@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Rust 这 4 种写法都通过编译了，但不知道我这样理解是对的吗？ - Rust</title>
+      <link>https://www.v2ex.com/t/838203</link>
+      <description>&lt;p&gt;代码出自 rustlings：&lt;/p&gt;&#xA;&lt;p&gt;第一种：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-rust&#34;&gt;fn count_iterator(map: &amp;amp;HashMap&amp;lt;String, Progress&amp;gt;, value: Progress) -&amp;gt; usize {&#xA;    // 文档中说 iter 返回 (&amp;amp;&#39;a K, &amp;amp;&#39;a V)，也就是 map 的 K 和 V 的引用组成的 tuple 。&#xA;    // 然后这个 tuple 被 deconstruct 了，且 V move 给了 v ，顺带地 map 也被 move 了？&#xA;    map.iter().filter(|(_, &amp;amp;v)| v == value).count()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第二种：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-rust&#34;&gt;fn count_iterator(map: &amp;amp;HashMap&amp;lt;String, Progress&amp;gt;, value: Progress) -&amp;gt; usize {&#xA;    // 无法理解为什么要 2 次 deref&#xA;    map.iter().filter(|(_, v)| **v == value).count()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第三种：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-rust&#34;&gt;fn count_iterator(map: &amp;amp;HashMap&amp;lt;String, Progress&amp;gt;, value: Progress) -&amp;gt; usize {&#xA;    // 请问这里 value 也是 move 给了 v 吗？那和第一种的区别是？&#xA;    map.iter().filter(|&amp;amp;(_, &amp;amp;v)| v == value).count()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第四种：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-rust&#34;&gt;fn count_iterator(map: &amp;amp;HashMap&amp;lt;String, Progress&amp;gt;, value: Progress) -&amp;gt; usize {&#xA;&#x9;// 首先 &amp;amp;(_, v) borrow map 的 (&amp;amp;&#39;a K, &amp;amp;&#39;a V)，然后这个 tuple 被 deconstruct ，v 是&#xA;    // &amp;amp;&#39;a V ，所以 deref v 拿到值，从而和 value 参数的值进行比较&#xA;    map.iter().filter(|&amp;amp;(_, v)| *v == value).count()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;理解上可能有误，还请大佬们指正，谢谢！&lt;/p&gt;&#xA;</description>
+      <author>chuanqirenwu</author>
+      <pubDate>05 Mar 2022 08:29:42 +0000</pubDate>
+    </item>
+    <item>
       <title>Scrapy Scapy spaCy 分不清了 - Python</title>
       <link>https://www.v2ex.com/t/838201</link>
       <description>&lt;p&gt;都用过，但都不常用。从没有一次拼对过。&lt;/p&gt;&#xA;</description>
@@ -11,7 +18,7 @@
       <pubDate>05 Mar 2022 08:20:01 +0000</pubDate>
     </item>
     <item>
-      <title>大家的 MacBook 工作的时候都多少度呀 - Apple</title>
+      <title>大家的 MacBook 工作的时候都多少度呀 - MacBook Pro</title>
       <link>https://www.v2ex.com/t/838198</link>
       <description>&lt;p&gt;我的是 MacBook Pro 2015 15 寸&lt;/p&gt;&#xA;&lt;p&gt;轻度使用 65 度 左右&lt;/p&gt;&#xA;&lt;p&gt;重度使用直接 85 度 了...&lt;/p&gt;&#xA;&lt;p&gt;公司的 MBP 2019 16 寸，没有特别注意过，但是好像也是呼呼热，键盘上方烫手。&lt;/p&gt;&#xA;&lt;p&gt;大家的 Mac 工作时候都多少度呀。&lt;/p&gt;&#xA;</description>
       <author>monetto</author>

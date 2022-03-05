@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Rust 这 4 种写法都通过编译了，但不知道我这样理解是对的吗？ - Rust",
+      "Link": "https://www.v2ex.com/t/838203",
+      "Description": "\u003cp\u003e代码出自 rustlings：\u003c/p\u003e\n\u003cp\u003e第一种：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003efn count_iterator(map: \u0026amp;HashMap\u0026lt;String, Progress\u0026gt;, value: Progress) -\u0026gt; usize {\n    // 文档中说 iter 返回 (\u0026amp;'a K, \u0026amp;'a V)，也就是 map 的 K 和 V 的引用组成的 tuple 。\n    // 然后这个 tuple 被 deconstruct 了，且 V move 给了 v ，顺带地 map 也被 move 了？\n    map.iter().filter(|(_, \u0026amp;v)| v == value).count()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e第二种：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003efn count_iterator(map: \u0026amp;HashMap\u0026lt;String, Progress\u0026gt;, value: Progress) -\u0026gt; usize {\n    // 无法理解为什么要 2 次 deref\n    map.iter().filter(|(_, v)| **v == value).count()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e第三种：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003efn count_iterator(map: \u0026amp;HashMap\u0026lt;String, Progress\u0026gt;, value: Progress) -\u0026gt; usize {\n    // 请问这里 value 也是 move 给了 v 吗？那和第一种的区别是？\n    map.iter().filter(|\u0026amp;(_, \u0026amp;v)| v == value).count()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e第四种：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003efn count_iterator(map: \u0026amp;HashMap\u0026lt;String, Progress\u0026gt;, value: Progress) -\u0026gt; usize {\n\t// 首先 \u0026amp;(_, v) borrow map 的 (\u0026amp;'a K, \u0026amp;'a V)，然后这个 tuple 被 deconstruct ，v 是\n    // \u0026amp;'a V ，所以 deref v 拿到值，从而和 value 参数的值进行比较\n    map.iter().filter(|\u0026amp;(_, v)| *v == value).count()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e理解上可能有误，还请大佬们指正，谢谢！\u003c/p\u003e\n",
+      "Author": "chuanqirenwu",
+      "PubDate": "2022-03-05T08:29:42Z"
+    },
+    {
       "Title": "Scrapy Scapy spaCy 分不清了 - Python",
       "Link": "https://www.v2ex.com/t/838201",
       "Description": "\u003cp\u003e都用过，但都不常用。从没有一次拼对过。\u003c/p\u003e\n",
@@ -11,7 +18,7 @@
       "PubDate": "2022-03-05T08:20:01Z"
     },
     {
-      "Title": "大家的 MacBook 工作的时候都多少度呀 - Apple",
+      "Title": "大家的 MacBook 工作的时候都多少度呀 - MacBook Pro",
       "Link": "https://www.v2ex.com/t/838198",
       "Description": "\u003cp\u003e我的是 MacBook Pro 2015 15 寸\u003c/p\u003e\n\u003cp\u003e轻度使用 65 度 左右\u003c/p\u003e\n\u003cp\u003e重度使用直接 85 度 了...\u003c/p\u003e\n\u003cp\u003e公司的 MBP 2019 16 寸，没有特别注意过，但是好像也是呼呼热，键盘上方烫手。\u003c/p\u003e\n\u003cp\u003e大家的 Mac 工作时候都多少度呀。\u003c/p\u003e\n",
       "Author": "monetto",
