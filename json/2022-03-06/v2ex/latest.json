@@ -4,11 +4,32 @@
   "Description": "",
   "Items": [
     {
-      "Title": "大家有收到这种请求和乌克兰站在一起的邮件吗? - 问与答",
-      "Link": "https://www.v2ex.com/t/838306",
-      "Description": "槽点 1: 别人花了钱就直接拒绝服务了\u003cbr /\u003e槽点 2: 自己不捐钱, 要求其他人捐钱\u003cbr /\u003e\u003ca target=\"_blank\" href=\"/i/4BKjj05U.png\" rel=\"nofollow noopener\" target=\"_blank\" title=\"在新窗口打开图片 4BKjj05U.png\"\u003e\u003cimg src=\"//i.v2ex.co/4BKjj05U.png\" class=\"embedded_image\"\u003e\u003c/a\u003e",
-      "Author": "ruiyi1994",
-      "PubDate": "2022-03-06T01:55:21Z"
+      "Title": "你们会在意执行用时和内存消耗吗？ - LeetCode",
+      "Link": "https://www.v2ex.com/t/838310",
+      "Description": "感觉这个结果不是很准，因为相同答案每次提交可能会差别非常大…",
+      "Author": "jaggle",
+      "PubDate": "2022-03-06T02:18:13Z"
+    },
+    {
+      "Title": "有做面包/吐司的视频推荐吗，做法越专业越好，最好是有系列教程的 - 问与答",
+      "Link": "https://www.v2ex.com/t/838309",
+      "Description": "倾向于日式的，软欧包，但是在 b 站和 youtube 没找到特别合适的，应该是我还没找到宝藏，希望有同好的可以推荐下，感谢",
+      "Author": "9",
+      "PubDate": "2022-03-06T02:11:32Z"
+    },
+    {
+      "Title": "有关前端使用 JS 生成音频指纹指代浏览器唯一用户，是否存在不稳定的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/838308",
+      "Description": "\u003cp\u003e如题，近期需求对匿名用户进行追踪，需要对身份进行唯一标记，前天发帖询问短哈希后楼内老哥提到可以使用 canvas 指纹代表用户。我搜索相关内容后如同打开了新世界的大门，头一次知道还有这种标记用户身份的方法。进而搜索得知音频设备也可以用来生成指纹，但是百度博客相关文章提到音频可能导致指纹不稳定（同设备多次执行结果不同），原文地址：\u003ca href=\"https://blog.csdn.net/cen_cs/article/details/106341724\" rel=\"nofollow\"\u003ehttps://blog.csdn.net/cen_cs/article/details/106341724\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e我复现过程中未遇到此问题，想请问有无论坛老哥遇到过类似问题，或者这个不稳定问题纯粹是写这篇博客的老哥乱扯的？\u003c/p\u003e\n\u003cp\u003e======\u003c/p\u003e\n\u003cp\u003e另外问一下有关 js 写法，查到的音频指纹生成代码的伪代码类似下述\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003evar AudioContext = ... // 链接音频设备\nvar context = new AudioContext(...) // 生成一段音频\n... // 配置音频内容\ncontext.oncomplete = function (event) {\n   ...\n   console.log(fingerprint) // 在音频生成完毕后触发回调，计算并输出音频指纹\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e考虑到使用中为了便捷调用，理想的情况希望将整个功能写在同一个函数里，即\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003elet get_audio_fingerprint = () =\u0026gt; {...};\nlet device_fingerprint = get_canvas_fingerprint() + get_audio_fingerprint(); // 类似这种调用方法\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是如上述伪代码中指纹生成是在回调函数里完成的，应该怎么把这个回调函数的结果返回给外层呢？试了试 promise ，但是得到浏览器提示说内层不允许调用 promise\u003c/p\u003e\n",
+      "Author": "LeeReamond",
+      "PubDate": "2022-03-06T02:01:14Z"
+    },
+    {
+      "Title": "从 k3s Fork Codebase, 打磨了一个自己满意的 Kubernetes 发行版 - 云计算",
+      "Link": "https://www.v2ex.com/t/838307",
+      "Description": "\u003cp\u003e\u003ca href=\"https://getk8e.com/\" rel=\"nofollow\"\u003ehttps://getk8e.com/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e使用 k8e 快速部署 Kubernetes 集群服务\u003c/p\u003e\n\u003cp\u003e作为 YAML 工程师，经常需要使用 Kubernetes 集群来验证很多技术化场景，如何快速搭建一套完整标准化的集群至关重要。罗列当前能快速部署 Kubernetes 集群的工具有很多种，例如官方首当其冲有 kubeadm 工具，云原生社区有 sealos 作为一键部署的最佳方案，熟悉起来后部署都非常快。但是你是否考虑过并不是每一个 YAML 工程师都需要非常了解集群组件的搭配。这里，我给大家推荐的工具是基于单个文件的免配置的部署方式，对比 kubeadm 和 sealos 方案，去掉了对 Kubernetes 官方组件镜像的依赖，并且把 Kubernetes 相关的核心扩展推荐组件也都集成到这个二进制包中，通过软链接暴露，让环境依赖更少，这个安装工具就是 k8e(可以叫 ‘kuber easy’ 或 K8 易) 。k8e 是基于当前主流上游 Kubernetes 发行版 k3s 做的优化封装和裁剪。去掉对 IoT 的依赖，目标就是做最好的服务器版本的发行版本。并且和上游保持一致，可以自由扩展。\u003c/p\u003e\n\u003cp\u003e欢迎使用\u003c/p\u003e\n",
+      "Author": "xds2000",
+      "PubDate": "2022-03-06T01:59:28Z"
     },
     {
       "Title": "macOS CLion 上面运行时的选项： profile, run with valgrind memcheck 是干嘛的？据我所知较新版本的 macOS 上根本没有 valgrind，也不能 profile，因为没有 perf - 程序员",
@@ -23,13 +44,6 @@
       "Description": "\u003col\u003e\n\u003cli\u003e两个人在一起之后, 总是担心自己会影响对方的生活质量, 想到结婚,总担心自己会有一天会拖累对方.这种应该算是恐婚吧? 有次特别沙 b 的跟妹子说, 要是有一天因为我你生活质量下降了. 果断离开我就好.我绝对不纠缠.\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e问: 不知道大家会不会有这种类似的\"恐婚\"?\u003c/p\u003e\n",
       "Author": "thisboy",
       "PubDate": "2022-03-06T01:09:45Z"
-    },
-    {
-      "Title": "国产屏还是垃圾的代名词吗？ - 问与答",
-      "Link": "https://www.v2ex.com/t/838299",
-      "Description": "最近家人的旧款 iPhone 手机屏幕摔坏了，要换个屏，想着旧手机去苹果官方、拆机屏价格都太高了，就抱着试一试的态度买了国产屏。尝试国产屏的理由：\u003cbr /\u003e1 、旧款手机大价钱去苹果售后换屏不值得，二手也卖不了几个钱；\u003cbr /\u003e2 、各种吹国产技术、国产屏幕如何提升、如何好的比较多；\u003cbr /\u003e3 、天猫商家排名第一、销量最高、信誉好、99%好评、5 年质保。\u003cbr /\u003e\u003cbr /\u003e淘宝（天猫）找到一家排名第一、月销量 3000+，99%的好评，商品详情各种吹如何好，豪言 5 年质保的，下单了。\u003cbr /\u003e\u003cbr /\u003e结果装上去，垃圾屏，严重卡顿、严重不跟手。\u003cbr /\u003e\u003cbr /\u003e联系商家要求退货，对方说：装上机器就不支持退了。\u003cbr /\u003e\u003cbr /\u003e个人经历仅代表个人言论，欢迎探讨。",
-      "Author": "V9NN",
-      "PubDate": "2022-03-06T00:21:32Z"
     },
     {
       "Title": "为什么现在短信登录场景，很少有行为验证了？ - 互联网",
@@ -205,6 +219,20 @@
       "Description": "\u003cp\u003e今天新买的戴尔 U2723 到了，还在调试使用中。本人设备为 M1 MBP\n刚才发现，在 Chrome 上拖动文章之类的时候文字会有晃动、拖影的感觉，但是同样的网页在 Safari 上拖动就没有或者很轻微，尤其是看苹果官网那种有动画缩放的页面会更加明显\n请问这是正常的吗？是 Safari 优化的更好还是？ Chrome 可以通过设置减轻这种拖影吗？\n另外，用 2720 的一堆朋友有类似的问题吗？在显示器设置方面还有没有其他经验分享？谢谢🙏\u003c/p\u003e\n",
       "Author": "pkumsy",
       "PubDate": "2022-03-05T14:34:48Z"
+    },
+    {
+      "Title": "大家有收到这种请求和乌克兰站在一起的邮件吗? - 问与答",
+      "Link": "https://www.v2ex.com/t/838306",
+      "Description": "槽点 1: 别人花了钱就直接拒绝服务了\u003cbr /\u003e槽点 2: 自己不捐钱, 要求其他人捐钱\u003cbr /\u003e\u003ca target=\"_blank\" href=\"/i/4BKjj05U.png\" rel=\"nofollow noopener\" target=\"_blank\" title=\"在新窗口打开图片 4BKjj05U.png\"\u003e\u003cimg src=\"//i.v2ex.co/4BKjj05U.png\" class=\"embedded_image\"\u003e\u003c/a\u003e",
+      "Author": "ruiyi1994",
+      "PubDate": "2022-03-06T01:55:21Z"
+    },
+    {
+      "Title": "国产屏还是垃圾的代名词吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/838299",
+      "Description": "最近家人的旧款 iPhone 手机屏幕摔坏了，要换个屏，想着旧手机去苹果官方、拆机屏价格都太高了，就抱着试一试的态度买了国产屏。尝试国产屏的理由：\u003cbr /\u003e1 、旧款手机大价钱去苹果售后换屏不值得，二手也卖不了几个钱；\u003cbr /\u003e2 、各种吹国产技术、国产屏幕如何提升、如何好的比较多；\u003cbr /\u003e3 、天猫商家排名第一、销量最高、信誉好、99%好评、5 年质保。\u003cbr /\u003e\u003cbr /\u003e淘宝（天猫）找到一家排名第一、月销量 3000+，99%的好评，商品详情各种吹如何好，豪言 5 年质保的，下单了。\u003cbr /\u003e\u003cbr /\u003e结果装上去，垃圾屏，严重卡顿、严重不跟手。\u003cbr /\u003e\u003cbr /\u003e联系商家要求退货，对方说：装上机器就不支持退了。\u003cbr /\u003e\u003cbr /\u003e个人经历仅代表个人言论，欢迎探讨。",
+      "Author": "V9NN",
+      "PubDate": "2022-03-06T00:21:32Z"
     },
     {
       "Title": "云端内容管理系统，一键集成富文本编辑器 - 程序员",
