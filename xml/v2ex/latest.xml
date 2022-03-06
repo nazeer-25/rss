@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>macOS CLion 上面的 dynamic analysis tool，比如 perf, valgrind，只能用本机的吗？不能用 docker 里面的？ - 程序员</title>
+      <link>https://www.v2ex.com/t/838317</link>
+      <description>&lt;p&gt;我使用的是 CLion+docker toolchain&lt;/p&gt;&#xA;&lt;p&gt;但是，这种配置，当我点击 run with valgrind memcheck 的时候，提示说找不到 valgrind executable&#xA;&lt;img alt=&#34;KoURDXkquJQALCm&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/03/06/KoURDXkquJQALCm.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;去设置里面找，发现没法设置成 docker 里面的 valgrind ，只能在本地文件夹里面选择 executable&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;pKDRYqatPIE2JnH&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/03/06/pKDRYqatPIE2JnH.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;我就奇了怪了，我编译都是在 docker 里面编译的，run with valgrind memcheck 为什么要我指定本地的 valgrind&lt;/p&gt;&#xA;</description>
+      <author>movq</author>
+      <pubDate>06 Mar 2022 03:22:23 +0000</pubDate>
+    </item>
+    <item>
       <title>c++ lambda 表达式里 为什么值捕获的局部变量无法修改？ - C++</title>
       <link>https://www.v2ex.com/t/838315</link>
       <description>&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;[&amp;amp;i] ( ) { std::cout &amp;lt;&amp;lt; i; }&#xA;&#xA;// is equivalent to&#xA;&#xA;struct anonymous&#xA;{&#xA;    int &amp;amp;m_i;&#xA;    anonymous(int &amp;amp;i) : m_i(i) {}&#xA;    inline auto operator()() const&#xA;    {&#xA;        std::cout &amp;lt;&amp;lt; m_i;&#xA;    }&#xA;};&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;首先我知道，一个如上的 lambda 表达式，其实相当于生成了一个如上匿名 struct 的实例 a ，运行 lambda 表达式时，其实就相当于执行 a().&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int main()&#xA;{&#xA;    int v1 = 42;&#xA;    auto f = [v1]() {return ++v1; };//值捕获&#xA;    v1 = 0;&#xA;    auto j = f(); //j 为 43&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是如上的代码却无法通过编译，除非你加上 mutable 。所以我是不是可以认为，如上的 lambda 表达式，是不是实际生成了如下的 struct ？&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;struct anonymous&#xA;{&#xA;    int m_i;&#xA;    anonymous(int i) : m_i(i) {}&#xA;    inline auto operator()() const//如果你加上 mutable ，这里的 const 才会去掉&#xA;    {&#xA;        m_i++;&#xA;    }&#xA;};&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;另外，c++ lambda 表达式是不是都可以认为 它的等价情况，就是生成了一个 重载了 operator()的匿名结构体的实例？如果不是的话，请帮忙举一个反例。&lt;/p&gt;&#xA;</description>
