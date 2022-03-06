@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教下，通过 fetch/axios 从网上 GET 到的文件， response.data 是 ArrayBuffer 还是 Blob，怎么转换呀？ - JavaScript</title>
+      <link>https://www.v2ex.com/t/838445</link>
+      <description>&lt;p&gt;弄了半天，转换来转换去，就是转换不对，没有弄明白。&lt;/p&gt;&#xA;&lt;p&gt;比如：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;export async function downloadPikachu(): Promise&amp;lt;Blob | undefined&amp;gt; {&#xA;  const options: AxiosRequestConfig = {&#xA;    method: &#34;GET&#34;,&#xA;    // url: &#34;https://static.wikia.nocookie.net/villainstournament/images/8/89/Pikachu.jpg/revision/latest?cb=20190528172002&#34;,&#xA;    url: &#34;https://static.wikia.nocookie.net/villainstournament/images/8/89/Pikachu.jpg&#34;,&#xA;    headers: {}&#xA;  };&#xA;&#xA;  try {&#xA;    const res = await axios(options);&#xA;    if (res.status === 200) {&#xA;      console.log(res);&#xA;&#xA;      // TODO:&#xA;      // const arrBuffer = res.data as ArrayBuffer;&#xA;      // const int8Array = Array.from(new Uint8Array(arrBuffer));&#xA;      // const blob = new Blob([arrBuffer], { type: &#34;application/octet-stream&#34; });&#xA;      // const blob = new Blob([new Uint8Array(int8Array)]);&#xA;      // return blob;&#xA;    }&#xA;    return undefined;&#xA;  } catch (error) {&#xA;    console.log(error);&#xA;    return undefined;&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;p.s.&#xA;需要 Blob ，是因为后面还要用(这样 chrome 就能够根据 blob 下载文件了，相当于 save as 成一个文件）&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;      const urlFile = window.URL.createObjectURL(blobData);&#xA;      const a = document.createElement(&#34;a&#34;);&#xA;      document.body.appendChild(a);&#xA;      a.href = urlFile;&#xA;      a.download = fileName;&#xA;      a.click();&#xA;      window.URL.revokeObjectURL(urlFile);&#xA;      a.remove();&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>yazoox</author>
+      <pubDate>06 Mar 2022 14:26:24 +0000</pubDate>
+    </item>
+    <item>
       <title>iPhone 全新原装正品未激活的库存机 这是啥机器 - 问与答</title>
       <link>https://www.v2ex.com/t/838443</link>
       <description>&lt;p&gt;对 iPhone8 系列情有独钟 想再入一个官翻或者全新版 收藏&lt;/p&gt;&#xA;&lt;p&gt;TB 上找了一家 iPhone8 Plus 报价 3K+ &lt;/p&gt;&#xA;&lt;p&gt;说是出售的都是全新原装正品未激活的库存机，都是从内部直接进货过来的 清零联保的 价格才有优惠销售&lt;/p&gt;&#xA;&lt;p&gt;老铁们 靠谱嘛~&lt;/p&gt;&#xA;&lt;p&gt;或者 有渠道能买美国苹果官网翻新的也可以的~ &lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.apple.com/shop/refurbished/iphone/iphone-8-iphone-8-plus&#34; rel=&#34;nofollow&#34;&gt;https://www.apple.com/shop/refurbished/iphone/iphone-8-iphone-8-plus&lt;/a&gt;&lt;/p&gt;&#xA;</description>

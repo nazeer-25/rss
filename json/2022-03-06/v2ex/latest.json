@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教下，通过 fetch/axios 从网上 GET 到的文件， response.data 是 ArrayBuffer 还是 Blob，怎么转换呀？ - JavaScript",
+      "Link": "https://www.v2ex.com/t/838445",
+      "Description": "\u003cp\u003e弄了半天，转换来转换去，就是转换不对，没有弄明白。\u003c/p\u003e\n\u003cp\u003e比如：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eexport async function downloadPikachu(): Promise\u0026lt;Blob | undefined\u0026gt; {\n  const options: AxiosRequestConfig = {\n    method: \"GET\",\n    // url: \"https://static.wikia.nocookie.net/villainstournament/images/8/89/Pikachu.jpg/revision/latest?cb=20190528172002\",\n    url: \"https://static.wikia.nocookie.net/villainstournament/images/8/89/Pikachu.jpg\",\n    headers: {}\n  };\n\n  try {\n    const res = await axios(options);\n    if (res.status === 200) {\n      console.log(res);\n\n      // TODO:\n      // const arrBuffer = res.data as ArrayBuffer;\n      // const int8Array = Array.from(new Uint8Array(arrBuffer));\n      // const blob = new Blob([arrBuffer], { type: \"application/octet-stream\" });\n      // const blob = new Blob([new Uint8Array(int8Array)]);\n      // return blob;\n    }\n    return undefined;\n  } catch (error) {\n    console.log(error);\n    return undefined;\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003ep.s.\n需要 Blob ，是因为后面还要用(这样 chrome 就能够根据 blob 下载文件了，相当于 save as 成一个文件）\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e      const urlFile = window.URL.createObjectURL(blobData);\n      const a = document.createElement(\"a\");\n      document.body.appendChild(a);\n      a.href = urlFile;\n      a.download = fileName;\n      a.click();\n      window.URL.revokeObjectURL(urlFile);\n      a.remove();\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "yazoox",
+      "PubDate": "2022-03-06T14:26:24Z"
+    },
+    {
       "Title": "iPhone 全新原装正品未激活的库存机 这是啥机器 - 问与答",
       "Link": "https://www.v2ex.com/t/838443",
       "Description": "\u003cp\u003e对 iPhone8 系列情有独钟 想再入一个官翻或者全新版 收藏\u003c/p\u003e\n\u003cp\u003eTB 上找了一家 iPhone8 Plus 报价 3K+ \u003c/p\u003e\n\u003cp\u003e说是出售的都是全新原装正品未激活的库存机，都是从内部直接进货过来的 清零联保的 价格才有优惠销售\u003c/p\u003e\n\u003cp\u003e老铁们 靠谱嘛~\u003c/p\u003e\n\u003cp\u003e或者 有渠道能买美国苹果官网翻新的也可以的~ \u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.apple.com/shop/refurbished/iphone/iphone-8-iphone-8-plus\" rel=\"nofollow\"\u003ehttps://www.apple.com/shop/refurbished/iphone/iphone-8-iphone-8-plus\u003c/a\u003e\u003c/p\u003e\n",
