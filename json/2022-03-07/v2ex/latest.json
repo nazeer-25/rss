@@ -130,7 +130,7 @@
       "PubDate": "2022-03-07T15:00:18Z"
     },
     {
-      "Title": "Oracle 数据库 - 如何安全快速全表更新 20 亿条数据 - 数据库",
+      "Title": "Oracle 数据库 - 如何安全快速全表更新 20 亿条数据 - Oracle",
       "Link": "https://www.v2ex.com/t/838735",
       "Description": "\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e最近项目遇到一个 Oracle 数据库的问题，发出来请教一下，希望专业人士指点一二。\u003c/p\u003e\n\u003cp\u003e描述：已有数据表 table_a, 每天都有新数据插入，每天（ business_Date ）产生的新数据量都在 100 万以上（ 100-500 万的数据量吧），已有 600 多天的数据, 现在 table_a 有约 20 亿条数据；\n最近在这个表新增了一个字段 ACTIVE ，现在需要把这个字段的值全部更新为'N'：\n方法 1：update table_a set ACTIVE='N';--直观的理解是这样更新，但是这样会产生巨大的 undo tablespace,不可行。\u003c/p\u003e\n\u003cp\u003e方法 2：遍历出所有的 business_Date,按天来 update ；--这种方法在测试环境感觉并没有很快，还有提升空间\n代码如下：\nDECLARE\nCURSOR cur\nIS\nSELECT DISTINCT business_date FROM table_a;--单独这段 query 执行时间大约是 5 分钟\nBEGIN\nFOR record IN cur\nLOOP--由于 table_a 已有 600 多天的数据，按天 update 批量更新的话，此循环需要执行 600 多次\nUPDATE table_a SET ACTIVE ='N' WHERE business_date=record.business_date;\nCOMMIT;\nEND LOOP;\nCOMMIT;\nEND;\u003c/p\u003e\n\u003cp\u003e方法 3：待定；貌似可以通过 rowid 来更新，但是还没试。\u003c/p\u003e\n\u003c/div\u003e",
       "Author": "pandago1",
