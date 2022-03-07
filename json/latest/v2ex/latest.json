@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "研究了一下第三方动漫网站的播放源 - 分享发现",
+      "Link": "https://www.v2ex.com/t/838743",
+      "Description": "\u003cdiv class=\"topic_content\"\u003e\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e这个原理可能很多人都知道的了，但迫于本人第一次见到，还是想和大家分享一下。\n根据我自己的理解，第三方动漫网站通常都是利用国内某些平台上传点过滤不当或者不做限制来做自己的视频 cdn ，从而省下大笔的流量开销。 以前看到很多都是直接上传整集番剧到单一文件，最近发现还有把 ts 切片当做图片上传的，也算是一种骚操作吧。我个人喜欢直接在播放页面截取 m3u8 用 ffmpeg 下载下来看，但是发现给 ffmpeg 喂进去之后提示找不到视频流，但是 potplayer 喂进去能正常播放，出于好奇就手动把文件下下来分析了一下。\n\u003cimg alt=\"1.png\" class=\"embedded_image\" src=\"https://s2.loli.net/2022/03/07/JXD1NKjZYWfveCV.png\"\u003e\n\u003ca href=\"https://img01.sogoucdn.com/net/a/04/link?appid=100520145\u0026amp;url=https://baipiao.yximgs.com/bs2/courseHead/135537572915594917\"\u003ehttps://img01.sogoucdn.com/net/a/04/link?appid=100520145\u0026amp;url=https://baipiao.yximgs.com/bs2/courseHead/135537572915594917\u003c/a\u003e\n在播放页面 f12 截取找到 m3u8 ，随便下载一段文件\n将后缀直接改成 ts 之后播放器打开只会一直显示一张白色的 png 图片，也没有声音，看得出来是文件解析不对。\n手动打开文件之后发现可看到 PNG 的头部，但并不是标准的 FF D8 开头，文件结尾也找不到 FF D9 。同时也存在 ffmpeg 头，说明这段 png 头是手动添加上去的，通过本地生成的 ts 文件进行对比之后手动删除无用的 png 头即可播放。\n\u003cimg alt=\"2.png\" class=\"embedded_image\" src=\"https://s2.loli.net/2022/03/07/JTLthHDnNKb8BQE.png\"\u003e\n\u003cimg alt=\"3.png\" class=\"embedded_image\" src=\"https://s2.loli.net/2022/03/07/TpPX3VutmlJcBYv.png\"\u003e\n\u003cimg alt=\"4.png\" class=\"embedded_image\" src=\"https://s2.loli.net/2022/03/07/3U4qmuLraSgdIQs.png\"\u003e\n那么问题来了，为什么单独下载下来更改后缀为 ts 无法播放，但是把 m3u8 直接放入播放器内又能正常播放呢，按道理来说播放器也是下载切片播放的吧？\n搜了一下，\u003ca href=\"http://yximgs.com\"\u003eyximgs.com\u003c/a\u003e 是快手的域名，前面的 sougoucdn 是给这段文件加速的？另外链接里的 baipiao （白嫖）难道是内部有人专门给他创建的子域名么？\u003c/p\u003e\n\u003c/div\u003e\u003c/div\u003e",
+      "Author": "MaxLv",
+      "PubDate": "2022-03-07T15:42:21Z"
+    },
+    {
+      "Title": "xdm, 因为组内项目线上 Bug, 被扣绩效合理吗 - 程序员",
+      "Link": "https://www.v2ex.com/t/838742",
+      "Description": "\u003cdiv class=\"topic_content\"\u003e\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e组内项目(代码和我无关), 线上出了 Bug, 被用户投诉。\n整个组绩效降了，导致我绩效被降级了。\n年终奖少了一部分，下半年的晋升也没了, 感觉好冤啊\u003c/p\u003e\n\u003c/div\u003e\u003c/div\u003e",
+      "Author": "nnd",
+      "PubDate": "2022-03-07T15:42:10Z"
+    },
+    {
+      "Title": "求助 CVS 文件名乱码问题（搜索一下午无果） - 问与答",
+      "Link": "https://www.v2ex.com/t/838741",
+      "Description": "\u003cdiv class=\"content\"\u003e \u003cdiv id=\"Rightbar\"\u003e \u003cdiv class=\"box\"\u003e\n\u003cdiv class=\"cell\"\u003e\n\u003cstrong\u003eV2EX = way to explore\u003c/strong\u003e \u003cspan class=\"fade\"\u003eV2EX 是一个关于分享和探索的地方\u003c/span\u003e\n\u003c/div\u003e \u003c/div\u003e \u003cdiv class=\"box\"\u003e\n\u003cdiv class=\"inner\"\u003e\n\u003ca href=\"https://www.finclip.com/competition/?from=v2ex\"\u003e\u003cimg src=\"https://cdn.v2ex.com/assets/sidebar/finclip_20220301.png\" width=\"250\" alt=\"FinClip\"\u003e\u003c/a\u003e\n\u003c/div\u003e \u003c/div\u003e \u003c/div\u003e\n\u003cdiv id=\"Main\"\u003e \u003cdiv class=\"box\"\u003e \u003cdiv class=\"cell\"\u003e\n\u003cdiv class=\"topic_content\"\u003e\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003eVue 项目。\nCVS(Concurrent Version System)拉取代码到本地的时候，部分图片的文件名（推测是中文）出现乱码，形如铐斤锟。\u003c/p\u003e\n\u003cp\u003e求前辈不吝赐教，谢谢各位！\u003c/p\u003e\n\u003c/div\u003e\u003c/div\u003e\n\u003c/div\u003e\n\u003c/div\u003e \u003c/div\u003e\n\u003c/div\u003e",
+      "Author": "angrylid",
+      "PubDate": "2022-03-07T15:42:09Z"
+    },
+    {
       "Title": "能否用 lodash/fp 表达 find one or get first? point free 且 lazy 的那种 - 前端开发",
       "Link": "https://www.v2ex.com/t/838740",
       "Description": "\u003cdiv class=\"content\"\u003e \u003cdiv id=\"Rightbar\"\u003e \u003cdiv class=\"box\"\u003e\n\u003cdiv class=\"cell\"\u003e\n\u003cstrong\u003eV2EX = way to explore\u003c/strong\u003e \u003cspan class=\"fade\"\u003eV2EX 是一个关于分享和探索的地方\u003c/span\u003e\n\u003c/div\u003e \u003c/div\u003e \u003cdiv class=\"box\"\u003e\n\u003cdiv class=\"inner\"\u003e\n\u003ca href=\"https://www.finclip.com/competition/?from=v2ex\"\u003e\u003cimg src=\"https://cdn.v2ex.com/assets/sidebar/finclip_20220301.png\" width=\"250\" alt=\"FinClip\"\u003e\u003c/a\u003e\n\u003c/div\u003e \u003c/div\u003e \u003c/div\u003e\n\u003cdiv id=\"Main\"\u003e \u003cdiv class=\"box\"\u003e \u003cdiv class=\"cell\"\u003e\n\u003cdiv class=\"topic_content\"\u003e\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e正常的写法是 \u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-JavaScript\"\u003econst findOneOrGetFirst = (predicate) =\u0026gt; (someTypeList) =\u0026gt; somTypeList.find(predicate) || someTypeList[0]\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这种写法能否转成 point free 的形式呢？\n也就是用函数的组合表达那个逻辑或\u003c/p\u003e\n\u003c/div\u003e\u003c/div\u003e\n\u003c/div\u003e\n\u003c/div\u003e \u003c/div\u003e\n\u003c/div\u003e",
