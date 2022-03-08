@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教一个使用 RestTemplete 调用服务周期性卡顿的问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/838954",
+      "Description": "\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e背景：项目使用 spring nacos+RestTemplete\u003c/p\u003e\n\u003cp\u003e现象：服务之间调用偶发响应时间 10s(上下几十毫秒波动)\u003c/p\u003e\n\u003cp\u003e目前定位到的问题：接口之间通信是没问题的，在执行到下面两行代码时\u003c/p\u003e\n\u003cp\u003eresponse = request.execute();\u003c/p\u003e\n\u003cp\u003ehandleResponse(url, method, response);\u003c/p\u003e\n\u003cp\u003e打断点后发现 response 已经有返回值，问题出在 handleResponse 方法里面，在获取 response 的 responseCode 时，会调用 HttpURLConnection.getResponseCode()方法，方法内会调用 getInputStream()检查连接是否可用，该方法由 synchronized 修饰\u003c/p\u003e\n\u003cp\u003e走到这一步发现 nacos 的 beat 方法也会一直调用到 HttpURLConnection.getResponseCode()方法，所以猜测可能是偶发性 nacos 占用了锁导致调用服务的线程一直阻塞，并且 10s 也符合 RestTemplete 默认的最大等待时间\u003c/p\u003e\n\u003cp\u003e目前不知道怎么进行下去解决问题了，希望大家能指点迷津！\u003c/p\u003e\n\u003c/div\u003e",
+      "Author": "BlackZhu",
+      "PubDate": "2022-03-08T13:14:50Z"
+    },
+    {
       "Title": "[兑换码分享] 「ULPB 试试双拼」- iOS 平台首个双拼练习软件 - 分享创造",
       "Link": "https://www.v2ex.com/t/838953",
       "Description": "\u003cdiv class=\"topic_content\"\u003e\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e两年前在 V 站知道了双拼输入法，当时发现市场上没有这种类型的 App ，于是一直就想做一款专门的软件来帮助学习\u0026amp;推广双拼输入法，一直拖到今天才上架 App store 😅。\u003c/p\u003e\n\u003cp\u003eApple Store 链接: \u003ca href=\"https://apps.apple.com/cn/app/id1613019131\"\u003ehttps://apps.apple.com/cn/app/id1613019131\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt class=\"embedded_image\" src=\"https://i.v2ex.co/ECaXVNg1.png\"\u003e\n\u003cimg alt class=\"embedded_image\" src=\"https://i.v2ex.co/Bj3RcL41.png\"\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt class=\"embedded_image\" src=\"https://i.v2ex.co/z9oOr9fi.png\"\u003e\u003c/p\u003e\n\u003cp\u003e分享一些兑换码： \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e9379EAF44HN3\n44H9R9NMLA76\nWJEE4TTFYAHJ\nWENHYTXYT6LN\nMY9PNJRRPJPF\n3HLWEH6FKP64\n946JN9TFTHER\n4HA9AFNJ6TRH\nL7MKFFX96LEY\n4EWAFXA46LLE\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003e双拼我用了两年了，还是很推荐的，小投入大回报\u003c/strong\u003e\n感兴趣的朋友来试试\u003c/p\u003e\n\u003c/div\u003e\u003c/div\u003e",
