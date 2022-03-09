@@ -4,6 +4,83 @@
   "Description": "",
   "Items": [
     {
+      "Title": "求教, Swift 引入 .a 库, 类型缺失? - 程序员",
+      "Link": "https://www.v2ex.com/t/839053",
+      "Description": "\u003cdiv class=\"topic_content\"\u003e\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e最近想试试 swift ，干写没什么意思，想把以前写的小工具重写一下。\u003cbr\u003e\n这不，遇到问题了，请各位巨佬稍微喵一眼，稍微点拨下，我就受用无穷了。 \u003c/p\u003e\n\u003cp\u003e项目结构，如图： ![img]\u003c/p\u003e\n\u003cp\u003e有主要有 3 个文件， 这里出问题的是 ecc.swift\n这里原 oc 项目会调用一个 libsecp256k1 。a 的静态库，\u003c/p\u003e\n\u003cp\u003e\n搜索了下，说是 swift 必须把。a 封装成 。framework ， \u003c/p\u003e\n\u003cp\u003e好的，于是，我在工程下面添加一个 target ， 编译成 framework\n然后在 ecc.swift 中 import secp256k1 ，import 也没报错 ，但是也不能双击进入详情，\u003c/p\u003e\n\u003cp\u003e\nbridging header 也对应的设置了 \u003c/p\u003e\n\u003cp\u003e但是使用头文件里面的类型时候，报错，Cannot find type 'secp256k1_context' in scope \u003c/p\u003e\n\u003cp\u003e[img]:https://gist 。githubusercontent 。com/vitock/063008742a81f63cc563567c0e90af96/raw/4231690ded80c486bb37c58e1c174dcc27eed8a3/WechatIMG121.png\u003c/p\u003e\n\u003c/div\u003e\u003c/div\u003e",
+      "Author": "liuidetmks",
+      "PubDate": "2022-03-09T02:44:31Z"
+    },
+    {
+      "Title": "Fomir: 又一个表单轮子 - 程序员",
+      "Link": "https://www.v2ex.com/t/839052",
+      "Description": "\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e最近半年，一直在做表单相关的业务，加上自己多年浸淫表单的经验，根据自己感悟，造了一个表单轮子，取名为 Formir 。\u003c/p\u003e\n\u003cp\u003eGithub 地址：\u003ca href=\"https://github.com/forsigner/fomir\"\u003ehttps://github.com/forsigner/fomir\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e为什么又要一个轮子？\u003c/h2\u003e\n\u003cp\u003e我尝试了很多表单库，比如 redux-form 、formik 、final-form 、react-hook-form 、formilyjs... 它们都非常优秀，但和我的理想型总是差一点。我希望有一个具有以下功能的表单库：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eApi 简洁，易用使用\u003c/li\u003e\n\u003cli\u003e易于更新表单状态，优雅处理联动逻辑\u003c/li\u003e\n\u003cli\u003e高性能，局部 render\u003c/li\u003e\n\u003cli\u003e高可定制\u003c/li\u003e\n\u003cli\u003e易于团队内沉淀组件\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e所以我创建了一个新的表单库，并将其命名为 \u003ca href=\"https://github.com/forsigner/fomir\"\u003e\u003cstrong\u003eFomir\u003c/strong\u003e\u003c/a\u003e。\u003c/p\u003e\n\u003ch2\u003e灵感\u003c/h2\u003e\n\u003cp\u003eFomir 的设计思路和灵感有很大一部分来自 \u003ca href=\"https://github.com/ianstormtaylor/slate\"\u003e\u003cstrong\u003eslatejs\u003c/strong\u003e\u003c/a\u003e，一个优秀的边界器解决方案。\u003c/p\u003e\n\u003ch2\u003e特性\u003c/h2\u003e\n\u003ch3\u003eSchema-First\u003c/h3\u003e\n\u003cp\u003eFomir 通过传递一个 Form schema 来构建表单, Form schema 是一棵树。Form schema 非常灵活，您可以通过它构建任何表单。\u003c/p\u003e\n\u003ch3\u003e状态驱动\u003c/h3\u003e\n\u003cp\u003e表单中的一切都是状态，改变表单状态非常容易。当您创建复杂业务逻辑表单时，它非常有用。\u003c/p\u003e\n\u003ch3\u003e高性能\u003c/h3\u003e\n\u003cp\u003e在某些情况下，表单性能非常重要。Fomir 表单状态管理基于发布订阅的，因此性能很好。当你更新单个字段时，它不会重新渲染整个表单。\u003c/p\u003e\n\u003ch3\u003e易于沉淀组件\u003c/h3\u003e\n\u003cp\u003e在 fomir 中，Form shema 中的 \u003ccode\u003ecomponent\u003c/code\u003e 属性决定如何渲染表单字段。Fomir 将促使你创建一些表单组件，例如 Input 、Select 、DatePicker... 这将使您在团队中轻松共享表单组件。\u003c/p\u003e\n\u003ch3\u003e低代码友好\u003c/h3\u003e\n\u003cp\u003efomir 使用 schema 构建表单，因此 fomir 在低代码场景中非常容易使用。当你想创建类似 Form builder 这些东西时，Fomir 可能是一个不错的选择。\u003c/p\u003e\n\u003ch3\u003e类型支持\u003c/h3\u003e\n\u003cp\u003eFomir Form 通过 Typescript 提供强类型，让您在编码时捕捉常见错误，并提供编码智能感知。\u003c/p\u003e\n\u003ch2\u003e安装\u003c/h2\u003e\n\u003cp\u003e核心库 \u003cstrong\u003efomir\u003c/strong\u003e 与框架无关, \u003cstrong\u003efomir-react\u003c/strong\u003e 是 react binding 库：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003enpm install fomir fomir-react\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e基本用法\u003c/h2\u003e\n\u003cp\u003e最基本用法，使用 \u003ccode\u003euseForm\u003c/code\u003e Api:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-jsx\"\u003efunction BasicForm() {\n  const form = useForm({\n    onSubmit(values) {\n      alert(JSON.stringify(values, null, 2))\n      console.log('values', values)\n    },\n    children: [\n      {\n        label: 'First Name',\n        name: 'firstName',\n        component: 'Input',\n        value: '',\n      },\n      {\n        label: 'Last Name',\n        name: 'lastName',\n        component: 'Input',\n        value: '',\n      },\n      {\n        component: 'Submit',\n        text: 'submit',\n      },\n    ],\n  })\n\n  return \u0026lt;Form form={form} /\u0026gt;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e使用 jsx\u003c/h2\u003e\n\u003cp\u003e当然，如果你的表单界面定制性非常强，你也可以使用 jsx:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-jsx\"\u003efunction BasicForm() {\n  const form = useForm({\n    onSubmit(values) {\n      alert(JSON.stringify(values, null, 2))\n      console.log('values', values)\n    },\n  })\n\n  return (\n    \u0026lt;Form form={form}\u0026gt;\n      \u0026lt;h2\u0026gt;Basic Info\u0026lt;/h2\u0026gt;\n      \u0026lt;Box bgGray100 rounded p3 mb4\u0026gt;\n        \u0026lt;Field component=\"Input\" label=\"First Name\" name=\"firstName\" /\u0026gt;\n        \u0026lt;Field component=\"Input\" label=\"Last Name\" name=\"lastName\" /\u0026gt;\n      \u0026lt;/Box\u0026gt;\n\n      \u0026lt;h2\u0026gt;Extra Info\u0026lt;/h2\u0026gt;\n      \u0026lt;Box bgGray100 rounded p3 mb4\u0026gt;\n        \u0026lt;Field component=\"Input\" label=\"Email\" name=\"email\" /\u0026gt;\n        \u0026lt;Field component=\"Textarea\" label=\"Bio\" name=\"bio\" /\u0026gt;\n      \u0026lt;/Box\u0026gt;\n\n      \u0026lt;button\u0026gt;Submit\u0026lt;/button\u0026gt;\n    \u0026lt;/Form\u0026gt;\n  )\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e文档\u003c/h2\u003e\n\u003cp\u003e更详细的使用方法请参见文档：\u003ca href=\"https://fomir.vercel.app/\"\u003efomir.vercel.app\u003c/a\u003e。\u003c/p\u003e\n\u003c/div\u003e",
+      "Author": "forsigner",
+      "PubDate": "2022-03-09T02:42:47Z"
+    },
+    {
+      "Title": "Photoshop 存储为选择的格式问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/839050",
+      "Description": "\u003cdiv class=\"content\"\u003e \u003cdiv id=\"Rightbar\"\u003e \u003cdiv class=\"box\"\u003e\n\u003cdiv class=\"cell\"\u003e\n\u003cstrong\u003eV2EX = way to explore\u003c/strong\u003e \u003cspan class=\"fade\"\u003eV2EX 是一个关于分享和探索的地方\u003c/span\u003e\n\u003c/div\u003e \u003c/div\u003e \u003cdiv class=\"box\"\u003e\n\u003cdiv class=\"inner\"\u003e\n\u003ca href=\"https://www.finclip.com/competition/?from=v2ex\"\u003e\u003cimg src=\"https://cdn.v2ex.com/assets/sidebar/finclip_20220301.png\" width=\"250\" alt=\"FinClip\"\u003e\u003c/a\u003e\n\u003c/div\u003e \u003c/div\u003e \u003c/div\u003e\n\u003cdiv id=\"Main\"\u003e \u003cdiv class=\"box\"\u003e \u003cdiv class=\"cell\"\u003e\n\u003cdiv class=\"topic_content\"\u003e为何我新建一个文件啥都不操作的情况下，点击存储为，可以选择很多格式，比如 bmp 格式。\u003cp\u003e但是如果我随便截图，放进去一张图后，再点存储为，就会只有：photoshop\\大型文档格式\\photoshop PDF\\PNG\\TIFF ？\u003c/p\u003e\n\u003c/div\u003e\n\u003c/div\u003e\n\u003c/div\u003e \u003c/div\u003e\n\u003c/div\u003e",
+      "Author": "CSGO",
+      "PubDate": "2022-03-09T02:40:43Z"
+    },
+    {
+      "Title": "面对 M1 MAX 的欧它 fusion 有什么感想？ - Apple",
+      "Link": "https://www.v2ex.com/t/839049",
+      "Description": "\u003cdiv class=\"content\"\u003e \u003cdiv id=\"Main\"\u003e \u003cdiv class=\"box\"\u003e \u003cdiv class=\"cell\"\u003e\n\u003cdiv class=\"topic_content\"\u003e\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e我感觉可以自由开 chrome ，不畏惧性能怪兽了（狗头保命\u003c/p\u003e\n\u003c/div\u003e\u003c/div\u003e\n\u003c/div\u003e\n\u003c/div\u003e \u003cp id=\"no-comments-yet\"\u003e\n目前尚无回复\n\u003c/p\u003e \u003c/div\u003e\n\u003c/div\u003e",
+      "Author": "sickoo",
+      "PubDate": "2022-03-09T02:40:36Z"
+    },
+    {
+      "Title": "iPhone SE（第三代）发布了，大家会买吗？ - Apple",
+      "Link": "https://www.v2ex.com/t/839048",
+      "Description": "\u003cdiv class=\"content\"\u003e \u003cdiv id=\"Main\"\u003e \u003cp id=\"no-comments-yet\"\u003e\n目前尚无回复\n\u003c/p\u003e \u003c/div\u003e\n\u003c/div\u003e",
+      "Author": "YL3616",
+      "PubDate": "2022-03-09T02:40:08Z"
+    },
+    {
+      "Title": "高并发下订单状态更新 - Java",
+      "Link": "https://www.v2ex.com/t/839046",
+      "Description": "\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e订单存在 flag 字段，0 未支付，1 支付中，2 支付完成。\n发起支付场景中，会先查询订单状态是否为 0 ，然后更新为 1 ，并且调用第三方支付系统获取 h5 的支付地址(耗时操作)。用户在 h5 上完成支付后，第三方支付系统会异步通知到后台服务。进行订单更新动作，并保存流水号。\u003c/p\u003e\n\u003ch2\u003e具体代码\u003c/h2\u003e \u003cp\u003e支付发起之前，会查库，判断 flag 是否为 0 ，可以的才会继续\u003c/p\u003e\n\u003ch2\u003e异步通知\u003c/h2\u003e\n\u003cp\u003e接收到第三方系统的异步通知后，会查库，判断 flag 是否为 1 ，可以的话才会更新订单。\u003c/p\u003e\n\u003ch2\u003e问题\u003c/h2\u003e\n\u003cp\u003e高并发下，第一个线程查库，查到 flag 是 0 ，在数据库没更新完成的情况下，第二个线程也来查库，查到是 flag 也是 0.同时发起了支付。如何防止这种场景呢？假设在单节点情况下，直接加 synchronized ，可以避免。但是这样的话，是对所有的线程都进行了阻塞，实际情况下，我们只是要对相同订单进行阻塞。不同订单不进行阻塞的。\u003c/p\u003e\n\u003cp\u003e在异步回调的情况也是一样，也是要先查订单状态 flag 为 1 的话，才会进行下一步动作，如果并发情况下出现了 2 个线程都查到是 flag 为 1 怎么处理？\u003c/p\u003e\n\u003ch2\u003e目前思路\u003c/h2\u003e\n\u003cp\u003e加锁，但是锁了所有的线程，订单 1 多个线程同时发起支付的话，需要加锁阻塞，只能有一个发起成功，但是不能影响订单 2 的发起支付。实际上只是为了锁同一笔订单。\u003c/p\u003e\n\u003cp\u003e用乐观锁，然后数据库 update 的时候，where flag=某个条件。一定会有一个线程更新失败，更新成功的才会进行后续操作。这样的话，会对数据库有影响吗？\u003c/p\u003e\n\u003cp\u003e想请问大佬们，这种先查库得到条件，再根据条件做后续动作的场景，在高并发下应该如何处理呢？\u003c/p\u003e\n\u003c/div\u003e",
+      "Author": "frank1256",
+      "PubDate": "2022-03-09T02:37:03Z"
+    },
+    {
+      "Title": "关于商城订单系统的疑问 - 程序员",
+      "Link": "https://www.v2ex.com/t/839045",
+      "Description": "\u003cdiv class=\"topic_content\"\u003e\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e商城订单系统\u003c/p\u003e\n\u003cp\u003e多个商家的订单合并支付时，使用的是主订单的 id\u003c/p\u003e\n\u003cp\u003e而如果用户支付时取消了，订单列表页面就会产生多个子订单，这时订单列表再去支付，使用的就是子订单的 id\u003c/p\u003e\n\u003cp\u003e这样的话就需要多一个字段来区分订单 id 是子订单，还是主订单\u003c/p\u003e\n\u003cp\u003e目前的想法是新增一张表，生成一个 \u003ccode\u003eorder_pay_id\u003c/code\u003e 专门用来对接支付\u003c/p\u003e\n\u003c/div\u003e\u003c/div\u003e",
+      "Author": "fakeMaster",
+      "PubDate": "2022-03-09T02:36:57Z"
+    },
+    {
+      "Title": "现在有黑科技可以把 Macbook Air M1 的内存硬盘换成更大的吗？ - Apple",
+      "Link": "https://www.v2ex.com/t/839044",
+      "Description": "\u003cdiv class=\"content\"\u003e \u003cdiv id=\"Main\"\u003e \u003cdiv class=\"box\"\u003e \u003cdiv class=\"cell\"\u003e\n\u003cdiv class=\"topic_content\"\u003e我记得以前看维修厮，好像 intel 芯片时代应该是有这样的方法的。\u003cp\u003e但是 M1 版本会对硬盘、内存进行验证吗？好像现在的 iPhone 都有验证了吧\u003c/p\u003e\n\u003c/div\u003e\n\u003c/div\u003e\n\u003c/div\u003e \u003c/div\u003e\n\u003c/div\u003e",
+      "Author": "ink19",
+      "PubDate": "2022-03-09T02:35:39Z"
+    },
+    {
+      "Title": "Kivy 终于更新了，自 2020 年 release 后，这次主要还是针对 MacOS 的 ARM 兼容，请问有人深度用过这个框架吗，体验怎样。 - Python",
+      "Link": "https://www.v2ex.com/t/839043",
+      "Description": "\u003cdiv class=\"content\"\u003e \u003cdiv id=\"Main\"\u003e \u003cp id=\"no-comments-yet\"\u003e\n目前尚无回复\n\u003c/p\u003e \u003c/div\u003e\n\u003c/div\u003e",
+      "Author": "ChrisFreeMan",
+      "PubDate": "2022-03-09T02:34:00Z"
+    },
+    {
+      "Title": "国企工作 20 年，还剩不到 3 年退休，这种情况是不是只能闷声吃个 N 的补偿了？ - 职场话题",
+      "Link": "https://www.v2ex.com/t/839042",
+      "Description": "\u003cdiv class=\"topic_content\"\u003e\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e某亲戚在大型国企工作 20 年，还有不到 3 年满 60 退休。\u003c/p\u003e\n\u003cp\u003e前些日子公司 HR 拉他谈话，说公司总部下发文件，要搞\"人员岗位优化\"，\n准备强制内退一批，还是国资委下发的文件。\u003c/p\u003e\n\u003cp\u003e如果接受协商解除劳动合同，经济补偿按过去一年还是三年平均工资给 N 的补偿，\u003c/p\u003e\n\u003cp\u003e如果不接受协商，几个月后也要强制内退，内退后每月薪酬按市最低工资标准支付。\u003c/p\u003e\n\u003cp\u003e(以上相关内容有和人力沟通的电话录音)\u003c/p\u003e\n\u003cp\u003e我听录音估计是上头对人员的平均年龄有 KPI 。\u003c/p\u003e\n\u003cp\u003e之前还协商过一次，说如果不接受内退，需要调离本省，\n去其他省的项目工作（亲戚的劳动合同写了省份+公司其他项目所在地之类的话语，要调离本省也不违反劳动合同）。\n前些日子的这次谈话，调离本省的选项也没了。\u003c/p\u003e\n\u003cp\u003e因为还没解除劳动合同，公司是没有违法行为的，估计争取不到 2N ，只能要 N 的补偿？\u003c/p\u003e\n\u003c/div\u003e\u003c/div\u003e",
+      "Author": "Serino",
+      "PubDate": "2022-03-09T02:32:32Z"
+    },
+    {
+      "Title": "[有始有终]记录一次失败的低成本创业实验 - 分享创造",
+      "Link": "https://www.v2ex.com/t/839041",
+      "Description": "\u003cdiv class=\"content\"\u003e \u003cdiv id=\"Rightbar\"\u003e \u003cdiv class=\"box\"\u003e\n\u003cdiv class=\"cell\"\u003e\n\u003cstrong\u003eV2EX = way to explore\u003c/strong\u003e \u003cspan class=\"fade\"\u003eV2EX 是一个关于分享和探索的地方\u003c/span\u003e\n\u003c/div\u003e \u003c/div\u003e \u003cdiv class=\"box\"\u003e\n\u003cdiv class=\"inner\"\u003e\n\u003ca href=\"https://www.finclip.com/competition/?from=v2ex\"\u003e\u003cimg src=\"https://cdn.v2ex.com/assets/sidebar/finclip_20220301.png\" width=\"250\" alt=\"FinClip\"\u003e\u003c/a\u003e\n\u003c/div\u003e \u003c/div\u003e \u003c/div\u003e\n\u003cdiv id=\"Main\"\u003e \u003cdiv class=\"box\"\u003e \u003cdiv class=\"cell\"\u003e \u003c/div\u003e\n\u003c/div\u003e \u003cdiv class=\"box\"\u003e\n\u003cdiv class=\"cell\"\u003e\n\u003cspan class=\"gray\"\u003e3 条回复  \u003cstrong class=\"snow\"\u003e•\u003c/strong\u003e  2022-03-09 10:43:49 +08:00\u003c/span\u003e\n\u003c/div\u003e\n\u003cdiv id=\"r_11443439\" class=\"cell\"\u003e\n\u003ctable width=\"100%\"\u003e\n\u003ctr\u003e\n\u003ctd width=\"48\"\u003e\u003cimg src=\"https://cdn.v2ex.com/avatar/c1fc/5c02/465405_normal.png?m=1632789841\" class=\"avatar\" alt=\"sugz\"\u003e\u003c/td\u003e\n\u003ctd width=\"10\"\u003e\u003c/td\u003e\n\u003ctd width=\"auto\"\u003e\n\u003cp class=\"fr\"\u003e     \u003cspan class=\"no\"\u003e1\u003c/span\u003e\u003c/p\u003e \u003cstrong\u003e\u003ca href=\"http://pages.feedbinusercontent.com/member/sugz\" class=\"dark\"\u003esugz\u003c/a\u003e\u003c/strong\u003e      \u003cspan class=\"ago\"\u003e12 分钟前\u003c/span\u003e \u003cp class=\"reply_content\"\u003e说实话，我进去后看不懂这是干啥的，虽然介绍了很多话。。。\u003c/p\u003e \u003c/td\u003e\n\u003c/tr\u003e\n\u003c/table\u003e\n\u003c/div\u003e\n\u003cdiv id=\"r_11443515\" class=\"cell\"\u003e\n\u003ctable width=\"100%\"\u003e\n\u003ctr\u003e\n\u003ctd width=\"48\"\u003e\u003cimg src=\"https://cdn.v2ex.com/avatar/ce46/0725/574098_normal.png?m=1646202696\" class=\"avatar\" alt=\"AshenOneOrz\"\u003e\u003c/td\u003e\n\u003ctd width=\"10\"\u003e\u003c/td\u003e\n\u003ctd width=\"auto\"\u003e\n\u003cp class=\"fr\"\u003e     \u003cspan class=\"no\"\u003e2\u003c/span\u003e\u003c/p\u003e \u003cstrong\u003e\u003ca href=\"http://pages.feedbinusercontent.com/member/AshenOneOrz\" class=\"dark\"\u003eAshenOneOrz\u003c/a\u003e\u003c/strong\u003e      \u003cspan class=\"ago\"\u003e4 分钟前\u003c/span\u003e \u003cp class=\"reply_content\"\u003e挺有意思的\u003c/p\u003e\n\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/table\u003e\n\u003c/div\u003e\n\u003cdiv id=\"r_11443532\" class=\"cell\"\u003e\n\u003ctable width=\"100%\"\u003e\n\u003ctr\u003e\n\u003ctd width=\"48\"\u003e\u003cimg src=\"https://cdn.v2ex.com/avatar/5129/e8be/40195_normal.png?m=1644408195\" class=\"avatar\" alt=\"BeijingBaby\"\u003e\u003c/td\u003e\n\u003ctd width=\"10\"\u003e\u003c/td\u003e\n\u003ctd width=\"auto\"\u003e\n\u003cp class=\"fr\"\u003e     \u003cspan class=\"no\"\u003e3\u003c/span\u003e\u003c/p\u003e \u003cstrong\u003e\u003ca href=\"http://pages.feedbinusercontent.com/member/BeijingBaby\" class=\"dark\"\u003eBeijingBaby\u003c/a\u003e\u003c/strong\u003e      \u003cspan class=\"ago\"\u003e3 分钟前\u003c/span\u003e \u003cdiv class=\"reply_content\"\u003e看完了，感觉 lz 做的是一个广告平台？有几点是认同的：低成本快速试错，什么技术不重要。有想法快速去验证，不要做思想派。大多数个人开发者对商业都不理解。\u003cp\u003e好奇的是，通过什么方式能快速获取到种子用户进行 mvp 验证，这恰恰是很多雏形创业的痛点。\u003c/p\u003e\n\u003c/div\u003e\n\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/table\u003e\n\u003c/div\u003e\n\u003c/div\u003e \u003c/div\u003e\n\u003c/div\u003e",
+      "Author": "shellc",
+      "PubDate": "2022-03-09T02:31:37Z"
+    },
+    {
       "Title": "做了个随机获取 NFT 图片的小程序 - 分享创造",
       "Link": "https://www.v2ex.com/t/839040",
       "Description": "\u003cdiv class=\"content\"\u003e \u003cdiv id=\"Rightbar\"\u003e \u003cdiv class=\"box\"\u003e\n\u003cdiv class=\"cell\"\u003e\n\u003cstrong\u003eV2EX = way to explore\u003c/strong\u003e \u003cspan class=\"fade\"\u003eV2EX 是一个关于分享和探索的地方\u003c/span\u003e\n\u003c/div\u003e \u003c/div\u003e \u003cdiv class=\"box\"\u003e\n\u003cdiv class=\"inner\"\u003e\n\u003ca href=\"https://www.finclip.com/competition/?from=v2ex\"\u003e\u003cimg src=\"https://cdn.v2ex.com/assets/sidebar/finclip_20220301.png\" width=\"250\" alt=\"FinClip\"\u003e\u003c/a\u003e\n\u003c/div\u003e \u003c/div\u003e \u003c/div\u003e\n\u003cdiv id=\"Main\"\u003e \u003cdiv class=\"box\"\u003e \u003cdiv class=\"cell\"\u003e\n\u003cdiv class=\"topic_content\"\u003e\u003cdiv class=\"markdown_body\"\u003e\n\u003cp\u003e功能很简单，就是随机获取一张 NFT 图片，可以预览保存\n点击标题可以复制商店链接\u003c/p\u003e\n\u003cimg class=\"embedded_image\" src=\"https://s3.bmp.ovh/imgs/2022/03/c98f25173154a9e2.jpg\"\u003e 小程序名称：nft 图\n小程序码：\u003cp\u003e\n\u003cimg class=\"embedded_image\" src=\"https://s3.bmp.ovh/imgs/2022/03/7c0440c8e56be798.jpg\"\u003e\u003c/p\u003e\n\u003c/div\u003e\u003c/div\u003e\n\u003c/div\u003e\n\u003c/div\u003e \u003c/div\u003e\n\u003c/div\u003e",
