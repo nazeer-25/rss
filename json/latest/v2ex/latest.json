@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教大家一个问题，线程池何时清理中断状态的，追源码没找到 - Java",
+      "Link": "https://www.v2ex.com/t/839112",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-java\"\u003e    static class MyRun implements Runnable {\n\n        @Override\n        public void run() {\n            System.out.println(\"MyRun 当前线程池:\" + Thread.currentThread().hashCode());\n            Thread.currentThread().interrupt();\n            System.out.println(\"MyRun 当前线程池中断状态:\" + Thread.currentThread().isInterrupted());\n        }\n    }\n\n\n    static class MyRun2 implements Runnable {\n\n        @Override\n        public void run() {\n            System.out.println(\"MyRun2 当前线程池:\" + Thread.currentThread().hashCode());\n            System.out.println(\"MyRun2 当前线程池中断状态:\" + Thread.currentThread().isInterrupted());\n        }\n    }\n\n    public static void main(String[] args) {\n\n        ExecutorService ex = Executors.newSingleThreadExecutor();\n\n        ex.execute(new MyRun());\n\n        try {\n            Thread.sleep(1000);\n        } catch (InterruptedException e) {\n            throw new RuntimeException();\n        }\n\n        ex.execute(new MyRun2());\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如上述代码,输出结果如下，为何 MyRun2 中读取的中断状态是 false 呢\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eMyRun 当前线程池:352001653\nMyRun 当前线程池中断状态:true\nMyRun2 当前线程池:352001653\nMyRun2 当前线程池中断状态:false\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "git00ll",
+      "PubDate": "2022-03-09T04:39:51Z"
+    },
+    {
+      "Title": "你见过哪些解气的话？ - 问与答",
+      "Link": "https://www.v2ex.com/t/839111",
+      "Description": "\u003cp\u003eA: 这个 Bug 你看下，能力越大，责任越大。\nB: 好啊，权责利对等，先把你工资给我转一点。\u003c/p\u003e\n",
+      "Author": "mingyuewandao",
+      "PubDate": "2022-03-09T04:36:23Z"
+    },
+    {
       "Title": "灵活就业半年，中途做的几个外包要写进简历吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/839109",
       "Description": "\u003cp\u003e感觉接到的项目比之前工作水平高一点，毕竟参与到整个项目 0~1 的周期里面了，面试公司看到的时候会不会有什么特殊想法\u003c/p\u003e\n",

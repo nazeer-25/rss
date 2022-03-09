@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教大家一个问题，线程池何时清理中断状态的，追源码没找到 - Java</title>
+      <link>https://www.v2ex.com/t/839112</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    static class MyRun implements Runnable {&#xA;&#xA;        @Override&#xA;        public void run() {&#xA;            System.out.println(&#34;MyRun 当前线程池:&#34; + Thread.currentThread().hashCode());&#xA;            Thread.currentThread().interrupt();&#xA;            System.out.println(&#34;MyRun 当前线程池中断状态:&#34; + Thread.currentThread().isInterrupted());&#xA;        }&#xA;    }&#xA;&#xA;&#xA;    static class MyRun2 implements Runnable {&#xA;&#xA;        @Override&#xA;        public void run() {&#xA;            System.out.println(&#34;MyRun2 当前线程池:&#34; + Thread.currentThread().hashCode());&#xA;            System.out.println(&#34;MyRun2 当前线程池中断状态:&#34; + Thread.currentThread().isInterrupted());&#xA;        }&#xA;    }&#xA;&#xA;    public static void main(String[] args) {&#xA;&#xA;        ExecutorService ex = Executors.newSingleThreadExecutor();&#xA;&#xA;        ex.execute(new MyRun());&#xA;&#xA;        try {&#xA;            Thread.sleep(1000);&#xA;        } catch (InterruptedException e) {&#xA;            throw new RuntimeException();&#xA;        }&#xA;&#xA;        ex.execute(new MyRun2());&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如上述代码,输出结果如下，为何 MyRun2 中读取的中断状态是 false 呢&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;MyRun 当前线程池:352001653&#xA;MyRun 当前线程池中断状态:true&#xA;MyRun2 当前线程池:352001653&#xA;MyRun2 当前线程池中断状态:false&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>git00ll</author>
+      <pubDate>09 Mar 2022 04:39:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>你见过哪些解气的话？ - 问与答</title>
+      <link>https://www.v2ex.com/t/839111</link>
+      <description>&lt;p&gt;A: 这个 Bug 你看下，能力越大，责任越大。&#xA;B: 好啊，权责利对等，先把你工资给我转一点。&lt;/p&gt;&#xA;</description>
+      <author>mingyuewandao</author>
+      <pubDate>09 Mar 2022 04:36:23 +0000</pubDate>
+    </item>
+    <item>
       <title>灵活就业半年，中途做的几个外包要写进简历吗？ - 问与答</title>
       <link>https://www.v2ex.com/t/839109</link>
       <description>&lt;p&gt;感觉接到的项目比之前工作水平高一点，毕竟参与到整个项目 0~1 的周期里面了，面试公司看到的时候会不会有什么特殊想法&lt;/p&gt;&#xA;</description>
