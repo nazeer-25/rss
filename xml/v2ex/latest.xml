@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>外企远程工作，但是是外包，可以冲吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/839202</link>
+      <description>&lt;p&gt;小弟人在上海，外地人，单身。&lt;/p&gt;&#xA;&lt;p&gt;最近在找工作，找到了一个外企的远程工作，不过是外包。&lt;/p&gt;&#xA;&lt;p&gt;目前纠结在：&lt;/p&gt;&#xA;&lt;p&gt;要不要继续在上海混，如果选择继续在上海混那肯定不会选外包。&lt;/p&gt;&#xA;&lt;p&gt;留在上海，有更多的机会，但想在上海定居很难，我的技术一般，虽然现在 27 岁，但是感觉也快接近收入天花板了。&lt;/p&gt;&#xA;&lt;p&gt;如果现在离开上海，那就找个二线城市拿着高于当地薪资水平的工资，不过外包毕竟不稳定，同时离开上海也意味着放弃很多机会。&lt;/p&gt;&#xA;&lt;p&gt;总之，两个选项：远程外包一线工资去二线躺平 or 一线正编一线工资+未来更多机会。&#xA;如果是你你会怎么选？&lt;/p&gt;&#xA;</description>
+      <author>zerocola</author>
+      <pubDate>09 Mar 2022 10:12:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>基于 Native.js 实现蓝牙打印问题请教 - 问与答</title>
+      <link>https://www.v2ex.com/t/839201</link>
+      <description>&lt;p&gt;框架使用的是 UNI-APP ，由于使用 uniapp 找不到非 BLE 蓝牙，于是使用了 Native.js 来实现，代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;const main = plus.android.runtimeMainActivity();&#xA;&#x9;&#x9;&#x9;&#x9;const Context = plus.android.importClass(&#34;android.content.Context&#34;);&#xA;&#x9;&#x9;&#x9;&#x9;const BManager = main.getSystemService(Context.BLUETOOTH_SERVICE);&#xA;&#x9;&#x9;&#x9;&#x9;plus.android.importClass(BManager);&#xA;&#x9;&#x9;&#x9;&#x9;const BAdapter = BManager.getAdapter();&#xA;&#x9;&#x9;&#x9;&#x9;console.log(&#34;BAdapter&#34;, BAdapter)&#xA;&#x9;&#x9;&#x9;&#x9;plus.android.importClass(BAdapter);&#xA;&#x9;&#x9;&#x9;&#x9;const lists = BAdapter.getBondedDevices();&#xA;&#x9;&#x9;&#x9;&#x9;console.log(&#34;lists&#34;, lists)&#xA;&#x9;&#x9;&#x9;&#x9;plus.android.importClass(lists);&#xA;&#x9;&#x9;&#x9;&#x9;// const resultDiv = document.getElementById(&#39;bluetooth_list&#39;);&#xA;&#x9;&#x9;&#x9;&#x9;const iterator = lists.iterator();&#xA;&#x9;&#x9;&#x9;&#x9;console.log(&#34;iterator&#34;, iterator)&#xA;&#x9;&#x9;&#x9;&#x9;plus.android.importClass(iterator);&#xA;&#x9;&#x9;&#x9;&#x9;while(iterator.hasNext()) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;const d = iterator.next();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;plus.android.importClass(d);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;this.deviceList.push({&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;name: d.getName(),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;deviceId: d.getAddress()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;})&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;                // 根据以上获取到的设备地址，尝试连接&#xA;&#x9;&#x9;&#x9;&#x9;const UUID = plus.android.importClass(&#34;java.util.UUID&#34;);&#xA;&#x9;&#x9;&#x9;&#x9; const  uuid = UUID.fromString(&#34;00001101-0000-1000-8000-00805F9B34FB&#34;); &#xA;&#x9;&#x9;&#x9;&#x9;var   device = BAdapter.getRemoteDevice(&#34;DC:0D:30:26:CC:2A&#34;);  &#xA;&#x9;&#x9;&#x9;&#x9;plus.android.importClass(device);  &#xA;&#x9;&#x9;&#x9;&#x9;const   bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(uuid);  &#xA;&#x9;&#x9;&#x9;&#x9; plus.android.importClass(bluetoothSocket); &#xA;&#x9;&#x9;&#x9;&#x9; &#xA;&#x9;&#x9;&#x9;&#x9;     if (!bluetoothSocket.isConnected()) {  &#xA;&#x9;&#x9;&#x9;&#x9;         console.log(&#39;检测到设备未连接，尝试连接....&#39;);  &#xA;&#x9;&#x9;&#x9;&#x9;         bluetoothSocket.connect();  &#xA;&#x9;&#x9;&#x9;&#x9;     }  &#xA;&#x9;&#x9;&#x9;&#x9; &#xA;&#x9;&#x9;&#x9;&#x9;     console.log(&#39;设备已连接&#39;);  &#xA;&#x9;&#x9;&#x9;&#x9;   if (bluetoothSocket.isConnected()) {  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;       console.log(&#39;设备已连接&#39;);&#xA;                           // 以下没有继续执行&#xA;&#x9;&#x9;&#x9;&#x9;          var outputStream = bluetoothSocket.getOutputStream();  &#xA;&#x9;&#x9;&#x9;&#x9;          plus.android.importClass(outputStream);  &#xA;&#x9;&#x9;&#x9;&#x9;          var string = &#34;打印测试\r\n&#34;;  &#xA;&#x9;&#x9;&#x9;&#x9;          var bytes = plus.android.invoke(string, &#39;getBytes&#39;, &#39;gbk&#39;);&#xA;&#x9;&#x9;&#x9;&#x9;          outputStream.write(bytes); &#xA;&#x9;&#x9;&#x9;&#x9;          outputStream.flush(); &#xA;&#x9;&#x9;&#x9;&#x9;          device = null //这里关键  &#xA;&#x9;&#x9;&#x9;&#x9;          bluetoothSocket.close(); //必须关闭蓝牙连接否则意外断开的话打印错误 &#xA;&#x9;&#x9;&#x9;&#x9;  &#xA;&#x9;&#x9;&#x9;&#x9;      }  &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;代码执行到“设别已连接”后就没有继续执行了，也没有报任何错误，对 plus.android.xx 相关 API 不熟悉，uniapp 官方文档也没有详细说明，请教各位彦祖指点迷津&lt;br/&gt;&#xA;uuid 是固定的，似乎所有的案例中都是这个 UUID ，暂时不知道怎么来的&lt;/p&gt;&#xA;</description>
+      <author>sonders</author>
+      <pubDate>09 Mar 2022 10:11:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>今天是什么情况，所有远程软件都用不了了？ - 问与答</title>
+      <link>https://www.v2ex.com/t/839200</link>
+      <description>&lt;p&gt;今天下午开始向日葵、ToDesk 都不行了。&#xA;非常恐慌，顺便求 v2 大佬们推荐下有没有什么开源或免费的自建远程服务。&lt;/p&gt;&#xA;</description>
+      <author>monkeyWie</author>
+      <pubDate>09 Mar 2022 10:05:15 +0000</pubDate>
+    </item>
+    <item>
       <title>看看这个, 腾讯云邀请三个好友关注公众号给你购买资格 - 分享发现</title>
       <link>https://www.v2ex.com/t/839199</link>
       <description>&lt;p&gt;&lt;img alt=&#34;img&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://inews.gtimg.com/newsapp_ls/0/14608069133/0.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
