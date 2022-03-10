@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>为什么系统里面没有任何提示&#34;要访问 Wifi 名称的 App 需要提供精确定位权限才行&#34;？ - iOS</title>
+      <link>https://www.v2ex.com/t/839543</link>
+      <description>&lt;p&gt;我有一个行车记录仪的 app ，需要连接行车记录仪自己的 wifi ，app 会检测是不是连上指定名称的 wifi 。&lt;br/&gt;&#xA;有一次我集中清理定位权限的时候把这个 app 的定位权限给关了，然后就再也连不上行车记录仪自己的 wifi 了。&lt;br/&gt;&#xA;我研究了好久，就是没想到这两者有关系。还以为行车记录仪坏了，准备买个新的呢，但是发现行车记录仪其实有在录像，就搁置了。&lt;br/&gt;&#xA;直到过了好久，给美的净水器连 WiFi 的时候，它提示我一定要打开精确定位权限才行。我不信，发现果然连不上，给了就通了。&lt;br/&gt;&#xA;然后才想起这个行车记录仪肯定是有这个问题，打开权限一试，果然成功了。&lt;br/&gt;&#xA;浪费我好多时间。&lt;/p&gt;&#xA;</description>
+      <author>forgottencoast</author>
+      <pubDate>10 Mar 2022 15:08:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>你们是怎么实现 rate limiting 的？ - 程序员</title>
+      <link>https://www.v2ex.com/t/839542</link>
+      <description>&lt;p&gt;我所实现的 rate limiting 是基于&lt;a href=&#34;https://stackoverflow.com/questions/13175050/how-to-implement-rate-limiting-using-redis&#34; rel=&#34;nofollow&#34;&gt;How to implement rate limiting using Redis - Stack Overflow&lt;/a&gt;的，&lt;code&gt;rateLimiting.lua&lt;/code&gt;如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;-- https://stackoverflow.com/questions/13175050/how-to-implement-rate-limiting-using-redis&#xA;-- KEYS[1] = rateLimitingKey, ARGV[1] = timePeriodInSeconds, ARGV[2] = allowableNumberOfCalls, ARGV[3] = nowEpochSecond&#xA;local timePeriodInSeconds = tonumber(ARGV[1])&#xA;local allowableNumberOfCalls = tonumber(ARGV[2])&#xA;local nowEpochSecond = tonumber(ARGV[3])&#xA;local times = redis.call(&#39;RPUSH&#39;, KEYS[1], nowEpochSecond)&#xA;if times &amp;gt; allowableNumberOfCalls then&#xA;    local timeStart = redis.call(&#39;LINDEX&#39;, KEYS[1], 0)&#xA;    local timeEnd = redis.call(&#39;LINDEX&#39;, KEYS[1], -1)&#xA;    redis.call(&#39;LTRIM&#39;, KEYS[1], -allowableNumberOfCalls, -1)&#xA;    if timeEnd - timeStart &amp;lt;= timePeriodInSeconds then&#xA;        return false&#xA;    else&#xA;        return true&#xA;    end&#xA;else&#xA;    return true&#xA;end&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如果 times &amp;lt;= allowableNumberOfCalls ，直接返回 true ，如果 times &amp;gt; allowableNumberOfCalls ，那么判断一下 timeEnd - timeStart &amp;lt;= timePeriodInSeconds ，如果结果为 true ，那么 return false ，否则 return true 。&lt;/p&gt;&#xA;&lt;p&gt;但是这有个问题，因为 nowEpochSecond 是服务实例告诉 Redis 的，但多个实例的时钟是无法确保一致的，那么会出现如下情况。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;假设 timePeriodInSeconds 为 5 ，allowableNumberOfCalls 为 1 ，当前时间（正确的时钟）为 2022-03-10 22:00:00 ，实例 1 的时钟跟正确的时钟一样，实例 2 的时钟比正确的时钟慢了 3 秒。&lt;/p&gt;&#xA;&lt;p&gt;用户此时访问了资源，该请求被实例 1 处理，能获取到资源，因为 ta 之前从没访问过，所以不会被限制。过了 6 秒，ta 又访问了资源，正常的结果是用户可以访问到资源，但是结果并不是，因为这次请求被实例 2 处理，而实例 2 此时的时间为 2022-03-10 22:00:03 ，rateLimiting.lua 最后会返回 false 。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;怎么解决上述问题？或者有什么更好的方法实现 rate limiting ？&lt;/p&gt;&#xA;</description>
+      <author>JasonLaw</author>
+      <pubDate>10 Mar 2022 15:01:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>[老生常谈] apple 13mini 无线充电 - Apple</title>
+      <link>https://www.v2ex.com/t/839541</link>
+      <description>&lt;p&gt;应该选择什么，预算 200 上下，尽量不要影响电池寿命吧&lt;/p&gt;&#xA;</description>
+      <author>RedBeanIce</author>
+      <pubDate>10 Mar 2022 14:58:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>[求助各位大佬] 2014 Macbook Pro 更换 SSD 后 功耗奇高 - MacBook Pro</title>
+      <link>https://www.v2ex.com/t/839540</link>
+      <description>&lt;p&gt;两天前给我的老 14 年中款 mbp15 更换了块三星 980&lt;/p&gt;&#xA;&lt;p&gt;昨天晚上记得充好电, 拔掉电源就去睡觉了&#xA;今早起来发现笔记本已经彻底没电&lt;/p&gt;&#xA;&lt;p&gt;查了下系统中的电池耗电记录 battery level&#xA;电池电量从 12 点的 100% 掉到 0%(今早 8 点), 也太可怕了&lt;/p&gt;&#xA;&lt;p&gt;换 ssd 前一晚上顶多也就是个掉电 5%的样子&lt;/p&gt;&#xA;&lt;p&gt;求各位大佬给点建议&lt;/p&gt;&#xA;&lt;p&gt;Ps.目前系统版本 Big Sur 11.6.4&lt;/p&gt;&#xA;</description>
+      <author>puyaraimondii</author>
+      <pubDate>10 Mar 2022 14:55:03 +0000</pubDate>
+    </item>
+    <item>
       <title>不懂就问，丰巢扫码取件之后打开推广页是怎么实现的？ - 问与答</title>
       <link>https://www.v2ex.com/t/839535</link>
       <description>看了一圈微信文档，没找到实现的方式，有没有大佬说说</description>
@@ -11,7 +39,7 @@
       <pubDate>10 Mar 2022 14:45:43 +0000</pubDate>
     </item>
     <item>
-      <title>上海疫情地图 - 问与答</title>
+      <title>上海疫情地图 - 上海</title>
       <link>https://www.v2ex.com/t/839534</link>
       <description>&lt;p&gt;最近上海疫情严重，有没有做精确到小区的疫情地图的呢&lt;/p&gt;&#xA;</description>
       <author>saki22oimo</author>

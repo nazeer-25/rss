@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "为什么系统里面没有任何提示\"要访问 Wifi 名称的 App 需要提供精确定位权限才行\"？ - iOS",
+      "Link": "https://www.v2ex.com/t/839543",
+      "Description": "\u003cp\u003e我有一个行车记录仪的 app ，需要连接行车记录仪自己的 wifi ，app 会检测是不是连上指定名称的 wifi 。\u003cbr/\u003e\n有一次我集中清理定位权限的时候把这个 app 的定位权限给关了，然后就再也连不上行车记录仪自己的 wifi 了。\u003cbr/\u003e\n我研究了好久，就是没想到这两者有关系。还以为行车记录仪坏了，准备买个新的呢，但是发现行车记录仪其实有在录像，就搁置了。\u003cbr/\u003e\n直到过了好久，给美的净水器连 WiFi 的时候，它提示我一定要打开精确定位权限才行。我不信，发现果然连不上，给了就通了。\u003cbr/\u003e\n然后才想起这个行车记录仪肯定是有这个问题，打开权限一试，果然成功了。\u003cbr/\u003e\n浪费我好多时间。\u003c/p\u003e\n",
+      "Author": "forgottencoast",
+      "PubDate": "2022-03-10T15:08:00Z"
+    },
+    {
+      "Title": "你们是怎么实现 rate limiting 的？ - 程序员",
+      "Link": "https://www.v2ex.com/t/839542",
+      "Description": "\u003cp\u003e我所实现的 rate limiting 是基于\u003ca href=\"https://stackoverflow.com/questions/13175050/how-to-implement-rate-limiting-using-redis\" rel=\"nofollow\"\u003eHow to implement rate limiting using Redis - Stack Overflow\u003c/a\u003e的，\u003ccode\u003erateLimiting.lua\u003c/code\u003e如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e-- https://stackoverflow.com/questions/13175050/how-to-implement-rate-limiting-using-redis\n-- KEYS[1] = rateLimitingKey, ARGV[1] = timePeriodInSeconds, ARGV[2] = allowableNumberOfCalls, ARGV[3] = nowEpochSecond\nlocal timePeriodInSeconds = tonumber(ARGV[1])\nlocal allowableNumberOfCalls = tonumber(ARGV[2])\nlocal nowEpochSecond = tonumber(ARGV[3])\nlocal times = redis.call('RPUSH', KEYS[1], nowEpochSecond)\nif times \u0026gt; allowableNumberOfCalls then\n    local timeStart = redis.call('LINDEX', KEYS[1], 0)\n    local timeEnd = redis.call('LINDEX', KEYS[1], -1)\n    redis.call('LTRIM', KEYS[1], -allowableNumberOfCalls, -1)\n    if timeEnd - timeStart \u0026lt;= timePeriodInSeconds then\n        return false\n    else\n        return true\n    end\nelse\n    return true\nend\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如果 times \u0026lt;= allowableNumberOfCalls ，直接返回 true ，如果 times \u0026gt; allowableNumberOfCalls ，那么判断一下 timeEnd - timeStart \u0026lt;= timePeriodInSeconds ，如果结果为 true ，那么 return false ，否则 return true 。\u003c/p\u003e\n\u003cp\u003e但是这有个问题，因为 nowEpochSecond 是服务实例告诉 Redis 的，但多个实例的时钟是无法确保一致的，那么会出现如下情况。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e假设 timePeriodInSeconds 为 5 ，allowableNumberOfCalls 为 1 ，当前时间（正确的时钟）为 2022-03-10 22:00:00 ，实例 1 的时钟跟正确的时钟一样，实例 2 的时钟比正确的时钟慢了 3 秒。\u003c/p\u003e\n\u003cp\u003e用户此时访问了资源，该请求被实例 1 处理，能获取到资源，因为 ta 之前从没访问过，所以不会被限制。过了 6 秒，ta 又访问了资源，正常的结果是用户可以访问到资源，但是结果并不是，因为这次请求被实例 2 处理，而实例 2 此时的时间为 2022-03-10 22:00:03 ，rateLimiting.lua 最后会返回 false 。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e怎么解决上述问题？或者有什么更好的方法实现 rate limiting ？\u003c/p\u003e\n",
+      "Author": "JasonLaw",
+      "PubDate": "2022-03-10T15:01:04Z"
+    },
+    {
+      "Title": "[老生常谈] apple 13mini 无线充电 - Apple",
+      "Link": "https://www.v2ex.com/t/839541",
+      "Description": "\u003cp\u003e应该选择什么，预算 200 上下，尽量不要影响电池寿命吧\u003c/p\u003e\n",
+      "Author": "RedBeanIce",
+      "PubDate": "2022-03-10T14:58:21Z"
+    },
+    {
+      "Title": "[求助各位大佬] 2014 Macbook Pro 更换 SSD 后 功耗奇高 - MacBook Pro",
+      "Link": "https://www.v2ex.com/t/839540",
+      "Description": "\u003cp\u003e两天前给我的老 14 年中款 mbp15 更换了块三星 980\u003c/p\u003e\n\u003cp\u003e昨天晚上记得充好电, 拔掉电源就去睡觉了\n今早起来发现笔记本已经彻底没电\u003c/p\u003e\n\u003cp\u003e查了下系统中的电池耗电记录 battery level\n电池电量从 12 点的 100% 掉到 0%(今早 8 点), 也太可怕了\u003c/p\u003e\n\u003cp\u003e换 ssd 前一晚上顶多也就是个掉电 5%的样子\u003c/p\u003e\n\u003cp\u003e求各位大佬给点建议\u003c/p\u003e\n\u003cp\u003ePs.目前系统版本 Big Sur 11.6.4\u003c/p\u003e\n",
+      "Author": "puyaraimondii",
+      "PubDate": "2022-03-10T14:55:03Z"
+    },
+    {
       "Title": "不懂就问，丰巢扫码取件之后打开推广页是怎么实现的？ - 问与答",
       "Link": "https://www.v2ex.com/t/839535",
       "Description": "看了一圈微信文档，没找到实现的方式，有没有大佬说说",
@@ -11,7 +39,7 @@
       "PubDate": "2022-03-10T14:45:43Z"
     },
     {
-      "Title": "上海疫情地图 - 问与答",
+      "Title": "上海疫情地图 - 上海",
       "Link": "https://www.v2ex.com/t/839534",
       "Description": "\u003cp\u003e最近上海疫情严重，有没有做精确到小区的疫情地图的呢\u003c/p\u003e\n",
       "Author": "saki22oimo",
