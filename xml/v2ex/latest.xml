@@ -4,9 +4,16 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求助:关于 Pinia - 问与答</title>
+      <link>https://www.v2ex.com/t/839383</link>
+      <description>&lt;p&gt;有如下代码：&#xA;声明了一个&lt;code&gt;app store&lt;/code&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;import { getAppAll } from &#39;@/api/app&#39;;&#xA;import { defineStore } from &#39;pinia&#39;;&#xA;import { IAppInfo } from &#39;@/utils/types&#39;;&#xA;import { store } from &#39;@/store&#39;;&#xA;&#xA;export const useAppStore = defineStore(&#39;app&#39;, {&#xA;    state: () =&amp;gt; ({&#xA;        appList: [],&#xA;    }),&#xA;    getters: {&#xA;        appList: (state) =&amp;gt; {&#xA;            console.log(&#39;getter&#39;, state.appList);&#xA;            return state.appList;&#xA;        },&#xA;    },&#xA;    actions: {&#xA;        async fetchAppList() {&#xA;            const resp = await getAppAll();&#xA;            const { data } = resp;&#xA;            const result = data as Array&amp;lt;IAppInfo&amp;gt;;&#xA;            this.$patch((state) =&amp;gt; {&#xA;                state.appList = result;&#xA;            });&#xA;        },&#xA;    },&#xA;});&#xA;&#xA;export function getAppStore() {&#xA;    return useAppStore(store);&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;为什么我在其它 组件中获取不到 appList 的值呢？一直是 undefind&#xA;其它 组件调用的代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;import { getAppStore } from &#39;@/store/modules/app&#39;;&#xA;const appStore = getAppStore();&#xA;const { appList } = appStore;&#xA;console.log(&#39;appList&#39;, appList); === undefind&#xA;const apps = ref(appList);&#xA;if (helper.len(apps.value) === 0) {&#xA;    await appStore.fetchAppList();&#xA;    apps.value = appStore.appList;&#xA;    console.log(&#39;apps.value&#39;, appStore.appList); === undefind&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>sunmoon1983</author>
+      <pubDate>10 Mar 2022 05:15:43 +0000</pubDate>
+    </item>
+    <item>
       <title>小数点算错， Fantasm Finance 损失约 1000ETH - 区块链</title>
       <link>https://www.v2ex.com/t/839381</link>
-      <description>&lt;a target=&#34;_blank&#34; href=&#34;https://mp.weixin.qq.com/s/aWO2w4qV1yPhsULxYLcVpw&#34; rel=&#34;nofollow noopener&#34;&gt;https://mp.weixin.qq.com/s/aWO2w4qV1yPhsULxYLcVpw&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;论同行评审、单元测试和安全审计的重要性</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/aWO2w4qV1yPhsULxYLcVpw&#34; rel=&#34;nofollow&#34;&gt;https://mp.weixin.qq.com/s/aWO2w4qV1yPhsULxYLcVpw&lt;/a&gt;&#xA;论同行评审、单元测试和安全审计的重要性&lt;/p&gt;&#xA;</description>
       <author>KamenReborn</author>
       <pubDate>10 Mar 2022 05:05:11 +0000</pubDate>
     </item>
