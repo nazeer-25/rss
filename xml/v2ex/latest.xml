@@ -4,7 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>VS2019 可以在 DllMain 里面创建线程， VS2017 则会被一直挂起？ - Windows</title>
+      <title>推广一下自己的表情包网站，顺便求一波友情链接。 - 推广</title>
+      <link>https://www.v2ex.com/t/839700</link>
+      <description>网站刚上线不久，所以百度只收录了首页。&lt;br /&gt;&lt;br /&gt;求一波友情链接。&lt;br /&gt;&lt;br /&gt;逗比联萌 &lt;a target=&#34;_blank&#34; href=&#34;https://www.doubilm.com/&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.doubilm.com/&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;里面的表情都是手动收集的，都是无水印的表情。</description>
+      <author>fanchenio</author>
+      <pubDate>11 Mar 2022 07:56:37 +0000</pubDate>
+    </item>
+    <item>
+      <title>30 岁之后还会频繁跳槽吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/839699</link>
+      <description>有没有人现身说法，30 之后平均多久跳一次。</description>
+      <author>JKeita</author>
+      <pubDate>11 Mar 2022 07:54:59 +0000</pubDate>
+    </item>
+    <item>
+      <title>阿里巴巴股价为什么跌的这么厉害？ - 问与答</title>
+      <link>https://www.v2ex.com/t/839698</link>
+      <author>quzard</author>
+      <pubDate>11 Mar 2022 07:53:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>VS2019 可以在 DllMain 里面创建线程， VS2017 则会被一直挂起？ - C++</title>
       <link>https://www.v2ex.com/t/839696</link>
       <description>&lt;p&gt;用 2017 工具链编译, 创建线程这一步就卡住不运行了：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/bI0Uts&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;bI0Uts.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2022/03/11/bI0Uts.png&#34;/&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;换 2019 编译，线程运行正常，钩子成功注册：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/bIBiNj&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;bIBiNj.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2022/03/11/bIBiNj.png&#34;/&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;C++代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#include &amp;lt;Windows.h&amp;gt;&#xA;#include &amp;lt;stdio.h&amp;gt;&#xA;#include &amp;lt;thread&amp;gt;&#xA;&#xA;extern &#34;C&#34; {&#xA;    __declspec(dllexport) BOOL WINAPI DllMain(&#xA;        HINSTANCE hinstDLL, // handle to DLL module&#xA;        DWORD fdwReason,    // reason for calling function&#xA;        LPVOID lpReserved)  // reserved&#xA;    {&#xA;        // Perform actions based on the reason for calling.&#xA;        switch (fdwReason)&#xA;        {&#xA;        case DLL_PROCESS_ATTACH:&#xA;        {&#xA;            // Initialize once for each new process.&#xA;            // Return FALSE to fail DLL load.&#xA;            printf(&#34;附加到进程\n&#34;);&#xA;            std::thread th([]{&#xA;                HHOOK hook = SetWindowsHookExW(WH_KEYBOARD_LL, (HOOKPROC)[](int code, WPARAM wParam, LPARAM lParam)-&amp;gt;LRESULT{&#xA;                    KBDLLHOOKSTRUCT *p = (KBDLLHOOKSTRUCT *)lParam;&#xA;                    // Do the wParam and lParam parameters contain information about a keyboard message.&#xA;                    if (code == HC_ACTION)&#xA;                    {&#xA;                        // Messsage data is ready for pickup&#xA;                        if (wParam == WM_SYSKEYDOWN || wParam == WM_KEYDOWN)&#xA;                        {&#xA;                            if (p-&amp;gt;vkCode == VK_LWIN)&#xA;                            {&#xA;                                printf(&#34;拦截 KeyDown 事件\n&#34;);&#xA;                                return TRUE;&#xA;                            }&#xA;                        }&#xA;                    }&#xA;                    // hook procedure must pass the message *Always*&#xA;                    return CallNextHookEx(NULL, code, wParam, lParam);&#xA;                }, NULL, 0);&#xA;                printf(&#34;hook = %p\n&#34;, hook);&#xA;                MSG msg = {0};&#xA;                while (1) {&#xA;                    GetMessage(&amp;amp;msg, NULL, 0, 0);&#xA;                    TranslateMessage(&amp;amp;msg);&#xA;                    DispatchMessage(&amp;amp;msg);&#xA;                }&#xA;            });&#xA;            th.detach();&#xA;            break;&#xA;        }&#xA;&#xA;        case DLL_THREAD_ATTACH:&#xA;            // Do thread-specific initialization.&#xA;            printf(&#34;附加到线程\n&#34;);&#xA;            break;&#xA;&#xA;        case DLL_THREAD_DETACH:&#xA;            // Do thread-specific cleanup.&#xA;            printf(&#34;从线程分离\n&#34;);&#xA;            break;&#xA;&#xA;        case DLL_PROCESS_DETACH:&#xA;            // Perform any necessary cleanup.&#xA;            printf(&#34;从进程分离\n&#34;);&#xA;            break;&#xA;        }&#xA;        return TRUE; // Successful DLL_PROCESS_ATTACH.&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
       <author>Kasumi20</author>
