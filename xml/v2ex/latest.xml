@@ -4,9 +4,16 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>救助! 四川移动 4G/5G 无法使用 DoT - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/839963</link>
+      <description>&lt;p&gt;本人 MIUI Global13 系统, 最近几天使用四川移动 4G/5G 流量已经完全不能使用以下 DoT:&#xA;dns.google&#xA;&lt;a href=&#34;http://dns.alidns.com&#34; rel=&#34;nofollow&#34;&gt;dns.alidns.com&lt;/a&gt;&#xA;dot.pub (162.14.21.56,162.14.21.178)&lt;/p&gt;&#xA;&lt;p&gt;以下 DoT 非常不稳定:&#xA;dns.pub(106.55.127.112)&lt;/p&gt;&#xA;&lt;p&gt;但是我使用手机开热点, 电脑上测试以上服务器的 853 端口均是 open(除了 8.8.8.8), 在电脑上通过 clash 能使用 DoT 服务.&lt;/p&gt;&#xA;&lt;p&gt;所以推测可能是安卓系统和 clash 对 tls 证书的处理方式不同 , 由于没办法直接测试 tls 连接, 希望 v 友们帮忙看看&lt;/p&gt;&#xA;&lt;p&gt;PS: 手机连接上 wifi, DoT 功能一切正常!&lt;/p&gt;&#xA;</description>
+      <author>leido</author>
+      <pubDate>12 Mar 2022 17:32:33 +0000</pubDate>
+    </item>
+    <item>
       <title>网络文件系统的选择 - 问与答</title>
       <link>https://www.v2ex.com/t/839962</link>
-      <description>&lt;p&gt;鉴于目前局势，打算备份下海外的数据回国内&lt;/p&gt;&#xA;&lt;p&gt;因为海外小机硬盘不够了，所以想远程挂载国内服务器的硬盘过去，数据有 3T 。&lt;/p&gt;&#xA;&lt;h2&gt;手头资源:&lt;/h2&gt;&#xA;&lt;p&gt;3T 的数据需要海外机器 A 用 wget 下载回来，但是海外机器 A 本地硬盘只有 200G 缓存不下，而且不好拆分太多碎文件，打算挂着慢慢下&lt;br/&gt;&#xA;国内机器 B 有 5T 硬盘挂载在本地 /DATA 目录  &lt;/p&gt;&#xA;&lt;h2&gt;额外限制条件：&lt;/h2&gt;&#xA;&lt;p&gt;国内机器 B 硬盘大但是上行(向外发送)只有 12M ，下行(下载接收)倒是 100M 够用&lt;br/&gt;&#xA;海外机器上下行都 1Gbps&lt;br/&gt;&#xA;两台机器间日常有丢包现象但不是特别严重&lt;br/&gt;&#xA;暂时不考虑用代理的方式下载，用的是类似 wget 的下载方式但是实际上比较复杂    &lt;/p&gt;&#xA;&lt;h2&gt;初步打算：&lt;/h2&gt;&#xA;&lt;p&gt;1.用 NFS 把国内机器 B 的 /DATA 目录挂载到海外机器 A 的 /DATA 目录下&lt;br/&gt;&#xA;2.在海外机器 A 的 /DATA 目录下 wget 挂在后台慢慢下  &lt;/p&gt;&#xA;&lt;h2&gt;问题是：&lt;/h2&gt;&#xA;&lt;p&gt;1.海外线路丢包很严重，经验 NFS 一般是局域网用，NFS 用在公网而且是跨国际线路会有哪些问题？&lt;br/&gt;&#xA;2.听说 NFS 是 UDP 协议，NFS 是否有自己处理类似 TCP 的数据包重发和验证？&lt;br/&gt;&#xA;3.安全性上打算直接限制公网 IP ，然后账号密码，是否够用？&lt;br/&gt;&#xA;4.如果 NFS 不是好选择，还有哪些替代？&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;鉴于目前局势，打算备份下海外的数据回国内&lt;/p&gt;&#xA;&lt;p&gt;因为海外小机硬盘不够了，所以想远程挂载国内服务器的硬盘过去，数据有 3T 。&lt;/p&gt;&#xA;&lt;h2&gt;手头资源:&lt;/h2&gt;&#xA;&lt;p&gt;3T 的数据需要海外机器 A 用 wget 下载回来，但是海外机器 A 本地硬盘只有 200G 缓存不下，而且不好拆分太多碎文件，打算挂着慢慢下&lt;br/&gt;&#xA;国内机器 B 有 5T 硬盘挂载在本地 /DATA 目录  &lt;/p&gt;&#xA;&lt;h2&gt;额外限制条件：&lt;/h2&gt;&#xA;&lt;p&gt;国内机器 B 硬盘大但是上行(向外发送)只有 12M ，下行(下载接收)倒是 100M 够用&lt;br/&gt;&#xA;海外机器上下行都 1Gbps&lt;br/&gt;&#xA;两台机器间日常有丢包现象但不是特别严重&lt;br/&gt;&#xA;暂时不考虑用代理的方式下载，用的是类似 wget 的下载方式但是实际上比较复杂    &lt;/p&gt;&#xA;&lt;h2&gt;初步打算：&lt;/h2&gt;&#xA;&lt;p&gt;1.用 NFS 把国内机器 B 的 /DATA 目录挂载到海外机器 A 的 /DATA 目录下&lt;br/&gt;&#xA;2.在海外机器 A 的 /DATA 目录下 wget 挂在后台慢慢下  &lt;/p&gt;&#xA;&lt;h2&gt;问题是：&lt;/h2&gt;&#xA;&lt;p&gt;1.海外线路一定会丢包，经验 NFS 一般是局域网用，NFS 用在公网而且是跨国际线路会有哪些问题？&lt;br/&gt;&#xA;2.听说 NFS 是 UDP 协议，NFS 是否有自己处理类似 TCP 的数据包重发和验证？&lt;br/&gt;&#xA;3.安全性上打算直接限制公网 IP ，然后账号密码，是否够用？&lt;br/&gt;&#xA;4.如果 NFS 不是好选择，还有哪些替代？&lt;/p&gt;&#xA;</description>
       <author>RatioPattern</author>
       <pubDate>12 Mar 2022 17:21:49 +0000</pubDate>
     </item>
