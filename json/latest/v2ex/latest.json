@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "js 有什么办法执行一个 object 的所有 method 并带上异常处理？ - 问与答",
+      "Link": "https://www.v2ex.com/t/840565",
+      "Description": "\u003cp\u003e在做前端浏览器信息追踪，把所有获取信息的方法和 method 都放在了一个 object 里\n但是有些浏览器默认阻止了一些行为导致执行中断，\u003cbr/\u003e\n有没有什么办法能够在异常处理里面执行完一个 object 的所有 method 。。。\u003cbr/\u003e\n举例：  \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e    traceinfo=new Object();\n    traceinfo.timezone=new Date().getTimezoneOffset();\n    traceinfo.hardwareConcurrency=navigator.hardwareConcurrency;\n    //cpu logical 核心数\n    traceinfo.timezone_extend=Intl.DateTimeFormat().resolvedOptions().timeZone;\n    //有些浏览器不支持\n    traceinfo.is_private_window=is_private_window();\n    traceinfo.os_info=getos_info();\n    traceinfo.os_info_extend=navigator.oscpu;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003etraceinfo 这个 object 里面既有 method 也有直接的浏览器变量赋值，如果直接像上面这样运行，假设比如火狐浏览器阻止了 navigator.hardwareConcurrency 数据的获取，抛出了 navigator 未定义异常，会导致后面的 timezone_extend ，is_private_window ，os_info ，os_info_extend 都为空  \u003c/p\u003e\n\u003cp\u003e期待是能够(伪 python):  \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efor methodname in traceinfo:\n\ttry:\n    \ttraceinfo.dataname=traceinfo.methodname()\n    except:\n    \ttraceinfo.dataname=null\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e得到的结果会都在 traceinfo 对象里面，个别获取不到的就为空就好\u003cbr/\u003e\nmethod 实在比较多，一个个用 try catch 包裹感觉不优雅...\u003c/p\u003e\n",
+      "Author": "RatioPattern",
+      "PubDate": "2022-03-15T10:42:11Z"
+    },
+    {
+      "Title": "公司内网服务器被入侵了，我们没有公网 IP，不过有开了个 frp 穿透 - 服务器",
+      "Link": "https://www.v2ex.com/t/840564",
+      "Description": "\u003cp\u003e下午发现服务器风扇一直转，然后 top 看了下，发现一个叫'systemdd-dev'的程序把 cpu 跑满了。一开始以为是 systemd 相关的进程，查了下 google 发现没有结果，然后意识到估计是挖矿程序之类的东西。看了下 crontab 果然多了个不认识的任务。然后查各种日志，发现都被删了，不确定对方是怎么进来的。我们服务器没有公网 IP ，只开了 frp 穿透，不确定是不是 frp 的漏洞导致的。而且看了用于穿透的云主机也没看到什么特别的日志，就比较蛋疼。唯一发现的东西就是恶意程序的 FD 连接了一个文件名'CVE-2021-4034'。现在不确定对方到底怎么入侵的，只能先把 frp 关了。想问问大家有没有什么排查思路。\u003c/p\u003e\n",
+      "Author": "zdt3476",
+      "PubDate": "2022-03-15T10:40:05Z"
+    },
+    {
       "Title": "npm 构建启动前端项目后，自动在桌面创建了 WITH-LOVE-FROM-AMERICA.txt - 前端开发",
       "Link": "https://www.v2ex.com/t/840562",
       "Description": "\u003cp\u003e结论先行\nnpm 构建前端项目，启动后在桌面自动创建《 WITH-LOVE-FROM-AMERICA.txt 》文件。\u003c/p\u003e\n\u003cp\u003e过程：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e在 gitHub 上下载\u003ca href=\"https://github.com/PanJiaChen/vue-element-admin.git\" rel=\"nofollow\"\u003evue-element-admin\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e按照 readme 中进行安装，\u003ccode\u003enpm install\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e启动项目 \u003ccode\u003enpm run dev\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e系统弹窗需要访问桌面的权限（手抖点的太快，没看清是哪个程序需要权限）\u003c/li\u003e\n\u003cli\u003e桌面出现《 WITH-LOVE-FROM-AMERICA.txt 》文件\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e观察：\n已经有其他网友也出现此情况，\u003ca href=\"https://ask.csdn.net/questions/7663044\" rel=\"nofollow\"\u003e桌面突然出现奇怪 txt 文件！\u003c/a\u003e\n好像是今天才出现这个情况\u003c/p\u003e\n\u003cp\u003e怀疑是不是 npm 依赖项被恶意篡改了。\nPS：难道是因为最近的国际时局？\u003c/p\u003e\n",
