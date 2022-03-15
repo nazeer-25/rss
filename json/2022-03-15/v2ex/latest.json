@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "程序启动的时候，一般怎么加载用 await 从本地数据库拿到的数据？ - Flutter",
+      "Link": "https://www.v2ex.com/t/840514",
+      "Description": "\u003cp\u003e一些配置信息存到 app 本地数据库的时候，启动时提取出来需要用 await （比如用数据库 sqlite 或 realm ），那么一般是怎么处理这个 await 跟界面渲染的关系的？是直接在 main 函数里用 await 等配置数据加载出来再 runApp 的吗？但这种用本地配置数据都需要 await 我感觉就有点麻烦，还是有别的更好做法？\u003c/p\u003e\n",
+      "Author": "Nillouise",
+      "PubDate": "2022-03-15T07:35:41Z"
+    },
+    {
+      "Title": "坐标苏州某市级机关，已经开始下架 win 电脑了。 - 职场话题",
+      "Link": "https://www.v2ex.com/t/840513",
+      "Description": "\u003cp\u003e换上国产安可电脑，听朋友说只能自己带破笔记本办公了，多么可笑。\u003c/p\u003e\n",
+      "Author": "gtchan13579",
+      "PubDate": "2022-03-15T07:33:46Z"
+    },
+    {
+      "Title": "iOS 15.4 12 小时制自动给我变成了 24 小时制了 - Apple",
+      "Link": "https://www.v2ex.com/t/840511",
+      "Description": "",
+      "Author": "YoungKing6",
+      "PubDate": "2022-03-15T07:32:39Z"
+    },
+    {
+      "Title": "请教一下“reddit”网站个人头像这种自定义模块的功能，是怎么实现的？ - 前端开发",
+      "Link": "https://www.v2ex.com/t/840510",
+      "Description": "\u003cp\u003e\u003cimg alt=\"xx.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/BJw5es7.png\"/\u003e \u003c/p\u003e\n\u003cp\u003e类似这种，有现成的第三方库吗？\u003c/p\u003e\n",
+      "Author": "ttentau1",
+      "PubDate": "2022-03-15T07:32:01Z"
+    },
+    {
+      "Title": "安卓手机破解密码 已经 Root 有我自己的指纹可以正常解锁 - Android",
+      "Link": "https://www.v2ex.com/t/840509",
+      "Description": "\u003cp\u003e前年用的旧手机 LG V50 ，今天开机改了个密码，结果忘记改成什么了。\n已经 Root 了，装了 lsp ，登了 google 账号，如何把 pin 码搞开？\n不能关机，关机在开机会强制输入 pin 码。\npin 码四位数字。现在变成了每 30s 才能输一次了。\u003c/p\u003e\n",
+      "Author": "enchigo",
+      "PubDate": "2022-03-15T07:31:45Z"
+    },
+    {
+      "Title": "自己做了一个摸鱼网站 - 分享创造",
+      "Link": "https://www.v2ex.com/t/840508",
+      "Description": "\u003cp\u003e\u003ca href=\"https://toutiao.zhangfan.vip/\" rel=\"nofollow\"\u003ehttps://toutiao.zhangfan.vip/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e把自己订阅的一些 rss 每次随机 100 个出来 分享给各位老哥\u003c/p\u003e\n",
+      "Author": "zhangfannn",
+      "PubDate": "2022-03-15T07:30:45Z"
+    },
+    {
       "Title": "刚入职的小白写了一个登录的接口，但感觉写的很臃肿，请教一下大佬有没有可以优化的地方呢？ - Java",
       "Link": "https://www.v2ex.com/t/840507",
       "Description": "\u003cpre\u003e\u003ccode\u003e@Override\n    public Response login(String params) {\n        try {\n            JSONObject jsonObject = JSON.parseObject(params);\n            // 解密手机号码\n            AesNewUtil aes = new AesNewUtil();\n            String decMobile = aes.decrypt(jsonObject.getString(\"mobile\"));\n            // 获取 openId\n            String openId = jsonObject.getString(\"openId\");\n            if (StringUtils.isEmpty(openId)) {\n                return Response.fail(RespCode.PARAM_NULL);\n            }\n            logger.info(\"openId : {}\", openId);\n            // 查询代客用户表\n            ValetUser valetUser = selectUserByMobile(decMobile);\n            // 用户是否存在于白名单中\n            if (null == valetUser) {\n                return Response.fail(RespCode.NO_GET_INFO);\n            } else {\n                String userId = valetUser.getUserId();\n                // 判断用户信息是否存在\n                ValetUserInfo valetUserInfo = valetUserInfoMapper.selectByPrimaryKey(userId);\n                if (null == valetUserInfo) {\n                    // 保存用户信息\n                    valetUserInfo = new ValetUserInfo();\n                    valetUserInfo.setUserId(userId);\n                    valetUserInfo.setOpenId(openId);\n                    valetUserInfo.setCreateTime(DateUtils.getNowDate());\n                    valetUserInfo.setUpdateTime(DateUtils.getNowDate());\n                    valetUserInfoMapper.insertSelective(valetUserInfo);\n                }\n                // 获取 token\n                String token = TokenUtil.generateToken(userId, decMobile, \"app\");\n                cacheOpt.getOpt(Constants.CACHE_STR).opsForValue().set(Constants.USER_AUTH_PRIFIX + userId, token, 7, TimeUnit.DAYS);\n//                cacheOpt.getOpt(Constants.CACHE_STR).opsForValue().set(Constants.LOGIN_MOBILE_AUTH_PRIFIX + userId, decMobile, 7, TimeUnit.DAYS);\n//                logger.info((String) cacheOpt.getOpt(Constants.CACHE_STR).opsForValue().get(Constants.USER_AUTH_PRIFIX + valetUser.getUserId()));\n                Map\u0026lt;String, Object\u0026gt; result = new HashMap\u0026lt;\u0026gt;();\n                // 用户类型:0 无效，1 网格，2 客户经理，3 泛渠道，4 其他\n                String userType = String.valueOf(valetUser.getUserType());\n                if (\"0\".equals(userType)) {\n                    userType = \"无效\";\n                } else if (\"1\".equals(userType)) {\n                    userType = \"网格\";\n                } else if (\"2\".equals(userType)) {\n                    userType = \"客户经理\";\n                } else if (\"3\".equals(userType)) {\n                    userType = \"泛渠道\";\n                } else {\n                    userType = \"其他\";\n                }\n                result.put(\"mobile\", valetUser.getMobile());\n                result.put(\"userName\", valetUser.getUserName());\n                result.put(\"cusName\", valetUser.getCusName());\n                result.put(\"userType\", userType);\n                result.put(\"operId\", valetUser.getOperId());\n                result.put(\"orgId\", valetUser.getOrgId());\n                result.put(\"merchantNum\", valetUser.getMerchantNum());\n                result.put(\"token\", token);\n                // 更新用户表登录时间\n                valetUserMapper.updateLoginTimeByUserId(DateUtils.getNowDate(), userId);\n                logger.info(\"登录成功 {}\", decMobile);\n                return Response.success(\"登录成功\", result);\n            }\n        } catch (ValetappException e) {\n            logger.error(\"登录失败 ： \" + e.getMessage());\n            return Response.fail(RespCode.FAIL);\n        }\n    }\n\u003c/code\u003e\u003c/pre\u003e\n",
