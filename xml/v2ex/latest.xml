@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>w3cschool.cn 离线客户端，居然要登录才能用 - 全球工单系统</title>
+      <link>https://www.v2ex.com/t/840611</link>
+      <description>&lt;p&gt;都离线了还要登录，脑子离线了？&lt;/p&gt;&#xA;</description>
+      <author>loading</author>
+      <pubDate>15 Mar 2022 14:18:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>15 万预算，做一款 2D 回合制游戏的后端。 - 程序员</title>
+      <link>https://www.v2ex.com/t/840610</link>
+      <description>&lt;p&gt;是一款 15 年前的 2D 回合制游戏，比较老。&#xA;现在找：有游戏开发经验，熟悉 TCP 协议，和数据分析的技术来做这个任务。&#xA;可长期合作，后续还有几款游戏也需要做。&#xA;预算价格 15 万，价格可谈。&#xA;团队或者个人均可。&#xA;VX：biaocun123&#xA;非诚勿扰。&lt;/p&gt;&#xA;</description>
+      <author>dogeking</author>
+      <pubDate>15 Mar 2022 14:16:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>使用 Workerman 为 Symfony（或其他类似的框架）提速 - PHP</title>
+      <link>https://www.v2ex.com/t/840608</link>
+      <description>&lt;p&gt;最近在调研新项目的启动框架，目标开发语言是 PHP ，调研了一些常用的框架和新框架：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Laravel：生态成熟，脚手架什么特别多，启动成本低；&lt;/li&gt;&#xA;&lt;li&gt;ThinkPHP：多年的偏见很难纠正，但是架不住熟练工多，需要考虑的；&lt;/li&gt;&#xA;&lt;li&gt;Yii2：个人最喜欢的框架，但是更新节奏太慢了，3.0 估计还得等一两年；&lt;/li&gt;&#xA;&lt;li&gt;Symfony：现代 PHP 框架的基石，但是要熟练使用比较困难；&lt;/li&gt;&#xA;&lt;li&gt;Hyperf：用的人不多，骂的人不少。但看代码感觉挺好的，特别是 AOP 那部分；&lt;/li&gt;&#xA;&lt;li&gt;Spiral：RoadRunner 法力加持，开发体验很不错；&lt;/li&gt;&#xA;&lt;li&gt;Webman：Workerman 作者最近在开发的一个应用框架，开发体验比 Spiral 好一点；&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;综合考虑下来（让自己写得舒服点、短时间就自己在开发、可能自己维护个两三年），最终还是决定用 Symfony 了。&lt;/p&gt;&#xA;&lt;p&gt;值得一提的是，就上面几个调研的框架来看，fpm 下运行的情况下，Symfony 的响应速度是最快的。按照大众认识，Symfony 应该是最慢的才对。&lt;/p&gt;&#xA;&lt;p&gt;虽然 Symfony 很快，但是在 fpm 下依然达不到 golang 吹心中的互联网 CURD Boy 的最低水平，为此我琢磨了下使用 Workerman 来作为 HTTP Server ，从而达到一个更好的性能水平。&lt;/p&gt;&#xA;&lt;p&gt;实现路径很简单：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Workerman 实现一个标准的 PSR Request / Response HTTP Server;&lt;/li&gt;&#xA;&lt;li&gt;Symfony Application 需支持 PSR Request / Response;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;其中 Workerman 在最新版本的 HTTP 服务是已经支持 PSR 的了。&#xA;Symfony 方面官方也有维护 symfony/psr-http-message-bridge 。&#xA;基于社区资源，我搞了一个 Bundle ，地址是 &lt;a href=&#34;https://github.com/tourze/workerman-server-bundle&#34; rel=&#34;nofollow&#34;&gt;https://github.com/tourze/workerman-server-bundle&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;要体验的话，很简单：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# symfony-cli 自行安装，大概率是要 FQ ，下面的命令最好也 FQ ，要不就自己改 composer 配置&#xA;symfony new --demo symfony0315 # 我目前只测试了 symfony5.4 ，其他版本的话自行解决&#xA;cd symfony0315&#xA;composer require tourze/workerman-server-bundle -vvv&#xA;bin/console workerman:http start&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后打开 &lt;a href=&#34;http://127.0.0.1:8080/&#34; rel=&#34;nofollow&#34;&gt;http://127.0.0.1:8080/&lt;/a&gt; 即可体验。在默认开启了 Web Profiler 的情况下，可以做到 10-20ms 的响应。创建配置文件 &lt;code&gt;.env.local&lt;/code&gt; 来切换到 production 环境：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;APP_ENV=prod&#xA;KERNEL_CLASS=&#39;App\Kernel&#39;&#xA;APP_SECRET=&#39;$ecretf0rt3st&#39;&#xA;SYMFONY_DEPRECATIONS_HELPER=999999&#xA;PANTHER_APP_ENV=panther&#xA;PANTHER_ERROR_SCREENSHOT_DIR=./var/error-screenshots&#xA;DATABASE_URL=sqlite:///%kernel.project_dir%/data/database_test.sqlite&#xA;MAILER_DSN=smtp://localhost&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;重启服务，此时刷新可以看到基本上可以保证请求在 10ms 内了，达到 phper 最低水准。&#xA;不会在 v2 贴图，图片就不放了。&lt;/p&gt;&#xA;&lt;p&gt;这个思路同样试用于其他类似的 PHP 框架，只要实现了 PSR 请求规范，都可以通过类似方式来改造。类似的注意点有：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;非 FPM 运行的 PHP 应用，没有 FPM 这种保姆来帮开发自动清理内存了，所以需要认真 review 代码，或者偷懒搞个 maxRequest 机制，处理数量到一定级别就自动退出这个进程（等 Workerman 自动再启动新进程）&lt;/li&gt;&#xA;&lt;li&gt;MySQL 、Redis 这种外部资源的连接，需要自己做保活；&lt;/li&gt;&#xA;&lt;li&gt;不要 die 、不要 exit ，多用 yii2-debug 、symfony web-profiler 这种工具，或者干脆点多 throw Exception ；&lt;/li&gt;&#xA;&lt;li&gt;加了 Workerman ，实际最大解决的是文件加载、和初始化对象的开销，如果业务代码很复杂的话，提升效果不明显的；&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>ywisax</author>
+      <pubDate>15 Mar 2022 14:15:19 +0000</pubDate>
+    </item>
+    <item>
       <title>这个电脑配置一般能卖多钱？ - 问与答</title>
       <link>https://www.v2ex.com/t/840607</link>
       <description>&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/aZPq5cF.jpeg&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/aZPq5cF.jpeg&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;</description>
