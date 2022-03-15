@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>刚入职的小白写了一个登录的接口，但感觉写的很臃肿，请教一下大佬有没有可以优化的地方呢？ - Java</title>
+      <link>https://www.v2ex.com/t/840507</link>
+      <description>&lt;pre&gt;&lt;code&gt;@Override&#xA;    public Response login(String params) {&#xA;        try {&#xA;            JSONObject jsonObject = JSON.parseObject(params);&#xA;            // 解密手机号码&#xA;            AesNewUtil aes = new AesNewUtil();&#xA;            String decMobile = aes.decrypt(jsonObject.getString(&#34;mobile&#34;));&#xA;            // 获取 openId&#xA;            String openId = jsonObject.getString(&#34;openId&#34;);&#xA;            if (StringUtils.isEmpty(openId)) {&#xA;                return Response.fail(RespCode.PARAM_NULL);&#xA;            }&#xA;            logger.info(&#34;openId : {}&#34;, openId);&#xA;            // 查询代客用户表&#xA;            ValetUser valetUser = selectUserByMobile(decMobile);&#xA;            // 用户是否存在于白名单中&#xA;            if (null == valetUser) {&#xA;                return Response.fail(RespCode.NO_GET_INFO);&#xA;            } else {&#xA;                String userId = valetUser.getUserId();&#xA;                // 判断用户信息是否存在&#xA;                ValetUserInfo valetUserInfo = valetUserInfoMapper.selectByPrimaryKey(userId);&#xA;                if (null == valetUserInfo) {&#xA;                    // 保存用户信息&#xA;                    valetUserInfo = new ValetUserInfo();&#xA;                    valetUserInfo.setUserId(userId);&#xA;                    valetUserInfo.setOpenId(openId);&#xA;                    valetUserInfo.setCreateTime(DateUtils.getNowDate());&#xA;                    valetUserInfo.setUpdateTime(DateUtils.getNowDate());&#xA;                    valetUserInfoMapper.insertSelective(valetUserInfo);&#xA;                }&#xA;                // 获取 token&#xA;                String token = TokenUtil.generateToken(userId, decMobile, &#34;app&#34;);&#xA;                cacheOpt.getOpt(Constants.CACHE_STR).opsForValue().set(Constants.USER_AUTH_PRIFIX + userId, token, 7, TimeUnit.DAYS);&#xA;//                cacheOpt.getOpt(Constants.CACHE_STR).opsForValue().set(Constants.LOGIN_MOBILE_AUTH_PRIFIX + userId, decMobile, 7, TimeUnit.DAYS);&#xA;//                logger.info((String) cacheOpt.getOpt(Constants.CACHE_STR).opsForValue().get(Constants.USER_AUTH_PRIFIX + valetUser.getUserId()));&#xA;                Map&amp;lt;String, Object&amp;gt; result = new HashMap&amp;lt;&amp;gt;();&#xA;                // 用户类型:0 无效，1 网格，2 客户经理，3 泛渠道，4 其他&#xA;                String userType = String.valueOf(valetUser.getUserType());&#xA;                if (&#34;0&#34;.equals(userType)) {&#xA;                    userType = &#34;无效&#34;;&#xA;                } else if (&#34;1&#34;.equals(userType)) {&#xA;                    userType = &#34;网格&#34;;&#xA;                } else if (&#34;2&#34;.equals(userType)) {&#xA;                    userType = &#34;客户经理&#34;;&#xA;                } else if (&#34;3&#34;.equals(userType)) {&#xA;                    userType = &#34;泛渠道&#34;;&#xA;                } else {&#xA;                    userType = &#34;其他&#34;;&#xA;                }&#xA;                result.put(&#34;mobile&#34;, valetUser.getMobile());&#xA;                result.put(&#34;userName&#34;, valetUser.getUserName());&#xA;                result.put(&#34;cusName&#34;, valetUser.getCusName());&#xA;                result.put(&#34;userType&#34;, userType);&#xA;                result.put(&#34;operId&#34;, valetUser.getOperId());&#xA;                result.put(&#34;orgId&#34;, valetUser.getOrgId());&#xA;                result.put(&#34;merchantNum&#34;, valetUser.getMerchantNum());&#xA;                result.put(&#34;token&#34;, token);&#xA;                // 更新用户表登录时间&#xA;                valetUserMapper.updateLoginTimeByUserId(DateUtils.getNowDate(), userId);&#xA;                logger.info(&#34;登录成功 {}&#34;, decMobile);&#xA;                return Response.success(&#34;登录成功&#34;, result);&#xA;            }&#xA;        } catch (ValetappException e) {&#xA;            logger.error(&#34;登录失败 ： &#34; + e.getMessage());&#xA;            return Response.fail(RespCode.FAIL);&#xA;        }&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>zx9481</author>
+      <pubDate>15 Mar 2022 07:28:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>win 上有没有可以实时翻译直播的应用或者浏览器插件？需要日译中。 - 问与答</title>
+      <link>https://www.v2ex.com/t/840506</link>
+      <description>&lt;p&gt;win 上有没有可以实时翻译直播的应用或者浏览器插件？需要日译中。&lt;/p&gt;&#xA;&lt;p&gt;具体需求是看油管的日语直播，可以实时翻译出中文字幕，类似华为手机的实时翻译功能。&lt;/p&gt;&#xA;</description>
+      <author>ahauzyh</author>
+      <pubDate>15 Mar 2022 07:24:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>免费领 7 天 QQ 音乐绿钻 - 分享发现</title>
+      <link>https://www.v2ex.com/t/840505</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://y.qq.com/jzt/6b1c7d/e1e5fb.html&#34; rel=&#34;nofollow&#34;&gt;https://y.qq.com/jzt/6b1c7d/e1e5fb.html&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;限量 500W 份，需要的领吧~&lt;/p&gt;&#xA;</description>
+      <author>sevenyangcc</author>
+      <pubDate>15 Mar 2022 07:21:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>准备升级到 macOS 12.3，但是 apple silicon 版的 python2.7.x 在哪下载？ - macOS</title>
+      <link>https://www.v2ex.com/t/840504</link>
+      <description>&lt;p&gt;已知 macOS12.3 删除了 python2.7.18&lt;/p&gt;&#xA;&lt;p&gt;已知 macOS12.2.1 的 python 2.7.18 是原生 arm 的 &lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/03/15/rEvdIWApRXhbHD3.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;python 官网上 2.7.18 好像只有 x86 的，我自己下载的 arm 版都得 3.x 版本了。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/03/15/cA74nK1lSEgkRWO.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;求问，apple silicon 版的 python2.7.x 在哪下载？&lt;/p&gt;&#xA;</description>
+      <author>Jiajin</author>
+      <pubDate>15 Mar 2022 07:20:44 +0000</pubDate>
+    </item>
+    <item>
       <title>公司网络不给听歌，怎么过？ - 程序员</title>
       <link>https://www.v2ex.com/t/840502</link>
       <description>&lt;p&gt;rt&#xA;为啥歌都不给听呢？没有动次打次怎么敲代码？&lt;/p&gt;&#xA;</description>

@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "刚入职的小白写了一个登录的接口，但感觉写的很臃肿，请教一下大佬有没有可以优化的地方呢？ - Java",
+      "Link": "https://www.v2ex.com/t/840507",
+      "Description": "\u003cpre\u003e\u003ccode\u003e@Override\n    public Response login(String params) {\n        try {\n            JSONObject jsonObject = JSON.parseObject(params);\n            // 解密手机号码\n            AesNewUtil aes = new AesNewUtil();\n            String decMobile = aes.decrypt(jsonObject.getString(\"mobile\"));\n            // 获取 openId\n            String openId = jsonObject.getString(\"openId\");\n            if (StringUtils.isEmpty(openId)) {\n                return Response.fail(RespCode.PARAM_NULL);\n            }\n            logger.info(\"openId : {}\", openId);\n            // 查询代客用户表\n            ValetUser valetUser = selectUserByMobile(decMobile);\n            // 用户是否存在于白名单中\n            if (null == valetUser) {\n                return Response.fail(RespCode.NO_GET_INFO);\n            } else {\n                String userId = valetUser.getUserId();\n                // 判断用户信息是否存在\n                ValetUserInfo valetUserInfo = valetUserInfoMapper.selectByPrimaryKey(userId);\n                if (null == valetUserInfo) {\n                    // 保存用户信息\n                    valetUserInfo = new ValetUserInfo();\n                    valetUserInfo.setUserId(userId);\n                    valetUserInfo.setOpenId(openId);\n                    valetUserInfo.setCreateTime(DateUtils.getNowDate());\n                    valetUserInfo.setUpdateTime(DateUtils.getNowDate());\n                    valetUserInfoMapper.insertSelective(valetUserInfo);\n                }\n                // 获取 token\n                String token = TokenUtil.generateToken(userId, decMobile, \"app\");\n                cacheOpt.getOpt(Constants.CACHE_STR).opsForValue().set(Constants.USER_AUTH_PRIFIX + userId, token, 7, TimeUnit.DAYS);\n//                cacheOpt.getOpt(Constants.CACHE_STR).opsForValue().set(Constants.LOGIN_MOBILE_AUTH_PRIFIX + userId, decMobile, 7, TimeUnit.DAYS);\n//                logger.info((String) cacheOpt.getOpt(Constants.CACHE_STR).opsForValue().get(Constants.USER_AUTH_PRIFIX + valetUser.getUserId()));\n                Map\u0026lt;String, Object\u0026gt; result = new HashMap\u0026lt;\u0026gt;();\n                // 用户类型:0 无效，1 网格，2 客户经理，3 泛渠道，4 其他\n                String userType = String.valueOf(valetUser.getUserType());\n                if (\"0\".equals(userType)) {\n                    userType = \"无效\";\n                } else if (\"1\".equals(userType)) {\n                    userType = \"网格\";\n                } else if (\"2\".equals(userType)) {\n                    userType = \"客户经理\";\n                } else if (\"3\".equals(userType)) {\n                    userType = \"泛渠道\";\n                } else {\n                    userType = \"其他\";\n                }\n                result.put(\"mobile\", valetUser.getMobile());\n                result.put(\"userName\", valetUser.getUserName());\n                result.put(\"cusName\", valetUser.getCusName());\n                result.put(\"userType\", userType);\n                result.put(\"operId\", valetUser.getOperId());\n                result.put(\"orgId\", valetUser.getOrgId());\n                result.put(\"merchantNum\", valetUser.getMerchantNum());\n                result.put(\"token\", token);\n                // 更新用户表登录时间\n                valetUserMapper.updateLoginTimeByUserId(DateUtils.getNowDate(), userId);\n                logger.info(\"登录成功 {}\", decMobile);\n                return Response.success(\"登录成功\", result);\n            }\n        } catch (ValetappException e) {\n            logger.error(\"登录失败 ： \" + e.getMessage());\n            return Response.fail(RespCode.FAIL);\n        }\n    }\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "zx9481",
+      "PubDate": "2022-03-15T07:28:38Z"
+    },
+    {
+      "Title": "win 上有没有可以实时翻译直播的应用或者浏览器插件？需要日译中。 - 问与答",
+      "Link": "https://www.v2ex.com/t/840506",
+      "Description": "\u003cp\u003ewin 上有没有可以实时翻译直播的应用或者浏览器插件？需要日译中。\u003c/p\u003e\n\u003cp\u003e具体需求是看油管的日语直播，可以实时翻译出中文字幕，类似华为手机的实时翻译功能。\u003c/p\u003e\n",
+      "Author": "ahauzyh",
+      "PubDate": "2022-03-15T07:24:21Z"
+    },
+    {
+      "Title": "免费领 7 天 QQ 音乐绿钻 - 分享发现",
+      "Link": "https://www.v2ex.com/t/840505",
+      "Description": "\u003cp\u003e\u003ca href=\"https://y.qq.com/jzt/6b1c7d/e1e5fb.html\" rel=\"nofollow\"\u003ehttps://y.qq.com/jzt/6b1c7d/e1e5fb.html\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e限量 500W 份，需要的领吧~\u003c/p\u003e\n",
+      "Author": "sevenyangcc",
+      "PubDate": "2022-03-15T07:21:56Z"
+    },
+    {
+      "Title": "准备升级到 macOS 12.3，但是 apple silicon 版的 python2.7.x 在哪下载？ - macOS",
+      "Link": "https://www.v2ex.com/t/840504",
+      "Description": "\u003cp\u003e已知 macOS12.3 删除了 python2.7.18\u003c/p\u003e\n\u003cp\u003e已知 macOS12.2.1 的 python 2.7.18 是原生 arm 的 \u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"image.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/03/15/rEvdIWApRXhbHD3.png\"/\u003e\u003c/p\u003e\n\u003cp\u003epython 官网上 2.7.18 好像只有 x86 的，我自己下载的 arm 版都得 3.x 版本了。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"image.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/03/15/cA74nK1lSEgkRWO.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e求问，apple silicon 版的 python2.7.x 在哪下载？\u003c/p\u003e\n",
+      "Author": "Jiajin",
+      "PubDate": "2022-03-15T07:20:44Z"
+    },
+    {
       "Title": "公司网络不给听歌，怎么过？ - 程序员",
       "Link": "https://www.v2ex.com/t/840502",
       "Description": "\u003cp\u003ert\n为啥歌都不给听呢？没有动次打次怎么敲代码？\u003c/p\u003e\n",
