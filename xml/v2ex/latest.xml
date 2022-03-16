@@ -4,9 +4,37 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>在 Composition API 里面返回动态构造的组件，是邪道做法吗？ - Vue.js</title>
+      <link>https://www.v2ex.com/t/840706</link>
+      <description>&lt;p&gt;标题可能说的不清楚，比如以下写法：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;// hooks.js&#xA;function useList (apiUrl) {&#xA;  const loading = ref(false)&#xA;  const list = ref([])&#xA;  const getData = () =&amp;gt; {&#xA;    loading.value = true&#xA;  &#x9;http.get(apiUrl).then(data =&amp;gt; {&#xA;      list.value = data&#xA;      loading.value = false&#xA;    })&#xA;  }&#xA;  const MyList = {&#xA;    render () {&#xA;      return &amp;lt;a-list data-source={list.value} loading={loading.value} size=&#34;small&#34; /&amp;gt;&#xA;    }&#xA;  }&#xA;  const ReloadBtn = {&#xA;    render () {&#xA;      return &amp;lt;a-button type=&#34;primary&#34; size=&#34;small&#34; onClick={getData} disabled={loading.value}&amp;gt;刷新&amp;lt;/a-button&amp;gt;&#xA;    }&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;// App.vue&#xA;&amp;lt;template&amp;gt;&#xA;  &amp;lt;div&amp;gt;&#xA;    &amp;lt;Component :is=&#34;ReloadBtn&#34; /&amp;gt;&#xA;  &amp;lt;/div&amp;gt;&#xA;  &amp;lt;Component :is=&#34;MyList&#34; /&amp;gt;&#xA;&amp;lt;/template&amp;gt;&#xA; &#xA;&amp;lt;script&amp;gt;&#xA;  import { useList } from &#39;hooks.js&#39;&#xA;  export default {&#xA;    setup () {&#xA;      const { MyList, ReloadBtn } = useList(&#39;http://xxxxxx/xxx&#39;)&#xA;      return { MyList, ReloadBtn }&#xA;    }&#xA;  }&#xA;&amp;lt;/script&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;// or App.vue with script setup&#xA;&amp;lt;template&amp;gt;&#xA;  &amp;lt;div&amp;gt;&#xA;    &amp;lt;ReloadBtn /&amp;gt;&#xA;  &amp;lt;/div&amp;gt;&#xA;  &amp;lt;MyList /&amp;gt;&#xA;&amp;lt;/template&amp;gt;&#xA; &#xA;&amp;lt;script setup&amp;gt;&#xA;  import { useList } from &#39;hooks.js&#39;&#xA;  const { MyList, ReloadBtn } = useList(&#39;http://xxxxxx/xxx&#39;)&#xA;&amp;lt;/script&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;类似这样（把 UI 封装在 hook 函数里）的实践，算是邪道么？因为我似乎 Google 不到任何相关的讨论，而在 VueUse 这类的库中，我也看不到任何这样做的例子，所以有点好奇。这样做有什么重大的缺陷吗？&lt;/p&gt;&#xA;</description>
+      <author>shintendo</author>
+      <pubDate>16 Mar 2022 03:26:59 +0000</pubDate>
+    </item>
+    <item>
+      <title>联通千兆 FTTR 安装记录 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/840705</link>
+      <description>&lt;p&gt;山东联通，原来是 200 兆带宽，tplink ac+4AP 组网&lt;/p&gt;&#xA;&lt;p&gt;想升级千兆，咨询小区联通师傅，小区接入为 10G epon,于是自己咸鱼本地淘了一套 hn8145xr epon +k662D 套装 ，送货上门。&lt;/p&gt;&#xA;&lt;p&gt;把每个房间自己穿了光纤，保留原来穿的 6 类线，用的到每个房间的电话线管。&lt;/p&gt;&#xA;&lt;p&gt;联系师傅开通宽带套餐，199 冰激凌套餐（极速版，下行速率 1GB ），打了个我认为很低的折扣。&lt;/p&gt;&#xA;&lt;p&gt;师傅上门，融纤，安装。&lt;/p&gt;&#xA;&lt;p&gt;媳妇的 iphone13 测速 750&lt;/p&gt;&#xA;&lt;p&gt;电脑主板自带千兆测速 939 。&lt;/p&gt;&#xA;&lt;p&gt;上行都惨不忍睹，应该是模板限速 50 了。&lt;/p&gt;&#xA;&lt;p&gt;有个小疑问，我这种自购组 fttr 和运营商那边 1700 开通 fttr 有什么区别吗？&lt;/p&gt;&#xA;&lt;p&gt;必须运营商那边做什么特殊设置才是真正的 fttr 吗？&lt;/p&gt;&#xA;</description>
+      <author>sadara</author>
+      <pubDate>16 Mar 2022 03:26:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>通用控制 是否可以提高编程效率 - 程序员</title>
+      <link>https://www.v2ex.com/t/840704</link>
+      <description>&lt;p&gt;目前刚连接上了 iPad ， 排列方式如下：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;51647400750_.pic_hd.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/03/16/Dv6hxLj3rE4OTBa.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;看书使用 TrackPad 操作起来似乎挺顺滑的 但是没有找到合适的使用场景。&lt;/p&gt;&#xA;&lt;p&gt;目前经常断联，稳定性相当一般，一顿操作下来，就是浪费了些时间体验一把用小圆点操作 iPad 。&lt;/p&gt;&#xA;</description>
+      <author>redtech</author>
+      <pubDate>16 Mar 2022 03:24:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>dns udp 连海外服务器且不被污染 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/840702</link>
+      <description>分享一个昨天 github 上看到的挺 6 的玩意，udpme 。udp 连海外 DNS 服务器无视污染。&lt;br /&gt;&lt;br /&gt;是一个独立的程序。已经放在路由上了。移动和联通宽带测试有效而且很稳。&lt;br /&gt;&lt;br /&gt;原理看不懂，好像是有特征可以把污染的数据包丢弃。蹲一下大佬们的想法。</description>
+      <author>Rilimu</author>
+      <pubDate>16 Mar 2022 03:20:43 +0000</pubDate>
+    </item>
+    <item>
       <title>升级了 mac 和 ios 的最新系统之后， AirPods 的自动切换变得好用了 - Apple</title>
       <link>https://www.v2ex.com/t/840700</link>
-      <description>手机上看完抖音（失去操作焦点之后），电脑上继续刷 b 站，竟然能接过去。</description>
+      <description>手机上听网易云，电脑上也听，竟然是互斥，播放电脑手机自动暂停，播放手机，电脑自动暂停，音频一直在耳机里出声音。竟然能接过去。</description>
       <author>hfl1995</author>
       <pubDate>16 Mar 2022 03:14:52 +0000</pubDate>
     </item>
