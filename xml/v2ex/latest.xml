@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>各位大佬对预测数据存储有什么好的方案吗 - 程序员</title>
+      <link>https://www.v2ex.com/t/840739</link>
+      <description>&lt;p&gt;发布时间：t&lt;/p&gt;&#xA;&lt;p&gt;预测时间范围：t--&amp;gt;Δi&lt;/p&gt;&#xA;&lt;p&gt;现有方案 1：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;发布时间&lt;/th&gt;&#xA;&lt;th&gt;预测时间&lt;/th&gt;&#xA;&lt;th&gt;预测项 1&lt;/th&gt;&#xA;&lt;th&gt;预测项 2&lt;/th&gt;&#xA;&lt;th&gt;预测项 3&lt;/th&gt;&#xA;&lt;th&gt;预测项...&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;t1&lt;/td&gt;&#xA;&lt;td&gt;t1+Δ&lt;/td&gt;&#xA;&lt;td&gt;v&lt;/td&gt;&#xA;&lt;td&gt;v&lt;/td&gt;&#xA;&lt;td&gt;v&lt;/td&gt;&#xA;&lt;td&gt;v&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;t2&lt;/td&gt;&#xA;&lt;td&gt;t2+Δ&lt;/td&gt;&#xA;&lt;td&gt;v&lt;/td&gt;&#xA;&lt;td&gt;v&lt;/td&gt;&#xA;&lt;td&gt;v&lt;/td&gt;&#xA;&lt;td&gt;v&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;t…&lt;/td&gt;&#xA;&lt;td&gt;t...+Δ&lt;/td&gt;&#xA;&lt;td&gt;v&lt;/td&gt;&#xA;&lt;td&gt;v&lt;/td&gt;&#xA;&lt;td&gt;v&lt;/td&gt;&#xA;&lt;td&gt;v&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;有点：心智成本低，读写方便&lt;/p&gt;&#xA;&lt;p&gt;缺点：记录数多且查询性能较差，建索引后查询性能有所提升但插入速度较慢&lt;/p&gt;&#xA;&lt;p&gt;现有方案 2：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;发布时间&lt;/th&gt;&#xA;&lt;th&gt;Δ1&lt;/th&gt;&#xA;&lt;th&gt;Δ2&lt;/th&gt;&#xA;&lt;th&gt;Δ3&lt;/th&gt;&#xA;&lt;th&gt;Δ…&lt;/th&gt;&#xA;&lt;th&gt;Δi&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;t1&lt;/td&gt;&#xA;&lt;td&gt;V1&lt;/td&gt;&#xA;&lt;td&gt;V2&lt;/td&gt;&#xA;&lt;td&gt;V3&lt;/td&gt;&#xA;&lt;td&gt;V…&lt;/td&gt;&#xA;&lt;td&gt;Vi&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;t2&lt;/td&gt;&#xA;&lt;td&gt;V1&lt;/td&gt;&#xA;&lt;td&gt;V2&lt;/td&gt;&#xA;&lt;td&gt;V3&lt;/td&gt;&#xA;&lt;td&gt;V…&lt;/td&gt;&#xA;&lt;td&gt;Vi&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;t…&lt;/td&gt;&#xA;&lt;td&gt;V1&lt;/td&gt;&#xA;&lt;td&gt;V2&lt;/td&gt;&#xA;&lt;td&gt;V3&lt;/td&gt;&#xA;&lt;td&gt;V…&lt;/td&gt;&#xA;&lt;td&gt;Vi&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;优点：可有效降低记录数量，提高查询效率&lt;/p&gt;&#xA;&lt;p&gt;缺点：进行各种计算时心智成本过高，代码质量难以保证&lt;/p&gt;&#xA;&lt;p&gt;现在用 MySQL 硬存，有以上两种方案，发现要么性能差，要么心智成本高，想跟各位大佬取取经&#xA;可以尝试 newSQL ，了解了时序数据库感觉好像也不是特别合适？因为时间会有重合&lt;/p&gt;&#xA;</description>
+      <author>y0bcn</author>
+      <pubDate>16 Mar 2022 05:55:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>物联网的技术方案都有哪些？刚入行 - 物联网</title>
+      <link>https://www.v2ex.com/t/840738</link>
+      <description>&lt;p&gt;我们目前设备不多。数据流程如下：&#xA;1- 硬件设备使用 485 线连接通讯设备(DTU),使用 4G 网络传输数据&#xA;2- 通讯设备吧数据传输到 EMQX&#xA;3- Java 程序订阅 EMQX 主题，接受 16 进制数据，并做解析 /告警校验等，录入 Influxdb&lt;/p&gt;&#xA;&lt;p&gt;遇到的问题是：java 程序挂掉，数据就丢失了，这里如何做高可用？&lt;/p&gt;&#xA;</description>
+      <author>HHAO2019</author>
+      <pubDate>16 Mar 2022 05:54:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>macOS 12.3 终于修复了状态栏图标过多时的间距突变问题，然后 safari 又出了 bug？ - macOS</title>
+      <link>https://www.v2ex.com/t/840736</link>
+      <description>终于把状态栏图标多到一定程度之后图标间距突然变宽的问题解决了，所以之前果然是 bug 而不是啥新特性 - -&lt;br /&gt;&lt;br /&gt;但是令人头秃的是 safari 里某些网站输出的是手机端的网页布局，修改 user agent 也是没有用，在 edge 和技术预览版 safari 里就是正常的，无奈只能先掏出 safari Technology Preview 版用起来了。</description>
+      <author>croient</author>
+      <pubDate>16 Mar 2022 05:47:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>2022 会出新款 APPLE TV 吗？ - Apple TV</title>
+      <link>https://www.v2ex.com/t/840735</link>
+      <description>想买一个，不知道今年会推新款不。大佬们怎么分析？</description>
+      <author>aaronlau</author>
+      <pubDate>16 Mar 2022 05:47:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>亚马逊中国改版了 - Amazon</title>
+      <link>https://www.v2ex.com/t/840734</link>
+      <description>&lt;p&gt;总算和其它亚马逊网站统一风格了...&#xA;还没改完，商品购买页面等等还是错位的旧版。&lt;/p&gt;&#xA;</description>
+      <author>Tony060912</author>
+      <pubDate>16 Mar 2022 05:47:09 +0000</pubDate>
+    </item>
+    <item>
       <title>居家办公环境 - 程序员</title>
       <link>https://www.v2ex.com/t/840732</link>
       <description>&lt;p&gt;上海深圳应该有好多人居家办公了吧，大伙分享一下居家办公的环境&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://wx2.sinaimg.cn/mw2000/7164c73aly1h0bmvyvmtij213y0u0jwe.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;没有双屏体验差点，不过能看孩子&lt;/p&gt;&#xA;</description>
