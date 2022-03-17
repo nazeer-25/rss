@@ -4,6 +4,55 @@
   "Description": "",
   "Items": [
     {
+      "Title": "使用 go generics 自定义路由 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/840922",
+      "Description": "\u003cp\u003e自己写的库 \u003ca href=\"https://github.com/issue9/mux\" rel=\"nofollow\"\u003ehttps://github.com/issue9/mux\u003c/a\u003e 基于 go1.18 的范型功能，实现对路由处理函数签名的自定义。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype (\n    Context struct {\n        R *http.Request\n        W http.ResponseWriter\n        P mux.Params\n    }\n\n    Handler interface {\n        Handle(*Context)\n    }\n\n    HandlerFunc func(*Context)\n\n    Router         = mux.RouterOf[Handler]\n    Prefix         = mux.PrefixOf[Handler]\n    Resource       = mux.ResourceOf[Handler]\n    Middleware     = mux.MiddlewareOf[Handler]\n    Options        = mux.OptionsOf[Handler]\n)\n\nfunc (f HandlerFunc) Handle(c *Context) { f(c) }\n\nfunc call(w http.ResponseWriter, r *http.Request, ps mux.Params, h Handler) {\n    h.Handle(\u0026amp;Context{R: r, W: w, P: ps})\n}\n\nfunc NewRouter(name string, o Options) *Router {\n    opt := \u0026amp;options{}\n    for _, oo := range o {\n        oo(opt)\n    }\n    return NewRouterOf[Handler](name, call, opt)\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e仅需 100 行不到的代码就可以实现一个功能完备的路由功能。很适合作为框架的路由实现。\u003c/p\u003e\n",
+      "Author": "xnotepad",
+      "PubDate": "2022-03-17T00:59:21Z"
+    },
+    {
+      "Title": "to b/to c 成就感问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/840921",
+      "Description": "工作几年,一直在做 TO B 的东西,业务简单或是复杂暂且不说\u003cbr /\u003e\u003cbr /\u003e只是觉得写起来不好玩,虽然确实有人反馈有了使用了我们开发的软件后提升了很多工作效率\u003cbr /\u003e\u003cbr /\u003e例如: 原本需要好几个小时人工完成的工作,可能借助软件系统,几分钟就搞定了\u003cbr /\u003e\u003cbr /\u003e但我还是觉得这是因为工作原因,客户不得不用\u003cbr /\u003e\u003cbr /\u003e-----------------------------------------------------------------------------------------------------\u003cbr /\u003e\u003cbr /\u003eto c 应该就完全不一样了,完全是因为好玩才去使用的,会收到很多反馈,会不会很有成就感\u003cbr /\u003e\u003cbr /\u003e好想写好玩的东西",
+      "Author": "seagull7558",
+      "PubDate": "2022-03-17T00:57:55Z"
+    },
+    {
+      "Title": "想问下各位老哥，入职新公司是不是都会看银行流水或个税截图？ - 职场话题",
+      "Link": "https://www.v2ex.com/t/840920",
+      "Description": "\u003cp\u003e如果只是拿银行流水的话，报高个 1 2k 是不是也没大问题，因为五险一金大家交基点，比例不一样\n也说得过去？\u003c/p\u003e\n\u003cp\u003e毕业后第一次跳槽，不太懂。求老哥们解答。\u003c/p\u003e\n",
+      "Author": "sanmuisme",
+      "PubDate": "2022-03-17T00:57:39Z"
+    },
+    {
+      "Title": "昨天（2022.3.16）开始 apple watch 使用广佛通报错，提示联系客服 - Apple",
+      "Link": "https://www.v2ex.com/t/840917",
+      "Description": "\u003cp\u003e上午还可以用，下午就提示错误了，今天早上也提示错误\u003c/p\u003e\n",
+      "Author": "wangbingqian521",
+      "PubDate": "2022-03-17T00:48:36Z"
+    },
+    {
+      "Title": "2022 年，求教大家都用哪家的公共 dns 了呢？ - DNS",
+      "Link": "https://www.v2ex.com/t/840916",
+      "Description": "\u003cp\u003e2022 年，求教大家都用哪家的公共 dns 了呢？\n目前在用着 dnspod 家的专业版。\n家里的网深圳移动\u003c/p\u003e\n",
+      "Author": "edison1998",
+      "PubDate": "2022-03-17T00:47:20Z"
+    },
+    {
+      "Title": "mbp2018 突然开不开机了 - 程序员",
+      "Link": "https://www.v2ex.com/t/840915",
+      "Description": "早上拿出来的时候就感觉很烫，打开接通电源长按开机没反应，键盘左侧区域一直烫手。昨天晚上也都是正常使用，用的小米的 30w 充电器充电，怎么过了一晚就不行了，脑壳疼，之前一直没坏过，有老哥知道怎么搞吗？",
+      "Author": "huabin",
+      "PubDate": "2022-03-17T00:45:58Z"
+    },
+    {
+      "Title": "编写自己的（玩具）编程语言 - Rust",
+      "Link": "https://www.v2ex.com/t/840914",
+      "Description": "\u003cp\u003e本文记录一个小型的玩具语言开发过程。作为学习实践 Rust 的副产品。\u003c/p\u003e\n\u003cp\u003e本过程将覆盖下面一些要点：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e解析文本格式的源代码。\u003c/li\u003e\n\u003cli\u003e构建 AST （语法树）。\u003c/li\u003e\n\u003cli\u003e从语法树翻译为可执行的目标代码。\u003c/li\u003e\n\u003cli\u003e执行目标代码（作为验证）。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e链接：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://zhuanlan.zhihu.com/p/479410951\" rel=\"nofollow\"\u003ehttps://zhuanlan.zhihu.com/p/479410951\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/nielinjie/bian-lang/tree/main\" rel=\"nofollow\"\u003ehttps://github.com/nielinjie/bian-lang/tree/main\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "nielinjie",
+      "PubDate": "2022-03-17T00:34:28Z"
+    },
+    {
       "Title": "《水印相机-简单好用》本地相册来了 - 分享发现",
       "Link": "https://www.v2ex.com/t/840913",
       "Description": "\u003cp\u003e\u003ca href=\"https://apps.apple.com/cn/app/qq/id1607957232\" rel=\"nofollow\"\u003e《水印相机-简单好用》\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e下载链接： \u003ca href=\"https://apps.apple.com/cn/app/qq/id1607957232\" rel=\"nofollow\"\u003ehttps://apps.apple.com/cn/app/qq/id1607957232\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e看到论坛有人说，需要相册和手机相册分开，来了，设置-拍照设置中可选择保存到 APP 相册；\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e增加了本地相册，可导入系统相册照片和选择 /长按保存到系统相册(需付费)\u003c/li\u003e\n\u003cli\u003e增加编辑图片入口\u003c/li\u003e\n\u003cli\u003e增加了裁剪视频入口\u003c/li\u003e\n\u003cli\u003e增加了拍摄后直接保存还是预览 /编辑后保存的选项\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e关于分享：分享功能，使用系统分享到微信，对图片大小和尺寸有要求，目前拍摄的照片质量和大小太大，所以唤起分享失败，而修改后照片又太模糊故而这期没有增加，可以保存到系统相册后去分享。下期我看看怎么添加分享功能。\u003c/p\u003e\n\u003cp\u003e关于图片上传，正在开发中\u003c/p\u003e\n",

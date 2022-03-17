@@ -4,6 +4,55 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>使用 go generics 自定义路由 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/840922</link>
+      <description>&lt;p&gt;自己写的库 &lt;a href=&#34;https://github.com/issue9/mux&#34; rel=&#34;nofollow&#34;&gt;https://github.com/issue9/mux&lt;/a&gt; 基于 go1.18 的范型功能，实现对路由处理函数签名的自定义。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type (&#xA;    Context struct {&#xA;        R *http.Request&#xA;        W http.ResponseWriter&#xA;        P mux.Params&#xA;    }&#xA;&#xA;    Handler interface {&#xA;        Handle(*Context)&#xA;    }&#xA;&#xA;    HandlerFunc func(*Context)&#xA;&#xA;    Router         = mux.RouterOf[Handler]&#xA;    Prefix         = mux.PrefixOf[Handler]&#xA;    Resource       = mux.ResourceOf[Handler]&#xA;    Middleware     = mux.MiddlewareOf[Handler]&#xA;    Options        = mux.OptionsOf[Handler]&#xA;)&#xA;&#xA;func (f HandlerFunc) Handle(c *Context) { f(c) }&#xA;&#xA;func call(w http.ResponseWriter, r *http.Request, ps mux.Params, h Handler) {&#xA;    h.Handle(&amp;amp;Context{R: r, W: w, P: ps})&#xA;}&#xA;&#xA;func NewRouter(name string, o Options) *Router {&#xA;    opt := &amp;amp;options{}&#xA;    for _, oo := range o {&#xA;        oo(opt)&#xA;    }&#xA;    return NewRouterOf[Handler](name, call, opt)&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;仅需 100 行不到的代码就可以实现一个功能完备的路由功能。很适合作为框架的路由实现。&lt;/p&gt;&#xA;</description>
+      <author>xnotepad</author>
+      <pubDate>17 Mar 2022 00:59:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>to b/to c 成就感问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/840921</link>
+      <description>工作几年,一直在做 TO B 的东西,业务简单或是复杂暂且不说&lt;br /&gt;&lt;br /&gt;只是觉得写起来不好玩,虽然确实有人反馈有了使用了我们开发的软件后提升了很多工作效率&lt;br /&gt;&lt;br /&gt;例如: 原本需要好几个小时人工完成的工作,可能借助软件系统,几分钟就搞定了&lt;br /&gt;&lt;br /&gt;但我还是觉得这是因为工作原因,客户不得不用&lt;br /&gt;&lt;br /&gt;-----------------------------------------------------------------------------------------------------&lt;br /&gt;&lt;br /&gt;to c 应该就完全不一样了,完全是因为好玩才去使用的,会收到很多反馈,会不会很有成就感&lt;br /&gt;&lt;br /&gt;好想写好玩的东西</description>
+      <author>seagull7558</author>
+      <pubDate>17 Mar 2022 00:57:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>想问下各位老哥，入职新公司是不是都会看银行流水或个税截图？ - 职场话题</title>
+      <link>https://www.v2ex.com/t/840920</link>
+      <description>&lt;p&gt;如果只是拿银行流水的话，报高个 1 2k 是不是也没大问题，因为五险一金大家交基点，比例不一样&#xA;也说得过去？&lt;/p&gt;&#xA;&lt;p&gt;毕业后第一次跳槽，不太懂。求老哥们解答。&lt;/p&gt;&#xA;</description>
+      <author>sanmuisme</author>
+      <pubDate>17 Mar 2022 00:57:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>昨天（2022.3.16）开始 apple watch 使用广佛通报错，提示联系客服 - Apple</title>
+      <link>https://www.v2ex.com/t/840917</link>
+      <description>&lt;p&gt;上午还可以用，下午就提示错误了，今天早上也提示错误&lt;/p&gt;&#xA;</description>
+      <author>wangbingqian521</author>
+      <pubDate>17 Mar 2022 00:48:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>2022 年，求教大家都用哪家的公共 dns 了呢？ - DNS</title>
+      <link>https://www.v2ex.com/t/840916</link>
+      <description>&lt;p&gt;2022 年，求教大家都用哪家的公共 dns 了呢？&#xA;目前在用着 dnspod 家的专业版。&#xA;家里的网深圳移动&lt;/p&gt;&#xA;</description>
+      <author>edison1998</author>
+      <pubDate>17 Mar 2022 00:47:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>mbp2018 突然开不开机了 - 程序员</title>
+      <link>https://www.v2ex.com/t/840915</link>
+      <description>早上拿出来的时候就感觉很烫，打开接通电源长按开机没反应，键盘左侧区域一直烫手。昨天晚上也都是正常使用，用的小米的 30w 充电器充电，怎么过了一晚就不行了，脑壳疼，之前一直没坏过，有老哥知道怎么搞吗？</description>
+      <author>huabin</author>
+      <pubDate>17 Mar 2022 00:45:58 +0000</pubDate>
+    </item>
+    <item>
+      <title>编写自己的（玩具）编程语言 - Rust</title>
+      <link>https://www.v2ex.com/t/840914</link>
+      <description>&lt;p&gt;本文记录一个小型的玩具语言开发过程。作为学习实践 Rust 的副产品。&lt;/p&gt;&#xA;&lt;p&gt;本过程将覆盖下面一些要点：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;解析文本格式的源代码。&lt;/li&gt;&#xA;&lt;li&gt;构建 AST （语法树）。&lt;/li&gt;&#xA;&lt;li&gt;从语法树翻译为可执行的目标代码。&lt;/li&gt;&#xA;&lt;li&gt;执行目标代码（作为验证）。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;链接：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/479410951&#34; rel=&#34;nofollow&#34;&gt;https://zhuanlan.zhihu.com/p/479410951&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/nielinjie/bian-lang/tree/main&#34; rel=&#34;nofollow&#34;&gt;https://github.com/nielinjie/bian-lang/tree/main&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>nielinjie</author>
+      <pubDate>17 Mar 2022 00:34:28 +0000</pubDate>
+    </item>
+    <item>
       <title>《水印相机-简单好用》本地相册来了 - 分享发现</title>
       <link>https://www.v2ex.com/t/840913</link>
       <description>&lt;p&gt;&lt;a href=&#34;https://apps.apple.com/cn/app/qq/id1607957232&#34; rel=&#34;nofollow&#34;&gt;《水印相机-简单好用》&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;下载链接： &lt;a href=&#34;https://apps.apple.com/cn/app/qq/id1607957232&#34; rel=&#34;nofollow&#34;&gt;https://apps.apple.com/cn/app/qq/id1607957232&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;看到论坛有人说，需要相册和手机相册分开，来了，设置-拍照设置中可选择保存到 APP 相册；&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;增加了本地相册，可导入系统相册照片和选择 /长按保存到系统相册(需付费)&lt;/li&gt;&#xA;&lt;li&gt;增加编辑图片入口&lt;/li&gt;&#xA;&lt;li&gt;增加了裁剪视频入口&lt;/li&gt;&#xA;&lt;li&gt;增加了拍摄后直接保存还是预览 /编辑后保存的选项&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;关于分享：分享功能，使用系统分享到微信，对图片大小和尺寸有要求，目前拍摄的照片质量和大小太大，所以唤起分享失败，而修改后照片又太模糊故而这期没有增加，可以保存到系统相册后去分享。下期我看看怎么添加分享功能。&lt;/p&gt;&#xA;&lt;p&gt;关于图片上传，正在开发中&lt;/p&gt;&#xA;</description>
