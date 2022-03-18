@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>便宜的号卡套餐 - 问与答</title>
+      <link>https://www.v2ex.com/t/841379</link>
+      <description>&lt;p&gt;想办一个实体卡，用作小号，收短信和接打电话，有没有便宜的套餐呢？&lt;/p&gt;&#xA;</description>
+      <author>prin523</author>
+      <pubDate>18 Mar 2022 14:50:15 +0000</pubDate>
+    </item>
+    <item>
       <title>GGM: 首个 Gloang 泛型 ORM 库发布 🚀 - Go 编程语言</title>
       <link>https://www.v2ex.com/t/841377</link>
       <description>&lt;p&gt;github 直达 &lt;a href=&#34;https://github.com/daodao97/ggm&#34; rel=&#34;nofollow&#34;&gt;github.com/daodao97/ggm&lt;/a&gt; &lt;/p&gt;&#xA;&lt;p&gt;欢迎大佬们多多指点, 给个 Star.&lt;/p&gt;&#xA;&lt;p&gt;包含泛型特性的 &lt;code&gt;go1.18&lt;/code&gt; 已经正式发布, 于是就迫不及待的体验了一把.&lt;/p&gt;&#xA;&lt;p&gt;我们来看下日常的 &lt;code&gt;db&lt;/code&gt; 交互中, 使用泛型, 将会带来哪些便利.&lt;/p&gt;&#xA;&lt;p&gt;以下为伪代码, 仅做示意.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// 预定义的结构体&#xA;type User struct{&#xA;&#x9;Id      int    `db:&#34;id&#34;`&#xA;&#x9;Name    string `db:&#34;name&#34;`&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;&lt;code&gt;database/sql&lt;/code&gt; 的原生写法&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;db := sql.Open()&#xA;&#xA;stmt, err := db.Prepare(sql)&#xA;if err != nil {&#xA;&#x9;return&#xA;}&#xA;&#xA;rows, err := stmt.Query(args...)&#xA;if err != nil {&#xA;&#x9;return&#xA;}&#xA;&#xA;var list []*User&#xA;for rows.Next() {&#xA;&#x9;tmp := new(User)&#xA;    rows.Scan(tmp.Id, tmp.User)&#xA;    list = append(list, tmp)&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;原生写法相对比较繁琐, 可能一般项目中不会作为首选方案.&lt;/p&gt;&#xA;&lt;h3&gt;稍微封装下的 db 类库&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;&#xA;db = xxx.Conn()&#xA;&#xA;var list []*User&#xA;&#xA;_ = db.Query(sql, &amp;amp;list)&#xA;&#xA;for _, u := range list {&#xA;&#x9;fmt.Println(u.Id)&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可以看出, 相对于原生写法, 代码已经十分简洁, 但是我们不得不提前定义 &lt;code&gt;var list []*User&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;并且需要将其已指针形式 &lt;code&gt;&amp;amp;list&lt;/code&gt; 传入类库, 熟悉其他语言的同学就会觉得这里看起来十分蹩脚了.&lt;/p&gt;&#xA;&lt;h3&gt;泛型的 db 类库&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;&#xA;list, _ := ggm.New[User]().Select(sql)&#xA;&#xA;for _, u := range list {&#xA;&#x9;fmt.Println(u.Id)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在泛型类库中, 查询后, 无需任何转换 &lt;code&gt;list&lt;/code&gt; 的类型已经是 &lt;code&gt;[]User&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;相对于第二写种法, 代码又精进了异步, 更加的简洁直观了.&lt;/p&gt;&#xA;&lt;h3&gt;传送门&lt;/h3&gt;&#xA;&lt;p&gt;github 直达 &lt;a href=&#34;https://github.com/daodao97/ggm&#34; rel=&#34;nofollow&#34;&gt;github.com/daodao97/ggm&lt;/a&gt; &lt;/p&gt;&#xA;&lt;p&gt;欢迎大佬们多多指点, 给个 Star.&lt;/p&gt;&#xA;</description>
