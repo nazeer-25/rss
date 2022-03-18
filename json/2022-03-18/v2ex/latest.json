@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "GGM: 首个 Gloang 泛型 ORM 库发布 🚀 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/841377",
+      "Description": "\u003cp\u003egithub 直达 \u003ca href=\"https://github.com/daodao97/ggm\" rel=\"nofollow\"\u003egithub.com/daodao97/ggm\u003c/a\u003e \u003c/p\u003e\n\u003cp\u003e欢迎大佬们多多指点, 给个 Star.\u003c/p\u003e\n\u003cp\u003e包含泛型特性的 \u003ccode\u003ego1.18\u003c/code\u003e 已经正式发布, 于是就迫不及待的体验了一把.\u003c/p\u003e\n\u003cp\u003e我们来看下日常的 \u003ccode\u003edb\u003c/code\u003e 交互中, 使用泛型, 将会带来哪些便利.\u003c/p\u003e\n\u003cp\u003e以下为伪代码, 仅做示意.\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 预定义的结构体\ntype User struct{\n\tId      int    `db:\"id\"`\n\tName    string `db:\"name\"`\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e\u003ccode\u003edatabase/sql\u003c/code\u003e 的原生写法\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003edb := sql.Open()\n\nstmt, err := db.Prepare(sql)\nif err != nil {\n\treturn\n}\n\nrows, err := stmt.Query(args...)\nif err != nil {\n\treturn\n}\n\nvar list []*User\nfor rows.Next() {\n\ttmp := new(User)\n    rows.Scan(tmp.Id, tmp.User)\n    list = append(list, tmp)\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e原生写法相对比较繁琐, 可能一般项目中不会作为首选方案.\u003c/p\u003e\n\u003ch3\u003e稍微封装下的 db 类库\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\ndb = xxx.Conn()\n\nvar list []*User\n\n_ = db.Query(sql, \u0026amp;list)\n\nfor _, u := range list {\n\tfmt.Println(u.Id)\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可以看出, 相对于原生写法, 代码已经十分简洁, 但是我们不得不提前定义 \u003ccode\u003evar list []*User\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e并且需要将其已指针形式 \u003ccode\u003e\u0026amp;list\u003c/code\u003e 传入类库, 熟悉其他语言的同学就会觉得这里看起来十分蹩脚了.\u003c/p\u003e\n\u003ch3\u003e泛型的 db 类库\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\nlist, _ := ggm.New[User]().Select(sql)\n\nfor _, u := range list {\n\tfmt.Println(u.Id)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在泛型类库中, 查询后, 无需任何转换 \u003ccode\u003elist\u003c/code\u003e 的类型已经是 \u003ccode\u003e[]User\u003c/code\u003e.\u003c/p\u003e\n\u003cp\u003e相对于第二写种法, 代码又精进了异步, 更加的简洁直观了.\u003c/p\u003e\n\u003ch3\u003e传送门\u003c/h3\u003e\n\u003cp\u003egithub 直达 \u003ca href=\"https://github.com/daodao97/ggm\" rel=\"nofollow\"\u003egithub.com/daodao97/ggm\u003c/a\u003e \u003c/p\u003e\n\u003cp\u003e欢迎大佬们多多指点, 给个 Star.\u003c/p\u003e\n",
+      "Author": "wenjie0032",
+      "PubDate": "2022-03-18T14:35:24Z"
+    },
+    {
       "Title": "求大家推荐中文的 Java 公开课 - 问与答",
       "Link": "https://www.v2ex.com/t/841376",
       "Description": "\u003cp\u003e初中级的那种就行了，如果是 coursera 那种带作业和项目的更好。老婆学编程想看看，我自己因为只看英文的所以对中文的不熟悉。\u003c/p\u003e\n\u003cp\u003e多谢各位～～\u003c/p\u003e\n",
