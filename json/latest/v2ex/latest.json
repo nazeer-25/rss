@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "传言 macOS 13 将以 iPad 风格的 App 资源库替换 Launchpad - macOS",
+      "Link": "https://www.v2ex.com/t/841543",
+      "Description": "\u003cp\u003e\u003ca href=\"https://twitter.com/MajinBuOfficial/status/1503465297977741316\" rel=\"nofollow\"\u003ehttps://twitter.com/MajinBuOfficial/status/1503465297977741316\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e遥想当年 Launchpad 就是从 iOS 反哺到 OS X 的功能，要真是这样，那也算是种奇妙的轮回了。\u003c/p\u003e\n",
+      "Author": "pocarisweat",
+      "PubDate": "2022-03-19T14:42:08Z"
+    },
+    {
       "Title": "微服务之间的接口调用有没有类似事务的实现 - 程序员",
       "Link": "https://www.v2ex.com/t/841541",
       "Description": "\u003ch3\u003e背景\u003c/h3\u003e\n\u003cp\u003e工作中遇到的一个真实场景\n一个电商系统，现在涉及三个独立服务之间的交互 \u003cstrong\u003e售后服务\u003c/strong\u003e(负责订单取消动作的发起）、\u003cstrong\u003e订单服务\u003c/strong\u003e（负责订单数据的管理）、\u003cstrong\u003e营销服务\u003c/strong\u003e（负责券数据的管理）。\n现在考虑这样一个场景，某个订单通过活动获得了优惠券。\u003cstrong\u003e售后服务\u003c/strong\u003e 需要分别和\u003cstrong\u003e订单服务\u003c/strong\u003e、\u003cstrong\u003e营销服务\u003c/strong\u003e 发生如下交互:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e调用营销服务冻结此订单获得的优惠券\u003c/li\u003e\n\u003cli\u003e调用订单管理服务取消订单\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e但是有可能发生如下调用结果:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e券冻结成功但是订单取消失败。\u003c/li\u003e\n\u003cli\u003e订单取消成功但是券冻结失败。\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003e现在我的做法是\u003c/h3\u003e\n\u003cp\u003e先冻结券，然后判断冻结是否成功。如果冻结失败则流程结束，向下游返回无法取消订单的消息。\n如果冻结券成功则取消订单，判断订单是否取消成功。如果取消成功流程结束，如果取消失败则重试三次，如果重试 3 次仍然失败则向 DB 插入一条异常记录，用定时任务定时批量重试。\u003c/p\u003e\n\u003ch3\u003e问题\u003c/h3\u003e\n\u003cp\u003e但是感觉这样的方案还是实现的不太优雅。 想问一下类似这种不同微服务之间接口调用，还想要达到一种类似 DB 中 \u003cstrong\u003e事务\u003c/strong\u003e 的场景有没有更合适的解决方案？\u003c/p\u003e\n",
