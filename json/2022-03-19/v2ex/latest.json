@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "微服务之间的接口调用有没有类似事务的实现 - 程序员",
+      "Link": "https://www.v2ex.com/t/841541",
+      "Description": "\u003ch3\u003e背景\u003c/h3\u003e\n\u003cp\u003e工作中遇到的一个真实场景\n一个电商系统，现在涉及三个独立服务之间的交互 \u003cstrong\u003e售后服务\u003c/strong\u003e(负责订单取消动作的发起）、\u003cstrong\u003e订单服务\u003c/strong\u003e（负责订单数据的管理）、\u003cstrong\u003e营销服务\u003c/strong\u003e（负责券数据的管理）。\n现在考虑这样一个场景，某个订单通过活动获得了优惠券。\u003cstrong\u003e售后服务\u003c/strong\u003e 需要分别和\u003cstrong\u003e订单服务\u003c/strong\u003e、\u003cstrong\u003e营销服务\u003c/strong\u003e 发生如下交互:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e调用营销服务冻结此订单获得的优惠券\u003c/li\u003e\n\u003cli\u003e调用订单管理服务取消订单\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e但是有可能发生如下调用结果:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e券冻结成功但是订单取消失败。\u003c/li\u003e\n\u003cli\u003e订单取消成功但是券冻结失败。\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003e现在我的做法是\u003c/h3\u003e\n\u003cp\u003e先冻结券，然后判断冻结是否成功。如果冻结失败则流程结束，向下游返回无法取消订单的消息。\n如果冻结券成功则取消订单，判断订单是否取消成功。如果取消成功流程结束，如果取消失败则重试三次，如果重试 3 次仍然失败则向 DB 插入一条异常记录，用定时任务定时批量重试。\u003c/p\u003e\n\u003ch3\u003e问题\u003c/h3\u003e\n\u003cp\u003e但是感觉这样的方案还是实现的不太优雅。 想问一下类似这种不同微服务之间接口调用，还想要达到一种类似 DB 中 \u003cstrong\u003e事务\u003c/strong\u003e 的场景有没有更合适的解决方案？\u003c/p\u003e\n",
+      "Author": "Dxxxxs",
+      "PubDate": "2022-03-19T14:26:07Z"
+    },
+    {
+      "Title": "主机经常无法进入开机启动画面，拔内存再插入的话偶尔能进，是什么原因？ - 问与答",
+      "Link": "https://www.v2ex.com/t/841540",
+      "Description": "\u003cp\u003e我有台开发用的主机，经常无法启动，偶尔能启动。\u003c/p\u003e\n\u003cp\u003e具体现象如下：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e经常不能启动指：指不能进开机自检画面，更不能进入主板 bios ，显示器根本无任何反应.\u003c/li\u003e\n\u003cli\u003e以前插 usb 外设的话，无法启动；不插 usb 就可以启动\u003c/li\u003e\n\u003cli\u003e现在即使不插 usb 也启动大概率启动不了\u003c/li\u003e\n\u003cli\u003e不过拆主机，拔内存，再插入内存，多试几次还是能启动\u003c/li\u003e\n\u003cli\u003e只能进入开机画面，就可以正常工作了，最怕升级重启。。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e请问大家，可能是什么原因呢？\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e显卡坏了、内存有问题？ 没有 IT 师傅或者备用显卡 /内存，不知如何确认这个问题。\u003c/li\u003e\n\u003cli\u003e积灰太严重？确实有积灰，不过 pc 主机有什么清灰工具推荐吗？\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "a132811",
+      "PubDate": "2022-03-19T14:25:06Z"
+    },
+    {
+      "Title": "使用 Quicker 实现「随机打开一个文件」 - 分享创造",
+      "Link": "https://www.v2ex.com/t/841539",
+      "Description": "\u003cp\u003e随机打开一个文件 - 动作信息 - Quicker：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://getquicker.net/Sharedaction?code=7b4408b0-6ddd-48af-42bb-08da08643be0\" rel=\"nofollow\" title=\"随机打开一个文件 - 动作信息 - Quicker\"\u003ehttps://getquicker.net/Sharedaction?code=7b4408b0-6ddd-48af-42bb-08da08643be0\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://files.getquicker.net/_actionDemos/7b4408b0-6ddd-48af-42bb-08da08643be0/20220318095744_%E9%9A%8F%E6%9C%BA%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6.gif\"/\u003e\u003c/p\u003e\n\u003cp\u003e================\u003c/p\u003e\n\u003cp\u003e顺便求下硬币，虽然只是自动化生成的年度报告：\u003c/p\u003e\n\u003cp\u003e[年度报告] 沉冰浮水的 2020 时光机_哔哩哔哩_bilibili：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.bilibili.com/video/BV15v411x7gV\" rel=\"nofollow\" title=\" [年度报告] 沉冰浮水的 2020 时光机_哔哩哔哩_bilibili\"\u003ehttps://www.bilibili.com/video/BV15v411x7gV\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "wdssmq",
+      "PubDate": "2022-03-19T14:24:08Z"
+    },
+    {
       "Title": "app store 登录不上去了？ - 问与答",
       "Link": "https://www.v2ex.com/t/841538",
       "Description": "",

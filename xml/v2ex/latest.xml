@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>微服务之间的接口调用有没有类似事务的实现 - 程序员</title>
+      <link>https://www.v2ex.com/t/841541</link>
+      <description>&lt;h3&gt;背景&lt;/h3&gt;&#xA;&lt;p&gt;工作中遇到的一个真实场景&#xA;一个电商系统，现在涉及三个独立服务之间的交互 &lt;strong&gt;售后服务&lt;/strong&gt;(负责订单取消动作的发起）、&lt;strong&gt;订单服务&lt;/strong&gt;（负责订单数据的管理）、&lt;strong&gt;营销服务&lt;/strong&gt;（负责券数据的管理）。&#xA;现在考虑这样一个场景，某个订单通过活动获得了优惠券。&lt;strong&gt;售后服务&lt;/strong&gt; 需要分别和&lt;strong&gt;订单服务&lt;/strong&gt;、&lt;strong&gt;营销服务&lt;/strong&gt; 发生如下交互:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;调用营销服务冻结此订单获得的优惠券&lt;/li&gt;&#xA;&lt;li&gt;调用订单管理服务取消订单&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;但是有可能发生如下调用结果:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;券冻结成功但是订单取消失败。&lt;/li&gt;&#xA;&lt;li&gt;订单取消成功但是券冻结失败。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3&gt;现在我的做法是&lt;/h3&gt;&#xA;&lt;p&gt;先冻结券，然后判断冻结是否成功。如果冻结失败则流程结束，向下游返回无法取消订单的消息。&#xA;如果冻结券成功则取消订单，判断订单是否取消成功。如果取消成功流程结束，如果取消失败则重试三次，如果重试 3 次仍然失败则向 DB 插入一条异常记录，用定时任务定时批量重试。&lt;/p&gt;&#xA;&lt;h3&gt;问题&lt;/h3&gt;&#xA;&lt;p&gt;但是感觉这样的方案还是实现的不太优雅。 想问一下类似这种不同微服务之间接口调用，还想要达到一种类似 DB 中 &lt;strong&gt;事务&lt;/strong&gt; 的场景有没有更合适的解决方案？&lt;/p&gt;&#xA;</description>
+      <author>Dxxxxs</author>
+      <pubDate>19 Mar 2022 14:26:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>主机经常无法进入开机启动画面，拔内存再插入的话偶尔能进，是什么原因？ - 问与答</title>
+      <link>https://www.v2ex.com/t/841540</link>
+      <description>&lt;p&gt;我有台开发用的主机，经常无法启动，偶尔能启动。&lt;/p&gt;&#xA;&lt;p&gt;具体现象如下：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;经常不能启动指：指不能进开机自检画面，更不能进入主板 bios ，显示器根本无任何反应.&lt;/li&gt;&#xA;&lt;li&gt;以前插 usb 外设的话，无法启动；不插 usb 就可以启动&lt;/li&gt;&#xA;&lt;li&gt;现在即使不插 usb 也启动大概率启动不了&lt;/li&gt;&#xA;&lt;li&gt;不过拆主机，拔内存，再插入内存，多试几次还是能启动&lt;/li&gt;&#xA;&lt;li&gt;只能进入开机画面，就可以正常工作了，最怕升级重启。。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;请问大家，可能是什么原因呢？&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;显卡坏了、内存有问题？ 没有 IT 师傅或者备用显卡 /内存，不知如何确认这个问题。&lt;/li&gt;&#xA;&lt;li&gt;积灰太严重？确实有积灰，不过 pc 主机有什么清灰工具推荐吗？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>a132811</author>
+      <pubDate>19 Mar 2022 14:25:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>使用 Quicker 实现「随机打开一个文件」 - 分享创造</title>
+      <link>https://www.v2ex.com/t/841539</link>
+      <description>&lt;p&gt;随机打开一个文件 - 动作信息 - Quicker：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://getquicker.net/Sharedaction?code=7b4408b0-6ddd-48af-42bb-08da08643be0&#34; rel=&#34;nofollow&#34; title=&#34;随机打开一个文件 - 动作信息 - Quicker&#34;&gt;https://getquicker.net/Sharedaction?code=7b4408b0-6ddd-48af-42bb-08da08643be0&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://files.getquicker.net/_actionDemos/7b4408b0-6ddd-48af-42bb-08da08643be0/20220318095744_%E9%9A%8F%E6%9C%BA%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6.gif&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;================&lt;/p&gt;&#xA;&lt;p&gt;顺便求下硬币，虽然只是自动化生成的年度报告：&lt;/p&gt;&#xA;&lt;p&gt;[年度报告] 沉冰浮水的 2020 时光机_哔哩哔哩_bilibili：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV15v411x7gV&#34; rel=&#34;nofollow&#34; title=&#34; [年度报告] 沉冰浮水的 2020 时光机_哔哩哔哩_bilibili&#34;&gt;https://www.bilibili.com/video/BV15v411x7gV&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>wdssmq</author>
+      <pubDate>19 Mar 2022 14:24:08 +0000</pubDate>
+    </item>
+    <item>
       <title>app store 登录不上去了？ - 问与答</title>
       <link>https://www.v2ex.com/t/841538</link>
       <author>jtiantian666</author>
