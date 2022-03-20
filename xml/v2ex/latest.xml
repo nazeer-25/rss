@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>vue 中 axios 如何实现异步并发，并且并发不因为某个请求失败而导致整个并发失败？ - 前端开发</title>
+      <link>https://www.v2ex.com/t/841664</link>
+      <description>&lt;p&gt;代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;script&amp;gt;&#xA;import axios from &#39;axios&#39;&#xA;export default {&#xA;  name: &#39;HelloWorld&#39;,&#xA;  props: {&#xA;    msg: String&#xA;  },&#xA;  data() {&#xA;    return {&#xA;      r1: &#39;&#39;,&#xA;      r2: &#39;&#39;,&#xA;      r3: &#39;&#39;&#xA;    }&#xA;  },&#xA;  created() {&#xA;    this.getData()&#xA;  },&#xA;  methods: {&#xA;    getData() {&#xA;      axios.all([&#xA;        axios.get(&#39;http://baidu.com&#39;),&#xA;        axios.get(&#39;https://163.com&#39;),&#xA;        axios.get(&#39;https://google.com&#39;)&#xA;      ]).then(&#xA;        axios.spread(function(r1, r2, r3) {&#xA;          console.log(r1, r2, r3)&#xA;        })&#xA;      ).catch(error =&amp;gt; console.log(error))&#xA;    }&#xA;  }&#xA;}&#xA;&amp;lt;/script&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;问题：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;1.前面两个 get 成功，第三个 get 失败了，整个 axios 请求都失败了，直接 catch 到 error 了&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;期待：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;1.就算第三个失败了，前面两个也能赋值给 r1 、r2 ，第三个失败就失败了。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>solaro</author>
+      <pubDate>20 Mar 2022 09:46:42 +0000</pubDate>
+    </item>
+    <item>
       <title>2022 了，作为程序员你有哪些副业？ - 程序员</title>
       <link>https://www.v2ex.com/t/841663</link>
       <description>&lt;p&gt;在众多诸如经济下行、35 岁危机的外部传输的焦虑下，似乎如今的代码工作者都需要有技术、团队合作以及常识之外的生存能力。无论是寻求靠个人能力转管理岗位，还是发掘自己的时间或技能搞副业，大家似乎都需要给自己一个“退路”。管理岗终究需要个人能力与追求匹配才比较现实，副业的选择貌似更多。V 站的各位，你们已经在经营什么副业了吗？或者你将来有什么副业的想法吗？&lt;/p&gt;&#xA;</description>
