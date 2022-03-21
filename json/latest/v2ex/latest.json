@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Tomcat 高并发情况下响应时间优化 - 程序员",
+      "Link": "https://www.v2ex.com/t/841961",
+      "Description": "\u003cp\u003e应用服务器配置 2C4G\nMYSQL 配置 1C1G\nSpringBoot 项目，使用 Docker 运行，默认配置，最大内存配置 2G ，运行环境 OPENJDK17 ，内嵌 tomcat 容器，JVM 配置为默认配置，内存在并发情况下较为稳定，G1 GC 无明显影响\u003c/p\u003e\n\u003cp\u003e数据库连接池大小为固定 4 个连接\u003c/p\u003e\n\u003cp\u003e代码场景(抢红包)：\n接口 A 写入一条记录+N 条(10)记录\n接口 B 分别更新接口 A 的 N 条记录\u003c/p\u003e\n\u003cp\u003e现主要问题，高并发情况下(并发数 100 ，TPS 1500)，RT99 只能做到 150ms ，并发数 200 ，TPS 1700 ，RT99 只能做到 200 左右，希望 RT99 压到 80ms 以内\u003c/p\u003e\n\u003cp\u003e现调整了以下 tomcat 主要参数\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003eserver:\n  tomcat:\n    threads:\n      max: 200\n      min-spare: 200\n    processor-cache: 2000\n    max-connections: 2000\n    accept-count: 1\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e现在问题是无论如何调整后三个参数，RT99 都无法降下来，也尝试过线程数固定 100 ，pc150 ，mc150 ，ac500 ，RT 图相对稳定，但仍有一次较大的波动。\u003c/p\u003e\n\u003cp\u003e请问一下这种情况如何优化 RT99\u003c/p\u003e\n",
+      "Author": "night98",
+      "PubDate": "2022-03-21T13:57:54Z"
+    },
+    {
       "Title": "请教一个通过端口获取进程的问题 - Linux",
       "Link": "https://www.v2ex.com/t/841960",
       "Description": "\u003cp\u003e服务器 A 的 8080 端口一直收到来自 服务器 B 的请求, 但 A 上并没有进程监听在 8080 上, 但 B 上某个 SB 进程总是用随机的高端口非常频繁的发, 导致有大量 RST 报文.\u003c/p\u003e\n\u003cp\u003e想问下, 我在 B 上, 要怎么找到是哪个进程在搞事, 因为非常快速就消失了, \u003ccode\u003ess\u003c/code\u003e 根本无法定位.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e明天去公司想用 \u003ccode\u003eiptables\u003c/code\u003e 做个 drop 规则不知道会不会让这个连接保留一段时间.\u003c/p\u003e\n\u003c/blockquote\u003e\n",
