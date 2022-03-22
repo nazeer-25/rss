@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "下班之后的时间大家都在干嘛？会学习提升自己么 - 程序员",
+      "Link": "https://www.v2ex.com/t/842201",
+      "Description": "\u003cp\u003e最近刷一些大厂的面经，发现他们真的好优秀，一次能拿好多大厂的 offer ，博客写的也好。再看看自己，大厂面试第一轮也过不了，上班混混日子工作没啥挑战性，下班也就躺着不学习...\u003c/p\u003e\n\u003cp\u003e也许就像当初高中的时候，有些同学一直努力刻苦，所以能考上名牌大学，而我只能读个普通大学，就是这个道理吧\u003c/p\u003e\n",
+      "Author": "boblin",
+      "PubDate": "2022-03-22T14:09:21Z"
+    },
+    {
+      "Title": "[求职][南京] - 酷工作",
+      "Link": "https://www.v2ex.com/t/842200",
+      "Description": "\u003cp\u003ebase 南京，java 开发，三年工作经验，目前 14K 。\u003c/p\u003e\n\u003cp\u003eWechat: ZHVhbnF3ZWk=\u003c/p\u003e\n\u003cp\u003ee-mail: ZHVhbnF3ZWlAMTYzLmNvbQ==\u003c/p\u003e\n",
+      "Author": "duanqw",
+      "PubDate": "2022-03-22T14:04:52Z"
+    },
+    {
       "Title": "21 款 16 寸标配 MacBookPro 外接 studio display 感觉 60hz 好卡顿怎么适应? - Apple",
       "Link": "https://www.v2ex.com/t/842199",
       "Description": "",
@@ -11,7 +25,7 @@
       "PubDate": "2022-03-22T13:56:12Z"
     },
     {
-      "Title": "2019 的 MBP，就这配置还能不能升级新系统？ - Apple",
+      "Title": "2019 的 MBP，就这配置还能不能升级新系统？ - MacBook Pro",
       "Link": "https://www.v2ex.com/t/842196",
       "Description": "MacBook Pro (13-inch, 2019, Two Thunderbolt 3 ports)\u003cbr /\u003e1.4 GHz 四核 Intel Core i5\u003cbr /\u003e16 GB 2133 MHz LPDDR3\u003cbr /\u003eIntel Iris Plus Graphics 645 1536 MB\u003cbr /\u003e\u003cbr /\u003e现在是 Big Sur 11.6.4,感觉还行，就是内存消耗有点大。\u003cbr /\u003e还能升 12.3 Monterey 不？\u003cbr /\u003e会不会升完就不能用了？",
       "Author": "designerkk",
@@ -48,7 +62,7 @@
     {
       "Title": "父组件直接属性传函数给子组件 VS 子组件 emit 方式的区别？ - Vue.js",
       "Link": "https://www.v2ex.com/t/842191",
-      "Description": "\u003cp\u003e可以看见子组件 props 里头接了这个函数，而且标明了是一个 Function 类型，注意不要写成 function ，\n容易抛错。\n现在有个问题就是这种方式，父给子直接方法，子调这个方法，跟子组件 emit 一个方法，父再来接有什么区别。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-html\"\u003e\u0026lt;code\u0026gt;\n\n父组件\n我们 qq 这个属性，传了一个 qq 方法给组件。\n\n\n\u0026lt;img alt=\"Vue logo\" src=\"./assets/logo.png\" /\u0026gt;\n  \u0026lt;HelloWorld msg=\"Welcome to Your Vue.js App\" /\u0026gt;\n  \u0026lt;CuteMurphy msg=\"Welcome to Your Vue.js App\" @shit=\"shit\" :qq=\"qq\" /\u0026gt;\n\u0026lt;/template\u0026gt;\n\n\u0026lt;script\u0026gt;\nimport HelloWorld from \"./components/HelloWorld.vue\";\nimport CuteMurphy from \"./components/CuteMurphy.vue\";\n\nexport default {\n  name: \"App\",\n  components: {\n    HelloWorld,\n    CuteMurphy,\n  },\n  methods:{\n    shit(){\n      console.log(\"shit\");\n    },\n    qq(msg){\n      console.log(msg);\n    }\n  }\n};\n\u0026lt;/script\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e子组件：\n可以看见子组件 props 里头接了这个函数，而且标明了是一个 Function 类型，注意不要写成 function ，\n容易抛错。\n现在有个问题就是这种方式，父给子直接方法，子调这个方法，跟子组件 emit 一个方法，父再来接有什么区别。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-html\"\u003e\u0026lt;template\u0026gt;\n  \u0026lt;div @click=\"handleClick\"\u0026gt;{{msg}} age is {{age}}\u0026lt;/div\u0026gt;\n\u0026lt;/template\u0026gt;\n\n\u0026lt;script\u0026gt;\nimport {ref, watchEffect} from 'vue';\nexport default {\n  name: \"CuteMurphy\",\n  props:{\n    msg:{\n      type:String\n    },\n    qq:{\n      type:Function\n    }\n  },\n  setup(props,ctx){\n    const age=ref(32);\n    const handleClick=()=\u0026gt;{\n      ctx.emit(\"shit\");\n    };\n\n    watchEffect(()=\u0026gt;{\n      props.qq(\"jiajia\");\n      console.log(age.value,33);\n      console.log(props.msg,777);\n    });\n\n    return {\n      age,\n      handleClick\n    }\n  },\n  data(){\n    return {\n      username:\"11wangjun\"\n    }\n  },\n  methods:{\n  }\n};\n\u0026lt;/script\u0026gt;\n\n\u0026lt;style scoped\u0026gt;\n\u0026lt;/style\u0026gt;\n\n\u0026lt;/code\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Description": "\u003cp\u003e可以看见子组件 props 里头接了这个函数，而且标明了是一个 Function 类型，注意不要写成 function ，\n容易抛错。\n现在有个问题就是这种方式，父给子直接方法，子调这个方法，跟子组件 emit 一个方法，父再来接有什么区别。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-html\"\u003e\u0026lt;code\u0026gt;\n\n父组件\n我们 qq 这个属性，传了一个 qq 方法给组件。\n\n\n\u0026lt;img alt=\"Vue logo\" src=\"./assets/logo.png\" /\u0026gt;\n  \u0026lt;HelloWorld msg=\"Welcome to Your Vue.js App\" /\u0026gt;\n  \u0026lt;CuteMurphy msg=\"Welcome to Your Vue.js App\" @shit=\"shit\" :qq=\"qq\" /\u0026gt;\n\u0026lt;/template\u0026gt;\n\n\u0026lt;script\u0026gt;\nimport HelloWorld from \"./components/HelloWorld.vue\";\nimport CuteMurphy from \"./components/CuteMurphy.vue\";\n\nexport default {\n  name: \"App\",\n  components: {\n    HelloWorld,\n    CuteMurphy,\n  },\n  methods:{\n    shit(){\n      console.log(\"shit\");\n    },\n    qq(msg){\n      console.log(msg);\n    }\n  }\n};\n\u0026lt;/script\u0026gt;\n\n子组件：\n可以看见子组件 props 里头接了这个函数，而且标明了是一个 Function 类型，注意不要写成 function ，\n容易抛错。\n现在有个问题就是这种方式，父给子直接方法，子调这个方法，跟子组件 emit 一个方法，父再来接有什么区别。\n\n\u0026lt;template\u0026gt;\n  \u0026lt;div @click=\"handleClick\"\u0026gt;{{msg}} age is {{age}}\u0026lt;/div\u0026gt;\n\u0026lt;/template\u0026gt;\n\n\u0026lt;script\u0026gt;\nimport {ref, watchEffect} from 'vue';\nexport default {\n  name: \"CuteMurphy\",\n  props:{\n    msg:{\n      type:String\n    },\n    qq:{\n      type:Function\n    }\n  },\n  setup(props,ctx){\n    const age=ref(32);\n    const handleClick=()=\u0026gt;{\n      ctx.emit(\"shit\");\n    };\n\n    watchEffect(()=\u0026gt;{\n      props.qq(\"jiajia\");\n      console.log(age.value,33);\n      console.log(props.msg,777);\n    });\n\n    return {\n      age,\n      handleClick\n    }\n  },\n  data(){\n    return {\n      username:\"11wangjun\"\n    }\n  },\n  methods:{\n  }\n};\n\u0026lt;/script\u0026gt;\n\n\u0026lt;style scoped\u0026gt;\n\u0026lt;/style\u0026gt;\n\n\u0026lt;/code\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "cutemurphy2888",
       "PubDate": "2022-03-22T12:47:30Z"
     },
@@ -123,7 +137,7 @@
       "PubDate": "2022-03-22T11:51:41Z"
     },
     {
-      "Title": "阿里公共 DNS 的 DoT 对 ECS 协议支持是不是有些问题？ - 问与答",
+      "Title": "阿里公共 DNS 的 DoT 对 ECS 协议支持是不是有些问题？ - DNS",
       "Link": "https://www.v2ex.com/t/842177",
       "Description": "\u003cp\u003e各位大佬，阿里公共 DNS 的 DoT 对 ECS 协议支持是不是有些问题？另外国内有对 ECS 支持比较好的公共 dns 嘛\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-[bash]\"\u003ekdig o-o.myaddr.google.com txt @dns.alidns.com +tls +subnet=124.223.xxx.xx\n;; TLS session (TLS1.3)-(ECDHE-X25519)-(ECDSA-SECP256R1-SHA256)-(AES-128-GCM)\n;; -\u0026gt;\u0026gt;HEADER\u0026lt;\u0026lt;- opcode: QUERY; status: NOERROR; id: 62443\n;; Flags: qr rd ra; QUERY: 1; ANSWER: 2; AUTHORITY: 0; ADDITIONAL: 1\n\n;; EDNS PSEUDOSECTION:\n;; Version: 0; flags: ; UDP size: 4096 B; ext-rcode: NOERROR\n;; CLIENT-SUBNET: 124.223.xxx.xx/32/24\n\n;; QUESTION SECTION:\n;; o-o.myaddr.google.com.\t\tIN\tTXT\n\n;; ANSWER SECTION:\no-o.myaddr.google.com.\t60\tIN\tTXT\t\"47.103.51.146\"\no-o.myaddr.google.com.\t60\tIN\tTXT\t\"edns0-client-subnet 39.96.155.0/25\"\n\n;; Received 177 B\n;; Time 2022-03-22 19:31:40 CST\n;; From 223.6.6.6@853(TCP) in 101.7 ms\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "kincaid",
