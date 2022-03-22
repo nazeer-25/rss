@@ -42,3 +42,5 @@ Report Issue: https://github.com/chyroc/grss/issues
 | Hacker News - Top Links | [JSON](./json/latest/ycombinator/best.json) | [RSS](./xml/ycombinator/best.xml) | [HTML](./html/ycombinator/best/index.html) |
 | Hacker News - New Links | [JSON](./json/latest/ycombinator/newest.json) | [RSS](./xml/ycombinator/newest.xml) | [HTML](./html/ycombinator/newest/index.html) |
 | 知乎书店 - 新书抢鲜 | [JSON](./json/latest/zhihu/bookstore/newest.json) | [RSS](./xml/zhihu/bookstore/newest.xml) | [HTML](./html/zhihu/bookstore/newest/index.html) |
+| 竹白 - 察说花园 | [JSON](./json/latest/zhubai/post/chasays.json) | [RSS](./xml/zhubai/post/chasays.xml) | [HTML](./html/zhubai/post/chasays/index.html) |
+| 竹白 - 捕蛇者说 newsletter | [JSON](./json/latest/zhubai/post/pythonhunter.json) | [RSS](./xml/zhubai/post/pythonhunter.xml) | [HTML](./html/zhubai/post/pythonhunter/index.html) |
