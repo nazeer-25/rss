@@ -30,6 +30,7 @@ Report Issue: https://github.com/chyroc/grss/issues
 | 少数派 - 推荐 | [JSON](./json/latest/sspai/index.json) | [RSS](./xml/sspai/index.xml) | [HTML](./html/sspai/index/index.html) |
 | 少数派 - Matrix | [JSON](./json/latest/sspai/matrix.json) | [RSS](./xml/sspai/matrix.xml) | [HTML](./html/sspai/matrix/index.html) |
 | Go语言中文网 - 首页 | [JSON](./json/latest/studygolang/index.json) | [RSS](./xml/studygolang/index.xml) | [HTML](./html/studygolang/index/index.html) |
+| TO-D 杂志 - 首页 | [JSON](./json/latest/todtod/index.json) | [RSS](./xml/todtod/index.xml) | [HTML](./html/todtod/index/index.html) |
 | 开发者头条 - 首页 | [JSON](./json/latest/toutiaoio/index.json) | [RSS](./xml/toutiaoio/index.xml) | [HTML](./html/toutiaoio/index/index.html) |
 | Trends.vc | [JSON](./json/latest/trends_vc/archive.json) | [RSS](./xml/trends_vc/archive.xml) | [HTML](./html/trends_vc/archive/index.html) |
 | Twitter - 我是苏畅 Origin Twitter | [JSON](./json/latest/twitter/user/origin/woshisuchang.json) | [RSS](./xml/twitter/user/origin/woshisuchang.xml) | [HTML](./html/twitter/user/origin/woshisuchang/index.html) |
