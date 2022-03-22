@@ -60,6 +60,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "Golang 上海/新加坡/香港 全球top5美国高频交易",
+      "Link": "https://studygolang.com/topics/15281#reply0",
+      "Description": "\u003cp\u003eDescription\u003c/p\u003e\n\n\u003cp\u003e岗位职责：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e负责金融/区块链领域相关系统开发、性能调优；\n负责开发和维护数据同步、微服务等中间件；\n负责需求调研分析，对上游业务部门进行支持；\n独立分析需求，完成功能设计、代码实现和测试；\n编写设计文档。\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003eRequirements\u003c/p\u003e\n\n\u003cp\u003e岗位要求：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e计算机相关专业本科以上学历；\n了解计算机网络，常见的网络协议；\n熟练掌握Golang语言，并具有2年以上项目开发经验；了解C++/Python 优先；\n熟悉LevelDB，Elasticsearch，Clickhouse 数据库；\n熟悉Redis, Kafka 等消息组件；\n熟悉微服务、Docker等相关技术的应用；\n熟悉软件项目开发流程、规范，有良好的开发习惯；\n热爱技术，有良好的学习、沟通、协作能力；\n有大数据开发经验者优先。\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e地点：上海 香港 新加坡 任选\n1年经验go 80万起\n2-4年 150万起\n若去新加坡，香港境外， 按照当地水平支付薪酬\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "日志初始化",
       "Link": "https://studygolang.com/articles/35550#reply0",
       "Description": "\u003cp\u003epackage xhty\u003c/p\u003e\n\n\u003cp\u003eimport (\n\t\u0026ldquo;io\u0026rdquo;\n\t\u0026ldquo;log\u0026rdquo;\n\t\u0026ldquo;os\u0026rdquo;\n)\u003c/p\u003e\n\n\u003cp\u003evar (\n\tTrace   *log.Logger // 记录所有日志\n\tInfo    *log.Logger // 重要的信息\n\tWarning *log.Logger // 需要注意的信息\n\tError   *log.Logger // 致命错误\n)\u003c/p\u003e\n\n\u003cp\u003e//1000、日志初始化\n//fp,err := xhty.LogInit(logPath)\n//入参：\t日志路径 logPathName \t\t//\u0026ldquo;运行日志//进程管理\u0026rdquo; + day + \u0026ldquo;.log\u0026rdquo;\n//出参：\t文件指针\tfp *os.File\n//\t\t错误\terr error\u003c/p\u003e\n\n\u003cp\u003e//////日志应用示例/////////////////\n// str:=\u0026ldquo;日志内容\u0026rdquo;\n// xhty.Warning.Println(\u0026ldquo;警告记录===\u0026rdquo;,str)\t//严重错误记录\n// xhty.Error.Println(\u0026ldquo;出错记录===\u0026rdquo;,str)\t\t//发生错误时记录\n// xhty.Trace.Println(\u0026ldquo;跟踪记录===\u0026rdquo;,str)\t\t//需要跟踪处理的记录\n// xhty.Info.Println(\u0026ldquo;信息记录===\u0026rdquo;,str)\t\t//正常的进度记录\n//////日志应用示例///////////////////////////////////////\u003c/p\u003e\n\n\u003cp\u003e//1000、日志初始化\nfunc LogInit(logPathName string) (fp *os.File, err error) {\n\t//创建日志文件///////////////////////////////////////\n\tfP, err := os.OpenFile(logPathName, os.O_CREATE|os.O_RDWR|os.O_APPEND, 0666)\n\tif err != nil {\n\t\tdirName := \u0026ldquo;运行日志\u0026rdquo; //目录只能一级一级创建\n\t\t_ = os.Mkdir(dirName, os.ModeDir|os.ModePerm)\n\t\tfP, err = os.OpenFile(logPathName, os.O_CREATE|os.O_RDWR|os.O_APPEND, 0666)\n\t\tif err != nil {\n\t\t\treturn\n\t\t}\n\t}\n\t/////////////////////////////////\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e//////////////////////////////////\nTrace = log.New(io.MultiWriter(fP, os.Stderr), \u0026quot;跟踪记录时间: \u0026quot;, log.Ltime|log.Lshortfile)\nInfo = log.New(io.MultiWriter(fP, os.Stderr), \u0026quot;信息记录时间: \u0026quot;, log.Ltime|log.Lshortfile)\nWarning = log.New(io.MultiWriter(fP, os.Stderr), \u0026quot;警告发出时间: \u0026quot;, log.Ltime|log.Lshortfile)\nError = log.New(io.MultiWriter(fP, os.Stderr), \u0026quot;错误发生时间：\u0026quot;, log.Ltime|log.Lshortfile)\n///////////////////////////////////////\nreturn\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n",
@@ -105,13 +112,6 @@
       "Title": "请问如何对结构文本中的列进行排序？",
       "Link": "https://studygolang.com/topics/15280#reply2",
       "Description": "\u003cp\u003e如题。\n想在自动化巡检的场景里对文件系统或者文件大小进行排序，找到使用率最大的文件系统，以便进行后续建议或者警告的打印。\n如图：\n\u003cimg src=\"https://static.studygolang.com/220320/d5abce420b41bec1efe4bb5f9926487c.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e比如对第五列进行排序，最终发现 / 分区使用率达到36%。请问是否有go语言的判断方法（非shell的）。感谢指导！~\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Golang 上海/新加坡/香港 全球top5美国高频交易",
-      "Link": "https://studygolang.com/topics/15281#reply0",
-      "Description": "\u003cp\u003eDescription\u003c/p\u003e\n\n\u003cp\u003e岗位职责：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e负责金融/区块链领域相关系统开发、性能调优；\n负责开发和维护数据同步、微服务等中间件；\n负责需求调研分析，对上游业务部门进行支持；\n独立分析需求，完成功能设计、代码实现和测试；\n编写设计文档。\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003eRequirements\u003c/p\u003e\n\n\u003cp\u003e岗位要求：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e计算机相关专业本科以上学历；\n了解计算机网络，常见的网络协议；\n熟练掌握Golang语言，并具有2年以上项目开发经验；了解C++/Python 优先；\n熟悉LevelDB，Elasticsearch，Clickhouse 数据库；\n熟悉Redis, Kafka 等消息组件；\n熟悉微服务、Docker等相关技术的应用；\n熟悉软件项目开发流程、规范，有良好的开发习惯；\n热爱技术，有良好的学习、沟通、协作能力；\n有大数据开发经验者优先。\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e地点：上海 香港 新加坡 任选\n1年经验go 80万起\n2-4年 150万起\n若去新加坡，香港境外， 按照当地水平支付薪酬\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
