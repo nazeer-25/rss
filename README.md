@@ -14,10 +14,12 @@ Report Issue: https://github.com/chyroc/grss/issues
 | ---   | ---  | --- | ---  |
 | 半月谈 - 今日谈 | [JSON](./json/latest/banyuetan/jinritan.json) | [RSS](./xml/banyuetan/jinritan.xml) | [HTML](./html/banyuetan/jinritan/index.html) |
 | DEV Community - Feed | [JSON](./json/latest/dev_to/feed.json) | [RSS](./xml/dev_to/feed.xml) | [HTML](./html/dev_to/feed/index.html) |
+| 面向信仰编程 - 首页 | [JSON](./json/latest/draveness/index.json) | [RSS](./xml/draveness/index.xml) | [HTML](./html/draveness/index/index.html) |
 | GitHub - Trending - go - daily | [JSON](./json/latest/github/trending/go/daily.json) | [RSS](./xml/github/trending/go/daily.xml) | [HTML](./html/github/trending/go/daily/index.html) |
 | GitHub - Trending - python - daily | [JSON](./json/latest/github/trending/python/daily.json) | [RSS](./xml/github/trending/python/daily.xml) | [HTML](./html/github/trending/python/daily/index.html) |
 | GitHub - Trending - rust - daily | [JSON](./json/latest/github/trending/rust/daily.json) | [RSS](./xml/github/trending/rust/daily.xml) | [HTML](./html/github/trending/rust/daily/index.html) |
 | Lobsters - Home | [JSON](./json/latest/lobste/home.json) | [RSS](./xml/lobste/home.xml) | [HTML](./html/lobste/home/index.html) |
+| 美团技术团队 - 文章 | [JSON](./json/latest/meituan_tech/article.json) | [RSS](./xml/meituan_tech/article.xml) | [HTML](./html/meituan_tech/article/index.html) |
 | 品玩 - 实时要闻 | [JSON](./json/latest/pingwest/status.json) | [RSS](./xml/pingwest/status.xml) | [HTML](./html/pingwest/status/index.html) |
 | Reddit - Too Many Requests | [JSON](./json/latest/reddit/community/hot/golang.json) | [RSS](./xml/reddit/community/hot/golang.xml) | [HTML](./html/reddit/community/hot/golang/index.html) |
 | Reddit - Too Many Requests | [JSON](./json/latest/reddit/community/hot/tech.json) | [RSS](./xml/reddit/community/hot/tech.xml) | [HTML](./html/reddit/community/hot/tech/index.html) |
