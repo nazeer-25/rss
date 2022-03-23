@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "老哥们，国内还有邮件列表云服务吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/842326",
+      "Description": "\u003cp\u003e想要加入一个小群体，来持续深入讨论某个话题的时候，感觉邮件列表会是个很好的选择。\u003c/p\u003e\n\u003cp\u003e我在国内国外找了一圈，发现现成的邮件列表服务好像挺少的，就谷歌的还能用（没验证过）。\u003c/p\u003e\n\u003cp\u003e然后我自己用良心云 1 核 2G 的轻量云搭了一个，能用，但是很卡，延迟很大，而且有很多小问题需要解决。\u003c/p\u003e\n\u003cp\u003e所以想问问 v 友们有没有国内好用一点的邮件列表，没被墙的国外服务也行。\u003c/p\u003e\n\u003cp\u003e或者自己搭，预计支持百来人左右的，配置得多高？\u003c/p\u003e\n",
+      "Author": "jie170601",
+      "PubDate": "2022-03-23T05:26:22Z"
+    },
+    {
+      "Title": "各位大都佬，用 docusaurus 在 GITHUB 自动渲染出错，哪位帮解决一下 - 问与答",
+      "Link": "https://www.v2ex.com/t/842325",
+      "Description": "\u003cp\u003e\u003ca href=\"http://pan.ibinzhou.com/2022/03/23/9b0ffec740884.jpg\" rel=\"nofollow\"\u003e\u003cimg alt=\"QQ 图片 20220323132240.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"http://pan.ibinzhou.com/2022/03/23/9b0ffec740884.jpg\"/\u003e\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "dashupc",
+      "PubDate": "2022-03-23T05:24:47Z"
+    },
+    {
+      "Title": "bind9（递归）配置 ECS 不生效 - 问与答",
+      "Link": "https://www.v2ex.com/t/842322",
+      "Description": "\u003cp\u003e最近在学习 dns 的相关知识，然后尝试用 bind 在内网搭建了一个递归 dns ，测试了一下解析什么的都正常，但是 ECS 似乎并不起作用，有大佬遇到过类似的情况嘛？ bind9.16.x 和 bind9.18.x 都试过了\u003c/p\u003e\n\u003ch2\u003e测试结果\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-[bash]\"\u003edig www.taobao.com @127.0.0.1 -p 54 +subnet=202.96.64.68\n\n; \u0026lt;\u0026lt;\u0026gt;\u0026gt; DiG 9.18.1-1+0~20220316.73+debian11~1.gbp965910-Debian \u0026lt;\u0026lt;\u0026gt;\u0026gt; www.taobao.com @127.0.0.1 -p 54 +subnet=202.96.64.68\n;; global options: +cmd\n;; Got answer:\n;; -\u0026gt;\u0026gt;HEADER\u0026lt;\u0026lt;- opcode: QUERY, status: NOERROR, id: 33865\n;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 1232\n; COOKIE: 5abbcad304b5d31c01000000623aaad500ab63c28430b13f (good)\n; CLIENT-SUBNET: 202.96.64.68/32/0\n;; QUESTION SECTION:\n;www.taobao.com.                        IN      A\n\n;; ANSWER SECTION:\nwww.taobao.com.         600     IN      CNAME   www.taobao.com.danuoyi.tbcache.com.\nwww.taobao.com.danuoyi.tbcache.com. 60 IN A     36.147.19.230\nwww.taobao.com.danuoyi.tbcache.com. 60 IN A     36.147.19.231\n\n;; Query time: 956 msec\n;; SERVER: 127.0.0.1#54(127.0.0.1) (UDP)\n;; WHEN: Wed Mar 23 13:06:29 CST 2022\n;; MSG SIZE  rcvd: 163\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e传了辽宁联通的 IP ，但返回仍是宽带出口 IP 查询的结果\u003c/p\u003e\n\u003ch2\u003e配置文件\u003c/h2\u003e\n\u003ch3\u003enamed.conf\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e// This is the primary configuration file for the BIND DNS server named.\n//\n// Please read /usr/share/doc/bind9/README.Debian.gz for information on the \n// structure of BIND configuration files in Debian, *BEFORE* you customize \n// this configuration file.\n//\n// If you are just adding zones, please do that in /etc/bind/named.conf.local\n\ninclude \"/etc/bind/named.conf.options\";\ninclude \"/etc/bind/named.conf.local\";\ninclude \"/etc/bind/named.conf.default-zones\";\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003enamed.conf.local\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e//\n// Do any local configuration here\n//\n\n// Consider adding the 1918 zones here, if they are not used in your\n// organization\n//include \"/etc/bind/zones.rfc1918\";\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003enamed.conf.options\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003eoptions {\n\tdirectory \"/var/cache/bind\";\n\n\t// If there is a firewall between you and nameservers you want\n\t// to talk to, you may need to fix the firewall to allow multiple\n\t// ports to talk.  See http://www.kb.cert.org/vuls/id/800113\n\n\t// If your ISP provided one or more IP addresses for stable \n\t// nameservers, you probably want to use them as forwarders.  \n\t// Uncomment the following block, and insert the addresses replacing \n\t// the all-0's placeholder.\n\n\t// forwarders {\n\t// \t0.0.0.0;\n\t// };\n\n\t//========================================================================\n\t// If BIND logs error messages about the root key being expired,\n\t// you will need to update your keys.  See https://www.isc.org/bind-keys\n\t//========================================================================\n\tdnssec-validation yes;\n\tlisten-on port 54 { any; };\n\tlisten-on-v6 port 54 { any; };\n};\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003enamed.conf.default-zones\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e// prime the server with knowledge of the root servers\nzone \".\" {\n\ttype hint;\n\tfile \"/usr/share/dns/root.hints\";\n};\n\n// be authoritative for the localhost forward and reverse zones, and for\n// broadcast zones as per RFC 1912\n\nzone \"localhost\" {\n\ttype master;\n\tfile \"/etc/bind/db.local\";\n};\n\nzone \"127.in-addr.arpa\" {\n\ttype master;\n\tfile \"/etc/bind/db.127\";\n};\n\nzone \"0.in-addr.arpa\" {\n\ttype master;\n\tfile \"/etc/bind/db.0\";\n};\n\nzone \"255.in-addr.arpa\" {\n\ttype master;\n\tfile \"/etc/bind/db.255\";\n};\nzone \"in-addr.arpa\" {\n        type master;\n        file \"/etc/bind/in-addr.arpa\";\n};\n\nzone \"root.zone\" {\n        type master;\n        file \"/etc/bind/root.zone\";\n};\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e求各位大佬指教\u003c/p\u003e\n",
+      "Author": "kincaid",
+      "PubDate": "2022-03-23T05:17:15Z"
+    },
+    {
+      "Title": "问一下现在手机 IOS 有什么好用的划句翻译？ - iOS",
+      "Link": "https://www.v2ex.com/t/842321",
+      "Description": "\u003cp\u003e语言是中日\u003c/p\u003e\n\u003cp\u003e使用场景是手机 ios ，非浏览器 app （比如对 qq 的聊天内容选取语句进行翻译）\u003c/p\u003e\n\u003cp\u003e需求是越方便快捷越好，精度没有要求那么严格\u003c/p\u003e\n",
+      "Author": "flcoyote",
+      "PubDate": "2022-03-23T05:17:13Z"
+    },
+    {
       "Title": "关贴有感，从一线回二三线，大家最舍不得是什么呢 - 问与答",
       "Link": "https://www.v2ex.com/t/842317",
       "Description": "高薪？\u003cbr /\u003e机遇？但混了几年还是没能力定居一线的话，以后遇到机遇的概率也就更小了吧。\u003cbr /\u003e教育？但我不想让下一代那么卷，回二线或许更好\u003cbr /\u003e\u003cbr /\u003e个人觉得如果回二线买房生活的压力小很多的话，这些原因都不那么重要，唯一就是心理上不那么容易接受降薪？或许也还好。\u003cbr /\u003e欢迎大家补充其他有可能的原因，给想要回二三线的人一些建议。",
