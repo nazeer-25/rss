@@ -18,6 +18,7 @@ Report Issue: https://github.com/chyroc/grss/issues
 | GitHub - Trending - go - daily | [JSON](./json/latest/github/trending/go/daily.json) | [RSS](./xml/github/trending/go/daily.xml) | [HTML](./html/github/trending/go/daily/index.html) |
 | GitHub - Trending - python - daily | [JSON](./json/latest/github/trending/python/daily.json) | [RSS](./xml/github/trending/python/daily.xml) | [HTML](./html/github/trending/python/daily/index.html) |
 | GitHub - Trending - rust - daily | [JSON](./json/latest/github/trending/rust/daily.json) | [RSS](./xml/github/trending/rust/daily.xml) | [HTML](./html/github/trending/rust/daily/index.html) |
+| GoCN - 每日新闻 | [JSON](./json/latest/gocn/daily.json) | [RSS](./xml/gocn/daily.xml) | [HTML](./html/gocn/daily/index.html) |
 | Lobsters - Home | [JSON](./json/latest/lobste/home.json) | [RSS](./xml/lobste/home.xml) | [HTML](./html/lobste/home/index.html) |
 | 美团技术团队 - 文章 | [JSON](./json/latest/meituan_tech/article.json) | [RSS](./xml/meituan_tech/article.xml) | [HTML](./html/meituan_tech/article/index.html) |
 | 品玩 - 实时要闻 | [JSON](./json/latest/pingwest/status.json) | [RSS](./xml/pingwest/status.xml) | [HTML](./html/pingwest/status/index.html) |
