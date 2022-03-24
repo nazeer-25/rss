@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>openwrt 上使用 opencIash 的奇葩问题 - OpenWrt</title>
+      <link>https://www.v2ex.com/t/842723</link>
+      <description>&lt;p&gt;我遇到了个很奇葩的问题，N1 作为旁路由。&lt;/p&gt;&#xA;&lt;p&gt;openclash 开启之后，PC 上浏览器能打开香港谷歌 &lt;a href=&#34;http://google.com.hk&#34; rel=&#34;nofollow&#34;&gt;google.com.hk&lt;/a&gt; ，  &lt;a href=&#34;http://drive.google.com&#34; rel=&#34;nofollow&#34;&gt;drive.google.com&lt;/a&gt; （这个不代 hk ）也能打开，但是就打不开 &lt;a href=&#34;http://google.com&#34; rel=&#34;nofollow&#34;&gt;google.com&lt;/a&gt; 这个不带 hk 网页。&lt;/p&gt;&#xA;&lt;p&gt;而手机和平板连旁路由就一切正常，什么都能打开。&lt;/p&gt;&#xA;&lt;p&gt;当我电脑不连旁路由，用 cfw 客户端时，也一切正常。不知什么原因？有没有大佬解答下😢😢&lt;/p&gt;&#xA;</description>
+      <author>psyer</author>
+      <pubDate>24 Mar 2022 13:56:06 +0000</pubDate>
+    </item>
+    <item>
       <title>如何优化 vite 打包后的文件大小？用的一个库发现不同的 import 姿势打包出来的大小差了近 5 倍 - 问与答</title>
       <link>https://www.v2ex.com/t/842722</link>
       <description>&lt;p&gt;demo 地址 &lt;a href=&#34;https://stackblitz.com/edit/vitejs-vite-cvb6u1?file=src/App.ts&#34; rel=&#34;nofollow&#34;&gt;https://stackblitz.com/edit/vitejs-vite-cvb6u1?file=src/App.ts&lt;/a&gt;&lt;br/&gt;&#xA;同样引入三个东西，第一种压缩前 44k ，第二种 17k ，第三种 9k&lt;br/&gt;&#xA;像这种兼容 commonjs 和 esm 的库，想要实现最优化打包大小每次 import 的时候是不是都要保证是从 es 目录下面单独引入的？&lt;br/&gt;&#xA;有没有插件可以实现把支持 esm 的库的引入都自动转成 es 目录下的引入？&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { List, NonEmptyList, Maybe } from &#39;purify-ts&#39;;&#xA;&#xA;// import { Maybe } from &#39;purify-ts/Maybe&#39;;&#xA;// import { NonEmptyList } from &#39;purify-ts/NonEmptyList&#39;;&#xA;// import { List } from &#39;purify-ts/List&#39;;&#xA;&#xA;// import { Maybe } from &#39;purify-ts/es/Maybe&#39;;&#xA;// import { NonEmptyList } from &#39;purify-ts/es/NonEmptyList&#39;;&#xA;// import { List } from &#39;purify-ts/es/List&#39;;&#xA;&#xA;const columns = [&#xA;  { id: 1, itemIds: [1, 2] },&#xA;  { id: 2, itemIds: [3] },&#xA;];&#xA;&#xA;function App() {&#xA;  Maybe.of(1).chain((value) =&amp;gt; Maybe.fromNullable(value).ifJust(console.log));&#xA;  NonEmptyList.fromArray([1, 2, 3]).map(NonEmptyList.head).ifJust(console.log);&#xA;  List.find(({ id }) =&amp;gt; id === 1, columns).ifJust(console.log);&#xA;&#xA;  return &#39;hello&#39;;&#xA;}&#xA;&#xA;const a = document.createElement(&#39;div&#39;);&#xA;a.innerText = App();&#xA;document.querySelector(&#39;#root&#39;)?.appendChild(a);&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
