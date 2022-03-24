@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>阅读源码，无意中看到这到一段，请教一下，这算是同步的还是异步的代码？ - JavaScript</title>
+      <link>https://www.v2ex.com/t/842504</link>
+      <description>&lt;p&gt;leran cli 的源代码&#xA;&lt;a href=&#34;https://github.com/lerna/lerna/blob/main/core/command/index.js#L45&#34; rel=&#34;nofollow&#34;&gt;https://github.com/lerna/lerna/blob/main/core/command/index.js#L45&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;这个 command 的 constructor 里面，&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;这种执行方式，是同步的么？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre&gt;&lt;code&gt;      let chain = Promise.resolve();&#xA;&#xA;      chain = chain.then(() =&amp;gt; {&#xA;        this.project = new Project(argv.cwd);&#xA;      });&#xA;      chain = chain.then(() =&amp;gt; this.configureEnvironment());&#xA;      chain = chain.then(() =&amp;gt; this.configureOptions());&#xA;      chain = chain.then(() =&amp;gt; this.configureProperties());&#xA;      chain = chain.then(() =&amp;gt; this.configureLogging());&#xA;      chain = chain.then(() =&amp;gt; this.runValidations());&#xA;      chain = chain.then(() =&amp;gt; this.runPreparations());&#xA;      chain = chain.then(() =&amp;gt; this.runCommand());&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;然后上面 1 中的代码，外面套了一层 let runner = new Promise((resolve, reject) =&amp;gt; { ... }&#xA;后面继续 runer.then(...)&#xA;这个是同步还是异步？&lt;/li&gt;&#xA;&lt;li&gt;command 的 constructor 是同步还是异步？&lt;/li&gt;&#xA;&lt;li&gt;该类 Command 的方法，runCommand()呢？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre&gt;&lt;code&gt; runCommand() {&#xA;    return Promise.resolve()&#xA;      .then(() =&amp;gt; this.initialize())&#xA;      .then((proceed) =&amp;gt; {&#xA;        if (proceed !== false) {&#xA;          return this.execute();&#xA;        }&#xA;        // early exits set their own exitCode (if non-zero)&#xA;      });&#xA;  }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;看得我好迷糊，也都没有添加 async 关键。&lt;/p&gt;&#xA;&lt;p&gt;求指点。&lt;/p&gt;&#xA;&lt;p&gt;谢谢！&lt;/p&gt;&#xA;</description>
+      <author>yazoox</author>
+      <pubDate>24 Mar 2022 00:15:06 +0000</pubDate>
+    </item>
+    <item>
       <title>黑苹果和 ubuntu 双系统， mac 时间总比 bios 时间快 8 个小时 - 问与答</title>
       <link>https://www.v2ex.com/t/842503</link>
       <description>如题，笔记本装了双系统，现在 ubuntu 已经禁用了 utc 时间 ，使用 bios 时间 ，但每次重启进入 mac ，然后关机，会发现 mac 时间比 bios 时间快 8 个小时 ，求教哈如何解决这个问题，网上搜了一下答案，未果，也有可能是我搜索的方式有问题</description>
