@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>上海猫眼还能去吗 - 职场话题</title>
+      <link>https://www.v2ex.com/t/842505</link>
+      <description>涨幅还可以，大概 50%，年终 3.5 个月，看脉脉年终还没发。&lt;br /&gt;&lt;br /&gt;老哥们有熟悉的嘛，求指导。</description>
+      <author>wukongkong</author>
+      <pubDate>24 Mar 2022 00:26:44 +0000</pubDate>
+    </item>
+    <item>
       <title>阅读源码，无意中看到这到一段，请教一下，这算是同步的还是异步的代码？ - JavaScript</title>
       <link>https://www.v2ex.com/t/842504</link>
       <description>&lt;p&gt;leran cli 的源代码&#xA;&lt;a href=&#34;https://github.com/lerna/lerna/blob/main/core/command/index.js#L45&#34; rel=&#34;nofollow&#34;&gt;https://github.com/lerna/lerna/blob/main/core/command/index.js#L45&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;这个 command 的 constructor 里面，&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;这种执行方式，是同步的么？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre&gt;&lt;code&gt;      let chain = Promise.resolve();&#xA;&#xA;      chain = chain.then(() =&amp;gt; {&#xA;        this.project = new Project(argv.cwd);&#xA;      });&#xA;      chain = chain.then(() =&amp;gt; this.configureEnvironment());&#xA;      chain = chain.then(() =&amp;gt; this.configureOptions());&#xA;      chain = chain.then(() =&amp;gt; this.configureProperties());&#xA;      chain = chain.then(() =&amp;gt; this.configureLogging());&#xA;      chain = chain.then(() =&amp;gt; this.runValidations());&#xA;      chain = chain.then(() =&amp;gt; this.runPreparations());&#xA;      chain = chain.then(() =&amp;gt; this.runCommand());&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;然后上面 1 中的代码，外面套了一层 let runner = new Promise((resolve, reject) =&amp;gt; { ... }&#xA;后面继续 runer.then(...)&#xA;这个是同步还是异步？&lt;/li&gt;&#xA;&lt;li&gt;command 的 constructor 是同步还是异步？&lt;/li&gt;&#xA;&lt;li&gt;该类 Command 的方法，runCommand()呢？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre&gt;&lt;code&gt; runCommand() {&#xA;    return Promise.resolve()&#xA;      .then(() =&amp;gt; this.initialize())&#xA;      .then((proceed) =&amp;gt; {&#xA;        if (proceed !== false) {&#xA;          return this.execute();&#xA;        }&#xA;        // early exits set their own exitCode (if non-zero)&#xA;      });&#xA;  }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;看得我好迷糊，也都没有添加 async 关键。&lt;/p&gt;&#xA;&lt;p&gt;求指点。&lt;/p&gt;&#xA;&lt;p&gt;谢谢！&lt;/p&gt;&#xA;</description>
