@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如何优化 vite 打包后的文件大小？用的一个库发现不同的 import 姿势打包出来的大小差了近 5 倍 - 问与答",
+      "Link": "https://www.v2ex.com/t/842722",
+      "Description": "\u003cp\u003edemo 地址 \u003ca href=\"https://stackblitz.com/edit/vitejs-vite-cvb6u1?file=src/App.ts\" rel=\"nofollow\"\u003ehttps://stackblitz.com/edit/vitejs-vite-cvb6u1?file=src/App.ts\u003c/a\u003e\u003cbr/\u003e\n同样引入三个东西，第一种压缩前 44k ，第二种 17k ，第三种 9k\u003cbr/\u003e\n像这种兼容 commonjs 和 esm 的库，想要实现最优化打包大小每次 import 的时候是不是都要保证是从 es 目录下面单独引入的？\u003cbr/\u003e\n有没有插件可以实现把支持 esm 的库的引入都自动转成 es 目录下的引入？\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003eimport { List, NonEmptyList, Maybe } from 'purify-ts';\n\n// import { Maybe } from 'purify-ts/Maybe';\n// import { NonEmptyList } from 'purify-ts/NonEmptyList';\n// import { List } from 'purify-ts/List';\n\n// import { Maybe } from 'purify-ts/es/Maybe';\n// import { NonEmptyList } from 'purify-ts/es/NonEmptyList';\n// import { List } from 'purify-ts/es/List';\n\nconst columns = [\n  { id: 1, itemIds: [1, 2] },\n  { id: 2, itemIds: [3] },\n];\n\nfunction App() {\n  Maybe.of(1).chain((value) =\u0026gt; Maybe.fromNullable(value).ifJust(console.log));\n  NonEmptyList.fromArray([1, 2, 3]).map(NonEmptyList.head).ifJust(console.log);\n  List.find(({ id }) =\u0026gt; id === 1, columns).ifJust(console.log);\n\n  return 'hello';\n}\n\nconst a = document.createElement('div');\na.innerText = App();\ndocument.querySelector('#root')?.appendChild(a);\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "TWorldIsNButThis",
+      "PubDate": "2022-03-24T13:44:30Z"
+    },
+    {
       "Title": "请教下使用过 hashicorp/raft 库的大佬 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/842721",
       "Description": "\u003cp\u003e我最近在开发 \u003ca href=\"https://github.com/yemingfeng/sdb\" rel=\"nofollow\"\u003esdb\u003c/a\u003e。主旨是构建一个分布式的 KV 存储。\n目前 raft 协议使用了 \u003ca href=\"https://github.com/hashicorp/raft\" rel=\"nofollow\"\u003ehashicorp/raft\u003c/a\u003e。接入后发现性能下降很严重，没有接入 raft 库之前写入的 qps 可以达到 7k ，接入后写入的 qps 只有 200 不到。\u003c/p\u003e\n\u003cp\u003e是我使用姿势的问题吗？还是这个库本身的性能就不高？\u003c/p\u003e\n\u003cp\u003e有使用过的大佬可以帮忙 review 下吗？感恩 \u003ca href=\"https://github.com/yemingfeng/sdb/pull/58\" rel=\"nofollow\"\u003ehttps://github.com/yemingfeng/sdb/pull/58\u003c/a\u003e\u003c/p\u003e\n",

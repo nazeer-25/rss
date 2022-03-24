@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>如何优化 vite 打包后的文件大小？用的一个库发现不同的 import 姿势打包出来的大小差了近 5 倍 - 问与答</title>
+      <link>https://www.v2ex.com/t/842722</link>
+      <description>&lt;p&gt;demo 地址 &lt;a href=&#34;https://stackblitz.com/edit/vitejs-vite-cvb6u1?file=src/App.ts&#34; rel=&#34;nofollow&#34;&gt;https://stackblitz.com/edit/vitejs-vite-cvb6u1?file=src/App.ts&lt;/a&gt;&lt;br/&gt;&#xA;同样引入三个东西，第一种压缩前 44k ，第二种 17k ，第三种 9k&lt;br/&gt;&#xA;像这种兼容 commonjs 和 esm 的库，想要实现最优化打包大小每次 import 的时候是不是都要保证是从 es 目录下面单独引入的？&lt;br/&gt;&#xA;有没有插件可以实现把支持 esm 的库的引入都自动转成 es 目录下的引入？&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { List, NonEmptyList, Maybe } from &#39;purify-ts&#39;;&#xA;&#xA;// import { Maybe } from &#39;purify-ts/Maybe&#39;;&#xA;// import { NonEmptyList } from &#39;purify-ts/NonEmptyList&#39;;&#xA;// import { List } from &#39;purify-ts/List&#39;;&#xA;&#xA;// import { Maybe } from &#39;purify-ts/es/Maybe&#39;;&#xA;// import { NonEmptyList } from &#39;purify-ts/es/NonEmptyList&#39;;&#xA;// import { List } from &#39;purify-ts/es/List&#39;;&#xA;&#xA;const columns = [&#xA;  { id: 1, itemIds: [1, 2] },&#xA;  { id: 2, itemIds: [3] },&#xA;];&#xA;&#xA;function App() {&#xA;  Maybe.of(1).chain((value) =&amp;gt; Maybe.fromNullable(value).ifJust(console.log));&#xA;  NonEmptyList.fromArray([1, 2, 3]).map(NonEmptyList.head).ifJust(console.log);&#xA;  List.find(({ id }) =&amp;gt; id === 1, columns).ifJust(console.log);&#xA;&#xA;  return &#39;hello&#39;;&#xA;}&#xA;&#xA;const a = document.createElement(&#39;div&#39;);&#xA;a.innerText = App();&#xA;document.querySelector(&#39;#root&#39;)?.appendChild(a);&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>TWorldIsNButThis</author>
+      <pubDate>24 Mar 2022 13:44:30 +0000</pubDate>
+    </item>
+    <item>
       <title>请教下使用过 hashicorp/raft 库的大佬 - Go 编程语言</title>
       <link>https://www.v2ex.com/t/842721</link>
       <description>&lt;p&gt;我最近在开发 &lt;a href=&#34;https://github.com/yemingfeng/sdb&#34; rel=&#34;nofollow&#34;&gt;sdb&lt;/a&gt;。主旨是构建一个分布式的 KV 存储。&#xA;目前 raft 协议使用了 &lt;a href=&#34;https://github.com/hashicorp/raft&#34; rel=&#34;nofollow&#34;&gt;hashicorp/raft&lt;/a&gt;。接入后发现性能下降很严重，没有接入 raft 库之前写入的 qps 可以达到 7k ，接入后写入的 qps 只有 200 不到。&lt;/p&gt;&#xA;&lt;p&gt;是我使用姿势的问题吗？还是这个库本身的性能就不高？&lt;/p&gt;&#xA;&lt;p&gt;有使用过的大佬可以帮忙 review 下吗？感恩 &lt;a href=&#34;https://github.com/yemingfeng/sdb/pull/58&#34; rel=&#34;nofollow&#34;&gt;https://github.com/yemingfeng/sdb/pull/58&lt;/a&gt;&lt;/p&gt;&#xA;</description>
