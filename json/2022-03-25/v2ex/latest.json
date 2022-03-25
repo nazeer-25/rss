@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "10 分钟对公司的 gitlab 代码仓库来一次安全体检 - 分享创造",
+      "Link": "https://www.v2ex.com/t/842763",
+      "Description": "\u003cblockquote\u003e\n\u003cp\u003e本文来自用户南瓜投稿\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e去年 log4j 漏洞爆发时候就已经很痛苦了，当时把所有的线上服务排查了一遍。没想到这都已经过去 3 个月了，上周又遇到了一个服务仍在使用低版本，被外部攻击，有点受伤。\n这件事后，老板让我全量扫一遍我们的代码库，看还有哪些服务还在用老版本的 log4j ，统一推一波修复，防止后续在发生此类事件。\u003c/p\u003e\n\u003ch2\u003e方案调研\u003c/h2\u003e\n\u003cp\u003e\u003cstrong\u003e方案一（放弃）\u003c/strong\u003e\n当时我第一反应是写个脚本，遍历所有项目，再拉取项目到本地，通过正则匹配的方式识别代码中是否使用了 log4j ，并提取版本，并根据版本号判断是否有漏洞。但后面想了下，这个漏洞检测方式不具备通用性。一是组件判断很麻烦，我们通常说的组件名和配置文件中的组件名根本不是一回事，不是很好对应，二是如果后边再有其他漏洞，还要重新写正则，着实麻烦。\n\u003cstrong\u003e方案二（成功）\u003c/strong\u003e\n在 github 上搜了下开源项目，看看有没有能对项目做组件扫描的工具，找了半天找到了一个叫 Murphyscan 的开源项目，比较满足我的需求。思路是写个脚本，先通过 gitlab 接口获取项目列表，然后 clone 代码到本地，然后通过 Murphyscan 提供的客户端扫描，处理扫描结果获取目标漏洞组件。\u003c/p\u003e\n\u003ch2\u003e脚本流程\u003c/h2\u003e\n\u003cp\u003e为寻求便捷、高效，使用 python3 编写脚本，具体流程如下：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e通过 python-gitlab 包，调用 gitlabapi ，获取项目列表及 clone 链接。\u003c/li\u003e\n\u003cli\u003eclone 代码到本地\u003c/li\u003e\n\u003cli\u003e调用 Murphyscan 客户端，扫描项目\u003c/li\u003e\n\u003cli\u003e处理扫描结果（扫描结果为 json 类型），遍历漏洞，发现目标漏洞打印项目名及项目提交者。\u003c/li\u003e\n\u003cli\u003e删除 clone 代码\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e进一步，增量检测\u003c/h2\u003e\n\u003cp\u003e全量检测搞定，老板交代的任务算是搞完，心情愉悦，但有一个问题，如果哪个程序员手抖，引用组件时候，又引入一个低版本的，那老板岂不是要杀我祭天。怀着忐忑的心情调研了下怎么扫描增量服务。\n经过调研发现，gitlab 有一个叫 webhook 功能。他的功能是，管理员可以指定 push 、merge 等动作触发时，向某个指定接口通知该事件，这样我就可以知道有代码更新或者创建。拿到通知后我就去拉取最新代码，再扫描一次，发现有漏洞后通过机器人提醒我，这样增量检测就搞定了。\u003c/p\u003e\n\u003ch2\u003egitlab 配置\u003c/h2\u003e\n\u003cp\u003e进入 Gitlab 平台，点击顶部 [菜单] - [管理员] 进入管理中心\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://murphysec-doc-1257309290.cos.ap-beijing.myqcloud.com/2022/03/24/16481369251088.jpg\"/\u003e\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e选择系统钩子进入 Webhook 设置页面\u003c/li\u003e\n\u003cli\u003eURL 处填写 python 起的 webapi 接口地址\u003c/li\u003e\n\u003cli\u003e下方触发器中确保 [仓库更新事件] 处于勾选状态\u003c/li\u003e\n\u003cli\u003e去掉 [启用 SSL 验证] 的默认勾选\u003c/li\u003e\n\u003cli\u003e点击 [添加系统钩子] 完成设置\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://murphysec-doc-1257309290.cos.ap-beijing.myqcloud.com/2022/03/24/16481369298127.jpg\"/\u003e\u003c/p\u003e\n\u003ch2\u003ewebapi\u003c/h2\u003e\n\u003cp\u003e通过 fastapi 起了一个 web 服务，其功能主要是接收 gitlab 的 webhook 事件推送，收到事件后，拉取项目代码，并进行扫描，同样扫描结果会通过飞书机器人将有问题的项目检测结果推送给我。\u003c/p\u003e\n\u003ch2\u003e待优化\u003c/h2\u003e\n\u003cp\u003e目前代码还有些问题，主要是目前流程还是单线程的，我们公司项目量和代码更新量比较少的情况下还可以，如果代码更新比较频繁，可能会导致使用 webapi 线程过多，服务崩溃。后续会通过任务队列形式，将 webhook 接口和漏洞检测拆开，通过任务队列管理检测任务。\u003c/p\u003e\n\u003ch2\u003e项目地址\u003c/h2\u003e\n\u003cp\u003e该项目已贡献给 MurphySecurity ，\n项目地址：\u003ca href=\"https://github.com/murphysecurity/murphysec-gitlab-scanner.git\" rel=\"nofollow\"\u003ehttps://github.com/murphysecurity/murphysec-gitlab-scanner.git\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "ssltest",
+      "PubDate": "2022-03-25T01:02:56Z"
+    },
+    {
+      "Title": "手机上微信聊天记录如何恢复 - 问与答",
+      "Link": "https://www.v2ex.com/t/842762",
+      "Description": "我和女朋友的聊天记录总共是 10.5G ，之前女朋友手机上不小心清空聊天记录了，但她电脑里有，我手机上有，请问有没有办法恢复她手机上的聊天记录",
+      "Author": "unt",
+      "PubDate": "2022-03-25T01:00:22Z"
+    },
+    {
+      "Title": "还是忍不住，开源了一个 Java 的 dubbo 网关，在众多网关使用者中寻找知音 - 分享创造",
+      "Link": "https://www.v2ex.com/t/842760",
+      "Description": "\u003ca target=\"_blank\" href=\"https://github.com/jingxiang/dubbo-gateway\" rel=\"nofollow noopener\"\u003ehttps://github.com/jingxiang/dubbo-gateway\u003c/a\u003e",
+      "Author": "kalman03",
+      "PubDate": "2022-03-25T00:47:17Z"
+    },
+    {
+      "Title": "想玩游戏，但是没有网络怎么办？ - 游戏",
+      "Link": "https://www.v2ex.com/t/842759",
+      "Description": "\u003cp\u003e想在下班后在公司附近的悠闲场所玩玩游戏（像 CSGO 之类），但是没有网络怎么办？想过随身 WiFi ，总感觉不稳定，有什么解决方法吗？\u003c/p\u003e\n",
+      "Author": "istevenshen",
+      "PubDate": "2022-03-25T00:43:01Z"
+    },
+    {
+      "Title": "大家是如何整合 rss、微信收藏、浏览器收藏夹等信息资源的，并将信息转换成知识？ - 问与答",
+      "Link": "https://www.v2ex.com/t/842758",
+      "Description": "\u003cp\u003e有没有一些工具可以串联上面的信息\u003c/p\u003e\n",
+      "Author": "kqij",
+      "PubDate": "2022-03-25T00:24:07Z"
+    },
+    {
+      "Title": "如何实现在 kylin 安装的 qemu 上装 Ubuntu 镜像 - Linux",
+      "Link": "https://www.v2ex.com/t/842757",
+      "Description": "\u003cp\u003e我最近在 risc-v 和 qemu 上想实现安装 Ubuntu 镜像来安装软件实现开发，但是在安装中遇到镜像安装不上的问题，请问大佬们有没有指导意见。（没有具体的报错，就是装了之后没反应，还是那种 linux （ none ）的状态）\u003c/p\u003e\n",
+      "Author": "imp258",
+      "PubDate": "2022-03-25T00:09:25Z"
+    },
+    {
       "Title": "播客分别在 iPad iPhone MacBook 上 都没办法特别好的及时更新和同步 - Apple",
       "Link": "https://www.v2ex.com/t/842756",
       "Description": "我在 ipad 上听的 ，我用 macbook 打开博客 却不会显示自己之前听过的博客，得要去 iphone 或者 ipad 上面找，大家怎么解决的？",
