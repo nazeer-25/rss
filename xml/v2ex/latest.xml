@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>C++如何写 Setup 程序？ - 问与答</title>
+      <link>https://www.v2ex.com/t/842922</link>
+      <description>&lt;p&gt;一般用什么语言写 Setup 程序？如果用 C++，要用哪些 API ？&lt;/p&gt;&#xA;</description>
+      <author>Ace2003</author>
+      <pubDate>25 Mar 2022 11:38:21 +0000</pubDate>
+    </item>
+    <item>
       <title>Python 发现个奇怪知识,类属性不被实例化修改,即可被外部修改 - Python</title>
       <link>https://www.v2ex.com/t/842921</link>
       <description>&lt;p&gt;今天使用 selenium 使用拖拽效果,发现异常的慢.网上一顿搜索,发现解决办法是修改源码控制间隔的属性值..&lt;/p&gt;&#xA;&lt;p&gt;这样太不友好了.直接全局改了.后来想看能不能外部写一个继承方法来做,看了源码后,还是放弃,水平有限.于是想的通过外部修改.&lt;/p&gt;&#xA;&lt;p&gt;于是做了一下实验.&lt;/p&gt;&#xA;&lt;p&gt;代码如下. 备注有返回值&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class AAA():&#xA;    DEP = 0&#xA;&#xA;    def get(self):&#xA;        return self.DEP&#xA;&#xA;&#xA;print(AAA.DEP)  # 0&#xA;&#xA;AAA.DEP = 5  # 修改默认属性&#xA;&#xA;ex_1 = AAA()  # 实例化 ex_1&#xA;print(ex_1.get())  # 5&#xA;&#xA;AAA.DEP = 10  # 再次修改默认属性&#xA;print(ex_1.get())  # 10&#xA;&#xA;ex_1.DEP = 15  # ex_1 修改实例属性&#xA;print(ex_1.get())  # 15&#xA;&#xA;AAA.DEP = 12  # 再次修改默认属性&#xA;print(ex_1.get())  # 15  被上次实例化修改属性后,类属性不再被修改,即返回 15&#xA;&#xA;&#xA;ex_2 = AAA()  # 实例化 ex_2&#xA;print(ex_2.get())  # 12  上段 ex_2 实例化之前前修改的值&#xA;&#xA;AAA.DEP = 20  # 修改原始属性&#xA;print(ex_2.get())  # 20&#xA;&#xA;ex_2.DEP = 30&#xA;print(ex_2.get())&#xA;&#xA;# 总结,类实例化后若原始属性不被修改 ,均可被外动态修改&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h1&gt;总结,类实例化后若原始属性不被修改 ,均可被外动态修改&lt;/h1&gt;&#xA;&lt;p&gt;后来再次实验,如果被 &lt;strong&gt;init&lt;/strong&gt; 初始化,值也不能被修改了&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class AAA():&#xA;    DEP = 0&#xA;    def __init__(self):&#xA;        self.DEP=10   # 被 init 初始化后,不能被修改了&#xA;    &#xA;    def get(self):&#xA;        return self.DEP&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;感觉奇奇怪怪的知识增加了..&lt;/p&gt;&#xA;&lt;p&gt;这么说,再次使用 selenium 不用使用 time.sleep 来控制了吧.&#xA;还没试,先分享下新发现.&lt;/p&gt;&#xA;</description>

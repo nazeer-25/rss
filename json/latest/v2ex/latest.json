@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "C++如何写 Setup 程序？ - 问与答",
+      "Link": "https://www.v2ex.com/t/842922",
+      "Description": "\u003cp\u003e一般用什么语言写 Setup 程序？如果用 C++，要用哪些 API ？\u003c/p\u003e\n",
+      "Author": "Ace2003",
+      "PubDate": "2022-03-25T11:38:21Z"
+    },
+    {
       "Title": "Python 发现个奇怪知识,类属性不被实例化修改,即可被外部修改 - Python",
       "Link": "https://www.v2ex.com/t/842921",
       "Description": "\u003cp\u003e今天使用 selenium 使用拖拽效果,发现异常的慢.网上一顿搜索,发现解决办法是修改源码控制间隔的属性值..\u003c/p\u003e\n\u003cp\u003e这样太不友好了.直接全局改了.后来想看能不能外部写一个继承方法来做,看了源码后,还是放弃,水平有限.于是想的通过外部修改.\u003c/p\u003e\n\u003cp\u003e于是做了一下实验.\u003c/p\u003e\n\u003cp\u003e代码如下. 备注有返回值\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eclass AAA():\n    DEP = 0\n\n    def get(self):\n        return self.DEP\n\n\nprint(AAA.DEP)  # 0\n\nAAA.DEP = 5  # 修改默认属性\n\nex_1 = AAA()  # 实例化 ex_1\nprint(ex_1.get())  # 5\n\nAAA.DEP = 10  # 再次修改默认属性\nprint(ex_1.get())  # 10\n\nex_1.DEP = 15  # ex_1 修改实例属性\nprint(ex_1.get())  # 15\n\nAAA.DEP = 12  # 再次修改默认属性\nprint(ex_1.get())  # 15  被上次实例化修改属性后,类属性不再被修改,即返回 15\n\n\nex_2 = AAA()  # 实例化 ex_2\nprint(ex_2.get())  # 12  上段 ex_2 实例化之前前修改的值\n\nAAA.DEP = 20  # 修改原始属性\nprint(ex_2.get())  # 20\n\nex_2.DEP = 30\nprint(ex_2.get())\n\n# 总结,类实例化后若原始属性不被修改 ,均可被外动态修改\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch1\u003e总结,类实例化后若原始属性不被修改 ,均可被外动态修改\u003c/h1\u003e\n\u003cp\u003e后来再次实验,如果被 \u003cstrong\u003einit\u003c/strong\u003e 初始化,值也不能被修改了\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eclass AAA():\n    DEP = 0\n    def __init__(self):\n        self.DEP=10   # 被 init 初始化后,不能被修改了\n    \n    def get(self):\n        return self.DEP\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e感觉奇奇怪怪的知识增加了..\u003c/p\u003e\n\u003cp\u003e这么说,再次使用 selenium 不用使用 time.sleep 来控制了吧.\n还没试,先分享下新发现.\u003c/p\u003e\n",
