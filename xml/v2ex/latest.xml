@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>MacBook Pro 2015 外界显示器随机黑屏求助 - MacBook Pro</title>
+      <link>https://www.v2ex.com/t/842856</link>
+      <description>设备 MacBook Pro 2015&lt;br /&gt;显示器优派 VX2478-4K-HD&lt;br /&gt;macOS 12.3 及之前都有这个问题&lt;br /&gt;绿联 Mini DP 转 DP 转接线&lt;br /&gt;有时候动一下电脑的位置或者转动一下显示器或者动一下转接线，显示器会黑一下屏又重新点亮，或者直接丢失信号，需要重启一下显示器。&lt;br /&gt;初步判断是转接线的问题。&lt;br /&gt;求助</description>
+      <author>Chadit</author>
+      <pubDate>25 Mar 2022 06:43:27 +0000</pubDate>
+    </item>
+    <item>
       <title>同样是 MySQL 8，这个我问题我硬是没搞明白会这样，希望大家帮我分析一下 - MySQL</title>
       <link>https://www.v2ex.com/t/842853</link>
       <description>&lt;p&gt;有一个表&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;CREATE TABLE `trade_account_total_daily_record`&#xA;(&#xA;    `date`         date           NOT NULL COMMENT &#39;日期&#39;,&#xA;    `account_type` int            NOT NULL COMMENT &#39;账户类型&#39;,&#xA;    `balance`      decimal(20, 2) NOT NULL DEFAULT 0.00 COMMENT &#39;账户余额&#39;,&#xA;    `created_at`   datetime       NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;创建时间&#39;,&#xA;    `updated_at`   datetime       NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT &#39;更新时间&#39;,&#xA;    PRIMARY KEY (`date`, `account_type`)&#xA;) ;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我执行&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;SELECT DATE_FORMAT(CURRENT_TIMESTAMP, &#39;%Y-%m-%d&#39;), 1, IFNULL(SUM(balance),0) + 10&#xA;FROM trade_account_total_daily_record WHERE account_type = 1 ORDER BY date DESC LIMIT 1 &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;能正确给出结果, 但是执行&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;INSERT INTO trade_account_total_daily_record (`date`, `account_type`, `balance`)&#xA;SELECT DATE_FORMAT(CURRENT_TIMESTAMP, &#39;%Y-%m-%d&#39;), 1, IFNULL(SUM(balance),0) + 10&#xA;FROM trade_account_total_daily_record WHERE account_type = 4 ORDER BY date DESC LIMIT 1&#xA;ON DUPLICATE KEY UPDATE `balance`=VALUES(`balance`) &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;就报 Column &#39;date&#39; cannot be null ，奇怪的是阿里云 RDS 数据库(mysql-8.0.25)会这样，我本地的 8.0.28 没问题&lt;/p&gt;&#xA;</description>
