@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>最近工作有点无聊 - 问与答</title>
+      <link>https://www.v2ex.com/t/842822</link>
+      <description>&lt;p&gt;有什么有趣的东西吗？&#xA;新技术？&#xA;新玩具？&lt;/p&gt;&#xA;</description>
+      <author>bigdoing</author>
+      <pubDate>25 Mar 2022 04:09:10 +0000</pubDate>
+    </item>
+    <item>
+      <title>无 Recovery 安装 magisk（root） - Android</title>
+      <link>https://www.v2ex.com/t/842820</link>
+      <description>&lt;p&gt;前情提要：&lt;/p&gt;&#xA;&lt;p&gt;我用的小米 civi ，有且只有国际版的包但是没 root ，再加上没有第三方 rec ，于是找了一下怎么刷入 magisk 。我是今天才知道还可以这么用…估计还有不知道的同学，分享一下。因为是写在博客上的（技术太烂就不放博客混 pv 了……），所以有的地方说的比较无基础一些，有开发基础的大家将就着看。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;以下操作需要用到部分文件的下载以及提前解除 bl 锁，部分链接不识别的话请手动复制奥&lt;/strong&gt;，所需打包下载地址：&lt;em&gt;wwp.lanzout. [删 除]  com/iANCn020tokb&lt;/em&gt;，咕咕噜链接： &lt;a href=&#34;https://drive.google.com/file/d/1B-TTi8xu_BBvEEGIeuSCViJ3IhdzIBin/view?usp=sharing&#34; rel=&#34;nofollow&#34;&gt;https://drive.google.com/file/d/1B-TTi8xu_BBvEEGIeuSCViJ3IhdzIBin/view?usp=sharing&lt;/a&gt;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;上步骤：&lt;/p&gt;&#xA;&lt;h2&gt;[一、确定你的刷机包]&lt;/h2&gt;&#xA;&lt;h3&gt;1. 如果你是线刷包&lt;/h3&gt;&#xA;&lt;p&gt;找到你的 boot.img 文件，复制到手机内&lt;/p&gt;&#xA;&lt;h3&gt;2. 如果你是卡刷包&lt;/h3&gt;&#xA;&lt;p&gt;首先解压你的卡刷包，然后下载 &lt;em&gt;wwp.lanzout. [删 除]  com/iEAvI020to7i&lt;/em&gt; &lt;/p&gt;&#xA;&lt;p&gt;解压，将上面解压后卡刷包内的 payload.bin 复制到 payload_dumper 文件夹内的 payload_input 文件夹内，后打开 payload_dumper-win64 ，等待输出完成到 payload_output 中。&lt;/p&gt;&#xA;&lt;h2&gt;[二、更改 boot.img]&lt;/h2&gt;&#xA;&lt;p&gt;通过上面的 1 或 2 你会得到 boot.img 文件，将文件复制到手机内你找得到的地方。然后安装 magisk apk ，下载地址：&lt;em&gt;github. [删 除]  com/topjohnwu/Magisk/releases/tag/v24.3&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;如果比较慢，你可以点击这个链接：&lt;em&gt;wwp.lanzout. [删 除]  com/irkwW020to5g&lt;/em&gt; 密码:aqsc&lt;/p&gt;&#xA;&lt;p&gt;安装 Magisk 之后打开，在第一张卡片（ Magisk ）右边，依次点击安装-安装-选择并修补一个文件，选择复制到手机内的 boot.img&lt;/p&gt;&#xA;&lt;p&gt;然后手机会启动控制台，并且会为你展示输出地址，一般输出地址在你的手机目录的 Download 文件夹下，文件名为&lt;code&gt;magisk_patched-24300_*****.img&lt;/code&gt;，复制这个文件到电脑。&lt;/p&gt;&#xA;&lt;h2&gt;[三、刷入更改后的 boot.img]&lt;/h2&gt;&#xA;&lt;p&gt;首先下载 adb ，如果有请跳过，没有可以点击：&lt;em&gt;wwp.lanzout. [删 除]  com/i61AZ020tnza&lt;/em&gt; 进行下载。下载后解压到你能找到的位置。&lt;/p&gt;&#xA;&lt;p&gt;打开 powershell ，如果找不到在哪里，可以按&lt;code&gt;Windows+R&lt;/code&gt;，然后输入 powershell ，回车即可。&lt;/p&gt;&#xA;&lt;p&gt;手机重启，按住音量减，按开机，进入 fastboot ，链接电脑。&lt;/p&gt;&#xA;&lt;p&gt;然后 cd 到你的&lt;code&gt;adb&lt;/code&gt;文件夹内，首先输入&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;fastboot devices&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;查看是否有设备链接成功。然后输入&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;./fastboot flash boot 路径 /路径 /magisk_patched-24300_*****.img &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;点击回车，大功告成，完成后手动重启即可！&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;注意！注意！注意！最后一行命令内的 &lt;code&gt;路径 /路径 /magisk_patched-24300_*****.img&lt;/code&gt;需要输入你的实际地址！如果你不会，可以输入完其他命令之后，把更改后的 boot.img 文件拖入到 powershell 窗口内即可！&lt;/strong&gt;&lt;/p&gt;&#xA;</description>
+      <author>Mateverse</author>
+      <pubDate>25 Mar 2022 04:08:03 +0000</pubDate>
+    </item>
+    <item>
       <title>大量查询数据任务，通过 kafka 缓冲后入库，如何解决大任务阻塞小任务的情况。 - 程序员</title>
       <link>https://www.v2ex.com/t/842819</link>
       <description>RT&lt;br /&gt;&lt;br /&gt;每个任务的流程为：查询服务（ N 个实例）-&amp;gt;kafka 集群（ 2 个 topic ）-&amp;gt;入库服务（ N 个实例）-&amp;gt;数据库&lt;br /&gt;&lt;br /&gt;目前情况：&lt;br /&gt;1. 查询服务从不同来源获取数据，任务数量比较多，1 天任务量可以到 10w 级别&lt;br /&gt;2. 任务查询的数据量差异比较大，有 1 亿条的，少的也就几十条，查询结束前无法提前知道数据量。&lt;br /&gt;3. 单个任务的查询是分批进行的，比如每查 1w 条提交一次给 kafka 的 2 个 topic （少于 1w 条写 topic1,等于 1w 条写 topic2 ）。&lt;br /&gt;4. 入库服务消费 2 个 topic ，写入结果库。&lt;br /&gt;&lt;br /&gt;遇到的问题：&lt;br /&gt;1. 当有大任务写了大量数据到 kafka 后，一些中小型任务被阻塞，需等大任务入库完成才能入库。&lt;br /&gt;&lt;br /&gt;想请教各位大神这类场景有什么策略解决大任务阻塞小任务入库的问题，或者有没其他 mq 替换 kafka ，支持创建大量 topic ，每个任务对应一个 topic ，且不影响 mq 性能。</description>
