@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>websocket 经常出现连不上的情况，但是同一个组件中的 http 请求是正常的 - 问与答</title>
+      <link>https://www.v2ex.com/t/842904</link>
+      <description>在 web 服务中用 gorilla/websocket 包来创建了一个 websocket 服务，这个 websocket 服务在本地测试的时候啥问题都没有，但是部署到服务器上之后就时常会出现无法连接的情况，通过日志跟 wireshock 抓包发现这些无法连接的包基本上都是处在第一次握手的阶段&lt;br /&gt;&lt;br /&gt;但是这个 web 服务中的普通 HTTP 请求都是正常的，不会出现这样的情况。不知道有没有遇到这种情况的</description>
+      <author>bandian</author>
+      <pubDate>25 Mar 2022 10:11:19 +0000</pubDate>
+    </item>
+    <item>
       <title>方法不执行，没有任何报错信息，请教思路 - Java</title>
       <link>https://www.v2ex.com/t/842903</link>
       <description>&lt;p&gt;大家好。我遇到个棘手的问题，无从下手。&#xA;我的给微信用户发送模板消息的方法不执行，日志没有报错信息，微信公众号管理页面后台也没找到任何报错信息。&#xA;重启项目后问题消失，但过一段时间问题复现，大概有个 6 天不重启能出现一次，目前发现是在系统繁忙后会偶尔出现此问题。&#xA;初步判断是：&#xA;未成功调用发送消息的 sendTemplateMsg()方法,此方法由 @&lt;a href=&#34;/member/Async&#34;&gt;Async&lt;/a&gt; 标识，是异步方法，@Async 是用默认线程池配置，初步判断是线程池任务队列参数过大，导致任务积压无法完成。&#xA;尝试了自定义线程池，配置如下：&lt;/p&gt;&#xA;&lt;p&gt;ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();&#xA;taskExecutor.setCorePoolSize(8);&#xA;taskExecutor.setMaxPoolSize(25);&#xA;taskExecutor.setQueueCapacity(1000);//之前这里是 Inteter.max_value 。会不会是 1000 还是太大了？&#xA;taskExecutor.setThreadNamePrefix(&#34;msg-thread-&#34;);&#xA;taskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());&#xA;taskExecutor.initialize();&lt;/p&gt;&#xA;&lt;p&gt;用户依旧收不到消息，且不报错。&#xA;线程信息大部分情况如下：&lt;/p&gt;&#xA;&lt;p&gt;Status&#x9;Number of Threads : 384&#x9;Percentage&#xA;Deadlock&#x9;0&#x9;0 (%)&#xA;Runnable&#x9;16&#x9;4 (%)&#xA;Waiting on condition&#x9;354&#x9;92 (%)&#xA;Waiting on monitor&#x9;0&#x9;0 (%)&#xA;Suspended&#x9;0&#x9;0 (%)&#xA;Object.wait()&#x9;14&#x9;4 (%)&#xA;Blocked&#x9;0&#x9;0 (%)&#xA;Parked&#x9;0&#x9;0 (%)&lt;/p&gt;&#xA;&lt;p&gt;出现问题时的线程信息忘记导出了（当时只想快点解决生产问题而急忙重启）。&lt;/p&gt;&#xA;&lt;p&gt;请教大家该如何排查？&lt;/p&gt;&#xA;</description>
