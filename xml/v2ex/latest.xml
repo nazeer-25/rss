@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Python 发现个奇怪知识,类属性不被实例化修改,即可被外部修改 - Python</title>
+      <link>https://www.v2ex.com/t/842921</link>
+      <description>&lt;p&gt;今天使用 selenium 使用拖拽效果,发现异常的慢.网上一顿搜索,发现解决办法是修改源码控制间隔的属性值..&lt;/p&gt;&#xA;&lt;p&gt;这样太不友好了.直接全局改了.后来想看能不能外部写一个继承方法来做,看了源码后,还是放弃,水平有限.于是想的通过外部修改.&lt;/p&gt;&#xA;&lt;p&gt;于是做了一下实验.&lt;/p&gt;&#xA;&lt;p&gt;代码如下. 备注有返回值&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class AAA():&#xA;    DEP = 0&#xA;&#xA;    def get(self):&#xA;        return self.DEP&#xA;&#xA;&#xA;print(AAA.DEP)  # 0&#xA;&#xA;AAA.DEP = 5  # 修改默认属性&#xA;&#xA;ex_1 = AAA()  # 实例化 ex_1&#xA;print(ex_1.get())  # 5&#xA;&#xA;AAA.DEP = 10  # 再次修改默认属性&#xA;print(ex_1.get())  # 10&#xA;&#xA;ex_1.DEP = 15  # ex_1 修改实例属性&#xA;print(ex_1.get())  # 15&#xA;&#xA;AAA.DEP = 12  # 再次修改默认属性&#xA;print(ex_1.get())  # 15  被上次实例化修改属性后,类属性不再被修改,即返回 15&#xA;&#xA;&#xA;ex_2 = AAA()  # 实例化 ex_2&#xA;print(ex_2.get())  # 12  上段 ex_2 实例化之前前修改的值&#xA;&#xA;AAA.DEP = 20  # 修改原始属性&#xA;print(ex_2.get())  # 20&#xA;&#xA;ex_2.DEP = 30&#xA;print(ex_2.get())&#xA;&#xA;# 总结,类实例化后若原始属性不被修改 ,均可被外动态修改&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h1&gt;总结,类实例化后若原始属性不被修改 ,均可被外动态修改&lt;/h1&gt;&#xA;&lt;p&gt;后来再次实验,如果被 &lt;strong&gt;init&lt;/strong&gt; 初始化,值也不能被修改了&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class AAA():&#xA;    DEP = 0&#xA;    def __init__(self):&#xA;        self.DEP=10   # 被 init 初始化后,不能被修改了&#xA;    &#xA;    def get(self):&#xA;        return self.DEP&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;感觉奇奇怪怪的知识增加了..&lt;/p&gt;&#xA;&lt;p&gt;这么说,再次使用 selenium 不用使用 time.sleep 来控制了吧.&#xA;还没试,先分享下新发现.&lt;/p&gt;&#xA;</description>
+      <author>llsquaer</author>
+      <pubDate>25 Mar 2022 11:33:37 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有朋友碰到过 亿图图示 周期性无响应？ - 软件</title>
+      <link>https://www.v2ex.com/t/842920</link>
+      <description>&lt;p&gt;半个月 左右一次，亿图图示打不开，白屏，无响应。昨天晚上用的还好好的&lt;/p&gt;&#xA;</description>
+      <author>panyuz</author>
+      <pubDate>25 Mar 2022 11:33:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>MatrixOne 首次函数挑战任务启动 - 数据库</title>
+      <link>https://www.v2ex.com/t/842919</link>
+      <description>MatrixOne 首次函数挑战任务开启啦！&lt;br /&gt;&lt;br /&gt;本次专门为数据库技术及开源技术开发爱好者打造了多维度的函数任务挑战，近距离了解 MatrixOne 产品，零成本参加开源项目，更加有技术大牛手把手指导。&lt;br /&gt;&lt;br /&gt;本次活动准备了不同难度的函数任务挑战，同时也发布了小小布道师的召集任务，希望通过本次活动，各位能够更好地了解开源项目的运营机制，以及成为 MatrixOne 社区的贡献者，一同共建这个社区。&lt;br /&gt;&lt;br /&gt;以下是本次任务的攻略直通车，方便快速开启本次函数探索之旅！&lt;br /&gt;任务通关秘籍： &lt;a target=&#34;_blank&#34; href=&#34;https://github.com/matrixorigin/matrixone/blob/main/docs/cn/MatrixOne/MatrixCampEvent.md&#34; rel=&#34;nofollow noopener&#34;&gt;https://github.com/matrixorigin/matrixone/blob/main/docs/cn/MatrixOne/MatrixCampEvent.md&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;MatrixOne 贡献指南： &lt;a target=&#34;_blank&#34; href=&#34;https://docs.matrixorigin.io/0.3.0/MatrixOne/Contribution-Guide/make-your-first-contribution/&#34; rel=&#34;nofollow noopener&#34;&gt;https://docs.matrixorigin.io/0.3.0/MatrixOne/Contribution-Guide/make-your-first-contribution/&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Github 任务直通车： &lt;a target=&#34;_blank&#34; href=&#34;https://github.com/matrixorigin/matrixone/issues/1997&#34; rel=&#34;nofollow noopener&#34;&gt;https://github.com/matrixorigin/matrixone/issues/1997&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;欢迎大家踊跃加入，多提意见！我们为社区的同学们准备了任务通关的精美礼品和更丰富的内容！&lt;br /&gt;也希望大家帮忙转发下方文章，让更多志同道合的小伙伴能够加入进来！&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://mp.weixin.qq.com/s/IVgvl875p8FFIgdn56Gvvw&#34; rel=&#34;nofollow noopener&#34;&gt;https://mp.weixin.qq.com/s/IVgvl875p8FFIgdn56Gvvw&lt;/a&gt;</description>
+      <author>dengn</author>
+      <pubDate>25 Mar 2022 11:29:14 +0000</pubDate>
+    </item>
+    <item>
       <title>CtyptoIng - 加密界的价值投资 - 分享创造</title>
       <link>https://www.v2ex.com/t/842917</link>
       <description>&lt;p&gt;地址： &lt;a href=&#34;http://ctyptoing.com&#34; rel=&#34;nofollow&#34;&gt;http://ctyptoing.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;近期更换了模版，打算打造一个币圈的价值投资网&#xA;主要从两点入手：&#xA;1 、空投推送&#xA;只要空投的好也是一笔不菲的收入&#xA;2 、定投策略&#xA;投机赚来的钱总有一天也会亏掉，只要管不住手[doge]，所以需要策略定投&lt;/p&gt;&#xA;&lt;p&gt;不知道有没有市场！大家有没有什么建议及需求！&lt;/p&gt;&#xA;</description>
