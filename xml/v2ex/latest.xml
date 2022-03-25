@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Etcd 的 watch chan 被 close，不知道应该如何复现 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/842900</link>
+      <description>&lt;p&gt;看了下 watch 的说明，在指定 watch 的 revision 被 compact 时或者 context 取消或到期，watch chan 会被 close 。&#xA;以下是我遇到的一个疑似被 close 的场景，已知问题是（服务存在大量与 etcd 的短连接）。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;for {&#xA;     ach := etcdClientV3.Watch(context.Background(), &#34;/test&#34;, clientv3.WithPrefix())&#xA;     for {&#xA;          select {&#xA;             case wch := &amp;lt;- ach {&#xA;                   fmt.Println(&#34;recv chan&#34;)    &#xA;             }&#xA;          }&#xA;     }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;尝试过往 etcdput 大量数据，再程序运行过程再 compact. 未能成功复现。&lt;/p&gt;&#xA;</description>
+      <author>kalista</author>
+      <pubDate>25 Mar 2022 09:39:37 +0000</pubDate>
+    </item>
+    <item>
       <title>CODING 公开课火热报名中！ - Coding</title>
       <link>https://www.v2ex.com/t/842899</link>
       <description>&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://help-assets.codehub.cn/enterprise/202203251728272.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
