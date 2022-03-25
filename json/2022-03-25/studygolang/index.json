@@ -67,6 +67,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "全职+远程  高级Golang， 薪资为税后20-40k",
+      "Link": "https://studygolang.com/topics/15305#reply4",
+      "Description": "\u003cp\u003e请联系扣扣    14 72 51 24 40 （去掉中间空格）\u003c/p\u003e\n\n\u003cp\u003e** 职责： **\n1. 负责高可用高并发的服务端的开发。\n2. 负责bug的修复。\n3. 配合测试工程师完成测试。\u003c/p\u003e\n\n\u003cp\u003e** 要求： **\n1. 3年以上go开发经验，具有较扎实的计算机和网络基础知识。\n2. 精通go语言，对gin，gorm框架有深刻的理解以及实践。\n3. 熟悉关系数据库，有扎实系统设计能力。\n4. 对软件产品有强烈的责任心，具备良好的沟通能力和优秀的团队协作能力。\n5. 熟悉git版本管理，团队协作开发。\n6. 有微服务经验者优先。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "如何高效快速的读取超大文件",
+      "Link": "https://studygolang.com/topics/15297#reply10",
+      "Description": "\u003cp\u003e最近需要分析网络流量通过网关的网络连接数，读取系统文件/proc/net/nf_conntrack, 提取protocol, src, dst, dport，然后统计这些数据的条数，打印出最高的20条，大概的代码如下:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Entity struct{\n    Protocol string\n    Src   string\n    Dst string\n    Dport  string\n}\n\nmapIPinfo := make(map[Entity]int)\n\nf, err := os.Open(filename)\nreader, err := bufio.NewReader(f)\nfor(reader.Scan()){\n      var entity Entity\n      line := reader.Text()\n      ... //这里对line提取protocol, src, dst, dport放到entity\n      mapIPinfo[entity]++\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e将protocol, src, dst, dport 放到到一个结构体里， 然后将结构体放到一个map中以进行统计和去重。\n这样运行后总共要花的时间超过15分钟， 太慢了。\u003c/p\u003e\n\n\u003cp\u003e然后我将读取每行改成读取多行，然后放到一个sync.Pool中，使用一个goroutine去提取， 同样也要花8分钟， 也太慢了。  感觉最后对map排序花的时间比较多。\u003c/p\u003e\n\n\u003cp\u003e请问大家有没有更好的方法和建议， 谢谢。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "📖 Go相关公众号文章每日推荐【2022-03-24】",
       "Link": "https://studygolang.com/topics/15306#reply0",
       "Description": "\u003cp\u003e一、Go语言中文网\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/0-updq-YURiBzC7FxZj5pw\"\u003eGo 中类型转换的那些事\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e二、Golang来啦\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/jzbe-C9WT-i-Vxd20C3s6g\"\u003eGo 语言基础 - if-else\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/w0fqSsMVho2ixEMIc4jlpw\"\u003egolang map 变量保存的是实际值所在的地址吗\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e三、新亮笔记\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/j8i08bhW_2W-7M_AKttGCw\"\u003e架构笔记汇总\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e四、飞雪无情\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/cwq3suCkJ9mxNtbp80PfiA\"\u003eGo 团队在 GopherCon 2021 上的演讲：Go 1.18 泛型简介\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e五、polarisxu\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/e2XbnO9lmUlqq1HTAsTHzQ\"\u003e思考：成为优秀Go工程师的三条路径\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e六、小白debug\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/1EufAhidCEH3bOz5dXcCwA\"\u003e写了 30 多个 Go 常用文件操作的示例，收藏这一篇就够了\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e七、轩脉刃的刀光剑影\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/KOzp9NoXVMu68OAH95kwkw\"\u003eRedis的事件处理机制\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e八、好未来技术\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/6j4YH9OtOVfSb3KLAb4x2w\"\u003e容器化后资源与成本优化实践\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e九、Go招聘\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/RP65tQRg35EcipdDxDrmDA\"\u003eGo语言 JSON 与 Cache 库 调研与选型\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
@@ -88,23 +102,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "如何高效快速的读取超大文件",
-      "Link": "https://studygolang.com/topics/15297#reply10",
-      "Description": "\u003cp\u003e最近需要分析网络流量通过网关的网络连接数，读取系统文件/proc/net/nf_conntrack, 提取protocol, src, dst, dport，然后统计这些数据的条数，打印出最高的20条，大概的代码如下:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Entity struct{\n    Protocol string\n    Src   string\n    Dst string\n    Dport  string\n}\n\nmapIPinfo := make(map[Entity]int)\n\nf, err := os.Open(filename)\nreader, err := bufio.NewReader(f)\nfor(reader.Scan()){\n      var entity Entity\n      line := reader.Text()\n      ... //这里对line提取protocol, src, dst, dport放到entity\n      mapIPinfo[entity]++\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e将protocol, src, dst, dport 放到到一个结构体里， 然后将结构体放到一个map中以进行统计和去重。\n这样运行后总共要花的时间超过15分钟， 太慢了。\u003c/p\u003e\n\n\u003cp\u003e然后我将读取每行改成读取多行，然后放到一个sync.Pool中，使用一个goroutine去提取， 同样也要花8分钟， 也太慢了。  感觉最后对map排序花的时间比较多。\u003c/p\u003e\n\n\u003cp\u003e请问大家有没有更好的方法和建议， 谢谢。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "一个指针经过循环后，指针值异常了，不懂求解惑",
       "Link": "https://studygolang.com/topics/15301#reply3",
       "Description": "\u003cp\u003e\u0026rdquo;`\nfunc main() {\n\tb := 23\n    var s *int\n\ts=\u0026amp;b\n\tfmt.Println(\u0026ldquo;init:\u0026rdquo;,*s)\n\tfmt.Println(\u0026ldquo;init adder:\u0026rdquo;,s)\n\tfor i :=0;i\u003c10;i++{\n\t\ts=\u0026amp;i\n\t\t//fmt.Println(\u0026ldquo;i:\u0026rdquo;,i)\n\t\tfmt.Printf(\u0026ldquo;%d-%v\\n\u0026rdquo;,i,\u0026amp;i)\n\t\tfmt.Println(\u0026ldquo;for-s:\u0026rdquo;,*s)\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e}\nfmt.Println(\u0026quot;s:\u0026quot;,*s)\nfmt.Println(\u0026quot;s adder:\u0026quot;,s)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u0026ldquo;`\n\u003cimg src=\"https://static.studygolang.com/220324/d76b0c45284148cb3db0a9f7b78d430a.png\" alt=\"image.png\" /\u003e\n为什么最后等于10了。。！！求大佬解惑\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "全职+远程  高级Golang， 薪资为税后20-40k",
-      "Link": "https://studygolang.com/topics/15305#reply4",
-      "Description": "\u003cp\u003e请联系扣扣    14 72 51 24 40 （去掉中间空格）\u003c/p\u003e\n\n\u003cp\u003e** 职责： **\n1. 负责高可用高并发的服务端的开发。\n2. 负责bug的修复。\n3. 配合测试工程师完成测试。\u003c/p\u003e\n\n\u003cp\u003e** 要求： **\n1. 3年以上go开发经验，具有较扎实的计算机和网络基础知识。\n2. 精通go语言，对gin，gorm框架有深刻的理解以及实践。\n3. 熟悉关系数据库，有扎实系统设计能力。\n4. 对软件产品有强烈的责任心，具备良好的沟通能力和优秀的团队协作能力。\n5. 熟悉git版本管理，团队协作开发。\n6. 有微服务经验者优先。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
