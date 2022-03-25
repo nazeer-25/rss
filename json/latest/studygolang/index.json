@@ -67,9 +67,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "如何高效快速的读取超大文件",
-      "Link": "https://studygolang.com/topics/15297#reply10",
-      "Description": "\u003cp\u003e最近需要分析网络流量通过网关的网络连接数，读取系统文件/proc/net/nf_conntrack, 提取protocol, src, dst, dport，然后统计这些数据的条数，打印出最高的20条，大概的代码如下:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Entity struct{\n    Protocol string\n    Src   string\n    Dst string\n    Dport  string\n}\n\nmapIPinfo := make(map[Entity]int)\n\nf, err := os.Open(filename)\nreader, err := bufio.NewReader(f)\nfor(reader.Scan()){\n      var entity Entity\n      line := reader.Text()\n      ... //这里对line提取protocol, src, dst, dport放到entity\n      mapIPinfo[entity]++\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e将protocol, src, dst, dport 放到到一个结构体里， 然后将结构体放到一个map中以进行统计和去重。\n这样运行后总共要花的时间超过15分钟， 太慢了。\u003c/p\u003e\n\n\u003cp\u003e然后我将读取每行改成读取多行，然后放到一个sync.Pool中，使用一个goroutine去提取， 同样也要花8分钟， 也太慢了。  感觉最后对map排序花的时间比较多。\u003c/p\u003e\n\n\u003cp\u003e请问大家有没有更好的方法和建议， 谢谢。\u003c/p\u003e\n",
+      "Title": "一个指针经过循环后，指针值异常了，不懂求解惑",
+      "Link": "https://studygolang.com/topics/15301#reply3",
+      "Description": "\u003cp\u003e\u0026rdquo;`\nfunc main() {\n\tb := 23\n    var s *int\n\ts=\u0026amp;b\n\tfmt.Println(\u0026ldquo;init:\u0026rdquo;,*s)\n\tfmt.Println(\u0026ldquo;init adder:\u0026rdquo;,s)\n\tfor i :=0;i\u003c10;i++{\n\t\ts=\u0026amp;i\n\t\t//fmt.Println(\u0026ldquo;i:\u0026rdquo;,i)\n\t\tfmt.Printf(\u0026ldquo;%d-%v\\n\u0026rdquo;,i,\u0026amp;i)\n\t\tfmt.Println(\u0026ldquo;for-s:\u0026rdquo;,*s)\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e}\nfmt.Println(\u0026quot;s:\u0026quot;,*s)\nfmt.Println(\u0026quot;s adder:\u0026quot;,s)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u0026ldquo;`\n\u003cimg src=\"https://static.studygolang.com/220324/d76b0c45284148cb3db0a9f7b78d430a.png\" alt=\"image.png\" /\u003e\n为什么最后等于10了。。！！求大佬解惑\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -95,6 +95,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "如何高效快速的读取超大文件",
+      "Link": "https://studygolang.com/topics/15297#reply10",
+      "Description": "\u003cp\u003e最近需要分析网络流量通过网关的网络连接数，读取系统文件/proc/net/nf_conntrack, 提取protocol, src, dst, dport，然后统计这些数据的条数，打印出最高的20条，大概的代码如下:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Entity struct{\n    Protocol string\n    Src   string\n    Dst string\n    Dport  string\n}\n\nmapIPinfo := make(map[Entity]int)\n\nf, err := os.Open(filename)\nreader, err := bufio.NewReader(f)\nfor(reader.Scan()){\n      var entity Entity\n      line := reader.Text()\n      ... //这里对line提取protocol, src, dst, dport放到entity\n      mapIPinfo[entity]++\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e将protocol, src, dst, dport 放到到一个结构体里， 然后将结构体放到一个map中以进行统计和去重。\n这样运行后总共要花的时间超过15分钟， 太慢了。\u003c/p\u003e\n\n\u003cp\u003e然后我将读取每行改成读取多行，然后放到一个sync.Pool中，使用一个goroutine去提取， 同样也要花8分钟， 也太慢了。  感觉最后对map排序花的时间比较多。\u003c/p\u003e\n\n\u003cp\u003e请问大家有没有更好的方法和建议， 谢谢。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "go net/http客户端 protocol error: received DATA before a HEADERS frame",
       "Link": "https://studygolang.com/topics/15302#reply1",
       "Description": "\u003cp\u003ehttp客户端请求的时候打印日志 protocol error: received DATA before a HEADERS frame\u003c/p\u003e\n\n\u003cp\u003e链接有时候会有301:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eclient := \u0026amp;http.Client{\n\tCheckRedirect: func(req *http.Request, via []*http.Request) error {\n\t\treturn http.ErrUseLastResponse\n\t},\n}\nresponse, err := client.Do(request)\nif err != nil {\n\treturn\n}\ndefer func() {\n\t_ = response.Body.Close()\n}()\nlocation := response.Header.Get(\u0026quot;Location\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e就是想取个301地址、有时候链接也会200、想不明白为啥会打印错误日志、查了好久也没查到解决方案、有没有大哥帮忙解惑\u003c/p\u003e\n",
@@ -112,13 +119,6 @@
       "Title": "新手如何选择计算机原理书籍？机械工业大黑书选哪本比较易懂？",
       "Link": "https://studygolang.com/topics/15303#reply0",
       "Description": "\u003cp\u003e本人学习编程纯属兴趣爱好，学过 Python Web、Golang、Rust、C（GCC）。能写一点小型 Web 网站、小爬虫、基础数据结构。学习期间（自学的）是照着书和网上示例敲代码多，对原理什么的几乎不懂。\u003c/p\u003e\n\n\u003cp\u003e现在想学习计算机原理方面的知识。网上也搜寻了一些资料，基本是机械工业的那些大黑书出镜率很高，评价也很高。\u003c/p\u003e\n\n\u003cp\u003e对比了一些大黑书后，想请各位大佬推荐一下，《深入理解计算机系统》、《现代操作系统》、《计算机组成与设计：硬件/软件接口》这三本中，哪本相对简单？适合新手学习计算机原理，尽可能少地受到挫败感。或者有其他计算机原理书籍推荐？\u003c/p\u003e\n\n\u003cp\u003e我的工作跟计算机界没有任何关系，就是对计算机原理比较好奇。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "一个指针经过循环后，指针值异常了，不懂求解惑",
-      "Link": "https://studygolang.com/topics/15301#reply2",
-      "Description": "\u003cp\u003e\u0026rdquo;`\nfunc main() {\n\tb := 23\n    var s *int\n\ts=\u0026amp;b\n\tfmt.Println(\u0026ldquo;init:\u0026rdquo;,*s)\n\tfmt.Println(\u0026ldquo;init adder:\u0026rdquo;,s)\n\tfor i :=0;i\u003c10;i++{\n\t\ts=\u0026amp;i\n\t\t//fmt.Println(\u0026ldquo;i:\u0026rdquo;,i)\n\t\tfmt.Printf(\u0026ldquo;%d-%v\\n\u0026rdquo;,i,\u0026amp;i)\n\t\tfmt.Println(\u0026ldquo;for-s:\u0026rdquo;,*s)\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e}\nfmt.Println(\u0026quot;s:\u0026quot;,*s)\nfmt.Println(\u0026quot;s adder:\u0026quot;,s)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u0026ldquo;`\n\u003cimg src=\"https://static.studygolang.com/220324/d76b0c45284148cb3db0a9f7b78d430a.png\" alt=\"image.png\" /\u003e\n为什么最后等于10了。。！！求大佬解惑\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -203,6 +203,13 @@
       "Title": "现在GO语言面试这么难吗？",
       "Link": "https://studygolang.com/topics/15289#reply12",
       "Description": "\u003cp\u003e下午面了一个杭州的电话面试,我没有go工作经验,只有go项目经验,面试前已经讲过了，面试官问我,top,ls的实现原理?我以为这就完了，又接着问我sp寄存器，x86和arm64为什么有区别,寄存器怎么实现的？这人说什么话之前都会说一个,那我问你一个简单的问题把,最后他问了个面向对象是什么,我就说面向对象把事物对象化,对象有自己的属性和行为,也就是方法。他说,我看你是完全不懂啊,你不适合,就挂电话退微信群了。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "一个指针经过循环后，指针值异常了，不懂求解惑",
+      "Link": "https://studygolang.com/topics/15301#reply2",
+      "Description": "\u003cp\u003e\u0026rdquo;`\nfunc main() {\n\tb := 23\n    var s *int\n\ts=\u0026amp;b\n\tfmt.Println(\u0026ldquo;init:\u0026rdquo;,*s)\n\tfmt.Println(\u0026ldquo;init adder:\u0026rdquo;,s)\n\tfor i :=0;i\u003c10;i++{\n\t\ts=\u0026amp;i\n\t\t//fmt.Println(\u0026ldquo;i:\u0026rdquo;,i)\n\t\tfmt.Printf(\u0026ldquo;%d-%v\\n\u0026rdquo;,i,\u0026amp;i)\n\t\tfmt.Println(\u0026ldquo;for-s:\u0026rdquo;,*s)\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e}\nfmt.Println(\u0026quot;s:\u0026quot;,*s)\nfmt.Println(\u0026quot;s adder:\u0026quot;,s)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u0026ldquo;`\n\u003cimg src=\"https://static.studygolang.com/220324/d76b0c45284148cb3db0a9f7b78d430a.png\" alt=\"image.png\" /\u003e\n为什么最后等于10了。。！！求大佬解惑\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
