@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>浏览器为什么选择了如今的同源策略 - 程序员</title>
+      <link>https://www.v2ex.com/t/843069</link>
+      <description>&lt;p&gt;浏览器会禁止下面的类似操作&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;&lt;a href=&#34;http://a.com&#34; rel=&#34;nofollow&#34;&gt;a.com&lt;/a&gt;&lt;/code&gt;中的 js 向&lt;code&gt;&lt;a href=&#34;http://b.com/api&#34; rel=&#34;nofollow&#34;&gt;b.com/api&lt;/a&gt;&lt;/code&gt;发送了请求，根据同源策略，这样的跨域请求会向&lt;code&gt;&lt;a href=&#34;http://b.com&#34; rel=&#34;nofollow&#34;&gt;b.com&lt;/a&gt;&lt;/code&gt; 发送一个 OPTIONS 预检请求，如果服务器返回的 Access-Allow-Origins 中不包含&lt;code&gt;&lt;a href=&#34;http://a.com&#34; rel=&#34;nofollow&#34;&gt;a.com&lt;/a&gt; &lt;/code&gt;，那么此次请求会被浏览器拒绝，&lt;code&gt;&lt;a href=&#34;http://a.com&#34; rel=&#34;nofollow&#34;&gt;a.com&lt;/a&gt;&lt;/code&gt;中的 js 拿不到请求返回的数据。&lt;/p&gt;&#xA;&lt;p&gt;这样的行为如果发生在本地应用程序例如 postman 中时，是可以拿到正常的请求数据的，因为 postman 没有同源策略，不会限制发送任何请求，那么为什么浏览器要对此做出限制？&lt;/p&gt;&#xA;&lt;p&gt;网上的大部分解释是，浏览器在向某个域名发起请求时，会携带上对应的网站 cookie ，如果用户登录了&lt;code&gt;&lt;a href=&#34;http://b.com&#34; rel=&#34;nofollow&#34;&gt;b.com&lt;/a&gt;&lt;/code&gt;，又打开了&lt;code&gt;&lt;a href=&#34;http://a.com&#34; rel=&#34;nofollow&#34;&gt;a.com&lt;/a&gt;&lt;/code&gt;，&lt;code&gt;&lt;a href=&#34;http://a.com&#34; rel=&#34;nofollow&#34;&gt;a.com&lt;/a&gt;&lt;/code&gt;向&lt;code&gt;&lt;a href=&#34;http://b.com/api&#34; rel=&#34;nofollow&#34;&gt;b.com/api&lt;/a&gt;&lt;/code&gt;发送的请求会带上&lt;code&gt;&lt;a href=&#34;http://b.com&#34; rel=&#34;nofollow&#34;&gt;b.com&lt;/a&gt;&lt;/code&gt;的 cookie ，会让&lt;code&gt;&lt;a href=&#34;http://b.com&#34; rel=&#34;nofollow&#34;&gt;b.com&lt;/a&gt;&lt;/code&gt;服务器认为是用户本人在操作，导致恶意攻击的发生。&lt;/p&gt;&#xA;&lt;p&gt;那么为什么浏览器不能分辨是哪个网站发起的请求呢？为什么浏览器不能在检测到是&lt;code&gt;&lt;a href=&#34;http://a.com&#34; rel=&#34;nofollow&#34;&gt;a.com&lt;/a&gt;&lt;/code&gt;发出的请求时，不携带&lt;code&gt;&lt;a href=&#34;http://b.com&#34; rel=&#34;nofollow&#34;&gt;b.com&lt;/a&gt;&lt;/code&gt;网站保存的 cookie 呢？这样不就能同样规避此类攻击吗？就如同在浏览器直接输入 api 网址那样拿到返回结果不行吗？&lt;/p&gt;&#xA;&lt;p&gt;我的理解是，浏览器厂商不能这样做，因为许多广告厂商需要在网站中嵌入第三方 cookie ，这样才能通过第三方 cookie 来确定同一用户，方便广告投放，但是这个说法也显然站不住脚，因为如今许多浏览器厂商都在主动禁止第三方 cookie ，那么这个同源策略到底保护的是什么呢？&lt;/p&gt;&#xA;</description>
+      <author>wheelg</author>
+      <pubDate>26 Mar 2022 09:48:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>fb 登录游戏异常 - 问与答</title>
+      <link>https://www.v2ex.com/t/843068</link>
+      <description>之前一直用 fb 登录玩的一个小游戏，一段时间没有玩，今天登录 fb 突然显示这样 一段文字&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;“应用未设置应用仍处于开发模式，你没有访问权限。请切换为己注册的模拟用户，或向应用管理员申请访问权限。”&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;怎么回事啊这个，好突然，求助&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;不会发图片，大家就这样凑合看😄</description>
+      <author>eumenides88</author>
+      <pubDate>26 Mar 2022 09:47:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>有多少人是用纯 Linux 做 NAS 系统的？ - 程序员</title>
+      <link>https://www.v2ex.com/t/843067</link>
+      <description>&lt;p&gt;感觉熟悉 Linux 的人来说，直接用 debian 或者 ubuntu 做 nas 可能会更好，安装个 smb 就可以用了，dcoker 啥的也都比较方便，甚至可以在 Linux 里面在装虚拟机。但是有个疑问，组软 raid 好组吗？&lt;/p&gt;&#xA;&lt;p&gt;有哪些坑吗？跟成品 nas 系统对比有什么优缺点&lt;/p&gt;&#xA;</description>
+      <author>qiubangzhu</author>
+      <pubDate>26 Mar 2022 09:44:02 +0000</pubDate>
+    </item>
+    <item>
       <title>关系型数据库 10 亿级别数据迁移到 neo4j 图数据库 - Java</title>
       <link>https://www.v2ex.com/t/843065</link>
       <description>&lt;h2&gt;现在有一个需求，需要将 Oracle 数据库中的 10 亿级别的数据迁移到 neo4j 数据库中，每天定时同步&lt;/h2&gt;&#xA;&lt;h3&gt;我的做法&lt;/h3&gt;&#xA;&lt;p&gt;查了 neo4j 的数据导入相关的官方文档，发现首先需要数据编写成 CSV 文件的格式，然后再用 LOAD CSV 命令导入到 neo4j 中，于是我用 Spring 写了个服务，先用多线程同时分页读数据库，将数据库中的数据存成 csv 文件，然后用 Java 驱动建立和 neo4j 数据的链接，然后用 LOAD CSV 命令插入数据，先跑一遍全量，然后每天定时跑增量，性能勉强可以接受。&lt;/p&gt;&#xA;&lt;h3&gt;我的疑问&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;又没有专门的 neo4j 数据库数据导入工具？比如封装好的 Java 类库？&lt;/li&gt;&#xA;&lt;li&gt;如果没有这样的类库，还有没有其他更好的方案？&lt;/li&gt;&#xA;&lt;li&gt;我也是 neo4j 的新手，大佬勿喷&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
