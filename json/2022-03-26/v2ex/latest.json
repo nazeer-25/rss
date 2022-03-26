@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "SDB 2.0.0 发布，增加了主从架构 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/843115",
+      "Description": "\u003cp\u003e一直在迭代自己的 \u003ca href=\"https://github.com/yemingfeng/sdb/\" rel=\"nofollow\"\u003eSDB\u003c/a\u003e。\u003c/p\u003e\n\u003cp\u003e1.x 版本发布后，SDB 已经是一个可靠的数据库了。并在 2022.03.10 增加了 cli 功能，提供 SDB 的易用性。之后我们便开始思考如何为 SDB 增加分布式的能力。\u003c/p\u003e\n\u003cp\u003e参考 redis 的实现，SDB 优先实现了主从架构，也在 v2.0.0 正式发布。\u003c/p\u003e\n\u003cp\u003e实现的过程比较曲折，golang 语言下可靠的 raft 库并不多，只找到了两种候选方案，并对候选方案做了以下结论：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003ca href=\"https://github.com/hashicorp/raft\" rel=\"nofollow\"\u003ehashicorp raft\u003c/a\u003e\u003cul\u003e\n\u003cli\u003e使用在 etcd 中，拥有广泛的使用者。然而接入下来发现，写入性能并不高。查阅了该项目的官方文档，他们只要提供的是可靠性，而不是性能。\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003ca href=\"https://github.com/lni/dragonboat\" rel=\"nofollow\"\u003edragonboat raft\u003c/a\u003e\u003cul\u003e\n\u003cli\u003e由国人所写，号称是最快的 multi raft 库。\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e为了支持国人项目，SDB 选择了 dragonboat raft ，写入的 QPS 从 12k 下降到了 5k ，但读能力是不受影响的，而且也可以水平扩展读能力，收益还是大于损耗的。\u003c/p\u003e\n\u003cp\u003e架构图如下：\n\u003cimg alt=\"architecture\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://github.com/yemingfeng/sdb/raw/master/docs/architecture.png\"/\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eSDB 集群中同时只有一个 master 节点，提供写入和读取的能力。以及 N 个 slave 节点提供读取能力。\u003c/li\u003e\n\u003cli\u003e当有读取请求的时候，可以请求集群中的任意节点，该节点会直接返回存储于该节点的数据。在主从节点数据同步的过程中，会因为同步时延带来数据的不一致。\u003c/li\u003e\n\u003cli\u003e当有写入请求的时候，可以请求阶段中的任意节点。如果请求的节点是主节点，则直接发起提案。若请求的节点是从节点，则该节点会将写入请求转发到主节点中，由主节点发提案。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e当需要使用读写分离的时候，可以创建多个 sdb grpc client ，连接对应的节点即可实现。\u003c/strong\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "Aidenboss",
+      "PubDate": "2022-03-26T16:18:55Z"
+    },
+    {
       "Title": "甲癌跳槽体检有办法过吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/843114",
       "Description": "问问各位彦祖，甲癌跳槽的话是不是体检都过不了呀，19 年 8 月手术后一直没转移，医生说临床治愈水平，想跳槽又担心体检都过不了。目前在银行做后台，觉得工作氛围很没劲每天摆烂不怎么加班，可能领导也发觉我总是摆烂，项目提名整个小组唯独没有我，所以想跳槽换个环境看看机会，在这边没啥技术提升氛围也不是自己喜欢的，好但又担心跳槽体检不过啊，有没人生解答大师给点意见。坐标深圳，待了快 3 年了，加上年终奖到手差不多 20W 吧。",
