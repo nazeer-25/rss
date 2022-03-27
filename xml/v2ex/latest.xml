@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>为什么 cloudflare 的 AAAA 记录 dns dig 不到，但是 curl 能访问到？ - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/843272</link>
+      <description>&lt;h1&gt;续前：&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.v2ex.com/t/843085&#34; rel=&#34;nofollow&#34;&gt;双栈接入 ipv6 导致的 DNS 问题&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1&gt;一些套了 CF 盾的网站，会出现 connection reset 的问题&lt;/h1&gt;&#xA;&lt;p&gt;比如 V2EX 的头像 cdn &lt;code&gt;&lt;a href=&#34;http://cdn.v2ex.com&#34; rel=&#34;nofollow&#34;&gt;cdn.v2ex.com&lt;/a&gt;&lt;/code&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;curl https://cdn.v2ex.com/ -vvv&#xA;*   Trying 2606:4700:10::6814:ada:443...&#xA;*   Trying 104.20.9.218:443...&#xA;* Connected to cdn.v2ex.com (104.20.9.218) port 443 (#0)&#xA;* ALPN, offering h2&#xA;* ALPN, offering http/1.1&#xA;...&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这里会发现有两个地址，v6 和 v4 的&lt;/p&gt;&#xA;&lt;p&gt;但是我 dig 的时候（加不计 46 参数都是一个结果）：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;dig [|-4|-6] cdn.v2ex.com&#xA;&#xA;; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.10.6 &amp;lt;&amp;lt;&amp;gt;&amp;gt; cdn.v2ex.com&#xA;;; global options: +cmd&#xA;;; Got answer:&#xA;;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 41286&#xA;;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1&#xA;&#xA;;; OPT PSEUDOSECTION:&#xA;; EDNS: version: 0, flags:; udp: 1024&#xA;;; QUESTION SECTION:&#xA;;cdn.v2ex.com.&#x9;&#x9;&#x9;IN&#x9;A&#xA;&#xA;;; ANSWER SECTION:&#xA;cdn.v2ex.com.&#x9;&#x9;3151&#x9;IN&#x9;A&#x9;104.20.10.218&#xA;cdn.v2ex.com.&#x9;&#x9;3151&#x9;IN&#x9;A&#x9;172.67.3.188&#xA;cdn.v2ex.com.&#x9;&#x9;3151&#x9;IN&#x9;A&#x9;104.20.9.218&#xA;&#xA;;; Query time: 11 msec&#xA;;; SERVER: 2409:my-n1-dns-server#53(2409:my-n1-dns-server)&#xA;;; WHEN: Mon Mar 28 07:25:28 CST 2022&#xA;;; MSG SIZE  rcvd: 89&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;确实是查不到任何 AAAA 记录，但是 curl 和浏览器还是会偶尔请求 v6 的记录导致 dns 问题&lt;/p&gt;&#xA;&lt;h1&gt;2606:4700:10::6814:ada 是被投毒的记录吗？&lt;/h1&gt;&#xA;&lt;p&gt;还真不是，查了下这个 v6 的地址，还真是 cf 的，只不过因为我的链路，v6 地址没有走分流导致被 reset 了&lt;/p&gt;&#xA;&lt;h1&gt;用 hello world 代理海外地址，好像目前只支持 ipv4 的？&lt;/h1&gt;&#xA;&lt;p&gt;通篇没翻到如何也支持 ipv6 啊&lt;/p&gt;&#xA;</description>
+      <author>phpfpm</author>
+      <pubDate>27 Mar 2022 23:29:08 +0000</pubDate>
+    </item>
+    <item>
       <title>Apple ID 是不是有类似“信誉值”之类的规则？ - Apple</title>
       <link>https://www.v2ex.com/t/843271</link>
       <description>&lt;p&gt;听别人说过的例子：&lt;/p&gt;&#xA;&lt;p&gt;1 、黑苹果使用新注册的空白账号，无法使用 iMessage 之类的同步功能，会被限制，而有用过白果的老账户不会。&lt;/p&gt;&#xA;&lt;p&gt;2 、iPhone 用户，购买 app /服务较多的 ID ，app /服务退款比较容易。&lt;/p&gt;&#xA;&lt;p&gt;阿里有芝麻信用，分数高于某个值则可以享受某些服务。苹果是否也有类似规则呢？聊聊你的看法。&lt;/p&gt;&#xA;</description>
