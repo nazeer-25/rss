@@ -34,6 +34,11 @@
       <description>&lt;p&gt;&lt;img src=&#34;https://static.studygolang.com/220328/59d946bd089871c19c4a93c6236a8359.png&#34; alt=&#34;uTools_1648471060092.png&#34; /&gt;&#xA;如图，想为HashMap这个struct添加方法，可是在声明泛型上无法声明，请教一下如何解决，个人感觉是在HashMap没有声明导致泛型方法导致无法为方法添加泛型&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>go 实现indexOf，leetCode28</title>
+      <link>https://studygolang.com/articles/35577#reply0</link>
+      <description>&lt;h1&gt;go indexOf&lt;/h1&gt;&#xA;&#xA;&lt;h2&gt;indexOf&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;indexOf(s, p string) 函数会返回p在s中首次出现的位置，倘如没有则返回-1，本次使用之前提到过的&lt;a href=&#34;https://studygolang.com/articles/35372&#34;&gt;kmp算法&lt;/a&gt;来作为indexOf的核心，并用来解决leetcode28题&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;code&lt;/h2&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func strStr(haystack string, needle string) int {&#xA;&#xA;    return indexOf(haystack, needle)&#xA;}&#xA;&#xA;func indexOf(s, p string) int {&#xA;    if len(p) == 0 {&#xA;        return 0&#xA;    }&#xA;    next := make([]int, len(p))&#xA;    next[0] = -1&#xA;&#xA;    j := -1&#xA;    for i := 1; i &amp;lt; len(p); i++ {&#xA;        for j != -1 &amp;amp;&amp;amp; p[i] != p[j+1] {&#xA;            j = next[j]&#xA;        }&#xA;        if p[i] == p[j+1] {&#xA;            j++&#xA;        }&#xA;        next[i] = j&#xA;    }&#xA;&#xA;    j = -1&#xA;    for i := 0; i &amp;lt; len(s); i++ {&#xA;        for j != -1 &amp;amp;&amp;amp; s[i] != p[j+1] {&#xA;            j = next[j]&#xA;        }&#xA;        if s[i] == p[j+1] {&#xA;            j++&#xA;        }&#xA;&#xA;        if j == len(p) - 1 {&#xA;            return i - j&#xA;        }&#xA;    }&#xA;    return -1&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
       <title>如何使得进度条始终在窗口底部？</title>
       <link>https://studygolang.com/topics/15313#reply4</link>
       <description>&lt;p&gt;在终端下，如何使得进度条始终在窗口底部？&#xA;在进度条运行的时候，还需要打印其他东西，为了使得进度条不被刷走，我想让进度条始终在窗口底部，请问各位大佬怎么实现😥&lt;/p&gt;&#xA;</description>
