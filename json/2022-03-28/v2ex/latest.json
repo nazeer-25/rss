@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "blogspot.com 上有哪些你常看的博客么? - 问与答",
+      "Link": "https://www.v2ex.com/t/843274",
+      "Description": "\u003cp\u003e似乎 blogspot 是目前所剩不多的平均干货含量较高、较“纯粹”的博客平台了.  国内的能对标也就 cnblog 了.\u003c/p\u003e\n\u003cp\u003e各位有常看、推荐的么? 主题 /领域不限.\u003c/p\u003e\n\u003cp\u003ePS: 最近发现的一博主: \u003ca href=\"http://0792z.blogspot.com\" rel=\"nofollow\"\u003ehttp://0792z.blogspot.com\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "dioxide",
+      "PubDate": "2022-03-28T00:23:12Z"
+    },
+    {
       "Title": "为什么 cloudflare 的 AAAA 记录 dns dig 不到，但是 curl 能访问到？ - 宽带症候群",
       "Link": "https://www.v2ex.com/t/843272",
       "Description": "\u003ch1\u003e续前：\u003c/h1\u003e\n\u003cp\u003e\u003ca href=\"https://www.v2ex.com/t/843085\" rel=\"nofollow\"\u003e双栈接入 ipv6 导致的 DNS 问题\u003c/a\u003e\u003c/p\u003e\n\u003ch1\u003e一些套了 CF 盾的网站，会出现 connection reset 的问题\u003c/h1\u003e\n\u003cp\u003e比如 V2EX 的头像 cdn \u003ccode\u003e\u003ca href=\"http://cdn.v2ex.com\" rel=\"nofollow\"\u003ecdn.v2ex.com\u003c/a\u003e\u003c/code\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ecurl https://cdn.v2ex.com/ -vvv\n*   Trying 2606:4700:10::6814:ada:443...\n*   Trying 104.20.9.218:443...\n* Connected to cdn.v2ex.com (104.20.9.218) port 443 (#0)\n* ALPN, offering h2\n* ALPN, offering http/1.1\n...\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这里会发现有两个地址，v6 和 v4 的\u003c/p\u003e\n\u003cp\u003e但是我 dig 的时候（加不计 46 参数都是一个结果）：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edig [|-4|-6] cdn.v2ex.com\n\n; \u0026lt;\u0026lt;\u0026gt;\u0026gt; DiG 9.10.6 \u0026lt;\u0026lt;\u0026gt;\u0026gt; cdn.v2ex.com\n;; global options: +cmd\n;; Got answer:\n;; -\u0026gt;\u0026gt;HEADER\u0026lt;\u0026lt;- opcode: QUERY, status: NOERROR, id: 41286\n;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 1024\n;; QUESTION SECTION:\n;cdn.v2ex.com.\t\t\tIN\tA\n\n;; ANSWER SECTION:\ncdn.v2ex.com.\t\t3151\tIN\tA\t104.20.10.218\ncdn.v2ex.com.\t\t3151\tIN\tA\t172.67.3.188\ncdn.v2ex.com.\t\t3151\tIN\tA\t104.20.9.218\n\n;; Query time: 11 msec\n;; SERVER: 2409:my-n1-dns-server#53(2409:my-n1-dns-server)\n;; WHEN: Mon Mar 28 07:25:28 CST 2022\n;; MSG SIZE  rcvd: 89\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e确实是查不到任何 AAAA 记录，但是 curl 和浏览器还是会偶尔请求 v6 的记录导致 dns 问题\u003c/p\u003e\n\u003ch1\u003e2606:4700:10::6814:ada 是被投毒的记录吗？\u003c/h1\u003e\n\u003cp\u003e还真不是，查了下这个 v6 的地址，还真是 cf 的，只不过因为我的链路，v6 地址没有走分流导致被 reset 了\u003c/p\u003e\n\u003ch1\u003e用 hello world 代理海外地址，好像目前只支持 ipv4 的？\u003c/h1\u003e\n\u003cp\u003e通篇没翻到如何也支持 ipv6 啊\u003c/p\u003e\n",
