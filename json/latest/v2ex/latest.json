@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "两台 iPhone 放在一起会互相刷卡, 怎么解决? - iPhone",
+      "Link": "https://www.v2ex.com/t/843946",
+      "Description": "\u003cp\u003e和女朋友的 iPhone 放在一起, 两台手机会自动亮屏刷卡, 一直重试, 不会停下来\u003c/p\u003e\n",
+      "Author": "phony2r",
+      "PubDate": "2022-03-30T11:09:07Z"
+    },
+    {
       "Title": "关于 nftables chain 优先级的问题 - 问与答",
       "Link": "https://www.v2ex.com/t/843944",
       "Description": "\u003cp\u003e现在有以下规则：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003etable inet filter2 { # handle 39\n        set iplist4 { # handle 3\n                type ipv4_addr\n        }\n\n        set iplist6 { # handle 4\n                type ipv6_addr\n        }\n\n        chain filter { # handle 12\n                type filter hook input priority filter + 1; policy accept;\n                ip saddr @iplist4 accept # handle 13\n                ip6 saddr @iplist6 accept # handle 14\n                drop # handle 16\n        }\n}\ntable ip default_filter { # handle 42\n        chain filter { # handle 4\n                type filter hook input priority filter; policy accept;\n                tcp dport 8092 accept # handle 5\n        }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e若是按上面设置，则无法访问 TCP 8092 端口，去掉 filter2 == filter == drop 规则后，TCP 8092 端口访问正常\u003c/p\u003e\n\u003cp\u003e请教：priority 设置优先级且数字越小优先级越高，而按照我的设置则无法屏蔽所有端口（除 TCP 8092 外），请问我哪里设置错了\u003c/p\u003e\n",
