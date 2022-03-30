@@ -4,9 +4,9 @@
   "Description": "",
   "Items": [
     {
-      "Title": "debian 的 ufw 如何重载防火墙规则？ ufw reload 会重复加载规则 - Debian",
+      "Title": "debian 的 ufw 如何重载防火墙规则？ ufw reload 会重复加载规则，困扰了好几年的问题 - Debian",
       "Link": "https://www.v2ex.com/t/843820",
-      "Description": "\u003cp\u003e比如我有一些规则在 \u003ccode\u003e/etc/ufw/before.rules\u003c/code\u003e里面\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# NAT Talbes rules\n*nat\n:PREROUTING ACCEPT [0:0]\n:POSTROUTING ACCEPT [0:0]\n\n# MASQUERADE\n-A POSTROUTING -s 172.18.0.0/16 ! -o docker0 -j MASQUERADE\n-A POSTROUTING -s 172.23.0.0/16 ! -o docker0 -j MASQUERADE\n\nCOMMIT\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我用\u003ccode\u003eufw reload\u003c/code\u003e后，用\u003ccode\u003eiptables -t nat -L -v\u003c/code\u003e发现重载了重复规则\u003c/p\u003e\n\u003cp\u003e大佬们在 debian 中是如何重新加载规则的？\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e比如我有一些规则在 \u003ccode\u003e/etc/ufw/before.rules\u003c/code\u003e里面\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# NAT Talbes rules\n*nat\n:PREROUTING ACCEPT [0:0]\n:POSTROUTING ACCEPT [0:0]\n\n# MASQUERADE\n-A POSTROUTING -s 172.18.0.0/16 ! -o docker0 -j MASQUERADE\n-A POSTROUTING -s 172.23.0.0/16 ! -o docker0 -j MASQUERADE\n\nCOMMIT\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我每次用\u003ccode\u003eufw reload\u003c/code\u003e后就会重复生成规则，用\u003ccode\u003eiptables -t nat -L -v\u003c/code\u003e发现重复加载了规则\u003c/p\u003e\n\u003cp\u003e这是\u003ccode\u003eufw reload\u003c/code\u003e之前\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.v2ex.co/i414F6Ys.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003eufw reload\u003c/code\u003e重载一次之后\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.v2ex.co/b2nnINIJ.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e多次\u003ccode\u003eufw reload\u003c/code\u003e后会产生更多重复规则。大佬们在 debian 中是如何重新加载规则的？\u003c/p\u003e\n",
       "Author": "herozzm",
       "PubDate": "2022-03-30T03:49:30Z"
     },

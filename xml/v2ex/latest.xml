@@ -4,9 +4,9 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>debian 的 ufw 如何重载防火墙规则？ ufw reload 会重复加载规则 - Debian</title>
+      <title>debian 的 ufw 如何重载防火墙规则？ ufw reload 会重复加载规则，困扰了好几年的问题 - Debian</title>
       <link>https://www.v2ex.com/t/843820</link>
-      <description>&lt;p&gt;比如我有一些规则在 &lt;code&gt;/etc/ufw/before.rules&lt;/code&gt;里面&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# NAT Talbes rules&#xA;*nat&#xA;:PREROUTING ACCEPT [0:0]&#xA;:POSTROUTING ACCEPT [0:0]&#xA;&#xA;# MASQUERADE&#xA;-A POSTROUTING -s 172.18.0.0/16 ! -o docker0 -j MASQUERADE&#xA;-A POSTROUTING -s 172.23.0.0/16 ! -o docker0 -j MASQUERADE&#xA;&#xA;COMMIT&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我用&lt;code&gt;ufw reload&lt;/code&gt;后，用&lt;code&gt;iptables -t nat -L -v&lt;/code&gt;发现重载了重复规则&lt;/p&gt;&#xA;&lt;p&gt;大佬们在 debian 中是如何重新加载规则的？&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;比如我有一些规则在 &lt;code&gt;/etc/ufw/before.rules&lt;/code&gt;里面&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# NAT Talbes rules&#xA;*nat&#xA;:PREROUTING ACCEPT [0:0]&#xA;:POSTROUTING ACCEPT [0:0]&#xA;&#xA;# MASQUERADE&#xA;-A POSTROUTING -s 172.18.0.0/16 ! -o docker0 -j MASQUERADE&#xA;-A POSTROUTING -s 172.23.0.0/16 ! -o docker0 -j MASQUERADE&#xA;&#xA;COMMIT&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我每次用&lt;code&gt;ufw reload&lt;/code&gt;后就会重复生成规则，用&lt;code&gt;iptables -t nat -L -v&lt;/code&gt;发现重复加载了规则&lt;/p&gt;&#xA;&lt;p&gt;这是&lt;code&gt;ufw reload&lt;/code&gt;之前&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/i414F6Ys.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;ufw reload&lt;/code&gt;重载一次之后&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/b2nnINIJ.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;多次&lt;code&gt;ufw reload&lt;/code&gt;后会产生更多重复规则。大佬们在 debian 中是如何重新加载规则的？&lt;/p&gt;&#xA;</description>
       <author>herozzm</author>
       <pubDate>30 Mar 2022 03:49:30 +0000</pubDate>
     </item>
