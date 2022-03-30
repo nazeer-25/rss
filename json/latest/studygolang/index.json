@@ -81,6 +81,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "请教一个泛型",
+      "Link": "https://studygolang.com/topics/15315#reply0",
+      "Description": "\u003cp\u003e\u003cimg src=\"https://static.studygolang.com/220328/59d946bd089871c19c4a93c6236a8359.png\" alt=\"uTools_1648471060092.png\" /\u003e\n如图，想为HashMap这个struct添加方法，可是在声明泛型上无法声明，请教一下如何解决，个人感觉是在HashMap没有声明导致泛型方法导致无法为方法添加泛型\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "同程旅行招聘Golang工程师啦！苏州/成都/长沙等地均有需求，待遇从优！快来联系我吧！",
       "Link": "https://studygolang.com/topics/15317#reply7",
       "Description": "\u003cp\u003e公司介绍：\u003cbr\u003e\n    同程艺龙由同程旅游集团旗下的同程网络板块和艺龙旅行网在2017年底合并而成。同程旅游集团是一个多元化旅游集团，中国在线旅游服务商和一站式旅游预订平台，是“中国民营企业500强”和“中国旅游集团20强”企业。同程旅游集团下辖同程网络和同程控股两大板块，其中同程网络业务涵盖同程机票、酒店、火车票、汽车票等多项业务。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e艺龙旅行网是中国在线旅行服务提供商之一，深耕OTA行业多年，秉承专业团队的管理运作，在酒店等领域享有盛誉。\n\n合并后，同程艺龙定位于在线旅行服务平台，将同程网络和艺龙各自核心业务优势互补，并占有微信钱包中机票火车票的入口和酒店入口。目前同程艺龙已有近两亿的消费会员，2017年服务超过五亿人次，合并交易额超过千亿人民币，并已实现年超过五亿人民币的规模化盈利。\n\n2018年11月26日，同程艺龙正式在港交所挂牌上市，成为港股OTA第一股。\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e所在部门：上市公司，千亿交易量的项目，陪你在技术路上升级打怪！\n福利待遇：六险一金，年终奖，项目奖，餐补，话补，体检，期权股票等等\nbase地：苏州/成都/长沙均可\u003c/p\u003e\n\n\u003cp\u003e岗位JD：\n职位描述：\n1. 负责服务端程序开发及维护；\n2. 产品需求变现及开发；\n3. 负责整体系统架构设计，对现有系统重构及优化；\n4. 系统基础组件开发；\n5. 业内新技术研究，团队技术培训。\u003c/p\u003e\n\n\u003cp\u003e职位要求\n1. 3年及以上工作经验，Golang开发2年及以上经验，有较好的C/C++开发经验者优先；\n2. 网络基础知识扎实，熟悉常用网络协议，有抓包分析报文解决问题相关经验；\n3. 熟悉MySQL、Redis、MQ、Docker、Rancher等，并能够较好的使用；\n4. 有大并发网络开发经验，具有大型项目开发经验；\n5. 熟悉基本的Shell及Git相关命令，能进行基本的Linux上的问题定位操作，有服务器性能优化者优先；\n6. 具备良好的开发基本功和习惯；\n7. 能够深入研究并思考业务及技术问题，并具备独立解决问题的能力；做事沉稳有耐心，积极向上；\n8. 工作态度良好，能够及时与团队和上级对问题进行沟通。\u003c/p\u003e\n\n\u003cp\u003e联系人：张小姐   有意向人士可以直接添加微信：1256870203\u003c/p\u003e\n",
@@ -112,13 +119,6 @@
       "Title": "go 实现indexOf，leetCode28",
       "Link": "https://studygolang.com/articles/35577#reply0",
       "Description": "\u003ch1\u003ego indexOf\u003c/h1\u003e\n\n\u003ch2\u003eindexOf\u003c/h2\u003e\n\n\u003cp\u003eindexOf(s, p string) 函数会返回p在s中首次出现的位置，倘如没有则返回-1，本次使用之前提到过的\u003ca href=\"https://studygolang.com/articles/35372\"\u003ekmp算法\u003c/a\u003e来作为indexOf的核心，并用来解决leetcode28题\u003c/p\u003e\n\n\u003ch2\u003ecode\u003c/h2\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc strStr(haystack string, needle string) int {\n\n    return indexOf(haystack, needle)\n}\n\nfunc indexOf(s, p string) int {\n    if len(p) == 0 {\n        return 0\n    }\n    next := make([]int, len(p))\n    next[0] = -1\n\n    j := -1\n    for i := 1; i \u0026lt; len(p); i++ {\n        for j != -1 \u0026amp;\u0026amp; p[i] != p[j+1] {\n            j = next[j]\n        }\n        if p[i] == p[j+1] {\n            j++\n        }\n        next[i] = j\n    }\n\n    j = -1\n    for i := 0; i \u0026lt; len(s); i++ {\n        for j != -1 \u0026amp;\u0026amp; s[i] != p[j+1] {\n            j = next[j]\n        }\n        if s[i] == p[j+1] {\n            j++\n        }\n\n        if j == len(p) - 1 {\n            return i - j\n        }\n    }\n    return -1\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "请教一个泛型",
-      "Link": "https://studygolang.com/topics/15315#reply0",
-      "Description": "\u003cp\u003e\u003cimg src=\"https://static.studygolang.com/220328/59d946bd089871c19c4a93c6236a8359.png\" alt=\"uTools_1648471060092.png\" /\u003e\n如图，想为HashMap这个struct添加方法，可是在声明泛型上无法声明，请教一下如何解决，个人感觉是在HashMap没有声明导致泛型方法导致无法为方法添加泛型\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
