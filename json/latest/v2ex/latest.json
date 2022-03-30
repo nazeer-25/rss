@@ -4,9 +4,16 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Pyqtgraph 绘制曲线的左下角的 A 按钮怎么去掉？ - Python",
+      "Link": "https://www.v2ex.com/t/843926",
+      "Description": "\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://tupian.li/images/2022/03/30/image6b37b8d20122d724.png\"/\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-PYTHON\"\u003e        Form.resize(820, 454)\n        Form.setObjectName(\"Form\")\n        historyLength=1800\n        self.graphicsView = PlotWidget(Form)\n        self.graphicsView.setGeometry(QtCore.QRect(10, 10, 261, 121))\n        self.graphicsView.setObjectName(\"graphicsView\")\n\n        self.graphicsView.setLabel(axis=\"left\",text='sEMG Voltage')\n        self.graphicsView.setLabel(axis='bottom',text='Time')\n        self.graphicsView.setMouseEnabled(x=False,y=False)\n        self.graphicsView.setAntialiasing(True)\n        self.graphicsView.enableMouse(False)\n        self.data1 = np.random.normal(size=1800)\n        self.curve2 = self.graphicsView.plot(self.data1)\n        self.ptr1 = 0\n\n        def update1():\n            global data1, ptr1\n            self.graphicsView.setRange(xRange=[self.ptr1,self.ptr1+historyLength],yRange=[0,500],padding=0)\n            self.data1[:-1] = self.data1[1:]  # shift data in the array one sample left\n\n            self.data1[-1] = random.uniform(0,500)\n\n            self.ptr1 += 1\n            self.curve2.setData(self.data1)\n            self.curve2.setPos(self.ptr1, 0)\n\n        self.timer = pg.QtCore.QTimer()\n        self.timer.timeout.connect(update1)\n        self.timer.start(10)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e设置了 buttonsHidden = True 还是去不掉\u003c/p\u003e\n",
+      "Author": "ALLROBOT",
+      "PubDate": "2022-03-30T09:50:38Z"
+    },
+    {
       "Title": "今天麦当劳早餐吃出一根弯曲的毛 - 程序员",
       "Link": "https://www.v2ex.com/t/843925",
-      "Description": "\u003cp\u003e\u003cimg alt=\"https://s1.ax1x.com/2022/03/30/q2iTL4.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2022/03/30/q2iTL4.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e如上图.\u003c/p\u003e\n\u003cp\u003e麦当劳不认，投诉无门，该怎么解决\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e\u003cimg alt=\"https://s1.ax1x.com/2022/03/30/q2iTL4.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2022/03/30/q2iTL4.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"https://s1.ax1x.com/2022/03/30/q2kMjO.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2022/03/30/q2kMjO.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e如上图.\u003c/p\u003e\n\u003cp\u003e麦当劳不认，投诉无门，该怎么解决\u003c/p\u003e\n",
       "Author": "Ivone29",
       "PubDate": "2022-03-30T09:40:19Z"
     },
