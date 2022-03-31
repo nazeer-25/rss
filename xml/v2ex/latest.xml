@@ -4,18 +4,60 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>想问下前端做打包是否可行 - 问与答</title>
+      <link>https://www.v2ex.com/t/844017</link>
+      <description>比如二维码需要批量下载，后端返回 100 个 code,前端把这 100 个 code 本地转成 100 个二维码然后再进行本地打包后下载。</description>
+      <author>xiaohantx</author>
+      <pubDate>31 Mar 2022 01:45:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>reddit 在 2017 年举办的 r/place 像素游戏，今年愚人节又要开放了 - 分享发现</title>
+      <link>https://www.v2ex.com/t/844014</link>
+      <description>&lt;p&gt;好像几天前就有消息了，不过我昨晚刚收到的邮件。&lt;br/&gt;&#xA;&lt;a href=&#34;https://www.reddit.com/r/place/comments/tqbguc/412022/&#34; rel=&#34;nofollow&#34;&gt;https://www.reddit.com/r/place/comments/tqbguc/412022/&lt;/a&gt; &lt;/p&gt;&#xA;&lt;p&gt;当年也去玩了下，挺有意思的，贴一篇随便搜的文章，供不了解的朋友看下：&lt;br/&gt;&#xA;&lt;a href=&#34;https://mp.weixin.qq.com/s/Pz0NZ2t9fd_-RNFj1rT0hA&#34; rel=&#34;nofollow&#34;&gt;参与这场线上大战之后，我觉得人类未来还是有希望的&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;P.S. 文章仅供了解活动内容，不代表本人观点&lt;/p&gt;&#xA;</description>
+      <author>Orenoid</author>
+      <pubDate>31 Mar 2022 01:38:35 +0000</pubDate>
+    </item>
+    <item>
+      <title>分享合并多个 excel 文件的方法，支持两种格式 - Python</title>
+      <link>https://www.v2ex.com/t/844013</link>
+      <description>&lt;p&gt;最开始在网上找的代码只支持一种格式的 EXCEL 合并，经过本菜鸟的优化以后，可以同时对两种格式的 excel 合并，忍不住分享一波。欢迎 V2er 老铁们拍砖！&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;代码&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import pandas as pd&#xA;import os,re&#xA;from xml.sax import ContentHandler, parse&#xA;# 解析 xml 格式的 excel 文件&#xA;class ExcelHandler(ContentHandler):&#xA;    def __init__(self):&#xA;        self.chars = [  ]&#xA;        self.cells = [  ]&#xA;        self.rows = [  ]&#xA;        self.tables = [  ]&#xA;    def characters(self, content):&#xA;        self.chars.append(content)&#xA;    def startElement(self, name, atts):&#xA;        if name==&#34;Cell&#34;:&#xA;            self.chars = [  ]&#xA;        elif name==&#34;Row&#34;:&#xA;            self.cells=[  ]&#xA;        elif name==&#34;Table&#34;:&#xA;            self.rows = [  ]&#xA;    def endElement(self, name):&#xA;        if name==&#34;Cell&#34;:&#xA;            self.cells.append(&#39;&#39;.join(self.chars))&#xA;        elif name==&#34;Row&#34;:&#xA;            self.rows.append(self.cells)&#xA;        elif name==&#34;Table&#34;:&#xA;            self.tables.append(self.rows)&#xA;&#xA;# 替换 XML 中的非法字符 &#xA;def clearContent(srcfile):&#xA;    outfile = srcfile + &#34;-output.xls&#34;&#xA;    if os.path.isfile(srcfile):&#xA;        fin  = open(srcfile, &#39;r&#39;,  encoding=&#39;UTF-8&#39;, errors=&#39;ignore&#39;)&#xA;        fout = open(outfile, &#34;wt&#34;, encoding=&#39;UTF-8&#39;,errors=&#39;ignore&#39;)&#xA;        reg  = re.compile(&#34;\&amp;lt;\Data.*\&amp;gt;(.*)\&amp;lt;\/Data\&amp;gt;&#34;) # 正则-取出需要处理的字符串          &#xA;        for line in fin:&#xA;            if i == 0 and line.find(&#34;xml version&#34;) &amp;lt; 1:&#xA;                print(srcfile, &#34;不是 xml 格式!&#34;)&#xA;                return False&#xA;            if line.find(&#39;&amp;lt;Data ss:Type=&#34;String&#34;&amp;gt;&#39;) &amp;gt; 0:&#xA;                row = reg.findall(line) &#xA;                if len(row) &amp;gt;0 and row[0] != &#34;&#34;:&#xA;                    aline = &#39;&amp;lt;Cell ss:StyleID=&#34;s_title&#34; &amp;gt;&amp;lt;Data ss:Type=&#34;String&#34;&amp;gt;%s&amp;lt;/Data&amp;gt;&amp;lt;/Cell&amp;gt;&#39;% (row[0].replace(&#34;&amp;amp;&#34;,&#34; &#34;).replace(&#34;&amp;gt;&#34;,&#34; &#34;).replace(&#34;&amp;lt;&#34;,&#34; &#34;))&#xA;                    fout.write(&#34;\n&#34; + aline)&#xA;                else:&#xA;                    fout.write(line)&#xA;            else:&#xA;                fout.write(line)&#xA;        fin.close()&#xA;        fout.close()&#xA;        os.remove(srcfile)&#xA;        os.rename(outfile, srcfile)&#xA;        return True&#xA;# 存放 EXCEL 原始文件的目录        &#xA;src_dir = &#34;D:\\Develop\\Python\\关单原始数据表格&#34;&#xA; &#xA;filename_excel = []&#xA;frames = []&#xA;for root, dirs, files in os.walk(src_dir):&#xA;    for file in files:&#xA;        filename_excel.append(os.path.join(root,file))&#xA;&#xA;new_list = []&#xA;excelHandler = ExcelHandler()  &#xA;for xls_file in filename_excel: &#xA;    print(&#34;读取文件.........&#34;,xls_file)&#xA;    try:&#xA;        dataframe = pd.read_excel(xls_file, converters={&#39;报关单号&#39;:str}) # 可设定指定列的格式&#xA;        new_list.append(dataframe)&#xA;    except:&#xA;        print(&#34;不是标准格式的 EXCEL ，尝试 XML 读取............&#34;)        &#xA;        clearContent(xls_file)             &#xA;        parse(xls_file, excelHandler)&#xA;        df = pd.DataFrame(excelHandler.tables[0][4:], columns = excelHandler.tables[0][3])&#xA;        df.columns = excelHandler.tables[0][0] &#xA;        new_list.append(df)               &#xA;# 将合并的结果写入文件&#xA;dfnew = pd.concat(new_list)&#xA;dfnew.to_excel(&#34;D:\\output\\alldata.xlsx&#34;,index=False)&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>yasea</author>
+      <pubDate>31 Mar 2022 01:37:59 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教个关于桌面应用开发的问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/844010</link>
+      <description>&lt;p&gt;现在 windows 原生桌面开发能做到 win11 类似的界面吗？需要自己写还是说原生开发就自带了那些组件？&lt;/p&gt;&#xA;</description>
+      <author>zxCoder</author>
+      <pubDate>31 Mar 2022 01:30:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>M1 mba 丐版 打英雄联盟(LOL)还凑合的体验 - 分享发现</title>
+      <link>https://www.v2ex.com/t/844008</link>
+      <description>&lt;ol&gt;&#xA;&lt;li&gt;下载 LOL 日服&lt;/li&gt;&#xA;&lt;li&gt;注册 LOL 日服账号(可能需要全局代理)&lt;/li&gt;&#xA;&lt;li&gt;下载加速器，我用的 uu 加速器，延迟稳定在 43ms 。(新注册免费 3 天,收费 30 元 /月.国内有些地方可以直连日服延迟 46ms,但不稳定)&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;目前体验是（打开低配机器适配模式,最低画质）大乱斗出门 145fps ，团战 100fps 。&#xA;如果你有一套不错的键鼠，那体验应该能接近马服。&lt;/p&gt;&#xA;&lt;p&gt;如果你是 M1 pro 以上的机器，这些信息可能对你有用。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.reddit.com/r/macgaming/comments/mi4sg1/league_of_legends_on_m1_144_fps/&#34; rel=&#34;nofollow&#34;&gt;https://www.reddit.com/r/macgaming/comments/mi4sg1/league_of_legends_on_m1_144_fps/&lt;/a&gt;&#xA;（据说使用 metal 后 fps 轻松到 200 ）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>ginbeebee</author>
+      <pubDate>31 Mar 2022 01:24:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教一个奇怪的网站重定向问题 - Chrome</title>
+      <link>https://www.v2ex.com/t/844007</link>
+      <description>&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/IJYxQED&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/IJYxQED&lt;/a&gt;&lt;br /&gt;访问 &lt;a target=&#34;_blank&#34; href=&#34;https://webyog.com/的时候，get&#34; rel=&#34;nofollow noopener&#34;&gt;https://webyog.com/的时候，get&lt;/a&gt; 请求返回 302 ，url 被重定向到一个广告网站，请求头里的 Remote Address: 127.0.0.1:7890 是我本地的 clash 端口&lt;br /&gt;&lt;br /&gt;目前只在 chrome 上被重定向，而且只有这一个网站。&lt;br /&gt;chrome 里可疑的插件都禁用试过了，缓存也清理了，很奇怪找不到原因。</description>
+      <author>nikubenki</author>
+      <pubDate>31 Mar 2022 01:22:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>试开 Surge macOS 五人车 - Surge</title>
+      <link>https://www.v2ex.com/t/844004</link>
+      <description>费用均摊、如上车人满足、马上开车&lt;br /&gt;考虑到个人隐私、联系方式暂不公开，需上车在这里答复，由我私信你&lt;br /&gt;注：为保证开车质量、需要芝麻信用 750 分&lt;br /&gt;本人 803 分</description>
+      <author>SteveRogers</author>
+      <pubDate>31 Mar 2022 01:12:48 +0000</pubDate>
+    </item>
+    <item>
       <title>升到 iOS15 后定位经常不准有没有人遇到过 - Apple</title>
       <link>https://www.v2ex.com/t/844003</link>
       <description>&lt;p&gt;钉钉打卡经常迟到，换了两个 iPhone 了，偶尔出现几次，开关飞行模式和定位设置，重启手机都不行，最终还原了网络设置才行&lt;/p&gt;&#xA;</description>
       <author>rophie123</author>
       <pubDate>31 Mar 2022 01:11:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>姐夫核酸阳性了没人管 - 上海</title>
-      <link>https://www.v2ex.com/t/844001</link>
-      <description>&lt;p&gt;我姐夫一家都是来上海浦东打工的普通务工人员，浦东这几天封闭，他们所在的唐镇虹三村附近集体核酸。第一次核酸有个人核酸出来阳性，然后和他一起排队的 10 个人都进行二次排查，我姐夫就在其中。&#xA;30 号排查出来的结果为阳性，症状为嗓子有点疼，村里直接就来把民宅的院子给锁住了，说是等拉走。已经过去 24 小时了还没有进行单独隔离，家里有老人小孩都挤在两个小房间中，没有锁门之外的任何防疫措施，消毒都没有，很有可能让本是阴性的姐姐和她的公婆孩子已经民宅内的其它住户感染上，十分不负责任。&#xA;打防疫热线忙，市长热线忙。现在很怕对老人孩子的影响，请大家给点建议还能通过什么手段联系到负责人进行处理，十分感谢。&lt;/p&gt;&#xA;</description>
-      <author>wkfyynh</author>
-      <pubDate>31 Mar 2022 00:57:53 +0000</pubDate>
     </item>
     <item>
       <title>有没有装 B，便宜，做工还好的手表？ - 问与答</title>
@@ -197,6 +239,13 @@
       <description>&lt;h1&gt;为什么找我内推&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;反馈比较快，有进度会及时告知。目前每天会固定投入一部分工作时间来招人。&lt;/li&gt;&#xA;&lt;li&gt;这里有大量岗位空缺：前后端、全栈、算法、大数据、音视频等等；覆盖各类 B 端业务：合同、费控、销售、商旅、人事、音视频、会议等。&lt;/li&gt;&#xA;&lt;li&gt;部分岗位的简历会直达 leader 快速进入面试流程&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1&gt;什么情况下可以找我内推&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在校学生或应届毕业生，可以找我内推实习或校招岗位&lt;/li&gt;&#xA;&lt;li&gt;希望换一个发展更快的行业，相同的付出换来更大回报的互联网老手，可以找我内推社招岗位&lt;/li&gt;&#xA;&lt;li&gt;如果你之前已经找其他朋友在字节内推过了，没关系，仍然可以找我来内推。因为不同部门、同一部门不同时期对岗位的要求都有可能有变化的，多尝试一次就多一分机会。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1&gt;我们团队在做什么&lt;/h1&gt;&#xA;&lt;p&gt;我们团队基于飞书 /Lark ，负责构建下一代数据智能的商业化系统，打造销售领域的数字化系统和工具平台，提供销售领域的数字化高效解决方案，帮助客户获得业务收入增长。包括：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;灵活可定制的销售业务引擎和经营管理系统&lt;/li&gt;&#xA;&lt;li&gt;销售领域的大数据收集 /分析 /可视化引擎和 AI 引擎 /知识图谱&lt;/li&gt;&#xA;&lt;li&gt;专家系统 /领域模型 /event-sourcing 引擎&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1&gt;对标产品&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Salesforce/Dynamics 365 ，Salesfoce 市值 2000 亿+美金&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://Gong.io&#34; rel=&#34;nofollow&#34;&gt;Gong.io&lt;/a&gt; 、Zuora 等，&lt;a href=&#34;http://Gong.io&#34; rel=&#34;nofollow&#34;&gt;Gong.io&lt;/a&gt; 估值 70 亿+美金&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;我们的前景&lt;/h1&gt;&#xA;&lt;p&gt;未来 10 年，中国公司数字化转型带来的巨大红利，中国 2B 科技公司 10 倍的增长（对比过去 10 年，2C 科技公司 10 倍的增长）。针对 2B 的业务高复杂度 /灵活定制要求 /高可用要求，随之而来的 2B 领域的技术巨大挑战和机会。&lt;/p&gt;&#xA;&lt;p&gt;中国销售领域数字化转型带来的巨大红利和产品机会，未来几十个销售领域产品带来的巨大机遇。针对销售领域，巨大的技术挑战包括销售领域模型建模、底层 event-sourcing 技术、销售业务引擎、销售数据引擎、销售 AI 引擎等。&lt;/p&gt;&#xA;&lt;h1&gt;团队现状&lt;/h1&gt;&#xA;&lt;p&gt;目前 60+团队，产品高速发展期，缺人&lt;/p&gt;&#xA;&lt;h1&gt;为什么加入我们？&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;飞书战略核心业务，行业长期巨大的机会，业务快速成长期，空间大，技术创新足&lt;/li&gt;&#xA;&lt;li&gt;运用领域建模（ DDD ）、event-sourcing 等 2B 领域技术&lt;/li&gt;&#xA;&lt;li&gt;面向 2B 的 NLP 、问答系统、搜索、AI 等技术&lt;/li&gt;&#xA;&lt;li&gt;设计高端灵活可配置 /装卸的前后端架构，应用 aPaaS 、iPaaS 等行业领先框架&lt;/li&gt;&#xA;&lt;li&gt;技术挑战大，可以快速打造团队和个人的技术壁垒&lt;/li&gt;&#xA;&lt;li&gt;打通前后端的开发架构和全栈能力，打通技术的理解&lt;/li&gt;&#xA;&lt;li&gt;业务的理解和建模能力，打破 2B 领域的障碍&#xA;8 数据和 AI 的开发设计能力，打开数字化的大门&#xA;9, 团队技术氛围好，硅谷范儿，精英团队大牛多，包括国内外各种大厂，帮助个人能力迅速成长，快速了解 2B 业务 /技术体系&lt;/li&gt;&#xA;&lt;li&gt;跟优秀的人在一起可以快速成长，各领域的专家互相学习提高&lt;/li&gt;&#xA;&lt;li&gt;团队内崇尚务实的技术氛围，一直关注前沿技术，坚持持续调研与分享，鼓励技术钻研和追求极致创新&#xA;技术视野广，帮助跳出职业瓶颈&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1&gt;岗位列表&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://job.toutiao.com/s/NHjYYNy&#34; rel=&#34;nofollow&#34;&gt;（资深）后端开发工程师-销售系统后台-EA customer 360&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;职位描述&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;负责飞书销售系统后台研发，帮助飞书客户业务收入增长；&lt;/li&gt;&#xA;&lt;li&gt;理解业务，针对业务进行模型建模和设计，不断抽象业务领域模型。负责后端各子系统和模块的设计与研发，承担业务研发和技术攻坚，保证高质量交付；&lt;/li&gt;&#xA;&lt;li&gt;参与现有系统的优化工作，定位系统瓶颈，提高系统性能 /稳定性以及业务扩展性；&lt;/li&gt;&#xA;&lt;li&gt;参与团队平台化服务化建设，逐步提升研发效率、研发质量，通过技术不断产出驱动业务的发展。&#xA;职位要求&lt;/li&gt;&#xA;&lt;li&gt;统招本科及以上学历，计算机、通信等相关专业；&lt;/li&gt;&#xA;&lt;li&gt;优秀的业务理解能力，计算机基础扎实，具备良好的编码能力、算法基础、抽象设计和工程设计能力；对领域模型 /event-sourcing 引擎有经验者优先&lt;/li&gt;&#xA;&lt;li&gt;熟练掌握至少一种服务端的主流编程语言、框架及相关生态（如 C/C++/PHP/Java/Golang 等）；&lt;/li&gt;&#xA;&lt;li&gt;熟悉后端开发相关知识 /技术 /工具链: 协议、架构、存储、缓存、安全等方向；&lt;/li&gt;&#xA;&lt;li&gt;优秀的团队合作和沟通能力，良好的职业素养和自驱力，有技术热情，能够持续学习和自我提高；&lt;/li&gt;&#xA;&lt;li&gt;技术社区活跃者、Github 开源项目经验者优先。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;其他 Java 、PHP 、C++等岗位也有大量职位，可以直接联系我来聊一聊呀&lt;/p&gt;&#xA;&lt;h1&gt;期待你的联系&lt;/h1&gt;&#xA;&lt;p&gt;我的微信：amoblin&lt;/p&gt;&#xA;&lt;p&gt;我的飞书：&lt;a href=&#34;https://www.feishu.cn/invitation/page/add_contact/?token=b2e57e3a-adc4-4061-8d9e-c90fca4738a6&amp;amp;unique_id=b2bQOkT17TpafU-tMj24bQ==&#34; rel=&#34;nofollow&#34;&gt;cuiguilin&lt;/a&gt;&lt;/p&gt;&#xA;</description>
       <author>amoblin</author>
       <pubDate>30 Mar 2022 14:13:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>姐夫核酸阳性了没人管 - 上海</title>
+      <link>https://www.v2ex.com/t/844001</link>
+      <description>&lt;p&gt;我姐夫一家都是来上海浦东打工的普通务工人员，浦东这几天封闭，他们所在的唐镇虹三村附近集体核酸。第一次核酸有个人核酸出来阳性，然后和他一起排队的 10 个人都进行二次排查，我姐夫就在其中。&#xA;30 号排查出来的结果为阳性，症状为嗓子有点疼，村里直接就来把民宅的院子给锁住了，说是等拉走。已经过去 24 小时了还没有进行单独隔离，家里有老人小孩都挤在两个小房间中，没有锁门之外的任何防疫措施，消毒都没有，很有可能让本是阴性的姐姐和她的公婆孩子已经民宅内的其它住户感染上，十分不负责任。&#xA;打防疫热线忙，市长热线忙。现在很怕对老人孩子的影响，请大家给点建议还能通过什么手段联系到负责人进行处理，十分感谢。&lt;/p&gt;&#xA;</description>
+      <author>wkfyynh</author>
+      <pubDate>31 Mar 2022 00:57:53 +0000</pubDate>
     </item>
     <item>
       <title>iPhone 用 airplay 把 fitness+投到 ATV3 非常卡 - Apple</title>
