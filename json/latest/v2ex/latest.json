@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "求助: 大批量数据同时更新问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/844365",
+      "Description": "\u003ch3\u003e情景\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e数据量在百万左右\u003c/li\u003e\n\u003cli\u003e需要保证用户看到最新的数据\u003c/li\u003e\n\u003cli\u003e实时性要求高\u003c/li\u003e\n\u003cli\u003e由于可配置规则的原因, 百万条数据的更新并不是同一规则, 即可能需要每一条或一批数据查到内存中单独计算\u003c/li\u003e\n\u003cli\u003e计算完成后需要调用其他服务进行同步更新\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e暂时想到的方案\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e提前计算, 例如 00:00 需要更新, 则 23:50 开始定时任务提前计算, 计算好的数据放在 redis 中, 00:00 开始由另一个定时任务告知程序从 redis 中读取最新值. 对 23:50 至 00:00 之间产生的脏数据进行 mark, 00:00 重新计算.\u003c/li\u003e\n\u003cli\u003e00:00 定时任务, 某一节点从 redis 中读取 clean 的最新值并发送到 MQ, 其余所有节点接受消息并写库\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003e球球各位大佬出出方案, 谢谢! Orz!\u003c/strong\u003e\u003c/p\u003e\n",
+      "Author": "slomo",
+      "PubDate": "2022-04-01T09:25:52Z"
+    },
+    {
+      "Title": "typora 使用对象存储做图床后，怎么解决只能设置对象存储公有读才能看到图片而带来的盗刷问题。 - 问与答",
+      "Link": "https://www.v2ex.com/t/844364",
+      "Description": "\u003cp\u003e如题，使用对象存储做图床后，对象存储侧，必须设置为公有读，才能看到文章中的图片，如果设置成私有读写，图片就展示不出来，但这带来个问题，就是盗刷，众所周知，云厂商对象存储下载都是收费的。\u003c/p\u003e\n\u003cp\u003e那 typora 用对象存储怎么避免这个问题呢？\u003c/p\u003e\n",
+      "Author": "jellyspot",
+      "PubDate": "2022-04-01T09:22:36Z"
+    },
+    {
+      "Title": "检测 goroutine 泄漏 - 分享发现",
+      "Link": "https://www.v2ex.com/t/844363",
+      "Description": "\u003cp\u003e比如常见的异步生产消费模型，下面这段代码你能快速定位泄漏问题吗？如果你不停的访问这个 3000 端口，网站会内存泄漏。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n)\n\nfunc main() {\n\t_ = http.ListenAndServe(\":3000\", http.HandlerFunc(handle))\n}\n\nfunc handle(_ http.ResponseWriter, _ *http.Request) {\n\tc := make(chan int)\n\tgo produce(c)\n\tgo consume(c)\n}\n\nfunc produce(c chan int) {\n\tfor i := range \"...\" {\n\t\tc \u0026lt;- i\n\t}\n}\n\nfunc consume(c chan int) {\n\tfor i := range c {\n\t\tfmt.Println(i)\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我们可以用 \u003ca href=\"https://github.com/ysmood/gotrace\" rel=\"nofollow\"\u003egotrace\u003c/a\u003e 来自动定位泄漏点，添加一个 \u003ccode\u003emain_test.go\u003c/code\u003e 文件：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\"testing\"\n\n\t\"github.com/ysmood/gotrace\"\n)\n\nfunc TestHandle(t *testing.T) {\n\tgotrace.CheckLeak(t, 0)\n\n\thandle(nil, nil)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e运行 \u003ccode\u003eGODEBUG=\"tracebackancestors=10\" go test\u003c/code\u003e，等待 3 秒后就可以看到打印信息如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e--- FAIL: TestHandle (3.00s)\n    main_test.go:10: leaking goroutines: goroutine 6 [chan receive]:\n        play.consume(0x0)\n        \t/Users/ys/repos/play/default/main.go:25 +0x74\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可以看到第 25 行的 \u003ccode\u003erange\u003c/code\u003e 卡住了，原因是 \u003ccode\u003echan receive\u003c/code\u003e，它在等待 \u003ccode\u003ec\u003c/code\u003e 的新消息，然而 produce 函数已经退出不会再往 \u003ccode\u003ec\u003c/code\u003e 里发布消息了。\u003c/p\u003e\n\u003cp\u003e修正的方法很多，比如把 produce 修改为：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc produce(c chan int) {\n\tfor i := range \"...\" {\n\t\tc \u0026lt;- i\n\t}\n\tclose(c)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e再运行 \u003ccode\u003ego test\u003c/code\u003e 测试就立马成功结束了。\u003c/p\u003e\n\u003cp\u003e想了解更多 gotrace 用法可以移步 \u003ca href=\"https://github.com/ysmood/gotrace\" rel=\"nofollow\"\u003ehttps://github.com/ysmood/gotrace\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "ysmood",
+      "PubDate": "2022-04-01T09:21:48Z"
+    },
+    {
       "Title": "升级到 iPadOS 15.4.1 后保护壳合盖锁屏功能失效 - Apple",
       "Link": "https://www.v2ex.com/t/844360",
       "Description": "\u003cp\u003e因为我有睡前一个小时不接电话不看 IM 消息的习惯，所以睡前一般不把手机放在卧室里，用 iPad 设起床闹钟。昨晚睡前玩完游戏随手一盖把 iPad 放床边桌子上，今天早上闹钟没响，发现 iPad 已经没电了，充电进去发现是因为保护壳合盖锁屏功能失效了（ 100%复现） \u003cstrong\u003e！！已确认设置中的合盖锁定选项处于开启状态！！\u003c/strong\u003e ，而且这个游戏运行时系统不会超时自动锁屏。联系 Apple 客服只告诉我抹掉所有内容一种解决方案。出 iPadOS16 我肯定不敢乱升级了，打算 15 用到换 iPad 。\u003c/p\u003e\n\u003cp\u003e设备是 iPad mini5 在保修期内，Apple 官网买的壳，不存在兼容性问题。\u003c/p\u003e\n",

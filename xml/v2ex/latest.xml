@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求助: 大批量数据同时更新问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/844365</link>
+      <description>&lt;h3&gt;情景&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;数据量在百万左右&lt;/li&gt;&#xA;&lt;li&gt;需要保证用户看到最新的数据&lt;/li&gt;&#xA;&lt;li&gt;实时性要求高&lt;/li&gt;&#xA;&lt;li&gt;由于可配置规则的原因, 百万条数据的更新并不是同一规则, 即可能需要每一条或一批数据查到内存中单独计算&lt;/li&gt;&#xA;&lt;li&gt;计算完成后需要调用其他服务进行同步更新&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;暂时想到的方案&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;提前计算, 例如 00:00 需要更新, 则 23:50 开始定时任务提前计算, 计算好的数据放在 redis 中, 00:00 开始由另一个定时任务告知程序从 redis 中读取最新值. 对 23:50 至 00:00 之间产生的脏数据进行 mark, 00:00 重新计算.&lt;/li&gt;&#xA;&lt;li&gt;00:00 定时任务, 某一节点从 redis 中读取 clean 的最新值并发送到 MQ, 其余所有节点接受消息并写库&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;球球各位大佬出出方案, 谢谢! Orz!&lt;/strong&gt;&lt;/p&gt;&#xA;</description>
+      <author>slomo</author>
+      <pubDate>01 Apr 2022 09:25:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>typora 使用对象存储做图床后，怎么解决只能设置对象存储公有读才能看到图片而带来的盗刷问题。 - 问与答</title>
+      <link>https://www.v2ex.com/t/844364</link>
+      <description>&lt;p&gt;如题，使用对象存储做图床后，对象存储侧，必须设置为公有读，才能看到文章中的图片，如果设置成私有读写，图片就展示不出来，但这带来个问题，就是盗刷，众所周知，云厂商对象存储下载都是收费的。&lt;/p&gt;&#xA;&lt;p&gt;那 typora 用对象存储怎么避免这个问题呢？&lt;/p&gt;&#xA;</description>
+      <author>jellyspot</author>
+      <pubDate>01 Apr 2022 09:22:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>检测 goroutine 泄漏 - 分享发现</title>
+      <link>https://www.v2ex.com/t/844363</link>
+      <description>&lt;p&gt;比如常见的异步生产消费模型，下面这段代码你能快速定位泄漏问题吗？如果你不停的访问这个 3000 端口，网站会内存泄漏。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;fmt&#34;&#xA;&#x9;&#34;net/http&#34;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;_ = http.ListenAndServe(&#34;:3000&#34;, http.HandlerFunc(handle))&#xA;}&#xA;&#xA;func handle(_ http.ResponseWriter, _ *http.Request) {&#xA;&#x9;c := make(chan int)&#xA;&#x9;go produce(c)&#xA;&#x9;go consume(c)&#xA;}&#xA;&#xA;func produce(c chan int) {&#xA;&#x9;for i := range &#34;...&#34; {&#xA;&#x9;&#x9;c &amp;lt;- i&#xA;&#x9;}&#xA;}&#xA;&#xA;func consume(c chan int) {&#xA;&#x9;for i := range c {&#xA;&#x9;&#x9;fmt.Println(i)&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我们可以用 &lt;a href=&#34;https://github.com/ysmood/gotrace&#34; rel=&#34;nofollow&#34;&gt;gotrace&lt;/a&gt; 来自动定位泄漏点，添加一个 &lt;code&gt;main_test.go&lt;/code&gt; 文件：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;testing&#34;&#xA;&#xA;&#x9;&#34;github.com/ysmood/gotrace&#34;&#xA;)&#xA;&#xA;func TestHandle(t *testing.T) {&#xA;&#x9;gotrace.CheckLeak(t, 0)&#xA;&#xA;&#x9;handle(nil, nil)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;运行 &lt;code&gt;GODEBUG=&#34;tracebackancestors=10&#34; go test&lt;/code&gt;，等待 3 秒后就可以看到打印信息如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;--- FAIL: TestHandle (3.00s)&#xA;    main_test.go:10: leaking goroutines: goroutine 6 [chan receive]:&#xA;        play.consume(0x0)&#xA;        &#x9;/Users/ys/repos/play/default/main.go:25 +0x74&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可以看到第 25 行的 &lt;code&gt;range&lt;/code&gt; 卡住了，原因是 &lt;code&gt;chan receive&lt;/code&gt;，它在等待 &lt;code&gt;c&lt;/code&gt; 的新消息，然而 produce 函数已经退出不会再往 &lt;code&gt;c&lt;/code&gt; 里发布消息了。&lt;/p&gt;&#xA;&lt;p&gt;修正的方法很多，比如把 produce 修改为：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func produce(c chan int) {&#xA;&#x9;for i := range &#34;...&#34; {&#xA;&#x9;&#x9;c &amp;lt;- i&#xA;&#x9;}&#xA;&#x9;close(c)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;再运行 &lt;code&gt;go test&lt;/code&gt; 测试就立马成功结束了。&lt;/p&gt;&#xA;&lt;p&gt;想了解更多 gotrace 用法可以移步 &lt;a href=&#34;https://github.com/ysmood/gotrace&#34; rel=&#34;nofollow&#34;&gt;https://github.com/ysmood/gotrace&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>ysmood</author>
+      <pubDate>01 Apr 2022 09:21:48 +0000</pubDate>
+    </item>
+    <item>
       <title>升级到 iPadOS 15.4.1 后保护壳合盖锁屏功能失效 - Apple</title>
       <link>https://www.v2ex.com/t/844360</link>
       <description>&lt;p&gt;因为我有睡前一个小时不接电话不看 IM 消息的习惯，所以睡前一般不把手机放在卧室里，用 iPad 设起床闹钟。昨晚睡前玩完游戏随手一盖把 iPad 放床边桌子上，今天早上闹钟没响，发现 iPad 已经没电了，充电进去发现是因为保护壳合盖锁屏功能失效了（ 100%复现） &lt;strong&gt;！！已确认设置中的合盖锁定选项处于开启状态！！&lt;/strong&gt; ，而且这个游戏运行时系统不会超时自动锁屏。联系 Apple 客服只告诉我抹掉所有内容一种解决方案。出 iPadOS16 我肯定不敢乱升级了，打算 15 用到换 iPad 。&lt;/p&gt;&#xA;&lt;p&gt;设备是 iPad mini5 在保修期内，Apple 官网买的壳，不存在兼容性问题。&lt;/p&gt;&#xA;</description>
