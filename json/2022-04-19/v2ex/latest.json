@@ -4,9 +4,16 @@
   "Description": "",
   "Items": [
     {
+      "Title": "没睡的 gopher 卷王请进 - 问与答",
+      "Link": "https://www.v2ex.com/t/848024",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc TestClose(t *testing.T) {\n\trand.Seed(time.Now().UnixNano())\n\twg := sync.WaitGroup{}\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tstop := make(chan struct{})\n\t\t// goroutine 1\n\t\tgo func() {\n\t\t\tfor range stop {\n\t\t\t\treturn\n\t\t\t}\n\t\t}()\n\t\t// goroutine 2\n\t\tgo func() {\n\t\t\tdefer close(stop)\n\t\t\tfor {\n\t\t\t\tif rand.Intn(10) \u0026lt; 3 {\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t}\n\t\t}()\n\t\t\u0026lt;-stop\n\t}()\n\twg.Wait()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e什么情况下 goroutine2 退出了但是 1 没退出\u003c/p\u003e\n",
+      "Author": "hihanley",
+      "PubDate": "2022-04-19T17:21:05Z"
+    },
+    {
       "Title": "戴尔 T30 内存原因频繁死机 - 问与答",
       "Link": "https://www.v2ex.com/t/848023",
-      "Description": "朋友送我一台弃疗的戴尔 T30 。这台电脑是他看我用 T30 装了一台 NAS 后跟着买的。我的 NAS 已稳定工作 4 年，他买的这台却频繁死机。具体故障表现为：小内存占用一个月也不死机，只要跑内存占用大的东西很快就会无征兆死机。昨天机器拿到手跑了一个 memtest ，直接花屏了。\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/9rzcHyr.jpeg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/9rzcHyr.jpeg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e\u003cbr /\u003e然后我把内存拆下来擦了擦，稳定地从昨天晚上运行到今天中午，然后又死机了。\u003cbr /\u003e推测故障原因大概就这三种：\u003cbr /\u003e1. Skylake （ E3-1225 v5 ）集成的内存控制器坏了\u003cbr /\u003e2. 主板的内存插槽坏了\u003cbr /\u003e3. 内存条坏了\u003cbr /\u003e有什么办法能够在不花钱买零件的情况下诊断故障原因呢？",
+      "Description": "朋友送我一台弃疗的戴尔 T30 。这台电脑是他看我用 T30 装了一台 NAS 后跟着买的。我的 NAS 已稳定工作 4 年，他买的这台却频繁死机。具体故障表现为：小内存占用一个月也不死机，只要跑内存占用大的东西很快就会无征兆死机。昨天机器拿到手跑了一个 memtest ，直接花屏了。\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/9rzcHyr.jpeg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/9rzcHyr.jpeg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e\u003cbr /\u003e然后我把内存拆下来擦了擦，稳定地从昨天晚上运行到今天中午，然后又死机了。\u003cbr /\u003e推测故障原因大概就这三种：\u003cbr /\u003e1. Skylake （ E3-1225 v5 ）集成的内存控制器坏了\u003cbr /\u003e2. 主板的内存插槽坏了\u003cbr /\u003e3. 内存条坏了\u003cbr /\u003e有什么办法能够在不花钱买零件的情况下诊断故障原因呢？如果维修成本\u0026gt;$100 我就不修了。",
       "Author": "xuegy",
       "PubDate": "2022-04-19T17:16:18Z"
     },
