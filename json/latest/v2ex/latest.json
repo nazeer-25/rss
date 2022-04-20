@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "想问下 el-table 的 v-if 的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/848211",
+      "Description": "\u003cpre\u003e\u003ccode\u003e\u0026lt;el-table-column :key=\"Math.random()\" v-if=\"[0,1,2,3,4].includes(info.index)\"  align=\"center\" type=\"selection\" width=\"60\" :selectable=\"checkboxSelect\" disabled /\u0026gt;\n        \u0026lt;el-table-column\n          v-for=\"(col,index) in gridDataOne\"\n          :key=\"index\"\n          :prop=\"col.prop\"\n          :label=\"col.label\"\n          :width=\"col.width\"\n          align=\"center\"\n          :show-overflow-tooltip=\"true\"\n        /\u0026gt;\n        \u0026lt;el-table-column v-if=\"[0,1,2,3,4].includes(info.index)\" class=\"version-td\" label=\"注册 ID\" prop=\"stationNum\" width=\"auto\" /\u0026gt;\n        \u0026lt;el-table-column v-if=\"[4].includes(info.index)\" class=\"version-td\" label=\"物联网卡\" prop=\"simCardId\" width=\"auto\" :show-overflow-tooltip=\"true\" /\u0026gt;\n        \u0026lt;el-table-column v-if=\"[6].includes(info.index)\" class=\"version-td\" label=\"区域类型\" width=\"auto\" :show-overflow-tooltip=\"true\"\u0026gt;\n          \u0026lt;template slot-scope=\"scope\"\u0026gt;\n            {{ scope.row.customConfigData ? scope.row.customConfigData.deviceType : '' }}\n          \u0026lt;/template\u0026gt;\n        \u0026lt;/el-table-column\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e当前 info.index === 6 这是一个代码段，我如果不加:key=\"Math.random()\"那么第一个多选就会显示，不受 if 控制，如果直接删掉，后面内容就会顶到前面但是标题栏还会有个多选框显示，加了:key=\"Math.random()\"都正常了，想了解下原因。。\u003c/p\u003e\n",
+      "Author": "xiaohantx",
+      "PubDate": "2022-04-20T10:04:50Z"
+    },
+    {
+      "Title": "k8s 脚本检测工具选择 - Kubernetes",
+      "Link": "https://www.v2ex.com/t/848210",
+      "Description": "\u003cp\u003e这两天在搜索 k8s 的 manifest 跟 Dockerfile 脚本检测工具，查到了有 kube-score,kubelinter 等工具，用了下，感觉差不多，不知道各位大佬用过的哪个是比较好用的，还请推荐下\u003c/p\u003e\n",
+      "Author": "pydiff",
+      "PubDate": "2022-04-20T10:03:15Z"
+    },
+    {
+      "Title": "GitHub 是否可以隐藏掉部分代码？ - GitHub",
+      "Link": "https://www.v2ex.com/t/848209",
+      "Description": "\u003cp\u003e最近想把一个私有的仓库设置为公开，\u003cbr/\u003e\n但是有一个问题，这个私有仓库代码中包含了 \u003ccode\u003eAPI key\u003c/code\u003e 和 \u003ccode\u003e云服务\u003c/code\u003e，\u003cbr/\u003e\n是否有一种方法可以将库中的所有历史记录中对应的内容隐藏呢？\u003cbr/\u003e\n（不想新开一个仓库 QAQ ）\u003c/p\u003e\n",
+      "Author": "Fatpandac",
+      "PubDate": "2022-04-20T10:01:28Z"
+    },
+    {
+      "Title": "长期的用户令牌是如何存储的呢？存储结构是什么样的？ - 程序员",
+      "Link": "https://www.v2ex.com/t/848208",
+      "Description": "\u003cp\u003e长期的用户令牌是如何存储的呢？存储结构是什么样的？\u003c/p\u003e\n\u003ch2\u003e背景\u003c/h2\u003e\n\u003cp\u003e一般来说 session 存储可以只生成一个随机 sessionId ，存在缓存中，value 是用户信息，返回给客户端可能是一个 cookie 里面的 token 之类的或者就叫 sessionId ，需要鉴权时候先拿 sessionId 找用户信息，再拿用户信息判断权限。\u003c/p\u003e\n\u003cp\u003e这种对于长期的令牌看起来就没有那么友好，如果申请一个令牌存在数据库内，然后直接对着这个令牌赋权，那数据库泄露就寄了，一般密码还会 md5 或者 hash 一下存，但 token 完全是个随机值，hash 一下就找不到了，那么 token 直接明文存看起来比密码还不安全，虽然 token 泄漏和密码泄漏危险性也不一致，但总觉的不太合适。\u003c/p\u003e\n\u003cp\u003e这就引出一个问题，是否要在 token 里面带上用户信息？\u003c/p\u003e\n\u003ch3\u003e方法 1：token 里面带用户信息\u003c/h3\u003e\n\u003cp\u003e比如我 token 由用户名+token 名+secret 组成，存储时候存 用户名，token 名，md5(secret)，查询时候先把 token 解析出用户名和 token 名，然后跟查密码一样确认 token 是否合法。\u003c/p\u003e\n\u003ch4\u003e想讨论的问题\u003c/h4\u003e\n\u003cp\u003e这个方法看起来没什么问题，相当于带上用户名和密码来访问了，不过这方法就需要各端协商出一个统一的解析方式。\u003c/p\u003e\n\u003cp\u003e这其实很容易想到 JWT ，可能这里直接用 JWT 就好了，还能帮忙做防篡改等措施，不过 JWT 设计的正常用法是无状态的，他会带来一个吊销困难的问题，感觉也很少长期 token 的设计会使用 JWT 的，而如果我把 JWT 有状态的使用看起来就有点怪。现实情况是否有人拿 JWT 做有状态 token 的呢？或者是否有其他比较好的方法吗？\u003c/p\u003e\n\u003ch3\u003e方法 2：用户传 token + 用户信息\u003c/h3\u003e\n\u003cp\u003e还有种方式是，把 token 就当作密码，每次登录时候用 token 代替密码登录，比如 git push 时候用的 token 就很像。\u003c/p\u003e\n\u003ch4\u003e想讨论的问题\u003c/h4\u003e\n\u003cp\u003e不过他实际存储时候是否是明文存储呢？如果是用的 hash 值存储，那如果一个用户有多个 token ，那是不是就得校验多次呢？并且 token 还能细分权限比如 api 的读写区分，还有项目 token ，ci token 等等，token 多起来之后索引是如何解决的呢\u003c/p\u003e\n",
+      "Author": "SSang",
+      "PubDate": "2022-04-20T10:00:01Z"
+    },
+    {
+      "Title": "@FindBlog 频道新增文章推荐栏目 - 奇思妙想",
+      "Link": "https://www.v2ex.com/t/848206",
+      "Description": "前段时间我在我的频道( \u003ca target=\"_blank\" href=\"https://t.me/findblog\" rel=\"nofollow noopener\"\u003ehttps://t.me/findblog\u003c/a\u003e )里发了一个调查：你希望本频道增加哪些和博客有关的内容？\u003cbr /\u003e\u003cbr /\u003e感谢网友的建议( \u003ca target=\"_blank\" href=\"https://t.me/c/1169210141/177\" rel=\"nofollow noopener\"\u003ehttps://t.me/c/1169210141/177\u003c/a\u003e )，本频道从本周起，每周日筛选个人认为不错的博客文章以周刊形式进行推送。\u003cbr /\u003e\u003cbr /\u003e类别不限，写作时间不限，范围是这周之内我阅读过的博客文章。\u003cbr /\u003e\u003cbr /\u003e由于个人专业知识有限，技术类的文章无法推荐，欢迎各位朋友向我投稿推荐。\u003cbr /\u003e\u003cbr /\u003e目前是 4 月 17 日开始第一期，地址： \u003ca target=\"_blank\" href=\"https://t.me/FindBlog/76\" rel=\"nofollow noopener\"\u003ehttps://t.me/FindBlog/76\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/jTjlzae.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/jTjlzae.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e",
+      "Author": "huhexian",
+      "PubDate": "2022-04-20T09:58:24Z"
+    },
+    {
       "Title": "请教各位大佬， Go 里面接口实现函数签名必须要一样吗？ - Go 编程语言",
       "Link": "https://www.v2ex.com/t/848205",
       "Description": "notify.go\u003cbr /\u003e \u003ca target=\"_blank\" href=\"https://imgur.com/17DVllo\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/17DVllo\u003c/a\u003e \u003cbr /\u003eewx_notify.go\u003cbr /\u003e \u003ca target=\"_blank\" href=\"https://imgur.com/MgtnFDV\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/MgtnFDV\u003c/a\u003e \u003cbr /\u003e \u003cbr /\u003e这样算实现了 Send 这个接口吗？\u003cbr /\u003e但是当我定义这个 SERVICES 时报错了\u003cbr /\u003e  \u003ca target=\"_blank\" href=\"https://imgur.com/8Y6Pwnw\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/8Y6Pwnw\u003c/a\u003e\u003cbr /\u003e  \u003cbr /\u003e我的想法是定义一个 base 的接口可以接收部分相同的参数，实现的接口可以传递其他额外的参数，不知道这个用 Go 怎么实现，请教各位大佬，谢谢",
