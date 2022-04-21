@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Mx keys 按键回弹卡顿和异响 - Apple",
+      "Link": "https://www.v2ex.com/t/848477",
+      "Description": "\u003cp\u003e去年 12 月买的 mx keys 键盘，4 月初拿出来，开始使用，现在已经有两个按键出现回弹卡顿和异响。网上搜索发现这个问题还真普遍。\n不过好在罗技售后给力，看了录制的视频，直接发了个新的键盘过来，还在路上。但是想想新键盘就这种问题，觉得品控确实需要提高。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.zhihu.com/question/424480666\" rel=\"nofollow\"\u003ehttps://www.zhihu.com/question/424480666\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.bilibili.com/video/BV1uE411T79B\" rel=\"nofollow\"\u003ehttps://www.bilibili.com/video/BV1uE411T79B\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.youtube.com/watch?v=OgBZTE7QM0k\" rel=\"nofollow\"\u003ehttps://www.youtube.com/watch?v=OgBZTE7QM0k\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "SuperXX",
+      "PubDate": "2022-04-21T20:02:09Z"
+    },
+    {
+      "Title": "react immutable 相关困惑 - React",
+      "Link": "https://www.v2ex.com/t/848476",
+      "Description": "\u003cp\u003e主要困惑的内容在两个 onClick 事件里，一个对于 state 是 immutable 的，另一个不是，但是效果是相同的。疑惑的点在于\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e两种写法是否都可以，第一种写法会不会导致 bug(比如 react18 cm 模式下)\u003c/li\u003e\n\u003cli\u003e如果两个写法都可以，是不是说明 react 本身并不强依赖 state 的 immutable ，只需要让 newState!==oldState ，也就是引用改变（非 js 基础类型），然后 newState 丢到 setState 里面去 react 都能正常 render\u003c/li\u003e\n\u003c/ol\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eimport { useState } from \"react\"\n\nfunction App() {\n  let [personList, setPersonList] = useState([{ name: \"jack\", age: 18 }])\n  \n  const onClick1 = () =\u0026gt; {\n    let newState = [...personList]\n    newState.push({ name: \"kk\", age: 1 })\n    // 这里相当于直接修改了 personList[0].name 上的值，对于 personList 这个 state 没有做到 immutable\n    newState[0].name = \"ddddddd\"\n    setPersonList(newState)\n  }\n  \n  const onClick2 = () =\u0026gt; {\n    setPersonList([\n      {\n        // 这里先复制一遍 personList[0]，再复制，personList 这个 state 在过程中是只读的，是 immutable\n        ...personList[0],\n        name: \"ddddddd\",\n      },\n      ...personList.slice(1),\n      { name: \"kk\", age: 1 },\n    ])\n  }\n  \n  return (\n    \u0026lt;div className=\"App\"\u0026gt;\n      \u0026lt;button onClick={onClick1}\u0026gt;add1\u0026lt;/button\u0026gt;\n      \u0026lt;button onClick={onClick2}\u0026gt;add2\u0026lt;/button\u0026gt;\n      {personList.map((item, index) =\u0026gt; {\n        return \u0026lt;div key={index}\u0026gt;{item.name}\u0026lt;/div\u0026gt;\n      })}\n    \u0026lt;/div\u0026gt;\n  )\n}\n\nexport default App\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e补充一下上述语境中 immutable 的定义，以常见的 immutable 库 immer 为例，可以看到执行函数，返回 new1 后，old 的值是不变的，这样可以认为 old 是 immutable 的\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eimport { produce } from \"immer\"\n\nconst old = [{ name: \"jack\", age: 18 }]\n\nconst new1 = produce(old, (state) =\u0026gt; {\n  state[0].name = \"ddddddd\"\n  state.push({ name: \"kk\", age: 1 })\n})\n\nconsole.log(\"原始值\", old) // 原始值 [ { name: 'jack', age: 18 } ]\nconsole.log(\"新值\", new1) // 新值 [ { name: 'ddddddd', age: 18 }, { name: 'kk', age: 1 } ]\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "yukinotech",
+      "PubDate": "2022-04-21T19:59:02Z"
+    },
+    {
       "Title": "学校免费的 OneDriveEdu 怎么查看容量配额？没在任何地方看到使用情况字眼。 - 微软",
       "Link": "https://www.v2ex.com/t/848475",
       "Description": "\u003cp\u003eRT 很奇怪 手机客户端、网页端都没显示配额\u003c/p\u003e\n",
