@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "各位大佬指点下字符串模式查找问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/848407",
+      "Description": "\u003ch2\u003e背景\u003c/h2\u003e\n\u003cp\u003e使用虚拟机+OpenWrt+Menthust 解决校园网认证问题，但是会有共享网络检测问题。目前现象是使用 80 端口很大概率被封，用 IPtables 禁止 80 端口的数据出 WALN 口就没事，分析是根据 HTTP 的 User-Agent 请求头判定的，但是现在挺多 APP 还用了 80 端口加速视频、图片什么的。目前找到了两种方案，分别是\u003ca href=\"https://github.com/CHN-beta/xmurp-ua\" rel=\"nofollow\"\u003exmurp-ua\u003c/a\u003e和\u003ca href=\"https://github.com/Zxilly/UA2F\" rel=\"nofollow\"\u003eUA2F\u003c/a\u003e,前者是内核修改，后者是用户态修改方案，但是不好使，访问 \u003ca href=\"http://ua.233996.xyz/\" rel=\"nofollow\"\u003eHTTP 页面\u003c/a\u003e，UA 并没修改。所以我参考他们的自己写了一个，同时也学习下 C 语言及 Linux 方面的东西.\u003c/p\u003e\n\u003ch2\u003e方案\u003c/h2\u003e\n\u003cp\u003e我采用的是第二个方案，设置规则，让符合条件的包交给用户态程序处理，模块是 NFQUEUE 。现在进度是交叉编译环境、测试环境都准备好了，代码进行到在 TCP payload 中查找 User-agent 并替换，想请问下那种查找算法效率高些？以下是我已进行的分析:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eTCP payload 最大载荷是 1500 - IP 头(20) - TCP 头(20) = 1460 (Bytes)，数据量也不是太大，直接暴力或许可以，UA2F 采用的就是暴力的方案\u003c/li\u003e\n\u003cli\u003e查找过程是否需要利用 HTTP 协议结构，比如对于 HTTP 1.x 在遇到第一个换行前不需要匹配 User-Agent 字符。但是这样就需要考虑协议版本的问题了，还需要识别协议的版本。若是直接搜索 User-Agent 字符串，就可以不用考虑这些\u003c/li\u003e\n\u003cli\u003e修改的时候，UA 信息可能被分片了，UA 主要信息在第二个包，但是\u003ccode\u003eUser-Agent\u003c/code\u003e字段却在前一个包，搜索不出来，第二个包好像不太好修改？修改成统一 UA 可能增大 TCP payload 的数据，导致 IP 层分片？感觉去掉各平台的标识就行了，比如 Android 、IOS 、Win 等标识不同时出现。考虑分片增加复杂度了，感觉这种情况可以不考虑，账号拉黑应该有个阈值的，不会有这么多数据包巧合。\u003c/li\u003e\n\u003cli\u003e一个 HTTP 的 TCP 链接，UA 应该大概率出现在第一个数据包（不考虑建立链接的包），后续的包应该不会出现了 UA ，所以可以借助 iptable 的标记功能，对后续的包快速放行。但是 HTTP2 的多路复用后续可能还会出现含义 UA 信息的包,不知道理解的对不对？。现现在大多数还是 HTTP 1.x 的？我观察虎牙直播的就是\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e查找算法我感觉\u003ccode\u003eRabin-Karp Algorithm\u003c/code\u003e应该合适,hh\u003c/p\u003e\n\u003cp\u003e问题是：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e采用何种方案定位 UA 位置？\u003c/li\u003e\n\u003cli\u003e定位后检索平台标识符替换，还是替换成统一的 UA ？\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "bbmike253455",
+      "PubDate": "2022-04-21T09:43:31Z"
+    },
+    {
       "Title": "两台电脑怎么同步文件夹？ - 问与答",
       "Link": "https://www.v2ex.com/t/848406",
       "Description": "\u003cp\u003e一台自用，一台工作。自用电脑用的多点，平常娱乐也处理下工作。\n比较麻烦的是，工作文件夹更新资料处理各类文件，工作机也要复制一份，特别麻烦。\n所以想问问有什么软件可以同步两台 PC 的某一文件夹？\u003c/p\u003e\n",
