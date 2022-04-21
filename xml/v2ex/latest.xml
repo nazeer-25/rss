@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于程序员可持续发展的问题？ - 随想</title>
+      <link>https://www.v2ex.com/t/848409</link>
+      <description>&lt;p&gt;这些年国内互联网的快速扩张，给人一种把平台当成个人能力的错觉。如果以后国内互联网的发展速度趋于稳定状态，程序员的日子还会这么好过吗？那么以后程序员的出路在哪里呢？&#xA;另外还想请教大家一个问题，个人技术栈是专精某个领域好，还是应该往多个领域发展？最近也开始了解一些外企和国外岗位的 jd ，好像国外的岗位都比较偏全栈？还请大家解惑？&lt;/p&gt;&#xA;</description>
+      <author>bigwhite2021</author>
+      <pubDate>21 Apr 2022 09:56:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>乳糖不耐有啥好的牛奶牌子推荐 - 问与答</title>
+      <link>https://www.v2ex.com/t/848408</link>
+      <description>&lt;p&gt;乳糖不耐受，顾名思义，喝到含乳糖的奶制品（甚至只需要一口），就会胃胀、恶心、腹泻。但冲泡咖啡、做一些食品、饮品，牛奶有助于提升风味。&lt;/p&gt;&#xA;&lt;p&gt;据我了解，此类人群，大致有两种被救赎的途径：一是乳糖酶片剂，食用乳糖前服用短时间内帮助消化，另一种，就是调制乳，即预先混入乳糖酶的牛奶。&lt;/p&gt;&#xA;&lt;p&gt;那么，有啥子味道值得信任、味道还不错的牌子推荐呢？&lt;/p&gt;&#xA;&lt;p&gt;我个人在线下买了蒙牛、伊利的 12 盒装（¥50 ），但觉得味道寡淡；又在电商平台上尝试过 1L 装的两家品牌，尼平河和卢森，颜色发黄，卢森的味道过甜，像小时候喝的旺仔牛奶。&lt;/p&gt;&#xA;&lt;p&gt;搜也搜不出个结果，商品评价都是给猫喝，猫很满意。遂来询问。&lt;/p&gt;&#xA;</description>
+      <author>KepaThings</author>
+      <pubDate>21 Apr 2022 09:54:00 +0000</pubDate>
+    </item>
+    <item>
       <title>各位大佬指点下字符串模式查找问题 - 程序员</title>
       <link>https://www.v2ex.com/t/848407</link>
       <description>&lt;h2&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;使用虚拟机+OpenWrt+Menthust 解决校园网认证问题，但是会有共享网络检测问题。目前现象是使用 80 端口很大概率被封，用 IPtables 禁止 80 端口的数据出 WALN 口就没事，分析是根据 HTTP 的 User-Agent 请求头判定的，但是现在挺多 APP 还用了 80 端口加速视频、图片什么的。目前找到了两种方案，分别是&lt;a href=&#34;https://github.com/CHN-beta/xmurp-ua&#34; rel=&#34;nofollow&#34;&gt;xmurp-ua&lt;/a&gt;和&lt;a href=&#34;https://github.com/Zxilly/UA2F&#34; rel=&#34;nofollow&#34;&gt;UA2F&lt;/a&gt;,前者是内核修改，后者是用户态修改方案，但是不好使，访问 &lt;a href=&#34;http://ua.233996.xyz/&#34; rel=&#34;nofollow&#34;&gt;HTTP 页面&lt;/a&gt;，UA 并没修改。所以我参考他们的自己写了一个，同时也学习下 C 语言及 Linux 方面的东西.&lt;/p&gt;&#xA;&lt;h2&gt;方案&lt;/h2&gt;&#xA;&lt;p&gt;我采用的是第二个方案，设置规则，让符合条件的包交给用户态程序处理，模块是 NFQUEUE 。现在进度是交叉编译环境、测试环境都准备好了，代码进行到在 TCP payload 中查找 User-agent 并替换，想请问下那种查找算法效率高些？以下是我已进行的分析:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;TCP payload 最大载荷是 1500 - IP 头(20) - TCP 头(20) = 1460 (Bytes)，数据量也不是太大，直接暴力或许可以，UA2F 采用的就是暴力的方案&lt;/li&gt;&#xA;&lt;li&gt;查找过程是否需要利用 HTTP 协议结构，比如对于 HTTP 1.x 在遇到第一个换行前不需要匹配 User-Agent 字符。但是这样就需要考虑协议版本的问题了，还需要识别协议的版本。若是直接搜索 User-Agent 字符串，就可以不用考虑这些&lt;/li&gt;&#xA;&lt;li&gt;修改的时候，UA 信息可能被分片了，UA 主要信息在第二个包，但是&lt;code&gt;User-Agent&lt;/code&gt;字段却在前一个包，搜索不出来，第二个包好像不太好修改？修改成统一 UA 可能增大 TCP payload 的数据，导致 IP 层分片？感觉去掉各平台的标识就行了，比如 Android 、IOS 、Win 等标识不同时出现。考虑分片增加复杂度了，感觉这种情况可以不考虑，账号拉黑应该有个阈值的，不会有这么多数据包巧合。&lt;/li&gt;&#xA;&lt;li&gt;一个 HTTP 的 TCP 链接，UA 应该大概率出现在第一个数据包（不考虑建立链接的包），后续的包应该不会出现了 UA ，所以可以借助 iptable 的标记功能，对后续的包快速放行。但是 HTTP2 的多路复用后续可能还会出现含义 UA 信息的包,不知道理解的对不对？。现现在大多数还是 HTTP 1.x 的？我观察虎牙直播的就是&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;查找算法我感觉&lt;code&gt;Rabin-Karp Algorithm&lt;/code&gt;应该合适,hh&lt;/p&gt;&#xA;&lt;p&gt;问题是：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;采用何种方案定位 UA 位置？&lt;/li&gt;&#xA;&lt;li&gt;定位后检索平台标识符替换，还是替换成统一的 UA ？&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
