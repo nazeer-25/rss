@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>绕过无线基站的通讯 APP - 奇思妙想</title>
+      <link>https://www.v2ex.com/t/848330</link>
+      <description>&lt;p&gt;看到大家讨论去中心化即时通讯项目那么热烈，想到其实可以直接做一款 APP ，调用手机的无线芯片，不通过运营商基站，直接其他手机实现通讯。&lt;/p&gt;&#xA;&lt;p&gt;类似的应用有 NFC 和 AirTags 那个蓝牙网络。&lt;/p&gt;&#xA;&lt;p&gt;搜了一下已经有很多类似的研究和专利。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://patentimages.storage.googleapis.com/95/20/e8/e710a850a06db5/CN103369579A.pdf&#34; rel=&#34;nofollow&#34;&gt;https://patentimages.storage.googleapis.com/95/20/e8/e710a850a06db5/CN103369579A.pdf&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://patentimages.storage.googleapis.com/0a/10/07/33f2d7dbb14447/CN102413536A.pdf&#34; rel=&#34;nofollow&#34;&gt;https://patentimages.storage.googleapis.com/0a/10/07/33f2d7dbb14447/CN102413536A.pdf&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://www.xjishu.com/zhuanli/62/201610556296.html&#34; rel=&#34;nofollow&#34;&gt;http://www.xjishu.com/zhuanli/62/201610556296.html&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;只要手机覆盖的密度够高，那理论上应该是可以不通过基站在一个范围内建立去中心化局域网，再在这个网络实现通讯的。&lt;/p&gt;&#xA;&lt;p&gt;如果这个 APP 还支持延迟发送和延迟接收，那就可以完全避开监控了。&lt;/p&gt;&#xA;&lt;p&gt;例如大家约好每个星期去某个咖啡厅，然后就会在群组中上线，保密性刚刚的！&lt;/p&gt;&#xA;</description>
+      <author>Ourobotos</author>
+      <pubDate>21 Apr 2022 04:15:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于 mybatisPlus 和传入动态参数排序的问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/848329</link>
+      <description>&lt;p&gt;请问各位大佬一个问题，我在使用 mybatisplus 时候遇到一个场景：&#xA;首先 有用户、商户、运营者这三个角色，用户申请成为运营者之后，就会在 shop_operator 表中建立一条关联关系，在界面 [申请成为运营者] 当中，需要查询出所有的店铺信息，然后将具有关联关系的店铺置顶&#xA;我是这么做的，首先查出登陆人的 id ，然后查关联关系，找出与我有关联的商铺 id ，然后把商铺 id 列表传入到查询 sql 中进行 order by desc 排序，但是此时会报错&#xA;Error querying database. Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : \n SELECT COUNT(1) FROM op_shop_info osi WHERE osi.shop_status = &#39;1&#39;&#xA;我在 Mapper 中的接口：&#xA;IPage&lt;opshopinfo&gt; queryShopListAndApplySts(Page page, @&lt;a href=&#34;/member/Param&#34;&gt;Param&lt;/a&gt;(&#34;shopName&#34;) String shopName, @&lt;a href=&#34;/member/Param&#34;&gt;Param&lt;/a&gt;(&#34;shopIds&#34;) List&lt;integer&gt; shopIds,@Param(&#34;userId&#34;) Integer userId);&lt;/integer&gt;&lt;/opshopinfo&gt;&lt;/p&gt;&#xA;&lt;p&gt;我在 xml 中写的 sql：&#xA;select     osi.shop_id,&#xA;osi.shop_name,&#xA;oso.apply_status,&#xA;oso.ct_time as apply_time&#xA;from op_shop_info osi&#xA;left join op_shop_operator oso on osi.shop_id = oso.shop_id and &#x9;&#x9;                                                            oso.user_id = #{userId}&#xA;&amp;lt;where&amp;gt;&#xA;osi.shop_status = &#39;1&#39;&#xA;&amp;lt;if test=&#34;shopName != null and shopName != &#39;&#39;&#34;&amp;gt;&#xA;and osi.shop_name like concat(&#39;%&#39;, #{shopName}, &#39;%&#39;)&#xA;&amp;lt;/if&amp;gt;&#xA;&amp;lt;/where&amp;gt;&#xA;&amp;lt;if test=&#34;shopIds != null and shopIds.size() != 0&#34;&amp;gt;&#xA;order by osi.shop_id in&#xA;&amp;lt;foreach collection=&#34;shopIds&#34; item=&#34;shopId&#34; index=&#34;index&#34; open=&#34;(&#34;     separator=&#34;,&#34; close=&#34;)&#34;&amp;gt;&#xA;#{shopId}&#xA;&amp;lt;/foreach&amp;gt;&#xA;desc&#xA;&amp;lt;/if&amp;gt;&lt;/p&gt;&#xA;&lt;p&gt;-- 最后是以查询 List ，然后对 List 手动分页暂时解决了。&#xA;还是对于原来写法这个报错很费解，那个 SELECT COUNT(*)是用来查询总条数的吧，为什么加上 order by 就报错呢？求解答，谢谢。&lt;/p&gt;&#xA;</description>
+      <author>kyoma</author>
+      <pubDate>21 Apr 2022 04:06:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>plus 会员免费领京东到家 VIP 和新增一些最新的联合会员活动～ - 优惠信息</title>
+      <link>https://www.v2ex.com/t/848328</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://daojia.jd.com/taroh5/h5dist/?channel=ac#/pages/differentIndustry-t/index?channel=jindongplus&amp;amp;rls_rge=out&amp;amp;isShowDownButton=0&#34; rel=&#34;nofollow&#34;&gt;京东 PLUS 会员免费领京东到家月卡和 6 张×4 元通用红包&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;更多会员活动，可以关注公众号：&lt;strong&gt;会员有活动&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;原文链接：&lt;a href=&#34;https://mp.weixin.qq.com/s/ELuhNf0M7oTPmani5piAIA&#34; rel=&#34;nofollow&#34;&gt;免费领 30 天京东到家+文库联合会员(买 1 得 5 仅 19 元)&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/QhwLYp4v52KolbGTkhxLTQ&#34; rel=&#34;nofollow&#34;&gt;新增三个联合会员活动!&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/NWQHSfNHW6yj9z-YUfXC2w&#34; rel=&#34;nofollow&#34;&gt;免费领百度网盘会员+两个联合会员活动～买一得 N&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>Rain520</author>
+      <pubDate>21 Apr 2022 04:06:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>github 个人主页的这个 team 怎么去掉? - 程序员</title>
+      <link>https://www.v2ex.com/t/848327</link>
+      <description>&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/04/21/ff0479329634382d.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;救命,主页挂个这个好下头&lt;/p&gt;&#xA;&lt;p&gt;我只是给提了个 typo issue,也妹加入这个 team,为啥会在主页出现&lt;/p&gt;&#xA;</description>
+      <author>RRyo</author>
+      <pubDate>21 Apr 2022 04:02:18 +0000</pubDate>
+    </item>
+    <item>
       <title>如何解决 PS5 透明代理与 uu 加速器冲突 - 问与答</title>
       <link>https://www.v2ex.com/t/848326</link>
       <description>为了看流媒体 PS5 设了透明代理，但这样 uu 加速器就不起作用了。&lt;br /&gt;有什么办法解决这个问题呢？既能透明代理，又能游戏网络加速</description>
