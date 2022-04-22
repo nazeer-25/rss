@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "创建了一个 Java 的增强 lambda 库，搬了一些 kotlin 中特别好用的方法过来 - 程序员",
+      "Link": "https://www.v2ex.com/t/848669",
+      "Description": "\u003cp\u003e一直在 kotlin 和 java 之间来回开发，有时候在写 java 的时候经常想起 kotlin 中特别方便的一些 lambda 方法，找了一圈好像也没找到合适的，就决定自己手撸一个用在自己项目里了，初版还很粗糙，欢迎大佬们提意见。项目地址在 \u003ca href=\"https://github.com/zshnb/extension-lambda\" rel=\"nofollow\"\u003ehttps://github.com/zshnb/extension-lambda\u003c/a\u003e 。\u003c/p\u003e\n\u003cp\u003e下面附一段使用说明。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e便捷的 map 操作\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e// 把一个 map 转成另一个 value 不变，key 不一样的 map\njava.util.Map\u0026lt;Integer, Integer\u0026gt; map = java.util.Map.of(1, 1, 2, 2, 3, 3);\njava.util.Map\u0026lt;String, Integer\u0026gt; anotherMap = Map.mapKey(map, entry -\u0026gt; entry.getKey().toString());\n\n// 把一个 map 转成另一个 key 不变，value 不一样的 map\njava.util.Map\u0026lt;Integer, Integer\u0026gt; map = java.util.Map.of(1, 1, 2, 2, 3, 3);\njava.util.Map\u0026lt;Integer, String\u0026gt; anotherMap = Map.mapValue(map, entry -\u0026gt; entry.getKey().toString());\n\n// 可以在 lambda 方法里引用 list 的下标\nList\u0026lt;Integer\u0026gt; integers = mapIndex(pairs, (index, pair) -\u0026gt; {\n    Assertions.assertEquals(index, atomicInteger.getAndIncrement());\n    return pair.getLeft();\n}).collect(Collectors.toList());\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003e分组，转换相关\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e// 把 list 转换成 map, key 的值由 lambda 得到\nMap\u0026lt;String, Pair\u0026lt;Integer, String\u0026gt;\u0026gt; map = associateBy(pairs, Pair::getRight);\n\n// 把 list 转换成 map, value 的值由 lambda 得到\nMap\u0026lt;String, Pair\u0026lt;Integer, String\u0026gt;\u0026gt; map = associateWith(pairs, Pair::getRight);\n\n// 分组，相同 key 的 item 在一个 list 里，key 由 lambda 得到\nMap\u0026lt;Integer, List\u0026lt;Pair\u0026lt;Integer, String\u0026gt;\u0026gt;\u0026gt; map = GroupBy.groupBy(pairs, Pair::getLeft);\n// 与上面不同的是 list 中的 value 也可以通过 lambda 得到\nMap\u0026lt;Integer, List\u0026lt;String\u0026gt;\u0026gt; map = GroupBy.groupBy(pairs, Pair::getLeft, Pair::getRight);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003elet with\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e// with 的 lambda 里返回的是传入的对象\nPair\u0026lt;Integer, Integer\u0026gt; pair = With.with(Pair.pair(1, 2), innerPair -\u0026gt; {\n    innerPair.setLeft(2);\n    innerPair.setRight(3);\n    return innerPair;\n});\n// let 的 lambda 里返回的是 lambda 里最后 return 语句的值\nInteger integer = Let.let(Pair.pair(1, 2), Pair::getLeft);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003e判断\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e// any 任何一个元素符合 predicate, 返回 true, 类似 or\nboolean result = Any.any(pairs, p -\u0026gt; p.getLeft() % 2 == 0);\n// all 所有元素符合 predicate,返回 true, 类似 and\nboolean result = All.all(pairs, p -\u0026gt; p.getLeft() \u0026gt; 0);\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "857681664",
+      "PubDate": "2022-04-22T13:43:10Z"
+    },
+    {
+      "Title": "求一个 局域网文件互传 方案 - 问与答",
+      "Link": "https://www.v2ex.com/t/848667",
+      "Description": "如题所述，我有两台电脑，一个是笔记本，一个是台式\u003cbr /\u003e\u003cbr /\u003e台式是接的路由器的口，笔记本是连的 wifi\u003cbr /\u003e\u003cbr /\u003e两个电脑之间需要几乎每天都会要互传文件，有没有什么好的方案\u003cbr /\u003e\u003cbr /\u003e目前在使用的 Windows 自带的**映射网络驱动器**，用着跟打开一个文件夹差不多的体验（我把它的快捷方式放桌面了）。不过令我感到不愉快的是，如果有一台主机离线了，一旦我从另一台主机中的桌面上拖拽一份文件稍微揩了一点那个快捷方式的油，就会卡住，我猜可能是在发送信号请求登录啥的\u003cbr /\u003e\u003cbr /\u003e有没有什么其他好的替代方案",
+      "Author": "cpf",
+      "PubDate": "2022-04-22T13:41:56Z"
+    },
+    {
       "Title": "如何无伤害防止猫咪在某些特定区域活动？ - 问与答",
       "Link": "https://www.v2ex.com/t/848666",
       "Description": "猫咪总喜欢跳到机箱的水冷口上，但是那是唯一的散热，以及一些衣柜里。之前发现猫咪很讨厌风油精，但是查了好像风油精有点伤害？有没有其他办法？",
