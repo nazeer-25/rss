@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "求一个开源 IM 系统 - 问与答",
+      "Link": "https://www.v2ex.com/t/848749",
+      "Description": "\u003cp\u003e要求，可以私有部署，支持在线人数 100 左右，功能：聊天，群组，传输文件.目前看到最合适的是 signalapp ，不过几乎没有文档，服务模块复杂，涉及语言也多，不利于后期二开。\u003c/p\u003e\n",
+      "Author": "HunterPan",
+      "PubDate": "2022-04-23T05:13:10Z"
+    },
+    {
       "Title": "MAC 访问 samba 频繁出现打不开文件夹 - Apple",
       "Link": "https://www.v2ex.com/t/848746",
       "Description": "\u003cp\u003e报错：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e不能打开文件夹“xxxx”，因为您没有权限查看其内容。\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e文件夹右下角有个禁止符号，经常出现，每次出现，重启 samba 服务有时候能管用，有时候不行（ samba 在 ubuntu 上）\u003c/p\u003e\n\u003cp\u003e但是虽说有这个状态，但是删除 /新建文件夹都是没问题的（但新建文件夹不能重命名），共享目录下，不在文件夹里的文件，读取，编辑，重命名，删除都没问题。\u003c/p\u003e\n\u003cp\u003e然后我试着用户 mac 的命令行，cd 到这个共享目录，也是没问题的\u003c/p\u003e\n\u003cp\u003e所有共享文件，文件夹权限在 ubuntu 都是 777 ，属组是 root：root\u003c/p\u003e\n\u003cp\u003e所以问题究竟出在哪里？\u003c/p\u003e\n\u003cp\u003e下面是 samba 的配置文件\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e[global]\n\tsyslog = 0\n\tserver role = standalone server\n\tobey pam restrictions = yes\n\tworkgroup = WORKGROUP\n\tunix password sync = yes\n\tmax log size = 1000\n\tmin protocol = SMB2\n\tpasswd program = /usr/bin/passwd %u\n\tpasswd chat = *Enter\\snew\\s*\\spassword:* %n\\n *Retype\\snew\\s*\\spassword:* %n\\n *password\\supdated\\ssuccessfully* .\n\tusershare allow guests = no\n\tos level = 20\n\tpanic action = /usr/share/samba/panic-action %d\n\tmap to guest = bad user\n\tpam password change = yes\n\tpassdb backend = tdbsam\n\tserver string =\n\tlog file = /var/log/samba/log.%m\n\tdns proxy = no\n\n\n[video]\n    valid users = video\n    write list = video\n    create mode = 777\n    directory mode = 777\n    path = /data/video\n    writable = yes\n    browseable = yes\n\u003c/code\u003e\u003c/pre\u003e\n",
