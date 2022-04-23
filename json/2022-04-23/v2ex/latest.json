@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "业务快速迭代需要修改数据库表结构，有办法能避免服务频繁重启吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/848851",
+      "Description": "\u003cp\u003e非微服务架构，没有那么庞大的需求。但是这个需求在设计上需要经常修改表结构，比如商品对象未来可能会不断新增一些附加属性（假设目前每行需要保存对象的文件地址、文件大小、修改时间等等，未来可能会根据需求不断新增作者 id ，作者备注等等，大概类似这种情况）\u003c/p\u003e\n\u003cp\u003e在这个需求下最初建表的时候不可能设计出未来所有可能出现的项目，而每次新增项目都要调整表结构，这又涉及到服务重启，还有如果有正在处理的链接那表还有上锁的等等问题。。有什么设计上的经验可以比较好的处理，避免各种凌晨三点维护重启服务的情况吗？\u003c/p\u003e\n\u003cp\u003e========\u003c/p\u003e\n\u003cp\u003e目前想到一种方法是专门搞一个追加项目表，里面一共四项，分别是(追加项目 id ，链接的原始项目 id ，追加项目名称，追加项目内容)。但是这么搞的话随着数据量无限增大，感觉处理读取需求时系统会被拖到非常慢，不是一个可行的方案。\u003c/p\u003e\n",
+      "Author": "LeeReamond",
+      "PubDate": "2022-04-23T20:35:45Z"
+    },
+    {
+      "Title": "从零开始搭建一个简单实用的微服务模板 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/848850",
+      "Description": "\u003cp\u003e最近总结了下平时工作中写的微服务, 抽出来一个比较简单直观的微服务项目启动模板. 如果对 Go 微服务选工具库或组织代码有所疑虑的话可以读读看, 限于篇幅这里就放个引言, 全篇可以点链接.\u003c/p\u003e\n\u003chr/\u003e\n\u003ch2\u003e引言\u003c/h2\u003e\n\u003cp\u003e微服务算是一个 Go 语言的主要应用场景, 与 Java 不同 Go 语言生态中并不存在一个像 Spring 那样具有绝对统治力的后端框架. 一般大家都是按照自己的业务需求, 组合一些工具库来实现微服务. 这次就带大家一起来实现一个简单实用的项目模板. \u003c/p\u003e\n\u003cp\u003e首先分享下我平常写微服务时常用的库:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e日志: \u003ca href=\"http://github.com/sirupsen/logrus\" rel=\"nofollow\"\u003egithub.com/sirupsen/logrus\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e命令行: \u003ca href=\"http://github.com/urfave/cli/v2\" rel=\"nofollow\"\u003egithub.com/urfave/cli/v2\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e服务器: \u003ca href=\"http://github.com/gofiber/fiber/v2\" rel=\"nofollow\"\u003egithub.com/gofiber/fiber/v2\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eHTTP 客户端: \u003ca href=\"http://github.com/go-resty/resty/v2\" rel=\"nofollow\"\u003egithub.com/go-resty/resty/v2\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e参数校验: \u003ca href=\"http://github.com/go-playground/validator/v10\" rel=\"nofollow\"\u003egithub.com/go-playground/validator/v10\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eJWT: \u003ca href=\"http://github.com/dgrijalva/jwt-go\" rel=\"nofollow\"\u003egithub.com/dgrijalva/jwt-go\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eMySQL: \u003ca href=\"http://github.com/go-sql-driver/mysql\" rel=\"nofollow\"\u003egithub.com/go-sql-driver/mysql\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e错误处理: \u003ca href=\"http://github.com/gota33/errors\" rel=\"nofollow\"\u003egithub.com/gota33/errors\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e初始化工具: \u003ca href=\"http://github.com/gota33/initializr\" rel=\"nofollow\"\u003egithub.com/gota33/initializr\u003c/a\u003e \u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e这次的项目模板准备支持的特性:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e命令行启动\u003c/li\u003e\n\u003cli\u003e优雅退出\u003c/li\u003e\n\u003cli\u003e配置仓库\u003c/li\u003e\n\u003cli\u003e访问日志\u003c/li\u003e\n\u003cli\u003eJWT\u003c/li\u003e\n\u003cli\u003e结构化错误处理\u003c/li\u003e\n\u003cli\u003e请求校验\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e全篇: \u003ca href=\"https://blog.igota.net/posts/20220422/\" rel=\"nofollow\"\u003ehttps://blog.igota.net/posts/20220422/\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "Gota",
+      "PubDate": "2022-04-23T20:33:46Z"
+    },
+    {
       "Title": "20220424 午夜俱乐部 - 天黑以后",
       "Link": "https://www.v2ex.com/t/848849",
       "Description": "\u003cp\u003e1 点 19 分被蚊子吵醒\u003c/p\u003e\n\u003cp\u003e躺在床上用肉体诱惑，等蚊子上钩\u003c/p\u003e\n\u003cp\u003e终于在 2 点 20 分打死蚊子，顺便上厕所小解\u003c/p\u003e\n\u003cp\u003e回到床上以为能睡个安稳觉\u003c/p\u003e\n\u003cp\u003e3 点 02 分耳旁嗡嗡作响，发现还有另一头蚊子\u003c/p\u003e\n\u003cp\u003e开灯去找蚊子，蚊子又飞走了\u003c/p\u003e\n\u003cp\u003e干，现在彻底失眠了\u003c/p\u003e\n",
