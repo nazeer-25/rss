@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>网上找了很多 windows 程序启动器，都不太好用，便学了下 pyqt 写了个 windows 程序启动器，欢迎 star - 程序员</title>
+      <link>https://www.v2ex.com/t/848761</link>
+      <description>&lt;p&gt;&lt;img alt=&#34;image&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://raw.githubusercontent.com/rango886/seed/main/example.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h1&gt;起因&lt;/h1&gt;&#xA;&lt;p&gt;网上找了很多的启动器，或多或少都有些缺点&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;不美观&lt;/li&gt;&#xA;&lt;li&gt;功能不符合自己的要求&lt;/li&gt;&#xA;&lt;li&gt;需要付费，绑定机器，订阅，账号登录&lt;/li&gt;&#xA;&lt;li&gt;不开源，想改动软件改不了&lt;/li&gt;&#xA;&lt;li&gt;开源，但是程序复杂。本项目十分简单，主程序 100 来行代码&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;种子启动器&lt;/h1&gt;&#xA;&lt;p&gt;取名种子启动器, 寓意通过种子启动器, 启动种子, 种子长成大树&lt;/p&gt;&#xA;&lt;h1&gt;技术栈&lt;/h1&gt;&#xA;&lt;p&gt;pyqt&lt;/p&gt;&#xA;&lt;h1&gt;使用方法&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;将快捷方式放入项目下 lnk 文件夹, lnk 文件夹内也可以建立文件夹, 文件夹支持嵌套&lt;/li&gt;&#xA;&lt;li&gt;在 lnk 文件夹内, quick 文件夹内的快捷方式会在菜单的第一级显示&lt;/li&gt;&#xA;&lt;li&gt;&#xA;快捷键控制 快捷键是全局的，任意程序内按快捷键都可以弹出菜单窗口&lt;ul&gt;&#xA;&lt;li&gt;alt+z 显示菜单&lt;/li&gt;&#xA;&lt;li&gt;esc 键隐藏菜单&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;项目地址 &lt;a href=&#34;https://github.com/rango886/seed&#34; rel=&#34;nofollow&#34;&gt;https://github.com/rango886/seed&lt;/a&gt; 欢迎 star 提建议&lt;/p&gt;&#xA;</description>
+      <author>lizhiping886</author>
+      <pubDate>23 Apr 2022 07:16:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>Wordpress 定时任务 wp-cron 的性能优化 - WordPress</title>
+      <link>https://www.v2ex.com/t/848760</link>
+      <description>&lt;p&gt;wordpress 的定时任务，比如定时发布文章，依赖的是自带的 wp-cron 来实现，这个需要用户访问来触发  &lt;/p&gt;&#xA;&lt;p&gt;由此引发了一个问题：  &lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如果网站用户访问不多，那么任务将不确定何时被触发  &lt;/li&gt;&#xA;&lt;li&gt;如果网站访问量很大，那么会严重的损耗性能（当然访问量大的，应该有能力解决）  &lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;那么最好是禁用自动触发的功能&lt;/p&gt;&#xA;&lt;h2&gt;禁用 wp-cron&lt;/h2&gt;&#xA;&lt;p&gt;在 &lt;code&gt;wp-config.php&lt;/code&gt; 里加上：   &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;define(&#39;DISABLE_WP_CRON&#39;, true);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这样就不会每个用户访问都来检测定时任务了 &lt;/p&gt;&#xA;&lt;h2&gt;通过 crontab 触发 wp-cron&lt;/h2&gt;&#xA;&lt;p&gt;如果是 linux 系统，并且可以登录服务器，那么用系统自带的 &lt;code&gt;crontab&lt;/code&gt; 来触发任务是比较理想的选择  &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;crontab -e&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后添加  &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;* * * * *   curl   https://example.com/wp-cron.php &amp;gt;&amp;gt; /dev/null 2&amp;gt;&amp;amp;1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这样，每分钟系统都会访问 wp-corn.php 这个文件，然后 wp-cron 会判断何时执行任务  &lt;/p&gt;&#xA;&lt;h2&gt;通过外部第三方系统触发（可选）&lt;/h2&gt;&#xA;&lt;p&gt;如果是 windows 系统，或者没有权限操作系统的 crontab ，那么还可以选择第三方的服务，这里我就要推一下我自己的服务了： &lt;a href=&#34;https://urlcron.itutil.cn&#34; rel=&#34;nofollow&#34;&gt;URLCron&lt;/a&gt; &lt;/p&gt;&#xA;&lt;p&gt;URLCron 会根据设定的频率或者表达式，按时去访问，与 crontab 的行为一致。不过使用 URLCron 会更加的方便，因为配置更简单，不需要 Linux 服务器的知识，同时可以保存访问记录，所以不用担心有没有触发定时任务，都记着呢  &lt;/p&gt;&#xA;&lt;p&gt;PC 和手机浏览器都有很好的体验，免费套餐也够 WordPress 用了  &lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img-blog.csdnimg.cn/img_convert/b747288f27ca308521dbdaa03099d8e7.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>imdgr886</author>
+      <pubDate>23 Apr 2022 07:15:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于 web3.0 的去中心化 - 分享发现</title>
+      <link>https://www.v2ex.com/t/848759</link>
+      <description>相信昨天的《四月之声》大家都看到了，不讨论政治，只谈技术，如果实现完完整整的去中心化，那是不是“删帖” “和谐” 将不复存在？&lt;br /&gt;期待能够有一天能够看到社交网络能够实现这个技术；&lt;br /&gt;可是这个如何实现？</description>
+      <author>magewu1223ll</author>
+      <pubDate>23 Apr 2022 07:06:49 +0000</pubDate>
+    </item>
+    <item>
       <title>十分无比极度纠结 iPad pro 到底买 11 寸还是 12.9 寸的。。。 - Apple</title>
       <link>https://www.v2ex.com/t/848758</link>
       <description>&lt;p&gt;最近学习要用到 iPad ，有个很老的 iPad Air ，太慢几乎没啥用了，想升级到 iPadPro 。主要需求是“看”，所以对屏幕尺寸很纠结。大致的明细需求如下：&#xA;1 、看各种杂七杂八的互联网 app ，知乎、b 站、v2ex 等；&#xA;2 、上网，用 safari 浏览网页的那种；&#xA;3 、偶尔看看资料、电子书，pdf 等；&#xA;4 、对画画、笔、键盘输入没有强烈需求；&#xA;5 、对 mini-led 也没啥太大需求；&#xA;6 、会有一定频率带出去，但也不是天天很长时间在外面需要掏出个 iPad 。&lt;/p&gt;&#xA;&lt;p&gt;到 apple store 摸了摸真机，12 寸屏幕确实爽，但是尺寸真是大。。。11 寸便携，屏幕小一圈。。。&#xA;所以。。。。就有了标题的无比纠结。。。&lt;/p&gt;&#xA;&lt;p&gt;听听大家的建议。&lt;/p&gt;&#xA;</description>
