@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Y9000P 2022 键盘失灵！ - 问与答</title>
+      <link>https://www.v2ex.com/t/848812</link>
+      <description>&lt;p&gt;系统：&#xA;WIN10 21H2 19044.1645&lt;/p&gt;&#xA;&lt;p&gt;问题：&#xA;本来是一直没开键盘灯，使用过程总突然键盘灯亮了（也可能是我按了 fn+space ），键盘就挂了，按什么键都没反应，重启进 BIOS 按 F12 也没反应，接外接键盘是好的，本体键盘就是没一丁点反应，后来重启两次就好了，各位遇见过同样情况的吗，真是活久见，用过几台笔记本，但是笔记本键盘挂掉第一次遇到，难道这是联想药丸的预兆？&lt;/p&gt;&#xA;</description>
+      <author>n2l</author>
+      <pubDate>23 Apr 2022 12:55:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>libfv：基于 C++20 的异步 HTTP 库 - C++</title>
+      <link>https://www.v2ex.com/t/848811</link>
+      <description>&lt;p&gt;仓库地址：&lt;a href=&#34;https://github.com/fawdlstty/libfv&#34; rel=&#34;nofollow&#34;&gt;https://github.com/fawdlstty/libfv&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;介绍一款船新 HTTP 库。C++的 HTTP 库很多，但基于 C++20 的异步网络 HTTP 库几乎没有。我没找到好用的，因此写了一个。在讲解这个库之前，我先说说为什么我们需要这样的库。&lt;/p&gt;&#xA;&lt;p&gt;C++ HTTP 库有两种主要的实现方式，第一种是同步 HTTP 网络访问，比如这样的代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;// 伪代码&#xA;Response _r = HttpGet (&#34;https://t.cn&#34;);&#xA;std::cout &amp;lt;&amp;lt; _t.text;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这样的代码写起来很简单，但它存在一个问题：HTTP 网络访问比较耗时，可能需要几百毫秒，这么长时间，这个线程将阻塞在这里，比较消耗线程资源。假如遇到需要同时发起几十、几百个请求，将较大消耗系统资源。很显然，它不是一个较好的设计。&lt;/p&gt;&#xA;&lt;p&gt;第二种是回调通知，比如这样的代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;// 伪代码&#xA;HttpGet (&#34;https://t.cn&#34;, [] (Response _r) {&#xA;&#x9;std::cout &amp;lt;&amp;lt; _t.text;&#xA;});&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这种方式解决了线程问题，也就是，几十、几百个请求可以同时发起，只需要极少量或者一个线程就行，HTTP 库内部实现了请求的内部管理，在收到请求的回复后，调用回调函数，从而实现请求的高效处理。但这种方式有个问题，假如我们需要根据请求结果内容转给下一个请求，这会带来一个回调地狱问题，比如这样的代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;// 伪代码&#xA;HttpGet (&#34;https://t.cn&#34;, [] (Response _r) {&#xA;    HttpGet (_t.text, [] (Response _r) {&#xA;        HttpGet (_t.text, [] (Response _r) {&#xA;            HttpGet (_t.text, [] (Response _r) {&#xA;                HttpGet (_t.text, [] (Response _r) {&#xA;                    std::cout &amp;lt;&amp;lt; _t.text;&#xA;                });&#xA;            });&#xA;        });&#xA;    });&#xA;});&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;那么，有没更好的处理方式呢？有，通过 C++20 的 co_await 实现异步等待。下面给出 libfv 的发起请求的代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;fv::Response _r = co_await fv::Get (&#34;https://t.cn&#34;);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;一方面它能获得回调方式的好处，也就是少量线程支撑同时大量的请求任务，同时它不会带来回调地狱问题。上面的代码通过 libfv 实现，代码可以这样写：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;fv::Response _r = co_await fv::Get (&#34;https://t.cn&#34;);&#xA;_r = co_await fv::Get (_r.text);&#xA;_r = co_await fv::Get (_r.text);&#xA;_r = co_await fv::Get (_r.text);&#xA;_r = co_await fv::Get (_r.text);&#xA;std::cout &amp;lt;&amp;lt; _t.text;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这儿特别说明一下。单 CPU 处理效率来说，C++20 的异步性能比回调要低，大概 10%左右，也就是假设理论上跑满网络 IO 带宽情况，回调需要 10%的 CPU ，那么使用 C++20 的异步需要 11%，这是 stackless 需要付出的代价。当然，在我看来这个特性完全可以忽略，毕竟 IO 密集型应用首先需要考虑的是跑满网络带宽，一般不太需要关注 CPU 使用率。&lt;/p&gt;&#xA;&lt;p&gt;libfv 使用方法见仓库：&lt;a href=&#34;https://github.com/fawdlstty/libfv&#34; rel=&#34;nofollow&#34;&gt;https://github.com/fawdlstty/libfv&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>fawdlstty</author>
+      <pubDate>23 Apr 2022 12:52:46 +0000</pubDate>
+    </item>
+    <item>
       <title>macOS 关于图片拼接的问题 - Apple</title>
       <link>https://www.v2ex.com/t/848808</link>
       <description>&lt;p&gt;请问 mac 下有没有快速简单的图片拼接的方法？或是软件？比如图片无缝竖拼和横拼的，望各位大神指点，感谢！！！&lt;/p&gt;&#xA;</description>
