@@ -44,9 +44,9 @@
       <description>&lt;p&gt;众所周知,在windows环境下编译linux上可执行程序的命令如下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;SET CGO_ENABLED=0 &#xA;SET GOOS=linux&#xA;SET GOARCH=amd64&#xA;go build main.go&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;自已在windows上写的玩意有时候老是想放到不同环境上跑,每次编译就需要执行4条命令,很麻烦&#xA;于是简单弄了个build_linux.bat&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;set file=%1&#xA;if &amp;quot;&amp;quot;%1&amp;quot;&amp;quot;==&amp;quot;&amp;quot;&amp;quot;&amp;quot; set file=main.go&#xA;SET CGO_ENABLED=0&#xA;SET GOOS=linux&#xA;SET GOARCH=amd64&#xA;go build %file%&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;然后想用go也实现这个玩意&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;flag&amp;quot;&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;os&amp;quot;&#xA;&#x9;&amp;quot;os/exec&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;initFlag()&#xA;&#x9;buildFile()&#xA;}&#xA;func buildFile() {&#xA;&#x9;fmt.Println(&amp;quot;*******&amp;quot;)&#xA;&#x9;cmd(&amp;quot; CGO_ENABLED=0&amp;quot;)&#xA;&#x9;cmd(&amp;quot; GOOS=&amp;quot; + GOOS)&#xA;&#x9;cmd(&amp;quot; GOARCH=&amp;quot; + GOARCH)&#xA;&#xA;&#x9;cmd := exec.Command(&amp;quot;go&amp;quot;, &amp;quot;build&amp;quot;, File)&#xA;&#x9;cmd.Env = os.Environ()&#xA;&#xA;&#x9;fmt.Println(cmd)&#xA;&#x9;err := cmd.Run()&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;fmt.Println(&amp;quot;***err:&amp;quot;, err)&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;}&#xA;func cmd(arg string) {&#xA;&#x9;// 怎么设置go env并生效?&#xA;&#x9;cmd := exec.Command(&amp;quot;go&amp;quot;, &amp;quot;env&amp;quot;, arg)&#xA;&#x9;fmt.Println(cmd)&#xA;&#x9;err := cmd.Run()&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;fmt.Println(&amp;quot;***err:&amp;quot;, err)&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;}&#xA;&#xA;var (&#xA;&#x9;GOOS   string&#xA;&#x9;GOARCH string&#xA;&#x9;File   string&#xA;)&#xA;&#xA;func initFlag() {&#xA;&#x9;flag.StringVar(&amp;amp;GOOS, &amp;quot;o&amp;quot;, &amp;quot;linux&amp;quot;, &amp;quot;目标平台的操作系统(darwin、freebsd、linux、windows)&amp;quot;)&#xA;&#x9;flag.StringVar(&amp;amp;GOARCH, &amp;quot;a&amp;quot;, &amp;quot;amd64&amp;quot;, &amp;quot;目标平台的体系架构(386、amd64、arm)&amp;quot;)&#xA;&#x9;flag.StringVar(&amp;amp;File, &amp;quot;f&amp;quot;, &amp;quot;main.go&amp;quot;, &amp;quot;需要编译的文件&amp;quot;)&#xA;&#x9;flag.Parse()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;然而上面的go demo只生效了 go build main.go 这条命令,并生成 main.exe文件,而不是理想上的linux可执行文件&lt;/p&gt;&#xA;&#xA;&lt;p&gt;求靓仔大佬解惑&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>vscode编辑器不出现语法错误提示了，只有警告</title>
-      <link>https://studygolang.com/topics/15414#reply2</link>
-      <description>&lt;p&gt;之前出现语法错误代码都是标红的的，文件也会变成红色提示有错误，现在全部变成了警告黄色。昨天我升级了一下版本到1.18.1，跟这个有关系吗？&lt;/p&gt;&#xA;</description>
+      <title>fmt.Scan 如何让程序自动输入?</title>
+      <link>https://studygolang.com/topics/15415#reply3</link>
+      <description>&lt;p&gt;程序在运行过程中需要交互，程序中使用了 fmt.scan (),&#xA;交互方式有两种，一种是通过键盘输入，一种是程序自动读取某文件并输入字符串。&#xA;现在无法实现程序自动输入后继续执行。&#xA;麻烦大家这个自动输入如何实现。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go 系列教程 —— 12. 可变参数函数</title>
@@ -77,11 +77,6 @@
       <title>disabled by -mod=vendor?第一次遇到这种，求解</title>
       <link>https://studygolang.com/topics/15416#reply1</link>
       <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220422/2f56ab231b6a3bc596b5f5a20679cf54.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h1&gt;现象&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;执行&lt;code&gt;go build -mod=vendor&lt;/code&gt;出现报错提示？&#xA;出现 &lt;code&gt;disabled by -mod=vendor&lt;/code&gt;&lt;/p&gt;&#xA;&#xA;&lt;h1&gt;经过&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;之前1个小时都能正常编译通过，后面我就是引用了个本地缓存库&lt;code&gt;fastcache&lt;/code&gt;之后就出现了这个，后面替换了这个库还是出现这提示。思考了很久，一直没解决，麻烦站内的大神帮忙看下&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>fmt.Scan 如何让程序自动输入?</title>
-      <link>https://studygolang.com/topics/15415#reply3</link>
-      <description>&lt;p&gt;程序在运行过程中需要交互，程序中使用了 fmt.scan (),&#xA;交互方式有两种，一种是通过键盘输入，一种是程序自动读取某文件并输入字符串。&#xA;现在无法实现程序自动输入后继续执行。&#xA;麻烦大家这个自动输入如何实现。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>优维低代码：对构件组合的封装，自定义模板</title>
@@ -122,6 +117,11 @@
       <title>芭比Q了，国产数据库成了我们推广落地go-zero的最大阻力</title>
       <link>https://studygolang.com/topics/15336#reply17</link>
       <description>&lt;p&gt;我们公司在用国产数据库（达梦、PolarDb、华为高斯、OceanBase），而我们项目组主要是用OceanBase。&#xA;然而，吹牛逼上天的OceanBase却没有 go driver的数据库驱动。&#xA;这下子怎么玩呢？&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>vscode编辑器不出现语法错误提示了，只有警告</title>
+      <link>https://studygolang.com/topics/15414#reply2</link>
+      <description>&lt;p&gt;之前出现语法错误代码都是标红的的，文件也会变成红色提示有错误，现在全部变成了警告黄色。昨天我升级了一下版本到1.18.1，跟这个有关系吗？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>大佬们分析一下，为什么这种方式调用函数会慢10倍？</title>
