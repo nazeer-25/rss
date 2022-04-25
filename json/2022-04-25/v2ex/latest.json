@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "二房东不退押金怎么办？ - 北京",
+      "Link": "https://www.v2ex.com/t/849208",
+      "Description": "\u003cp\u003e已经退房 9 天了，二房东押金还没有退，有什么什么投诉途径？\u003c/p\u003e\n",
+      "Author": "kilala2020",
+      "PubDate": "2022-04-25T09:42:37Z"
+    },
+    {
       "Title": "老生常谈的 paypal 提现问题。 - PayPal",
       "Link": "https://www.v2ex.com/t/849207",
       "Description": "\u003cp\u003e金额不算大，国区 180 刀左右，走银行卡手续费就要 35 刀。\n看了很多网友推荐的 第三方提现方法，基本都是需要有电商店铺的。\n有没有个行得通的方法，至少不用给 35 刀手续费的\u003c/p\u003e\n",
@@ -65,13 +72,6 @@
       "Description": "\u003cp\u003e测试源代码如下:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# -*- coding: utf-8 -*-\n\nfrom os import path\nfrom time import sleep\nfrom winsystray import SysTrayIcon\nfrom winsystray.win32_adapter import NIIF_USER, NIIF_LARGE_ICON, MFS_DISABLED\n\napp_root = path.dirname(path.realpath(__file__))\n\ndef on_right_click(systray):\n    build_menu(systray)\n    systray._show_menu()\n\ndef on_quit(systray):\n    global running\n    running = False\n\ndef on_select(systray):\n    '''\n    这里怎么知道点击的是哪个菜单呢?\n\n    '''\n    \ndef build_menu(systray):\n    global last_main_menu, labs\n    \n    #print(labs.values())\n    main_menu = []\n    for k in labs.keys():\n        main_menu.append((k, 'pass', MFS_DISABLED))\n        for j in labs[k]:\n            main_menu.append(('   '+j['Name'], on_select)) # 这里的响应函数怎么传参数呢? \n        main_menu.append((None, '-'))\n    main_menu.append((None, '-'))\n    main_menu = tuple(main_menu)\n    if main_menu != last_main_menu:\n        systray.update(menu=main_menu)\n        last_main_menu = main_menu\n\ndef balloons_info(text, title='通知'):\n    my_tray.show_balloon(text, title, NIIF_USER | NIIF_LARGE_ICON)\n    \nlast_main_menu = None\nlabs={'Sort 1':[{'Name':'Jack', 'Args':'8866'},{'Name':'Bob', 'Args':'9900'}],'Sort 2':[{'Name':'Jams', 'Args':'8686'},{'Name':'John', 'Args':'9090'}]} \nquit_item = '退出', on_quit\nicon_pth = path.join(app_root, 'favicon.ico')\nmy_tray = SysTrayIcon(icon_pth, '测试响应', None, quit_item,\n                            left_click=None, right_click=on_right_click)\nmy_tray.start()\n\nsleep(0.1)\nballoons_info('响应测试已经启动。\\n\\n 右键选择菜单')\nrunning = True\nwhile running:\n    sleep(2)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e效果如图所示\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"效果图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://gitee.com/sobweb/FreeD/raw/master/imgs/Snipaste_2022-04-25_16-39-09.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e###问题是\u003c/p\u003e\n\u003cp\u003e响应函数如何接收参数呢? 或者 响应函数怎么知道点击的是哪个菜单呢?\u003c/p\u003e\n\u003cp\u003e引用的库 winsystray\u003ca href=\"https://github.com/SeaHOH/GotoX/discussions/228\" rel=\"nofollow\"\u003e参见\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "lon91ong",
       "PubDate": "2022-04-25T08:54:48Z"
-    },
-    {
-      "Title": "个人和工作室接外包有啥区别吗 - 酷工作",
-      "Link": "https://www.v2ex.com/t/849197",
-      "Description": "\u003cp\u003e之前接外包的时候，最麻烦的就是收款环节，对方公司需要我自己开具发票。在 V 站 上看到不少工作室，想问问工作室和个人在接外包的时候，有什么区别吗？\u003c/p\u003e\n\u003cp\u003e另外大家接外包的优雅姿势是什么呢\u003c/p\u003e\n",
-      "Author": "coxier",
-      "PubDate": "2022-04-25T08:50:03Z"
     },
     {
       "Title": "现在哪个盒子能刷 Linux 系统，并且容易更换硬盘？ - 问与答",
@@ -296,6 +296,13 @@
       "Description": "这是我无意中发现的，如果在 windows 远程桌面里随便开个什么音乐软件听歌，在网络好的情况下不会有什么，在网络条件不好的情况下，会出现呲呲的噪音，以及原本的声音像是被有损压缩了一样变差了。\u003cbr /\u003e\u003cbr /\u003e这让我感到很惊奇，不知道这是个什么原理，因为我不太清楚远程桌面是怎么把音频数据传到本地电脑的，按我原本设想，网不好应该会卡，就像看视频时网不好就卡那转圈。但是感觉 windows 远程桌面更胜一筹，直接给你动态压缩了。\u003cbr /\u003e\u003cbr /\u003e所以 windows 远程桌面到底是如何处理音频信号的？",
       "Author": "abcbuzhiming",
       "PubDate": "2022-04-25T06:52:59Z"
+    },
+    {
+      "Title": "个人和工作室接外包有啥区别吗 - 酷工作",
+      "Link": "https://www.v2ex.com/t/849197",
+      "Description": "\u003cp\u003e之前接外包的时候，最麻烦的就是收款环节，对方公司需要我自己开具发票。在 V 站 上看到不少工作室，想问问工作室和个人在接外包的时候，有什么区别吗？\u003c/p\u003e\n\u003cp\u003e另外大家接外包的优雅姿势是什么呢\u003c/p\u003e\n",
+      "Author": "coxier",
+      "PubDate": "2022-04-25T08:50:03Z"
     },
     {
       "Title": "怀疑 Tim 会导致 Win11 的任务管理器一直重启 - 全球工单系统",
