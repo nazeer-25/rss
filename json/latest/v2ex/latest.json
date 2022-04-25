@@ -4,6 +4,97 @@
   "Description": "",
   "Items": [
     {
+      "Title": "为什么 Android dex 文件会有 64K 引用限制 - Android",
+      "Link": "https://www.v2ex.com/t/849080",
+      "Description": "\u003cblockquote\u003e\n\u003cp\u003e今天在研究 linux lds 文件的时候，看到一篇博客，如下所写:\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e许多脚本是相当的简单的.\n\n可能的最简单的脚本只含有一个命令: 'SECTIONS'. 你可以使用'SECTIONS'来描述输出文件的内存布局.\n\n'SECTIONS'是一个功能很强大的命令. 这里这们会描述一个很简单的使用. 让我们假设你的程序只有代码节,\n初始化过的数据节, 和未初始化过的数据节. 这些会存在于'.text','.data'和'.bss'节, 另外, 让我们进一\n步假设在你的输入文件中只有这些节.\n\n对于这个例子, 我们说代码应当被载入到地址'0x10000'处, 而数据应当从 0x8000000 处开始. 下面是一个实现\n这个功能的脚本:\n\n    SECTIONS\n    {\n      . = 0x10000;\n      .text : { *(.text) }\n      . = 0x8000000;\n      .data : { *(.data) }\n      .bss : { *(.bss) }\n    }\n\n你使用关键字'SECTIONS'写了这个 SECTIONS 命令, 后面跟有一串放在花括号中的符号赋值和输出节描述的内容.\n\n上例中, 在'SECTIONS'命令中的第一行是对一个特殊的符号'.'赋值, 这是一个定位计数器. 如果你没有以其\n它的方式指定输出节的地址(其他方式在后面会描述), 那地址值就会被设为定位计数器的现有值. 定位计数器\n然后被加上输出节的尺寸. 在'SECTIONS'命令的开始处, 定位计数器拥有值'0'.\n\n第二行定义一个输出节,'.text'. 冒号是语法需要,现在可以被忽略. 节名后面的花括号中,你列出所有应当被\n放入到这个输出节中的输入节的名字. '*'是一个通配符,匹配任何文件名. 表达式'*(.text)'意思是所有的输\n入文件中的'.text'输入节.\n\n因为当输出节'.text'定义的时候, 定位计数器的值是'0x10000',连接器会把输出文件中的'.text'节的地址设\n为'0x10000'.\n\n余下的内容定义了输出文件中的'.data'节和'.bss'节. 连接器会把'.data'输出节放到地址'0x8000000'处. 连接\n器放好'.data'输出节之后, 定位计数器的值是'0x8000000'加上'.data'输出节的长度. 得到的结果是连接器会\n把'.bss'输出节放到紧接'.data'节后面的位置.\n\n连接器会通过在必要时增加定位计数器的值来保证每一个输出节具有它所需的对齐. 在这个例子中, 为'.text'\n和'.data'节指定的地址会满足对齐约束, 但是连接器可能会\n需要在'.data'和'.bss'节之间创建一个小的缺口.\n\n就这样,这是一个简单但完整的连接脚本.\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e0x10000 正是 64*1024 ，不禁想到 Android 的 64K 引用限制，好奇为什么都是这个值，还是业界标准如此？\u003c/p\u003e\n",
+      "Author": "StonyGround",
+      "PubDate": "2022-04-25T02:33:39Z"
+    },
+    {
+      "Title": "腾讯 QQ 太牛逼了，一个月 QQ 被封 2 次（我涉嫌诈骗？） - 全球工单系统",
+      "Link": "https://www.v2ex.com/t/849079",
+      "Description": "\u003cp\u003e去年我的 QQ 被封数次，这个月我的 QQ 被封 2 次，被封的理由全部是说我“涉嫌诈骗”，作为一个合法公民，正常的聊天和交流技术，我也不知道是怎样判断我诈骗的。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/04/25/28e3bdcf20de802e.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e被封了还找不到人工客服，更不可能提供相关证据，你连说话的机会都没有，我说你诈骗那你就是诈骗，太牛逼了。如果我真的涉嫌诈骗，大可以收集证据直接提交公安机关，如果没有呢，就让我当个哑巴吗？\u003c/p\u003e\n\u003cp\u003e看另外一个帖子用腾讯会议也被封了： \u003ca href=\"https://www.v2ex.com/t/847957\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/847957\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "xiaoz",
+      "PubDate": "2022-04-25T02:30:52Z"
+    },
+    {
+      "Title": "话说深圳从宝安到南山的地铁高峰持续多久？ - 深圳",
+      "Link": "https://www.v2ex.com/t/849077",
+      "Description": "\u003cp\u003e工作在高新南，现在住南油坐 9 号线，早上 9 点多上车人很少很舒服。\n看宝安的房子比南山便宜很多，所以想搬远一点了。\n目前考虑通勤问题，之前 8 点多，从机场坐过一次 11-5-9 号线回南山，印象中 11 号线太恐怖了，完全是人贴人。\n目前倾向于住翻身，灵芝这边，5 号线-\u0026gt;1 号线上班，话说有没有已经住在这边的，早上 9 点左右 5 号线，宝安中心换乘的人多不多呀？\u003c/p\u003e\n",
+      "Author": "1YsX1",
+      "PubDate": "2022-04-25T02:23:58Z"
+    },
+    {
+      "Title": "Python 如何判断一张图片的内容为文字内容? - 问与答",
+      "Link": "https://www.v2ex.com/t/849076",
+      "Description": "有个需求,识别图片,判断图片内容是 文字还是图表\u003cbr /\u003e想到的办法:\u003cbr /\u003e1,像素判断,因为文字内容的颜色不是黑就是蓝,取像素值并设定阈值进行判断\u003cbr /\u003e2,进行文字识别,以识别到的文字量和图片宽高的比例进行判断\u003cbr /\u003e\u003cbr /\u003e第 1 种感觉阈值要探索好久\u003cbr /\u003e第 2 种感觉太\"重\"了,效率太低\u003cbr /\u003e\u003cbr /\u003e不知道 V 友们有什么见解",
+      "Author": "colatea",
+      "PubDate": "2022-04-25T02:19:59Z"
+    },
+    {
+      "Title": "twitter 推特的新账号无法添加两步验证大家也是这样吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/849075",
+      "Description": "我的推特账号是刚刚注册的，手机号和邮箱都是刚刚注册的，但是在扫描两步验证二维码填进去 6 位验证码以后，点击确定，“身份验证应用”那里依然没有勾选，用手机双重验证也不行，大家也是这样吗？",
+      "Author": "linxooppo",
+      "PubDate": "2022-04-25T02:14:15Z"
+    },
+    {
+      "Title": "office 365 拼团，有老哥需要吗 - 程序员",
+      "Link": "https://www.v2ex.com/t/849074",
+      "Description": "\u003cp\u003e今天天猫刚下单，花了 279 块\n目前还剩四个位置，45 块一位\u003c/p\u003e\n\u003cp\u003e订阅过期日期 2023 年 4 月 24 日\u003c/p\u003e\n\u003cp\u003e微信号：VHplcm8wMQ==\u003c/p\u003e\n",
+      "Author": "TzeroLL",
+      "PubDate": "2022-04-25T02:07:45Z"
+    },
+    {
+      "Title": "我的某个基金已经跌了 40 个点了，抛了还是留着？ - 问与答",
+      "Link": "https://www.v2ex.com/t/849073",
+      "Description": "\u003cp\u003e亏惨了，大佬们给点建议吧。\u003c/p\u003e\n",
+      "Author": "Crump",
+      "PubDate": "2022-04-25T02:05:31Z"
+    },
+    {
+      "Title": "为什么大家非得官网买 macbook，要等好几个月，淘宝上大把的现货啊 - Apple",
+      "Link": "https://www.v2ex.com/t/849072",
+      "Description": "\u003cp\u003ert ，刚入手 16 寸 M1MAX,北京闪送，2 小时送到，官网订购等那么长时间不心塞吗\u003c/p\u003e\n",
+      "Author": "pangshu8703",
+      "PubDate": "2022-04-25T02:05:07Z"
+    },
+    {
+      "Title": "坐标深圳, 最近无法访问同性交友网站，改 host，梯子也不行，只能访问镜像站，怎么解决？ - 问与答",
+      "Link": "https://www.v2ex.com/t/849071",
+      "Description": "显示：\u003cbr /\u003e无法访问此网站 \u003ca target=\"_blank\" href=\"http://github.com\" rel=\"nofollow noopener\"\u003egithub.com\u003c/a\u003e 的响应时间过长。\u003cbr /\u003e请试试以下办法：\u003cbr /\u003e\u003cbr /\u003e检查网络连接\u003cbr /\u003e检查代理服务器和防火墙\u003cbr /\u003eERR_CONNECTION_TIMED_OUT",
+      "Author": "craiiz",
+      "PubDate": "2022-04-25T02:01:35Z"
+    },
+    {
+      "Title": "是否有成熟的音频版“HDR” - 问与答",
+      "Link": "https://www.v2ex.com/t/849069",
+      "Description": "相比于提升画面质量的 HDR ，音频方面也不可忽视，能极大的提高观感质量。初步想到的应用场景有以下两点：\u0026lt;/br\u0026gt;\u003cbr /\u003e\u003cbr /\u003e1. 自动调节不同音频的音量大小到同一增益。防止因不同视频的增益不一样而导致的“我听不见”和“我聋了”的状况。\u0026lt;/br\u0026gt;\u003cbr /\u003e\u003cbr /\u003e2. 动态调整同一音频不同时域中的增益。比如我想听清楚悄悄话内容，我不想被里面的鬼哭狼嚎震碎耳膜。\u0026lt;/br\u0026gt;\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e总体而言，个人感觉，最近五年，音频上的技术发展远低于视频方面。",
+      "Author": "imes",
+      "PubDate": "2022-04-25T01:54:34Z"
+    },
+    {
+      "Title": "BT 下载时出现大量同一公网 IP 段的 Peer，操控者目的是啥？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/849068",
+      "Description": "\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/04/25/1fa160b56d95b952.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e今日下载 windows10 新版本镜像文件时，发现出现了一批 58.243.132.0/24 段的 Peer （截图不全），且客户端标志一致（ aria2/1.34.0 ）。经查询，该 IP 段归属于安徽安庆联通，应用场景：普通家宽。\u003c/p\u003e\n\u003cp\u003e初步估测，可能是有组织控制了同一 BRAS 下的大量家宽。但不知道进行这种操作的目的是什么。\u003c/p\u003e\n\u003cp\u003e是否有大佬可以跟进看看这批机器在搞啥。\u003c/p\u003e\n",
+      "Author": "emUi998",
+      "PubDate": "2022-04-25T01:53:12Z"
+    },
+    {
+      "Title": "[小外包]找前端做个活动 h5，已有后端 - 酷工作",
+      "Link": "https://www.v2ex.com/t/849067",
+      "Description": "\u003cp\u003e联系方式 wx：NjE5MzM0NTY （ base64 ）\u003c/p\u003e\n\u003cp\u003eh5 放到 app 内置浏览器作为活动。\u003c/p\u003e\n\u003cp\u003e主功能：用户点击开始掉落 3x3 的矩阵，如果行或列相同则消除，同时用户获得奖励。\u003c/p\u003e\n\u003cp\u003e加 v 有完整的需求说明，要求 3-4 天内完成\u003c/p\u003e\n\u003cp\u003e预算 3k （仅前端，这边有设计和后端）\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"微信图片_20220414002524.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/04/14/eAnuwqtK6acP3di.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e之前发过一次预算没谈拢~\u003c/p\u003e\n",
+      "Author": "llhh",
+      "PubDate": "2022-04-25T01:53:11Z"
+    },
+    {
+      "Title": "怎么爬 wasm 的数据呢？ - 问与答",
+      "Link": "https://www.v2ex.com/t/849066",
+      "Description": "要爬一个数据，发现页面是 api 调用 WebAssembly 获取的数据，对 WebAssembly 不是只知道一点概念，是编译来的可执行文件，想问下有办法取到实际数据吗？感谢各位大佬",
+      "Author": "676529483",
+      "PubDate": "2022-04-25T01:52:20Z"
+    },
+    {
       "Title": "搬瓦工 169.99 - VPS",
       "Link": "https://www.v2ex.com/t/849065",
       "Description": "\u003cp\u003e有人用过那个搬瓦工 169.99 套餐吗\u003c/p\u003e\n",
