@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "今天封楼被困公司，研究了一下 ProcessPoolExecutor，结果遇到了一个神奇 Python 问题，百思不得其解 - Python",
+      "Link": "https://www.v2ex.com/t/849250",
+      "Description": "\u003ch3\u003e用的 python3.7.13 。报错信息如下兄弟们：\u003c/h3\u003e\n\u003ch3\u003e很奇怪为什么不能 raise key-value 格式的自定义错误  ，\u003c/h3\u003e\n\u003ch3\u003e要是改成 raise MyError( 1, 'desc') 就没问题了，这是不是 python 的 bug?\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e# 这是代码，直接，可以运行\nfrom concurrent.futures.process import ProcessPoolExecutor\n\n\nclass MyError(Exception):\n    def __init__(self, code: int, desc: str):\n        self.code = code\n        self.desc = desc\n\n\ndef foo(i, j):\n    print(i, j)\n    raise MyError(code=1, desc='desc')\n\n\ndef main():\n    with ProcessPoolExecutor(3) as executor:\n        f = executor.submit(foo, 1, 11)\n        e = f.exception()\n        print(e)\n\n        f.result()\n\n\nif __name__ == '__main__':\n    main()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e下面是输出结果：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e1 11\nA process in the process pool was terminated abruptly while the future was running or pending.\nconcurrent.futures.process._RemoteTraceback: \n'''\nTraceback (most recent call last):\n  File \"/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/process.py\", line 367, in _queue_management_worker\n    result_item = result_reader.recv()\n  File \"/Python.framework/Versions/3.7/lib/python3.7/multiprocessing/connection.py\", line 251, in recv\n    return _ForkingPickler.loads(buf.getbuffer())\nTypeError: __init__() missing 2 required positional arguments: 'code' and 'desc'\n'''\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Users/v2exblog/demo/aaa.py\", line 25, in \u0026lt;module\u0026gt;\n    main()\n  File \"/Users/v2exblog/demo/aaa.py\", line 21, in main\n    f.result()\n  File \"/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/_base.py\", line 428, in result\n    return self.__get_result()\n  File \"/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/_base.py\", line 384, in __get_result\n    raise self._exception\nconcurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "v2exblog",
+      "PubDate": "2022-04-25T14:30:36Z"
+    },
+    {
+      "Title": "使用通用控制两天遇到的一点问题 - Apple",
+      "Link": "https://www.v2ex.com/t/849249",
+      "Description": "这两天居家办公，上班的同时想用自己电脑写点东西，但是两个电脑换来换去太麻烦，于是想起来了通用控制。公司电脑是 mbp2019 ，自己电脑是 mba m1 ，花了半小时把两台电脑从 12.0 升级到了 12.3 ，然后接上键鼠，鼠标在两台电脑之间滑来滑去很丝滑，但是用了这两天发现了一些问题：\u003cbr /\u003e1. 接力，在一台 Mac 开网页，另一台 Mac 的 Dock 栏浏览器上也会显示接力图标，强迫症看了很难受，如果在设置-\u0026gt;通用，关闭接力的话，又提示“需要使用接力才能将光标和键盘移动到附近的 Mac 和 iPad”，昨天没尝试关闭接力，今天关闭了，发现鼠标和键盘还是可以切换设备。所以不知道苹果为什么要加一个不能关闭的提示\u003cbr /\u003e2. 延迟，键鼠用的是 magic keyboard 和 trackpad ，刚连接的时候确实很丝滑，但是过了一段时间移动到另一台 Mac 上就会很卡，只能重新，也可能是我周围的信号干扰太强？(延迟高的时候，接力功能也是开启的)\u003cbr /\u003e3. 显示器高度，这个是我的问题，因为只有一个显示器，另一台 Mac 只能放在桌子上，考虑这两天买个电脑支架，有没有推荐的",
+      "Author": "pikoqian98",
+      "PubDate": "2022-04-25T14:27:10Z"
+    },
+    {
       "Title": "公司内部知识库如何创建/用什么软件好？ - 问与答",
       "Link": "https://www.v2ex.com/t/849248",
       "Description": "旧员工走一茬，新员工重新培训一茬，上手慢，费心，培训不到位则出错，招致损失。包括各类生产过程问题，质量问题，错完又错。\u003cbr /\u003e\u003cbr /\u003e应该做个知识库了，但不知道怎么建设比较系统、完善，有公司建立了知识库的 V 友大佬吗？可否指点一二，感谢。",
