@@ -74,9 +74,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "请问如何匹配\"3.5小时\"这个信息",
-      "Link": "https://studygolang.com/topics/15423#reply2",
-      "Description": "\u003cp\u003e如题。\n请问用正则表达式如何提取一段信息中的”3.5小时“，目前能提取3小时，但是一遇到小数点就提取不了了。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003erexOverTimeHours := regexp.MustCompile(\u0026quot;([0-9][0-9]|[0-9]|[0-9].[0-9]+)小时\u0026quot;) \n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e不论是这样写还是小数点的那个  .  左边加1个还是2个 \\ ，都无法显示出 3.5小时。\u003c/p\u003e\n\n\u003cp\u003e感谢各位大神指导。\u003c/p\u003e\n",
+      "Title": "诚招区块链全栈工程师",
+      "Link": "https://studygolang.com/topics/15421#reply0",
+      "Description": "\u003cp\u003e１、熟悉去中心化协议，比如AMM等，对于现行市面上流行的Uniswap、Ox协议、路印协议、IDEX等其中一个或多个有过深入研究；\u003c/p\u003e\n\n\u003cp\u003e２、掌握typescript和Solidity，了解Web3中间件的客户端使用，具备区块链基础知识及研发经验；\u003c/p\u003e\n\n\u003cp\u003e３、熟悉以太坊、EOS等至少一种区块链公链底层框架。\u003c/p\u003e\n\n\u003cp\u003e４、在区块链领域对于共识算法、P2P通讯协议、智能合约等关键技术有一定的研究和认识；\u003c/p\u003e\n\n\u003cp\u003e５、知识面广，思路开阔，创新能力强，对新技术持有敏感性并愿意致力于新技术的探索和研究，有一定的抗压能力，有完整一套项目架构搭建的方案。\u003c/p\u003e\n\n\u003cp\u003e可远程办公或线下办公－杭州未来科技城，薪资25K-50K，有意可发简历至：olivia@ownershiplabs.com\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -84,6 +84,13 @@
       "Title": "GO如何实现执行SET CGO_ENABLED=0 SET GOOS=linux SET GOARCH=amd64等命令并build成功?",
       "Link": "https://studygolang.com/topics/15422#reply1",
       "Description": "\u003cp\u003e众所周知,在windows环境下编译linux上可执行程序的命令如下\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eSET CGO_ENABLED=0 \nSET GOOS=linux\nSET GOARCH=amd64\ngo build main.go\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e自已在windows上写的玩意有时候老是想放到不同环境上跑,每次编译就需要执行4条命令,很麻烦\n于是简单弄了个build_linux.bat\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eset file=%1\nif \u0026quot;\u0026quot;%1\u0026quot;\u0026quot;==\u0026quot;\u0026quot;\u0026quot;\u0026quot; set file=main.go\nSET CGO_ENABLED=0\nSET GOOS=linux\nSET GOARCH=amd64\ngo build %file%\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e然后想用go也实现这个玩意\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;flag\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;os\u0026quot;\n\t\u0026quot;os/exec\u0026quot;\n)\n\nfunc main() {\n\tinitFlag()\n\tbuildFile()\n}\nfunc buildFile() {\n\tfmt.Println(\u0026quot;*******\u0026quot;)\n\tcmd(\u0026quot; CGO_ENABLED=0\u0026quot;)\n\tcmd(\u0026quot; GOOS=\u0026quot; + GOOS)\n\tcmd(\u0026quot; GOARCH=\u0026quot; + GOARCH)\n\n\tcmd := exec.Command(\u0026quot;go\u0026quot;, \u0026quot;build\u0026quot;, File)\n\tcmd.Env = os.Environ()\n\n\tfmt.Println(cmd)\n\terr := cmd.Run()\n\tif err != nil {\n\t\tfmt.Println(\u0026quot;***err:\u0026quot;, err)\n\t\treturn\n\t}\n}\nfunc cmd(arg string) {\n\t// 怎么设置go env并生效?\n\tcmd := exec.Command(\u0026quot;go\u0026quot;, \u0026quot;env\u0026quot;, arg)\n\tfmt.Println(cmd)\n\terr := cmd.Run()\n\tif err != nil {\n\t\tfmt.Println(\u0026quot;***err:\u0026quot;, err)\n\t\treturn\n\t}\n}\n\nvar (\n\tGOOS   string\n\tGOARCH string\n\tFile   string\n)\n\nfunc initFlag() {\n\tflag.StringVar(\u0026amp;GOOS, \u0026quot;o\u0026quot;, \u0026quot;linux\u0026quot;, \u0026quot;目标平台的操作系统(darwin、freebsd、linux、windows)\u0026quot;)\n\tflag.StringVar(\u0026amp;GOARCH, \u0026quot;a\u0026quot;, \u0026quot;amd64\u0026quot;, \u0026quot;目标平台的体系架构(386、amd64、arm)\u0026quot;)\n\tflag.StringVar(\u0026amp;File, \u0026quot;f\u0026quot;, \u0026quot;main.go\u0026quot;, \u0026quot;需要编译的文件\u0026quot;)\n\tflag.Parse()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e然而上面的go demo只生效了 go build main.go 这条命令,并生成 main.exe文件,而不是理想上的linux可执行文件\u003c/p\u003e\n\n\u003cp\u003e求靓仔大佬解惑\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "请问如何匹配\"3.5小时\"这个信息",
+      "Link": "https://studygolang.com/topics/15423#reply2",
+      "Description": "\u003cp\u003e如题。\n请问用正则表达式如何提取一段信息中的”3.5小时“，目前能提取3小时，但是一遇到小数点就提取不了了。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003erexOverTimeHours := regexp.MustCompile(\u0026quot;([0-9][0-9]|[0-9]|[0-9].[0-9]+)小时\u0026quot;) \n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e不论是这样写还是小数点的那个  .  左边加1个还是2个 \\ ，都无法显示出 3.5小时。\u003c/p\u003e\n\n\u003cp\u003e感谢各位大神指导。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -105,13 +112,6 @@
       "Title": "结构体中有一个属性是interface，初始化问题",
       "Link": "https://studygolang.com/topics/15418#reply3",
       "Description": "\u003cp\u003etype Stu struct {\n\tStatus int\n\tMessage string\n\tData: interface{}\n}\u003c/p\u003e\n\n\u003cp\u003e//var data interface{}\u003c/p\u003e\n\n\u003cp\u003estu := \u0026amp;Stu{Status: 200, Message: \u0026ldquo;success\u0026rdquo;, Data: interface{}}\u003c/p\u003e\n\n\u003cp\u003e这样的话直接就报错了，必须初始化一个变量为data，能否不声明就快速初始化？\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "诚招区块链全栈工程师",
-      "Link": "https://studygolang.com/topics/15421#reply0",
-      "Description": "\u003cp\u003e１、熟悉去中心化协议，比如AMM等，对于现行市面上流行的Uniswap、Ox协议、路印协议、IDEX等其中一个或多个有过深入研究；\u003c/p\u003e\n\n\u003cp\u003e２、掌握typescript和Solidity，了解Web3中间件的客户端使用，具备区块链基础知识及研发经验；\u003c/p\u003e\n\n\u003cp\u003e３、熟悉以太坊、EOS等至少一种区块链公链底层框架。\u003c/p\u003e\n\n\u003cp\u003e４、在区块链领域对于共识算法、P2P通讯协议、智能合约等关键技术有一定的研究和认识；\u003c/p\u003e\n\n\u003cp\u003e５、知识面广，思路开阔，创新能力强，对新技术持有敏感性并愿意致力于新技术的探索和研究，有一定的抗压能力，有完整一套项目架构搭建的方案。\u003c/p\u003e\n\n\u003cp\u003e可远程办公或线下办公－杭州未来科技城，薪资25K-50K，有意可发简历至：olivia@ownershiplabs.com\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
