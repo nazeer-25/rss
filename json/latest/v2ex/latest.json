@@ -4,7 +4,14 @@
   "Description": "",
   "Items": [
     {
-      "Title": "今天封楼被困公司，研究了一下 ProcessPoolExecutor，结果遇到了一个神奇 Python 问题，百思不得其解 - Python",
+      "Title": "Mac 下有什么使用 containerd 运行时的方案？ - Docker",
+      "Link": "https://www.v2ex.com/t/849251",
+      "Description": "\u003cp\u003e请教下各位彦祖，Mac 下有什么使用 containerd 运行时的方案？\u003c/p\u003e\n\u003cp\u003e不想安装 Docker Desktop For Mac ，毕竟 docker 即将过时了。。\u003c/p\u003e\n\u003cp\u003e不使用 multipass 虚拟机的情况下，Mac 有什么类似 Docker Desktop For Mac 的软件吗？使用 containerd 运行时的。\u003c/p\u003e\n",
+      "Author": "Yakir",
+      "PubDate": "2022-04-25T14:32:13Z"
+    },
+    {
+      "Title": "今天封楼被困公司，研究了一下 ProcessPoolExecutor，发现了一个 Python 的 Bug，分享给各位，网上似乎没解决方案 - Python",
       "Link": "https://www.v2ex.com/t/849250",
       "Description": "\u003ch3\u003e用的 python3.7.13 。报错信息如下兄弟们：\u003c/h3\u003e\n\u003ch3\u003e很奇怪为什么不能 raise key-value 格式的自定义错误  ，\u003c/h3\u003e\n\u003ch3\u003e要是改成 raise MyError( 1, 'desc') 就没问题了，这是不是 python 的 bug?\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e# 这是代码，直接，可以运行\nfrom concurrent.futures.process import ProcessPoolExecutor\n\n\nclass MyError(Exception):\n    def __init__(self, code: int, desc: str):\n        self.code = code\n        self.desc = desc\n\n\ndef foo(i, j):\n    print(i, j)\n    raise MyError(code=1, desc='desc')\n\n\ndef main():\n    with ProcessPoolExecutor(3) as executor:\n        f = executor.submit(foo, 1, 11)\n        e = f.exception()\n        print(e)\n\n        f.result()\n\n\nif __name__ == '__main__':\n    main()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e下面是输出结果：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e1 11\nA process in the process pool was terminated abruptly while the future was running or pending.\nconcurrent.futures.process._RemoteTraceback: \n'''\nTraceback (most recent call last):\n  File \"/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/process.py\", line 367, in _queue_management_worker\n    result_item = result_reader.recv()\n  File \"/Python.framework/Versions/3.7/lib/python3.7/multiprocessing/connection.py\", line 251, in recv\n    return _ForkingPickler.loads(buf.getbuffer())\nTypeError: __init__() missing 2 required positional arguments: 'code' and 'desc'\n'''\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Users/v2exblog/demo/aaa.py\", line 25, in \u0026lt;module\u0026gt;\n    main()\n  File \"/Users/v2exblog/demo/aaa.py\", line 21, in main\n    f.result()\n  File \"/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/_base.py\", line 428, in result\n    return self.__get_result()\n  File \"/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/_base.py\", line 384, in __get_result\n    raise self._exception\nconcurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "v2exblog",
