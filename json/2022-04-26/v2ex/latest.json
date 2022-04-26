@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "B 站有什么有趣的节目推荐 - 问与答",
+      "Link": "https://www.v2ex.com/t/849425",
+      "Description": "求各位推荐搞笑，有趣的视频，最好不要太长，30min 以内最佳",
+      "Author": "dynastysea",
+      "PubDate": "2022-04-26T11:34:41Z"
+    },
+    {
+      "Title": "Google 的跟踪 ID 能自定义吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/849424",
+      "Description": "\u003cp\u003e如果只能是 U-\\d+-\\d 的格式，岂不是很容易被爬虫（比如 buildwith ）或别有用心的人知道某网站 A 和网站 B 是同一个人的吗？\u003c/p\u003e\n",
+      "Author": "helloiac",
+      "PubDate": "2022-04-26T11:30:56Z"
+    },
+    {
       "Title": "[求助] github action: Permission to git denied to github-actions - 问与答",
       "Link": "https://www.v2ex.com/t/849423",
       "Description": "\u003cp\u003e各位 v 友好，我最近在学习 github actions, 但是不清楚为啥会在自动 push 的时候报错~\n就是 push 到当前 repo 的 main 分支的时候报错了\n我也搜索了相关的 issue ，但是还是没法解决： \u003ca href=\"https://github.com/ad-m/github-push-action/issues/96\" rel=\"nofollow\"\u003ehttps://github.com/ad-m/github-push-action/issues/96\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e特来求助各位呜呜呜\u003c/p\u003e\n\u003cp\u003e我的报错信息是：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ePush to branch main\nremote: Permission to ... denied to github-actions[bot].\nfatal: unable to access '...': The requested URL returned error: 403\nError: Invalid exit code: 128\n    at ChildProcess.\u0026lt;anonymous\u0026gt; (/home/runner/work/_actions/ad-m/github-push-action/master/start.js:29:21)\n    at ChildProcess.emit (events.js:314:20)\n    at maybeClose (internal/child_process.js:1022:16)\n    at Process.ChildProcess._handle.onexit (internal/child_process.js:287:5) {\n  code: 128\n}\nError: Invalid exit code: 128\n    at ChildProcess.\u0026lt;anonymous\u0026gt; (/home/runner/work/_actions/ad-m/github-push-action/master/start.js:29:21)\n    at ChildProcess.emit (events.js:314:20)\n    at maybeClose (internal/child_process.js:1022:16)\n    at Process.ChildProcess._handle.onexit (internal/child_process.js:287:5)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e配置文件如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yml\"\u003ename: learn\n\nenv:\n  PYTHON_VERSION: '3.8'               # set this to the Python version to use\n\non:\n  issues:\n    types:\n      - labeled\n\njobs:\n  learning:\n    runs-on: ubuntu-latest\n    permissions:\n      issues: write\n    steps:\n      - uses: actions/checkout@v2\n        with:\n          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.\n          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.\n\t  \n      ...\n          \n      - name: Commit files\n        run: |\n          git config --local user.email \"github-actions[bot]@users.noreply.github.com\"\n          git config --local user.name \"github-actions[bot]\"\n          git commit -m \"Add changes\" -a\n      - name: Push changes\n        uses: ad-m/github-push-action@master\n        with:\n          github_token: ${{ secrets.GITHUB_TOKEN }}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
