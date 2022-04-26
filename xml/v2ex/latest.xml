@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求问一个 vue3 setup 封装抽离 js 导致 ref.value 为 undefined 的问题。 - 问与答</title>
+      <link>https://www.v2ex.com/t/849390</link>
+      <description>&lt;p&gt;// 假定有两个功能块 A 和 B,未封装前代码&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;&#xA;&#x9;&amp;lt;div ref=&#34;BRef&#34;&amp;gt;&amp;lt;/div&amp;gt;&#xA;&amp;lt;/template&amp;gt;&#xA;&amp;lt;script setup lang=&#34;ts&#34;&amp;gt;&#xA;// A 功能区代码&#xA;&#xA;// B 功能区代码&#xA;const BRef = ref();&#xA;const doClick = () =&amp;gt; {&#xA;&#x9;//可以正常获取&#xA;&#x9;console.log(BRef.value);&#xA;}&#xA;&amp;lt;/script&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;//封装抽离功能块&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;&#xA;&#x9;&amp;lt;div ref=&#34;BRef&#34;&amp;gt;&amp;lt;/div&amp;gt;&#xA;&amp;lt;/template&amp;gt;&#xA;&amp;lt;script setup lang=&#34;ts&#34;&amp;gt;&#xA;// A 功能区代码&#xA;import { A 相关 } from &#39;./A&#39;&#xA;import { BRef, doClick } from &#39;./B&#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;//B 功能区 js 代码&#xA;const BRef = ref();&#xA;const doClick = () =&amp;gt; {&#xA;&#x9;//此处找不到，为 undefined&#xA;&#x9;console.log(BRef.value);&#xA;}&#xA;&#xA;export { BRef, doClick }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;现在改造必须在最外层重新赋值一下，才能获取，有没有更优雅的写法&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;&#xA;&#x9;&amp;lt;div ref=&#34;BRefCopy&#34;&amp;gt;&amp;lt;/div&amp;gt;&#xA;&amp;lt;/template&amp;gt;&#xA;&amp;lt;script setup lang=&#34;ts&#34;&amp;gt;&#xA;// A 功能区代码&#xA;import { A 相关 } from &#39;./A&#39;&#xA;import { BRef, doClick } from &#39;./B&#39;&#xA;const BRefCopy = BRef;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>MinYa</author>
+      <pubDate>26 Apr 2022 08:06:44 +0000</pubDate>
+    </item>
+    <item>
       <title>带 T2 芯片的 Mac 安全性这么低吗 - Mac mini</title>
       <link>https://www.v2ex.com/t/849389</link>
       <description>&lt;p&gt;之前听大家说有 T2 芯片的 Mac 不再需要打开 FileVault ，说 T2 就相当于 FileValut 的功能了，然后我就关闭了 FileValut 功能。&#xA;今天拿出吃灰的 Mac mini 2018 ，但是太久没用，忘记了开机密码，一筹莫展之际，在网上看到有人说到恢复模式可以重置密码，就抱着试一试的态度，然后真的奇迹发生了，在恢复模式里用终端输入 resetpassword 之后就弹出重置密码的窗口了，不需要原密码，直接重置了，震惊到我了，以前好像是听说有 T2 芯片的话进入恢复模式是需要先输入密码的，现在完全不需要，这是咋回事呢？我现在都是懵逼的，如果设备被人偷了或捡去了岂不是特别容易被人拿到磁盘的数据？这 T2 芯片貌似也没起啥作用呀。&lt;/p&gt;&#xA;&lt;p&gt;备注：macOS 版本为 Mojave 10.14.6&lt;/p&gt;&#xA;</description>

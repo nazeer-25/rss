@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "求问一个 vue3 setup 封装抽离 js 导致 ref.value 为 undefined 的问题。 - 问与答",
+      "Link": "https://www.v2ex.com/t/849390",
+      "Description": "\u003cp\u003e// 假定有两个功能块 A 和 B,未封装前代码\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026lt;template\u0026gt;\n\t\u0026lt;div ref=\"BRef\"\u0026gt;\u0026lt;/div\u0026gt;\n\u0026lt;/template\u0026gt;\n\u0026lt;script setup lang=\"ts\"\u0026gt;\n// A 功能区代码\n\n// B 功能区代码\nconst BRef = ref();\nconst doClick = () =\u0026gt; {\n\t//可以正常获取\n\tconsole.log(BRef.value);\n}\n\u0026lt;/script\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e//封装抽离功能块\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026lt;template\u0026gt;\n\t\u0026lt;div ref=\"BRef\"\u0026gt;\u0026lt;/div\u0026gt;\n\u0026lt;/template\u0026gt;\n\u0026lt;script setup lang=\"ts\"\u0026gt;\n// A 功能区代码\nimport { A 相关 } from './A'\nimport { BRef, doClick } from './B'\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e//B 功能区 js 代码\nconst BRef = ref();\nconst doClick = () =\u0026gt; {\n\t//此处找不到，为 undefined\n\tconsole.log(BRef.value);\n}\n\nexport { BRef, doClick }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e现在改造必须在最外层重新赋值一下，才能获取，有没有更优雅的写法\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026lt;template\u0026gt;\n\t\u0026lt;div ref=\"BRefCopy\"\u0026gt;\u0026lt;/div\u0026gt;\n\u0026lt;/template\u0026gt;\n\u0026lt;script setup lang=\"ts\"\u0026gt;\n// A 功能区代码\nimport { A 相关 } from './A'\nimport { BRef, doClick } from './B'\nconst BRefCopy = BRef;\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "MinYa",
+      "PubDate": "2022-04-26T08:06:44Z"
+    },
+    {
       "Title": "带 T2 芯片的 Mac 安全性这么低吗 - Mac mini",
       "Link": "https://www.v2ex.com/t/849389",
       "Description": "\u003cp\u003e之前听大家说有 T2 芯片的 Mac 不再需要打开 FileVault ，说 T2 就相当于 FileValut 的功能了，然后我就关闭了 FileValut 功能。\n今天拿出吃灰的 Mac mini 2018 ，但是太久没用，忘记了开机密码，一筹莫展之际，在网上看到有人说到恢复模式可以重置密码，就抱着试一试的态度，然后真的奇迹发生了，在恢复模式里用终端输入 resetpassword 之后就弹出重置密码的窗口了，不需要原密码，直接重置了，震惊到我了，以前好像是听说有 T2 芯片的话进入恢复模式是需要先输入密码的，现在完全不需要，这是咋回事呢？我现在都是懵逼的，如果设备被人偷了或捡去了岂不是特别容易被人拿到磁盘的数据？这 T2 芯片貌似也没起啥作用呀。\u003c/p\u003e\n\u003cp\u003e备注：macOS 版本为 Mojave 10.14.6\u003c/p\u003e\n",
