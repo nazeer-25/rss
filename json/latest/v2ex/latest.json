@@ -235,13 +235,6 @@
       "PubDate": "2022-04-27T06:40:05Z"
     },
     {
-      "Title": "求一个 PS 破解版下载链接 - 问与答",
-      "Link": "https://www.v2ex.com/t/849569",
-      "Description": "\u003cp\u003e想求一个 WIN10 破解版 PS 的下载链接，网页上下载的都篡改浏览器首页，还内置了广告，由于重置了电脑，原来公众号的的下载链接已经失效了\u003c/p\u003e\n",
-      "Author": "one234",
-      "PubDate": "2022-04-27T06:34:04Z"
-    },
-    {
       "Title": "如果使用 Java 去实现将镜像放到容器中并启动这个操作 - Java",
       "Link": "https://www.v2ex.com/t/849568",
       "Description": "在项目中的场景是 由后端去启动 docker 镜像并做一些操作，使用的工具 com.github.docker-java 但是里面并没有 docker run 的实现方法\u003cbr /\u003e求问各位大佬们",
@@ -296,6 +289,13 @@
       "Description": "\u003cp\u003e是酱，觉得市面上的 api 网关都太产品化，难用（配置麻烦），所以用 spring cloud gateway 自己开发了一套网关。\u003c/p\u003e\n\u003cp\u003e然后对实现形式上，有一些争议，主要体现在规范、管理上。 比如：\u003c/p\u003e\n\u003cp\u003e第一种，像支付宝一样\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eopenapi.x.com/gateway.do?method=api.name.and.version\u0026amp;other_business_parameters\u0026amp;sign_type=hmac\u0026amp;sign=\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e第二种\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eGET openapi.x.com/api/name/and/version?other_business_parameters HTTP/1.1\nHost openapi.x.com\nX-$公司名缩写-AUTHTYPE: HMAC-SHA256\nX-$-Client-ID: xxx\nX-$-Sign: xxxxxxxxx\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e无论那种，到网关，最终都 http.reveserve( http://backend-server-name-in-k8s:port)\u003c/p\u003e\n\u003cp\u003e就从表意、管理、规范、使用等等等等各方面来综合定一个方案，哪种更好。\u003c/p\u003e\n\u003cp\u003e尝试第一种，使用 apisix ，\n配置了一堆  /\u003ca href=\"http://gatweay.do\" rel=\"nofollow\"\u003egatweay.do\u003c/a\u003e 的路由。。后台页面像这样：\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e路由\u003c/th\u003e\n\u003cth\u003e对应服务\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e/\u003ca href=\"http://gateawy.do\" rel=\"nofollow\"\u003egateawy.do\u003c/a\u003e\u003c/td\u003e\n\u003ctd\u003es1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e/\u003ca href=\"http://gateway.do\" rel=\"nofollow\"\u003egateway.do\u003c/a\u003e\u003c/td\u003e\n\u003ctd\u003es2\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e/\u003ca href=\"http://gateway.do\" rel=\"nofollow\"\u003egateway.do\u003c/a\u003e\u003c/td\u003e\n\u003ctd\u003es3\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e/\u003ca href=\"http://gateway.do\" rel=\"nofollow\"\u003egateway.do\u003c/a\u003e\u003c/td\u003e\n\u003ctd\u003es4\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e第二种，后台页面像这样：\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e路由\u003c/th\u003e\n\u003cth\u003e对应服务\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e/v1/s1/**\u003c/td\u003e\n\u003ctd\u003es1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e/v1/s2/**\u003c/td\u003e\n\u003ctd\u003es2\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e/v1/special/**\u003c/td\u003e\n\u003ctd\u003es3\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e/v1/444/**\u003c/td\u003e\n\u003ctd\u003es4\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e不说技术实现，自己开发的话，无论哪种方案都能实现也都好实现。就说管理、规范等等等等其他方案。\u003c/p\u003e\n",
       "Author": "dzdh",
       "PubDate": "2022-04-27T06:07:36Z"
+    },
+    {
+      "Title": "求一个 PS 破解版下载链接 - 问与答",
+      "Link": "https://www.v2ex.com/t/849569",
+      "Description": "\u003cp\u003e想求一个 WIN10 破解版 PS 的下载链接，网页上下载的都篡改浏览器首页，还内置了广告，由于重置了电脑，原来公众号的的下载链接已经失效了\u003c/p\u003e\n",
+      "Author": "one234",
+      "PubDate": "2022-04-27T06:34:04Z"
     },
     {
       "Title": "程序员宝宝，编程猎人，这些辣鸡聚合站 - 程序员",
