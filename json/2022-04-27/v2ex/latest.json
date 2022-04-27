@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "北京五一咋整 - 问与答",
+      "Link": "https://www.v2ex.com/t/849562",
+      "Description": "\u003cp\u003e坐标北京，五一不知道咋整，回家吧回不去，出去玩吧北京就那几个地儿我估摸着都爆满，大家有什么计划不\u003c/p\u003e\n",
+      "Author": "svt",
+      "PubDate": "2022-04-27T06:15:21Z"
+    },
+    {
+      "Title": "iOS 上网易新闻 app 推送问题 - 全球工单系统",
+      "Link": "https://www.v2ex.com/t/849561",
+      "Description": "\u003cp\u003e每次我在锁屏界面点开一个它的一个新闻推送消息，在显示它的开屏界面时，我切换到其他的 app ，一会儿再切换回来后，只会显示 app 首页界面，不会显示我要看的新闻详情\u003c/p\u003e\n\u003cp\u003e最新版本仍然有这个问题\u003c/p\u003e\n\u003cp\u003e你们说网易是不是故意地非要用户看完广告，或者手动点击跳过才能看新闻详情呢\u003c/p\u003e\n",
+      "Author": "pheyer",
+      "PubDate": "2022-04-27T06:08:55Z"
+    },
+    {
+      "Title": "对于 api 网关来说，两种设计，哪种更适合 - 问与答",
+      "Link": "https://www.v2ex.com/t/849560",
+      "Description": "\u003cp\u003e是酱，觉得市面上的 api 网关都太产品化，难用（配置麻烦），所以用 spring cloud gateway 自己开发了一套网关。\u003c/p\u003e\n\u003cp\u003e然后对实现形式上，有一些争议，主要体现在规范、管理上。 比如：\u003c/p\u003e\n\u003cp\u003e第一种，像支付宝一样\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eopenapi.x.com/gateway.do?method=api.name.and.version\u0026amp;other_business_parameters\u0026amp;sign_type=hmac\u0026amp;sign=\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e第二种\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eGET openapi.x.com/api/name/and/version?other_business_parameters HTTP/1.1\nHost openapi.x.com\nX-$公司名缩写-AUTHTYPE: HMAC-SHA256\nX-$-Client-ID: xxx\nX-$-Sign: xxxxxxxxx\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e无论那种，到网关，最终都 http.reveserve( http://backend-server-name-in-k8s:port)\u003c/p\u003e\n\u003cp\u003e就从表意、管理、规范、使用等等等等各方面来综合定一个方案，哪种更好。\u003c/p\u003e\n\u003cp\u003e尝试第一种，使用 apisix ，\n配置了一堆  /\u003ca href=\"http://gatweay.do\" rel=\"nofollow\"\u003egatweay.do\u003c/a\u003e 的路由。。后台页面像这样：\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e路由\u003c/th\u003e\n\u003cth\u003e对应服务\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e/\u003ca href=\"http://gateawy.do\" rel=\"nofollow\"\u003egateawy.do\u003c/a\u003e\u003c/td\u003e\n\u003ctd\u003es1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e/\u003ca href=\"http://gateway.do\" rel=\"nofollow\"\u003egateway.do\u003c/a\u003e\u003c/td\u003e\n\u003ctd\u003es2\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e/\u003ca href=\"http://gateway.do\" rel=\"nofollow\"\u003egateway.do\u003c/a\u003e\u003c/td\u003e\n\u003ctd\u003es3\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e/\u003ca href=\"http://gateway.do\" rel=\"nofollow\"\u003egateway.do\u003c/a\u003e\u003c/td\u003e\n\u003ctd\u003es4\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e第二种，后台页面像这样：\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e路由\u003c/th\u003e\n\u003cth\u003e对应服务\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e/v1/s1/**\u003c/td\u003e\n\u003ctd\u003es1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e/v1/s2/**\u003c/td\u003e\n\u003ctd\u003es2\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e/v1/special/**\u003c/td\u003e\n\u003ctd\u003es3\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e/v1/444/**\u003c/td\u003e\n\u003ctd\u003es4\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e不说技术实现，自己开发的话，无论哪种方案都能实现也都好实现。就说管理、规范等等等等其他方案。\u003c/p\u003e\n",
+      "Author": "dzdh",
+      "PubDate": "2022-04-27T06:07:36Z"
+    },
+    {
+      "Title": "Apple One 美区超大杯 - Apple",
+      "Link": "https://www.v2ex.com/t/849559",
+      "Description": "\u003cp\u003eApple One 美区超大杯，价格等人齐了之后平分的价格，有需要的联系 tg:Y3lzaGFsbA==\u003c/p\u003e\n",
+      "Author": "Cyshall",
+      "PubDate": "2022-04-27T06:07:06Z"
+    },
+    {
       "Title": "如何调试小米手机自带浏览器？ - 程序员",
       "Link": "https://www.v2ex.com/t/849558",
       "Description": "\u003cp\u003e小米手机浏览器发现一个兼容性问题，能看到头像没有显示出来\u003c/p\u003e\n\u003cp\u003e想问一下怎么才能调试自带的手机浏览器呢？\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://zhidao.baidu.com/question/621082524796321692.html\" rel=\"nofollow\"\u003ehttps://zhidao.baidu.com/question/621082524796321692.html\u003c/a\u003e\u003c/p\u003e\n",
@@ -11,7 +39,7 @@
       "PubDate": "2022-04-27T06:04:01Z"
     },
     {
-      "Title": "关于 apple watch 微信通知的疑惑 - 问与答",
+      "Title": "关于 apple watch 微信通知的疑惑 -  WATCH",
       "Link": "https://www.v2ex.com/t/849557",
       "Description": "有什么办法能在不开静音模式的前提下，能让微信通知在手机和 watch 上都没有声音，但是 watch 上有震动？\u003cbr /\u003e\u003cbr /\u003e目前要想在 watch 上有震动，就必须开启微信在手机上的通知声音，然而这样 watch 也会有声音，这时候只能在 watch 上开静音模式",
       "Author": "vaf714172",

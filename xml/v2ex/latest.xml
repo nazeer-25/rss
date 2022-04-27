@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>北京五一咋整 - 问与答</title>
+      <link>https://www.v2ex.com/t/849562</link>
+      <description>&lt;p&gt;坐标北京，五一不知道咋整，回家吧回不去，出去玩吧北京就那几个地儿我估摸着都爆满，大家有什么计划不&lt;/p&gt;&#xA;</description>
+      <author>svt</author>
+      <pubDate>27 Apr 2022 06:15:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>iOS 上网易新闻 app 推送问题 - 全球工单系统</title>
+      <link>https://www.v2ex.com/t/849561</link>
+      <description>&lt;p&gt;每次我在锁屏界面点开一个它的一个新闻推送消息，在显示它的开屏界面时，我切换到其他的 app ，一会儿再切换回来后，只会显示 app 首页界面，不会显示我要看的新闻详情&lt;/p&gt;&#xA;&lt;p&gt;最新版本仍然有这个问题&lt;/p&gt;&#xA;&lt;p&gt;你们说网易是不是故意地非要用户看完广告，或者手动点击跳过才能看新闻详情呢&lt;/p&gt;&#xA;</description>
+      <author>pheyer</author>
+      <pubDate>27 Apr 2022 06:08:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>对于 api 网关来说，两种设计，哪种更适合 - 问与答</title>
+      <link>https://www.v2ex.com/t/849560</link>
+      <description>&lt;p&gt;是酱，觉得市面上的 api 网关都太产品化，难用（配置麻烦），所以用 spring cloud gateway 自己开发了一套网关。&lt;/p&gt;&#xA;&lt;p&gt;然后对实现形式上，有一些争议，主要体现在规范、管理上。 比如：&lt;/p&gt;&#xA;&lt;p&gt;第一种，像支付宝一样&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;openapi.x.com/gateway.do?method=api.name.and.version&amp;amp;other_business_parameters&amp;amp;sign_type=hmac&amp;amp;sign=&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第二种&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;GET openapi.x.com/api/name/and/version?other_business_parameters HTTP/1.1&#xA;Host openapi.x.com&#xA;X-$公司名缩写-AUTHTYPE: HMAC-SHA256&#xA;X-$-Client-ID: xxx&#xA;X-$-Sign: xxxxxxxxx&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;无论那种，到网关，最终都 http.reveserve( http://backend-server-name-in-k8s:port)&lt;/p&gt;&#xA;&lt;p&gt;就从表意、管理、规范、使用等等等等各方面来综合定一个方案，哪种更好。&lt;/p&gt;&#xA;&lt;p&gt;尝试第一种，使用 apisix ，&#xA;配置了一堆  /&lt;a href=&#34;http://gatweay.do&#34; rel=&#34;nofollow&#34;&gt;gatweay.do&lt;/a&gt; 的路由。。后台页面像这样：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;路由&lt;/th&gt;&#xA;&lt;th&gt;对应服务&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;/&lt;a href=&#34;http://gateawy.do&#34; rel=&#34;nofollow&#34;&gt;gateawy.do&lt;/a&gt;&lt;/td&gt;&#xA;&lt;td&gt;s1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;/&lt;a href=&#34;http://gateway.do&#34; rel=&#34;nofollow&#34;&gt;gateway.do&lt;/a&gt;&lt;/td&gt;&#xA;&lt;td&gt;s2&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;/&lt;a href=&#34;http://gateway.do&#34; rel=&#34;nofollow&#34;&gt;gateway.do&lt;/a&gt;&lt;/td&gt;&#xA;&lt;td&gt;s3&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;/&lt;a href=&#34;http://gateway.do&#34; rel=&#34;nofollow&#34;&gt;gateway.do&lt;/a&gt;&lt;/td&gt;&#xA;&lt;td&gt;s4&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;第二种，后台页面像这样：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;路由&lt;/th&gt;&#xA;&lt;th&gt;对应服务&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;/v1/s1/**&lt;/td&gt;&#xA;&lt;td&gt;s1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;/v1/s2/**&lt;/td&gt;&#xA;&lt;td&gt;s2&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;/v1/special/**&lt;/td&gt;&#xA;&lt;td&gt;s3&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;/v1/444/**&lt;/td&gt;&#xA;&lt;td&gt;s4&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;不说技术实现，自己开发的话，无论哪种方案都能实现也都好实现。就说管理、规范等等等等其他方案。&lt;/p&gt;&#xA;</description>
+      <author>dzdh</author>
+      <pubDate>27 Apr 2022 06:07:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>Apple One 美区超大杯 - Apple</title>
+      <link>https://www.v2ex.com/t/849559</link>
+      <description>&lt;p&gt;Apple One 美区超大杯，价格等人齐了之后平分的价格，有需要的联系 tg:Y3lzaGFsbA==&lt;/p&gt;&#xA;</description>
+      <author>Cyshall</author>
+      <pubDate>27 Apr 2022 06:07:06 +0000</pubDate>
+    </item>
+    <item>
       <title>如何调试小米手机自带浏览器？ - 程序员</title>
       <link>https://www.v2ex.com/t/849558</link>
       <description>&lt;p&gt;小米手机浏览器发现一个兼容性问题，能看到头像没有显示出来&lt;/p&gt;&#xA;&lt;p&gt;想问一下怎么才能调试自带的手机浏览器呢？&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://zhidao.baidu.com/question/621082524796321692.html&#34; rel=&#34;nofollow&#34;&gt;https://zhidao.baidu.com/question/621082524796321692.html&lt;/a&gt;&lt;/p&gt;&#xA;</description>
@@ -11,7 +39,7 @@
       <pubDate>27 Apr 2022 06:04:01 +0000</pubDate>
     </item>
     <item>
-      <title>关于 apple watch 微信通知的疑惑 - 问与答</title>
+      <title>关于 apple watch 微信通知的疑惑 -  WATCH</title>
       <link>https://www.v2ex.com/t/849557</link>
       <description>有什么办法能在不开静音模式的前提下，能让微信通知在手机和 watch 上都没有声音，但是 watch 上有震动？&lt;br /&gt;&lt;br /&gt;目前要想在 watch 上有震动，就必须开启微信在手机上的通知声音，然而这样 watch 也会有声音，这时候只能在 watch 上开静音模式</description>
       <author>vaf714172</author>
