@@ -40,7 +40,7 @@
     },
     {
       "Title": "大佬们，我是不是碰到了培训机构",
-      "Link": "https://studygolang.com/topics/15441#reply2",
+      "Link": "https://studygolang.com/topics/15441#reply3",
       "Description": "\u003cp\u003e今年刚开的小公司面试技术面，就让我翻译了一篇英文文档，下午说我过了，给我发offer，让我五一假后入职\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -210,6 +210,13 @@
       "Title": "GO如何实现执行SET CGO_ENABLED=0 SET GOOS=linux SET GOARCH=amd64等命令并build成功?",
       "Link": "https://studygolang.com/topics/15422#reply2",
       "Description": "\u003cp\u003e众所周知,在windows环境下编译linux上可执行程序的命令如下\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eSET CGO_ENABLED=0 \nSET GOOS=linux\nSET GOARCH=amd64\ngo build main.go\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e自已在windows上写的玩意有时候老是想放到不同环境上跑,每次编译就需要执行4条命令,很麻烦\n于是简单弄了个build_linux.bat\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eset file=%1\nif \u0026quot;\u0026quot;%1\u0026quot;\u0026quot;==\u0026quot;\u0026quot;\u0026quot;\u0026quot; set file=main.go\nSET CGO_ENABLED=0\nSET GOOS=linux\nSET GOARCH=amd64\ngo build %file%\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e然后想用go也实现这个玩意\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;flag\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;os\u0026quot;\n\t\u0026quot;os/exec\u0026quot;\n)\n\nfunc main() {\n\tinitFlag()\n\tbuildFile()\n}\nfunc buildFile() {\n\tfmt.Println(\u0026quot;*******\u0026quot;)\n\tcmd(\u0026quot; CGO_ENABLED=0\u0026quot;)\n\tcmd(\u0026quot; GOOS=\u0026quot; + GOOS)\n\tcmd(\u0026quot; GOARCH=\u0026quot; + GOARCH)\n\n\tcmd := exec.Command(\u0026quot;go\u0026quot;, \u0026quot;build\u0026quot;, File)\n\tcmd.Env = os.Environ()\n\n\tfmt.Println(cmd)\n\terr := cmd.Run()\n\tif err != nil {\n\t\tfmt.Println(\u0026quot;***err:\u0026quot;, err)\n\t\treturn\n\t}\n}\nfunc cmd(arg string) {\n\t// 怎么设置go env并生效?\n\tcmd := exec.Command(\u0026quot;go\u0026quot;, \u0026quot;env\u0026quot;, arg)\n\tfmt.Println(cmd)\n\terr := cmd.Run()\n\tif err != nil {\n\t\tfmt.Println(\u0026quot;***err:\u0026quot;, err)\n\t\treturn\n\t}\n}\n\nvar (\n\tGOOS   string\n\tGOARCH string\n\tFile   string\n)\n\nfunc initFlag() {\n\tflag.StringVar(\u0026amp;GOOS, \u0026quot;o\u0026quot;, \u0026quot;linux\u0026quot;, \u0026quot;目标平台的操作系统(darwin、freebsd、linux、windows)\u0026quot;)\n\tflag.StringVar(\u0026amp;GOARCH, \u0026quot;a\u0026quot;, \u0026quot;amd64\u0026quot;, \u0026quot;目标平台的体系架构(386、amd64、arm)\u0026quot;)\n\tflag.StringVar(\u0026amp;File, \u0026quot;f\u0026quot;, \u0026quot;main.go\u0026quot;, \u0026quot;需要编译的文件\u0026quot;)\n\tflag.Parse()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e然而上面的go demo只生效了 go build main.go 这条命令,并生成 main.exe文件,而不是理想上的linux可执行文件\u003c/p\u003e\n\n\u003cp\u003e求靓仔大佬解惑\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "大佬们，我是不是碰到了培训机构",
+      "Link": "https://studygolang.com/topics/15441#reply2",
+      "Description": "\u003cp\u003e今年刚开的小公司面试技术面，就让我翻译了一篇英文文档，下午说我过了，给我发offer，让我五一假后入职\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },

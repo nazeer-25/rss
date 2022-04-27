@@ -30,7 +30,7 @@
     </item>
     <item>
       <title>大佬们，我是不是碰到了培训机构</title>
-      <link>https://studygolang.com/topics/15441#reply2</link>
+      <link>https://studygolang.com/topics/15441#reply3</link>
       <description>&lt;p&gt;今年刚开的小公司面试技术面，就让我翻译了一篇英文文档，下午说我过了，给我发offer，让我五一假后入职&lt;/p&gt;&#xA;</description>
     </item>
     <item>
@@ -152,6 +152,11 @@
       <title>GO如何实现执行SET CGO_ENABLED=0 SET GOOS=linux SET GOARCH=amd64等命令并build成功?</title>
       <link>https://studygolang.com/topics/15422#reply2</link>
       <description>&lt;p&gt;众所周知,在windows环境下编译linux上可执行程序的命令如下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;SET CGO_ENABLED=0 &#xA;SET GOOS=linux&#xA;SET GOARCH=amd64&#xA;go build main.go&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;自已在windows上写的玩意有时候老是想放到不同环境上跑,每次编译就需要执行4条命令,很麻烦&#xA;于是简单弄了个build_linux.bat&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;set file=%1&#xA;if &amp;quot;&amp;quot;%1&amp;quot;&amp;quot;==&amp;quot;&amp;quot;&amp;quot;&amp;quot; set file=main.go&#xA;SET CGO_ENABLED=0&#xA;SET GOOS=linux&#xA;SET GOARCH=amd64&#xA;go build %file%&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;然后想用go也实现这个玩意&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;flag&amp;quot;&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;os&amp;quot;&#xA;&#x9;&amp;quot;os/exec&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;initFlag()&#xA;&#x9;buildFile()&#xA;}&#xA;func buildFile() {&#xA;&#x9;fmt.Println(&amp;quot;*******&amp;quot;)&#xA;&#x9;cmd(&amp;quot; CGO_ENABLED=0&amp;quot;)&#xA;&#x9;cmd(&amp;quot; GOOS=&amp;quot; + GOOS)&#xA;&#x9;cmd(&amp;quot; GOARCH=&amp;quot; + GOARCH)&#xA;&#xA;&#x9;cmd := exec.Command(&amp;quot;go&amp;quot;, &amp;quot;build&amp;quot;, File)&#xA;&#x9;cmd.Env = os.Environ()&#xA;&#xA;&#x9;fmt.Println(cmd)&#xA;&#x9;err := cmd.Run()&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;fmt.Println(&amp;quot;***err:&amp;quot;, err)&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;}&#xA;func cmd(arg string) {&#xA;&#x9;// 怎么设置go env并生效?&#xA;&#x9;cmd := exec.Command(&amp;quot;go&amp;quot;, &amp;quot;env&amp;quot;, arg)&#xA;&#x9;fmt.Println(cmd)&#xA;&#x9;err := cmd.Run()&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;fmt.Println(&amp;quot;***err:&amp;quot;, err)&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;}&#xA;&#xA;var (&#xA;&#x9;GOOS   string&#xA;&#x9;GOARCH string&#xA;&#x9;File   string&#xA;)&#xA;&#xA;func initFlag() {&#xA;&#x9;flag.StringVar(&amp;amp;GOOS, &amp;quot;o&amp;quot;, &amp;quot;linux&amp;quot;, &amp;quot;目标平台的操作系统(darwin、freebsd、linux、windows)&amp;quot;)&#xA;&#x9;flag.StringVar(&amp;amp;GOARCH, &amp;quot;a&amp;quot;, &amp;quot;amd64&amp;quot;, &amp;quot;目标平台的体系架构(386、amd64、arm)&amp;quot;)&#xA;&#x9;flag.StringVar(&amp;amp;File, &amp;quot;f&amp;quot;, &amp;quot;main.go&amp;quot;, &amp;quot;需要编译的文件&amp;quot;)&#xA;&#x9;flag.Parse()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;然而上面的go demo只生效了 go build main.go 这条命令,并生成 main.exe文件,而不是理想上的linux可执行文件&lt;/p&gt;&#xA;&#xA;&lt;p&gt;求靓仔大佬解惑&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>大佬们，我是不是碰到了培训机构</title>
+      <link>https://studygolang.com/topics/15441#reply2</link>
+      <description>&lt;p&gt;今年刚开的小公司面试技术面，就让我翻译了一篇英文文档，下午说我过了，给我发offer，让我五一假后入职&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>大佬们，我是不是碰到了培训机构</title>
