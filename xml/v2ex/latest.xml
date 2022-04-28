@@ -4,6 +4,33 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>nodejs cpu profiling 的疑问 - 问与答</title>
+      <link>https://www.v2ex.com/t/849849</link>
+      <description>&lt;p&gt;简单描述下项目，container 里面 nodejs 进程启动一个 web server ，同时会用到 puppeteer 控制 chrome 做些事情。&lt;/p&gt;&#xA;&lt;p&gt;遇到的问题是 container 经常会因为 liveness probe fail 被 restart 。其中 liveness probe 直接就是做的 webserver 简单的 health check 。所以确实是 CPU 使用太高，导致 eventloop 被 block ，无法响应 liveness check 。&lt;/p&gt;&#xA;&lt;p&gt;使用 node 内建的 profile 来做分析。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;node --prof index.js&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;得到的结果是：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; [Summary]:&#xA;   ticks  total  nonlib   name&#xA;    420    2.9%   99.3%  JavaScript&#xA;      0    0.0%    0.0%  C++&#xA;    597    4.1%  141.1%  GC&#xA;  13981   97.1%          Shared libraries&#xA;      3    0.0%          Unaccounted&#xA;      &#xA; [Shared libraries]:&#xA;   ticks  total  nonlib   name&#xA;   6579   45.7%          /usr/local/bin/node&#xA;   5776   40.1%          /lib/x86_64-linux-gnu/libc-2.28.so&#xA;   1539   10.7%          /lib/x86_64-linux-gnu/libpthread-2.28.so&#xA;     82    0.6%          /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25&#xA;      5    0.0%          [vdso]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;显示 CPU 是花在 node 上和 libc 里面的函数。&#xA;其中一些 callstack 是这样的&#xA;&lt;a href=&#34;https://imgtu.com/i/LXKYx1&#34; rel=&#34;nofollow&#34;&gt;pic1&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/LXQ3cR&#34; rel=&#34;nofollow&#34;&gt;pic2&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;看 callstack 大部分时间都是 puppeteer 做 IPC ，也即 node 进程与 chrome 进程通信。&lt;/p&gt;&#xA;&lt;p&gt;按理来说应该是异步的，不应该 block eventloop 。&lt;/p&gt;&#xA;&lt;p&gt;有没有可能是&lt;strong&gt;libuv 里面 epoll_pwait 的时候 io callback 太多，导致迟迟无法进入到下一个 eventloop 导致 eventloop 被 block 了呢&lt;/strong&gt;？发现问题的时候 container CPU 确实已经很满了。&lt;/p&gt;&#xA;</description>
+      <author>v2byy</author>
+      <pubDate>28 Apr 2022 08:30:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有继续区块链上的斗地主游戏？ - 区块链</title>
+      <link>https://www.v2ex.com/t/849848</link>
+      <description>&lt;p&gt;继续 bsc 或者 ethereum 都可以，我觉得应该很有意思&lt;/p&gt;&#xA;</description>
+      <author>lovepplforever</author>
+      <pubDate>28 Apr 2022 08:29:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>如果一份全职远程工作，薪资略少于坐班工作 2-3K 左右，你会选择哪个？好奇大家选择不选择远程工作的理由是啥？ - 问与答</title>
+      <link>https://www.v2ex.com/t/849847</link>
+      <author>tata923</author>
+      <pubDate>28 Apr 2022 08:28:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>隔壁帖子奶茶和烟有感，其实大家并没有认识到 糖 的危害。 - 生活方式</title>
+      <link>https://www.v2ex.com/t/849845</link>
+      <description>&lt;p&gt;烟会导致很多癌症 这是毋庸置疑的，但是 糖 对一个营养摄入正常的人来说也一样可怕。&lt;/p&gt;&#xA;&lt;p&gt;糖 衍生开的是会快速吸收的碳水化物。&lt;/p&gt;&#xA;&lt;p&gt;大家如果跟我一样肥胖，看过三甲医院的营养减肥科，医生会告诉你，你可以开放的去摄入油脂，但是一定要控糖。&lt;/p&gt;&#xA;&lt;p&gt;快糖 快速吸收的碳水化物， 会让胰岛素飙升，胰岛素多会促进脂肪的合成，并降低脂肪的代谢。 &lt;/p&gt;&#xA;&lt;p&gt;正常人偶尔喝奶茶一点毛病没有。&lt;/p&gt;&#xA;&lt;p&gt;但是如果你经常喝奶茶，高糖食物摄入，奶茶 + 蛋糕。 那么你的胰岛素会越来越不敏感，可能摄入 200g 纯碳水，正常人 3 小时胰岛素消耗完毕，糖分消耗完毕。&lt;/p&gt;&#xA;&lt;p&gt;但是肥胖或者微胖人群，3 小时后胰岛素依旧在分泌，虽然糖分已经没了，但是还是会促进脂肪的合成。然后没糖了，胰岛素还在会怎么样？ TMD 会饿呀，饿了会怎么样？ 又 TMD 的去吃了。 然后就死循环了。&lt;/p&gt;&#xA;&lt;p&gt;所以减肥最重要的其实不是控脂肪，吃什么奥利司他，放个屁都会蹦油在菊花那边。 虽重要的是控糖，其实是控制胰岛素，让胰岛素不要经常喝过多的分泌。&lt;/p&gt;&#xA;</description>
+      <author>alanying</author>
+      <pubDate>28 Apr 2022 08:25:20 +0000</pubDate>
+    </item>
+    <item>
       <title>Apple Watch 明明手机已经挂断电话了，为什么顶部始终有个电话标志？ - 问与答</title>
       <link>https://www.v2ex.com/t/849843</link>
       <description>手机已经挂断电话了，而且也很长时间没有打电话，为什么手表顶部的电话标志一直在那，点进去也不知道怎么退出，就一直在那，重启什么的也不好使。</description>
@@ -16,20 +43,6 @@
       <description>&lt;p&gt;log4j2 中的配置&#xA;&amp;lt;Property name=&#34;LOG_HOME&#34; value=&#34;${spring:logging.home:-/root/app/logs/ntpTime/}&#34;/&amp;gt;&lt;/p&gt;&#xA;&lt;p&gt;实际情况:&#xA;spring 还没有启动完成,此时读取不了 yml 中的 logging.home,会生成一个 spring:logging.home 目录. 等到 spring 启动完成后会在配置的 logging.home 下生成文件&lt;/p&gt;&#xA;&lt;p&gt;疑问:&#xA;虽然 Property value 配置了默认路径,但是会生成一个垃圾文件(因为 spring 没有启动完成读取不到配置,只能用默认的),请问这个有没有什么解决办法&lt;/p&gt;&#xA;</description>
       <author>BrookO</author>
       <pubDate>28 Apr 2022 07:59:51 +0000</pubDate>
-    </item>
-    <item>
-      <title>芯片抢购项目，需求技术强大人员，提供你所需要任何东西 - 酷工作</title>
-      <link>https://www.v2ex.com/t/849840</link>
-      <description>&lt;p&gt;我们能提供什么？&#xA;抢购窍门，逻辑思路，实现方向，销售端支持&lt;/p&gt;&#xA;&lt;p&gt;你能得到什么？&#xA;合作方式：提成点数，利润分红，保底回报&lt;/p&gt;&#xA;&lt;p&gt;实施方向，抢购方法逻辑流程都能提供给你，需要你有足够强大的技术实力进行实现，项目合法合规。&lt;/p&gt;&#xA;&lt;p&gt;有兴趣的联系 v：Lo_2333&lt;/p&gt;&#xA;</description>
-      <author>Lo2333</author>
-      <pubDate>28 Apr 2022 07:59:37 +0000</pubDate>
-    </item>
-    <item>
-      <title>当了这么多年男人，发现还是喜欢女人 - 生活</title>
-      <link>https://www.v2ex.com/t/849839</link>
-      <description>&lt;p&gt;跟风首页列表&lt;/p&gt;&#xA;</description>
-      <author>acmore</author>
-      <pubDate>28 Apr 2022 07:59:34 +0000</pubDate>
     </item>
     <item>
       <title>请教页面离线技术 - JavaScript</title>
@@ -51,13 +64,6 @@
       <description>&lt;p&gt;显示发帖 IP 这几十年前论坛就有的功能，没有的时候闹着要，真有了也没多少人关注。&#xA;不如改成隐藏的 IP ，但是加一个质疑按钮，有网友质疑发帖人地址的时候，可以点质疑按钮，弹出一个投票界面让网友选择发帖人的地址。&#xA;凑齐 1000 个质疑后开奖，看看有多少人猜对了，有多少人打脸了。。。&lt;/p&gt;&#xA;&lt;p&gt;这样是不是大家参与积极性就高多了？&lt;/p&gt;&#xA;</description>
       <author>shyrock</author>
       <pubDate>28 Apr 2022 07:48:11 +0000</pubDate>
-    </item>
-    <item>
-      <title>第一步 twitter, 下一步 抖音，可口可乐 - 问与答</title>
-      <link>https://www.v2ex.com/t/849833</link>
-      <description>马斯克内心的想法是什么，据说川建国的 twitter 账号马上放出来</description>
-      <author>lutian</author>
-      <pubDate>28 Apr 2022 07:40:01 +0000</pubDate>
     </item>
     <item>
       <title>山寨 type-c 耳机还是牛逼(纯褒义) - 分享发现</title>
@@ -253,6 +259,27 @@
       <description>&lt;p&gt;在老家某四线城市买了套碧桂园精装修的房子，瓷砖、洗手间、厨房这些地方的基础配件开发商都弄好了，需要装修的应该是电器、窗帘、灯饰、浴室等等。想问问大家：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在哪些平台上可以看一些装修方案？&lt;/li&gt;&#xA;&lt;li&gt;在买大件电器（电视、冰箱、洗衣机等）有啥技巧或者避坑的点吗？&lt;/li&gt;&#xA;&lt;li&gt;老家只有妈妈在家，我不在家的情况下，有比较好的上门安装服务么？&#xA;感谢！&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
       <author>whasyt</author>
       <pubDate>28 Apr 2022 06:18:03 +0000</pubDate>
+    </item>
+    <item>
+      <title>芯片抢购项目，需求技术强大人员，提供你所需要任何东西 - 酷工作</title>
+      <link>https://www.v2ex.com/t/849840</link>
+      <description>&lt;p&gt;我们能提供什么？&#xA;抢购窍门，逻辑思路，实现方向，销售端支持&lt;/p&gt;&#xA;&lt;p&gt;你能得到什么？&#xA;合作方式：提成点数，利润分红，保底回报&lt;/p&gt;&#xA;&lt;p&gt;实施方向，抢购方法逻辑流程都能提供给你，需要你有足够强大的技术实力进行实现，项目合法合规。&lt;/p&gt;&#xA;&lt;p&gt;有兴趣的联系 v：Lo_2333&lt;/p&gt;&#xA;</description>
+      <author>Lo2333</author>
+      <pubDate>28 Apr 2022 07:59:37 +0000</pubDate>
+    </item>
+    <item>
+      <title>当了这么多年男人，发现还是喜欢女人 - 生活</title>
+      <link>https://www.v2ex.com/t/849839</link>
+      <description>&lt;p&gt;跟风首页列表&lt;/p&gt;&#xA;</description>
+      <author>acmore</author>
+      <pubDate>28 Apr 2022 07:59:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>第一步 twitter, 下一步 抖音，可口可乐 - 问与答</title>
+      <link>https://www.v2ex.com/t/849833</link>
+      <description>马斯克内心的想法是什么，据说川建国的 twitter 账号马上放出来</description>
+      <author>lutian</author>
+      <pubDate>28 Apr 2022 07:40:01 +0000</pubDate>
     </item>
     <item>
       <title>求助云服务器选型问题 - 服务器</title>
