@@ -60,9 +60,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go菜鸟：请各位大佬指点，代码哪里错了",
-      "Link": "https://studygolang.com/topics/15432#reply4",
-      "Description": "\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;errors\u0026quot;\n\t\u0026quot;os\u0026quot;\n)\n\nconst rows, columns = 9, 9\ntype Grid [rows][columns]int8\n\nfunc main() {\n\tvar g Grid\n\terr := g.Set(6,2,5)\n\tif err != nil {\n\t\tfmt.Println(\u0026quot;A\u0026quot;,err)\n\t\tfmt.Printf(\u0026quot;An error occurred: %v.\\n\u0026quot;, err)\n\t\tos.Exit(1)\n\t}\n}\n\nfunc (g *Grid) Set(row, column int, digit int8) error {\n\tif !inBounds(row, column) {\n\t\treturn errors.New(\u0026quot;out of bounds\u0026quot;)\n\t}\n\t\tg[row][columns] = digit\n\t\treturn nil\n\t\n}\n\nfunc inBounds(row, column int) bool {\n\tif row \u0026lt; 0 || row \u0026gt;= rows {\n\t\treturn false\n\t}\n\n\tif column \u0026lt; 0 || column \u0026gt;= columns{\n\t\treturn false\n\t}\n\n\treturn true\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e错误：\n#command-line-arguments\u003c/p\u003e\n\n\u003cp\u003e./a.go:26:10: invalid argument: array index 9 out of bounds [0:9]\u003c/p\u003e\n",
+      "Title": "goweb 框架选择",
+      "Link": "https://studygolang.com/topics/15437#reply0",
+      "Description": "\u003cp\u003e接触到的go web框架如下 gin、 beego、goframe、echo四种。\n个人感受如下：\n- beego 功能齐全，但是在orm和route上限制比较大。 规模比较小的站点足够使用\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cp\u003egin   过于灵活，go orm功能不够强，没有特别方便的辅助开发的脚手架功能。个人开发api的首选\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003eecho 简单接触，未深入\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003egoframe 功能齐全，针对传统web开发的orm和路由功能足够使用。对团队来说不需要额外限制组件使用等。直接用gf的组件即可\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e学习难度比较：\u003c/p\u003e\n\n\u003cp\u003e四个相差并不大。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -116,9 +116,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "goweb 框架选择",
-      "Link": "https://studygolang.com/topics/15437#reply0",
-      "Description": "\u003cp\u003e接触到的go web框架如下 gin、 beego、goframe、echo四种。\n个人感受如下：\n- beego 功能齐全，但是在orm和route上限制比较大。 规模比较小的站点足够使用\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cp\u003egin   过于灵活，go orm功能不够强，没有特别方便的辅助开发的脚手架功能。个人开发api的首选\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003eecho 简单接触，未深入\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003egoframe 功能齐全，针对传统web开发的orm和路由功能足够使用。对团队来说不需要额外限制组件使用等。直接用gf的组件即可\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e学习难度比较：\u003c/p\u003e\n\n\u003cp\u003e四个相差并不大。\u003c/p\u003e\n",
+      "Title": "go菜鸟：请各位大佬指点，代码哪里错了",
+      "Link": "https://studygolang.com/topics/15432#reply4",
+      "Description": "\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;errors\u0026quot;\n\t\u0026quot;os\u0026quot;\n)\n\nconst rows, columns = 9, 9\ntype Grid [rows][columns]int8\n\nfunc main() {\n\tvar g Grid\n\terr := g.Set(6,2,5)\n\tif err != nil {\n\t\tfmt.Println(\u0026quot;A\u0026quot;,err)\n\t\tfmt.Printf(\u0026quot;An error occurred: %v.\\n\u0026quot;, err)\n\t\tos.Exit(1)\n\t}\n}\n\nfunc (g *Grid) Set(row, column int, digit int8) error {\n\tif !inBounds(row, column) {\n\t\treturn errors.New(\u0026quot;out of bounds\u0026quot;)\n\t}\n\t\tg[row][columns] = digit\n\t\treturn nil\n\t\n}\n\nfunc inBounds(row, column int) bool {\n\tif row \u0026lt; 0 || row \u0026gt;= rows {\n\t\treturn false\n\t}\n\n\tif column \u0026lt; 0 || column \u0026gt;= columns{\n\t\treturn false\n\t}\n\n\treturn true\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e错误：\n#command-line-arguments\u003c/p\u003e\n\n\u003cp\u003e./a.go:26:10: invalid argument: array index 9 out of bounds [0:9]\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
