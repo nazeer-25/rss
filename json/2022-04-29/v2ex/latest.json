@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "详解 LB 负载均衡的应用 - 云计算",
+      "Link": "https://www.v2ex.com/t/850051",
+      "Description": "\u003cp\u003eCloudpods 是一个开源的 Golang 实现的云原生的多云和混合云融合平台。\u003c/p\u003e\n\u003cp\u003eCloudpods 不仅可以管理本地的虚拟机和物理机资源，还可以管理其他公有云和私有云平台的资源。\u003c/p\u003e\n\u003cp\u003eGitHub: \u003ca href=\"https://github.com/yunionio/cloudpods\" rel=\"nofollow\"\u003ehttps://github.com/yunionio/cloudpods\u003c/a\u003e,欢迎使用+star\u003c/p\u003e\n\u003cp\u003e今天分享的内容是“云上负载均衡产品的应用”。会从以下几个方面展开：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e负载均衡\u003cstrong\u003e产品简介\u003c/strong\u003e。主要介绍负载均衡作为一个云上产品，它的功能模型是怎样的，日常使用中会遇到的业务词汇\u003c/li\u003e\n\u003cli\u003e负载均衡的\u003cstrong\u003e功能与典型应用场景\u003c/strong\u003e。这部分主要结合业务词汇，对负载均衡服务中常见的一些功能选项进行介绍，并举例介绍一些典型的应用场景\u003c/li\u003e\n\u003cli\u003e最后，介绍负载均衡产品相比传统方式的优点\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003e一、产品简介\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e1. 以 NGINX 为例\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e提到负载均衡，我们以前一般先会想到 NGINX ，或者淘宝的分支 Tengine 。我们先来看看\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e它是怎样工作的\u003c/li\u003e\n\u003cli\u003e它解决了什么样的问题\u003c/li\u003e\n\u003cli\u003e它适合什么样的应用场景\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg alt=\"图片\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1b2289e729e34f8e9af43af31ed79426%7Etplv-k3u1fbpfcp-zoom-1.image\"/\u003e\u003c/p\u003e\n\u003cp\u003e在加入了 NGINX 之后，客户端（ Client IP ）首先与 NGINX 建立连接（ Virtual IP+Virtual Port ），请求也先发给 NGINX ，再由 NGINX 从多个后端服务器中选择一台，建立连接后把请求转发给后端服务器（ Real IP ）。\u003c/p\u003e\n\u003cp\u003eNGINX 作为网络转发节点，不参与后端服务的业务逻辑处理。而相比客户端直连后端，多个后端服务器可同时处理业务请求，应用的服务能力得到水平扩展。同时，转发节点上可以对后端做健康检查，自动屏蔽掉不健康的后端服务器，保障业务的高可用，使得单个后端服务器在故障、升级、过载时依然对用户连续可用。\u003c/p\u003e\n\u003cp\u003e因此，我们说水平扩展、高可用是负载均衡解决的最基本的两个问题。从另外一方面来说，使用负载均衡的业务，在架构设计上应该是能够水平扩展的。比如，一个应用的多个实例之间不需要通信，相互之间没有复杂的状态维护。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e2. 业务词汇\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e在使用云上负载均衡的时候，不管哪个厂商的产品，我们会遇到一些常用的业务词汇。我们围绕一张图来简要介绍。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"图片\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3fa18c769207497f89d883ed83a362f7%7Etplv-k3u1fbpfcp-zoom-1.image\"/\u003e\u003c/p\u003e\n\u003cp\u003e负载均衡实例，除了区域、可用区之外，每个实例至少有一个 IP 地址。同一个负载均衡实例下可以有多个监听，每个监听一般至少有协议、端口两个属性。后面还会介绍监听的其它属性，比如调度算法、健康检查、转发策略等。\u003c/p\u003e\n\u003cp\u003e实例和监听对应到 NGINX 上，其实是 Virtual IP 和 Virtual Port 的组合。每个监听有一个后端服务器组，组内可以有多个后端服务器，监听将来自客户端的请求转发给后端服务器（ Real IP 、Real Port ）。\u003c/p\u003e\n\u003cp\u003e对于 HTTPS 协议的监听，我们还会遇到 TLS 证书的概念。\u003c/p\u003e\n\u003cp\u003e通常每个监听还可以绑定一个访问控制列表，用来设置黑名单、白名单，限定业务的服务范围。\u003c/p\u003e\n\u003cp\u003e将业务词汇放到转发模型上，我们可以得到这样一张图。在壹云的负载均衡实现中，转发节点使用 HAProxy 负责具体的流量转发。实例和监听的配置被转换为 HAProxy 的配置应用到转发节点上。HAProxy 据此将流量转发到后端服务器组。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"图片\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/34b75cbfb8ea47f4acb0f61f058a649c%7Etplv-k3u1fbpfcp-zoom-1.image\"/\u003e\u003c/p\u003e\n\u003cp\u003e因篇幅过长，后续的功能与应用场景，和总结等详细内容请点击链接查看 \u003ca href=\"https://mp.weixin.qq.com/s/3IWF-HwGAI6FquKsoGbAcA\" rel=\"nofollow\"\u003ehttps://mp.weixin.qq.com/s/3IWF-HwGAI6FquKsoGbAcA\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eGitHub: \u003ca href=\"https://github.com/yunionio/cloudpods\" rel=\"nofollow\"\u003ehttps://github.com/yunionio/cloudpods\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "Cloudpods",
+      "PubDate": "2022-04-29T08:15:04Z"
+    },
+    {
+      "Title": "各位 dalao 平时都有哪些养生习惯 - 生活",
+      "Link": "https://www.v2ex.com/t/850049",
+      "Description": "现代社会，实际上最重要的还是有个健康的身体。\u003cbr /\u003e所以大家平常都有哪些有利健康的习惯，或饮食，或运动，都来分享分享。\u003cbr /\u003e我个人的话，每餐尽量低油低盐低糖，饮料基本不喝(国内的饮料都不好喝),各种颜色的蔬菜都摄入些。运动偶尔练练核心力量或者跑步机跑跑，日常办公一小时起来活动活动...",
+      "Author": "kldd529",
+      "PubDate": "2022-04-29T08:11:23Z"
+    },
+    {
+      "Title": "个人 Microsoft 账号的数据存储位置？ - 微软",
+      "Link": "https://www.v2ex.com/t/850048",
+      "Description": "\u003cp\u003e如何确认个人 Microsoft 账号信息存储位置？保存在境内 /国际版？如何换区？\u003c/p\u003e\n\u003cp\u003e相关：《网络安全法》\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://docs.microsoft.com/zh-cn/microsoft-365/enterprise/o365-data-locations?view=o365-worldwide\" rel=\"nofollow\"\u003e365 的方法在这里\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "SunsetShimmer",
+      "PubDate": "2022-04-29T08:11:20Z"
+    },
+    {
+      "Title": "招 Solidity 开发工程师 - 区块链",
+      "Link": "https://www.v2ex.com/t/850047",
+      "Description": "\u003cp\u003e招 Solidity 开发工程师\u003c/p\u003e\n\u003cp\u003e(不要求全部）\n具有 Solidity 开发经验\n良好的编程技能，java, javascript, php, golang, c/c++ 或其他语言\n熟悉常规的加密算法 (RSA, AES, DES, ect.)\n有 web3.js 的实际开发经验\n有 Substrate, Ethereum, Solana 至少两个的开发使用经验\n熟悉 React.js, REST APIs, GraphQL\n熟悉 ERC20, ERC721 并且有相关开发经验\n对区块链相关的测试、调试、部署相关工具有使用经验（ e.g.Truffle/Embark ）\n熟悉 EVM\n具有已经开发好的 dapp 经验为佳\u003c/p\u003e\n",
+      "Author": "yysato",
+      "PubDate": "2022-04-29T08:10:57Z"
+    },
+    {
       "Title": "bilibili 上海地区十五日会员免费领取。 - 优惠信息",
       "Link": "https://www.v2ex.com/t/850046",
       "Description": "\u003cp\u003e\u003ca href=\"https://www.bilibili.com/blackboard/activity-TuhcQyqcpo.html\" rel=\"nofollow\"\u003ehttps://www.bilibili.com/blackboard/activity-TuhcQyqcpo.html\u003c/a\u003e\u003c/p\u003e\n",
