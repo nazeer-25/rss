@@ -4,11 +4,67 @@
   "Description": "",
   "Items": [
     {
-      "Title": "surge ios 有 2 车位 - Surge",
-      "Link": "https://www.v2ex.com/t/849957",
-      "Description": "\u003cp\u003e需要联系 wx：Y2hhcmxlc3Fpbjc=\u003c/p\u003e\n",
-      "Author": "CharlesQin",
-      "PubDate": "2022-04-29T01:54:47Z"
+      "Title": "动态库设置版本的一些问题[CMake 编译] - 问与答",
+      "Link": "https://www.v2ex.com/t/849967",
+      "Description": "\u003ch2\u003e原因\u003c/h2\u003e\n\u003cp\u003e当前目录结构树如下\n---Main\n|---src\n|\t|---CMakeLists\n|   |---A.cpp\n|   |---A.h\n|\n|---test\n|\t|---CMakeLists\n|---test.cpp\n|\n|---CMakeLists\u003c/p\u003e\n\u003cp\u003e在 Main 中设置了 \u003cstrong\u003eadd_subdirectory\u003c/strong\u003e src 和 test;\u003c/p\u003e\n\u003cp\u003esrc 中生成一个 \u003cstrong\u003e\u003ca href=\"http://libA.so\" rel=\"nofollow\"\u003elibA.so\u003c/a\u003e\u003c/strong\u003e ;\u003c/p\u003e\n\u003cp\u003etest 中生成执行文件 test ，链接 libA; \u003c/p\u003e\n\u003cp\u003e为了在 libA 中添加版本信息，我讲各个级的 CMakeLists 改成如下：\u003c/p\u003e\n\u003cp\u003eMain\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eadd_subdirectory(src)\nadd_subdirectory(test)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003esrc\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eadd_library(A SHARED A.cpp A.h)\nset_target_properties(A PROPERTIES VERSION 1.0 SONAME 1)\ntarget_compile_options(A PRIVATE \"-fPIC\")\nadd_custom_command(\n    TARGET A POST_BUILD\n    COMMAND\n   \t${CMAKE_COMMAND} -E rename ${PROJECT_SOURCE_DIR}/libA.so.${COMPILE_TIME} \t${PROJECT_SOURCE_DIR}/libA.so\n)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003etest\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eset(CMAKE_EXE_LINKER_FLAGS \"${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath=./\")\nadd_executable(test test.cpp)\ntarget_link_libraries(test libA.so)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这样产生的 \u003ca href=\"http://libA.so\" rel=\"nofollow\"\u003elibA.so\u003c/a\u003e ， 可以通过 \u003ccode\u003ereadelf \u003ca href=\"http://libA.so\" rel=\"nofollow\"\u003elibA.so\u003c/a\u003e | grep \"SONAME\"\u003c/code\u003e 看到编译时间，但是也产生了问题。\u003c/p\u003e\n\u003ch2\u003e产生的问题\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003eCMake 会优先编译 test, 然后链接 \u003ca href=\"http://libA.so\" rel=\"nofollow\"\u003elibA.so\u003c/a\u003e ， 会报错，找不到 \u003ca href=\"http://libA.so\" rel=\"nofollow\"\u003elibA.so\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e如果将 test 目录下 CMakeLists 改为 \u003ccode\u003etarget_link_libraries(test A)\u003c/code\u003e 虽然 test 后编译，但是会报错，找不到 libA.so.1.0\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e想问一下各位朋友有没有啥解决方法，在 1.情况下，可以先编译生成 libA ，再去编译链接 test\n或者对于版本，有更好的方法，我是希望编译出 \u003ca href=\"http://libA.so\" rel=\"nofollow\"\u003elibA.so\u003c/a\u003e 而使用别的方式去获取到版本信息\u003c/p\u003e\n",
+      "Author": "kanhongj",
+      "PubDate": "2022-04-29T02:49:28Z"
+    },
+    {
+      "Title": "求推荐 Linux server 发行版 - Linux",
+      "Link": "https://www.v2ex.com/t/849966",
+      "Description": "如题，最近刚下单一套 i3 10100 的 itx 配置准备 diy 一台 nas 主机，主要需求：文件共享 、docker 、跑一些脚本。体验了 truenas 后还是决定放弃成品的 nas 系统，很多地方用起来很不顺手。现在准备装 linux server ，我自己只用过 centos 和 ubuntu ，如果想换换口味，想请教下老哥们更推荐什么发行版呢",
+      "Author": "storyxc",
+      "PubDate": "2022-04-29T02:47:43Z"
+    },
+    {
+      "Title": "iPhone 有什么让你离不开的功能吗？ - iPhone",
+      "Link": "https://www.v2ex.com/t/849965",
+      "Description": "做个小调查",
+      "Author": "FLY59189",
+      "PubDate": "2022-04-29T02:43:47Z"
+    },
+    {
+      "Title": "mbp2015 升级 macos12 - Apple",
+      "Link": "https://www.v2ex.com/t/849964",
+      "Description": "\u003cp\u003embp2015 有升级到 macos12 的没？使用情况如何，考虑要不要把系统升级一下，有几个软件的新版本只支持新版本系统；\u003c/p\u003e\n",
+      "Author": "muhuan",
+      "PubDate": "2022-04-29T02:41:28Z"
+    },
+    {
+      "Title": "有没有让笔记本在盒盖状态下如果断开电源就自动睡眠的软件/方法？ - 问与答",
+      "Link": "https://www.v2ex.com/t/849963",
+      "Description": "经常忘记睡眠就拔电源走人，导致电脑在包里咆哮，甚至周末直接亏电。\u003cbr /\u003e但是设置定时睡眠又会影响平时。",
+      "Author": "mhqschen",
+      "PubDate": "2022-04-29T02:40:39Z"
+    },
+    {
+      "Title": "居家办公,公司只发 50%工资违法吗? - 职场话题",
+      "Link": "https://www.v2ex.com/t/849962",
+      "Description": "RT,坐标浙江,因为疫情,所在城市 1 级响应不能出门.公司要求居家办公.",
+      "Author": "abenx",
+      "PubDate": "2022-04-29T02:37:48Z"
+    },
+    {
+      "Title": "问一下大家和我是一样的吗?关于喝茶喝咖啡 - 生活",
+      "Link": "https://www.v2ex.com/t/849961",
+      "Description": "天天到公司往那一坐 对着电脑敲啊看啊的有时候就会犯困,头点啊点的, 然后就喝茶提神 喝咖啡提神,\u003cbr /\u003e为什么我喝不出咖啡和茶的香,我听喝的人说香  哪里香了 我喝咖啡就是苦和甜 茶叶就是苦, 冲好了 我就咕咚咕咚当水喝了.我就是好奇这个香,香对我来说有点抽象.🤣",
+      "Author": "Lyv5",
+      "PubDate": "2022-04-29T02:34:09Z"
+    },
+    {
+      "Title": "安卓设备被风控有什么解决途径 - 问与答",
+      "Link": "https://www.v2ex.com/t/849960",
+      "Description": "人在上海 用了脚本刷 美团买菜  被风控不能下单\u003cbr /\u003e\u003cbr /\u003e当前情况：\u003cbr /\u003e1.当前设备的美团买菜及美团系 APP 应用被风控\u003cbr /\u003e2.当前设备相同账号的小程序未被风控\u003cbr /\u003e3.别的设备相同账号 APP 未被风控\u003cbr /\u003e4.重置当前设备可以解除风控\u003cbr /\u003e\u003cbr /\u003e推断：\u003cbr /\u003e风控规则是识别当前设备机器码（重置可以变更） 或 在当前设备写入风控文件\u003cbr /\u003e\u003cbr /\u003e希望得到不重置设备解决的思路和办法  主力机  重置太伤",
+      "Author": "statement",
+      "PubDate": "2022-04-29T02:28:37Z"
+    },
+    {
+      "Title": "create-react-app 如何 eject 引用 antd 样式库 - 前端开发",
+      "Link": "https://www.v2ex.com/t/849959",
+      "Description": "\u003cp\u003eless 引入成功了 ,但是音容 antd.less 会报错。。\u003c/p\u003e\n\u003cp\u003e// \u003ca href=\"https://github.com/ant-design/ant-motion/issues/44\" rel=\"nofollow\"\u003ehttps://github.com/ant-design/ant-motion/issues/44\u003c/a\u003e\n.bezierEasingMixin();\n^\nInline JavaScript is not enabled. Is it set in your options?\nError in D:\\Code-gen\\front\\node_modules\\antd\\es\\style\\color\\bezierEasing.less (line 110, column 0)\u003c/p\u003e\n\u003cp\u003e看的一脸懵逼\n话说有啥相关 webpack 配置的系列文章吗\u003c/p\u003e\n",
+      "Author": "zhangleshiye",
+      "PubDate": "2022-04-29T02:16:08Z"
     },
     {
       "Title": "go 用来业务开发, 开发速度是不是吊打其他语言? - Go 编程语言",
@@ -58,13 +114,6 @@
       "Description": "\u003cp\u003e准备做一个关于宝宝记录的 App/小程序，核心功能是：\u003cbr/\u003e\n记录宝宝的重要时刻、身高体重变化、提供少而精的文章新闻，规划备忘等\u003c/p\u003e\n\u003cp\u003e全部本地存储，且可导出\u003c/p\u003e\n\u003cp\u003e整体原则就是简洁风格，没有广告和各种花边推销，也不做社区，就是自己做着玩。\u003c/p\u003e\n\u003cp\u003e这种 App 大家会用么，有没有一些建议\u003c/p\u003e\n",
       "Author": "beryl",
       "PubDate": "2022-04-29T01:25:56Z"
-    },
-    {
-      "Title": "豆瓣电影好像。。。 - 电影",
-      "Link": "https://www.v2ex.com/t/849945",
-      "Description": "\u003cp\u003e刚看到有人说《哭悲》就习惯性上豆瓣搜索。\n结果发现豆瓣把《哭悲》的影评都删除了，而且整个条目都没剩下。\n不知道是只有《哭悲》由此待遇，还是有更多电影被下架封印了。\u003c/p\u003e\n\u003cp\u003e没想到用了 20 年的豆瓣电影落得如此下场，是不是以后只能 IMDB 了？\u003c/p\u003e\n",
-      "Author": "shyrock",
-      "PubDate": "2022-04-29T01:15:33Z"
     },
     {
       "Title": "照片打印机，有人用过吗？ - 问与答",
@@ -233,6 +282,20 @@
       "Description": "查询了一下，5 月份，美联储会加息，\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e这将会引发什么？\u003cbr /\u003e\u003cbr /\u003e比如 股市，房产等经济体，会不会受到影响？",
       "Author": "DavidXs",
       "PubDate": "2022-04-28T15:40:46Z"
+    },
+    {
+      "Title": "surge ios 有 2 车位 - Surge",
+      "Link": "https://www.v2ex.com/t/849957",
+      "Description": "\u003cp\u003e需要联系 wx：Y2hhcmxlc3Fpbjc=\u003c/p\u003e\n",
+      "Author": "CharlesQin",
+      "PubDate": "2022-04-29T01:54:47Z"
+    },
+    {
+      "Title": "豆瓣电影好像。。。 - 电影",
+      "Link": "https://www.v2ex.com/t/849945",
+      "Description": "\u003cp\u003e刚看到有人说《哭悲》就习惯性上豆瓣搜索。\n结果发现豆瓣把《哭悲》的影评都删除了，而且整个条目都没剩下。\n不知道是只有《哭悲》由此待遇，还是有更多电影被下架封印了。\u003c/p\u003e\n\u003cp\u003e没想到用了 20 年的豆瓣电影落得如此下场，是不是以后只能 IMDB 了？\u003c/p\u003e\n",
+      "Author": "shyrock",
+      "PubDate": "2022-04-29T01:15:33Z"
     },
     {
       "Title": "现在美区 Apple 官网买礼品卡要美区手机号了？ - Apple",

@@ -4,11 +4,67 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>surge ios 有 2 车位 - Surge</title>
-      <link>https://www.v2ex.com/t/849957</link>
-      <description>&lt;p&gt;需要联系 wx：Y2hhcmxlc3Fpbjc=&lt;/p&gt;&#xA;</description>
-      <author>CharlesQin</author>
-      <pubDate>29 Apr 2022 01:54:47 +0000</pubDate>
+      <title>动态库设置版本的一些问题[CMake 编译] - 问与答</title>
+      <link>https://www.v2ex.com/t/849967</link>
+      <description>&lt;h2&gt;原因&lt;/h2&gt;&#xA;&lt;p&gt;当前目录结构树如下&#xA;---Main&#xA;|---src&#xA;|&#x9;|---CMakeLists&#xA;|   |---A.cpp&#xA;|   |---A.h&#xA;|&#xA;|---test&#xA;|&#x9;|---CMakeLists&#xA;|---test.cpp&#xA;|&#xA;|---CMakeLists&lt;/p&gt;&#xA;&lt;p&gt;在 Main 中设置了 &lt;strong&gt;add_subdirectory&lt;/strong&gt; src 和 test;&lt;/p&gt;&#xA;&lt;p&gt;src 中生成一个 &lt;strong&gt;&lt;a href=&#34;http://libA.so&#34; rel=&#34;nofollow&#34;&gt;libA.so&lt;/a&gt;&lt;/strong&gt; ;&lt;/p&gt;&#xA;&lt;p&gt;test 中生成执行文件 test ，链接 libA; &lt;/p&gt;&#xA;&lt;p&gt;为了在 libA 中添加版本信息，我讲各个级的 CMakeLists 改成如下：&lt;/p&gt;&#xA;&lt;p&gt;Main&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;add_subdirectory(src)&#xA;add_subdirectory(test)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;src&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;add_library(A SHARED A.cpp A.h)&#xA;set_target_properties(A PROPERTIES VERSION 1.0 SONAME 1)&#xA;target_compile_options(A PRIVATE &#34;-fPIC&#34;)&#xA;add_custom_command(&#xA;    TARGET A POST_BUILD&#xA;    COMMAND&#xA;   &#x9;${CMAKE_COMMAND} -E rename ${PROJECT_SOURCE_DIR}/libA.so.${COMPILE_TIME} &#x9;${PROJECT_SOURCE_DIR}/libA.so&#xA;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;test&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;set(CMAKE_EXE_LINKER_FLAGS &#34;${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath=./&#34;)&#xA;add_executable(test test.cpp)&#xA;target_link_libraries(test libA.so)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这样产生的 &lt;a href=&#34;http://libA.so&#34; rel=&#34;nofollow&#34;&gt;libA.so&lt;/a&gt; ， 可以通过 &lt;code&gt;readelf &lt;a href=&#34;http://libA.so&#34; rel=&#34;nofollow&#34;&gt;libA.so&lt;/a&gt; | grep &#34;SONAME&#34;&lt;/code&gt; 看到编译时间，但是也产生了问题。&lt;/p&gt;&#xA;&lt;h2&gt;产生的问题&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;CMake 会优先编译 test, 然后链接 &lt;a href=&#34;http://libA.so&#34; rel=&#34;nofollow&#34;&gt;libA.so&lt;/a&gt; ， 会报错，找不到 &lt;a href=&#34;http://libA.so&#34; rel=&#34;nofollow&#34;&gt;libA.so&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;如果将 test 目录下 CMakeLists 改为 &lt;code&gt;target_link_libraries(test A)&lt;/code&gt; 虽然 test 后编译，但是会报错，找不到 libA.so.1.0&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;想问一下各位朋友有没有啥解决方法，在 1.情况下，可以先编译生成 libA ，再去编译链接 test&#xA;或者对于版本，有更好的方法，我是希望编译出 &lt;a href=&#34;http://libA.so&#34; rel=&#34;nofollow&#34;&gt;libA.so&lt;/a&gt; 而使用别的方式去获取到版本信息&lt;/p&gt;&#xA;</description>
+      <author>kanhongj</author>
+      <pubDate>29 Apr 2022 02:49:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>求推荐 Linux server 发行版 - Linux</title>
+      <link>https://www.v2ex.com/t/849966</link>
+      <description>如题，最近刚下单一套 i3 10100 的 itx 配置准备 diy 一台 nas 主机，主要需求：文件共享 、docker 、跑一些脚本。体验了 truenas 后还是决定放弃成品的 nas 系统，很多地方用起来很不顺手。现在准备装 linux server ，我自己只用过 centos 和 ubuntu ，如果想换换口味，想请教下老哥们更推荐什么发行版呢</description>
+      <author>storyxc</author>
+      <pubDate>29 Apr 2022 02:47:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>iPhone 有什么让你离不开的功能吗？ - iPhone</title>
+      <link>https://www.v2ex.com/t/849965</link>
+      <description>做个小调查</description>
+      <author>FLY59189</author>
+      <pubDate>29 Apr 2022 02:43:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>mbp2015 升级 macos12 - Apple</title>
+      <link>https://www.v2ex.com/t/849964</link>
+      <description>&lt;p&gt;mbp2015 有升级到 macos12 的没？使用情况如何，考虑要不要把系统升级一下，有几个软件的新版本只支持新版本系统；&lt;/p&gt;&#xA;</description>
+      <author>muhuan</author>
+      <pubDate>29 Apr 2022 02:41:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有让笔记本在盒盖状态下如果断开电源就自动睡眠的软件/方法？ - 问与答</title>
+      <link>https://www.v2ex.com/t/849963</link>
+      <description>经常忘记睡眠就拔电源走人，导致电脑在包里咆哮，甚至周末直接亏电。&lt;br /&gt;但是设置定时睡眠又会影响平时。</description>
+      <author>mhqschen</author>
+      <pubDate>29 Apr 2022 02:40:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>居家办公,公司只发 50%工资违法吗? - 职场话题</title>
+      <link>https://www.v2ex.com/t/849962</link>
+      <description>RT,坐标浙江,因为疫情,所在城市 1 级响应不能出门.公司要求居家办公.</description>
+      <author>abenx</author>
+      <pubDate>29 Apr 2022 02:37:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>问一下大家和我是一样的吗?关于喝茶喝咖啡 - 生活</title>
+      <link>https://www.v2ex.com/t/849961</link>
+      <description>天天到公司往那一坐 对着电脑敲啊看啊的有时候就会犯困,头点啊点的, 然后就喝茶提神 喝咖啡提神,&lt;br /&gt;为什么我喝不出咖啡和茶的香,我听喝的人说香  哪里香了 我喝咖啡就是苦和甜 茶叶就是苦, 冲好了 我就咕咚咕咚当水喝了.我就是好奇这个香,香对我来说有点抽象.🤣</description>
+      <author>Lyv5</author>
+      <pubDate>29 Apr 2022 02:34:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>安卓设备被风控有什么解决途径 - 问与答</title>
+      <link>https://www.v2ex.com/t/849960</link>
+      <description>人在上海 用了脚本刷 美团买菜  被风控不能下单&lt;br /&gt;&lt;br /&gt;当前情况：&lt;br /&gt;1.当前设备的美团买菜及美团系 APP 应用被风控&lt;br /&gt;2.当前设备相同账号的小程序未被风控&lt;br /&gt;3.别的设备相同账号 APP 未被风控&lt;br /&gt;4.重置当前设备可以解除风控&lt;br /&gt;&lt;br /&gt;推断：&lt;br /&gt;风控规则是识别当前设备机器码（重置可以变更） 或 在当前设备写入风控文件&lt;br /&gt;&lt;br /&gt;希望得到不重置设备解决的思路和办法  主力机  重置太伤</description>
+      <author>statement</author>
+      <pubDate>29 Apr 2022 02:28:37 +0000</pubDate>
+    </item>
+    <item>
+      <title>create-react-app 如何 eject 引用 antd 样式库 - 前端开发</title>
+      <link>https://www.v2ex.com/t/849959</link>
+      <description>&lt;p&gt;less 引入成功了 ,但是音容 antd.less 会报错。。&lt;/p&gt;&#xA;&lt;p&gt;// &lt;a href=&#34;https://github.com/ant-design/ant-motion/issues/44&#34; rel=&#34;nofollow&#34;&gt;https://github.com/ant-design/ant-motion/issues/44&lt;/a&gt;&#xA;.bezierEasingMixin();&#xA;^&#xA;Inline JavaScript is not enabled. Is it set in your options?&#xA;Error in D:\Code-gen\front\node_modules\antd\es\style\color\bezierEasing.less (line 110, column 0)&lt;/p&gt;&#xA;&lt;p&gt;看的一脸懵逼&#xA;话说有啥相关 webpack 配置的系列文章吗&lt;/p&gt;&#xA;</description>
+      <author>zhangleshiye</author>
+      <pubDate>29 Apr 2022 02:16:08 +0000</pubDate>
     </item>
     <item>
       <title>go 用来业务开发, 开发速度是不是吊打其他语言? - Go 编程语言</title>
@@ -58,13 +114,6 @@
       <description>&lt;p&gt;准备做一个关于宝宝记录的 App/小程序，核心功能是：&lt;br/&gt;&#xA;记录宝宝的重要时刻、身高体重变化、提供少而精的文章新闻，规划备忘等&lt;/p&gt;&#xA;&lt;p&gt;全部本地存储，且可导出&lt;/p&gt;&#xA;&lt;p&gt;整体原则就是简洁风格，没有广告和各种花边推销，也不做社区，就是自己做着玩。&lt;/p&gt;&#xA;&lt;p&gt;这种 App 大家会用么，有没有一些建议&lt;/p&gt;&#xA;</description>
       <author>beryl</author>
       <pubDate>29 Apr 2022 01:25:56 +0000</pubDate>
-    </item>
-    <item>
-      <title>豆瓣电影好像。。。 - 电影</title>
-      <link>https://www.v2ex.com/t/849945</link>
-      <description>&lt;p&gt;刚看到有人说《哭悲》就习惯性上豆瓣搜索。&#xA;结果发现豆瓣把《哭悲》的影评都删除了，而且整个条目都没剩下。&#xA;不知道是只有《哭悲》由此待遇，还是有更多电影被下架封印了。&lt;/p&gt;&#xA;&lt;p&gt;没想到用了 20 年的豆瓣电影落得如此下场，是不是以后只能 IMDB 了？&lt;/p&gt;&#xA;</description>
-      <author>shyrock</author>
-      <pubDate>29 Apr 2022 01:15:33 +0000</pubDate>
     </item>
     <item>
       <title>照片打印机，有人用过吗？ - 问与答</title>
@@ -233,6 +282,20 @@
       <description>查询了一下，5 月份，美联储会加息，&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;这将会引发什么？&lt;br /&gt;&lt;br /&gt;比如 股市，房产等经济体，会不会受到影响？</description>
       <author>DavidXs</author>
       <pubDate>28 Apr 2022 15:40:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>surge ios 有 2 车位 - Surge</title>
+      <link>https://www.v2ex.com/t/849957</link>
+      <description>&lt;p&gt;需要联系 wx：Y2hhcmxlc3Fpbjc=&lt;/p&gt;&#xA;</description>
+      <author>CharlesQin</author>
+      <pubDate>29 Apr 2022 01:54:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>豆瓣电影好像。。。 - 电影</title>
+      <link>https://www.v2ex.com/t/849945</link>
+      <description>&lt;p&gt;刚看到有人说《哭悲》就习惯性上豆瓣搜索。&#xA;结果发现豆瓣把《哭悲》的影评都删除了，而且整个条目都没剩下。&#xA;不知道是只有《哭悲》由此待遇，还是有更多电影被下架封印了。&lt;/p&gt;&#xA;&lt;p&gt;没想到用了 20 年的豆瓣电影落得如此下场，是不是以后只能 IMDB 了？&lt;/p&gt;&#xA;</description>
+      <author>shyrock</author>
+      <pubDate>29 Apr 2022 01:15:33 +0000</pubDate>
     </item>
     <item>
       <title>现在美区 Apple 官网买礼品卡要美区手机号了？ - Apple</title>
