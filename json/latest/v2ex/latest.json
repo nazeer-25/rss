@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Laravel 使用 memcached 缓存时， Composer 报 Class ‘memcached’ Not Found 错误 - PHP",
+      "Link": "https://www.v2ex.com/t/850531",
+      "Description": "\u003col\u003e\n\u003cli\u003e运行环境\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003eMac MAMP PRO 6.6.1\nNginx:1.19.2\nMysql:5.7.34\nMemcached:1.4.32\nPHP：8.1.1\u003c/p\u003e\n\u003cp\u003e3). 当前系统\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e问题描述？\n1 、在 PHP 文件中直接测试 memcached 缓存，是可以读取的，代码如下：\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e$memcached-\u0026gt;addServer('127.0.0.1', 11211);\u003c/p\u003e\n\u003cp\u003e$version = $memcached-\u0026gt;getVersion();\necho '\u003c/p\u003e\u003cpre\u003e';\nprint_r($version);\necho '\u003c/pre\u003e';\u003cp\u003e\u003c/p\u003e\n\u003cp\u003e$memcached-\u0026gt;set('Key1', 'MAMP PRO');\n$result = $memcached-\u0026gt;get('Key1');\necho $result;\n2. 在命令行执行 php artisan queue:work 正常（之前不行，后面修改环境变量后可以了）\n3. 命令行执行 composer dump-autoload 报错\u003c/p\u003e\n\u003cp\u003eError \u003c/p\u003e\n\u003cp\u003eClass \"Memcached\" not found\u003c/p\u003e\n\u003cp\u003eat vendor/laravel/framework/src/Illuminate/Cache/MemcachedConnector.php:69\n65|      * @\u003ca href=\"/member/return\"\u003ereturn\u003c/a\u003e \\Memcached\n66|      */\n67|     protected function createMemcachedInstance($connectionId)\n68|     {\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e69|         return empty($connectionId) ? new Memcached : new Memcached($connectionId);\n70|     }\n71|\n72|     /**\n73|      * Set the SASL credentials on the Memcached connection.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e  +9 vendor frames \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e10  [internal]:0\nSpatie\\Permission\\PermissionRegistrar::__construct(Object(Illuminate\\Cache\\CacheManager))\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e  +14 vendor frames \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e25  [internal]:0\nIlluminate\\Foundation\\Application::Illuminate\\Foundation{closure}(Object(Spatie\\Permission\\PermissionServiceProvider))\u003c/p\u003e\n",
+      "Author": "freadman",
+      "PubDate": "2022-05-02T10:30:02Z"
+    },
+    {
       "Title": "支付宝中小程序的问题 - 支付宝",
       "Link": "https://www.v2ex.com/t/850530",
       "Description": "\u003cp\u003e支付宝中的几个用到地图的小程序现在有点问题\u003c/p\u003e\n\u003cp\u003e[菜鸟] ，点开快递列表中 [运输中] 或 [已签收] 的快递，直接显示的时轨迹地图， [已发货] 则是正常的物流信息。\u003c/p\u003e\n\u003cp\u003e[我的快递] ， [已发货]  [已签收] 列表中的快递点开后，显示正常的物流信息。 [运输中] 则直接时轨迹地图\u003c/p\u003e\n\u003cp\u003e[饿了么] 地址管理中修改地址或添加地址也是直接显示地图，没办法正常操作。\u003c/p\u003e\n\u003cp\u003epixel4a android12 play 版和国内版支付宝都一样\n印象中以前好像没这问题，最近两天才发现的\u003c/p\u003e\n",
