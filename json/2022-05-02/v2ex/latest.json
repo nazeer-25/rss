@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "2022 了，光猫桥接，路由器拨号算好习惯还是臭毛病 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/850519",
+      "Description": "欢迎讨论",
+      "Author": "bl5c",
+      "PubDate": "2022-05-02T08:07:22Z"
+    },
+    {
+      "Title": "Rog 全家桶是否有关闭显示器后关闭 rgb 的方法？ - 问与答",
+      "Link": "https://www.v2ex.com/t/850518",
+      "Description": "\u003cp\u003e如题，据我所知雷蛇的驱动里是有这一项选项的。\n在 Windows 环境下，当关闭显示器（指设置电脑过 5 分钟自动关闭显示器，或者按下机箱电源时关闭显示器。而不是指直接关闭显示器电源）后，可以停止所有 rgb 设备的灯效\u003c/p\u003e\n\u003cp\u003e贼船好像一直是没有这个设计（起码目前我在用的 K100 键盘没有，鼠标垫我记得也不行），突出一个亮就完事了。但是用 wallpaper engine 等软件也可以实现类似的效果。\u003c/p\u003e\n\u003cp\u003e最近心水 Rog 的耀光幻 2 的键盘，但是奥创的 aura sync 好像没有和贼船雷蛇类似的 wallpaper engine 联动插件，所以旧方法应该是不行的。所以想问一下，rog 家的灯效有办法实现熄屏后自动关灯吗？多谢！\u003c/p\u003e\n",
+      "Author": "natsukage",
+      "PubDate": "2022-05-02T08:05:51Z"
+    },
+    {
+      "Title": "想借由开发一个简单的 web app 来熟悉 Vue，不知道从何处入手，望老手不吝赐教 - Vue.js",
+      "Link": "https://www.v2ex.com/t/850517",
+      "Description": "\u003cp\u003e刚开始接触 web app 的开发，手头上刚好有一个管理系统的后台。该后台已经提供了一套 XML API 。\u003c/p\u003e\n\u003cp\u003e我的需求是开发一个 web app 。这个 app 通过与管理系统后台的数据交换，可以实现：向用户展示一组“控件”（控件所需要展示的信息来源于对后台的 POST 请求）；用户与控件进行交互，把更新的状态信息又反馈给后台（依旧是通过 POST 请求）。\u003c/p\u003e\n\u003cp\u003e我的问题是，这个 web app 完全用 Vue 就可以实现了吗？还需要涉及 backend 的开发吗？前端页面按说也需要有自己的状态信息需要管理吧。最近刚开始接触 Vue ，了解到 reactivity 的概念，感觉似乎很对路：通过页面操纵数据，数据的变化又能立即在页面上反映出来。\u003c/p\u003e\n\u003cp\u003e初次接触 web app 开发，手边资料很丰富，但不知道从何处入手，希望经验丰富者指点一下努力的方向，多谢！\u003c/p\u003e\n",
+      "Author": "macid",
+      "PubDate": "2022-05-02T08:03:02Z"
+    },
+    {
+      "Title": "WireGuard 客户端无法获取伪装后的 GUA 地址 - OpenWrt",
+      "Link": "https://www.v2ex.com/t/850516",
+      "Description": "\u003ch2\u003e情况说明\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003eWireguard 运行在内网一台 OpenWrt 路由器上（ AP 模式，作为旁路由 /透明网关）\u003c/li\u003e\n\u003cli\u003eOpenWrt 配置了 lan6 接口，可以获取公网 IPv6 地址\u003c/li\u003e\n\u003cli\u003eOpenWrt 当然配置了 SSR PLUS\u003c/li\u003e\n\u003cli\u003e网关和 DNS 指定为 OpenWrt 的手机，\u003ca href=\"http://test-ipv6.com\" rel=\"nofollow\"\u003etest-ipv6.com\u003c/a\u003e 获得了 10 分，也可以访问纯 IPv6 站点\u003c/li\u003e\n\u003cli\u003eWireGuard 配置了 NAT66 地址伪装，但是客户端无法获取 IPv6 地址\u003c/li\u003e\n\u003cli\u003e内网中另外一台 Linux 主机也开启了 WireGuard 及 NAT66 伪装，仅支持 IPv4 的电脑可以连接回家，访问 IPv6 网络\u003c/li\u003e\n\u003cli\u003eOpenWrt 路由器增加与另外一台内网 Linux 主机相同的防火墙配置，依然无法获取 IPv6 公网地址\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003eOpenWrt 配置\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e/etc/config/network\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003econfig globals 'globals'\n\nconfig interface 'lan'\n        option type 'bridge'\n        option ifname 'eth1 eth2 eth3'\n        option proto 'static'\n        option netmask '255.255.255.0'\n        option ip6assign '60'\n        option ipaddr '192.168.8.108'\n        option gateway '192.168.8.1'\n        option dns '192.168.8.1'\n\nconfig interface 'wan'\n        option ifname 'eth0'\n        option proto 'dhcp'\n\nconfig interface 'wan6'\n        option ifname 'eth0'\n        option proto 'dhcpv6'\n        option reqaddress 'try'\n        option reqprefix 'auto'\n\nconfig interface 'lan6'\n        option proto 'dhcpv6'\n        option ifname '@lan'\n        option reqaddress 'try'\n        option reqprefix 'auto'\n        option clientid 'cafe:0108'\n\nconfig interface 'wgs0'\n        option proto 'wireguard'\n        option private_key 'PRIVKEY'\n        option listen_port '1380'\n        list addresses '10.7.0.1/16'\n        list addresses 'fda7::1/64'\n\nconfig wireguard_wgs0 '1005'\n        option public_key 'PUBKEY'\n        list allowed_ips '10.7.10.5/32'\n        list allowed_ips 'fda7::1005/128'\n        option route_allowed_ips '1'\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003e防火墙配置\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003ca href=\"https://imgur.com/a/kussrY1\" rel=\"nofollow\"\u003ehttps://imgur.com/a/kussrY1\u003c/a\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e/etc/rc.local\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003e#!/bin/bash\nIPT=\"/usr/sbin/iptables\"\nIPT6=\"/usr/sbin/ip6tables\"\n\nIN_FACE=\"br-lan\"                # NIC connected to the internet\nIN_FACE6=\"br-lan\"               # NIC connected to the internet\nWG_FACE=\"wgs0\"                  # WG NIC\nSUB_NET=\"10.7.0.0/16\"           # WG IPv4 sub/net aka CIDR\nWG_PORT=\"1380\"                  # WG udp port\nSUB_NET_6=\"fda7::/64\"           # WG IPv6 sub/net\n\n## IPv4 ##\n$IPT -t nat -I POSTROUTING 1 -s $SUB_NET -o $IN_FACE -j MASQUERADE\n$IPT -I INPUT 1 -i $WG_FACE -j ACCEPT\n$IPT -I FORWARD 1 -i $IN_FACE -o $WG_FACE -j ACCEPT\n$IPT -I FORWARD 1 -i $WG_FACE -o $IN_FACE -j ACCEPT\n$IPT -I INPUT 1 -i $IN_FACE -p udp --dport $WG_PORT -j ACCEPT\n\n## IPv6 ##\n$IPT6 -t nat -I POSTROUTING 1 -s $SUB_NET_6 -o $IN_FACE6 -j MASQUERADE\n$IPT6 -I INPUT 1 -i $WG_FACE -j ACCEPT\n$IPT6 -I FORWARD 1 -i $IN_FACE6 -o $WG_FACE -j ACCEPT\n$IPT6 -I FORWARD 1 -i $WG_FACE -o $IN_FACE6 -j ACCEPT\n$IPT6 -I INPUT 1 -i $IN_FACE6 -p udp --dport $WG_PORT -j ACCEPT\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e问题\u003c/h2\u003e\n\u003cp\u003e请问是什么原因？哪里可能存在问题？\u003c/p\u003e\n\u003cp\u003e谢谢！\u003c/p\u003e\n",
+      "Author": "DopaminePlz",
+      "PubDate": "2022-05-02T08:00:11Z"
+    },
+    {
+      "Title": "大厂完善的基建对于个人发展的利弊 - 程序员",
+      "Link": "https://www.v2ex.com/t/850515",
+      "Description": "\u003cul\u003e\n\u003cli\u003e楼主目前初入职场半年，目前在大厂做研发工作。\u003c/li\u003e\n\u003cli\u003e工作以来，很明显的感受就是公司的基础建设做的特别的完善，举例来说，服务的性能指标，cpu 利用率，接口耗时等等基本不用关心，框架啥的已经帮你统计好，内网平台可以直接看，平常需要进入实例里手敲命令去查问题的场景很少很少。\u003c/li\u003e\n\u003cli\u003e举一个例子，公司内使用 redis ，基本就是申请好一个实例或者集群直接使用，redis 的配置以及各种考量基本接触不到。\u003c/li\u003e\n\u003cli\u003e完善的基建对于工作了几年的程序员来说，可以避免很多重复劳动，但是对于新手程序员来说，可能更多的实践对于个人的提升会更大，比如小点的公司，起一个服务可能需要你从 nginx 到底层存储都需要去操作配置实践、\u003c/li\u003e\n\u003cli\u003e以上很直接的一个推论就是：对于初入职场的程序员来说，可能大厂并不是最优选择，小点的公司更能起到实践作用。\u003c/li\u003e\n\u003cli\u003e想问问个人 v2exer 的看法\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "chenxiankong",
+      "PubDate": "2022-05-02T07:59:03Z"
+    },
+    {
       "Title": "宽带越来越高， AC86U 退役，求推荐 AP 路由 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/850514",
       "Description": "86 做了 2 年 AP 总体蛮好，现换个支持 WiFi 6 的",
