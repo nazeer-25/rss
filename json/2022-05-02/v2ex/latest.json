@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "一个电视机顶盒引发的 tcp 路径 mtu 问题 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/850496",
+      "Description": "\u003cp\u003e换了一个路由器，用的是自己编译的 OpenWRT 系统，发现一个很奇怪的问题， 电视直播能看，但是其他节目点击需要很久才能进入。比如一些电影，或者电视剧。原来的路由器没有问题。所以我就抓了一下包。\u003c/p\u003e\n\u003cp\u003e机顶盒(192.168.5.240) --LAN(192.168.5.50) OpenWRT 路由器--PPPoE-- Internet\u003c/p\u003e\n\u003cp\u003eNotes:\u003c/p\u003e\n\u003cp\u003e1.打码的 IP 是服务器 IP.\u003c/p\u003e\n\u003cp\u003e2.路由器的 LAN IP 是 192 .168.5.50,不是 192.168.5.1\u003c/p\u003e\n\u003cp\u003e3.包是在 LAN 这边抓的，所以看不到我的 WAN IP.\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://sm.ms/image/3Y6kQFnlyIhuxAE\" rel=\"nofollow\"\u003e\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/05/02/3Y6kQFnlyIhuxAE.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e因为是 PPPoE, 所以最佳的 MSS 是 1500-40(IP 头部+tcp 头部）-8 （ PPPoE 头部）=1452. 所以机顶盒多次用服务器通告的 MSS 1460 为依据发包，这个我觉得不对。应该是当收到路由器发给\n它的第一个 ICMP destination unreachable(Frangmentation Needed)包就应该缩小自己的包的大小，而\n不是一直用 1514 的大小发。我这样理解对吗？如果对的话，就没办法解释以前的路由器为什么可以了。这个可能要仔细抓一下老路由器的包了。\u003c/p\u003e\n",
+      "Author": "huangya",
+      "PubDate": "2022-05-02T05:50:57Z"
+    },
+    {
       "Title": "远程工作团队如何保证项目的有序进行呢 - 问与答",
       "Link": "https://www.v2ex.com/t/850494",
       "Description": "\u003cp\u003e如题，最近有聊一个远程的工作团队，但新组建的，新项目，感觉会慢慢失控，自己只是其中一点而已\u003c/p\u003e\n\u003cp\u003e想问下，远程团队一般要怎么有序推进，需要怎样的一个或几个人来统筹全局，技术方向 and 产品方向， 还是团队的每个人都要掌握本职意外的一些主动性，大局观啥的什么的\u003c/p\u003e\n",
