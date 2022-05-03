@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>服务器磁盘突然写入巨慢问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/850652</link>
+      <description>&lt;h2&gt;问题现象&lt;/h2&gt;&#xA;&lt;p&gt;生产环境有个 mysql 从库服务器，只装了 mysql ,出现了 2 次磁盘写入巨慢的情况&lt;/p&gt;&#xA;&lt;p&gt;先看图，磁盘正常写入速度&#xA;&lt;a href=&#34;https://imgtu.com/i/OkgRgA&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;OkgRgA.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2022/05/03/OkgRgA.png&#34;/&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;磁盘写不动&#xA;&lt;a href=&#34;https://imgtu.com/i/OkgvD0&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;OkgvD0.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2022/05/03/OkgvD0.png&#34;/&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;从凌晨 3 点开始，磁盘突然写不动，并且 IO 耗时巨高，每秒只能写入 1 、2 MB&lt;/p&gt;&#xA;&lt;p&gt;与之带来的问题是 MySQL 主从延迟越来越高&lt;/p&gt;&#xA;&lt;p&gt;出问题的 2 次都是在夜间自动执行了 MySQL 表优化,就是这个语句&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;optimize table `table_name`;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;表引擎是 MyISAM ，并且都是大表，一张表 索引长度+数据长度 超过 50G &lt;/p&gt;&#xA;&lt;h2&gt;解决过程&lt;/h2&gt;&#xA;&lt;p&gt;第一次出问题搞了一整天，因为这台服务器只装了 MySQL 服务，也没有其他进程。&lt;/p&gt;&#xA;&lt;p&gt;/var/log/messages &#x9; 也没有发现异常&lt;/p&gt;&#xA;&lt;p&gt;MySQL 错误日志也没发现异常&lt;/p&gt;&#xA;&lt;p&gt;服务器系统环境是 centos6.5 , 4 块物理盘做的 raid5 阵列&lt;/p&gt;&#xA;&lt;p&gt;首先是重启 MySQL ，磁盘写入依然慢&lt;/p&gt;&#xA;&lt;p&gt;重启系统，没用&lt;/p&gt;&#xA;&lt;p&gt;各种 百度 Google 都没发现有效线索&lt;/p&gt;&#xA;&lt;p&gt;一度认为是物理磁盘坏了，但是磁盘是在线状态&lt;/p&gt;&#xA;&lt;p&gt;最后关机，进入 bios 查看硬盘状态，没有做任何操作，开机后磁盘写入速度恢复正常了&lt;/p&gt;&#xA;&lt;p&gt;这时候我怀疑是关机了一段时间后在开机，磁盘写入才恢复，但是不确定&lt;/p&gt;&#xA;&lt;p&gt;第二次出问题后，先关机了 10 分钟，10 分钟后开机磁盘写入速度恢复正常&lt;/p&gt;&#xA;&lt;p&gt;这时候可以确定要先关机一段时间，磁盘才能恢复正常，重启无效&lt;/p&gt;&#xA;&lt;h2&gt;疑问&lt;/h2&gt;&#xA;&lt;p&gt;虽然磁盘写入速度恢复了，但是问题点还是没找到，为什么磁盘会突然写不动？&lt;/p&gt;&#xA;&lt;p&gt;如果是因为 optimize table &lt;code&gt;table_name&lt;/code&gt;; 这个语句操作了大表，但是另外 2 个从库服务器没这种情况&lt;/p&gt;&#xA;&lt;p&gt;最诡异的是重启无效，要关机一段时间再开机才能恢复&lt;/p&gt;&#xA;&lt;p&gt;这种情况 Google 也不知道用什么关键词？&lt;/p&gt;&#xA;&lt;p&gt;有大佬遇到过这种情况，或者知道是什么原因么？&lt;/p&gt;&#xA;</description>
+      <author>AnjingJingan</author>
+      <pubDate>03 May 2022 08:56:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>发现 v2 的 gamedb 节点，有点意思 - 分享发现</title>
+      <link>https://www.v2ex.com/t/850651</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.v2ex.com/gamedb&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/gamedb&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;之前都没发现有这个节点&lt;/p&gt;&#xA;</description>
+      <author>EminemW</author>
+      <pubDate>03 May 2022 08:55:48 +0000</pubDate>
+    </item>
+    <item>
       <title>求购《代码整洁之道》2020 版本的 pdf - 程序员</title>
       <link>https://www.v2ex.com/t/850650</link>
       <description>&lt;p&gt;如题，网上找的 pdf 都是 2010 版本的&lt;/p&gt;&#xA;</description>
