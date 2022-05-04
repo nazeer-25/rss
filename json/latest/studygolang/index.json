@@ -25,16 +25,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "求一份Go语言后端实习岗位",
-      "Link": "https://studygolang.com/topics/15451#reply1",
-      "Description": "\u003ch2\u003e如题 求一份Go后端实习岗位\u003c/h2\u003e\n\n\u003ch2\u003e联系方式:lizican123@gmail.com\u003c/h2\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220503/75f6227b783809a1685f6b853cc3e460.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Title": "一个gRpc拦截器的bug",
+      "Link": "https://studygolang.com/topics/15450#reply0",
+      "Description": "\u003cp\u003e问题大概是这样的，有一个链式的grpc流式拦截器。如下图：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220502/e1c635d1bcbbac007709fb35bcff341e.png\" alt=\"image.png\" /\u003e\n其中执行到GrpcJWTAuthToken这个拦截器的时候。会判断客户端传过来的metedata中的Authorization空格后面的token是否合法。\n如果合法，就可以找到响应的用户，然后将用户的信息放到metedata里面.\n\u003cimg src=\"https://static.golangjob.cn/220502/54bd871232897c429cbc70c6914e4e5d.png\" alt=\"image.png\" /\u003e\n然后调用下面的handler方法，执行下一个拦截器。\n\u003cimg src=\"https://static.golangjob.cn/220502/b95aed0e8e3ba25f377e7439c00d023e.png\" alt=\"image.png\" /\u003e\n然后就会走到流量统计拦截器，这个时候获取metedata的租户，却获取不到了。\n\u003cimg src=\"https://static.golangjob.cn/220502/0ca6f9752acfd2c3f6aa7490d04bc1d7.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e下面上一下debug的图。\n\u003cimg src=\"https://static.golangjob.cn/220502/1e99c802ce73d316799a4d96aabe0650.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220502/f24015aae3a9002e16e9bf5c22a9bcd5.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e我自己试了一下，感觉是因为就算metedata进行了set，但是对执行器链的context没有改变，所以执行到下一个拦截器。\n还是用的没set的context，但是不知道如果修改context。\n\u003cimg src=\"https://static.golangjob.cn/220502/24851f5e3dbecbf681a2b813a9c792e1.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e可以得到context。\n但是context是开头小写，我无法修改，\n\u003cimg src=\"https://static.golangjob.cn/220502/aec4b01445c2b95621c304021b97dda7.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e我该怎么办？ 求大佬解答。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "一个gRpc拦截器的bug",
-      "Link": "https://studygolang.com/topics/15450#reply0",
-      "Description": "\u003cp\u003e问题大概是这样的，有一个链式的grpc流式拦截器。如下图：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220502/e1c635d1bcbbac007709fb35bcff341e.png\" alt=\"image.png\" /\u003e\n其中执行到GrpcJWTAuthToken这个拦截器的时候。会判断客户端传过来的metedata中的Authorization空格后面的token是否合法。\n如果合法，就可以找到响应的用户，然后将用户的信息放到metedata里面.\n\u003cimg src=\"https://static.golangjob.cn/220502/54bd871232897c429cbc70c6914e4e5d.png\" alt=\"image.png\" /\u003e\n然后调用下面的handler方法，执行下一个拦截器。\n\u003cimg src=\"https://static.golangjob.cn/220502/b95aed0e8e3ba25f377e7439c00d023e.png\" alt=\"image.png\" /\u003e\n然后就会走到流量统计拦截器，这个时候获取metedata的租户，却获取不到了。\n\u003cimg src=\"https://static.golangjob.cn/220502/0ca6f9752acfd2c3f6aa7490d04bc1d7.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e下面上一下debug的图。\n\u003cimg src=\"https://static.golangjob.cn/220502/1e99c802ce73d316799a4d96aabe0650.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220502/f24015aae3a9002e16e9bf5c22a9bcd5.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e我自己试了一下，感觉是因为就算metedata进行了set，但是对执行器链的context没有改变，所以执行到下一个拦截器。\n还是用的没set的context，但是不知道如果修改context。\n\u003cimg src=\"https://static.golangjob.cn/220502/24851f5e3dbecbf681a2b813a9c792e1.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e可以得到context。\n但是context是开头小写，我无法修改，\n\u003cimg src=\"https://static.golangjob.cn/220502/aec4b01445c2b95621c304021b97dda7.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e我该怎么办？ 求大佬解答。\u003c/p\u003e\n",
+      "Title": "求一份Go语言后端实习岗位",
+      "Link": "https://studygolang.com/topics/15451#reply1",
+      "Description": "\u003ch2\u003e如题 求一份Go后端实习岗位\u003c/h2\u003e\n\n\u003ch2\u003e联系方式:lizican123@gmail.com\u003c/h2\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220503/75f6227b783809a1685f6b853cc3e460.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
