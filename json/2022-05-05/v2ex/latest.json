@@ -4,13 +4,6 @@
   "Description": "",
   "Items": [
     {
-      "Title": "V2EX 某些用户主页 404？ - V2EX",
-      "Link": "https://www.v2ex.com/t/851073",
-      "Description": "\u003ca target=\"_blank\" href=\"https://www.v2ex.com/member/killsting\" rel=\"nofollow noopener\"\u003ehttps://www.v2ex.com/member/killsting\u003c/a\u003e\u003cbr /\u003e点开这位会员的用户主页，返回 404 错误码？难道是帐户注销了？\u003cbr /\u003e在其它主题下还能看到这位会员的回复。",
-      "Author": "microka",
-      "PubDate": "2022-05-05T20:08:32Z"
-    },
-    {
       "Title": "最近 iPhone 经常遇到 5G 有信号但无法上网 - iPhone",
       "Link": "https://www.v2ex.com/t/851072",
       "Description": "iPhone 12, iOS 15.4.1, 运营商：中国移动 50.0 ，蜂窝网络：启用 5G\u003cbr /\u003e最近经常遇到熄屏一段时间再重新解锁后，手机显示为 5G 网络状态（信号 2-4 格），此时手机无法获取任何蜂窝网络数据。经测试，此状态下手机可正常接打电话，而拨出电话时蜂窝数据网络会恢复正常（而如果只是接到来电则不会恢复蜂窝数据网络）。当出现此状况时，就算通过开关飞行模式恢复了蜂窝数据网络，如果再次熄屏（ 10 秒钟即可）、解锁，问题又会复现（复现成功率极高！）\u003cbr /\u003e而如果重启 iPhone 后熄屏几分钟再解锁又不容易复现了，只能等下一次不知什么时候才会遇到问题。\u003cbr /\u003e\u003cbr /\u003e所处位置的 5G 网络信号不算弱，想问下这是什么问题？如果以后再遇到这种情况，能有什么可行的调试、排障方法？",
@@ -289,6 +282,13 @@
       "Description": "\u003cp\u003e以 wireguard 假设现在使用 wireguard 绑定到 utun5 \u003c/p\u003e\n\u003cp\u003e再设定路由 0.0.0.0/1 128.0.0.0/1\n再将服务端的 IP 路由指向 en0\n此时可以正常使用，全局 IP 都变成了服务器的 IP \u003c/p\u003e\n\u003cp\u003e我想在此时能够再指定网卡 en0 进行拨号 \u003c/p\u003e\n\u003cp\u003e先测试了（指定出口 IP ） dial, err := net.DialTCP(\"tcp\", local, remote) \u003c/p\u003e\n\u003cp\u003e失败，提示错误 no route to host \u003c/p\u003e\n\u003cp\u003e然后测试了  （指定出口网卡）\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\t\t\tdialer := \u0026amp;net.Dialer{\n\t\t\t\tControl: func(network, address string, conn syscall.RawConn) error {\n\t\t\t\t\treturn conn.Control(func(fd uintptr) {\n\t\t\t\t\t\tswitch network {\n\t\t\t\t\t\tcase \"tcp4\", \"udp4\":\n\t\t\t\t\t\t\tunix.SetsockoptInt(int(fd), unix.IPPROTO_IP, unix.IP_BOUND_IF, bindIface.Index)\n\t\t\t\t\t\tcase \"tcp6\", \"udp6\":\n\t\t\t\t\t\t\tunix.SetsockoptInt(int(fd), unix.IPPROTO_IPV6, unix.IPV6_BOUND_IF, bindIface.Index)\n\t\t\t\t\t\t}\n\t\t\t\t\t})\n\t\t\t\t},\n\t\t\t}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e依旧无效 此时提示错误：dial tcp xxxx:xxx: connect: network is unreachable \u003c/p\u003e\n\u003cp\u003e是不是没办法实现了。。。。。。 \u003c/p\u003e\n\u003cp\u003ePS：以上两种测试\n在不开启 utun 时 测试 en0 是正常的\n在开启 utun 时 测试 utun 也是正常的 \u003c/p\u003e\n\u003cp\u003e也就是同时只有一个出口可以正常得到响应\u003c/p\u003e\n",
       "Author": "8520ccc",
       "PubDate": "2022-05-05T11:57:03Z"
+    },
+    {
+      "Title": "V2EX 某些用户主页 404？ - V2EX",
+      "Link": "https://www.v2ex.com/t/851073",
+      "Description": "\u003ca target=\"_blank\" href=\"https://www.v2ex.com/member/killsting\" rel=\"nofollow noopener\"\u003ehttps://www.v2ex.com/member/killsting\u003c/a\u003e\u003cbr /\u003e点开这位会员的用户主页，返回 404 错误码？难道是帐户注销了？\u003cbr /\u003e在其它主题下还能看到这位会员的回复。",
+      "Author": "microka",
+      "PubDate": "2022-05-05T20:08:32Z"
     },
     {
       "Title": "请教下各位大佬，企业停工停产变相裁员，打工人怎么更好地维护自己的权益 - 职场话题",
