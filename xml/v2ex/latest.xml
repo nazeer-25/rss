@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>golang 如何判断自身已被执行？ - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/851071</link>
+      <description>&lt;p&gt;网上暂时找到两个方法：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;进程运行时检查当前目录下有没有 PID 文件，有就是重复执行。没有的话就获取当前 PID 保存在当前目录。&lt;/li&gt;&#xA;&lt;li&gt;os.Getenv 获取环境变量，为空就是首次执行，然后写入环境变量。不为空就是重复执行。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;第一种方式问题是需要文件锁，而 win 不支持文件锁。&#xA;第二种不知道 win 是否支持，但是如果进程启动后被 kill 掉，那么环境变量依然存在，还会被视为重复运行。&lt;/p&gt;&#xA;&lt;p&gt;我想实现如果首次执行就后台运行，开始监听端口，等待被调用业务函数。&#xA;如果已经执行，就显示菜单，等待输入业务指令。&lt;/p&gt;&#xA;&lt;p&gt;请教大佬还有哪些办法可以判断自身已经被执行？&lt;/p&gt;&#xA;&lt;p&gt;hash 自身程序？然后在进程里对比？是不是太极端了？进程里找程序名会不会太不严谨？求教！&lt;/p&gt;&#xA;</description>
+      <author>raw0xff</author>
+      <pubDate>05 May 2022 18:56:43 +0000</pubDate>
+    </item>
+    <item>
       <title>如何优雅的判断 server 的 ListenAndServe 方法是否调用成功？ - 程序员</title>
       <link>https://www.v2ex.com/t/851070</link>
       <description>&lt;p&gt;事情是这样的，有一个我不太理解的开发场景，首先 DNS 、TCP 等服务端在启动服务端时是进入一个循环的，我想编写一个 Start 方法来启动这些服务器，但是我在调用 Start 方法时该如何判断启动时是否抛出异常呢？（在外部判断而非 Start 方法内部）。&lt;/p&gt;&#xA;&lt;p&gt;因为如果启动成功则会一直死循环，调用者也无法获得调用成功的信号，而失败了才会即刻抛出，在这种情况下该如何处理呢？&lt;/p&gt;&#xA;</description>
