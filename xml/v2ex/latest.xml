@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Mac 上如何实现在使用 utun 时再绑定网络出口？ - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/851024</link>
+      <description>&lt;p&gt;以 wireguard 假设现在使用 wireguard 绑定到 utun5&lt;/p&gt;&#xA;&lt;p&gt;再设定路由 0.0.0.0/1 128.0.0.0/1&#xA;再将服务端的 IP 路由指向 en0&#xA;此时可以正常使用，全局 IP 都变成了服务器的 IP&lt;/p&gt;&#xA;&lt;p&gt;我想在此时能够再指定网卡 en0 进行拨号&lt;/p&gt;&#xA;&lt;p&gt;测试了 dial, err := net.DialTCP(&#34;tcp&#34;, local, remote)&lt;/p&gt;&#xA;&lt;p&gt;失败，提示错误 no route to host&#xA;测试了 &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&#x9;&#x9;&#x9;dialer := &amp;amp;net.Dialer{&#xA;&#x9;&#x9;&#x9;&#x9;Control: func(network, address string, conn syscall.RawConn) error {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return conn.Control(func(fd uintptr) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;switch network {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;case &#34;tcp4&#34;, &#34;udp4&#34;:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;unix.SetsockoptInt(int(fd), unix.IPPROTO_IP, unix.IP_BOUND_IF, bindIface.Index)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;case &#34;tcp6&#34;, &#34;udp6&#34;:&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;unix.SetsockoptInt(int(fd), unix.IPPROTO_IPV6, unix.IPV6_BOUND_IF, bindIface.Index)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;})&#xA;&#x9;&#x9;&#x9;&#x9;},&#xA;&#x9;&#x9;&#x9;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;依旧无效 此时提示错误：dial tcp xxxx:xxx: connect: network is unreachable&lt;/p&gt;&#xA;&lt;p&gt;是不是没办法实现了。。。。。。&lt;/p&gt;&#xA;</description>
+      <author>8520ccc</author>
+      <pubDate>05 May 2022 11:57:03 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教下各位大佬，企业停工停产变相裁员，打工人怎么更好地维护自己的利益 - 职场话题</title>
+      <link>https://www.v2ex.com/t/851023</link>
+      <description>&lt;h3&gt;女朋友公司，今天接到行政电话，大致内容就是：&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;明天开始停工停产，可以不用到公司上班了；&lt;/li&gt;&#xA;&lt;li&gt;从今天开始，正常发一个月薪水；&lt;/li&gt;&#xA;&lt;li&gt;下个月开始，按深圳最低基本工资的 80%发放，也就是 2200 * 0.8 = 1760 元；&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3&gt;据我了解&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;她们公司上个月刚裁完一波；&lt;/li&gt;&#xA;&lt;li&gt;她们部门目前只有她一个人接到电话通知；&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3&gt;请问下，这种情况下，应该如何更好的维护自己的权益。去仲裁能拿到 N+1 赔偿么？&lt;/h3&gt;&#xA;</description>
+      <author>youngzhaojia</author>
+      <pubDate>05 May 2022 11:56:10 +0000</pubDate>
+    </item>
+    <item>
       <title>最新版本电脑微信打开小程序依旧提示版本过旧 - 全球工单系统</title>
       <link>https://www.v2ex.com/t/851022</link>
       <description>&lt;p&gt;微信电脑板刚刚更新的 3.6.0 好像是&lt;/p&gt;&#xA;&lt;p&gt;但是开一些小程序依旧提示版本过旧&lt;/p&gt;&#xA;&lt;p&gt;PS：手机端（ iOS ）的微信确实版本很旧，莫非电脑小程序和这也有关？&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://user-images.githubusercontent.com/16254644/166912478-745c3236-1770-4dc0-90e6-7ed592e39260.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
