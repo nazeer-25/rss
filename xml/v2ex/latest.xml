@@ -4,6 +4,69 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Firefox 火狐浏览器捕获 ctrl+c 有问题，有时没法捕获该快捷键 - Firefox</title>
+      <link>https://www.v2ex.com/t/851324</link>
+      <description>&lt;p&gt;10 次 ctrl+c ，起码有 2 、3 次复制无效，必须多按几下 ctrl+c 才能捕获成功&lt;/p&gt;&#xA;&lt;p&gt;火狐浏览器自带翻新功能，但点了没啥用，该有的问题依旧&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://wx1.sinaimg.cn/orj360/006GyH5Qgy1h1znpla38dj30kr0fpjvt.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;问题 Gif：&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/6glUOGh.gif&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>ALLROBOT</author>
+      <pubDate>07 May 2022 03:29:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>边缘计算、云函数的使用场景是什么？ - 程序员</title>
+      <link>https://www.v2ex.com/t/851323</link>
+      <description>&lt;p&gt;很早之前就知道 Serverless 的概念，最近用了一下 Cloudflare 的 Workers 边缘计算，做了点小东西（ IP 查询、DDNS 更新、TOTP 验证码生成），感觉功能比较单一，都是实现一些十来行就能运行的代码，看上去给的运行环境性能也不高，要求挺多的。  &lt;/p&gt;&#xA;&lt;p&gt;看到 AWS 也有 lambda ，腾讯云也有那种云函数，想知道如果放到一个真实的业务中这些小代码片段的“云函数”能做些什么？以及，云函数适合用来跑 AI 识别的业务吗（最近有这样的需求）？&lt;/p&gt;&#xA;</description>
+      <author>ByteCat</author>
+      <pubDate>07 May 2022 03:27:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>go 语言如何关闭正在运行的协程？谢谢 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/851321</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;fmt&#34;&#xA;&#x9;&#34;sync&#34;&#xA;&#x9;&#34;time&#34;&#xA;)&#xA;&#xA;func workRoutine(work chan string, done chan string, wg *sync.WaitGroup) {&#xA;&#x9;select {&#xA;&#x9;case donemsg := &amp;lt;-done:&#xA;&#x9;&#x9;fmt.Println(donemsg)&#xA;&#x9;case msg := &amp;lt;-work:&#xA;&#x9;&#x9;//这里将有大量工作可能半个小时都未必执行完，这样 done 这个 channel 就无法收到退出信号&#xA;&#x9;&#x9;for i := 0; i &amp;lt; 100000; i++ {&#xA;&#x9;&#x9;&#x9;fmt.Println(msg)&#xA;&#x9;&#x9;&#x9;time.Sleep(time.Second)&#xA;&#x9;&#x9;}&#xA;&#x9;case &amp;lt;-time.After(time.Second * 1000):&#xA;&#x9;&#x9;fmt.Println(&#34;timeout&#34;)&#xA;&#x9;}&#xA;&#x9;wg.Done()&#xA;}&#xA;func closeWorkRoutine(done chan string, wg *sync.WaitGroup) {&#xA;&#x9;//目标是 10 秒后希望能关掉 test 这个协程&#xA;&#x9;time.Sleep(time.Second * 10)&#xA;&#x9;done &amp;lt;- &#34;done&#34;&#xA;&#x9;wg.Done()&#xA;}&#xA;func main() {&#xA;&#x9;done := make(chan string)&#xA;&#x9;work := make(chan string, 1)&#xA;&#x9;wg := sync.WaitGroup{}&#xA;&#x9;wg.Add(2)&#xA;&#x9;work &amp;lt;- &#34;work&#34;&#xA;&#x9;go workRoutine(work, done, &amp;amp;wg)&#xA;&#x9;go closeWorkRoutine(done, &amp;amp;wg)&#xA;&#x9;wg.Wait()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;请参考上面的代码，我现在有两个协程，一个叫 workRoutine ，另一个叫 closeWorkRoutine ，我的目标是希望 closeWorkRoutine 可以在 10 秒后可以关闭 workRoutine 的协程，但是上面这个代码是无法关闭的，因为 work 过于繁重，永远轮不到执行关闭的时候。请问有什么办法可以直接关闭协程，而无需介意当前协程的状态，最好能像线程那样有一个 ID 我可以直接在外部强制关掉，请问我应该如何做呢，谢谢。&lt;/p&gt;&#xA;</description>
+      <author>hkhk366</author>
+      <pubDate>07 May 2022 03:24:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>YQ 会影响软考按时正常进行吗？有上海准备 5 月高项的同学吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/851320</link>
+      <description>&lt;p&gt;其他 YQ 地区也有可能取消吗？&lt;/p&gt;&#xA;</description>
+      <author>BeforeTooLate</author>
+      <pubDate>07 May 2022 03:23:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>交易加行业咨询的网站，二级域名叫什么合适？ - 程序员</title>
+      <link>https://www.v2ex.com/t/851319</link>
+      <description>&lt;p&gt;现在 &lt;code&gt;www&lt;/code&gt; 和 &lt;code&gt;@&lt;/code&gt; 是公司官网。另外有一个平台，主要内容是行业里资源的交易以及行业咨询，这种平台二级域名叫什么好？&lt;/p&gt;&#xA;&lt;p&gt;开始想的是 &lt;code&gt;mall&lt;/code&gt; ，但咨询也占很大的比重，不完全是个交易平台，用 &lt;code&gt;mall&lt;/code&gt; 不太合适。&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;centre&lt;/code&gt;?&#xA;&lt;code&gt;info&lt;/code&gt;?&#xA;&lt;code&gt;platform&lt;/code&gt;?&lt;/p&gt;&#xA;&lt;p&gt;这些觉得都有点傻&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;market&lt;/code&gt; 怎么样？&lt;/p&gt;&#xA;</description>
+      <author>alzee</author>
+      <pubDate>07 May 2022 03:22:53 +0000</pubDate>
+    </item>
+    <item>
+      <title>深圳的小电驴还需要上牌吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/851318</link>
+      <description>&lt;p&gt;如题。&lt;/p&gt;&#xA;&lt;p&gt;背景：买了一款小电驴，车行老板说 2021 年 7 月深圳的试点就结束了，现在没必要上牌。&lt;/p&gt;&#xA;</description>
+      <author>yurong333333</author>
+      <pubDate>07 May 2022 03:22:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>ajax cors 进行授权有什么问题吗？不喜欢单点登录，因为要跳转 - 问与答</title>
+      <link>https://www.v2ex.com/t/851317</link>
+      <description>sso 单点登录要跳转到授权域名页面。如果授权网站是本公司的，并且开放跨域访问，用 ajax 静默登录不是更加用户友好吗？</description>
+      <author>henryhu</author>
+      <pubDate>07 May 2022 03:17:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>上海软考这次五月估计不考了吧？我准备不复习了，主要没有看多少。 - 程序员</title>
+      <link>https://www.v2ex.com/t/851316</link>
+      <description>上海高考都延期了好像。这次 YQ 软考高级估计不少地方要取消.</description>
+      <author>justrand</author>
+      <pubDate>07 May 2022 03:14:37 +0000</pubDate>
+    </item>
+    <item>
+      <title>天天干着不适合身体状况和反感的工作,心情很差怎么办? - 问与答</title>
+      <link>https://www.v2ex.com/t/851315</link>
+      <description>&lt;p&gt;毕业两年,钱没攒多少,去年查出原发性高血压二级.今年在野外感冒没能及时治疗,变成支气管肺炎,治疗后不停咳嗽,医生诊断为咳嗽变异性哮喘。但是单位强制要求去野外工作，说出现问题了才能离开，搞的内心很难受，我该怎么办。&lt;/p&gt;&#xA;</description>
+      <author>snoBall</author>
+      <pubDate>07 May 2022 03:13:44 +0000</pubDate>
+    </item>
+    <item>
       <title>m1 pro 和 win 主机 显示器连接问题 - macOS</title>
       <link>https://www.v2ex.com/t/851313</link>
       <description>&lt;ol&gt;&#xA;&lt;li&gt;有一个 m1 pro 还有一个 win10 主机，有 hdmi 和 vga 接口 &lt;/li&gt;&#xA;&lt;li&gt;有一个 benq pd2705Q 上面有 type-c 和 hdmi 没有 vga 接口&lt;/li&gt;&#xA;&lt;li&gt;有一个 moavto 上面有 hdmi 还有个 vga 接口&#xA;我目前是直接 m1 typec 连了 benq ，然后 hdmi 连的 moavto ，但是这样感觉使用不是很方便，每次电脑要插入两个接口，然后想连接 win10 还要切换信号或者拔了 hdmi ，感觉很麻烦。&#xA;想要把另外一个显示器直接连接到 benq 上面。然后我把 win10 hdmi 连接到 benq 感觉这样会方便很多，不知道可不可以，有试过的吗 ？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>

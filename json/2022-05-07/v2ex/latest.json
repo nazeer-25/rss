@@ -4,6 +4,69 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Firefox 火狐浏览器捕获 ctrl+c 有问题，有时没法捕获该快捷键 - Firefox",
+      "Link": "https://www.v2ex.com/t/851324",
+      "Description": "\u003cp\u003e10 次 ctrl+c ，起码有 2 、3 次复制无效，必须多按几下 ctrl+c 才能捕获成功\u003c/p\u003e\n\u003cp\u003e火狐浏览器自带翻新功能，但点了没啥用，该有的问题依旧\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://wx1.sinaimg.cn/orj360/006GyH5Qgy1h1znpla38dj30kr0fpjvt.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e问题 Gif：\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/6glUOGh.gif\"/\u003e\u003c/p\u003e\n",
+      "Author": "ALLROBOT",
+      "PubDate": "2022-05-07T03:29:13Z"
+    },
+    {
+      "Title": "边缘计算、云函数的使用场景是什么？ - 程序员",
+      "Link": "https://www.v2ex.com/t/851323",
+      "Description": "\u003cp\u003e很早之前就知道 Serverless 的概念，最近用了一下 Cloudflare 的 Workers 边缘计算，做了点小东西（ IP 查询、DDNS 更新、TOTP 验证码生成），感觉功能比较单一，都是实现一些十来行就能运行的代码，看上去给的运行环境性能也不高，要求挺多的。  \u003c/p\u003e\n\u003cp\u003e看到 AWS 也有 lambda ，腾讯云也有那种云函数，想知道如果放到一个真实的业务中这些小代码片段的“云函数”能做些什么？以及，云函数适合用来跑 AI 识别的业务吗（最近有这样的需求）？\u003c/p\u003e\n",
+      "Author": "ByteCat",
+      "PubDate": "2022-05-07T03:27:54Z"
+    },
+    {
+      "Title": "go 语言如何关闭正在运行的协程？谢谢 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/851321",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n\t\"time\"\n)\n\nfunc workRoutine(work chan string, done chan string, wg *sync.WaitGroup) {\n\tselect {\n\tcase donemsg := \u0026lt;-done:\n\t\tfmt.Println(donemsg)\n\tcase msg := \u0026lt;-work:\n\t\t//这里将有大量工作可能半个小时都未必执行完，这样 done 这个 channel 就无法收到退出信号\n\t\tfor i := 0; i \u0026lt; 100000; i++ {\n\t\t\tfmt.Println(msg)\n\t\t\ttime.Sleep(time.Second)\n\t\t}\n\tcase \u0026lt;-time.After(time.Second * 1000):\n\t\tfmt.Println(\"timeout\")\n\t}\n\twg.Done()\n}\nfunc closeWorkRoutine(done chan string, wg *sync.WaitGroup) {\n\t//目标是 10 秒后希望能关掉 test 这个协程\n\ttime.Sleep(time.Second * 10)\n\tdone \u0026lt;- \"done\"\n\twg.Done()\n}\nfunc main() {\n\tdone := make(chan string)\n\twork := make(chan string, 1)\n\twg := sync.WaitGroup{}\n\twg.Add(2)\n\twork \u0026lt;- \"work\"\n\tgo workRoutine(work, done, \u0026amp;wg)\n\tgo closeWorkRoutine(done, \u0026amp;wg)\n\twg.Wait()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e请参考上面的代码，我现在有两个协程，一个叫 workRoutine ，另一个叫 closeWorkRoutine ，我的目标是希望 closeWorkRoutine 可以在 10 秒后可以关闭 workRoutine 的协程，但是上面这个代码是无法关闭的，因为 work 过于繁重，永远轮不到执行关闭的时候。请问有什么办法可以直接关闭协程，而无需介意当前协程的状态，最好能像线程那样有一个 ID 我可以直接在外部强制关掉，请问我应该如何做呢，谢谢。\u003c/p\u003e\n",
+      "Author": "hkhk366",
+      "PubDate": "2022-05-07T03:24:29Z"
+    },
+    {
+      "Title": "YQ 会影响软考按时正常进行吗？有上海准备 5 月高项的同学吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/851320",
+      "Description": "\u003cp\u003e其他 YQ 地区也有可能取消吗？\u003c/p\u003e\n",
+      "Author": "BeforeTooLate",
+      "PubDate": "2022-05-07T03:23:12Z"
+    },
+    {
+      "Title": "交易加行业咨询的网站，二级域名叫什么合适？ - 程序员",
+      "Link": "https://www.v2ex.com/t/851319",
+      "Description": "\u003cp\u003e现在 \u003ccode\u003ewww\u003c/code\u003e 和 \u003ccode\u003e@\u003c/code\u003e 是公司官网。另外有一个平台，主要内容是行业里资源的交易以及行业咨询，这种平台二级域名叫什么好？\u003c/p\u003e\n\u003cp\u003e开始想的是 \u003ccode\u003emall\u003c/code\u003e ，但咨询也占很大的比重，不完全是个交易平台，用 \u003ccode\u003emall\u003c/code\u003e 不太合适。\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003ecentre\u003c/code\u003e?\n\u003ccode\u003einfo\u003c/code\u003e?\n\u003ccode\u003eplatform\u003c/code\u003e?\u003c/p\u003e\n\u003cp\u003e这些觉得都有点傻\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003emarket\u003c/code\u003e 怎么样？\u003c/p\u003e\n",
+      "Author": "alzee",
+      "PubDate": "2022-05-07T03:22:53Z"
+    },
+    {
+      "Title": "深圳的小电驴还需要上牌吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/851318",
+      "Description": "\u003cp\u003e如题。\u003c/p\u003e\n\u003cp\u003e背景：买了一款小电驴，车行老板说 2021 年 7 月深圳的试点就结束了，现在没必要上牌。\u003c/p\u003e\n",
+      "Author": "yurong333333",
+      "PubDate": "2022-05-07T03:22:16Z"
+    },
+    {
+      "Title": "ajax cors 进行授权有什么问题吗？不喜欢单点登录，因为要跳转 - 问与答",
+      "Link": "https://www.v2ex.com/t/851317",
+      "Description": "sso 单点登录要跳转到授权域名页面。如果授权网站是本公司的，并且开放跨域访问，用 ajax 静默登录不是更加用户友好吗？",
+      "Author": "henryhu",
+      "PubDate": "2022-05-07T03:17:30Z"
+    },
+    {
+      "Title": "上海软考这次五月估计不考了吧？我准备不复习了，主要没有看多少。 - 程序员",
+      "Link": "https://www.v2ex.com/t/851316",
+      "Description": "上海高考都延期了好像。这次 YQ 软考高级估计不少地方要取消.",
+      "Author": "justrand",
+      "PubDate": "2022-05-07T03:14:37Z"
+    },
+    {
+      "Title": "天天干着不适合身体状况和反感的工作,心情很差怎么办? - 问与答",
+      "Link": "https://www.v2ex.com/t/851315",
+      "Description": "\u003cp\u003e毕业两年,钱没攒多少,去年查出原发性高血压二级.今年在野外感冒没能及时治疗,变成支气管肺炎,治疗后不停咳嗽,医生诊断为咳嗽变异性哮喘。但是单位强制要求去野外工作，说出现问题了才能离开，搞的内心很难受，我该怎么办。\u003c/p\u003e\n",
+      "Author": "snoBall",
+      "PubDate": "2022-05-07T03:13:44Z"
+    },
+    {
       "Title": "m1 pro 和 win 主机 显示器连接问题 - macOS",
       "Link": "https://www.v2ex.com/t/851313",
       "Description": "\u003col\u003e\n\u003cli\u003e有一个 m1 pro 还有一个 win10 主机，有 hdmi 和 vga 接口 \u003c/li\u003e\n\u003cli\u003e有一个 benq pd2705Q 上面有 type-c 和 hdmi 没有 vga 接口\u003c/li\u003e\n\u003cli\u003e有一个 moavto 上面有 hdmi 还有个 vga 接口\n我目前是直接 m1 typec 连了 benq ，然后 hdmi 连的 moavto ，但是这样感觉使用不是很方便，每次电脑要插入两个接口，然后想连接 win10 还要切换信号或者拔了 hdmi ，感觉很麻烦。\n想要把另外一个显示器直接连接到 benq 上面。然后我把 win10 hdmi 连接到 benq 感觉这样会方便很多，不知道可不可以，有试过的吗 ？\u003c/li\u003e\n\u003c/ol\u003e\n",
