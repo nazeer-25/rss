@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教 k8s 国内网络访问不了镜像问题的解决方案 - Kubernetes",
+      "Link": "https://www.v2ex.com/t/851280",
+      "Description": "\u003cp\u003e由于国内网络问题，k8s 的官方镜像在腾讯云服务器上访问不到，导致一些错误。\u003c/p\u003e\n\u003cp\u003e我是在安装 nginx-ingress 遇到的问题。\u003c/p\u003e\n\u003cp\u003e在执行了 \u003ccode\u003ekubectl apply -f \u003ca href=\"https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml\" rel=\"nofollow\"\u003ehttps://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml\u003c/a\u003e\u003c/code\u003e 后，发现官方镜像访问超时。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"官方镜像访问超时\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/05/07/cf8118b2a9e1cab6.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e我在我自己电脑（有代理）上试了下 docker 直接拉取，也是超时的。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"docker 直接拉取超时\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/05/07/cb25d7b3ac497bd1.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e这么看，代理也是行不通的，我又尝试了修改 \u003ccode\u003edeploy.yaml\u003c/code\u003e 文件中的镜像源，如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e# 替换 k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1@sha256:64d8c73dca984af206adf9d6d7e46aa550362b1d7a01f3a0a91b20cc67868660\n\ndocker.io/liangjw/kube-webhook-certgen:v1.1.1@sha256:23a03c9c381fba54043d0f6148efeaf4c1ca2ed176e43455178b5c5ebf15ad70\n\n\n# 替换 k8s.gcr.io/ingress-nginx/controller:v1.2.0@sha256:d8196e3bc1e72547c5dec66d6556c0ff92a23f6d0919b206be170bc90d5f9185\n\ndocker.io/dyrnq/ingress-nginx-controller:v1.2.0@sha256:2746adf7d60c782b83f6fa6e1ceb938878b9f5b16c217e530ba8895f94221a04\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e替完后重新 \u003ccode\u003ekubectl apply -f \u003ca href=\"https://cdn.jsdelivr.net/gh/kade-code/k8s-mirror@master/deploy3.yaml\" rel=\"nofollow\"\u003ehttps://cdn.jsdelivr.net/gh/kade-code/k8s-mirror@master/deploy3.yaml\u003c/a\u003e\u003c/code\u003e 就会报错。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"kubectl apply 报错\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/05/07/145e5a401651e2c6.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e这个错误我 google 了，说是不让改里面的字段，我也试了把之前的 deployment 删掉，也是不行，就无解了，然后改镜像源的方案我就放弃了。\u003c/p\u003e\n\u003cp\u003e其间，我查找了 github 的 issue ，\u003ca href=\"https://github.com/kubernetes/ingress-nginx/issues/6335#issuecomment-1011850699\" rel=\"nofollow\"\u003ehttps://github.com/kubernetes/ingress-nginx/issues/6335#issuecomment-1011850699\u003c/a\u003e，也没有一个能解决我的问题的。\u003c/p\u003e\n\u003cp\u003e也尝试过 docker pull 镜像源，然后改成官方源的 tag ，也是不起作用。\u003c/p\u003e\n\u003cp\u003e折腾了 2 天，实在没有办法，特来请教，希望大佬们支支招。\u003c/p\u003e\n",
+      "Author": "klo424",
+      "PubDate": "2022-05-07T01:12:22Z"
+    },
+    {
+      "Title": "这样的公司是正常的吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/851279",
+      "Description": "\u003cp\u003e楼主今年毕业，已经与一个公司签了三方。\u003c/p\u003e\n\u003cp\u003e公司负责人说是一个保密公司，所以签的协议上面的公司其实是个不知名的公司，工资也从这个公司发。\u003c/p\u003e\n\u003cp\u003e去实习过两次感觉氛围不错，人也都挺好的，但是不是去的公司地，在是专门给实习生准备的地点。\u003c/p\u003e\n\u003cp\u003e跟我们说的时候说工资其实是小头，一般来说项目奖金才是大头，一般奖金比工资还多。\u003c/p\u003e\n\u003cp\u003e昨天和朋友吃饭聊天说了，他们说有点画大饼了，但我觉得画饼那不都是公司必备技能所以也没放在心上。\u003c/p\u003e\n\u003cp\u003e目前还不知道公司在哪，只知道大概位置。\u003c/p\u003e\n\u003cp\u003e请问大伙这是个什么操作？\u003c/p\u003e\n",
+      "Author": "Zhancha",
+      "PubDate": "2022-05-07T01:07:45Z"
+    },
+    {
       "Title": "大家平时都用什么 todo 待办? - 问与答",
       "Link": "https://www.v2ex.com/t/851277",
       "Description": "\u003ch2\u003e如题。\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e最好是支持多端同步。\u003c/li\u003e\n\u003cli\u003e求职各位指教。\u003c/li\u003e\n\u003c/ul\u003e\n",
