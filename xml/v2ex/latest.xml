@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于 win11 经典菜单请教一下，为什么我的脚本不管用 - Windows</title>
+      <link>https://www.v2ex.com/t/851457</link>
+      <description>&lt;p&gt;win11 右键菜单改了很多地方，很多人都说不好用。所以我照着&lt;a href=&#34;https://www.sordum.org/14479/windows-11-classic-context-menu-v1-1/&#34; rel=&#34;nofollow&#34;&gt;https://www.sordum.org/14479/windows-11-classic-context-menu-v1-1/&lt;/a&gt;的方法写了个脚本来切换新菜单和经典菜单。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;function ToggleWin11ContextMenu {&#xA;  param()&#xA;&#xA;  $registry = &#39;HKCU:\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}&#39;&#xA;  if (Test-Path $registry) {&#xA;    Remove-Item $registry -Recurse -Force&#xA;    Stop-Process -Name explorer&#xA;  } else {&#xA;    New-Item -Path &#34;$registry\InprocServer32&#34; -Force&#xA;    Stop-Process -Name explorer&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;理论上我的脚本应该没问题，但是实际上只有第一次切换可以正常工作。此后不论怎么新建删除注册表还是重启资源管理器，永远都是新菜单。但是参考链接里人家的工具却可以正常的来回切换，按理说都是修改注册表，怎么我的就不管用了呢？&lt;/p&gt;&#xA;</description>
+      <author>techstay</author>
+      <pubDate>07 May 2022 13:05:20 +0000</pubDate>
+    </item>
+    <item>
       <title>Windows 电源管理可以不用 xx 管家吗？ - Windows</title>
       <link>https://www.v2ex.com/t/851456</link>
       <description>ThinkPad X395 ，一般都是插着电源使用的，有没有什么方案可以在不用 xx 管家的情况下来设定 80% 的充电阙值？之前用 Lenovo Vantage ，感觉占内存也不少，只有设定充电阙值这一个需求</description>
