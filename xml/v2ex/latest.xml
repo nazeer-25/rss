@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Mac 自动填充验证码的探索 - Apple</title>
+      <link>https://www.v2ex.com/t/851374</link>
+      <description>&lt;h2&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;智能手机发展到 2022 年了，不管使用的是 Android 还是 iOS ，当我们收到短信验证码之后，手机会自动提取出其中的验证码并复制出来，如果给的权限够多，它甚至可以帮你自动填充到你正要输入的地方，只是不同系统之间会有些许差别。&lt;/p&gt;&#xA;&lt;p&gt;这是我们都已知且习惯的操作。&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;当然，验证码作为当前越来越重要的一种安全验证工具，允许软件如此自由获取到验证码是一件非常危险的事情，所以最好不要允许系统外的第三方后台联网输入法来读取它。&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;但是，如果你使用的是桌面设备，那如何将手机收到的验证码自动在桌面设备上填充呢？&lt;/p&gt;&#xA;&lt;h2&gt;探索&lt;/h2&gt;&#xA;&lt;p&gt;众所周知，如果恰好同时使用了 Mac 与 iPhone ，这个操作 Apple 也已经为你做好了（部分）。&lt;/p&gt;&#xA;&lt;p&gt;参考&lt;a href=&#34;https://support.apple.com/zh-cn/HT208386&#34; rel=&#34;nofollow&#34;&gt;将 iPhone 中的短信 /彩信转发到 iPad 、iPod touch 或 Mac 。&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;当手机收到短信时将会自动同步到同一个 Apple ID 登录的 Mac 上面。&lt;/p&gt;&#xA;&lt;p&gt;如果你使用的正好是 Mac 自带的 Safari 浏览器来填充验证码，恭喜你，你不用做任何操作，你将可以在 Safari 上面点一下直接填充手机收到的验证码。&lt;/p&gt;&#xA;&lt;h2&gt;延伸&lt;/h2&gt;&#xA;&lt;p&gt;由于 Apple 的隐私限制，在 Safari 之外比如 Chrome 等 Apple 生态外的软件内我们是无法如此方便地填充验证码的。&lt;/p&gt;&#xA;&lt;p&gt;咋办，有人和我一样懒吗？&lt;/p&gt;&#xA;&lt;p&gt;有人用 &lt;a href=&#34;https://www.ohtipi.com/&#34; rel=&#34;nofollow&#34;&gt;ohtipi&lt;/a&gt; 方案，但是好像收费而且仅仅限制在浏览器内。&lt;/p&gt;&#xA;&lt;p&gt;也有其他脚本方案的。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://bokunlin.github.io/2021/07/11/Mac-%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%A4%8D%E5%88%B6%E6%89%8B%E6%9C%BA%E9%AA%8C%E8%AF%81%E7%A0%81&#34; rel=&#34;nofollow&#34;&gt;Bokun 的方案&lt;/a&gt; 是做定时器每分钟跑一次，这种不高频的操作做定时器后台一直跑，感觉有点过了，我参考做了个适合我的手动方案。&lt;/p&gt;&#xA;&lt;h3&gt;大致原理&lt;/h3&gt;&#xA;&lt;p&gt;Mac 收到的信息内容会存储在 &lt;code&gt;/Users/${Your Name}/Library/Messages/chat.db&lt;/code&gt; 这个文件内，通过脚本读取最近 60 秒的一条信息内容，如果有验证码信息，通过正则筛选出其中的验证码，并复制到剪贴板，成功与否都给出一条系统通知。&lt;/p&gt;&#xA;&lt;h3&gt;步骤&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;在你喜欢的地方新建一个 shell 脚本文件（比如 &lt;code&gt;/Users/${Your Name}/Shells/&lt;a href=&#34;http://AutoCheckCode.sh&#34; rel=&#34;nofollow&#34;&gt;AutoCheckCode.sh&lt;/a&gt;&lt;/code&gt;，文件内容在文末），给此文件授予当前用户读与写的权限（选中文件 ⌘+I ）。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;测试一下此脚本是否正确，使用系统自带终端或者 iTerm ，cd 到存放上一步文件的目录内，执行 &lt;code&gt;./&lt;a href=&#34;http://AutoCheckCode.sh&#34; rel=&#34;nofollow&#34;&gt;AutoCheckCode.sh&lt;/a&gt;&lt;/code&gt;，成功与否都将收到一条提示。到这一步，后面只需要考虑如何以最快速的方式执行这个脚本。&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;需要注意无论使用自带终端、快捷指令、自动操作、或者 iTerm 等执行此脚本，都需要到系统偏好设置-安全与隐私-隐私-完全磁盘访问权限，打开对应软件的权限。&lt;/em&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Mac 上快速执行脚本有很多方式，我也都进行了尝试。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;考虑使用 Mac 新版本的快捷指令，运行 Shell 脚本，报错放弃。👎🏻&lt;/li&gt;&#xA;&lt;li&gt;使用 Mac 的自动操作编写一个快速操作，然后到系统偏好设置-键盘-快捷键-服务-通用，将刚刚写的操作配置一个快捷键，看起来完美。可是运行发现必须要自动操作这个 APP 在前台才能成功，放弃。👎🏻&lt;/li&gt;&#xA;&lt;li&gt;使用自动操作创建一个应用程序，程序内选择运行 shell 脚本，脚本内容为 &lt;code&gt;sh /Users/${Your Name}/Shells/&lt;a href=&#34;http://AutoCheckCode.sh&#34; rel=&#34;nofollow&#34;&gt;AutoCheckCode.sh&lt;/a&gt;&lt;/code&gt;，保存此应用至 Mac 的应用程序目录之内，名称看个人喜欢，比如「复制验证码.app 」。同时记得给这个应用完全磁盘访问权限。👍🏻&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;此时相当于你已经开发打包并安装了一个 Mac 的应用程序，虽然它很简单。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;触发这个程序的方式那就更多了，Alfred 、HapiGo 、Raycast ，甚至手动点击一下也是可以的，当 Mac 收到短信的时候，执行一下应用即可。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;脚本内容&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash&#xA;&#xA;echo &#34;starting to check code&#34;;&#xA;  # 路径中的 dufu 记得改成自己电脑的名字&#xA;  # 通过 Sqlite3 查 1 条 iMessage 最近 60 秒收到消息（ iMessage 收到消息的时间可能有延迟，这里实际冗余多了 2 秒）&#xA;  #! /Users/dufu/Library/Messages/chat.db&#xA;  #！这个 DB 文件和目录记得给开权限，默认是不给读的。&#xA;  result=$(sqlite3 /Users/dufu/Library/Messages/chat.db &#39;SELECT text FROM message WHERE datetime(date/1000000000 + 978307200,&#34;unixepoch&#34;,&#34;localtime&#34;) &amp;gt; datetime(&#34;now&#34;,&#34;localtime&#34;,&#34;-60 second&#34;) ORDER BY date DESC LIMIT 1;&#39;)&#xA;&#xA;  name=&#34;验证码&#34;;&#xA;&#xA;  # 看下最近有没有收到消息&#xA;  if [ ! $result ]; then&#xA;      echo &#34;latest not receive code messsages&#34;;&#xA;      osascript -e &#34;display notification \&#34;最近 60 秒未收到验证码！\&#34; with title \&#34;提示\&#34;   &#34;;&#xA;      return&#xA;  fi&#xA;&#xA;#   如果短信中包含验证码则取前 4-6 个数字&#xA;  if [[ &#34;$result&#34; =~ &#34;$name&#34; ]]; then&#xA;      code=`echo $result | grep -o &#34;[0-9]\{4,6\}&#34;`;&#xA;      echo &#34;code is $code&#34;;&#xA;      # 将获取到的数字输出到剪贴板&#xA;      echo &#34;$code&#34; | pbcopy;&#xA;&#xA;      # 发个系统通知，展示内容，同时提醒你可以 Command + v 粘贴了。&#xA;      osascript -e &#34;display notification \&#34;$code\&#34; with title \&#34;验证码已复制\&#34;&#34;;&#xA;  fi&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;题外&lt;/h2&gt;&#xA;&lt;p&gt;另外也可以使用 Mac 的脚本编辑器，输入以下 AppleScript （我使用了 iTerm ），&lt;strong&gt;保存时文件格式选择应用程序&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;tell application &#34;iTerm&#34;&#xA;&#x9;activate&#xA;&#x9;create window with default profile command &#34;sh /Users/dufu/Shells/AutoCheckCode.sh&#34;&#xA;end tell&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如果觉得创建的这个 APP 图标不好看，可以复制一张图片，在访达里选中这个应用，按 ⌘+I ，选中应用图标 ⌘+V ，将你的应用图标替换。&lt;/p&gt;&#xA;</description>
+      <author>dufu1991</author>
+      <pubDate>07 May 2022 07:05:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>如何快速的使用 Swift 开发 APP？ - 问与答</title>
+      <link>https://www.v2ex.com/t/851373</link>
+      <description>&lt;p&gt;最近萌生了开发一个 ios APP 的想法，之前是没有用过 Swift ，想要快速入门，用框架，或者模板也都可以。先做出来一个东西。看文档当然是好的，不过更希望有人指点，能少走些弯路快速输出成果。谢谢了！ PS：有编程基础。&lt;/p&gt;&#xA;</description>
+      <author>leeggco</author>
+      <pubDate>07 May 2022 07:04:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>有朋友在深圳坪洲地铁站附近办过健身卡的？ - 深圳</title>
+      <link>https://www.v2ex.com/t/851372</link>
+      <description>&lt;p&gt;最近感觉不锻炼身体原来越差了，打算搞个游泳卡玩玩， 有没朋友在坪洲地铁站附近办过健身游泳卡的 过来咨询下，看着附近有时力和人人乐的零距离，不知道工作日 19 点到 22 点，周末下午到晚上人多不多 有没游泳&#xA;老手带带&lt;/p&gt;&#xA;</description>
+      <author>Roderick6</author>
+      <pubDate>07 May 2022 07:04:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>前端有什么发布打包自动加版本的工具吗？ - 程序员</title>
+      <link>https://www.v2ex.com/t/851371</link>
+      <description>不想麻烦运维（就是想前端自己试）&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;现在前后端分离 打包后的结构是这样的&lt;br /&gt;&lt;br /&gt;dist/&lt;br /&gt; -- index.html (引用 js ,css)&lt;br /&gt; -- js/*.js&lt;br /&gt; -- css/*.css&lt;br /&gt; &lt;br /&gt;&lt;br /&gt;我想达到的效果是&lt;br /&gt;&lt;br /&gt;dist/&lt;br /&gt; -- index.html (引用 v1.1.0/js , v1.1.0/css)&lt;br /&gt; -- v1.1.0/&lt;br /&gt; -----js/*.js&lt;br /&gt; -----css/*.css&lt;br /&gt;&lt;br /&gt;如果只是加个目录应该没什么问题，打包的时候资源文件 path 能设置。&lt;br /&gt;&lt;br /&gt;这样每次 build 的时候版本号增加 如 v1.1.1, v1.1.2 ....(增量更新 index.html 覆盖)&lt;br /&gt;&lt;br /&gt;dist/&lt;br /&gt;  -- index.html (引用最新的 v1.1.2/js , v1.1.2/css)&lt;br /&gt;  -- v1.1.0&lt;br /&gt;  -- v1.1.1/&lt;br /&gt;  -- v1.1.2/&lt;br /&gt;  &#x9;--- js&lt;br /&gt;    --- css&lt;br /&gt;&lt;br /&gt;这个方案应该没问题吧，服务器 build 结束以后 增量更新（可以先上传完 v1.1.2 资源文件后 再上传 index.html 覆盖）&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;现在问题就是，怎么能让每次的版本能自动打上呢？(不想每次手动去改，也不一定非要固定的格式，能每次自增就行)&lt;br /&gt;&lt;br /&gt;- 我想到了一个比较傻的方案，每次 build 的时候去远端 index.html 里拉现在是 xxx 版本，然后根据自己定的规则去 build 下一个版本号</description>
+      <author>firhome</author>
+      <pubDate>07 May 2022 07:01:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>公司发邮件的成本很高吗.. - 问与答</title>
+      <link>https://www.v2ex.com/t/851370</link>
+      <description>&lt;p&gt;n 次错过待办提醒之后想找个带邮件提醒的 todo 软件..然后发现市面上基本没有..难道发邮件的成本很高吗..&lt;/p&gt;&#xA;</description>
+      <author>yixin026</author>
+      <pubDate>07 May 2022 06:59:52 +0000</pubDate>
+    </item>
+    <item>
       <title>经常在知乎上刷到的大流量卡.有坑吗. - 生活</title>
       <link>https://www.v2ex.com/t/851369</link>
       <description>&lt;p&gt;因为手机流量经常不够用(日常刷刷抖音视频),苦于运营商的正规流量太贵了,所以一直以来都是买的共享流量,但是感觉共享流量的支出也挺贵的.&#xA;最近也换了一个双卡的手机.然后在知乎上经常刷到那种低价大流量的.例如什么电信的星神卡,星奇卡.&#xA;类似这种.&#xA;&lt;a href=&#34;https://imgtu.com/i/OQe4ER&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;OQe4ER.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2022/05/07/OQe4ER.jpg&#34;/&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;我想问问 为啥这些卡这么便宜,流量还这么多,有什么坑吗?&lt;/p&gt;&#xA;</description>
