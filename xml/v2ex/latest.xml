@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>文件增量同步算法有哪些可以改进的地方？ - 算法</title>
+      <link>https://www.v2ex.com/t/851611</link>
+      <description>&lt;p&gt;在网上看了一些关于 rsync 核心算法的介绍（比如&lt;a href=&#34;https://coolshell.cn/articles/7425.html&#34; rel=&#34;nofollow&#34;&gt;这个&lt;/a&gt; ），了解到这个增量同步做法的核心是：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;把旧文件按固定大小（假设块大小是 n ）拆成块，然后对每块算散列值&lt;/li&gt;&#xA;&lt;li&gt;&#xA;建立一个长度为 n 的固定窗口，从头在新文件上滑动&lt;ul&gt;&#xA;&lt;li&gt;如果旧文件有某块的散列和当前窗口匹配，就前进 n 个字节开启下一轮匹配&lt;/li&gt;&#xA;&lt;li&gt;否则前进 1 字节再匹配，这个字节就标记为新增的&lt;/li&gt;&#xA;&lt;li&gt;散列算法经过特意选择，上一轮的计算结果可以重用&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;最后得到一个这个文件由哪些新增内容和已有块组成的结果，就可以只同步更改的部分了&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;还没有看 rsync 的源码，不知道它最新的实现和上面有多少出入。&lt;/p&gt;&#xA;&lt;p&gt;一些网盘（比如 Dropbox ）把增量同步当作自己的核心技术。我想了想 rsync 这个做法有哪些可以改进的地方，只能想到简单的几点：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;纯文本文件是按行为单位的，所以同步纯文本文件时，散列的单位可以是不定长的行而非固定长的块。但这样要传输的数据就会变多（大部分行都短于一个 512B 的块）甚至需要多次网络请求（如果把多行作为一个散列单位），所以还不知道究竟能不能加速&lt;/li&gt;&#xA;&lt;li&gt;&#xA;一些二进制文件，有特有的数据包格式（比如压缩包，音乐文件），整个文件可能被分为文件头和若干段，我们可以有意识利用这些信息实现同步，做法可能因不同格式而异&lt;ul&gt;&#xA;&lt;li&gt;压缩文件有个问题，就是其中的某个文件变化一点点，压缩后的结果可能截然不同。这种情况只能根据文件大小判断是全量同步还是临时解压后再做对比&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这么看好像能提高的地方也不多。&lt;/p&gt;&#xA;</description>
+      <author>ecnelises</author>
+      <pubDate>08 May 2022 15:29:48 +0000</pubDate>
+    </item>
+    <item>
       <title>非主流键盘布局： Programmer Dvorak —— 我的八年使用体会 - 分享创造</title>
       <link>https://www.v2ex.com/t/851609</link>
       <description>&lt;p&gt;&lt;a href=&#34;https://stackia.notion.site/Programmer-Dvorak-a7f334a949f349eea3e7ce748e5a1770&#34; rel=&#34;nofollow&#34;&gt;https://stackia.notion.site/Programmer-Dvorak-a7f334a949f349eea3e7ce748e5a1770&lt;/a&gt;&lt;/p&gt;&#xA;</description>
