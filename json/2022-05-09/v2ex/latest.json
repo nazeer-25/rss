@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "杭州健康码核酸检测提示手机号是国外问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/851733",
+      "Description": "我的杭州健康马每次测核酸医护人员扫我码后都会提示我是海外手机弹窗，然后我还得报号码让他手动输入到手机号一栏，不然好像测了就不会有结果。\u003cbr /\u003e\u003cbr /\u003e而健康码右上角点击修改，手机号啥的也不支持修改，我的手机号是小米的米粉卡，但是属于中国电信的，因为我办业务都是通过电信，是电信的一个套餐，非小米移动的那种卡；手机号 173 开头，难道被健康马纳入海外手机？\u003cbr /\u003e\u003cbr /\u003e尝试在支付宝我的-客服沟通，最终客服答复感谢反馈，希望下次给我带来更好体验。。。\u003cbr /\u003e\u003cbr /\u003e不知道大伙或朋友有一样问题吗？可以解决吗？",
+      "Author": "CSGO",
+      "PubDate": "2022-05-09T06:07:58Z"
+    },
+    {
+      "Title": "mysql 表查询语句优化 - MySQL",
+      "Link": "https://www.v2ex.com/t/851731",
+      "Description": "\u003cp\u003e用户表现在有 200 万数据，字段有 137 个，表大小在 2G 左右。\u003c/p\u003e\n\u003cp\u003e现在复杂查询的情况下，有大量慢 sql 。如果不依托 es,如何优化。\u003c/p\u003e\n\u003cp\u003e其中包含 not in ,多类型字段检索。（类似于性别这种）\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eEXPLAIN\nSELECT\n\tma.gender,\n\tma.face_audit_state,\n\tma.nickname,\n\tma.id,\n\tma.birth,\n\tma.vd_address,\n\tma.sign,\n\tma.accid,\n\tma.home_town_title,\n\tma.create_time,\n\tma.address_distance,\n\tround(6371 * 2 * asin(sqrt(pow(sin((32.076434 * pi() / 180 - ma.hb_lat * pi() / 180) / 2), 2) + cos(32.076434 * pi() / 180) * cos(ma.hb_lat * pi() / 180) * pow(sin((118.608198 * pi() / 180 - ma.hb_lng * pi() / 180) / 2), 2))) * 1000) AS distance\nFROM\n\t`pyjy_member_account` `ma`\nWHERE\n\t`ma`.`id` NOT IN('2201041', '567573', '602180', '654435', '901333', '1074617', '1703630', '1983745', '24936', '83914')\n\tAND `ma`.`puppet` = '1'\n\tAND `ma`.`has_im` = '1'\n\tAND `ma`.`birth` \u0026gt;= '63043200'\n\tAND `ma`.`birth` \u0026lt;= '1104422400'\n\tAND `ma`.`personal_want` = '6'\n\tAND `ma`.`face_audit_state` = '3'\n\tAND `ma`.`gender` = '2'\n\tAND(round(6371 * 2 * asin(sqrt(pow(sin((32.076434 * pi() / 180 - ma.hb_lat * pi() / 180) / 2), 2) + cos(32.076434 * pi() / 180) * cos(ma.hb_lat * pi() / 180) * pow(sin((118.608198 * pi() / 180 - ma.hb_lng * pi() / 180) / 2), 2))) * 1000) \u0026lt;= 46000)\n\tAND `ma`.`block_state` = '1'\nORDER BY\n\t`ma`.`hb_time` DESC\nLIMIT 20,\n20\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e  UNIQUE KEY `qm_member_account_accid_uindex` (`accid`),\n  UNIQUE KEY `qm_member_account_account_uindex` (`account`,`app_name`),\n  KEY `pyjy_member_account_hb_time_idx` (`hb_time`),\n  KEY `invitation_code` (`invitation_code`),\n  KEY `member_account_phone_idx` (`phone`),\n  KEY `sign_auditing_idx` (`sign_auditing`) USING BTREE,\n  KEY `nickname_auditing_idx` (`nickname_auditing`),\n  KEY `account_puppet_idx` (`puppet`) USING BTREE,\n  KEY `account_online_mode_idx` (`online_mode`) USING BTREE,\n  KEY `account_block_state_idx` (`block_state`) USING BTREE,\n  KEY `account_face_audit_state_idx` (`face_audit_state`) USING BTREE,\n  KEY `account_gender_idx` (`gender`) USING BTREE,\n  KEY `account_prepare_state_idx` (`prepare_state`) USING BTREE\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e以下是表索引。\n通过 explain 发现 PRIMARY,account_puppet_idx,account_block_state_idx,account_face_audit_state_idx,account_gender_idx 这些索引可以被设计，但是在实际执行过程中，仅仅命中\n此 pyjy_member_account_hb_time_idx 索引。\u003c/p\u003e\n\u003cp\u003e所以想问下，类似于这种改如何优化性能。这些查询条件绝大多说都是 tinyint(1)类型\u003c/p\u003e\n",
+      "Author": "awanganddong",
+      "PubDate": "2022-05-09T06:06:37Z"
+    },
+    {
       "Title": "北京-国企-内推-前端-16~30K+年终奖 - 酷工作",
       "Link": "https://www.v2ex.com/t/851730",
       "Description": "\u003cp\u003e目前收到七位 v 友的简历,谢谢信任.\n详情直接跳转之前的帖子:\u003ca href=\"https://www.v2ex.com/t/848429#reply4\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/848429#reply4\u003c/a\u003e\n另外福利新增为:企业年金个人 4% 公司 8%\u003c/p\u003e\n\u003cp\u003eVX:\necho bW91eGluemk= | base64 --decode\u003c/p\u003e\n\u003cp\u003e邮箱:\necho NDA4NTA5NjY5QHFxLmNvbQ== | base64 --decode\u003c/p\u003e\n\u003cp\u003e谢谢.欢迎咨询\u003c/p\u003e\n",
