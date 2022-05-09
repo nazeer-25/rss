@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求助,网络拓扑问题 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/851874</link>
+      <description>&lt;h3&gt;背景&lt;/h3&gt;&#xA;&lt;p&gt;买了个电视盒子,想看视频.&lt;/p&gt;&#xA;&lt;h3&gt;拓扑描述&lt;/h3&gt;&#xA;&lt;p&gt;光猫(联通)--(brige)--路由器(xiaomi-AX6000)&lt;/p&gt;&#xA;&lt;p&gt;其他设备君连接在 AX6000 路由器下 (GW:192.168.31.1)&lt;/p&gt;&#xA;&lt;p&gt;包括: 电视,电视盒子,手机,电脑,群辉. 等智能设备&lt;/p&gt;&#xA;&lt;p&gt;已知这些设备均可联网.&lt;/p&gt;&#xA;&lt;h3&gt;折腾,在群辉中用 docker 装 openwrt 当旁路由用&lt;/h3&gt;&#xA;&lt;p&gt;群辉通过 docker 方式装了原版 openwrt (image: openwrtorg/rootfs:latest)&lt;/p&gt;&#xA;&lt;p&gt;群辉上设置了&#xA;网卡混杂&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;sudo ip link set eth0 promisc on &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;openwrt 容器通过 macvlan 桥接群辉 host (ADDR:192.168.31.2)&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;docker network create -d macvlan --subnet=192.168.31.0/24 --gateway=192.168.31.1 -o parent=eth0 macnet&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;openwrt 容器中配置了 (默认网关 192.168.31.1)&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;route add default gw 192.168.31.1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;设备 ip 情况:&lt;/h3&gt;&#xA;&lt;p&gt;ax6000: 192.168.31.1&#xA;openwrt: 192.168.31.2  gw:192.168.31.1&#xA;群辉:  192.168.31.254   gw:192.168.31.1&#xA;电脑 1: 192.168.31.100   gw:192.168.31.1&#xA;手机 1: 192.168.31.102   gw:192.168.31.2 &lt;/p&gt;&#xA;&lt;h3&gt;现象&lt;/h3&gt;&#xA;&lt;p&gt;openwrt 容器中: 可以正常访问外网&#xA;群辉: 可以正常访问外网&#xA;电脑 1: 可以正常访问外网\群辉\openwrt&#xA;手机 1: 只可以访问内网即可以访问 192.168.31.1 ,也可访问 192.168.31.2 但是不能访问外网&lt;/p&gt;&#xA;&lt;h3&gt;期望&lt;/h3&gt;&#xA;&lt;p&gt;期望 手机 1 可以访问外网.&lt;/p&gt;&#xA;&lt;h3&gt;猜测&lt;/h3&gt;&#xA;&lt;p&gt;应该是缺少一个路由,或者 nat 设置,将手机 1 上的流量转到外网.&#xA;小白不懂网络,求赐教,问题出在哪里了?&lt;/p&gt;&#xA;</description>
+      <author>mlboy</author>
+      <pubDate>09 May 2022 23:55:20 +0000</pubDate>
+    </item>
+    <item>
       <title>gcc 可变长度数组 - C++</title>
       <link>https://www.v2ex.com/t/851873</link>
       <description>&lt;p&gt;variable length array 在 c++里应该是不支持的吧，&#xA;但我用 gcc 可以编译啊，有没有办法关掉呢？&lt;/p&gt;&#xA;&lt;p&gt;int main() {&#xA;int a;&#xA;cin &amp;gt;&amp;gt; a;&#xA;int b[a];&#xA;}&lt;/p&gt;&#xA;</description>
