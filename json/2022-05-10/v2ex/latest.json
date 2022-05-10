@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "快递停在附近的一个中转站不动了，可以自己去取吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/851875",
+      "Description": "工作电脑的固态硬盘坏了，着急用。停在附近的中转站两天没动静了。好气啊",
+      "Author": "muooOOO",
+      "PubDate": "2022-05-10T00:23:19Z"
+    },
+    {
       "Title": "求助,网络拓扑问题 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/851874",
       "Description": "\u003ch3\u003e背景\u003c/h3\u003e\n\u003cp\u003e买了个电视盒子,想看视频.\u003c/p\u003e\n\u003ch3\u003e拓扑描述\u003c/h3\u003e\n\u003cp\u003e光猫(联通)--(brige)--路由器(xiaomi-AX6000)\u003c/p\u003e\n\u003cp\u003e其他设备君连接在 AX6000 路由器下 (GW:192.168.31.1)\u003c/p\u003e\n\u003cp\u003e包括: 电视,电视盒子,手机,电脑,群辉. 等智能设备\u003c/p\u003e\n\u003cp\u003e已知这些设备均可联网.\u003c/p\u003e\n\u003ch3\u003e折腾,在群辉中用 docker 装 openwrt 当旁路由用\u003c/h3\u003e\n\u003cp\u003e群辉通过 docker 方式装了原版 openwrt (image: openwrtorg/rootfs:latest)\u003c/p\u003e\n\u003cp\u003e群辉上设置了\n网卡混杂\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esudo ip link set eth0 promisc on \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eopenwrt 容器通过 macvlan 桥接群辉 host (ADDR:192.168.31.2)\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edocker network create -d macvlan --subnet=192.168.31.0/24 --gateway=192.168.31.1 -o parent=eth0 macnet\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eopenwrt 容器中配置了 (默认网关 192.168.31.1)\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eroute add default gw 192.168.31.1\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e设备 ip 情况:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003eax6000: 192.168.31.1\nopenwrt: 192.168.31.2  gw:192.168.31.1\n群辉:  192.168.31.254   gw:192.168.31.1\n电脑 1: 192.168.31.100   gw:192.168.31.1\n手机 1: 192.168.31.102   gw:192.168.31.2 \n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e现象\u003c/h3\u003e\n\u003cp\u003eopenwrt 容器中: 可以正常访问外网 \u003c/p\u003e\n\u003cp\u003e群辉: 可以正常访问外网\u003c/p\u003e\n\u003cp\u003e电脑 1: 可以正常访问外网\\群辉\\openwrt \u003c/p\u003e\n\u003cp\u003e手机 1: 只可以访问内网即可以访问 192.168.31.1 ,也可访问 192.168.31.2 但是不能访问外网\u003c/p\u003e\n\u003ch3\u003e期望\u003c/h3\u003e\n\u003cp\u003e期望 手机 1 可以访问外网.\u003c/p\u003e\n\u003ch3\u003e猜测\u003c/h3\u003e\n\u003cp\u003e应该是缺少一个路由,或者 nat 设置,将手机 1 上的流量转到外网.\u003c/p\u003e\n\u003cp\u003e小白不懂网络,求赐教,问题出在哪里了?\u003c/p\u003e\n\u003cp\u003e类似这种配置\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eiptables -t nat -I POSTROUTING -j MASQUERADE \n\u003c/code\u003e\u003c/pre\u003e\n",
