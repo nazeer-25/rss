@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>13 mini 无线充电问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/851974</link>
+      <description>&lt;p&gt;买了个 13 mini 立式无线充电对不准，车上的无线充也特别容易因为滑动卡不住了。各位彦祖有什么好办法吗？&lt;/p&gt;&#xA;</description>
+      <author>derek80</author>
+      <pubDate>10 May 2022 06:26:52 +0000</pubDate>
+    </item>
+    <item>
       <title>当 P 的数量为 1 时 GMP 调度的问题 - Go 编程语言</title>
       <link>https://www.v2ex.com/t/851973</link>
       <description>```go&lt;br /&gt;package main&lt;br /&gt;&lt;br /&gt;import (&lt;br /&gt;&#x9;&#34;fmt&#34;&lt;br /&gt;&#x9;&#34;runtime&#34;&lt;br /&gt;&#x9;&#34;sync&#34;&lt;br /&gt;)&lt;br /&gt;&lt;br /&gt;func main() {&lt;br /&gt;&#x9;//&lt;br /&gt;&#x9;wait := sync.WaitGroup{}&lt;br /&gt;&#x9;runtime.GOMAXPROCS(1)&lt;br /&gt;&#x9;wait.Add(20)&lt;br /&gt;&#x9;str := &#34;ABCDEFGHIJKLM&#34;&lt;br /&gt;&lt;br /&gt;&#x9;for i := 0; i &amp;lt; 10; i++ {&lt;br /&gt;&#x9;&#x9;go func(i int) {&lt;br /&gt;&#x9;&#x9;&#x9;fmt.Println(i, &#34;---&#34;)&lt;br /&gt;&#x9;&#x9;&#x9;wait.Done()&lt;br /&gt;&#x9;&#x9;}(i)&lt;br /&gt;&#x9;}&lt;br /&gt;&lt;br /&gt;&#x9;for i, l := 0, len(str); i &amp;lt; l; i++ {&lt;br /&gt;&#x9;&#x9;go func(i int) {&lt;br /&gt;&#x9;&#x9;&#x9;fmt.Println(string(str[i]))&lt;br /&gt;&#x9;&#x9;&#x9;wait.Done()&lt;br /&gt;&#x9;&#x9;}(i)&lt;br /&gt;&#x9;}&lt;br /&gt;&#x9;fmt.Println(&#34;---------------&#34;)&lt;br /&gt;&#x9;wait.Wait()&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;```&lt;br /&gt;为什么这个程序会优先执行下面这个 goroutine 中的最后一个，然后再回到上面去执行&lt;br /&gt;输出结果如下&lt;br /&gt;```&lt;br /&gt;---------------&lt;br /&gt;M&lt;br /&gt;0 ---&lt;br /&gt;1 ---&lt;br /&gt;2 ---&lt;br /&gt;3 ---&lt;br /&gt;4 ---&lt;br /&gt;5 ---&lt;br /&gt;6 ---&lt;br /&gt;7 ---&lt;br /&gt;8 ---&lt;br /&gt;9 ---&lt;br /&gt;A&lt;br /&gt;B&lt;br /&gt;C&lt;br /&gt;D&lt;br /&gt;E&lt;br /&gt;F&lt;br /&gt;G&lt;br /&gt;H&lt;br /&gt;I&lt;br /&gt;```&lt;br /&gt;如果从 GMP 的角度去看的话,一开始设置了 P 的数量为 1 那后续 G0 调用玩 goroutine 之后，把后续的 G 都塞到了本地 p 的队列里面 m 从里面取 输出的结果不应该是顺序的嘛， 为什么会产生单独输出一次 M 的现象&lt;br /&gt;&lt;br /&gt;我所认为的理想状态下输出的内容&lt;br /&gt;```&lt;br /&gt;0123456789ABCDEFGHIM&lt;br /&gt;```</description>

@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "13 mini 无线充电问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/851974",
+      "Description": "\u003cp\u003e买了个 13 mini 立式无线充电对不准，车上的无线充也特别容易因为滑动卡不住了。各位彦祖有什么好办法吗？\u003c/p\u003e\n",
+      "Author": "derek80",
+      "PubDate": "2022-05-10T06:26:52Z"
+    },
+    {
       "Title": "当 P 的数量为 1 时 GMP 调度的问题 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/851973",
       "Description": "```go\u003cbr /\u003epackage main\u003cbr /\u003e\u003cbr /\u003eimport (\u003cbr /\u003e\t\"fmt\"\u003cbr /\u003e\t\"runtime\"\u003cbr /\u003e\t\"sync\"\u003cbr /\u003e)\u003cbr /\u003e\u003cbr /\u003efunc main() {\u003cbr /\u003e\t//\u003cbr /\u003e\twait := sync.WaitGroup{}\u003cbr /\u003e\truntime.GOMAXPROCS(1)\u003cbr /\u003e\twait.Add(20)\u003cbr /\u003e\tstr := \"ABCDEFGHIJKLM\"\u003cbr /\u003e\u003cbr /\u003e\tfor i := 0; i \u0026lt; 10; i++ {\u003cbr /\u003e\t\tgo func(i int) {\u003cbr /\u003e\t\t\tfmt.Println(i, \"---\")\u003cbr /\u003e\t\t\twait.Done()\u003cbr /\u003e\t\t}(i)\u003cbr /\u003e\t}\u003cbr /\u003e\u003cbr /\u003e\tfor i, l := 0, len(str); i \u0026lt; l; i++ {\u003cbr /\u003e\t\tgo func(i int) {\u003cbr /\u003e\t\t\tfmt.Println(string(str[i]))\u003cbr /\u003e\t\t\twait.Done()\u003cbr /\u003e\t\t}(i)\u003cbr /\u003e\t}\u003cbr /\u003e\tfmt.Println(\"---------------\")\u003cbr /\u003e\twait.Wait()\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003e```\u003cbr /\u003e为什么这个程序会优先执行下面这个 goroutine 中的最后一个，然后再回到上面去执行\u003cbr /\u003e输出结果如下\u003cbr /\u003e```\u003cbr /\u003e---------------\u003cbr /\u003eM\u003cbr /\u003e0 ---\u003cbr /\u003e1 ---\u003cbr /\u003e2 ---\u003cbr /\u003e3 ---\u003cbr /\u003e4 ---\u003cbr /\u003e5 ---\u003cbr /\u003e6 ---\u003cbr /\u003e7 ---\u003cbr /\u003e8 ---\u003cbr /\u003e9 ---\u003cbr /\u003eA\u003cbr /\u003eB\u003cbr /\u003eC\u003cbr /\u003eD\u003cbr /\u003eE\u003cbr /\u003eF\u003cbr /\u003eG\u003cbr /\u003eH\u003cbr /\u003eI\u003cbr /\u003e```\u003cbr /\u003e如果从 GMP 的角度去看的话,一开始设置了 P 的数量为 1 那后续 G0 调用玩 goroutine 之后，把后续的 G 都塞到了本地 p 的队列里面 m 从里面取 输出的结果不应该是顺序的嘛， 为什么会产生单独输出一次 M 的现象\u003cbr /\u003e\u003cbr /\u003e我所认为的理想状态下输出的内容\u003cbr /\u003e```\u003cbr /\u003e0123456789ABCDEFGHIM\u003cbr /\u003e```",
