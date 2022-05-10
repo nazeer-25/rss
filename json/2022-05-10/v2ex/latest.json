@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Gin 如何让通过中间件设置的变量 在模板中能读取到 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/852086",
+      "Description": "\u003cp\u003e详细描述应该是 怎么定义公共的全局模板变量，比如全局的 webtitle 、seotitle 等\u003c/p\u003e\n\u003cp\u003e如\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003erouter := gin.Default()\n\nrouter.use(func (ctx *gin.Context) {\n    // if user.isLogged()\n\t    // 怎么才能设置一个变量或值，让模板中可以读到\n    // endif\n})\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如 fiber 可以这样：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eapp.Use(func(ctx *fiber.Ctx) error {\n\t_ = ctx.Bind(fiber.Map{\n\t\t\"t\": time.Now().UnixNano(),\n\t})\n\treturn ctx.Next()\n})\n\napp.Get(\"/\", func(ctx *fiber.Ctx) error {\n\treturn ctx.Render(\"tmpl_name\", fiber.Map{\n\t})\n})\n\n// 模板中可以  {{ .t }} 得到当前的时间戳\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "dzdh",
+      "PubDate": "2022-05-10T15:22:10Z"
+    },
+    {
+      "Title": "心塞... 平板的 Type-C 又被暴力了一回 - 硬件",
+      "Link": "https://www.v2ex.com/t/852085",
+      "Description": "\u003cp\u003e平板没拿稳滑下去了, Type-C 充电线插着暴力着陆... 口子感觉又松了.\u003c/p\u003e\n\u003cp\u003e与之对比的是 surface connect 磁吸口. 我平时使用时相当自由, 根本不用担忧接口, 怎么舒服怎么用. 就是外设太贵.\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e虽然理论上 Type-C 口钢壳很扎实, 舌片是塑料有一定弹性能忍受一定形变.\u003c/p\u003e\n\u003cp\u003e但是架不住主板那边的设计可能很水, 好一些的可能会有加固措施, 固定在主板上. 差的就...\u003c/p\u003e\n\u003cp\u003e毕竟见过被搞挂的 C 口, 变得松松垮垮的.\u003c/p\u003e\n",
+      "Author": "Osk",
+      "PubDate": "2022-05-10T15:20:53Z"
+    },
+    {
+      "Title": "看到很多人最新讨论移民，想起高晓松的节目，把很多国家（北美，欧洲，日本新加坡等）都介绍了一遍，他的节目我觉得还是比较客观的，但是被人断章取义地打成公知。 - 生活",
+      "Link": "https://www.v2ex.com/t/852084",
+      "Description": "\u003cp\u003e他的节目《晓松奇谈》 132 期，《晓说》 211 期，每期 45 分钟，一共 15000+分钟的脱口秀节目，被打成公知罪证的能有 10 个吗，我自己说这么多话，如果能滴水不漏我觉得都不可能\u003c/p\u003e\n",
+      "Author": "nsynet57",
+      "PubDate": "2022-05-10T15:20:38Z"
+    },
+    {
+      "Title": "DNSPod 权威服务器的 DNSSEC 有问题 - 全球工单系统",
+      "Link": "https://www.v2ex.com/t/852083",
+      "Description": "之前我在申请 Google SSL 证书的时候 ACME 遇到了 SERVFAIL 错误，只要开了 DNSSEC 就会 CAA SERVFAIL ，哪怕其实并没有配置 CAA 记录。经过查询有同样的案例，今天 Google 方面也回应了，问题在于 DNSPod 的权威服务器：\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://issuetracker.google.com/issues/227690397\" rel=\"nofollow noopener\"\u003ehttps://issuetracker.google.com/issues/227690397\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e@\u003ca target=\"_blank\" href=\"/member/johnjiang85\" rel=\"nofollow noopener\"\u003ejohnjiang85\u003c/a\u003e",
+      "Author": "Love4Taylor",
+      "PubDate": "2022-05-10T15:18:49Z"
+    },
+    {
       "Title": "gov 网站安全证书问题 - 问与答",
       "Link": "https://www.v2ex.com/t/852082",
       "Description": "\u003cp\u003e网络小白，我发现访问很多 gov 网站的时候，网址栏都会显示不安全，然后查了一下谷歌帮助，是因为没有使用 https （超文本传输安全协议）而是使用了 http （超文本传输协议），也就说没有使用 SSL 数字证书（不知道可不可以这么理解）。\u003c/p\u003e\n\u003cp\u003e那么这样不是会导致很多安全问题吗，因为我查到\u003cstrong\u003eHTTP 协议无法加密数据，所有通信数据都在网络中明文“裸奔”，这是导致数据泄露、数据篡改、流量劫持、钓鱼攻击等安全问题的重要原因。而 HTTPS 是用来解决 HTTP 明文协议的缺陷，在 HTTP 的基础上加入 SSL/TLS 协议，依靠 SSL 证书来验证服务器的身份，为客户端和服务器端之间建立“SSL”通道，确保数据运输安全\u003c/strong\u003e，我的博客都申请了个证书加上了，是 gov 网站没有这方面的需求吗还是其他原因？\n谢谢大家\u003c/p\u003e\n",
