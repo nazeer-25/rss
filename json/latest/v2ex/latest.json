@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教一个 shared_ptr 内存泄漏的问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/851924",
+      "Description": "\u003cp\u003e如题，我正在用 cpp 写一个线程池的 submit 函数，为了可以让用户可以异步的获取到函数执行的返回值，我使用了 future 和 promise 特性，一部分代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-c++\"\u003etemplate \u0026lt;typename Fn, typename... Args, typename HasRet, typename Redundant\u0026gt;\n::std::future\u0026lt;typename ::std::result_of\u0026lt;Fn(Args...)\u0026gt;::type\u0026gt;\nThreadPool::submit(Fn\u0026amp;\u0026amp; func, Args... args)\n{\n\tif (!running_)\n\t{\n\t\tLOGS_FATAL \u0026lt;\u0026lt; \"thread pool has not been initialized\";\n\t}\n\tusing RetType = typename ::std::result_of\u0026lt;Fn(Args...)\u0026gt;::type;\n\tLockGuardType lock(mutex_);\n\tauto promise = ::std::make_shared\u0026lt;::std::promise\u0026lt;RetType\u0026gt;\u0026gt;();\n\tauto future = promise-\u0026gt;get_future();\n\t::std::function\u0026lt;RetType()\u0026gt; tmpTask = ::std::bind(::std::forward\u0026lt;Fn\u0026gt;(func), \t\t\t\t\t::std::forward\u0026lt;Args\u0026gt;(args)...);\n1 ）\tTaskType task = [t = ::std::move(tmpTask), promise]() mutable\n\t{\n2 ）\t\tassert(promise.use_count() == 1);\n\t\tpromise-\u0026gt;set_value(t());\n\t};\n3 ）    assert(promise.use_count() == 2);\n    ......\n    return future;\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e1 ）处我用的 lambda 是值捕获 promise,3 ）处的 use_count 总为 2 这没问题，现在的问题不知为什么 2 ）处的 use_count 却不稳定，有时为 3 ，有时为 1 ？\n下面为测试代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eTEST_F(ThreadPoolTest, SubmitHasRetval)\n{\n\t::std::function\u0026lt;int32_t ()\u0026gt; f = []() -\u0026gt; int32_t\n\t{\n\t\treturn 5;\n\t};\n\tauto future1 = threadPool-\u0026gt;submit(f);\n\tfuture1.wait();\n\tASSERT_EQ(future1.get(), 5);\n\tauto future2 = threadPool-\u0026gt;submit(::std::move(f));\n\tfuture2.wait();\n\tASSERT_EQ(future2.get(), 5);\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003edebug 模式下正常结果为：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e2022-05-10 11:09:44.942 [9924] DEBUG ThreadPool.cpp:111 - thread pool init success\n2022-05-10 11:09:44.943 [9924] DEBUG ThreadPool.cpp:128 - thread pool has been shutdown\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e错误结果为：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e... Assertion `promise.use_count() == 1' failed.\n2022-05-10 11:17:26.951 [10115] DEBUG ThreadPool.cpp:111 - thread pool init success\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e感谢大佬们看完我这丑陋的代码。。。\u003c/p\u003e\n",
+      "Author": "guang19",
+      "PubDate": "2022-05-10T03:19:39Z"
+    },
+    {
+      "Title": "弃坑了 BoltDB 的那个男人，他说要 all in SQLite - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/851923",
+      "Description": "BoltDB 作者原来是去了 \u003ca target=\"_blank\" href=\"http://fly.io\" rel=\"nofollow noopener\"\u003efly.io\u003c/a\u003e 上班呀。\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://fly.io/blog/all-in-on-sqlite-litestream/\" rel=\"nofollow noopener\"\u003ehttps://fly.io/blog/all-in-on-sqlite-litestream/\u003c/a\u003e",
+      "Author": "cmdOptionKana",
+      "PubDate": "2022-05-10T03:19:02Z"
+    },
+    {
       "Title": "今年会发布新 macbook 吗 - Apple",
       "Link": "https://www.v2ex.com/t/851920",
       "Description": "\u003cp\u003e看了下官网订购，都要到 7 月了，不是刚需，如果今年有新 macbook 或者来年 3 月有新的，感觉可以等等啊\u003c/p\u003e\n",

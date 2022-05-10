@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教一个 shared_ptr 内存泄漏的问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/851924</link>
+      <description>&lt;p&gt;如题，我正在用 cpp 写一个线程池的 submit 函数，为了可以让用户可以异步的获取到函数执行的返回值，我使用了 future 和 promise 特性，一部分代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;template &amp;lt;typename Fn, typename... Args, typename HasRet, typename Redundant&amp;gt;&#xA;::std::future&amp;lt;typename ::std::result_of&amp;lt;Fn(Args...)&amp;gt;::type&amp;gt;&#xA;ThreadPool::submit(Fn&amp;amp;&amp;amp; func, Args... args)&#xA;{&#xA;&#x9;if (!running_)&#xA;&#x9;{&#xA;&#x9;&#x9;LOGS_FATAL &amp;lt;&amp;lt; &#34;thread pool has not been initialized&#34;;&#xA;&#x9;}&#xA;&#x9;using RetType = typename ::std::result_of&amp;lt;Fn(Args...)&amp;gt;::type;&#xA;&#x9;LockGuardType lock(mutex_);&#xA;&#x9;auto promise = ::std::make_shared&amp;lt;::std::promise&amp;lt;RetType&amp;gt;&amp;gt;();&#xA;&#x9;auto future = promise-&amp;gt;get_future();&#xA;&#x9;::std::function&amp;lt;RetType()&amp;gt; tmpTask = ::std::bind(::std::forward&amp;lt;Fn&amp;gt;(func), &#x9;&#x9;&#x9;&#x9;&#x9;::std::forward&amp;lt;Args&amp;gt;(args)...);&#xA;1 ）&#x9;TaskType task = [t = ::std::move(tmpTask), promise]() mutable&#xA;&#x9;{&#xA;2 ）&#x9;&#x9;assert(promise.use_count() == 1);&#xA;&#x9;&#x9;promise-&amp;gt;set_value(t());&#xA;&#x9;};&#xA;3 ）    assert(promise.use_count() == 2);&#xA;    ......&#xA;    return future;&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;1 ）处我用的 lambda 是值捕获 promise,3 ）处的 use_count 总为 2 这没问题，现在的问题不知为什么 2 ）处的 use_count 却不稳定，有时为 3 ，有时为 1 ？&#xA;下面为测试代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;TEST_F(ThreadPoolTest, SubmitHasRetval)&#xA;{&#xA;&#x9;::std::function&amp;lt;int32_t ()&amp;gt; f = []() -&amp;gt; int32_t&#xA;&#x9;{&#xA;&#x9;&#x9;return 5;&#xA;&#x9;};&#xA;&#x9;auto future1 = threadPool-&amp;gt;submit(f);&#xA;&#x9;future1.wait();&#xA;&#x9;ASSERT_EQ(future1.get(), 5);&#xA;&#x9;auto future2 = threadPool-&amp;gt;submit(::std::move(f));&#xA;&#x9;future2.wait();&#xA;&#x9;ASSERT_EQ(future2.get(), 5);&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;debug 模式下正常结果为：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;2022-05-10 11:09:44.942 [9924] DEBUG ThreadPool.cpp:111 - thread pool init success&#xA;2022-05-10 11:09:44.943 [9924] DEBUG ThreadPool.cpp:128 - thread pool has been shutdown&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;错误结果为：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;... Assertion `promise.use_count() == 1&#39; failed.&#xA;2022-05-10 11:17:26.951 [10115] DEBUG ThreadPool.cpp:111 - thread pool init success&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;感谢大佬们看完我这丑陋的代码。。。&lt;/p&gt;&#xA;</description>
+      <author>guang19</author>
+      <pubDate>10 May 2022 03:19:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>弃坑了 BoltDB 的那个男人，他说要 all in SQLite - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/851923</link>
+      <description>BoltDB 作者原来是去了 &lt;a target=&#34;_blank&#34; href=&#34;http://fly.io&#34; rel=&#34;nofollow noopener&#34;&gt;fly.io&lt;/a&gt; 上班呀。&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://fly.io/blog/all-in-on-sqlite-litestream/&#34; rel=&#34;nofollow noopener&#34;&gt;https://fly.io/blog/all-in-on-sqlite-litestream/&lt;/a&gt;</description>
+      <author>cmdOptionKana</author>
+      <pubDate>10 May 2022 03:19:02 +0000</pubDate>
+    </item>
+    <item>
       <title>今年会发布新 macbook 吗 - Apple</title>
       <link>https://www.v2ex.com/t/851920</link>
       <description>&lt;p&gt;看了下官网订购，都要到 7 月了，不是刚需，如果今年有新 macbook 或者来年 3 月有新的，感觉可以等等啊&lt;/p&gt;&#xA;</description>
