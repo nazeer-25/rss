@@ -4,6 +4,111 @@
   "Description": "",
   "Items": [
     {
+      "Title": "用 BetterDummy 解决了 Pro Display XDR 显示器分辨率“过低”的问题，不完美，但堪用 - Apple",
+      "Link": "https://www.v2ex.com/t/851908",
+      "Description": "如题，Pro display XDR 用着挺好，就是在 apple silicon 的 mac 上，looks like 分辨率只能 2:1 ，也就是 3008 x 1692 ；数值上甚至低于 LG 5K 屏幕的 3800 x 1800 。导致文字显示看上去太大，桌面空间利用效率也不如 LG 5K （这点因人而异，不同人的习惯不一样）。对我而言，理想的 looks like 分辨率是 3840 x 2160 ，以前只能强开这个分辨率，没有 hidpi ，白瞎了这块屏幕。\u003cbr /\u003e\u003cbr /\u003e昨天偶然尝试了一下 BetterDummy 这个软件，通过一个虚拟的显示器，将原显示器镜像到虚拟显示器上，终于实现了 3840 x 2160 的 hidpi 。\u003cbr /\u003e\u003cbr /\u003e只是用了这个软件之后存在两个明显的问题（ 1 ）不能打开 HDR ；（ 2 ）不能看 Netflix 等需要 HDCP 适配的内容。只能工作上需要的时候切换了。\u003cbr /\u003e\u003cbr /\u003e不知道大家还有没有更好的方案，可以解决 Pro Display XDR 分辨率的问题？谢谢！",
+      "Author": "chunh",
+      "PubDate": "2022-05-10T02:28:20Z"
+    },
+    {
+      "Title": "城市高架桥和环城路没有最低速限制是不是影响了通行效率 - 问与答",
+      "Link": "https://www.v2ex.com/t/851907",
+      "Description": "\u003cul\u003e\n\u003cli\u003e城市道路高架桥和跨江大桥都没有低速限制吗,每天高峰期都有很多低速车在压着后面的车流,导致拥堵.\u003c/li\u003e\n\u003cli\u003e通过 12345 平台反馈后得到回复说 :车辆低速行驶不属于交通违法行为.\u003c/li\u003e\n\u003cli\u003e想知道有没有城市是规定这个低速违规的,或者最左侧车道低速违规?\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "waising",
+      "PubDate": "2022-05-10T02:26:15Z"
+    },
+    {
+      "Title": "CompletableFuture FutureTask 的错误使用案例 - Java",
+      "Link": "https://www.v2ex.com/t/851906",
+      "Description": "\u003ch2\u003e一、背景\u003c/h2\u003e\n\u003cp\u003e在一些接口响应时间的优化中有一些任务是可以异步处理的，常常会用到这个线程池。但是有一些业务需要依赖异步任务的结果，那么就需要用到 CompletableFuture 或者 FutureTask ，或者在一些多任务并发执行的时候，CompletableFuture 可以提供一些方法让我们更容易的控制并发编程。\u003c/p\u003e\n\u003ch2\u003e二、常见的错误操作\u003c/h2\u003e\n\u003cp\u003e这种就是画蛇添足的做法，等于脱裤子放屁。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"所谓的异步\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/05/10/432c05035f74a9c9.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e第二种方式是把一些业务代码放在 get()方法之前去执行。这种是 oK 的，但是还有一个问题。如果异步任务是 IO 密集型，那么就需要解决线程池的问题。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"放中间\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/05/10/f94a7b7a3baa5f5d.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e第三种：使用额外的线程池，处理这个 IO 密集型任务。\n\u003cimg alt=\"自定义线程池\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/05/10/9c0b7f199a145d98.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e总结\u003c/h2\u003e\n\u003cp\u003e使用 CompletableFuture 、FutureTask 的前提：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e你的业务有异步的需求且需要知道任务执行的结果。比如是否执行完成，执行结果。\u003c/li\u003e\n\u003cli\u003e你的整个业务链中有不依赖这个异步任务结果的业务代码，这样就可以先执行这些中间业务代码。\u003c/li\u003e\n\u003cli\u003e这个中间业务代码（ IO 阻塞或者非阻塞代码，非阻塞代码一般很快）的执行时间 W ，W 最好大于或者等于这个异步任务的执行时间。如果 W 执行很快，比如是非阻塞代码，那么这个异步任务的意义不大。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e注意事项：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e如果这个异步任务是一个非阻塞代码（也就是计算密集型代码），那么直接用即可(底层是 ForkJoinPool)。这个在就不再阐述原理了，在线程池那集有讲过。\u003c/li\u003e\n\u003cli\u003e如果这个异步任务是一个 IO 阻塞型代码，那么就需要使用一个额外的自定义线程池去处理，这个线程池的大小取决于这个任务的 IO 和 cpu 时间比，还有和中间任务的时间比，大致确定范围即可。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e这些问题的详细描述在我的 B 站里 ，java 并发编程： \u003ca href=\"https://www.bilibili.com/video/BV1CA4y1S7Pe\" rel=\"nofollow\"\u003ehttps://www.bilibili.com/video/BV1CA4y1S7Pe\u003c/a\u003e?\n这些都是 API 的使用，其实很无聊。但是错的人太多了，所以就讲一下这个问题。头大。。\u003c/p\u003e\n\u003cp\u003e其他的场景就是多个任务同步执行的情况，可以使用 allOf ，compose 等，那么就不在这里给大家演示了。\u003c/p\u003e\n",
+      "Author": "byte10",
+      "PubDate": "2022-05-10T02:21:52Z"
+    },
+    {
+      "Title": "用 openwrt 的有没有遇到过，必须 restart interface 才能恢复链路的情况？ - OpenWrt",
+      "Link": "https://www.v2ex.com/t/851905",
+      "Description": "我暂时不想深究里面原因，单纯想看看是比较普遍的情况，还是只有我遇到了。\u003cbr /\u003e\u003cbr /\u003e这台设备 wan 口连在公司局域网内使用的，前几天信息部调整过网络当时断了网，外网局域网都断过，昨天恢复的（参数没变动），我这设备却一直没恢复联网，我也没想到要去重启，信息部的人也有点奇怪，然后我突发奇想点了一下 wan interface 的 restart ，瞬间恢复联网了。\u003cbr /\u003e感觉有点违背常识……",
+      "Author": "ungrown",
+      "PubDate": "2022-05-10T02:21:37Z"
+    },
+    {
+      "Title": "小型直播间用什么网络设备？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/851904",
+      "Description": "\u003cp\u003e简单说一下情况：公司有原来有两个直播间，各拉了一条上下行对等的 100M 电信，每个房间放了一台家用无线路由，也够用，毕竟就带 1 台电脑和 2 个手机；后来业务多了，需要再加两个直播间，由于新直播间在办公区域（老直播间在同层其他区域的房间有专门的入户光纤），原有办公区域光纤已经做了分线，一个用于普通办公区域，另一个现在升级为上 200M 、下 180M 的企业宽带，用什么设备能做到两个直播间能平均使用，不相互影响，并且能预留 30M 给另外一些业务使用呢？\u003c/p\u003e\n\u003cp\u003e补充一下：普通办公用的是上 30M 、下 1000M 的企业宽带，用的 H3C 企业路由+AP 的解决方案，目前使用设备在 120 台左右（ PC 和移动设备大约一般一般吧），偶尔会有人反应网卡，但不是所有人，查看路由 cpu 和内存占用率并不高，怀疑是个别 AP 下的设备数量过多（ 60 左右），另外一个就是个别笔记本网卡在 win11 下驱动有问题；如果直播宽带并入已有的办公路由，担心会出现影响直播效果；\u003c/p\u003e\n\u003cp\u003e求助各位有没有推荐的方案！！！谢谢\u003c/p\u003e\n",
+      "Author": "wanggh1021",
+      "PubDate": "2022-05-10T02:20:51Z"
+    },
+    {
+      "Title": "有了解深圳格力的小伙伴吗 - 程序员",
+      "Link": "https://www.v2ex.com/t/851903",
+      "Description": "\u003cp\u003e公司在南山中科大厦，面试给我的感觉加班会比较严重。\u003c/p\u003e\n\u003cp\u003e有没有大佬了解过。\u003c/p\u003e\n",
+      "Author": "wszzh",
+      "PubDate": "2022-05-10T02:19:23Z"
+    },
+    {
+      "Title": "提前一个星期知道自己要被裁了，要把年假都请完吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/851902",
+      "Description": "\u003cp\u003e我有一个朋友系列。骗大家我是小狗。程序员在小厂，项目营收惨淡，整个组直接 cut 了。\u003c/p\u003e\n\u003cp\u003e提前知道要被裁，还有什么必做的事情？\u003c/p\u003e\n",
+      "Author": "revalue",
+      "PubDate": "2022-05-10T02:18:30Z"
+    },
+    {
+      "Title": "才入手没多久的 Mac Studio SSD cycle count 记录有点不正常 - Apple",
+      "Link": "https://www.v2ex.com/t/851901",
+      "Description": "\u003cp\u003e事情是这样子的，楼主最近看到有帖子在测试 M1 系列的 SSD 读写，就也来测试一下最近入手差不多十天的 Mac Studio 512GB 的丐版读写情况。\n先贴一下测试的结果：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eSMART overall-health self-assessment test result: PASSED\n\nSMART/Health Information (NVMe Log 0x02)\nCritical Warning:                   0x00\nTemperature:                        28 Celsius\nAvailable Spare:                    100%\nAvailable Spare Threshold:          99%\nPercentage Used:                    0%\nData Units Read:                    1,854,190 [949 GB]\nData Units Written:                 1,788,640 [915 GB]\nHost Read Commands:                 24,420,956\nHost Write Commands:                17,290,272\nController Busy Time:               0\nPower Cycles:                       194\nPower On Hours:                     15\nUnsafe Shutdowns:                   10\nMedia and Data Integrity Errors:    0\nError Information Log Entries:      0\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其实这个读写也还算正常，但是这里面统计的 Power Cylce 实在是有点高了。。。\n所以翻了翻日志，看到 Apple 系统日志(ASL)消息里面大概有这些：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n...\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:37:45 bootlog[0]: BOOT_TIME 1647931065 208129\n2022 年 3 月 22 日 14:43:49 halt[980]: SHUTDOWN_TIME: 1647931429 677034\n2022 年 4 月 30 日 12:55:34 bootlog[0]: BOOT_TIME 1651294534 602752\n2022 年 4 月 30 日 12:58:39 loginwindow[123]: USER_PROCESS: 123 console\n2022 年 4 月 30 日 12:58:40 loginwindow[123]: DEAD_PROCESS: 123 console\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e4 月 30 号之后的记录就是楼主开始使用这个 mac studio 的实际时间，所以我猜测上面 3 月 22 的记录应该是出厂测试的时间。所以 Mac 出厂测试会进行这样的磁盘断电测试嘛？有没有大佬可以简单讲解一下呢？\u003c/p\u003e\n",
+      "Author": "z1249502889",
+      "PubDate": "2022-05-10T02:16:52Z"
+    },
+    {
+      "Title": "电脑 D 盘有文件夹丢失，很重要，数据恢复哪家靠谱，淘宝有靠谱的吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/851900",
+      "Description": "淘宝有靠谱的吗，还是去线下，线下又应该去哪里？求帮助",
+      "Author": "baleeny",
+      "PubDate": "2022-05-10T02:16:45Z"
+    },
+    {
+      "Title": "xcode 编译的执行文件包含用户信息怎么去掉? - 程序员",
+      "Link": "https://www.v2ex.com/t/851899",
+      "Description": "\u003cp\u003exxd TargetBin 总是能搜索到自己的用户名 ,还不止一个\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e/Users/UserName/Library/Developer/Xcode/DerivedData\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这些信息是做什么用的?\u003c/p\u003e\n",
+      "Author": "liuidetmks",
+      "PubDate": "2022-05-10T02:14:03Z"
+    },
+    {
+      "Title": "狗粮有没有推荐的？ - 问与答",
+      "Link": "https://www.v2ex.com/t/851898",
+      "Description": "目前吃的是比乐，也吃过网易严选，大家有什么狗粮推荐的？性价比比较高的？",
+      "Author": "ak8888",
+      "PubDate": "2022-05-10T02:13:06Z"
+    },
+    {
+      "Title": "[帮房东大姐发布] 海昌路（1 号线/18 号线）地铁 600m 悦城单间出租 - 成都",
+      "Link": "https://www.v2ex.com/t/851897",
+      "Description": "\u003cp\u003e啥都有，空调需要自己出钱，每周都有人来打扫卫生，房东大姐为人 nice ，可以短租用来过渡~！\u003c/p\u003e\n\u003cp\u003e我的 vx：tadaole\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"微信图片_20220510100452 1.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/05/10/KigolhkdxIFfHOX.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"微信图片_20220510100449 1.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/05/10/2soO5hptgNfDemw.jpg\"/\u003e\u003c/p\u003e\n",
+      "Author": "liuchengfeng1",
+      "PubDate": "2022-05-10T02:06:15Z"
+    },
+    {
+      "Title": "ThinkBook 16p 和 拯救者 Y9000P 2022 如何选择？ - 问与答",
+      "Link": "https://www.v2ex.com/t/851896",
+      "Description": "ThinkBook 16p AMD 锐龙 7 5800H/16GB/512GB SSD/NVIDIA GeForce RTX 3060MaxQ/2.5K\u003cbr /\u003e拯救者 Y9000P 2022 AMD Ryzen 7 5800H/16G/512G SSD/GeForce RTX™  3060 6G 独显 /钛晶灰\u003cbr /\u003e\u003cbr /\u003e以上二款价格差不多，Y9000P 就是有点厚重，不太方便移动；\u003cbr /\u003eThinkBook 16p 比较轻些，会不会影响性能释放，想入手 ThinkBook 16p 这款，有买过的朋友给点建议，谢谢！",
+      "Author": "Aluhao",
+      "PubDate": "2022-05-10T02:05:48Z"
+    },
+    {
+      "Title": "设计院开始各种节流了，未来该怎么办？ - 职场话题",
+      "Link": "https://www.v2ex.com/t/851895",
+      "Description": "\u003cp\u003e公司准备要取消考勤奖了，一个月 400 多，一年 5000 没了。\n各种设备升级也都暂停了。然后公司的各种福利待遇，食堂的伙食都肉眼可见的下降。\n未来设计院该何去何从，公司的危机、行业的危机也都转嫁到我们普通员工身上了。\u003c/p\u003e\n",
+      "Author": "mantreegcj",
+      "PubDate": "2022-05-10T02:01:31Z"
+    },
+    {
+      "Title": "求教，偶尔做个网站发布分析数据什么的， GO 和 Python 选哪个呀 - 问与答",
+      "Link": "https://www.v2ex.com/t/851893",
+      "Description": "\u003cp\u003e之前学过上古语言 ASP+VBscript ，后面学了 spring boot ，有点 MVC 的基础，但感觉 JAVA 好复杂，我只是个业余的选手，所以请问下大家哪个方便啊，能够快速实现前段+数据库，且学习成本比较低的。\u003c/p\u003e\n",
+      "Author": "DadLearnpython",
+      "PubDate": "2022-05-10T01:59:03Z"
+    },
+    {
       "Title": "现在这个时代，是当个万金油更好还是专研某一领域更好？ - 程序员",
       "Link": "https://www.v2ex.com/t/851890",
       "Description": "",
