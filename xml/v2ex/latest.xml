@@ -4,7 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>关于 Linux 下面的 包管理器的 疑惑 - 程序员</title>
+      <title>Instagram 网页版视频是如何限制在 devtools 中找到视频链接进行直接下载的? - 程序员</title>
+      <link>https://www.v2ex.com/t/852210</link>
+      <description>&lt;p&gt;今天想下载 IG 的一个视频, 于是打开了网页端, 找到视频标签, 查看是 blob, 于是去 Network 里找 m3u8, 但是没有找到.&lt;/p&gt;&#xA;&lt;p&gt;测试链接:&#xA;&lt;a href=&#34;https://www.instagram.com/reel/CdYOo_QIB5L/&#34; rel=&#34;nofollow&#34;&gt;https://www.instagram.com/reel/CdYOo_QIB5L/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;video 标签:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;video class=&#34;tWeCl&#34; crossorigin=&#34;anonymous&#34; playsinline=&#34;&#34; poster=&#34;https://scontent-hkt1-2.cdninstagram.com/v/t51.2885-15/280525371_399280442062025_5345542004741217395_n.jpg&#34; preload=&#34;none&#34; type=&#34;video/mp4&#34; src=&#34;blob:https://www.instagram.com/4feb10a9-7a9d-4d3c-b63a-6773a391bded&#34; loop=&#34;&#34; style=&#34;display: block;&#34;&amp;gt;&amp;lt;/video&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;于是就很好奇, 查看了一下, 它使用分段的 mp4 进行拼接成的视频, 视频链接如下:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;links = [&#xA;    &#39;https://scontent-hkt1-2.cdninstagram.com/v/t66.30100-16/48765482_566184564823119_7249730986057316274_n.mp4?_nc_ht=scontent-hkt1-2.cdninstagram.com&amp;amp;_nc_cat=1&amp;amp;_nc_ohc=4Ba61mlOYE4AX9Ym6rG&amp;amp;edm=APfKNqwBAAAA&amp;amp;ccb=7-4&amp;amp;oh=00_AT-ddAJEjKnOOOGslcGOVkxctcfcao29aLwNDjjWSC7d5g&amp;amp;oe=627D7BBA&amp;amp;_nc_sid=74f7ba&amp;amp;bytestart=0&amp;amp;byteend=782&#39;,&#xA;    &#39;https://scontent-hkt1-2.cdninstagram.com/v/t66.30100-16/48765482_566184564823119_7249730986057316274_n.mp4?_nc_ht=scontent-hkt1-2.cdninstagram.com&amp;amp;_nc_cat=1&amp;amp;_nc_ohc=4Ba61mlOYE4AX9Ym6rG&amp;amp;edm=APfKNqwBAAAA&amp;amp;ccb=7-4&amp;amp;oh=00_AT-ddAJEjKnOOOGslcGOVkxctcfcao29aLwNDjjWSC7d5g&amp;amp;oe=627D7BBA&amp;amp;_nc_sid=74f7ba&amp;amp;bytestart=783&amp;amp;byteend=970&#39;,&#xA;    &#39;https://scontent-hkt1-2.cdninstagram.com/v/t66.30100-16/48765482_566184564823119_7249730986057316274_n.mp4?_nc_ht=scontent-hkt1-2.cdninstagram.com&amp;amp;_nc_cat=1&amp;amp;_nc_ohc=4Ba61mlOYE4AX9Ym6rG&amp;amp;edm=APfKNqwBAAAA&amp;amp;ccb=7-4&amp;amp;oh=00_AT-ddAJEjKnOOOGslcGOVkxctcfcao29aLwNDjjWSC7d5g&amp;amp;oe=627D7BBA&amp;amp;_nc_sid=74f7ba&amp;amp;bytestart=971&amp;amp;byteend=22557&#39;,&#xA;    &#39;https://scontent-hkt1-2.cdninstagram.com/v/t66.30100-16/48765482_566184564823119_7249730986057316274_n.mp4?_nc_ht=scontent-hkt1-2.cdninstagram.com&amp;amp;_nc_cat=1&amp;amp;_nc_ohc=4Ba61mlOYE4AX9Ym6rG&amp;amp;edm=APfKNqwBAAAA&amp;amp;ccb=7-4&amp;amp;oh=00_AT-ddAJEjKnOOOGslcGOVkxctcfcao29aLwNDjjWSC7d5g&amp;amp;oe=627D7BBA&amp;amp;_nc_sid=74f7ba&amp;amp;bytestart=22558&amp;amp;byteend=161856&#39;,&#xA;    &#39;https://scontent-hkt1-2.cdninstagram.com/v/t66.30100-16/48765482_566184564823119_7249730986057316274_n.mp4?_nc_ht=scontent-hkt1-2.cdninstagram.com&amp;amp;_nc_cat=1&amp;amp;_nc_ohc=4Ba61mlOYE4AX9Ym6rG&amp;amp;edm=APfKNqwBAAAA&amp;amp;ccb=7-4&amp;amp;oh=00_AT-ddAJEjKnOOOGslcGOVkxctcfcao29aLwNDjjWSC7d5g&amp;amp;oe=627D7BBA&amp;amp;_nc_sid=74f7ba&amp;amp;bytestart=161857&amp;amp;byteend=304637&#39;,&#xA;  ];&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;于是自己写了下面这段代码, 手动拼接然后进行下载:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;  var blobs = await Promise.all(links.map(async link=&amp;gt; {&#xA;    return await fetch(link).then(r=&amp;gt;r.blob())&#xA;  }));&#xA;  var combinedVideoBlob = blobs.reduce((a, b) =&amp;gt; new Blob([a, b], { type: &#39;video/mp4&#39; }));&#xA;  var downloadA = document.createElement(&#34;a&#34;);&#xA;  downloadA.download = &#34;a.mp4&#34;;&#xA;  downloadA.href = window.webkitURL.createObjectURL(combinedVideoBlob);&#xA;  downloadA.click();&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;最终下载成功, 但是视频只有声音没有图像.&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;想知道代码哪里出了问题, 为什么视频没有图像?&lt;/li&gt;&#xA;&lt;li&gt;有什么方便的浏览器插件, 检测到视频会悬浮一个下载按钮, 获取下载直链&lt;/li&gt;&#xA;&lt;li&gt;有什么方式避免用户(开发者)打开 devtools 找到视频地址进行下载?&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>FaiChou</author>
+      <pubDate>11 May 2022 07:58:53 +0000</pubDate>
+    </item>
+    <item>
+      <title>firebase 升级成付费套餐，没法选择中国的银行卡。有什么办法可以绕过吗？ - Firebase</title>
+      <link>https://www.v2ex.com/t/852209</link>
+      <author>westlinkin</author>
+      <pubDate>11 May 2022 07:56:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>语音房间聊天软件还值得做吗 - 分享创造</title>
+      <link>https://www.v2ex.com/t/852208</link>
+      <description>&lt;p&gt;腾讯的 hood 玩了下感觉还不错&lt;/p&gt;&#xA;</description>
+      <author>lalabba</author>
+      <pubDate>11 May 2022 07:56:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问 datalist 元素什么时候改成居中对齐了？ - 问与答</title>
+      <link>https://www.v2ex.com/t/852207</link>
+      <description>&lt;p&gt;原来是和上面的 input 左边缘对齐的… 请教怎样设置它左对齐呢？&lt;/p&gt;&#xA;</description>
+      <author>weichen2</author>
+      <pubDate>11 May 2022 07:55:59 +0000</pubDate>
+    </item>
+    <item>
+      <title>AirPods pro 收音模糊，沉闷。 - Apple</title>
+      <link>https://www.v2ex.com/t/852206</link>
+      <description>&lt;p&gt;手机型号:iPhone13&#xA;IOS 版本：15.4&#xA;AirPods pro 固件版本：4E71&lt;/p&gt;&#xA;&lt;p&gt;昨天接到电话面试，开始使用耳机进行通话，面试官反应我声音模糊听不清楚（两轮电话面试对方都说了）。使用 iPhone13 的听筒就没问题，被迫举着手机聊了 40 分钟 (︶︹︺)。&#xA;后来自己找朋友测试，声音确实沉闷模糊。&#xA;昨天找 apple 技术支持远程通话他说一开始有点模糊，后来又清晰，与手机听筒没有什么区别。&#xA;不知道大家有没有这样的问题？有什么建议吗？&lt;/p&gt;&#xA;</description>
+      <author>fantasticlw</author>
+      <pubDate>11 May 2022 07:54:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>Mac M1 屏幕轻微闪屏 - MacBook Pro</title>
+      <link>https://www.v2ex.com/t/852205</link>
+      <description>&lt;p&gt;Mac M1 13 寸，今天中午午休完点亮屏幕，切到 Android Studio 页面，突然发现，怎么屏幕底部有些闪？&lt;/p&gt;&#xA;&lt;p&gt;我开始离近仔细查看，确实在闪，但不明显，需要离的近仔细看，而且不能试亮色背景，比如白色、也不能是纯黑，就得是 idea 的背景，灰灰的，才能看到在闪。&lt;/p&gt;&#xA;&lt;p&gt;我网上开始查，有说关闭自动亮度，无果，有说设置这设置那，都不行，重启后无果。&lt;/p&gt;&#xA;&lt;p&gt;我心想这品控也太差了，然后我去面了个候选人。&lt;/p&gt;&#xA;&lt;p&gt;回来后发现，好像又不闪了。这是什么情况，而且可以肯定的是并不是强度工作后导致的闪屏，然后让电脑休息了一会就不闪了，因为我中午是午休完打开电脑就有闪屏的症状的。&lt;/p&gt;&#xA;&lt;p&gt;这是什么情况？搞不懂啊&lt;/p&gt;&#xA;</description>
+      <author>xingcy</author>
+      <pubDate>11 May 2022 07:54:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于 Linux 下面的 包管理器的 疑惑 - Linux</title>
       <link>https://www.v2ex.com/t/852203</link>
       <description>&lt;p&gt;linux 的包管理器很强大 下载软件十分的方便 但是下载的软件各个目录 好像是分散在 各个目录中的，比如下载了 redis&#xA;启动程序 好像在 /usr/bin 中&#xA;数据好像在 /usr/local/redis-3.2.0/data&#xA;为啥 要这种设计呢？&#xA;直接在一个固定的目录下面不行吗？&lt;/p&gt;&#xA;</description>
       <author>huyangq</author>
