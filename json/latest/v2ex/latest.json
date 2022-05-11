@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请问，这里的值有必要过滤吗？ - PHP",
+      "Link": "https://www.v2ex.com/t/852174",
+      "Description": "\u003cp\u003e这里分配的 \u003ccode\u003e$user\u003c/code\u003e 做模板才用到，还需要过滤吗？\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ereturn view('user/login', ['user' =\u0026gt; $user]);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e源码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-php\"\u003efunction view(string $path, array $data = []): string\n{\n    $file = VIEW_PATH . $path . '.view.php';\n\n    if (!file_exists($file)) {\n        throw new Exception(\"模板文件 {$file} 不存在\");\n    }\n\n    if ($data \u0026amp;\u0026amp; is_array($data)) {\n    \t// 请问，这里的值有必要过滤吗？\n        foreach ($data as $key =\u0026gt; $value) {\n            $data[$key] = escape($value);\n        }\n        extract($data, EXTR_SKIP);\n    }\n\n    ob_start();\n    include $file;\n    $contents = ob_get_contents() ?: '';\n    ob_end_flush();\n\n    return $contents;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e还有，别人都这样用，为啥我这样是返回空字符？😅\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eob_start();\n\ntry {\n\tinclude($file);\n} catch (\\Throwable $th) {\n\ttrigger_error($th);\n}\n\nreturn ob_get_clean();\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "wfdaj",
+      "PubDate": "2022-05-11T05:35:04Z"
+    },
+    {
       "Title": "问个技术问题， Java 中的队列中断的问题 - 问与答",
       "Link": "https://www.v2ex.com/t/852173",
       "Description": "如果保证队列中一直有数据，不会阻塞 take ，取出数据就不做任何处理，丢弃，然后取下一个。这个时候其他线程对他发起中断，那么这个消费线程会抛出中断异常吗？\u003cbr /\u003e\u003cbr /\u003e就是说 take 非阻塞状态为是否会抛出中断异常？",

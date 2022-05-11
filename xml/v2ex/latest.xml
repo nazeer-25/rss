@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请问，这里的值有必要过滤吗？ - PHP</title>
+      <link>https://www.v2ex.com/t/852174</link>
+      <description>&lt;p&gt;这里分配的 &lt;code&gt;$user&lt;/code&gt; 做模板才用到，还需要过滤吗？&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;return view(&#39;user/login&#39;, [&#39;user&#39; =&amp;gt; $user]);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;源码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;function view(string $path, array $data = []): string&#xA;{&#xA;    $file = VIEW_PATH . $path . &#39;.view.php&#39;;&#xA;&#xA;    if (!file_exists($file)) {&#xA;        throw new Exception(&#34;模板文件 {$file} 不存在&#34;);&#xA;    }&#xA;&#xA;    if ($data &amp;amp;&amp;amp; is_array($data)) {&#xA;    &#x9;// 请问，这里的值有必要过滤吗？&#xA;        foreach ($data as $key =&amp;gt; $value) {&#xA;            $data[$key] = escape($value);&#xA;        }&#xA;        extract($data, EXTR_SKIP);&#xA;    }&#xA;&#xA;    ob_start();&#xA;    include $file;&#xA;    $contents = ob_get_contents() ?: &#39;&#39;;&#xA;    ob_end_flush();&#xA;&#xA;    return $contents;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;还有，别人都这样用，为啥我这样是返回空字符？😅&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ob_start();&#xA;&#xA;try {&#xA;&#x9;include($file);&#xA;} catch (\Throwable $th) {&#xA;&#x9;trigger_error($th);&#xA;}&#xA;&#xA;return ob_get_clean();&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>wfdaj</author>
+      <pubDate>11 May 2022 05:35:04 +0000</pubDate>
+    </item>
+    <item>
       <title>问个技术问题， Java 中的队列中断的问题 - 问与答</title>
       <link>https://www.v2ex.com/t/852173</link>
       <description>如果保证队列中一直有数据，不会阻塞 take ，取出数据就不做任何处理，丢弃，然后取下一个。这个时候其他线程对他发起中断，那么这个消费线程会抛出中断异常吗？&lt;br /&gt;&lt;br /&gt;就是说 take 非阻塞状态为是否会抛出中断异常？</description>
