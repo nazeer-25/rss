@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有没有人看 Google I/O '22 - Google",
+      "Link": "https://www.v2ex.com/t/852304",
+      "Description": "刚刚看完谷歌发布会，Google pixel 6a 摄像头比 6 平一些，预告的 pixel7 更是直接平了没有凸出来！！！谷歌眼镜项目又启动了，不过不一样了，变为翻译眼镜，可以看到并翻译语言。其他的没啥亮点了我觉得",
+      "Author": "xuxinglin8888",
+      "PubDate": "2022-05-11T19:28:40Z"
+    },
+    {
       "Title": "跨境电商独角兽 SHEIN 希音国内国外持续招人！新加坡研发中心福利超级加倍！包签证润新加坡！ - 酷工作",
       "Link": "https://www.v2ex.com/t/852303",
       "Description": "\u003ch1\u003e跨境电商独角兽 SHEIN 希音持续招人！新加坡研发中心福利超级加倍！\u003c/h1\u003e\n\u003ch2\u003e招聘说明（国内）\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\n1 、可以把简历私我邮箱，\u003ca href=\"mailto:yiyelin@shein.com\"\u003eyiyelin@shein.com\u003c/a\u003e\u003cul\u003e\n\u003cli\u003e（姓名+岗位+期望 base 地区）\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n2 、内推直达： \u003ca href=\"https://taou.cn/2ZBcz\" rel=\"nofollow\"\u003ehttps://taou.cn/2ZBcz\u003c/a\u003e\u003cul\u003e\n\u003cli\u003e（  [电脑]  点击链接筛选职能，再搜索职位直接投递简历，最多可以投递三个岗位）\u003c/li\u003e\n\u003cli\u003e（ [手机] 用户请复制链接到微信打开）\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e3 、大部分岗位要求学历本科，但是如果你比较资深+经验丰富，可忽略学历\u003c/li\u003e\n\u003cli\u003e4 、招聘进度可以关注 SHEIN 招聘公众号自查，也可以联系我进行查询\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e新加坡研发中心（国外）\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003eSHEIN 新加坡热招中！国内可投递，我们提供新加坡 EP 工作签证，10-7-5 WLB, 一周 2 天居家办公，18 天年假加 11 天公共假期，团队开放平等扁平化，团建生日小礼品，casual dress code ，小哥哥小姐姐多多。薪水对标国内科技大厂且低税~ 不要担心英语水平的问题！\u003c/li\u003e\n\u003cli\u003e\n内推直达： \u003ca href=\"https://taou.cn/2ZBcz\" rel=\"nofollow\"\u003ehttps://taou.cn/2ZBcz\u003c/a\u003e\u003cul\u003e\n\u003cli\u003e（  [电脑]  点击链接选择信息技术类，然后筛选工作地区为新加坡进行投递）\u003c/li\u003e\n\u003cli\u003e（ [手机] 用户请复制链接到微信打开）\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e联系方式，欢迎直接联系我咨询岗位详情\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e邮箱联系： \u003ca href=\"mailto:yiyelin@shein.com\"\u003eyiyelin@shein.com\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eVX：18877532527\u003c/li\u003e\n\u003c/ul\u003e\n",
@@ -16,13 +23,6 @@
       "Description": "\u003cpre\u003e\u003ccode\u003eimport {Component, HostListener, OnInit} from '@angular/core';\nimport {MenuItem, MessageService} from \"primeng/api\";\nimport {HttpClient} from \"@angular/common/http\";\nimport {ActivatedRoute, ParamMap, Router} from \"@angular/router\";\nimport {CategoryForm} from \"./category-form\";\n\n@Component({\n  selector: 'app-articles-category-add-edit',\n  templateUrl: './category-add-edit.component.html',\n  providers: [MessageService]\n})\nexport class CategoryAddEditComponent implements OnInit {\n  apiUrl = \"/api/Articles/Categories\";\n\n  loading = true;\n  model = new CategoryForm(\"\", \"\");\n  home: MenuItem = {icon: 'pi pi-home', routerLink: '/admin/dashboard'};\n  paths = [\n    {label: '管理文章', routerLink: '/admin/articles'},\n    {label: '新建文章分类'}\n  ];\n  categoryId?: string;\n  invalidNameReason = \"\";\n  pendingChanges = false;\n  saving = false;\n\n  constructor(private http: HttpClient,\n              private messageService: MessageService,\n              private route: ActivatedRoute, private router: Router) {\n  }\n\n  ngOnInit() {\n    this.route.paramMap.subscribe((params: ParamMap) =\u0026gt; {\n      if (params.get('id') != \"create\") {\n        this.categoryId = params.get('id');\n        this.paths[1].label = \"编辑文章分类 \" + this.categoryId;\n        this.http.get(this.apiUrl + this.categoryId).subscribe(data =\u0026gt; {\n          this.model = data as CategoryForm;\n          this.loading = false;\n        });\n      } else this.loading = false;\n    })\n  }\n\n  @HostListener('window:beforeunload')\n  canDeactivate() {\n    return !this.pendingChanges;\n  }\n\n  save() {\n    if (this.saving) return;\n\n    this.model.categoryName = this.model.categoryName.trim();\n    if (this.model.categoryName.length == 0) {\n      this.invalidNameReason = \"分类名称不能为空。\";\n      return;\n    }\n    this.model.categoryNameEn = this.model.categoryNameEn.trim();\n    this.saving = true;\n\n    const url = this.categoryId ? `${this.apiUrl}/${this.categoryId}` : this.apiUrl;\n\n    this.http[this.categoryId?\"put\":\"post\"](url, this.model).subscribe(\n      () =\u0026gt; {\n        this.pendingChanges = false;\n        this.router.navigate(['../../'], {relativeTo: this.route});\n      },\n      () =\u0026gt; {\n        this.messageService.add({severity: 'error', summary: '错误', detail: '保存失败。'});\n        this.saving = false;\n      }\n    );\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "dfgxcvbcv",
       "PubDate": "2022-05-11T19:13:58Z"
-    },
-    {
-      "Title": "麻烦大家给点意见，这样的女朋友要不要结婚 - 问与答",
-      "Link": "https://www.v2ex.com/t/852301",
-      "Description": "女朋友是 211 研究生，家里爸妈工作都是体系内，刚毕业一年体质内，年薪大概 15w-20w 。我呢，渣二本，家里父母条件不好都打工的。年薪大概 50w 。要结婚买房，她家会出一半首付，我家出一半首付。但是问题就是女朋友脾气不好，有时是不讲道理的那种（其实我发现不是不讲道理，而是不懂道理，比较自我，也不接受别人批评，连说一句都不能说。另外就是工作中也处理不好和同事关系，总是觉得高人一等的感觉，口头最多的一句话就是，你是谁啊，凭什么指挥我和说我类似的，导致公司里经常和别人冲突）。还有就是由于我爸妈出了很少首付，他爸妈给他的全部首付，她特别不愿意待见我爸妈，这点是我不能忍的，甚至我说过年我父母会来过年呆个几天，她都不同意，而我却能打印她父母常住我们之后的家。还有就是我感觉我们价值观完全不同，所以也经常吵架，我特别想分手，但是她就是不分，最近炒的特别凶，然后她竟然收敛了点，表现的比以前好很多，我本来准备强行分手，搬走的，但是看她这样又不是很忍心，而且怕她之后会闹。但是特别担心之后婚姻不和谐，经常吵架，最重要的，其实我们都不爱对方，她就是想买房，而我一直下不了决心，犹豫不决的，所以麻烦大家能给点意见",
-      "Author": "asiaon123",
-      "PubDate": "2022-05-11T17:54:31Z"
     },
     {
       "Title": "2022 年的 Google 开发者大会直播讨论汇总贴。直播已经开始 - Android",
@@ -268,6 +268,13 @@
       "Description": "\u003cp\u003e几年前买了一台雷蛇手机 2 代（记得是雷蛇特价活动时买的，花费 3~4K ），去年电池就不行了。今年刚过完冬就这台机的充电功能基本完蛋，表现为开机状态下无法充电，换了电池也不行。\u003c/p\u003e\n\u003cp\u003e在关机状态下充电，正常情况下它会先显示雷蛇 Logo ，然后显示电池电量，接着黑屏继续充。\u003c/p\u003e\n\u003cp\u003e自从故障后，关机充电时它会不断地循环显示雷蛇 Logo ，就是无法进入显示电量的界面。神奇的是，这种情况下它居然能够缓慢地充电，10 个小时可以充到 90%以上，12 小时接近充满。\u003c/p\u003e\n\u003cp\u003e故障后的关机充电效率堪比 2010 年代的万能充。\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e如果现在换手机，预算 4K 以下，什么选择比较好？\u003c/p\u003e\n\u003cp\u003e实在舍不得 2K 屏+120Hz 的刷新率，这台机的 LCD 屏幕就算放到现在也一点都不差。要是它没坏，5 年内我都不想换。\u003c/p\u003e\n\u003cp\u003e新手机起码要能继续维持 2K 屏+120Hz 刷新率，如果不是异形屏、继续是四角都是纯直角的那就更好（但我搜了下手机市场，这种屏幕的手机越来越少）。\u003c/p\u003e\n\u003cp\u003e谢绝打孔、刘海。\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e想过重新买一台二手雷蛇，但怕翻车。\u003c/p\u003e\n",
       "Author": "cnbatch",
       "PubDate": "2022-05-11T11:31:10Z"
+    },
+    {
+      "Title": "麻烦大家给点意见，这样的女朋友要不要结婚 - 问与答",
+      "Link": "https://www.v2ex.com/t/852301",
+      "Description": "女朋友是 211 研究生，家里爸妈工作都是体系内，刚毕业一年体质内，年薪大概 15w-20w 。我呢，渣二本，家里父母条件不好都打工的。年薪大概 50w 。要结婚买房，她家会出一半首付，我家出一半首付。但是问题就是女朋友脾气不好，有时是不讲道理的那种（其实我发现不是不讲道理，而是不懂道理，比较自我，也不接受别人批评，连说一句都不能说。另外就是工作中也处理不好和同事关系，总是觉得高人一等的感觉，口头最多的一句话就是，你是谁啊，凭什么指挥我和说我类似的，导致公司里经常和别人冲突）。还有就是由于我爸妈出了很少首付，他爸妈给他的全部首付，她特别不愿意待见我爸妈，这点是我不能忍的，甚至我说过年我父母会来过年呆个几天，她都不同意，而我却能打印她父母常住我们之后的家。还有就是我感觉我们价值观完全不同，所以也经常吵架，我特别想分手，但是她就是不分，最近炒的特别凶，然后她竟然收敛了点，表现的比以前好很多，我本来准备强行分手，搬走的，但是看她这样又不是很忍心，而且怕她之后会闹。但是特别担心之后婚姻不和谐，经常吵架，最重要的，其实我们都不爱对方，她就是想买房，而我一直下不了决心，犹豫不决的，所以麻烦大家能给点意见",
+      "Author": "asiaon123",
+      "PubDate": "2022-05-11T17:54:31Z"
     },
     {
       "Title": "索尼发布旗舰智能手机 Xperia 1 IV 等 - SONY",
