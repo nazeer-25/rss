@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>收 Internet 全表后的次优路径问题 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/852319</link>
+      <description>紧接之前的帖子 &lt;a target=&#34;_blank&#34; href=&#34;/t/781573&#34; rel=&#34;nofollow noopener&#34;&gt;/t/781573&lt;/a&gt; （ bgp peering 可以收全球 internet 路由表的资源），目的就是为了做精细的目的地访问分流。&lt;br /&gt;&lt;br /&gt;在 Vultr 收了全表，用 bird 做的 bgp daemon ，做了三网过滤，策略是按照 ip 地址的始发 ASN 做动态过滤：&lt;br /&gt;&lt;br /&gt;filter bgp_in_filter {&lt;br /&gt;        if source != RTS_BGP then reject;  #Deny Non-BGP Route&lt;br /&gt;&lt;br /&gt;        # ChinaNet #其他三网的过滤也是一样&lt;br /&gt;        if bgp_path.last ~ ct_asn then {&lt;br /&gt;                        bgp_community = -empty-;&lt;br /&gt;                        bgp_community.add((1,1));&lt;br /&gt;                        accept;&lt;br /&gt;        }&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;filter bgp_out_filter {&lt;br /&gt;        if source != RTS_BGP then reject;  #Deny Non-BGP Route&lt;br /&gt;&lt;br /&gt;        if bgp_path.last ~ ct_asn || bgp_path.last ~ cu_asn || bgp_path.last ~ cm_asn  || bgp_path.last ~ noisp_asn  || bgp_path.last ~ zero_asn then {&lt;br /&gt;                        accept;&lt;br /&gt;        }&lt;br /&gt;        reject;&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;ASN 信息来源于 IPIP &lt;a target=&#34;_blank&#34; href=&#34;https://whois.ipip.net/countries/CN&#34; rel=&#34;nofollow noopener&#34;&gt;https://whois.ipip.net/countries/CN&lt;/a&gt; ，定期手动更新 ASN 。&lt;br /&gt;&lt;br /&gt;经过半年多的运行，对于完全始发于特定 ASN 的 IP 地址，以上策略完全工作正常。&lt;br /&gt;&lt;br /&gt;目前的次优路径问题是，对于完全始发 ASN 的 IP 地址，如果被宣告于多个 ASN ，则无法实现精准 ASN 过滤。&lt;br /&gt;比如：114.114.114.114 这个 DNS 的地址，从地址库查询属于 AS174： &lt;a target=&#34;_blank&#34; href=&#34;https://tools.ipip.net/as.php&#34; rel=&#34;nofollow noopener&#34;&gt;https://tools.ipip.net/as.php&lt;/a&gt;&lt;br /&gt;但是在国内三大运营商 AS 均可查询到地址通告：&lt;br /&gt;&lt;br /&gt;AS174&#x9;已标注&#x9;114.114.112.0/21&#x9;COGENT-174 - Cogent Communications, US&lt;br /&gt;AS56046&#x9;已标注&#x9;114.114.112.0/22&#x9;CMNET-Jiangsu-AP - China Mobile Communications Corporation, CN&lt;br /&gt;AS4134&#x9;已标注&#x9;114.114.112.0/21&#x9;CHINANET-BACKBONE - No.31,Jin-rong Street, CN&lt;br /&gt;AS4837&#x9;已标注&#x9;114.114.112.0/21&#x9;CHINA169-Backbone - CHINA UNICOM China169 Backbone, CN&lt;br /&gt;&lt;br /&gt;我的问题是，是否有通过 BGP AS-PATH 过滤的方法解决这个问题？&lt;br /&gt;&lt;br /&gt;或者是不收全表了，直接用 https://asn.bgp.space/ 静态库写入 bird ，再发送给边界路由器。&lt;br /&gt;&lt;br /&gt;或者有好的解决方案？不胜赐教~~</description>
+      <author>nbsn</author>
+      <pubDate>12 May 2022 01:15:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>[上海/北京/成都] 天翼云存储管控招聘 - 酷工作</title>
+      <link>https://www.v2ex.com/t/852318</link>
+      <description>&lt;p&gt;职位诱惑：云计算、分布式存储、发展前景广阔&#xA;职位描述：&#xA;工作职责：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;负责分布式存储管理系统开发工作；&lt;/li&gt;&#xA;&lt;li&gt;负责分布式存储管理系统核心模块设计、研发工作；&lt;/li&gt;&#xA;&lt;li&gt;参与持续优化分布式存储管理系统性能、提高产品的稳定性；&lt;/li&gt;&#xA;&lt;li&gt;参与开发线上系统的运维工具与自动化脚本。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;任职要求:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;本科及以上学历，计算机类专业优先；&lt;/li&gt;&#xA;&lt;li&gt;三年及以上工作经验，其中至少两年存储相关开发经验；&lt;/li&gt;&#xA;&lt;li&gt;熟悉存储的内在工作原理，有丰富的线上部署、日常运维、性能分析优化、故障处理能力；&lt;/li&gt;&#xA;&lt;li&gt;熟悉 Python ，同时有其他语言（ C/C++、JAVA 、go ）开发经验更佳，熟悉 Linux/Unix 操作系统，了解内核文件系统和 IO 机制；&lt;/li&gt;&#xA;&lt;li&gt;熟悉 MySQL 、PostgreSQL 、MongoDB 、Redis 等相关开源数据库源码，熟悉 Ceph/HDFS/Gluster 等分布式系统优先； 熟练使用 zabbix 、prometheus 等监控告警工具。&lt;/li&gt;&#xA;&lt;li&gt;诚实守信、作风踏实严谨、责任心强，具备良好团队协作能力精神，学习能力强，善于解决复杂问题；&lt;/li&gt;&#xA;&lt;li&gt;35 周岁（含）以下，身心健康；&lt;/li&gt;&#xA;&lt;li&gt;过往工作业绩优秀，或有知名互联网 /IT 、云服务头部企业工作经验者，年龄、工作年限可适当放宽。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;简历投递（ base64 解码） emhhb2Jpbmd4aUBsaXZlLmNvbQ==&lt;/p&gt;&#xA;</description>
+      <author>z1214800730</author>
+      <pubDate>12 May 2022 01:13:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>学了 3 天 Typescript 写了一个微信读书的 Obsidian 插件 - 分享创造</title>
+      <link>https://www.v2ex.com/t/852317</link>
+      <description>&lt;p&gt;本人是一个刚做了后端程序员，上海疫情被封在家挺无聊的，接触 Typescript 还是挺偶然的，平时笔记软件 Obsidian ，在逛 github 的时候看到 Obsidian 有 kindle 相关的插件，然鹅我平时都用微信读书比较多，所以就在思考为啥不能自己做一个微信读书插件，于是就&lt;a href=&#34;https://ts.xcatliu.com/basics/type-of-function.html&#34; rel=&#34;nofollow&#34;&gt;自学了 Typescript&lt;/a&gt;写了一个插件,插件名字叫做：&#xA;&lt;a href=&#34;https://github.com/zhaohongxuan/obsidian-weread-plugin&#34; rel=&#34;nofollow&#34;&gt;obsidian-weread-plugin&lt;/a&gt;,欢迎 star~&lt;/p&gt;&#xA;&lt;p&gt;在用 Obsidian 的同学可以先试试，目前插件还在官方审核，可以先从 &lt;a href=&#34;https://github.com/zhaohongxuan/obsidian-weread-plugin/releases&#34; rel=&#34;nofollow&#34;&gt;release 页面&lt;/a&gt; 上 download 自己安装，有问题欢迎提 issue.&lt;/p&gt;&#xA;&lt;p&gt;使用效果图：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://cdn.jsdelivr.net/gh/zhaohongxuan/picgo@master/20220512090456.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;刚接触 Typescript 代码写的比较糙不太优雅，希望前端大佬可以指点一下。顺便夸一下 Typescript ，对从静态语言转型的人来说太友好了。&lt;/p&gt;&#xA;</description>
+      <author>ZhaoHongXuan</author>
+      <pubDate>12 May 2022 01:11:35 +0000</pubDate>
+    </item>
+    <item>
+      <title>我是新时代四败青年 - 深圳</title>
+      <link>https://www.v2ex.com/t/852316</link>
+      <description>&lt;p&gt;我是新时代四败青年：&#xA;人生失败、事业失败、婚姻失败、人际关系失败&lt;/p&gt;&#xA;&lt;p&gt;我骄傲了吗？&lt;/p&gt;&#xA;</description>
+      <author>MrCsharp</author>
+      <pubDate>12 May 2022 01:10:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>Flutter 3 发布，支持 iOS, Android, web, Windows, macOS, Linux - 分享发现</title>
+      <link>https://www.v2ex.com/t/852315</link>
+      <description>&lt;p&gt;In previous releases, we supplemented &lt;strong&gt;iOS&lt;/strong&gt; and &lt;strong&gt;Android&lt;/strong&gt; with &lt;strong&gt;web&lt;/strong&gt; and &lt;strong&gt;Windows&lt;/strong&gt; support, and now Flutter 3 adds stable support for &lt;strong&gt;macOS&lt;/strong&gt; and &lt;strong&gt;Linux&lt;/strong&gt; apps.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://medium.com/flutter/introducing-flutter-3-5eb69151622f&#34; rel=&#34;nofollow&#34;&gt;https://medium.com/flutter/introducing-flutter-3-5eb69151622f&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;这样看来，在桌面端有望取代 Electron(的一部分简单软件) ？&lt;/p&gt;&#xA;</description>
+      <author>cmdOptionKana</author>
+      <pubDate>12 May 2022 00:53:31 +0000</pubDate>
+    </item>
+    <item>
       <title>大家有没有比较好的经验，管理两个版本的 Python , 2 &amp; 3? - Python</title>
       <link>https://www.v2ex.com/t/852314</link>
       <description>&lt;p&gt;发现很多程序的运行环境，都需要 python 支持，而且，版本还不一样。python2 和 python3 都需要。&lt;/p&gt;&#xA;&lt;p&gt;楼主一直整得不太好（因为不是经常使用），经常一个程序或者环境跑起来，缺 python 。所以特意来请教一下，大家有没有比较好的 best practice ，管理 python 的版本，2 &amp;amp; 3 ，以及对应的 pip 。&lt;/p&gt;&#xA;&lt;p&gt;macOS 和 windows 都分别怎么设置，比较好用&amp;amp;通用？&lt;/p&gt;&#xA;&lt;p&gt;谢谢！&lt;/p&gt;&#xA;</description>
