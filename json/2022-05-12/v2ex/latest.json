@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "tornado 框架大佬求入 - Python",
+      "Link": "https://www.v2ex.com/t/852470",
+      "Description": "\u003cp\u003e需求是用 tornado 实现一个 websocket 接口，来实现 socket 消息的透传。\n由于 sock.recv 是阻塞的，协程实现的话，总是会卡在第二次循环并且超时。\n大致的代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\nimport socket\n\nimport tornado.websocket\nfrom tornado import gen\n\n\nclass WebSocketHandler(tornado.websocket.WebSocketHandler):\n    sock = socket\n\n    @gen.coroutine\n    def _read_from_sock(self, sock: socket, buffer_size: int):\n        while True:\n            try:\n                chunk = sock.recv(buffer_size)\n                if not chunk:\n                    return\n                self.write_message(chunk)\n            except socket.timeout:\n                raise tornado.websocket.WebSocketError('timeout!')\n\n    def open(self, container_id):\n        self._read_from_sock(self.sock, 4096)\n\n    def on_message(self, message):\n        self.sock.sendall(message.encode(encoding='utf-8'))\n\n    def on_close(self):\n        pass\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我想在主线程中实现 socket 的监听并返回 write_message ，但是这样的协程似乎不可以，子线程试过也是会阻塞。不知道问题出在哪里？求大佬帮帮忙。谢谢了！\u003c/p\u003e\n",
+      "Author": "GYGYG",
+      "PubDate": "2022-05-12T10:07:08Z"
+    },
+    {
+      "Title": "共同探讨： Cloudflare 是怎么识别出来我是服务器环境的？ - Python",
+      "Link": "https://www.v2ex.com/t/852469",
+      "Description": "\u003cp\u003e说下我这已经验证的问题：本地运行采集代码无任何问题(MacOS)，但放到服务器上(CentOS)上会出现 403 状态码,并弹出 Cloudflare 验证码页面。本地 IP 是用代理挂的服务器 IP ，无任何问题，但直接在服务器上跑不通。\u003c/p\u003e\n\u003cp\u003eurllib 包也皆为同一版本，header 头用的 ua 也是同一个。\u003c/p\u003e\n\u003cp\u003e服务器请求页面最下面有这样一行提示：Another way to prevent getting this page in the future is to use Privacy Pass. You may need to download version 2.0 now from the Chrome Web Store.说明是识别了 UA 的。除了 UA ，Cloudflare 还可能在哪些方面识别服务器呢？\u003c/p\u003e\n",
+      "Author": "tg11",
+      "PubDate": "2022-05-12T10:05:39Z"
+    },
+    {
+      "Title": "如何将云端服务器上的数据，同步到各自的终端服务器上？ - MySQL",
+      "Link": "https://www.v2ex.com/t/852468",
+      "Description": "\u003cp\u003e后台在云端服务器上面，每个终端对应一个数据库，表结构都相同。\u003c/p\u003e\n\u003cp\u003e所以当我修改好后台数据，在点击同步数据，就把刚才修改的数据同步到对应的终端服务器上面。\n现在的方案：\u003c/p\u003e\n\u003cp\u003e1 、云端修改增加、删除、修改数据，生成 sql 。\u003c/p\u003e\n\u003cp\u003e2 、将生成的 SQL 保存。\u003c/p\u003e\n\u003cp\u003e3 、点击同步数据。\u003c/p\u003e\n\u003cp\u003e4 、后台会生成一个实时或定时任务。\u003c/p\u003e\n\u003cp\u003e5 、在终端服务器在线时，检查任务，发送 SQL 进行同步。\u003c/p\u003e\n\u003cp\u003e现在的问题就在第一步生成 SQL 这里，所以请问怎么能获取到提交成功的 SQL ？\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://asp.net\" rel=\"nofollow\"\u003easp.net\u003c/a\u003e core + mysql + EF Core + Dapper + HangFire + SignalR\u003c/p\u003e\n\u003cp\u003e不知道这是不是好的方案\u003c/p\u003e\n",
+      "Author": "zhuyw2006",
+      "PubDate": "2022-05-12T10:05:27Z"
+    },
+    {
+      "Title": "如何从省市区县地名里面提取出最关键的名称进行地名匹配？ - 程序员",
+      "Link": "https://www.v2ex.com/t/852467",
+      "Description": "\u003cp\u003e比如:高陵县和高陵区，其实是一个地区。 可是由于历史原因，我们的对接的客户，有些是高陵县，有些是高陵区\n这样就会匹配失败。\u003c/p\u003e\n\u003cp\u003e有没有自然语言处理的方法能够提取出“高陵”呢？\u003c/p\u003e\n\u003cp\u003e另外：不要进行字符串截取，不可行，尤其是少数民族地区。\u003c/p\u003e\n",
+      "Author": "xiyangzh",
+      "PubDate": "2022-05-12T10:05:19Z"
+    },
+    {
       "Title": "Amazon Prime Video 上租或者购买的电影可以下载吗 - Amazon",
       "Link": "https://www.v2ex.com/t/852463",
       "Description": "\u003cp\u003e有没有用过的老哥说一下的，想收藏之前的一些冷门电影，比如这个\u003cbr/\u003e\n\u003ca href=\"https://www.amazon.co.uk/gp/video/detail/0NHETI8MZO1CFUTAS32B65EXK3/ref=atv_dl_rdr?tag=justgbdnkw-21\" rel=\"nofollow\"\u003ehttps://www.amazon.co.uk/gp/video/detail/0NHETI8MZO1CFUTAS32B65EXK3/ref=atv_dl_rdr?tag=justgbdnkw-21\u003c/a\u003e\u003c/p\u003e\n",
