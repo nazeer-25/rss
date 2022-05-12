@@ -4,6 +4,97 @@
   "Description": "",
   "Items": [
     {
+      "Title": "局域网 Samba 速度很慢，只有 2M - 程序员",
+      "Link": "https://www.v2ex.com/t/852345",
+      "Description": "\u003cp\u003e如题，环境如下：\u003c/p\u003e\n\u003cp\u003e路由器: 小米 mini Pandora 固件\u003c/p\u003e\n\u003cp\u003eSamba 服务器: N1 盒子 Armbian Focal + Docker 架设 Samba (镜像是 dperson/samba)，NAT 网络模式，文件系统是 外挂 256G 闪迪 SD 卡 Ext4 文件系统。\u003c/p\u003e\n\u003cp\u003eWin10/Mac 拷贝文件都很慢，而且速度 在 200k - 2MB 之间来回跳。\u003c/p\u003e\n\u003cp\u003e稳定的话速度可以达到 2.5mb/s...\u003c/p\u003e\n\u003cp\u003e这个速度正常吗...\u003c/p\u003e\n",
+      "Author": "monetto",
+      "PubDate": "2022-05-12T02:37:55Z"
+    },
+    {
+      "Title": "关于 RUST 生命周期的疑问 - Rust",
+      "Link": "https://www.v2ex.com/t/852344",
+      "Description": "\u003cp\u003e这是代码\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efn main() {\n    let n = String::from(\"rust\");\n    let myname;\n    {\n        let obj = AA{\n            name: \u0026amp;n\n        };\n        myname = obj.get_name();\n    }\n    println!(\"{}\", myname)\n\n}\n\nstruct AA\u0026lt;'a\u0026gt;{\n    name: \u0026amp;'a str\n}\n\nimpl \u0026lt;'a\u0026gt; AA\u0026lt;'a\u0026gt;{\n    fn get_name(\u0026amp;self) -\u0026gt; \u0026amp; str{\n        return \u0026amp;self.name;\n    }\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e按照文档来说，下面的报错能理解，因为 myname 的生命周期应该和 obj 是一样的，出了作用范围就被编译器检查出来了\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eerror[E0597]: `obj` does not live long enough\n  --\u0026gt; src/main.rs:14:18\n   |\n14 |         myname = obj.get_name();\n   |                  ^^^^^^^^^^^^^^ borrowed value does not live long enough\n15 |     }\n   |     - `obj` dropped here while still borrowed\n16 |     println!(\"{}\", myname)\n   |                    ------ borrow later used here\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是，如果我把方法返回值写明返回的生命周期，如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eimpl \u0026lt;'a\u0026gt; AA\u0026lt;'a\u0026gt;{\n    fn get_name(\u0026amp;self) -\u0026gt; \u0026amp;'a str{\n        return \u0026amp;self.name;\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这样能正常运行\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ewarning: `hello_cargo` (bin \"hello_cargo\") generated 4 warnings\n    Finished dev [unoptimized + debuginfo] target(s) in 0.45s\n     Running `target/debug/hello_cargo`\nrust\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e疑问：为什么会产生这样的区别，按照生命周期省略规则的第三条规则来说默认的返回生命周期是\u0026amp;self 的，也就是 obj 的，这个生命周期和'a 是不一样的吗\u003c/p\u003e\n",
+      "Author": "liangzimo",
+      "PubDate": "2022-05-12T02:36:53Z"
+    },
+    {
+      "Title": "不知道我还能不能顶的住。 - 杭州",
+      "Link": "https://www.v2ex.com/t/852343",
+      "Description": "\u003cp\u003e如题，资金链断裂 ，杭州 6 点有哪些兼职，搬砖都行大家有没有兼职群 ，给我推一下。谢谢\u003c/p\u003e\n",
+      "Author": "blurh11E27",
+      "PubDate": "2022-05-12T02:33:16Z"
+    },
+    {
+      "Title": "企业邮箱对接微信服务通知是不是有 BUG？ - 全球工单系统",
+      "Link": "https://www.v2ex.com/t/852342",
+      "Description": "前段时间注册过腾讯企业邮箱，用了一段时间不好用就注销了\u003cbr /\u003e3 月 19 日突然微信服务通知推送邀请通知\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://imgur.com/0iDaKQg\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/0iDaKQg\u003c/a\u003e\u003cbr /\u003e在参照了网上的教程完全注销企业邮箱并在小卡片里面点击投诉之后消停了\u003cbr /\u003e今天上微信一看居然又来了\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://imgur.com/KADpbUY\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/KADpbUY\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e微信不是号称小而美么？ 这种服务通知是怎么推送的  我都完全注销企业邮箱并点击投诉了为什么还会收到？",
+      "Author": "lanceb1uy",
+      "PubDate": "2022-05-12T02:32:11Z"
+    },
+    {
+      "Title": "如何让电脑识别不同的键盘？ - 问与答",
+      "Link": "https://www.v2ex.com/t/852340",
+      "Description": "我想在电脑上插两个键盘，一个正常使用，另一个通过 AutoHotKey 作为宏键盘，但是 AutoHotKey 无法区分来自不同键盘的输入，如何让电脑识别不同的键盘？",
+      "Author": "oy9r",
+      "PubDate": "2022-05-12T02:31:44Z"
+    },
+    {
+      "Title": "羊毛薅起来，午饭有了 - 分享发现",
+      "Link": "https://www.v2ex.com/t/852339",
+      "Description": "复制本段内容『 CNCC_NEWB91E4078A38766F7 』打开中国联通 APP ，抽奖得 16 元现金红包、100 元无门槛美食红包、1800 元购机礼包等\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e不愿复制，也可直接打开联通 app 查看",
+      "Author": "jtiantian666",
+      "PubDate": "2022-05-12T02:25:31Z"
+    },
+    {
+      "Title": "上海张江高科技园附近租房 - 上海",
+      "Link": "https://www.v2ex.com/t/852338",
+      "Description": "\u003cp\u003e疫情结束后将会返回上海工作，想请问一下，在这边工作的朋友，都在附近哪里租房？有渠道吗？\n感谢🙏\u003c/p\u003e\n",
+      "Author": "fzy0728",
+      "PubDate": "2022-05-12T02:24:37Z"
+    },
+    {
+      "Title": "CharaChorder“和弦键盘”，靠同时输入来智能纠错，从而提升输入效率 - 分享发现",
+      "Link": "https://www.v2ex.com/t/852337",
+      "Description": "官网链接： \u003ca target=\"_blank\" href=\"https://www.charachorder.com/product-page/charachorder-lite\" rel=\"nofollow noopener\"\u003ehttps://www.charachorder.com/product-page/charachorder-lite\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e当你需要输入单词时，可以同时输入所有不同字母从而实现快速录入。\u003cbr /\u003e比如输入“word”，你就可以 w ，o ，r ，d 键一起录入。\u003cbr /\u003e\u003cbr /\u003e这个思路类似于手机上的“滑动录入”，找到你输入的组合键中最可能录入的单词（或字母组合顺序）。\u003cbr /\u003e\u003cbr /\u003e这款键盘可以说是另辟蹊径，将原本应该是软件实现的内容内置到了键盘的 rom 当中。比较有创意。",
+      "Author": "kop1989smurf",
+      "PubDate": "2022-05-12T02:23:54Z"
+    },
+    {
+      "Title": "老哥们 都用啥大流量卡~~~ - 问与答",
+      "Link": "https://www.v2ex.com/t/852336",
+      "Description": "在贴吧看到好多铁友推荐河南星卡 \u003cbr /\u003e\u003cbr /\u003e老哥们都用啥~~~",
+      "Author": "justin2018",
+      "PubDate": "2022-05-12T02:23:33Z"
+    },
+    {
+      "Title": "使用 surge 的奇葩问题。 - Surge",
+      "Link": "https://www.v2ex.com/t/852335",
+      "Description": "\u003cp\u003e最近试用了一下 surge ，发现了一些我在使用中的问题，各位如果有遇到能解决的麻烦留个言，给后边人填添坑，这些问题资料比较少\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e自定义域名 dns 解析。\u003c/li\u003e\n\u003cli\u003e配合公司 vpn 使用，特定域名忽略代理。（类似 clash 的 proxyIgnoreList ）\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e最近疫情原因很多人都居家办公，这些问题应该比较容易遇到。\u003c/p\u003e\n",
+      "Author": "Richared",
+      "PubDate": "2022-05-12T02:11:40Z"
+    },
+    {
+      "Title": "VMware 虚拟机运行中，实体主机被关机了，这种情况下虚拟机会被挂起，请教一下这种操作安全吗？虚拟主机会不会有挂掉，丢文件，或则再也起不来的可能性？ - 问与答",
+      "Link": "https://www.v2ex.com/t/852334",
+      "Description": "",
+      "Author": "1dian01",
+      "PubDate": "2022-05-12T02:10:55Z"
+    },
+    {
+      "Title": "手机自带桌面为什么连更换主题、字体这些沙雕功能都能提供支持，却给桌面上的 App 图标改个名字、加个备注都不舍的给？？ - 问与答",
+      "Link": "https://www.v2ex.com/t/852333",
+      "Description": "\u003cp\u003ert. 有些沙雕 app 名字完全看不出是干什么卵用的，桌面上显示的图标就算不能改名字，至少也给加个备注也行啊（仅桌面上的 app 图标，非快捷方式，非第三方桌面）\u003c/p\u003e\n",
+      "Author": "xiangyuecn",
+      "PubDate": "2022-05-12T02:10:38Z"
+    },
+    {
+      "Title": "没有 NAT， IPV6 的是否会带来更多的安全问题？ - 问与答",
+      "Link": "https://www.v2ex.com/t/852332",
+      "Description": "IPV4 的时代，大部分家庭电脑都是在 NAT 下得到了保护，如果用了 IPV6 是不是更加容易出问题？所有的设备都可以被直连对吧？如果防火墙没关闭好，会有很多问题吧？\u003cbr /\u003e\u003cbr /\u003e我的手机 linux deploy 安装了 ssh ，后面因为有 IPV6 ，所以我就只用公钥登陆了，因为中间者得到这个 IPV6 地址吧？\u003cbr /\u003e\u003cbr /\u003e我知道的就是 NAT 和中间人，不知道 IPV6 是怎么解决的。以后普及后，是不是以后可以搞宽带运营商了？去获取大家的 IPV6 ，定向扫描😈？\u003cbr /\u003e\u003cbr /\u003e网络小白的疑惑，说的不对，见笑了😂。",
+      "Author": "byte10",
+      "PubDate": "2022-05-12T02:05:53Z"
+    },
+    {
       "Title": "郭明琪： 2023 年 iPhone 可能会换 Type-C - iPhone",
       "Link": "https://www.v2ex.com/t/852331",
       "Description": "\u003cdiv\u003e\n My latest survey indicates that 2H23 new iPhone will abandon Lightning port and switch to USB-C port. USB-C could improve iPhone's transfer and charging speed in hardware designs, but the final spec details still depend on iOS support. It's expected to see existing USB-C-related suppliers of Apple's ecosystem (e.g., IC controller, connector) become the market's focus in the next 1-2 years, thanks to vast orders from iPhones and accessories' adoption of USB-C ports. (@Ming-Chi Kuo)\n\u003c/div\u003e",
