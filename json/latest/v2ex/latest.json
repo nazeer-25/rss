@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "对 coroutine.__await__() 调用 next 为什么会导致重复进入 Future.__await__() - Python",
+      "Link": "https://www.v2ex.com/t/852684",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-python\"\u003eimport types\nfrom typing import Any, Awaitable\n\n\n@types.coroutine\ndef _async_yield(obj):\n    return (yield obj)\n\n\nasync def gather(*aws: Awaitable[Any], return_exceptions: bool = False):\n    result_array: list[Any] = [None for _ in range(len(aws))]\n    done, pending = [], [*aws]\n    while pending:\n        for i, awaitable in enumerate(aws):\n            if awaitable in done:\n                continue\n            try:\n                next(awaitable.__await__())\n                await _async_yield(None)\n            except StopIteration as exc:\n                result_array[i] = exc.value\n                done.append(awaitable)\n                pending.remove(awaitable)\n            except BaseException as exc:\n                if not return_exceptions:\n                    raise\n                result_array[i] = exc\n                done.append(awaitable)\n                pending.remove(awaitable)\n    return result_array\n\n\nasync def test_wait():\n    async def a():\n        return 1\n\n    async def b():\n        import asyncio\n\n        await asyncio.sleep(0)\n        return 2\n\n    async def c():\n        import asyncio\n\n        await asyncio.sleep(1)\n        return 3\n\n    return await gather(a(), b(), c(), asyncio.create_task(c()))\n\n\nif __name__ == \"__main__\":\n    import asyncio\n\n    print(asyncio.run(test_wait()))\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e报错所处的位置：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e    # asyncio/futures.py line 281\n    def __await__(self):\n        if not self.done():\n            self._asyncio_future_blocking = True\n            yield self  # This tells Task to wait for completion.\n        if not self.done():\n            raise RuntimeError(\"await wasn't used with future\")\n        return self.result()  # May raise too.\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "abersheeran",
+      "PubDate": "2022-05-13T10:05:04Z"
+    },
+    {
+      "Title": "有没有电动剃须刀推荐啊 - 问与答",
+      "Link": "https://www.v2ex.com/t/852683",
+      "Description": "有没有电动剃须刀推荐啊（价格大概 100-300 ）刮胡子干净一点的，之前买的感觉都不够锋利",
+      "Author": "wuwu123",
+      "PubDate": "2022-05-13T10:01:33Z"
+    },
+    {
+      "Title": "新的 mbp 外观有缺陷，退不退好 - Apple",
+      "Link": "https://www.v2ex.com/t/852682",
+      "Description": "\u003cp\u003e如图，老铁们退不退好啊\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://postimg.cc/MnMR6SVq\" rel=\"nofollow\"\u003ehttps://postimg.cc/MnMR6SVq\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://postimg.cc/F7n3XRfT\" rel=\"nofollow\"\u003ehttps://postimg.cc/F7n3XRfT\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "Kristd",
+      "PubDate": "2022-05-13T10:00:44Z"
+    },
+    {
       "Title": "想了解下 UST 和 Luna，站内搜到一些内容，真行啊 - 加密货币",
       "Link": "https://www.v2ex.com/t/852680",
       "Description": "\u003ca target=\"_blank\" href=\"https://www.v2ex.com/t/832743\" rel=\"nofollow noopener\"\u003ehttps://www.v2ex.com/t/832743\u003c/a\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"/i/RF9i2Qz1.png\" rel=\"nofollow noopener\" target=\"_blank\" title=\"在新窗口打开图片 RF9i2Qz1.png\"\u003e\u003cimg src=\"//i.v2ex.co/RF9i2Qz1.png\" class=\"embedded_image\"\u003e\u003c/a\u003e",

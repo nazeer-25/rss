@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>对 coroutine.__await__() 调用 next 为什么会导致重复进入 Future.__await__() - Python</title>
+      <link>https://www.v2ex.com/t/852684</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import types&#xA;from typing import Any, Awaitable&#xA;&#xA;&#xA;@types.coroutine&#xA;def _async_yield(obj):&#xA;    return (yield obj)&#xA;&#xA;&#xA;async def gather(*aws: Awaitable[Any], return_exceptions: bool = False):&#xA;    result_array: list[Any] = [None for _ in range(len(aws))]&#xA;    done, pending = [], [*aws]&#xA;    while pending:&#xA;        for i, awaitable in enumerate(aws):&#xA;            if awaitable in done:&#xA;                continue&#xA;            try:&#xA;                next(awaitable.__await__())&#xA;                await _async_yield(None)&#xA;            except StopIteration as exc:&#xA;                result_array[i] = exc.value&#xA;                done.append(awaitable)&#xA;                pending.remove(awaitable)&#xA;            except BaseException as exc:&#xA;                if not return_exceptions:&#xA;                    raise&#xA;                result_array[i] = exc&#xA;                done.append(awaitable)&#xA;                pending.remove(awaitable)&#xA;    return result_array&#xA;&#xA;&#xA;async def test_wait():&#xA;    async def a():&#xA;        return 1&#xA;&#xA;    async def b():&#xA;        import asyncio&#xA;&#xA;        await asyncio.sleep(0)&#xA;        return 2&#xA;&#xA;    async def c():&#xA;        import asyncio&#xA;&#xA;        await asyncio.sleep(1)&#xA;        return 3&#xA;&#xA;    return await gather(a(), b(), c(), asyncio.create_task(c()))&#xA;&#xA;&#xA;if __name__ == &#34;__main__&#34;:&#xA;    import asyncio&#xA;&#xA;    print(asyncio.run(test_wait()))&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;报错所处的位置：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;    # asyncio/futures.py line 281&#xA;    def __await__(self):&#xA;        if not self.done():&#xA;            self._asyncio_future_blocking = True&#xA;            yield self  # This tells Task to wait for completion.&#xA;        if not self.done():&#xA;            raise RuntimeError(&#34;await wasn&#39;t used with future&#34;)&#xA;        return self.result()  # May raise too.&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>abersheeran</author>
+      <pubDate>13 May 2022 10:05:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有电动剃须刀推荐啊 - 问与答</title>
+      <link>https://www.v2ex.com/t/852683</link>
+      <description>有没有电动剃须刀推荐啊（价格大概 100-300 ）刮胡子干净一点的，之前买的感觉都不够锋利</description>
+      <author>wuwu123</author>
+      <pubDate>13 May 2022 10:01:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>新的 mbp 外观有缺陷，退不退好 - Apple</title>
+      <link>https://www.v2ex.com/t/852682</link>
+      <description>&lt;p&gt;如图，老铁们退不退好啊&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://postimg.cc/MnMR6SVq&#34; rel=&#34;nofollow&#34;&gt;https://postimg.cc/MnMR6SVq&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://postimg.cc/F7n3XRfT&#34; rel=&#34;nofollow&#34;&gt;https://postimg.cc/F7n3XRfT&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>Kristd</author>
+      <pubDate>13 May 2022 10:00:44 +0000</pubDate>
+    </item>
+    <item>
       <title>想了解下 UST 和 Luna，站内搜到一些内容，真行啊 - 加密货币</title>
       <link>https://www.v2ex.com/t/852680</link>
       <description>&lt;a target=&#34;_blank&#34; href=&#34;https://www.v2ex.com/t/832743&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.v2ex.com/t/832743&lt;/a&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;/i/RF9i2Qz1.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34; title=&#34;在新窗口打开图片 RF9i2Qz1.png&#34;&gt;&lt;img src=&#34;//i.v2ex.co/RF9i2Qz1.png&#34; class=&#34;embedded_image&#34;&gt;&lt;/a&gt;</description>
