@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "MacBook Pro 16 寸雷电 3 加 Core X 显卡坞疑问，望指教，谢谢 - MacBook Pro",
+      "Link": "https://www.v2ex.com/t/852687",
+      "Description": "\u003cp\u003e现在搭配的显卡是 蓝宝石 5500XT 8GB 白金版\u003c/p\u003e\n\u003cp\u003e有个问题是：\u003c/p\u003e\n\u003cp\u003e在这个配置中瓶颈是雷电 3 PCIE 的传输带宽（听说只能最多 22Gb ）还是 5500XT 这个显卡？\u003c/p\u003e\n\u003cp\u003e如果是雷电 3 的传输带宽，那没得办法了。\u003c/p\u003e\n\u003cp\u003e如果是显卡还可以换更好的，那请指教换哪款显卡可以最有效的利用率。\u003c/p\u003e\n\u003cp\u003e感谢\u003c/p\u003e\n",
+      "Author": "yousabuk",
+      "PubDate": "2022-05-13T10:15:14Z"
+    },
+    {
+      "Title": "[上海 HC] #元宇宙#智能虚拟人#UGC+GPT-3#硅谷创业团队#寻找数据开发工程师 - 酷工作",
+      "Link": "https://www.v2ex.com/t/852686",
+      "Description": "\u003cp\u003eGemsouls 欢迎你来撩来撩🍬️\n优秀的伙伴薪酬和职位都可以面聊🤝\n微信聊聊：zuji0647 （备注 V2EX ）\n简历投递： \u003ca href=\"mailto:xianghui@mygemsouls.com\"\u003exianghui@mygemsouls.com\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e我们是谁：\nGemsouls 是一家打造全交互虚拟人的早期公司，2021 年完成来自顶级基金的天使轮融资，目前正在高速发展中。我们结合 UGC 创作和最前沿的 GPT-3 等 AI 技术，打造千人千面、超高互动性的智能虚拟人，致力于重新定义元宇宙中的人机关系。产品目前出海至欧美英语市场，创始人团队从硅谷回国创业，主要经历囊括 Facebook AI 强化学习，人工智能顶会多篇论文和演讲，硅谷独角兽 Stitch Fix ，斯坦福 MBA ；中美两地都有团队。\u003c/p\u003e\n\u003cp\u003e我们的价值观：\n🤩 团队管理方式高度灵活，结果导向，拒绝 996 ，聚集创意和才华，一起做有趣的事\n🤩 我们坚定地投入在成长型人才上，只要有学习能力和开放的心态，每个人的潜力都是无限的\n🤩 人机关系将在这个时代被重新定义，我们坚信科技和 AI 应该用于丰富人的灵魂，而不是榨干我们的注意力，让人变得更加空虚\u003c/p\u003e\n\u003cp\u003e我们希望你：\n💎对探索虚拟世界和人机交互的未来有热情，有协作精神，有极强的学习能力和探索解决问题的能力\n💎本科及以上学历，计算机、电子、数学等相关专业\n💎熟练使用 SQL ，熟练使用至少一种主流关系型和非关系型数据库\n💎熟悉 Linux 系统各个基本指令和脚本编写\n💎1 年以上数仓开发和数据可视化的相关经验，有海量数据处理经验者优先\n💎有面向用户的产品项目经验，并有伴随早期产品成长经历的优先\u003c/p\u003e\n\u003cp\u003e工作内容：\n👏🏻与业务团队紧密合作，构建全面、精准反映业务状况及风险的指标体系，基于监控指标体系及时发现业务问题\n👏🏻负责各数据源的对接，数仓与大数据开发，构建数据可视化平台，支持数据分析，以数据驱动业务\n👏🏻数据质量管理和数据服务性能调优\u003c/p\u003e\n",
+      "Author": "mygemsouls",
+      "PubDate": "2022-05-13T10:10:15Z"
+    },
+    {
       "Title": "对 coroutine.__await__() 调用 next 为什么会导致重复进入 Future.__await__() - Python",
       "Link": "https://www.v2ex.com/t/852684",
       "Description": "\u003cpre\u003e\u003ccode class=\"language-python\"\u003eimport types\nfrom typing import Any, Awaitable\n\n\n@types.coroutine\ndef _async_yield(obj):\n    return (yield obj)\n\n\nasync def gather(*aws: Awaitable[Any], return_exceptions: bool = False):\n    result_array: list[Any] = [None for _ in range(len(aws))]\n    done, pending = [], [*aws]\n    while pending:\n        for i, awaitable in enumerate(aws):\n            if awaitable in done:\n                continue\n            try:\n                next(awaitable.__await__())\n                await _async_yield(None)\n            except StopIteration as exc:\n                result_array[i] = exc.value\n                done.append(awaitable)\n                pending.remove(awaitable)\n            except BaseException as exc:\n                if not return_exceptions:\n                    raise\n                result_array[i] = exc\n                done.append(awaitable)\n                pending.remove(awaitable)\n    return result_array\n\n\nasync def test_wait():\n    async def a():\n        return 1\n\n    async def b():\n        import asyncio\n\n        await asyncio.sleep(0)\n        return 2\n\n    async def c():\n        import asyncio\n\n        await asyncio.sleep(1)\n        return 3\n\n    return await gather(a(), b(), c(), asyncio.create_task(c()))\n\n\nif __name__ == \"__main__\":\n    import asyncio\n\n    print(asyncio.run(test_wait()))\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e报错所处的位置：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e    # asyncio/futures.py line 281\n    def __await__(self):\n        if not self.done():\n            self._asyncio_future_blocking = True\n            yield self  # This tells Task to wait for completion.\n        if not self.done():\n            raise RuntimeError(\"await wasn't used with future\")\n        return self.result()  # May raise too.\n\u003c/code\u003e\u003c/pre\u003e\n",
