@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>UrlParamsRemover 自动删除 url 中的参数并写入系统剪贴板 - 分享发现</title>
+      <link>https://www.v2ex.com/t/852658</link>
+      <description>&lt;p&gt;我有一个习惯，分享给别人一个不需要参数就能准确定位的资源链接，我一定“强迫症一样”把参数全都删了然后再发给别人。这里不谈论好坏，强迫症，也不谈论意义，我简单用 Java 写了一段代码实现了，但是不够优雅，还请各位看官批评。&lt;/p&gt;&#xA;&lt;p&gt;举个例子&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;https://www.bilibili.com/video/BV1Ez411v7eL?from=search&amp;amp;seid=3493040094031299633&amp;amp;spm_id_from=333.337.0.0&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这个链接很明显是用户搜索了什么关键词之后点进去视频页面产生的 url ，现在我复制它，在 Powershell 下输入 &lt;strong&gt;url&lt;/strong&gt; 回车&lt;/p&gt;&#xA;&lt;p&gt;剪贴板已经变成了&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;https://www.bilibili.com/video/BV1Ez411v7eL&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;接着在任何想要粘贴的地方粘贴即可（比如微信聊天框💬️）&lt;/p&gt;&#xA;&lt;p&gt;感觉我的实现还是太 low 了，希望有更好的，让我学习一下，我是真的很有这个需求。虽然通过 windows batch file 配合 powershell alias 加上本程序已经很快了，但是我想要通过快捷键，比如 &lt;strong&gt;windows/command + shift + R&lt;/strong&gt; 快速执行程序，然后让程序写入新的 url 到系统剪贴板，这个 work flow 更加无感，也更便捷。&lt;/p&gt;&#xA;&lt;p&gt;比如 picgo: 截图 --&amp;gt; &lt;strong&gt;control/command + shift + P&lt;/strong&gt; --&amp;gt; 等待上传成功，url 自动写入系统剪贴板 --&amp;gt; 在需要的地方粘贴。&lt;/p&gt;&#xA;&lt;p&gt;我的代码: &lt;a href=&#34;https://github.com/hellodk34/UrlParamsRemover&#34; rel=&#34;nofollow&#34;&gt;https://github.com/hellodk34/UrlParamsRemover&lt;/a&gt;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;有下面这些步骤。&lt;/p&gt;&#xA;&lt;h2&gt;下载 jar file&lt;/h2&gt;&#xA;&lt;p&gt;从 &lt;a href=&#34;https://github.com/hellodk34/UrlParamsRemover/releases/latest/download/UrlParamsRemover.jar&#34; rel=&#34;nofollow&#34;&gt;releases&lt;/a&gt; 下载最新 jar file.&lt;/p&gt;&#xA;&lt;p&gt;在 jdk11 下开发和测试，不知道 java8 是否兼容。&lt;/p&gt;&#xA;&lt;h2&gt;编写 batch file&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code&gt;@ECHO OFF&#xA;start java -jar &amp;lt;your_jar_file_path&amp;gt;.jar&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;编写 powershell profile 脚本&lt;/h2&gt;&#xA;&lt;p&gt;此处可参考我的文章: &lt;a href=&#34;https://hellodk.cn/post/935&#34; rel=&#34;nofollow&#34;&gt;为 PowerShell 设置 alias&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;编辑文件 &lt;strong&gt;xxx\WindowsPowerShell\Microsoft.PowerShell_profile.ps1&lt;/strong&gt;，添加如下内容（如果没有请生成，请参考上文操作）。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;function url {d:\UrlParamsRemover.bat}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;此处 url 就是 alias.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;整个 flow 就是用户（从浏览器地址栏）复制 url 然后 powershell 输入 url 执行就能将新的 url 写入剪贴板，用户可以在任何地方粘贴。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;大家有更好的方法吗？感觉 go 适合写这个小工具。来实现一个吧：）最好能绑定系统快捷键。&lt;/p&gt;&#xA;</description>
+      <author>AllenHua</author>
+      <pubDate>13 May 2022 08:13:01 +0000</pubDate>
+    </item>
+    <item>
       <title>知网涉嫌垄断被调查。 - 分享发现</title>
       <link>https://www.v2ex.com/t/852657</link>
       <description>&lt;p&gt;想不到他也有今天。&lt;/p&gt;&#xA;</description>
@@ -13,7 +20,7 @@
     <item>
       <title>微信小程序中上滑式弹窗是如何做的呢？ - 微信</title>
       <link>https://www.v2ex.com/t/852656</link>
-      <description>&lt;p&gt;天府通小程序跳转行程码是通过一个上滑的弹窗实现的，而不是通过一个提示框跳转小程序，请问这种方式是怎么实现的呢？官方文档上没找到说明&lt;/p&gt;&#xA;&lt;p&gt;这个是图片示例&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/OsKhB6&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;OsKhB6.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2022/05/13/OsKhB6.jpg&#34;/&gt;&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;天府通小程序跳转行程码是通过一个上滑的弹窗实现的，而不是通过一个提示框跳转小程序，请问这种方式是怎么实现的呢？官方文档上没找到说明&lt;/p&gt;&#xA;&lt;p&gt;这个是图片示例&lt;/p&gt;&#xA;&lt;p&gt;[url=&lt;a href=&#34;https://imgtu.com/i/OsKhB6&#34; rel=&#34;nofollow&#34;&gt;https://imgtu.com/i/OsKhB6&lt;/a&gt;][img]&lt;a href=&#34;https://s1.ax1x.com/2022/05/13/OsKhB6.jpg&#34; rel=&#34;nofollow&#34;&gt;https://s1.ax1x.com/2022/05/13/OsKhB6.jpg&lt;/a&gt;[/img][/url]&lt;/p&gt;&#xA;</description>
       <author>Geekerstar</author>
       <pubDate>13 May 2022 08:10:06 +0000</pubDate>
     </item>
