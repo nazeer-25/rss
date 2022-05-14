@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教大佬！ swiftui 如何使用 ViewModel 中的 bool 值控制 View 层的 sheet 展示？ - iOS",
+      "Link": "https://www.v2ex.com/t/852773",
+      "Description": "\u003cp\u003e学习 swift \u0026amp; swiftui 中，遇到一个关于 sheet 展示的小问题，请各位大佬指点。\u003c/p\u003e\n\u003cp\u003e一般常见的都是在 View 层以\u003ccode\u003e@State\u003c/code\u003e标记的 bool 变量来控制 sheet 开关\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-swift\"\u003estruct ContentView: View {\n    \n    @State var showSheet:Bool = false\n    \n    var body: some View {\n        VStack{\n            Text(\"Hello, world!\")\n                .padding()\n        }.sheet(isPresented: $showSheet){\n            //sheet view...\n        }\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是如果此时有了 ViewModel ，我想在 ViewModel 里的某些逻辑后再控制 sheet 开关，该如何实现呢？\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-swift\"\u003eclass MyViewModel : ObservableObject {\n    \n    \n    func sheetControlBySomeJudgement(){\n        if (...) {\n            //此时需要将 View 层 sheet 展开\n            //此时如何关联改变外部的 @State 变量呢？\n            //尝试过使用 @Binding 来关联内外 bool 参数，但是好像并没有用\n        }\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "anxiousPumpkin",
+      "PubDate": "2022-05-14T03:57:08Z"
+    },
+    {
+      "Title": "有没有同时支持 MBP(4K60Hz)和 Switch 的 Type-C 扩展坞？ - MacBook Pro",
+      "Link": "https://www.v2ex.com/t/852772",
+      "Description": "\u003cp\u003e设备 MBP2017 15inch ，有独显； ns 长续航版\u003c/p\u003e\n\u003cp\u003eMBP 有偶尔外接 4K 显示器的需求，ns 有偶尔连接同一款显示器底座模式的需求\u003c/p\u003e\n\u003cp\u003e目前在用的是某宝一款叫 C-Force 的 Type-C 扩展坞，价格低廉只要几十块，大概的样子长这样： \u003ca href=\"https://s2.loli.net/2022/05/14/y1sgRvBWMqJpEF5.jpg\" rel=\"nofollow\"\u003ehttps://s2.loli.net/2022/05/14/y1sgRvBWMqJpEF5.jpg\u003c/a\u003e ，起初是给 Switch 买的，外接显示器玩游戏基本无延迟，而且普通的 20W PD 充电器就可以开启底座模式(老任原装的充电器和底座是在是太大只)，这个扩展坞也可以给 MBP 用，但是外接 HDMI 显示器只有 30Hz\u003c/p\u003e\n\u003cp\u003e求推荐一款 Type-C 扩展坞，需求：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e同时支持 MBP 和 Switch ，且连接 MBP 时支持 4K60Hz （必需）；\u003c/li\u003e\n\u003cli\u003e最好有 USB 3.0 接口，但非必需；\u003c/li\u003e\n\u003cli\u003e最好有前兆网口，但非必需；\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e关于第 2 点，已经做过功课，市售扩展坞仅有 Apple A2119 等几款支持 4k60HZ 的同时支持满速 USB 3.0 ，见帖子 /t/656856 ，目前自己手上的 A 口的设备不是很多了，所以这个需求稍微弱一些，能有最好，不满速也行，甚至没有也可以接受。\u003c/p\u003e\n",
+      "Author": "gangsta",
+      "PubDate": "2022-05-14T03:56:48Z"
+    },
+    {
+      "Title": "请教各位老哥， PostgreSQL、PostGIS 基于地理空间的查询如何优化速度？ - PostgreSQL",
+      "Link": "https://www.v2ex.com/t/852771",
+      "Description": "\u003cp\u003e\u003cstrong\u003e场景：\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e可以理解为：记录飞机飞行的轨迹，把经、纬度点，高度、速度、航向存入\u003ccode\u003ePostgreSQL\u003c/code\u003e数据库，并在经纬度列建立 gist 索引。\u003c/p\u003e\n\u003cp\u003e数据量大概在 1 亿条左右。\u003c/p\u003e\n\u003cp\u003e想实现查询指定区域范围（圆形、矩形、多边形）内的轨迹。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e测试：\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e随机在经度（-180°，180°），纬度（-90°，90°）的范围内生成 1 亿个坐标点，保留小数点后 5 位小数，并存入数据库，测试在指定的范围内的查询速度。\u003c/p\u003e\n\u003cp\u003e查询矩形区域\u003ccode\u003e32°*32°\u003c/code\u003e的范围，查询出来的记录数约为 150 万条，用时 15 分钟左右。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e问题：\u003c/strong\u003e\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e想请问各位老哥，如何把查询的时间给优化下去，现在耗时 15 分钟有点儿太长了。\u003c/li\u003e\n\u003cli\u003e如果不关注实时的点，只关注整体的轨迹线，如何把轨迹线抽取出来？做压缩？这样查询速度会不会快一些。\u003c/li\u003e\n\u003cli\u003e如果抽取轨迹线的话，如何保留速度、航向、高度等特征值。想以后做分析用，比如突然转向、突然减速、突然高度骤降等。\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "liuguangxuan",
+      "PubDate": "2022-05-14T03:52:16Z"
+    },
+    {
+      "Title": "关于搜索引擎蜘蛛问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/852770",
+      "Description": "\u003cp\u003e同一个 ip 既是 bing 的 也是 360 的\n这种情况是怎么回事\u003c/p\u003e\n",
+      "Author": "Tianyan",
+      "PubDate": "2022-05-14T03:47:58Z"
+    },
+    {
+      "Title": "在 Windows 中一键安装纯净的 Chromium 浏览器 - Windows",
+      "Link": "https://www.v2ex.com/t/852768",
+      "Description": "\u003cp\u003e写了一个 PowerShell 自动安装和更新脚本，无部署依赖、联网即可完成，欢迎体验！如果喜欢，求 star 、求安装情况的反馈\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/LittleboyHarry/ohmycrx/blob/master/install-chromium.ps1\" rel=\"nofollow\"\u003ehttps://github.com/LittleboyHarry/ohmycrx/blob/master/install-chromium.ps1\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e不考虑 flash 等专有软件，日常使用无广告和云服务捆绑、无魔改、高版本内核的 Chromium 看看多数网页，似乎也挺好的\u003c/p\u003e\n",
+      "Author": "LittleboyHarry",
+      "PubDate": "2022-05-14T03:24:42Z"
+    },
+    {
+      "Title": "Macbook 为什么合盖后过段时间自动醒来？ - macOS",
+      "Link": "https://www.v2ex.com/t/852766",
+      "Description": "\u003cp\u003e我是插着 AC 合盖的，macOS 12.3.1 ，一个晚上下来外壳微微发烫，肯定没睡。\u003c/p\u003e\n\u003cp\u003e查了下 wake 的原因是：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eWake from Standby [CDNVA] : due to EC.DarkPME/HID Activity Using AC (Charge:100%) 20 secs \nDarkWake from Standby [CDN] : due to EC.DarkPME/Maintenance Using AC (Charge:100%) 36 secs  \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e系统设置里的电源：能关的都关了\u003c/p\u003e\n\u003cp\u003e可能是蓝牙的问题，因为最近用蓝牙耳机，断断续续特别厉害。\u003c/p\u003e\n\u003cp\u003e应该如何排查？\u003c/p\u003e\n",
+      "Author": "cmichael",
+      "PubDate": "2022-05-14T03:13:27Z"
+    },
+    {
       "Title": "好奇 V2EX 的楼层回复机制 - 问与答",
       "Link": "https://www.v2ex.com/t/852765",
       "Description": "\u003ca target=\"_blank\" href=\"https://i.imgur.com/lx8yjir.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/lx8yjir.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e\u003cbr /\u003e##\u003cbr /\u003e##\u003cbr /\u003e##\u003cbr /\u003e如上图, 2017 年的时候也有人有这样的想法\u003cbr /\u003e就是这个为啥不优化一下呢, 哪怕回复的时候自动带上\u0026lt;#楼层号\u0026gt;也好的啊\u003cbr /\u003e就是不理解, 为啥不优化下这个 \u003ca target=\"_blank\" href=\"https://i.imgur.com/1kFaq4m.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/1kFaq4m.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e",
