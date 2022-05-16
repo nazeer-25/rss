@@ -4,11 +4,32 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>出 650 京东 E 卡，生肖茅台，生肖猪、生肖鼠。 - 京东</title>
-      <link>https://www.v2ex.com/t/853109</link>
-      <description>650E 卡，640 出&lt;br /&gt;&lt;br /&gt;茅台生肖猪、生肖鼠，3900 一瓶打包，限杭州自提。</description>
-      <author>hitoto</author>
-      <pubDate>16 May 2022 03:04:41 +0000</pubDate>
+      <title>[讨论] 为何 epoll_wait 有性能瓶颈？ - Linux</title>
+      <link>https://www.v2ex.com/t/853120</link>
+      <description>&lt;p&gt;使用 Linux 提供的&lt;a href=&#34;https://github.com/torvalds/linux/tree/master/tools/perf/bench&#34; rel=&#34;nofollow&#34;&gt;benchmark 工具&lt;/a&gt;perf 测试如下&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;机器 28 个核&#xA;-m 每个读线程使用独立的 epfd&#xA;-t 读线程的数量&#xA;-r 执行 benchmark 的时间（给 2 秒跑的快些，默认 8 秒）&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;./perf bench epoll wait -m -t 1 -r 2&#xA;# Running &#39;epoll/wait&#39; benchmark:&#xA;Run summary [PID 23298]: 1 threads monitoring on 64 file-descriptors for 2 secs.&#xA;&#xA;[thread  0] fdmap: 0x27e0260 ... 0x27e035c [ 525069 ops/sec ]&#xA;&#xA;Averaged 525069 operations/sec (+- 0.00%), total secs = 2&#xA;&#xA;./perf bench epoll wait -m -t 2 -r 2&#xA;# Running &#39;epoll/wait&#39; benchmark:&#xA;Run summary [PID 23312]: 2 threads monitoring on 64 file-descriptors for 2 secs.&#xA;&#xA;[thread  0] fdmap: 0x1bec260 ... 0x1bec35c [ 463399 ops/sec ]&#xA;[thread  1] fdmap: 0x1bec5f0 ... 0x1bec6ec [ 463392 ops/sec ]&#xA;&#xA;Averaged 463395 operations/sec (+- 0.00%), total secs = 2&#xA;&#xA;&#xA;./perf bench epoll wait -m -t 4 -r 2&#xA;# Running &#39;epoll/wait&#39; benchmark:&#xA;Run summary [PID 23319]: 4 threads monitoring on 64 file-descriptors for 2 secs.&#xA;&#xA;[thread  0] fdmap: 0x22ea260 ... 0x22ea35c [ 208576 ops/sec ]&#xA;[thread  1] fdmap: 0x22ea5f0 ... 0x22ea6ec [ 208576 ops/sec ]&#xA;[thread  2] fdmap: 0x22ea980 ... 0x22eaa7c [ 208576 ops/sec ]&#xA;[thread  3] fdmap: 0x22ead10 ... 0x22eae0c [ 208565 ops/sec ]&#xA;&#xA;Averaged 208573 operations/sec (+- 0.00%), total secs = 2&#xA;&#xA;./perf bench epoll wait -m -t 8 -r 2&#xA;# Running &#39;epoll/wait&#39; benchmark:&#xA;Run summary [PID 23328]: 8 threads monitoring on 64 file-descriptors for 2 secs.&#xA;&#xA;[thread  0] fdmap: 0x1832370 ... 0x183246c [ 150848 ops/sec ]&#xA;[thread  1] fdmap: 0x1832700 ... 0x18327fc [ 150848 ops/sec ]&#xA;[thread  2] fdmap: 0x1832a90 ... 0x1832b8c [ 150848 ops/sec ]&#xA;[thread  3] fdmap: 0x1832e20 ... 0x1832f1c [ 150848 ops/sec ]&#xA;[thread  4] fdmap: 0x18331b0 ... 0x18332ac [ 150848 ops/sec ]&#xA;[thread  5] fdmap: 0x1833540 ... 0x183363c [ 150844 ops/sec ]&#xA;[thread  6] fdmap: 0x18338d0 ... 0x18339cc [ 150824 ops/sec ]&#xA;[thread  7] fdmap: 0x1833c60 ... 0x1833d5c [ 150816 ops/sec ]&#xA;&#xA;Averaged 150840 operations/sec (+- 0.00%), total secs = 2&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可以看到每秒执行的的 epoll_wait 数量在减少，变化的参数是线程数，每个读线程调用 epoll_wait 等待 64 个 fd ，一个写线程向所有读线程的所有 fd 写入数据。然后打印的结果是每个读线程每秒能完成的 epoll_wait 数量&lt;/p&gt;&#xA;&lt;p&gt;按理说，每个读线程都有独立的 epfd ，线程间没有资源共享，为何吞吐量（每秒执行的 epoll 数量）会下降？&lt;/p&gt;&#xA;</description>
+      <author>pwrliang</author>
+      <pubDate>16 May 2022 03:23:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有性价比高一些的固态硬盘推荐？ - 程序员</title>
+      <link>https://www.v2ex.com/t/853119</link>
+      <description>&lt;p&gt;不想买三星的，太贵了。&#xA;铠侠、西数的怎么样？&lt;/p&gt;&#xA;</description>
+      <author>mikeluckybiy</author>
+      <pubDate>16 May 2022 03:21:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>不同尺寸显示器下，保持相同的文本物理尺寸时，对分辨率的调整，并判断可视内容的变化。 - 问与答</title>
+      <link>https://www.v2ex.com/t/853116</link>
+      <description>&lt;p&gt;例如，27 寸 4K ，习惯于缩放到 1920 * 1080 ，文本看起来不累眼，但显示内容不多。因此想换 32 寸。此时，面临的问题是，32 寸在保持 27 寸上述文本大小时，是否能增加足够的显示内容。&lt;/p&gt;&#xA;&lt;p&gt;个人对 DPI 、PPI 、逻辑分辨率、点距啥的不清楚，但经过查询，发现解决方法如下，感觉挺靠谱，所以想分享给有需求的各位：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;计算 1920*1080 下的点距值；&lt;/li&gt;&#xA;&lt;li&gt;计算 32 寸下近似 x 的分辨率 y ，可通过 &lt;a href=&#34;https://pxcalc.com/%E5%AE%8C%E6%88%90%E3%80%82&#34; rel=&#34;nofollow&#34;&gt;https://pxcalc.com/完成。&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;在 27 寸下，将分辨率调为 y ，此时可视内容即为，32 寸下文本物理大小与 27 寸 1080P 相同时，所显示的内容区域。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;刷了很多帖子，v2ex 、知乎、NGA 。上述方法来源于 &lt;a href=&#34;https://www.reddit.com/r/Monitors/comments/8ea1ak/4k_without_scaling_27_vs_32/%E3%80%82&#34; rel=&#34;nofollow&#34;&gt;https://www.reddit.com/r/Monitors/comments/8ea1ak/4k_without_scaling_27_vs_32/。&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>ly879</author>
+      <pubDate>16 May 2022 03:18:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>OmniMeta：一个查看文件元数据的免费 macOS 应用 - 分享创造</title>
+      <link>https://www.v2ex.com/t/853113</link>
+      <description>&lt;p&gt;有时候要查看文件元数据，不管使用 ⌘ + ⌥ + I ，还是切换访达视图，我觉得都不是很方便，用多了会觉得这些查看方式的阻力很大。&lt;/p&gt;&#xA;&lt;p&gt;所以一气之下花了几个小时写了个小 App ，可以认为是 &lt;code&gt;mdls filename&lt;/code&gt; 命令的可视化版本。&lt;/p&gt;&#xA;&lt;p&gt;应用很简单，大小为 803 KB ，只有一个主窗口。&lt;/p&gt;&#xA;&lt;p&gt;使用方式有以下几种：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;拖拽文件到程序坞图标，应用会自动打开主窗口并显示文件元数据。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;打开应用后，⌘ + C 拷贝文件，应用会自动弹出主窗口并显示文件元数据。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;打开应用后，拖拽文件到应用主窗口。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;此外还可以选择行后鼠标右键单击选择拷贝值。&lt;/p&gt;&#xA;&lt;p&gt;已知问题：各种文件的属性比较多，没有一一确认，特别是值类型为 boolean 的。所以在此类的值都标注为 &lt;code&gt;否 /0&lt;/code&gt; 或 &lt;code&gt;是 /1&lt;/code&gt;，前面的中文是我自己添加的，后面是实际值。&lt;/p&gt;&#xA;&lt;p&gt;但实际上可能有误，&lt;code&gt;0&lt;/code&gt; 和 &lt;code&gt;1&lt;/code&gt; 可能表示的是其他意思，所以这种情况可以根据属性自行判断。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/8Fh6tv3e.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;OmniMeta 下载地址：&lt;a href=&#34;https://apps.apple.com/cn/app/omnimeta-metadata-viewer/id1620651781?l=en&amp;amp;mt=12&#34; rel=&#34;nofollow&#34;&gt;Mac App Store&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;我的其他付费应用：&lt;a href=&#34;https://shinystone.net/&#34; rel=&#34;nofollow&#34;&gt;https://shinystone.net/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>ferrum</author>
+      <pubDate>16 May 2022 03:13:16 +0000</pubDate>
     </item>
     <item>
       <title>写了一个项目工作强度计算工具「code996」，欢迎测试和反馈 - 分享创造</title>
@@ -244,6 +265,13 @@
       <description>&lt;p&gt;想知道 V2er 对此次各种场外的看法。&lt;/p&gt;&#xA;</description>
       <author>UIXX</author>
       <pubDate>16 May 2022 01:15:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>出 650 京东 E 卡，生肖茅台，生肖猪、生肖鼠。 - 京东</title>
+      <link>https://www.v2ex.com/t/853109</link>
+      <description>650E 卡，640 出&lt;br /&gt;&lt;br /&gt;茅台生肖猪、生肖鼠，3900 一瓶打包，限杭州自提。</description>
+      <author>hitoto</author>
+      <pubDate>16 May 2022 03:04:41 +0000</pubDate>
     </item>
     <item>
       <title>请问各位大佬，想自己学 Swift 做独立开发，请问要学 OC 吗。 - Swift</title>

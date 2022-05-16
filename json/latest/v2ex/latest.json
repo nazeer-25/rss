@@ -4,11 +4,32 @@
   "Description": "",
   "Items": [
     {
-      "Title": "出 650 京东 E 卡，生肖茅台，生肖猪、生肖鼠。 - 京东",
-      "Link": "https://www.v2ex.com/t/853109",
-      "Description": "650E 卡，640 出\u003cbr /\u003e\u003cbr /\u003e茅台生肖猪、生肖鼠，3900 一瓶打包，限杭州自提。",
-      "Author": "hitoto",
-      "PubDate": "2022-05-16T03:04:41Z"
+      "Title": "[讨论] 为何 epoll_wait 有性能瓶颈？ - Linux",
+      "Link": "https://www.v2ex.com/t/853120",
+      "Description": "\u003cp\u003e使用 Linux 提供的\u003ca href=\"https://github.com/torvalds/linux/tree/master/tools/perf/bench\" rel=\"nofollow\"\u003ebenchmark 工具\u003c/a\u003eperf 测试如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e机器 28 个核\n-m 每个读线程使用独立的 epfd\n-t 读线程的数量\n-r 执行 benchmark 的时间（给 2 秒跑的快些，默认 8 秒）\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e./perf bench epoll wait -m -t 1 -r 2\n# Running 'epoll/wait' benchmark:\nRun summary [PID 23298]: 1 threads monitoring on 64 file-descriptors for 2 secs.\n\n[thread  0] fdmap: 0x27e0260 ... 0x27e035c [ 525069 ops/sec ]\n\nAveraged 525069 operations/sec (+- 0.00%), total secs = 2\n\n./perf bench epoll wait -m -t 2 -r 2\n# Running 'epoll/wait' benchmark:\nRun summary [PID 23312]: 2 threads monitoring on 64 file-descriptors for 2 secs.\n\n[thread  0] fdmap: 0x1bec260 ... 0x1bec35c [ 463399 ops/sec ]\n[thread  1] fdmap: 0x1bec5f0 ... 0x1bec6ec [ 463392 ops/sec ]\n\nAveraged 463395 operations/sec (+- 0.00%), total secs = 2\n\n\n./perf bench epoll wait -m -t 4 -r 2\n# Running 'epoll/wait' benchmark:\nRun summary [PID 23319]: 4 threads monitoring on 64 file-descriptors for 2 secs.\n\n[thread  0] fdmap: 0x22ea260 ... 0x22ea35c [ 208576 ops/sec ]\n[thread  1] fdmap: 0x22ea5f0 ... 0x22ea6ec [ 208576 ops/sec ]\n[thread  2] fdmap: 0x22ea980 ... 0x22eaa7c [ 208576 ops/sec ]\n[thread  3] fdmap: 0x22ead10 ... 0x22eae0c [ 208565 ops/sec ]\n\nAveraged 208573 operations/sec (+- 0.00%), total secs = 2\n\n./perf bench epoll wait -m -t 8 -r 2\n# Running 'epoll/wait' benchmark:\nRun summary [PID 23328]: 8 threads monitoring on 64 file-descriptors for 2 secs.\n\n[thread  0] fdmap: 0x1832370 ... 0x183246c [ 150848 ops/sec ]\n[thread  1] fdmap: 0x1832700 ... 0x18327fc [ 150848 ops/sec ]\n[thread  2] fdmap: 0x1832a90 ... 0x1832b8c [ 150848 ops/sec ]\n[thread  3] fdmap: 0x1832e20 ... 0x1832f1c [ 150848 ops/sec ]\n[thread  4] fdmap: 0x18331b0 ... 0x18332ac [ 150848 ops/sec ]\n[thread  5] fdmap: 0x1833540 ... 0x183363c [ 150844 ops/sec ]\n[thread  6] fdmap: 0x18338d0 ... 0x18339cc [ 150824 ops/sec ]\n[thread  7] fdmap: 0x1833c60 ... 0x1833d5c [ 150816 ops/sec ]\n\nAveraged 150840 operations/sec (+- 0.00%), total secs = 2\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可以看到每秒执行的的 epoll_wait 数量在减少，变化的参数是线程数，每个读线程调用 epoll_wait 等待 64 个 fd ，一个写线程向所有读线程的所有 fd 写入数据。然后打印的结果是每个读线程每秒能完成的 epoll_wait 数量\u003c/p\u003e\n\u003cp\u003e按理说，每个读线程都有独立的 epfd ，线程间没有资源共享，为何吞吐量（每秒执行的 epoll 数量）会下降？\u003c/p\u003e\n",
+      "Author": "pwrliang",
+      "PubDate": "2022-05-16T03:23:28Z"
+    },
+    {
+      "Title": "有没有性价比高一些的固态硬盘推荐？ - 程序员",
+      "Link": "https://www.v2ex.com/t/853119",
+      "Description": "\u003cp\u003e不想买三星的，太贵了。\n铠侠、西数的怎么样？\u003c/p\u003e\n",
+      "Author": "mikeluckybiy",
+      "PubDate": "2022-05-16T03:21:54Z"
+    },
+    {
+      "Title": "不同尺寸显示器下，保持相同的文本物理尺寸时，对分辨率的调整，并判断可视内容的变化。 - 问与答",
+      "Link": "https://www.v2ex.com/t/853116",
+      "Description": "\u003cp\u003e例如，27 寸 4K ，习惯于缩放到 1920 * 1080 ，文本看起来不累眼，但显示内容不多。因此想换 32 寸。此时，面临的问题是，32 寸在保持 27 寸上述文本大小时，是否能增加足够的显示内容。\u003c/p\u003e\n\u003cp\u003e个人对 DPI 、PPI 、逻辑分辨率、点距啥的不清楚，但经过查询，发现解决方法如下，感觉挺靠谱，所以想分享给有需求的各位：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e计算 1920*1080 下的点距值；\u003c/li\u003e\n\u003cli\u003e计算 32 寸下近似 x 的分辨率 y ，可通过 \u003ca href=\"https://pxcalc.com/%E5%AE%8C%E6%88%90%E3%80%82\" rel=\"nofollow\"\u003ehttps://pxcalc.com/完成。\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e在 27 寸下，将分辨率调为 y ，此时可视内容即为，32 寸下文本物理大小与 27 寸 1080P 相同时，所显示的内容区域。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e刷了很多帖子，v2ex 、知乎、NGA 。上述方法来源于 \u003ca href=\"https://www.reddit.com/r/Monitors/comments/8ea1ak/4k_without_scaling_27_vs_32/%E3%80%82\" rel=\"nofollow\"\u003ehttps://www.reddit.com/r/Monitors/comments/8ea1ak/4k_without_scaling_27_vs_32/。\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "ly879",
+      "PubDate": "2022-05-16T03:18:26Z"
+    },
+    {
+      "Title": "OmniMeta：一个查看文件元数据的免费 macOS 应用 - 分享创造",
+      "Link": "https://www.v2ex.com/t/853113",
+      "Description": "\u003cp\u003e有时候要查看文件元数据，不管使用 ⌘ + ⌥ + I ，还是切换访达视图，我觉得都不是很方便，用多了会觉得这些查看方式的阻力很大。\u003c/p\u003e\n\u003cp\u003e所以一气之下花了几个小时写了个小 App ，可以认为是 \u003ccode\u003emdls filename\u003c/code\u003e 命令的可视化版本。\u003c/p\u003e\n\u003cp\u003e应用很简单，大小为 803 KB ，只有一个主窗口。\u003c/p\u003e\n\u003cp\u003e使用方式有以下几种：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e拖拽文件到程序坞图标，应用会自动打开主窗口并显示文件元数据。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e打开应用后，⌘ + C 拷贝文件，应用会自动弹出主窗口并显示文件元数据。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e打开应用后，拖拽文件到应用主窗口。\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e此外还可以选择行后鼠标右键单击选择拷贝值。\u003c/p\u003e\n\u003cp\u003e已知问题：各种文件的属性比较多，没有一一确认，特别是值类型为 boolean 的。所以在此类的值都标注为 \u003ccode\u003e否 /0\u003c/code\u003e 或 \u003ccode\u003e是 /1\u003c/code\u003e，前面的中文是我自己添加的，后面是实际值。\u003c/p\u003e\n\u003cp\u003e但实际上可能有误，\u003ccode\u003e0\u003c/code\u003e 和 \u003ccode\u003e1\u003c/code\u003e 可能表示的是其他意思，所以这种情况可以根据属性自行判断。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.v2ex.co/8Fh6tv3e.png\"/\u003e\u003c/p\u003e\n\u003cp\u003eOmniMeta 下载地址：\u003ca href=\"https://apps.apple.com/cn/app/omnimeta-metadata-viewer/id1620651781?l=en\u0026amp;mt=12\" rel=\"nofollow\"\u003eMac App Store\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e我的其他付费应用：\u003ca href=\"https://shinystone.net/\" rel=\"nofollow\"\u003ehttps://shinystone.net/\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "ferrum",
+      "PubDate": "2022-05-16T03:13:16Z"
     },
     {
       "Title": "写了一个项目工作强度计算工具「code996」，欢迎测试和反馈 - 分享创造",
@@ -247,6 +268,13 @@
       "Description": "\u003cp\u003e想知道 V2er 对此次各种场外的看法。\u003c/p\u003e\n",
       "Author": "UIXX",
       "PubDate": "2022-05-16T01:15:08Z"
+    },
+    {
+      "Title": "出 650 京东 E 卡，生肖茅台，生肖猪、生肖鼠。 - 京东",
+      "Link": "https://www.v2ex.com/t/853109",
+      "Description": "650E 卡，640 出\u003cbr /\u003e\u003cbr /\u003e茅台生肖猪、生肖鼠，3900 一瓶打包，限杭州自提。",
+      "Author": "hitoto",
+      "PubDate": "2022-05-16T03:04:41Z"
     },
     {
       "Title": "请问各位大佬，想自己学 Swift 做独立开发，请问要学 OC 吗。 - Swift",
