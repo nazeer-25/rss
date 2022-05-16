@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>上海电信家宽 96 天未变过 IP - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/853271</link>
+      <description>&lt;p&gt;上海电信家宽，非 SDN 光猫(桥接模式)，OpenWrt 软路由拨号，已经 96 天没有变过 IP 了，以前从未这样过。有一样情况的朋友吗&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;InkedScreenshot 2022-05-16 203056_LI.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/05/16/yjNbxw5FV2LSc8v.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>EnsonYan</author>
+      <pubDate>16 May 2022 12:46:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>自建网盘存储方案选择 - NAS</title>
+      <link>https://www.v2ex.com/t/853269</link>
+      <description>&lt;p&gt;各位自建网盘都用得什么存储方案呢？&#xA;对象存储还是国外的大盘鸡？&lt;/p&gt;&#xA;</description>
+      <author>maguangyuan</author>
+      <pubDate>16 May 2022 12:42:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>分享一个 5 刀的 Google play 兑换码 - 分享发现</title>
+      <link>https://www.v2ex.com/t/853267</link>
+      <description>8MSQCBWDFEY28LZ ，不知道哪个区能用反正 JP 是用不了：）</description>
+      <author>timelessg</author>
+      <pubDate>16 May 2022 12:39:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>自己的一些职业规划，大家看有问题吗？ - 程序员</title>
+      <link>https://www.v2ex.com/t/853266</link>
+      <description>首先我主业是前端，vue 一把梭那种，比较菜的&lt;br /&gt;&lt;br /&gt;我的规划是：&lt;br /&gt;1.找一份比较轻松的 955 工作，工资中等偏下都可以，但是一定要有很多空余时间&lt;br /&gt;2.学习 Android ，iOS 开发，可以开发一些原生插件在例如 uniapp 上售卖，还可以接一些定制单&lt;br /&gt;3.学习主流的 java ，php （接单）&lt;br /&gt;&lt;br /&gt;这样子的话，工作有收入，业余也有收入，就不用太担心裁员，失业之类的问题&lt;br /&gt;大家怎么看呢？</description>
+      <author>Features</author>
+      <pubDate>16 May 2022 12:39:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>sql 求助，果然只会 mysql 的写 hive 要命 - 程序员</title>
+      <link>https://www.v2ex.com/t/853265</link>
+      <description>&lt;p&gt;数据开发跑路了，只能自己去 hive 导数据，需求是：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;xfrom=&#39;sugg&#39;的全要&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;其它 xfrom 的按 sub_region 分组根据 pubtime 一个月前取 xx 条，一个月内取 xx 条，都要按 click 倒序排&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;汇总到一起&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;渣渣业务开发只能写出这种 sql 了，跑了下执行一次要 49 块钱，求个优化🙏&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;WITH total AS (&#xA;&#x9;SELECT * FROM xx.xx WHERE log_date=&#39;20220515&#39;&#xA;),&#xA;other AS (&#xA;&#x9;SELECT * FROM total WHERE xfrom != &#39;sugg&#39;&#xA;),&#xA;final AS (&#xA;  SELECT * FROM total WHERE xfrom=&#39;sugg&#39; &#xA;  UNION ALL&#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;a&#39; AND pubtime &amp;lt; &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 1000) a1&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;a&#39; AND pubtime &amp;gt;= &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 1000) a2&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;b&#39; AND pubtime &amp;lt; &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 1000) b1&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;b&#39; AND pubtime &amp;gt;= &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 1000) b2&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;c&#39; AND pubtime &amp;lt; &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 250) c1&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;c&#39; AND pubtime &amp;gt;= &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 250) c2&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;d&#39; AND pubtime &amp;lt; &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 500) d1&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;d&#39; AND pubtime &amp;gt;= &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 500) d2&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;e&#39; AND pubtime &amp;lt; &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 500) e1&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;e&#39; AND pubtime &amp;gt;= &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 500) e2&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;f&#39; AND pubtime &amp;lt; &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 50) f1&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;f&#39; AND pubtime &amp;gt;= &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 50) f2&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;g&#39; AND pubtime &amp;lt; &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 50) g1&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;g&#39; AND pubtime &amp;gt;= &#39;${yyyyMMdd,-1m}&#39; ORDER BY click DESC LIMIT 50) g2&#xA;  UNION ALL &#xA;  -- 这个 sub_region 有特殊要求，其它都是一样的条件，只是 limit 数量不同&#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;h&#39; AND pubtime &amp;lt; &#39;${yyyyMMdd,-1m}&#39; AND (tag LIKE &#39;%th%&#39; OR tag LIKE &#39;%ph%&#39;) ORDER BY click DESC LIMIT 150) h1&#xA;  UNION ALL &#xA;  SELECT * FROM (SELECT * FROM other WHERE sub_region=&#39;h&#39; AND pubtime &amp;gt;= &#39;${yyyyMMdd,-1m}&#39; AND (tag LIKE &#39;%th%&#39; OR tag LIKE &#39;%ph%&#39;) ORDER BY click DESC LIMIT 150) h2&#xA;)&#xA;INSERT OVERWRITE TABLE yy.yy SELECT * FROM final;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>Distand</author>
+      <pubDate>16 May 2022 12:36:33 +0000</pubDate>
+    </item>
+    <item>
       <title>OpenWrt 路由器，一言难尽啊 - OpenWrt</title>
       <link>https://www.v2ex.com/t/853264</link>
       <description>&lt;p&gt;红米 Ax6s ，刷了开源 2.4G+5G 固件，结果发现有线网口上网 OK ，但是 STA/终端居然连局域网机器都无法访问！检查了半天，也没有发现哪里的设置有问题。由 STA Ping 局域网其它机器，在路由器 /AP 运行 tcpdump 发现&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;ARP, Request who-has 192.168.8.26 tell 192.168.8.1,length 46.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;好奇怪。&lt;/p&gt;&#xA;&lt;p&gt;最后谷歌搜索，发现 OpenWrt 官方论坛提示说在 lan 接口配置里面增加以下配置：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;option igmp_snooping &#39;1&#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;增加之后，果然 STA/无线终端就可以上网了。&lt;/p&gt;&#xA;&lt;p&gt;真是无语啦，在默认的配置下无线设备居然无法上网。&lt;/p&gt;&#xA;&lt;p&gt;还有此前提问的 WireGuard 客户端无 IPv6 访问的问题...&lt;/p&gt;&#xA;&lt;p&gt;现在发现这 OpenWrt 系统，真是一言难尽啊！&lt;/p&gt;&#xA;</description>
