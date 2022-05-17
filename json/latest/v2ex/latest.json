@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "js 如何播放 pcm 片段 - 程序员",
+      "Link": "https://www.v2ex.com/t/853429",
+      "Description": "\u003cp\u003e后台用 ffmpeg 解码出 pcm 音频传到页面用 AudioContext 播放，每帧之间都会有间隔导致听起来断断续续的，有什么办法解决这个问题\u003c/p\u003e\n",
+      "Author": "faust24601",
+      "PubDate": "2022-05-17T05:11:36Z"
+    },
+    {
+      "Title": "OPENWRT 实现跨网段访问的问题解决，求解惑 - OpenWrt",
+      "Link": "https://www.v2ex.com/t/853428",
+      "Description": "\u003ch1\u003e目前是纯属知其然不知其所以然的状态，特求答疑解惑。\u003c/h1\u003e\n\u003col\u003e\n\u003cli\u003eIP 动态伪装和 MSS 钳制到底是干啥的？参考文档：\u003ca href=\"https://hexo.aragon.wang/2019/08/26/OpenWrt-%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E5%AE%9E%E7%8E%B0%E8%B7%A8%E7%BD%91%E6%AE%B5%E8%AE%BF%E9%97%AE/\" rel=\"nofollow\"\u003eOpenWrt 设置静态路由实现跨网段访问\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e我以下的方案 2 是做这件事情的最佳实践吗？\u003c/li\u003e\n\u003cli\u003eopenwrt 的防火墙区域到底是做什么的？看起来也有转发和 NAT 的作用？\u003c/li\u003e\n\u003cli\u003e接口配置和不配置网关影响 default 路由？\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch1\u003e问题和解决方案\u003c/h1\u003e\n\u003ch2\u003e问题\u003c/h2\u003e\n\u003cp\u003e之前的提问：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.v2ex.com/t/852993\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/852993\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eOPENWRT 的某个接口接入了另外一个子网，用 DHCP/STATIC 的方式获取 ip 地址之后，OP 本身可以直接访问子网，但是 OPENWRT 作为 br-lan 下的其他设备无法访问这个子网\u003c/p\u003e\n\u003ch3\u003e网络拓扑\u003c/h3\u003e\n\u003cp\u003eOP 的 ETH1 连接光猫的 LAN1 ，新建 pppoe-wan 接口拨号。\u003c/p\u003e\n\u003cp\u003e光猫关闭自身的 DHCP ，设备可以连接光猫的 LAN1~LAN4 ，用 STATIC 的方式获取 IP 。\n光猫 IP：192.168.1.1\u003c/p\u003e\n\u003ch2\u003e原解决方案 1：MAN 划入 WAN 接口，设置跃点\u003c/h2\u003e\n\u003ch3\u003e新建 MAN 接口：\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e协议：静态地址\u003c/li\u003e\n\u003cli\u003eIPV4 地址：192.168.1.10\u003c/li\u003e\n\u003cli\u003e子网掩码：255.255.255.0\u003c/li\u003e\n\u003cli\u003e网关：192.168.1.1\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003eMAN 接口的防火墙设置\u003c/h3\u003e\n\u003cp\u003e区域选择\u003ccode\u003eWAN\u003c/code\u003e\u003c/p\u003e\n\u003ch3\u003eMAN 接口的高级设置\u003c/h3\u003e\n\u003cp\u003e网关跃点选择 99\u003c/p\u003e\n\u003ch3\u003e此种方案的路由表\u003c/h3\u003e\n\u003cp\u003e有两个默认路由，其中走 192.168.1.1 的默认路由的 metric 是 99 ，优先级较低，公网流量不会走这个出去。\u003c/p\u003e\n\u003ch2\u003e解决方案 2：把 MAN 接口划入防火墙的 MAN 区域\u003c/h2\u003e\n\u003ch3\u003e新建 MAN 接口：\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e协议：静态地址\u003c/li\u003e\n\u003cli\u003eIPV4 地址：192.168.1.10\u003c/li\u003e\n\u003cli\u003e子网掩码：255.255.255.0\u003c/li\u003e\n\u003cli\u003e网关：空着，不写\u003c/li\u003e\n\u003cli\u003e网关跃点：不写\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003eMAN 接口的防火墙设置\u003c/h3\u003e\n\u003cp\u003e区域选择\u003ccode\u003eMAN\u003c/code\u003e，新建一个 MAN 防火墙区域\u003c/p\u003e\n\u003ch3\u003eMAN 防火墙的设置\u003c/h3\u003e\n\u003cp\u003e照抄 WAN 的设置。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e入站，出站：允许；转发：拒绝\u003c/li\u003e\n\u003cli\u003eIP 动态伪装：启用\u003c/li\u003e\n\u003cli\u003eMSS 钳制：启用\u003c/li\u003e\n\u003cli\u003e覆盖接口：只选择 man 接口\u003c/li\u003e\n\u003cli\u003e端口触发：允许转发到目标区域 都不选；允许从源区域转发：只选 lan\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003e此种方案的路由表\u003c/h3\u003e\n\u003cp\u003e默认路由只有 pppoe-wan 的路由\u003c/p\u003e\n",
+      "Author": "phpfpm",
+      "PubDate": "2022-05-17T05:09:29Z"
+    },
+    {
+      "Title": "U-Web 网站统计收费了， V 友们有没免费的网站统计推荐 - 程序员",
+      "Link": "https://www.v2ex.com/t/853427",
+      "Description": "\u003cp\u003e之前自己搭的小破站一直使用 U-Web 来查看网站的请求访问情况。最近 U-Web 网站统计收费了，V 友们有没有免费的网站统计推荐。\u003c/p\u003e\n",
+      "Author": "sakishum",
+      "PubDate": "2022-05-17T05:06:54Z"
+    },
+    {
+      "Title": "今年最满意的电子产品： macbook pro 16 寸 - Apple",
+      "Link": "https://www.v2ex.com/t/853426",
+      "Description": "\u003cp\u003e换上新的 macbook 16 m1 pro 之后感觉这应该是今年最值的产品了。\n优点：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e首先响应速度非常的快，甚至比我的 i7 台式机还快；\u003c/li\u003e\n\u003cli\u003e再来就是它竟然可以安装 ios 的软件，例如微信读书；\u003c/li\u003e\n\u003cli\u003e最后就是图片预览可以直接复制文字，这非常有用，特别是在工作中查问题的时候；\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e缺点：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e做 cpp 开发编译 x86 版本的工程非常慢；\u003c/li\u003e\n\u003cli\u003e系统还是有些小 bug ，有待优化；\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "luozhiyun",
+      "PubDate": "2022-05-17T05:03:08Z"
+    },
+    {
+      "Title": "有没有好用的 NTFS 文件系统工具可以手工添加坏块的 - Windows",
+      "Link": "https://www.v2ex.com/t/853425",
+      "Description": "硬盘有潜在坏块，部分区域读取延迟很大，但是又不是完全坏掉，所以想通过文件系统层面来屏蔽掉这部分区域\u003cbr /\u003e\u003cbr /\u003e换硬盘就不要说了，想换的话也不会提问了\u003cbr /\u003e\u003cbr /\u003e另外什么 P 表 G 表也不用说了，没几个位置可以塞\u003cbr /\u003e\u003cbr /\u003e已知的 NTFS 文件系统有$BadClus 来管理坏簇信息，但是却没有好的工具来进行操作\u003cbr /\u003e\u003cbr /\u003eLinux 下的 ext 文件系统倒是可以通过 file 导入区块位置来标记，windows 下不知是否有类似的工具？\u003cbr /\u003e\u003cbr /\u003e（ PS：chkdsk 没用，因为数据还是可以读出来，只是很慢，不能被判定为坏簇）",
+      "Author": "wr410",
+      "PubDate": "2022-05-17T05:00:37Z"
+    },
+    {
+      "Title": "nginx 反对网站只能打开首页但文章页链接出现 404，如何解决呢？ - 问与答",
+      "Link": "https://www.v2ex.com/t/853423",
+      "Description": "在香港 CN2 服务器，使用的 windows server 2008 系统，用的宝塔面板，安装 nginx ，使用宝塔反代网站，以加速国外站点，首页可以打开，但是其它文章链接，显示“404 ，您请求的文件不存在! ”\u003cbr /\u003e\u003cbr /\u003e这是 nginx 配置错误的问题么？如何解决呢？",
+      "Author": "permaylau",
+      "PubDate": "2022-05-17T04:51:27Z"
+    },
+    {
       "Title": "NS 高级会员家庭车 自己开的 临时 1 个位置 - Nintendo Switch",
       "Link": "https://www.v2ex.com/t/853422",
       "Description": "NS 高级会员家庭车 自己用自己开的\u003cbr /\u003e付年费到 10 月份了  朋友可能 8 月份要进来\u003cbr /\u003e临时两三个月有 1 个空闲位置 \u003cbr /\u003e可月付 没几块钱 保证稳定\u003cbr /\u003e适合临时有联机需求的人  可以玩动森和马车 dlc 以及很多小游戏\u003cbr /\u003e有意留言",

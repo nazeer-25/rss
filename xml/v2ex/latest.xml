@@ -4,6 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>js 如何播放 pcm 片段 - 程序员</title>
+      <link>https://www.v2ex.com/t/853429</link>
+      <description>&lt;p&gt;后台用 ffmpeg 解码出 pcm 音频传到页面用 AudioContext 播放，每帧之间都会有间隔导致听起来断断续续的，有什么办法解决这个问题&lt;/p&gt;&#xA;</description>
+      <author>faust24601</author>
+      <pubDate>17 May 2022 05:11:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>OPENWRT 实现跨网段访问的问题解决，求解惑 - OpenWrt</title>
+      <link>https://www.v2ex.com/t/853428</link>
+      <description>&lt;h1&gt;目前是纯属知其然不知其所以然的状态，特求答疑解惑。&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;IP 动态伪装和 MSS 钳制到底是干啥的？参考文档：&lt;a href=&#34;https://hexo.aragon.wang/2019/08/26/OpenWrt-%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E5%AE%9E%E7%8E%B0%E8%B7%A8%E7%BD%91%E6%AE%B5%E8%AE%BF%E9%97%AE/&#34; rel=&#34;nofollow&#34;&gt;OpenWrt 设置静态路由实现跨网段访问&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;我以下的方案 2 是做这件事情的最佳实践吗？&lt;/li&gt;&#xA;&lt;li&gt;openwrt 的防火墙区域到底是做什么的？看起来也有转发和 NAT 的作用？&lt;/li&gt;&#xA;&lt;li&gt;接口配置和不配置网关影响 default 路由？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1&gt;问题和解决方案&lt;/h1&gt;&#xA;&lt;h2&gt;问题&lt;/h2&gt;&#xA;&lt;p&gt;之前的提问：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.v2ex.com/t/852993&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/852993&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;OPENWRT 的某个接口接入了另外一个子网，用 DHCP/STATIC 的方式获取 ip 地址之后，OP 本身可以直接访问子网，但是 OPENWRT 作为 br-lan 下的其他设备无法访问这个子网&lt;/p&gt;&#xA;&lt;h3&gt;网络拓扑&lt;/h3&gt;&#xA;&lt;p&gt;OP 的 ETH1 连接光猫的 LAN1 ，新建 pppoe-wan 接口拨号。&lt;/p&gt;&#xA;&lt;p&gt;光猫关闭自身的 DHCP ，设备可以连接光猫的 LAN1~LAN4 ，用 STATIC 的方式获取 IP 。&#xA;光猫 IP：192.168.1.1&lt;/p&gt;&#xA;&lt;h2&gt;原解决方案 1：MAN 划入 WAN 接口，设置跃点&lt;/h2&gt;&#xA;&lt;h3&gt;新建 MAN 接口：&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;协议：静态地址&lt;/li&gt;&#xA;&lt;li&gt;IPV4 地址：192.168.1.10&lt;/li&gt;&#xA;&lt;li&gt;子网掩码：255.255.255.0&lt;/li&gt;&#xA;&lt;li&gt;网关：192.168.1.1&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3&gt;MAN 接口的防火墙设置&lt;/h3&gt;&#xA;&lt;p&gt;区域选择&lt;code&gt;WAN&lt;/code&gt;&lt;/p&gt;&#xA;&lt;h3&gt;MAN 接口的高级设置&lt;/h3&gt;&#xA;&lt;p&gt;网关跃点选择 99&lt;/p&gt;&#xA;&lt;h3&gt;此种方案的路由表&lt;/h3&gt;&#xA;&lt;p&gt;有两个默认路由，其中走 192.168.1.1 的默认路由的 metric 是 99 ，优先级较低，公网流量不会走这个出去。&lt;/p&gt;&#xA;&lt;h2&gt;解决方案 2：把 MAN 接口划入防火墙的 MAN 区域&lt;/h2&gt;&#xA;&lt;h3&gt;新建 MAN 接口：&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;协议：静态地址&lt;/li&gt;&#xA;&lt;li&gt;IPV4 地址：192.168.1.10&lt;/li&gt;&#xA;&lt;li&gt;子网掩码：255.255.255.0&lt;/li&gt;&#xA;&lt;li&gt;网关：空着，不写&lt;/li&gt;&#xA;&lt;li&gt;网关跃点：不写&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3&gt;MAN 接口的防火墙设置&lt;/h3&gt;&#xA;&lt;p&gt;区域选择&lt;code&gt;MAN&lt;/code&gt;，新建一个 MAN 防火墙区域&lt;/p&gt;&#xA;&lt;h3&gt;MAN 防火墙的设置&lt;/h3&gt;&#xA;&lt;p&gt;照抄 WAN 的设置。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;入站，出站：允许；转发：拒绝&lt;/li&gt;&#xA;&lt;li&gt;IP 动态伪装：启用&lt;/li&gt;&#xA;&lt;li&gt;MSS 钳制：启用&lt;/li&gt;&#xA;&lt;li&gt;覆盖接口：只选择 man 接口&lt;/li&gt;&#xA;&lt;li&gt;端口触发：允许转发到目标区域 都不选；允许从源区域转发：只选 lan&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3&gt;此种方案的路由表&lt;/h3&gt;&#xA;&lt;p&gt;默认路由只有 pppoe-wan 的路由&lt;/p&gt;&#xA;</description>
+      <author>phpfpm</author>
+      <pubDate>17 May 2022 05:09:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>U-Web 网站统计收费了， V 友们有没免费的网站统计推荐 - 程序员</title>
+      <link>https://www.v2ex.com/t/853427</link>
+      <description>&lt;p&gt;之前自己搭的小破站一直使用 U-Web 来查看网站的请求访问情况。最近 U-Web 网站统计收费了，V 友们有没有免费的网站统计推荐。&lt;/p&gt;&#xA;</description>
+      <author>sakishum</author>
+      <pubDate>17 May 2022 05:06:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>今年最满意的电子产品： macbook pro 16 寸 - Apple</title>
+      <link>https://www.v2ex.com/t/853426</link>
+      <description>&lt;p&gt;换上新的 macbook 16 m1 pro 之后感觉这应该是今年最值的产品了。&#xA;优点：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;首先响应速度非常的快，甚至比我的 i7 台式机还快；&lt;/li&gt;&#xA;&lt;li&gt;再来就是它竟然可以安装 ios 的软件，例如微信读书；&lt;/li&gt;&#xA;&lt;li&gt;最后就是图片预览可以直接复制文字，这非常有用，特别是在工作中查问题的时候；&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;缺点：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;做 cpp 开发编译 x86 版本的工程非常慢；&lt;/li&gt;&#xA;&lt;li&gt;系统还是有些小 bug ，有待优化；&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>luozhiyun</author>
+      <pubDate>17 May 2022 05:03:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有好用的 NTFS 文件系统工具可以手工添加坏块的 - Windows</title>
+      <link>https://www.v2ex.com/t/853425</link>
+      <description>硬盘有潜在坏块，部分区域读取延迟很大，但是又不是完全坏掉，所以想通过文件系统层面来屏蔽掉这部分区域&lt;br /&gt;&lt;br /&gt;换硬盘就不要说了，想换的话也不会提问了&lt;br /&gt;&lt;br /&gt;另外什么 P 表 G 表也不用说了，没几个位置可以塞&lt;br /&gt;&lt;br /&gt;已知的 NTFS 文件系统有$BadClus 来管理坏簇信息，但是却没有好的工具来进行操作&lt;br /&gt;&lt;br /&gt;Linux 下的 ext 文件系统倒是可以通过 file 导入区块位置来标记，windows 下不知是否有类似的工具？&lt;br /&gt;&lt;br /&gt;（ PS：chkdsk 没用，因为数据还是可以读出来，只是很慢，不能被判定为坏簇）</description>
+      <author>wr410</author>
+      <pubDate>17 May 2022 05:00:37 +0000</pubDate>
+    </item>
+    <item>
+      <title>nginx 反对网站只能打开首页但文章页链接出现 404，如何解决呢？ - 问与答</title>
+      <link>https://www.v2ex.com/t/853423</link>
+      <description>在香港 CN2 服务器，使用的 windows server 2008 系统，用的宝塔面板，安装 nginx ，使用宝塔反代网站，以加速国外站点，首页可以打开，但是其它文章链接，显示“404 ，您请求的文件不存在! ”&lt;br /&gt;&lt;br /&gt;这是 nginx 配置错误的问题么？如何解决呢？</description>
+      <author>permaylau</author>
+      <pubDate>17 May 2022 04:51:27 +0000</pubDate>
+    </item>
+    <item>
       <title>NS 高级会员家庭车 自己开的 临时 1 个位置 - Nintendo Switch</title>
       <link>https://www.v2ex.com/t/853422</link>
       <description>NS 高级会员家庭车 自己用自己开的&lt;br /&gt;付年费到 10 月份了  朋友可能 8 月份要进来&lt;br /&gt;临时两三个月有 1 个空闲位置 &lt;br /&gt;可月付 没几块钱 保证稳定&lt;br /&gt;适合临时有联机需求的人  可以玩动森和马车 dlc 以及很多小游戏&lt;br /&gt;有意留言</description>
