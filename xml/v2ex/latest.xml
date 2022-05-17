@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>没有做过服装的朋友 - 问与答</title>
+      <link>https://www.v2ex.com/t/853498</link>
+      <description>想买点纯色 T 恤印图案在网上卖.&lt;br /&gt;有几个问题:&lt;br /&gt;纯色 T 恤分 230g 和 268g 都是纯棉的差异在哪? &lt;br /&gt;印烫图案是不是对衣服材质有要求?</description>
+      <author>QGabriel</author>
+      <pubDate>17 May 2022 08:48:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>Linux 进程挂起问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/853496</link>
+      <description>&lt;p&gt;线上生产环境用 shell 脚本并发执行 php ,时间长了几乎每个脚本都有大量睡眠状态的进程一直挂在后台，像这样&lt;br/&gt;：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/O4qhsU&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;O4qhsU.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2022/05/17/O4qhsU.png&#34;/&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;8 号唤起的进程还挂在后台&lt;/p&gt;&#xA;&lt;p&gt;以 994032 为例，用 strace 查看状态返回：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;strace -p 994032&#xA;strace: Process 994032 attached&#xA;futex(0x563cb97ec830, FUTEX_WAIT_PRIVATE, 2, NUL&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;Google 了 FUTEX_WAIT_PRIVATE 说是等待唤醒，但是如果不 kill 的话永远不会唤醒&lt;/p&gt;&#xA;&lt;p&gt;查看运行时间：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ps -p 994032 -p etime&#xA;    ELAPSED&#xA; 8-21:56:58&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;br/&gt;&#xA;shell 脚本长这样&#xA;&lt;pre&gt;&lt;code&gt;#!/bin/bash  &#xA;&#xA;pid=$$&#xA;name=`basename $0`&#xA;ps -ef|awk -v p=$pid -v n=$name &#39;$2!=p &amp;amp;&amp;amp; $NF~n{system(&#34;kill &#34;p)}&#39;  #禁止重复运行&#xA;&#xA;ids=$(/usr/bin/php /www/wwwroot/index_cli.php UploadImag/get_id)  #获取 id ,一般会返回几万个 ID ，格式是这样的 (1 2 3 5 6 7) &#xA;&#xA;temp_fifo_file=$$.info        #以当前进程号，为临时管道取名&#xA;mkfifo $temp_fifo_file        #创建临时管道&#xA;exec 6&amp;lt;&amp;gt;$temp_fifo_file       #创建标识为 6 ，可以对管道进行读写&#xA;rm $temp_fifo_file            #清空管道内容&#xA;&#xA;&#xA;temp_thread=80                 #进程数&#xA;&#xA;for ((i=0;i&amp;lt;temp_thread;i++)) #为进程创建相应的占位&#xA;do&#xA;  echo                        #每个 echo 输出一个回车，为每个进程创建一个占位&#xA;done &amp;gt;&amp;amp;6                      #将占位信息写入标识为 6 的管道&#xA;&#xA;for loop in $ids&#xA;do&#xA;  read                        #获取标识为 6 的占位&#xA;  {&#xA;&#xA;&#x9;/usr/bin/php /www/wwwroot/index_cli.php UploadImag/upload_img/id/$loop  #后台执行抓取程序&#xA;&#xA;    echo &amp;gt;&amp;amp;6                  #&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;当任务执行完后，会释放管道占位，所以补充一个占位&#xA;  }&amp;amp;                          #&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;在后台执行{}中的任务&#xA;done &amp;lt;&amp;amp;6                      #将标识为 6 的管道作为标准输入&#xA;&#xA;wait                          #等待所有任务完成&#xA;exec 6&amp;gt;&amp;amp;-                     #关闭标识为 6 的管道&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;br/&gt;&#xA;定时任务调度方式&#xA;&lt;pre&gt;&lt;code&gt;*/5 * * * * /bin/sh /www/wwwroot/cron/UploadImag.sh&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;br/&gt;&#xA;项目用 thinkphp3.1 写的历史老项目，脚本也是前人留下来的，要并发执行的时候就复制一下这个 shell 脚本模板，改一下里面的参数&#xA;&lt;p&gt;发展到现在已经有几百个这样的 shell 脚本，几乎全部存在进程卡住的情况&lt;/p&gt;&#xA;&lt;p&gt;系统是 centos7&lt;/p&gt;&#xA;&lt;p&gt;php5.4 版本&lt;/p&gt;&#xA;&lt;p&gt;请教这种进程卡住的情况应该怎么解决？&lt;/p&gt;&#xA;</description>
+      <author>AnjingJingan</author>
+      <pubDate>17 May 2022 08:44:03 +0000</pubDate>
+    </item>
+    <item>
       <title>iPhone 一个令人无语的通话拨出体验 - iPhone</title>
       <link>https://www.v2ex.com/t/853495</link>
       <description>&lt;p&gt;通过“最近通话”拨出电话，挂电话的时候可能正好点在其他通话上拨出。这种问题简直难以理解，是不该用“最近通话”打电话吗？&lt;/p&gt;&#xA;</description>
