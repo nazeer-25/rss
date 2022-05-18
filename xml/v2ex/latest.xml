@@ -4,6 +4,54 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教一个简单的 Java 问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/853703</link>
+      <description>&lt;p&gt;今天在把一个项目的数据库，从 oracle 切换到 postgres 时，&#xA;遇到了问题&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;UserLogic.java&#xA;&#xA;User user = getUserAFromXXX();&#xA;user.setUpdateTime( new Date() );&#xA;UserDao.update( user );&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;执行到 update()时，报错如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;错误: 语法错误 在 &#34;(&#34; 或附近的&#xA;&#xA;    update&#xA;        (&#xA;            select&#xA;                *          &#xA;            from&#xA;                USER&#xA;            where&#xA;                TYPE=1      &#xA;        ) &#xA;    set&#xA;       UPDATETIME = NOW()&#xA;    where &#xA;       TYPE=1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;看了一下，User 分为 2 种形式，UserA 和 UserB 。&lt;/p&gt;&#xA;&lt;p&gt;两者在数据库中，对应着同一张表，都为 USER 表。&lt;/p&gt;&#xA;&lt;p&gt;唯一的不同仅在于 A 的 type = 1 ，B 的 type = 2 。&lt;/p&gt;&#xA;&lt;p&gt;当需要使用 type = 1 的数据时，则取 UserA 的 entity ，反之亦然。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;UserA.hbm.xml：&#xA;&#xA; &amp;lt;class &#xA;    name=&#34;userA&#34; &#xA;    table=&#34;USER&#34;&#xA;    lazy=&#34;true&#34;&#xA; &amp;gt;&#xA;    &amp;lt;subselect&amp;gt;&#xA;        select * &#xA;        from USER&#xA;        where TYPE=1&#xA;    &amp;lt;/subselect&amp;gt;&#xA;……（下略）……&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;UserB.hbm.xml：&#xA;&#xA; &amp;lt;class &#xA;    name=&#34;userB&#34; &#xA;    table=&#34;USER&#34;&#xA;    lazy=&#34;true&#34;&#xA; &amp;gt;&#xA;    &amp;lt;subselect&amp;gt;&#xA;        select * &#xA;        from USER&#xA;        where TYPE=2&#xA;    &amp;lt;/subselect&amp;gt;&#xA;……（下略）……&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;回到最开始的提问，原本 SQL 是：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;    update&#xA;       USER&#xA;    set&#xA;       UPDATETIME = NOW()&#xA;    where &#xA;       TYPE=1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;因为现在这种写法，变成了：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;    update&#xA;        (&#xA;            select&#xA;                *          &#xA;            from&#xA;                USER&#xA;            where&#xA;                TYPE=1      &#xA;        ) &#xA;    set&#xA;       UPDATETIME = NOW()&#xA;    where &#xA;       TYPE=1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;以前的数据库是 oracle 的，这种写法倒是也能更新进去。现在数据库换成了 Postgres ，直接报语法错误了。&lt;/p&gt;&#xA;&lt;p&gt;看了下 hibernate 的官方文档，&amp;lt;subselect&amp;gt;应该是只读，不能用于更新，不知道为什么原来的程序员这么写。&lt;/p&gt;&#xA;&lt;p&gt;不知道怎么改了，还望各位大佬不吝赐教，小的感激不尽。&lt;/p&gt;&#xA;</description>
+      <author>lithium148</author>
+      <pubDate>18 May 2022 06:18:27 +0000</pubDate>
+    </item>
+    <item>
+      <title>寻找前端程序员老哥合作写网站 - 程序员</title>
+      <link>https://www.v2ex.com/t/853700</link>
+      <description>&lt;p&gt;1.本人平面设计工作室，平时接很多企业官网设计的活，程序这块之前是外包的，现在长期合作的外包程序找了新工作，没法做外包了。我自己也通过周围朋友找了几个前端，没能找到满足需求的。&lt;/p&gt;&#xA;&lt;p&gt;2.听说 V2EX 上卧虎藏龙，想看看有没有程序员老哥，专门写前端的，平时有空能接私活，希望能长期合作，诚意寻找！&lt;/p&gt;&#xA;&lt;p&gt;3.我页面设计是在 figma 上面完成的，协调配合起来非常方便，稿子非常规范，交互的地方我会找好参考或者用 figma 做好交互演示，录屏做说明。只要配合我执行代码落地即可。&lt;/p&gt;&#xA;&lt;p&gt;4.远程合作即可，不是招人上班，不需要面对面沟通。&lt;/p&gt;&#xA;&lt;p&gt;5.有意向的老哥，麻烦发个附上联系方式发个邮件到 &lt;a href=&#34;mailto:qiaoya123456@gmail.com&#34;&gt;qiaoya123456@gmail.com&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>qiaoya</author>
+      <pubDate>18 May 2022 06:12:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>用 swoole 加速 laravel 似乎并不像宣传的那么有效 - 程序员</title>
+      <link>https://www.v2ex.com/t/853699</link>
+      <description>&lt;p&gt;因为不止一次听别人讨论要用 Swoole 来提高性能，甚至很多面试官也喜欢问 swoole ，虽然我也觉得 swoole 很牛逼，但是我还是建议不要轻易用，除非你用来做连接池，否则没有什么加速效果。  &lt;/p&gt;&#xA;&lt;p&gt;详细的测试过程我发不在简书，如果觉得测试过程和结果有问题，欢迎理性讨论。&lt;br/&gt;&#xA;&lt;a href=&#34;https://www.jianshu.com/p/33a53c574f88&#34; rel=&#34;nofollow&#34;&gt;https://www.jianshu.com/p/33a53c574f88&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;这里直接贴结果&lt;br/&gt;&#xA;|          | Lravel | Laravel + Opcache |  LaravelS |&lt;br/&gt;&#xA;|----------|--------|-------------------|-----------|&lt;br/&gt;&#xA;| 请求数   | 1000   | 1000              | 1000      |&lt;br/&gt;&#xA;| 耗时 /req | 42.698 | 4.405             | 1.876     |&lt;br/&gt;&#xA;| QPS      | 23     | 227               | 533       |  &lt;/p&gt;&#xA;&lt;p&gt;乍一看 Swoole (LravelS) 比 Opcache 快了 2 倍多，好像很厉害，但是也只是快了 2.4ms 左右，这只是一个 helloworld 程序，如果多次查询数据库，这个 2.4 ms 可以忽略不计&lt;/p&gt;&#xA;</description>
+      <author>cszchen</author>
+      <pubDate>18 May 2022 06:10:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>由于从小到大没有养成良好的喝奶习惯，现在摄入含乳糖的食物总是出现乳糖不耐的症状，有什么办法减轻该症状吗？谢谢 - 问与答</title>
+      <link>https://www.v2ex.com/t/853698</link>
+      <description>&lt;a target=&#34;_blank&#34; href=&#34;https://zh.m.wikipedia.org/zh/%E4%B9%B3%E7%B3%96%E4%B8%8D%E8%80%90&#34; rel=&#34;nofollow noopener&#34;&gt;https://zh.m.wikipedia.org/zh/%E4%B9%B3%E7%B3%96%E4%B8%8D%E8%80%90&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;wiki 里面提到可以服用乳糖酶补充剂，但是好像并没有哪些天然蔬菜 /水果含有乳糖酶？有知道的老哥麻烦告知一下，谢谢。</description>
+      <author>valuable</author>
+      <pubDate>18 May 2022 06:09:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>话说 v 站结婚的各位 ，家里都是咋管钱的 - 生活</title>
+      <link>https://www.v2ex.com/t/853697</link>
+      <author>zhangleshiye</author>
+      <pubDate>18 May 2022 06:07:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>有无可以 PC、安卓同步阅读进度和书签的 PDF 阅读器 - 问与答</title>
+      <link>https://www.v2ex.com/t/853696</link>
+      <description>希望在上班摸鱼时可以同步在家看书的进度，目前阅读大部分是 PDF ，批注和笔记不是刚需，有阅读进度和书签同步就行，文件同步也不强求。看这个知乎回答（ &lt;a target=&#34;_blank&#34; href=&#34;https://www.zhihu.com/question/28926380&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.zhihu.com/question/28926380&lt;/a&gt; ），最适合的是网易云阅读（ &lt;a target=&#34;_blank&#34; href=&#34;https://yuedu.163.com&#34; rel=&#34;nofollow noopener&#34;&gt;https://yuedu.163.com&lt;/a&gt; ），但 PC 端用的是 flash ，那至少两年没更新了吧......</description>
+      <author>roth</author>
+      <pubDate>18 May 2022 06:05:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教大神们一个关于 Grafana 的问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/853695</link>
+      <description>&lt;p&gt;我是按这么老哥的教程搭建的 Docker+Prometheus+Grafana 监控 VPS 运行状态&#xA;&lt;a href=&#34;https://lala.im/6764.html&#34; rel=&#34;nofollow&#34;&gt;https://lala.im/6764.html&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;搭建了两个，公网的那个显示正常。&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/05/18/3fc31f2581714a70.png&#34;/&gt;&#xA;私网的有好几个选项无法显示，带宽和 IO 显示不出来&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/05/18/75daae03447b1998.png&#34;/&gt;&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/05/18/398625a681ed9172.png&#34;/&gt;&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/05/18/58df9e91a8c4dd1b.png&#34;/&gt;&#xA;模板一样，用的都是 16098&#xA;Grafana 版本一样，用的都是 V8.4.4&#xA;被监控的小鸡我试过用同一个，也是有问题。&lt;/p&gt;&#xA;&lt;p&gt;公网用的是 RN 的小鸡，ubuntu 系统&#xA;内网用的 ESXI 虚拟机，Centos7.9 系统&#xA;有人知道是什么问题吗？&lt;/p&gt;&#xA;</description>
+      <author>simplove</author>
+      <pubDate>18 May 2022 06:05:03 +0000</pubDate>
+    </item>
+    <item>
       <title>大家用 vscode 会基本脱离鼠标吗 - 问与答</title>
       <link>https://www.v2ex.com/t/853694</link>
       <description>&lt;p&gt;我感觉不用鼠标，快捷键花点时间肌肉记忆倒还好，就是浏览长文件代码的时候有点吃力，用键盘滚屏总感觉比用鼠标滚屏要吃力很多，是不是我打开方式有问题...&lt;/p&gt;&#xA;</description>

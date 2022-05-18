@@ -4,6 +4,55 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教一个简单的 Java 问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/853703",
+      "Description": "\u003cp\u003e今天在把一个项目的数据库，从 oracle 切换到 postgres 时，\n遇到了问题\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eUserLogic.java\n\nUser user = getUserAFromXXX();\nuser.setUpdateTime( new Date() );\nUserDao.update( user );\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e执行到 update()时，报错如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e错误: 语法错误 在 \"(\" 或附近的\n\n    update\n        (\n            select\n                *          \n            from\n                USER\n            where\n                TYPE=1      \n        ) \n    set\n       UPDATETIME = NOW()\n    where \n       TYPE=1\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e看了一下，User 分为 2 种形式，UserA 和 UserB 。\u003c/p\u003e\n\u003cp\u003e两者在数据库中，对应着同一张表，都为 USER 表。\u003c/p\u003e\n\u003cp\u003e唯一的不同仅在于 A 的 type = 1 ，B 的 type = 2 。\u003c/p\u003e\n\u003cp\u003e当需要使用 type = 1 的数据时，则取 UserA 的 entity ，反之亦然。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eUserA.hbm.xml：\n\n \u0026lt;class \n    name=\"userA\" \n    table=\"USER\"\n    lazy=\"true\"\n \u0026gt;\n    \u0026lt;subselect\u0026gt;\n        select * \n        from USER\n        where TYPE=1\n    \u0026lt;/subselect\u0026gt;\n……（下略）……\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003eUserB.hbm.xml：\n\n \u0026lt;class \n    name=\"userB\" \n    table=\"USER\"\n    lazy=\"true\"\n \u0026gt;\n    \u0026lt;subselect\u0026gt;\n        select * \n        from USER\n        where TYPE=2\n    \u0026lt;/subselect\u0026gt;\n……（下略）……\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e回到最开始的提问，原本 SQL 是：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e    update\n       USER\n    set\n       UPDATETIME = NOW()\n    where \n       TYPE=1\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e因为现在这种写法，变成了：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e    update\n        (\n            select\n                *          \n            from\n                USER\n            where\n                TYPE=1      \n        ) \n    set\n       UPDATETIME = NOW()\n    where \n       TYPE=1\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e以前的数据库是 oracle 的，这种写法倒是也能更新进去。现在数据库换成了 Postgres ，直接报语法错误了。\u003c/p\u003e\n\u003cp\u003e看了下 hibernate 的官方文档，\u0026lt;subselect\u0026gt;应该是只读，不能用于更新，不知道为什么原来的程序员这么写。\u003c/p\u003e\n\u003cp\u003e不知道怎么改了，还望各位大佬不吝赐教，小的感激不尽。\u003c/p\u003e\n",
+      "Author": "lithium148",
+      "PubDate": "2022-05-18T06:18:27Z"
+    },
+    {
+      "Title": "寻找前端程序员老哥合作写网站 - 程序员",
+      "Link": "https://www.v2ex.com/t/853700",
+      "Description": "\u003cp\u003e1.本人平面设计工作室，平时接很多企业官网设计的活，程序这块之前是外包的，现在长期合作的外包程序找了新工作，没法做外包了。我自己也通过周围朋友找了几个前端，没能找到满足需求的。\u003c/p\u003e\n\u003cp\u003e2.听说 V2EX 上卧虎藏龙，想看看有没有程序员老哥，专门写前端的，平时有空能接私活，希望能长期合作，诚意寻找！\u003c/p\u003e\n\u003cp\u003e3.我页面设计是在 figma 上面完成的，协调配合起来非常方便，稿子非常规范，交互的地方我会找好参考或者用 figma 做好交互演示，录屏做说明。只要配合我执行代码落地即可。\u003c/p\u003e\n\u003cp\u003e4.远程合作即可，不是招人上班，不需要面对面沟通。\u003c/p\u003e\n\u003cp\u003e5.有意向的老哥，麻烦发个附上联系方式发个邮件到 \u003ca href=\"mailto:qiaoya123456@gmail.com\"\u003eqiaoya123456@gmail.com\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "qiaoya",
+      "PubDate": "2022-05-18T06:12:29Z"
+    },
+    {
+      "Title": "用 swoole 加速 laravel 似乎并不像宣传的那么有效 - 程序员",
+      "Link": "https://www.v2ex.com/t/853699",
+      "Description": "\u003cp\u003e因为不止一次听别人讨论要用 Swoole 来提高性能，甚至很多面试官也喜欢问 swoole ，虽然我也觉得 swoole 很牛逼，但是我还是建议不要轻易用，除非你用来做连接池，否则没有什么加速效果。  \u003c/p\u003e\n\u003cp\u003e详细的测试过程我发不在简书，如果觉得测试过程和结果有问题，欢迎理性讨论。\u003cbr/\u003e\n\u003ca href=\"https://www.jianshu.com/p/33a53c574f88\" rel=\"nofollow\"\u003ehttps://www.jianshu.com/p/33a53c574f88\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e这里直接贴结果\u003cbr/\u003e\n|          | Lravel | Laravel + Opcache |  LaravelS |\u003cbr/\u003e\n|----------|--------|-------------------|-----------|\u003cbr/\u003e\n| 请求数   | 1000   | 1000              | 1000      |\u003cbr/\u003e\n| 耗时 /req | 42.698 | 4.405             | 1.876     |\u003cbr/\u003e\n| QPS      | 23     | 227               | 533       |  \u003c/p\u003e\n\u003cp\u003e乍一看 Swoole (LravelS) 比 Opcache 快了 2 倍多，好像很厉害，但是也只是快了 2.4ms 左右，这只是一个 helloworld 程序，如果多次查询数据库，这个 2.4 ms 可以忽略不计\u003c/p\u003e\n",
+      "Author": "cszchen",
+      "PubDate": "2022-05-18T06:10:13Z"
+    },
+    {
+      "Title": "由于从小到大没有养成良好的喝奶习惯，现在摄入含乳糖的食物总是出现乳糖不耐的症状，有什么办法减轻该症状吗？谢谢 - 问与答",
+      "Link": "https://www.v2ex.com/t/853698",
+      "Description": "\u003ca target=\"_blank\" href=\"https://zh.m.wikipedia.org/zh/%E4%B9%B3%E7%B3%96%E4%B8%8D%E8%80%90\" rel=\"nofollow noopener\"\u003ehttps://zh.m.wikipedia.org/zh/%E4%B9%B3%E7%B3%96%E4%B8%8D%E8%80%90\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003ewiki 里面提到可以服用乳糖酶补充剂，但是好像并没有哪些天然蔬菜 /水果含有乳糖酶？有知道的老哥麻烦告知一下，谢谢。",
+      "Author": "valuable",
+      "PubDate": "2022-05-18T06:09:23Z"
+    },
+    {
+      "Title": "话说 v 站结婚的各位 ，家里都是咋管钱的 - 生活",
+      "Link": "https://www.v2ex.com/t/853697",
+      "Description": "",
+      "Author": "zhangleshiye",
+      "PubDate": "2022-05-18T06:07:43Z"
+    },
+    {
+      "Title": "有无可以 PC、安卓同步阅读进度和书签的 PDF 阅读器 - 问与答",
+      "Link": "https://www.v2ex.com/t/853696",
+      "Description": "希望在上班摸鱼时可以同步在家看书的进度，目前阅读大部分是 PDF ，批注和笔记不是刚需，有阅读进度和书签同步就行，文件同步也不强求。看这个知乎回答（ \u003ca target=\"_blank\" href=\"https://www.zhihu.com/question/28926380\" rel=\"nofollow noopener\"\u003ehttps://www.zhihu.com/question/28926380\u003c/a\u003e ），最适合的是网易云阅读（ \u003ca target=\"_blank\" href=\"https://yuedu.163.com\" rel=\"nofollow noopener\"\u003ehttps://yuedu.163.com\u003c/a\u003e ），但 PC 端用的是 flash ，那至少两年没更新了吧......",
+      "Author": "roth",
+      "PubDate": "2022-05-18T06:05:34Z"
+    },
+    {
+      "Title": "请教大神们一个关于 Grafana 的问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/853695",
+      "Description": "\u003cp\u003e我是按这么老哥的教程搭建的 Docker+Prometheus+Grafana 监控 VPS 运行状态\n\u003ca href=\"https://lala.im/6764.html\" rel=\"nofollow\"\u003ehttps://lala.im/6764.html\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e搭建了两个，公网的那个显示正常。\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/05/18/3fc31f2581714a70.png\"/\u003e\n私网的有好几个选项无法显示，带宽和 IO 显示不出来\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/05/18/75daae03447b1998.png\"/\u003e\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/05/18/398625a681ed9172.png\"/\u003e\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/05/18/58df9e91a8c4dd1b.png\"/\u003e\n模板一样，用的都是 16098\nGrafana 版本一样，用的都是 V8.4.4\n被监控的小鸡我试过用同一个，也是有问题。\u003c/p\u003e\n\u003cp\u003e公网用的是 RN 的小鸡，ubuntu 系统\n内网用的 ESXI 虚拟机，Centos7.9 系统\n有人知道是什么问题吗？\u003c/p\u003e\n",
+      "Author": "simplove",
+      "PubDate": "2022-05-18T06:05:03Z"
+    },
+    {
       "Title": "大家用 vscode 会基本脱离鼠标吗 - 问与答",
       "Link": "https://www.v2ex.com/t/853694",
       "Description": "\u003cp\u003e我感觉不用鼠标，快捷键花点时间肌肉记忆倒还好，就是浏览长文件代码的时候有点吃力，用键盘滚屏总感觉比用鼠标滚屏要吃力很多，是不是我打开方式有问题...\u003c/p\u003e\n",
