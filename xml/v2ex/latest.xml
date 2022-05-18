@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>家人们，现在的 WSL2 可以编译 aosp 吗 - Android</title>
+      <link>https://www.v2ex.com/t/853752</link>
+      <description>&lt;p&gt;以前用 WSL1 试过编译，结果检测到硬盘不区分大小写，后来查资料发现，WSL1 并不具备修改 windows 物理硬盘属性的功能，遂放弃。不知道 WSL2 可不可以，有没有试过的家人呢？&lt;/p&gt;&#xA;</description>
+      <author>StonyGround</author>
+      <pubDate>18 May 2022 09:34:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>又一个「透明创业」实例初始化：挑战日更 YouTube，为去到更远的地方 - 奇思妙想</title>
+      <link>https://www.v2ex.com/t/853751</link>
+      <description>接力帖子： &lt;a target=&#34;_blank&#34; href=&#34;/t/850671&#34; rel=&#34;nofollow noopener&#34;&gt;/t/850671&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;---&lt;br /&gt;&lt;br /&gt;疫情常态化抑郁了很长时间，希望做些改变。&lt;br /&gt;&lt;br /&gt;之前每年去两次日本和其他几个国家，距离现在已经非常久远了，就连离开大陆也过去几年时间。&lt;br /&gt;&lt;br /&gt;梦想火星移民，现在能做的只是不断争取走得更远的机会，比如逃离小区和城市。&lt;br /&gt;&lt;br /&gt;想通过日更视频的形式，记录灵活就业方向的「整活搞钱」日常，重新发现更大的世界，唤起对身边事物的热爱。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;文字和视频记录：&lt;br /&gt;&lt;br /&gt;- &lt;a target=&#34;_blank&#34; href=&#34;http://zhix.in&#34; rel=&#34;nofollow noopener&#34;&gt;zhix.in&lt;/a&gt;&lt;br /&gt;- Bilibili: xinzhi 万里行&lt;br /&gt;- YouTube: &lt;a target=&#34;_blank&#34; href=&#34;https://www.youtube.com/channel/UCgrNxW6i6fGzCZ-TWks4SnA&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.youtube.com/channel/UCgrNxW6i6fGzCZ-TWks4SnA&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;希望以后有更多人接力，加入新挑战。</description>
+      <author>xinzhi</author>
+      <pubDate>18 May 2022 09:33:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>写了个命令行的脚手架，感觉还挺好使 - 程序员</title>
+      <link>https://www.v2ex.com/t/853750</link>
+      <description>&lt;h1&gt;gostage&lt;/h1&gt;&#xA;&lt;p&gt;gostage 是一个快速搭建常驻服务的命令行脚手架。&lt;/p&gt;&#xA;&lt;h2&gt;安装&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go get github.com/PeterYangs/gostage&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;快速开始&lt;/h2&gt;&#xA;&lt;p&gt;编写一个每秒往一个文件中写入一行文本的服务&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;import (&#xA;&#x9;&#34;context&#34;&#xA;&#x9;&#34;fmt&#34;&#xA;&#x9;&#34;github.com/PeterYangs/gostage&#34;&#xA;&#x9;&#34;os&#34;&#xA;&#x9;&#34;time&#34;&#xA;)&#xA;func main() {&#xA;&#x9;g := gostage.NewStage(context.Background())&#xA;&#x9;//绑定主服务逻辑&#xA;&#x9;g.StartFunc(func(st *gostage.Stage) error {&#xA;&#x9;&#x9;//打开文件&#xA;&#x9;&#x9;file, err := os.OpenFile(&#34;word.txt&#34;, os.O_CREATE|os.O_RDWR, 0644)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;return err&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;//计数&#xA;&#x9;&#x9;index := 0&#xA;&#x9;&#x9;defer file.Close()&#xA;&#x9;&#x9;for {&#xA;&#x9;&#x9;&#x9;select {&#xA;&#x9;&#x9;&#x9;case &amp;lt;-st.GetCxt().Done():&#xA;&#x9;&#x9;&#x9;&#x9;return nil&#xA;&#x9;&#x9;&#x9;default:&#xA;&#x9;&#x9;&#x9;&#x9;//打印计数到终端&#xA;&#x9;&#x9;&#x9;&#x9;fmt.Println(index)&#xA;&#x9;&#x9;&#x9;&#x9;//每秒写入一行文本&#xA;&#x9;&#x9;&#x9;&#x9;time.Sleep(1 * time.Second)&#xA;&#x9;&#x9;&#x9;&#x9;file.Write([]byte(&#34;word\n&#34;))&#xA;&#x9;&#x9;&#x9;&#x9;index++&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;})&#xA;&#x9;err := g.Run()&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;fmt.Println(err)&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h4&gt;启动&lt;/h4&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go run stage.go 或 go run stage.go start&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h4&gt;守护进程&lt;/h4&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go  go run stage.go start -d&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h4&gt;停止&lt;/h4&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go run stage.go stop&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h4&gt;帮助&lt;/h4&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go run stage.go help&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;地址： &lt;a href=&#34;https://github.com/PeterYangs/gostage&#34; rel=&#34;nofollow&#34;&gt;https://github.com/PeterYangs/gostage&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>PeterYang1996</author>
+      <pubDate>18 May 2022 09:28:13 +0000</pubDate>
+    </item>
+    <item>
       <title>hugegraph 的边文件，可以不使用 json 吗 - 问与答</title>
       <link>https://www.v2ex.com/t/853749</link>
       <description>官方写的 edge_knwos.json&lt;br /&gt;{&#34;source_name&#34;: &#34;marko&#34;, &#34;target_name&#34;: &#34;vadas&#34;, &#34;date&#34;: &#34;20160110&#34;, &#34;weight&#34;: 0.5}&lt;br /&gt;{&#34;source_name&#34;: &#34;marko&#34;, &#34;target_name&#34;: &#34;josh&#34;, &#34;date&#34;: &#34;20130220&#34;, &#34;weight&#34;: 1.0}&lt;br /&gt;&lt;br /&gt;可以不使用 json 作为边数据吗，直接&lt;br /&gt;source_name,target_name,data,weight&lt;br /&gt;marko,vadas,20160110,0.5&lt;br /&gt;...</description>
