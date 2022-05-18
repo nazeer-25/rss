@@ -158,6 +158,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "一个gRpc拦截器的bug",
+      "Link": "https://studygolang.com/topics/15450#reply5",
+      "Description": "\u003cp\u003e问题大概是这样的，有一个链式的grpc流式拦截器。如下图：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220502/e1c635d1bcbbac007709fb35bcff341e.png\" alt=\"image.png\" /\u003e\n其中执行到GrpcJWTAuthToken这个拦截器的时候。会判断客户端传过来的metedata中的Authorization空格后面的token是否合法。\n如果合法，就可以找到响应的用户，然后将用户的信息放到metedata里面.\n\u003cimg src=\"https://static.golangjob.cn/220502/54bd871232897c429cbc70c6914e4e5d.png\" alt=\"image.png\" /\u003e\n然后调用下面的handler方法，执行下一个拦截器。\n\u003cimg src=\"https://static.golangjob.cn/220502/b95aed0e8e3ba25f377e7439c00d023e.png\" alt=\"image.png\" /\u003e\n然后就会走到流量统计拦截器，这个时候获取metedata的租户，却获取不到了。\n\u003cimg src=\"https://static.golangjob.cn/220502/0ca6f9752acfd2c3f6aa7490d04bc1d7.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e下面上一下debug的图。\n\u003cimg src=\"https://static.golangjob.cn/220502/1e99c802ce73d316799a4d96aabe0650.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220502/f24015aae3a9002e16e9bf5c22a9bcd5.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e我自己试了一下，感觉是因为就算metedata进行了set，但是对执行器链的context没有改变，所以执行到下一个拦截器。\n还是用的没set的context，但是不知道如果修改context。\n\u003cimg src=\"https://static.golangjob.cn/220502/24851f5e3dbecbf681a2b813a9c792e1.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e可以得到context。\n但是context是开头小写，我无法修改，\n\u003cimg src=\"https://static.golangjob.cn/220502/aec4b01445c2b95621c304021b97dda7.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e我该怎么办？ 求大佬解答。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "诚招GO开发工程师",
       "Link": "https://studygolang.com/topics/15474#reply1",
       "Description": "\u003cp\u003e岗位职责:\u003c/p\u003e\n\n\u003cp\u003e1.能够独立进行区块链底层系统及应用平台的功能定义和架构设计，研究区块链的协议，运行机制、底层实现和应用平台研发等；\u003c/p\u003e\n\n\u003cp\u003e2.从事区块链产品的设计和研发工作，研究区块链的协议，运行机制和底层实现等；\u003c/p\u003e\n\n\u003cp\u003e任职要求:\u003c/p\u003e\n\n\u003cp\u003e1.本科及以上学历, 计算机、软件工程等相关专业；\u003c/p\u003e\n\n\u003cp\u003e2.从事Go开发2年或以上，熟悉Solidity，了解Web3中间件的客户端使用，例如IPFS、AR、GRT、Chainlink为加分项；\u003c/p\u003e\n\n\u003cp\u003e3.熟悉各种数据结构和算法设计，有过区块链相关工作经验。\u003c/p\u003e\n\n\u003cp\u003e可远程办公或线下办公－杭州未来科技城，可以带小宠物上班，上班期间可喝酒（但是不要喝醉了哦），工作时间：12点至19点，不加班，双休，薪资25K-50K。\u003c/p\u003e\n\n\u003cp\u003e我们是一家区块链技术驱动的创业公司，产品名：dataverse，有意可发简历至：olivia@ownershiplabs.com\u003c/p\u003e\n",
