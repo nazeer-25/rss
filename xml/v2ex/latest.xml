@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>[Rust] 为啥我这里的 p 可以在多个线程间转移所有权并使用呢? - Rust</title>
+      <link>https://www.v2ex.com/t/853726</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-rust&#34;&gt;&#xA;&#xA;use std::thread;&#xA;&#xA;fn main() {&#xA;    struct Point&amp;lt;T&amp;gt; {&#xA;        pub x: T,&#xA;    }&#xA;&#xA;    let mut p = Point { x: 32 };&#xA;    &#xA;&#xA;    let mut vals = Vec::new();&#xA;    for _ in 0..2 {&#xA;        let h = thread::spawn(move || {&#xA;            p.x = 5;&#xA;            println!(&#34;{}&#34;, p.x);&#xA;        });&#xA;        vals.push(h);&#xA;    }&#xA;&#xA;    for v in vals {&#xA;        v.join().unwrap();&#xA;    }&#xA;    println!(&#34;{}&#34;, p.x);  // 32&#xA;}&#xA;&#xA;输出结果是两个 5 和最后的 32, 也就是说线程里修改对主线程无效&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;playground url: &lt;a href=&#34;https://play.rust-lang.org/?version=stable&amp;amp;mode=debug&amp;amp;edition=2021&amp;amp;gist=bf8936b4cc64c1f3124e926e81d9b4d6&#34; rel=&#34;nofollow&#34;&gt;https://play.rust-lang.org/?version=stable&amp;amp;mode=debug&amp;amp;edition=2021&amp;amp;gist=bf8936b4cc64c1f3124e926e81d9b4d6&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;DDDD -_-&lt;/p&gt;&#xA;&lt;p&gt;我这里的变量 p 为啥能在多个线程间修改和使用呢? 懂的兄弟带带我, 谢谢.&lt;/p&gt;&#xA;&lt;p&gt;同时求一个好的 rust 社区 /论坛 /讨论区&lt;/p&gt;&#xA;</description>
+      <author>BBCCBB</author>
+      <pubDate>18 May 2022 07:47:24 +0000</pubDate>
+    </item>
+    <item>
       <title>看完《看完房贴文有感》有感 - 随想</title>
       <link>https://www.v2ex.com/t/853724</link>
       <description>&lt;p&gt;原贴： &lt;a href=&#34;https://www.v2ex.com/t/853624&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/853624&lt;/a&gt;&lt;br/&gt;&#xA;原贴里 OP 15 年毕业，大家都说正是风口的时候，买房很轻松，不会只有我 15 年毕业还没买房吧  &lt;/p&gt;&#xA;&lt;p&gt;前几年啥也不懂，工资低，也被消费主义洗脑到处花钱，没想过进过大厂&lt;br/&gt;&#xA;这两年同学都陆续成家买房了才缓过劲来，也对消费主义不感冒了，开始攒了点（也只有一点点）&lt;br/&gt;&#xA;但离买房还早，要买房至少还要攒两年（去二线城市买很便宜的那种）&lt;br/&gt;&#xA;在一线城市买估计要攒四五年，都不知道四五年后会发生什么  &lt;/p&gt;&#xA;&lt;p&gt;*别问为什么家里不出点钱，问就是家里穷&lt;/p&gt;&#xA;</description>
