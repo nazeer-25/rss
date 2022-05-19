@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "免费 CDN 上传大文件 - 分享创造",
+      "Link": "https://www.v2ex.com/t/853977",
+      "Description": "\u003cp\u003e由于很多免费 CDN 对单个文件的体积有限制，因此无法上传大文件。\u003c/p\u003e\n\u003cp\u003e不过有个黑科技可以突破这个限制：把大文件切割成多个小文件上传，运行时通过 Service Worker 进行合并，这样在页面看来仍是一个大文件。\u003c/p\u003e\n\u003cp\u003e这里使用 NPM 空间演示。将测试文件 bbb.mp4 以每片 10MiB 切割：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003emkdir -p bbb.mp4.parts\nsplit -b 10MiB -d bbb.mp4 bbb.mp4.parts/\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e得到 00 、01 、02 、...、33 切片，然后逐个上传到 NPM：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003enpm.elemecdn.com/free-host@0.0.0-bbb-00/main.bin\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003enpm.elemecdn.com/free-host@0.0.0-bbb-01/main.bin\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e...\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"http://npm.elemecdn.com/free-host@0.0.0-bbb-33/main.bin\" rel=\"nofollow\"\u003enpm.elemecdn.com/free-host@0.0.0-bbb-33/main.bin\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e最终效果：\u003ca href=\"http://freecdn.etherdream.com/bbb.mp4\" rel=\"nofollow\"\u003efreecdn.etherdream.com/bbb.mp4\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e该文件实际并不存在，而是通过 Service Worker 虚拟出来的。如果用低版本浏览器访问就是 404 。\u003c/p\u003e\n\u003cp\u003e拖动视频进度条，程序会根据 Range 请求范围，加载相应的分片。\u003c/p\u003e\n\u003cp\u003e（打开控制台调试时不要勾选“禁用缓存”，否则请求可能不走 ServiceWorker ）\u003c/p\u003e\n\u003cp\u003e事实上 NPM 有多个服务，例如 \u003ca href=\"http://unpkg.com\" rel=\"nofollow\"\u003eunpkg.com\u003c/a\u003e 和 \u003ca href=\"http://npm.elemecdn.com\" rel=\"nofollow\"\u003enpm.elemecdn.com\u003c/a\u003e 。因此当一个 CDN 速度慢时，Service Worker 可自动选择另一个，从而增加稳定性。\u003c/p\u003e\n\u003cp\u003e更多细节可查看：\u003ca href=\"http://github.com/EtherDream/freecdn/tree/master/examples/file-split\" rel=\"nofollow\"\u003egithub.com/EtherDream/freecdn/tree/master/examples/file-split\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "iqoo",
+      "PubDate": "2022-05-19T10:02:15Z"
+    },
+    {
+      "Title": "在浏览器内执行 ffmpeg cli - 分享创造",
+      "Link": "https://www.v2ex.com/t/853976",
+      "Description": "\u003cp\u003e纯客户端的 ffmpeg,\n执行一些低计算量的操作蛮方便的, 例如: 拆分 /合并影轨音轨\u003c/p\u003e\n\u003cp\u003e核心基于\u003ca href=\"https://ffmpegwasm.netlify.app/\" rel=\"nofollow\"\u003effmpeg.wasm\u003c/a\u003e, 修复 Unicode 档名会出错的问题, UI 使用\u003ca href=\"https://preactjs.com/\" rel=\"nofollow\"\u003ePreact.js\u003c/a\u003e + \u003ca href=\"https://bulma.io/\" rel=\"nofollow\"\u003eBulma.css\u003c/a\u003e.\u003c/p\u003e\n\u003cp\u003eUI 还不是很完善, 有空会再调整调整.\u003c/p\u003e\n\u003cp\u003e有考虑弄成 PWA, 那个 wasm 是真的有点大, service worker 快取后应该会好不少...\u003c/p\u003e\n\u003cp\u003e操作方式:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e选取需要处理的档案\u003c/li\u003e\n\u003cli\u003e设定 ffmpeg 参数\u003c/li\u003e\n\u003cli\u003e点\"Run\", 耐心等跑完\u003c/li\u003e\n\u003cli\u003e输出可以直接在网页上观看, 亦可直接下载\u003c/li\u003e\n\u003c/ol\u003e\n\u003cul\u003e\n\u003cli\u003e连结: \u003ca href=\"https://sauceburnseal.net/ffmpeg/\" rel=\"nofollow\"\u003ehttps://sauceburnseal.net/ffmpeg/\u003c/a\u003e (cloudflare + github pages)\u003c/li\u003e\n\u003cli\u003erepo: \u003ca href=\"https://github.com/cs8425/ffmpeg-cli-online\" rel=\"nofollow\"\u003ehttps://github.com/cs8425/ffmpeg-cli-online\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "cs8425",
+      "PubDate": "2022-05-19T10:00:32Z"
+    },
+    {
       "Title": "请问各位大佬，贵公司续签合同的申请都是什么样的？ - 问与答",
       "Link": "https://www.v2ex.com/t/853975",
       "Description": "如题，近期劳动合同还有几月到期，要开始写续签申请了，要求写个人简述（ 3-4 千字），个人评价（ 6 、7 百字）及直接主管和部门主管评价（各要有优缺点，且不能相同），所以想抄下各位大佬的作业。。。",
