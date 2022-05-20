@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于 React Hook 的问题, 如何避免子组件不必要的更新? - 问与答</title>
+      <link>https://www.v2ex.com/t/854260</link>
+      <description>&lt;p&gt;代码大致逻辑如下, const b 基于 a 生成(实际上 a 是通过 props 传进来的),并传递给组件 Child.&lt;br/&gt;&#xA;根据输出可以注意到子组件 Child 被调用了两次.&lt;br/&gt;&#xA;怎么做才能避免 Child 不必要二次更新呢?  &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-react&#34;&gt;function createB(a) {&#xA;  return { a };&#xA;}&#xA;&#xA;export default function Index() {&#xA;  const [a, setA] = useState(0);&#xA;  const [b, setB] = useState(createB(a));&#xA;&#xA;  useEffect(() =&amp;gt; {&#xA;    console.log(&#39;b&#39;, b);&#xA;    setB(createB(a));&#xA;  }, [a]);&#xA;&#xA;  return &amp;lt;Child b={b}&amp;gt;&amp;lt;/Child&amp;gt;;&#xA;}&#xA;&#xA;function Child(props) {&#xA;  const b = props.b;&#xA;  useEffect(() =&amp;gt; {&#xA;    console.log(&#39;child b&#39;, b);&#xA;  }, [b]);&#xA;  return &amp;lt;div&amp;gt;{b.a}&amp;lt;/div&amp;gt;;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;输出 &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;child b {a: 0}&#xA;b {a: 0}&#xA;child b {a: 0}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>rabbbit</author>
+      <pubDate>20 May 2022 12:50:53 +0000</pubDate>
+    </item>
+    <item>
       <title>网线太长会导致拨号失败吗？ - 宽带症候群</title>
       <link>https://www.v2ex.com/t/854258</link>
       <description>&lt;h2&gt;今天发现一个奇怪的问题，路由和光猫之间的网线长度似乎会影响拨号&lt;/h2&gt;&#xA;&lt;p&gt;现在有网线 2 根 第一根网线较长（ 20M ）左右 第二根较短（ 1M ）&lt;/p&gt;&#xA;&lt;p&gt;如果按照&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;方案 A：光猫-短网线-路由-长网线-台式 则可以成功拨号&lt;/li&gt;&#xA;&lt;li&gt;方案 B:光猫-长网线-路由-短网线-台式 则无法成功拨号（ openwrt 接口页面显示 wan 口数据包为 0 ）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;因此推测网线长度似乎会影响拨号&#xA;求助 V 友解惑，选方案 B 的原因是 A 方案受到插座限制，路由器只能拿在手里：-）&lt;/p&gt;&#xA;</description>
