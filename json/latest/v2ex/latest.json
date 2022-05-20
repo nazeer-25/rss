@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Mac pro 2018 U 盘安装 Ubuntu 22.04 LTS 每次到引导页面就黑屏，请问这个有大佬知道如何处理吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/854223",
+      "Description": "身边有一台很久没用的 mac 电脑，想把它装成 linux 。\u003cbr /\u003e\u003cbr /\u003e一开始 根据 \u003ca target=\"_blank\" href=\"https://wiki.t2linux.org/distributions/ubuntu/installation/\" rel=\"nofollow noopener\"\u003ehttps://wiki.t2linux.org/distributions/ubuntu/installation/\u003c/a\u003e\u003cbr /\u003e文章指示，去关闭安全引导和设置允许外部媒介启动。 然后重新开机选择 u 盘启动，进来之后就一直黑屏，没反应。\u003cbr /\u003e\u003cbr /\u003e我以为是 u 盘里面的引导程序不对，但我之前在 dell 笔记本也是用同样的引导程序装的（ rufus 装的），后面又试了用 UltralISO 装，又按\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://ubuntu.com/tutorials/create-a-usb-stick-on-macos#4-install-and-run-etcher\" rel=\"nofollow noopener\"\u003ehttps://ubuntu.com/tutorials/create-a-usb-stick-on-macos#4-install-and-run-etcher\u003c/a\u003e\u003cbr /\u003e说的用 balenaEtcher 安装引导程序。\u003cbr /\u003e来回试了两三次，都是选择了 u 盘引导之后就一直黑屏。\u003cbr /\u003e\u003cbr /\u003e现在连 mac 系统内建的恢复系统都进不去。联网恢复 也报错 support.apple.mac/startup -1008f 。",
+      "Author": "sciel",
+      "PubDate": "2022-05-20T08:33:27Z"
+    },
+    {
+      "Title": "有小伙伴对光纤有研究么，从公司捡了一卷光纤回来，不知道怎么用 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/854221",
+      "Description": "公司最近清理仓库，一卷光纤，没拆封，扔到废品区了，我捡了回来。\u003cbr /\u003e光纤表面标注：FTTH GJYXCH 2B6a 2020\u003cbr /\u003e\u003cbr /\u003e请问最大带宽多少？能家用么，如果可以的话我需要准备什么东西？\u003cbr /\u003e谢谢。",
+      "Author": "nightma7e",
+      "PubDate": "2022-05-20T08:32:27Z"
+    },
+    {
       "Title": "请教一个 ConcurrentHashMap 问题 - Java",
       "Link": "https://www.v2ex.com/t/854219",
       "Description": "\u003cpre\u003e\u003ccode class=\"language-java\"\u003epublic class IdGeneratorService {\n    private final Map\u0026lt;String, AtomicLong\u0026gt; map = new ConcurrentHashMap\u0026lt;\u0026gt;();\n\n    public long nextId(String key) {\n        // 虽然采用了并发安全的容器，但是当 contains 语句通过后,有可能出现多线程先后 put,AtomicLong 值有可能给覆盖?\n        if (!map.containsKey(key)) {\n            AtomicLong atomicLong = new AtomicLong(0);\n            map.put(key, atomicLong);\n            return atomicLong.incrementAndGet();\n        }\n        return map.get(key).incrementAndGet();\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e代码如上，如果并发调用 nextId()，我感觉即使使用了并发安全的容器,实际上这段代码也不是线程安全的，如果多线程访问，还是会出现 nextId()重复的问题，有可能 nextId 会出现多个 1 ？但是实际经过测试，并不会重现这个问题。。\u003cstrong\u003e请教一下，这段代码是不是线程安全的，是否会生成重复 id?\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e测试代码\u003c/strong\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e    public static void main(String[] args) throws InterruptedException {\n        int count=2000;\n        CountDownLatch cdl=new CountDownLatch(count);\n        IdGeneratorService service = new IdGeneratorService();\n        Map\u0026lt;Long, AtomicLong\u0026gt; countMap=new ConcurrentHashMap\u0026lt;\u0026gt;();\n        for(long i=1;i\u0026lt;=count;i++){\n            countMap.put(i,new AtomicLong());\n        }\n        for(int i=0;i\u0026lt;count;i++){\n            new Thread(()-\u0026gt;{\n                long id = service.nextId(\"test\");\n                countMap.get(id).incrementAndGet();\n                cdl.countDown();\n            }).start();\n        }\n        cdl.await();\n        boolean match = countMap.values().stream().mapToLong(AtomicLong::get).anyMatch(l-\u0026gt;l\u0026gt;1);\n        System.out.printf(\"id 重复=%b\\n\",match);\n    }\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -13,7 +27,7 @@
     {
       "Title": "征集 iOS App 创意和灵感 - 程序员",
       "Link": "https://www.v2ex.com/t/854218",
-      "Description": "\u003cp\u003e各位大佬在日常生活工作中，有没有这样的一瞬间：哎呀，要是有个这样的 App 就好了！\u003c/p\u003e\n\u003cp\u003e如果有，欢迎留言，因为您的希望真的可能变成实现。\u003c/p\u003e\n\u003cp\u003e我计划开发个人 App ，现征集创意和灵感，👏大家踊跃留言。\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e各位大佬在日常生活工作中，有没有这样的一瞬间：哎呀，要是有个这样的 App 就好了！\u003c/p\u003e\n\u003cp\u003e如果有，欢迎留言，因为您的希望真的可能变成实现。\u003c/p\u003e\n\u003cp\u003e我计划开发个人 App ，现征集创意和灵感，👏大家踊跃留言。\u003c/p\u003e\n\u003cp\u003e附上我之前开发的一个简单的二维码管理器 App ，开发这个 App 的原因是我自己平时会用到：\n\u003ca href=\"https://apps.apple.com/cn/app/id1601447400\" rel=\"nofollow\"\u003ehttps://apps.apple.com/cn/app/id1601447400\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "Jihua",
       "PubDate": "2022-05-20T08:24:31Z"
     },

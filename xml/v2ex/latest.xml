@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Mac pro 2018 U 盘安装 Ubuntu 22.04 LTS 每次到引导页面就黑屏，请问这个有大佬知道如何处理吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/854223</link>
+      <description>身边有一台很久没用的 mac 电脑，想把它装成 linux 。&lt;br /&gt;&lt;br /&gt;一开始 根据 &lt;a target=&#34;_blank&#34; href=&#34;https://wiki.t2linux.org/distributions/ubuntu/installation/&#34; rel=&#34;nofollow noopener&#34;&gt;https://wiki.t2linux.org/distributions/ubuntu/installation/&lt;/a&gt;&lt;br /&gt;文章指示，去关闭安全引导和设置允许外部媒介启动。 然后重新开机选择 u 盘启动，进来之后就一直黑屏，没反应。&lt;br /&gt;&lt;br /&gt;我以为是 u 盘里面的引导程序不对，但我之前在 dell 笔记本也是用同样的引导程序装的（ rufus 装的），后面又试了用 UltralISO 装，又按&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://ubuntu.com/tutorials/create-a-usb-stick-on-macos#4-install-and-run-etcher&#34; rel=&#34;nofollow noopener&#34;&gt;https://ubuntu.com/tutorials/create-a-usb-stick-on-macos#4-install-and-run-etcher&lt;/a&gt;&lt;br /&gt;说的用 balenaEtcher 安装引导程序。&lt;br /&gt;来回试了两三次，都是选择了 u 盘引导之后就一直黑屏。&lt;br /&gt;&lt;br /&gt;现在连 mac 系统内建的恢复系统都进不去。联网恢复 也报错 support.apple.mac/startup -1008f 。</description>
+      <author>sciel</author>
+      <pubDate>20 May 2022 08:33:27 +0000</pubDate>
+    </item>
+    <item>
+      <title>有小伙伴对光纤有研究么，从公司捡了一卷光纤回来，不知道怎么用 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/854221</link>
+      <description>公司最近清理仓库，一卷光纤，没拆封，扔到废品区了，我捡了回来。&lt;br /&gt;光纤表面标注：FTTH GJYXCH 2B6a 2020&lt;br /&gt;&lt;br /&gt;请问最大带宽多少？能家用么，如果可以的话我需要准备什么东西？&lt;br /&gt;谢谢。</description>
+      <author>nightma7e</author>
+      <pubDate>20 May 2022 08:32:27 +0000</pubDate>
+    </item>
+    <item>
       <title>请教一个 ConcurrentHashMap 问题 - Java</title>
       <link>https://www.v2ex.com/t/854219</link>
       <description>&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class IdGeneratorService {&#xA;    private final Map&amp;lt;String, AtomicLong&amp;gt; map = new ConcurrentHashMap&amp;lt;&amp;gt;();&#xA;&#xA;    public long nextId(String key) {&#xA;        // 虽然采用了并发安全的容器，但是当 contains 语句通过后,有可能出现多线程先后 put,AtomicLong 值有可能给覆盖?&#xA;        if (!map.containsKey(key)) {&#xA;            AtomicLong atomicLong = new AtomicLong(0);&#xA;            map.put(key, atomicLong);&#xA;            return atomicLong.incrementAndGet();&#xA;        }&#xA;        return map.get(key).incrementAndGet();&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;代码如上，如果并发调用 nextId()，我感觉即使使用了并发安全的容器,实际上这段代码也不是线程安全的，如果多线程访问，还是会出现 nextId()重复的问题，有可能 nextId 会出现多个 1 ？但是实际经过测试，并不会重现这个问题。。&lt;strong&gt;请教一下，这段代码是不是线程安全的，是否会生成重复 id?&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;测试代码&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    public static void main(String[] args) throws InterruptedException {&#xA;        int count=2000;&#xA;        CountDownLatch cdl=new CountDownLatch(count);&#xA;        IdGeneratorService service = new IdGeneratorService();&#xA;        Map&amp;lt;Long, AtomicLong&amp;gt; countMap=new ConcurrentHashMap&amp;lt;&amp;gt;();&#xA;        for(long i=1;i&amp;lt;=count;i++){&#xA;            countMap.put(i,new AtomicLong());&#xA;        }&#xA;        for(int i=0;i&amp;lt;count;i++){&#xA;            new Thread(()-&amp;gt;{&#xA;                long id = service.nextId(&#34;test&#34;);&#xA;                countMap.get(id).incrementAndGet();&#xA;                cdl.countDown();&#xA;            }).start();&#xA;        }&#xA;        cdl.await();&#xA;        boolean match = countMap.values().stream().mapToLong(AtomicLong::get).anyMatch(l-&amp;gt;l&amp;gt;1);&#xA;        System.out.printf(&#34;id 重复=%b\n&#34;,match);&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -13,7 +27,7 @@
     <item>
       <title>征集 iOS App 创意和灵感 - 程序员</title>
       <link>https://www.v2ex.com/t/854218</link>
-      <description>&lt;p&gt;各位大佬在日常生活工作中，有没有这样的一瞬间：哎呀，要是有个这样的 App 就好了！&lt;/p&gt;&#xA;&lt;p&gt;如果有，欢迎留言，因为您的希望真的可能变成实现。&lt;/p&gt;&#xA;&lt;p&gt;我计划开发个人 App ，现征集创意和灵感，👏大家踊跃留言。&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;各位大佬在日常生活工作中，有没有这样的一瞬间：哎呀，要是有个这样的 App 就好了！&lt;/p&gt;&#xA;&lt;p&gt;如果有，欢迎留言，因为您的希望真的可能变成实现。&lt;/p&gt;&#xA;&lt;p&gt;我计划开发个人 App ，现征集创意和灵感，👏大家踊跃留言。&lt;/p&gt;&#xA;&lt;p&gt;附上我之前开发的一个简单的二维码管理器 App ，开发这个 App 的原因是我自己平时会用到：&#xA;&lt;a href=&#34;https://apps.apple.com/cn/app/id1601447400&#34; rel=&#34;nofollow&#34;&gt;https://apps.apple.com/cn/app/id1601447400&lt;/a&gt;&lt;/p&gt;&#xA;</description>
       <author>Jihua</author>
       <pubDate>20 May 2022 08:24:31 +0000</pubDate>
     </item>
