@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教一个 ConcurrentHashMap 问题 - Java",
+      "Link": "https://www.v2ex.com/t/854219",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-java\"\u003epublic class IdGeneratorService {\n    private final Map\u0026lt;String, AtomicLong\u0026gt; map = new ConcurrentHashMap\u0026lt;\u0026gt;();\n\n    public long nextId(String key) {\n        // 虽然采用了并发安全的容器，但是当 contains 语句通过后,有可能出现多线程先后 put,AtomicLong 值有可能给覆盖?\n        if (!map.containsKey(key)) {\n            AtomicLong atomicLong = new AtomicLong(0);\n            map.put(key, atomicLong);\n            return atomicLong.incrementAndGet();\n        }\n        return map.get(key).incrementAndGet();\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e代码如上，如果并发调用 nextId()，我感觉即使使用了并发安全的容器,实际上这段代码也不是线程安全的，如果多线程访问，还是会出现 nextId()重复的问题，有可能 nextId 会出现多个 1 ？但是实际经过测试，并不会重现这个问题。。\u003cstrong\u003e请教一下，这段代码是不是线程安全的，是否会生成重复 id?\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e测试代码\u003c/strong\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e    public static void main(String[] args) throws InterruptedException {\n        int count=2000;\n        CountDownLatch cdl=new CountDownLatch(count);\n        IdGeneratorService service = new IdGeneratorService();\n        Map\u0026lt;Long, AtomicLong\u0026gt; countMap=new ConcurrentHashMap\u0026lt;\u0026gt;();\n        for(long i=1;i\u0026lt;=count;i++){\n            countMap.put(i,new AtomicLong());\n        }\n        for(int i=0;i\u0026lt;count;i++){\n            new Thread(()-\u0026gt;{\n                long id = service.nextId(\"test\");\n                countMap.get(id).incrementAndGet();\n                cdl.countDown();\n            }).start();\n        }\n        cdl.await();\n        boolean match = countMap.values().stream().mapToLong(AtomicLong::get).anyMatch(l-\u0026gt;l\u0026gt;1);\n        System.out.printf(\"id 重复=%b\\n\",match);\n    }\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "agzou",
+      "PubDate": "2022-05-20T08:26:11Z"
+    },
+    {
+      "Title": "征集 iOS App 创意和灵感 - 程序员",
+      "Link": "https://www.v2ex.com/t/854218",
+      "Description": "\u003cp\u003e各位大佬在日常生活工作中，有没有这样的一瞬间：哎呀，要是有个这样的 App 就好了！\u003c/p\u003e\n\u003cp\u003e如果有，欢迎留言，因为您的希望真的可能变成实现。\u003c/p\u003e\n\u003cp\u003e我计划开发个人 App ，现征集创意和灵感，👏大家踊跃留言。\u003c/p\u003e\n",
+      "Author": "Jihua",
+      "PubDate": "2022-05-20T08:24:31Z"
+    },
+    {
+      "Title": "有没有两个在银泰城附近的单间的,能够压一付一,单价在 1300 以下,有大佬推荐吗? - 成都",
+      "Link": "https://www.v2ex.com/t/854217",
+      "Description": "\u003cp\u003eVX:z741069229\u003c/p\u003e\n",
+      "Author": "w741069229",
+      "PubDate": "2022-05-20T08:21:49Z"
+    },
+    {
       "Title": "聊聊音乐(不是艺术上的音乐) - 问与答",
       "Link": "https://www.v2ex.com/t/854216",
       "Description": "\u003ca target=\"_blank\" href=\"https://glass-whitefish-4b7.notion.site/77a9524b18934de898bba05e987740a7\" rel=\"nofollow noopener\"\u003ehttps://glass-whitefish-4b7.notion.site/77a9524b18934de898bba05e987740a7\u003c/a\u003e",

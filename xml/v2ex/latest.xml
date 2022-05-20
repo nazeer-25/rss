@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教一个 ConcurrentHashMap 问题 - Java</title>
+      <link>https://www.v2ex.com/t/854219</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class IdGeneratorService {&#xA;    private final Map&amp;lt;String, AtomicLong&amp;gt; map = new ConcurrentHashMap&amp;lt;&amp;gt;();&#xA;&#xA;    public long nextId(String key) {&#xA;        // 虽然采用了并发安全的容器，但是当 contains 语句通过后,有可能出现多线程先后 put,AtomicLong 值有可能给覆盖?&#xA;        if (!map.containsKey(key)) {&#xA;            AtomicLong atomicLong = new AtomicLong(0);&#xA;            map.put(key, atomicLong);&#xA;            return atomicLong.incrementAndGet();&#xA;        }&#xA;        return map.get(key).incrementAndGet();&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;代码如上，如果并发调用 nextId()，我感觉即使使用了并发安全的容器,实际上这段代码也不是线程安全的，如果多线程访问，还是会出现 nextId()重复的问题，有可能 nextId 会出现多个 1 ？但是实际经过测试，并不会重现这个问题。。&lt;strong&gt;请教一下，这段代码是不是线程安全的，是否会生成重复 id?&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;测试代码&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    public static void main(String[] args) throws InterruptedException {&#xA;        int count=2000;&#xA;        CountDownLatch cdl=new CountDownLatch(count);&#xA;        IdGeneratorService service = new IdGeneratorService();&#xA;        Map&amp;lt;Long, AtomicLong&amp;gt; countMap=new ConcurrentHashMap&amp;lt;&amp;gt;();&#xA;        for(long i=1;i&amp;lt;=count;i++){&#xA;            countMap.put(i,new AtomicLong());&#xA;        }&#xA;        for(int i=0;i&amp;lt;count;i++){&#xA;            new Thread(()-&amp;gt;{&#xA;                long id = service.nextId(&#34;test&#34;);&#xA;                countMap.get(id).incrementAndGet();&#xA;                cdl.countDown();&#xA;            }).start();&#xA;        }&#xA;        cdl.await();&#xA;        boolean match = countMap.values().stream().mapToLong(AtomicLong::get).anyMatch(l-&amp;gt;l&amp;gt;1);&#xA;        System.out.printf(&#34;id 重复=%b\n&#34;,match);&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>agzou</author>
+      <pubDate>20 May 2022 08:26:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>征集 iOS App 创意和灵感 - 程序员</title>
+      <link>https://www.v2ex.com/t/854218</link>
+      <description>&lt;p&gt;各位大佬在日常生活工作中，有没有这样的一瞬间：哎呀，要是有个这样的 App 就好了！&lt;/p&gt;&#xA;&lt;p&gt;如果有，欢迎留言，因为您的希望真的可能变成实现。&lt;/p&gt;&#xA;&lt;p&gt;我计划开发个人 App ，现征集创意和灵感，👏大家踊跃留言。&lt;/p&gt;&#xA;</description>
+      <author>Jihua</author>
+      <pubDate>20 May 2022 08:24:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有两个在银泰城附近的单间的,能够压一付一,单价在 1300 以下,有大佬推荐吗? - 成都</title>
+      <link>https://www.v2ex.com/t/854217</link>
+      <description>&lt;p&gt;VX:z741069229&lt;/p&gt;&#xA;</description>
+      <author>w741069229</author>
+      <pubDate>20 May 2022 08:21:49 +0000</pubDate>
+    </item>
+    <item>
       <title>聊聊音乐(不是艺术上的音乐) - 问与答</title>
       <link>https://www.v2ex.com/t/854216</link>
       <description>&lt;a target=&#34;_blank&#34; href=&#34;https://glass-whitefish-4b7.notion.site/77a9524b18934de898bba05e987740a7&#34; rel=&#34;nofollow noopener&#34;&gt;https://glass-whitefish-4b7.notion.site/77a9524b18934de898bba05e987740a7&lt;/a&gt;</description>
