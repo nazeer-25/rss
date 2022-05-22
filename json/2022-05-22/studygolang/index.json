@@ -53,6 +53,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "有偿！解决后私信我 golang使用cbergoon/merkletree生成的树在合约端验证失败",
+      "Link": "https://studygolang.com/topics/15513#reply0",
+      "Description": "\u003cp\u003egolang相关代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc (n NFT) CalculateHash() ([]byte, error) {\nb := new(big.Int)\nb.SetString(n.tokenID, 10)\nnum := common.LeftPadBytes(b.Bytes(), 32)\nhash := crypto.Keccak256Hash(common.HexToAddress(nAddress).Bytes(), num)\nreturn hash.Bytes(), nil\n}\n\nhex := common.Bytes2Hex( tree.MerkleRoot())\nfmt.Println(\u0026quot;root:\u0026quot;,hex)\n\npath, _, _ := tree.GetMerklePath(list[0])\nfor _,v := range path {\nhash := common.BytesToHash(v)\nproof = append(proof, hash.String())\n}\nfmt.Println(\u0026quot;proof\u0026quot;,proof)\n\nfunc (n NFT) CalculateHash() ([]byte, error) {\nb := new(big.Int)\nb.SetString(n.tokenID, 10)\nnum := common.LeftPadBytes(b.Bytes(), 32)\nhash := crypto.Keccak256Hash(common.HexToAddress(nAddress).Bytes(), num)\nreturn hash.Bytes(), nil\n}\n\nhex := common.Bytes2Hex( tree.MerkleRoot())\nfmt.Println(\u0026quot;root:\u0026quot;,hex)\n\npath, _, _ := tree.GetMerklePath(list[0])\nfor _,v := range path {\nhash := common.BytesToHash(v)\nproof = append(proof, hash.String())\n}\nfmt.Println(\u0026quot;proof\u0026quot;,proof)\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e生成的proof无法在合约端验证成功\n合约代码参考\u003ca href=\"https://mirror.xyz/qiwihui.eth/HRifb9gziR1UvVmRcMjDfDvQ9mq7o7FA6BNuCJMFT00\"\u003ehttps://mirror.xyz/qiwihui.eth/HRifb9gziR1UvVmRcMjDfDvQ9mq7o7FA6BNuCJMFT00\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "fuzzing 测试数字为何不起作用? 0-2023为什么测试数秒还没报错?",
       "Link": "https://studygolang.com/topics/15511#reply1",
       "Description": "\u003cp\u003e模糊测试以种子: 58 10 随机测试,  必然会测试大于2023的值, 这里为何测试通过?  这段测试代码有什么问题?\u0026rdquo;\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc checkAge(num int) error{\n\tif num \u0026gt;2023{\n\t\t// error\n\t\treturn errors.New(\u0026quot;耶稣的年龄不能大于2023\u0026quot;)\n\t}\n\treturn nil\n}\n\nfunc FuzzAge(f *testing.F) {\n\t// seed\n\tf.Add(58)\n\tf.Add(10)\n\t// fuzzing\n\tf.Fuzz(func(t *testing.T, age int) {\n\t\tif err:= checkAge(age); err == nil {\n\t\t\tt.Log(\u0026quot;正确\u0026quot;, age )\n\t\t}else {\n\t\t\tt.Log(age)\n\t\t\tt.Error(err.Error())\n\t\t}\n\t})\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003ecommand:  go test -v -fuzz=Fuzz   \n\u003c/code\u003e\u003c/pre\u003e\n",
