@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "使用自签证书的不同 https 服务，能只触发一次隐私设置提示吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/854757",
+      "Description": "现有 IP1 、IP2 两个服务器上各自有一套 https 服务，都是使用自签证书。\u003cbr /\u003e\u003cbr /\u003eIP1 的服务想在页面框架内加入 IP2 的页面。\u003cbr /\u003e\u003cbr /\u003e现在情况是会触发两次的“您的连接不是私密连接”，点击前往……\u003cbr /\u003e\u003cbr /\u003e我也明白正常肯定是这样，就是想问问能不能通过什么骚操作，实现触发一次就行了。\u003cbr /\u003e\u003cbr /\u003e目前想到的是用 nginx 转发，全走 IP1 ，不知道会有什么隐患",
+      "Author": "iblessyou",
+      "PubDate": "2022-05-23T09:28:04Z"
+    },
+    {
+      "Title": "群晖通过 docker 更新和部署 letsencrypt 证书 - 分享发现",
+      "Link": "https://www.v2ex.com/t/854756",
+      "Description": "\u003cp\u003e群晖使用了 letsencrypt 的免费证书，3 个月要更新一次，之前是在 Mac 上更好证书，手动通过群晖 web 页面进行替换。\u003c/p\u003e\n\u003cp\u003e本着能不动手就自动化的目标，查找了一些资料，加上实际测试，现在已经能通过 docker 来申请并且在群晖上自动部署证书。\u003c/p\u003e\n\u003cp\u003e前置条件\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e准备好域名托管站点的 id 和 key ，我用的阿里云\u003c/li\u003e\n\u003cli\u003e准备好群晖的账户，建议不要用默认管理员，新建一个账户，加入管理员组，毕竟这个只在本地使用。\u003c/li\u003e\n\u003cli\u003e群晖安装 docker 组件，下载好对应的 docker 镜像：neilpang/\u003ca href=\"http://acme.sh\" rel=\"nofollow\"\u003eacme.sh\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e准备一个目录，映射到容器中保存证书文件，这里是：/volume2/docker/acme\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e更新脚本如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e#!/bin/bash\nexport DOMAIN='abc.com'\n\ndocker run --rm \\\n-v \"/volume2/docker/acme\":/acme.sh \\\n-e Ali_Key=\"*\" \\\n-e Ali_Secret=\"*\" \\\n--net=host \\\nneilpang/acme.sh \\\n--issue --dns dns_ali --dnssleep 60 -d \"${DOMAIN}\" -d \"*.${DOMAIN}\" --server letsencrypt\n\nsleep 5\n\ndocker run --rm -v \"/volume2/docker/acme\":/acme.sh -e SYNO_Username=\"*\" -e SYNO_Password=\"*\" -e SYNO_Certificate=\"caupdate\"  -e SYNO_Scheme=\"http\" -e SYNO_Create=1 --net=host neilpang/acme.sh --deploy -d \"${DOMAIN}\" -d \"*.${DOMAIN}\" --deploy-hook synology_dsm\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其中 \u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eDOMAIN 按照实际来写\u003c/li\u003e\n\u003cli\u003eAli_Key 、Ali_Secret 按照实际来写，用法和 \u003ca href=\"http://acme.sh\" rel=\"nofollow\"\u003eacme.sh\u003c/a\u003e 参数是一样的\u003c/li\u003e\n\u003cli\u003e群晖部分 SYNO_Username 用户名、SYNO_Password 密码、SYNO_Certificate 证书名称\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e其他部分保持默认，保存后添加脚本执行权限，本地跑一遍测试下，没问题就可以添加到计划任务，定期运行。\u003c/p\u003e\n",
+      "Author": "goodryb",
+      "PubDate": "2022-05-23T09:26:13Z"
+    },
+    {
+      "Title": "iOS 怎么实现流量耗尽自动断网？今天超了快 1GB 浪费了 600 多块钱。 - iOS",
+      "Link": "https://www.v2ex.com/t/854755",
+      "Description": "我的卡漫游超出流量 USD $0.1/MB\u003cbr /\u003e感觉这个需求挺普遍的，设置找了很久也没找到这个功能。",
+      "Author": "dfgxcvbcv",
+      "PubDate": "2022-05-23T09:25:13Z"
+    },
+    {
       "Title": "广州小北 || 淘金有 v 友驻扎么? 租房求推荐 - 广州",
       "Link": "https://www.v2ex.com/t/854751",
       "Description": "\u003cp\u003e小北淘金附近, 最好是能停车的, 有没有 v 友住附近推荐一下的周六日去踩踩点\u003c/p\u003e\n",

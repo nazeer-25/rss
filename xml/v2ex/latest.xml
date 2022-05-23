@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>使用自签证书的不同 https 服务，能只触发一次隐私设置提示吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/854757</link>
+      <description>现有 IP1 、IP2 两个服务器上各自有一套 https 服务，都是使用自签证书。&lt;br /&gt;&lt;br /&gt;IP1 的服务想在页面框架内加入 IP2 的页面。&lt;br /&gt;&lt;br /&gt;现在情况是会触发两次的“您的连接不是私密连接”，点击前往……&lt;br /&gt;&lt;br /&gt;我也明白正常肯定是这样，就是想问问能不能通过什么骚操作，实现触发一次就行了。&lt;br /&gt;&lt;br /&gt;目前想到的是用 nginx 转发，全走 IP1 ，不知道会有什么隐患</description>
+      <author>iblessyou</author>
+      <pubDate>23 May 2022 09:28:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>群晖通过 docker 更新和部署 letsencrypt 证书 - 分享发现</title>
+      <link>https://www.v2ex.com/t/854756</link>
+      <description>&lt;p&gt;群晖使用了 letsencrypt 的免费证书，3 个月要更新一次，之前是在 Mac 上更好证书，手动通过群晖 web 页面进行替换。&lt;/p&gt;&#xA;&lt;p&gt;本着能不动手就自动化的目标，查找了一些资料，加上实际测试，现在已经能通过 docker 来申请并且在群晖上自动部署证书。&lt;/p&gt;&#xA;&lt;p&gt;前置条件&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;准备好域名托管站点的 id 和 key ，我用的阿里云&lt;/li&gt;&#xA;&lt;li&gt;准备好群晖的账户，建议不要用默认管理员，新建一个账户，加入管理员组，毕竟这个只在本地使用。&lt;/li&gt;&#xA;&lt;li&gt;群晖安装 docker 组件，下载好对应的 docker 镜像：neilpang/&lt;a href=&#34;http://acme.sh&#34; rel=&#34;nofollow&#34;&gt;acme.sh&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;准备一个目录，映射到容器中保存证书文件，这里是：/volume2/docker/acme&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;更新脚本如下&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#!/bin/bash&#xA;export DOMAIN=&#39;abc.com&#39;&#xA;&#xA;docker run --rm \&#xA;-v &#34;/volume2/docker/acme&#34;:/acme.sh \&#xA;-e Ali_Key=&#34;*&#34; \&#xA;-e Ali_Secret=&#34;*&#34; \&#xA;--net=host \&#xA;neilpang/acme.sh \&#xA;--issue --dns dns_ali --dnssleep 60 -d &#34;${DOMAIN}&#34; -d &#34;*.${DOMAIN}&#34; --server letsencrypt&#xA;&#xA;sleep 5&#xA;&#xA;docker run --rm -v &#34;/volume2/docker/acme&#34;:/acme.sh -e SYNO_Username=&#34;*&#34; -e SYNO_Password=&#34;*&#34; -e SYNO_Certificate=&#34;caupdate&#34;  -e SYNO_Scheme=&#34;http&#34; -e SYNO_Create=1 --net=host neilpang/acme.sh --deploy -d &#34;${DOMAIN}&#34; -d &#34;*.${DOMAIN}&#34; --deploy-hook synology_dsm&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;其中 &lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;DOMAIN 按照实际来写&lt;/li&gt;&#xA;&lt;li&gt;Ali_Key 、Ali_Secret 按照实际来写，用法和 &lt;a href=&#34;http://acme.sh&#34; rel=&#34;nofollow&#34;&gt;acme.sh&lt;/a&gt; 参数是一样的&lt;/li&gt;&#xA;&lt;li&gt;群晖部分 SYNO_Username 用户名、SYNO_Password 密码、SYNO_Certificate 证书名称&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;其他部分保持默认，保存后添加脚本执行权限，本地跑一遍测试下，没问题就可以添加到计划任务，定期运行。&lt;/p&gt;&#xA;</description>
+      <author>goodryb</author>
+      <pubDate>23 May 2022 09:26:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>iOS 怎么实现流量耗尽自动断网？今天超了快 1GB 浪费了 600 多块钱。 - iOS</title>
+      <link>https://www.v2ex.com/t/854755</link>
+      <description>我的卡漫游超出流量 USD $0.1/MB&lt;br /&gt;感觉这个需求挺普遍的，设置找了很久也没找到这个功能。</description>
+      <author>dfgxcvbcv</author>
+      <pubDate>23 May 2022 09:25:13 +0000</pubDate>
+    </item>
+    <item>
       <title>广州小北 || 淘金有 v 友驻扎么? 租房求推荐 - 广州</title>
       <link>https://www.v2ex.com/t/854751</link>
       <description>&lt;p&gt;小北淘金附近, 最好是能停车的, 有没有 v 友住附近推荐一下的周六日去踩踩点&lt;/p&gt;&#xA;</description>
