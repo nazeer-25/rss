@@ -59,9 +59,19 @@
       <description>&lt;h3&gt;代码如下：&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;unsafe&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;var f float64 = 1.0&#xA;&#x9;fmt.Println(Float64bits(f))&#xA;}&#xA;&#xA;func Float64bits(f float64) uint64 {&#xA;&#x9;return *((*uint64)(unsafe.Pointer(&amp;amp;f)))&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;结果如下：&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;$ go run main.go&#xA;4607182418800017408&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;疑问：&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;为啥结果不是1，而是那么大的一个数字呢？&lt;/strong&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>不回车怎么捕获tab键</title>
+      <link>https://studygolang.com/topics/15523#reply0</link>
+      <description>&lt;p&gt;想做类似tab键自动补全的功能， 但不知道怎么捕获按tab event事件， 请教大佬们。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;&#xA;func Loop() {&#xA;&#x9;buf := bufio.NewReader(os.Stdin)&#xA;&#x9;for {&#xA;&#x9;&#x9;line, _, err := buf.ReadRune()&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;fmt.Println(err)&#xA;&#x9;&#x9;&#x9;continue&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;switch line {&#xA;&#x9;&#x9;case &#39;\t&#39;:   //这个地方都需要回车才行， 不回车怎么捕获tab&#xA;&#x9;&#x9;&#x9;fmt.Print(&amp;quot;your press tab key&amp;quot;)&#xA;&#x9;&#x9;default:&#xA;&#x9;&#x9;&#x9;fmt.Print(string(line))&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
       <title>Go 加入箭头函数，你支持吗？</title>
       <link>https://studygolang.com/topics/15515#reply8</link>
       <description>&lt;p&gt;大家好，我是 polarisxu。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Go 中有匿名函数，但即使是简单的函数，也需要完整的编写函数：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func (x, y int) bool { return x &amp;lt; y }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;但很多其他语言，有简写方式，这就是轻量级匿名函数语法。即：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;(x, y) =&amp;gt; { x &amp;lt; y }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;即箭头函数。如果你没有见过这样的语法，咋一看会有点懵？！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;当然，目前还是在激烈讨论阶段，能不能最终引入还未知。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我个人感觉，Go 还是别增加语法糖，搞得语言很复杂了，只有一种解决方案没啥不好，你觉得呢？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;提案讨论地址：&lt;a href=&#34;https://github.com/golang/go/issues/21498&#34;&gt;https://github.com/golang/go/issues/21498&lt;/a&gt;。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>WGCLOUD的性能怎么样</title>
+      <link>https://studygolang.com/topics/15512#reply0</link>
+      <description>&lt;p&gt;我们监测服务器的工具软件，要关注稳定性和安全性，性能当然也要考虑，那么WGCLOUD监控系统的性能怎么样？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以下来自实战经验&lt;/p&gt;&#xA;&#xA;&lt;p&gt;WGCLOUD的server是java微服务架构springboot开发，非常稳定安全，因为server是服务端，我们只部署一个，所以在内存和cpu方面我们基本可以忽略的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;WGCLOUD的客户端agent，使用golang开发，天然具有高性能优势，对内存cpu使用率非常低，大部分时间静默运行，资源占用几乎可以忽略，及时运行在1H512M的主机，也很稳定。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>一个专门学习Golang的地方，视频+教程很全乎的</title>
@@ -92,11 +102,6 @@
       <title>有偿！解决后私信我 golang使用cbergoon/merkletree生成的树在合约端验证失败</title>
       <link>https://studygolang.com/topics/15513#reply0</link>
       <description>&lt;p&gt;golang相关代码&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;func (n NFT) CalculateHash() ([]byte, error) {&#xA;b := new(big.Int)&#xA;b.SetString(n.tokenID, 10)&#xA;num := common.LeftPadBytes(b.Bytes(), 32)&#xA;hash := crypto.Keccak256Hash(common.HexToAddress(nAddress).Bytes(), num)&#xA;return hash.Bytes(), nil&#xA;}&#xA;&#xA;hex := common.Bytes2Hex( tree.MerkleRoot())&#xA;fmt.Println(&amp;quot;root:&amp;quot;,hex)&#xA;&#xA;path, _, _ := tree.GetMerklePath(list[0])&#xA;for _,v := range path {&#xA;hash := common.BytesToHash(v)&#xA;proof = append(proof, hash.String())&#xA;}&#xA;fmt.Println(&amp;quot;proof&amp;quot;,proof)&#xA;&#xA;func (n NFT) CalculateHash() ([]byte, error) {&#xA;b := new(big.Int)&#xA;b.SetString(n.tokenID, 10)&#xA;num := common.LeftPadBytes(b.Bytes(), 32)&#xA;hash := crypto.Keccak256Hash(common.HexToAddress(nAddress).Bytes(), num)&#xA;return hash.Bytes(), nil&#xA;}&#xA;&#xA;hex := common.Bytes2Hex( tree.MerkleRoot())&#xA;fmt.Println(&amp;quot;root:&amp;quot;,hex)&#xA;&#xA;path, _, _ := tree.GetMerklePath(list[0])&#xA;for _,v := range path {&#xA;hash := common.BytesToHash(v)&#xA;proof = append(proof, hash.String())&#xA;}&#xA;fmt.Println(&amp;quot;proof&amp;quot;,proof)&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;生成的proof无法在合约端验证成功&#xA;合约代码参考&lt;a href=&#34;https://mirror.xyz/qiwihui.eth/HRifb9gziR1UvVmRcMjDfDvQ9mq7o7FA6BNuCJMFT00&#34;&gt;https://mirror.xyz/qiwihui.eth/HRifb9gziR1UvVmRcMjDfDvQ9mq7o7FA6BNuCJMFT00&lt;/a&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>WGCLOUD的性能怎么样</title>
-      <link>https://studygolang.com/topics/15512#reply0</link>
-      <description>&lt;p&gt;我们监测服务器的工具软件，要关注稳定性和安全性，性能当然也要考虑，那么WGCLOUD监控系统的性能怎么样？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以下来自实战经验&lt;/p&gt;&#xA;&#xA;&lt;p&gt;WGCLOUD的server是java微服务架构springboot开发，非常稳定安全，因为server是服务端，我们只部署一个，所以在内存和cpu方面我们基本可以忽略的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;WGCLOUD的客户端agent，使用golang开发，天然具有高性能优势，对内存cpu使用率非常低，大部分时间静默运行，资源占用几乎可以忽略，及时运行在1H512M的主机，也很稳定。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>简化 Go 中对 JSON 的处理</title>
