@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "前后端分离项目，后端 Springboot 获取不到前端 axios 传递的 header 是怎么回事儿？ - 前端开发",
+      "Link": "https://www.v2ex.com/t/855091",
+      "Description": "\u003cp\u003e一直做安卓开发，趁着疫情失业，就想着更新一下技术栈，就学了一下 Springboot 和 Vue ，顺便写了个页面，然后在 Android WebView 上加载。\u003c/p\u003e\n\u003cp\u003e项目后端是 Springboot 写的\u003c/p\u003e\n\u003cp\u003e前端是 Vue2\u003c/p\u003e\n\u003cp\u003e前端使用 axios 发送 get 请求：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eaxios.get('https://www.xxx.com/getXXX?a=1\u0026amp;b=2\u0026amp;c=3', {\n        headers: {\n          \"Token\": \"xxxxxxxxx\"\n        }\n      }).then((res) =\u0026gt; {\n        ...\n      })\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e后端 Springboot Controller 是这样写的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e    @GetMapping(\"/getXXX\")\n    public Result getXXX(HttpServletRequest request, @RequestParam(\"a\") int a, @RequestParam(\"b\") int b, @RequestParam(\"c\") int c) {\n        String userId = request.getHeader(\"Token\");\n        if (userId == null) {\n            return new Result(false, \"未登录操作\", null, null);\n        } else {\n            return service.getPlans(userId, year, month, day);\n        }\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e涉及到跨域问题，在 Controller 上加了 \u003ccode\u003e@CrossOrigin\u003c/code\u003e 注解解决了。\u003c/p\u003e\n\u003cp\u003e整个过程在浏览器调试的时候是正常的，但是将 Vue 项目打包上传到服务器中，使用 Android webview 来访问的时候，却提示“未登录操作”，也就意味着 \u003ccode\u003erequest.getHeader(\"Token\")\u003c/code\u003e 为 null\u003c/p\u003e\n\u003cp\u003e我遍历了下 Springboot 接受到的 Header ，只有：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003euser-agent\nhost\nconnection\naccept-encoding\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e也就是说，webview 下 \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e        headers: {\n          \"Token\": \"xxxxxxxxx\"\n        }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e是无效的\u003c/p\u003e\n\u003cp\u003e有人遇到过这样的状况吗？该怎么解决呀\u003c/p\u003e\n",
+      "Author": "lixyz",
+      "PubDate": "2022-05-24T15:55:29Z"
+    },
+    {
       "Title": "关于 Adguard Home - 问与答",
       "Link": "https://www.v2ex.com/t/855089",
       "Description": "今天刚搭建好 DOH 都是正常访问的\u003cbr /\u003e\u003cbr /\u003e到了 DOT 853 端口总是无法访问，\u003cbr /\u003e\u003cbr /\u003e服务器（国外）上 853 也是正常监听的\u003cbr /\u003e\u003cbr /\u003e所以说现在 853 端口直接阻断了吗 无论国内外服务器",
