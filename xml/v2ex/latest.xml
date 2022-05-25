@@ -4,7 +4,7 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>SQL 求助，如何同时搜索两列数据的多种情况？ - 问与答</title>
+      <title>SQL 求助，如何同时搜索两列数据的多种情况？ - 数据库</title>
       <link>https://www.v2ex.com/t/855340</link>
       <description>&lt;p&gt;业务上有一张表示对象分科目成绩的表，大概结构就是 主键自增 ID 、科目名，科目成绩，对象 ID 这四项，业务上搜索需要搜索，比如“搜索科目 1 成绩为 90,91,92,93,94,95 的所有对象 ID”&lt;/p&gt;&#xA;&lt;p&gt;SQL 目前是按下面这样写的&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT objid FROM SCOTT.SCORES WHERE subject = 1 AND score IN (90,91,92,93,94,95) &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是遇到如果需要同时搜索不同科目的话，比如同时对科目 1 的成绩和科目 2 的成绩有要求，就需要拆成多个搜索语句，目前是这么写的&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT DISTINCT objid FROM （&#xA;    SELECT objid FROM SCOTT.SCORES WHERE subject = 1 AND score IN (90,91,92,93,94,95)&#xA;    UNION&#xA;    SELECT objid FROM SCOTT.SCORES WHERE subject = 2 AND score IN (60,70,90)&#xA;    UNION&#xA;    SELECT objid FROM SCOTT.SCORES WHERE subject = 3 AND score IN (75,85)&#xA;） AS tmp&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;感觉非常麻烦，请问有什么放到一句话里的写法吗？&lt;/p&gt;&#xA;&lt;p&gt;目前是在表里针对 subject 的值进行了分区，然后对 subject 和 score 建立了一个联合的普通索引，性能上还有能优化的地方吗？谢谢大家&lt;/p&gt;&#xA;</description>
       <author>Richard14</author>
