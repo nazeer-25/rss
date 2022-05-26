@@ -67,6 +67,27 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "GO怎么世界标准时间转成北京时间和时间戳",
+      "Link": "https://studygolang.com/topics/15521#reply5",
+      "Description": "\u003cp\u003e使用阿里云OSS生成了STS账号，但返回的过期时间的格式为\u0026rdquo;2022-05-24T07:06:55Z\u0026rdquo;有点猛\n想问问怎么把这样的时间格式转成时间戳和北京时间\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go 加入箭头函数，你支持吗？",
+      "Link": "https://studygolang.com/topics/15515#reply9",
+      "Description": "\u003cp\u003e大家好，我是 polarisxu。\u003c/p\u003e\n\n\u003cp\u003eGo 中有匿名函数，但即使是简单的函数，也需要完整的编写函数：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc (x, y int) bool { return x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e但很多其他语言，有简写方式，这就是轻量级匿名函数语法。即：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e(x, y) =\u0026gt; { x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e即箭头函数。如果你没有见过这样的语法，咋一看会有点懵？！\u003c/p\u003e\n\n\u003cp\u003e当然，目前还是在激烈讨论阶段，能不能最终引入还未知。\u003c/p\u003e\n\n\u003cp\u003e我个人感觉，Go 还是别增加语法糖，搞得语言很复杂了，只有一种解决方案没啥不好，你觉得呢？\u003c/p\u003e\n\n\u003cp\u003e提案讨论地址：\u003ca href=\"https://github.com/golang/go/issues/21498\"\u003ehttps://github.com/golang/go/issues/21498\u003c/a\u003e。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go语言读写条形码",
+      "Link": "https://studygolang.com/articles/35663#reply1",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;image/png\u0026quot;\n\t\u0026quot;os\u0026quot;\n\t\u0026quot;github.com/makiuchi-d/gozxing\u0026quot;\n\t\u0026quot;github.com/makiuchi-d/gozxing/oned\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n)\n\nfunc encode(content, savePath string, width, height int) error {\n\tenc := oned.NewCode128Writer()\n\timg, err := enc.Encode(content, gozxing.BarcodeFormat_CODE_128, width, height, nil)\n\tif err != nil {\n\t\treturn err\n\t}\n\tfile, err := os.Create(savePath)\n\tif err != nil {\n\t\treturn err\n\t}\n\tdefer file.Close()\n\treturn png.Encode(file, img)\n}\n\nfunc decode(file string) (content string, err error) {\n\tf, err := os.Open(file)\n\tif err != nil {\n\t\treturn content, err\n\t}\n\timg, err := png.Decode(f)\n\tif err != nil {\n\t\treturn content, err\n\t}\n\tdec := oned.NewCode128Reader()\n\ti, err := gozxing.NewBinaryBitmapFromImage(img)\n\tif err != nil {\n\t\treturn content, err\n\t}\n\tr, err := dec.DecodeWithoutHints(i)\n\tif err != nil {\n\t\treturn content, err\n\t}\n\treturn r.String(), err\n}\n\nfunc main() {\n\tfile := \u0026quot;barcode.png\u0026quot;\n\tif err := encode(\u0026quot;barcode\u0026quot;, file, 120, 60); err != nil {\n\t\tfmt.Println(\u0026quot;encode error:\u0026quot;, err)\n\t\treturn\n\t}\n\tfmt.Println(\u0026quot;encode success!\u0026quot;)\n\tcontent, err := decode(file)\n\tif err != nil {\n\t\tfmt.Println(\u0026quot;decode error:\u0026quot;, err)\n\t\treturn\n\t}\n\tfmt.Println(content)\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "go如何调用C++写的so文件呢?",
       "Link": "https://studygolang.com/topics/15526#reply2",
       "Description": "\u003cp\u003e我在github看到一个OCR识别的源码,他是py调用一个so实现的,我想用go来写一份,但是不知道如何调用,希望有时间的大佬能教教,源码地址如下:\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/myhub/tr\"\u003ehttps://github.com/myhub/tr\u003c/a\u003e\u003c/p\u003e\n",
@@ -95,13 +116,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "GO怎么世界标准时间转成北京时间和时间戳",
-      "Link": "https://studygolang.com/topics/15521#reply5",
-      "Description": "\u003cp\u003e使用阿里云OSS生成了STS账号，但返回的过期时间的格式为\u0026rdquo;2022-05-24T07:06:55Z\u0026rdquo;有点猛\n想问问怎么把这样的时间格式转成时间戳和北京时间\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "mac安装bee问题",
       "Link": "https://studygolang.com/topics/15518#reply2",
       "Description": "\u003cp\u003e通过命令go install github.com/beego/bee@latest安装直接报，\ngo/pkg/mod/golang.org/x/sys@v0.0.0-20191005200804-aed5e4c7ecf9/unix/syscall_darwin.1_13.go:25:3: //go:linkname must refer to declared function or variable\n然后我就去安装sys包，通过命令go install golang.org/x/sys@latest，安装，继续报错，\ngo: golang.org/x/sys@latest: module golang.org/x/sys@latest found (v0.0.0-20220520151302-bc2c85ada10a), but does not contain package golang.org/x/sys\n有大佬知道怎么解决吗，我试了各种办法好像都不行，求助要怎么解决\u003c/p\u003e\n",
@@ -126,13 +140,6 @@
       "Title": "📖 Go相关公众号文章每日推荐【2022-05-24】",
       "Link": "https://studygolang.com/topics/15524#reply0",
       "Description": "\u003cp\u003e一、Go语言中文网\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/0q9z2cLcKmxZDfAdNohInA\"\u003eGo 引入箭头函数，你支持吗？\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/swEqflRGfe4rg9LA7z4rkQ\"\u003e新手如何用 VSCode 调试 MySQL\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e二、脑子进煎鱼了\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/lTfu2F0TLJsguUG0Av2VWQ\"\u003eGo 错误处理中再套个娃，能解决烦恼不？\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/nS-72MLogNmwUBcvC2Xq6g\"\u003eGo 的 TryLock 实现\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e三、Golang梦工厂\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/ybbwIykY6NLYcNFLCR2VFQ\"\u003e为什么mysql插入数据会失败?\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e四、TonyBai\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/9vrNLy2peWMvetO7OLQ-mg\"\u003e手把手教你使用ANTLR和Go实现一门DSL语言（第一部分）：设计DSL语法与文法\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e五、polarisxu\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/kZMaPfw0gsExFZzwvESC0g\"\u003e真好！这本 Go 图书的泛型章节，免费下载了\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e六、云加社区\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/--ciEa-Oj0NEUxlp1Af_aQ\"\u003e必撸系列！Go另外几个黑魔法技巧汇总\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e七、Go招聘\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/pzMvHvkBfCrPXTVZzfh_Mw\"\u003e自动发现 Go 项目 Bug 的神器\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Go 加入箭头函数，你支持吗？",
-      "Link": "https://studygolang.com/topics/15515#reply9",
-      "Description": "\u003cp\u003e大家好，我是 polarisxu。\u003c/p\u003e\n\n\u003cp\u003eGo 中有匿名函数，但即使是简单的函数，也需要完整的编写函数：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc (x, y int) bool { return x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e但很多其他语言，有简写方式，这就是轻量级匿名函数语法。即：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e(x, y) =\u0026gt; { x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e即箭头函数。如果你没有见过这样的语法，咋一看会有点懵？！\u003c/p\u003e\n\n\u003cp\u003e当然，目前还是在激烈讨论阶段，能不能最终引入还未知。\u003c/p\u003e\n\n\u003cp\u003e我个人感觉，Go 还是别增加语法糖，搞得语言很复杂了，只有一种解决方案没啥不好，你觉得呢？\u003c/p\u003e\n\n\u003cp\u003e提案讨论地址：\u003ca href=\"https://github.com/golang/go/issues/21498\"\u003ehttps://github.com/golang/go/issues/21498\u003c/a\u003e。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -168,13 +175,6 @@
       "Title": "📖 Go相关公众号文章每日推荐【2022-05-23】",
       "Link": "https://studygolang.com/topics/15517#reply0",
       "Description": "\u003cp\u003e一、Go语言中文网\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/Jxw5y4BVHSDKUl9A3citLw\"\u003e浅析Go内存管理架构\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e二、脑子进煎鱼了\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/Hj9q9MQD6tQIX6mpj7y9pA\"\u003e分享如何阅读 Go 源码\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e三、网管叨bi叨\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/4NRHd9EY91OKHq81JBHYxw\"\u003e上次的问题解决啦，重新送上Go ORM 单元测试全流程讲解\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/vXkCLPoOn9jETdJweWagGA\"\u003e全面总结：Go 语言四种类型转换方法\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e四、Go101\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/CP7Kqe2nS4p14xlOhD3zLQ\"\u003e方法选择器的正规化\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e五、Golang技术分享\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/QVDZpILIKMRbg2-0MgbPqA\"\u003e一个 Benchmark 比较分析工具\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e六、章老师说\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/nnMjAxJF64QgwqHcN2qxYw\"\u003e代码的艺术直播系列(5): 如何写好项目文档\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e七、polarisxu\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/ef7xuCqvlhDIPksDvMNscQ\"\u003eGo语言爱好者周刊：第 145 期 — 它们相等吗？\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e八、幽鬼\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/VcX6MGx39rz3q0DcwH783A\"\u003e自动发现 Go 项目 Bug 的神器\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e九、微服务实践\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/SjtMZErSPE56VooGHDrlyg\"\u003e类型安全的 Go HTTP 请求\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e十、无闻老师Flamego视频系列\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://www.bilibili.com/video/BV1dA4y1o7sn\"\u003e【Flamego 框架基础】第 6 期：处理器返回值_哔哩哔哩_bilibili\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Go语言读写条形码",
-      "Link": "https://studygolang.com/articles/35663#reply1",
-      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;image/png\u0026quot;\n\t\u0026quot;os\u0026quot;\n\t\u0026quot;github.com/makiuchi-d/gozxing\u0026quot;\n\t\u0026quot;github.com/makiuchi-d/gozxing/oned\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n)\n\nfunc encode(content, savePath string, width, height int) error {\n\tenc := oned.NewCode128Writer()\n\timg, err := enc.Encode(content, gozxing.BarcodeFormat_CODE_128, width, height, nil)\n\tif err != nil {\n\t\treturn err\n\t}\n\tfile, err := os.Create(savePath)\n\tif err != nil {\n\t\treturn err\n\t}\n\tdefer file.Close()\n\treturn png.Encode(file, img)\n}\n\nfunc decode(file string) (content string, err error) {\n\tf, err := os.Open(file)\n\tif err != nil {\n\t\treturn content, err\n\t}\n\timg, err := png.Decode(f)\n\tif err != nil {\n\t\treturn content, err\n\t}\n\tdec := oned.NewCode128Reader()\n\ti, err := gozxing.NewBinaryBitmapFromImage(img)\n\tif err != nil {\n\t\treturn content, err\n\t}\n\tr, err := dec.DecodeWithoutHints(i)\n\tif err != nil {\n\t\treturn content, err\n\t}\n\treturn r.String(), err\n}\n\nfunc main() {\n\tfile := \u0026quot;barcode.png\u0026quot;\n\tif err := encode(\u0026quot;barcode\u0026quot;, file, 120, 60); err != nil {\n\t\tfmt.Println(\u0026quot;encode error:\u0026quot;, err)\n\t\treturn\n\t}\n\tfmt.Println(\u0026quot;encode success!\u0026quot;)\n\tcontent, err := decode(file)\n\tif err != nil {\n\t\tfmt.Println(\u0026quot;decode error:\u0026quot;, err)\n\t\treturn\n\t}\n\tfmt.Println(content)\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
