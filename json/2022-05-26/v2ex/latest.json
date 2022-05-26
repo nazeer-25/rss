@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "ffmpeg 怎么处理 h265 切 h264 的直播流？ - FFmpeg",
+      "Link": "https://www.v2ex.com/t/855410",
+      "Description": "\u003cp\u003e小弟在用 ffmpeg 做一个直播流的播放器，发现当直播流中 265 切成 264 ，播放器会卡死，查了下是 ffmpeg 的 265 封装器没法直接解析 264 的封装头部，于是找到解析报错的地方是在 ff_h2645_packet_split 里的 hevc_parse_nal_header 。\n本以为把这个 ret 为负的报错抛上去就能解决了。\n结果改完后，发现个别手机的正常 265 直播流也会 ret\u0026lt;0 ，这下不知道该怎么区分是编码格式切换引起还是个简单的 warning 了。\n有大神能给点思路吗？\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eint ff_h2645_packet_split(H2645Packet *pkt, const uint8_t *buf, int length, void *logctx, int is_nalff, int nal_length_size, enum AVCodecID codec_id)\n{\n   ......\n         if (codec_id == AV_CODEC_ID_HEVC)\n             ret = hevc_parse_nal_header(nal, logctx);\n         else\n             ret = h264_parse_nal_header(nal, logctx);\n         if (ret \u0026lt;= 0 || nal-\u0026gt;size \u0026lt;= 0) {\n             if (ret \u0026lt; 0) {\n                 av_log(logctx, AV_LOG_ERROR, \"Invalid NAL unit %d, skipping.\\n\",\n                        nal-\u0026gt;type);\n             }\n             pkt-\u0026gt;nb_nals--;\n         }\n   ......\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "JusticeLanding",
+      "PubDate": "2022-05-26T04:23:03Z"
+    },
+    {
       "Title": "米家新风空调尊享版有人用过吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/855409",
       "Description": "\u003cp\u003eRT ，网上逛了一圈，新风空调好像也没太多的选择\u003c/p\u003e\n\u003cp\u003e不是新房装修，所以新风系统什么的不可能搞了\u003c/p\u003e\n\u003cp\u003e主要是希望制冷制热的同时能改善空气质量，因为在南方，所以也希望除湿性能好点\u003c/p\u003e\n\u003cp\u003e1.5 匹 60 米新风量对于 10 米室内空间应该会有很好效果吧？\u003c/p\u003e\n",
