@@ -81,13 +81,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go如何调用C++写的so文件呢?",
-      "Link": "https://studygolang.com/topics/15526#reply2",
-      "Description": "\u003cp\u003e我在github看到一个OCR识别的源码,他是py调用一个so实现的,我想用go来写一份,但是不知道如何调用,希望有时间的大佬能教教,源码地址如下:\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/myhub/tr\"\u003ehttps://github.com/myhub/tr\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "Go 加入箭头函数，你支持吗？",
       "Link": "https://studygolang.com/topics/15515#reply10",
       "Description": "\u003cp\u003e大家好，我是 polarisxu。\u003c/p\u003e\n\n\u003cp\u003eGo 中有匿名函数，但即使是简单的函数，也需要完整的编写函数：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc (x, y int) bool { return x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e但很多其他语言，有简写方式，这就是轻量级匿名函数语法。即：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e(x, y) =\u0026gt; { x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e即箭头函数。如果你没有见过这样的语法，咋一看会有点懵？！\u003c/p\u003e\n\n\u003cp\u003e当然，目前还是在激烈讨论阶段，能不能最终引入还未知。\u003c/p\u003e\n\n\u003cp\u003e我个人感觉，Go 还是别增加语法糖，搞得语言很复杂了，只有一种解决方案没啥不好，你觉得呢？\u003c/p\u003e\n\n\u003cp\u003e提案讨论地址：\u003ca href=\"https://github.com/golang/go/issues/21498\"\u003ehttps://github.com/golang/go/issues/21498\u003c/a\u003e。\u003c/p\u003e\n",
@@ -95,23 +88,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "go如何调用C++写的so文件呢?",
+      "Link": "https://studygolang.com/topics/15526#reply2",
+      "Description": "\u003cp\u003e我在github看到一个OCR识别的源码,他是py调用一个so实现的,我想用go来写一份,但是不知道如何调用,希望有时间的大佬能教教,源码地址如下:\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/myhub/tr\"\u003ehttps://github.com/myhub/tr\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "数组型interface赋值报错问题请教",
       "Link": "https://studygolang.com/topics/15529#reply1",
       "Description": "\u003cpre\u003e\u003ccode class=\"language-golang\"\u003epackage main\n\ntype Entity interface {\n\tSay() string\n}\n\ntype Cat struct{}\n\nfunc (c Cat) Say() string {\n\treturn \u0026quot;我是一只猫\u0026quot;\n}\n\ntype Union struct {\n\tMem []Entity\n}\n\nfunc main() {\n\tvar cats []Cat\n\tcats = append(cats, Cat{})\n\tcats = append(cats, Cat{})\n\tcats = append(cats, Cat{})\n\tu := Union{\n\t\tMem: cats,\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e如上代码，声明一个名为\u003ccode\u003eEntity\u003c/code\u003e的\u003ccode\u003einterface\u003c/code\u003e，包含一个方法\u003ccode\u003eSay() string\u003c/code\u003e，再声明一个名为\u003ccode\u003eCat\u003c/code\u003e的\u003ccode\u003estruct\u003c/code\u003e实现该方法，我把\u003ccode\u003eUnion\u003c/code\u003e的\u003ccode\u003eMem\u003c/code\u003e属性声明为\u003ccode\u003e[]Entity\u003c/code\u003e类型，但是对该字段赋值时会报错如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e: cannot use cats (type []Cat) as type []Entity in field value\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e求大佬指教，该怎么调整？？？\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "求指教，谁能解释下这几行代码打印的结果不？",
-      "Link": "https://studygolang.com/topics/15522#reply3",
-      "Description": "\u003ch3\u003e代码如下：\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;unsafe\u0026quot;\n)\n\nfunc main() {\n\tvar f float64 = 1.0\n\tfmt.Println(Float64bits(f))\n}\n\nfunc Float64bits(f float64) uint64 {\n\treturn *((*uint64)(unsafe.Pointer(\u0026amp;f)))\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e结果如下：\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode\u003e$ go run main.go\n4607182418800017408\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e疑问：\u003c/h3\u003e\n\n\u003cp\u003e\u003cstrong\u003e为啥结果不是1，而是那么大的一个数字呢？\u003c/strong\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "📖 Go相关公众号文章每日推荐【2022-05-24】",
-      "Link": "https://studygolang.com/topics/15524#reply0",
-      "Description": "\u003cp\u003e一、Go语言中文网\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/0q9z2cLcKmxZDfAdNohInA\"\u003eGo 引入箭头函数，你支持吗？\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/swEqflRGfe4rg9LA7z4rkQ\"\u003e新手如何用 VSCode 调试 MySQL\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e二、脑子进煎鱼了\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/lTfu2F0TLJsguUG0Av2VWQ\"\u003eGo 错误处理中再套个娃，能解决烦恼不？\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/nS-72MLogNmwUBcvC2Xq6g\"\u003eGo 的 TryLock 实现\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e三、Golang梦工厂\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/ybbwIykY6NLYcNFLCR2VFQ\"\u003e为什么mysql插入数据会失败?\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e四、TonyBai\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/9vrNLy2peWMvetO7OLQ-mg\"\u003e手把手教你使用ANTLR和Go实现一门DSL语言（第一部分）：设计DSL语法与文法\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e五、polarisxu\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/kZMaPfw0gsExFZzwvESC0g\"\u003e真好！这本 Go 图书的泛型章节，免费下载了\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e六、云加社区\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/--ciEa-Oj0NEUxlp1Af_aQ\"\u003e必撸系列！Go另外几个黑魔法技巧汇总\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e七、Go招聘\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/pzMvHvkBfCrPXTVZzfh_Mw\"\u003e自动发现 Go 项目 Bug 的神器\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -137,6 +123,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "求指教，谁能解释下这几行代码打印的结果不？",
+      "Link": "https://studygolang.com/topics/15522#reply3",
+      "Description": "\u003ch3\u003e代码如下：\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;unsafe\u0026quot;\n)\n\nfunc main() {\n\tvar f float64 = 1.0\n\tfmt.Println(Float64bits(f))\n}\n\nfunc Float64bits(f float64) uint64 {\n\treturn *((*uint64)(unsafe.Pointer(\u0026amp;f)))\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e结果如下：\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode\u003e$ go run main.go\n4607182418800017408\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e疑问：\u003c/h3\u003e\n\n\u003cp\u003e\u003cstrong\u003e为啥结果不是1，而是那么大的一个数字呢？\u003c/strong\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "no required module provides package",
       "Link": "https://studygolang.com/topics/15528#reply0",
       "Description": "\u003cdiv class=\"container nav-content\"\u003e \u003cdiv class=\"inner_content\"\u003e \u003cstrong\u003e \u003ca href=\"http://pages.feedbinusercontent.com/wiki/about\" class=\"dark\"\u003e关于\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/wiki/faq\" class=\"dark\"\u003eFAQ\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/wiki/contributors\" class=\"dark\"\u003e贡献者\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/readings\" class=\"dark\"\u003e晨读\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"https://github.com/studygolang\" class=\"dark\"\u003eGithub\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://weibo.com/studygolang\" class=\"dark\"\u003e新浪微博\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"https://play.studygolang.com\" class=\"dark\"\u003ePlay\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/wiki/duty\" class=\"dark\"\u003e免责声明\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/wiki/contact\" class=\"dark\"\u003e联系我们\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/wiki/donate\" class=\"dark\"\u003e捐赠\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/wiki/cool\" class=\"dark\"\u003e酷站\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/feed.html\" class=\"dark\"\u003eFeed订阅\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003cspan id=\"onlineusers\"\u003e2431164\u003c/span\u003e 人在线 \u003c/strong\u003e  \u003cspan class=\"cc\"\u003e最高记录 \u003cspan id=\"maxonline\"\u003e5390\u003c/span\u003e\u003c/span\u003e ©2013-2022 studygolang.com Go语言中文网，中国 Golang 社区，致力于构建完善的 Golang 中文社区，Go语言爱好者的学习家园。 Powered by \u003ca href=\"https://github.com/studygolang/studygolang\"\u003eStudyGolang(Golang + MySQL)\u003c/a\u003e  \u003cspan class=\"snow\"\u003e•\u003c/span\u003e \u003cspan class=\"snow\"\u003e·\u003c/span\u003e CDN 采用 \u003ca href=\"https://portal.qiniu.com/signup?code=3lfz4at7pxfma\" class=\"dark\"\u003e七牛云\u003c/a\u003e \u003cspan class=\"small cc\"\u003eVERSION: V4.0.0 \u003cspan class=\"snow\"\u003e·\u003c/span\u003e 6.997237ms \u003cspan class=\"snow\"\u003e·\u003c/span\u003e \u003cstrong\u003e为了更好的体验，本站推荐使用 Chrome 或 Firefox 浏览器\u003c/strong\u003e\u003c/span\u003e \u003cspan class=\"f12 c9\"\u003e\u003ca href=\"https://beian.miit.gov.cn/\"\u003e京ICP备14030343号-1\u003c/a\u003e\u003c/span\u003e \u003c/div\u003e \u003c/div\u003e\u003chr\u003e\u003ch4\u003ePage 2\u003c/h4\u003e\u003cdiv class=\"container nav-content\"\u003e \u003cdiv class=\"inner_content\"\u003e \u003cstrong\u003e \u003ca href=\"http://pages.feedbinusercontent.com/wiki/about\" class=\"dark\"\u003e关于\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/wiki/faq\" class=\"dark\"\u003eFAQ\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/wiki/contributors\" class=\"dark\"\u003e贡献者\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/readings\" class=\"dark\"\u003e晨读\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"https://github.com/studygolang\" class=\"dark\"\u003eGithub\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://weibo.com/studygolang\" class=\"dark\"\u003e新浪微博\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"https://play.studygolang.com\" class=\"dark\"\u003ePlay\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/wiki/duty\" class=\"dark\"\u003e免责声明\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/wiki/contact\" class=\"dark\"\u003e联系我们\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/wiki/donate\" class=\"dark\"\u003e捐赠\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/wiki/cool\" class=\"dark\"\u003e酷站\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003ca href=\"http://pages.feedbinusercontent.com/feed.html\" class=\"dark\"\u003eFeed订阅\u003c/a\u003e   \u003cspan class=\"snow\"\u003e•\u003c/span\u003e   \u003cspan id=\"onlineusers\"\u003e2431164\u003c/span\u003e 人在线 \u003c/strong\u003e  \u003cspan class=\"cc\"\u003e最高记录 \u003cspan id=\"maxonline\"\u003e5390\u003c/span\u003e\u003c/span\u003e ©2013-2022 studygolang.com Go语言中文网，中国 Golang 社区，致力于构建完善的 Golang 中文社区，Go语言爱好者的学习家园。 Powered by \u003ca href=\"https://github.com/studygolang/studygolang\"\u003eStudyGolang(Golang + MySQL)\u003c/a\u003e  \u003cspan class=\"snow\"\u003e•\u003c/span\u003e \u003cspan class=\"snow\"\u003e·\u003c/span\u003e CDN 采用 \u003ca href=\"https://portal.qiniu.com/signup?code=3lfz4at7pxfma\" class=\"dark\"\u003e七牛云\u003c/a\u003e \u003cspan class=\"small cc\"\u003eVERSION: V4.0.0 \u003cspan class=\"snow\"\u003e·\u003c/span\u003e 16.263685ms \u003cspan class=\"snow\"\u003e·\u003c/span\u003e \u003cstrong\u003e为了更好的体验，本站推荐使用 Chrome 或 Firefox 浏览器\u003c/strong\u003e\u003c/span\u003e \u003cspan class=\"f12 c9\"\u003e\u003ca href=\"https://beian.miit.gov.cn/\"\u003e京ICP备14030343号-1\u003c/a\u003e\u003c/span\u003e \u003c/div\u003e \u003c/div\u003e",
@@ -158,13 +151,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "GO怎么世界标准时间转成北京时间和时间戳",
-      "Link": "https://studygolang.com/topics/15521#reply5",
-      "Description": "\u003cp\u003e使用阿里云OSS生成了STS账号，但返回的过期时间的格式为\u0026rdquo;2022-05-24T07:06:55Z\u0026rdquo;有点猛\n想问问怎么把这样的时间格式转成时间戳和北京时间\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "不回车怎么捕获tab键",
       "Link": "https://studygolang.com/topics/15523#reply1",
       "Description": "\u003cp\u003e想做类似tab键自动补全的功能， 但不知道怎么捕获按tab event事件， 请教大佬们。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\nfunc Loop() {\n\tbuf := bufio.NewReader(os.Stdin)\n\tfor {\n\t\tline, _, err := buf.ReadRune()\n\t\tif err != nil {\n\t\t\tfmt.Println(err)\n\t\t\tcontinue\n\t\t}\n\n\t\tswitch line {\n\t\tcase '\\t':   //这个地方都需要回车才行， 不回车怎么捕获tab\n\t\t\tfmt.Print(\u0026quot;your press tab key\u0026quot;)\n\t\tdefault:\n\t\t\tfmt.Print(string(line))\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -175,6 +161,13 @@
       "Title": "「WGCLOUD」的agent可以设置开机自动启动吗",
       "Link": "https://studygolang.com/topics/15525#reply0",
       "Description": "\u003cp\u003e我想你应该问的是windows下的agent如何设置开机自动启动吧\u003c/p\u003e\n\n\u003cp\u003e查看如下agent注册windows服务说明\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://wgstart.com/help/docs32.html\"\u003ehttps://wgstart.com/help/docs32.html\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e如果是server想设置开机自动启动也可以，如下\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://wgstart.com/help/docs49.html\"\u003ehttps://wgstart.com/help/docs49.html\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "📖 Go相关公众号文章每日推荐【2022-05-24】",
+      "Link": "https://studygolang.com/topics/15524#reply0",
+      "Description": "\u003cp\u003e一、Go语言中文网\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/0q9z2cLcKmxZDfAdNohInA\"\u003eGo 引入箭头函数，你支持吗？\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/swEqflRGfe4rg9LA7z4rkQ\"\u003e新手如何用 VSCode 调试 MySQL\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e二、脑子进煎鱼了\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/lTfu2F0TLJsguUG0Av2VWQ\"\u003eGo 错误处理中再套个娃，能解决烦恼不？\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/nS-72MLogNmwUBcvC2Xq6g\"\u003eGo 的 TryLock 实现\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e三、Golang梦工厂\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/ybbwIykY6NLYcNFLCR2VFQ\"\u003e为什么mysql插入数据会失败?\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e四、TonyBai\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/9vrNLy2peWMvetO7OLQ-mg\"\u003e手把手教你使用ANTLR和Go实现一门DSL语言（第一部分）：设计DSL语法与文法\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e五、polarisxu\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/kZMaPfw0gsExFZzwvESC0g\"\u003e真好！这本 Go 图书的泛型章节，免费下载了\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e六、云加社区\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/--ciEa-Oj0NEUxlp1Af_aQ\"\u003e必撸系列！Go另外几个黑魔法技巧汇总\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e七、Go招聘\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/pzMvHvkBfCrPXTVZzfh_Mw\"\u003e自动发现 Go 项目 Bug 的神器\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -203,6 +196,20 @@
       "Title": "golang web服务 生成excel文件并下载",
       "Link": "https://studygolang.com/topics/4038#reply8",
       "Description": "\u003cp\u003e我想请教一下怎样 ==不保存== 生成的文件而直接返回给浏览器\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc (this *MyHandler)DownloadHandler(w http.ResponseWriter, r *http.Request) () {\n\tfile := xlsx.NewFile()\n\tsheet, _ := file.AddSheet(\u0026quot;Sheet1\u0026quot;)\n\trow := sheet.AddRow()\n\trow.SetHeightCM(1) //设置每行的高度\n\tcell := row.AddCell()\n\tcell.Value = \u0026quot;haha\u0026quot;\n\tcell = row.AddCell()\n\tcell.Value = \u0026quot;xixi\u0026quot;\n\n\t// ==================================\n\terr := file.Save(\u0026quot;./files/file.xlsx\u0026quot;)\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\n\n\tw.Header().Set(\u0026quot;Content-Disposition\u0026quot;, \u0026quot;attachment; filename=file.xls\u0026quot;)\n\t//io.Copy(w, f)\n\thttp.ServeFile(w, r, \u0026quot;./files/haha2.xls\u0026quot;)\n\treturn\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e我目前这种实现方式服务端必须先保存到服务器，然后再通过文件服务返回给浏览器\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "【有偿】寻求Go项目开发援助",
+      "Link": "https://studygolang.com/topics/15479#reply5",
+      "Description": "\u003cp\u003e项目概述：\n基于go语言开发一个涉及加密传输的信息共享系统\u003c/p\u003e\n\n\u003cp\u003e详细要求：\n1、至少包含两个客户端和一个中间服务器端，客户端可上传信息（文件）到服务器端存储，并支持对服务端的信息进行访问和更新。\n2、加密传输要求，客户端上传信息到服务端和访问信息的过程，需要结合代理重加密的原理。（此部分程序已有，后续工作需要寻找合适的共享信息系统的框架，并结合前面的信息加密传输的接口，完善整个项目）\n3、能力要求，需要有能搭建中小型项目的能力。有偿，有意者留言详谈。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "GO怎么世界标准时间转成北京时间和时间戳",
+      "Link": "https://studygolang.com/topics/15521#reply5",
+      "Description": "\u003cp\u003e使用阿里云OSS生成了STS账号，但返回的过期时间的格式为\u0026rdquo;2022-05-24T07:06:55Z\u0026rdquo;有点猛\n想问问怎么把这样的时间格式转成时间戳和北京时间\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -238,13 +245,6 @@
       "Title": "go-carbon 2.1.8 版本发布， 轻量级、语义化、对开发者友好的Golang时间处理库",
       "Link": "https://studygolang.com/topics/15520#reply0",
       "Description": "\u003cp\u003ecarbon 是一个轻量级、语义化、对开发者友好的 golang 时间处理库，支持链式调用。\u003c/p\u003e\n\n\u003cp\u003e目前已被 \u003ca href=\"https://github.com/avelino/awesome-go#date-and-time\" title=\"awesome-go\"\u003eawesome-go\u003c/a\u003e 收录，如果您觉得不错，请给个 star 吧\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/golang-module/carbon\" title=\"github.com/golang-module/carbon\"\u003egithub.com/golang-module/carbon\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://gitee.com/golang-module/carbon\" title=\"gitee.com/golang-module/carbon\"\u003egitee.com/golang-module/carbon\u003c/a\u003e\u003c/p\u003e\n\n\u003ch4\u003e安装使用\u003c/h4\u003e\n\n\u003ch5\u003eGolang 版本大于等于1.16\u003c/h5\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 使用 github 库\ngo get -u github.com/golang-module/carbon/v2\n\nimport (\n \t\u0026quot;github.com/golang-module/carbon/v2\u0026quot;\n )\n\n// 使用 gitee 库\ngo get -u gitee.com/golang-module/carbon/v2\n\nimport (\n \t\u0026quot;gitee.com/golang-module/carbon/v2\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003eGolang 版本小于1.16\u003c/h5\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 使用 github 库\ngo get -u github.com/golang-module/carbon\n\nimport (\n\t \u0026quot;github.com/golang-module/carbon\u0026quot;\n )\n\n// 使用 gitee 库\ngo get -u gitee.com/golang-module/carbon\n\nimport (\n\t \u0026quot;gitee.com/golang-module/carbon\u0026quot;\n )\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003e更新日志\u003c/h5\u003e\n\n\u003cul\u003e\n\u003cli\u003e修复 ToFormatString () 方法对于支持 i18n 的特殊字符 (D, F, M, l) 不能输出本地化翻译的 bug\u003c/li\u003e\n\u003cli\u003e修复 \u003ccode\u003elang/jp.json\u003c/code\u003e 语法错误\u003c/li\u003e\n\u003cli\u003e修复 \u003ccode\u003elang/ro.json\u003c/code\u003e 语法错误\u003c/li\u003e\n\u003cli\u003e统一私有方法注释格式\u003c/li\u003e\n\u003cli\u003e优化 IsSameXXX() 判断逻辑\u003c/li\u003e\n\u003cli\u003e优化单元测试\u003c/li\u003e\n\u003c/ul\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "【有偿】寻求Go项目开发援助",
-      "Link": "https://studygolang.com/topics/15479#reply5",
-      "Description": "\u003cp\u003e项目概述：\n基于go语言开发一个涉及加密传输的信息共享系统\u003c/p\u003e\n\n\u003cp\u003e详细要求：\n1、至少包含两个客户端和一个中间服务器端，客户端可上传信息（文件）到服务器端存储，并支持对服务端的信息进行访问和更新。\n2、加密传输要求，客户端上传信息到服务端和访问信息的过程，需要结合代理重加密的原理。（此部分程序已有，后续工作需要寻找合适的共享信息系统的框架，并结合前面的信息加密传输的接口，完善整个项目）\n3、能力要求，需要有能搭建中小型项目的能力。有偿，有意者留言详谈。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
