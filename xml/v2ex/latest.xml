@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>typescript 大类拆分成多文件方案？ - 程序员</title>
+      <link>https://www.v2ex.com/t/855664</link>
+      <description>&lt;p&gt;有个类 A,里面有很多方法，可能有互相调用,代码很多,是在是忍不了了,想拆分成多个文件&lt;br/&gt;&#xA;搜了下,ts 原生好像不支持。网上搜的方法都是要对代码改动比较多。&lt;br/&gt;&#xA;目前想到一个较少改动的,(只需要 复制-粘贴)&lt;br/&gt;&#xA;就是把想归集的方法写到一起&lt;br/&gt;&#xA;依次继承，&lt;br/&gt;&#xA;最后只要暴露最下面的类  &lt;/p&gt;&#xA;&lt;p&gt;但是要保证继承顺序，还是有些繁琐，&lt;br/&gt;&#xA;请问有更好的方式吗？（不改业务代码，或者极少改动）  &lt;/p&gt;&#xA;&lt;p&gt;a,b,c 这三个方法可能有互相调用的情况  &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;class A {&#xA;    a(){    }  //业务代码&#xA;    b(){    }  // 业务代码&#xA;    c(){    } // 业务代码&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;------------- 拆分后,各个类放在不同文件----------&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;/// a.ts&#xA;class A_0{&#xA;    a(){} // 空 body&#xA;    b(){} // 空 body&#xA;    c(){} // 空 body&#xA;}&#xA;&#xA;&#xA;class A_a extends A_0{&#xA;    a(){&#xA;        /// 实际代码&#xA;    } &#xA;}&#xA;&#xA;// b.ts&#xA;class A_b extends A_a{&#xA;    b(){&#xA;        /// 实际代码&#xA;    } &#xA;}&#xA;&#xA;// c.ts&#xA;class A_c extends A_b{&#xA;    c(){&#xA;        /// 实际代码&#xA;    } &#xA;}&#xA;&#xA;&#xA;&#xA;/// 暴露给外面使用&#xA;class A extends A_c{&#xA;    &#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>liuidetmks</author>
+      <pubDate>27 May 2022 06:06:09 +0000</pubDate>
+    </item>
+    <item>
       <title>有什么适合网页阅读的中文字体推荐的吗？ - 问与答</title>
       <link>https://www.v2ex.com/t/855662</link>
       <description>&lt;p&gt;系统默认的看得审美疲劳了。&lt;/p&gt;&#xA;</description>
