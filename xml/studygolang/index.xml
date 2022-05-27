@@ -59,11 +59,6 @@
       <description>&lt;p&gt;&lt;code&gt;viper&lt;/code&gt;支持读取环境变量和读取配置文件，我在尝试封装一个方法，用于选择读取环境变量，读取配置文件或者两个都使用，我能想到的方法是使用&lt;code&gt;switch&lt;/code&gt;，但是我感觉会造成代码冗余，请问有其他合适的方法吗？谢谢&#xA;&amp;gt; 当然直接将添加env和file封装成函数就可减少冗余&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;swtich ConfigUsage{&#xA;&#x9;case Env:&#xA;&#x9;&#x9;// 添加env配置&#xA;&#x9;case Config:&#xA;&#x9;&#x9;// 添加 file读取配置&#xA;&#x9;case All:&#xA;&#x9;&#x9;// env 和 file 配置&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
-      <title>不回车怎么捕获tab键</title>
-      <link>https://studygolang.com/topics/15523#reply1</link>
-      <description>&lt;p&gt;想做类似tab键自动补全的功能， 但不知道怎么捕获按tab event事件， 请教大佬们。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;&#xA;func Loop() {&#xA;&#x9;buf := bufio.NewReader(os.Stdin)&#xA;&#x9;for {&#xA;&#x9;&#x9;line, _, err := buf.ReadRune()&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;fmt.Println(err)&#xA;&#x9;&#x9;&#x9;continue&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;switch line {&#xA;&#x9;&#x9;case &#39;\t&#39;:   //这个地方都需要回车才行， 不回车怎么捕获tab&#xA;&#x9;&#x9;&#x9;fmt.Print(&amp;quot;your press tab key&amp;quot;)&#xA;&#x9;&#x9;default:&#xA;&#x9;&#x9;&#x9;fmt.Print(string(line))&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
-    </item>
-    <item>
       <title>Go 加入箭头函数，你支持吗？</title>
       <link>https://studygolang.com/topics/15515#reply10</link>
       <description>&lt;p&gt;大家好，我是 polarisxu。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Go 中有匿名函数，但即使是简单的函数，也需要完整的编写函数：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func (x, y int) bool { return x &amp;lt; y }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;但很多其他语言，有简写方式，这就是轻量级匿名函数语法。即：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;(x, y) =&amp;gt; { x &amp;lt; y }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;即箭头函数。如果你没有见过这样的语法，咋一看会有点懵？！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;当然，目前还是在激烈讨论阶段，能不能最终引入还未知。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我个人感觉，Go 还是别增加语法糖，搞得语言很复杂了，只有一种解决方案没啥不好，你觉得呢？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;提案讨论地址：&lt;a href=&#34;https://github.com/golang/go/issues/21498&#34;&gt;https://github.com/golang/go/issues/21498&lt;/a&gt;。&lt;/p&gt;&#xA;</description>
@@ -117,6 +112,11 @@
       <title>GO怎么世界标准时间转成北京时间和时间戳</title>
       <link>https://studygolang.com/topics/15521#reply5</link>
       <description>&lt;p&gt;使用阿里云OSS生成了STS账号，但返回的过期时间的格式为&amp;rdquo;2022-05-24T07:06:55Z&amp;rdquo;有点猛&#xA;想问问怎么把这样的时间格式转成时间戳和北京时间&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>不回车怎么捕获tab键</title>
+      <link>https://studygolang.com/topics/15523#reply1</link>
+      <description>&lt;p&gt;想做类似tab键自动补全的功能， 但不知道怎么捕获按tab event事件， 请教大佬们。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;&#xA;func Loop() {&#xA;&#x9;buf := bufio.NewReader(os.Stdin)&#xA;&#x9;for {&#xA;&#x9;&#x9;line, _, err := buf.ReadRune()&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;fmt.Println(err)&#xA;&#x9;&#x9;&#x9;continue&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;switch line {&#xA;&#x9;&#x9;case &#39;\t&#39;:   //这个地方都需要回车才行， 不回车怎么捕获tab&#xA;&#x9;&#x9;&#x9;fmt.Print(&amp;quot;your press tab key&amp;quot;)&#xA;&#x9;&#x9;default:&#xA;&#x9;&#x9;&#x9;fmt.Print(string(line))&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>「WGCLOUD」的agent可以设置开机自动启动吗</title>
