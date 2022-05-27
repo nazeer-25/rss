@@ -74,9 +74,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "「WGCLOUD」的agent可以设置开机自动启动吗",
-      "Link": "https://studygolang.com/topics/15525#reply0",
-      "Description": "\u003cp\u003e我想你应该问的是windows下的agent如何设置开机自动启动吧\u003c/p\u003e\n\n\u003cp\u003e查看如下agent注册windows服务说明\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://wgstart.com/help/docs32.html\"\u003ehttps://wgstart.com/help/docs32.html\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e如果是server想设置开机自动启动也可以，如下\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://wgstart.com/help/docs49.html\"\u003ehttps://wgstart.com/help/docs49.html\u003c/a\u003e\u003c/p\u003e\n",
+      "Title": "用 Golang 跑「队列任务」，也可以像 Laravel 一样简单",
+      "Link": "https://studygolang.com/articles/35668#reply0",
+      "Description": "\u003cp\u003e话说用 Golang 跑「队列任务」需要几步？使用 \u003ca href=\"https://github.com/goravel/goravel\"\u003eGoravel\u003c/a\u003e ,四步不能再多了！\u003c/p\u003e\n\n\u003ch3\u003e第一步：生成任务类\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode\u003ego run . artisan make:job HelloWorld\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e任务类结构\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage jobs\n\ntype HelloWorld struct {\n}\n\n//Signature The name and signature of the job.\nfunc (receiver *HelloWorld) Signature() string {\n  return \u0026quot;process_podcast\u0026quot;\n}\n\n//Handle Execute the job.\nfunc (receiver *HelloWorld) Handle(args ...interface{}) error {\n  return nil\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e第二步：注册任务\u003c/h3\u003e\n\n\u003cp\u003e注册到 \u003ccode\u003eapp/provides/queue_service_provider.go\u003c/code\u003e\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc (receiver *QueueServiceProvider) Jobs() []queue.Job {\n  return []queue.Job{\n    \u0026amp;jobs.HelloWorld{},\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e第三步：启动队列服务器\u003c/h3\u003e\n\n\u003cp\u003e在根目录下 \u003ccode\u003emain.go\u003c/code\u003e 中启动队列服务器\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n  \u0026quot;github.com/goravel/framework/support/facades\u0026quot;\n  \u0026quot;goravel/bootstrap\u0026quot;\n)\n\nfunc main() {\n  // This bootstraps the framework and gets it ready for use.\n  bootstrap.Boot()\n\n  // Start queue server by facades.Queue.\n  go facades.Queue.Worker(queue.Args{}).Run()\n\n  select {}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e第四步：调度任务\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode\u003eerr := facades.Queue.Job(\u0026amp;jobs.HelloWorld{}, []queue.Arg{}).Dispatch()\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003eOK, Over. 更多功能详见文档，基本用法与 Laravel 保持一致，小伙伴们开始愉快的搞事情吧！\u003c/p\u003e\n\n\u003ch2\u003e关于 Goravel\u003c/h2\u003e\n\n\u003cp\u003eGoravel 是一个功能完备、具有良好扩展能力的 Web 应用程序框架。 作为一个起始脚手架帮助 Golang 开发者快速构建自己的应用。\u003c/p\u003e\n\n\u003cp\u003e项目地址：\u003ca href=\"https://github.com/goravel/goravel\" title=\"https://github.com/goravel/goravel\"\u003ehttps://github.com/goravel/goravel\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e文档地址：\u003ca href=\"https://www.goravel.dev\" title=\"www.goravel.dev\"\u003ewww.goravel.dev\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cp  align=\"center\"\u003e\u003cimg  src=\"https://cdn.learnku.com/uploads/images/202112/16/29432/0DkNTwOZmj.png!large\"  width=\"300\"\u003e\u003c/p\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -112,13 +112,6 @@
       "Title": "go如何调用C++写的so文件呢?",
       "Link": "https://studygolang.com/topics/15526#reply2",
       "Description": "\u003cp\u003e我在github看到一个OCR识别的源码,他是py调用一个so实现的,我想用go来写一份,但是不知道如何调用,希望有时间的大佬能教教,源码地址如下:\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/myhub/tr\"\u003ehttps://github.com/myhub/tr\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "用 Golang 跑「队列任务」，也可以像 Laravel 一样简单",
-      "Link": "https://studygolang.com/articles/35668#reply0",
-      "Description": "\u003cp\u003e话说用 Golang 跑「队列任务」需要几步？使用 \u003ca href=\"https://github.com/goravel/goravel\"\u003eGoravel\u003c/a\u003e ,四步不能再多了！\u003c/p\u003e\n\n\u003ch3\u003e第一步：生成任务类\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode\u003ego run . artisan make:job HelloWorld\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e任务类结构\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage jobs\n\ntype HelloWorld struct {\n}\n\n//Signature The name and signature of the job.\nfunc (receiver *HelloWorld) Signature() string {\n  return \u0026quot;process_podcast\u0026quot;\n}\n\n//Handle Execute the job.\nfunc (receiver *HelloWorld) Handle(args ...interface{}) error {\n  return nil\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e第二步：注册任务\u003c/h3\u003e\n\n\u003cp\u003e注册到 \u003ccode\u003eapp/provides/queue_service_provider.go\u003c/code\u003e\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc (receiver *QueueServiceProvider) Jobs() []queue.Job {\n  return []queue.Job{\n    \u0026amp;jobs.HelloWorld{},\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e第三步：启动队列服务器\u003c/h3\u003e\n\n\u003cp\u003e在根目录下 \u003ccode\u003emain.go\u003c/code\u003e 中启动队列服务器\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n  \u0026quot;github.com/goravel/framework/support/facades\u0026quot;\n  \u0026quot;goravel/bootstrap\u0026quot;\n)\n\nfunc main() {\n  // This bootstraps the framework and gets it ready for use.\n  bootstrap.Boot()\n\n  // Start queue server by facades.Queue.\n  go facades.Queue.Worker(queue.Args{}).Run()\n\n  select {}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e第四步：调度任务\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode\u003eerr := facades.Queue.Job(\u0026amp;jobs.HelloWorld{}, []queue.Arg{}).Dispatch()\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003eOK, Over. 更多功能详见文档，基本用法与 Laravel 保持一致，小伙伴们开始愉快的搞事情吧！\u003c/p\u003e\n\n\u003ch2\u003e关于 Goravel\u003c/h2\u003e\n\n\u003cp\u003eGoravel 是一个功能完备、具有良好扩展能力的 Web 应用程序框架。 作为一个起始脚手架帮助 Golang 开发者快速构建自己的应用。\u003c/p\u003e\n\n\u003cp\u003e项目地址：\u003ca href=\"https://github.com/goravel/goravel\" title=\"https://github.com/goravel/goravel\"\u003ehttps://github.com/goravel/goravel\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e文档地址：\u003ca href=\"https://www.goravel.dev\" title=\"www.goravel.dev\"\u003ewww.goravel.dev\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cp  align=\"center\"\u003e\u003cimg  src=\"https://cdn.learnku.com/uploads/images/202112/16/29432/0DkNTwOZmj.png!large\"  width=\"300\"\u003e\u003c/p\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -161,6 +154,13 @@
       "Title": "不回车怎么捕获tab键",
       "Link": "https://studygolang.com/topics/15523#reply1",
       "Description": "\u003cp\u003e想做类似tab键自动补全的功能， 但不知道怎么捕获按tab event事件， 请教大佬们。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\nfunc Loop() {\n\tbuf := bufio.NewReader(os.Stdin)\n\tfor {\n\t\tline, _, err := buf.ReadRune()\n\t\tif err != nil {\n\t\t\tfmt.Println(err)\n\t\t\tcontinue\n\t\t}\n\n\t\tswitch line {\n\t\tcase '\\t':   //这个地方都需要回车才行， 不回车怎么捕获tab\n\t\t\tfmt.Print(\u0026quot;your press tab key\u0026quot;)\n\t\tdefault:\n\t\t\tfmt.Print(string(line))\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "「WGCLOUD」的agent可以设置开机自动启动吗",
+      "Link": "https://studygolang.com/topics/15525#reply0",
+      "Description": "\u003cp\u003e我想你应该问的是windows下的agent如何设置开机自动启动吧\u003c/p\u003e\n\n\u003cp\u003e查看如下agent注册windows服务说明\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://wgstart.com/help/docs32.html\"\u003ehttps://wgstart.com/help/docs32.html\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e如果是server想设置开机自动启动也可以，如下\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://wgstart.com/help/docs49.html\"\u003ehttps://wgstart.com/help/docs49.html\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
