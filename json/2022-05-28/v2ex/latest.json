@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教 go 标准库 aes 的默认的加密模式是什么？没有 openSSL 里的那种初始化变量 IV，是有个默认值？还是说 go 标准库里默认的初始化 iv=key ？ - 问与答",
+      "Link": "https://www.v2ex.com/t/855847",
+      "Description": "请教如下的示例代码，没有 IV （初始化向量）\u003cbr /\u003e\u003cbr /\u003e来源： \u003ca target=\"_blank\" href=\"https://www.developer.com/languages/cryptography-in-go/\" rel=\"nofollow noopener\"\u003ehttps://www.developer.com/languages/cryptography-in-go/\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e上面文章提到的案例是：\u003cbr /\u003e~~~\u003cbr /\u003e\u003cbr /\u003epackage main\u003cbr /\u003e\u003cbr /\u003eimport (\u003cbr /\u003e\t\"crypto/aes\"\u003cbr /\u003e\t\"encoding/hex\"\u003cbr /\u003e\t\"fmt\"\u003cbr /\u003e)\u003cbr /\u003e\u003cbr /\u003efunc encryptMessage(key string, message string) string {\u003cbr /\u003e\tc, err := aes.NewCipher([]byte(key))\u003cbr /\u003e\tif err != nil {\u003cbr /\u003e\t\tfmt.Println(err)\u003cbr /\u003e\t}\u003cbr /\u003e\tmsgByte := make([]byte, len(message))\u003cbr /\u003e\tc.Encrypt(msgByte, []byte(message))\u003cbr /\u003e\treturn hex.EncodeToString(msgByte)\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003efunc decryptMessage(key string, message string) string {\u003cbr /\u003e\ttxt, _ := hex.DecodeString(message)\u003cbr /\u003e\tc, err := aes.NewCipher([]byte(key))\u003cbr /\u003e\tif err != nil {\u003cbr /\u003e\t\tfmt.Println(err)\u003cbr /\u003e\t}\u003cbr /\u003e\tmsgByte := make([]byte, len(txt))\u003cbr /\u003e\tc.Decrypt(msgByte, []byte(txt))\u003cbr /\u003e\u003cbr /\u003e\tmsg := string(msgByte[:])\u003cbr /\u003e\treturn msg\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003efunc main() {\u003cbr /\u003e\u003cbr /\u003e\tplainText := \"This is a secret\"                  \u003cbr /\u003e\tkey := \"this_must_be_of_32_byte_length!!\"\u003cbr /\u003e\u003cbr /\u003e\temsg := encryptMessage(key, plainText)\u003cbr /\u003e\tdmesg := decryptMessage(key, emsg)\u003cbr /\u003e\u003cbr /\u003e\tfmt.Println(\"Encrypted Message: \", emsg)\u003cbr /\u003e\tfmt.Println(\"Decrypted Message: \", dmesg)\u003cbr /\u003e\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003e~~~\u003cbr /\u003e\u003cbr /\u003e请教下：aes 的默认的加密模式是什么？ [比如 cbc 之类的加密模式是哪一种？] 没有 openSSL 里的那种初始化变量 IV ，是有个默认值？还是说 go 标准库里默认的初始化 iv=key ？",
+      "Author": "xiaoyanbot",
+      "PubDate": "2022-05-28T06:29:59Z"
+    },
+    {
+      "Title": "聊聊当下的 B 站 - 哔哩哔哩",
+      "Link": "https://www.v2ex.com/t/855846",
+      "Description": "\u003cp\u003e我的以下观点由最近大火的王心凌和可达鸭发散而来。\u003c/p\u003e\n\u003cp\u003e当下的 B 站充满了某音、某手的特征，标签几乎要被点满。本来国内只看 B 站的，但是这样下去，B 站迟早变成下一个某音。是叔叔真的缺钱了吗？热门里，以及我们难以发现的某个角落里，充斥着大量蹭热度的“王心凌”话题视频。与前面“王心凌”视频类似，“可达鸭”的很多视频也是蹭热度，篇幅短小又无趣，几十秒甚至一二十秒。太太太娱乐向了，叔叔能通过这些流量挣到钱吗？没有广告怎么挣？如果不能或者挣的少我想谈谈我的意见——\u003c/p\u003e\n\u003cp\u003e有没有一种可能，限制 UP 主每个月的发布数量，主要是视频作品的限制，限制数量再加上限制时长，一分钟以内的视频每个月最多发布 3 篇，这样应该能减少平台的作品量，总体提升平台视频的“质量”。\u003c/p\u003e\n\u003cp\u003e但这样似乎很难给 B 站带来收益，所以还是一个非常复杂的问题。如何找到一个绝妙的商业模式，充分满足视频质量数量、平台、ugc 的 u （ user/uploader ） 以及更多 public view 的观众的需要。\u003c/p\u003e\n\u003cp\u003e长视频都很难见到了，根据我的了解，现在也就科技区，学习资源区（各种教程甚至初高中的课程学习、纪录片之类的归类于此），数码区（勉强算上）能够输出比较有干货的内容，往往这些人能够沉淀下来做一些事情，在现在这个快节奏、快消费的网络时代，什么都来得快也去得快。\u003c/p\u003e\n\u003cp\u003e我是希望小破站越做越好的，但是像现在这样长期以往不加一个有效的管控措施的话，最后任其恣意生长，最后就是下一个某音。变成某音有什么不好的？\u003c/p\u003e\n\u003cp\u003e到最后我认为不如直接向 YouTube 看齐，引入比 YouTube 更少量的广告（ youtube 的广告量似乎有点过分，但人家是面向全球用户的），但是能带给平台和 UP 主甚至于普通用户都有更多的好处。\u003c/p\u003e\n\u003cp\u003e要改变，但做这样的决定，还是太难了。\u003c/p\u003e\n",
+      "Author": "AllenHua",
+      "PubDate": "2022-05-28T06:28:52Z"
+    },
+    {
       "Title": "有高级低码工程师这样的职位吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/855844",
       "Description": "纯突发奇想",
