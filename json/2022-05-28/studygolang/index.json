@@ -54,7 +54,7 @@
     },
     {
       "Title": "请教一下如何使用go实现windows编程",
-      "Link": "https://studygolang.com/articles/35674#reply0",
+      "Link": "https://studygolang.com/articles/35674#reply1",
       "Description": "\u003cp\u003e请教一下如何使用go实现各种windows api的调用。\n如\n\u003ccode\u003e\u0026quot;golang.org/x/sys/windows\u0026quot;\u003c/code\u003e 包中的CreateMutex函数。\n我在搜索该函数时发现他的调用方式为\u003ccode\u003eCreateMutex(nil, false, syscall.StringToUTF16Ptr(name))\u003c/code\u003e，最后一个参数使用syscall将字符串转为指针类型，但不明白为什么要使用这种方法，请教一下各位大佬是否有这方面的系统性学习资料。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -88,16 +88,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "聊聊在Linux生产环境中你们是如何部署GO持续运行的",
-      "Link": "https://studygolang.com/topics/15531#reply7",
-      "Description": "\u003cp\u003e我是一句话： nohup ./main \u0026gt; ./nohup.log 1\u0026gt;\u0026amp;1 \u0026amp;\u003c/p\u003e\n\n\u003cp\u003e可有时候他会自动终止运行，运行时间长了还会报错：accept4: too many open files;\u003c/p\u003e\n\n\u003cp\u003e聊聊你们Go生成的二进制文件，在Linux生产环境中，如何持续稳定运行的。\u003c/p\u003e\n\n\u003cp\u003e参考一下你们的思路\u003c/p\u003e\n",
+      "Title": "泛型什么时候能用, 1.19支持字段吗?",
+      "Link": "https://studygolang.com/topics/15534#reply11",
+      "Description": "\u003cp\u003e读取字段不支持, 方法参数不能有泛型,   那要这泛型有何用.\u003c/p\u003e\n\n\u003cp\u003e1.18的泛型是来搞笑的吗,  没整理好就发布了, 唉!\u003c/p\u003e\n\n\u003cp\u003e// 心力交瘁,  等c++的import,  golang 泛型.  关键是一个都没实现,  逼着我用C# JAVA\u0026hellip;\u0026hellip;\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "泛型什么时候能用, 1.19支持字段吗?",
-      "Link": "https://studygolang.com/topics/15534#reply11",
-      "Description": "\u003cp\u003e读取字段不支持, 方法参数不能有泛型,   那要这泛型有何用.\u003c/p\u003e\n\n\u003cp\u003e1.18的泛型是来搞笑的吗,  没整理好就发布了, 唉!\u003c/p\u003e\n\n\u003cp\u003e// 心力交瘁,  等c++的import,  golang 泛型.  关键是一个都没实现,  逼着我用C# JAVA\u0026hellip;\u0026hellip;\u003c/p\u003e\n",
+      "Title": "聊聊在Linux生产环境中你们是如何部署GO持续运行的",
+      "Link": "https://studygolang.com/topics/15531#reply7",
+      "Description": "\u003cp\u003e我是一句话： nohup ./main \u0026gt; ./nohup.log 1\u0026gt;\u0026amp;1 \u0026amp;\u003c/p\u003e\n\n\u003cp\u003e可有时候他会自动终止运行，运行时间长了还会报错：accept4: too many open files;\u003c/p\u003e\n\n\u003cp\u003e聊聊你们Go生成的二进制文件，在Linux生产环境中，如何持续稳定运行的。\u003c/p\u003e\n\n\u003cp\u003e参考一下你们的思路\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -203,6 +203,13 @@
       "Title": "golang web服务 生成excel文件并下载",
       "Link": "https://studygolang.com/topics/4038#reply8",
       "Description": "\u003cp\u003e我想请教一下怎样 ==不保存== 生成的文件而直接返回给浏览器\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc (this *MyHandler)DownloadHandler(w http.ResponseWriter, r *http.Request) () {\n\tfile := xlsx.NewFile()\n\tsheet, _ := file.AddSheet(\u0026quot;Sheet1\u0026quot;)\n\trow := sheet.AddRow()\n\trow.SetHeightCM(1) //设置每行的高度\n\tcell := row.AddCell()\n\tcell.Value = \u0026quot;haha\u0026quot;\n\tcell = row.AddCell()\n\tcell.Value = \u0026quot;xixi\u0026quot;\n\n\t// ==================================\n\terr := file.Save(\u0026quot;./files/file.xlsx\u0026quot;)\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\n\n\tw.Header().Set(\u0026quot;Content-Disposition\u0026quot;, \u0026quot;attachment; filename=file.xls\u0026quot;)\n\t//io.Copy(w, f)\n\thttp.ServeFile(w, r, \u0026quot;./files/haha2.xls\u0026quot;)\n\treturn\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e我目前这种实现方式服务端必须先保存到服务器，然后再通过文件服务返回给浏览器\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "请教一下如何使用go实现windows编程",
+      "Link": "https://studygolang.com/articles/35674#reply0",
+      "Description": "\u003cp\u003e请教一下如何使用go实现各种windows api的调用。\n如\n\u003ccode\u003e\u0026quot;golang.org/x/sys/windows\u0026quot;\u003c/code\u003e 包中的CreateMutex函数。\n我在搜索该函数时发现他的调用方式为\u003ccode\u003eCreateMutex(nil, false, syscall.StringToUTF16Ptr(name))\u003c/code\u003e，最后一个参数使用syscall将字符串转为指针类型，但不明白为什么要使用这种方法，请教一下各位大佬是否有这方面的系统性学习资料。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
