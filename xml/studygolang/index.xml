@@ -49,6 +49,11 @@
       <description>&lt;p&gt;请教如下的示例代码，没有 IV （初始化向量）&lt;/p&gt;&#xA;&#xA;&lt;p&gt;来源： &lt;a href=&#34;https://www.developer.com/languages/cryptography-in-go/&#34;&gt;https://www.developer.com/languages/cryptography-in-go/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;上面文章提到的案例是：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;&#xA;package main&#xA;&#xA;import (&#xA;&amp;quot;crypto/aes&amp;quot;&#xA;&amp;quot;encoding/hex&amp;quot;&#xA;&amp;quot;fmt&amp;quot;&#xA;)&#xA;&#xA;func encryptMessage(key string, message string) string {&#xA;c, err := aes.NewCipher([]byte(key))&#xA;if err != nil {&#xA;fmt.Println(err)&#xA;}&#xA;msgByte := make([]byte, len(message))&#xA;c.Encrypt(msgByte, []byte(message))&#xA;return hex.EncodeToString(msgByte)&#xA;}&#xA;&#xA;func decryptMessage(key string, message string) string {&#xA;txt, _ := hex.DecodeString(message)&#xA;c, err := aes.NewCipher([]byte(key))&#xA;if err != nil {&#xA;fmt.Println(err)&#xA;}&#xA;msgByte := make([]byte, len(txt))&#xA;c.Decrypt(msgByte, []byte(txt))&#xA;&#xA;msg := string(msgByte[:])&#xA;return msg&#xA;}&#xA;&#xA;func main() {&#xA;&#xA;plainText := &amp;quot;This is a secret&amp;quot;&#xA;key := &amp;quot;this_must_be_of_32_byte_length!!&amp;quot;&#xA;&#xA;emsg := encryptMessage(key, plainText)&#xA;dmesg := decryptMessage(key, emsg)&#xA;&#xA;fmt.Println(&amp;quot;Encrypted Message: &amp;quot;, emsg)&#xA;fmt.Println(&amp;quot;Decrypted Message: &amp;quot;, dmesg)&#xA;&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;请教下：aes 的默认的加密模式是什么？ [比如 cbc 之类的加密模式是哪一种？] 没有 openSSL 里的那种初始化变量 IV ，是有个默认值？还是说 go 标准库里默认的初始化 iv=key ？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>聊聊在Linux生产环境中你们是如何部署GO持续运行的</title>
+      <link>https://studygolang.com/topics/15531#reply7</link>
+      <description>&lt;p&gt;我是一句话： nohup ./main &amp;gt; ./nohup.log 1&amp;gt;&amp;amp;1 &amp;amp;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可有时候他会自动终止运行，运行时间长了还会报错：accept4: too many open files;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;聊聊你们Go生成的二进制文件，在Linux生产环境中，如何持续稳定运行的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;参考一下你们的思路&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>数组型interface赋值报错问题请教</title>
       <link>https://studygolang.com/topics/15529#reply2</link>
       <description>&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main&#xA;&#xA;type Entity interface {&#xA;&#x9;Say() string&#xA;}&#xA;&#xA;type Cat struct{}&#xA;&#xA;func (c Cat) Say() string {&#xA;&#x9;return &amp;quot;我是一只猫&amp;quot;&#xA;}&#xA;&#xA;type Union struct {&#xA;&#x9;Mem []Entity&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;var cats []Cat&#xA;&#x9;cats = append(cats, Cat{})&#xA;&#x9;cats = append(cats, Cat{})&#xA;&#x9;cats = append(cats, Cat{})&#xA;&#x9;u := Union{&#xA;&#x9;&#x9;Mem: cats,&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;如上代码，声明一个名为&lt;code&gt;Entity&lt;/code&gt;的&lt;code&gt;interface&lt;/code&gt;，包含一个方法&lt;code&gt;Say() string&lt;/code&gt;，再声明一个名为&lt;code&gt;Cat&lt;/code&gt;的&lt;code&gt;struct&lt;/code&gt;实现该方法，我把&lt;code&gt;Union&lt;/code&gt;的&lt;code&gt;Mem&lt;/code&gt;属性声明为&lt;code&gt;[]Entity&lt;/code&gt;类型，但是对该字段赋值时会报错如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;: cannot use cats (type []Cat) as type []Entity in field value&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;求大佬指教，该怎么调整？？？&lt;/p&gt;&#xA;</description>
@@ -57,11 +62,6 @@
       <title>泛型什么时候能用, 1.19支持字段吗?</title>
       <link>https://studygolang.com/topics/15534#reply8</link>
       <description>&lt;p&gt;读取字段不支持, 方法参数不能有泛型,   那要这泛型有何用.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1.18的泛型是来搞笑的吗,  没整理好就发布了, 唉!&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 心力交瘁,  等c++的import,  golang 泛型.  关键是一个都没实现,  逼着我用C# JAVA&amp;hellip;&amp;hellip;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>聊聊在Linux生产环境中你们是如何部署GO持续运行的</title>
-      <link>https://studygolang.com/topics/15531#reply7</link>
-      <description>&lt;p&gt;我是一句话： nohup ./main &amp;gt; ./nohup.log 1&amp;gt;&amp;amp;1 &amp;amp;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可有时候他会自动终止运行，运行时间长了还会报错：accept4: too many open files;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;聊聊你们Go生成的二进制文件，在Linux生产环境中，如何持续稳定运行的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;参考一下你们的思路&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>golang 如何实现viper选择</title>
