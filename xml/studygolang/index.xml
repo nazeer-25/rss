@@ -34,14 +34,14 @@
       <description>&lt;p&gt;请教如下的示例代码，没有 IV （初始化向量）&lt;/p&gt;&#xA;&#xA;&lt;p&gt;来源： &lt;a href=&#34;https://www.developer.com/languages/cryptography-in-go/&#34;&gt;https://www.developer.com/languages/cryptography-in-go/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;上面文章提到的案例是：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;&#xA;package main&#xA;&#xA;import (&#xA;&amp;quot;crypto/aes&amp;quot;&#xA;&amp;quot;encoding/hex&amp;quot;&#xA;&amp;quot;fmt&amp;quot;&#xA;)&#xA;&#xA;func encryptMessage(key string, message string) string {&#xA;c, err := aes.NewCipher([]byte(key))&#xA;if err != nil {&#xA;fmt.Println(err)&#xA;}&#xA;msgByte := make([]byte, len(message))&#xA;c.Encrypt(msgByte, []byte(message))&#xA;return hex.EncodeToString(msgByte)&#xA;}&#xA;&#xA;func decryptMessage(key string, message string) string {&#xA;txt, _ := hex.DecodeString(message)&#xA;c, err := aes.NewCipher([]byte(key))&#xA;if err != nil {&#xA;fmt.Println(err)&#xA;}&#xA;msgByte := make([]byte, len(txt))&#xA;c.Decrypt(msgByte, []byte(txt))&#xA;&#xA;msg := string(msgByte[:])&#xA;return msg&#xA;}&#xA;&#xA;func main() {&#xA;&#xA;plainText := &amp;quot;This is a secret&amp;quot;&#xA;key := &amp;quot;this_must_be_of_32_byte_length!!&amp;quot;&#xA;&#xA;emsg := encryptMessage(key, plainText)&#xA;dmesg := decryptMessage(key, emsg)&#xA;&#xA;fmt.Println(&amp;quot;Encrypted Message: &amp;quot;, emsg)&#xA;fmt.Println(&amp;quot;Decrypted Message: &amp;quot;, dmesg)&#xA;&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;请教下：aes 的默认的加密模式是什么？ [比如 cbc 之类的加密模式是哪一种？] 没有 openSSL 里的那种初始化变量 IV ，是有个默认值？还是说 go 标准库里默认的初始化 iv=key ？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>泛型什么时候能用, 1.19支持字段吗?</title>
-      <link>https://studygolang.com/topics/15534#reply12</link>
-      <description>&lt;p&gt;读取字段不支持, 方法参数不能有泛型,   那要这泛型有何用.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1.18的泛型是来搞笑的吗,  没整理好就发布了, 唉!&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 心力交瘁,  等c++的import,  golang 泛型.  关键是一个都没实现,  逼着我用C# JAVA&amp;hellip;&amp;hellip;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>「WGCLOUD」启动server提示 The daemons have started successfully and are protecting the server.</title>
       <link>https://studygolang.com/topics/15536#reply1</link>
       <description>&lt;p&gt;这个是WGCLOUD的守护进程（server/wgcloud-daemon-release）成功启动的提示信息&lt;/p&gt;&#xA;&#xA;&lt;p&gt;守护进程启动后不要关闭，server程序要和它进行通信&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>泛型什么时候能用, 1.19支持字段吗?</title>
+      <link>https://studygolang.com/topics/15534#reply12</link>
+      <description>&lt;p&gt;读取字段不支持, 方法参数不能有泛型,   那要这泛型有何用.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1.18的泛型是来搞笑的吗,  没整理好就发布了, 唉!&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 心力交瘁,  等c++的import,  golang 泛型.  关键是一个都没实现,  逼着我用C# JAVA&amp;hellip;&amp;hellip;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go 加入箭头函数，你支持吗？</title>
