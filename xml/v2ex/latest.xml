@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>nginx 如何反向代理 GO 语言编写的 web 服务？ - 问与答</title>
+      <link>https://www.v2ex.com/t/856113</link>
+      <description>&lt;p&gt;github 上找了个 go 写的监控服务，想用 nginx 反向代理放到公网上，反向代理配置&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;server {&#xA;&#x9;...&#xA;    location / {       &#xA;        proxy_pass http://127.0.0.1:30666;&#xA;        proxy_http_version 1.1;&#xA;        proxy_set_header Upgrade $http_upgrade;&#xA;        proxy_set_header Connection &#34;upgrade&#34;;&#xA;        proxy_set_header Host $http_host;&#xA;&#xA;        proxy_set_header X-Real-IP $remote_addr;&#xA;        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;按此配置执行后，访问根目录可以得到正确的 html ，但由 go 提供的静态资源无法加载，（比如 &lt;a href=&#34;https://my.site/css/app.b9c5a4b6.css&#34; rel=&#34;nofollow&#34;&gt;https://my.site/css/app.b9c5a4b6.css&lt;/a&gt; ）这种资源，&lt;/p&gt;&#xA;&lt;p&gt;在服务器本地运行 &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;wget http://127.0.0.1:30666/css/app.b9c5a4b6.css&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;是可以正确获取到资源的，但是 nginx 无法代理，推测也许是 nginx 扫描本地目录当中没有 css 这个文件夹所以返回 404 ？&lt;/p&gt;&#xA;&lt;p&gt;总之是本地有，远程返回 404 ，有无大佬知道是怎么回事&lt;/p&gt;&#xA;</description>
+      <author>Richard14</author>
+      <pubDate>29 May 2022 23:23:00 +0000</pubDate>
+    </item>
+    <item>
       <title>有人知道 nplayer TV 端视频封面为什么加载这么慢么？ - Android</title>
       <link>https://www.v2ex.com/t/856112</link>
       <description>平均十分钟才能加载出一个视频封面&lt;br /&gt;有什么加快视频封面加载的方法？&lt;br /&gt;或者在哪里保存视频封面缓存？&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/dajfZ9j.jpg&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/dajfZ9j.jpg&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;这是 tv 包&lt;br /&gt;链接: &lt;a target=&#34;_blank&#34; href=&#34;https://pan.baidu.com/s/19Ses4Ya-1CCdw-AD6EFP6w?pwd=xd1r&#34; rel=&#34;nofollow noopener&#34;&gt;https://pan.baidu.com/s/19Ses4Ya-1CCdw-AD6EFP6w?pwd=xd1r&lt;/a&gt; 提取码: xd1r</description>
