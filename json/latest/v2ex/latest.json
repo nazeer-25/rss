@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "这样的工具软件可以在 Linux 中静默运行吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/856352",
+      "Description": "想在自己的 VPS 小鸡（ CentOS 7 - 64bit - minimal ）上使用 Distill 这个网页监测工具，（非付费的话）貌似仅支持桌面浏览器扩展运行。\u003cbr /\u003e\u003cbr /\u003e该如何在这个小鸡上运行这个工具？\u003cbr /\u003e（或者其它可替代的方案也行）",
+      "Author": "airbotgo",
+      "PubDate": "2022-05-31T00:42:12Z"
+    },
+    {
       "Title": "OpenWrt 每次启动都要物理断掉外部网络才能启动 DHCP 服务，否则客户端不会被分配 IP。请问原因是？ - OpenWrt",
       "Link": "https://www.v2ex.com/t/856351",
       "Description": "\u003cp\u003e表现就是断电重启之后，客户端不会被分配内网 IP 地址了。\n必须拔下 eth1 （ WAN ）的网线后重启才能恢复正常。\u003c/p\u003e\n\u003cp\u003e网络配置如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003eroot@OpenWrt:~ # cat /etc/config/network\n\nconfig interface 'loopback'\n\toption device 'lo'\n\toption proto 'static'\n\toption ipaddr '127.0.0.1'\n\toption netmask '255.0.0.0'\n\nconfig globals 'globals'\n\toption ula_prefix 'xxx'\n\nconfig device\n\toption name 'br-lan'\n\toption type 'bridge'\n\tlist ports 'eth0'\n\tlist ports 'eth2'\n\tlist ports 'eth3'\n\nconfig interface 'lan'\n\toption device 'br-lan'\n\toption proto 'static'\n\toption ipaddr '192.168.3.1'\n\toption netmask '255.255.255.0'\n\toption ip6assign '60'\n\nconfig interface 'wan'\n\toption device 'eth1'\n\toption proto 'pppoe'\n\toption username 'xxx'\n\toption password 'xxx'\n\toption ipv6 'auto'\n\nconfig interface 'wan6'\n\toption device 'eth1'\n\toption proto 'dhcpv6'\n\nconfig interface 'docker'\n\toption device 'docker0'\n\toption proto 'none'\n\toption auto '0'\n\nconfig device\n\toption type 'bridge'\n\toption name 'docker0'\n\u003c/code\u003e\u003c/pre\u003e\n",
