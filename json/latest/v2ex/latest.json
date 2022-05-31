@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "诡异的执行结果，有哪位 Go 大神来给瞧瞧？ - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/856589",
+      "Description": "\u003cp\u003e先说一下具体背景，本人在刷题，有一道题是要求使用三个协程依次循环输出 ABCABCABCABCABC 。\u003c/p\u003e\n\u003cp\u003e以下这种实现方式会出现非常诡异的结果：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    var wg sync.WaitGroup = sync.WaitGroup{}\n    wg.Add(1)\n\n    // var ch chan bool = make(chan bool)\n    var i int = 0\n\n    go func() {\n        for {\n            // 自旋锁\n            for i%3 != 0 {\n            }\n\n            fmt.Print(\"A\", i)\n\n            i = i + 1\n        }\n    }()\n    go func() {\n        for {\n            // 自旋锁\n            for i%3 != 1 {\n            }\n\n            fmt.Print(\"B\", i)\n\n            i = i + 1\n        }\n    }()\n    go func() {\n        for {\n\n\t\t\t// 限制循环次数，避免一直死循环\n            if i \u0026gt;= 3 {\n                fmt.Print(\"E\", i, \"\\n\")\n                i = 2\n                break\n            }\n\n            // 这段如果注释掉，就只会输出 AB 然后一直死循环\n            fmt.Print(\"[K]\")\n\n            // 自旋锁\n            for i%3 != 2 {\n            }\n\n            fmt.Print(\"C\", i)\n\n            i++\n\n        }\n        wg.Done()\n    }()\n\n    // ch \u0026lt;- true\n\n    wg.Wait()\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e上面三个协程使用一个变量来模拟锁，当变量的值和自身对应，即和 3 取余后比较与第 N （取 0 、1 、2 ）个协程相等，就说明该协程获取到锁，于是输出对应的字母，然后通过将变量的值增加的方式来模拟释放锁。\u003c/p\u003e\n\u003cp\u003e如果直接运行上面那段代码，有时候会输出\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e[K]A0B1C2E3\nA3A3B4\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e为了方便查找问题，在输出字母的时候也会同时输出 i 的值，可以看到有两个 A3 ，问题是每次协程输出字母后 i 的值都会自增，理论上不可能出现两个 A3 ，但显示就是这么诡异。\u003c/p\u003e\n\u003cp\u003e还有，代码注释里面又说到，如果把 \u003ccode\u003efmt.Print(\"[K]\")\u003c/code\u003e，注释掉，就只会输出 A0B1 ，然后一直陷入死循环。真实诡异！\u003c/p\u003e\n\u003cp\u003e这还没完，如果把 \u003ccode\u003eif i \u0026gt;= 3 {\u003c/code\u003e 这段用来限制循环次数的代码放到 \u003ccode\u003efmt.Print(\"C\", i)\u003c/code\u003e 下面，那一切又恢复正常了。负负得正？诡异的诡异为正常？\u003c/p\u003e\n\u003cp\u003e本人的 Go 版本为 1.18.1 ，切换到 1.14.15 也是有同样的问题。\u003c/p\u003e\n\u003cp\u003e个人猜测是 \u003ccode\u003ei = i + 1\u003c/code\u003e 的问题，于是在 \u003ccode\u003ei = i + 1\u003c/code\u003e 后也再输出 i 的值，发现 i 的值并有增加，这样看来确实是它的问题，问题这没道理啊！虽说三个协程存在并发问题，但在操作 i 时只有一个协程在操作，其它都是在读，不应该会影响才对。难道真的有影响？一个协程把 i 拿出来，加一后再放回去，这个拿出来是赋值给寄存器，寄存器加一后再拷贝到栈中，这个过程另一协程也会去读，同样把值赋值给寄存器，这个寄存器是一样的？共享的？所以就被覆盖了？感觉有这个可能。\u003c/p\u003e\n",
+      "Author": "cocong",
+      "PubDate": "2022-05-31T16:22:35Z"
+    },
+    {
+      "Title": "Cloudflare Pages 挺良心 - 程序员",
+      "Link": "https://www.v2ex.com/t/856588",
+      "Description": "17ce 测了一下，国内大部分地区打开速度都还行\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://blockchain-tools.pages.dev/#/terra\" rel=\"nofollow noopener\"\u003ehttps://blockchain-tools.pages.dev/#/terra\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e还提供云函数，基本上前后端可以一把梭了： \u003ca target=\"_blank\" href=\"https://developers.cloudflare.com/pages/platform/functions\" rel=\"nofollow noopener\"\u003ehttps://developers.cloudflare.com/pages/platform/functions\u003c/a\u003e",
+      "Author": "estk",
+      "PubDate": "2022-05-31T16:15:59Z"
+    },
+    {
+      "Title": "老用户， 618 腾讯云服务器有啥优惠吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/856587",
+      "Description": "\u003cp\u003e看了下都是首单新用户...\u003c/p\u003e\n",
+      "Author": "immortalz",
+      "PubDate": "2022-05-31T16:13:58Z"
+    },
+    {
       "Title": "出乐高兰博基尼 1800\r\n迈凯伦 F1 910 - LEGO",
       "Link": "https://www.v2ex.com/t/856585",
       "Description": "出乐高兰博基尼 1800\u003cbr /\u003e迈凯伦 F1 910\u003cbr /\u003e全新未拆封\u003cbr /\u003e联系方式：bGlsdWx1Y2FzbGlsdWx1Y2Fz",
