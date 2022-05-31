@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>偶然发现了一个 Hall of Shame - 分享发现</title>
+      <link>https://www.v2ex.com/t/856593</link>
+      <description>&lt;a target=&#34;_blank&#34; href=&#34;https://hall-of-shame.vercel.app&#34; rel=&#34;nofollow noopener&#34;&gt;https://hall-of-shame.vercel.app&lt;/a&gt;&lt;br /&gt;干得漂亮🙈</description>
+      <author>skies457</author>
+      <pubDate>31 May 2022 16:30:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>有不错的国创动漫推荐么？？ - 问与答</title>
+      <link>https://www.v2ex.com/t/856592</link>
+      <description>&lt;p&gt;看完了 《不良人》系列、《凡人修仙传》、《刺客 567 》、《一人之下》 、《开局一座山》、&lt;/p&gt;&#xA;&lt;p&gt;觉得都挺不错的。剧荒了。&#xA;求推荐国创动漫。&lt;/p&gt;&#xA;</description>
+      <author>yanwen</author>
+      <pubDate>31 May 2022 16:28:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>6.18 天猫买的 13－ 4849 安卓用户疑虑中 - Apple</title>
+      <link>https://www.v2ex.com/t/856591</link>
+      <description>20:00_京东 4700 多的抢不到，我感觉是套路。同时关注的天猫苹果店经历两次弹窗（说什么人多什么的）后进入付款页面结账。 那么问题来了，作为一个多年三星用户不知道苹果系统怎么用。中国的 id 能装我需要的 app 吗？如 wise  PayPal  Instagram reddit clash 等国外的 app ？   如果都用不了那对我来说差不多就是半块砖头了。</description>
+      <author>hellotao</author>
+      <pubDate>31 May 2022 16:27:17 +0000</pubDate>
+    </item>
+    <item>
       <title>诡异的执行结果，有哪位 Go 大神来给瞧瞧？ - Go 编程语言</title>
       <link>https://www.v2ex.com/t/856589</link>
       <description>&lt;p&gt;先说一下具体背景，本人在刷题，有一道题是要求使用三个协程依次循环输出 ABCABCABCABCABC 。&lt;/p&gt;&#xA;&lt;p&gt;以下这种实现方式会出现非常诡异的结果：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;    &#34;fmt&#34;&#xA;    &#34;sync&#34;&#xA;)&#xA;&#xA;func main() {&#xA;    var wg sync.WaitGroup = sync.WaitGroup{}&#xA;    wg.Add(1)&#xA;&#xA;    // var ch chan bool = make(chan bool)&#xA;    var i int = 0&#xA;&#xA;    go func() {&#xA;        for {&#xA;            // 自旋锁&#xA;            for i%3 != 0 {&#xA;            }&#xA;&#xA;            fmt.Print(&#34;A&#34;, i)&#xA;&#xA;            i = i + 1&#xA;        }&#xA;    }()&#xA;    go func() {&#xA;        for {&#xA;            // 自旋锁&#xA;            for i%3 != 1 {&#xA;            }&#xA;&#xA;            fmt.Print(&#34;B&#34;, i)&#xA;&#xA;            i = i + 1&#xA;        }&#xA;    }()&#xA;    go func() {&#xA;        for {&#xA;&#xA;&#x9;&#x9;&#x9;// 限制循环次数，避免一直死循环&#xA;            if i &amp;gt;= 3 {&#xA;                fmt.Print(&#34;E&#34;, i, &#34;\n&#34;)&#xA;                i = 2&#xA;                break&#xA;            }&#xA;&#xA;            // 这段如果注释掉，就只会输出 AB 然后一直死循环&#xA;            fmt.Print(&#34;[K]&#34;)&#xA;&#xA;            // 自旋锁&#xA;            for i%3 != 2 {&#xA;            }&#xA;&#xA;            fmt.Print(&#34;C&#34;, i)&#xA;&#xA;            i++&#xA;&#xA;        }&#xA;        wg.Done()&#xA;    }()&#xA;&#xA;    // ch &amp;lt;- true&#xA;&#xA;    wg.Wait()&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;上面三个协程使用一个变量来模拟锁，当变量的值和自身对应，即和 3 取余后比较与第 N （取 0 、1 、2 ）个协程相等，就说明该协程获取到锁，于是输出对应的字母，然后通过将变量的值增加的方式来模拟释放锁。&lt;/p&gt;&#xA;&lt;p&gt;如果直接运行上面那段代码，有时候会输出&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;[K]A0B1C2E3&#xA;A3A3B4&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;为了方便查找问题，在输出字母的时候也会同时输出 i 的值，可以看到有两个 A3 ，问题是每次协程输出字母后 i 的值都会自增，理论上不可能出现两个 A3 ，但显示就是这么诡异。&lt;/p&gt;&#xA;&lt;p&gt;还有，代码注释里面又说到，如果把 &lt;code&gt;fmt.Print(&#34;[K]&#34;)&lt;/code&gt;，注释掉，就只会输出 A0B1 ，然后一直陷入死循环。真实诡异！&lt;/p&gt;&#xA;&lt;p&gt;这还没完，如果把 &lt;code&gt;if i &amp;gt;= 3 {&lt;/code&gt; 这段用来限制循环次数的代码放到 &lt;code&gt;fmt.Print(&#34;C&#34;, i)&lt;/code&gt; 下面，那一切又恢复正常了。负负得正？诡异的诡异为正常？&lt;/p&gt;&#xA;&lt;p&gt;本人的 Go 版本为 1.18.1 ，切换到 1.14.15 也是有同样的问题。&lt;/p&gt;&#xA;&lt;p&gt;个人猜测是 &lt;code&gt;i = i + 1&lt;/code&gt; 的问题，于是在 &lt;code&gt;i = i + 1&lt;/code&gt; 后也再输出 i 的值，发现 i 的值并有增加，这样看来确实是它的问题，问题这没道理啊！虽说三个协程存在并发问题，但在操作 i 时只有一个协程在操作，其它都是在读，不应该会影响才对。难道真的有影响？一个协程把 i 拿出来，加一后再放回去，这个拿出来是赋值给寄存器，寄存器加一后再拷贝到栈中，这个过程另一协程也会去读，同样把值赋值给寄存器，这个寄存器是一样的？共享的？所以就被覆盖了？感觉有这个可能。&lt;/p&gt;&#xA;</description>
