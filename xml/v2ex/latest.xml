@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>OpenWrt 每次启动都要物理断掉外部网络才能启动 DHCP 服务，否则客户端不会被分配 IP。请问原因是？ - OpenWrt</title>
+      <link>https://www.v2ex.com/t/856351</link>
+      <description>&lt;p&gt;表现就是断电重启之后，客户端不会被分配内网 IP 地址了。&#xA;必须拔下 eth1 （ WAN ）的网线后重启才能恢复正常。&lt;/p&gt;&#xA;&lt;p&gt;网络配置如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;root@OpenWrt:~ # cat /etc/config/network&#xA;&#xA;config interface &#39;loopback&#39;&#xA;&#x9;option device &#39;lo&#39;&#xA;&#x9;option proto &#39;static&#39;&#xA;&#x9;option ipaddr &#39;127.0.0.1&#39;&#xA;&#x9;option netmask &#39;255.0.0.0&#39;&#xA;&#xA;config globals &#39;globals&#39;&#xA;&#x9;option ula_prefix &#39;xxx&#39;&#xA;&#xA;config device&#xA;&#x9;option name &#39;br-lan&#39;&#xA;&#x9;option type &#39;bridge&#39;&#xA;&#x9;list ports &#39;eth0&#39;&#xA;&#x9;list ports &#39;eth2&#39;&#xA;&#x9;list ports &#39;eth3&#39;&#xA;&#xA;config interface &#39;lan&#39;&#xA;&#x9;option device &#39;br-lan&#39;&#xA;&#x9;option proto &#39;static&#39;&#xA;&#x9;option ipaddr &#39;192.168.3.1&#39;&#xA;&#x9;option netmask &#39;255.255.255.0&#39;&#xA;&#x9;option ip6assign &#39;60&#39;&#xA;&#xA;config interface &#39;wan&#39;&#xA;&#x9;option device &#39;eth1&#39;&#xA;&#x9;option proto &#39;pppoe&#39;&#xA;&#x9;option username &#39;xxx&#39;&#xA;&#x9;option password &#39;xxx&#39;&#xA;&#x9;option ipv6 &#39;auto&#39;&#xA;&#xA;config interface &#39;wan6&#39;&#xA;&#x9;option device &#39;eth1&#39;&#xA;&#x9;option proto &#39;dhcpv6&#39;&#xA;&#xA;config interface &#39;docker&#39;&#xA;&#x9;option device &#39;docker0&#39;&#xA;&#x9;option proto &#39;none&#39;&#xA;&#x9;option auto &#39;0&#39;&#xA;&#xA;config device&#xA;&#x9;option type &#39;bridge&#39;&#xA;&#x9;option name &#39;docker0&#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>WildCat</author>
+      <pubDate>31 May 2022 00:19:33 +0000</pubDate>
+    </item>
+    <item>
       <title>为什么剪映在 windows 和 macbook 上剪辑出来的文件，一个变小了，一个反而变大了？ - 程序员</title>
       <link>https://www.v2ex.com/t/856350</link>
       <description>&lt;p&gt;macos 是 8G 内存， 剪映 3.0.0&lt;/p&gt;&#xA;&lt;p&gt;windows 是 32G 内存，剪映 2.8.5&lt;/p&gt;&#xA;&lt;p&gt;说真的，我用很多其他的剪辑软件，在 macbook 都是体积反而变大了，从 mov 格式到 mp4 ，还有压缩，体积变大了&lt;/p&gt;&#xA;&lt;p&gt;在 windows 上用剪映 2.8.5 ，是第一次视频品质肉眼看不出变化的情况下，也是 mov 到 mp4 ，文件显著变小&lt;/p&gt;&#xA;&lt;p&gt;参数都一样，mov 到 mp4 ，H264 压缩，30fps&lt;/p&gt;&#xA;&lt;p&gt;有人遇到类似的问题吗？&lt;/p&gt;&#xA;</description>
