@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如何在默认转发伪装策略之前加一个不伪装的策略？ - 问与答",
+      "Link": "https://www.v2ex.com/t/856608",
+      "Description": "\u003ch1\u003e网络拓扑：\u003c/h1\u003e\n\u003col\u003e\n\u003cli\u003e主路由 192.168.10.1\u003c/li\u003e\n\u003cli\u003e旁路由 192.168.10.2 ，static ，默认网关是 192.168.10.1\u003c/li\u003e\n\u003cli\u003eDHCP：主路由下发，下发的网关和 DNS 都指向旁路由\u003c/li\u003e\n\u003cli\u003e旁路由设置以下转发规则：\u003c/li\u003e\n\u003c/ol\u003e\n\u003cul\u003e\n\u003cli\u003eiptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE\u003c/li\u003e\n\u003c/ul\u003e\n\u003col\u003e\n\u003cli\u003e内网机器 192.168.10.120\u003c/li\u003e\n\u003cli\u003e端口转发：8888:主路由公网出口 ==\u0026gt; 192.168.10.120:80\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch1\u003e遇到的问题\u003c/h1\u003e\n\u003cp\u003e流量从公网进来，从 192.168.10.1 打到 192.168.10.120 之后，回包是回给公网的，此时回包的数据包回给 192.168.10.2 ，而不是直接给主路由\u003c/p\u003e\n\u003cp\u003e192.168.10.2 收到其他机器给外网的数据包之后，开始伪装，把 sip 改为自己的 ip ，也就是 NAT 伪装\u003c/p\u003e\n\u003cp\u003e此时 192.168.10.1 蒙圈了：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e入站 visitor:12345 =\u0026gt; publicip:8888\u003c/li\u003e\n\u003cli\u003e转发 visitor:12345 =\u0026gt; 10.120:80\u003c/li\u003e\n\u003cli\u003e回包 10.2:80 =\u0026gt; visitor:12345 （这个包的 SRC 存疑，不确定回包的端口号是不是 80 ）\u003c/li\u003e\n\u003cli\u003e然后发现转发的地址和回包的地址不对，路由器 drop 这个流量，外网收不到回包\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch1\u003e可能的解决方案\u003c/h1\u003e\n\u003cp\u003e在默认的伪装策略之前加一条，当来源 ip 是 10.120 且来源端口是 80 的时候，直接接受而不是伪装：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eiptables -t nat -I POSTROUTING -o eth0 -p tcp -s 192.168.10.120 --source-port 80 -j ACCEPT\niptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是似乎不生效，求解\u003c/p\u003e\n\u003cp\u003e看了一下 OP 的 iptables ，发现这个策略没有收到包和流量，看起来是没有命中？\u003c/p\u003e\n",
+      "Author": "phpfpm",
+      "PubDate": "2022-06-01T00:20:49Z"
+    },
+    {
+      "Title": "为什么我的 windows vscode 默认菜单栏界面都是鬼畜扑克牌图表？？ - Visual Studio Code",
+      "Link": "https://www.v2ex.com/t/856607",
+      "Description": "\u003ca target=\"_blank\" href=\"https://imgur.com/a/fbmreOQ\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/a/fbmreOQ\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e从 Win10 到 Win11 ，两台不同电脑，界面都是这么鬼畜银魂不算\u003cbr /\u003e\u003cbr /\u003e尝试过以下均无效：\u003cbr /\u003e1 ）关闭设置同步\u003cbr /\u003e2 ）重装，删除 %APPDATA%\\Code 和 %USERPROFILE%\\.vscode. 目录\u003cbr /\u003e3 ）改 Product Icon Theme 只能改最左侧一栏的大图标，右上角的最小化，最大化，关闭 图表还是这样扑克牌",
+      "Author": "liutian9",
+      "PubDate": "2022-06-01T00:15:18Z"
+    },
+    {
+      "Title": "M1 Max 10 + 32 PD 运行 LOL 帧数过低「团战 50 左右」，软件上有没有什么好点的解决办法？ - Apple",
+      "Link": "https://www.v2ex.com/t/856605",
+      "Description": "不要问我为啥打游戏还要买 Mac ，不能打影响也不大，偶尔跟朋友开黑才玩玩",
+      "Author": "TuringHero",
+      "PubDate": "2022-06-01T00:05:37Z"
+    },
+    {
       "Title": "当我自己做了一个网页版的我的世界... - 分享创造",
       "Link": "https://www.v2ex.com/t/856604",
       "Description": "\u003cp\u003e在前一阵子接触到 Three.js 后, 我发现了它能为前端 3D 可视化 / 动画 / 游戏方向带来的无限可能, 正好最近在与朋友重温我的世界, 便有了用 Three.js 来仿制 Minecraft 的想法, 正好也可以通过一个有趣的项目来学习一下前端 3D 领域.\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"动图展示\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b6ef483379a4e8a98fcc64e1964c88a%7Etplv-k3u1fbpfcp-zoom-1.image\"/\u003e\u003c/p\u003e\n\u003cp\u003e感兴趣的朋友可以去下面的一些链接看看: \u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://mc-zh.yuleiz.com/\" rel=\"nofollow\"\u003e游戏体验地址\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/vyse12138/minecraft-threejs\" rel=\"nofollow\"\u003eGitHub 源码地址\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e目前支持了以下功能:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e方块的放置 / 破坏\u003c/li\u003e\n\u003cli\u003e不同的方块类型选择\u003c/li\u003e\n\u003cli\u003e移动和碰撞检测\u003c/li\u003e\n\u003cli\u003e随机的地形和树木生成\u003c/li\u003e\n\u003cli\u003e无限的世界\u003c/li\u003e\n\u003cli\u003e保存 / 读取游戏\u003c/li\u003e\n\u003cli\u003e音效和背景音乐\u003c/li\u003e\n\u003cli\u003e可调节的渲染距离和视野范围\u003c/li\u003e\n\u003cli\u003e基本的 UI\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e如果大家在试玩中有什么问题的话, 也可以评论留言或者去 GitHub 上提 Issue, 我也会努力更新优化的~\u003c/p\u003e\n",
