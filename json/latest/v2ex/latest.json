@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "几年不看小说了，最近动漫剧荒，求近几年出的好看小说，文笔好点的武侠、玄幻类，最好完本的，拒绝小白文。 - 问与答",
+      "Link": "https://www.v2ex.com/t/856776",
+      "Description": "比如，英雄志。可惜最后几章孙狗不更了。除了每次开章铺垫太多，啰嗦不知所云，感觉还算一部佳作啊",
+      "Author": "ACVV",
+      "PubDate": "2022-06-01T09:34:01Z"
+    },
+    {
+      "Title": "电视上看英文视频，想挡住字幕你们都是怎么做的 - 奇思妙想",
+      "Link": "https://www.v2ex.com/t/856775",
+      "Description": "\u003cp\u003e刚搜了一下居然因为这个需求发了一个专利，哈哈\u003c/p\u003e\n",
+      "Author": "pheyer",
+      "PubDate": "2022-06-01T09:29:11Z"
+    },
+    {
+      "Title": "6.1 级地震，这是给四川人民过六一吧。 - 成都",
+      "Link": "https://www.v2ex.com/t/856774",
+      "Description": "\u003cp\u003e坐标绵阳，震感挺强的。不知道成都的感受如何\u003c/p\u003e\n",
+      "Author": "rykka",
+      "PubDate": "2022-06-01T09:29:08Z"
+    },
+    {
+      "Title": "一个客户端零配置的端口转发工具 - 分享创造",
+      "Link": "https://www.v2ex.com/t/856773",
+      "Description": "\u003cp\u003e主要想要解决的需求是有时想把一个端口暴露在公网，但又不想完全公开，只想开放给认证过的客户端，通过转发到客户端的本地端口来访问。\u003c/p\u003e\n\u003cp\u003efrp 的 STCP 模式能解决这个问题，实现方式是端口提供者 A 、公网服务器 B 、访问者 C 三个机器都进行配置。这样做忽略了一点，就是 A 和 B 可能都是我自己，但用户 C 可能是个完全不懂技术的人，我要花时间教给 C 怎么去配置。\u003c/p\u003e\n\u003cp\u003eVPN 也可以解决这个需求，也还是会有上述配置问题。一些新型 VPN 如 tailscale 主打零配置，但前提是公网服务器由他来提供。\u003c/p\u003e\n\u003cp\u003e于是就自己写了一个简单的工具，实现了类似 ssh 隧道的端口转发功能，加密和认证用的是 noise 协议，握手采用跟 wireguard 一样提前交换密钥的形式。特色就是客户端无需配置，服务端的配置也只需要执行命令，不用复制粘贴密钥。\u003c/p\u003e\n\u003cp\u003e关于零配置我的实现非常暴力：在二进制程序的数据段预留一部分空间，当需要新的客户端时，服务端程序复制一份空白的客户端，修改二进制文件把生成的配置存进去，得到一个认证过的客户端。把这个认证过的客户端发给对方，使用时直接无参数运行。\u003c/p\u003e\n\u003ch1\u003e工作原理\u003c/h1\u003e\n\u003cpre\u003e\u003ccode\u003e远端 1 \u0026lt;-\u0026gt; 客户端 \u0026lt;-\u0026gt; 服务端 \u0026lt;-\u0026gt; 远端 2\n\u003c/code\u003e\u003c/pre\u003e\n\u003col\u003e\n\u003cli\u003e服务端绑定公网 IP 的一个端口.\u003c/li\u003e\n\u003cli\u003e远端可以是其他的公网端口(\u003ca href=\"http://google.com:443\" rel=\"nofollow\"\u003egoogle.com:443\u003c/a\u003e), 本地端口(127.0.0.1:port), 或者动态端口(socks5).\u003c/li\u003e\n\u003cli\u003e\n客户端可以工作于以下任一模式：\u003cul\u003e\n\u003cli\u003e\u003ccode\u003essh -L\u003c/code\u003e 模式：通过服务端访问远端 2 的静态端口。\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003essh -D\u003c/code\u003e 模式：通过服务端内置的 socks5 服务访问动态的远端 2 。\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003essh -R\u003c/code\u003e 模式：将远端 1(固定端口或内建 socks5)暴露给服务端并注册一个 \u003cem\u003eservice id\u003c/em\u003e 。\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003essh -R visitor\u003c/code\u003e 模式：只有在此模式下具有相同 \u003cem\u003eservice id\u003c/em\u003e 的客户端才能访问暴露的端口。\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e客户端与服务端通过 \u003ccode\u003eNoise_IK_25519_ChaChaPoly_BLAKE2s\u003c/code\u003e 协议握手.\u003c/li\u003e\n\u003cli\u003e随后客户端与服务端之间的流量加密传输.\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch1\u003e使用场景举例\u003c/h1\u003e\n\u003col\u003e\n\u003cli\u003e\u003ccode\u003e-L\u003c/code\u003e 模式： 把某些软件绑定在 127.0.0.1 的 socks5 服务加密共享给局域网中的某几台机器，从而无需绑定 0.0.0.0 完全在局域网公开\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003e-D\u003c/code\u003e 模式：内网其中一台机器有公网端口时，作为 VPN 服务的简单替代，从外部访问内网任意一台机器\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003e-R\u003c/code\u003e 模式：把内网机器的端口暴露至公网服务器，并且只允许同样认证过的客户端访问\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e想法非常简单，作者也比较菜，肯定会有潜在的安全缺陷，\u003cstrong\u003e不推荐\u003c/strong\u003e在生产环境使用，作者也\u003cstrong\u003e不\u003c/strong\u003e为可能出现的安全问题负责。\u003c/p\u003e\n\u003cp\u003e开发过程没有什么技术含量，基本都是用的现成的轮子。性能方面因为就我自己在用，目前没感觉出太大问题，没详细测过性能，有可能还不如 ssh 。\u003c/p\u003e\n\u003cp\u003e源码在：\u003ca href=\"https://github.com/wlh320/portguard\" rel=\"nofollow\"\u003ehttps://github.com/wlh320/portguard\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e感兴趣的网友欢迎一起探讨和改进。\u003c/p\u003e\n",
+      "Author": "wlh233",
+      "PubDate": "2022-06-01T09:27:32Z"
+    },
+    {
+      "Title": "社保公积金代缴有靠谱的推荐嘛？某宝下架了此类产品😭 - 上海",
+      "Link": "https://www.v2ex.com/t/856772",
+      "Description": "",
+      "Author": "wenhuibrave",
+      "PubDate": "2022-06-01T09:26:39Z"
+    },
+    {
+      "Title": "iPhone xs Siri 不能识别语音是哪个麦克风坏了 - iPhone",
+      "Link": "https://www.v2ex.com/t/856771",
+      "Description": "\u003cp\u003eiphone xs Siri 不能识别语音，录视频声音也是滋滋的不清晰，通话跟微信语音都正常，是哪个麦克风坏了，想自己买个换下\u003c/p\u003e\n",
+      "Author": "xjpz",
+      "PubDate": "2022-06-01T09:22:07Z"
+    },
+    {
       "Title": "[北京] 软件工程师组队啦 - 北京",
       "Link": "https://www.v2ex.com/t/856770",
       "Description": "聊生活，工作和其它，有时候也有内推和求职，纯粹的程序员群，无商业， 群主的微信(base64): cGZkcjIwMjIwNQ==   备注下 v 站北京",
