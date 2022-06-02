@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如何防止自己变得堕落？和朋友们出去喝酒，小姐姐们很性感 - 问与答",
+      "Link": "https://www.v2ex.com/t/857045",
+      "Description": "",
+      "Author": "sciel",
+      "PubDate": "2022-06-02T15:38:13Z"
+    },
+    {
+      "Title": "请教一个 XML 序列化问题 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/857044",
+      "Description": "\u003cp\u003e我要生成如下 xml 文件\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026lt;?xml version=\"1.0\" encoding=\"UTF-8\"?\u0026gt;\n\u0026lt;svc_init ver=\"2.0.0\"\u0026gt;\n\t\u0026lt;sms ver=\"2.0.0\"\u0026gt;\n\t\t\u0026lt;client\u0026gt;\n\t\t\t\u0026lt;id\u0026gt;id\u0026lt;/id\u0026gt;\n\t\t\t\u0026lt;pwd\u0026gt;pwd\u0026lt;/pwd\u0026gt;\n\t\t\t\u0026lt;serviceid\u0026gt;serviceid\u0026lt;/serviceid\u0026gt;\n\t\t\u0026lt;/client\u0026gt;\n\t\t\u0026lt;sms_info\u0026gt;\n\t\t\t\u0026lt;phone\u0026gt;13013001300\u0026lt;/phone\u0026gt;\n\t\t\t\u0026lt;content\u0026gt;测试\u0026lt;/content\u0026gt;\n\t\t\u0026lt;/sms_info\u0026gt;\n\t\u0026lt;/sms\u0026gt;\n\u0026lt;/svc_init\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e代码为\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\"encoding/xml\"\n\t\"fmt\"\n\t\"os\"\n)\n\ntype Client struct {\n\tId        string `xml:\"client\u0026gt;id\"`\n\tPwd       string `xml:\"client\u0026gt;pwd\"`\n\tServiceid string `xml:\"client\u0026gt;serviceid\"`\n}\n\ntype Sms_info struct {\n\tPhone   string `xml:\"sms_info\u0026gt;phone\"`\n\tContent string `xml:\"sms_info\u0026gt;content\"`\n}\n\ntype Sms struct {\n\tXMLName xml.Name `xml:\"sms\"`\n\tVer     string   `xml:\"ver,attr\"`\n\tClient\n\tSms_info\n}\n\ntype Svc_init struct {\n\tXMLName xml.Name `xml:\"svc_init\"`\n\tVer     string   `xml:\"ver,attr\"`\n\tSms\n}\n\nfunc main() {\n\tid := \"id\"\n\tpwd := \"pwd\"\n\tserviceid := \"serviceid\"\n\n\tclient := Client{Id: id, Pwd: pwd, Serviceid: serviceid}\n\tsms_info := Sms_info{Phone: \"13013001300\", Content: \"测试\"}\n\n\tsms := Sms{Ver: \"2.0.0\", Client: client, Sms_info: sms_info}\n\n\tv := Svc_init{Ver: \"2.0.0\", Sms: sms}\n\n\tfmt.Println(v)\n\toutput, _ := xml.MarshalIndent(v, \"  \", \"    \")\n\n\tos.Stdout.Write(output)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e运行后生成\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026lt;svc_init ver=\"2.0.0\"\u0026gt;\n\t\u0026lt;client\u0026gt;\n\t\t\u0026lt;id\u0026gt;id\u0026lt;/id\u0026gt;\n\t\t\u0026lt;pwd\u0026gt;pwd\u0026lt;/pwd\u0026gt;\n\t\t\u0026lt;serviceid\u0026gt;serviceid\u0026lt;/serviceid\u0026gt;\n\t\u0026lt;/client\u0026gt;\n\t\u0026lt;sms_info\u0026gt;\n\t\t\u0026lt;phone\u0026gt;13013001300\u0026lt;/phone\u0026gt;\n\t\t\u0026lt;content\u0026gt;测试\u0026lt;/content\u0026gt;\n\t\u0026lt;/sms_info\u0026gt;\n\u0026lt;/svc_init\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可以看到结果的 sms 结构丢失了\n但是我直接打印 v 值\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e{{ } 2.0.0 {{ } 2.0.0 {id pwd serviceid} {13013001300 测试}}}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可以看到 sms 结构还在\n请问为什么会这样，然后如何修复呢，感谢。\u003c/p\u003e\n",
+      "Author": "seers",
+      "PubDate": "2022-06-02T15:37:21Z"
+    },
+    {
+      "Title": "分享一下自己写的 mac 端输入法 - macOS",
+      "Link": "https://www.v2ex.com/t/857043",
+      "Description": "\u003cp\u003e最近在学 vim 就顺手写了这个输入法辅助学习。源代码和 release 以及产品说明放在了 GitHub ，已经上传了 intel 编译的 app ，M1 可以根据代码自行编译。仓库地址是 \u003ca href=\"https://github.com/fumeboy/ihelper\" rel=\"nofollow\"\u003ehttps://github.com/fumeboy/ihelper\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e主要是作为快捷输入工具，可以替换默认的英文输入法。功能和 Alfred 这样的工具比较接近（其实我也有打算做成 Alfred 这样的，想想还是算了，玩具项目还是玩具到底\u003c/p\u003e\n\u003cp\u003e使用方法就是像查单词一样查快捷键、命令等信息并输出\u003c/p\u003e\n\u003cp\u003e下面是两张使用截图（不知道在 V2EX 能不能显示\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"screenshot\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://github.com/fumeboy/ihelper/blob/main/README/1.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"screenshot\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://github.com/fumeboy/ihelper/blob/main/README/2.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "fumeboy",
+      "PubDate": "2022-06-02T15:36:56Z"
+    },
+    {
+      "Title": "家宽搭建 http 代理 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/857042",
+      "Description": "\u003cp\u003e之前搭了 ssr-server ，自用一年半载没问题。\n网上搜了下下，家宽被封的大致都是搭了网站，绑定域名的。\n搭 http 代理，风险高吗？仅自用，不过墙。\n对这方面不是太了解，家里的 qbittorrent web(公网 ip:8888)和群晖的 5000 端口开了几年都没事\u003c/p\u003e\n",
+      "Author": "levenwindy",
+      "PubDate": "2022-06-02T15:34:57Z"
+    },
+    {
       "Title": "推荐一下自己写的考试系统， - 分享创造",
       "Link": "https://www.v2ex.com/t/857041",
       "Description": "\u003ch1\u003e卷王-更好的考试系统\u003c/h1\u003e\n\u003cp\u003e因为调查问卷和考试系统是相通的，距离上次发完帖子 \u003ca href=\"https://www.v2ex.com/t/849971#reply21\" rel=\"nofollow\"\u003e分享一下自己写的调查问卷系统(卷王)，个人觉得已经是开源里面功能最全的了\u003c/a\u003e 差不多有一个月的时间，利用周末和每天夜晚的空闲时间给改造成了一个考试系统，基本实现了问卷网考试的大部分功能。\n大家可以很容易的自己搭建一个刷题系统，爬点题库，愉快的刷题。\u003c/p\u003e\n\u003cp\u003e放个简单的练习模式的链接给大家体验一下：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://wj.surveyking.cn/s/Z3GSnC\" rel=\"nofollow\"\u003e四大名著知识考试\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e主要功能有：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n支持题库导入，目前支持三种导入方式\u003cul\u003e\n\u003cli\u003e通过 excel 模板导入题库\u003c/li\u003e\n\u003cli\u003e通过在线文本编辑导入题库\u003c/li\u003e\n\u003cli\u003e通过问卷编辑器编辑题库\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e支持练习模式，题库刷题，实时查看答案解析\u003c/li\u003e\n\u003cli\u003e支持多种计分方式，答案解析支持富文本（图片、视频、数学公式等）\u003c/li\u003e\n\u003cli\u003e支持多种考试题型，单选、多选、判断、横向填空、简答、签名、图片上传等题型\u003c/li\u003e\n\u003cli\u003e完美适配手机端\u003c/li\u003e\n\u003cli\u003e支持答题卡，题目标记等\u003c/li\u003e\n\u003cli\u003e支持自动算分\u003c/li\u003e\n\u003cli\u003e安装简单(打的可执行的 jar 只有 38M ，一键运行)\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e考试编辑\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"Imgur\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/xhpis5K.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003eweb 端练习模式截图\n\u003cimg alt=\"Imgur\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/XJ0Oz2G.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e手机端练习模式截图\n\u003cimg alt=\"Imgur\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/v1os4CI.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e放一个动态演示 1 分钟从导入题库到发布题库刷题\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"Imgur\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/Ri9Lw4F.gif\"/\u003e\u003c/p\u003e\n",
