@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "小型家用网络建设记 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/857280",
+      "Description": "\u003cp\u003e前段时间某学弟找我，说要结婚搬新家，想置办一套新的网络设施，大概就是要 WiFi6 + 群晖，其他一概不知，因为学弟单位上公网比较难，有时候要私人电脑回家处理一下自家厂里的事，所以还有回家的需求。正好做完作业给大家瞧瞧看看有什么再优化优化的。\u003c/p\u003e\n\u003cp\u003e本垃圾佬又开始上海鲜市场淘交换机了，考虑到要放在弱电箱里，还是先稳定可靠，2.5G 、10G 什么的花把式现在也不是很急需，另外能入眼的万兆可能是 S5720-EI 或者 S6720 起步，这些都不可能塞进弱电箱了，那就先整一个华为 S5720-12TP-LI-AC 吧～\n整体拓扑图如下:\n\u003cimg alt=\"terry-home\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://hao.meshlab.cn/content/images/2022/06/terry-home.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e实现目标\u003c/h3\u003e\n\u003cp\u003e家用基础设施全面虚拟化（路由器、DNS ）等，存储在 OptiPlex 7090 上装了 nvme + 机械的配置同时满足系统和下载缓存的需求。同时因为电信提供的公网 IP 和大流量 5G 卡，支持远程 VPN 回家。因为学弟单位限制，单位电脑无法上公网也不能做工作以外的事情，所以他日常带 iPad 或者自己的 Macbook Pro 去上班，所以有一个方便的 VPN 连回家还是非常方便他回家做一些业划务水的事。\u003c/p\u003e\n\u003ch3\u003e接入网\u003c/h3\u003e\n\u003cp\u003e电信 1000M v4/v6 双栈公网；\n移动 300M v6 公网\u003c/p\u003e\n\u003ch3\u003e交换机、无线网络和虚拟化\u003c/h3\u003e\n\u003cp\u003e华为 S5720-12TP-LI-AC 交换机\u003c/p\u003e\n\u003cp\u003eESXi 虚拟化 Dell OptiPlex 7000 系列 SFF 主机\u003c/p\u003e\n\u003cp\u003e另加学弟现有的一台老机（一台装了 3080 的 老机器）\u003c/p\u003e\n\u003cp\u003eAruba AP-505 胖瘦一体，开 Instant 模式\u003c/p\u003e\n\u003cp\u003e群晖 DS920+\u003c/p\u003e\n\u003cp\u003e以上所有设备接到华为交换机，交换机开三层 VLANIF 、DHCP 和 VRF （主要给移动机顶盒单独走移动用）\n虚拟化主机运行，然后新建以下服务给这次的网络：\u003c/p\u003e\n\u003cp\u003eDNS：干净的 电信+国际-广告 解析环境\u003c/p\u003e\n\u003cp\u003eocserv：AnyConnect 接入\u003c/p\u003e\n\u003cp\u003e云桌面：由 vmware Horizon 驱动\u003c/p\u003e\n\u003cp\u003e软路由：RouterOS CHR 6.9 - 电信 和 VyOS 1.3.1 - 移动\u003c/p\u003e\n\u003ch3\u003eVLAN 规划\u003c/h3\u003e\n\u003cp\u003e10\t接入网：单电信\t192.168.10.0/24\t交换机 VLANIF 启用 DHCP\t\u003c/p\u003e\n\u003cp\u003e11\t接入网：国际友好\t192.168.11.0/24\t交换机 VLANIF 启用 DHCP\t\u003c/p\u003e\n\u003cp\u003e20\t服务段，DNS 、ocserv 等\t192.168.20.0/24 含国际路由\u003c/p\u003e\n\u003cp\u003e21\t设备管理\t192.168.21.0/24\t交换机 VLANIF 启用 DHCP\t包含家里的物联网设备和 Aruba Instant\u003c/p\u003e\n\u003cp\u003e100  路由器-交换机三层互联\u003c/p\u003e\n\u003cp\u003e101  电信宽带\u003c/p\u003e\n\u003cp\u003e102  移动宽带\u003c/p\u003e\n\u003ch3\u003e升级留坑\u003c/h3\u003e\n\u003cp\u003e关于万兆 到桌面什么的并不是很急需，倒是 DS920 和虚拟化平台可以通过 10G 互联以后直接 iSCSI 挂载到虚拟机上用，这个需要注意的就是设备得离得足够近，不管是光缆、DAC 还是 AOC ，能接上线且不影响家里的摆设还是很重要的。另外 Dell OptiPlex 7000 系列的半高挡板装一块单口 /双口拆机 X520 还是很有性价比的。\n关于性能 因为 Dell OptiPlex 的可靠性和性能都可以做得很好，而且非常静音且节能，同时 SFF 主机和 Micro 主机尺寸都非常小巧，未来有更多需要可以叠叠乐，因为学弟最终安排了一个柜子来置放设备，所以未来收一台 S6720S-16X-LI 来做全万兆互联也是可以完成的任务了\u003c/p\u003e\n",
+      "Author": "exiaohao",
+      "PubDate": "2022-06-04T12:21:47Z"
+    },
+    {
+      "Title": "关于微软 XGP，请教几个问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/857279",
+      "Description": "\u003cp\u003e1 、我没有 XBox ，是不是只买 PC Game Pass （每月 29 港币）就行了？\u003cbr/\u003e\n2 、我偶尔看到 XX 游戏进入 /退出 XBOX 的新闻。一款游戏一般会在 XGP 里待多久？\u003cbr/\u003e\n3 、某款游戏我玩过之后退出了 XBOX ，存档能否继承呢？（例如我在 steam 买下这款游戏，能不能迁移存档之类的）\u003cbr/\u003e\n4 、如果某款游戏退出 XBOX 后又回归，我的 [云存档] 是否还在？\u003cbr/\u003e\n5 、XGP 是否会封禁跨区用户？（例如我买港服 XGP ，但在大陆网络中使用会不会被封）\u003cbr/\u003e\n6 、XGP 在不同国家 /地区的游戏库有差别么？哪个地区最丰富？\u003cbr/\u003e\n7 、除了官网直接购买，还有靠谱且便宜的渠道么？  \u003c/p\u003e\n\u003cp\u003e提前感谢各位解答~\u003c/p\u003e\n",
+      "Author": "mokeyjay",
+      "PubDate": "2022-06-04T12:16:38Z"
+    },
+    {
+      "Title": "问个比较简单的路由器的问题 - 路由器",
+      "Link": "https://www.v2ex.com/t/857278",
+      "Description": "\u003cp\u003e我现在公司办公室有一根网线, 我能不能把这个网线接到一个路由器上, 然后在分出来两根线用, 我不知道这种普通的网线和直接从服务商那里接过来的是不是一样的, 这个感觉比较简单但是确实不太懂. 网上没找到比较好的答案, 问路由器客服也不知道\u003c/p\u003e\n",
+      "Author": "woshichuanqilz",
+      "PubDate": "2022-06-04T12:15:24Z"
+    },
+    {
+      "Title": "核酸时长怎么是从开始做核酸开始计算的，为什么不是从出来结果后开始算呢，是有什么考虑吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/857277",
+      "Description": "\u003cp\u003e如题，这个问题就会导致白天去做的核酸，凌晨 2 点左右才出结果，但是 72h 核酸证明往往实际只用到了 2 天\u003c/p\u003e\n",
+      "Author": "extra888",
+      "PubDate": "2022-06-04T12:15:03Z"
+    },
+    {
       "Title": "什么是 go template？ - Go 编程语言",
       "Link": "https://www.v2ex.com/t/857275",
       "Description": "\u003cp\u003e最新写 k8s 的 helm chart ，说 chart 语法就是 go template 语法，想问下 go template 怎么开始学习？\u003c/p\u003e\n",
