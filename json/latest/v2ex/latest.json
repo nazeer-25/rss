@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "[内推]微软北京 - 酷工作",
+      "Link": "https://www.v2ex.com/t/857562",
+      "Description": "\u003cp\u003e微软北京\nAzure 认知服务团队\nOpen SDE2-Senior 职级\n英语可开口交流即可\nSkill:有 K8S/cloud 经验加分\n技术语言：go/Java/python/power shell/c#\n3 年以上工作经验\u003c/p\u003e\n\u003cp\u003e欢迎联系 msreferral AT microsoft dot com\n276637517 AT qq dot com\u003c/p\u003e\n",
+      "Author": "chengcic",
+      "PubDate": "2022-06-06T06:10:49Z"
+    },
+    {
+      "Title": "Go 初学者请教一个 channel 的 问题 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/857560",
+      "Description": "\u003cp\u003e最近在看 gopl ，对第八章这个 crawl 的代码有个小小的问题。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efunc crawl(url string) []string {\n\tfmt.Println(url)\n\tlist, err := links.Extract(url)\n\tif err != nil {\n\t\tlog.Print(err)\n\t}\n\treturn list\n}\n\n//!-crawl\n\n//!+main\nfunc main() {\n\tworklist := make(chan []string)\n\n\t// Start with the command-line arguments.\n\tgo func() { worklist \u0026lt;- os.Args[1:] }()  // 为啥不需要 close buffer\n\n\t// Crawl the web concurrently.\n\tseen := make(map[string]bool)\n\tfor list := range worklist {\n\t\tfor _, link := range list {\n\t\t\tif !seen[link] {\n\t\t\t\tseen[link] = true\n\t\t\t\tgo func(link string) {\n\t\t\t\t\tworklist \u0026lt;- crawl(link)\n\t\t\t\t}(link)\n\t\t\t}\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ccode\u003ego func() { worklist \u0026lt;- os.Args[1:] }()\u003c/code\u003e 这里应该是定义 unbuffered channel out 的一端，我看前面的示例对于 out 都要及时的 close ，这里似乎没有。\u003c/p\u003e\n\u003cp\u003e求指教。\u003c/p\u003e\n",
+      "Author": "kashin0116",
+      "PubDate": "2022-06-06T06:08:34Z"
+    },
+    {
+      "Title": "大佬们，坐标杭州，推荐今年换工作吗? - 职场话题",
+      "Link": "https://www.v2ex.com/t/857559",
+      "Description": "\u003cp\u003e一年经验，感觉薪资低一些。另外，公司把年终奖也取消了。\u003c/p\u003e\n\u003cp\u003e今年九月份想换一下工作，又听说今年互联网形式不好，大佬们推荐今年换工作吗?  或者再呆到明年三四月份。。。\u003c/p\u003e\n",
+      "Author": "TAFMT",
+      "PubDate": "2022-06-06T06:03:30Z"
+    },
+    {
+      "Title": "老哥们我整不会了，能否教教我？ SSR 前端 + API 后端应该怎样简易优雅的平滑部署 - 程序员",
+      "Link": "https://www.v2ex.com/t/857558",
+      "Description": "\u003cp\u003e如果是前后端分离，前端只有静态文件。  \u003c/p\u003e\n\u003cp\u003e部署起来都是直接 Nginx 往前面套就完事了。新版本上线的时候也就切一切 Nginx 的 upstream  \u003c/p\u003e\n\u003cp\u003e前端还能直接丢对象储存、顺手打包到 api server 的静态文件里、直接把服务器文件覆盖等等，总之都挺方便。\u003c/p\u003e\n\u003cbr/\u003e\n\u003cp\u003e但是如果是到 SSR 的前端，我就有点迷茫了。\u003cbr/\u003e\n因为要给前端单独部署一个 node 服务。并且这个 node 服务还要请求后端接口，那 node 那边也得维护 api server 的地址才行。   \u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003enode -\u0026gt; api server\u003c/strong\u003e 这一层，是要每次打包 node | 启动 node 服务的时候手动操作么，额就感觉怪麻烦的。  \u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e我想了想，上一次线，得：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e将新的 api server 启动到新的端口\u003c/li\u003e\n\u003cli\u003e将新的 node server 启动到新的端口\u003c/li\u003e\n\u003cli\u003e启动 node server 时手动设置一下 node server 请求 SSR 数据的地址\u003c/li\u003e\n\u003cli\u003e切 nginx 的 upstream\u003c/li\u003e\n\u003cli\u003e停掉老的 api server / node server\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e有经验的同志们一般是咋部署的？怎么搞最快捷\u003c/p\u003e\n\u003cbr/\u003e\n\u003cp\u003e还有一个额外的问题，客户端 HTTP 请求 API 的链路（注意，不是 SSR ，是 JSON API ）一般是哪个？  \u003c/p\u003e\n\u003cp\u003e1 、客户端 -\u0026gt; Nginx (proxy) -\u0026gt; node (proxy) -\u0026gt; api server\u003cbr/\u003e\n2 、客户端 -\u0026gt; Nginx (proxy) -\u0026gt; api server\u003c/p\u003e\n",
+      "Author": "sorakylin",
+      "PubDate": "2022-06-06T06:02:53Z"
+    },
+    {
       "Title": "广东电信免费提速到 300M - 宽带症候群",
       "Link": "https://www.v2ex.com/t/857557",
       "Description": "\u003cp\u003e原来是深圳电信 100M 的，现在已经提速到 300M\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/06/06/af689e8e79dceea5.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e途径：电信营业厅 app 首页\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/06/06/01a8758eb23de8f8.png\"/\u003e\u003c/p\u003e\n",

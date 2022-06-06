@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>[内推]微软北京 - 酷工作</title>
+      <link>https://www.v2ex.com/t/857562</link>
+      <description>&lt;p&gt;微软北京&#xA;Azure 认知服务团队&#xA;Open SDE2-Senior 职级&#xA;英语可开口交流即可&#xA;Skill:有 K8S/cloud 经验加分&#xA;技术语言：go/Java/python/power shell/c#&#xA;3 年以上工作经验&lt;/p&gt;&#xA;&lt;p&gt;欢迎联系 msreferral AT microsoft dot com&#xA;276637517 AT qq dot com&lt;/p&gt;&#xA;</description>
+      <author>chengcic</author>
+      <pubDate>06 Jun 2022 06:10:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>Go 初学者请教一个 channel 的 问题 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/857560</link>
+      <description>&lt;p&gt;最近在看 gopl ，对第八章这个 crawl 的代码有个小小的问题。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;func crawl(url string) []string {&#xA;&#x9;fmt.Println(url)&#xA;&#x9;list, err := links.Extract(url)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Print(err)&#xA;&#x9;}&#xA;&#x9;return list&#xA;}&#xA;&#xA;//!-crawl&#xA;&#xA;//!+main&#xA;func main() {&#xA;&#x9;worklist := make(chan []string)&#xA;&#xA;&#x9;// Start with the command-line arguments.&#xA;&#x9;go func() { worklist &amp;lt;- os.Args[1:] }()  // 为啥不需要 close buffer&#xA;&#xA;&#x9;// Crawl the web concurrently.&#xA;&#x9;seen := make(map[string]bool)&#xA;&#x9;for list := range worklist {&#xA;&#x9;&#x9;for _, link := range list {&#xA;&#x9;&#x9;&#x9;if !seen[link] {&#xA;&#x9;&#x9;&#x9;&#x9;seen[link] = true&#xA;&#x9;&#x9;&#x9;&#x9;go func(link string) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;worklist &amp;lt;- crawl(link)&#xA;&#x9;&#x9;&#x9;&#x9;}(link)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;code&gt;go func() { worklist &amp;lt;- os.Args[1:] }()&lt;/code&gt; 这里应该是定义 unbuffered channel out 的一端，我看前面的示例对于 out 都要及时的 close ，这里似乎没有。&lt;/p&gt;&#xA;&lt;p&gt;求指教。&lt;/p&gt;&#xA;</description>
+      <author>kashin0116</author>
+      <pubDate>06 Jun 2022 06:08:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>大佬们，坐标杭州，推荐今年换工作吗? - 职场话题</title>
+      <link>https://www.v2ex.com/t/857559</link>
+      <description>&lt;p&gt;一年经验，感觉薪资低一些。另外，公司把年终奖也取消了。&lt;/p&gt;&#xA;&lt;p&gt;今年九月份想换一下工作，又听说今年互联网形式不好，大佬们推荐今年换工作吗?  或者再呆到明年三四月份。。。&lt;/p&gt;&#xA;</description>
+      <author>TAFMT</author>
+      <pubDate>06 Jun 2022 06:03:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>老哥们我整不会了，能否教教我？ SSR 前端 + API 后端应该怎样简易优雅的平滑部署 - 程序员</title>
+      <link>https://www.v2ex.com/t/857558</link>
+      <description>&lt;p&gt;如果是前后端分离，前端只有静态文件。  &lt;/p&gt;&#xA;&lt;p&gt;部署起来都是直接 Nginx 往前面套就完事了。新版本上线的时候也就切一切 Nginx 的 upstream  &lt;/p&gt;&#xA;&lt;p&gt;前端还能直接丢对象储存、顺手打包到 api server 的静态文件里、直接把服务器文件覆盖等等，总之都挺方便。&lt;/p&gt;&#xA;&lt;br/&gt;&#xA;&lt;p&gt;但是如果是到 SSR 的前端，我就有点迷茫了。&lt;br/&gt;&#xA;因为要给前端单独部署一个 node 服务。并且这个 node 服务还要请求后端接口，那 node 那边也得维护 api server 的地址才行。   &lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;node -&amp;gt; api server&lt;/strong&gt; 这一层，是要每次打包 node | 启动 node 服务的时候手动操作么，额就感觉怪麻烦的。  &lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;我想了想，上一次线，得：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;将新的 api server 启动到新的端口&lt;/li&gt;&#xA;&lt;li&gt;将新的 node server 启动到新的端口&lt;/li&gt;&#xA;&lt;li&gt;启动 node server 时手动设置一下 node server 请求 SSR 数据的地址&lt;/li&gt;&#xA;&lt;li&gt;切 nginx 的 upstream&lt;/li&gt;&#xA;&lt;li&gt;停掉老的 api server / node server&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;有经验的同志们一般是咋部署的？怎么搞最快捷&lt;/p&gt;&#xA;&lt;br/&gt;&#xA;&lt;p&gt;还有一个额外的问题，客户端 HTTP 请求 API 的链路（注意，不是 SSR ，是 JSON API ）一般是哪个？  &lt;/p&gt;&#xA;&lt;p&gt;1 、客户端 -&amp;gt; Nginx (proxy) -&amp;gt; node (proxy) -&amp;gt; api server&lt;br/&gt;&#xA;2 、客户端 -&amp;gt; Nginx (proxy) -&amp;gt; api server&lt;/p&gt;&#xA;</description>
+      <author>sorakylin</author>
+      <pubDate>06 Jun 2022 06:02:53 +0000</pubDate>
+    </item>
+    <item>
       <title>广东电信免费提速到 300M - 宽带症候群</title>
       <link>https://www.v2ex.com/t/857557</link>
       <description>&lt;p&gt;原来是深圳电信 100M 的，现在已经提速到 300M&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/06/06/af689e8e79dceea5.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;途径：电信营业厅 app 首页&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/06/06/01a8758eb23de8f8.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
