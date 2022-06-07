@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "清库存只是调侃，产品强行差异化分级才是商业逻辑 - Apple",
+      "Link": "https://www.v2ex.com/t/857859",
+      "Description": "\u003cp\u003e昨晚朋友们都看了发布会，果不其然大家都调侃库克清库存。\u003cbr/\u003e\n按理说，应该没有人当真吧？有老哥说要开模，这样省钱？差点笑出声，苹果要亏死，开不起模了\u003cbr/\u003e\n库克不单单是库存克星，还是刀法大师，强行产品差异化，不同价格等级都有对应的产品。\u003c/p\u003e\n",
+      "Author": "phub2020",
+      "PubDate": "2022-06-07T04:20:03Z"
+    },
+    {
       "Title": "typescript 类型的交并运算问题，官方文档好像也没给交并运算的详细信息，就给了一个基本的用法 - TypeScript",
       "Link": "https://www.v2ex.com/t/857858",
       "Description": "\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003etype IssueExcludeAssigneesField = {\n  id: number\n  project_id: number\n  title: string\n  due_date: string | null\n}\ntype Assignee = {\n  name: string\n}\n\ntype Issue = IssueExcludeAssigneesField \u0026amp; ({ assignees: [Assignee] } | { assignees: [] })\ntype Issue2 = IssueExcludeAssigneesField \u0026amp; { assignees: [Assignee] | [] }\n\n\ndeclare function map\u0026lt;T1, T2\u0026gt;(_: (_: T1) =\u0026gt; T2): T2\ndeclare function pick\u0026lt;T\u0026gt;(_: T): Pick\u0026lt;T, keyof T\u0026gt;\n\nmap\u0026lt;Issue, Issue\u0026gt;(pick)  // Type '[Assignee]' is not assignable to type '[]'.\nmap\u0026lt;Issue2, Issue2\u0026gt;(pick) // OK\n\ndeclare function mapIssue(_: Issue): Issue2\nmap\u0026lt;Issue, Issue\u0026gt;(mapIssue) // OK\n\ntype assignees1 = Issue['assignees']\ntype assignees2 = Issue2['assignees']\ndeclare function mapAssignee(_: assignees1): assignees2\nmap\u0026lt;assignees1, assignees1\u0026gt;(mapAssignee) // OK\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca href=\"https://www.typescriptlang.org/play?#code/C4TwDgpgBAkgznArhAogDwMYBtEBMICCCAlgOYB2EEcAYsRFrlALxQDeAsAFBRTG4AuKOUQBbAEYQATt15gpAewBWEDMAD6-ISInTZUYMWBYIQuMCnFypfbmTrcAQ2Cmo5y9agAfYYixZuAF9uUEgoIjgySmhWTh5hR1FXdysbLmCuEPBoeCQY2ARkdGw8QhIKKlp6RigAMigACjYoR3LouCEAbQioqgBdKEDvdha2yq6BwIBKLLDc5AAmFgK84px8HorqOgYmeubWyK2OqG6xiAGfTsnuW658bEcpaAAzRHI1YgVyKFFHMAAPAAVACMABooECFgA+BrqIRwoSgqYsaGQhZTJELbgPLBPV7vT7fKBgYgYADWwNh8MhmKgAAUyZSgRDyRAQAoXpDoXc-oD5hAIQLYaSKTMuHyAQKFkLChAYQ1ReTxTjVHjnlA3h9DMS+QLEStkHTpdxJQLZXlYXq5SrMlxQtBDr1qCDlgLOgByJ3HD19WaO85wJasaWe73tX2qx4arVEn58zbRA3hyogukp6jYiX-AEZuDg0ZHdogq3-RNUKZAA\" rel=\"nofollow\"\u003eplayground\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e上面的这段代码为啥第一个 pick 会报错\u003cbr/\u003e\n后面的两个 map 应该能证明两个 issue 和 assignees 都是可以互相赋值的等价的类型吧\u003c/p\u003e\n",
