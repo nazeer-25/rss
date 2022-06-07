@@ -4,6 +4,55 @@
   "Description": "",
   "Items": [
     {
+      "Title": "怎么买到显示器原装支架 - 问与答",
+      "Link": "https://www.v2ex.com/t/857856",
+      "Description": "\u003cp\u003e优派 vx2731 ，需要一个原装支架。\nQ1: 24 寸和 27 寸支架是通用的吗？\nQ2: 如果通用的话，怎么买到优派的显示器支架，戴尔的比较好买，优派的没怎么看到。\u003c/p\u003e\n",
+      "Author": "hideinbush",
+      "PubDate": "2022-06-07T04:01:40Z"
+    },
+    {
+      "Title": "PHP 编译器 BPC 新里程碑达成: 可以编译 web 应用了! - PHP",
+      "Link": "https://www.v2ex.com/t/857855",
+      "Description": "\u003cp\u003e不清楚 BPC 是什么的参看这里:\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.v2ex.com/t/826154\" rel=\"nofollow\"\u003e开发了一年多的 PHP 编译器 BPC 初见成效,发一些测试程序给大家看看\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.v2ex.com/t/836369\" rel=\"nofollow\"\u003ePHP 编译器 BPC 的第一个成功案例来了!\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e新里程碑\u003c/h2\u003e\n\u003cp\u003e在过去的 3 个多月里,我们完成了 apache2 module mod_bpc 的开发,使得 bpc 可以将 php web 项目编译成动态链接库文件(.so)加载到 apache2 里,像 mod_php 那样运行.\u003c/p\u003e\n\u003cp\u003e扩展方面,我们实现了 session,spl,pdo,pdo_mysql,pdo_sqlite,filter.\u003c/p\u003e\n\u003cp\u003ephp 方面,我们改写了 phpunit,使之能够编译运行.\u003c/p\u003e\n\u003cp\u003emod_bpc 提供 web 访问,session 管理用户状态,pdo 连接数据库,phpunit 测试保障.到此,php web 开发的最小核心都 ready 了.\u003c/p\u003e\n\u003ch2\u003ephp web 项目展示\u003c/h2\u003e\n\u003cp\u003e两年前,我写了一本电子书 \u003ca href=\"https://www.zhihu.com/column/c_1269564826948546560\" rel=\"nofollow\"\u003e《 PHPUnit in Action --- The Easy Way 》\u003c/a\u003e.\u003c/p\u003e\n\u003cp\u003e这本书通过一个完整的实战项目介绍了云招 OurATS 11 年来实践 PHPUnit/DbUnit 的经验.\u003c/p\u003e\n\u003cp\u003e这个实战项目是一个极简的 blog 项目,但麻雀虽小,五脏俱全,包含了用户注册 /激活 /登录 /退出 /文章的 CURD/打标签 /上传文件等功能及相应的测试方法.\u003c/p\u003e\n\u003cp\u003e这里我使用 bpc 将其编译成动态链接库,给大家展示下 bpc 编译的 web 项目是什么样子的.\u003c/p\u003e\n\u003cp\u003e该项目的 php 源码在这里: \u003ca href=\"https://github.com/heguangyu5/PHPUnit-in-Action-Code/tree/bpc/ourblog\" rel=\"nofollow\"\u003ehttps://github.com/heguangyu5/PHPUnit-in-Action-Code/tree/bpc/ourblog\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e由于 php 代码最终被编译成了动态链接库,所以运行此项目\u003cstrong\u003e不需要 php 环境\u003c/strong\u003e.\u003c/p\u003e\n\u003cp\u003e以下假设我们在一台全新的 \u003cstrong\u003eUbuntu 18.04 amd64 server\u003c/strong\u003e 上部署此项目.\u003c/p\u003e\n\u003ch3\u003e第一步: 安装 apache2 和 mysql server\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003esudo apt install apache2 mysql-server\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e由于 apache 默认启用了 module mpm_event,而我们需要 mpm_prefork,所以切换下.\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003esudo a2dismod mpm_event\nsudo a2enmod mpm_prefork\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e第二步: 创建 our_blog 数据库\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003ewget https://www.ourats.com/bpc/ourblog/our_blog.sql\nsudo mysql \u0026lt; our_blog.sql\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e第三步: 安装 bpc runtime 及扩展\u003c/h3\u003e\n\u003cp\u003ebpc 的 pdo_mysql 扩展基于 libmysqlclient 实现,所以需要先安装 libmysqlclient.\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003esudo apt install libmysqlclient20\nwget https://www.ourats.com/bpc/ourblog/bpc-common-2.0.tar.gz\nsudo tar -C / -zxf bpc-common-2.0.tar.gz\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e第四步: 安装并启用 mod_bpc\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003ewget https://www.ourats.com/bpc/ourblog/libapache2-mod-bpc.tar.gz\nsudo tar -C / -zxf libapache2-mod-bpc.tar.gz\nsudo ldconfig\nsudo a2enmod bpc\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e第五步: 部署 ourblog 项目\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003ewget https://www.ourats.com/bpc/ourblog/libourblog_u-4.4a.so\nsudo mv libourblog_u-4.4a.so /usr/local/lib/\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e配置 \u003ccode\u003e/usr/local/etc/bpc.conf\u003c/code\u003e 将 \u003ccode\u003e\u003ca href=\"http://libourblog_u-4.4a.so\" rel=\"nofollow\"\u003elibourblog_u-4.4a.so\u003c/a\u003e\u003c/code\u003e  以 web lib 加载.\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003esudo vi /usr/local/etc/bpc.conf\n# 最后一行 (web-libs bpctest) 改为\n(web-libs ourblog)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e配置 apache 虚拟主机\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003ewget https://www.ourats.com/bpc/ourblog/bpc.ourblog.me.conf\nsudo mv bpc.ourblog.me.conf /etc/apache2/sites-available/\nsudo mkdir /var/www/bpc.ourblog.me\nsudo touch /var/www/bpc.ourblog.me/index.php\nsudo mkdir /var/www/bpc.ourblog.me/upload\nsudo chown www-data:www-data /var/www/bpc.ourblog.me/upload\nsudo a2enmod rewrite\nsudo a2ensite bpc.ourblog.me.conf\nsudo systemctl restart apache2\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e修改本机 \u003ccode\u003e/etc/hosts\u003c/code\u003e 将 \u003ca href=\"http://bpc.ourblog.me\" rel=\"nofollow\"\u003ebpc.ourblog.me\u003c/a\u003e 指向 \u003cstrong\u003eUbuntu 18.04 amd64 server\u003c/strong\u003e 的 IP 地址.\u003c/p\u003e\n\u003cp\u003e浏览器访问 \u003ca href=\"http://bpc.ourblog.me\" rel=\"nofollow\"\u003ehttp://bpc.ourblog.me\u003c/a\u003e 即可.\u003c/p\u003e\n\u003cp\u003e要想进一步使用各个功能,需要点击 Sign Up 注册一个帐号,然后去数据库 mail_queue 表中找到激活链接激活帐号.然后就可以点击 Sign In 登录到后台进行文章的 CURD 操作.文件上传在 \u003ccode\u003eadmin/upload.php\u003c/code\u003e页面.\u003c/p\u003e\n\u003cp\u003e到此,一个 bpc 编译的极简的 php web 项目就运行起来了.\u003c/p\u003e\n\u003ch2\u003e关于 phpunit\u003c/h2\u003e\n\u003cp\u003ephpunit 可以很好地保障编译后的 php 代码和 php 本身运行效果一致.\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.zhihu.com/column/c_1269564826948546560\" rel=\"nofollow\"\u003e《 PHPUnit in Action --- The Easy Way 》\u003c/a\u003e 的读者可以下载 \u003ccode\u003e\u003ca href=\"http://sync-test-db.sh\" rel=\"nofollow\"\u003esync-test-db.sh\u003c/a\u003e\u003c/code\u003e \u003ccode\u003erun-test\u003c/code\u003e 和 \u003ccode\u003e\u003ca href=\"http://run-all-tests-bpc.sh\" rel=\"nofollow\"\u003erun-all-tests-bpc.sh\u003c/a\u003e\u003c/code\u003e 试一下.\u003c/p\u003e\n\u003cp\u003e运行这几个程序需要  《 PHPUnit in Action --- The Easy Way 》中构建的 mysql-3307,所以如果你没有环境就不用试了.\u003c/p\u003e\n\u003cp\u003e运行效果如下:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003ewget https://www.ourats.com/bpc/ourblog/sync-test-db.sh\nwget https://www.ourats.com/bpc/ourblog/run-test\nwget https://www.ourats.com/bpc/ourblog/run-all-tests-bpc.sh\nchmod a+x sync-test-db.sh run-test run-all-tests-bpc.sh\nmkdir -p ./OurBlog/Upload\nwget -O OurBlog/Upload/ourats.png https://www.ourats.com/css/img/logo-white.png\n./sync-test-db.sh\n./run-all-tests-bpc.sh\n\n\n=== Run Reg,Activate ===\n\nPHPUnit 4.8.36 by Sebastian Bergmann and contributors.\n\n.....................\n\nTime: 98 ms, Memory: 26.84MB\n\nOK (21 tests, 41 assertions)\n\n\n=== Run BaseDbTablesInit ===\n\nPHPUnit 4.8.36 by Sebastian Bergmann and contributors.\n\n.\n\nTime: 33 ms, Memory: 17.54MB\n\nOK (1 test, 1 assertion)\n\n\n=== Run Others ===\n\nPHPUnit 4.8.36 by Sebastian Bergmann and contributors.\n\n.........................................\n\nTime: 208 ms, Memory: 43.46MB\n\nOK (41 tests, 75 assertions)\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "heguangyu5",
+      "PubDate": "2022-06-07T03:58:24Z"
+    },
+    {
+      "Title": "用 safari 在 facebook 的 group 里打字经常光标位置错乱，我是个例吗？ - Facebook",
+      "Link": "https://www.v2ex.com/t/857854",
+      "Description": "",
+      "Author": "deadtomb",
+      "PubDate": "2022-06-07T03:58:05Z"
+    },
+    {
+      "Title": "看惯了 Apple 高分显示屏后还能回到 1080p 吗 - Apple",
+      "Link": "https://www.v2ex.com/t/857853",
+      "Description": "目前是 2019 MacBook Pro 乞丐版，最近想换到惠普战 X 试下 Win11 ，但是战系列屏幕分辨率都只是 1080p 的，视觉上会有很大的落差吗，会不会颗粒感非常严重造成没法适应",
+      "Author": "vipzhanghe",
+      "PubDate": "2022-06-07T03:53:49Z"
+    },
+    {
+      "Title": "勾 8 苹果，这就开始挤牙膏了？ - Apple",
+      "Link": "https://www.v2ex.com/t/857852",
+      "Description": "\u003cp\u003eM2 是什么鬼，CPU 都不舍得多加一个？ hin 失望，希望大家尽量不要买 M2 的产品，给库克老小子一个教训。\u003c/p\u003e\n",
+      "Author": "Cyshall",
+      "PubDate": "2022-06-07T03:51:15Z"
+    },
+    {
+      "Title": "高考忘带准考证的十有八九也是差生，不服来辩[破涕为笑] - 教育",
+      "Link": "https://www.v2ex.com/t/857851",
+      "Description": "",
+      "Author": "tristankuo",
+      "PubDate": "2022-06-07T03:51:12Z"
+    },
+    {
+      "Title": "腾讯良心云 618 首单活动会有国内轻量 3 年的吗? - 云计算",
+      "Link": "https://www.v2ex.com/t/857850",
+      "Description": "\u003cp\u003e腾讯良心云 618 首单活动会有国内轻量 3 年的吗?\n我是用来搭建企业邮箱的,要求就是长期使用,起码有个 3 年吧,一年的是便宜,恐怕后面续费就贵了.\n或者有更有性价比的厂商麻烦大佬推荐一下.\u003c/p\u003e\n",
+      "Author": "minilei",
+      "PubDate": "2022-06-07T03:50:29Z"
+    },
+    {
       "Title": "PVE 下群晖 NAS 内存占用异常 - 问与答",
       "Link": "https://www.v2ex.com/t/857849",
       "Description": "在 PVE 下装了一个黑群晖，最近在下载文件的时候老是自动关机，后来查看是内存占用太高导致的。\u003cbr /\u003e\u003cbr /\u003e问题描述：\u003cbr /\u003e      基础情况：在 PVE 下装了一个黑群晖，分配了 5G 的虚拟内存，刚开机的时候内存占用在 900M 左右。\u003cbr /\u003e\u003cbr /\u003e      需求：黑群晖里面挂载了阿里云盘的 webdav ，然后从 webdav 下载文件到 nas 磁盘。\u003cbr /\u003e\u003cbr /\u003e      出现问题：在下载的过程中，pve 控制台显示 nas 虚拟内存占用不断升高，经过测试，虚拟内存的增高随着下载文件的大小增高，并且在下载完成后，占用的内存无法释放，当下载文件较大时，内存占满关机。但是在 nas 系统里面的控制面板，一直显示很低的内存和 cpu 占用率。\u003cbr /\u003e      \u003cbr /\u003e      不太清楚问题出在了哪里，不会是将文件都缓存到了虚拟内存？为什么会出现这种情况？刚开始玩群晖，不是很懂，求大佬指教！",
