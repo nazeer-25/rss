@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>typescript 类型的交并运算问题，官方文档好像也没给交并运算的详细信息，就给了一个基本的用法 - TypeScript</title>
+      <link>https://www.v2ex.com/t/857858</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;type IssueExcludeAssigneesField = {&#xA;  id: number&#xA;  project_id: number&#xA;  title: string&#xA;  due_date: string | null&#xA;}&#xA;type Assignee = {&#xA;  name: string&#xA;}&#xA;&#xA;type Issue = IssueExcludeAssigneesField &amp;amp; ({ assignees: [Assignee] } | { assignees: [] })&#xA;type Issue2 = IssueExcludeAssigneesField &amp;amp; { assignees: [Assignee] | [] }&#xA;&#xA;&#xA;declare function map&amp;lt;T1, T2&amp;gt;(_: (_: T1) =&amp;gt; T2): T2&#xA;declare function pick&amp;lt;T&amp;gt;(_: T): Pick&amp;lt;T, keyof T&amp;gt;&#xA;&#xA;map&amp;lt;Issue, Issue&amp;gt;(pick)  // Type &#39;[Assignee]&#39; is not assignable to type &#39;[]&#39;.&#xA;map&amp;lt;Issue2, Issue2&amp;gt;(pick) // OK&#xA;&#xA;declare function mapIssue(_: Issue): Issue2&#xA;map&amp;lt;Issue, Issue&amp;gt;(mapIssue) // OK&#xA;&#xA;type assignees1 = Issue[&#39;assignees&#39;]&#xA;type assignees2 = Issue2[&#39;assignees&#39;]&#xA;declare function mapAssignee(_: assignees1): assignees2&#xA;map&amp;lt;assignees1, assignees1&amp;gt;(mapAssignee) // OK&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.typescriptlang.org/play?#code/C4TwDgpgBAkgznArhAogDwMYBtEBMICCCAlgOYB2EEcAYsRFrlALxQDeAsAFBRTG4AuKOUQBbAEYQATt15gpAewBWEDMAD6-ISInTZUYMWBYIQuMCnFypfbmTrcAQ2Cmo5y9agAfYYixZuAF9uUEgoIjgySmhWTh5hR1FXdysbLmCuEPBoeCQY2ARkdGw8QhIKKlp6RigAMigACjYoR3LouCEAbQioqgBdKEDvdha2yq6BwIBKLLDc5AAmFgK84px8HorqOgYmeubWyK2OqG6xiAGfTsnuW658bEcpaAAzRHI1YgVyKFFHMAAPAAVACMABooECFgA+BrqIRwoSgqYsaGQhZTJELbgPLBPV7vT7fKBgYgYADWwNh8MhmKgAAUyZSgRDyRAQAoXpDoXc-oD5hAIQLYaSKTMuHyAQKFkLChAYQ1ReTxTjVHjnlA3h9DMS+QLEStkHTpdxJQLZXlYXq5SrMlxQtBDr1qCDlgLOgByJ3HD19WaO85wJasaWe73tX2qx4arVEn58zbRA3hyogukp6jYiX-AEZuDg0ZHdogq3-RNUKZAA&#34; rel=&#34;nofollow&#34;&gt;playground&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;上面的这段代码为啥第一个 pick 会报错&lt;br/&gt;&#xA;后面的两个 map 应该能证明两个 issue 和 assignees 都是可以互相赋值的等价的类型吧&lt;/p&gt;&#xA;</description>
+      <author>TWorldIsNButThis</author>
+      <pubDate>07 Jun 2022 04:14:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>海外资金能国内买东西吗？ - 生活</title>
+      <link>https://www.v2ex.com/t/857857</link>
+      <description>&lt;p&gt;如果我和对方都在国外银行走转账，然后对方把他在国内的车过户给我，这样可行吗？&lt;/p&gt;&#xA;</description>
+      <author>wobuhuicode</author>
+      <pubDate>07 Jun 2022 04:07:43 +0000</pubDate>
+    </item>
+    <item>
       <title>怎么买到显示器原装支架 - 问与答</title>
       <link>https://www.v2ex.com/t/857856</link>
       <description>&lt;p&gt;优派 vx2731 ，需要一个原装支架。&#xA;Q1: 24 寸和 27 寸支架是通用的吗？&#xA;Q2: 如果通用的话，怎么买到优派的显示器支架，戴尔的比较好买，优派的没怎么看到。&lt;/p&gt;&#xA;</description>
