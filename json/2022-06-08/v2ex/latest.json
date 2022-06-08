@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "pandas 相关， k 线数据加工，用 resample 寻找价格最值相应时间遇到问题。 - Python",
+      "Link": "https://www.v2ex.com/t/858228",
+      "Description": "\u003cpre\u003e\u003ccode\u003edef func1(x):\n        try:\n                return x.index[x.argmax()]\n        except:\n                return -999\ndef func2(x):\n        try:\n                return x.index[x.argmin()]\n        except:\n                return -999\ndf_origin['high_time'] = (df['last'].resample(label='right', closed='right',rule=period).agg(lambda x:func1(x))) \ndf_origin['low_time'] = (df['last'].resample(label='right', closed='right',rule=period).agg(lambda x:func2(x)))\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e原表是一个时间顺序的价格序列 如果不写 try except 的话 x.index[x.argmax()]会因为 resample 遇到非交易时间段会自动切割出空值，argmax 在空值会报错。感觉方法不好，想请教下正确思路。。\u003c/p\u003e\n",
+      "Author": "bleutail",
+      "PubDate": "2022-06-08T09:38:28Z"
+    },
+    {
       "Title": "iPhone 12 Pro 的外屏摔碎了，咋凑合用？ - 问与答",
       "Link": "https://www.v2ex.com/t/858225",
       "Description": "撸猫的时候摔水泥地上了，右上角有一道浅浅的裂痕，长约 4cm ，不影响使用，现在有如下选择：\u003cbr /\u003e\u003cbr /\u003e1. 官方换屏，2199RMB\u003cbr /\u003e2. 第三方换屏，1000+RMB ，且有风险\u003cbr /\u003e3. 只换外屏，几百 RMB ，找不到靠谱的，风险更大\u003cbr /\u003e4. 凑合用，看着膈应，且有可能影响我搓澡的时候听歌防水\u003cbr /\u003e5. 贴张膜，20RMB ，不知道管不管用\u003cbr /\u003e6. 卖了，买 13\u003cbr /\u003e\u003cbr /\u003e你会怎么选",
