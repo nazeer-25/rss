@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>一个简单分析 diff 上下游调用的小工具/想法 - 分享创造</title>
+      <link>https://www.v2ex.com/t/858279</link>
+      <description>&lt;h2&gt;背景与效果&lt;/h2&gt;&#xA;&lt;p&gt;在研发流程中无论是 code review 、MR 基本都绕不开 code diff 的存在，而人眼很难准确评估 diff 的影响规模。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.postimg.cc/L5cwt7qS/Wechat-IMG8.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;linkediff 可以在无需编译的情况下对你的代码进行解析，指出 diff 的影响范围：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.postimg.cc/sX0tX1sv/Wechat-IMG9.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;通过脑图可以看到：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;对 UTGen.java 发生了三块变更&lt;/li&gt;&#xA;&lt;li&gt;64-216 行这块影响了 methodsToCases 方法&lt;/li&gt;&#xA;&lt;li&gt;这个方法调用了近 40 个方法，并被 2 个方法调用&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;他同时也生成易处理的 JSON 文件便于与其他系统（如 CI ）配合。&lt;/p&gt;&#xA;&lt;h2&gt;使用&lt;/h2&gt;&#xA;&lt;p&gt;当前只支持 java 项目。多的不在这说了，用 docker 可以用现成的镜像一键体验，原生则稍微麻烦点&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/williamfzc/linkediff&#34; rel=&#34;nofollow&#34;&gt;https://github.com/williamfzc/linkediff&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;想法跟讨论点&lt;/h2&gt;&#xA;&lt;p&gt;智能 diff 功能存在我的 TODO 里很久了，之前的设计是：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;tree-sitter （这里选型有很多） 转 ast graph&lt;/li&gt;&#xA;&lt;li&gt;ast graph -&amp;gt; 更高层级的、通用 graph&lt;/li&gt;&#xA;&lt;li&gt;raw diff 生成&lt;/li&gt;&#xA;&lt;li&gt;代入 graph 抠出整条调用上下游&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;而后来偶然发现了 &lt;a href=&#34;https://github.com/modernizing/coca&#34; rel=&#34;nofollow&#34;&gt;coca&lt;/a&gt; ，发现已经将第二步与第四步完成了。所以趁着休息日摸鱼把这个最小可体验版本写（拼）出来了。&lt;/p&gt;&#xA;&lt;p&gt;但这个工具肯定不是理想形态，我纠结的点有几个：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;tree-sitter 是否已经是静态分析的标准选择（我基于 antlr4 撸过一个，但性能差远了&lt;/li&gt;&#xA;&lt;li&gt;AST 在不同语言似乎格式也不同，转换要兼容就很麻烦&lt;/li&gt;&#xA;&lt;li&gt;基于 tree-sitter 的上层工具也不算多，github 的 semantic 算一个，有点慌&lt;/li&gt;&#xA;&lt;li&gt;...&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;最后&lt;/h2&gt;&#xA;&lt;p&gt;欢迎感兴趣的朋友一起脑暴&lt;/p&gt;&#xA;</description>
+      <author>williamfzc</author>
+      <pubDate>08 Jun 2022 14:55:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>做了个留学加拿大的网站，求大佬们提点意见。 - 问与答</title>
+      <link>https://www.v2ex.com/t/858278</link>
+      <description>去年我刚申请留学的时候，觉得中介真贵，看起来也不是很专业，也不懂 IT 。&lt;br /&gt;所以内心一直有个自己转行成功后，想自己搞一个这样的业务。就是帮助有低成本留学来加拿大做码农的朋友。&lt;br /&gt;&lt;br /&gt;我初步做了一个网站，只是我脑子里有太多想法，真开始做的时候又提笔忘字。&lt;br /&gt;所以需要集思广益。收费目前只是我初步的概念，请大家轻喷。&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://www.fengyekongliu.com/&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.fengyekongliu.com/&lt;/a&gt;</description>
+      <author>upcliucong</author>
+      <pubDate>08 Jun 2022 14:51:41 +0000</pubDate>
+    </item>
+    <item>
       <title>写了个中国程序员最容易读错的那些单词，欢迎 V 友体验 - 程序员</title>
       <link>https://www.v2ex.com/t/858277</link>
       <description>&lt;p&gt;在 github 上看到了&lt;a href=&#34;https://github.com/shimohq/chinese-programmer-wrong-pronunciation&#34; rel=&#34;nofollow&#34;&gt;中国程序员容易发音错误的单词&lt;/a&gt;&#xA;感觉挺好玩的，就写了个&lt;a href=&#34;https://apps.apple.com/cn/app/%E7%8C%BF%E5%8D%95%E8%AF%8D-%E4%B8%AD%E5%9B%BD%E7%A8%8B%E5%BA%8F%E5%91%98%E5%AE%B9%E6%98%93%E5%8F%91%E9%9F%B3%E9%94%99%E8%AF%AF%E7%9A%84%E5%8D%95%E8%AF%8D/id1626487291&#34; rel=&#34;nofollow&#34;&gt;iOS 版&lt;/a&gt;&#xA;欢迎大家下载体验&lt;/p&gt;&#xA;</description>

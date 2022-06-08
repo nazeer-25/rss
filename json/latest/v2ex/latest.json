@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "一个简单分析 diff 上下游调用的小工具/想法 - 分享创造",
+      "Link": "https://www.v2ex.com/t/858279",
+      "Description": "\u003ch2\u003e背景与效果\u003c/h2\u003e\n\u003cp\u003e在研发流程中无论是 code review 、MR 基本都绕不开 code diff 的存在，而人眼很难准确评估 diff 的影响规模。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.postimg.cc/L5cwt7qS/Wechat-IMG8.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003elinkediff 可以在无需编译的情况下对你的代码进行解析，指出 diff 的影响范围：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.postimg.cc/sX0tX1sv/Wechat-IMG9.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e通过脑图可以看到：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e对 UTGen.java 发生了三块变更\u003c/li\u003e\n\u003cli\u003e64-216 行这块影响了 methodsToCases 方法\u003c/li\u003e\n\u003cli\u003e这个方法调用了近 40 个方法，并被 2 个方法调用\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e他同时也生成易处理的 JSON 文件便于与其他系统（如 CI ）配合。\u003c/p\u003e\n\u003ch2\u003e使用\u003c/h2\u003e\n\u003cp\u003e当前只支持 java 项目。多的不在这说了，用 docker 可以用现成的镜像一键体验，原生则稍微麻烦点\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/williamfzc/linkediff\" rel=\"nofollow\"\u003ehttps://github.com/williamfzc/linkediff\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e想法跟讨论点\u003c/h2\u003e\n\u003cp\u003e智能 diff 功能存在我的 TODO 里很久了，之前的设计是：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003etree-sitter （这里选型有很多） 转 ast graph\u003c/li\u003e\n\u003cli\u003east graph -\u0026gt; 更高层级的、通用 graph\u003c/li\u003e\n\u003cli\u003eraw diff 生成\u003c/li\u003e\n\u003cli\u003e代入 graph 抠出整条调用上下游\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e而后来偶然发现了 \u003ca href=\"https://github.com/modernizing/coca\" rel=\"nofollow\"\u003ecoca\u003c/a\u003e ，发现已经将第二步与第四步完成了。所以趁着休息日摸鱼把这个最小可体验版本写（拼）出来了。\u003c/p\u003e\n\u003cp\u003e但这个工具肯定不是理想形态，我纠结的点有几个：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003etree-sitter 是否已经是静态分析的标准选择（我基于 antlr4 撸过一个，但性能差远了\u003c/li\u003e\n\u003cli\u003eAST 在不同语言似乎格式也不同，转换要兼容就很麻烦\u003c/li\u003e\n\u003cli\u003e基于 tree-sitter 的上层工具也不算多，github 的 semantic 算一个，有点慌\u003c/li\u003e\n\u003cli\u003e...\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e最后\u003c/h2\u003e\n\u003cp\u003e欢迎感兴趣的朋友一起脑暴\u003c/p\u003e\n",
+      "Author": "williamfzc",
+      "PubDate": "2022-06-08T14:55:14Z"
+    },
+    {
+      "Title": "做了个留学加拿大的网站，求大佬们提点意见。 - 问与答",
+      "Link": "https://www.v2ex.com/t/858278",
+      "Description": "去年我刚申请留学的时候，觉得中介真贵，看起来也不是很专业，也不懂 IT 。\u003cbr /\u003e所以内心一直有个自己转行成功后，想自己搞一个这样的业务。就是帮助有低成本留学来加拿大做码农的朋友。\u003cbr /\u003e\u003cbr /\u003e我初步做了一个网站，只是我脑子里有太多想法，真开始做的时候又提笔忘字。\u003cbr /\u003e所以需要集思广益。收费目前只是我初步的概念，请大家轻喷。\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://www.fengyekongliu.com/\" rel=\"nofollow noopener\"\u003ehttps://www.fengyekongliu.com/\u003c/a\u003e",
+      "Author": "upcliucong",
+      "PubDate": "2022-06-08T14:51:41Z"
+    },
+    {
       "Title": "写了个中国程序员最容易读错的那些单词，欢迎 V 友体验 - 程序员",
       "Link": "https://www.v2ex.com/t/858277",
       "Description": "\u003cp\u003e在 github 上看到了\u003ca href=\"https://github.com/shimohq/chinese-programmer-wrong-pronunciation\" rel=\"nofollow\"\u003e中国程序员容易发音错误的单词\u003c/a\u003e\n感觉挺好玩的，就写了个\u003ca href=\"https://apps.apple.com/cn/app/%E7%8C%BF%E5%8D%95%E8%AF%8D-%E4%B8%AD%E5%9B%BD%E7%A8%8B%E5%BA%8F%E5%91%98%E5%AE%B9%E6%98%93%E5%8F%91%E9%9F%B3%E9%94%99%E8%AF%AF%E7%9A%84%E5%8D%95%E8%AF%8D/id1626487291\" rel=\"nofollow\"\u003eiOS 版\u003c/a\u003e\n欢迎大家下载体验\u003c/p\u003e\n",
