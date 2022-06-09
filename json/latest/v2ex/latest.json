@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "开源 v1.0：简易探针+webssh - 分享创造",
+      "Link": "https://www.v2ex.com/t/858455",
+      "Description": "\u003ch3\u003e缘由\u003c/h3\u003e\n\u003cp\u003e多地办公，不方便登录个人服务器，现成的开源项目都太大，功能繁杂，于是有了这个想法\u003c/p\u003e\n\u003ch3\u003e功能\u003c/h3\u003e\n\u003cp\u003e多服务器管理; 通过 websocker 实时更新服务器基本信息: 系统、公网 IP 、CPU 、内存、硬盘、网卡等\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"list\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/06/09/2bb30a6dc5aebdea.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e基于浏览器解决 SSH 跨端同步问题——Web SSH\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"wenssh\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/06/09/2e76fa5f9f8e6c6f.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e安装\u003c/h3\u003e\n\u003cp\u003eDocker： [size=4]docker run -d -p 8082:8082 -p 22022:22022 chaoszhu/easynode\u003c/p\u003e\n\u003ch3\u003e开源地址(\u003cstrong\u003e求个 star~\u003c/strong\u003e)： \u003ca href=\"https://github.com/chaos-zhu/easynode\" rel=\"nofollow\"\u003ehttps://github.com/chaos-zhu/easynode\u003c/a\u003e\u003c/h3\u003e\n\u003ch4\u003e更多信息请阅读仓库 readme ，使用过程如有 BUG 、有需求欢迎各位大佬 issues(●'◡'●)\u003c/h4\u003e\n",
+      "Author": "bitkuang8",
+      "PubDate": "2022-06-09T08:03:02Z"
+    },
+    {
+      "Title": "centos7 防火墙（firewalld）是打开的，然后没有开放 8002 端口，但这个端口的程序可以访问，请问还可以从哪里排查，是哪里的规则是打开的？ - 问与答",
+      "Link": "https://www.v2ex.com/t/858454",
+      "Description": "\u003cp\u003e程序在 docker 里运行映射到宿主机的 8002 端口。 可以通过宿主机的 公网 IP：8002  正常访问到程序\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003enetstat -nltp\nActive Internet connections (only servers)\nProto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    \ntcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      843/sshd            \ntcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      939/master          \ntcp        0      0 0.0.0.0:8002            0.0.0.0:*               LISTEN      22206/docker-proxy  \ntcp6       0      0 :::22                   :::*                    LISTEN      843/sshd            \ntcp6       0      0 ::1:25                  :::*                    LISTEN      939/master          \ntcp6       0      0 :::8002                 :::*                    LISTEN      22210/docker-proxy\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e防火墙是开启状态\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# firewall-cmd --state\nrunning\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e开放的规则里没有发现 8002 端口，但 WEB 程序的确可以访问\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# firewall-cmd --list-all\npublic (active)\n  target: default\n  icmp-block-inversion: no\n  interfaces: eth0\n  sources: \n  services: dhcpv6-client ssh\n  ports: \n  protocols: \n  masquerade: no\n  forward-ports: \n  source-ports: \n  icmp-blocks: \n  rich rules: \n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e# firewall-cmd --list-all --zone=public\npublic (active)\n  target: default\n  icmp-block-inversion: no\n  interfaces: eth0\n  sources: \n  services: dhcpv6-client ssh\n  ports: \n  protocols: \n  masquerade: no\n  forward-ports: \n  source-ports: \n  icmp-blocks: \n  rich rules: \n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003efirewall-cmd --list-all --zone=docker\ndocker (active)\n  target: ACCEPT\n  icmp-block-inversion: no\n  interfaces: docker0\n  sources: \n  services: \n  ports: \n  protocols: \n  masquerade: no\n  forward-ports: \n  source-ports: \n  icmp-blocks: \n  rich rules: \n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e# firewall-cmd --get-active-zones\ndocker\n  interfaces: docker0\npublic\n  interfaces: eth0\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e两个 zone ，docker 和 public 下面的 list ports 都是空的， 很奇怪。 请教是还可以查看哪里，可以看到是放行 8002 端口的？ 还是说， 默认放行全部的端口吗？\u003c/p\u003e\n",
+      "Author": "xiaoyanbot",
+      "PubDate": "2022-06-09T08:02:36Z"
+    },
+    {
+      "Title": "关于 App Store 要求 APP 必须提供用户彻底删除的功能的一个问题 - iDev",
+      "Link": "https://www.v2ex.com/t/858453",
+      "Description": "\u003cp\u003e月末就是 App Store 要求 APP 必须提供彻底删除自己数据这个功能的 deadline 了。\u003c/p\u003e\n\u003cp\u003e有一个细节我这里不是非常清楚，不知道各位老哥有没有处理到过，就是删除后，是否这个用户后续仍然可以重新注册和原先的唯一标识相同的新账号，包括不限于被删除账户的邮箱 /手机号 /登录名等等\u003c/p\u003e\n\u003cp\u003e这个当然也和删除的具体实现有一定的关联，有了解的老哥解答一下，谢谢\u003c/p\u003e\n",
+      "Author": "vimac",
+      "PubDate": "2022-06-09T08:01:15Z"
+    },
+    {
       "Title": "这是 Github 的 Bug ，还是什么我不知道的 Feature？ - GitHub",
       "Link": "https://www.v2ex.com/t/858451",
       "Description": "\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/9iOmID0.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e如上图。\u003c/p\u003e\n\u003cp\u003eInbox 显示有 4 条通知，实际上只能看到 3 条。\u003c/p\u003e\n\u003cp\u003e把这 3 条清掉之后，右上角还是一直显示一个小蓝点，Inbox 里也显示还剩一条看不到也清不掉的通知。\u003c/p\u003e\n\u003cp\u003e这是 Bug 吗？还是我触发了什么隐藏的功能。。。\u003c/p\u003e\n\u003cp\u003e如果是 Bug 的话，要怎么联系客服解决呢？\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e这是要逼死强迫症啊。。。\u003c/p\u003e\n",

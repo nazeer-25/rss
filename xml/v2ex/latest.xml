@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>开源 v1.0：简易探针+webssh - 分享创造</title>
+      <link>https://www.v2ex.com/t/858455</link>
+      <description>&lt;h3&gt;缘由&lt;/h3&gt;&#xA;&lt;p&gt;多地办公，不方便登录个人服务器，现成的开源项目都太大，功能繁杂，于是有了这个想法&lt;/p&gt;&#xA;&lt;h3&gt;功能&lt;/h3&gt;&#xA;&lt;p&gt;多服务器管理; 通过 websocker 实时更新服务器基本信息: 系统、公网 IP 、CPU 、内存、硬盘、网卡等&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;list&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/06/09/2bb30a6dc5aebdea.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;基于浏览器解决 SSH 跨端同步问题——Web SSH&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;wenssh&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/06/09/2e76fa5f9f8e6c6f.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;安装&lt;/h3&gt;&#xA;&lt;p&gt;Docker： [size=4]docker run -d -p 8082:8082 -p 22022:22022 chaoszhu/easynode&lt;/p&gt;&#xA;&lt;h3&gt;开源地址(&lt;strong&gt;求个 star~&lt;/strong&gt;)： &lt;a href=&#34;https://github.com/chaos-zhu/easynode&#34; rel=&#34;nofollow&#34;&gt;https://github.com/chaos-zhu/easynode&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;h4&gt;更多信息请阅读仓库 readme ，使用过程如有 BUG 、有需求欢迎各位大佬 issues(●&#39;◡&#39;●)&lt;/h4&gt;&#xA;</description>
+      <author>bitkuang8</author>
+      <pubDate>09 Jun 2022 08:03:02 +0000</pubDate>
+    </item>
+    <item>
+      <title>centos7 防火墙（firewalld）是打开的，然后没有开放 8002 端口，但这个端口的程序可以访问，请问还可以从哪里排查，是哪里的规则是打开的？ - 问与答</title>
+      <link>https://www.v2ex.com/t/858454</link>
+      <description>&lt;p&gt;程序在 docker 里运行映射到宿主机的 8002 端口。 可以通过宿主机的 公网 IP：8002  正常访问到程序&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;netstat -nltp&#xA;Active Internet connections (only servers)&#xA;Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    &#xA;tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      843/sshd            &#xA;tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      939/master          &#xA;tcp        0      0 0.0.0.0:8002            0.0.0.0:*               LISTEN      22206/docker-proxy  &#xA;tcp6       0      0 :::22                   :::*                    LISTEN      843/sshd            &#xA;tcp6       0      0 ::1:25                  :::*                    LISTEN      939/master          &#xA;tcp6       0      0 :::8002                 :::*                    LISTEN      22210/docker-proxy&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;防火墙是开启状态&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# firewall-cmd --state&#xA;running&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;开放的规则里没有发现 8002 端口，但 WEB 程序的确可以访问&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# firewall-cmd --list-all&#xA;public (active)&#xA;  target: default&#xA;  icmp-block-inversion: no&#xA;  interfaces: eth0&#xA;  sources: &#xA;  services: dhcpv6-client ssh&#xA;  ports: &#xA;  protocols: &#xA;  masquerade: no&#xA;  forward-ports: &#xA;  source-ports: &#xA;  icmp-blocks: &#xA;  rich rules: &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;# firewall-cmd --list-all --zone=public&#xA;public (active)&#xA;  target: default&#xA;  icmp-block-inversion: no&#xA;  interfaces: eth0&#xA;  sources: &#xA;  services: dhcpv6-client ssh&#xA;  ports: &#xA;  protocols: &#xA;  masquerade: no&#xA;  forward-ports: &#xA;  source-ports: &#xA;  icmp-blocks: &#xA;  rich rules: &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;firewall-cmd --list-all --zone=docker&#xA;docker (active)&#xA;  target: ACCEPT&#xA;  icmp-block-inversion: no&#xA;  interfaces: docker0&#xA;  sources: &#xA;  services: &#xA;  ports: &#xA;  protocols: &#xA;  masquerade: no&#xA;  forward-ports: &#xA;  source-ports: &#xA;  icmp-blocks: &#xA;  rich rules: &#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;# firewall-cmd --get-active-zones&#xA;docker&#xA;  interfaces: docker0&#xA;public&#xA;  interfaces: eth0&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;两个 zone ，docker 和 public 下面的 list ports 都是空的， 很奇怪。 请教是还可以查看哪里，可以看到是放行 8002 端口的？ 还是说， 默认放行全部的端口吗？&lt;/p&gt;&#xA;</description>
+      <author>xiaoyanbot</author>
+      <pubDate>09 Jun 2022 08:02:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于 App Store 要求 APP 必须提供用户彻底删除的功能的一个问题 - iDev</title>
+      <link>https://www.v2ex.com/t/858453</link>
+      <description>&lt;p&gt;月末就是 App Store 要求 APP 必须提供彻底删除自己数据这个功能的 deadline 了。&lt;/p&gt;&#xA;&lt;p&gt;有一个细节我这里不是非常清楚，不知道各位老哥有没有处理到过，就是删除后，是否这个用户后续仍然可以重新注册和原先的唯一标识相同的新账号，包括不限于被删除账户的邮箱 /手机号 /登录名等等&lt;/p&gt;&#xA;&lt;p&gt;这个当然也和删除的具体实现有一定的关联，有了解的老哥解答一下，谢谢&lt;/p&gt;&#xA;</description>
+      <author>vimac</author>
+      <pubDate>09 Jun 2022 08:01:15 +0000</pubDate>
+    </item>
+    <item>
       <title>这是 Github 的 Bug ，还是什么我不知道的 Feature？ - GitHub</title>
       <link>https://www.v2ex.com/t/858451</link>
       <description>&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/9iOmID0.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;如上图。&lt;/p&gt;&#xA;&lt;p&gt;Inbox 显示有 4 条通知，实际上只能看到 3 条。&lt;/p&gt;&#xA;&lt;p&gt;把这 3 条清掉之后，右上角还是一直显示一个小蓝点，Inbox 里也显示还剩一条看不到也清不掉的通知。&lt;/p&gt;&#xA;&lt;p&gt;这是 Bug 吗？还是我触发了什么隐藏的功能。。。&lt;/p&gt;&#xA;&lt;p&gt;如果是 Bug 的话，要怎么联系客服解决呢？&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;这是要逼死强迫症啊。。。&lt;/p&gt;&#xA;</description>
