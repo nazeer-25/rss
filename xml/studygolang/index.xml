@@ -33,12 +33,12 @@
       <description>&lt;p&gt;很多轮子都有error类型变量return，但是我调用的时候可以不接受（也不用&amp;rdquo;_“接受），程序不报错。类似情况还有for range对数组遍历只接受索引值。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;但是我自己写的函数，如果有两个值要返回，我必须都要接受。（或者用”-“接受），否则报错&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>首批“先进级”！优维科技通过信通院可观测性最高级评测</title>
-      <link>https://studygolang.com/articles/35692#reply0</link>
-    </item>
-    <item>
       <title>defer使用</title>
       <link>https://studygolang.com/resources/15533#reply0</link>
+    </item>
+    <item>
+      <title>首批“先进级”！优维科技通过信通院可观测性最高级评测</title>
+      <link>https://studygolang.com/articles/35692#reply0</link>
     </item>
     <item>
       <title>华为云特价服务器</title>
@@ -65,6 +65,14 @@
       <description>&lt;p&gt;huawei云服务器4核8G5M，3年1800，独立IP，个性域名，CDN加速，云数据库，优惠多多，适用Web服务器、广告、游戏等企业通用业务场景，有意者请联系VX:15824857323。&#xA;&lt;img src=&#34;https://static.golangjob.cn/220609/f9352735a787949c33a5c9994f0d892c.jpg&#34; alt=&#34;微信图片_20220609100403.jpg&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>https://studygolang.com/interview/question</title>
+      <link>https://studygolang.com/resources/15532#reply0</link>
+    </item>
+    <item>
+      <title>穿透迷雾：未来的可观测性工具</title>
+      <link>https://studygolang.com/articles/35689#reply0</link>
+    </item>
+    <item>
       <title>价值百万的域名，用Go搭了一个垃圾站！</title>
       <link>https://studygolang.com/topics/15585#reply2</link>
       <description>&lt;p&gt;一个朋友用一个价值百万的域名&lt;a href=&#34;https://www.msj.com/&#34;&gt;www.msj.com&lt;/a&gt;，让我用Go帮他写了一个网站，我感觉 程序配不上这个域名，怎么破！&#xA;求各位大佬指点迷津。&lt;/p&gt;&#xA;</description>
@@ -78,10 +86,6 @@
       <title>有关go场景提问</title>
       <link>https://studygolang.com/topics/15584#reply1</link>
       <description>&lt;p&gt;前提：本人做前端，但是对go比较感兴趣&#xA;问题：就是想问大家一般用go是web开发还是偏向存储或者网络方面的研发&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>https://studygolang.com/interview/question</title>
-      <link>https://studygolang.com/resources/15532#reply0</link>
     </item>
     <item>
       <title>pycharm 2022永久激活版下载，亲测有效</title>
@@ -127,10 +131,6 @@
       <title>传入\u的正则表达式正常解析</title>
       <link>https://studygolang.com/topics/15580#reply0</link>
       <description>&lt;p&gt;go语言的正则表达式库传&lt;code&gt;\u&lt;/code&gt;字符串时会直接报错不支持，而源码里面写&lt;code&gt;\u&lt;/code&gt;是支持的，所以我想到了如下方案。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;regexp_unicode.go&lt;/code&gt; 内容如下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package tools&#xA;&#xA;import (&#xA;&#x9;&amp;quot;regexp&amp;quot;&#xA;&#x9;&amp;quot;strconv&amp;quot;&#xA;&#x9;&amp;quot;strings&amp;quot;&#xA;)&#xA;&#xA;var regUnicode = regexp.MustCompile(`\\u[\da-fA-F]{4}|\\U[\da-fA-F]{8}`)&#xA;&#xA;func ReplaceUnicode(s string) string {&#xA;&#x9;return regUnicode.ReplaceAllStringFunc(s, parseUnicode)&#xA;}&#xA;&#xA;// 找到unicode字符串,转换为utf8字节&#xA;func parseUnicode(s string) string {&#xA;&#x9;i, err := strconv.ParseUint(s[2:], 16, 32)&#xA;&#x9;if err != nil || i &amp;gt; 0x10ffff {&#xA;&#x9;&#x9;return s // 转换错误,或者超出定义范围返回原字符串&#xA;&#x9;}&#xA;&#xA;&#x9;/* https://en.wikipedia.org/wiki/UTF-8, 根据如下规则进行转换&#xA;&#x9;First code point  Last code point   Byte 1    Byte 2    Byte 3    Byte 4&#xA;&#x9;          U+0000           U+007F  0xxxxxxx&#xA;&#x9;          U+0080           U+07FF  110xxxxx  10xxxxxx&#xA;&#x9;          U+0800           U+FFFF  1110xxxx  10xxxxxx  10xxxxxx&#xA;&#x9;         U+10000   [nb 2]U+10FFFF  11110xxx  10xxxxxx  10xxxxxx  10xxxxxx&#xA;&#x9;*/&#xA;&#x9;const (&#xA;&#x9;&#x9;mask0         = 0b01111111             // &amp;lt; 0x80    时的Byte 1掩码&#xA;&#x9;&#x9;mask1, mask11 = 0b11000000, 0b00011111 // &amp;lt; 0x80    时的Byte 1掩码&#xA;&#x9;&#x9;mask2, mask22 = 0b11100000, 0b00001111 // &amp;lt; 0x800   时的Byte 1掩码&#xA;&#x9;&#x9;mask3, mask33 = 0b11110000, 0b00000111 // &amp;lt; 0x10000 时的Byte 1掩码&#xA;&#x9;&#x9;mask4, mask44 = 0b10000000, 0b00111111 // 其他位的掩码&#xA;&#x9;)&#xA;&#x9;var str strings.Builder&#xA;&#x9;if i &amp;gt;= 0x10000 {&#xA;&#x9;&#x9;str.WriteByte(mask3 | byte(i&amp;gt;&amp;gt;18&amp;amp;mask33))&#xA;&#x9;&#x9;str.WriteByte(mask4 | byte(i&amp;gt;&amp;gt;12&amp;amp;mask44))&#xA;&#x9;&#x9;str.WriteByte(mask4 | byte(i&amp;gt;&amp;gt;6&amp;amp;mask44))&#xA;&#x9;&#x9;str.WriteByte(mask4 | byte(i&amp;amp;mask44))&#xA;&#x9;} else if i &amp;gt;= 0x800 {&#xA;&#x9;&#x9;str.WriteByte(mask2 | byte(i&amp;gt;&amp;gt;12&amp;amp;mask22))&#xA;&#x9;&#x9;str.WriteByte(mask4 | byte(i&amp;gt;&amp;gt;6&amp;amp;mask44))&#xA;&#x9;&#x9;str.WriteByte(mask4 | byte(i&amp;amp;mask44))&#xA;&#x9;} else if i &amp;gt;= 0x80 {&#xA;&#x9;&#x9;str.WriteByte(mask1 | byte(i&amp;gt;&amp;gt;6&amp;amp;mask11))&#xA;&#x9;&#x9;str.WriteByte(mask4 | byte(i&amp;amp;mask44))&#xA;&#x9;} else {&#xA;&#x9;&#x9;str.WriteByte(byte(i &amp;amp; mask0))&#xA;&#x9;}&#xA;&#x9;return str.String()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;regexp_unicode_test.go&lt;/code&gt; 测试代码如下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package tools&#xA;&#xA;import (&#xA;&#x9;&amp;quot;regexp&amp;quot;&#xA;&#x9;&amp;quot;testing&amp;quot;&#xA;)&#xA;&#xA;// go test -v -run TestReplaceUnicode&#xA;func TestReplaceUnicode(t *testing.T) {&#xA;&#x9;// 这种字符串只能在源码中使用,包含中文使用\u这种格式&#xA;&#x9;s0 := &amp;quot;^[\u4e00-\u9fa5\\w]{1,20}$&amp;quot;&#xA;&#x9;r0 := regexp.MustCompile(s0)&#xA;&#xA;&#x9;// 这种是外部传入\u格式字符,不经过转换regexp库会直接报错&#xA;&#x9;s1 := ReplaceUnicode(`^[\u4e00-\u9fa5\w]{1,20}$`)&#xA;&#x9;r1 := regexp.MustCompile(s1)&#xA;&#xA;&#x9;if s0 != s1 {&#xA;&#x9;&#x9;t.Fatal(&amp;quot;s0 != s1&amp;quot;)&#xA;&#x9;}&#xA;&#xA;&#x9;if r0.String() != r1.String() {&#xA;&#x9;&#x9;t.Fatal(&amp;quot;r0 != r1&amp;quot;)&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>穿透迷雾：未来的可观测性工具</title>
-      <link>https://studygolang.com/articles/35689#reply0</link>
     </item>
     <item>
       <title>安卓快速集成即时通聊天APP，只需几行代码轻松实现</title>
