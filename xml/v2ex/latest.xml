@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>想问下用过 Nexus5x 的有多少人🤣🤣🤣🤣🤣 - 奇思妙想</title>
+      <link>https://www.v2ex.com/t/858828</link>
+      <description>最近 n5x 丢回抽屉了（状态正常，能开机）</description>
+      <author>WOLFRAZOR</author>
+      <pubDate>10 Jun 2022 16:24:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>对 Java 之泛型通配符 ?extends T 的认知 和 ? super T 一些理解 - Java</title>
+      <link>https://www.v2ex.com/t/858827</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;&#xA;import java.util.ArrayList;&#xA;import java.util.List;&#xA;&#xA;public class App {&#xA;&#xA;    class A {&#xA;&#xA;    }&#xA;&#xA;    class B extends A {&#xA;&#xA;    }&#xA;&#xA;    class C extends B {&#xA;&#xA;    }&#xA;&#xA;    class D extends C {&#xA;&#xA;    }&#xA;&#xA;    public static void main(String[] args) {&#xA;        List&amp;lt;A&amp;gt; al = new ArrayList&amp;lt;A&amp;gt;();&#xA;        // 无法修改泛型继承关系&#xA;        al = new ArrayList&amp;lt;B&amp;gt;(); // 编译错误&#xA;        al.add(new A());&#xA;        al.add(new B());&#xA;        al.add(new C());&#xA;        A a = al.get(0);&#xA;&#xA;        // 声明 List&amp;lt;? extends A&amp;gt; , 实现可能是 继承 A 的任意类型&#xA;        List&amp;lt;? extends A&amp;gt; al1 = new ArrayList&amp;lt;A&amp;gt;() {&#xA;            {&#xA;                // 放入子类&#xA;                add(new B());&#xA;            }&#xA;        };&#xA;        al1 = new ArrayList&amp;lt;B&amp;gt;() {&#xA;&#xA;            {&#xA;                // 放入子类&#xA;                add(new C());&#xA;            }&#xA;        };&#xA;        al1 = new ArrayList&amp;lt;C&amp;gt;() {&#xA;&#xA;            {&#xA;                // 无法放入 B&#xA;                add(new B()); // 编译错误&#xA;                // 放入子类&#xA;                add(new D());&#xA;            }&#xA;        };&#xA;&#xA;        // 虽然编译器知道放入数据一定是继承 A&#xA;        // List&amp;lt;? extends A&amp;gt; al1 实现类一定是 List&amp;lt;A&amp;gt; 或 List&amp;lt;A 的子类&amp;gt;&#xA;        // 但是用户指定的实现不确定 比如 ArrayList&amp;lt;C&amp;gt; 无法放入 B 类型，会有类型转换错误&#xA;        al1.add(new A()); // 编译错误&#xA;        al1.add(new B()); // 编译错误&#xA;&#xA;        // 因为声明的 List&amp;lt;? extends A&amp;gt;, 编译器确定类型一定是 A&#xA;        A x = al1.get(0);&#xA;&#xA;        // 声明 List&amp;lt;? super D&amp;gt; , 实现可能是 D 的任意父类, 兼容放入 D 以及子类&#xA;        List&amp;lt;? super D&amp;gt; bl1 = new ArrayList&amp;lt;Object&amp;gt;() {&#xA;            {&#xA;                // 我放入和 D 类型无关的数据&#xA;                add(&#34;&#34;);&#xA;                add(new D());&#xA;            }&#xA;        };&#xA;        bl1 = new ArrayList&amp;lt;A&amp;gt;() {&#xA;            {&#xA;                add(new A());&#xA;                add(new D());&#xA;            }&#xA;        };&#xA;&#xA;        // 编译器知道实现一定是 D 的父类&#xA;        // 支持放入任意 D 和 所有继承 D 的类&#xA;        // List&amp;lt;? super D&amp;gt; 声明了编译器只能放入 D 和 D 的实现类型&#xA;        bl1.add(new A()); // 编译失败&#xA;        bl1.add(new D());&#xA;&#xA;        // 编译器无法获取确定实现类支持的数据类型,&#xA;        // 因为 List&amp;lt;? super D&amp;gt; bl1 可以是 List&amp;lt;D&amp;gt; 或 List&amp;lt;D 的父类&amp;gt; 的实现装载数据&#xA;        // 如果获取类型转换为 D 会有类型转换错误&#xA;        D b = bl1.get(0); // 编译错误&#xA;        Object o = bl1.get(0); // 所有类型的父类是 Object 所以支持&#xA;        // 需要人为强制转换, 有类型转换异常风险&#xA;        D b1 = (D) bl1.get(0);&#xA;&#xA;    }&#xA;}&#xA;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>Kaiv2</author>
+      <pubDate>10 Jun 2022 16:22:38 +0000</pubDate>
+    </item>
+    <item>
       <title>各位长跑的步频是多少？ 基普乔格的步频是多少呢？ - 跑步</title>
       <link>https://www.v2ex.com/t/858826</link>
       <author>sciel</author>

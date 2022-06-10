@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "想问下用过 Nexus5x 的有多少人🤣🤣🤣🤣🤣 - 奇思妙想",
+      "Link": "https://www.v2ex.com/t/858828",
+      "Description": "最近 n5x 丢回抽屉了（状态正常，能开机）",
+      "Author": "WOLFRAZOR",
+      "PubDate": "2022-06-10T16:24:52Z"
+    },
+    {
+      "Title": "对 Java 之泛型通配符 ?extends T 的认知 和 ? super T 一些理解 - Java",
+      "Link": "https://www.v2ex.com/t/858827",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-java\"\u003e\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class App {\n\n    class A {\n\n    }\n\n    class B extends A {\n\n    }\n\n    class C extends B {\n\n    }\n\n    class D extends C {\n\n    }\n\n    public static void main(String[] args) {\n        List\u0026lt;A\u0026gt; al = new ArrayList\u0026lt;A\u0026gt;();\n        // 无法修改泛型继承关系\n        al = new ArrayList\u0026lt;B\u0026gt;(); // 编译错误\n        al.add(new A());\n        al.add(new B());\n        al.add(new C());\n        A a = al.get(0);\n\n        // 声明 List\u0026lt;? extends A\u0026gt; , 实现可能是 继承 A 的任意类型\n        List\u0026lt;? extends A\u0026gt; al1 = new ArrayList\u0026lt;A\u0026gt;() {\n            {\n                // 放入子类\n                add(new B());\n            }\n        };\n        al1 = new ArrayList\u0026lt;B\u0026gt;() {\n\n            {\n                // 放入子类\n                add(new C());\n            }\n        };\n        al1 = new ArrayList\u0026lt;C\u0026gt;() {\n\n            {\n                // 无法放入 B\n                add(new B()); // 编译错误\n                // 放入子类\n                add(new D());\n            }\n        };\n\n        // 虽然编译器知道放入数据一定是继承 A\n        // List\u0026lt;? extends A\u0026gt; al1 实现类一定是 List\u0026lt;A\u0026gt; 或 List\u0026lt;A 的子类\u0026gt;\n        // 但是用户指定的实现不确定 比如 ArrayList\u0026lt;C\u0026gt; 无法放入 B 类型，会有类型转换错误\n        al1.add(new A()); // 编译错误\n        al1.add(new B()); // 编译错误\n\n        // 因为声明的 List\u0026lt;? extends A\u0026gt;, 编译器确定类型一定是 A\n        A x = al1.get(0);\n\n        // 声明 List\u0026lt;? super D\u0026gt; , 实现可能是 D 的任意父类, 兼容放入 D 以及子类\n        List\u0026lt;? super D\u0026gt; bl1 = new ArrayList\u0026lt;Object\u0026gt;() {\n            {\n                // 我放入和 D 类型无关的数据\n                add(\"\");\n                add(new D());\n            }\n        };\n        bl1 = new ArrayList\u0026lt;A\u0026gt;() {\n            {\n                add(new A());\n                add(new D());\n            }\n        };\n\n        // 编译器知道实现一定是 D 的父类\n        // 支持放入任意 D 和 所有继承 D 的类\n        // List\u0026lt;? super D\u0026gt; 声明了编译器只能放入 D 和 D 的实现类型\n        bl1.add(new A()); // 编译失败\n        bl1.add(new D());\n\n        // 编译器无法获取确定实现类支持的数据类型,\n        // 因为 List\u0026lt;? super D\u0026gt; bl1 可以是 List\u0026lt;D\u0026gt; 或 List\u0026lt;D 的父类\u0026gt; 的实现装载数据\n        // 如果获取类型转换为 D 会有类型转换错误\n        D b = bl1.get(0); // 编译错误\n        Object o = bl1.get(0); // 所有类型的父类是 Object 所以支持\n        // 需要人为强制转换, 有类型转换异常风险\n        D b1 = (D) bl1.get(0);\n\n    }\n}\n\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "Kaiv2",
+      "PubDate": "2022-06-10T16:22:38Z"
+    },
+    {
       "Title": "各位长跑的步频是多少？ 基普乔格的步频是多少呢？ - 跑步",
       "Link": "https://www.v2ex.com/t/858826",
       "Description": "",
