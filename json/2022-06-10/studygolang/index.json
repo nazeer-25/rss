@@ -74,6 +74,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "有关go场景提问",
+      "Link": "https://studygolang.com/topics/15584#reply1",
+      "Description": "\u003cp\u003e前提：本人做前端，但是对go比较感兴趣\n问题：就是想问大家一般用go是web开发还是偏向存储或者网络方面的研发\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "首批“先进级”！优维科技通过信通院可观测性最高级评测",
+      "Link": "https://studygolang.com/articles/35692#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "把gin validator验证翻译器组成中间件访问频繁会造成panic concurrent map write",
       "Link": "https://studygolang.com/topics/15589#reply6",
       "Description": "\u003cp\u003e参考go语言编程之旅博客开发一章，把gin validator验证翻译器做成中间件放到r.Use(middleware.Translations())里当后台访问比较频繁的时候会直接panic 提示bad map state 和concurrent map write。这种情况下怎么解决  新人求教\u003c/p\u003e\n",
@@ -116,16 +130,23 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "有关go场景提问",
-      "Link": "https://studygolang.com/topics/15584#reply1",
-      "Description": "\u003cp\u003e前提：本人做前端，但是对go比较感兴趣\n问题：就是想问大家一般用go是web开发还是偏向存储或者网络方面的研发\u003c/p\u003e\n",
+      "Title": "defer使用",
+      "Link": "https://studygolang.com/resources/15533#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "首批“先进级”！优维科技通过信通院可观测性最高级评测",
-      "Link": "https://studygolang.com/articles/35692#reply0",
+      "Title": "https://studygolang.com/interview/question",
+      "Link": "https://studygolang.com/resources/15532#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Golang for range 和闭包的坑",
+      "Link": "https://studygolang.com/articles/35691#reply0",
+      "Description": "\u003ch4\u003e一、for range 坑：\u003c/h4\u003e\n\n\u003cp\u003e例子：将数组元素的地址存入到指针map中\u003c/p\u003e\n\n\u003cp\u003e上代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\tarr := []int{1, 2, 3} // 普通数组\n\n\tm := make(map[int]*int) // 指针map\n\tfor i, v := range arr {\n               // fmt.Println(\u0026amp;v)    // 如果在这里打印v的内存地址的话，会发现3次的地址都是一样的\n\t\tm[i] = \u0026amp;v\n\t}\n\n\tfor _, v := range m {\n\t\tfmt.Println(*v) // 输出数据 3 3 3\n\t}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e可以看出输出结果，并非预期那样 1 2 3.\u003c/p\u003e\n\n\u003cp\u003e从输出的数据可以推测，好像每次都输出了最的原始3 。\u003c/p\u003e\n\n\u003cp\u003e** 原因是什么：**\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e其实原因是循环变量的作用域的规则限制。在上面的程序中，v 在 for 循环引进的一个块作用域内进行声明。在循环里创建的所有函数变量共享相同的变量，就是一个可访问的存储位置，而不是固定的值。\n\n假设 v 变量的地址在 0xc0000180c0  上， for 循环在迭代过程中，所有变量值都是在这地址上迭代的。因此存入map中的地址3次都是一样的 0xc0000180c0\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e如何解决\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003e\tarr := []int{1, 2, 3} // 普通数组\n\n\tm := make(map[int]*int) // 指针map\n\tfor i, v := range arr {\n\t\tfmt.Println(\u0026amp;v)\n\t\tvTmp := v    // 修改点\n\t\tm[i] = \u0026amp;vTmp // 修改点\n\t}\n\n\tfor _, v := range m {\n\t\tfmt.Println(*v) // 输出数据 3 3 3\n\t}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e在上面的程序中，for循环语句引入了新的词法块，循环变量v在这个词法块中被声明。在该循环中生成的所有函数值都共享相同的循环变量。需要注意，函数值中记录的是循环变量的内存地址，而不是循环变量某一时刻的值。以v为例，后续的迭代会不断更新v的值，当操作执行时，for循环已完成，v中存储的值等于最后一次迭代的值。这意味着，每次都是相同的目录。\u003c/p\u003e\n\n\u003cp\u003e通常，为了解决这个问题，我们会引入一个与循环变量同名的局部变量，作为循环变量的副本。比如下面的变量dir，虽然这看起来很奇怪，但却很有用。\u003c/p\u003e\n\n\u003ch4\u003e二、for range  使用闭包 坑：\u003c/h4\u003e\n\n\u003cp\u003e错误示例：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\ts := []int{1, 2, 3}\n\tfor _, v := range s {\n\t\tgo func() {\n\t\t\tfmt.Println(v) // 输出结果3 3 3\n\t\t}()\n\t}\n\tselect {}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e正确使用\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\ts := []int{1, 2, 3}\n\tfor _, v := range s {\n\t\tgo func(v int) {\n\t\t\tfmt.Println(v) // 输出结果3 1 2\n\t\t}(v)\n\t}\n\tselect {}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e**  原因：**\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e在没有将变量 v 的拷贝值传进匿名函数之前，只能获取最后一次循环的值,这是新手最容易遇到的坑。\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e三、 匿名函数列表：\u003c/h4\u003e\n\n\u003cp\u003e错误示例：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\tvar slice []func()  // 匿名函数列表\n\tsli := []int{1, 2, 3, 4, 5}\n\tfor _, v := range sli {\n\t\tfmt.Println(\u0026amp;v)\n\t\tslice = append(slice, func() {\n\t\t\tfmt.Println(v * v) // 直接打印结果\n\t\t})\n\t}\n\n\tfor _, val := range slice {\n\t\tval()\n\t}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出结果：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e0xc0000b2008\n0xc0000b2008\n0xc0000b2008\n0xc0000b2008\n0xc0000b2008\n25\n25\n25\n25\n25\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e修改后代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\tvar slice []func()  // 匿名函数列表\n\tsli := []int{1, 2, 3, 4, 5}\n\tfor _, v := range sli {\n\t\tt := v\n\t\tfmt.Println(\u0026amp;t) // 内存次之不同\n\t\tslice = append(slice, func() {\n\t\t\tfmt.Println(t * t) // 直接打印结果\n\t\t})\n\t}\n\n\tfor _, val := range slice {\n\t\tval()\n\t}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出结果：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e0xc0000b2008\n0xc0000b2020\n0xc0000b2028\n0xc0000b2030\n0xc0000b2038\n1\n4\n9\n16\n25\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e** 原因：**\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e每次 append 操作仅将匿名函数放入到列表中，但并未执行，并且引用的变量都是 v，随着 v 的改变匿名函数中的 v 也在改变，所以当执行这些函数时，他们读取的都是环境变量 v 最后一次的值。解决的方法就是每次复制变量 v 然后传到匿名函数中，让闭包的环境变量不相同。\n\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e四、defer调用闭包\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport \u0026quot;fmt\u0026quot;\n\nfunc main() {\n    x, y := 1, 2\n\n    defer func(a int) { \n        fmt.Printf(\u0026quot;x:%d,y:%d\\n\u0026quot;, a, y)  // y 为闭包引用\n    }(x)      // 复制 x 的值\n\n    x += 100\n    y += 100\n    fmt.Println(x, y)\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出结果：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e101 102\nx:1,y:102\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这不是go或defer本身导致的，而是因为它们都会等待循环结束后，再执行函数值。\u003c/p\u003e\n\n\u003cp\u003e*** x和y的值代表了复制与引用的区别，什么时候使用复制什么时候使用引用需要谨慎考虑。***\u003c/p\u003e\n\n\u003cp\u003e参考文档：\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://www.jianshu.com/p/fa21e6fada70\"\u003e简书-田飞雨\u003c/a\u003e\n\u003ca href=\"https://www.jianshu.com/p/0e2e353b6c7d\"\u003e简书-gurlan\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -161,27 +182,6 @@
       "Title": "📖 Go相关公众号文章每日推荐【2022-06-08】",
       "Link": "https://studygolang.com/topics/15587#reply0",
       "Description": "\u003cp\u003e一、Go语言中文网\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/P_bPVzfZZhpokoLXllGxdw\"\u003eGo：从一个data race问题学到的\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e二、脑子进煎鱼了\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/uo23gKC_Lbm0JNe5_YbVfA\"\u003eGo 要加个箭头语法，这下更像 PHP 了！\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/dqtwCx7bDuAxsEUvHTigAg\"\u003e从 Go log 库到 Zap，怎么打造出好用又实用的 Logger\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e三、Go招聘\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/IUFf3Owgra4BQPh8lLDxSA\"\u003e2022年 需求中最佳的DevOps 工具\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e四、网管叨bi叨\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/ALHrgbbBrTuFo6PLj3bczQ\"\u003e做 Go 代码Review时，建议先检查这几个错误，太坑了\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e五、亚军进化史\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/p9AOozN3PcZX0pdX-g3OCA\"\u003eGo技术日报(2022-06-07)——go程序员开发效率神器汇总\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e六、云加社区\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/svKtrTbEU-2MsChqvZKjMA\"\u003e码住！Golang并发安全与引用传递总结\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e七、新亮笔记\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/OXtYDF8aeGS7gkLqC127Gw\"\u003e非功能需求的测试\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e八、小白debug\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/iY6aM5kAw7NmmdYHDBPw4Q\"\u003e聊聊索引失效的10种场景，太坑了\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e九、榫卯江湖\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/BT1efaHicwqHWrwDtT_f5w\"\u003eTetragon进程阻断原理\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "defer使用",
-      "Link": "https://studygolang.com/resources/15533#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "https://studygolang.com/interview/question",
-      "Link": "https://studygolang.com/resources/15532#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Golang for range 和闭包的坑",
-      "Link": "https://studygolang.com/articles/35691#reply0",
-      "Description": "\u003ch4\u003e一、for range 坑：\u003c/h4\u003e\n\n\u003cp\u003e例子：将数组元素的地址存入到指针map中\u003c/p\u003e\n\n\u003cp\u003e上代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\tarr := []int{1, 2, 3} // 普通数组\n\n\tm := make(map[int]*int) // 指针map\n\tfor i, v := range arr {\n               // fmt.Println(\u0026amp;v)    // 如果在这里打印v的内存地址的话，会发现3次的地址都是一样的\n\t\tm[i] = \u0026amp;v\n\t}\n\n\tfor _, v := range m {\n\t\tfmt.Println(*v) // 输出数据 3 3 3\n\t}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e可以看出输出结果，并非预期那样 1 2 3.\u003c/p\u003e\n\n\u003cp\u003e从输出的数据可以推测，好像每次都输出了最的原始3 。\u003c/p\u003e\n\n\u003cp\u003e** 原因是什么：**\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e其实原因是循环变量的作用域的规则限制。在上面的程序中，v 在 for 循环引进的一个块作用域内进行声明。在循环里创建的所有函数变量共享相同的变量，就是一个可访问的存储位置，而不是固定的值。\n\n假设 v 变量的地址在 0xc0000180c0  上， for 循环在迭代过程中，所有变量值都是在这地址上迭代的。因此存入map中的地址3次都是一样的 0xc0000180c0\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e如何解决\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003e\tarr := []int{1, 2, 3} // 普通数组\n\n\tm := make(map[int]*int) // 指针map\n\tfor i, v := range arr {\n\t\tfmt.Println(\u0026amp;v)\n\t\tvTmp := v    // 修改点\n\t\tm[i] = \u0026amp;vTmp // 修改点\n\t}\n\n\tfor _, v := range m {\n\t\tfmt.Println(*v) // 输出数据 3 3 3\n\t}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e在上面的程序中，for循环语句引入了新的词法块，循环变量v在这个词法块中被声明。在该循环中生成的所有函数值都共享相同的循环变量。需要注意，函数值中记录的是循环变量的内存地址，而不是循环变量某一时刻的值。以v为例，后续的迭代会不断更新v的值，当操作执行时，for循环已完成，v中存储的值等于最后一次迭代的值。这意味着，每次都是相同的目录。\u003c/p\u003e\n\n\u003cp\u003e通常，为了解决这个问题，我们会引入一个与循环变量同名的局部变量，作为循环变量的副本。比如下面的变量dir，虽然这看起来很奇怪，但却很有用。\u003c/p\u003e\n\n\u003ch4\u003e二、for range  使用闭包 坑：\u003c/h4\u003e\n\n\u003cp\u003e错误示例：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\ts := []int{1, 2, 3}\n\tfor _, v := range s {\n\t\tgo func() {\n\t\t\tfmt.Println(v) // 输出结果3 3 3\n\t\t}()\n\t}\n\tselect {}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e正确使用\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\ts := []int{1, 2, 3}\n\tfor _, v := range s {\n\t\tgo func(v int) {\n\t\t\tfmt.Println(v) // 输出结果3 1 2\n\t\t}(v)\n\t}\n\tselect {}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e**  原因：**\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e在没有将变量 v 的拷贝值传进匿名函数之前，只能获取最后一次循环的值,这是新手最容易遇到的坑。\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e三、 匿名函数列表：\u003c/h4\u003e\n\n\u003cp\u003e错误示例：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\tvar slice []func()  // 匿名函数列表\n\tsli := []int{1, 2, 3, 4, 5}\n\tfor _, v := range sli {\n\t\tfmt.Println(\u0026amp;v)\n\t\tslice = append(slice, func() {\n\t\t\tfmt.Println(v * v) // 直接打印结果\n\t\t})\n\t}\n\n\tfor _, val := range slice {\n\t\tval()\n\t}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出结果：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e0xc0000b2008\n0xc0000b2008\n0xc0000b2008\n0xc0000b2008\n0xc0000b2008\n25\n25\n25\n25\n25\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e修改后代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\tvar slice []func()  // 匿名函数列表\n\tsli := []int{1, 2, 3, 4, 5}\n\tfor _, v := range sli {\n\t\tt := v\n\t\tfmt.Println(\u0026amp;t) // 内存次之不同\n\t\tslice = append(slice, func() {\n\t\t\tfmt.Println(t * t) // 直接打印结果\n\t\t})\n\t}\n\n\tfor _, val := range slice {\n\t\tval()\n\t}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出结果：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e0xc0000b2008\n0xc0000b2020\n0xc0000b2028\n0xc0000b2030\n0xc0000b2038\n1\n4\n9\n16\n25\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e** 原因：**\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e每次 append 操作仅将匿名函数放入到列表中，但并未执行，并且引用的变量都是 v，随着 v 的改变匿名函数中的 v 也在改变，所以当执行这些函数时，他们读取的都是环境变量 v 最后一次的值。解决的方法就是每次复制变量 v 然后传到匿名函数中，让闭包的环境变量不相同。\n\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e四、defer调用闭包\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport \u0026quot;fmt\u0026quot;\n\nfunc main() {\n    x, y := 1, 2\n\n    defer func(a int) { \n        fmt.Printf(\u0026quot;x:%d,y:%d\\n\u0026quot;, a, y)  // y 为闭包引用\n    }(x)      // 复制 x 的值\n\n    x += 100\n    y += 100\n    fmt.Println(x, y)\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出结果：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e101 102\nx:1,y:102\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这不是go或defer本身导致的，而是因为它们都会等待循环结束后，再执行函数值。\u003c/p\u003e\n\n\u003cp\u003e*** x和y的值代表了复制与引用的区别，什么时候使用复制什么时候使用引用需要谨慎考虑。***\u003c/p\u003e\n\n\u003cp\u003e参考文档：\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://www.jianshu.com/p/fa21e6fada70\"\u003e简书-田飞雨\u003c/a\u003e\n\u003ca href=\"https://www.jianshu.com/p/0e2e353b6c7d\"\u003e简书-gurlan\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
