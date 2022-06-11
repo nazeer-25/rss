@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Flutter 中如何优雅的封装 Widget？ - 问与答</title>
+      <link>https://www.v2ex.com/t/858958</link>
+      <description>&lt;p&gt;举个栗子，封装一个 Text Widget 。&lt;/p&gt;&#xA;&lt;p&gt;方式一&lt;/p&gt;&#xA;&lt;p&gt;优点：&lt;/p&gt;&#xA;&lt;p&gt;不用担心为了自定义某个预设样式，而导致所有预设样式丢失。&lt;/p&gt;&#xA;&lt;p&gt;缺点：&lt;/p&gt;&#xA;&lt;p&gt;这里只是暴露了 Text 控件的几个属性，实际开发中一个 Widget 可能需要暴露很多属性，后面扩展下来，属性列表可能会拉的很长。在这里极限情况就要暴露 Text 控件的所有属性给外界。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class TextWidget extends StatelessWidget {&#xA;  final String text;&#xA;  final Color? color;&#xA;  final double? fontSize;&#xA;  final FontWeight? fontWeight;&#xA;&#xA;  const TextWidget({&#xA;    Key? key,&#xA;    required this.text,&#xA;    this.color = Colors.black,&#xA;    this.fontSize = 16,&#xA;    this.fontWeight = FontWeight.normal,&#xA;  }) : super(key: key);&#xA;&#xA;  @override&#xA;  Widget build(BuildContext context) {&#xA;    return Text(&#xA;      text,&#xA;      style: TextStyle(&#xA;        color: color,&#xA;        fontSize: fontSize,&#xA;        fontWeight: fontWeight,&#xA;      ),&#xA;    );&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;方式二&lt;/p&gt;&#xA;&lt;p&gt;优点：&lt;/p&gt;&#xA;&lt;p&gt;不用暴露太多属性，直接暴露一个 textStyle 属性，需要用到 text 的什么属性，使用者自己传入 textStyle 即可。&lt;/p&gt;&#xA;&lt;p&gt;缺点：&lt;/p&gt;&#xA;&lt;p&gt;一旦 Widget 使用者，需要传入 textStyle 自定义部分样式，会丢失预设的 textStyle 所有默认样式，所有样式都需要重新传，对于只改其中单个或少数几个样式来说，很不方便。&lt;/p&gt;&#xA;&lt;p&gt;这里预设了颜色、字号、字重这三个样式属性，使用者如果仅仅需要修改颜色，那在将自定义 color 传入 textStyle 的同时，还要传入字号、字重这俩属性默认的值。&lt;/p&gt;&#xA;&lt;p&gt;这里预设样式比较少还好。如果预设样式列表特别长，有十几个甚至更多属性，为了自定义其中一个属性的样式，需要重新传所有样式，就很难受很不友好。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class TextWidget extends StatelessWidget {&#xA;  final String text;&#xA;  final TextStyle textStyle;&#xA;&#xA;  const TextWidget({&#xA;    Key? key,&#xA;    required this.text,&#xA;    this.textStyle = const TextStyle(&#xA;      color: Colors.black,&#xA;      fontSize: 16,&#xA;      fontWeight: FontWeight.normal,&#xA;    ),&#xA;  }) : super(key: key);&#xA;&#xA;  @override&#xA;  Widget build(BuildContext context) {&#xA;    return Text(text, style: textStyle);&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>Trello</author>
+      <pubDate>11 Jun 2022 11:47:55 +0000</pubDate>
+    </item>
+    <item>
       <title>吐嘈一个奇葩的一天 - 问与答</title>
       <link>https://www.v2ex.com/t/858957</link>
       <description>&lt;p&gt;被一个奇葩惊呆了。因为同路，就顺路捎了一个没开车的朋友回家，路过奶茶店的时候问我喝不喝奶茶，他下去买，回来告诉我十块钱让我支付宝转他。刚才回家一看奶茶杯子上明明写着八块钱！我捎了十几公里都没想过要收油费，就路过下去买个奶茶还要赚个手续费的吗？&lt;/p&gt;&#xA;</description>
