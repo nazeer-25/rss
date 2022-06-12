@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "电信千兆宽带有线跑不满无线能跑满是什么原因 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/859174",
+      "Description": "\u003cp\u003e全 CAT6 网线，设备：电信千兆光猫桥接、N5105 4 口 I225V3 ESXI 爱快主路由（直通）+openwrt 旁路由（直通） 、TPLINK 2.5G8 口交换机，TPLINK8 口千兆交换机、TPLINK XDR 5480 、K2P 老毛子、PC1 英特尔 2.5G 网卡 、PC2 螃蟹千兆网卡、手机 一加 9PRO\u003cbr/\u003e\n各种姿势有线都跑不满千兆，但无线可以，搞不懂什么原因\n各种组合测试结果如下：\n1 、PC1-2.5G 交换机-爱快-光猫 890M\n2 、PC1-2.5G 交换机-openwrt 网关-爱快-光猫 890M\n3 、PC1-2.5G 交换机-openwrt iperf3 测试 上下行单线程都跑满 2.37G\n4 、PC1-光猫直拨 890M\n5 、PC1-K2P-光猫 890M\n6 、PC1-2.5G 交换机-PC2 iperf3 940M\n7 、替换成千兆交换机结果差不多\n8 、PC2 重复上面测试结果与 PC1 差不多\n9 、一加 9PRO-XDR5480-2.5G 交换机-爱快-光猫，940+m\n10 、一加 9PRO-XDR5480-2.5G 交换机-openwrt 网关-爱快-光猫，940+m\n11 、一加 9PRO-XDR5480-2.5G 交换机-openwrt iperf3 1.6G\n12 、一加 9PRO-XDR5480-2.5G 交换机-PC1 1.6G\u003c/p\u003e\n\u003cp\u003e无线能跑满千兆，那么光纤线路没问题，光猫没问题，爱快主路由没问题，交换机-爱快-光猫这段网线也是没问题\n有线 iperf3 内网也能跑满，PC-2 交换机的这段链路也没问题，所以实在想不明白有线为什么会差那么几十 M\u003c/p\u003e\n\u003cp\u003e和 MTU 有没关系？所有设备 MTU 都是默认值没改过\u003c/p\u003e\n\u003cp\u003e另外想问下现在广东地区 speedtest 还有什么电信能跑满千兆的节点，以前广州深圳电信的节点都没了，只有一个广州电信 5G 的实在拉跨，现在只发现南宁移动的节点能跑满\u003c/p\u003e\n",
+      "Author": "dada0627",
+      "PubDate": "2022-06-12T17:56:34Z"
+    },
+    {
       "Title": "关于如何在 Golang 中实现抽象类 - 程序员",
       "Link": "https://www.v2ex.com/t/859173",
       "Description": "\u003cp\u003e假设现在我们定义了一个接口\u003ccode\u003eI\u003c/code\u003e,有两个方法\u003ccode\u003eFoo\u003c/code\u003e,\u003ccode\u003eBar\u003c/code\u003e, 结构体\u003ccode\u003eParent\u003c/code\u003e实现了 \u003ccode\u003eFoo\u003c/code\u003e，而\u003ccode\u003eBar\u003c/code\u003e作为抽象方法由子类实现，\n示例代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003epackage main\n\ntype I interface {\n\tFoo()\n\tBar() \n}\n\ntype Parent struct {\n\tI\n}\n\nfunc (p *Parent) Foo() {\n\tp.Bar()\n}\n\n\n\ntype Child struct {\n\tParent\n}\n\nfunc (c *Child) Bar() {\n\tfmt.Println(\"Child.Bar()\")\n}\n\nfunc main() {\n\tc := \u0026amp;Child{\n\t\tParent: Parent{},\n\t}\n\tc.I = c // 如果注释掉这几句会提示空指针异常\n\tc.Foo()\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e输出如下:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eChild.Bar()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e问题：\n1.上面的代码实现了类似\u003ccode\u003eJava\u003c/code\u003e风格的抽象类，但是在\u003ccode\u003emain\u003c/code\u003e方法中的这句代码没看懂\u003ccode\u003ec.I = c\u003c/code\u003e，这句代码的本质是做了什么事情？为什么\u003ccode\u003ec.I = c\u003c/code\u003e就会报空指针异常\u003c/p\u003e\n",

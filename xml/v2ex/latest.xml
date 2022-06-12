@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>电信千兆宽带有线跑不满无线能跑满是什么原因 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/859174</link>
+      <description>&lt;p&gt;全 CAT6 网线，设备：电信千兆光猫桥接、N5105 4 口 I225V3 ESXI 爱快主路由（直通）+openwrt 旁路由（直通） 、TPLINK 2.5G8 口交换机，TPLINK8 口千兆交换机、TPLINK XDR 5480 、K2P 老毛子、PC1 英特尔 2.5G 网卡 、PC2 螃蟹千兆网卡、手机 一加 9PRO&lt;br/&gt;&#xA;各种姿势有线都跑不满千兆，但无线可以，搞不懂什么原因&#xA;各种组合测试结果如下：&#xA;1 、PC1-2.5G 交换机-爱快-光猫 890M&#xA;2 、PC1-2.5G 交换机-openwrt 网关-爱快-光猫 890M&#xA;3 、PC1-2.5G 交换机-openwrt iperf3 测试 上下行单线程都跑满 2.37G&#xA;4 、PC1-光猫直拨 890M&#xA;5 、PC1-K2P-光猫 890M&#xA;6 、PC1-2.5G 交换机-PC2 iperf3 940M&#xA;7 、替换成千兆交换机结果差不多&#xA;8 、PC2 重复上面测试结果与 PC1 差不多&#xA;9 、一加 9PRO-XDR5480-2.5G 交换机-爱快-光猫，940+m&#xA;10 、一加 9PRO-XDR5480-2.5G 交换机-openwrt 网关-爱快-光猫，940+m&#xA;11 、一加 9PRO-XDR5480-2.5G 交换机-openwrt iperf3 1.6G&#xA;12 、一加 9PRO-XDR5480-2.5G 交换机-PC1 1.6G&lt;/p&gt;&#xA;&lt;p&gt;无线能跑满千兆，那么光纤线路没问题，光猫没问题，爱快主路由没问题，交换机-爱快-光猫这段网线也是没问题&#xA;有线 iperf3 内网也能跑满，PC-2 交换机的这段链路也没问题，所以实在想不明白有线为什么会差那么几十 M&lt;/p&gt;&#xA;&lt;p&gt;和 MTU 有没关系？所有设备 MTU 都是默认值没改过&lt;/p&gt;&#xA;&lt;p&gt;另外想问下现在广东地区 speedtest 还有什么电信能跑满千兆的节点，以前广州深圳电信的节点都没了，只有一个广州电信 5G 的实在拉跨，现在只发现南宁移动的节点能跑满&lt;/p&gt;&#xA;</description>
+      <author>dada0627</author>
+      <pubDate>12 Jun 2022 17:56:34 +0000</pubDate>
+    </item>
+    <item>
       <title>关于如何在 Golang 中实现抽象类 - 程序员</title>
       <link>https://www.v2ex.com/t/859173</link>
       <description>&lt;p&gt;假设现在我们定义了一个接口&lt;code&gt;I&lt;/code&gt;,有两个方法&lt;code&gt;Foo&lt;/code&gt;,&lt;code&gt;Bar&lt;/code&gt;, 结构体&lt;code&gt;Parent&lt;/code&gt;实现了 &lt;code&gt;Foo&lt;/code&gt;，而&lt;code&gt;Bar&lt;/code&gt;作为抽象方法由子类实现，&#xA;示例代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main&#xA;&#xA;type I interface {&#xA;&#x9;Foo()&#xA;&#x9;Bar() &#xA;}&#xA;&#xA;type Parent struct {&#xA;&#x9;I&#xA;}&#xA;&#xA;func (p *Parent) Foo() {&#xA;&#x9;p.Bar()&#xA;}&#xA;&#xA;&#xA;&#xA;type Child struct {&#xA;&#x9;Parent&#xA;}&#xA;&#xA;func (c *Child) Bar() {&#xA;&#x9;fmt.Println(&#34;Child.Bar()&#34;)&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;c := &amp;amp;Child{&#xA;&#x9;&#x9;Parent: Parent{},&#xA;&#x9;}&#xA;&#x9;c.I = c // 如果注释掉这几句会提示空指针异常&#xA;&#x9;c.Foo()&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;输出如下:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;Child.Bar()&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;问题：&#xA;1.上面的代码实现了类似&lt;code&gt;Java&lt;/code&gt;风格的抽象类，但是在&lt;code&gt;main&lt;/code&gt;方法中的这句代码没看懂&lt;code&gt;c.I = c&lt;/code&gt;，这句代码的本质是做了什么事情？为什么&lt;code&gt;c.I = c&lt;/code&gt;就会报空指针异常&lt;/p&gt;&#xA;</description>
