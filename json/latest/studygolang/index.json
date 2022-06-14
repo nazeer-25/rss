@@ -95,6 +95,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "Go 加入箭头函数，你支持吗？",
+      "Link": "https://studygolang.com/topics/15515#reply23",
+      "Description": "\u003cp\u003e大家好，我是 polarisxu。\u003c/p\u003e\n\n\u003cp\u003eGo 中有匿名函数，但即使是简单的函数，也需要完整的编写函数：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc (x, y int) bool { return x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e但很多其他语言，有简写方式，这就是轻量级匿名函数语法。即：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e(x, y) =\u0026gt; { x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e即箭头函数。如果你没有见过这样的语法，咋一看会有点懵？！\u003c/p\u003e\n\n\u003cp\u003e当然，目前还是在激烈讨论阶段，能不能最终引入还未知。\u003c/p\u003e\n\n\u003cp\u003e我个人感觉，Go 还是别增加语法糖，搞得语言很复杂了，只有一种解决方案没啥不好，你觉得呢？\u003c/p\u003e\n\n\u003cp\u003e提案讨论地址：\u003ca href=\"https://github.com/golang/go/issues/21498\"\u003ehttps://github.com/golang/go/issues/21498\u003c/a\u003e。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "Go 1.19 Beta1 发布，这个改动挺有意思",
       "Link": "https://studygolang.com/topics/15598#reply0",
       "Description": "\u003cp\u003e大家好，我是 polarisxu。\u003c/p\u003e\n\n\u003cp\u003e近日，Go1.19 进入了冻结状态，即不接受新功能，同时发布了 Go1.19 Beta1 版本。\u003c/p\u003e\n\n\u003cp\u003e试用 Go1.19 Beta1 最好的方式是通过以下命令安装：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003ego install golang.org/dl/go1.19beta1@latest\ngo1.19beta1 download\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220612/46e2e71b14304aaa394b67004b2e550e.png\" alt=\"go1.19beta1.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e相比 Go1.18，Go1.19 的新特性比较少，有以下几个点值得关注：\u003c/p\u003e\n\n\u003cp\u003e1）Doc Comments，这个在今年年初就有开始设计，主要提供了一些更友好的样式支持。完整的设计文档见：\u003ca href=\"https://github.com/golang/proposal/blob/master/design/51082-godocfmt.md\"\u003ehttps://github.com/golang/proposal/blob/master/design/51082-godocfmt.md\u003c/a\u003e。比如简单的链接样式：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220612/67753e4356a359b19199564b5503b4dd.png\" alt=\"doc-comment.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e2）泛型相关问题、改进：\u003ca href=\"https://github.com/golang/go/issues?q=is%3Aissue+label%3Agenerics+milestone%3AGo1.19+is%3Aopen\"\u003ehttps://github.com/golang/go/issues?q=is%3Aissue+label%3Agenerics+milestone%3AGo1.19+is%3Aopen\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e3）Runtime 的一些变化，比如内存限制 \u003ccode\u003eruntime/debug.SetMemoryLimit\u003c/code\u003e，几个新的 runtime metric 等，此外，有一个比较有意思的改动：runtime 现在将根据 goroutine 的历史平均堆栈使用情况分配初始 goroutine 堆栈。这避免了在平均情况下需要的一些早期堆栈增长和复制，以换取在低于平均水平的 goroutine 上最多浪费 2 倍的空间。也就是说，goroutine 的栈使用情况会根据实际使用情况做调整，相关改动：\u003ca href=\"https://github.com/golang/go/commit/016d7552138077741a9c3fdadc73c0179f5d3ff7\"\u003ehttps://github.com/golang/go/commit/016d7552138077741a9c3fdadc73c0179f5d3ff7\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e4）默认提高文件描述符打开数限制，具体可以参考：\u003ca href=\"https://github.com/golang/go/issues/46279\"\u003ehttps://github.com/golang/go/issues/46279\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e5）内存模型做了更新：\u003ca href=\"https://tip.golang.org/ref/mem\"\u003ehttps://tip.golang.org/ref/mem\u003c/a\u003e，使得 Go 与 C、C++、Java、JavaScript、Rust、Swift 等语言使用的内存模型保持一致。\u003c/p\u003e\n\n\u003cp\u003e更多详细的变化可以参考 Go1.19 的 Release Notes：\u003ca href=\"https://tip.golang.org/doc/go1.19\"\u003ehttps://tip.golang.org/doc/go1.19\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e另外，目前 Go1.19 还有 200 Open 状态的 issue 没有解决：\u003ca href=\"https://github.com/golang/go/milestone/224\"\u003ehttps://github.com/golang/go/milestone/224\u003c/a\u003e。\u003c/p\u003e\n",
@@ -133,13 +140,6 @@
       "Title": "我是一只小小鸟",
       "Link": "https://studygolang.com/articles/35699#reply0",
       "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Go 加入箭头函数，你支持吗？",
-      "Link": "https://studygolang.com/topics/15515#reply23",
-      "Description": "\u003cp\u003e大家好，我是 polarisxu。\u003c/p\u003e\n\n\u003cp\u003eGo 中有匿名函数，但即使是简单的函数，也需要完整的编写函数：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc (x, y int) bool { return x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e但很多其他语言，有简写方式，这就是轻量级匿名函数语法。即：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e(x, y) =\u0026gt; { x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e即箭头函数。如果你没有见过这样的语法，咋一看会有点懵？！\u003c/p\u003e\n\n\u003cp\u003e当然，目前还是在激烈讨论阶段，能不能最终引入还未知。\u003c/p\u003e\n\n\u003cp\u003e我个人感觉，Go 还是别增加语法糖，搞得语言很复杂了，只有一种解决方案没啥不好，你觉得呢？\u003c/p\u003e\n\n\u003cp\u003e提案讨论地址：\u003ca href=\"https://github.com/golang/go/issues/21498\"\u003ehttps://github.com/golang/go/issues/21498\u003c/a\u003e。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
