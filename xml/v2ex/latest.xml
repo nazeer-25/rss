@@ -4,6 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于 Stringbuilder 中 append 方法的实现有一个疑问 - Java</title>
+      <link>https://www.v2ex.com/t/859504</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public AbstractStringBuilder append(String str) {&#xA;    // 如果 str 为 null ，则在字符数组中添加 &#39;n&#39;&#39;u&#39;&#39;l&#39;&#39;l&#39;&#xA;        if (str == null)&#xA;            return appendNull();&#xA;        int len = str.length();&#xA;        ensureCapacityInternal(count + len);&#xA;        str.getChars(0, len, value, count);&#xA;        count += len;&#xA;        return this;&#xA;    }```&#xA;    &#xA;&#xA;字符串参数为 null 时调用了 appendNull(); 方法&#xA;```java&#xA;    private AbstractStringBuilder appendNull() {&#xA;        int c = count;&#xA;        ensureCapacityInternal(c + 4);&#xA;        // 这里将内部字符数组赋值给局部变量&#xA;        final char[] value = this.value;&#xA;        // 然后通过局部变量向内部数组添加字符&#xA;        value[c++] = &#39;n&#39;;&#xA;        value[c++] = &#39;u&#39;;&#xA;        value[c++] = &#39;l&#39;;&#xA;        value[c++] = &#39;l&#39;;&#xA;        // 这里的 count 也是先赋值给局部变量，为什么不直接使用 count 呢？&#xA;        count = c;&#xA;        return this;&#xA;    }```&#xA;    &#xA;我的疑问是 appendNull 方法中为什么要创建一个 final char[] value 这样一个局部变量来操作内部数组而不是直接使用 this.value ？这么做的用意是什么？&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>zhao1014</author>
+      <pubDate>14 Jun 2022 04:19:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>现在有完全离线的通话录音 APP 吗？ - iPhone</title>
+      <link>https://www.v2ex.com/t/859503</link>
+      <description>&lt;p&gt;通话录音联网上传到他们云端，让我很是膈应。&lt;/p&gt;&#xA;&lt;p&gt;录音备份完全可以通过自动（加密）存储到个人云盘或者定时提醒备份解决，可以接受按月付费。&lt;/p&gt;&#xA;</description>
+      <author>v2tudnew</author>
+      <pubDate>14 Jun 2022 04:17:35 +0000</pubDate>
+    </item>
+    <item>
+      <title>4/7 层负载均衡，反向代理高可用怎么配，求大佬指点 - 程序员</title>
+      <link>https://www.v2ex.com/t/859502</link>
+      <description>&lt;p&gt;组网结构为，一台四层负载均衡的设备（例如：192.168.177.100 ），后边是多台 7 层 nginx 方向代理（ vip 为：192.168.100.100 反向代理 &lt;a href=&#34;http://a.com&#34; rel=&#34;nofollow&#34;&gt;a.com&lt;/a&gt;(192.168.101.101)），再后边是多台真实 web 服务器，多台 7 层反向代理服务器是为了处理大流量，每台服务器会有后端 web 服务器的 ip 地址。&lt;/p&gt;&#xA;&lt;p&gt;以上是个实例，为了实现需求多台 7 层反向代理需要同时 listen 192.168.100.100 ，然后把请求方向代理到对应的后端 web 服务器 &lt;a href=&#34;http://a.com&#34; rel=&#34;nofollow&#34;&gt;a.com&lt;/a&gt; 。&lt;/p&gt;&#xA;&lt;p&gt;请问 nginx 7 层代理应该怎么配置？&lt;/p&gt;&#xA;</description>
+      <author>1260475686</author>
+      <pubDate>14 Jun 2022 04:07:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>[后端][全职远程] Java 三年工作经验求职 - 求职</title>
+      <link>https://www.v2ex.com/t/859501</link>
+      <description>&lt;p&gt;&lt;strong&gt;期望远程的原因主要是:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;主要是因为小城市(石家庄)确实没有什么合适的工作机会,公司领导过于看重工作经验,他们很骄傲的点是 &#39;我们公司好多十年以上的员工&#39;&lt;/li&gt;&#xA;&lt;li&gt;之前疫情期间有过居家办公经历,大概半年左右,体验确实很不错&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;个人简历地址:&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://www.guzongbo.com/2022/04/26/Java%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91-%E8%B0%B7%E5%AE%97%E5%8D%9A-24/&#34; rel=&#34;nofollow&#34;&gt;http://www.guzongbo.com/2022/04/26/Java%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91-%E8%B0%B7%E5%AE%97%E5%8D%9A-24/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>seagull7558</author>
+      <pubDate>14 Jun 2022 03:57:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>哪家的 cloud console 最好 - 云计算</title>
+      <link>https://www.v2ex.com/t/859500</link>
+      <description>&lt;p&gt;最近在用谷歌的 cloud console ，发现真的好用，但是网络隔一段时间就断了&#xA;想问下大家，你们用过云厂商的 cloud console 吗？哪家比较好用。&#xA;我认为的好用应该有以下几点：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;可以 ssh 登录，例如 google 就是用 gcloud cloud-shell ssh 登录的&lt;/li&gt;&#xA;&lt;li&gt;有持久化空间，谷歌是 50GB &lt;/li&gt;&#xA;&lt;li&gt;内存尽量大，谷歌给了 16GB&lt;/li&gt;&#xA;&lt;li&gt;可以提权，看了阿里的 sudo -i 无法提权，docker 也没有启动，腾讯也是&lt;/li&gt;&#xA;&lt;li&gt;预装的软件满足开发使用&lt;/li&gt;&#xA;&lt;li&gt;网络稳定，最好能够直接访问 github,&lt;a href=&#34;http://docker.io&#34; rel=&#34;nofollow&#34;&gt;docker.io&lt;/a&gt; ，&lt;a href=&#34;http://gcr.io&#34; rel=&#34;nofollow&#34;&gt;gcr.io&lt;/a&gt; 这些&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>amrom</author>
+      <pubDate>14 Jun 2022 03:56:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>到底什么是 web3 - Web3</title>
+      <link>https://www.v2ex.com/t/859499</link>
+      <description>&lt;p&gt;抛砖引玉，欢迎大家讨论&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/m4j8szJeeAL65bDdY6bc8A&#34; rel=&#34;nofollow&#34;&gt;https://mp.weixin.qq.com/s/m4j8szJeeAL65bDdY6bc8A&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>ponymaggie</author>
+      <pubDate>14 Jun 2022 03:50:49 +0000</pubDate>
+    </item>
+    <item>
       <title>MacBook Air 可能会开创一个新的产品系列 - MacBook Air</title>
       <link>https://www.v2ex.com/t/859498</link>
       <description>&lt;p&gt;之前的 Air 有 11 寸，现在 Air 是 14 寸，虽然有小道消息说是会有更大尺寸的 MacBook Air ，&lt;/p&gt;&#xA;&lt;p&gt;但是苹果要是从之前的产品布局出发，出一个 12 寸的话，估计会有更多人来买单。&lt;/p&gt;&#xA;&lt;p&gt;个人也是非常期待有 12 寸的 MacBook Air 产品，前提是不要有刘海。&lt;/p&gt;&#xA;</description>
@@ -199,13 +241,6 @@
       <pubDate>14 Jun 2022 02:26:45 +0000</pubDate>
     </item>
     <item>
-      <title>Apple One 美区超大杯，季付 - Apple</title>
-      <link>https://www.v2ex.com/t/859463</link>
-      <description>&lt;p&gt;（被隔壁 Fitness+ 帖子诱惑到了，试用了两天，真香，寻车无果，自己开一个吧，而且已经有近 4 年的 Setapp 和 NS 车主经验了😂）&lt;/p&gt;&#xA;&lt;p&gt;季付 105 ，5 车位，07/12 试用期结束前满 2 人（不算车主）及以上发车。&lt;/p&gt;&#xA;&lt;p&gt;iCloud 每人 333G ，也是美区。&lt;/p&gt;&#xA;&lt;p&gt;Telegram 同 V2EX 账号。&lt;/p&gt;&#xA;&lt;p&gt;发车后会组微信群收款。&lt;/p&gt;&#xA;</description>
-      <author>Vicia</author>
-      <pubDate>14 Jun 2022 02:19:14 +0000</pubDate>
-    </item>
-    <item>
       <title>铁子们铁子们，实力不够的团队该如何面对强 Push 的情况？ - 酷工作</title>
       <link>https://www.v2ex.com/t/859462</link>
       <description>&lt;h2&gt;1 背景&lt;/h2&gt;&#xA;&lt;p&gt;项目还没开始，组建团队中。目前组队的有 3 个 Java ，1 个前端小哥。然而已经被定下 9 月 30 日交付项目了。同时草草拍了下脑袋，估摸着七月份开始，怎么也要 20 个小伙伴才能把这事儿办成。&#xA;同时呢，因为部门领导新官上任，大刀阔斧，所以对于部门交付的质量和进度还是颇为关注。目前状况真的是巧妇难为无米之炊。虽然也努力管理过他的预期，也收到了一些帮助。不过对于项目本身而言，还是有很多挑战。&lt;/p&gt;&#xA;&lt;h2&gt;2 做出的努力&lt;/h2&gt;&#xA;&lt;h3&gt;2.1 招聘&lt;/h3&gt;&#xA;&lt;p&gt;现在环境不好，招募团队成员很是艰辛（几个面试官基本一周要面 20 个候选人以上），加上公司内部流程长，进一个小伙伴得 3~4 周。所以只能先去沟通 HR 部门，加快进度，相对薪资也争取了一定的空间。&lt;/p&gt;&#xA;&lt;h3&gt;2.2 采购人力&lt;/h3&gt;&#xA;&lt;p&gt;在 V2 可能有点 zz 不正确，不过在招人很难的情况下，还是打起了采购外包同学的念头，同时也因为之前从未和外包同学团队打过交道，加之前辈关于他们的不好评价，也会有些犹豫。&lt;/p&gt;&#xA;&lt;h3&gt;2.3 期望管理&lt;/h3&gt;&#xA;&lt;p&gt;和业务部门争取一些缓冲。不过结果很不好。想想也是，目前只是我的不好预感，一切都还没发生，的确缺乏说服力。&lt;/p&gt;&#xA;&lt;h2&gt;3 需要请教诸君&lt;/h2&gt;&#xA;&lt;p&gt;1 、关于外包同学，是否真的如传言所说，概率上来说大多都无法独立完成工作？是否可以分享些他们合作的比较优秀的实践？&#xA;2 、就目前团队成员来看，面临的问题诸多，情况比较棘手，加上团队草创，磨合不够。很是担心因为这一时的压力，导致团队减员，这就很得不偿失（起码我是这么认为），希望诸君能分享下经验~&#xA;3 、关于招募团队成员，我们求贤若渴，相关的 hc 如下： &lt;a href=&#34;https://www.zhipin.com/gongsi/2b3ed1592d16535d1nB43di8EVs%7E.html?ka=search_rcmd_company_name_2b3ed1592d16535d1nB43di8EVs%7E_custompage&#34; rel=&#34;nofollow&#34;&gt;https://www.zhipin.com/gongsi/2b3ed1592d16535d1nB43di8EVs~.html?ka=search_rcmd_company_name_2b3ed1592d16535d1nB43di8EVs~_custompage&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;有需要也可找我内推，我的 V：18823851641&#xA;————————————————————————————————————————————————————————————————————&#xA;感谢大家听我 BB ，以上&lt;/p&gt;&#xA;</description>
@@ -253,6 +288,13 @@
       <description>今年真是扛不住，失业加上股市暴跌，快没钱消费了。美股利空仍然没消化完。</description>
       <author>silvernoo</author>
       <pubDate>14 Jun 2022 02:05:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>Apple One 美区超大杯，季付 - Apple</title>
+      <link>https://www.v2ex.com/t/859463</link>
+      <description>&lt;p&gt;（被隔壁 Fitness+ 帖子诱惑到了，试用了两天，真香，寻车无果，自己开一个吧，而且已经有近 4 年的 Setapp 和 NS 车主经验了😂）&lt;/p&gt;&#xA;&lt;p&gt;季付 105 ，5 车位，07/12 试用期结束前满 2 人（不算车主）及以上发车。&lt;/p&gt;&#xA;&lt;p&gt;iCloud 每人 333G ，也是美区。&lt;/p&gt;&#xA;&lt;p&gt;Telegram 同 V2EX 账号。&lt;/p&gt;&#xA;&lt;p&gt;发车后会组微信群收款。&lt;/p&gt;&#xA;</description>
+      <author>Vicia</author>
+      <pubDate>14 Jun 2022 02:19:14 +0000</pubDate>
     </item>
     <item>
       <title>MacBook Air M2 什么时候发售啊 - Apple</title>
