@@ -60,6 +60,27 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "用 Golang 创作了一个图片处理服务",
+      "Link": "https://studygolang.com/topics/15603#reply0",
+      "Description": "\u003cp\u003eGolang构建的轻量级图片处理服务\u003c/p\u003e\n\n\u003cp\u003eGimg是通用的图片处理服务,能够缩放图片,制作缩略图等。\u003c/p\u003e\n\n\u003cp\u003e它提供非常多的对象存储后端(localfs/fastdfs\u0026hellip;),对热点图片进行缓存(memory/memcached/redis/ssdb),专注做图片的处理。\u003c/p\u003e\n\n\u003cp\u003e您可以把它放到HTTP代理服务器之后,比如Nginx或者Varnish,也可以指定图片获取的路径,它会自动去抓取图片。\u003c/p\u003e\n\n\u003cp\u003e详细请看:\u003ca href=\"https://github.com/x-debug/gimg\"\u003ehttps://github.com/x-debug/gimg\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go 加入箭头函数，你支持吗？",
+      "Link": "https://studygolang.com/topics/15515#reply23",
+      "Description": "\u003cp\u003e大家好，我是 polarisxu。\u003c/p\u003e\n\n\u003cp\u003eGo 中有匿名函数，但即使是简单的函数，也需要完整的编写函数：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc (x, y int) bool { return x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e但很多其他语言，有简写方式，这就是轻量级匿名函数语法。即：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e(x, y) =\u0026gt; { x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e即箭头函数。如果你没有见过这样的语法，咋一看会有点懵？！\u003c/p\u003e\n\n\u003cp\u003e当然，目前还是在激烈讨论阶段，能不能最终引入还未知。\u003c/p\u003e\n\n\u003cp\u003e我个人感觉，Go 还是别增加语法糖，搞得语言很复杂了，只有一种解决方案没啥不好，你觉得呢？\u003c/p\u003e\n\n\u003cp\u003e提案讨论地址：\u003ca href=\"https://github.com/golang/go/issues/21498\"\u003ehttps://github.com/golang/go/issues/21498\u003c/a\u003e。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "《Go题库·3》Go语言中是如何实现继承的?",
+      "Link": "https://studygolang.com/topics/15599#reply0",
+      "Description": "\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e面试企业\u003c/strong\u003e 百度\t\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e解析整理\u003c/strong\u003e \u003ca href=\"https://www.golangroadmap.com/\"\u003eGOLANG ROADMAP社区\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（溪尾）\u003c/h2\u003e\n\n\u003cp\u003e对于Go语言是否像C++、Java一样是面向对象的语言，官方给出的解释如下：\u003c/p\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003eYes and no. Although Go has types and methods and allows an object-oriented style of programming, there is no type hierarchy. The concept of “interface” in Go provides a different approach that we believe is easy to use and in some ways more general. There are also ways to embed types in other types to provide something analogous—but not identical—to subclassing. Moreover, methods in Go are more general than in C++ or Java: they can be defined for any sort of data, even built-in types such as plain, “unboxed” integers. They are not restricted to structs (classes).\u003c/p\u003e\n\n\u003cp\u003eAlso, the lack of a type hierarchy makes “objects” in Go feel much more lightweight than in languages such as C++ or Java.\u003c/p\u003e\n\n\u003cp\u003e翻译：\u003c/p\u003e\n\n\u003cp\u003e是,也不是.虽然Go语言可以通过定义类型和方法来实现面向对象的设计风格,但是Go实际上并没有继承这一说法.在Go语言中,interface(接口)这个概念以另外一种角度展现了一种更加易用与通用的设计方法.在Go中,我们可以通过组合,也就是将某个类型放入另外的一个类型中来实现类似继承,让该类型提供有共性但不相同的功能.相比起C++和Java,Go提供了更加通用的定义函数的方法,我们可以指定函数的接受对象(receiver),它可以是任意的类型,包括内建类型,在这里没有任何的限制。\u003c/p\u003e\n\n\u003cp\u003e同样的,没有了类型继承,使得Go语言在面向对象编程的方面会显得更加轻量化。\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cp\u003e在Go语言中，可以通过结构体组合来实现继承，示例如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 这里Student继承了People，具有People的属性\ntype People struct {\n    Name string\n}\n\ntype Student struct{\n    People\n    Grade int\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "《Go题库·4》数组怎么转集合?",
       "Link": "https://studygolang.com/topics/15606#reply0",
       "Description": "\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e面试企业\u003c/strong\u003e TCL\t\u003c/p\u003e\n\n\u003cp\u003e**解析整理 ** \u003ca href=\"https://www.golangroadmap.com/\"\u003eGOLANG ROADMAP社区\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cp\u003e\u003cstrong\u003e答案1：\u003c/strong\u003e（溪尾）\u003c/p\u003e\n\n\u003cp\u003e可以使用数组的索引作为map的key，数组的值作为map的值\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc main() {\n\tarr := [5]int{1, 2, 3, 4, 5}\n\tm := make(map[int]int, 5)\n\tfor i, v := range arr {\n\t\tm[i] = v\n\t}\n\tfmt.Println(m)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -84,13 +105,6 @@
       "Title": "请教，C 程序里面的IPC named FIFO如何跟Go程序连接？",
       "Link": "https://studygolang.com/topics/15604#reply0",
       "Description": "\u003cp\u003e公司有一个系统项目用C写的，有另外一个处理程序用Go，C项目里面有IPC 接口，请问如果在Go里面连接C项目定义的IPC Fifo呢？\u003c/p\u003e\n\n\u003cp\u003e谢谢！\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "用 Golang 创作了一个图片处理服务",
-      "Link": "https://studygolang.com/topics/15603#reply0",
-      "Description": "\u003cp\u003eGolang构建的轻量级图片处理服务\u003c/p\u003e\n\n\u003cp\u003eGimg是通用的图片处理服务,能够缩放图片,制作缩略图等。\u003c/p\u003e\n\n\u003cp\u003e它提供非常多的对象存储后端(localfs/fastdfs\u0026hellip;),对热点图片进行缓存(memory/memcached/redis/ssdb),专注做图片的处理。\u003c/p\u003e\n\n\u003cp\u003e您可以把它放到HTTP代理服务器之后,比如Nginx或者Varnish,也可以指定图片获取的路径,它会自动去抓取图片。\u003c/p\u003e\n\n\u003cp\u003e详细请看:\u003ca href=\"https://github.com/x-debug/gimg\"\u003ehttps://github.com/x-debug/gimg\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -137,13 +151,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Go 加入箭头函数，你支持吗？",
-      "Link": "https://studygolang.com/topics/15515#reply23",
-      "Description": "\u003cp\u003e大家好，我是 polarisxu。\u003c/p\u003e\n\n\u003cp\u003eGo 中有匿名函数，但即使是简单的函数，也需要完整的编写函数：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc (x, y int) bool { return x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e但很多其他语言，有简写方式，这就是轻量级匿名函数语法。即：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e(x, y) =\u0026gt; { x \u0026lt; y }\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e即箭头函数。如果你没有见过这样的语法，咋一看会有点懵？！\u003c/p\u003e\n\n\u003cp\u003e当然，目前还是在激烈讨论阶段，能不能最终引入还未知。\u003c/p\u003e\n\n\u003cp\u003e我个人感觉，Go 还是别增加语法糖，搞得语言很复杂了，只有一种解决方案没啥不好，你觉得呢？\u003c/p\u003e\n\n\u003cp\u003e提案讨论地址：\u003ca href=\"https://github.com/golang/go/issues/21498\"\u003ehttps://github.com/golang/go/issues/21498\u003c/a\u003e。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "📖 Go相关公众号文章每日推荐【2022-06-09/12】",
       "Link": "https://studygolang.com/topics/15600#reply0",
       "Description": "\u003cp\u003e一、Go语言中文网\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/5-ebv0lxEM8ZMiOXYYPsoQ\"\u003e提高效率的 5 个 GoLand 快捷键，你都知道吗？\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/wyQOZG6ZEqjw4rH_Gh7Asg\"\u003egolang刷leetcode：统计区间中的整数数目\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/DlvMClQorruvF0FetDdl4w\"\u003ePHP 跌出前 10，Go 机会来了？6 月 TIOBE 榜单\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/YDe572BdjMJHH8pZe5uK5w\"\u003eGo语言爱好者周刊：第 148 期\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e二、GoOfficialBlog\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/2sNMaRuowPnbfAYgRw1RtA\"\u003e[摘要]如何构建分布式数据库 severless 服务?\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e三、亚军进化史\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/4Owhi1w3khAIYupkyP2_3Q\"\u003eGo技术日报(2022-06-08)——聊聊索引失效的10种场景，太坑了\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e四、轩脉刃的刀光剑影\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/Xs5Ngi9444z6SyVVu0byUg\"\u003ecgo调用c动态库实战\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e五、RememberGo\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/aBdvYvoIO2FTMTPDY_IFYQ\"\u003eGo 网络库 Gnet 解析\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e六、章老师说\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/YI-GBXDD8kgg2TFs7M3caA\"\u003e软件，以人为本\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e七、云影原生\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/wWWtCsXdoBSAXVZhXQY7Dw\"\u003e监控中的GC延迟是在说什么？\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e八、k8s技术圈\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/JpdFQHqvuJqS3cDsNYy2Ag\"\u003e可视化 Kubernetes 历史记录\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e九、polarisxu\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/kFo-T47zXLgOD9PKRCQizA\"\u003eGo 1.19 Beta1 发布，这个改动挺有意思\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e十、网管叨bi叨\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/3_P_fpsC0ZQywlSoqdQ9Sg\"\u003eK8s也面向对象？学会这三要素，用K8s就跟编程一样\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
@@ -165,16 +172,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "《Go题库·3》Go语言中是如何实现继承的?",
-      "Link": "https://studygolang.com/topics/15599#reply0",
-      "Description": "\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e面试企业\u003c/strong\u003e 百度\t\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e解析整理\u003c/strong\u003e \u003ca href=\"https://www.golangroadmap.com/\"\u003eGOLANG ROADMAP社区\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（溪尾）\u003c/h2\u003e\n\n\u003cp\u003e对于Go语言是否像C++、Java一样是面向对象的语言，官方给出的解释如下：\u003c/p\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003eYes and no. Although Go has types and methods and allows an object-oriented style of programming, there is no type hierarchy. The concept of “interface” in Go provides a different approach that we believe is easy to use and in some ways more general. There are also ways to embed types in other types to provide something analogous—but not identical—to subclassing. Moreover, methods in Go are more general than in C++ or Java: they can be defined for any sort of data, even built-in types such as plain, “unboxed” integers. They are not restricted to structs (classes).\u003c/p\u003e\n\n\u003cp\u003eAlso, the lack of a type hierarchy makes “objects” in Go feel much more lightweight than in languages such as C++ or Java.\u003c/p\u003e\n\n\u003cp\u003e翻译：\u003c/p\u003e\n\n\u003cp\u003e是,也不是.虽然Go语言可以通过定义类型和方法来实现面向对象的设计风格,但是Go实际上并没有继承这一说法.在Go语言中,interface(接口)这个概念以另外一种角度展现了一种更加易用与通用的设计方法.在Go中,我们可以通过组合,也就是将某个类型放入另外的一个类型中来实现类似继承,让该类型提供有共性但不相同的功能.相比起C++和Java,Go提供了更加通用的定义函数的方法,我们可以指定函数的接受对象(receiver),它可以是任意的类型,包括内建类型,在这里没有任何的限制。\u003c/p\u003e\n\n\u003cp\u003e同样的,没有了类型继承,使得Go语言在面向对象编程的方面会显得更加轻量化。\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cp\u003e在Go语言中，可以通过结构体组合来实现继承，示例如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 这里Student继承了People，具有People的属性\ntype People struct {\n    Name string\n}\n\ntype Student struct{\n    People\n    Grade int\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Title": "基于gin的商城项目",
+      "Link": "https://studygolang.com/topics/15596#reply0",
+      "Description": "\u003cp\u003e根据之前看到的一个java电商将其用go 实现了 一遍\u003c/p\u003e\n\n\u003cp\u003e项目地址：\u003ca href=\"https://github.com/newbee-ltd/newbee-mall-api-go/\"\u003ehttps://github.com/newbee-ltd/newbee-mall-api-go/\u003c/a\u003e相关技术栈\n+ zap 高性能日志库\n+ viper 配置管理神器\n+ gorm orm库\n+ gin web框架\u003c/p\u003e\n\n\u003cp\u003e结合原项目的前端项目，目前已可以跑通所有流程\u003c/p\u003e\n\n\u003cp\u003e本职工作是测试，未来想转go开发，项目代码中还存在诸多不足，还请各位大佬指正！\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "基于gin的商城项目",
-      "Link": "https://studygolang.com/topics/15596#reply0",
-      "Description": "\u003cp\u003e根据之前看到的一个java电商将其用go 实现了 一遍\u003c/p\u003e\n\n\u003cp\u003e项目地址：\u003ca href=\"https://github.com/newbee-ltd/newbee-mall-api-go/\"\u003ehttps://github.com/newbee-ltd/newbee-mall-api-go/\u003c/a\u003e相关技术栈\n+ zap 高性能日志库\n+ viper 配置管理神器\n+ gorm orm库\n+ gin web框架\u003c/p\u003e\n\n\u003cp\u003e结合原项目的前端项目，目前已可以跑通所有流程\u003c/p\u003e\n\n\u003cp\u003e本职工作是测试，未来想转go开发，项目代码中还存在诸多不足，还请各位大佬指正！\u003c/p\u003e\n",
+      "Title": "[全职远程][长期稳定][15k-30k+高额夜班津贴] 招募夜班全栈开发工程师",
+      "Link": "https://studygolang.com/topics/15500#reply2",
+      "Description": "\u003ch3\u003e关于我们\u003c/h3\u003e\n\n\u003cp\u003e我们是一个发展中的软件技术团队，自16年成立以来，帮助了很多美国创业公司发展壮大。我们致力于为互联网初创公司提供高质量的技术支持，服务内容包括了社交、支付、工具、内容、图像处理等移动端及网页应用。本次希望通过社区找到可以在北京时间晚上12点至早上9点间工作的工程师，帮助我们协调不同项目的开发， 解决不同时区项目可能遇到的问题，确保线上业务稳定运行。\u003c/p\u003e\n\n\u003cp\u003e如果你能适应远程办公方式，追求项目质量、注重开发效率、热爱学习和研究最新的技术，那还等什么，赶快来加入我们吧～同时也欢迎海外时差党朋友讨论其他时间段的合作方式。\u003c/p\u003e\n\n\u003ch3\u003e希望你具有\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e有克服困难解决难点的精神及高效及时的沟通交流能力\u003c/li\u003e\n\u003cli\u003e能跟踪前沿技术，评估并适时引入适用的新技术\u003c/li\u003e\n\u003cli\u003e安静的工作环境和高速的网络连接\u003c/li\u003e\n\u003cli\u003e有远程办公经验者优先\u003c/li\u003e\n\u003cli\u003e有海外工作学习经历优先\u003c/li\u003e\n\u003cli\u003e英语流利者优先\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003e全栈工程师岗位要求\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e有三到五年以上的互联网软件开发经验，有前后端分离项目经验；\u003c/li\u003e\n\u003cli\u003e熟悉当前主流的前后端语言及框架，有大中型以上系统设计研发经验优先\u003c/li\u003e\n\u003cli\u003e能根据不同的项目切换不同的技术栈进行开发并有学习新技术的热情\u003c/li\u003e\n\u003cli\u003e能独立开发并领导一个项目(前端+后端)或在高级工程师的指导下完成整个项目的开发(前端+后端)\u003c/li\u003e\n\u003cli\u003e负责核心技术问题的攻关，解决项目/产品上的技术难题\u003c/li\u003e\n\u003cli\u003e提供产品和技术解决方案，协助软件测试并优化产品\u003c/li\u003e\n\u003cli\u003e有架构、高并发开发经验者优先\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003e薪资范围及工作时间\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e周二至周六凌晨12点至早上9点，工作8小时\u003c/li\u003e\n\u003cli\u003e薪资15k-30k\u003c/li\u003e\n\u003cli\u003e除薪资外，根据职级P4-P6享有5k夜班津贴，P7及以上享有7k夜班津贴\u003c/li\u003e\n\u003cli\u003e能力出众者另议\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003e我们能提供\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e灵活的工作地点\u003c/li\u003e\n\u003cli\u003e社保补贴，期权激励\u003c/li\u003e\n\u003cli\u003e享有无限带薪假期\u003c/li\u003e\n\u003cli\u003e优质项目奖金\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch4\u003e联系方式\u003c/h4\u003e\n\n\u003cul\u003e\n\u003cli\u003e邮件：jobs@theteam247.com\u003c/li\u003e\n\u003cli\u003e电话/微信：18971229147\n持续招聘中～\u003c/li\u003e\n\u003c/ul\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
