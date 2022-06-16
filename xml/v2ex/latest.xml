@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>React Suspense 尝鲜,处理前后端 IO 异步操作 - 推广</title>
+      <link>https://www.v2ex.com/t/860017</link>
+      <description>&lt;h3&gt;简单介绍一下 Suspense&lt;/h3&gt;&#xA;&lt;p&gt;Suspense 主要用来解决网络 IO 问题，它早在 2018 年的 React 16.6.0 版本中就已发布。它的相关用法有些已经比较成熟，有的相对不太稳定，甚至经历了重命名、删除：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在 render 函数中，我们可以写入一个异步请求，请求数据&lt;/li&gt;&#xA;&lt;li&gt;react 会从我们缓存中读取这个缓存&lt;/li&gt;&#xA;&lt;li&gt;如果有缓存了，直接进行正常的 render&lt;/li&gt;&#xA;&lt;li&gt;如果没有缓存，那么会抛出一个异常，这个异常是一个 promise&lt;/li&gt;&#xA;&lt;li&gt;当这个 promise 完成后（请求数据完成），react 会继续回到原来的 render 中（实际上是重新执行一遍 render ），把数据 render 出来&lt;/li&gt;&#xA;&lt;li&gt;完全同步写法，没有任何异步 callback 之类的东西&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;如果你还没有明白这是什么意思那我简单的表述成下面这句话：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;调用 render 函数-&amp;gt;发现有异步请求-&amp;gt;悬停，等待异步请求结果-&amp;gt;再渲染展示数据&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;看着是非常神奇的，用同步方法写异步，而且没有 yield/async/await ，简直能把人看傻眼了。这么做的好处自然就是，我们的思维逻辑非常的简单，清楚，没有 callback ，没有其他任何玩意，不能不说，看似优雅了非常多而且牛逼。&lt;/p&gt;&#xA;&lt;h3&gt;Suspense 的主要用法和场景&lt;/h3&gt;&#xA;&lt;p&gt;在前端开发中，经常会有这样的需求，加载某个界面时，如果界面的资源比较大，前端对数据的处理也需要时间，加载比较慢，这时候我们需要用一个加载动画或者提示，使得交互更加友好。&lt;/p&gt;&#xA;&lt;p&gt;一. React18 之前的做法:&#xA;在 React18 之前，我们要实现上面这个效果，请求数据或者加载新的组件的时机一般在 componentDidMount ，在 State 中需要一个 flag 变量来记录请求数据的状态，后续手动更改这个状态，非常的不方便。代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class App extends Component {&#xA;  state = {&#xA;isLoading: false,&#xA;  }&#xA;&#xA;  componentDidMount() {&#xA;    this.setState({&#xA;      data: null,&#xA;isLoading: true,&#xA;    });&#xA;    axios.get(&#39;/api/getData&#39;).then((data) =&amp;gt; {&#xA;      this.setState({&#xA;        data,&#xA;isLoading: false,&#xA;      });&#xA;    });&#xA;  }&#xA;&#xA;  render() {&#xA;    return this.state.loading ? &#39;正在加载中...&#39; : (&#xA;      &amp;lt;Page data={data} /&amp;gt;&#xA;    );&#xA;  }&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;二. React18 之后：&#xA;1.React.lazy&#xA;React.lazy() 允许你定义一个动态加载的组件。这有助于缩减 bundle 的体积，并延迟加载在初次渲染时未用到的组件&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;const SomeComponent = React.lazy(() =&amp;gt; import(&#39;./SomeComponent&#39;));&#xA;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;渲染 lazy 组件依赖该组件渲染树上层的 &amp;amp;lt;React.Suspense&amp;amp;gt; 组件。这是指定加载指示器（ loading indicator ）的方式。&#xA;2.React.Suspense&#xA;React.Suspense 可以指定加载指示器（ loading indicator ），以防其组件树中的某些子组件尚未具备渲染条件：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;// 该组件是动态加载的&#xA;const OtherComponent = React.lazy(() =&amp;gt; import(&#39;./OtherComponent&#39;));&#xA;&#xA;function MyComponent() {&#xA;  return (&#xA;    // 显示 &amp;lt;Spinner&amp;gt; 组件直至 OtherComponent 加载完成&#xA;    &amp;lt;React.Suspense fallback={&amp;lt;Spinner /&amp;gt;}&amp;gt;&#xA;      &amp;lt;div&amp;gt;&#xA;        &amp;lt;OtherComponent /&amp;gt;&#xA;      &amp;lt;/div&amp;gt;&#xA;    &amp;lt;/React.Suspense&amp;gt; &#xA;  );&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;Suspense 尝鲜：配合前端表格组件处理前后端 IO 异步操作&lt;/h3&gt;&#xA;&lt;p&gt;因为没有后端逻辑，前端表格组件主要用于在前端对 Excel 、Grid 表格数据在线编辑和展示，而利用 Suspense 的技术特点，便可以轻松实现前后端 IO 异步操作：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;const PureSpread = React.lazy(() =&amp;gt; import(&#39;./components/pureSpread&#39;))&#xA;const SpreadDesigner = React.lazy(() =&amp;gt; import(&#39;./components/designer&#39;))&#xA;const {Content,Header} = Layout&#xA;&#xA;&#xA;&#xA;const App = () =&amp;gt; (&#xA;  &amp;lt;Layout className=&#34;app&#34;&amp;gt;&#xA;     &amp;lt;IndexSider/&amp;gt;&#xA;     &amp;lt;Layout&amp;gt;&#xA;        &amp;lt;Content className=&#34;index-content&#34;&amp;gt;&#xA;          &amp;lt;HashRouter&amp;gt;&#xA;              &amp;lt;Switch&amp;gt;&#xA;                &amp;lt;Suspense fallback={&amp;lt;div&amp;gt;loading...&amp;lt;/div&amp;gt;}&amp;gt;&#xA;                  &amp;lt;Route exact path=&#34;/&#34; component={PureSpread}/&amp;gt;&#xA;                  &amp;lt;Route exact path=&#34;/designer&#34; component={SpreadDesigner}/&amp;gt;   &#xA;                &amp;lt;/Suspense&amp;gt;&#xA;              &amp;lt;/Switch&amp;gt;&#xA;          &amp;lt;/HashRouter&amp;gt;&#xA;        &amp;lt;/Content&amp;gt;&#xA;        &amp;lt;IndexFooter/&amp;gt;&#xA;     &amp;lt;/Layout&amp;gt;&#xA;  &amp;lt;/Layout&amp;gt;&#xA;)&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;看一下效果：&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img2022.cnblogs.com/blog/139239/202206/139239-20220616134450724-1802491738.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;本文 Demo:&lt;a href=&#34;https://gcdn.grapecity.com.cn/forum.php?mod=attachment&amp;amp;aid=MjEyNzM4fDI0MzNlYTIyfDE2NTM4OTI4Mzh8MXwxNDc4NTk%3D&#34; rel=&#34;nofollow&#34;&gt;https://gcdn.grapecity.com.cn/forum.php?mod=attachment&amp;amp;aid=MjEyNzM4fDI0MzNlYTIyfDE2NTM4OTI4Mzh8MXwxNDc4NTk%3D&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;了解更多在线 demo： &lt;a href=&#34;https://demo.grapecity.com.cn/spreadjs/gc-sjs-samples/index.html&#34; rel=&#34;nofollow&#34;&gt;https://demo.grapecity.com.cn/spreadjs/gc-sjs-samples/index.html&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>GrapeCityChina</author>
+      <pubDate>16 Jun 2022 05:47:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>问下大家，谁用过 Stacks 当知识库或者笔记软件吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/860016</link>
+      <description>&lt;p&gt;这个软件刚装了，看样子不错，是个开源的，可以保存本地，功能也比较全，就是需要采购授权，不知道跟 Joplin 这些比效果怎么样，谁用过。&lt;/p&gt;&#xA;&lt;p&gt;网上我没找到授权文件 哭&lt;/p&gt;&#xA;&lt;p&gt;官网地址： &lt;a href=&#34;https://stacks.rocks/&#34; rel=&#34;nofollow&#34;&gt;https://stacks.rocks/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>heliushao88</author>
+      <pubDate>16 Jun 2022 05:47:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>VS Code 中 IntelliCode quicksuggestions, Tabnine, GitHub Copilot 共存 - 程序员</title>
+      <link>https://www.v2ex.com/t/860015</link>
+      <description>&lt;p&gt;tabnine 更新了，启用 Advanced Completions 需要开启 inline 补全。&#xA;同时我还安装了 Copilot.&#xA;我还不想丢掉 IntelliCode 下拉框那样的提示。&lt;/p&gt;&#xA;&lt;p&gt;为了让 GitHub Copilot, IntelliCode quicksuggestions, Tabnine Advanced Completions 可以同时使用，我做了如下配置：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{&#xA;&#34;github.copilot.inlineSuggest.enable&#34;: false,&#xA;&#34;editor.suggest.preview&#34;: true,&#xA;&#34;editor.inlineSuggest.enabled&#34;: true&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;也就是&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;关掉 Copilot 的 inline, 如果要用 copilot 就按 ctrl + enter 打开侧栏&lt;/li&gt;&#xA;&lt;li&gt;允许 vscode 自动显示 inline 建议&lt;/li&gt;&#xA;&lt;li&gt;用 inline 预览 intellicode 建议&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;最后的效果就是这样的：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;同时显示内联建议和下拉栏，quicksuggestions 的建议在 inline 中是斜体，tabnine 的建议在 inline 中是正文&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://youjb.com/images/2022/06/16/20220616125906d80bee6436323416.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>kouhe3</author>
+      <pubDate>16 Jun 2022 05:46:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>扫地机器人，是买只扫地的好，还是扫地拖地一体的好？ - 生活</title>
+      <link>https://www.v2ex.com/t/860014</link>
+      <description>&lt;p&gt;RT 。欢迎用过的 V2er 们分享下经验。&lt;/p&gt;&#xA;</description>
+      <author>ZC3746</author>
+      <pubDate>16 Jun 2022 05:44:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>深信服的瓜 - 程序员</title>
+      <link>https://www.v2ex.com/t/860013</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/DaxiaSec/SXF_aTrust_sandbox_bypass&#34; rel=&#34;nofollow&#34;&gt;https://github.com/DaxiaSec/SXF_aTrust_sandbox_bypass&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>BeijingBaby</author>
+      <pubDate>16 Jun 2022 05:44:21 +0000</pubDate>
+    </item>
+    <item>
       <title>typora 老版本开启强更，已换到 MarkText，但性能太差… - Markdown</title>
       <link>https://www.v2ex.com/t/860011</link>
       <description>本周一上班的时候，发现 Typora 老版本开启了强更，依稀记得当时关掉了更新检测之类的…&lt;br /&gt;&lt;br /&gt;在 V2 找了一圈替代品，发现 MarkText 免费也有支持实时预览，但是搜索效率太慢了，大概 1800 行的文档，搜索直接卡死……&lt;br /&gt;&lt;br /&gt;请问还有没有更好用的 Markdown 编辑软件，最好需要实时预览的，vscode 之类的代码编辑器暂不考虑…</description>
