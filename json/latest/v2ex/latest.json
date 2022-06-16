@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "指挥调度中心那种大屏幕有什么开源方案（Vue）推荐的吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/860033",
+      "Description": "\u003cp\u003e一般是一个深蓝近黑的背景色，上面一些柱图地图啥的。\u003c/p\u003e\n\u003cp\u003e自己搭起来真的很难弄好看了。\u003c/p\u003e\n\u003cp\u003e问一下可有什么开源的组件和主题推荐的吗？\u003c/p\u003e\n\u003cp\u003e最好是 vue 生态的。\u003c/p\u003e\n",
+      "Author": "libasten",
+      "PubDate": "2022-06-16T06:39:51Z"
+    },
+    {
+      "Title": "解决 Win11 的 OpenSSH 无法用密钥登录的问题 - Windows",
+      "Link": "https://www.v2ex.com/t/860032",
+      "Description": "\u003cp\u003e这个问题有一阵了, 一直不知道啥原因\u003c/p\u003e\n\u003cp\u003e检查了配置文件\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e%PROGRAMDATA%/ssh/sshd_config\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e里面\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ePubkeyAuthentication yes\nAuthorizedKeysFile\t.ssh/authorized_keys\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e检查了在.ssh/authorized_keys 里面确实有我添加的公钥\u003c/p\u003e\n\u003cp\u003e用 debug 模式运行 sshd, output 如下:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edebug1: trying public key file C:\\\\ProgramData\\\\ssh\\\\administrators_authorized_keys\nFailed publickey for xxxxxxx\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e经检查, 根本就没有 C:\\ProgramData\\ssh\\administrators_authorized_keys 这么个文件\n我的公钥都在 .ssh/authorized_keys 里面.\u003c/p\u003e\n\u003cp\u003e那么是什么导致 OpenSSH 去 administrators_authorized_keys 里面找公钥呢?\u003c/p\u003e\n\u003cp\u003e翻到 sshd_config 这个配置文件的最下面, 发现有这么两行:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eMatch Group administrators\n       AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e直接注释掉:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e#Match Group administrators\n#       AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e重启 sshd 服务\n再试试 ssh, 这次没有提示要输 password 而是直接用密钥登录了, 问题解决.\u003c/p\u003e\n\u003cp\u003ePS:\nopenssh 默认连进去是 cmd 而不是 powershell\n可以把 default shell 改成 powershell 方便之后的操作\npowershell 下运行:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eNew-ItemProperty -Path \"HKLM:\\SOFTWARE\\OpenSSH\" -Name DefaultShell -Value \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -PropertyType String -Force\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e重启 sshd 服务, 这下直接连进去就是 powershell 了\u003c/p\u003e\n",
+      "Author": "zx900930",
+      "PubDate": "2022-06-16T06:37:53Z"
+    },
+    {
       "Title": "2K 以内求推荐一款桌面音箱 - 问与答",
       "Link": "https://www.v2ex.com/t/860031",
       "Description": "\u003cp\u003e需求主要是想提升看电影的体验，偶尔剪辑视频，其余时间就是当 Mac 扬声器用\u003c/p\u003e\n\u003cp\u003e前几天上头了想搞环绕音效，因为看到下载的片源都是什么 DDP5.1 的，后来想想电脑搞这个好像不太现实\u003c/p\u003e\n\u003cp\u003e现在清醒了想 2K 以内搞个 2.0 或者 2.1 的电脑音箱就行了，低音不需要太猛，出租屋隔音不太好，我 HomePod 听歌音量都只开 20%左右，这两天看了一些音箱，筛选出两个方向不太一样的型号，Bose C50 和 iLoud MM 不知如何选择，各位可以给些建议或者推荐一些其他型号吗？\u003c/p\u003e\n",
