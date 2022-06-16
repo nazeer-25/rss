@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "求一个 windows 下方便的 web 文件管理系统 - 问与答",
+      "Link": "https://www.v2ex.com/t/860157",
+      "Description": "\u003ch4\u003e需求：让不懂电脑的人能轻松访问 windows 服务器里的文件。\u003c/h4\u003e\n\u003ch4\u003e事情是这样的，我把家人手机上的图片使用 syncthing 同步到了自己的 windows server 上，但我既不想新建用户，也不想能过 samba 等共享方式给他们使用。 只想把这个目录通过某个方式，在内网搞一个类似 web 的文件浏览器让他们访问。\u003c/h4\u003e\n\u003ch4\u003e功能：\u003c/h4\u003e\n\u003cul\u003e\n\u003cli\u003e根目录可以自定义，而不是把 server 上的所有目录和盘都显示出来。\u003c/li\u003e\n\u003cli\u003e界面易于操作，别搞成树型纯文字的方式。\u003c/li\u003e\n\u003cli\u003e易于部署。\u003c/li\u003e\n\u003cli\u003e能浏览图片，视频，ＰＤＦ吧.最好 office 也能浏览。实在不行下载到本地看也不是不行。\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "doumeki",
+      "PubDate": "2022-06-16T15:27:11Z"
+    },
+    {
+      "Title": "616 米家崩了后中枢网关用户的实际体验 - 智能家电",
+      "Link": "https://www.v2ex.com/t/860156",
+      "Description": "\u003ch1\u003e基本情况\u003c/h1\u003e\n\u003cp\u003e网关：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e中枢网关*1 （一周前新增\u003c/li\u003e\n\u003cli\u003e多模网关*2\u003c/li\u003e\n\u003cli\u003eaqara 最早的 zigbee 网关（已废弃）\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e设备：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eyeelight 灯光设备 15+\u003c/li\u003e\n\u003cli\u003ezigbee 设备（主要是三年前装修期搞的 aqara 一堆开关，门窗，红外，空调控制器等） 40+\u003c/li\u003e\n\u003cli\u003e一堆无限贴墙开关，智能场景开关等\u003c/li\u003e\n\u003cli\u003e蓝牙 mesh：10+\u003c/li\u003e\n\u003cli\u003e其他 wifi 接入设备（微波炉、破壁机等等） 20+\u003c/li\u003e\n\u003cli\u003e小爱音箱*3\u003c/li\u003e\n\u003cli\u003eHomePods\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e还有一堆未列出的!\u003c/p\u003e\n\u003ch1\u003e架构\u003c/h1\u003e\n\u003cp\u003e历史原因折腾了三套\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e米家方案，一周前全面升级了智能 2.0 ，增加了中枢网关，全部本地智能，断网验证无误，能够在完全无网条件下使用；\u003c/li\u003e\n\u003cli\u003eHA 方案+HomeKit：miot 插件接入，独立的家庭，作为备份，基本上从未启用过，未配置过自动化相关，仅尝试，但一直没删除；\u003c/li\u003e\n\u003cli\u003e多模网关直接连接 HomeKit：一个独立的家庭设置，大部分 zigbee 设备都能接入，另有一部分设备通过一个独立的 HA ，逐个插件本地接入，控制流畅（联动及智能尚未通过 HomeKit 自动化配置），特别是前段时间升级到最新的 develop beta 版本 iOS ，Home 的新界面简直就是和我之前想自己在 HA 接口基础上搞的那套一致，理想方案，618 购入一堆 HomeKit 支持设备正准备逐个替换；\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1\u003e616 真实情况反馈\u003c/h1\u003e\n\u003cp\u003e晚饭后发现小爱不能关灯，提示网络有些问题。但 iKuai 无报警，随便测试了下网络一切正常。\u003c/p\u003e\n\u003cp\u003e后怀疑小爱自己的问题，重启无效；重启网关无效；米家 APP 所有设备丢失，智能丢失。\u003c/p\u003e\n\u003cp\u003e迅速排查发现 \u003ca href=\"http://home.mi.com\" rel=\"nofollow\"\u003ehome.mi.com\u003c/a\u003e 限流错误，确认米家服务崩了。。。\u003c/p\u003e\n\u003cp\u003e此时，无限开关所有控制失效（注意，今天仍确认过一次智能为本地执行模式，且有中枢网关）；\u003c/p\u003e\n\u003cp\u003e临时通过 HomeKit 方案语音控制，且 Home App 完全正常。\u003c/p\u003e\n\u003cp\u003e晚上 8 点左右，陆续恢复列表，但是。。。。 所有智能全部丢失，日志中全部都是失败的记录，点击提示找不到此智能。\u003c/p\u003e\n\u003cp\u003e9 时左右恢复智能列表，但仍然无法保存和使用，所有联动依然无法使用，部分灯光通过备份遥控器和 HomeKit 控制。\u003c/p\u003e\n\u003cp\u003e截至目前，联动及无线开关仍无法使用，灯组控制、自动化完全失灵（仍确认显示为本地智能，2.0 版本）\u003c/p\u003e\n\u003ch1\u003e总结\u003c/h1\u003e\n\u003cp\u003e怀疑重启中枢网关后从远程同步数据失败，自动化相关配置丢失，本地执行策略出现问题。\u003c/p\u003e\n\u003cp\u003e宣传的本地执行就是个笑话。。。\u003c/p\u003e\n\u003cp\u003e还是乖乖的回到 HomeKit 这套方案吧，计划这周末迁移和调整完毕。\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e待续....\u003c/p\u003e\n",
+      "Author": "ucaime",
+      "PubDate": "2022-06-16T15:24:34Z"
+    },
+    {
+      "Title": "这两天晚上玩了几个 steam 新品游戏节的 Demo，简评一下 - 游戏",
+      "Link": "https://www.v2ex.com/t/860155",
+      "Description": "\u003cp\u003e见图~\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://pic.imgdb.cn/item/62ab49c40947543129da7f49.png\" rel=\"nofollow\"\u003ehttps://pic.imgdb.cn/item/62ab49c40947543129da7f49.png\u003c/a\u003e\n\u003ca href=\"https://pic.imgdb.cn/item/62ab49c40947543129da7f13.png\" rel=\"nofollow\"\u003ehttps://pic.imgdb.cn/item/62ab49c40947543129da7f13.png\u003c/a\u003e\n\u003ca href=\"https://pic.imgdb.cn/item/62ab49c40947543129da7f0a.png\" rel=\"nofollow\"\u003ehttps://pic.imgdb.cn/item/62ab49c40947543129da7f0a.png\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "maweihao999",
+      "PubDate": "2022-06-16T15:19:08Z"
+    },
+    {
       "Title": "排序算法问题，如何快速筛选出数组前 N 位的位置？ - 问与答",
       "Link": "https://www.v2ex.com/t/860153",
       "Description": "\u003cp\u003e生产中需要用到相关实现算法，感觉比较像一道算法题，但我想了想没有什么太好的办法，来请教一下万能的 v 友。\u003c/p\u003e\n\u003cp\u003e现有一自然数 N ，假定取值范围 1-100.\u003c/p\u003e\n\u003cp\u003e有一数组，储存双精度浮点数，数组长度为 N-100000.求筛选数组中最大（或最小）前 N 位数所在的位置。\u003c/p\u003e\n\u003cp\u003e为传统算法基本上都是为全排序设计的，不存在说只取前 N 位最大即可。还有一个问题是排序大多数直接操作数据而不是操作指针，给我整不会了。。\u003c/p\u003e\n\u003cp\u003e需要时间复杂度最优，不在意空间复杂度。。\u003c/p\u003e\n",
