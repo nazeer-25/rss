@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>centos 定时任务执行脚本，输出到文件的内容会自动省略 - 程序员</title>
+      <link>https://www.v2ex.com/t/860125</link>
+      <description>&lt;p&gt;手动执行脚本，在脚本里面输出变量到文件正常&lt;/p&gt;&#xA;&lt;p&gt;但是换成 crontab 调度执行，脚本输出到文件的内容会自动省略一些&lt;/p&gt;&#xA;&lt;p&gt;代码&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;IN=`echo &#34;$LINE&#34; | tr -s &#39; &#39;`&#xA;PID=`echo $IN | cut -d &#39; &#39; -f1 `&#xA;CMD=&#34;`echo $IN | cut -d &#39; &#39; -f12 ` ` echo $IN | cut -d &#39; &#39; -f13` ` echo $IN | cut -d &#39; &#39; -f14`&#34;&#xA;CPU=`echo $IN | cut -d &#39; &#39; -f9 `&#xA;MEM=`echo $IN | cut -d &#39; &#39; -f10 `&#xA;&#xA;echo &#34;${PID}|${CMD}|${CPU}|${MEM}&#34; &amp;gt;&amp;gt; /tmp/push-top-tmp.log&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;手动执行文件结果：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;./push-top.sh&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/XH6LlR&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;XH6LlR.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2022/06/16/XH6LlR.png&#34;/&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;br/&gt;&#xA;&lt;p&gt;crontab 调度执行的结果：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;* * * * * /push-top.sh&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/XH6zTO&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;XH6zTO.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2022/06/16/XH6zTO.png&#34;/&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;br/&gt;&#xA;&lt;p&gt;在脚本里面加过 source /etc/profile ，无效&lt;/p&gt;&#xA;&lt;p&gt;在定时任务前加过 source /etc/profile &amp;amp;&amp;amp; /&lt;a href=&#34;http://push-top.sh&#34; rel=&#34;nofollow&#34;&gt;push-top.sh&lt;/a&gt; ,无效&lt;/p&gt;&#xA;&lt;br/&gt;&#xA;&lt;p&gt;一模一样的脚本，都是用 root 账户执行，为什么 crontab 执行后面的参数都掉了？&lt;/p&gt;&#xA;</description>
+      <author>AnjingJingan</author>
+      <pubDate>16 Jun 2022 12:05:50 +0000</pubDate>
+    </item>
+    <item>
       <title>米家这是又崩了么？ - 小米</title>
       <link>https://www.v2ex.com/t/860124</link>
       <description>&lt;p&gt;小米就不能好好搞个本地化 哪怕出个中枢硬件要我们掏钱买也行啊&#xA;全放在云上&#xA;现在看了一下 主域名 &lt;a href=&#34;http://home.mi.com&#34; rel=&#34;nofollow&#34;&gt;home.mi.com&lt;/a&gt; 返回{&#34;code&#34;:-12, &#34;message&#34;:&#34;throttle deny agw&#34;}&lt;/p&gt;&#xA;</description>
