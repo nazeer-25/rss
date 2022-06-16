@@ -81,6 +81,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "golang使用net包怎么实现linux curl指令功能，获取下载速度等指标？",
+      "Link": "https://studygolang.com/articles/35702#reply1",
+      "Description": "\u003cul\u003e\n\u003cli\u003e如何采用net包或者其他第三方包，实现curl功能\u003c/li\u003e\n\u003cli\u003e比如：\n\n\u003cul\u003e\n\u003cli\u003ecurl \u0026ndash;connect-timeout 5 -m 30 -w %{http_code}::%{speed_download}::%{size_download}\u0026ldquo;\\n\u0026rdquo; -x 127.0.0.1:80 \u0026ldquo;\u003ca href=\"http://xxx.com/1M.png\u0026quot;\"\u003ehttp://xxx.com/1M.png\u0026rdquo;\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "《Go题库·5》Go的GMP模型?",
       "Link": "https://studygolang.com/topics/15610#reply0",
       "Description": "\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e面试企业\u003c/strong\u003e 深信服，百度，小米，哔哩哔哩，好未来，跟谁学，学而思，网易，腾讯，知乎，高德，字节，，新浪，虾皮，Aibee。\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e题目解析\u003c/strong\u003e \u003ca href=\"https://www.golangroadmap.com/\"\u003eGOLANG ROADMAP社区\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（溪尾）\u003c/h2\u003e\n\n\u003cp\u003eG是\u003ccode\u003eGoroutine\u003c/code\u003e的缩写，相当于操作系统的进程控制块(process control block)。它包含：函数执行的指令和参数，任务对象，线程上下文切换，字段保护，和字段的寄存器。\u003c/p\u003e\n\n\u003cp\u003eM是一个线程，每个M都有一个线程的栈。如果没有给线程的栈分配内存，操作系统会给线程的栈分配默认的内存。当线程的栈制定，M.stack-\u0026gt;G.stack, M的PC寄存器会执行G提供的函数。\u003c/p\u003e\n\n\u003cp\u003eP(处理器，Processor)是一个抽象的概念，不是物理上的CPU。当一个P有任务，需要创建或者唤醒一个系统线程去处理它队列中的任务。P决定同时执行的任务的数量，\u003ccode\u003eGOMAXPROCS\u003c/code\u003e限制系统线程执行用户层面的任务的数量。\u003c/p\u003e\n\n\u003cp\u003eGO调度器的调度过程，首先创建一个G对象，然后G被保存在P的本地队列或者全局队列（global queue）。这时P会唤醒一个M。P按照它的执行顺序继续执行任务。M寻找一个空闲的P，如果找得到，将G与自己绑定。然后M执行一个调度循环：调用G对象-\u0026gt;执行-\u0026gt;清理线程-\u0026gt;继续寻找Goroutine。\u003c/p\u003e\n\n\u003cp\u003e在M的执行过程中，上下文切换随时发生。当切换发生，任务的执行现场需要被保护，这样在下一次调度执行可以进行现场恢复。M的栈保存在G对象中，只有现场恢复需要的寄存器(SP,PC等)，需要被保存到G对象。\u003c/p\u003e\n\n\u003cp\u003e如果G对象还没有被执行，M可以将G重新放到P的调度队列，等待下一次的调度执行。当调度执行时，M可以通过G的vdsoSP, vdsoPC 寄存器进行现场恢复。\u003c/p\u003e\n\n\u003cp\u003eP队列 P有2种类型的队列：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cp\u003e本地队列：本地的队列是无锁的，没有数据竞争问题，处理速度比较高。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e全局队列：是用来平衡不同的P的任务数量，所有的M共享P的全局队列。\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e线程清理 G的调度是为了实现P/M的绑定，所以线程清理就是释放P上的G，让其他的G能够被调度。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cp\u003e主动释放(active release)：典型的例子是，执行G任务时，发生了系统调用(system call)，这时M会处于阻塞（Block）状态。调度器会设置一个超时时间，来释放P。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e被动释放(passive release)：如果系统调用发生，监控程序需要扫描处于阻塞状态的P/M。 这时，超时之后，P资源会回收，程序被安排给队列中的其他G任务。\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
@@ -91,13 +98,6 @@
       "Title": "用 Golang 创作了一个图片处理服务",
       "Link": "https://studygolang.com/topics/15603#reply0",
       "Description": "\u003cp\u003eGolang构建的轻量级图片处理服务\u003c/p\u003e\n\n\u003cp\u003eGimg是通用的图片处理服务,能够缩放图片,制作缩略图等。\u003c/p\u003e\n\n\u003cp\u003e它提供非常多的对象存储后端(localfs/fastdfs\u0026hellip;),对热点图片进行缓存(memory/memcached/redis/ssdb),专注做图片的处理。\u003c/p\u003e\n\n\u003cp\u003e您可以把它放到HTTP代理服务器之后,比如Nginx或者Varnish,也可以指定图片获取的路径,它会自动去抓取图片。\u003c/p\u003e\n\n\u003cp\u003e详细请看:\u003ca href=\"https://github.com/x-debug/gimg\"\u003ehttps://github.com/x-debug/gimg\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "golang使用net包怎么实现linux curl指令功能，获取下载速度等指标？",
-      "Link": "https://studygolang.com/articles/35702#reply1",
-      "Description": "\u003cul\u003e\n\u003cli\u003e如何采用net包或者其他第三方包，实现curl功能\u003c/li\u003e\n\u003cli\u003e比如：\n\n\u003cul\u003e\n\u003cli\u003ecurl \u0026ndash;connect-timeout 5 -m 30 -w %{http_code}::%{speed_download}::%{size_download}\u0026ldquo;\\n\u0026rdquo; -x 127.0.0.1:80 \u0026ldquo;\u003ca href=\"http://xxx.com/1M.png\u0026quot;\"\u003ehttp://xxx.com/1M.png\u0026rdquo;\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
