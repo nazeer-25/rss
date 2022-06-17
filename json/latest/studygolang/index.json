@@ -130,6 +130,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "go如何更新文本文件中某一行的内容",
+      "Link": "https://studygolang.com/topics/11154#reply2",
+      "Description": "\u003cp\u003e这是代码实现,有个问题是更改某一行的内容后会影响下一个的内容.请大神帮我看一下\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;bufio\u0026quot;\n\t\u0026quot;errors\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;io\u0026quot;\n\t\u0026quot;os\u0026quot;\n\t\u0026quot;strings\u0026quot;\n)\n\nfunc main() {\n\tfi, err := os.OpenFile(\u0026quot;test.txt\u0026quot;, os.O_RDWR, os.ModePerm)\n\tif err != nil {\n\t\tfmt.Println(err)\n\t\treturn\n\t}\n\tdefer fi.Close()\n\treader := bufio.NewReader(fi)\n\tlineCnt := 0\n\tseekP := 0\n\tfor {\n\t\tbs, _, err := reader.ReadLine()\n\t\tif err == io.EOF {\n\t\t\tfmt.Println(errors.New(\u0026quot;读取完成\u0026quot;))\n\t\t\tbreak\n\t\t}\n\t\tlineCnt = len(bs) + 2 //ReadLine 返回读取的长度不包含换行\\r\\n\n\t\tif strings.Contains(string(bs), \u0026quot;hello\u0026quot;) {\n\t\t\tdelBytes := make([]byte, 0) //编辑包含hello的行，需要先在该行写入ascii的127即删除符号，再写入新内容\n\t\t\tfor i := 0; i \u0026lt; lineCnt; i++ {\n\t\t\t\tdelBytes = append(delBytes, 127)\n\t\t\t}\n\n\t\t\tfi.WriteAt(delBytes, int64(seekP))\n\n\t\t\tnewStr := \u0026quot;hi\\r\\n\u0026quot;\n\t\t\tfi.WriteAt([]byte(newStr), int64(seekP)) //在该行写入新内容\n\t\t\tlineCnt = len([]byte(newStr))            //该行长度是新内容的长度\n\t\t}\n\n\t\tseekP += lineCnt\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e文本文件原始:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eskdflksdlkfs\nsjdfksdfksf\nskjdkfj hello skjdfksjdfksjdkf\n123\n123\n123\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e被程序修改后,可以看到修改行的下一行被加入了很多空格\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eskdflksdlkfs\nsjdfksdfksf\nhi\n123\n123\n123\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "[广州]招聘golang开发工程师（12-20K）",
       "Link": "https://studygolang.com/topics/9431#reply2",
       "Description": "\u003cp\u003e岗位职责：\u003c/p\u003e\n\n\u003cp\u003e1、负责相关产品的后台开发；\n2、对现有的业务系统进行功能的优化和重构工作;\n3、根据业务和技术需要进行相关预研工作;\n4、分析和整理现有的业务系统问题，提出优化方案并执行;\n5、提高系统的性能与稳定性。\u003c/p\u003e\n\n\u003cp\u003e任职要求：\u003c/p\u003e\n\n\u003cp\u003e1、一年以上 Golang 开发经验优先，接受其他后台语言转GO语言开发；\n2、熟悉 Web 开发，有 HTTP API 开发经验；\n3、熟悉 TCP、HTTP 等常用协议；\n4、熟悉 MySQL 操作及其性能优化 ；\n5、熟悉 Git 代码协作；\n6、对于分布式系统及其高可用、高并发有一定经验；\n7、对代码质量有追求，命名规范，结构清晰，逻辑性强；\n8、熟悉linux操作，具备一定 Shell 脚本开发能力。\u003c/p\u003e\n\n\u003cp\u003e加分项：\u003c/p\u003e\n\n\u003cp\u003e1、熟悉了解grpc，protobuf协议；\n2、熟练掌握一门脚本语言（python，js等）；\u003c/p\u003e\n\n\u003cp\u003e投递方式：\n邮箱：wangguichao211@163.com\n咨询QQ：1966324276\u003c/p\u003e\n",
