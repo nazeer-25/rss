@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>容器中如何能访问到宿主机的端口？ - Docker</title>
+      <link>https://www.v2ex.com/t/860293</link>
+      <description>&lt;p&gt;宿主机启动了一个 node 服务，端口 8001,nginx 为容器，配置反代访问不到&#xA;宿主机系统 Ubuntu 20.04.2 LTS (GNU/Linux 5.13.0-1036-oracle aarch64)&lt;/p&gt;&#xA;&lt;h2&gt;docker 容器 nginx:alpine 反代 8001 端口&lt;/h2&gt;&#xA;&lt;p&gt;nginx 配置如下&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;location / {&#xA;    proxy_set_header Host $host:$server_port;&#xA;    proxy_set_header X-Real-Ip $remote_addr;&#xA;    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#xA;    proxy_pass http://172.23.0.1:8001;&#xA;\}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;#容器的 ip 信息&#xA;docker inspect nginx | grep IPAddress&#xA;&#xA;&#34;SecondaryIPAddresses&#34;: null,&#xA;            &#34;IPAddress&#34;: &#34;&#34;,&#xA;                    &#34;IPAddress&#34;: &#34;172.23.0.2&#34;,&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;nginx 内能够 ping 通 172.23.0.1 ，但是 wget &lt;a href=&#34;http://172.23.0.1:8001&#34; rel=&#34;nofollow&#34;&gt;http://172.23.0.1:8001&lt;/a&gt; 不行&lt;/p&gt;&#xA;&lt;p&gt;应该要怎么配置才能够访问通&lt;/p&gt;&#xA;</description>
+      <author>WenJimmy</author>
+      <pubDate>17 Jun 2022 06:33:03 +0000</pubDate>
+    </item>
+    <item>
       <title>我这个崽又来诉苦关于恋爱结婚的那档子事了 - 问与答</title>
       <link>https://www.v2ex.com/t/860292</link>
       <description>跟男朋友在一起快一年了，最近心里想着也是得稍微规划一下未来了，然后早上就问了下他，结果就曝出来我不知道的事情；他上周刚好回家了，他说其实有跟父母提到我，他爸妈觉得我配不上她的家庭，不同意，具体看不上我哪些，我也不知道，他不讲给我。他爸爸在成都当公务员，妈妈在成都的某个大学当行政老师，我只知道这些，我父母都是小县城里普通的打工人，论条件的话的确是我高攀了；&lt;br /&gt;其实一开始他追我的时候，我就说了自己配不上他，毕竟他是从美国留学回来的，我们这种小家庭根本不敢想去美国留学的。（写到这里，感觉自己骨子里真的是好自卑的人，花了很长时间想摆脱都没能，可能父母也是自卑的人，我爸妈听说我男朋友家庭之后，也是觉得自己可别给女儿丢人了）&lt;br /&gt;还有一点就是他是 96 年的，我是 93 年的，他的薪资 32K ，我 22K ，我知道现在主要是看男朋友的态度了，他说不想分开，但也不知道该怎么办。&lt;br /&gt;这种剧情真的太电视剧了，大部分的结果都是分开。就是心里堵得慌！真的希望父母们不要太过于干涉孩子们的婚姻，父母只需要把控人品就好了，别的留给孩子自己去思考决定不好嘛？！遇到一个互相喜欢的人已经很难了，父母还要从中阻挠！</description>
