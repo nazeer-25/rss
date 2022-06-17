@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>武汉---急需一名前端岗和美工一名 - 酷工作</title>
+      <link>https://www.v2ex.com/t/860383</link>
+      <description>公司名称：武汉君牧科技&lt;br /&gt;工作地点：武汉江汉区&lt;br /&gt;工作经验：一年以上&lt;br /&gt;联系微信：1152107599</description>
+      <author>mmei737201</author>
+      <pubDate>17 Jun 2022 13:53:22 +0000</pubDate>
+    </item>
+    <item>
       <title>在 DDD 或 Clean Architecture 里，请问数据验证代码该放在哪层？是用异常还是返回值？ - 问与答</title>
       <link>https://www.v2ex.com/t/860381</link>
       <description>&lt;p&gt;背景：假设有一个 API 项目用的是 aspnetcore ，然后项目各个功能拆分成独立的组件库了（比如 identity 、user profiles 、sessions 、posts ），都有各自独立的接口，UI 层（ API ）需要哪个就引用哪个库配置哪个库。&lt;/p&gt;&#xA;&lt;p&gt;比如有一个创建用户的接口，首先框架会自动基于 Model 属性和数据类型对请求数据做基本的数据验证，比如是不是一个有效的 int 、Guid 、Email 等等。&lt;/p&gt;&#xA;&lt;p&gt;假如接下来我要验证这个电子邮件是不是符合某些规则，然后是不是唯一的没有被别人注册使用，这个逻辑我该在组件的 Service 里做还是数据存储层 Repository 里做，还是就在 Controller 那验证？&lt;/p&gt;&#xA;&lt;p&gt;我搜了下外网的回答，各种观点的都有，总结下来就是都觉得自己的是好的，别的都不建议，然后都有一点点道理。&lt;/p&gt;&#xA;&lt;p&gt;有的说应该确保从 Repository 存进和取出的数据都应该是有效的，否则世界就会变得太复杂，所以在 Repository 里验证；（到底有没有必要再在这里做一次验证？）&lt;/p&gt;&#xA;&lt;p&gt;有的说应该在 Entity 或 Model 做（里面还分成很多派系）；&lt;/p&gt;&#xA;&lt;p&gt;有的说在 Service 做；&lt;/p&gt;&#xA;&lt;p&gt;有的在 Specification ；有的在 Command ；有的在 Event ；&lt;/p&gt;&#xA;&lt;p&gt;有的说在最开始创建或修改的地方做（通常是 Controller 那里）；&lt;/p&gt;&#xA;&lt;p&gt;还有，数据无效（比如有非法字符，或这个电子邮件已经被使用）该使用异常还是返回值？&lt;/p&gt;&#xA;&lt;p&gt;有的观点是如果大量数据需要验证，使用异常会打断流程，但如果我在那层做完全部验证在把这些问题整合抛出一个异常呢？而且接口返回值也不需要再套几层对象包装。&lt;/p&gt;&#xA;&lt;p&gt;比如我觉得&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;Task&amp;lt;User&amp;gt; Repository.AddAsync(User user)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;就比&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;Task&amp;lt;IdentityResult&amp;gt; Repository.AddAsync(User user)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;清晰简单，我也不用考虑这个 IdentityResult 怎么来兼容其它类型的操作，外面的那层也可以不用套上这个返回值类型的枷锁。&lt;/p&gt;&#xA;&lt;p&gt;为什么我会需要考虑这个 IdentityResult 怎么来兼容其它类型的操作，比如我有一个接口，给用户添加一个 Claim ，然后返回完整的信息而不需要再查询一次，接口为这样：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;Task&amp;lt;UserClaim&amp;gt; AddClaimAsync(User user, Claim claim)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如果改成返回 IdentityResult 就需要给 IdentityResult 增加属性，但是大部分时候是不需要这个属性的。&lt;/p&gt;&#xA;&lt;p&gt;你们会怎么做的？&lt;/p&gt;&#xA;</description>
