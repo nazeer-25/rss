@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "在 DDD 或 Clean Architecture 里，请问数据验证代码该放在哪层？是用异常还是返回值？ - 问与答",
+      "Link": "https://www.v2ex.com/t/860381",
+      "Description": "\u003cp\u003e背景：假设有一个 API 项目用的是 aspnetcore ，然后项目各个功能拆分成独立的组件库了（比如 identity 、user profiles 、sessions 、posts ），都有各自独立的接口，UI 层（ API ）需要哪个就引用哪个库配置哪个库。\u003c/p\u003e\n\u003cp\u003e比如有一个创建用户的接口，首先框架会自动基于 Model 属性和数据类型对请求数据做基本的数据验证，比如是不是一个有效的 int 、Guid 、Email 等等。\u003c/p\u003e\n\u003cp\u003e假如接下来我要验证这个电子邮件是不是符合某些规则，然后是不是唯一的没有被别人注册使用，这个逻辑我该在组件的 Service 里做还是数据存储层 Repository 里做，还是就在 Controller 那验证？\u003c/p\u003e\n\u003cp\u003e我搜了下外网的回答，各种观点的都有，总结下来就是都觉得自己的是好的，别的都不建议，然后都有一点点道理。\u003c/p\u003e\n\u003cp\u003e有的说应该确保从 Repository 存进和取出的数据都应该是有效的，否则世界就会变得太复杂，所以在 Repository 里验证；（到底有没有必要再在这里做一次验证？）\u003c/p\u003e\n\u003cp\u003e有的说应该在 Entity 或 Model 做（里面还分成很多派系）；\u003c/p\u003e\n\u003cp\u003e有的说在 Service 做；\u003c/p\u003e\n\u003cp\u003e有的在 Specification ；有的在 Command ；有的在 Event ；\u003c/p\u003e\n\u003cp\u003e有的说在最开始创建或修改的地方做（通常是 Controller 那里）；\u003c/p\u003e\n\u003cp\u003e还有，数据无效（比如有非法字符，或这个电子邮件已经被使用）该使用异常还是返回值？\u003c/p\u003e\n\u003cp\u003e有的观点是如果大量数据需要验证，使用异常会打断流程，但如果我在那层做完全部验证在把这些问题整合抛出一个异常呢？而且接口返回值也不需要再套几层对象包装。\u003c/p\u003e\n\u003cp\u003e比如我觉得\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-cs\"\u003eTask\u0026lt;User\u0026gt; Repository.AddAsync(User user)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e就比\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-cs\"\u003eTask\u0026lt;IdentityResult\u0026gt; Repository.AddAsync(User user)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e清晰简单，我也不用考虑这个 IdentityResult 怎么来兼容其它类型的操作，外面的那层也可以不用套上这个返回值类型的枷锁。\u003c/p\u003e\n\u003cp\u003e为什么我会需要考虑这个 IdentityResult 怎么来兼容其它类型的操作，比如我有一个接口，给用户添加一个 Claim ，然后返回完整的信息而不需要再查询一次，接口为这样：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-cs\"\u003eTask\u0026lt;UserClaim\u0026gt; AddClaimAsync(User user, Claim claim)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如果改成返回 IdentityResult 就需要给 IdentityResult 增加属性，但是大部分时候是不需要这个属性的。\u003c/p\u003e\n\u003cp\u003e你们会怎么做的？\u003c/p\u003e\n",
+      "Author": "skinny",
+      "PubDate": "2022-06-17T13:38:19Z"
+    },
+    {
       "Title": "所谓重新开始失败的一百种姿势 - 生活",
       "Link": "https://www.v2ex.com/t/860379",
       "Description": "从高中开始刷 ins 和油管，不太接触周围人的日常。\u003cbr /\u003e现在失业在家，为了避免消极待业与社会脱节，建了一个学习生活群。\u003cbr /\u003e之前自学过设计，当过产品和运营，现在是前端。\u003cbr /\u003e群里日常到技术都可以聊...\u003cbr /\u003e为了群不沦为 ghs...希望你能适当聊点有营养的东西。\u003cbr /\u003e有需要留 v",
