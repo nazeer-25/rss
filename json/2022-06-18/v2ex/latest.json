@@ -4,27 +4,6 @@
   "Description": "",
   "Items": [
     {
-      "Title": "聚合腾讯云轻量级香港服务器*1=30mbps, *2=60mbps - 分享创造",
-      "Link": "https://www.v2ex.com/t/860540",
-      "Description": "\u003cp\u003e发现腾讯轻量级香港服务器便宜又好用，美中不足是只有 30mbps 。于是写了个程序能聚合多台的带宽,简单说就是买两台就可以得到 60mbps 带宽(3 台 90m)。用了两周还是比较稳定好用，想分享给大家。欢迎 star 和 issue 。\u003cbr/\u003e\n项目: \u003ca href=\"https://github.com/fregie/mpx\" rel=\"nofollow\"\u003ehttps://github.com/fregie/mpx\u003c/a\u003e \u003c/p\u003e\n\u003cp\u003e我买了 3 台\n\u003cimg alt=\"90mbps\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/06/18/40012395510f8a06.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e原理\u003c/h3\u003e\n\u003cp\u003e分别把数据从公网发到两台服务器，其中一台转发到另一台，另一台再转发出去，因为内网和服务器公网下行都能远超 30mbps ，所以作代理的时候可以叠加公网上行带宽\u003c/p\u003e\n\u003ch3\u003e使用 docker 快速上手\u003c/h3\u003e\n\u003cp\u003e假设我们有两台服务器\u003ccode\u003eserver-1\u003c/code\u003e, \u003ccode\u003eserver-2\u003c/code\u003e\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e\u003c/th\u003e\n\u003cth\u003e公网 IP\u003c/th\u003e\n\u003cth\u003e内网 IP\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003eserver-1\u003c/td\u003e\n\u003ctd\u003epublic-ip-1\u003c/td\u003e\n\u003ctd\u003eprivate-ip-1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eserver-2\u003c/td\u003e\n\u003ctd\u003epublic-ip-2\u003c/td\u003e\n\u003ctd\u003eprivate-ip-2\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003ch4\u003eserver-1 部署\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003edocker run -d --restart=always --name=ssgo -p 2551:2551 -t niiv0832/go-shadowsocks2:latest -u -s 'ss://AEAD_CHACHA20_POLY1305:password@:2551'\ndocker run -d --restart=always --name mpx -p 5512:5512 -e LISTEN_ADDR=\"0.0.0.0:5512\" -e TARGET_ADDR=\"private-ip-1:2551\" fregie/mpx:latest\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4\u003eserver-2 部署\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003eecho \"net.ipv4.ip_forward = 1\" \u0026gt;\u0026gt; /etc/sysctl.conf\nsysctl -p\niptables -t nat -I POSTROUTING  -j MASQUERADE\niptables -t nat -I PREROUTING -p tcp --dport 6666 -j DNAT --to-destination private-ip-1:5512\niptables -t nat -I POSTROUTING -d private-ip-1 -p tcp --dport 5512 -j SNAT --to-source private-ip-2\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4\u003e本地部署\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003edocker run -d --restart=always --name mpx -p 5513:5513 -e LISTEN_ADDR=\"0.0.0.0:5513\" -e SERVER_ADDR=\"public-ip-1:5512|1,public-ip-2:6666|1\" fregie/mpx:latest\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e使用以下配置启动任意 shadowsocks 客户端\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yaml\"\u003eserver: 127.0.0.1\nport: 5513\nmethod: AEAD_CHACHA20_POLY1305\npassword: password\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "fregie",
-      "PubDate": "2022-06-18T10:45:59Z"
-    },
-    {
-      "Title": "Office 365 拼车 自己开的稳定 - 优惠信息",
-      "Link": "https://www.v2ex.com/t/860538",
-      "Description": "\u003cp\u003e长期用 office365 家庭版，自用，2023 年 7 月 17 日到期，剩余车位出 49 元 /人*年\u003c/p\u003e\n\u003cp\u003e微信：iSophious\u003c/p\u003e\n",
-      "Author": "Bellaaa",
-      "PubDate": "2022-06-18T10:34:29Z"
-    },
-    {
-      "Title": "office 365 发车啦~拼车~ - Microsoft Office",
-      "Link": "https://www.v2ex.com/t/860533",
-      "Description": "\u003cp\u003e今天刚订阅的 365 家庭版。Office 全家桶+one drive1T 空间。\u003c/p\u003e\n\u003cp\u003e有需要的同学可以联系，到期时间 2023.7.17 ，每人每年 50 元。v: iSophious\u003c/p\u003e\n",
-      "Author": "Bellaaa",
-      "PubDate": "2022-06-18T09:49:55Z"
-    },
-    {
       "Title": "铁子们，你们休育儿假了吗？ - 深圳",
       "Link": "https://www.v2ex.com/t/860530",
       "Description": "\u003cp\u003e深圳，今年开始，有 1~36 月娃的打工仔有 10 天的育儿假，一般公司不会宣导，不了解的铁子要抓紧休假了，已经 6 月份了。\n其他城市也有，成都和上海是 5 天，北京不了解多少天。\u003c/p\u003e\n",
@@ -205,6 +184,27 @@
       "Description": "\u003cp\u003eMacbook air M1 内置电池本来很耐用，开会 3 天，过程无聊，手头正好有个 10000mah 的 USB pd 充电宝，支持 18w 输出，想测试下充电宝给 Mac 充电 /供电情况如何，几点发现：\u003cbr/\u003e\n1.用 C2C 线连接充电宝和 Mac ，电脑识别供电功率 18w ，实际充电功率为 12V ，1.4A ，大约 17w 。\u003cbr/\u003e\n2.用充电宝给 Mac 充电，能量转换效率似乎不高，充电宝掉电很快，电脑充电很慢。\u003cbr/\u003e\n3.Mac 充满后，用充电宝给 Mac 供电，使用场景主要是写文档、写邮件，屏幕亮度 50%，这时充电宝电压 12V ，电流大约 0.3A ，整机功耗大约 3.x 瓦，充电宝能量转换效率很高，1 小时充电宝大约掉电 10%。\u003cbr/\u003e\n4.一块 10000mah 的充电宝，能量大约 37 瓦，轻办公使用场景下，用来给 M1 Mac 供电，大约可以用 10 小时。充电宝+内置电池大约可以用 10+18=28 小时。  \u003c/p\u003e\n\u003cp\u003e笔记本电脑就应该这样用。  \u003c/p\u003e\n\u003cp\u003e有点意思，跟大家分享一下。\u003c/p\u003e\n",
       "Author": "leeway82",
       "PubDate": "2022-06-18T05:26:00Z"
+    },
+    {
+      "Title": "聚合腾讯云轻量级香港服务器*1=30mbps, *2=60mbps - 分享创造",
+      "Link": "https://www.v2ex.com/t/860540",
+      "Description": "\u003cp\u003e发现腾讯轻量级香港服务器便宜又好用，美中不足是只有 30mbps 。于是写了个程序能聚合多台的带宽,简单说就是买两台就可以得到 60mbps 带宽(3 台 90m)。用了两周还是比较稳定好用，想分享给大家。欢迎 star 和 issue 。\u003cbr/\u003e\n项目: \u003ca href=\"https://github.com/fregie/mpx\" rel=\"nofollow\"\u003ehttps://github.com/fregie/mpx\u003c/a\u003e \u003c/p\u003e\n\u003cp\u003e我买了 3 台\n\u003cimg alt=\"90mbps\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/06/18/40012395510f8a06.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e原理\u003c/h3\u003e\n\u003cp\u003e分别把数据从公网发到两台服务器，其中一台转发到另一台，另一台再转发出去，因为内网和服务器公网下行都能远超 30mbps ，所以作代理的时候可以叠加公网上行带宽\u003c/p\u003e\n\u003ch3\u003e使用 docker 快速上手\u003c/h3\u003e\n\u003cp\u003e假设我们有两台服务器\u003ccode\u003eserver-1\u003c/code\u003e, \u003ccode\u003eserver-2\u003c/code\u003e\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e\u003c/th\u003e\n\u003cth\u003e公网 IP\u003c/th\u003e\n\u003cth\u003e内网 IP\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003eserver-1\u003c/td\u003e\n\u003ctd\u003epublic-ip-1\u003c/td\u003e\n\u003ctd\u003eprivate-ip-1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eserver-2\u003c/td\u003e\n\u003ctd\u003epublic-ip-2\u003c/td\u003e\n\u003ctd\u003eprivate-ip-2\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003ch4\u003eserver-1 部署\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003edocker run -d --restart=always --name=ssgo -p 2551:2551 -t niiv0832/go-shadowsocks2:latest -u -s 'ss://AEAD_CHACHA20_POLY1305:password@:2551'\ndocker run -d --restart=always --name mpx -p 5512:5512 -e LISTEN_ADDR=\"0.0.0.0:5512\" -e TARGET_ADDR=\"private-ip-1:2551\" fregie/mpx:latest\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4\u003eserver-2 部署\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003eecho \"net.ipv4.ip_forward = 1\" \u0026gt;\u0026gt; /etc/sysctl.conf\nsysctl -p\niptables -t nat -I POSTROUTING  -j MASQUERADE\niptables -t nat -I PREROUTING -p tcp --dport 6666 -j DNAT --to-destination private-ip-1:5512\niptables -t nat -I POSTROUTING -d private-ip-1 -p tcp --dport 5512 -j SNAT --to-source private-ip-2\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4\u003e本地部署\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003edocker run -d --restart=always --name mpx -p 5513:5513 -e LISTEN_ADDR=\"0.0.0.0:5513\" -e SERVER_ADDR=\"public-ip-1:5512|1,public-ip-2:6666|1\" fregie/mpx:latest\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e使用以下配置启动任意 shadowsocks 客户端\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yaml\"\u003eserver: 127.0.0.1\nport: 5513\nmethod: AEAD_CHACHA20_POLY1305\npassword: password\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "fregie",
+      "PubDate": "2022-06-18T10:45:59Z"
+    },
+    {
+      "Title": "Office 365 拼车 自己开的稳定 - 优惠信息",
+      "Link": "https://www.v2ex.com/t/860538",
+      "Description": "\u003cp\u003e长期用 office365 家庭版，自用，2023 年 7 月 17 日到期，剩余车位出 49 元 /人*年\u003c/p\u003e\n\u003cp\u003e微信：iSophious\u003c/p\u003e\n",
+      "Author": "Bellaaa",
+      "PubDate": "2022-06-18T10:34:29Z"
+    },
+    {
+      "Title": "office 365 发车啦~拼车~ - Microsoft Office",
+      "Link": "https://www.v2ex.com/t/860533",
+      "Description": "\u003cp\u003e今天刚订阅的 365 家庭版。Office 全家桶+one drive1T 空间。\u003c/p\u003e\n\u003cp\u003e有需要的同学可以联系，到期时间 2023.7.17 ，每人每年 50 元。v: iSophious\u003c/p\u003e\n",
+      "Author": "Bellaaa",
+      "PubDate": "2022-06-18T09:49:55Z"
     },
     {
       "Title": "618 各位都买了啥？ - 买买买",
