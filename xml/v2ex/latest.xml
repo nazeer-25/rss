@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>golang 基于 net.Conn 的连接多路复用库。可用于减少握手时间，聚合链路带宽 - 分享创造</title>
+      <link>https://www.v2ex.com/t/860578</link>
+      <description>&lt;h2&gt;用途&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;复用已有连接，省去握手时间。可用于解决多重连接场景下建立连接握手时间太长&lt;/li&gt;&#xA;&lt;li&gt;聚合多个 IP/服务器，同时聚合带宽，多个低带宽服务器聚合成高带宽&lt;/li&gt;&#xA;&lt;li&gt;某些情况下聚合多条 TCP 连接可以提高峰值带宽&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;仓库: &lt;a href=&#34;https://github.com/fregie/mpx&#34; rel=&#34;nofollow&#34;&gt;https://github.com/fregie/mpx&lt;/a&gt; &lt;/p&gt;&#xA;&lt;p&gt;欢迎 star 和 issue&#xA;隐藏功能: &lt;a href=&#34;https://www.v2ex.com/t/860540&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/860540&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;之前发的贴被移到了 Chamber 节点，所以再发一个介绍技术特性的贴&lt;/p&gt;&#xA;</description>
+      <author>fregie</author>
+      <pubDate>18 Jun 2022 14:17:43 +0000</pubDate>
+    </item>
+    <item>
       <title>DNSPod DoH 延迟大，偶尔解析出错，包括腾讯系域名 - 全球工单系统</title>
       <link>https://www.v2ex.com/t/860576</link>
       <description>&lt;p&gt;不久前重新配置了路由，增加了 dnscrypt-proxy 负责局域网内设备解析，因为对 dnspod 印象比较好所以用了这家 doh&lt;/p&gt;&#xA;&lt;p&gt;然后手机 app 时不时出现图片空白（没加载），需要刷新才能加载成功，排查后发现居然是 dnspod doh 的问题&lt;/p&gt;&#xA;&lt;p&gt;看解析日志，dnspod doh 响应在 20ms 以内的不到 10%，大部分是 40ms 到 100ms ，偶尔会超过 1000ms 和失败&lt;/p&gt;&#xA;&lt;p&gt;更换到 alidns doh ，大部分解析时间能保持在 20ms 以内，手机 app 图片空白现象消失&lt;/p&gt;&#xA;&lt;p&gt;我想着解析腾讯系域名用 dnspod 应该会比 alidns 要准确，更换 alidns 时专门配置了例外，让 dnspod 解析腾讯系域名，结果微信服务出现部分图片空白，然后我取消掉例外配置让腾讯系域名也由 alidns 解析反而正常了&lt;/p&gt;&#xA;&lt;p&gt;最初使用的是域名地址 &lt;a href=&#34;https://doh.pub/dns-query&#34; rel=&#34;nofollow&#34;&gt;https://doh.pub/dns-query&lt;/a&gt; ，发现异常后在 dnspod 官网找到 ip 地址更换测试，包括 &lt;a href=&#34;https://1.12.12.12/dns-query&#34; rel=&#34;nofollow&#34;&gt;https://1.12.12.12/dns-query&lt;/a&gt; 和 &lt;a href=&#34;https://120.53.53.53/dns-query&#34; rel=&#34;nofollow&#34;&gt;https://120.53.53.53/dns-query&lt;/a&gt; ，都是一样慢和小概率出错&lt;/p&gt;&#xA;&lt;p&gt;使用的网络是广东移动宽带&lt;/p&gt;&#xA;&lt;p&gt;@&lt;a href=&#34;/member/naizhao&#34;&gt;naizhao&lt;/a&gt;&lt;/p&gt;&#xA;</description>
