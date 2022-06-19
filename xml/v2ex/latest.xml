@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>贝尔金拓展坞一次没用就想闲鱼卖了，连 4K60hz 都不支持 - 问与答</title>
+      <link>https://www.v2ex.com/t/860709</link>
+      <description>求问可以通过什么技术手段让它支持 4k60hz</description>
+      <author>unt</author>
+      <pubDate>19 Jun 2022 12:52:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>今天联通转电信全程 20 分钟 - 分享发现</title>
+      <link>https://www.v2ex.com/t/860708</link>
+      <description>今天在商场看到电信在推，一直就想转电信了，联通总是没信号总是失联。&lt;br /&gt;刚好今天看到就转电信了。&lt;br /&gt;预存 200 送 200+800 冻结 2 年+宽带。&lt;br /&gt;选的 119 套餐才有宽带，20G 流量送 20G+300 分钟。</description>
+      <author>JasonFW</author>
+      <pubDate>19 Jun 2022 12:41:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>iOS 除了以下音量类型，还有别的吗？铃声音量，媒体音量，通话时的听筒音量，通话时的免提音量， Siri 音量。 - Apple</title>
+      <link>https://www.v2ex.com/t/860707</link>
+      <description>&lt;p&gt;我才发现 Siri 的音量是独立于媒体音量的。&lt;/p&gt;&#xA;</description>
+      <author>GooglePlay</author>
+      <pubDate>19 Jun 2022 12:40:26 +0000</pubDate>
+    </item>
+    <item>
       <title>LeetCode 的 Java 题目，同样的数据，本地能过测试但是在线过不了 - 程序员</title>
       <link>https://www.v2ex.com/t/860705</link>
       <description>&lt;p&gt;题目：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/&#34; rel=&#34;nofollow&#34;&gt;https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;就是一个二叉搜索树，两个节点 p 和 q 找到最近公共祖先。这个树最大节点数目是 100000(虽然题目没说，但是我在美国 leetcode 里面找到了说明，而且在美国 leetcode 和这里提交，报错情况一模一样）&lt;/p&gt;&#xA;&lt;p&gt;我的做法是先把这个树变成一个 index 为 1 对应 root 的数组&lt;code&gt;vals&lt;/code&gt;，左子树 index 是 2*index, 右子树是 2*index+1 。&lt;/p&gt;&#xA;&lt;p&gt;找到 p 的 index 是 pIndex ，q 的 index 是 qIndex ，然后在 boolean 数组&lt;code&gt;visited&lt;/code&gt;里面把 p 的 parent 都标记为 true ，然后分析 q ，q 的第一个 visited 为 true 的地方就是最近的公共节点。&lt;/p&gt;&#xA;&lt;p&gt;代码是这样：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;class Solution {&#xA;        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {&#xA;            if (root == null) {&#xA;                return null;&#xA;            }&#xA;            final int maxSize = 9000000;&#xA;            int[] vals = new int[maxSize];&#xA;            TreeNode[] nodes = new TreeNode[maxSize];&#xA;            boolean[] visited = new boolean[maxSize];&#xA;            var nodeStack = new ArrayDeque&amp;lt;TreeNode&amp;gt;();&#xA;            var indexStack = new ArrayDeque&amp;lt;Integer&amp;gt;();&#xA;            nodeStack.offerLast(root);&#xA;            indexStack.offerLast(1);&#xA;            int pIndex = 0, qIndex = 0;&#xA;            while (nodeStack.size() != 0) {&#xA;                var node = nodeStack.pollFirst();&#xA;                var index = indexStack.pollFirst();&#xA;                vals[index] = node.val;&#xA;                nodes[index] = node;&#xA;                if (node == p) {&#xA;                    pIndex = index;&#xA;                } else if (node == q) {&#xA;                    qIndex = index;&#xA;                }&#xA;                if (node.left != null) {&#xA;                    nodeStack.offerLast(node.left);&#xA;                    indexStack.offerLast(2 * index);&#xA;                }&#xA;                if (node.right != null) {&#xA;                    nodeStack.offerLast(node.right);&#xA;                    indexStack.offerLast(2 * index + 1);&#xA;                }&#xA;            }&#xA;            while (pIndex &amp;gt;= 1) {&#xA;                visited[pIndex] = true;&#xA;                pIndex /= 2;&#xA;            }&#xA;            TreeNode answer = null;&#xA;            while (qIndex &amp;gt;= 1) {&#xA;                if (visited[qIndex]) {&#xA;                    answer = nodes[qIndex];&#xA;                    break;&#xA;                }&#xA;                qIndex /= 2;&#xA;            }&#xA;            return answer;&#xA;        }&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;报错是:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;java.lang.ArrayIndexOutOfBoundsException: Index 12694084 out of bounds for length 9000000&#xA;  at line 21, Solution.lowestCommonAncestor&#xA;  at line 55, __DriverSolution__.__helper__&#xA;  at line 102, __Driver__.main&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;也就是说，我在第一个 while 里面第三行 val[index] = node.val 时，index 超过了 900000.&lt;/p&gt;&#xA;&lt;p&gt;但是我在本地测试同样的数据，没有任何问题，能给出正确答案。&lt;/p&gt;&#xA;&lt;p&gt;从逻辑上说，这个测试数据集给出了 20000 个节点，也不可能让 index 达到报错里面所说的 12694084 。。。(很简单的逻辑。。。）&lt;/p&gt;&#xA;&lt;p&gt;真不知道出了什么问题。。。&lt;/p&gt;&#xA;</description>
