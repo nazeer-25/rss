@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "我双非一本科班生，做软件测试有学历优势不？ - 问与答",
+      "Link": "https://www.v2ex.com/t/860734",
+      "Description": "做开发能力也不行，就想着搞测试",
+      "Author": "jiyan5",
+      "PubDate": "2022-06-19T14:55:02Z"
+    },
+    {
+      "Title": "上海徐汇西岸求租房 - 上海",
+      "Link": "https://www.v2ex.com/t/860733",
+      "Description": "\u003cul\u003e\n\u003cli\u003e位置在地铁云锦路，或者 11 ，12 号线和 8 号线前滩附近\u003c/li\u003e\n\u003cli\u003e预算 3.5k ，最好有独卫\u003c/li\u003e\n\u003cli\u003e直租转租或者想要合租的都可以，联系加绿色软件 eXVndW1vb3I=\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e另外问问徐汇这边公租房好排吗\u003c/p\u003e\n",
+      "Author": "tractatus",
+      "PubDate": "2022-06-19T14:50:38Z"
+    },
+    {
       "Title": "Cpp 移动构造函数的问题 - 程序员",
       "Link": "https://www.v2ex.com/t/860731",
       "Description": "\u003cp\u003e这个是我的代码, 按照移动构造函数的定义, 我先创建了一个对象 a, 这个对象强制使用 move 调用移动构造函数赋值给 b, 这个时候, a, b 里面的成员变量的地址 data 应该是一样的, 为什么我这里显示的不一样? \u003c/p\u003e\n\u003cp\u003e运行结果\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eConstructor is called for 10\n000000950D2FF7F8 // addr\nMove Constructor for 10\n000000950D2FF818 // addr\nDestructor is called for 10\nDestructor is called for nullptr\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode class=\"language-cpp\"\u003e// C++ program with declaring the\n// move constructor\n#include \u0026lt;iostream\u0026gt;\n#include \u0026lt;vector\u0026gt;\nusing namespace std;\n\n// Move Class\nclass Move {\n\npublic:\n\n    int* data;\n    // Constructor\n    Move(int d)\n    {\n        // Declare object in the heap\n        data = new int;\n        *data = d;\n        cout \u0026lt;\u0026lt; \"Constructor is called for \"\n            \u0026lt;\u0026lt; d \u0026lt;\u0026lt; endl;\n    };\n\n    // Copy Constructor\n    Move(const Move\u0026amp; source)\n        : Move{ *source.data }\n    {\n\n        // Copying the data by making\n        // deep copy\n        cout \u0026lt;\u0026lt; \"Copy Constructor is called -\"\n            \u0026lt;\u0026lt; \"Deep copy for \"\n            \u0026lt;\u0026lt; *source.data\n            \u0026lt;\u0026lt; endl;\n    }\n\n    // Move Constructor\n    Move(Move\u0026amp;\u0026amp; source)\n        : data{ source.data }\n    {\n\n        cout \u0026lt;\u0026lt; \"Move Constructor for \"\n            \u0026lt;\u0026lt; *source.data \u0026lt;\u0026lt; endl;\n        source.data = nullptr;\n    }\n\n\n    // Destructor\n    ~Move()\n    {\n        if (data != nullptr)\n\n            // If pointer is not pointing\n            // to nullptr\n            cout \u0026lt;\u0026lt; \"Destructor is called for \"\n            \u0026lt;\u0026lt; *data \u0026lt;\u0026lt; endl;\n        else\n\n            // If pointer is pointing\n            // to nullptr\n            cout \u0026lt;\u0026lt; \"Destructor is called\"\n            \u0026lt;\u0026lt; \" for nullptr \"\n            \u0026lt;\u0026lt; endl;\n\n        // Free up the memory assigned to\n        // The data member of the object\n        delete data;\n    }\n};\n\n// Driver Code\nint main()\n{\n    // Vector of Move Class\n    //vector\u0026lt;Move\u0026gt; vec;\n\n    //// Inserting Object of Move Class\n    //vec.push_back(Move{ 10 });\n    //vec.push_back(Move{ 20 });\n    Move a(10);\n    cout \u0026lt;\u0026lt; \u0026amp;(a.data) \u0026lt;\u0026lt; endl;\n    Move b = move(a);\n    cout \u0026lt;\u0026lt; \u0026amp;(b.data) \u0026lt;\u0026lt; endl;\n    return 0;\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
