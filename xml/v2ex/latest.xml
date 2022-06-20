@@ -4,6 +4,61 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>阿里云 RDS-MySQL 8.0 日期处理有 BUG - 全球工单系统</title>
+      <link>https://www.v2ex.com/t/860798</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-MySQL&#34;&gt;CREATE TABLE `xxx` (&#xA; `id` INT(10) NOT NULL AUTO_INCREMENT,&#xA; `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;创建时间&#39;,&#xA; `expire_time` TIMESTAMP NOT NULL COMMENT &#39;超时时间&#39;,&#xA; PRIMARY KEY (`id`) USING BTREE&#xA;)&#xA;COMMENT=&#39;test&#39; COLLATE=&#39;utf8mb4_general_ci&#39; ENGINE=InnoDB;&#xA;&#xA;/* SQL 错误（ 1067 ）：Invalid default value for &#39;expire_time&#39; */&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;有点奇怪，上面是最小复现的语句，在开源版的 MySQL 8.0 上是没有问题的，开的配置是一样(默认）的，&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;目前来看触发的条件就是前面一句也是一个 TIMESTAMP 且后面修饰不一样就会出现，单独只有 &lt;code&gt;expire_time&lt;/code&gt; 是没有问题的。&lt;/p&gt;&#xA;&lt;p&gt;(啊，虽然现在用 timestamp 不太合理，但是我觉得我现在这个项目可能活不到 2038 年&lt;/p&gt;&#xA;</description>
+      <author>szq8014</author>
+      <pubDate>20 Jun 2022 02:44:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>m1 max 用啥都快，就是辣鸡 office 还是那么卡顿 - MacBook Pro</title>
+      <link>https://www.v2ex.com/t/860795</link>
+      <description>&lt;p&gt;首发当天，去年 10.26 入了次顶配 16 寸（硬盘 4T ），&#xA;用啥都快，就是 excel 还是很卡顿，切换 tag 无比慢，好卡&#xA;跟整个 mac os 非常不和谐，&#xA;office 啥时候适配 arm 啊。。。&#xA;为啥要用：&#xA;1 、公司有 license ，免费&#xA;2 、同事都用，交互数据分析报告方便，&#xA;3 、在线文档搞不定图表&lt;/p&gt;&#xA;</description>
+      <author>makeitwork</author>
+      <pubDate>20 Jun 2022 02:38:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>Python 去重问题 - Python</title>
+      <link>https://www.v2ex.com/t/860794</link>
+      <description>list1 = [{b: 1, c: 2}, {b: 2, c: 3}, {b: 3, c: 4},{b: 2, c: 1}]&lt;br /&gt;list2 = [{a: 1, d: 0.1},{a: 2, d: 0.1},{a: 3, d: 0.2},{a: 4, d: 0.3},{a: 5, d: 0.1},{a: 6, d: 0.1}]&lt;br /&gt;&lt;br /&gt;list1 和 list2 都是 DataFrame.&lt;br /&gt;&lt;br /&gt;问题 1: list1 怎么把{b: 2, c: 1}这种数据范围重复的值去掉?&lt;br /&gt;问题 2: 把 list2 中符合(a&amp;gt;=b and a &amp;lt;= b)的 d 字段 value 相加赋值给 list1[0][&#39;d&#39;]&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;各位大佬帮忙解答一下或提供思路 谢谢了</description>
+      <author>QGabriel</author>
+      <pubDate>20 Jun 2022 02:36:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>iPad 退出登录后，自动登录上一个账户 - Apple</title>
+      <link>https://www.v2ex.com/t/860793</link>
+      <description>ipad 上 登录 AppleID A -&amp;gt; A 退出登录 -&amp;gt; 登录 B -&amp;gt; B 退出登录 -&amp;gt;（奇迹发生了）自动登录回账户 A 。&lt;br /&gt;&lt;br /&gt;因为在 B 退出之后要抹除一会数据，这时我没注意看，再回头看的时候，已经是账户 A 处于登录状态了。点进去能看见信息，使用 icloud 和 appstore 还需要认证密码。安全里面可以修改账户密码，输入 ipad 锁屏密码就行。为了确认是 bug ，我修改了一下，居然成功了。&lt;br /&gt;&lt;br /&gt;搜了一下没搜到类似的，有人碰到过吗？</description>
+      <author>trivisa</author>
+      <pubDate>20 Jun 2022 02:29:57 +0000</pubDate>
+    </item>
+    <item>
+      <title>有关 cloudflare 国内部分地区无法访问的问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/860792</link>
+      <description>个人破站绑定 cf 后，特别是晚上，很可能国内就无法访问，用 &lt;a target=&#34;_blank&#34; href=&#34;https://ping.chinaz.com/测试&#34; rel=&#34;nofollow noopener&#34;&gt;https://ping.chinaz.com/测试&lt;/a&gt; ping 或者国内速度，确实多个地区会出现超时打不开的情况，我的域名是 cname 解析到的 cf ，ping 上去显示：104.21.2.253 。&lt;br /&gt;&lt;br /&gt;我打开域名解析里，发现有个权重，我以为可以给 www 添加更多的 A 记录，比如 A 记录到 1.0.0.0 、A 记录到 1.0.0.1 ，这样当 104.21.2.253 超时的时候，可以自动用 1.0.0.0 或 1.0.0.1 ，但是添加的时候就提示“A 记录和 CNAME 记录有冲突，请先删除或暂停现有的 CNAME 记录后重试”，看来是我误解了？</description>
+      <author>CSGO</author>
+      <pubDate>20 Jun 2022 02:26:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>好奇，大家在不同平台的头像昵称会设置为一样的吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/860791</link>
+      <description>&lt;p&gt;我理解的是：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;设置成一样，有利于营销自己，别人多见到几次你的头像 /昵称，就对你熟悉了&lt;/li&gt;&#xA;&lt;li&gt;设置为不一样，能隐藏自己（但是要手机号的话就没办法了）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;我个人没有偏好，有的平台一样有的不一样，完全看心情，也没有 gv 或者阿里小号，互联网裸奔状态。各位彦祖呢？&lt;/p&gt;&#xA;</description>
+      <author>yunyuyuan</author>
+      <pubDate>20 Jun 2022 02:18:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>不懂就问, iMac 2021 有屏闪吗 - Apple</title>
+      <link>https://www.v2ex.com/t/860789</link>
+      <author>threeti</author>
+      <pubDate>20 Jun 2022 02:11:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>[求职] 6 年前端，求职一份远程工作 - 求职</title>
+      <link>https://www.v2ex.com/t/860788</link>
+      <description>现在主要在做团队提效的相关工具，低代码、组件库等等。&lt;br /&gt;&lt;br /&gt;可全栈&lt;br /&gt;&lt;br /&gt;技能：&lt;br /&gt;1. 前端：vue (react 也可，主要 vue)、webpack 、vite&lt;br /&gt;2. 后端：Node.js 、typescript （早年也做过两年 java ，不过已经忘的差不多了，需要熟悉）</description>
+      <author>PatrickChen</author>
+      <pubDate>20 Jun 2022 02:05:30 +0000</pubDate>
+    </item>
+    <item>
       <title>ONE NOTE 笔记本, 一整个分区居 然 消 失 了! - 分享发现</title>
       <link>https://www.v2ex.com/t/860787</link>
       <description>&lt;p&gt;这么多年一直是 one note 的重度用户, 各种工作资料和乱七八糟笔记都存在上面. &lt;/p&gt;&#xA;&lt;p&gt;虽然使用过程中小毛病经常有, 涉及代码也不如 markdown 方便, 但胜在多终端同步, 并且是大公司产品, 总体还是信任度很高的.&lt;br/&gt;&#xA;直到昨天晚上, 某个记录大量重要工作内容的分区, 在眼皮底下, 鼠标一点居!然!直!接!消!失!了!  &lt;/p&gt;&#xA;&lt;p&gt;直接愣了好几秒, 第一反应是自己误操作, 重新点其他分区, 单击 /双击 /连续双击都没有复现, 然后右键选择删除分区, 也会有对话框提示, 并且真的删除后, 从回收站还能找到...  &lt;/p&gt;&#xA;&lt;p&gt;确认是出了 BUG, 然后上网一搜一身冷汗...原来这问题很多人都遇到过, 并且持续时间已经有好几年了, 运气好的, 根据微软社区的回复, 通过几番尝试, 也许能找回来, 更多情况下, 只能认栽.  &lt;/p&gt;&#xA;&lt;p&gt;这么多年的重度用户, 这一次经历, 很确定可以彻底弃用 one onte 了, 上周一个礼拜的工作内容全部丢失, 这滋味真是酸爽!&lt;/p&gt;&#xA;&lt;p&gt;唉, 吐槽完毕, 无力回天!&lt;/p&gt;&#xA;</description>

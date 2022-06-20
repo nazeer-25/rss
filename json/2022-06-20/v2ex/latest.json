@@ -4,6 +4,62 @@
   "Description": "",
   "Items": [
     {
+      "Title": "阿里云 RDS-MySQL 8.0 日期处理有 BUG - 全球工单系统",
+      "Link": "https://www.v2ex.com/t/860798",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-MySQL\"\u003eCREATE TABLE `xxx` (\n `id` INT(10) NOT NULL AUTO_INCREMENT,\n `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n `expire_time` TIMESTAMP NOT NULL COMMENT '超时时间',\n PRIMARY KEY (`id`) USING BTREE\n)\nCOMMENT='test' COLLATE='utf8mb4_general_ci' ENGINE=InnoDB;\n\n/* SQL 错误（ 1067 ）：Invalid default value for 'expire_time' */\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e有点奇怪，上面是最小复现的语句，在开源版的 MySQL 8.0 上是没有问题的，开的配置是一样(默认）的，\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e目前来看触发的条件就是前面一句也是一个 TIMESTAMP 且后面修饰不一样就会出现，单独只有 \u003ccode\u003eexpire_time\u003c/code\u003e 是没有问题的。\u003c/p\u003e\n\u003cp\u003e(啊，虽然现在用 timestamp 不太合理，但是我觉得我现在这个项目可能活不到 2038 年\u003c/p\u003e\n",
+      "Author": "szq8014",
+      "PubDate": "2022-06-20T02:44:21Z"
+    },
+    {
+      "Title": "m1 max 用啥都快，就是辣鸡 office 还是那么卡顿 - MacBook Pro",
+      "Link": "https://www.v2ex.com/t/860795",
+      "Description": "\u003cp\u003e首发当天，去年 10.26 入了次顶配 16 寸（硬盘 4T ），\n用啥都快，就是 excel 还是很卡顿，切换 tag 无比慢，好卡\n跟整个 mac os 非常不和谐，\noffice 啥时候适配 arm 啊。。。\n为啥要用：\n1 、公司有 license ，免费\n2 、同事都用，交互数据分析报告方便，\n3 、在线文档搞不定图表\u003c/p\u003e\n",
+      "Author": "makeitwork",
+      "PubDate": "2022-06-20T02:38:39Z"
+    },
+    {
+      "Title": "Python 去重问题 - Python",
+      "Link": "https://www.v2ex.com/t/860794",
+      "Description": "list1 = [{b: 1, c: 2}, {b: 2, c: 3}, {b: 3, c: 4},{b: 2, c: 1}]\u003cbr /\u003elist2 = [{a: 1, d: 0.1},{a: 2, d: 0.1},{a: 3, d: 0.2},{a: 4, d: 0.3},{a: 5, d: 0.1},{a: 6, d: 0.1}]\u003cbr /\u003e\u003cbr /\u003elist1 和 list2 都是 DataFrame.\u003cbr /\u003e\u003cbr /\u003e问题 1: list1 怎么把{b: 2, c: 1}这种数据范围重复的值去掉?\u003cbr /\u003e问题 2: 把 list2 中符合(a\u0026gt;=b and a \u0026lt;= b)的 d 字段 value 相加赋值给 list1[0]['d']\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e各位大佬帮忙解答一下或提供思路 谢谢了",
+      "Author": "QGabriel",
+      "PubDate": "2022-06-20T02:36:38Z"
+    },
+    {
+      "Title": "iPad 退出登录后，自动登录上一个账户 - Apple",
+      "Link": "https://www.v2ex.com/t/860793",
+      "Description": "ipad 上 登录 AppleID A -\u0026gt; A 退出登录 -\u0026gt; 登录 B -\u0026gt; B 退出登录 -\u0026gt;（奇迹发生了）自动登录回账户 A 。\u003cbr /\u003e\u003cbr /\u003e因为在 B 退出之后要抹除一会数据，这时我没注意看，再回头看的时候，已经是账户 A 处于登录状态了。点进去能看见信息，使用 icloud 和 appstore 还需要认证密码。安全里面可以修改账户密码，输入 ipad 锁屏密码就行。为了确认是 bug ，我修改了一下，居然成功了。\u003cbr /\u003e\u003cbr /\u003e搜了一下没搜到类似的，有人碰到过吗？",
+      "Author": "trivisa",
+      "PubDate": "2022-06-20T02:29:57Z"
+    },
+    {
+      "Title": "有关 cloudflare 国内部分地区无法访问的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/860792",
+      "Description": "个人破站绑定 cf 后，特别是晚上，很可能国内就无法访问，用 \u003ca target=\"_blank\" href=\"https://ping.chinaz.com/测试\" rel=\"nofollow noopener\"\u003ehttps://ping.chinaz.com/测试\u003c/a\u003e ping 或者国内速度，确实多个地区会出现超时打不开的情况，我的域名是 cname 解析到的 cf ，ping 上去显示：104.21.2.253 。\u003cbr /\u003e\u003cbr /\u003e我打开域名解析里，发现有个权重，我以为可以给 www 添加更多的 A 记录，比如 A 记录到 1.0.0.0 、A 记录到 1.0.0.1 ，这样当 104.21.2.253 超时的时候，可以自动用 1.0.0.0 或 1.0.0.1 ，但是添加的时候就提示“A 记录和 CNAME 记录有冲突，请先删除或暂停现有的 CNAME 记录后重试”，看来是我误解了？",
+      "Author": "CSGO",
+      "PubDate": "2022-06-20T02:26:22Z"
+    },
+    {
+      "Title": "好奇，大家在不同平台的头像昵称会设置为一样的吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/860791",
+      "Description": "\u003cp\u003e我理解的是：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e设置成一样，有利于营销自己，别人多见到几次你的头像 /昵称，就对你熟悉了\u003c/li\u003e\n\u003cli\u003e设置为不一样，能隐藏自己（但是要手机号的话就没办法了）\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e我个人没有偏好，有的平台一样有的不一样，完全看心情，也没有 gv 或者阿里小号，互联网裸奔状态。各位彦祖呢？\u003c/p\u003e\n",
+      "Author": "yunyuyuan",
+      "PubDate": "2022-06-20T02:18:56Z"
+    },
+    {
+      "Title": "不懂就问, iMac 2021 有屏闪吗 - Apple",
+      "Link": "https://www.v2ex.com/t/860789",
+      "Description": "",
+      "Author": "threeti",
+      "PubDate": "2022-06-20T02:11:12Z"
+    },
+    {
+      "Title": "[求职] 6 年前端，求职一份远程工作 - 求职",
+      "Link": "https://www.v2ex.com/t/860788",
+      "Description": "现在主要在做团队提效的相关工具，低代码、组件库等等。\u003cbr /\u003e\u003cbr /\u003e可全栈\u003cbr /\u003e\u003cbr /\u003e技能：\u003cbr /\u003e1. 前端：vue (react 也可，主要 vue)、webpack 、vite\u003cbr /\u003e2. 后端：Node.js 、typescript （早年也做过两年 java ，不过已经忘的差不多了，需要熟悉）",
+      "Author": "PatrickChen",
+      "PubDate": "2022-06-20T02:05:30Z"
+    },
+    {
       "Title": "ONE NOTE 笔记本, 一整个分区居 然 消 失 了! - 分享发现",
       "Link": "https://www.v2ex.com/t/860787",
       "Description": "\u003cp\u003e这么多年一直是 one note 的重度用户, 各种工作资料和乱七八糟笔记都存在上面. \u003c/p\u003e\n\u003cp\u003e虽然使用过程中小毛病经常有, 涉及代码也不如 markdown 方便, 但胜在多终端同步, 并且是大公司产品, 总体还是信任度很高的.\u003cbr/\u003e\n直到昨天晚上, 某个记录大量重要工作内容的分区, 在眼皮底下, 鼠标一点居!然!直!接!消!失!了!  \u003c/p\u003e\n\u003cp\u003e直接愣了好几秒, 第一反应是自己误操作, 重新点其他分区, 单击 /双击 /连续双击都没有复现, 然后右键选择删除分区, 也会有对话框提示, 并且真的删除后, 从回收站还能找到...  \u003c/p\u003e\n\u003cp\u003e确认是出了 BUG, 然后上网一搜一身冷汗...原来这问题很多人都遇到过, 并且持续时间已经有好几年了, 运气好的, 根据微软社区的回复, 通过几番尝试, 也许能找回来, 更多情况下, 只能认栽.  \u003c/p\u003e\n\u003cp\u003e这么多年的重度用户, 这一次经历, 很确定可以彻底弃用 one onte 了, 上周一个礼拜的工作内容全部丢失, 这滋味真是酸爽!\u003c/p\u003e\n\u003cp\u003e唉, 吐槽完毕, 无力回天!\u003c/p\u003e\n",
