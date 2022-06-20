@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Pixel 4 黑屏求助 - Google",
+      "Link": "https://www.v2ex.com/t/861006",
+      "Description": "老哥们求救！刚买的 pixel 4 变成砖了，按什么键都没反应\u003cbr /\u003e本来好好的，打着游戏突然就黑屏重启，google 徽标出现后又黑屏，然后就彻底死机了\u003cbr /\u003e网上按电源键+音量键之类的强制重启方法都没用，再没辙的话只能送修了。。。",
+      "Author": "Muxhrom",
+      "PubDate": "2022-06-20T15:50:14Z"
+    },
+    {
+      "Title": "有没有大佬用过腾讯的压测大师呢？测试连 1000 并发都扛不住，心态崩了。。。 - 问与答",
+      "Link": "https://www.v2ex.com/t/861005",
+      "Description": "\u003cp\u003e有老哥用过腾讯云的压测大师吗？今天刚进行了几波测试，不管是测试 API 接口还是测试网站首页，最高并发量设置的 1000,成功率都没有达到 1%。。。这就非常奇怪了，也不知道是小弟配置的压测参数不合适还是我们的服务确实存在问题。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e压测业务流程：请求 --\u0026gt; CDN(腾讯云静态加速) --\u0026gt; Nginx(NGINX Plus) --\u0026gt; 源站(Java)   # 源站调用了云数据库 MySQL 和 Redis\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e配置\u003c/h3\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e\u003c/th\u003e\n\u003cth\u003eNginx\u003c/th\u003e\n\u003cth\u003e源站\u003c/th\u003e\n\u003cth\u003eMySQL\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003eCPU\u003c/td\u003e\n\u003ctd\u003e2 核\u003c/td\u003e\n\u003ctd\u003e4 核\u003c/td\u003e\n\u003ctd\u003e2 核\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e内存\u003c/td\u003e\n\u003ctd\u003e4GB\u003c/td\u003e\n\u003ctd\u003e8GB\u003c/td\u003e\n\u003ctd\u003e4GB\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e网络\u003c/td\u003e\n\u003ctd\u003e200M\u003c/td\u003e\n\u003ctd\u003e与 Nginx 内网通信\u003c/td\u003e\n\u003ctd\u003e与源站内网通信\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e磁盘\u003c/td\u003e\n\u003ctd\u003e高性能云硬盘\u003c/td\u003e\n\u003ctd\u003eSSD 云硬盘\u003c/td\u003e\n\u003ctd\u003e-\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003ch3\u003e压测时系统负载\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e# Nginx\nCPU：无明显波动\n内存：无明显波动\n网络外网出带宽峰值：5Mbps/s\n磁盘 IOPS：写 114io/s   读 17io/s\nQPS：峰值 518 次 /秒\n\n# 源站\nCPU：无明显波动\n内存：无明显波动\n磁盘 IOPS：读写连 10io/s 都没达到\n\n# MySQL\nCPU：峰值利用率 70%\n内存：无明显波动\nQPS：峰值 730 次 /秒\nTPS：峰值 10 次 /秒\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e压测大师配置参数\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.bmp.ovh/imgs/2022/06/20/8c6a3c96ea7fea99.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e压测大师报告\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.bmp.ovh/imgs/2022/06/20/2b160e88b0228c9f.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.bmp.ovh/imgs/2022/06/20/fc0e61d036b1b9a4.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e问题\u003c/h3\u003e\n\u003cp\u003e在此小弟有几个问题想请教\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e压测大师 1000 并发，为什么 TPS 值如何高？压测大师的 1000 并发量与实际用户的 1000 并发量是不是存在差异呢？\u003c/li\u003e\n\u003cli\u003e源站 Java 在压测期间，接收到的请求几乎都在 3000ms 以上，压测的接口也只是返回 json 信息而已，没有复杂的查询，观察到各个服务的系统指标并没有异常情况，压测期间服务延迟很高最后导致无响应似乎有点太离谱了吧。。。\u003c/li\u003e\n\u003cli\u003e是不是小弟不太懂。。压测 1000 并发量这个量已经很大了还是不是很大呢？\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "daimaosix",
+      "PubDate": "2022-06-20T15:49:00Z"
+    },
+    {
       "Title": "04 年注册的移动手机号码，现在忘了，有办法找到这个号码吗？ - 全球工单系统",
       "Link": "https://www.v2ex.com/t/861004",
       "Description": "04 年注册的移动手机号，05 年用这个手机号注册了魔兽世界的账号，当时还是九城，然后大约 06 年的时候我换了手机号\u003cbr /\u003e\u003cbr /\u003e最近我的魔兽世界账号出了一些问题，需要填写一些资料，其中很重要的一项就是“曾用手机号”，但我实在记不起当时用的号码了，尝试找了一些老早的其他账号，邮箱邮件之类的都没法找到\u003cbr /\u003e\u003cbr /\u003e现在有没有办法找到我当初的手机号码（我只记得是 138 开头的）",

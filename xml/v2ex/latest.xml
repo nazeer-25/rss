@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Pixel 4 黑屏求助 - Google</title>
+      <link>https://www.v2ex.com/t/861006</link>
+      <description>老哥们求救！刚买的 pixel 4 变成砖了，按什么键都没反应&lt;br /&gt;本来好好的，打着游戏突然就黑屏重启，google 徽标出现后又黑屏，然后就彻底死机了&lt;br /&gt;网上按电源键+音量键之类的强制重启方法都没用，再没辙的话只能送修了。。。</description>
+      <author>Muxhrom</author>
+      <pubDate>20 Jun 2022 15:50:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有大佬用过腾讯的压测大师呢？测试连 1000 并发都扛不住，心态崩了。。。 - 问与答</title>
+      <link>https://www.v2ex.com/t/861005</link>
+      <description>&lt;p&gt;有老哥用过腾讯云的压测大师吗？今天刚进行了几波测试，不管是测试 API 接口还是测试网站首页，最高并发量设置的 1000,成功率都没有达到 1%。。。这就非常奇怪了，也不知道是小弟配置的压测参数不合适还是我们的服务确实存在问题。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;压测业务流程：请求 --&amp;gt; CDN(腾讯云静态加速) --&amp;gt; Nginx(NGINX Plus) --&amp;gt; 源站(Java)   # 源站调用了云数据库 MySQL 和 Redis&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;配置&lt;/h3&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;&lt;/th&gt;&#xA;&lt;th&gt;Nginx&lt;/th&gt;&#xA;&lt;th&gt;源站&lt;/th&gt;&#xA;&lt;th&gt;MySQL&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;CPU&lt;/td&gt;&#xA;&lt;td&gt;2 核&lt;/td&gt;&#xA;&lt;td&gt;4 核&lt;/td&gt;&#xA;&lt;td&gt;2 核&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;内存&lt;/td&gt;&#xA;&lt;td&gt;4GB&lt;/td&gt;&#xA;&lt;td&gt;8GB&lt;/td&gt;&#xA;&lt;td&gt;4GB&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;网络&lt;/td&gt;&#xA;&lt;td&gt;200M&lt;/td&gt;&#xA;&lt;td&gt;与 Nginx 内网通信&lt;/td&gt;&#xA;&lt;td&gt;与源站内网通信&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;磁盘&lt;/td&gt;&#xA;&lt;td&gt;高性能云硬盘&lt;/td&gt;&#xA;&lt;td&gt;SSD 云硬盘&lt;/td&gt;&#xA;&lt;td&gt;-&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;h3&gt;压测时系统负载&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# Nginx&#xA;CPU：无明显波动&#xA;内存：无明显波动&#xA;网络外网出带宽峰值：5Mbps/s&#xA;磁盘 IOPS：写 114io/s   读 17io/s&#xA;QPS：峰值 518 次 /秒&#xA;&#xA;# 源站&#xA;CPU：无明显波动&#xA;内存：无明显波动&#xA;磁盘 IOPS：读写连 10io/s 都没达到&#xA;&#xA;# MySQL&#xA;CPU：峰值利用率 70%&#xA;内存：无明显波动&#xA;QPS：峰值 730 次 /秒&#xA;TPS：峰值 10 次 /秒&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;压测大师配置参数&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.bmp.ovh/imgs/2022/06/20/8c6a3c96ea7fea99.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;压测大师报告&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.bmp.ovh/imgs/2022/06/20/2b160e88b0228c9f.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.bmp.ovh/imgs/2022/06/20/fc0e61d036b1b9a4.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;问题&lt;/h3&gt;&#xA;&lt;p&gt;在此小弟有几个问题想请教&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;压测大师 1000 并发，为什么 TPS 值如何高？压测大师的 1000 并发量与实际用户的 1000 并发量是不是存在差异呢？&lt;/li&gt;&#xA;&lt;li&gt;源站 Java 在压测期间，接收到的请求几乎都在 3000ms 以上，压测的接口也只是返回 json 信息而已，没有复杂的查询，观察到各个服务的系统指标并没有异常情况，压测期间服务延迟很高最后导致无响应似乎有点太离谱了吧。。。&lt;/li&gt;&#xA;&lt;li&gt;是不是小弟不太懂。。压测 1000 并发量这个量已经很大了还是不是很大呢？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>daimaosix</author>
+      <pubDate>20 Jun 2022 15:49:00 +0000</pubDate>
+    </item>
+    <item>
       <title>04 年注册的移动手机号码，现在忘了，有办法找到这个号码吗？ - 全球工单系统</title>
       <link>https://www.v2ex.com/t/861004</link>
       <description>04 年注册的移动手机号，05 年用这个手机号注册了魔兽世界的账号，当时还是九城，然后大约 06 年的时候我换了手机号&lt;br /&gt;&lt;br /&gt;最近我的魔兽世界账号出了一些问题，需要填写一些资料，其中很重要的一项就是“曾用手机号”，但我实在记不起当时用的号码了，尝试找了一些老早的其他账号，邮箱邮件之类的都没法找到&lt;br /&gt;&lt;br /&gt;现在有没有办法找到我当初的手机号码（我只记得是 138 开头的）</description>
