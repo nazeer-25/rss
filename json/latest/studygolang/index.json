@@ -102,6 +102,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "有关go场景提问",
+      "Link": "https://studygolang.com/topics/15584#reply2",
+      "Description": "\u003cp\u003e前提：本人做前端，但是对go比较感兴趣\n问题：就是想问大家一般用go是web开发还是偏向存储或者网络方面的研发\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "go如何更新文本文件中某一行的内容",
       "Link": "https://studygolang.com/topics/11154#reply3",
       "Description": "\u003cp\u003e这是代码实现,有个问题是更改某一行的内容后会影响下一个的内容.请大神帮我看一下\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;bufio\u0026quot;\n\t\u0026quot;errors\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;io\u0026quot;\n\t\u0026quot;os\u0026quot;\n\t\u0026quot;strings\u0026quot;\n)\n\nfunc main() {\n\tfi, err := os.OpenFile(\u0026quot;test.txt\u0026quot;, os.O_RDWR, os.ModePerm)\n\tif err != nil {\n\t\tfmt.Println(err)\n\t\treturn\n\t}\n\tdefer fi.Close()\n\treader := bufio.NewReader(fi)\n\tlineCnt := 0\n\tseekP := 0\n\tfor {\n\t\tbs, _, err := reader.ReadLine()\n\t\tif err == io.EOF {\n\t\t\tfmt.Println(errors.New(\u0026quot;读取完成\u0026quot;))\n\t\t\tbreak\n\t\t}\n\t\tlineCnt = len(bs) + 2 //ReadLine 返回读取的长度不包含换行\\r\\n\n\t\tif strings.Contains(string(bs), \u0026quot;hello\u0026quot;) {\n\t\t\tdelBytes := make([]byte, 0) //编辑包含hello的行，需要先在该行写入ascii的127即删除符号，再写入新内容\n\t\t\tfor i := 0; i \u0026lt; lineCnt; i++ {\n\t\t\t\tdelBytes = append(delBytes, 127)\n\t\t\t}\n\n\t\t\tfi.WriteAt(delBytes, int64(seekP))\n\n\t\t\tnewStr := \u0026quot;hi\\r\\n\u0026quot;\n\t\t\tfi.WriteAt([]byte(newStr), int64(seekP)) //在该行写入新内容\n\t\t\tlineCnt = len([]byte(newStr))            //该行长度是新内容的长度\n\t\t}\n\n\t\tseekP += lineCnt\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e文本文件原始:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eskdflksdlkfs\nsjdfksdfksf\nskjdkfj hello skjdfksjdfksjdkf\n123\n123\n123\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e被程序修改后,可以看到修改行的下一行被加入了很多空格\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eskdflksdlkfs\nsjdfksdfksf\nhi\n123\n123\n123\n\u003c/code\u003e\u003c/pre\u003e\n",
