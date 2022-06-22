@@ -67,6 +67,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "为什么 main 中调用包中可导出变量提示未",
+      "Link": "https://studygolang.com/articles/35715#reply2",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "优维EasyOps智能监控，让高校运维更“高效”",
       "Link": "https://studygolang.com/articles/35713#reply0",
       "Description": "",
@@ -77,13 +84,6 @@
       "Title": "golang 无法访问导入包中的导出变量？",
       "Link": "https://studygolang.com/topics/15631#reply1",
       "Description": "\u003cp\u003e被导入包：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage utils\n\nimport (\n\t\u0026quot;github.com/elastic/go-elasticsearch/v6\u0026quot;\n\t\u0026quot;log\u0026quot;\n)\n\nvar EsClient *elasticsearch.Client\n\nfunc init() {\n\thost := Cfg.Section(\u0026quot;es\u0026quot;).Key(\u0026quot;host\u0026quot;).String()\n\tif host == \u0026quot;\u0026quot; {\n\t\tlog.Fatal(\u0026quot;es Host 未设置\u0026quot;)\n\t}\n\n\tcfg := elasticsearch.Config{\n\t\tAddresses: []string{host},\n\t}\n\n\tEsClient, err := elasticsearch.NewClient(cfg)\n\tif err != nil {\n\t\tlog.Fatal(\u0026quot;连接失败\u0026quot;, err)\n\t}\n\n\t_, err = EsClient.Info()\n\tif err != nil {\n\t\tlog.Fatalf(\u0026quot;连接出错：\u0026quot;+host, err)\n\t}\n\n\tfmt.Println(EsClient) // \u0026amp;{0xc000166000 0xc000162000}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003emain.go\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n    \u0026quot;data_push/utils\u0026quot;\n    \u0026quot;fmt\u0026quot;\n)\n\nfunc main() {\n   fmt.Println(utils.EsClient) // 结果为 nil\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003emain 函数中输出 utils 包中 EsClient 变量，结果为 nil，但是 utils 包中初始化后值不为 nil，这是什么原因呢？\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "为什么 main 中调用包中可导出变量提示未",
-      "Link": "https://studygolang.com/articles/35715#reply1",
-      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -102,6 +102,27 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "星星点灯",
+      "Link": "https://studygolang.com/articles/35710#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Golang中有没有指向类型的类型",
+      "Link": "https://studygolang.com/topics/15625#reply2",
+      "Description": "\u003cp\u003e我想写一个函数，传入一个类型，然后返回这个类型的对像\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go install 突然失灵了！",
+      "Link": "https://studygolang.com/topics/15623#reply1",
+      "Description": "\u003cp\u003e今天安装几个常用包，发现全部失灵了，之前记得是可以的啊，，\n尝试一：go install github.com/swaggo/swag/cmd/swag@latest\nbash: go install github.com/swaggo/swag/cmd/swag@latest: No such file or directory\n尝试二：go install github.com/gofrs/uuid\nbash: go install github.com/gofrs/uuid: No such file or directory\n求解~~\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "📖 Go相关公众号文章每日推荐【2022-06-17/19】",
       "Link": "https://studygolang.com/topics/15627#reply0",
       "Description": "\u003cp\u003e一、Go语言中文网\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/SxteF0gPrzfvwPCev6VlhA\"\u003eGo语言爱好者周刊：第 149 期 — 正确率只有 22%\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/RdcJucgckixfVJ7pEAXgxw\"\u003eGo 开源项目推荐：一个简单的 Go 练手项目\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/B2a0XAC459JfhSbJIVeiHA\"\u003egolang刷leetcode：我能赢吗\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e二、polarisxu\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/tL9HNmPwMSrPFnn5aUI4-A\"\u003eVSCode 1.68 发布\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e三、网管叨bi叨\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/y1_wzqsbBTJoHqrJCiszwA\"\u003eDDD - 领域驱动设计，是银弹还是炒作？\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e四、亚军进化史\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/7yZ_VfaKautNhWcDoeRkyg\"\u003eGo技术日报(2022-06-15)——图解Go内存管理器\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e五、TechPaper\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/GtVtgTBZxW2ecs7QyDTcEg\"\u003e简单的 redis get 为什么也会有秒级的延迟\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e六、TonyBai\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/s6daq8zGqGGvNHMpf2SW0g\"\u003e小厂内部私有Go module拉取方案（续）\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e七、luozhiyun很酷\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/_Q8DppSQnBCUtngRmi6N2g\"\u003e聊聊两个Go即将过时的GC优化策略\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e八、aoho求索\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/zCwMzwnqwtRk90_iTyn6OQ\"\u003eetcd 如何实现 MVCC？\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e九、Go招聘\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/DqRZo8V2EHMHQ92mcT7RHg\"\u003e开启两个Goroutine并发执行两个事务，能保证数据唯一吗？\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
@@ -112,6 +133,13 @@
       "Title": "📖 Go相关公众号文章每日推荐【2022-06-20】",
       "Link": "https://studygolang.com/topics/15626#reply0",
       "Description": "\u003cp\u003e一、Go语言中文网\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/Whb5wm28KR_6QmqDsAdtcw\"\u003e关于 Go1.18 新函数 TryLock 的故事\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/wz-In-r1z91Te_HChsIMkA\"\u003eGo 语言中的零拷贝优化\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e二、脑子进煎鱼了\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/fKxITKsBct9GLRYk4HLdKA\"\u003eGo 内联优化：如何让我们的程序更快？\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/RAt0z0nL53yE38sIsF1JcQ\"\u003e分库分表会带来读扩散问题？怎么解决？\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e三、网管叨bi叨\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/7I0zB_AsltzDLmc9ew48Bg\"\u003eGo 1.18 让写测试的代码量骤减，你会开始写测试吗？\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e四、Golang技术分享\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/0E466avtngc_V_CsIAqyvQ\"\u003eGo：简单的优化笔记\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e五、k8s技术圈\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/PI3E5-S0Qhbmn0OgEvYy-Q\"\u003e你不是不会处理多行日志，只是不会写正则表达式而已~\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e六、polarisxu\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/xEiXN2JT-RHVMHlYl0hVjQ\"\u003e惊！这道题正确率竟然只有 22%：答案详解\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e七、云原生社区动态\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/G6WG_-C6d-raoRmH4hBjoQ\"\u003e分布式存储系统 Curve 成为 CNCF 沙箱项目\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e八、幽鬼\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/_jD63AEvegboHA6MBJkP2A\"\u003e在 Golang 中使用 -w 和 -s 标志\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e九、许式伟\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/GHaMHXvHrAOOQacUa2FkLQ\"\u003eGo+ 类文件：DSL vs. SDF\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e十、微服务实践\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/QqrLOq7DcDVuIM_1YAaVTw\"\u003ego-zero微服务实战系列（五、缓存代码怎么写）\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e十一、奇伢云存储\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/BwqHMhc2WtAY_R-UffNQ4w\"\u003eGo 的 nil 值判断，千方百计，还是踩坑!\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "优维低代码：构件 slot 说明",
+      "Link": "https://studygolang.com/articles/35709#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -151,34 +179,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "星星点灯",
-      "Link": "https://studygolang.com/articles/35710#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Golang中有没有指向类型的类型",
-      "Link": "https://studygolang.com/topics/15625#reply2",
-      "Description": "\u003cp\u003e我想写一个函数，传入一个类型，然后返回这个类型的对像\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "go install 突然失灵了！",
-      "Link": "https://studygolang.com/topics/15623#reply1",
-      "Description": "\u003cp\u003e今天安装几个常用包，发现全部失灵了，之前记得是可以的啊，，\n尝试一：go install github.com/swaggo/swag/cmd/swag@latest\nbash: go install github.com/swaggo/swag/cmd/swag@latest: No such file or directory\n尝试二：go install github.com/gofrs/uuid\nbash: go install github.com/gofrs/uuid: No such file or directory\n求解~~\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "优维低代码：构件 slot 说明",
-      "Link": "https://studygolang.com/articles/35709#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "【杭州西湖区】【招聘】独立游戏Go语言服务端开发",
       "Link": "https://studygolang.com/topics/15091#reply7",
       "Description": "\u003cp\u003e我们是一个独立游戏小团队，欢迎有兴趣的朋友加入我们！\u003cbr\u003e\n我们的游戏：\u003ca href=\"https://www.taptap.com/app/211594\"\u003ehttps://www.taptap.com/app/211594\u003c/a\u003e\u003cbr\u003e\n我们的招聘链接：\u003ca href=\"https://www.zhipin.com/gongsir/53d6cf64768421f41XN_2NS4Ew~~.html\"\u003ehttps://www.zhipin.com/gongsir/53d6cf64768421f41XN_2NS4Ew~~.html\u003c/a\u003e\u003cbr\u003e\n可以直接QQ联系我，也可以BOSS直聘上找我，QQ:1252947002\u003c/p\u003e\n\n\u003cp\u003e岗位要求\u003cbr\u003e\n熟悉Golang语言，1年以上Golang开发经验。\u003cbr\u003e\n熟悉Golang协程、channel和锁的使用及原理，\u003cbr\u003e\n熟悉Socket/WebSocket 服务器端通信技术，熟悉协程程序开发；\u003cbr\u003e\n熟练使用版本管理工具GIT  ；\n熟悉Linux操作系统，熟悉TCP/IP、HTTP等协议；\u003cbr\u003e\n具备高度的责任心、良好的沟通能力和团队合作精神；\u003cbr\u003e\n有大型多人在线游戏服务器开发经验优先；\u003cbr\u003e\n有微服务开发经验优先；\u003c/p\u003e\n\n\u003cp\u003e岗位职责：\u003cbr\u003e\n开发游戏业务逻辑，包括但不限于匹配、社交、事件、卡牌等模块；\u003cbr\u003e\n与策划及客户端人员进行有效沟通，分析、解决各种服务器的问题；\u003cbr\u003e\n配合游戏前端进行各个功能模块的联调；\u003cbr\u003e\n熟练和冷静的应对运营中的突发事件，严格按照运营流程处理事务。\u003c/p\u003e\n\n\u003cp\u003e工作时间及福利：\u003cbr\u003e\n1、不打卡不考勤，周末双休，午休1.5小时，无加班文化；\u003cbr\u003e\n2、标准规范的节假日制度，享受国家规定的法定假日，同时提供年假、婚假等；\u003c/p\u003e\n\n\u003cp\u003eps：没行业相关经验没关系，基础好就行了。\u003c/p\u003e\n",
@@ -189,6 +189,13 @@
       "Title": "golang使用net包怎么实现linux curl指令功能，获取下载速度等指标？",
       "Link": "https://studygolang.com/articles/35702#reply3",
       "Description": "\u003cul\u003e\n\u003cli\u003e如何采用net包或者其他第三方包，实现curl功能\u003c/li\u003e\n\u003cli\u003e比如：\n\n\u003cul\u003e\n\u003cli\u003ecurl \u0026ndash;connect-timeout 5 -m 30 -w %{http_code}::%{speed_download}::%{size_download}\u0026ldquo;\\n\u0026rdquo; -x 127.0.0.1:80 \u0026ldquo;\u003ca href=\"http://xxx.com/1M.png\u0026quot;\"\u003ehttp://xxx.com/1M.png\u0026rdquo;\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "为什么 main 中调用包中可导出变量提示未",
+      "Link": "https://studygolang.com/articles/35715#reply1",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
