@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>手机关于修改 IMEI 求助 - Android</title>
+      <link>https://www.v2ex.com/t/861506</link>
+      <description>&lt;p&gt;由于使用的是联通某物联卡，为了换设备在探索如何修改新设备的 IMEI （所以这里讨论的并不是系统层面上欺骗其它 app 获取的 IMEI ，用 Xposed 模块什么的是不行了）。目前遇到了一些问题。&lt;/p&gt;&#xA;&lt;p&gt;手机机型 Motorola Edge S Pro ，ROM 是官方的安卓 12 。&lt;/p&gt;&#xA;&lt;p&gt;首先的思路是通过 diag 端口，备份 qcn 文件进行修改。(因为这办法在老机器上是奏效的)&#xA;但是在手机解锁 BL 并 root 之后，使用&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;adb shell setprop sys.usb.config diag,adb&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;并不能打开 diag 端口完成修改操作，猜测是只有官方的工程 ROM 才能正常打开，不知道对不对。尝试了一下其他大佬编译的 LinOS 开启也是一样的结果，所以这个思路到这里断了。&lt;/p&gt;&#xA;&lt;p&gt;第二个想法是能不能通过直接修改手机部分分区实现目的，于是备份了&lt;code&gt;mdm1m9kefs1 、mdm1m9kefs2 、mdmaddr&lt;/code&gt;以及&lt;code&gt;persist&lt;/code&gt;分区，并使用十六进制编辑器在里面按照修改 qcn 的方式搜索原本的 IMEI 。&lt;/p&gt;&#xA;&lt;p&gt;搜索的结果是只在&lt;code&gt;persist&lt;/code&gt;分区查找到了。到这里我以为胜利在望，把修改好的&lt;code&gt;persist.img&lt;/code&gt;使用 dd 命令覆盖了上去（我只修改了 IMEI1 ，IMEI2 没有修改，使用 dd 命令而不是 fastboot flash 的原因是后者会有 permission denied 报错），并双清以及清空了基带缓存，重新开机。&lt;/p&gt;&#xA;&lt;p&gt;然而操作完成之后，不仅手机的 IMEI 完全没有变化，而且手机还没有了信号。SIM 卡是可以读取到的，但是在设置中是禁用的状态，也无法手动启用，到这里我没有任何思路了。（但是起码证明 persist 分区确实成功刷入了）&lt;/p&gt;&#xA;&lt;p&gt;有几个问题想要问一下大佬们：&#xA;&lt;code&gt;mdm1m9kefs1/2&lt;/code&gt;这两个分区好像是基带缓存，分区中是否有保存 IMEI ？如果有，在十六进制编辑器中搜索不到是因为加密了吗？&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;persist&lt;/code&gt;分区中的 IMEI1 数据修改之后没有效果，是因为存在数据检验吗？&lt;/p&gt;&#xA;</description>
+      <author>black201w</author>
+      <pubDate>22 Jun 2022 15:36:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>北京电信物联网无法访问美国网络 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/861505</link>
+      <description>&lt;p&gt;本人常用&lt;strong&gt;电信物联网&lt;/strong&gt;卡上网，地区北京。近日无法访问所有美国地区的服务器，包括 cloudflare ，github ，个人 VPS 等。但能正常访问香港、新加坡的。咨询过物联网卡商家，他们说没有动手脚。&#xA;本人的电信手机卡网络则没有问题。&#xA;有没有人遇到类似情况，或者知道其中原因？&#xA;这种情况向电信投诉有用吗？&lt;/p&gt;&#xA;</description>
+      <author>csx</author>
+      <pubDate>22 Jun 2022 15:34:33 +0000</pubDate>
+    </item>
+    <item>
       <title>POST 获得 403 而 GET 正常？浏览器新版本又有什么新特性了？ - 问与答</title>
       <link>https://www.v2ex.com/t/861503</link>
       <description>症状：&lt;br /&gt;AJAX 调用服务器获取 JSON ，几个主要参数使用 querystring 形式，使用 GET 一切正常，但是 POST 则直接 403&lt;br /&gt;&lt;br /&gt;推敲：&lt;br /&gt;反复试验，因为甭管 GET 还是 POST ，参数全都通过 querystring 提供，实际并没有 POST BODY 。&lt;br /&gt;刚开始怀疑服务器端有 filter 拦截，但是没有发现；&lt;br /&gt;然后 curl -d &#34;&#34; &#34;{url}&#34;正常，curl &#34;{url}&#34;也正常；&lt;br /&gt;逼着用了 IE 做实验，POST 和 GET 仍然正常。&lt;br /&gt;&lt;br /&gt;最后成了唯一不正常的就是 Edge(v102.0.1245.44)，然后用了新版本提供的“网络控制台”工具（类似 postman ），把 BODY 设置为 form-data 、x-www-form-urlencoded 、raw text 就没问题了（即便没有实际内容），BODY 调到 none ，妥妥的 403 ，更神奇的在 header 里手动设置 content-type: none 或者无论什么值乃至空字符串——只要有这个 option ，那就没有问题。&lt;br /&gt;&lt;br /&gt;推论：&lt;br /&gt;如果要说 403 是服务器返回的，但是为什么 curl 和 IE 不返 403 ，唯独 edge ？这天天升级的浏览器，是又弄什么幺蛾子了？ edge 的核心 chromium 加什么新特性了？？</description>
