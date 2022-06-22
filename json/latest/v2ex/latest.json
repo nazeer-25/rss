@@ -4,9 +4,16 @@
   "Description": "",
   "Items": [
     {
+      "Title": "实体建模时如何优雅地解决一个实体的某几个字段在某个状态下同时存在/同时不存在，或者只有在某种状态下才有某种行为的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/861461",
+      "Description": "目前倾向于用 adt ，但是对于不支持交类型的一些名义类型语言，有两个正交的状态就得手动定义四种类型，更烦的是得起四个名字，状态多起来要实现完全完备的建模有点不现实也不实用",
+      "Author": "TWorldIsNButThis",
+      "PubDate": "2022-06-22T11:22:48Z"
+    },
+    {
       "Title": "curl localhost 关于 iptables 的一个疑问 - Linux",
       "Link": "https://www.v2ex.com/t/861460",
-      "Description": "\u003cp\u003e在机器上安装一个 nginx ，然后 curl localhost 。\u003c/p\u003e\n\u003cp\u003e我的理解是：curl -\u0026gt; prerouting -\u0026gt; input -\u0026gt; nginx -\u0026gt; output -\u0026gt; postrouting 。\u003c/p\u003e\n\u003cp\u003e我的疑问是：nginx 的回包经过 postrouting 之后怎么返回给 curl 的？是再次进入 prerouting -\u0026gt; input --\u0026gt; curl 这样的吗？\u003c/p\u003e\n\u003cp\u003e我在机器上配置 iptables 日志：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e-t raw -A PREROUTING -p tcp --dport 80 -j LOG --log-prefix \"IPTABLES (curl in): \"\n-t raw -A PREROUTING -p tcp --sport 80 -j LOG --log-prefix \"IPTABLES (nginx in):\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是日志里面只有 (curl in) 没有（ nginx in ）。\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e在机器上安装一个 nginx ，然后 curl localhost 。\u003c/p\u003e\n\u003cp\u003e我的理解是：curl 发出的报文 -\u0026gt; prerouting -\u0026gt; input -\u0026gt; nginx 回包 -\u0026gt; output -\u0026gt; postrouting 。\u003c/p\u003e\n\u003cp\u003e我的疑问是：nginx 的回包经过 postrouting 之后怎么返回给 curl 的？是再次进入 prerouting -\u0026gt; input --\u0026gt; curl 这样的吗？\u003c/p\u003e\n\u003cp\u003e我在机器上配置 iptables 日志：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e-t raw -A PREROUTING -p tcp --dport 80 -j LOG --log-prefix \"IPTABLES (curl in): \"\n-t raw -A PREROUTING -p tcp --sport 80 -j LOG --log-prefix \"IPTABLES (nginx in):\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是日志里面只有 (curl in) 没有（ nginx in ）。\u003c/p\u003e\n",
       "Author": "yujianwjj",
       "PubDate": "2022-06-22T11:13:00Z"
     },
