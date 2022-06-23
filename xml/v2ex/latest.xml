@@ -4,11 +4,18 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>Surge for IOS 3 缺 2 - Surge</title>
-      <link>https://www.v2ex.com/t/861786</link>
-      <description>&lt;p&gt;后续商量续费 留下你的 tg 即可&lt;/p&gt;&#xA;</description>
-      <author>lokk799</author>
-      <pubDate>23 Jun 2022 16:08:11 +0000</pubDate>
+      <title>有用过 tun2socks 的吗 本机代理陷入 loops 有啥好的办法？ - 程序员</title>
+      <link>https://www.v2ex.com/t/861788</link>
+      <description>最近正在做一个 proxy 工具，需要支持全局代理。目前方案是创建 tun 虚拟网卡，使用 tun2socks 转发流量到本机 localhost 的 ssr/ss 代理客户端 ss-local ，客户端 ss-local 再向 ss-server 通信就行了。&lt;br /&gt;&lt;br /&gt;因为需要全局使用，所以在 windows 路由表让所有流量走虚拟网卡（ route add 0.0.0.0 =&amp;gt; tun ），但是我发现 ss-local 向 ss-server 请求时会形成 route loop （又匹配到了 0.0.0.0 的路由规则），导致请求发不出去。&lt;br /&gt;&lt;br /&gt;我尝试单独设置 ss-server 的 ip 走原来的网关，不走虚拟网卡，这样子是可行的，代理也可以正常工作。但是这样不太合理，每次切换 ss-server 就要设置路由，也很可能造成软件运行中的一些 bug 。所以想问下：tun 全局代理下，有没有更好的处理本机流量转发的方式？就是和网卡出口流量、路由表设置、分流这些相关的东西。🙏</description>
+      <author>nojsja</author>
+      <pubDate>23 Jun 2022 16:28:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>个人实验网络构建小结 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/861787</link>
+      <description>&lt;p&gt;总的来说，缺乏可维护性，内网路由段乱飞没有很好办法聚合，挺混沌。&lt;/p&gt;&#xA;&lt;p&gt;IPv6 网段是固定的 /48 隧道公网网段，不展示前缀。&lt;/p&gt;&#xA;&lt;p&gt;拓扑大致如下：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;2022-06-23-1952.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/06/23/95DcfLaNhHTZx8z.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;地址块分配大致如下：&lt;/p&gt;&#xA;&lt;p&gt;主要使用的内网 IPv4 地址块是 172.16.192.0/18 。&lt;/p&gt;&#xA;&lt;p&gt;设备环回接口地址块：&lt;/p&gt;&#xA;&lt;p&gt;IPv4：172.16.200.0/24&lt;/p&gt;&#xA;&lt;p&gt;IPv6：(/48 前缀):0:0:1:0::/64&lt;/p&gt;&#xA;&lt;p&gt;SDWAN 子网 1 （待启用）：&lt;/p&gt;&#xA;&lt;p&gt;IPv4：172.16.197.0/24&lt;/p&gt;&#xA;&lt;p&gt;SDWAN 子网 2：&lt;/p&gt;&#xA;&lt;p&gt;这个网络用来连接自己的各种设备，很杂乱，准备将互联互通用的网络设备再拆分出来单独用一个 SDWAN 子网。&lt;/p&gt;&#xA;&lt;p&gt;IPv4：172.16.193.0/24&lt;/p&gt;&#xA;&lt;p&gt;IPv6：(/48 前缀):100::/64&lt;/p&gt;&#xA;&lt;p&gt;SDWAN 子网 3：&lt;/p&gt;&#xA;&lt;p&gt;这是一个旧的用来跟朋友异地组网用的网络。&lt;/p&gt;&#xA;&lt;p&gt;IPv4：203.0.113.0/24&lt;/p&gt;&#xA;&lt;p&gt;DG 区域服务子网：&lt;/p&gt;&#xA;&lt;p&gt;建设中&lt;/p&gt;&#xA;&lt;p&gt;GZ 区域服务子网：&lt;/p&gt;&#xA;&lt;p&gt;IPv4：172.16.196.0/24&lt;/p&gt;&#xA;&lt;p&gt;IPv6：(/48 前缀):101::/64&lt;/p&gt;&#xA;&lt;p&gt;这个网络使用 OSPF 作为 IGP ，具有一定程度上的多路径冗余能力。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;屏幕截图 2022-06-23 204055.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/06/23/8q7dAc2YSnEPhBi.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;屏幕截图 2022-06-23 204356.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/06/23/rA34OwCLmZvlhKB.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;外部的分流路由表通过 Linux 核心路由表导入，然后重分发到 IBGP 网络中。&lt;/p&gt;&#xA;&lt;p&gt;为什么不直接用 OSPF 呢？&lt;/p&gt;&#xA;&lt;p&gt;我认为，IGP 应该专心处理自己网络内的路由，干好自己在网内铺路的活就够了，要尽可能避免将外部的路由导入 IGP 中。而且这个 OSPF 实现无法承载那么多路由，会直接把路由进程整崩。&lt;/p&gt;&#xA;&lt;p&gt;至于将所有导入的路由的起源 AS 设为 109 ，这是我个人的恶趣味。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;屏幕截图 2022-06-23 232657.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/06/23/rK2puZBaTh91MSj.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;屏幕截图 2022-06-23 232750.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/06/23/xuldce68iWb5IwP.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;以前也有导入过 IPv6 的路由表，但是感觉没多大用处，之后就没再导了。&lt;/p&gt;&#xA;</description>
+      <author>HawkinsSherpherd</author>
+      <pubDate>23 Jun 2022 16:26:49 +0000</pubDate>
     </item>
     <item>
       <title>PS5 联机问题 - PlayStation 5</title>
@@ -226,6 +233,13 @@
       <description>刚下单了小米投影仪青春版，想问一下如果同局域网下的 Windows 开启了共享文件夹，投影仪可以播放文件夹下的视频文件吗？</description>
       <author>lyc575757</author>
       <pubDate>23 Jun 2022 11:19:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>Surge for IOS 3 缺 2 - Surge</title>
+      <link>https://www.v2ex.com/t/861786</link>
+      <description>&lt;p&gt;后续商量续费 留下你的 tg 即可&lt;/p&gt;&#xA;</description>
+      <author>lokk799</author>
+      <pubDate>23 Jun 2022 16:08:11 +0000</pubDate>
     </item>
     <item>
       <title>Gopher 苦 ORM 久矣，发布个使用 rawsql 节省体力的包，使用姿势与标准库基本相同 - Go 编程语言</title>
