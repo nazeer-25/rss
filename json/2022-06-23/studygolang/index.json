@@ -102,6 +102,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "golang 无法访问导入包中的导出变量？",
+      "Link": "https://studygolang.com/topics/15631#reply1",
+      "Description": "\u003cp\u003e被导入包：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage utils\n\nimport (\n\t\u0026quot;github.com/elastic/go-elasticsearch/v6\u0026quot;\n\t\u0026quot;log\u0026quot;\n)\n\nvar EsClient *elasticsearch.Client\n\nfunc init() {\n\thost := Cfg.Section(\u0026quot;es\u0026quot;).Key(\u0026quot;host\u0026quot;).String()\n\tif host == \u0026quot;\u0026quot; {\n\t\tlog.Fatal(\u0026quot;es Host 未设置\u0026quot;)\n\t}\n\n\tcfg := elasticsearch.Config{\n\t\tAddresses: []string{host},\n\t}\n\n\tEsClient, err := elasticsearch.NewClient(cfg)\n\tif err != nil {\n\t\tlog.Fatal(\u0026quot;连接失败\u0026quot;, err)\n\t}\n\n\t_, err = EsClient.Info()\n\tif err != nil {\n\t\tlog.Fatalf(\u0026quot;连接出错：\u0026quot;+host, err)\n\t}\n\n\tfmt.Println(EsClient) // \u0026amp;{0xc000166000 0xc000162000}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003emain.go\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n    \u0026quot;data_push/utils\u0026quot;\n    \u0026quot;fmt\u0026quot;\n)\n\nfunc main() {\n   fmt.Println(utils.EsClient) // 结果为 nil\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003emain 函数中输出 utils 包中 EsClient 变量，结果为 nil，但是 utils 包中初始化后值不为 nil，这是什么原因呢？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "# 稳了github star突破9k即时通讯IM开源项目OpenIM版本发布-生产环境重点关注",
       "Link": "https://studygolang.com/articles/35720#reply0",
       "Description": "",
@@ -119,13 +126,6 @@
       "Title": "在程序退出，defer 不执行是为什么",
       "Link": "https://studygolang.com/articles/35711#reply6",
       "Description": "\u003cp\u003e如代码所示\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc main() {\n\tserver := http.Server{\n\t\tAddr:    \u0026quot;0.0.0.0:8565\u0026quot;,\n\t\tHandler: nil,\n\t}\n\n\tdefer server.Shutdown(context.Background())\n\tdefer fmt.Println(\u0026quot;closed\u0026quot;)\n\tserver.ListenAndServe()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e当结束程序时，并没有打印 \u003ccode\u003eclosed\u003c/code\u003e 输出，这是为什么？\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "golang 无法访问导入包中的导出变量？",
-      "Link": "https://studygolang.com/topics/15631#reply1",
-      "Description": "\u003cp\u003e被导入包：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage utils\n\nimport (\n\t\u0026quot;github.com/elastic/go-elasticsearch/v6\u0026quot;\n\t\u0026quot;log\u0026quot;\n)\n\nvar EsClient *elasticsearch.Client\n\nfunc init() {\n\thost := Cfg.Section(\u0026quot;es\u0026quot;).Key(\u0026quot;host\u0026quot;).String()\n\tif host == \u0026quot;\u0026quot; {\n\t\tlog.Fatal(\u0026quot;es Host 未设置\u0026quot;)\n\t}\n\n\tcfg := elasticsearch.Config{\n\t\tAddresses: []string{host},\n\t}\n\n\tEsClient, err := elasticsearch.NewClient(cfg)\n\tif err != nil {\n\t\tlog.Fatal(\u0026quot;连接失败\u0026quot;, err)\n\t}\n\n\t_, err = EsClient.Info()\n\tif err != nil {\n\t\tlog.Fatalf(\u0026quot;连接出错：\u0026quot;+host, err)\n\t}\n\n\tfmt.Println(EsClient) // \u0026amp;{0xc000166000 0xc000162000}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003emain.go\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n    \u0026quot;data_push/utils\u0026quot;\n    \u0026quot;fmt\u0026quot;\n)\n\nfunc main() {\n   fmt.Println(utils.EsClient) // 结果为 nil\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003emain 函数中输出 utils 包中 EsClient 变量，结果为 nil，但是 utils 包中初始化后值不为 nil，这是什么原因呢？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
