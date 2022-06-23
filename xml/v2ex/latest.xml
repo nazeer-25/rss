@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>小米投影仪支持 smb 访问吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/861740</link>
+      <description>刚下单了小米投影仪青春版，想问一下如果同局域网下的 Windows 开启了共享文件夹，投影仪可以播放文件夹下的视频文件吗？</description>
+      <author>lyc575757</author>
+      <pubDate>23 Jun 2022 11:19:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>Gopher 苦 ORM 久矣，发布个使用 rawsql 节省体力的包，使用姿势与标准库基本相同 - 程序员</title>
+      <link>https://www.v2ex.com/t/861739</link>
+      <description>&lt;h3&gt;初衷&lt;/h3&gt;&#xA;&lt;p&gt;这是前几天看到隔壁帖子吵得热闹，一时兴起写的，还没大规模测试，感兴趣的同学欢迎来 issue/pr 骚扰。&lt;/p&gt;&#xA;&lt;p&gt;隔壁帖子： /t/859178&lt;/p&gt;&#xA;&lt;h3&gt;项目地址&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/lesismal/sqlw&#34; rel=&#34;nofollow&#34;&gt;github.com/lesismal/sqlw&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;示例代码&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/lesismal/sqlw_examples&#34; rel=&#34;nofollow&#34;&gt;github.com/lesismal/sqlw_examples&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;特点：&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;非 ORM ，仍然是标准库的姿势使用 rawsql&lt;/li&gt;&#xA;&lt;li&gt;简单封装了标准库 sql ，Query 相关的方法增加了一个参数来接收结果，不再需要自己处理 rows&lt;/li&gt;&#xA;&lt;li&gt;简洁干净，目前只使用标准库，无三方依赖&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;直接上代码吧：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;db, err := sqlw.Open(&#34;mysql&#34;, &#34;test:123qwe@tcp(localhost:3306)/sqlw_test&#34;, &#34;db&#34;)&#xA;if err != nil {&#xA;      log.Fatal(err)&#xA;}&#xA;&#xA;var dst examples.ModelForTest&#xA;err = db.QueryRow(&amp;amp;dst, `select * from sqlw_test.sqlw_test`)&#xA;if err != nil {&#xA;      log.Fatal(err)&#xA;}&#xA;log.Printf(&#34;dst: %v&#34;, dst)&#xA;&#xA;var dsts []*examples.ModelForTest&#xA;err = db.QueryRow(&amp;amp;dsts, `select * from sqlw_test.sqlw_test`)&#xA;if err != nil {&#xA;      log.Fatal(err)&#xA;}&#xA;log.Printf(&#34;dst: %v&#34;, dsts )&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;db.Prepare|sql.Stmt, db.Begin|Tx 也类似，保持了标准库的简洁基础上省去了自己遍历 rows 去 scan 的麻烦，代码量节省很多&lt;/p&gt;&#xA;</description>
+      <author>lesismal</author>
+      <pubDate>23 Jun 2022 11:13:34 +0000</pubDate>
+    </item>
+    <item>
       <title>跨地域跨部门沟通非常困难有什么办法 - 职场话题</title>
       <link>https://www.v2ex.com/t/861738</link>
       <description>&lt;p&gt;有很多数据或者其他资源需要联系其他部门的人，但是直属领导了解和提供的资源有限，很多时候都不是在写代码，而是到处发邮件聊天软件求人，遇到比较好聊的人会比较顺利，但经常遇到尤其是其他时区的其他地域的完全不回复的人，或者一件事情没完成偶尔回复一下，然后就没有然后了，事情推进非常困难。团队里有项目经理如果十分着急就会帮忙联系催一催，但是很多时候都是我一个程序员到处找资源想办法把事情做成，经常导致一个看起来简单的事情做了很久。&lt;/p&gt;&#xA;</description>
