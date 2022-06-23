@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "想问下申请信用卡的事情。目前没有申请过信用卡，不知道怎么个流程。\r\n信用卡会不会收费呢？去哪申请比较好，希望能拥有一张免费信用卡。\r\n因为我想继续使用 Copilot，但好像需要信用卡。\r\n各位有经验的朋友，能不能指导一下？谢了 - 程序员",
+      "Link": "https://www.v2ex.com/t/861616",
+      "Description": "\u003cp\u003e想问下申请信用卡的事情。目前没有申请过信用卡，不知道怎么个流程。\n信用卡会不会收费呢？去哪申请比较好，希望能拥有一张免费信用卡。\n因为我想继续使用 Copilot ，但好像需要信用卡。\n各位有经验的朋友，能不能指导一下？谢了\u003c/p\u003e\n",
+      "Author": "ponconsoft",
+      "PubDate": "2022-06-23T04:16:47Z"
+    },
+    {
+      "Title": "CORS 和 JQUERY POST 打架了怎么办？求个解决之道 - 问与答",
+      "Link": "https://www.v2ex.com/t/861615",
+      "Description": "\u003cp\u003e昨天折腾发现了一个问题，脑袋一热，没找到根源就发了帖子 \u003ca href=\"https://www.v2ex.com/t/861503\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/861503\u003c/a\u003e ，最后发现是 CORS 的问题。但是新的问题又来了。\u003c/p\u003e\n\u003cp\u003e使用的是 Tomcat 8.5 ，用了官方的 CORS 。其中有一段代码是这样的\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e} else if (\"POST\".equals(method)) {\n    String mediaType = getMediaType(request.getContentType());\n    if (mediaType != null) {\n        if (SIMPLE_HTTP_REQUEST_CONTENT_TYPE_VALUES.contains(mediaType)) {\n            requestType = CORSRequestType.SIMPLE;\n        } else {\n            requestType = CORSRequestType.ACTUAL;\n        }\n    }\n} else {\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其中 SIMPLE_HTTP_REQUEST_CONTENT_TYPE_VALUES 是 application/x-www-form-urlencoded,  multipart/form-data, text/plain 其中之一； CORSRequestType 默认是 INVALID_CORS ，也就是返回 403 的情况。\u003c/p\u003e\n\u003cp\u003e所以结论就是如果 POST 方法，Header 没有 Content-Type ，mediaType==null ，则走向了 403 ，解释了原帖的疑惑。可是问题根源在哪里呢？\u003c/p\u003e\n\u003cp\u003e系统使用了比较古老的 JQuery 1.12 ，其中的片段是这样的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e// Set the correct header, if data is being sent\nif ( s.data \u0026amp;\u0026amp; s.hasContent \u0026amp;\u0026amp; s.contentType !== false || options.contentType ) {\n\tjqXHR.setRequestHeader( \"Content-Type\", s.contentType );\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这就是如果 data==\"\"，那就不设置 Content-Type 。另外，POST 通过 querystring 提供了一些数据，所以 s.hasContent==true 。\u003c/p\u003e\n\u003cp\u003e一个驴唇，一个马嘴，还真对上了🤣。一个是 POST 不见 Content-Type 就觉得不安全，一个是没有实际 data 就不搞 Content-Type 。而实际上 POST 是可以没有内容以及没有 Content-Type 的吧。\u003c/p\u003e\n\u003cp\u003e那么怎么解决呢？？\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e修改 CORSFilter ？我认为这可能是一个 BUG ，因为这个 mediaType 的 if 没有 else ，或者原本的计划就是不能缺失 Content-Type ，缺失则是 403 。如果这里有问题，那就直接加上 else requestType = CORSRequestType.ACTUAL 重新编译然后注入到 Tomcat 里。\u003c/li\u003e\n\u003cli\u003e修改 JQuery ？不知道新版 JQuery 如何认知这件事情的。可以搞一个拦截，比如 jquery 代码片段那里的 s.data 改成(true||s.data)。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eCORS 和 JQUERY 两方的原则是啥？改谁？\u003c/p\u003e\n",
+      "Author": "cpstar",
+      "PubDate": "2022-06-23T04:15:39Z"
+    },
+    {
       "Title": "移动也开始阻断外网流量了 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/861613",
       "Description": "时隔几天，移动又开始骚操作了",
