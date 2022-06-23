@@ -67,6 +67,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "《Go题库·10》channel和锁的对比",
+      "Link": "https://studygolang.com/topics/15632#reply0",
+      "Description": "\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e题目解析\u003c/strong\u003e \u003ca href=\"https://www.golangroadmap.com/\"\u003eGOLANG ROADMAP社区\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（engine）\u003c/h2\u003e\n\n\u003cp\u003e并发问题可以用channel解决也可以用Mutex解决，但是它们的擅长解决的问题有一些不同。\u003c/p\u003e\n\n\u003cp\u003echannel关注的是并发问题的数据流动，适用于数据在多个协程中流动的场景。\u003c/p\u003e\n\n\u003cp\u003e而mutex关注的是是数据不动，某段时间只给一个协程访问数据的权限，适用于数据位置固定的场景。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "golang 无法访问导入包中的导出变量？",
+      "Link": "https://studygolang.com/topics/15631#reply1",
+      "Description": "\u003cp\u003e被导入包：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage utils\n\nimport (\n\t\u0026quot;github.com/elastic/go-elasticsearch/v6\u0026quot;\n\t\u0026quot;log\u0026quot;\n)\n\nvar EsClient *elasticsearch.Client\n\nfunc init() {\n\thost := Cfg.Section(\u0026quot;es\u0026quot;).Key(\u0026quot;host\u0026quot;).String()\n\tif host == \u0026quot;\u0026quot; {\n\t\tlog.Fatal(\u0026quot;es Host 未设置\u0026quot;)\n\t}\n\n\tcfg := elasticsearch.Config{\n\t\tAddresses: []string{host},\n\t}\n\n\tEsClient, err := elasticsearch.NewClient(cfg)\n\tif err != nil {\n\t\tlog.Fatal(\u0026quot;连接失败\u0026quot;, err)\n\t}\n\n\t_, err = EsClient.Info()\n\tif err != nil {\n\t\tlog.Fatalf(\u0026quot;连接出错：\u0026quot;+host, err)\n\t}\n\n\tfmt.Println(EsClient) // \u0026amp;{0xc000166000 0xc000162000}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003emain.go\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n    \u0026quot;data_push/utils\u0026quot;\n    \u0026quot;fmt\u0026quot;\n)\n\nfunc main() {\n   fmt.Println(utils.EsClient) // 结果为 nil\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003emain 函数中输出 utils 包中 EsClient 变量，结果为 nil，但是 utils 包中初始化后值不为 nil，这是什么原因呢？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "为什么 main 中调用包中可导出变量提示未",
       "Link": "https://studygolang.com/articles/35715#reply4",
       "Description": "",
@@ -81,23 +95,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "《Go题库·10》channel和锁的对比",
-      "Link": "https://studygolang.com/topics/15632#reply0",
-      "Description": "\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e题目解析\u003c/strong\u003e \u003ca href=\"https://www.golangroadmap.com/\"\u003eGOLANG ROADMAP社区\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（engine）\u003c/h2\u003e\n\n\u003cp\u003e并发问题可以用channel解决也可以用Mutex解决，但是它们的擅长解决的问题有一些不同。\u003c/p\u003e\n\n\u003cp\u003echannel关注的是并发问题的数据流动，适用于数据在多个协程中流动的场景。\u003c/p\u003e\n\n\u003cp\u003e而mutex关注的是是数据不动，某段时间只给一个协程访问数据的权限，适用于数据位置固定的场景。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "最热门海量的阿里云盘资源分享",
       "Link": "https://studygolang.com/articles/35716#reply0",
       "Description": "\u003ch1\u003e最热门阿里云盘资源分享\u003c/h1\u003e\n\n\u003cp\u003e\u003cstrong\u003e更新时间：2022.06.21\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e阿里云盘目前还处在野生发展，有很多百度云盘不方便分享的文件资源，发现一批长期更新的阿里云盘资源合集，使用腾讯文档分享，非常非常丰富，有需要的记得下载到本地，且用且珍惜。\u003c/p\u003e\n\n\u003cp\u003e本页面专门汇集各位网友分享的优质阿里云盘资源，并且\u003cstrong\u003e长期更新，欢迎收藏至书签\u003c/strong\u003e！同时如果你手上也有大量的阿里云盘资源，欢迎在评论区留言分享！\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e云盘资源获取方式，见文末~\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e云盘资源获取方式，见文末~\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e云盘资源获取方式，见文末~\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e阿里云盘空间够大、下载也不限速，但是资源这方面还是差点，下面就是给大家分享的资源 \u003cstrong\u003e，里面有很多网友分享的阿里云盘资源，这下啥都有了！\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e先给大家瞅瞅这个站点长啥样：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/93c714de9dd44186adf82d0a66b40359~tplv-k3u1fbpfcp-zoom-1.image\" alt=\"\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e虽然卖相一般，光分享链接就有 290+，且个个是合集。\u003c/p\u003e\n\n\u003cp\u003e比如 ePUBee 小蜜蜂这个电子书资源站，这个里面就有把小蜜蜂全站扒下来的阿里云盘资源。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b38a7ac9d52247458778a5956150b234~tplv-k3u1fbpfcp-zoom-1.image\" alt=\"\" /\u003e\u003cbr\u003e\n合计 432G 的电子书，点进去看你会发现全都是整理好的 epub 格式的电子书：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b49641731a4426583af53f368f3c627~tplv-k3u1fbpfcp-zoom-1.image\" alt=\"\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e比如超2000册的计算机图书，永久有效\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/39177051b67b4b79a725f724ee2c60c0~tplv-k3u1fbpfcp-zoom-1.image\" alt=\"\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e比如各大企业面试笔试汇总\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5456b2518751471ea5bd5d1bdaa9407f~tplv-k3u1fbpfcp-zoom-1.image\" alt=\"\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e比如图灵设计丛书300+合集（PDF）\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f60a19e560004aa697ac8ccaaebe4702~tplv-k3u1fbpfcp-zoom-1.image\" alt=\"\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e比如 10000+ 的 PPT 模板：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3491dbc61d0a49d78c235ef3f1f46181~tplv-k3u1fbpfcp-zoom-1.image\" alt=\"\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e这个里面，还不乏大厂的内部培训资料、自媒体教程、理财课、心理学、面试汇总等等等等，想了解的小伙伴还是去亲自去看一下吧。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4ef0a6327994a64806ee7daab0e505a~tplv-k3u1fbpfcp-zoom-1.image\" alt=\"\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e帖子的最前方，有 9 个资源大杂烩，套娃收录的是像这个帖子一样的资源文档。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/055a96b1927a4223965e8db3d688c358~tplv-k3u1fbpfcp-zoom-1.image\" alt=\"\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e点开可以看到\u003cstrong\u003e持续更新177天的腾讯文档，资源内容包罗万象\u003c/strong\u003e，影视音乐、全球各国电视剧、动漫漫画等等。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9a5222d97b0e4225b77202e67ca5d39f~tplv-k3u1fbpfcp-zoom-1.image\" alt=\"\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e这里还有上千个阿里云盘分享链接，大多数也都是合集的那种，一共算下来有 2400T 的资源。\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e云盘资源获取，访问链接：\u003ca href=\"http://www.itmind.net/23261.html\"\u003ehttp://www.itmind.net/23261.html\u003c/a\u003e\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e云盘资源获取，访问链接：\u003ca href=\"http://www.itmind.net/23261.html\"\u003ehttp://www.itmind.net/23261.html\u003c/a\u003e\u003c/strong\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "golang 无法访问导入包中的导出变量？",
-      "Link": "https://studygolang.com/topics/15631#reply1",
-      "Description": "\u003cp\u003e被导入包：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage utils\n\nimport (\n\t\u0026quot;github.com/elastic/go-elasticsearch/v6\u0026quot;\n\t\u0026quot;log\u0026quot;\n)\n\nvar EsClient *elasticsearch.Client\n\nfunc init() {\n\thost := Cfg.Section(\u0026quot;es\u0026quot;).Key(\u0026quot;host\u0026quot;).String()\n\tif host == \u0026quot;\u0026quot; {\n\t\tlog.Fatal(\u0026quot;es Host 未设置\u0026quot;)\n\t}\n\n\tcfg := elasticsearch.Config{\n\t\tAddresses: []string{host},\n\t}\n\n\tEsClient, err := elasticsearch.NewClient(cfg)\n\tif err != nil {\n\t\tlog.Fatal(\u0026quot;连接失败\u0026quot;, err)\n\t}\n\n\t_, err = EsClient.Info()\n\tif err != nil {\n\t\tlog.Fatalf(\u0026quot;连接出错：\u0026quot;+host, err)\n\t}\n\n\tfmt.Println(EsClient) // \u0026amp;{0xc000166000 0xc000162000}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003emain.go\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n    \u0026quot;data_push/utils\u0026quot;\n    \u0026quot;fmt\u0026quot;\n)\n\nfunc main() {\n   fmt.Println(utils.EsClient) // 结果为 nil\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003emain 函数中输出 utils 包中 EsClient 变量，结果为 nil，但是 utils 包中初始化后值不为 nil，这是什么原因呢？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
