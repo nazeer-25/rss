@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Vue3 KeepAlive 的一些问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/861673",
+      "Description": "\u003cp\u003eVue3 KeepAlive 支持写法：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-html\"\u003e\u0026lt;router-view v-slot=\"{Component}\"\u0026gt;\n  \u0026lt;keep-alive\n    v-if=\"$route.meta.keepAlive\"\u0026gt;\n    \u0026lt;component\n      :key=\"$route.name\"\n      :is=\"Component\"/\u0026gt;\n  \u0026lt;/keep-alive\u0026gt;\n  \u0026lt;component\n    v-else\n    :key=\"$route.name\"\n    :is=\"Component\"/\u0026gt;\n\u0026lt;/router-view\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003erouter.js 中配置如下，其中 page-one 中有一个按钮可以执行 $router.push({path: '/keep-alive/page-two'})，page-two 中有一个按钮可以执行 $router.back()。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003e{\n  path: '/keep-alive',\n  component: () =\u0026gt; import('@/components/Layout/index.vue'),\n  children: [\n    {\n      path: 'page-one',\n      name: '/keep-alive/page-one',\n      meta: {\n        keepAlive: true\n      },\n      component: () =\u0026gt; import('@/views/PageOne/index.vue')\n    },\n    {\n      path: 'page-two',\n      name: '/keep-alive/page-two',\n      meta: {\n        // keepAlive: true\n      },\n      component: () =\u0026gt; import('@/views/PageTwo/index.vue')\n    }\n  ]\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e问题，只有当 page-one 和 page-tow 都设置 keepAlive 为 true 时候，page-one 才能正确的保留数据。如果只有 page-one 的 keepAlive 为 true ，而 page-two 的 keepAlive 为 false 时，从 page-tow 返回到 page-one 时，数据不会保存。请问各位大神能否帮忙解答以下~不胜感激。\u003c/p\u003e\n",
+      "Author": "17681880207",
+      "PubDate": "2022-06-23T07:41:57Z"
+    },
+    {
+      "Title": "各位 V2er 怎么看阿里云企业主体备案域名需要录制承诺小视频的操作 - 程序员",
+      "Link": "https://www.v2ex.com/t/861672",
+      "Description": "\u003cp\u003e我在腾讯云用企业主体（个体工商户）购买并备案了一个域名，然后现在有一个子域名需要解析到阿里云的云服务器上，阿里云这边需要做新增接入备案，于是来我开始备案，提交了一系列的资料之后，阿里云的客户给我来电说需要我做一个额外的辅助验证，以下两种方式任选其一：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e用钉钉（后来另一个客服来电说微信也可以）在我的办公地点拿着身份证和营业执照做一个视频验证\u003c/li\u003e\n\u003cli\u003e录一个承诺小视频（按照指定话术念一段话）发给他们\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003cstrong\u003e这个行为引起了我的强烈反感。\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e我认为我已经提供了所以规定中所需的资料，我反感这种突袭式的额外检验要求，尤其格外反感这种念话术的视频要求，原因有以下三点：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e视频本身对我来说是一个负担很重的媒介形式（生活中我只和女朋友一个人打过视频电话）\u003c/li\u003e\n\u003cli\u003e这种念着指定话术录制视频的形式让我有一种强烈的被羞辱的感觉，就像是在认罪一样。\u003c/li\u003e\n\u003cli\u003e我认为这是越界的个人信息收集行为，我担心我的个人隐私安全问题。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e我给第一个客服反馈过我的强烈不满后，过了十来分钟（不得不表扬阿里云客服反映速度很快👍）后另一位备案客服给我来电，她给我的解释是：通信管理局要求服务商核实网站备案人员和网站信息的真实性，这是他们核实用户信息的一种辅助手段，辛苦我配合一下他们的工作。\u003c/p\u003e\n\u003cp\u003e但我不能接受这个解释，原因有以下几点：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e我在其他云服务商用企业身份备案域名并没有要求提供类似的验证方式，所以这只是阿里云自己的行为，并非规定的要求（这一点我也跟客服确认过，她承认是阿里云方面的行为）\u003c/li\u003e\n\u003cli\u003e我提供的营业执照信息、身份证信息包括活体验证信息，足以满足阿里云方面检验我个人信息和公司信息真实性的需求，没有理由再用同样的接口收集超额的个人信息。\u003c/li\u003e\n\u003cli\u003e我接受并签署了所有相关的服务条款，如果我个人或我网站的行为违规甚至违法，自会有合同的制约甚至法律的制裁，而非在这之前做更多令人为难的检查手续。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e附上客服给我发的要求邮件内容：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"邮件内容\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.lifelog.cool/uPic%2FSnipaste_2022-06-23_15-31-56.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e我个人目前还在纠结是否要录这个视频，想听听各位 v2er 的看法。\u003c/p\u003e\n\u003cp\u003ePs：为避免无意义的口水战，请不要回复 “你不喜欢可以换别家” 之类的话，我明白这是一种解决方式，但不代表这样的行为没有讨论的价值，并且阿里云作为国内云服务市场绝对的领头羊，他们的行为有很强的示范作用，这些年某些互联网企业垄断市场后开始“压迫 /胁迫”用户的的例子大家都看得很多了。\u003c/p\u003e\n",
+      "Author": "Asimov01",
+      "PubDate": "2022-06-23T07:40:01Z"
+    },
+    {
       "Title": "请问各位都是怎么找到摸鱼的群的？ - 问与答",
       "Link": "https://www.v2ex.com/t/861671",
       "Description": "有在 github 、tg 、掘金、b 站、博客等渠道找过一些，但是有些慢慢就没人说话了，想问问还有别的渠道吗？",
@@ -107,13 +121,6 @@
       "Description": "\u003cp\u003e处于好奇，看到咸鱼有人 100 收实名后的真快乐账号，他们把这个收到去干嘛，感觉大生意的样子。\u003c/p\u003e\n",
       "Author": "baseline",
       "PubDate": "2022-06-23T06:56:28Z"
-    },
-    {
-      "Title": "自建 yyds - VPS",
-      "Link": "https://www.v2ex.com/t/861653",
-      "Description": "\u003cp\u003e从 15 年开始一直白嫖腾讯云、阿里云、aws 、azure 等，这几家比较稳，除了某年国庆 ss 集体翻车几乎没出过事。\u003c/p\u003e\n\u003cp\u003e新手村 \u003ca href=\"https://github.com/zephyr404/v2\" rel=\"nofollow\"\u003ehttps://github.com/zephyr404/v2\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "zephyr1",
-      "PubDate": "2022-06-23T06:53:28Z"
     },
     {
       "Title": "apple music 家庭版发车 - 问与答",
@@ -254,6 +261,13 @@
       "Description": "",
       "Author": "goooglethink",
       "PubDate": "2022-06-23T04:58:30Z"
+    },
+    {
+      "Title": "自建 yyds - VPS",
+      "Link": "https://www.v2ex.com/t/861653",
+      "Description": "\u003cp\u003e从 15 年开始一直白嫖腾讯云、阿里云、aws 、azure 等，这几家比较稳，除了某年国庆 ss 集体翻车几乎没出过事。\u003c/p\u003e\n\u003cp\u003e新手村 \u003ca href=\"https://github.com/zephyr404/v2\" rel=\"nofollow\"\u003ehttps://github.com/zephyr404/v2\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "zephyr1",
+      "PubDate": "2022-06-23T06:53:28Z"
     },
     {
       "Title": "准备阶段性退网 V2er 们进来集思广益了 - 问与答",
