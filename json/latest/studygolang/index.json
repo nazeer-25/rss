@@ -26,7 +26,7 @@
     },
     {
       "Title": "一个逃逸分析问题，求指教",
-      "Link": "https://studygolang.com/topics/15636#reply2",
+      "Link": "https://studygolang.com/topics/15636#reply3",
       "Description": "\u003cp\u003e今天在分析代码时候，突然想到一个事情，在使用channel时候，我看了代码，里面传递的数据时指针类型的。我当时就在考虑，这种做法会不会导致GC压力过大，然后我进行的测试发现的确会比没有指针类型的压力大点（也不是很多）。\n后面我考虑想着能不能换成非指针数据，然后我突然考虑到了一个问题，我们一般接收channel数据时候，都是在一个func中处理，比如：\n\u003ccode\u003e\nfunc rcv() {\n\tfor {\n\t\tp := \u0026lt;-pc\n\t\tp.A = 1\n\t}\n}\u003c/code\u003e\n这种方式。这里的pc传递的是非指针数据。我想了一下，也没有发生逃逸，那么问题来了：\n这里的p会分配在栈上，那我的程序一直跑着，不会导致栈空间不足吗？然后还是被分配在堆上？\n求解这里问题，有点没搞懂\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -95,13 +95,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "新人刚学go第一天，问一下为什么定义int还能赋值字符串啊",
-      "Link": "https://studygolang.com/topics/15633#reply4",
-      "Description": "\u003cp\u003evar b int = \u0026lsquo;2\u0026rsquo;\nfmt.Println(b)\n输出是50.。。。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "一个repo中好多微服务，如何单独给每个微服务定版本号？",
       "Link": "https://studygolang.com/topics/15634#reply5",
       "Description": "\u003cp\u003egit tag针对是整个repo，这个难住我了\u003c/p\u003e\n",
@@ -112,6 +105,13 @@
       "Title": "【公告】寻找社区日常运营、功能开发、维护 自愿者",
       "Link": "https://studygolang.com/topics/4092#reply256",
       "Description": "\u003cp\u003e本站 2013 年上线以来，得到国内广大 gopher 们的支持，也让我有动力一直开发、维护着。\u003c/p\u003e\n\n\u003cp\u003e随着 go 越来越流行，学习 go 的人也越来越多，本社区用户量也越来越大，而我个人的精力有限。为了给社区用户提供更好的服务，希望有自愿者加入社区，一起维护、运营本站。招募的自愿者包括：\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e日常网站运营 —— 比如晨读文章推荐、周推荐等；\u003cstrong\u003e特别欢迎在校大学生；\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003e功能开发、维护 —— 参与开发本站功能；板块维护、管理者等；\u003c/li\u003e\n\u003cli\u003e活动组织、宣传者 —— 组织社区用户参与互动，和外界联系拉赞助等；\u003c/li\u003e\n\u003cli\u003e翻译 —— Go 相关教程、文章、资讯等的翻译；\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e其他你想到的，也可以和我沟通~ 根据情况，会提供奖励~\u003c/p\u003e\n\n\u003cp\u003e项目开源的，参与开发，可以直接 fork + PR，参与其他的可以加我微信 gopherstudio 联系。\u003c/p\u003e\n\n\u003cp\u003e项目地址：\u003ca href=\"https://github.com/studygolang/studygolang\"\u003ehttps://github.com/studygolang/studygolang\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.studygolang.com/static/img/gopherstudio2.png?imageView2/2/w/154\" alt=\"\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "新人刚学go第一天，问一下为什么定义int还能赋值字符串啊",
+      "Link": "https://studygolang.com/topics/15633#reply4",
+      "Description": "\u003cp\u003evar b int = \u0026lsquo;2\u0026rsquo;\nfmt.Println(b)\n输出是50.。。。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -196,6 +196,13 @@
       "Title": "优维EasyOps智能监控，让高校运维更“高效”",
       "Link": "https://studygolang.com/articles/35713#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "一个逃逸分析问题，求指教",
+      "Link": "https://studygolang.com/topics/15636#reply2",
+      "Description": "\u003cp\u003e今天在分析代码时候，突然想到一个事情，在使用channel时候，我看了代码，里面传递的数据时指针类型的。我当时就在考虑，这种做法会不会导致GC压力过大，然后我进行的测试发现的确会比没有指针类型的压力大点（也不是很多）。\n后面我考虑想着能不能换成非指针数据，然后我突然考虑到了一个问题，我们一般接收channel数据时候，都是在一个func中处理，比如：\n\u003ccode\u003e\nfunc rcv() {\n\tfor {\n\t\tp := \u0026lt;-pc\n\t\tp.A = 1\n\t}\n}\u003c/code\u003e\n这种方式。这里的pc传递的是非指针数据。我想了一下，也没有发生逃逸，那么问题来了：\n这里的p会分配在栈上，那我的程序一直跑着，不会导致栈空间不足吗？然后还是被分配在堆上？\n求解这里问题，有点没搞懂\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
