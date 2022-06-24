@@ -61,7 +61,7 @@
     },
     {
       "Title": "请教关于双重 for-range下的sub-routine执行问题",
-      "Link": "https://studygolang.com/topics/15641#reply1",
+      "Link": "https://studygolang.com/topics/15641#reply2",
       "Description": "\u003ch3\u003eHi 各位大佬，\u003c/h3\u003e\n\n\u003ch4\u003e请教一个问题，做了一个打印log的方法，通过for-range把多个log并行打印到文件。\u003c/h4\u003e\n\n\u003ch4\u003ePCMapSetting的类型是map[int][]PortRegionInformation.\u003c/h4\u003e\n\n\u003ch4\u003e每个portMap大概有1万到2万个数据不等。\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc printToFileOld(outDir string) {\n\tfor pcId, netSetting := range PCMapSetting {\n\t\tfor idx, portMap := range portsSetting {\n\t\t\tprintToFile(outDir, pcIdx, fileIdx, portMapItem)\n\t\t}\n\t}\n}\n\nfunc printToFile(outDir string) {\n\tvar wg sync.WaitGroup\n\tfor pcId, netSetting := range PCMapSetting {\n\t\tfor idx, portMap := range portsSetting {\n\t\t\tgo func(pcIdx int, fileIdx int, portMapItem PortRegionInformation) {\n\t\t\t\twg.Add(1)\n\t\t\t\tprintToFile(outDir, pcIdx, fileIdx, portMapItem)\n\t\t\t\twg.Done()\n\t\t\t}(pcId, idx, portMap)\n\t\t}\n\t}\n\twg.Wait()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e用printToFileOld可以把完整的数据打印出来，但是用printToFile却能打印部分数据。程序运行没有啥异常，不知道为何在并行模式下，子进程没有执行完就结束了？ 帮忙看看，是不是printToFile里面的写法有问题？\u003c/h4\u003e\n\n\u003ch3\u003e谢谢！\u003c/h3\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -196,6 +196,13 @@
       "Title": "优维EasyOps智能监控，让高校运维更“高效”",
       "Link": "https://studygolang.com/articles/35713#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "请教关于双重 for-range下的sub-routine执行问题",
+      "Link": "https://studygolang.com/topics/15641#reply1",
+      "Description": "\u003ch3\u003eHi 各位大佬，\u003c/h3\u003e\n\n\u003ch4\u003e请教一个问题，做了一个打印log的方法，通过for-range把多个log并行打印到文件。\u003c/h4\u003e\n\n\u003ch4\u003ePCMapSetting的类型是map[int][]PortRegionInformation.\u003c/h4\u003e\n\n\u003ch4\u003e每个portMap大概有1万到2万个数据不等。\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc printToFileOld(outDir string) {\n\tfor pcId, netSetting := range PCMapSetting {\n\t\tfor idx, portMap := range portsSetting {\n\t\t\tprintToFile(outDir, pcIdx, fileIdx, portMapItem)\n\t\t}\n\t}\n}\n\nfunc printToFile(outDir string) {\n\tvar wg sync.WaitGroup\n\tfor pcId, netSetting := range PCMapSetting {\n\t\tfor idx, portMap := range portsSetting {\n\t\t\tgo func(pcIdx int, fileIdx int, portMapItem PortRegionInformation) {\n\t\t\t\twg.Add(1)\n\t\t\t\tprintToFile(outDir, pcIdx, fileIdx, portMapItem)\n\t\t\t\twg.Done()\n\t\t\t}(pcId, idx, portMap)\n\t\t}\n\t}\n\twg.Wait()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e用printToFileOld可以把完整的数据打印出来，但是用printToFile却能打印部分数据。程序运行没有啥异常，不知道为何在并行模式下，子进程没有执行完就结束了？ 帮忙看看，是不是printToFile里面的写法有问题？\u003c/h4\u003e\n\n\u003ch3\u003e谢谢！\u003c/h3\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },

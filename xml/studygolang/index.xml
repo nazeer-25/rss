@@ -43,7 +43,7 @@
     </item>
     <item>
       <title>请教关于双重 for-range下的sub-routine执行问题</title>
-      <link>https://studygolang.com/topics/15641#reply1</link>
+      <link>https://studygolang.com/topics/15641#reply2</link>
       <description>&lt;h3&gt;Hi 各位大佬，&lt;/h3&gt;&#xA;&#xA;&lt;h4&gt;请教一个问题，做了一个打印log的方法，通过for-range把多个log并行打印到文件。&lt;/h4&gt;&#xA;&#xA;&lt;h4&gt;PCMapSetting的类型是map[int][]PortRegionInformation.&lt;/h4&gt;&#xA;&#xA;&lt;h4&gt;每个portMap大概有1万到2万个数据不等。&lt;/h4&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func printToFileOld(outDir string) {&#xA;&#x9;for pcId, netSetting := range PCMapSetting {&#xA;&#x9;&#x9;for idx, portMap := range portsSetting {&#xA;&#x9;&#x9;&#x9;printToFile(outDir, pcIdx, fileIdx, portMapItem)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;func printToFile(outDir string) {&#xA;&#x9;var wg sync.WaitGroup&#xA;&#x9;for pcId, netSetting := range PCMapSetting {&#xA;&#x9;&#x9;for idx, portMap := range portsSetting {&#xA;&#x9;&#x9;&#x9;go func(pcIdx int, fileIdx int, portMapItem PortRegionInformation) {&#xA;&#x9;&#x9;&#x9;&#x9;wg.Add(1)&#xA;&#x9;&#x9;&#x9;&#x9;printToFile(outDir, pcIdx, fileIdx, portMapItem)&#xA;&#x9;&#x9;&#x9;&#x9;wg.Done()&#xA;&#x9;&#x9;&#x9;}(pcId, idx, portMap)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;wg.Wait()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h4&gt;用printToFileOld可以把完整的数据打印出来，但是用printToFile却能打印部分数据。程序运行没有啥异常，不知道为何在并行模式下，子进程没有执行完就结束了？ 帮忙看看，是不是printToFile里面的写法有问题？&lt;/h4&gt;&#xA;&#xA;&lt;h3&gt;谢谢！&lt;/h3&gt;&#xA;</description>
     </item>
     <item>
@@ -136,6 +136,11 @@
     <item>
       <title>优维EasyOps智能监控，让高校运维更“高效”</title>
       <link>https://studygolang.com/articles/35713#reply0</link>
+    </item>
+    <item>
+      <title>请教关于双重 for-range下的sub-routine执行问题</title>
+      <link>https://studygolang.com/topics/15641#reply1</link>
+      <description>&lt;h3&gt;Hi 各位大佬，&lt;/h3&gt;&#xA;&#xA;&lt;h4&gt;请教一个问题，做了一个打印log的方法，通过for-range把多个log并行打印到文件。&lt;/h4&gt;&#xA;&#xA;&lt;h4&gt;PCMapSetting的类型是map[int][]PortRegionInformation.&lt;/h4&gt;&#xA;&#xA;&lt;h4&gt;每个portMap大概有1万到2万个数据不等。&lt;/h4&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func printToFileOld(outDir string) {&#xA;&#x9;for pcId, netSetting := range PCMapSetting {&#xA;&#x9;&#x9;for idx, portMap := range portsSetting {&#xA;&#x9;&#x9;&#x9;printToFile(outDir, pcIdx, fileIdx, portMapItem)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;func printToFile(outDir string) {&#xA;&#x9;var wg sync.WaitGroup&#xA;&#x9;for pcId, netSetting := range PCMapSetting {&#xA;&#x9;&#x9;for idx, portMap := range portsSetting {&#xA;&#x9;&#x9;&#x9;go func(pcIdx int, fileIdx int, portMapItem PortRegionInformation) {&#xA;&#x9;&#x9;&#x9;&#x9;wg.Add(1)&#xA;&#x9;&#x9;&#x9;&#x9;printToFile(outDir, pcIdx, fileIdx, portMapItem)&#xA;&#x9;&#x9;&#x9;&#x9;wg.Done()&#xA;&#x9;&#x9;&#x9;}(pcId, idx, portMap)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;wg.Wait()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h4&gt;用printToFileOld可以把完整的数据打印出来，但是用printToFile却能打印部分数据。程序运行没有啥异常，不知道为何在并行模式下，子进程没有执行完就结束了？ 帮忙看看，是不是printToFile里面的写法有问题？&lt;/h4&gt;&#xA;&#xA;&lt;h3&gt;谢谢！&lt;/h3&gt;&#xA;</description>
     </item>
     <item>
       <title>请教关于双重 for-range下的sub-routine执行问题</title>
