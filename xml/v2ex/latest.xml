@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有没有这种在运行时基于 typescript interface 信息序列化和反序列化 JSON 数据的库？ - 前端开发</title>
+      <link>https://www.v2ex.com/t/861898</link>
+      <description>&lt;p&gt;&lt;strong&gt;提出此问题的场景：&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;后端 API 返回 JSON 格式的数据，但字段通常都是 snake_case 的，即使是 camelCase ，有时候前端也需要对其重命名以符合前端的命名规范和一致性。&lt;/p&gt;&#xA;&lt;p&gt;通常后端 API 返回 JSON 格式的数据都是序列化为 JavaScript 后就丢弃了，目前的做法需要 2 步：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;将后端 API 返回的数据 parse 为 JavaScript 对象（这一步通常框架会帮我们完成）&lt;/li&gt;&#xA;&lt;li&gt;将原解析出来的对象 adapt 成前端需要的对象&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;第 2 步中存在这么一些问题：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;从后端解析的原始对象，如果不为其定义一个 TypeScript interface ，无法智能提示，如果定义，则需要为后端返回的原始对象定义一个 interface ，同时还要为转换后的前端对象定义一个 interface ，这就存在 2 个长得很像的 interface ，大部分差异只在于字段的 case 风格。&lt;/li&gt;&#xA;&lt;li&gt;后端对象往前端对象转换时，存在 undefined 风险。这在转换的时候可能是检查不出来的，在后续运行使用某些字时可能触发异常。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;一种解决此问题的想法&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;解决思路是允许后端对象和前端对象共享 1 个 interface ，并且除了静态检查，&lt;strong&gt;运行时&lt;/strong&gt;也会校验数据合法性。&lt;/p&gt;&#xA;&lt;p&gt;举个例子，后端返回如下数据：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&#x9;{&#xA;    &#34;id&#34;: 1,&#xA;    &#34;usename&#34;: &#34;testuser&#34;,&#xA;    &#34;avatar_url&#34;: &#34;https://....&#34;,&#xA;    &#34;is_admin&#34;: false,&#xA;    &#34;type&#34;: &#34;vip&#34;&#xA;  }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;前端可以定义如下 interface：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;/*&#xA;rename_all = &#34;camelCase&#34;&#xA;*/&#xA;interface User {&#xA;  id: number;&#xA;  username: string;&#xA;  avatarUrl: string;&#xA;  isAdmin: string;&#xA;  /*&#xA;  alias=&#34;type&#34;&#xA;  */&#xA;  userType: string;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;注意到注释 rename_all = &#34;camelCase&#34;，alias=&#34;type&#34;（当然注释只是一种注解的形式，可行性暂不讨论），那么在根据这个 interface 序列化和反序列化是，库将根据注解将所有的 snake_case ，转为 camelCase ，userType 的值将从原数据对象的 type 字段提取。此外由于类型都是 string 或者 number ，如果原对象的值类型不符合，运行时将直接抛出异常。&lt;/p&gt;&#xA;&lt;p&gt;以下是一个调用示例：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;// 此调用内部会将后端返回的数据序根据 User interface 的信息列化为符合这个接口的对象，如果无法序列化，抛出异常。&#xA;api.get(&#34;testuser&#34;).json&amp;lt;User&amp;gt;()&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>chuanqirenwu</author>
+      <pubDate>24 Jun 2022 05:04:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>你认识的外包同事是怎样的? 有什么奇闻轶事可以简单描述和分享吗? - 问与答</title>
+      <link>https://www.v2ex.com/t/861897</link>
+      <description>我自己是某厂“2012”的一个边缘部门的外包。每天的任务就是采集数据。&lt;br /&gt;&lt;br /&gt;形容一下我自己吧，做事不太用心，懒散，每天混吃等死，焦虑。&lt;br /&gt;&lt;br /&gt;我的外包同事是这样的：年龄平均 27 岁，水平参差不齐(因部门需求的性质(采集数据 /数据标注)总体来看各人的水平都比较低)，在几年内几乎看不到发展，喜欢看知乎，抖音，不会用代理，擅用百度和 csdn 找资料，认真工作，期待年终奖的激励。&lt;br /&gt;&lt;br /&gt;我来贡献一个点让大家踩吧：在和同事“友好”的交流一些时事观点后，我发现我的这几个同事怎么有些民粹，还有些 low 呢。那么，推论一下，外包大部分都是这么 low 吗?(表现在一些思维方式、对待人际关系的方式，自尊的丧失等)。一个平和温顺的同事原来心里也充满了抖音上的、流行的观点，突然职责起我屁股歪。。。大家可以喷我了，我烦反思 /参考（几个同事已经开始不理我了(｡•́︿•̀｡)）。。</description>
+      <author>vvsystem</author>
+      <pubDate>24 Jun 2022 04:59:53 +0000</pubDate>
+    </item>
+    <item>
       <title>求一个 5000 以内相机推荐 - 摄影</title>
       <link>https://www.v2ex.com/t/861896</link>
       <description>&lt;p&gt;预算 5k 以内，适合妹子用的，谢谢各位大佬了。&lt;/p&gt;&#xA;</description>
@@ -81,7 +95,7 @@
       <pubDate>24 Jun 2022 03:56:13 +0000</pubDate>
     </item>
     <item>
-      <title>kcp 协议，真的更快吗？ - 分享创造</title>
+      <title>kcp 协议，真的更快吗？ - 问与答</title>
       <link>https://www.v2ex.com/t/861884</link>
       <description>&lt;p&gt;kcp 协议： &lt;a href=&#34;https://github.com/skywind3000/kcp&#34; rel=&#34;nofollow&#34;&gt;https://github.com/skywind3000/kcp&lt;/a&gt;&#xA;根据描述，kcp 是相比于 tcp 以牺牲带宽为代价，降低网络延迟；&#xA;那我就提出个问题：如果将网络上所有 tcp 替换为 kcp ，每个人感受到的延迟会变低么？因为相应的重传机制和拥塞避免机制都被修改了。&lt;/p&gt;&#xA;&lt;p&gt;另外：在功能上 kcp 和 quic 有类似之处，但我没有看到任何比较 kcp 与 quic 的测试.&lt;/p&gt;&#xA;</description>
       <author>ty359</author>

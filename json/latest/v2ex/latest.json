@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有没有这种在运行时基于 typescript interface 信息序列化和反序列化 JSON 数据的库？ - 前端开发",
+      "Link": "https://www.v2ex.com/t/861898",
+      "Description": "\u003cp\u003e\u003cstrong\u003e提出此问题的场景：\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e后端 API 返回 JSON 格式的数据，但字段通常都是 snake_case 的，即使是 camelCase ，有时候前端也需要对其重命名以符合前端的命名规范和一致性。\u003c/p\u003e\n\u003cp\u003e通常后端 API 返回 JSON 格式的数据都是序列化为 JavaScript 后就丢弃了，目前的做法需要 2 步：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e将后端 API 返回的数据 parse 为 JavaScript 对象（这一步通常框架会帮我们完成）\u003c/li\u003e\n\u003cli\u003e将原解析出来的对象 adapt 成前端需要的对象\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e第 2 步中存在这么一些问题：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e从后端解析的原始对象，如果不为其定义一个 TypeScript interface ，无法智能提示，如果定义，则需要为后端返回的原始对象定义一个 interface ，同时还要为转换后的前端对象定义一个 interface ，这就存在 2 个长得很像的 interface ，大部分差异只在于字段的 case 风格。\u003c/li\u003e\n\u003cli\u003e后端对象往前端对象转换时，存在 undefined 风险。这在转换的时候可能是检查不出来的，在后续运行使用某些字时可能触发异常。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003e一种解决此问题的想法\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e解决思路是允许后端对象和前端对象共享 1 个 interface ，并且除了静态检查，\u003cstrong\u003e运行时\u003c/strong\u003e也会校验数据合法性。\u003c/p\u003e\n\u003cp\u003e举个例子，后端返回如下数据：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e\t{\n    \"id\": 1,\n    \"usename\": \"testuser\",\n    \"avatar_url\": \"https://....\",\n    \"is_admin\": false,\n    \"type\": \"vip\"\n  }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e前端可以定义如下 interface：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003e/*\nrename_all = \"camelCase\"\n*/\ninterface User {\n  id: number;\n  username: string;\n  avatarUrl: string;\n  isAdmin: string;\n  /*\n  alias=\"type\"\n  */\n  userType: string;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e注意到注释 rename_all = \"camelCase\"，alias=\"type\"（当然注释只是一种注解的形式，可行性暂不讨论），那么在根据这个 interface 序列化和反序列化是，库将根据注解将所有的 snake_case ，转为 camelCase ，userType 的值将从原数据对象的 type 字段提取。此外由于类型都是 string 或者 number ，如果原对象的值类型不符合，运行时将直接抛出异常。\u003c/p\u003e\n\u003cp\u003e以下是一个调用示例：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003e// 此调用内部会将后端返回的数据序根据 User interface 的信息列化为符合这个接口的对象，如果无法序列化，抛出异常。\napi.get(\"testuser\").json\u0026lt;User\u0026gt;()\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "chuanqirenwu",
+      "PubDate": "2022-06-24T05:04:52Z"
+    },
+    {
+      "Title": "你认识的外包同事是怎样的? 有什么奇闻轶事可以简单描述和分享吗? - 问与答",
+      "Link": "https://www.v2ex.com/t/861897",
+      "Description": "我自己是某厂“2012”的一个边缘部门的外包。每天的任务就是采集数据。\u003cbr /\u003e\u003cbr /\u003e形容一下我自己吧，做事不太用心，懒散，每天混吃等死，焦虑。\u003cbr /\u003e\u003cbr /\u003e我的外包同事是这样的：年龄平均 27 岁，水平参差不齐(因部门需求的性质(采集数据 /数据标注)总体来看各人的水平都比较低)，在几年内几乎看不到发展，喜欢看知乎，抖音，不会用代理，擅用百度和 csdn 找资料，认真工作，期待年终奖的激励。\u003cbr /\u003e\u003cbr /\u003e我来贡献一个点让大家踩吧：在和同事“友好”的交流一些时事观点后，我发现我的这几个同事怎么有些民粹，还有些 low 呢。那么，推论一下，外包大部分都是这么 low 吗?(表现在一些思维方式、对待人际关系的方式，自尊的丧失等)。一个平和温顺的同事原来心里也充满了抖音上的、流行的观点，突然职责起我屁股歪。。。大家可以喷我了，我烦反思 /参考（几个同事已经开始不理我了(｡•́︿•̀｡)）。。",
+      "Author": "vvsystem",
+      "PubDate": "2022-06-24T04:59:53Z"
+    },
+    {
       "Title": "求一个 5000 以内相机推荐 - 摄影",
       "Link": "https://www.v2ex.com/t/861896",
       "Description": "\u003cp\u003e预算 5k 以内，适合妹子用的，谢谢各位大佬了。\u003c/p\u003e\n",
@@ -81,7 +95,7 @@
       "PubDate": "2022-06-24T03:56:13Z"
     },
     {
-      "Title": "kcp 协议，真的更快吗？ - 分享创造",
+      "Title": "kcp 协议，真的更快吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/861884",
       "Description": "\u003cp\u003ekcp 协议： \u003ca href=\"https://github.com/skywind3000/kcp\" rel=\"nofollow\"\u003ehttps://github.com/skywind3000/kcp\u003c/a\u003e\n根据描述，kcp 是相比于 tcp 以牺牲带宽为代价，降低网络延迟；\n那我就提出个问题：如果将网络上所有 tcp 替换为 kcp ，每个人感受到的延迟会变低么？因为相应的重传机制和拥塞避免机制都被修改了。\u003c/p\u003e\n\u003cp\u003e另外：在功能上 kcp 和 quic 有类似之处，但我没有看到任何比较 kcp 与 quic 的测试.\u003c/p\u003e\n",
       "Author": "ty359",
