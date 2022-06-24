@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "现在面试的 leetcode 都是什么水平? - 问与答",
+      "Link": "https://www.v2ex.com/t/861999",
+      "Description": "好久没面试过了, 听网上说, 好像都得 medium, hard 一遍 AC 才有机会进入下一轮? 真的这样?",
+      "Author": "asanelder",
+      "PubDate": "2022-06-24T11:19:54Z"
+    },
+    {
+      "Title": "未登录时访问个别主题被 302 到首页 - 反馈",
+      "Link": "https://www.v2ex.com/t/861998",
+      "Description": "\u003cp\u003e登录后可以正常访问。例如 \u003ca href=\"https://www.v2ex.com/t/861183\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/861183\u003c/a\u003e\n这是一个 feature 吗？\u003c/p\u003e\n",
+      "Author": "fano",
+      "PubDate": "2022-06-24T11:15:22Z"
+    },
+    {
+      "Title": "自建 smtp 发送服务中难点踩坑解决 - 程序员",
+      "Link": "https://www.v2ex.com/t/861997",
+      "Description": "必要性介绍\u003cbr /\u003e因为信息保密的需要，或者担心竞争对手获取和分析自己邮件中的商业秘密，有一些项目不方便使用腾讯、网易、Amazon 和 mailgun 等服务发送敏感信息。于是产生了自建 smtp 邮件服务器直接向外发送邮件的需求。\u003cbr /\u003e\u003cbr /\u003e这里对自建 smtp 邮局对外发送邮件的一些坑进行总结，希望对需要的朋友有点帮助\u003cbr /\u003e\u003cbr /\u003esmtp 协议简介\u003cbr /\u003e最新 SMTP 协议 RFC5321 地址： \u003ca target=\"_blank\" href=\"https://tools.ietf.org/html/rfc5321\" rel=\"nofollow noopener\"\u003ehttps://tools.ietf.org/html/rfc5321\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003esmtp ，简单邮件传输协议，是一个 80 年代起就广泛使用的基于 TCP 使用 ASCII 字符来传输信息的协议。\u003cbr /\u003e\u003cbr /\u003e网络主机 A 向 B 发送信息，A 可以连接 B 的 25 端口，然后明文发起一串 ascii 字符的会话，达到将信息从主机 A 传输到 B 的任务。\u003cbr /\u003e\u003cbr /\u003e出现多媒体的时候，就用 MIME 格式来表示二进制数据。\u003cbr /\u003e\u003cbr /\u003eSMTP 会话例子\u003cbr /\u003eC client S Server\u003cbr /\u003e\u003cbr /\u003eC telnet S 的 25 端口\u003cbr /\u003e\u003cbr /\u003eS: 220 \u003ca target=\"_blank\" href=\"http://smtp.abc.com\" rel=\"nofollow noopener\"\u003esmtp.abc.com\u003c/a\u003e ESMTP Postfix\u003cbr /\u003eC: HELO \u003ca target=\"_blank\" href=\"http://me.com\" rel=\"nofollow noopener\"\u003eme.com\u003c/a\u003e\u003cbr /\u003eS: 250 \u003ca target=\"_blank\" href=\"http://smtp.abc.com\" rel=\"nofollow noopener\"\u003esmtp.abc.com\u003c/a\u003e, OK\u003cbr /\u003eC: MAIL FROM:\u0026lt;bob@me.com\u0026gt;\u003cbr /\u003eS: 250 Ok\u003cbr /\u003eC: RCPT TO:\u0026lt;alice@abc.com\u0026gt;\u003cbr /\u003eS: 250 Ok\u003cbr /\u003eC: DATA\u003cbr /\u003eS: 354 End data with \u0026lt;CR\u0026gt;\u0026lt;LF\u0026gt;.\u0026lt;CR\u0026gt;\u0026lt;LF\u0026gt;\u003cbr /\u003eC: From: \"Bob\" \u0026lt;bob@me.com\u0026gt;\u003cbr /\u003eC: To: Alice \u0026lt;alice@abc.com\u0026gt;\u003cbr /\u003eC: Date: Tue, 15 Jan 2008 16:02:43 -0500\u003cbr /\u003eNICE TO MEET YOU\u003cbr /\u003eC: .\u003cbr /\u003eS: 250 Ok: queued as 12345\u003cbr /\u003eC: QUIT\u003cbr /\u003eS: 221 Bye\u003cbr /\u003e这么简单的 ascii 文字交互，几乎就是邮件发送的全部细节。\u003cbr /\u003e\u003cbr /\u003eSMTP 挑战和坑\u003cbr /\u003e既然邮件发送是这么简单，而且没有太多的硬性成本，所以垃圾邮件的泛滥在所难免。所以在多年后的今天，我们自己想搭建一个 smtp 服务发送一些类似于验证码的邮件，会显得这么困难。\u003cbr /\u003e\u003cbr /\u003e下面我们提到一些坑\u003cbr /\u003e\u003cbr /\u003e域名方面\u003cbr /\u003e很多 SMTP 发送邮件的坑，都发生在域名这里，所以对域名设置一定准确。\u003cbr /\u003e\u003cbr /\u003e1 域名非主流\u003cbr /\u003e\u003cbr /\u003e有的朋友使用 .cc .tk .ml 等域名来注册邮局发送邮件。虽然 RFC 协议并没有说不可以使用这些域名。但域名的歧视依然存在，特别是很多垃圾发送者使用免费的 TK ML 等国家域名来发送邮件的时候，你再使用这些免费域名，肯定遇到很多莫名其妙的拦截\u003cbr /\u003e\u003cbr /\u003e2 没有做 PTR 解析\u003cbr /\u003e\u003cbr /\u003ePTR ，也称为 rDNS ，例如 \u003ca target=\"_blank\" href=\"http://cloudflare.com\" rel=\"nofollow noopener\"\u003ecloudflare.com\u003c/a\u003e 的域名 A 记录解释指向 1.1.1.1 ，如果 1.1.1.1 的域名的 rDNS 也可以指向 \u003ca target=\"_blank\" href=\"http://cloudflare.com\" rel=\"nofollow noopener\"\u003ecloudflare.com\u003c/a\u003e ，那么我们说 1.1.1.1 PTR 的记录是 \u003ca target=\"_blank\" href=\"http://cloudflare.com\" rel=\"nofollow noopener\"\u003ecloudflare.com\u003c/a\u003e 。\u003cbr /\u003e\u003cbr /\u003e可以为 IP 加上 PTR 记录，这个就是向邮件服务提供商表明了这个 IP 是被你的域名所拥有的，这有利于提升 IP+域名的权重\u003cbr /\u003e\u003cbr /\u003e查询 ptr 记录的方法：\u003cbr /\u003e\u003cbr /\u003ehost -t PTR 1.1.1.1 （ linux ）\u003cbr /\u003e\u003cbr /\u003e不知道什么原因，全文发 V2EX 会导致账号来临时封禁，应该没有什么敏感词。有兴趣的可以到这里看全文：\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://zhuji188.com/%e8%87%aa%e5%bb%basmtp%e9%82%ae%e5%b1%80%e5%8f%91%e9%80%81%e9%82%ae%e4%bb%b6%e7%9a%84%e4%b8%80%e4%ba%9b%e5%9d%91/\" rel=\"nofollow noopener\"\u003ehttps://zhuji188.com/%e8%87%aa%e5%bb%basmtp%e9%82%ae%e5%b1%80%e5%8f%91%e9%80%81%e9%82%ae%e4%bb%b6%e7%9a%84%e4%b8%80%e4%ba%9b%e5%9d%91/\u003c/a\u003e",
+      "Author": "ggvm",
+      "PubDate": "2022-06-24T11:10:52Z"
+    },
+    {
       "Title": "我想找个 Windows 下的原生应用，来替代 Postman，大家有推荐的么？ - 问与答",
       "Link": "https://www.v2ex.com/t/861995",
       "Description": "如题，Postman 太大了，动不动就升级。找了很久，竟然没找到像 paw 一样的 win 独占接口管理工具。不李姐……\u003cbr /\u003e注意是原生应用哦~",
