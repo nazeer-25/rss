@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>HTTP 的 DELETE 请求，如何能联动 Linux 底层的回收站机制 - 问与答</title>
+      <link>https://www.v2ex.com/t/862096</link>
+      <description>&lt;p&gt;需求是这样的。&lt;/p&gt;&#xA;&lt;p&gt;安装了 nextcloud ，nextcloud ，在删除文件时，调用的时 HTTP 的 DELETE 请求（虽说 nextcloud 有回收站机制，但是还是感觉不保险），而这个 DELETE ，我拦不住，删了就真的删除了。&lt;/p&gt;&#xA;&lt;p&gt;我在 nextcloud 宿主机，安装了类似 trash-cli 的软件，并且把 rm 命令 alias 到 trash-put ，这可以防止从 rm 为入口误删，但其实对 HTTP 的请求并没有用。&lt;/p&gt;&#xA;&lt;p&gt;所以想请教下，能否把 DELETE 请求和类似 trash-cli 这种命令做联动。&lt;/p&gt;&#xA;&lt;p&gt;对这里实在不太懂，还请大家看看有什么思路没，尽量不要去修改原始代码。&lt;/p&gt;&#xA;</description>
+      <author>jellyspot</author>
+      <pubDate>25 Jun 2022 04:22:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>新手请教: 类属性(attribute)和类成员属性之间有什么关系呢?应该是与命名空间(name space)有关. - 程序员</title>
+      <link>https://www.v2ex.com/t/862095</link>
+      <description>&lt;p&gt;楼主正在自学数据结构.写别的练习时遇到了一点小问题.向大家请教.谢谢啦!&lt;/p&gt;&#xA;&lt;p&gt;在 Python 中,类成员可以直接访问类属性.比如  &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class A:&#xA;    a=1&#xA;&#xA;class B(A):&#xA;    b=6&#xA;&#xA;x=B()&#xA;&#xA;print(x.a)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;会显示&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;对类属性的修改会导致通过类成员访问这一属性时发生改变:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class A:&#xA;    a=1&#xA;&#xA;class B(A):&#xA;    b=6&#xA;&#xA;x=B()&#xA;&#xA;print(A.a, x.a, x.a is A.a)&#xA;&#xA;A.a = 2&#xA;&#xA;print(A.a,x.a, A.a is x.a)&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;输出为:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;1 1 True&#xA;2 2 True&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这些我大概还是理解的,但是下面事情变得复杂:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class A:&#xA;    a=1&#xA;&#xA;class B(A):&#xA;    b=6&#xA;&#xA;x=B()&#xA;&#xA;print(A.a, x.a, x.a is A.a)&#xA;&#xA;A.a = 2&#xA;&#xA;print(A.a,x.a, A.a is x.a)&#xA;&#xA;x.a = 0&#xA;&#xA;print(A.a,x.a, x.a is A.a)&#xA;&#xA;A.a = 3&#xA;print(A.a,x.a, x.a is A.a)&#xA;&#xA;A.a = 0&#xA;print(A.a, x.a, A.a is x.a)&#xA;&#xA;print(2 is 2 )&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;输出为:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;1 1 True&#xA;2 2 True&#xA;2 0 False&#xA;3 0 False&#xA;0 0 True&#xA;True&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;以及如果使用可变类型赋值&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class A:&#xA;    a=[1]&#xA;&#xA;class B(A):&#xA;    b=[6]&#xA;&#xA;x=B()&#xA;&#xA;print(A.a, x.a, x.a is A.a)&#xA;&#xA;A.a = [2]&#xA;&#xA;print(A.a,x.a, A.a is x.a)&#xA;&#xA;x.a = [0]&#xA;&#xA;print(A.a,x.a, x.a is A.a)&#xA;&#xA;A.a = [3]&#xA;print(A.a,x.a, x.a is A.a)&#xA;&#xA;A.a = [0]&#xA;print(A.a, x.a, A.a is x.a)&#xA;&#xA;print([2] is [2] )&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;会显示:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;[1] [1] True&#xA;[2] [2] True&#xA;[2] [0] False&#xA;[3] [0] False&#xA;[0] [0] False&#xA;False&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我的问题:&lt;/p&gt;&#xA;&lt;p&gt;1.为什么会产生这种区别?&lt;/p&gt;&#xA;&lt;p&gt;2.用代码&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;x.a = 0&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;和&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;x.a = [0]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;改变类成员属性时发生了什么呢?为什么不会改变类属性 A.a 呢?&lt;/p&gt;&#xA;&lt;p&gt;3.在修改过 x.a 后,修改 A.a 就不会影响 x.a 了,这是为什么呢?&lt;/p&gt;&#xA;</description>
+      <author>JYLu</author>
+      <pubDate>25 Jun 2022 04:16:32 +0000</pubDate>
+    </item>
+    <item>
       <title>外卖员可以给用户发短信吗？ - 问与答</title>
       <link>https://www.v2ex.com/t/862094</link>
       <description>&lt;p&gt;在美团上点了一个外卖，收到后有人号称是外卖员的用个人手机号给我发了一条消息，让我评价。对于评价这个事，我是没有异议并且表示理解的。但是他为什么能给我的手机发短信呀，那个单子上面不是说了用户的手机号是隐私，而且做了隐藏，还提供了一个转播号，难道外卖员真的知道我真实的手机号吗？还是通过那个转播号也可以给我发短信呢&lt;/p&gt;&#xA;</description>

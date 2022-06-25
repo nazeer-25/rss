@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "HTTP 的 DELETE 请求，如何能联动 Linux 底层的回收站机制 - 问与答",
+      "Link": "https://www.v2ex.com/t/862096",
+      "Description": "\u003cp\u003e需求是这样的。\u003c/p\u003e\n\u003cp\u003e安装了 nextcloud ，nextcloud ，在删除文件时，调用的时 HTTP 的 DELETE 请求（虽说 nextcloud 有回收站机制，但是还是感觉不保险），而这个 DELETE ，我拦不住，删了就真的删除了。\u003c/p\u003e\n\u003cp\u003e我在 nextcloud 宿主机，安装了类似 trash-cli 的软件，并且把 rm 命令 alias 到 trash-put ，这可以防止从 rm 为入口误删，但其实对 HTTP 的请求并没有用。\u003c/p\u003e\n\u003cp\u003e所以想请教下，能否把 DELETE 请求和类似 trash-cli 这种命令做联动。\u003c/p\u003e\n\u003cp\u003e对这里实在不太懂，还请大家看看有什么思路没，尽量不要去修改原始代码。\u003c/p\u003e\n",
+      "Author": "jellyspot",
+      "PubDate": "2022-06-25T04:22:52Z"
+    },
+    {
+      "Title": "新手请教: 类属性(attribute)和类成员属性之间有什么关系呢?应该是与命名空间(name space)有关. - 程序员",
+      "Link": "https://www.v2ex.com/t/862095",
+      "Description": "\u003cp\u003e楼主正在自学数据结构.写别的练习时遇到了一点小问题.向大家请教.谢谢啦!\u003c/p\u003e\n\u003cp\u003e在 Python 中,类成员可以直接访问类属性.比如  \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eclass A:\n    a=1\n\nclass B(A):\n    b=6\n\nx=B()\n\nprint(x.a)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e会显示\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e1\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e对类属性的修改会导致通过类成员访问这一属性时发生改变:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eclass A:\n    a=1\n\nclass B(A):\n    b=6\n\nx=B()\n\nprint(A.a, x.a, x.a is A.a)\n\nA.a = 2\n\nprint(A.a,x.a, A.a is x.a)\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e输出为:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e1 1 True\n2 2 True\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这些我大概还是理解的,但是下面事情变得复杂:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eclass A:\n    a=1\n\nclass B(A):\n    b=6\n\nx=B()\n\nprint(A.a, x.a, x.a is A.a)\n\nA.a = 2\n\nprint(A.a,x.a, A.a is x.a)\n\nx.a = 0\n\nprint(A.a,x.a, x.a is A.a)\n\nA.a = 3\nprint(A.a,x.a, x.a is A.a)\n\nA.a = 0\nprint(A.a, x.a, A.a is x.a)\n\nprint(2 is 2 )\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e输出为:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e1 1 True\n2 2 True\n2 0 False\n3 0 False\n0 0 True\nTrue\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e以及如果使用可变类型赋值\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eclass A:\n    a=[1]\n\nclass B(A):\n    b=[6]\n\nx=B()\n\nprint(A.a, x.a, x.a is A.a)\n\nA.a = [2]\n\nprint(A.a,x.a, A.a is x.a)\n\nx.a = [0]\n\nprint(A.a,x.a, x.a is A.a)\n\nA.a = [3]\nprint(A.a,x.a, x.a is A.a)\n\nA.a = [0]\nprint(A.a, x.a, A.a is x.a)\n\nprint([2] is [2] )\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e会显示:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e[1] [1] True\n[2] [2] True\n[2] [0] False\n[3] [0] False\n[0] [0] False\nFalse\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我的问题:\u003c/p\u003e\n\u003cp\u003e1.为什么会产生这种区别?\u003c/p\u003e\n\u003cp\u003e2.用代码\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ex.a = 0\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e和\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ex.a = [0]\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e改变类成员属性时发生了什么呢?为什么不会改变类属性 A.a 呢?\u003c/p\u003e\n\u003cp\u003e3.在修改过 x.a 后,修改 A.a 就不会影响 x.a 了,这是为什么呢?\u003c/p\u003e\n",
+      "Author": "JYLu",
+      "PubDate": "2022-06-25T04:16:32Z"
+    },
+    {
       "Title": "外卖员可以给用户发短信吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/862094",
       "Description": "\u003cp\u003e在美团上点了一个外卖，收到后有人号称是外卖员的用个人手机号给我发了一条消息，让我评价。对于评价这个事，我是没有异议并且表示理解的。但是他为什么能给我的手机发短信呀，那个单子上面不是说了用户的手机号是隐私，而且做了隐藏，还提供了一个转播号，难道外卖员真的知道我真实的手机号吗？还是通过那个转播号也可以给我发短信呢\u003c/p\u003e\n",
