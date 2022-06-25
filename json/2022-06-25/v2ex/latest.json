@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Cloudflare Workers 反向代理+跨域 - Serverless",
+      "Link": "https://www.v2ex.com/t/862194",
+      "Description": "\u003cp\u003e有时前端在调用一些第三方 API 时会遇到跨域问题，通过反代并在 headers 里配置即可跨域\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascripy\"\u003easync function handleRequest(request) {\n  const urlObj = new URL(request.url)\n  let url = urlObj.href.replace(urlObj.origin+'/', '').trim()\n  if (0!==url.indexOf('https://') \u0026amp;\u0026amp; 0===url.indexOf('https:')) {\n    url = url.replace('https:/', 'https://')\n  } else if (0!==url.indexOf('http://') \u0026amp;\u0026amp; 0===url.indexOf('http:')) {\n    url = url.replace('http:/', 'http://')\n  }\n  const response = await fetch(url, {\n    headers: request.headers,\n    body: request.body,\n    method: request.method\n  })\n  let respHeaders = {}\n  response.headers.forEach((value, key)=\u0026gt;respHeaders[key] = value)\n  respHeaders['Access-Control-Allow-Origin'] = '*'\n  return new Response( await response.blob() , {\n    headers: respHeaders,\n    status: response.status\n  });\n}\naddEventListener('fetch', event =\u0026gt; {\n  return event.respondWith(handleRequest(event.request))\n})\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e使用方法：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003exxx.workers.dev/https://guge.com\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可用于反代网页、json 甚至 image 等文件\u003c/p\u003e\n",
+      "Author": "estk",
+      "PubDate": "2022-06-25T13:52:24Z"
+    },
+    {
       "Title": "在使用 git 时的一些尴尬场景里的修复方案 - git",
       "Link": "https://www.v2ex.com/t/862191",
       "Description": "\u003ca target=\"_blank\" href=\"https://ohshitgit.com\" rel=\"nofollow noopener\"\u003ehttps://ohshitgit.com\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e还有一个简体中文的翻译版本：\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://ohshitgit.com/zh\" rel=\"nofollow noopener\"\u003ehttps://ohshitgit.com/zh\u003c/a\u003e",
