@@ -38,6 +38,11 @@
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;题目解析&lt;/strong&gt; &lt;a href=&#34;https://www.golangroadmap.com/&#34;&gt;GOLANG ROADMAP社区&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;h2&gt;&lt;strong&gt;答案&lt;/strong&gt;（engine）&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;channel适用于数据在多个协程中流动的场景，有很多实际应用：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;① 任务定时&lt;/p&gt;&#xA;&#xA;&lt;p&gt;比如超时处理：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;select {&#xA;    case &amp;lt;-time.After(time.Second):&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;定时任务&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;select {&#xA;    case &amp;lt;- time.Tick(time.Second)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;② 解耦生产者和消费者&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可以将生产者和消费者解耦出来，生产者只需要往channel发送数据，而消费者只管从channel中获取数据。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;③ 控制并发数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以爬虫为例，比如需要爬取1w条数据，需要并发爬取以提高效率，但并发量又不能过大，可以通过channel来控制并发规模，比如同时支持5个并发任务：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;ch := make(chan int, 5)&#xA;for _, url := range urls {&#xA;  go func() {&#xA;    ch &amp;lt;- 1&#xA;    worker(url)&#xA;    &amp;lt;- ch&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
+      <title>go不同包管理器间怎么兼容？</title>
+      <link>https://studygolang.com/topics/15640#reply2</link>
+      <description>&lt;p&gt;刚开始学go，但是go的包管理实在太混乱，遇到一个问题：我的项目是用go.mod管理的，但是我依赖的包有的是用vendor管理，有的是用go path管理，导致我无法使用这些依赖（会报错），这种情况该怎么解决？&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>doak-cms 文章管理系统 推荐</title>
       <link>https://studygolang.com/articles/35724#reply0</link>
       <description>&lt;p&gt;doak-cms 是使用 gofiber 和 Xorm 的 go 文章管理系统&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;项目介绍&lt;/h3&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;使用 go 开发的通用文章管理系统&lt;/li&gt;&#xA;&lt;li&gt;核心使用了 Fiber、Xorm 及 Rpcx 等 go 开发包&lt;/li&gt;&#xA;&lt;li&gt;不使用 rpc 可将 &lt;code&gt;main.go&lt;/code&gt; 里 rpc 部分注释掉&lt;/li&gt;&#xA;&lt;li&gt;项目地址： &lt;a href=&#34;https://github.com/deatil/doak-cms&#34;&gt;https://github.com/deatil/doak-cms&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;后台访问地址: /sys&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;h3&gt;环境要求&lt;/h3&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Go &amp;gt;= 1.18&lt;/li&gt;&#xA;&lt;li&gt;Myql&lt;/li&gt;&#xA;&lt;li&gt;Redis&lt;/li&gt;&#xA;&lt;li&gt;Etcd&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;h3&gt;截图预览&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220624/9e38a2d282669f4df22ffbc44087af39.png&#34; alt=&#34;login.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220624/04ac2a18e34d175554f551327984951a.png&#34; alt=&#34;index.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220624/76c47ba3e52fb08370b1fa4f7fb3cfe2.png&#34; alt=&#34;cate.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220624/4c4b84787d62780f86fd01f66fa81af6.png&#34; alt=&#34;art.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220624/eff63079c918c23cb27e8f44d44c9321.png&#34; alt=&#34;attach.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;更多截图&#xA;&lt;a href=&#34;https://github.com/deatil/doak-cms/issues/1&#34;&gt;doak-cms 截图&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;安装步骤&lt;/h3&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;首先克隆项目到本地&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;git clone https://github.com/deatil/doak-cms.git&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;然后配置数据库等相关配置，配置位置&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;/config/config.ini&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;最后导入 sql 数据到数据库&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;/doc/doak_cms.sql&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;运行测试&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;go run main.go&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;后台登录账号及密码：&lt;code&gt;admin&lt;/code&gt; / &lt;code&gt;123456&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
@@ -46,11 +51,6 @@
       <title>一个逃逸分析问题，求指教</title>
       <link>https://studygolang.com/topics/15636#reply8</link>
       <description>&lt;p&gt;今天在分析代码时候，突然想到一个事情，在使用channel时候，我看了代码，里面传递的数据时指针类型的。我当时就在考虑，这种做法会不会导致GC压力过大，然后我进行的测试发现的确会比没有指针类型的压力大点（也不是很多）。&#xA;后面我考虑想着能不能换成非指针数据，然后我突然考虑到了一个问题，我们一般接收channel数据时候，都是在一个func中处理，比如：&#xA;&lt;code&gt;&#xA;func rcv() {&#xA;&#x9;for {&#xA;&#x9;&#x9;p := &amp;lt;-pc&#xA;&#x9;&#x9;p.A = 1&#xA;&#x9;}&#xA;}&lt;/code&gt;&#xA;这种方式。这里的pc传递的是非指针数据。我想了一下，也没有发生逃逸，那么问题来了：&#xA;这里的p会分配在栈上，那我的程序一直跑着，不会导致栈空间不足吗？然后还是被分配在堆上？&#xA;求解这里问题，有点没搞懂&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>go不同包管理器间怎么兼容？</title>
-      <link>https://studygolang.com/topics/15640#reply2</link>
-      <description>&lt;p&gt;刚开始学go，但是go的包管理实在太混乱，遇到一个问题：我的项目是用go.mod管理的，但是我依赖的包有的是用vendor管理，有的是用go path管理，导致我无法使用这些依赖（会报错），这种情况该怎么解决？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>[全职远程][长期稳定][10k-35k] 招募 高级React Native开发工程师</title>
@@ -68,6 +68,10 @@
       <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220623/02f4b09abe42088698911ae383dae1c7.JPG&#34; alt=&#34;20220623-204017(WeLinkPC).JPG&#34; /&gt; V：13223560631 欢迎联系&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>UGeek大咖说 | 可观测之超融合存储系统的应用与设计</title>
+      <link>https://studygolang.com/articles/35722#reply0</link>
+    </item>
+    <item>
       <title>go语言学习</title>
       <link>https://studygolang.com/articles/35721#reply0</link>
       <description>&lt;p&gt;go语言编程用什么编程软件比较好goland还是vscode，还有求一份goland的破解吧&lt;/p&gt;&#xA;</description>
@@ -81,10 +85,6 @@
       <title>Dubbo Mesh 正式启动，现征集 Mesh Istio 贡献者</title>
       <link>https://studygolang.com/topics/15638#reply0</link>
       <description>&lt;p&gt;Dubbo 社区目前已全面启动 Dubbo Mesh 项目计划，目前社区正在开展数据面、控制面相关工作。数据面 ThinSDK + Sidecar、Proxyless（xDS）目前已基本完成，控制面计划是基于 Istio 进行扩展，以支持 Dubbo3 特有的服务地址发现模型、扩展 Dubbo 的服务治理能力。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220624/8ec08937d6480ed38380a97e6e6aa4ac.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;现征集对 Dubbo Mesh 感兴趣的开发者，尤其是熟悉 Istio 扩展开发的同学，共建 Dubbo Mesh 引领国内开源微服务社区。请联系社区负责人：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;微信：18660031965&lt;br&gt;&#xA;Dubbo Mesh 钉钉群：44729514&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>UGeek大咖说 | 可观测之超融合存储系统的应用与设计</title>
-      <link>https://studygolang.com/articles/35722#reply0</link>
     </item>
     <item>
       <title>优维低代码：构件渲染子构件</title>
