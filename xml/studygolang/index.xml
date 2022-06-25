@@ -28,11 +28,6 @@
       <description>&lt;p&gt;99年，成人自考本科还在考，想学GO转开发，大佬们此路通嘛？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>一个逃逸分析问题，求指教</title>
-      <link>https://studygolang.com/topics/15636#reply8</link>
-      <description>&lt;p&gt;今天在分析代码时候，突然想到一个事情，在使用channel时候，我看了代码，里面传递的数据时指针类型的。我当时就在考虑，这种做法会不会导致GC压力过大，然后我进行的测试发现的确会比没有指针类型的压力大点（也不是很多）。&#xA;后面我考虑想着能不能换成非指针数据，然后我突然考虑到了一个问题，我们一般接收channel数据时候，都是在一个func中处理，比如：&#xA;&lt;code&gt;&#xA;func rcv() {&#xA;&#x9;for {&#xA;&#x9;&#x9;p := &amp;lt;-pc&#xA;&#x9;&#x9;p.A = 1&#xA;&#x9;}&#xA;}&lt;/code&gt;&#xA;这种方式。这里的pc传递的是非指针数据。我想了一下，也没有发生逃逸，那么问题来了：&#xA;这里的p会分配在栈上，那我的程序一直跑着，不会导致栈空间不足吗？然后还是被分配在堆上？&#xA;求解这里问题，有点没搞懂&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>《Go题库·11》channel的应用场景</title>
       <link>https://studygolang.com/topics/15644#reply2</link>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;题目解析&lt;/strong&gt; &lt;a href=&#34;https://www.golangroadmap.com/&#34;&gt;GOLANG ROADMAP社区&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;h2&gt;&lt;strong&gt;答案&lt;/strong&gt;（engine）&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;channel适用于数据在多个协程中流动的场景，有很多实际应用：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;① 任务定时&lt;/p&gt;&#xA;&#xA;&lt;p&gt;比如超时处理：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;select {&#xA;    case &amp;lt;-time.After(time.Second):&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;定时任务&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;select {&#xA;    case &amp;lt;- time.Tick(time.Second)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;② 解耦生产者和消费者&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可以将生产者和消费者解耦出来，生产者只需要往channel发送数据，而消费者只管从channel中获取数据。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;③ 控制并发数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以爬虫为例，比如需要爬取1w条数据，需要并发爬取以提高效率，但并发量又不能过大，可以通过channel来控制并发规模，比如同时支持5个并发任务：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;ch := make(chan int, 5)&#xA;for _, url := range urls {&#xA;  go func() {&#xA;    ch &amp;lt;- 1&#xA;    worker(url)&#xA;    &amp;lt;- ch&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -50,6 +45,11 @@
     <item>
       <title>优维低代码：构件渲染子构件</title>
       <link>https://studygolang.com/articles/35723#reply0</link>
+    </item>
+    <item>
+      <title>一个逃逸分析问题，求指教</title>
+      <link>https://studygolang.com/topics/15636#reply8</link>
+      <description>&lt;p&gt;今天在分析代码时候，突然想到一个事情，在使用channel时候，我看了代码，里面传递的数据时指针类型的。我当时就在考虑，这种做法会不会导致GC压力过大，然后我进行的测试发现的确会比没有指针类型的压力大点（也不是很多）。&#xA;后面我考虑想着能不能换成非指针数据，然后我突然考虑到了一个问题，我们一般接收channel数据时候，都是在一个func中处理，比如：&#xA;&lt;code&gt;&#xA;func rcv() {&#xA;&#x9;for {&#xA;&#x9;&#x9;p := &amp;lt;-pc&#xA;&#x9;&#x9;p.A = 1&#xA;&#x9;}&#xA;}&lt;/code&gt;&#xA;这种方式。这里的pc传递的是非指针数据。我想了一下，也没有发生逃逸，那么问题来了：&#xA;这里的p会分配在栈上，那我的程序一直跑着，不会导致栈空间不足吗？然后还是被分配在堆上？&#xA;求解这里问题，有点没搞懂&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>知名厂商招Golang开发，全额六险一金，不加班不打卡，大数据产品，原生云服务，甲方内部机会~~base上海</title>
