@@ -39,16 +39,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go不同包管理器间怎么兼容？",
-      "Link": "https://studygolang.com/topics/15640#reply2",
-      "Description": "\u003cp\u003e刚开始学go，但是go的包管理实在太混乱，遇到一个问题：我的项目是用go.mod管理的，但是我依赖的包有的是用vendor管理，有的是用go path管理，导致我无法使用这些依赖（会报错），这种情况该怎么解决？\u003c/p\u003e\n",
+      "Title": "《Go题库·11》channel的应用场景",
+      "Link": "https://studygolang.com/topics/15644#reply2",
+      "Description": "\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e题目解析\u003c/strong\u003e \u003ca href=\"https://www.golangroadmap.com/\"\u003eGOLANG ROADMAP社区\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（engine）\u003c/h2\u003e\n\n\u003cp\u003echannel适用于数据在多个协程中流动的场景，有很多实际应用：\u003c/p\u003e\n\n\u003cp\u003e① 任务定时\u003c/p\u003e\n\n\u003cp\u003e比如超时处理：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eselect {\n    case \u0026lt;-time.After(time.Second):\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e定时任务\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eselect {\n    case \u0026lt;- time.Tick(time.Second)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e② 解耦生产者和消费者\u003c/p\u003e\n\n\u003cp\u003e可以将生产者和消费者解耦出来，生产者只需要往channel发送数据，而消费者只管从channel中获取数据。\u003c/p\u003e\n\n\u003cp\u003e③ 控制并发数\u003c/p\u003e\n\n\u003cp\u003e以爬虫为例，比如需要爬取1w条数据，需要并发爬取以提高效率，但并发量又不能过大，可以通过channel来控制并发规模，比如同时支持5个并发任务：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ech := make(chan int, 5)\nfor _, url := range urls {\n  go func() {\n    ch \u0026lt;- 1\n    worker(url)\n    \u0026lt;- ch\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "《Go题库·11》channel的应用场景",
-      "Link": "https://studygolang.com/topics/15644#reply2",
-      "Description": "\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e题目解析\u003c/strong\u003e \u003ca href=\"https://www.golangroadmap.com/\"\u003eGOLANG ROADMAP社区\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（engine）\u003c/h2\u003e\n\n\u003cp\u003echannel适用于数据在多个协程中流动的场景，有很多实际应用：\u003c/p\u003e\n\n\u003cp\u003e① 任务定时\u003c/p\u003e\n\n\u003cp\u003e比如超时处理：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eselect {\n    case \u0026lt;-time.After(time.Second):\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e定时任务\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eselect {\n    case \u0026lt;- time.Tick(time.Second)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e② 解耦生产者和消费者\u003c/p\u003e\n\n\u003cp\u003e可以将生产者和消费者解耦出来，生产者只需要往channel发送数据，而消费者只管从channel中获取数据。\u003c/p\u003e\n\n\u003cp\u003e③ 控制并发数\u003c/p\u003e\n\n\u003cp\u003e以爬虫为例，比如需要爬取1w条数据，需要并发爬取以提高效率，但并发量又不能过大，可以通过channel来控制并发规模，比如同时支持5个并发任务：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ech := make(chan int, 5)\nfor _, url := range urls {\n  go func() {\n    ch \u0026lt;- 1\n    worker(url)\n    \u0026lt;- ch\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Title": "go不同包管理器间怎么兼容？",
+      "Link": "https://studygolang.com/topics/15640#reply2",
+      "Description": "\u003cp\u003e刚开始学go，但是go的包管理实在太混乱，遇到一个问题：我的项目是用go.mod管理的，但是我依赖的包有的是用vendor管理，有的是用go path管理，导致我无法使用这些依赖（会报错），这种情况该怎么解决？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -67,13 +67,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "【公告】寻找社区日常运营、功能开发、维护 自愿者",
-      "Link": "https://studygolang.com/topics/4092#reply256",
-      "Description": "\u003cp\u003e本站 2013 年上线以来，得到国内广大 gopher 们的支持，也让我有动力一直开发、维护着。\u003c/p\u003e\n\n\u003cp\u003e随着 go 越来越流行，学习 go 的人也越来越多，本社区用户量也越来越大，而我个人的精力有限。为了给社区用户提供更好的服务，希望有自愿者加入社区，一起维护、运营本站。招募的自愿者包括：\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e日常网站运营 —— 比如晨读文章推荐、周推荐等；\u003cstrong\u003e特别欢迎在校大学生；\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003e功能开发、维护 —— 参与开发本站功能；板块维护、管理者等；\u003c/li\u003e\n\u003cli\u003e活动组织、宣传者 —— 组织社区用户参与互动，和外界联系拉赞助等；\u003c/li\u003e\n\u003cli\u003e翻译 —— Go 相关教程、文章、资讯等的翻译；\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e其他你想到的，也可以和我沟通~ 根据情况，会提供奖励~\u003c/p\u003e\n\n\u003cp\u003e项目开源的，参与开发，可以直接 fork + PR，参与其他的可以加我微信 gopherstudio 联系。\u003c/p\u003e\n\n\u003cp\u003e项目地址：\u003ca href=\"https://github.com/studygolang/studygolang\"\u003ehttps://github.com/studygolang/studygolang\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.studygolang.com/static/img/gopherstudio2.png?imageView2/2/w/154\" alt=\"\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "优维低代码：构件渲染子构件",
       "Link": "https://studygolang.com/articles/35723#reply0",
       "Description": "",
@@ -84,6 +77,20 @@
       "Title": "一个逃逸分析问题，求指教",
       "Link": "https://studygolang.com/topics/15636#reply8",
       "Description": "\u003cp\u003e今天在分析代码时候，突然想到一个事情，在使用channel时候，我看了代码，里面传递的数据时指针类型的。我当时就在考虑，这种做法会不会导致GC压力过大，然后我进行的测试发现的确会比没有指针类型的压力大点（也不是很多）。\n后面我考虑想着能不能换成非指针数据，然后我突然考虑到了一个问题，我们一般接收channel数据时候，都是在一个func中处理，比如：\n\u003ccode\u003e\nfunc rcv() {\n\tfor {\n\t\tp := \u0026lt;-pc\n\t\tp.A = 1\n\t}\n}\u003c/code\u003e\n这种方式。这里的pc传递的是非指针数据。我想了一下，也没有发生逃逸，那么问题来了：\n这里的p会分配在栈上，那我的程序一直跑着，不会导致栈空间不足吗？然后还是被分配在堆上？\n求解这里问题，有点没搞懂\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "西安华为社招",
+      "Link": "https://studygolang.com/topics/15637#reply0",
+      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220623/02f4b09abe42088698911ae383dae1c7.JPG\" alt=\"20220623-204017(WeLinkPC).JPG\" /\u003e V：13223560631 欢迎联系\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "【公告】寻找社区日常运营、功能开发、维护 自愿者",
+      "Link": "https://studygolang.com/topics/4092#reply256",
+      "Description": "\u003cp\u003e本站 2013 年上线以来，得到国内广大 gopher 们的支持，也让我有动力一直开发、维护着。\u003c/p\u003e\n\n\u003cp\u003e随着 go 越来越流行，学习 go 的人也越来越多，本社区用户量也越来越大，而我个人的精力有限。为了给社区用户提供更好的服务，希望有自愿者加入社区，一起维护、运营本站。招募的自愿者包括：\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e日常网站运营 —— 比如晨读文章推荐、周推荐等；\u003cstrong\u003e特别欢迎在校大学生；\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003e功能开发、维护 —— 参与开发本站功能；板块维护、管理者等；\u003c/li\u003e\n\u003cli\u003e活动组织、宣传者 —— 组织社区用户参与互动，和外界联系拉赞助等；\u003c/li\u003e\n\u003cli\u003e翻译 —— Go 相关教程、文章、资讯等的翻译；\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e其他你想到的，也可以和我沟通~ 根据情况，会提供奖励~\u003c/p\u003e\n\n\u003cp\u003e项目开源的，参与开发，可以直接 fork + PR，参与其他的可以加我微信 gopherstudio 联系。\u003c/p\u003e\n\n\u003cp\u003e项目地址：\u003ca href=\"https://github.com/studygolang/studygolang\"\u003ehttps://github.com/studygolang/studygolang\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.studygolang.com/static/img/gopherstudio2.png?imageView2/2/w/154\" alt=\"\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -112,13 +119,6 @@
       "Title": "Dubbo Mesh 正式启动，现征集 Mesh Istio 贡献者",
       "Link": "https://studygolang.com/topics/15638#reply0",
       "Description": "\u003cp\u003eDubbo 社区目前已全面启动 Dubbo Mesh 项目计划，目前社区正在开展数据面、控制面相关工作。数据面 ThinSDK + Sidecar、Proxyless（xDS）目前已基本完成，控制面计划是基于 Istio 进行扩展，以支持 Dubbo3 特有的服务地址发现模型、扩展 Dubbo 的服务治理能力。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220624/8ec08937d6480ed38380a97e6e6aa4ac.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e现征集对 Dubbo Mesh 感兴趣的开发者，尤其是熟悉 Istio 扩展开发的同学，共建 Dubbo Mesh 引领国内开源微服务社区。请联系社区负责人：\u003c/p\u003e\n\n\u003cp\u003e微信：18660031965\u003cbr\u003e\nDubbo Mesh 钉钉群：44729514\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "西安华为社招",
-      "Link": "https://studygolang.com/topics/15637#reply0",
-      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220623/02f4b09abe42088698911ae383dae1c7.JPG\" alt=\"20220623-204017(WeLinkPC).JPG\" /\u003e V：13223560631 欢迎联系\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
