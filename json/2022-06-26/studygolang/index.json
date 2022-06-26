@@ -39,13 +39,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go语言学习",
-      "Link": "https://studygolang.com/articles/35721#reply0",
-      "Description": "\u003cp\u003ego语言编程用什么编程软件比较好goland还是vscode，还有求一份goland的破解吧\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "《Go题库·11》channel的应用场景",
       "Link": "https://studygolang.com/topics/15644#reply2",
       "Description": "\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e题目解析\u003c/strong\u003e \u003ca href=\"https://www.golangroadmap.com/\"\u003eGOLANG ROADMAP社区\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（engine）\u003c/h2\u003e\n\n\u003cp\u003echannel适用于数据在多个协程中流动的场景，有很多实际应用：\u003c/p\u003e\n\n\u003cp\u003e① 任务定时\u003c/p\u003e\n\n\u003cp\u003e比如超时处理：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eselect {\n    case \u0026lt;-time.After(time.Second):\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e定时任务\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eselect {\n    case \u0026lt;- time.Tick(time.Second)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e② 解耦生产者和消费者\u003c/p\u003e\n\n\u003cp\u003e可以将生产者和消费者解耦出来，生产者只需要往channel发送数据，而消费者只管从channel中获取数据。\u003c/p\u003e\n\n\u003cp\u003e③ 控制并发数\u003c/p\u003e\n\n\u003cp\u003e以爬虫为例，比如需要爬取1w条数据，需要并发爬取以提高效率，但并发量又不能过大，可以通过channel来控制并发规模，比如同时支持5个并发任务：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ech := make(chan int, 5)\nfor _, url := range urls {\n  go func() {\n    ch \u0026lt;- 1\n    worker(url)\n    \u0026lt;- ch\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -126,6 +119,13 @@
       "Title": "UGeek大咖说 | 可观测之超融合存储系统的应用与设计",
       "Link": "https://studygolang.com/articles/35722#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go语言学习",
+      "Link": "https://studygolang.com/articles/35721#reply0",
+      "Description": "\u003cp\u003ego语言编程用什么编程软件比较好goland还是vscode，还有求一份goland的破解吧\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
