@@ -88,13 +88,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "一个repo中好多微服务，如何单独给每个微服务定版本号？",
-      "Link": "https://studygolang.com/topics/15634#reply6",
-      "Description": "\u003cp\u003egit tag针对是整个repo，这个难住我了\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "请教关于双重 for-range下的sub-routine执行问题",
       "Link": "https://studygolang.com/topics/15641#reply2",
       "Description": "\u003ch3\u003eHi 各位大佬，\u003c/h3\u003e\n\n\u003ch4\u003e请教一个问题，做了一个打印log的方法，通过for-range把多个log并行打印到文件。\u003c/h4\u003e\n\n\u003ch4\u003ePCMapSetting的类型是map[int][]PortRegionInformation.\u003c/h4\u003e\n\n\u003ch4\u003e每个portMap大概有1万到2万个数据不等。\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc printToFileOld(outDir string) {\n\tfor pcId, netSetting := range PCMapSetting {\n\t\tfor idx, portMap := range portsSetting {\n\t\t\tprintToFile(outDir, pcIdx, fileIdx, portMapItem)\n\t\t}\n\t}\n}\n\nfunc printToFile(outDir string) {\n\tvar wg sync.WaitGroup\n\tfor pcId, netSetting := range PCMapSetting {\n\t\tfor idx, portMap := range portsSetting {\n\t\t\tgo func(pcIdx int, fileIdx int, portMapItem PortRegionInformation) {\n\t\t\t\twg.Add(1)\n\t\t\t\tprintToFile(outDir, pcIdx, fileIdx, portMapItem)\n\t\t\t\twg.Done()\n\t\t\t}(pcId, idx, portMap)\n\t\t}\n\t}\n\twg.Wait()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e用printToFileOld可以把完整的数据打印出来，但是用printToFile却能打印部分数据。程序运行没有啥异常，不知道为何在并行模式下，子进程没有执行完就结束了？ 帮忙看看，是不是printToFile里面的写法有问题？\u003c/h4\u003e\n\n\u003ch3\u003e谢谢！\u003c/h3\u003e\n",
@@ -154,6 +147,13 @@
       "Title": "goweb 框架选择",
       "Link": "https://studygolang.com/topics/15437#reply4",
       "Description": "\u003cp\u003e接触到的go web框架如下 gin、 beego、goframe、echo四种。\n个人感受如下：\n- beego 功能齐全，但是在orm和route上限制比较大。 规模比较小的站点足够使用\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cp\u003egin   过于灵活，go orm功能不够强，没有特别方便的辅助开发的脚手架功能。个人开发api的首选\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003eecho 简单接触，未深入\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003egoframe 功能齐全，针对传统web开发的orm和路由功能足够使用。对团队来说不需要额外限制组件使用等。直接用gf的组件即可\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e学习难度比较：\u003c/p\u003e\n\n\u003cp\u003e四个相差并不大。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "一个repo中好多微服务，如何单独给每个微服务定版本号？",
+      "Link": "https://studygolang.com/topics/15634#reply6",
+      "Description": "\u003cp\u003egit tag针对是整个repo，这个难住我了\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
