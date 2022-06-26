@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>发现 Edge 开始比 Chrome 好用一些了 - 问与答</title>
+      <link>https://www.v2ex.com/t/862303</link>
+      <description>&lt;p&gt;自 Chrome99 以来，开始间断地尝试使用 Edge ，到如今 103 完全切换到 Edge 。Chrome 的几次更新添加的诸如搜索标签页，显示侧边栏，分享此页功能，都十分难用或鸡肋，且不可关闭或隐藏，Edge 则正相反。且由于国内的网络环境，Chrome 上的标签页几乎无法与手机联动，翻译也时灵时不灵。&lt;/p&gt;&#xA;&lt;p&gt;虽然现在 Edge 是基于 Chromium ，但是 UI 布局和图标尺寸比 Chrome 协调。Chrome 看上去像旧版 VS 编译出的程序，两个浏览器 UI 面积相同，但是 Chrome 的菜单和图标都显得更小。个人体验相同的功能，Edge 的更顺手。&lt;/p&gt;&#xA;&lt;p&gt;Edge 不仅与 Chrome 共通插件，自带的沉浸式阅读器与页面朗读功能也比插件市场中的要强。能识别更多的网页，并转换成适合阅读的模式。个人感觉在 Chromium 的基础上，Edge 的交互比 Chrome 优化的更好。不知道大家是否也有同感。&lt;/p&gt;&#xA;</description>
+      <author>dacapoday</author>
+      <pubDate>26 Jun 2022 09:36:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于 vim 和 goland 的使用技巧问题 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/862302</link>
+      <description>goland 能不能快捷键快速找到实现接口的类？ &lt;br /&gt;vim 有没有什么办法快速找到实现接口的类？&lt;br /&gt;&lt;br /&gt;以前是开发 java 的， 没有折腾过 golang ，发现这玩意好多东西被阉割了, 很多跳转用不了，界面还没 vim 看起来舒服。</description>
+      <author>jeesk</author>
+      <pubDate>26 Jun 2022 09:34:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>跨域测试小工具 - 前端开发</title>
+      <link>https://www.v2ex.com/t/862301</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://blockchain-tools.pages.dev/#/cors-checker&#34; rel=&#34;nofollow&#34;&gt;https://blockchain-tools.pages.dev/#/cors-checker&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://nftstorage.link/ipfs/bafkreif6ykx7bdmdkm2mjhw7rv2dmhkmothuxfw6mndl4mpeqhnblxucby&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;截图 workers-dev 出自：&lt;a href=&#34;/t/862194&#34; rel=&#34;nofollow&#34;&gt;/t/862194&lt;/a&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;import { Box, TextField, Button, Typography } from &#34;@mui/material&#34;&#xA;import { useState } from &#34;react&#34;&#xA;import CircularProgress from &#39;@mui/material/CircularProgress&#39;&#xA;&#xA;export default function CorsChecker() {&#xA;  const [inputValue, setInputValue] = useState(&#39;&#39;)&#xA;  const [urlsInfo, setUrlsInfo] = useState&amp;lt;{url: string, cros: string}[]&amp;gt;([])&#xA;  const [checking, setChecking] = useState(false)&#xA;  async function check() {&#xA;    let _urlsInfo = []&#xA;    setChecking(true)&#xA;    setUrlsInfo([])&#xA;    for (const url of inputValue.split(&#39;\n&#39;)) {&#xA;      if (!url.trim() || _urlsInfo.filter(urlInfo=&amp;gt;{return urlInfo.url===url.trim()}).length&amp;gt;0 ) continue&#xA;      let urlInfo = {url: url.trim(), cros: &#39;❔&#39;}&#xA;      let res&#xA;      try {&#xA;        res = await fetch(url.trim())&#xA;      } catch(e) {}&#xA;      if (&#39;cors&#39;===res?.type) {&#xA;        urlInfo.cros = &#39;✅&#39;&#xA;      } else {&#xA;        urlInfo.cros = &#39;❌&#39;&#xA;      }&#xA;      _urlsInfo.push(urlInfo)&#xA;    }&#xA;    setChecking(false)&#xA;    setUrlsInfo(_urlsInfo)&#xA;  }&#xA;  return (&#xA;    &amp;lt;Box display=&#39;flex&#39; alignItems=&#39;center&#39; justifyContent=&#39;center&#39; minHeight=&#39;62vh&#39;&amp;gt;&#xA;      &amp;lt;Box maxWidth=&#39;800px&#39; width=&#39;100%&#39;&amp;gt;&#xA;        &amp;lt;Typography variant=&#34;h3&#34; component=&#34;div&#34; gutterBottom&amp;gt;&#xA;          CORS Checker&#xA;        &amp;lt;/Typography&amp;gt;&#xA;        &amp;lt;TextField&#xA;          fullWidth&#xA;          label=&#34;One url per line&#34;&#xA;          multiline&#xA;          rows={8}&#xA;          value={inputValue}&#xA;          onChange={(e)=&amp;gt;setInputValue(e.target.value)}&#xA;        /&amp;gt;&#xA;        &amp;lt;Button onClick={()=&amp;gt;check()} disabled={checking} variant=&#34;contained&#34; className=&#34;my-4&#34;&amp;gt;&#xA;          {checking&amp;amp;&amp;amp;&amp;lt;CircularProgress color=&#39;inherit&#39; size=&#39;1rem&#39; value={50} className=&#39;mr-2&#39; /&amp;gt;}&#xA;          {checking?&#39;Checking&#39;:&#39;Check&#39;}&#xA;        &amp;lt;/Button&amp;gt;&#xA;        {urlsInfo.map(urlInfo=&amp;gt;(&#xA;          &amp;lt;div key={urlInfo.url+urlInfo.cros}&amp;gt;{urlInfo.cros} {urlInfo.url}&amp;lt;/div&amp;gt;&#xA;        ))}&#xA;      &amp;lt;/Box&amp;gt;&#xA;    &amp;lt;/Box&amp;gt;&#xA;  )&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>estk</author>
+      <pubDate>26 Jun 2022 09:31:59 +0000</pubDate>
+    </item>
+    <item>
       <title>C++开发工程师寻远程办公职位 - 酷工作</title>
       <link>https://www.v2ex.com/t/862300</link>
       <description>&lt;p&gt;我会什么：&#xA;1 ，主要做 C++和 python 开发，熟悉 linux ，对 mysql ，redis 比较熟悉，对 redis 研究和改造过部分源码&#xA;2 ，熟悉 ROS 系统的基本是用法，基于此做过打点日志的 topic 延迟分析&#xA;3 ，熟悉深度学习目标检测模型在 AI 芯片上的适配（ atlas 系列，rk1808/3399 系列），熟悉 ncnn 框架在高通平台的适配&lt;/p&gt;&#xA;&lt;p&gt;我需要什么：&#xA;1 ，目标寻找一份全职远程办公的研发工作&lt;/p&gt;&#xA;&lt;p&gt;我做过什么&#xA;1 ，2013 年-2016 年在做对象存储服务：基础组件开发和优化，元数据管理服务开发，文件分块，备份等逻辑开发&#xA;2 ，2016 年-2019 年在做防伪终端和 app 的后台研发工作：主要包括数据的存储和搜索服务等开发，消息机制等开发&#xA;3 ，2019 年-2021 年在做深度学习目标检测模型在 AI 芯片上的适配，算法主要是 yolo 系列，frcn 系列，cascadercnn 等，芯片主要是华为的 atlas ，瑞芯微的 rk 系列，高通平台的&#xA;4 ，2021 年至今主要是在做自动驾驶系统模块的研发&lt;/p&gt;&#xA;&lt;p&gt;我的联系方式 17301215146#&lt;a href=&#34;http://163.com&#34; rel=&#34;nofollow&#34;&gt;163.com&lt;/a&gt;&#xA;WX:qq7606399&lt;/p&gt;&#xA;</description>
