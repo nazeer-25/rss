@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>使用 docker 安装 derp 成功了，但是 headscale 不知道如何设置自建 derp - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/862296</link>
+      <description>&lt;p&gt;整了一圈，不知道自己哪里出错了，求大佬们指路 🤦‍♂️ &lt;br/&gt;&lt;/p&gt;&#xA;&lt;p&gt;1 、根据此链接（ &lt;a href=&#34;https://techoverflow.net/2022/01/16/how-to-setup-headscale-server-in-5-minutes-using-docker-compose/%EF%BC%89&#34; rel=&#34;nofollow&#34;&gt;https://techoverflow.net/2022/01/16/how-to-setup-headscale-server-in-5-minutes-using-docker-compose/）&lt;/a&gt; 在云服务器安装 docker 版 headscale ，在多个客户端成功连接上 headscale 并相互访问&lt;br/&gt;&#xA;2 、根据此链接（ &lt;a href=&#34;https://icloudnative.io/posts/custom-derp-servers/%EF%BC%89&#34; rel=&#34;nofollow&#34;&gt;https://icloudnative.io/posts/custom-derp-servers/）&lt;/a&gt; 的‘自建私有 DERP server’部分在具有公网 ip 的 all in boom 上面的 ubuntu 搭建 derp 服务器成功（访问 &lt;a href=&#34;https://myhomeip.me:12345&#34; rel=&#34;nofollow&#34;&gt;https://myhomeip.me:12345&lt;/a&gt; 成功出现 This is a Tailscale DERP server.）&lt;br/&gt;&#xA;3 、修改云服务器 &lt;code&gt;/opt/headscale/.config/config.yaml&lt;/code&gt; 的 derp 部分的 paths&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;paths:&#xA;  - /etc/headscale/derp.yaml&#xA;paths: []&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;br/&gt;4 、云服务器编辑文件 /opt/headscale/.config/derp.yaml&#xA;‘’‘&#xA;regions:&#xA;900:&#xA;regionid: 900&#xA;regioncode: myderp&#xA;regionname: myhomederp&#xA;nodes:&#xA;- name: 900a&#xA;regionid: 900&#xA;hostname: &lt;a href=&#34;http://myhomeip.me&#34; rel=&#34;nofollow&#34;&gt;myhomeip.me&lt;/a&gt;&#xA;stunport: 3478&#xA;stunonly: false&#xA;derpport: 12345‘’‘&#xA;&lt;br/&gt;5 、更新 headscale 服务端并重启服务，mac 客户端重启后 netcheck 仍然没有自建 derp 服务器&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker-compose up -d&#xA;sudo systemctl restart headscale&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>mbooyn</author>
+      <pubDate>26 Jun 2022 09:00:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>Linux 高分屏缩放方案(分数缩放) - Linux</title>
+      <link>https://www.v2ex.com/t/862295</link>
+      <description>&lt;p&gt;这几天安装了 Ubuntu22 ，笔记本屏幕分辨率是 2k 的，似乎 linux 对高分屏的适配不是很好。&lt;/p&gt;&#xA;&lt;p&gt;如果默认 100% 缩放，界面和字体会太小看不清，但是 200%比例缩放又太大了。如果用启用分数缩放(fractional scaling)，在 x11 下窗口拖动时会画面会撕裂。在 wayland 下没有这个问题，GTK 应用能适配分数缩放，画面锐利，但是像 QT 应用和 intellij 家的应用比如 pycharm ，显示效果会很模糊。&lt;/p&gt;&#xA;&lt;p&gt;虽然可以通过添加环境变量让 QT 应用适配 wayland ，但是会出现一些其他问题，比如在应用里鼠标大小不一致，UI 界面不一致。electron 和 chrome 也可以添加启动参数，但是没有 x 下稳定，总是 crash 。&lt;/p&gt;&#xA;&lt;p&gt;想问问各位有什么解决(替代)方案吗？&lt;/p&gt;&#xA;</description>
+      <author>juejinloop</author>
+      <pubDate>26 Jun 2022 08:56:02 +0000</pubDate>
+    </item>
+    <item>
+      <title>icloud 有没有什么车 - iCloud</title>
+      <link>https://www.v2ex.com/t/862294</link>
+      <description>&lt;p&gt;50g 不够，200g 太贵了&lt;/p&gt;&#xA;</description>
+      <author>fengchen0vr</author>
+      <pubDate>26 Jun 2022 08:52:48 +0000</pubDate>
+    </item>
+    <item>
       <title>咨询- iCloud 到期会把文件自动下载回本地吗 - iCloud</title>
       <link>https://www.v2ex.com/t/862293</link>
       <description>&lt;p&gt;如题，现在 Mac 上很多的文件都自动上传在 iCloud 上，每次使用需要等 1-2 分钟下载回本地打开，请问 iCloud 到期后，是会自动回到本地，还是要手动进行操作？谢谢各位大哥解答。&lt;/p&gt;&#xA;</description>
