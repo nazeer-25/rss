@@ -32,25 +32,6 @@
       <link>https://studygolang.com/articles/35725#reply0</link>
     </item>
     <item>
-      <title>一个逃逸分析问题，求指教</title>
-      <link>https://studygolang.com/topics/15636#reply8</link>
-      <description>&lt;p&gt;今天在分析代码时候，突然想到一个事情，在使用channel时候，我看了代码，里面传递的数据时指针类型的。我当时就在考虑，这种做法会不会导致GC压力过大，然后我进行的测试发现的确会比没有指针类型的压力大点（也不是很多）。&#xA;后面我考虑想着能不能换成非指针数据，然后我突然考虑到了一个问题，我们一般接收channel数据时候，都是在一个func中处理，比如：&#xA;&lt;code&gt;&#xA;func rcv() {&#xA;&#x9;for {&#xA;&#x9;&#x9;p := &amp;lt;-pc&#xA;&#x9;&#x9;p.A = 1&#xA;&#x9;}&#xA;}&lt;/code&gt;&#xA;这种方式。这里的pc传递的是非指针数据。我想了一下，也没有发生逃逸，那么问题来了：&#xA;这里的p会分配在栈上，那我的程序一直跑着，不会导致栈空间不足吗？然后还是被分配在堆上？&#xA;求解这里问题，有点没搞懂&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>UGeek大咖说 | 可观测之超融合存储系统的应用与设计</title>
-      <link>https://studygolang.com/articles/35722#reply0</link>
-    </item>
-    <item>
-      <title>go语言学习</title>
-      <link>https://studygolang.com/articles/35721#reply0</link>
-      <description>&lt;p&gt;go语言编程用什么编程软件比较好goland还是vscode，还有求一份goland的破解吧&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>校园IM即时通APP深度集成与定制开发解决方案</title>
-      <link>https://studygolang.com/topics/15635#reply0</link>
-      <description>&lt;p&gt;信贸通即时通讯系统支持组织结构和部门，注重老师，职工，学生沟通，提高效率改变工作和沟通方式，适合高校、中小学内部沟通的强大工具。支持电脑端，网页端，手机端。是一套完整独立，不依赖第三方的即时通沟通系统。同时提供SDK和API接口，支持快速集成到其他应用系统中。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;系统架构&#xA;自研协议独立开发，采用高并发go语言开发的即时通讯及历史消息云存储通信系统。系统安全性高可扩展能力强，系统兼容性强。可快速无缝集成到各种应用系统，有效提高开发效率，节约成本。能轻松在线定制客户端。支持多平台客户端实现多端与多设备同步。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;功能特点&#xA;1、支持发富文本消息支持文字、图片、表情、语音、视频、位置、名片、文件、红包、阅后即焚、好友验证，离线消息，消息撤回等功能。&#xA;2、支多对多群聊、支持主动加入、邀请加入、踢出好友、禁言、消息审核等功能，丰富的权限及管理功能。&#xA;3、群聊支持建群、退群、解散群组、禁言、踢人、拉人进群、群备注等功能。&#xA;4、个人信息支持更改昵称、头像、个性签名，在线状态设置等。&#xA;5、支持查看历史消息、离线消息。聊天历史消息云端管理，实时查阅聊天记录，收发时间，收发IP地址。&#xA;6、支持好友分组、好友查找、好友申请、同意好友申请、拒绝申请、删除好友，好友备注。&#xA;7、支持脏字敏感词过滤，后台可自由配置敏感词，进行过滤拦截和替换，同时可以记录敏感词发送来源。&#xA;9、强大的后台管理功能，可以自由设置分角色快速批量设置管理用户的权限。&#xA;10、数据同步，可以与应用系统集成，实时发布用户登录状态，在线状态，用户数据到集成的应用系统。可以实时配置和更新设置。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;集成和定制开发&#xA;1、可以通过在线控制平台，轻松定制您的即时通讯服务。&#xA;2、丰富的开发集成接口，简单调用API即可与您的应用系统无缝集成，大大提高系统整合集成的开发效率。&#xA;3、可根据用户的需求进行深度二次开发，开发内容包含对软件功能的定制、界面的定制等，并提供与其他软件整合或嵌入方案。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Q  Q ：2533950058&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>《Go题库·11》channel的应用场景</title>
       <link>https://studygolang.com/topics/15644#reply2</link>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;题目解析&lt;/strong&gt; &lt;a href=&#34;https://www.golangroadmap.com/&#34;&gt;GOLANG ROADMAP社区&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;h2&gt;&lt;strong&gt;答案&lt;/strong&gt;（engine）&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;channel适用于数据在多个协程中流动的场景，有很多实际应用：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;① 任务定时&lt;/p&gt;&#xA;&#xA;&lt;p&gt;比如超时处理：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;select {&#xA;    case &amp;lt;-time.After(time.Second):&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;定时任务&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;select {&#xA;    case &amp;lt;- time.Tick(time.Second)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;② 解耦生产者和消费者&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可以将生产者和消费者解耦出来，生产者只需要往channel发送数据，而消费者只管从channel中获取数据。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;③ 控制并发数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以爬虫为例，比如需要爬取1w条数据，需要并发爬取以提高效率，但并发量又不能过大，可以通过channel来控制并发规模，比如同时支持5个并发任务：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;ch := make(chan int, 5)&#xA;for _, url := range urls {&#xA;  go func() {&#xA;    ch &amp;lt;- 1&#xA;    worker(url)&#xA;    &amp;lt;- ch&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -73,6 +54,11 @@
     <item>
       <title>优维低代码：构件渲染子构件</title>
       <link>https://studygolang.com/articles/35723#reply0</link>
+    </item>
+    <item>
+      <title>一个逃逸分析问题，求指教</title>
+      <link>https://studygolang.com/topics/15636#reply8</link>
+      <description>&lt;p&gt;今天在分析代码时候，突然想到一个事情，在使用channel时候，我看了代码，里面传递的数据时指针类型的。我当时就在考虑，这种做法会不会导致GC压力过大，然后我进行的测试发现的确会比没有指针类型的压力大点（也不是很多）。&#xA;后面我考虑想着能不能换成非指针数据，然后我突然考虑到了一个问题，我们一般接收channel数据时候，都是在一个func中处理，比如：&#xA;&lt;code&gt;&#xA;func rcv() {&#xA;&#x9;for {&#xA;&#x9;&#x9;p := &amp;lt;-pc&#xA;&#x9;&#x9;p.A = 1&#xA;&#x9;}&#xA;}&lt;/code&gt;&#xA;这种方式。这里的pc传递的是非指针数据。我想了一下，也没有发生逃逸，那么问题来了：&#xA;这里的p会分配在栈上，那我的程序一直跑着，不会导致栈空间不足吗？然后还是被分配在堆上？&#xA;求解这里问题，有点没搞懂&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>知名厂商招Golang开发，全额六险一金，不加班不打卡，大数据产品，原生云服务，甲方内部机会~~base上海</title>
@@ -98,6 +84,20 @@
       <title>西安华为社招</title>
       <link>https://studygolang.com/topics/15637#reply0</link>
       <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220623/02f4b09abe42088698911ae383dae1c7.JPG&#34; alt=&#34;20220623-204017(WeLinkPC).JPG&#34; /&gt; V：13223560631 欢迎联系&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>UGeek大咖说 | 可观测之超融合存储系统的应用与设计</title>
+      <link>https://studygolang.com/articles/35722#reply0</link>
+    </item>
+    <item>
+      <title>go语言学习</title>
+      <link>https://studygolang.com/articles/35721#reply0</link>
+      <description>&lt;p&gt;go语言编程用什么编程软件比较好goland还是vscode，还有求一份goland的破解吧&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>校园IM即时通APP深度集成与定制开发解决方案</title>
+      <link>https://studygolang.com/topics/15635#reply0</link>
+      <description>&lt;p&gt;信贸通即时通讯系统支持组织结构和部门，注重老师，职工，学生沟通，提高效率改变工作和沟通方式，适合高校、中小学内部沟通的强大工具。支持电脑端，网页端，手机端。是一套完整独立，不依赖第三方的即时通沟通系统。同时提供SDK和API接口，支持快速集成到其他应用系统中。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;系统架构&#xA;自研协议独立开发，采用高并发go语言开发的即时通讯及历史消息云存储通信系统。系统安全性高可扩展能力强，系统兼容性强。可快速无缝集成到各种应用系统，有效提高开发效率，节约成本。能轻松在线定制客户端。支持多平台客户端实现多端与多设备同步。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;功能特点&#xA;1、支持发富文本消息支持文字、图片、表情、语音、视频、位置、名片、文件、红包、阅后即焚、好友验证，离线消息，消息撤回等功能。&#xA;2、支多对多群聊、支持主动加入、邀请加入、踢出好友、禁言、消息审核等功能，丰富的权限及管理功能。&#xA;3、群聊支持建群、退群、解散群组、禁言、踢人、拉人进群、群备注等功能。&#xA;4、个人信息支持更改昵称、头像、个性签名，在线状态设置等。&#xA;5、支持查看历史消息、离线消息。聊天历史消息云端管理，实时查阅聊天记录，收发时间，收发IP地址。&#xA;6、支持好友分组、好友查找、好友申请、同意好友申请、拒绝申请、删除好友，好友备注。&#xA;7、支持脏字敏感词过滤，后台可自由配置敏感词，进行过滤拦截和替换，同时可以记录敏感词发送来源。&#xA;9、强大的后台管理功能，可以自由设置分角色快速批量设置管理用户的权限。&#xA;10、数据同步，可以与应用系统集成，实时发布用户登录状态，在线状态，用户数据到集成的应用系统。可以实时配置和更新设置。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;集成和定制开发&#xA;1、可以通过在线控制平台，轻松定制您的即时通讯服务。&#xA;2、丰富的开发集成接口，简单调用API即可与您的应用系统无缝集成，大大提高系统整合集成的开发效率。&#xA;3、可根据用户的需求进行深度二次开发，开发内容包含对软件功能的定制、界面的定制等，并提供与其他软件整合或嵌入方案。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Q  Q ：2533950058&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>有关go场景提问</title>
