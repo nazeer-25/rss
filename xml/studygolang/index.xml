@@ -37,6 +37,11 @@
       <description>&lt;p&gt;写了一个小库 &lt;a href=&#34;https://github.com/leijux/herror&#34;&gt;https://github.com/leijux/herror&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import &amp;quot;github.com/leijux/herror&amp;quot;&#xA;&#xA;func F() error {&#xA;    return errors.New(&amp;quot;err&amp;quot;)&#xA;}&#xA;&#xA;func main() {&#xA;    herror.HandleErr(F()).Must()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
+      <title>《Go题库·11》channel的应用场景</title>
+      <link>https://studygolang.com/topics/15644#reply2</link>
+      <description>&lt;h2&gt;&lt;strong&gt;答案&lt;/strong&gt;（engine）&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;channel适用于数据在多个协程中流动的场景，有很多实际应用：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;① 任务定时&lt;/p&gt;&#xA;&#xA;&lt;p&gt;比如超时处理：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;select {&#xA;    case &amp;lt;-time.After(time.Second):&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;定时任务&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;select {&#xA;    case &amp;lt;- time.Tick(time.Second)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;② 解耦生产者和消费者&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可以将生产者和消费者解耦出来，生产者只需要往channel发送数据，而消费者只管从channel中获取数据。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;③ 控制并发数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以爬虫为例，比如需要爬取1w条数据，需要并发爬取以提高效率，但并发量又不能过大，可以通过channel来控制并发规模，比如同时支持5个并发任务：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;ch := make(chan int, 5)&#xA;for _, url := range urls {&#xA;  go func() {&#xA;    ch &amp;lt;- 1&#xA;    worker(url)&#xA;    &amp;lt;- ch&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
       <title>99年，成人自考本科还在考，想学GO转开发，大佬们此路通嘛？</title>
       <link>https://studygolang.com/topics/15645#reply3</link>
       <description>&lt;p&gt;99年，成人自考本科还在考，想学GO转开发，大佬们此路通嘛？&lt;/p&gt;&#xA;</description>
@@ -45,11 +50,6 @@
       <title>求教一下mac m1环境下，附带动态库的情况下，如何将交叉编译为linux-amd64</title>
       <link>https://studygolang.com/topics/15646#reply1</link>
       <description>&lt;p&gt;之前用x86架构的mac时，github上有现成的arm64的GCC工具，现在换成arm64的mac了，发现网上找不到x86的GCC工具了，求教各位，如何解决。GOOS=linux GOARCH=amd64 这个行不通，因为里面有动态库文件&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>《Go题库·11》channel的应用场景</title>
-      <link>https://studygolang.com/topics/15644#reply2</link>
-      <description>&lt;h2&gt;&lt;strong&gt;答案&lt;/strong&gt;（engine）&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;channel适用于数据在多个协程中流动的场景，有很多实际应用：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;① 任务定时&lt;/p&gt;&#xA;&#xA;&lt;p&gt;比如超时处理：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;select {&#xA;    case &amp;lt;-time.After(time.Second):&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;定时任务&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;select {&#xA;    case &amp;lt;- time.Tick(time.Second)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;② 解耦生产者和消费者&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可以将生产者和消费者解耦出来，生产者只需要往channel发送数据，而消费者只管从channel中获取数据。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;③ 控制并发数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以爬虫为例，比如需要爬取1w条数据，需要并发爬取以提高效率，但并发量又不能过大，可以通过channel来控制并发规模，比如同时支持5个并发任务：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;ch := make(chan int, 5)&#xA;for _, url := range urls {&#xA;  go func() {&#xA;    ch &amp;lt;- 1&#xA;    worker(url)&#xA;    &amp;lt;- ch&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>doak-cms 文章管理系统 推荐</title>
