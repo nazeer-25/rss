@@ -28,13 +28,13 @@
       <description>&lt;p&gt;居家远程办公岗位，薪资税后25-40K，感兴趣可加vx:918159045&#xA;岗位职责：&#xA;1.负责核心业务组件的研发；&#xA;2.参与服务端后台系统架构设计，以及服务所需的基础组件的实现；&#xA;3.有团队精神，对代码有追求者优先；&#xA;任职要求：&#xA;1. 两年以上服务端研发经验；&#xA;2. 深入理解计算机原理，有扎实的数据结构和算法基础；&#xA;3. 深入理解linux系统及其原理，熟悉常用数据结构的使用，熟悉TCP/IP、HTTP协议以及网络编程；&#xA;4. 熟悉c++/java/golang/php/node/python等语言,至少一种，有一年以上golang研发经验优先；&#xA;5. 熟悉go语言框架代码，至少深入理解一个go开源项目；&#xA;6. 了解rpc协议，熟悉常用的sql、nosql数据库原理和相关查询优化经验。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>优维HyperInsight：掘金164.94亿美元可观测市场的“金锄头”？</title>
-      <link>https://studygolang.com/articles/35726#reply0</link>
-    </item>
-    <item>
       <title>《Go题库·12》slice和array区别？</title>
       <link>https://studygolang.com/topics/15652#reply0</link>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;题目解析&lt;/strong&gt; &lt;a href=&#34;https://www.golangroadmap.com/&#34;&gt;GOLANG ROADMAP社区&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;h2&gt;&lt;strong&gt;答案&lt;/strong&gt;（engine）&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;array是固定长度的数组，是值类型的，如果进行赋值或者作为函数参数，实际上整个数据都会被重新拷贝一份。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;使用前必须声明长度&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;arr := [5]int&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;而slice属于引用类型，是一个不定长的，总是指向底层的数组array的数据结构。作为函数参数时，slice传递的是指针。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;创建时不需要指定长度&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var s []int&#xA;s := make([]int,10)&#xA;s :=[]int{1,2,3}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>优维HyperInsight：掘金164.94亿美元可观测市场的“金锄头”？</title>
+      <link>https://studygolang.com/articles/35726#reply0</link>
     </item>
     <item>
       <title>几百行代码实现一个脚本解释器</title>
@@ -45,6 +45,11 @@
       <title>关于交互shll的问题 请大佬指教！</title>
       <link>https://studygolang.com/topics/15653#reply0</link>
       <description>&lt;p&gt;项目中需要实现一个功能：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;远程服务器开一个端口&#xA;windows本地通过putty.exe -raw ip -P port 进行连接Linux服务器执行命令&#xA;需要能够 tab补全 vim top 等交互命令&#xA;不使用网上的 ssh协议 也不使用 telnet协议&#xA;本人在测试中只能够本地在服务端敲命令交互 没法达到putty连接远程交互 希望大佬教教(最好能给出示例代码)&#xA;下面给出目前的代码 及实现效果(很垃圾希望大佬教教)&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;io&amp;quot;&#xA;&#x9;&amp;quot;log&amp;quot;&#xA;&#x9;&amp;quot;net&amp;quot;&#xA;&#x9;&amp;quot;os&amp;quot;&#xA;&#x9;&amp;quot;os/exec&amp;quot;&#xA;&#x9;&amp;quot;os/signal&amp;quot;&#xA;&#x9;&amp;quot;syscall&amp;quot;&#xA;&#xA;&#x9;&amp;quot;github.com/creack/pty&amp;quot;&#xA;&#x9;&amp;quot;golang.org/x/term&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;//监听&#xA;&#x9;listener, err := net.Listen(&amp;quot;tcp&amp;quot;, &amp;quot;0.0.0.0:8888&amp;quot;)&#xA;&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;fmt.Println(&amp;quot;err1=&amp;quot;, err)&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#xA;&#x9;defer listener.Close()&#xA;&#xA;&#x9;//接受多个用户连接&#xA;&#x9;for {&#xA;&#x9;&#x9;fmt.Println(&amp;quot;listen 0.0.0.0:8888&amp;quot;)&#xA;&#x9;&#x9;//有用户连接才会继续向下执行 然后返回该用户连接 不然就一直监听&#xA;&#x9;&#x9;conn, err := listener.Accept()&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;fmt.Println(&amp;quot;err2=&amp;quot;, err)&#xA;&#x9;&#x9;&#x9;return&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;go GetShell(conn)&#xA;&#xA;&#x9;}&#xA;&#xA;}&#xA;&#xA;func GetShell(conn net.Conn) error {&#xA;&#x9;// Create arbitrary command.&#xA;&#x9;c := exec.Command(&amp;quot;bash&amp;quot;)&#xA;&#xA;&#x9;// Start the command with a pty.&#xA;&#x9;ptmx, err := pty.Start(c)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return err&#xA;&#x9;}&#xA;&#x9;// Make sure to close the pty at the end.&#xA;&#x9;defer func() { _ = ptmx.Close() }() // Best effort.&#xA;&#xA;&#x9;// Handle pty size.&#xA;&#x9;ch := make(chan os.Signal, 1)&#xA;&#x9;signal.Notify(ch, syscall.SIGWINCH)&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for range ch {&#xA;&#x9;&#x9;&#x9;if err := pty.InheritSize(os.Stdin, ptmx); err != nil {&#xA;&#x9;&#x9;&#x9;&#x9;log.Printf(&amp;quot;error resizing pty: %s&amp;quot;, err)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}()&#xA;&#x9;ch &amp;lt;- syscall.SIGWINCH                        // Initial resize.&#xA;&#x9;defer func() { signal.Stop(ch); close(ch) }() // Cleanup signals when done.&#xA;&#xA;&#x9;// Set stdin in raw mode.&#xA;&#x9;oldState, err := term.MakeRaw(int(os.Stdin.Fd()))&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;panic(err)&#xA;&#x9;}&#xA;&#x9;defer func() { _ = term.Restore(int(os.Stdin.Fd()), oldState) }() // Best effort.&#xA;&#xA;&#x9;// Copy stdin to the pty and the pty to stdout.&#xA;&#x9;// NOTE: The goroutine will keep reading until the next keystroke before returning.&#xA;&#x9;go func() { _, _ = io.Copy(ptmx, os.Stdin) }()&#xA;&#x9;_, _ = io.Copy(conn, ptmx)&#xA;&#xA;&#x9;return nil&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;下面附上效果图&#xA;&lt;img src=&#34;https://static.golangjob.cn/220628/2898acdb760b8f77ffdd375684499314.gif&#34; alt=&#34;当前效果.gif&#34; /&gt;&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>阿里云产品返现金</title>
+      <link>https://studygolang.com/topics/15654#reply0</link>
+      <description>&lt;p&gt;阿里云618大促：云服务器、云存储、云数据库、网络与CDN、阿里企业邮箱、短信、钉钉等&#xA;联系我折上返现优惠+技术支持VX:18523323332&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>求教一下mac m1环境下，附带动态库的情况下，如何将交叉编译为linux-amd64</title>
