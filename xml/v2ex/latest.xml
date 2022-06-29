@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Python Borg pattern 模式疑问 - 程序员</title>
+      <link>https://www.v2ex.com/t/862937</link>
+      <description>&lt;pre&gt;&lt;code&gt;from typing import Dict&#xA;&#xA;&#xA;class Borg:&#xA;    _shared_state: Dict[str, str] = {}&#xA;&#xA;    def __init__(self):&#xA;        self.__dict__ = self._shared_state&#xA;&#xA;&#xA;class YourBorg(Borg):&#xA;    def __init__(self, state=None):&#xA;        super().__init__()&#xA;        if state:&#xA;            self.state = state&#xA;        else:&#xA;            # initiate the first instance with default state&#xA;            if not hasattr(self, &#34;state&#34;):&#xA;                self.state = &#34;Init&#34;   # 这里为什么会更新到 _shared_state 的 value 中&#xA;&#xA;    def __str__(self):&#xA;        return self.state&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第 19 行,  &lt;code&gt;self.state = &#34;Init&#34;&lt;/code&gt; 后, 会将&lt;code&gt;_shared_state: {}&lt;/code&gt;, 更新为 &lt;code&gt;_shared_state: {&#34;state&#34;: &#34;Init&#34;}&lt;/code&gt; 这是为什么?&lt;/p&gt;&#xA;</description>
+      <author>css3</author>
+      <pubDate>29 Jun 2022 07:05:06 +0000</pubDate>
+    </item>
+    <item>
       <title>Mac 上面你用 WPS 还是 office - macOS</title>
       <link>https://www.v2ex.com/t/862936</link>
       <description>&lt;p&gt;office 太臃肿，wps 轻便系列。&lt;/p&gt;&#xA;&lt;p&gt;wpz 会员对比 office 365 有哪些优势&lt;/p&gt;&#xA;</description>

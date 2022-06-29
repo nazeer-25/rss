@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Python Borg pattern 模式疑问 - 程序员",
+      "Link": "https://www.v2ex.com/t/862937",
+      "Description": "\u003cpre\u003e\u003ccode\u003efrom typing import Dict\n\n\nclass Borg:\n    _shared_state: Dict[str, str] = {}\n\n    def __init__(self):\n        self.__dict__ = self._shared_state\n\n\nclass YourBorg(Borg):\n    def __init__(self, state=None):\n        super().__init__()\n        if state:\n            self.state = state\n        else:\n            # initiate the first instance with default state\n            if not hasattr(self, \"state\"):\n                self.state = \"Init\"   # 这里为什么会更新到 _shared_state 的 value 中\n\n    def __str__(self):\n        return self.state\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e第 19 行,  \u003ccode\u003eself.state = \"Init\"\u003c/code\u003e 后, 会将\u003ccode\u003e_shared_state: {}\u003c/code\u003e, 更新为 \u003ccode\u003e_shared_state: {\"state\": \"Init\"}\u003c/code\u003e 这是为什么?\u003c/p\u003e\n",
+      "Author": "css3",
+      "PubDate": "2022-06-29T07:05:06Z"
+    },
+    {
       "Title": "Mac 上面你用 WPS 还是 office - macOS",
       "Link": "https://www.v2ex.com/t/862936",
       "Description": "\u003cp\u003eoffice 太臃肿，wps 轻便系列。\u003c/p\u003e\n\u003cp\u003ewpz 会员对比 office 365 有哪些优势\u003c/p\u003e\n",
