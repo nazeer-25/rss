@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Nginx 反代后端证书配置问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/862991",
+      "Description": "\u003cp\u003e使用 docker 启动了 elasticsearch 8.0 ，因为这个版本的 es 是使用 https 请求的，所以 curl 测试的时候要带上自签证书\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003ecurl --cacert http_ca.crt -u elastic:elastic123 https://127.0.0.1:9200\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e想暴露一部分接口给公网访问，就用 nginx 反代，nginx 的域名已经使用了 acme 签发的证书，前面我还在想 nginx 怎么配置 localtion /es/ 那部分的证书，大概参考了这个文档：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ehttps://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但实际上，反代之后，请求 \u003ca href=\"https://reverse.com/es/\" rel=\"nofollow\"\u003ehttps://reverse.com/es/\u003c/a\u003e 的域名，location /es/ {} 下不用配置 elasticsearch 自签的证书都可以，这个是什么原理？\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\n  location /es/ {\n     proxy_pass https://127.0.0.1:9200/;\n     include proxy.conf;\n  }\n\n本地不带证书请求会错误\ncurl -u elastic:elastic123 https://127.0.0.1:9200\ncurl: (60) SSL certificate problem: self signed certificate in certificate chain\nMore details here: https://curl.haxx.se/docs/sslcerts.html\n\ncurl failed to verify the legitimacy of the server and therefore could not\nestablish a secure connection to it. To learn more about this situation and\nhow to fix it, please visit the web page mentioned above.\n\n\n请求反代的域名直接可以\n\ncurl -u elastic:elastic123 https://reverse.com/es/\n{\n  \"name\" : \"xx\",\n  \"cluster_name\" : \"docker-cluster\",\n  \"cluster_uuid\" : \"xx\",\n  \"version\" : {\n    \"number\" : \"8.2.3\",\n    \"build_flavor\" : \"default\",\n    \"build_type\" : \"docker\",\n    \"build_hash\" : \"xx\",\n    \"build_date\" : \"xx\",\n    \"build_snapshot\" : false,\n    \"lucene_version\" : \"9.1.0\",\n    \"minimum_wire_compatibility_version\" : \"7.17.0\",\n    \"minimum_index_compatibility_version\" : \"7.0.0\"\n  },\n  \"tagline\" : \"You Know, for Search\"\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "olofbrother",
+      "PubDate": "2022-06-29T09:39:21Z"
+    },
+    {
       "Title": "[又拍云] 出海企业安全防御——跨境电商专场 - 分享发现",
       "Link": "https://www.v2ex.com/t/862989",
       "Description": "\u003cp\u003e\u003ca href=\"https://shangzhibo.tv/watch/10782487?promoteSign=4af5Yafs-pH40d\" rel=\"nofollow\"\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"http://tva1.sinaimg.cn/large/007tBpQ3ly1h3p8htmqkdj30ku1m3e6m.jpg\"/\u003e\u003c/a\u003e\u003c/p\u003e\n",
