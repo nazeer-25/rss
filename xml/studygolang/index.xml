@@ -47,14 +47,19 @@
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;题目解析&lt;/strong&gt; &lt;a href=&#34;https://www.golangroadmap.com/&#34;&gt;GOLANG ROADMAP社区&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;h2&gt;&lt;strong&gt;答案&lt;/strong&gt;（engine）&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;① Add一个负数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如果计数器的值小于0会直接panic&lt;/p&gt;&#xA;&#xA;&lt;p&gt;②  Add在Wait之后调用&lt;/p&gt;&#xA;&#xA;&lt;p&gt;比如一些子协程开头调用Add结束调用Wait，这些 Wait无法阻塞子协程。正确做法是在开启子协程之前先Add特定的值。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;③ 未置为0就重用&lt;/p&gt;&#xA;&#xA;&lt;p&gt;WaitGroup可以完成一次编排任务，计数值降为0后可以继续被其他任务所用，但是不要在还没使用完的时候就用于其他任务，这样由于带着计数值，很可能出问题。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;④ 复制waitgroup&lt;/p&gt;&#xA;&#xA;&lt;p&gt;WaitGroup有nocopy字段，不能被复制。也意味着WaitGroup不能作为函数的参数。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>golang远程办公</title>
-      <link>https://studygolang.com/topics/15651#reply3</link>
-      <description>&lt;p&gt;居家远程办公岗位，薪资税后25-40K，感兴趣可加vx:918159045&#xA;岗位职责：&#xA;1.负责核心业务组件的研发；&#xA;2.参与服务端后台系统架构设计，以及服务所需的基础组件的实现；&#xA;3.有团队精神，对代码有追求者优先；&#xA;任职要求：&#xA;1. 两年以上服务端研发经验；&#xA;2. 深入理解计算机原理，有扎实的数据结构和算法基础；&#xA;3. 深入理解linux系统及其原理，熟悉常用数据结构的使用，熟悉TCP/IP、HTTP协议以及网络编程；&#xA;4. 熟悉c++/java/golang/php/node/python等语言,至少一种，有一年以上golang研发经验优先；&#xA;5. 熟悉go语言框架代码，至少深入理解一个go开源项目；&#xA;6. 了解rpc协议，熟悉常用的sql、nosql数据库原理和相关查询优化经验。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>Golang的GUI开发GoVCL安装失败，急！</title>
       <link>https://studygolang.com/topics/15654#reply1</link>
       <description>&lt;p&gt;按照官网步骤下来，一直没有安装成功，网上也没有关于GoVCL的文章，谁可以帮忙出一个在Linux和Windows下安装GoVCL的教程？&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>这样处理err如何</title>
+      <link>https://studygolang.com/topics/15648#reply0</link>
+      <description>&lt;p&gt;写了一个小库 &lt;a href=&#34;https://github.com/leijux/herror&#34;&gt;https://github.com/leijux/herror&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import &amp;quot;github.com/leijux/herror&amp;quot;&#xA;&#xA;func F() error {&#xA;    return errors.New(&amp;quot;err&amp;quot;)&#xA;}&#xA;&#xA;func main() {&#xA;    herror.HandleErr(F()).Must()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>golang远程办公</title>
+      <link>https://studygolang.com/topics/15651#reply3</link>
+      <description>&lt;p&gt;居家远程办公岗位，薪资税后25-40K，感兴趣可加vx:918159045&#xA;岗位职责：&#xA;1.负责核心业务组件的研发；&#xA;2.参与服务端后台系统架构设计，以及服务所需的基础组件的实现；&#xA;3.有团队精神，对代码有追求者优先；&#xA;任职要求：&#xA;1. 两年以上服务端研发经验；&#xA;2. 深入理解计算机原理，有扎实的数据结构和算法基础；&#xA;3. 深入理解linux系统及其原理，熟悉常用数据结构的使用，熟悉TCP/IP、HTTP协议以及网络编程；&#xA;4. 熟悉c++/java/golang/php/node/python等语言,至少一种，有一年以上golang研发经验优先；&#xA;5. 熟悉go语言框架代码，至少深入理解一个go开源项目；&#xA;6. 了解rpc协议，熟悉常用的sql、nosql数据库原理和相关查询优化经验。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>B 站疯传！堪称最强！计算机、网络、算法知识总结电子书下载！</title>
@@ -104,11 +109,6 @@
       <title>📖 Go相关公众号文章每日推荐【2022-06-24/26】</title>
       <link>https://studygolang.com/topics/15649#reply0</link>
       <description>&lt;p&gt;一、Go语言中文网&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/o7Eraz38Sw5lqPBFGEk9TQ&#34;&gt;Go语言爱好者周刊：第 150 期 —— Go 的收入水平满意吗？&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/l-NBtcjngtboUdRQKUr-cg&#34;&gt;golang刷leetcode：道路的最大总重要性&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3HRHjDUSnExdb6njMtaXXw&#34;&gt;Go 每日一库：gomonkey 是什么？&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/qbaHETgPOlU4JvMuihQY3Q&#34;&gt;拒绝千篇一律，这套Go错误处理的完整解决方案值得一看！&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;二、微客鸟窝&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/L9VEIZO8CIdHx7jGjlI4-w&#34;&gt;gin博客项目复盘&amp;ndash;01配置文件使用&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;三、专家极客圈&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/sSwXgrHvQcjSuiy9bA8d_g&#34;&gt;分布式系统设计模式&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;四、k8s技术圈&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/PFcacSZTBgwqYwP0hzfkQA&#34;&gt;vivo 容器集群监控系统架构与实践&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;五、网管叨bi叨&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/sIMVKgGgEC0F6ftZjwnn6w&#34;&gt;用 channel 把 Go 程序写崩的三种姿势，你集齐过吗？&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;六、TechPaper&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/NkKCafAO87aMBMWj10V3AQ&#34;&gt;如何提升研发效率-工具篇&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;七、陪计算机走过漫长岁月&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ORbyWahKe4WoWQ2fxWuKBQ&#34;&gt;如何写好单元测试以及go单元测试工具库testify简单介绍&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;八、腾讯云CDN&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/uNtbXRDIxZLTf-cHN9La6w&#34;&gt;HTTP/3官宣！QUIC从端到云的一站式方案&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;九、高可用架构&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/u9gZze3jx-xULxZuyHZd-g&#34;&gt;Facebook 是怎么保证缓存一致性的&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>这样处理err如何</title>
-      <link>https://studygolang.com/topics/15648#reply0</link>
-      <description>&lt;p&gt;写了一个小库 &lt;a href=&#34;https://github.com/leijux/herror&#34;&gt;https://github.com/leijux/herror&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import &amp;quot;github.com/leijux/herror&amp;quot;&#xA;&#xA;func F() error {&#xA;    return errors.New(&amp;quot;err&amp;quot;)&#xA;}&#xA;&#xA;func main() {&#xA;    herror.HandleErr(F()).Must()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>补齐短板-开源IM项目OpenIM关于初始化/登录/好友接口文档介绍</title>
