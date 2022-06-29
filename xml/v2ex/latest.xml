@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>这样算不算违规搭建 web 服务？ - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/863000</link>
+      <description>&lt;p&gt;家里有公网 IP ，用一个未备案的域名配合 Cloudflare 的 API 配置了 DDNS ，然后把一个很高位端口映射到了一个 xray 启动的 HTTPs 服务上了，xray 的 fallback 数组为空，这样任何人直接用浏览器访问这个服务都会返回 This site can’t be reached 的错误，只有代理客户端使用正确的信息才可以使用这个代理服务器，这种伪装效果可以避开电信的审查么？代理客户端连接到服务器的请求在电信开来是一个 HTTPs 请求，但是直接访问这个端口的话又访问不到。&lt;/p&gt;&#xA;</description>
+      <author>Tonni</author>
+      <pubDate>29 Jun 2022 10:04:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有 C/C++做 部分预处理 的工具 - C++</title>
+      <link>https://www.v2ex.com/t/862999</link>
+      <description>&lt;p&gt;需求大概就是在#define 或者#include 头文件不完整的情况下做预处理，有多少做多少，as much as possible ，缺失的保持原状。&lt;/p&gt;&#xA;&lt;p&gt;如果直接用 gcc -E 的话会直接报错，找不到.h 或者相关定义&lt;/p&gt;&#xA;&lt;p&gt;有没有什么工具能实现？（除了自己写&lt;/p&gt;&#xA;</description>
+      <author>liyafe1997</author>
+      <pubDate>29 Jun 2022 10:03:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教大佬一个关于 SQL 的问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/862998</link>
+      <description>&lt;h1&gt;题目&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;原始表格：&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;自增 ID (id)&lt;/th&gt;&#xA;&lt;th&gt;名称 (name)&lt;/th&gt;&#xA;&lt;th&gt;成绩 (score)&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;小明&lt;/td&gt;&#xA;&lt;td&gt;10&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;td&gt;小红&lt;/td&gt;&#xA;&lt;td&gt;23&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;3&lt;/td&gt;&#xA;&lt;td&gt;小特&lt;/td&gt;&#xA;&lt;td&gt;66&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;4&lt;/td&gt;&#xA;&lt;td&gt;小红&lt;/td&gt;&#xA;&lt;td&gt;32&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;5&lt;/td&gt;&#xA;&lt;td&gt;小特&lt;/td&gt;&#xA;&lt;td&gt;68&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;6&lt;/td&gt;&#xA;&lt;td&gt;小黄&lt;/td&gt;&#xA;&lt;td&gt;66&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;strong&gt;目标表格：&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;自增 ID (id)&lt;/th&gt;&#xA;&lt;th&gt;名称 (name)&lt;/th&gt;&#xA;&lt;th&gt;成绩 (score)&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;小明&lt;/td&gt;&#xA;&lt;td&gt;10&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;4&lt;/td&gt;&#xA;&lt;td&gt;小红&lt;/td&gt;&#xA;&lt;td&gt;32&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;5&lt;/td&gt;&#xA;&lt;td&gt;小特&lt;/td&gt;&#xA;&lt;td&gt;68&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;6&lt;/td&gt;&#xA;&lt;td&gt;小黄&lt;/td&gt;&#xA;&lt;td&gt;66&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;strong&gt;需求：&lt;/strong&gt;获取每个学生最新的一个成绩&lt;/p&gt;&#xA;&lt;h1&gt;疑问&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;已经尝试的方法：&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sqlite&#34;&gt;SELECT * FROM (SELECT * FROM tb_test&#xA;ORDER BY id DESC) GROUP BY name&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;strong&gt;疑问：&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;code&gt;GROUP BY&lt;/code&gt;这样用法是规范的吗？看教程一般都是跟 SUM 等公式一起用的&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;GROUP BY&lt;/code&gt;在 SQLiteStudio 软件中获取的 id 是升序的，但在 QT 中使用又是降序的，是数据库引擎的问题？&lt;/li&gt;&#xA;&lt;li&gt;有没有更好的方法去解答这个题目&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>yaron</author>
+      <pubDate>29 Jun 2022 10:03:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>segmentfault 删库跑路了吗？ - 程序员</title>
+      <link>https://www.v2ex.com/t/862997</link>
+      <description>&lt;p&gt;刚想查个问题，进去一个大大的 502😅&lt;/p&gt;&#xA;</description>
+      <author>fpure</author>
+      <pubDate>29 Jun 2022 10:02:57 +0000</pubDate>
+    </item>
+    <item>
       <title>写了一个开源的面向数据库 IO 的零冗余数据缓存框架，希望大佬们给些意见 - Java</title>
       <link>https://www.v2ex.com/t/862993</link>
       <description>&lt;p&gt;业余时间花了一年左右写了一个开源缓存框架 Kache ，主要用于以类似 Spring cache 的使用方式下沉到数据库持久化操作。可以将有限的空间放大应用于更多的缓存上，增强缓存命中率和降低缓存变动成本&#xA;仓库地址： &lt;a href=&#34;https://gitee.com/Kould/kache&#34; rel=&#34;nofollow&#34;&gt;https://gitee.com/Kould/kache&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;希望各位大佬多多给予意见，能 star 或推荐一下！&lt;/p&gt;&#xA;</description>
