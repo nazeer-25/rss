@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有日子没买机票，现在机建燃油费的涨幅仅仅是因为油价吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/862944",
+      "Description": "\u003cp\u003e现在杭州到云南机建 50 燃油费要 140\u003c/p\u003e\n\u003cp\u003e之前机建 50 燃油 20\u003c/p\u003e\n\u003cp\u003e油价两三块的涨幅，燃油费能翻七倍，这太离谱了吧\u003c/p\u003e\n",
+      "Author": "gogf",
+      "PubDate": "2022-06-29T07:36:29Z"
+    },
+    {
+      "Title": "小火箭 DNS 设置 / 访问不了部分国内 CDN 网站 e.g 小红书 - 问与答",
+      "Link": "https://www.v2ex.com/t/862943",
+      "Description": "\u003cul\u003e\n\u003cli\u003e网络： 公共网络 WIFI 北方城市联通\u003c/li\u003e\n\u003cli\u003eIOS: 15.x\u003c/li\u003e\n\u003cli\u003e小火箭版本: 2.2.9\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e小火箭配置: default.conf\n远程服务器: 美国\n远程服务器 DNS: 127.0.0.1:53 (adguard home) 转发 nextdns\u003c/p\u003e\n\u003cp\u003e近期，用户反映在 config 模式下不能访问淘宝。将 config 改为 proxy 后，不仅不能上淘宝，也不能上微信朋友圈。\u003c/p\u003e\n\u003cp\u003e参照 \u003ca href=\"https://v2ex.com/t/801289\" rel=\"nofollow\"\u003ehttps://v2ex.com/t/801289\u003c/a\u003e, 将 IPV6 关闭, 小火箭 DNS 从 system 改为 \u003ca href=\"https://doh.pub/dns-query\" rel=\"nofollow\"\u003ehttps://doh.pub/dns-query\u003c/a\u003e, \u003ca href=\"https://dns.alidns.com/dns-query\" rel=\"nofollow\"\u003ehttps://dns.alidns.com/dns-query\u003c/a\u003e 后用户反映可以访问淘宝 和 微信。 但用户不能访问小红书 (之前使用 system 时用户可以访问)。\u003c/p\u003e\n\u003cp\u003e尝试在配置文件中加入\nDOMAIN-SUFFIX,\u003ca href=\"http://xiaohongshu.com\" rel=\"nofollow\"\u003exiaohongshu.com\u003c/a\u003e,Proxy 后，依然不能访问。\u003c/p\u003e\n\u003cp\u003e从服务器的 error.log 来看\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003es.xiaohongshu.com -\u0026gt; [34.120.19.185]\nwww.xiaohongshu.com -\u0026gt; [101.33.20.34 43.132.84.11]\nt2.xiaohongshu.com -\u0026gt; [157.185.156.141 157.185.175.105 157.185.169.203 157.185.178.99]\npicasso-static.xiaohongshu.com -\u0026gt; [34.120.19.185]\nedith.xiaohongshu.com -\u0026gt; [96.16.55.102 96.16.55.84]\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eDNS 应该都解析到了美国。同时因为小火箭规则中, GEOIP,CN,DIRECT    Final,Proxy 按道理应该由小火箭进行代理。\n从 error.log 来看\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e2022/06/28 00:06:28 [Info] [656820912] proxy/vless/inbound: firstLen = 579\n2022/06/28 00:06:28 [Info] [656820912] proxy/vless/inbound: received request for tcp:edith.xiaohongshu.com:443\n2022/06/28 00:06:28 [Info] [656820912] app/dispatcher: default route for tcp:edith.xiaohongshu.com:443\n2022/06/28 00:06:28 [Info] [656820912] proxy/freedom: opening connection to tcp:edith.xiaohongshu.com:443\n2022/06/28 00:06:28 [Info] [656820912] proxy/freedom: dialing to tcp:101.33.20.34:443\n2022/06/28 00:06:28 [Info] [656820912] transport/internet/tcp: dialing TCP to tcp:101.33.20.34:443\n2022/06/28 00:06:28 [Info] [1575990283] proxy/freedom: dialing to tcp:43.132.84.11:443\n2022/06/28 00:06:28 [Info] [1575990283] transport/internet/tcp: dialing TCP to tcp:43.132.84.11:443 2022/06/28 00:06:29 [Info] [1575990283] app/proxyman/outbound: failed to process outbound traffic \u0026gt; proxy/freedom: connection ends \u0026gt; context canceled\n2022/06/28 00:06:29 [Info] [1575990283] app/proxyman/inbound: connection ends \u0026gt; proxy/vless/inbound: connection ends \u0026gt; proxy/vless/inbound: failed to transfer response payload \u0026gt; io: read/write on closed pipe\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e因为用户在远程，配合有限，不能拿到用户方面的 log ， 因此，我想是不是因为仍然是 DNS 的问题? 是否因该指定 \"\u003ca href=\"http://xiaohongshu.com\" rel=\"nofollow\"\u003exiaohongshu.com\u003c/a\u003e,Direct\", 并且在 Host 内直接加入当地运行商的 DNS 来指定一个当地的 IP ？\u003c/p\u003e\n\u003cp\u003e原因是什么? (1) 海外 CDN 解析错误，解析到了无法访问的 IP (2) GEOIP CN 库 错误包含了海外 CDN 的 IP 但是国内网络下无法直连？ \u003c/p\u003e\n\u003cp\u003e谢谢。\u003c/p\u003e\n",
+      "Author": "zw963258852147",
+      "PubDate": "2022-06-29T07:33:56Z"
+    },
+    {
+      "Title": "哎 胃难受了有半年了 - 生活",
+      "Link": "https://www.v2ex.com/t/862942",
+      "Description": "\u003cp\u003e最开始是在 20 年末 喝豆浆粉的时候会出现胃胀的感觉 但是基本过一会儿就 ok 了； 20 年末~21 年中旬没啥事，21 年中开始经常和瑞幸咖啡，速溶咖啡，喝完就容易出现胃胀，但也没那么难受，睡一觉就没事了，21 年末，速溶咖啡喝的多，不过也就 1 天一袋，胃又涨了，最关键的是当我睡一觉起来这种感觉还在的时候我就知道完了 出大问题了，后来去做过一次胃镜，慢性非活动型胃炎，22 年 2 月份做的，吃了一堆药 p 用没有，到现在半年了，天天嗳气，胃胀，真是难受啊。。。基本那种睡一觉起来还解决不了的问题就很折磨人了。。\u003c/p\u003e\n",
+      "Author": "qwertyzzz",
+      "PubDate": "2022-06-29T07:33:01Z"
+    },
+    {
+      "Title": "Gnome Boxes 运行 Win10 虚拟机缓慢 - Linux",
+      "Link": "https://www.v2ex.com/t/862941",
+      "Description": "\u003cp\u003e宿主机是 Fedora36 Workstation, CPU 是 AMD R5 3500U, 内存 10G, 用 Fedora 自带的 Gnome Boxes 运行 Win10, 分配的内存 3G, CPU8 个, 也安装了以下软件:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003espice-guest-tools-latest.exe\u003c/li\u003e\n\u003cli\u003espice-webdavd-x64-latest.msi\u003c/li\u003e\n\u003cli\u003evirtio-win-guest-tools.exe\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e拖动窗口依然很卡, 操作不如 VirtualBox 流畅, 有什么解决办法吗? 还是说 Gnome Boxes 对 Win10 本来就优化差?\u003c/p\u003e\n",
+      "Author": "Yiskiee",
+      "PubDate": "2022-06-29T07:31:57Z"
+    },
+    {
       "Title": "预算 1500-2500，能收个什么配置的笔记本 - 问与答",
       "Link": "https://www.v2ex.com/t/862940",
       "Description": "使用场景: \u003cbr /\u003e\u003cbr /\u003e主要用来办公，office 、ps 、pcb 绘制软件、偶尔 matlab ，还有简单的单机游戏如 CS 。",
