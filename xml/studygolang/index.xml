@@ -97,7 +97,7 @@
     </item>
     <item>
       <title>Go语言怎么把json中的键名处理成map中的key</title>
-      <link>https://studygolang.com/topics/15642#reply10</link>
+      <link>https://studygolang.com/topics/15642#reply11</link>
       <description>&lt;p&gt;go写的程序，现在要弄一个程序的配置文件，现在用的方法就是，json的配置文件中的键名与go中定义的结构体一一对应，这样就可以使用第三方库jsoniter或者go自已的json处理库把json文件中的内容进行处理，并把结果保存到了全局变量中，方便其它文件调用。&#xA;解决了当某个配置项要临时调整时，只要在配置文件中修改一下，再重新加载一次就可以。但无法解决如果要添加多一个配置项这个问题，因为如果要添加多一个配置项，除了json配置文件要做添加，还要在go语言中定义的结构体做添加才可以。而现在想的是，使用map然后把json中的键当做map的key。json中的值当做map的值，这样以后就只需要修改配置文件，而不需要修改go文件了。&#xA;所以想问问不在引入第三库的前提下，怎么把json的键名处理成map的key&lt;/p&gt;&#xA;&#xA;&lt;p&gt;大概是就是下面这样的&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;// 配置文件&#xA;{&#xA;  &amp;quot;config&amp;quot;: {&#xA;    &amp;quot;a&amp;quot;: &amp;quot;aa&amp;quot;,&#xA;    &amp;quot;b&amp;quot;: &amp;quot;bb&amp;quot;,&#xA;    &amp;quot;c&amp;quot;: &amp;quot;20&amp;quot;,&#xA;  },&#xA;  &amp;quot;config_test&amp;quot;: {&#xA;    &amp;quot;a&amp;quot;: &amp;quot;aa&amp;quot;,&#xA;    &amp;quot;b&amp;quot;: &amp;quot;bb&amp;quot;,&#xA;    &amp;quot;c&amp;quot;: &amp;quot;20&amp;quot;,&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;我的json配置文件的格式是上面那样的，有什么法子可以处理成以下的方法方式吗？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;abc[&amp;ldquo;config&amp;rdquo;][&amp;ldquo;a&amp;rdquo;] // 值为aa&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;不华丽的分割线&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;abc[&amp;ldquo;config_test&amp;rdquo;][&amp;ldquo;c&amp;rdquo;] // 值为20&lt;/p&gt;&#xA;</description>
     </item>
     <item>
@@ -138,6 +138,11 @@
       <title>求教一下mac m1环境下，附带动态库的情况下，如何将交叉编译为linux-amd64</title>
       <link>https://studygolang.com/topics/15646#reply3</link>
       <description>&lt;p&gt;之前用x86架构的mac时，github上有现成的arm64的GCC工具，现在换成arm64的mac了，发现网上找不到x86的GCC工具了，求教各位，如何解决。GOOS=linux GOARCH=amd64 这个行不通，因为里面有动态库文件&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>Go语言怎么把json中的键名处理成map中的key</title>
+      <link>https://studygolang.com/topics/15642#reply10</link>
+      <description>&lt;p&gt;go写的程序，现在要弄一个程序的配置文件，现在用的方法就是，json的配置文件中的键名与go中定义的结构体一一对应，这样就可以使用第三方库jsoniter或者go自已的json处理库把json文件中的内容进行处理，并把结果保存到了全局变量中，方便其它文件调用。&#xA;解决了当某个配置项要临时调整时，只要在配置文件中修改一下，再重新加载一次就可以。但无法解决如果要添加多一个配置项这个问题，因为如果要添加多一个配置项，除了json配置文件要做添加，还要在go语言中定义的结构体做添加才可以。而现在想的是，使用map然后把json中的键当做map的key。json中的值当做map的值，这样以后就只需要修改配置文件，而不需要修改go文件了。&#xA;所以想问问不在引入第三库的前提下，怎么把json的键名处理成map的key&lt;/p&gt;&#xA;&#xA;&lt;p&gt;大概是就是下面这样的&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;// 配置文件&#xA;{&#xA;  &amp;quot;config&amp;quot;: {&#xA;    &amp;quot;a&amp;quot;: &amp;quot;aa&amp;quot;,&#xA;    &amp;quot;b&amp;quot;: &amp;quot;bb&amp;quot;,&#xA;    &amp;quot;c&amp;quot;: &amp;quot;20&amp;quot;,&#xA;  },&#xA;  &amp;quot;config_test&amp;quot;: {&#xA;    &amp;quot;a&amp;quot;: &amp;quot;aa&amp;quot;,&#xA;    &amp;quot;b&amp;quot;: &amp;quot;bb&amp;quot;,&#xA;    &amp;quot;c&amp;quot;: &amp;quot;20&amp;quot;,&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;我的json配置文件的格式是上面那样的，有什么法子可以处理成以下的方法方式吗？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;abc[&amp;ldquo;config&amp;rdquo;][&amp;ldquo;a&amp;rdquo;] // 值为aa&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;不华丽的分割线&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;abc[&amp;ldquo;config_test&amp;rdquo;][&amp;ldquo;c&amp;rdquo;] // 值为20&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Gopher们谁能讲讲区块链的前景如何？</title>
