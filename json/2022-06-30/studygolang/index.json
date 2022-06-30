@@ -46,9 +46,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "终于有人把云原生架构讲明白了",
-      "Link": "https://studygolang.com/articles/35733#reply0",
-      "Description": "",
+      "Title": "《Go题库·14》WaitGroup的坑",
+      "Link": "https://studygolang.com/topics/15658#reply0",
+      "Description": "\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（engine）\u003c/h2\u003e\n\n\u003cp\u003e① Add一个负数\u003c/p\u003e\n\n\u003cp\u003e如果计数器的值小于0会直接panic\u003c/p\u003e\n\n\u003cp\u003e②  Add在Wait之后调用\u003c/p\u003e\n\n\u003cp\u003e比如一些子协程开头调用Add结束调用Wait，这些 Wait无法阻塞子协程。正确做法是在开启子协程之前先Add特定的值。\u003c/p\u003e\n\n\u003cp\u003e③ 未置为0就重用\u003c/p\u003e\n\n\u003cp\u003eWaitGroup可以完成一次编排任务，计数值降为0后可以继续被其他任务所用，但是不要在还没使用完的时候就用于其他任务，这样由于带着计数值，很可能出问题。\u003c/p\u003e\n\n\u003cp\u003e④ 复制waitgroup\u003c/p\u003e\n\n\u003cp\u003eWaitGroup有nocopy字段，不能被复制。也意味着WaitGroup不能作为函数的参数。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "《Go题库·13》向为nil的channel发送数据会怎么样",
+      "Link": "https://studygolang.com/topics/15657#reply0",
+      "Description": "\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（栾龙生）\u003c/h2\u003e\n\n\u003cp\u003e空通道即无缓冲通道。无缓冲通道上的发送操作将会阻塞，直到另一个goroutine在对应的通道上执行接收操作，这时值传送完成，两个goroutine都可以继续执行。相反，如果接收操作先执行，接收方gorountine将阻塞，直到另一个goroutine在同一个通道上发送一个值。\u003c/p\u003e\n\n\u003cp\u003e使用无缓冲通道进行的通信导致发送和接收goroutine同步化。因此，无缓冲通道也称为同步通道。当一个值在无缓冲通道上传递时，接收值后发送方goroutine才被再次唤醒。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -67,16 +74,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "《Go题库·14》WaitGroup的坑",
-      "Link": "https://studygolang.com/topics/15658#reply0",
-      "Description": "\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（engine）\u003c/h2\u003e\n\n\u003cp\u003e① Add一个负数\u003c/p\u003e\n\n\u003cp\u003e如果计数器的值小于0会直接panic\u003c/p\u003e\n\n\u003cp\u003e②  Add在Wait之后调用\u003c/p\u003e\n\n\u003cp\u003e比如一些子协程开头调用Add结束调用Wait，这些 Wait无法阻塞子协程。正确做法是在开启子协程之前先Add特定的值。\u003c/p\u003e\n\n\u003cp\u003e③ 未置为0就重用\u003c/p\u003e\n\n\u003cp\u003eWaitGroup可以完成一次编排任务，计数值降为0后可以继续被其他任务所用，但是不要在还没使用完的时候就用于其他任务，这样由于带着计数值，很可能出问题。\u003c/p\u003e\n\n\u003cp\u003e④ 复制waitgroup\u003c/p\u003e\n\n\u003cp\u003eWaitGroup有nocopy字段，不能被复制。也意味着WaitGroup不能作为函数的参数。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "《Go题库·13》向为nil的channel发送数据会怎么样",
-      "Link": "https://studygolang.com/topics/15657#reply0",
-      "Description": "\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（栾龙生）\u003c/h2\u003e\n\n\u003cp\u003e空通道即无缓冲通道。无缓冲通道上的发送操作将会阻塞，直到另一个goroutine在对应的通道上执行接收操作，这时值传送完成，两个goroutine都可以继续执行。相反，如果接收操作先执行，接收方gorountine将阻塞，直到另一个goroutine在同一个通道上发送一个值。\u003c/p\u003e\n\n\u003cp\u003e使用无缓冲通道进行的通信导致发送和接收goroutine同步化。因此，无缓冲通道也称为同步通道。当一个值在无缓冲通道上传递时，接收值后发送方goroutine才被再次唤醒。\u003c/p\u003e\n",
+      "Title": "终于有人把云原生架构讲明白了",
+      "Link": "https://studygolang.com/articles/35733#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
