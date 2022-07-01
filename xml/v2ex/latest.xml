@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>parameter pack 仅作为部分参数的问题 - C++</title>
+      <link>https://www.v2ex.com/t/863563</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;iostream&amp;gt;&#xA;#include &amp;lt;functional&amp;gt;&#xA;&#xA;template &amp;lt;typename ... Args&amp;gt;&#xA;int invoke(const std::function&amp;lt;int(Args ..., bool)&amp;gt;&amp;amp; f, Args&amp;amp;&amp;amp; ... args) {&#xA;&#x9;int r0 = f(std::forward&amp;lt;Args&amp;gt;(args)..., false);&#xA;&#x9;int r1 = f(std::forward&amp;lt;Args&amp;gt;(args)..., true);&#xA;&#x9;return r0 + r1;&#xA;}&#xA;&#xA;int g(int a, int b, bool c) {&#xA;&#x9;if (c) {&#xA;&#x9;&#x9;return a + b;&#xA;&#x9;}&#xA;&#x9;return a - b;&#xA;}&#xA;&#xA;int main() {&#xA;&#x9;int r = invoke(std::function&amp;lt;int(int,int,bool)&amp;gt;(g), 2, 3);&#xA;&#x9;std::cout &amp;lt;&amp;lt; r &amp;lt;&amp;lt; std::endl;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;上面的例子在 GCC 里类型推导不出来。如果 &lt;code&gt;invoke&lt;/code&gt; 的 &lt;code&gt;f&lt;/code&gt; 是 &lt;code&gt;const std::function&amp;lt;int(bool, Args ...)&amp;gt;&amp;amp;&lt;/code&gt; 则可以推导出来，但像这种附加的参数在 Args 后面的情况怎么办呢？&lt;/p&gt;&#xA;</description>
+      <author>Contextualist</author>
+      <pubDate>01 Jul 2022 23:32:39 +0000</pubDate>
+    </item>
+    <item>
       <title>关于 macmini 间歇性网络不好 甚至连看 1080p 都会卡 - 问与答</title>
       <link>https://www.v2ex.com/t/863562</link>
       <description>设备 macmini m1 16g&lt;br /&gt;蓝牙 只连接一个 mx master 鼠标&lt;br /&gt;我房间内的 其他设备都不会卡 手机 ipad 都一切正常 &lt;br /&gt;唯独 macmini 会抽风&lt;br /&gt;想问一下 有无朋友有这样的状况 都是怎么解决的&lt;br /&gt;由于在国外 这个是房东的集中无线网络 拉网线是不可能的&lt;br /&gt;该怎么解决问题 ,谢谢</description>
