@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "关于付费 APP 加密方式的一些疑问 - 程序员",
+      "Link": "https://www.v2ex.com/t/863351",
+      "Description": "\u003cp\u003e可能因为我的水平有限，我所能想到的加密方式似乎都没有实际用处。\u003c/p\u003e\n\u003cp\u003e比如，某个业务场景是付费用户可以创建无限的素材，而非付费用户只能创建不高于某数量的素材。\u003c/p\u003e\n\u003cp\u003e虽然我已经用了各种方式来加密这个“某数量”的值，不过不管前面写的多绕，但是最终还是会回归到一个 \u003ccode\u003eif\u003c/code\u003e 逻辑判断。\u003c/p\u003e\n\u003cp\u003e比如，针对上述场景，我是这样写的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-kotlin\"\u003e    val a = \"RWM=\"\n    val b = a.decodeBase64()?.string(Charset.forName(\"utf8\")) ?: \"${Char(0)}${Char(0)}\"\n\n    val realNum = 10\n\n    if (realNum \u0026lt;= b.toCharArray()[1].code - b.toCharArray()[0].code) {\n        println(\"pass\")\n    }\n    else {\n        println(\"you need pay first\")\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是反编译下来是这样的：\u003c/p\u003e\n\u003cp\u003e（节选）\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e      if (realNum \u0026lt;= var8 - var3) {\n         var4 = \"pass\";\n         System.out.println(var4);\n      } else {\n         var4 = \"you need pay first\";\n         System.out.println(var4);\n      }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e不管你前面写的有多复杂，最终还是会回归到简单的 \u003ccode\u003eif\u003c/code\u003e 逻辑判断，别人修改时只需要删除或者直接改一下这个判断就能轻松破解了。\u003c/p\u003e\n\u003cp\u003e判断是否付费同理，不管前面写的多复杂，最终会回归到简单的逻辑判断。\u003c/p\u003e\n\u003cp\u003e所以我现在加密完全依赖于加固，但是加固也只能防的住“脚本小子”一键破解，如果是有大牛专门破解的话，也很容易被脱壳。\u003c/p\u003e\n\u003cp\u003e虽然防住“脚本小子”已经满足我的需求了，但是我还是想知道，应该怎么在不加固的情况下避免被“一键”破解呢？\u003c/p\u003e\n\u003cp\u003e据我所知，某个业内有名的 APP ，就没有使用加固，但是就是至今没被破解，甚至作者还专门搞了个悬赏，让别人区破解它。据我了解的是，至今没人破解成功。\u003c/p\u003e\n\u003cp\u003e补充：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eAPP 性质决定了没法将需要加密的逻辑放到服务器避免被本地破解\u003c/li\u003e\n\u003cli\u003e上述代码只是做了一个示例，实际使用比这个复杂，而且核心代码也是写在 c++ 中的，不过正如我上述说的，即使写在 c++ 中，最终也是回归到 java 调用 c++的代码，然后做一个简单的逻辑判断\u003c/li\u003e\n\u003cli\u003e我想到的是把加密和业务逻辑混合在一起，但是自己实际测试过，即使这样反编译后效果也不理想。\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "equationl",
+      "PubDate": "2022-07-01T00:56:34Z"
+    },
+    {
+      "Title": "iPhone 如何禁止删除 esim 卡号？ - Apple",
+      "Link": "https://www.v2ex.com/t/863350",
+      "Description": "\u003cp\u003e因为 esim 下发后难以补办（或者说是完全补不了），尝试了家庭的儿童账号、监管模式，都无法实现，在蜂窝那里点一下移除蜂窝号码就会删掉，有什么办法能实现吗？\u003c/p\u003e\n",
+      "Author": "Nanana777",
+      "PubDate": "2022-07-01T00:48:45Z"
+    },
+    {
+      "Title": "索尼国行电视，哪些 tv 游戏值得推荐？ - 问与答",
+      "Link": "https://www.v2ex.com/t/863349",
+      "Description": "\u003cp\u003e声明：\u003c/p\u003e\n\u003cp\u003e1 、只有一台 55x91j 索尼国行电视机和手柄，没有 ps4/5 、switch 或 xbox 游戏主机。\u003c/p\u003e\n\u003cp\u003e2 、不使用模拟器，如 retroarch 等。\u003c/p\u003e\n\u003cp\u003e3 、没有谷歌盒子。\u003c/p\u003e\n\u003cp\u003e众所周知，索尼国行电视不支持谷歌服务，所以只能去找一些不需要谷歌框架的游戏。\u003c/p\u003e\n\u003cp\u003e最近发现下面几款游戏还不错，\u003c/p\u003e\n\u003cp\u003e1 、Beach Buggy Racing=\u0026gt;赛车类游戏，遥控器就能操作。\u003c/p\u003e\n\u003cp\u003e2 、腾讯先锋 /腾讯 Start 云游戏 /网易云游戏=\u0026gt;可玩王者农药、和平精英等热门手游。\u003c/p\u003e\n\u003cp\u003ev 友们，还有哪些好玩的，可以推荐下吗？欢迎跟帖。\u003c/p\u003e\n",
+      "Author": "coolworker",
+      "PubDate": "2022-07-01T00:47:00Z"
+    },
+    {
+      "Title": "种族主义在中国是一个需要解决的社会问题吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/863348",
+      "Description": "\u003cp\u003e问这个是因为某中国游戏开发商开发的二次元多平台（ Windows/Android/iOS/Play Station ）开放世界游戏因为可操作角色的肤色问题在英文互联网引起了争议。\u003c/p\u003e\n\u003cp\u003e有人认为是因为开发商来自中国因此忽略了这个问题，也有人认为中国同样存在严重的族歧视问题，只是宣传掩盖了它们。\u003c/p\u003e\n",
+      "Author": "c6h6cl6",
+      "PubDate": "2022-07-01T00:37:55Z"
+    },
+    {
       "Title": "Win10 + 4k 快速启动栏的显示问题，已经自己写程序搞定啦。需要的可以 GitHub 下载尝试一下 - 分享创造",
       "Link": "https://www.v2ex.com/t/863346",
       "Description": "前置帖子: \u003ca target=\"_blank\" href=\"https://www.v2ex.com/t/860215\" rel=\"nofollow noopener\"\u003ehttps://www.v2ex.com/t/860215\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e两周前发帖子询问了一波，貌似还在用快速启动栏的人不多，也没找到解决方案。\u003cbr /\u003e\u003cbr /\u003e之前我说准备用 DeskBand 自己写程序搞定，现在已经写好了。找了一圈示例程序，只找到 \u003ca target=\"_blank\" href=\"https://github.com/20154530/DeskBandTest\" rel=\"nofollow noopener\"\u003ehttps://github.com/20154530/DeskBandTest\u003c/a\u003e 这个默认就能很好的自动缩放。所以最终是以这个项目为基础修改来的。\u003cbr /\u003e\u003cbr /\u003eGitHub 项目地址: \u003ca target=\"_blank\" href=\"https://github.com/wudicgi/Win10QuickLaunchBar\" rel=\"nofollow noopener\"\u003ehttps://github.com/wudicgi/Win10QuickLaunchBar\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e需要的小伙伴可以直接下载 release 压缩包使用。",

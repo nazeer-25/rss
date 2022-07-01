@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于付费 APP 加密方式的一些疑问 - 程序员</title>
+      <link>https://www.v2ex.com/t/863351</link>
+      <description>&lt;p&gt;可能因为我的水平有限，我所能想到的加密方式似乎都没有实际用处。&lt;/p&gt;&#xA;&lt;p&gt;比如，某个业务场景是付费用户可以创建无限的素材，而非付费用户只能创建不高于某数量的素材。&lt;/p&gt;&#xA;&lt;p&gt;虽然我已经用了各种方式来加密这个“某数量”的值，不过不管前面写的多绕，但是最终还是会回归到一个 &lt;code&gt;if&lt;/code&gt; 逻辑判断。&lt;/p&gt;&#xA;&lt;p&gt;比如，针对上述场景，我是这样写的：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;    val a = &#34;RWM=&#34;&#xA;    val b = a.decodeBase64()?.string(Charset.forName(&#34;utf8&#34;)) ?: &#34;${Char(0)}${Char(0)}&#34;&#xA;&#xA;    val realNum = 10&#xA;&#xA;    if (realNum &amp;lt;= b.toCharArray()[1].code - b.toCharArray()[0].code) {&#xA;        println(&#34;pass&#34;)&#xA;    }&#xA;    else {&#xA;        println(&#34;you need pay first&#34;)&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是反编译下来是这样的：&lt;/p&gt;&#xA;&lt;p&gt;（节选）&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;      if (realNum &amp;lt;= var8 - var3) {&#xA;         var4 = &#34;pass&#34;;&#xA;         System.out.println(var4);&#xA;      } else {&#xA;         var4 = &#34;you need pay first&#34;;&#xA;         System.out.println(var4);&#xA;      }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;不管你前面写的有多复杂，最终还是会回归到简单的 &lt;code&gt;if&lt;/code&gt; 逻辑判断，别人修改时只需要删除或者直接改一下这个判断就能轻松破解了。&lt;/p&gt;&#xA;&lt;p&gt;判断是否付费同理，不管前面写的多复杂，最终会回归到简单的逻辑判断。&lt;/p&gt;&#xA;&lt;p&gt;所以我现在加密完全依赖于加固，但是加固也只能防的住“脚本小子”一键破解，如果是有大牛专门破解的话，也很容易被脱壳。&lt;/p&gt;&#xA;&lt;p&gt;虽然防住“脚本小子”已经满足我的需求了，但是我还是想知道，应该怎么在不加固的情况下避免被“一键”破解呢？&lt;/p&gt;&#xA;&lt;p&gt;据我所知，某个业内有名的 APP ，就没有使用加固，但是就是至今没被破解，甚至作者还专门搞了个悬赏，让别人区破解它。据我了解的是，至今没人破解成功。&lt;/p&gt;&#xA;&lt;p&gt;补充：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;APP 性质决定了没法将需要加密的逻辑放到服务器避免被本地破解&lt;/li&gt;&#xA;&lt;li&gt;上述代码只是做了一个示例，实际使用比这个复杂，而且核心代码也是写在 c++ 中的，不过正如我上述说的，即使写在 c++ 中，最终也是回归到 java 调用 c++的代码，然后做一个简单的逻辑判断&lt;/li&gt;&#xA;&lt;li&gt;我想到的是把加密和业务逻辑混合在一起，但是自己实际测试过，即使这样反编译后效果也不理想。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>equationl</author>
+      <pubDate>01 Jul 2022 00:56:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>iPhone 如何禁止删除 esim 卡号？ - Apple</title>
+      <link>https://www.v2ex.com/t/863350</link>
+      <description>&lt;p&gt;因为 esim 下发后难以补办（或者说是完全补不了），尝试了家庭的儿童账号、监管模式，都无法实现，在蜂窝那里点一下移除蜂窝号码就会删掉，有什么办法能实现吗？&lt;/p&gt;&#xA;</description>
+      <author>Nanana777</author>
+      <pubDate>01 Jul 2022 00:48:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>索尼国行电视，哪些 tv 游戏值得推荐？ - 问与答</title>
+      <link>https://www.v2ex.com/t/863349</link>
+      <description>&lt;p&gt;声明：&lt;/p&gt;&#xA;&lt;p&gt;1 、只有一台 55x91j 索尼国行电视机和手柄，没有 ps4/5 、switch 或 xbox 游戏主机。&lt;/p&gt;&#xA;&lt;p&gt;2 、不使用模拟器，如 retroarch 等。&lt;/p&gt;&#xA;&lt;p&gt;3 、没有谷歌盒子。&lt;/p&gt;&#xA;&lt;p&gt;众所周知，索尼国行电视不支持谷歌服务，所以只能去找一些不需要谷歌框架的游戏。&lt;/p&gt;&#xA;&lt;p&gt;最近发现下面几款游戏还不错，&lt;/p&gt;&#xA;&lt;p&gt;1 、Beach Buggy Racing=&amp;gt;赛车类游戏，遥控器就能操作。&lt;/p&gt;&#xA;&lt;p&gt;2 、腾讯先锋 /腾讯 Start 云游戏 /网易云游戏=&amp;gt;可玩王者农药、和平精英等热门手游。&lt;/p&gt;&#xA;&lt;p&gt;v 友们，还有哪些好玩的，可以推荐下吗？欢迎跟帖。&lt;/p&gt;&#xA;</description>
+      <author>coolworker</author>
+      <pubDate>01 Jul 2022 00:47:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>种族主义在中国是一个需要解决的社会问题吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/863348</link>
+      <description>&lt;p&gt;问这个是因为某中国游戏开发商开发的二次元多平台（ Windows/Android/iOS/Play Station ）开放世界游戏因为可操作角色的肤色问题在英文互联网引起了争议。&lt;/p&gt;&#xA;&lt;p&gt;有人认为是因为开发商来自中国因此忽略了这个问题，也有人认为中国同样存在严重的族歧视问题，只是宣传掩盖了它们。&lt;/p&gt;&#xA;</description>
+      <author>c6h6cl6</author>
+      <pubDate>01 Jul 2022 00:37:55 +0000</pubDate>
+    </item>
+    <item>
       <title>Win10 + 4k 快速启动栏的显示问题，已经自己写程序搞定啦。需要的可以 GitHub 下载尝试一下 - 分享创造</title>
       <link>https://www.v2ex.com/t/863346</link>
       <description>前置帖子: &lt;a target=&#34;_blank&#34; href=&#34;https://www.v2ex.com/t/860215&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.v2ex.com/t/860215&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;两周前发帖子询问了一波，貌似还在用快速启动栏的人不多，也没找到解决方案。&lt;br /&gt;&lt;br /&gt;之前我说准备用 DeskBand 自己写程序搞定，现在已经写好了。找了一圈示例程序，只找到 &lt;a target=&#34;_blank&#34; href=&#34;https://github.com/20154530/DeskBandTest&#34; rel=&#34;nofollow noopener&#34;&gt;https://github.com/20154530/DeskBandTest&lt;/a&gt; 这个默认就能很好的自动缩放。所以最终是以这个项目为基础修改来的。&lt;br /&gt;&lt;br /&gt;GitHub 项目地址: &lt;a target=&#34;_blank&#34; href=&#34;https://github.com/wudicgi/Win10QuickLaunchBar&#34; rel=&#34;nofollow noopener&#34;&gt;https://github.com/wudicgi/Win10QuickLaunchBar&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;需要的小伙伴可以直接下载 release 压缩包使用。</description>
