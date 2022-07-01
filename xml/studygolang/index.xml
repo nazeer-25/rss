@@ -50,7 +50,7 @@
     </item>
     <item>
       <title>遇到一个很苦恼的问题，go里面大数的进制转换</title>
-      <link>https://studygolang.com/topics/15665#reply0</link>
+      <link>https://studygolang.com/topics/15665#reply1</link>
       <description>&lt;p&gt;我现在遇到一个问题，一个大数字符串10进制，不能转int64（超过int64的长度），怎么把它转成64进制的字符串呢&lt;/p&gt;&#xA;</description>
     </item>
     <item>
@@ -59,14 +59,18 @@
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;题目解析&lt;/strong&gt; &lt;a href=&#34;https://www.golangroadmap.com/&#34;&gt;GOLANG ROADMAP社区&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;h2&gt;&lt;strong&gt;答案&lt;/strong&gt;（自由）&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;读写锁的底层是基于互斥锁实现的。&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;为什么有读写锁，它解决了什么问题？（使用场景）&lt;/li&gt;&#xA;&lt;li&gt;它的底层原理是什么？&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;在这里我会结合 Go 中的读写锁 RWMutex 进行介绍。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我们通过与 Mutex 对比得出答案。Mutex 是不区分 goroutine 对共享资源的操作行为的，在读操作、它会上锁，在写操作，它也会上锁，当一段时间内，读操作居多时，读操作在 Mutex 的保护下也不得不变为串行访问，对性能的影响也就比较大了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;RWMutex 读写锁的诞生为了区分读写操作，在进行读操作时，goroutine 就不必傻傻的等待了，而是可以并发地访问共享资源，将串行读变成了并行读，提高了读操作的性能。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;读写锁针对解决一类问题：readers-writes ，同时有多个读或者多个写操作时，只要有一个线程在执行写操作，其他的线程都不能进行读操作。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;读写锁其实有三种工作模型：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Read-perferring 优先读设计，可能会导致写饥饿&lt;/li&gt;&#xA;&lt;li&gt;Write-prferring 优先写设计，避免写饥饿&lt;/li&gt;&#xA;&lt;li&gt;不指定优先级 不区分优先级，解决饥饿问题&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;Go 中的读写锁，工作模型是 Write-prferring 方案。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;&lt;strong&gt;答案&lt;/strong&gt;（栾龙生）&lt;/h2&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;读写锁解决问题&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;主要应用于写操作少，读操作多的场景。读写锁满足以下四条规则。&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;写锁需要阻塞写锁：一个协程拥有写锁时，其他协程写锁定需要阻塞；&lt;/li&gt;&#xA;&lt;li&gt;写锁需要阻塞读锁：一个协程拥有写锁时，其他协程读锁定需要阻塞；&lt;/li&gt;&#xA;&lt;li&gt;读锁需要阻塞写锁：一个协程拥有读锁时，其他协程写锁定需要阻塞；&lt;/li&gt;&#xA;&lt;li&gt;读锁不能阻塞读锁：一个协程拥有读锁时，其他协程也可以拥有读锁。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;读写锁底层实现&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;读写锁内部仍有一个互斥锁，用于将多个写操作隔离开来，其他几个都用于隔离读操作和写操作。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;源码包&lt;code&gt;src/sync/rmmutex.go:RWMutex&lt;/code&gt;中定义了读写锁的数据结构&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type RWMutex struct {&#xA;&#x9;w           Mutex  // held if there are pending writers&#xA;&#x9;writerSem   uint32 // semaphore for writers to wait for completing readers&#xA;&#x9;readerSem   uint32 // semaphore for readers to wait for completing writers&#xA;&#x9;readerCount int32  // number of pending readers&#xA;&#x9;readerWait  int32  // number of departing readers&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
-      <title>go语言中的内存</title>
-      <link>https://studygolang.com/topics/15662#reply1</link>
-      <description>&lt;p&gt;纯go语言小白，以前看过一点java的编程知识。想问一下，go语言中变量创建，内存是怎么分配的。是像java一样有堆、栈、方法区，还是怎样？网上找的视频 ，没有将内存分析，看的很迷茫。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>《Go题库·15》go struct 能不能比较?</title>
       <link>https://studygolang.com/topics/15663#reply0</link>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;题目解析&lt;/strong&gt; &lt;a href=&#34;https://www.golangroadmap.com/&#34;&gt;GOLANG ROADMAP社区&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;h2&gt;&lt;strong&gt;答案&lt;/strong&gt;（engine）&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;需要具体情况具体分析，如果struct中含有不能被比较的字段类型，就不能被比较，如果struct中所有的字段类型都支持比较，那么就可以被比较。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;不可被比较的类型:&#xA;① slice，因为slice是引用类型，除非是和nil比较&#xA;② map，和slice同理，如果要比较两个map只能通过循环遍历实现&#xA;③ 函数类型&lt;/p&gt;&#xA;&#xA;&lt;p&gt;其他的类型都可以比较。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;还有两点值得注意：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;结构体之间只能比较它们是否相等，而不能比较它们的大小。&lt;/li&gt;&#xA;&lt;li&gt;只有所有属性都相等而属性顺序都一致的结构体才能进行比较。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>Gopher们谁能讲讲区块链的前景如何？</title>
+      <link>https://studygolang.com/topics/15660#reply1</link>
+      <description>&lt;p&gt;区块链目前似乎不像前几年那么热闹了。但在招聘网站上还常常看到招Go程序员做区块链的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我自己没有涉足过这个行业，所以想听听这个行业里的Gopher们对区块链技术、区块链行业以及现实应用三个方面发展前景的看法。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>终于有人把云原生架构讲明白了</title>
+      <link>https://studygolang.com/articles/35733#reply0</link>
     </item>
     <item>
       <title>Gopher苦ORM久矣，发布个高效极简的rawsql库</title>
@@ -74,9 +78,9 @@
       <description>&lt;h1&gt;sqlw - ra&lt;strong&gt;&lt;em&gt;w&lt;/em&gt;&lt;/strong&gt; and simple &lt;strong&gt;&lt;em&gt;w&lt;/em&gt;&lt;/strong&gt;rapped std sql&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://godoc.org/github.com/lesismal/sqlw&#34;&gt;&lt;img src=&#34;https://godoc.org/github.com/lesismal/sqlw?status.svg&#34; alt=&#34;Doc&#34; title=&#34;&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://goreportcard.com/report/github.com/lesismal/sqlw&#34;&gt;&lt;img src=&#34;https://goreportcard.com/badge/github.com/lesismal/sqlw&#34; alt=&#34;Go Report Card&#34; title=&#34;&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;LICENSE&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/license-MIT-blue.svg&#34; alt=&#34;MIT licensed&#34; title=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;安装&lt;/h2&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;go get github.com/lesismal/sqlw&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h2&gt;使用&lt;/h2&gt;&#xA;&#xA;&lt;h3&gt;定义结构&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;Noted&lt;/strong&gt;:&#xA;1. 这里示例的结构体标签&lt;code&gt;db&lt;/code&gt;，用于映射结构体与sql的表字段。&#xA;2. 如果您想使用一些三方工具自动生成结构体或sql表，但是三方工具有自定义的结构体标签，您可以在 &lt;code&gt;sqlw.Open&lt;/code&gt; 时指定结构体标签，或者用 &lt;code&gt;db.SetTag()&lt;/code&gt; 方法来修改该标签。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;type Model struct {&#xA;&#x9;Id int64  `db:&amp;quot;id&amp;quot;`&#xA;&#x9;I  int64  `db:&amp;quot;i&amp;quot;`&#xA;&#x9;S  string `db:&amp;quot;s&amp;quot;`&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;创建sqlw.DB实例&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;import (&#xA;    _ &amp;quot;github.com/go-sql-driver/mysql&amp;quot;&#xA;    &amp;quot;github.com/lesismal/sqlw&amp;quot;&#xA;)&#xA;&#xA;// &amp;quot;db&amp;quot; 是您的结构体用于与sql表字段映射的标签, 如果您使用三方工具自动生成结构体或sql表，您可以根据该工具生成的实际标签作为参数&#xA;db, err := sqlw.Open(&amp;quot;mysql&amp;quot;, SqlConnStr, &amp;quot;db&amp;quot;)&#xA;if err != nil {&#xA;    // handle err&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;创建/使用事务&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;tx, err := db.Begin()&#xA;if err != nil {&#xA;    // handle err&#xA;}&#xA;defer tx.Rollback()&#xA;&#xA;// curd logic&#xA;&#xA;err = tx.Commit()&#xA;if err != nil {&#xA;    // handle err&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;创建/使用Stmt/预编译&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;stmt, err := db.Prepare(`your sql`)&#xA;if err != nil {&#xA;    // handle err&#xA;}&#xA;&#xA;// curd logic using stmt&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;插入一条记录&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;model := Model{&#xA;    I: 1,&#xA;    S: &amp;quot;str_1&amp;quot;,&#xA;}&#xA;&#xA;result, err := db.Insert(&amp;quot;insert into sqlw_test.sqlw_test&amp;quot;, &amp;amp;model)&#xA;// result, err := db.Insert(&amp;quot;insert into sqlw_test.sqlw_test(i,s)&amp;quot;, &amp;amp;model) // 插入结构体指定字段&#xA;if err != nil {&#xA;    log.Panic(err)&#xA;}&#xA;log.Println(&amp;quot;sql:&amp;quot;, result.Sql())&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;插入多条记录&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;var models []*Model&#xA;for i:=0; i&amp;lt;3; i++{&#xA;    models = append(models, &amp;amp;Model{&#xA;        I: i,&#xA;        S: fmt.Sprintf(&amp;quot;str_%v&amp;quot;, i),&#xA;    })&#xA;}&#xA;&#xA;result, err := db.Insert(&amp;quot;insert into sqlw_test.sqlw_test&amp;quot;, models)&#xA;// result, err := db.Insert(&amp;quot;insert into sqlw_test.sqlw_test(i,s)&amp;quot;, models) // 插入结构体指定字段&#xA;if err != nil {&#xA;    log.Panic(err)&#xA;}&#xA;log.Println(&amp;quot;sql:&amp;quot;, result.Sql())&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;删除记录&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;deleteId := 1&#xA;result, err := db.Delete(&amp;quot;delete from sqlw_test.sqlw_test where id=?&amp;quot;, deleteId)&#xA;if err != nil {&#xA;    log.Panic(err)&#xA;}&#xA;log.Println(&amp;quot;sql:&amp;quot;, result.Sql())&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;更新记录&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;m := Model{&#xA;    I: 10,&#xA;    S: &amp;quot;str_10&amp;quot;,&#xA;}&#xA;&#xA;updateId := 1&#xA;result, err := db.Update(&amp;quot;update sqlw_test.sqlw_test set i=?, s=? where id=?&amp;quot;, &amp;amp;m, updateId)&#xA;if err != nil {&#xA;    log.Panic(err)&#xA;}&#xA;log.Println(&amp;quot;sql:&amp;quot;, result.Sql())&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;查询单条记录&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;var model Model&#xA;selectId := 1&#xA;result, err := db.Select(&amp;amp;model, &amp;quot;select * from sqlw_test.sqlw_test where id=?&amp;quot;, selectId)&#xA;// result, err := db.Select(&amp;amp;model, &amp;quot;select (i,s) from sqlw_test.sqlw_test where id=?&amp;quot;, selectId) // 查询结构体指定字段&#xA;if err != nil {&#xA;    log.Panic(err)&#xA;}&#xA;log.Println(&amp;quot;model:&amp;quot;, model)&#xA;log.Println(&amp;quot;sql:&amp;quot;, result.Sql())&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;查询多条记录&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;var models []*Model // type []Model is also fine&#xA;result, err = db.Select(&amp;amp;models, &amp;quot;select * from sqlw_test.sqlw_test&amp;quot;)&#xA;// result, err = db.Select(&amp;amp;models, &amp;quot;select (i,s) from sqlw_test.sqlw_test&amp;quot;) // 查询结构体指定字段&#xA;if err != nil {&#xA;    log.Panic(err)&#xA;}&#xA;for i, v := range models {&#xA;    log.Printf(&amp;quot;models[%v]: %v&amp;quot;, i, v)&#xA;}&#xA;log.Println(&amp;quot;sql:&amp;quot;, result.Sql())&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;获取执行的sql语句及参数&lt;/h3&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;code&gt;sqlw.DB/Tx/Stmt&lt;/code&gt; 的所有 &lt;code&gt;Query/QueryRow/Exec/Insert/Delete/Update/Select&lt;/code&gt; 相关方法都会返回 &lt;code&gt;(sqlw.Result, error)&lt;/code&gt;，&#xA;其中的 &lt;code&gt;sqlw.Result&lt;/code&gt; 是非 nil 的，您可以通过 &lt;code&gt;sqlw.Result.Sql()&lt;/code&gt; 获取实际执行的sql语句及参数并辅助日志或调试。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;例如：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;result, err := db.Insert(`insert into t(a,b) values(?,?)`, 1, 2)&#xA;if err != nil {&#xA;    // handle err&#xA;}&#xA;fmt.Println(&amp;quot;sql:&amp;quot;, result.Sql)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;输出：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sql: insert into t(a,b) values(?,?), [1, 2]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;更多示例&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;请参考：&lt;a href=&#34;https://github.com/lesismal/sqlw_examples&#34;&gt;sqlw_examples&lt;/a&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>Gopher们谁能讲讲区块链的前景如何？</title>
-      <link>https://studygolang.com/topics/15660#reply1</link>
-      <description>&lt;p&gt;区块链目前似乎不像前几年那么热闹了。但在招聘网站上还常常看到招Go程序员做区块链的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我自己没有涉足过这个行业，所以想听听这个行业里的Gopher们对区块链技术、区块链行业以及现实应用三个方面发展前景的看法。&lt;/p&gt;&#xA;</description>
+      <title>go语言中的内存</title>
+      <link>https://studygolang.com/topics/15662#reply1</link>
+      <description>&lt;p&gt;纯go语言小白，以前看过一点java的编程知识。想问一下，go语言中变量创建，内存是怎么分配的。是像java一样有堆、栈、方法区，还是怎样？网上找的视频 ，没有将内存分析，看的很迷茫。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>go识别二维码大码</title>
@@ -92,10 +96,6 @@
       <title>《Go题库·13》向为nil的channel发送数据会怎么样</title>
       <link>https://studygolang.com/topics/15657#reply0</link>
       <description>&lt;h2&gt;&lt;strong&gt;答案&lt;/strong&gt;（栾龙生）&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;空通道即无缓冲通道。无缓冲通道上的发送操作将会阻塞，直到另一个goroutine在对应的通道上执行接收操作，这时值传送完成，两个goroutine都可以继续执行。相反，如果接收操作先执行，接收方gorountine将阻塞，直到另一个goroutine在同一个通道上发送一个值。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;使用无缓冲通道进行的通信导致发送和接收goroutine同步化。因此，无缓冲通道也称为同步通道。当一个值在无缓冲通道上传递时，接收值后发送方goroutine才被再次唤醒。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>终于有人把云原生架构讲明白了</title>
-      <link>https://studygolang.com/articles/35733#reply0</link>
     </item>
     <item>
       <title>golang 无法访问导入包中的导出变量？</title>
@@ -135,6 +135,11 @@
       <title>北京五道口顶级游戏公司中台部门招go开发</title>
       <link>https://studygolang.com/topics/15208#reply3</link>
       <description>&lt;p&gt;此岗位长期有效&lt;/p&gt;&#xA;&#xA;&lt;p&gt;公司网站:  &lt;a href=&#34;https://www.hortorgames.com/&#34;&gt;https://www.hortorgames.com/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;坐标: 北京-海淀-五道口&lt;/p&gt;&#xA;&#xA;&lt;p&gt;职责: 负责中台部门通用服务如登录, 注册, 支付, 统计等功能的开发&lt;/p&gt;&#xA;&#xA;&lt;p&gt;要求: 扎实的数据结构与算法等计算机基础知识, 熟悉Redis, MongoDB等后端技术&lt;/p&gt;&#xA;&#xA;&lt;p&gt;薪资: 25-35k  15薪&lt;/p&gt;&#xA;&#xA;&lt;p&gt;福利: 双休, 极少加班, 反对内卷, 3公里内2k租房补贴, 每年两次晋升机会, 豪横年会, 工作和技术氛围好&lt;/p&gt;&#xA;&#xA;&lt;p&gt;联系方式:  加wx  xbtb1354  备注 go内推此岗位长期有效, 长期招聘游戏前后端, 策划美术运营等&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>遇到一个很苦恼的问题，go里面大数的进制转换</title>
+      <link>https://studygolang.com/topics/15665#reply0</link>
+      <description>&lt;p&gt;我现在遇到一个问题，一个大数字符串10进制，不能转int64（超过int64的长度），怎么把它转成64进制的字符串呢&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>西安华为社招</title>
