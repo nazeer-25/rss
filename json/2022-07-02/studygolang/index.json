@@ -67,6 +67,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "json.Marshal注释里面的这2个地方怎么理解",
+      "Link": "https://studygolang.com/topics/15664#reply1",
+      "Description": "\u003col\u003e\n\u003cli\u003e\u003cp\u003e// The nil pointer exception is not strictly necessary\u003cbr\u003e\n// but mimics a similar, necessary exception in the behavior of\u003cbr\u003e\n// UnmarshalJSON.\u003cbr\u003e\n我英文水平有问题吗？翻译如下：\n空指针异常不是必要的，但它在UnmarshalJSON的行为中模仿了一个相似的，必要的异常。\n我怎么感觉不通顺呢？也没法理解。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e// An anonymous struct field of interface type is treated the same as having\u003cbr\u003e\n// that type as its name, rather than being anonymous.\u003cbr\u003e\ninterface类型的匿名字段？这是允许存在的吗？\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "《Go题库·16》读写锁底层是怎么实现的",
       "Link": "https://studygolang.com/topics/15666#reply0",
       "Description": "\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（自由）\u003c/h2\u003e\n\n\u003cp\u003e读写锁的底层是基于互斥锁实现的。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e为什么有读写锁，它解决了什么问题？（使用场景）\u003c/li\u003e\n\u003cli\u003e它的底层原理是什么？\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e在这里我会结合 Go 中的读写锁 RWMutex 进行介绍。\u003c/p\u003e\n\n\u003cp\u003e我们通过与 Mutex 对比得出答案。Mutex 是不区分 goroutine 对共享资源的操作行为的，在读操作、它会上锁，在写操作，它也会上锁，当一段时间内，读操作居多时，读操作在 Mutex 的保护下也不得不变为串行访问，对性能的影响也就比较大了。\u003c/p\u003e\n\n\u003cp\u003eRWMutex 读写锁的诞生为了区分读写操作，在进行读操作时，goroutine 就不必傻傻的等待了，而是可以并发地访问共享资源，将串行读变成了并行读，提高了读操作的性能。\u003c/p\u003e\n\n\u003cp\u003e读写锁针对解决一类问题：readers-writes ，同时有多个读或者多个写操作时，只要有一个线程在执行写操作，其他的线程都不能进行读操作。\u003c/p\u003e\n\n\u003cp\u003e读写锁其实有三种工作模型：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eRead-perferring\u2028优先读设计，可能会导致写饥饿\u003c/li\u003e\n\u003cli\u003eWrite-prferring\u2028优先写设计，避免写饥饿\u003c/li\u003e\n\u003cli\u003e不指定优先级\u2028不区分优先级，解决饥饿问题\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eGo 中的读写锁，工作模型是 Write-prferring 方案。\u003c/p\u003e\n\n\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（栾龙生）\u003c/h2\u003e\n\n\u003col\u003e\n\u003cli\u003e读写锁解决问题\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e主要应用于写操作少，读操作多的场景。读写锁满足以下四条规则。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e写锁需要阻塞写锁：一个协程拥有写锁时，其他协程写锁定需要阻塞；\u003c/li\u003e\n\u003cli\u003e写锁需要阻塞读锁：一个协程拥有写锁时，其他协程读锁定需要阻塞；\u003c/li\u003e\n\u003cli\u003e读锁需要阻塞写锁：一个协程拥有读锁时，其他协程写锁定需要阻塞；\u003c/li\u003e\n\u003cli\u003e读锁不能阻塞读锁：一个协程拥有读锁时，其他协程也可以拥有读锁。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003col\u003e\n\u003cli\u003e读写锁底层实现\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e读写锁内部仍有一个互斥锁，用于将多个写操作隔离开来，其他几个都用于隔离读操作和写操作。\u003c/p\u003e\n\n\u003cp\u003e源码包\u003ccode\u003esrc/sync/rmmutex.go:RWMutex\u003c/code\u003e中定义了读写锁的数据结构\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype RWMutex struct {\n\tw           Mutex  // held if there are pending writers\n\twriterSem   uint32 // semaphore for writers to wait for completing readers\n\treaderSem   uint32 // semaphore for readers to wait for completing writers\n\treaderCount int32  // number of pending readers\n\treaderWait  int32  // number of departing readers\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -84,13 +91,6 @@
       "Title": "《Go题库·15》go struct 能不能比较?",
       "Link": "https://studygolang.com/topics/15663#reply0",
       "Description": "\u003ch2\u003e\u003cstrong\u003e答案\u003c/strong\u003e（engine）\u003c/h2\u003e\n\n\u003cp\u003e需要具体情况具体分析，如果struct中含有不能被比较的字段类型，就不能被比较，如果struct中所有的字段类型都支持比较，那么就可以被比较。\u003c/p\u003e\n\n\u003cp\u003e不可被比较的类型:\n① slice，因为slice是引用类型，除非是和nil比较\n② map，和slice同理，如果要比较两个map只能通过循环遍历实现\n③ 函数类型\u003c/p\u003e\n\n\u003cp\u003e其他的类型都可以比较。\u003c/p\u003e\n\n\u003cp\u003e还有两点值得注意：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e结构体之间只能比较它们是否相等，而不能比较它们的大小。\u003c/li\u003e\n\u003cli\u003e只有所有属性都相等而属性顺序都一致的结构体才能进行比较。\u003c/li\u003e\n\u003c/ul\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "json.Marshal注释里面的这2个地方怎么理解",
-      "Link": "https://studygolang.com/topics/15664#reply1",
-      "Description": "\u003col\u003e\n\u003cli\u003e\u003cp\u003e// The nil pointer exception is not strictly necessary\u003cbr\u003e\n// but mimics a similar, necessary exception in the behavior of\u003cbr\u003e\n// UnmarshalJSON.\u003cbr\u003e\n我英文水平有问题吗？翻译如下：\n空指针异常不是必要的，但它在UnmarshalJSON的行为中模仿了一个相似的，必要的异常。\n我怎么感觉不通顺呢？也没法理解。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e// An anonymous struct field of interface type is treated the same as having\u003cbr\u003e\n// that type as its name, rather than being anonymous.\u003cbr\u003e\ninterface类型的匿名字段？这是允许存在的吗？\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
