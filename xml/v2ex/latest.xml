@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教一个 Nginx 反代配置写法 - NGINX</title>
+      <link>https://www.v2ex.com/t/863697</link>
+      <description>&lt;p&gt;由于现在手上的 WordPress 网站服务器访问比较慢，想用一台香港服务器做 Nginx 全站反代。&lt;/p&gt;&#xA;&lt;p&gt;网站没有做动静分离，只希望对静态图片做缓存处理，动态内容仍然回源。&lt;/p&gt;&#xA;&lt;p&gt;用的是宝塔面板，规则这样写报错&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#PROXY-START/&#xA;&#xA;location ^~ /&#xA;{&#xA;    proxy_pass https://**.**.**.**;&#xA;    proxy_set_header Host ***.*****.***;&#xA;    proxy_set_header X-Real-IP $remote_addr;&#xA;    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#xA;    proxy_set_header REMOTE-HOST $remote_addr;&#xA;&#xA;    add_header X-Cache $upstream_cache_status;&#xA;    add_header CDN-Server HK;&#xA;&#xA;    #Set Nginx Cache&#xA;    &#xA;&#xA;   &#x9;if ( $uri ~* &#34;\.(gif|png|jpg|css|js|woff|woff2)$&#34; )&#xA;    {&#xA;         proxy_ignore_headers Set-Cookie Cache-Control expires;&#xA;         proxy_cache cache_one;&#xA;         proxy_cache_key $host$uri$is_args$args;&#xA;         proxy_cache_valid 200 304 301 302 10080m;&#xA;    }&#xA;    &#xA;   &#xA;}&#xA;&#xA;#PROXY-END/&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;请教大佬们应该如何配置&lt;/p&gt;&#xA;</description>
+      <author>Kei001</author>
+      <pubDate>02 Jul 2022 15:55:17 +0000</pubDate>
+    </item>
+    <item>
       <title>mac 抹掉数据重装系统会升级版本吗 - 问与答</title>
       <link>https://www.v2ex.com/t/863695</link>
       <description>搜了一下，看是需要 command+r 然后抹掉硬盘数据，然后选 重新安装 OS X ，在线下载系统，  请问下这个下载的新系统是不是不是我目前的版本了，应该是比较新的版本了，会不会导致装完卡死了。。。&lt;br /&gt;19 年的 mac</description>
