@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Java 写 gateway 与多个不通协议的单片机(下位机)进行通讯的思路 - Java",
+      "Link": "https://www.v2ex.com/t/863764",
+      "Description": "\u003cp\u003e小白,请教一下 v 站的大神们,目前想 java 写一个网关跟下位机(主要是单片机)进行通讯,实现数据的双向传输.java 有没有什么框架可以快速快发的呀?目前的下位机通讯都是 lan 通讯,主要有 2 种,一种是 TCP 通讯,另外一种是 UDP 通讯.\u003c/p\u003e\n",
+      "Author": "peitaobest",
+      "PubDate": "2022-07-03T08:18:43Z"
+    },
+    {
       "Title": "Filco 键盘好像非常怕潮 - 分享发现",
       "Link": "https://www.v2ex.com/t/863763",
       "Description": "用了三年无进液，钢板鼓泡成这样，离大谱。图片在这里，\u003ca target=\"_blank\" href=\"https://jecvay.com/2022/07/filco-wet-broken.html\" rel=\"nofollow noopener\"\u003ehttps://jecvay.com/2022/07/filco-wet-broken.html\u003c/a\u003e",
@@ -46,13 +53,6 @@
       "PubDate": "2022-07-03T07:34:28Z"
     },
     {
-      "Title": "上海泄露的部分数据 - 分享发现",
-      "Link": "https://www.v2ex.com/t/863757",
-      "Description": "\u003cp\u003e\u003ca href=\"https://i.breached.co/0U3PGt9yj3cbeSAP.tar.gz\" rel=\"nofollow\"\u003ehttps://i.breached.co/0U3PGt9yj3cbeSAP.tar.gz\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "a793657136",
-      "PubDate": "2022-07-03T07:20:46Z"
-    },
-    {
       "Title": "iOS 版 QQ 有人能在群里发闪照吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/863756",
       "Description": "今天有人说自己没有闪照功能了，好友聊天可以发，群发不了，我试了一下所有的 QQ 在 QQ 群里选择照片都只有原图，后面的闪照没了，不管是 iPhone 还是 iPad 都发不了，但是问了安卓用户都可以在群里发闪照。",
@@ -88,13 +88,6 @@
       "PubDate": "2022-07-03T06:09:28Z"
     },
     {
-      "Title": "上海国安数据库疑似泄露 - 信息安全",
-      "Link": "https://www.v2ex.com/t/863750",
-      "Description": "\u003cp\u003e目前国外论坛 breached 发布出售信息，以 10BTC(20 亿美元)的价格出售这些数据\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"image.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://image.xyzcdn.net/FpHUZcr-n8C4Jm8D8UZ-zUflXYvg.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e根据卖家描述，其中信息已经超过 24T ，包含十亿公民及十亿病历信息如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e姓名\n出生地\n地址\n身份证号\n手机号码\n所有犯罪 /案件详细信息\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cimg alt=\"image.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://image.xyzcdn.net/FsFLr0YL3EmqXo-VsmkXCRj0phnW.png\"/\u003e\u003c/p\u003e\n\u003chr/\u003e\n\u003ch2\u003eps：目前所有信息存疑，请继续观望。请不要尝试使用社工库机器人，那反而证明你是个真人。\u003c/h2\u003e\n",
-      "Author": "AxcLsy",
-      "PubDate": "2022-07-03T06:05:37Z"
-    },
-    {
       "Title": "请教一个简单的 Golang interface 和 models 组织的问题 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/863748",
       "Description": "\u003cp\u003e写得比较长，🙏\u003c/p\u003e\n\u003cp\u003e问题是这样的，A 层依赖于 B 层，A 作为使用者想隔离 B 的依赖，定义 interface 的时候该如何设计？\u003c/p\u003e\n\u003cp\u003e比如：controller 层从 JSON 绑定 model ，后续需要调用 service 层的用户处理逻辑\u003c/p\u003e\n\u003cp\u003e代码如下:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\n// package main\n\n// 构造 user service 实例\nuserService := service.NewUserService(...)\n\n// userApp 依赖 user service\nuserApp := controller.NewUserApp(userService)\n\n-----\n\n// package controller\ntype UserApp struct {\n    svc *service.UserService\n}\n\ntype User struct {\n    ...\n}\n\nfunc NewUserApp(svc *service.UserService) *UserApp {\n    return \u0026amp;UserApp{svc: svc}\n}\n\n// handler\nfunc (app* UserApp) Add(c Context) error {\n    // controller 层绑定 model\n    var user User\n    if err := bindJSON(c, \u0026amp;user); err != nil {\n        return err\n    }\n\n    // model 转换\n    var svcUser service.User\n    toSvcUser(user, \u0026amp;svcUser);\n\n    // 调用 service 逻辑\n    return app.svc.AddUser(svcUser)\n}\n\n----\n\n// package service\ntype UserService struct {\n    ...\n}\n\nfunc NewUserService(...) *UserService {\n    ...\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这里为了方便测试 controller ，希望把 service 的依赖作为一个接口，变成下面这样：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\n// package controller\ntype IUserService interface {\n    AddUser(user xxx) error\n}\n\ntype UserApp struct {\n    svc IUserService\n}\n\nfunc NewUserApp(svc IUserService) *UserApp {\n    return \u0026amp;UserApp{svc: svc}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我的疑问是这里的接口应该是下面的哪一种：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\n方法 1:\n\ntype IUserService interface {\n    // 使用自己包的类型\n    AddUser(u User)\n}\n\n方法 2:\n\ntype IUserService interface {\n    // 使用依赖包的类型\n    AddUser(u service.User)\n}\n\n方法 3:\n\n另开一个 models 包。把类型全塞 models 包里面，controller 层和 service 层都依赖于 models\n这种做法似乎不推荐吗？\n\nhttps://rakyll.org/style-packages/\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如果是第一种的话，我是不是还需要在 controller 层加一个 adapter 来适配接口：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\n// package controller\ntype UserServiceAdapter struct {\n    svc *service.UserService\n}\n\n// adapter 实现接口\nfunc (adapter *UserServiceAdapter) AddUser(user User) error {\n    // model 转换\n    var svcUser service.User\n    toSvcUser(user, \u0026amp;svcUser);\n\n    // 调用 service 逻辑\n    return adapter.svc.AddUser(svcUser)\n}\n\nfunc NewUserServiceAdapter(svc *service.UserSvC) *UserServiceAdapter{\n    return \u0026amp;UserServiceAdapter{ svc: svc }\n}\n\n\n// package\n// 构造 user service 实例\nuserService := service.NewUserService(...)\nuserApp := controller.NewUserApp(\n    // 创建 adapter ，adapter 满足接口\n    controller.NewUserServiceAdapter(userService)\n)\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e相关参考链接：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://tutorialedge.net/golang/accept-interfaces-return-structs/\" rel=\"nofollow\"\u003ehttps://tutorialedge.net/golang/accept-interfaces-return-structs/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/golang/go/wiki/CodeReviewComments\" rel=\"nofollow\"\u003ehttps://github.com/golang/go/wiki/CodeReviewComments\u003c/a\u003e\u003c/p\u003e\n",
@@ -102,32 +95,11 @@
       "PubDate": "2022-07-03T05:49:17Z"
     },
     {
-      "Title": "又一炸弹， 23TB 数据。 - 信息安全",
-      "Link": "https://www.v2ex.com/t/863746",
-      "Description": "魔都 23TB 数据库被脱\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e[img]\u003ca target=\"_blank\" href=\"https://i.imgur.com/djtQikl.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/djtQikl.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e[/img]\u003cbr /\u003e\u003cbr /\u003e[img]\u003ca target=\"_blank\" href=\"https://i.imgur.com/9E8lQGT.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/9E8lQGT.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e[/img]",
-      "Author": "moeik",
-      "PubDate": "2022-07-03T05:32:06Z"
-    },
-    {
-      "Title": "上海公安局数据库泄漏，阿里云要赔多少钱。。 - 云计算",
-      "Link": "https://www.v2ex.com/t/863744",
-      "Description": "\u003cp\u003e项目名称：上海市公安局智慧公安综合服务平台建设\n采购单位：上海市公安局\n公告时间：2020 年 05 月 18 日 08:22\n招标公告日期：2019 年 06 月 04 日\n中标日期：2019 年 07 月 15 日\n中标金额 ：2253.000000 万元（人民币）\n中标单位：阿里云计算有限公司\n项目联系人：董晴\n项目联系电话：SHXM-00-20190604-0191\n采购单位地址：武宁南路 128 号\n采购单位联系方式：18818273350\n代理机构名称：上海市政府采购中心\n代理机构地址：上海市大连路 515 号\n代理机构联系方式：021-35968018\u003c/p\u003e\n\u003cp\u003e不知道是不是一个项目，也可能健康码是另外的云承载的。\n核心业务和数据上云一定要慎重呀！！！慎重！！！慎重！！！\u003c/p\u003e\n",
-      "Author": "HansZimmer",
-      "PubDate": "2022-07-03T05:28:19Z"
-    },
-    {
       "Title": "从 Anki 到 Obsidian，我的 Spaced Repetition 经历 - 程序员",
       "Link": "https://www.v2ex.com/t/863740",
       "Description": "\u003cp\u003e原文发表在我的博客：\u003ca href=\"https://felixgibson.github.io/2022/07/03/%E6%88%91%E4%BD%BF%E7%94%A8%E2%80%9C%E9%97%B4%E9%9A%94%E9%87%8D%E5%A4%8D%E2%80%9D%E7%9A%84%E7%BB%8F%E5%8E%86/\" rel=\"nofollow\"\u003e从 Anki 到 Obsidian ，我的 Spaced Repetition 经历\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003eSpaced Repetition 定义和作用\u003c/h2\u003e\n\u003cp\u003e间隔重复，英文叫做\"Spaced Repetition\"，关于它的定义，可看 Spaced repetition-\u003ca href=\"https://en.wikipedia.org/wiki/Spaced_repetition\" rel=\"nofollow\"\u003een.wikipedia.org\u003c/a\u003e 。\n就我半年的使用来看，Spaced Repetition 有多个好处：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e能够回顾知识：很多时候，自己都是在犯过去同样的错误，通过 Spaced Repetition ，相当于加了一个超级强大的 memo ，就像是动态规划算法，一但做过某个东西，下一次就可以直接拿来用。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eself testing：复习卡片，就是回答问题的过程，这个过程能够增加记忆。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e减少选择：很多时候，我们会面临选择的困境，我们的选择太多会让“选择”这个过程就花费很多时间。Spaced Repetition ，减少了选择，你只需要不断地复习就行了。至于复习哪些内容，算法都帮你解决了。其实，抖音这类 app ，也是利用了这个特点，减少了用户的选择。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e孤立语义，避免 illusion of competence: 我在之前的\u003ca href=\"https://felixgibson.github.io/2022/06/05/2022-06-04/\" rel=\"nofollow\"\u003e博客\u003c/a\u003e中提到了\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003emany students experience illusions of competence when they are studying. “repeatedly read their notes or textbook(despite the limited benefits of this strategy), but relatively few engage in self-testing or retrieval practice while studying”\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e很多人不断重复阅读书籍，以为自己什么都会了，但是一考试，却发现实际上还是有很多空缺。这是因为我们对书籍的整体太熟悉造成。要打破这种熟悉，增加单个知识点的连接，就需要孤立每一个知识点，这个可以通过 Spaced Repetition 做到\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e从 Anki 到 Obsidian ，我的 Spaced Repetition 经历\u003c/h2\u003e\n\u003cp\u003e第一次接触到 Spaced Repetition 是通过 Anki ，用了一段时间，发现制作卡片和回顾卡片都太独立，没法整合到笔记系统中。\u003c/p\u003e\n\u003cp\u003e后面把笔记系统从 onenote 切换到了 logseq ，发现 logseq 自带的 flashcards 就是 anki 的便捷版本，随后就开始在 logseq 上制作卡片，然后回顾卡片。但是在这个过程中，发现一些 Logseq 的问题，\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e比如性能堪忧。当我制作了 500+卡片时，已经很卡顿了。\u003c/li\u003e\n\u003cli\u003e功能不全面，有 bug 。比如 flashcard 不具备根据 card-next-schedule 进行排序的功能，由此我还专门提了一个\u003ca href=\"https://github.com/logseq/logseq/pull/4864\" rel=\"nofollow\"\u003ePR 给 Logseq 官方\u003c/a\u003e，但是最终还是放弃了。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e最后把笔记从 Logseq 迁移到 Obsidian ，无意间发现\u003ca href=\"https://github.com/st3v3nmw/obsidian-spaced-repetition\" rel=\"nofollow\"\u003eobsidian-spaced-repetition\u003c/a\u003e这个插件，但是用了一段时间后，发现这个插件有一些功能不满足我的需求，比如制作卡片不灵活，它的\"?\"符号必须在行首且没有空格。不支持 tag 重新排序。等等。\u003c/p\u003e\n\u003cp\u003e最后，自己 fork 了一个分支，维护了起来。由于和原仓库改动较大，就没有提 PR 了。目前当作自己在用，而且 README 更新较慢。。\n\u003ca href=\"https://github.com/FelixGibson/obsidian-spaced-repetition\" rel=\"nofollow\"\u003e自己 fork 的分支的链接\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e总结\u003c/h2\u003e\n\u003cp\u003eSpaced Repetition 适合那些需要一生记忆的知识，对我来说，它能够极大地提高我的效率。希望大家读完本文章都能有所收获，找到自己合适的学习方式。\u003c/p\u003e\n",
       "Author": "jjtom5f2",
       "PubDate": "2022-07-03T04:51:58Z"
-    },
-    {
-      "Title": "如何评价这些数据 [上海国家警察数据库被脱库] - 信息安全",
-      "Link": "https://www.v2ex.com/t/863739",
-      "Description": "\u003cp\u003e原文链接： \u003ca href=\"https://breached.to/Thread-Selling-2022-SHGA-Shanghai-Gov-National-Police-database\" rel=\"nofollow\"\u003ehttps://breached.to/Thread-Selling-2022-SHGA-Shanghai-Gov-National-Police-database\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "NiZerin",
-      "PubDate": "2022-07-03T04:27:36Z"
     },
     {
       "Title": "涉及两级路由的 IPv6 前缀下发（委派）问题求助 - 宽带症候群",
@@ -233,6 +205,41 @@
       "Description": "\u003cp\u003e淘宝上买的那种不是什么牌子的两三百的工学椅，我已经坐坏两个了，感觉应该是因为自己大体重，90kg 搞的鬼。。\u003c/p\u003e\n\u003cp\u003e多谢\u003c/p\u003e\n",
       "Author": "Newyorkcity",
       "PubDate": "2022-07-03T01:01:36Z"
+    },
+    {
+      "Title": "上海泄露的部分数据 - 分享发现",
+      "Link": "https://www.v2ex.com/t/863757",
+      "Description": "\u003cp\u003e\u003ca href=\"https://i.breached.co/0U3PGt9yj3cbeSAP.tar.gz\" rel=\"nofollow\"\u003ehttps://i.breached.co/0U3PGt9yj3cbeSAP.tar.gz\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "a793657136",
+      "PubDate": "2022-07-03T07:20:46Z"
+    },
+    {
+      "Title": "上海国安数据库疑似泄露 - 信息安全",
+      "Link": "https://www.v2ex.com/t/863750",
+      "Description": "\u003cp\u003e目前国外论坛 breached 发布出售信息，以 10BTC(20 亿美元)的价格出售这些数据\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"image.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://image.xyzcdn.net/FpHUZcr-n8C4Jm8D8UZ-zUflXYvg.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e根据卖家描述，其中信息已经超过 24T ，包含十亿公民及十亿病历信息如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e姓名\n出生地\n地址\n身份证号\n手机号码\n所有犯罪 /案件详细信息\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cimg alt=\"image.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://image.xyzcdn.net/FsFLr0YL3EmqXo-VsmkXCRj0phnW.png\"/\u003e\u003c/p\u003e\n\u003chr/\u003e\n\u003ch2\u003eps：目前所有信息存疑，请继续观望。请不要尝试使用社工库机器人，那反而证明你是个真人。\u003c/h2\u003e\n",
+      "Author": "AxcLsy",
+      "PubDate": "2022-07-03T06:05:37Z"
+    },
+    {
+      "Title": "又一炸弹， 23TB 数据。 - 信息安全",
+      "Link": "https://www.v2ex.com/t/863746",
+      "Description": "魔都 23TB 数据库被脱\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e[img]\u003ca target=\"_blank\" href=\"https://i.imgur.com/djtQikl.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/djtQikl.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e[/img]\u003cbr /\u003e\u003cbr /\u003e[img]\u003ca target=\"_blank\" href=\"https://i.imgur.com/9E8lQGT.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/9E8lQGT.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e[/img]",
+      "Author": "moeik",
+      "PubDate": "2022-07-03T05:32:06Z"
+    },
+    {
+      "Title": "上海公安局数据库泄漏，阿里云要赔多少钱。。 - 云计算",
+      "Link": "https://www.v2ex.com/t/863744",
+      "Description": "\u003cp\u003e项目名称：上海市公安局智慧公安综合服务平台建设\n采购单位：上海市公安局\n公告时间：2020 年 05 月 18 日 08:22\n招标公告日期：2019 年 06 月 04 日\n中标日期：2019 年 07 月 15 日\n中标金额 ：2253.000000 万元（人民币）\n中标单位：阿里云计算有限公司\n项目联系人：董晴\n项目联系电话：SHXM-00-20190604-0191\n采购单位地址：武宁南路 128 号\n采购单位联系方式：18818273350\n代理机构名称：上海市政府采购中心\n代理机构地址：上海市大连路 515 号\n代理机构联系方式：021-35968018\u003c/p\u003e\n\u003cp\u003e不知道是不是一个项目，也可能健康码是另外的云承载的。\n核心业务和数据上云一定要慎重呀！！！慎重！！！慎重！！！\u003c/p\u003e\n",
+      "Author": "HansZimmer",
+      "PubDate": "2022-07-03T05:28:19Z"
+    },
+    {
+      "Title": "如何评价这些数据 [上海国家警察数据库被脱库] - 信息安全",
+      "Link": "https://www.v2ex.com/t/863739",
+      "Description": "\u003cp\u003e原文链接： \u003ca href=\"https://breached.to/Thread-Selling-2022-SHGA-Shanghai-Gov-National-Police-database\" rel=\"nofollow\"\u003ehttps://breached.to/Thread-Selling-2022-SHGA-Shanghai-Gov-National-Police-database\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "NiZerin",
+      "PubDate": "2022-07-03T04:27:36Z"
     },
     {
       "Title": "迫于很久没玩 GTA5 了，大家有没有推荐一个便宜的本本玩~ - 问与答",
