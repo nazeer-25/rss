@@ -4,6 +4,73 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Nydus 开源项目 - 将 npm 包安装速度提高 8 倍，容器启动速度提高 100 倍 - 分享创造</title>
+      <link>https://www.v2ex.com/t/863924</link>
+      <description>&lt;p&gt;最近几年发生了很多事，我的个人项目&lt;a href=&#34;https://v2ex.com/t/862975&#34; rel=&#34;nofollow&#34;&gt;纸小墨&lt;/a&gt;因为一些原因鸽掉了，已经打算在后面整理下开源。我也从前端转向了后端，在做和容器镜像相关的工作，最近两年我都在和同事小伙伴们维护开源项目 Nydus ，一个容器镜像 /数据分发加速框架。&lt;/p&gt;&#xA;&lt;p&gt;发挥了下我的业余设计和前端技能，写了个简单的页面：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://nydus.dev/&#34; rel=&#34;nofollow&#34;&gt;https://nydus.dev/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Nydus 简单来说就是实现了容器镜像的按需加载，利用 FUSE 技术，做到在容器启动后，再开始从远端（镜像中心）拉取必须使用的镜像数据（有一篇 &lt;a href=&#34;https://www.usenix.org/conference/fast16/technical-sessions/presentation/harter&#34; rel=&#34;nofollow&#34;&gt;FAST&lt;/a&gt; 论文研究分析说镜像拉取占了大约容器 76% 的启动时间，但却只有 6.4% 的数据是会被容器读取的）。这个思路并不新鲜，我们只是在镜像构建到运行做了很多优化工作，甚至为了提升性能，把它做到了&lt;a href=&#34;https://mp.weixin.qq.com/s/w7lIZxT9Wk6-zJr23oBDzA&#34; rel=&#34;nofollow&#34;&gt;内核态&lt;/a&gt;（ Linux 5.19-rc1+）里去，让内核支持了 Nydus 格式。&lt;/p&gt;&#xA;&lt;p&gt;也许对于小公司来说，镜像加速是完全用不到的，但对于大公司或者有大规模集群，对冷启动扩容延迟要求较高的场景（大促扩容，游戏服务器扩容，函数计算）来说，镜像加速技术不仅能将容器启动分钟级延迟降低到秒级，还能大量节省网络 /存储开销。&lt;/p&gt;&#xA;&lt;p&gt;另外，nydus 实际上也是一个数据分发加速框架，比如很快要开源的 [tnpm](( &lt;a href=&#34;https://dev.to/atian25/in-depth-of-tnpm-rapid-mode-how-could-we-fast-10s-than-pnpm-3bpp&#34; rel=&#34;nofollow&#34;&gt;https://dev.to/atian25/in-depth-of-tnpm-rapid-mode-how-could-we-fast-10s-than-pnpm-3bpp&lt;/a&gt;)) 项目，用 smallfish 测试 npm 包安装速度，基于 nydus 的 tnpm 可以把原生 npm 的 67s 降低到 8s 。其原理就是 nydus 能解决海量小文件（ node_modules 黑洞）解压落盘很慢的问题，所以可以做到非常快。&lt;/p&gt;&#xA;&lt;p&gt;在国内做开源并不容易，大家总是对国内开源项目持怀疑或者不信任的态度，我们是想做好开源的，我们的团队也是 &lt;a href=&#34;https://github.com/kata-containers/kata-containers&#34; rel=&#34;nofollow&#34;&gt;KataContainers&lt;/a&gt; 的主要发起人。&lt;/p&gt;&#xA;&lt;p&gt;如果对 nydus 感兴趣，可以帮忙在 github 给个 star :) &lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/dragonflyoss/image-service&#34; rel=&#34;nofollow&#34;&gt;https://github.com/dragonflyoss/image-service&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>imeoer</author>
+      <pubDate>04 Jul 2022 04:08:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>纯 Swift 语言编写的繁简转换引擎「步天歌」 - iDev</title>
+      <link>https://www.v2ex.com/t/863922</link>
+      <description>&lt;p&gt;虽然世间已经有 SwiftyOpenCC 了，但这玩意实在太臃肿。其内部的构造之复杂，实在过于牛鼎烹鸡。&lt;/p&gt;&#xA;&lt;p&gt;于是就有了用纯 Swift 语言打造的步天歌引擎。&lt;/p&gt;&#xA;&lt;p&gt;步天歌引擎 (Hotenka Engine) 是一套简繁转换模组，将 Nick Chen 的 ObjC 模组「 NCChineseConverter 」用 Swift 重写而得。简繁转换资料改用 OpenCC 的转换资料（ Apache License 2.0 ）且有做了一些修改。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://gitee.com/vChewing/Hotenka&#34; rel=&#34;nofollow&#34;&gt;https://gitee.com/vChewing/Hotenka&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;使用方法请参见仓库内的 HotenkaTest.swift 档案。要编译 plist 词库的话，跑一遍单元测试即可自动生成 plist 词库档案。&lt;/p&gt;&#xA;&lt;p&gt;仓库内自带的简繁词库是基于 OpenCC 原厂词库改来的，没有香港繁体支持。但各位可以自己看词库格式自己修改制作。也可以直接用 NCChineseConverter 仓库内的 Python 脚本来生成词库档案（需要先将 Python 2 脚本转换成 Python 3 脚本、且更正其中的 Wikipedia 相关档案的网址为最新的版本）。&lt;/p&gt;&#xA;&lt;p&gt;$ EOF.&lt;/p&gt;&#xA;</description>
+      <author>ShikiSuen</author>
+      <pubDate>04 Jul 2022 03:59:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>为什么 开源中国 总是喜欢带节奏? - 程序员</title>
+      <link>https://www.v2ex.com/t/863921</link>
+      <description>&lt;p&gt;比如例用微信订阅号发布或者转发各种带着仇恨情绪信息&lt;/p&gt;&#xA;&lt;h2&gt;&lt;a href=&#34;https://postimg.cc/D4420m13&#34; rel=&#34;nofollow&#34;&gt;Dingtalk-20220704112837.jpg&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;h2&gt;很喜欢用公众号发布相关信息 不太喜欢这样的运营&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://postimg.cc/GH0RzLk9&#34; rel=&#34;nofollow&#34;&gt;Dingtalk-20220704112837.jpg&lt;/a&gt;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;最后说一下 gitlab 及文档都是开源的。gitlab 可以私有化部署,目前公司内部就是用的 Gitlab.&lt;/p&gt;&#xA;&lt;p&gt;开源中国 Gitee 不是开源的,私有化部署的费用对于中小型公司是一笔较大开支.&lt;/p&gt;&#xA;&lt;p&gt;本人也用 gitee, 希望能做好一点.&lt;/p&gt;&#xA;</description>
+      <author>anviod</author>
+      <pubDate>04 Jul 2022 03:57:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>服务端有什么类似 Vue 依赖收集模式的实现吗？用来在数据更新后做刷新缓存之类的操作 - 程序员</title>
+      <link>https://www.v2ex.com/t/863920</link>
+      <author>Sin</author>
+      <pubDate>04 Jul 2022 03:55:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>群晖 NAS + 全 SSD 硬盘 能把噪声压制到无感么？ - 问与答</title>
+      <link>https://www.v2ex.com/t/863919</link>
+      <description>想放在书房。&lt;br /&gt;&lt;br /&gt;我有一台 win 笔记本 24 小时开着，风扇低速转，不把耳朵凑过去听听不到。我所说的噪音“无感”就是这个感觉。</description>
+      <author>ttgo</author>
+      <pubDate>04 Jul 2022 03:52:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>通过 CDN 引入来使用 vue3-easy-data-table - Vue.js</title>
+      <link>https://www.v2ex.com/t/863918</link>
+      <description>&lt;h1&gt;Steps:&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;引入！&#xA;&lt;img class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://preview.redd.it/hb7lsclxsc991.png?width=1866&amp;amp;format=png&amp;amp;auto=webp&amp;amp;s=a83854482e1f43ada49e3a3ff6353a79d96c6916&#34;/&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;使用！&#xA;&lt;img class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://preview.redd.it/xujaxclxsc991.png?width=960&amp;amp;crop=smart&amp;amp;auto=webp&amp;amp;s=eabc267bcb5f108da964b87d8240c1159332f820&#34;/&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;awesome ！&#xA;&lt;img class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://preview.redd.it/aybk4d61uc991.png?width=2012&amp;amp;format=png&amp;amp;auto=webp&amp;amp;s=5a76421b9110fc69ff8f274ff39ab549d6b2e30d&#34;/&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1&gt;ES module or UMD ？&lt;/h1&gt;&#xA;&lt;p&gt;项目的 build tool 用的 vite ，打包出 xxxx.es.js(ES module 格式)和 xxxx.umd.js(UMD 格式)两种结果，本来想推荐在浏览器中通过 script 标签引入 CDN 的 ES module 文件并且使用的，就像下面这样：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;link href=&#34;https://unpkg.com/vue3-easy-data-table/dist/style.css&#34; rel=&#34;stylesheet&#34;&amp;gt;&#xA;&#xA;&amp;lt;body&amp;gt;&#xA;  &amp;lt;div id=&#34;app&#34;&amp;gt;&#xA;    &amp;lt;easy-data-table&#xA;      :headers=&#34;headers&#34;&#xA;      :items=&#34;items&#34;&#xA;    /&amp;gt;&#xA;  &amp;lt;/div&amp;gt;&#xA;&#xA;  &amp;lt;script type=&#34;importmap&#34;&amp;gt;&#xA;    {&#xA;      &#34;imports&#34;: {&#xA;        &#34;vue&#34;: &#34;https://cdn.jsdelivr.net/npm/vue@3.2.1/dist/vue.global.js&#34;,&#xA;        &#34;vue3-easy-data-table&#34;: &#34;https://unpkg.com/vue3-easy-data-table&#34;&#xA;      }&#xA;    }&#xA;  &amp;lt;/script&amp;gt;&#xA;  &#xA;  &amp;lt;script type=&#34;module&#34;&amp;gt;&#xA;    import { createApp } from &#39;vue&#39;&#xA;    import Vue3EasyDataTable from &#39;vue3-easy-data-table&#39;;&#xA;&#xA;    const App = createApp({&#xA;        components: {&#xA;          EasyDataTable: Vue3EasyDataTable,&#xA;        },&#xA;        data () {&#xA;          return {&#xA;            headers:[&#xA;              { text: &#34;PLAYER&#34;, value: &#34;player&#34; },&#xA;              { text: &#34;TEAM&#34;, value: &#34;team&#34;},&#xA;              { text: &#34;NUMBER&#34;, value: &#34;number&#34;},&#xA;              { text: &#34;POSITION&#34;, value: &#34;position&#34;},&#xA;              { text: &#34;HEIGHT&#34;, value: &#34;indicator.height&#34;},&#xA;              { text: &#34;WEIGHT (lbs)&#34;, value: &#34;indicator.weight&#34;, sortable: true},&#xA;              { text: &#34;LAST ATTENDED&#34;, value: &#34;lastAttended&#34;, width: 200},&#xA;              { text: &#34;COUNTRY&#34;, value: &#34;country&#34;},&#xA;            ],&#xA;            items: [&#xA;              { player: &#34;Stephen Curry&#34;, team: &#34;GSW&#34;, number: 30, position: &#39;G&#39;, indicator: {&#34;height&#34;: &#39;6-2&#39;, &#34;weight&#34;: 185}, lastAttended: &#34;Davidson&#34;, country: &#34;USA&#34;},&#xA;              { player: &#34;Lebron James&#34;, team: &#34;LAL&#34;, number: 6, position: &#39;F&#39;, indicator: {&#34;height&#34;: &#39;6-9&#39;, &#34;weight&#34;: 250}, lastAttended: &#34;St. Vincent-St. Mary HS (OH)&#34;, country: &#34;USA&#34;},&#xA;              { player: &#34;Kevin Durant&#34;, team: &#34;BKN&#34;, number: 7, position: &#39;F&#39;, indicator: {&#34;height&#34;: &#39;6-10&#39;, &#34;weight&#34;: 240}, lastAttended: &#34;Texas-Austin&#34;, country: &#34;USA&#34;},&#xA;              { player: &#34;Giannis Antetokounmpo&#34;, team: &#34;MIL&#34;, number: 34, position: &#39;F&#39;, indicator: {&#34;height&#34;: &#39;6-11&#39;, &#34;weight&#34;: 242}, lastAttended: &#34;Filathlitikos&#34;, country: &#34;Greece&#34;},&#xA;            ],&#xA;          }&#xA;        },&#xA;      })&#xA;&#xA;    if (document.getElementById(&#39;app&#39;)) {&#xA;      App.mount(&#39;#app&#39;)&#xA;    }&#xA;  &amp;lt;/script&amp;gt;&#xA;&amp;lt;/body&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;不过 safari,firefox 等浏览器都还不支持&lt;code&gt;importmap&lt;/code&gt;的用法:&lt;a href=&#34;https://caniuse.com/?search=importmap&#34; rel=&#34;nofollow&#34;&gt;https://caniuse.com/?search=importmap&lt;/a&gt;&#xA;所以还是用了老办法，在打包入口文件 index.ts 中检测浏览器 vue 环境并全局注册 Vue3EasyDataTable 组件，&lt;a href=&#34;https://github.com/HC200ok/vue3-easy-data-table/blob/main/src/index.ts%EF%BC%9A&#34; rel=&#34;nofollow&#34;&gt;https://github.com/HC200ok/vue3-easy-data-table/blob/main/src/index.ts：&lt;/a&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-ts&#34;&gt;if (typeof window !== &#39;undefined&#39; &amp;amp;&amp;amp; window.Vue) {&#xA;  window.Vue.createApp({}).component(&#39;Vue3EasyDataTable&#39;, DataTable);&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后使用的时候通过&lt;code&gt;window[&#39;vue3-easy-data-table&#39;]&lt;/code&gt;获取。&lt;/p&gt;&#xA;&lt;h1&gt;文档&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://hc200ok.github.io/vue3-easy-data-table-doc/getting-started/via-cdn.html&#34; rel=&#34;nofollow&#34;&gt;https://hc200ok.github.io/vue3-easy-data-table-doc/getting-started/via-cdn.html&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;如有建议或需求，欢迎提 issue ，项目地址：&#xA;&lt;a href=&#34;https://github.com/HC200ok/vue3-easy-data-table/&#34; rel=&#34;nofollow&#34;&gt;https://github.com/HC200ok/vue3-easy-data-table/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;如果觉得还不错，欢迎给我一个 github⭐支持我一下，谢谢！&lt;/p&gt;&#xA;&lt;img class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://image.space.rakuten.co.jp/d/strg/ctrl/9/c4317c40d491bd7e1ecd0e90e26d936c1d52cbf5.23.9.9.3.gif&#34;/&gt;</description>
+      <author>hc93</author>
+      <pubDate>04 Jul 2022 03:51:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>M1 pro ，飞利浦 9 合一扩展坞发热 - MacBook Pro</title>
+      <link>https://www.v2ex.com/t/863916</link>
+      <description>&lt;p&gt;14 寸 mbp2021 m1pro ，买了飞利浦 9 合一扩展坞，只接了一个网口，使用下来会发热。今天用回贝尔金的网口转 typec 基本没啥热感。&lt;/p&gt;&#xA;&lt;p&gt;之前贝尔金接 16 款 intel 的 mbp 倒是也发热。挺奇怪的。&lt;/p&gt;&#xA;</description>
+      <author>yuthelloworld</author>
+      <pubDate>04 Jul 2022 03:50:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问有没有济南的交友群，周末可以出来耍的？ - 济南</title>
+      <link>https://www.v2ex.com/t/863915</link>
+      <author>v2user89</author>
+      <pubDate>04 Jul 2022 03:49:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>求 mac 上 git 可视化工具 - 程序员</title>
+      <link>https://www.v2ex.com/t/863913</link>
+      <description>&lt;p&gt;windows 上用惯了小乌龟进行代码的可视化差异对比，文件行的追溯，重要的是命令行切换分支后，小乌龟已经打开的面包还是原来的面板，方便进行多个 hash 号的 cherry pick,source tree 就不行了，命令行切分支后，source tree 会马上刷新成当前分支的 history,  各位大佬 mac 上都用啥&lt;/p&gt;&#xA;</description>
+      <author>fxjson</author>
+      <pubDate>04 Jul 2022 03:47:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>内向的人有哪些优势? - 问与答</title>
+      <link>https://www.v2ex.com/t/863912</link>
+      <author>scalaer</author>
+      <pubDate>04 Jul 2022 03:46:27 +0000</pubDate>
+    </item>
+    <item>
       <title>求分享提升自我的公众号，视频号 - 程序员</title>
       <link>https://www.v2ex.com/t/863911</link>
       <description>&lt;p&gt;有没有类型 B 站 [ Go 夜读] 一类的分享，不限于技术，产品，业务，之类的分享都可。&lt;/p&gt;&#xA;</description>

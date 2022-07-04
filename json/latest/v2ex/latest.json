@@ -4,6 +4,76 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Nydus 开源项目 - 将 npm 包安装速度提高 8 倍，容器启动速度提高 100 倍 - 分享创造",
+      "Link": "https://www.v2ex.com/t/863924",
+      "Description": "\u003cp\u003e最近几年发生了很多事，我的个人项目\u003ca href=\"https://v2ex.com/t/862975\" rel=\"nofollow\"\u003e纸小墨\u003c/a\u003e因为一些原因鸽掉了，已经打算在后面整理下开源。我也从前端转向了后端，在做和容器镜像相关的工作，最近两年我都在和同事小伙伴们维护开源项目 Nydus ，一个容器镜像 /数据分发加速框架。\u003c/p\u003e\n\u003cp\u003e发挥了下我的业余设计和前端技能，写了个简单的页面：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://nydus.dev/\" rel=\"nofollow\"\u003ehttps://nydus.dev/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eNydus 简单来说就是实现了容器镜像的按需加载，利用 FUSE 技术，做到在容器启动后，再开始从远端（镜像中心）拉取必须使用的镜像数据（有一篇 \u003ca href=\"https://www.usenix.org/conference/fast16/technical-sessions/presentation/harter\" rel=\"nofollow\"\u003eFAST\u003c/a\u003e 论文研究分析说镜像拉取占了大约容器 76% 的启动时间，但却只有 6.4% 的数据是会被容器读取的）。这个思路并不新鲜，我们只是在镜像构建到运行做了很多优化工作，甚至为了提升性能，把它做到了\u003ca href=\"https://mp.weixin.qq.com/s/w7lIZxT9Wk6-zJr23oBDzA\" rel=\"nofollow\"\u003e内核态\u003c/a\u003e（ Linux 5.19-rc1+）里去，让内核支持了 Nydus 格式。\u003c/p\u003e\n\u003cp\u003e也许对于小公司来说，镜像加速是完全用不到的，但对于大公司或者有大规模集群，对冷启动扩容延迟要求较高的场景（大促扩容，游戏服务器扩容，函数计算）来说，镜像加速技术不仅能将容器启动分钟级延迟降低到秒级，还能大量节省网络 /存储开销。\u003c/p\u003e\n\u003cp\u003e另外，nydus 实际上也是一个数据分发加速框架，比如很快要开源的 [tnpm](( \u003ca href=\"https://dev.to/atian25/in-depth-of-tnpm-rapid-mode-how-could-we-fast-10s-than-pnpm-3bpp\" rel=\"nofollow\"\u003ehttps://dev.to/atian25/in-depth-of-tnpm-rapid-mode-how-could-we-fast-10s-than-pnpm-3bpp\u003c/a\u003e)) 项目，用 smallfish 测试 npm 包安装速度，基于 nydus 的 tnpm 可以把原生 npm 的 67s 降低到 8s 。其原理就是 nydus 能解决海量小文件（ node_modules 黑洞）解压落盘很慢的问题，所以可以做到非常快。\u003c/p\u003e\n\u003cp\u003e在国内做开源并不容易，大家总是对国内开源项目持怀疑或者不信任的态度，我们是想做好开源的，我们的团队也是 \u003ca href=\"https://github.com/kata-containers/kata-containers\" rel=\"nofollow\"\u003eKataContainers\u003c/a\u003e 的主要发起人。\u003c/p\u003e\n\u003cp\u003e如果对 nydus 感兴趣，可以帮忙在 github 给个 star :) \u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/dragonflyoss/image-service\" rel=\"nofollow\"\u003ehttps://github.com/dragonflyoss/image-service\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "imeoer",
+      "PubDate": "2022-07-04T04:08:01Z"
+    },
+    {
+      "Title": "纯 Swift 语言编写的繁简转换引擎「步天歌」 - iDev",
+      "Link": "https://www.v2ex.com/t/863922",
+      "Description": "\u003cp\u003e虽然世间已经有 SwiftyOpenCC 了，但这玩意实在太臃肿。其内部的构造之复杂，实在过于牛鼎烹鸡。\u003c/p\u003e\n\u003cp\u003e于是就有了用纯 Swift 语言打造的步天歌引擎。\u003c/p\u003e\n\u003cp\u003e步天歌引擎 (Hotenka Engine) 是一套简繁转换模组，将 Nick Chen 的 ObjC 模组「 NCChineseConverter 」用 Swift 重写而得。简繁转换资料改用 OpenCC 的转换资料（ Apache License 2.0 ）且有做了一些修改。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://gitee.com/vChewing/Hotenka\" rel=\"nofollow\"\u003ehttps://gitee.com/vChewing/Hotenka\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e使用方法请参见仓库内的 HotenkaTest.swift 档案。要编译 plist 词库的话，跑一遍单元测试即可自动生成 plist 词库档案。\u003c/p\u003e\n\u003cp\u003e仓库内自带的简繁词库是基于 OpenCC 原厂词库改来的，没有香港繁体支持。但各位可以自己看词库格式自己修改制作。也可以直接用 NCChineseConverter 仓库内的 Python 脚本来生成词库档案（需要先将 Python 2 脚本转换成 Python 3 脚本、且更正其中的 Wikipedia 相关档案的网址为最新的版本）。\u003c/p\u003e\n\u003cp\u003e$ EOF.\u003c/p\u003e\n",
+      "Author": "ShikiSuen",
+      "PubDate": "2022-07-04T03:59:08Z"
+    },
+    {
+      "Title": "为什么 开源中国 总是喜欢带节奏? - 程序员",
+      "Link": "https://www.v2ex.com/t/863921",
+      "Description": "\u003cp\u003e比如例用微信订阅号发布或者转发各种带着仇恨情绪信息\u003c/p\u003e\n\u003ch2\u003e\u003ca href=\"https://postimg.cc/D4420m13\" rel=\"nofollow\"\u003eDingtalk-20220704112837.jpg\u003c/a\u003e\u003c/h2\u003e\n\u003ch2\u003e很喜欢用公众号发布相关信息 不太喜欢这样的运营\u003c/h2\u003e\n\u003cp\u003e\u003ca href=\"https://postimg.cc/GH0RzLk9\" rel=\"nofollow\"\u003eDingtalk-20220704112837.jpg\u003c/a\u003e\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e最后说一下 gitlab 及文档都是开源的。gitlab 可以私有化部署,目前公司内部就是用的 Gitlab.\u003c/p\u003e\n\u003cp\u003e开源中国 Gitee 不是开源的,私有化部署的费用对于中小型公司是一笔较大开支.\u003c/p\u003e\n\u003cp\u003e本人也用 gitee, 希望能做好一点.\u003c/p\u003e\n",
+      "Author": "anviod",
+      "PubDate": "2022-07-04T03:57:39Z"
+    },
+    {
+      "Title": "服务端有什么类似 Vue 依赖收集模式的实现吗？用来在数据更新后做刷新缓存之类的操作 - 程序员",
+      "Link": "https://www.v2ex.com/t/863920",
+      "Description": "",
+      "Author": "Sin",
+      "PubDate": "2022-07-04T03:55:09Z"
+    },
+    {
+      "Title": "群晖 NAS + 全 SSD 硬盘 能把噪声压制到无感么？ - 问与答",
+      "Link": "https://www.v2ex.com/t/863919",
+      "Description": "想放在书房。\u003cbr /\u003e\u003cbr /\u003e我有一台 win 笔记本 24 小时开着，风扇低速转，不把耳朵凑过去听听不到。我所说的噪音“无感”就是这个感觉。",
+      "Author": "ttgo",
+      "PubDate": "2022-07-04T03:52:26Z"
+    },
+    {
+      "Title": "通过 CDN 引入来使用 vue3-easy-data-table - Vue.js",
+      "Link": "https://www.v2ex.com/t/863918",
+      "Description": "\u003ch1\u003eSteps:\u003c/h1\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e引入！\n\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://preview.redd.it/hb7lsclxsc991.png?width=1866\u0026amp;format=png\u0026amp;auto=webp\u0026amp;s=a83854482e1f43ada49e3a3ff6353a79d96c6916\"/\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e使用！\n\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://preview.redd.it/xujaxclxsc991.png?width=960\u0026amp;crop=smart\u0026amp;auto=webp\u0026amp;s=eabc267bcb5f108da964b87d8240c1159332f820\"/\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eawesome ！\n\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://preview.redd.it/aybk4d61uc991.png?width=2012\u0026amp;format=png\u0026amp;auto=webp\u0026amp;s=5a76421b9110fc69ff8f274ff39ab549d6b2e30d\"/\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch1\u003eES module or UMD ？\u003c/h1\u003e\n\u003cp\u003e项目的 build tool 用的 vite ，打包出 xxxx.es.js(ES module 格式)和 xxxx.umd.js(UMD 格式)两种结果，本来想推荐在浏览器中通过 script 标签引入 CDN 的 ES module 文件并且使用的，就像下面这样：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-html\"\u003e\u0026lt;link href=\"https://unpkg.com/vue3-easy-data-table/dist/style.css\" rel=\"stylesheet\"\u0026gt;\n\n\u0026lt;body\u0026gt;\n  \u0026lt;div id=\"app\"\u0026gt;\n    \u0026lt;easy-data-table\n      :headers=\"headers\"\n      :items=\"items\"\n    /\u0026gt;\n  \u0026lt;/div\u0026gt;\n\n  \u0026lt;script type=\"importmap\"\u0026gt;\n    {\n      \"imports\": {\n        \"vue\": \"https://cdn.jsdelivr.net/npm/vue@3.2.1/dist/vue.global.js\",\n        \"vue3-easy-data-table\": \"https://unpkg.com/vue3-easy-data-table\"\n      }\n    }\n  \u0026lt;/script\u0026gt;\n  \n  \u0026lt;script type=\"module\"\u0026gt;\n    import { createApp } from 'vue'\n    import Vue3EasyDataTable from 'vue3-easy-data-table';\n\n    const App = createApp({\n        components: {\n          EasyDataTable: Vue3EasyDataTable,\n        },\n        data () {\n          return {\n            headers:[\n              { text: \"PLAYER\", value: \"player\" },\n              { text: \"TEAM\", value: \"team\"},\n              { text: \"NUMBER\", value: \"number\"},\n              { text: \"POSITION\", value: \"position\"},\n              { text: \"HEIGHT\", value: \"indicator.height\"},\n              { text: \"WEIGHT (lbs)\", value: \"indicator.weight\", sortable: true},\n              { text: \"LAST ATTENDED\", value: \"lastAttended\", width: 200},\n              { text: \"COUNTRY\", value: \"country\"},\n            ],\n            items: [\n              { player: \"Stephen Curry\", team: \"GSW\", number: 30, position: 'G', indicator: {\"height\": '6-2', \"weight\": 185}, lastAttended: \"Davidson\", country: \"USA\"},\n              { player: \"Lebron James\", team: \"LAL\", number: 6, position: 'F', indicator: {\"height\": '6-9', \"weight\": 250}, lastAttended: \"St. Vincent-St. Mary HS (OH)\", country: \"USA\"},\n              { player: \"Kevin Durant\", team: \"BKN\", number: 7, position: 'F', indicator: {\"height\": '6-10', \"weight\": 240}, lastAttended: \"Texas-Austin\", country: \"USA\"},\n              { player: \"Giannis Antetokounmpo\", team: \"MIL\", number: 34, position: 'F', indicator: {\"height\": '6-11', \"weight\": 242}, lastAttended: \"Filathlitikos\", country: \"Greece\"},\n            ],\n          }\n        },\n      })\n\n    if (document.getElementById('app')) {\n      App.mount('#app')\n    }\n  \u0026lt;/script\u0026gt;\n\u0026lt;/body\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e不过 safari,firefox 等浏览器都还不支持\u003ccode\u003eimportmap\u003c/code\u003e的用法:\u003ca href=\"https://caniuse.com/?search=importmap\" rel=\"nofollow\"\u003ehttps://caniuse.com/?search=importmap\u003c/a\u003e\n所以还是用了老办法，在打包入口文件 index.ts 中检测浏览器 vue 环境并全局注册 Vue3EasyDataTable 组件，\u003ca href=\"https://github.com/HC200ok/vue3-easy-data-table/blob/main/src/index.ts%EF%BC%9A\" rel=\"nofollow\"\u003ehttps://github.com/HC200ok/vue3-easy-data-table/blob/main/src/index.ts：\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-ts\"\u003eif (typeof window !== 'undefined' \u0026amp;\u0026amp; window.Vue) {\n  window.Vue.createApp({}).component('Vue3EasyDataTable', DataTable);\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e然后使用的时候通过\u003ccode\u003ewindow['vue3-easy-data-table']\u003c/code\u003e获取。\u003c/p\u003e\n\u003ch1\u003e文档\u003c/h1\u003e\n\u003cp\u003e\u003ca href=\"https://hc200ok.github.io/vue3-easy-data-table-doc/getting-started/via-cdn.html\" rel=\"nofollow\"\u003ehttps://hc200ok.github.io/vue3-easy-data-table-doc/getting-started/via-cdn.html\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e如有建议或需求，欢迎提 issue ，项目地址：\n\u003ca href=\"https://github.com/HC200ok/vue3-easy-data-table/\" rel=\"nofollow\"\u003ehttps://github.com/HC200ok/vue3-easy-data-table/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e如果觉得还不错，欢迎给我一个 github⭐支持我一下，谢谢！\u003c/p\u003e\n\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://image.space.rakuten.co.jp/d/strg/ctrl/9/c4317c40d491bd7e1ecd0e90e26d936c1d52cbf5.23.9.9.3.gif\"/\u003e",
+      "Author": "hc93",
+      "PubDate": "2022-07-04T03:51:18Z"
+    },
+    {
+      "Title": "M1 pro ，飞利浦 9 合一扩展坞发热 - MacBook Pro",
+      "Link": "https://www.v2ex.com/t/863916",
+      "Description": "\u003cp\u003e14 寸 mbp2021 m1pro ，买了飞利浦 9 合一扩展坞，只接了一个网口，使用下来会发热。今天用回贝尔金的网口转 typec 基本没啥热感。\u003c/p\u003e\n\u003cp\u003e之前贝尔金接 16 款 intel 的 mbp 倒是也发热。挺奇怪的。\u003c/p\u003e\n",
+      "Author": "yuthelloworld",
+      "PubDate": "2022-07-04T03:50:46Z"
+    },
+    {
+      "Title": "请问有没有济南的交友群，周末可以出来耍的？ - 济南",
+      "Link": "https://www.v2ex.com/t/863915",
+      "Description": "",
+      "Author": "v2user89",
+      "PubDate": "2022-07-04T03:49:15Z"
+    },
+    {
+      "Title": "求 mac 上 git 可视化工具 - 程序员",
+      "Link": "https://www.v2ex.com/t/863913",
+      "Description": "\u003cp\u003ewindows 上用惯了小乌龟进行代码的可视化差异对比，文件行的追溯，重要的是命令行切换分支后，小乌龟已经打开的面包还是原来的面板，方便进行多个 hash 号的 cherry pick,source tree 就不行了，命令行切分支后，source tree 会马上刷新成当前分支的 history,  各位大佬 mac 上都用啥\u003c/p\u003e\n",
+      "Author": "fxjson",
+      "PubDate": "2022-07-04T03:47:13Z"
+    },
+    {
+      "Title": "内向的人有哪些优势? - 问与答",
+      "Link": "https://www.v2ex.com/t/863912",
+      "Description": "",
+      "Author": "scalaer",
+      "PubDate": "2022-07-04T03:46:27Z"
+    },
+    {
       "Title": "求分享提升自我的公众号，视频号 - 程序员",
       "Link": "https://www.v2ex.com/t/863911",
       "Description": "\u003cp\u003e有没有类型 B 站 [ Go 夜读] 一类的分享，不限于技术，产品，业务，之类的分享都可。\u003c/p\u003e\n",
