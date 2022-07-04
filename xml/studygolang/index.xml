@@ -136,25 +136,5 @@
       <link>https://studygolang.com/topics/15640#reply3</link>
       <description>&lt;p&gt;刚开始学go，但是go的包管理实在太混乱，遇到一个问题：我的项目是用go.mod管理的，但是我依赖的包有的是用vendor管理，有的是用go path管理，导致我无法使用这些依赖（会报错），这种情况该怎么解决？&lt;/p&gt;&#xA;</description>
     </item>
-    <item>
-      <title>请大佬们帮忙看下这个是什么问题</title>
-      <link>https://studygolang.com/topics/15668#reply0</link>
-      <description>&lt;p&gt;func (controller *OrdersController) PostAddOrder(c *gin.Context) {&#xA;&#x9;var cGoodsList []models.OrderGoodsList&#xA;&#x9;var tGoodsList models.OrderGoodsList&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;vgoodslist := c.PostFormArray(&amp;quot;goodslist&amp;quot;)&#xA;fmt.Println(vgoodslist)&#xA;for _, v := range vgoodslist {&#xA;&#x9;json.Unmarshal([]byte(v), &amp;amp;tGoodsList)&#xA;&#x9;cGoodsList = append(cGoodsList, tGoodsList)&#xA;}&#xA;c.JSON(200, gin.H{&#xA;&#x9;&amp;quot;data&amp;quot;: cGoodsList,&#xA;})&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;传递的 goodslist = [{&amp;ldquo;goodsName&amp;rdquo;:&amp;ldquo;test1&amp;rdquo;,&amp;ldquo;format&amp;rdquo;:&amp;ldquo;黑色&amp;rdquo;,&amp;ldquo;quantity&amp;rdquo;:1,&amp;ldquo;price&amp;rdquo;:99.99},{&amp;ldquo;goodsName&amp;rdquo;:&amp;ldquo;test2&amp;rdquo;,&amp;ldquo;format&amp;rdquo;:&amp;ldquo;XXL&amp;rdquo;,&amp;ldquo;quantity&amp;rdquo;:2&amp;rdquo;price&amp;rdquo;:199.99}]&lt;/p&gt;&#xA;&#xA;&lt;p&gt;最终结果：&#xA;{&#xA;    &amp;ldquo;data&amp;rdquo;: [&#xA;        {&#xA;            &amp;ldquo;goodsName&amp;rdquo;: &amp;ldquo;test1&amp;rdquo;,&#xA;            &amp;ldquo;format&amp;rdquo;: &amp;ldquo;黑色&amp;rdquo;,&#xA;            &amp;ldquo;quantity&amp;rdquo;: 1,&#xA;            &amp;ldquo;price&amp;rdquo;: 99.99&#xA;        },&#xA;        {&#xA;            &amp;ldquo;goodsName&amp;rdquo;: &amp;ldquo;test1&amp;rdquo;,&#xA;            &amp;ldquo;format&amp;rdquo;: &amp;ldquo;黑色&amp;rdquo;,&#xA;            &amp;ldquo;quantity&amp;rdquo;: 1,&#xA;            &amp;ldquo;price&amp;rdquo;: 99.99&#xA;        }&#xA;    ]&#xA;}&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>一个逃逸分析问题，求指教</title>
-      <link>https://studygolang.com/topics/15636#reply9</link>
-      <description>&lt;p&gt;今天在分析代码时候，突然想到一个事情，在使用channel时候，我看了代码，里面传递的数据时指针类型的。我当时就在考虑，这种做法会不会导致GC压力过大，然后我进行的测试发现的确会比没有指针类型的压力大点（也不是很多）。&#xA;后面我考虑想着能不能换成非指针数据，然后我突然考虑到了一个问题，我们一般接收channel数据时候，都是在一个func中处理，比如：&#xA;&lt;code&gt;&#xA;func rcv() {&#xA;&#x9;for {&#xA;&#x9;&#x9;p := &amp;lt;-pc&#xA;&#x9;&#x9;p.A = 1&#xA;&#x9;}&#xA;}&lt;/code&gt;&#xA;这种方式。这里的pc传递的是非指针数据。我想了一下，也没有发生逃逸，那么问题来了：&#xA;这里的p会分配在栈上，那我的程序一直跑着，不会导致栈空间不足吗？然后还是被分配在堆上？&#xA;求解这里问题，有点没搞懂&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>北京五道口顶级游戏公司中台部门招go开发</title>
-      <link>https://studygolang.com/topics/15208#reply3</link>
-      <description>&lt;p&gt;此岗位长期有效&lt;/p&gt;&#xA;&#xA;&lt;p&gt;公司网站:  &lt;a href=&#34;https://www.hortorgames.com/&#34;&gt;https://www.hortorgames.com/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;坐标: 北京-海淀-五道口&lt;/p&gt;&#xA;&#xA;&lt;p&gt;职责: 负责中台部门通用服务如登录, 注册, 支付, 统计等功能的开发&lt;/p&gt;&#xA;&#xA;&lt;p&gt;要求: 扎实的数据结构与算法等计算机基础知识, 熟悉Redis, MongoDB等后端技术&lt;/p&gt;&#xA;&#xA;&lt;p&gt;薪资: 25-35k  15薪&lt;/p&gt;&#xA;&#xA;&lt;p&gt;福利: 双休, 极少加班, 反对内卷, 3公里内2k租房补贴, 每年两次晋升机会, 豪横年会, 工作和技术氛围好&lt;/p&gt;&#xA;&#xA;&lt;p&gt;联系方式:  加wx  xbtb1354  备注 go内推此岗位长期有效, 长期招聘游戏前后端, 策划美术运营等&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>《Go题库·14》WaitGroup的坑</title>
-      <link>https://studygolang.com/topics/15658#reply0</link>
-      <description>&lt;h2&gt;&lt;strong&gt;答案&lt;/strong&gt;（engine）&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;① Add一个负数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如果计数器的值小于0会直接panic&lt;/p&gt;&#xA;&#xA;&lt;p&gt;②  Add在Wait之后调用&lt;/p&gt;&#xA;&#xA;&lt;p&gt;比如一些子协程开头调用Add结束调用Wait，这些 Wait无法阻塞子协程。正确做法是在开启子协程之前先Add特定的值。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;③ 未置为0就重用&lt;/p&gt;&#xA;&#xA;&lt;p&gt;WaitGroup可以完成一次编排任务，计数值降为0后可以继续被其他任务所用，但是不要在还没使用完的时候就用于其他任务，这样由于带着计数值，很可能出问题。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;④ 复制waitgroup&lt;/p&gt;&#xA;&#xA;&lt;p&gt;WaitGroup有nocopy字段，不能被复制。也意味着WaitGroup不能作为函数的参数。&lt;/p&gt;&#xA;</description>
-    </item>
   </channel>
 </rss>
