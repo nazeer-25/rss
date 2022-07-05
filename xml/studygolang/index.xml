@@ -63,6 +63,11 @@
       <description>&lt;p&gt;构建约束排除 &amp;rsquo;D:/go/src/gorm.io/gorm&amp;rsquo; 中所有的 Go 文件，怎么解决呢&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>新手想请教一个协程批处理任务的问题</title>
+      <link>https://studygolang.com/topics/15671#reply5</link>
+      <description>&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;encoding/json&amp;quot;&#xA;&#x9;&amp;quot;log&amp;quot;&#xA;&#x9;&amp;quot;sync&amp;quot;&#xA;)&#xA;&#xA;var ResData []ItemData&#xA;var ch = make(chan ItemData)&#xA;&#xA;&#xA;func do(u UserRes,item ItemData,p Param, waitGroup *sync.WaitGroup)  {&#xA;&#x9;defer waitGroup.Done()&#xA;&#x9;//do something  5-10s&#xA;&#x9;item.money_total = 1 &#xA;&#x9;ch&amp;lt;-item&#xA;}&#xA;&#xA;func main()  {&#xA;&#x9;sql := &amp;quot;SELECT id FROM user limit 10000&amp;quot;&#xA;&#x9;rows, err := dbCon.Queryx(sql)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatalf(&amp;quot;err: %v&amp;quot;, err)&#xA;&#x9;}&#xA;&#x9;defer rows.Close()&#xA;&#x9;var wg sync.WaitGroup&#xA;&#x9;for rows.Next() {&#xA;&#x9;&#x9;wg.Add(1)&#xA;&#x9;&#x9;var u UserRes&#xA;&#x9;&#x9;var item  ItemData&#xA;&#x9;&#x9;err = rows.StructScan(&amp;amp;u)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;log.Fatalf(&amp;quot;err: %v&amp;quot;, err)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;go do(u,item,p,&amp;amp;wg)&#xA;&#xA;&#x9;&#x9;ResData = append(ResData,&amp;lt;- ch)&#xA;&#x9;}&#xA;&#x9;json, err := json.Marshal(ResData)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatalf(&amp;quot;JSON ERR: %v&amp;quot;, err)&#xA;&#x9;}&#xA;&#x9;wg.Wait()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;这上面是部分代码示意&#xA;大概需求就是我需要给每个用户生成一份报表。每个用户生成时间大概就是5-10s，但是用户比较多&#xA;然后我发现我这样写好像还是需要很久的时间才能全部处理完&#xA;感觉是我对哪块的理解有问题或者是哪里阻塞了。&#xA;或者大佬们一般这种任务是怎么处理的。用什么组件&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>Server端系统，容器该选什么了</title>
       <link>https://studygolang.com/topics/15673#reply0</link>
       <description>&lt;p&gt;centos8 停更了。几乎是最短寿命的server OS&lt;/p&gt;&#xA;&#xA;&lt;p&gt;只有Centos Stream 自动更新的系统。后面搏杀的结果未知。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;docker 吧，k8s 1.24后不直接支持了。改CRI 标准了&lt;/p&gt;&#xA;&#xA;&lt;p&gt;刚看好podman  结果centos 这么整。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;大家都在怎么选择的。&lt;/p&gt;&#xA;</description>
@@ -76,11 +81,6 @@
       <title>删除写屏障的疑问</title>
       <link>https://studygolang.com/topics/15669#reply0</link>
       <description>&lt;p&gt;在学习yuasa删除写屏障的时候大多数的资料都是说删除写屏障是在对某个对象删除引用的时候将被删除的对象写为灰色。 但是go语言原本中配图却是这样的，是将自身节点置为灰色， 请问下这是为什么呀， 还是说这里写错了？&#xA;&lt;img src=&#34;https://static.golangjob.cn/220704/6732f2c936c7e293430caad956441ad9.jpg&#34; alt=&#34;20220704-095835(WeLinkPC).jpg&#34; /&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>新手想请教一个协程批处理任务的问题</title>
-      <link>https://studygolang.com/topics/15671#reply5</link>
-      <description>&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;encoding/json&amp;quot;&#xA;&#x9;&amp;quot;log&amp;quot;&#xA;&#x9;&amp;quot;sync&amp;quot;&#xA;)&#xA;&#xA;var ResData []ItemData&#xA;var ch = make(chan ItemData)&#xA;&#xA;&#xA;func do(u UserRes,item ItemData,p Param, waitGroup *sync.WaitGroup)  {&#xA;&#x9;defer waitGroup.Done()&#xA;&#x9;//do something  5-10s&#xA;&#x9;item.money_total = 1 &#xA;&#x9;ch&amp;lt;-item&#xA;}&#xA;&#xA;func main()  {&#xA;&#x9;sql := &amp;quot;SELECT id FROM user limit 10000&amp;quot;&#xA;&#x9;rows, err := dbCon.Queryx(sql)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatalf(&amp;quot;err: %v&amp;quot;, err)&#xA;&#x9;}&#xA;&#x9;defer rows.Close()&#xA;&#x9;var wg sync.WaitGroup&#xA;&#x9;for rows.Next() {&#xA;&#x9;&#x9;wg.Add(1)&#xA;&#x9;&#x9;var u UserRes&#xA;&#x9;&#x9;var item  ItemData&#xA;&#x9;&#x9;err = rows.StructScan(&amp;amp;u)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;log.Fatalf(&amp;quot;err: %v&amp;quot;, err)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;go do(u,item,p,&amp;amp;wg)&#xA;&#xA;&#x9;&#x9;ResData = append(ResData,&amp;lt;- ch)&#xA;&#x9;}&#xA;&#x9;json, err := json.Marshal(ResData)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatalf(&amp;quot;JSON ERR: %v&amp;quot;, err)&#xA;&#x9;}&#xA;&#x9;wg.Wait()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;这上面是部分代码示意&#xA;大概需求就是我需要给每个用户生成一份报表。每个用户生成时间大概就是5-10s，但是用户比较多&#xA;然后我发现我这样写好像还是需要很久的时间才能全部处理完&#xA;感觉是我对哪块的理解有问题或者是哪里阻塞了。&#xA;或者大佬们一般这种任务是怎么处理的。用什么组件&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>提效120%！优维科技助力德邦快递实现自动化运维</title>
