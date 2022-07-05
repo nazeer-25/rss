@@ -81,6 +81,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "使用gorm出现的导入问题",
+      "Link": "https://studygolang.com/topics/15680#reply0",
+      "Description": "\u003cp\u003e构建约束排除 \u0026rsquo;D:/go/src/gorm.io/gorm\u0026rsquo; 中所有的 Go 文件，怎么解决呢\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "新手想请教一个协程批处理任务的问题",
       "Link": "https://studygolang.com/topics/15671#reply5",
       "Description": "\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;encoding/json\u0026quot;\n\t\u0026quot;log\u0026quot;\n\t\u0026quot;sync\u0026quot;\n)\n\nvar ResData []ItemData\nvar ch = make(chan ItemData)\n\n\nfunc do(u UserRes,item ItemData,p Param, waitGroup *sync.WaitGroup)  {\n\tdefer waitGroup.Done()\n\t//do something  5-10s\n\titem.money_total = 1 \n\tch\u0026lt;-item\n}\n\nfunc main()  {\n\tsql := \u0026quot;SELECT id FROM user limit 10000\u0026quot;\n\trows, err := dbCon.Queryx(sql)\n\tif err != nil {\n\t\tlog.Fatalf(\u0026quot;err: %v\u0026quot;, err)\n\t}\n\tdefer rows.Close()\n\tvar wg sync.WaitGroup\n\tfor rows.Next() {\n\t\twg.Add(1)\n\t\tvar u UserRes\n\t\tvar item  ItemData\n\t\terr = rows.StructScan(\u0026amp;u)\n\t\tif err != nil {\n\t\t\tlog.Fatalf(\u0026quot;err: %v\u0026quot;, err)\n\t\t}\n\t\tgo do(u,item,p,\u0026amp;wg)\n\n\t\tResData = append(ResData,\u0026lt;- ch)\n\t}\n\tjson, err := json.Marshal(ResData)\n\tif err != nil {\n\t\tlog.Fatalf(\u0026quot;JSON ERR: %v\u0026quot;, err)\n\t}\n\twg.Wait()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这上面是部分代码示意\n大概需求就是我需要给每个用户生成一份报表。每个用户生成时间大概就是5-10s，但是用户比较多\n然后我发现我这样写好像还是需要很久的时间才能全部处理完\n感觉是我对哪块的理解有问题或者是哪里阻塞了。\n或者大佬们一般这种任务是怎么处理的。用什么组件\u003c/p\u003e\n",
