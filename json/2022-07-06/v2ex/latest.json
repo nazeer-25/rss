@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有没有待机时间长不易发烫的手机 - 问与答",
+      "Link": "https://www.v2ex.com/t/864450",
+      "Description": "另外问下有没有什么可以让软件不被卸载的手段，想装个远程手机的软件，又怕被老爸卸载掉",
+      "Author": "Fantasia1993",
+      "PubDate": "2022-07-06T07:27:50Z"
+    },
+    {
+      "Title": "基于上一个帖子 C 语言 循环下 创建动态数组 非常慢 应该如何解决？ 贴代码啦 - C",
+      "Link": "https://www.v2ex.com/t/864449",
+      "Description": "\u003cp\u003e首先，通过上一个帖子，确实提示很快的速度，总体来说提高了 3.5 倍左右。 非常感谢大家！！！\n我的问题是: 想在提升时间复杂度, 目前个人觉得能在提升速度的地方只有 比较那块能操作，但是已经黔驴技穷了.\u003c/p\u003e\n\u003cp\u003evoid main() {  \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e// 以下简介是通过 举例来进行说明\n// 类似于多人打游戏，假设三个人(A,B,C)， 每局每个人会有一个分数， 一般来说分高则获胜(这里取最低，不影响理解)\n// 最终通过 N 个迭代计算各个玩家的 Equity （ Equity = win+tie ）, win , tie 数。\n// 如何计算 win: 每局只有一个人获胜, 至多一个，则+1 ，\n// 如何计算 tie: 1 / n , 其中 n 为当局分数最低的人数\n\n// 第 1 局 A:50 , b: 60 , c: 60, 故 A 获胜. win-\u0026gt; A = 0 + 1 \n// 最终结果：win: A=1 , B = 0, C = 0    tie-\u0026gt; A: 0 , B : 0, C : 0\n// \n// 第 2 局 A:50 , b: 50 , c: 70, 故 A, B 平. tie-\u0026gt; A = (1/2) , B = (1/2)\n// 最终结果：win: A=1 , B = 0, C = 0    tie-\u0026gt; A: 0.5 , B : 0.5, C : 0\n// \n// 第 3 局 A:100 , b: 100 , c: 100, 故 A, B, C 平. tie: A=1/3=0.33 , B=1/3=0.33, C=1/3=0.33 \n// 最终结果：win: A=1 , B = 0, C = 0    tie-\u0026gt; A: 0.5+0.33=0.83, B=0.5+0.33=0.83,  C=0.33\n\n// 假设只玩了三局, 那么本次游戏所有的胜率为: \n// 最后结果全部除以 3 ,因为本次玩了 3 局\n// A: {Equity: 1.83, win: 1, tie: 0.83} -\u0026gt;  {Equity: 1.83/3, win: 1/3, tie: 0.83/3} -\u0026gt;  {Equity: 0.61, win: 0.33, tie: 0.28}\n// B: {Equity: 0.83, win: 0, tie: 0.83} -\u0026gt;  {Equity: 0.83/3, win: 0/3, tie: 0.83/3} -\u0026gt;  {Equity: 0.28, win: 0, tie: 0.28}\n// C: {Equity: 0.33, win: 0, tie: 0.33} -\u0026gt;  {Equity: 0.33/3, win: 0/3, tie: 0.33/3} -\u0026gt;  {Equity: 0.11, win: 0, tie: 0.11}\n//\n// 如何验证结果是否正确: 将所有的 Equity 相加是否约等于 1. 0.61+0.28+0.11 = 1; 故正确！\n\n// 下面简单阐述下代码逻辑\n// 使用两个数组储存结果, win 数组 和 tie 数组， 分别记录次数，两个数组的长度为本次游戏的人数\n// 使用上面的例子可以演变为: \n// 第一局: win 数组 -\u0026gt; [1, 0, 0] tie 数组-\u0026gt; [0, 0, 0]\n// 第二局: win 数组 -\u0026gt; [1, 0, 0] tie 数组-\u0026gt; [0.5, 0.5, 0]\n// 第三局: win 数组 -\u0026gt; [1, 0, 0] tie 数组-\u0026gt; [0.83, 0.33, 0.33]\n// 最后只需要用 n(n 为游戏次数) 除以这两个数组各个元素就可以了\n\nint h_ = 1; // 为了方便 本次游戏次数 1 故忽略次数 for 循环 \nint c_ = 2; // 玩家个人数\n\nint* res_card_lst = (int*)malloc(c_ * sizeof(int));\nint* min_v_index_lst = (int*)malloc(c_ * sizeof(int)); \nint* score_arr_win = (int*)calloc(c_, sizeof(int)); // win 数组\nfloat* score_arr_tie = (float*)calloc(c_, sizeof(float)); // tie 数组\n\nint min_v_index; int min_score;\nint ii; int jj; int k; int l; int m;\nint a_; int min_i; int index_;\n\nint poker_lst[] = {\n  0,\n  1, 2, 3, 4, 5, 6, 7, 8, 9, 10,\n  11, 12, 13, 14, 15, 16, 17, 18, 19, 20,\n  21, 22, 23, 24, 25, 26, 27, 28, 29, 30,\n  31, 32, 33, 34, 35, 36, 37, 38, 39, 40,\n  41, 42, 43, 44, 45, 46, 47, 48, 49, 50,\n  51, };\nint len_poker_lst = 52;\n// 五层是 将 poker_lst 进行不重复组合。 \n// 1.要么先组合成，在遍历,遍历的同时做逻辑处理。\n// 2. 要么同时生成排列组合的时候 进行逻辑处理, 一下就是采用此方案。\nfor (ii = 0; ii \u0026lt; len_poker_lst; ii++) {\n\tfor (jj = ii + 1; jj \u0026lt; len_poker_lst; jj++) {\n\t\tfor (k = jj + 1; k \u0026lt; len_poker_lst; k++) {\n\t\t\tfor (l = k + 1; l \u0026lt; len_poker_lst; l++) {\n\t\t\t\tfor (m = l + 1; m \u0026lt; len_poker_lst; m++) {\n\t\t\t\t\t// 下面是主要逻辑\n\t\t\t\t\tmin_score = 7462;\n\t\t\t\t\t// 用数组进行储存结果 同时获取最小值的结果\n\t\t\t\t\tfor (int j = 0; j \u0026lt; c_; j++) {\n\t\t\t\t\t\t// res 其实就是通过上面的循环拿到组合,进行一些逻辑操作，最终返回一个 int 数值.\n\t\t\t\t\t\t// 可以理解为游戏分数, \n\t\t\t\t\t\t// 可以随便写死，写死无非就是全部都是平局, \n\t\t\t\t\t\t// 本次主要是测试时间复杂度,这个函数不能动,和这个函数也无太大关系\n\t\t\t\t\t\t//res = evaluate_7cards(poker_lst[ii], poker_lst[jj], poker_lst[k], poker_lst[0], poker_lst[1],\n\t\t\t\t\t\t//\t          玩家数据 1 , 玩家数据 2);\n\t\t\t\t\t\tres = 666;  \n\t\t\t\t\t\tres_card_lst[j] = res;\n\t\t\t\t\t\tif (res \u0026lt; min_score) min_score = res;\n\t\t\t\t\t}\n\t\t\t\t\t// 找到最小值的玩家的下标, 同时记录最小值玩家的个数\n\t\t\t\t\tmin_v_index = 0;\n\t\t\t\t\tfor (a_ = 0; a_ \u0026lt; c_; a_++) {\n\t\t\t\t\t\tif (res_card_lst[a_] == min_score) {\n\t\t\t\t\t\t\tmin_v_index_lst[min_v_index] = a_;\n\t\t\t\t\t\t\tmin_v_index += 1;\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\t//  如果最小值玩家只有一个，那么就直接 win 数组 += 1\n\t\t\t\t\tif (min_v_index == 1) {\n\t\t\t\t\t\tscore_arr_win[min_v_index_lst[0]] = score_arr_win[min_v_index_lst[0]]+ 1;\n\t\t\t\t\t}\n\t\t\t\t\telse {\n\t\t\t\t\t\t// 最小值玩家多个情况, 遍历玩家下标，在 tie 数组进行计算 (1 / n)\n\t\t\t\t\t\tfor (min_i = 0; min_i \u0026lt; min_v_index; min_i++) {\n\t\t\t\t\t\t\tindex_ = min_v_index_lst[min_i] + c_;\n\t\t\t\t\t\t\tscore_arr_tie[index_] = score_arr_tie[index_] + (1.0 / min_v_index);\n\t\t\t\t\t\t}\n\t\t\t\t\t};\n\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e}\u003c/p\u003e\n",
+      "Author": "hhhhhh123",
+      "PubDate": "2022-07-06T07:27:34Z"
+    },
+    {
+      "Title": "为什么拉黑人，还能打进来电话 - iPhone",
+      "Link": "https://www.v2ex.com/t/864448",
+      "Description": "\u003cp\u003e确定在联系人里已经阻止了\u003c/p\u003e\n",
+      "Author": "revival83",
+      "PubDate": "2022-07-06T07:26:36Z"
+    },
+    {
+      "Title": "这个论坛，用户留言的红心(在时间信息右边)是怎么点的？为啥我没找到 - 问与答",
+      "Link": "https://www.v2ex.com/t/864446",
+      "Description": "",
+      "Author": "bam9",
+      "PubDate": "2022-07-06T07:23:20Z"
+    },
+    {
+      "Title": "surge ios 出一个授权位 - Surge",
+      "Link": "https://www.v2ex.com/t/864445",
+      "Description": "surge ios 出一个授权位，2023/07/01 过期，110 元出\u003cbr /\u003etg username：olvin1",
+      "Author": "gggttao",
+      "PubDate": "2022-07-06T07:18:56Z"
+    },
+    {
       "Title": "又想跳槽了，会不会被说太频繁？ - 问与答",
       "Link": "https://www.v2ex.com/t/864444",
       "Description": "\u003cp\u003e坐标帝都，毕业不到两年，上一家干满一年，跳到一线了。现在差一个月满一年，又想跳了，原因是钱少，可能以后还有降薪的可能；东西也学的差不多了（公司业务自己捋的代码，了解的差不多了，现在都是 crud 了。周末和下班也在自己学东西，二开 Redis ，写动态线程池，感觉能力比一年前的自己又提升了）\u003c/p\u003e\n\u003cp\u003e有将来冲大厂的想法，我这一年一跳会不会不太好……\u003c/p\u003e\n",
