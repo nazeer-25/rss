@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有没有什么简单的能用 js 开发安卓应用并能收发原生广播的东西么 - 程序员",
+      "Link": "https://www.v2ex.com/t/864336",
+      "Description": "\u003cul\u003e\n\u003cli\u003e在搞 PLC 上位机. 后台, 安卓, web 前端, 桌面端一条龙, 天天在 java, c#, js 之间无缝切换.\u003c/li\u003e\n\u003cli\u003e经常是一个功能接着一个功能, 一个前端接着一个前端, 一个 android app 接着一个 android app, 换个客户就要根据客户厂内实际情况改这里改那里.\u003c/li\u003e\n\u003cli\u003e功能都不复杂, 要的就是快速响应, 越快越好.\u003c/li\u003e\n\u003cli\u003e最近 android app 变更频繁, 我本来主攻 c#和 java 后台. 安卓实在是不熟, 开发速度慢了被催死了, 天天加班加到晚上十点十二点周末无休的.\u003c/li\u003e\n\u003cli\u003e想问问有没有啥办法能用 js 开发么? 安卓我一来不熟悉开发慢, 二来每次改了点啥看效果, 都要点下 android studio 上面的 debug 按钮, 然后编译打包 install 到 PDA, 光这个 debug 每次就要等个 30 秒, 太恶心了.\u003c/li\u003e\n\u003cli\u003e如果是 js, vue 这种, 改了啥立马就能刷新效果的就好了, 我就不用天天熬夜了.\u003c/li\u003e\n\u003cli\u003e曾想过直接开发 pwa 应用, 但是没办法, 工业用的安卓 PDA 需要对接 PDA 上的扫码器. 基本就是发个广播通知 PDA 上的扫码器, 再注册个广播接收扫码结果. 纯 js 它干不了这个啊. 我该怎么办? 在原生安卓里添加一个 webview, 再把收到的扫码结果传递到 webview 里去么?\u003c/li\u003e\n\u003cli\u003e调用 PDA 扫码器和接收扫码结果的代码如下:\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003e    private static final String ACTION_CLAIM_SCANNER = \"com.honeywell.aidc.action.ACTION_CLAIM_SCANNER\";\n    private static final String EXTRA_PROPERTIES = \"com.honeywell.aidc.extra.EXTRA_PROPERTIES\";\n\n    @Override\n    public void use() {\n        // 指定扫码结果广播接收器的 ACTION 名称\n        Bundle properties = new Bundle();\n        properties.putBoolean(\"DPR_DATA_INTENT\", true);\n        properties.putString(\"DPR_DATA_INTENT_ACTION\", ACTION_BARCODE_DATA);\n        // 如需启用指定的 profile, 可 putExtra(EXTRA_PROFILE, \"MyProfile1\")\n        Intent intent = new Intent(ACTION_CLAIM_SCANNER).putExtra(EXTRA_PROPERTIES, properties);\n        context.sendBroadcast(intent);\n\n        // 注册扫码结果广播接收器\n        context.registerReceiver(receiver, new IntentFilter(ACTION_BARCODE_DATA));\n    }\n\n    private static final String ACTION_RELEASE_SCANNER = \"com.honeywell.aidc.action.ACTION_RELEASE_SCANNER\";\n\n    @Override\n    public void release() {\n        listeners.clear();\n        context.unregisterReceiver(receiver);\n        context.sendBroadcast(new Intent(ACTION_RELEASE_SCANNER).setPackage(\"com.intermec.datacollectionservice\"));\n    }\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "bthulu",
+      "PubDate": "2022-07-06T00:44:44Z"
+    },
+    {
+      "Title": "色弱换驾驶证好麻烦 - 广州",
+      "Link": "https://www.v2ex.com/t/864335",
+      "Description": "\u003cp\u003eBase:广州，医院看色谱图没过，说要去市十二医院，有兄弟遇到类似情况的么？\u003c/p\u003e\n",
+      "Author": "stevenshum",
+      "PubDate": "2022-07-06T00:44:12Z"
+    },
+    {
+      "Title": "如何找到打开小程序的快捷指令？ - 问与答",
+      "Link": "https://www.v2ex.com/t/864333",
+      "Description": "以微信健康码为例，基本上出入各种场合都需要打开，高频操作。\u003cbr /\u003e但是微信并没有快捷功能——连长按的快捷菜单、小部件都没有提供。\u003cbr /\u003e\u003cbr /\u003e自己平时用「快捷指令」比较多，如何找到可以使用的（目前有效的）微信健康码小程序打开方式？\u003cbr /\u003e（最好是直接展示健康码绿码）",
+      "Author": "airbotgo",
+      "PubDate": "2022-07-06T00:40:02Z"
+    },
+    {
       "Title": "百度网盘的性能问题？ - 问与答",
       "Link": "https://www.v2ex.com/t/864331",
       "Description": "第一次充了会员，体验了满速下载。但是下载时候非常卡，移动鼠标都有起码半秒以上延迟，完全无法工作。我看大部分时候硬盘占用率不高，cpu 占用也就 20%，内存更少。（偶尔会 cpu100 ，还有一两次 gpu 占用飙升）网上一查知乎上最早 15 年就有人吐槽，陆续到现在不断有受害者。受害者的机子从轻薄本到 5900x ，看似也不是配置问题。用过国内的阿里和天翼，国外的 mega ，onedrive ，都没这个问题。",
