@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>TinyMCE 富文本 光标移动 - 问与答</title>
+      <link>https://www.v2ex.com/t/864499</link>
+      <description>请问该如何移动 tinymce 富文本内的光标？我想在最开头插入一段摘要，官方文档看了好久实在没找到怎么个实现法，&lt;br /&gt;就是如何移动光标到最开头？谢谢了！</description>
+      <author>AerithLoveMe</author>
+      <pubDate>06 Jul 2022 10:26:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>同问，三年不吃早饭了，为什么瘦不下来？最近还重了好几斤 - 问与答</title>
+      <link>https://www.v2ex.com/t/864498</link>
+      <description>&lt;p&gt;如题，三年前我大概 120 斤，由于工作原因，起得晚睡得晚，就养成了不吃早饭、一天 2 顿饭的习惯，一直到现在。可是体重却一直在增加，尤其今年，快 150 了。刚才看到那位老哥问“一个月不吃晚饭能瘦多少斤”，我刚去称了下，最近又长了，马上就 150&lt;/p&gt;&#xA;</description>
+      <author>danc</author>
+      <pubDate>06 Jul 2022 10:23:10 +0000</pubDate>
+    </item>
+    <item>
+      <title>我有一个坏毛病。 - 问与答</title>
+      <link>https://www.v2ex.com/t/864497</link>
+      <description>我有一个坏毛病，每天起床会想着第一件事做什么，第二件做什么，一直持续到去上班。&lt;br /&gt;通勤路上也会思考，到地铁了要去哪个车门，哪个车门离转乘地铁最近，离出口最近。。。&lt;br /&gt;&lt;br /&gt;你们会吗？是不是人天生都有对稳定的预期问题。</description>
+      <author>chenzesam</author>
+      <pubDate>06 Jul 2022 10:22:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>公司发数字人民币工资有什么好处吗？ - 程序员</title>
+      <link>https://www.v2ex.com/t/864496</link>
+      <description>坐标 SZ ，&lt;br /&gt;小公司，老大突然问有没有人用数字人民币，&lt;br /&gt;之后联系我表示工资发数字人民币是否可以接受，我感觉可以接受，网上也有搜到一些宣传一些单位改发数字人民币工资的，加上数字人民币可溯源的特性，应该没啥坑吧，就同意了，&lt;br /&gt;不过老大还说给我打 5w 的数字人民币让我转现钱给他，这我拒绝了，怎么看都不对劲，&lt;br /&gt;然后上个月就收到上上月工资以数字人民币形式，发币钱包也是公司全名，&lt;br /&gt;&lt;br /&gt;接着就是这个月，我们一般是月末发上月工资，结果这月的月初就给我发了数字人民币说是提前发的工资，&lt;br /&gt;感觉公司好像有数字人民币急着花出去似的，不知道什么原因，大家伙有头绪没，</description>
+      <author>AoEiuV020CN</author>
+      <pubDate>06 Jul 2022 10:22:20 +0000</pubDate>
+    </item>
+    <item>
       <title>nodejs 推送图片到 RTMP 延时和花屏 有什么办法优化 - 问与答</title>
       <link>https://www.v2ex.com/t/864495</link>
       <description>&lt;h2&gt;实现思路&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;nodeJS 获取到图片的 base64 数据&lt;/li&gt;&#xA;&lt;li&gt;通过 ffmpeg pipe 推送到 rtmp&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;代码实现&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const child_process = require(&#39;child_process&#39;)&#xA;let child = child_process.spawn(&#39;ffmpeg&#39;, [&#xA;  &#39;-f&#39;, &#39;image2pipe&#39;,&#xA;  &#39;-i&#39;, &#39;-&#39;,&#xA;  &#39;-vcodec&#39;, &#39;libx264&#39;,&#xA;  &#39;-f&#39;, &#39;flv&#39;,&#xA;  &#39;rtmp://127.0.0.1:56413/live/test&#39;&#xA;]);&#xA;&#xA;child.stdout.on(&#39;data&#39;, function (data) {&#xA;  console.log(data.toString());&#xA;});&#xA;&#xA;child.stderr.on(&#39;data&#39;, function (data) {&#xA;  console.log(data.toString());&#xA;});&#xA;&#xA;child.on(&#39;close&#39;, (code, signal) =&amp;gt; {&#xA;  console.log(&#39;ffmpeg 进程中断&#39;, code, signal);&#xA;});&#xA;&#xA;&#xA;// 图片数据写入管道&#xA;function writeImg (base64) {&#xA;  let imgData = Buffer.from(base64, &#39;base64&#39;)&#xA;  child.stdin.write(imgData)&#xA;}&#xA;&#xA;&#xA;// 模拟循环获取图片数据&#xA;for (let i = 0; i &amp;lt; 100; i ++) {&#xA;  writeImg(&#39;/9j/4AAQSkZJRgABAQAA........&#39;)&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;存在问题&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;花屏问题&lt;/li&gt;&#xA;&lt;li&gt;延时累计&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;不知道有什么方法可以优化&lt;/p&gt;&#xA;</description>
