@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>软路由选择困难 - 问与答</title>
+      <link>https://www.v2ex.com/t/864570</link>
+      <description>一直在用 diy 的 nas 开个虚拟机当主路由（单 openwrt ，只开了 mwan3+小猫咪+adguardhome+frpc ）&lt;br /&gt;接下来一段时间要待在外地 怕家人搞不定 all in boom 打算把软路由单独拆分出来&lt;br /&gt;因为家里房间比较多 预埋的网口也有点多 能一口气插完所有房间预埋口又放得进弱电箱的 2.5/10g 交换机目前还没见到&lt;br /&gt;所以想弄个网口稍微多一些的软路由 把监控和卧室的无线 ap 之类的分一些插在软路由的网口上 这样一来交换机升级也好选些&lt;br /&gt;目前看到的基本上就是 n5105 的 6 口或者 r86s 万兆版 要么就是 j4125 拖 6 个 2.5g 口 价格差距也不小&lt;br /&gt;问一下万能的 v2er j4125 的性能碰到软交换的场景（比如手机-ap-软路由-交换机-nas ）能跑到多少速度 和 5105 的差距大不大&lt;br /&gt;或者有没有什么成品可以推荐</description>
+      <author>TsukiMori</author>
+      <pubDate>06 Jul 2022 17:05:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于我为了写一个浏览器插件，最后开发了一个浏览器 APP 的故事 - 程序员</title>
+      <link>https://www.v2ex.com/t/864569</link>
+      <description>前些天发了帖子，关于我开发的和老婆远程一起看视频的插件，收获了不少用户。&lt;br /&gt;&lt;br /&gt;先打个广告，可能是远程一起看视频最好的解决方法： &lt;a target=&#34;_blank&#34; href=&#34;https://videotogether.github.io&#34; rel=&#34;nofollow noopener&#34;&gt;https://videotogether.github.io&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;最近经常有用户反馈，插件在一些盗版视频网站上似乎没有办法同步视频。调试了一下发现，这些盗版视频网站很多都会用嵌套 iframe （给不懂浏览器的朋友科普一下，就是网页里面嵌了子网页）的方式播放视频。嵌套的 iframe 和页面都不在同一个域下面，由于浏览器的安全限制，js 是没法读取跨域 iframe 中的内容。子页面还会校验请求的 Referrer ，对于不在白名单的页面直接返回 error 。所以也无法通过在新窗口打开子页面的方式绕过这个 iframe 的限制。&lt;br /&gt;&lt;br /&gt;调研了一番以后，发现如果 js 插件可以注入到这些子页面中，通过不同页面 PostMessage 也是可以实现跨页面操作的。无非是原来一个函数调用解决的问题，变成了多个插件实例异步通讯完成。虽然麻烦了一点，至少还能解决。&lt;br /&gt;&lt;br /&gt;电脑上的 tampermonkey 插件是支持注入 js 到 iframe 的。但是在安卓上，我几乎把酷安能够下载到的支持插件的浏览器用了一个遍，没有一个能够注入 js 到 iframe 。&lt;br /&gt;&lt;br /&gt;最后在 StackOverFlow 上找到了答案，安卓系统的 webview 是没有提供 API 注入 iframe 的。唯一能实现这个功能的方式是劫持 webview 的 request ，手动请求到 html response 后添加脚本代码到末尾。这么 hack 的方式肯定是不能指望有浏览器能支持了。最终我在 Github 找了一个开源的 react native 浏览器，加了了劫持 request 的代码，集成了一起看视频插件后打包了一个 APP 。心力憔悴。&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/kTn0rqm.jpg&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/kTn0rqm.jpg&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;顺带一说，我知道安卓上有 kiwi 浏览器，不过 chrome 商店国内访问不了</description>
+      <author>maggch97</author>
+      <pubDate>06 Jul 2022 17:03:36 +0000</pubDate>
+    </item>
+    <item>
       <title>Redis 字符串编码 embstr 有性能优势，为什么要有长度限制呢？ - Redis</title>
       <link>https://www.v2ex.com/t/864567</link>
       <description>&lt;p&gt;网上很多文章都是讲 embstr 编码的性能优势，比如&lt;strong&gt;连续内存空间&lt;/strong&gt;，raw 编码会分别创建 RedisObject 和 sds 结构，但还是疑惑 embstr 为什么有长度限制只能专用于存储短字符串呢？&lt;/p&gt;&#xA;&lt;p&gt;如果要存一个很长的字符串，用 embstr ，也创建一块连续内容空间不就好了。&lt;/p&gt;&#xA;&lt;p&gt;请大佬讲解，谢谢！&lt;/p&gt;&#xA;</description>
