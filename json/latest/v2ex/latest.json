@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Python 加入类型注解后，父类到子类的强制转换怎么处理？ - Python",
+      "Link": "https://www.v2ex.com/t/864482",
+      "Description": "\u003cp\u003e先贴代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python3\"\u003eclass AbstractMapper(ABC):\n\n    def __init__(self):\n        self._loaded_map: Dict[\"ObjectId\", \"DomainObject\"] = {}\n\n    def _abstract_find(self, id_: \"ObjectId\") -\u0026gt; \"DomainObject\":\n        stmt = self.find_statement()\n        try:\n            rs = cursor.execute(stmt, (id_,)).fetchone()\n            res = self._load(rs)\n            return res\n        except Exception as e:\n            ...\n        finally:\n            ...\n\n    def _load(self, rs: tuple) -\u0026gt; \"DomainObject\":\n        if rs[0] in self._loaded_map:\n            return self._loaded_map[rs[0]]\n        res = self._do_load(rs)\n        self._loaded_map[res.id] = res\n        return res\n\n    @abstractmethod\n    def _do_load(self, rs: tuple) -\u0026gt; \"DomainObject\":\n        ...\n\n    @abstractmethod\n    def find_statement(self) -\u0026gt; str:\n        ...\n\n\nclass ArtistMapper(AbstractMapper):\n\n    def find_statement(self) -\u0026gt; str:\n        return \"select id, name from artists where id = $1 limit 1\"\n\n    def _do_load(self, rs: tuple) -\u0026gt; \"DomainObject\":\n        id_ = rs[0]\n        name = rs[1]\n        return Artist(id_, name)\n\n    def find(self, id_) -\u0026gt; \"Artist\":\n        return self._abstract_find(id_)  # Expression of type \"DomainObject\" cannot be assigned to return type \"Artist\"   \"DomainObject\" is incompatible with \"Artist\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e上面的代码中，\u003ccode\u003e_abstract_find()\u003c/code\u003e 的返回值标注为 DomainObject 类型，而在 ArtistMapper 中 find 方法需要返回一个 Artist 实例，Artist 是 DomainObject 的子类。\u003c/p\u003e\n\u003cp\u003e我看到 Java 代码中这里是通过强制类型转换解决的，Python 中这样的代码虽然可以正确运行，但无法通过静态类型检查，想知道有什么办法可以通过检查？\u003c/p\u003e\n",
+      "Author": "lanlanye",
+      "PubDate": "2022-07-06T09:14:08Z"
+    },
+    {
+      "Title": "请推荐一个 Win7 里的截图识别 QR 码的小软件，绿色 - 问与答",
+      "Link": "https://www.v2ex.com/t/864481",
+      "Description": "好像截图软件那样，手工对指定范围截图，识别出二维码，自动复制到粘贴板？",
+      "Author": "pppguest3962",
+      "PubDate": "2022-07-06T09:09:42Z"
+    },
+    {
+      "Title": "iOS bug 分享 - Apple",
+      "Link": "https://www.v2ex.com/t/864480",
+      "Description": "\u003cp\u003e在通讯录中随便打开一个联系人。\u003c/p\u003e\n\u003cp\u003e点「编辑」。\u003c/p\u003e\n\u003cp\u003e随便点一个电话号码。注意要在末尾点，而不是号码中间。\u003c/p\u003e\n\u003cp\u003e随便输入一个数字，使得号码多出一位。\u003c/p\u003e\n\u003cp\u003e摇晃设备，点「撤销」。\u003c/p\u003e\n\u003cp\u003e（此时并未撤销，且光标跳到了最前面）\u003c/p\u003e\n\u003cp\u003e再次摇晃设备，再点「撤销」。\u003c/p\u003e\n\u003cp\u003eApp 崩溃。\u003c/p\u003e\n",
+      "Author": "GooglePlay",
+      "PubDate": "2022-07-06T09:07:28Z"
+    },
+    {
       "Title": "软件测试规范？ - 程序员",
       "Link": "https://www.v2ex.com/t/864479",
       "Description": "\u003cp\u003e有么有大佬知道, 软件测试规范有没有明确的规定，现行的资料各种分类比较乱？\u003c/p\u003e\n",

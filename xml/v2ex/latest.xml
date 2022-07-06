@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Python 加入类型注解后，父类到子类的强制转换怎么处理？ - Python</title>
+      <link>https://www.v2ex.com/t/864482</link>
+      <description>&lt;p&gt;先贴代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python3&#34;&gt;class AbstractMapper(ABC):&#xA;&#xA;    def __init__(self):&#xA;        self._loaded_map: Dict[&#34;ObjectId&#34;, &#34;DomainObject&#34;] = {}&#xA;&#xA;    def _abstract_find(self, id_: &#34;ObjectId&#34;) -&amp;gt; &#34;DomainObject&#34;:&#xA;        stmt = self.find_statement()&#xA;        try:&#xA;            rs = cursor.execute(stmt, (id_,)).fetchone()&#xA;            res = self._load(rs)&#xA;            return res&#xA;        except Exception as e:&#xA;            ...&#xA;        finally:&#xA;            ...&#xA;&#xA;    def _load(self, rs: tuple) -&amp;gt; &#34;DomainObject&#34;:&#xA;        if rs[0] in self._loaded_map:&#xA;            return self._loaded_map[rs[0]]&#xA;        res = self._do_load(rs)&#xA;        self._loaded_map[res.id] = res&#xA;        return res&#xA;&#xA;    @abstractmethod&#xA;    def _do_load(self, rs: tuple) -&amp;gt; &#34;DomainObject&#34;:&#xA;        ...&#xA;&#xA;    @abstractmethod&#xA;    def find_statement(self) -&amp;gt; str:&#xA;        ...&#xA;&#xA;&#xA;class ArtistMapper(AbstractMapper):&#xA;&#xA;    def find_statement(self) -&amp;gt; str:&#xA;        return &#34;select id, name from artists where id = $1 limit 1&#34;&#xA;&#xA;    def _do_load(self, rs: tuple) -&amp;gt; &#34;DomainObject&#34;:&#xA;        id_ = rs[0]&#xA;        name = rs[1]&#xA;        return Artist(id_, name)&#xA;&#xA;    def find(self, id_) -&amp;gt; &#34;Artist&#34;:&#xA;        return self._abstract_find(id_)  # Expression of type &#34;DomainObject&#34; cannot be assigned to return type &#34;Artist&#34;   &#34;DomainObject&#34; is incompatible with &#34;Artist&#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;上面的代码中，&lt;code&gt;_abstract_find()&lt;/code&gt; 的返回值标注为 DomainObject 类型，而在 ArtistMapper 中 find 方法需要返回一个 Artist 实例，Artist 是 DomainObject 的子类。&lt;/p&gt;&#xA;&lt;p&gt;我看到 Java 代码中这里是通过强制类型转换解决的，Python 中这样的代码虽然可以正确运行，但无法通过静态类型检查，想知道有什么办法可以通过检查？&lt;/p&gt;&#xA;</description>
+      <author>lanlanye</author>
+      <pubDate>06 Jul 2022 09:14:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>请推荐一个 Win7 里的截图识别 QR 码的小软件，绿色 - 问与答</title>
+      <link>https://www.v2ex.com/t/864481</link>
+      <description>好像截图软件那样，手工对指定范围截图，识别出二维码，自动复制到粘贴板？</description>
+      <author>pppguest3962</author>
+      <pubDate>06 Jul 2022 09:09:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>iOS bug 分享 - Apple</title>
+      <link>https://www.v2ex.com/t/864480</link>
+      <description>&lt;p&gt;在通讯录中随便打开一个联系人。&lt;/p&gt;&#xA;&lt;p&gt;点「编辑」。&lt;/p&gt;&#xA;&lt;p&gt;随便点一个电话号码。注意要在末尾点，而不是号码中间。&lt;/p&gt;&#xA;&lt;p&gt;随便输入一个数字，使得号码多出一位。&lt;/p&gt;&#xA;&lt;p&gt;摇晃设备，点「撤销」。&lt;/p&gt;&#xA;&lt;p&gt;（此时并未撤销，且光标跳到了最前面）&lt;/p&gt;&#xA;&lt;p&gt;再次摇晃设备，再点「撤销」。&lt;/p&gt;&#xA;&lt;p&gt;App 崩溃。&lt;/p&gt;&#xA;</description>
+      <author>GooglePlay</author>
+      <pubDate>06 Jul 2022 09:07:28 +0000</pubDate>
+    </item>
+    <item>
       <title>软件测试规范？ - 程序员</title>
       <link>https://www.v2ex.com/t/864479</link>
       <description>&lt;p&gt;有么有大佬知道, 软件测试规范有没有明确的规定，现行的资料各种分类比较乱？&lt;/p&gt;&#xA;</description>
