@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Golang 版本的咪咕音乐下载器 - 分享发现</title>
+      <link>https://www.v2ex.com/t/864911</link>
+      <description>&lt;p&gt;看到 &lt;a href=&#34;/t/864633&#34; rel=&#34;nofollow&#34;&gt;/t/864633&lt;/a&gt; 这个兄弟的帖子，顺手撸了个 Golang 版本的玩玩。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/lenmx/migu_music_downloader&#34; rel=&#34;nofollow&#34;&gt;https://github.com/lenmx/migu_music_downloader&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;img&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://github.com/lenmx/migu_music_downloader/raw/main/screenshot.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>lenmx</author>
+      <pubDate>08 Jul 2022 05:13:07 +0000</pubDate>
+    </item>
+    <item>
       <title>在写 go 的 parser 时，对于语法有定义有一些疑惑 - Go 编程语言</title>
       <link>https://www.v2ex.com/t/864910</link>
       <description>&lt;p&gt;比如 import 语句的定义如下，可知 import 语句由 “import” + 可选的 ImportSpec + ImportPath 组成 （ &lt;a href=&#34;https://go.dev/ref/spec#ImportSpec&#34; rel=&#34;nofollow&#34;&gt;https://go.dev/ref/spec#ImportSpec&lt;/a&gt; ）&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ImportDecl       = &#34;import&#34; ( ImportSpec | &#34;(&#34; { ImportSpec &#34;;&#34; } &#34;)&#34; ) .&#xA;ImportSpec       = [ &#34;.&#34; | PackageName ] ImportPath .&#xA;ImportPath       = string_lit .&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但问题是，连接这三者的“空白区域”的定义并不明确，比如，我认为 空白区域可以填充任意形式的注释，但并非如此：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;import /*&#xA; */f &#34;fmt&#34;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;上面这个注释的使用是正确的&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;import /*&#xA; */f /*&#xA; */ &#34;fmt&#34;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但这个注释的使用就是错误的，ImportSpec 和 ImportPath 之间只能用不含换行的注释&lt;/p&gt;&#xA;&lt;p&gt;问题是，我如何能知道哪些空白区域可以换行，哪些地方不能？&lt;/p&gt;&#xA;</description>
