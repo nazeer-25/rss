@@ -46,13 +46,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "模板消息参数类型校验",
-      "Link": "https://studygolang.com/topics/15682#reply3",
-      "Description": "\u003cp\u003e想模仿公众号自己弄一个模板消息，模板消息结构体为\n\u003cimg src=\"https://static.golangjob.cn/220707/071751faa83a30b3738bf93f1972f91d.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e那比如{{AAA}}是小三，{{BBB}}是小四。小三认识了小四。那对于这个{{AAA}}和{{BBB}}这俩参数类型及长度的校验怎么做。比如限定俩都是字符串，长度20。这块参数类型的限定怎么做，需要加什么结构或者伪代码，请有思路的人帮忙给点指导建议或者demo代码，谢谢。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "golang 压缩和解压zip文件",
       "Link": "https://studygolang.com/articles/35744#reply1",
       "Description": "\u003ch2\u003e压缩zip\u003c/h2\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc Zip(dest string, paths ...string) error {\n\tzfile, err := os.Create(dest)\n\tif err != nil {\n\t\treturn err\n\t}\n\tdefer zfile.Close()\n\n\tzipWriter := zip.NewWriter(zfile)\n\tdefer zipWriter.Close()\n\n\tfor _, src := range paths {\n\t\t// remove the trailing path sepeartor if it is a directory\n\t\tsrc := strings.TrimSuffix(src, string(os.PathSeparator))\n\n\t\terr = filepath.Walk(src, func(path string, info os.FileInfo, err error) error {\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\t// create local file header\n\t\t\theader, err := zip.FileInfoHeader(info)\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\t// set compression method to deflate\n\t\t\theader.Method = zip.Deflate\n\t\t\t// set relative path of file in zip archive\n\t\t\theader.Name, err = filepath.Rel(filepath.Dir(src), path)\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\tif info.IsDir() {\n\t\t\t\theader.Name += string(os.PathSeparator)\n\t\t\t}\n\t\t\t// create writer for writing header\n\t\t\theaderWriter, err := zipWriter.CreateHeader(header)\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\tif info.IsDir() {\n\t\t\t\treturn nil\n\t\t\t}\n\t\t\tf, err := os.Open(path)\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\tdefer f.Close()\n\t\t\t_, err = io.Copy(headerWriter, f)\n\t\t\treturn err\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t}\n\treturn nil\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch2\u003e解压zip\u003c/h2\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc Unzip(src string, dest string) error {\n\treader, err := zip.OpenReader(src)\n\tif err != nil {\n\t\treturn err\n\t}\n\tdefer reader.Close()\n\n\tfor _, file := range reader.File {\n\t\tfilePath := path.Join(dest, file.Name)\n\t\tif file.FileInfo().IsDir() {\n\t\t\tos.MkdirAll(filePath, os.ModePerm)\n\t\t} else {\n\t\t\tif err = os.MkdirAll(filepath.Dir(filePath), os.ModePerm); err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\tinFile, err := file.Open()\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\tdefer inFile.Close()\n\n\t\t\toutFile, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, file.Mode())\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\tdefer outFile.Close()\n\n\t\t\t_, err = io.Copy(outFile, inFile)\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t}\n\t}\n\treturn nil\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch2\u003e工程源码\u003c/h2\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/xbmlz/gct\"\u003ehttps://github.com/xbmlz/gct\u003c/a\u003e\u003c/p\u003e\n",
@@ -63,6 +56,13 @@
       "Title": "二本大二 学Go语言 来得及吗",
       "Link": "https://studygolang.com/topics/15677#reply12",
       "Description": "\u003cp\u003e请各位大佬 指点一下 ， 目前学了C和数据结构 ， 准备搞Linux  还是先搞Go  我看Go岗位 要求的都是优先有经验的， 害怕到时找不到合适的岗位。\n现在应该还能搏一搏  还请各位给点高见\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "模板消息参数类型校验",
+      "Link": "https://studygolang.com/topics/15682#reply3",
+      "Description": "\u003cp\u003e想模仿公众号自己弄一个模板消息，模板消息结构体为\n\u003cimg src=\"https://static.golangjob.cn/220707/071751faa83a30b3738bf93f1972f91d.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e那比如{{AAA}}是小三，{{BBB}}是小四。小三认识了小四。那对于这个{{AAA}}和{{BBB}}这俩参数类型及长度的校验怎么做。比如限定俩都是字符串，长度20。这块参数类型的限定怎么做，需要加什么结构或者伪代码，请有思路的人帮忙给点指导建议或者demo代码，谢谢。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -130,13 +130,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "利用proto文件生成swagger的时候，如何生成的swagger时不包含output_only字段",
-      "Link": "https://studygolang.com/topics/15676#reply0",
-      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220705/2b30772abf56b28f0260f6c65a1ad92f.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "去哪儿面试题 （Golang实现）多线程顺序输出1-75",
       "Link": "https://studygolang.com/articles/20961#reply9",
       "Description": "",
@@ -189,6 +182,13 @@
       "Title": "菜鸟入门，迷惑的一道题，大牛给解答下。",
       "Link": "https://studygolang.com/topics/15674#reply1",
       "Description": "\u003cp\u003efunc solution9() {\n\tnums := [][]int{}\n\tnums = append(nums, []int{})\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efor _, v := range []int{1, 2, 3} {\n\tfor _, k := range nums {\n\t\tnums = append(nums, append(k, v))\n\t\tfmt.Println(nums)\n\t}\n}\n\nfmt.Println(nums)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n\n\u003cp\u003e//打印结果\n[[] [1]]\n[[] [1] [2]]\n[[] [1] [2] [1 2]]\n[[] [1] [2] [1 2] [3]]   // 正常\n[[] [1] [2] [1 3] [3] [1 3]]   //异常，[1,2] -\u0026gt; [1,3]\n[[] [1] [2] [1 3] [3] [1 3] [2 3]]\n[[] [1] [2] [1 3] [3] [1 3] [2 3] [1 3 3]]\n[[] [1] [2] [1 3] [3] [1 3] [2 3] [1 3 3]]\u003cimg src=\"https://static.golangjob.cn/220705/592f638af68f094687f44c34b0f18ea4.jpg\" alt=\"TT截图未命名.jpg\" /\u003e\u003cimg src=\"https://static.golangjob.cn/220705/64bde92b546abe30077ad4d30e24f1ce.jpg\" alt=\"TT截图未命名.jpg\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "利用proto文件生成swagger的时候，如何生成的swagger时不包含output_only字段",
+      "Link": "https://studygolang.com/topics/15676#reply0",
+      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220705/2b30772abf56b28f0260f6c65a1ad92f.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
