@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Swift Combine 的类型看着真心累啊 - Swift",
+      "Link": "https://www.v2ex.com/t/864929",
+      "Description": "\u003cpre\u003e\u003ccode\u003efunc stories() -\u0026gt; AnyPublisher\u0026lt;[Story], Error\u0026gt; {\n    URLSession.shared\n      .dataTaskPublisher(for: EndPoint.stories.url)\n      .map(\\.data)\n      .decode(type: [Int].self, decoder: decoder)\n      .mapError { error -\u0026gt; API.Error in\n        switch error {\n        case is URLError:\n          return Error.addressUnreachable(EndPoint.stories.url)\n        default:\n          return Error.invalidResponse\n        }\n      }\n      .filter({ !$0.isEmpty })\n      .flatMap { storyIDs in\n        mergedStories(ids: storyIDs)\n      }\n      .scan([]) { stories, story -\u0026gt; [Story] in\n        stories + [story]\n      }\n      .map{ $0.sorted() }\n      .eraseToAnyPublisher()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e光标放在 eraseToAnyPublisher 后面，按 esc ，能看到最后的类型\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://wx3.sinaimg.cn/mw2000/b644ec65gy1h3zhh0ez1ej20ew03wmza.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e我的妈，就不能简化下吗\u003c/p\u003e\n\u003cp\u003e希望能向 RXSwift 学习下吧，别嵌套这么多层了，看着眼晕😵‍💫\u003c/p\u003e\n",
+      "Author": "chiaf",
+      "PubDate": "2022-07-08T06:07:12Z"
+    },
+    {
+      "Title": "有什么办法能够快速分享只读 terminal 给同事让他们观看么？ - 程序员",
+      "Link": "https://www.v2ex.com/t/864928",
+      "Description": "\u003cp\u003e有时候做 presentation 需要有一些 live coding ，如果用 Google Meet 分享屏幕的话有延迟不说，画质还经常被压缩到的。目前的想法是收集一下同事的 SSH pubkey 然后添加到我主机上的公用账户里，然后用 tmux 新建一个共享的 session ，需要看我操作的同时可以 SSH 到我的机器上然后用 tmux 加入这个 session 。\u003c/p\u003e\n\u003cp\u003e但问题是这样太麻烦了，新来一个人就要收集一个新的 ssh pubkey ，而且我公司也禁止了密码登录。想请问有什么办法能够快速分享 terminal 给同事么？需要是纯内网解决方案。谢谢\u003c/p\u003e\n",
+      "Author": "dangyuluo",
+      "PubDate": "2022-07-08T06:03:48Z"
+    },
+    {
       "Title": "有什么适合二十几岁的好玩的玩具推荐吗 - 问与答",
       "Link": "https://www.v2ex.com/t/864924",
       "Description": "\u003cp\u003e最近一个人有点无聊，想一个人安安静静玩点什么东西，或者培养个什么爱好，想问问大家平时有没有什么好玩的消遣，有意思的爱好；大家安利一下\u003c/p\u003e\n",
@@ -151,7 +165,7 @@
       "PubDate": "2022-07-08T04:08:37Z"
     },
     {
-      "Title": "老板跑路,如何挽回部分损失(限深圳,上海) - 分享发现",
+      "Title": "老板跑路,如何挽回部分损失(限深圳,上海) - 职场话题",
       "Link": "https://www.v2ex.com/t/864898",
       "Description": "\u003cp\u003e2021 年老板跑路,欠薪 2 个半月.申请欠薪垫付 昨天尘埃落定 签字领钱.可以跟大家说说流程了!\u003c/p\u003e\n\u003cp\u003e步骤\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e1.申请劳动仲裁\n\n2.开庭(不需要请律师,自己就能搞定 如实说就可以,工资计算不对可以当庭调整)\n\n3.收到劳动仲裁裁决书(一定要仔细核对,法官很容易把日期或金额写错.我们就掉这坑了 2021 写成了 2020 导致要重新出裁决书,重新送达裁决书)\n\n4.等待劳动仲裁裁决书送达给对方(如果没人签收,会公告送达 时间比较长 慢慢等),期间要主动打电话问送达时间,确认送达时间 后推 15 天裁决就生效了\n\n5.拿着劳动仲裁裁决书和送达回证 去法院申请强制执行,等待强制执行终本\n\n6.拿着执行裁决书 向中级人民法院(部分区级法院也可以 如福田区的)申请公司破产清算,\n\n7.拿到破产清算受理的民事裁定书 就可以申请欠薪垫付了.\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e垫付标准\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e2020 年度职工月平均工资 11620 元,2021 年度职工月平均工资 12964 元.\n\n第二十条\n欠薪月数不超过六个月的，垫付欠薪按照实际欠薪月数计算；超过六个月的，按照六个月计算。\n\n每月欠薪数额高于本市上年度职工月平均工资百分之六十的，垫付标准按照本市上年度职工月平均工资的百分之六十计算；每月欠薪数额低于本市上年度职工月平均工资百分之六十的，垫付标准按照实际欠薪数额计算。不能确认欠薪数额的，按照本市职工最低工资标准确定垫付数额。\n\n第三十三条\n垫付欠薪涉及的上年度本市职工月平均工资，上半年垫付的，按上二年度职工月平均工资计算；下半年垫付的，按上年度职工月平均工资计算。\n\n深圳经济特区欠薪保障条例 http://www.gd.gov.cn/zwgk/wjk/zcfgk/content/post_2531474.html\n\n上海市企业欠薪保障金筹集和垫付的若干规定 https://www.shanghai.gov.cn/nw16862/20200820/0001-16862_11370.html\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e两种可以申请欠薪垫付\n1.人民法院依法受理破产申请； 2.法定代表人或者主要负责人隐匿或者逃逸；(步骤 4 完成就可以申请了,工作人员说成功率比较低,我就不在这浪费时间了 选择第一种稳拿)\u003c/p\u003e\n",
       "Author": "wmwgijol28",
@@ -198,13 +212,6 @@
       "Description": "",
       "Author": "lcq",
       "PubDate": "2022-07-08T03:38:02Z"
-    },
-    {
-      "Title": "30 岁，有润美丽国的机会，润还是不润？ - 职场话题",
-      "Link": "https://www.v2ex.com/t/864889",
-      "Description": "\u003cp\u003e当前在一个互联网大厂，最近几个月一直在裁员，暂时（一年内）本人不会被裁；和前老板聊天，说有个职位很适合，可以 relocate 到美国，所以想请教一下大家，润还是不润？\u003c/p\u003e\n\u003cp\u003e当前在大厂，所以润到美国中小公司的话，薪资上提升比较有限。主要考虑的问题有：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e职业发展问题，当前在的公司可能后续会有被裁的风险；处于非核心业务，后续发展比较有限，极大可能就是吃大锅饭；\u003c/li\u003e\n\u003cli\u003e父母后续养老问题，现在在国内，隔一段时间可以回家看看父母，如果润出去了，这样机会可能会少很多。\u003c/li\u003e\n\u003cli\u003e还是单身狗，这点算是优势？\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e希望有相关经验的老哥可以提供一些思路，感谢。\u003c/p\u003e\n",
-      "Author": "goosling",
-      "PubDate": "2022-07-08T03:34:24Z"
     },
     {
       "Title": "刚面了一个 6 年的前端，页面有 10 张图片每个 1MB， 2000 个用户同时访问需要多大带宽 - 问与答",
@@ -254,6 +261,13 @@
       "Description": "\u003cp\u003e服务器是宝塔邮局（ Postfix + Dovecot + Rspamd ）\u003c/p\u003e\n\u003cp\u003e用 Python 自带的 poplib 收信，大概每天收十几封信就会报错\u003c/p\u003e\n\u003cp\u003eConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。\u003c/p\u003e\n\u003cp\u003e之前还能通过多次尝试，重启服务器临时解决。今天这些办法都不行，一直报错。服务器只有系统防火墙，实测关闭了也没用\u003c/p\u003e\n",
       "Author": "lz24xg",
       "PubDate": "2022-07-08T03:17:31Z"
+    },
+    {
+      "Title": "30 岁，有润美丽国的机会，润还是不润？ - 职场话题",
+      "Link": "https://www.v2ex.com/t/864889",
+      "Description": "\u003cp\u003e当前在一个互联网大厂，最近几个月一直在裁员，暂时（一年内）本人不会被裁；和前老板聊天，说有个职位很适合，可以 relocate 到美国，所以想请教一下大家，润还是不润？\u003c/p\u003e\n\u003cp\u003e当前在大厂，所以润到美国中小公司的话，薪资上提升比较有限。主要考虑的问题有：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e职业发展问题，当前在的公司可能后续会有被裁的风险；处于非核心业务，后续发展比较有限，极大可能就是吃大锅饭；\u003c/li\u003e\n\u003cli\u003e父母后续养老问题，现在在国内，隔一段时间可以回家看看父母，如果润出去了，这样机会可能会少很多。\u003c/li\u003e\n\u003cli\u003e还是单身狗，这点算是优势？\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e希望有相关经验的老哥可以提供一些思路，感谢。\u003c/p\u003e\n",
+      "Author": "goosling",
+      "PubDate": "2022-07-08T03:34:24Z"
     },
     {
       "Title": "北京哪里能买到 200-300W 总价的房子，希望以后房子至少不贬值 - 北京",
