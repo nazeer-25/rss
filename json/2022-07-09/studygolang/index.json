@@ -46,13 +46,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "华为云服务器千亿补贴，4核8G5M，1800/3 年，活动长期有效",
-      "Link": "https://studygolang.com/articles/35747#reply0",
-      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220708/c7632d371099fd0b9430f56c304afb1b.jpg\" alt=\"微信图片_20220707143809.jpg\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e哪位老板有需求请联系VX：xiaomafuwuqi\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "goland go语言的强大开发工具中文激活版",
       "Link": "https://studygolang.com/resources/15536#reply0",
       "Description": "",
@@ -63,6 +56,13 @@
       "Title": "golang 压缩和解压zip文件",
       "Link": "https://studygolang.com/articles/35744#reply1",
       "Description": "\u003ch2\u003e压缩zip\u003c/h2\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc Zip(dest string, paths ...string) error {\n\tzfile, err := os.Create(dest)\n\tif err != nil {\n\t\treturn err\n\t}\n\tdefer zfile.Close()\n\n\tzipWriter := zip.NewWriter(zfile)\n\tdefer zipWriter.Close()\n\n\tfor _, src := range paths {\n\t\t// remove the trailing path sepeartor if it is a directory\n\t\tsrc := strings.TrimSuffix(src, string(os.PathSeparator))\n\n\t\terr = filepath.Walk(src, func(path string, info os.FileInfo, err error) error {\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\t// create local file header\n\t\t\theader, err := zip.FileInfoHeader(info)\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\t// set compression method to deflate\n\t\t\theader.Method = zip.Deflate\n\t\t\t// set relative path of file in zip archive\n\t\t\theader.Name, err = filepath.Rel(filepath.Dir(src), path)\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\tif info.IsDir() {\n\t\t\t\theader.Name += string(os.PathSeparator)\n\t\t\t}\n\t\t\t// create writer for writing header\n\t\t\theaderWriter, err := zipWriter.CreateHeader(header)\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\tif info.IsDir() {\n\t\t\t\treturn nil\n\t\t\t}\n\t\t\tf, err := os.Open(path)\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\tdefer f.Close()\n\t\t\t_, err = io.Copy(headerWriter, f)\n\t\t\treturn err\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t}\n\treturn nil\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch2\u003e解压zip\u003c/h2\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc Unzip(src string, dest string) error {\n\treader, err := zip.OpenReader(src)\n\tif err != nil {\n\t\treturn err\n\t}\n\tdefer reader.Close()\n\n\tfor _, file := range reader.File {\n\t\tfilePath := path.Join(dest, file.Name)\n\t\tif file.FileInfo().IsDir() {\n\t\t\tos.MkdirAll(filePath, os.ModePerm)\n\t\t} else {\n\t\t\tif err = os.MkdirAll(filepath.Dir(filePath), os.ModePerm); err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\tinFile, err := file.Open()\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\tdefer inFile.Close()\n\n\t\t\toutFile, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, file.Mode())\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t\tdefer outFile.Close()\n\n\t\t\t_, err = io.Copy(outFile, inFile)\n\t\t\tif err != nil {\n\t\t\t\treturn err\n\t\t\t}\n\t\t}\n\t}\n\treturn nil\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch2\u003e工程源码\u003c/h2\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/xbmlz/gct\"\u003ehttps://github.com/xbmlz/gct\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "华为云服务器千亿补贴，4核8G5M，1800/3 年，活动长期有效",
+      "Link": "https://studygolang.com/articles/35747#reply0",
+      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220708/c7632d371099fd0b9430f56c304afb1b.jpg\" alt=\"微信图片_20220707143809.jpg\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e哪位老板有需求请联系VX：xiaomafuwuqi\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
