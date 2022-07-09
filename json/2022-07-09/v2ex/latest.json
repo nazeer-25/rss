@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "[求助][zerotier]zerotier 很卡，基本处于不太可用状态。 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/865188",
+      "Description": "\u003cp\u003e最近房东换了个新网，没有公网 IP 了，之前是在路由器开了个 OpenVpn Server ，公司电脑作为 client 连过去。\n家里路由器下有台服务器，装了些服务，本来公司电脑 vpn 连过来用着很方便。\n同事服务器上开了 samba ，vpn 连过来，samba 作为网络驱动器挂在 windows 下用着很方便，速度也不错。\n现在问题来了。\u003c/p\u003e\n\u003cp\u003e没有公网 IP 后，我用过 frp 。\n我腾讯云有机子，frp 可以用，速度也不错，但是只限于我开的那些服务，而且每个服务都要映射一遍，很麻烦。所以开始搜能不能没有公网 IP 的情况下，搭建局域网 vpn 。\u003c/p\u003e\n\u003cp\u003e找到两个方案。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ezerotier\u003c/li\u003e\n\u003cli\u003eopenvpn\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch4\u003ezerotier\u003c/h4\u003e\n\u003cp\u003e我用了，我在我家里服务器上装了 zerotier ，路由器有 zerotier 插件也装了，公司电脑也装了 zerotier 。\n现在有两个问题。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e很卡。节点接互 ping 经常丢包，时延也在 400-800ms 。samba 的服务器上装了 zerotier ，能作为网络驱动器打开但是很卡，打开个目录卡个几秒钟，考个文件过去卡住没什么反应，基本不可用。\u003c/li\u003e\n\u003cli\u003e公司能 ping 通路由器，同时路由器上做了端口转发到内网服务端口，但是访问路由器开出来的端口无法访问服务。（这样的思路不行么？）\n不知道怎么解决，卡的问题是不是能通过在腾讯云搭建 moon 节点解决？\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch4\u003eopenvpn\u003c/h4\u003e\n\u003cp\u003e我还没有试，思路是在腾讯云或者其他有公网 IP 的机子上装个 openvpn server ，将路由器和公司电脑作为 client 接入。路由器开端口映射，公司电脑是不是就能通过路由器的局域网 ip 和开出来的端口进行访问？\n然后在 samba 服务器作为 client 接入，公司电脑也就能访问 samba 目录了。（不知道行不行？）\u003c/p\u003e\n\u003cp\u003e网络小白，大哥们求赐教。\u003c/p\u003e\n",
+      "Author": "zjsegzhf",
+      "PubDate": "2022-07-09T16:55:29Z"
+    },
+    {
+      "Title": "数据库应该使用单独列存储计数吗？ - 数据库",
+      "Link": "https://www.v2ex.com/t/865187",
+      "Description": "\u003ch2\u003e问题描述\u003c/h2\u003e\n\u003cp\u003e一个学校有 N 个班级，一个班级有 N 个学生。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e在展示学校列表的时候，需要展示该学校的班级数量、学生数量\u003c/li\u003e\n\u003cli\u003e在展示班级列表的时候，需要展示该班级的学生数量\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e以下两种方式如何选择：\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e\u003cstrong\u003e1.使用单独列\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e在\u003ccode\u003e学校\u003c/code\u003e表使用 \u003ccode\u003eclassesCount\u003c/code\u003e 和 \u003ccode\u003estudentsCount\u003c/code\u003e 两个列来分别存储该校\u003ccode\u003e班级\u003c/code\u003e数量、该校\u003ccode\u003e学生\u003c/code\u003e数量，在\u003ccode\u003e班级\u003c/code\u003e表中使用 \u003ccode\u003estudentsCount\u003c/code\u003e 列存储该班\u003ccode\u003e学生\u003c/code\u003e数量。\u003c/p\u003e\n\u003cp\u003e在\u003ccode\u003e班级\u003c/code\u003e实体增、删时，更新\u003ccode\u003e学校\u003c/code\u003e表的 \u003ccode\u003eclassesCount\u003c/code\u003e 列；在\u003ccode\u003e学生\u003c/code\u003e实体增、删时，更新\u003ccode\u003e班级\u003c/code\u003e表及\u003ccode\u003e学校\u003c/code\u003e表的 \u003ccode\u003estudentsCount\u003c/code\u003e 列。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e2.使用数据库查询\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e班级数量和学生数量由数据库查询获得。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003eselect * from cmapus;\nselect count(*) as classesCount from classes group by campus_id;\nselect count(*) as studentsCount from students group by campus_id;\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr/\u003e\n\u003cp\u003e方式一在增、删时需要做额外操作，会存在事务不能保证正确的情况吗？\u003c/p\u003e\n\u003cp\u003e方式二在数据量大的时候性能会很差吗？\u003c/p\u003e\n\u003ch2\u003e额外提问\u003c/h2\u003e\n\u003cp\u003e类似这种数据库设计问题，有推荐的书籍参阅吗？\u003c/p\u003e\n",
+      "Author": "zhengjian",
+      "PubDate": "2022-07-09T16:47:53Z"
+    },
+    {
       "Title": "Ventura 设置里有个登录项，怎么删除呢 - macOS",
       "Link": "https://www.v2ex.com/t/865186",
       "Description": "好多已经卸载的 app 还残留在登录项，比如 docker 启动守护进程，docker 残留文件几乎删完了，还是不行",
