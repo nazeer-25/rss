@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "抖音出 Mac 客户端了？ - 分享发现",
+      "Link": "https://www.v2ex.com/t/865442",
+      "Description": "via: \u003ca target=\"_blank\" href=\"https://www.douyin.com/downloadpage\" rel=\"nofollow noopener\"\u003ehttps://www.douyin.com/downloadpage\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e使用体验简报：\u003cbr /\u003e\u003cbr /\u003e网页套了一个壳，CPU 占用还奇高（ 53%~80%）。搜索出视频结果，打开视频居然跳开新窗口。。算了。还是继续用网页版得了。",
+      "Author": "yanwen",
+      "PubDate": "2022-07-11T07:06:19Z"
+    },
+    {
+      "Title": "React 中授权码模式有示例吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/865440",
+      "Description": "\u003cp\u003e目前我在自己创建一个 授权码模式 提供者，创建一个 React 去调用。\u003c/p\u003e\n\u003cp\u003e关键角色：认证服务，认证客服端，回调地址。\u003c/p\u003e\n\u003cp\u003ecallback.tsx\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eexport default function CallBack() {\n  useEffect(() =\u0026gt; {\n    window.location.href = 'http://127.0.0.1:8080/';\n  }, []);\n\n  return (\n    \u0026lt;div\u0026gt;登录跳转中...\u0026lt;/div\u0026gt;\n  );\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eAuthContext.tsx\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003euseEffect(() =\u0026gt; {\n    const initialize = async () =\u0026gt; {\n\n      //\n      const code = new URL(window.location.href).searchParams.get('code');\n      // 是否已经登录了\n      const accessToken = localStorage.getItem('accessToken');\n\n      if (code) {\n        const body = [];\n        body.push('grant_type=authorization_code');\n        body.push(`code=${code}`);\n        body.push('redirect_uri=http://127.0.0.1:8080/callback');\n        axios.post('/api/oauth2/token', body.join('\u0026amp;'), {\n          headers: {\n            'Content-Type': 'application/x-www-form-urlencoded',\n            'Authorization': 'Basic YmVhci1jbGllbnQ6YmVhcg==',\n          },\n        }).then(response =\u0026gt; {\n          if (response.status !== 200) {\n            return Promise.reject(new Error('Invalid status code received in the token response: '\n              + response.status));\n          }\n          setSession(response.data.access_token);\n        });\n      }\n\n      console.log('AuthContext' + code);\n\n      // check token\n      if (accessToken) {\n        const user = { 'username': 'admin' };\n        dispatch({\n          type: Types.init,\n          payload: {\n            isAuthenticated: true,\n            user,\n          },\n        });\n      }\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eAuthGuard.tsx\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eif (!isAuthenticated) {\n    if (pathname !== requestedLocation) {\n      setRequestedLocation(pathname);\n    }\n    let authorize = 'http://127.0.0.1:9000/oauth2/authorize?response_type=code\u0026amp;scope=market\u0026amp;client_id=bear-client\u0026amp;redirect_uri=http://127.0.0.1:8080/callback';\n    window.location.href = authorize;\n\n  }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eAuthGuard -\u0026gt; callback -\u0026gt; AuthContext\u003c/p\u003e\n\u003cp\u003e退出后 callback -\u0026gt; AuthContext ，如果删除 callback 直接进入 AuthContext 则会获取不到 token.\u003c/p\u003e\n\u003cp\u003e但是我退出如果只是删除了 session 则会进入重定向死循环。。 \u003c/p\u003e\n\u003cp\u003e问题有点没头没脑的，求个简单示例吧。\u003c/p\u003e\n",
+      "Author": "guisheng",
+      "PubDate": "2022-07-11T06:59:55Z"
+    },
+    {
+      "Title": "我可以让公司再和我签一个合同吗？ - 职场话题",
+      "Link": "https://www.v2ex.com/t/865439",
+      "Description": "\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.bmp.ovh/imgs/2022/07/11/69fefab4095d4d49.png\"/\u003e\n本来想发文字的，但是发不出来，只能发图了，麻烦大家看下。\u003c/p\u003e\n",
+      "Author": "amiwrong123",
+      "PubDate": "2022-07-11T06:57:50Z"
+    },
+    {
+      "Title": "跑步受限，髌腱炎，难受 - 跑步",
+      "Link": "https://www.v2ex.com/t/865438",
+      "Description": "\u003cp\u003e一个多月了，疼痛有所减轻，什么时候才能痊愈，想念可以自由跑动的日子\u003c/p\u003e\n",
+      "Author": "3country",
+      "PubDate": "2022-07-11T06:57:40Z"
+    },
+    {
+      "Title": "怎么买金条划算？ - 问与答",
+      "Link": "https://www.v2ex.com/t/865437",
+      "Description": "\u003cp\u003e感觉最近时局动荡，想买点金条囤起来，其实也没钱就是几 g 几 g 的买。\n但是感觉店里价格简直 sb ，网上价格也不算很划算，有没有什么方式能接近金价的买黄金？\u003c/p\u003e\n",
+      "Author": "svt",
+      "PubDate": "2022-07-11T06:55:54Z"
+    },
+    {
       "Title": "能不能让设备同时获取到 2 个不同网段的 IP 地址？ - OpenWrt",
       "Link": "https://www.v2ex.com/t/865436",
       "Description": "\u003cp\u003e如下图所示：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"net.jpeg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/07/11/GHK7hdW6IwfxQ2Y.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e请问我如何配置才能让路由器下的设备同时获取 2 个网段的 IP 地址？\u003c/p\u003e\n",
