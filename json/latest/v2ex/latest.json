@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "机器学习有没有什么方案可以实现文章自动配图？ - 问与答",
+      "Link": "https://www.v2ex.com/t/865770",
+      "Description": "\u003cp\u003e如题，需求是个人博客经常会更新一些音乐相关评论，比如 xxx 曲，xxx 歌手，xxx 作者，每次发文章都要新找配图，文章多了以后感觉挺麻烦的。使用深度学习有没有什么方案可以实现自动配图呢？比如根据标题自动筛选出关键字（歌手、歌曲名等等），然后到图片引擎爬取对应关键字的结果，然后通过某种网络筛选出来合适的图。\u003c/p\u003e\n\u003cp\u003e目前没法直接引用爬取结果是，搜索引擎出来的图也不一定是相关的，有可能出现完全无关的图，而且图片大小之类的也很难限制，经常搜出超大或超小的图。音乐相关如果只是单纯爬取某些音乐网站的话，各家的数据又都不全，而且有些网络歌曲不在这些音乐网站里\u003c/p\u003e\n",
+      "Author": "LeeReamond",
+      "PubDate": "2022-07-12T14:01:34Z"
+    },
+    {
+      "Title": "有感而发，经济危机时，做什么才能最大程度减少自己的损失？ - 问与答",
+      "Link": "https://www.v2ex.com/t/865768",
+      "Description": "对目前的经济越来越无信心了，联系最近最受关注的银行事件，以及今天传的全国烂尾楼受害者发起的强制停贷接力，真的感觉深深地不安。\u003cbr /\u003e没怎么看过经济危机方面的书籍，可以推荐一下？以及讨论一下最差的情况发生的话，可以做些什么来尽量保护自己和家人？\u003cbr /\u003e（希望尽量严肃一些的讨论~）",
+      "Author": "KillPaul",
+      "PubDate": "2022-07-12T13:58:37Z"
+    },
+    {
+      "Title": "Cloudflare 批量删除 DNS 记录的方式 - Cloudflare",
+      "Link": "https://www.v2ex.com/t/865765",
+      "Description": "\u003cp\u003e域名 NS 之前在阿里云，解析了泛域名\u003ccode\u003e*.domain.com\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e导入 cf 时，它自动帮我同步了 200+条记录\u003c/p\u003e\n\u003cp\u003e尝试在阿里云删除\u003ccode\u003e*.domain.com\u003c/code\u003e，等了十几分钟再导入依然 200+记录\u003c/p\u003e\n\u003cp\u003e尝试了几次发现没有阻止 cf 自动导入的方式，于是打算手动删除\u003c/p\u003e\n\u003cp\u003e但是 200+条太多，官方也没有批量删除的方式，只好借助 api 了\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eimport axios from 'axios'\n\nconst apiEmail = 'cloudflare login email'\nconst apiKey   = 'Global API Key @ https://dash.cloudflare.com/profile/api-tokens'\nconst zoneId   = 'zone id of the domain in cloudflare'\n\nconst api = `https://api.cloudflare.com/client/v4/zones/${zoneId}/dns_records`\nconst headers = {'X-Auth-Email': apiEmail, 'X-Auth-Key': apiKey}\naxios.request({url: `${api}?per_page=5000`, headers}).then(({data})=\u0026gt;{ \n  // https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records at List DNS Records\n  let errorOccurs = false\n  for (const dnsRecord of data.result||[]) {\n    axios.request({url: `${api}/${dnsRecord.id}`, method: 'DELETE', headers}).then(({data})=\u0026gt;{\n      console.log('delete result', data)\n    }).catch(error=\u0026gt;{\n      console.error(error, error.response?.data)\n      errorOccurs = true\n    })\n    if (errorOccurs) break\n  }\n}).catch(error=\u0026gt;{\n  console.error(error, error.response?.data)\n})\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "estk",
+      "PubDate": "2022-07-12T13:48:19Z"
+    },
+    {
       "Title": "字符串 hash 问题，有 \u003cN 个字符串长度任意，放入到长度为 N 的数组，后续还需要根据这 N 个字符串快速得到位置，怎么样最快呢？ - 程序员",
       "Link": "https://www.v2ex.com/t/865764",
       "Description": "\u003cp\u003e有经验的大佬来指教一下\u003c/p\u003e\n",
@@ -221,7 +242,7 @@
       "PubDate": "2022-07-12T09:42:28Z"
     },
     {
-      "Title": "请求下各位怎么看书的 - 问与答",
+      "Title": "请求下各位怎么看书的 - 阅读",
       "Link": "https://www.v2ex.com/t/865727",
       "Description": "\u003cp\u003e最近在家里看书，发现一些问题。\u003c/p\u003e\n\u003cp\u003e看的一本是《经济学原理》，刚开始看的时候还好，感觉挺有意思的，到了后面，有太多的新概念，看了后面忘了前面，还有很多概念晦涩难懂，有想过边看边做笔记，但是需要的记得东西有点多，工作量有点大。\u003c/p\u003e\n\u003cp\u003e还有平常看技术书也是，看了就忘了，平常工作有些也不好学以致用。\u003c/p\u003e\n\u003cp\u003e不知道大家有什么看书的技巧，以及怎么对抗遗忘。\u003c/p\u003e\n",
       "Author": "dongdongdong",
