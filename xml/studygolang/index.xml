@@ -37,14 +37,14 @@
       <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// The Go visibility rules for struct fields are amended for JSON when&#xA;// deciding which field to marshal or unmarshal. If there are&#xA;// multiple fields at the same level, and that level is the least&#xA;// nested (and would therefore be the nesting level selected by the&#xA;// usual Go rules), the following extra rules apply:&#xA;//&#xA;// 1) Of those fields, if any are JSON-tagged, only tagged fields are considered,&#xA;// even if there are multiple untagged fields that would otherwise conflict.&#xA;//&#xA;// 2) If there is exactly one field (tagged or not according to the first rule), that is selected.&#xA;//&#xA;// 3) Otherwise there are multiple fields, and all are ignored; no error occurs.&#xA;//&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;其中的&lt;code&gt;the least nested&lt;/code&gt;最小嵌套是什么意思？这里的A，B，C三个struct哪个是最小嵌套？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Int int&#xA;&#xA;type C struct {&#xA;&#x9;Int&#xA;}&#xA;&#xA;type B struct {&#xA;&#x9;C&#xA;&#x9;Int&#xA;}&#xA;&#xA;type A struct {&#xA;&#x9;B&#xA;&#x9;Int&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
+      <title>自己搭建的库上传到github之后怎么使用？</title>
+      <link>https://studygolang.com/topics/15687#reply4</link>
+      <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220710/62afb12e5c532cd1a3e19dbb95227b14.jpg&#34; alt=&#34;image.png&#34; /&gt;&lt;br&gt;&#xA;下载好之后 不能用然后目录是这样的&lt;br&gt;&#xA;&lt;img src=&#34;https://static.golangjob.cn/220710/c79d86f95b59085621667dda07de2f80.jpg&#34; alt=&#34;image.png&#34; /&gt;&lt;br&gt;&#xA;使用的时候会报错让我使用get重新安装&lt;br&gt;&#xA;&lt;img src=&#34;https://static.golangjob.cn/220710/321ef8177502a3e68ab72dab4217c97f.png&#34; alt=&#34;image.png&#34; /&gt;&lt;br&gt;&#xA;原因是地址中还有大小写吗还是什么求大佬指教&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>函数的入参统一做jsonMarshal或jsonUnmarshal处理，通过反射？</title>
       <link>https://studygolang.com/topics/15688#reply1</link>
       <description>&lt;p&gt;请教各位经验er一个基础问题，也不确定是否可行&lt;/p&gt;&#xA;&#xA;&lt;p&gt;假设原来多个函数，如下图，函数 A、B、C 等，里面第一部分逻辑都需要对入参做jsonMarshal或jsonUnmarshal或其他操作，我就想着是否可以通过反射或其他方法统一处理掉，在函数外面嵌套一层去做处理。&#xA;&lt;img src=&#34;https://static.golangjob.cn/220711/5c2e5caeaf5e4fb702c79c4e58a16fec.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如何才能统一处理呢，麻烦有经验的大大指点下查询哪方面知识我去试下，或解决方案链接，或demo&#xA;&lt;img src=&#34;https://static.golangjob.cn/220711/700b0b57987c8f347c4eb382ec2c2773.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;感激不尽。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>自己搭建的库上传到github之后怎么使用？</title>
-      <link>https://studygolang.com/topics/15687#reply3</link>
-      <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220710/62afb12e5c532cd1a3e19dbb95227b14.jpg&#34; alt=&#34;image.png&#34; /&gt;&lt;br&gt;&#xA;下载好之后 不能用然后目录是这样的&lt;br&gt;&#xA;&lt;img src=&#34;https://static.golangjob.cn/220710/c79d86f95b59085621667dda07de2f80.jpg&#34; alt=&#34;image.png&#34; /&gt;&lt;br&gt;&#xA;使用的时候会报错让我使用get重新安装&lt;br&gt;&#xA;&lt;img src=&#34;https://static.golangjob.cn/220710/321ef8177502a3e68ab72dab4217c97f.png&#34; alt=&#34;image.png&#34; /&gt;&lt;br&gt;&#xA;原因是地址中还有大小写吗还是什么求大佬指教&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go语言爱好者周刊：第 151 期</title>
@@ -128,6 +128,11 @@
       <title>模板消息参数类型校验</title>
       <link>https://studygolang.com/topics/15682#reply3</link>
       <description>&lt;p&gt;想模仿公众号自己弄一个模板消息，模板消息结构体为&#xA;&lt;img src=&#34;https://static.golangjob.cn/220707/071751faa83a30b3738bf93f1972f91d.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;那比如{{AAA}}是小三，{{BBB}}是小四。小三认识了小四。那对于这个{{AAA}}和{{BBB}}这俩参数类型及长度的校验怎么做。比如限定俩都是字符串，长度20。这块参数类型的限定怎么做，需要加什么结构或者伪代码，请有思路的人帮忙给点指导建议或者demo代码，谢谢。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>自己搭建的库上传到github之后怎么使用？</title>
+      <link>https://studygolang.com/topics/15687#reply3</link>
+      <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220710/62afb12e5c532cd1a3e19dbb95227b14.jpg&#34; alt=&#34;image.png&#34; /&gt;&lt;br&gt;&#xA;下载好之后 不能用然后目录是这样的&lt;br&gt;&#xA;&lt;img src=&#34;https://static.golangjob.cn/220710/c79d86f95b59085621667dda07de2f80.jpg&#34; alt=&#34;image.png&#34; /&gt;&lt;br&gt;&#xA;使用的时候会报错让我使用get重新安装&lt;br&gt;&#xA;&lt;img src=&#34;https://static.golangjob.cn/220710/321ef8177502a3e68ab72dab4217c97f.png&#34; alt=&#34;image.png&#34; /&gt;&lt;br&gt;&#xA;原因是地址中还有大小写吗还是什么求大佬指教&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>请教有没有用过rsa公钥解密私钥加密的兄弟</title>
