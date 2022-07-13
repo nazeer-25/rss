@@ -31,9 +31,9 @@
       <link>https://studygolang.com/p/1120#reply0</link>
     </item>
     <item>
-      <title>请教有没有用过rsa公钥解密私钥加密的兄弟</title>
-      <link>https://studygolang.com/topics/15691#reply2</link>
-      <description>&lt;p&gt;目前在对接个接口，要求的是公钥解密，私钥加密的。&#xA;但是找了一下golang的文档 发现都是私钥解密 公钥加密的。&lt;/p&gt;&#xA;</description>
+      <title>函数的入参统一做jsonMarshal或jsonUnmarshal处理，通过反射？</title>
+      <link>https://studygolang.com/topics/15688#reply1</link>
+      <description>&lt;p&gt;请教各位经验er一个基础问题，也不确定是否可行&lt;/p&gt;&#xA;&#xA;&lt;p&gt;假设原来多个函数，如下图，函数 A、B、C 等，里面第一部分逻辑都需要对入参做jsonMarshal或jsonUnmarshal或其他操作，我就想着是否可以通过反射或其他方法统一处理掉，在函数外面嵌套一层去做处理。&#xA;&lt;img src=&#34;https://static.golangjob.cn/220711/5c2e5caeaf5e4fb702c79c4e58a16fec.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如何才能统一处理呢，麻烦有经验的大大指点下查询哪方面知识我去试下，或解决方案链接，或demo&#xA;&lt;img src=&#34;https://static.golangjob.cn/220711/700b0b57987c8f347c4eb382ec2c2773.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;感激不尽。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>关于Go的selector的疑惑</title>
@@ -41,14 +41,14 @@
       <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type A struct {&#xA;&#x9;r int&#xA;}&#xA;&#xA;func (a A) FuncA() {}&#xA;&#xA;type B A&#xA;&#xA;type C *A&#xA;&#xA;func main() {&#xA;    var b B&#xA;    var a A&#xA;    var c C&#xA;    a.FuncA()   //legal&#xA;    b.FuncA()   //illegal&#xA;    c.FuncA()   //illegal&#xA;    (*c).FuncA()    //legal&#xA;    fmt.Println(b.r)    //legal&#xA;    fmt.Println(c.r)    //legal&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;为什么b.FuncA() 和 c.FuncA() 不合法，而(*c).FuncA()，b.r和c.r合法呢？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>请教有没有用过rsa公钥解密私钥加密的兄弟</title>
+      <link>https://studygolang.com/topics/15691#reply2</link>
+      <description>&lt;p&gt;目前在对接个接口，要求的是公钥解密，私钥加密的。&#xA;但是找了一下golang的文档 发现都是私钥解密 公钥加密的。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>golang os.StartProcess 子进程标准输出问题</title>
       <link>https://studygolang.com/topics/15690#reply0</link>
       <description>&lt;p&gt;在开发 一个进程管理程序时使用os.StartProcess 方法启动进程 为 进程的标准输出，错误输出 进行日志处理，日志需要添加 时间前缀所以需要截断 输出流进行 时间追加。具体代码如下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;logOutput1, logOutput12, err := getLogFile(logPath)&#xA;if err != nil {&#xA;&#x9;return nil, err&#xA;}&#xA;&#xA;&#xA;attr := &amp;amp;os.ProcAttr{&#xA;&#x9;Dir: filepath.Dir(processFile),&#xA;&#x9;Env:   os.Environ(),&#xA;&#x9;Files: []*os.File{nil, logOutput1, logOutput12},&#xA;&#x9;Sys: &amp;amp;syscall.SysProcAttr{&#xA;&#x9;&#x9;Credential: &amp;amp;syscall.Credential{&#xA;&#x9;&#x9;&#x9;Uid: uid,&#xA;&#x9;&#x9;&#x9;Gid: gid,&#xA;&#x9;&#x9;},&#xA;&#x9;&#x9;Setsid: true,&#xA;&#x9;},&#xA;}&#xA;&#xA;var processParams = []string{processFile}&#xA;if len(extArgs) &amp;gt; 0 {&#xA;&#x9;processParams = append(processParams, strings.Split(extArgs, &amp;quot; &amp;quot;)...)&#xA;}&#xA;&#xA;process, err := os.StartProcess(processFile, processParams, attr)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;func getLogFile(customLogFile string) (*os.File,*os.File, error) {&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;logFile, err := os.OpenFile(customLogFile, syscall.O_CREAT|syscall.O_APPEND|syscall.O_WRONLY, 0755)&#xA;if err != nil {&#xA;&#x9;return nil,nil, err&#xA;}&#xA;&#xA;rf1,wf1,err2:= os.Pipe()&#xA;if err2 != nil{&#xA;&#x9;log(&amp;quot;管道开启失败-&amp;quot; + err2.Error())&#xA;}&#xA;go func (rf, wf *os.File){&#xA;&#x9; for{&#xA;&#x9;&#x9; buffer := make([]byte, 5000)&#xA;&#x9;&#x9; flen ,err := rf.Read(buffer)&#xA;&#x9; &#x9;if err == io.EOF{&#xA;&#x9;&#x9;&#x9;if wf != nil{&#xA;&#x9;&#x9;&#x9;&#x9;wf.Close()&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;rf.Close()&#xA;&#x9;&#x9;&#x9;break&#xA;&#x9;&#x9;}&#xA;&#x9; &#x9;if err == nil{&#xA;&#x9; &#x9;&#x9;if flen &amp;lt; 1{&#xA;&#x9; &#x9;&#x9;&#x9;continue&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9; &#x9;&#x9;now := time.Now().Format(&amp;quot;2006-01-02 15:04:05&amp;quot;) + &amp;quot; &amp;quot;&#xA;&#x9;&#x9;&#x9;wf.Write(append([]byte(now), buffer[:flen]...))&#xA;&#x9;&#x9;}else{&#xA;&#x9;&#x9;&#x9;continue&#xA;&#x9;&#x9;}&#xA;&#x9; }&#xA;}(rf1,logFile)&#xA;&#xA;rf2,wf2,err3:= os.Pipe()&#xA;if err3 != nil{&#xA;&#x9;log(&amp;quot;管道开启失败-&amp;quot; + err3.Error())&#xA;}&#xA;go func (rf, wf *os.File){&#xA;&#x9;for{&#xA;&#x9;&#x9;buffer := make([]byte, 5000)&#xA;&#x9;&#x9;flen ,err := rf.Read(buffer)&#xA;&#x9;&#x9;if err == io.EOF {&#xA;&#x9;&#x9;&#x9;if wf != nil{&#xA;&#x9;&#x9;&#x9;&#x9;wf.Close()&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;rf.Close()&#xA;&#x9;&#x9;&#x9;break&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if err == nil{&#xA;&#x9;&#x9;&#x9;if flen &amp;lt; 1{&#xA;&#x9;&#x9;&#x9;&#x9;continue&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;now := time.Now().Format(&amp;quot;2006-01-02 15:04:05&amp;quot;) + &amp;quot; &amp;quot;&#xA;&#x9;&#x9;&#x9;wf.Write(append([]byte(now), buffer[:flen]...))&#xA;&#x9;&#x9;}else{&#xA;&#x9;&#x9;&#x9;continue&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}(rf2,logFile)&#xA;return wf1,wf2, nil&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;测试执行启动程序后 子进程 总是会出现 标准输出无法写入导致 子进程挂掉，有谁了解的吗帮忙解答下&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>函数的入参统一做jsonMarshal或jsonUnmarshal处理，通过反射？</title>
-      <link>https://studygolang.com/topics/15688#reply1</link>
-      <description>&lt;p&gt;请教各位经验er一个基础问题，也不确定是否可行&lt;/p&gt;&#xA;&#xA;&lt;p&gt;假设原来多个函数，如下图，函数 A、B、C 等，里面第一部分逻辑都需要对入参做jsonMarshal或jsonUnmarshal或其他操作，我就想着是否可以通过反射或其他方法统一处理掉，在函数外面嵌套一层去做处理。&#xA;&lt;img src=&#34;https://static.golangjob.cn/220711/5c2e5caeaf5e4fb702c79c4e58a16fec.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如何才能统一处理呢，麻烦有经验的大大指点下查询哪方面知识我去试下，或解决方案链接，或demo&#xA;&lt;img src=&#34;https://static.golangjob.cn/220711/700b0b57987c8f347c4eb382ec2c2773.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;感激不尽。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>优维低代码：Best Practice</title>
