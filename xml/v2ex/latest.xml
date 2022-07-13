@@ -4,6 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>问一个 golang 新手问题，一个 golang 的 struct 使用了 json fields，怎么在导入的时候加入其他的 fields？ - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/865993</link>
+      <description>&lt;p&gt;比如说我在 models 里面定义了一个 user struct 绑定了 json fields ，数据操作层可能有不同的实现，因为数据库可能有多个不同的实现，比如说用 orm 来进行数据库的 curd 要增加 orm 的 fields ，使用 mongodb 的 drver 来进行 nosql 的的 curd 要增加 mongodb 的 bson 的 fields. &lt;/p&gt;&#xA;&lt;p&gt;想做到操作层和 model 层的分离，有什么好的项目实践方法？&lt;/p&gt;&#xA;&lt;p&gt;写了个 demo ，发现实现起来太笨了。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package repo&#xA;&#xA;import (&#xA;&#x9;&#34;context&#34;&#xA;&#x9;&#34;time&#34;&#xA;&#xA;&#x9;&#34;gin-base/models&#34;&#xA;&#x9;&#34;github.com/uptrace/bun&#34;&#xA;)&#xA;&#xA;// bunUserRepository bun ORM user struct&#xA;type bunUserRepostiory struct {&#xA;&#x9;DB *bun.DB&#xA;}&#xA;&#xA;type bunUser struct {&#xA;&#x9;bun.BaseModel `bun:&#34;table:users&#34;`&#xA;&#x9;ID            uint64    `bun:&#34;id,pk,autoincrement&#34;`&#xA;&#x9;Username      string    `bun:&#34;username,notnull&#34;`&#xA;&#x9;Password      string    `bun:&#34;password,notnull&#34;`&#xA;&#x9;Nickname      string    `bun:&#34;nickname&#34;`&#xA;&#x9;CreateAt      time.Time `bun:&#34;create_at,nullzero,notnull,default:current_timestamp&#34;`&#xA;&#x9;UpdateAt      time.Time `bun:&#34;update_at,nullzero,notnull,default:current_timestamp&#34;`&#xA;&#x9;DeleteAt      time.Time `bun:&#34;delete_at,soft_delete,nullzero,notnull,default:current_timestamp&#34;`&#xA;}&#xA;&#xA;func (bu *bunUser) Model() (mu *models.User) {&#xA;&#x9;mu.ID = bu.ID&#xA;&#x9;mu.Username = bu.Username&#xA;&#x9;mu.Password = bu.Password&#xA;&#x9;mu.Nickname = bu.Nickname&#xA;&#x9;mu.CreateAt = bu.CreateAt&#xA;&#x9;mu.UpdateAt = bu.UpdateAt&#xA;&#x9;mu.DeleteAt = bu.DeleteAt&#xA;&#x9;return mu&#xA;&#xA;}&#xA;&#xA;func NewBunUserRepostiory(DB *bun.DB) *bunUserRepostiory {&#xA;&#x9;return &amp;amp;bunUserRepostiory{DB: DB}&#xA;}&#xA;&#xA;func (b *bunUserRepostiory) Create(ctx context.Context,&#xA;&#x9;newUser *bunUser) (u *models.User, err error) {&#xA;&#x9;_, err = b.DB.NewInsert().Model(newUser).Exec(ctx)&#xA;&#x9;u = newUser.Model()&#xA;&#x9;return&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>livenux</author>
+      <pubDate>13 Jul 2022 13:57:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>Pixle4a 5G 的手势感觉有点难，有没有像 iPhone 那样的悬浮触控小圆圈按钮呀？ - 问与答</title>
+      <link>https://www.v2ex.com/t/865992</link>
+      <description>&lt;a target=&#34;_blank&#34; href=&#34;https://support.google.com/pixelphone/answer/7443425?hl=zh-Hant&#34; rel=&#34;nofollow noopener&#34;&gt;https://support.google.com/pixelphone/answer/7443425?hl=zh-Hant&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;这个手势文档感觉太多了~·&lt;br /&gt;有没有简单的悬浮触控呀~~</description>
+      <author>foreverstandbyu</author>
+      <pubDate>13 Jul 2022 13:57:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>生产力工具笔记本有推荐的吗 - 硬件</title>
+      <link>https://www.v2ex.com/t/865991</link>
+      <description>希望是 win 平台大内存低显卡 最重要是稳定&lt;br /&gt;目前有点中意 thinkpad 的 p15gen2 想看看还有没有其他选择</description>
+      <author>gibber</author>
+      <pubDate>13 Jul 2022 13:55:57 +0000</pubDate>
+    </item>
+    <item>
+      <title>上海今年这是要热死谁啊？ - 上海</title>
+      <link>https://www.v2ex.com/t/865990</link>
+      <description>&lt;p&gt;咱就是说，来上海好几年了今年是最热的一年，夏天还有三个月，可怎么熬啊呜呜呜呜 T T&lt;/p&gt;&#xA;</description>
+      <author>xxxoctopus</author>
+      <pubDate>13 Jul 2022 13:54:53 +0000</pubDate>
+    </item>
+    <item>
+      <title>一个系统如何保证 log 的高可用跟鲁棒性？ - 程序员</title>
+      <link>https://www.v2ex.com/t/865988</link>
+      <description>之前一阵在研究一些系统设计题。&lt;br /&gt;对于数据库，突然断电的解决办法大多都是读 raw log 重做。也就是 log 是整个系统安全的基石。&lt;br /&gt;但似乎从来没见到讨论如何保证 写 log 可用 跟 log 不丢失（磁盘损坏 etc ）。&lt;br /&gt;我尝试找过很多材料，基本都没有讨论，遂很迷茫，求大佬解释下。&lt;br /&gt;&lt;br /&gt;或者换个角度，这个 log 要不要放在三个不同机房的机器上（是的话如何保证写高可用，不是的话怎么容灾）？每台机器是不是要组个 raid （什么样的 raid 比较推荐）？某台机器突然坏了（断电，磁盘出错）怎么办？&lt;br /&gt;再如果 log 是跟数据库的机器在一台电脑上，怎么保证分布式下的数据库的 log 们都一样呢？</description>
+      <author>yhvictor</author>
+      <pubDate>13 Jul 2022 13:44:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>上个月还发帖抱怨喂同事屎，这个月祸来了。 - 职场话题</title>
+      <link>https://www.v2ex.com/t/865987</link>
+      <description>前置剧情：直属领导一个孕妇马上要休产假了，不出意外这个位置是我的了。&lt;br /&gt;&lt;br /&gt;于是她开始被挖坑，在总监面前各种抓我的错误，本人性格也是大意，开始也没觉得不对。现在总监觉得我很喜欢在别人身上找原因，以及真的态度有问题，连被针对都是臆想。导致我 6 月份绩效钱要被扣 20%，&lt;br /&gt;&lt;br /&gt;原因 1.卡我工作进度导致没有按时完成工作说我工作能力不行，2.找个四五月份的工作错误，没有对公司造成任何损失扣分。3.说我晚上 23 点拒绝接受紧急加班任务，工作态度不好。事实这事情还是拖到了第二天好，根本不是什么紧急事&lt;br /&gt;&lt;br /&gt;关键是交代给我的工作我没有一个拒绝，安排的加班也没有一次不来的，唯一我接受自己工作能力不足这一点，但是我薪资和职位就这点高度。但是另外两个小鞋我穿不上，明天人事找我约谈，我不怕被开，倒是想拿赔偿。但是以这种方式扣我钱合法吗，V 友求支招</description>
+      <author>xiaocongcong</author>
+      <pubDate>13 Jul 2022 13:43:16 +0000</pubDate>
+    </item>
+    <item>
       <title>分享个有趣的发现， ios 端港澳地区的 app 都没有广告，包括哔哩哔哩，抖音，微信等等 - 分享发现</title>
       <link>https://www.v2ex.com/t/865985</link>
       <description>那天看到有人发香港地区的哔哩哔哩比较简约，我就把大陆地区的卸载了，登录我香港区的 appleid 去下载了 B 站，果然清爽了好多，视频区没看到过广告推广的视频了。&lt;br /&gt;然后我把大陆的抖音也卸载了，去下载了港区的，也刷不到广告视频了。&lt;br /&gt;我再突发奇想，微信呢？刷朋友圈，每页必有一个垃圾推送广告，我把聊天记录转移以后，重新下载了港区的 wechat ，刷朋友圈都没有广告了！！！&lt;br /&gt;由此看来，以后大部分 app 都可以迁移到港区了。&lt;br /&gt;我得出结论：牛`ma`爱看广告，谁赞成，谁反对？</description>
