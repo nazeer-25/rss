@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教下，我这个 API 后端访问分布情况，服务器放在哪里更合适呢？ - 问与答",
+      "Link": "https://www.v2ex.com/t/865926",
+      "Description": "\u003cp\u003eAWS 用户，目前服务器在新加坡，ec2+db+s3 ，有 CDN\n想根据用户访问分布换个区域，最好是 aws 大区（例如弗吉尼亚，爱尔兰等）\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/07/13/ef4a370da0c5f478.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "MAKF",
+      "PubDate": "2022-07-13T07:27:25Z"
+    },
+    {
+      "Title": "flask socketio 无法向客户端推送消息 - Python",
+      "Link": "https://www.v2ex.com/t/865925",
+      "Description": "\u003cp\u003e这是客户端：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eapp = Flask(__name__)\napp.config['SECRET_KEY'] = 'secret!'\nsocketio = SocketIO(app)\ntokenList = {}\n\n\n@app.route(\"/test\")\ndef testConnect():\n    sid = tokenList[\"114514\"]\n    print(sid)\n    emit('newMission', {'from': 'server'}, namespace=\"newMission\", to=sid)\n    return 'success'\n\n\n@socketio.on('register')\ndef register(data):\n    print(\"服务器%s 尝试注册\" % data[\"secret\"])\n    emit('register', {\"token\": \"1919810\"})\n    print(\"注册成功，token 为%s\" % \"1919810\")\n    sid = request.sid\n    join_room(\"mainRoom\")\n    tokenList[\"114514\"] = sid\n\n\n\"\"\"@socketio.on('message')\ndef message(data):\n    print(data)  # {'from': 'client'}\n    emit('response', {'from': 'server'})\n    sleep(5)\n    emit('response', \"exit\")\"\"\"\n\nif __name__ == '__main__':\n    socketio.run(app, debug=True, host='127.0.0.1', port=8090)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这是服务端：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eimport socketio\n\nsio = socketio.Client()\n\n\n@sio.event()\ndef connect():\n    print('正在注册，请稍后')\n    sio.emit('register', {'secret': '114514'})\n\n\n@sio.on('register')\ndef isReg(data):\n    print(\"注册成功，当前 token 为\" + data[\"token\"])\n\n\n@sio.on(\"newMission\", namespace=\"message\")\ndef newMission(data):\n    print(data)\n\n\nsio.connect('ws://localhost:8090')\nsio.wait()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e预计是打算让服务端获取客户端的 sid ，然后通过 sid 推送消息，但是不知道为什么客户端死活无法收到消息，查了很久也不知道哪里写错了，求助万能的 v 友\u003c/p\u003e\n",
+      "Author": "zhishixiang",
+      "PubDate": "2022-07-13T07:24:14Z"
+    },
+    {
+      "Title": "求批量替换康熙部首为普通汉字的 VBA 脚本 - 问与答",
+      "Link": "https://www.v2ex.com/t/865924",
+      "Description": "\u003cp\u003e如题，原 Word 文件估计是哪个吃错药的 PDF 转换器搞出来的，蛋疼\u003c/p\u003e\n\u003cp\u003e附一个网上找到的对照表\n\u003ca href=\"https://github.com/ritajie/kangxi_i_know_you/blob/master/dict.json\" rel=\"nofollow\"\u003ehttps://github.com/ritajie/kangxi_i_know_you/blob/master/dict.json\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "hs0000t",
+      "PubDate": "2022-07-13T07:22:23Z"
+    },
+    {
+      "Title": "南京市好市民的歌。 - 生活",
+      "Link": "https://www.v2ex.com/t/865923",
+      "Description": "\u003cp\u003e最近听歌荒了。不知道听什么了。\n中了他的毒了。。一首《离婚》听了好多遍了。。。\n感觉想分享他的歌给朋友。\n好像找到不到合适的，有些词，可能不太和谐吧。\nv 站应该有不少朋友喜欢他的歌吧。\n。。。\u003c/p\u003e\n\u003cp\u003e假正经的人太多了，认真做事的人，反而行为不端了。哈哈。\u003c/p\u003e\n",
+      "Author": "linxu",
+      "PubDate": "2022-07-13T07:22:07Z"
+    },
+    {
       "Title": "虚无主义，对抗小技巧。来几个，兄弟们 - 问与答",
       "Link": "https://www.v2ex.com/t/865922",
       "Description": "",
