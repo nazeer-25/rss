@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "应该怎么理解 rowid 在 sqlite 中的使用 - SQLite",
+      "Link": "https://www.v2ex.com/t/866001",
+      "Description": "S.O 上我记得有个贴\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://stackoverflow.com/questions/35876171/sqlite-rowid-after-deleting-rows\" rel=\"nofollow noopener\"\u003ehttps://stackoverflow.com/questions/35876171/sqlite-rowid-after-deleting-rows\u003c/a\u003e\u003cbr /\u003e其中有段话我印象很深\u003cbr /\u003eThe data for rowid tables is stored as a B-Tree structure containing one entry for each table row, using the rowid value as the key. This means that retrieving or sorting records by rowid is fast. Searching for a record with a specific rowid, or for all records with rowids within a specified range is around twice as fast as a similar search made by specifying any other PRIMARY KEY or indexed value.\u003cbr /\u003e总结起来：rowid - 也就是 true primary key 性能优势大\u003cbr /\u003e\u003cbr /\u003e在 Sqlite 官网的 rowid table 中，又是这么阐述的：If the rowid is not aliased by INTEGER PRIMARY KEY then it is not persistent and might change. In particular the VACUUM command will change rowids for tables that do not declare an INTEGER PRIMARY KEY. Therefore, applications should not normally access the rowid directly, but instead use an INTEGER PRIMARY KEY.\u003cbr /\u003e总结起来：不应该直接使用 rowid\u003cbr /\u003e\u003cbr /\u003e自己平时在操作 sqlite select row 的时候，一直都是直接用 rowid 来选取执行的，一开始是不知道 declare primary key as alias of rowid ，后来是发现没有使用场景用到。官网让不要 direct access 的原因是 rowid 有时候会变，比如 VACUUM 。我没有理解这句，我就是需要 rowid 重新 rebuild ，才会去用 VACUUM 的啊，否则当频繁操作添加，删除动作后，不进行 rebuild ，我再用语句操作 rowid ，可能就不是我真正需要操作的行。所以我才每次在这些动作后，都会进行 VACUUM 。主要是为了逻辑不出错，同时之后读取性能好，空间小。\u003cbr /\u003e\u003cbr /\u003e但有时候 VACUUM 的时间会很长，可是不操作，此 rowid(true primary key ）不是彼 rowid 啊，例如删除了第 6 行，如果不 VACUUM, 我想再操作新的第 6 行，这个时候 rowid 其实是 7 ，不是 6 ，就产生了逻辑问题啊。\u003cbr /\u003e\u003cbr /\u003e阐述得略混乱，请见谅！",
+      "Author": "youthfire",
+      "PubDate": "2022-07-13T14:44:21Z"
+    },
+    {
+      "Title": "华硕路由器 RT-AC66U B1 2.4GHz 灯不亮， 1~13 频道丢失 - 路由器",
+      "Link": "https://www.v2ex.com/t/866000",
+      "Description": "\u003cp\u003e华硕 RT-AC66U B1 ，用了 5 年的路由器，一直都正常。\u003c/p\u003e\n\u003cp\u003e前几天发现家里的空调、监控都掉线了，但是手机能正常连上。\u003c/p\u003e\n\u003cp\u003e刚开始以为是网络问题，重启路由器几次后，发现问题依旧。\u003c/p\u003e\n\u003cp\u003e在管理界面里找了一圈，发现 2.4GHz 频段能选的频道变为“自动、149 、153 、157 、161 、165”几个，原来的 1~13 频道都消失不见了；而 5GHz 频段的频道只剩“自动”一个，且当前频道是 0 。\u003c/p\u003e\n\u003cp\u003e路由器上的 5GHz 灯正常亮，2.4GHz 灯不亮。\u003c/p\u003e\n\u003cp\u003e所用固件是最新版本的 3.0.0.4.386.48262 ，已用了几个月都正常。\u003c/p\u003e\n\u003cp\u003e恢复出厂设置、刷回 384 固件都试了，问题依旧。\u003c/p\u003e\n\u003cp\u003e感觉是 2.4GHz 的硬件（芯片？）坏掉了……\u003c/p\u003e\n\u003cp\u003e手机连上的 SSID 虽然是 2.4GHz 的，但其实是 5GHz 的信号？\u003c/p\u003e\n",
+      "Author": "eato",
+      "PubDate": "2022-07-13T14:40:14Z"
+    },
+    {
+      "Title": "mac 浏览器（chrome 和 safari 都这样）鼠标中键没有出箭头不能快速滑动页面 - 问与答",
+      "Link": "https://www.v2ex.com/t/865999",
+      "Description": "平时都用触摸板的可能没太注意过，现在加了个架子不方便用触摸板了，结果鼠标中键不触发那个箭头了，没办法快速滑动页面，狂拖滚轮实在累手。键肯定是没问题的，平时都中键关页面。有没有大佬知道是 mac 不支持还是有啥开关。",
+      "Author": "jadehare",
+      "PubDate": "2022-07-13T14:36:26Z"
+    },
+    {
       "Title": "沙盒中的程序如何推数据到物理机？ - 问与答",
       "Link": "https://www.v2ex.com/t/865998",
       "Description": "业务中需要使用高拍仪推送身份证号至光标所在位置，但是高拍仪拍照的软件和推送身份证号的插件存在我方无法解决的冲突。如果把浏览器和身份证插件都放在 sandbox 中，则可以解决此问题，但是因此浏览器下载的表格也会在沙盒中打开。请教各位如何不把浏览器放到沙盒中，同时能够使插件推送身份证号？",
