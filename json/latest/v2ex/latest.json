@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Git 三大分支策略， 2 个人的前端团队，开发一个中型应用，适合用哪种策略 - 程序员",
+      "Link": "https://www.v2ex.com/t/865994",
+      "Description": "现在哪种策略比较主流，易于操作",
+      "Author": "unt",
+      "PubDate": "2022-07-13T14:01:45Z"
+    },
+    {
       "Title": "问一个 golang 新手问题，一个 golang 的 struct 使用了 json fields，怎么在导入的时候加入其他的 fields？ - Go 编程语言",
       "Link": "https://www.v2ex.com/t/865993",
       "Description": "\u003cp\u003e比如说我在 models 里面定义了一个 user struct 绑定了 json fields ，数据操作层可能有不同的实现，因为数据库可能有多个不同的实现，比如说用 orm 来进行数据库的 curd 要增加 orm 的 fields ，使用 mongodb 的 drver 来进行 nosql 的的 curd 要增加 mongodb 的 bson 的 fields. \u003c/p\u003e\n\u003cp\u003e想做到操作层和 model 层的分离，有什么好的项目实践方法？\u003c/p\u003e\n\u003cp\u003e写了个 demo ，发现实现起来太笨了。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003epackage repo\n\nimport (\n\t\"context\"\n\t\"time\"\n\n\t\"gin-base/models\"\n\t\"github.com/uptrace/bun\"\n)\n\n// bunUserRepository bun ORM user struct\ntype bunUserRepostiory struct {\n\tDB *bun.DB\n}\n\ntype bunUser struct {\n\tbun.BaseModel `bun:\"table:users\"`\n\tID            uint64    `bun:\"id,pk,autoincrement\"`\n\tUsername      string    `bun:\"username,notnull\"`\n\tPassword      string    `bun:\"password,notnull\"`\n\tNickname      string    `bun:\"nickname\"`\n\tCreateAt      time.Time `bun:\"create_at,nullzero,notnull,default:current_timestamp\"`\n\tUpdateAt      time.Time `bun:\"update_at,nullzero,notnull,default:current_timestamp\"`\n\tDeleteAt      time.Time `bun:\"delete_at,soft_delete,nullzero,notnull,default:current_timestamp\"`\n}\n\nfunc (bu *bunUser) Model() (mu *models.User) {\n\tmu.ID = bu.ID\n\tmu.Username = bu.Username\n\tmu.Password = bu.Password\n\tmu.Nickname = bu.Nickname\n\tmu.CreateAt = bu.CreateAt\n\tmu.UpdateAt = bu.UpdateAt\n\tmu.DeleteAt = bu.DeleteAt\n\treturn mu\n\n}\n\nfunc NewBunUserRepostiory(DB *bun.DB) *bunUserRepostiory {\n\treturn \u0026amp;bunUserRepostiory{DB: DB}\n}\n\nfunc (b *bunUserRepostiory) Create(ctx context.Context,\n\tnewUser *bunUser) (u *models.User, err error) {\n\t_, err = b.DB.NewInsert().Model(newUser).Exec(ctx)\n\tu = newUser.Model()\n\treturn\n}\n\u003c/code\u003e\u003c/pre\u003e\n",

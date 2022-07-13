@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Git 三大分支策略， 2 个人的前端团队，开发一个中型应用，适合用哪种策略 - 程序员</title>
+      <link>https://www.v2ex.com/t/865994</link>
+      <description>现在哪种策略比较主流，易于操作</description>
+      <author>unt</author>
+      <pubDate>13 Jul 2022 14:01:45 +0000</pubDate>
+    </item>
+    <item>
       <title>问一个 golang 新手问题，一个 golang 的 struct 使用了 json fields，怎么在导入的时候加入其他的 fields？ - Go 编程语言</title>
       <link>https://www.v2ex.com/t/865993</link>
       <description>&lt;p&gt;比如说我在 models 里面定义了一个 user struct 绑定了 json fields ，数据操作层可能有不同的实现，因为数据库可能有多个不同的实现，比如说用 orm 来进行数据库的 curd 要增加 orm 的 fields ，使用 mongodb 的 drver 来进行 nosql 的的 curd 要增加 mongodb 的 bson 的 fields. &lt;/p&gt;&#xA;&lt;p&gt;想做到操作层和 model 层的分离，有什么好的项目实践方法？&lt;/p&gt;&#xA;&lt;p&gt;写了个 demo ，发现实现起来太笨了。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package repo&#xA;&#xA;import (&#xA;&#x9;&#34;context&#34;&#xA;&#x9;&#34;time&#34;&#xA;&#xA;&#x9;&#34;gin-base/models&#34;&#xA;&#x9;&#34;github.com/uptrace/bun&#34;&#xA;)&#xA;&#xA;// bunUserRepository bun ORM user struct&#xA;type bunUserRepostiory struct {&#xA;&#x9;DB *bun.DB&#xA;}&#xA;&#xA;type bunUser struct {&#xA;&#x9;bun.BaseModel `bun:&#34;table:users&#34;`&#xA;&#x9;ID            uint64    `bun:&#34;id,pk,autoincrement&#34;`&#xA;&#x9;Username      string    `bun:&#34;username,notnull&#34;`&#xA;&#x9;Password      string    `bun:&#34;password,notnull&#34;`&#xA;&#x9;Nickname      string    `bun:&#34;nickname&#34;`&#xA;&#x9;CreateAt      time.Time `bun:&#34;create_at,nullzero,notnull,default:current_timestamp&#34;`&#xA;&#x9;UpdateAt      time.Time `bun:&#34;update_at,nullzero,notnull,default:current_timestamp&#34;`&#xA;&#x9;DeleteAt      time.Time `bun:&#34;delete_at,soft_delete,nullzero,notnull,default:current_timestamp&#34;`&#xA;}&#xA;&#xA;func (bu *bunUser) Model() (mu *models.User) {&#xA;&#x9;mu.ID = bu.ID&#xA;&#x9;mu.Username = bu.Username&#xA;&#x9;mu.Password = bu.Password&#xA;&#x9;mu.Nickname = bu.Nickname&#xA;&#x9;mu.CreateAt = bu.CreateAt&#xA;&#x9;mu.UpdateAt = bu.UpdateAt&#xA;&#x9;mu.DeleteAt = bu.DeleteAt&#xA;&#x9;return mu&#xA;&#xA;}&#xA;&#xA;func NewBunUserRepostiory(DB *bun.DB) *bunUserRepostiory {&#xA;&#x9;return &amp;amp;bunUserRepostiory{DB: DB}&#xA;}&#xA;&#xA;func (b *bunUserRepostiory) Create(ctx context.Context,&#xA;&#x9;newUser *bunUser) (u *models.User, err error) {&#xA;&#x9;_, err = b.DB.NewInsert().Model(newUser).Exec(ctx)&#xA;&#x9;u = newUser.Model()&#xA;&#x9;return&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
