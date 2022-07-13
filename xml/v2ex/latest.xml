@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>感觉要解决大事情了？——超大基建要来了 - 问与答</title>
+      <link>https://www.v2ex.com/t/866007</link>
+      <description>&lt;p&gt;发改委：在重点工程项目中大力实施以工代赈：&#xA;&lt;a href=&#34;https://baijiahao.baidu.com/s?id=1738187130184461886&#34; rel=&#34;nofollow&#34;&gt;https://baijiahao.baidu.com/s?id=1738187130184461886&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;隔壁：/t/865906&lt;/p&gt;&#xA;</description>
+      <author>pastor</author>
+      <pubDate>13 Jul 2022 16:01:00 +0000</pubDate>
+    </item>
+    <item>
       <title>给老哥们提个需求， 大佬过来设计下，给个方案 - 问与答</title>
       <link>https://www.v2ex.com/t/866006</link>
       <description>&lt;p&gt;需求背景： 手机端实时展示 每个 店铺的 当天交易流水总值。 也就是后端实时推送 键值对（ shopId, dayBill：该店铺的当前交易总额）数据给手机端。&lt;/p&gt;&#xA;&lt;p&gt;dayBill 不需要你去统计，你只需要监听  上游的 mq 交易消息，mq 消息中会传递 shopId 和这个店铺当前累计交易额。 你需要做的内容仅仅是将这个数据推给 手机端，底层通信业不需要关心。&lt;/p&gt;&#xA;&lt;p&gt;一个店铺 当前可能没有交易订单， 也可能每秒有上千个订单。 因此 一个店铺的消息可能会有很多。 你需要设计 内容就是 如何 保证 客户端能够实时拿到消息 且服务端不会频繁推送消息。也就是流控设计。允许延迟大概在 5 秒。   你可以假想成 手机客户端 App 有一个 列表，列表的内容 就是店铺的 id 和当前该店铺当天累计交易额。&lt;/p&gt;&#xA;&lt;p&gt;我提供三种方案供参考： &lt;/p&gt;&#xA;&lt;p&gt;（ 1 ）第一种方案：手机端定时拉取数据， 方案不通过！&lt;/p&gt;&#xA;&lt;p&gt;（ 2 ）第二种方案：redis 中 使用 zset 存放数据，member 是 shopid, score 是当前时间戳。  当接收到店铺的交易消息（消息内有店铺当前累计交易额）的时候 更新 zset 中指定 memeber 的 score 。  然后定时任务每隔 3 秒 取出  score 小于（当前时间戳-3 秒 ）的 member ，将这些 member 的 交易信息推送给客户端。  方案不通过： 不通过的原因是， 假设这个店铺每隔 1 秒就有一个交易订单， 那么 监听 mq 消息直接更新 zset 会导致 score 一直递增， 因此会导致这个 店铺的交易额 迟迟无法推送给 手机端的问题，也就是消息推送不够及时。&lt;/p&gt;&#xA;&lt;p&gt;从这个方案中我们看出来  监听的第一条店铺消息一定是要推送给手机端的，只不过这条消息 记录的交易额可能并不是最新的。&lt;/p&gt;&#xA;&lt;p&gt;（ 3 ）延迟队列。 监听到的 mq 交易消息 放入延迟队列，队列 中元素 equals 判断的逻辑是 shopid 相等。因此只要 店铺的第一个交易额 进入队列，后续的交易消息不回进入队列。同时需要已收到的消息中的记录店铺的最大交易额。&#xA;另外一个线程 定期 3 秒从 延迟队列中取出数据。 目前这个方案 尚可满足需求。&lt;/p&gt;&#xA;&lt;p&gt;归纳： 其实这个需求的设计的 就是 （ 1 ）压缩重复的消息 （ 2 ）尽可能保证实时推送。  老哥们有没有 在哪些源码中看过类似的需求？ 能给个代码参考吗？实现不是问题，想看下别人怎么设计的&lt;/p&gt;&#xA;</description>
