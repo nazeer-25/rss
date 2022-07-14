@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "作为一个面试官，应该怎么组织面试？ - 程序员",
+      "Link": "https://www.v2ex.com/t/866106",
+      "Description": "\u003cp\u003e最近在一个社群互助面试，想问一下大家，我应该怎么组织面试？应该出哪些题目？\u003c/p\u003e\n\u003cp\u003e对方的一些背景：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e生活在美国的国际大学生\u003c/li\u003e\n\u003cli\u003e正在寻找实习\u003c/li\u003e\n\u003cli\u003e想要进入大公司，面试过 FANNG\u003c/li\u003e\n\u003cli\u003e想面试专注于 LeetCode\u003c/li\u003e\n\u003cli\u003e已经做过差不多 180 道 LeetCode\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "JasonLaw",
+      "PubDate": "2022-07-14T04:01:49Z"
+    },
+    {
+      "Title": "数据库小白想咨询下，怎么处理业务的原始数据跟处理过后的数据的连接关系？ - 数据库",
+      "Link": "https://www.v2ex.com/t/866104",
+      "Description": "\u003cp\u003e比如说，我这里有些原始的数据表 A：\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003eindex\u003c/th\u003e\n\u003cth\u003etime\u003c/th\u003e\n\u003cth\u003edata\u003c/th\u003e\n\u003cth\u003euser\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003ctd\u003e2021-01-01\u003c/td\u003e\n\u003ctd\u003e0.1\u003c/td\u003e\n\u003ctd\u003ea\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003ctd\u003e2021-01-02\u003c/td\u003e\n\u003ctd\u003e0.1\u003c/td\u003e\n\u003ctd\u003ea\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003ctd\u003e2021-01-03\u003c/td\u003e\n\u003ctd\u003e0.1\u003c/td\u003e\n\u003ctd\u003ea\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e3\u003c/td\u003e\n\u003ctd\u003e2021-01-01\u003c/td\u003e\n\u003ctd\u003e0.1\u003c/td\u003e\n\u003ctd\u003eb\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e4\u003c/td\u003e\n\u003ctd\u003e2021-01-04\u003c/td\u003e\n\u003ctd\u003e0.1\u003c/td\u003e\n\u003ctd\u003eb\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e然后根据业务需要，生成处理过后的表 B(这里的逻辑就是用户为单位计算 data 的总和)：\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003eindex\u003c/th\u003e\n\u003cth\u003euser\u003c/th\u003e\n\u003cth\u003esum_data\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003ctd\u003ea\u003c/td\u003e\n\u003ctd\u003e0.3\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003ctd\u003eb\u003c/td\u003e\n\u003ctd\u003e0.2\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e然后某一天我们需要从表 B 的项目反推表 A 的项目（比如表 B 的第 0 项就是表 A 的 0 ，1 ，2 项）的时候，要怎么做比较好呢？\u003c/p\u003e\n\u003cp\u003e我现在有下面的思路：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e根据表 B 的生成逻辑来 SELECT 出表 A 的项目\n-\u0026gt; 这是最直接的，但是计算量大\u003c/li\u003e\n\u003cli\u003e表 B 里面加一列文字，记着使用的表 A 项目的 INDEX\n-\u0026gt; 计算量小，但是耗地方\u003c/li\u003e\n\u003cli\u003e表 A 里面加一列文字，记着连接到的表 B 的 INDEX\n-\u0026gt; 这样每次生成新的表，都要动一次表 A\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e请问大神有什么好的思路？\u003c/p\u003e\n",
+      "Author": "uil330",
+      "PubDate": "2022-07-14T03:55:30Z"
+    },
+    {
+      "Title": "疫情下远程组织网安竞赛如何保障公平？ - 问与答",
+      "Link": "https://www.v2ex.com/t/866103",
+      "Description": "\u003cp\u003e集团公司要组织一场面向内部员工的网络安全大赛，原来都是集中起来现场办，现在因为疫情考虑远程办（选手在本单位找场所参赛），面临主要问题是如何保障比赛公平，因为比赛结果跟下属单位和选手奖励荣誉挂钩。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e目前已经考虑的措施有：\u003c/strong\u003e\u003cbr/\u003e\n1.各单位参赛场所全程采用摄像机本地录像，事后备查；\u003cbr/\u003e\n2.所有选手签订诚信承诺书；\u003cbr/\u003e\n3.所有选手电脑安装 VPN 客户端，确保参赛设备固定、独占式接入、电脑无跨网连接；\u003cbr/\u003e\n4.所有选手电脑安装远程画面监视软件（不需要控制），一是主办方可以安排裁判实时盯盘（每人盯 5 到 10 个选手），二是可以将桌面画面全程记录下来供事后审计。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e请教彦祖们的问题：\u003c/strong\u003e\u003cbr/\u003e\n措施 1 、2 偏管理比较容易实施，但真正管住还得靠技术手段，想跟彦祖们请教下：\u003cbr/\u003e\n1.措施 3 用深信服之类的 VPN 是否可以满足，或者其他推荐解决方案，能解决选手终端可信的问题；\u003cbr/\u003e\n2.措施 4 有没有好的推荐解决方案，200 多名选手实时录屏关注保障稳定性和优化带宽占用，目前调研了一圈还没特别满意的；\u003cbr/\u003e\n3.还有没有其他建议的措施手段？主要是保障公平公正方面。\u003c/p\u003e\n\u003cp\u003ePS：\u003cstrong\u003e有预算！！！\u003c/strong\u003e\u003c/p\u003e\n",
+      "Author": "glasswm",
+      "PubDate": "2022-07-14T03:52:47Z"
+    },
+    {
+      "Title": "electron-vue，引入模块展现出的奇怪问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/866102",
+      "Description": "\u003cp\u003e偶然发现 electron-vue 下引用 node_modules 下的文件与直接引用文件夹中的文件表现不一致。文件内容都是 umd.js ，\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e(function(root, factory) {\n  if (typeof module === 'object' \u0026amp;\u0026amp; typeof module.exports === 'object') {\n    console.log('是 commonjs 模块规范，nodejs 环境')\n    module.exports = factory();\n  } else if (typeof define === 'function' \u0026amp;\u0026amp; define.amd) {\n    console.log('是 AMD 模块规范，如 require.js')\n    define(factory())\n  } else if (typeof define === 'function' \u0026amp;\u0026amp; define.cmd) {\n    console.log('是 CMD 模块规范，如 sea.js')\n    define(function(require, exports, module) {\n      module.exports = factory()\n    })\n  } else {\n    console.log('没有模块环境，直接挂载在全局对象上')\n    if(root){\n      root.umdModule = factory();\n    }\n  }\n\n}(this, function() {\n  return {\n    name: '我是一个 umd 模块'\n  }\n}))\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e从 node_modules 引入的可以直接使用。\u003c/p\u003e\n\u003cp\u003e但是从普通文件夹中引入的文件。this 是 undefined ，exports 未定义，define 未定义，所有的环境都不匹配。\u003c/p\u003e\n\u003cp\u003e在新建的 webpack 项目中，不管在什么地方引入文件都是表现正常的，可以直接使用。\u003c/p\u003e\n\u003cp\u003e请问是什么原因导致了这个问题出现呢。\u003c/p\u003e\n",
+      "Author": "BenchWidth",
+      "PubDate": "2022-07-14T03:45:53Z"
+    },
+    {
+      "Title": "谁有 Adguard Home 和最新版本的 xxr plus 和 passwall 相配合的教程 - 问与答",
+      "Link": "https://www.v2ex.com/t/866101",
+      "Description": "最新版本的 xxr plus 和 passwall 和 dnsmasq 都深度绑定了，没法单独设置国内 dns 的地址，并且抛弃了 pdnsd ，我简单试了一下，不管是 luci-app-Adguard Home 还是在内网机上部署 docker 版本的 Adguard Home ，都会影响科学上网。\u003cbr /\u003e\u003cbr /\u003e要求有 3 个\u003cbr /\u003e1：可以用 Adguard Home ，局域网内的设备的 dns 请求都可以正常显示，而不是统一的主路由地址。\u003cbr /\u003e2：不影响科学上网。\u003cbr /\u003e3：国内国外 dns 用 2 个 Adguard Home 处理，我只求国内 dns 部分的教程。",
+      "Author": "yyysuo",
+      "PubDate": "2022-07-14T03:44:31Z"
+    },
+    {
+      "Title": "经常看到 2， 3 百万买大三居的，有啥陷阱吗？ - 深圳",
+      "Link": "https://www.v2ex.com/t/866100",
+      "Description": "\u003cp\u003e经常看到租房中介发朋友圈，比如\u003c/p\u003e\n\u003cp\u003e宝安桃源居旁边红本商品房 90 平米，240 万买大三居，首付 140 万，全新精装，住宅性质，比旁边农民房还便宜。\u003c/p\u003e\n\u003cp\u003e这种是啥套路？\u003c/p\u003e\n",
+      "Author": "jatsz2020",
+      "PubDate": "2022-07-14T03:39:01Z"
+    },
+    {
       "Title": "国内平台几乎全是手机验证登陆，为何还要设置密码？ - 程序员",
       "Link": "https://www.v2ex.com/t/866099",
       "Description": "\u003cp\u003e密码登陆，奇葩的是输入密码后还需要手机号验证，明知道路的尽头必须手机，为何还要这样做\u003c/p\u003e\n\u003cp\u003e让我想到 Microsoft 的无密码登陆是否是未来趋势？\u003c/p\u003e\n",
@@ -58,13 +100,6 @@
       "Description": "自己的手机好几年了，想着手机应该不容易坏吧。\u003cbr /\u003e\u003cbr /\u003e于是就去拍拍买，为什么不去海鲜市场呢，因为拍拍有 7 天退换，还有反悔的余地。海鲜就是一锤子买卖，愿赌服输。\u003cbr /\u003e\u003cbr /\u003e可是到手才发现，很多二手机暗病很多，和自己想象中的完全不是一回事。\u003cbr /\u003e\u003cbr /\u003e手上一个 256G 的手机，成色很新，就是 CPU 发热过大，里面有虚焊，会不定时自动关机，正在换货中，心累。\u003cbr /\u003e\u003cbr /\u003e显卡也一样，最近价格跌了不少，敢不敢买便宜的矿卡，赌一把呢？陷入了沉思和迷茫。",
       "Author": "tool2d",
       "PubDate": "2022-07-14T03:08:36Z"
-    },
-    {
-      "Title": "[GitHub 项目]全国各省市停贷通知汇总 - 分享发现",
-      "Link": "https://www.v2ex.com/t/866089",
-      "Description": "\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e数据来源统计以及发起人：zhihu @\u003ca href=\"/member/Leepeng\"\u003eLeepeng\u003c/a\u003e Young\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e特别提示: 如果要 pull request 请按照格式\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e1 、修改总数以及添加位置的数量\n2 、最好有图片\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e请勿发表过激言论\u003c/li\u003e\n\u003c/ul\u003e\n",
-      "Author": "s60985545lwh",
-      "PubDate": "2022-07-14T03:08:35Z"
     },
     {
       "Title": "观看 NAS 里的蓝光原盘，大家是怎么解决字幕问题的？ - NAS",
@@ -219,6 +254,13 @@
       "Description": "\u003cp\u003e如题，我是之前大佬们推荐的时候买的，花的钱不多\u003c/p\u003e\n\u003cp\u003e后面限免了，但是想想挺好用也不亏，然后停更越来越久……\u003c/p\u003e\n\u003cp\u003e有些想要的功能没有，只能重新入了 PasteNow ，这个不错的，中间考虑了 Pastepal ，就是卡了点\u003c/p\u003e\n\u003cp\u003e结果现在 FastClip3 恢复更新，更新完一看，好家伙，订阅收费，旁边是买断收费\u003c/p\u003e\n\u003cp\u003e那之前还卖什么？你要这么搞为什么不干脆上架个新 App 算了，老的保持原样，非要搞这种操作，有意思吗？\u003c/p\u003e\n",
       "Author": "neochen13",
       "PubDate": "2022-07-14T02:01:24Z"
+    },
+    {
+      "Title": "[GitHub 项目]全国各省市停贷通知汇总 - 分享发现",
+      "Link": "https://www.v2ex.com/t/866089",
+      "Description": "\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e数据来源统计以及发起人：zhihu @\u003ca href=\"/member/Leepeng\"\u003eLeepeng\u003c/a\u003e Young\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e特别提示: 如果要 pull request 请按照格式\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e1 、修改总数以及添加位置的数量\n2 、最好有图片\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e请勿发表过激言论\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "s60985545lwh",
+      "PubDate": "2022-07-14T03:08:35Z"
     },
     {
       "Title": "刚用 NestJS 完成一个项目，开发体验一般， JS 模块添加依赖注入，个人感觉必要性不强 - Node.js",
