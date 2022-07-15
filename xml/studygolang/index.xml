@@ -36,11 +36,6 @@
       <description>&lt;p&gt;go1.18支持工作区，我将公共代码都移到工作区，这样就有A模块和B模块，其中B模块是公共代码，A模块依赖B模块。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;由于工作区的支持，可以直接在工作区目录运行和调试A模块；但是如果要使用&lt;code&gt;go mod tidy&lt;/code&gt; 命令，则必须进入A模块，此时提示无法找到B模块（因为B模块是本地的，当然找不到）.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我想请问，在工作区开发模式下，如何使用 &lt;code&gt;go mod tidy&lt;/code&gt;命令呢，是不是我的使用方式有问题？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>请教有没有用过rsa公钥解密私钥加密的兄弟</title>
-      <link>https://studygolang.com/topics/15691#reply3</link>
-      <description>&lt;p&gt;目前在对接个接口，要求的是公钥解密，私钥加密的。&#xA;但是找了一下golang的文档 发现都是私钥解密 公钥加密的。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>test</title>
       <link>https://studygolang.com/articles/35756#reply0</link>
     </item>
@@ -90,6 +85,11 @@
       <title>关于通过go-stomp订阅activemq无法持久化订阅的问题</title>
       <link>https://studygolang.com/topics/11996#reply6</link>
       <description>&lt;p&gt;最近用golang重写一个java的消息中间件，使用go-stomp远程订阅activemq的topic，能够接收到数据。但是虽然配置了clientID，每次重启程序还是没有接收到离线时候的数据，在java老项目里用setClientId能实现数据持久化订阅。&#xA;源码如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;conn, err := stomp.Dial(&amp;quot;tcp&amp;quot;, &amp;quot;1.1.1.1:8000&amp;quot;,&#xA;&#x9;stomp.ConnOpt.Login(&amp;quot;name&amp;quot;, &amp;quot;passwd&amp;quot;),&#xA;&#x9;stomp.ConnOpt.HeartBeatError(5*time.Minute))&#xA;if err != nil {&#xA;&#x9;fmt.Println(&amp;quot;err =&amp;quot;, err)&#xA;}&#xA;&#xA;//消费者订阅这个队列&#xA;//参数一：订阅名&#xA;//参数二：确认信息，直接填默认地即可&#xA;&#xA;defer conn.Disconnect()&#xA;&#xA;sub, err := conn.Subscribe(&amp;quot;/topic/topic.name&amp;quot;, stomp.AckMode(stomp.AckAuto),&#xA;&#x9;stomp.SubscribeOpt.Id(&amp;quot;user-0728&amp;quot;))&#xA;for { //无限循环&#xA;&#x9;fmt.Println(sub.Active())&#xA;&#x9;fmt.Println(sub.Id())&#xA;&#x9;select {&#xA;&#x9;//sub.C是一个channel，如果订阅的队列有数据就读取&#xA;&#x9;case v := &amp;lt;-sub.C:&#xA;&#x9;&#x9;//读取的数据是一个*stomp.Message类型&#xA;&#x9;&#x9;ch &amp;lt;- v&#xA;&#x9;&#x9;//如果30秒还没有人发数据的话，就结束&#xA;&#x9;case &amp;lt;-time.After(time.Second * 30):&#xA;&#x9;&#x9;fmt.Println(&amp;quot;timeout&amp;quot;)&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>请教有没有用过rsa公钥解密私钥加密的兄弟</title>
+      <link>https://studygolang.com/topics/15691#reply3</link>
+      <description>&lt;p&gt;目前在对接个接口，要求的是公钥解密，私钥加密的。&#xA;但是找了一下golang的文档 发现都是私钥解密 公钥加密的。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>去哪儿面试题 （Golang实现）多线程顺序输出1-75</title>
