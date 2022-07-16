@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>愁死了! 关于分布式定时任务执行编排问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/866688</link>
+      <description>&lt;p&gt;需求（使用：java 、xxl ）：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;任务表中有 200w 数据，需要先通过定时任务（每天执行一次，该表的数据每天都会全量更新）计算其中的一部分数据 n （大概 150w 左右），完后才能执行剩余的 m （大概 50w ）。&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;问题：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;不能通过 n,m 中字段区分做排序执行，因为是执行计算的逻辑是分布式集群加多线程环境，不能保证先后顺序。问题是通过定时任务怎么判断 n 执行完了才能再执行 m 呢？&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;目前方案：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;通过两个定时任务分别执行 n,m 。1 、通过 xxl 定时任务发起调用 A 服务。查询任务表以每页 500 条获取任务表中 n 的数据的总页数 x ，然后将 x 缓存到 redis 。接下来 A 会将查询出的 500 条数据调用 B 服务去多线程执行。每当 B 执行完 500 条后在 try ，finaly 中会将 x 做减一的操作，直到 x 减到 0 ，通过另一个定时任务执行 m(提前会判断 x 是否为 0)。这样会有一个问题：如果任务执行中没有减到 0 ，那第二个定时任务就无法执行 m 了。请问有大佬遇到过这样的场景吗？&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>weixiaoyun</author>
+      <pubDate>16 Jul 2022 13:53:17 +0000</pubDate>
+    </item>
+    <item>
       <title>有小伙伴公司找临时兼职吗， Base 海淀 - 程序员</title>
       <link>https://www.v2ex.com/t/866687</link>
       <description>v DeepRedTech ，帮小伙伴找实习，阅读广泛，擅长视频后期，文案方面</description>
