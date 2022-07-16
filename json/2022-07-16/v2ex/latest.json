@@ -4,9 +4,16 @@
   "Description": "",
   "Items": [
     {
+      "Title": "刚撸 Python ，问个问题 - Python",
+      "Link": "https://www.v2ex.com/t/866690",
+      "Description": "\u003cp\u003e像 java 有 apache 和 spring guava hutool 这种第三方的工具类库\n里面包括字符串 数组 对象 map 等等的工具类方法\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epython 有没有这样的工具库\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "blankmiss",
+      "PubDate": "2022-07-16T14:10:04Z"
+    },
+    {
       "Title": "愁死了! 关于分布式定时任务执行编排问题 - 问与答",
       "Link": "https://www.v2ex.com/t/866688",
-      "Description": "\u003cp\u003e需求（使用：java 、xxl ）：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e任务表中有 200w 数据，需要先通过定时任务（每天执行一次，该表的数据每天都会全量更新）计算其中的一部分数据 n （大概 150w 左右），完后才能执行剩余的 m （大概 50w ）。\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e问题：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e不能通过 n,m 中字段区分做排序执行，因为是执行计算的逻辑是分布式集群加多线程环境，不能保证先后顺序。问题是通过定时任务怎么判断 n 执行完了才能再执行 m 呢？\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e目前方案：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e通过两个定时任务分别执行 n,m 。1 、通过 xxl 定时任务发起调用 A 服务。查询任务表以每页 500 条获取任务表中 n 的数据的总页数 x ，然后将 x 缓存到 redis 。接下来 A 会将查询出的 500 条数据调用 B 服务去多线程执行。每当 B 执行完 500 条后在 try ，finaly 中会将 x 做减一的操作，直到 x 减到 0 ，通过另一个定时任务执行 m(提前会判断 x 是否为 0)。这样会有一个问题：如果任务执行中没有减到 0 ，那第二个定时任务就无法执行 m 了。请问有大佬遇到过这样的场景吗？\u003c/code\u003e\u003c/pre\u003e\n",
+      "Description": "\u003cp\u003e需求（使用：java 、xxl ）：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e任务表中有 200w 数据，需要先通过定时任务（每天执行一次，该表的数据每天都会全量更新）计算其中的一部分数据 n （大概 150w 左右），完后才能执行剩余的 m （大概 50w ）。\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e问题：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e不能通过 n,m 中字段区分做排序执行，因为执行计算逻辑是在分布式集群加多线程环境，不能保证先后顺序。问题是通过定时任务怎么判断 n 执行完了才能再执行 m 呢？\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e目前方案：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e通过两个定时任务分别执行 n,m 。通过 xxl 定时任务发起调用 A 服务。查询任务表以每页 500 条获取任务表中 n 的数据的总页数 x ，然后将 x 缓存到 redis 。接下来 A 会将查询出的 500 条数据调用 B 服务去多线程执行。每当 B 执行完 500 条后在 try ，finaly 中会将 x 做减一的操作，直到 x 减到 0 ，通过另一个定时任务执行 m(提前会判断 x 是否为 0)。这样会有一个问题：如果任务执行中没有减到 0 ，那第二个定时任务就无法执行 m 了。请问有大佬遇到过这样的场景吗？\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "weixiaoyun",
       "PubDate": "2022-07-16T13:53:17Z"
     },
