@@ -23,6 +23,11 @@
       <description>&lt;pre&gt;&lt;code&gt;/*&#xA;我想实现的是一个servers数组，里面装了server（map），server不同的key对应不同的value，如server1{&amp;quot;name&amp;quot;:&amp;quot;machine1&amp;quot; ...},server2{&amp;quot;name&amp;quot;:&amp;quot;machine2&amp;quot;}...&#xA;然后我通过遍历数组servers，遇到不同的下标时修改对应servers[i]的某个key对应的值，但是这样写下来运行每个server全都改成了同样的值，自己调试发现代码到那一步（断点）就是直接就全部server都改了，新手看了半天很困惑，希望了解的帮我看一下，先谢谢了！&#xA;*/&#xA;&#xA;&#xA;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;strconv&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;servers := New()&#xA;&#x9;Mod(servers)&#xA;&#x9;fmt.Println(servers)&#xA;}&#xA;func New() *[]map[string]string {&#xA;&#x9;server := make(map[string]string)&#xA;&#x9;servers := make([]map[string]string, 0)&#xA;&#x9;for i := 0; i &amp;lt; 5; i++ {&#xA;&#x9;&#x9;server[&amp;quot;name&amp;quot;] = &amp;quot;server&amp;quot; + string(i)&#xA;&#x9;&#x9;server[&amp;quot;type&amp;quot;] = &amp;quot;machine&amp;quot;&#xA;&#x9;&#x9;servers = append(servers, server)&#xA;&#x9;}&#xA;&#x9;return &amp;amp;servers&#xA;}&#xA;func Mod(servers *[]map[string]string) {&#xA;&#x9;for i, server := range *servers {&#xA;&#x9;&#x9;if i == 1 {&#xA;&#x9;&#x9;&#x9;fmt.Println(i)&#xA;&#x9;&#x9;&#x9;server[&amp;quot;name&amp;quot;] = &amp;quot;machine&amp;quot; + strconv.Itoa(i)&#xA;&#x9;&#x9;&#x9;server[&amp;quot;type&amp;quot;] = &amp;quot;cloud&amp;quot;&#xA;&#x9;&#x9;&#x9;fmt.Println(server[&amp;quot;name&amp;quot;])&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if i == 3 {&#xA;&#x9;&#x9;&#x9;//fmt.Println(i)&#xA;&#x9;&#x9;&#x9;/*断点*/server[&amp;quot;name&amp;quot;] = &amp;quot;machine&amp;quot; + strconv.Itoa(i)&#xA;&#x9;&#x9;&#x9;server[&amp;quot;type&amp;quot;] = &amp;quot;physic&amp;quot;&#xA;&#x9;&#x9;&#x9;fmt.Println(server[&amp;quot;name&amp;quot;])&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
+      <title>OwnershipLabs招聘GO开发工程师</title>
+      <link>https://studygolang.com/topics/15698#reply0</link>
+      <description>&lt;p&gt;岗位职责：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1、能够独立进行区块链底层系统及应用平台的功能定义和架构设计，研究区块链的协议，运行机制、底层实现和应用平台研发等；&#xA;2、从事区块链产品的设计和研发工作，研究区块链的协议，运行机制和底层实现等；&#xA;3、完成智能合约前端接⼝的封装和测试；&#xA;4、产品链上数据的链下读取、处理、索引、存储和检索。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;任职要求:&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1、本科及以上学历, 计算机、软件工程等相关专业；&#xA;2、从事Go开发2年或以上，擅⻓数据库、缓存、队列等后端技术；&#xA;3、熟悉Solidity、Typescript，能根据智能合约封装出供前端团队调⽤的 API 接⼝；&#xA;4、热爱区块链技术及渴望在区块链技术持续成长。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;加分项：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1、了解Web3中间件的客户端使用，例如IPFS、Ceramic、Chainlink等去中⼼化数据存储⽅案；&#xA;2、熟悉 The Graph去中⼼化索引协议，良好的英语阅读能力。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可远程办公或线下办公－杭州未来科技城，可以带小宠物上班，上班期间可喝酒（但是不要喝醉了哦），工作时间：12点至19点，不加班，双休，薪资25K-50K。&#xA;我们是一家区块链技术驱动的创业公司，产品名：dataverse，有意可发简历至：olivia@ownershiplabs.com&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>go中的channel的一点疑惑</title>
       <link>https://studygolang.com/topics/15700#reply2</link>
       <description>&lt;p&gt;正在用go写后台，遇到一个场景是这样的：&#xA;每个用户在上传新文件时，go都要去删除旧文件，所以我想当用户上传新文件成功之后，就把旧文件的地址放到channel中，然后channel那边创建有三个协程来取出数据并进行删除操作。这个流程没有什么问题。我疑惑的是，我应该创建多大的channel呢，太小了我怕到时候忙不过来出现阻塞，太大了又感觉浪费。还是可以不指定channel的大小，由系统来决定，channel满了系统就自己增加，少了就自己减少，不知道会这样吗？&#xA;目前代码如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;var delete_channel = make(chan string,100)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -59,11 +64,6 @@
     <item>
       <title>优维科技2022发展半年报重磅发布!</title>
       <link>https://studygolang.com/articles/35760#reply0</link>
-    </item>
-    <item>
-      <title>OwnershipLabs招聘GO开发工程师</title>
-      <link>https://studygolang.com/topics/15698#reply0</link>
-      <description>&lt;p&gt;岗位职责：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1、能够独立进行区块链底层系统及应用平台的功能定义和架构设计，研究区块链的协议，运行机制、底层实现和应用平台研发等；&#xA;2、从事区块链产品的设计和研发工作，研究区块链的协议，运行机制和底层实现等；&#xA;3、完成智能合约前端接⼝的封装和测试；&#xA;4、产品链上数据的链下读取、处理、索引、存储和检索。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;任职要求:&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1、本科及以上学历, 计算机、软件工程等相关专业；&#xA;2、从事Go开发2年或以上，擅⻓数据库、缓存、队列等后端技术；&#xA;3、熟悉Solidity、Typescript，能根据智能合约封装出供前端团队调⽤的 API 接⼝；&#xA;4、热爱区块链技术及渴望在区块链技术持续成长。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;加分项：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1、了解Web3中间件的客户端使用，例如IPFS、Ceramic、Chainlink等去中⼼化数据存储⽅案；&#xA;2、熟悉 The Graph去中⼼化索引协议，良好的英语阅读能力。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可远程办公或线下办公－杭州未来科技城，可以带小宠物上班，上班期间可喝酒（但是不要喝醉了哦），工作时间：12点至19点，不加班，双休，薪资25K-50K。&#xA;我们是一家区块链技术驱动的创业公司，产品名：dataverse，有意可发简历至：olivia@ownershiplabs.com&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>诚招-招聘GO开发工程师</title>
