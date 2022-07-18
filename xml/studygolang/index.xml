@@ -52,14 +52,14 @@
       <description>&lt;p&gt;我们每个人可能都熟悉 git ，但是对于 GitHub 开源项目协同维护的流程，又是十分陌生的，这个项目将介绍分享如何维护参与 GitHub 开源项目。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;项目地址： &lt;a href=&#34;https://github.com/eryajf/HowToStartOpenSource&#34;&gt;https://github.com/eryajf/HowToStartOpenSource&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;还在持续更新中。。。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>go中的channel的一点疑惑</title>
-      <link>https://studygolang.com/topics/15700#reply4</link>
-      <description>&lt;p&gt;正在用go写后台，遇到一个场景是这样的：&#xA;每个用户在上传新文件时，go都要去删除旧文件，所以我想当用户上传新文件成功之后，就把旧文件的地址放到channel中，然后channel那边创建有三个协程来取出数据并进行删除操作。这个流程没有什么问题。我疑惑的是，我应该创建多大的channel呢，太小了我怕到时候忙不过来出现阻塞，太大了又感觉浪费。还是可以不指定channel的大小，由系统来决定，channel满了系统就自己增加，少了就自己减少，不知道会这样吗？&#xA;目前代码如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;var delete_channel = make(chan string,100)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
-    </item>
-    <item>
       <title>大家帮我看一下，我是新手菜鸡，应该是我理解不到位，求解惑，感谢！</title>
       <link>https://studygolang.com/topics/15701#reply9</link>
       <description>&lt;pre&gt;&lt;code&gt;/*&#xA;我想实现的是一个servers数组，里面装了server（map），server不同的key对应不同的value，如server1{&amp;quot;name&amp;quot;:&amp;quot;machine1&amp;quot; ...},server2{&amp;quot;name&amp;quot;:&amp;quot;machine2&amp;quot;}...&#xA;然后我通过遍历数组servers，遇到不同的下标时修改对应servers[i]的某个key对应的值，但是这样写下来运行每个server全都改成了同样的值，自己调试发现代码到那一步（断点）就是直接就全部server都改了，新手看了半天很困惑，希望了解的帮我看一下，先谢谢了！&#xA;*/&#xA;&#xA;&#xA;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;strconv&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;servers := New()&#xA;&#x9;Mod(servers)&#xA;&#x9;fmt.Println(servers)&#xA;}&#xA;func New() *[]map[string]string {&#xA;&#x9;server := make(map[string]string)&#xA;&#x9;servers := make([]map[string]string, 0)&#xA;&#x9;for i := 0; i &amp;lt; 5; i++ {&#xA;&#x9;&#x9;server[&amp;quot;name&amp;quot;] = &amp;quot;server&amp;quot; + string(i)&#xA;&#x9;&#x9;server[&amp;quot;type&amp;quot;] = &amp;quot;machine&amp;quot;&#xA;&#x9;&#x9;servers = append(servers, server)&#xA;&#x9;}&#xA;&#x9;return &amp;amp;servers&#xA;}&#xA;func Mod(servers *[]map[string]string) {&#xA;&#x9;for i, server := range *servers {&#xA;&#x9;&#x9;if i == 1 {&#xA;&#x9;&#x9;&#x9;fmt.Println(i)&#xA;&#x9;&#x9;&#x9;server[&amp;quot;name&amp;quot;] = &amp;quot;machine&amp;quot; + strconv.Itoa(i)&#xA;&#x9;&#x9;&#x9;server[&amp;quot;type&amp;quot;] = &amp;quot;cloud&amp;quot;&#xA;&#x9;&#x9;&#x9;fmt.Println(server[&amp;quot;name&amp;quot;])&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if i == 3 {&#xA;&#x9;&#x9;&#x9;//fmt.Println(i)&#xA;&#x9;&#x9;&#x9;/*断点*/server[&amp;quot;name&amp;quot;] = &amp;quot;machine&amp;quot; + strconv.Itoa(i)&#xA;&#x9;&#x9;&#x9;server[&amp;quot;type&amp;quot;] = &amp;quot;physic&amp;quot;&#xA;&#x9;&#x9;&#x9;fmt.Println(server[&amp;quot;name&amp;quot;])&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>go中的channel的一点疑惑</title>
+      <link>https://studygolang.com/topics/15700#reply4</link>
+      <description>&lt;p&gt;正在用go写后台，遇到一个场景是这样的：&#xA;每个用户在上传新文件时，go都要去删除旧文件，所以我想当用户上传新文件成功之后，就把旧文件的地址放到channel中，然后channel那边创建有三个协程来取出数据并进行删除操作。这个流程没有什么问题。我疑惑的是，我应该创建多大的channel呢，太小了我怕到时候忙不过来出现阻塞，太大了又感觉浪费。还是可以不指定channel的大小，由系统来决定，channel满了系统就自己增加，少了就自己减少，不知道会这样吗？&#xA;目前代码如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;var delete_channel = make(chan string,100)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>图执行引擎那些事（二）</title>
