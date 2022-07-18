@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "我遇到的手机版的回复框问题 - 反馈",
+      "Link": "https://www.v2ex.com/t/866978",
+      "Description": "# 我遇到的手机版的回复框问题\u003cbr /\u003e\u003cbr /\u003e手机版本的 V2EX ，在读贴或者编辑回复内容的时候，不知道怎么突然就发出去了。\u003cbr /\u003e这种情通常是在上下拖动回复框的时候发生。\u003cbr /\u003e又不能删回复，所以比较尴尬。\u003cbr /\u003e希望能加个回复确认的弹窗来避免这样的问题。\u003cbr /\u003e\u003cbr /\u003e + 浏览器: firefox nightly 版本\u003cbr /\u003e + 手机: 小米 10\u003cbr /\u003e + 输入法: 搜狗输入法小米版",
+      "Author": "iceheart",
+      "PubDate": "2022-07-18T04:59:32Z"
+    },
+    {
+      "Title": "有熟悉 openwrt 的编译 Makefile 的大佬吗，缓存后二次编译的几个问题请教 - OpenWrt",
+      "Link": "https://www.v2ex.com/t/866977",
+      "Description": "\u003ch2\u003e二次编译是否要清理，清理哪些目录\u003c/h2\u003e\n\u003cp\u003e目前是利用 zstd 缓存了整个编译的目录，然后编译完成后 \u003ccode\u003erm -rf tmp bin\u003c/code\u003e 目录，\n然后后续再触发 GitHub action 是先下载缓存，一系列更新 feeds 和 git pull, 后面才是 make ，也就是后续全部是二次编译。此刻在 make 之前需要 make clean 的吗，但是我看 Makefile 里是把 \u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-makefile\"\u003eclean: FORCE\n\trm -rf $(BUILD_DIR) $(STAGING_DIR) $(BIN_DIR) $(OUTPUT_DIR)/packages/$(ARCH_PACKAGES) $(BUILD_LOG_DIR) $(TOPDIR)/staging_dir/packages\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003ebuild_dir 和 staging_dir 都干掉了，这样 toolchain 不就没了吗（二次编译快我理解就是第一次编译把 toolchain 和 tools 编译好了）。我试了下编译完成后 make clean 后的二次编译，会很久，我不 make clean 下，触发 action 编译就 1 个半小时。\u003c/p\u003e\n\u003cp\u003e然后是关于 dl 目录，我编译完清理 dl 目录的话，后续的二次编译经常会发生几个 go 的包编译报错说 \u003ccode\u003eno non-test Go files in /workdir/openwrt/dl/go-mod-cache/\u003ca href=\"http://github.com/\" rel=\"nofollow\"\u003egithub.com/\u003c/a\u003e\u003c/code\u003e，不删除可以解决这个问题。\n但是如果不删除 dl 目录，这个目录因为每次源码更新，下载的新包的时候，不会清理 dl 里老版本的压缩包，里面的老版本包会导致 dl 目录越来越大。\n主要是二次编译开始之前，需要清理哪些目录\u003c/p\u003e\n\u003ch2\u003e问题 2 ，make 的拆解\u003c/h2\u003e\n\u003cp\u003e我的编译主要耗时在 \u003ccode\u003emake -j$(nproc)\u003c/code\u003e ，实际是我只想编译 imageBuilder 和 packages ，github action 的后面阶段是使用 imageBuilder 打包出 slim 和 full 版本，不知道这个 make 是不是可以拆解成单步执行，例如：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003emake tools/compile -j$(nproc)\nmake target/compile\nmake toolchain/compile\nmake buildinfo\nmake diffconfig buildversion feedsversion\nmake package/compile\n\nmake package/install\nmake target/install\nmake package/index\nmake json_overview_image_info\nmake checksum\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "guanzhangzhang",
+      "PubDate": "2022-07-18T04:52:38Z"
+    },
+    {
       "Title": "有啥国内大带宽测速网站，下载地址，想测一下宽带下载速度，同时也测一下上传速度。 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/866975",
       "Description": "\u003cp\u003e最近研究多拨，但是用 speedtest 发现测不出真实的效果。大伙们有没有带宽大的文件下载地址，我用迅雷下载试一试。能大带宽上传文件的网站麻烦也推荐一下，测一下上传速度\u003c/p\u003e\n",
@@ -16,13 +30,6 @@
       "Description": "除了一般的公园，爬山（太热了）\u003cbr /\u003e室内室外啥都行",
       "Author": "wikiwiki6",
       "PubDate": "2022-07-18T04:39:03Z"
-    },
-    {
-      "Title": "账号降权原因？ - V2EX",
-      "Link": "https://www.v2ex.com/t/866973",
-      "Description": "\u003cp\u003e今天发了个二手交易帖子，突然发现自己账号降权了，看历史记录，3 月 30 号那天就降权了。\u003c/p\u003e\n\u003cp\u003e具体表现是回复需要的铜币是 26 了。\u003c/p\u003e\n\u003cp\u003e翻到那天的回复，都没有什么问题，但是有一个主题发现现在是 404 了。\u003c/p\u003e\n\u003cp\u003e具体是啥主题，大概站长也能找到，有关微信关键词的。我想问哪一条触发社区指标原则，以及帮助文档这些了？我不太理解\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e我发布帖子的时候，根本不知道关键词会指向 XX 这个人，我只是觉得微信屏蔽一个英文单词很离谱，想问问原因\u003c/li\u003e\n\u003cli\u003e后续的附言、回复也不涉及对 XX 这个人有任何名誉上的诋毁把？顶多只是提到这个人的昵称。\u003c/li\u003e\n\u003cli\u003e整个帖子的回复，也并非是围绕 XX ，而是分享微信的某个限制关键词（因为我觉得奇怪），而且微信不只是限制这些人把，淘宝的链接不是也会屏蔽么？这应该是正常的讨论帖子把？\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e@\u003ca href=\"/member/Livid\"\u003eLivid\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "Macolor21",
-      "PubDate": "2022-07-18T04:34:51Z"
     },
     {
       "Title": "分享一下原版 x86 openwrt 手动安装需要的插件的方案 - OpenWrt",
@@ -158,13 +165,6 @@
       "PubDate": "2022-07-18T03:41:28Z"
     },
     {
-      "Title": "gitee 离大谱了 这也被和谐？ - 程序员",
-      "Link": "https://www.v2ex.com/t/866950",
-      "Description": "\u003cp\u003e原链接： \u003ca href=\"https://github.com/ossrs/srs/wiki/v4_CN_Home#getting-started\" rel=\"nofollow\"\u003ehttps://github.com/ossrs/srs/wiki/v4_CN_Home#getting-started\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e因为想发给老板看看这个开源项目，担心他打不开 GitHub ，于是把原链接 wiki 里的 gitee 贴心发给他了，结果他点开屁也不是。\u003c/p\u003e\n\u003cp\u003e离谱 gitee： \u003ca href=\"https://gitee.com/ossrs/srs/wikis/v4_CN_Home\" rel=\"nofollow\"\u003ehttps://gitee.com/ossrs/srs/wikis/v4_CN_Home\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "andyskaura",
-      "PubDate": "2022-07-18T03:34:58Z"
-    },
-    {
       "Title": "有没有 Windows 下命令行查看 CPU 温度的工具 - 硬件",
       "Link": "https://www.v2ex.com/t/866949",
       "Description": "\u003cp\u003e如题\u003c/p\u003e\n\u003cp\u003e垃圾机械革命无界 16 ，风扇策略很烂，然后又没有控制台\u003c/p\u003e\n\u003cp\u003e只能自己写个脚本，根据 CPU 温度，让风扇转速从 0-100 自动控制\u003c/p\u003e\n\u003cp\u003e但是有个问题，目前获取不到 CPU 温度，虽然有一堆工具，但是都没提供 CMD 模式\u003c/p\u003e\n\u003cp\u003e就比较蛋疼\u003c/p\u003e\n",
@@ -261,6 +261,20 @@
       "Description": "\u003cp\u003e前 4 集很精彩，5-8 集开始崩了，9 集的第 6 个游戏，就搁那互殴，完了两人还都悔悟了，女主死的莫名其妙，强行把玻璃炸了刺伤女主；\n老头大 boss 跟男主说了一大堆，又好像什么都没说；\n男主拿了奖金愣是拖了一年才安置女主弟弟，准备行动了染个红头发（黑人问号？），下季又去参加游戏，你这季能赢不是各种躺赢吗？ 123 木头人被外国小哥救，拔河靠老头战术，弹珠是老头送的，踩玻璃还要女主提示左边玻璃是安全的，这下一季不是去送死？人设太割裂了\u003c/p\u003e\n",
       "Author": "lamesbond",
       "PubDate": "2022-07-18T02:55:38Z"
+    },
+    {
+      "Title": "账号降权原因？ - V2EX",
+      "Link": "https://www.v2ex.com/t/866973",
+      "Description": "\u003cp\u003e今天发了个二手交易帖子，突然发现自己账号降权了，看历史记录，3 月 30 号那天就降权了。\u003c/p\u003e\n\u003cp\u003e具体表现是回复需要的铜币是 26 了。\u003c/p\u003e\n\u003cp\u003e翻到那天的回复，都没有什么问题，但是有一个主题发现现在是 404 了。\u003c/p\u003e\n\u003cp\u003e具体是啥主题，大概站长也能找到，有关微信关键词的。我想问哪一条触发社区指标原则，以及帮助文档这些了？我不太理解\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e我发布帖子的时候，根本不知道关键词会指向 XX 这个人，我只是觉得微信屏蔽一个英文单词很离谱，想问问原因\u003c/li\u003e\n\u003cli\u003e后续的附言、回复也不涉及对 XX 这个人有任何名誉上的诋毁把？顶多只是提到这个人的昵称。\u003c/li\u003e\n\u003cli\u003e整个帖子的回复，也并非是围绕 XX ，而是分享微信的某个限制关键词（因为我觉得奇怪），而且微信不只是限制这些人把，淘宝的链接不是也会屏蔽么？这应该是正常的讨论帖子把？\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e@\u003ca href=\"/member/Livid\"\u003eLivid\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "Macolor21",
+      "PubDate": "2022-07-18T04:34:51Z"
+    },
+    {
+      "Title": "gitee 离大谱了 这也被和谐？ - 程序员",
+      "Link": "https://www.v2ex.com/t/866950",
+      "Description": "\u003cp\u003e原链接： \u003ca href=\"https://github.com/ossrs/srs/wiki/v4_CN_Home#getting-started\" rel=\"nofollow\"\u003ehttps://github.com/ossrs/srs/wiki/v4_CN_Home#getting-started\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e因为想发给老板看看这个开源项目，担心他打不开 GitHub ，于是把原链接 wiki 里的 gitee 贴心发给他了，结果他点开屁也不是。\u003c/p\u003e\n\u003cp\u003e离谱 gitee： \u003ca href=\"https://gitee.com/ossrs/srs/wikis/v4_CN_Home\" rel=\"nofollow\"\u003ehttps://gitee.com/ossrs/srs/wikis/v4_CN_Home\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "andyskaura",
+      "PubDate": "2022-07-18T03:34:58Z"
     },
     {
       "Title": "带父母体检，真的很重要！ - 生活",
