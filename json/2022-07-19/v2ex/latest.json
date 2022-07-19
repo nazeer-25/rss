@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "物联网卡环境下注册 app 是否容易触发风控 - 问与答",
+      "Link": "https://www.v2ex.com/t/867347",
+      "Description": "",
+      "Author": "sunxiaochuang",
+      "PubDate": "2022-07-19T11:08:21Z"
+    },
+    {
       "Title": "请教一下 macOS 中 newsboat 该怎么优雅地显示图片？ - macOS",
       "Link": "https://www.v2ex.com/t/867346",
       "Description": "\u003cp\u003e\u003cstrong\u003e环境\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003emacOS 版本：12.4\u003c/li\u003e\n\u003cli\u003e终端模拟器：kitty by Kovid Goyal\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003e背景信息\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e目前 macOS 下的 w3m 缺乏 w3mimgdisplay 命令，也缺乏 ueberzug ，所以终端下的图片显示只能依赖终端模拟器本身的图形协议来完成（常见的终端 kitty 和 iTerm2 都自带图形协议）。Newsboat 本身是一个终端下的 RSS 阅读器，主要用于文字阅读；然而我订阅的 RSS 不可避免需要图片预览，比如 xkcd 就是一个纯图片的 feed…\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e楼主目前思路\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e先是看到有人搞出了一套\u003ca href=\"https://github.com/newsboat/newsboat/issues/480\" rel=\"nofollow\"\u003e能够实现图片预览的 pager\u003c/a\u003e，可惜对方使用了 w3m ，所以没法直接拿来用。我依样画葫芦从 kitty 自带的图片预览 icat 出发\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e先抓取文章中的图片链接\u003c/li\u003e\n\u003cli\u003e下载到本地的 /tmp 目录下\u003c/li\u003e\n\u003cli\u003e用\u003ccode\u003ekitty +kitten icat\u003c/code\u003e在终端中显示图片\u003c/li\u003e\n\u003cli\u003e写成代码，然后在 newsboat 里配置成一个 pager\u003c/li\u003e\n\u003c/ol\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e#!/usr/bin/env bash\n\nfunction urldecode() { : \"${*//+/ }\"; echo -e \"${_//%/\\\\x}\"; }\n\nif grep -qE \"xkcd\" \"${1}\"; then\n    # 下载 xkcd 源中的图片，然后用 icat 预览\n    image=$(grep -E -o \"https?://[a-zA-Z0-9./?=_%:-]*.(jpg|png|JPG|PNG)\" \u0026lt; \"${1}\" | tail -1)\n    cd /private/tmp/\n    imagepath=\"${image/https:\\///private/tmp}\" \n    imagepath=$(urldecode \"$imagepath\")  \n    if [[ ! -f \"$imagepath\" ]]; then    \n        # echo \"downloading...\"\n        nohup wget -q -m \"$image\" \u0026amp;\u0026gt;/dev/null\n    fi\n    kitty +kitten icat --hold \"${imagepath/jpg/png}\"\nelse\n    # 其他 feed 改成 less\n    less \"${1}\"\nfi\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这个方法目前的问题是，对于纯文本的条目只能改用\u003ccode\u003eless\u003c/code\u003e做 pager ，无法用 newsboat 自带的 pager 了。会多几次按键操作，阅读效率降低。不知道有没有朋友在 macOS 下也折腾过 newsboat ，请支支招。\u003c/p\u003e\n",
