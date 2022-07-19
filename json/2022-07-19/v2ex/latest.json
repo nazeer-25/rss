@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如何在 spring boot 中实现对一个数据对象的流式处理？ - Java",
+      "Link": "https://www.v2ex.com/t/867282",
+      "Description": "\u003cp\u003e如何在 spring 中实现对同一个数据对象，实现流式处理？\n即，定义某一接口，同时定义多个处理类来实现这个接口，在处理数据时，依次（并行）调用这些处理类，在处理类内部，根据业务需求，判断是否需要进行处理，不处理的直接 return 。\u003c/p\u003e\n\u003cp\u003e现在的方式是使用策略模式，通过 Autowired 自动注入这些处理类，放入 map ，根据业务类型取出不同的处理类进行处理。\u003c/p\u003e\n\u003cp\u003e不知这是否是在 spring boot 中的最佳实现方式？\n如果同时需要多个处理类进行处理（如上所述），是否只能在自动注入时放入一个 List 中，进行遍历处理？\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003epublic interface Strategy {\n   Integer getBizCode();\n   public int doOperation(int num1, int num2);\n}\n\n\n\n@Component\npublic class OperationAdd implements Strategy{\n    @Override\n    public Integer getBizCode() {\n        return 1;\n    }\n\n   @Override\n   public int doOperation(int num1, int num2) {\n      return num1 + num2;\n   }\n}\n\n@Component\npublic class OperationSubtract implements Strategy{\n\n    @Override\n    public Integer getBizCode() {\n        return 2;\n    }\n\n   @Override\n   public int doOperation(int num1, int num2) {\n      return num1 - num2;\n   }\n}\n\n\n\npublic class StrategyPatternDemo {\n\n    HashMap\u0026lt;Integer, Strategy\u0026gt; strategyMap = new HashMap\u0026lt;\u0026gt;();\n\n    @Autowired\n    public StrategyPatternDemo(List\u0026lt;Strategy\u0026gt; strategies){\n        for (Strategy strategy : strategies) {\n            strategyMap.put(strategy.getCode(),strategy);\n        }\n    }\n\n   public void test(int type, int num1, int num2) {\n        Strategy strategy = strategyMap.get(type);\n        int result = strategy.doOperation(num1, num2);\n        System.out.println(result);\n   }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "zhijiansha",
+      "PubDate": "2022-07-19T07:03:10Z"
+    },
+    {
+      "Title": "48G 内存照样有 swap - macOS",
+      "Link": "https://www.v2ex.com/t/867280",
+      "Description": "\u003cp\u003e黑苹果，catalina ，没用满，出现了 560 兆的交换占用\u003c/p\u003e\n",
+      "Author": "nutting",
+      "PubDate": "2022-07-19T06:59:35Z"
+    },
+    {
+      "Title": "出一把京东京造 Q2 铝坨坨机械键盘 (aka Keycron) - 京东",
+      "Link": "https://www.v2ex.com/t/867279",
+      "Description": "购于京东 4 月 6 号，基本没使用，玩 FPS 要斜着键盘太重了不方便，买来换了个轴（自带黄轴 =\u0026gt; CAP 茶轴）\u003cbr /\u003e\u003cbr /\u003e箱说全，所有东西都没扔，自带换下来的轴也都可以给你\u003cbr /\u003e\u003cbr /\u003e明盘 600 ，vx：ZmFub2ZicG0xMzg=\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/mINEXDi.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/mINEXDi.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/aUuLQD4.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/aUuLQD4.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e",
+      "Author": "tediorelee",
+      "PubDate": "2022-07-19T06:58:58Z"
+    },
+    {
+      "Title": "m1 芯片 macbook pro，用一段时间后 intellij idea 巨卡，重启电脑后又恢复了，大家知道怎么解决吗？ - 程序员",
+      "Link": "https://www.v2ex.com/t/867278",
+      "Description": "",
+      "Author": "superbai",
+      "PubDate": "2022-07-19T06:57:42Z"
+    },
+    {
+      "Title": "在北京周边，是不是天津最适合定居？ - 北京",
+      "Link": "https://www.v2ex.com/t/867277",
+      "Description": "\u003cp\u003e只在北京周边或者河北省选择定居的话，综合考虑工作生活等方面，北京定居难度太大，河北省其他城市基本被北京吸干，或许真的只剩下天津了，虽然天津也没有那么好吧。不知道各位 V 友怎么看？\u003c/p\u003e\n",
+      "Author": "ro2020",
+      "PubDate": "2022-07-19T06:57:13Z"
+    },
+    {
       "Title": "新买的 apple watch series7 刚开始几天耗电快正常吗 -  WATCH",
       "Link": "https://www.v2ex.com/t/867276",
       "Description": "\u003cp\u003e新买的 apple watch series7 蜂窝版 刚开始几天耗电快正常吗？\n前天开始使用的，今天早上 7:40 满电戴上，现在 14:40,还剩 35%，问了支持的客服说有可能的，让我再观察下试试\u003c/p\u003e\n",
