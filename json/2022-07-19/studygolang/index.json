@@ -33,7 +33,7 @@
     },
     {
       "Title": "Go 修改 struct 的打印信息，类似于 python __str__",
-      "Link": "https://studygolang.com/topics/15704#reply0",
+      "Link": "https://studygolang.com/topics/15704#reply1",
       "Description": "\u003cp\u003e大佬们，有没有人知道 Go 修改 struct 的打印信息，类似于 python 的 \u003cstrong\u003estr\u003c/strong\u003e 函数\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -60,6 +60,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "大家帮我看一下，我是新手菜鸡，应该是我理解不到位，求解惑，感谢！",
+      "Link": "https://studygolang.com/topics/15701#reply9",
+      "Description": "\u003cpre\u003e\u003ccode\u003e/*\n我想实现的是一个servers数组，里面装了server（map），server不同的key对应不同的value，如server1{\u0026quot;name\u0026quot;:\u0026quot;machine1\u0026quot; ...},server2{\u0026quot;name\u0026quot;:\u0026quot;machine2\u0026quot;}...\n然后我通过遍历数组servers，遇到不同的下标时修改对应servers[i]的某个key对应的值，但是这样写下来运行每个server全都改成了同样的值，自己调试发现代码到那一步（断点）就是直接就全部server都改了，新手看了半天很困惑，希望了解的帮我看一下，先谢谢了！\n*/\n\n\npackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;strconv\u0026quot;\n)\n\nfunc main() {\n\tservers := New()\n\tMod(servers)\n\tfmt.Println(servers)\n}\nfunc New() *[]map[string]string {\n\tserver := make(map[string]string)\n\tservers := make([]map[string]string, 0)\n\tfor i := 0; i \u0026lt; 5; i++ {\n\t\tserver[\u0026quot;name\u0026quot;] = \u0026quot;server\u0026quot; + string(i)\n\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;machine\u0026quot;\n\t\tservers = append(servers, server)\n\t}\n\treturn \u0026amp;servers\n}\nfunc Mod(servers *[]map[string]string) {\n\tfor i, server := range *servers {\n\t\tif i == 1 {\n\t\t\tfmt.Println(i)\n\t\t\tserver[\u0026quot;name\u0026quot;] = \u0026quot;machine\u0026quot; + strconv.Itoa(i)\n\t\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;cloud\u0026quot;\n\t\t\tfmt.Println(server[\u0026quot;name\u0026quot;])\n\t\t}\n\t\tif i == 3 {\n\t\t\t//fmt.Println(i)\n\t\t\t/*断点*/server[\u0026quot;name\u0026quot;] = \u0026quot;machine\u0026quot; + strconv.Itoa(i)\n\t\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;physic\u0026quot;\n\t\t\tfmt.Println(server[\u0026quot;name\u0026quot;])\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "go中的channel的一点疑惑",
       "Link": "https://studygolang.com/topics/15700#reply5",
       "Description": "\u003cp\u003e正在用go写后台，遇到一个场景是这样的：\n每个用户在上传新文件时，go都要去删除旧文件，所以我想当用户上传新文件成功之后，就把旧文件的地址放到channel中，然后channel那边创建有三个协程来取出数据并进行删除操作。这个流程没有什么问题。我疑惑的是，我应该创建多大的channel呢，太小了我怕到时候忙不过来出现阻塞，太大了又感觉浪费。还是可以不指定channel的大小，由系统来决定，channel满了系统就自己增加，少了就自己减少，不知道会这样吗？\n目前代码如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003evar delete_channel = make(chan string,100)\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -77,13 +84,6 @@
       "Title": "针对大型复杂map的GC优化， 变成map[uint64]int+外部二级索引切片 大幅减少GC耗时",
       "Link": "https://studygolang.com/topics/15703#reply3",
       "Description": "\u003ch1\u003enoGCMapIndex\u003c/h1\u003e\n\n\u003cp\u003e对于大型map，比如总数达到千万级别的map,如果键或者值中包含引用类型(string类型，结构体类型，或者任何基本类型+指针的定义 *int, *float 等)，那么这个MAP在垃圾回收的时候就会非常慢，GC的周期回收时间可以达到秒级。\u003c/p\u003e\n\n\u003cp\u003e所以对于这种map需要进行优化，把复杂的不利于GC的复杂map转化为基础类型的  map[uint64]int+外部二级索引切片的形式。比如 map[string]intercace{} 转换为 map[uint64]int+[]intercace{}的形式，变成这种形式之后，整个gc基本就不耗时了。\u003c/p\u003e\n\n\u003cp\u003e注意，这种做法主要适用于单次加载完后，键值对不再变化的情况。对于键值对在运行过程中还要动态增减的情况则不适合。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;github.com/yudeguang/noGCMapIndex\u0026quot;\n\t\u0026quot;log\u0026quot;\n\t\u0026quot;strconv\u0026quot;\n)\n\nfunc main() {\n\tlog.SetFlags(log.Lshortfile | log.Ltime)\n\ttstring()\n\ttint()\n}\n\nfunc tstring() {\n\t//旧MAP\n\ttype col struct {\n\t\ta string\n\t\tb string\n\t\tc int\n\t}\n\toldMap := make(map[string]col)\n\tfor i := 0; i \u0026lt; 10; i++ {\n\t\toldMap[strconv.Itoa(i)] = col{strconv.Itoa(i), strconv.Itoa(i), i}\n\t}\n\n\t//旧MAP转换为新形式的map+二级索引切片的形式\n\tdata := make([]col, len(oldMap))\n\tm := noGCMapIndex.NewString(len(oldMap))\n\tfor k, v := range oldMap {\n\t\tindex := m.CreateIndex(k)\n\t\tdata[index] = v\n\t}\n\t//查询数据\n\tkey := \u0026quot;3\u0026quot;\n\tindex := m.GetIndex(key)\n\tif index != -1 {\n\t\tlog.Println(\u0026quot;key:\u0026quot;, key, \u0026quot;对应的值为:\u0026quot;, data[index])\n\t} else {\n\t\tlog.Println(key, \u0026quot;不存在\u0026quot;)\n\t}\n}\n\nfunc tint() {\n\t//旧MAP\n\ttype col struct {\n\t\ta string\n\t\tb string\n\t\tc int\n\t}\n\toldMap := make(map[int]col)\n\tfor i := 0; i \u0026lt; 10; i++ {\n\t\toldMap[i] = col{strconv.Itoa(i), strconv.Itoa(i), i}\n\t}\n\n\t//旧MAP转换为新形式的map+二级索引切片的形式\n\tdata := make([]col, len(oldMap))\n\tm := noGCMapIndex.NewInt(len(oldMap))\n\tfor k, v := range oldMap {\n\t\tindex := m.CreateIndex(k)\n\t\tdata[index] = v\n\t}\n\t//查询数据\n\tkey := 3\n\tindex := m.GetIndex(key)\n\tif index != -1 {\n\t\tlog.Println(\u0026quot;key:\u0026quot;, key, \u0026quot;对应的值为:\u0026quot;, data[index])\n\t} else {\n\t\tlog.Println(key, \u0026quot;不存在\u0026quot;)\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "大家帮我看一下，我是新手菜鸡，应该是我理解不到位，求解惑，感谢！",
-      "Link": "https://studygolang.com/topics/15701#reply9",
-      "Description": "\u003cpre\u003e\u003ccode\u003e/*\n我想实现的是一个servers数组，里面装了server（map），server不同的key对应不同的value，如server1{\u0026quot;name\u0026quot;:\u0026quot;machine1\u0026quot; ...},server2{\u0026quot;name\u0026quot;:\u0026quot;machine2\u0026quot;}...\n然后我通过遍历数组servers，遇到不同的下标时修改对应servers[i]的某个key对应的值，但是这样写下来运行每个server全都改成了同样的值，自己调试发现代码到那一步（断点）就是直接就全部server都改了，新手看了半天很困惑，希望了解的帮我看一下，先谢谢了！\n*/\n\n\npackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;strconv\u0026quot;\n)\n\nfunc main() {\n\tservers := New()\n\tMod(servers)\n\tfmt.Println(servers)\n}\nfunc New() *[]map[string]string {\n\tserver := make(map[string]string)\n\tservers := make([]map[string]string, 0)\n\tfor i := 0; i \u0026lt; 5; i++ {\n\t\tserver[\u0026quot;name\u0026quot;] = \u0026quot;server\u0026quot; + string(i)\n\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;machine\u0026quot;\n\t\tservers = append(servers, server)\n\t}\n\treturn \u0026amp;servers\n}\nfunc Mod(servers *[]map[string]string) {\n\tfor i, server := range *servers {\n\t\tif i == 1 {\n\t\t\tfmt.Println(i)\n\t\t\tserver[\u0026quot;name\u0026quot;] = \u0026quot;machine\u0026quot; + strconv.Itoa(i)\n\t\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;cloud\u0026quot;\n\t\t\tfmt.Println(server[\u0026quot;name\u0026quot;])\n\t\t}\n\t\tif i == 3 {\n\t\t\t//fmt.Println(i)\n\t\t\t/*断点*/server[\u0026quot;name\u0026quot;] = \u0026quot;machine\u0026quot; + strconv.Itoa(i)\n\t\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;physic\u0026quot;\n\t\t\tfmt.Println(server[\u0026quot;name\u0026quot;])\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -182,6 +182,13 @@
       "Title": "OwnershipLabs招聘GO开发工程师",
       "Link": "https://studygolang.com/topics/15698#reply0",
       "Description": "\u003cp\u003e岗位职责：\u003c/p\u003e\n\n\u003cp\u003e1、能够独立进行区块链底层系统及应用平台的功能定义和架构设计，研究区块链的协议，运行机制、底层实现和应用平台研发等；\n2、从事区块链产品的设计和研发工作，研究区块链的协议，运行机制和底层实现等；\n3、完成智能合约前端接⼝的封装和测试；\n4、产品链上数据的链下读取、处理、索引、存储和检索。\u003c/p\u003e\n\n\u003cp\u003e任职要求:\u003c/p\u003e\n\n\u003cp\u003e1、本科及以上学历, 计算机、软件工程等相关专业；\n2、从事Go开发2年或以上，擅⻓数据库、缓存、队列等后端技术；\n3、熟悉Solidity、Typescript，能根据智能合约封装出供前端团队调⽤的 API 接⼝；\n4、热爱区块链技术及渴望在区块链技术持续成长。\u003c/p\u003e\n\n\u003cp\u003e加分项：\u003c/p\u003e\n\n\u003cp\u003e1、了解Web3中间件的客户端使用，例如IPFS、Ceramic、Chainlink等去中⼼化数据存储⽅案；\n2、熟悉 The Graph去中⼼化索引协议，良好的英语阅读能力。\u003c/p\u003e\n\n\u003cp\u003e可远程办公或线下办公－杭州未来科技城，可以带小宠物上班，上班期间可喝酒（但是不要喝醉了哦），工作时间：12点至19点，不加班，双休，薪资25K-50K。\n我们是一家区块链技术驱动的创业公司，产品名：dataverse，有意可发简历至：olivia@ownershiplabs.com\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go 修改 struct 的打印信息，类似于 python __str__",
+      "Link": "https://studygolang.com/topics/15704#reply0",
+      "Description": "\u003cp\u003e大佬们，有没有人知道 Go 修改 struct 的打印信息，类似于 python 的 \u003cstrong\u003estr\u003c/strong\u003e 函数\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
