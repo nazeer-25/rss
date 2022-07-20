@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "surge 有没有办法合并配置 - Surge",
+      "Link": "https://www.v2ex.com/t/867606",
+      "Description": "\u003cp\u003e有一些自己的配置但是托管配置无法修改， 所以只能手动 copy 托管配置，然后在 copy 的内容上面进行修改，但是托管的配置就处于不再更新的状态了，所以想的是没有办法自己一个配置， 托管一个配置，我在使用的时候合并两个配置\u003c/p\u003e\n",
+      "Author": "lazyfighter",
+      "PubDate": "2022-07-20T10:33:04Z"
+    },
+    {
+      "Title": "杭州哪里换驾照 - 问与答",
+      "Link": "https://www.v2ex.com/t/867603",
+      "Description": "\u003cp\u003e驾照即将过期。浙江政务网上查了一下，线下办事点那里只写了古墩路 下沙 余杭，是不是河坊街那边没法换？\u003c/p\u003e\n\u003cp\u003e有老哥能指点一下么。\u003c/p\u003e\n\u003cp\u003e谢谢。\u003c/p\u003e\n",
+      "Author": "shanghai1943",
+      "PubDate": "2022-07-20T10:30:05Z"
+    },
+    {
+      "Title": "如何使 Wireguard 接入到局域网的设备，亦可以走透明代理 - WireGuard",
+      "Link": "https://www.v2ex.com/t/867602",
+      "Description": "\u003cp\u003e树莓派上面做的网关，跑 ubuntu-jammy\u003c/p\u003e\n\u003cp\u003e首先，我根据 \u003ca href=\"https://guide.v2fly.org/app/tproxy.html#%E4%B8%BA-v2ray-%E9%85%8D%E7%BD%AE%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86%E7%9A%84%E5%85%A5%E7%AB%99%E5%92%8C-dns-%E5%88%86%E6%B5%81\" rel=\"nofollow\"\u003e新 V2Ray 白话文指南 - 透明代理 TPROXY\u003c/a\u003e 配置了透明代理，局域网里面的设备配置一下网关就可以科学上网(没有在路由配置默认网关指向树莓派)\u003c/p\u003e\n\u003cp\u003e需求：外出的时候，Wireguard(wg)接入的设备跟家里局域网一样走透明代理的形式，不要通过 SwitchyOmega 或者系统配代理指向树莓派的方式进行科学上网。\u003c/p\u003e\n\u003cp\u003e赐教:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e局域网的透明代理跟 wg 不能共存，wg client 握手失败 ，有熟悉朋友讲解一下，是哪里出错了？或者推荐一下 debug 工具。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e应该怎么配置(\u003ccode\u003eiptable\u003c/code\u003e OR \u003ccode\u003eip route\u003c/code\u003e OR 配置 v2fly 的 Routing)才可以实现 wg 的接入设备也能透明代理？\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e还是说，换一个\u003ca href=\"https://v2ex.com/t/844790#reply49\" rel=\"nofollow\"\u003e透明代理的思路\u003c/a\u003e，由(其他)软件层面去管理 wg 和局域网的透明代理。\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003e相关信息\u003c/h3\u003e\n\u003cp\u003e局域网网段：\u003ccode\u003e10.12.0.0/24\u003c/code\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e路由地址: \u003ccode\u003e10.12.0.200\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e树莓派地址: \u003ccode\u003e10.12.0.100\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eWireguard 网段：\u003ccode\u003e10.16.0.0/24\u003c/code\u003e\u003c/p\u003e\n\u003ch4\u003etproxy 的 nft\u003c/h4\u003e\n\u003cpre\u003e\u003ccode\u003eflush ruleset\n\ninclude \"/etc/nftables/private-ipv4.nft\"\ninclude \"/etc/nftables/chnroute.nft\"\n\ntable ip v2ray {\n    chain PREROUTING {\n        type filter hook prerouting priority filter; policy accept;\n        ip daddr $private_ipv4 return\n        ip daddr $chnroute_list return\n        meta l4proto { tcp, udp } ip daddr 10.12.0.0-10.12.0.255 return\n        meta mark 0x000000ff return\n        meta l4proto { tcp, udp } meta mark set 0x00000001 tproxy to 127.0.0.1:12345 accept\n    }\n\n    chain OUTPUT {\n        type route hook output priority filter; policy accept;\n        ip daddr $private_ipv4 return\n        meta l4proto { tcp, udp } ip daddr 10.12.0.0-10.12.0.255 return\n        meta mark 0x000000ff return\n        meta l4proto { tcp, udp } meta mark set 0x00000001 accept\n    }\n}\n\ntable ip filter {\n    chain DIVERT {\n        type filter hook prerouting priority mangle; policy accept;\n        meta l4proto tcp socket transparent 1 meta mark set 0x00000001 accept\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4\u003ewg 的 nft\u003c/h4\u003e\n\u003cpre\u003e\u003ccode\u003enft flush ruleset\nnft add table filter\nnft add chain filter INPUT { type filter hook input priority 0 \\; }\nnft add chain filter FORWARD { type filter hook forward priority 0 \\; }\nnft add chain filter OUTPUT { type filter hook output priority 0 \\; }\n\nnft add table wg2nat\nnft add chain wg2nat PREROUTING { type nat hook prerouting priority -100 \\; }\nnft add rule wg2nat PREROUTING meta nftrace set 1\nnft add chain wg2nat INPUT { type nat hook input priority 100 \\; }\nnft add chain wg2nat OUTPUT { type nat hook output priority -100 \\; }\nnft add chain wg2nat POSTROUTING { type nat hook postrouting priority 100 \\; }\nnft add rule wg2nat POSTROUTING oifname \"eth0\" ip saddr 10.16.0.0/24 counter masquerade comment \"wireguard-nat-rule\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4\u003eip route\u003c/h4\u003e\n\u003cpre\u003e\u003ccode\u003edefault via 10.12.0.200 dev eth0 proto dhcp src 10.12.0.100 metric 100 \n10.12.0.0/24 dev eth0 proto kernel scope link src 10.12.0.100 metric 100 \n10.12.0.200 dev eth0 proto dhcp scope link src 10.12.0.100 metric 100 \n10.12.0.100 dev eth0 proto dhcp scope host src 10.12.0.100 metric 100 \n10.16.0.0/24 dev wg0 proto kernel scope link src 10.16.0.1 \n223.5.5.5 via 10.12.0.200 dev eth0 proto dhcp src 10.12.0.100 metric 100\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "enrolls",
+      "PubDate": "2022-07-20T10:25:54Z"
+    },
+    {
+      "Title": "怎么解决 Mac 下文件名的乱码问题 - Apple",
+      "Link": "https://www.v2ex.com/t/867601",
+      "Description": "\u003cp\u003e例如从某网盘，在 web 页面上文件名一切正常，下载的就变乱码了\u003c/p\u003e\n\u003cp\u003e一个压缩文件，在预览里看到的文件名一切正常，解压后就变乱码了。\u003c/p\u003e\n\u003cp\u003e我知道是文字编码原因，请问在 Mac 系统里有没有合适的解决方案？\u003c/p\u003e\n",
+      "Author": "clearc",
+      "PubDate": "2022-07-20T10:25:01Z"
+    },
+    {
       "Title": "baidu.com 无法访问 - 程序员",
       "Link": "https://www.v2ex.com/t/867599",
       "Description": "\u003cp\u003e最近发现 \u003ca href=\"http://baidu.com\" rel=\"nofollow\"\u003ebaidu.com\u003c/a\u003e 域名无法访问，但是 \u003ca href=\"http://www.baidu.com\" rel=\"nofollow\"\u003ewww.baidu.com\u003c/a\u003e 是可以的，不知道百度为什么会出现这样的问题\n\u003cimg alt=\"xf.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/07/20/UwEvVbn4WXPola5.png\"/\u003e\u003c/p\u003e\n",
