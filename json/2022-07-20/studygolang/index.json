@@ -39,6 +39,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "换个姿势做运维！GOPS 2022 · 深圳站精彩内容抢先看",
+      "Link": "https://studygolang.com/articles/35773#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "net/http库",
       "Link": "https://studygolang.com/topics/15706#reply0",
       "Description": "\u003cp\u003ehttp库这么多方法，记不过来呀？有大佬在开发请求的时候哪些是比较常用的吗？\u003c/p\u003e\n",
@@ -53,9 +60,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "换个姿势做运维！GOPS 2022 · 深圳站精彩内容抢先看",
-      "Link": "https://studygolang.com/articles/35773#reply0",
-      "Description": "",
+      "Title": "Go 修改 struct 的打印信息，类似于 python __str__",
+      "Link": "https://studygolang.com/topics/15704#reply3",
+      "Description": "\u003cp\u003e大佬们，有没有人知道 Go 修改 struct 的打印信息，类似于 python 的 \u003cstrong\u003estr\u003c/strong\u003e 函数\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -70,13 +77,6 @@
       "Title": "针对大型复杂map的GC优化， 变成map[uint64]int+外部二级索引切片 大幅减少GC耗时",
       "Link": "https://studygolang.com/topics/15703#reply4",
       "Description": "\u003ch1\u003enoGCMapIndex\u003c/h1\u003e\n\n\u003cp\u003e对于大型map，比如总数达到千万级别的map,如果键或者值中包含引用类型(string类型，结构体类型，或者任何基本类型+指针的定义 *int, *float 等)，那么这个MAP在垃圾回收的时候就会非常慢，GC的周期回收时间可以达到秒级。\u003c/p\u003e\n\n\u003cp\u003e所以对于这种map需要进行优化，把复杂的不利于GC的复杂map转化为基础类型的  map[uint64]int+外部二级索引切片的形式。比如 map[string]intercace{} 转换为 map[uint64]int+[]intercace{}的形式，变成这种形式之后，整个gc基本就不耗时了。\u003c/p\u003e\n\n\u003cp\u003e注意，这种做法主要适用于单次加载完后，键值对不再变化的情况。对于键值对在运行过程中还要动态增减的情况则不适合。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;github.com/yudeguang/noGCMapIndex\u0026quot;\n\t\u0026quot;log\u0026quot;\n\t\u0026quot;strconv\u0026quot;\n)\n\nfunc main() {\n\tlog.SetFlags(log.Lshortfile | log.Ltime)\n\ttstring()\n\ttint()\n}\n\nfunc tstring() {\n\t//旧MAP\n\ttype col struct {\n\t\ta string\n\t\tb string\n\t\tc int\n\t}\n\toldMap := make(map[string]col)\n\tfor i := 0; i \u0026lt; 10; i++ {\n\t\toldMap[strconv.Itoa(i)] = col{strconv.Itoa(i), strconv.Itoa(i), i}\n\t}\n\n\t//旧MAP转换为新形式的map+二级索引切片的形式\n\tdata := make([]col, len(oldMap))\n\tm := noGCMapIndex.NewString(len(oldMap))\n\tfor k, v := range oldMap {\n\t\tindex := m.CreateIndex(k)\n\t\tdata[index] = v\n\t}\n\t//查询数据\n\tkey := \u0026quot;3\u0026quot;\n\tindex := m.GetIndex(key)\n\tif index != -1 {\n\t\tlog.Println(\u0026quot;key:\u0026quot;, key, \u0026quot;对应的值为:\u0026quot;, data[index])\n\t} else {\n\t\tlog.Println(key, \u0026quot;不存在\u0026quot;)\n\t}\n}\n\nfunc tint() {\n\t//旧MAP\n\ttype col struct {\n\t\ta string\n\t\tb string\n\t\tc int\n\t}\n\toldMap := make(map[int]col)\n\tfor i := 0; i \u0026lt; 10; i++ {\n\t\toldMap[i] = col{strconv.Itoa(i), strconv.Itoa(i), i}\n\t}\n\n\t//旧MAP转换为新形式的map+二级索引切片的形式\n\tdata := make([]col, len(oldMap))\n\tm := noGCMapIndex.NewInt(len(oldMap))\n\tfor k, v := range oldMap {\n\t\tindex := m.CreateIndex(k)\n\t\tdata[index] = v\n\t}\n\t//查询数据\n\tkey := 3\n\tindex := m.GetIndex(key)\n\tif index != -1 {\n\t\tlog.Println(\u0026quot;key:\u0026quot;, key, \u0026quot;对应的值为:\u0026quot;, data[index])\n\t} else {\n\t\tlog.Println(key, \u0026quot;不存在\u0026quot;)\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Go 修改 struct 的打印信息，类似于 python __str__",
-      "Link": "https://studygolang.com/topics/15704#reply3",
-      "Description": "\u003cp\u003e大佬们，有没有人知道 Go 修改 struct 的打印信息，类似于 python 的 \u003cstrong\u003estr\u003c/strong\u003e 函数\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
