@@ -53,20 +53,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "花 1 小时试用产品，薅羊毛 150 元京东购物卡",
-      "Link": "https://studygolang.com/articles/35773#reply0",
-      "Description": "\u003cp\u003e上市公司沃趣科技（ 839849 ）推出私有云产品部署试用活动，注册部署试用产品可以获得 150 元京东购物卡，有兴趣的小伙伴可以试试，我已经领到了 可以在自己的虚拟机部署产品，也可以购买临时服务器，按使用时间付费的服务器\u003c/p\u003e\n\n\u003cp\u003e针对企业邮箱问题，沃趣客服表示不会骚扰客户，大家可以放心，没有企业邮箱的小伙伴，可以试用企业微信邮箱或者可以先写一个虚拟企业邮箱，需要获取授权码的时候再修改个人邮箱获取\u003c/p\u003e\n\n\u003cp\u003e部署文档如下： \u003ca href=\"https://rrac8tbybu.feishu.cn/docx/doxcnUujUQbWn9iJwb97CiDZ8hZ\"\u003ehttps://rrac8tbybu.feishu.cn/docx/doxcnUujUQbWn9iJwb97CiDZ8hZ\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e也可以参考官方文档部署最新版的\u003c/p\u003e\n\n\u003cp\u003e如果没有虚拟机的话，建议参考教程使用腾讯云 [按量计费服务器] ，划重点，按量计费服务器，按量计费服务器，按量计费服务器。。。。部署完成审核通过之后就可以销毁机器了。。。部署成本大概 3-5 元左右\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "大家帮我看一下，我是新手菜鸡，应该是我理解不到位，求解惑，感谢！",
-      "Link": "https://studygolang.com/topics/15701#reply9",
-      "Description": "\u003cpre\u003e\u003ccode\u003e/*\n我想实现的是一个servers数组，里面装了server（map），server不同的key对应不同的value，如server1{\u0026quot;name\u0026quot;:\u0026quot;machine1\u0026quot; ...},server2{\u0026quot;name\u0026quot;:\u0026quot;machine2\u0026quot;}...\n然后我通过遍历数组servers，遇到不同的下标时修改对应servers[i]的某个key对应的值，但是这样写下来运行每个server全都改成了同样的值，自己调试发现代码到那一步（断点）就是直接就全部server都改了，新手看了半天很困惑，希望了解的帮我看一下，先谢谢了！\n*/\n\n\npackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;strconv\u0026quot;\n)\n\nfunc main() {\n\tservers := New()\n\tMod(servers)\n\tfmt.Println(servers)\n}\nfunc New() *[]map[string]string {\n\tserver := make(map[string]string)\n\tservers := make([]map[string]string, 0)\n\tfor i := 0; i \u0026lt; 5; i++ {\n\t\tserver[\u0026quot;name\u0026quot;] = \u0026quot;server\u0026quot; + string(i)\n\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;machine\u0026quot;\n\t\tservers = append(servers, server)\n\t}\n\treturn \u0026amp;servers\n}\nfunc Mod(servers *[]map[string]string) {\n\tfor i, server := range *servers {\n\t\tif i == 1 {\n\t\t\tfmt.Println(i)\n\t\t\tserver[\u0026quot;name\u0026quot;] = \u0026quot;machine\u0026quot; + strconv.Itoa(i)\n\t\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;cloud\u0026quot;\n\t\t\tfmt.Println(server[\u0026quot;name\u0026quot;])\n\t\t}\n\t\tif i == 3 {\n\t\t\t//fmt.Println(i)\n\t\t\t/*断点*/server[\u0026quot;name\u0026quot;] = \u0026quot;machine\u0026quot; + strconv.Itoa(i)\n\t\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;physic\u0026quot;\n\t\t\tfmt.Println(server[\u0026quot;name\u0026quot;])\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "针对大型复杂map的GC优化， 变成map[uint64]int+外部二级索引切片 大幅减少GC耗时",
       "Link": "https://studygolang.com/topics/15703#reply4",
       "Description": "\u003ch1\u003enoGCMapIndex\u003c/h1\u003e\n\n\u003cp\u003e对于大型map，比如总数达到千万级别的map,如果键或者值中包含引用类型(string类型，结构体类型，或者任何基本类型+指针的定义 *int, *float 等)，那么这个MAP在垃圾回收的时候就会非常慢，GC的周期回收时间可以达到秒级。\u003c/p\u003e\n\n\u003cp\u003e所以对于这种map需要进行优化，把复杂的不利于GC的复杂map转化为基础类型的  map[uint64]int+外部二级索引切片的形式。比如 map[string]intercace{} 转换为 map[uint64]int+[]intercace{}的形式，变成这种形式之后，整个gc基本就不耗时了。\u003c/p\u003e\n\n\u003cp\u003e注意，这种做法主要适用于单次加载完后，键值对不再变化的情况。对于键值对在运行过程中还要动态增减的情况则不适合。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;github.com/yudeguang/noGCMapIndex\u0026quot;\n\t\u0026quot;log\u0026quot;\n\t\u0026quot;strconv\u0026quot;\n)\n\nfunc main() {\n\tlog.SetFlags(log.Lshortfile | log.Ltime)\n\ttstring()\n\ttint()\n}\n\nfunc tstring() {\n\t//旧MAP\n\ttype col struct {\n\t\ta string\n\t\tb string\n\t\tc int\n\t}\n\toldMap := make(map[string]col)\n\tfor i := 0; i \u0026lt; 10; i++ {\n\t\toldMap[strconv.Itoa(i)] = col{strconv.Itoa(i), strconv.Itoa(i), i}\n\t}\n\n\t//旧MAP转换为新形式的map+二级索引切片的形式\n\tdata := make([]col, len(oldMap))\n\tm := noGCMapIndex.NewString(len(oldMap))\n\tfor k, v := range oldMap {\n\t\tindex := m.CreateIndex(k)\n\t\tdata[index] = v\n\t}\n\t//查询数据\n\tkey := \u0026quot;3\u0026quot;\n\tindex := m.GetIndex(key)\n\tif index != -1 {\n\t\tlog.Println(\u0026quot;key:\u0026quot;, key, \u0026quot;对应的值为:\u0026quot;, data[index])\n\t} else {\n\t\tlog.Println(key, \u0026quot;不存在\u0026quot;)\n\t}\n}\n\nfunc tint() {\n\t//旧MAP\n\ttype col struct {\n\t\ta string\n\t\tb string\n\t\tc int\n\t}\n\toldMap := make(map[int]col)\n\tfor i := 0; i \u0026lt; 10; i++ {\n\t\toldMap[i] = col{strconv.Itoa(i), strconv.Itoa(i), i}\n\t}\n\n\t//旧MAP转换为新形式的map+二级索引切片的形式\n\tdata := make([]col, len(oldMap))\n\tm := noGCMapIndex.NewInt(len(oldMap))\n\tfor k, v := range oldMap {\n\t\tindex := m.CreateIndex(k)\n\t\tdata[index] = v\n\t}\n\t//查询数据\n\tkey := 3\n\tindex := m.GetIndex(key)\n\tif index != -1 {\n\t\tlog.Println(\u0026quot;key:\u0026quot;, key, \u0026quot;对应的值为:\u0026quot;, data[index])\n\t} else {\n\t\tlog.Println(key, \u0026quot;不存在\u0026quot;)\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -123,9 +109,23 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "大家帮我看一下，我是新手菜鸡，应该是我理解不到位，求解惑，感谢！",
+      "Link": "https://studygolang.com/topics/15701#reply9",
+      "Description": "\u003cpre\u003e\u003ccode\u003e/*\n我想实现的是一个servers数组，里面装了server（map），server不同的key对应不同的value，如server1{\u0026quot;name\u0026quot;:\u0026quot;machine1\u0026quot; ...},server2{\u0026quot;name\u0026quot;:\u0026quot;machine2\u0026quot;}...\n然后我通过遍历数组servers，遇到不同的下标时修改对应servers[i]的某个key对应的值，但是这样写下来运行每个server全都改成了同样的值，自己调试发现代码到那一步（断点）就是直接就全部server都改了，新手看了半天很困惑，希望了解的帮我看一下，先谢谢了！\n*/\n\n\npackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;strconv\u0026quot;\n)\n\nfunc main() {\n\tservers := New()\n\tMod(servers)\n\tfmt.Println(servers)\n}\nfunc New() *[]map[string]string {\n\tserver := make(map[string]string)\n\tservers := make([]map[string]string, 0)\n\tfor i := 0; i \u0026lt; 5; i++ {\n\t\tserver[\u0026quot;name\u0026quot;] = \u0026quot;server\u0026quot; + string(i)\n\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;machine\u0026quot;\n\t\tservers = append(servers, server)\n\t}\n\treturn \u0026amp;servers\n}\nfunc Mod(servers *[]map[string]string) {\n\tfor i, server := range *servers {\n\t\tif i == 1 {\n\t\t\tfmt.Println(i)\n\t\t\tserver[\u0026quot;name\u0026quot;] = \u0026quot;machine\u0026quot; + strconv.Itoa(i)\n\t\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;cloud\u0026quot;\n\t\t\tfmt.Println(server[\u0026quot;name\u0026quot;])\n\t\t}\n\t\tif i == 3 {\n\t\t\t//fmt.Println(i)\n\t\t\t/*断点*/server[\u0026quot;name\u0026quot;] = \u0026quot;machine\u0026quot; + strconv.Itoa(i)\n\t\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;physic\u0026quot;\n\t\t\tfmt.Println(server[\u0026quot;name\u0026quot;])\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "学习周刊-总第62期-一个优秀开源的的论坛程序与免费gif图片压缩工具",
       "Link": "https://studygolang.com/articles/35766#reply0",
       "Description": "\u003ch3\u003e0 ，前言\u003c/h3\u003e\n\n\u003cp\u003e周刊维护在：\u003ca href=\"https://github.com/eryajf/learning-weekly\"\u003ehttps://github.com/eryajf/learning-weekly\u003c/a\u003e 欢迎投稿，推荐或自荐项目 /文章 /博客，请提交 issue 。\u003c/p\u003e\n\n\u003cp\u003e这里记录我们每周工作学习过程中遇到学到的优秀开源项目，优秀文章，以及优秀博客。有很多优秀的内容，都值得被铭记，值得被分享，值得被更多人学习，我们想通过这里每周的记录分享，一方面强化自己对优秀内容的认识与学习，另一方面能够把优质内容统一汇总，以飨大众。\u003c/p\u003e\n\n\u003cp\u003e我们的内容会以运维技术和 Golang 为主，以及 GitHub 上优秀项目或经验。已经经过一次筛选过滤的内容，质量不会太差，在你空闲无事的时候，可以过来随便看看，必能有所收益。\u003c/p\u003e\n\n\u003cp\u003e你也可以在我的博客 \u003ca href=\"https://wiki.eryajf.net/pages/11c668/\"\u003ehttps://wiki.eryajf.net/pages/11c668/\u003c/a\u003e 查看汇总周刊。\u003c/p\u003e\n\n\u003ch3\u003e1，优秀项目\u003c/h3\u003e\n\n\u003chr\u003e\n\n\u003cul\u003e\n\u003cli\u003e项目地址：\u003ca href=\"https://github.com/flarum/framework\"\u003eframework\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e项目说明：一个简单的，优雅地论坛项目，utools的官方论坛就是这个风格。\n\u003cimg src=\"http://t.eryajf.net/imgs/2022/06/d7ea05dc866f24d4.png\" alt=\"\" /\u003e\u003c/li\u003e\n\u003cli\u003e相关文章：\u003ca href=\"https://github.com/flarum/framework#readme\"\u003eREADME\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003chr\u003e\n\n\u003cul\u003e\n\u003cli\u003e项目地址：\u003ca href=\"https://github.com/ImageOptim/ImageOptim\"\u003eImageOptim\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e项目说明：一个图片压缩工具，重要的是，它还支持gif格式压缩。\n\u003cimg src=\"http://t.eryajf.net/imgs/2022/06/df2b947ce4920d13.png\" alt=\"\" /\u003e\u003c/li\u003e\n\u003cli\u003e相关文章：\u003ca href=\"https://github.com/ImageOptim/ImageOptim#readme\"\u003eREADME\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003chr\u003e\n\n\u003cul\u003e\n\u003cli\u003e项目地址：\u003ca href=\"https://github.com/tidwall/gjson\"\u003egjson\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e项目说明：快速获取JSON中指定key对应的值。\u003c/li\u003e\n\u003cli\u003e相关文章：\u003ca href=\"https://github.com/tidwall/gjson#readme\"\u003eREADME\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003chr\u003e\n\n\u003cul\u003e\n\u003cli\u003e项目地址：\u003ca href=\"https://github.com/xiaodingding/iotfast\"\u003eiotfast\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e项目说明：go语言开发的一个物联网管理平台\u003c/li\u003e\n\u003cli\u003e相关文章：\u003ca href=\"https://github.com/xiaodingding/iotfast#readme\"\u003eREADME\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003chr\u003e\n\n\u003ch3\u003e2，优秀文章\u003c/h3\u003e\n\n\u003chr\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://devconnected.com/how-to-search-ldap-using-ldapsearch-examples/\"\u003eHow To Search LDAP using ldapsearch (With Examples)\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e如题，很赞的文章\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003chr\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://juejin.cn/post/7119123646471208968\"\u003e爆肝两千字整理《Go学习路线图》\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e作者是个有心人，一路学习，一路总结，这篇文章是把其所有的文章做了一个整理\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003chr\u003e\n\n\u003ch3\u003e3，优秀博客\u003c/h3\u003e\n\n\u003chr\u003e\n\n\u003cul\u003e\n\u003cli\u003e博客地址：\u003ca href=\"https://xdbin.com/\"\u003e初意\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e简单说明：河南老乡，博客内容很不错，golang相关\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003chr\u003e\n\n\u003cul\u003e\n\u003cli\u003e博客地址：\u003ca href=\"https://www.leavesongs.com/\"\u003e离别歌\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e简单说明：安全相关，热衷开源\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003chr\u003e\n\n\u003cul\u003e\n\u003cli\u003e博客地址：\u003ca href=\"https://juemuren4449.com/\"\u003e掘墓人的小铲子\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e简单说明：有生活气息的技术博客\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003chr\u003e\n\n\u003cul\u003e\n\u003cli\u003e博客地址：\u003ca href=\"https://ops.m114.org/\"\u003ecloudSky\u0026rsquo;s 小站\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e简单说明：golang小技巧，Nginx，Lua等内容\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003chr\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go中的channel的一点疑惑",
+      "Link": "https://studygolang.com/topics/15700#reply9",
+      "Description": "\u003cp\u003e正在用go写后台，遇到一个场景是这样的：\n每个用户在上传新文件时，go都要去删除旧文件，所以我想当用户上传新文件成功之后，就把旧文件的地址放到channel中，然后channel那边创建有三个协程来取出数据并进行删除操作。这个流程没有什么问题。我疑惑的是，我应该创建多大的channel呢，太小了我怕到时候忙不过来出现阻塞，太大了又感觉浪费。还是可以不指定channel的大小，由系统来决定，channel满了系统就自己增加，少了就自己减少，不知道会这样吗？\n目前代码如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003evar delete_channel = make(chan string,100)\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -140,13 +140,6 @@
       "Title": "北京五道口顶级游戏公司中台部门招go开发",
       "Link": "https://studygolang.com/topics/15208#reply9",
       "Description": "\u003cp\u003e此岗位长期有效\u003c/p\u003e\n\n\u003cp\u003e公司网站:  \u003ca href=\"https://www.hortorgames.com/\"\u003ehttps://www.hortorgames.com/\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e坐标: 北京-海淀-五道口\u003c/p\u003e\n\n\u003cp\u003e职责: 负责中台部门通用服务如登录, 注册, 支付, 统计等功能的开发\u003c/p\u003e\n\n\u003cp\u003e要求: 扎实的数据结构与算法等计算机基础知识, 熟悉Redis, MongoDB等后端技术\u003c/p\u003e\n\n\u003cp\u003e薪资: 25-35k  15薪\u003c/p\u003e\n\n\u003cp\u003e福利: 双休, 极少加班, 反对内卷, 3公里内2k租房补贴, 每年两次晋升机会, 豪横年会, 工作和技术氛围好\u003c/p\u003e\n\n\u003cp\u003e联系方式:  加wx  xbtb1354  备注 go内推此岗位长期有效, 长期招聘游戏前后端, 策划美术运营等\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "go中的channel的一点疑惑",
-      "Link": "https://studygolang.com/topics/15700#reply8",
-      "Description": "\u003cp\u003e正在用go写后台，遇到一个场景是这样的：\n每个用户在上传新文件时，go都要去删除旧文件，所以我想当用户上传新文件成功之后，就把旧文件的地址放到channel中，然后channel那边创建有三个协程来取出数据并进行删除操作。这个流程没有什么问题。我疑惑的是，我应该创建多大的channel呢，太小了我怕到时候忙不过来出现阻塞，太大了又感觉浪费。还是可以不指定channel的大小，由系统来决定，channel满了系统就自己增加，少了就自己减少，不知道会这样吗？\n目前代码如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003evar delete_channel = make(chan string,100)\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -189,6 +182,20 @@
       "Title": "Go Web 框架 Aurora",
       "Link": "https://studygolang.com/p/1120#reply2",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "花 1 小时试用产品，薅羊毛 150 元京东购物卡",
+      "Link": "https://studygolang.com/articles/35773#reply0",
+      "Description": "\u003cp\u003e上市公司沃趣科技（ 839849 ）推出私有云产品部署试用活动，注册部署试用产品可以获得 150 元京东购物卡，有兴趣的小伙伴可以试试，我已经领到了 可以在自己的虚拟机部署产品，也可以购买临时服务器，按使用时间付费的服务器\u003c/p\u003e\n\n\u003cp\u003e针对企业邮箱问题，沃趣客服表示不会骚扰客户，大家可以放心，没有企业邮箱的小伙伴，可以试用企业微信邮箱或者可以先写一个虚拟企业邮箱，需要获取授权码的时候再修改个人邮箱获取\u003c/p\u003e\n\n\u003cp\u003e部署文档如下： \u003ca href=\"https://rrac8tbybu.feishu.cn/docx/doxcnUujUQbWn9iJwb97CiDZ8hZ\"\u003ehttps://rrac8tbybu.feishu.cn/docx/doxcnUujUQbWn9iJwb97CiDZ8hZ\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e也可以参考官方文档部署最新版的\u003c/p\u003e\n\n\u003cp\u003e如果没有虚拟机的话，建议参考教程使用腾讯云 [按量计费服务器] ，划重点，按量计费服务器，按量计费服务器，按量计费服务器。。。。部署完成审核通过之后就可以销毁机器了。。。部署成本大概 3-5 元左右\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go中的channel的一点疑惑",
+      "Link": "https://studygolang.com/topics/15700#reply8",
+      "Description": "\u003cp\u003e正在用go写后台，遇到一个场景是这样的：\n每个用户在上传新文件时，go都要去删除旧文件，所以我想当用户上传新文件成功之后，就把旧文件的地址放到channel中，然后channel那边创建有三个协程来取出数据并进行删除操作。这个流程没有什么问题。我疑惑的是，我应该创建多大的channel呢，太小了我怕到时候忙不过来出现阻塞，太大了又感觉浪费。还是可以不指定channel的大小，由系统来决定，channel满了系统就自己增加，少了就自己减少，不知道会这样吗？\n目前代码如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003evar delete_channel = make(chan string,100)\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
