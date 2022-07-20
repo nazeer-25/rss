@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如何让 TCP 出现 Accept()错误？ - Linux",
+      "Link": "https://www.v2ex.com/t/867547",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\tctx := context.Background()\n\n\tfor {\n\t\tconn, err := l.listener.Accept()\n\t\tif err != nil {\n\t\t\t// Close() was probably called.\n        \t// 想要走到这里，执行这行代码\n\t\t\tconnRefuse.Add(1)\n\t\t\treturn\n\t\t}\n\n\t\tacceptTime := time.Now()\n\n\t\tconnectionID := l.connectionID\n\t\tl.connectionID++\n\n\t\tconnCount.Add(1)\n\t\tconnAccept.Add(1)\n\n\t\tgo func() {\n\t\t\tif l.PreHandleFunc != nil {\n\t\t\t\tconn, err = l.PreHandleFunc(ctx, conn, connectionID)\n\t\t\t\tif err != nil {\n\t\t\t\t\tlog.Errorf(\"mysql_server pre hook: %s\", err)\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tl.handle(conn, connectionID, acceptTime)\n\t\t}()\n\t}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "vczyh",
+      "PubDate": "2022-07-20T07:10:13Z"
+    },
+    {
+      "Title": "[深圳大型游戏公司]运维开发工程师 - 酷工作",
+      "Link": "https://www.v2ex.com/t/867546",
+      "Description": "职位描述\u003cbr /\u003eBase 深圳南油\u003cbr /\u003e工作职责：\u003cbr /\u003e        运维需求分析和功能设计；\u003cbr /\u003e        持续优化平台能力，提升运维效率，保障运维质量\u003cbr /\u003e任职要求：\u003cbr /\u003e\u003cbr /\u003e        1 、计算机相关专业，有 3 年以上 Python 和前端开发经验；\u003cbr /\u003e        2 、熟悉 Python 语言特性，熟悉 Django 、DRF 开发框架；\u003cbr /\u003e        3 、熟悉 vue 前端框架；\u003cbr /\u003e        4 、熟悉 redis 中间件；\u003cbr /\u003e        5 、熟悉 MySQL 数据库；\u003cbr /\u003e        6 、熟悉 Linux 操作系统、TCP/IP 网络基础；\u003cbr /\u003e\u003cbr /\u003e职位信息\u003cbr /\u003e学历要求\u003cbr /\u003e本科\u003cbr /\u003e微信：senoritaziyan",
+      "Author": "ziyannn",
+      "PubDate": "2022-07-20T07:06:56Z"
+    },
+    {
+      "Title": "大佬们推荐使用哪家的短信服务商？七牛云稳定吗？ - 程序员",
+      "Link": "https://www.v2ex.com/t/867544",
+      "Description": "",
+      "Author": "Crazy2Code",
+      "PubDate": "2022-07-20T07:04:15Z"
+    },
+    {
       "Title": "VPS 违反谷歌云条款，该怎么写申诉信通过？ - VPS",
       "Link": "https://www.v2ex.com/t/867543",
       "Description": "去年拿信用卡薅了下 gcp 的羊毛，其实也很正常的操作，就是弄了个香港的 vps 搭建了 v2 瑞帆樯满足日常需求，猜测出问题的两个原因：\u003cbr /\u003e1.用的是 github 上的某个一键脚本，可能有挖矿脚本？被 gcp 检测到了？\u003cbr /\u003e2.服务搭建好之后，初期上油管看视频的流量比较大？被检测了？",
