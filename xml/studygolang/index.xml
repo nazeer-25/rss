@@ -31,18 +31,18 @@
       <link>https://studygolang.com/articles/35773#reply0</link>
     </item>
     <item>
-      <title>net/http库</title>
-      <link>https://studygolang.com/topics/15706#reply0</link>
-      <description>&lt;p&gt;http库这么多方法，记不过来呀？有大佬在开发请求的时候哪些是比较常用的吗？&lt;/p&gt;&#xA;</description>
+      <title>新人项目-自己使用Gin和RPC框架Kitex实现简易短视频</title>
+      <link>https://studygolang.com/topics/15709#reply0</link>
+      <description>&lt;p&gt;最近刚刚校招入职，之前是Java选手，刚刚接触GO语言，发现比Java舒服太多。&#xA;转语言学习过程，通过做个项目练手，主要目的是熟悉Go语言、Gin框架和RPC框架Kitex&#xA;目前项目还在进行中，目前只实现了用户服务的注册和查询功能（精力有限，带薪学习）&lt;/p&gt;&#xA;&#xA;&lt;p&gt;有很多不足之处，也请大佬们指点，希望能在这条路上不断前行&#xA;项目地址：&lt;a href=&#34;https://github.com/Ligouhai-bigone/easy_douyin&#34;&gt;https://github.com/Ligouhai-bigone/easy_douyin&lt;/a&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>低代码加速数字化转型的 5 种方式</title>
       <link>https://studygolang.com/articles/35771#reply0</link>
     </item>
     <item>
-      <title>Go 修改 struct 的打印信息，类似于 python __str__</title>
-      <link>https://studygolang.com/topics/15704#reply3</link>
-      <description>&lt;p&gt;大佬们，有没有人知道 Go 修改 struct 的打印信息，类似于 python 的 &lt;strong&gt;str&lt;/strong&gt; 函数&lt;/p&gt;&#xA;</description>
+      <title>net/http库</title>
+      <link>https://studygolang.com/topics/15706#reply0</link>
+      <description>&lt;p&gt;http库这么多方法，记不过来呀？有大佬在开发请求的时候哪些是比较常用的吗？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>[杭州][15K-20K] 医疗诊断公司 招聘golang开发工程师 不加班! 不加班! 不加班!</title>
@@ -53,6 +53,11 @@
       <title>针对大型复杂map的GC优化， 变成map[uint64]int+外部二级索引切片 大幅减少GC耗时</title>
       <link>https://studygolang.com/topics/15703#reply4</link>
       <description>&lt;h1&gt;noGCMapIndex&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;对于大型map，比如总数达到千万级别的map,如果键或者值中包含引用类型(string类型，结构体类型，或者任何基本类型+指针的定义 *int, *float 等)，那么这个MAP在垃圾回收的时候就会非常慢，GC的周期回收时间可以达到秒级。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;所以对于这种map需要进行优化，把复杂的不利于GC的复杂map转化为基础类型的  map[uint64]int+外部二级索引切片的形式。比如 map[string]intercace{} 转换为 map[uint64]int+[]intercace{}的形式，变成这种形式之后，整个gc基本就不耗时了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;注意，这种做法主要适用于单次加载完后，键值对不再变化的情况。对于键值对在运行过程中还要动态增减的情况则不适合。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;github.com/yudeguang/noGCMapIndex&amp;quot;&#xA;&#x9;&amp;quot;log&amp;quot;&#xA;&#x9;&amp;quot;strconv&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;log.SetFlags(log.Lshortfile | log.Ltime)&#xA;&#x9;tstring()&#xA;&#x9;tint()&#xA;}&#xA;&#xA;func tstring() {&#xA;&#x9;//旧MAP&#xA;&#x9;type col struct {&#xA;&#x9;&#x9;a string&#xA;&#x9;&#x9;b string&#xA;&#x9;&#x9;c int&#xA;&#x9;}&#xA;&#x9;oldMap := make(map[string]col)&#xA;&#x9;for i := 0; i &amp;lt; 10; i++ {&#xA;&#x9;&#x9;oldMap[strconv.Itoa(i)] = col{strconv.Itoa(i), strconv.Itoa(i), i}&#xA;&#x9;}&#xA;&#xA;&#x9;//旧MAP转换为新形式的map+二级索引切片的形式&#xA;&#x9;data := make([]col, len(oldMap))&#xA;&#x9;m := noGCMapIndex.NewString(len(oldMap))&#xA;&#x9;for k, v := range oldMap {&#xA;&#x9;&#x9;index := m.CreateIndex(k)&#xA;&#x9;&#x9;data[index] = v&#xA;&#x9;}&#xA;&#x9;//查询数据&#xA;&#x9;key := &amp;quot;3&amp;quot;&#xA;&#x9;index := m.GetIndex(key)&#xA;&#x9;if index != -1 {&#xA;&#x9;&#x9;log.Println(&amp;quot;key:&amp;quot;, key, &amp;quot;对应的值为:&amp;quot;, data[index])&#xA;&#x9;} else {&#xA;&#x9;&#x9;log.Println(key, &amp;quot;不存在&amp;quot;)&#xA;&#x9;}&#xA;}&#xA;&#xA;func tint() {&#xA;&#x9;//旧MAP&#xA;&#x9;type col struct {&#xA;&#x9;&#x9;a string&#xA;&#x9;&#x9;b string&#xA;&#x9;&#x9;c int&#xA;&#x9;}&#xA;&#x9;oldMap := make(map[int]col)&#xA;&#x9;for i := 0; i &amp;lt; 10; i++ {&#xA;&#x9;&#x9;oldMap[i] = col{strconv.Itoa(i), strconv.Itoa(i), i}&#xA;&#x9;}&#xA;&#xA;&#x9;//旧MAP转换为新形式的map+二级索引切片的形式&#xA;&#x9;data := make([]col, len(oldMap))&#xA;&#x9;m := noGCMapIndex.NewInt(len(oldMap))&#xA;&#x9;for k, v := range oldMap {&#xA;&#x9;&#x9;index := m.CreateIndex(k)&#xA;&#x9;&#x9;data[index] = v&#xA;&#x9;}&#xA;&#x9;//查询数据&#xA;&#x9;key := 3&#xA;&#x9;index := m.GetIndex(key)&#xA;&#x9;if index != -1 {&#xA;&#x9;&#x9;log.Println(&amp;quot;key:&amp;quot;, key, &amp;quot;对应的值为:&amp;quot;, data[index])&#xA;&#x9;} else {&#xA;&#x9;&#x9;log.Println(key, &amp;quot;不存在&amp;quot;)&#xA;&#x9;}&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>Go 修改 struct 的打印信息，类似于 python __str__</title>
+      <link>https://studygolang.com/topics/15704#reply3</link>
+      <description>&lt;p&gt;大佬们，有没有人知道 Go 修改 struct 的打印信息，类似于 python 的 &lt;strong&gt;str&lt;/strong&gt; 函数&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>支持Saga、Tcc、Xa混用，支持gRPC，HTTP混用的分布式事务模式</title>
