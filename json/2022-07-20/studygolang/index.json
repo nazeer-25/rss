@@ -67,6 +67,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "大家帮我看一下，我是新手菜鸡，应该是我理解不到位，求解惑，感谢！",
+      "Link": "https://studygolang.com/topics/15701#reply9",
+      "Description": "\u003cpre\u003e\u003ccode\u003e/*\n我想实现的是一个servers数组，里面装了server（map），server不同的key对应不同的value，如server1{\u0026quot;name\u0026quot;:\u0026quot;machine1\u0026quot; ...},server2{\u0026quot;name\u0026quot;:\u0026quot;machine2\u0026quot;}...\n然后我通过遍历数组servers，遇到不同的下标时修改对应servers[i]的某个key对应的值，但是这样写下来运行每个server全都改成了同样的值，自己调试发现代码到那一步（断点）就是直接就全部server都改了，新手看了半天很困惑，希望了解的帮我看一下，先谢谢了！\n*/\n\n\npackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;strconv\u0026quot;\n)\n\nfunc main() {\n\tservers := New()\n\tMod(servers)\n\tfmt.Println(servers)\n}\nfunc New() *[]map[string]string {\n\tserver := make(map[string]string)\n\tservers := make([]map[string]string, 0)\n\tfor i := 0; i \u0026lt; 5; i++ {\n\t\tserver[\u0026quot;name\u0026quot;] = \u0026quot;server\u0026quot; + string(i)\n\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;machine\u0026quot;\n\t\tservers = append(servers, server)\n\t}\n\treturn \u0026amp;servers\n}\nfunc Mod(servers *[]map[string]string) {\n\tfor i, server := range *servers {\n\t\tif i == 1 {\n\t\t\tfmt.Println(i)\n\t\t\tserver[\u0026quot;name\u0026quot;] = \u0026quot;machine\u0026quot; + strconv.Itoa(i)\n\t\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;cloud\u0026quot;\n\t\t\tfmt.Println(server[\u0026quot;name\u0026quot;])\n\t\t}\n\t\tif i == 3 {\n\t\t\t//fmt.Println(i)\n\t\t\t/*断点*/server[\u0026quot;name\u0026quot;] = \u0026quot;machine\u0026quot; + strconv.Itoa(i)\n\t\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;physic\u0026quot;\n\t\t\tfmt.Println(server[\u0026quot;name\u0026quot;])\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "Go 修改 struct 的打印信息，类似于 python __str__",
       "Link": "https://studygolang.com/topics/15704#reply3",
       "Description": "\u003cp\u003e大佬们，有没有人知道 Go 修改 struct 的打印信息，类似于 python 的 \u003cstrong\u003estr\u003c/strong\u003e 函数\u003c/p\u003e\n",
@@ -105,13 +112,6 @@
       "Title": "cgo 调用matlab 转出来的 c 方法，c方法入参是不定长二位数组",
       "Link": "https://studygolang.com/topics/15702#reply3",
       "Description": "\u003cp\u003e这边有个算法是matlab转c，算法的入参是个N*15的不定长二维数组，转出来之后方法的入参成了一个emxArray_real_T 的指针，我在go里面，应该怎么才能把二位数组传进去啊\u003c/p\u003e\n\n\u003cp\u003e这是c的结构体\nstruct emxArray_real_T\n{\n  double *data;\n  int *size;\n  int allocatedSize;\n  int numDimensions;\n  boolean_T canFreeData;\n};\n这是c方法 int * FeatureData_FeatureIdentify(const emxArray_real_T *data, int M[17])\n{计算逻辑}\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "大家帮我看一下，我是新手菜鸡，应该是我理解不到位，求解惑，感谢！",
-      "Link": "https://studygolang.com/topics/15701#reply9",
-      "Description": "\u003cpre\u003e\u003ccode\u003e/*\n我想实现的是一个servers数组，里面装了server（map），server不同的key对应不同的value，如server1{\u0026quot;name\u0026quot;:\u0026quot;machine1\u0026quot; ...},server2{\u0026quot;name\u0026quot;:\u0026quot;machine2\u0026quot;}...\n然后我通过遍历数组servers，遇到不同的下标时修改对应servers[i]的某个key对应的值，但是这样写下来运行每个server全都改成了同样的值，自己调试发现代码到那一步（断点）就是直接就全部server都改了，新手看了半天很困惑，希望了解的帮我看一下，先谢谢了！\n*/\n\n\npackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;strconv\u0026quot;\n)\n\nfunc main() {\n\tservers := New()\n\tMod(servers)\n\tfmt.Println(servers)\n}\nfunc New() *[]map[string]string {\n\tserver := make(map[string]string)\n\tservers := make([]map[string]string, 0)\n\tfor i := 0; i \u0026lt; 5; i++ {\n\t\tserver[\u0026quot;name\u0026quot;] = \u0026quot;server\u0026quot; + string(i)\n\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;machine\u0026quot;\n\t\tservers = append(servers, server)\n\t}\n\treturn \u0026amp;servers\n}\nfunc Mod(servers *[]map[string]string) {\n\tfor i, server := range *servers {\n\t\tif i == 1 {\n\t\t\tfmt.Println(i)\n\t\t\tserver[\u0026quot;name\u0026quot;] = \u0026quot;machine\u0026quot; + strconv.Itoa(i)\n\t\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;cloud\u0026quot;\n\t\t\tfmt.Println(server[\u0026quot;name\u0026quot;])\n\t\t}\n\t\tif i == 3 {\n\t\t\t//fmt.Println(i)\n\t\t\t/*断点*/server[\u0026quot;name\u0026quot;] = \u0026quot;machine\u0026quot; + strconv.Itoa(i)\n\t\t\tserver[\u0026quot;type\u0026quot;] = \u0026quot;physic\u0026quot;\n\t\t\tfmt.Println(server[\u0026quot;name\u0026quot;])\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
