@@ -46,15 +46,15 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "爽！用golang 手撸了个贪吃蛇",
-      "Link": "https://studygolang.com/topics/15707#reply1",
-      "Description": "\u003ch2\u003e背景\u003c/h2\u003e\n\n\u003cp\u003e题主现在是php程序员, 学了一周的\u003ccode\u003egolang\u003c/code\u003e, 深刻的感受到了其特性的优雅及功能的强大, 为了增强熟练度, 决定来写个贪吃蛇来践行下.(\u003ccode\u003e底部有github项目链接\u003c/code\u003e)\u003c/p\u003e\n\n\u003ch2\u003e需求构思\u003c/h2\u003e\n\n\u003cpre\u003e\u003ccode\u003e1. 确定元素\n    - 蛇\n    - 墙\n    - 食物\n    - 分数\n    - 基本的提示信息\n\n2. 用户故事\n    - 蛇撞墙, 死亡\n    - 蛇吃蛋分数加1, 身体增加一格长度.\n    - 点击键盘左键, 蛇向左走\n    - 点击键盘右键, 蛇向右走\n    - 点击键盘上键, 蛇向上走\n    - 点击键盘下键, 蛇向下走\n    - 点esc, 退出游戏\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch2\u003e逻辑构思\u003c/h2\u003e\n\n\u003cp\u003e\u003ccode\u003e元素\u003c/code\u003e及\u003ccode\u003e用户故事\u003c/code\u003e都确定了, 就要开始写代码吗? 写项目不是这样的！要践行以终为始(很重要!, 否则可能会造成代码的\u003ccode\u003e荒草丛生\u003c/code\u003e), 先去思考一下我们的代码结构是什么样子的.\u003c/p\u003e\n\n\u003cp\u003e以\u003ccode\u003e手持游戏机\u003c/code\u003e为例.\n- 游戏机其实就是一个服务(Service), 然后\u003ccode\u003e屏幕\u003c/code\u003e和\u003ccode\u003e键盘\u003c/code\u003e统一由游戏机调配.\n    - 屏幕(provider)\n    - 键盘控制(provider)\u003c/p\u003e\n\n\u003cp\u003e然后我们细分一下屏幕和键盘控制的元素:\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e屏幕: 蛇,食物,屏幕宽及高,得分.\u003c/li\u003e\n\u003cli\u003e键盘控制: 用户移动指令,用户退出指令, 蛇死亡指令.\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch2\u003e代码结构\u003c/h2\u003e\n\n\u003cpre\u003e\u003ccode\u003e//game control 游戏数据结构\ntype game struct {\n   //控制\n   control *control\n   //屏幕\n   screen *screen\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003e//control 键盘控制\ntype control struct {\n   moveChannel           chan int\n   quitChannel           chan int\n   playGameStatusChannel chan bool\n   gameOver              bool\n   direction             int\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003e//screen 屏幕相关参数\ntype screen struct {\n   snakes    *snake\n   foodPoint *scope\n   width     int\n   height    int\n   score     int\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003e//NewGameService 实例化游戏服务\nfunc NewGameService() *gameService {\n   return \u0026amp;gameService{screenApp: newScreenApp(), monitorApp: newMonitorApp()}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003e//newScreenApp 屏幕实例化\nfunc newScreenApp() *screenApp {\n   return \u0026amp;screenApp{Screen: initScreenHandle()}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003e//newMonitorApp 实例化\nfunc newMonitorApp() *monitorApp {\n   return \u0026amp;monitorApp{Monitor: initMonitor()}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch2\u003e小结\u003c/h2\u003e\n\n\u003cp\u003e个人认为项目的\u003ccode\u003e代码的结构\u003c/code\u003e写的还算清晰,所以不放\u003ccode\u003e过多\u003c/code\u003e代码了, 只是把一个全局的结构图景放到这里, 留给你去探索. 这个小项目的代码逻辑肯定还不完善,你如果有什么想法或者吐槽, 可以在下方留言,每个我都会认真阅读和回复.😃\u003c/p\u003e\n\n\u003cp\u003e最后放上项目链接(🌺🌺🌺🌺🌺🌺 感觉不错, 别忘star哦 🌺🌺🌺🌺🌺🌺):\n\u003ca href=\"https://github.com/TheOnlines/golang_snake#readme\"\u003ehttps://github.com/TheOnlines/golang_snake#readme\u003c/a\u003e\u003c/p\u003e\n",
+      "Title": "GitHub 开源项目维护参与指南： HowToStartOpenSource",
+      "Link": "https://studygolang.com/articles/35770#reply0",
+      "Description": "\u003cp\u003e我们每个人可能都熟悉 git ，但是对于 GitHub 开源项目协同维护的流程，又是十分陌生的，这个项目将介绍分享如何维护参与 GitHub 开源项目。\u003c/p\u003e\n\n\u003cp\u003e项目地址： \u003ca href=\"https://github.com/eryajf/HowToStartOpenSource\"\u003ehttps://github.com/eryajf/HowToStartOpenSource\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e还在持续更新中。。。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "初探 Gomobile ，利用 Go 开发 IOS Library 实现 Swift 调用 Go 函数",
-      "Link": "https://studygolang.com/articles/35772#reply0",
+      "Title": "低代码加速数字化转型的 5 种方式",
+      "Link": "https://studygolang.com/articles/35771#reply0",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -74,8 +74,15 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "低代码加速数字化转型的 5 种方式",
-      "Link": "https://studygolang.com/articles/35771#reply0",
+      "Title": "爽！用golang 手撸了个贪吃蛇",
+      "Link": "https://studygolang.com/topics/15707#reply1",
+      "Description": "\u003ch2\u003e背景\u003c/h2\u003e\n\n\u003cp\u003e题主现在是php程序员, 学了一周的\u003ccode\u003egolang\u003c/code\u003e, 深刻的感受到了其特性的优雅及功能的强大, 为了增强熟练度, 决定来写个贪吃蛇来践行下.(\u003ccode\u003e底部有github项目链接\u003c/code\u003e)\u003c/p\u003e\n\n\u003ch2\u003e需求构思\u003c/h2\u003e\n\n\u003cpre\u003e\u003ccode\u003e1. 确定元素\n    - 蛇\n    - 墙\n    - 食物\n    - 分数\n    - 基本的提示信息\n\n2. 用户故事\n    - 蛇撞墙, 死亡\n    - 蛇吃蛋分数加1, 身体增加一格长度.\n    - 点击键盘左键, 蛇向左走\n    - 点击键盘右键, 蛇向右走\n    - 点击键盘上键, 蛇向上走\n    - 点击键盘下键, 蛇向下走\n    - 点esc, 退出游戏\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch2\u003e逻辑构思\u003c/h2\u003e\n\n\u003cp\u003e\u003ccode\u003e元素\u003c/code\u003e及\u003ccode\u003e用户故事\u003c/code\u003e都确定了, 就要开始写代码吗? 写项目不是这样的！要践行以终为始(很重要!, 否则可能会造成代码的\u003ccode\u003e荒草丛生\u003c/code\u003e), 先去思考一下我们的代码结构是什么样子的.\u003c/p\u003e\n\n\u003cp\u003e以\u003ccode\u003e手持游戏机\u003c/code\u003e为例.\n- 游戏机其实就是一个服务(Service), 然后\u003ccode\u003e屏幕\u003c/code\u003e和\u003ccode\u003e键盘\u003c/code\u003e统一由游戏机调配.\n    - 屏幕(provider)\n    - 键盘控制(provider)\u003c/p\u003e\n\n\u003cp\u003e然后我们细分一下屏幕和键盘控制的元素:\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e屏幕: 蛇,食物,屏幕宽及高,得分.\u003c/li\u003e\n\u003cli\u003e键盘控制: 用户移动指令,用户退出指令, 蛇死亡指令.\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch2\u003e代码结构\u003c/h2\u003e\n\n\u003cpre\u003e\u003ccode\u003e//game control 游戏数据结构\ntype game struct {\n   //控制\n   control *control\n   //屏幕\n   screen *screen\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003e//control 键盘控制\ntype control struct {\n   moveChannel           chan int\n   quitChannel           chan int\n   playGameStatusChannel chan bool\n   gameOver              bool\n   direction             int\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003e//screen 屏幕相关参数\ntype screen struct {\n   snakes    *snake\n   foodPoint *scope\n   width     int\n   height    int\n   score     int\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003e//NewGameService 实例化游戏服务\nfunc NewGameService() *gameService {\n   return \u0026amp;gameService{screenApp: newScreenApp(), monitorApp: newMonitorApp()}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003e//newScreenApp 屏幕实例化\nfunc newScreenApp() *screenApp {\n   return \u0026amp;screenApp{Screen: initScreenHandle()}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003e//newMonitorApp 实例化\nfunc newMonitorApp() *monitorApp {\n   return \u0026amp;monitorApp{Monitor: initMonitor()}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch2\u003e小结\u003c/h2\u003e\n\n\u003cp\u003e个人认为项目的\u003ccode\u003e代码的结构\u003c/code\u003e写的还算清晰,所以不放\u003ccode\u003e过多\u003c/code\u003e代码了, 只是把一个全局的结构图景放到这里, 留给你去探索. 这个小项目的代码逻辑肯定还不完善,你如果有什么想法或者吐槽, 可以在下方留言,每个我都会认真阅读和回复.😃\u003c/p\u003e\n\n\u003cp\u003e最后放上项目链接(🌺🌺🌺🌺🌺🌺 感觉不错, 别忘star哦 🌺🌺🌺🌺🌺🌺):\n\u003ca href=\"https://github.com/TheOnlines/golang_snake#readme\"\u003ehttps://github.com/TheOnlines/golang_snake#readme\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "初探 Gomobile ，利用 Go 开发 IOS Library 实现 Swift 调用 Go 函数",
+      "Link": "https://studygolang.com/articles/35772#reply0",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -95,13 +102,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "GitHub 开源项目维护参与指南： HowToStartOpenSource",
-      "Link": "https://studygolang.com/articles/35770#reply0",
-      "Description": "\u003cp\u003e我们每个人可能都熟悉 git ，但是对于 GitHub 开源项目协同维护的流程，又是十分陌生的，这个项目将介绍分享如何维护参与 GitHub 开源项目。\u003c/p\u003e\n\n\u003cp\u003e项目地址： \u003ca href=\"https://github.com/eryajf/HowToStartOpenSource\"\u003ehttps://github.com/eryajf/HowToStartOpenSource\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e还在持续更新中。。。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "Go 修改 struct 的打印信息，类似于 python __str__",
       "Link": "https://studygolang.com/articles/35768#reply1",
       "Description": "\u003cp\u003e大佬们，有没有人知道Go 如何修改 struct 的打印信息，类似于 python 的\u003cstrong\u003estr\u003c/strong\u003e函数\u003c/p\u003e\n",
@@ -112,6 +112,13 @@
       "Title": "优维低代码：Brick Life Cycle 构件生命周期",
       "Link": "https://studygolang.com/articles/35769#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "判断某个ip是否属于某个网段",
+      "Link": "https://studygolang.com/topics/4051#reply2",
+      "Description": "\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;strconv\u0026quot;\n\t\u0026quot;strings\u0026quot;\n)\n\nfunc main() {\n\tfmt.Println(isBelong(`10.187.102.8`, `10.187.102.0/24`))\n\n}\n\nfunc isBelong(ip, cidr string) bool {\n\tipAddr := strings.Split(ip, `.`)\n\tif len(ipAddr) \u0026lt; 4 {\n\t\treturn false\n\t}\n\tcidrArr := strings.Split(cidr, `/`)\n\tif len(cidrArr) \u0026lt; 2 {\n\t\treturn false\n\t}\n\tvar tmp = make([]string, 0)\n\tfor key, value := range strings.Split(`255.255.255.0`, `.`) {\n\t\tiint, _ := strconv.Atoi(value)\n\n\t\tiint2, _ := strconv.Atoi(ipAddr[key])\n\n\t\ttmp = append(tmp, strconv.Itoa(iint\u0026amp;iint2))\n\t}\n\treturn strings.Join(tmp, `.`) == cidrArr[0]\n}\n\n\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
