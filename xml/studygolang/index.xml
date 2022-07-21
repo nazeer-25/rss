@@ -27,10 +27,6 @@
       <link>https://studygolang.com/articles/35776#reply0</link>
     </item>
     <item>
-      <title>初探 Gomobile ，利用 Go 开发 IOS Library 实现 Swift 调用 Go 函数</title>
-      <link>https://studygolang.com/articles/35772#reply0</link>
-    </item>
-    <item>
       <title>爽！用golang 手撸了个贪吃蛇</title>
       <link>https://studygolang.com/topics/15707#reply2</link>
       <description>&lt;h2&gt;背景&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;题主现在是php程序员, 学了一周的&lt;code&gt;golang&lt;/code&gt;, 深刻的感受到了其特性的优雅及功能的强大, 为了增强熟练度, 决定来写个贪吃蛇来践行下.(&lt;code&gt;底部有github项目链接&lt;/code&gt;)&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;需求构思&lt;/h2&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;1. 确定元素&#xA;    - 蛇&#xA;    - 墙&#xA;    - 食物&#xA;    - 分数&#xA;    - 基本的提示信息&#xA;&#xA;2. 用户故事&#xA;    - 蛇撞墙, 死亡&#xA;    - 蛇吃蛋分数加1, 身体增加一格长度.&#xA;    - 点击键盘左键, 蛇向左走&#xA;    - 点击键盘右键, 蛇向右走&#xA;    - 点击键盘上键, 蛇向上走&#xA;    - 点击键盘下键, 蛇向下走&#xA;    - 点esc, 退出游戏&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h2&gt;逻辑构思&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;元素&lt;/code&gt;及&lt;code&gt;用户故事&lt;/code&gt;都确定了, 就要开始写代码吗? 写项目不是这样的！要践行以终为始(很重要!, 否则可能会造成代码的&lt;code&gt;荒草丛生&lt;/code&gt;), 先去思考一下我们的代码结构是什么样子的.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以&lt;code&gt;手持游戏机&lt;/code&gt;为例.&#xA;- 游戏机其实就是一个服务(Service), 然后&lt;code&gt;屏幕&lt;/code&gt;和&lt;code&gt;键盘&lt;/code&gt;统一由游戏机调配.&#xA;    - 屏幕(provider)&#xA;    - 键盘控制(provider)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;然后我们细分一下屏幕和键盘控制的元素:&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;屏幕: 蛇,食物,屏幕宽及高,得分.&lt;/li&gt;&#xA;&lt;li&gt;键盘控制: 用户移动指令,用户退出指令, 蛇死亡指令.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;h2&gt;代码结构&lt;/h2&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;//game control 游戏数据结构&#xA;type game struct {&#xA;   //控制&#xA;   control *control&#xA;   //屏幕&#xA;   screen *screen&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;//control 键盘控制&#xA;type control struct {&#xA;   moveChannel           chan int&#xA;   quitChannel           chan int&#xA;   playGameStatusChannel chan bool&#xA;   gameOver              bool&#xA;   direction             int&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;//screen 屏幕相关参数&#xA;type screen struct {&#xA;   snakes    *snake&#xA;   foodPoint *scope&#xA;   width     int&#xA;   height    int&#xA;   score     int&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;//NewGameService 实例化游戏服务&#xA;func NewGameService() *gameService {&#xA;   return &amp;amp;gameService{screenApp: newScreenApp(), monitorApp: newMonitorApp()}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;//newScreenApp 屏幕实例化&#xA;func newScreenApp() *screenApp {&#xA;   return &amp;amp;screenApp{Screen: initScreenHandle()}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;//newMonitorApp 实例化&#xA;func newMonitorApp() *monitorApp {&#xA;   return &amp;amp;monitorApp{Monitor: initMonitor()}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h2&gt;小结&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;个人认为项目的&lt;code&gt;代码的结构&lt;/code&gt;写的还算清晰,所以不放&lt;code&gt;过多&lt;/code&gt;代码了, 只是把一个全局的结构图景放到这里, 留给你去探索. 这个小项目的代码逻辑肯定还不完善,你如果有什么想法或者吐槽, 可以在下方留言,每个我都会认真阅读和回复.😃&lt;/p&gt;&#xA;&#xA;&lt;p&gt;最后放上项目链接(🌺🌺🌺🌺🌺🌺 感觉不错, 别忘star哦 🌺🌺🌺🌺🌺🌺):&#xA;&lt;a href=&#34;https://github.com/TheOnlines/golang_snake#readme&#34;&gt;https://github.com/TheOnlines/golang_snake#readme&lt;/a&gt;&lt;/p&gt;&#xA;</description>
@@ -53,6 +49,10 @@
     <item>
       <title>换个姿势做运维！GOPS 2022 · 深圳站精彩内容抢先看</title>
       <link>https://studygolang.com/articles/35773#reply0</link>
+    </item>
+    <item>
+      <title>初探 Gomobile ，利用 Go 开发 IOS Library 实现 Swift 调用 Go 函数</title>
+      <link>https://studygolang.com/articles/35772#reply0</link>
     </item>
     <item>
       <title>低代码加速数字化转型的 5 种方式</title>
