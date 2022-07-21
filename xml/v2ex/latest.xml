@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>如果开发一个云笔记应该怎么设计? - 问与答</title>
+      <link>https://www.v2ex.com/t/867854</link>
+      <description>&lt;p&gt;如果做一个支持协同编辑,文档共享,类似 yuque 那样的 应该怎么技术选型?&lt;/p&gt;&#xA;&lt;p&gt;自己做了一款 web 的笔记软件,目录树结构,markdown 格式存储,支持协同编辑和公开分享(单页),遇到一些问题,&lt;/p&gt;&#xA;&lt;p&gt;想请教一下各位&lt;/p&gt;&#xA;&lt;p&gt;目前用 go 写的,协同用的 websockets 进行广播,存储用的 mysql,搜索索引用的 bleve&lt;/p&gt;&#xA;&lt;p&gt;数据库的设计比较简单&lt;/p&gt;&#xA;&lt;p&gt;notes 表除了常规的内容存储,加了一个&lt;code&gt;ParentId&lt;/code&gt;来存储上级节点的 ID 来实现的无限下级&lt;/p&gt;&#xA;&lt;h1&gt;第一个问题是是权限问题&lt;/h1&gt;&#xA;&lt;p&gt;但是无法解决权限问题,比如我创建了一篇笔记本下面有 N 篇子笔记&lt;/p&gt;&#xA;&lt;p&gt;我把笔记本分享给了 A,A 在下面又创建了 N 个子笔记,这玩意权限应该怎么管控&lt;/p&gt;&#xA;&lt;p&gt;现在比较蠢,笔记 ID 用的 UUID,保证唯一性不能被遍历导致越权修改,&lt;/p&gt;&#xA;&lt;p&gt;在通过笔记绑定 UID,设置只能由拥有者进行删除 /移动操作.&lt;/p&gt;&#xA;&lt;p&gt;实际上如果知道其他人的笔记的 UUID 就能进行读取了..&lt;/p&gt;&#xA;&lt;p&gt;目前协作编辑,实际上就是把分享的 UUID 共享给目标用户,这样他就能通过这个 UUID 来遍及下级节点进行编辑了.&lt;/p&gt;&#xA;&lt;p&gt;想过用中间表来管理每一篇笔记的权限,但是感觉如果并发高是不是性能会差一点,虽然可以用缓存等方式解决&lt;/p&gt;&#xA;&lt;h2&gt;权限问题 2&lt;/h2&gt;&#xA;&lt;p&gt;就是公开分享,目前只能分享单页,也是因为上面的问题不好做权限管理,如果分享了 A 笔记本,下面有 1 万篇子笔记&lt;/p&gt;&#xA;&lt;p&gt;如果用中间表势必要创建 1 万个权限表的数据..&lt;/p&gt;&#xA;&lt;h1&gt;第二个问题是双向链&lt;/h1&gt;&#xA;&lt;p&gt;如果想实现类似 obsidian 之类的双向链接功能&lt;/p&gt;&#xA;&lt;p&gt;是不是要把文章拆分成 block&lt;/p&gt;&#xA;&lt;p&gt;然后用一个中间表来管理 block 的类型和链接&lt;/p&gt;&#xA;&lt;h1&gt;第三个问题是数据库&lt;/h1&gt;&#xA;&lt;p&gt;现在用的绑定到编辑器的 onchange 事件,如果发生变化就更新,但是如果并发比较高的话感觉性能是个很大的问题,加上会有一些 api 会做一些比较多的实时写入,感觉 mysql 不是很好的选择&lt;/p&gt;&#xA;&lt;p&gt;是不是用 mongo 会更好,但是现在用 gorm 做的绑定用起来确实方便,改成 mongo 感觉大部分数据库部分都得手撸语句.&lt;/p&gt;&#xA;</description>
+      <author>cond0r</author>
+      <pubDate>21 Jul 2022 13:17:28 +0000</pubDate>
+    </item>
+    <item>
       <title>这个老 mbp 的屏幕是完蛋了？ - Apple</title>
       <link>https://www.v2ex.com/t/867853</link>
       <description>翻出了在床底下封尘已久的 mbp ，一打开，吓屎我了，屏幕怎么这样？擦了也一样，是进灰了？&lt;br /&gt;mbp mid 2012&lt;br /&gt;&lt;br /&gt;&lt;br /&gt; &lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/7yqEfmS.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/7yqEfmS.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt; &lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/CU0HsQH.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/CU0HsQH.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;</description>

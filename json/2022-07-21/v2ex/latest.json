@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如果开发一个云笔记应该怎么设计? - 问与答",
+      "Link": "https://www.v2ex.com/t/867854",
+      "Description": "\u003cp\u003e如果做一个支持协同编辑,文档共享,类似 yuque 那样的 应该怎么技术选型?\u003c/p\u003e\n\u003cp\u003e自己做了一款 web 的笔记软件,目录树结构,markdown 格式存储,支持协同编辑和公开分享(单页),遇到一些问题,\u003c/p\u003e\n\u003cp\u003e想请教一下各位\u003c/p\u003e\n\u003cp\u003e目前用 go 写的,协同用的 websockets 进行广播,存储用的 mysql,搜索索引用的 bleve\u003c/p\u003e\n\u003cp\u003e数据库的设计比较简单\u003c/p\u003e\n\u003cp\u003enotes 表除了常规的内容存储,加了一个\u003ccode\u003eParentId\u003c/code\u003e来存储上级节点的 ID 来实现的无限下级\u003c/p\u003e\n\u003ch1\u003e第一个问题是是权限问题\u003c/h1\u003e\n\u003cp\u003e但是无法解决权限问题,比如我创建了一篇笔记本下面有 N 篇子笔记\u003c/p\u003e\n\u003cp\u003e我把笔记本分享给了 A,A 在下面又创建了 N 个子笔记,这玩意权限应该怎么管控\u003c/p\u003e\n\u003cp\u003e现在比较蠢,笔记 ID 用的 UUID,保证唯一性不能被遍历导致越权修改,\u003c/p\u003e\n\u003cp\u003e在通过笔记绑定 UID,设置只能由拥有者进行删除 /移动操作.\u003c/p\u003e\n\u003cp\u003e实际上如果知道其他人的笔记的 UUID 就能进行读取了..\u003c/p\u003e\n\u003cp\u003e目前协作编辑,实际上就是把分享的 UUID 共享给目标用户,这样他就能通过这个 UUID 来遍及下级节点进行编辑了.\u003c/p\u003e\n\u003cp\u003e想过用中间表来管理每一篇笔记的权限,但是感觉如果并发高是不是性能会差一点,虽然可以用缓存等方式解决\u003c/p\u003e\n\u003ch2\u003e权限问题 2\u003c/h2\u003e\n\u003cp\u003e就是公开分享,目前只能分享单页,也是因为上面的问题不好做权限管理,如果分享了 A 笔记本,下面有 1 万篇子笔记\u003c/p\u003e\n\u003cp\u003e如果用中间表势必要创建 1 万个权限表的数据..\u003c/p\u003e\n\u003ch1\u003e第二个问题是双向链\u003c/h1\u003e\n\u003cp\u003e如果想实现类似 obsidian 之类的双向链接功能\u003c/p\u003e\n\u003cp\u003e是不是要把文章拆分成 block\u003c/p\u003e\n\u003cp\u003e然后用一个中间表来管理 block 的类型和链接\u003c/p\u003e\n\u003ch1\u003e第三个问题是数据库\u003c/h1\u003e\n\u003cp\u003e现在用的绑定到编辑器的 onchange 事件,如果发生变化就更新,但是如果并发比较高的话感觉性能是个很大的问题,加上会有一些 api 会做一些比较多的实时写入,感觉 mysql 不是很好的选择\u003c/p\u003e\n\u003cp\u003e是不是用 mongo 会更好,但是现在用 gorm 做的绑定用起来确实方便,改成 mongo 感觉大部分数据库部分都得手撸语句.\u003c/p\u003e\n",
+      "Author": "cond0r",
+      "PubDate": "2022-07-21T13:17:28Z"
+    },
+    {
       "Title": "这个老 mbp 的屏幕是完蛋了？ - Apple",
       "Link": "https://www.v2ex.com/t/867853",
       "Description": "翻出了在床底下封尘已久的 mbp ，一打开，吓屎我了，屏幕怎么这样？擦了也一样，是进灰了？\u003cbr /\u003embp mid 2012\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e \u003ca target=\"_blank\" href=\"https://i.imgur.com/7yqEfmS.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/7yqEfmS.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e \u003ca target=\"_blank\" href=\"https://i.imgur.com/CU0HsQH.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/CU0HsQH.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e",
