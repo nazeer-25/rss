@@ -31,13 +31,13 @@
       <link>https://studygolang.com/articles/35777#reply0</link>
     </item>
     <item>
+      <title>【Golang】golang中map元素的删除和清空</title>
+      <link>https://studygolang.com/articles/35778#reply0</link>
+    </item>
+    <item>
       <title>数组中最长的套</title>
       <link>https://studygolang.com/topics/15710#reply0</link>
       <description>&lt;p&gt;很久之前开发某个金融项目时遇到的，现在突然回想起来，觉得可以作为一个题目。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;设 a 是一个长度至少为 3 的 []int。如果&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;0 &amp;lt;= i &amp;lt; j &amp;lt; len(a)，j - i &amp;gt;= 2&lt;/li&gt;&#xA;&lt;li&gt;a[j] &amp;gt;= a[i]&lt;/li&gt;&#xA;&lt;li&gt;对任意 k，i &amp;lt; k &amp;lt; j，有 a[k] &amp;lt; a[i]&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;则称二元组 (i, j) 是一个套。此时 j - i 称为套的长。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;要计算 a 中最长的套，如果最长的不止一个，找到一个就行。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>【Golang】golang中map元素的删除和清空</title>
-      <link>https://studygolang.com/articles/35778#reply0</link>
     </item>
     <item>
       <title>【Golang】golang实现简单memcache</title>
@@ -53,6 +53,11 @@
       <description>&lt;h2&gt;背景&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;题主现在是php程序员, 学了一周的&lt;code&gt;golang&lt;/code&gt;, 深刻的感受到了其特性的优雅及功能的强大, 为了增强熟练度, 决定来写个贪吃蛇来践行下.(&lt;code&gt;底部有github项目链接&lt;/code&gt;)&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;需求构思&lt;/h2&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;1. 确定元素&#xA;    - 蛇&#xA;    - 墙&#xA;    - 食物&#xA;    - 分数&#xA;    - 基本的提示信息&#xA;&#xA;2. 用户故事&#xA;    - 蛇撞墙, 死亡&#xA;    - 蛇吃蛋分数加1, 身体增加一格长度.&#xA;    - 点击键盘左键, 蛇向左走&#xA;    - 点击键盘右键, 蛇向右走&#xA;    - 点击键盘上键, 蛇向上走&#xA;    - 点击键盘下键, 蛇向下走&#xA;    - 点esc, 退出游戏&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h2&gt;逻辑构思&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;元素&lt;/code&gt;及&lt;code&gt;用户故事&lt;/code&gt;都确定了, 就要开始写代码吗? 写项目不是这样的！要践行以终为始(很重要!, 否则可能会造成代码的&lt;code&gt;荒草丛生&lt;/code&gt;), 先去思考一下我们的代码结构是什么样子的.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以&lt;code&gt;手持游戏机&lt;/code&gt;为例.&#xA;- 游戏机其实就是一个服务(Service), 然后&lt;code&gt;屏幕&lt;/code&gt;和&lt;code&gt;键盘&lt;/code&gt;统一由游戏机调配.&#xA;    - 屏幕(provider)&#xA;    - 键盘控制(provider)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;然后我们细分一下屏幕和键盘控制的元素:&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;屏幕: 蛇,食物,屏幕宽及高,得分.&lt;/li&gt;&#xA;&lt;li&gt;键盘控制: 用户移动指令,用户退出指令, 蛇死亡指令.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;h2&gt;代码结构&lt;/h2&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;//game control 游戏数据结构&#xA;type game struct {&#xA;   //控制&#xA;   control *control&#xA;   //屏幕&#xA;   screen *screen&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;//control 键盘控制&#xA;type control struct {&#xA;   moveChannel           chan int&#xA;   quitChannel           chan int&#xA;   playGameStatusChannel chan bool&#xA;   gameOver              bool&#xA;   direction             int&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;//screen 屏幕相关参数&#xA;type screen struct {&#xA;   snakes    *snake&#xA;   foodPoint *scope&#xA;   width     int&#xA;   height    int&#xA;   score     int&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;//NewGameService 实例化游戏服务&#xA;func NewGameService() *gameService {&#xA;   return &amp;amp;gameService{screenApp: newScreenApp(), monitorApp: newMonitorApp()}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;//newScreenApp 屏幕实例化&#xA;func newScreenApp() *screenApp {&#xA;   return &amp;amp;screenApp{Screen: initScreenHandle()}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;//newMonitorApp 实例化&#xA;func newMonitorApp() *monitorApp {&#xA;   return &amp;amp;monitorApp{Monitor: initMonitor()}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h2&gt;小结&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;个人认为项目的&lt;code&gt;代码的结构&lt;/code&gt;写的还算清晰,所以不放&lt;code&gt;过多&lt;/code&gt;代码了, 只是把一个全局的结构图景放到这里, 留给你去探索. 这个小项目的代码逻辑肯定还不完善,你如果有什么想法或者吐槽, 可以在下方留言,每个我都会认真阅读和回复.😃&lt;/p&gt;&#xA;&#xA;&lt;p&gt;最后放上项目链接(🌺🌺🌺🌺🌺🌺 感觉不错, 别忘star哦 🌺🌺🌺🌺🌺🌺):&#xA;&lt;a href=&#34;https://github.com/TheOnlines/golang_snake#readme&#34;&gt;https://github.com/TheOnlines/golang_snake#readme&lt;/a&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>新人项目-自己使用Gin和RPC框架Kitex实现简易短视频</title>
+      <link>https://studygolang.com/topics/15709#reply0</link>
+      <description>&lt;p&gt;最近刚刚校招入职，之前是Java选手，刚刚接触GO语言，发现比Java舒服太多。&#xA;转语言学习过程，通过做个项目练手，主要目的是熟悉Go语言、Gin框架和RPC框架Kitex&#xA;目前项目还在进行中，目前只实现了用户服务的注册和查询功能（精力有限，带薪学习）&lt;/p&gt;&#xA;&#xA;&lt;p&gt;有很多不足之处，也请大佬们指点，希望能在这条路上不断前行&#xA;项目地址：&lt;a href=&#34;https://github.com/Ligouhai-bigone/easy_douyin&#34;&gt;https://github.com/Ligouhai-bigone/easy_douyin&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>[阿里-千寻位置-上海] 稳定性治理团队后端研发实习岗位</title>
       <link>https://studygolang.com/topics/15708#reply2</link>
       <description>&lt;p&gt;&lt;strong&gt;岗位职责：&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1、负责稳定性治理工具平台开发工作&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;技能要求：&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1、熟练掌握Go语言&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2、熟练使用MySQL或PostgreSQL任一关系数据库，索引、事务原理了解更佳，熟练使用Gorm框架更佳&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3、了解消息队列kafka、rocketmq、nsq等任何一个消息队列的使用，原理了解更佳&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4、熟悉TPC/IP协议和HTTP协议，了解Go标准库http原理更佳&lt;/p&gt;&#xA;&#xA;&lt;p&gt;5、熟练使用Git进行协作开发&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;其他要求：&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1、23年毕业生&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;简历请投递至：&lt;/strong&gt;eGlhbmcuZ2FvQHd6LWluYy5jb20K&lt;/p&gt;&#xA;</description>
@@ -61,11 +66,6 @@
       <title>net/http库</title>
       <link>https://studygolang.com/topics/15706#reply1</link>
       <description>&lt;p&gt;http库这么多方法，记不过来呀？有大佬在开发请求的时候哪些是比较常用的吗？&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>新人项目-自己使用Gin和RPC框架Kitex实现简易短视频</title>
-      <link>https://studygolang.com/topics/15709#reply0</link>
-      <description>&lt;p&gt;最近刚刚校招入职，之前是Java选手，刚刚接触GO语言，发现比Java舒服太多。&#xA;转语言学习过程，通过做个项目练手，主要目的是熟悉Go语言、Gin框架和RPC框架Kitex&#xA;目前项目还在进行中，目前只实现了用户服务的注册和查询功能（精力有限，带薪学习）&lt;/p&gt;&#xA;&#xA;&lt;p&gt;有很多不足之处，也请大佬们指点，希望能在这条路上不断前行&#xA;项目地址：&lt;a href=&#34;https://github.com/Ligouhai-bigone/easy_douyin&#34;&gt;https://github.com/Ligouhai-bigone/easy_douyin&lt;/a&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>换个姿势做运维！GOPS 2022 · 深圳站精彩内容抢先看</title>
