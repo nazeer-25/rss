@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>tcp_timestamps 关闭条件下，服务端 syn 丢包 - 程序员</title>
+      <link>https://www.v2ex.com/t/868057</link>
+      <description>&lt;h3&gt;环境&lt;/h3&gt;&#xA;&lt;p&gt;服务 A：k8s 环境运行的服务，kubernetes 1.19.10; CNI calico 3.17.4 CrossSubnet&lt;/p&gt;&#xA;&lt;p&gt;服务 B：物理机运行的服务，Centos 7.5&lt;/p&gt;&#xA;&lt;h3&gt;背景&lt;/h3&gt;&#xA;&lt;p&gt;服务 A 上 k8s 环境后，服务 A 直接调用服务 B ，偶现提示连接超时，Caused by: java.net.SocketTimeoutException: connect timed out ；&lt;/p&gt;&#xA;&lt;h3&gt;排查过程&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;查看服务 B 节点的 netstat 情况:&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;[root@app01 ~]# netstat  -s|egrep &#34;SYNs to LISTEN sockets|passive&#34;&#xA;    5436752164 passive connection openings&#xA;    87458 passive connections rejected because of time stamp&#xA;    283176 SYNs to LISTEN sockets dropped&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可以看出来是 SYN 请求被丢弃，而且 SYN 丢弃数量和 timestamp 丢弃的数量保持同步，可以初步断定是 timestamp 问题导致。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;半连接和全连接队列是否满了&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;用 ss -lnt(全连接)和 netstat -natp |grep SYN_RECV|wc -l (半连接) 均 OK,排除队列满的问题。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;查看服务 A 和服务 B 是否开启 tcp_tw_recycle 和 tcp_timestamps&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;服务 A 所在的 node 节点未开启，服务 B 所在的物理机也未开启；&#xA;k8s 环境的 node 节点都已经关闭了 tcp_timestamps ，相当于 per-host 的 PAWS 机制未开启。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;抓包分析&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;从服务端抓包&#xA;看到很多重传的 syn 包，源地址都是服务 A 所在的 node 节点&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;客户端抓包&#xA;现象一致，服务 A 一直重传给服务 B SYN 包&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;问题&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在客户端未开启 tcp_timestamps 的情况下，为何服务端还会出现 time stamp 丢包？&lt;/li&gt;&#xA;&lt;li&gt;丢包有没有可能其它问题导致？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>jarry118</author>
+      <pubDate>22 Jul 2022 09:35:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>web 页面对 服务器操作，有没有好的开源项目之类的推荐 - 问与答</title>
+      <link>https://www.v2ex.com/t/868056</link>
+      <description>目标是希望能启动一个服务页面&lt;br /&gt;把一些服务器命令。&lt;br /&gt;如 rm -rf /logs/*  之类的 shell 命令&lt;br /&gt;做成 web 页面一个的点击事件，达到在 web 方便对服务器进行一些常用操作。&lt;br /&gt;内部使用，不用考虑安全问题。轻量，易操作就好。不限语言。</description>
+      <author>iblessyou</author>
+      <pubDate>22 Jul 2022 09:33:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>Go 轻量级事件总线框架，你们都用啥？ - 问与答</title>
+      <link>https://www.v2ex.com/t/868055</link>
+      <description>&lt;p&gt;小应用，有些地方打算用&lt;strong&gt;事件发布 /订阅&lt;/strong&gt;来实现一些功能，类似于&lt;code&gt;Spring&lt;/code&gt;的&lt;code&gt;ApplicationEvent&lt;/code&gt;。&lt;/p&gt;&#xA;&lt;p&gt;在 Github 找了一个比较热门的：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/asaskevich/EventBus&#34; rel=&#34;nofollow&#34;&gt;https://github.com/asaskevich/EventBus&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;但是很久没维护了，而且很多 issues 也没处理，怕有坑。&lt;/p&gt;&#xA;&lt;p&gt;还有其他推荐的吗？&lt;/p&gt;&#xA;</description>
+      <author>KevinBlandy</author>
+      <pubDate>22 Jul 2022 09:30:18 +0000</pubDate>
+    </item>
+    <item>
       <title>有没有一个网站，能聚合掘金、v2ex、各大厂技术博客上的优秀文章？ - 问与答</title>
       <link>https://www.v2ex.com/t/868054</link>
       <description>&lt;p&gt;平时对技术文章质量要求比较多，经常要在各个网站中切换去寻找和甄别文章质量&#xA;有没有网站可以把程序员相关信息聚合起来，把获取信息成本降低&lt;/p&gt;&#xA;</description>

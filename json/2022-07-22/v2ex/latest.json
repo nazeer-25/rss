@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "tcp_timestamps 关闭条件下，服务端 syn 丢包 - 程序员",
+      "Link": "https://www.v2ex.com/t/868057",
+      "Description": "\u003ch3\u003e环境\u003c/h3\u003e\n\u003cp\u003e服务 A：k8s 环境运行的服务，kubernetes 1.19.10; CNI calico 3.17.4 CrossSubnet\u003c/p\u003e\n\u003cp\u003e服务 B：物理机运行的服务，Centos 7.5\u003c/p\u003e\n\u003ch3\u003e背景\u003c/h3\u003e\n\u003cp\u003e服务 A 上 k8s 环境后，服务 A 直接调用服务 B ，偶现提示连接超时，Caused by: java.net.SocketTimeoutException: connect timed out ；\u003c/p\u003e\n\u003ch3\u003e排查过程\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e查看服务 B 节点的 netstat 情况:\u003c/li\u003e\n\u003c/ol\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e[root@app01 ~]# netstat  -s|egrep \"SYNs to LISTEN sockets|passive\"\n    5436752164 passive connection openings\n    87458 passive connections rejected because of time stamp\n    283176 SYNs to LISTEN sockets dropped\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可以看出来是 SYN 请求被丢弃，而且 SYN 丢弃数量和 timestamp 丢弃的数量保持同步，可以初步断定是 timestamp 问题导致。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e半连接和全连接队列是否满了\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e用 ss -lnt(全连接)和 netstat -natp |grep SYN_RECV|wc -l (半连接) 均 OK,排除队列满的问题。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e查看服务 A 和服务 B 是否开启 tcp_tw_recycle 和 tcp_timestamps\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e服务 A 所在的 node 节点未开启，服务 B 所在的物理机也未开启；\nk8s 环境的 node 节点都已经关闭了 tcp_timestamps ，相当于 per-host 的 PAWS 机制未开启。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e抓包分析\u003c/li\u003e\n\u003c/ol\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e从服务端抓包\n看到很多重传的 syn 包，源地址都是服务 A 所在的 node 节点\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e客户端抓包\n现象一致，服务 A 一直重传给服务 B SYN 包\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e问题\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e在客户端未开启 tcp_timestamps 的情况下，为何服务端还会出现 time stamp 丢包？\u003c/li\u003e\n\u003cli\u003e丢包有没有可能其它问题导致？\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "jarry118",
+      "PubDate": "2022-07-22T09:35:17Z"
+    },
+    {
+      "Title": "web 页面对 服务器操作，有没有好的开源项目之类的推荐 - 问与答",
+      "Link": "https://www.v2ex.com/t/868056",
+      "Description": "目标是希望能启动一个服务页面\u003cbr /\u003e把一些服务器命令。\u003cbr /\u003e如 rm -rf /logs/*  之类的 shell 命令\u003cbr /\u003e做成 web 页面一个的点击事件，达到在 web 方便对服务器进行一些常用操作。\u003cbr /\u003e内部使用，不用考虑安全问题。轻量，易操作就好。不限语言。",
+      "Author": "iblessyou",
+      "PubDate": "2022-07-22T09:33:28Z"
+    },
+    {
+      "Title": "Go 轻量级事件总线框架，你们都用啥？ - 问与答",
+      "Link": "https://www.v2ex.com/t/868055",
+      "Description": "\u003cp\u003e小应用，有些地方打算用\u003cstrong\u003e事件发布 /订阅\u003c/strong\u003e来实现一些功能，类似于\u003ccode\u003eSpring\u003c/code\u003e的\u003ccode\u003eApplicationEvent\u003c/code\u003e。\u003c/p\u003e\n\u003cp\u003e在 Github 找了一个比较热门的：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/asaskevich/EventBus\" rel=\"nofollow\"\u003ehttps://github.com/asaskevich/EventBus\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e但是很久没维护了，而且很多 issues 也没处理，怕有坑。\u003c/p\u003e\n\u003cp\u003e还有其他推荐的吗？\u003c/p\u003e\n",
+      "Author": "KevinBlandy",
+      "PubDate": "2022-07-22T09:30:18Z"
+    },
+    {
       "Title": "有没有一个网站，能聚合掘金、v2ex、各大厂技术博客上的优秀文章？ - 问与答",
       "Link": "https://www.v2ex.com/t/868054",
       "Description": "\u003cp\u003e平时对技术文章质量要求比较多，经常要在各个网站中切换去寻找和甄别文章质量\n有没有网站可以把程序员相关信息聚合起来，把获取信息成本降低\u003c/p\u003e\n",
