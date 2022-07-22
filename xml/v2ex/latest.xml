@@ -4,9 +4,30 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>tcp_timestamps 关闭条件下，服务端 syn 丢包 - 程序员</title>
+      <title>到哪找比较完整的前端面试题，期待各位老哥热心分享 [必以“感谢”回应] ？ - 程序员</title>
+      <link>https://www.v2ex.com/t/868061</link>
+      <description>&lt;p&gt;我老婆要换工作了，我一个后端不太了解，感谢各位老铁帮忙！！！&lt;/p&gt;&#xA;</description>
+      <author>tenstone</author>
+      <pubDate>22 Jul 2022 09:46:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>现在(2022)固定电话可以通过以太网传输数据吗？ - 程序员</title>
+      <link>https://www.v2ex.com/t/868060</link>
+      <description>&lt;p&gt;我对固定电话的印象还停留在 21 世纪的头几年。前阵子重新接公司的网，发现固定电话是有一条双绞线入户接在以太网交换机 A 上，A 与另一台以太网交换机 B 级联，电话用双绞线接在了 B 上，RJ45 接口。A 和 B 应该都没有 VLAN 功能。&lt;/p&gt;&#xA;&lt;p&gt;所以现在固定电话是在以太网上分组交换数据了吗？还是已经在 TCP/IP 栈上了？还是单纯的网线太乱我看错了....&lt;/p&gt;&#xA;</description>
+      <author>Explr</author>
+      <pubDate>22 Jul 2022 09:41:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>有在 macos 下用 ikbc 蓝牙键盘的 v 友吗，为啥切换软件会让键盘短暂失灵？ - 程序员</title>
+      <link>https://www.v2ex.com/t/868059</link>
+      <description>&lt;p&gt;最近买了个 ikbc 的蓝牙三模键盘，没用两天发现一个神奇的事情。&lt;/p&gt;&#xA;&lt;p&gt;就是用着用着，键盘会突然没有反应几秒，然后闪灯重新和电脑连上，但是我看说明书说 30min 没有使用才会自动断连。&lt;/p&gt;&#xA;&lt;p&gt;本以为是键盘质量问题，打算找客服对线走售后。&lt;/p&gt;&#xA;&lt;p&gt;但是这两天发现并不是无规律，而是在 mac 下切换软件 /或者截图后会发生。&lt;/p&gt;&#xA;&lt;p&gt;例如，正在聊微信，突然切换到 Chrome ，这是键盘就会失去链接，按什么都没有用，大概过个 3-5s 闪灯重连。&lt;/p&gt;&#xA;&lt;p&gt;又或者，正在使用某个软件，按下 command+x 截图快捷键截图，完了截完图，键盘又失灵了。&lt;/p&gt;&#xA;&lt;p&gt;所以是软件会和蓝牙冲突？&lt;/p&gt;&#xA;&lt;p&gt;PS：电脑蓝牙应该没问题，连蓝牙鼠标包括之前的罗技键盘都没有问题。&lt;/p&gt;&#xA;</description>
+      <author>ggp1ot2</author>
+      <pubDate>22 Jul 2022 09:37:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>服务端 syn 丢包问题排查 - 程序员</title>
       <link>https://www.v2ex.com/t/868057</link>
-      <description>&lt;h3&gt;环境&lt;/h3&gt;&#xA;&lt;p&gt;服务 A：k8s 环境运行的服务，kubernetes 1.19.10; CNI calico 3.17.4 CrossSubnet&lt;/p&gt;&#xA;&lt;p&gt;服务 B：物理机运行的服务，Centos 7.5&lt;/p&gt;&#xA;&lt;h3&gt;背景&lt;/h3&gt;&#xA;&lt;p&gt;服务 A 上 k8s 环境后，服务 A 直接调用服务 B ，偶现提示连接超时，Caused by: java.net.SocketTimeoutException: connect timed out ；&lt;/p&gt;&#xA;&lt;h3&gt;排查过程&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;查看服务 B 节点的 netstat 情况:&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;[root@app01 ~]# netstat  -s|egrep &#34;SYNs to LISTEN sockets|passive&#34;&#xA;    5436752164 passive connection openings&#xA;    87458 passive connections rejected because of time stamp&#xA;    283176 SYNs to LISTEN sockets dropped&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可以看出来是 SYN 请求被丢弃，而且 SYN 丢弃数量和 timestamp 丢弃的数量保持同步，可以初步断定是 timestamp 问题导致。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;半连接和全连接队列是否满了&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;用 ss -lnt(全连接)和 netstat -natp |grep SYN_RECV|wc -l (半连接) 均 OK,排除队列满的问题。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;查看服务 A 和服务 B 是否开启 tcp_tw_recycle 和 tcp_timestamps&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;服务 A 所在的 node 节点未开启，服务 B 所在的物理机也未开启；&#xA;k8s 环境的 node 节点都已经关闭了 tcp_timestamps ，相当于 per-host 的 PAWS 机制未开启。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;抓包分析&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;从服务端抓包&#xA;看到很多重传的 syn 包，源地址都是服务 A 所在的 node 节点&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;客户端抓包&#xA;现象一致，服务 A 一直重传给服务 B SYN 包&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;问题&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在客户端未开启 tcp_timestamps 的情况下，为何服务端还会出现 time stamp 丢包？&lt;/li&gt;&#xA;&lt;li&gt;丢包有没有可能其它问题导致？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <description>&lt;h3&gt;环境&lt;/h3&gt;&#xA;&lt;p&gt;服务 A：k8s 环境运行的服务，kubernetes 1.19.10; CNI calico 3.17.4 CrossSubnet&lt;/p&gt;&#xA;&lt;p&gt;服务 B：物理机运行的服务，Centos 7.5&lt;/p&gt;&#xA;&lt;h3&gt;背景&lt;/h3&gt;&#xA;&lt;p&gt;服务 A 上 k8s 环境后，服务 A 直接调用服务 B ，偶现提示连接超时，Caused by: java.net.SocketTimeoutException: connect timed out ；&lt;/p&gt;&#xA;&lt;h3&gt;排查过程&lt;/h3&gt;&#xA;&lt;p&gt;1.查看服务 B 节点的 netstat 情况:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;[root@app01 ~]# netstat  -s|egrep &#34;SYNs to LISTEN sockets|passive&#34;&#xA;    5436752164 passive connection openings&#xA;    87458 passive connections rejected because of time stamp&#xA;    283176 SYNs to LISTEN sockets dropped&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可以看出来是 SYN 请求被丢弃，而且 SYN 丢弃数量和 timestamp 丢弃的数量保持同步，可以初步断定是 timestamp 问题导致。&lt;/p&gt;&#xA;&lt;p&gt;2.半连接和全连接队列是否满了&lt;/p&gt;&#xA;&lt;p&gt;用 ss -lnt(全连接)和 netstat -natp |grep SYN_RECV|wc -l (半连接) 均 OK,排除队列满的问题。&lt;/p&gt;&#xA;&lt;p&gt;3.查看服务 A 和服务 B 是否开启 tcp_tw_recycle 和 tcp_timestamps&lt;/p&gt;&#xA;&lt;p&gt;服务 A 所在的 node 节点未开启，服务 B 所在的物理机已开启；&lt;/p&gt;&#xA;&lt;p&gt;k8s 环境的 node 节点都已经关闭了 tcp_timestamps ，相当于 per-host 的 PAWS 机制未开启。&lt;/p&gt;&#xA;&lt;p&gt;4.抓包分析&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;从服务端抓包&#xA;看到很多重传的 syn 包，源地址都是服务 A 所在的 node 节点&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;客户端抓包&#xA;现象一致，服务 A 一直重传给服务 B SYN 包&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;问题&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在客户端未开启 tcp_timestamps 的情况下，为何服务端还会出现 time stamp 丢包？&lt;/li&gt;&#xA;&lt;li&gt;丢包有没有可能其它问题导致？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
       <author>jarry118</author>
       <pubDate>22 Jul 2022 09:35:17 +0000</pubDate>
     </item>
