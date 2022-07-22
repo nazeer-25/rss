@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Macbook Pro 16 寸 4k 60hz 扩展坞推荐。 - MacBook Pro</title>
+      <link>https://www.v2ex.com/t/868114</link>
+      <description>最近入手了返校季的 MBP16 寸版本，目前显示器用的是 Dell 2720qm ，这个显示器有一个 type-c 全接口，充电加数据传输。&lt;br /&gt;&lt;br /&gt;想买一个支持 type-c ，4k60hz 刷新率的扩展坞(笔记本上只插一根线省事儿），请问大家有什么推荐的产品嘛？</description>
+      <author>chuckzhou02</author>
+      <pubDate>22 Jul 2022 14:15:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>写 go 语言的一种不作不会死的方式 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/868113</link>
+      <description>&lt;p&gt;&lt;strong&gt;不捕获 error&lt;/strong&gt; &lt;/p&gt;&#xA;&lt;p&gt;典型的像如下代码：    &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func getBar()(*bar, err){&#xA;&#x9;//some errors&#xA;    if err := hasError(); err != nil{&#xA;    &#x9;return nil, err&#xA;    }&#xA;&#x9;//do sth&#xA;    return new(bar), nil&#xA;}&#xA;func foo(){&#xA;&#x9;b, _ := getBar()&#xA;    b.DoSth() //panic&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;以下典型的 golang 代码看起来很烦，而且直接影响代码风格美观程度。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func getBar()(*bar, err){&#xA;&#x9;//do sth&#xA;    return 0, nil&#xA;}&#xA;&#xA;func foo()error{&#xA;&#x9;if b1, err := getBar(); err != nil{&#xA;    &#x9;return err&#xA;    }&#xA;    if b2, err := getBar(); err != nil{&#xA;    &#x9;return err&#xA;    }&#xA;    return nil&#xA;}&#x9;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我在很多项目里看到新手或者从其他语言转过来的同学，喜欢写 &lt;code&gt;if p, _ := getBar()&lt;/code&gt; 这样的代码，然后继续处理接下来的流程。这样做的问题在于你直接忽略掉了你所调用代码产生的错误，你内心默认的代码运行方式是：“&lt;strong&gt;我的代码一定会以正确的方式运行。&lt;/strong&gt;”&lt;br/&gt;&#xA;在很多其他的语言里会有 try catch 这样的机制，可以让你在函数调用的外部直接捕获异常。当随之带来的问题是 try catch 是跨函数跨模块和函数的，容易出现抛出的异常被并不适合这个模块的代码模块去处理。&lt;br/&gt;&#xA;go 语言这个错误处理方式虽然丑陋，但简单有效。它这样做简单的让你把 error 直接丢给上一层，上一层可以决定这个错误是继续传递还是中止处理。当我把写 go 关于错误处理的思维方式转变成：&lt;strong&gt;不放过任何一个错误&lt;/strong&gt;后，写代码的心智负担将得极低。我只需要关心当前的函数输入输出数据是否合法，以及调用其他函数时出错后选择继续还是中止。而且 go 语言这种小粒度的 error 处理方式几乎不用 care 错误的类型，遇到不合法 /异常 /错误 /非正常流程后只需要 error 继续 /中止一把梭即可。&lt;br/&gt;&#xA;不信你可以看看下面是如何用简单的错误处理是如何改掉 HTTP 200 一把梭的毛病。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;func Query(w http.ResponseWriter, r *http.Request) {&#xA;&#x9;var data RequestData&#xA;    err := json.NewDecoder(r.Body).Decode(&amp;amp;data)&#xA;    if err != nil{&#xA;    &#x9;w.WriteHeader( http.StatusBadRequest)&#xA;    &#x9;return&#xA;    }&#xA;    if data.Name == &#34;not existed&#34;{&#xA;    &#x9;w.WriteHeader( http.StatusNotFound)&#xA;        return&#xA;    }&#xA;    w.WriteHeader( http.StatusOK)&#xA;    return&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;某些 golang 的 web framework 会调用 recover 方法，以防止 HTTP server 崩溃。不得不说这是它提供的一种“助纣为虐”的方式让你去忽略掉某些致命的错误。这完全没必要，守护进程比 recover 要靠谱得多（还能自动获得重启大法的加成:) ）。我个人认为在代码里面尽量不要调用任何 recover 的代码，尽量在代码部署到生产环境前测试发现所有可能的 panic 错误并修复掉。如果代码发生 panic 问题，肯定是有什么地方你没有想到或没设计好，你需要做的是修改代码而不是掩盖错误。&lt;/p&gt;&#xA;&lt;p&gt;捕获所有错误你唯一需要付出的代价就是：多敲几个字。而付出的这点代价你将获得：底层成本的设计负担，无脑的心智负担，健壮的代码，严格的输入输出限定。&lt;/p&gt;&#xA;</description>
+      <author>join</author>
+      <pubDate>22 Jul 2022 14:05:41 +0000</pubDate>
+    </item>
+    <item>
       <title>微信是不是崩了？ - 微信</title>
       <link>https://www.v2ex.com/t/868112</link>
       <description>突然收不到也发不出消息了，没有任何提示。&lt;br /&gt;是微信崩了还是我的号崩了😡</description>

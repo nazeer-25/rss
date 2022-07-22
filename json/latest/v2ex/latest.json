@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Macbook Pro 16 寸 4k 60hz 扩展坞推荐。 - MacBook Pro",
+      "Link": "https://www.v2ex.com/t/868114",
+      "Description": "最近入手了返校季的 MBP16 寸版本，目前显示器用的是 Dell 2720qm ，这个显示器有一个 type-c 全接口，充电加数据传输。\u003cbr /\u003e\u003cbr /\u003e想买一个支持 type-c ，4k60hz 刷新率的扩展坞(笔记本上只插一根线省事儿），请问大家有什么推荐的产品嘛？",
+      "Author": "chuckzhou02",
+      "PubDate": "2022-07-22T14:15:05Z"
+    },
+    {
+      "Title": "写 go 语言的一种不作不会死的方式 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/868113",
+      "Description": "\u003cp\u003e\u003cstrong\u003e不捕获 error\u003c/strong\u003e \u003c/p\u003e\n\u003cp\u003e典型的像如下代码：    \u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc getBar()(*bar, err){\n\t//some errors\n    if err := hasError(); err != nil{\n    \treturn nil, err\n    }\n\t//do sth\n    return new(bar), nil\n}\nfunc foo(){\n\tb, _ := getBar()\n    b.DoSth() //panic\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e以下典型的 golang 代码看起来很烦，而且直接影响代码风格美观程度。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc getBar()(*bar, err){\n\t//do sth\n    return 0, nil\n}\n\nfunc foo()error{\n\tif b1, err := getBar(); err != nil{\n    \treturn err\n    }\n    if b2, err := getBar(); err != nil{\n    \treturn err\n    }\n    return nil\n}\t\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我在很多项目里看到新手或者从其他语言转过来的同学，喜欢写 \u003ccode\u003eif p, _ := getBar()\u003c/code\u003e 这样的代码，然后继续处理接下来的流程。这样做的问题在于你直接忽略掉了你所调用代码产生的错误，你内心默认的代码运行方式是：“\u003cstrong\u003e我的代码一定会以正确的方式运行。\u003c/strong\u003e”\u003cbr/\u003e\n在很多其他的语言里会有 try catch 这样的机制，可以让你在函数调用的外部直接捕获异常。当随之带来的问题是 try catch 是跨函数跨模块和函数的，容易出现抛出的异常被并不适合这个模块的代码模块去处理。\u003cbr/\u003e\ngo 语言这个错误处理方式虽然丑陋，但简单有效。它这样做简单的让你把 error 直接丢给上一层，上一层可以决定这个错误是继续传递还是中止处理。当我把写 go 关于错误处理的思维方式转变成：\u003cstrong\u003e不放过任何一个错误\u003c/strong\u003e后，写代码的心智负担将得极低。我只需要关心当前的函数输入输出数据是否合法，以及调用其他函数时出错后选择继续还是中止。而且 go 语言这种小粒度的 error 处理方式几乎不用 care 错误的类型，遇到不合法 /异常 /错误 /非正常流程后只需要 error 继续 /中止一把梭即可。\u003cbr/\u003e\n不信你可以看看下面是如何用简单的错误处理是如何改掉 HTTP 200 一把梭的毛病。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efunc Query(w http.ResponseWriter, r *http.Request) {\n\tvar data RequestData\n    err := json.NewDecoder(r.Body).Decode(\u0026amp;data)\n    if err != nil{\n    \tw.WriteHeader( http.StatusBadRequest)\n    \treturn\n    }\n    if data.Name == \"not existed\"{\n    \tw.WriteHeader( http.StatusNotFound)\n        return\n    }\n    w.WriteHeader( http.StatusOK)\n    return\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e某些 golang 的 web framework 会调用 recover 方法，以防止 HTTP server 崩溃。不得不说这是它提供的一种“助纣为虐”的方式让你去忽略掉某些致命的错误。这完全没必要，守护进程比 recover 要靠谱得多（还能自动获得重启大法的加成:) ）。我个人认为在代码里面尽量不要调用任何 recover 的代码，尽量在代码部署到生产环境前测试发现所有可能的 panic 错误并修复掉。如果代码发生 panic 问题，肯定是有什么地方你没有想到或没设计好，你需要做的是修改代码而不是掩盖错误。\u003c/p\u003e\n\u003cp\u003e捕获所有错误你唯一需要付出的代价就是：多敲几个字。而付出的这点代价你将获得：底层成本的设计负担，无脑的心智负担，健壮的代码，严格的输入输出限定。\u003c/p\u003e\n",
+      "Author": "join",
+      "PubDate": "2022-07-22T14:05:41Z"
+    },
+    {
       "Title": "微信是不是崩了？ - 微信",
       "Link": "https://www.v2ex.com/t/868112",
       "Description": "突然收不到也发不出消息了，没有任何提示。\u003cbr /\u003e是微信崩了还是我的号崩了😡",
