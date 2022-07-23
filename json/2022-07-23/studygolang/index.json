@@ -102,13 +102,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "[阿里-千寻位置-上海] 稳定性治理团队后端研发实习岗位",
-      "Link": "https://studygolang.com/topics/15708#reply2",
-      "Description": "\u003cp\u003e\u003cstrong\u003e岗位职责：\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e1、负责稳定性治理工具平台开发工作\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e技能要求：\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e1、熟练掌握Go语言\u003c/p\u003e\n\n\u003cp\u003e2、熟练使用MySQL或PostgreSQL任一关系数据库，索引、事务原理了解更佳，熟练使用Gorm框架更佳\u003c/p\u003e\n\n\u003cp\u003e3、了解消息队列kafka、rocketmq、nsq等任何一个消息队列的使用，原理了解更佳\u003c/p\u003e\n\n\u003cp\u003e4、熟悉TPC/IP协议和HTTP协议，了解Go标准库http原理更佳\u003c/p\u003e\n\n\u003cp\u003e5、熟练使用Git进行协作开发\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e其他要求：\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e1、23年毕业生\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e简历请投递至：\u003c/strong\u003eeGlhbmcuZ2FvQHd6LWluYy5jb20K\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "新人项目-自己使用Gin和RPC框架Kitex实现简易短视频",
       "Link": "https://studygolang.com/topics/15709#reply0",
       "Description": "\u003cp\u003e最近刚刚校招入职，之前是Java选手，刚刚接触GO语言，发现比Java舒服太多。\n转语言学习过程，通过做个项目练手，主要目的是熟悉Go语言、Gin框架和RPC框架Kitex\n目前项目还在进行中，目前只实现了用户服务的注册和查询功能（精力有限，带薪学习）\u003c/p\u003e\n\n\u003cp\u003e有很多不足之处，也请大佬们指点，希望能在这条路上不断前行\n项目地址：\u003ca href=\"https://github.com/Ligouhai-bigone/easy_douyin\"\u003ehttps://github.com/Ligouhai-bigone/easy_douyin\u003c/a\u003e\u003c/p\u003e\n",
@@ -168,6 +161,13 @@
       "Title": "go如何更新文本文件中某一行的内容",
       "Link": "https://studygolang.com/topics/11154#reply5",
       "Description": "\u003cp\u003e这是代码实现,有个问题是更改某一行的内容后会影响下一个的内容.请大神帮我看一下\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;bufio\u0026quot;\n\t\u0026quot;errors\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;io\u0026quot;\n\t\u0026quot;os\u0026quot;\n\t\u0026quot;strings\u0026quot;\n)\n\nfunc main() {\n\tfi, err := os.OpenFile(\u0026quot;test.txt\u0026quot;, os.O_RDWR, os.ModePerm)\n\tif err != nil {\n\t\tfmt.Println(err)\n\t\treturn\n\t}\n\tdefer fi.Close()\n\treader := bufio.NewReader(fi)\n\tlineCnt := 0\n\tseekP := 0\n\tfor {\n\t\tbs, _, err := reader.ReadLine()\n\t\tif err == io.EOF {\n\t\t\tfmt.Println(errors.New(\u0026quot;读取完成\u0026quot;))\n\t\t\tbreak\n\t\t}\n\t\tlineCnt = len(bs) + 2 //ReadLine 返回读取的长度不包含换行\\r\\n\n\t\tif strings.Contains(string(bs), \u0026quot;hello\u0026quot;) {\n\t\t\tdelBytes := make([]byte, 0) //编辑包含hello的行，需要先在该行写入ascii的127即删除符号，再写入新内容\n\t\t\tfor i := 0; i \u0026lt; lineCnt; i++ {\n\t\t\t\tdelBytes = append(delBytes, 127)\n\t\t\t}\n\n\t\t\tfi.WriteAt(delBytes, int64(seekP))\n\n\t\t\tnewStr := \u0026quot;hi\\r\\n\u0026quot;\n\t\t\tfi.WriteAt([]byte(newStr), int64(seekP)) //在该行写入新内容\n\t\t\tlineCnt = len([]byte(newStr))            //该行长度是新内容的长度\n\t\t}\n\n\t\tseekP += lineCnt\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e文本文件原始:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eskdflksdlkfs\nsjdfksdfksf\nskjdkfj hello skjdfksjdfksjdkf\n123\n123\n123\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e被程序修改后,可以看到修改行的下一行被加入了很多空格\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eskdflksdlkfs\nsjdfksdfksf\nhi\n123\n123\n123\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "[阿里-千寻位置-上海] 稳定性治理团队后端研发实习岗位",
+      "Link": "https://studygolang.com/topics/15708#reply2",
+      "Description": "\u003cp\u003e\u003cstrong\u003e岗位职责：\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e1、负责稳定性治理工具平台开发工作\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e技能要求：\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e1、熟练掌握Go语言\u003c/p\u003e\n\n\u003cp\u003e2、熟练使用MySQL或PostgreSQL任一关系数据库，索引、事务原理了解更佳，熟练使用Gorm框架更佳\u003c/p\u003e\n\n\u003cp\u003e3、了解消息队列kafka、rocketmq、nsq等任何一个消息队列的使用，原理了解更佳\u003c/p\u003e\n\n\u003cp\u003e4、熟悉TPC/IP协议和HTTP协议，了解Go标准库http原理更佳\u003c/p\u003e\n\n\u003cp\u003e5、熟练使用Git进行协作开发\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e其他要求：\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e1、23年毕业生\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e简历请投递至：\u003c/strong\u003eeGlhbmcuZ2FvQHd6LWluYy5jb20K\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
