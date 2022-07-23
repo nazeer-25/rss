@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>如何给代理加一层 socks5 代理方式 - Node.js</title>
+      <link>https://www.v2ex.com/t/868192</link>
+      <description>&lt;p&gt;使用 electron 写的客户端 ， 需要用到一个代理的功能，目前是直接使用 http 代理，设置远程的 proxy-server 地址即可。 走的是 http 、https 代理，代码在最下面。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#########         ############&#xA;本地客户端 -proxy-&amp;gt; proxy server -&amp;gt; 指定网站&#xA;#########         ############&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;希望在本地增加一个 &lt;code&gt;socks5&lt;/code&gt; 的代理层，数据转换后通过 http\websockets 到 proxy server, 类似这样&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#########           ###########          ############&#xA;本地客户端 -socks5-&amp;gt; local proxy  -proxy-&amp;gt; proxy server -&amp;gt; 指定网站&#xA;#########           ###########          ############&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;求赐教！！&lt;/p&gt;&#xA;&lt;p&gt;&lt;br/&gt;&lt;br/&gt;&lt;/p&gt;&lt;hr/&gt;&lt;p&gt;&lt;/p&gt;&#xA;&lt;p&gt;服务器端代理的源码&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const http = require(&#39;http&#39;)&#xA;const net = require(&#39;net&#39;)&#xA;const port = 1080&#xA;function buildHeaders(headers) {&#xA;  const arr = []&#xA;  for (const [k, v] of Object.entries(headers)) {&#xA;    arr.push(`${k}:${v}\r\n`)&#xA;  }&#xA;  return arr.join(&#39;&#39;)&#xA;}&#xA;&#xA;function getHostAndPort(req) {&#xA;  let host&#xA;  let port&#xA;  try {&#xA;    ;[host, port] = new URL(req.url)&#xA;  } catch (e) {&#xA;    ;[host, port] = req.headers.host.split(&#39;:&#39;)&#xA;  } finally {&#xA;    if (!port) {&#xA;      port = 80&#xA;    }&#xA;  }&#xA;  console.log(host, port)&#xA;  return [host, port]&#xA;}&#xA;const server = http.createServer((req, res) =&amp;gt; {&#xA;  const [host, port] = getHostAndPort(req)&#xA;  http.get(&#xA;    {&#xA;      port,&#xA;      host,&#xA;      path: req.url&#xA;    },&#xA;    response =&amp;gt; {&#xA;      response.pipe(res)&#xA;    }&#xA;  )&#xA;})&#xA;&#xA;server.on(&#39;upgrade&#39;, (req, res, head) =&amp;gt; {&#xA;  const [host, port] = getHostAndPort(req)&#xA;  const client = net.connect({&#xA;    port,&#xA;    host&#xA;  })&#xA;  client.on(&#39;connect&#39;, () =&amp;gt; {&#xA;    client.write(`GET ${req.url}\r\n` + buildHeaders(req.headers) + &#39;\r\n&#39;)&#xA;    res.pipe(client)&#xA;    client.pipe(res)&#xA;  })&#xA;  client.on(&#39;error&#39;, () =&amp;gt; {&#xA;    res.destroy()&#xA;  })&#xA;})&#xA;server.on(&#39;connect&#39;, (req, client, head) =&amp;gt; {&#xA;  const [host, port] = getHostAndPort(req)&#xA;  const socket = net.connect(port, host, () =&amp;gt; {&#xA;    console.log(&#39;connect&#39;, port, host, head)&#xA;    client.write(&#39;HTTP/1.1 200 Connection Established\r\n&#39; + &#39;Proxy-agent: Node.js-Proxy\r\n&#39; + &#39;\r\n&#39;)&#xA;    socket.write(head)&#xA;    socket.pipe(client)&#xA;    client.pipe(socket)&#xA;  })&#xA;})&#xA;server.listen(port, () =&amp;gt; console.log(port))&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>humbass</author>
+      <pubDate>23 Jul 2022 06:14:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>搜索英文技术问题的技巧 - 问与答</title>
+      <link>https://www.v2ex.com/t/868191</link>
+      <description>&lt;p&gt;请教一个各位遇到技术问题，运用英语搜索答案的技巧&lt;/p&gt;&#xA;&lt;p&gt;迫于简中搜索越来越多广告，未来个人需要慢慢转变为用英文搜索&#xA;RT&lt;/p&gt;&#xA;</description>
+      <author>makia98</author>
+      <pubDate>23 Jul 2022 06:10:40 +0000</pubDate>
+    </item>
+    <item>
       <title>Bitwarden 只能通过服务器上部署的网页版而不能通过客户端修改密码是开发者偷懒没写这个功能还是有别的目的？ - 信息安全</title>
       <link>https://www.v2ex.com/t/868190</link>
       <description>Bitwarden 是一个端到端加密的密码管理工具，即它的主密码明文应该在任何情况下都不被上传到存储密码库的服务器上，以确保获得服务器控制权的情况下用户密码不被泄露。但 Bitwarden 目前的设计是只能通过服务器上部署的网页版而不能通过客户端修改密码，由于网页版本 Bitwarden 是由存放密码库的服务器提供的，如果该服务器被黑，网页版代码被修改，则能轻松记录用户输入的主密码。而用户却只能通过这一有可能被下毒的网页版本修改主密码。是开发者偷懒没写这个功能还是有别的目的？</description>
