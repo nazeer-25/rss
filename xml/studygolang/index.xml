@@ -27,10 +27,6 @@
       <description>&lt;p&gt;改版了下书上的计算目录下所有总目录的文件大小，执行后小目录的可以跑出结果，但是根盘就不行，报错，求大佬指导&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;os&amp;quot;&#xA;&#x9;&amp;quot;path/filepath&amp;quot;&#xA;&#x9;&amp;quot;sync&amp;quot;&#xA;&#x9;&amp;quot;time&amp;quot;&#xA;)&#xA;&#xA;var done = make(chan struct{})&#xA;&#xA;func cancelled() bool {&#xA;&#x9;select {&#xA;&#x9;case &amp;lt;-done:&#xA;&#x9;&#x9;return true&#xA;&#x9;default:&#xA;&#x9;&#x9;return false&#xA;&#x9;}&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;// Determine the initial directories.&#xA;&#x9;roots := os.Args[1:]&#xA;&#x9;if len(roots) == 0 {&#xA;&#x9;&#x9;roots = []string{&amp;quot;.&amp;quot;}&#xA;&#x9;}&#xA;&#x9;go func() {&#xA;&#x9;&#x9;os.Stdin.Read(make([]byte, 1)) // read a single byte&#xA;&#x9;&#x9;close(done)&#xA;&#x9;}()&#xA;&#xA;&#x9;fileSizes := make(chan map[string]int64)&#xA;&#xA;&#x9;var n sync.WaitGroup&#xA;&#x9;for _, root := range roots {&#xA;&#x9;&#x9;n.Add(1)&#xA;&#x9;&#x9;go walkDir(root, &amp;amp;n, fileSizes)&#xA;&#x9;}&#xA;&#x9;go func() {&#xA;&#x9;&#x9;n.Wait()&#xA;&#x9;&#x9;close(fileSizes)&#xA;&#x9;}()&#xA;&#xA;&#x9;tick := time.Tick(500 * time.Millisecond)&#xA;&#x9;var nbytes = make(map[string]int64)&#xA;loop:&#xA;&#x9;for {&#xA;&#x9;&#x9;select {&#xA;&#x9;&#x9;case &amp;lt;-done:&#xA;&#x9;&#x9;&#x9;// Drain fileSizes to allow existing goroutines to finish.&#xA;&#x9;&#x9;&#x9;for range fileSizes {&#xA;&#x9;&#x9;&#x9;&#x9;// Do nothing.&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;return&#xA;&#x9;&#x9;case size, ok := &amp;lt;-fileSizes:&#xA;&#x9;&#x9;&#x9;if !ok {&#xA;&#x9;&#x9;&#x9;&#x9;break loop // fileSizes was closed&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;for k, v := range size {&#xA;&#x9;&#x9;&#x9;&#x9;nbytes[k] += v&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;case &amp;lt;-tick:&#xA;&#x9;&#x9;&#x9;//printDiskUsage(nfiles, nbytes)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;for k, v := range nbytes {&#xA;&#x9;&#x9;if v &amp;gt; 10*1e9 {&#xA;&#x9;&#x9;&#x9;printDiskUsage(k, v) // final totals&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;func printDiskUsage(nfiles string, nbytes int64) {&#xA;&#x9;fmt.Printf(&amp;quot;【%s】:【%.1f GB】\n&amp;quot;, nfiles, float64(nbytes)/1e9)&#xA;}&#xA;&#xA;func walkDir(dir string, n *sync.WaitGroup, fileSizes chan&amp;lt;- map[string]int64) {&#xA;&#xA;&#x9;dirsSize := make(map[string]int64) //需要有个缓冲，不然并发报错&#xA;&#xA;&#x9;defer n.Done()&#xA;&#x9;if cancelled() {&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;for _, entry := range dirents(dir) {&#xA;&#x9;&#x9;if entry.IsDir() {&#xA;&#x9;&#x9;&#x9;n.Add(1)&#xA;&#x9;&#x9;&#x9;subdir := filepath.Join(dir, entry.Name())&#xA;&#x9;&#x9;&#x9;go walkDir(subdir, n, fileSizes)&#xA;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;dirsSize[dir] += entry.Size()&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;fileSizes &amp;lt;- dirsSize&#xA;&#x9;}&#xA;}&#xA;&#xA;var sema = make(chan struct{}, 20) // concurrency-limiting counting semaphore&#xA;&#xA;func dirents(dir string) []os.FileInfo {&#xA;&#x9;select {&#xA;&#x9;case sema &amp;lt;- struct{}{}: // acquire token&#xA;&#x9;case &amp;lt;-done:&#xA;&#x9;&#x9;return nil // cancelled&#xA;&#x9;}&#xA;&#x9;defer func() { &amp;lt;-sema }() // release token&#xA;&#x9;f, err := os.Open(dir)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;fmt.Fprintf(os.Stderr, &amp;quot;du: %v\n&amp;quot;, err)&#xA;&#x9;&#x9;return nil&#xA;&#x9;}&#xA;&#x9;defer f.Close()&#xA;&#xA;&#x9;entries, err := f.Readdir(0) // 0 =&amp;gt; no limit; read all entries&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;fmt.Fprintf(os.Stderr, &amp;quot;du: %v\n&amp;quot;, err)&#xA;&#x9;&#x9;// Don&#39;t return: Readdir may return partial results.&#xA;&#x9;}&#xA;&#x9;return entries&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220724/535fee11a1ea9443f6623e040eb3c9c7.png&#34; alt=&#34;企业微信截图_5d112c50-e290-4b2f-a66a-56458d21cd43.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>【Golang】golang中map元素的删除和清空</title>
-      <link>https://studygolang.com/articles/35778#reply0</link>
-    </item>
-    <item>
       <title>OpenIM重大优化-消息按需加载 一致性缓存 uniapp发布</title>
       <link>https://studygolang.com/articles/35784#reply0</link>
     </item>
@@ -71,12 +67,12 @@
       <link>https://studygolang.com/articles/35779#reply0</link>
     </item>
     <item>
-      <title>【Golang】理解Golang中的time.Duration</title>
-      <link>https://studygolang.com/articles/35777#reply0</link>
+      <title>【Golang】golang中map元素的删除和清空</title>
+      <link>https://studygolang.com/articles/35778#reply0</link>
     </item>
     <item>
-      <title>优维科技7周年庆｜未来可“7”，从心出发</title>
-      <link>https://studygolang.com/articles/35776#reply0</link>
+      <title>【Golang】理解Golang中的time.Duration</title>
+      <link>https://studygolang.com/articles/35777#reply0</link>
     </item>
     <item>
       <title>股票分析小仓库</title>
@@ -106,6 +102,10 @@
     <item>
       <title>在线sql转protobuf</title>
       <link>https://studygolang.com/resources/15508#reply3</link>
+    </item>
+    <item>
+      <title>优维科技7周年庆｜未来可“7”，从心出发</title>
+      <link>https://studygolang.com/articles/35776#reply0</link>
     </item>
     <item>
       <title>一个仅需三步配置就能生成免费个人博客的开源模板：vdoing-template</title>
