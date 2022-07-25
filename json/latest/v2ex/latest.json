@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "ASL Sender Statistics 是啥意思？ - macOS",
+      "Link": "https://www.v2ex.com/t/868659",
+      "Description": "\u003cp\u003e\u003cimg alt=\"截屏 2022-07-25 22.16.55.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/07/25/junSCwObIz24mUF.png\"/\u003e\n日志里每 10 分钟一条“ASL Sender Statistics”，这个是什么意思？\u003c/p\u003e\n",
+      "Author": "bingkina",
+      "PubDate": "2022-07-25T14:20:07Z"
+    },
+    {
+      "Title": "Java JVM 的 native 方法如何进行监控 - Java",
+      "Link": "https://www.v2ex.com/t/868658",
+      "Description": "\u003cp\u003eJava 问题，目前遇到了一个比较奇怪的问题：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e内部公司使用了一些奇怪安全软件，登录了账号后，发现 IDEA 打不开了；\u003c/li\u003e\n\u003cli\u003e通过 JvisualVM 监控到一个 windows native 的本地方法发生了堵塞，CPU 达到了 100%；\u003c/li\u003e\n\u003cli\u003e写了一个简单的案例，去调用这个方法，发现确实会在扫描大量文件时发生堵塞。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e想找到一种方式查看到当前 jvm （ windows 平台）的 C++的方法调用栈的情况呢？\n具体是那个位置造成了死循环（目前看 jdk 层 java 代码未产生死循环）。\u003c/p\u003e\n\u003cp\u003e方法名是 WindowsNativeDispatcher.CreateFile0 ，通过 JDK 源码，找到了 natvie 方法的 c 文件\u003c/p\u003e\n\u003cp\u003e下面是具体代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eJNIEXPORT jlong JNICALL\nJava_sun_nio_fs_WindowsNativeDispatcher_CreateFile0(JNIEnv* env, jclass this,\n    jlong address, jint dwDesiredAccess, jint dwShareMode, jlong sdAddress,\n    jint dwCreationDisposition, jint dwFlagsAndAttributes)\n{\n    HANDLE handle;\n    LPCWSTR lpFileName = jlong_to_ptr(address);\n\n    SECURITY_ATTRIBUTES securityAttributes;\n    LPSECURITY_ATTRIBUTES lpSecurityAttributes;\n    PSECURITY_DESCRIPTOR lpSecurityDescriptor = jlong_to_ptr(sdAddress);\n\n\n    if (lpSecurityDescriptor == NULL) {\n        lpSecurityAttributes = NULL;\n    } else {\n        securityAttributes.nLength = sizeof(SECURITY_ATTRIBUTES);\n        securityAttributes.lpSecurityDescriptor = lpSecurityDescriptor;\n        securityAttributes.bInheritHandle = FALSE;\n        lpSecurityAttributes = \u0026amp;securityAttributes;\n    }\n\n    handle = CreateFileW(lpFileName,\n                        (DWORD)dwDesiredAccess,\n                        (DWORD)dwShareMode,\n                        lpSecurityAttributes,\n                        (DWORD)dwCreationDisposition,\n                        (DWORD)dwFlagsAndAttributes,\n                        NULL);\n    if (handle == INVALID_HANDLE_VALUE) {\n        throwWindowsException(env, GetLastError());\n    }\n    return ptr_to_jlong(handle);\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "L0L",
+      "PubDate": "2022-07-25T14:10:15Z"
+    },
+    {
       "Title": "[非常有趣的现象]群晖 DS1815+ 接软路由外网不能访问，接普通路由器可以访问外网 - 问与答",
       "Link": "https://www.v2ex.com/t/868657",
       "Description": "\u003cp\u003e书接上文， 收了一台 1815+, 一通重置，硬盘也切换回来了，一切顺利。唯独绑定 ID 的时候发现始终没办法绑定上去。 经过一番测试, 似乎访问外部网络不通， 后来 wifi 路由器拨号，再接上群晖，一切正常。\u003c/p\u003e\n\u003cp\u003e综上，各位巨佬，知道具体是软路由的什么设置导致这种现象？以及要怎样解决？\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ealex@nas:~$ sudo ping www.baidu.com\nPassword:\nping: www.baidu.com: Temporary failure in name resolution\n\nalex@nas:~$ cat /etc/resolv.conf\nnameserver      114.114.114.114\n\nalex@nas:~$ sudo ping 192.168.1.2\nPassword:\nPING 192.168.1.2 (192.168.1.2) 56(84) bytes of data.\n^C\n--- 192.168.1.2 ping statistics ---\n24 packets transmitted, 0 received, 100% packet loss, time 1022ms\n\n\u003c/code\u003e\u003c/pre\u003e\n",
