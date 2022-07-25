@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>深度学习中位置编码的本质是不是就是一层 nn.Parameter()而已？ - 程序员</title>
+      <link>https://www.v2ex.com/t/868638</link>
+      <description>&lt;p&gt;近日阅读 Bert 源码，读到其中所谓“可训练式”的位置编码的部分，似乎具体实现就是初始化一个可训练的，然后把它加到输入上，这就算是可训练的位置编码了。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;def __init__(self):&#xA;    super()&#xA;    positional_encoding = nn.Parameter()&#xA;def forward(self, x):&#xA;    x += positional_encoding&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我不太能确定是否就是这么简单，还是我理解错了。&lt;/p&gt;&#xA;&lt;p&gt;另外我注意到按照经典 Bert 的实现:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;BertModel(&#xA;  (embeddings): BertEmbeddings(&#xA;    (word_embeddings): Embedding(30522, 768, padding_idx=0)&#xA;    (position_embeddings): Embedding(512, 768)&#xA;    (token_type_embeddings): Embedding(2, 768)&#xA;    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)&#xA;    (dropout): Dropout(p=0.1, inplace=False)&#xA;  )&#xA;  (encoder): BertEncoder(&#xA;    (layer): ModuleList(&#xA;      (0): BertLayer(...)&#xA;      ...&#xA;  (pooler): BertPooler(...)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;实际上它只进行了一次 positional_embedding ，也就是在输入的时候，这是否意味着实际上所谓的能把握序列信息的也只有第一层，后面的 bert 层是无法识别位置信息的？&lt;/p&gt;&#xA;&lt;p&gt;但是这么说的话，按照我上一个帖子的内容 &lt;a href=&#34;https://v2ex.com/t/868398#reply5&#34; rel=&#34;nofollow&#34;&gt;https://v2ex.com/t/868398#reply5&lt;/a&gt; ，bert 的输出根据设置一般有两部分，一部分是类似原始输入序列长度对应长度的数组，表示每个字经过特征提取后的消息，另一部分是一个表示全句子整体信息的层。理论上前者应该与输入是一一对应的，但是它都不能捕捉位置，这不是很矛盾吗&lt;/p&gt;&#xA;</description>
+      <author>Richard14</author>
+      <pubDate>25 Jul 2022 11:44:01 +0000</pubDate>
+    </item>
+    <item>
       <title>间接性健身，总是坚持不下去怎么办？ - 问与答</title>
       <link>https://www.v2ex.com/t/868637</link>
       <description>基本坚持了一礼拜，总是会想着给自己放一天假，然后就索性那个礼拜都不想去了。过了一周后又开始后悔，又恢复健身。周而复始。&lt;br /&gt;&lt;br /&gt;各位健身达人都是怎么坚持下来的？</description>

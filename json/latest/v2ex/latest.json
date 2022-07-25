@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "深度学习中位置编码的本质是不是就是一层 nn.Parameter()而已？ - 程序员",
+      "Link": "https://www.v2ex.com/t/868638",
+      "Description": "\u003cp\u003e近日阅读 Bert 源码，读到其中所谓“可训练式”的位置编码的部分，似乎具体实现就是初始化一个可训练的，然后把它加到输入上，这就算是可训练的位置编码了。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edef __init__(self):\n    super()\n    positional_encoding = nn.Parameter()\ndef forward(self, x):\n    x += positional_encoding\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我不太能确定是否就是这么简单，还是我理解错了。\u003c/p\u003e\n\u003cp\u003e另外我注意到按照经典 Bert 的实现:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eBertModel(\n  (embeddings): BertEmbeddings(\n    (word_embeddings): Embedding(30522, 768, padding_idx=0)\n    (position_embeddings): Embedding(512, 768)\n    (token_type_embeddings): Embedding(2, 768)\n    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)\n    (dropout): Dropout(p=0.1, inplace=False)\n  )\n  (encoder): BertEncoder(\n    (layer): ModuleList(\n      (0): BertLayer(...)\n      ...\n  (pooler): BertPooler(...)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e实际上它只进行了一次 positional_embedding ，也就是在输入的时候，这是否意味着实际上所谓的能把握序列信息的也只有第一层，后面的 bert 层是无法识别位置信息的？\u003c/p\u003e\n\u003cp\u003e但是这么说的话，按照我上一个帖子的内容 \u003ca href=\"https://v2ex.com/t/868398#reply5\" rel=\"nofollow\"\u003ehttps://v2ex.com/t/868398#reply5\u003c/a\u003e ，bert 的输出根据设置一般有两部分，一部分是类似原始输入序列长度对应长度的数组，表示每个字经过特征提取后的消息，另一部分是一个表示全句子整体信息的层。理论上前者应该与输入是一一对应的，但是它都不能捕捉位置，这不是很矛盾吗\u003c/p\u003e\n",
+      "Author": "Richard14",
+      "PubDate": "2022-07-25T11:44:01Z"
+    },
+    {
       "Title": "间接性健身，总是坚持不下去怎么办？ - 问与答",
       "Link": "https://www.v2ex.com/t/868637",
       "Description": "基本坚持了一礼拜，总是会想着给自己放一天假，然后就索性那个礼拜都不想去了。过了一周后又开始后悔，又恢复健身。周而复始。\u003cbr /\u003e\u003cbr /\u003e各位健身达人都是怎么坚持下来的？",
