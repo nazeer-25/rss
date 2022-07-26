@@ -4,7 +4,28 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>长辈介绍相亲，发了一张半身照，和一张比较随便的全身照。结果对方女孩子说现在考试太忙了，手机号都没给 - 生活</title>
+      <title>⚛️ React 开发最佳实践 - React</title>
+      <link>https://www.v2ex.com/t/868907</link>
+      <description>&lt;p&gt;非常基础非常初级非常幼稚的 React 开发看了想打人的 React 开发最佳实践，但我保证每个大公司都有这样的代码，所有的屎山项目都是这么累计起来的而且大家不以为意。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;多层 props 传递，保持命名一致&lt;br/&gt;&#xA;&lt;code&gt;onChange&lt;/code&gt; → &lt;code&gt;onChange&lt;/code&gt; → &lt;code&gt;onChange&lt;/code&gt; ✅&lt;br/&gt;&#xA;&lt;code&gt;onChange&lt;/code&gt; → &lt;code&gt;handleChange&lt;/code&gt; → &lt;code&gt;change&lt;/code&gt; ❌   &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;若对函数包装后传递，保持命名不一致&lt;br/&gt;&#xA;&lt;code&gt;onChange&lt;/code&gt; → &lt;code&gt;onTextChange = () =&amp;gt; { onChange() }&lt;/code&gt; → &lt;code&gt;onTextChange&lt;/code&gt; ✅&lt;br/&gt;&#xA;&lt;code&gt;onChange&lt;/code&gt; → &lt;code&gt;onChange = () =&amp;gt; { props.onChange() }&lt;/code&gt; → &lt;code&gt;onChange&lt;/code&gt; ❌   &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;保持命名简洁&lt;br/&gt;&#xA;&lt;code&gt;onChange&lt;/code&gt; ✅&lt;br/&gt;&#xA;&lt;code&gt;handleChange&lt;/code&gt; ❌  &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;保持命名明确&lt;br/&gt;&#xA;&lt;code&gt;onChange&lt;/code&gt; &lt;code&gt;paginationTotal&lt;/code&gt; ✅&lt;br/&gt;&#xA;&lt;code&gt;change&lt;/code&gt; &lt;code&gt;pagiTotal&lt;/code&gt; ❌   &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;传递不同组件的 props ，保持前缀区分&lt;br/&gt;&#xA;&lt;code&gt;tableColumns&lt;/code&gt; &lt;code&gt;tableLoading&lt;/code&gt; &lt;code&gt;btnType&lt;/code&gt; &lt;code&gt;btnText&lt;/code&gt; ✅&lt;br/&gt;&#xA;&lt;code&gt;columns&lt;/code&gt; &lt;code&gt;loading&lt;/code&gt; &lt;code&gt;type&lt;/code&gt; &lt;code&gt;text&lt;/code&gt; ❌   &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;将 props 按照一定的规则排序，例如 UI 中出现顺序、或变量类型、或重要程度等   &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;保持文件与目录的命名，单复数符合常规&lt;br/&gt;&#xA;&lt;code&gt;common&lt;/code&gt; &lt;code&gt;config&lt;/code&gt; &lt;code&gt;components&lt;/code&gt; &lt;code&gt;utils&lt;/code&gt; ✅&lt;br/&gt;&#xA;&lt;code&gt;commons&lt;/code&gt; &lt;code&gt;configs&lt;/code&gt; &lt;code&gt;component&lt;/code&gt; &lt;code&gt;util&lt;/code&gt; ❌   &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;code&gt;&#39;&#39;&lt;/code&gt; 与 &lt;code&gt;0&lt;/code&gt; 在 jsx 中一定要做判断&lt;br/&gt;&#xA;&lt;code&gt;val !== &#39;&#39; &amp;amp;&amp;amp; 123&lt;/code&gt; &lt;code&gt;val !== 0 &amp;amp;&amp;amp; 123&lt;/code&gt; ✅&lt;br/&gt;&#xA;&lt;code&gt;val &amp;amp;&amp;amp; 123&lt;/code&gt; ❌   &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;保持文件、文件夹大小写一致&lt;br/&gt;&#xA;&lt;code&gt;ShopList&lt;/code&gt; &lt;code&gt;ShopDetail&lt;/code&gt; ✅&lt;br/&gt;&#xA;&lt;code&gt;shop-list&lt;/code&gt; &lt;code&gt;ShopDetail&lt;/code&gt; ❌   &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;保持文件夹命名与 url 对应&lt;br/&gt;&#xA;&lt;code&gt;/Shop/List.jsx&lt;/code&gt; → &lt;code&gt;/shop&lt;/code&gt; ✅&lt;br/&gt;&#xA;&lt;code&gt;/BestShop/List.jsx&lt;/code&gt; → &lt;code&gt;/shop&lt;/code&gt; ❌   &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;保持文件夹层级与 url 一致&lt;br/&gt;&#xA;&lt;code&gt;/Shop/A.jsx&lt;/code&gt; → &lt;code&gt;/shop/a&lt;/code&gt;、&lt;code&gt;/Shop/B.jsx&lt;/code&gt; → &lt;code&gt;/shop/b&lt;/code&gt; ✅&lt;br/&gt;&#xA;&lt;code&gt;/Shop/A.jsx&lt;/code&gt; → &lt;code&gt;/shop/a&lt;/code&gt;、&lt;code&gt;/Shop/Center/B.jsx&lt;/code&gt; → &lt;code&gt;/shop/b&lt;/code&gt; ❌   &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;理清文件、文件夹设置逻辑，尽量减少数目，思考是否有必要新增&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>nanxiaobei</author>
+      <pubDate>26 Jul 2022 15:00:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>求教电视盒怎么选？ - 问与答</title>
+      <link>https://www.v2ex.com/t/868906</link>
+      <description>1 、我的需求主要是看虎牙、斗鱼、电视直播，国外流媒体基本不看。&lt;br /&gt;2 、倾向上，个人更喜欢 Google TV ，UI 和遥控器好看，但看了各种评测，看起来必须要路由器翻墙才行？是激活的时候翻墙，还是一直翻墙用？&lt;br /&gt;3 、我现在手里就小米 ax3600 和 k2p ，好像就 k2p 能翻，但又不想刷机啥的，主要是怕影响平时的上网速度，感觉路由翻墙不太好用&lt;br /&gt;4 、或者我的需求，有国产比较好的盒子推荐吗？</description>
+      <author>27149</author>
+      <pubDate>26 Jul 2022 14:57:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>现在测试工程师需要什么技能呀！ - 程序员</title>
+      <link>https://www.v2ex.com/t/868905</link>
+      <description>&lt;p&gt;朋友找工作帮忙问下，现在大环境真的太差了呀，需要会 python 么？&lt;/p&gt;&#xA;</description>
+      <author>overthemoon</author>
+      <pubDate>26 Jul 2022 14:55:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>长辈介绍相亲，发了一张半身照，和一张比较丑的全身照。结果后面对方女孩子说现在考试太忙了，手机号都没给 - 生活</title>
       <link>https://www.v2ex.com/t/868904</link>
       <author>unregister</author>
       <pubDate>26 Jul 2022 14:54:36 +0000</pubDate>
