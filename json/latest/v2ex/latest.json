@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "kafka 的 max.poll.records 参数 - 问与答",
+      "Link": "https://www.v2ex.com/t/868849",
+      "Description": "文档上写着默认是 500 ，意思是单个消费者实例一次性可以从某个分区中取出 1 ～ 500 条消息出来消费，假设我 enable.auto.commit 参数设置为 false ，就是手动提交消费者 offset ，那这 500 条消息的 offset 是否是一次性一起提交？ 如果是一起提交 offset ，这中间有一条消息消费报错了，提交的 offset 应该是多少呢？",
+      "Author": "fatyoung",
+      "PubDate": "2022-07-26T09:59:12Z"
+    },
+    {
+      "Title": "为什么用 toByteArray()这个方法在某些机型上卡顿? - 问与答",
+      "Link": "https://www.v2ex.com/t/868847",
+      "Description": "场景：将手机录屏编码后得到的 byte[]序列化成 protobuf 类\u003cbr /\u003e问题：一秒编码 30 帧，随着时间推移，手机会越来越卡。\u003cbr /\u003e经过排查，发现是这行代码造成卡顿，\u003cbr /\u003eval toByteArray = screenMes.build().toByteArray()\u003cbr /\u003e \u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e 完整的代码如下：\u003cbr /\u003eval byteBuffer: ByteBuffer = ByteBuffer.allocateDirect(1024 * 1024 * 3)\u003cbr /\u003eprivate lateinit var screenMes: KCPMessage.ScreencapMes.Builder\u003cbr /\u003e    /**\u003cbr /\u003e     * 编码回调\u003cbr /\u003e     * bytes 编码后的数据\u003cbr /\u003e     * flags 是否 I 帧\u003cbr /\u003e     */\u003cbr /\u003e    override fun onScreenInfo(bytes: ByteArray?, flags: Int) {\u003cbr /\u003e        isRecording = true\u003cbr /\u003e        if (bytes != null) {\u003cbr /\u003e            screenMes.data = ByteString.copyFrom(bytes)\u003cbr /\u003e            screenMes.sort = mFlowSort\u003cbr /\u003e\u003cbr /\u003e            if (flags == MediaCodec.BUFFER_FLAG_KEY_FRAME) {\u003cbr /\u003e                screenMes.frameType = 0\u003cbr /\u003e            } else {\u003cbr /\u003e                screenMes.frameType = 1\u003cbr /\u003e            }\u003cbr /\u003e\u003cbr /\u003e            val toByteArray = screenMes.build().toByteArray()\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e            byteBuffer.clear()\u003cbr /\u003e            byteBuffer.putInt(toByteArray.size + 4)\u003cbr /\u003e            byteBuffer.putInt(KcpType.Type_Send_Frame)\u003cbr /\u003e            byteBuffer.put(toByteArray)\u003cbr /\u003e            byteBuffer.flip()\u003cbr /\u003e            if (mUdxState == 1) {\u003cbr /\u003e                if (mFlowSort \u0026gt; 999999999999999999) {\u003cbr /\u003e                    mFlowSort = 1\u003cbr /\u003e                }\u003cbr /\u003e                mFlowSort++\u003cbr /\u003e                SendUtils.getInstance().handlePacket(true, byteBuffer, screenMes.frameType)\u003cbr /\u003e            } else {\u003cbr /\u003e                mFlowSort = 1\u003cbr /\u003e            }\u003cbr /\u003e\u003cbr /\u003e        }\u003cbr /\u003e    }\u003cbr /\u003e    \u003cbr /\u003e奇怪哦,小米,华为,OP,都测了,就三星手机会卡.其他手机都 OK.",
+      "Author": "yueji",
+      "PubDate": "2022-07-26T09:54:26Z"
+    },
+    {
       "Title": "面试流程拖很久会有什么后果吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/868846",
       "Description": "现在硕士在读，今年 4 月左右投了字节的实习，过了二面，然后因为地点 /岗位 /时间不太匹配在三面时聊了几句就结束了。面试官说让 hr 帮我看看有没有合适的，后面几个月 hr 给我打过两次电话问我还实习不，我都拒绝了，还是岗位 /时间的问题，说现在不考虑，打算过半年（下学期）再去找实习。如果重新投字节的话会不会影响评价？需要重新面试吗？",
