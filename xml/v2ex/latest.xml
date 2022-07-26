@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>看 pip 的启动脚本看得我人都傻了 - Linux</title>
+      <link>https://www.v2ex.com/t/868827</link>
+      <description>&lt;p&gt;&lt;code&gt;/usr/bin/pip3.10&lt;/code&gt;：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#!/bin/sh&#xA;&#34;exec&#34; &#34;$(dirname $0)/python3.10&#34; &#34;$0&#34; &#34;$@&#34;&#xA;# -*- coding: utf-8 -*-&#xA;import re&#xA;import sys&#xA;from pip._internal.cli.main import main&#xA;if __name__ == &#39;__main__&#39;:&#xA;    sys.argv[0] = re.sub(r&#39;(-script\.pyw|\.exe)?$&#39;, &#39;&#39;, sys.argv[0])&#xA;    sys.exit(main())&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;个人理解是，上述脚本通过 exec ，用指定位置的 python 直接替换掉了当前的 shell 进程，那么为什么 &lt;code&gt;&#34;exec&#34; &#34;$(dirname $0)/python3.10&#34; &#34;$0&#34; &#34;$@&#34;&lt;/code&gt; 之后的代码还能接着执行呢？&lt;/p&gt;&#xA;&lt;p&gt;以及，为什么要这样写呢，拆开写不好吗？&lt;/p&gt;&#xA;</description>
+      <author>MiketsuSmasher</author>
+      <pubDate>26 Jul 2022 08:58:24 +0000</pubDate>
+    </item>
+    <item>
       <title>gpgtar 有没有办法可以不手动输入解压密码? - Linux</title>
       <link>https://www.v2ex.com/t/868826</link>
       <description>&lt;p&gt;用 gpgtar 加密压缩了一个目录, 作为数据的备份.&lt;/p&gt;&#xA;&lt;p&gt;现在有个问题:&#xA;每次解密还原的时候, 都要手动输入一次密钥的口令, 没办法用脚本自动化. &lt;/p&gt;&#xA;&lt;p&gt;有没有办法象 gpg 那样, 通过一个文件来传送密码的?&lt;/p&gt;&#xA;&lt;p&gt;看到 gpgtar 有个参数是 --gpg-args, 不知道是干什么用的.&lt;/p&gt;&#xA;</description>
