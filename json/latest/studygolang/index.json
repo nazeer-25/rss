@@ -53,6 +53,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "发布一个go语言的小项目，感兴趣的联系",
+      "Link": "https://studygolang.com/topics/15717#reply1",
+      "Description": "\u003cp\u003e微：hp800811\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "并发目录大小报错",
       "Link": "https://studygolang.com/topics/15714#reply2",
       "Description": "\u003cp\u003e改版了下书上的计算目录下所有总目录的文件大小，执行后小目录的可以跑出结果，但是根盘就不行，报错，求大佬指导\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;os\u0026quot;\n\t\u0026quot;path/filepath\u0026quot;\n\t\u0026quot;sync\u0026quot;\n\t\u0026quot;time\u0026quot;\n)\n\nvar done = make(chan struct{})\n\nfunc cancelled() bool {\n\tselect {\n\tcase \u0026lt;-done:\n\t\treturn true\n\tdefault:\n\t\treturn false\n\t}\n}\n\nfunc main() {\n\t// Determine the initial directories.\n\troots := os.Args[1:]\n\tif len(roots) == 0 {\n\t\troots = []string{\u0026quot;.\u0026quot;}\n\t}\n\tgo func() {\n\t\tos.Stdin.Read(make([]byte, 1)) // read a single byte\n\t\tclose(done)\n\t}()\n\n\tfileSizes := make(chan map[string]int64)\n\n\tvar n sync.WaitGroup\n\tfor _, root := range roots {\n\t\tn.Add(1)\n\t\tgo walkDir(root, \u0026amp;n, fileSizes)\n\t}\n\tgo func() {\n\t\tn.Wait()\n\t\tclose(fileSizes)\n\t}()\n\n\ttick := time.Tick(500 * time.Millisecond)\n\tvar nbytes = make(map[string]int64)\nloop:\n\tfor {\n\t\tselect {\n\t\tcase \u0026lt;-done:\n\t\t\t// Drain fileSizes to allow existing goroutines to finish.\n\t\t\tfor range fileSizes {\n\t\t\t\t// Do nothing.\n\t\t\t}\n\t\t\treturn\n\t\tcase size, ok := \u0026lt;-fileSizes:\n\t\t\tif !ok {\n\t\t\t\tbreak loop // fileSizes was closed\n\t\t\t}\n\t\t\tfor k, v := range size {\n\t\t\t\tnbytes[k] += v\n\t\t\t}\n\t\tcase \u0026lt;-tick:\n\t\t\t//printDiskUsage(nfiles, nbytes)\n\t\t}\n\t}\n\tfor k, v := range nbytes {\n\t\tif v \u0026gt; 10*1e9 {\n\t\t\tprintDiskUsage(k, v) // final totals\n\t\t}\n\t}\n}\n\nfunc printDiskUsage(nfiles string, nbytes int64) {\n\tfmt.Printf(\u0026quot;【%s】:【%.1f GB】\\n\u0026quot;, nfiles, float64(nbytes)/1e9)\n}\n\nfunc walkDir(dir string, n *sync.WaitGroup, fileSizes chan\u0026lt;- map[string]int64) {\n\n\tdirsSize := make(map[string]int64) //需要有个缓冲，不然并发报错\n\n\tdefer n.Done()\n\tif cancelled() {\n\t\treturn\n\t}\n\tfor _, entry := range dirents(dir) {\n\t\tif entry.IsDir() {\n\t\t\tn.Add(1)\n\t\t\tsubdir := filepath.Join(dir, entry.Name())\n\t\t\tgo walkDir(subdir, n, fileSizes)\n\t\t} else {\n\t\t\tdirsSize[dir] += entry.Size()\n\t\t}\n\t\tfileSizes \u0026lt;- dirsSize\n\t}\n}\n\nvar sema = make(chan struct{}, 20) // concurrency-limiting counting semaphore\n\nfunc dirents(dir string) []os.FileInfo {\n\tselect {\n\tcase sema \u0026lt;- struct{}{}: // acquire token\n\tcase \u0026lt;-done:\n\t\treturn nil // cancelled\n\t}\n\tdefer func() { \u0026lt;-sema }() // release token\n\tf, err := os.Open(dir)\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \u0026quot;du: %v\\n\u0026quot;, err)\n\t\treturn nil\n\t}\n\tdefer f.Close()\n\n\tentries, err := f.Readdir(0) // 0 =\u0026gt; no limit; read all entries\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \u0026quot;du: %v\\n\u0026quot;, err)\n\t\t// Don't return: Readdir may return partial results.\n\t}\n\treturn entries\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220724/535fee11a1ea9443f6623e040eb3c9c7.png\" alt=\"企业微信截图_5d112c50-e290-4b2f-a66a-56458d21cd43.png\" /\u003e\u003c/p\u003e\n",
@@ -60,23 +67,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "win10 vscode调试go代码，安装dlv插件报错：",
-      "Link": "https://studygolang.com/topics/15713#reply1",
-      "Description": "\u003cp\u003edlv: failed to install dlv(github.com/go-delve/delve/cmd/dlv@latest): Error: Command failed: E:\\go\\bin\\go.exe install -v github.com/go-delve/delve/cmd/dlv@latest\npkg\\mod\\github.com\\go-delve\\delve@v1.9.0\\service\\debugger\\debugger.go:28:2: found packages native (proc.go) and your_operating_system_and_architecture_combination_is_not_supported_by_delve (support_sentinel.go) in E:\\workspace\\go\\pkg\\mod\\github.com\\go-delve\\delve@v1.9.0\\pkg\\proc\\native\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "优维低代码：Use Resolves",
       "Link": "https://studygolang.com/articles/35787#reply0",
       "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "发布一个go语言的小项目，感兴趣的联系",
-      "Link": "https://studygolang.com/topics/15717#reply1",
-      "Description": "\u003cp\u003e微：hp800811\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -103,7 +96,7 @@
     },
     {
       "Title": "不懂就问, 关于动态类型的疑惑",
-      "Link": "https://studygolang.com/topics/15507#reply6",
+      "Link": "https://studygolang.com/topics/15507#reply9",
       "Description": "\u003cp\u003e**我是个刚写go的小白, 之前写前端的, 所以以下问题可能比较傻, 如果引起大佬不适请见谅 **\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e写了个web服务, 感觉大部分业务模块的增删改查操作可以通用, 所以在model包里写了个通用的struct;\u003cbr\u003e\n\u003ccode\u003e\npackage model\ntype _model struct {\nTableName string\nParseQuery func(map[string]any, *gorm.DB) *gorm.DB \n...\n}\nfunc (model Model) GetById(id uint) error {....}\nfunc (model Model) Create(data any) error {....}\n....\n// 其他通用的方法\n\u003c/code\u003e\u003cbr\u003e\n\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e然后其他各个业务模块都继承这个struct\u003cbr\u003e\n\u003ccode\u003e\n// 这个是bar业务模块的文件bar.go\npackage model\n// 声明这个业务模块的表结构\ntype Bar struct {\nID         uint           `json:\u0026quot;id,omitempty\u0026quot; gorm:\u0026quot;primarykey;uniqueIndex\u0026quot;`\nName        string `json:\u0026quot;name,omitempty\u0026quot; gorm:\u0026quot;type:varchar(32);default:NULL\u0026quot;`\nPid         uint   `json:\u0026quot;pid,omitempty\u0026quot; gorm:\u0026quot;type:int\u0026quot;`\nStatus      uint   `json:\u0026quot;status,omitempty\u0026quot; gorm:\u0026quot;type:bytes;default:1\u0026quot;`\n}\n// bar业务模块继承_model\ntype barFromModel struct {\n_model\n}\n// 实例化\nvar BarModel barFromModel\nfunc init(){\nBarModel.TableName = \u0026quot;bars\u0026quot;\nBarModelParseQuery = func(...)  *gorm.DB {....}\n...\n}\n// 定义一些该模块特有的方法\nfunc (model BarModel) MyMethod(){.....}\n\u003c/code\u003e\u003cbr\u003e\n\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e在api包中调用model包中的相关方法\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage apibar\nfunc Create(c *gin.Context) {\n....\n// 调用通用方法\nerr := model.BarModel.create(.....)\n....\n}\n\u003c/code\u003e\u003c/pre\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003cstrong\u003e问题来了\u003c/strong\u003e\u003cbr\u003e\n如果我想在定义_model的方法时, 明确的知道是哪个模块在调用这个通用方, 并明确的获得此模块的表结构(type), 甚至在通用方法中通用方法中实例化业务模块的表结构\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage model\ntype _model struct {\nTableName string\nParseQuery func(map[string]any, *gorm.DB) *gorm.DB \n...\n}\nfunc (model Model) GetById(id uint) error {....}\nfunc (model Model) Create(data any) error {\n/*============================\n我想在这里通过 model获得当前调用通用方法的子类是谁,\n如果能在这里明确获得Bar(表结构的结构体类型)就好了\n如果能实例化上述结构体就更好了\no2 请问大佬们, 可以做到吗?\n=============================*/\n}\n....\n\u003c/code\u003e\u003c/pre\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -119,6 +112,13 @@
       "Title": "芭比Q了，国产数据库成了我们推广落地go-zero的最大阻力",
       "Link": "https://studygolang.com/topics/15336#reply22",
       "Description": "\u003cp\u003e我们公司在用国产数据库（达梦、PolarDb、华为高斯、OceanBase），而我们项目组主要是用OceanBase。\n然而，吹牛逼上天的OceanBase却没有 go driver的数据库驱动。\n这下子怎么玩呢？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "win10 vscode调试go代码，安装dlv插件报错：",
+      "Link": "https://studygolang.com/topics/15713#reply1",
+      "Description": "\u003cp\u003edlv: failed to install dlv(github.com/go-delve/delve/cmd/dlv@latest): Error: Command failed: E:\\go\\bin\\go.exe install -v github.com/go-delve/delve/cmd/dlv@latest\npkg\\mod\\github.com\\go-delve\\delve@v1.9.0\\service\\debugger\\debugger.go:28:2: found packages native (proc.go) and your_operating_system_and_architecture_combination_is_not_supported_by_delve (support_sentinel.go) in E:\\workspace\\go\\pkg\\mod\\github.com\\go-delve\\delve@v1.9.0\\pkg\\proc\\native\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -175,6 +175,13 @@
       "Title": "工作区多模块使用`go mod tidy`失败",
       "Link": "https://studygolang.com/topics/15694#reply4",
       "Description": "\u003cp\u003ego1.18支持工作区，我将公共代码都移到工作区，这样就有A模块和B模块，其中B模块是公共代码，A模块依赖B模块。\u003c/p\u003e\n\n\u003cp\u003e由于工作区的支持，可以直接在工作区目录运行和调试A模块；但是如果要使用\u003ccode\u003ego mod tidy\u003c/code\u003e 命令，则必须进入A模块，此时提示无法找到B模块（因为B模块是本地的，当然找不到）.\u003c/p\u003e\n\n\u003cp\u003e我想请问，在工作区开发模式下，如何使用 \u003ccode\u003ego mod tidy\u003c/code\u003e命令呢，是不是我的使用方式有问题？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "不懂就问, 关于动态类型的疑惑",
+      "Link": "https://studygolang.com/topics/15507#reply6",
+      "Description": "\u003cp\u003e**我是个刚写go的小白, 之前写前端的, 所以以下问题可能比较傻, 如果引起大佬不适请见谅 **\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e写了个web服务, 感觉大部分业务模块的增删改查操作可以通用, 所以在model包里写了个通用的struct;\u003cbr\u003e\n\u003ccode\u003e\npackage model\ntype _model struct {\nTableName string\nParseQuery func(map[string]any, *gorm.DB) *gorm.DB \n...\n}\nfunc (model Model) GetById(id uint) error {....}\nfunc (model Model) Create(data any) error {....}\n....\n// 其他通用的方法\n\u003c/code\u003e\u003cbr\u003e\n\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e然后其他各个业务模块都继承这个struct\u003cbr\u003e\n\u003ccode\u003e\n// 这个是bar业务模块的文件bar.go\npackage model\n// 声明这个业务模块的表结构\ntype Bar struct {\nID         uint           `json:\u0026quot;id,omitempty\u0026quot; gorm:\u0026quot;primarykey;uniqueIndex\u0026quot;`\nName        string `json:\u0026quot;name,omitempty\u0026quot; gorm:\u0026quot;type:varchar(32);default:NULL\u0026quot;`\nPid         uint   `json:\u0026quot;pid,omitempty\u0026quot; gorm:\u0026quot;type:int\u0026quot;`\nStatus      uint   `json:\u0026quot;status,omitempty\u0026quot; gorm:\u0026quot;type:bytes;default:1\u0026quot;`\n}\n// bar业务模块继承_model\ntype barFromModel struct {\n_model\n}\n// 实例化\nvar BarModel barFromModel\nfunc init(){\nBarModel.TableName = \u0026quot;bars\u0026quot;\nBarModelParseQuery = func(...)  *gorm.DB {....}\n...\n}\n// 定义一些该模块特有的方法\nfunc (model BarModel) MyMethod(){.....}\n\u003c/code\u003e\u003cbr\u003e\n\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e在api包中调用model包中的相关方法\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage apibar\nfunc Create(c *gin.Context) {\n....\n// 调用通用方法\nerr := model.BarModel.create(.....)\n....\n}\n\u003c/code\u003e\u003c/pre\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e\u003cstrong\u003e问题来了\u003c/strong\u003e\u003cbr\u003e\n如果我想在定义_model的方法时, 明确的知道是哪个模块在调用这个通用方, 并明确的获得此模块的表结构(type), 甚至在通用方法中通用方法中实例化业务模块的表结构\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage model\ntype _model struct {\nTableName string\nParseQuery func(map[string]any, *gorm.DB) *gorm.DB \n...\n}\nfunc (model Model) GetById(id uint) error {....}\nfunc (model Model) Create(data any) error {\n/*============================\n我想在这里通过 model获得当前调用通用方法的子类是谁,\n如果能在这里明确获得Bar(表结构的结构体类型)就好了\n如果能实例化上述结构体就更好了\no2 请问大佬们, 可以做到吗?\n=============================*/\n}\n....\n\u003c/code\u003e\u003c/pre\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
