@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "[全职远程][长期稳定] 招募 产品/UI 设计师 - 酷工作",
+      "Link": "https://www.v2ex.com/t/868989",
+      "Description": "\u003ch3\u003e关于我们\u003c/h3\u003e\n\u003cp\u003e我们是一个发展中的软件技术团队，自 16 年成立以来，帮助了很多美国创业公司发展壮大。我们致力于为互联网初创公司提供高质量的技术支持，服务内容包括了社交、支付、工具、内容、图像处理等移动端及网页应用。由于业务不断发展，希望寻找到可以长期合作的全职 产品 /UI 设计师加入团队。\u003c/p\u003e\n\u003ch3\u003e希望你具有\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e本科及以上学历，美术设计及相关专业\u003c/li\u003e\n\u003cli\u003e丰富的响应式网站和移动产品 /UI 设计经验，对用户体验有较深入的研究与理解\u003c/li\u003e\n\u003cli\u003e熟练掌握 AI 、PS 、AE 、Sketch 等设计软件，能独立完成界面相关视觉设计\u003c/li\u003e\n\u003cli\u003e有一定的信息收集、数据分析能力，能够从产品定位及用户角度设计产品并通过数据验证\u003c/li\u003e\n\u003cli\u003e有良好的沟通和团队协作能力\u003c/li\u003e\n\u003cli\u003e良好的英语读写能力\u003c/li\u003e\n\u003cli\u003e熟悉 HTML / CSS 者优先\u003c/li\u003e\n\u003cli\u003e欢迎应届生申请\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e薪资范围\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e薪资 8K 起\u003c/li\u003e\n\u003cli\u003e能力出众者另议\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e我们能提供\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e灵活的工作地点\u003c/li\u003e\n\u003cli\u003e社保补贴，期权激励\u003c/li\u003e\n\u003cli\u003e享有带薪假期\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch4\u003e联系方式\u003c/h4\u003e\n\u003cul\u003e\n\u003cli\u003e邮件： \u003ca href=\"mailto:jobs@theteam247.com\"\u003ejobs@theteam247.com\u003c/a\u003e \u003c/li\u003e\n\u003cli\u003e电话 /微信：18971229147\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003ePS：简历请附带独立设计作品集\u003c/p\u003e\n",
+      "Author": "nito61",
+      "PubDate": "2022-07-27T04:12:41Z"
+    },
+    {
+      "Title": "请问大家做一个支持同时在线 300 人的古董预定平台，收费 3w 贵吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/868987",
+      "Description": "\u003cp\u003e接到一个朋友的朋友的单子，需求如下\n1.同时在线 300 人，\n2.业务页面大概有 20 来个\n3.一整套系统，搞定服务器，域名，证书，前端，后端，还有管理系统（这里页面起码也有十个吧）等等\n4.平台不包括线上交易，线上下单，线下交易\n请问大家工期 20 天，收费 3w 贵吗？多少工期和费用合理？\u003c/p\u003e\n",
+      "Author": "wliansheng",
+      "PubDate": "2022-07-27T03:52:59Z"
+    },
+    {
       "Title": "React 中如何可以实现 vue3.2 新增的 effectScope 特性呢？ - React",
       "Link": "https://www.v2ex.com/t/868986",
       "Description": "\u003cblockquote\u003e\n\u003cp\u003eeffectScope 可以让不同的组件之间共享相同的依赖存活周期，即可以实现多个组件共享相同状态，并且实现所有的组件都被销毁后触发响应式状态销毁，这样优化了相同的内容重复注册，还共享了数据状态\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003eimport {ref, onScopeDispose, effectScope} from 'vue';\n\nexport function createSharedComposable(composable) {\n    let subscribers = 0\n    let state, scope\n\n    const dispose = () =\u0026gt; {\n        if (scope \u0026amp;\u0026amp; --subscribers \u0026lt;= 0) {\n            scope.stop()\n            state = scope = null\n        }\n    }\n\n    return (...args) =\u0026gt; {\n        subscribers++\n        if (!state) {\n            scope = effectScope(true)\n            state = scope.run(() =\u0026gt; composable(...args))\n        }\n        onScopeDispose(dispose)\n        return state\n    }\n}\n\nexport let useShareMouse = createSharedComposable(useMouse)\n\nexport function useMouse() {\n    const x = ref(0)\n    const y = ref(0)\n\n    function handler(e) {\n        x.value = e.x\n        y.value = e.y\n    }\n\n    window.addEventListener('mousemove', handler)\n\n    onScopeDispose(() =\u0026gt; {\n        console.log('onUnmounted')\n        window.removeEventListener('mousemove', handler)\n    })\n\n    return {x, y}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",

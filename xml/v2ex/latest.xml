@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>[全职远程][长期稳定] 招募 产品/UI 设计师 - 酷工作</title>
+      <link>https://www.v2ex.com/t/868989</link>
+      <description>&lt;h3&gt;关于我们&lt;/h3&gt;&#xA;&lt;p&gt;我们是一个发展中的软件技术团队，自 16 年成立以来，帮助了很多美国创业公司发展壮大。我们致力于为互联网初创公司提供高质量的技术支持，服务内容包括了社交、支付、工具、内容、图像处理等移动端及网页应用。由于业务不断发展，希望寻找到可以长期合作的全职 产品 /UI 设计师加入团队。&lt;/p&gt;&#xA;&lt;h3&gt;希望你具有&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;本科及以上学历，美术设计及相关专业&lt;/li&gt;&#xA;&lt;li&gt;丰富的响应式网站和移动产品 /UI 设计经验，对用户体验有较深入的研究与理解&lt;/li&gt;&#xA;&lt;li&gt;熟练掌握 AI 、PS 、AE 、Sketch 等设计软件，能独立完成界面相关视觉设计&lt;/li&gt;&#xA;&lt;li&gt;有一定的信息收集、数据分析能力，能够从产品定位及用户角度设计产品并通过数据验证&lt;/li&gt;&#xA;&lt;li&gt;有良好的沟通和团队协作能力&lt;/li&gt;&#xA;&lt;li&gt;良好的英语读写能力&lt;/li&gt;&#xA;&lt;li&gt;熟悉 HTML / CSS 者优先&lt;/li&gt;&#xA;&lt;li&gt;欢迎应届生申请&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;薪资范围&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;薪资 8K 起&lt;/li&gt;&#xA;&lt;li&gt;能力出众者另议&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;我们能提供&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;灵活的工作地点&lt;/li&gt;&#xA;&lt;li&gt;社保补贴，期权激励&lt;/li&gt;&#xA;&lt;li&gt;享有带薪假期&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4&gt;联系方式&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;邮件： &lt;a href=&#34;mailto:jobs@theteam247.com&#34;&gt;jobs@theteam247.com&lt;/a&gt; &lt;/li&gt;&#xA;&lt;li&gt;电话 /微信：18971229147&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;PS：简历请附带独立设计作品集&lt;/p&gt;&#xA;</description>
+      <author>nito61</author>
+      <pubDate>27 Jul 2022 04:12:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问大家做一个支持同时在线 300 人的古董预定平台，收费 3w 贵吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/868987</link>
+      <description>&lt;p&gt;接到一个朋友的朋友的单子，需求如下&#xA;1.同时在线 300 人，&#xA;2.业务页面大概有 20 来个&#xA;3.一整套系统，搞定服务器，域名，证书，前端，后端，还有管理系统（这里页面起码也有十个吧）等等&#xA;4.平台不包括线上交易，线上下单，线下交易&#xA;请问大家工期 20 天，收费 3w 贵吗？多少工期和费用合理？&lt;/p&gt;&#xA;</description>
+      <author>wliansheng</author>
+      <pubDate>27 Jul 2022 03:52:59 +0000</pubDate>
+    </item>
+    <item>
       <title>React 中如何可以实现 vue3.2 新增的 effectScope 特性呢？ - React</title>
       <link>https://www.v2ex.com/t/868986</link>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;effectScope 可以让不同的组件之间共享相同的依赖存活周期，即可以实现多个组件共享相同状态，并且实现所有的组件都被销毁后触发响应式状态销毁，这样优化了相同的内容重复注册，还共享了数据状态&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;pre&gt;&lt;code&gt;import {ref, onScopeDispose, effectScope} from &#39;vue&#39;;&#xA;&#xA;export function createSharedComposable(composable) {&#xA;    let subscribers = 0&#xA;    let state, scope&#xA;&#xA;    const dispose = () =&amp;gt; {&#xA;        if (scope &amp;amp;&amp;amp; --subscribers &amp;lt;= 0) {&#xA;            scope.stop()&#xA;            state = scope = null&#xA;        }&#xA;    }&#xA;&#xA;    return (...args) =&amp;gt; {&#xA;        subscribers++&#xA;        if (!state) {&#xA;            scope = effectScope(true)&#xA;            state = scope.run(() =&amp;gt; composable(...args))&#xA;        }&#xA;        onScopeDispose(dispose)&#xA;        return state&#xA;    }&#xA;}&#xA;&#xA;export let useShareMouse = createSharedComposable(useMouse)&#xA;&#xA;export function useMouse() {&#xA;    const x = ref(0)&#xA;    const y = ref(0)&#xA;&#xA;    function handler(e) {&#xA;        x.value = e.x&#xA;        y.value = e.y&#xA;    }&#xA;&#xA;    window.addEventListener(&#39;mousemove&#39;, handler)&#xA;&#xA;    onScopeDispose(() =&amp;gt; {&#xA;        console.log(&#39;onUnmounted&#39;)&#xA;        window.removeEventListener(&#39;mousemove&#39;, handler)&#xA;    })&#xA;&#xA;    return {x, y}&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
