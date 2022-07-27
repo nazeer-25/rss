@@ -4,6 +4,89 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>React 中如何可以实现 vue3.2 新增的 effectScope 特性呢？ - React</title>
+      <link>https://www.v2ex.com/t/868986</link>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;effectScope 可以让不同的组件之间共享相同的依赖存活周期，即可以实现多个组件共享相同状态，并且实现所有的组件都被销毁后触发响应式状态销毁，这样优化了相同的内容重复注册，还共享了数据状态&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;pre&gt;&lt;code&gt;import {ref, onScopeDispose, effectScope} from &#39;vue&#39;;&#xA;&#xA;export function createSharedComposable(composable) {&#xA;    let subscribers = 0&#xA;    let state, scope&#xA;&#xA;    const dispose = () =&amp;gt; {&#xA;        if (scope &amp;amp;&amp;amp; --subscribers &amp;lt;= 0) {&#xA;            scope.stop()&#xA;            state = scope = null&#xA;        }&#xA;    }&#xA;&#xA;    return (...args) =&amp;gt; {&#xA;        subscribers++&#xA;        if (!state) {&#xA;            scope = effectScope(true)&#xA;            state = scope.run(() =&amp;gt; composable(...args))&#xA;        }&#xA;        onScopeDispose(dispose)&#xA;        return state&#xA;    }&#xA;}&#xA;&#xA;export let useShareMouse = createSharedComposable(useMouse)&#xA;&#xA;export function useMouse() {&#xA;    const x = ref(0)&#xA;    const y = ref(0)&#xA;&#xA;    function handler(e) {&#xA;        x.value = e.x&#xA;        y.value = e.y&#xA;    }&#xA;&#xA;    window.addEventListener(&#39;mousemove&#39;, handler)&#xA;&#xA;    onScopeDispose(() =&amp;gt; {&#xA;        console.log(&#39;onUnmounted&#39;)&#xA;        window.removeEventListener(&#39;mousemove&#39;, handler)&#xA;    })&#xA;&#xA;    return {x, y}&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>SystemLight</author>
+      <pubDate>27 Jul 2022 03:51:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>人在加拿大，为何就知乎和百度云老是要验证手机号，别的网站/APP 不需要？ - 问与答</title>
+      <link>https://www.v2ex.com/t/868985</link>
+      <description>&lt;p&gt;知乎和百度云这两网站，每天第一次登陆的时候都要验证手机号，烦死了。&lt;/p&gt;&#xA;&lt;p&gt;人在国外的老哥们，你们遇到这样的问题了吗，怎么破？&lt;/p&gt;&#xA;</description>
+      <author>ZC3746</author>
+      <pubDate>27 Jul 2022 03:49:58 +0000</pubDate>
+    </item>
+    <item>
+      <title>IDEA 2022.2 开启 ZGC 的问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/868984</link>
+      <description>&lt;p&gt;今天发布了 2022.2 ，MacOS 平台下尝试开下 ZGC&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;-Xmx2048m&#xA;-XX:+UseZGC&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;开之前占 2.5 GB 内存，开之后占 6 GB 内存，醉了&lt;/p&gt;&#xA;</description>
+      <author>ojh</author>
+      <pubDate>27 Jul 2022 03:49:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>IDEA 2022.2 正式发布， Runtime 17 终于到正式版了 - 程序员</title>
+      <link>https://www.v2ex.com/t/868983</link>
+      <description>&lt;p&gt;拯救 intel 芯片 MBP 的 JetBrains Runtime 17 终于实装了。&lt;/p&gt;&#xA;</description>
+      <author>zero47</author>
+      <pubDate>27 Jul 2022 03:49:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>Linux github 一些问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/868982</link>
+      <description>&lt;ol&gt;&#xA;&lt;li&gt;这里竟然只有一个 branch&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/torvalds/linux&#34; rel=&#34;nofollow&#34;&gt;https://github.com/torvalds/linux&lt;/a&gt;&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;linux kernel 看起来还没有加入对 rust 的支持？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>luffy</author>
+      <pubDate>27 Jul 2022 03:47:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>有字节跳动的前端吗，你们的前端公共库 CDN 有个 BUG - 全球工单系统</title>
+      <link>https://www.v2ex.com/t/868981</link>
+      <description>&lt;p&gt;同样是 &lt;code&gt;layui.js&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;这是字节的 CDN： &lt;a href=&#34;https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/layui/2.5.7/layui.js&#34; rel=&#34;nofollow&#34;&gt;https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/layui/2.5.7/layui.js&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;这是 cdnjs 的 CDN： &lt;a href=&#34;https://cdnjs.cloudflare.com/ajax/libs/layui/2.5.7/layui.js&#34; rel=&#34;nofollow&#34;&gt;https://cdnjs.cloudflare.com/ajax/libs/layui/2.5.7/layui.js&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;可以看出字节的 CDN 的代码被莫名截断了，导致整个 JS 出错。&lt;/p&gt;&#xA;&lt;p&gt;麻烦字节的朋友反馈和排查下。&lt;/p&gt;&#xA;</description>
+      <author>MarkP</author>
+      <pubDate>27 Jul 2022 03:47:03 +0000</pubDate>
+    </item>
+    <item>
+      <title>福田区石厦北缔馨园一房一厅户型出租 - 深圳</title>
+      <link>https://www.v2ex.com/t/868977</link>
+      <description>&lt;h1&gt;[整租] 缔馨园&lt;/h1&gt;&#xA;&lt;h2&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;孩子小一入学，目前已尘埃落定，故出租此房，目前业主自住，看房方便。&#xA;业主直租，中介勿扰哦。 无中介费及任何隐藏费用~&#xA;&lt;strong&gt;房屋不允许养宠物&lt;/strong&gt;&#xA;原因：由于有些人群对宠物的毛过敏，为了便于出租以及减少纠纷，故不允许养宠物，请见谅&lt;/p&gt;&#xA;&lt;h2&gt;房屋介绍&lt;/h2&gt;&#xA;&lt;p&gt;位置：福田区石厦北一街缔馨园&#xA;楼层：3 楼&#xA;朝向：北向，但夕晒不严重，因为对面有房屋挡住&#xA;面积：42m² 户型：一房一厅一卫&#xA;周边配套：楼下的商铺就有包子铺、沙县、百果园，7-11 等，周边有传统的肉菜市场，天虹商场，马成时代广场，离 COCO PARK 也只有一个地铁站；由于离福田区委比较近，附近经常有人巡逻，确保治安；附近还有一个社区公园，虽然不大，但平时去跑跑步什么的完全没问题，想游泳可以去福田区委的游泳池是对外开放的，对面的小区也有游泳池对外开放；另外平时学校开学楼下有两个免费核酸点，放假用了对面学校操场做为免费核酸点，做核酸非常方便。&#xA;租金：5200 元 /月（自如同户型 5700+起~），押二付一；水电物管燃气费，每个月提供账单截图后再另外收取；&#xA;交通：距离 3 /7 号线石厦站 350 米，南门由于疫情没有开放，开放后会更近&lt;/p&gt;&#xA;&lt;p&gt;入住时间：即时入住&lt;/p&gt;&#xA;&lt;p&gt;房屋清单：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;名称&lt;/th&gt;&#xA;&lt;th&gt;品牌&lt;/th&gt;&#xA;&lt;th&gt;数量&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;空调&lt;/td&gt;&#xA;&lt;td&gt;美的&lt;/td&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;电视&lt;/td&gt;&#xA;&lt;td&gt;小米&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;洗衣机&lt;/td&gt;&#xA;&lt;td&gt;海尔&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;热水器&lt;/td&gt;&#xA;&lt;td&gt;万和&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;抽油烟机&lt;/td&gt;&#xA;&lt;td&gt;奇田&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;燃气灶&lt;/td&gt;&#xA;&lt;td&gt;美的&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;冰箱&lt;/td&gt;&#xA;&lt;td&gt;西门子&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;即热饮水机&lt;/td&gt;&#xA;&lt;td&gt;云米&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;小爱音箱&lt;/td&gt;&#xA;&lt;td&gt;小米&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;智能风扇 E3&lt;/td&gt;&#xA;&lt;td&gt;小米&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;空调伴侣&lt;/td&gt;&#xA;&lt;td&gt;小米&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;鹿客智能指纹锁&lt;/td&gt;&#xA;&lt;td&gt;鹿客&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;监控摄像头（可解绑）&lt;/td&gt;&#xA;&lt;td&gt;小蚁&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;以上设备除智能锁外的小件，可自行选择是否需要&#xA;智能锁不可拆除，可现场尝试能否换绑，如不能换绑，会用米家分享设备并提供管理员权限，并当面删除全部指纹和密码；&lt;/p&gt;&#xA;&lt;h2&gt;福利&lt;/h2&gt;&#xA;&lt;p&gt;1 、300M 移动宽带可免费使用到今年 11 月 1 日；&#xA;2 、可提供刷好 OpenWrt 路由器供使用；&#xA;3 、续租不涨租（由于大儿子 2024 年需要上中学，如学校要求核实实际居住，则会收回房屋自住，23 年签合同时会只签到 2024 年 4 月底）&lt;/p&gt;&#xA;&lt;h2&gt;联系方式&lt;/h2&gt;&#xA;&lt;p&gt;dng6c3RheXJlYWxTWg==&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.wellcee.com/rent-apartment/1658838695365917&#34; rel=&#34;nofollow&#34;&gt;看图可到 wellcee&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>echoo00</author>
+      <pubDate>27 Jul 2022 03:32:24 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有快速搭建 socks5 / http 正向代理服务器的方案？ - 问与答</title>
+      <link>https://www.v2ex.com/t/868976</link>
+      <description>&lt;p&gt;我经常有这样的需求：在我的电脑上搭建一个 http / socks5 代理服务器，然后同局域网的其他主机连我的电脑代理上网。&lt;/p&gt;&#xA;&lt;p&gt;现在的解决方案一般是用 shadowsocks 或者 frp 搭建一个，但感觉属于杀鸡用牛刀。&lt;/p&gt;&#xA;&lt;p&gt;有什么简单快捷的工具吗？最好是支持 windows 的。&lt;/p&gt;&#xA;</description>
+      <author>villivateur</author>
+      <pubDate>27 Jul 2022 03:26:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>2022 年了， iPhone 怎么装小飞机出国 - 程序员</title>
+      <link>https://www.v2ex.com/t/868975</link>
+      <description>&lt;p&gt;有什么简单 安全 方便的办法吗&lt;/p&gt;&#xA;</description>
+      <author>godfunc</author>
+      <pubDate>27 Jul 2022 03:26:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>safari 有没有办法 暂时/临时 allow insure content？ - 前端开发</title>
+      <link>https://www.v2ex.com/t/868974</link>
+      <description>&lt;p&gt;我们自己做的网站，有一个功能，就是点击一个页面上的一个按钮，能够打开本地的一个应用。（其实，zoom 也有类似的，点击页面上一个按钮，打开本地的 zoom app ）&lt;/p&gt;&#xA;&lt;p&gt;现在在 chrome &amp;amp; edge 都没有问题，但是 safari 有问题，&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;[blocked] The page at https://&amp;lt;our-web-site&amp;gt; was not allowed to run insecure content from ws://127.0.0.1:12345/.&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我们本地应用，是监听 12345 的端口，能够和 website 通讯。&lt;/p&gt;&#xA;&lt;p&gt;google 了一下，其实和这个问题有点像，&lt;a href=&#34;https://stackoverflow.com/questions/39076180/https-page-was-not-allowed-to-run-insecure-content-from-safari-extension-uri&#34; rel=&#34;nofollow&#34;&gt;https://stackoverflow.com/questions/39076180/https-page-was-not-allowed-to-run-insecure-content-from-safari-extension-uri&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;但是很遗憾，最新版的 safari 没有找到哪里有类似的设置 unblock 。&lt;/p&gt;&#xA;&lt;p&gt;我试着打开 safari 的 develop 菜单，然后把所有的这些都勾选上了。还是不能工作。&#xA;&lt;img alt=&#34;safari setting2.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/07/27/8sNvodwam5rOZhj.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;所以，来请教一下，是我哪里理解错了，或者有没有什么 workaround ，方法等等。谢谢！&lt;/p&gt;&#xA;&lt;p&gt;macOS: 12.3.1&#xA;safari: Version 15.4 (17613.1.17.1.13)&lt;/p&gt;&#xA;</description>
+      <author>yazoox</author>
+      <pubDate>27 Jul 2022 03:21:03 +0000</pubDate>
+    </item>
+    <item>
+      <title>idea 换了新 UI 之后，怎么在右上角用 jrebel&amp;XRebel 运行项目？找不到 jrebel 的图标了 - 问与答</title>
+      <link>https://www.v2ex.com/t/868973</link>
+      <description>&lt;p&gt;1.就是旧的 UI 右上角不是可以用 Jrebel 运行项目嘛&#xA;2.然后切换到新 UI 右上角只有 run 和 debug 项目了，jrebel 运行的图标不见了，也找不到运行的入口&lt;/p&gt;&#xA;</description>
+      <author>zxy148</author>
+      <pubDate>27 Jul 2022 03:20:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>同学建筑设计的，来杭州快一个月了，面试机会只有 4-5 次，要不要建议他转行。然后想问下大家，都比较看好啥行业。他的哥哥，想让他搞直播运营，但是看他的态度有点不想放弃他的专业（毕竟学了五年） - 问与答</title>
+      <link>https://www.v2ex.com/t/868972</link>
+      <author>bam9</author>
+      <pubDate>27 Jul 2022 03:19:58 +0000</pubDate>
+    </item>
+    <item>
       <title>[上海求职]最近面上了国企外包，有很多疑问，希望有人能帮我解答一下 - 酷工作</title>
       <link>https://www.v2ex.com/t/868970</link>
       <description>&lt;p&gt;待业太久，处于高不成低不就的状态。由于 PHP 的机会很少就往其他岗位试探了一下，误打误撞投了个“云计算”的岗位，但是是个外包的岗位，外包到上海电信。hr 说年薪大概在 12-15w ，但是岗位工资目前较模糊，说是岗位工资和实际到手一点关系都没有，没跟国企外包打过交道心里犯了很多嘀咕，较之前的收入可定会断崖式下降。不知道还有其他需要注意的地方吗？大佬们给个建议。&#xA;希望有相似经历的大佬也能分享一下。&#xA;人力公司：&lt;a href=&#34;https://www.tianyancha.com/company/1261251994&#34; rel=&#34;nofollow&#34;&gt;上海安迪人力资源服务有限公司&lt;/a&gt;&#xA;前路漫漫 又有很多不确定性，这次是彻底的。&lt;/p&gt;&#xA;</description>

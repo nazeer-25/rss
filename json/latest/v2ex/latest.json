@@ -4,6 +4,90 @@
   "Description": "",
   "Items": [
     {
+      "Title": "React 中如何可以实现 vue3.2 新增的 effectScope 特性呢？ - React",
+      "Link": "https://www.v2ex.com/t/868986",
+      "Description": "\u003cblockquote\u003e\n\u003cp\u003eeffectScope 可以让不同的组件之间共享相同的依赖存活周期，即可以实现多个组件共享相同状态，并且实现所有的组件都被销毁后触发响应式状态销毁，这样优化了相同的内容重复注册，还共享了数据状态\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003eimport {ref, onScopeDispose, effectScope} from 'vue';\n\nexport function createSharedComposable(composable) {\n    let subscribers = 0\n    let state, scope\n\n    const dispose = () =\u0026gt; {\n        if (scope \u0026amp;\u0026amp; --subscribers \u0026lt;= 0) {\n            scope.stop()\n            state = scope = null\n        }\n    }\n\n    return (...args) =\u0026gt; {\n        subscribers++\n        if (!state) {\n            scope = effectScope(true)\n            state = scope.run(() =\u0026gt; composable(...args))\n        }\n        onScopeDispose(dispose)\n        return state\n    }\n}\n\nexport let useShareMouse = createSharedComposable(useMouse)\n\nexport function useMouse() {\n    const x = ref(0)\n    const y = ref(0)\n\n    function handler(e) {\n        x.value = e.x\n        y.value = e.y\n    }\n\n    window.addEventListener('mousemove', handler)\n\n    onScopeDispose(() =\u0026gt; {\n        console.log('onUnmounted')\n        window.removeEventListener('mousemove', handler)\n    })\n\n    return {x, y}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "SystemLight",
+      "PubDate": "2022-07-27T03:51:07Z"
+    },
+    {
+      "Title": "人在加拿大，为何就知乎和百度云老是要验证手机号，别的网站/APP 不需要？ - 问与答",
+      "Link": "https://www.v2ex.com/t/868985",
+      "Description": "\u003cp\u003e知乎和百度云这两网站，每天第一次登陆的时候都要验证手机号，烦死了。\u003c/p\u003e\n\u003cp\u003e人在国外的老哥们，你们遇到这样的问题了吗，怎么破？\u003c/p\u003e\n",
+      "Author": "ZC3746",
+      "PubDate": "2022-07-27T03:49:58Z"
+    },
+    {
+      "Title": "IDEA 2022.2 开启 ZGC 的问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/868984",
+      "Description": "\u003cp\u003e今天发布了 2022.2 ，MacOS 平台下尝试开下 ZGC\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e-Xmx2048m\n-XX:+UseZGC\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e开之前占 2.5 GB 内存，开之后占 6 GB 内存，醉了\u003c/p\u003e\n",
+      "Author": "ojh",
+      "PubDate": "2022-07-27T03:49:30Z"
+    },
+    {
+      "Title": "IDEA 2022.2 正式发布， Runtime 17 终于到正式版了 - 程序员",
+      "Link": "https://www.v2ex.com/t/868983",
+      "Description": "\u003cp\u003e拯救 intel 芯片 MBP 的 JetBrains Runtime 17 终于实装了。\u003c/p\u003e\n",
+      "Author": "zero47",
+      "PubDate": "2022-07-27T03:49:12Z"
+    },
+    {
+      "Title": "Linux github 一些问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/868982",
+      "Description": "\u003col\u003e\n\u003cli\u003e这里竟然只有一个 branch\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/torvalds/linux\" rel=\"nofollow\"\u003ehttps://github.com/torvalds/linux\u003c/a\u003e\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003elinux kernel 看起来还没有加入对 rust 的支持？\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "luffy",
+      "PubDate": "2022-07-27T03:47:04Z"
+    },
+    {
+      "Title": "有字节跳动的前端吗，你们的前端公共库 CDN 有个 BUG - 全球工单系统",
+      "Link": "https://www.v2ex.com/t/868981",
+      "Description": "\u003cp\u003e同样是 \u003ccode\u003elayui.js\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e这是字节的 CDN： \u003ca href=\"https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/layui/2.5.7/layui.js\" rel=\"nofollow\"\u003ehttps://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/layui/2.5.7/layui.js\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e这是 cdnjs 的 CDN： \u003ca href=\"https://cdnjs.cloudflare.com/ajax/libs/layui/2.5.7/layui.js\" rel=\"nofollow\"\u003ehttps://cdnjs.cloudflare.com/ajax/libs/layui/2.5.7/layui.js\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e可以看出字节的 CDN 的代码被莫名截断了，导致整个 JS 出错。\u003c/p\u003e\n\u003cp\u003e麻烦字节的朋友反馈和排查下。\u003c/p\u003e\n",
+      "Author": "MarkP",
+      "PubDate": "2022-07-27T03:47:03Z"
+    },
+    {
+      "Title": "福田区石厦北缔馨园一房一厅户型出租 - 深圳",
+      "Link": "https://www.v2ex.com/t/868977",
+      "Description": "\u003ch1\u003e[整租] 缔馨园\u003c/h1\u003e\n\u003ch2\u003e背景\u003c/h2\u003e\n\u003cp\u003e孩子小一入学，目前已尘埃落定，故出租此房，目前业主自住，看房方便。\n业主直租，中介勿扰哦。 无中介费及任何隐藏费用~\n\u003cstrong\u003e房屋不允许养宠物\u003c/strong\u003e\n原因：由于有些人群对宠物的毛过敏，为了便于出租以及减少纠纷，故不允许养宠物，请见谅\u003c/p\u003e\n\u003ch2\u003e房屋介绍\u003c/h2\u003e\n\u003cp\u003e位置：福田区石厦北一街缔馨园\n楼层：3 楼\n朝向：北向，但夕晒不严重，因为对面有房屋挡住\n面积：42m² 户型：一房一厅一卫\n周边配套：楼下的商铺就有包子铺、沙县、百果园，7-11 等，周边有传统的肉菜市场，天虹商场，马成时代广场，离 COCO PARK 也只有一个地铁站；由于离福田区委比较近，附近经常有人巡逻，确保治安；附近还有一个社区公园，虽然不大，但平时去跑跑步什么的完全没问题，想游泳可以去福田区委的游泳池是对外开放的，对面的小区也有游泳池对外开放；另外平时学校开学楼下有两个免费核酸点，放假用了对面学校操场做为免费核酸点，做核酸非常方便。\n租金：5200 元 /月（自如同户型 5700+起~），押二付一；水电物管燃气费，每个月提供账单截图后再另外收取；\n交通：距离 3 /7 号线石厦站 350 米，南门由于疫情没有开放，开放后会更近\u003c/p\u003e\n\u003cp\u003e入住时间：即时入住\u003c/p\u003e\n\u003cp\u003e房屋清单：\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e名称\u003c/th\u003e\n\u003cth\u003e品牌\u003c/th\u003e\n\u003cth\u003e数量\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e空调\u003c/td\u003e\n\u003ctd\u003e美的\u003c/td\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e电视\u003c/td\u003e\n\u003ctd\u003e小米\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e洗衣机\u003c/td\u003e\n\u003ctd\u003e海尔\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e热水器\u003c/td\u003e\n\u003ctd\u003e万和\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e抽油烟机\u003c/td\u003e\n\u003ctd\u003e奇田\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e燃气灶\u003c/td\u003e\n\u003ctd\u003e美的\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e冰箱\u003c/td\u003e\n\u003ctd\u003e西门子\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e即热饮水机\u003c/td\u003e\n\u003ctd\u003e云米\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e小爱音箱\u003c/td\u003e\n\u003ctd\u003e小米\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e智能风扇 E3\u003c/td\u003e\n\u003ctd\u003e小米\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e空调伴侣\u003c/td\u003e\n\u003ctd\u003e小米\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e鹿客智能指纹锁\u003c/td\u003e\n\u003ctd\u003e鹿客\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e监控摄像头（可解绑）\u003c/td\u003e\n\u003ctd\u003e小蚁\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e以上设备除智能锁外的小件，可自行选择是否需要\n智能锁不可拆除，可现场尝试能否换绑，如不能换绑，会用米家分享设备并提供管理员权限，并当面删除全部指纹和密码；\u003c/p\u003e\n\u003ch2\u003e福利\u003c/h2\u003e\n\u003cp\u003e1 、300M 移动宽带可免费使用到今年 11 月 1 日；\n2 、可提供刷好 OpenWrt 路由器供使用；\n3 、续租不涨租（由于大儿子 2024 年需要上中学，如学校要求核实实际居住，则会收回房屋自住，23 年签合同时会只签到 2024 年 4 月底）\u003c/p\u003e\n\u003ch2\u003e联系方式\u003c/h2\u003e\n\u003cp\u003edng6c3RheXJlYWxTWg==\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.wellcee.com/rent-apartment/1658838695365917\" rel=\"nofollow\"\u003e看图可到 wellcee\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "echoo00",
+      "PubDate": "2022-07-27T03:32:24Z"
+    },
+    {
+      "Title": "有没有快速搭建 socks5 / http 正向代理服务器的方案？ - 问与答",
+      "Link": "https://www.v2ex.com/t/868976",
+      "Description": "\u003cp\u003e我经常有这样的需求：在我的电脑上搭建一个 http / socks5 代理服务器，然后同局域网的其他主机连我的电脑代理上网。\u003c/p\u003e\n\u003cp\u003e现在的解决方案一般是用 shadowsocks 或者 frp 搭建一个，但感觉属于杀鸡用牛刀。\u003c/p\u003e\n\u003cp\u003e有什么简单快捷的工具吗？最好是支持 windows 的。\u003c/p\u003e\n",
+      "Author": "villivateur",
+      "PubDate": "2022-07-27T03:26:47Z"
+    },
+    {
+      "Title": "2022 年了， iPhone 怎么装小飞机出国 - 程序员",
+      "Link": "https://www.v2ex.com/t/868975",
+      "Description": "\u003cp\u003e有什么简单 安全 方便的办法吗\u003c/p\u003e\n",
+      "Author": "godfunc",
+      "PubDate": "2022-07-27T03:26:01Z"
+    },
+    {
+      "Title": "safari 有没有办法 暂时/临时 allow insure content？ - 前端开发",
+      "Link": "https://www.v2ex.com/t/868974",
+      "Description": "\u003cp\u003e我们自己做的网站，有一个功能，就是点击一个页面上的一个按钮，能够打开本地的一个应用。（其实，zoom 也有类似的，点击页面上一个按钮，打开本地的 zoom app ）\u003c/p\u003e\n\u003cp\u003e现在在 chrome \u0026amp; edge 都没有问题，但是 safari 有问题，\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e[blocked] The page at https://\u0026lt;our-web-site\u0026gt; was not allowed to run insecure content from ws://127.0.0.1:12345/.\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我们本地应用，是监听 12345 的端口，能够和 website 通讯。\u003c/p\u003e\n\u003cp\u003egoogle 了一下，其实和这个问题有点像，\u003ca href=\"https://stackoverflow.com/questions/39076180/https-page-was-not-allowed-to-run-insecure-content-from-safari-extension-uri\" rel=\"nofollow\"\u003ehttps://stackoverflow.com/questions/39076180/https-page-was-not-allowed-to-run-insecure-content-from-safari-extension-uri\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e但是很遗憾，最新版的 safari 没有找到哪里有类似的设置 unblock 。\u003c/p\u003e\n\u003cp\u003e我试着打开 safari 的 develop 菜单，然后把所有的这些都勾选上了。还是不能工作。\n\u003cimg alt=\"safari setting2.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/07/27/8sNvodwam5rOZhj.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e所以，来请教一下，是我哪里理解错了，或者有没有什么 workaround ，方法等等。谢谢！\u003c/p\u003e\n\u003cp\u003emacOS: 12.3.1\nsafari: Version 15.4 (17613.1.17.1.13)\u003c/p\u003e\n",
+      "Author": "yazoox",
+      "PubDate": "2022-07-27T03:21:03Z"
+    },
+    {
+      "Title": "idea 换了新 UI 之后，怎么在右上角用 jrebel\u0026XRebel 运行项目？找不到 jrebel 的图标了 - 问与答",
+      "Link": "https://www.v2ex.com/t/868973",
+      "Description": "\u003cp\u003e1.就是旧的 UI 右上角不是可以用 Jrebel 运行项目嘛\n2.然后切换到新 UI 右上角只有 run 和 debug 项目了，jrebel 运行的图标不见了，也找不到运行的入口\u003c/p\u003e\n",
+      "Author": "zxy148",
+      "PubDate": "2022-07-27T03:20:16Z"
+    },
+    {
+      "Title": "同学建筑设计的，来杭州快一个月了，面试机会只有 4-5 次，要不要建议他转行。然后想问下大家，都比较看好啥行业。他的哥哥，想让他搞直播运营，但是看他的态度有点不想放弃他的专业（毕竟学了五年） - 问与答",
+      "Link": "https://www.v2ex.com/t/868972",
+      "Description": "",
+      "Author": "bam9",
+      "PubDate": "2022-07-27T03:19:58Z"
+    },
+    {
       "Title": "[上海求职]最近面上了国企外包，有很多疑问，希望有人能帮我解答一下 - 酷工作",
       "Link": "https://www.v2ex.com/t/868970",
       "Description": "\u003cp\u003e待业太久，处于高不成低不就的状态。由于 PHP 的机会很少就往其他岗位试探了一下，误打误撞投了个“云计算”的岗位，但是是个外包的岗位，外包到上海电信。hr 说年薪大概在 12-15w ，但是岗位工资目前较模糊，说是岗位工资和实际到手一点关系都没有，没跟国企外包打过交道心里犯了很多嘀咕，较之前的收入可定会断崖式下降。不知道还有其他需要注意的地方吗？大佬们给个建议。\n希望有相似经历的大佬也能分享一下。\n人力公司：\u003ca href=\"https://www.tianyancha.com/company/1261251994\" rel=\"nofollow\"\u003e上海安迪人力资源服务有限公司\u003c/a\u003e\n前路漫漫 又有很多不确定性，这次是彻底的。\u003c/p\u003e\n",
