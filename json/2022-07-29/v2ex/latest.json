@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请问如何在 JsonPath 中再次筛选通过过滤器过滤出来的结果？ - 程序员",
+      "Link": "https://www.v2ex.com/t/869524",
+      "Description": "\u003cp\u003e对于如下 Json ，假设 site 数组下的元素数量足够多（此处限于篇幅，只写部分），需要通过 JsonPath 筛选出 site 里 name 为“菜鸟”的任意一个 id 。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n  \"data\": {\n    \"site\": [\n      {\n        \"id\": \"2213341\",\n        \"name\": \"菜鸟\"\n      },\n      {\n        \"id\": \"4123124\",\n        \"name\": \"菜鸟\"\n      },\n      {\n        \"id\": \"2123412\",\n        \"name\": \"菜鸟\"\n      },\n      {\n        \"id\": \"1241433\",\n        \"name\": \"Google\"\n      }\n    ]\n  }\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e通过数组过滤器可以获取到所有满足条件的 id ，但好像无法在从中取出一个来了？\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e# 筛选出所有 name 为“菜鸟”的 id\n\n$.data.site[?(@.name==\"菜鸟\")].id\n\n[\n  \"2213341\",\n  \"4123124\",\n  \"2123412\"\n]\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在这个基础上尝试了以下用法好像都无法满足，比如：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e$.data.site[?(@.name==\"菜鸟\")].id[0]              x\n\n$.data.site[?(@.name==\"菜鸟\")].id.min()           x\n\n# 再加一个过滤器？\n\n$.data.site[?(@.name==\"菜鸟\") \u0026amp;\u0026amp; something].id    x  \n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e感觉通过过滤器筛选出来之后，有多个匹配，虽然也用 [] 包裹了所有的结果，但它并不是一个 Json 意义上的数组，所以无法通过数组的方式再次筛选里面的结果？\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/07/29/84fddefb12c01573.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e求解惑，求解决方案。\u003c/p\u003e\n",
+      "Author": "luckycoding",
+      "PubDate": "2022-07-29T10:31:05Z"
+    },
+    {
       "Title": "说一个关于中国移动的 [服务密码安全规范] 的笑话 - 分享发现",
       "Link": "https://www.v2ex.com/t/869523",
       "Description": "\u003cp\u003e我用的是中国移动。\u003c/p\u003e\n\u003cp\u003e迫于忘记服务密码需要重置服务密码，选了个这样的密码 531566 ，提示我 [对不起，您输入的新密码不符合安全规范....服务密码应为 6 位纯数字，且不能为连续或重复的 6 位数字] ，试了几次都不行。\u003c/p\u003e\n\u003cp\u003e我盯了半天，实在不知道哪里不符合了，难道是因为 66 属于连续数字？\u003c/p\u003e\n\u003cp\u003e于是试着换了个密码 123321 ，结果密码修改成功了。\u003c/p\u003e\n\u003cp\u003e这.....................\u003c/p\u003e\n",
