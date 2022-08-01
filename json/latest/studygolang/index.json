@@ -46,6 +46,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "Golang GUI nuxui",
+      "Link": "https://studygolang.com/p/1121#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "Go 项目实战-获取多级分类下的全部商品",
       "Link": "https://studygolang.com/articles/35802#reply0",
       "Description": "\u003cblockquote\u003e\n\u003cp\u003e备注：前面项目中用到的代码已经分享到\u003ccode\u003eGitHub\u003c/code\u003e中去了，并且以后所有项目中会出现的代码都会提交上去，欢迎查阅。\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cp\u003e\u003ca href=\"https://gitee.com/jobhandsome/goshop\"\u003e\u003cimg src=\"https://gitee.com/jobhandsome/goshop/widgets/widget_card.svg?colors=4183c4,ffffff,ffffff,e3e9ed,666666,9b9b9b\" alt=\"枫零落/goshop\" /\u003e\u003c/a\u003e\u003c/p\u003e\n\n\u003ch3\u003e需求分析\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e传入任意分类编号，获取该分类下所有子分类的分类编号\u003c/li\u003e\n\u003cli\u003e通过获取的分类编号列表，查询对应的商品数据\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003e接下来咱们就来实现以上需求：\u003c/h3\u003e\n\n\u003ch4\u003e第一步：获取指定分类下的所有子分类编号\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc (Category) GetCategoryIds(DB *gorm.DB, cateId int64) (pids map[int]int64) {\n\tif cateId == 0 {\n\t\treturn\n\t}\n\tvar Result []*Category\n\t// 查询全部的分类编号和pid\n\tDB.Select([]string{\u0026quot;id\u0026quot;, \u0026quot;pid\u0026quot;}).Find(\u0026amp;Result)\n\tindex := 0\n\tpids = make(map[int]int64)\n\t// 递归遍历指定分类下的全部子分类编号\n\t// 通过匿名函数的方式进行递归算法\n\tvar inPids func(Result []*Category, cateId int64)\n\tinPids = func(Result []*Category, cateId int64) {\n\t\tif Result == nil {\n\t\t\treturn\n\t\t}\n\t\tfor _, item := range Result {\n\t\t   // 判断pid 和传入的 分类编号 相等\n\t\t\tif item.Pid == cateId {\n\t\t\t\tpids[index] = item.ID\n\t\t\t\tindex++\n\t\t\t\t// 递归传入下一个的分类编号\n\t\t\t\tinPids(Result, item.ID)\n\t\t\t}\n\t\t}\n\t}\n\t// 初始化\n\tinPids(Result, cateId)\n\treturn\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e第二步：对获取到的分类编号数组（hashMap）进行处理\u003c/h4\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e第一步获取到的结果集是\u003ccode\u003ehashMap\u003c/code\u003e数组，无法在\u003ccode\u003egorm\u003c/code\u003e中直接使用，需要进行处理：处理成 \u003ccode\u003e'1','2','3','4'\u003c/code\u003e 这样的字符串才可以直接使用进行查询！\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003evar GoodsResult []*model.Goods\nvar resErr error\nif len(pids) \u0026gt; 0 {\n   // 定义 bytes Buffer 变量\n\tpidsByte := new(bytes.Buffer)\n\tfor _, value := range pids {\n\t  // 通过fmt.fmt.Fprintf 进行格式化赋值处理\n\t\t_, err := fmt.Fprintf(pidsByte, \u0026quot;'%s',\u0026quot;, strconv.FormatInt(value, 10))\n\t\tif err != nil {\n\t\t\treturn\n\t\t}\n\t}\n\tpidsString := pidsByte.String()\n\t// 过滤，最后两个字符(',)\n\tpidsString = pidsString[0 : len(pidsString)-2]\n\t// 过滤，第一个字符（'）\n\tpidsString = pidsString[1:]\n\t// 查询结果\n\tresErr = DB.Where(\u0026quot;goods_cate in (?)\u0026quot;, pidsString).Order(\u0026quot;created_at desc\u0026quot;).Find(\u0026amp;GoodsResult).Error\n} else {\n\tresErr = DB.Order(\u0026quot;created_at desc\u0026quot;).Find(\u0026amp;GoodsResult).Error\n}\n// 获取数据总数量\ncount := DB.Find(\u0026amp;model.Goods{}).RowsAffected\n\nif resErr != nil {\n\tutils.Fail(ctx, resErr.Error(), nil)\n\treturn\n}\nutils.Success(ctx, \u0026quot;获取成功\u0026quot;, gin.H{\n\t\u0026quot;count\u0026quot;: count,\n\t\u0026quot;data\u0026quot;:  GoodsResult,\n})\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e到了这一步，咱们就实现了上面需求的功能。 更多功能请持续关注！！！！！\u003c/p\u003e\n\n\u003ch4\u003e星球地址：\u003ca href=\"https://t.zsxq.com/03MJM7YfI\"\u003ehttps://t.zsxq.com/03MJM7YfI\u003c/a\u003e\u003c/h4\u003e\n\n\u003ch4\u003e\u003cstrong\u003e关注公众号「程序员小乔」\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cp\u003e\u003cimg src=\"https://www.qsjob.fun/zb_users/upload/2022/07/202207041451541741109.jpg\" alt=\"程序员小乔\" title=\"程序员小乔\" /\u003e\u003c/p\u003e\n",
@@ -76,13 +83,6 @@
     {
       "Title": "解析以太坊交易 abi-decoder",
       "Link": "https://studygolang.com/p/1122#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Golang GUI nuxui",
-      "Link": "https://studygolang.com/p/1121#reply0",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
