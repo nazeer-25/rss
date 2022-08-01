@@ -4,6 +4,55 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>如何取消被封 Google 账号的 YouTube 频道会员订阅自动续费？ - Google</title>
+      <link>https://www.v2ex.com/t/869929</link>
+      <description>因为安装恶意浏览器扩展 Google 账号被盗了，申诉说被用来发布欺诈性内容无法解封，但每月依旧从我的信用卡扣订阅频道会员的钱。除了挂失换卡（听说现在很麻烦）还有什么办法能解决么？</description>
+      <author>edis0n0</author>
+      <pubDate>01 Aug 2022 04:42:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>发一个看起来没啥用的字节码编辑库 - Python</title>
+      <link>https://www.v2ex.com/t/869928</link>
+      <description>&lt;p&gt;先贴一下 README&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;Pyasmer 是一个 Python 字节码编辑库。它可以用来修改现有的二进制代码(例如, func.&lt;strong&gt;code&lt;/strong&gt;)。&lt;/p&gt;&#xA;&lt;p&gt;Pyasmer 可以帮助开发者在 python 代码中执行一些动态地在已有代码中插桩、代理、指令生成，&lt;/p&gt;&#xA;&lt;p&gt;使用它需要你具备一定的 Python 字节码和 CPython 虚拟机执行机制，你可以从官方文档获取这些知识： &lt;a href=&#34;https://docs.python.org/3/library/dis.html&#34; rel=&#34;nofollow&#34;&gt;https://docs.python.org/3/library/dis.html&lt;/a&gt;。Pyasmer 也会提供一些易于使用的接口，降低使用难度。&lt;/p&gt;&#xA;&lt;p&gt;举个例子：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import sys&#xA;&#xA;from pyasmer.asm_instruction import asm_global_var, asm_fast_var&#xA;from pyasmer.code_writer import CodeWriter&#xA;&#xA;if __name__ == &#39;__main__&#39;:&#xA;    _frozen_importlib = sys.modules[&#39;_frozen_importlib&#39;]&#xA;    # _find_and_load_unlocked 函数会在 import 模块的时候被调用&#xA;    _find_and_load_unlocked = getattr(_frozen_importlib, &#39;_find_and_load_unlocked&#39;)&#xA;    cw = CodeWriter(_find_and_load_unlocked.__code__)()&#xA;    # 在_find_and_load_unlocked 函数开头添加一个 print ，将要被 import 的模块名称打印出来&#xA;    #&#xA;    # 更新插入位置到函数开头(第 0 条指令)&#xA;    cw.update_position(offset=0)&#xA;    # None: 忽略返回值&#xA;    # asm_global_var(&#39;print&#39;): 调用的函数为 print&#xA;    # asm_fast_var(&#39;name&#39;): 将局部变量`name`传给 print&#xA;    cw.call_function(None, asm_global_var(&#39;print&#39;), asm_fast_var(&#39;name&#39;))&#xA;    cw.gen_code()&#xA;    # 执行 import 命令&#xA;    import ast&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;输出显示有两个模块在 import 命令过程中被引用。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;output:&#xA;    ast&#xA;    _ast&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;目前功能还比较简单，支持插入函数调用、获取属性等功能。&lt;/p&gt;&#xA;&lt;p&gt;此外支持通过表达式匹配定位要修改的位置，比如：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;@asm_viewer&#xA;def binary_ops(a, b):&#xA;    return [a + b, a - b, a * b, a / b, a + b]&#xA;&#xA;&#xA;def test_match_binary_op():&#xA;    cv: CodeViewer = binary_ops.viewer&#xA;    # 匹配到两处 a + b 的位置&#xA;    binary_add = [x for x in cv.find_snippet_by_expression(&#34;a + b&#34;, local_vars=[&#34;a&#34;, &#34;b&#34;])]&#xA;    assert len(binary_add) == 2&#xA;    # 第 0-2 条指令和第 12-14 条指令&#xA;    # LOAD_FAST a&#xA;    # LOAD_FAST b&#xA;    # BINARY_ADD&#xA;    assert binary_add == [(0, 2), (12, 14)]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;总之，想要更多的功能欢迎来手搓，使用场景请各自脑补，over~~~&lt;/p&gt;&#xA;</description>
+      <author>penguinWWY</author>
+      <pubDate>01 Aug 2022 04:37:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>[北京/上海/合肥] [内推]前端/后端 - 酷工作</title>
+      <link>https://www.v2ex.com/t/869927</link>
+      <description>&lt;h2&gt;关于我们&lt;/h2&gt;&#xA;&lt;p&gt;蔚来汽车招人啦。海量 HC ，不卷不打卡。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.nio.cn/about&#34; rel=&#34;nofollow&#34;&gt;https://www.nio.cn/about&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;职位信息&lt;/h2&gt;&#xA;&lt;h3&gt;资深前端开发工程师(职级参考 p6-7)&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;大学本科或以上学历，5 年以上前端开发经验，计算机后相关优先；&lt;/li&gt;&#xA;&lt;li&gt;基础扎实，熟练掌握 JS 、CSS 、HTML 、TypeScript 、Node.js 等 Web 开发技术；&lt;/li&gt;&#xA;&lt;li&gt;对主流前端开发框架 Vue 、React 等至少一个有深了解并熟练使用；&lt;/li&gt;&#xA;&lt;li&gt;能够独立思考产品中的技术架构和实现，有产品意识，将用户体验作为主要驱动力；&lt;/li&gt;&#xA;&lt;li&gt;具备良好的沟通能力和团队协作精神、严谨的工作态度与高质量意识；&lt;/li&gt;&#xA;&lt;li&gt;热爱前端技术，有较强的学习能力，有强烈的求知欲、好奇心和进取心 ，能及时关注和学习业界最新的前端技术；&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;资深后端开发工程师(职级参考 p6-7)&lt;/h3&gt;&#xA;&lt;p&gt;计算机软件相关专业本科及以上学历, 五年以上 Java 后端开发经验&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;JAVA 基础扎实，熟悉 JVM 原理，具备多线程和高并发代码开发实践能力&lt;/li&gt;&#xA;&lt;li&gt;熟悉 MySQL ，Redis ，ElasticSearch ，Hbase 开发及调优，具有基于数据库、缓存、分布式存储开发高性能、高可用数据应用的实际经验&lt;/li&gt;&#xA;&lt;li&gt;熟练运用 Spring ，SpringMVC ，MyBatis ，Netty 等开源技术框架，精通 http ，webservice 接口设计和实现&lt;/li&gt;&#xA;&lt;li&gt;具备 SpringCloud 微服务架构实践经验&lt;/li&gt;&#xA;&lt;li&gt;熟悉 RESTful API 和常用网络协议，比如 TCP/IP 、HTTP 、SSL 、WS 、SOAP 等&lt;/li&gt;&#xA;&lt;li&gt;熟悉一项或多项大数据处理 /分析的相关工具，深入了解其原理，如 Hadoop 、Hive 、Spark 、Kafka 、Druid 、ClickHouse 、Kylin ；&lt;/li&gt;&#xA;&lt;li&gt;熟悉 Docker/Kubernetes 等容器及容器治理技术&lt;/li&gt;&#xA;&lt;li&gt;熟练使用 Linux 操作系统、SHELL 脚本编写、系统可用性、性能检测排查常用工具&lt;/li&gt;&#xA;&lt;li&gt;具备大数据量高并发在线处理工作经验&lt;/li&gt;&#xA;&lt;li&gt;对于开源中间件领域有深入理解，担任过主流开源项目的贡献者&lt;/li&gt;&#xA;&lt;li&gt;热爱技术，工作认真、严谨，对系统质量有近乎苛刻的要求意识&lt;/li&gt;&#xA;&lt;li&gt;良好的需求理解能力、沟通能力和团队合作精神&lt;/li&gt;&#xA;&lt;li&gt;良好的英文听说读写能力&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;其他职位也可以自行投递&lt;/h3&gt;&#xA;&lt;p&gt;[内推码：&lt;strong&gt;YCTTSZ9&lt;/strong&gt;] &lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://nio.jobs.feishu.cn/referral/?token=MTsxNjU5MzI0NDgxNDY4OzcxMTQ0ODcwMDYzMzE0ODYyMDk7NzAwMzMxNTMzOTQyMjIyMjYwNg&#34; rel=&#34;nofollow&#34;&gt;https://nio.jobs.feishu.cn/referral/?token=MTsxNjU5MzI0NDgxNDY4OzcxMTQ0ODcwMDYzMzE0ODYyMDk7NzAwMzMxNTMzOTQyMjIyMjYwNg&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;联系方式&lt;/h2&gt;&#xA;&lt;p&gt;vx(base64): ZXRoZXJlYWwtZGV2ZWxvcGVy&lt;/p&gt;&#xA;&lt;p&gt;邮箱(base64)：bGlueGlhb2RpMjI0QGdtYWlsLmNvbQ==&lt;/p&gt;&#xA;</description>
+      <author>RyanLim</author>
+      <pubDate>01 Aug 2022 04:32:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>电视投屏是不是一般都是走的 2.4G 的信道? - 问与答</title>
+      <link>https://www.v2ex.com/t/869926</link>
+      <description>&lt;p&gt;家里人一投屏，我的 2.4G 罗技鼠标就晃的一逼。&#xA;通过买新电视可以解决这个问题不?或者在电视上安装 app?&lt;/p&gt;&#xA;</description>
+      <author>pdog18</author>
+      <pubDate>01 Aug 2022 04:29:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>快七夕了，大家送什么礼物呀 - 生活</title>
+      <link>https://www.v2ex.com/t/869925</link>
+      <description>&lt;p&gt;想着送一条项链，大家有没有推荐的呀.... 或者有其他推荐的&lt;/p&gt;&#xA;</description>
+      <author>fy1206</author>
+      <pubDate>01 Aug 2022 04:28:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>“我不知道我要找的东西叫 MDN docs” 到你第一次遇见 MDN 花了多久 - 问与答</title>
+      <link>https://www.v2ex.com/t/869923</link>
+      <description>&lt;p&gt;web 入门千千万, 给我整的好烦.&#xA;不知道哪个帖子, 链接我到了 MDN.&lt;/p&gt;&#xA;&lt;p&gt;为什么我搜 web 入门不出来 MDN 呢, 我苦涩.&lt;/p&gt;&#xA;</description>
+      <author>andyJado</author>
+      <pubDate>01 Aug 2022 04:24:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>阿里被被列入“预摘牌”名单，面临退市风险 - 分享发现</title>
+      <link>https://www.v2ex.com/t/869922</link>
+      <description>&lt;p&gt;一阵唏嘘&lt;/p&gt;&#xA;</description>
+      <author>feather12315</author>
+      <pubDate>01 Aug 2022 04:18:55 +0000</pubDate>
+    </item>
+    <item>
       <title>企业微信的产品经理，你们最近的改动过分了！ - 全球工单系统</title>
       <link>https://www.v2ex.com/t/869921</link>
       <description>&lt;p&gt;我们是一家 ISV ，为行业客户提供 SaaS 产品，以前是使用客户的身份在企业微信里上线“企业自建应用”，已经上线了快 50 家系统。最近被你们的“新改动”搞得新业务流程都被 break 掉了，服了你们了&lt;/p&gt;&#xA;&lt;p&gt;具体被你们 break 掉的流程有&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;OAuth 登录不再能获得微信头像 ( &lt;a href=&#34;https://developer.work.weixin.qq.com/document/path/91025)%E3%80%82%E6%B3%A8%E6%84%8F%E8%BF%99%E6%98%AF&#34; rel=&#34;nofollow&#34;&gt;https://developer.work.weixin.qq.com/document/path/91025)。注意这是&lt;/a&gt; OAuth 不是 OAuth2 ，是 Desktop Web 的 OAuth 。请问企业自建应用使用你们的 SSO 有什么必要不能获得微信头像？你们提供了显示微信头像的 JS 控件了吗？&lt;/li&gt;&#xA;&lt;li&gt;自建应用的“网页授权及 JS-SDK”域名要检查域名主体，否则必须走第三方代开发接口。说实话，改成第三方代开发接口也没啥，我们也就一个晚上走通了。但是你们给了我们时间过渡了吗？我们前一天还可以使用自己的域名，第二天按照交付计划上线正式系统就被 block 了，你们知道给我们带来多大被动吗？&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;亏了我们之前一直向客户推荐用企业微信，无非就是用你们的 SSO 整个登录流程顺滑一点。现在看来你们的 API 相当不可靠，前一天觉得肯定一直会有的接口第二天就没有了，还要走审核流程！难道我们非得用你们的 SSO ，没有帐号密码登录 /短信登录可用吗？难道我们非要用你们的 JS-SDK ，没有 HTML5 API 可用吗？以后我们肯定不会再推荐客户用你们的平台&lt;/p&gt;&#xA;&lt;p&gt;希望你们好自为之&lt;/p&gt;&#xA;</description>
