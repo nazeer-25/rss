@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Java switch 为什么比 for 循环快？ - Java</title>
+      <link>https://www.v2ex.com/t/870434</link>
+      <description>测试代码&lt;br /&gt;for (int j = 0; j &amp;lt; 30; j++) {&lt;br /&gt;            long current = System.currentTimeMillis();&lt;br /&gt;            for (long i = 0; i &amp;lt; 1000000000; i++) {&lt;br /&gt;                getPriority(10);&lt;br /&gt;            }&lt;br /&gt;            long first = System.currentTimeMillis();&lt;br /&gt;            for (long i = 0; i &amp;lt; 1000000000; i++) {&lt;br /&gt;                getPriority1(10);&lt;br /&gt;            }&lt;br /&gt;            long second = System.currentTimeMillis();&lt;br /&gt;            System.out.println(&#34;first= &#34; + (first - current) + &#34; second= &#34; + (second - first));&lt;br /&gt;        }&lt;br /&gt;        &lt;br /&gt;原方法        &lt;br /&gt;    private static int getPriority(int cameraType) {&lt;br /&gt;        switch (cameraType) {&lt;br /&gt;            case 4:&lt;br /&gt;                return CameraType.CAMERA_1.getPriority();&lt;br /&gt;            case 5:&lt;br /&gt;                return CameraType.CAMERA_2.getPriority();&lt;br /&gt;            case 6:&lt;br /&gt;                return CameraType.CAMERA_3.getPriority();&lt;br /&gt;            case 7:&lt;br /&gt;                return CameraType.CAMERA_4.getPriority();&lt;br /&gt;            case 8:&lt;br /&gt;                return CameraType.CAMERA_5.getPriority();&lt;br /&gt;            case 9:&lt;br /&gt;                return CameraType.CAMERA_6.getPriority();&lt;br /&gt;            case 10:&lt;br /&gt;                return CameraType.CAMERA_7.getPriority();&lt;br /&gt;            default:&lt;br /&gt;                return -1;&lt;br /&gt;        }&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    private static int getPriority1(int cameraType) {&lt;br /&gt;        for (CameraType cameraType1 : CameraType.values()) {&lt;br /&gt;            if (cameraType1.getCameraType() == cameraType) {&lt;br /&gt;                return cameraType1.getPriority();&lt;br /&gt;            }&lt;br /&gt;        }&lt;br /&gt;        return -1;&lt;br /&gt;    }    &lt;br /&gt;    &lt;br /&gt;所用枚举类型&lt;br /&gt;    public enum CameraType {&lt;br /&gt;        CAMERA_1(&#34;相机 1&#34;, 4, 0), CAMERA_2(&#34;相机 2&#34;, 5, 2), CAMERA_3(&#34;相机 3&#34;, 6, 3), CAMERA_4(&#34;相机 4&#34;, 7, 4),&lt;br /&gt;        CAMERA_5(&#34;相机 5&#34;, 8, 5), CAMERA_6(&#34;相机 6&#34;, 9, 6), CAMERA_7(&#34;相机 7&#34;, 10, 1);&lt;br /&gt;        private final String mCameraName;&lt;br /&gt;        private final int mCameraType;&lt;br /&gt;        private final int mPriority;&lt;br /&gt;&lt;br /&gt;        CameraType(String name, int cameraType, int priority) {&lt;br /&gt;            mCameraName = name;&lt;br /&gt;            mCameraType = cameraType;&lt;br /&gt;            mPriority = priority;&lt;br /&gt;        }&lt;br /&gt;&lt;br /&gt;        public String getCameraName() {&lt;br /&gt;            return mCameraName;&lt;br /&gt;        }&lt;br /&gt;&lt;br /&gt;        public int getCameraType() {&lt;br /&gt;            return mCameraType;&lt;br /&gt;        }&lt;br /&gt;&lt;br /&gt;        public int getPriority() {&lt;br /&gt;            return mPriority;&lt;br /&gt;        }&lt;br /&gt;    }&lt;br /&gt;    &lt;br /&gt;结果&lt;br /&gt;first= 500 second= 8683&lt;br /&gt;first= 536 second= 6801&lt;br /&gt;first= 520 second= 7329&lt;br /&gt;first= 639 second= 7556&lt;br /&gt;first= 562 second= 7279&lt;br /&gt;first= 592 second= 7458&lt;br /&gt;&lt;br /&gt;个人感觉，switch 不还是从最开始 case 匹配到最终符合的 case 然后返回的吗？那不就跟 for 循环的匹配办法一样吗！为什么两者速度差一个数量级</description>
+      <author>cpalead</author>
+      <pubDate>03 Aug 2022 07:18:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>深圳有推荐的 Mac 维修点嘛？ - Apple</title>
+      <link>https://www.v2ex.com/t/870433</link>
+      <description>&lt;p&gt;17 款的 mac pro 主板烧了（被天才吧判的死刑，只换不修）；深圳有推荐的维修点嘛？看看能否续命&lt;/p&gt;&#xA;</description>
+      <author>FishStars</author>
+      <pubDate>03 Aug 2022 07:16:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>vnc 连接不能输入用户名？ - Raspberry Pi</title>
+      <link>https://www.v2ex.com/t/870432</link>
+      <description>我不明白为什么不能输入用户名。我应该先输入我的用户名，然后再输入密码才能正常登录。&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://help.realvnc.com/hc/user_images/z8EQczfH8-gUW8tG-FcAJw.png&#34; rel=&#34;nofollow noopener&#34;&gt;https://help.realvnc.com/hc/user_images/z8EQczfH8-gUW8tG-FcAJw.png&lt;/a&gt;</description>
+      <author>CSGO</author>
+      <pubDate>03 Aug 2022 07:12:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>有方便开发插件支持的移动端开发框架吗？ - 程序员</title>
+      <link>https://www.v2ex.com/t/870431</link>
+      <description>&lt;p&gt;需要是一个移动端框架，我用这个框架开发出一个 app 后，想提供插件接口，让其他人可以扩展这个 app 界面与功能。&lt;/p&gt;&#xA;&lt;p&gt;我个人用过 flutter 开发应用，但想不出好方法提供插件接口。&#xA;个人更倾向于插件用前端的技术栈来开发，像桌面端的 electron 。&#xA;我看移动端的 obsidian 是能支持插件的，有空看下用的什么方式实现的。&lt;/p&gt;&#xA;&lt;p&gt;不知道大家有什么好的推荐吗？&lt;/p&gt;&#xA;</description>
+      <author>kongkongye</author>
+      <pubDate>03 Aug 2022 07:11:44 +0000</pubDate>
+    </item>
+    <item>
       <title>优惠信息里面买的腾讯云服务器被骗了，发帖提示以防后面的朋友被骗。 - 服务器</title>
       <link>https://www.v2ex.com/t/870430</link>
       <description>&lt;p&gt;前不久在优惠信息里面买了两台腾讯云的服务器结果一台已经被更换了手机号，另一台今天又收到关联申请被取消的消息。&lt;/p&gt;&#xA;&lt;p&gt;找客服说需要将实名信息改为自己的，改的话需要提交之前的实名资料。骗子已经拉黑我了根本联系不到。&lt;/p&gt;&#xA;&lt;p&gt;客服说提供认证实名信息账号是会被找回的。 &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;您的关联申请已被取消&#xA;尊敬的腾讯云用户，您好！&#xA;&#xA;您的腾讯云账号（账号 ID：10002***01832 ，昵称：邵武市南沽网络工作室）在 2022-02-13 00:47:00 提交的与腾讯云合作伙伴“商丘新云网络科技有限公司”提供服务的申请，现已为您取消，取消原因：关联申请超过 30 天。请知悉。如果您希望寻找新的腾讯云合作伙伴提供免费的上云咨询服务，可以前往合作伙伴门户查找离您最近的腾讯云合作伙伴。感谢您的理解与配合。&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;希望大家在这边买服务器时不要被骗了～&lt;/p&gt;&#xA;&lt;p&gt;另外能推荐一些国外的服务商吗？&lt;/p&gt;&#xA;</description>
