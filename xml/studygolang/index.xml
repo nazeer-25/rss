@@ -37,13 +37,13 @@
       <description>&lt;p&gt;现状如下：&#xA;&amp;gt;我现在有很多API，每个API的数据都不一样，每个接口我所需要的数据也不一样，所以我针对每一个接口，都写了不同的结构体。现在我获得响应，需要根据不同的API初始化不同的结构体，再把获取的json数据反序列化到这个结构体&lt;/p&gt;&#xA;&#xA;&lt;p&gt;问题如下：&#xA;&amp;gt;由于存在很多API，也就是说很多不同结构体，我在&lt;code&gt;json.Unmarshal()&lt;/code&gt;的时候，必须传&lt;code&gt;interface&lt;/code&gt;，但是使用&lt;code&gt;Unmarshal（）&lt;/code&gt;函数的时候，如果传参是&lt;code&gt;interface&lt;/code&gt;，那么一定会反序列化成&lt;code&gt;map&lt;/code&gt;格式，这样导致我使用结构体过滤的数据无效。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;例子：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;&#xA;type API struct {&#xA;&#x9;MyTarget    string    `json:&amp;quot;target&amp;quot;`&#xA;}&#xA;&#xA;type API2 struct {&#xA;&#x9;MyTarget2    string    `json:&amp;quot;target2&amp;quot;`&#xA;}&#xA;&#xA;type API3 struct {&#xA;&#x9;MyTarget3    string    `json:&amp;quot;target3&amp;quot;`&#xA;}&#xA;&#xA;var APISlice = map[string]interface{}{&#xA;&#x9;&amp;quot;api&amp;quot;:API{},&#xA;&#x9;&amp;quot;api2&amp;quot;:API2{},&#xA;&#x9;&amp;quot;api3&amp;quot;:API3{},&#xA;}&#xA;&#xA;func main() {&#xA;    data = []byte{}&#xA;    str := &amp;quot;api1&amp;quot;&#x9;//假设是api1,实际业务我是遍历每一个api的&#xA;    myStruct := APISlice[str]&#xA;    json.Unmarshal(data,&amp;amp;myStruct)&#x9;//此时得到的结果，是一个map,并且响应的结果（即data）全部装进这个map里面了&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;//而我想要的是我已经用结构体定义好的字段，target就是我想要得&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
+      <title>天呐，七夕我收到9份告白~</title>
+      <link>https://studygolang.com/articles/35814#reply0</link>
+    </item>
+    <item>
       <title>关于执行cmd命令的问题，各位彦祖请进来给点意见</title>
       <link>https://studygolang.com/topics/15741#reply0</link>
       <description>&lt;p&gt;请问不使用wait方法，有什么方法知道cmd正在运行或者运行结束了&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220805/3226ff7759b3fd47bbaab20d223b745b.png&#34; alt=&#34;微信截图_20220805225803.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>天呐，七夕我收到9份告白~</title>
-      <link>https://studygolang.com/articles/35814#reply0</link>
     </item>
     <item>
       <title>Go1.19 如期发布了</title>
