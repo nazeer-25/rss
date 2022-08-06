@@ -53,13 +53,6 @@
       "PubDate": "2022-08-06T04:18:15Z"
     },
     {
-      "Title": "哎，这团体码咋整？ - 深圳",
-      "Link": "https://www.v2ex.com/t/871061",
-      "Description": "\u003cp\u003e深圳最近搞了个核酸团体码，房东天天催人加入，我看了一下相关新闻,这玩意太侵犯隐私了，一人不做核酸，这个团体码就变黄了，然后团体的全部成员都能看到你，大家都可以对你批斗……真是绝，完美转稼成人民内部矛盾。上次看到这种连坐制度还是日本侵华，统治沦陷区的时候。\u003c/p\u003e\n\u003cp\u003e我很不喜欢这个东西，感觉已经触犯到我的底线了，奈何房东天天发，今天甚至直接发我微信了，也不能总是装着看不见，那么问题来了，我怎么可以避开，不加入这个团体码？除了离开深圳，沦陷区也要生活啊😂\u003c/p\u003e\n\u003cp\u003e国内相关报导（还算能过审）： \u003ca href=\"https://m.toutiao.com/article/7125567966573380108/\" rel=\"nofollow\"\u003ehttps://m.toutiao.com/article/7125567966573380108/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e国外已经被黑出翔了\u003c/p\u003e\n",
-      "Author": "wonderfulcxm",
-      "PubDate": "2022-08-06T04:16:25Z"
-    },
-    {
       "Title": "iPad Pro 卡死现象，初步猜想跟通用控制有关... - Apple",
       "Link": "https://www.v2ex.com/t/871060",
       "Description": "\u003ch3\u003e设备\u003c/h3\u003e\n\u003cp\u003eiPad Pro 2020 + M1 MacBook Pro\n系统均为最新稳定版\u003c/p\u003e\n\u003ch3\u003e卡死的现象：\u003c/h3\u003e\n\u003cp\u003eiPad 基本不受手指控制，有极高的延迟，手指滑动后过了几秒才响应，重启恢复。\u003c/p\u003e\n\u003cp\u003e而且这时候的随航功能完全正常，60 帧很稳，遇到过很多次了。\u003c/p\u003e\n\u003cp\u003e昨晚在 iPad 上关闭通用控制，目前还没有复现。\u003c/p\u003e\n",
@@ -121,13 +114,6 @@
       "Description": "\u003cp\u003e本人群晖是在 PVE 下，然后用 GVT-G 把核显分了俩，一个给了群晖，识别正常。群晖是用 USB 虚拟引导的。根据教程搞人脸识别出了问题：\u003c/p\u003e\n\u003cp\u003ekvm: -device vfio-pci,sysfsdev=/sys/bus/mdev/devices/604e42e4-2e90-11ec-8861-037c58d42915,addr=02.0,x-igd-opregion=on,driver=vfio-pci-nohotplug: vfio 604e42e4-2e90-11ec-8861-037c58d42915: error getting device from group 11: File exists\u003c/p\u003e\n\u003cp\u003eUSB 虚拟引导是这样的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eargs: -device 'qemu-xhci,addr=0x18' -drive 'id=synoboot,file=/root/synology/DS9180727.img,if=none,format=raw' -device 'usb-storage,id=synoboot,drive=synoboot,bootindex=5' \n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e别人教程里设这样设置人脸识别的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eargs: -device vfio-pci,sysfsdev=/sys/bus/mdev/devices/604e42e4-2e90-11ec-8861-037c58d42915,addr=02.0,x-igd-opregion=on,driver=vfio-pci-nohotplug\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我把两句直接复制进去会上面的那一句被删除，估计是配置文件里只能有一个 args ，然后我把他们合并一行：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eargs: -device vfio-pci,sysfsdev=/sys/bus/mdev/devices/604e42e4-2e90-11ec-8861-037c58d42915,addr=02.0,x-igd-opregion=on,driver=vfio-pci-nohotplug -device 'qemu-xhci,addr=0x18' -drive 'id=synoboot,file=/root/synology/DS9180727.img,if=none,format=raw' -device 'usb-storage,id=synoboot,drive=synoboot,bootindex=5'\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e就出现了上面的错误。\u003c/p\u003e\n\u003cp\u003e下面是完整配置：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eargs: -device vfio-pci,sysfsdev=/sys/bus/mdev/devices/604e42e4-2e90-11ec-8861-037c58d42915,addr=02.0,x-igd-opregion=on,driver=vfio-pci-nohotplug -device 'qemu-xhci,addr=0x18' -drive 'id=synoboot,file=/root/synology/DS9180727.img,if=none,format=raw' -device 'usb-storage,id=synoboot,drive=synoboot,bootindex=5'\nballoon: 2048\nboot: order=ide2;net0\ncores: 2\ncpu: host\nhookscript: local:snippets/gvt_g_0x02.pl\nhostpci0: 0000:01:00.0\nhostpci1: 0000:00:02.0,mdev=i915-GVTg_V5_8\nide2: none,media=cdrom\nmachine: q35\nmemory: 4096\nname: DSM7.1\nnet0: e1000e=E6:02:85:E1:A8:57,bridge=vmbr0,firewall=1\nnuma: 0\nonboot: 1\nostype: l26\nsata0: sdb-hhd:101/vm-101-disk-1.qcow2,size=100G,ssd=1\nscsihw: virtio-scsi-pci\nsmbios1: uuid=c31154f6-793a-4d4a-884a-7fe7cd29467d\nsockets: 1\nusb1: host=152d:1567,usb3=1\nusb2: host=1-6,usb3=1\nvga: none\nvmgenid: 91f2a2ff-91d9-42c1-b83e-41078c9eb516\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这个是复制系统修改的脚本：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e#!/usr/bin/perl\n\n# Exmple hook script for PVE guests (hookscript config option)\n# You can set this via pct/qm with\n# pct set \u0026lt;vmid\u0026gt; -hookscript \u0026lt;volume-id\u0026gt;\n# qm set \u0026lt;vmid\u0026gt; -hookscript \u0026lt;volume-id\u0026gt;\n# where \u0026lt;volume-id\u0026gt; has to be an executable file in the snippets folder\n# of any storage with directories e.g.:\n# qm set 100 -hookscript local:snippets/hookscript.pl\n\nuse strict;\nuse warnings;\n\nprint \"GUEST HOOK: \" . join(' ', @ARGV). \"\\n\";\n\n# First argument is the vmid\n\nmy $vmid = shift;\n\n# Second argument is the phase\n\nmy $phase = shift;\n\nif ($phase eq 'pre-start') {\n\n    # First phase 'pre-start' will be executed before the guest\n    # is started. Exiting with a code != 0 will abort the start\n\n    print \"$vmid is starting, doing preparations.\\n\";\n    system(\"echo 604e42e4-2e90-11ec-8861-037c58d42915 \u0026gt; /sys/bus/pci/devices/0000:00:02.0/mdev_supported_types/i915-GVTg_V5_8/create\");\n\n    # print \"preparations failed, aborting.\"\n    # exit(1);\n\n} elsif ($phase eq 'post-start') {\n\n    # Second phase 'post-start' will be executed after the guest\n    # successfully started.\n\n    print \"$vmid started successfully.\\n\";\n    system(\"echo 1 \u0026gt; /sys/bus/mdev/devices/604e42e4-2e90-11ec-8861-037c58d42915/remove\");\n\n} elsif ($phase eq 'pre-stop') {\n\n    # Third phase 'pre-stop' will be executed before stopping the guest\n    # via the API. Will not be executed if the guest is stopped from\n    # within e.g., with a 'poweroff'\n\n    print \"$vmid will be stopped.\\n\";\n\n} elsif ($phase eq 'post-stop') {\n\n    # Last phase 'post-stop' will be executed after the guest stopped.\n    # This should even be executed in case the guest crashes or stopped\n    # unexpectedly.\n\n    print \"$vmid stopped. Doing cleanup.\\n\";\n\n} else {\n    die \"got unknown phase '$phase'\\n\";\n}\n\nexit(0);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e求大佬们解惑。\u003c/p\u003e\n",
       "Author": "glouhao",
       "PubDate": "2022-08-06T03:27:48Z"
-    },
-    {
-      "Title": "报警后的流程是什么的? - 北京",
-      "Link": "https://www.v2ex.com/t/871048",
-      "Description": "\u003cp\u003e前天,人生中第一次报警.\u003c/p\u003e\n\u003cp\u003e楼上在晚上 11 点后开始活动,多次沟通无果,前天 11 点多再一次被吵醒.\u003c/p\u003e\n\u003cp\u003e真的是怒火冲天……然后报了人生中第一次警.\u003c/p\u003e\n\u003cp\u003e等了接近两分钟才有人接了……\u003c/p\u003e\n\u003cp\u003e跟话务员沟通后,等了一段时间派出所来了一次电话又询问了一下信息\u003c/p\u003e\n\u003cp\u003e自己等到一点多就睡着了\u003c/p\u003e\n\u003cp\u003e第二天又来了一个回访,问我对出警的民警是否满意,一脸懵逼\u003c/p\u003e\n\u003cp\u003eMD,写贴子的同时,楼上的电钻又响起了,大周末……\u003c/p\u003e\n\u003cp\u003e还有因为邻居扰民退租,押金是否可以全额退回?\u003c/p\u003e\n",
-      "Author": "runking",
-      "PubDate": "2022-08-06T03:24:46Z"
     },
     {
       "Title": "iOS 和 Mac 上有能下载 m3u8 并转换成 mp4 的方法或者 app 吗？ - 问与答",
@@ -268,6 +254,20 @@
       "Description": "\u003cp\u003e有现成的分享一下吗？谢谢\u003c/p\u003e\n",
       "Author": "applefly",
       "PubDate": "2022-08-06T00:56:25Z"
+    },
+    {
+      "Title": "哎，这团体码咋整？ - 深圳",
+      "Link": "https://www.v2ex.com/t/871061",
+      "Description": "\u003cp\u003e深圳最近搞了个核酸团体码，房东天天催人加入，我看了一下相关新闻,这玩意太侵犯隐私了，一人不做核酸，这个团体码就变黄了，然后团体的全部成员都能看到你，大家都可以对你批斗……真是绝，完美转稼成人民内部矛盾。上次看到这种连坐制度还是日本侵华，统治沦陷区的时候。\u003c/p\u003e\n\u003cp\u003e我很不喜欢这个东西，感觉已经触犯到我的底线了，奈何房东天天发，今天甚至直接发我微信了，也不能总是装着看不见，那么问题来了，我怎么可以避开，不加入这个团体码？除了离开深圳，沦陷区也要生活啊😂\u003c/p\u003e\n\u003cp\u003e国内相关报导（还算能过审）： \u003ca href=\"https://m.toutiao.com/article/7125567966573380108/\" rel=\"nofollow\"\u003ehttps://m.toutiao.com/article/7125567966573380108/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e国外已经被黑出翔了\u003c/p\u003e\n",
+      "Author": "wonderfulcxm",
+      "PubDate": "2022-08-06T04:16:25Z"
+    },
+    {
+      "Title": "报警后的流程是什么的? - 北京",
+      "Link": "https://www.v2ex.com/t/871048",
+      "Description": "\u003cp\u003e前天,人生中第一次报警.\u003c/p\u003e\n\u003cp\u003e楼上在晚上 11 点后开始活动,多次沟通无果,前天 11 点多再一次被吵醒.\u003c/p\u003e\n\u003cp\u003e真的是怒火冲天……然后报了人生中第一次警.\u003c/p\u003e\n\u003cp\u003e等了接近两分钟才有人接了……\u003c/p\u003e\n\u003cp\u003e跟话务员沟通后,等了一段时间派出所来了一次电话又询问了一下信息\u003c/p\u003e\n\u003cp\u003e自己等到一点多就睡着了\u003c/p\u003e\n\u003cp\u003e第二天又来了一个回访,问我对出警的民警是否满意,一脸懵逼\u003c/p\u003e\n\u003cp\u003eMD,写贴子的同时,楼上的电钻又响起了,大周末……\u003c/p\u003e\n\u003cp\u003e还有因为邻居扰民退租,押金是否可以全额退回?\u003c/p\u003e\n",
+      "Author": "runking",
+      "PubDate": "2022-08-06T03:24:46Z"
     },
     {
       "Title": "请问 Win10 多桌面如何绑定应用？ - 程序员",

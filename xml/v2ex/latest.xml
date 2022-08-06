@@ -53,13 +53,6 @@
       <pubDate>06 Aug 2022 04:18:15 +0000</pubDate>
     </item>
     <item>
-      <title>哎，这团体码咋整？ - 深圳</title>
-      <link>https://www.v2ex.com/t/871061</link>
-      <description>&lt;p&gt;深圳最近搞了个核酸团体码，房东天天催人加入，我看了一下相关新闻,这玩意太侵犯隐私了，一人不做核酸，这个团体码就变黄了，然后团体的全部成员都能看到你，大家都可以对你批斗……真是绝，完美转稼成人民内部矛盾。上次看到这种连坐制度还是日本侵华，统治沦陷区的时候。&lt;/p&gt;&#xA;&lt;p&gt;我很不喜欢这个东西，感觉已经触犯到我的底线了，奈何房东天天发，今天甚至直接发我微信了，也不能总是装着看不见，那么问题来了，我怎么可以避开，不加入这个团体码？除了离开深圳，沦陷区也要生活啊😂&lt;/p&gt;&#xA;&lt;p&gt;国内相关报导（还算能过审）： &lt;a href=&#34;https://m.toutiao.com/article/7125567966573380108/&#34; rel=&#34;nofollow&#34;&gt;https://m.toutiao.com/article/7125567966573380108/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;国外已经被黑出翔了&lt;/p&gt;&#xA;</description>
-      <author>wonderfulcxm</author>
-      <pubDate>06 Aug 2022 04:16:25 +0000</pubDate>
-    </item>
-    <item>
       <title>iPad Pro 卡死现象，初步猜想跟通用控制有关... - Apple</title>
       <link>https://www.v2ex.com/t/871060</link>
       <description>&lt;h3&gt;设备&lt;/h3&gt;&#xA;&lt;p&gt;iPad Pro 2020 + M1 MacBook Pro&#xA;系统均为最新稳定版&lt;/p&gt;&#xA;&lt;h3&gt;卡死的现象：&lt;/h3&gt;&#xA;&lt;p&gt;iPad 基本不受手指控制，有极高的延迟，手指滑动后过了几秒才响应，重启恢复。&lt;/p&gt;&#xA;&lt;p&gt;而且这时候的随航功能完全正常，60 帧很稳，遇到过很多次了。&lt;/p&gt;&#xA;&lt;p&gt;昨晚在 iPad 上关闭通用控制，目前还没有复现。&lt;/p&gt;&#xA;</description>
@@ -121,13 +114,6 @@
       <description>&lt;p&gt;本人群晖是在 PVE 下，然后用 GVT-G 把核显分了俩，一个给了群晖，识别正常。群晖是用 USB 虚拟引导的。根据教程搞人脸识别出了问题：&lt;/p&gt;&#xA;&lt;p&gt;kvm: -device vfio-pci,sysfsdev=/sys/bus/mdev/devices/604e42e4-2e90-11ec-8861-037c58d42915,addr=02.0,x-igd-opregion=on,driver=vfio-pci-nohotplug: vfio 604e42e4-2e90-11ec-8861-037c58d42915: error getting device from group 11: File exists&lt;/p&gt;&#xA;&lt;p&gt;USB 虚拟引导是这样的：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;args: -device &#39;qemu-xhci,addr=0x18&#39; -drive &#39;id=synoboot,file=/root/synology/DS9180727.img,if=none,format=raw&#39; -device &#39;usb-storage,id=synoboot,drive=synoboot,bootindex=5&#39; &#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;别人教程里设这样设置人脸识别的：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;args: -device vfio-pci,sysfsdev=/sys/bus/mdev/devices/604e42e4-2e90-11ec-8861-037c58d42915,addr=02.0,x-igd-opregion=on,driver=vfio-pci-nohotplug&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我把两句直接复制进去会上面的那一句被删除，估计是配置文件里只能有一个 args ，然后我把他们合并一行：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;args: -device vfio-pci,sysfsdev=/sys/bus/mdev/devices/604e42e4-2e90-11ec-8861-037c58d42915,addr=02.0,x-igd-opregion=on,driver=vfio-pci-nohotplug -device &#39;qemu-xhci,addr=0x18&#39; -drive &#39;id=synoboot,file=/root/synology/DS9180727.img,if=none,format=raw&#39; -device &#39;usb-storage,id=synoboot,drive=synoboot,bootindex=5&#39;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;就出现了上面的错误。&lt;/p&gt;&#xA;&lt;p&gt;下面是完整配置：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;args: -device vfio-pci,sysfsdev=/sys/bus/mdev/devices/604e42e4-2e90-11ec-8861-037c58d42915,addr=02.0,x-igd-opregion=on,driver=vfio-pci-nohotplug -device &#39;qemu-xhci,addr=0x18&#39; -drive &#39;id=synoboot,file=/root/synology/DS9180727.img,if=none,format=raw&#39; -device &#39;usb-storage,id=synoboot,drive=synoboot,bootindex=5&#39;&#xA;balloon: 2048&#xA;boot: order=ide2;net0&#xA;cores: 2&#xA;cpu: host&#xA;hookscript: local:snippets/gvt_g_0x02.pl&#xA;hostpci0: 0000:01:00.0&#xA;hostpci1: 0000:00:02.0,mdev=i915-GVTg_V5_8&#xA;ide2: none,media=cdrom&#xA;machine: q35&#xA;memory: 4096&#xA;name: DSM7.1&#xA;net0: e1000e=E6:02:85:E1:A8:57,bridge=vmbr0,firewall=1&#xA;numa: 0&#xA;onboot: 1&#xA;ostype: l26&#xA;sata0: sdb-hhd:101/vm-101-disk-1.qcow2,size=100G,ssd=1&#xA;scsihw: virtio-scsi-pci&#xA;smbios1: uuid=c31154f6-793a-4d4a-884a-7fe7cd29467d&#xA;sockets: 1&#xA;usb1: host=152d:1567,usb3=1&#xA;usb2: host=1-6,usb3=1&#xA;vga: none&#xA;vmgenid: 91f2a2ff-91d9-42c1-b83e-41078c9eb516&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这个是复制系统修改的脚本：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl&#xA;&#xA;# Exmple hook script for PVE guests (hookscript config option)&#xA;# You can set this via pct/qm with&#xA;# pct set &amp;lt;vmid&amp;gt; -hookscript &amp;lt;volume-id&amp;gt;&#xA;# qm set &amp;lt;vmid&amp;gt; -hookscript &amp;lt;volume-id&amp;gt;&#xA;# where &amp;lt;volume-id&amp;gt; has to be an executable file in the snippets folder&#xA;# of any storage with directories e.g.:&#xA;# qm set 100 -hookscript local:snippets/hookscript.pl&#xA;&#xA;use strict;&#xA;use warnings;&#xA;&#xA;print &#34;GUEST HOOK: &#34; . join(&#39; &#39;, @ARGV). &#34;\n&#34;;&#xA;&#xA;# First argument is the vmid&#xA;&#xA;my $vmid = shift;&#xA;&#xA;# Second argument is the phase&#xA;&#xA;my $phase = shift;&#xA;&#xA;if ($phase eq &#39;pre-start&#39;) {&#xA;&#xA;    # First phase &#39;pre-start&#39; will be executed before the guest&#xA;    # is started. Exiting with a code != 0 will abort the start&#xA;&#xA;    print &#34;$vmid is starting, doing preparations.\n&#34;;&#xA;    system(&#34;echo 604e42e4-2e90-11ec-8861-037c58d42915 &amp;gt; /sys/bus/pci/devices/0000:00:02.0/mdev_supported_types/i915-GVTg_V5_8/create&#34;);&#xA;&#xA;    # print &#34;preparations failed, aborting.&#34;&#xA;    # exit(1);&#xA;&#xA;} elsif ($phase eq &#39;post-start&#39;) {&#xA;&#xA;    # Second phase &#39;post-start&#39; will be executed after the guest&#xA;    # successfully started.&#xA;&#xA;    print &#34;$vmid started successfully.\n&#34;;&#xA;    system(&#34;echo 1 &amp;gt; /sys/bus/mdev/devices/604e42e4-2e90-11ec-8861-037c58d42915/remove&#34;);&#xA;&#xA;} elsif ($phase eq &#39;pre-stop&#39;) {&#xA;&#xA;    # Third phase &#39;pre-stop&#39; will be executed before stopping the guest&#xA;    # via the API. Will not be executed if the guest is stopped from&#xA;    # within e.g., with a &#39;poweroff&#39;&#xA;&#xA;    print &#34;$vmid will be stopped.\n&#34;;&#xA;&#xA;} elsif ($phase eq &#39;post-stop&#39;) {&#xA;&#xA;    # Last phase &#39;post-stop&#39; will be executed after the guest stopped.&#xA;    # This should even be executed in case the guest crashes or stopped&#xA;    # unexpectedly.&#xA;&#xA;    print &#34;$vmid stopped. Doing cleanup.\n&#34;;&#xA;&#xA;} else {&#xA;    die &#34;got unknown phase &#39;$phase&#39;\n&#34;;&#xA;}&#xA;&#xA;exit(0);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;求大佬们解惑。&lt;/p&gt;&#xA;</description>
       <author>glouhao</author>
       <pubDate>06 Aug 2022 03:27:48 +0000</pubDate>
-    </item>
-    <item>
-      <title>报警后的流程是什么的? - 北京</title>
-      <link>https://www.v2ex.com/t/871048</link>
-      <description>&lt;p&gt;前天,人生中第一次报警.&lt;/p&gt;&#xA;&lt;p&gt;楼上在晚上 11 点后开始活动,多次沟通无果,前天 11 点多再一次被吵醒.&lt;/p&gt;&#xA;&lt;p&gt;真的是怒火冲天……然后报了人生中第一次警.&lt;/p&gt;&#xA;&lt;p&gt;等了接近两分钟才有人接了……&lt;/p&gt;&#xA;&lt;p&gt;跟话务员沟通后,等了一段时间派出所来了一次电话又询问了一下信息&lt;/p&gt;&#xA;&lt;p&gt;自己等到一点多就睡着了&lt;/p&gt;&#xA;&lt;p&gt;第二天又来了一个回访,问我对出警的民警是否满意,一脸懵逼&lt;/p&gt;&#xA;&lt;p&gt;MD,写贴子的同时,楼上的电钻又响起了,大周末……&lt;/p&gt;&#xA;&lt;p&gt;还有因为邻居扰民退租,押金是否可以全额退回?&lt;/p&gt;&#xA;</description>
-      <author>runking</author>
-      <pubDate>06 Aug 2022 03:24:46 +0000</pubDate>
     </item>
     <item>
       <title>iOS 和 Mac 上有能下载 m3u8 并转换成 mp4 的方法或者 app 吗？ - 问与答</title>
@@ -268,6 +254,20 @@
       <description>&lt;p&gt;有现成的分享一下吗？谢谢&lt;/p&gt;&#xA;</description>
       <author>applefly</author>
       <pubDate>06 Aug 2022 00:56:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>哎，这团体码咋整？ - 深圳</title>
+      <link>https://www.v2ex.com/t/871061</link>
+      <description>&lt;p&gt;深圳最近搞了个核酸团体码，房东天天催人加入，我看了一下相关新闻,这玩意太侵犯隐私了，一人不做核酸，这个团体码就变黄了，然后团体的全部成员都能看到你，大家都可以对你批斗……真是绝，完美转稼成人民内部矛盾。上次看到这种连坐制度还是日本侵华，统治沦陷区的时候。&lt;/p&gt;&#xA;&lt;p&gt;我很不喜欢这个东西，感觉已经触犯到我的底线了，奈何房东天天发，今天甚至直接发我微信了，也不能总是装着看不见，那么问题来了，我怎么可以避开，不加入这个团体码？除了离开深圳，沦陷区也要生活啊😂&lt;/p&gt;&#xA;&lt;p&gt;国内相关报导（还算能过审）： &lt;a href=&#34;https://m.toutiao.com/article/7125567966573380108/&#34; rel=&#34;nofollow&#34;&gt;https://m.toutiao.com/article/7125567966573380108/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;国外已经被黑出翔了&lt;/p&gt;&#xA;</description>
+      <author>wonderfulcxm</author>
+      <pubDate>06 Aug 2022 04:16:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>报警后的流程是什么的? - 北京</title>
+      <link>https://www.v2ex.com/t/871048</link>
+      <description>&lt;p&gt;前天,人生中第一次报警.&lt;/p&gt;&#xA;&lt;p&gt;楼上在晚上 11 点后开始活动,多次沟通无果,前天 11 点多再一次被吵醒.&lt;/p&gt;&#xA;&lt;p&gt;真的是怒火冲天……然后报了人生中第一次警.&lt;/p&gt;&#xA;&lt;p&gt;等了接近两分钟才有人接了……&lt;/p&gt;&#xA;&lt;p&gt;跟话务员沟通后,等了一段时间派出所来了一次电话又询问了一下信息&lt;/p&gt;&#xA;&lt;p&gt;自己等到一点多就睡着了&lt;/p&gt;&#xA;&lt;p&gt;第二天又来了一个回访,问我对出警的民警是否满意,一脸懵逼&lt;/p&gt;&#xA;&lt;p&gt;MD,写贴子的同时,楼上的电钻又响起了,大周末……&lt;/p&gt;&#xA;&lt;p&gt;还有因为邻居扰民退租,押金是否可以全额退回?&lt;/p&gt;&#xA;</description>
+      <author>runking</author>
+      <pubDate>06 Aug 2022 03:24:46 +0000</pubDate>
     </item>
     <item>
       <title>请问 Win10 多桌面如何绑定应用？ - 程序员</title>
