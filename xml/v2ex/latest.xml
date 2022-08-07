@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>golang 指针的问题 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/871263</link>
+      <description>&lt;pre&gt;&lt;code&gt;func testMutex() {&#xA;&#xA;&#x9;stu := &amp;amp;Stu{&#xA;&#x9;&#x9;name: &#34;song&#34;,&#xA;&#x9;&#x9;age:  &#34;12&#34;,&#xA;&#x9;&#x9;s:    Stu1{name: &#34;stu1&#34;},&#xA;&#x9;}&#xA;&#x9;stu.st1 = &amp;amp;Stu{&#xA;&#x9;&#x9;name: &#34;i amstu.st1&#34;,&#xA;&#x9;&#x9;age:  &#34;&#34;,&#xA;&#x9;&#x9;s:    Stu1{},&#xA;&#x9;&#x9;st1:  nil,&#xA;&#x9;}&#xA;&#x9;// 获取第一个&#xA;&#x9;fmt.Println((*Stu)(unsafe.Pointer(uintptr(unsafe.Pointer(stu)))).name)&#xA;&#x9;i := *(*string)(unsafe.Pointer(uintptr(unsafe.Pointer(stu)) + unsafe.Sizeof(&#34;&#34;)))&#xA;&#x9;// 获取第二个&#xA;&#x9;fmt.Println(i)&#xA;&#x9;// 获取第三个&#xA;&#x9;ci := (*Stu1)(unsafe.Pointer(uintptr(unsafe.Pointer(stu)) + unsafe.Sizeof(&#34;&#34;) + unsafe.Sizeof(&#34;&#34;)))&#xA;&#x9;fmt.Println(ci.name)&#xA;&#x9;// 获取第四个&#xA;&#x9;ci1 := *(*Stu)(unsafe.Pointer(uintptr(unsafe.Pointer(stu)) + unsafe.Sizeof(&#34;&#34;) + unsafe.Sizeof(&#34;&#34;) + unsafe.Sizeof(stu.s)))&#xA;&#x9;fmt.Println(ci1)&#xA;}&#xA;&#xA;type Stu struct {&#xA;&#x9;name string&#xA;&#x9;age  string&#xA;&#x9;s    Stu1&#xA;&#x9;st1  *Stu&#xA;}&#xA;&#xA;type Stu1 struct {&#xA;&#x9;name string&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;代码如上。 我发现 这样搞， 获取不到 Stu 里面的 st1 指针对象。 尴尬住了&lt;/p&gt;&#xA;</description>
+      <author>jeesk</author>
+      <pubDate>07 Aug 2022 10:23:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>大家写代码的时候会特意打开压缩吗？ - MySQL</title>
+      <link>https://www.v2ex.com/t/871262</link>
+      <description>今天有一个很旧的 PHP 程序，连 maxscale 发生超时，结果查下来是因为开了 COMPRESS 。而 maxscale 握手是不支持压缩的。两边握手对不上引起了超时。&lt;br /&gt;&lt;br /&gt;不过这就引发了一个问题，如果是 mysqldump 一次几十个 G ，而 CPU 又比较多的话，打开压缩应该是一个比较好的选择。&lt;br /&gt;&lt;br /&gt;但只是写代码，我略看了一下，大多数程序都没有启动压缩。特意打开压缩除了像我今天这样遇上兼容性问题，似乎并没有多少好处。除非 mysql 和应用不在同一个内网，带宽有限。只有非常极端的应用才会需要这个。</description>
+      <author>gengchun</author>
+      <pubDate>07 Aug 2022 10:19:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>Webpack+TypeScript 油猴开发模板，支持本地调试、热刷新、自动构建和自动发布更新 - 分享创造</title>
+      <link>https://www.v2ex.com/t/871261</link>
+      <description>&lt;p&gt;视频教程：&lt;a href=&#34;https://www.bilibili.com/video/BV1oB4y1478c&#34; rel=&#34;nofollow&#34;&gt;https://www.bilibili.com/video/BV1oB4y1478c&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;项目地址：&lt;a href=&#34;https://github.com/Eished/douyu-helper&#34; rel=&#34;nofollow&#34;&gt;https://github.com/Eished/douyu-helper&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;开发文档：&lt;a href=&#34;https://github.com/Eished/douyu-helper/tree/main/docs&#34; rel=&#34;nofollow&#34;&gt;https://github.com/Eished/douyu-helper/tree/main/docs&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;此项目作为油猴开发模板的优点：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;配置简单&lt;/li&gt;&#xA;&lt;li&gt;符合前端工程化开发习惯，和前端开发框架一致的开发体验&lt;/li&gt;&#xA;&lt;li&gt;支持本地网页热刷新和在线网页热刷新&lt;/li&gt;&#xA;&lt;li&gt;支持本地模拟在线网页，网页加载和调试速度更快&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>Eished</author>
+      <pubDate>07 Aug 2022 10:13:17 +0000</pubDate>
+    </item>
+    <item>
       <title>[分享]夏天市内游，感受新能源车的优缺点 - 电动汽车</title>
       <link>https://www.v2ex.com/t/871259</link>
       <description>&lt;p&gt;坐标广东佛山，目的地是南海湾森林公园，车程 50 多公里。车型是小鹏 G3i 460n ，满电出发，没有续航焦虑。这几天，气温降下来了，适合户外活动。&lt;/p&gt;&#xA;&lt;h3&gt;优点，手机 app 远程开空调&lt;/h3&gt;&#xA;&lt;p&gt;上山游玩到中午，太阳变猛烈。由于是露天停车场，汽车暴晒。手机 app 显示车内温度 49°C ，在下山途中开启了车内空调的极速降温模式。上车前显示 33°C ，人体感受舒适，不热。这个体验超级好！因为以前的油车比较低档，每次暴晒后只能手动降温。&lt;/p&gt;&#xA;&lt;h3&gt;缺点，前车大玻璃防晒不隔热&lt;/h3&gt;&#xA;&lt;p&gt;停车时，车内撑起了遮阳伞，挡住前车玻璃。但是一收起伞，马上感受到热！&lt;/p&gt;&#xA;&lt;p&gt;本来都知道会晒，所以贴了膜。这膜挡了阳光，但不隔热…用手感受了一下车顶和玻璃的温度，对比很明显，车顶明显不热。不知道那些全玻璃车顶的，夏天是怎么过来的。&lt;/p&gt;&#xA;&lt;p&gt;然后就是网购一个专门的隔热设备，看看后面效果怎样。&lt;/p&gt;&#xA;</description>
