@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "看了一个 APT 27 得组织，突然对黑客的相关技术挺感兴趣？有老哥说说嘛。故事技术论坛都可以 - 程序员",
+      "Link": "https://www.v2ex.com/t/871544",
+      "Description": "",
+      "Author": "microxiaoxiao",
+      "PubDate": "2022-08-08T15:13:22Z"
+    },
+    {
       "Title": "请问 openwrt 的 wireguard 如何设置？ - OpenWrt",
       "Link": "https://www.v2ex.com/t/871543",
       "Description": "各位彦祖：\u003cbr /\u003e\u003cbr /\u003e场景是 op 的 wg 当客户端连接远端一个 peer ，不是当服务端让其它客户端接入，所以设置方法跟很多教程不一样，不需要端口转发，也不需要监听固定端口，默认监听随机端口就行。\u003cbr /\u003e\u003cbr /\u003e我参考资料尝试 2 种方案都一样，网络倒是通了，不过 op 下本地网络默认优先走远端 peer ，表现是访问 \u003ca target=\"_blank\" href=\"https://www.ip138.com\" rel=\"nofollow noopener\"\u003ehttps://www.ip138.com\u003c/a\u003e 得到远端 peer 的公网 ip ，不是 op 自身本地拨号公网 ip ，而且 wireguard 接口的流量非常大。\u003cbr /\u003e\u003cbr /\u003e我希望把远端局域网（ 10.13.1.*）接入到本地网络（ 192.168.2.*）之后，本地网络默认走自己公网 ip ，不可用时才走远端 peer 。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e第 1 种方案，参考油管视频： \u003cdiv class=\"embedded_video_wrapper\"\u003e\u003ciframe src=\"https://www.youtube.com/embed/0_zQAp3V18c\" class=\"embedded_video\" allowfullscreen=\"\" type=\"text/html\" id=\"ytplayer\" frameborder=\"0\"\u003e\u003c/iframe\u003e\u003c/div\u003e ，主要特点是把 wireguard 接口的防火墙分配给 wan 区域，配置好 client 就能用，无需再额外折腾防火墙规则，简单易用。\u003cbr /\u003e\u003cbr /\u003e第 2 种方案，参考其他博客，把 wireguard 接口的防火墙分配给一个新建区域，命名为 wireguard ，设置 lan 区域 \u0026lt;=\u0026gt; wireguard 区域 允许互相转发，启动 wg 接口发现只有 op 自身能连接远端局域网（ 10.13.1.*），本地局域网其他机器则不行，op 加入一条防火墙自定义规则后解决：iptables -t nat -A POSTROUTING -o wireguard -j MASQUERADE\u003cbr /\u003e\u003cbr /\u003e2 种方案都有同样的问题，折腾期间好几次翻车让我电脑跟 op 失联失去控制，幸运的是 pve 宿主机还能连，通过 console 模拟物理显示器的方式进入 op ssh ，vim 修改配置救回来。\u003cbr /\u003e\u003cbr /\u003e怀疑是路由问题，启动 wireguard 后，ip route show table main 显示默认路由由 pppoe-wan 改成了 wireguard ，尝试改成 pppoe-wan 优先，没改成功。",
