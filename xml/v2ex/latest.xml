@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>C++如何简单地在堆上创建多维数组？ - C++</title>
+      <link>https://www.v2ex.com/t/871538</link>
+      <description>&lt;p&gt;如果直接在栈上创建维数很高的多维数组，会有爆栈的风险。&lt;/p&gt;&#xA;&lt;p&gt;在 stackflow 上搜索了一个回答，感觉很新颖，示例如下。请问下大家有其他方法能简单地在堆上创造多维数组吗？&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;memory&amp;gt;&#xA;&#xA;struct Foo&#xA;{&#xA;    int arr[100][200][100];&#xA;};&#xA;&#xA;int main()&#xA;{&#xA;    auto foo = std::make_unique&amp;lt;Foo&amp;gt;(); // allocate on the heap&#xA;    auto&amp;amp; arr = foo-&amp;gt;arr;&#xA;&#xA;    arr[1][2][3] = 42;&#xA;&#xA;    return 0;&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/59082203/c-declaring-a-static-contiguous-multi-dimensional-array-on-the-heap-the-right&#34; rel=&#34;nofollow&#34;&gt;https://stackoverflow.com/questions/59082203/c-declaring-a-static-contiguous-multi-dimensional-array-on-the-heap-the-right&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>wisefree</author>
+      <pubDate>08 Aug 2022 14:44:16 +0000</pubDate>
+    </item>
+    <item>
       <title>多节点接入同一 ASN，应当如何配置路由？ - 问与答</title>
       <link>https://www.v2ex.com/t/871536</link>
       <description>&lt;p&gt;最近想研究一下 BGP ，准备到时候弄到一个 ASN ，但是因为没有经验决定先入 DN42 试试。但是现在有一个问题想了解，当我拥有多地点多台服务器的情况下，如何配置路由（内部+连接外部 peering ）比较符合真实世界的习惯呢？可能是比较小白的问题，谢谢～&lt;/p&gt;&#xA;&lt;p&gt;例如：&#xA;现有 AS 4242429923&#xA;服务器 A：JP 网卡地址为内网 服务商 1&#xA;服务器 B：HK 网卡地址为内网 服务商 2&#xA;服务器 C：CN 网卡地址为内网 服务商 2&#xA;服务器 D：KR 网卡地址为公网 服务商 3&#xA;服务器 E：US 网卡地址为公网 服务商 4&lt;/p&gt;&#xA;&lt;p&gt;网段：fd16:1234:1122::/48&lt;/p&gt;&#xA;&lt;p&gt;方案 1：&#xA;内网 - 建立一个 Full-Mesh 网络&#xA;外网 - 每台服务器采用相同的 peering 配置&lt;/p&gt;&#xA;&lt;p&gt;方案 2:&#xA;内网 - 服务器间采用多条网络互通（但无法构成 Full-Mesh ），利用 Babel 或者 OSPF 做内部寻路&#xA;外网 - 每台服务器采用相同的 peering 配置&lt;/p&gt;&#xA;&lt;p&gt;^^^^^^ 是不是以上两个方式会导致网络包不能直达服务器，而是需要经过内部再次中转？&lt;/p&gt;&#xA;&lt;p&gt;方案 3: [没有太想明白是否可以实现]&#xA;内网 - 建立一个 Full-Mesh 网络&#xA;外网 - 每台服务器只广播自己的网段并静态路由&#xA;问题 - BGP 协议是基于 ASPATH 的，那这样操作会不会导致找不到同 ASN 下其他 IP ？或者炸掉整个网络？&lt;/p&gt;&#xA;&lt;p&gt;方案 4:&#xA;配置 Confederation&lt;/p&gt;&#xA;&lt;p&gt;方案 5:&#xA;配置 BGP Route Reflector&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;以及 同一个服务商的两个数据中心的两台服务器，如何保证找到的是最佳路由？ [当服务商的 ASN-自有 ASN 只有一个距离的情况下] &lt;/p&gt;&#xA;&lt;p&gt;以及 如果一个节点故障，如何保证能够快速到其他节点呢？&lt;/p&gt;&#xA;&lt;p&gt;谢谢～&lt;/p&gt;&#xA;</description>

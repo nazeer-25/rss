@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "C++如何简单地在堆上创建多维数组？ - C++",
+      "Link": "https://www.v2ex.com/t/871538",
+      "Description": "\u003cp\u003e如果直接在栈上创建维数很高的多维数组，会有爆栈的风险。\u003c/p\u003e\n\u003cp\u003e在 stackflow 上搜索了一个回答，感觉很新颖，示例如下。请问下大家有其他方法能简单地在堆上创造多维数组吗？\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-c++\"\u003e#include \u0026lt;memory\u0026gt;\n\nstruct Foo\n{\n    int arr[100][200][100];\n};\n\nint main()\n{\n    auto foo = std::make_unique\u0026lt;Foo\u0026gt;(); // allocate on the heap\n    auto\u0026amp; arr = foo-\u0026gt;arr;\n\n    arr[1][2][3] = 42;\n\n    return 0;\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca href=\"https://stackoverflow.com/questions/59082203/c-declaring-a-static-contiguous-multi-dimensional-array-on-the-heap-the-right\" rel=\"nofollow\"\u003ehttps://stackoverflow.com/questions/59082203/c-declaring-a-static-contiguous-multi-dimensional-array-on-the-heap-the-right\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "wisefree",
+      "PubDate": "2022-08-08T14:44:16Z"
+    },
+    {
       "Title": "多节点接入同一 ASN，应当如何配置路由？ - 问与答",
       "Link": "https://www.v2ex.com/t/871536",
       "Description": "\u003cp\u003e最近想研究一下 BGP ，准备到时候弄到一个 ASN ，但是因为没有经验决定先入 DN42 试试。但是现在有一个问题想了解，当我拥有多地点多台服务器的情况下，如何配置路由（内部+连接外部 peering ）比较符合真实世界的习惯呢？可能是比较小白的问题，谢谢～\u003c/p\u003e\n\u003cp\u003e例如：\n现有 AS 4242429923\n服务器 A：JP 网卡地址为内网 服务商 1\n服务器 B：HK 网卡地址为内网 服务商 2\n服务器 C：CN 网卡地址为内网 服务商 2\n服务器 D：KR 网卡地址为公网 服务商 3\n服务器 E：US 网卡地址为公网 服务商 4\u003c/p\u003e\n\u003cp\u003e网段：fd16:1234:1122::/48\u003c/p\u003e\n\u003cp\u003e方案 1：\n内网 - 建立一个 Full-Mesh 网络\n外网 - 每台服务器采用相同的 peering 配置\u003c/p\u003e\n\u003cp\u003e方案 2:\n内网 - 服务器间采用多条网络互通（但无法构成 Full-Mesh ），利用 Babel 或者 OSPF 做内部寻路\n外网 - 每台服务器采用相同的 peering 配置\u003c/p\u003e\n\u003cp\u003e^^^^^^ 是不是以上两个方式会导致网络包不能直达服务器，而是需要经过内部再次中转？\u003c/p\u003e\n\u003cp\u003e方案 3: [没有太想明白是否可以实现]\n内网 - 建立一个 Full-Mesh 网络\n外网 - 每台服务器只广播自己的网段并静态路由\n问题 - BGP 协议是基于 ASPATH 的，那这样操作会不会导致找不到同 ASN 下其他 IP ？或者炸掉整个网络？\u003c/p\u003e\n\u003cp\u003e方案 4:\n配置 Confederation\u003c/p\u003e\n\u003cp\u003e方案 5:\n配置 BGP Route Reflector\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e以及 同一个服务商的两个数据中心的两台服务器，如何保证找到的是最佳路由？ [当服务商的 ASN-自有 ASN 只有一个距离的情况下] \u003c/p\u003e\n\u003cp\u003e以及 如果一个节点故障，如何保证能够快速到其他节点呢？\u003c/p\u003e\n\u003cp\u003e谢谢～\u003c/p\u003e\n",
