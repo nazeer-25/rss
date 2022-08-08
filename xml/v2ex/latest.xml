@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>多节点接入同一 ASN，应当如何配置路由？ - 问与答</title>
+      <link>https://www.v2ex.com/t/871536</link>
+      <description>&lt;p&gt;最近想研究一下 BGP ，准备到时候弄到一个 ASN ，但是因为没有经验决定先入 DN42 试试。但是现在有一个问题想了解，当我拥有多地点多台服务器的情况下，如何配置路由（内部+连接外部 peering ）比较符合真实世界的习惯呢？可能是比较小白的问题，谢谢～&lt;/p&gt;&#xA;&lt;p&gt;例如：&#xA;现有 AS 4242429923&#xA;服务器 A：JP 网卡地址为内网 服务商 1&#xA;服务器 B：HK 网卡地址为内网 服务商 2&#xA;服务器 C：CN 网卡地址为内网 服务商 2&#xA;服务器 D：KR 网卡地址为公网 服务商 3&#xA;服务器 E：US 网卡地址为公网 服务商 4&lt;/p&gt;&#xA;&lt;p&gt;网段：fd16:1234:1122::/48&lt;/p&gt;&#xA;&lt;p&gt;方案 1：&#xA;内网 - 建立一个 Full-Mesh 网络&#xA;外网 - 每台服务器采用相同的 peering 配置&lt;/p&gt;&#xA;&lt;p&gt;方案 2:&#xA;内网 - 服务器间采用多条网络互通（但无法构成 Full-Mesh ），利用 Babel 或者 OSPF 做内部寻路&#xA;外网 - 每台服务器采用相同的 peering 配置&lt;/p&gt;&#xA;&lt;p&gt;^^^^^^ 是不是以上两个方式会导致网络包不能直达服务器，而是需要经过内部再次中转？&lt;/p&gt;&#xA;&lt;p&gt;方案 3: [没有太想明白是否可以实现]&#xA;内网 - 建立一个 Full-Mesh 网络&#xA;外网 - 每台服务器只广播自己的网段并静态路由&#xA;问题 - BGP 协议是基于 ASPATH 的，那这样操作会不会导致找不到同 ASN 下其他 IP ？或者炸掉整个网络？&lt;/p&gt;&#xA;&lt;p&gt;方案 4:&#xA;配置 Confederation&lt;/p&gt;&#xA;&lt;p&gt;方案 5:&#xA;配置 BGP Route Reflector&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;以及 同一个服务商的两个数据中心的两台服务器，如何保证找到的是最佳路由？ [当服务商的 ASN-自有 ASN 只有一个距离的情况下] &lt;/p&gt;&#xA;&lt;p&gt;以及 如果一个节点故障，如何保证能够快速到其他节点呢？&lt;/p&gt;&#xA;&lt;p&gt;谢谢～&lt;/p&gt;&#xA;</description>
+      <author>yaoyao1128</author>
+      <pubDate>08 Aug 2022 14:35:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>把 FortiGate-ARM-KVM 在 R4S 上跑起来了 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/871535</link>
+      <description>&lt;p&gt;只用 4 个 A53 小核，在宿主、KVM 、FortiGateVM 都不调优拉起来直接跑的情况下，纯 4 层防火墙吞吐量 450M ，7 层防火墙+全量日志吞吐量 400M ，NGFW 防火墙+全量日志吞吐量 300M&lt;/p&gt;&#xA;&lt;p&gt;好像 R4S 的 Realtek 网卡不支持 SR-IOV ，只能用 Virtio 模式跑。另外对 ARM 和 KVM 都不熟，也不知道怎么优化比较好。&lt;/p&gt;&#xA;&lt;p&gt;不过发现 FortiGate VM 的授权模式改了，以前必须有 License 才能启动，现在没 License 也可以工作了，只是有一些配置上的限制（ 1c2g 和策略数量），测试玩玩是没问题了。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;1&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://wx3.sinaimg.cn/mw1024/a8de007dly1h4zq2q5r1nj21370u0404.jpg&#34;/&gt;&#xA;&lt;img alt=&#34;2&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://wx2.sinaimg.cn/mw1024/a8de007dly1h4zq2q7solj21k70u0n0j.jpg&#34;/&gt;&#xA;&lt;img alt=&#34;3&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://wx2.sinaimg.cn/mw1024/a8de007dly1h4zq2q57ryj213o0u0wh4.jpg&#34;/&gt;&#xA;&lt;img alt=&#34;4&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://wx3.sinaimg.cn/mw1024/a8de007dly1h4zq2q8azvj22ho0u0ahh.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>oldhan</author>
+      <pubDate>08 Aug 2022 14:34:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>求推荐一款 IOS 码字 APP，支持老机器的 - 问与答</title>
+      <link>https://www.v2ex.com/t/871534</link>
+      <description>&lt;p&gt;手头有一台十年前的 pad ，系统是 12.5.5 ，&#xA;现在还有支持这个系统的码字 app 么？&#xA;求推荐！&lt;/p&gt;&#xA;</description>
+      <author>2232588429</author>
+      <pubDate>08 Aug 2022 14:32:47 +0000</pubDate>
+    </item>
+    <item>
       <title>有没有那些你很难忘记的人，一起来倾诉下吧 - 分享发现</title>
       <link>https://www.v2ex.com/t/871533</link>
       <description>毕业七年了，被大学女友删除微信了，今天发消息提示要加好友，我加回去问为啥删，毕竟朋友一场留着也挺好，回复原因是以后不会有交集，留了没有意义，然后祝我好运后我还没回复又删了&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;其实我只是想告诉你，我今天看到你了&lt;br /&gt;&lt;br /&gt;确实太难忘记了，留着微信也只是想偶尔看看，没有其他任何想法&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;我也结婚生子了，不应该这样，有些人确实该忘了&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;也太难忘了！&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;借地倾诉下，也祝你好运</description>
@@ -56,7 +77,7 @@
       <title>Java 求解答：为什么 JackSon 和 fastJson 里使用 string.intern，欢迎美团技术团队解答:-) - Java</title>
       <link>https://www.v2ex.com/t/871521</link>
       <description>&lt;p&gt;问题：使用 string.intern 可以节省时间吗，可以节省空间吗？&lt;/p&gt;&#xA;&lt;p&gt;前段时间，迁移容器化之后发现机器的 youngGc 时间缓慢上涨，从几十毫秒涨到了几百毫秒，然后出发 full gc 之后，youngGc 时间又重新回落到几十毫秒&#xA;后来确定了是系统产生了很多的不同字符串的 key ，同时 jackSon 的 internCache 调用了 string.intern()方法，导致了字符串常量池 stringTable 膨胀，最终导致 YoungGc 扫描变慢&lt;/p&gt;&#xA;&lt;p&gt;看了下美团技术团队里写道，fastJson 里使用了 string.intern,可以大大减少时间和空间，不太理解为什么可以节省时间，节省空间我能够理解，但是使用 string.intern ，不是更加的耗时吗？&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html&#34; rel=&#34;nofollow&#34;&gt;https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html&lt;/a&gt;&lt;/p&gt;&#xA;</description>
-      <author>1023363777</author>
+      <author>badboy17</author>
       <pubDate>08 Aug 2022 13:16:31 +0000</pubDate>
     </item>
     <item>
