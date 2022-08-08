@@ -4,9 +4,37 @@
   "Description": "",
   "Items": [
     {
+      "Title": "PC 低成本升级求推荐 - 问与答",
+      "Link": "https://www.v2ex.com/t/871481",
+      "Description": "由于玩永劫 1080 下打团帧数不高，暂时不想整机换血（明年搬家可能整机换掉），想在现在基础上升级下配置\u003cbr /\u003e\u003cbr /\u003e板 U：i5-8500 B350M\u003cbr /\u003e内存：8g x 2 (2666)\u003cbr /\u003e显卡：rx480 8G\u003cbr /\u003e电源：全汉 550w",
+      "Author": "Enirm",
+      "PubDate": "2022-08-08T09:37:39Z"
+    },
+    {
+      "Title": "有多少 V 友是没有爱好的 - 程序员",
+      "Link": "https://www.v2ex.com/t/871480",
+      "Description": "\u003cp\u003e同事朋友们喜欢打球、拍照、骑行、旅行等等，反而自己没什么爱好，不爱玩游戏，也不喜欢群体活动，一到休息日就宅家，算不算性格缺陷。。。\u003c/p\u003e\n",
+      "Author": "dudubaba",
+      "PubDate": "2022-08-08T09:36:01Z"
+    },
+    {
+      "Title": "关于 1 password 登录的一个疑问 - 问与答",
+      "Link": "https://www.v2ex.com/t/871479",
+      "Description": "最近换了新 macbook ，然后所有东西全部从头装的，没同步，只是登录了相同的 apple id ，然后发现装完 1p 以后直接输入主密码就能登录了，不需要我输入账户和密钥，不知道怎么实现的。（当时旧电脑和 iPhone 在同一个局域网里）\u003cbr /\u003e\u003cbr /\u003e然后在网页里登录也是，直接就登录了。\u003cbr /\u003e\u003cbr /\u003e几年前碰到的另一个类似的情况是 NIKE 的 SNKRS app 完全删除以后重新安装完还是登录的。",
+      "Author": "stoluoyu",
+      "PubDate": "2022-08-08T09:33:13Z"
+    },
+    {
+      "Title": "有没有这样一门语言，保留 Rust 其他特性但提供 GC 能力？ - Rust",
+      "Link": "https://www.v2ex.com/t/871478",
+      "Description": "\u003cp\u003e首先我还是很喜欢 Rust 的所有权系统的，我觉得这是当下最为优雅的无 GC 内存管理方案。但不可否认的是，如果我们面向的是业务开发而非底层开发，大多数情况并不是不能接受 GC 带来的性能损耗。但所有权管理带来的陡峭学习曲线，对于技术团队搭建无疑是个巨大挑战（应该没人会否认培养一个成熟 Rust 工程师的难度要远远高于 Java/Go 吧）\u003c/p\u003e\n\u003cp\u003e所以有没有这样一门语言，在移除所有权系统并提供 GC 的前提下，保留 Rust 的以下特点（按重要性排列）：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e完整的泛型和标准集合类库\u003c/li\u003e\n\u003cli\u003e优雅的空值检查和错误处理\u003c/li\u003e\n\u003cli\u003e支持高阶函数等函数式编程范式\u003c/li\u003e\n\u003cli\u003e模式匹配\u003c/li\u003e\n\u003cli\u003e支持 Trait 或其他类似的 Duck typing\u003c/li\u003e\n\u003cli\u003e异步友好：支持协程和消息通道\u003c/li\u003e\n\u003cli\u003e宏编程\u003c/li\u003e\n\u003cli\u003e无虚拟机，原生编译\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e前五点可以认为是必要项，后三点属于加分项\u003c/p\u003e\n",
+      "Author": "sy20030260",
+      "PubDate": "2022-08-08T09:32:49Z"
+    },
+    {
       "Title": "为何从通道取数据顺序是错误的？ - Go 编程语言",
       "Link": "https://www.v2ex.com/t/871477",
-      "Description": "\u003cp\u003e新手学习 go ，从通道中获取数据为什么顺序是错乱的，下面是我写的伪代码\npackage main\u003c/p\u003e\n\u003cp\u003eimport (\n\"fmt\"\n\"io\"\n\"net/http\"\n\"os\"\n\"sync\"\n)\u003c/p\u003e\n\u003cp\u003evar wg sync.WaitGroup\u003c/p\u003e\n\u003cp\u003efunc Gets(uri string, buf chan []byte) {\nresp, err := http.Get(uri)\nif err != nil {\nfmt.Println(err)\nreturn\n}\ndefer resp.Body.Close()\nbufs := make([]byte, 128)\nfor {\nn, err1 := resp.Body.Read(bufs[:])\nif err1 == io.EOF {\nbreak\n}\nbuf \u0026lt;- bufs[:n]\nfmt.Println(string(bufs[:n]))\n}\nfmt.Println(\"读取数据完毕\")\nclose(buf)\n}\u003c/p\u003e\n\u003cp\u003efunc SaveFile(name string, buf chan []byte) {\ndefer wg.Done()\nf, err2 := os.Create(name)\nif err2 != nil {\nreturn\n}\ndefer f.Close()\nfor {\nif data, ok := \u0026lt;-buf; ok {\nf.Write(data)\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\t} else {\n\t\tbreak\n\t}\n}\nf.Sync()\nfmt.Println(\"写入数据完毕\")\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e}\u003c/p\u003e\n\u003cp\u003efunc main() {\nfor i := 1; i \u0026lt; 2; i++ {\nwg.Add(1)\nbuf := make(chan []byte)\nfiles1 := \"test1.txt\"\nurils := \"\u003ca href=\"http://www.baidu.cn\" rel=\"nofollow\"\u003ehttp://www.baidu.cn\u003c/a\u003e\"\ngo SaveFile(files1, buf)\ngo Gets(urils, buf)\n}\nwg.Wait()\n}\u003c/p\u003e\n\u003cp\u003efmt.Println(string(bufs[:n]))这个和 test1.txt 中内容不一致啊，这个是为什么，各位大神帮忙分析下。\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e新手学习 go ，从通道中获取数据为什么顺序是错乱的，下面是我写的伪代码\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\"fmt\"\n\t\"io\"\n\t\"net/http\"\n\t\"os\"\n\t\"sync\"\n)\n\nvar wg sync.WaitGroup\n\nfunc Gets(uri string, buf chan []byte) {\n\tresp, err := http.Get(uri)\n\tif err != nil {\n\t\tfmt.Println(err)\n\t\treturn\n\t}\n\tdefer resp.Body.Close()\n\tbufs := make([]byte, 128)\n\tfor {\n\t\tn, err1 := resp.Body.Read(bufs[:])\n\t\tif err1 == io.EOF {\n\t\t\tbreak\n\t\t}\n\t\tbuf \u0026lt;- bufs[:n]\n\t\tfmt.Println(string(bufs[:n]))\n\t}\n\tfmt.Println(\"读取数据完毕\")\n\tclose(buf)\n}\n\nfunc SaveFile(name string, buf chan []byte) {\n\tdefer wg.Done()\n\tf, err2 := os.Create(name)\n\tif err2 != nil {\n\t\treturn\n\t}\n\tdefer f.Close()\n\tfor {\n\t\tif data, ok := \u0026lt;-buf; ok {\n\t\t\tf.Write(data)\n\n\t\t} else {\n\t\t\tbreak\n\t\t}\n\t}\n\tf.Sync()\n\tfmt.Println(\"写入数据完毕\")\n}\n\nfunc main() {\n\tfor i := 1; i \u0026lt; 2; i++ {\n\t\twg.Add(1)\n\t\tbuf := make(chan []byte)\n\t\tfiles1 := \"test1.txt\"\n\t\turils := \"http://www.baidu.cn\"\n\t\tgo SaveFile(files1, buf)\n\t\tgo Gets(urils, buf)\n\t}\n\twg.Wait()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003efmt.Println(string(bufs[:n]))这个和 test1.txt 中内容不一致啊，这个是为什么，各位大神帮忙分析下。\u003c/p\u003e\n",
       "Author": "yunshangdetianya",
       "PubDate": "2022-08-08T09:29:31Z"
     },

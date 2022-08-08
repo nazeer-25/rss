@@ -4,9 +4,37 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>PC 低成本升级求推荐 - 问与答</title>
+      <link>https://www.v2ex.com/t/871481</link>
+      <description>由于玩永劫 1080 下打团帧数不高，暂时不想整机换血（明年搬家可能整机换掉），想在现在基础上升级下配置&lt;br /&gt;&lt;br /&gt;板 U：i5-8500 B350M&lt;br /&gt;内存：8g x 2 (2666)&lt;br /&gt;显卡：rx480 8G&lt;br /&gt;电源：全汉 550w</description>
+      <author>Enirm</author>
+      <pubDate>08 Aug 2022 09:37:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>有多少 V 友是没有爱好的 - 程序员</title>
+      <link>https://www.v2ex.com/t/871480</link>
+      <description>&lt;p&gt;同事朋友们喜欢打球、拍照、骑行、旅行等等，反而自己没什么爱好，不爱玩游戏，也不喜欢群体活动，一到休息日就宅家，算不算性格缺陷。。。&lt;/p&gt;&#xA;</description>
+      <author>dudubaba</author>
+      <pubDate>08 Aug 2022 09:36:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于 1 password 登录的一个疑问 - 问与答</title>
+      <link>https://www.v2ex.com/t/871479</link>
+      <description>最近换了新 macbook ，然后所有东西全部从头装的，没同步，只是登录了相同的 apple id ，然后发现装完 1p 以后直接输入主密码就能登录了，不需要我输入账户和密钥，不知道怎么实现的。（当时旧电脑和 iPhone 在同一个局域网里）&lt;br /&gt;&lt;br /&gt;然后在网页里登录也是，直接就登录了。&lt;br /&gt;&lt;br /&gt;几年前碰到的另一个类似的情况是 NIKE 的 SNKRS app 完全删除以后重新安装完还是登录的。</description>
+      <author>stoluoyu</author>
+      <pubDate>08 Aug 2022 09:33:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有这样一门语言，保留 Rust 其他特性但提供 GC 能力？ - Rust</title>
+      <link>https://www.v2ex.com/t/871478</link>
+      <description>&lt;p&gt;首先我还是很喜欢 Rust 的所有权系统的，我觉得这是当下最为优雅的无 GC 内存管理方案。但不可否认的是，如果我们面向的是业务开发而非底层开发，大多数情况并不是不能接受 GC 带来的性能损耗。但所有权管理带来的陡峭学习曲线，对于技术团队搭建无疑是个巨大挑战（应该没人会否认培养一个成熟 Rust 工程师的难度要远远高于 Java/Go 吧）&lt;/p&gt;&#xA;&lt;p&gt;所以有没有这样一门语言，在移除所有权系统并提供 GC 的前提下，保留 Rust 的以下特点（按重要性排列）：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;完整的泛型和标准集合类库&lt;/li&gt;&#xA;&lt;li&gt;优雅的空值检查和错误处理&lt;/li&gt;&#xA;&lt;li&gt;支持高阶函数等函数式编程范式&lt;/li&gt;&#xA;&lt;li&gt;模式匹配&lt;/li&gt;&#xA;&lt;li&gt;支持 Trait 或其他类似的 Duck typing&lt;/li&gt;&#xA;&lt;li&gt;异步友好：支持协程和消息通道&lt;/li&gt;&#xA;&lt;li&gt;宏编程&lt;/li&gt;&#xA;&lt;li&gt;无虚拟机，原生编译&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;前五点可以认为是必要项，后三点属于加分项&lt;/p&gt;&#xA;</description>
+      <author>sy20030260</author>
+      <pubDate>08 Aug 2022 09:32:49 +0000</pubDate>
+    </item>
+    <item>
       <title>为何从通道取数据顺序是错误的？ - Go 编程语言</title>
       <link>https://www.v2ex.com/t/871477</link>
-      <description>&lt;p&gt;新手学习 go ，从通道中获取数据为什么顺序是错乱的，下面是我写的伪代码&#xA;package main&lt;/p&gt;&#xA;&lt;p&gt;import (&#xA;&#34;fmt&#34;&#xA;&#34;io&#34;&#xA;&#34;net/http&#34;&#xA;&#34;os&#34;&#xA;&#34;sync&#34;&#xA;)&lt;/p&gt;&#xA;&lt;p&gt;var wg sync.WaitGroup&lt;/p&gt;&#xA;&lt;p&gt;func Gets(uri string, buf chan []byte) {&#xA;resp, err := http.Get(uri)&#xA;if err != nil {&#xA;fmt.Println(err)&#xA;return&#xA;}&#xA;defer resp.Body.Close()&#xA;bufs := make([]byte, 128)&#xA;for {&#xA;n, err1 := resp.Body.Read(bufs[:])&#xA;if err1 == io.EOF {&#xA;break&#xA;}&#xA;buf &amp;lt;- bufs[:n]&#xA;fmt.Println(string(bufs[:n]))&#xA;}&#xA;fmt.Println(&#34;读取数据完毕&#34;)&#xA;close(buf)&#xA;}&lt;/p&gt;&#xA;&lt;p&gt;func SaveFile(name string, buf chan []byte) {&#xA;defer wg.Done()&#xA;f, err2 := os.Create(name)&#xA;if err2 != nil {&#xA;return&#xA;}&#xA;defer f.Close()&#xA;for {&#xA;if data, ok := &amp;lt;-buf; ok {&#xA;f.Write(data)&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&#x9;} else {&#xA;&#x9;&#x9;break&#xA;&#x9;}&#xA;}&#xA;f.Sync()&#xA;fmt.Println(&#34;写入数据完毕&#34;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;&lt;p&gt;func main() {&#xA;for i := 1; i &amp;lt; 2; i++ {&#xA;wg.Add(1)&#xA;buf := make(chan []byte)&#xA;files1 := &#34;test1.txt&#34;&#xA;urils := &#34;&lt;a href=&#34;http://www.baidu.cn&#34; rel=&#34;nofollow&#34;&gt;http://www.baidu.cn&lt;/a&gt;&#34;&#xA;go SaveFile(files1, buf)&#xA;go Gets(urils, buf)&#xA;}&#xA;wg.Wait()&#xA;}&lt;/p&gt;&#xA;&lt;p&gt;fmt.Println(string(bufs[:n]))这个和 test1.txt 中内容不一致啊，这个是为什么，各位大神帮忙分析下。&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;新手学习 go ，从通道中获取数据为什么顺序是错乱的，下面是我写的伪代码&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;fmt&#34;&#xA;&#x9;&#34;io&#34;&#xA;&#x9;&#34;net/http&#34;&#xA;&#x9;&#34;os&#34;&#xA;&#x9;&#34;sync&#34;&#xA;)&#xA;&#xA;var wg sync.WaitGroup&#xA;&#xA;func Gets(uri string, buf chan []byte) {&#xA;&#x9;resp, err := http.Get(uri)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;fmt.Println(err)&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;defer resp.Body.Close()&#xA;&#x9;bufs := make([]byte, 128)&#xA;&#x9;for {&#xA;&#x9;&#x9;n, err1 := resp.Body.Read(bufs[:])&#xA;&#x9;&#x9;if err1 == io.EOF {&#xA;&#x9;&#x9;&#x9;break&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;buf &amp;lt;- bufs[:n]&#xA;&#x9;&#x9;fmt.Println(string(bufs[:n]))&#xA;&#x9;}&#xA;&#x9;fmt.Println(&#34;读取数据完毕&#34;)&#xA;&#x9;close(buf)&#xA;}&#xA;&#xA;func SaveFile(name string, buf chan []byte) {&#xA;&#x9;defer wg.Done()&#xA;&#x9;f, err2 := os.Create(name)&#xA;&#x9;if err2 != nil {&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;defer f.Close()&#xA;&#x9;for {&#xA;&#x9;&#x9;if data, ok := &amp;lt;-buf; ok {&#xA;&#x9;&#x9;&#x9;f.Write(data)&#xA;&#xA;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;break&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;f.Sync()&#xA;&#x9;fmt.Println(&#34;写入数据完毕&#34;)&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;for i := 1; i &amp;lt; 2; i++ {&#xA;&#x9;&#x9;wg.Add(1)&#xA;&#x9;&#x9;buf := make(chan []byte)&#xA;&#x9;&#x9;files1 := &#34;test1.txt&#34;&#xA;&#x9;&#x9;urils := &#34;http://www.baidu.cn&#34;&#xA;&#x9;&#x9;go SaveFile(files1, buf)&#xA;&#x9;&#x9;go Gets(urils, buf)&#xA;&#x9;}&#xA;&#x9;wg.Wait()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;fmt.Println(string(bufs[:n]))这个和 test1.txt 中内容不一致啊，这个是为什么，各位大神帮忙分析下。&lt;/p&gt;&#xA;</description>
       <author>yunshangdetianya</author>
       <pubDate>08 Aug 2022 09:29:31 +0000</pubDate>
     </item>
