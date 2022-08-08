@@ -25,13 +25,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "分享一个 go 写的 cms",
-      "Link": "https://studygolang.com/topics/15742#reply0",
-      "Description": "\u003cp\u003e最近也写了个简单的cms系统，基于go语言的 \u003ccode\u003egofiber\u003c/code\u003e 框架，数据库连接使用的是 \u003ccode\u003eXorm\u003c/code\u003e\u003c/p\u003e\n\n\u003cp\u003e当时的想法是需要用到 \u003ccode\u003erpc\u003c/code\u003e 连接，所以这里面有加上 \u003ccode\u003erpc\u003c/code\u003e\u003c/p\u003e\n\n\u003cp\u003e用户端页面模板是可替换的\u003c/p\u003e\n\n\u003cp\u003e项目地址为: \u003ca href=\"https://github.com/deatil/doak-cms\"\u003ehttps://github.com/deatil/doak-cms\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e一些截图\n\u003cimg src=\"https://static.golangjob.cn/220624/4c4b84787d62780f86fd01f66fa81af6.png\" alt=\"art.png\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/220624/9e38a2d282669f4df22ffbc44087af39.png\" alt=\"login.png\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/220624/76c47ba3e52fb08370b1fa4f7fb3cfe2.png\" alt=\"cate.png\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "小白求助，关于Go编译的顺序",
       "Link": "https://studygolang.com/articles/35817#reply0",
       "Description": "\u003cp\u003e为什么bar()不是用main中的局部变量p，bar()不是在main()中使用的嘛？\n\u003cimg src=\"https://pic3.zhimg.com/v2-9d9b41fff81bf058036724b3f9b22fe2_b.jpeg\" alt=\"\" /\u003e\n为什么main()匿名函数不等价于原先的写法呢？\n\u003cimg src=\"https://pic4.zhimg.com/v2-04d3a08c68ec67ab1719cb662bb160e7_r.jpg\" alt=\"\" /\u003e\n个人理解是：bar()在main()函数外定义，所以使用的变量作用域应该为全局变量。但是如果按照编译器执行的顺序，为什么运行到bar()的时候，还能知道使用全局呢，不应该使用main()中的局部变量嘛？\u003c/p\u003e\n",
@@ -42,6 +35,34 @@
       "Title": "Golang实现sha256或sha512加密",
       "Link": "https://studygolang.com/articles/35818#reply0",
       "Description": "\u003ch1\u003e代码实现sha-256加密算法\u003c/h1\u003e\n\n\u003cpre\u003e\u003ccode\u003esha-256.go\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\npackage tools\n\nimport (\n    \u0026quot;crypto/sha256\u0026quot;\n    \u0026quot;encoding/hex\u0026quot;\n)\n\n//SHA256生成哈希值\n\nfunc GetSHA256HashCode(stringMessage string) string {\n\n    message := []byte(stringMessage) //字符串转化字节数组\n    //创建一个基于SHA256算法的hash.Hash接口的对象\n    hash := sha256.New() //sha-256加密\n    //hash := sha512.New() //SHA-512加密\n    //输入数据\n    hash.Write(message)\n    //计算哈希值\n    bytes := hash.Sum(nil)\n    //将字符串编码为16进制格式,返回字符串\n    hashCode := hex.EncodeToString(bytes)\n    //返回哈希值\n    return hashCode\n\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch1\u003e调用\u003c/h1\u003e\n\n\u003cp\u003e用main方法调用sha-256\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003emain.go\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;GraduationProject/tools\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n)\n\nfunc main() {\n\n\ttxt := \u0026quot;Hello World!\u0026quot;\n\n\tcode := tools.GetSHA256HashCode(txt)\n\n\tfmt.Println(\u0026quot;\\n加密前的明文\\n\u0026quot;, txt, \u0026quot;\\nSHA-256加密后的密文:\\n\u0026quot;, code)\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e控制台\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e加密前的明文\n Hello World!\nSHA-256加密后的密文:\n 7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch1\u003e代码实现sha-512\u003c/h1\u003e\n\n\u003cpre\u003e\u003ccode\u003e将sha-256.go文件的第15行加上注释，16行去掉注释\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\n\npackage tools\n\nimport (\n\t\u0026quot;crypto/sha256\u0026quot;\n\t\u0026quot;encoding/hex\u0026quot;\n)\n\n//SHA256生成哈希值\n\nfunc GetSHA256HashCode(stringMessage string) string {\n\n\tmessage := []byte(stringMessage) //字符串转化字节数组\n\t//创建一个基于SHA256算法的hash.Hash接口的对象\n\t//hash := sha256.New() //sha-256加密\n\thash := sha512.New() //SHA-512加密\n\t//输入数据\n\thash.Write(message)\n\t//计算哈希值\n\tbytes := hash.Sum(nil)\n\t//将字符串编码为16进制格式,返回字符串\n\thashCode := hex.EncodeToString(bytes)\n\t//返回哈希值\n\treturn hashCode\n\n}\n\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "分享一个 go 写的 cms",
+      "Link": "https://studygolang.com/topics/15742#reply0",
+      "Description": "\u003cp\u003e最近也写了个简单的cms系统，基于go语言的 \u003ccode\u003egofiber\u003c/code\u003e 框架，数据库连接使用的是 \u003ccode\u003eXorm\u003c/code\u003e\u003c/p\u003e\n\n\u003cp\u003e当时的想法是需要用到 \u003ccode\u003erpc\u003c/code\u003e 连接，所以这里面有加上 \u003ccode\u003erpc\u003c/code\u003e\u003c/p\u003e\n\n\u003cp\u003e用户端页面模板是可替换的\u003c/p\u003e\n\n\u003cp\u003e项目地址为: \u003ca href=\"https://github.com/deatil/doak-cms\"\u003ehttps://github.com/deatil/doak-cms\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e一些截图\n\u003cimg src=\"https://static.golangjob.cn/220624/4c4b84787d62780f86fd01f66fa81af6.png\" alt=\"art.png\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/220624/9e38a2d282669f4df22ffbc44087af39.png\" alt=\"login.png\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/220624/76c47ba3e52fb08370b1fa4f7fb3cfe2.png\" alt=\"cate.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "redis web端管理工具 grm",
+      "Link": "https://studygolang.com/p/1123#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "用golang写的终端(命令行)组件库",
+      "Link": "https://studygolang.com/topics/15740#reply0",
+      "Description": "\u003cp\u003e项目地址:\n- \u003ca href=\"https://github.com/fzdwx/infinite\"\u003egithub\u003c/a\u003e\n- \u003ca href=\"https://gitee.com/ekoclike/infinite\"\u003egitee\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e简介:\u003c/p\u003e\n\n\u003cp\u003e主要用于开发终端(命令行)的程序,它默认提供一些交互式的组件库,例如\n- multi select\n- single select\n- confirm\n- spinner\u003c/p\u003e\n\n\u003cp\u003e同样也提供一些更基础的\u003ccode\u003ecomponent\u003c/code\u003e\n- input#component\n- selection#component\n- spinner#component\u003c/p\u003e\n\n\u003cp\u003e你可以将它们组合起来,或者封装你想要的形状,比如说\u003ccode\u003emulti select\u003c/code\u003e和 \u003ccode\u003esingle select\u003c/code\u003e 的基础组件就是\u003ccode\u003eselection#component\u003c/code\u003e; \u003ccode\u003einput text\u003c/code\u003e和 \u003ccode\u003econfirm\u003c/code\u003e是基于\u003ccode\u003einput#component\u003c/code\u003e.\u003c/p\u003e\n\n\u003cp\u003e一些demo:\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://user-images.githubusercontent.com/65269574/183073869-7de79068-0d52-46d2-84aa-4a5130df5634.gif\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://user-images.githubusercontent.com/65269574/183075959-031a068d-6f88-40a0-8b5e-f3d5bba481af.gif\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://user-images.githubusercontent.com/65269574/183076452-5fa73013-42de-47df-97b4-7be743d074c1.gif\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "最新学习GO,基础+进阶,有学习路线图、面试题、Go语言大牛必读书籍，关键还有视频版，发给各位  扶我起来，我还有继续学",
+      "Link": "https://studygolang.com/topics/15739#reply1",
+      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220805/9f044b131e5f1f38e34b27e87c30c9be.jpg\" alt=\"微信图片_20220805105033.jpg\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/220805/929f0240e89434dfc1ff241aa03d6af7.jpg\" alt=\"微信图片_202208051050331.jpg\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/220805/3af4a46a268351b2e372b21ff7099bc6.jpg\" alt=\"微信图片_202208051050332.jpg\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/220805/6ea01d87d1eb024e4fe358628cfe45c2.jpg\" alt=\"微信图片_202208051050333.jpg\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/220805/78dd0c442ee6764eef29dcba1220258d.jpg\" alt=\"微信图片_202208051050334.jpg\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -60,13 +81,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "redis web端管理工具 grm",
-      "Link": "https://studygolang.com/p/1123#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "关于执行cmd命令的问题，各位彦祖请进来给点意见",
       "Link": "https://studygolang.com/topics/15741#reply0",
       "Description": "\u003cp\u003e请问不使用wait方法，有什么方法知道cmd正在运行或者运行结束了\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220805/3226ff7759b3fd47bbaab20d223b745b.png\" alt=\"微信截图_20220805225803.png\" /\u003e\u003c/p\u003e\n",
@@ -74,23 +88,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "用golang写的终端(命令行)组件库",
-      "Link": "https://studygolang.com/topics/15740#reply0",
-      "Description": "\u003cp\u003e项目地址:\n- \u003ca href=\"https://github.com/fzdwx/infinite\"\u003egithub\u003c/a\u003e\n- \u003ca href=\"https://gitee.com/ekoclike/infinite\"\u003egitee\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e简介:\u003c/p\u003e\n\n\u003cp\u003e主要用于开发终端(命令行)的程序,它默认提供一些交互式的组件库,例如\n- multi select\n- single select\n- confirm\n- spinner\u003c/p\u003e\n\n\u003cp\u003e同样也提供一些更基础的\u003ccode\u003ecomponent\u003c/code\u003e\n- input#component\n- selection#component\n- spinner#component\u003c/p\u003e\n\n\u003cp\u003e你可以将它们组合起来,或者封装你想要的形状,比如说\u003ccode\u003emulti select\u003c/code\u003e和 \u003ccode\u003esingle select\u003c/code\u003e 的基础组件就是\u003ccode\u003eselection#component\u003c/code\u003e; \u003ccode\u003einput text\u003c/code\u003e和 \u003ccode\u003econfirm\u003c/code\u003e是基于\u003ccode\u003einput#component\u003c/code\u003e.\u003c/p\u003e\n\n\u003cp\u003e一些demo:\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://user-images.githubusercontent.com/65269574/183073869-7de79068-0d52-46d2-84aa-4a5130df5634.gif\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://user-images.githubusercontent.com/65269574/183075959-031a068d-6f88-40a0-8b5e-f3d5bba481af.gif\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://user-images.githubusercontent.com/65269574/183076452-5fa73013-42de-47df-97b4-7be743d074c1.gif\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "选择客栈算法题20220805",
       "Link": "https://studygolang.com/articles/35815#reply0",
       "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "最新学习GO,基础+进阶,有学习路线图、面试题、Go语言大牛必读书籍，关键还有视频版，发给各位  扶我起来，我还有继续学",
-      "Link": "https://studygolang.com/topics/15739#reply1",
-      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220805/9f044b131e5f1f38e34b27e87c30c9be.jpg\" alt=\"微信图片_20220805105033.jpg\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/220805/929f0240e89434dfc1ff241aa03d6af7.jpg\" alt=\"微信图片_202208051050331.jpg\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/220805/3af4a46a268351b2e372b21ff7099bc6.jpg\" alt=\"微信图片_202208051050332.jpg\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/220805/6ea01d87d1eb024e4fe358628cfe45c2.jpg\" alt=\"微信图片_202208051050333.jpg\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/220805/78dd0c442ee6764eef29dcba1220258d.jpg\" alt=\"微信图片_202208051050334.jpg\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
