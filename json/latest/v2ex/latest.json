@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请问 openwrt 的 wireguard 如何设置？ - OpenWrt",
+      "Link": "https://www.v2ex.com/t/871543",
+      "Description": "各位彦祖：\u003cbr /\u003e\u003cbr /\u003e场景是 op 的 wg 当客户端连接远端一个 peer ，不是当服务端让其它客户端接入，所以设置方法跟很多教程不一样，不需要端口转发，也不需要监听固定端口，默认监听随机端口就行。\u003cbr /\u003e\u003cbr /\u003e我参考资料尝试 2 种方案都一样，网络倒是通了，不过 op 下本地网络默认优先走远端 peer ，表现是访问 \u003ca target=\"_blank\" href=\"https://www.ip138.com\" rel=\"nofollow noopener\"\u003ehttps://www.ip138.com\u003c/a\u003e 得到远端 peer 的公网 ip ，不是 op 自身本地拨号公网 ip ，而且 wireguard 接口的流量非常大。\u003cbr /\u003e\u003cbr /\u003e我希望把远端局域网（ 10.13.1.*）接入到本地网络（ 192.168.2.*）之后，本地网络默认走自己公网 ip ，不可用时才走远端 peer 。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e第 1 种方案，参考油管视频： \u003cdiv class=\"embedded_video_wrapper\"\u003e\u003ciframe src=\"https://www.youtube.com/embed/0_zQAp3V18c\" class=\"embedded_video\" allowfullscreen=\"\" type=\"text/html\" id=\"ytplayer\" frameborder=\"0\"\u003e\u003c/iframe\u003e\u003c/div\u003e ，主要特点是把 wireguard 接口的防火墙分配给 wan 区域，配置好 client 就能用，无需再额外折腾防火墙规则，简单易用。\u003cbr /\u003e\u003cbr /\u003e第 2 种方案，参考其他博客，把 wireguard 接口的防火墙分配给一个新建区域，命名为 wireguard ，设置 lan 区域 \u0026lt;=\u0026gt; wireguard 区域 允许互相转发，启动 wg 接口发现只有 op 自身能连接远端局域网（ 10.13.1.*），本地局域网其他机器则不行，op 加入一条防火墙自定义规则后解决：iptables -t nat -A POSTROUTING -o wireguard -j MASQUERADE\u003cbr /\u003e\u003cbr /\u003e2 种方案都有同样的问题，折腾期间好几次翻车让我电脑跟 op 失联失去控制，幸运的是 pve 宿主机还能连，通过 console 模拟物理显示器的方式进入 op ssh ，vim 修改配置救回来。\u003cbr /\u003e\u003cbr /\u003e怀疑是路由问题，启动 wireguard 后，ip route show table main 显示默认路由由 pppoe-wan 改成了 wireguard ，尝试改成 pppoe-wan 优先，没改成功。",
+      "Author": "photon006",
+      "PubDate": "2022-08-08T15:09:55Z"
+    },
+    {
+      "Title": "求助：家里路由器有信号但是网速很差的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/871542",
+      "Description": "这应该是一个通用问题，在我们小区普遍存在\u003cbr /\u003e\u003cbr /\u003e背景情况：新买的红米 AX3000 路由器在卧室，不太好移动了  卧室内 2.4ghz 和 5ghz 的 wifi 都速度很快 没问题\u003cbr /\u003e\u003cbr /\u003e客厅和卧室有点远，隔了两堵墙，在客厅用 wifi 体验很差\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e问题\u003cbr /\u003e1  只用 5ghz 的情况，在客厅信号很弱，手机连上只有 1 小格，但是尽管只有一格，速度达到 4-5m/s 还是没问题的，看个视频发个微信够用了 。\u003cbr /\u003e但是问题就是信号格数太小，很容易完全断掉……  导致体验不好\u003cbr /\u003e\u003cbr /\u003e2 于是换用 2.4ghz ，到了客厅，信号只衰减了一格看上去还不错，但是实际体验差很多，微信消息延迟很久发不出去，b 站看视频要缓冲很久…… 基本不可用\u003cbr /\u003e\u003cbr /\u003e这种情况下我怀疑是小区里 2.4ghz 的路由器太多，信道占满了\u003cbr /\u003e\u003cbr /\u003e但是奇怪的是为什么在卧室没问题，我猜测是卧室里信道满了但是仍然够用，到了客厅信号虽然有两格，但是可能信道的堵塞更严重，导致无法正常使用？\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e---这个问题在同户型的邻居家也复现了，基本都是 2.4ghz 很容易有信号但是无网可上\u003cbr /\u003e\u003cbr /\u003e所以现在很尴尬，5ghz 和 2.4ghz 的体验都不好\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e我想了想最好的办法可能是再买个路由器组无限 mesh  但是要加钱  优先级不那么高，实在不行再这么干\u003cbr /\u003e\u003cbr /\u003e有没有别的好的解决办法？或者有没有老哥解释一下其中的技术原因（ 2.4ghz 信号还好但是就是没网速）\u003cbr /\u003e\u003cbr /\u003e感谢~",
+      "Author": "wasd6267016",
+      "PubDate": "2022-08-08T15:07:30Z"
+    },
+    {
       "Title": "看起来 IE 不是最好的第三方浏览器下载器了，连浏览器官网都不适配 IE 了，错位到下载按钮都点不到了，有点离谱。 - 分享发现",
       "Link": "https://www.v2ex.com/t/871539",
       "Description": "\u003ca target=\"_blank\" href=\"http://i.ibb.co/SB0Srpz/64.jpg\" rel=\"nofollow noopener\"\u003ei.ibb.co/SB0Srpz/64.jpg\u003c/a\u003e",
