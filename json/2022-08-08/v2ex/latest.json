@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "DRF ModelViewSet django-filter 如何筛选关联表字段？ - Python",
+      "Link": "https://www.v2ex.com/t/871497",
+      "Description": "\u003cp\u003epython 新手，一个简单的筛选把我搞懵逼了。\n第一个 model: electrode\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003efrom django.db import models\n\n# Create your models here.\n\nclass Electrode(models.Model):\n    name = models.CharField(max_length=32, null=True)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e第二个 model: electrode_log\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003efrom django.db import models\nfrom Application.views.electrode.models import Electrode\n\n# Create your models here.\n\nclass ElectrodeLog(models.Model):\n    electrode = models.ForeignKey(Electrode, on_delete=models.CASCADE, default=None, null=True)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e用的视图集 ModelViewSet ，求教怎么在筛选到 Electrode 表的 name ，万分感激。\u003c/p\u003e\n",
+      "Author": "lsymy",
+      "PubDate": "2022-08-08T11:13:25Z"
+    },
+    {
+      "Title": "有没有什么好的云开发方案，价格便宜好用的 - 程序员",
+      "Link": "https://www.v2ex.com/t/871496",
+      "Description": "M1 芯片，有些软件体验感很差，比如说 hbuilder 连接安卓模拟器，想通过 webide 或者 rdp 远程实现云开发",
+      "Author": "unt",
+      "PubDate": "2022-08-08T11:13:03Z"
+    },
+    {
       "Title": "Vue 新手上路，像请教个 vue-router 的问题 - 程序员",
       "Link": "https://www.v2ex.com/t/871495",
       "Description": "\u003cp\u003e下面是我写的一个 demo\u003c/p\u003e\n\u003cp\u003eApp.vue 文件\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026lt;template\u0026gt;\n  \u0026lt;div\u0026gt;这是根页面\u0026lt;/div\u0026gt;\n\u0026lt;/template\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eLogin.vue 组件\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026lt;template\u0026gt;\n  \u0026lt;div\u0026gt;这是 login 页面\u0026lt;/div\u0026gt;\n  \u0026lt;button @click=\"login\"\u0026gt;login\u0026lt;/button\u0026gt;\n\u0026lt;/template\u0026gt;\n\n\u0026lt;script setup\u0026gt;\n  import { useRouter } from 'vue-router';\n  const router = useRouter()\n  const toHome = () =\u0026gt; {\n    localStorage.setItem('username', 'tom');\n    router.push('/')\n  }\n\u0026lt;/script\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e路由文件\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003econst routes = [\n  {\n    path: '/',\n    redirect: () =\u0026gt; {\n      if(localStorage['username'] == 'tom'){\n        return '/'\n      }else{\n        return '/login'\n      }\n    }\n  },\n  {\n    path: '/login',\n    component: login\n  },\n]\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我的本意是 login 页面因为没有任何复用的标签或组件，是完全独立于\u003ccode\u003e/\u003c/code\u003e根页面的，没登录跳转到 Login 组件，但当我访问\u003ccode\u003elocalhost:3000\u003c/code\u003e时，我以为的页面是这样的\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.bmp.ovh/imgs/2022/08/08/9b1ff0426d9d6e3d.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e但实际渲染出来的页面是\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.bmp.ovh/imgs/2022/08/08/34ad88e75a5a13dc.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e为啥差别这么大呢，为啥根页面内容没被替换掉，login 页面的内容没渲染出来\u003c/p\u003e\n\u003cp\u003e首先项目自带的 App.vue 最终会渲染到于\u003ccode\u003e/\u003c/code\u003e根页面上，我没理解错吧？\u003c/p\u003e\n\u003cp\u003e为啥组件不能脱离 App.vue 渲染单独当做一个页面使用吗？只能使用\u003ccode\u003e\u0026lt;router-view/\u0026gt;\u003c/code\u003e或者\u003ccode\u003e\u0026lt;component is=''/\u0026gt;\u003c/code\u003e镶嵌在 App.vue 中使用吗？\u003c/p\u003e\n\u003cp\u003e还有访问一个我没有在路由中配置的 url ，如\u003ccode\u003e/home\u003c/code\u003e，按理说是 404 ，但实际还可以访问 App.vue 的渲染的\u003ccode\u003e/\u003c/code\u003e根页面，难道就不能限制\u003ccode\u003e/\u003c/code\u003e完全只匹配\u003ccode\u003e/\u003c/code\u003e，不去匹配\u003ccode\u003e/home\u003c/code\u003e，\u003ccode\u003e/user\u003c/code\u003e？\u003c/p\u003e\n",

@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>DRF ModelViewSet django-filter 如何筛选关联表字段？ - Python</title>
+      <link>https://www.v2ex.com/t/871497</link>
+      <description>&lt;p&gt;python 新手，一个简单的筛选把我搞懵逼了。&#xA;第一个 model: electrode&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django.db import models&#xA;&#xA;# Create your models here.&#xA;&#xA;class Electrode(models.Model):&#xA;    name = models.CharField(max_length=32, null=True)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第二个 model: electrode_log&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django.db import models&#xA;from Application.views.electrode.models import Electrode&#xA;&#xA;# Create your models here.&#xA;&#xA;class ElectrodeLog(models.Model):&#xA;    electrode = models.ForeignKey(Electrode, on_delete=models.CASCADE, default=None, null=True)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;用的视图集 ModelViewSet ，求教怎么在筛选到 Electrode 表的 name ，万分感激。&lt;/p&gt;&#xA;</description>
+      <author>lsymy</author>
+      <pubDate>08 Aug 2022 11:13:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有什么好的云开发方案，价格便宜好用的 - 程序员</title>
+      <link>https://www.v2ex.com/t/871496</link>
+      <description>M1 芯片，有些软件体验感很差，比如说 hbuilder 连接安卓模拟器，想通过 webide 或者 rdp 远程实现云开发</description>
+      <author>unt</author>
+      <pubDate>08 Aug 2022 11:13:03 +0000</pubDate>
+    </item>
+    <item>
       <title>Vue 新手上路，像请教个 vue-router 的问题 - 程序员</title>
       <link>https://www.v2ex.com/t/871495</link>
       <description>&lt;p&gt;下面是我写的一个 demo&lt;/p&gt;&#xA;&lt;p&gt;App.vue 文件&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;&#xA;  &amp;lt;div&amp;gt;这是根页面&amp;lt;/div&amp;gt;&#xA;&amp;lt;/template&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;Login.vue 组件&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;&#xA;  &amp;lt;div&amp;gt;这是 login 页面&amp;lt;/div&amp;gt;&#xA;  &amp;lt;button @click=&#34;login&#34;&amp;gt;login&amp;lt;/button&amp;gt;&#xA;&amp;lt;/template&amp;gt;&#xA;&#xA;&amp;lt;script setup&amp;gt;&#xA;  import { useRouter } from &#39;vue-router&#39;;&#xA;  const router = useRouter()&#xA;  const toHome = () =&amp;gt; {&#xA;    localStorage.setItem(&#39;username&#39;, &#39;tom&#39;);&#xA;    router.push(&#39;/&#39;)&#xA;  }&#xA;&amp;lt;/script&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;路由文件&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;const routes = [&#xA;  {&#xA;    path: &#39;/&#39;,&#xA;    redirect: () =&amp;gt; {&#xA;      if(localStorage[&#39;username&#39;] == &#39;tom&#39;){&#xA;        return &#39;/&#39;&#xA;      }else{&#xA;        return &#39;/login&#39;&#xA;      }&#xA;    }&#xA;  },&#xA;  {&#xA;    path: &#39;/login&#39;,&#xA;    component: login&#xA;  },&#xA;]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我的本意是 login 页面因为没有任何复用的标签或组件，是完全独立于&lt;code&gt;/&lt;/code&gt;根页面的，没登录跳转到 Login 组件，但当我访问&lt;code&gt;localhost:3000&lt;/code&gt;时，我以为的页面是这样的&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.bmp.ovh/imgs/2022/08/08/9b1ff0426d9d6e3d.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;但实际渲染出来的页面是&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.bmp.ovh/imgs/2022/08/08/34ad88e75a5a13dc.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;为啥差别这么大呢，为啥根页面内容没被替换掉，login 页面的内容没渲染出来&lt;/p&gt;&#xA;&lt;p&gt;首先项目自带的 App.vue 最终会渲染到于&lt;code&gt;/&lt;/code&gt;根页面上，我没理解错吧？&lt;/p&gt;&#xA;&lt;p&gt;为啥组件不能脱离 App.vue 渲染单独当做一个页面使用吗？只能使用&lt;code&gt;&amp;lt;router-view/&amp;gt;&lt;/code&gt;或者&lt;code&gt;&amp;lt;component is=&#39;&#39;/&amp;gt;&lt;/code&gt;镶嵌在 App.vue 中使用吗？&lt;/p&gt;&#xA;&lt;p&gt;还有访问一个我没有在路由中配置的 url ，如&lt;code&gt;/home&lt;/code&gt;，按理说是 404 ，但实际还可以访问 App.vue 的渲染的&lt;code&gt;/&lt;/code&gt;根页面，难道就不能限制&lt;code&gt;/&lt;/code&gt;完全只匹配&lt;code&gt;/&lt;/code&gt;，不去匹配&lt;code&gt;/home&lt;/code&gt;，&lt;code&gt;/user&lt;/code&gt;？&lt;/p&gt;&#xA;</description>
