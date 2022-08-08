@@ -46,9 +46,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "redis web端管理工具 grm",
-      "Link": "https://studygolang.com/p/1123#reply0",
-      "Description": "",
+      "Title": "求助，关于json反序列化问题",
+      "Link": "https://studygolang.com/articles/35816#reply2",
+      "Description": "\u003cp\u003e现状如下：\n\u0026gt;我现在有很多API，每个API的数据都不一样，每个接口我所需要的数据也不一样，所以我针对每一个接口，都写了不同的结构体。现在我获得响应，需要根据不同的API初始化不同的结构体，再把获取的json数据反序列化到这个结构体\u003c/p\u003e\n\n\u003cp\u003e问题如下：\n\u0026gt;由于存在很多API，也就是说很多不同结构体，我在\u003ccode\u003ejson.Unmarshal()\u003c/code\u003e的时候，必须传\u003ccode\u003einterface\u003c/code\u003e，但是使用\u003ccode\u003eUnmarshal（）\u003c/code\u003e函数的时候，如果传参是\u003ccode\u003einterface\u003c/code\u003e，那么一定会反序列化成\u003ccode\u003emap\u003c/code\u003e格式，这样导致我使用结构体过滤的数据无效。\u003c/p\u003e\n\n\u003cp\u003e例子：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\ntype API struct {\n\tMyTarget    string    `json:\u0026quot;target\u0026quot;`\n}\n\ntype API2 struct {\n\tMyTarget2    string    `json:\u0026quot;target2\u0026quot;`\n}\n\ntype API3 struct {\n\tMyTarget3    string    `json:\u0026quot;target3\u0026quot;`\n}\n\nvar APISlice = map[string]interface{}{\n\t\u0026quot;api\u0026quot;:API{},\n\t\u0026quot;api2\u0026quot;:API2{},\n\t\u0026quot;api3\u0026quot;:API3{},\n}\n\nfunc main() {\n    data = []byte{}\n    str := \u0026quot;api1\u0026quot;\t//假设是api1,实际业务我是遍历每一个api的\n    myStruct := APISlice[str]\n    json.Unmarshal(data,\u0026amp;myStruct)\t//此时得到的结果，是一个map,并且响应的结果（即data）全部装进这个map里面了\n\t\t\t\t\t\t\t\t//而我想要的是我已经用结构体定义好的字段，target就是我想要得\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -60,9 +60,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "求助，关于json反序列化问题",
-      "Link": "https://studygolang.com/articles/35816#reply2",
-      "Description": "\u003cp\u003e现状如下：\n\u0026gt;我现在有很多API，每个API的数据都不一样，每个接口我所需要的数据也不一样，所以我针对每一个接口，都写了不同的结构体。现在我获得响应，需要根据不同的API初始化不同的结构体，再把获取的json数据反序列化到这个结构体\u003c/p\u003e\n\n\u003cp\u003e问题如下：\n\u0026gt;由于存在很多API，也就是说很多不同结构体，我在\u003ccode\u003ejson.Unmarshal()\u003c/code\u003e的时候，必须传\u003ccode\u003einterface\u003c/code\u003e，但是使用\u003ccode\u003eUnmarshal（）\u003c/code\u003e函数的时候，如果传参是\u003ccode\u003einterface\u003c/code\u003e，那么一定会反序列化成\u003ccode\u003emap\u003c/code\u003e格式，这样导致我使用结构体过滤的数据无效。\u003c/p\u003e\n\n\u003cp\u003e例子：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\ntype API struct {\n\tMyTarget    string    `json:\u0026quot;target\u0026quot;`\n}\n\ntype API2 struct {\n\tMyTarget2    string    `json:\u0026quot;target2\u0026quot;`\n}\n\ntype API3 struct {\n\tMyTarget3    string    `json:\u0026quot;target3\u0026quot;`\n}\n\nvar APISlice = map[string]interface{}{\n\t\u0026quot;api\u0026quot;:API{},\n\t\u0026quot;api2\u0026quot;:API2{},\n\t\u0026quot;api3\u0026quot;:API3{},\n}\n\nfunc main() {\n    data = []byte{}\n    str := \u0026quot;api1\u0026quot;\t//假设是api1,实际业务我是遍历每一个api的\n    myStruct := APISlice[str]\n    json.Unmarshal(data,\u0026amp;myStruct)\t//此时得到的结果，是一个map,并且响应的结果（即data）全部装进这个map里面了\n\t\t\t\t\t\t\t\t//而我想要的是我已经用结构体定义好的字段，target就是我想要得\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Title": "redis web端管理工具 grm",
+      "Link": "https://studygolang.com/p/1123#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
