@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "为何从通道取数据顺序是错误的？ - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/871477",
+      "Description": "\u003cp\u003e新手学习 go ，从通道中获取数据为什么顺序是错乱的，下面是我写的伪代码\npackage main\u003c/p\u003e\n\u003cp\u003eimport (\n\"fmt\"\n\"io\"\n\"net/http\"\n\"os\"\n\"sync\"\n)\u003c/p\u003e\n\u003cp\u003evar wg sync.WaitGroup\u003c/p\u003e\n\u003cp\u003efunc Gets(uri string, buf chan []byte) {\nresp, err := http.Get(uri)\nif err != nil {\nfmt.Println(err)\nreturn\n}\ndefer resp.Body.Close()\nbufs := make([]byte, 128)\nfor {\nn, err1 := resp.Body.Read(bufs[:])\nif err1 == io.EOF {\nbreak\n}\nbuf \u0026lt;- bufs[:n]\nfmt.Println(string(bufs[:n]))\n}\nfmt.Println(\"读取数据完毕\")\nclose(buf)\n}\u003c/p\u003e\n\u003cp\u003efunc SaveFile(name string, buf chan []byte) {\ndefer wg.Done()\nf, err2 := os.Create(name)\nif err2 != nil {\nreturn\n}\ndefer f.Close()\nfor {\nif data, ok := \u0026lt;-buf; ok {\nf.Write(data)\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\t} else {\n\t\tbreak\n\t}\n}\nf.Sync()\nfmt.Println(\"写入数据完毕\")\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e}\u003c/p\u003e\n\u003cp\u003efunc main() {\nfor i := 1; i \u0026lt; 2; i++ {\nwg.Add(1)\nbuf := make(chan []byte)\nfiles1 := \"test1.txt\"\nurils := \"\u003ca href=\"http://www.baidu.cn\" rel=\"nofollow\"\u003ehttp://www.baidu.cn\u003c/a\u003e\"\ngo SaveFile(files1, buf)\ngo Gets(urils, buf)\n}\nwg.Wait()\n}\u003c/p\u003e\n\u003cp\u003efmt.Println(string(bufs[:n]))这个和 test1.txt 中内容不一致啊，这个是为什么，各位大神帮忙分析下。\u003c/p\u003e\n",
+      "Author": "yunshangdetianya",
+      "PubDate": "2022-08-08T09:29:31Z"
+    },
+    {
+      "Title": "RyzenTuner：一个调节 Ryzen 移动处理器功率限制的小工具 - 分享发现",
+      "Link": "https://www.v2ex.com/t/871475",
+      "Description": "\u003cp\u003e在 GitHub 上看到 Archeb 的 \u003ca href=\"https://github.com/Archeb/RyzenTuner\" rel=\"nofollow\"\u003eRyzenTuner\u003c/a\u003e 项目，根据自己的需求在原来的基础上做了一点调整。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"preview.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/08/08/zUrw76fEuGLVZ4i.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003eGitHub 项目地址：\n\u003ca href=\"https://github.com/zqhong/RyzenTuner\" rel=\"nofollow\"\u003ehttps://github.com/zqhong/RyzenTuner\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e下载地址：\n\u003ca href=\"https://github.com/zqhong/RyzenTuner/releases\" rel=\"nofollow\"\u003ehttps://github.com/zqhong/RyzenTuner/releases\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "zqhong",
+      "PubDate": "2022-08-08T09:27:05Z"
+    },
+    {
+      "Title": "firefox 确定不是在搞笑吗？一万年了出了个浏览器级的翻译扩展 - 问与答",
+      "Link": "https://www.v2ex.com/t/871474",
+      "Description": "\u003cp\u003e然后 choose language 里面，没有英语，我真服了\u003c/p\u003e\n",
+      "Author": "placeholder",
+      "PubDate": "2022-08-08T09:25:15Z"
+    },
+    {
+      "Title": "windows 主板后面那个 AUDIO 圆孔插入耳机没有反应 - 问与答",
+      "Link": "https://www.v2ex.com/t/871473",
+      "Description": "\u003cp\u003e没个孔都试过，而且还有插入提示。但是就是没有声音呢\u003c/p\u003e\n",
+      "Author": "stnhu",
+      "PubDate": "2022-08-08T09:22:52Z"
+    },
+    {
       "Title": "想给老爸买点茶，有推荐的店铺吗？ - 生活",
       "Link": "https://www.v2ex.com/t/871472",
       "Description": "\u003cp\u003e铁观音、碧螺春都可以\u003c/p\u003e\n",
