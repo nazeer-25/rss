@@ -4,13 +4,6 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>无 - 问与答</title>
-      <link>https://www.v2ex.com/t/871425</link>
-      <description>无</description>
-      <author>freelancher</author>
-      <pubDate>08 Aug 2022 06:40:45 +0000</pubDate>
-    </item>
-    <item>
       <title>有没有其他的类似于剪藏的 App 或者服务？ - 问与答</title>
       <link>https://www.v2ex.com/t/871424</link>
       <description>&lt;p&gt;如题。&lt;/p&gt;&#xA;&lt;p&gt;这么多年一直觉得剪藏很好用，而且在各个设备上都能比较好的使用和同步。没找到类似的替代品。&#xA;但单纯用剪藏又觉得有点贵，另外有着对印象笔记本体的各种不爽。&lt;/p&gt;&#xA;&lt;p&gt;因此请教有没有其他的类似于剪藏的 App 或者服务？谢谢！&lt;/p&gt;&#xA;</description>
@@ -275,6 +268,13 @@
       <description>&lt;p&gt;一、查看 docker container 的 Cgroup 我是使用如下方式：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker ps|grep nginx&#xA;$ docker inspect 4e35d36bc919 | grep -i pid&#xA;&#xA;&#34;Pid&#34;: 20513,&#xA;&#34;PidMode&#34;: &#34;&#34;,&#xA;&#34;PidsLimit&#34;: null,&#xA;&#xA;$ cd /sys/fs/cgroup/memory&#xA;$ cat cgroup.procs # 20513 ，可以看到 docker nginx 的 container 的 PID 为 20513 的已经生效&#xA;$ cat memory.limit_in_bytes &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;二、但是在 K8S 中找了半天也找不到 Pod 的 Cgroups&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 使用下面命令设置了 CPU 和 Memory&#xA;$ kubectl set resources deployment nginx-deployment -c=nginx --limits=cpu=500m,memory=128Mi&#xA;# 查看是否生效&#xA;$ kubectl get deploy nginx-deployment -oyaml&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;...&#xA;spec:&#xA;  containers:&#xA;    resources:&#xA;      limits:&#xA;        cpu: 500m&#xA;        memory: 128Mi&#xA;...&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;得到如上 yaml 证明已经修改 CPU 、Memory 成功了。&lt;/p&gt;&#xA;&lt;p&gt;问题：K8S 如何查看 Pod 的 Cgroup ？换句话说我想找到“使用 kubectl set resources 命令设置 CPU 、Memory 的 Cgroup 在 Linux 上的实现”，因为是初学者，所以希望各位前辈通俗易懂最好有命令可以提供一下，不胜感激！！！！感谢每一位回复的前辈，谢谢&lt;/p&gt;&#xA;&lt;p&gt;docker 已配置：cgroupdriver=systemd&#xA;&lt;br/&gt;&lt;/p&gt;&#xA;&lt;p&gt;docker version：20.10.17&#xA;&lt;br/&gt;&lt;/p&gt;&#xA;&lt;p&gt;kubernetes version：v1.22.2&lt;/p&gt;&#xA;</description>
       <author>jenrey</author>
       <pubDate>08 Aug 2022 03:27:32 +0000</pubDate>
+    </item>
+    <item>
+      <title>无 - 问与答</title>
+      <link>https://www.v2ex.com/t/871425</link>
+      <description>无</description>
+      <author>freelancher</author>
+      <pubDate>08 Aug 2022 06:40:45 +0000</pubDate>
     </item>
     <item>
       <title>[网易内推] 互娱 23 届校招内推 内推码 XX3CuG - 酷工作</title>
