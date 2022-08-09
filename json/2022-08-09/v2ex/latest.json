@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "在已知车辆的坐标、速度向量以及旋转的情况下，求出车辆的漂移角度？ - 编程",
+      "Link": "https://www.v2ex.com/t/871779",
+      "Description": "\u003cp\u003eRT ，最近在开发一个游戏模组，想做一个漂移角度显示（就是下图中底部的那个条），目前能够通过脚本得到的信息有车辆的坐标、当前速度向量 Vector3 ，以及旋转（ roll, pitch, yaw ），如何计算出车辆的漂移角度？\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"img\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.zerodream.net/6308636fe610044545d5904f63e22d5d.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e已经有一段 Github 找的代码可以计算出漂移角度，但是它永远只能计算出正的角度，无法得知车辆是向左还是向右漂移。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-lua\"\u003efunction angle(veh)\n    local vx, vy, vz = table.unpack(GetEntityVelocity(veh))\n    local modV = math.sqrt(vx*vx + vy*vy)\n    local rx, ry, rz = table.unpack(GetEntityRotation(veh, 0))\n    local sn, cs = -math.sin(math.rad(rz)), math.cos(math.rad(rz))\n    \n    -- 如果速度太慢则返回 0\n    if GetEntitySpeed(veh)* 3.6 \u0026lt; 5 or GetVehicleCurrentGear(veh) == 0 then\n        return 0\n    end\n    \n    local cosX = (sn*vx + cs*vy) / modV\n    if cosX \u0026gt; 0.966 or cosX \u0026lt; 0 then\n        return 0\n    end\n    return math.deg(math.acos(cosX)) * 0.5\nend\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e各位 v2 大佬有什么好的方法吗？数学不好，实在是想不出来了\u003c/p\u003e\n\u003cp\u003e对了，语言是 Lua ，如果有其他语言的例子也可以，谢谢了~\u003c/p\u003e\n",
+      "Author": "KasuganoSoras",
+      "PubDate": "2022-08-09T13:45:11Z"
+    },
+    {
+      "Title": "Chrome 发起的 HTTP 的请求头 Accept 中有个 v=b3，它是干嘛的？ - 浏览器",
+      "Link": "https://www.v2ex.com/t/871778",
+      "Description": "\u003cpre\u003e\u003ccode\u003eAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e看末尾这里，有个 v=b3 。\u003c/p\u003e\n\u003cp\u003e隔壁 Firefox 倒是没带。\u003c/p\u003e\n",
+      "Author": "fstar",
+      "PubDate": "2022-08-09T13:38:00Z"
+    },
+    {
       "Title": "Windows/ Linux 版本 GoldenDict++OCR-3E11 支持 Apple OSX 内置词典 - 分享创造",
       "Link": "https://www.v2ex.com/t/871777",
       "Description": "如题，索引、查询、样式及全文检索等功能同其它格式辞书一样得到全面支持:\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://www.autoptr.top/gdocr/GoldenDict-OCR-Changelog/\" rel=\"nofollow noopener\"\u003ehttps://www.autoptr.top/gdocr/GoldenDict-OCR-Changelog/\u003c/a\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://www.autoptr.top/gdocr/GoldenDict-OCR-Free-Dictionaries/#1-apple-osxs-built-in-dictionaryhttpssupportapplecomzh-cnguidedictionarywelcomemac%E9%AB%98%E5%A4%A7%E4%B8%8A%E5%8F%88%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84apple%E8%BE%9E%E4%B9%A6httpssupportapplecomzh-cnguidedictionarywelcomemac\" rel=\"nofollow noopener\"\u003ehttps://www.autoptr.top/gdocr/GoldenDict-OCR-Free-Dictionaries/#1-apple-osxs-built-in-dictionaryhttpssupportapplecomzh-cnguidedictionarywelcomemac%E9%AB%98%E5%A4%A7%E4%B8%8A%E5%8F%88%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84apple%E8%BE%9E%E4%B9%A6httpssupportapplecomzh-cnguidedictionarywelcomemac\u003c/a\u003e",
