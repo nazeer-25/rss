@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "分享一个在 NAT1 下将端口打开到公网上的方法 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/871773",
+      "Description": "\u003ch2\u003e前言\u003c/h2\u003e\n\u003cp\u003e最近在机缘巧合之下入了几个 pt 大站。大站下载人数多，总的来说还是比较好混的。但是为了永久保留账号，需要刷一定的上传流量。在苦恼于硬盘空间不足无法大量保种的同时，还有一个很重要的问题就是没有公网 ip 。家里的宽带是电信内网 v4+公网 v6 ，虽然有 ipv6 地址，并且大部分 pt 都支持 v6 tracker ，但是总的来看 ipv6 无论是做种还是下载人数都是远远少于 ipv4 的。所以一直想要一个公网 ip 。给运营商要公网 ip 好几次，都被打太极给拒绝了。因为之前研究过 nat 以及打洞相关的知识，就想研究一下没有公网 ip 是否也可以把某个端口暴露在公网上。恰好家里宽带是 nat1 ，经过一番折腾，发现了一种可以在 nat1 下将某个端口暴露在公网的办法，在这里分享给大家。\u003c/p\u003e\n\u003ch2\u003e准备工具\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003eOS：Debian\u003c/li\u003e\n\u003cli\u003eBT 客户端： 这里以 qbittorrent-nox 为例，其他客户端可以自行参考\u003c/li\u003e\n\u003cli\u003ehttps mitm 、rewrite 工具： \u003ca href=\"https://mitmproxy.org/\" rel=\"nofollow\"\u003emitmproxy\u003c/a\u003e，选择它是因为可以兼顾中间人以及修改 http 请求\u003c/li\u003e\n\u003cli\u003e网络包构造工具： \u003ca href=\"https://github.com/rickettm/SendIP\" rel=\"nofollow\"\u003esendip\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e抓包工具：tcpdump\u003c/li\u003e\n\u003cli\u003e另一台具有公网 ip 的 vps\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e预备知识\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003enat1： 即完全锥形 nat ，意味着某一个 local port 对应的 external port 可以被任意地址的 peer 访问。其中 local port 和 external port 一般是不一样的。\u003c/li\u003e\n\u003cli\u003etracker： 一般 pt 站使用的均为 http(s) tracker ，根据\u003ca href=\"https://www.bittorrent.org/beps/bep_0003.html\" rel=\"nofollow\"\u003ebep_0003\u003c/a\u003e，对 tracker 的 http(s)请求参数中包含客户端 ip 和 port 信息，其中 ip 信息是可选的。通过对 qbittorrent 的 http 请求抓包可以证实上述过程。\u003c/li\u003e\n\u003cli\u003enexusphp：大部分国内 pt 站都用的这个框架。通过大致研究\u003ca href=\"https://github.com/xiaomlove/nexusphp\" rel=\"nofollow\"\u003e源码\u003c/a\u003e，可以发现客户端的 ip 地址实际是通过 tracker 请求对应的 ip 得到的，而 port 则是直接取 tracker 请求中的 port 参数。这就导致了服务器获取到的端口实际上是客户端的 local port 。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e具体步骤\u003c/h2\u003e\n\u003cp\u003e1 第一步当然是打开 BT 客户端。这里以 qbittorrent 为例，假设 qbittorrent 的 BT 监听端口，即 local port 为 12345\u003c/p\u003e\n\u003cp\u003e2 将 local port 和 nat 防火墙对应的 external port 之间的映射打开。由于 qbittorrent 已经监听了 12345 端口。所以无法通过创建一个新 socket 进行发包。当然，你可以重新编译 qbittorrent ，加上 SO_REUSEPORT 标志，但是这里为了快速实验，使用基于 raw socket 的 sendip 工具进行网络包创建，命令如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003ewatch -n 1 sendip -p ipv4 -is \u0026lt;LOCAL_ADDR\u0026gt; -id \u0026lt;YOUR_VPS_ADDR\u0026gt; -p tcp -ts 12345 -td \u0026lt;ARBITRARILY_PORT\u0026gt; \u0026lt;YOUR_VPS_ADDR\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这里使用 watch 命令每秒执行一次 sendip 命令，是因为我这里的 CGN nat 在未建立连接的情况下超时时间非常短，只有 5 秒。作为对比，linux 下 iptables 的 conntrack 模块在 NEW 状态下会持续 180 秒。所以需要每秒发一次包保持连接。注意，这个命令在之后需要一直运行以保持 nat 映射，即使已经端口映射成功。\u003c/p\u003e\n\u003cp\u003e命令中-td 表示的目标端口可以随意指定\u003c/p\u003e\n\u003cp\u003e3 在 vps 上抓包获取 external port 。使用 tcpdump 抓取上一步中发送的网络包，从而获取到 local port 12345 对应的 external port ，这里假设为 54321 。\u003c/p\u003e\n\u003cp\u003e4 本地部署 mitmproxy ，抓取 qbittorrent 的 tracker 请求。这里 qbittorrent 需要修改三个设置：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eConnection -\u0026gt; Peer connection protocol 改为 TCP 。因为 tcp 和 udp 在 nat 防火墙上映射得到的端口是不一样的，所以想同时映射 udp 的话需要再执行一次本教程。\u003c/li\u003e\n\u003cli\u003eConnection -\u0026gt; Proxy Server 设置 http 代理为 mitmproxy 的监听端口。注意这里不要勾选 Use proxy for peer connections ，因为我们只需要中间人 tracker 请求。  \u003c/li\u003e\n\u003cli\u003eAdvanced -\u0026gt; Validate HTTPS tracker certificate 取消勾选。因为解密 https 需要中间人证书，这里直接忽略校验证书，省去了配置 mitmproxy 自签名证书的步骤。这样就可以在 mitmproxy 中抓取到 tracker 请求了。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e5 通过 mitmproxy 自定义脚本修改 tracker 请求中的 port 参数。官网有一个\u003ca href=\"https://docs.mitmproxy.org/stable/addons-examples/#http-modify-query-string\" rel=\"nofollow\"\u003e示例\u003c/a\u003e，将参数换为 port ，参数的值替换为第三步中得到的 external port 54321 即可。\u003c/p\u003e\n\u003cp\u003e6 大功告成\u003c/p\u003e\n\u003ch2\u003e结果\u003c/h2\u003e\n\u003cp\u003e我从以下三方面验证了内网的 12345 端口已经打开在了公网上：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e通过另外设备(手机)或者站长工具里的\u003ca href=\"https://www.itdog.cn/tcping/\" rel=\"nofollow\"\u003etcp ping\u003c/a\u003e，可以 ping 通 54321 号端口。\u003c/li\u003e\n\u003cli\u003ept 站的个人信息页面里会显示客户端的 ip 以及端口，可以确认端口变为了 external port 54321 ，同时连接性为绿色。\u003c/li\u003e\n\u003cli\u003eqbittorrent 中，在种子的 peers 选项卡里，可以看到很多 peers 的 Flags 一栏中有 I 标志，意味着是由其他 peers 主动连接的。\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e问题\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003eipv6 。将 ipv4 的 external port 修改以后，在 pt 站的个人信息里，ipv6 的 external port 也改变了，导致 ipv6 无法接受入站连接。经过初步调研发现，似乎是 bt 标准对 ipv4\u0026amp;v6 双栈情况下的支持问题，即使 tracker 请求是 ipv4 发出的，qbittorrent 也会在参数上附加 ipv6=xxx 。尝试过将 v6 请求不经过 mitm 修改，也无法解决问题。其实个人也不推荐这么做，如果你的 v4 和 v6 端口不一样，可能会被管理员怀疑使用魔改客户端导致封号。一个变通的方法是，在本地使用 ip6tables 转发 ipv6 的 54321 端口到 12345 。\u003c/li\u003e\n\u003cli\u003enat 映射断开，事实上，虽然使用 watch 命令每秒发送一次数据包维持映射，但是在我实际测试中，还是有两次映射改变的情况，其中一次是因为宽带重拨，另一次我没有捕捉到原因。每次映射改变，都需要在 mitmproxy 脚本里更改 external port ，可以说是很不自动化。\u003c/li\u003e\n\u003cli\u003e这种方法只适用于通过 tracker 连接 peers 的情况，DHT 下似乎用不了？不过问题不大，毕竟是为了 pt 折腾的。\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e总结\u003c/h2\u003e\n\u003cp\u003e可以看出，通过(很麻烦的)折腾，是可以达到将 BT 客户端的 nat1 端口映射到公网的目的的。这主要归功于 nat1 的特性，所以显然 nat234 都不能使用。这个方法应该只在 PT 的情况下比较实用，毕竟如果是打洞的话，有一台有公网 ip 的 vps 就已经可以完成打洞了。这次试验结果来看还是很成功的，发现了一种将 nat1 主机的某个端口打开到公网的方法，但是使用上述方法显然不能完成自动化，大部分操作都需要手动配置。所以如果可以开发一款 C/S 软件，自动化的打开 nat 映射，服务端抓包，获取外部端口，结果发送到客户端，可以极大地简化上述操作，并且在 nat 映射发生改变的情况下自动的更改外部端口。\u003c/p\u003e\n",
+      "Author": "delpo",
+      "PubDate": "2022-08-09T12:38:13Z"
+    },
+    {
+      "Title": "有个创业思路，帮助传统企业做数据化转型，想讨论下？ - 问与答",
+      "Link": "https://www.v2ex.com/t/871771",
+      "Description": "\u003cp\u003e给传统企业提供数据化转型的定制化服务，就是数据仓库，BI 报表，数据分析乃至机器学习这样一整套的解决方案？这个能搞吗?这里有没有传统企业的朋友来交流下？\u003c/p\u003e\n",
+      "Author": "scratbai",
+      "PubDate": "2022-08-09T12:35:24Z"
+    },
+    {
+      "Title": "有在香港 IT 工作的朋友吗？希望能认识一下 - 香港",
+      "Link": "https://www.v2ex.com/t/871770",
+      "Description": "有 hk id ，但是一直在国内读书工作，不会粤语，英文一般的话，怎么在香港找到第一份工作呢？",
+      "Author": "Timzzzzz",
+      "PubDate": "2022-08-09T12:33:02Z"
+    },
+    {
+      "Title": "[求助贴] openwrt 中 passwall 使用自建节点无法访问 - OpenWrt",
+      "Link": "https://www.v2ex.com/t/871769",
+      "Description": "\u003cp\u003e请教下各位 v 友，openwrt 中 Passwall 上网问题:\u003c/p\u003e\n\u003cp\u003e设备及系统：\n使用 K2p(padavan)+N1(openwrt)\n自建: 使用 x-ui 的 vmess 节点   机场:  trojan 节点\u003c/p\u003e\n\u003cp\u003e问题:\n之前一直使用 Passwall 搭配自建节点来上网（稳定半年多了），近期出现了问题，自建节点不能正常上网，机场的可以，更新了最新的规则，以及尝试使用 x-ui 下的 trojan 的方式，也还是不行，请教下怎么解决\u003c/p\u003e\n\u003cp\u003e补充说明：自建节点在 iOS 的机器上使用没有问题\u003c/p\u003e\n",
+      "Author": "swordfairy",
+      "PubDate": "2022-08-09T12:28:57Z"
+    },
+    {
+      "Title": "一个 B 站（哔哩哔哩 bilibili）网页暗色/黑夜模式的浏览器插件 - 分享发现",
+      "Link": "https://www.v2ex.com/t/871768",
+      "Description": "\u003cp\u003e很喜欢网页暗色 /黑夜模式，但是 B 站 web 端还没有支持，写了个插件来实现：\u003c/p\u003e\n\u003cp\u003eChrome 商店： \u003ca href=\"https://chrome.google.com/webstore/detail/darkbili-dark-mode-for-bi/kpjklikhldpeiibfhadeogaaeenhffba\" rel=\"nofollow\"\u003ehttps://chrome.google.com/webstore/detail/darkbili-dark-mode-for-bi/kpjklikhldpeiibfhadeogaaeenhffba\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e微软 Edge 商店： \u003ca href=\"https://microsoftedge.microsoft.com/addons/detail/darkbili-dark-mode-for-/nbabimeobioggknlhdndgigjndphjmbi\" rel=\"nofollow\"\u003ehttps://microsoftedge.microsoft.com/addons/detail/darkbili-dark-mode-for-/nbabimeobioggknlhdndgigjndphjmbi\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"screenshot\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://store-images.s-microsoft.com/image/apps.30460.8b8e1f00-6240-4f07-9d4e-76231a5ad108.d08cade3-1560-4af4-af64-84ab4203fa10.5cd41622-4062-483d-813e-b80d95a30a50\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"screenshot\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://store-images.s-microsoft.com/image/apps.19304.8b8e1f00-6240-4f07-9d4e-76231a5ad108.d08cade3-1560-4af4-af64-84ab4203fa10.ecf387eb-271d-4769-9b99-2ce584a1cf53\"/\u003e\u003c/p\u003e\n",
+      "Author": "flankerfc",
+      "PubDate": "2022-08-09T12:26:00Z"
+    },
+    {
+      "Title": "请问一下，自己开发的 web 网站想要部分功能收费，涉及到支付，国内需要去注册公司主体吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/871767",
+      "Description": "",
+      "Author": "zaczhou",
+      "PubDate": "2022-08-09T12:25:09Z"
+    },
+    {
       "Title": "求职业培训视频加速插件 - 浏览器",
       "Link": "https://www.v2ex.com/t/871766",
       "Description": "\u003cp\u003e用了各种插件最高只能 2 倍速，有破解的办法吗？\u003c/p\u003e\n\u003cp\u003e网站:\u003ca href=\"http://www.jobmooc.com\" rel=\"nofollow\"\u003ewww.jobmooc.com\u003c/a\u003e\u003c/p\u003e\n",
