@@ -46,6 +46,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "优维x统信软件，携手共建政企一体化IT运维解决方案",
+      "Link": "https://studygolang.com/articles/35820#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "小白求助，关于Go编译的顺序",
       "Link": "https://studygolang.com/articles/35817#reply1",
       "Description": "\u003cp\u003e为什么bar()不是用main中的局部变量p，bar()不是在main()中使用的嘛？\n\u003cimg src=\"https://pic3.zhimg.com/v2-9d9b41fff81bf058036724b3f9b22fe2_b.jpeg\" alt=\"\" /\u003e\n为什么main()匿名函数不等价于原先的写法呢？\n\u003cimg src=\"https://pic4.zhimg.com/v2-04d3a08c68ec67ab1719cb662bb160e7_r.jpg\" alt=\"\" /\u003e\n个人理解是：bar()在main()函数外定义，所以使用的变量作用域应该为全局变量。但是如果按照编译器执行的顺序，为什么运行到bar()的时候，还能知道使用全局呢，不应该使用main()中的局部变量嘛？\u003c/p\u003e\n",
@@ -70,13 +77,6 @@
       "Title": "Golang实现sha256或sha512加密",
       "Link": "https://studygolang.com/articles/35818#reply0",
       "Description": "\u003ch1\u003e代码实现sha-256加密算法\u003c/h1\u003e\n\n\u003cpre\u003e\u003ccode\u003esha-256.go\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\npackage tools\n\nimport (\n    \u0026quot;crypto/sha256\u0026quot;\n    \u0026quot;encoding/hex\u0026quot;\n)\n\n//SHA256生成哈希值\n\nfunc GetSHA256HashCode(stringMessage string) string {\n\n    message := []byte(stringMessage) //字符串转化字节数组\n    //创建一个基于SHA256算法的hash.Hash接口的对象\n    hash := sha256.New() //sha-256加密\n    //hash := sha512.New() //SHA-512加密\n    //输入数据\n    hash.Write(message)\n    //计算哈希值\n    bytes := hash.Sum(nil)\n    //将字符串编码为16进制格式,返回字符串\n    hashCode := hex.EncodeToString(bytes)\n    //返回哈希值\n    return hashCode\n\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch1\u003e调用\u003c/h1\u003e\n\n\u003cp\u003e用main方法调用sha-256\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003emain.go\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;GraduationProject/tools\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n)\n\nfunc main() {\n\n\ttxt := \u0026quot;Hello World!\u0026quot;\n\n\tcode := tools.GetSHA256HashCode(txt)\n\n\tfmt.Println(\u0026quot;\\n加密前的明文\\n\u0026quot;, txt, \u0026quot;\\nSHA-256加密后的密文:\\n\u0026quot;, code)\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e控制台\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e加密前的明文\n Hello World!\nSHA-256加密后的密文:\n 7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch1\u003e代码实现sha-512\u003c/h1\u003e\n\n\u003cpre\u003e\u003ccode\u003e将sha-256.go文件的第15行加上注释，16行去掉注释\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\n\npackage tools\n\nimport (\n\t\u0026quot;crypto/sha256\u0026quot;\n\t\u0026quot;encoding/hex\u0026quot;\n)\n\n//SHA256生成哈希值\n\nfunc GetSHA256HashCode(stringMessage string) string {\n\n\tmessage := []byte(stringMessage) //字符串转化字节数组\n\t//创建一个基于SHA256算法的hash.Hash接口的对象\n\t//hash := sha256.New() //sha-256加密\n\thash := sha512.New() //SHA-512加密\n\t//输入数据\n\thash.Write(message)\n\t//计算哈希值\n\tbytes := hash.Sum(nil)\n\t//将字符串编码为16进制格式,返回字符串\n\thashCode := hex.EncodeToString(bytes)\n\t//返回哈希值\n\treturn hashCode\n\n}\n\n\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "优维x统信软件，携手共建政企一体化IT运维解决方案",
-      "Link": "https://studygolang.com/articles/35820#reply0",
-      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
