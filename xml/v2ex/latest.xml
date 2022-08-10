@@ -4,6 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>想请教下 TypeScript 里面几个泛型方法的写法 - TypeScript</title>
+      <link>https://www.v2ex.com/t/871926</link>
+      <description>&lt;p&gt;问题有点长，不过主要是有例子&lt;/p&gt;&#xA;&lt;p&gt;比如说我有这样的一个 interface&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;interface MyInterface {&#xA;  propertyA: string | null;&#xA;  propertyB: number | null;&#xA;  propertyC: SomeOtherInterface | null;&#xA;  propertyD: AnotherOtherInterface | null;&#xA;}&#xA;&#xA;interface SomeOtherInterface {&#xA;  propertyX: string | null;&#xA;  propertyY: number | null;&#xA;}&#xA;&#xA;interface AnotherOtherInterface {&#xA;  propertyM: string | null;&#xA;  propertyN: number | null;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后我需要一个方法去修改这个 MyInterface 的一个对象上的属性（假如说返回一个新对象而不是原地修改），那么我可以写出这样的一个泛型方法：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const updateProperty = &amp;lt;&#xA;  TKey extends keyof MyInterface,&#xA;  TValue extends MyInterface[TKey]&#xA;&amp;gt;(&#xA;  originalObject: MyInterface,&#xA;  propertyName: TKey,&#xA;  propertyValue: TValue&#xA;): MyInterface =&amp;gt; {&#xA;  // ... some internal logic&#xA;  return { ...originalObject, [propertyName]: propertyValue };&#xA;};&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;到这里也没有问题，调用起来也很简单&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const new1 = updateProperty(original, &#34;propertyA&#34;, &#34;some string&#34;);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第一个问题是，如果再写一个方法，一次性需要修改不确定数量的多个属性，这个泛型定义怎么写？&#xA;我想到的方法是，写个数组传&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const updateProperties = &amp;lt;&#xA;  TKey extends keyof MyInterface,&#xA;  TValue extends MyInterface[TKey]&#xA;&amp;gt;(&#xA;  originalObject: MyInterface,&#xA;  propertiesToUpdate: { propertyName: TKey; propertyValue: TValue }[]&#xA;): MyInterface =&amp;gt; {&#xA;  // ... some internal logic&#xA;  const updatedObject = { ...originalObject };&#xA;  propertiesToUpdate.forEach(&#xA;    (p) =&amp;gt; (updatedObject[p.propertyName] = p.propertyValue)&#xA;  );&#xA;  return updatedObject;&#xA;};&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;设想的调用方法是&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const new2 = updateProperties(original, [&#xA;  {&#xA;    propertyName: &#34;propertyA&#34;,&#xA;    propertyValue: &#34;some string&#34;,&#xA;  },&#xA;  {&#xA;    propertyName: &#34;propertyB&#34;,&#xA;    propertyValue: 10,&#xA;  },&#xA;]);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是实际上是不可以的，因为在修改多个不同类型的属性的时候，TKey 就是联合类型了，TValue 也会变成相对于 TKey 的联合类型，导致无法赋值回去&#xA;我想的是在 propertyName 为 A 的时候，propertyValue 只能为 string | null ，同时对于 B ，只能接收 number | null ，数组中各个元素是相互独立的&#xA;那我这个方法应该如何修改？&lt;/p&gt;&#xA;&lt;p&gt;第二个问题是，如果我想写一个方法去修改 propertyC -&amp;gt; propertyX / Y, propertyD -&amp;gt; propertyM/N ，这个泛型方法怎么写&#xA;期望的调用方法是&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;updateSubProperty(&#34;propertyC&#34;, &#34;propertyX&#34;, &#34;some string&#34;);&#xA;updateSubProperty(&#34;propertyD&#34;, &#34;propertyY&#34;, 20);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;其中第一个参数限定为像 propertyC/D 这样的“对象”而不是 string number 这样的基础类型（描述的可能不准确），第二个第三个参数是限定为第一个参数确定下来的类型的属性和值&#xA;简单的想法如下&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const updateSubProperty = &amp;lt;&#xA;  TTop extends keyof MyInterface, // Should be restricted to some &#34;object&#34; only properties, but how?&#xA;  TSub extends keyof MyInterface[TTop],&#xA;  TValue extends keyof MyInterface[TTop][TSub]&#xA;&amp;gt;(&#xA;  originalObject: MyInterface,&#xA;  topProperty: TTop,&#xA;  subProperty: TSub,&#xA;  value: TValue&#xA;) =&amp;gt; {&#xA;  // ... some internal logic&#xA;  const originalSubObject = originalObject[topProperty] ?? ({} as TTop); // It&#39;s acceptable to leave some properties missing, no worry&#xA;  const newSubObject = { ...originalSubObject, [subProperty]: value }; // ERROR: Spread types may only be created from object types.ts(2698)&#xA;  return { ...originalObject, [topProperty]: newSubObject };&#xA;};&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后理所当然是报了错，&lt;code&gt;Spread types may only be created from object types.ts(2698)&lt;/code&gt;&#xA;原因我也知道，TTop 那边应该限制为 object-only ，像上面那样写的话依然可以给第一个参数传 propertyA ，这不是我想要的。那么这边的这个泛型约束应该如何定义？&lt;/p&gt;&#xA;</description>
+      <author>eraserking</author>
+      <pubDate>10 Aug 2022 06:29:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>[北京应届] 招聘运维；前端；运开； - 酷工作</title>
+      <link>https://www.v2ex.com/t/871925</link>
+      <description>&lt;h1&gt;我们是谁&lt;/h1&gt;&#xA;&lt;p&gt;水木未来（北京）科技有限公司是一家结构和计算驱动的新型药物研发公司，拥有亚太区第一个商业化冷冻电镜服务平台，并以与 2022 年建立了全球最大的冷冻电镜商业化平台（北京、杭州两地），基于冷冻电镜、计算化学、机器学习和高性能计算核心技术，在小分子、抗体药、蛋白降解、基因治疗等领域推动数字化创新，助力全球创新药企大幅提升药物研发效率和成功率。&lt;/p&gt;&#xA;&lt;p&gt;水木未来 2017 年创立于清华大学，由清华大学多名知名教授组建，核心团队由优秀的生命和计算科学家、IT 互联网和医药产业专家组成。核心团队背景包括清华，北大，剑桥，耶鲁等名校以及默克，强生，罗氏，药明康德等大型生物医药企业。公司至今完成了合计四轮融资，已成功为来自中国、美国、欧洲的 200 余家国内外创新药药企和顶级科研机构提供了结构生物学和药物发现服务。&lt;/p&gt;&#xA;&lt;h1&gt;招聘对象&lt;/h1&gt;&#xA;&lt;p&gt;2021.11-2022.10 毕业的本科应届毕业生。&#xA;it/运维 运开同时开放社招。&lt;/p&gt;&#xA;&lt;h1&gt;岗位要求&lt;/h1&gt;&#xA;&lt;p&gt;本科及以上学历，计算机、数学、电子工程、通信等相关专业；&#xA;具备扎实的数据结构和计算机系统基础，精通一种开发语言；&#xA;对基础软件充满热情，具备较好的动手能力和技术热情，有成功的研究型或实战型项目技术成果落地者优先；&#xA;关注开源技术，有开源贡献者优先；&#xA;快速学习，不断突破技术瓶颈，乐于探索未知领域，随时准备好去面对新挑战；&#xA;良好的团队合作精神，能够做到严谨、皮实、乐观。&lt;/p&gt;&#xA;&lt;h1&gt;工作地点&lt;/h1&gt;&#xA;&lt;p&gt;北京市昌平区生命科学园新生巢创新中心 2 号楼 4 层水木未来&lt;/p&gt;&#xA;&lt;h1&gt;开放岗位&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;前端开发工程师&lt;/li&gt;&#xA;&lt;li&gt;运维 /IT 工程师&lt;/li&gt;&#xA;&lt;li&gt;运维开发工程师&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;公司福利&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;住房补贴&lt;/li&gt;&#xA;&lt;li&gt;交通补贴&lt;/li&gt;&#xA;&lt;li&gt;带薪年假&lt;/li&gt;&#xA;&lt;li&gt;高温补贴&lt;/li&gt;&#xA;&lt;li&gt;餐费补贴&lt;/li&gt;&#xA;&lt;li&gt;年终奖&lt;/li&gt;&#xA;&lt;li&gt;喜事红包&lt;/li&gt;&#xA;&lt;li&gt;取暖补贴&lt;/li&gt;&#xA;&lt;li&gt;通话补贴&lt;/li&gt;&#xA;&lt;li&gt;有竞争力的薪资机制&lt;/li&gt;&#xA;&lt;li&gt;节假日礼品 /生日礼品&lt;/li&gt;&#xA;&lt;li&gt;完善的晋升调薪机制&lt;/li&gt;&#xA;&lt;li&gt;外地 /应届生 /实习 /刚入职均可提供宿舍&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>xiaxichen</author>
+      <pubDate>10 Aug 2022 06:26:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>2022 年 8 月，有什么好的电瓶车推荐吗 - 程序员</title>
+      <link>https://www.v2ex.com/t/871924</link>
+      <description>坐标苏州，没什么上牌的限制。通勤用，预算 4000 左右</description>
+      <author>hgzhcn</author>
+      <pubDate>10 Aug 2022 06:23:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>115 会员到期了，不想续费，有什么替代产品吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/871923</link>
+      <description>&lt;p&gt;如标题描述，115 曾经挺好用的。个人用最多是云下载功能，然而最近发现新资源下载速度很慢，有些老资源和谐起来也是不留情。除了还有些备份的数据之外，115 已经对我没有了任何吸引力。&lt;/p&gt;&#xA;&lt;p&gt;暂没有预算自己上本地存储，有没有能平替的云盘工具？求个推荐&lt;/p&gt;&#xA;</description>
+      <author>MonTubasa</author>
+      <pubDate>10 Aug 2022 06:20:10 +0000</pubDate>
+    </item>
+    <item>
+      <title>亏麻了， 5 年的收入全买了互联网公司的股票 - 生活</title>
+      <link>https://www.v2ex.com/t/871922</link>
+      <description>、买了腾讯、阿里、京东、美团，现在亏损有 35%了，&lt;br /&gt;之前每个月吃吃喝喝能存一万块钱，今年也失业半年找不到合适的工作，一看股票整个人都不好了，</description>
+      <author>tufeiyuan</author>
+      <pubDate>10 Aug 2022 06:20:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>10 台服务器，如何在最短时间内爬取 5000 条商品价格？ - 程序员</title>
+      <link>https://www.v2ex.com/t/871921</link>
+      <description>&lt;p&gt;有 5000 条固定的商品需要不停的更新价格，现在手上有 10 台服务器。&lt;/p&gt;&#xA;&lt;p&gt;是不是这样实现更好：&#xA;服务器 1 去爬取更新时间最久的一条商品，服务器 2 去爬取倒数第二条商品？&#xA;就是不知道如何解决服务器同时都更新最后一条的问题。&lt;/p&gt;&#xA;&lt;p&gt;如果要这样实现，需要怎么做？&#xA;网上搜了下，分布式爬虫，消息队列，redis 都感觉有点麻烦？&lt;/p&gt;&#xA;&lt;p&gt;因为时间急，所以问问有什么简单的解决方案。&#xA;小弟做 Android 的，不太懂爬虫技术，不知道描述清楚没？&lt;/p&gt;&#xA;&lt;p&gt;之前我是把数据分成十块，每块 500 条商品，然后每个服务器就更新那 500 条，感觉还是有点慢，&#xA;用的 Jsoup 爬取。&lt;/p&gt;&#xA;&lt;p&gt;谢谢。&lt;/p&gt;&#xA;</description>
+      <author>StarXing</author>
+      <pubDate>10 Aug 2022 06:19:02 +0000</pubDate>
+    </item>
+    <item>
       <title>请教一个电动牙刷的问题 - 生活</title>
       <link>https://www.v2ex.com/t/871920</link>
       <description>大家在用电动牙刷刷牙的时候，是像普通牙刷那样自己会来回小幅度动一下，还是就只是把牙刷放到牙齿上完全依靠电动牙刷本身的震动呢？</description>

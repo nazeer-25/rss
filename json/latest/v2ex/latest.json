@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "想请教下 TypeScript 里面几个泛型方法的写法 - TypeScript",
+      "Link": "https://www.v2ex.com/t/871926",
+      "Description": "\u003cp\u003e问题有点长，不过主要是有例子\u003c/p\u003e\n\u003cp\u003e比如说我有这样的一个 interface\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003einterface MyInterface {\n  propertyA: string | null;\n  propertyB: number | null;\n  propertyC: SomeOtherInterface | null;\n  propertyD: AnotherOtherInterface | null;\n}\n\ninterface SomeOtherInterface {\n  propertyX: string | null;\n  propertyY: number | null;\n}\n\ninterface AnotherOtherInterface {\n  propertyM: string | null;\n  propertyN: number | null;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e然后我需要一个方法去修改这个 MyInterface 的一个对象上的属性（假如说返回一个新对象而不是原地修改），那么我可以写出这样的一个泛型方法：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003econst updateProperty = \u0026lt;\n  TKey extends keyof MyInterface,\n  TValue extends MyInterface[TKey]\n\u0026gt;(\n  originalObject: MyInterface,\n  propertyName: TKey,\n  propertyValue: TValue\n): MyInterface =\u0026gt; {\n  // ... some internal logic\n  return { ...originalObject, [propertyName]: propertyValue };\n};\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e到这里也没有问题，调用起来也很简单\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003econst new1 = updateProperty(original, \"propertyA\", \"some string\");\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e第一个问题是，如果再写一个方法，一次性需要修改不确定数量的多个属性，这个泛型定义怎么写？\n我想到的方法是，写个数组传\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003econst updateProperties = \u0026lt;\n  TKey extends keyof MyInterface,\n  TValue extends MyInterface[TKey]\n\u0026gt;(\n  originalObject: MyInterface,\n  propertiesToUpdate: { propertyName: TKey; propertyValue: TValue }[]\n): MyInterface =\u0026gt; {\n  // ... some internal logic\n  const updatedObject = { ...originalObject };\n  propertiesToUpdate.forEach(\n    (p) =\u0026gt; (updatedObject[p.propertyName] = p.propertyValue)\n  );\n  return updatedObject;\n};\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e设想的调用方法是\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003econst new2 = updateProperties(original, [\n  {\n    propertyName: \"propertyA\",\n    propertyValue: \"some string\",\n  },\n  {\n    propertyName: \"propertyB\",\n    propertyValue: 10,\n  },\n]);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是实际上是不可以的，因为在修改多个不同类型的属性的时候，TKey 就是联合类型了，TValue 也会变成相对于 TKey 的联合类型，导致无法赋值回去\n我想的是在 propertyName 为 A 的时候，propertyValue 只能为 string | null ，同时对于 B ，只能接收 number | null ，数组中各个元素是相互独立的\n那我这个方法应该如何修改？\u003c/p\u003e\n\u003cp\u003e第二个问题是，如果我想写一个方法去修改 propertyC -\u0026gt; propertyX / Y, propertyD -\u0026gt; propertyM/N ，这个泛型方法怎么写\n期望的调用方法是\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003eupdateSubProperty(\"propertyC\", \"propertyX\", \"some string\");\nupdateSubProperty(\"propertyD\", \"propertyY\", 20);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其中第一个参数限定为像 propertyC/D 这样的“对象”而不是 string number 这样的基础类型（描述的可能不准确），第二个第三个参数是限定为第一个参数确定下来的类型的属性和值\n简单的想法如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003econst updateSubProperty = \u0026lt;\n  TTop extends keyof MyInterface, // Should be restricted to some \"object\" only properties, but how?\n  TSub extends keyof MyInterface[TTop],\n  TValue extends keyof MyInterface[TTop][TSub]\n\u0026gt;(\n  originalObject: MyInterface,\n  topProperty: TTop,\n  subProperty: TSub,\n  value: TValue\n) =\u0026gt; {\n  // ... some internal logic\n  const originalSubObject = originalObject[topProperty] ?? ({} as TTop); // It's acceptable to leave some properties missing, no worry\n  const newSubObject = { ...originalSubObject, [subProperty]: value }; // ERROR: Spread types may only be created from object types.ts(2698)\n  return { ...originalObject, [topProperty]: newSubObject };\n};\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e然后理所当然是报了错，\u003ccode\u003eSpread types may only be created from object types.ts(2698)\u003c/code\u003e\n原因我也知道，TTop 那边应该限制为 object-only ，像上面那样写的话依然可以给第一个参数传 propertyA ，这不是我想要的。那么这边的这个泛型约束应该如何定义？\u003c/p\u003e\n",
+      "Author": "eraserking",
+      "PubDate": "2022-08-10T06:29:12Z"
+    },
+    {
+      "Title": "[北京应届] 招聘运维；前端；运开； - 酷工作",
+      "Link": "https://www.v2ex.com/t/871925",
+      "Description": "\u003ch1\u003e我们是谁\u003c/h1\u003e\n\u003cp\u003e水木未来（北京）科技有限公司是一家结构和计算驱动的新型药物研发公司，拥有亚太区第一个商业化冷冻电镜服务平台，并以与 2022 年建立了全球最大的冷冻电镜商业化平台（北京、杭州两地），基于冷冻电镜、计算化学、机器学习和高性能计算核心技术，在小分子、抗体药、蛋白降解、基因治疗等领域推动数字化创新，助力全球创新药企大幅提升药物研发效率和成功率。\u003c/p\u003e\n\u003cp\u003e水木未来 2017 年创立于清华大学，由清华大学多名知名教授组建，核心团队由优秀的生命和计算科学家、IT 互联网和医药产业专家组成。核心团队背景包括清华，北大，剑桥，耶鲁等名校以及默克，强生，罗氏，药明康德等大型生物医药企业。公司至今完成了合计四轮融资，已成功为来自中国、美国、欧洲的 200 余家国内外创新药药企和顶级科研机构提供了结构生物学和药物发现服务。\u003c/p\u003e\n\u003ch1\u003e招聘对象\u003c/h1\u003e\n\u003cp\u003e2021.11-2022.10 毕业的本科应届毕业生。\nit/运维 运开同时开放社招。\u003c/p\u003e\n\u003ch1\u003e岗位要求\u003c/h1\u003e\n\u003cp\u003e本科及以上学历，计算机、数学、电子工程、通信等相关专业；\n具备扎实的数据结构和计算机系统基础，精通一种开发语言；\n对基础软件充满热情，具备较好的动手能力和技术热情，有成功的研究型或实战型项目技术成果落地者优先；\n关注开源技术，有开源贡献者优先；\n快速学习，不断突破技术瓶颈，乐于探索未知领域，随时准备好去面对新挑战；\n良好的团队合作精神，能够做到严谨、皮实、乐观。\u003c/p\u003e\n\u003ch1\u003e工作地点\u003c/h1\u003e\n\u003cp\u003e北京市昌平区生命科学园新生巢创新中心 2 号楼 4 层水木未来\u003c/p\u003e\n\u003ch1\u003e开放岗位\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e前端开发工程师\u003c/li\u003e\n\u003cli\u003e运维 /IT 工程师\u003c/li\u003e\n\u003cli\u003e运维开发工程师\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1\u003e公司福利\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e住房补贴\u003c/li\u003e\n\u003cli\u003e交通补贴\u003c/li\u003e\n\u003cli\u003e带薪年假\u003c/li\u003e\n\u003cli\u003e高温补贴\u003c/li\u003e\n\u003cli\u003e餐费补贴\u003c/li\u003e\n\u003cli\u003e年终奖\u003c/li\u003e\n\u003cli\u003e喜事红包\u003c/li\u003e\n\u003cli\u003e取暖补贴\u003c/li\u003e\n\u003cli\u003e通话补贴\u003c/li\u003e\n\u003cli\u003e有竞争力的薪资机制\u003c/li\u003e\n\u003cli\u003e节假日礼品 /生日礼品\u003c/li\u003e\n\u003cli\u003e完善的晋升调薪机制\u003c/li\u003e\n\u003cli\u003e外地 /应届生 /实习 /刚入职均可提供宿舍\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "xiaxichen",
+      "PubDate": "2022-08-10T06:26:47Z"
+    },
+    {
+      "Title": "2022 年 8 月，有什么好的电瓶车推荐吗 - 程序员",
+      "Link": "https://www.v2ex.com/t/871924",
+      "Description": "坐标苏州，没什么上牌的限制。通勤用，预算 4000 左右",
+      "Author": "hgzhcn",
+      "PubDate": "2022-08-10T06:23:49Z"
+    },
+    {
+      "Title": "115 会员到期了，不想续费，有什么替代产品吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/871923",
+      "Description": "\u003cp\u003e如标题描述，115 曾经挺好用的。个人用最多是云下载功能，然而最近发现新资源下载速度很慢，有些老资源和谐起来也是不留情。除了还有些备份的数据之外，115 已经对我没有了任何吸引力。\u003c/p\u003e\n\u003cp\u003e暂没有预算自己上本地存储，有没有能平替的云盘工具？求个推荐\u003c/p\u003e\n",
+      "Author": "MonTubasa",
+      "PubDate": "2022-08-10T06:20:10Z"
+    },
+    {
+      "Title": "亏麻了， 5 年的收入全买了互联网公司的股票 - 生活",
+      "Link": "https://www.v2ex.com/t/871922",
+      "Description": "、买了腾讯、阿里、京东、美团，现在亏损有 35%了，\u003cbr /\u003e之前每个月吃吃喝喝能存一万块钱，今年也失业半年找不到合适的工作，一看股票整个人都不好了，",
+      "Author": "tufeiyuan",
+      "PubDate": "2022-08-10T06:20:01Z"
+    },
+    {
+      "Title": "10 台服务器，如何在最短时间内爬取 5000 条商品价格？ - 程序员",
+      "Link": "https://www.v2ex.com/t/871921",
+      "Description": "\u003cp\u003e有 5000 条固定的商品需要不停的更新价格，现在手上有 10 台服务器。\u003c/p\u003e\n\u003cp\u003e是不是这样实现更好：\n服务器 1 去爬取更新时间最久的一条商品，服务器 2 去爬取倒数第二条商品？\n就是不知道如何解决服务器同时都更新最后一条的问题。\u003c/p\u003e\n\u003cp\u003e如果要这样实现，需要怎么做？\n网上搜了下，分布式爬虫，消息队列，redis 都感觉有点麻烦？\u003c/p\u003e\n\u003cp\u003e因为时间急，所以问问有什么简单的解决方案。\n小弟做 Android 的，不太懂爬虫技术，不知道描述清楚没？\u003c/p\u003e\n\u003cp\u003e之前我是把数据分成十块，每块 500 条商品，然后每个服务器就更新那 500 条，感觉还是有点慢，\n用的 Jsoup 爬取。\u003c/p\u003e\n\u003cp\u003e谢谢。\u003c/p\u003e\n",
+      "Author": "StarXing",
+      "PubDate": "2022-08-10T06:19:02Z"
+    },
+    {
       "Title": "请教一个电动牙刷的问题 - 生活",
       "Link": "https://www.v2ex.com/t/871920",
       "Description": "大家在用电动牙刷刷牙的时候，是像普通牙刷那样自己会来回小幅度动一下，还是就只是把牙刷放到牙齿上完全依靠电动牙刷本身的震动呢？",
