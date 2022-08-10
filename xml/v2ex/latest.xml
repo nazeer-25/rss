@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>一个对象有多个字段需要分别求和，每一个字段都有一个 stream 流处理不太美观 - Java</title>
+      <link>https://www.v2ex.com/t/872043</link>
+      <description>&lt;p&gt;一个对象有多个字段需要分别求和，比如人数，金额，重量。&#xA;那我有三个 stream 处理需要三条语句，这种情况可以用 Function 函数处理吗？&lt;/p&gt;&#xA;</description>
+      <author>unregister</author>
+      <pubDate>10 Aug 2022 14:58:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>编写一个 shell 脚本，将 2 个文件的差集，输出到一个新文件 - 程序员</title>
+      <link>https://www.v2ex.com/t/872042</link>
+      <description>&lt;p&gt;如：有如下 2 个文件：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ cat a.txt&#xA;1111111&#xA;2222222&#xA;3333333&#xA;7777777&#xA;9999999&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ cat b.txt&#xA;1111111&#xA;2222222&#xA;3333333&#xA;4444444&#xA;7777777&#xA;5555555&#xA;6666666&#xA;8888888&#xA;9999999&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;将 2 个文件的差级输出到文件 c.txt&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ cat c.txt&#xA;4444444&#xA;5555555&#xA;6666666&#xA;8888888&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;请问如何实现？&lt;/p&gt;&#xA;</description>
+      <author>mantis</author>
+      <pubDate>10 Aug 2022 14:56:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>React Hook 一些实践选择的讨论 - React</title>
+      <link>https://www.v2ex.com/t/872041</link>
+      <description>&lt;p&gt;目前我正在实现自己的一个组件库: &lt;a href=&#34;https://agile-ui.vercel.app/&#34; rel=&#34;nofollow&#34;&gt;https://agile-ui.vercel.app/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;里面用到了 useFocus, useHover 等等自定义的 Hook&lt;/p&gt;&#xA;&lt;p&gt;目前这种机制的 Hook 有两种实现方式：&lt;/p&gt;&#xA;&lt;p&gt;第一种: 传入原始的 onBlur, onFocus 事件，然后合并事件并返回 handle ，在组件里面使用 on 绑定：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;&#xA;export const useFocus = (options) =&amp;gt; {&#xA;  const { state = false, onBlur, onFocus } = options;&#xA;&#xA;  const [focus, setFocus] = useState(state);&#xA;&#xA;  const handleBlur = useCallback(&#xA;    (e) =&amp;gt; {&#xA;      setFocus(false);&#xA;      onBlur &amp;amp;&amp;amp; onBlur(e);&#xA;    },&#xA;    [onBlur]&#xA;  );&#xA;&#xA;  const handleFocus = useCallback(&#xA;    (e) =&amp;gt; {&#xA;      setFocus(true);&#xA;      onFocus &amp;amp;&amp;amp; onFocus(e);&#xA;    },&#xA;    [onFocus]&#xA;  );&#xA;&#xA;  return { focus, handleBlur, handleFocus };&#xA;}&#xA;&#xA;export const Demo = (props) =&amp;gt; {&#xA;&#x9;const { onBlur, onFocus, ...rest } = props;&#xA;    &#xA;    const { focus, handleBlur, handleFocus } = useFocus({ onBlur, onFocus });&#xA;    &#xA;    return &amp;lt;button onBlur={handleBlur} onFocus={handleFocus} {...rest} /&amp;gt;&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第二种：利用 ref 绑定事件即可，不需要传递事件&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;&#xA;export const useFocus = () =&amp;gt; {&#xA;  const [focus, setFocus] = useState(false);&#xA;  const ref = useRef(null);&#xA;  const handleBlur = useCallback(() =&amp;gt; setFocus(false), []);&#xA;  const handleFocus = useCallback(() =&amp;gt; setFocus(true), []);&#xA;&#xA;  useEffect(() =&amp;gt; {&#xA;    if (ref.current) {&#xA;      ref.current.addEventListener(&#39;blur&#39;, handleBlur);&#xA;      ref.current.addEventListener(&#39;focus&#39;, handleFocus);&#xA;&#xA;      return () =&amp;gt; {&#xA;        ref.current?.removeEventListener(&#39;blur&#39;, handleBlur);&#xA;        ref.current?.removeEventListener(&#39;focus&#39;, handleFocus);&#xA;      };&#xA;    }&#xA;&#xA;    return undefined;&#xA;  }, []);&#xA;&#xA;  return { ref, focus };&#xA;}&#xA;&#xA;&#xA;export const Demo = (props) =&amp;gt; {&#xA;    const { ref, focus } = useFocus();&#xA;    &#xA;    return &amp;lt;button ref={ref} {...props} /&amp;gt;&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;大家觉得哪种方案更好呢？&lt;/p&gt;&#xA;</description>
+      <author>huijiewei</author>
+      <pubDate>10 Aug 2022 14:54:40 +0000</pubDate>
+    </item>
+    <item>
       <title>职场感觉 35 还好，可怕的是 40、45.... - 职场话题</title>
       <link>https://www.v2ex.com/t/872040</link>
       <description>&lt;p&gt;不出意外人人都有 40 、45 岁的一天，投简历 HR 直接过滤。&lt;/p&gt;&#xA;</description>

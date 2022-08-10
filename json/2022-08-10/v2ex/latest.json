@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "一个对象有多个字段需要分别求和，每一个字段都有一个 stream 流处理不太美观 - Java",
+      "Link": "https://www.v2ex.com/t/872043",
+      "Description": "\u003cp\u003e一个对象有多个字段需要分别求和，比如人数，金额，重量。\n那我有三个 stream 处理需要三条语句，这种情况可以用 Function 函数处理吗？\u003c/p\u003e\n",
+      "Author": "unregister",
+      "PubDate": "2022-08-10T14:58:11Z"
+    },
+    {
+      "Title": "编写一个 shell 脚本，将 2 个文件的差集，输出到一个新文件 - 程序员",
+      "Link": "https://www.v2ex.com/t/872042",
+      "Description": "\u003cp\u003e如：有如下 2 个文件：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e$ cat a.txt\n1111111\n2222222\n3333333\n7777777\n9999999\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e$ cat b.txt\n1111111\n2222222\n3333333\n4444444\n7777777\n5555555\n6666666\n8888888\n9999999\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e将 2 个文件的差级输出到文件 c.txt\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e$ cat c.txt\n4444444\n5555555\n6666666\n8888888\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e请问如何实现？\u003c/p\u003e\n",
+      "Author": "mantis",
+      "PubDate": "2022-08-10T14:56:56Z"
+    },
+    {
+      "Title": "React Hook 一些实践选择的讨论 - React",
+      "Link": "https://www.v2ex.com/t/872041",
+      "Description": "\u003cp\u003e目前我正在实现自己的一个组件库: \u003ca href=\"https://agile-ui.vercel.app/\" rel=\"nofollow\"\u003ehttps://agile-ui.vercel.app/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e里面用到了 useFocus, useHover 等等自定义的 Hook\u003c/p\u003e\n\u003cp\u003e目前这种机制的 Hook 有两种实现方式：\u003c/p\u003e\n\u003cp\u003e第一种: 传入原始的 onBlur, onFocus 事件，然后合并事件并返回 handle ，在组件里面使用 on 绑定：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003e\nexport const useFocus = (options) =\u0026gt; {\n  const { state = false, onBlur, onFocus } = options;\n\n  const [focus, setFocus] = useState(state);\n\n  const handleBlur = useCallback(\n    (e) =\u0026gt; {\n      setFocus(false);\n      onBlur \u0026amp;\u0026amp; onBlur(e);\n    },\n    [onBlur]\n  );\n\n  const handleFocus = useCallback(\n    (e) =\u0026gt; {\n      setFocus(true);\n      onFocus \u0026amp;\u0026amp; onFocus(e);\n    },\n    [onFocus]\n  );\n\n  return { focus, handleBlur, handleFocus };\n}\n\nexport const Demo = (props) =\u0026gt; {\n\tconst { onBlur, onFocus, ...rest } = props;\n    \n    const { focus, handleBlur, handleFocus } = useFocus({ onBlur, onFocus });\n    \n    return \u0026lt;button onBlur={handleBlur} onFocus={handleFocus} {...rest} /\u0026gt;\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e第二种：利用 ref 绑定事件即可，不需要传递事件\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003e\nexport const useFocus = () =\u0026gt; {\n  const [focus, setFocus] = useState(false);\n  const ref = useRef(null);\n  const handleBlur = useCallback(() =\u0026gt; setFocus(false), []);\n  const handleFocus = useCallback(() =\u0026gt; setFocus(true), []);\n\n  useEffect(() =\u0026gt; {\n    if (ref.current) {\n      ref.current.addEventListener('blur', handleBlur);\n      ref.current.addEventListener('focus', handleFocus);\n\n      return () =\u0026gt; {\n        ref.current?.removeEventListener('blur', handleBlur);\n        ref.current?.removeEventListener('focus', handleFocus);\n      };\n    }\n\n    return undefined;\n  }, []);\n\n  return { ref, focus };\n}\n\n\nexport const Demo = (props) =\u0026gt; {\n    const { ref, focus } = useFocus();\n    \n    return \u0026lt;button ref={ref} {...props} /\u0026gt;\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e大家觉得哪种方案更好呢？\u003c/p\u003e\n",
+      "Author": "huijiewei",
+      "PubDate": "2022-08-10T14:54:40Z"
+    },
+    {
       "Title": "职场感觉 35 还好，可怕的是 40、45.... - 职场话题",
       "Link": "https://www.v2ex.com/t/872040",
       "Description": "\u003cp\u003e不出意外人人都有 40 、45 岁的一天，投简历 HR 直接过滤。\u003c/p\u003e\n",
