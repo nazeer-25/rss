@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>这几天压力有点大，前天突然感觉呼吸不正常了，需要刻意去深呼吸 - 生活</title>
+      <link>https://www.v2ex.com/t/872181</link>
+      <description>&lt;p&gt;不知道是正常现象还是说身体出问题&lt;/p&gt;&#xA;</description>
+      <author>zxCoder</author>
+      <pubDate>11 Aug 2022 07:30:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>不懂相关技术，想要学习一些相关知识，目的是改进家里的宽带…… - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/872180</link>
+      <description>&lt;p&gt;目前人在国外，不是做计算机相关工作的，经常发现家里的网络不管是微信打开图片或者往国内传文件都巨慢。有时候连 Google 都很慢。Google 一圈之后，在电脑上装了 DNS Jumper 找到最快 DNS 之后，把这个 DNS 设置到路由器里，会有一段时间的改善然后有时候又不行了。&lt;/p&gt;&#xA;&lt;p&gt;我知道这种问题很复杂，原因很多。现在想系统学习一下相关知识，目的是能顺畅 Troubleshooting 改善家里的网络状况，包括但不限于路由 /软路由设置，网络连接设备占用等。是不是必须从头把 TCP/IP 先过一遍？有什么推荐的学习路径吗？&lt;/p&gt;&#xA;</description>
+      <author>Alexhex</author>
+      <pubDate>11 Aug 2022 07:29:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>终于把 Vue 的 Dialog 给整舒服了 - Vue.js</title>
+      <link>https://www.v2ex.com/t/872179</link>
+      <description>&lt;p&gt;目前流行的弹窗，不管是&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;dialog visible=&#34;visible&#34;&amp;gt;&#xA;&#x9;&amp;lt;user-dialog /&amp;gt;&#xA;&amp;lt;/dialog&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;还是&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;&#xA;    &amp;lt;dialog visible=&#34;visible&#34;&amp;gt;&amp;lt;/dialog&amp;gt;&#xA;&amp;lt;/template&amp;gt;&#xA;&amp;lt;script&amp;gt;&#xA;&#x9;visible = false&#xA;    open(){&#xA;    &#x9;this.visible = true&#xA;    }&#xA;    close(){&#xA;    &#x9;this.visible = true&#xA;    }&#xA;&amp;lt;/script&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;都难受至极。&lt;/p&gt;&#xA;&lt;h2&gt;第一种写法&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在使用 dialog 的时候，dialog 就已经加载好了，但是我还不需要，所以造成不必要的资源浪费(可忽略)，以及在代码里看着这堆东西太不优雅了&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code&gt;&#x9;&amp;lt;dialog ref=&#34;dialog1&#34; :visible=&#34;dialog1&#34; /&amp;gt;&#xA;&#x9;&amp;lt;dialog ref=&#34;dialog2&#34; :visible=&#34;dialog2&#34; /&amp;gt;&#xA;&#x9;&amp;lt;dialog ref=&#34;dialog3&#34; :visible=&#34;dialog3&#34; /&amp;gt;&#xA;&#x9;&amp;lt;dialog ref=&#34;dialog4&#34; :visible=&#34;dialog4&#34; /&amp;gt;&#xA;&#x9;......&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;visible 会留在调用组件里，调用者有 N 个 dialog 就有 N 个变量&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code&gt;data(){&#xA;&#x9;return {&#xA;&#x9;&#x9;dialog1: false,&#xA;&#x9;&#x9;dialog2: false,&#xA;&#x9;&#x9;dialog3: false,&#xA;&#x9;&#x9;......&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;想在关闭 dialog 的时候做一些事情很难受，要么 watch dialog1~N 这个变量，要么给所有 dialog 写&lt;code&gt;&amp;lt;dialog @close=&#34;close&#34; /&amp;gt;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;在关闭弹窗时，接收返回的变量很难受&lt;pre&gt;&lt;code&gt;&amp;lt;dialog :visible.sync=&#34;visible&#34;&amp;gt;&#xA;&#x9;&amp;lt;user-dialog @close=&#34;close&#34; /&amp;gt;&#xA;&amp;lt;/dialog&amp;gt;&#xA;&#xA;data(){&#xA;&#x9;return {&#xA;&#x9;&#x9;visible: true&#xA;&#x9;}&#xA;}&#xA;&#xA;close(event){&#xA;&#x9;console.log(event)&#xA;&#x9;this.visible = false&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;第二种写法&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;一旦引入组件，组件便开始 mount 了，生命周期也执行了，如果调用者引入了 N 个 dialog ，那性能可想而知，还不如第一种写法&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;因失去了生命周期的特性，导致关闭弹窗的时候需要你自己重置数据，做清理&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;而且你开不能利用生命周期来做数据加载，因为你还没打开弹窗，90%的业务场景是没必要加载数据的，所以你还要在 open 里自己加载&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;还有一些问题我暂时想不起来，先略吧&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;忍了好久了，终于把 &lt;a href=&#34;https://material.angular.io/components/dialog/overview&#34; rel=&#34;nofollow&#34;&gt;https://material.angular.io/components/dialog/overview&lt;/a&gt; 的 dialog 给挪过来了，所说不太完美，但是至少满足我的痛点了。&lt;/p&gt;&#xA;&lt;p&gt;使用文档可以看我写的&lt;a href=&#34;https://stackblitz.com/edit/vue2-vite-typescript-starter-4gf3es&#34; rel=&#34;nofollow&#34;&gt;demo&lt;/a&gt;，API 参考的话可以看&lt;a href=&#34;https://material.angular.io/components/dialog/api&#34; rel=&#34;nofollow&#34;&gt;Dialog | Angular Material&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;各位如果也有同样的痛苦的话，可以 fork 到自己项目里去改一下就可以用了。&lt;/p&gt;&#xA;&lt;p&gt;写得不是很完美，仅作为一个想法、思路。&lt;/p&gt;&#xA;&lt;p&gt;ps：真的想吐槽手动初始化 Vue 这个过程，难受至极，离开了文档的操作，啥也不是。&lt;/p&gt;&#xA;</description>
+      <author>wunonglin</author>
+      <pubDate>11 Aug 2022 07:26:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>真心求教，网络分布、路由、转发、穿透相关知识怎么系统学习 - 程序员</title>
+      <link>https://www.v2ex.com/t/872178</link>
+      <description>&lt;p&gt;起因还是兴趣以及*趣&lt;/p&gt;&#xA;&lt;p&gt;需求是想搞清楚以下这些东西，最好是能以前后内容贯通的方式系统性地学习：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;DNS 的原理，以及简单实现&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;硬软路由 / 旁路由 / 单臂路由 等路由组件相通的部分，和各自解决的痛点&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;交换机相对路由器又解决了什么关键的问题&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;NAT 类型以及打洞具体实现方法，进一步 P2P 打洞的实现&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;网络包混淆混淆的到底是啥，比如员工使用**上网能让网络工程师看不出他访问了啥网站吗？&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;感觉在描述网络工程，但我想知道有没有哪一本书是专门把上面这些东西给一个野路子程序员拎清后拿来用的，或者一本《计算机网络》能解决以上问题吗？&lt;/p&gt;&#xA;</description>
+      <author>lookStupiToForce</author>
+      <pubDate>11 Aug 2022 07:25:43 +0000</pubDate>
+    </item>
+    <item>
       <title>宽带改桥接后隔一段时间会被 isp 强制重播，请问怎样才能不被重播？ - 宽带症候群</title>
       <link>https://www.v2ex.com/t/872176</link>
       <description>&lt;p&gt;是福建移动的宽带，发现改了桥接以后;路由器隔一段时间拨号会掉！之前还以为是固件问题刷了几个都一样，看了下日志发现不对，在恩山搜到了相似的情况；可能是 isp 强制重拨号😢按评论区的方法“打开不主动发送 lcp-echo”后还是同样的结果！&lt;/p&gt;&#xA;</description>

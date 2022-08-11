@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "这几天压力有点大，前天突然感觉呼吸不正常了，需要刻意去深呼吸 - 生活",
+      "Link": "https://www.v2ex.com/t/872181",
+      "Description": "\u003cp\u003e不知道是正常现象还是说身体出问题\u003c/p\u003e\n",
+      "Author": "zxCoder",
+      "PubDate": "2022-08-11T07:30:14Z"
+    },
+    {
+      "Title": "不懂相关技术，想要学习一些相关知识，目的是改进家里的宽带…… - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/872180",
+      "Description": "\u003cp\u003e目前人在国外，不是做计算机相关工作的，经常发现家里的网络不管是微信打开图片或者往国内传文件都巨慢。有时候连 Google 都很慢。Google 一圈之后，在电脑上装了 DNS Jumper 找到最快 DNS 之后，把这个 DNS 设置到路由器里，会有一段时间的改善然后有时候又不行了。\u003c/p\u003e\n\u003cp\u003e我知道这种问题很复杂，原因很多。现在想系统学习一下相关知识，目的是能顺畅 Troubleshooting 改善家里的网络状况，包括但不限于路由 /软路由设置，网络连接设备占用等。是不是必须从头把 TCP/IP 先过一遍？有什么推荐的学习路径吗？\u003c/p\u003e\n",
+      "Author": "Alexhex",
+      "PubDate": "2022-08-11T07:29:01Z"
+    },
+    {
+      "Title": "终于把 Vue 的 Dialog 给整舒服了 - Vue.js",
+      "Link": "https://www.v2ex.com/t/872179",
+      "Description": "\u003cp\u003e目前流行的弹窗，不管是\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026lt;dialog visible=\"visible\"\u0026gt;\n\t\u0026lt;user-dialog /\u0026gt;\n\u0026lt;/dialog\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e还是\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026lt;template\u0026gt;\n    \u0026lt;dialog visible=\"visible\"\u0026gt;\u0026lt;/dialog\u0026gt;\n\u0026lt;/template\u0026gt;\n\u0026lt;script\u0026gt;\n\tvisible = false\n    open(){\n    \tthis.visible = true\n    }\n    close(){\n    \tthis.visible = true\n    }\n\u0026lt;/script\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e都难受至极。\u003c/p\u003e\n\u003ch2\u003e第一种写法\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e在使用 dialog 的时候，dialog 就已经加载好了，但是我还不需要，所以造成不必要的资源浪费(可忽略)，以及在代码里看着这堆东西太不优雅了\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003e\t\u0026lt;dialog ref=\"dialog1\" :visible=\"dialog1\" /\u0026gt;\n\t\u0026lt;dialog ref=\"dialog2\" :visible=\"dialog2\" /\u0026gt;\n\t\u0026lt;dialog ref=\"dialog3\" :visible=\"dialog3\" /\u0026gt;\n\t\u0026lt;dialog ref=\"dialog4\" :visible=\"dialog4\" /\u0026gt;\n\t......\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003evisible 会留在调用组件里，调用者有 N 个 dialog 就有 N 个变量\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003edata(){\n\treturn {\n\t\tdialog1: false,\n\t\tdialog2: false,\n\t\tdialog3: false,\n\t\t......\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003e想在关闭 dialog 的时候做一些事情很难受，要么 watch dialog1~N 这个变量，要么给所有 dialog 写\u003ccode\u003e\u0026lt;dialog @close=\"close\" /\u0026gt;\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\n在关闭弹窗时，接收返回的变量很难受\u003cpre\u003e\u003ccode\u003e\u0026lt;dialog :visible.sync=\"visible\"\u0026gt;\n\t\u0026lt;user-dialog @close=\"close\" /\u0026gt;\n\u0026lt;/dialog\u0026gt;\n\ndata(){\n\treturn {\n\t\tvisible: true\n\t}\n}\n\nclose(event){\n\tconsole.log(event)\n\tthis.visible = false\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e第二种写法\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e一旦引入组件，组件便开始 mount 了，生命周期也执行了，如果调用者引入了 N 个 dialog ，那性能可想而知，还不如第一种写法\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e因失去了生命周期的特性，导致关闭弹窗的时候需要你自己重置数据，做清理\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e而且你开不能利用生命周期来做数据加载，因为你还没打开弹窗，90%的业务场景是没必要加载数据的，所以你还要在 open 里自己加载\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e还有一些问题我暂时想不起来，先略吧\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e忍了好久了，终于把 \u003ca href=\"https://material.angular.io/components/dialog/overview\" rel=\"nofollow\"\u003ehttps://material.angular.io/components/dialog/overview\u003c/a\u003e 的 dialog 给挪过来了，所说不太完美，但是至少满足我的痛点了。\u003c/p\u003e\n\u003cp\u003e使用文档可以看我写的\u003ca href=\"https://stackblitz.com/edit/vue2-vite-typescript-starter-4gf3es\" rel=\"nofollow\"\u003edemo\u003c/a\u003e，API 参考的话可以看\u003ca href=\"https://material.angular.io/components/dialog/api\" rel=\"nofollow\"\u003eDialog | Angular Material\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e各位如果也有同样的痛苦的话，可以 fork 到自己项目里去改一下就可以用了。\u003c/p\u003e\n\u003cp\u003e写得不是很完美，仅作为一个想法、思路。\u003c/p\u003e\n\u003cp\u003eps：真的想吐槽手动初始化 Vue 这个过程，难受至极，离开了文档的操作，啥也不是。\u003c/p\u003e\n",
+      "Author": "wunonglin",
+      "PubDate": "2022-08-11T07:26:06Z"
+    },
+    {
+      "Title": "真心求教，网络分布、路由、转发、穿透相关知识怎么系统学习 - 程序员",
+      "Link": "https://www.v2ex.com/t/872178",
+      "Description": "\u003cp\u003e起因还是兴趣以及*趣\u003c/p\u003e\n\u003cp\u003e需求是想搞清楚以下这些东西，最好是能以前后内容贯通的方式系统性地学习：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003eDNS 的原理，以及简单实现\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e硬软路由 / 旁路由 / 单臂路由 等路由组件相通的部分，和各自解决的痛点\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e交换机相对路由器又解决了什么关键的问题\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eNAT 类型以及打洞具体实现方法，进一步 P2P 打洞的实现\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e网络包混淆混淆的到底是啥，比如员工使用**上网能让网络工程师看不出他访问了啥网站吗？\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e感觉在描述网络工程，但我想知道有没有哪一本书是专门把上面这些东西给一个野路子程序员拎清后拿来用的，或者一本《计算机网络》能解决以上问题吗？\u003c/p\u003e\n",
+      "Author": "lookStupiToForce",
+      "PubDate": "2022-08-11T07:25:43Z"
+    },
+    {
       "Title": "宽带改桥接后隔一段时间会被 isp 强制重播，请问怎样才能不被重播？ - 宽带症候群",
       "Link": "https://www.v2ex.com/t/872176",
       "Description": "\u003cp\u003e是福建移动的宽带，发现改了桥接以后;路由器隔一段时间拨号会掉！之前还以为是固件问题刷了几个都一样，看了下日志发现不对，在恩山搜到了相似的情况；可能是 isp 强制重拨号😢按评论区的方法“打开不主动发送 lcp-echo”后还是同样的结果！\u003c/p\u003e\n",
