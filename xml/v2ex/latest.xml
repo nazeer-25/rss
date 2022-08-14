@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于编程语言内存对齐的疑问 - 程序员</title>
+      <link>https://www.v2ex.com/t/872792</link>
+      <description>&lt;p&gt;最近对于编程语言为什么要进行内存对齐有些疑问，网上看的资料基本都是说为了 CPU 的效率，减少 CPU 访问内存的次数，但是总感觉这种说法很勉强，举例：&#xA;对于 64 位系统，CPU 按 8 字节取内存，那么假设有&#xA;struct s {&#xA;a int16&#xA;b int64&#xA;}&#xA;对于这个结构体，我的理解是不管对不对齐 CPU 总是要取两次的，如果这个时候多了个 c 变量&#xA;struct s {&#xA;a int16&#xA;b int64&#xA;c int16&#xA;}&#xA;如果不对齐的话，那么只需要 2+8+2=12 个字节空间，CPU 只需要取两次。如果是内存对齐，那么&#xA;需要 8+8+8=24 个字节空间，CPU 反而需要读三次，这么来看不对齐不但节省 CPU 时间，还节省内存空间，所以为什么要对齐呢？。。。难道 CPU 拼接变量很消耗时间？&lt;/p&gt;&#xA;</description>
+      <author>gps32251070</author>
+      <pubDate>14 Aug 2022 10:40:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>求一个脚本该如何实现？ - 程序员</title>
+      <link>https://www.v2ex.com/t/872791</link>
+      <description>脚本如下：&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;function 弓箭手攻击设置&lt;br /&gt;&#x9;set_race(1);&lt;br /&gt;&#x9;set_skill(&#34;弓箭手物理攻击&#34;);&lt;br /&gt;end&lt;br /&gt;&lt;br /&gt;function 棍职业攻击设置&lt;br /&gt;&#x9;set_race(2);&lt;br /&gt;&#x9;set_skill(&#34;棍物理攻击&#34;);&lt;br /&gt;end&lt;br /&gt;&lt;br /&gt;function 刀职业攻击设置&lt;br /&gt;&#x9;set_race(3);&lt;br /&gt;&#x9;set_skill(&#34;刀物理攻击&#34;);&lt;br /&gt;end&lt;br /&gt;&lt;br /&gt;function 剑职业攻击设置&lt;br /&gt;&#x9;set_race(4);&lt;br /&gt;&#x9;set_skill(&#34;剑物理攻击&#34;);&lt;br /&gt;end&lt;br /&gt;&lt;br /&gt;function main&lt;br /&gt;&#x9;call 剑职业攻击设置;&lt;br /&gt;&#x9;&lt;br /&gt;&#x9;label 战斗设定&lt;br /&gt;&#x9;&#x9;if get_level() &amp;gt; 5&lt;br /&gt;&#x9;&#x9;&#x9;register(1, &#34;main&#34;, &#34;回城过程&#34;);&lt;br /&gt;&#x9;&#x9;&#x9;jmp 5 级战斗过程&lt;br /&gt;&#x9;&#x9;end;&lt;br /&gt;&lt;br /&gt;&#x9;// 默认过程&lt;br /&gt;&#x9;jmp 5 级战斗过程&lt;br /&gt;&#x9;//return;&lt;br /&gt;&lt;br /&gt;&#x9;label 5 级内战斗过程&lt;br /&gt;&#x9;&#x9;goto(&#34;烟波山&#34;);&lt;br /&gt;&#x9;&#x9;loop 杀怪&lt;br /&gt;&#x9;&#x9;&#x9;// 杀兔子&lt;br /&gt;&#x9;&#x9;&#x9;fight(124, 164, 30, 1);&lt;br /&gt;&#x9;&#x9;end;&lt;br /&gt;&lt;br /&gt;&#x9;label 5 级战斗过程&lt;br /&gt;&#x9;&#x9;goto(&#34;山洞&#34;);&lt;br /&gt;&#x9;&#x9;loop 杀怪&lt;br /&gt;&#x9;&#x9;&#x9;// 杀一般的怪&lt;br /&gt;&#x9;&#x9;&#x9;fight(86, 123, 30, 1);&lt;br /&gt;&lt;br /&gt;&#x9;&#x9;&#x9;fight(138, 119, 30, 1);&lt;br /&gt;&lt;br /&gt;&#x9;&#x9;&#x9;fight(138, 119, 1000, 1);&lt;br /&gt;&#x9;&#x9;&#x9;&lt;br /&gt;&#x9;&#x9;&#x9;// 杀张大手&lt;br /&gt;&#x9;&#x9;&#x9;//fight(83, 47, 30, 1);&lt;br /&gt;&#x9;&#x9;end;&lt;br /&gt;&lt;br /&gt;&#x9;label 回城过程&lt;br /&gt;&#x9;&#x9;msg(&#34;....这里是 回城...&#34;);&lt;br /&gt;&#x9;&#x9;&lt;br /&gt;&#x9;&#x9;goto(&#34;草药铺&#34;, &#34;老郎中&#34;)&lt;br /&gt;&lt;br /&gt;&#x9;&#x9;chat_npc(&#34;老郎中&#34;)&lt;br /&gt;&lt;br /&gt;&#x9;&#x9;if get_error() &amp;gt; 0&lt;br /&gt;&#x9;&#x9;&#x9;jmp 过程异常&lt;br /&gt;&#x9;&#x9;end&lt;br /&gt;&lt;br /&gt;&#x9;&#x9;// 获得我的物品列表&lt;br /&gt;&#x9;&#x9;get_my_items();&lt;br /&gt;&#x9;&#x9;&lt;br /&gt;&#x9;&#x9;// 卖普通物品&lt;br /&gt;&#x9;&#x9;sell_items(1);&lt;br /&gt;&lt;br /&gt;&#x9;&#x9;// 买东西 止血草 10 个&lt;br /&gt;&#x9;&#x9;buy(&#34;止血草&#34;, 10, 1);&lt;br /&gt;&lt;br /&gt;&#x9;&#x9;// 买够 金创药 10 个, 注意： 根据后面标准位判断&lt;br /&gt;&#x9;&#x9;buy(&#34;金创药&#34;, 10, 1);&lt;br /&gt;&#x9;&#x9;&lt;br /&gt;&#x9;&#x9;get_my_items();&lt;br /&gt;&lt;br /&gt;&#x9;&#x9;msg(&#34;回程过程结束...&#34;);&lt;br /&gt;&#x9;&#x9;jmp 战斗设定&lt;br /&gt;&lt;br /&gt;&#x9;msg(&#34; &amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt; main2 end &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; &#34;);&lt;br /&gt;&lt;br /&gt;&#x9;return;&#x9;&lt;br /&gt;&lt;br /&gt;&#x9;label 过程异常&lt;br /&gt;&#x9;&#x9;msg(&#34;过程异常，查日志&#34;);&lt;br /&gt;end;</description>
+      <author>think9999</author>
+      <pubDate>14 Aug 2022 10:36:17 +0000</pubDate>
+    </item>
+    <item>
       <title>问一下大家的话费套餐都是什么样的，比较一下好知道我被坑了多少。 - 问与答</title>
       <link>https://www.v2ex.com/t/872790</link>
       <description>目前用的是联通的冰激凌 5G 套餐 69 元档，一个月 350 分钟通话，24G 流量。</description>
