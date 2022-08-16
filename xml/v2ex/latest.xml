@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>nodejs 新手，请问下 typescript 工程引入/导出 npm 包和 package.json 的问题 - Node.js</title>
+      <link>https://www.v2ex.com/t/873343</link>
+      <description>&lt;p&gt;简单来说，我这边前端和服务器都用到了一块逻辑代码，然后我图方便把它提出来作为 npm 包，一处更改前后都能使用。但是：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;前后端都是 typescript&lt;/li&gt;&#xA;&lt;li&gt;前端工程是 es module 发布类网页应用，后端工程是 node 的 commonjs&lt;/li&gt;&#xA;&lt;li&gt;前端不支持 bigint ，后端支持&lt;/li&gt;&#xA;&lt;li&gt;前端查了一下 JSBI 可以 babel 导出时选择替换为 bigint&lt;/li&gt;&#xA;&lt;li&gt;于是我查了一下找到个 hybrid npm 包的 package.json 写法，就是 esm -&amp;gt; import ，cjs -&amp;gt; require 分开填写&lt;/li&gt;&#xA;&lt;li&gt;问题又来了，babel 导出的 bigint 的 .d.ts 和 tsc 导出的 JSBI 的 .d.ts 并不一致，并且如果想两边使用方便，确实前端不能看到 bigint 后端不能看到 JSBI &lt;/li&gt;&#xA;&lt;li&gt;然后我又再起了个 npm 包，把 JSBI 套了一层，在工具类里面处理导出，自己 type 了个 BI 类型，不会暴露出 JSBI 或者 bigint&lt;/li&gt;&#xA;&lt;li&gt;当然逻辑模块引用工具类的 npm 包时又循环到上面的问题了，公共代码引用方式相同，同一个包，如何用的时候导入命令相同，比如都是 &lt;code&gt;import { BIEx, BI } from &#39;jsbi-extension&#39;;&lt;/code&gt; 但是在不同“语境”下代表的东西不同？&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;我不知道我表述清楚没有，最后我的临时解决方案是自己造的这个 jsbi 的套壳起了俩分枝，在公共逻辑模块 build esm/cjs 时分别引用不同的分支，但...感觉各种别扭...请问这种情形的标准解决方案是什么？&lt;/p&gt;&#xA;&lt;p&gt;我造的 JSBI 坑在这 &lt;code&gt;&lt;a href=&#34;https://github.com/darklinden/jsbi-extension&#34; rel=&#34;nofollow&#34;&gt;https://github.com/darklinden/jsbi-extension&lt;/a&gt;&lt;/code&gt; 后来想了下也只是因为我这是前后端 esm 和 cjs 的不同才只有两个分支...如果是做成通用的...岂不是要 4 个分支？&lt;/p&gt;&#xA;</description>
+      <author>darklinden</author>
+      <pubDate>16 Aug 2022 22:46:18 +0000</pubDate>
+    </item>
+    <item>
       <title>企业级设备能通过装证书让浏览器不提示不安全么？ - 程序员</title>
       <link>https://www.v2ex.com/t/873342</link>
       <description>&lt;p&gt;RT ，楼主买了台华为的交换机，访问 web 后台不能记住密码就很烦&lt;/p&gt;&#xA;</description>
