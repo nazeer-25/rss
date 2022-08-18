@@ -28,14 +28,14 @@
       <description>&lt;p&gt;应用侧围绕 Span，有三个核心任务要完成：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;生成 Span：操作开始构建 Span 并填充 StartTime，操作完成时填充 EndTime 信息，期间可追加 Attributes、Event 等&#xA;传播 Span：进程内通过 context.Context、进程间通过请求的 header 作为 SpanContext 的载体，传播的核心信息是 TraceId 和 ParentSpanId&#xA;上报 Span：生成的 Span 通过 tracing exporter 发送给 collect agent / back-end server&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>并发小白 sync.Mutex 疑问，求大佬指点</title>
-      <link>https://studygolang.com/articles/35833#reply4</link>
-      <description>&lt;h4&gt;&lt;em&gt;疑问&lt;/em&gt;&lt;/h4&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;为什么 main 方法中循环打印 myMap 时还要加锁？不加锁 go build -race cmd/main.go 编译运行时会提示有两个数据存在竞争关系&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;sync&amp;quot;&#xA;&#x9;&amp;quot;time&amp;quot;&#xA;)&#xA;&#xA;var (&#xA;&#x9;myMap = make(map[int]int, 10)&#xA;&#x9;lock  sync.Mutex&#xA;)&#xA;&#xA;func test(n int) {&#xA;&#xA;&#x9;res := 1&#xA;&#x9;for i := 1; i &amp;lt;= n; i++ {&#xA;&#x9;&#x9;res *= i&#xA;&#x9;}&#xA;&#xA;&#x9;lock.Lock()&#xA;&#x9;defer lock.Unlock()&#xA;&#x9;myMap[n] = res&#xA;&#xA;}&#xA;&#xA;func main() {&#xA;&#xA;&#x9;for i := 1; i &amp;lt;= 20; i++ {&#xA;&#x9;&#x9;go test(i)&#xA;&#x9;}&#xA;&#xA;&#x9;time.Sleep(time.Second * 10)&#xA;&#xA;&#x9;//lock.Lock()&#xA;&#x9;for i, v := range myMap {&#xA;&#x9;&#x9;fmt.Printf(&amp;quot;map[%d] = %d \n \n&amp;quot;, i, v)&#xA;&#x9;}&#xA;&#x9;//lock.Unlock()&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
-    </item>
-    <item>
       <title>go与can通信协议</title>
       <link>https://studygolang.com/topics/15760#reply4</link>
       <description>&lt;p&gt;遇到一个需求，用go语言实现持续读取can协议通信数据，有没有哪位大哥接触过，求教啊&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>并发小白 sync.Mutex 疑问，求大佬指点</title>
+      <link>https://studygolang.com/articles/35833#reply4</link>
+      <description>&lt;h4&gt;&lt;em&gt;疑问&lt;/em&gt;&lt;/h4&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;为什么 main 方法中循环打印 myMap 时还要加锁？不加锁 go build -race cmd/main.go 编译运行时会提示有两个数据存在竞争关系&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;sync&amp;quot;&#xA;&#x9;&amp;quot;time&amp;quot;&#xA;)&#xA;&#xA;var (&#xA;&#x9;myMap = make(map[int]int, 10)&#xA;&#x9;lock  sync.Mutex&#xA;)&#xA;&#xA;func test(n int) {&#xA;&#xA;&#x9;res := 1&#xA;&#x9;for i := 1; i &amp;lt;= n; i++ {&#xA;&#x9;&#x9;res *= i&#xA;&#x9;}&#xA;&#xA;&#x9;lock.Lock()&#xA;&#x9;defer lock.Unlock()&#xA;&#x9;myMap[n] = res&#xA;&#xA;}&#xA;&#xA;func main() {&#xA;&#xA;&#x9;for i := 1; i &amp;lt;= 20; i++ {&#xA;&#x9;&#x9;go test(i)&#xA;&#x9;}&#xA;&#xA;&#x9;time.Sleep(time.Second * 10)&#xA;&#xA;&#x9;//lock.Lock()&#xA;&#x9;for i, v := range myMap {&#xA;&#x9;&#x9;fmt.Printf(&amp;quot;map[%d] = %d \n \n&amp;quot;, i, v)&#xA;&#x9;}&#xA;&#x9;//lock.Unlock()&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>推荐四款非常好用的免费电脑梯子软件，免费V2ray和Trojan节点科学上网</title>
