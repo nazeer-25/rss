@@ -4,23 +4,128 @@
   "Description": "",
   "Items": [
     {
-      "Title": "笔记本主板点不亮了，可能会是什么问题？ - 计算机",
+      "Title": "Rust Wasm 图片转 ASCII 艺术 - 分享创造",
+      "Link": "https://www.v2ex.com/t/873675",
+      "Description": "\u003cp\u003e\u003cimg alt=\"image\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://user-images.githubusercontent.com/11046969/185098055-64d35b39-be09-4ced-b524-e3e1071a5da5.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e有一些隐藏在代码中的 ASCII 有意思的图片，如：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003e/*\n                                 _\n                              _ooOoo_\n                             o8888888o\n                             88\" . \"88\n                             (| -_- |)\n                             O\\  =  /O\n                          ____/`---'\\____\n                        .'  \\\\|     |//  `.\n                       /  \\\\|||  :  |||//  \\\n                      /  _||||| -:- |||||_  \\\n                      |   | \\\\\\  -  /'| |   |\n                      | \\_|  `\\`---'//  |_/ |\n                      \\  .-\\__ `-. -'__/-.  /\n                    ___`. .'  /--.--\\  `. .'___\n                 .\"\" '\u0026lt;  `.___\\_\u0026lt;|\u0026gt;_/___.' _\u0026gt; \\\"\".\n                | | :  `- \\`. ;`. _/; .'/ /  .' ; |    \n                \\  \\ `-.   \\_\\_`. _.'_/_/  -' _.' /\n  ================-.`___`-.__\\ \\___  /__.-'_.'_.-'================\n                              `=--=-'                  \n\n                   佛祖保佑    永无 BUG    永不宕机\n*/\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可以把一些有意思的图片转成 ASCII 艺术图，嵌到代码中，或者 log 中。\u003c/p\u003e\n\u003cp\u003e整体原理比较简单，这里用 Rust Wasm 实现一下。\u003c/p\u003e\n\u003ch2\u003e1. 原理\u003c/h2\u003e\n\u003cp\u003e先简单说一下原理。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eRGB 图片转成灰度图片。\u003c/li\u003e\n\u003cli\u003e准备一些不同密度的 ASCII 字符。\u003c/li\u003e\n\u003cli\u003e遍历灰度图片像素，根据亮度值 替换相应的 ASCII 字符。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e这里主要说一下灰度的处理过程。\u003c/p\u003e\n\u003ch3\u003e1.1 灰度处理\u003c/h3\u003e\n\u003cp\u003e灰度和彩色图片的区别就是 \u003ccode\u003eR=G=B\u003c/code\u003e。\u003c/p\u003e\n\u003cp\u003e关于灰度值的计算，有 3 种主流方式：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e最大值法：\u003ccode\u003eMax(R, G, B)\u003c/code\u003e。\u003c/li\u003e\n\u003cli\u003e平均值法：\u003ccode\u003e(R + G + B) / 3\u003c/code\u003e。\u003c/li\u003e\n\u003cli\u003e\n加权平均值法：\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e0.2126 * R + 0.7152 * G + 0.0722 * B\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003e0.299 * R + 0.587 * G + 0.114 * B\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003eMath.sqrt( (0.299 * R) ** 2 + (0.587 * G) ** 2 + (0.114 * B) ** 2 )\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e效果如下图所示 (\u003ca href=\"https://lecepin.github.io/rust-wasm-image-ascii/gray.html\" rel=\"nofollow\"\u003e演示地址\u003c/a\u003e)：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"image\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://user-images.githubusercontent.com/11046969/185090833-cd71e959-2ac1-4abb-ad0e-c140b07349f5.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e这里在 Rust 中用的是加权平均值的第一种方式：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003epub fn get_luminance(r: u8, g: u8, b: u8) -\u0026gt; f32 {\n    let r = 0.2126 * (r as f32);\n    let g = 0.7152 * (g as f32);\n    let b = 0.0722 * (b as f32);\n    r + g + b\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e2. Rust Image 的一些处理\u003c/h2\u003e\n\u003cp\u003e这里罗列一下一些注意点。\u003c/p\u003e\n\u003ch3\u003e2.1 JS 到 Rust 的 File 传递\u003c/h3\u003e\n\u003cp\u003e这里需要转成 Uint8Array 进行传递：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003econst file = e.target.files[0];\nconst reader = new FileReader();\n\nreader.onloadend = (evt) =\u0026gt; {\n  try {\n    const u8buffer = new Uint8Array(evt.target.result);\n    const result = get_rust_image(u8buffer);\n  } catch (error) {\n    console.log({ error });\n  }\n};\nfile \u0026amp;\u0026amp; reader.readAsArrayBuffer(file);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e对应的 Rust 按照 \u003ccode\u003eVec\u0026lt;u8\u0026gt;\u003c/code\u003e 处理 :\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003e#[wasm_bindgen]\npub fn get_rust_image(raw: Vec\u0026lt;u8\u0026gt;) { ... }\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e2.2 Rust 到 JS \u003ccode\u003eVec\u0026lt;u8\u0026gt;\u003c/code\u003e 传递\u003c/h3\u003e\n\u003cp\u003eRust 部分只要传递 \u003ccode\u003eVec\u0026lt;u8\u0026gt;\u003c/code\u003e 即可：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003e#[wasm_bindgen]\npub fn get_rust_image(raw: Vec\u0026lt;u8\u0026gt;)  -\u0026gt; Vec\u0026lt;u8\u0026gt; { ... }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eJS 消费时，按照 Uint8Array 处理即可：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003e// to Blob\nconst blob = new Blob([u8buffer.buffer]);\n// to File\nconst file = new File([blob], 'image.unknown');\n// to URL\nconst url = URL.createObjectURL(blob);\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e2.3 Rust Image Crate 输出图片数据\u003c/h3\u003e\n\u003cp\u003eImage Crate 将图片加载完后，默认输出的 bytes 是一个解码后的原始数据，传递给 JS 后是无法正常使用的，需要对原始数据进行编码后，输出才行。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"image\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://user-images.githubusercontent.com/11046969/185090956-5295e17a-e578-4271-ba92-7a65b96cef7c.png\"/\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003e// 给编码器一块内存空间，用来写入数据\nlet mut output_buffer = vec![];\n// 创建一个编码器\nlet mut encoder = JpegEncoder::new_with_quality(\u0026amp;mut output_buffer, 100);\n\n// 编码输出\nencoder\n    .encode(\u0026amp;img_raw, width, height, ColorType::L8)\n    .unwrap();\n\n// 直接把内存输出就行\noutput_buffer\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e3. 实现\u003c/h2\u003e\n\u003cp\u003e这里做了两个版本。\u003c/p\u003e\n\u003ch3\u003e3.1 简版实现\u003c/h3\u003e\n\u003cp\u003e这个比较简单，就是去色，匹配，再连接即可：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003e#[wasm_bindgen]\npub fn get_ascii_by_image(raw: Vec\u0026lt;u8\u0026gt;, scale: u32, reverse: bool) -\u0026gt; String {\n    let img = load_from_memory(\u0026amp;raw).unwrap();\n    let img = img\n        .resize(\n            (img.width() * scale / 100) as u32,\n            (img.height() * scale / 100) as u32,\n            FilterType::Nearest,\n        )\n        .grayscale();\n    let mut pallete = [' ', '.', '\\\\', '*', '#', '$', '@'];\n    let mut current_line = 0;\n    let mut result = \"\".to_string();\n\n    if reverse {\n        pallete.reverse();\n    }\n\n    for (_, line, rgba) in img.pixels() {\n        if current_line != line {\n            result.push('\\n');\n            current_line = line;\n        }\n\n        let r = 0.2126 * (rgba.0[0] as f32);\n        let g = 0.7152 * (rgba.0[0] as f32);\n        let b = 0.0722 * (rgba.0[0] as f32);\n        let gray = r + g + b;\n        let caracter = ((gray / 255.0) * (pallete.len() - 1) as f32).round() as usize;\n\n        result.push(pallete[caracter]);\n\n        // 填充一下，有些扁\n        if caracter \u0026lt; (pallete.len() - 2) {\n            result.push('.');\n        } else {\n            result.push(' ');\n        }\n    }\n\n    result\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca href=\"https://lecepin.github.io/rust-wasm-image-ascii/test.html\" rel=\"nofollow\"\u003e演示地址\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e执行时间在 20ms 左右。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"image\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://user-images.githubusercontent.com/11046969/185091081-dd6b53d2-b5b8-4b57-80ec-1abfce14487d.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e3.2 Tai 版\u003c/h3\u003e\n\u003cp\u003e看到一个支持 ASCII 种类挺多的 Rust 项目 \u003ca href=\"https://github.com/MustafaSalih1993/tai\" rel=\"nofollow\"\u003ehttps://github.com/MustafaSalih1993/tai\u003c/a\u003e ，于是将这个项目的 IO 部分进行了修改，适配 WASM 进行了编译处理。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://lecepin.github.io/rust-wasm-image-ascii/index.html\" rel=\"nofollow\"\u003e演示地址\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e这个耗时在 50ms 左右。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"image\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://user-images.githubusercontent.com/11046969/185091133-0c6d6dd7-4a0a-48d2-99b4-12ee6606e2f8.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e4. 安装\u0026amp;使用\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-html\"\u003e\u0026lt;script type=\"module\"\u0026gt;\n  import initWasm, {\n    get_gray_image,\n    get_ascii_by_image,\n    get_ascii_by_image_tai,\n  } from \"./pkg/rust_wasm_image_ascii.js\";\n\n  initWasm()\n    .then(() =\u0026gt; {});\n\u0026lt;/script\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可以直接使用仓库中 \u003ccode\u003epkg/\u003c/code\u003e 目录中的文件，也可以使用 upkg 的资源 \u003ca href=\"https://unpkg.com/browse/rust-wasm-image-ascii/\" rel=\"nofollow\"\u003ehttps://unpkg.com/browse/rust-wasm-image-ascii/\u003c/a\u003e ，也可以 \u003ccode\u003enpm install rust-wasm-image-ascii\u003c/code\u003e 使用。\u003c/p\u003e\n\u003cp\u003e接口描述参考这里：\u003ca href=\"https://github.com/lecepin/rust-wasm-image-ascii/blob/master/pkg/rust_wasm_image_ascii.d.ts\" rel=\"nofollow\"\u003epkg/rust_wasm_image_ascii.d.ts\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e🌟 Github 代码地址：\u003ca href=\"https://github.com/lecepin/rust-wasm-image-ascii\" rel=\"nofollow\"\u003ehttps://github.com/lecepin/rust-wasm-image-ascii\u003c/a\u003e\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/lecepin/blog/blob/main/Rust%20Wasm%20%E5%9B%BE%E7%89%87%E8%BD%AC%20ASCII%20%E8%89%BA%E6%9C%AF.md\" rel=\"nofollow\"\u003e🌟 Github 原文地址\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n",
+      "Author": "lecepin",
+      "PubDate": "2022-08-18T03:07:38Z"
+    },
+    {
+      "Title": "新一代 Intel 为啥不学一下苹果 M1/M2 的 SoC 设计， CPU 集成内存呢？ - 硬件",
+      "Link": "https://www.v2ex.com/t/873674",
+      "Description": "物理距离 CPU 越近了，性能肯定就越高。\u003cbr /\u003e\u003cbr /\u003e反正新一代 CPU ，都是需要重新设计主板的，可以直接把 CPU 面积做大，集成内存。\u003cbr /\u003e\u003cbr /\u003e这样就没双通道内存的问题，组个 256 通道都可以，肯定能显著提升内存性能。",
+      "Author": "tool2d",
+      "PubDate": "2022-08-18T03:06:36Z"
+    },
+    {
+      "Title": "[咨询] 如何提高英语进入外企 - 职场话题",
+      "Link": "https://www.v2ex.com/t/873673",
+      "Description": "\u003cp\u003e目前在一家头部互联网公司任职开发，随着年龄增加，不管是心理上还是身体上都接受不了无效的工作内耗和内卷，实在是精疲力尽，且公司氛围和个人性格是非常难改变的，与其在这里挣扎，选择离开或许是个不错的选择。\u003c/p\u003e\n\u003cp\u003e想着提高下英语，换个环境进入外企过上正常的上班生活。虽然平时看各类英文文档啥的没啥问题，但听和说实在是拉胯，平时逛 youtube 基本需要开英文字幕，否则只靠听很难理解。\u003c/p\u003e\n\u003cp\u003e想在这里咨询下各位已经或曾经在外企工作的大佬，还有英语不错的大兄弟，你们是如何锻炼听和说的。我个人是倾向于报周末的培训班，这样比较有体系，自主学习需要克服的东西太多了，但是在点评上看了一圈实在是眼花缭乱。各位有推荐的培训班也可以推荐，不甚感激。\u003c/p\u003e\n",
+      "Author": "quietDown",
+      "PubDate": "2022-08-18T03:04:28Z"
+    },
+    {
+      "Title": "[求助]跳绳把膝关节弄伤了，去北京哪家医院比较好？ - 北京",
+      "Link": "https://www.v2ex.com/t/873672",
+      "Description": "\u003cp\u003e如题，谢谢\u003c/p\u003e\n",
+      "Author": "enzo26",
+      "PubDate": "2022-08-18T03:03:44Z"
+    },
+    {
+      "Title": "是否还能坚持 128G 呢各位？ - Apple",
+      "Link": "https://www.v2ex.com/t/873671",
+      "Description": "\u003cp\u003e从 5s 时代开始用 iPhone ，到目前最高也就是到 128G ，而且也已经持续三四年了。\u003cbr/\u003e\n但是目前手头的 mini 已经 109G 了，还是在各种减压方式之后，估摸着下一台就要上 256 了吧。\u003cbr/\u003e\nV 站彦祖们，你们的手机容量是多少呢？\u003c/p\u003e\n",
+      "Author": "phub2020",
+      "PubDate": "2022-08-18T02:52:16Z"
+    },
+    {
+      "Title": "如何把一个单词分解成词根+词缀的组合？ - 问与答",
+      "Link": "https://www.v2ex.com/t/873669",
+      "Description": "假设已经有了足够丰富的词根词缀表，如何把一个单词分解为词根+词缀的组合？\u003cbr /\u003e\u003cbr /\u003e对于多词根、多词缀的单词呢？",
+      "Author": "arvin01",
+      "PubDate": "2022-08-18T02:46:07Z"
+    },
+    {
+      "Title": "iOS 16 不支持 MitM 了 - iOS",
+      "Link": "https://www.v2ex.com/t/873668",
+      "Description": "今天看到少数派的文章 \u003ca target=\"_blank\" href=\"https://sspai.com/post/75189\" rel=\"nofollow noopener\"\u003ehttps://sspai.com/post/75189\u003c/a\u003e ，下面评论说 iOS 16 最近的几个 beta 不支持 MitM 了",
+      "Author": "nishuoshenme",
+      "PubDate": "2022-08-18T02:35:33Z"
+    },
+    {
+      "Title": "二线 80 平置换帝都 40 平，值得不？ - 北京",
+      "Link": "https://www.v2ex.com/t/873667",
+      "Description": "\u003cp\u003e如题 单身狗一人住 全款不贷款，或者最多公积金贷一点\u003c/p\u003e\n",
+      "Author": "zxfreedom",
+      "PubDate": "2022-08-18T02:33:36Z"
+    },
+    {
+      "Title": "iOS 版的 OneDrive 卡上传 - iPhone",
+      "Link": "https://www.v2ex.com/t/873664",
+      "Description": "总是显示:正在进行设置 然而我挂了一晚上也没用\u003cbr /\u003e试过的解决方案:\u003cbr /\u003e1.代理 无效\u003cbr /\u003e2.注销重登 无效\u003cbr /\u003e3.删除重下 无效\u003cbr /\u003e为什么不用其他备份方式?\u003cbr /\u003e1.谷歌相册:同时在用 使用体验很好 挂代理上传下载都不错 就是空间没有那么多\u003cbr /\u003e2.iCloud:开启优化后加载总需要转圈,而且优化并没有节省太多空间,我需要删除本地照片,下载体验极其糟糕\u003cbr /\u003e3.国内盘:丢照片风险高各种违规风险高\u003cbr /\u003e4.硬盘:我需要在线浏览和下载又用不到 nas 的体量",
+      "Author": "Vtwoguest",
+      "PubDate": "2022-08-18T02:27:09Z"
+    },
+    {
+      "Title": "miui13 如何恢复谷歌搜索框 - MIUI",
+      "Link": "https://www.v2ex.com/t/873663",
+      "Description": "\u003cp\u003emiui13 的添加小部件里谷歌搜索框找不到了，现在只剩了语音搜索，如何恢复？\u003c/p\u003e\n",
+      "Author": "fengmengqiu",
+      "PubDate": "2022-08-18T02:26:30Z"
+    },
+    {
+      "Title": "如何监听浏览器中同一域名的 tab 全部关闭？ - JavaScript",
+      "Link": "https://www.v2ex.com/t/873662",
+      "Description": "\u003cp\u003e奇葩需求：所有这个网站的标签页 tab 全部关闭则退出登陆（调用 logout 接口）。\u003c/p\u003e\n\u003cp\u003e（以下代码是目前的实现，完全关闭浏览器后退出登陆） \u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003e // 刷新和关闭网页都会触发 onunload, 因此用 sessionStorage 区分，浏览器完全关闭后会清空 sessionStorage\n        sessionStorage.setItem('reloaded', 'yes');\n        window.onunload = function(e) {\n            if (sessionStorage.getItem('reloaded') == null) {\n                fetch(\"/logout\", {\n                method: \"POST\",\n                // keepalive 属性用于页面卸载时，告诉浏览器在后台保持连接，继续发送数据。开启了 keepalive 属性后，网页就算被关闭了，请求被会继续执行而不会中断。\n                keepalive: true\n            });\n            }\n        };\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e请问，有没有方法实现检测到所有同域标签页关闭的方法？\u003c/p\u003e\n",
+      "Author": "Jexxie",
+      "PubDate": "2022-08-18T02:26:22Z"
+    },
+    {
+      "Title": "idea 2022.2 和 2022.2.1 都闪退 - macOS",
+      "Link": "https://www.v2ex.com/t/873661",
+      "Description": "\u003cp\u003e好像从 idea2022.2 开始，runtime jdk 就默认是 17 了\n不知道为啥，打开软件，没一会就会崩溃\u003c/p\u003e\n\u003cp\u003e附上 vm 配置和报错日志。。\u003c/p\u003e\n\u003cp\u003e前面尝试过把 runtime jdk 改成 17 ，一直奔溃，所以 vm 就改回了默认配置\u003c/p\u003e\n\u003cp\u003e-Xmx4096m\u003c/p\u003e\n\u003cp\u003e-XX:+UseShenandoahGC\u003c/p\u003e\n\u003cp\u003e-XX:ShenandoahGCHeuristics=compact\u003c/p\u003e\n\u003cp\u003e-Dide.no.platform.update=true\u003c/p\u003e\n\u003cp\u003e-Dtoolbox.notification.token=dH0PpwKxRkICfjwK7kL6wLsPfsRDazhscfIXGgI82vs=\u003c/p\u003e\n\u003cp\u003e-Dtoolbox.notification.portFile=/Users/devinwu/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/222.3739.54/IntelliJ IDEA.app.vmoptions.port\u003c/p\u003e\n\u003cp\u003e-Didea.plugins.path=/Users/devinwu/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/222.3739.54/IntelliJ IDEA.app.plugins\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://sm.ms/image/VrnCbIkwYqWxhUG\" rel=\"nofollow\"\u003e\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/08/18/VrnCbIkwYqWxhUG.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "devinww",
+      "PubDate": "2022-08-18T02:24:48Z"
+    },
+    {
+      "Title": "大家开车时，最讨厌的违法行为是什么？ - 行程控",
+      "Link": "https://www.v2ex.com/t/873660",
+      "Description": "\u003cp\u003e我每个工作日都是开车上下班，并且里程不短。\u003c/p\u003e\n\u003cp\u003e我最讨厌的就是插队！！！！\u003c/p\u003e\n\u003cp\u003e不管是排队出高速，还是交替进入路口，总是有几个“聪明”人跑前面去插队。以我的开车经验，我不想让他插，他是插不到我前面的。\u003c/p\u003e\n\u003cp\u003e大家说说吧，你们最讨厌什么。不求能改变，只求吐槽。\u003c/p\u003e\n",
+      "Author": "nbweb",
+      "PubDate": "2022-08-18T02:19:42Z"
+    },
+    {
+      "Title": "MS Edge 推出新的跨设备同步工具: Edge Drop, 我的 Android 端能用 Drop 但 PC 端却找不到此功能 - Edge",
+      "Link": "https://www.v2ex.com/t/873659",
+      "Description": "\u003cp\u003eEdge Drop 简介: \u003ca href=\"https://www.ithome.com/0/622/495.htm\" rel=\"nofollow\"\u003ehttps://www.ithome.com/0/622/495.htm\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e日前, Android 端 Edge 正式版本 104.0.1293.55 发布, 可以使用 Drop.\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"Screenshot_20220818-101650\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://tva2.sinaimg.cn/large/007uv4aMgy1h5apc6osyij30g911ygo7.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e但更早些的时候, PC 端 Edge 更新到 104.0.1293.54, 找不到 Drop 功能. 我也尝试了 Beta 版和 Dev 版, 均没有找到.\u003c/p\u003e\n\u003cp\u003e有谁成功在电脑上启用了 Drop 吗?\u003c/p\u003e\n",
+      "Author": "FengMubai",
+      "PubDate": "2022-08-18T02:19:04Z"
+    },
+    {
+      "Title": "请问京东怎么看已购商品的实付金额？ - 问与答",
+      "Link": "https://www.v2ex.com/t/873657",
+      "Description": "订单点进去不是实付金额，请问怎么看实付金额？",
+      "Author": "tbg",
+      "PubDate": "2022-08-18T02:16:59Z"
+    },
+    {
+      "Title": "不懂就问，广州的招行体检是哪个套餐？ - 广州",
+      "Link": "https://www.v2ex.com/t/873656",
+      "Description": "\u003cp\u003e具体的体检门店是这里：\u003ca href=\"http://gzgb.ikang.com/#hosDetail\" rel=\"nofollow\"\u003e爱康国宾广州环市东分院 \u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "ligiggy",
+      "PubDate": "2022-08-18T02:11:58Z"
+    },
+    {
+      "Title": "笔记本主板点不亮了，可能会是什么问题？ - 问与答",
       "Link": "https://www.v2ex.com/t/873655",
       "Description": "\u003cp\u003e如题，前几天发现电脑坏了。\nDell 游侠 G3 3579 ，用了六七年了，加过内存条和 SSD 换过风扇，这应该是第一次不可替换类型的硬件损坏，电池也是有问题的存不了多少电\n症状：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e连接适配器电源灯是正常亮的\u003c/li\u003e\n\u003cli\u003e点击开机，开机指示灯（我的是大小写锁定）亮半秒后灭，2~3s 后再亮半秒后灭，以此类推\u003c/li\u003e\n\u003cli\u003ebios 放电，拆内存硬盘最小运行同样无法点亮主板\u003c/li\u003e\n\u003cli\u003e拿下去修过，过保了没找 Dell 售后，300 修完当时是可以点亮的（当时只挂了一条内存，另外一条内存和俩 SSD 我拆了拿回家的），回家装好也能开机\u003c/li\u003e\n\u003cli\u003e过了一天又不能开了，拆内存硬盘，这些挂载的数量越少，风扇转的越久，开机指示灯亮的越久，也就越接近正常点亮，拆光了多试几次也就能正常点亮，挂载回去也能正常开机\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e并不知道维修师傅换了什么东西，我感觉是非正常供电\u003c/p\u003e\n",
       "Author": "klight",
       "PubDate": "2022-08-18T02:10:26Z"
     },
     {
-      "Title": "[记录]-一个让我感到有些后怕的事情 - 程序员",
-      "Link": "https://www.v2ex.com/t/873654",
-      "Description": "\u003cp\u003e大概是在 2021 年,我在上海的第一份工作,作为一名 Javaer,进入了一家很小的数据行业公司,认识到了第一个主管,就这样一直共事了有大概半年的时间,期间其实有很长一段时间感觉他这人比较事儿而且有时候语气很不好,有一次因为一个很小的转义问题和我扯嗓子喊...半年后,我从这家公司离职了,后来打听发现新来的那个实习生竟然是我当时离职时候的工资...\n就在今年 6 月份,我在微信记录里面无意间发现了一个文件,里面记录着测试环境服务器的大部分 host 地址和 root(你没看错,是 root)的远程密码,当登上去的时候,我心里还是挺震惊的,然后我开始把 apps 下面的所有 tomcat 应用全部 rm 了,改掉了原先的 root 密码,甚至打算在上面建一个 MC 的 Forge 服务器,但是最后不知怎得,也许是收到了良心的谴责,我告诉了我原来的主管,主管也没说什么再就是下个周一的时候公司的 CEO 打来电话,问我现在还能不能登陆上服务器,我交代了大部分的事情直接挂掉了电话(因为那个老板的碎嘴子我早就知道,而且脾气很爆),之后他短信告诉我要报警,我却不以为然.\u003c/p\u003e\n",
-      "Author": "PendingOni",
-      "PubDate": "2022-08-18T02:08:51Z"
-    },
-    {
       "Title": "现在 m2 功率需求那么大，放进固态移动硬盘盒， USB2.0 和 USB3.0 都没办法正常使用？ - 硬件",
       "Link": "https://www.v2ex.com/t/873653",
-      "Description": "理论上\u003cbr /\u003eUSB2.0 的最大电流是 0.5A ，功率是 2.5W 。\u003cbr /\u003eUSB3.0 的最大电流是 0.9A ，功率是 4.5W 。\u003cbr /\u003e\u003cbr /\u003e可是主流 m2 ssd ，功率测试下，读写峰值平均都超过 USB3.0 ，最起码要 USB3.1 接口才能完全喂饱。\u003cbr /\u003e那不是接上稍微老一点的电脑，很容易功率不足，掉盘掉数据？但很奇怪，卖硬盘盒的商家，商品介绍页面完全没提到这点。\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/eXwjuhS.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/eXwjuhS.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e",
+      "Description": "理论上\u003cbr /\u003eUSB2.0 的最大电流是 0.5A ，支持功率是 2.5W 。\u003cbr /\u003eUSB3.0 的最大电流是 0.9A ，支持功率是 4.5W 。\u003cbr /\u003e\u003cbr /\u003e可是主流 m2 ssd ，功率测试下，读写峰值平均都超过 USB3.0 ，最起码要 USB3.1 接口才能完全喂饱。\u003cbr /\u003e那不是接上稍微老一点的电脑，很容易功率不足，掉盘掉数据？但很奇怪，卖硬盘盒的商家，商品介绍页面完全没提到这点，也丝毫没有加辅助供电线的打算。\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/eXwjuhS.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/eXwjuhS.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e",
       "Author": "tool2d",
       "PubDate": "2022-08-18T02:08:24Z"
     },
@@ -156,6 +261,13 @@
       "Description": "\u003cp\u003e最近想拷贝数据到机械硬盘上，路由器只有 100m 的，试了下 smb 速度慢～～～\u003c/p\u003e\n\u003cp\u003e后面搞了条绿联的易驱线，然后通过 type-c 转 usb 接到 m1 上，\n试了下写入速度只有 30m/s ，\n在 windows 上测了下有 120m/s ，这个速度差异有点大，然后百度了下，发现这个是硬伤？\u003c/p\u003e\n",
       "Author": "mycs999",
       "PubDate": "2022-08-18T00:50:11Z"
+    },
+    {
+      "Title": "[记录]-一个让我感到有些后怕的事情 - 程序员",
+      "Link": "https://www.v2ex.com/t/873654",
+      "Description": "\u003cp\u003e大概是在 2021 年,我在上海的第一份工作,作为一名 Javaer,进入了一家很小的数据行业公司,认识到了第一个主管,就这样一直共事了有大概半年的时间,期间其实有很长一段时间感觉他这人比较事儿而且有时候语气很不好,有一次因为一个很小的转义问题和我扯嗓子喊...半年后,我从这家公司离职了,后来打听发现新来的那个实习生竟然是我当时离职时候的工资...\n就在今年 6 月份,我在微信记录里面无意间发现了一个文件,里面记录着测试环境服务器的大部分 host 地址和 root(你没看错,是 root)的远程密码,当登上去的时候,我心里还是挺震惊的,然后我开始把 apps 下面的所有 tomcat 应用全部 rm 了,改掉了原先的 root 密码,甚至打算在上面建一个 MC 的 Forge 服务器,但是最后不知怎得,也许是收到了良心的谴责,我告诉了我原来的主管,主管也没说什么再就是下个周一的时候公司的 CEO 打来电话,问我现在还能不能登陆上服务器,我交代了大部分的事情直接挂掉了电话(因为那个老板的碎嘴子我早就知道,而且脾气很爆),之后他短信告诉我要报警,我却不以为然.\u003c/p\u003e\n",
+      "Author": "PendingOni",
+      "PubDate": "2022-08-18T02:08:51Z"
     },
     {
       "Title": "在电脑上有什么好的方法可以实现自律？（包括：断网，限制使用 APP） - 问与答",
