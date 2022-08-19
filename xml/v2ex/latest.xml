@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>特斯拉 FM 无线调频 转 蓝牙输出 方案 - 问与答</title>
+      <link>https://www.v2ex.com/t/874056</link>
+      <description>&lt;p&gt;有类似东西吗  找了很久没找到&lt;/p&gt;&#xA;</description>
+      <author>hsddszjs</author>
+      <pubDate>19 Aug 2022 10:41:01 +0000</pubDate>
+    </item>
+    <item>
       <title>数据库与缓存的一致性问题的两个疑问 - 程序员</title>
       <link>https://www.v2ex.com/t/874053</link>
       <description>首先，这里不讨论 Binlog 方案。&lt;br /&gt;&lt;br /&gt;其次，基于我对该问题的理解，准备用以下实现：&lt;br /&gt;1 ）先更新数据库，再删除缓存。&lt;br /&gt;2 ）通过延时双删解决不一致问题，这里借助消息队列实现了异步的延时双删，以加快吞吐量。&lt;br /&gt;3 ）通过消息队列实现重试，以解决第二步 删除缓存失败 的问题。&lt;br /&gt;&lt;br /&gt;最后，我有两个想问的问题：&lt;br /&gt;1 ）除了侵入了业务代码和引入消息队列会引发的问题以外，上面的方案有啥问题么？&lt;br /&gt;2 ）下列两种伪代码实现，哪种是对的？错在哪里？&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;// 伪代码 1&lt;br /&gt;// 更新数据库&lt;br /&gt;updateDB();&lt;br /&gt;// 第一次删除缓存，同步&lt;br /&gt;result = deleteCache(key);&lt;br /&gt;if (false == result) {&lt;br /&gt;&#x9;// 失败&lt;br /&gt;&#x9;sendMessageToMQToDeleteCacheWithoutDelay(key);&lt;br /&gt;}&lt;br /&gt;// 第二次删除缓存，异步且延迟&lt;br /&gt;sendMessageToMQToDeleteKeyWithDelay(key, delay);&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;// 伪代码 2&lt;br /&gt;// 更新数据库&lt;br /&gt;updateDB();&lt;br /&gt;// 第一次删除缓存，同步&lt;br /&gt;deleteCache(key);&lt;br /&gt;// 即使上面的第一次删除缓存操作失败了，也什么都不做，继续向下执行&lt;br /&gt;// 第二次删除缓存，异步且延迟&lt;br /&gt;sendMessageToMQToDeleteCacheWithDelay(key, delay);</description>
