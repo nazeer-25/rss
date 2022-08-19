@@ -32,6 +32,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "go 互斥锁和自旋锁的性能对比的问题",
+      "Link": "https://studygolang.com/topics/15763#reply0",
+      "Description": "\u003cp\u003e最近需要做一个本地缓存的需求，缓存数据从 redis 读取\n遂考虑到在大量并发的情况下，减少 go 协程切换的消耗，考虑用自旋锁来实现\u003c/p\u003e\n\n\u003cp\u003e大概的思路是：\n- 大量并发请求\n- 自旋锁上锁\n\t- 放一个 goroutine 去 redis 读取数据到本地缓存\n\t- 其他 goroutine 原地自旋等待缓存数据\n- 读取的协程读取到数据之后解锁\u003c/p\u003e\n\n\u003cp\u003e但是我经过实际测试，发现用自旋锁的速度和用互斥锁的速度要差1~2个数量级，遂很不理解\u003c/p\u003e\n\n\u003cp\u003e之后我经过大量测试发现：\n- 自旋锁在 本地操作（值自增），阻塞操作（sleep 或者 channel recv）时，性能高于互斥锁\n- 在 HTTP 操作时性能和互斥锁相当\n- 在通过 \u0026ldquo;github.com/go-redis/redis/v8\u0026rdquo; 操作 redis 获取数据时，自旋锁的性能和互斥锁要差1个数量级\u003c/p\u003e\n\n\u003cp\u003e不知道是否有大佬可以解答一番？不吝赐教\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/Mericusta/go-foo/tree/main/src/sync-foo\"\u003e测试代码在这里\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "并发小白 sync.Mutex 疑问，求大佬指点",
       "Link": "https://studygolang.com/articles/35833#reply4",
       "Description": "\u003ch4\u003e\u003cem\u003e疑问\u003c/em\u003e\u003c/h4\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e为什么 main 方法中循环打印 myMap 时还要加锁？不加锁 go build -race cmd/main.go 编译运行时会提示有两个数据存在竞争关系\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;sync\u0026quot;\n\t\u0026quot;time\u0026quot;\n)\n\nvar (\n\tmyMap = make(map[int]int, 10)\n\tlock  sync.Mutex\n)\n\nfunc test(n int) {\n\n\tres := 1\n\tfor i := 1; i \u0026lt;= n; i++ {\n\t\tres *= i\n\t}\n\n\tlock.Lock()\n\tdefer lock.Unlock()\n\tmyMap[n] = res\n\n}\n\nfunc main() {\n\n\tfor i := 1; i \u0026lt;= 20; i++ {\n\t\tgo test(i)\n\t}\n\n\ttime.Sleep(time.Second * 10)\n\n\t//lock.Lock()\n\tfor i, v := range myMap {\n\t\tfmt.Printf(\u0026quot;map[%d] = %d \\n \\n\u0026quot;, i, v)\n\t}\n\t//lock.Unlock()\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -42,13 +49,6 @@
       "Title": "go与can通信协议",
       "Link": "https://studygolang.com/topics/15760#reply4",
       "Description": "\u003cp\u003e遇到一个需求，用go语言实现持续读取can协议通信数据，有没有哪位大哥接触过，求教啊\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "go 互斥锁和自旋锁的性能对比的问题",
-      "Link": "https://studygolang.com/topics/15763#reply0",
-      "Description": "\u003cp\u003e最近需要做一个本地缓存的需求，缓存数据从 redis 读取\n遂考虑到在大量并发的情况下，减少 go 协程切换的消耗，考虑用自旋锁来实现\u003c/p\u003e\n\n\u003cp\u003e大概的思路是：\n- 大量并发请求\n- 自旋锁上锁\n\t- 放一个 goroutine 去 redis 读取数据到本地缓存\n\t- 其他 goroutine 原地自旋等待缓存数据\n- 读取的协程读取到数据之后解锁\u003c/p\u003e\n\n\u003cp\u003e但是我经过实际测试，发现用自旋锁的速度和用互斥锁的速度要差1~2个数量级，遂很不理解\u003c/p\u003e\n\n\u003cp\u003e之后我经过大量测试发现：\n- 自旋锁在 本地操作（值自增），阻塞操作（sleep 或者 channel recv）时，性能高于互斥锁\n- 在 HTTP 操作时性能和互斥锁相当\n- 在通过 \u0026ldquo;github.com/go-redis/redis/v8\u0026rdquo; 操作 redis 获取数据时，自旋锁的性能和互斥锁要差1个数量级\u003c/p\u003e\n\n\u003cp\u003e不知道是否有大佬可以解答一番？不吝赐教\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/Mericusta/go-foo/tree/main/src/sync-foo\"\u003e测试代码在这里\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -81,6 +81,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "纯手撸 Go Web 框架 Aurora",
+      "Link": "https://studygolang.com/topics/15496#reply4",
+      "Description": "\u003cp\u003eAurora 框架是转 Go 语言开发 不久后的想法，Go 开发入门的框架就是Gin，所以很多地方都能看到Gin的身影。\u003cbr\u003e\nAurora GitHub地址: \u003ca href=\"https://github.com/aurora-go/aurora\"\u003eaurora\u003c/a\u003e\u003cbr\u003e\nAurora 文档地址：\u003ca href=\"http://www.go-aurora.cn\"\u003edocument\u003c/a\u003e\u003cbr\u003e\n欢迎各位 Gopher Star 助力\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "高性能默克尔树（Merkle Tree）库: txaty/go-merkletree",
       "Link": "https://studygolang.com/topics/15759#reply3",
       "Description": "\u003cp\u003e很高兴和大家分享我最近开源的 Golang 默克尔树（Merkle Tree）的轮子，生成proof和验证proof的方法比cbergoon/merkletree要快很多。\u003c/p\u003e\n\n\u003cp\u003eGitHub: \u003ca href=\"https://github.com/txaty/go-merkletree\"\u003ehttps://github.com/txaty/go-merkletree\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003eGo Doc: \u003ca href=\"https://pkg.go.dev/github.com/txaty/go-merkletree\"\u003ehttps://pkg.go.dev/github.com/txaty/go-merkletree\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e我觉得我们用 Merkle Tree 的大部分场景需要的是 Merkle root 和每个叶节点的 proof，这样我们就可以通过 proof 来重新计算 Merkle root，然后比较计算结果和原来的 root 来证明叶节点的 membership 或存在性。 如果计算出的根与原始根相等，则叶节点是存在的。\n所以与其他一些实现不同的是，在构建新的 Merkle Tree 时，我写的库只构建叶节点 proof 和 Merkle root，而不用缓存整个树。 通过这种方法进行优化，可以运行得比 GitHub 上类似的star最多的库：cbergoon/merkletree 快几十上百倍。 并且我还写了用 goroutine 并行优化的方法。\u003c/p\u003e\n\n\u003cp\u003e下面是和 cbergoon/merkletree 的benchmark。测试了 proof 生成和验证两个方法。因为 cbergoon/merkletree 的 NewTree() 方法只生成树，不生成 proof，GetMerklePath() 才生成一个叶节点的 proof，所以 proof 生成是通过 NewTree() 和对每个叶节点 call 一遍 GetMerklePath() 来测的。下面是 benchmark 结果：\u003c/p\u003e\n\n\u003cp\u003e1,000个数据块（证明快4.7倍，验证快3.6倍）：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003egoos: linux\ngoarch: amd64\npkg: github.com/txaty/go-merkletree\ncpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz\nBenchmarkMerkleTreeProofGen\nBenchmarkMerkleTreeProofGen-12             \t     774\t   1525119 ns/op\nBenchmarkMerkleTreeProofGenParallel\nBenchmarkMerkleTreeProofGenParallel-12     \t     866\t   1402052 ns/op\nBenchmark_cbergoonMerkleTreeProofGen\nBenchmark_cbergoonMerkleTreeProofGen-12    \t     165\t   7142707 ns/op\nBenchmarkMerkleTreeVerify\nBenchmarkMerkleTreeVerify-12               \t     172\t   6886498 ns/op\nBenchmark_cbergoonMerkleTreeVerify\nBenchmark_cbergoonMerkleTreeVerify-12      \t      46\t  24741956 ns/op\nPASS\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e10,000个数据块（证明快24倍，验证快8.2倍）:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003egoos: linux\ngoarch: amd64\npkg: github.com/txaty/go-merkletree\ncpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz\nBenchmarkMerkleTreeProofGen\nBenchmarkMerkleTreeProofGen-12             \t      55\t  20999696 ns/op\nBenchmarkMerkleTreeProofGenParallel\nBenchmarkMerkleTreeProofGenParallel-12     \t     128\t   9295963 ns/op\nBenchmark_cbergoonMerkleTreeProofGen\nBenchmark_cbergoonMerkleTreeProofGen-12    \t       2\t 504747049 ns/op\nBenchmarkMerkleTreeVerify\nBenchmarkMerkleTreeVerify-12               \t      12\t  93694508 ns/op\nBenchmark_cbergoonMerkleTreeVerify\nBenchmark_cbergoonMerkleTreeVerify-12      \t       2\t 771403038 ns/op\nPASS\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e100,000个数据块（证明快333倍，验证快42倍）:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003egoos: linux\ngoarch: amd64\npkg: github.com/txaty/go-merkletree\ncpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz\nBenchmarkMerkleTreeProofGen\nBenchmarkMerkleTreeProofGen-12             \t       6\t 181101101 ns/op\nBenchmarkMerkleTreeProofGenParallel\nBenchmarkMerkleTreeProofGenParallel-12     \t      10\t 107610935 ns/op\nBenchmark_cbergoonMerkleTreeProofGen\nBenchmark_cbergoonMerkleTreeProofGen-12    \t       1\t60383341291 ns/op\nBenchmarkMerkleTreeVerify\nBenchmarkMerkleTreeVerify-12               \t       1\t1148882340 ns/op\nBenchmark_cbergoonMerkleTreeVerify\nBenchmark_cbergoonMerkleTreeVerify-12      \t       1\t48003616811 ns/op\nPASS\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e1000,000个数据块（cbergoon/merkle在我的电脑上已经无法短时间得到结果了）：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003egoos: linux\ngoarch: amd64\npkg: github.com/txaty/go-merkletree\ncpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz\nBenchmarkMerkleTreeProofGen\nBenchmarkMerkleTreeProofGen-12            \t       1\t1558584621 ns/op\nBenchmarkMerkleTreeProofGenParallel\nBenchmarkMerkleTreeProofGenParallel-12    \t       2\t 806060148 ns/op\nBenchmarkMerkleTreeVerify\nBenchmarkMerkleTreeVerify-12              \t       1\t8041060031 ns/op\nPASS\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e然后并行的方法也比原方法在算多数据块的时候会快很多。我感觉现在并行的实现还不够好，所以还会想进一步优化的方法。\u003c/p\u003e\n\n\u003cp\u003e希望我的库可以帮到你。同时如果发现问题的话请提 issue，感谢！\u003c/p\u003e\n\n\u003cp\u003eGo Forum 链接：\u003ca href=\"https://forum.golangbridge.org/t/high-performance-go-merkle-tree-implementation/28490\"\u003ehttps://forum.golangbridge.org/t/high-performance-go-merkle-tree-implementation/28490\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e知乎链接：\u003ca href=\"https://zhuanlan.zhihu.com/p/553599674\"\u003ehttps://zhuanlan.zhihu.com/p/553599674\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220815/101dfca0fa20740c89c37fbecea9c4c9.png\" alt=\"Screenshot 2022-05-15 at 20.22.11.png\" /\u003e\u003c/p\u003e\n",
@@ -91,13 +98,6 @@
       "Title": "北京五道口顶级游戏公司中台部门招go开发",
       "Link": "https://studygolang.com/topics/15208#reply13",
       "Description": "\u003cp\u003e此岗位长期有效\u003c/p\u003e\n\n\u003cp\u003e公司网站:  \u003ca href=\"https://www.hortorgames.com/\"\u003ehttps://www.hortorgames.com/\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e坐标: 北京-海淀-五道口\u003c/p\u003e\n\n\u003cp\u003e职责: 负责中台部门通用服务如登录, 注册, 支付, 统计等功能的开发\u003c/p\u003e\n\n\u003cp\u003e要求: 扎实的数据结构与算法等计算机基础知识, 熟悉Redis, MongoDB等后端技术\u003c/p\u003e\n\n\u003cp\u003e薪资: 25-35k  15薪\u003c/p\u003e\n\n\u003cp\u003e福利: 双休, 极少加班, 反对内卷, 3公里内2k租房补贴, 每年两次晋升机会, 豪横年会, 工作和技术氛围好\u003c/p\u003e\n\n\u003cp\u003e联系方式:  加wx  xbtb1354  备注 go内推此岗位长期有效, 长期招聘游戏前后端, 策划美术运营等\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "纯手撸 Go Web 框架 Aurora",
-      "Link": "https://studygolang.com/topics/15496#reply3",
-      "Description": "\u003cp\u003eAurora 框架是转 Go 语言开发 不久后的想法，Go 开发入门的框架就是Gin，所以很多地方都能看到Gin的身影。\u003cbr\u003e\nAurora GitHub地址: \u003ca href=\"https://github.com/aurora-go/aurora\"\u003eaurora\u003c/a\u003e\u003cbr\u003e\nAurora 文档地址：\u003ca href=\"http://www.go-aurora.cn\"\u003edocument\u003c/a\u003e\u003cbr\u003e\n欢迎各位 Gopher Star 助力\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -182,6 +182,13 @@
       "Title": "Carbon 语法简要",
       "Link": "https://studygolang.com/topics/15729#reply5",
       "Description": "\u003col\u003e\n\u003cli\u003epackage ExplorerTest api;\n使用包管理机制，构建大型工程（操作系统、游戏）\u003c/li\u003e\n\u003cli\u003efn Main() -\u0026gt; i32 {\nvar s: auto = \u0026ldquo;Hello world!\u0026rdquo;;\nPrint(s);\nreturn 0;\n}； 声明式语法，提升开发效率\u003c/li\u003e\n\u003cli\u003evar x: i64 = 42; 明确类型，平衡编译器与开发者期望效率\u003c/li\u003e\n\u003cli\u003eif (fruit.IsYellow()) {\nConsole.Print(\u0026ldquo;Banana!\u0026rdquo;);\n} else if (fruit.IsOrange()) {\nConsole.Print(\u0026ldquo;Orange!\u0026rdquo;);\n}；类似Go语言的大小写访问域控制，简洁与（编译时）正交\u003c/li\u003e\n\u003cli\u003eclass Point {\nvar x: i32;\nvar y: i32;\n}；启用类建模，肯定结构化建模的效率和管理便利\u003c/li\u003e\n\u003cli\u003e单继承，继续否定了继承的复杂性，肯定了组合（习惯总结归约）\u003c/li\u003e\n\u003cli\u003e范型、指针；提供约束与灵活。 C++库的调用，使用成熟与积累组件。\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "纯手撸 Go Web 框架 Aurora",
+      "Link": "https://studygolang.com/topics/15496#reply3",
+      "Description": "\u003cp\u003eAurora 框架是转 Go 语言开发 不久后的想法，Go 开发入门的框架就是Gin，所以很多地方都能看到Gin的身影。\u003cbr\u003e\nAurora GitHub地址: \u003ca href=\"https://github.com/aurora-go/aurora\"\u003eaurora\u003c/a\u003e\u003cbr\u003e\nAurora 文档地址：\u003ca href=\"http://www.go-aurora.cn\"\u003edocument\u003c/a\u003e\u003cbr\u003e\n欢迎各位 Gopher Star 助力\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
