@@ -22,11 +22,6 @@
       <link>https://studygolang.com/articles/35834#reply0</link>
     </item>
     <item>
-      <title>go 互斥锁和自旋锁的性能对比的问题</title>
-      <link>https://studygolang.com/topics/15763#reply0</link>
-      <description>&lt;p&gt;最近需要做一个本地缓存的需求，缓存数据从 redis 读取&#xA;遂考虑到在大量并发的情况下，减少 go 协程切换的消耗，考虑用自旋锁来实现&lt;/p&gt;&#xA;&#xA;&lt;p&gt;大概的思路是：&#xA;- 大量并发请求&#xA;- 自旋锁上锁&#xA;&#x9;- 放一个 goroutine 去 redis 读取数据到本地缓存&#xA;&#x9;- 其他 goroutine 原地自旋等待缓存数据&#xA;- 读取的协程读取到数据之后解锁&lt;/p&gt;&#xA;&#xA;&lt;p&gt;但是我经过实际测试，发现用自旋锁的速度和用互斥锁的速度要差1~2个数量级，遂很不理解&lt;/p&gt;&#xA;&#xA;&lt;p&gt;之后我经过大量测试发现：&#xA;- 自旋锁在 本地操作（值自增），阻塞操作（sleep 或者 channel recv）时，性能高于互斥锁&#xA;- 在 HTTP 操作时性能和互斥锁相当&#xA;- 在通过 &amp;ldquo;github.com/go-redis/redis/v8&amp;rdquo; 操作 redis 获取数据时，自旋锁的性能和互斥锁要差1个数量级&lt;/p&gt;&#xA;&#xA;&lt;p&gt;不知道是否有大佬可以解答一番？不吝赐教&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/Mericusta/go-foo/tree/main/src/sync-foo&#34;&gt;测试代码在这里&lt;/a&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>并发小白 sync.Mutex 疑问，求大佬指点</title>
       <link>https://studygolang.com/articles/35833#reply4</link>
       <description>&lt;h4&gt;&lt;em&gt;疑问&lt;/em&gt;&lt;/h4&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;为什么 main 方法中循环打印 myMap 时还要加锁？不加锁 go build -race cmd/main.go 编译运行时会提示有两个数据存在竞争关系&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;sync&amp;quot;&#xA;&#x9;&amp;quot;time&amp;quot;&#xA;)&#xA;&#xA;var (&#xA;&#x9;myMap = make(map[int]int, 10)&#xA;&#x9;lock  sync.Mutex&#xA;)&#xA;&#xA;func test(n int) {&#xA;&#xA;&#x9;res := 1&#xA;&#x9;for i := 1; i &amp;lt;= n; i++ {&#xA;&#x9;&#x9;res *= i&#xA;&#x9;}&#xA;&#xA;&#x9;lock.Lock()&#xA;&#x9;defer lock.Unlock()&#xA;&#x9;myMap[n] = res&#xA;&#xA;}&#xA;&#xA;func main() {&#xA;&#xA;&#x9;for i := 1; i &amp;lt;= 20; i++ {&#xA;&#x9;&#x9;go test(i)&#xA;&#x9;}&#xA;&#xA;&#x9;time.Sleep(time.Second * 10)&#xA;&#xA;&#x9;//lock.Lock()&#xA;&#x9;for i, v := range myMap {&#xA;&#x9;&#x9;fmt.Printf(&amp;quot;map[%d] = %d \n \n&amp;quot;, i, v)&#xA;&#x9;}&#xA;&#x9;//lock.Unlock()&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -35,6 +30,11 @@
       <title>go与can通信协议</title>
       <link>https://studygolang.com/topics/15760#reply4</link>
       <description>&lt;p&gt;遇到一个需求，用go语言实现持续读取can协议通信数据，有没有哪位大哥接触过，求教啊&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>go 互斥锁和自旋锁的性能对比的问题</title>
+      <link>https://studygolang.com/topics/15763#reply0</link>
+      <description>&lt;p&gt;最近需要做一个本地缓存的需求，缓存数据从 redis 读取&#xA;遂考虑到在大量并发的情况下，减少 go 协程切换的消耗，考虑用自旋锁来实现&lt;/p&gt;&#xA;&#xA;&lt;p&gt;大概的思路是：&#xA;- 大量并发请求&#xA;- 自旋锁上锁&#xA;&#x9;- 放一个 goroutine 去 redis 读取数据到本地缓存&#xA;&#x9;- 其他 goroutine 原地自旋等待缓存数据&#xA;- 读取的协程读取到数据之后解锁&lt;/p&gt;&#xA;&#xA;&lt;p&gt;但是我经过实际测试，发现用自旋锁的速度和用互斥锁的速度要差1~2个数量级，遂很不理解&lt;/p&gt;&#xA;&#xA;&lt;p&gt;之后我经过大量测试发现：&#xA;- 自旋锁在 本地操作（值自增），阻塞操作（sleep 或者 channel recv）时，性能高于互斥锁&#xA;- 在 HTTP 操作时性能和互斥锁相当&#xA;- 在通过 &amp;ldquo;github.com/go-redis/redis/v8&amp;rdquo; 操作 redis 获取数据时，自旋锁的性能和互斥锁要差1个数量级&lt;/p&gt;&#xA;&#xA;&lt;p&gt;不知道是否有大佬可以解答一番？不吝赐教&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/Mericusta/go-foo/tree/main/src/sync-foo&#34;&gt;测试代码在这里&lt;/a&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>应用侧围绕 Span，有三个核心任务要完成</title>
