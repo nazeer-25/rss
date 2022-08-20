@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>上海的消费券抽奖报名，微信要刷脸，但云闪付和支付宝不用刷脸 - 上海</title>
+      <link>https://www.v2ex.com/t/874214</link>
+      <description>&lt;p&gt;提醒一下，这两天的电子消费券活动，微信小程序要求必须刷脸才能报名，但这个强制捆绑的刷脸验证是财付通的要求，并不是主办方的要求。用支付宝或者云闪付报名就不需要刷脸验证。&lt;/p&gt;&#xA;&lt;p&gt;同样的，像之前上传抗原自测用的疫测达小程序，只有微信小程序需要刷脸才给用，支付宝小程序不用刷脸也能正常使用。&lt;/p&gt;&#xA;&lt;p&gt;总之遇到微信要求刷脸的情况，可以试试看其他平台，大概率都是微信自己加戏。&lt;/p&gt;&#xA;</description>
+      <author>snw</author>
+      <pubDate>20 Aug 2022 08:55:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>成都地区连不上洛杉矶地区搬瓦工机房，丢包 - VPS</title>
+      <link>https://www.v2ex.com/t/874213</link>
+      <description>&lt;p&gt;如图&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/08/20/9adbfad83e6971b1.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;大约是从昨天开始，想知道发生了甚么事。。。。。&lt;/p&gt;&#xA;</description>
+      <author>EHemingway</author>
+      <pubDate>20 Aug 2022 08:53:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>为什么 C++ 中 PCRE 正则匹配只能捕获 19 个 group 出来 - C++</title>
+      <link>https://www.v2ex.com/t/874212</link>
+      <description>&lt;h3&gt;程序问题&lt;/h3&gt;&#xA;&lt;p&gt;我的正则 pattern 是 &lt;code&gt;(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)(l)(m)(n)(o)(p)(q)(r)(s)(t)(u)(v)(w)(x)(y)(z)&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;然后我需要匹配的字符串是 &lt;code&gt;abcdefghijklmnopqrstuvwxyz&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;程序输出是：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;i_0:0 i_1:26 i_2:0 i_3:1 i_4:1 i_5:2 i_6:2 i_7:3 i_8:3 i_9:4 i_10:4 i_11:5 i_12:5 i_13:6 i_14:6 i_15:7 i_16:7 i_17:8 i_18:8 i_19:9 i_20:9 i_21:10 i_22:10 i_23:11 i_24:11 i_25:12 i_26:12 i_27:13 i_28:13 i_29:14 i_30:14 i_31:15 i_32:15 i_33:16 i_34:16 i_35:17 i_36:17 i_37:18 i_38:18 i_39:19 i_40:0 i_41:0 i_42:0 i_43:0 i_44:0 i_45:0 i_46:0 i_47:0 i_48:0 i_49:0 i_50:0 i_51:0 i_52:0 i_53:0 i_54:0 i_55:0 i_56:0 i_57:0 i_58:0 i_59:0&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;问题：为什么只匹配了 19 组出来？&lt;/p&gt;&#xA;&lt;h3&gt;相关代码&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;pcre.h&amp;gt;&#xA;#include &amp;lt;iostream&amp;gt;&#xA;&#xA;pcre* _rex;&#xA;pcre_extra* _rexEx;&#xA;&#xA;void CompileRexStr(const std::string&amp;amp; rex) {&#xA;    const char* errorinfo;&#xA;    int errpos = 0;&#xA;    _rex = NULL;&#xA;    _rexEx = NULL;&#xA;&#xA;    _rex = pcre_compile(rex.c_str(), PCRE_UTF8, &amp;amp;errorinfo, &amp;amp;errpos, NULL);&#xA;    _rexEx = pcre_study(_rex, PCRE_STUDY_JIT_COMPILE, &amp;amp;errorinfo);&#xA;}&#xA;&#xA;int main(){&#xA;    std::string rex = &#34;(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)(l)(m)(n)(o)(p)(q)(r)(s)(t)(u)(v)(w)(x)(y)(z)&#34;;&#xA;    CompileRexStr(rex);&#xA;&#xA;    std::string str = &#34;abcdefghijklmnopqrstuvwxyz&#34;;&#xA;    int result[60] = {0};&#xA;    int cur = 0;&#xA;    int pos = pcre_exec(_rex, _rexEx, str.c_str(), str.length(), cur, 0, result, 60);&#xA;&#xA;    for(int i=0;i &amp;lt; 60; i++) {&#xA;        std::cout &amp;lt;&amp;lt; &#34;i_&#34; &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &#34;:&#34; &amp;lt;&amp;lt; result[i] &amp;lt;&amp;lt; &#34; &#34;;&#xA;    }&#xA;&#xA;    return 0;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>zhengken</author>
+      <pubDate>20 Aug 2022 08:50:44 +0000</pubDate>
+    </item>
+    <item>
       <title>成都目前楼市的情况还值得上车吗? - 成都</title>
       <link>https://www.v2ex.com/t/874210</link>
       <description>&lt;p&gt;软件园上班，手持有 60w 的样子，高新区社保，未落户，普通资格....&lt;/p&gt;&#xA;</description>
