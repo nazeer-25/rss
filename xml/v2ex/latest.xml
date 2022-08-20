@@ -6,7 +6,7 @@
     <item>
       <title>用户余额高，无支付密码功能的商城客户端扫码功能这么设计是否足够安全和高效？ - 程序员</title>
       <link>https://www.v2ex.com/t/874222</link>
-      <description>要求是在登录页面（现在只有密码登录功能）边上做个扫码登录功能（不需要用户点击就展示二维码），扫码记录需要永久保留。&lt;br /&gt;&lt;br /&gt;流程：&lt;br /&gt;浏览器：访问登录页面-&amp;gt;浏览器本地随机生成一个 UUID （避免每次用户刷新页面都多一条记录），拼接到登录 URL 中生成二维码中-&amp;gt;每秒轮询一次扫码记录是否存在-&amp;gt;轮询时服务器发现扫码记录则创建 Session 完成登录，同时保存 IP 地址等必要客户端信息并更新失效时间为当前时间。&lt;br /&gt;客户端：扫描浏览器生成的二维码-&amp;gt;数据库创建扫码记录，包含用户 ID ，有效期 10 秒。&lt;br /&gt;&lt;br /&gt;数据库字段：&lt;br /&gt;QuickLoginChallengeGuid&lt;br /&gt;UserId&lt;br /&gt;ExpiredAt&lt;br /&gt;CreatedAt&lt;br /&gt;UpdatedAt</description>
+      <description>要求是在登录页面（现在只有密码登录功能）边上做个扫码登录功能（不需要用户点击就展示二维码），扫码记录需要永久保留。&lt;br /&gt;&lt;br /&gt;流程：&lt;br /&gt;浏览器：访问登录页面-&amp;gt;浏览器本地随机生成一个 UUID （避免每次用户刷新页面都多一条记录，同时少一个请求），拼接到登录 URL 中生成二维码中-&amp;gt;每秒轮询一次扫码记录是否存在-&amp;gt;轮询时服务器发现扫码记录则创建 Session 完成登录，同时保存 IP 地址等必要客户端信息并更新失效时间为当前时间。&lt;br /&gt;客户端：扫描浏览器生成的二维码-&amp;gt;数据库创建扫码记录，包含用户 ID ，有效期 10 秒。&lt;br /&gt;&lt;br /&gt;数据库字段：&lt;br /&gt;QuickLoginChallengeGuid&lt;br /&gt;UserId&lt;br /&gt;ExpiredAt&lt;br /&gt;CreatedAt&lt;br /&gt;UpdatedAt&lt;br /&gt;&lt;br /&gt;安全顾虑：是否存在灰产使用大量肉鸡扫描 UUID 的可能？还是 32 位 16 进制字符已经足够避免暴力尝试了？</description>
       <author>edis0n0</author>
       <pubDate>20 Aug 2022 10:42:08 +0000</pubDate>
     </item>
