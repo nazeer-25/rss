@@ -4,16 +4,23 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>可变参数模板，递归获取参数时，如何确定当前参数是第几个？ - C++</title>
+      <link>https://www.v2ex.com/t/874619</link>
+      <description>&lt;p&gt;代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;iostream&amp;gt;&#xA;&#xA;template &amp;lt;typename T, typename... Args&amp;gt;&#xA;void print(const T &amp;amp;text, Args... args) {&#xA;    std::cout &amp;lt;&amp;lt; text &amp;lt;&amp;lt; &#39; &#39;;&#xA;    std::cout &amp;lt;&amp;lt; ??? &amp;lt;&amp;lt; std::endl;  // 如何获取参数的索引位置？&#xA;&#xA;    if constexpr (sizeof...(args) &amp;gt; 0) {&#xA;        print(args...);&#xA;    }&#xA;}&#xA;&#xA;int main(int argc, char *argv[])&#xA;{&#xA;    print(&#34;abc&#34;, &#34;def&#34;, &#34;ghi&#34;);&#xA;&#xA;    return 0;&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;期望输出：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;abc 1&#xA;def 2&#xA;ghi 3&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>cxxnullptr</author>
+      <pubDate>22 Aug 2022 09:54:14 +0000</pubDate>
+    </item>
+    <item>
       <title>建议停止使用 Todesk - 问与答</title>
       <link>https://www.v2ex.com/t/874618</link>
-      <description>&lt;p&gt;作为一个从 Todesk 刚出就使用的老用户，使用到 2.0 时第一批个人版付费的用户，也是在 V2 跟核心开发在 QQ 跟他们内部管理人员沟通过多次的老用户劝诫各位不要使用 Todesk 了&lt;/p&gt;&#xA;&lt;p&gt;小问题有这么几点问题&#xA;1 、不定时顿卡，不清楚什么原因导致的&#xA;2 、使用时电脑风扇会提速&#xA;3 、手机版体验极差&#xA;4 、通常情况下主控不能同时使用&lt;/p&gt;&#xA;&lt;p&gt;以上几点不是主要问题，花钱或者等版本更新或许可以解决，让我彻底想放弃的原因是前段时间国家层面的大型攻防演练爆出说 Todesk 有安全问题，我多方求证后发现问题出在设备连接代码跟连接密码太简单，可以被爆破，然后他们更新了连接策略，这个策略有多傻逼呢&#xA;1 、控制端必须登录，不登陆不给你连接到其它机器&#xA;2 、登录后必须绑定手机号&#xA;3 、手机号必须没有绑定在其它 Todesk 账号上&lt;/p&gt;&#xA;&lt;p&gt;这么看还能理解这是为了安全性考虑，但是最愚蠢的事情来了&#xA;因为我有两个账号，一个账号是老账号，个人版本付费到 2023 年。一个是新账号，没有付费，是某次急着用忘了老账号的密码临时使用的。&#xA;今天因为有急事需要连接到别人的电脑上，打开了半个月没使用的 Todesk ，发现不登陆的情况下不能远程连接到其它机器了，于是乎登录，登陆后还是不能连接到其它机器，提示我需要绑定手机号，输入自己的手机号绑定的时候提示我手机号已经绑定过了不能再绑定第二个账号。&#xA;这都没问题，我想着我去手机号注册的那个账号上解绑掉手机号可以把。登录后发现压根就没有解绑的选项。那我注销掉这个账号总可以了吧。&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;作为一个从 Todesk 刚出就使用的老用户，使用到 2.0 时第一批个人版付费的用户，也是在 V2 跟核心开发在 QQ 跟他们内部管理人员沟通过多次的老用户劝诫各位不要使用 Todesk 了&lt;/p&gt;&#xA;&lt;p&gt;小问题有这么几点问题&#xA;1 、不定时顿卡，不清楚什么原因导致的&#xA;2 、使用时电脑风扇会提速&#xA;3 、手机版体验极差&#xA;4 、通常情况下主控不能同时使用&lt;/p&gt;&#xA;&lt;p&gt;以上几点不是主要问题，花钱或者等版本更新或许可以解决，让我彻底想放弃的原因是前段时间国家层面的大型攻防演练爆出说 Todesk 有安全问题，我多方求证后发现问题出在设备连接代码跟连接密码太简单，可以被爆破，然后他们更新了连接策略，这个策略有多傻逼呢&#xA;1 、控制端必须登录，不登陆不给你连接到其它机器&#xA;2 、登录后必须绑定手机号&#xA;3 、手机号必须没有绑定在其它 Todesk 账号上&lt;/p&gt;&#xA;&lt;p&gt;这么看还能理解这是为了安全性考虑，但是最愚蠢的事情来了&#xA;因为我有两个账号，一个账号是老账号，个人版本付费到 2023 年。一个是新账号，没有付费，是某次急着用忘了老账号的密码临时使用的。&#xA;今天因为有急事需要连接到别人的电脑上，打开了半个月没使用的 Todesk ，发现不登陆的情况下不能远程连接到其它机器了，于是乎登录，登陆后还是不能连接到其它机器，提示我需要绑定手机号，输入自己的手机号绑定的时候提示我手机号已经绑定过了不能再绑定第二个账号。&#xA;这都没问题，我想着我去手机号注册的那个账号上解绑掉手机号可以把。登录后发现压根就没有解绑的选项。那我注销掉这个账号总可以了吧。&#xA;一看注销情况，注销必须等待 7 天，联系我的 VIP 专属客服，排队 6 个人之后我跟他讲明了情况，说明了需要急用，告诉我他会帮我提交，让我耐心等待.....&lt;/p&gt;&#xA;&lt;p&gt;作为一款收费软件，在更新功能之前不告知用户提前做好准备，不发公告，突然更新导致用户无法正常使用软件，真的是没大厂的命得了大厂的病。&lt;/p&gt;&#xA;&lt;p&gt;各位还是花点钱用同类产品吧，最少免费的向日葵给我 300k 我还能在应急的时候用，Todesk 这软件花了钱也买不到安心。&lt;/p&gt;&#xA;&lt;p&gt;对了，我付费半年后基础功能又免费了，冤大头就是我。&lt;/p&gt;&#xA;</description>
       <author>B4a1n</author>
       <pubDate>22 Aug 2022 09:49:57 +0000</pubDate>
     </item>
     <item>
-      <title>自己带电脑，公司每个月补贴 200 元 ,两年一共 4800 元 - 问与答</title>
+      <title>自己带电脑，公司每个月补贴 200 元 ,两年一共 4800 元，想买个 MAC - 问与答</title>
       <link>https://www.v2ex.com/t/874617</link>
-      <description>有必要为此买个 16 寸丐版 MACBOOK PRO 吗？</description>
+      <description>如题，16 寸丐版 MACBOOK PRO</description>
       <author>zhoupeng199</author>
       <pubDate>22 Aug 2022 09:44:59 +0000</pubDate>
     </item>
