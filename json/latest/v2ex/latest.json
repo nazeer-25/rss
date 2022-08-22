@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "win 下的 Linux 环境选择 - Windows",
+      "Link": "https://www.v2ex.com/t/874664",
+      "Description": "\u003cp\u003ewin 下 Linux 环境有几种选择：\u003c/p\u003e\n\u003cp\u003e1, qemu 装 linux\u003c/p\u003e\n\u003cp\u003e2, virtualbox 装 linux\u003c/p\u003e\n\u003cp\u003e3, vmware 装 linux\u003c/p\u003e\n\u003cp\u003e4, docker\u003c/p\u003e\n\u003cp\u003e5, wsl2\u003c/p\u003e\n\u003cp\u003e通过 vscode ssh 插件可以连到 linux 虚似机里面的项目。\u003c/p\u003e\n\u003cp\u003e看起来是 qemu/virtualbox 装虚似机会更方便一些，可以少踩一些坑？\u003c/p\u003e\n\u003cp\u003e从方便开发的角度来看， 不确定哪一种会更方便顺畅一些？\u003c/p\u003e\n",
+      "Author": "luffy",
+      "PubDate": "2022-08-22T13:55:40Z"
+    },
+    {
+      "Title": "业务系统是否真的需要 Elasticsearch? - 程序员",
+      "Link": "https://www.v2ex.com/t/874663",
+      "Description": "\u003cp\u003e前段时间做系统查询优化 , 通过 binlog-kafka 把数据同步到了另一个数据库中 . 技术选型的时候团队内有领导推荐 es , 但是仔细分析之后感觉真正适合 es 的场景并不是很多.但是各种公众号上提到 es 的频率又非常高 , 所以想和大家探讨下 es 的用途 . 由于我没有很深入的使用 , 部分总结可能并不准确 , 还望各位彦祖们多多指点\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e模糊查询\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e在分词查询这一块 , es 是绝对的王者 . 但是仔细想下 , 对于普通的业务系统 , 是否真的需要全模糊查询 ? 比如说对于手机号和订单号 , 可以创建倒序索引 , 优化成右模糊 . 而对于一般的 cms , 可以通过创建标签和分类的方法进行初筛 , 之后即便是全模糊 , 对于普通网站来说也是可以接受的 . 当然对于知乎这类内容平台肯定是需要搜索系统 , 但 es 好像也无法满足知乎的搜索要求\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e日志查询\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e大部分日志组件都是用 es 进行存储 , 提高了查询速度 . 但其实我们也可以尝试结构化日志 , 把一条日志解析为操作人 , 操作类型 , 操作对象 id , 操作结果 , 项目名称 , 日志级别 , traceId 等 , 比如\"用户 A 购买了商品 c\"就可以结构成{\"user\":\"A\",\"type\":\"pay\",\"target\":\"c\"...} , 结构化之后我们就可以放入到关系型数据库中 . 实际上已经有些日志系统已经开始选用 clickhouse 存储结构化日志 , 可以用低于 es 的成本存储数据 ,并提高几倍的查询速度 , 甚至还可以进行日志分析\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eOLAP\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e针对 olap 领域,es 的竞争对手就更多了 比如上文提到的 clickhouse,还有 Hadoop,Greenplum.我这方面涉猎不多,就不展开了\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e多字段联合查询\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e引用自 \u003ca href=\"https://zhuanlan.zhihu.com/p/373351625\" rel=\"nofollow\"\u003e记十亿级 Es 数据迁移 mongodb 成本节省及性能优化实践\u003c/a\u003e\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e有些业务场景，查询条件是由用户触发，查询条件不固定，可能存在多个字段的随机组合查询。mongodb 和 mysql 等数据库，都需要手动创建索引，由于 8 字段以上的随机组合查询情况种类太多，因此很难手动建索引覆盖所有场景.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e首先这种情况的确是成立的 , 但实际场景中 , 有些查询条件是非常低频的 , 我们可以先对常用的查询条件创建组合索引 , 之后再根据耗时情况创建索引\u003c/p\u003e\n\u003cp\u003e所以想了好久 , 感觉对于非 cms 的系统 ,好像 es 还真的不是必须要用的业务组件. 有点困惑,希望彦祖们帮忙分析.\u003c/p\u003e\n",
+      "Author": "changdy",
+      "PubDate": "2022-08-22T13:54:23Z"
+    },
+    {
       "Title": "转 29 套餐的有“本人同意 接受中国联通相关商业性短信和商业性电话”这个待生效服务么？ - 问与答",
       "Link": "https://www.v2ex.com/t/874662",
       "Description": "\u003cp\u003e10010 说这是办理套餐所需，但我看这文字着实不太像。。\n\u003cimg alt=\"x\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/08/22/a443d74d80a5070f.png\"/\u003e\u003c/p\u003e\n",
