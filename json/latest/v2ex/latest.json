@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "go gorm 建表问题， - 问与答",
+      "Link": "https://www.v2ex.com/t/874933",
+      "Description": "\u003cp\u003e创建了一个\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003etype newMap struct {\n\tID       uint\n\tName     string\n\tsource   string\n\tfileSize int64\n\tcom      string\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e编译运行后只有 id 和 name 这两个字段，\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003emysql\u0026gt; select * from new_maps;\n+----+-------+\n| id | name  |\n+----+-------+\n|  1 | test1 |\n+----+-------+\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e新版的 gorm 必须指定 gorm 相关的 tag 吗，还是我哪里有问题，请大家指教哈呢\u003c/p\u003e\n\u003cp\u003e完整代码如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\"fmt\"\n\n\t\"gorm.io/driver/mysql\"\n\t\"gorm.io/gorm\"\n)\n\nfunc main() {\n\tdb := ConnectMysql()\n\tdb.AutoMigrate(\u0026amp;newMap{})\n\tdb.Create(\u0026amp;newMap{Name: \"test1\", source: \"upload\", fileSize: 500, com: \"wwww.baidu.com\"})\n\tfmt.Println(\"ok\")\n}\n\nfunc ConnectMysql() *gorm.DB {\n\tdsn := \"root:passwd@tcp(127.0.0.1:3306)/goweb?charset=utf8mb4\u0026amp;parseTime=True\u0026amp;loc=Local\"\n\tdb, err := gorm.Open(mysql.Open(dsn), \u0026amp;gorm.Config{})\n\tif err == nil {\n\t\treturn db\n\t}\n\treturn nil\n}\n\ntype newMap struct {\n\tID       uint\n\tName     string\n\tsource   string\n\tfileSize int64\n\tcom      string\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "wanchenyi",
+      "PubDate": "2022-08-23T16:26:39Z"
+    },
+    {
+      "Title": "firefox 莫名奇妙禁用安装扩展，微软账户登录服务也是一言难尽，体验最好的浏览器可能还是 google chrome - 随想",
+      "Link": "https://www.v2ex.com/t/874932",
+      "Description": "\u003ch2\u003efirefox\u003c/h2\u003e\n\u003cp\u003e今天 firefox 突然提醒无法安装扩展，“你所在到区域不支持此扩展”\n之前已安装到扩展也看不到了\nGhelper 倒是可以安装，但是火狐版的经常打不开页面不知道为啥\u003c/p\u003e\n\u003ch2\u003e微软 edge\u003c/h2\u003e\n\u003cp\u003e微软虽然没墙，但是也经常连不上，他那个服务器挂梯子有时候也连不上\u003c/p\u003e\n\u003ch2\u003eGoogle chrome\u003c/h2\u003e\n\u003cp\u003e被墙是唯一到缺点了，挂了梯子就一帆风顺\u003c/p\u003e\n\u003ch2\u003echromium\u003c/h2\u003e\n\u003cp\u003elinux 社区支持，相比 chrome 安装方便一点\n有一段时间没有 google 同步服务了，配置下可以解决\n\u003ca href=\"https://stackoverflow.com/questions/67459316/enabling-chromium-to-sync-with-google-account/67459416#67459416\" rel=\"nofollow\"\u003ehttps://stackoverflow.com/questions/67459316/enabling-chromium-to-sync-with-google-account/67459416#67459416\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "treblex",
+      "PubDate": "2022-08-23T16:20:21Z"
+    },
+    {
+      "Title": "球球了游戏主策大佬捞一捞，你需要能够呈现你方案的文字吧！ - 酷工作",
+      "Link": "https://www.v2ex.com/t/874931",
+      "Description": "做过一阵 NFT 策划，深深明白一个好文案对框架的重要性！\u003cbr /\u003e5 年编辑撰稿，虽说也能做策划，但对文字还是抱有更大热情的。\u003cbr /\u003e之前一直写的是城市现象啊青年文化之类的东西，对游戏或者金融什么的没什么兴趣，最近迫于生计哈哈哈哈哈并且误打误撞做了 nft 策划，不敢说比肩操盘人，但整个流程下来还是能体会一些的。一边做方案一边职业本能反应的担心文案跟不上不能呈现我的方案…\u003cbr /\u003e又，大家都知道 nft 在国内发展其实很畸形，就是割韭菜嘛，我还是想 那个方案都是策划想秃头难产的孩子啊，应该好好对待吧\u003cbr /\u003e那就得出一个结论：请有情怀的游戏工作室主策捞捞我，我只想做个为牛逼方案锦上添花的卑微小文案！\u003cbr /\u003e深圳捞捞",
+      "Author": "kittenkilling",
+      "PubDate": "2022-08-23T16:19:42Z"
+    },
+    {
+      "Title": "天气这么热，我的猜想 - 奇思妙想",
+      "Link": "https://www.v2ex.com/t/874930",
+      "Description": "最近全球高温，降雨减少，各地温度破纪录\u003cbr /\u003e我认为是下面的原因导致的\u003cbr /\u003e2020 年因为疫情，人类活动减少\u003cbr /\u003e2021 年和 2022 年人类活动增加\u003cbr /\u003e乐观的猜想，现如今能源价格上涨会降低人类活动，2023 年或许不会这么热\u003cbr /\u003e你怎么看？",
+      "Author": "cxt890604",
+      "PubDate": "2022-08-23T16:16:06Z"
+    },
+    {
       "Title": "[成都租房] 张家寺地铁站口，转租，一室一厅，还有个小书房 - 成都",
       "Link": "https://www.v2ex.com/t/874929",
       "Description": "\u003cp\u003e价格 2000 ，从 9.25 到明年 8.25 ，押一付三，感兴趣联系。\nMTg2OTc3MDUzMzI=\u003c/p\u003e\n",
