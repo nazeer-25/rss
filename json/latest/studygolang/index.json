@@ -39,6 +39,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "Go依赖库问题",
+      "Link": "https://studygolang.com/topics/15776#reply2",
+      "Description": "\u003cp\u003e我想问一下，为啥Go的第三方依赖库有那么多？就没有人把常用的功能整合在一起，然后就get这个库使用就行了，这样不是更方便吗？这么多库，感觉好麻烦。百度了这个问题都没有得到答案。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "「WGCLOUD」需要在全新的服务器上安装吗?",
       "Link": "https://studygolang.com/topics/15774#reply0",
       "Description": "\u003cp\u003eWGCLOUD不需要全新的服务器，已有的服务器就可以部署\u003c/p\u003e\n\n\u003cp\u003e它的兼容性很好\u003c/p\u003e\n",
@@ -49,13 +56,6 @@
       "Title": "DTM PHP SDK 0.2.3发布，支持XA事务",
       "Link": "https://studygolang.com/topics/15773#reply0",
       "Description": "\u003cp\u003e\u003ca href=\"https://github.com/dtm-labs/dtm\"\u003ehttps://github.com/dtm-labs/dtm\u003c/a\u003e 是一款变革性的分布式事务框架，提供了傻瓜式的使用方式，极大的降低了分布式事务的使用门槛，改变了“能不用分布式事务就不用”的行业现状，优雅的解决了服务间的数据一致性问题。\u003c/p\u003e\n\n\u003ch2\u003e特性\u003c/h2\u003e\n\n\u003cul\u003e\n\u003cli\u003e支持多种语言：支持Go、Java、PHP、C#、Python、Nodejs 各种语言的SDK\u003c/li\u003e\n\u003cli\u003e支持多种事务模式：SAGA、TCC、XA、二阶段消息（本地消息表，事务消息）\u003c/li\u003e\n\u003cli\u003e支持多种数据库事务：Mysql、Redis、MongoDB、Postgres、TDSQL等\u003c/li\u003e\n\u003cli\u003e支持多种存储引擎：Mysql（常用）、Redis（高性能）、MongoDB（规划中）\u003c/li\u003e\n\u003cli\u003e支持多种微服务架构：go-zero、go-kratos/kratos、polarismesh/polaris\u003c/li\u003e\n\u003cli\u003e支持高可用，易水平扩展\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch2\u003ePHP SDK 新版的主要更新\u003c/h2\u003e\n\n\u003cul\u003e\n\u003cli\u003e完整支持XA事务\u003c/li\u003e\n\u003cli\u003e修复事务管理器缺少 execute 方法\u003c/li\u003e\n\u003cli\u003e修复 GRPC 下TCC，saga，XA无法执行的bug\u003c/li\u003e\n\u003cli\u003e移除 DtmXaGRPCMiddleware\u003c/li\u003e\n\u003cli\u003e修复 BarrierId 一直叠加的bug\u003c/li\u003e\n\u003cli\u003e移除 XA 里面的 var_dump 方法\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e此次版本主要由\u003ca href=\"https://github.com/PandaLIU-1111\"\u003ePandaLIU-1111\u003c/a\u003e贡献，也包含了以下人员的多个PR\n- \u003ca href=\"https://github.com/kids-return\"\u003ekids-return\u003c/a\u003e\n- \u003ca href=\"https://github.com/huangzhhui\"\u003ehuangzhhui\u003c/a\u003e\u003c/p\u003e\n\n\u003ch2\u003eXA 模式简介\u003c/h2\u003e\n\n\u003cp\u003eXA是由X/Open组织提出的分布式事务的规范，XA规范主要定义了(全局)事务管理器\u0026trade;和(局部)资源管理器(RM)之间的接口。本地的数据库如mysql在XA中扮演的是RM角色\u003c/p\u003e\n\n\u003cp\u003eXA一共分为两阶段：\u003c/p\u003e\n\n\u003cp\u003e第一阶段（prepare）：即所有的参与者RM准备执行事务并锁住需要的资源。参与者ready时，向TM报告已准备就绪。 第二阶段 (commit/rollback)：当事务管理者\u0026trade;确认所有参与者(RM)都ready后，向所有参与者发送commit命令。\u003c/p\u003e\n\n\u003cp\u003e目前主流的数据库基本都支持XA事务，包括mysql、oracle、sqlserver、postgre\u003c/p\u003e\n\n\u003cp\u003e下面是一个成功完成的XA事物典型的时序图\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://dtm.pub/assets/xa_normal.5a0ce600.jpg\" height=600/\u003e\u003c/p\u003e\n\n\u003ch2\u003eXA 模式代码示例\u003c/h2\u003e\n\n\u003cp\u003e以下展示在 Hyperf 框架中的使用方法，其它框架类似\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-php\"\u003e\u0026lt;?php\n\nnamespace App\\Controller;\n\nuse App\\Grpc\\GrpcClient;\nuse DtmClient\\DbTransaction\\DBTransactionInterface;\nuse DtmClient\\TransContext;\nuse DtmClient\\XA;\nuse Hyperf\\Contract\\ConfigInterface;\nuse Hyperf\\Di\\Annotation\\Inject;\nuse Hyperf\\HttpServer\\Annotation\\Controller;\nuse Hyperf\\HttpServer\\Annotation\\GetMapping;\nuse Hyperf\\HttpServer\\Annotation\\RequestMapping;\nuse Hyperf\\HttpServer\\Contract\\RequestInterface;\nuse Psr\\Http\\Message\\ResponseInterface;\n\n#[Controller(prefix: '/xa')]\nclass XAController\n{\n\n    private GrpcClient $grpcClient;\n\n    protected string $serviceUri = 'http://127.0.0.1:9502';\n\n    public function __construct(\n        private XA $xa,\n        protected ConfigInterface $config,\n    ) {\n        $server = $this-\u0026gt;config-\u0026gt;get('dtm.server', '127.0.0.1');\n        $port = $this-\u0026gt;config-\u0026gt;get('dtm.port.grpc', 36790);\n        $hostname = $server . ':' . $port;\n        $this-\u0026gt;grpcClient = new GrpcClient($hostname);\n    }\n\n\n    #[GetMapping(path: 'successCase')]\n    public function successCase(): string\n    {\n        $payload = ['amount' =\u0026gt; 50];\n        // 开启Xa 全局事物\n        $gid = $this-\u0026gt;xa-\u0026gt;generateGid();\n        $this-\u0026gt;xa-\u0026gt;globalTransaction($gid, function () use ($payload) {\n            // 调用子事物接口\n            $respone = $this-\u0026gt;xa-\u0026gt;callBranch($this-\u0026gt;serviceUri . '/xa/api/transIn', $payload);\n            // XA http模式下获取子事物返回结构\n            /* @var ResponseInterface $respone */\n            $respone-\u0026gt;getBody()-\u0026gt;getContents();\n            // 调用子事物接口\n            $payload = ['amount' =\u0026gt; 10];\n            $this-\u0026gt;xa-\u0026gt;callBranch($this-\u0026gt;serviceUri . '/xa/api/transOut', $payload);\n        });\n        // 通过 TransContext::getGid() 获得 全局事务ID 并返回\n        return TransContext::getGid();\n    }\n\n    #[RequestMapping(methods: [\u0026quot;GET\u0026quot;, \u0026quot;POST\u0026quot;, \u0026quot;PUT\u0026quot;], path: 'api/transIn')]\n    public function transIn(RequestInterface $request): array\n    {\n        $content = $request-\u0026gt;post('amount');\n        $amount = $content['amount'] ?? 50;\n        // 模拟分布式系统下transIn方法\n        $this-\u0026gt;xa-\u0026gt;localTransaction(function (DBTransactionInterface $dbTransaction) use ($amount) {\n            // 请使用 DBTransactionInterface 处理本地 Mysql 事物\n            $dbTransaction-\u0026gt;xaExecute('UPDATE `order` set `amount` = `amount` + ? where id = 1', [$amount]);\n        });\n\n        return ['status' =\u0026gt; 0, 'message' =\u0026gt; 'ok'];\n    }\n\n    /**\n     * @param RequestInterface $request\n     * @return array\n     */\n    #[RequestMapping(methods: [\u0026quot;GET\u0026quot;, \u0026quot;POST\u0026quot;, \u0026quot;PUT\u0026quot;], path: 'api/transOut')]\n    public function transOut(RequestInterface $request): array\n    {\n        $content = $request-\u0026gt;post('amount');\n        $amount = $content['amount'] ?? 10;\n        // 模拟分布式系统下transOut方法\n        $this-\u0026gt;xa-\u0026gt;localTransaction(function (DBTransactionInterface $dbTransaction) use ($amount) {\n            // 请使用 DBTransactionInterface 处理本地 Mysql 事物\n            $dbTransaction-\u0026gt;xaExecute('UPDATE `order` set `amount` = `amount` - ? where id = 2', [$amount]);\n        });\n\n        return ['status' =\u0026gt; 0, 'message' =\u0026gt; 'ok'];\n    }\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e上面的代码首先注册了一个全局XA事务，然后添加了两个子事务transIn、transOut。子事务全部执行成功之后，提交给dtm。dtm收到提交的xa全局事务后，会调用所有子事务的xa commit，完成整个xa事务。\u003c/p\u003e\n\n\u003cp\u003e可运行的例子参考: \u003ca href=\"https://github.com/dtm-php/dtm-client\"\u003edtm-php/dtm-client\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Go依赖库问题",
-      "Link": "https://studygolang.com/topics/15776#reply1",
-      "Description": "\u003cp\u003e我想问一下，为啥Go的第三方依赖库有那么多？就没有人把常用的功能整合在一起，然后就get这个库使用就行了，这样不是更方便吗？这么多库，感觉好麻烦。百度了这个问题都没有得到答案。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -182,6 +182,13 @@
       "Title": "我的GitHub stars汇总归类列表，欢迎大家star收藏",
       "Link": "https://studygolang.com/topics/15724#reply1",
       "Description": "\u003cp\u003e我的GitHub stars汇总归类列表，欢迎大家star收藏，经过我的一次过滤，都是一些精品值得关注学习的项目。\u003c/p\u003e\n\n\u003cp\u003e地址：\u003ca href=\"https://github.com/eryajf/awesome-stars-eryajf\"\u003ehttps://github.com/eryajf/awesome-stars-eryajf\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e该列表每天凌晨会自动更新！\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go依赖库问题",
+      "Link": "https://studygolang.com/topics/15776#reply1",
+      "Description": "\u003cp\u003e我想问一下，为啥Go的第三方依赖库有那么多？就没有人把常用的功能整合在一起，然后就get这个库使用就行了，这样不是更方便吗？这么多库，感觉好麻烦。百度了这个问题都没有得到答案。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
