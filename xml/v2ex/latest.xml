@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>只有我一个人 Apple Music 冷门音乐播放卡顿？ - Apple</title>
+      <link>https://www.v2ex.com/t/875060</link>
+      <description>上网搜了下，似乎没有找到类似比较明确的帖子来讨论，特开一贴。&lt;br /&gt;&lt;br /&gt;简而言之，我在默认代理模式下用 Apple Music 播放较为冷门的音乐（尤其是开广播或自动推荐，被推荐到了冷门音乐的时候），经常会出现卡顿的情况，并且 Apple Music 也没有缓冲条，但是估计来看只能是网络问题。不少冷门音乐不会有卡顿的情况，但偶尔会突然出现卡顿，很败兴致。从我的测试来看，跟音质关系似乎不大，无损和 AAC 同样会有卡顿的情况，且出现频率差不太多。如果听到了一首卡顿的歌曲，那么接下来听到的几首、十几首也会相对容易出现卡顿（直到我那天放弃听 AM ，改听别的东西为止）。&lt;br /&gt;&lt;br /&gt;Apple Music 是有国内 CDN 的，哪怕是在国内用外区的 Apple Music ，同样会用到国内 CDN 。所以从 CDN 到终端的速度肯定不是问题。那么比较合理的解释是，AM 的源站在海外，但苹果让国内 CDN 直接从国外服务器下载数据，因为回源速度过慢才导致卡顿。AM 在国内的 CDN 比较分散，其域名 &lt;a target=&#34;_blank&#34; href=&#34;http://aod.itunes.apple.com&#34; rel=&#34;nofollow noopener&#34;&gt;aod.itunes.apple.com&lt;/a&gt; 应该用的是 akamai 在国内的节点，解析能看到混用了阿里云、金山云、网宿等。这也就意味着如果恰好被解析到了回源网络不好的 CDN 节点，在播放未被缓存下来的音乐时会卡顿。这也解释前文提到的现象。&lt;br /&gt;&lt;br /&gt;最近试着把 &lt;a target=&#34;_blank&#34; href=&#34;http://aod.itunes.apple.com&#34; rel=&#34;nofollow noopener&#34;&gt;aod.itunes.apple.com&lt;/a&gt; 给走代理，卡顿的情况就没有出现了，但仍有待进一步观察。另外，播放自己在音乐资料库上传的音乐，是一定不走国内服务器的，走的是 &lt;a target=&#34;_blank&#34; href=&#34;http://blobstore.apple.com&#34; rel=&#34;nofollow noopener&#34;&gt;blobstore.apple.com&lt;/a&gt; 。这个域名国内似乎会被播到苹果的东京节点（甚至不是苹果的香港节点，苹果对大陆的推送通知和 iCloud drive 之类都走香港），联通经过 NTT 。这个地址肯定也是要走代理的，否则晚高峰体验很差。&lt;br /&gt;&lt;br /&gt;如果单在 iPhone 上设置还算好，但是家里有 HomePod （ mini ）的就不行了。在不考虑路由分流的情况下，我曾经试过挑几个看起来回源效果还不错的节点来写在路由器 DNS 的 hosts 上，效果一般（也可能是我路由器 DNS 配的有问题）。后来我留意到一个现象，有的时候在 iPhone 上遥控 HomePod 时，iPhone 上选择播放器的地方会显示“iPhone → HomePod”（或者“iPhone → 客厅”之类，你给 HomePod 起的名字是什么就是什么），有的时候只会显示“HomePod”（或“客厅”之类）。很明显，“iPhone → HomePod”这种提示，是由 iPhone 来处理音乐的下载，然后 Airplay 到 HomePod 上；但是如果只写“HomePod”的话，那么音乐的下载都是由 HomePod 处理的，而 iPhone 只是一个遥控器。如果 iPhone 能代理 &lt;a target=&#34;_blank&#34; href=&#34;http://aod.itunes.apple.com&#34; rel=&#34;nofollow noopener&#34;&gt;aod.itunes.apple.com&lt;/a&gt; 的话，那么强制“iPhone → HomePod”模式就能解决 HomePod 上播放卡顿的问题。&lt;br /&gt;&lt;br /&gt;所以现在我尝试这么做（似乎有用，如果确定有用的话我会 append ）：在 iPhone 的家庭 app ，长按选择 HomePod ，拖到底部，选择“Apple Music 与播客”的“主要用户”，然后在里面登出自己的 Apple Music 帐号即可强制“iPhone → HomePod”模式。&lt;br /&gt;&lt;br /&gt;缺点是似乎不能直接在 HomePod 上直接用 siri 操控播放，但是仍然可以对 iPhone 上的 siri 说“在客厅 /卧室 /所有地方播放 xxx”来遥控 HomePod 。这种方式还有两个好处，一个是苹果的播客（ Podcast ）服务器比 Apple Music 还不稳定，这样强制播放会好得多；另一个是在 iPhone 上的非英文曲名不会被强制写成英文（也可能只有我才这样）。&lt;br /&gt;&lt;br /&gt;我最开始的想法是在家庭 app 的右上角三点，选择“家庭设置”，“用户”，选择自己的 Apple ID ，选择“Apple Music”，然后关掉“在‘家庭’中使用”，但是这个似乎不能强制“iPhone → HomePod”，只有上面说的办法能用。我也没太清楚这两处设置有什么具体区别。当然路由分流一劳永逸。&lt;br /&gt;&lt;br /&gt;希望大家交流一下自己的体验。如果有能确定有用的方式，会 append 。&lt;br /&gt;&lt;br /&gt;部分参考（尤其是 CDN 域名部分）来自： &lt;a target=&#34;_blank&#34; href=&#34;https://steppark.net/15844652241485.html&#34; rel=&#34;nofollow noopener&#34;&gt;https://steppark.net/15844652241485.html&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;PS：国区 AM 搜不到万能青年旅店了，代表作杀死那个石家庄人。可能是版权问题？国内其他网站还没有下架。</description>
+      <author>ChineseTeacher</author>
+      <pubDate>24 Aug 2022 06:53:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>Office 365 差一人 - Microsoft Office</title>
+      <link>https://www.v2ex.com/t/875059</link>
+      <description>&lt;p&gt;价格：28 元 /年&#xA;到期时间：2023.09.23 （首年 13 个月）&#xA;绿色软件：eGlubGluZ3RpYW54aWE=&lt;/p&gt;&#xA;</description>
+      <author>xxooyy</author>
+      <pubDate>24 Aug 2022 06:51:45 +0000</pubDate>
+    </item>
+    <item>
       <title>现在除了 hpe 的 gen 10 plus 服务器之外，还有什么替代品吗？ - 服务器</title>
       <link>https://www.v2ex.com/t/875058</link>
       <description>&lt;p&gt;gen10 plus 的确很好，但价格偏贵，失去了 gen 8 时候的性价比。&lt;/p&gt;&#xA;&lt;p&gt;而且疫情当道，即使通过德国亚马逊或者美国亚马逊直邮(比淘宝划算)，也不见得能邮寄到中国来，过海关就不知道要多少个月了。。&lt;/p&gt;&#xA;&lt;p&gt;有没有可以取代 gen 10 plus 的这种带 lio 带外管理，且有 4 盘位的超微型服务器啊？好久没关注微型服务器这块了。。。&lt;/p&gt;&#xA;&lt;p&gt;目前的需求是打算跑虚拟机，做一些对性能有一定要求的服务器之类。不然树莓派就够了。。。&lt;/p&gt;&#xA;</description>
