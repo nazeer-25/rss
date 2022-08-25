@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "求助,群晖和威联通在移动端 APP 上的使用体验如何? - 问与答",
+      "Link": "https://www.v2ex.com/t/875338",
+      "Description": "想入手一台 4 盘位 NAS,已经看了很多很多,都说威联通的软件比群晖差好多(群晖也好不到哪去...?)\u003cbr /\u003e\u003cbr /\u003e目前纠结于:\u003cbr /\u003e\u003cbr /\u003e在家宽有外网 IP 的情况下,威联通的移动端 APP 到底差到什么程度?\u003cbr /\u003e\u003cbr /\u003e我个人倒不觉得折腾威联通是件痛苦的事.\u003cbr /\u003e主要是老婆大人要远程使用手机来看照片,听歌,视频这些功能,这些功能我折腾也折腾不出来啊,所以只能希望厂家做好自己份内的事\u003cbr /\u003e\u003cbr /\u003e目前选项:\u003cbr /\u003e\u003cbr /\u003e1.如果两者都能正常使用,所谓的\"差\"只是体验上差点意思,不至于一个中年妇女摔手机,那我就性能为王,买威联通 464C\u003cbr /\u003e2.如果两者体验都很非常差,NAS 和女人无法兼得,那我就先不买了,继续 DDNS+OPENWRT+WOL+向日葵控制家里主机\u003cbr /\u003e3.如果群晖明显胜出,那我就考虑等待 922+或者等 920+降价(1522+硬解码的问题不知道对日常使用影响多大,不大也可以考虑)",
+      "Author": "gezimonkey",
+      "PubDate": "2022-08-25T07:28:41Z"
+    },
+    {
+      "Title": "拒绝加班:巧用前端电子表格中构建公式树 - 推广",
+      "Link": "https://www.v2ex.com/t/875337",
+      "Description": "\u003cp\u003e还在为满屏的公式而“内牛满面”吗？还在为长串的公式解析而发愁吗？ 还在定位错误的公式而苦恼吗？上班要写代码，加班还要分析这又长又臭的公式。你的发际线还好吗？\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824140805595-829993922.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e本葡萄来拯救你的发际线啦！带来的不是洗发水，而是公式追踪！这一章，让本葡萄带你用前端电子表格的公式追踪构建公式树，快（解）速（救）分（你）析（的）公（脱）式（发）问题。\u003c/p\u003e\n\u003ch3\u003e背景\u003c/h3\u003e\n\u003cp\u003e在审计、财会、金融等对公式有着大量需求且需要进行分析的行业中，经常会遇见复杂的公式计算，并且需要知道每一步计算的结果或者引用的数据是否正确。这个时候，满屏的公式，仿佛在告诉你：别想下班！手动将公式一步一步分解，遇到短的公式还好说。遇到长的公式，不仅工作量大，而且容易出错，一不小心弄错了，就错过了末班车时间。那如何能够快速地将公式拆解，分析出其中的每一步计算步骤呢？\n这里就可以用到前面说的，利用 SpreadJS 的计算引擎，把分析交给机器来做，分析完成之后，可以通过 SpreadJS 自身的形状功能来绘制一个清晰明了的公式树。不仅快且稳，重要的是可以早点下班，他不香吗？\u003c/p\u003e\n\u003cp\u003eok ，那我们来看看效果。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824141721181-1993190997.gif\"/\u003e\u003c/p\u003e\n\u003ch3\u003e实现步骤\u003c/h3\u003e\n\u003cp\u003e想要实现这样的公式树，引入 SpreadJS 是必不可少的步骤，这里就不再赘述\n怎么进行引入，主要就讲讲这个公式树以及相应的右键菜单是怎么实现的，快速入门可以参考下方链接的 demo：\n\u003ca href=\"https://demo.grapecity.com.cn/spreadjs/SpreadJSTutorial/features/workbook/initialization/purejs\" rel=\"nofollow\"\u003ehttps://demo.grapecity.com.cn/spreadjs/SpreadJSTutorial/features/workbook/initialization/purejs\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e可以看到上图除了用一个工作簿实例用于正常显示数据和公式之外，在下方也是一个工作簿实例，用于通过形状绘制公式树。公式树的实现其实可以更加灵活，比如弹出一个模态窗，模态窗中加载一个 SpreadJS 实例，或者完全自己用 DOM 来绘制也都是可以的。因为通过 SpreadJS 的公式追踪，就可以拿到公式相关的引用信息，至于怎么画出来，都是可以的。\u003c/p\u003e\n\u003cp\u003e我们可以把上方的工作簿对象定义为 spread ，把下方绘制公式树的工作簿对象定义为 spreadForShow ，在默认情况下，我们通过 css 将 spreadForShow 进行隐藏。\n我们通过下面的代码将两个工作簿实例进行初始化。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824141812903-1458502440.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e为了能够更加清晰看到单元格对应的公式，这边也添加了一个公式栏和 Spread 进行绑定，通过以下代码即可。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824141821927-1565049742.png\"/\u003e\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824141837562-1980316933.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e接下来就是创建对应的右键菜单“钻取”项，下图是实现添加右键菜单项的效果。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824141846693-476831456.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e对应的，我们需要注册点击这个项之后的处理命令。该核心也就是作用主要在于，\ndocument.getElementById(\"show\").style.visibility = \"visible\";\n是控制 spreadForShow 这个工作簿的显示。其余代码可以简单理解为创建命令的“模板”。详细注册命令可以参考以下链接：\n\u003ca href=\"https://demo.grapecity.com.cn/spreadjs/SpreadJSTutorial/features/worksheet/actions/custom-action#\" rel=\"nofollow\"\u003ehttps://demo.grapecity.com.cn/spreadjs/SpreadJSTutorial/features/worksheet/actions/custom-action#\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824142133457-168152003.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e注册完对应的命令之后，为了能够让这个项只在由公式的单元格中出现，可以重写 onOpenMenu 。在这个方法里面通过 getFormula 判断点击的单元格是否有公式。有公式，则往右键菜单数组里面添加“钻取”项。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824142153109-594878180.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e以上就是一些前期的准备代码，我们再来看下如何获取公式的引用信息。通过 sheet.getPrecedents(row, col)可以获取单元格中公式具体引用的单元格，返回的是一个对象数组。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824142204968-1548661576.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e为了能够在点击单元格的时候，提前将公式树绘制好，这里用了一个事件监听，当监听到选区改变的时候，分别调用创建节点以及绘制公式树的方法（后面会进行介绍）。然后将用显示公式树的 spreadForShow 这个工作簿进行隐藏。因为我们的主要逻辑是通过右键显示公式树，然后切换单元格的时候关闭公式树。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824142239447-322850984.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e下一步是创建公式引用的节点，为了能够在节点上展示该单元格相关的更多信息，一个的单元格创建一个对应的 node 对象，包括了单元格值，单元格位置以及单元格描述。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824142301230-1882547616.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e再往下就是从原始公式开始逐层往下找了。从原始的公式单元格出发，通过 sheet.getPrecedents(row, col);找到对应引用单元格之后。以找到的单元格为起点，再次往下找，直至找不到为止。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824142319913-595896451.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e将公式对应的节点逐一找完之后，就可以开始在 spreadForShow 工作簿上进行绘制了。我们就分别绘制用于展示数据的矩形以及用于连接这些形状的连接器形状。下面的代码中 getRectShape 用于创建展示数据的矩形，里面通过代码设置了文本颜色、填充颜色、字体等。getConnectorShape 则是用于创建线条连接器，设置了线宽、颜色等。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824142338585-435990456.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e最后就是根据前面构造出来的节点，以及预定义好的形状方法进行公式树的绘制。在这个 if-else 中，如果节点是父节点，则通过连接器型装将子节点相连接，如果没有子节点则无需连接。在 creatNodeTree 方法中，定义的节点信息，通过拼接的方式，将节点信息设置在对应的矩形上。也就是一个一个节点往下绘制，直至绘制完成。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img2022.cnblogs.com/blog/139239/202208/139239-20220824142356229-761213005.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e怎么样？看完上面的介绍可以实现对应的功能吗？想不想立刻拥有如此强大的数据？没有 demo 的技术文章，就跟方便面没有调料包一样，索然无味。还不赶快下载 demo 尝试一下~\n\u003ca href=\"https://gcdn.grapecity.com.cn/forum.php?mod=attachment\u0026amp;aid=MjI3NTA1fGNiZTgzNTU4fDE2NjA4OTY1Njh8NjI2NzZ8OTk3MTg%3D\" rel=\"nofollow\"\u003ehttps://gcdn.grapecity.com.cn/forum.php?mod=attachment\u0026amp;aid=MjI3NTA1fGNiZTgzNTU4fDE2NjA4OTY1Njh8NjI2NzZ8OTk3MTg%3D\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "GrapeCityChina",
+      "PubDate": "2022-08-25T07:27:56Z"
+    },
+    {
+      "Title": "Mysql 主从下,行锁还有效吗 - 程序员",
+      "Link": "https://www.v2ex.com/t/875336",
+      "Description": "\u003cp\u003e想用 mysql 的行锁当分布式锁,环境是一主二从,主负责写,从负责读.\n行锁依然有效吗?for update 会阻塞所有客户端的请求吗?\u003c/p\u003e\n\u003cp\u003e如果是双主的情况也是一样吗?\u003c/p\u003e\n\u003cp\u003e没咋试过...之前一直都是单节点\u003c/p\u003e\n",
+      "Author": "frank1256",
+      "PubDate": "2022-08-25T07:19:43Z"
+    },
+    {
       "Title": "[感想]-大概有多久没有和自己小时候的玩伴联机或者联系了 - 生活",
       "Link": "https://www.v2ex.com/t/875335",
       "Description": "\u003cp\u003e\u003cimg alt=\"ssw.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/08/25/BoihlsbeSC4KM8d.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e我俩是从小学开始认识的,都在一个班上,当时我俩学习成绩一直是很差的,所以可谓是'臭味相投'\u003c/p\u003e\n\u003cp\u003e之后等到小学毕业后除了有时候能够去他家的 Nintendo Wii 上玩一玩 Mario Kart 也就没什么联系了\u003c/p\u003e\n\u003cp\u003e在之后就是上高中的时候,我从天津的第 82 中学考到了第 102 中学,发现他也在 102,但是我们就是说说话而已,那时学业繁忙,大都没什么时间一起玩游戏(尽管之后的我退学了)\u003c/p\u003e\n\u003cp\u003e在之后就是在回家的路上碰到了他 互相寒暄了一阵子后加上了微信,那个时候发现他已经快要当物理老师了(那时我在实习)\u003c/p\u003e\n\u003cp\u003e我发现以前小时候的玩伴因为种种原因都分道扬镳了,有的是学业有的是工作,但是现在还能够在一块侃大山玩联机的,还是要好好珍惜这份感情\u003c/p\u003e\n",
@@ -165,13 +186,6 @@
       "PubDate": "2022-08-25T05:59:37Z"
     },
     {
-      "Title": "iCloud 2T 美区 4 人车 - iCloud",
-      "Link": "https://www.v2ex.com/t/875307",
-      "Description": "\u003cp\u003eiCloud 美区  2T ，4 人车差 2 人，每人 512G ，季付 52 元，提前下车不退，欢迎稳定车友\u003c/p\u003e\n",
-      "Author": "Hallelu",
-      "PubDate": "2022-08-25T05:57:59Z"
-    },
-    {
       "Title": "从待了三年的外包辞职了，大家伙有什么想问的吗？ - 程序员",
       "Link": "https://www.v2ex.com/t/875306",
       "Description": "\u003cp\u003e在 2020 年底加入深圳某一外包公司。然后在做一个香港的项目，期间因为项目 A 裁员，被发配回到所谓资源池里。于是又面试了同一个客户的另外岗位，又待了一年半。\u003c/p\u003e\n\u003cp\u003e工作时间朝九晚六，完全不加班。\u003c/p\u003e\n\u003cp\u003e薪水也在市场平均水平左右。\u003c/p\u003e\n\u003cp\u003eOP 12 年毕业。\u003c/p\u003e\n",
@@ -261,6 +275,13 @@
       "Description": "持续集成部门，平时 60%的工作是开发，40%的工作是运维，出了问题及时支持。\u003cbr /\u003e领导最近说把运维部分的业务交给 IT 、运维部门，是要做什么呢？感觉有点危险啊",
       "Author": "hxndg",
       "PubDate": "2022-08-25T04:04:41Z"
+    },
+    {
+      "Title": "iCloud 2T 美区 4 人车 - iCloud",
+      "Link": "https://www.v2ex.com/t/875307",
+      "Description": "\u003cp\u003eiCloud 美区  2T ，4 人车差 2 人，每人 512G ，季付 52 元，提前下车不退，欢迎稳定车友\u003c/p\u003e\n",
+      "Author": "Hallelu",
+      "PubDate": "2022-08-25T05:57:59Z"
     },
     {
       "Title": "为了 homebrew 还是升级了系统 - macOS",
