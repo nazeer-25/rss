@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "互联网上为了保护隐私我们能做些什么？分享我的想法和我带来的 link-cleaner - 分享发现",
+      "Link": "https://www.v2ex.com/t/875442",
+      "Description": "\u003cblockquote\u003e\n\u003cp\u003e本文原文: \u003ca href=\"https://hellodk.cn/post/1101\" rel=\"nofollow\"\u003ehttps://hellodk.cn/post/1101\u003c/a\u003e  不是我推广自己，原文是自己的博客，有错别字或者想要修改、增加内容时改起来方便。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e前两天站里有个帖子 \u003ca href=\"https://www.v2ex.com/t/874281\" rel=\"nofollow\"\u003e网上留联系方式的隐私保护尝试\u003c/a\u003e , 我回复了几层，而后引起了我的思考。确实现在的大环 jìng 就是在收集隐私，前些年各大 App 还很流行年末搞出各种总结，近些年似乎有些收敛。这就是互联网企业的产品在利用各种手段搜集、统计我们日常使用手机时方方面面的行为，最明显的就是 A 用户分享，B 用户点击了 A 用户分享的内容，然后由此产生了一些微妙的联系，实际上最终这个联系非常的庞大，足以支撑起各大 App 产出各种各样的年度报告。\u003c/p\u003e\n\u003cp\u003e如今互联网如此渗透进我们的生活了，为了保护我们的隐私，我们能做些什么？我先抛砖引玉说几点\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e注册非大路地区的 手机号，在 mǐn 赶网站上注册使用\u003c/li\u003e\n\u003cli\u003e尽量使用邮箱注册各个网站，虽然大路地区这样的网站已经几乎绝迹了\u003c/li\u003e\n\u003cli\u003e尽量减少使用 guó 内 App ，包括桌面端和移动端的程序，桌面端的有些程序不得不用时可以塞进虚拟机打开，比如之前的 WPS 事件，完全可以跟 V 友开车上 Office 365\u003c/li\u003e\n\u003cli\u003e下载软件只在官网、GitHub 等平台寻找下载链接，guó 内的下崽器就千万别碰\u003c/li\u003e\n\u003cli\u003e手机号千万千万保护好，不轻易泄露\u003c/li\u003e\n\u003cli\u003e常用软件的设置，多看看，以 \u003cstrong\u003e保护自己的隐私\u003c/strong\u003e 作为原则设置各个选项。其实这里讲了很多点，如果你嫌麻烦或者不在乎隐私也就无所谓了\u003c/li\u003e\n\u003cli\u003e多多使用 Google 和 Bing ，baidu 只作为一些场景下的候选，比如 \u003cstrong\u003esite:\u003ca href=\"http://tieba.baidu.com\" rel=\"nofollow\"\u003etieba.baidu.com\u003c/a\u003e xxxx\u003c/strong\u003e 搜你的关键词在贴吧中大家的讨论，肯定能搜出来很多\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e这一点是我很想提的\u003c/strong\u003e，\u003cstrong\u003e尽量减少使用应用内的分享功能！\u003c/strong\u003e，因为他们基本上会带有相应的 track params ，也就是追踪参数。平台给你生成了带了个尾巴的链接，你分享了，别人点进去一定会有更多数据生成，追踪了分享人和点击人的行为\u003c/li\u003e\n\u003cli\u003e\n上面那个帖子有 V 友提到，在网上留联系方式时，在 V 站大家习惯 base64 ，微信号直接 base64 出来的字符串是固定的，很容易被搜索引擎爬取到，可能会被人搜到你在其他地方的活动。但是加上一些其他字符串，一起 encode 结果就会变化，这真是一个非常 nice ，非常省时省力省心的好方法。比如\u003cpre\u003e\u003ccode\u003eroot@debian11:~# echo \"my weixin id is: 12345678, shared on v2ex.com at 2022-08-25\" |base64\nbXkgd2VpeGluIGlkIGlzOiAxMjM0NTY3OCwgc2hhcmVkIG9uIHYyZXguY29tIGF0IDIwMjItMDgt\nMjUK\nroot@debian11:~# echo \"bXkgd2VpeGluIGlkIGlzOiAxMjM0NTY3OCwgc2hhcmVkIG9uIHYyZXguY29tIGF0IDIwMjItMDgt\nMjUK\" |base64 -d\nmy weixin id is: 12345678, shared on v2ex.com at 2022-08-25\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e抛砖引玉了，希望大家发表发表自己的看法和自己的做法。我已养成习惯：给别人分享东西时，基本上是分享标题 + 链接，如果是链接要看它干不干净。\u003c/p\u003e\n\u003cp\u003e为此我用 Java 写了一个简单的应用，打包成了 jar ，要使用的话安装 \u003ca href=\"https://www.injdk.cn/\" rel=\"nofollow\"\u003eOpenJDK11\u003c/a\u003e 。\u003c/p\u003e\n\u003ch2\u003e用法\u003c/h2\u003e\n\u003cp\u003e复制从平台复制的链接，执行 \u003cstrong\u003ejava -jar link-cleaner-1.0.0.jar\u003c/strong\u003e，\u003cstrong\u003e新的链接将会自动写入剪贴板，再粘贴即可\u003c/strong\u003e。我处理了 pdd 、taobao 、jd 、bilibili 四个平台的链接。下面是一些例子。\u003c/p\u003e\n\u003cp\u003epdd ，别人通过应用内分享给你的商品，你点击后会直接给你展示是谁分享的。如果是你分享的链接，被很多人通过微信转发了，会不会社死？所以隐私很重要。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"拼多多极简白键帽分享带链接追踪功能-处理压缩后\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://image.940304.xyz/i/2022/08/25/630776655ec97.jpg\"/\u003e\u003c/p\u003e\n\u003ch2\u003epdd\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003e$ java -jar link-cleaner-1.0.0.jar\nyour original clipboard text is: https://mobile.yangkeduo.com/goods.html?_x_org=2\u0026amp;refer_share_uin=KSFDGHKGUQXWTDO6DFD4JEM4II_GEXDA\u0026amp;_x_query=%E6%BA%90%E5%B7%A5%E4%B8%9A%E9%94%AE%E5%B8%BD\u0026amp;share_uin=KSFDGHKGUQXWTDO6DFD4JEM4II_GEXDA\u0026amp;page_from=23\u0026amp;_wv=41729\u0026amp;refer_share_channel=copy_link\u0026amp;refer_share_id=LJ8vv4WYAvYeEDzl5BqMr2rbJCLWiX9u\u0026amp;goods_id=28707795xxxx\u0026amp;pxq_secret_key=VGKR5MJG66CF7YSADPCIDC4OAA3ZUKSORF6SJAVHT3JXSROMIAGA\u0026amp;_wvx=10\nyour new clipboard text is: https://mobile.yangkeduo.com/goods.html?goods_id=28707795xxxx\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003etaobao\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003e$ java -jar link-cleaner-1.0.0.jar\nyour original clipboard text is:  [淘宝]  https://m.tb.cn/h.fAwWH69?tk=XTP02u5xxxx CZ3457 「 LuatOS 墨水屏开发板（每个 ID 限购 1 件,,多拍不发）」\n点击链接直接打开\nyour new clipboard text is:  CZ3457 「 LuatOS 墨水屏开发板（每个 ID 限购 1 件,,多拍不发）」\n点击链接直接打开 https://item.taobao.com/item.htm?id=67803651xxxx\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003ejd\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003e$ java -jar link-cleaner-1.0.0.jar\nyour original clipboard text is: https://item.m.jd.com/product/10001058xxxx.html?\u0026amp;utm_source=iosapp\u0026amp;utm_medium=appshare\u0026amp;utm_campaign=t_335139774\u0026amp;utm_term=CopyURL\u0026amp;ad_od=share\u0026amp;gx=RnE3kDMMOmWKmtRN6tUjCHNhknHA\nyour new clipboard text is: https://item.m.jd.com/product/10001058xxxx.html\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003ebilibili-1\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003e$ java -jar link-cleaner-1.0.0.jar\nyour original clipboard text is:  [让你的耳朵怀孕！《 A Moment Apart 》极限竞速：地平线 4 配乐-哔哩哔哩]  https://b23.tv/GUOxxxx\nyour new clipboard text is:  [让你的耳朵怀孕！《 A Moment Apart 》极限竞速：地平线 4 配乐-哔哩哔哩]   https://www.bilibili.com/video/BV1M4411q7W8\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003ebilibili-2\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003e$ java -jar link-cleaner-1.0.0.jar\nyour original clipboard text is:  [ [何同学] 我做了一个自己打字的键盘...]  https://www.bilibili.com/video/BV1W14y1b7Mq?share_source=copy_web\u0026amp;vd_source=f3e330de995a48b819604c85bc0dxxxx\nyour new clipboard text is:  [ [何同学] 我做了一个自己打字的键盘...]   https://www.bilibili.com/video/BV1W14y1b7Mq\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e源码在: \u003ca href=\"https://github.com/hellodk34/link-cleaner\" rel=\"nofollow\"\u003ehttps://github.com/hellodk34/link-cleaner\u003c/a\u003e 欢迎大家来添砖加瓦。\u003c/p\u003e\n\u003cp\u003eto be continued...\u003c/p\u003e\n\u003cp\u003eps: 为了避免可能存在的烦人检查和麻烦，本文就自我审查了。另外举的例子中各个链接均用 xxxx 打码了。\u003c/p\u003e\n",
+      "Author": "AllenHua",
+      "PubDate": "2022-08-25T13:55:24Z"
+    },
+    {
+      "Title": "idm 没有注册过期了不能用，除了重装系统还有别的简单高效的方法吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/875441",
+      "Description": "",
+      "Author": "yhm2046",
+      "PubDate": "2022-08-25T13:53:54Z"
+    },
+    {
+      "Title": "请问 Generative Dungeon 是怎么实现在 opensea 上直接玩游戏 - 问与答",
+      "Link": "https://www.v2ex.com/t/875440",
+      "Description": "\u003cp\u003eopensea 上创建 nft 之允许 jpg,gltf 等资源类文件\n想不通怎么实现的，请指教\u003c/p\u003e\n",
+      "Author": "walkershow",
+      "PubDate": "2022-08-25T13:53:34Z"
+    },
+    {
       "Title": "想了解一下大厂的商业化邮箱服务是怎么实现的？ - 程序员",
       "Link": "https://www.v2ex.com/t/875438",
       "Description": "开源的好像有 postfix ，但是 postfix 支持多少并发？支持多分布式嘛？",
@@ -11,7 +32,7 @@
       "PubDate": "2022-08-25T13:41:12Z"
     },
     {
-      "Title": "百度云有遇到过照片被和谐的吗？ - 互联网",
+      "Title": "百度云有遇到过照片被和谐的吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/875437",
       "Description": "\u003cp\u003e在考虑搞个 Nas 还是百度云，我用下来百度云还是挺不错的当然是开通了会员，大概有 100G 的照片想要备份尤其看中智能相册，而且百度云可以和一刻相册联动，AI 识别做的还不错，问题就是就是担心被和谐，当然了也没啥太露骨的照片。NAS 方案的话考虑的是 Mage20 貌似 AI 相册还不错。\u003c/p\u003e\n",
       "Author": "hiboshi",
