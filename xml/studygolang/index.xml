@@ -24,13 +24,8 @@
     </item>
     <item>
       <title>GO 请求一个URL如何指定IP？</title>
-      <link>https://studygolang.com/topics/15780#reply1</link>
+      <link>https://studygolang.com/topics/15780#reply2</link>
       <description>&lt;p&gt;比如要请求一个 域名 A.COM ，希望DNS指定解析到IP 1.1.1.1，如何设置http.Client呢？&#xA;*不能本地改HOST那种方式&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>Golang 中使用「Event - Listener」解耦逻辑，让你的应用更简单！</title>
-      <link>https://studygolang.com/articles/35837#reply1</link>
-      <description>&lt;p&gt;当一个订单完成时，老板说：发个短信给用户，再发个邮件吧，同时更新下统计数据，巴拉巴拉（真事多）。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我们当然可以用 &lt;code&gt;goroutine&lt;/code&gt; 处理这些耗时的任务，但优雅的一种方式是使用「事件系统（Event - Listener 模式）」来进行代码的解耦，让代码逻辑更简单！&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;跟 Laravel 的使用方法完全一致，Phper 请安心服用。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;h3&gt;第一步：生成任务类&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;go run . artisan make:event PodcastProcessed&#xA;go run . artisan make:listener SendPodcastNotification&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;第二步：注册事件和监听器&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;package providers&#xA;&#xA;import (&#xA;  &amp;quot;github.com/goravel/framework/contracts/events&amp;quot;&#xA;  &amp;quot;github.com/goravel/framework/support/facades&amp;quot;&#xA;)&#xA;&#xA;type EventServiceProvider struct {&#xA;}&#xA;&#xA;...&#xA;&#xA;func (receiver *EventServiceProvider) listen() map[events.Event][]events.Listener {&#xA;  return map[events.Event][]events.Listener{&#xA;    &amp;amp;events.OrderShipped{}: {&#xA;      &amp;amp;listeners.SendShipmentNotification{},&#xA;    },&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;第三步：实现 Listener 逻辑&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;巴拉巴拉&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;第四步：调度事件&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;err := facades.Event.Job(&amp;amp;events.OrderShipped{}, []events.Arg{&#xA;    {Type: &amp;quot;string&amp;quot;, Value: &amp;quot;abcc&amp;quot;},&#xA;    {Type: &amp;quot;int&amp;quot;, Value: 1234},&#xA;  }).Dispatch()&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;Over, 更多功能&lt;a href=&#34;https://www.goravel.dev/cn/zong-he-hua-ti/shi-jian-xi-tong&#34; title=&#34;详见文档&#34;&gt;详见文档&lt;/a&gt;，小伙伴们开始愉快的搞事情吧！&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;关于 Goravel&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;Goravel 是一个功能完备、具有良好扩展能力的 Web 应用程序框架。 作为一个起始脚手架帮助 Golang 开发者快速构建自己的应用。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;项目地址：&lt;a href=&#34;https://github.com/goravel/goravel&#34; title=&#34;https://github.com/goravel/goravel&#34;&gt;https://github.com/goravel/goravel&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;文档地址：&lt;a href=&#34;https://www.goravel.dev&#34; title=&#34;www.goravel.dev&#34;&gt;www.goravel.dev&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220424/0e7c588cd1e98b26d6803cbf8af2d478.png&#34; alt=&#34;golang横-500.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go语言爱好者周刊：第 156 期</title>
@@ -46,6 +41,11 @@
       <title>Go依赖库问题</title>
       <link>https://studygolang.com/topics/15776#reply6</link>
       <description>&lt;p&gt;我想问一下，为啥Go的第三方依赖库有那么多？就没有人把常用的功能整合在一起，然后就get这个库使用就行了，这样不是更方便吗？这么多库，感觉好麻烦。百度了这个问题都没有得到答案。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>Golang 中使用「Event - Listener」解耦逻辑，让你的应用更简单！</title>
+      <link>https://studygolang.com/articles/35837#reply1</link>
+      <description>&lt;p&gt;当一个订单完成时，老板说：发个短信给用户，再发个邮件吧，同时更新下统计数据，巴拉巴拉（真事多）。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我们当然可以用 &lt;code&gt;goroutine&lt;/code&gt; 处理这些耗时的任务，但优雅的一种方式是使用「事件系统（Event - Listener 模式）」来进行代码的解耦，让代码逻辑更简单！&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;跟 Laravel 的使用方法完全一致，Phper 请安心服用。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;h3&gt;第一步：生成任务类&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;go run . artisan make:event PodcastProcessed&#xA;go run . artisan make:listener SendPodcastNotification&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;第二步：注册事件和监听器&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;package providers&#xA;&#xA;import (&#xA;  &amp;quot;github.com/goravel/framework/contracts/events&amp;quot;&#xA;  &amp;quot;github.com/goravel/framework/support/facades&amp;quot;&#xA;)&#xA;&#xA;type EventServiceProvider struct {&#xA;}&#xA;&#xA;...&#xA;&#xA;func (receiver *EventServiceProvider) listen() map[events.Event][]events.Listener {&#xA;  return map[events.Event][]events.Listener{&#xA;    &amp;amp;events.OrderShipped{}: {&#xA;      &amp;amp;listeners.SendShipmentNotification{},&#xA;    },&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;第三步：实现 Listener 逻辑&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;巴拉巴拉&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;第四步：调度事件&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;err := facades.Event.Job(&amp;amp;events.OrderShipped{}, []events.Arg{&#xA;    {Type: &amp;quot;string&amp;quot;, Value: &amp;quot;abcc&amp;quot;},&#xA;    {Type: &amp;quot;int&amp;quot;, Value: 1234},&#xA;  }).Dispatch()&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;Over, 更多功能&lt;a href=&#34;https://www.goravel.dev/cn/zong-he-hua-ti/shi-jian-xi-tong&#34; title=&#34;详见文档&#34;&gt;详见文档&lt;/a&gt;，小伙伴们开始愉快的搞事情吧！&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;关于 Goravel&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;Goravel 是一个功能完备、具有良好扩展能力的 Web 应用程序框架。 作为一个起始脚手架帮助 Golang 开发者快速构建自己的应用。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;项目地址：&lt;a href=&#34;https://github.com/goravel/goravel&#34; title=&#34;https://github.com/goravel/goravel&#34;&gt;https://github.com/goravel/goravel&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;文档地址：&lt;a href=&#34;https://www.goravel.dev&#34; title=&#34;www.goravel.dev&#34;&gt;www.goravel.dev&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220424/0e7c588cd1e98b26d6803cbf8af2d478.png&#34; alt=&#34;golang横-500.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>原来有如此丝滑的mock工具！</title>
@@ -130,6 +130,11 @@
       <title>北京五道口顶级游戏公司中台部门招go开发</title>
       <link>https://studygolang.com/topics/15208#reply15</link>
       <description>&lt;p&gt;此岗位长期有效&lt;/p&gt;&#xA;&#xA;&lt;p&gt;公司网站:  &lt;a href=&#34;https://www.hortorgames.com/&#34;&gt;https://www.hortorgames.com/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;坐标: 北京-海淀-五道口&lt;/p&gt;&#xA;&#xA;&lt;p&gt;职责: 负责中台部门通用服务如登录, 注册, 支付, 统计等功能的开发&lt;/p&gt;&#xA;&#xA;&lt;p&gt;要求: 扎实的数据结构与算法等计算机基础知识, 熟悉Redis, MongoDB等后端技术&lt;/p&gt;&#xA;&#xA;&lt;p&gt;薪资: 25-35k  15薪&lt;/p&gt;&#xA;&#xA;&lt;p&gt;福利: 双休, 极少加班, 反对内卷, 3公里内2k租房补贴, 每年两次晋升机会, 豪横年会, 工作和技术氛围好&lt;/p&gt;&#xA;&#xA;&lt;p&gt;联系方式:  加wx  xbtb1354  备注 go内推此岗位长期有效, 长期招聘游戏前后端, 策划美术运营等&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>GO 请求一个URL如何指定IP？</title>
+      <link>https://studygolang.com/topics/15780#reply1</link>
+      <description>&lt;p&gt;比如要请求一个 域名 A.COM ，希望DNS指定解析到IP 1.1.1.1，如何设置http.Client呢？&#xA;*不能本地改HOST那种方式&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>GO 请求一个URL如何指定IP？</title>
