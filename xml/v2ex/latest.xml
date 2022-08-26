@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>React 遍历数组中的元素，渲染出来的对象如何控制子项的展示或隐藏呢？ - 问与答</title>
+      <link>https://www.v2ex.com/t/875678</link>
+      <description>&lt;p&gt;想要实现 点击每个项的设置，展示对应的设置框。&lt;/p&gt;&#xA;&lt;p&gt;设置框的展示与否设置了通过&lt;code&gt;show&lt;/code&gt;属性来判断&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;div className={i.show ? &#39;menu-show&#39; : &#39;menu-hide&#39;}&amp;gt;&#xA; &amp;lt;p&amp;gt;名称: {i.name}&amp;lt;/p&amp;gt;&#xA; &amp;lt;p&amp;gt;年龄: &amp;lt;input type=&#34;text&#34;/&amp;gt;&amp;lt;/p&amp;gt;&#xA;&amp;lt;/div&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;点击 box 框时 也设置了 &lt;code&gt;&amp;lt;div key={&lt;a href=&#34;http://i.name&#34; rel=&#34;nofollow&#34;&gt;i.name&lt;/a&gt;} className=&#34;box&#34; onClick={() =&amp;gt; i.show = !i.show}&amp;gt;&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;可为什么没效果呢？  下面是一个完成的例子。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;&#xA;&amp;lt;html lang=&#34;zh&#34;&amp;gt;&#xA;&amp;lt;head&amp;gt;&#xA;    &amp;lt;meta charset=&#34;UTF-8&#34;&amp;gt;&#xA;    &amp;lt;title&amp;gt;Title&amp;lt;/title&amp;gt;&#xA;    &amp;lt;script crossorigin src=&#34;https://unpkg.com/react@18/umd/react.development.js&#34;&amp;gt;&amp;lt;/script&amp;gt;&#xA;    &amp;lt;script crossorigin src=&#34;https://unpkg.com/react-dom@18/umd/react-dom.development.js&#34;&amp;gt;&amp;lt;/script&amp;gt;&#xA;    &amp;lt;script src=&#34;https://unpkg.com/babel-standalone@6/babel.min.js&#34;&amp;gt;&amp;lt;/script&amp;gt;&#xA;    &amp;lt;style&amp;gt;&#xA;        * {&#xA;            padding: 0;&#xA;            margin: 0;&#xA;        }&#xA;&#xA;        .wrapper, h1 {&#xA;            display: flex;&#xA;            margin: auto 220px;&#xA;        }&#xA;&#xA;        .box {&#xA;            font-size: 16px;&#xA;            background-color: #00a0e9;&#xA;            margin: 3px;&#xA;            border-radius: 3px;&#xA;            padding: 3px;&#xA;        }&#xA;&#xA;        .menu-hide, .menu-show {&#xA;            margin-top: 12px;&#xA;        }&#xA;&#xA;        .menu-hide {&#xA;            display: none;&#xA;        }&#xA;&#xA;        .menu-show {&#xA;            display: block;&#xA;        }&#xA;    &amp;lt;/style&amp;gt;&#xA;&#xA;&amp;lt;/head&amp;gt;&#xA;&amp;lt;body&amp;gt;&#xA;&amp;lt;div id=&#34;root&#34;&amp;gt;&amp;lt;/div&amp;gt;&#xA;&amp;lt;/body&amp;gt;&#xA;&amp;lt;script type=&#34;text/babel&#34;&amp;gt;&#xA;    const App = () =&amp;gt; {&#xA;        const [items, setItems] = React.useState([{name: &#39;twitch&#39;, age: 3}, {name: &#39;虎牙&#39;, age: 5}, {name: &#39;斗鱼&#39;, age: 6}])&#xA;        return &amp;lt;div&amp;gt;&#xA;            &amp;lt;h1&amp;gt;study&amp;lt;/h1&amp;gt;&#xA;            &amp;lt;div className=&#34;wrapper&#34;&amp;gt;&#xA;                {items.map(i =&amp;gt; {&#xA;                    i.show = false&#xA;                    return &amp;lt;div key={i.name} className=&#34;box&#34; onClick={() =&amp;gt; i.show = !i.show}&amp;gt;&#xA;                        &amp;lt;p&amp;gt;名称 {i.name}&amp;lt;/p&amp;gt;&#xA;                        &amp;lt;p&amp;gt;年龄: {i.age}&amp;lt;/p&amp;gt;&#xA;                        &amp;lt;a href=&#34;#&#34;&amp;gt;设置&amp;lt;/a&amp;gt;&#xA;                        &amp;lt;div className={i.show ? &#39;menu-show&#39; : &#39;menu-hide&#39;}&amp;gt;&#xA;                            &amp;lt;p&amp;gt;名称: {i.name}&amp;lt;/p&amp;gt;&#xA;                            &amp;lt;p&amp;gt;年龄: &amp;lt;input type=&#34;text&#34;/&amp;gt;&amp;lt;/p&amp;gt;&#xA;                        &amp;lt;/div&amp;gt;&#xA;                    &amp;lt;/div&amp;gt;&#xA;                })}&#xA;            &amp;lt;/div&amp;gt;&#xA;        &amp;lt;/div&amp;gt;&#xA;    }&#xA;    ReactDOM.createRoot(document.getElementById(&#39;root&#39;)).render(&amp;lt;App/&amp;gt;)&#xA;&amp;lt;/script&amp;gt;&#xA;&amp;lt;/html&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>morri</author>
+      <pubDate>26 Aug 2022 11:13:53 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有可以批量拉黑功能的推特辅助？ - 程序员</title>
+      <link>https://www.v2ex.com/t/875677</link>
+      <description>&lt;p&gt;推特水军很多，一个一个点手都麻了，有没有软件可以设置好拉黑方式、几层拉黑，批量执行？&lt;/p&gt;&#xA;</description>
+      <author>mikeluckybiy</author>
+      <pubDate>26 Aug 2022 11:09:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>大小周是真的烦 - 职场话题</title>
+      <link>https://www.v2ex.com/t/875676</link>
+      <description>&lt;p&gt;🌈，为什么会有这样的模式。还有 12.30 下班，6.30 下班的。&lt;/p&gt;&#xA;&lt;p&gt;不如直接 996 来的痛快。&lt;/p&gt;&#xA;</description>
+      <author>iwh718</author>
+      <pubDate>26 Aug 2022 11:09:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>filelocator 命令行的布尔正则表达式报错问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/875675</link>
+      <description>图形化界面正常运行，命令行就不行，&lt;br /&gt;&lt;br /&gt;output 的文件里提示 error while parsing&lt;br /&gt;&lt;br /&gt;其中的(？ m)解析不了，&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;如果不加（？ m ）就返回不了我需要的内容。&lt;br /&gt;&lt;br /&gt;官方 help 文档也没找到辅助参数 来限定 multiline&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;这可咋办</description>
+      <author>voidtools</author>
+      <pubDate>26 Aug 2022 11:08:58 +0000</pubDate>
+    </item>
+    <item>
       <title>[提问]银行存款还靠谱吗？ - 投资</title>
       <link>https://www.v2ex.com/t/875674</link>
       <description>&lt;p&gt;河南村镇银行的事件曝光后，我赶紧把小银行的钱取了出来，有损失，但问题不大。&lt;/p&gt;&#xA;&lt;p&gt;我想问一下各位 v 友，目前四大国有银行买大额存单还靠谱吗？或者有更好的保本保息方案吗？&#xA;（本人理财白痴）&lt;/p&gt;&#xA;</description>
