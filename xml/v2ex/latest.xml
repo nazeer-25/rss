@@ -4,16 +4,23 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>DSM7.0 使用 Let&#39;s encrypt 脚本 syno-acme nginx 重启问题 - NAS</title>
+      <link>https://www.v2ex.com/t/875859</link>
+      <description>&lt;h2&gt;问题：&lt;/h2&gt;&#xA;&lt;p&gt;由于我使用了 frp+域名穿透 https 的方式，使用&lt;a href=&#34;https://github.com/andyzhshg/syno-acme&#34; rel=&#34;nofollow&#34;&gt;https://github.com/andyzhshg/syno-acme&lt;/a&gt; 申请 Let&#39;s encrypt 证书，今天突然发现证书是过期的，排查了一下 Log ，发现如下错误：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;begin reloadWebService&#xA;reloading new cert...&#xA;/volume1/nas_share/certs/syno-acme/cert-up.sh: line 69: /usr/syno/etc/rc.sysv/nginx.sh: No such file or directory&#xA;done reloadWebService&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;后续在项目仓库&lt;a href=&#34;https://github.com/andyzhshg/syno-acme/issues/66&#34; rel=&#34;nofollow&#34;&gt;issue&lt;/a&gt;中查到&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;&lt;a href=&#34;http://nginx.sh&#34; rel=&#34;nofollow&#34;&gt;nginx.sh&lt;/a&gt;&lt;/code&gt;在 dsm7 中并不存在，导致无法让 nginx 重新加载新证书，群晖自带的 nginx 使用 systemd 的方式管理，而普通的 systemctl reload nginx 也无法重新加载新的证书&lt;/p&gt;&#xA;&lt;h2&gt;解决&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;重启 nginx 服务 &lt;code&gt;systemctl restart nginx&lt;/code&gt;，但是群晖很多服务基于 nginx ，导致很多套件重启，比较麻烦，耗时也比较久&lt;/li&gt;&#xA;&lt;li&gt;使用&lt;code&gt;synow3tool --gen-all &amp;amp;&amp;amp; systemctl reload nginx&lt;/code&gt; 替代 restart ，&#34;dsm7 中多了一个 nginx 的 www 证书路径，前面的 syno3tool 用于更新那个路径下的证书，更新后即可正常 reload 生效&#34;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>zggsong</author>
+      <pubDate>27 Aug 2022 11:38:21 +0000</pubDate>
+    </item>
+    <item>
       <title>请问关于 Linux 的问题 - 问与答</title>
       <link>https://www.v2ex.com/t/875858</link>
-      <description>&lt;p&gt;实验室公用服务器，大家都有账号自己 ssh 上去跑代码&lt;/p&gt;&#xA;&lt;p&gt;刚刚发现账号 a 下 /home/a/x 下的大部分文件都被删除了，剩下一个文件夹，ls -l 查看所有者是 root&lt;/p&gt;&#xA;&lt;p&gt;之前这个服务器修过，但据说没有动过硬盘&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;这种情况是否肯定是被 rm 手动删除 /误删了？&lt;/strong&gt;&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;实验室公用服务器，大家都有账号自己 ssh 上去跑代码&lt;/p&gt;&#xA;&lt;p&gt;刚刚发现账号 a 下 /home/a/x 下的大部分文件都被删除了，剩下一个文件夹，ls -l 查看所有者是 root&lt;/p&gt;&#xA;&lt;p&gt;之前这个服务器修过，但据说没有动过硬盘&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;这种情况是否肯定是被 rm 手动删除 /误删了？&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;然后这个账号现在 ssh 密码登录不上，显示 Permission denied, please try again.&lt;/p&gt;&#xA;&lt;p&gt;据说没有人修改这个账号的密码&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;是否有什么操作会同时造成这两种结果？&lt;/strong&gt;&lt;/p&gt;&#xA;</description>
       <author>zxCoder</author>
       <pubDate>27 Aug 2022 11:34:30 +0000</pubDate>
     </item>
     <item>
       <title>好奇双宽带用 tplink 的飞流有啥效果么 - 宽带症候群</title>
       <link>https://www.v2ex.com/t/875857</link>
-      <description>&lt;p&gt;办了一条联通宽带，家里还有一条电信的，如果用个双 wan 的路由器会有啥提升么。&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;办了一条联通宽带，家里还有一条电信的，如果用个双 wan 的路由器会有啥提升么。或者有啥坑么。目前用的是网件的路由器，只有一个 wan 。&lt;/p&gt;&#xA;</description>
       <author>teek</author>
       <pubDate>27 Aug 2022 11:28:33 +0000</pubDate>
     </item>
