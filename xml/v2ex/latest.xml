@@ -4,18 +4,18 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>iPhone 信号真的太差了 - 问与答</title>
+      <link>https://www.v2ex.com/t/875870</link>
+      <description>在商场打开一个小程序，等了十分钟，真的是拉闸，iphone13 还以为 13 信号会好一些</description>
+      <author>madNeal</author>
+      <pubDate>27 Aug 2022 13:08:36 +0000</pubDate>
+    </item>
+    <item>
       <title>大家好，我又双叒叕来推广我的项目了～ - 分享创造</title>
       <link>https://www.v2ex.com/t/875869</link>
       <description>&lt;h2&gt;一些碎碎念&lt;/h2&gt;&#xA;&lt;p&gt;之前在 V 站发了贴，并申请了想 LeetCode 合作，详情可以看：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.v2ex.com/t/868526&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/868526&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.v2ex.com/t/868747&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/868747&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;虽然被拒绝了，但是还是很感谢大家提出的意见，经过一个多月的优化和锤炼，Js-sdsl 有了自己完整的一套社区&lt;/p&gt;&#xA;&lt;p&gt;包括：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/js-sdsl/js-sdsl&#34; rel=&#34;nofollow&#34;&gt;Js-sdsl repo&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/js-sdsl&#34; rel=&#34;nofollow&#34;&gt;Js-sdsl 组织&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://js-sdsl.github.io/#/zh-cn/&#34; rel=&#34;nofollow&#34;&gt;Js-sdsl 官网&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://js-sdsl.github.io/#/zh-cn/test/benchmark-analyze&#34; rel=&#34;nofollow&#34;&gt;Benchmark&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;在 Benchmark 中，Js-sdsl 被证实已经超越了当前最流行的数据结构库，性能是 denque (号称当前最快的双端队列) 接近三倍，是 functional-red-black-tree (npm 下载量两千万+每周) 的六倍&lt;/p&gt;&#xA;&lt;p&gt;特别的，我们的 Deque 在持久性插入的情况下速度接近 Js 原生 Array.push&lt;/p&gt;&#xA;&lt;p&gt;后续我们将会进行对 Hash 结构的优化，期望能超越 JS 原生 Set 和 Map ，并将位图 (bitmap) 加入到库中&lt;/p&gt;&#xA;&lt;h2&gt;一些解答&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Q：做这个有什么用？&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;这个是比较多的一个问题，当然也很好解答&lt;/p&gt;&#xA;&lt;p&gt;第一点，从社区情况来看，Js 并不提供原生的相关数据结构，只是在 ES6 中提供了 Set 和 Map 两种哈希表，我们希望通过编写 Js-sdsl 来解决这个问题&lt;/p&gt;&#xA;&lt;p&gt;举个例子，我有一个 JSON 数组，内部包含 a, b, c 四个字段，其中 c 为主键，每个位置上都不一样，我想根据 a, b 的值来实现去重&lt;/p&gt;&#xA;&lt;p&gt;使用 Js-sdsl 我们可以很好的实现这一点&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { OrderedSet } from &#39;js-sdsl&#39;;&#xA;const arr = [{ a: 1, b: 1, c: 1 }];&#xA;const st = new OrderedSet(arr, (x, y) =&amp;gt; {&#xA;    if (x.a !== y.a) return x.a - y.a;&#xA;    if (x.b !== y.b) return x.b - y.b;&#xA;    return 0;&#xA;});&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第二点，npm 上虽然这样的轮子很多，但是大多都是老旧项目，规范和性能堪忧，这点在 benchmark 中得到证实&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Q：使用的这样的场景很少&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;难道前端真的用不到数据结构吗？&lt;/p&gt;&#xA;&lt;p&gt;真是大错特错！&lt;/p&gt;&#xA;&lt;p&gt;随便去 npm 上搜索一下相关的关键词就会发现下载量是很高的，大多数都来自 nodeJs 依赖，比如 mysql 、Kafka 插件，又或者想要使用 nodeJs 进行数据处理的爱好者或工作者，只要是和数据处理相关，就一定会有相关的使用场景&lt;/p&gt;&#xA;&lt;p&gt;在 nodeJs 中，就连并发安全问题都是一大难点 &lt;a href=&#34;https://www.npmjs.com/package/async-lock&#34; rel=&#34;nofollow&#34;&gt;https://www.npmjs.com/package/async-lock&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;我们的展望&lt;/h2&gt;&#xA;&lt;p&gt;首先，我们想要通过 Js-sdsl 这一库推动前端数据结构的发展，并创立一些规范，为此我们呼吁更多的算法爱好者加入到 Js-sdsl 的生态建设中&lt;/p&gt;&#xA;&lt;p&gt;其次，通过 Benchmark 的展现，我相信在下一个大版本中可以吸引到更多底层开发人员接入 Js-sdsl 以提高服务性能&lt;/p&gt;&#xA;&lt;p&gt;感谢 V 友的耐心观看，如果可以的话希望的到您的一颗 star ，同时也欢迎提交 Issue 和 PR 来做出贡献&lt;/p&gt;&#xA;&lt;p&gt;以上。&lt;/p&gt;&#xA;</description>
       <author>zilongyao1366</author>
       <pubDate>27 Aug 2022 12:58:49 +0000</pubDate>
-    </item>
-    <item>
-      <title>港区奶飞招车友 - Netflix</title>
-      <link>https://www.v2ex.com/t/875868</link>
-      <description>&lt;p&gt;招四个长期车友，50/季，200/年&lt;/p&gt;&#xA;&lt;p&gt;最好来长期稳定一点的车友，大家都方便，提前下车按天退&lt;/p&gt;&#xA;&lt;p&gt;阿根廷 Youtube Premium 3/月招一位车友， 有个哥们刚下车&lt;/p&gt;&#xA;&lt;p&gt;有意联系 wx （ base64 ）：bTYzNzgxMjEw=&lt;/p&gt;&#xA;</description>
-      <author>azuremem</author>
-      <pubDate>27 Aug 2022 12:57:03 +0000</pubDate>
     </item>
     <item>
       <title>关于运营商分配假公网 IP 的问题 - 宽带症候群</title>
@@ -268,6 +268,13 @@
       <description>换过一个电池了，非原装的真不行，一年不到就遁出红尘了~&lt;br /&gt;&lt;br /&gt;求推荐</description>
       <author>arvin01</author>
       <pubDate>27 Aug 2022 07:49:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>港区奶飞招车友 - Netflix</title>
+      <link>https://www.v2ex.com/t/875868</link>
+      <description>&lt;p&gt;招四个长期车友，50/季，200/年&lt;/p&gt;&#xA;&lt;p&gt;最好来长期稳定一点的车友，大家都方便，提前下车按天退&lt;/p&gt;&#xA;&lt;p&gt;阿根廷 Youtube Premium 3/月招一位车友， 有个哥们刚下车&lt;/p&gt;&#xA;&lt;p&gt;有意联系 wx （ base64 ）：bTYzNzgxMjEw=&lt;/p&gt;&#xA;</description>
+      <author>azuremem</author>
+      <pubDate>27 Aug 2022 12:57:03 +0000</pubDate>
     </item>
     <item>
       <title>ios 怎么调节单个 app 的提示音大小 - 程序员</title>
