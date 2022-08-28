@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有无 B 站产品经理，拉黑后的 UP 主还出现在自己账号搜索结果页中的逻辑真的合适吗？ - 全球工单系统",
+      "Link": "https://www.v2ex.com/t/875995",
+      "Description": "\u003ca target=\"_blank\" href=\"https://www.v2ex.com/t/461396\" rel=\"nofollow noopener\"\u003ehttps://www.v2ex.com/t/461396\u003c/a\u003e\u003cbr /\u003e站内搜索看到 2018 年已有相关帖子，但是 4 年过去了，为何还是这样？\u003cbr /\u003e拉黑过的 UP 主据观察倒是没有出现在首页推荐中了，但是搜索结果页还是出现。\u003cbr /\u003e目前看来 B 站对于拉黑有两个点：1 、不再主动推荐，2 、无法查看其首页，但可以看他的视频。\u003cbr /\u003e\u003cbr /\u003e这样对我来说很劝退，为了放松搜些感兴趣的视频看，拉黑过的 UP 却阴魂不散，有种吃了苍蝇的感觉。",
+      "Author": "ecletics",
+      "PubDate": "2022-08-28T09:53:13Z"
+    },
+    {
       "Title": "Linux 修改键位映射 - Linux",
       "Link": "https://www.v2ex.com/t/875994",
       "Description": "折腾了几天， 分享一下 Linux 下修改键位映射的思路和工具。\u003cbr /\u003e\u003cbr /\u003e需达到的效果：\u003cbr /\u003eCapsLock 单按为 Esc ，组合按为 Ctrl\u003cbr /\u003e左 Shift 单按切输入法，右 Shift 单按打出左括号\u003cbr /\u003e文本编辑时适配 Emacs 基础快捷键\u003cbr /\u003e按键布局尽量与 macOS 一致\u003cbr /\u003e\u003cbr /\u003emacOS 键位的好处是 Command 与 Ctrl 分开，使得一些 Emacs 快捷键与系统命令快捷键能够共存（如 Ctrl+A 跳至行首，Command+A 全选等）。\u003cbr /\u003e\u003cbr /\u003e调研：\u003cbr /\u003eLinux 下的改键软件大致分为两类：\u003cbr /\u003e一类为使用 X11/Xorg 的键盘映射接口，如 xmodmap 、xkeysnail 等；\u003cbr /\u003e另一类为调用 kernel 层的输入接口，如 keyd 、KMonad 等。\u003cbr /\u003e因为我用的桌面是 Gnome Wayland ，所以 X11 下的就无法考虑了。後面两个目前都在积极开发中：keyd 用 C 写的，配置文件类似 TOML ，Linux 专属； KMonad 是 Haskell ，配置文件是类似 Lisp 但惊人的直观，且跨平台。考虑到效率，我选择了 keyd （ \u003ca target=\"_blank\" href=\"https://github.com/rvaiya/keyd\" rel=\"nofollow noopener\"\u003ehttps://github.com/rvaiya/keyd\u003c/a\u003e ）。\u003cbr /\u003e\u003cbr /\u003e安装过程不表，说一下遇到的体会和小坑。\u003cbr /\u003ekeyd 以 layer 为核心概念，每个 layer 就是一段配置，layer 可以继承和切换。这样很容易实现我需要的效果（如：左 Alt 继承 Ctrl 功能，但特定键下可触发自定义）。\u003cbr /\u003e不过要注意的是，目前 git 仓库中的示例配置有部分是错的（应该是近期迭代了 2.0 版但示例未及时更新），修改要点：\u003cbr /\u003e1. 2.0 版舍弃了`leftmeta = alt`的语法，现在必须写成`leftmeta = layer(alt)`\u003cbr /\u003e2. 切换 layer 时如果有参数，要用 swap2 而不是 swap ，具体用法在 man page 有写\u003cbr /\u003e\u003cbr /\u003e现在仍有部分 Emacs 键位无法实现，如 Ctrl+k （删至行末），因这一功能没有单键对应。如果定义为 Shift+End+Delete 组合键，不仅删除时有延迟，而且会影响 Terminal 中 Ctrl+k 的行为。\u003cbr /\u003e注意到 Gnome Tweak 中有一个启用 Emacs 键位的选项，研究了一下如何实现的，发现是使用了 gtk 的 Api 自定义了一些配置（位于：/usr/share/themes/Emacs/gtk-3.0/gtk-keys.css ），这样我们可以仿照此配置，新建一个 YourKey 文件夹，将 gtk-keys.css 中需要的搬过来，再通过`gsettings set org.gnome.desktop.interface gtk-key-theme YourKey`设为自己想到的效果。\u003cbr /\u003e不过这衹对 gtk 应用生效，好在我装的非 gtk 应用不多，目前已基本够用。",
