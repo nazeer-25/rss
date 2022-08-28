@@ -92,10 +92,6 @@
       <description>&lt;p&gt;大家好，我是渔夫子。本号新推出「go工具箱」系列，意在给大家分享使用go语言编写的实用的、好玩的工具。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;你一定想过将视频网站上的视频给下载下来。可是又愁于没有合适的工具。今天就给大家推荐一款用Go写的视频下载工具lux。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;lux是用Go编写的一个下载视频的工具，基于ffmpeg库，支持macOS、windows、linux等多个平台。可以下载抖音、哔哩哔哩、优酷、youtube、西瓜视频、爱奇艺、秒拍、微博、快手、Instagram、Twitter、腾讯视频、网易音乐、音悦台、极客时间、TikTok、好看视频、虎扑、虎牙视频、喜马拉雅、糖豆广场舞等。可以说所有主流网站的视频都可以下载。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;其安装也非常简单，如果是在macOS下，可以通过brew命令安装：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;brew install lux&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;如果使用go语言的话，也可以使用go install来安装：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;go install github.com/iawia002/lux@latest&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;在windows下，可以直接下载其编译好的二进制版本即可。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;使用也非常简单，下面是以youtube的视频为例进行下载：&#xA;&lt;img src=&#34;https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a0d929d7a15749cda85348d65f32a66c~tplv-k3u1fbpfcp-zoom-1.image&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;也可以通过-p参数下载bilibili的视频合集：&#xA;&lt;img src=&#34;https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/82f1740747d14f8f97636a335f6085ce~tplv-k3u1fbpfcp-zoom-1.image&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;更多项目详情请查看如下链接。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;开源项目地址：&lt;a href=&#34;https://github.com/iawia002/lux&#34;&gt;https://github.com/iawia002/lux&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;开源项目作者：iawia002&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;p align=center&gt;&amp;mdash;特别推荐&amp;mdash;&lt;/p&gt;&#xA;特别推荐：一个专注go项目实战、项目中踩坑经验及避坑指南、各种好玩的go工具的公众号，「Go学堂」，专注实用性，非常值得大家关注。点击下方公众号卡片，直接关注。关注送《100个go常见的错误》pdf文档。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>优维科技&amp;招商基金 | 招商基金DevSecOps实践与避坑指南</title>
-      <link>https://studygolang.com/articles/35838#reply0</link>
-    </item>
-    <item>
       <title>北京五道口顶级游戏公司中台部门招go开发</title>
       <link>https://studygolang.com/topics/15208#reply16</link>
       <description>&lt;p&gt;此岗位长期有效&lt;/p&gt;&#xA;&#xA;&lt;p&gt;公司网站:  &lt;a href=&#34;https://www.hortorgames.com/&#34;&gt;https://www.hortorgames.com/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;坐标: 北京-海淀-五道口&lt;/p&gt;&#xA;&#xA;&lt;p&gt;职责: 负责中台部门通用服务如登录, 注册, 支付, 统计等功能的开发&lt;/p&gt;&#xA;&#xA;&lt;p&gt;要求: 扎实的数据结构与算法等计算机基础知识, 熟悉Redis, MongoDB等后端技术&lt;/p&gt;&#xA;&#xA;&lt;p&gt;薪资: 25-35k  15薪&lt;/p&gt;&#xA;&#xA;&lt;p&gt;福利: 双休, 极少加班, 反对内卷, 3公里内2k租房补贴, 每年两次晋升机会, 豪横年会, 工作和技术氛围好&lt;/p&gt;&#xA;&#xA;&lt;p&gt;联系方式:  加wx  xbtb1354  备注 go内推此岗位长期有效, 长期招聘游戏前后端, 策划美术运营等&lt;/p&gt;&#xA;</description>
@@ -131,14 +127,18 @@
       <description>&lt;p&gt;最近需要做一个本地缓存的需求，缓存数据从 redis 读取&#xA;遂考虑到在大量并发的情况下，减少 go 协程切换的消耗，考虑用自旋锁来实现&lt;/p&gt;&#xA;&#xA;&lt;p&gt;大概的思路是：&#xA;- 大量并发请求&#xA;- 自旋锁上锁&#xA;&#x9;- 放一个 goroutine 去 redis 读取数据到本地缓存&#xA;&#x9;- 其他 goroutine 原地自旋等待缓存数据&#xA;- 读取的协程读取到数据之后解锁&lt;/p&gt;&#xA;&#xA;&lt;p&gt;但是我经过实际测试，发现用自旋锁的速度和用互斥锁的速度要差1~2个数量级，遂很不理解&lt;/p&gt;&#xA;&#xA;&lt;p&gt;之后我经过大量测试发现：&#xA;- 自旋锁在 本地操作（值自增），阻塞操作（sleep 或者 channel recv）时，性能高于互斥锁&#xA;- 在 HTTP 操作时性能和互斥锁相当&#xA;- 在通过 &amp;ldquo;github.com/go-redis/redis/v8&amp;rdquo; 操作 redis 获取数据时，自旋锁的性能和互斥锁要差1个数量级&lt;/p&gt;&#xA;&#xA;&lt;p&gt;不知道是否有大佬可以解答一番？不吝赐教&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/Mericusta/go-foo/tree/main/src/sync-foo&#34;&gt;测试代码在这里&lt;/a&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>golang交叉编译上遇到的问题！</title>
-      <link>https://studygolang.com/topics/15781#reply11</link>
-      <description>&lt;p&gt;本人使用的是&lt;strong&gt;linux&lt;/strong&gt;，想要编辑一个程序exe到win10上运行。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;然后往上找了一些相关内容，几乎千篇一律，估计大家也没遇到我的问题的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;命令行输入&lt;code&gt;CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go&lt;/code&gt;然后报错如下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go &#xA;package command-line-arguments&#xA;&#x9;imports fyne.io/fyne/v2/app&#xA;&#x9;imports fyne.io/fyne/v2/internal/driver/glfw&#xA;&#x9;imports fyne.io/fyne/v2/internal/driver/common&#xA;&#x9;imports fyne.io/fyne/v2/internal/painter/gl&#xA;&#x9;imports github.com/go-gl/gl/v3.2-core/gl: build constraints exclude all Go files in /home/deyen/go/pkg/mod/github.com/go-gl/gl@v0.0.0-20211210172815-726fda9656d6/v3.2-core/gl&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;贵坛大佬估计不少，这个问题我觉得应该也不难，就是不知道该怎么解决。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;报错的英文也不复杂，但就是不知道从哪里下手。在此先谢谢了～&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>判断某个ip是否属于某个网段</title>
       <link>https://studygolang.com/topics/4051#reply6</link>
       <description>&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;strconv&amp;quot;&#xA;&#x9;&amp;quot;strings&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;fmt.Println(isBelong(`10.187.102.8`, `10.187.102.0/24`))&#xA;&#xA;}&#xA;&#xA;func isBelong(ip, cidr string) bool {&#xA;&#x9;ipAddr := strings.Split(ip, `.`)&#xA;&#x9;if len(ipAddr) &amp;lt; 4 {&#xA;&#x9;&#x9;return false&#xA;&#x9;}&#xA;&#x9;cidrArr := strings.Split(cidr, `/`)&#xA;&#x9;if len(cidrArr) &amp;lt; 2 {&#xA;&#x9;&#x9;return false&#xA;&#x9;}&#xA;&#x9;var tmp = make([]string, 0)&#xA;&#x9;for key, value := range strings.Split(`255.255.255.0`, `.`) {&#xA;&#x9;&#x9;iint, _ := strconv.Atoi(value)&#xA;&#xA;&#x9;&#x9;iint2, _ := strconv.Atoi(ipAddr[key])&#xA;&#xA;&#x9;&#x9;tmp = append(tmp, strconv.Itoa(iint&amp;amp;iint2))&#xA;&#x9;}&#xA;&#x9;return strings.Join(tmp, `.`) == cidrArr[0]&#xA;}&#xA;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>优维科技&amp;招商基金 | 招商基金DevSecOps实践与避坑指南</title>
+      <link>https://studygolang.com/articles/35838#reply0</link>
+    </item>
+    <item>
+      <title>golang交叉编译上遇到的问题！</title>
+      <link>https://studygolang.com/topics/15781#reply11</link>
+      <description>&lt;p&gt;本人使用的是&lt;strong&gt;linux&lt;/strong&gt;，想要编辑一个程序exe到win10上运行。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;然后往上找了一些相关内容，几乎千篇一律，估计大家也没遇到我的问题的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;命令行输入&lt;code&gt;CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go&lt;/code&gt;然后报错如下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go &#xA;package command-line-arguments&#xA;&#x9;imports fyne.io/fyne/v2/app&#xA;&#x9;imports fyne.io/fyne/v2/internal/driver/glfw&#xA;&#x9;imports fyne.io/fyne/v2/internal/driver/common&#xA;&#x9;imports fyne.io/fyne/v2/internal/painter/gl&#xA;&#x9;imports github.com/go-gl/gl/v3.2-core/gl: build constraints exclude all Go files in /home/deyen/go/pkg/mod/github.com/go-gl/gl@v0.0.0-20211210172815-726fda9656d6/v3.2-core/gl&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;贵坛大佬估计不少，这个问题我觉得应该也不难，就是不知道该怎么解决。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;报错的英文也不复杂，但就是不知道从哪里下手。在此先谢谢了～&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>使用gin框架，每次重启服务器后都无法登陆</title>
