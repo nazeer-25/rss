@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Linux 修改键位映射 - Linux</title>
+      <link>https://www.v2ex.com/t/875994</link>
+      <description>折腾了几天， 分享一下 Linux 下修改键位映射的思路和工具。&lt;br /&gt;&lt;br /&gt;需达到的效果：&lt;br /&gt;CapsLock 单按为 Esc ，组合按为 Ctrl&lt;br /&gt;左 Shift 单按切输入法，右 Shift 单按打出左括号&lt;br /&gt;文本编辑时适配 Emacs 基础快捷键&lt;br /&gt;按键布局尽量与 macOS 一致&lt;br /&gt;&lt;br /&gt;macOS 键位的好处是 Command 与 Ctrl 分开，使得一些 Emacs 快捷键与系统命令快捷键能够共存（如 Ctrl+A 跳至行首，Command+A 全选等）。&lt;br /&gt;&lt;br /&gt;调研：&lt;br /&gt;Linux 下的改键软件大致分为两类：&lt;br /&gt;一类为使用 X11/Xorg 的键盘映射接口，如 xmodmap 、xkeysnail 等；&lt;br /&gt;另一类为调用 kernel 层的输入接口，如 keyd 、KMonad 等。&lt;br /&gt;因为我用的桌面是 Gnome Wayland ，所以 X11 下的就无法考虑了。後面两个目前都在积极开发中：keyd 用 C 写的，配置文件类似 TOML ，Linux 专属； KMonad 是 Haskell ，配置文件是类似 Lisp 但惊人的直观，且跨平台。考虑到效率，我选择了 keyd （ &lt;a target=&#34;_blank&#34; href=&#34;https://github.com/rvaiya/keyd&#34; rel=&#34;nofollow noopener&#34;&gt;https://github.com/rvaiya/keyd&lt;/a&gt; ）。&lt;br /&gt;&lt;br /&gt;安装过程不表，说一下遇到的体会和小坑。&lt;br /&gt;keyd 以 layer 为核心概念，每个 layer 就是一段配置，layer 可以继承和切换。这样很容易实现我需要的效果（如：左 Alt 继承 Ctrl 功能，但特定键下可触发自定义）。&lt;br /&gt;不过要注意的是，目前 git 仓库中的示例配置有部分是错的（应该是近期迭代了 2.0 版但示例未及时更新），修改要点：&lt;br /&gt;1. 2.0 版舍弃了`leftmeta = alt`的语法，现在必须写成`leftmeta = layer(alt)`&lt;br /&gt;2. 切换 layer 时如果有参数，要用 swap2 而不是 swap ，具体用法在 man page 有写&lt;br /&gt;&lt;br /&gt;现在仍有部分 Emacs 键位无法实现，如 Ctrl+k （删至行末），因这一功能没有单键对应。如果定义为 Shift+End+Delete 组合键，不仅删除时有延迟，而且会影响 Terminal 中 Ctrl+k 的行为。&lt;br /&gt;注意到 Gnome Tweak 中有一个启用 Emacs 键位的选项，研究了一下如何实现的，发现是使用了 gtk 的 Api 自定义了一些配置（位于：/usr/share/themes/Emacs/gtk-3.0/gtk-keys.css ），这样我们可以仿照此配置，新建一个 YourKey 文件夹，将 gtk-keys.css 中需要的搬过来，再通过`gsettings set org.gnome.desktop.interface gtk-key-theme YourKey`设为自己想到的效果。&lt;br /&gt;不过这衹对 gtk 应用生效，好在我装的非 gtk 应用不多，目前已基本够用。</description>
+      <author>phoulx</author>
+      <pubDate>28 Aug 2022 09:44:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>瑞昱（小螃蟹）的硬件驱动程序去哪里下载？ - 程序员</title>
+      <link>https://www.v2ex.com/t/875993</link>
+      <description>瑞昱真是家奇葩公司，从来不发布自家设备的驱动程序，官网什么也没有……&lt;br /&gt;只能用 OEM 提供的驱动，但是 OEM 的驱动尼玛也是从来不更新，都是一次性驱动……&lt;br /&gt;想问下是不是有我不知道的瑞昱驱动获取渠道呢？</description>
+      <author>NETID</author>
+      <pubDate>28 Aug 2022 09:38:35 +0000</pubDate>
+    </item>
+    <item>
       <title>痛点：请教一款 Mac 下的邮件管理软件 - 问与答</title>
       <link>https://www.v2ex.com/t/875992</link>
       <description>&lt;p&gt;出于每次 git 的交互都会邮箱提醒，但每次都要不定时登录网页刷新邮箱····&lt;/p&gt;&#xA;&lt;p&gt;而 Mac 下自带的邮箱软件，不会后台常驻，强迫症总是把他退出了···而且它对 gmail 的支持好像并不是很好，每次同步要好久。&lt;/p&gt;&#xA;&lt;p&gt;所以有没有一种状态栏常驻的邮箱呢？有那种小红点提示，像微信一样 hhhh&lt;/p&gt;&#xA;</description>
