@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "[社招] [北京/上海/杭州] 字节搜索业务研发团队招人啦 - 酷工作",
+      "Link": "https://www.v2ex.com/t/876570",
+      "Description": "投递方式：发送简历到邮箱 hkh_bupt@126.com \u003cbr /\u003e\u003cbr /\u003e要求：\u003cbr /\u003e1 、有 2~5 年工作经验。\u003cbr /\u003e2 、熟悉 Linux 开发环境，有 C,C++,Golang,Java,Python 等任一种使用娴熟的语言。\u003cbr /\u003e3 、有主流大规模搜索方向开发经验的优先。\u003cbr /\u003e4 、熟悉 Hadoop 、Hive 、Flink ，有大数据开发工作经验优先。\u003cbr /\u003e\u003cbr /\u003e团队介绍\u003cbr /\u003e我们的团队是中国区搜索业务研发团队，承担抖音、头条、西瓜、火山等搜索业务的开发工作，同时也负责字节如意（阿拉丁）、搜索离线架构、搜索推荐词中台等复杂和有挑战的搜索架构工作，愿景是打造高可用高性能的产品体验。用优质的工程能力去赋能业务成长，在业务快速的增长中不断提升我们的架构和平台化能力，成长空间极大，同时也有很多的挑战和机会。 团队比较新，各个方向都非常缺人，欢迎有志同学加盟入伙，共创大业。",
+      "Author": "mrbendy",
+      "PubDate": "2022-08-30T13:26:56Z"
+    },
+    {
+      "Title": "在学习 Go 的泛型，写了个模拟 async/await 的小工具，写的过程中发现个问题 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/876569",
+      "Description": "\u003cp\u003e谁能看出来问题在哪里 #狗头\u003c/p\u003e\n\u003cp\u003e代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epackage future\n\nimport (\n        \"context\"\n)\n\ntype Future[T any] interface {\n        Await() (T, error)\n        Cancel()\n}\n\ntype future[T any] struct {\n        ret    chan result[T]\n        ctx    context.Context\n        cancel context.CancelFunc\n}\n\ntype result[T any] struct {\n        dat T\n        err error\n}\n\nfunc Async[T any](fn func() (T, error)) Future[T] {\n        return AsyncWithContext(context.Background(), fn)\n}\n\nfunc AsyncWithContext[T any](ctx context.Context, fn func() (T, error)) Future[T] {\n        c := make(chan result[T], 1)\n        fctx, cancel := context.WithCancel(ctx)\n\n        go func() {\n                ret, err := fn()\n                c \u0026lt;- result[T]{dat: ret, err: err}\n        }()\n        return \u0026amp;future[T]{ret: c, ctx: fctx, cancel: cancel}\n}\n\nfunc (f *future[T]) Await() (T, error) {\n        var result result[T]\n\n        select {\n        case \u0026lt;-f.ctx.Done():\n                result.err = f.ctx.Err()\n        case ret := \u0026lt;-f.ret:\n                result = ret\n        }\n\n        f.cancel()\n        return result.dat, result.err\n}\n\nfunc (f *future[T]) Cancel() {\n        f.cancel()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e用法是：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ef := future.Async(myfunc)\n// 去干其他事\nresult, err := f.Await()\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "rrfeng",
+      "PubDate": "2022-08-30T13:23:40Z"
+    },
+    {
+      "Title": "windows 快捷键怎么删除当前行的光标前的所有字符 - Windows",
+      "Link": "https://www.v2ex.com/t/876568",
+      "Description": "\u003cp\u003e类似 mac 的 command del 这种，有快捷键吗\u003c/p\u003e\n",
+      "Author": "siwadiya",
+      "PubDate": "2022-08-30T13:18:49Z"
+    },
+    {
+      "Title": "继续普及一个心理健康的知识点 - 随想",
+      "Link": "https://www.v2ex.com/t/876567",
+      "Description": "它最初指的是弗洛伊德“恋母情结”的女性版本，小女孩被父亲吸引，并因此与母亲为敌，当下 Daddy issue 的兴趣主体虽然大部分是女性，但也包括不少同性恋男性。\u003cbr /\u003e\u003cbr /\u003e最近一次看到对这个话题的讨论，是在被称为《致命女人》后的又一部神剧《现代爱情》上。\u003cbr /\u003e\u003cbr /\u003e第六集里，讲述了 11 岁就失去父亲陪伴的年轻女孩麦德琳，工作后遇见同事里的一位工程师大叔，并有意去接触，二人迅速变得亲密起来。\u003cbr /\u003e\u003cbr /\u003e直到有一天，在大叔低头亲吻麦德琳之后，她却突然变得惊恐而愤怒……\u003cbr /\u003e\u003cbr /\u003e这一集的女主角无疑是最受争议的，几乎被全网骂婊。\u003cbr /\u003e\u003cbr /\u003e可我觉得她太冤枉了。\u003cbr /\u003e\u003cbr /\u003e毕竟，谁年轻时没懵懵懂懂地自称爱大叔呢？\u003cbr /\u003e\u003cbr /\u003e转自： \u003ca target=\"_blank\" href=\"https://www.jiemian.com/article/3671683.html\" rel=\"nofollow noopener\"\u003ehttps://www.jiemian.com/article/3671683.html\u003c/a\u003e",
+      "Author": "justanetizen",
+      "PubDate": "2022-08-30T13:16:47Z"
+    },
+    {
+      "Title": "MaterialUI 的 ButtonGroup 组件， Button 中间的 border 没有被覆盖是怎么实现的？ - 问与答",
+      "Link": "https://www.v2ex.com/t/876566",
+      "Description": "这个是 MUI 官方的 Demo： \u003ca target=\"_blank\" href=\"https://gbhhib.csb.app/\" rel=\"nofollow noopener\"\u003ehttps://gbhhib.csb.app/\u003c/a\u003e\u003cbr /\u003e它的例子中，当 hover 按钮的时候，按钮中间的那个 border 是没有被覆盖的\u003cbr /\u003e\u003cbr /\u003e但是我自己尝试实现的时候，和它一样用了`margin-left:-1px`，我的例子中的 border 就被后一个按钮覆盖了，是我哪里的样式不对吗？默认情况下应该是会被覆盖的，为什么它的例子中可以做到不被覆盖呢。。\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://codesandbox.io/s/cocky-waterfall-ry1gn6\" rel=\"nofollow noopener\"\u003ehttps://codesandbox.io/s/cocky-waterfall-ry1gn6\u003c/a\u003e",
+      "Author": "csdoker",
+      "PubDate": "2022-08-30T13:09:27Z"
+    },
+    {
       "Title": "奈飞和迪士尼+ - 问与答",
       "Link": "https://www.v2ex.com/t/876564",
       "Description": "v 友更倾向使用哪个",
