@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>创建了一个旅行办公 交流群，有想法的小伙伴可以加入呀 - 生活</title>
+      <link>https://www.v2ex.com/t/876498</link>
+      <description>&lt;p&gt;创建了一个旅行办公 交流群，群里有各互联网大厂的小伙伴，也有长期旅行办公的大佬。&lt;br/&gt;&#xA;大家可以在本群自由探讨和分享任何有关 远程工作 / 旅行办公 的生活和有趣的事，可以做内容分享 /攻略探讨。&lt;br/&gt;&#xA;非常欢迎大家提出任何有关工作生活、有趣的观点。&lt;br/&gt;&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/08/30/b032a113283b51b3.jpeg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>NerdTsai</author>
+      <pubDate>30 Aug 2022 07:58:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>QALI (Quick Aliasing): 用 Rust 实现了个命令简写和脚本管理工具 - 分享创造</title>
+      <link>https://www.v2ex.com/t/876497</link>
+      <description>&lt;p&gt;具体安装与操作方式请见 &lt;a href=&#34;https://github.com/JettChenT/qali&#34; rel=&#34;nofollow&#34;&gt;github&lt;/a&gt; 以及&lt;a href=&#34;https://asciinema.org/a/517546&#34; rel=&#34;nofollow&#34;&gt;演示&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;我编写该工具主要是为了解决个人平常命令行中遇到的以下问题：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;较长的指令输入麻烦 /记不住 eg. &lt;code&gt;tar -xvf.....&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;可以通过 &lt;code&gt;alias {a}={b}&lt;/code&gt; 快速缩短指令，不过是在 session 内暂时储存的&lt;/li&gt;&#xA;&lt;li&gt;可以通过编辑 &lt;code&gt;.zshrc&lt;/code&gt;, &lt;code&gt;.bashrc&lt;/code&gt; 等设置，但是删、查、改以及迁移(eg. bash-&amp;gt;zsh) 极为不方便&lt;/li&gt;&#xA;&lt;li&gt;想要全局访问自己写的 python/shell 脚本&lt;a href=&#34;https://stackoverflow.com/a/26349590/8554592&#34; rel=&#34;nofollow&#34;&gt;有点复杂&lt;/a&gt;，且不好维护&lt;/li&gt;&#xA;&lt;li&gt;在系统的命名空间设置 alias 以及添加自己的程序时容易和系统已有的指令冲突 (参考 &lt;a href=&#34;https://rhodesmill.org/brandon/2009/commands-with-comma/&#34; rel=&#34;nofollow&#34;&gt;start all your commands with comma&lt;/a&gt; )&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;QALI 包含两个指令: &lt;code&gt;q&lt;/code&gt;(常用操作) 和 &lt;code&gt;qali&lt;/code&gt;(管理操作)，并解决了以上每个问题:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;eg. &lt;code&gt;q -s untar &#34;tar -xvf&#34;&lt;/code&gt; 设置简写，并使用 &lt;code&gt;q untar {文件名}&lt;/code&gt; 快速运行指令&lt;/li&gt;&#xA;&lt;li&gt;qali 将命令简写储存在本地文件夹内，不会丢失&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;qali list&lt;/code&gt; 查看所有假名;&#xA;&lt;code&gt;qali remove&lt;/code&gt; 删除假名;&#xA;&lt;code&gt;qali select&lt;/code&gt; 通过 fuzzy select 查找指令&lt;/li&gt;&#xA;&lt;li&gt;eg. &lt;code&gt;q -s hi ./&lt;a href=&#34;http://hello.py&#34; rel=&#34;nofollow&#34;&gt;hello.py&lt;/a&gt;&lt;/code&gt; ：自动识别 Python 脚本，并可以在任意地点通过 &lt;code&gt;q hi&lt;/code&gt; 全局执行脚本 (目前还支持 shell)&lt;/li&gt;&#xA;&lt;li&gt;在 QALI 里面设置的命令不会和系统命名空间冲突，&lt;code&gt;q {...}&lt;/code&gt; 命名空间有且仅有用户自己设置的命令简写&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;写这个工具的同时也发现 github 上面有一些功能类似的项目，以下是一个对比：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/denisidoro/navi&#34; rel=&#34;nofollow&#34;&gt;navi&lt;/a&gt;: 侧重于使用他人写的 cheatsheets, 要通过手动编辑文件管理指令&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://espanso.org&#34; rel=&#34;nofollow&#34;&gt;espanso&lt;/a&gt;: 功能非常全面，也支持添加脚本，要通过手动编辑文件管理指令且使用图形界面&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/olets/zsh-abbr&#34; rel=&#34;nofollow&#34;&gt;zsh-abbr&lt;/a&gt;: 包含了快速的设置和执行功能，但是没有自己的 namespace, 且只支持 zsh&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;欢迎各位在下方评论提建议以及在&lt;a href=&#34;https://github.com/JettChenT/qali&#34; rel=&#34;nofollow&#34;&gt;github&lt;/a&gt;上合作！&lt;/p&gt;&#xA;</description>
+      <author>JettChen</author>
+      <pubDate>30 Aug 2022 07:56:03 +0000</pubDate>
+    </item>
+    <item>
       <title>请教，关于智能门禁/门锁 - 硬件</title>
       <link>https://www.v2ex.com/t/876496</link>
       <description>&lt;p&gt;最近有一个需求，就是想把公司的门锁换成智能门锁，公司职员可以直接在自己开发的小程序上开门。&lt;/p&gt;&#xA;&lt;p&gt;需求很简单，但是碰到一个问题，就是不知道怎么为智能门锁接入系统。&lt;/p&gt;&#xA;&lt;p&gt;我查到小米有一个 loT 开放平台，海康威视也有开放平台，是不是接入了开放平台，就可以获得门禁的协议了？&lt;/p&gt;&#xA;&lt;p&gt;一直是做 java 开发，对硬件这一块实在是不了解，请各位 v 友赐教！&lt;/p&gt;&#xA;</description>
