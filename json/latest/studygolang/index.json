@@ -95,9 +95,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "golang 有刷网站pv uv的demo吗",
-      "Link": "https://studygolang.com/topics/15796#reply0",
-      "Description": "",
+      "Title": "WGCLOUD可以监测防火墙吗?",
+      "Link": "https://studygolang.com/topics/15800#reply0",
+      "Description": "\u003cp\u003e可以监测\u003c/p\u003e\n\n\u003cp\u003eWGCLOUD监控平台的监测模块比较灵活，可以通过端口，PING的方式来监测防火墙的状态，并支持告警通知，比如邮件、钉钉、微信等告警方式\u003c/p\u003e\n\n\u003cp\u003e如果防火墙支持SNMP协议，还可以监测防火墙的进出口流量统计信息\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -116,6 +116,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "noGCMap 用于解决千万级MAP GC耗时过长问题(无hash冲突问题，对比fastcache bigcache等)",
+      "Link": "https://studygolang.com/topics/15797#reply0",
+      "Description": "\u003cp\u003enoGCMap\n\u003ca href=\"https://github.com/yudeguang/noGcMap\"\u003ehttps://github.com/yudeguang/noGcMap\u003c/a\u003e 与 \u003ca href=\"https://github.com/yudeguang/noGcStaticMap\"\u003ehttps://github.com/yudeguang/noGcStaticMap\u003c/a\u003e 为同一系列的无GC类型MAP，两者针对的场景有一定差异,noGcStaticMap性能稍高，内存占用更小，但不支持增删改。\u003c/p\u003e\n\n\u003cp\u003e与fastcache bigcache等相比，无hash冲突问题，并且对键值对增长无限制，不会删除老旧键值对。\u003c/p\u003e\n\n\u003cp\u003e对于大型map，比如总数达到千万级别的map,如果键或者值中包含引用类型(string类型，结构体类型，或者任何基本类型+指针的定义 *int, *float 等)，那么这个map在垃圾回收的时候就会非常慢，GC的周期回收时间可以达到秒级甚至分钟级。\u003c/p\u003e\n\n\u003cp\u003e对此参考fastcache等，把复杂的不利于GC的复杂map转化为基础类型的map map[uint64]uint32 用于存储索引 和 []byte用于存储实际键值。如此改造之后，基本上实现了零GC,总体而言：\u003c/p\u003e\n\n\u003cp\u003e优点:\u003c/p\u003e\n\n\u003cp\u003e1)几乎零GC;\u003c/p\u003e\n\n\u003cp\u003e2)无hash碰撞问题;\u003c/p\u003e\n\n\u003cp\u003e3)支持增删改( 相比 \u003ca href=\"https://github.com/yudeguang/noGcStaticMap\"\u003ehttps://github.com/yudeguang/noGcStaticMap\u003c/a\u003e );\u003c/p\u003e\n\n\u003cp\u003e4)代码量非常少，适合根据自己需求做二次修改;\u003c/p\u003e\n\n\u003cp\u003e缺点: 1)性能比 \u003ca href=\"https://github.com/yudeguang/noGcStaticMap\"\u003ehttps://github.com/yudeguang/noGcStaticMap\u003c/a\u003e 稍差，内存占用稍高;\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;github.com/yudeguang/noGcMap\u0026quot;\n\t\u0026quot;log\u0026quot;\n)\n\nfunc main() {\n\tlog.SetFlags(log.Lshortfile | log.Ltime)\n\tm := noGCMap.New()\n\tm.SetString(\u0026quot;1\u0026quot;, \u0026quot;1原始\u0026quot;)\n\tlog.Println(m.GetString(\u0026quot;1\u0026quot;))\n\tm.DeleteString(\u0026quot;1\u0026quot;)\n\tlog.Println(m.GetString(\u0026quot;1\u0026quot;))\n\tm.SetString(\u0026quot;1\u0026quot;,\u0026quot;1修改\u0026quot;)\n\tlog.Println(m.GetString(\u0026quot;1\u0026quot;))\n\tm.SetString(\u0026quot;1\u0026quot;,\u0026quot;1修改2\u0026quot;)\n\tlog.Println(m.GetString(\u0026quot;1\u0026quot;))\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "golang 有刷网站pv uv的demo吗",
+      "Link": "https://studygolang.com/topics/15796#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "2022，我们该如何搭建可观测模型来实现“故障”的快速治理？",
       "Link": "https://studygolang.com/articles/35842#reply0",
       "Description": "",
@@ -123,23 +137,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "WGCLOUD可以监测防火墙吗?",
-      "Link": "https://studygolang.com/topics/15800#reply0",
-      "Description": "\u003cp\u003e可以监测\u003c/p\u003e\n\n\u003cp\u003eWGCLOUD监控平台的监测模块比较灵活，可以通过端口，PING的方式来监测防火墙的状态，并支持告警通知，比如邮件、钉钉、微信等告警方式\u003c/p\u003e\n\n\u003cp\u003e如果防火墙支持SNMP协议，还可以监测防火墙的进出口流量统计信息\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "YTask Go 语言异步任务框架  V3.0.0 发布",
       "Link": "https://studygolang.com/topics/15794#reply0",
       "Description": "\u003ch3\u003eYTask\u003c/h3\u003e\n\n\u003cp\u003eYTask是一个Go语言异步任务框架，其支持所有能被序列化为json的类型。本次更新增加了诸多功能，修复bug，提升了稳定性。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eGitHub：\u003ca href=\"https://github.com/gojuukaze/YTask\"\u003ehttps://github.com/gojuukaze/YTask\u003c/a\u003e\u003cbr\u003e\n\u003c/li\u003e\n\u003cli\u003e文档：\u003ca href=\"https://doc.ikaze.cn/YTask\"\u003ehttps://doc.ikaze.cn/YTask\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003e更新说明\u003c/h3\u003e\n\n\u003cp\u003e若从v2升级，请先阅读 （If upgrading from v2, please read this first）-\u0026gt; \u003ca href=\"https://doc.ikaze.cn/YTask/upgrade.html#v2v3\"\u003e从v2升级到v3\u003c/a\u003e\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eImprove English documentation \u003ca href=\"https://github.com/gojuukaze/YTask/wiki\"\u003eEn Doc\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e修改目录结构，把broker, backend移出主包。现在不用安装不必要的driver包了\u003c/li\u003e\n\u003cli\u003ebroker, backend全部支持连接池 (#27)\u003c/li\u003e\n\u003cli\u003e支持工作流，文档 -\u0026gt; \u003ca href=\"https://doc.ikaze.cn/YTask/workflow.html\"\u003ehttps://doc.ikaze.cn/YTask/workflow.html\u003c/a\u003e\n\u003ccode\u003ego\nclient.Workflow().\n   Send(\u0026quot;group1\u0026quot;, \u0026quot;add\u0026quot;, 123, 44).\n   Send(\u0026quot;group1\u0026quot;, \u0026quot;add\u0026quot;).\n   Done()\n\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e支持中止任务(#22) ，文档 -\u0026gt; \u003ca href=\"https://doc.ikaze.cn/YTask/abortTask.html\"\u003ehttps://doc.ikaze.cn/YTask/abortTask.html\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e修复log行号输出bug\u003c/li\u003e\n\u003cli\u003e修改队列名拼写错误，修改msg结构体\u003c/li\u003e\n\u003cli\u003eTaskCtl移动到server包中，结构体内的某些字段移动到msg中 ( 从v2升级时需要注意 )\u003c/li\u003e\n\u003cli\u003e通过TaskCtl获取重试次数时需要通过 \u003ccode\u003ectl.GetRetryCount()\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e不在支持RocketMq ，具体说明见: \u003ca href=\"https://github.com/gojuukaze/YTask/tree/master/drives/rocketmq\"\u003edrives/rocketmq\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "noGCMap 用于解决千万级MAP GC耗时过长问题(无hash冲突问题，对比fastcache bigcache等)",
-      "Link": "https://studygolang.com/topics/15797#reply0",
-      "Description": "\u003cp\u003enoGCMap\n\u003ca href=\"https://github.com/yudeguang/noGcMap\"\u003ehttps://github.com/yudeguang/noGcMap\u003c/a\u003e 与 \u003ca href=\"https://github.com/yudeguang/noGcStaticMap\"\u003ehttps://github.com/yudeguang/noGcStaticMap\u003c/a\u003e 为同一系列的无GC类型MAP，两者针对的场景有一定差异,noGcStaticMap性能稍高，内存占用更小，但不支持增删改。\u003c/p\u003e\n\n\u003cp\u003e与fastcache bigcache等相比，无hash冲突问题，并且对键值对增长无限制，不会删除老旧键值对。\u003c/p\u003e\n\n\u003cp\u003e对于大型map，比如总数达到千万级别的map,如果键或者值中包含引用类型(string类型，结构体类型，或者任何基本类型+指针的定义 *int, *float 等)，那么这个map在垃圾回收的时候就会非常慢，GC的周期回收时间可以达到秒级甚至分钟级。\u003c/p\u003e\n\n\u003cp\u003e对此参考fastcache等，把复杂的不利于GC的复杂map转化为基础类型的map map[uint64]uint32 用于存储索引 和 []byte用于存储实际键值。如此改造之后，基本上实现了零GC,总体而言：\u003c/p\u003e\n\n\u003cp\u003e优点:\u003c/p\u003e\n\n\u003cp\u003e1)几乎零GC;\u003c/p\u003e\n\n\u003cp\u003e2)无hash碰撞问题;\u003c/p\u003e\n\n\u003cp\u003e3)支持增删改( 相比 \u003ca href=\"https://github.com/yudeguang/noGcStaticMap\"\u003ehttps://github.com/yudeguang/noGcStaticMap\u003c/a\u003e );\u003c/p\u003e\n\n\u003cp\u003e4)代码量非常少，适合根据自己需求做二次修改;\u003c/p\u003e\n\n\u003cp\u003e缺点: 1)性能比 \u003ca href=\"https://github.com/yudeguang/noGcStaticMap\"\u003ehttps://github.com/yudeguang/noGcStaticMap\u003c/a\u003e 稍差，内存占用稍高;\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;github.com/yudeguang/noGcMap\u0026quot;\n\t\u0026quot;log\u0026quot;\n)\n\nfunc main() {\n\tlog.SetFlags(log.Lshortfile | log.Ltime)\n\tm := noGCMap.New()\n\tm.SetString(\u0026quot;1\u0026quot;, \u0026quot;1原始\u0026quot;)\n\tlog.Println(m.GetString(\u0026quot;1\u0026quot;))\n\tm.DeleteString(\u0026quot;1\u0026quot;)\n\tlog.Println(m.GetString(\u0026quot;1\u0026quot;))\n\tm.SetString(\u0026quot;1\u0026quot;,\u0026quot;1修改\u0026quot;)\n\tlog.Println(m.GetString(\u0026quot;1\u0026quot;))\n\tm.SetString(\u0026quot;1\u0026quot;,\u0026quot;1修改2\u0026quot;)\n\tlog.Println(m.GetString(\u0026quot;1\u0026quot;))\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
