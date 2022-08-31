@@ -4,9 +4,30 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>[自建图床解决方案分享] lsky + 阿里云盘 + webdav - 分享发现</title>
+      <link>https://www.v2ex.com/t/876776</link>
+      <description>&lt;p&gt;一直在 cnblogs 写博客（更多是转发记录一些大神的解决问题过程），习惯把文章的图片一张张抠下来再上传，效率太低了，实践了一下 typora+picgo 自动上传 http 图片替换成自己图床的地址。&lt;/p&gt;&#xA;&lt;h3&gt;实践一下 github 、gitee 、jihulab 和七牛云作为图片存储后端：&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;github 时不时被墙&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;gitee 提示我是图床应用，不给我公开权限&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;jihulab 直接说我的图片由于法律原因不给显示&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;七牛有限额&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;遂想到了把自己的公网 ip 和软路由利用起来&lt;/h3&gt;&#xA;&lt;p&gt;1 、docker 容器把 aliyundrive-webdav 跑起来，开启用户认证，指定根目录&lt;/p&gt;&#xA;&lt;p&gt;2 、再跑一个 lsky-pro ，创建一个新的存储策略，对接上一步的 webdav ，将用户的存储策略改成 webdav&lt;/p&gt;&#xA;&lt;p&gt;3 、再跑一个 webdav ，这个 webdav 关闭用户认证和自动索引，存储策略的访问域名改成这个新的 webdav ，这样以后上传图片直接返回的就是无需认证的 webdav 地址了&lt;/p&gt;&#xA;&lt;p&gt;4 、picgo 装 lankong 插件配置，picgo 和 typora 一顿配置猛如虎，好像插入图片会自动上传并替换成图床地址了&lt;/p&gt;&#xA;&lt;h3&gt;总结&lt;/h3&gt;&#xA;&lt;p&gt;1 、一套部署下来比较麻烦，还要跑一个数据库（ lsky 支持 sqlite ，然而我没跑起来）&lt;/p&gt;&#xA;&lt;p&gt;2 、需要自己有公网 IP 加服务端设备&lt;/p&gt;&#xA;&lt;p&gt;3 、不知阿里云盘会不会屏蔽图片，tg 上分享的热门电影可是很容易被屏蔽的&lt;/p&gt;&#xA;&lt;h3&gt;收获&lt;/h3&gt;&#xA;&lt;p&gt;1 、dockerhub 上找到 halcyonazure/lsky-pro-docker 镜像，使用挺简单，就是没有 arm 架构的镜像，fork 了一把源码，恶补了一下 github actions ，搞出了自己的 arm 架构镜像&lt;/p&gt;&#xA;&lt;p&gt;2 、typora 结合 picgo 终于可以愉快的抠图了&lt;/p&gt;&#xA;&lt;p&gt;3 、发现我的壁纸，收藏的插画可以愉快的安家了，lsky 后端管理预览效果还不错，还有高级搜索，我在 picgo 的 lankong 插件配置了一个小号来做图片上传，写作图片和我的收藏的插画互不干扰&lt;/p&gt;&#xA;&lt;p&gt;4 、最后收获凌晨两点睡觉&lt;/p&gt;&#xA;</description>
+      <author>nihaorz</author>
+      <pubDate>31 Aug 2022 09:17:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>给各位喝茶的同学分享一些发现 - 分享发现</title>
+      <link>https://www.v2ex.com/t/876775</link>
+      <description>就是茶农会在采摘一次后，给茶叶喷生长素&lt;br /&gt;&lt;br /&gt;有些茶农喷的忒狠了，摘了以后，喷洒过量生长素，3 天后又能采摘一波&lt;br /&gt;比韭菜可厉害多了。。。&lt;br /&gt;&lt;br /&gt;我是今天刚刚知道这个事情的，为啥我会知道呢？ &lt;br /&gt;因为我女朋友家就是种茶的&lt;br /&gt;&lt;br /&gt;我也知道为啥喝茶要洗茶了。。。</description>
+      <author>Features</author>
+      <pubDate>31 Aug 2022 09:16:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>html 中，如何让安卓 Chrome 禁止被长按呼出菜单？ - 问与答</title>
+      <link>https://www.v2ex.com/t/876774</link>
+      <description>一个 html 有个背景 div ，里面放了一些图片啥的，在安卓的 chrome 上，本来是要长按复制 html 上的内容，但是很容易长按到空白区域的背景上，这时候就会弹出分享啊、下载、新标签打开此图片啥的菜单。&lt;br /&gt;&lt;br /&gt;搜索了一下有个“onselectstart=&#34;return false&#34; onselect=&#34;document.selection.empty()&#34;”&lt;br /&gt;添加到 div 中，似乎不起作用。</description>
+      <author>CSGO</author>
+      <pubDate>31 Aug 2022 09:09:06 +0000</pubDate>
+    </item>
+    <item>
       <title>给大家说说我对微信聊天记录的理解（包括最新的 PC 端新功能 - 分享发现</title>
       <link>https://www.v2ex.com/t/876773</link>
-      <description>&lt;p&gt;首先微信聊天记录完整版只存在于移动端的。也就是说如果你开了桌面端，离线后重新登录也不会完整同步全部新消息。&lt;/p&gt;&#xA;&lt;h3&gt;备份与恢复&lt;/h3&gt;&#xA;&lt;p&gt;你可以将移动端的聊天记录数据备份到电脑上，但是这只是数据，没法在电脑端查看的。你可以随时将这份数据恢复至移动端。&lt;/p&gt;&#xA;&lt;p&gt;如下图示：&lt;/p&gt;&#xA;&lt;p&gt;图一占位&#xA;图二占位&lt;/p&gt;&#xA;&lt;h3&gt;迁移&lt;/h3&gt;&#xA;&lt;p&gt;在最新的 PC 端微信可以进行聊天记录的「迁移」，同时可以在 PC 端浏览合并后两台设备的聊天记录。这一更新某种程度上解决手机端微信占用太多内存的问题。&lt;/p&gt;&#xA;&lt;p&gt;如下图示：&lt;/p&gt;&#xA;&lt;p&gt;图一占位&#xA;图二占位&#xA;图三占位&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;特殊声明：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;本贴不讨论微信本身好坏&lt;/li&gt;&#xA;&lt;li&gt;这是本人的理解，可能很多人会觉得是常识。但我也在这里看到很多人没搞清楚，这是这个帖子的出现的原因&lt;/li&gt;&#xA;&lt;li&gt;不正确的地方可以指出来，一起讨论&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <description>&lt;p&gt;首先微信聊天记录完整版只存在于移动端的。也就是说如果你开了桌面端，离线后重新登录也不会完整同步全部新消息。&lt;/p&gt;&#xA;&lt;h3&gt;备份与恢复&lt;/h3&gt;&#xA;&lt;p&gt;你可以将移动端的聊天记录数据备份到电脑上，但是这只是数据，没法在电脑端查看的。你可以随时将这份数据恢复至移动端。&lt;/p&gt;&#xA;&lt;p&gt;如下图示：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;p1&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/bA48aEG.png&#34;/&gt;&#xA;&lt;img alt=&#34;p2&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/neZqvHX.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;迁移&lt;/h3&gt;&#xA;&lt;p&gt;在最新的 PC 端微信可以进行聊天记录的「迁移」，同时可以在 PC 端浏览合并后两台设备的聊天记录。这一更新某种程度上解决手机端微信占用太多内存的问题。&lt;/p&gt;&#xA;&lt;p&gt;如下图示：&lt;/p&gt;&#xA;&lt;p&gt;图一占位&#xA;图二占位&#xA;图三占位&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;特殊声明：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;本贴不讨论微信本身好坏&lt;/li&gt;&#xA;&lt;li&gt;这是本人的理解，可能很多人会觉得是常识。但我也在这里看到很多人没搞清楚，这是这个帖子的出现的原因&lt;/li&gt;&#xA;&lt;li&gt;不正确的地方可以指出来，一起讨论&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
       <author>stnhu</author>
       <pubDate>31 Aug 2022 09:03:11 +0000</pubDate>
     </item>
