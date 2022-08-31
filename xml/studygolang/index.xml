@@ -23,11 +23,6 @@
       <description>&lt;p&gt;&lt;strong&gt;开发环境&lt;/strong&gt;：ubuntu ,多用户使用同一开发环境，每个用户有自己的GOPATH，&#xA;&lt;strong&gt;问题&lt;/strong&gt;： 用户A 开发好go主程序与插件，可正常加载运行，发布。用户B 克隆用户A提交的插件代码，无修改，编译后，使用A编译过的主程序，无法加载，提示 plugin was built with a different version of package github.com/nats-io/nats.go/encoders/builtin&#xA;&lt;strong&gt;分析&lt;/strong&gt;： 主要原因是 GOPATH的实际路径不同导致&#xA;&lt;strong&gt;解决&lt;/strong&gt;：尝试多用户使用相同的 GOPATH，并设置目录SGID ，确保目录下每个成员都能读写，但实际有些文件其他用户确实没有权限。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/220831/da4be7c507746243acb9e78a4c4dcd6b.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>WGCLOUD可以监测防火墙吗?</title>
-      <link>https://studygolang.com/topics/15800#reply0</link>
-      <description>&lt;p&gt;可以监测&lt;/p&gt;&#xA;&#xA;&lt;p&gt;WGCLOUD监控平台的监测模块比较灵活，可以通过端口，PING的方式来监测防火墙的状态，并支持告警通知，比如邮件、钉钉、微信等告警方式&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如果防火墙支持SNMP协议，还可以监测防火墙的进出口流量统计信息&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>golang如何开发调用打印机和扫描仪</title>
       <link>https://studygolang.com/topics/15802#reply0</link>
       <description>&lt;p&gt;golang如何开发调用打印机和扫描仪，实现静态传送文件给打印机，打印，控制扫描仪扫描。请教大神指点&lt;/p&gt;&#xA;</description>
@@ -48,6 +43,11 @@
       <description>&lt;p&gt;CAP as the base of Cluster System.&#xA;Cnsistency: all node see the same data at the same time.&#xA;Availability: read and write always succeed.&#xA;P: the system continues to operate despite arbitrary message loss or failure of part of the system.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以上是CAP的概念。&#xA;场景与动作如下：&#xA;1） 注册中心的作用是作为一个“公共电话薄”作用，每个“worker”可以把“电话薄”在本地留存一份副本；&#xA;2） 每个“woker”上线（up）或下线（down）的动作，最好同步感知，以免因节点路由引发错误，导致更上一层做处理。&#xA;3） 多个注册中心中其一下线，不应当影响“worker”的执行，并且worker中保存了副本数据。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;基于以上动作，要保证业务间（处于上层）通讯被正确路由；C 很重要，用于保存实时数据。&#xA;基于以上动作，注册中心异常不应影响业务，P 很重要。&#xA;并且，worker注册下线的异常应由服务启动或关闭时自行重试选择节点。A 不是很重要。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;所以，注册中心应实现为 CP ；推荐使用 ETCD&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>WGCLOUD可以监测防火墙吗?</title>
+      <link>https://studygolang.com/topics/15800#reply0</link>
+      <description>&lt;p&gt;可以监测&lt;/p&gt;&#xA;&#xA;&lt;p&gt;WGCLOUD监控平台的监测模块比较灵活，可以通过端口，PING的方式来监测防火墙的状态，并支持告警通知，比如邮件、钉钉、微信等告警方式&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如果防火墙支持SNMP协议，还可以监测防火墙的进出口流量统计信息&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>Go语言使用goroutine及通道实现并发详解</title>
       <link>https://studygolang.com/resources/15541#reply0</link>
     </item>
@@ -64,10 +64,6 @@
       <title>继承或使用单域功能组件深度不应超过3层</title>
       <link>https://studygolang.com/topics/15808#reply0</link>
       <description>&lt;p&gt;否则维护成本将超过创建成本&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>2022，我们该如何搭建可观测模型来实现“故障”的快速治理？</title>
-      <link>https://studygolang.com/articles/35842#reply0</link>
     </item>
     <item>
       <title>前端小白躺平摆烂可以吗</title>
@@ -91,6 +87,10 @@
     <item>
       <title>golang 有刷网站pv uv的demo吗</title>
       <link>https://studygolang.com/topics/15796#reply0</link>
+    </item>
+    <item>
+      <title>2022，我们该如何搭建可观测模型来实现“故障”的快速治理？</title>
+      <link>https://studygolang.com/articles/35842#reply0</link>
     </item>
     <item>
       <title>YTask Go 语言异步任务框架  V3.0.0 发布</title>
