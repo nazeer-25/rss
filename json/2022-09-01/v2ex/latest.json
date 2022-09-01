@@ -4,6 +4,55 @@
   "Description": "",
   "Items": [
     {
+      "Title": "中秋了. 筒子们你们公司发什么? - 程序员",
+      "Link": "https://www.v2ex.com/t/877061",
+      "Description": "\u003cp\u003e我们公司发的连花清瘟, 吊的一批\u003c/p\u003e\n",
+      "Author": "siaronwang",
+      "PubDate": "2022-09-01T09:27:07Z"
+    },
+    {
+      "Title": "北京怎么开失业证明，领取失业金？ - 问与答",
+      "Link": "https://www.v2ex.com/t/877059",
+      "Description": "谁搞过，给个提示？",
+      "Author": "cantonadong",
+      "PubDate": "2022-09-01T09:25:24Z"
+    },
+    {
+      "Title": "[北京/上海/杭州/成都] 字节跳动 - 生活服务业务急聘 - 酷工作",
+      "Link": "https://www.v2ex.com/t/877058",
+      "Description": "\u003ch2\u003e业务简介\u003c/h2\u003e\n\u003cp\u003e旨在通过字节现有流量入口内打造面向本地生活服务的内容，通过视频或图文种草或达人带货模式引导用户线上完成购买线下消费。\u003c/p\u003e\n\u003ch2\u003e发展状况\u003c/h2\u003e\n\u003cp\u003e目前处在高速上升期，上半年 GMV220 亿，超出预期，正在快速扩张团队。机不可失，不要错过\u003c/p\u003e\n\u003ch2\u003e福利待遇\u003c/h2\u003e\n\u003cp\u003e极具竞争力的薪资、免费三餐、房补、健身房、体检、下午茶，应有尽有\u003c/p\u003e\n\u003ch2\u003e岗位及地点\u003c/h2\u003e\n\u003cp\u003e杭州、成都、上海、北京：服务端及客户端，中高级都有需求\u003c/p\u003e\n\u003cp\u003e联系邮箱 base64：Z2FyeS55dWFuLmpoQGdtYWlsLmNvbQ==\n可根据你需求发你详细 JD ，投递后可加微信全程服务面试进度～\u003c/p\u003e\n",
+      "Author": "elliotloststh",
+      "PubDate": "2022-09-01T09:25:05Z"
+    },
+    {
+      "Title": "基于 xbot 实现微信关键词自动回复 - 分享创造",
+      "Link": "https://www.v2ex.com/t/877057",
+      "Description": "\u003cp\u003e基于 xbot 实现微信关键词自动回复\u003c/p\u003e\n\u003ch2\u003e项目链接\u003c/h2\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/xbot-org/demo_keyword_reply\" rel=\"nofollow\"\u003ehttps://github.com/xbot-org/demo_keyword_reply\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e使用\u003c/h2\u003e\n\u003cp\u003e先配置好 xbot 的配置如下，并运行\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eCALLBACK_URL=http://127.0.0.1:5678\nSECRET=xxx\nPORT=5557\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eclone 代码\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003egit clone https://github.com/xbot-org/demo_keyword_reply.git\ncd demo_keyword_reply\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e运行此服务 \u003ccode\u003ephp -S localhost:5678\u003c/code\u003e\u003c/p\u003e\n\u003ch2\u003e效果图\u003c/h2\u003e\n\u003cp\u003e\u003cimg alt=\"1662022320_1_.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/09/01/3ejwHTLXsOQVlI2.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e代码\u003c/h2\u003e\n\u003cp\u003e代码很简单，这里贴一下\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-php\"\u003e\u0026lt;?php\n\n$jsonString = file_get_contents(\"php://input\");\n\n$msg = json_decode($jsonString, true);\n\nswitch ($msg['type']) {\n    case 'MT_RECV_TEXT_MSG':\n        if ($msg['data']['msg'] == 'ping') {\n            sendText($msg['data']['from_wxid'], 'pong');\n        } elseif ($msg['data']['msg'] == '123') {\n            sendText($msg['data']['from_wxid'], '456');\n        }\n}\n\necho '{}';\n\nfunction sendText($wxid, $content) {\n    post(json_encode([\n        'client_id' =\u0026gt; 1,\n        'is_sync' =\u0026gt; 1,\n        'data' =\u0026gt; [\n            'to_wxid' =\u0026gt; $wxid,\n            'content' =\u0026gt; $content,\n        ],\n        'type' =\u0026gt; 'MT_SEND_TEXTMSG',\n    ]));\n}\n\nfunction post($data) {\n    $opts = array('http' =\u0026gt;\n        array(\n            'method'  =\u0026gt; 'POST',\n            'header'  =\u0026gt; 'Content-Type: application/json',\n            'content' =\u0026gt; $data\n        )\n    );\n\n    $context  = stream_context_create($opts);\n\n    file_get_contents('http://127.0.0.1:5557', false, $context);\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003exbot 文档\u003c/h2\u003e\n\u003cp\u003e\u003ca href=\"https://www.apifox.cn/apidoc/shared-71b9855b-693c-48fc-858b-cde2c5afe5a8\" rel=\"nofollow\"\u003ehttps://www.apifox.cn/apidoc/shared-71b9855b-693c-48fc-858b-cde2c5afe5a8\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "HanSonJ",
+      "PubDate": "2022-09-01T09:22:23Z"
+    },
+    {
+      "Title": "[送码] Mac 远程锁 SimpleLock - Apple",
+      "Link": "https://www.v2ex.com/t/877056",
+      "Description": "\u003cp\u003e个人在公司上班的时候使用的是个人 Mac ，个人 Mac 上不可避免的就会存一些私人的信息了。公司毕竟还是公共场合，我自己也把安全问题看得比较重要，也许是反破解形成的惯性和习惯，所以每次离开 Mac 的时候都会动手把 Mac 屏幕锁上，保护信息的安全嘛。不知道是不是年纪大了的原因，有时候不在 Mac 旁边的时候回想不起屏幕有没有锁定，要跑回去看，这样就有恼火。经常这样同事也很难理解我的行为，不知道我在干嘛 :(\u003c/p\u003e\n\u003cp\u003e基于这个情况就开发了这个 SimpleLock, 一把 Mac 电脑的远程锁，就像 App 名字描述的那样，App 的核心功能很简单，就是查询 Mac 锁定状态和远程锁定。 欢迎需要的同学试用, 期望收到你们的反馈 :)\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://apps.apple.com/zh/app/simplelock/id1636013366\" rel=\"nofollow\"\u003eApp Store\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://simplelock.app/\" rel=\"nofollow\"\u003eSimple Lock\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e免费使用码，免费一年，期待大家体验.\u003c/p\u003e\n\u003cp\u003eJP69WJ3W9WJT\u003c/p\u003e\n\u003cp\u003e7AATW9FPRRAJ\u003c/p\u003e\n\u003cp\u003eLK6NK3T4RW7X\u003c/p\u003e\n\u003cp\u003eE773TF6W6JKY\u003c/p\u003e\n\u003cp\u003eKHP49FXJY4EJ\u003c/p\u003e\n\u003cp\u003eN7EA4RNJ33AP\u003c/p\u003e\n\u003cp\u003eKYNMAXKEMTL4\u003c/p\u003e\n\u003cp\u003eWP9N6L7K63WP\u003c/p\u003e\n\u003cp\u003eY44MNA3TAM9P\u003c/p\u003e\n\u003cp\u003eME7KFTNK7J4E\u003c/p\u003e\n\u003cp\u003eTP9WEE7AXFA3\u003c/p\u003e\n\u003cp\u003eMR7XL7NWJAKT\u003c/p\u003e\n\u003cp\u003eEF9KM6MWTPXW\u003c/p\u003e\n\u003cp\u003eMFAMWJX7FYPJ\u003c/p\u003e\n\u003cp\u003eYHPXX6WYP94Y\u003c/p\u003e\n\u003cp\u003eMPJHR4FAAKME\u003c/p\u003e\n\u003cp\u003eLLWHEM79RAH3\u003c/p\u003e\n\u003cp\u003e3N93NLFPK3JJ\u003c/p\u003e\n\u003cp\u003eFXJJLHL9AMN9\u003c/p\u003e\n\u003cp\u003eXYPPA9N3WRHE\u003c/p\u003e\n",
+      "Author": "inertiagrade",
+      "PubDate": "2022-09-01T09:20:50Z"
+    },
+    {
+      "Title": "降薪资 30%到央企，不知道以后时候会后悔 - 程序员",
+      "Link": "https://www.v2ex.com/t/877055",
+      "Description": "\u003cp\u003e而立之年，是在互联网继续打拼呢还是润到央企子公司，是个值得思考的问题\u003c/p\u003e\n",
+      "Author": "NullErro",
+      "PubDate": "2022-09-01T09:20:34Z"
+    },
+    {
+      "Title": "[广州 字节] 是否还在焦虑，我们还持续招前端 - 酷工作",
+      "Link": "https://www.v2ex.com/t/877054",
+      "Description": "\u003ch2\u003e我们业务\u003c/h2\u003e\n\u003cp\u003e我们是字节飞书人事部门，目前正迅速发展中，广招各路英才。\u003c/p\u003e\n\u003ch2\u003e简单的要求\u003c/h2\u003e\n\u003cp\u003e1 、负责各类效率工具与企业 SaaS 的前端设计与研发，主要形式有 Web 系统、小程序、H5 应用等，为海量用户提供优质的信息服务和极致体验；\u003c/p\u003e\n\u003cp\u003e2 、与产品经理、设计师、后端工程师一起，提升产品的用户体验，打造卓越的互联网产品；\u003c/p\u003e\n\u003cp\u003e3 、关注前端前沿技术发展，能够将新知识传递给团队，并且转化到潜在项目中。\u003c/p\u003e\n\u003ch2\u003e行动起来吧\u003c/h2\u003e\n\u003cp\u003e无论是否加入，只有感兴趣可以了解更多。v-x：debug-js\u003c/p\u003e\n\u003cp\u003e或直接内推： \u003ca href=\"https://job.toutiao.com/s/jEbqoom\" rel=\"nofollow\"\u003ehttps://job.toutiao.com/s/jEbqoom\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "foyo",
+      "PubDate": "2022-09-01T09:18:38Z"
+    },
+    {
       "Title": "王卡限定版的扣费来了 - 分享发现",
       "Link": "https://www.v2ex.com/t/877053",
       "Description": "\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/09/01/a6f99e643275e6b7.jpeg\"/\u003e\u003c/p\u003e\n",
