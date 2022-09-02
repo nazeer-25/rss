@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "mobx-state-tree 的 model 如何定义 Record 类型？ - React",
+      "Link": "https://www.v2ex.com/t/877320",
+      "Description": "\u003cp\u003e一直没有深入的用这个状态库，发现 types 下只有一些基础类型\u003c/p\u003e\n",
+      "Author": "liuzhaowei55",
+      "PubDate": "2022-09-02T10:24:25Z"
+    },
+    {
+      "Title": "各位大佬们，能不能推荐点适合上班吃的猪肉脯或者牛肉脯啊？ - 生活",
+      "Link": "https://www.v2ex.com/t/877319",
+      "Description": "如题，最好是散装的，方便带……\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e肚子饿了真难受，本来想买点抹茶类零食，但是太花了不知道买哪种好",
+      "Author": "neochen13",
+      "PubDate": "2022-09-02T10:24:19Z"
+    },
+    {
       "Title": "火绒要怎么定义规则保护文件夹，自定义的防护规则失效 - 问与答",
       "Link": "https://www.v2ex.com/t/877317",
       "Description": "\u003cp\u003e创建了一个火绒自定义防护规则，保护文件夹，但是未生效，folder-reader.exe 是自己用 go 写的，另外测试了保护单文件是可以的\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"截图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://urlshare.img.ink/2022/c9baa0e78c992.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e完整代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\"bufio\"\n\t\"fmt\"\n\t\"io/ioutil\"\n\t\"os\"\n\t\"os/signal\"\n\t\"runtime\"\n\t\"strings\"\n\t\"syscall\"\n)\n\n/**\n * 读入输入\n */\nfunc readPrint() (bool, string) {\n\tfmt.Println(\"input file path:\")\n\n\tinputReader := bufio.NewReader(os.Stdin)\n\tinput, err := inputReader.ReadString('\\n')\n\tif err != nil {\n\t\terrInfo := fmt.Sprintf(\"read input error: \\n%s\\n\", err.Error())\n\t\tfmt.Printf(errInfo)\n\t\treturn false, \"\"\n\t}\n\tinput = strings.ReplaceAll(input, \"\\r\", \"\")\n\tinput = strings.ReplaceAll(input, \"\\n\", \"\")\n\treturn true, input\n}\n\n/**\n * 读取文件\n */\nfunc fileRead(path string) {\n\texists, err := pathExists(path)\n\tif err != nil {\n\t\terrInfo := fmt.Sprintf(\"path check error: \\n%s\\n\", err.Error())\n\t\tfmt.Printf(errInfo)\n\t\treturn\n\t}\n\n\tif !exists {\n\t\terrInfo := fmt.Sprintf(\"path not exists: \\n%s\\n\", path)\n\t\tfmt.Printf(errInfo)\n\t\treturn\n\t}\n\n\tif !isFile(path) {\n\t\terrInfo := fmt.Sprintf(\"path is folder : \\n%s\\n\", path)\n\t\tfmt.Printf(errInfo)\n\t\treturn\n\t}\n\n\tfile, err := os.Open(path)\n\tif err != nil {\n\t\terrInfo := fmt.Sprintf(\"fild open error: \\n%s\\n\", err.Error())\n\t\tfmt.Printf(errInfo)\n\t\treturn\n\t}\n\n\tcontent, err := ioutil.ReadAll(file)\n\tif err != nil {\n\t\terrInfo := fmt.Sprintf(\"fild read error: \\n%s\\n\", err.Error())\n\t\tfmt.Printf(errInfo)\n\t\treturn\n\t}\n\toutInfo := fmt.Sprintf(\"fild content: \\n%s\\n\", content)\n\tfmt.Printf(outInfo)\n}\n\n/**\n * 判断所给路径文件 /文件夹是否存在\n */\nfunc pathExists(path string) (bool, error) {\n\t_, err := os.Stat(path)\n\tif err == nil {\n\t\treturn true, nil\n\t}\n\n\tif os.IsNotExist(err) {\n\t\treturn false, nil\n\t}\n\treturn false, err\n}\n\n/**\n * 判断所给路径是否为文件夹\n */\nfunc isDir(path string) bool {\n\ts, err := os.Stat(path)\n\tif err != nil {\n\t\treturn false\n\t}\n\treturn s.IsDir()\n}\n\n/**\n * 判断所给路径是否为文件\n */\nfunc isFile(path string) bool {\n\treturn !isDir(path)\n}\n\nfunc main() {\n\tsucceed, input := readPrint()\n\tif succeed {\n\t\tfileRead(input)\n\t}\n\n\tif runtime.GOOS == \"windows\" {\n\t\t//pause\n\t\tfmt.Println(\"system(pause)\")\n\t\tquit := make(chan os.Signal)\n\t\tsignal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)\n\t\tsig := \u0026lt;-quit\n\t\tfor {\n\t\t\tif sig.String() == \"interrupt\" {\n\t\t\t\tbreak\n\t\t\t}\n\t\t}\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -214,13 +228,6 @@
       "PubDate": "2022-09-02T08:09:33Z"
     },
     {
-      "Title": "[提问]现在去换汇怎么样？ - 投资",
-      "Link": "https://www.v2ex.com/t/877280",
-      "Description": "\u003cp\u003e手里有差不多 20w 现金，暂时用不上。\u003c/p\u003e\n\u003cp\u003e如果打算去换汇，人民币还会进一步贬值吗？\u003c/p\u003e\n",
-      "Author": "foufoufm",
-      "PubDate": "2022-09-02T08:06:09Z"
-    },
-    {
       "Title": "播客伙伴/嘉宾招募 - 程序员",
       "Link": "https://www.v2ex.com/t/877279",
       "Description": "\u003cp\u003e自己一直想做一个播客，但是在与一些选题层面没有很好的方向， 最近稍微不那么忙了，想找个 1~2 个合适的人，一起做录制播客  \u003c/p\u003e\n\u003cp\u003e播客方向：科技、互联网、技术硬核等等。\u003cbr/\u003e\n形式：您可以来当嘉宾，分享自己的行业或者有趣的事情；或者有 1~2 位同样爱好的当固定嘉宾。\u003c/p\u003e\n\u003cp\u003e我也不是什么大 V ，纯粹是爱好分享，同时满足自己的表达欲，如果你也是这样的人，同时希望您满足：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e对播客感兴趣  \u003c/li\u003e\n\u003cli\u003e对科技互联网感兴趣  \u003c/li\u003e\n\u003cli\u003e乐于分享  \u003c/li\u003e\n\u003cli\u003e是一个有意思的人\n5 ...\n有意向可以邮件简单介绍下，一起玩耍\npolandeme#gmail#com\u003c/li\u003e\n\u003c/ol\u003e\n",
@@ -282,6 +289,13 @@
       "Description": "\u003cp\u003e最新的 ios 和 iPad os 测试版系统在最新版的 iTunes （ win ）和 mac os 上均无法进行平刷或恢复出厂设置，提示要下载补丁包，但是一直下载不下来。有人能提供一个直接的下载链接吗，谢谢。\u003c/p\u003e\n",
       "Author": "dicbldicbl",
       "PubDate": "2022-09-02T07:24:16Z"
+    },
+    {
+      "Title": "[提问]现在去换汇怎么样？ - 投资",
+      "Link": "https://www.v2ex.com/t/877280",
+      "Description": "\u003cp\u003e手里有差不多 20w 现金，暂时用不上。\u003c/p\u003e\n\u003cp\u003e如果打算去换汇，人民币还会进一步贬值吗？\u003c/p\u003e\n",
+      "Author": "foufoufm",
+      "PubDate": "2022-09-02T08:06:09Z"
     },
     {
       "Title": "rime 输入法打不出失落。 - 问与答",
