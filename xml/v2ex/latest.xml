@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>tp5.1 队列报错解决 - PHP</title>
+      <link>https://www.v2ex.com/t/877310</link>
+      <description>&lt;p&gt;项目是 tp5.1&lt;/p&gt;&#xA;&lt;p&gt;队列报下边这个错误 &lt;/p&gt;&#xA;&lt;p&gt;Error while sending STMT_CLOSE packet. PID=10471&lt;/p&gt;&#xA;&lt;p&gt;网上搜索资料是断线重连的问题，但断线重连是设置的。&lt;/p&gt;&#xA;&lt;p&gt;引起这个问题的 sql 报错有下边这些&lt;/p&gt;&#xA;&lt;p&gt;PDO::prepare(): send of 93 bytes failed with errno=110 Connection timed out&lt;/p&gt;&#xA;&lt;p&gt;think\db\Connection::free(): send of 9 bytes failed with errno=110 Connection timed out&lt;/p&gt;&#xA;&lt;p&gt;所以想问下此类问题如何解决。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;      try {&#xA;            // 调试开始&#xA;            $this-&amp;gt;debug(true);&#xA;&#xA;            // 预处理&#xA;            $this-&amp;gt;PDOStatement = $this-&amp;gt;linkID-&amp;gt;prepare($sql);&#xA;&#xA;            // 是否为存储过程调用&#xA;            $procedure = in_array(strtolower(substr(trim($sql), 0, 4)), [&#39;call&#39;, &#39;exec&#39;]);&#xA;&#xA;            // 参数绑定&#xA;            if ($procedure) {&#xA;                $this-&amp;gt;bindParam($bind);&#xA;            } else {&#xA;                $this-&amp;gt;bindValue($bind);&#xA;            }&#xA;&#xA;            // 执行查询&#xA;            $this-&amp;gt;PDOStatement-&amp;gt;execute();&#xA;&#xA;            // 调试结束&#xA;            $this-&amp;gt;debug(false, &#39;&#39;, $master);&#xA;&#xA;            // 返回结果集&#xA;            return $this-&amp;gt;getResult($pdo, $procedure);&#xA;        } catch (\PDOException $e) {&#xA;            if ($this-&amp;gt;isBreak($e)) {&#xA;                return $this-&amp;gt;close()-&amp;gt;query($sql, $bind, $master, $pdo);&#xA;            }&#xA;&#xA;            throw new PDOException($e, $this-&amp;gt;config, $this-&amp;gt;getLastsql());&#xA;        } catch (\Throwable $e) {&#xA;            if ($this-&amp;gt;isBreak($e)) {&#xA;                return $this-&amp;gt;close()-&amp;gt;query($sql, $bind, $master, $pdo);&#xA;            }&#xA;&#xA;            throw $e;&#xA;        } catch (\Exception $e) {&#xA;            if ($this-&amp;gt;isBreak($e)) {&#xA;                return $this-&amp;gt;close()-&amp;gt;query($sql, $bind, $master, $pdo);&#xA;            }&#xA;&#xA;            throw $e;&#xA;        }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>awanganddong</author>
+      <pubDate>02 Sep 2022 09:42:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>整点 meme（梗图） - 程序员</title>
+      <link>https://www.v2ex.com/t/877309</link>
+      <description>code 相关：&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/a/bZdSn2A&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/a/bZdSn2A&lt;/a&gt;</description>
+      <author>ediron</author>
+      <pubDate>02 Sep 2022 09:42:26 +0000</pubDate>
+    </item>
+    <item>
       <title>使用 Canal 异步删除的缓存最终一致性方案 添加异步校验流程如何实现？ - Java</title>
       <link>https://www.v2ex.com/t/877308</link>
       <description>&lt;p&gt;最初的想法是 消费完 Canal 监听消息删除缓存，而后向 MQ 发送校验消息。&#xA;具体校验流程为： 查验 redis 是否操作存在该 key ， 如果没有不管， 如果有查数据库比对不一致则删除。&#xA;目前的问题是，如果写操作频繁情况下，校验消息会很多 ，这又导致查库操作增多了。仔细考虑了下这个想法貌似不是很好。请问有比较好的实现建议吗？&lt;/p&gt;&#xA;</description>

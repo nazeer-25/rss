@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "tp5.1 队列报错解决 - PHP",
+      "Link": "https://www.v2ex.com/t/877310",
+      "Description": "\u003cp\u003e项目是 tp5.1\u003c/p\u003e\n\u003cp\u003e队列报下边这个错误 \u003c/p\u003e\n\u003cp\u003eError while sending STMT_CLOSE packet. PID=10471\u003c/p\u003e\n\u003cp\u003e网上搜索资料是断线重连的问题，但断线重连是设置的。\u003c/p\u003e\n\u003cp\u003e引起这个问题的 sql 报错有下边这些\u003c/p\u003e\n\u003cp\u003ePDO::prepare(): send of 93 bytes failed with errno=110 Connection timed out\u003c/p\u003e\n\u003cp\u003ethink\\db\\Connection::free(): send of 9 bytes failed with errno=110 Connection timed out\u003c/p\u003e\n\u003cp\u003e所以想问下此类问题如何解决。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e      try {\n            // 调试开始\n            $this-\u0026gt;debug(true);\n\n            // 预处理\n            $this-\u0026gt;PDOStatement = $this-\u0026gt;linkID-\u0026gt;prepare($sql);\n\n            // 是否为存储过程调用\n            $procedure = in_array(strtolower(substr(trim($sql), 0, 4)), ['call', 'exec']);\n\n            // 参数绑定\n            if ($procedure) {\n                $this-\u0026gt;bindParam($bind);\n            } else {\n                $this-\u0026gt;bindValue($bind);\n            }\n\n            // 执行查询\n            $this-\u0026gt;PDOStatement-\u0026gt;execute();\n\n            // 调试结束\n            $this-\u0026gt;debug(false, '', $master);\n\n            // 返回结果集\n            return $this-\u0026gt;getResult($pdo, $procedure);\n        } catch (\\PDOException $e) {\n            if ($this-\u0026gt;isBreak($e)) {\n                return $this-\u0026gt;close()-\u0026gt;query($sql, $bind, $master, $pdo);\n            }\n\n            throw new PDOException($e, $this-\u0026gt;config, $this-\u0026gt;getLastsql());\n        } catch (\\Throwable $e) {\n            if ($this-\u0026gt;isBreak($e)) {\n                return $this-\u0026gt;close()-\u0026gt;query($sql, $bind, $master, $pdo);\n            }\n\n            throw $e;\n        } catch (\\Exception $e) {\n            if ($this-\u0026gt;isBreak($e)) {\n                return $this-\u0026gt;close()-\u0026gt;query($sql, $bind, $master, $pdo);\n            }\n\n            throw $e;\n        }\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "awanganddong",
+      "PubDate": "2022-09-02T09:42:55Z"
+    },
+    {
+      "Title": "整点 meme（梗图） - 程序员",
+      "Link": "https://www.v2ex.com/t/877309",
+      "Description": "code 相关：\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://imgur.com/a/bZdSn2A\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/a/bZdSn2A\u003c/a\u003e",
+      "Author": "ediron",
+      "PubDate": "2022-09-02T09:42:26Z"
+    },
+    {
       "Title": "使用 Canal 异步删除的缓存最终一致性方案 添加异步校验流程如何实现？ - Java",
       "Link": "https://www.v2ex.com/t/877308",
       "Description": "\u003cp\u003e最初的想法是 消费完 Canal 监听消息删除缓存，而后向 MQ 发送校验消息。\n具体校验流程为： 查验 redis 是否操作存在该 key ， 如果没有不管， 如果有查数据库比对不一致则删除。\n目前的问题是，如果写操作频繁情况下，校验消息会很多 ，这又导致查库操作增多了。仔细考虑了下这个想法貌似不是很好。请问有比较好的实现建议吗？\u003c/p\u003e\n",
