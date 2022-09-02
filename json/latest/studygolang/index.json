@@ -81,16 +81,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Golang LIb A Go language implementation of the Java Stream API.",
-      "Link": "https://studygolang.com/p/1125#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "golang如何开发调用打印机和扫描仪",
-      "Link": "https://studygolang.com/topics/15802#reply1",
-      "Description": "\u003cp\u003egolang如何开发调用打印机和扫描仪，实现静态传送文件给打印机，打印，控制扫描仪扫描。请教大神指点\u003c/p\u003e\n",
+      "Title": "Go1.19 如期发布了",
+      "Link": "https://studygolang.com/topics/15736#reply2",
+      "Description": "\u003cp\u003e在 Go1.18 发布 5 个月后，Go1.19 如期发布了。不过，它的大部分更改都在工具链、runtime 和库的实现中。与往常一样，该版本保持了 Go 1\u003ca href=\"https://go.dev/doc/go1compat\"\u003e的兼容性承诺\u003c/a\u003e。因此几乎所有 Go 程序都能像以前一样继续编译和运行。\u003c/p\u003e\n\n\u003cp\u003eGo 1.19 重要的变化有：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eGo 内存模型，详细参考官方文档：\u003ca href=\"https://go.dev/ref/mem\"\u003ehttps://go.dev/ref/mem\u003c/a\u003e。随着内存模型的更新，Go 1.19 在 sync/atomic 包引入了新的类型：types Bool, Int32, Int64, Uint32, Uint64, Uintptr 和 Pointer 等，这让原子值的使用更方便。\u003c/li\u003e\n\u003cli\u003e工具方面，文档格式增强。文档注释中添加了对链接、列表和更清晰标题的支持。详情见：\u003ca href=\"https://go.dev/doc/comment\"\u003ehttps://go.dev/doc/comment\u003c/a\u003e。\u003c/li\u003e\n\u003cli\u003eruntime 方面，最值得关注的变化就是增加了 runtime/debug.SetMemoryLimit，可以限制 Go 的内存使用。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e其他是一些库的小变化。\u003c/p\u003e\n\n\u003cp\u003e详细变化可以查看官方 Release Notes：\u003ca href=\"https://go.dev/doc/go1.19\"\u003ehttps://go.dev/doc/go1.19\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003eGo 语言中文网也为大家准备好了 Go1.19 的下载包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -109,6 +102,41 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "论“新轮子”与“规范”矛盾",
+      "Link": "https://studygolang.com/topics/15809#reply0",
+      "Description": "\u003cp\u003e业界常有“建议不重新造轮子”的说法；这种说法的依据是：大家都是技术工作者，自己的创造不可能比已有经过检验的现有产品好很多。\n重复造轮子的人也有自己的理由：1. 实践一种理论，并打通该理论的全部流程，本身就是一种学习。2. 开发和使用习惯的个人差异。\n究竟应不应该重复创造轮子呢？\n我的观点是这样的：1）我们应当关注“规范” 或 “约定”，先确定规范和约定，包括设计理念、侧重要解决的方面，其中的平衡和取舍。即：why。然后才是一个组件或类库的实现实例。此实例仅作为以上解决方案的实现论证，不排除有其他路径实现方法。\n2） 出于学习的目的或优化现有产品的某些点的实现，可以fork一遍，或替换算法；重新组织流程。\n以上两点，都是出于“管理”的视角，一方面实现全产业域的发展，一个是个体自我管理。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go slice 的append的用法细节",
+      "Link": "https://studygolang.com/topics/15806#reply0",
+      "Description": "\u003cp\u003e\u003cstrong\u003eappend的时候，如果slice容量足够，不需要扩容，则slice底层数组的值会变动。如果需要扩容，会形成新的数组指针给到slice，原来的数组值是不会变的。对于想要在函数调用过程中改变上层传入的slice里的值的写法要注意！！！\u003c/strong\u003e\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e容量足够\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc main() {\n\tline := \u0026quot;123456789abcdefghijklmnopqrstuvw\u0026quot; // len 32\n\tl := []byte(line)                          // 默认cap 32\n\taaa(l[27:30])\n\tlogger.Infof(\u0026quot;out : %v %v\u0026quot;, len(l), cap(l))\n\tlogger.Infof(\u0026quot;l %v\u0026quot;, string(l))\n}\n\nfunc aaa(line []byte) {\n\tlogger.Infof(\u0026quot;in 1: %v %v\u0026quot;, len(line), cap(line))\n\tlogger.Infof(\u0026quot;in line: %v\u0026quot;, string(line))\n\tline = append(line, []byte(\u0026quot;AAA\u0026quot;)...)\n\tlogger.Infof(\u0026quot;in 2: %v %v\u0026quot;, len(line), cap(line))\n\tlogger.Infof(\u0026quot;in line2: %v\u0026quot;, string(line))\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e2022-08-31 15:38:58  file=TestThings/main.go:111 level=info in 1: 3 5\n2022-08-31 15:38:58  file=TestThings/main.go:112 level=info in line: stu        \n2022-08-31 15:38:58  file=TestThings/main.go:114 level=info in 2: 5 5           \n2022-08-31 15:38:58  file=TestThings/main.go:115 level=info in line2: stuAA     \n2022-08-31 15:38:58  file=TestThings/main.go:100 level=info out : 32 32         \n2022-08-31 15:38:58  file=TestThings/main.go:101 level=info l 123456789abcdefghijklmnopqrstuAA \n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e\u003cstrong\u003e容量不够\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc main() {\n\tline := \u0026quot;123456789abcdefghijklmnopqrstuvw\u0026quot; // len 32\n\tl := []byte(line)                          // 默认cap 32\n\taaa(l[27:30])\n\tlogger.Infof(\u0026quot;out : %v %v\u0026quot;, len(l), cap(l))\n\tlogger.Infof(\u0026quot;l %v\u0026quot;, string(l))\n}\n\nfunc aaa(line []byte) {\n\tlogger.Infof(\u0026quot;in 1: %v %v\u0026quot;, len(line), cap(line))\n\tlogger.Infof(\u0026quot;in line: %v\u0026quot;, string(line))\n\tline = append(line, []byte(\u0026quot;AAA\u0026quot;)...)\n\tlogger.Infof(\u0026quot;in 2: %v %v\u0026quot;, len(line), cap(line))\n\tlogger.Infof(\u0026quot;in line2: %v\u0026quot;, string(line))\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e2022-08-31 16:00:35  file=TestThings/main.go:105 level=info in 1: 3 5\n2022-08-31 16:00:35  file=TestThings/main.go:106 level=info in line: stu        \n2022-08-31 16:00:35  file=TestThings/main.go:108 level=info in 2: 6 16          \n2022-08-31 16:00:35  file=TestThings/main.go:109 level=info in line2: stuAAA    \n2022-08-31 16:00:35  file=TestThings/main.go:100 level=info out : 32 32         \n2022-08-31 16:00:35  file=TestThings/main.go:101 level=info l 123456789abcdefghijklmnopqrstuvw \n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "2022年科学上网，搭梯子，上网最稳定，有售后指导的三款工具测评推荐",
+      "Link": "https://studygolang.com/topics/15804#reply0",
+      "Description": "\u003cp\u003e这是一份还算比较负责任的梯子推荐指南，现在市面上梯子工具品牌着实是太多了，很多人都看花了眼，在这么繁多的品牌当中，我们选梯子的要求其实除了速度之外，就只有一个标准，除了稳定，还是得稳定，有时候有售后真的很重要！\u003c/p\u003e\n\n\u003cp\u003e做测评也有三年多时间了，今天的这份梯子VPN推荐表单，都是我本人使用过3个月以上的梯子，最主要的是安全稳定，有售后。这是我们关注的重点。\u003c/p\u003e\n\n\u003cp\u003e废话不多说，直接进入主题。\u003c/p\u003e\n\n\u003cp\u003e一.值得推荐的梯子名单列表\u003c/p\u003e\n\n\u003cp\u003e1）、ChainVPN梯子 最稳售后最快\u003c/p\u003e\n\n\u003cp\u003eChainVPN梯子 ChainVPN官网 [\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e简介：ChainVPN梯子我已经翻来覆去推荐好几遍了，几乎在每一次推VPN的时候都会推荐它，这也是我自己平时经常使用的梯子之一。性价比可以说是最高的，目前ChainVPN存在时间已经有四年多了，这期间服务一直能做到快速稳定，在墙加高的特殊时期表现的尤其优秀。重点是技术售后很专业，回复特别快，这也是一款只需订单个套餐，在windows,mac,ios,Andriod等多平台都可以使用的梯子。\u003c/p\u003e\n\n\u003cp\u003e2）、Express VPN\u003c/p\u003e\n\n\u003cp\u003e简介：如果还不知道这款梯子的朋友，那我敢百分百确定他是一个新手。Express在业界的名气就等于是篮球界的耐克。用一句话概括起来就是除了贵也没什么别的缺点了。\u003c/p\u003e\n\n\u003cp\u003eExpress VPN的营销推广能力在业内是首屈一指的，基本大大小小和翻墙沾边的网站都有它的广告，可能也是广告费这一块儿的开销太大，导致了他定的价格非常高，有多高？三层楼那么高咯。\u003c/p\u003e\n\n\u003cp\u003e玩笑归玩笑，不过在使用体验上Express还是不错的，在全球多个国家拥有3000+的服务器是让我印象最深刻的一点，其线路使用速度和Westworld相差不大，特殊时期团队的反应速度也可以。\u003c/p\u003e\n\n\u003cp\u003e唯一诟病的是Express在中国的镜像网站因为某些原因导致大陆用户无法访问，所以如果大陆用户想要使用Express，那就必须先用别的梯子翻墙登录他们的官网才行，这导致了很大一部分用户的流失。\u003c/p\u003e\n\n\u003cp\u003e总结起来就一句话，如果你有钱，那就选择Express，它会让你体验到什么叫做尊贵！\u003c/p\u003e\n\n\u003ch3\u003e\u003cstrong\u003e3）、Nord VPN\u003c/strong\u003e\u003c/h3\u003e\n\n\u003cp\u003e简介：Nord的性价比在我看来还算是不错的，唯一的缺点就是它的客户端不是太稳定，使用速度上和前面两款没有太大的区别，但是不知道为什么，很多人更倾向于选择前面两款而不是Nord VPN。\u003c/p\u003e\n\n\u003cp\u003eNord的一大优点是它内置有恶意软件和广告的拦截器，也就是能在访问过程当中帮用户拦截恶意广告，这个功能在其他VPN中是不具备的，也算是一个独家优势。\u003c/p\u003e\n\n\u003cp\u003e其他的就和上面两款差不多的，好奇的朋友可以试一下。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "注册中心究竟应该实现CAP中的哪两点？",
+      "Link": "https://studygolang.com/topics/15803#reply0",
+      "Description": "\u003cp\u003eCAP as the base of Cluster System.\nCnsistency: all node see the same data at the same time.\nAvailability: read and write always succeed.\nP: the system continues to operate despite arbitrary message loss or failure of part of the system.\u003c/p\u003e\n\n\u003cp\u003e以上是CAP的概念。\n场景与动作如下：\n1） 注册中心的作用是作为一个“公共电话薄”作用，每个“worker”可以把“电话薄”在本地留存一份副本；\n2） 每个“woker”上线（up）或下线（down）的动作，最好同步感知，以免因节点路由引发错误，导致更上一层做处理。\n3） 多个注册中心中其一下线，不应当影响“worker”的执行，并且worker中保存了副本数据。\u003c/p\u003e\n\n\u003cp\u003e基于以上动作，要保证业务间（处于上层）通讯被正确路由；C 很重要，用于保存实时数据。\n基于以上动作，注册中心异常不应影响业务，P 很重要。\n并且，worker注册下线的异常应由服务启动或关闭时自行重试选择节点。A 不是很重要。\u003c/p\u003e\n\n\u003cp\u003e所以，注册中心应实现为 CP ；推荐使用 ETCD\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "golang如何开发调用打印机和扫描仪",
+      "Link": "https://studygolang.com/topics/15802#reply1",
+      "Description": "\u003cp\u003egolang如何开发调用打印机和扫描仪，实现静态传送文件给打印机，打印，控制扫描仪扫描。请教大神指点\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "优维低代码：Placeholders 占位符",
       "Link": "https://studygolang.com/articles/35845#reply0",
       "Description": "",
@@ -116,16 +144,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Go1.19 如期发布了",
-      "Link": "https://studygolang.com/topics/15736#reply1",
-      "Description": "\u003cp\u003e在 Go1.18 发布 5 个月后，Go1.19 如期发布了。不过，它的大部分更改都在工具链、runtime 和库的实现中。与往常一样，该版本保持了 Go 1\u003ca href=\"https://go.dev/doc/go1compat\"\u003e的兼容性承诺\u003c/a\u003e。因此几乎所有 Go 程序都能像以前一样继续编译和运行。\u003c/p\u003e\n\n\u003cp\u003eGo 1.19 重要的变化有：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eGo 内存模型，详细参考官方文档：\u003ca href=\"https://go.dev/ref/mem\"\u003ehttps://go.dev/ref/mem\u003c/a\u003e。随着内存模型的更新，Go 1.19 在 sync/atomic 包引入了新的类型：types Bool, Int32, Int64, Uint32, Uint64, Uintptr 和 Pointer 等，这让原子值的使用更方便。\u003c/li\u003e\n\u003cli\u003e工具方面，文档格式增强。文档注释中添加了对链接、列表和更清晰标题的支持。详情见：\u003ca href=\"https://go.dev/doc/comment\"\u003ehttps://go.dev/doc/comment\u003c/a\u003e。\u003c/li\u003e\n\u003cli\u003eruntime 方面，最值得关注的变化就是增加了 runtime/debug.SetMemoryLimit，可以限制 Go 的内存使用。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e其他是一些库的小变化。\u003c/p\u003e\n\n\u003cp\u003e详细变化可以查看官方 Release Notes：\u003ca href=\"https://go.dev/doc/go1.19\"\u003ehttps://go.dev/doc/go1.19\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003eGo 语言中文网也为大家准备好了 Go1.19 的下载包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "论“新轮子”与“规范”矛盾",
-      "Link": "https://studygolang.com/topics/15809#reply0",
-      "Description": "\u003cp\u003e业界常有“建议不重新造轮子”的说法；这种说法的依据是：大家都是技术工作者，自己的创造不可能比已有经过检验的现有产品好很多。\n重复造轮子的人也有自己的理由：1. 实践一种理论，并打通该理论的全部流程，本身就是一种学习。2. 开发和使用习惯的个人差异。\n究竟应不应该重复创造轮子呢？\n我的观点是这样的：1）我们应当关注“规范” 或 “约定”，先确定规范和约定，包括设计理念、侧重要解决的方面，其中的平衡和取舍。即：why。然后才是一个组件或类库的实现实例。此实例仅作为以上解决方案的实现论证，不排除有其他路径实现方法。\n2） 出于学习的目的或优化现有产品的某些点的实现，可以fork一遍，或替换算法；重新组织流程。\n以上两点，都是出于“管理”的视角，一方面实现全产业域的发展，一个是个体自我管理。\u003c/p\u003e\n",
+      "Title": "Golang LIb A Go language implementation of the Java Stream API.",
+      "Link": "https://studygolang.com/p/1125#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -151,13 +172,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go slice 的append的用法细节",
-      "Link": "https://studygolang.com/topics/15806#reply0",
-      "Description": "\u003cp\u003e\u003cstrong\u003eappend的时候，如果slice容量足够，不需要扩容，则slice底层数组的值会变动。如果需要扩容，会形成新的数组指针给到slice，原来的数组值是不会变的。对于想要在函数调用过程中改变上层传入的slice里的值的写法要注意！！！\u003c/strong\u003e\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e容量足够\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc main() {\n\tline := \u0026quot;123456789abcdefghijklmnopqrstuvw\u0026quot; // len 32\n\tl := []byte(line)                          // 默认cap 32\n\taaa(l[27:30])\n\tlogger.Infof(\u0026quot;out : %v %v\u0026quot;, len(l), cap(l))\n\tlogger.Infof(\u0026quot;l %v\u0026quot;, string(l))\n}\n\nfunc aaa(line []byte) {\n\tlogger.Infof(\u0026quot;in 1: %v %v\u0026quot;, len(line), cap(line))\n\tlogger.Infof(\u0026quot;in line: %v\u0026quot;, string(line))\n\tline = append(line, []byte(\u0026quot;AAA\u0026quot;)...)\n\tlogger.Infof(\u0026quot;in 2: %v %v\u0026quot;, len(line), cap(line))\n\tlogger.Infof(\u0026quot;in line2: %v\u0026quot;, string(line))\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e2022-08-31 15:38:58  file=TestThings/main.go:111 level=info in 1: 3 5\n2022-08-31 15:38:58  file=TestThings/main.go:112 level=info in line: stu        \n2022-08-31 15:38:58  file=TestThings/main.go:114 level=info in 2: 5 5           \n2022-08-31 15:38:58  file=TestThings/main.go:115 level=info in line2: stuAA     \n2022-08-31 15:38:58  file=TestThings/main.go:100 level=info out : 32 32         \n2022-08-31 15:38:58  file=TestThings/main.go:101 level=info l 123456789abcdefghijklmnopqrstuAA \n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e\u003cstrong\u003e容量不够\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc main() {\n\tline := \u0026quot;123456789abcdefghijklmnopqrstuvw\u0026quot; // len 32\n\tl := []byte(line)                          // 默认cap 32\n\taaa(l[27:30])\n\tlogger.Infof(\u0026quot;out : %v %v\u0026quot;, len(l), cap(l))\n\tlogger.Infof(\u0026quot;l %v\u0026quot;, string(l))\n}\n\nfunc aaa(line []byte) {\n\tlogger.Infof(\u0026quot;in 1: %v %v\u0026quot;, len(line), cap(line))\n\tlogger.Infof(\u0026quot;in line: %v\u0026quot;, string(line))\n\tline = append(line, []byte(\u0026quot;AAA\u0026quot;)...)\n\tlogger.Infof(\u0026quot;in 2: %v %v\u0026quot;, len(line), cap(line))\n\tlogger.Infof(\u0026quot;in line2: %v\u0026quot;, string(line))\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e2022-08-31 16:00:35  file=TestThings/main.go:105 level=info in 1: 3 5\n2022-08-31 16:00:35  file=TestThings/main.go:106 level=info in line: stu        \n2022-08-31 16:00:35  file=TestThings/main.go:108 level=info in 2: 6 16          \n2022-08-31 16:00:35  file=TestThings/main.go:109 level=info in line2: stuAAA    \n2022-08-31 16:00:35  file=TestThings/main.go:100 level=info out : 32 32         \n2022-08-31 16:00:35  file=TestThings/main.go:101 level=info l 123456789abcdefghijklmnopqrstuvw \n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "Go语言使用goroutine及通道实现并发详解",
       "Link": "https://studygolang.com/resources/15541#reply0",
       "Description": "",
@@ -165,23 +179,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "2022年科学上网，搭梯子，上网最稳定，有售后指导的三款工具测评推荐",
-      "Link": "https://studygolang.com/topics/15804#reply0",
-      "Description": "\u003cp\u003e这是一份还算比较负责任的梯子推荐指南，现在市面上梯子工具品牌着实是太多了，很多人都看花了眼，在这么繁多的品牌当中，我们选梯子的要求其实除了速度之外，就只有一个标准，除了稳定，还是得稳定，有时候有售后真的很重要！\u003c/p\u003e\n\n\u003cp\u003e做测评也有三年多时间了，今天的这份梯子VPN推荐表单，都是我本人使用过3个月以上的梯子，最主要的是安全稳定，有售后。这是我们关注的重点。\u003c/p\u003e\n\n\u003cp\u003e废话不多说，直接进入主题。\u003c/p\u003e\n\n\u003cp\u003e一.值得推荐的梯子名单列表\u003c/p\u003e\n\n\u003cp\u003e1）、ChainVPN梯子 最稳售后最快\u003c/p\u003e\n\n\u003cp\u003eChainVPN梯子 ChainVPN官网 [\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e简介：ChainVPN梯子我已经翻来覆去推荐好几遍了，几乎在每一次推VPN的时候都会推荐它，这也是我自己平时经常使用的梯子之一。性价比可以说是最高的，目前ChainVPN存在时间已经有四年多了，这期间服务一直能做到快速稳定，在墙加高的特殊时期表现的尤其优秀。重点是技术售后很专业，回复特别快，这也是一款只需订单个套餐，在windows,mac,ios,Andriod等多平台都可以使用的梯子。\u003c/p\u003e\n\n\u003cp\u003e2）、Express VPN\u003c/p\u003e\n\n\u003cp\u003e简介：如果还不知道这款梯子的朋友，那我敢百分百确定他是一个新手。Express在业界的名气就等于是篮球界的耐克。用一句话概括起来就是除了贵也没什么别的缺点了。\u003c/p\u003e\n\n\u003cp\u003eExpress VPN的营销推广能力在业内是首屈一指的，基本大大小小和翻墙沾边的网站都有它的广告，可能也是广告费这一块儿的开销太大，导致了他定的价格非常高，有多高？三层楼那么高咯。\u003c/p\u003e\n\n\u003cp\u003e玩笑归玩笑，不过在使用体验上Express还是不错的，在全球多个国家拥有3000+的服务器是让我印象最深刻的一点，其线路使用速度和Westworld相差不大，特殊时期团队的反应速度也可以。\u003c/p\u003e\n\n\u003cp\u003e唯一诟病的是Express在中国的镜像网站因为某些原因导致大陆用户无法访问，所以如果大陆用户想要使用Express，那就必须先用别的梯子翻墙登录他们的官网才行，这导致了很大一部分用户的流失。\u003c/p\u003e\n\n\u003cp\u003e总结起来就一句话，如果你有钱，那就选择Express，它会让你体验到什么叫做尊贵！\u003c/p\u003e\n\n\u003ch3\u003e\u003cstrong\u003e3）、Nord VPN\u003c/strong\u003e\u003c/h3\u003e\n\n\u003cp\u003e简介：Nord的性价比在我看来还算是不错的，唯一的缺点就是它的客户端不是太稳定，使用速度上和前面两款没有太大的区别，但是不知道为什么，很多人更倾向于选择前面两款而不是Nord VPN。\u003c/p\u003e\n\n\u003cp\u003eNord的一大优点是它内置有恶意软件和广告的拦截器，也就是能在访问过程当中帮用户拦截恶意广告，这个功能在其他VPN中是不具备的，也算是一个独家优势。\u003c/p\u003e\n\n\u003cp\u003e其他的就和上面两款差不多的，好奇的朋友可以试一下。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "注册中心究竟应该实现CAP中的哪两点？",
-      "Link": "https://studygolang.com/topics/15803#reply0",
-      "Description": "\u003cp\u003eCAP as the base of Cluster System.\nCnsistency: all node see the same data at the same time.\nAvailability: read and write always succeed.\nP: the system continues to operate despite arbitrary message loss or failure of part of the system.\u003c/p\u003e\n\n\u003cp\u003e以上是CAP的概念。\n场景与动作如下：\n1） 注册中心的作用是作为一个“公共电话薄”作用，每个“worker”可以把“电话薄”在本地留存一份副本；\n2） 每个“woker”上线（up）或下线（down）的动作，最好同步感知，以免因节点路由引发错误，导致更上一层做处理。\n3） 多个注册中心中其一下线，不应当影响“worker”的执行，并且worker中保存了副本数据。\u003c/p\u003e\n\n\u003cp\u003e基于以上动作，要保证业务间（处于上层）通讯被正确路由；C 很重要，用于保存实时数据。\n基于以上动作，注册中心异常不应影响业务，P 很重要。\n并且，worker注册下线的异常应由服务启动或关闭时自行重试选择节点。A 不是很重要。\u003c/p\u003e\n\n\u003cp\u003e所以，注册中心应实现为 CP ；推荐使用 ETCD\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "go-plugin go插件使用问题",
       "Link": "https://studygolang.com/topics/15801#reply0",
       "Description": "\u003cp\u003e\u003cstrong\u003e开发环境\u003c/strong\u003e：ubuntu ,多用户使用同一开发环境，每个用户有自己的GOPATH，\n\u003cstrong\u003e问题\u003c/strong\u003e： 用户A 开发好go主程序与插件，可正常加载运行，发布。用户B 克隆用户A提交的插件代码，无修改，编译后，使用A编译过的主程序，无法加载，提示 plugin was built with a different version of package github.com/nats-io/nats.go/encoders/builtin\n\u003cstrong\u003e分析\u003c/strong\u003e： 主要原因是 GOPATH的实际路径不同导致\n\u003cstrong\u003e解决\u003c/strong\u003e：尝试多用户使用相同的 GOPATH，并设置目录SGID ，确保目录下每个成员都能读写，但实际有些文件其他用户确实没有权限。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/220831/da4be7c507746243acb9e78a4c4dcd6b.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go1.19 如期发布了",
+      "Link": "https://studygolang.com/topics/15736#reply1",
+      "Description": "\u003cp\u003e在 Go1.18 发布 5 个月后，Go1.19 如期发布了。不过，它的大部分更改都在工具链、runtime 和库的实现中。与往常一样，该版本保持了 Go 1\u003ca href=\"https://go.dev/doc/go1compat\"\u003e的兼容性承诺\u003c/a\u003e。因此几乎所有 Go 程序都能像以前一样继续编译和运行。\u003c/p\u003e\n\n\u003cp\u003eGo 1.19 重要的变化有：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eGo 内存模型，详细参考官方文档：\u003ca href=\"https://go.dev/ref/mem\"\u003ehttps://go.dev/ref/mem\u003c/a\u003e。随着内存模型的更新，Go 1.19 在 sync/atomic 包引入了新的类型：types Bool, Int32, Int64, Uint32, Uint64, Uintptr 和 Pointer 等，这让原子值的使用更方便。\u003c/li\u003e\n\u003cli\u003e工具方面，文档格式增强。文档注释中添加了对链接、列表和更清晰标题的支持。详情见：\u003ca href=\"https://go.dev/doc/comment\"\u003ehttps://go.dev/doc/comment\u003c/a\u003e。\u003c/li\u003e\n\u003cli\u003eruntime 方面，最值得关注的变化就是增加了 runtime/debug.SetMemoryLimit，可以限制 Go 的内存使用。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e其他是一些库的小变化。\u003c/p\u003e\n\n\u003cp\u003e详细变化可以查看官方 Release Notes：\u003ca href=\"https://go.dev/doc/go1.19\"\u003ehttps://go.dev/doc/go1.19\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003eGo 语言中文网也为大家准备好了 Go1.19 的下载包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
