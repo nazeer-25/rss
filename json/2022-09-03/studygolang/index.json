@@ -68,7 +68,7 @@
     },
     {
       "Title": "9.9元/年 撸1台 服务器，自用搭建系统 学习golang 正好",
-      "Link": "https://studygolang.com/articles/35846#reply1",
+      "Link": "https://studygolang.com/articles/35846#reply2",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -175,6 +175,13 @@
       "Title": "为什么这段代码会产生DATA RACE呢？",
       "Link": "https://studygolang.com/topics/14518#reply2",
       "Description": "\u003cp\u003e为什么这段代码会产生DATA RACE呢？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// main.go\npackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;log\u0026quot;\n\t\u0026quot;sync\u0026quot;\n\t\u0026quot;time\u0026quot;\n)\n\ntype runner struct {\n\tmutableCh chan func()\n\tclose     chan struct{}\n}\n\nvar pool = \u0026amp;sync.Pool{\n\tNew: func() interface{} {\n\t\treturn new(runner)\n\t},\n}\n\nfunc newRunner() *runner {\n\tr := pool.Get().(*runner)\n\tr.mutableCh = make(chan func())\n\tr.close = make(chan struct{})\n\treturn r\n}\n\nfunc (r *runner) send(fn func()) error {\n\twait := make(chan struct{})\n\n\tvar err error\n\tr.mutableCh \u0026lt;- func() {\n\t\tdefer func() {\n\t\t\tif e := recover(); e != nil {\n\t\t\t\tlog.Printf(\u0026quot;%s\u0026quot;, e)\n\t\t\t\terr = fmt.Errorf(\u0026quot;error: %s\u0026quot;, e)\n\t\t\t\tclose(wait)\n\t\t\t}\n\t\t}()\n\n\t\tfn()\n\t\tclose(wait)\n\t}\n\n\t\u0026lt;-wait\n\treturn err\n}\n\nfunc (r *runner) start() {\n\tgo func() {\n\t\tfor {\n\t\t\tselect {\n\t\t\tcase fn := \u0026lt;-r.mutableCh:\n\t\t\t\tfn()\n\t\t\tcase \u0026lt;-r.close:\n\t\t\t\treturn\n\t\t\t}\n\t\t}\n\t}()\n}\n\nfunc (r *runner) stop() {\n\tclose(r.close)\n}\n\nfunc releaserunner(s *runner) {\n\ts.mutableCh = nil\n\ts.close = nil\n\tpool.Put(s)\n}\n\nfunc main() {\n\tr := newRunner()\n\tdefer releaserunner(r)\n\tr.start()\n\t// err1 := r.send(func() {\n\t// \tfmt.Println(\u0026quot;send---\u0026quot;)\n\t// })\n\t// fmt.Println(err1)\n\n\tr.stop()\n\ttime.Sleep(time.Second * 1)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e执行 go run -race main.go\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode\u003e==================\nWARNING: DATA RACE\nWrite at 0x00c00011a220 by main goroutine:\n  main.releaserunner()\n      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:71 +0x3e\n  main.main()\n      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:87 +0x1b0\n\nPrevious read at 0x00c00011a220 by goroutine 7:\n  main.(*runner).start.func1()\n      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:53 +0x64\n\nGoroutine 7 (finished) created at:\n  main.(*runner).start()\n      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:50 +0x4c\n  main.main()\n      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:79 +0x17e\n==================\n==================\nWARNING: DATA RACE\nWrite at 0x00c00011a228 by main goroutine:\n  main.releaserunner()\n      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:72 +0x69\n  main.main()\n      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:87 +0x1b0\n\nPrevious read at 0x00c00011a228 by goroutine 7:\n  main.(*runner).start.func1()\n      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:55 +0x8a\n\nGoroutine 7 (finished) created at:\n  main.(*runner).start()\n      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:50 +0x4c\n  main.main()\n      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:79 +0x17e\n==================\nFound 2 data race(s)\nexit status 66\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "9.9元/年 撸1台 服务器，自用搭建系统 学习golang 正好",
+      "Link": "https://studygolang.com/articles/35846#reply1",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
