@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "macos 怎么快速桌面切换？ - Apple",
+      "Link": "https://www.v2ex.com/t/877441",
+      "Description": "\u003cp\u003e使用鼠标+键盘的情况下，目前知道的有\nctrl+数字\nctrl+左右方向键\u003c/p\u003e\n\u003cp\u003e但都需要右手从鼠标上下来，鼠标上的额外的前进后退键不想变更用途，有使用键盘+鼠标滚轮切换的方案吗？\n比如按住 alt+向上滚轮 or 向下滚轮实现切换\u003c/p\u003e\n",
+      "Author": "klamo",
+      "PubDate": "2022-09-03T05:35:23Z"
+    },
+    {
+      "Title": "golang 日志如何打印带指针的结构体 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/877438",
+      "Description": "\u003cpre\u003e\u003ccode\u003epackage main\nimport (\n\t\"fmt\"\n)\ntype Student struct{\n\tStudentName *string\n}\ntype Teacher struct {\n\tTeacherName *string\n\tStudent1 Student\n\tStudent2 *Student\n}\n\nfunc main() {    \n\tstudentName := \"zhangsan\"\n\tteacherName := \"teacher\"\n\tstudent := Student{\n\t\tStudentName:\u0026amp;studentName,\n\t}\t\n\tteacher := Teacher {\n\t\tTeacherName : \u0026amp;teacherName,\n\t\tStudent1: student,\n\t\tStudent2: \u0026amp;student,\n\t}\n\tfmt.Printf(\"%v\\n\",teacher)\t\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如上述代码会打印如下输出\n\u003ccode\u003e{0xc0000a0220 {0xc0000a0210} 0xc0000b6018}\u003c/code\u003e，这种东西打到日志里面一点用都没有，然后测试同学来问我这里是不是加密了，搞得我很尴尬\u003c/p\u003e\n\u003cp\u003e查询到网上的方法是，为指针添加 String 方法，如\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efunc (s *Student) String() string{\n\treturn fmt.Sprintf(\"{[CustomStudent]name:%s}\",*s.StudentName)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是仍然输出存在问题 \u003ccode\u003e{0xc000096220 {0xc000096210} {[CustomStudent]name:zhangsan}}\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e改为为结构体本身添加 String 方法 ok\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efunc (s Student) String() string{\n\treturn fmt.Sprintf(\"{[CustomStudent]name:%s}\",*s.StudentName)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e输出 \u003ccode\u003e{0xc000010260 {[CustomStudent]name:zhangsan} {[CustomStudent]name:zhangsan}}\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e但是很明显，要为每个结构体手动添加 String 方法还是比较繁琐且枯燥的。而且我也不想改项目组里以前的代码，虽然加个 String 方法没啥太大风险。\u003c/p\u003e\n\u003cp\u003e之前做 java 虽然也是每个类都有 string 方法，但好歹是可以自动生成的，golang 里面打印这种日志大家有什么好方法吗？\u003c/p\u003e\n",
+      "Author": "trivisa",
+      "PubDate": "2022-09-03T05:25:41Z"
+    },
+    {
+      "Title": "打算洗牙,然后问了街边的牙科诊所洗牙只要 100 左右,医院都要 350 左右,有朋友知道有什么差异吗?为啥价格差了几倍 - 问与答",
+      "Link": "https://www.v2ex.com/t/877437",
+      "Description": "",
+      "Author": "a33291",
+      "PubDate": "2022-09-03T05:24:33Z"
+    },
+    {
+      "Title": "自建 headscale 的问题 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/877436",
+      "Description": "\u003cp\u003ehk 的一台服务器上建了 headscale\n在公司用物联网的随身 wifi ，移动物联卡\n家里电信千兆\n连完之后 ping 了一下延迟特别高，400ms 以上\nrdp 没法用\n有啥办法么……\u003c/p\u003e\n",
+      "Author": "shakukansp",
+      "PubDate": "2022-09-03T05:22:34Z"
+    },
+    {
       "Title": "C++看开源代码有什么好方法吗？ - 程序员",
       "Link": "https://www.v2ex.com/t/877435",
       "Description": "现在 C++项目一般是用 cmake 构建，include, source 文件夹分离，这样的话调试很方便。但我想仅阅读原代码，由于头文件路径问题，vscode 自带的“跳转到函数实现”不能用",

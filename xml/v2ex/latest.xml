@@ -4,6 +4,33 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>macos 怎么快速桌面切换？ - Apple</title>
+      <link>https://www.v2ex.com/t/877441</link>
+      <description>&lt;p&gt;使用鼠标+键盘的情况下，目前知道的有&#xA;ctrl+数字&#xA;ctrl+左右方向键&lt;/p&gt;&#xA;&lt;p&gt;但都需要右手从鼠标上下来，鼠标上的额外的前进后退键不想变更用途，有使用键盘+鼠标滚轮切换的方案吗？&#xA;比如按住 alt+向上滚轮 or 向下滚轮实现切换&lt;/p&gt;&#xA;</description>
+      <author>klamo</author>
+      <pubDate>03 Sep 2022 05:35:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>golang 日志如何打印带指针的结构体 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/877438</link>
+      <description>&lt;pre&gt;&lt;code&gt;package main&#xA;import (&#xA;&#x9;&#34;fmt&#34;&#xA;)&#xA;type Student struct{&#xA;&#x9;StudentName *string&#xA;}&#xA;type Teacher struct {&#xA;&#x9;TeacherName *string&#xA;&#x9;Student1 Student&#xA;&#x9;Student2 *Student&#xA;}&#xA;&#xA;func main() {    &#xA;&#x9;studentName := &#34;zhangsan&#34;&#xA;&#x9;teacherName := &#34;teacher&#34;&#xA;&#x9;student := Student{&#xA;&#x9;&#x9;StudentName:&amp;amp;studentName,&#xA;&#x9;}&#x9;&#xA;&#x9;teacher := Teacher {&#xA;&#x9;&#x9;TeacherName : &amp;amp;teacherName,&#xA;&#x9;&#x9;Student1: student,&#xA;&#x9;&#x9;Student2: &amp;amp;student,&#xA;&#x9;}&#xA;&#x9;fmt.Printf(&#34;%v\n&#34;,teacher)&#x9;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如上述代码会打印如下输出&#xA;&lt;code&gt;{0xc0000a0220 {0xc0000a0210} 0xc0000b6018}&lt;/code&gt;，这种东西打到日志里面一点用都没有，然后测试同学来问我这里是不是加密了，搞得我很尴尬&lt;/p&gt;&#xA;&lt;p&gt;查询到网上的方法是，为指针添加 String 方法，如&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;func (s *Student) String() string{&#xA;&#x9;return fmt.Sprintf(&#34;{[CustomStudent]name:%s}&#34;,*s.StudentName)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是仍然输出存在问题 &lt;code&gt;{0xc000096220 {0xc000096210} {[CustomStudent]name:zhangsan}}&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;改为为结构体本身添加 String 方法 ok&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;func (s Student) String() string{&#xA;&#x9;return fmt.Sprintf(&#34;{[CustomStudent]name:%s}&#34;,*s.StudentName)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;输出 &lt;code&gt;{0xc000010260 {[CustomStudent]name:zhangsan} {[CustomStudent]name:zhangsan}}&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;但是很明显，要为每个结构体手动添加 String 方法还是比较繁琐且枯燥的。而且我也不想改项目组里以前的代码，虽然加个 String 方法没啥太大风险。&lt;/p&gt;&#xA;&lt;p&gt;之前做 java 虽然也是每个类都有 string 方法，但好歹是可以自动生成的，golang 里面打印这种日志大家有什么好方法吗？&lt;/p&gt;&#xA;</description>
+      <author>trivisa</author>
+      <pubDate>03 Sep 2022 05:25:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>打算洗牙,然后问了街边的牙科诊所洗牙只要 100 左右,医院都要 350 左右,有朋友知道有什么差异吗?为啥价格差了几倍 - 问与答</title>
+      <link>https://www.v2ex.com/t/877437</link>
+      <author>a33291</author>
+      <pubDate>03 Sep 2022 05:24:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>自建 headscale 的问题 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/877436</link>
+      <description>&lt;p&gt;hk 的一台服务器上建了 headscale&#xA;在公司用物联网的随身 wifi ，移动物联卡&#xA;家里电信千兆&#xA;连完之后 ping 了一下延迟特别高，400ms 以上&#xA;rdp 没法用&#xA;有啥办法么……&lt;/p&gt;&#xA;</description>
+      <author>shakukansp</author>
+      <pubDate>03 Sep 2022 05:22:34 +0000</pubDate>
+    </item>
+    <item>
       <title>C++看开源代码有什么好方法吗？ - 程序员</title>
       <link>https://www.v2ex.com/t/877435</link>
       <description>现在 C++项目一般是用 cmake 构建，include, source 文件夹分离，这样的话调试很方便。但我想仅阅读原代码，由于头文件路径问题，vscode 自带的“跳转到函数实现”不能用</description>
