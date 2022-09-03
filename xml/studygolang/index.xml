@@ -46,6 +46,10 @@
       <link>https://studygolang.com/p/1126#reply0</link>
     </item>
     <item>
+      <title>9.9元/年 撸1台 服务器，自用搭建系统 学习golang 正好</title>
+      <link>https://studygolang.com/articles/35846#reply1</link>
+    </item>
+    <item>
       <title>自己封装tcp包嫌麻烦 ，有什么tcp框架推荐吗？</title>
       <link>https://studygolang.com/topics/15810#reply5</link>
       <description>&lt;p&gt;如题，自己只是 个业余搞golang 的。觉得tcp封包麻烦 ，想用框架管理连接, 心跳包 处理粘包等,&#xA;各位 大佬有什么框架推荐吗？&lt;/p&gt;&#xA;</description>
@@ -54,10 +58,6 @@
       <title>Go1.19 如期发布了</title>
       <link>https://studygolang.com/topics/15736#reply2</link>
       <description>&lt;p&gt;在 Go1.18 发布 5 个月后，Go1.19 如期发布了。不过，它的大部分更改都在工具链、runtime 和库的实现中。与往常一样，该版本保持了 Go 1&lt;a href=&#34;https://go.dev/doc/go1compat&#34;&gt;的兼容性承诺&lt;/a&gt;。因此几乎所有 Go 程序都能像以前一样继续编译和运行。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Go 1.19 重要的变化有：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Go 内存模型，详细参考官方文档：&lt;a href=&#34;https://go.dev/ref/mem&#34;&gt;https://go.dev/ref/mem&lt;/a&gt;。随着内存模型的更新，Go 1.19 在 sync/atomic 包引入了新的类型：types Bool, Int32, Int64, Uint32, Uint64, Uintptr 和 Pointer 等，这让原子值的使用更方便。&lt;/li&gt;&#xA;&lt;li&gt;工具方面，文档格式增强。文档注释中添加了对链接、列表和更清晰标题的支持。详情见：&lt;a href=&#34;https://go.dev/doc/comment&#34;&gt;https://go.dev/doc/comment&lt;/a&gt;。&lt;/li&gt;&#xA;&lt;li&gt;runtime 方面，最值得关注的变化就是增加了 runtime/debug.SetMemoryLimit，可以限制 Go 的内存使用。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;其他是一些库的小变化。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;详细变化可以查看官方 Release Notes：&lt;a href=&#34;https://go.dev/doc/go1.19&#34;&gt;https://go.dev/doc/go1.19&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Go 语言中文网也为大家准备好了 Go1.19 的下载包：&lt;a href=&#34;https://studygolang.com/dl&#34;&gt;https://studygolang.com/dl&lt;/a&gt;。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>9.9元/年 撸1台 服务器，自用搭建系统 学习golang 正好</title>
-      <link>https://studygolang.com/articles/35846#reply0</link>
     </item>
     <item>
       <title>学习周刊-总第69期-2021年个人博主们的年终总结</title>
@@ -119,6 +119,10 @@
       <title>为什么这段代码会产生DATA RACE呢？</title>
       <link>https://studygolang.com/topics/14518#reply2</link>
       <description>&lt;p&gt;为什么这段代码会产生DATA RACE呢？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// main.go&#xA;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;log&amp;quot;&#xA;&#x9;&amp;quot;sync&amp;quot;&#xA;&#x9;&amp;quot;time&amp;quot;&#xA;)&#xA;&#xA;type runner struct {&#xA;&#x9;mutableCh chan func()&#xA;&#x9;close     chan struct{}&#xA;}&#xA;&#xA;var pool = &amp;amp;sync.Pool{&#xA;&#x9;New: func() interface{} {&#xA;&#x9;&#x9;return new(runner)&#xA;&#x9;},&#xA;}&#xA;&#xA;func newRunner() *runner {&#xA;&#x9;r := pool.Get().(*runner)&#xA;&#x9;r.mutableCh = make(chan func())&#xA;&#x9;r.close = make(chan struct{})&#xA;&#x9;return r&#xA;}&#xA;&#xA;func (r *runner) send(fn func()) error {&#xA;&#x9;wait := make(chan struct{})&#xA;&#xA;&#x9;var err error&#xA;&#x9;r.mutableCh &amp;lt;- func() {&#xA;&#x9;&#x9;defer func() {&#xA;&#x9;&#x9;&#x9;if e := recover(); e != nil {&#xA;&#x9;&#x9;&#x9;&#x9;log.Printf(&amp;quot;%s&amp;quot;, e)&#xA;&#x9;&#x9;&#x9;&#x9;err = fmt.Errorf(&amp;quot;error: %s&amp;quot;, e)&#xA;&#x9;&#x9;&#x9;&#x9;close(wait)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}()&#xA;&#xA;&#x9;&#x9;fn()&#xA;&#x9;&#x9;close(wait)&#xA;&#x9;}&#xA;&#xA;&#x9;&amp;lt;-wait&#xA;&#x9;return err&#xA;}&#xA;&#xA;func (r *runner) start() {&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for {&#xA;&#x9;&#x9;&#x9;select {&#xA;&#x9;&#x9;&#x9;case fn := &amp;lt;-r.mutableCh:&#xA;&#x9;&#x9;&#x9;&#x9;fn()&#xA;&#x9;&#x9;&#x9;case &amp;lt;-r.close:&#xA;&#x9;&#x9;&#x9;&#x9;return&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}()&#xA;}&#xA;&#xA;func (r *runner) stop() {&#xA;&#x9;close(r.close)&#xA;}&#xA;&#xA;func releaserunner(s *runner) {&#xA;&#x9;s.mutableCh = nil&#xA;&#x9;s.close = nil&#xA;&#x9;pool.Put(s)&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;r := newRunner()&#xA;&#x9;defer releaserunner(r)&#xA;&#x9;r.start()&#xA;&#x9;// err1 := r.send(func() {&#xA;&#x9;// &#x9;fmt.Println(&amp;quot;send---&amp;quot;)&#xA;&#x9;// })&#xA;&#x9;// fmt.Println(err1)&#xA;&#xA;&#x9;r.stop()&#xA;&#x9;time.Sleep(time.Second * 1)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;执行 go run -race main.go&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;==================&#xA;WARNING: DATA RACE&#xA;Write at 0x00c00011a220 by main goroutine:&#xA;  main.releaserunner()&#xA;      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:71 +0x3e&#xA;  main.main()&#xA;      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:87 +0x1b0&#xA;&#xA;Previous read at 0x00c00011a220 by goroutine 7:&#xA;  main.(*runner).start.func1()&#xA;      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:53 +0x64&#xA;&#xA;Goroutine 7 (finished) created at:&#xA;  main.(*runner).start()&#xA;      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:50 +0x4c&#xA;  main.main()&#xA;      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:79 +0x17e&#xA;==================&#xA;==================&#xA;WARNING: DATA RACE&#xA;Write at 0x00c00011a228 by main goroutine:&#xA;  main.releaserunner()&#xA;      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:72 +0x69&#xA;  main.main()&#xA;      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:87 +0x1b0&#xA;&#xA;Previous read at 0x00c00011a228 by goroutine 7:&#xA;  main.(*runner).start.func1()&#xA;      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:55 +0x8a&#xA;&#xA;Goroutine 7 (finished) created at:&#xA;  main.(*runner).start()&#xA;      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:50 +0x4c&#xA;  main.main()&#xA;      /home/users/zhangming12/gopath/src/icode.baidu.com/baidu/ps-se-go/exgraph/test.go:79 +0x17e&#xA;==================&#xA;Found 2 data race(s)&#xA;exit status 66&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>9.9元/年 撸1台 服务器，自用搭建系统 学习golang 正好</title>
+      <link>https://studygolang.com/articles/35846#reply0</link>
     </item>
     <item>
       <title>自己封装tcp包嫌麻烦 ，有什么tcp框架推荐吗？</title>
