@@ -6,7 +6,7 @@
     {
       "Title": "增强 Spring @Scheduled 注解，支持分布式定时任务 - 分享创造",
       "Link": "https://www.v2ex.com/t/877658",
-      "Description": "微服务项目中，@Scheduled 在有多个实例的情况下无法使用。引入 xxl job 等又比较重，需要耗费一定的时间，如果项目对定时任务的需求比较简单，完全划不来。所以对 @\u003ca target=\"_blank\" href=\"/member/Scheduled\" rel=\"nofollow noopener\"\u003eScheduled\u003c/a\u003e 进行了增强，使其支持分布式的定时任务。\u003cbr /\u003eSpring 的 @\u003ca target=\"_blank\" href=\"/member/Scheduled\" rel=\"nofollow noopener\"\u003eScheduled\u003c/a\u003e",
+      "Description": "微服务项目中，@Scheduled 在有多个实例的情况下无法使用。\u003cbr /\u003e引入 xxl job 等又比较重，需要耗费一定的时间，如果项目对定时任务的需求比较简单，完全划不来。\u003cbr /\u003e所以对 @\u003ca target=\"_blank\" href=\"/member/Scheduled\" rel=\"nofollow noopener\"\u003eScheduled\u003c/a\u003e 进行了增强，使其支持分布式的定时任务。\u003cbr /\u003e原理如下：\u003cbr /\u003eSpring 的 @\u003ca target=\"_blank\" href=\"/member/Scheduled\" rel=\"nofollow noopener\"\u003eScheduled\u003c/a\u003e 使用 cron 的情况下，是按照周期执行的，也就是根据表达式计算的下次执行的时间是固定的。 使用 CronSequenceGenerator 可以计算出下次执行时间，所以就可以依据这个时间进行加锁，防止定时任务的重复执行，即在一个周期内只有一个定时任务会被执行，同时也不影响下个周期的定时任务执行。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e项目地址： \u003ca target=\"_blank\" href=\"https://github.com/gaoice/distributed-scheduling-spring-boot-starter\" rel=\"nofollow noopener\"\u003ehttps://github.com/gaoice/distributed-scheduling-spring-boot-starter\u003c/a\u003e",
       "Author": "gaobing",
       "PubDate": "2022-09-04T11:50:15Z"
     },
