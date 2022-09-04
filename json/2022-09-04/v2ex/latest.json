@@ -4,9 +4,16 @@
   "Description": "",
   "Items": [
     {
+      "Title": "双系统启动问题 - Linux",
+      "Link": "https://www.v2ex.com/t/877659",
+      "Description": "\u003cp\u003e本人在一台 nuc 上安装了 ubuntu 和 windows 双系统，windows 安装在一块 512g 的 m.2 硬盘上，ubuntu 安装在一块 1t 的 sata 硬盘上。\n现在遇到的问题就是，ubuntu 重启正常，也可以进入 grub 调整要启动哪个系统。但是 windows 重启时总是报错：\u003cem\u003e\u003cstrong\u003eBIOS has detected unsuccessful POST attempts. Possible causes include recent changes to BIOS, Performance Options, or recent hardware changes.\u003c/strong\u003e\u003c/em\u003e\nIntel 官网的解释是外部 USB 驱动器在启动过程连接到 NUC 时，可能会发生这种情况，官方建议在启动时，断开所有外部 USB 驱动器的连接，但是我照做了，仍然没有效果。\u003c/p\u003e\n",
+      "Author": "AdamCao",
+      "PubDate": "2022-09-04T12:04:14Z"
+    },
+    {
       "Title": "增强 Spring @Scheduled 注解，支持分布式定时任务 - 分享创造",
       "Link": "https://www.v2ex.com/t/877658",
-      "Description": "微服务项目中，@Scheduled 在有多个实例的情况下无法使用。\u003cbr /\u003e引入 xxl job 等又比较重，需要耗费一定的时间，如果项目对定时任务的需求比较简单，完全划不来。\u003cbr /\u003e所以对 @\u003ca target=\"_blank\" href=\"/member/Scheduled\" rel=\"nofollow noopener\"\u003eScheduled\u003c/a\u003e 进行了增强，使其支持分布式的定时任务。\u003cbr /\u003e原理如下：\u003cbr /\u003eSpring 的 @\u003ca target=\"_blank\" href=\"/member/Scheduled\" rel=\"nofollow noopener\"\u003eScheduled\u003c/a\u003e 使用 cron 的情况下，是按照周期执行的，也就是根据表达式计算的下次执行的时间是固定的。 使用 CronSequenceGenerator 可以计算出下次执行时间，所以就可以依据这个时间进行加锁，防止定时任务的重复执行，即在一个周期内只有一个定时任务会被执行，同时也不影响下个周期的定时任务执行。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e项目地址： \u003ca target=\"_blank\" href=\"https://github.com/gaoice/distributed-scheduling-spring-boot-starter\" rel=\"nofollow noopener\"\u003ehttps://github.com/gaoice/distributed-scheduling-spring-boot-starter\u003c/a\u003e",
+      "Description": "微服务项目中，@Scheduled 在有多个实例的情况下无法使用。\u003cbr /\u003e引入 xxl job 等又比较重，需要耗费一定的时间，如果项目对定时任务的需求比较简单，完全划不来。\u003cbr /\u003e所以对 @\u003ca target=\"_blank\" href=\"/member/Scheduled\" rel=\"nofollow noopener\"\u003eScheduled\u003c/a\u003e 进行了增强，使其支持分布式的定时任务。\u003cbr /\u003e原理如下：\u003cbr /\u003eSpring 的 @\u003ca target=\"_blank\" href=\"/member/Scheduled\" rel=\"nofollow noopener\"\u003eScheduled\u003c/a\u003e 使用 cron 的情况下，是按照周期执行的，也就是根据表达式计算的下次执行的时间是固定的。 使用 CronSequenceGenerator 可以计算出下次执行时间，所以就可以依据这个时间对当前周期进行加锁，防止定时任务的重复执行，即在一个周期内只有一个定时任务会被执行，同时相比直接加锁，也不会影响下个周期的定时任务执行。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e项目地址： \u003ca target=\"_blank\" href=\"https://github.com/gaoice/distributed-scheduling-spring-boot-starter\" rel=\"nofollow noopener\"\u003ehttps://github.com/gaoice/distributed-scheduling-spring-boot-starter\u003c/a\u003e",
       "Author": "gaobing",
       "PubDate": "2022-09-04T11:50:15Z"
     },
