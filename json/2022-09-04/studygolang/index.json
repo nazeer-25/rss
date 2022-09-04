@@ -25,6 +25,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "9.9元/年 撸1台 服务器，自用搭建系统 学习golang 正好",
+      "Link": "https://studygolang.com/articles/35846#reply2",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "web框架 xirang",
       "Link": "https://studygolang.com/p/1126#reply3",
       "Description": "",
@@ -35,13 +42,6 @@
       "Title": "go-cryptobin 常用加密解密库，新版添加 openssl 证书生成和解析",
       "Link": "https://studygolang.com/topics/15813#reply2",
       "Description": "\u003cp\u003e\u003ca href=\"https://github.com/deatil/go-cryptobin\"\u003ego-cryptobin\u003c/a\u003e  是一个 go 的常用加密解密库，包含了一下特性\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/deatil/go-cryptobin\"\u003ego-cryptobin\u003c/a\u003e 包括常用的对称加密和非对称加密及签名验证\u003c/li\u003e\n\u003cli\u003e对称加密解密（Aes/Des/TriDes/SM4/Tea/Twofish/Xts）\u003c/li\u003e\n\u003cli\u003e对称加密解密模式（ECB/CBC/CFB/OFB/CTR/GCM）\u003c/li\u003e\n\u003cli\u003e对称加密解密补码（NoPadding/ZeroPadding/PKCS5Padding/PKCS7Padding/X923Padding/ISO10126Padding/ISO97971Padding/ISO7816_4Padding/TBCPadding/PKCS1Padding）\u003c/li\u003e\n\u003cli\u003e非对称加密解密（RSA/SM2）\u003c/li\u003e\n\u003cli\u003e非对称签名验证（RSA/PSS/DSA/Ecdsa/EdDSA/SM2）\u003c/li\u003e\n\u003cli\u003e默认 \u003ccode\u003eAes\u003c/code\u003e, \u003ccode\u003eECB\u003c/code\u003e, \u003ccode\u003eNoPadding\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e项目地址: \u003ca href=\"https://github.com/deatil/go-cryptobin\"\u003ehttps://github.com/deatil/go-cryptobin\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e最新版本添加了 openssh 证书生成和解析，具体使用可以看一下示例\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003essh rsa生成使用\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n    \u0026quot;fmt\u0026quot;\n    \u0026quot;encoding/pem\u0026quot;\n    \u0026quot;github.com/deatil/lakego-filesystem/filesystem\u0026quot;\n    cryptobin_ssh \u0026quot;github.com/deatil/go-cryptobin/ssh\u0026quot;\n    cryptobin_rsa \u0026quot;github.com/deatil/go-cryptobin/cryptobin/rsa\u0026quot;\n)\n\nfunc main() {\n    fs := filesystem.New()\n\n    rsa := cryptobin_rsa.NewRsa().GenerateKey(2048)\n\n    // block, _ := cryptobin_ssh.MarshalOpenSSHPrivateKey(obj.GetPrivateKey(), \u0026quot;comment\u0026quot;)\n    // block, _ := cryptobin_ssh.MarshalOpenSSHPrivateKeyWithPassword(obj.GetPrivateKey(), \u0026quot;comment\u0026quot;, []byte(\u0026quot;123\u0026quot;))\n    rsaBlock, _ := cryptobin_ssh.MarshalOpenSSHPrivateKeyWithPassword(\n        rsa.GetPrivateKey(),\n        \u0026quot;comment\u0026quot;,\n        []byte(\u0026quot;123\u0026quot;),\n        cryptobin_ssh.Opts{\n            // cryptobin_ssh.AES256CBC\n            Cipher:  cryptobin_ssh.AES256CTR,\n            KDFOpts: cryptobin_ssh.BcryptOpts{\n                SaltSize: 16,\n                Rounds:   16,\n            },\n        },\n    )\n\n    rsaBlockkeyData := pem.EncodeToMemory(rsaBlock)\n    fs.Put(\u0026quot;./runtime/key/ssh/rsa-en\u0026quot;, string(rsaBlockkeyData))\n\n    fmt.Println(\u0026quot;生成成功\u0026quot;)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "9.9元/年 撸1台 服务器，自用搭建系统 学习golang 正好",
-      "Link": "https://studygolang.com/articles/35846#reply2",
-      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
