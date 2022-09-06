@@ -4,6 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>BI 系统的分布式部署原理和技术实现 - 推广</title>
+      <link>https://www.v2ex.com/t/878062</link>
+      <description>&lt;h3&gt;1.什么是分布式&lt;/h3&gt;&#xA;&lt;p&gt;关于“分布式系统”的定义，我们先看下书中是怎么说的。《分布式系统原理和范型》一书中是这样定义分布式系统的：“分布式系统是若干独立计算机的集合，这些计算机对于用户来说就像是单个相关系统”。&#xA;关于这个定义，我们直观的感受就是：&#xA;首先，这种系统相对来说很厉害，由好几台主机组成。以谷歌、亚马逊等服务商而言，他们的数据中心都由上万台主机支撑起来的。&#xA;其次，虽然很它很厉害，但对于外人来说，是感觉不到这些主机的存在。也就是说，我们只看到是一个系统在运作。以最近的“亚马逊 S3 宕机事件”为例，平时，我们压根不知道亚马逊所提供的服务背后是由多少台主机组成，但是等到 S3 宕机才知道，这货已经是占了互联网世界的半壁江山了。&#xA;从进程角度看，两个程序分别运行在两个台主机的进程上，它们相互协作最终完成同一个服务（或者功能），那么理论上这两个程序所组成的系统，也可以称作是“分布式系统”。&#xA;当然，这个两个程序可以是不同的程序，也可以是相同的程序。如果是相同的程序，我们又可以称之为“集群”。所谓集群，就是将相同的程序，通过不断横向扩展，来提高服务能力的方式。&#xA;举一个生活中的例子来说明：&#xA;小饭店原来只有一个厨师，切菜洗菜备料炒菜全干。后来客人多了，厨房一个厨师忙不过来，又请了个厨师，两个厨师都能炒一样的菜，两个厨师的关系是集群。&#xA;为了让厨师专心炒菜，把菜做到极致，再请了个配菜师负责切菜，备菜，备料 ... ， 厨师和配菜师的关系是分布式。&#xA;一个配菜师也忙不过来了，又请了个配菜师，两个配菜师关系是集群。&#xA;一个配菜师因故请假了，但是其余的配菜师还是该啥就干啥，只是没请假的配菜师任务均匀的加量了，但他们的任务和职责是不变的，这是集群。&#xA;店里生意很好，当店长接到订单后，看哪个厨师活儿不重，就将新的订单分给谁，这就是负载均衡。&#xA;集群：多个人在一起做同样的事 。&#xA;分布式 ：多个人在一起做不同的事 。&#xA;负载均衡：决定将任务以某种规则分给谁做。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img2022.cnblogs.com/blog/139239/202209/139239-20220906133616585-213193986.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img2022.cnblogs.com/blog/139239/202209/139239-20220906133657875-490445787.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;2.为什么使用分布式部署&lt;/h3&gt;&#xA;&lt;p&gt;了解了什么是分布式之后，为什么要使用分布部署呢；&#xA;首先分布式部署优点很明显，主要体现在下面 4 个方面：&#xA;&lt;strong&gt;系统可用性提升&lt;/strong&gt;&#xA;传统的集中式计算或集中式存储在遇见单点故障时很容易造成整个服务不可用，分布式下的服务体系，单台机器有故障，不致于造成整个服务不可用。&#xA;&lt;strong&gt;系统并发能力提升&lt;/strong&gt;&#xA;比如双 11 活动，平时订单少 50 台机器就够了，到了 11 订单量剧增，服务器增加到 100 台，每台机器之间相互独立，互不影响。&#xA;&lt;strong&gt;系统容错能力提升&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img2022.cnblogs.com/blog/139239/202209/139239-20220906133752554-404264903.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;同一组服务分别部署在北京上海杭州，杭州的机房突发断电或者火灾，杭州机房的流量会被自动分发到北京和上海的机房，不影响用户使用。&#xA;&lt;strong&gt;低延迟&lt;/strong&gt;&#xA;参考上一个图，北京的用户请求自动分发到北京，上海的用户请求被分发到上海，服务器会根据用户的 IP 选择距离自己最近的机房，降低网络延迟。&#xA;同样分布式部署带来好处的同时也会有一些缺点，只要是下面 3 个方面：&#xA;&lt;strong&gt;分布式服务依赖网络&lt;/strong&gt;&#xA;服务器间通讯依赖网络，不可靠网络包括网络延时，丢包、中断、异步，一个完整的服务请求依赖一连串服务调用，任意一个服务节点网络出现问题，都可能造成本次请求失败。&#xA;&lt;strong&gt;维护成本高&lt;/strong&gt;&#xA;传统单体式服务只需要维护一个站点就可以。&#xA;分布式服务系统被拆分成若干个小服务，服务从 1 变为几十个上百个服务后，增加运维成本。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;一致性，可用性，分区容错性无法同时满足&lt;/strong&gt;&#xA;这个是最主要的，这三种特性就是平时说的 CAP 定理，在分布式系统中，这三种特性最多只能满足两种，无法同时满足，需要根据实际情况去调整牺牲掉其中哪个。&lt;/p&gt;&#xA;&lt;h3&gt;&lt;a href=&#34;http://3.BI&#34; rel=&#34;nofollow&#34;&gt;3.BI&lt;/a&gt; 系统的分布式部署原理和技术实现&lt;/h3&gt;&#xA;&lt;p&gt;随着数据的爆炸性增长，BI 系统需要处理的数据越来越多，动辄 TB 级，甚至 PB 级，于是服务器宕机，反应迟钝，查询缓慢等各种性能问题接踵而来，BI 系统的用户，心里简直又苦又难~~~&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img2022.cnblogs.com/blog/139239/202209/139239-20220906133921222-692543296.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;各路 BI 厂商也意识到这些问题，纷纷推出各种解决方案。&lt;/p&gt;&#xA;&lt;p&gt;这里提供一种使用分布式部署解决方案。&#xA;架构图如下：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img2022.cnblogs.com/blog/139239/202209/139239-20220906133931537-1725392723.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;那么分布式部署呢，主要是对 ReportWorker ，CotWorker ，DashboardWorker 组件进行横向扩展，这几个组件主要是负责仪表板和报表运算的组件，可以部署多个以提供系统的计算性能。&#xA;为了降低用户部署成本，提供了在线的远程部署方式，UI 界面化操作，可以在线添加节点，远程为每个节点部署需要的组件，以及对节点组件进行在线启停，进一步降低用户部署成本。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img2022.cnblogs.com/blog/139239/202209/139239-20220906133942879-1046661152.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;同时也可以在线的运维管理和系统诊断功能，可以查看系统资源消耗，系统日志下载，方便对 BI 系统进行运维管理，降低用户的运维成本。&#xA;大家如果感兴趣欢迎访问各种在线 demo,体会 BI 工具为数据可视化带来的便利： &lt;a href=&#34;https://www.grapecity.com.cn/solutions/wyn/demo00&#34; rel=&#34;nofollow&#34;&gt;https://www.grapecity.com.cn/solutions/wyn/demo00&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>GrapeCityChina</author>
+      <pubDate>06 Sep 2022 05:43:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>ERP 项目合作（web＋易语言） - 酷工作</title>
+      <link>https://www.v2ex.com/t/878061</link>
+      <description>&lt;p&gt;目前有个项目需求，做一个 erp 系统，需要做 web 端和 pc 端，是关于手机服务方面的，有一定的客户量，随时能推广，就差一个技术开发&#xA;有兴趣的联系 qq：3441702128&lt;/p&gt;&#xA;</description>
+      <author>gbccyc</author>
+      <pubDate>06 Sep 2022 05:24:53 +0000</pubDate>
+    </item>
+    <item>
+      <title>Apple ID 家庭共享 &amp; 转区问题 - Apple</title>
+      <link>https://www.v2ex.com/t/878060</link>
+      <description>&lt;p&gt;现港区，今年 5 月份刚上了个 am 的车（之前一直在其他家庭里）。最近逐渐开始有 atv+和 icloud 需求，感觉美区 apple one 的车性价比很高。但如果我现在跳车，转到美区的话，是不是会受一年只能加入一次家庭的影响，上不了别人的车呢？还有这个一年只能加入一次的规则，是指每年都有一次加入的机会，还是必须在一个家庭里满一年才能加入其他家庭呢&lt;/p&gt;&#xA;</description>
+      <author>xige1213888</author>
+      <pubDate>06 Sep 2022 05:23:32 +0000</pubDate>
+    </item>
+    <item>
+      <title>求 12 路 DVI+12 路 HDMI 延长 100 米的方案 - 硬件</title>
+      <link>https://www.v2ex.com/t/878058</link>
+      <description>&lt;p&gt;一台 DVI 设备，输出 12 路 DVI ；一台 HDMI 设备，输出 12 路 HDMI 。&lt;/p&gt;&#xA;&lt;p&gt;24 路显示器在 100 以外，求连接与设备方案。&lt;/p&gt;&#xA;&lt;p&gt;1080p - 2k 就够了，4k 也行。&lt;/p&gt;&#xA;</description>
+      <author>documentzhangx66</author>
+      <pubDate>06 Sep 2022 05:19:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>nuc 如何降频使用，或者有啥更好的使用姿势 - 问与答</title>
+      <link>https://www.v2ex.com/t/878056</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.v2ex.com/t/877044&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/877044&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;从上边贴子收的，装了 win10 + todesk ，用途是 Resilio Sync 同步备份 + 偶尔下 BT ，然后 smb 共享出来；&lt;/p&gt;&#xA;&lt;p&gt;另外收的 128g m2 当系统盘，存储是 USB 外接 500g 机械，笔记本上换下来的；&lt;/p&gt;&#xA;&lt;p&gt;理论上能跑 Docker 的小主机就能符合，但是又不知道哪款够用，纠结之下就入了 nuc4 ；&lt;/p&gt;&#xA;&lt;p&gt;接下为是重点，风扇太响了。。BIOS 里看了下，功耗相关的主要选项都是灰色不可用；&lt;/p&gt;&#xA;&lt;p&gt;然后系统也不一定要 win10 ，但是试过 deepin 装 vnc 没成功， [突然想起来没试 ToDesk Linux 客户端 - -&lt;/p&gt;&#xA;</description>
+      <author>wdssmq</author>
+      <pubDate>06 Sep 2022 05:12:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问腾讯大王卡副卡能共享主卡 70G 流量包吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/878055</link>
+      <description>&lt;p&gt;前段时间转了王卡限定版，送了 70G 通用+30G 专用流量～想问一下，这其中的 70G 的通用流量，副卡可以直接共享吗？&lt;br/&gt;&lt;br/&gt;另外，王卡亲情卡是不是就是副卡？&lt;br/&gt;&lt;br/&gt;谢谢&lt;/p&gt;&#xA;</description>
+      <author>leonme</author>
+      <pubDate>06 Sep 2022 05:11:50 +0000</pubDate>
+    </item>
+    <item>
       <title>中秋发啥了？让我羡慕羡慕 - 程序员</title>
       <link>https://www.v2ex.com/t/878053</link>
       <description>&lt;p&gt;我先来，直至目前我司发了空气月饼一盒。价值 0&lt;/p&gt;&#xA;</description>
