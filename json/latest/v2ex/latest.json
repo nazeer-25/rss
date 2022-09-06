@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有无 CLI 的翻译软件? - 问与答",
+      "Link": "https://www.v2ex.com/t/878122",
+      "Description": "\u003cp\u003edeepl 的免费 api 要美国地址,吐了\u003c/p\u003e\n",
+      "Author": "andyJado",
+      "PubDate": "2022-09-06T09:12:44Z"
+    },
+    {
+      "Title": "为什么感觉抖音有点洗脑的感觉 - 问与答",
+      "Link": "https://www.v2ex.com/t/878121",
+      "Description": "\u003cp\u003e手机上没装抖音，在 m1 上面装了个抖音看了下，感觉有点洗脑\u003c/p\u003e\n",
+      "Author": "lovepplforever",
+      "PubDate": "2022-09-06T09:09:08Z"
+    },
+    {
+      "Title": "@建设银行，你家的“建行生活”该适配安卓 13 了~~ - 全球工单系统",
+      "Link": "https://www.v2ex.com/t/878120",
+      "Description": "\u003cp\u003e:(( 昨天看 miui 的 android13 内测评价都不错就刷上了\n其他 app 都测试了一下没什么大问题\u003c/p\u003e\n\u003cp\u003e目前只看到“建行生活”打开即白屏，\n应用中心也提示不兼容\u003c/p\u003e\n",
+      "Author": "Zerek",
+      "PubDate": "2022-09-06T09:05:56Z"
+    },
+    {
+      "Title": "怎样通过可以用 JSON 表示的数据结构来存储本地化内容的语言回退状态 - 程序员",
+      "Link": "https://www.v2ex.com/t/878119",
+      "Description": "\u003ch2\u003e场景\u003c/h2\u003e\n\u003cp\u003e有这样一个场景：对于一个默认语言下存在的图像（图像数量在 4000 张左右），其 URL 类似这样：\u003ccode\u003e/en-US/docs/Web/hello.png\u003c/code\u003e。而网站会有多个本地化的语言（大概 8 个左右），每一种语言都会引用本地化的图像，与上面的图像对应的本地化图像的 URL 类似这样：\u003ccode\u003e/zh-CN/docs/Web/hello.png\u003c/code\u003e。但不一定每一个语言都存在本地化的图像。\u003c/p\u003e\n\u003ch2\u003e存在的问题\u003c/h2\u003e\n\u003cp\u003e所以就有一个问题：存储默认语言下的图像在哪些本地化语言中存在（或不存在），在通过 Web 访问时，若图像并没有被本地化（在本地化语言中不存在），则回退到默认语言。\u003c/p\u003e\n\u003cp\u003e这些文件通过 AWS S3 和 CloudFront 部署，所以只能在 Lambda@Edge 上解决这个问题（将上面图像的本地化状态存储在 JSON 中，通过 JavaScript 去处理上述的逻辑）\u003c/p\u003e\n\u003ch2\u003e想到的解决方案\u003c/h2\u003e\n\u003cp\u003e将每一种本地化语言都标记成 32 位整数中的一个二进制位，类似这样：\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e语言\u003c/th\u003e\n\u003cth\u003e值\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003ezh-CN\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003efr\u003c/td\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eja\u003c/td\u003e\n\u003ctd\u003e4\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e...\u003c/td\u003e\n\u003ctd\u003e.\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e对于每一张默认语言下的图像，找出对应的图像在哪些本地化语言下不存在，将这些不存在的语言对应的二进制值进行求和。例如，图像 \u003ccode\u003e/en-US/docs/Web/hello.png\u003c/code\u003e 没有 \u003ccode\u003efr\u003c/code\u003e 和 \u003ccode\u003eja\u003c/code\u003e 这两个语言对应的本地化图像。那求和计算就是：2+4=6 。这样就可以直接通过键值对存储在 JSON 里面：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n  \"docs/Web/hello.png\": 6,\n  // ...\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在 Lambda@Edge 的 JavaScript 运行环境下就可以直接导入这个 JSON ，并通过按位与运算判断本地化图像是否不存在：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003econst notExist = require('notExist.json');\nconst bitMask = {\n  \"zh-CN\": 1,\n  \"fr\": 2,\n  \"ja\": 4,\n}\n\n// path: /en-US/docs/Web/hello.png\nlet path = request.uri;\nconst uriParts = path.split(\"/\");\nconst locale = uriParts[1];\nconst pathWithoutLocale = uriParts.slice(2).join(\"/\");\n\nif (\n  locale !== \"en-US\" \u0026amp;\u0026amp;\n  notExist[pathWithoutLocale] \u0026amp;\u0026amp;\n  (notExist[pathWithoutLocale] \u0026amp; bitMask[locale]) !== 0\n) {\n  // 不存在（但存在于默认语言中），使用默认语言下的图像\n  path = `/en-US/${pathWithoutLocale}`;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e有什么更合适的思路不？\u003c/p\u003e\n",
+      "Author": "yin1999",
+      "PubDate": "2022-09-06T09:04:04Z"
+    },
+    {
       "Title": "各位有熟悉 SSD 的能推荐个 1T 容量的型号吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/878118",
       "Description": "\u003cp\u003e需求：插槽支持 NVME ，容量要求 1T ，使用上是用作数据库落盘，随机读写都比较大。\u003c/p\u003e\n\u003cp\u003e想要买的那种定位是，类似于 80 分感觉的。不追求极致价格下的极致性能，而是追求大众用得起的产品里质量稍好一些价格稍贵一些那种的。\u003c/p\u003e\n\u003cp\u003e各位有型号推荐吗？我不关注电子产品，这方面完全不懂\u003c/p\u003e\n",

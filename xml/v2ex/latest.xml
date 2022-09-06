@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有无 CLI 的翻译软件? - 问与答</title>
+      <link>https://www.v2ex.com/t/878122</link>
+      <description>&lt;p&gt;deepl 的免费 api 要美国地址,吐了&lt;/p&gt;&#xA;</description>
+      <author>andyJado</author>
+      <pubDate>06 Sep 2022 09:12:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>为什么感觉抖音有点洗脑的感觉 - 问与答</title>
+      <link>https://www.v2ex.com/t/878121</link>
+      <description>&lt;p&gt;手机上没装抖音，在 m1 上面装了个抖音看了下，感觉有点洗脑&lt;/p&gt;&#xA;</description>
+      <author>lovepplforever</author>
+      <pubDate>06 Sep 2022 09:09:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>@建设银行，你家的“建行生活”该适配安卓 13 了~~ - 全球工单系统</title>
+      <link>https://www.v2ex.com/t/878120</link>
+      <description>&lt;p&gt;:(( 昨天看 miui 的 android13 内测评价都不错就刷上了&#xA;其他 app 都测试了一下没什么大问题&lt;/p&gt;&#xA;&lt;p&gt;目前只看到“建行生活”打开即白屏，&#xA;应用中心也提示不兼容&lt;/p&gt;&#xA;</description>
+      <author>Zerek</author>
+      <pubDate>06 Sep 2022 09:05:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>怎样通过可以用 JSON 表示的数据结构来存储本地化内容的语言回退状态 - 程序员</title>
+      <link>https://www.v2ex.com/t/878119</link>
+      <description>&lt;h2&gt;场景&lt;/h2&gt;&#xA;&lt;p&gt;有这样一个场景：对于一个默认语言下存在的图像（图像数量在 4000 张左右），其 URL 类似这样：&lt;code&gt;/en-US/docs/Web/hello.png&lt;/code&gt;。而网站会有多个本地化的语言（大概 8 个左右），每一种语言都会引用本地化的图像，与上面的图像对应的本地化图像的 URL 类似这样：&lt;code&gt;/zh-CN/docs/Web/hello.png&lt;/code&gt;。但不一定每一个语言都存在本地化的图像。&lt;/p&gt;&#xA;&lt;h2&gt;存在的问题&lt;/h2&gt;&#xA;&lt;p&gt;所以就有一个问题：存储默认语言下的图像在哪些本地化语言中存在（或不存在），在通过 Web 访问时，若图像并没有被本地化（在本地化语言中不存在），则回退到默认语言。&lt;/p&gt;&#xA;&lt;p&gt;这些文件通过 AWS S3 和 CloudFront 部署，所以只能在 Lambda@Edge 上解决这个问题（将上面图像的本地化状态存储在 JSON 中，通过 JavaScript 去处理上述的逻辑）&lt;/p&gt;&#xA;&lt;h2&gt;想到的解决方案&lt;/h2&gt;&#xA;&lt;p&gt;将每一种本地化语言都标记成 32 位整数中的一个二进制位，类似这样：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;语言&lt;/th&gt;&#xA;&lt;th&gt;值&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;zh-CN&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;fr&lt;/td&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;ja&lt;/td&gt;&#xA;&lt;td&gt;4&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;...&lt;/td&gt;&#xA;&lt;td&gt;.&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;对于每一张默认语言下的图像，找出对应的图像在哪些本地化语言下不存在，将这些不存在的语言对应的二进制值进行求和。例如，图像 &lt;code&gt;/en-US/docs/Web/hello.png&lt;/code&gt; 没有 &lt;code&gt;fr&lt;/code&gt; 和 &lt;code&gt;ja&lt;/code&gt; 这两个语言对应的本地化图像。那求和计算就是：2+4=6 。这样就可以直接通过键值对存储在 JSON 里面：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{&#xA;  &#34;docs/Web/hello.png&#34;: 6,&#xA;  // ...&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在 Lambda@Edge 的 JavaScript 运行环境下就可以直接导入这个 JSON ，并通过按位与运算判断本地化图像是否不存在：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const notExist = require(&#39;notExist.json&#39;);&#xA;const bitMask = {&#xA;  &#34;zh-CN&#34;: 1,&#xA;  &#34;fr&#34;: 2,&#xA;  &#34;ja&#34;: 4,&#xA;}&#xA;&#xA;// path: /en-US/docs/Web/hello.png&#xA;let path = request.uri;&#xA;const uriParts = path.split(&#34;/&#34;);&#xA;const locale = uriParts[1];&#xA;const pathWithoutLocale = uriParts.slice(2).join(&#34;/&#34;);&#xA;&#xA;if (&#xA;  locale !== &#34;en-US&#34; &amp;amp;&amp;amp;&#xA;  notExist[pathWithoutLocale] &amp;amp;&amp;amp;&#xA;  (notExist[pathWithoutLocale] &amp;amp; bitMask[locale]) !== 0&#xA;) {&#xA;  // 不存在（但存在于默认语言中），使用默认语言下的图像&#xA;  path = `/en-US/${pathWithoutLocale}`;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;有什么更合适的思路不？&lt;/p&gt;&#xA;</description>
+      <author>yin1999</author>
+      <pubDate>06 Sep 2022 09:04:04 +0000</pubDate>
+    </item>
+    <item>
       <title>各位有熟悉 SSD 的能推荐个 1T 容量的型号吗？ - 问与答</title>
       <link>https://www.v2ex.com/t/878118</link>
       <description>&lt;p&gt;需求：插槽支持 NVME ，容量要求 1T ，使用上是用作数据库落盘，随机读写都比较大。&lt;/p&gt;&#xA;&lt;p&gt;想要买的那种定位是，类似于 80 分感觉的。不追求极致价格下的极致性能，而是追求大众用得起的产品里质量稍好一些价格稍贵一些那种的。&lt;/p&gt;&#xA;&lt;p&gt;各位有型号推荐吗？我不关注电子产品，这方面完全不懂&lt;/p&gt;&#xA;</description>
