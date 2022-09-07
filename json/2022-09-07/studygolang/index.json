@@ -53,9 +53,23 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "gorm 关联查询问题",
+      "Link": "https://studygolang.com/topics/15828#reply0",
+      "Description": "\u003cp\u003e我最近在学习gorm，正接触到关联模式。其中，我对belongs to的示例定义如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// Employee \n// @Description 雇员\ntype Employee struct {\n\tID   uint   `gorm:\u0026quot;primary_key;autoIncrement:true\u0026quot;` \n\tName string \n\t//[belongs to][一对一]声明写法如下\n\tCID int     //Company ID\n\tC   Company `gorm:\u0026quot;foreignKey:CID\u0026quot;` \n\n// Company\n// @Description: 公司\ntype Company struct {\n\tID   uint   `gorm:\u0026quot;primary_key;autoIncrement:true\u0026quot;` \n\tName string `gorm:\u0026quot;unique\u0026quot;`                       \n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e在继续学习到查询时，我了解到了在Employees表中查Company信息需要使用：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003edb.Model(\u0026amp;employee).Association(\u0026quot;C\u0026quot;).Find(\u0026amp;employee.C)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这样的写法，才能够查询到完整的Employee信息。现在我的问题是，如何查询工作于Name=“CompanyA”的公司的所有雇员信息？我能想到的是分两步：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e//1. 先根据公司名查公司id\ndb.First(\u0026amp;company, \u0026quot;name=?\u0026quot;, \u0026quot;CompanyA\u0026quot;)\n//2. 再用得到的company.ID在用户表中查\ndb.Preload(\u0026quot;C\u0026quot;).Find(\u0026amp;results, \u0026quot;c_id=?\u0026quot;, company.ID)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这样确实可行，但是我觉得会不会有更加简单的查询方式，一步就搞定的那种。官方文档看的很懵，网上搜索也没找到想要的东西，请问大家还知道别的写法吗？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "Go1.19 如期发布了",
       "Link": "https://studygolang.com/topics/15736#reply3",
       "Description": "\u003cp\u003e在 Go1.18 发布 5 个月后，Go1.19 如期发布了。不过，它的大部分更改都在工具链、runtime 和库的实现中。与往常一样，该版本保持了 Go 1\u003ca href=\"https://go.dev/doc/go1compat\"\u003e的兼容性承诺\u003c/a\u003e。因此几乎所有 Go 程序都能像以前一样继续编译和运行。\u003c/p\u003e\n\n\u003cp\u003eGo 1.19 重要的变化有：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eGo 内存模型，详细参考官方文档：\u003ca href=\"https://go.dev/ref/mem\"\u003ehttps://go.dev/ref/mem\u003c/a\u003e。随着内存模型的更新，Go 1.19 在 sync/atomic 包引入了新的类型：types Bool, Int32, Int64, Uint32, Uint64, Uintptr 和 Pointer 等，这让原子值的使用更方便。\u003c/li\u003e\n\u003cli\u003e工具方面，文档格式增强。文档注释中添加了对链接、列表和更清晰标题的支持。详情见：\u003ca href=\"https://go.dev/doc/comment\"\u003ehttps://go.dev/doc/comment\u003c/a\u003e。\u003c/li\u003e\n\u003cli\u003eruntime 方面，最值得关注的变化就是增加了 runtime/debug.SetMemoryLimit，可以限制 Go 的内存使用。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e其他是一些库的小变化。\u003c/p\u003e\n\n\u003cp\u003e详细变化可以查看官方 Release Notes：\u003ca href=\"https://go.dev/doc/go1.19\"\u003ehttps://go.dev/doc/go1.19\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003eGo 语言中文网也为大家准备好了 Go1.19 的下载包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "收纳阿里巴巴优秀技术文章，《阿里开发者手册》-Golang专题带你轻松玩转golang~",
+      "Link": "https://studygolang.com/articles/35849#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -69,13 +83,6 @@
     {
       "Title": "IBM深度解读：为什么我们需要可观测性？",
       "Link": "https://studygolang.com/articles/35850#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "收纳阿里巴巴优秀技术文章，《阿里开发者手册》-Golang专题带你轻松玩转golang~",
-      "Link": "https://studygolang.com/articles/35849#reply0",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
