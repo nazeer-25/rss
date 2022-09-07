@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "nginx 的 proxy_pass 后端一个 upstream 多个动态 IP 怎么破？ - NGINX",
+      "Link": "https://www.v2ex.com/t/878478",
+      "Description": "\u003cp\u003e环境是 k8s ，需要多个域名对应不同的容器或 svc ，同时因为历史原因，不可能去修改业务代码兼容集群环境如通过 configmap 配置。\u003c/p\u003e\n\u003cp\u003e所以现在的能想到的配置类似如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-nginx\"\u003emap $host $svc {\n    a.com \"vip-svc\";\n    b.com \"normal-svc\";\n    c.com \"mormal-svc\";\n    ..省略 1w 多\n}\nserver {\n   location / {\n       proxy_pass http://$svc;\n   }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这个 svc 就是不同的 service 。通过 http://svc-name 的形式可以访问到。但是有个问题是，nginx 会在一次请求后固定这个 host 的 ip 在内存中。导致如果对应 svc 的 pod 发生轮换或扩缩容则 ip 会变，然后再来新请求就 504 了。\u003c/p\u003e\n\u003cp\u003e通过 ingress 由于 ingress 也是一个独立 pod 解决不了换 ip 的问题。\u003c/p\u003e\n\u003cp\u003eupstream 的 resolve 需要 nginx plus 才有。三方插件如 dynamic-upstream 运行一段时间后 cpu 奇高。\u003c/p\u003e\n\u003cp\u003e有什么更简单的解决方案吗。\u003c/p\u003e\n\u003cp\u003eps:\n容器中的 nginx 配置文件通过监听 redis （ confd ）实时变更。\u003c/p\u003e\n",
+      "Author": "dzdh",
+      "PubDate": "2022-09-07T16:14:18Z"
+    },
+    {
+      "Title": "再发个焦虑症/疑病症/抑郁的自助指南 v1.1 版 - 生活",
+      "Link": "https://www.v2ex.com/t/878477",
+      "Description": "\u003cp\u003e之前发过一篇《\u003ca href=\"https://www.v2ex.com/t/877950\" rel=\"nofollow\"\u003e急性心梗发作及猝死风险应对的自助指南 v1.2 版\u003c/a\u003e》\u003c/p\u003e\n\u003cp\u003e再分享个焦虑症 /疑病症 /抑郁的自助指南吧，这个还是 1.1 版；\u003c/p\u003e\n\u003cp\u003e因为以往面对的，可以说基本生活能力、知识水平，包括财务水平，显然是达不到 v 站各位思聪们的，另外有此类问题的兄弟姐妹多是需要\u003cstrong\u003e情绪关怀和情感关怀\u003c/strong\u003e，为了尽可能帮助到大家，文字部分也就有了些倾斜，不得已减少了理性部分文字内容，思聪们不要嫌弃；\u003c/p\u003e\n\u003cp\u003e总而言之，今年不太平，未来若干年还比不上今年，尤其是慢慢上了年纪的思聪们，压力都大，尽量自我开导吧；\u003c/p\u003e\n\u003cp\u003e同前面的猝死风险自助指南，也不需要什么版权保护和署名，有需要随便拿去分发，只是不要回来找我碰瓷就好；\u003c/p\u003e\n\u003cp\u003edropbox pdf 文件链接：[焦虑症 /疑病症 /抑郁的自助指南 v1.1 版]( \u003ca href=\"https://www.dropbox.com/s/rjmgkvvtla0ih2n/%E6%80%80%E7%96%91%E8%87%AA%E5%B7%B1%E5%BE%97%E4%BA%86%E7%96%91%E7%97%85%E7%97%87%E7%84%A6%E8%99%91%E7%97%87%E6%8A%91%E9%83%81%E7%97%87%E4%B8%8D%E8%A6%81%E6%85%8C%EF%BC%8C%E5%88%86%E4%BA%AB%E8%BF%99%E4%BB%BD%E5%B8%AE%E5%8A%A9%E5%BB%BA%E8%AE%AE%E6%8C%87%E5%8D%97\" rel=\"nofollow\"\u003ehttps://www.dropbox.com/s/rjmgkvvtla0ih2n/怀疑自己得了疑病症焦虑症抑郁症不要慌，分享这份帮助建议指南\u003c/a\u003e v1.1 版给您.pdf)\u003c/p\u003e\n",
+      "Author": "Maxwe11",
+      "PubDate": "2022-09-07T16:04:58Z"
+    },
+    {
       "Title": "记一下手机意外丢失 - 生活",
       "Link": "https://www.v2ex.com/t/878476",
       "Description": "\u003cp\u003e记一下手机意外丢失\u003c/p\u003e\n\u003cp\u003e先说说我今天遭遇：\n下雨天，下班时骑自行车走的太快在路上滑了一下，皮肤有外伤马上处理（手机掉了没有留意到）。\u003c/p\u003e\n\u003cp\u003e在出租屋简单处理伤口后，想着我的手机呢 ！马上回头原位置寻找了 15 分钟没有找到，时间相差没有超过 15 分钟。\u003c/p\u003e\n\u003cp\u003e带着一种不信任他人的观念，脑子里面其他的事情都消失，饭也不吃了，都在思考着如何处理好这件事情，越快越好。\u003c/p\u003e\n\u003cp\u003e评估自己红米手机的安全等级，全字母锁屏、特备程序应用锁、锁屏不可操作状态栏，那么最大的风险就是手机卡 ！\u003c/p\u003e\n\u003cp\u003e手机卡联系人和电子凭证、以及支付宝存款最为重要，避免被不法分子拿到和利用，没有健康码或许大厦都进不去，在几分钟内决定选择注销手机卡和补卡。\u003c/p\u003e\n\u003cp\u003e回到宿舍用电脑查询最近的服务厅，马上出发。\u003c/p\u003e\n\u003cp\u003e途中，公交要健康码、说明原因，司机表示同情，通过；\u003c/p\u003e\n\u003cp\u003e进入联通营业厅，要求健康码，说明原因，通过。\u003c/p\u003e\n\u003cp\u003e佛山没有疫情，幸亏没有那么严格，不然真的是处处受难。\u003c/p\u003e\n\u003cp\u003e补好卡后，去借用手机，与家人说明状况，提防诈骗电话。时间大概跨度在 17：40~19：10 ，约 1 个半小时。\u003c/p\u003e\n\u003cp\u003e现在晚上回头去想，当时选择方式或者并不是最为有效和降低损失成本的方法，可能可打电话回到手机，或许能够找回来。\u003c/p\u003e\n\u003cp\u003e可惜作为一个孤独的流浪人，没有什么朋友，甚至周围都没有可帮上忙的人，当时紧急之下就做了这个决定。\u003c/p\u003e\n\u003cp\u003e如果再来一次在面临同样的状况和条件下，或许我也会做出同样的决策和行为吧。\u003c/p\u003e\n\u003cp\u003e后续调整：增加备用机、存款大多数退出余额宝、增加手机定位、保持一定的现金\u003c/p\u003e\n",
