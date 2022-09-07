@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "M1 16G 前台才打开几个内存就占满了 - macOS",
+      "Link": "https://www.v2ex.com/t/878397",
+      "Description": "\u003cp\u003eChrome 才开了 8 个标签\n微信,钉钉,clashxpro,腾讯柠檬清理,ishot 截图,AlDente 充电保护\n请问磁盘读取的那两个是什么东东,这么大的数据.\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://i.imgur.com/jpfmFQN.png\" rel=\"nofollow\"\u003ehttps://i.imgur.com/jpfmFQN.png\u003c/a\u003e\n\u003ca href=\"https://i.imgur.com/a5Vv0v0.png\" rel=\"nofollow\"\u003ehttps://i.imgur.com/a5Vv0v0.png\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "szqhades",
+      "PubDate": "2022-09-07T09:12:49Z"
+    },
+    {
+      "Title": "[Tampermonkey] 受隔壁帖子启发, 整了一个油猴脚本 - 分享创造",
+      "Link": "https://www.v2ex.com/t/878396",
+      "Description": "\u003cp\u003e用来每天上网提醒自己好好赚钱, 早日远离这些生物\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e// ==UserScript==\n// @name        Ruler\n// @namespace   Violentmonkey Scripts\n// @include *\n// @grant       none\n// @version     1.0\n// @license     MIT\n// @author      fuckduanluan\n// @description Inspired by https://www.v2ex.com/t/878358\n// ==/UserScript==\n\n\nwindow.addEventListener('load', () =\u0026gt; {\n  const dec = decodeURIComponent,\n      enc = encodeURIComponent,\n      decode = function decode(s) {\n    return s.replace(/(%[0-9A-Z]{2})+/g, dec);\n  };\n\n  function setCookie(key, value, _temp) {\n    let _ref = _temp === void 0 ? {} : _temp,\n        expires = _ref.expires,\n        domain = _ref.domain,\n        secure = _ref.secure,\n        _ref$path = _ref.path,\n        path = _ref$path === void 0 ? '/' : _ref$path;\n\n    if (typeof value !== 'string') {\n\n      value = String(value);\n    }\n\n\n    key = enc(key.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, dec));\n\n\n    value = enc(value.replace(/%(23|24|26|2B|5E|60|7C)/g, dec).replace(/[\\\\]/g, escape));\n    let text = key + \"=\" + value;\n    text += \"; path=\" + path.split(';')[0];\n\n    typeof expires === 'number' \u0026amp;\u0026amp; (expires = new Date(Date.now() + expires * 36e5)); \n\n\n    expires instanceof Date \u0026amp;\u0026amp; (text += \"; expires=\" + expires.toUTCString());\n    typeof domain === 'string' \u0026amp;\u0026amp; (text += \"; domain=\" + domain.split(';')[0]);\n    secure \u0026amp;\u0026amp; (text += '; secure');\n    return document.cookie = text;\n  }\n\n  function getCookie(key) {\n    const cookies = document.cookie ? document.cookie.split('; ') : [],\n        rst = [];\n\n    for (let i = 0, len = cookies.length; i \u0026lt; len; ++i) {\n      let part = cookies[i].split('='),\n          name = decode(part[0]),\n          value = decode(part.slice(1).join('='));\n      name === key \u0026amp;\u0026amp; rst.push(value);\n    }\n\n    return rst.length ? rst.length === 1 ? rst[0] : rst : null;\n  }\n  if (getCookie('hasBanner')) return;\n  \n  const banner = document.createElement('div');\n  banner.style.cssText = `\n    color: #eee;\n    font-size: 24px;\n    text-shadow: 0 3px 3px #666;\n    line-height: 22px;\n    padding: 8px;\n    font-family: \"Microsoft Yahei\";\n    text-align: center;\n    cursor: pointer;\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    z-index: 9999;\n    background: linear-gradient(-45deg, #0057b7 25%, #ffd700 0, #ffd700 50%, #0057b7 0, #0057b7 75%, #ffd700 0);\n    background-size: 100px 100px;\n    box-shadow: 0 3px 10px #aaa;\n  `;\n  banner.textContent = '我们终将在没有黑暗的地方相见';\n  banner.addEventListener('click', function() {\n    this.style.display = 'none';\n    setCookie('hasBanner', 1, { expires: 24 * 7 });\n  });\n  document.body.appendChild(banner);\n});\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e内容可以改成自己喜欢的, 默认点击即可隐藏一周\nEnjoy\u003c/p\u003e\n",
+      "Author": "Al0rid4l",
+      "PubDate": "2022-09-07T09:06:18Z"
+    },
+    {
       "Title": "企业微信连设置自动回复都不支持吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/878393",
       "Description": "\u003cp\u003e比如我请假了，设置好自动回复，其他同事找我时就可以及时告诉他我请假了，请找某某某，急事电话联系，然后关闭企业微信通知，眼不见心不烦\u003c/p\u003e\n\u003cp\u003e翻了一遍没有发现这个功能，只找到了设置工作签名的地方，但是工作签名又不是谁都会注意看，网上搜索了一下，只找到了针对客户的自动回复，而且还要管理员在后台设置，难道企业微信默认每个人都是 7x24 小时待命的社畜？\u003c/p\u003e\n",
