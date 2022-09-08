@@ -46,6 +46,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "AES 加密",
+      "Link": "https://studygolang.com/articles/35853#reply0",
+      "Description": "\u003cpre\u003e\u003ccode\u003eimport (\n    \u0026quot;bytes\u0026quot;\n    \u0026quot;crypto/aes\u0026quot;\n    \u0026quot;fmt\u0026quot;\n    \u0026quot;crypto/cipher\u0026quot;\n    \u0026quot;encoding/base64\u0026quot;\n)\n\nfunc main() {\n    orig := \u0026quot;hello world\u0026quot;\n    key := \u0026quot;123456781234567812345678\u0026quot;\n    fmt.Println(\u0026quot;原文：\u0026quot;, orig)\n\n    encryptCode := AesEncrypt(orig, key)\n    fmt.Println(\u0026quot;密文：\u0026quot; , encryptCode)\n\n    decryptCode := AesDecrypt(encryptCode, key)\n    fmt.Println(\u0026quot;解密结果：\u0026quot;, decryptCode)\n}\n\nfunc AesEncrypt(orig string, key string) string {\n    // 转成字节数组\n    origData := []byte(orig)\n    k := []byte(key)\n\n    // 分组秘钥\n    block, _ := aes.NewCipher(k)\n    // 获取秘钥块的长度\n    blockSize := block.BlockSize()\n    // 补全码\n    origData = PKCS7Padding(origData, blockSize)\n    // 加密模式\n    blockMode := cipher.NewCBCEncrypter(block, k[:blockSize])\n    // 创建数组\n    cryted := make([]byte, len(origData))\n    // 加密\n    blockMode.CryptBlocks(cryted, origData)\n\n    return base64.StdEncoding.EncodeToString(cryted)\n\n}\n\nfunc AesDecrypt(cryted string, key string) string {\n    // 转成字节数组\n    crytedByte, _ := base64.StdEncoding.DecodeString(cryted)\n    k := []byte(key)\n\n    // 分组秘钥\n    block, _ := aes.NewCipher(k)\n    // 获取秘钥块的长度\n    blockSize := block.BlockSize()\n    // 加密模式\n    blockMode := cipher.NewCBCDecrypter(block, k[:blockSize])\n    // 创建数组\n    orig := make([]byte, len(crytedByte))\n    // 解密\n    blockMode.CryptBlocks(orig, crytedByte)\n    // 去补全码\n    orig = PKCS7UnPadding(orig)\n    return string(orig)\n}\n\n//补码\nfunc PKCS7Padding(ciphertext []byte, blocksize int) []byte {\n    padding := blocksize - len(ciphertext)%blocksize\n    padtext := bytes.Repeat([]byte{byte(padding)}, padding)\n    return append(ciphertext, padtext...)\n}\n\n//去码\nfunc PKCS7UnPadding(origData []byte) []byte {\n    length := len(origData)\n    unpadding := int(origData[length-1])\n    return origData[:(length - unpadding)]\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e参考：\n\u003ca href=\"https://www.jb51.net/article/245521.htm\"\u003ehttps://www.jb51.net/article/245521.htm\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "已经用了2年多的上网梯子,这款是我见过最隐蔽的的翻qiang方式,科学上网,这个确实稳定",
       "Link": "https://studygolang.com/topics/15823#reply0",
       "Description": "\u003cp\u003e\u003cstrong\u003eChainVPN梯子\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e点击直达官网\u003c/strong\u003e[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e我算了一下自己用梯子也快十年了，期间经历了国内的监管从严到松几个来回，起起伏伏，看过太多用过太多，贵的不一定是好的，便宜的也 不定就划算，根据我多年的经验总结，用梯子，最重要的其实关注3个点\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e一、性价比\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e这家的话有一个性价比套餐特别划算,平均算下来￥9.9/月，我自己用了2年多，后来用量大换成无限流量套餐了。\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e二、稳定，隐蔽，安全\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e非常适合国内用户，亚洲地区使用，在国内使用表现很稳定，用的是VLESS+XTLS协议，梯子界的黑科技，隐藏本地IP\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e三、有技术售后\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e这点特别重要，有微信售后真的和省心，这家是为数不多的有微信售后的梯子，售后大神是技术极客，可以解决遇到的所有问题和疑问，没有售后的梯子，出了问题只能自己瞎琢磨，两眼一抹黑。\u003c/p\u003e\n\n\u003cp\u003e点击直达官网[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n",
@@ -53,16 +60,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "新人小白，求用go封装httpclient工具类~",
-      "Link": "https://studygolang.com/topics/15825#reply2",
-      "Description": "\u003cp\u003e需求就是用go语言封装一个httpclient请求工具类 但是我不知道从何下手 不知道该怎么写 有没有大神有现成的让我研究研究~\u003c/p\u003e\n",
+      "Title": "Go1.19 如期发布了",
+      "Link": "https://studygolang.com/topics/15736#reply4",
+      "Description": "\u003cp\u003e在 Go1.18 发布 5 个月后，Go1.19 如期发布了。不过，它的大部分更改都在工具链、runtime 和库的实现中。与往常一样，该版本保持了 Go 1\u003ca href=\"https://go.dev/doc/go1compat\"\u003e的兼容性承诺\u003c/a\u003e。因此几乎所有 Go 程序都能像以前一样继续编译和运行。\u003c/p\u003e\n\n\u003cp\u003eGo 1.19 重要的变化有：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eGo 内存模型，详细参考官方文档：\u003ca href=\"https://go.dev/ref/mem\"\u003ehttps://go.dev/ref/mem\u003c/a\u003e。随着内存模型的更新，Go 1.19 在 sync/atomic 包引入了新的类型：types Bool, Int32, Int64, Uint32, Uint64, Uintptr 和 Pointer 等，这让原子值的使用更方便。\u003c/li\u003e\n\u003cli\u003e工具方面，文档格式增强。文档注释中添加了对链接、列表和更清晰标题的支持。详情见：\u003ca href=\"https://go.dev/doc/comment\"\u003ehttps://go.dev/doc/comment\u003c/a\u003e。\u003c/li\u003e\n\u003cli\u003eruntime 方面，最值得关注的变化就是增加了 runtime/debug.SetMemoryLimit，可以限制 Go 的内存使用。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e其他是一些库的小变化。\u003c/p\u003e\n\n\u003cp\u003e详细变化可以查看官方 Release Notes：\u003ca href=\"https://go.dev/doc/go1.19\"\u003ehttps://go.dev/doc/go1.19\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003eGo 语言中文网也为大家准备好了 Go1.19 的下载包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Go1.19 如期发布了",
-      "Link": "https://studygolang.com/topics/15736#reply4",
-      "Description": "\u003cp\u003e在 Go1.18 发布 5 个月后，Go1.19 如期发布了。不过，它的大部分更改都在工具链、runtime 和库的实现中。与往常一样，该版本保持了 Go 1\u003ca href=\"https://go.dev/doc/go1compat\"\u003e的兼容性承诺\u003c/a\u003e。因此几乎所有 Go 程序都能像以前一样继续编译和运行。\u003c/p\u003e\n\n\u003cp\u003eGo 1.19 重要的变化有：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eGo 内存模型，详细参考官方文档：\u003ca href=\"https://go.dev/ref/mem\"\u003ehttps://go.dev/ref/mem\u003c/a\u003e。随着内存模型的更新，Go 1.19 在 sync/atomic 包引入了新的类型：types Bool, Int32, Int64, Uint32, Uint64, Uintptr 和 Pointer 等，这让原子值的使用更方便。\u003c/li\u003e\n\u003cli\u003e工具方面，文档格式增强。文档注释中添加了对链接、列表和更清晰标题的支持。详情见：\u003ca href=\"https://go.dev/doc/comment\"\u003ehttps://go.dev/doc/comment\u003c/a\u003e。\u003c/li\u003e\n\u003cli\u003eruntime 方面，最值得关注的变化就是增加了 runtime/debug.SetMemoryLimit，可以限制 Go 的内存使用。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e其他是一些库的小变化。\u003c/p\u003e\n\n\u003cp\u003e详细变化可以查看官方 Release Notes：\u003ca href=\"https://go.dev/doc/go1.19\"\u003ehttps://go.dev/doc/go1.19\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003eGo 语言中文网也为大家准备好了 Go1.19 的下载包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
+      "Title": "新人小白，求用go封装httpclient工具类~",
+      "Link": "https://studygolang.com/topics/15825#reply2",
+      "Description": "\u003cp\u003e需求就是用go语言封装一个httpclient请求工具类 但是我不知道从何下手 不知道该怎么写 有没有大神有现成的让我研究研究~\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
