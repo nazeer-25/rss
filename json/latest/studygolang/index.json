@@ -32,13 +32,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "gorm 关联查询问题",
-      "Link": "https://studygolang.com/topics/15828#reply6",
-      "Description": "\u003cp\u003e我最近在学习gorm，正接触到关联模式。其中，我对belongs to的示例定义如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// Employee \n// @Description 雇员\ntype Employee struct {\n\tID   uint   `gorm:\u0026quot;primary_key;autoIncrement:true\u0026quot;` \n\tName string \n\t//[belongs to][一对一]声明写法如下\n\tCID int     //Company ID\n\tC   Company `gorm:\u0026quot;foreignKey:CID\u0026quot;` \n\n// Company\n// @Description: 公司\ntype Company struct {\n\tID   uint   `gorm:\u0026quot;primary_key;autoIncrement:true\u0026quot;` \n\tName string `gorm:\u0026quot;unique\u0026quot;`                       \n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e在继续学习到查询时，我了解到了在Employees表中查Company信息需要使用：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003edb.Model(\u0026amp;employee).Association(\u0026quot;C\u0026quot;).Find(\u0026amp;employee.C)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这样的写法，才能够查询到完整的Employee信息。现在我的问题是，如何查询工作于Name=“CompanyA”的公司的所有雇员信息？我能想到的是分两步：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e//1. 先根据公司名查公司id\ndb.First(\u0026amp;company, \u0026quot;name=?\u0026quot;, \u0026quot;CompanyA\u0026quot;)\n//2. 再用得到的company.ID在用户表中查\ndb.Preload(\u0026quot;C\u0026quot;).Find(\u0026amp;results, \u0026quot;c_id=?\u0026quot;, company.ID)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这样确实可行，但是我觉得会不会有更加简单的查询方式，一步就搞定的那种。官方文档看的很懵，网上搜索也没找到想要的东西，请问大家还知道别的写法吗？\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "9月更新！7个超好用的功能上线了！EasyOps®UI8.0更有大变动",
       "Link": "https://studygolang.com/articles/35852#reply0",
       "Description": "",
@@ -56,6 +49,13 @@
       "Title": "基于Colly的本子爬虫",
       "Link": "https://studygolang.com/articles/35854#reply0",
       "Description": "\u003cp\u003e使用\u003ccode\u003ecolly\u003c/code\u003e进行了以下爬虫的制作，主要爬了一些漫画，尽管框架内实现了并发但是直接使用框架的并发可能导致图片获取顺序的混乱，使用生产消费者模型构造了一套并发框架。地址 \u003ca href=\"https://github.com/Youngkingman/gentlemanSpider\"\u003ehttps://github.com/Youngkingman/gentlemanSpider\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "gorm 关联查询问题",
+      "Link": "https://studygolang.com/topics/15828#reply6",
+      "Description": "\u003cp\u003e我最近在学习gorm，正接触到关联模式。其中，我对belongs to的示例定义如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// Employee \n// @Description 雇员\ntype Employee struct {\n\tID   uint   `gorm:\u0026quot;primary_key;autoIncrement:true\u0026quot;` \n\tName string \n\t//[belongs to][一对一]声明写法如下\n\tCID int     //Company ID\n\tC   Company `gorm:\u0026quot;foreignKey:CID\u0026quot;` \n\n// Company\n// @Description: 公司\ntype Company struct {\n\tID   uint   `gorm:\u0026quot;primary_key;autoIncrement:true\u0026quot;` \n\tName string `gorm:\u0026quot;unique\u0026quot;`                       \n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e在继续学习到查询时，我了解到了在Employees表中查Company信息需要使用：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003edb.Model(\u0026amp;employee).Association(\u0026quot;C\u0026quot;).Find(\u0026amp;employee.C)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这样的写法，才能够查询到完整的Employee信息。现在我的问题是，如何查询工作于Name=“CompanyA”的公司的所有雇员信息？我能想到的是分两步：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e//1. 先根据公司名查公司id\ndb.First(\u0026amp;company, \u0026quot;name=?\u0026quot;, \u0026quot;CompanyA\u0026quot;)\n//2. 再用得到的company.ID在用户表中查\ndb.Preload(\u0026quot;C\u0026quot;).Find(\u0026amp;results, \u0026quot;c_id=?\u0026quot;, company.ID)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这样确实可行，但是我觉得会不会有更加简单的查询方式，一步就搞定的那种。官方文档看的很懵，网上搜索也没找到想要的东西，请问大家还知道别的写法吗？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -95,16 +95,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "IBM深度解读：为什么我们需要可观测性？",
-      "Link": "https://studygolang.com/articles/35850#reply0",
-      "Description": "",
+      "Title": "Go 1.19.1 发布",
+      "Link": "https://studygolang.com/topics/15824#reply0",
+      "Description": "\u003cp\u003e大家好，Go 官方发布了 Go1.19.1 和 Go1.18.6，这是两个小版本，主要包括安全更新和一些 bug 修复，这次一共修复了 20 个 issue。\u003c/p\u003e\n\n\u003cp\u003e首先是两个安全更新：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003enet/http 包：handle server errors after sending GOAWAY\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eA closing HTTP/2 server connection could hang forever waiting for a clean shutdown that was preempted by a subsequent fatal error. This failure mode could be exploited to cause a denial of service.\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003enet/url 包：JoinPath does not strip relative path components in all circumstances\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eJoinPath and URL.JoinPath would not remove ../ path components appended to a relative path. For example, JoinPath(\u0026rdquo;\u003ca href=\"https://go.dev/\"\u003ehttps://go.dev\u003c/a\u003e\u0026rdquo;, \u0026ldquo;../go\u0026rdquo;) returned the URL \u003ca href=\"https://go.dev/go\"\u003ehttps://go.dev/../go\u003c/a\u003e, despite the JoinPath documentation stating that ../ path elements are cleaned from the result.\u003c/p\u003e\n\n\u003cp\u003e其他的 issue 列表见：\u003ca href=\"https://github.com/golang/go/issues?q=milestone%3AGo1.19.1+label%3ACherryPickApproved\"\u003ehttps://github.com/golang/go/issues?q=milestone%3AGo1.19.1+label%3ACherryPickApproved\u003c/a\u003e，文末点击「阅读原文」可以直达该页面。\u003c/p\u003e\n\n\u003cp\u003eGo语言中文网为大家准备好了最新的安装包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Go 1.19.1 发布",
-      "Link": "https://studygolang.com/topics/15824#reply0",
-      "Description": "\u003cp\u003e大家好，Go 官方发布了 Go1.19.1 和 Go1.18.6，这是两个小版本，主要包括安全更新和一些 bug 修复，这次一共修复了 20 个 issue。\u003c/p\u003e\n\n\u003cp\u003e首先是两个安全更新：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003enet/http 包：handle server errors after sending GOAWAY\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eA closing HTTP/2 server connection could hang forever waiting for a clean shutdown that was preempted by a subsequent fatal error. This failure mode could be exploited to cause a denial of service.\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003enet/url 包：JoinPath does not strip relative path components in all circumstances\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eJoinPath and URL.JoinPath would not remove ../ path components appended to a relative path. For example, JoinPath(\u0026rdquo;\u003ca href=\"https://go.dev/\"\u003ehttps://go.dev\u003c/a\u003e\u0026rdquo;, \u0026ldquo;../go\u0026rdquo;) returned the URL \u003ca href=\"https://go.dev/go\"\u003ehttps://go.dev/../go\u003c/a\u003e, despite the JoinPath documentation stating that ../ path elements are cleaned from the result.\u003c/p\u003e\n\n\u003cp\u003e其他的 issue 列表见：\u003ca href=\"https://github.com/golang/go/issues?q=milestone%3AGo1.19.1+label%3ACherryPickApproved\"\u003ehttps://github.com/golang/go/issues?q=milestone%3AGo1.19.1+label%3ACherryPickApproved\u003c/a\u003e，文末点击「阅读原文」可以直达该页面。\u003c/p\u003e\n\n\u003cp\u003eGo语言中文网为大家准备好了最新的安装包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
+      "Title": "IBM深度解读：为什么我们需要可观测性？",
+      "Link": "https://studygolang.com/articles/35850#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
