@@ -25,13 +25,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "新人小白，求用go封装httpclient工具类~",
-      "Link": "https://studygolang.com/topics/15825#reply2",
-      "Description": "\u003cp\u003e需求就是用go语言封装一个httpclient请求工具类 但是我不知道从何下手 不知道该怎么写 有没有大神有现成的让我研究研究~\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "gorm 关联查询问题",
       "Link": "https://studygolang.com/topics/15828#reply4",
       "Description": "\u003cp\u003e我最近在学习gorm，正接触到关联模式。其中，我对belongs to的示例定义如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// Employee \n// @Description 雇员\ntype Employee struct {\n\tID   uint   `gorm:\u0026quot;primary_key;autoIncrement:true\u0026quot;` \n\tName string \n\t//[belongs to][一对一]声明写法如下\n\tCID int     //Company ID\n\tC   Company `gorm:\u0026quot;foreignKey:CID\u0026quot;` \n\n// Company\n// @Description: 公司\ntype Company struct {\n\tID   uint   `gorm:\u0026quot;primary_key;autoIncrement:true\u0026quot;` \n\tName string `gorm:\u0026quot;unique\u0026quot;`                       \n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e在继续学习到查询时，我了解到了在Employees表中查Company信息需要使用：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003edb.Model(\u0026amp;employee).Association(\u0026quot;C\u0026quot;).Find(\u0026amp;employee.C)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这样的写法，才能够查询到完整的Employee信息。现在我的问题是，如何查询工作于Name=“CompanyA”的公司的所有雇员信息？我能想到的是分两步：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e//1. 先根据公司名查公司id\ndb.First(\u0026amp;company, \u0026quot;name=?\u0026quot;, \u0026quot;CompanyA\u0026quot;)\n//2. 再用得到的company.ID在用户表中查\ndb.Preload(\u0026quot;C\u0026quot;).Find(\u0026amp;results, \u0026quot;c_id=?\u0026quot;, company.ID)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这样确实可行，但是我觉得会不会有更加简单的查询方式，一步就搞定的那种。官方文档看的很懵，网上搜索也没找到想要的东西，请问大家还知道别的写法吗？\u003c/p\u003e\n",
@@ -60,16 +53,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Go 1.19.1 发布",
-      "Link": "https://studygolang.com/topics/15824#reply0",
-      "Description": "\u003cp\u003e大家好，Go 官方发布了 Go1.19.1 和 Go1.18.6，这是两个小版本，主要包括安全更新和一些 bug 修复，这次一共修复了 20 个 issue。\u003c/p\u003e\n\n\u003cp\u003e首先是两个安全更新：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003enet/http 包：handle server errors after sending GOAWAY\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eA closing HTTP/2 server connection could hang forever waiting for a clean shutdown that was preempted by a subsequent fatal error. This failure mode could be exploited to cause a denial of service.\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003enet/url 包：JoinPath does not strip relative path components in all circumstances\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eJoinPath and URL.JoinPath would not remove ../ path components appended to a relative path. For example, JoinPath(\u0026rdquo;\u003ca href=\"https://go.dev/\"\u003ehttps://go.dev\u003c/a\u003e\u0026rdquo;, \u0026ldquo;../go\u0026rdquo;) returned the URL \u003ca href=\"https://go.dev/go\"\u003ehttps://go.dev/../go\u003c/a\u003e, despite the JoinPath documentation stating that ../ path elements are cleaned from the result.\u003c/p\u003e\n\n\u003cp\u003e其他的 issue 列表见：\u003ca href=\"https://github.com/golang/go/issues?q=milestone%3AGo1.19.1+label%3ACherryPickApproved\"\u003ehttps://github.com/golang/go/issues?q=milestone%3AGo1.19.1+label%3ACherryPickApproved\u003c/a\u003e，文末点击「阅读原文」可以直达该页面。\u003c/p\u003e\n\n\u003cp\u003eGo语言中文网为大家准备好了最新的安装包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
+      "Title": "新人小白，求用go封装httpclient工具类~",
+      "Link": "https://studygolang.com/topics/15825#reply2",
+      "Description": "\u003cp\u003e需求就是用go语言封装一个httpclient请求工具类 但是我不知道从何下手 不知道该怎么写 有没有大神有现成的让我研究研究~\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Go1.19 如期发布了",
-      "Link": "https://studygolang.com/topics/15736#reply3",
-      "Description": "\u003cp\u003e在 Go1.18 发布 5 个月后，Go1.19 如期发布了。不过，它的大部分更改都在工具链、runtime 和库的实现中。与往常一样，该版本保持了 Go 1\u003ca href=\"https://go.dev/doc/go1compat\"\u003e的兼容性承诺\u003c/a\u003e。因此几乎所有 Go 程序都能像以前一样继续编译和运行。\u003c/p\u003e\n\n\u003cp\u003eGo 1.19 重要的变化有：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eGo 内存模型，详细参考官方文档：\u003ca href=\"https://go.dev/ref/mem\"\u003ehttps://go.dev/ref/mem\u003c/a\u003e。随着内存模型的更新，Go 1.19 在 sync/atomic 包引入了新的类型：types Bool, Int32, Int64, Uint32, Uint64, Uintptr 和 Pointer 等，这让原子值的使用更方便。\u003c/li\u003e\n\u003cli\u003e工具方面，文档格式增强。文档注释中添加了对链接、列表和更清晰标题的支持。详情见：\u003ca href=\"https://go.dev/doc/comment\"\u003ehttps://go.dev/doc/comment\u003c/a\u003e。\u003c/li\u003e\n\u003cli\u003eruntime 方面，最值得关注的变化就是增加了 runtime/debug.SetMemoryLimit，可以限制 Go 的内存使用。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e其他是一些库的小变化。\u003c/p\u003e\n\n\u003cp\u003e详细变化可以查看官方 Release Notes：\u003ca href=\"https://go.dev/doc/go1.19\"\u003ehttps://go.dev/doc/go1.19\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003eGo 语言中文网也为大家准备好了 Go1.19 的下载包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
+      "Title": "Go 1.19.1 发布",
+      "Link": "https://studygolang.com/topics/15824#reply0",
+      "Description": "\u003cp\u003e大家好，Go 官方发布了 Go1.19.1 和 Go1.18.6，这是两个小版本，主要包括安全更新和一些 bug 修复，这次一共修复了 20 个 issue。\u003c/p\u003e\n\n\u003cp\u003e首先是两个安全更新：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003enet/http 包：handle server errors after sending GOAWAY\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eA closing HTTP/2 server connection could hang forever waiting for a clean shutdown that was preempted by a subsequent fatal error. This failure mode could be exploited to cause a denial of service.\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003enet/url 包：JoinPath does not strip relative path components in all circumstances\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eJoinPath and URL.JoinPath would not remove ../ path components appended to a relative path. For example, JoinPath(\u0026rdquo;\u003ca href=\"https://go.dev/\"\u003ehttps://go.dev\u003c/a\u003e\u0026rdquo;, \u0026ldquo;../go\u0026rdquo;) returned the URL \u003ca href=\"https://go.dev/go\"\u003ehttps://go.dev/../go\u003c/a\u003e, despite the JoinPath documentation stating that ../ path elements are cleaned from the result.\u003c/p\u003e\n\n\u003cp\u003e其他的 issue 列表见：\u003ca href=\"https://github.com/golang/go/issues?q=milestone%3AGo1.19.1+label%3ACherryPickApproved\"\u003ehttps://github.com/golang/go/issues?q=milestone%3AGo1.19.1+label%3ACherryPickApproved\u003c/a\u003e，文末点击「阅读原文」可以直达该页面。\u003c/p\u003e\n\n\u003cp\u003eGo语言中文网为大家准备好了最新的安装包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -95,6 +88,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "Go1.19 如期发布了",
+      "Link": "https://studygolang.com/topics/15736#reply3",
+      "Description": "\u003cp\u003e在 Go1.18 发布 5 个月后，Go1.19 如期发布了。不过，它的大部分更改都在工具链、runtime 和库的实现中。与往常一样，该版本保持了 Go 1\u003ca href=\"https://go.dev/doc/go1compat\"\u003e的兼容性承诺\u003c/a\u003e。因此几乎所有 Go 程序都能像以前一样继续编译和运行。\u003c/p\u003e\n\n\u003cp\u003eGo 1.19 重要的变化有：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eGo 内存模型，详细参考官方文档：\u003ca href=\"https://go.dev/ref/mem\"\u003ehttps://go.dev/ref/mem\u003c/a\u003e。随着内存模型的更新，Go 1.19 在 sync/atomic 包引入了新的类型：types Bool, Int32, Int64, Uint32, Uint64, Uintptr 和 Pointer 等，这让原子值的使用更方便。\u003c/li\u003e\n\u003cli\u003e工具方面，文档格式增强。文档注释中添加了对链接、列表和更清晰标题的支持。详情见：\u003ca href=\"https://go.dev/doc/comment\"\u003ehttps://go.dev/doc/comment\u003c/a\u003e。\u003c/li\u003e\n\u003cli\u003eruntime 方面，最值得关注的变化就是增加了 runtime/debug.SetMemoryLimit，可以限制 Go 的内存使用。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e其他是一些库的小变化。\u003c/p\u003e\n\n\u003cp\u003e详细变化可以查看官方 Release Notes：\u003ca href=\"https://go.dev/doc/go1.19\"\u003ehttps://go.dev/doc/go1.19\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003eGo 语言中文网也为大家准备好了 Go1.19 的下载包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "WGCLOUD官网是什么",
       "Link": "https://studygolang.com/topics/15822#reply0",
       "Description": "\u003cp\u003e\u003ca href=\"http://www.wgstart.com\"\u003ewww.wgstart.com\u003c/a\u003e\u003c/p\u003e\n",
@@ -105,6 +105,13 @@
       "Title": "gookit/properties - Java Properties 格式内容的解析，编码解码库",
       "Link": "https://studygolang.com/topics/15821#reply0",
       "Description": "\u003cp\u003e\u003ca href=\"https://github.com/gookit/properties\"\u003egookit/properties\u003c/a\u003e - Java Properties 格式内容的解析器，编码解码库\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e通用的Java \u003ccode\u003eproperties\u003c/code\u003e 格式内容解析器\u003c/li\u003e\n\u003cli\u003e支持像 \u003ccode\u003ejson\u003c/code\u003e 包一样的 \u003ccode\u003eMarshal\u003c/code\u003e 和 \u003ccode\u003eUnmarshal\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e支持以 \u003ccode\u003e!\u003c/code\u003e, \u003ccode\u003e#\u003c/code\u003e 开头的行注释\n\n\u003cul\u003e\n\u003cli\u003e增强: 也额外支持 \u003ccode\u003e//\u003c/code\u003e, \u003ccode\u003e/* multi line comments */\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003e支持多行字符串值，以 \u003ccode\u003e\\\\\u003c/code\u003e 结尾进行换行\n\n\u003cul\u003e\n\u003cli\u003e增强: 也额外支持 \u003ccode\u003e'''multi line string''''\u003c/code\u003e, \u003ccode\u003e\u0026quot;\u0026quot;\u0026quot;multi line string\u0026quot;\u0026quot;\u0026quot;\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003e支持值引用 var 解析。 format: \u003ccode\u003e${some.other.key}\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e支持 ENV 变量解析。 format: \u003ccode\u003e${APP_ENV}\u003c/code\u003e, \u003ccode\u003e${APP_ENV | default}\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003eGithub: \u003ca href=\"https://github.com/gookit/properties\"\u003ehttps://github.com/gookit/properties\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch2\u003e使用说明\u003c/h2\u003e\n\n\u003cp\u003e使用说明请看 \u003ca href=\"https://github.com/gookit/properties/blob/main/README.zh-CN.md\"\u003eREADME\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "【招聘】【北京】字节跳动 搜索 服务端 GoLang 招聘",
+      "Link": "https://studygolang.com/topics/15798#reply1",
+      "Description": "\u003cp\u003e字节搜索 服务端 招人\u003cbr\u003e\n不限语言，只要愿意转 GO 就可以~~\u003cbr\u003e\n工作地点 北京 大钟寺 附近\u003cbr\u003e\n欢迎点击链接投递或联系我， 微信：diudiufox\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://job.toutiao.com/s/j37Pt93\"\u003ehttps://job.toutiao.com/s/j37Pt93\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e职位描述\u003c/p\u003e\n\n\u003cp\u003e1、参与ByteDance搜索工程研发工作，用最前沿的工程技术，强大的技术驱动力，做出最激动人心的技术产出、给用户提供最好的搜索体验；\u003cbr\u003e\n2、参与抖音/今日头条/西瓜视频/搜索中台等搜索业务的工程研发工作，服务数亿的用户；\u003cbr\u003e\n3、参与搜索工程方向多个领域的优化、改进和创造、创新工作，可能的方向包括：\u003cbr\u003e\n(1) 业务工程： 以最高的人效来支持搜索产品脑洞无极限的高频迭代需求，用最好的技术来赋能业务的增长；\u003cbr\u003e\n(2) 性能\u0026amp;稳定性： 以最强的技术能力和最细致入微的技术视角来挖掘系统的性能瓶颈，不设边界的去突破常规进行优化和提升，打造全球最快、最稳的搜索产品；\u003cbr\u003e\n(3) 搜索工程架构： 能够对庞大的搜索架构进行最优化的治理，确保整体系统的设计合理，运作顺畅，打造小而美的系统；\u003cbr\u003e\n(4) 搜索平台： 平台方向包括字节如意平台、搜索中台、搜索云平台等，解决千亿级的数据平台化工作和苛刻的高准招率问题；\u003cbr\u003e\n(5) 搜索离线： 对千亿的文档和短视频数据集里进行数据处理，确保能够高时效送索引，并推动离线数据平台化的建设，为搜索引擎提供可靠的数据支撑。\u003c/p\u003e\n\n\u003cp\u003e职位要求\u003c/p\u003e\n\n\u003cp\u003e1、出色的分析问题、解决问题能力，总是能从纷繁复杂的工程现象中一眼看出问题本质；\u003cbr\u003e\n2、出色的工程能力、动手能力、架构设计能力，能够设计和落地大流量高并发的搜索业务系统；\u003cbr\u003e\n3、强悍的代码能力、数据结构和基础算法功底，能够举一反三；\u003cbr\u003e\n4、熟悉Linux开发环境，有C,C++,Golang,Java 等任一种使用娴熟的语言，并不排除学习更多技能；\u003cbr\u003e\n5、有主流大规模搜索方向开发经验的优先；\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
