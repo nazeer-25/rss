@@ -14,7 +14,7 @@
     </item>
     <item>
       <title>gorm 关联查询问题</title>
-      <link>https://studygolang.com/topics/15828#reply4</link>
+      <link>https://studygolang.com/topics/15828#reply5</link>
       <description>&lt;p&gt;我最近在学习gorm，正接触到关联模式。其中，我对belongs to的示例定义如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// Employee &#xA;// @Description 雇员&#xA;type Employee struct {&#xA;&#x9;ID   uint   `gorm:&amp;quot;primary_key;autoIncrement:true&amp;quot;` &#xA;&#x9;Name string &#xA;&#x9;//[belongs to][一对一]声明写法如下&#xA;&#x9;CID int     //Company ID&#xA;&#x9;C   Company `gorm:&amp;quot;foreignKey:CID&amp;quot;` &#xA;&#xA;// Company&#xA;// @Description: 公司&#xA;type Company struct {&#xA;&#x9;ID   uint   `gorm:&amp;quot;primary_key;autoIncrement:true&amp;quot;` &#xA;&#x9;Name string `gorm:&amp;quot;unique&amp;quot;`                       &#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;在继续学习到查询时，我了解到了在Employees表中查Company信息需要使用：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;db.Model(&amp;amp;employee).Association(&amp;quot;C&amp;quot;).Find(&amp;amp;employee.C)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;这样的写法，才能够查询到完整的Employee信息。现在我的问题是，如何查询工作于Name=“CompanyA”的公司的所有雇员信息？我能想到的是分两步：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//1. 先根据公司名查公司id&#xA;db.First(&amp;amp;company, &amp;quot;name=?&amp;quot;, &amp;quot;CompanyA&amp;quot;)&#xA;//2. 再用得到的company.ID在用户表中查&#xA;db.Preload(&amp;quot;C&amp;quot;).Find(&amp;amp;results, &amp;quot;c_id=?&amp;quot;, company.ID)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;这样确实可行，但是我觉得会不会有更加简单的查询方式，一步就搞定的那种。官方文档看的很懵，网上搜索也没找到想要的东西，请问大家还知道别的写法吗？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
@@ -31,6 +31,10 @@
       <title>新人小白，求用go封装httpclient工具类~</title>
       <link>https://studygolang.com/topics/15825#reply2</link>
       <description>&lt;p&gt;需求就是用go语言封装一个httpclient请求工具类 但是我不知道从何下手 不知道该怎么写 有没有大神有现成的让我研究研究~&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>收纳阿里巴巴优秀技术文章，《阿里开发者手册》-Golang专题带你轻松玩转golang~</title>
+      <link>https://studygolang.com/articles/35849#reply0</link>
     </item>
     <item>
       <title>Go1.19 如期发布了</title>
@@ -55,10 +59,6 @@
     <item>
       <title>IBM深度解读：为什么我们需要可观测性？</title>
       <link>https://studygolang.com/articles/35850#reply0</link>
-    </item>
-    <item>
-      <title>收纳阿里巴巴优秀技术文章，《阿里开发者手册》-Golang专题带你轻松玩转golang~</title>
-      <link>https://studygolang.com/articles/35849#reply0</link>
     </item>
     <item>
       <title>已经用了2年多的上网梯子,这款是我见过最隐蔽的的翻qiang方式,科学上网,这个确实稳定</title>
@@ -120,6 +120,11 @@
     <item>
       <title>大型开源社区Casbin招募远程运营实习生！（长期招募）</title>
       <link>https://studygolang.com/articles/35848#reply0</link>
+    </item>
+    <item>
+      <title>gorm 关联查询问题</title>
+      <link>https://studygolang.com/topics/15828#reply4</link>
+      <description>&lt;p&gt;我最近在学习gorm，正接触到关联模式。其中，我对belongs to的示例定义如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// Employee &#xA;// @Description 雇员&#xA;type Employee struct {&#xA;&#x9;ID   uint   `gorm:&amp;quot;primary_key;autoIncrement:true&amp;quot;` &#xA;&#x9;Name string &#xA;&#x9;//[belongs to][一对一]声明写法如下&#xA;&#x9;CID int     //Company ID&#xA;&#x9;C   Company `gorm:&amp;quot;foreignKey:CID&amp;quot;` &#xA;&#xA;// Company&#xA;// @Description: 公司&#xA;type Company struct {&#xA;&#x9;ID   uint   `gorm:&amp;quot;primary_key;autoIncrement:true&amp;quot;` &#xA;&#x9;Name string `gorm:&amp;quot;unique&amp;quot;`                       &#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;在继续学习到查询时，我了解到了在Employees表中查Company信息需要使用：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;db.Model(&amp;amp;employee).Association(&amp;quot;C&amp;quot;).Find(&amp;amp;employee.C)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;这样的写法，才能够查询到完整的Employee信息。现在我的问题是，如何查询工作于Name=“CompanyA”的公司的所有雇员信息？我能想到的是分两步：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//1. 先根据公司名查公司id&#xA;db.First(&amp;amp;company, &amp;quot;name=?&amp;quot;, &amp;quot;CompanyA&amp;quot;)&#xA;//2. 再用得到的company.ID在用户表中查&#xA;db.Preload(&amp;quot;C&amp;quot;).Find(&amp;amp;results, &amp;quot;c_id=?&amp;quot;, company.ID)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;这样确实可行，但是我觉得会不会有更加简单的查询方式，一步就搞定的那种。官方文档看的很懵，网上搜索也没找到想要的东西，请问大家还知道别的写法吗？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go1.19 如期发布了</title>
