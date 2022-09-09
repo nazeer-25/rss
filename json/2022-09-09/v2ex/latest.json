@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教如何在多个规律表名的表查询某个 id 最大值，并确认是哪个表 - MySQL",
+      "Link": "https://www.v2ex.com/t/878970",
+      "Description": "\u003ch1\u003e表说明\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e表名：固定的前缀+%Y%m%d, 如 \u003ccode\u003esummary_20220809\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e表结构：count BIGINT,  id BIGINT\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1\u003e查询单个表值示例\u003c/h1\u003e\n\u003cpre\u003e\u003ccode class=\"language-mysql\"\u003eselect count from @table where id = @id;\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch1\u003e思路\u003c/h1\u003e\n\u003cp\u003e是否只能用循环日期+动态 sql 处理？\u003c/p\u003e\n\u003cp\u003e伪代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003ecreate PROCEDURE findMaxDay(id INT, mouth VARCHAR(255);)\nbegin\n\t-- 省略一些赋值\n\n    WHILE x \u0026lt;= 31 DO\n        set table_name = CONCAT('summary_',mouth, lpad(x,2,0));\n        -- 查询单表结果并赋值\n        set sql = CONCAT(\"select count INTO @tmp from '\", table_name, \"' where id = '\", id,\"'\");\n        PREPARE stmt FROM @sql;\n        EXECUTE stmt;\n        deallocate prepare stmt;\n        -- 比较和更新结果\n        set @day = IF( @tmp \u0026gt; @max, lpad(x,2,0), @day);\n        set @max = max(tmp, max);\n        set x = x + 1;\n    END WHILE;\n    -- 输出结果\n    select day;\nend\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e请大佬看看这样的思路对不对？有没有更好的方案。\u003c/p\u003e\n",
+      "Author": "killva4624",
+      "PubDate": "2022-09-09T10:11:24Z"
+    },
+    {
       "Title": "红米 k50 的充电头把 MacBook air 的 usb 口干沉默了 - Apple",
       "Link": "https://www.v2ex.com/t/878969",
       "Description": "我用红米 k50 的原装 67w 充电头插 MacBook air m1 上会把 usb 弄得完全用不了。\u003cbr /\u003e\u003cbr /\u003e插上去第一次能充电，拔了再插就会没反应了，充不进电，两个口都没反应。然后再插别的充电线，usb 设备也都会用不了。\u003cbr /\u003e\u003cbr /\u003e重启一下 usb 就正常了。但是只要一插红米这套充电就能把 usb 口弄出问题。今天拿别人的同款的 air 试了下也一样复现了。\u003cbr /\u003e\u003cbr /\u003e我以为支持 pd 充电随便插没事的。不过我不确定是我这个充电头有问题，有红米充电头的可以试一下。",

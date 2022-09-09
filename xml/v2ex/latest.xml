@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教如何在多个规律表名的表查询某个 id 最大值，并确认是哪个表 - MySQL</title>
+      <link>https://www.v2ex.com/t/878970</link>
+      <description>&lt;h1&gt;表说明&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;表名：固定的前缀+%Y%m%d, 如 &lt;code&gt;summary_20220809&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;表结构：count BIGINT,  id BIGINT&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;查询单个表值示例&lt;/h1&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;select count from @table where id = @id;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h1&gt;思路&lt;/h1&gt;&#xA;&lt;p&gt;是否只能用循环日期+动态 sql 处理？&lt;/p&gt;&#xA;&lt;p&gt;伪代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;create PROCEDURE findMaxDay(id INT, mouth VARCHAR(255);)&#xA;begin&#xA;&#x9;-- 省略一些赋值&#xA;&#xA;    WHILE x &amp;lt;= 31 DO&#xA;        set table_name = CONCAT(&#39;summary_&#39;,mouth, lpad(x,2,0));&#xA;        -- 查询单表结果并赋值&#xA;        set sql = CONCAT(&#34;select count INTO @tmp from &#39;&#34;, table_name, &#34;&#39; where id = &#39;&#34;, id,&#34;&#39;&#34;);&#xA;        PREPARE stmt FROM @sql;&#xA;        EXECUTE stmt;&#xA;        deallocate prepare stmt;&#xA;        -- 比较和更新结果&#xA;        set @day = IF( @tmp &amp;gt; @max, lpad(x,2,0), @day);&#xA;        set @max = max(tmp, max);&#xA;        set x = x + 1;&#xA;    END WHILE;&#xA;    -- 输出结果&#xA;    select day;&#xA;end&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;请大佬看看这样的思路对不对？有没有更好的方案。&lt;/p&gt;&#xA;</description>
+      <author>killva4624</author>
+      <pubDate>09 Sep 2022 10:11:24 +0000</pubDate>
+    </item>
+    <item>
       <title>红米 k50 的充电头把 MacBook air 的 usb 口干沉默了 - Apple</title>
       <link>https://www.v2ex.com/t/878969</link>
       <description>我用红米 k50 的原装 67w 充电头插 MacBook air m1 上会把 usb 弄得完全用不了。&lt;br /&gt;&lt;br /&gt;插上去第一次能充电，拔了再插就会没反应了，充不进电，两个口都没反应。然后再插别的充电线，usb 设备也都会用不了。&lt;br /&gt;&lt;br /&gt;重启一下 usb 就正常了。但是只要一插红米这套充电就能把 usb 口弄出问题。今天拿别人的同款的 air 试了下也一样复现了。&lt;br /&gt;&lt;br /&gt;我以为支持 pd 充电随便插没事的。不过我不确定是我这个充电头有问题，有红米充电头的可以试一下。</description>
