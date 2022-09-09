@@ -4,6 +4,110 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教大家, 前端图片合成有哪些插件可以使用 - 问与答</title>
+      <link>https://www.v2ex.com/t/878868</link>
+      <description>目前要做一个功能&lt;br /&gt;具体的就是有上衣,裤子,发型,嘴型,鼻子,眼睛这些可选. 然后每次选择后实时的在页面上呈现. 用户选择完成后.给用户生成一张图片.&lt;br /&gt;想了解一下.有哪些前端插件可以使用,谢谢大家!</description>
+      <author>changepll</author>
+      <pubDate>09 Sep 2022 03:56:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>摸鱼一个半月，做了个不好用的静态站点生成网站。 - 分享创造</title>
+      <link>https://www.v2ex.com/t/878867</link>
+      <description>&lt;h3&gt;前言&lt;/h3&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;先说一下，分享出来不是为了推广或者什么（还没做完），是单纯的遇到瓶颈了，想看看万能的 v 友有什么看法~ &lt;/p&gt;&#xA;&lt;p&gt;不好意思，项目也没有开源，本来是打算当一个产品去做的。不过后面如果干不下去了就开源了吧（还有一个原因是写得很屎，不好意思开源）。&lt;/p&gt;&#xA;&lt;p&gt;链接在最下面 ~&lt;/p&gt;&#xA;&lt;h3&gt;项目截图&lt;/h3&gt;&#xA;&lt;hr/&gt;&#xA;&lt;h4&gt;编辑页面&lt;/h4&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://peasy.oss-cn-shanghai.aliyuncs.com/3bd5dbed-52b3-430e-a96c-0b79351aaa41&#34;/&gt;&lt;/p&gt;&#xA;&lt;h4&gt;Dashboard&lt;/h4&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;http://peasy.oss-cn-shanghai.aliyuncs.com/4f6c418e-34ad-43c8-b6e1-cfb632a58686&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;为啥做这个东西？&lt;/h3&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;前不久瞎逛，看到有个接外包的网站写个静态页面收费五十一百的。就在想如果做个静态页面生成的网站应该还是有点市场的，并且也可以做成简历生成的。最主要的是自己想搞点东西出来当副业。&lt;/p&gt;&#xA;&lt;p&gt;后来也看了市场上众多竞品，基本上都不提供下载功能（都得在他们网站发布访问），要么就是像 Ant Design Landing Page 那种面向开发者的下载下来是源码。&lt;/p&gt;&#xA;&lt;p&gt;然后就想做一个能直接下载 html 的网站，也就做出来这么个东西了。&lt;/p&gt;&#xA;&lt;h3&gt;实现&lt;/h3&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;底层的实现逻辑很简单，说白了就是配置一个 css 的对象，然后生成页面的时候再拿这组配置去渲染。&lt;/p&gt;&#xA;&lt;p&gt;一开始实现的时候是直接用 vue ssr 的 api 直接生成 html 文件的，后面迭代多了一些事件和脚本要处理，还是直接依赖 vue 了（用的 vue 官方贴的 cdn ）&lt;/p&gt;&#xA;&lt;p&gt;页面结构上其实就是由多个 Section （固定宽度 100%）堆叠组成，然后再 Section 里面配置组件。&lt;/p&gt;&#xA;&lt;p&gt;目前基础组件有容器组件（最主要的组件，使用 Flex 布局），文本，图片，媒体等等。&lt;/p&gt;&#xA;&lt;h3&gt;功能和吐槽&lt;/h3&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;先说几个比较值得说的功能特点吧（自认为的）&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;免登录直接下载 html 文件&lt;/strong&gt; -- 改完直接点击右上角的 Download 就能下载可以直接打开的 index.html 文件，如果没有项目保存需求的话，不需要登录也可以的。（也有 &lt;a href=&#34;http://github.io&#34; rel=&#34;nofollow&#34;&gt;github.io&lt;/a&gt; 、vercel 的配置指引）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;组件配置联动&lt;/strong&gt;&#xA;-- 复制组件的时候，默认两个组件是关联在一起的，也就是配置是公用一套的，也支持单组配置取消关联然后独立设置。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;项目 /模板 /素材复用&lt;/strong&gt; -- Template/Section/Component 都能直接保存，然后复用。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多页&lt;/strong&gt; -- 多个页面其实就是多个 html ，Download 会直接下载全部页面的 zip ，跳转可以用 ./xxxx.html 跳转&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;支持双端配置&lt;/strong&gt; -- 一组配置支持双端共用和分开配置两种，一般都是先写好 pc 的，然后切移动端再做兼容处理，如果不是复杂的结果处理起来还是挺方便的（其实还支持 rem 和媒体查询，但是感觉不好用）。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;接下来是吐槽&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;难用&lt;/strong&gt; -- 很难配，即使上手了会使用快捷键，配起来也很繁琐。而且因为层级遮挡等问题，有时候要选容器组件，得通过 Layers 树或者切换父子组件的方式去选中。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;功能有限&lt;/strong&gt; -- 因为没法有灵活的 js 去控制，样式配置也只有一套。如果要给组件加个 Active 之类的状态和对应样式，就会很难做。（有想过要不要加 plugin 的方式去支持）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;上手困难&lt;/strong&gt; -- 因为项目做完还没好好做引导，上手基本上是闷逼的。如果是开发者摸索摸索可能还能懂个一二三，如果是非开发者那基本用不了。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;生成的页面不可维护&lt;/strong&gt; -- 生成的页面元素都是用内联样式，生成的 index.html 基本上不可读。如果要再加点东西会很困难。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;想法&lt;/h3&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;说到底，还是对自己项目的定位不清晰。一开始想做面对非开发者的，但是后面做着做着，发现非开发者根本用不了这套东西。但是开发者又不需要这种难用得要死的东西。&lt;/p&gt;&#xA;&lt;p&gt;有点迷茫要做成什么样，因为确实不好用，我自己配模板都懒得配。&lt;/p&gt;&#xA;&lt;p&gt;我个人想法是干脆这套配置就不直接开放出去了（当做一个额外功能），配置的工作留给自己用😭。然后再单独做一套工作流，例如可以直接配置「文本+图片」之类的形式，然后输出页面或者简历。&lt;/p&gt;&#xA;&lt;h3&gt;最后再贴体验链接&lt;/h3&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;因为项目还没有做指引，直接上手可能会闷逼。估计还有些 bug ，目前还在开发中。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://p-easy.net/site/edit&#34; rel=&#34;nofollow&#34;&gt;https://p-easy.net/site/edit&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;对了，无视那些付费计划，目前并没有计划。只是模板需要，和不想直接把自定义子域名的功能开放出去（维护服务器也要钱钱的( Ĭ ^ Ĭ )），所以先做了一套会员系统。&lt;/p&gt;&#xA;&lt;p&gt;用户系统是直接用的 Logto ，登录注册流程都挺简单的。也可以直接使用测试账号 test ，密码 123456 体验。&lt;/p&gt;&#xA;</description>
+      <author>nightcatsama</author>
+      <pubDate>09 Sep 2022 03:55:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>兄弟们，自己做了个 app，求提点意见： iOS 应用双开，边刷抖音边学习 - 程序员</title>
+      <link>https://www.v2ex.com/t/878866</link>
+      <description>&lt;p&gt;自己平时经常玩王者荣耀,每次开局的时候 我选完英雄就喜欢切出去耍会抖音.再回到游戏的时候 经常成了挂机队友. &lt;/p&gt;&#xA;&lt;p&gt;因此写了这么个应用,可以边玩游戏边刷抖音 微博和新闻. 对于学生党来说 更是可以边在刷抖音打游戏的时候 顺便背会单词 降低点负罪感 充分利用好时间. &lt;/p&gt;&#xA;&lt;p&gt;App 已经上架 欢迎从 app store 搜索 悬浮工具箱&lt;/p&gt;&#xA;</description>
+      <author>SkipToMyLou</author>
+      <pubDate>09 Sep 2022 03:46:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>《阿凡达 2：水之道》，有期待的 - 电影</title>
+      <link>https://www.v2ex.com/t/878865</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://imgse.com/i/vqX0ot&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;vqX0ot.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2022/09/09/vqX0ot.jpg&#34;/&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;当年 1 上映带来的震撼还记得吗？&lt;/p&gt;&#xA;</description>
+      <author>sevenyangcc</author>
+      <pubDate>09 Sep 2022 03:45:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>iOS 或者 MAC 有什么软件或方式自动备份微信聊天文件吗 - Apple</title>
+      <link>https://www.v2ex.com/t/878864</link>
+      <description>用安卓手机会有很方便的微信聊天文件自动备份设置，百度网盘 /阿里云盘以及各家手机自己的云盘都有很方便的微信文件备份功能，这样即使文件在聊天记录中过期也能去云盘搜索找到。&lt;br /&gt;&lt;br /&gt;但是 iOS 手机一直没有找到可以自动备份的设置，基本都需要主动发送。&lt;br /&gt;&lt;br /&gt;MAC 电脑用 WPS 可以设置自动备份微信文件，但是是整个聊天文件夹自动备份的，而且在电脑本地也会留存一份，占用双份磁盘空间。。。&lt;br /&gt;&lt;br /&gt; 不知道有没有类似安卓那种无感自动备份（上传云盘），需要查找时去云盘查找就好的软件 /设置</description>
+      <author>18k</author>
+      <pubDate>09 Sep 2022 03:43:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>Espanso 在 Windows 和 Mac 上的内存占用为什么差别那么大？ - 问与答</title>
+      <link>https://www.v2ex.com/t/878863</link>
+      <description>&lt;p&gt;在 windows 上三个进程最多 4-5mb ，通常不到 1m ；&#xA;在 Mac OS 上通常占用 20 多 mb ；&#xA;是因为内存暂用计算方式不同吗？&lt;/p&gt;&#xA;</description>
+      <author>Gehrman</author>
+      <pubDate>09 Sep 2022 03:42:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教一个关于 spring 事务的异常 - 程序员</title>
+      <link>https://www.v2ex.com/t/878862</link>
+      <description>在使用 springboot 框架，手动控制事务时用如下写法&lt;br /&gt;Object rollBackPoint = TransactionAspectSupport.currentTransactionStatus().createSavepoint();&lt;br /&gt;数据库操作&lt;br /&gt;其他操作&lt;br /&gt;try {&lt;br /&gt;数据库操作&lt;br /&gt;}catch {&lt;br /&gt;TransactionAspectSupport.currentTransactionStatus().rollbackToSavepoint(rollBackPoint);&lt;br /&gt;retrun ApiResult.successs();&lt;br /&gt;}&lt;br /&gt;看着没什么问题，但是用了一段时间后却抛出了一个异常如下：&lt;br /&gt;Could not create JDBC savepoint;nested exception is java.sql.SQLNonTransientConnectionException: Unsupported statement&lt;br /&gt;从来没遇见过这异常，想知道如何去排查解决</description>
+      <author>jdOY</author>
+      <pubDate>09 Sep 2022 03:41:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>彦祖们，可以聊一下 py/go 在市场的薪资不， 比如按照 地方-年薪： 总包 or 月薪 - 问与答</title>
+      <link>https://www.v2ex.com/t/878861</link>
+      <author>wenqiang1208</author>
+      <pubDate>09 Sep 2022 03:39:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教 kafka 独立消费者 如果崩溃了如何获取 offset? - Kafka</title>
+      <link>https://www.v2ex.com/t/878860</link>
+      <description>&lt;p&gt;最简单的例子.&#xA;一个独立消费者(不隶属于任何群组) 重启. 并且消费者代码中没有设置 offset.&lt;/p&gt;&#xA;&lt;p&gt;我想默认从上一次消费的地点继续消费. 有没有办法实现?&lt;/p&gt;&#xA;&lt;p&gt;kafka 是如何认识这个独立的消费者?&#xA;群组我知道, 是由 group name 来标识. 但是独立消费者我没想明白有什么办法. kafka 权威指南中也没有找到相关的描述.&lt;/p&gt;&#xA;&lt;p&gt;似乎 kafka 消费者使用群组是一个很普遍的做法.&lt;/p&gt;&#xA;&lt;p&gt;kafka 新手. 轻喷.&lt;/p&gt;&#xA;</description>
+      <author>chaleaochexist</author>
+      <pubDate>09 Sep 2022 03:34:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>stable diffusion 用 3060 8G 显存跑 640 的图，用 p40 24G 显存跑大不了多少... - 问与答</title>
+      <link>https://www.v2ex.com/t/878859</link>
+      <description>有啥性价比高的方式或者卡推荐不</description>
+      <author>l0wkey</author>
+      <pubDate>09 Sep 2022 03:32:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>iPhone 不用全面屏的原因是什么？ - iPhone</title>
+      <link>https://www.v2ex.com/t/878857</link>
+      <description>&lt;p&gt;新一代 iPhone 采用“灵动岛”设计，依然没有采用全面屏。&lt;/p&gt;&#xA;&lt;p&gt;国内很多手机都已经是全面屏了，全面屏技术是否已经成熟，还存在哪些需要解决的问题？&#xA;苹果没有采用全面屏的原因是什么？&lt;/p&gt;&#xA;</description>
+      <author>daoqiongsi1101</author>
+      <pubDate>09 Sep 2022 03:25:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>开发了一个资产管理、自动更新股票基金收益的小程序 - 分享创造</title>
+      <link>https://www.v2ex.com/t/878856</link>
+      <description>&lt;p&gt;上次发了个&lt;a href=&#34;https://v2ex.com/t/866669#reply13&#34; rel=&#34;nofollow&#34;&gt;咨询帖&lt;/a&gt;，求推荐一款资产管理软件，但是找了半天都不太理想，于是自己花了一个月时间，开了这款小程序。&lt;/p&gt;&#xA;&lt;p&gt;基本满足了我上次发的需求，UI 和功能是借鉴了鲨鱼记账和支付宝 。小程序只会获取用户的 openId ，没有任何敏感信息，所有删除都是物理删除。&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;需求&lt;/th&gt;&#xA;&lt;th&gt;完成&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1.可以手动录入银行卡、微信、支付宝、基金、股票等等的账户金额，和负债金额&lt;/td&gt;&#xA;&lt;td&gt;✔&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;2.可以更新某条账户金额，并记录变更记录&lt;/td&gt;&#xA;&lt;td&gt;✔&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;3.可以看到整体的资产变更趋势&lt;/td&gt;&#xA;&lt;td&gt;✔&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;4.有导入、导出功能&lt;/td&gt;&#xA;&lt;td&gt;开发中&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;5.数据云同步&lt;/td&gt;&#xA;&lt;td&gt;✔&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;6.UI 简洁 (ps ，op 是后端开发，UI 真的是尽力了)&lt;/td&gt;&#xA;&lt;td&gt;✔&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;7.自动入账、出账，自动更新股票、基金收益&lt;/td&gt;&#xA;&lt;td&gt;✔&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;h2&gt;预览图&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/09/09/3UtMoVARhOfCebu.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/09/09/5IvFLkxWEGA9rMU.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/09/09/NptO5BX6JeUPRFI.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/09/09/KEg2onFVZQOhqMc.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;gh_257813a8d4f3_258.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/09/09/G1lvINAoRiCbwM8.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>yisier</author>
+      <pubDate>09 Sep 2022 03:24:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>各种讨论 esim，我问一个问题：到底是不开放 esim 有错，还是去卡槽有错 - Apple</title>
+      <link>https://www.v2ex.com/t/878855</link>
+      <description>&lt;p&gt;有人吐槽苹果去卡槽不好，有人吐槽四大不开放 esim 不好。那终归有一个是对的，一个是错的，到底结果是啥。&lt;/p&gt;&#xA;</description>
+      <author>phub2020</author>
+      <pubDate>09 Sep 2022 03:22:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>GitHub Copilot 信用卡付款的时候失败是怎么回事 - GitHub Copilot</title>
+      <link>https://www.v2ex.com/t/878854</link>
+      <description>用的招行 VISA 双币卡&lt;br /&gt;&lt;br /&gt;提示 The credit card was declined by the payment processor, please verify the card&#39;s information. If the problem persists, please contact the card&#39;s issuer.&lt;br /&gt;&lt;br /&gt;确认了卡号、有效日期和 CVV 都是正确的&lt;br /&gt;&lt;br /&gt;这个是被招行限制了吗</description>
+      <author>zengxs</author>
+      <pubDate>09 Sep 2022 03:20:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>[求职][ Java ]广州 3 年 Java 开发求职&amp;简历指导 - 求职</title>
+      <link>https://www.v2ex.com/t/878853</link>
+      <description>&lt;p&gt;今年行情面试机会比过往少很多，求大佬们指导下简历问题&amp;amp;求捞~&#xA;&lt;img alt=&#34;Snipaste_2022-09-09_11-19-16.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/09/09/BsYeUO4tC6mZX1D.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>banmuyutian</author>
+      <pubDate>09 Sep 2022 03:20:16 +0000</pubDate>
+    </item>
+    <item>
       <title>Windows 下有什么好方法备份 live photo 和查看 live photo 的？ - iPhone</title>
       <link>https://www.v2ex.com/t/878852</link>
       <description>&lt;p&gt;RT ，谢谢了，搜了一下貌似没啥好方法。&#xA;我之前都是 PC 插 iPhone 备份到移动硬盘。但是这样就是一张 jpg 和一个 mp4.。。。&lt;/p&gt;&#xA;</description>
