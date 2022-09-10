@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "c++ 多进程 内存泄漏问题求助 - 问与答",
+      "Link": "https://www.v2ex.com/t/879220",
+      "Description": "\u003cdiv\u003e\n\u003cp\u003e我是 c++初学者，尝试使用多进程时遇到了诡异的内存泄漏的问题，这是全部代码。\u003c/p\u003e\n\u003cp\u003e在我本地的服务器用 valgrind 测试没有泄漏，但另一台服务器上就会出现泄漏问题，我百思不得其解，请大神给点思路\u003c/p\u003e\n\u003cp\u003e随附 cpp 源文件和 valgrind 的 log 的下载链接：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://dropover.cloud/9552c4\" rel=\"nofollow\"\u003ehttps://dropover.cloud/9552c4\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-cpp\"\u003e#include \u0026lt;string.h\u0026gt;\n#include \u0026lt;regex\u0026gt;\n#include \u0026lt;sys/wait.h\u0026gt;\n#include \u0026lt;unistd.h\u0026gt;\n\u003cp\u003eint test(std::string input, std::string output){\nint status = 0;\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epid_t pid;\nfor (int i = 0; i \u0026amp;lt; 10; i++) {\n    pid = fork();\n    \n    if (pid == 0) {\n        exit(0);\n\n    }\n    else if (pid \u0026amp;lt; 0) {\n        perror(\"fork\");\n        exit(1);\n    }\n    else {\n        waitpid(pid, \u0026amp;amp;status, 0);\n    }\n    \n}\n// memery leak\n\nreturn 0;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e}\u003c/p\u003e\n\u003cp\u003eint main(int argc, char *argv[]) {\nstd::string input = \"1\";\nstd::string output = \"2\";\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003etest(input, output);  \n\nreturn 0;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e}\u003c/p\u003e\n\u003c/code\u003e\u003cp\u003e\u003ccode class=\"language-cpp\"\u003e\u003c/code\u003e\u003c/p\u003e\u003c/pre\u003e \u003cp\u003e\u003c/p\u003e\n\u003c/div\u003e",
+      "Author": "ShinomiyaKaguya",
+      "PubDate": "2022-09-10T21:08:33Z"
+    },
+    {
       "Title": "有什么能穿透 tcp 代理的， udp in tcp 的方案吗 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/879219",
       "Description": "\u003cp\u003e应用协议是 udp ， 然后走的 tcp 代理，但这个代理对 udp 有限速，所以想到将 udp 转为 tcp 去传。\n第一个想到的就是 udp2raw ，但是作者在 wiki 里写了，“faketcp 方案的缺点是无法穿透 tcp 代理（包括反向 tcp 代理），比如 haproxy 。”\u003c/p\u003e\n\u003cp\u003e求问还有什么方案？\u003c/p\u003e\n\u003cp\u003e需求是高性能，CPU 开销少，无须考虑加解密数据泄露的问题。\u003c/p\u003e\n",

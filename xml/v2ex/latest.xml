@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>c++ 多进程 内存泄漏问题求助 - 问与答</title>
+      <link>https://www.v2ex.com/t/879220</link>
+      <description>&lt;div&gt;&#xA;&lt;p&gt;我是 c++初学者，尝试使用多进程时遇到了诡异的内存泄漏的问题，这是全部代码。&lt;/p&gt;&#xA;&lt;p&gt;在我本地的服务器用 valgrind 测试没有泄漏，但另一台服务器上就会出现泄漏问题，我百思不得其解，请大神给点思路&lt;/p&gt;&#xA;&lt;p&gt;随附 cpp 源文件和 valgrind 的 log 的下载链接：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://dropover.cloud/9552c4&#34; rel=&#34;nofollow&#34;&gt;https://dropover.cloud/9552c4&lt;/a&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;string.h&amp;gt;&#xA;#include &amp;lt;regex&amp;gt;&#xA;#include &amp;lt;sys/wait.h&amp;gt;&#xA;#include &amp;lt;unistd.h&amp;gt;&#xA;&lt;p&gt;int test(std::string input, std::string output){&#xA;int status = 0;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;pid_t pid;&#xA;for (int i = 0; i &amp;amp;lt; 10; i++) {&#xA;    pid = fork();&#xA;    &#xA;    if (pid == 0) {&#xA;        exit(0);&#xA;&#xA;    }&#xA;    else if (pid &amp;amp;lt; 0) {&#xA;        perror(&#34;fork&#34;);&#xA;        exit(1);&#xA;    }&#xA;    else {&#xA;        waitpid(pid, &amp;amp;amp;status, 0);&#xA;    }&#xA;    &#xA;}&#xA;// memery leak&#xA;&#xA;return 0;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;&lt;p&gt;int main(int argc, char *argv[]) {&#xA;std::string input = &#34;1&#34;;&#xA;std::string output = &#34;2&#34;;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;test(input, output);  &#xA;&#xA;return 0;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;&lt;/code&gt;&lt;p&gt;&lt;code class=&#34;language-cpp&#34;&gt;&lt;/code&gt;&lt;/p&gt;&lt;/pre&gt; &lt;p&gt;&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <author>ShinomiyaKaguya</author>
+      <pubDate>10 Sep 2022 21:08:33 +0000</pubDate>
+    </item>
+    <item>
       <title>有什么能穿透 tcp 代理的， udp in tcp 的方案吗 - 宽带症候群</title>
       <link>https://www.v2ex.com/t/879219</link>
       <description>&lt;p&gt;应用协议是 udp ， 然后走的 tcp 代理，但这个代理对 udp 有限速，所以想到将 udp 转为 tcp 去传。&#xA;第一个想到的就是 udp2raw ，但是作者在 wiki 里写了，“faketcp 方案的缺点是无法穿透 tcp 代理（包括反向 tcp 代理），比如 haproxy 。”&lt;/p&gt;&#xA;&lt;p&gt;求问还有什么方案？&lt;/p&gt;&#xA;&lt;p&gt;需求是高性能，CPU 开销少，无须考虑加解密数据泄露的问题。&lt;/p&gt;&#xA;</description>
