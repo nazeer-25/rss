@@ -4,9 +4,23 @@
   "Description": "",
   "Items": [
     {
+      "Title": "奇怪, `TOP`命令在 Debug 和 Release 环境下输出结果不一样 - Android",
+      "Link": "https://www.v2ex.com/t/879120",
+      "Description": "\u003cp\u003e问题起因：\n获取进程实时 CPU 占用率，还在看这方面东西，\u003cstrong\u003e如有更好方法提供也非常感谢\u003c/strong\u003e。\u003c/p\u003e\n\u003cp\u003e问题描述：\nRelease 环境下，没有自身进程相关信息，即使去掉\u003ccode\u003e-o\u003c/code\u003e部分，输出的也只有一条其他进程的信息。\u003c/p\u003e\n\u003cp\u003e测试设备：\nGoogle Pixel 3 Android 12\nAndroid Studio Chipmunk | 2021.2.1 Patch 2\u003c/p\u003e\n\u003cp\u003e代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-kotlin\"\u003e mBinding.btnConfirmAttCpu.setOnClickListener {\n     val runtime = Runtime.getRuntime()\n     val cmd = arrayOf(\"sh\",\"-c\",\"top -n 1 -p ${Process.myPid()} -o PID,%CPU\")\n     val exec = runtime.exec(cmd)\n     exec.inputStream.reader().apply {\n         mBinding.displayCpuAttCpu.text = readLines().joinToString(\"${System.lineSeparator()}${System.lineSeparator()}\")\n         close()\n     }\n     exec.destroy()\n }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eDebug 输出:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e[s [999C [999B [6n [u [H [J [?25l [H [J [s [999C [999B [6n [uTasks: 1 total,   0 running,   1 sleeping,   0 stopped,   0 zombie\n    \n      Mem:  3665332K total,  3516028K used,   149304K free,     4520K buffers\n    \n     Swap:  2097148K total,   590344K used,  1506804K free,  1975304K cached\n    \n    800%cpu   0%user   0%nice   0%sys 800%idle   0%iow   0%irq   0%sirq   0%host\n    \n     [7m   PID[%CPU                                                                      [0m\n    \n     24654 12.0\n    \n     [?25h [0m [1000;1H [K [?25h [?25h [0m [1000;1H [K\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eRelease 输出：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e[s [999C [999B [6n [u [H [J [?25l [H [J [s [999C [999B [6n [uTasks: 0 total,   0 running,   0 sleeping,   0 stopped,   0 zombie\n    \n      Mem:  3665332K total,  3537360K used,   127972K free,     4520K buffers\n    \n     Swap:  2097148K total,   542884K used,  1554264K free,  1971444K cached\n    \n    800%cpu   0%user   0%nice   0%sys 800%idle   0%iow   0%irq   0%sirq   0%host\n    \n     [7m   PID[%CPU                                                                      [0m\n    \n     [?25h [0m [1000;1H [K [?25h [?25h [0m [1000;1H [K\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "john6lq",
+      "PubDate": "2022-09-10T07:07:34Z"
+    },
+    {
+      "Title": "这个《东成西就》定格动画片段我今天看了一百遍笑了一百遍 - 哔哩哔哩",
+      "Link": "https://www.v2ex.com/t/879119",
+      "Description": "\u003cp\u003e[定格动画翻拍《东成西就》-哔哩哔哩]  \u003ca href=\"https://b23.tv/ih6dxDJ\" rel=\"nofollow\"\u003ehttps://b23.tv/ih6dxDJ\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "leimao",
+      "PubDate": "2022-09-10T07:06:33Z"
+    },
+    {
       "Title": "更换 tls 证书 Common Name， tls 阻断频率降低了 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/879118",
-      "Description": "\u003cp\u003eRT ，\u003c/p\u003e\n\u003cp\u003e一直用 a 域名的自签名证书做的 tls over ss 代理。\u003c/p\u003e\n\u003cp\u003e最近阻断的频率有点高。\u003c/p\u003e\n\u003cp\u003e重新注册了新的 .us 域名, 重新生成 tls 证书，重新部署，发现流畅了不少。\u003c/p\u003e\n\u003cp\u003e可能 gfw 对长期使用 同一个 域名的 tls 加密数据包 做了重点监控。\u003c/p\u003e\n",
+      "Description": "\u003cp\u003eRT ，\u003c/p\u003e\n\u003cp\u003e一直用 a 域名的自签名证书做的 tls over ss 代理。\u003c/p\u003e\n\u003cp\u003e最近阻断的频率有点高。\u003c/p\u003e\n\u003cp\u003e重新注册了新的  域名, 重新生成 tls 证书，重新部署，发现流畅了不少。\u003c/p\u003e\n\u003cp\u003e可能 gfw 对长期使用 同一个 域名的 tls 加密数据包 做了重点监控。\u003c/p\u003e\n\u003cp\u003eps: gfw 不会验证 ca ，不会验证证书是否合法，只检测 common name ，按照这个思路，是不是可以定期用访问量大的 境外 白名单 网站，fake 下 tls 证书。\u003c/p\u003e\n",
       "Author": "cloudsigma2022",
       "PubDate": "2022-09-10T06:56:53Z"
     },
