@@ -37,10 +37,6 @@
       <description>&lt;pre&gt;&lt;code&gt;import (&#xA;    &amp;quot;bytes&amp;quot;&#xA;    &amp;quot;crypto/aes&amp;quot;&#xA;    &amp;quot;fmt&amp;quot;&#xA;    &amp;quot;crypto/cipher&amp;quot;&#xA;    &amp;quot;encoding/base64&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;    orig := &amp;quot;hello world&amp;quot;&#xA;    key := &amp;quot;123456781234567812345678&amp;quot;&#xA;    fmt.Println(&amp;quot;原文：&amp;quot;, orig)&#xA;&#xA;    encryptCode := AesEncrypt(orig, key)&#xA;    fmt.Println(&amp;quot;密文：&amp;quot; , encryptCode)&#xA;&#xA;    decryptCode := AesDecrypt(encryptCode, key)&#xA;    fmt.Println(&amp;quot;解密结果：&amp;quot;, decryptCode)&#xA;}&#xA;&#xA;func AesEncrypt(orig string, key string) string {&#xA;    // 转成字节数组&#xA;    origData := []byte(orig)&#xA;    k := []byte(key)&#xA;&#xA;    // 分组秘钥&#xA;    block, _ := aes.NewCipher(k)&#xA;    // 获取秘钥块的长度&#xA;    blockSize := block.BlockSize()&#xA;    // 补全码&#xA;    origData = PKCS7Padding(origData, blockSize)&#xA;    // 加密模式&#xA;    blockMode := cipher.NewCBCEncrypter(block, k[:blockSize])&#xA;    // 创建数组&#xA;    cryted := make([]byte, len(origData))&#xA;    // 加密&#xA;    blockMode.CryptBlocks(cryted, origData)&#xA;&#xA;    return base64.StdEncoding.EncodeToString(cryted)&#xA;&#xA;}&#xA;&#xA;func AesDecrypt(cryted string, key string) string {&#xA;    // 转成字节数组&#xA;    crytedByte, _ := base64.StdEncoding.DecodeString(cryted)&#xA;    k := []byte(key)&#xA;&#xA;    // 分组秘钥&#xA;    block, _ := aes.NewCipher(k)&#xA;    // 获取秘钥块的长度&#xA;    blockSize := block.BlockSize()&#xA;    // 加密模式&#xA;    blockMode := cipher.NewCBCDecrypter(block, k[:blockSize])&#xA;    // 创建数组&#xA;    orig := make([]byte, len(crytedByte))&#xA;    // 解密&#xA;    blockMode.CryptBlocks(orig, crytedByte)&#xA;    // 去补全码&#xA;    orig = PKCS7UnPadding(orig)&#xA;    return string(orig)&#xA;}&#xA;&#xA;//补码&#xA;func PKCS7Padding(ciphertext []byte, blocksize int) []byte {&#xA;    padding := blocksize - len(ciphertext)%blocksize&#xA;    padtext := bytes.Repeat([]byte{byte(padding)}, padding)&#xA;    return append(ciphertext, padtext...)&#xA;}&#xA;&#xA;//去码&#xA;func PKCS7UnPadding(origData []byte) []byte {&#xA;    length := len(origData)&#xA;    unpadding := int(origData[length-1])&#xA;    return origData[:(length - unpadding)]&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;参考：&#xA;&lt;a href=&#34;https://www.jb51.net/article/245521.htm&#34;&gt;https://www.jb51.net/article/245521.htm&lt;/a&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>9月更新！7个超好用的功能上线了！EasyOps®UI8.0更有大变动</title>
-      <link>https://studygolang.com/articles/35852#reply0</link>
-    </item>
-    <item>
       <title>亲测一款科学上网的梯子, 不仅能翻出去上外网,还能隐藏本地IP, 算是我见过最独特隐蔽的上网方式</title>
       <link>https://studygolang.com/topics/15830#reply1</link>
       <description>&lt;p&gt;&lt;strong&gt;ChainVPN梯子&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;点击直达官网[&lt;a href=&#34;https://www.zhujiechong.top&#34;&gt;https://www.zhujiechong.top&lt;/a&gt;]&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我算了一下自己用梯子也快十年了，期间经历了国内的监管从严到松几个来回，起起伏伏，看过太多用过太多，贵的不一定是好的，便宜的也 不定就划算，根据我多年的经验总结，用梯子，最重要的其实关注3个点&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;一、性价比&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;这家的话有一个性价比套餐特别划算,平均算下来￥9.9/月，我自己用了2年多，后来用量大换成无限流量套餐了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;二、稳定，隐蔽，安全&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;非常适合国内用户，亚洲地区使用，在国内使用表现很稳定，用的是VLESS+XTLS协议，梯子界的黑科技，隐藏本地IP&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;三、有技术售后&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;这点特别重要，有微信售后真的和省心，这家是为数不多的有微信售后的梯子，售后大神是技术极客，可以解决遇到的所有问题和疑问，没有售后的梯子，出了问题只能自己瞎琢磨，两眼一抹黑。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;点击直达官网[&lt;a href=&#34;https://www.zhujiechong.top&#34;&gt;https://www.zhujiechong.top&lt;/a&gt;]&lt;/p&gt;&#xA;</description>
@@ -78,6 +74,10 @@
       <title>Go写的第一个网站，大家看看速度快不快？</title>
       <link>https://studygolang.com/topics/14460#reply82</link>
       <description>&lt;p&gt;这个是我用Go写的第一个网站，&#xA;&lt;a href=&#34;https://www.qqx.com/&#34;&gt;https://www.qqx.com/&lt;/a&gt;&#xA;大家看看速度快不快？&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>9月更新！7个超好用的功能上线了！EasyOps®UI8.0更有大变动</title>
+      <link>https://studygolang.com/articles/35852#reply0</link>
     </item>
     <item>
       <title>gorm 如何构建  多个字段，任意组合的查询，形如sql    where (user_id,type) in ((568,6),(569,6),(600,8))</title>
