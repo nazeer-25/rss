@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "试着用 luv 写个读取文件内容方法，实在是写不下去 - 程序员",
+      "Link": "https://www.v2ex.com/t/879326",
+      "Description": "\u003cpre\u003e\u003ccode\u003elocal uv = vim.loop\n\nlocal readall = function(path, callback)\n  uv.fs_open(path, \"r\", 384, function(open_err, fd)\n    assert(open_err == nil, open_err)\n    uv.fs_stat(path, function(stat_err, stat)\n      assert(stat_err == nil, stat_err)\n      uv.fs_read(fd, stat.size, 0, function(read_err, data)\n        assert(read_err == nil, read_err)\n        assert(#data == stat.size)\n        uv.fs_close(fd, function(close_err, success)\n          assert(close_err == nil, close_err)\n          assert(success)\n          callback(data)\n        end)\n      end)\n    end)\n  end)\nend\n\nreadall(\"/tmp/seq30\", function(data)\n  for _, line in ipairs(vim.split(data, \"\\n\")) do\n    print(line)\n  end\nend)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e贴出来给大家瞅瞅啊。\u003c/p\u003e\n\u003cp\u003e其实就一个 \u003ccode\u003eio.lines(path)\u003c/code\u003e，写完上面这篇代码我不由得犹豫，我就写个小插件，有必要强上异步吗？\n还只是个这么简单的需求。\u003c/p\u003e\n\u003cp\u003e（ vim.loop 是 neovim 提供的 libuv/luv 访问入口）\u003c/p\u003e\n",
+      "Author": "haoliang",
+      "PubDate": "2022-09-11T11:35:38Z"
+    },
+    {
       "Title": "想为 libcef 的 任何 http 请求 加 自定义 header，应该怎么拦截 - 问与答",
       "Link": "https://www.v2ex.com/t/879325",
       "Description": "",

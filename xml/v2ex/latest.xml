@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>试着用 luv 写个读取文件内容方法，实在是写不下去 - 程序员</title>
+      <link>https://www.v2ex.com/t/879326</link>
+      <description>&lt;pre&gt;&lt;code&gt;local uv = vim.loop&#xA;&#xA;local readall = function(path, callback)&#xA;  uv.fs_open(path, &#34;r&#34;, 384, function(open_err, fd)&#xA;    assert(open_err == nil, open_err)&#xA;    uv.fs_stat(path, function(stat_err, stat)&#xA;      assert(stat_err == nil, stat_err)&#xA;      uv.fs_read(fd, stat.size, 0, function(read_err, data)&#xA;        assert(read_err == nil, read_err)&#xA;        assert(#data == stat.size)&#xA;        uv.fs_close(fd, function(close_err, success)&#xA;          assert(close_err == nil, close_err)&#xA;          assert(success)&#xA;          callback(data)&#xA;        end)&#xA;      end)&#xA;    end)&#xA;  end)&#xA;end&#xA;&#xA;readall(&#34;/tmp/seq30&#34;, function(data)&#xA;  for _, line in ipairs(vim.split(data, &#34;\n&#34;)) do&#xA;    print(line)&#xA;  end&#xA;end)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;贴出来给大家瞅瞅啊。&lt;/p&gt;&#xA;&lt;p&gt;其实就一个 &lt;code&gt;io.lines(path)&lt;/code&gt;，写完上面这篇代码我不由得犹豫，我就写个小插件，有必要强上异步吗？&#xA;还只是个这么简单的需求。&lt;/p&gt;&#xA;&lt;p&gt;（ vim.loop 是 neovim 提供的 libuv/luv 访问入口）&lt;/p&gt;&#xA;</description>
+      <author>haoliang</author>
+      <pubDate>11 Sep 2022 11:35:38 +0000</pubDate>
+    </item>
+    <item>
       <title>想为 libcef 的 任何 http 请求 加 自定义 header，应该怎么拦截 - 问与答</title>
       <link>https://www.v2ex.com/t/879325</link>
       <author>admirez</author>
