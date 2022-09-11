@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "三星这次所谓大批量爆出固态损坏，可能也没那么严重？ - 程序员",
+      "Link": "https://www.v2ex.com/t/879351",
+      "Description": "\u003cp\u003e前几天 v 友推荐买了个固态，下完单才发现三星最近在爆固件门，固态会快速损耗坏掉，贴吧上很多人发帖。\u003c/p\u003e\n\u003cp\u003e我自己买回来一看，亚马逊版 970 evo plus ，容量 2T ，序列号 s6 ，出厂固件版本 4B ，完全是贴吧爆出风险的重灾区之重重灾区的型号。\u003c/p\u003e\n\u003cp\u003e买回来以后比较担心，而且这次的问题似乎不经过长时间使用还不会发现有没有问题。所以最后写了个小程序尝试性地做了 20 次擦写，结果 smart 信息上看不出任何问题，没有报错，没有消耗备用容量。虽然不能证明这个固态就没问题，不过起码证明有大概率没问题。\u003c/p\u003e\n\u003cp\u003e这么想来，以三星作为几乎是固态第一品牌的出货量，贴吧爆出来的帖子好像绝对数量仔细想想也没那么多，一共也就那几个帖子。。。所以可能之前高概率中招是一种错觉，实际情况仍然是百分之个位数会中招，大部分人完全不用担心？\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/huM3BiE.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "Richard14",
+      "PubDate": "2022-09-11T14:53:37Z"
+    },
+    {
+      "Title": "ADB 下如何用 CP 命令复制没有扩展名的文件呢？ - Android",
+      "Link": "https://www.v2ex.com/t/879350",
+      "Description": "\u003cp\u003e各位 V 有友中秋快乐，\n请问下，谁知道 ADB 下如何用 CP 命令复制没有扩展名的文件呢？\nadb shell \"su cp /data/data/com.XX.ang/SERVER_CONFIG /sdcatd/\" 我是这样用的，但是错误\nSERVER_CONFIG 是一个没有扩展名的 xml 文件\u003c/p\u003e\n",
+      "Author": "atfeel",
+      "PubDate": "2022-09-11T14:50:47Z"
+    },
+    {
+      "Title": "分享一个自用的爬漫画框架 - 分享创造",
+      "Link": "https://www.v2ex.com/t/879349",
+      "Description": "\u003cp\u003e迫于某部动画因为疫情停更, 为了满足好奇便去找漫画看\u003c/p\u003e\n\u003cp\u003e想起很久之前写过爬漫画的爬虫, 但结构混乱无法复用\u003c/p\u003e\n\u003cp\u003e这次好好整改了代码, 形成了一个可方便使用的框架, 感觉不错分享出来\u003c/p\u003e\n\u003cp\u003e以下是 Readme, 代码仓库地址: \u003ca href=\"https://github.com/MXXXXXS/comic-spider\" rel=\"nofollow\"\u003ecomic-spider\u003c/a\u003e\u003c/p\u003e\n\u003ch1\u003eComic-spider\u003c/h1\u003e\n\u003cp\u003e一个通用的漫画爬虫框架\u003c/p\u003e\n\u003ch2\u003e\u003cstrong\u003e注意: 本项目不针对任何特定站点, 不包含任何实际的代码实现, 仅提供一个思路框架\u003c/strong\u003e\u003c/h2\u003e\n\u003ch2\u003e框架设计\u003c/h2\u003e\n\u003ch3\u003e网站数据访问\u003c/h3\u003e\n\u003cp\u003e为了模拟人类的行为, comic-spider(以下简称 cs)使用 puppeteer 来访问网站数据\u003c/p\u003e\n\u003cp\u003e这给予了实现者丰富的 api 来操作网页内容, 更加方便\u003c/p\u003e\n\u003ch3\u003e数据获取流程\u003c/h3\u003e\n\u003cp\u003ecs 的原本设计目标是下载漫画, 数据获取流程是模仿人类用户访问的行为的\u003c/p\u003e\n\u003cp\u003e通常的一部漫画会有一个目录页面, 方便用户选择章节\u003c/p\u003e\n\u003cp\u003ecs 暴露了一个\u003ccode\u003eabstract class Spider\u003c/code\u003e, \u003ccode\u003econstructor\u003c/code\u003e接受一个\u003ccode\u003eindexUrl\u003c/code\u003e参数, 用于指定目录页\u003c/p\u003e\n\u003cp\u003e打开目录页后, 需要从页面中提取出所有章节的入口, 使用者需要实现\u003ccode\u003egetChapterEntries\u003c/code\u003e来返回一个所有章节入口 url 的数组\u003c/p\u003e\n\u003cp\u003e有了所有章节的入口 url 的数组, 接着 cs 会按照顺序一个个打开各个章节入口页面, 一次同时打开的页面数量可通过\u003ccode\u003epageParallelCounts\u003c/code\u003e配置\u003c/p\u003e\n\u003cp\u003e打开某一章节内容页后, 需要获取本章节的页数, 实现者需要实现\u003ccode\u003egetChapterPageCounts\u003c/code\u003e来返回本章节的页数. 页数用于告知 cs 何时完成本章节爬取\u003c/p\u003e\n\u003cp\u003e打开某一章节内容页后, 需要获取具体的图像, 实现者需要实现\u003ccode\u003egetImageUrls\u003c/code\u003e来返回本章节包含的漫画图像链接, 返回一个数组, 因为有时一个页面不止一页漫画\u003c/p\u003e\n\u003cp\u003e打开某一章节内容页后, 需要获取下一页的链接, 实现者需要实现\u003ccode\u003egetNextPageUrl\u003c/code\u003e来返回下一页的链接\u003c/p\u003e\n\u003cp\u003e获取到章节内容页的图片链接后, 依据链接, 实现者需要指定图像的保存位置, 需要实现\u003ccode\u003egetImageSavePath\u003c/code\u003e来从链接生成对应的图像文件下载保存路径\u003c/p\u003e\n\u003ch2\u003e如何使用\u003c/h2\u003e\n\u003cp\u003e前置知识: web 前端基础, ts, nodejs, 了解 puppeteer\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e注意: 由于懒得折腾, 作者只在 mac 上实际跑过, 期待 win11 的 wslg\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e使用\u003ccode\u003eyarn\u003c/code\u003e来安装依赖\u003c/p\u003e\n\u003cp\u003e实现者需要基于\u003ccode\u003eSpider\u003c/code\u003e来自己实现细节, 参考\u003ccode\u003esrc/examples/spiderExample.ts\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e具体实现的文件入口路径为\u003ccode\u003esrc/app/app.ts\u003c/code\u003e, 可以从\u003ccode\u003esrc/examples/spiderExample.ts\u003c/code\u003e复制过去\u003c/p\u003e\n\u003cp\u003e实现后, 使用\u003ccode\u003eyarn build-dev\u003c/code\u003e编译, 之后\u003ccode\u003enode out/app.js\u003c/code\u003e运行\u003c/p\u003e\n\u003ch2\u003e调试\u003c/h2\u003e\n\u003cp\u003e推荐使用 vscode, 项目带有 vscode 的调试配置\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003eyarn build-dev\u003c/code\u003e后, 在调试面板启动调试即可\u003c/p\u003e\n\u003ch2\u003e自定义\u003c/h2\u003e\n\u003ch3\u003e配置代理\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003eSpider\u003c/code\u003e的\u003ccode\u003econstructor\u003c/code\u003e 参数指定\u003ccode\u003eproxy\u003c/code\u003e, 为一个 http 代理服务器地址, 暂未实现用户认证; 常见的情况是本地 clash 的代理地址\u003c/p\u003e\n\u003ch3\u003e配置请求头\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003eSpider\u003c/code\u003e的\u003ccode\u003econstructor\u003c/code\u003e 参数指定\u003ccode\u003eheaders\u003c/code\u003e, 类型为\u003ccode\u003e[string, string][]\u003c/code\u003e\u003c/p\u003e\n\u003ch3\u003e并发页面数量\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003eSpider\u003c/code\u003e的\u003ccode\u003econstructor\u003c/code\u003e 参数指定\u003ccode\u003epageParallelCounts\u003c/code\u003e, 控制 puppeteer 一次开启的页面数量(并行爬取多个章节)\u003c/p\u003e\n\u003ch3\u003e为了模仿人类, 打开下一页时配置延迟与抖动\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003eSpider\u003c/code\u003e的\u003ccode\u003econstructor\u003c/code\u003e 参数指定\u003ccode\u003ethrottle\u003c/code\u003e(毫秒), \u003ccode\u003ethrottleRandom\u003c/code\u003e(毫秒), 每次爬完一页, 等待一会儿再翻页\u003c/p\u003e\n\u003ch3\u003e只爬取某个范围内的章节\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003eSpider\u003c/code\u003e的\u003ccode\u003econstructor\u003c/code\u003e 参数指定\u003ccode\u003echapterRange\u003c/code\u003e, 在\u003ccode\u003egetChapterEntries\u003c/code\u003e获取全面章节后, \u003ccode\u003echapterRange\u003c/code\u003e会作为全部章节\u003ccode\u003e.slice\u003c/code\u003e的参数, 来指定具体爬取的章节范围\u003c/p\u003e\n\u003ch3\u003e显示 puppeteer 界面\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003eSpider\u003c/code\u003e的\u003ccode\u003econstructor\u003c/code\u003e 参数指定\u003ccode\u003eheadless\u003c/code\u003e为\u003ccode\u003efalse\u003c/code\u003e, 默认为\u003ccode\u003etrue\u003c/code\u003e\u003c/p\u003e\n\u003ch2\u003eLicense\u003c/h2\u003e\n\u003cp\u003eMIT @\u003ca href=\"https://github.com/MXXXXXS/comic-spider\" rel=\"nofollow\"\u003eMXXXXXS\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "MXXXXXS",
+      "PubDate": "2022-09-11T14:48:24Z"
+    },
+    {
       "Title": "iPhone14pro Max 还是 iPhone14pro - Apple",
       "Link": "https://www.v2ex.com/t/879348",
       "Description": "在 Apple store 都下单了，发货时间比较晚，现在还没最终决定，决定了就取消另一个订单。用过的 v 友，推荐 pro 还是 pro Max ？",
@@ -16,13 +37,6 @@
       "Description": "\u003cp\u003e动森出的时候有限定机就买了一台，现在喷射战士也出限定机，还是 OLED 的，所以就又买了一台，三台了，想着送朋友一起玩，所以问下怎么搞合适\u003c/p\u003e\n",
       "Author": "kaiki",
       "PubDate": "2022-09-11T14:30:30Z"
-    },
-    {
-      "Title": "gfw 对 ipv6 有特殊检测机制？ - 宽带症候群",
-      "Link": "https://www.v2ex.com/t/879345",
-      "Description": "\u003cp\u003eRT ，\u003c/p\u003e\n\u003cp\u003e最近，总发现 v6 连接速度变慢。\u003c/p\u003e\n\u003cp\u003eping 正常，后台也能看到数据包，但是打开 gooogle 反映巨慢，而 v4 却正常。\u003c/p\u003e\n\u003cp\u003e搭建了 speedtest ，测试了下，v6 下载上传似乎也正常。\u003c/p\u003e\n\u003cp\u003ev4\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"01GCPFA9N8QRR13TQAVNY6254P.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/09/11/7QoX6tsFA1LShqu.png\"/\u003e\u003c/p\u003e\n\u003cp\u003ev6\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"01GCPEQADXW587HSZRKSNNPYM2.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/09/11/c5Tby9RevK846YH.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e重启光猫后，获取新的 ipv6 ，有改观，但过段时间后，又变慢了。\u003c/p\u003e\n\u003cp\u003e目前，怀疑可能是 bbr 或者 gfw 对 ipv6 有特殊检测机制。\u003c/p\u003e\n",
-      "Author": "cloudsigma2022",
-      "PubDate": "2022-09-11T14:26:17Z"
     },
     {
       "Title": "Linux 连接校园网的问题 - Linux",
@@ -261,6 +275,13 @@
       "Description": "",
       "Author": "pdog18",
       "PubDate": "2022-09-11T09:01:20Z"
+    },
+    {
+      "Title": "gfw 对 ipv6 有特殊检测机制？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/879345",
+      "Description": "\u003cp\u003eRT ，\u003c/p\u003e\n\u003cp\u003e最近，总发现 v6 连接速度变慢。\u003c/p\u003e\n\u003cp\u003eping 正常，后台也能看到数据包，但是打开 gooogle 反映巨慢，而 v4 却正常。\u003c/p\u003e\n\u003cp\u003e搭建了 speedtest ，测试了下，v6 下载上传似乎也正常。\u003c/p\u003e\n\u003cp\u003ev4\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"01GCPFA9N8QRR13TQAVNY6254P.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/09/11/7QoX6tsFA1LShqu.png\"/\u003e\u003c/p\u003e\n\u003cp\u003ev6\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"01GCPEQADXW587HSZRKSNNPYM2.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/09/11/c5Tby9RevK846YH.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e重启光猫后，获取新的 ipv6 ，有改观，但过段时间后，又变慢了。\u003c/p\u003e\n\u003cp\u003e目前，怀疑可能是 bbr 或者 gfw 对 ipv6 有特殊检测机制。\u003c/p\u003e\n",
+      "Author": "cloudsigma2022",
+      "PubDate": "2022-09-11T14:26:17Z"
     },
     {
       "Title": "国区 apple music 拼车 - Apple",
