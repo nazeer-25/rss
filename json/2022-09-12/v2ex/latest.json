@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "对抗单点故障：家庭网络子网拆分和隔离——拆成三个子网，搞定路由表 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/879539",
+      "Description": "\u003ch1\u003e-2 写在最前面：为什么不用 All-in-one?\u003c/h1\u003e\n\u003col\u003e\n\u003cli\u003e担心弱电箱比较小，一个小的软路由(J4125/N5105 扛不住）\u003c/li\u003e\n\u003cli\u003e穷，买不起核心路由器\u003c/li\u003e\n\u003cli\u003e一个大的 Pve 设备挂了就是全屋都挂，这个可靠性我不接受\u003c/li\u003e\n\u003cli\u003e各种设备都试一试（ x86 主路由，arm 的旁路由，tp 的企业级多 wan 口路由），相互配合一下挺好玩的\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch1\u003e-1 几款核心设备\u003c/h1\u003e\n\u003col\u003e\n\u003cli\u003e\nTPLink XDR5480 \u0026amp;\u0026amp; MA5671A 猫棒(192.168.10.0/24)：\u003col\u003e\n\u003cli\u003eTP 家的飞流系列的路由器，带有 2.5G SFP 接口，接了华为 MA5671A GPON stick （猫棒）\u003c/li\u003e\n\u003cli\u003e用无线 mesh 连接 AX1850 路由做房间覆盖\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003cli\u003e\n某家 J4125 1GbE 的软路由(192.168.0.0/24)\u003col\u003e\n\u003cli\u003e4 口软路由，2g+16g 的丐配置\u003c/li\u003e\n\u003cli\u003e本来开始打算上 5125+2.5GbE 的，无奈和某光纤转发器不太兼容，遂退货作罢\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003cli\u003e\nTPLink R483G 企业级路由器(192.168.100.0/24)\u003col\u003e\n\u003cli\u003e之前有一段时间做多 wan 口聚合等用途，现在作为网桥服务\u0026amp;\u0026amp;vpn 接入\u003c/li\u003e\n\u003cli\u003e非常稳定可靠\u003c/li\u003e\n\u003cli\u003e买二手的性价比也不错\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003cli\u003e\n光纤转发器\u0026amp;\u0026amp;隐形光纤\u003col\u003e\n\u003cli\u003e当初某宝买的时候说 2Lan 口支持隔离,但是实际看下来并不支持隔离，坑爹啊这\u003c/li\u003e\n\u003cli\u003e需求点是弱电箱到机柜没有网线，所以拉了一根隐形光纤作为通信手段。\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003cli\u003e\nR2s \u0026amp;\u0026amp; N1\u003col\u003e\n\u003cli\u003e这俩就不多说了，R2s 两百多，N1 不带遥控器的话 100 不到\u003c/li\u003e\n\u003cli\u003e感觉性能上不分伯仲，R2s 多一个 Lan 口可以多整活\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch1\u003e0 前情提要\u003c/h1\u003e\n\u003cp\u003e\u003ca href=\"https://www.v2ex.com/t/877324\" rel=\"nofollow\"\u003eXDR5480 与 R2s 做 Lan 口聚合\u003c/a\u003e——放弃，5480 提供的链路聚合功能有限。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.v2ex.com/t/869681\" rel=\"nofollow\"\u003evpn\u0026amp;\u0026amp;网桥\u003c/a\u003e——TL-R483G 基本完美完成任务\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.v2ex.com/t/856608\" rel=\"nofollow\"\u003e旁路由端口转发的一些坑\u003c/a\u003e——不依赖旁路由做端口转发\u003c/p\u003e\n\u003ch1\u003e1 梳理核心需求\u003c/h1\u003e\n\u003ch2\u003e机柜，生产网络科学稳定\u003c/h2\u003e\n\u003cp\u003e这个真没啥说的，直接走软路由拨号，在软路由上进行流量分离等等, 这部分就走基于 J4125 的 x86 软路由去实现了。\u003c/p\u003e\n\u003ch2\u003eWiFi 路由 5G ax 覆盖，科学，稳定\u003c/h2\u003e\n\u003cp\u003e之前用的是 XDR-5430 ，升级成为 XDR-5480 之后，多了一个自定义的 SFP 接口，可以直接用猫棒就很香\u003c/p\u003e\n\u003cp\u003e所以基于要使用猫棒，就必须路由拨号，科学上网使用旁路由网关实现。\u003c/p\u003e\n\u003cp\u003ewifi 的 mesh 子路由选择的是 TP XDR1850 ，最开始的时候 200 一个，现在涨价到 250 了\u003c/p\u003e\n\u003ch2\u003e远程办公期间可以可靠访问机柜网络，修复和诊断家庭网络问题\u003c/h2\u003e\n\u003cp\u003e远程访问嘛，ssh/rdp/web 等各种服务直接用端口开放在公网上安全性问题很大，外面需要套一层 vpn 的壳子。\u003c/p\u003e\n\u003cp\u003e如何实现 vpn server ？大概有这么几个方案\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e在 J4125 软路由上开启 vpn 服务器\u003c/li\u003e\n\u003cli\u003e在 XDR-5480 下的子网开 vpn 服务器，用端口转发访问（涉及到旁路由，可能需要两次端口转发）\u003c/li\u003e\n\u003cli\u003e在 J4125 软路由下面的某个设备上开启 vpn 服务器\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e但是这些方案面临的共同问题是:\u003c/p\u003e\n\u003cp\u003e如果接入的路由器出了问题了（ 5480/J4125)挂了，vpn 不也是连不进去了？\u003c/p\u003e\n\u003cp\u003e参考去年 B 站的复盘，一个核心原因是：生产网络挂了之后，缺乏旁路进入机房的手段\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.163.com/dy/article/HCFJP6P80511D3QS.html\" rel=\"nofollow\"\u003eB 站宕机事故复盘：2021.07.13 我们是这样崩的\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e因此，在这个环节，我选择用 R483G 企业级有线路由器做 VPN 接入网关。\u003c/p\u003e\n\u003cp\u003e同时，感谢 TP 厂家的客服支持，R483G 的 NAPT 功能启用之后，就可以实现一个简单的免配置的网桥功能，可以很方便的打通各个子网，作为 WiFi 网络和生产网络互访的一个 Backup 。\u003c/p\u003e\n\u003cp\u003e使用 R483G 作为接入 VPN 路由之后，可以很方便的访问两个子网，实现远程接入。\u003c/p\u003e\n\u003cp\u003e当然，如果偶尔 R483G 出了问题，还保留一个在 J4125 下的 vpn 服务作为备用接入。\u003c/p\u003e\n\u003ch2\u003eWiFi 网络和机柜网络可以实现互访\u003c/h2\u003e\n\u003cp\u003e在以上基础设施搭建完成之后，网络互访的路由表就可以配置了，而且可以有两条线路：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e通过一个机柜网络的接口 DHCP 分配给 Wifi 网络，加入静态路由可以互访\u003c/li\u003e\n\u003cli\u003e通过 R483G 的接口互访，作为 Backup\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch1\u003e线路部署\u003c/h1\u003e\n\u003cp\u003e\u003cimg alt=\"布线图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://cdn.yitang.top/upload/ether-public/yitang/1662991599bac52590860c930e5396c2db1369c10c1c8dd9f8.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e弱电箱部分配合两个置物架，放置了\u003c/p\u003e\n\u003cp\u003e电信光猫+XDR5480 （这家伙真大啊）+R483G+J4125+N1+R2s+光纤转发器的一端\n这些都在弱电箱这里了。\u003c/p\u003e\n\u003cp\u003e到机柜处基本就一根光纤了，从转发器接入交换机到各个设备。\u003c/p\u003e\n\u003ch1\u003e路由表设计\u003c/h1\u003e\n\u003cp\u003e\u003cimg alt=\"路由表\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://cdn.yitang.top/upload/ether-public/yitang/1662991599351723dfcbf0eefb6aff9fef99dea94eae2f48e0.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e路由表比较复杂，请忽略黑字重点看彩色字就行。\u003c/p\u003e\n\u003cp\u003eR483G 做了一层接入层网桥的功能，可以实现网间互访的备份。\u003c/p\u003e\n\u003ch1\u003e测速杂项\u003c/h1\u003e\n\u003cp\u003ewifi 能测到 800Mbps(三星 S20+，只能 1T1R 1200Mbps ）\u003c/p\u003e\n\u003cp\u003eLAN 测速（ R2s+N1 一起），出口能跑到 1200Mbps ，证明猫棒是生效的。\u003c/p\u003e\n\u003ch1\u003e稳定性可靠性分析\u003c/h1\u003e\n\u003ch2\u003e设计目标：任意一个设备单点故障，能做到自动 /手动切换，可用。\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e\nR483G 挂了\u003col\u003e\n\u003cli\u003e内网互联不影响\u003c/li\u003e\n\u003cli\u003eVPN 可以 fallback 到走 J4125 下面的 vpn\u003c/li\u003e\n\u003cli\u003ewifi 和机柜网络不影响\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003cli\u003e\nJ4125 挂了\u003col\u003e\n\u003cli\u003ewifi 不影响\u003c/li\u003e\n\u003cli\u003e机柜的内网访问不影响\u003c/li\u003e\n\u003cli\u003e未来可以在机柜加一个备用网关，走机柜的 XDR1850 的 Mesh 路由出公网\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003cli\u003e\nXDR-5480 挂了\u003col\u003e\n\u003cli\u003e机柜网络不受影响\u003c/li\u003e\n\u003cli\u003emesh 路由和下面的有线设备几乎都得挂，这个暂时无解\u003c/li\u003e\n\u003cli\u003e无线可以用 N1 起一个同 SSID 的备用接入点+DHCP ，走机柜网络出（不一定，前提是 5480 的交换别挂）\u003c/li\u003e\n\u003cli\u003eJ4125 下面挂了一个很挫很小的路由器，作为 wifi 接入点可以直接进 J4125 的网络。\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003cli\u003e\nR2s 挂了\u003col\u003e\n\u003cli\u003e机柜网络不受影响\u003c/li\u003e\n\u003cli\u003e用 N1 起 mac vlan 来代替 R2s 作为网关\u003c/li\u003e\n\u003cli\u003e内网互联可以走 R483G\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003cli\u003e\n光纤转发器 /光纤挂了\u003col\u003e\n\u003cli\u003ewifi 不受影响\u003c/li\u003e\n\u003cli\u003e未来可以做一个备用网关，见 2.3   \u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003cli\u003e\n电信光猫 /光纤挂了\u003col\u003e\n\u003cli\u003ewifi 不受影响\u003c/li\u003e\n\u003cli\u003e在 J4125 上加一个走 R2s 出的网关可以正常上网\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003cli\u003e\n移动光纤挂了\u003col\u003e\n\u003cli\u003e都不受影响，都是双路热备的\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e服务监控和诊断\u003c/h2\u003e\n\u003cp\u003e目前主要靠内网的一些脚本实现 DDNS ，服务发现，服务心跳报警等，对于一些网络层不可达的问题也能提早发现。\u003c/p\u003e\n\u003ch2\u003e稳定性的核心是：如果我不在家，家里网络出了一些问题，至少我能尝试做点什么。\u003c/h2\u003e\n\u003cp\u003e未来一些迭代点：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e在 N1 上整活，实现和 R2s 的 keep-alive\u003c/li\u003e\n\u003cli\u003e机柜侧做 WiFi 网络接入的 backup ，保证断线的时候对业务影响最小\u003c/li\u003e\n\u003cli\u003e提升服务监控和诊断的能力，有问题及时预警\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "phpfpm",
+      "PubDate": "2022-09-12T14:52:57Z"
+    },
+    {
+      "Title": "再来帮推一下电信集团套餐 - 生活",
+      "Link": "https://www.v2ex.com/t/879537",
+      "Description": "\u003cp\u003e再推原因：上次 v 友办的多，老板说有新套餐会给提醒，超值优惠。感谢 v 友。\n套餐是闲鱼无聊搜到的，老板退伍兵，人实在。\n发下他最新圈的动态。\n北京电信 5G 套餐\n39 套餐，120g 全国通用，500 分钟。（新办）\n49 套餐，120g 全国通用，700 分钟。（新办、携转、升级套餐）\n69 套餐，120g 全国通用+60g 北京，900 分钟。（新办、携转、升级套餐）\n以上是套餐详情，下边一条是他最新一条。\n北京电信 49 元 5G 融合套餐，120g 全国通用流量，700 分钟国内通话，送 200M 宽带，本月还有最后 1 个名额，需要的抓紧了！！！\n老板说 v 直接加（但我是闲鱼下单的哈，v 友自便）：dianxin336688\n放两张简单的套餐图，介绍的可能不详细，需要的可以去聊。\n\u003ca href=\"https://img1.imgtp.com/2022/09/12/5QhQqdRX.jpg\" rel=\"nofollow\"\u003ehttps://img1.imgtp.com/2022/09/12/5QhQqdRX.jpg\u003c/a\u003e\n\u003ca href=\"https://img1.imgtp.com/2022/09/12/8wUk8fpm.jpg\" rel=\"nofollow\"\u003ehttps://img1.imgtp.com/2022/09/12/8wUk8fpm.jpg\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "hpella",
+      "PubDate": "2022-09-12T14:46:43Z"
+    },
+    {
       "Title": "neocities 上有很多 95 后可能没怎么见过的「个人网站」 - 分享发现",
       "Link": "https://www.v2ex.com/t/879536",
       "Description": "\u003cp\u003e\u003ca href=\"https://neocities.org/browse\" rel=\"nofollow\"\u003ehttps://neocities.org/browse\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e当年能手写网站的都是有个性的人，现在即便有个人网站的，大部分人都是找个 hexo 皮肤之类的扔 github 就完事咯。。\u003c/p\u003e\n",
@@ -95,13 +109,6 @@
       "PubDate": "2022-09-12T13:46:18Z"
     },
     {
-      "Title": "求推荐机场/梯子 - 分享发现",
-      "Link": "https://www.v2ex.com/t/879521",
-      "Description": "\u003cp\u003e客户端：Clash\u003c/p\u003e\n\u003cp\u003e用途：主要用来在电视上 刷 Netflix 和油管\u003c/p\u003e\n\u003cp\u003e最近用的挂了，所以期望新的机场有最好有 2 年以上的稳定使用经验\u003c/p\u003e\n\u003cp\u003e谢谢！\u003c/p\u003e\n",
-      "Author": "WeberXie",
-      "PubDate": "2022-09-12T13:37:04Z"
-    },
-    {
       "Title": "CubyText 分享一个开源的自制的知识管理的 App - 分享创造",
       "Link": "https://www.v2ex.com/t/879519",
       "Description": "支持自动生成 Outline\u003cbr /\u003e支持类似 Notion 的 block\u003cbr /\u003e支持多 Tabs\u003cbr /\u003e支持文章间引用关系\u003cbr /\u003e\u003cbr /\u003eGithub 地址： \u003ca target=\"_blank\" href=\"https://github.com/vincentdchan/CubyText\" rel=\"nofollow noopener\"\u003ehttps://github.com/vincentdchan/CubyText\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e欢迎试用和提意见",
@@ -165,13 +172,6 @@
       "PubDate": "2022-09-12T12:56:23Z"
     },
     {
-      "Title": "我发现了，讨论新冠和中医的帖子都会转到水深火热节点，还有什么是不宜在 V2EX 讨论的？ - V2EX",
-      "Link": "https://www.v2ex.com/t/879507",
-      "Description": "\u003cp\u003eRT ，没有讽刺的意思，完全理解，在国内必须接受审查。\u003c/p\u003e\n\u003cp\u003e想了解一下还有啥是这样的？或者建议去哪里讨论？\u003c/p\u003e\n",
-      "Author": "daoqiongsi1101",
-      "PubDate": "2022-09-12T12:47:12Z"
-    },
-    {
       "Title": "年年焕新真的坑爹 - iPhone",
       "Link": "https://www.v2ex.com/t/879506",
       "Description": "\u003cp\u003e明明预约的时候是 9.17 ，预约成功后变成 9.26 ，苹果今年真的恶心。\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e预计在 周一 2022/09/26 送达。 到货后我们会通知你，并请你选择取货的日期和时间。\u003c/p\u003e\n",
@@ -207,20 +207,6 @@
       "PubDate": "2022-09-12T11:35:53Z"
     },
     {
-      "Title": "Surge 4 Mac 车位 - Surge",
-      "Link": "https://www.v2ex.com/t/879501",
-      "Description": "\u003cp\u003e两个车位，三设备版本\u003c/p\u003e\n\u003cp\u003e137/设备\u003c/p\u003e\n\u003cp\u003e升级问题后续商量，你们两个意见只要一致我就跟随升级或者停留\u003c/p\u003e\n\u003cp\u003e绿色软件 base64：Z2EyZW5k\u003c/p\u003e\n",
-      "Author": "Ga2en",
-      "PubDate": "2022-09-12T11:20:51Z"
-    },
-    {
-      "Title": "这是闹哪样啊，帝都核酸检测 72 小时倒退回 48 小时了啊？ - 北京",
-      "Link": "https://www.v2ex.com/t/879500",
-      "Description": "这是在开历史倒车啊？",
-      "Author": "bclerdx",
-      "PubDate": "2022-09-12T10:58:39Z"
-    },
-    {
       "Title": "win11 开机欢迎界面卡几十秒 - Windows",
       "Link": "https://www.v2ex.com/t/879499",
       "Description": "版本 21h2 。查了一下说可能显卡原因，但我驱动都已经更新到最新了。\u003cbr /\u003e\u003cbr /\u003e正常开机应该 20 秒进桌面，现在会在欢迎界面开一分钟左右，或者直接黑屏一分钟才进桌面。\u003cbr /\u003e\u003cbr /\u003e不知道怎么定位问题，有没有开机日志可查？",
@@ -254,6 +240,34 @@
       "Description": "\u003cp\u003e小弟我前些天收到了官网定的 m1 max 款 mac studio ，今天在油管刷到别人的开箱视频，里面提了一嘴电源线的材质，我这才发现我的是普通的那种橡胶材质。\u003c/p\u003e\n\u003cp\u003e不过我没遇到闲置时风扇声或者电流声。\u003c/p\u003e\n",
       "Author": "Karlven",
       "PubDate": "2022-09-12T10:13:56Z"
+    },
+    {
+      "Title": "求推荐机场/梯子 - 分享发现",
+      "Link": "https://www.v2ex.com/t/879521",
+      "Description": "\u003cp\u003e客户端：Clash\u003c/p\u003e\n\u003cp\u003e用途：主要用来在电视上 刷 Netflix 和油管\u003c/p\u003e\n\u003cp\u003e最近用的挂了，所以期望新的机场有最好有 2 年以上的稳定使用经验\u003c/p\u003e\n\u003cp\u003e谢谢！\u003c/p\u003e\n",
+      "Author": "WeberXie",
+      "PubDate": "2022-09-12T13:37:04Z"
+    },
+    {
+      "Title": "我发现了，讨论新冠和中医的帖子都会转到水深火热节点，还有什么是不宜在 V2EX 讨论的？ - V2EX",
+      "Link": "https://www.v2ex.com/t/879507",
+      "Description": "\u003cp\u003eRT ，没有讽刺的意思，完全理解，在国内必须接受审查。\u003c/p\u003e\n\u003cp\u003e想了解一下还有啥是这样的？或者建议去哪里讨论？\u003c/p\u003e\n",
+      "Author": "daoqiongsi1101",
+      "PubDate": "2022-09-12T12:47:12Z"
+    },
+    {
+      "Title": "Surge 4 Mac 车位 - Surge",
+      "Link": "https://www.v2ex.com/t/879501",
+      "Description": "\u003cp\u003e两个车位，三设备版本\u003c/p\u003e\n\u003cp\u003e137/设备\u003c/p\u003e\n\u003cp\u003e升级问题后续商量，你们两个意见只要一致我就跟随升级或者停留\u003c/p\u003e\n\u003cp\u003e绿色软件 base64：Z2EyZW5k\u003c/p\u003e\n",
+      "Author": "Ga2en",
+      "PubDate": "2022-09-12T11:20:51Z"
+    },
+    {
+      "Title": "这是闹哪样啊，帝都核酸检测 72 小时倒退回 48 小时了啊？ - 北京",
+      "Link": "https://www.v2ex.com/t/879500",
+      "Description": "这是在开历史倒车啊？",
+      "Author": "bclerdx",
+      "PubDate": "2022-09-12T10:58:39Z"
     },
     {
       "Title": "export = React; 该怎么理解？ - React",

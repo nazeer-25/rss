@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>对抗单点故障：家庭网络子网拆分和隔离——拆成三个子网，搞定路由表 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/879539</link>
+      <description>&lt;h1&gt;-2 写在最前面：为什么不用 All-in-one?&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;担心弱电箱比较小，一个小的软路由(J4125/N5105 扛不住）&lt;/li&gt;&#xA;&lt;li&gt;穷，买不起核心路由器&lt;/li&gt;&#xA;&lt;li&gt;一个大的 Pve 设备挂了就是全屋都挂，这个可靠性我不接受&lt;/li&gt;&#xA;&lt;li&gt;各种设备都试一试（ x86 主路由，arm 的旁路由，tp 的企业级多 wan 口路由），相互配合一下挺好玩的&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1&gt;-1 几款核心设备&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;TPLink XDR5480 &amp;amp;&amp;amp; MA5671A 猫棒(192.168.10.0/24)：&lt;ol&gt;&#xA;&lt;li&gt;TP 家的飞流系列的路由器，带有 2.5G SFP 接口，接了华为 MA5671A GPON stick （猫棒）&lt;/li&gt;&#xA;&lt;li&gt;用无线 mesh 连接 AX1850 路由做房间覆盖&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;某家 J4125 1GbE 的软路由(192.168.0.0/24)&lt;ol&gt;&#xA;&lt;li&gt;4 口软路由，2g+16g 的丐配置&lt;/li&gt;&#xA;&lt;li&gt;本来开始打算上 5125+2.5GbE 的，无奈和某光纤转发器不太兼容，遂退货作罢&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;TPLink R483G 企业级路由器(192.168.100.0/24)&lt;ol&gt;&#xA;&lt;li&gt;之前有一段时间做多 wan 口聚合等用途，现在作为网桥服务&amp;amp;&amp;amp;vpn 接入&lt;/li&gt;&#xA;&lt;li&gt;非常稳定可靠&lt;/li&gt;&#xA;&lt;li&gt;买二手的性价比也不错&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;光纤转发器&amp;amp;&amp;amp;隐形光纤&lt;ol&gt;&#xA;&lt;li&gt;当初某宝买的时候说 2Lan 口支持隔离,但是实际看下来并不支持隔离，坑爹啊这&lt;/li&gt;&#xA;&lt;li&gt;需求点是弱电箱到机柜没有网线，所以拉了一根隐形光纤作为通信手段。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;R2s &amp;amp;&amp;amp; N1&lt;ol&gt;&#xA;&lt;li&gt;这俩就不多说了，R2s 两百多，N1 不带遥控器的话 100 不到&lt;/li&gt;&#xA;&lt;li&gt;感觉性能上不分伯仲，R2s 多一个 Lan 口可以多整活&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1&gt;0 前情提要&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.v2ex.com/t/877324&#34; rel=&#34;nofollow&#34;&gt;XDR5480 与 R2s 做 Lan 口聚合&lt;/a&gt;——放弃，5480 提供的链路聚合功能有限。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.v2ex.com/t/869681&#34; rel=&#34;nofollow&#34;&gt;vpn&amp;amp;&amp;amp;网桥&lt;/a&gt;——TL-R483G 基本完美完成任务&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.v2ex.com/t/856608&#34; rel=&#34;nofollow&#34;&gt;旁路由端口转发的一些坑&lt;/a&gt;——不依赖旁路由做端口转发&lt;/p&gt;&#xA;&lt;h1&gt;1 梳理核心需求&lt;/h1&gt;&#xA;&lt;h2&gt;机柜，生产网络科学稳定&lt;/h2&gt;&#xA;&lt;p&gt;这个真没啥说的，直接走软路由拨号，在软路由上进行流量分离等等, 这部分就走基于 J4125 的 x86 软路由去实现了。&lt;/p&gt;&#xA;&lt;h2&gt;WiFi 路由 5G ax 覆盖，科学，稳定&lt;/h2&gt;&#xA;&lt;p&gt;之前用的是 XDR-5430 ，升级成为 XDR-5480 之后，多了一个自定义的 SFP 接口，可以直接用猫棒就很香&lt;/p&gt;&#xA;&lt;p&gt;所以基于要使用猫棒，就必须路由拨号，科学上网使用旁路由网关实现。&lt;/p&gt;&#xA;&lt;p&gt;wifi 的 mesh 子路由选择的是 TP XDR1850 ，最开始的时候 200 一个，现在涨价到 250 了&lt;/p&gt;&#xA;&lt;h2&gt;远程办公期间可以可靠访问机柜网络，修复和诊断家庭网络问题&lt;/h2&gt;&#xA;&lt;p&gt;远程访问嘛，ssh/rdp/web 等各种服务直接用端口开放在公网上安全性问题很大，外面需要套一层 vpn 的壳子。&lt;/p&gt;&#xA;&lt;p&gt;如何实现 vpn server ？大概有这么几个方案&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在 J4125 软路由上开启 vpn 服务器&lt;/li&gt;&#xA;&lt;li&gt;在 XDR-5480 下的子网开 vpn 服务器，用端口转发访问（涉及到旁路由，可能需要两次端口转发）&lt;/li&gt;&#xA;&lt;li&gt;在 J4125 软路由下面的某个设备上开启 vpn 服务器&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;但是这些方案面临的共同问题是:&lt;/p&gt;&#xA;&lt;p&gt;如果接入的路由器出了问题了（ 5480/J4125)挂了，vpn 不也是连不进去了？&lt;/p&gt;&#xA;&lt;p&gt;参考去年 B 站的复盘，一个核心原因是：生产网络挂了之后，缺乏旁路进入机房的手段&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.163.com/dy/article/HCFJP6P80511D3QS.html&#34; rel=&#34;nofollow&#34;&gt;B 站宕机事故复盘：2021.07.13 我们是这样崩的&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;因此，在这个环节，我选择用 R483G 企业级有线路由器做 VPN 接入网关。&lt;/p&gt;&#xA;&lt;p&gt;同时，感谢 TP 厂家的客服支持，R483G 的 NAPT 功能启用之后，就可以实现一个简单的免配置的网桥功能，可以很方便的打通各个子网，作为 WiFi 网络和生产网络互访的一个 Backup 。&lt;/p&gt;&#xA;&lt;p&gt;使用 R483G 作为接入 VPN 路由之后，可以很方便的访问两个子网，实现远程接入。&lt;/p&gt;&#xA;&lt;p&gt;当然，如果偶尔 R483G 出了问题，还保留一个在 J4125 下的 vpn 服务作为备用接入。&lt;/p&gt;&#xA;&lt;h2&gt;WiFi 网络和机柜网络可以实现互访&lt;/h2&gt;&#xA;&lt;p&gt;在以上基础设施搭建完成之后，网络互访的路由表就可以配置了，而且可以有两条线路：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;通过一个机柜网络的接口 DHCP 分配给 Wifi 网络，加入静态路由可以互访&lt;/li&gt;&#xA;&lt;li&gt;通过 R483G 的接口互访，作为 Backup&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1&gt;线路部署&lt;/h1&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;布线图&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://cdn.yitang.top/upload/ether-public/yitang/1662991599bac52590860c930e5396c2db1369c10c1c8dd9f8.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;弱电箱部分配合两个置物架，放置了&lt;/p&gt;&#xA;&lt;p&gt;电信光猫+XDR5480 （这家伙真大啊）+R483G+J4125+N1+R2s+光纤转发器的一端&#xA;这些都在弱电箱这里了。&lt;/p&gt;&#xA;&lt;p&gt;到机柜处基本就一根光纤了，从转发器接入交换机到各个设备。&lt;/p&gt;&#xA;&lt;h1&gt;路由表设计&lt;/h1&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;路由表&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://cdn.yitang.top/upload/ether-public/yitang/1662991599351723dfcbf0eefb6aff9fef99dea94eae2f48e0.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;路由表比较复杂，请忽略黑字重点看彩色字就行。&lt;/p&gt;&#xA;&lt;p&gt;R483G 做了一层接入层网桥的功能，可以实现网间互访的备份。&lt;/p&gt;&#xA;&lt;h1&gt;测速杂项&lt;/h1&gt;&#xA;&lt;p&gt;wifi 能测到 800Mbps(三星 S20+，只能 1T1R 1200Mbps ）&lt;/p&gt;&#xA;&lt;p&gt;LAN 测速（ R2s+N1 一起），出口能跑到 1200Mbps ，证明猫棒是生效的。&lt;/p&gt;&#xA;&lt;h1&gt;稳定性可靠性分析&lt;/h1&gt;&#xA;&lt;h2&gt;设计目标：任意一个设备单点故障，能做到自动 /手动切换，可用。&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;R483G 挂了&lt;ol&gt;&#xA;&lt;li&gt;内网互联不影响&lt;/li&gt;&#xA;&lt;li&gt;VPN 可以 fallback 到走 J4125 下面的 vpn&lt;/li&gt;&#xA;&lt;li&gt;wifi 和机柜网络不影响&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;J4125 挂了&lt;ol&gt;&#xA;&lt;li&gt;wifi 不影响&lt;/li&gt;&#xA;&lt;li&gt;机柜的内网访问不影响&lt;/li&gt;&#xA;&lt;li&gt;未来可以在机柜加一个备用网关，走机柜的 XDR1850 的 Mesh 路由出公网&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;XDR-5480 挂了&lt;ol&gt;&#xA;&lt;li&gt;机柜网络不受影响&lt;/li&gt;&#xA;&lt;li&gt;mesh 路由和下面的有线设备几乎都得挂，这个暂时无解&lt;/li&gt;&#xA;&lt;li&gt;无线可以用 N1 起一个同 SSID 的备用接入点+DHCP ，走机柜网络出（不一定，前提是 5480 的交换别挂）&lt;/li&gt;&#xA;&lt;li&gt;J4125 下面挂了一个很挫很小的路由器，作为 wifi 接入点可以直接进 J4125 的网络。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;R2s 挂了&lt;ol&gt;&#xA;&lt;li&gt;机柜网络不受影响&lt;/li&gt;&#xA;&lt;li&gt;用 N1 起 mac vlan 来代替 R2s 作为网关&lt;/li&gt;&#xA;&lt;li&gt;内网互联可以走 R483G&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;光纤转发器 /光纤挂了&lt;ol&gt;&#xA;&lt;li&gt;wifi 不受影响&lt;/li&gt;&#xA;&lt;li&gt;未来可以做一个备用网关，见 2.3   &lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;电信光猫 /光纤挂了&lt;ol&gt;&#xA;&lt;li&gt;wifi 不受影响&lt;/li&gt;&#xA;&lt;li&gt;在 J4125 上加一个走 R2s 出的网关可以正常上网&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;移动光纤挂了&lt;ol&gt;&#xA;&lt;li&gt;都不受影响，都是双路热备的&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;服务监控和诊断&lt;/h2&gt;&#xA;&lt;p&gt;目前主要靠内网的一些脚本实现 DDNS ，服务发现，服务心跳报警等，对于一些网络层不可达的问题也能提早发现。&lt;/p&gt;&#xA;&lt;h2&gt;稳定性的核心是：如果我不在家，家里网络出了一些问题，至少我能尝试做点什么。&lt;/h2&gt;&#xA;&lt;p&gt;未来一些迭代点：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在 N1 上整活，实现和 R2s 的 keep-alive&lt;/li&gt;&#xA;&lt;li&gt;机柜侧做 WiFi 网络接入的 backup ，保证断线的时候对业务影响最小&lt;/li&gt;&#xA;&lt;li&gt;提升服务监控和诊断的能力，有问题及时预警&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>phpfpm</author>
+      <pubDate>12 Sep 2022 14:52:57 +0000</pubDate>
+    </item>
+    <item>
+      <title>再来帮推一下电信集团套餐 - 生活</title>
+      <link>https://www.v2ex.com/t/879537</link>
+      <description>&lt;p&gt;再推原因：上次 v 友办的多，老板说有新套餐会给提醒，超值优惠。感谢 v 友。&#xA;套餐是闲鱼无聊搜到的，老板退伍兵，人实在。&#xA;发下他最新圈的动态。&#xA;北京电信 5G 套餐&#xA;39 套餐，120g 全国通用，500 分钟。（新办）&#xA;49 套餐，120g 全国通用，700 分钟。（新办、携转、升级套餐）&#xA;69 套餐，120g 全国通用+60g 北京，900 分钟。（新办、携转、升级套餐）&#xA;以上是套餐详情，下边一条是他最新一条。&#xA;北京电信 49 元 5G 融合套餐，120g 全国通用流量，700 分钟国内通话，送 200M 宽带，本月还有最后 1 个名额，需要的抓紧了！！！&#xA;老板说 v 直接加（但我是闲鱼下单的哈，v 友自便）：dianxin336688&#xA;放两张简单的套餐图，介绍的可能不详细，需要的可以去聊。&#xA;&lt;a href=&#34;https://img1.imgtp.com/2022/09/12/5QhQqdRX.jpg&#34; rel=&#34;nofollow&#34;&gt;https://img1.imgtp.com/2022/09/12/5QhQqdRX.jpg&lt;/a&gt;&#xA;&lt;a href=&#34;https://img1.imgtp.com/2022/09/12/8wUk8fpm.jpg&#34; rel=&#34;nofollow&#34;&gt;https://img1.imgtp.com/2022/09/12/8wUk8fpm.jpg&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>hpella</author>
+      <pubDate>12 Sep 2022 14:46:43 +0000</pubDate>
+    </item>
+    <item>
       <title>neocities 上有很多 95 后可能没怎么见过的「个人网站」 - 分享发现</title>
       <link>https://www.v2ex.com/t/879536</link>
       <description>&lt;p&gt;&lt;a href=&#34;https://neocities.org/browse&#34; rel=&#34;nofollow&#34;&gt;https://neocities.org/browse&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;当年能手写网站的都是有个性的人，现在即便有个人网站的，大部分人都是找个 hexo 皮肤之类的扔 github 就完事咯。。&lt;/p&gt;&#xA;</description>
@@ -95,13 +109,6 @@
       <pubDate>12 Sep 2022 13:46:18 +0000</pubDate>
     </item>
     <item>
-      <title>求推荐机场/梯子 - 分享发现</title>
-      <link>https://www.v2ex.com/t/879521</link>
-      <description>&lt;p&gt;客户端：Clash&lt;/p&gt;&#xA;&lt;p&gt;用途：主要用来在电视上 刷 Netflix 和油管&lt;/p&gt;&#xA;&lt;p&gt;最近用的挂了，所以期望新的机场有最好有 2 年以上的稳定使用经验&lt;/p&gt;&#xA;&lt;p&gt;谢谢！&lt;/p&gt;&#xA;</description>
-      <author>WeberXie</author>
-      <pubDate>12 Sep 2022 13:37:04 +0000</pubDate>
-    </item>
-    <item>
       <title>CubyText 分享一个开源的自制的知识管理的 App - 分享创造</title>
       <link>https://www.v2ex.com/t/879519</link>
       <description>支持自动生成 Outline&lt;br /&gt;支持类似 Notion 的 block&lt;br /&gt;支持多 Tabs&lt;br /&gt;支持文章间引用关系&lt;br /&gt;&lt;br /&gt;Github 地址： &lt;a target=&#34;_blank&#34; href=&#34;https://github.com/vincentdchan/CubyText&#34; rel=&#34;nofollow noopener&#34;&gt;https://github.com/vincentdchan/CubyText&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;欢迎试用和提意见</description>
@@ -165,13 +172,6 @@
       <pubDate>12 Sep 2022 12:56:23 +0000</pubDate>
     </item>
     <item>
-      <title>我发现了，讨论新冠和中医的帖子都会转到水深火热节点，还有什么是不宜在 V2EX 讨论的？ - V2EX</title>
-      <link>https://www.v2ex.com/t/879507</link>
-      <description>&lt;p&gt;RT ，没有讽刺的意思，完全理解，在国内必须接受审查。&lt;/p&gt;&#xA;&lt;p&gt;想了解一下还有啥是这样的？或者建议去哪里讨论？&lt;/p&gt;&#xA;</description>
-      <author>daoqiongsi1101</author>
-      <pubDate>12 Sep 2022 12:47:12 +0000</pubDate>
-    </item>
-    <item>
       <title>年年焕新真的坑爹 - iPhone</title>
       <link>https://www.v2ex.com/t/879506</link>
       <description>&lt;p&gt;明明预约的时候是 9.17 ，预约成功后变成 9.26 ，苹果今年真的恶心。&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;预计在 周一 2022/09/26 送达。 到货后我们会通知你，并请你选择取货的日期和时间。&lt;/p&gt;&#xA;</description>
@@ -207,20 +207,6 @@
       <pubDate>12 Sep 2022 11:35:53 +0000</pubDate>
     </item>
     <item>
-      <title>Surge 4 Mac 车位 - Surge</title>
-      <link>https://www.v2ex.com/t/879501</link>
-      <description>&lt;p&gt;两个车位，三设备版本&lt;/p&gt;&#xA;&lt;p&gt;137/设备&lt;/p&gt;&#xA;&lt;p&gt;升级问题后续商量，你们两个意见只要一致我就跟随升级或者停留&lt;/p&gt;&#xA;&lt;p&gt;绿色软件 base64：Z2EyZW5k&lt;/p&gt;&#xA;</description>
-      <author>Ga2en</author>
-      <pubDate>12 Sep 2022 11:20:51 +0000</pubDate>
-    </item>
-    <item>
-      <title>这是闹哪样啊，帝都核酸检测 72 小时倒退回 48 小时了啊？ - 北京</title>
-      <link>https://www.v2ex.com/t/879500</link>
-      <description>这是在开历史倒车啊？</description>
-      <author>bclerdx</author>
-      <pubDate>12 Sep 2022 10:58:39 +0000</pubDate>
-    </item>
-    <item>
       <title>win11 开机欢迎界面卡几十秒 - Windows</title>
       <link>https://www.v2ex.com/t/879499</link>
       <description>版本 21h2 。查了一下说可能显卡原因，但我驱动都已经更新到最新了。&lt;br /&gt;&lt;br /&gt;正常开机应该 20 秒进桌面，现在会在欢迎界面开一分钟左右，或者直接黑屏一分钟才进桌面。&lt;br /&gt;&lt;br /&gt;不知道怎么定位问题，有没有开机日志可查？</description>
@@ -254,6 +240,34 @@
       <description>&lt;p&gt;小弟我前些天收到了官网定的 m1 max 款 mac studio ，今天在油管刷到别人的开箱视频，里面提了一嘴电源线的材质，我这才发现我的是普通的那种橡胶材质。&lt;/p&gt;&#xA;&lt;p&gt;不过我没遇到闲置时风扇声或者电流声。&lt;/p&gt;&#xA;</description>
       <author>Karlven</author>
       <pubDate>12 Sep 2022 10:13:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>求推荐机场/梯子 - 分享发现</title>
+      <link>https://www.v2ex.com/t/879521</link>
+      <description>&lt;p&gt;客户端：Clash&lt;/p&gt;&#xA;&lt;p&gt;用途：主要用来在电视上 刷 Netflix 和油管&lt;/p&gt;&#xA;&lt;p&gt;最近用的挂了，所以期望新的机场有最好有 2 年以上的稳定使用经验&lt;/p&gt;&#xA;&lt;p&gt;谢谢！&lt;/p&gt;&#xA;</description>
+      <author>WeberXie</author>
+      <pubDate>12 Sep 2022 13:37:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>我发现了，讨论新冠和中医的帖子都会转到水深火热节点，还有什么是不宜在 V2EX 讨论的？ - V2EX</title>
+      <link>https://www.v2ex.com/t/879507</link>
+      <description>&lt;p&gt;RT ，没有讽刺的意思，完全理解，在国内必须接受审查。&lt;/p&gt;&#xA;&lt;p&gt;想了解一下还有啥是这样的？或者建议去哪里讨论？&lt;/p&gt;&#xA;</description>
+      <author>daoqiongsi1101</author>
+      <pubDate>12 Sep 2022 12:47:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>Surge 4 Mac 车位 - Surge</title>
+      <link>https://www.v2ex.com/t/879501</link>
+      <description>&lt;p&gt;两个车位，三设备版本&lt;/p&gt;&#xA;&lt;p&gt;137/设备&lt;/p&gt;&#xA;&lt;p&gt;升级问题后续商量，你们两个意见只要一致我就跟随升级或者停留&lt;/p&gt;&#xA;&lt;p&gt;绿色软件 base64：Z2EyZW5k&lt;/p&gt;&#xA;</description>
+      <author>Ga2en</author>
+      <pubDate>12 Sep 2022 11:20:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>这是闹哪样啊，帝都核酸检测 72 小时倒退回 48 小时了啊？ - 北京</title>
+      <link>https://www.v2ex.com/t/879500</link>
+      <description>这是在开历史倒车啊？</description>
+      <author>bclerdx</author>
+      <pubDate>12 Sep 2022 10:58:39 +0000</pubDate>
     </item>
     <item>
       <title>export = React; 该怎么理解？ - React</title>
