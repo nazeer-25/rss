@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有人在 trustdata 工作吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/879838",
+      "Description": "\u003cp\u003e有人在 trustdata 工作吗，请教个事\u003c/p\u003e\n",
+      "Author": "eshezhao",
+      "PubDate": "2022-09-13T15:33:36Z"
+    },
+    {
+      "Title": "[租房] 上海安亭创新港附近 - 上海",
+      "Link": "https://www.v2ex.com/t/879837",
+      "Description": "\u003cp\u003eRT ，大一室 /一室一厅 均可，步行至创新港 15min 内，预算 3000 内，可接受养猫。\n月底搬入，如有转租或房源请底下留言，晚上下班后回复。\u003c/p\u003e\n",
+      "Author": "Csfalcon",
+      "PubDate": "2022-09-13T15:31:10Z"
+    },
+    {
+      "Title": "有小伙伴问我 SDB 的锁模型，我重新梳理了一下 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/879836",
+      "Description": "\u003ch2\u003eSDB 背后的思考 ———— List 数据结构锁模型设计\u003c/h2\u003e\n\u003chr/\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/yemingfeng/sdb/blob/master/docs/List%20%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1.md\" rel=\"nofollow\"\u003e从上一篇中，我们已经设计好了 List 数据结构在 kv 存储中的数据模型。\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e这一篇，我们介绍下 SDB 在 List 数据结构中的锁模型设计。\u003c/p\u003e\n\u003cp\u003e我们重新回顾下 List 数据模型图：\u003c/p\u003e\n\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://github.com/yemingfeng/sdb/blob/master/docs/List%20%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B.jpg?raw=true\"/\u003e\n\u003cp\u003e可以看出，每个 List 都包含 N 个版本，每个版本都有 meta key 、deleted key 、ttl key 。其作用如下：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\nmeta key\u003cul\u003e\n\u003cli\u003e存储 List 的 meta 信息，如元素个数、是否删除、ttl 、版本号等。\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\ndeleted key\u003cul\u003e\n\u003cli\u003e可以根据该 key 检索被删除的 List ，用于数据回收。\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\nttl key\u003cul\u003e\n\u003cli\u003e可以根据该 key 检索被带有 ttl 的 List ，用于数据回收。\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e每个元素在 List 上都包含一个 seq key 和 value key 。其作用如下：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\nseq key\u003cul\u003e\n\u003cli\u003e用于顺序遍历 List 元素。\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\nvalue key\u003cul\u003e\n\u003cli\u003e用于在 List 中删除某元素。\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eQ：用户同时进行写入操作请求：LLPush 、LRPush 、LDel 、LRem 等，如何加锁？\u003c/p\u003e\n\u003cp\u003eA：由于这类请求会操作 meta key 。为了保证一致性，SDB 会按照用户写入的 key 进行加锁。 实际上，SDB 内部维护了多把锁，每个 key hash 后会取到对应的锁，然后对该锁进行加锁操作。伪代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003evar lockers []*sync.RWMutex\n\n// 写操作加锁\nfunc wlock(key []byte) {\n\tgetLocker(key).Lock()\n}\n\n// 读操作加锁\nfunc wUnLock(key []byte) {\n\tgetLocker(key).Unlock()\n}\n\n// 根据 key 获取锁\nfunc getLocker(key []byte) *sync.RWMutex {\n\tchecksum := crc16.Checksum(key, crc16.IBMTable)\n\treturn lockers[int(checksum)%len(lockers)]\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eQ：为什么不考虑每个 key 一把锁，而是多个 key 经过 hash 后共用一把锁？\u003c/p\u003e\n\u003cp\u003eA：如果每个 key 一把锁，可能会出现锁太多带来的性能损耗。虽然多个 key 经过 hash 后会共用一把锁，但每次用户的写入请求应该是快速返回的，写锁锁住的时间应该是不会太长的。\u003c/p\u003e\n\u003cp\u003eQ：用户的写入操作和 LCount 、LRange 的加锁逻辑是什么？\u003c/p\u003e\n\u003cp\u003eA：针对 LCount ，只是读取 meta 信息，不需要做额外的加锁处理。 而 LRange 操作是遍历 key 的，为了防止在遍历的时候，对该 List 进行了写入操作带来的数据混乱问题。SDB 对该操作加了读锁，伪代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003e// 写操作加锁\nfunc rlock(key []byte) {\n\tgetLocker(key).RLock()\n}\n\n// 读操作加锁\nfunc rUnLock(key []byte) {\n\tgetLocker(key).RUnlock()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eQ：deleted 数据回收任务和用户的写入请求加锁逻辑是怎样的？\u003c/p\u003e\n\u003cp\u003eA：由于 SDB 是采用多版本的设计，用户的写入请求只会操作最新版本的 meta key 等，而 deleted 数据回收任务不会回收最新版本的数据，所以二者不存在冲突的问题，不需要额外加锁。\u003c/p\u003e\n\u003cp\u003eQ：ttl 数据回收任务和用户的写入请求加锁逻辑是怎样的？\u003c/p\u003e\n\u003cp\u003eA：由于 SDB 是采用多版本的设计，用户的写入请求只会操作最新版本的 meta key 等，而 ttl 数据回收任务可能会回收最新版本的数据，所以二者不存在冲突的问题。这二者存在以下组合：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n用户请求 LLPush （ LRPush 同理） + ttl 数据回收任务同时进行\u003cul\u003e\n\u003cli\u003e假设 listA 最高版本号是 3 ，即将过期，meta 信息是：\u003ccode\u003e{count=3, version=3, ttl=1, nextSeq=4, deleted=false}\u003c/code\u003e，包含了元素是：[a, b, c]。而 LLPush 的元素是：[a, d]。 - LPush 获取到最高版本号 3 ，发现未过期（即将过期）。所以会往版本号 3 写入 [a, d] 数据 + meta \u003ccode\u003e{count=5, version=3, ttl=1, nextSeq=6, deleted=false}\u003c/code\u003e 信息和元素 [a, d]。 - ttl 数据回收任务只回收了版本号 3 的 meta key：\u003ccode\u003e{count=3, version=3, ttl=1, nextSeq=4, deleted=false}\u003c/code\u003e 和数据：[a, b, c]。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e总结：这种情况不需要加锁，只需要在每次 LPush 是再保证写入一次 ttl key 即可。等下一次回收任务还会回收该 listA 的版本号 3 的所有数据。\u003c/strong\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n用户请求 LDel + ttl 数据回收任务同时进行\u003cul\u003e\n\u003cli\u003e假设删除 listA 最高版本号是 3 ，对 listA 进行删除，同时 ttl 数据回收任务发现 listA 即将过期。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e总结：这种情况不需要加锁，ttl 数据任务会回收一次 listA 数据，deleted 数据回收也会回收一次 listA 数据。\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003eLRem 同理。\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "Aidenboss",
+      "PubDate": "2022-09-13T15:28:44Z"
+    },
+    {
+      "Title": "有没有数字通信原理（李白萍）的课件 PPT 啊？ - 问与答",
+      "Link": "https://www.v2ex.com/t/879835",
+      "Description": "",
+      "Author": "zhangruochen",
+      "PubDate": "2022-09-13T15:21:51Z"
+    },
+    {
       "Title": "The Legend of Zelda: Tears of the Kingdom - Nintendo Switch",
       "Link": "https://www.v2ex.com/t/879834",
       "Description": "\u003cp\u003e2023 年 5 月 12 号\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.youtube.com/watch?v=2SNF4M_v7wc\" rel=\"nofollow\"\u003ehttps://www.youtube.com/watch?v=2SNF4M_v7wc\u003c/a\u003e\u003c/p\u003e\n",
