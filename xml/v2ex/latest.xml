@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>如何看待冯大辉关于微信存储技术不垃圾的论证？ - 问与答</title>
+      <link>https://www.v2ex.com/t/880130</link>
+      <description>&lt;p&gt;冯的公众号「小道消息」只要涉及微信和拼多多的，必然是一顿吹捧。&lt;/p&gt;&#xA;&lt;p&gt;这不，又来了一篇，说网友吐槽的文件存多份的情况不存在。&lt;/p&gt;&#xA;&lt;p&gt;还给出了一个证明方法，如果属实，他给 500 块钱。&lt;/p&gt;&#xA;&lt;p&gt;感觉他在吓唬微信上的不懂技术的人。&lt;/p&gt;&#xA;&lt;p&gt;有人懂 unix 的说说看吗？&lt;/p&gt;&#xA;&lt;p&gt;文章链接：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/fGzVbZbLuAlsfuYNO_mIyA&#34; rel=&#34;nofollow&#34;&gt;https://mp.weixin.qq.com/s/fGzVbZbLuAlsfuYNO_mIyA&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>libasten</author>
+      <pubDate>14 Sep 2022 22:54:18 +0000</pubDate>
+    </item>
+    <item>
       <title>在云上做了一次 ops，感觉像是在烂泥里爬行 - 程序员</title>
       <link>https://www.v2ex.com/t/880128</link>
       <description>&lt;p&gt;当然如果是 bare metal 上肯定也好不到哪里去。&lt;/p&gt;&#xA;&lt;p&gt;今天尝试把一个 Docker Image 推送到 Google Cloud ，然后用 Cloud Run 跑服务，遇到了无数的问题。先是 Docker 不熟练，需要用 Nginx 服务器把 MKDocs 编译出来的静态站点显示出来，研究了半天 Dockerfile 的语法，终于用双 Docker 的方法搞定了。本地上能够用 127.0.0.1:80 来访问，第一阶段成功。&lt;/p&gt;&#xA;&lt;p&gt;接下来是把 Docker Image 放在 Cloud Run 上跑。碰到了许多问题——首先是许可不足，搜索了一下，发现可以用 impersonate service account 的方法借服务账号的权限。第一次成功了，把 Docker Image 推送到了 Artifact Registry ，但是 Cloud Run 怎么跑也跑不出来，看 log 什么也没有。这次折腾了不少时间，后来发现，原来是自己脑残，M1 上 build 的不能在云端用，必须是 amd64 的。&lt;/p&gt;&#xA;&lt;p&gt;重新编译了之后再次推送，老问题出了新花样，不知道什么原因总是说我没有 crendential ，折腾了老半天，只好用另外一种办法给 docker 推送的权限，这次总算搞定了。最后一步就是访问 Cloud Run 的网站，发现 Cloud Run 的 url 总是显示 403 ，原来是需要 token ，但是 Chrome 上改 header 十分麻烦，最后用 Modheader 解决了。&lt;/p&gt;&#xA;&lt;p&gt;当然事情还没做完，之后还要研究怎么用 GitHub Action 来做 CICD ，不然如何做到动态部署呢？当然今天实在是没心思搞了，明天继续。&lt;/p&gt;&#xA;&lt;p&gt;我的感想就是，让我们这种没做过开发的人做 Ops ，真是受罪。我从来没用过 Nginx 的人，哪里知道怎么设置？更别说还得在 Docker 里写额外的设置。我也没弄过 Cloud Run ，它是有 doc ，问题是 doc 未必能解决我的问题，最后还是 Stackoverflow 一把梭。好在本人搜索技能尚可，所有的东西都能搜到。看来搜索能力的确是我们这种挫逼的必备技能。&lt;/p&gt;&#xA;</description>
