@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>分享一下最近新写的 Web API 框架 - 分享创造</title>
+      <link>https://www.v2ex.com/t/880033</link>
+      <description>&lt;p&gt;在这个主题下发布应该没错吧。&lt;/p&gt;&#xA;&lt;p&gt;零零总总写了有半年了，虽然现在并不是一个发布的好时机，但是想要先分享出来和大家伙交流一下想法。本来打算先在公司用起来的，不过最近公司没有什么新项目，老项目我也不想换框架了，人力物力呀…… 所以只在自己的个人项目下应用了，目前运转良好。&lt;/p&gt;&#xA;&lt;p&gt;又是一个轮子，只不过有些不一样的地方。&lt;/p&gt;&#xA;&lt;p&gt;首先，思想上它是完全面向 API 文档的。也许好多团队写文档会借助于 YAPI 这样的第三方工具，或者直接用 Postman 这样用用例来说话，再不济手写 Markdown. 我在框架里直接生成了 OpenAPI 的规格文档，在开发者实现接口的同时，文档就生成了。例如像下面这样定义一个接口，同时文档就能生成了：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;route(&#39;/users&#39;, :post)&#xA;  .title(&#39;创建一个新用户&#39;)&#xA;  .params {&#xA;    param :user, type: &#39;object&#39;, using: UserEntity&#xA;  }&#xA;  .do_any {&#xA;    # 这里实现你的业务逻辑 ...&#xA;  }&#xA;  .if_status(201) {&#xA;    expose :user, type: &#39;object&#39;, using: UserEntity&#xA;  }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;其次，这次将参数和返回值的写法统一起来了。像上面，我们只用了一个 &lt;code&gt;UserEntity&lt;/code&gt;，就可以同时定义参数和返回值了，再也不用写两遍了。你的 &lt;code&gt;UserEntity&lt;/code&gt; 内部可能是这样写的：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class UserEntity&#xA;  property :id, type: &#39;integer&#39;, param: false # 只返回&#xA;  property :password, type: &#39;string&#39;, render: false # 只用作参数&#xA;  property :name, type: &#39;string,&#xA;  property :age, type: &#39;integer&#39;&#xA;end&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;其他的功能还有很多，就不想一一列举了。想进一步了解的，可以去看 GitHub 仓库：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/yetrun/web-frame&#34; rel=&#34;nofollow&#34;&gt;https://github.com/yetrun/web-frame&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;这个框架适合纯 API 后端的场景，即前后端分离。也比较适合团队，基本用一种固定的写法构建 API. 重点是生成对应的文档，前后端不再扯皮（你的文档是这么定义的，怎么你返回的数据是长这样啊之类的云云）。&lt;/p&gt;&#xA;&lt;p&gt;说实话最近整体的工作节奏都有些慢，受大环境的影响吧。本来打算等到我稳定运行后再发布了，但是这可能还要一阵子，就先预先发布一下看看反馈再说。现在大家运行起来可能有点吃力，因为还缺一个项目脚手架，后面会补上。&lt;/p&gt;&#xA;&lt;p&gt;如果觉得对你有用，还望支持一下，对我回复个 +1. 如果大家热情足够的话，因为涉及到文档，我感觉上手难度还是有的，到时会建个 QQ 群或微信群做全面的答疑。如果大家热情不高，我就当成一个小众项目在我的团队里使用吧。视反馈而定。&lt;/p&gt;&#xA;</description>
+      <author>yetrun</author>
+      <pubDate>14 Sep 2022 08:55:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>网址被阻断跳转到百度智能云，求解？ - 分享发现</title>
+      <link>https://www.v2ex.com/t/880032</link>
+      <description>打开一个曼谷学校的网址 &lt;a target=&#34;_blank&#34; href=&#34;http://school.abroad-china.com/International-School-Thailand/22.html&#34; rel=&#34;nofollow noopener&#34;&gt;http://school.abroad-china.com/International-School-Thailand/22.html&lt;/a&gt;&lt;br /&gt;被重定向到百度智能云&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;http://domainwall.cloud.baidu.com/block.html&#34; rel=&#34;nofollow noopener&#34;&gt;http://domainwall.cloud.baidu.com/block.html&lt;/a&gt;&lt;br /&gt;显示 “根据工信部相关法律法规 ，已对该网站进行阻断显示。”&lt;br /&gt;我使用代理工具把学校的网址设置为 proxy ，走代理服务器，还是会被百度智能云阻断。不知道问题出在哪里？宽带？手机？代理服务器？要怎么解决这个问题呢？&lt;br /&gt;坐标上海，使用的是移动的宽带。</description>
+      <author>wenhuibrave</author>
+      <pubDate>14 Sep 2022 08:53:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>有哪些文字转语音的直链 - 问与答</title>
+      <link>https://www.v2ex.com/t/880031</link>
+      <description>&lt;p&gt;需求如下：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;以汉字或拼音+音节为参数，进行 http(s)请求，直接返回语音直链；&lt;/li&gt;&#xA;&lt;li&gt;支持单字、词语和简单的句子；&lt;/li&gt;&#xA;&lt;li&gt;语音充满语气和节奏就更好了。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;俺目前找到两个：&#xA;&lt;a href=&#34;https://tts.baidu.com/text2audio?tex=%E6%9C%89%E4%B8%80%E4%B8%AA%E4%BA%BA%E5%9C%A8%E8%B6%B3%E7%90%83%E5%9C%BA&amp;amp;cuid=dict&amp;amp;lan=ZH&amp;amp;ctp=100&amp;amp;pdt=30&amp;amp;vol=100&amp;amp;per=4100&#34; rel=&#34;nofollow&#34;&gt;https://tts.baidu.com/text2audio?tex=%E6%9C%89%E4%B8%80%E4%B8%AA%E4%BA%BA%E5%9C%A8%E8%B6%B3%E7%90%83%E5%9C%BA&amp;amp;cuid=dict&amp;amp;lan=ZH&amp;amp;ctp=100&amp;amp;pdt=30&amp;amp;vol=100&amp;amp;per=4100&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://yinjie.hanyupinyin.cn/duyinjie/liu1.mp3&#34; rel=&#34;nofollow&#34;&gt;http://yinjie.hanyupinyin.cn/duyinjie/liu1.mp3&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;有哪些更好的在线服务呀？在下无烟祖拜托各位冠希哥帮忙🙏🙏🙏。&lt;/p&gt;&#xA;</description>
+      <author>turtlekey</author>
+      <pubDate>14 Sep 2022 08:53:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>从 Google 相册迁移到 Synology Photos 有没有需要注意的点 - NAS</title>
+      <link>https://www.v2ex.com/t/880029</link>
+      <description>终究相集存放在本地较为方便，在迁移过程中有没有什么坑需要注意的，以及两者体验上的区别，欢迎各位分享</description>
+      <author>fanxasy</author>
+      <pubDate>14 Sep 2022 08:50:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>今年应届生就业情况咋样？后端， 211 硕 - 问与答</title>
+      <link>https://www.v2ex.com/t/880028</link>
+      <description>如题，表弟今年校招，卷的不要不要的。&lt;br /&gt;&lt;br /&gt;多方信息，供参考：&lt;br /&gt;1 、宁波银行，一个岗位连 985 硕都可能卡简历，这么卷吗？面试的都是中科大、复旦等...&lt;br /&gt;2 、弟弟的本科室友现在 985 研二，从大厂找到中厂甚至连外包都去面了，从提前批面到现在 0 offer ，现在在跟我弟这种次一级的一起卷银行&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/E7Toezr.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/E7Toezr.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;</description>
+      <author>yexiao117</author>
+      <pubDate>14 Sep 2022 08:48:32 +0000</pubDate>
+    </item>
+    <item>
       <title>反编译安卓 APK 寻找加密算法，有大神指点一下吗？ - 程序员</title>
       <link>https://www.v2ex.com/t/880027</link>
       <description>我是一个后端小菜鸡开发，最近想了解一下一个 APP 的加密算法，目前已经完成了反编译的工作，但是因为代码混淆过所以反编译出来的代码很混乱，有找到一些加密相关的代码，但是又有点看不太懂，有哪位大神可以指点一下吗？像这种在一堆混淆代码里找寻加密代码有没有什么窍门？</description>

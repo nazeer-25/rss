@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "分享一下最近新写的 Web API 框架 - 分享创造",
+      "Link": "https://www.v2ex.com/t/880033",
+      "Description": "\u003cp\u003e在这个主题下发布应该没错吧。\u003c/p\u003e\n\u003cp\u003e零零总总写了有半年了，虽然现在并不是一个发布的好时机，但是想要先分享出来和大家伙交流一下想法。本来打算先在公司用起来的，不过最近公司没有什么新项目，老项目我也不想换框架了，人力物力呀…… 所以只在自己的个人项目下应用了，目前运转良好。\u003c/p\u003e\n\u003cp\u003e又是一个轮子，只不过有些不一样的地方。\u003c/p\u003e\n\u003cp\u003e首先，思想上它是完全面向 API 文档的。也许好多团队写文档会借助于 YAPI 这样的第三方工具，或者直接用 Postman 这样用用例来说话，再不济手写 Markdown. 我在框架里直接生成了 OpenAPI 的规格文档，在开发者实现接口的同时，文档就生成了。例如像下面这样定义一个接口，同时文档就能生成了：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-ruby\"\u003eroute('/users', :post)\n  .title('创建一个新用户')\n  .params {\n    param :user, type: 'object', using: UserEntity\n  }\n  .do_any {\n    # 这里实现你的业务逻辑 ...\n  }\n  .if_status(201) {\n    expose :user, type: 'object', using: UserEntity\n  }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其次，这次将参数和返回值的写法统一起来了。像上面，我们只用了一个 \u003ccode\u003eUserEntity\u003c/code\u003e，就可以同时定义参数和返回值了，再也不用写两遍了。你的 \u003ccode\u003eUserEntity\u003c/code\u003e 内部可能是这样写的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-ruby\"\u003eclass UserEntity\n  property :id, type: 'integer', param: false # 只返回\n  property :password, type: 'string', render: false # 只用作参数\n  property :name, type: 'string,\n  property :age, type: 'integer'\nend\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其他的功能还有很多，就不想一一列举了。想进一步了解的，可以去看 GitHub 仓库：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/yetrun/web-frame\" rel=\"nofollow\"\u003ehttps://github.com/yetrun/web-frame\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e这个框架适合纯 API 后端的场景，即前后端分离。也比较适合团队，基本用一种固定的写法构建 API. 重点是生成对应的文档，前后端不再扯皮（你的文档是这么定义的，怎么你返回的数据是长这样啊之类的云云）。\u003c/p\u003e\n\u003cp\u003e说实话最近整体的工作节奏都有些慢，受大环境的影响吧。本来打算等到我稳定运行后再发布了，但是这可能还要一阵子，就先预先发布一下看看反馈再说。现在大家运行起来可能有点吃力，因为还缺一个项目脚手架，后面会补上。\u003c/p\u003e\n\u003cp\u003e如果觉得对你有用，还望支持一下，对我回复个 +1. 如果大家热情足够的话，因为涉及到文档，我感觉上手难度还是有的，到时会建个 QQ 群或微信群做全面的答疑。如果大家热情不高，我就当成一个小众项目在我的团队里使用吧。视反馈而定。\u003c/p\u003e\n",
+      "Author": "yetrun",
+      "PubDate": "2022-09-14T08:55:36Z"
+    },
+    {
+      "Title": "网址被阻断跳转到百度智能云，求解？ - 分享发现",
+      "Link": "https://www.v2ex.com/t/880032",
+      "Description": "打开一个曼谷学校的网址 \u003ca target=\"_blank\" href=\"http://school.abroad-china.com/International-School-Thailand/22.html\" rel=\"nofollow noopener\"\u003ehttp://school.abroad-china.com/International-School-Thailand/22.html\u003c/a\u003e\u003cbr /\u003e被重定向到百度智能云\u003cbr /\u003e\u003ca target=\"_blank\" href=\"http://domainwall.cloud.baidu.com/block.html\" rel=\"nofollow noopener\"\u003ehttp://domainwall.cloud.baidu.com/block.html\u003c/a\u003e\u003cbr /\u003e显示 “根据工信部相关法律法规 ，已对该网站进行阻断显示。”\u003cbr /\u003e我使用代理工具把学校的网址设置为 proxy ，走代理服务器，还是会被百度智能云阻断。不知道问题出在哪里？宽带？手机？代理服务器？要怎么解决这个问题呢？\u003cbr /\u003e坐标上海，使用的是移动的宽带。",
+      "Author": "wenhuibrave",
+      "PubDate": "2022-09-14T08:53:55Z"
+    },
+    {
+      "Title": "有哪些文字转语音的直链 - 问与答",
+      "Link": "https://www.v2ex.com/t/880031",
+      "Description": "\u003cp\u003e需求如下：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e以汉字或拼音+音节为参数，进行 http(s)请求，直接返回语音直链；\u003c/li\u003e\n\u003cli\u003e支持单字、词语和简单的句子；\u003c/li\u003e\n\u003cli\u003e语音充满语气和节奏就更好了。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e俺目前找到两个：\n\u003ca href=\"https://tts.baidu.com/text2audio?tex=%E6%9C%89%E4%B8%80%E4%B8%AA%E4%BA%BA%E5%9C%A8%E8%B6%B3%E7%90%83%E5%9C%BA\u0026amp;cuid=dict\u0026amp;lan=ZH\u0026amp;ctp=100\u0026amp;pdt=30\u0026amp;vol=100\u0026amp;per=4100\" rel=\"nofollow\"\u003ehttps://tts.baidu.com/text2audio?tex=%E6%9C%89%E4%B8%80%E4%B8%AA%E4%BA%BA%E5%9C%A8%E8%B6%B3%E7%90%83%E5%9C%BA\u0026amp;cuid=dict\u0026amp;lan=ZH\u0026amp;ctp=100\u0026amp;pdt=30\u0026amp;vol=100\u0026amp;per=4100\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://yinjie.hanyupinyin.cn/duyinjie/liu1.mp3\" rel=\"nofollow\"\u003ehttp://yinjie.hanyupinyin.cn/duyinjie/liu1.mp3\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e有哪些更好的在线服务呀？在下无烟祖拜托各位冠希哥帮忙🙏🙏🙏。\u003c/p\u003e\n",
+      "Author": "turtlekey",
+      "PubDate": "2022-09-14T08:53:18Z"
+    },
+    {
+      "Title": "从 Google 相册迁移到 Synology Photos 有没有需要注意的点 - NAS",
+      "Link": "https://www.v2ex.com/t/880029",
+      "Description": "终究相集存放在本地较为方便，在迁移过程中有没有什么坑需要注意的，以及两者体验上的区别，欢迎各位分享",
+      "Author": "fanxasy",
+      "PubDate": "2022-09-14T08:50:55Z"
+    },
+    {
+      "Title": "今年应届生就业情况咋样？后端， 211 硕 - 问与答",
+      "Link": "https://www.v2ex.com/t/880028",
+      "Description": "如题，表弟今年校招，卷的不要不要的。\u003cbr /\u003e\u003cbr /\u003e多方信息，供参考：\u003cbr /\u003e1 、宁波银行，一个岗位连 985 硕都可能卡简历，这么卷吗？面试的都是中科大、复旦等...\u003cbr /\u003e2 、弟弟的本科室友现在 985 研二，从大厂找到中厂甚至连外包都去面了，从提前批面到现在 0 offer ，现在在跟我弟这种次一级的一起卷银行\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/E7Toezr.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/E7Toezr.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e",
+      "Author": "yexiao117",
+      "PubDate": "2022-09-14T08:48:32Z"
+    },
+    {
       "Title": "反编译安卓 APK 寻找加密算法，有大神指点一下吗？ - 程序员",
       "Link": "https://www.v2ex.com/t/880027",
       "Description": "我是一个后端小菜鸡开发，最近想了解一下一个 APP 的加密算法，目前已经完成了反编译的工作，但是因为代码混淆过所以反编译出来的代码很混乱，有找到一些加密相关的代码，但是又有点看不太懂，有哪位大神可以指点一下吗？像这种在一堆混淆代码里找寻加密代码有没有什么窍门？",
