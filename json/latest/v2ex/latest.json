@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "sap rac 节点互 ping 丢包率 50%，系统负载 10%以下，最有可能是哪个环节的问题？ - Linux",
+      "Link": "https://www.v2ex.com/t/880057",
+      "Description": "先是发现 SAP 应用突然访问缓慢，检查数据库节点 1 有 oracle 健康检查进程占 cpu100%并且报某路径不存在的错误，负载 0.6 左右；经过查询 oracle 官方方案，确认可以关闭健康检查进程。关闭后 cpu 负载降到 0.1 ，应用访问缓慢问题改善，但是仍然存在；继续排查发现 rac 节点互 ping 丢包率 50%，HA 应用节点 ping 数据库丢包 20%，系统日志无其它错误，最有可能是哪个环节出了问题？",
+      "Author": "yyysuo",
+      "PubDate": "2022-09-14T10:41:22Z"
+    },
+    {
+      "Title": "爬虫相关，关于 XPath 的疑问 - Python",
+      "Link": "https://www.v2ex.com/t/880056",
+      "Description": "\u003cp\u003e\u003ca href=\"http://eid.csrc.gov.cn/fund/disclose/instance_html_view.do?instanceid=11733222\" rel=\"nofollow\"\u003ehttp://eid.csrc.gov.cn/fund/disclose/instance_html_view.do?instanceid=11733222\u003c/a\u003e\n\u003ca href=\"http://eid.csrc.gov.cn/fund/disclose/instance_html_view.do?instanceid=11733213\" rel=\"nofollow\"\u003ehttp://eid.csrc.gov.cn/fund/disclose/instance_html_view.do?instanceid=11733213\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e在上面这两个链接中我想获取对应的基金名称，我在浏览器里面获取到的 full XPath 如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e/html/body/table/tbody/tr/td[2]/table/tbody/tr[1]/td[1]/div/table[1]/tbody/tr[2]/td/div/div/table/tbody/tr[1]/td[2]/p\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是第二个链接中我能顺利获取到值，第一个获取到的内容为空\u003c/p\u003e\n\u003cp\u003e为了给大佬省事，对应的代码如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efrom ast import main\nfrom fake_useragent import UserAgent\nfrom lxml import etree\nimport requests\n\nua = UserAgent()\nheaders = {\"user-agent\": ua.random}\nurl1 = \"http://eid.csrc.gov.cn/fund/disclose/instance_html_view.do?instanceid=11733222\"\nurl2 = \"http://eid.csrc.gov.cn/fund/disclose/instance_html_view.do?instanceid=11733213\"\n\n\ndef get_fund_name(url: str):\n    x = requests.get(url, headers = headers)\n    selector = etree.HTML(x.content)\n    fund_name = selector.xpath('/html/body/table/tbody/tr/td[2]/table/tbody/tr[1]/td[1]/div/table[1]/tbody/tr[2]/td/div/div/table/tbody/tr[1]/td[2]/p/text()')\n    return fund_name\n\nprint(get_fund_name(url1))\nprint(get_fund_name(url2))\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eoutput 如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e[]\n['长信利盈灵活配置混合型证券投资基金']\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我仔细对比了这两个网页，实在是找不到原因……\u003c/p\u003e\n",
+      "Author": "MrVito",
+      "PubDate": "2022-09-14T10:38:09Z"
+    },
+    {
       "Title": "Notes 在 Mac 下冷启动不会默认打开窗口, 甚至经常卡死 - macOS",
       "Link": "https://www.v2ex.com/t/880055",
       "Description": "\u003cp\u003eMacOS: 12.5 (21G72)\u003c/p\u003e\n\u003cp\u003e启动方式: Spotlight 搜索 Notes 启动\u003c/p\u003e\n\u003cp\u003e这问题已经好久了(印象中得有一年时间了), 我的 Notes 里面也没有很多东西(50 个小笔记), 但每次打开都不能直接打开, 需要再点一下 dock 栏目, 有时候点一下 dock 栏目也出不了窗口, 只能强退重新打开.\u003c/p\u003e\n",
