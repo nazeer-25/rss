@@ -4,9 +4,30 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教 Android 系统使用的 2 个问题 - Android",
+      "Link": "https://www.v2ex.com/t/879866",
+      "Description": "\u003cp\u003e时隔 3 年，用回 Android 了。有一些使用的疑惑请教。\u003c/p\u003e\n\u003cp\u003e我的手机系统是 Colors 12 。  \u003c/p\u003e\n\u003cp\u003e1 、大多数 Android 应用都要求对储存空间访问，可相机拍摄的照片都储存在 DCIM 目录中。那么没办法避免这些应用随意读取照片？（有个现实的问题是，现在大量扫码打卡，微信想要选相册中的照片扫码，扫描界面一点击“相册”，最近拍的傻照全展示在屏幕上了）\u003c/p\u003e\n\u003cp\u003e2 、定位我看只有给或不给，两种功能，如果要模糊位置，得用模拟定位实现？\u003c/p\u003e\n",
+      "Author": "Roanapur",
+      "PubDate": "2022-09-14T00:27:25Z"
+    },
+    {
+      "Title": "这个 golang struct 是用的什么生成的 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/879865",
+      "Description": "\u003cp\u003egorm\u003c/p\u003e\n\u003cp\u003eddl 语句如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eCREATE TABLE `pf_station_info` (\n  `id` int unsigned NOT NULL AUTO_INCREMENT,\n  `name` varchar(20) NOT NULL DEFAULT '' COMMENT '站点名称',\n  `location` json NOT NULL COMMENT '站点所在经纬度',\n  `ip_address` varchar(15) NOT NULL DEFAULT '' COMMENT '站点 ip 地址,非此 IP 数据不接收',\n  `tiger_shaped` char(32) NOT NULL DEFAULT '' COMMENT '握手符号',\n  `heartbeat` int unsigned NOT NULL DEFAULT '0' COMMENT '上次心跳时间戳',\n  `status` int NOT NULL DEFAULT '0' COMMENT '站点状态：0 正常，非 0 为停用时间戳',\n  `add_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e要生成 如下 gorm struct , not null 以及 comment 也在 tag 里\n且 location 类型 是 datatypes.JSON 类型\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003etype Station struct {\n\tId          int64          `json:\"id\" gorm:\"primaryKey;autoIncrement;comment:主键 id\"`\n\tName        string         `gorm:\"type:varchar(20);column:name;not null;comment:站点名称\" json:\"name\"`\n\tLocation    datatypes.JSON `gorm:\"type:json;column:location;not null;comment:站点所在经纬度\" json:\"location\"`\n\tIpAddress   string         `gorm:\"type:varchar(15);column:ip_address;not null;comment:站点 ip 地址,非此 IP 数据不接收\" json:\"ip_address\"`\n\tTigerShaped string         `gorm:\"type:char(32);column:tiger_shaped;not null;comment:握手符号\" json:\"tiger_shaped\"`\n\tHeartbeat   int64          `gorm:\"type:int(10);column:heartbeat;not null;comment:上次心跳时间戳\" json:\"heartbeat\"`\n\tStatus      int64          `gorm:\"type:int(11);column:status;comment:站点状态：0 正常，非 0 为停用时间戳\" json:\"status\"`\n\tAddTime     time.Time      `gorm:\"type:datetime;comment:创建时间\" json:\"add_time,omitempty\"`\n\tUpdateTime  time.Time      `gorm:\"type:datetime;comment:修改时间\" json:\"update_time,omitempty\"`\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e有人知道 上面的 struct 是用 什么工具生成的吗?我猜不可能手写吧。\u003c/p\u003e\n\u003cp\u003e谷歌搜了下  看了好几个 根据 ddl 生成都不一样 ，比如下面的\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.qetool.com/sql_json_go/sql.html\" rel=\"nofollow\"\u003ehttps://www.qetool.com/sql_json_go/sql.html\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://sql2struct.atotoa.com/\" rel=\"nofollow\"\u003ehttp://sql2struct.atotoa.com/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eutools 里的 sql2struct 生成也不一样\u003c/p\u003e\n\u003cp\u003e有没大佬推荐个好用点的 或 跟这个 生成一模一样的。\u003c/p\u003e\n",
+      "Author": "guanhui07",
+      "PubDate": "2022-09-14T00:18:23Z"
+    },
+    {
+      "Title": "如何获取旧版本的 tvOS 描述文件？ - 问与答",
+      "Link": "https://www.v2ex.com/t/879864",
+      "Description": "之前安装过屏蔽 iOS 更新的描述文件，描述文件为：tvOS 14 beta software profile 。\u003cbr /\u003e\u003cbr /\u003e某次在电脑上给 iPhone 刷机之前忘记删除描述文件，更新后该描述文件的入口消失，导致无法查看、编辑该描述文件。但是手机的在线更新检测功能也一直处于屏蔽状态。解决办法是重新安装该描述文件，再删除就正常了。\u003cbr /\u003e\u003cbr /\u003e目前网上提供下载的基本都更新到 tvOS 15 beta 。\u003cbr /\u003e\u003cbr /\u003e请问，如何找到这个描述文件：\u003cbr /\u003etvOS 14 beta software profile （有效期：2021 年 4 月 2 日）\u003cbr /\u003e\u003cbr /\u003e或者谁还有这个文件的备份的？",
+      "Author": "airbotgo",
+      "PubDate": "2022-09-14T00:14:04Z"
+    },
+    {
       "Title": "9 月 16 日起可查看供货情况 - Apple",
       "Link": "https://www.v2ex.com/t/879862",
-      "Description": "\u003cp\u003eRT,\u003c/p\u003e\n\u003cp\u003e自己写的 python 脚本，从今天开始，出现这个提示。意思是现在没货了。前几天还是不是放出几个，平均 5s 左右抢光。手慢的我，一个都没有抢到。\u003c/p\u003e\n",
+      "Description": "\u003cp\u003eRT,\u003c/p\u003e\n\u003cp\u003e自己写的 python 脚本，从今天开始，出现这个提示。意思是现在没货了。前几天还时不时放出几个，平均 5s 左右抢光。手慢的我，一个都没有抢到。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"微信截图_20220914080218.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2022/09/14/AKiNzJXZW2x9CUT.png\"/\u003e\u003c/p\u003e\n",
       "Author": "cloudsigma2022",
       "PubDate": "2022-09-14T00:00:18Z"
     },
