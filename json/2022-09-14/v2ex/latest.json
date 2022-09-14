@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Mac 版 Surge 5 人车还有 4 车位 - Surge",
+      "Link": "https://www.v2ex.com/t/880094",
+      "Description": "\u003cp\u003e昨天刚购入 139 一位，有需要的联系 \u003ca href=\"https://t.me/DoranSi\" rel=\"nofollow\"\u003ehttps://t.me/DoranSi\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "sleet",
+      "PubDate": "2022-09-14T14:24:38Z"
+    },
+    {
+      "Title": "电视怎么进行防沉迷设置 - 问与答",
+      "Link": "https://www.v2ex.com/t/880093",
+      "Description": "经常沉迷于电视，浪费了很多时间，有什么技术上的防控方法吗 ?\u003cbr /\u003e\u003cbr /\u003e多人共用的，老爸，老妈也有用",
+      "Author": "bigxianyu",
+      "PubDate": "2022-09-14T14:23:22Z"
+    },
+    {
       "Title": "ts 如何根据可选参数返回不同的泛型成员，有简单的写法吗？ - TypeScript",
       "Link": "https://www.v2ex.com/t/880092",
       "Description": "\u003cp\u003e我想实现一个 ts 版本的简版 usePromise\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e  // 期望类型推导出：data 的类型是 {list: FileNode[]} (即返回 T)\n  const [data, isOk] = usePromise(\n    () =\u0026gt; {\n      return Promise.resolve({list:[]}) as Promise\u0026lt;{ list: FileNode[] }\u0026gt;;\n    },\n    { initValue: {list:[]} }\n  );\n\n  // 期望类型推导出：fileNodes 的类型是一个 FileNode 数组 (即返回 T['list'])\n  const [fileNodes, isOk] = usePromise(\n    () =\u0026gt; {\n      return Promise.resolve({list:[]}) as Promise\u0026lt;{ list: FileNode[] }\u0026gt;;\n    },\n    { initValue: [] },\n    \"list\",\n  );\n  \n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我的 usePromise 实现如下, 利用\u003ccode\u003eK extends keyof T\u003c/code\u003e 判断如果 K 属性存在就返回\u003ccode\u003eT[K]\u003c/code\u003e, 否则返回\u003ccode\u003eT\u003c/code\u003e\n测试发现 ts 判断可选参数时总会失败，只会返回\u003ccode\u003eT\u003c/code\u003e.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eexport function usePromise\u0026lt;T, K\u0026gt;(\n  factory: () =\u0026gt; Promise\u0026lt;T\u0026gt;,\n  options: Options\u0026lt;K extends keyof T ? T[K] : T\u0026gt; = {},\n  filterKey?: K,\n): [K extends keyof T ? T[K] : T, boolean] {\n  type R = K extends keyof T ? T[K] : T;\n  const [state, setState] = useState\u0026lt;R\u0026gt;(\n    options.initValue!,\n  );\n  const isLoadingRef = useRef(false);\n  useEffect(() =\u0026gt; {\n    factory().then((r) =\u0026gt; {\n      if (filterKey) {\n        setState((r as any)[filterKey] as unknown as R);\n      } else {\n        setState(r as unknown as R);\n      }\n    }).catch((res) =\u0026gt; {\n      if (options.onError) options.onError(res);\n      else throw res;\n    });\n  }, []);\n  return [state, isLoadingRef.current] as [R, boolean];\n}\n\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我知道可以增加两个 function 的类型重载解决这个问题，但是手写一遍类型重载感觉太麻烦。\u003c/p\u003e\n\u003cp\u003e请教一下有没有更简单的方法呢？\u003c/p\u003e\n",

@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Mac 版 Surge 5 人车还有 4 车位 - Surge</title>
+      <link>https://www.v2ex.com/t/880094</link>
+      <description>&lt;p&gt;昨天刚购入 139 一位，有需要的联系 &lt;a href=&#34;https://t.me/DoranSi&#34; rel=&#34;nofollow&#34;&gt;https://t.me/DoranSi&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>sleet</author>
+      <pubDate>14 Sep 2022 14:24:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>电视怎么进行防沉迷设置 - 问与答</title>
+      <link>https://www.v2ex.com/t/880093</link>
+      <description>经常沉迷于电视，浪费了很多时间，有什么技术上的防控方法吗 ?&lt;br /&gt;&lt;br /&gt;多人共用的，老爸，老妈也有用</description>
+      <author>bigxianyu</author>
+      <pubDate>14 Sep 2022 14:23:22 +0000</pubDate>
+    </item>
+    <item>
       <title>ts 如何根据可选参数返回不同的泛型成员，有简单的写法吗？ - TypeScript</title>
       <link>https://www.v2ex.com/t/880092</link>
       <description>&lt;p&gt;我想实现一个 ts 版本的简版 usePromise&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;  // 期望类型推导出：data 的类型是 {list: FileNode[]} (即返回 T)&#xA;  const [data, isOk] = usePromise(&#xA;    () =&amp;gt; {&#xA;      return Promise.resolve({list:[]}) as Promise&amp;lt;{ list: FileNode[] }&amp;gt;;&#xA;    },&#xA;    { initValue: {list:[]} }&#xA;  );&#xA;&#xA;  // 期望类型推导出：fileNodes 的类型是一个 FileNode 数组 (即返回 T[&#39;list&#39;])&#xA;  const [fileNodes, isOk] = usePromise(&#xA;    () =&amp;gt; {&#xA;      return Promise.resolve({list:[]}) as Promise&amp;lt;{ list: FileNode[] }&amp;gt;;&#xA;    },&#xA;    { initValue: [] },&#xA;    &#34;list&#34;,&#xA;  );&#xA;  &#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我的 usePromise 实现如下, 利用&lt;code&gt;K extends keyof T&lt;/code&gt; 判断如果 K 属性存在就返回&lt;code&gt;T[K]&lt;/code&gt;, 否则返回&lt;code&gt;T&lt;/code&gt;&#xA;测试发现 ts 判断可选参数时总会失败，只会返回&lt;code&gt;T&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;export function usePromise&amp;lt;T, K&amp;gt;(&#xA;  factory: () =&amp;gt; Promise&amp;lt;T&amp;gt;,&#xA;  options: Options&amp;lt;K extends keyof T ? T[K] : T&amp;gt; = {},&#xA;  filterKey?: K,&#xA;): [K extends keyof T ? T[K] : T, boolean] {&#xA;  type R = K extends keyof T ? T[K] : T;&#xA;  const [state, setState] = useState&amp;lt;R&amp;gt;(&#xA;    options.initValue!,&#xA;  );&#xA;  const isLoadingRef = useRef(false);&#xA;  useEffect(() =&amp;gt; {&#xA;    factory().then((r) =&amp;gt; {&#xA;      if (filterKey) {&#xA;        setState((r as any)[filterKey] as unknown as R);&#xA;      } else {&#xA;        setState(r as unknown as R);&#xA;      }&#xA;    }).catch((res) =&amp;gt; {&#xA;      if (options.onError) options.onError(res);&#xA;      else throw res;&#xA;    });&#xA;  }, []);&#xA;  return [state, isLoadingRef.current] as [R, boolean];&#xA;}&#xA;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我知道可以增加两个 function 的类型重载解决这个问题，但是手写一遍类型重载感觉太麻烦。&lt;/p&gt;&#xA;&lt;p&gt;请教一下有没有更简单的方法呢？&lt;/p&gt;&#xA;</description>
