@@ -32,7 +32,7 @@
     </item>
     <item>
       <title>【今天碰到的一个笔试题题目】关于defer，请各位大佬出谋划策！！！</title>
-      <link>https://studygolang.com/topics/15835#reply0</link>
+      <link>https://studygolang.com/topics/15835#reply1</link>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;下面程序会输出什么？为什么？&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;type temp struct{}&#xA;&#xA;func (t *temp) Add(elem int) *temp {&#xA;&#x9;fmt.Print(elem)&#xA;&#x9;return &amp;amp;temp{}&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;tt := &amp;amp;temp{}&#xA;&#x9;defer tt.Add(1).Add(2)&#xA;&#x9;tt.Add(3)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
@@ -122,6 +122,11 @@
       <title>AES 加密</title>
       <link>https://studygolang.com/articles/35853#reply0</link>
       <description>&lt;pre&gt;&lt;code&gt;import (&#xA;    &amp;quot;bytes&amp;quot;&#xA;    &amp;quot;crypto/aes&amp;quot;&#xA;    &amp;quot;fmt&amp;quot;&#xA;    &amp;quot;crypto/cipher&amp;quot;&#xA;    &amp;quot;encoding/base64&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;    orig := &amp;quot;hello world&amp;quot;&#xA;    key := &amp;quot;123456781234567812345678&amp;quot;&#xA;    fmt.Println(&amp;quot;原文：&amp;quot;, orig)&#xA;&#xA;    encryptCode := AesEncrypt(orig, key)&#xA;    fmt.Println(&amp;quot;密文：&amp;quot; , encryptCode)&#xA;&#xA;    decryptCode := AesDecrypt(encryptCode, key)&#xA;    fmt.Println(&amp;quot;解密结果：&amp;quot;, decryptCode)&#xA;}&#xA;&#xA;func AesEncrypt(orig string, key string) string {&#xA;    // 转成字节数组&#xA;    origData := []byte(orig)&#xA;    k := []byte(key)&#xA;&#xA;    // 分组秘钥&#xA;    block, _ := aes.NewCipher(k)&#xA;    // 获取秘钥块的长度&#xA;    blockSize := block.BlockSize()&#xA;    // 补全码&#xA;    origData = PKCS7Padding(origData, blockSize)&#xA;    // 加密模式&#xA;    blockMode := cipher.NewCBCEncrypter(block, k[:blockSize])&#xA;    // 创建数组&#xA;    cryted := make([]byte, len(origData))&#xA;    // 加密&#xA;    blockMode.CryptBlocks(cryted, origData)&#xA;&#xA;    return base64.StdEncoding.EncodeToString(cryted)&#xA;&#xA;}&#xA;&#xA;func AesDecrypt(cryted string, key string) string {&#xA;    // 转成字节数组&#xA;    crytedByte, _ := base64.StdEncoding.DecodeString(cryted)&#xA;    k := []byte(key)&#xA;&#xA;    // 分组秘钥&#xA;    block, _ := aes.NewCipher(k)&#xA;    // 获取秘钥块的长度&#xA;    blockSize := block.BlockSize()&#xA;    // 加密模式&#xA;    blockMode := cipher.NewCBCDecrypter(block, k[:blockSize])&#xA;    // 创建数组&#xA;    orig := make([]byte, len(crytedByte))&#xA;    // 解密&#xA;    blockMode.CryptBlocks(orig, crytedByte)&#xA;    // 去补全码&#xA;    orig = PKCS7UnPadding(orig)&#xA;    return string(orig)&#xA;}&#xA;&#xA;//补码&#xA;func PKCS7Padding(ciphertext []byte, blocksize int) []byte {&#xA;    padding := blocksize - len(ciphertext)%blocksize&#xA;    padtext := bytes.Repeat([]byte{byte(padding)}, padding)&#xA;    return append(ciphertext, padtext...)&#xA;}&#xA;&#xA;//去码&#xA;func PKCS7UnPadding(origData []byte) []byte {&#xA;    length := len(origData)&#xA;    unpadding := int(origData[length-1])&#xA;    return origData[:(length - unpadding)]&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;参考：&#xA;&lt;a href=&#34;https://www.jb51.net/article/245521.htm&#34;&gt;https://www.jb51.net/article/245521.htm&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>【今天碰到的一个笔试题题目】关于defer，请各位大佬出谋划策！！！</title>
+      <link>https://studygolang.com/topics/15835#reply0</link>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;下面程序会输出什么？为什么？&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;type temp struct{}&#xA;&#xA;func (t *temp) Add(elem int) *temp {&#xA;&#x9;fmt.Print(elem)&#xA;&#x9;return &amp;amp;temp{}&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;tt := &amp;amp;temp{}&#xA;&#x9;defer tt.Add(1).Add(2)&#xA;&#x9;tt.Add(3)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>9月更新！7个超好用的功能上线了！EasyOps®UI8.0更有大变动</title>
