@@ -4,6 +4,47 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ts 如何根据可选参数返回不同的泛型成员，有简单的写法吗？ - TypeScript</title>
+      <link>https://www.v2ex.com/t/880092</link>
+      <description>&lt;p&gt;我想实现一个 ts 版本的简版 usePromise&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;  // 期望类型推导出：data 的类型是 {list: FileNode[]} (即返回 T)&#xA;  const [data, isOk] = usePromise(&#xA;    () =&amp;gt; {&#xA;      return Promise.resolve({list:[]}) as Promise&amp;lt;{ list: FileNode[] }&amp;gt;;&#xA;    },&#xA;    { initValue: {list:[]} }&#xA;  );&#xA;&#xA;  // 期望类型推导出：fileNodes 的类型是一个 FileNode 数组 (即返回 T[&#39;list&#39;])&#xA;  const [fileNodes, isOk] = usePromise(&#xA;    () =&amp;gt; {&#xA;      return Promise.resolve({list:[]}) as Promise&amp;lt;{ list: FileNode[] }&amp;gt;;&#xA;    },&#xA;    { initValue: [] },&#xA;    &#34;list&#34;,&#xA;  );&#xA;  &#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我的 usePromise 实现如下, 利用&lt;code&gt;K extends keyof T&lt;/code&gt; 判断如果 K 属性存在就返回&lt;code&gt;T[K]&lt;/code&gt;, 否则返回&lt;code&gt;T&lt;/code&gt;&#xA;测试发现 ts 判断可选参数时总会失败，只会返回&lt;code&gt;T&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;export function usePromise&amp;lt;T, K&amp;gt;(&#xA;  factory: () =&amp;gt; Promise&amp;lt;T&amp;gt;,&#xA;  options: Options&amp;lt;K extends keyof T ? T[K] : T&amp;gt; = {},&#xA;  filterKey?: K,&#xA;): [K extends keyof T ? T[K] : T, boolean] {&#xA;  type R = K extends keyof T ? T[K] : T;&#xA;  const [state, setState] = useState&amp;lt;R&amp;gt;(&#xA;    options.initValue!,&#xA;  );&#xA;  const isLoadingRef = useRef(false);&#xA;  useEffect(() =&amp;gt; {&#xA;    factory().then((r) =&amp;gt; {&#xA;      if (filterKey) {&#xA;        setState((r as any)[filterKey] as unknown as R);&#xA;      } else {&#xA;        setState(r as unknown as R);&#xA;      }&#xA;    }).catch((res) =&amp;gt; {&#xA;      if (options.onError) options.onError(res);&#xA;      else throw res;&#xA;    });&#xA;  }, []);&#xA;  return [state, isLoadingRef.current] as [R, boolean];&#xA;}&#xA;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我知道可以增加两个 function 的类型重载解决这个问题，但是手写一遍类型重载感觉太麻烦。&lt;/p&gt;&#xA;&lt;p&gt;请教一下有没有更简单的方法呢？&lt;/p&gt;&#xA;</description>
+      <author>a132811</author>
+      <pubDate>14 Sep 2022 14:21:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>没人讨论钟文泽 iPhone 14 的评测吗，感觉很不错啊。 - Apple</title>
+      <link>https://www.v2ex.com/t/880091</link>
+      <description>&lt;p&gt;之前说的芯片是换皮，但其实提升也算是正常换代挺不错了。&#xA;影像系统简直惊为天人啊。&#xA;灵动岛实际看起来也很不错。&#xA;加量不加价，这些升级没涨价，有点牛的。&#xA;可惜屏幕，害，要不然真的很想换&lt;/p&gt;&#xA;</description>
+      <author>Glauben</author>
+      <pubDate>14 Sep 2022 14:20:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>想要充值信仰，国内买 Pixel 有什么需要注意的吗？ - Android</title>
+      <link>https://www.v2ex.com/t/880090</link>
+      <description>比如前几代听说电信卡需要改什么文件才能使用，现在还需要吗？港版台版美版适合买哪个？除了 tb 和亚马逊直邮，有无其他方便的入手渠道？</description>
+      <author>sky96111</author>
+      <pubDate>14 Sep 2022 14:18:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>Pom.xml 文件两个 warnning 有谁知道是啥子意思吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/880089</link>
+      <description>&lt;p&gt;找了一晚上也没有找到解决办法&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://s1.328888.xyz/2022/09/14/camWF.png&#34; rel=&#34;nofollow&#34;&gt;https://s1.328888.xyz/2022/09/14/camWF.png&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>qwertty01</author>
+      <pubDate>14 Sep 2022 14:15:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>从安卓 app 界面取列表值，有什么好的工具？ - 程序员</title>
+      <link>https://www.v2ex.com/t/880088</link>
+      <description>&lt;p&gt;比如某团 买药模块&lt;/p&gt;&#xA;</description>
+      <author>King1998</author>
+      <pubDate>14 Sep 2022 14:11:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有 github issue 侧边栏的插件啊？ - GitHub</title>
+      <link>https://www.v2ex.com/t/880087</link>
+      <author>soberzml</author>
+      <pubDate>14 Sep 2022 14:10:15 +0000</pubDate>
+    </item>
+    <item>
       <title>苏宁要开始 996 了，凛冬将至 - 程序员</title>
       <link>https://www.v2ex.com/t/880086</link>
       <description>&lt;h2&gt;公司这是温水煮青蛙吗？&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;7 月通知 995&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;晚上加班的人挺多，也在符合国人性格&lt;/li&gt;&#xA;&lt;li&gt;一般没人愿意做出头鸟，想想忍忍也就过去了&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;9 月(今天)通知 996&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;不知道大家还能忍吗&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;你们觉得公司这个操作想干嘛吗？不知道下一步还有什么动作&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;国内企业也挺逗，想让员工加班又不敢明说，写到合同里面。&lt;/p&gt;&#xA;&lt;p&gt;就是各种潜规则，一级一级向下口头传达，搞的跟地下党似的。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;996 是你们修来的福报&lt;/li&gt;&#xA;&lt;li&gt;混日子不是我兄弟&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;用到人家时，话说的比唱到都好听；用不到了裁员搞的比谁都凶，你谁啊，谁是你兄弟&lt;/p&gt;&#xA;</description>
