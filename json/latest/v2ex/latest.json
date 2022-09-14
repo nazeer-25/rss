@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "WWDC 发布 macOS Ventura 的时候展示使用手机摄像头的支架在哪里可以买到？ - macOS",
+      "Link": "https://www.v2ex.com/t/880037",
+      "Description": "\u003cp\u003e迫于盒盖使用 MacBook ，想要用上这个功能进行高质量的视频通话。\u003c/p\u003e\n\u003cp\u003e找了很久都没有一个类似的支架，请问有什么渠道可以买到或者有什么合适的替代方案吗？\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"Imgur\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://imgur.com/UMAFGee\"/\u003e\u003c/p\u003e\n",
+      "Author": "Chandleric",
+      "PubDate": "2022-09-14T09:06:32Z"
+    },
+    {
+      "Title": "golang 有没轻量级的配置中心？ - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/880036",
+      "Description": "\u003cp\u003e主要用于边缘节点侧，一个集成系统，要集成很多第三方的系统或硬件\n为了便于现场安装部署（主要是配置）\u003c/p\u003e\n",
+      "Author": "xsen",
+      "PubDate": "2022-09-14T09:03:22Z"
+    },
+    {
+      "Title": "公司邮箱迁移到腾讯企业邮，之前基于 exchangelib 的自动化工具都不能用了 - Python",
+      "Link": "https://www.v2ex.com/t/880035",
+      "Description": "\u003cp\u003e原先设定了自动规则把数据报表类邮件先转存到一个文件夹，定时用 exchangelib 下载后加工入库，\u003c/p\u003e\n\u003cp\u003e新的邮件系统依然可以用 exchange 方式在手机和 windows mail 客户端登录，但同样的用户名和服务器名填在 exchangelib 就报错，错误信息如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eMalformedResponseError: \nUnknown failure in response. Code: 400 \nheaders: {\n\t'Server': 'nginx', \n\t'Date': 'Wed, 14 Sep 2022 03:43:30 GMT', \n\t'Content-Type': 'text/html; charset=UTF-8', \n\t'Content-Length': '149', \n\t'Connection': 'keep-alive', \n\t'WWW-Authenticate': 'Basic realm=\"qq.com\"', \n\t'Cache-Control': 'private, max-age=0', \n\t'Alternate-Protocol': '443:quic', \n\t'Expires': 'Wed, 14 Sep 2022 03:43:30 GMT'\n} \ncontent: \n\u0026lt;HTML\u0026gt;\n\t\u0026lt;HEAD\u0026gt;\n\t\u0026lt;TITLE\u0026gt;400 Bad Request\u0026lt;/TITLE\u0026gt;\n\t\u0026lt;/HEAD\u0026gt;\n\t\u0026lt;BODY BGCOLOR=\"#FFFFFF\" TEXT=\"#000000\"\u0026gt;\n\t\t\u0026lt;H1\u0026gt;400 Bad Request\u0026lt;/H1\u0026gt;\n\t\u0026lt;/BODY\u0026gt;\n\u0026lt;/HTML\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e对比了一下旧邮箱的 exchange 服务发现就是因为 https://\u0026lt;mail server\u0026gt;/EWS/Exchange.asmx 这个页面报错 400 ，这里原本应该弹出登录窗口的\u003c/p\u003e\n\u003cp\u003e既然手机客户端能正常登录，exchangelib 改改参数能用吗？\u003c/p\u003e\n",
+      "Author": "nemo95",
+      "PubDate": "2022-09-14T09:01:39Z"
+    },
+    {
       "Title": "分享一下最近新写的 Web API 框架 - 分享创造",
       "Link": "https://www.v2ex.com/t/880033",
       "Description": "\u003cp\u003e在这个主题下发布应该没错吧。\u003c/p\u003e\n\u003cp\u003e零零总总写了有半年了，虽然现在并不是一个发布的好时机，但是想要先分享出来和大家伙交流一下想法。本来打算先在公司用起来的，不过最近公司没有什么新项目，老项目我也不想换框架了，人力物力呀…… 所以只在自己的个人项目下应用了，目前运转良好。\u003c/p\u003e\n\u003cp\u003e又是一个轮子，只不过有些不一样的地方。\u003c/p\u003e\n\u003cp\u003e首先，思想上它是完全面向 API 文档的。也许好多团队写文档会借助于 YAPI 这样的第三方工具，或者直接用 Postman 这样用用例来说话，再不济手写 Markdown. 我在框架里直接生成了 OpenAPI 的规格文档，在开发者实现接口的同时，文档就生成了。例如像下面这样定义一个接口，同时文档就能生成了：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-ruby\"\u003eroute('/users', :post)\n  .title('创建一个新用户')\n  .params {\n    param :user, type: 'object', using: UserEntity\n  }\n  .do_any {\n    # 这里实现你的业务逻辑 ...\n  }\n  .if_status(201) {\n    expose :user, type: 'object', using: UserEntity\n  }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其次，这次将参数和返回值的写法统一起来了。像上面，我们只用了一个 \u003ccode\u003eUserEntity\u003c/code\u003e，就可以同时定义参数和返回值了，再也不用写两遍了。你的 \u003ccode\u003eUserEntity\u003c/code\u003e 内部可能是这样写的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-ruby\"\u003eclass UserEntity\n  property :id, type: 'integer', param: false # 只返回\n  property :password, type: 'string', render: false # 只用作参数\n  property :name, type: 'string,\n  property :age, type: 'integer'\nend\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其他的功能还有很多，就不想一一列举了。想进一步了解的，可以去看 GitHub 仓库：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/yetrun/web-frame\" rel=\"nofollow\"\u003ehttps://github.com/yetrun/web-frame\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e这个框架适合纯 API 后端的场景，即前后端分离。也比较适合团队，基本用一种固定的写法构建 API. 重点是生成对应的文档，前后端不再扯皮（你的文档是这么定义的，怎么你返回的数据是长这样啊之类的云云）。\u003c/p\u003e\n\u003cp\u003e说实话最近整体的工作节奏都有些慢，受大环境的影响吧。本来打算等到我稳定运行后再发布了，但是这可能还要一阵子，就先预先发布一下看看反馈再说。现在大家运行起来可能有点吃力，因为还缺一个项目脚手架，后面会补上。\u003c/p\u003e\n\u003cp\u003e如果觉得对你有用，还望支持一下，对我回复个 +1. 如果大家热情足够的话，因为涉及到文档，我感觉上手难度还是有的，到时会建个 QQ 群或微信群做全面的答疑。如果大家热情不高，我就当成一个小众项目在我的团队里使用吧。视反馈而定。\u003c/p\u003e\n",
