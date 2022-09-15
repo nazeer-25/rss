@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如何通过 shardingsphere proxy 实现只分库不分表 - 问与答",
+      "Link": "https://www.v2ex.com/t/880348",
+      "Description": "1 场景：系统根据行政区划不同分库，不分表。需要根据 sql 语句中的 orgCode 的值切换数据库，比如 orgCode = '51000’切换到 A 数据库执行 sql ，orgCode = '51001’切换到 b 数据库执行 sql 。\u003cbr /\u003e\u003cbr /\u003e2 问题：\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://community.sphere-ex.com/uploads/default/original/2X/6/65e209f74587878d91203c7dca00c4914be448eb.png\" rel=\"nofollow noopener\"\u003ehttps://community.sphere-ex.com/uploads/default/original/2X/6/65e209f74587878d91203c7dca00c4914be448eb.png\u003c/a\u003e\u003cbr /\u003e如上图配置时重写 StandardShardingAlgorithm 的自定义算法未生效，sql 永远在 ds_3 库执行，只有在 rules 加上\u003cbr /\u003e\u003cbr /\u003e  tables:\u003cbr /\u003e      person:\u003cbr /\u003e        actualDataNodes: ds_${1..3}.person\u003cbr /\u003e的配置才能生效，但是只对 person 表起作用。\u003cbr /\u003e\u003cbr /\u003e3 想要达到的效果：只配置默认分库策略，不配置 tables ，然后任意 sql 可根据 orgCode 的值切换到对应数据库执行。",
+      "Author": "BlackZhu",
+      "PubDate": "2022-09-15T11:24:01Z"
+    },
+    {
+      "Title": "关于限流组件，令牌桶和漏桶 - Java",
+      "Link": "https://www.v2ex.com/t/880347",
+      "Description": "\u003cp\u003e之前有疑问，令牌桶可以允许突然的并发流量，但是漏桶不行，然后看了一些资料，也是云里雾里，感觉并没有理解透彻，后来看 guava 的 ratelimiter ，用的令牌桶算法，代码里其实并没有维护一个’桶‘的概念，现在比较好奇，怎么实现一个漏桶算法呢，用代码，或者伪代码，有大佬有相关的资料吗\u003c/p\u003e\n",
+      "Author": "badboy17",
+      "PubDate": "2022-09-15T11:20:40Z"
+    },
+    {
+      "Title": "新品发布 | Cloudpods 3.9.2 版本上线！ - 云计算",
+      "Link": "https://www.v2ex.com/t/880346",
+      "Description": "Cloudpods 是一个开源的 Golang 实现的云原生的多云和混合云融合平台。Cloudpods 不仅可以管理本地的虚拟机和物理机资源，还可以管理其他公有云和私有云平台的资源。\u003cbr /\u003e\u003cbr /\u003eCloudpods 由北京云联壹云技术有限公司主导开发，并于 2019 年 9 月于 Github 开源。Cloudpods 采用核心开源模式，其商业版本云联壹云企业版（ YunionCloud ）自 2017 年开始研发，已经服务了上百家企业客户。\u003cbr /\u003e\u003cbr /\u003e9 月 14 日，Cloudpods 新版本 v3.9.2 正式发布。本次更新主要支持纳管高版本 k8s 及其他一些修复优化，以下为版本更新详情：\u003cbr /\u003e\u003cbr /\u003eGitHub: \u003ca target=\"_blank\" href=\"https://github.com/yunionio/cloudpods\" rel=\"nofollow noopener\"\u003ehttps://github.com/yunionio/cloudpods\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e欢迎使用、体验+star\u003cbr /\u003e\u003cbr /\u003e1 、新功能\u003cbr /\u003e\u003cbr /\u003e [主机] 中标麒麟镜像支持\u003cbr /\u003e [认证] 支持通过手机号验证码登录(需配置短信通知渠道)\u003cbr /\u003e [容器] 高版本 k8s 纳管支持\u003cbr /\u003e [部署] 支持通过 Kubernetes Helm 安装云管平台\u003cbr /\u003e [控制面板] 使用率增加水波球样式\u003cbr /\u003e\u003cbr /\u003e2 、功能优化\u003cbr /\u003e\u003cbr /\u003e [监控] 监控优化，支持 SQL Server 数据库监控\u003cbr /\u003e [主机] 迁移过程优化\u003cbr /\u003e [认证]  MFA 认证增加安卓离线包下载及 Chrome 插件引导\u003cbr /\u003e [主机] 增加远程连接信息查看\u003cbr /\u003e [系统] 更多的资源列表字段支持排序\u003cbr /\u003e\u003cbr /\u003e3 、问题修复\u003cbr /\u003e\u003cbr /\u003e [监控] 告警状态无法更新问题修复\u003cbr /\u003e [认证] 个人中心展示多云免密登录异常问题修复\u003cbr /\u003e [主机]  KVM 使用 ceph 磁盘报认证错误\u003cbr /\u003e [网络]  VPCAgent 同步安全组错误\u003cbr /\u003e [认证]  SMTP 邮件发送失败\u003cbr /\u003e [调度] 同时使用反亲和组和调度标签时结果不符合预期\u003cbr /\u003e [容器] 集群创建虚拟机出现磁盘分配失败的问题\u003cbr /\u003e\u003cbr /\u003e详情查看 \u003ca target=\"_blank\" href=\"https://mp.weixin.qq.com/s/YS6Odn_5dGM3NWZERQVSUA\" rel=\"nofollow noopener\"\u003ehttps://mp.weixin.qq.com/s/YS6Odn_5dGM3NWZERQVSUA\u003c/a\u003e",
+      "Author": "Cloudpods",
+      "PubDate": "2022-09-15T11:18:43Z"
+    },
+    {
       "Title": "为程序员准备的运动 徒步 露营 全公益 无收费 - 北京",
       "Link": "https://www.v2ex.com/t/880342",
       "Description": "\u003cp\u003e国庆前后是赏秋的最佳时机，给大家准备好了 哈哈 全公益 无收费\u003c/p\u003e\n\u003cp\u003e北京以及周边地区已进入秋季，参加活动请带一件厚衣服、带足饮水、做好防晒。白天越来越短头灯必带。\u003c/p\u003e\n\u003cp\u003e—————————————\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/3T21Zq_6LrjNNgJoV-ypHQ\" rel=\"nofollow\"\u003e[出京 48 小时核酸]  [重装露营]  9 月 17-18 日老掌沟-东猴顶-西猴顶赏秋\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/Y3niQ_1o8lqDPYxLhcpJLA\" rel=\"nofollow\"\u003e[出京 48 小时核酸]  [中级活动]  9 月 16-17 日老掌沟-半截沟 环穿赏秋\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/rsJfaPX4Q3_nXvXE-g67OQ\" rel=\"nofollow\"\u003e[中级强度]  9 月 17 日棋盘山 20 公里+1350 米爬升徒步\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/RV8Vdnc5cUkfDaVDgFewEg\" rel=\"nofollow\"\u003e[中级强度]  9 月 17 日狗牙山 13 公里+900 米爬升徒步\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e[][国庆活动]\u003ca href=\"https://mp.weixin.qq.com/s/Rz5SjbFK8Sto7nh2BBPKqQ\" rel=\"nofollow\"\u003e9 月 30 日晚-10 月 7 日皖南休闲+徒步休闲溜达游\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"https://www.2bulu.com/event/d-3528741.htm\" rel=\"nofollow\"\u003e[骑行活动]  9 月 14 日北京中轴线骑行（ 19:00 永定门外 A 口集合）\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"https://www.2bulu.com/event/d-3524642.htm\" rel=\"nofollow\"\u003e[沙河大集]  9 月 18 日周日带你去逛集（沙河周日市场）\u003c/a\u003e\n—————————————\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e全公益 无收费\u003c/p\u003e\n",
