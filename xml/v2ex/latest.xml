@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于列表数据删除时前端展示那些事 - 程序员</title>
+      <link>https://www.v2ex.com/t/880409</link>
+      <description>&lt;p&gt;今天下午，办公室的民工都在热火朝天的堆代码。突然前端的同志说，删除列表中的一些数据时会造成数据丢失或者重复，我有没有什么看法。作为一个资深不务正业的后端，我决定加入了这场讨论。&lt;/p&gt;&#xA;&lt;p&gt;交代一下背景：用户个人中心的任务列表需要做批量删除，因为做了分页，根据 limit (page - 1) * page_size, page_size 确实会出现这样的问题。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;数据举例：&#xA;page1：00 01 02 03 04 05 06 07 08 09&#xA;page2：10 11 12 13 14 15 16 17 18 19&#xA;page3：20 21 22 23 24 25 26 27 28 29&#xA;page4：30 31 32 33 34 35 36 37 38 39&#xA;page5：40 41 42 43 44 45 46 47 48 49&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;基于这样的背景我们 3 个人（分别称 A 、C 、D （本人），因为感觉小 B 不是很礼貌）提出了几种解决方案：&lt;/p&gt;&#xA;&lt;h2&gt;1 ）做标记&lt;/h2&gt;&#xA;&lt;p&gt;C：或许把删除先做成标记，等到用户退出列表页或者回到个人中心的时候再提交删除.&lt;br/&gt;&#xA;A &amp;amp; D：这样好像不太稳定，如果用户非正常退出的话不是很好正常提交，造成数据删除失败的现象，而且如果删除失败也不是很好的反馈给用户&lt;/p&gt;&#xA;&lt;h4&gt;总结：NO&lt;/h4&gt;&#xA;&lt;h2&gt;2 ）删除部分&lt;/h2&gt;&#xA;&lt;p&gt;D：把删除数据最上页的数据更新，下面的全删除掉呢&#xA;例：删除 11 22 23 30 这些数据的话，就重新加载 page2 ，page3 、4 、5 全都删掉。数据变为&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;page1：00 01 02 03 04 05 06 07 08 09&#xA;page2：10    12 13 14 15 16 17 18 19 20&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;A &amp;amp; C：这样用户体检不是很好，最好能定位到用户访问数据的最后一项&lt;/p&gt;&#xA;&lt;h4&gt;总结：不适合批量删除，但是单项删除的话好像是可以的，因为删除页就是所在页？&lt;/h4&gt;&#xA;&lt;h2&gt;3 ）补齐方式&lt;/h2&gt;&#xA;&lt;p&gt;D：那删除之后，把最后一页做成补齐页记录误差，重新请求最后一页，创建一个新的页放进去呢&#xA;例：删除 11 22 23 30 这些数据的话，就把 page5 的前 4 个保留，删除掉后面 6 个，然后重新请求 page5 ，保存在 page6 ，记录误差为 &lt;strong&gt;1&lt;/strong&gt; ，数据变为&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;page1：00 01 02 03 04 05 06 07 08 09&#xA;page2：10    12 13 14 15 16 17 18 19&#xA;page3：20 21       24 25 26 27 28 29&#xA;page4：   31 32 33 34 35 36 37 38 39&#xA;page5：40 41 42 43&#xA;page6: 44 45 46 47 48 49 50 51 52 53&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;此时的 page6 的数据为 page5 的数据，page1 + ... + page5 是前 4 页的总和，误差记录为 1 ，请求时页码加上误差即可&lt;br/&gt;&#xA;A &amp;amp; C：这样会有点问题，如果删除的数据包括 page5 中的数据，那么补齐的数据需要去掉这些数据，如果删除的数据超过了一页，就需要计算最后几页，会比较麻烦&lt;/p&gt;&#xA;&lt;h4&gt;总结：可以实现，但是较复杂&lt;/h4&gt;&#xA;&lt;h2&gt;4 ）重新整合&lt;/h2&gt;&#xA;&lt;p&gt;A：基于 3 的方法，在删除完成后把页码重新整合，再请求最后一页的数据，数据变为&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;page1：00 01 02 03 04 05 06 07 08 09&#xA;page2：10    12 13 14 15 16 17 18 19 20&#xA;page3：   21       24 25 26 27 28 29 31 32 33&#xA;page4：            34 35 36 37 38 39 40 41 42 43&#xA;page5: 44 45 46 47 48 49 50 51 52 53&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h4&gt;总结：可以实现，但是数据量较大时可能会渲染卡顿？&lt;/h4&gt;&#xA;&lt;h2&gt;5 ）请求时添加偏移量&lt;/h2&gt;&#xA;&lt;p&gt;C：可以请求的时候，加上 delete____count ，数据查询时变为 limit (page - 1) * page_size - delete_count, page_size&lt;/p&gt;&#xA;&lt;h4&gt;总结：可以实现，需要前后端的代码都做一下改动，可能因为数据源的程序不太好改动，那边的同事说实现不了 - -#&lt;/h4&gt;&#xA;&lt;h2&gt;写在后面&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code&gt;1.以上讨论都是建立用户操作自己的列表时所做的操作，而且没有考虑到多端登录的问题；&#xA;2.如果是在后台管理删除掉数据的话，用户的列表也会出问题，可能需要做缓存或者用别的方式通知用户？&#xA;3.想起之前做的竞价功能，需要最新的出价在上面，然后做分页，列表的数据也会用这种问题，如果加上请求时间就可以解决，如果有需要的同志可以这样实现。&#xA;&#xA;好像还有很多的问题没有解决，但是今天有点晚了，就先这样。&#xA;第一次写这种主题，抛砖引玉，如果大家有什么好的解决方法欢迎一起讨论哈&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>iam</author>
+      <pubDate>15 Sep 2022 16:41:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>升级 iOS16 后捷径 Shortcuts 无法在 Home 界面运行的 bug - iPhone</title>
+      <link>https://www.v2ex.com/t/880408</link>
+      <description>&lt;p&gt;习惯把捷径的快捷方式添加到 home 主界面运行, 比如一键自动倒计时 15 分钟, 自动开启 /关闭暗黑模式此类的简单功能, 更新到 16 之后发现点 Home 界面的快捷方式绝大多数情况不会被执行, 只能去 shortcuts.app 里面运行. &lt;/p&gt;&#xA;&lt;p&gt;想问下大家升级手机之后有没有遇到这个 bug?&lt;/p&gt;&#xA;&lt;p&gt;手机是 iPhone12 mini&lt;/p&gt;&#xA;</description>
+      <author>dhou45</author>
+      <pubDate>15 Sep 2022 16:35:04 +0000</pubDate>
+    </item>
+    <item>
       <title>iPhone 地区版本选择 - Apple</title>
       <link>https://www.v2ex.com/t/880407</link>
       <description>购买 iPhone 14 Pro ，需要使用实体 sim 卡+esim ，中国大陆、香港、澳门版本不考虑，请问选择哪个地区的版本功能最全面、不受阉割或改动(如日版快门声)?谢谢。</description>
@@ -20,7 +34,7 @@
     <item>
       <title>12.6 上 Music.app 耗电惊人 - macOS</title>
       <link>https://www.v2ex.com/t/880405</link>
-      <description>&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/AiGwG6u.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;利申: 所有音乐文件都在本地 我不知道究竟是有什么东西能让它这么耗电 在 12.5 的时候是正常的...&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/AiGwG6u.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;利申: 所有音乐文件都在本地 我不知道究竟是有什么东西能让它这么耗电 在 12.5 的时候是正常的...&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;CPU 用量&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/5BZOk74.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
       <author>VpChris</author>
       <pubDate>15 Sep 2022 16:31:12 +0000</pubDate>
     </item>
@@ -79,13 +93,6 @@
       <description>&lt;p&gt;我的场景是这样的：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;API a 是比较常见的接口，几乎每个页面都要调用&lt;/li&gt;&#xA;&lt;li&gt;API b 是依赖 a 的结果，去调用的&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;我先把 API a 和 b 用 react query 抽象成 hook:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const useFetchA = (params) =&amp;gt; {&#xA;&#x9;return useQuery([&#39;fetchA&#39;, params], async () =&amp;gt; {&#xA;    &#x9;return await API.a(params)&#xA;    })&#xA;}&#xA;&#xA;// useFetchB 也类似，就不写了&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后在很多组件上都有这样的两行：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;const resA = useFetchA(&#39;xxx&#39;);&#xA;const resB = useFetchB(&#39;yyy&#39;);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我也想过要 API.a 和 API.b 放在一个 hook 里，但是这样，单独使用 API.a 或 API.b 的时候就不方便了。&lt;/p&gt;&#xA;&lt;p&gt;也想过把 useFetchA 和 useFetchB 再放在一个 hook 里，类似这样:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const useFetchAandB = (params) =&amp;gt; {&#xA;&#x9;const {data: resA} = useFetchA(params)&#xA;    const {data: resB} = useFetchB(resA)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;不知道这样是否可行？有什么隐患？是否符合规范？&lt;/p&gt;&#xA;</description>
       <author>RRRSSS</author>
       <pubDate>15 Sep 2022 15:37:02 +0000</pubDate>
-    </item>
-    <item>
-      <title>堕入地狱模式 - 分享发现</title>
-      <link>https://www.v2ex.com/t/880395</link>
-      <description>我家楼下一家做饮食的茶楼，去年美团外卖日均是 280 多单，今年基本是 90 单不到了。&lt;br /&gt;&lt;br /&gt;还有我们镇上的最大的一个工厂，2015 年是建厂以来的最多员工，达到了 12000 多人，现在只剩下 3000 人不到了啊。&lt;br /&gt;还有因为 2015 年以前厂区极度繁荣，所以周边建满了出租楼房。2015 年单间的出租价钱是 400 元以上，现在 160 元每月都有大量的空房租不出去了，空置率最少一半。。。&lt;br /&gt;&lt;br /&gt;还有我 2020 年各买了几百股郑州银行和西安银行股票作为观察仓位，现在都是是浮亏 40%左右。。。</description>
-      <author>x198</author>
-      <pubDate>15 Sep 2022 15:36:36 +0000</pubDate>
     </item>
     <item>
       <title>手机从 OLED 屏幕换成 LCD 屏幕，治好了我的眼睛痛。 - 硬件</title>
@@ -282,6 +289,13 @@
       <description>&lt;p&gt;rt,&lt;/p&gt;&#xA;&lt;p&gt;教育网 v6 ，阻断基本没有。&#xA;联通 v6,阻断基本 3 分钟一次，一次关小黑屋 3 分钟。&lt;/p&gt;&#xA;</description>
       <author>cloudsigma2022</author>
       <pubDate>15 Sep 2022 12:29:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>堕入地狱模式 - 分享发现</title>
+      <link>https://www.v2ex.com/t/880395</link>
+      <description>我家楼下一家做饮食的茶楼，去年美团外卖日均是 280 多单，今年基本是 90 单不到了。&lt;br /&gt;&lt;br /&gt;还有我们镇上的最大的一个工厂，2015 年是建厂以来的最多员工，达到了 12000 多人，现在只剩下 3000 人不到了啊。&lt;br /&gt;还有因为 2015 年以前厂区极度繁荣，所以周边建满了出租楼房。2015 年单间的出租价钱是 400 元以上，现在 160 元每月都有大量的空房租不出去了，空置率最少一半。。。&lt;br /&gt;&lt;br /&gt;还有我 2020 年各买了几百股郑州银行和西安银行股票作为观察仓位，现在都是是浮亏 40%左右。。。</description>
+      <author>x198</author>
+      <pubDate>15 Sep 2022 15:36:36 +0000</pubDate>
     </item>
     <item>
       <title>桌面软件开发 2022 年 用啥技术栈？ - 问与答</title>
