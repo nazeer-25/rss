@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "老哥们，请问这个 Model 在 Django 里面怎么建比较好 - 程序员",
+      "Link": "https://www.v2ex.com/t/880418",
+      "Description": "\u003cp\u003e新手上路，如果问题太简单请见谅\u003c/p\u003e\n\u003cp\u003e有原料和食谱两个 Model ，原料组成食谱。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003eclass Ingredient(models.Model):\n    name = models.CharField(max_length=200)\n    unit = models.ManyToManyField('IngredientUnit') ## unit 后期可能会增删\n\n\nclass IngredientUnit(models.Model):\n    name = models.CharField(max_length=200)\n\n\nclass Recipe(models.Model):\n    name = models.CharField(max_length=200)\n    ingredients = ??\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e比方说有\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e原料 1: {\n    name: '酱油',\n    unit: ['瓶', '桶']\n}\n原料 2: {\n    name: '八角',\n    unit: ['粒']\n}\n\n食谱: {\n    name: '烧鸡',\n    ingredients: [\n        {\n            name: '酱油',\n            unit: '瓶'，\n            amount: 1\n        },\n        {\n            name: '酱油',\n            unit: '桶'，\n            amount: 2\n        } // 酱油两桶不够，三桶太多\n    ] // 不可以出现“一粒酱油”的组合\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "CptDoraemon",
+      "PubDate": "2022-09-15T23:01:41Z"
+    },
+    {
       "Title": "windows 为什么无法访问 Ubuntu 初始化的机械硬盘 - 程序员",
       "Link": "https://www.v2ex.com/t/880417",
       "Description": "\u003cp\u003e如题 小弟我为了更好的管理自己的小电影买了那种企业级的大容量机械硬盘（氦封） 16T 就是那种一般要装在台式机里面用螺丝固定的机械硬盘 不是那种可以带着走的\u003cstrong\u003e移动硬盘\u003c/strong\u003e（这种移动硬盘不需要初始化插什么系统都可以用）\u003c/p\u003e\n\u003cp\u003e然后我用 Ubuntu 初始化的这个硬盘 就是用 Ubuntu Disks -\u0026gt; Format Partition\n然后选择的 NTFS （ windows 的文件格式）\u003c/p\u003e\n\u003cp\u003e然后这个硬盘 Ubuntu 台式机可以识别，Macbook 可以识别，偏偏就唯独 windows 根本显示不出来盘符（但是右下角可以弹出这个硬盘）\u003c/p\u003e\n\u003cp\u003e各位有经验的大佬知道这是为什么吗？\u003c/p\u003e\n",
