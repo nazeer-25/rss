@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "v2 二极管越来越多了 - 2021",
+      "Link": "https://www.v2ex.com/t/880802",
+      "Description": "\u003cp\u003e每天看 v2 好几年了，感觉最近这一年在一些讨论的话题里，二极管越来越多了，各种无脑吹和无脑黑。全然不去考虑事情的多面性，有错误就恨不得打下地狱。\u003cbr/\u003e\u003cbr/\u003e是什么原因导致这种现象发生的呢？\u003c/p\u003e\n",
+      "Author": "tulongtou",
+      "PubDate": "2022-09-17T06:39:12Z"
+    },
+    {
       "Title": "golang 创建多级目录失败 - 问与答",
       "Link": "https://www.v2ex.com/t/880801",
       "Description": "\u003cp\u003e请教个问题，没搜到类似情况的。\u003c/p\u003e\n\u003cp\u003e调用 os.Create 或者 os.WriteFile ，文件名是一个绝对路径，调用前 后边几级目录还没创建，按官方的例子，会自动创建目录，实际使用会报错：\n\u003ccode\u003eno such file or directory\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e调用前加了\u003ccode\u003esyscall.Umask(0)\u003c/code\u003e,对新创建文件的权限，取消了掩码限制\u003c/p\u003e\n\u003cp\u003e绝对路径类似于 /Users/admin/xxx/blog/content/zh-CN/post/filedir/test\u003c/p\u003e\n\u003cp\u003e已有目录 /Users/admin/xxx/blog/content/zh-CN/post 的权限也是 3 个 rwx ，自己在 shell 操作创建也是没问题。\u003c/p\u003e\n\u003cp\u003e因为拼接的路径，后边几级目录不确定，不至于每次创建一级，就调用个 os.Chmod 吧。。。\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e官方文档\nfunc WriteFile(name string, data []byte, perm FileMode) error\u003c/p\u003e\n\u003cp\u003eWriteFile writes data to the named file, creating it if necessary. If the file does not exist, WriteFile creates it with permissions perm (before umask); otherwise WriteFile truncates it before writing, without changing permissions.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eerr := os.WriteFile(\"testdata/hello\", []byte(\"Hello, Gophers!\"), 0666)\nif err != nil {\nlog.Fatal(err)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
