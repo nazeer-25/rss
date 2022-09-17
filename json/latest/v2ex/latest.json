@@ -4,6 +4,62 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教 Nginx Proxy Manager 与 X-UI 共存后的， trojan 该如何设置 - 问与答",
+      "Link": "https://www.v2ex.com/t/880781",
+      "Description": "请教 Nginx Proxy Manager 与 X-UI 共存后的，trojan 该如何设置\u003cbr /\u003e\u003cbr /\u003eNginx Proxy Manager 和 x-ui 已设置分流（路径）共存，请教如何写入配置使用 trojan+ws 和 trojan+grpc ？\u003cbr /\u003e目前是无法和客户端联系。附相关设置。\u003cbr /\u003enpm 这边*.conf 的设置：\u003cbr /\u003elocation ^~ /xui {              #xui 换成你前面设置的面板的 url 根路径\u003cbr /\u003e      proxy_pass http://158.101.3.171:8443/xui;  # IP 填服务器 IP ，这边不能填 127.0.0.1 ，因为是在容器里，8443 换成你 xui 面板的端口\u003cbr /\u003e      proxy_set_header Host $host;\u003cbr /\u003e      proxy_set_header X-Real-IP $remote_addr;\u003cbr /\u003e      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\u003cbr /\u003e  }\u003cbr /\u003e  location /aa {                 # aa 填你前面设置的 ws 的路径\u003cbr /\u003e          proxy_redirect off;\u003cbr /\u003e          proxy_pass http://158.101.3.171:1021;    # IP 填服务器 IP ，这边不能填 127.0.0.1 ，因为是在容器里，1021 换成你入站规则那边的 IP\u003cbr /\u003e          proxy_http_version 1.1;\u003cbr /\u003e          proxy_set_header Upgrade $http_upgrade;\u003cbr /\u003e          proxy_set_header Connection \"upgrade\";\u003cbr /\u003e          proxy_set_header Host $http_host;\u003cbr /\u003e          proxy_read_timeout 300s;\u003cbr /\u003e          # Show realip in v2ray access.log\u003cbr /\u003e          proxy_set_header X-Real-IP $remote_addr;\u003cbr /\u003e          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\u003cbr /\u003e  }\u003cbr /\u003e  \u003cbr /\u003e  X-UI 面板设置“xray 相关设置”中的：\u003cbr /\u003e  {\u003cbr /\u003e  \"log\": null,\u003cbr /\u003e  \"routing\": {\u003cbr /\u003e    \"rules\": [\u003cbr /\u003e      {\u003cbr /\u003e        \"inboundTag\": [\u003cbr /\u003e          \"api\"\u003cbr /\u003e        ],\u003cbr /\u003e        \"outboundTag\": \"api\",\u003cbr /\u003e        \"type\": \"field\"\u003cbr /\u003e      },\u003cbr /\u003e      {\u003cbr /\u003e        \"ip\": [\u003cbr /\u003e          \"geoip:private\"\u003cbr /\u003e        ],\u003cbr /\u003e        \"outboundTag\": \"blocked\",\u003cbr /\u003e        \"type\": \"field\"\u003cbr /\u003e      },\u003cbr /\u003e      {\u003cbr /\u003e        \"outboundTag\": \"blocked\",\u003cbr /\u003e        \"protocol\": [\u003cbr /\u003e          \"bittorrent\"\u003cbr /\u003e        ],\u003cbr /\u003e        \"type\": \"field\"\u003cbr /\u003e      }\u003cbr /\u003e    ]\u003cbr /\u003e  },\u003cbr /\u003e  \"dns\": null,\u003cbr /\u003e  \"inbounds\": [\u003cbr /\u003e    {\u003cbr /\u003e      \"listen\": null,\u003cbr /\u003e      \"port\": 1021,                   #此处原本是 443 ，为了不冲突，对应改成了 1021\u003cbr /\u003e      \"protocol\": \"trojan\",\u003cbr /\u003e      \"settings\": {\u003cbr /\u003e        \"clients\": [\u003cbr /\u003e          {\u003cbr /\u003e            \"password\": \"xxxxxxxx\",\u003cbr /\u003e            \"flow\": \"xtls-rprx-direct\"\u003cbr /\u003e          }\u003cbr /\u003e        ],\u003cbr /\u003e        \"fallbacks\": [\u003cbr /\u003e          {\u003cbr /\u003e            \"name\": \"\u003ca target=\"_blank\" href=\"http://xxxx.com\" rel=\"nofollow noopener\"\u003exxxx.com\u003c/a\u003e\",\u003cbr /\u003e            \"alpn\": \"\",\u003cbr /\u003e            \"path\": \"/\",\u003cbr /\u003e            \"dest\": \"453\",\u003cbr /\u003e            \"xver\": 1\u003cbr /\u003e          },\u003cbr /\u003e          {\u003cbr /\u003e            \"name\": \"\u003ca target=\"_blank\" href=\"http://xxxx.com\" rel=\"nofollow noopener\"\u003exxxx.com\u003c/a\u003e\",\u003cbr /\u003e            \"alpn\": \"h2\",\u003cbr /\u003e            \"path\": \"\",\u003cbr /\u003e            \"dest\": \"483\",\u003cbr /\u003e            \"xver\": 1\u003cbr /\u003e          },\u003cbr /\u003e          {\u003cbr /\u003e            \"name\": \"\",\u003cbr /\u003e            \"alpn\": \"\",\u003cbr /\u003e            \"path\": \"\",\u003cbr /\u003e            \"dest\": \"\u003ca target=\"_blank\" href=\"http://www.bing.com:80\" rel=\"nofollow noopener\"\u003ewww.bing.com:80\u003c/a\u003e\",\u003cbr /\u003e            \"xver\": 0\u003cbr /\u003e          }\u003cbr /\u003e        ]\u003cbr /\u003e      },\u003cbr /\u003e      \"streamSettings\": {\u003cbr /\u003e        \"network\": \"tcp\",\u003cbr /\u003e        \"security\": \"xtls\",\u003cbr /\u003e        \"xtlsSettings\": {\u003cbr /\u003e          \"serverName\": \u003ca target=\"_blank\" href=\"http://xxxx.com\" rel=\"nofollow noopener\"\u003exxxx.com\u003c/a\u003e\",\u003cbr /\u003e          \"minVersion\": \"1.2\",\u003cbr /\u003e          \"certificates\": [\u003cbr /\u003e            {\u003cbr /\u003e              \"certificateFile\": \"/root/cert.crt\",\u003cbr /\u003e              \"keyFile\": \"/root/private.key\"\u003cbr /\u003e            }\u003cbr /\u003e          ]\u003cbr /\u003e        },\u003cbr /\u003e        \"tcpSettings\": {\u003cbr /\u003e          \"header\": {\u003cbr /\u003e            \"type\": \"none\"\u003cbr /\u003e          }\u003cbr /\u003e        }\u003cbr /\u003e      },\u003cbr /\u003e      \"tag\": \"inbound-443\",\u003cbr /\u003e      \"sniffing\": {\u003cbr /\u003e        \"enabled\": true,\u003cbr /\u003e        \"destOverride\": [\u003cbr /\u003e          \"http\",\u003cbr /\u003e          \"tls\"\u003cbr /\u003e        ]\u003cbr /\u003e      }\u003cbr /\u003e    },\u003cbr /\u003e    {\u003cbr /\u003e      \"listen\": \"127.0.0.1\",\u003cbr /\u003e      \"port\": 453,\u003cbr /\u003e      \"protocol\": \"trojan\",\u003cbr /\u003e      \"settings\": {\u003cbr /\u003e        \"clients\": [\u003cbr /\u003e          {\u003cbr /\u003e            \"password\": \"xxxxxxxx\"\u003cbr /\u003e          }\u003cbr /\u003e        ]\u003cbr /\u003e      },\u003cbr /\u003e      \"streamSettings\": {\u003cbr /\u003e        \"network\": \"ws\",\u003cbr /\u003e        \"wsSettings\": {\u003cbr /\u003e          \"acceptProxyProtocol\": true,\u003cbr /\u003e          \"path\": \"/\",\u003cbr /\u003e          \"headers\": {\u003cbr /\u003e            \"Host\": \"\u003ca target=\"_blank\" href=\"http://xxxx.com\" rel=\"nofollow noopener\"\u003exxxx.com\u003c/a\u003e\"\u003cbr /\u003e          }\u003cbr /\u003e        }\u003cbr /\u003e      }\u003cbr /\u003e    },\u003cbr /\u003e    {\u003cbr /\u003e      \"listen\": \"127.0.0.1\",\u003cbr /\u003e      \"port\": 483,\u003cbr /\u003e      \"protocol\": \"trojan\",\u003cbr /\u003e      \"settings\": {\u003cbr /\u003e        \"clients\": [\u003cbr /\u003e          {\u003cbr /\u003e            \"password\": \"xxxxxxxx\"\u003cbr /\u003e          }\u003cbr /\u003e        ]\u003cbr /\u003e      },\u003cbr /\u003e      \"streamSettings\": {\u003cbr /\u003e        \"network\": \"grpc\",\u003cbr /\u003e        \"grpcSettings\": {\u003cbr /\u003e          \"serviceName\": \"XXX\"\u003cbr /\u003e        },\u003cbr /\u003e        \"sockopt\": {\u003cbr /\u003e          \"acceptProxyProtocol\": true\u003cbr /\u003e        }\u003cbr /\u003e      }\u003cbr /\u003e    }\u003cbr /\u003e  ],\u003cbr /\u003e  \"outbounds\": [\u003cbr /\u003e    {\u003cbr /\u003e      \"protocol\": \"freedom\",\u003cbr /\u003e      \"settings\": {}\u003cbr /\u003e    },\u003cbr /\u003e    {\u003cbr /\u003e      \"protocol\": \"blackhole\",\u003cbr /\u003e      \"settings\": {},\u003cbr /\u003e      \"tag\": \"blocked\"\u003cbr /\u003e    }\u003cbr /\u003e  ],\u003cbr /\u003e  \"transport\": null,\u003cbr /\u003e  \"policy\": {\u003cbr /\u003e    \"system\": {\u003cbr /\u003e      \"statsInboundDownlink\": true,\u003cbr /\u003e      \"statsInboundUplink\": true\u003cbr /\u003e    }\u003cbr /\u003e  },\u003cbr /\u003e  \"api\": {\u003cbr /\u003e    \"services\": [\u003cbr /\u003e      \"HandlerService\",\u003cbr /\u003e      \"LoggerService\",\u003cbr /\u003e      \"StatsService\"\u003cbr /\u003e    ],\u003cbr /\u003e    \"tag\": \"api\"\u003cbr /\u003e  },\u003cbr /\u003e  \"stats\": {},\u003cbr /\u003e  \"reverse\": null,\u003cbr /\u003e  \"fakeDns\": null\u003cbr /\u003e}",
+      "Author": "kady",
+      "PubDate": "2022-09-17T04:27:21Z"
+    },
+    {
+      "Title": "如何使用 git 更新远程仓库默认分支？ - git",
+      "Link": "https://www.v2ex.com/t/880780",
+      "Description": "\u003cp\u003e昨天让运维同事帮忙改了一下我们组里一个项目的 git 仓库的默认分支，结果他埋怨说，这么简单的操作，几条 git 命令的事，非得麻烦他。\u003c/p\u003e\n\u003cp\u003e但是通过查阅资料，我仍然没有找到更新远程默认分支的方法，所以烦请 V 站大佬支支招。\u003c/p\u003e\n\u003cp\u003e首先，我知道默认分支由 HEAD 控制，可以用 \u003ccode\u003egit symbolic-ref\u003c/code\u003e 修改。但是，截至最新版本的 git ，似乎没有机制可以将 symbolic ref “推送”到远程仓库。\u003c/p\u003e\n\u003cp\u003e像 GitHub 、GitLab 等代码托管平台都在仓库的管理界面提供有修改默认分支的接口，但我们的 git 服务端就是一个普通的 SSH server ，没有任何前端。而且我们也没有服务器的 shell access ，想要登上服务器把远程仓库当作本地仓库一样改，也是不可行的。\u003c/p\u003e\n\u003cp\u003e所以这里想请教一下各位大佬，有没有办法可以做到，在仅使用标准 git 命令的前提下，从本地更新远程仓库的 HEAD ？\u003c/p\u003e\n",
+      "Author": "majula",
+      "PubDate": "2022-09-17T04:22:40Z"
+    },
+    {
+      "Title": "今年这黄牛有点过分了吧，，， - Apple",
+      "Link": "https://www.v2ex.com/t/880778",
+      "Description": "\u003cp\u003e北京，之前还都能点进去几步。然后没货\n今天直接扫到放货的那一秒直接没货\u003c/p\u003e\n\u003cp\u003eApple store App 也有脚本了吗\u003c/p\u003e\n",
+      "Author": "StefanShenHSC",
+      "PubDate": "2022-09-17T04:15:54Z"
+    },
+    {
+      "Title": "Apple One 美区超大杯，长期自用，可拉群, 两个车位 - Apple",
+      "Link": "https://www.v2ex.com/t/880777",
+      "Description": "\u003cp\u003e为了 fitness+和 tv 新开的美区号，自用，v(base64):ZXRoYW53YW5nc2Y=\n包括 Music ，Arcade ，TV+，News+，Fitness+，iCloud 2T ，目前有一个月的试用期到 9 月 22 ，试用期不收钱，之后 105 一个季度，短期 /白嫖试用勿扰。跳车不退，下车最好能提前一周通知就好！之后大家稳定的话可能考虑半年收一次，我基本不用 icloud ，到时可能一个车位可以多分些 icloud （\u0026gt;333gb 一人)\u003c/p\u003e\n",
+      "Author": "namaste1wang",
+      "PubDate": "2022-09-17T04:15:05Z"
+    },
+    {
+      "Title": "根据简历预测求职者是 junior 还是 senior 水平 - 机器学习",
+      "Link": "https://www.v2ex.com/t/880776",
+      "Description": "\u003cp\u003e今天和老板对话，总感觉哪里不对劲\u003c/p\u003e\n\u003cp\u003e我说，要根据简历预测求职者是 junior 还是 senior level ，我们首先要有现有简历数据让机器去学习什么是 junior 还是 senor 简历\n这个需要人工标记\u003c/p\u003e\n\u003cp\u003e老板说，我们直接写个 python script 去抓取简历关键字，然后把简历 label 成 junior 或者 senior ，然后再让 AI\n去学习\u003c/p\u003e\n\u003cp\u003e我勒了个去\u003c/p\u003e\n\u003cp\u003e既然这个 python script 可以 100%判断简历是 junior 还是 senior 了，还要 AI 干什么\n这么干的话，AI 最好也无非达到这个 python script 的水平而已\u003c/p\u003e\n\u003cp\u003e我总觉得哪里不对劲\u003c/p\u003e\n",
+      "Author": "manyprospect",
+      "PubDate": "2022-09-17T04:15:00Z"
+    },
+    {
+      "Title": "发现 moto 的入门级性价比很高 - Android",
+      "Link": "https://www.v2ex.com/t/880774",
+      "Description": "\u003cp\u003e系统相对干净，g71s 1219 入手 695 的 u 3.1 的闪存 d5 的内存 ，8+128  防抖主摄，120 刷的荧幕。5000 毫安电池。1219 的价格 等两头到手了再看看，估计在做工方面可能不如蓝绿厂\u003c/p\u003e\n",
+      "Author": "ruoyutx",
+      "PubDate": "2022-09-17T04:11:05Z"
+    },
+    {
+      "Title": "微信充值九折无限跳转的一种解决方法 - Apple",
+      "Link": "https://www.v2ex.com/t/880773",
+      "Description": "可能是之前微信绑过其他旧 Apple ID 导致的，我的微信以前是绑过自己英区 iCloud 账户的。\u003cbr /\u003e致电 4006668800 ，电话打通以后大概描述一下问题，普通专员大概率是解决不了的，会转高级专员，账户是国区的应该会转国区账户 /商店的高级专员，外区的应该会转到台湾那边的高级专员（我的是这样），验证设备信息以后告知小哥哥 /小姐姐不要解绑支付方式（外区，国区哪怕解绑了重绑也方便一点吧 2333 ），需要解绑相关身份信息，然后等待一会儿即可，普通专员好像不太了解相关问题，只会重复“我们 Apple 不记录身份证 /身份信息”。",
+      "Author": "Gouzhi",
+      "PubDate": "2022-09-17T04:04:08Z"
+    },
+    {
+      "Title": "日产车机 Carplay - 汽车",
+      "Link": "https://www.v2ex.com/t/880771",
+      "Description": "刚提了一辆逍客，但是车机不支持 Carplay ，求问 V 有有没有什么办法解决？",
+      "Author": "SherlockHolmes2",
+      "PubDate": "2022-09-17T03:59:59Z"
+    },
+    {
       "Title": "xfce 的 4k 字体渲染竟然比 win10 看起来都舒服 - Linux",
       "Link": "https://www.v2ex.com/t/880770",
       "Description": "这是为啥？\u003cbr /\u003e感觉不科学啊。。。",

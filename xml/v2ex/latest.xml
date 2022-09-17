@@ -4,6 +4,62 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教 Nginx Proxy Manager 与 X-UI 共存后的， trojan 该如何设置 - 问与答</title>
+      <link>https://www.v2ex.com/t/880781</link>
+      <description>请教 Nginx Proxy Manager 与 X-UI 共存后的，trojan 该如何设置&lt;br /&gt;&lt;br /&gt;Nginx Proxy Manager 和 x-ui 已设置分流（路径）共存，请教如何写入配置使用 trojan+ws 和 trojan+grpc ？&lt;br /&gt;目前是无法和客户端联系。附相关设置。&lt;br /&gt;npm 这边*.conf 的设置：&lt;br /&gt;location ^~ /xui {              #xui 换成你前面设置的面板的 url 根路径&lt;br /&gt;      proxy_pass http://158.101.3.171:8443/xui;  # IP 填服务器 IP ，这边不能填 127.0.0.1 ，因为是在容器里，8443 换成你 xui 面板的端口&lt;br /&gt;      proxy_set_header Host $host;&lt;br /&gt;      proxy_set_header X-Real-IP $remote_addr;&lt;br /&gt;      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&lt;br /&gt;  }&lt;br /&gt;  location /aa {                 # aa 填你前面设置的 ws 的路径&lt;br /&gt;          proxy_redirect off;&lt;br /&gt;          proxy_pass http://158.101.3.171:1021;    # IP 填服务器 IP ，这边不能填 127.0.0.1 ，因为是在容器里，1021 换成你入站规则那边的 IP&lt;br /&gt;          proxy_http_version 1.1;&lt;br /&gt;          proxy_set_header Upgrade $http_upgrade;&lt;br /&gt;          proxy_set_header Connection &#34;upgrade&#34;;&lt;br /&gt;          proxy_set_header Host $http_host;&lt;br /&gt;          proxy_read_timeout 300s;&lt;br /&gt;          # Show realip in v2ray access.log&lt;br /&gt;          proxy_set_header X-Real-IP $remote_addr;&lt;br /&gt;          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&lt;br /&gt;  }&lt;br /&gt;  &lt;br /&gt;  X-UI 面板设置“xray 相关设置”中的：&lt;br /&gt;  {&lt;br /&gt;  &#34;log&#34;: null,&lt;br /&gt;  &#34;routing&#34;: {&lt;br /&gt;    &#34;rules&#34;: [&lt;br /&gt;      {&lt;br /&gt;        &#34;inboundTag&#34;: [&lt;br /&gt;          &#34;api&#34;&lt;br /&gt;        ],&lt;br /&gt;        &#34;outboundTag&#34;: &#34;api&#34;,&lt;br /&gt;        &#34;type&#34;: &#34;field&#34;&lt;br /&gt;      },&lt;br /&gt;      {&lt;br /&gt;        &#34;ip&#34;: [&lt;br /&gt;          &#34;geoip:private&#34;&lt;br /&gt;        ],&lt;br /&gt;        &#34;outboundTag&#34;: &#34;blocked&#34;,&lt;br /&gt;        &#34;type&#34;: &#34;field&#34;&lt;br /&gt;      },&lt;br /&gt;      {&lt;br /&gt;        &#34;outboundTag&#34;: &#34;blocked&#34;,&lt;br /&gt;        &#34;protocol&#34;: [&lt;br /&gt;          &#34;bittorrent&#34;&lt;br /&gt;        ],&lt;br /&gt;        &#34;type&#34;: &#34;field&#34;&lt;br /&gt;      }&lt;br /&gt;    ]&lt;br /&gt;  },&lt;br /&gt;  &#34;dns&#34;: null,&lt;br /&gt;  &#34;inbounds&#34;: [&lt;br /&gt;    {&lt;br /&gt;      &#34;listen&#34;: null,&lt;br /&gt;      &#34;port&#34;: 1021,                   #此处原本是 443 ，为了不冲突，对应改成了 1021&lt;br /&gt;      &#34;protocol&#34;: &#34;trojan&#34;,&lt;br /&gt;      &#34;settings&#34;: {&lt;br /&gt;        &#34;clients&#34;: [&lt;br /&gt;          {&lt;br /&gt;            &#34;password&#34;: &#34;xxxxxxxx&#34;,&lt;br /&gt;            &#34;flow&#34;: &#34;xtls-rprx-direct&#34;&lt;br /&gt;          }&lt;br /&gt;        ],&lt;br /&gt;        &#34;fallbacks&#34;: [&lt;br /&gt;          {&lt;br /&gt;            &#34;name&#34;: &#34;&lt;a target=&#34;_blank&#34; href=&#34;http://xxxx.com&#34; rel=&#34;nofollow noopener&#34;&gt;xxxx.com&lt;/a&gt;&#34;,&lt;br /&gt;            &#34;alpn&#34;: &#34;&#34;,&lt;br /&gt;            &#34;path&#34;: &#34;/&#34;,&lt;br /&gt;            &#34;dest&#34;: &#34;453&#34;,&lt;br /&gt;            &#34;xver&#34;: 1&lt;br /&gt;          },&lt;br /&gt;          {&lt;br /&gt;            &#34;name&#34;: &#34;&lt;a target=&#34;_blank&#34; href=&#34;http://xxxx.com&#34; rel=&#34;nofollow noopener&#34;&gt;xxxx.com&lt;/a&gt;&#34;,&lt;br /&gt;            &#34;alpn&#34;: &#34;h2&#34;,&lt;br /&gt;            &#34;path&#34;: &#34;&#34;,&lt;br /&gt;            &#34;dest&#34;: &#34;483&#34;,&lt;br /&gt;            &#34;xver&#34;: 1&lt;br /&gt;          },&lt;br /&gt;          {&lt;br /&gt;            &#34;name&#34;: &#34;&#34;,&lt;br /&gt;            &#34;alpn&#34;: &#34;&#34;,&lt;br /&gt;            &#34;path&#34;: &#34;&#34;,&lt;br /&gt;            &#34;dest&#34;: &#34;&lt;a target=&#34;_blank&#34; href=&#34;http://www.bing.com:80&#34; rel=&#34;nofollow noopener&#34;&gt;www.bing.com:80&lt;/a&gt;&#34;,&lt;br /&gt;            &#34;xver&#34;: 0&lt;br /&gt;          }&lt;br /&gt;        ]&lt;br /&gt;      },&lt;br /&gt;      &#34;streamSettings&#34;: {&lt;br /&gt;        &#34;network&#34;: &#34;tcp&#34;,&lt;br /&gt;        &#34;security&#34;: &#34;xtls&#34;,&lt;br /&gt;        &#34;xtlsSettings&#34;: {&lt;br /&gt;          &#34;serverName&#34;: &lt;a target=&#34;_blank&#34; href=&#34;http://xxxx.com&#34; rel=&#34;nofollow noopener&#34;&gt;xxxx.com&lt;/a&gt;&#34;,&lt;br /&gt;          &#34;minVersion&#34;: &#34;1.2&#34;,&lt;br /&gt;          &#34;certificates&#34;: [&lt;br /&gt;            {&lt;br /&gt;              &#34;certificateFile&#34;: &#34;/root/cert.crt&#34;,&lt;br /&gt;              &#34;keyFile&#34;: &#34;/root/private.key&#34;&lt;br /&gt;            }&lt;br /&gt;          ]&lt;br /&gt;        },&lt;br /&gt;        &#34;tcpSettings&#34;: {&lt;br /&gt;          &#34;header&#34;: {&lt;br /&gt;            &#34;type&#34;: &#34;none&#34;&lt;br /&gt;          }&lt;br /&gt;        }&lt;br /&gt;      },&lt;br /&gt;      &#34;tag&#34;: &#34;inbound-443&#34;,&lt;br /&gt;      &#34;sniffing&#34;: {&lt;br /&gt;        &#34;enabled&#34;: true,&lt;br /&gt;        &#34;destOverride&#34;: [&lt;br /&gt;          &#34;http&#34;,&lt;br /&gt;          &#34;tls&#34;&lt;br /&gt;        ]&lt;br /&gt;      }&lt;br /&gt;    },&lt;br /&gt;    {&lt;br /&gt;      &#34;listen&#34;: &#34;127.0.0.1&#34;,&lt;br /&gt;      &#34;port&#34;: 453,&lt;br /&gt;      &#34;protocol&#34;: &#34;trojan&#34;,&lt;br /&gt;      &#34;settings&#34;: {&lt;br /&gt;        &#34;clients&#34;: [&lt;br /&gt;          {&lt;br /&gt;            &#34;password&#34;: &#34;xxxxxxxx&#34;&lt;br /&gt;          }&lt;br /&gt;        ]&lt;br /&gt;      },&lt;br /&gt;      &#34;streamSettings&#34;: {&lt;br /&gt;        &#34;network&#34;: &#34;ws&#34;,&lt;br /&gt;        &#34;wsSettings&#34;: {&lt;br /&gt;          &#34;acceptProxyProtocol&#34;: true,&lt;br /&gt;          &#34;path&#34;: &#34;/&#34;,&lt;br /&gt;          &#34;headers&#34;: {&lt;br /&gt;            &#34;Host&#34;: &#34;&lt;a target=&#34;_blank&#34; href=&#34;http://xxxx.com&#34; rel=&#34;nofollow noopener&#34;&gt;xxxx.com&lt;/a&gt;&#34;&lt;br /&gt;          }&lt;br /&gt;        }&lt;br /&gt;      }&lt;br /&gt;    },&lt;br /&gt;    {&lt;br /&gt;      &#34;listen&#34;: &#34;127.0.0.1&#34;,&lt;br /&gt;      &#34;port&#34;: 483,&lt;br /&gt;      &#34;protocol&#34;: &#34;trojan&#34;,&lt;br /&gt;      &#34;settings&#34;: {&lt;br /&gt;        &#34;clients&#34;: [&lt;br /&gt;          {&lt;br /&gt;            &#34;password&#34;: &#34;xxxxxxxx&#34;&lt;br /&gt;          }&lt;br /&gt;        ]&lt;br /&gt;      },&lt;br /&gt;      &#34;streamSettings&#34;: {&lt;br /&gt;        &#34;network&#34;: &#34;grpc&#34;,&lt;br /&gt;        &#34;grpcSettings&#34;: {&lt;br /&gt;          &#34;serviceName&#34;: &#34;XXX&#34;&lt;br /&gt;        },&lt;br /&gt;        &#34;sockopt&#34;: {&lt;br /&gt;          &#34;acceptProxyProtocol&#34;: true&lt;br /&gt;        }&lt;br /&gt;      }&lt;br /&gt;    }&lt;br /&gt;  ],&lt;br /&gt;  &#34;outbounds&#34;: [&lt;br /&gt;    {&lt;br /&gt;      &#34;protocol&#34;: &#34;freedom&#34;,&lt;br /&gt;      &#34;settings&#34;: {}&lt;br /&gt;    },&lt;br /&gt;    {&lt;br /&gt;      &#34;protocol&#34;: &#34;blackhole&#34;,&lt;br /&gt;      &#34;settings&#34;: {},&lt;br /&gt;      &#34;tag&#34;: &#34;blocked&#34;&lt;br /&gt;    }&lt;br /&gt;  ],&lt;br /&gt;  &#34;transport&#34;: null,&lt;br /&gt;  &#34;policy&#34;: {&lt;br /&gt;    &#34;system&#34;: {&lt;br /&gt;      &#34;statsInboundDownlink&#34;: true,&lt;br /&gt;      &#34;statsInboundUplink&#34;: true&lt;br /&gt;    }&lt;br /&gt;  },&lt;br /&gt;  &#34;api&#34;: {&lt;br /&gt;    &#34;services&#34;: [&lt;br /&gt;      &#34;HandlerService&#34;,&lt;br /&gt;      &#34;LoggerService&#34;,&lt;br /&gt;      &#34;StatsService&#34;&lt;br /&gt;    ],&lt;br /&gt;    &#34;tag&#34;: &#34;api&#34;&lt;br /&gt;  },&lt;br /&gt;  &#34;stats&#34;: {},&lt;br /&gt;  &#34;reverse&#34;: null,&lt;br /&gt;  &#34;fakeDns&#34;: null&lt;br /&gt;}</description>
+      <author>kady</author>
+      <pubDate>17 Sep 2022 04:27:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>如何使用 git 更新远程仓库默认分支？ - git</title>
+      <link>https://www.v2ex.com/t/880780</link>
+      <description>&lt;p&gt;昨天让运维同事帮忙改了一下我们组里一个项目的 git 仓库的默认分支，结果他埋怨说，这么简单的操作，几条 git 命令的事，非得麻烦他。&lt;/p&gt;&#xA;&lt;p&gt;但是通过查阅资料，我仍然没有找到更新远程默认分支的方法，所以烦请 V 站大佬支支招。&lt;/p&gt;&#xA;&lt;p&gt;首先，我知道默认分支由 HEAD 控制，可以用 &lt;code&gt;git symbolic-ref&lt;/code&gt; 修改。但是，截至最新版本的 git ，似乎没有机制可以将 symbolic ref “推送”到远程仓库。&lt;/p&gt;&#xA;&lt;p&gt;像 GitHub 、GitLab 等代码托管平台都在仓库的管理界面提供有修改默认分支的接口，但我们的 git 服务端就是一个普通的 SSH server ，没有任何前端。而且我们也没有服务器的 shell access ，想要登上服务器把远程仓库当作本地仓库一样改，也是不可行的。&lt;/p&gt;&#xA;&lt;p&gt;所以这里想请教一下各位大佬，有没有办法可以做到，在仅使用标准 git 命令的前提下，从本地更新远程仓库的 HEAD ？&lt;/p&gt;&#xA;</description>
+      <author>majula</author>
+      <pubDate>17 Sep 2022 04:22:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>今年这黄牛有点过分了吧，，， - Apple</title>
+      <link>https://www.v2ex.com/t/880778</link>
+      <description>&lt;p&gt;北京，之前还都能点进去几步。然后没货&#xA;今天直接扫到放货的那一秒直接没货&lt;/p&gt;&#xA;&lt;p&gt;Apple store App 也有脚本了吗&lt;/p&gt;&#xA;</description>
+      <author>StefanShenHSC</author>
+      <pubDate>17 Sep 2022 04:15:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>Apple One 美区超大杯，长期自用，可拉群, 两个车位 - Apple</title>
+      <link>https://www.v2ex.com/t/880777</link>
+      <description>&lt;p&gt;为了 fitness+和 tv 新开的美区号，自用，v(base64):ZXRoYW53YW5nc2Y=&#xA;包括 Music ，Arcade ，TV+，News+，Fitness+，iCloud 2T ，目前有一个月的试用期到 9 月 22 ，试用期不收钱，之后 105 一个季度，短期 /白嫖试用勿扰。跳车不退，下车最好能提前一周通知就好！之后大家稳定的话可能考虑半年收一次，我基本不用 icloud ，到时可能一个车位可以多分些 icloud （&amp;gt;333gb 一人)&lt;/p&gt;&#xA;</description>
+      <author>namaste1wang</author>
+      <pubDate>17 Sep 2022 04:15:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>根据简历预测求职者是 junior 还是 senior 水平 - 机器学习</title>
+      <link>https://www.v2ex.com/t/880776</link>
+      <description>&lt;p&gt;今天和老板对话，总感觉哪里不对劲&lt;/p&gt;&#xA;&lt;p&gt;我说，要根据简历预测求职者是 junior 还是 senior level ，我们首先要有现有简历数据让机器去学习什么是 junior 还是 senor 简历&#xA;这个需要人工标记&lt;/p&gt;&#xA;&lt;p&gt;老板说，我们直接写个 python script 去抓取简历关键字，然后把简历 label 成 junior 或者 senior ，然后再让 AI&#xA;去学习&lt;/p&gt;&#xA;&lt;p&gt;我勒了个去&lt;/p&gt;&#xA;&lt;p&gt;既然这个 python script 可以 100%判断简历是 junior 还是 senior 了，还要 AI 干什么&#xA;这么干的话，AI 最好也无非达到这个 python script 的水平而已&lt;/p&gt;&#xA;&lt;p&gt;我总觉得哪里不对劲&lt;/p&gt;&#xA;</description>
+      <author>manyprospect</author>
+      <pubDate>17 Sep 2022 04:15:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>发现 moto 的入门级性价比很高 - Android</title>
+      <link>https://www.v2ex.com/t/880774</link>
+      <description>&lt;p&gt;系统相对干净，g71s 1219 入手 695 的 u 3.1 的闪存 d5 的内存 ，8+128  防抖主摄，120 刷的荧幕。5000 毫安电池。1219 的价格 等两头到手了再看看，估计在做工方面可能不如蓝绿厂&lt;/p&gt;&#xA;</description>
+      <author>ruoyutx</author>
+      <pubDate>17 Sep 2022 04:11:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>微信充值九折无限跳转的一种解决方法 - Apple</title>
+      <link>https://www.v2ex.com/t/880773</link>
+      <description>可能是之前微信绑过其他旧 Apple ID 导致的，我的微信以前是绑过自己英区 iCloud 账户的。&lt;br /&gt;致电 4006668800 ，电话打通以后大概描述一下问题，普通专员大概率是解决不了的，会转高级专员，账户是国区的应该会转国区账户 /商店的高级专员，外区的应该会转到台湾那边的高级专员（我的是这样），验证设备信息以后告知小哥哥 /小姐姐不要解绑支付方式（外区，国区哪怕解绑了重绑也方便一点吧 2333 ），需要解绑相关身份信息，然后等待一会儿即可，普通专员好像不太了解相关问题，只会重复“我们 Apple 不记录身份证 /身份信息”。</description>
+      <author>Gouzhi</author>
+      <pubDate>17 Sep 2022 04:04:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>日产车机 Carplay - 汽车</title>
+      <link>https://www.v2ex.com/t/880771</link>
+      <description>刚提了一辆逍客，但是车机不支持 Carplay ，求问 V 有有没有什么办法解决？</description>
+      <author>SherlockHolmes2</author>
+      <pubDate>17 Sep 2022 03:59:59 +0000</pubDate>
+    </item>
+    <item>
       <title>xfce 的 4k 字体渲染竟然比 win10 看起来都舒服 - Linux</title>
       <link>https://www.v2ex.com/t/880770</link>
       <description>这是为啥？&lt;br /&gt;感觉不科学啊。。。</description>
