@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Python apscheduler 用 RedisJobStore 问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/881093</link>
+      <description>&lt;pre&gt;&lt;code&gt;redis_uri = config.LOCAL_REDIS_URI or config.REDIS_URI&#xA;connection_pool = ConnectionPool.from_url(redis_uri)&#xA;job_store = RedisJobStore(connection_pool=connection_pool)&#xA;job_stores = {&#39;default&#39;: job_store}&#xA;&#xA;scheduler = BlockingScheduler(timezone=&#39;Asia/Shanghai&#39;, jobstores=job_stores)&#xA;&#xA;&#xA;def check_new_job():&#xA;    print(scheduler.get_jobs())&#xA;    with open(&#39;text.txt&#39;, &#39;a+&#39;) as f:&#xA;        f.write(f&#39;{time.time()}\n&#39;)&#xA;&#xA;&#xA;def run():&#xA;    scheduler.add_job(check_new_job, &#39;interval&#39;, seconds=5, id=&#39;job_test2&#39;, next_run_time=datetime.now(),&#xA;                      replace_existing=True)&#xA;&#xA;    scheduler.start()&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如果用默认的 MemoryJobStore 打印跟写入的时间戳都正常&lt;/li&gt;&#xA;&lt;li&gt;用 RedisJobStore 没有打印，文件写没有写入时间戳，redis 是正常的，可以看到 job 写到 redis 了&lt;/li&gt;&#xA;&lt;li&gt;第一次运用会有打印跟写入，5 秒后的下一次运行就没有打印与写入&lt;/li&gt;&#xA;&lt;li&gt;关掉程序，在运行同样没有打印与写入&lt;/li&gt;&#xA;&lt;li&gt;RedisJobStore 为什么没有打印？&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>fangwenxue</author>
+      <pubDate>18 Sep 2022 13:03:27 +0000</pubDate>
+    </item>
+    <item>
       <title>从 iCloud 恢复有没有加速的办法 - iCloud</title>
       <link>https://www.v2ex.com/t/881092</link>
       <description>&lt;p&gt;新 iPhone 选择了从 iCloud 恢复，不算照片，纯 App 数据备份大概 50 个 G 左右，但是 20 小时过去了，大概只恢复了 30 个 G ，占了 15 个 G 的微信一直没好。&lt;/p&gt;&#xA;&lt;p&gt;路由器上看了一下数据统计，主要是 &lt;a href=&#34;http://icloud-content.com.cn&#34; rel=&#34;nofollow&#34;&gt;icloud-content.com.cn&lt;/a&gt; 这个域名在下载，会同时保持有 0~3 个链接左右，速度也就 500Kb ~ 2Mb ，域名的归属 IP 是上海和武汉，比较正常。&lt;/p&gt;&#xA;&lt;p&gt;提问：有没有什么办法能加快 iCloud 的这个恢复速度 ？&lt;/p&gt;&#xA;&lt;p&gt;PS：应该和 DNS ，亮屏，充电没有太大关系，观察了一下，这些操作并不影响 icloud-content 的下载。&lt;/p&gt;&#xA;</description>
