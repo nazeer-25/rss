@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>提问对于低质量高复杂度业务代码逻辑的一根筋治理 - Java</title>
+      <link>https://www.v2ex.com/t/881126</link>
+      <description>&lt;h3&gt;问题前置描述&lt;/h3&gt;&#xA;&lt;p&gt;为了便于表述，函数名字用日常生活举例子。问题都是真实的问题&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class 每日生活 {&#xA;  public Object 吃早饭 {&#xA;  &#x9;检查有没有起床();&#xA;    if (爸妈在家() &amp;amp;&amp;amp; 早饭已经做好()) {&#xA;      真正的吃早饭(); // 封装了一堆选叉子还是筷子，端碗还是拿杯子的细节&#xA;    } else {&#xA;      做饭结果 结果 = 自己做早饭();&#xA;      if (结果.能吃()) {&#xA;        真正的吃早饭();&#xA;      }&#xA;    }&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;今儿个轮到我做上帝，去操纵某个小人，于是实例化了上面这个 class ，上帝我准备发功指挥小人吃早饭。&lt;/p&gt;&#xA;&lt;p&gt;然而一开始就炸了，昨晚上小人喝多，睡了沙发。虽然爸妈在家饭也做好了，因为检查起床的逻辑是依赖于床的，没有考虑沙发，吃饭失败。程序在入口就报错了。&lt;/p&gt;&#xA;&lt;p&gt;折腾一通踩完坑，也修复了一些逻辑以后。这次我学乖了，想先看看代码的逻辑和依赖关系，尝试去理解那些本不应该需要我去理解的问题。&lt;/p&gt;&#xA;&lt;p&gt;光看“爸妈在家()” 并不知道是需要爸妈同时在家，还是只要有一个人在家即可，作为上帝，我也不大明白“爸妈在家”和“早饭做好”的必然联系（为什么？可能因为我家都是爷爷帮忙叫外卖的...）&lt;/p&gt;&#xA;&lt;p&gt;之后，花了一大堆时间去理清中间的逻辑，又加入了爷爷奶奶，外公外婆在家，做饭或者叫外卖的各种检查以及实现。&lt;/p&gt;&#xA;&lt;p&gt;--&lt;/p&gt;&#xA;&lt;h3&gt;总结一下&lt;/h3&gt;&#xA;&lt;p&gt;函数名字并不能如实的反应内在逻辑，即便增加注释也没啥用，而且注释和代码的同步也是个老大难问题，代码审查的人也不是什么时候都认真看代码。&lt;/p&gt;&#xA;&lt;p&gt;每个家庭的人口构成，生活习惯的不一样，会导致简单吃早饭这一件事儿的流程和实现也不一样。&lt;/p&gt;&#xA;&lt;p&gt;过两天这小人结婚了，还得把老婆 /老公一大家子接进来，又是麻烦事儿。&lt;/p&gt;&#xA;&lt;p&gt;--&lt;/p&gt;&#xA;&lt;h3&gt;解决办法&lt;/h3&gt;&#xA;&lt;p&gt;理论上书里都有，但是收到人力，财力，时间的限制，我自己不打算完全的去解决问题，我只想做到能够&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;当问题发生的时候，快速识别问题在哪里&lt;/li&gt;&#xA;&lt;li&gt;不用完整看完代码，能够知道依赖是什么&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;在考虑做一套 annotation ，并且抽象出来一套标签，比如&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;@家庭情况(只支持当事人性别为男，父母同住，父亲不会做饭，母亲会做饭，家里从来不允许叫外卖)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;当然标签可以不止一个，标签也不用考虑到所有情况。我可以增加一些标签间的依赖关系，再加一个小 plugin 去编译这些 annotation 生成文档。甚至于到我这里的特殊情况，我可以安排人肉去检查标签和实际业务逻辑之间是否一致，是否反映了当下最新的业务需求。&lt;/p&gt;&#xA;&lt;p&gt;估计会有人问为啥不用 DDD ，那我就还得再引用上面的“但是收到人力，财力，时间的限制”一遍&lt;/p&gt;&#xA;&lt;p&gt;--&lt;/p&gt;&#xA;&lt;h3&gt;我的问题&lt;/h3&gt;&#xA;&lt;p&gt;其实想看看有没有什么现成好用的轮子。。。&lt;/p&gt;&#xA;</description>
+      <author>AntiGameZ</author>
+      <pubDate>18 Sep 2022 18:52:24 +0000</pubDate>
+    </item>
+    <item>
       <title>ios 14.7.1 越狱，求大佬推荐靠谱的防越狱检测插件 - Apple</title>
       <link>https://www.v2ex.com/t/881123</link>
       <description>丑媳妇终于熬成婆，手持 iPhone 11 ，历时 2 年终于等到能完美越狱的时候［也终于可以实现通话录音的功能］，有 3-4 年没倒腾越狱的事情，严重脱节，求如题的插件，感谢</description>
