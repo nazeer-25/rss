@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教：希望全部 jpg 301 到另外一个域名 - NGINX</title>
+      <link>https://www.v2ex.com/t/881702</link>
+      <description>&lt;p&gt;需求：&lt;a href=&#34;http://A.com&#34; rel=&#34;nofollow&#34;&gt;A.com&lt;/a&gt; 全部图片 301 到 &lt;a href=&#34;http://B.com&#34; rel=&#34;nofollow&#34;&gt;B.com&lt;/a&gt;,例如 &lt;a href=&#34;https://www.a.com/img/499eb411b48c2c1f51832d35441b5fe61527179630.jpg&#34; rel=&#34;nofollow&#34;&gt;https://www.a.com/img/499eb411b48c2c1f51832d35441b5fe61527179630.jpg&lt;/a&gt;&#xA;&lt;a href=&#34;https://cdn1.b.com/img/499eb411b48c2c1f51832d35441b5fe61527179630.jpg&#34; rel=&#34;nofollow&#34;&gt;https://cdn1.b.com/img/499eb411b48c2c1f51832d35441b5fe61527179630.jpg&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Nginx 做如下配置：&#xA;location ~* .(jpg|jpeg) {&#xA;return 301 &lt;a href=&#34;https://cdn1.b.com.cn%241%3B&#34; rel=&#34;nofollow&#34;&gt;https://cdn1.b.com.cn$1;&lt;/a&gt;&#xA;}&lt;/p&gt;&#xA;&lt;p&gt;可是访问： &lt;a href=&#34;https://www.a.com/img/499eb411b48c2c1f51832d35441b5fe61527179630.jpg&#34; rel=&#34;nofollow&#34;&gt;https://www.a.com/img/499eb411b48c2c1f51832d35441b5fe61527179630.jpg&lt;/a&gt;&#xA;为什么变成了 301 到：&#xA;&lt;a href=&#34;https://cdn1.b.com.cn/jpg&#34; rel=&#34;nofollow&#34;&gt;https://cdn1.b.com.cn/jpg&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>idragonet</author>
+      <pubDate>20 Sep 2022 14:41:39 +0000</pubDate>
+    </item>
+    <item>
       <title>如何在子进程的 for 循环中更新 tqdm 进度条 - Python</title>
       <link>https://www.v2ex.com/t/881701</link>
       <description>&lt;p&gt;问题的背景是对于一个大批量的数据，想要分割成多个小批量然后使用多进程的方式进行处理，目前这一步已经实现，现在想加上一个进度条显示总的处理进程，目前调研出的结果都是只能显示每个小批量的完成进度(tqdm 配合 imap),每个小批量数据必须在一个进程内进行处理，不能分开（也就是不能将整个大批量数据直接丢给 imap)&lt;/p&gt;&#xA;&lt;p&gt;举个例子可能更好理解：有 10000 条数据，我想分 10 份 1000 条数据的小批量用 10 个进程进行处理，我想要的效果是[0/10000]这种，而 tqdm 配合 imap 实现效果是[0/10]这种。重点在于 &lt;strong&gt;如何在子进程的 for 循环中更新 tqdm 进度条&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;伪代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def worker(data, pbar):&#xA;&#x9;for i in data:&#xA;    &#x9;print(data)&#xA;        pbar.update(1)&#xA;&#xA;if __name__ == &#34;__main__&#34;:&#xA;&#x9;data = [1]*10000&#xA;    pbar = tqdm.tqdm(10000)&#xA;&#x9;for i in range(0, 10000, 1000):&#xA;    &#x9;p_list.append(Process(target=worker, args=(data[i, i+1000],pbar)))&#xA;        p_list[-1].start()&#xA;    for p in p_list:&#xA;    &#x9;p.jion()&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;希望大佬能指点一下，感谢&lt;/p&gt;&#xA;</description>

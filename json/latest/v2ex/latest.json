@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教：希望全部 jpg 301 到另外一个域名 - NGINX",
+      "Link": "https://www.v2ex.com/t/881702",
+      "Description": "\u003cp\u003e需求：\u003ca href=\"http://A.com\" rel=\"nofollow\"\u003eA.com\u003c/a\u003e 全部图片 301 到 \u003ca href=\"http://B.com\" rel=\"nofollow\"\u003eB.com\u003c/a\u003e,例如 \u003ca href=\"https://www.a.com/img/499eb411b48c2c1f51832d35441b5fe61527179630.jpg\" rel=\"nofollow\"\u003ehttps://www.a.com/img/499eb411b48c2c1f51832d35441b5fe61527179630.jpg\u003c/a\u003e\n\u003ca href=\"https://cdn1.b.com/img/499eb411b48c2c1f51832d35441b5fe61527179630.jpg\" rel=\"nofollow\"\u003ehttps://cdn1.b.com/img/499eb411b48c2c1f51832d35441b5fe61527179630.jpg\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eNginx 做如下配置：\nlocation ~* .(jpg|jpeg) {\nreturn 301 \u003ca href=\"https://cdn1.b.com.cn%241%3B\" rel=\"nofollow\"\u003ehttps://cdn1.b.com.cn$1;\u003c/a\u003e\n}\u003c/p\u003e\n\u003cp\u003e可是访问： \u003ca href=\"https://www.a.com/img/499eb411b48c2c1f51832d35441b5fe61527179630.jpg\" rel=\"nofollow\"\u003ehttps://www.a.com/img/499eb411b48c2c1f51832d35441b5fe61527179630.jpg\u003c/a\u003e\n为什么变成了 301 到：\n\u003ca href=\"https://cdn1.b.com.cn/jpg\" rel=\"nofollow\"\u003ehttps://cdn1.b.com.cn/jpg\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "idragonet",
+      "PubDate": "2022-09-20T14:41:39Z"
+    },
+    {
       "Title": "如何在子进程的 for 循环中更新 tqdm 进度条 - Python",
       "Link": "https://www.v2ex.com/t/881701",
       "Description": "\u003cp\u003e问题的背景是对于一个大批量的数据，想要分割成多个小批量然后使用多进程的方式进行处理，目前这一步已经实现，现在想加上一个进度条显示总的处理进程，目前调研出的结果都是只能显示每个小批量的完成进度(tqdm 配合 imap),每个小批量数据必须在一个进程内进行处理，不能分开（也就是不能将整个大批量数据直接丢给 imap)\u003c/p\u003e\n\u003cp\u003e举个例子可能更好理解：有 10000 条数据，我想分 10 份 1000 条数据的小批量用 10 个进程进行处理，我想要的效果是[0/10000]这种，而 tqdm 配合 imap 实现效果是[0/10]这种。重点在于 \u003cstrong\u003e如何在子进程的 for 循环中更新 tqdm 进度条\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e伪代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003edef worker(data, pbar):\n\tfor i in data:\n    \tprint(data)\n        pbar.update(1)\n\nif __name__ == \"__main__\":\n\tdata = [1]*10000\n    pbar = tqdm.tqdm(10000)\n\tfor i in range(0, 10000, 1000):\n    \tp_list.append(Process(target=worker, args=(data[i, i+1000],pbar)))\n        p_list[-1].start()\n    for p in p_list:\n    \tp.jion()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e希望大佬能指点一下，感谢\u003c/p\u003e\n",
