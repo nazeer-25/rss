@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>受不了某些不让复制的站点，分享个基于 anyproxy 的自用方案 - 分享创造</title>
+      <link>https://www.v2ex.com/t/881665</link>
+      <description>&lt;p&gt;有一个是当年发了 10 几年的文章的站点已经无耻到极点！&#xA;处理方案有很多，正好最近做相关项目用到 anyproxy ，就先用他临时处理。分享下规则，主要是找复制相关的关键词，其他拦截转发工具也可以用。&lt;/p&gt;&#xA;&lt;h3&gt;规则代码&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const replaceList = [&#39;contextmenu &#39;,&#39;contextMenu &#39;, &#39;contextMenu&#39;, &#39;SelectStart&#39;, &#39;selectStart&#39;, &#39;selectstart&#39;,&#39;dragstart&#39;, &#39;onCopy&#39;, &#39;user-select&#39;, &#39;keypress&#39;, &#39;mousedown&#39;, &#39;keydown&#39;, &#39;keyup&#39;, &#39;keyCode&#39;, &#39;KeyCode&#39;, &#39;which&#39;, &#39;copy&#39;]&#xA;const replaceCssList = [&#39;xxx&#39;]&#xA;&#xA;module.exports={&#xA;&#x9;*beforeSendResponse(requestDetail,responseDetail) {&#xA;&#x9;&#x9;const url = requestDetail.url &#xA;&#xA;&#x9;&#x9;if(url.indexOf(&#39;我发了文章，不登录自己都不能复制！那些 xx 网站&#39;) &amp;gt; 0 ) {&#xA;&#x9;&#x9;&#x9;const contype = responseDetail.response.header[&#39;Content-Type&#39;]&#xA;&#x9;&#x9;&#x9;console.log(&#39;isHtml:::::::&#39;, contype);&#xA;&#x9;&#x9;&#x9;const isHtml = contype.indexOf(&#39;html&#39;) &amp;gt; -1&#xA;&#x9;&#x9;&#x9;const isJs = contype.indexOf(&#39;javascript&#39;) &amp;gt; -1&#xA;&#x9;&#x9;&#x9;console.log(&#39;js =&amp;gt;&#39;, url);&#xA;&#x9;&#x9;&#x9;const newResponse = responseDetail.response;&#xA;&#xA;&#x9;&#x9;&#x9;if(isJs){&#xA;&#x9;&#x9;&#x9;&#x9;// newResponse.body +=&#39;-- AnyProxy Hacked! --&#39;;&#xA;&#x9;&#x9;&#x9;&#x9;newResponse.body +=&#39;&#39;;&#xA;&#x9;&#x9;&#x9;&#x9;replaceList.map(s =&amp;gt; {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;console.log(&#39;替换 js=&amp;gt;&#39;, s, url);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;const ns = new RegExp(s, &#39;ig&#39;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;newResponse.body = newResponse.body.replace(ns, &#39;_fk_&#39; + s)&#xA;&#x9;&#x9;&#x9;&#x9;})&#xA;&#x9;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;&#x9;if(url.substr(url.length-3, 3) == &#39;css&#39; || isHtml) {&#xA;&#x9;&#x9;&#x9;&#x9;console.log(&#39;?????&#39;, newResponse.body.toString());&#xA;&#x9;&#x9;&#x9;&#x9;replaceCssList.map(s =&amp;gt; {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;const ns = new RegExp(s, &#39;ig&#39;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;newResponse.body = newResponse.body.toString().replace(ns, &#39;&#39;) &#xA;&#x9;&#x9;&#x9;&#x9;})&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;return new Promise((resolve,reject)=&amp;gt;{&#xA;&#x9;&#x9;&#x9;&#x9;resolve({ response:newResponse });&#xA;&#xA;      });&#xA;    }&#xA; }&#xA;&#xA;};&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;跑起来&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;anyproxy -i --rule 脚本文件&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;SwitchyOmega 走起&lt;/h3&gt;&#xA;&lt;h3&gt;其他玩法&lt;/h3&gt;&#xA;&lt;p&gt;自己弄个服务器挂上去&lt;/p&gt;&#xA;</description>
+      <author>simo</author>
+      <pubDate>20 Sep 2022 10:42:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>求个 html 写法 - 程序员</title>
+      <link>https://www.v2ex.com/t/881664</link>
+      <description>&lt;p&gt;浏览器显示成如下，“复制”是按钮且不换行，只复制 1.1.1.1&lt;/p&gt;&#xA;&lt;p&gt;ip 地址是 1.1.1.1 复制&lt;/p&gt;&#xA;</description>
+      <author>fengchen0vr</author>
+      <pubDate>20 Sep 2022 10:38:29 +0000</pubDate>
+    </item>
+    <item>
       <title>求 PC 主机配置推荐 - 问与答</title>
       <link>https://www.v2ex.com/t/881663</link>
       <description>&lt;p&gt;用来开 5 个虚拟机搞 k8s 用，不玩游戏&lt;/p&gt;&#xA;</description>
