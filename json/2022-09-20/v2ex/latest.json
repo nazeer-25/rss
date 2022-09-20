@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "2.5G 光猫棒+2.5G 软路由顺利突破千兆 - 问与答",
+      "Link": "https://www.v2ex.com/t/881667",
+      "Description": "老房子，超五类的网线。\u003cbr /\u003e\u003cbr /\u003e光猫棒和破解服务都是在某鱼买的，加上 HN8145XR 的破解服务，一共花费 300 来块。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/pPBrC0w.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/pPBrC0w.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/X1bnfIS.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/X1bnfIS.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e",
+      "Author": "xlsepiphone",
+      "PubDate": "2022-09-20T10:52:24Z"
+    },
+    {
+      "Title": "求助， xdm，有没有懂点人事的 xd 帮我分析一下这个靠不靠谱 - 酷工作",
+      "Link": "https://www.v2ex.com/t/881666",
+      "Description": "\u003cp\u003e上周面试的一家公司，突然打电话说通过了，因为之前成都疫情都是线上面试让我明天可以去公司看看环境然后考虑要不要入职，福利待遇这些都很满足我的期望，但是说到合同的时候说由于他们公司的 hc 没有位置了，所以签合同是和另外两个公司里面选一个签，然后说签一年签三年都行，让我最好签一年后面好方便重新跟他们公司签，但是这个形式我感觉就是外包的形式啊，感觉好坑啊，有没有懂这方面的老哥帮我判断一下这种稳不稳啊，我明天先去现场看看环境如何，主要最近收到的 offer 确实都不太合我的心意，让我开始有些着急了\u003c/p\u003e\n",
+      "Author": "fueen",
+      "PubDate": "2022-09-20T10:51:29Z"
+    },
+    {
       "Title": "受不了某些不让复制的站点，分享个基于 anyproxy 的自用方案 - 分享创造",
       "Link": "https://www.v2ex.com/t/881665",
       "Description": "\u003cp\u003e有一个是当年发了 10 几年的文章的站点已经无耻到极点！\n处理方案有很多，正好最近做相关项目用到 anyproxy ，就先用他临时处理。分享下规则，主要是找复制相关的关键词，其他拦截转发工具也可以用。\u003c/p\u003e\n\u003ch3\u003e规则代码\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003econst replaceList = ['contextmenu ','contextMenu ', 'contextMenu', 'SelectStart', 'selectStart', 'selectstart','dragstart', 'onCopy', 'user-select', 'keypress', 'mousedown', 'keydown', 'keyup', 'keyCode', 'KeyCode', 'which', 'copy']\nconst replaceCssList = ['xxx']\n\nmodule.exports={\n\t*beforeSendResponse(requestDetail,responseDetail) {\n\t\tconst url = requestDetail.url \n\n\t\tif(url.indexOf('我发了文章，不登录自己都不能复制！那些 xx 网站') \u0026gt; 0 ) {\n\t\t\tconst contype = responseDetail.response.header['Content-Type']\n\t\t\tconsole.log('isHtml:::::::', contype);\n\t\t\tconst isHtml = contype.indexOf('html') \u0026gt; -1\n\t\t\tconst isJs = contype.indexOf('javascript') \u0026gt; -1\n\t\t\tconsole.log('js =\u0026gt;', url);\n\t\t\tconst newResponse = responseDetail.response;\n\n\t\t\tif(isJs){\n\t\t\t\t// newResponse.body +='-- AnyProxy Hacked! --';\n\t\t\t\tnewResponse.body +='';\n\t\t\t\treplaceList.map(s =\u0026gt; {\n\t\t\t\t\tconsole.log('替换 js=\u0026gt;', s, url);\n\t\t\t\t\tconst ns = new RegExp(s, 'ig')\n\t\t\t\t\tnewResponse.body = newResponse.body.replace(ns, '_fk_' + s)\n\t\t\t\t})\n\t\t\t}\n\n\t\t\tif(url.substr(url.length-3, 3) == 'css' || isHtml) {\n\t\t\t\tconsole.log('?????', newResponse.body.toString());\n\t\t\t\treplaceCssList.map(s =\u0026gt; {\n\t\t\t\t\tconst ns = new RegExp(s, 'ig')\n\t\t\t\t\tnewResponse.body = newResponse.body.toString().replace(ns, '') \n\t\t\t\t})\n\t\t\t}\n\t\t\treturn new Promise((resolve,reject)=\u0026gt;{\n\t\t\t\tresolve({ response:newResponse });\n\n      });\n    }\n }\n\n};\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e跑起来\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003eanyproxy -i --rule 脚本文件\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003eSwitchyOmega 走起\u003c/h3\u003e\n\u003ch3\u003e其他玩法\u003c/h3\u003e\n\u003cp\u003e自己弄个服务器挂上去\u003c/p\u003e\n",
