@@ -89,7 +89,7 @@
     },
     {
       "Title": "go 互斥锁和自旋锁的性能对比的问题",
-      "Link": "https://studygolang.com/topics/15763#reply11",
+      "Link": "https://studygolang.com/topics/15763#reply12",
       "Description": "\u003cp\u003e最近需要做一个本地缓存的需求，缓存数据从 redis 读取\n遂考虑到在大量并发的情况下，减少 go 协程切换的消耗，考虑用自旋锁来实现\u003c/p\u003e\n\n\u003cp\u003e大概的思路是：\n- 大量并发请求\n- 自旋锁上锁\n\t- 放一个 goroutine 去 redis 读取数据到本地缓存\n\t- 其他 goroutine 原地自旋等待缓存数据\n- 读取的协程读取到数据之后解锁\u003c/p\u003e\n\n\u003cp\u003e但是我经过实际测试，发现用自旋锁的速度和用互斥锁的速度要差1~2个数量级，遂很不理解\u003c/p\u003e\n\n\u003cp\u003e之后我经过大量测试发现：\n- 自旋锁在 本地操作（值自增），阻塞操作（sleep 或者 channel recv）时，性能高于互斥锁\n- 在 HTTP 操作时性能和互斥锁相当\n- 在通过 \u0026ldquo;github.com/go-redis/redis/v8\u0026rdquo; 操作 redis 获取数据时，自旋锁的性能和互斥锁要差1个数量级\u003c/p\u003e\n\n\u003cp\u003e不知道是否有大佬可以解答一番？不吝赐教\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/Mericusta/go-foo/tree/main/src/sync-foo\"\u003e测试代码在这里\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -175,6 +175,13 @@
       "Title": "通过浏览器连接docker容器",
       "Link": "https://studygolang.com/articles/31549#reply1",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go 互斥锁和自旋锁的性能对比的问题",
+      "Link": "https://studygolang.com/topics/15763#reply11",
+      "Description": "\u003cp\u003e最近需要做一个本地缓存的需求，缓存数据从 redis 读取\n遂考虑到在大量并发的情况下，减少 go 协程切换的消耗，考虑用自旋锁来实现\u003c/p\u003e\n\n\u003cp\u003e大概的思路是：\n- 大量并发请求\n- 自旋锁上锁\n\t- 放一个 goroutine 去 redis 读取数据到本地缓存\n\t- 其他 goroutine 原地自旋等待缓存数据\n- 读取的协程读取到数据之后解锁\u003c/p\u003e\n\n\u003cp\u003e但是我经过实际测试，发现用自旋锁的速度和用互斥锁的速度要差1~2个数量级，遂很不理解\u003c/p\u003e\n\n\u003cp\u003e之后我经过大量测试发现：\n- 自旋锁在 本地操作（值自增），阻塞操作（sleep 或者 channel recv）时，性能高于互斥锁\n- 在 HTTP 操作时性能和互斥锁相当\n- 在通过 \u0026ldquo;github.com/go-redis/redis/v8\u0026rdquo; 操作 redis 获取数据时，自旋锁的性能和互斥锁要差1个数量级\u003c/p\u003e\n\n\u003cp\u003e不知道是否有大佬可以解答一番？不吝赐教\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/Mericusta/go-foo/tree/main/src/sync-foo\"\u003e测试代码在这里\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },

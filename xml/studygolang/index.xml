@@ -63,7 +63,7 @@
     </item>
     <item>
       <title>go 互斥锁和自旋锁的性能对比的问题</title>
-      <link>https://studygolang.com/topics/15763#reply11</link>
+      <link>https://studygolang.com/topics/15763#reply12</link>
       <description>&lt;p&gt;最近需要做一个本地缓存的需求，缓存数据从 redis 读取&#xA;遂考虑到在大量并发的情况下，减少 go 协程切换的消耗，考虑用自旋锁来实现&lt;/p&gt;&#xA;&#xA;&lt;p&gt;大概的思路是：&#xA;- 大量并发请求&#xA;- 自旋锁上锁&#xA;&#x9;- 放一个 goroutine 去 redis 读取数据到本地缓存&#xA;&#x9;- 其他 goroutine 原地自旋等待缓存数据&#xA;- 读取的协程读取到数据之后解锁&lt;/p&gt;&#xA;&#xA;&lt;p&gt;但是我经过实际测试，发现用自旋锁的速度和用互斥锁的速度要差1~2个数量级，遂很不理解&lt;/p&gt;&#xA;&#xA;&lt;p&gt;之后我经过大量测试发现：&#xA;- 自旋锁在 本地操作（值自增），阻塞操作（sleep 或者 channel recv）时，性能高于互斥锁&#xA;- 在 HTTP 操作时性能和互斥锁相当&#xA;- 在通过 &amp;ldquo;github.com/go-redis/redis/v8&amp;rdquo; 操作 redis 获取数据时，自旋锁的性能和互斥锁要差1个数量级&lt;/p&gt;&#xA;&#xA;&lt;p&gt;不知道是否有大佬可以解答一番？不吝赐教&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/Mericusta/go-foo/tree/main/src/sync-foo&#34;&gt;测试代码在这里&lt;/a&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
@@ -123,6 +123,11 @@
     <item>
       <title>通过浏览器连接docker容器</title>
       <link>https://studygolang.com/articles/31549#reply1</link>
+    </item>
+    <item>
+      <title>go 互斥锁和自旋锁的性能对比的问题</title>
+      <link>https://studygolang.com/topics/15763#reply11</link>
+      <description>&lt;p&gt;最近需要做一个本地缓存的需求，缓存数据从 redis 读取&#xA;遂考虑到在大量并发的情况下，减少 go 协程切换的消耗，考虑用自旋锁来实现&lt;/p&gt;&#xA;&#xA;&lt;p&gt;大概的思路是：&#xA;- 大量并发请求&#xA;- 自旋锁上锁&#xA;&#x9;- 放一个 goroutine 去 redis 读取数据到本地缓存&#xA;&#x9;- 其他 goroutine 原地自旋等待缓存数据&#xA;- 读取的协程读取到数据之后解锁&lt;/p&gt;&#xA;&#xA;&lt;p&gt;但是我经过实际测试，发现用自旋锁的速度和用互斥锁的速度要差1~2个数量级，遂很不理解&lt;/p&gt;&#xA;&#xA;&lt;p&gt;之后我经过大量测试发现：&#xA;- 自旋锁在 本地操作（值自增），阻塞操作（sleep 或者 channel recv）时，性能高于互斥锁&#xA;- 在 HTTP 操作时性能和互斥锁相当&#xA;- 在通过 &amp;ldquo;github.com/go-redis/redis/v8&amp;rdquo; 操作 redis 获取数据时，自旋锁的性能和互斥锁要差1个数量级&lt;/p&gt;&#xA;&#xA;&lt;p&gt;不知道是否有大佬可以解答一番？不吝赐教&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/Mericusta/go-foo/tree/main/src/sync-foo&#34;&gt;测试代码在这里&lt;/a&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>go 互斥锁和自旋锁的性能对比的问题</title>
