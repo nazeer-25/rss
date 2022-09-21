@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>问一下大家要想成为架构师需要掌握什么技能？ - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/881946</link>
+      <description>&lt;p&gt;这几天 app 老是转圈（ tornado 开发）领导天天问我咱们架构行不行，要不要换语言重构。&#xA;我认为的后端架构不就是懂这些吗：&#xA;k8s+docker+nginx+supervisor+gunicorn+ansible 部署项目&#xA;python 、go  开发项目&#xA;redis 、rabbitmq 队列&#xA;mysql 、pg 、elk 、cassandra 数据库&#xA;etcd  配置中心&lt;/p&gt;&#xA;&lt;p&gt;还有什么是我需要掌握的？&#xA;（其实我觉的我欠缺的是系统的业务架构：比如 分库分表、分布式事务、内存、cpu 的调优上。）&#xA;.....&lt;/p&gt;&#xA;&lt;p&gt;其实我们的并发不太大，但是就是数据量大了，以前写的慢查询比较多。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;nginx 错误日志：recv() failed (104: Connection reset by peer)&#xA;&#xA;nginx 配置如下：&#xA;upstream doctor_up {&#xA;   server 127.0.0.1:8400;&#xA;   server 127.0.0.1:8401;&#xA;   server 127.0.0.1:8402;&#xA;   server 127.0.0.1:8403;&#xA;   server 127.0.0.1:8404;&#xA;&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;找了两天发现，nginx 打印错误都是在同一个端口上。而且顺着错误往上找在之前都会出现好几个请求访问时间 30s 左右。怀疑是不是写入数据的时候锁表，导致查询卡住，然后后台服务端口堵塞。nginx RST 连接 close 。&#xA;============= [ pad ] 转圈问题处理方案===========&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;[后端]  nginx 连接数调高、buffer 缓存调大、keepalive 加了长连接&lt;/li&gt;&#xA;&lt;li&gt;[后端] 增加后台服务进程数&lt;/li&gt;&#xA;&lt;li&gt;[后端] 慢接口进行读写分离优化（分析错误日志，找到转圈时刻慢接口）&lt;/li&gt;&#xA;&lt;li&gt;[后端] 增加自动访问接口提醒功能(每分钟)&lt;/li&gt;&#xA;&lt;li&gt;[后端] 增加了调第三方服务超时时间&lt;/li&gt;&#xA;&lt;li&gt;[前端] 优化了超时时间 30 秒改 10 秒&lt;/li&gt;&#xA;&lt;li&gt;[前端] 优化了页面快速切换的重复请求&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>longmeier90</author>
+      <pubDate>21 Sep 2022 09:59:11 +0000</pubDate>
+    </item>
+    <item>
       <title>clash 突然访问 edge Visited Links - 问与答</title>
       <link>https://www.v2ex.com/t/881945</link>
       <description>&lt;ul&gt;&#xA;&lt;li&gt;火绒拦截:&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;火绒拦截&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/XAvX2Af.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;版本号:&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;版本&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/5Ag7h9P.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;用了一段时间都没发现 clash 访问过这个文件目录，今天第一次看到，不是很明白，这个工具软件，访问 visited links 的必要性&lt;/h3&gt;&#xA;</description>
