@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>输入法问题 - 输入法</title>
+      <link>https://www.v2ex.com/t/881948</link>
+      <description>不是程序员所以不太了解这方面原理。&lt;br /&gt;使用的 Windows10 系统，系统有两个输入法：自带微软输入法和搜狗输入法。&lt;br /&gt;请问使用微软自带输入法输入内容的时候，搜狗输入法会检测到我输入了什么吗？ [就是我现在使用微软输入法打字，但系统中安装了搜狗输入法，搜狗输入法会检测到我输入了什么吗] &lt;br /&gt;之前看到过输入法泄露隐私之类的帖子，大多都对国内商业公司的输入法隐私问题表示担忧，推荐使用小狼毫、自带输入法、谷歌输入法之类的。不过我还是对商业公司提供的输入法的联想功能还是比较依赖的，想要隐私和方便兼顾。打算日常聊天搜索之类的使用自带输入法；需要打文章之类的使用搜狗输入法。</description>
+      <author>Skeleies</author>
+      <pubDate>21 Sep 2022 10:13:54 +0000</pubDate>
+    </item>
+    <item>
       <title>问一下大家要想成为架构师需要掌握什么技能？ - Go 编程语言</title>
       <link>https://www.v2ex.com/t/881946</link>
       <description>&lt;p&gt;这几天 app 老是转圈（ tornado 开发）领导天天问我咱们架构行不行，要不要换语言重构。&#xA;我认为的后端架构不就是懂这些吗：&#xA;k8s+docker+nginx+supervisor+gunicorn+ansible 部署项目&#xA;python 、go  开发项目&#xA;redis 、rabbitmq 队列&#xA;mysql 、pg 、elk 、cassandra 数据库&#xA;etcd  配置中心&lt;/p&gt;&#xA;&lt;p&gt;还有什么是我需要掌握的？&#xA;（其实我觉的我欠缺的是系统的业务架构：比如 分库分表、分布式事务、内存、cpu 的调优上。）&#xA;.....&lt;/p&gt;&#xA;&lt;p&gt;其实我们的并发不太大，但是就是数据量大了，以前写的慢查询比较多。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;nginx 错误日志：recv() failed (104: Connection reset by peer)&#xA;&#xA;nginx 配置如下：&#xA;upstream doctor_up {&#xA;   server 127.0.0.1:8400;&#xA;   server 127.0.0.1:8401;&#xA;   server 127.0.0.1:8402;&#xA;   server 127.0.0.1:8403;&#xA;   server 127.0.0.1:8404;&#xA;&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;找了两天发现，nginx 打印错误都是在同一个端口上。而且顺着错误往上找在之前都会出现好几个请求访问时间 30s 左右。怀疑是不是写入数据的时候锁表，导致查询卡住，然后后台服务端口堵塞。nginx RST 连接 close 。&#xA;============= [ pad ] 转圈问题处理方案===========&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;[后端]  nginx 连接数调高、buffer 缓存调大、keepalive 加了长连接&lt;/li&gt;&#xA;&lt;li&gt;[后端] 增加后台服务进程数&lt;/li&gt;&#xA;&lt;li&gt;[后端] 慢接口进行读写分离优化（分析错误日志，找到转圈时刻慢接口）&lt;/li&gt;&#xA;&lt;li&gt;[后端] 增加自动访问接口提醒功能(每分钟)&lt;/li&gt;&#xA;&lt;li&gt;[后端] 增加了调第三方服务超时时间&lt;/li&gt;&#xA;&lt;li&gt;[前端] 优化了超时时间 30 秒改 10 秒&lt;/li&gt;&#xA;&lt;li&gt;[前端] 优化了页面快速切换的重复请求&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
