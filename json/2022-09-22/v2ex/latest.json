@@ -4,6 +4,69 @@
   "Description": "",
   "Items": [
     {
+      "Title": "WSL2 现已支持 Systemd - Windows",
+      "Link": "https://www.v2ex.com/t/882117",
+      "Description": "\u003cp\u003e根据微软的官方博客： \u003ca href=\"https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl\" rel=\"nofollow\"\u003ehttps://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl\u003c/a\u003e ，在最新版的 WSL2 中已经支持了 Systemd ，升级的方法如下（以 Windows 商店内的 Ubuntu 发行版为例，Windows 版本为 Windows 11 22H2 ）：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e更新 WSL 版本：\u003ccode\u003ewsl.exe --update\u003c/code\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e查看 WSL 版本：\u003ccode\u003ewsl.exe --version\u003c/code\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e如果第一行显示为 \u003ccode\u003eWSL version: 0.67.6.0\u003c/code\u003e ，则已升级到支持 systemd 的版本\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e设置 systemd 开机自启（在 Linux 内执行以下命令）：\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003esudo cat \u0026gt; /etc/wsl.conf \u0026lt;\u0026lt;EOF\n[boot]\nsystemd=true\nEOF\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e退出 Linux 子系统，并关闭 WSL：\u003ccode\u003ewsl.exe --shutdown\u003c/code\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e重新进入 WSL ，输入 \u003ccode\u003esystemctl list-unit-files --type=service\u003c/code\u003e ，即可检验 systemd 的运行状态\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "charlieethan",
+      "PubDate": "2022-09-22T04:36:06Z"
+    },
+    {
+      "Title": "脚本弄到集群上？？ - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/882116",
+      "Description": "\u003cp\u003e各位大哥，部门打算把脚本（ go 的脚本，死循环处理数据，现在在单台机器上）弄到 k8s 上，不知道各位大哥有什么方案推荐不？\u003c/p\u003e\n",
+      "Author": "yadoT",
+      "PubDate": "2022-09-22T04:36:02Z"
+    },
+    {
+      "Title": "iPhone 14 Pro 深空黑色北京王府井 9.23 - iPhone",
+      "Link": "https://www.v2ex.com/t/882115",
+      "Description": "刚抢到一台，有没有需要的，周五取货，+200 出。\u003cbr /\u003e我坐地铁去王府井来回要俩小时，纯属慈善帮忙抢了。",
+      "Author": "hfl1995",
+      "PubDate": "2022-09-22T04:34:56Z"
+    },
+    {
+      "Title": "最近几天我开发了一个可以让 2 台机一起编译 Linux 内核的程序，不知道能不能骗到一些 star - Linux",
+      "Link": "https://www.v2ex.com/t/882114",
+      "Description": "\u003cp\u003e我开发这个项目的主要目的就是为了缩减我编译内核时要等待的时间，我觉得使用效果还不错所以就添加了一些使用说明希望也能对其他人有用。\u003c/p\u003e\n\u003cp\u003e项目链接： \u003ca href=\"https://github.com/donglisi/kerncc\" rel=\"nofollow\"\u003ehttps://github.com/donglisi/kerncc\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e以下复制自我的 \u003ca href=\"http://README.md\" rel=\"nofollow\"\u003eREADME.md\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e研究 Linux 内核的 Kbuild 系统让我发现一件有趣的事，Linux 内核的 Makefile 有一个名为 parpare0 的规则，这个规则执行后就生成了编译绝大多数 c 语言源代码文件的所需的头文件，而且 Linux 内核的 Makefile 生成的编译器命令行参数非常容易用程序去解析，于是我开发了这个项目来缩短我编译内核的时间。\u003c/p\u003e\n\u003cp\u003e这个程序支持用 2 台机一起编译 Linux 内核，kerncc 是编译器的包装器，kernccd 是接收编译任务的守护进程。\u003c/p\u003e\n\u003cp\u003e原理：\u003c/p\u003e\n\u003cp\u003e1,一台机用来执行 make 正常构建内核，另一台机仅仅负责生成可重定向目标文件，源代码和.config 需要在两台机的相同目录各拷贝一份，通过网络传输编译器命令行以及回传编译结果。\u003c/p\u003e\n\u003cp\u003e2, 正常编译的那台机通过设置内核 Makefile 的参数 CC 来指定编译器为 kerncc ，还需要设置 KERNCC_IP 环境变量来指定 kernccd 的 ip 地址，kerncc 默认会将 PATH 中的名为 gcc 的文件作为编译器，设置环境变量 KERNCC_CC 可以指定 kerncc 所使用的编译器。\u003c/p\u003e\n\u003cp\u003e3, 内核的 Makefile 有一个名为 parpare0 的规则，这个规则生成一些必要的头文件，在另一台机上执行 make parpare0 后就可以开始接收编译任务，当.config 修改后需要重新执行这一步。\u003c/p\u003e\n\u003cp\u003e4, kerncc 解析传给编译器的参数，如果是编译 c 语言源代码源文件的命令就允许分发到另一台机去编译，否则直接 exec 调用本机的编译器，是否分发到远程取决于文件的大小和一个随机数，小于一定的大小就直接在本机编译（默认是小于 1000 ，通过设置 KERNCC_SIZE 环境变量可以修改这个值），随机数用来进行负载均衡（每个 kerncc 进程都会生成一个大小在 0 到 100 之间的随机数，默认是大于 50 就分发到远程编译，可以通过设置环境变量 KERNCC_BALANCE 来更改这个值）。\u003c/p\u003e\n\u003cp\u003e5, 另一台机编译成功后会把 gcc 生成的.o 文件（可重定向目标文件）和.d 文件（用来记录有那些依赖的头文件）回传到正常编译的那台机。\u003c/p\u003e\n\u003cp\u003e6, kerncc 如果遇到连接不上 kernccd 或在另一台机上遇到编译报错或等待编译结果的过程中 kernccd 被异常终止等异常情况，就会在正常编译的这台机上重新执行一下同样的命令。\u003c/p\u003e\n\u003cp\u003e特性：\u003c/p\u003e\n\u003cp\u003e1, 因为 make 的过程中会生成一些.h 和.c 文件，这些文件只存在于正常编译的那台机上，这些生成的 c 源代码文件和依赖这些文件的 c 源代码文件无法在另一台机上编译，kernccd 遇到编译报错的情况时会把编译报错的 c 源代码文件的路径打印出来，可以将 kernccd 的输出保存到正常编译的那台机的编译输出目录下的名为 files 的文件中，kerncc 会读取这个 files 文件，这样下次编译时如果匹配到就直接在本地编译，节省了分发到远程编译的时间。不过需要注意的是编译报错也有可能是其他原因引起的，比如 2 台机的源代码不同步或代码错误，需要人工来判断具体的报错的原因。\u003c/p\u003e\n\u003cp\u003e2, 支持交叉编译其他体系结构的内核，比如要为 aarch64 架构编译内核，只需要在 make 前加上 KERNCC_CC=/usr/bin/aarch64-linux-gnu-gcc 就可以，完整的命令行类似这样：\u003c/p\u003e\n\u003cp\u003eKERNCC_CC=/usr/bin/aarch64-linux-gnu-gcc make -j56 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CC=kerncc O=build\u003c/p\u003e\n\u003cp\u003e3, 相较于 distcc 有非常好的资源利用率，distcc 是把预处理后的文件分发到远程去编译再回传编译结果，因为预处理后的文件的体积比较大，所耗费的网络和存储资源较高，性能较差，kerncc 在设置合理的 KERNCC_SIZE 和 KERNCC_BALANCE 以及 make -j 并行任务数的情况下，几乎可以榨干两台机的 cpu 。\u003c/p\u003e\n\u003cp\u003e演示：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.youtube.com/watch?v=cUZPV_Kygwc\" rel=\"nofollow\"\u003ehttps://www.youtube.com/watch?v=cUZPV_Kygwc\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e这个视频演示了用 2 台机一起编译可以用来启动我的台式机的内核的效果，develop 这台机用来执行 make ，处理器为 3700X ，desktop 这台机运行 kernccd ，处理器为 5600X ，这 2 台机一起编译耗时 2 分钟（如果只用 3700X 这台机编译的话耗时是 3 分钟）。\u003c/p\u003e\n\u003cp\u003e右上角的小窗口运行 kernccd ，输出的是遇到编译报错的源代码文件的路径，这个小窗口下面的小窗口运行着 nload ，用来监控编译过程中的网络流量。\u003c/p\u003e\n\u003cp\u003e右下角的 2 个小窗口是 sysstat 包中的 sar 命令的格式化过的输出，最左边一列的数值越高表明越多的 cpu 时间用在实际的编译任务上，最右边的一列数字越高表明越多的 cpu 时间被浪费在运行空闲任务上。\u003c/p\u003e\n",
+      "Author": "qemu32",
+      "PubDate": "2022-09-22T04:33:13Z"
+    },
+    {
+      "Title": "Google 定位到泰国怎么办？ - Google",
+      "Link": "https://www.v2ex.com/t/882113",
+      "Description": "\u003cp\u003eip 是洛杉矶的，但每次搜索都是泰国的结果，搜索页面下方显示：\u003c/p\u003e\n\u003cp\u003eThailand | Los Angeles CA, California, USA - Based on your past activity\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eUpdate location\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e每个搜索结果的时间都是佛教历的。。。\u003c/p\u003e\n\u003cp\u003e反馈了也不管用，开启了 Fake Location 也没用\u003c/p\u003e\n",
+      "Author": "qviqvi",
+      "PubDate": "2022-09-22T04:31:24Z"
+    },
+    {
+      "Title": "没完没了的争论 - 程序员",
+      "Link": "https://www.v2ex.com/t/882112",
+      "Description": "\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://user-images.githubusercontent.com/71636191/191658147-e37b467b-f786-414a-abfe-62315894d99b.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "opentrade",
+      "PubDate": "2022-09-22T04:25:13Z"
+    },
+    {
+      "Title": "Wasmtime 1.0 正式发布：快速、安全、可用于生产环境 - 分享发现",
+      "Link": "https://www.v2ex.com/t/882111",
+      "Description": "\u003cp\u003e历经三年开发，Bytecode Alliance （字节码联盟）宣布 \u003ca href=\"https://github.com/bytecodealliance/wasmtime\" rel=\"nofollow\"\u003eWebAssembly runtime\u003c/a\u003e —— Wasmtime 1.0 正式发布，并可用于生产环境。\u003c/p\u003e\n\u003cp\u003eWasmtime 是 Bytecode Alliance 开发的 WebAssembly runtime ，采用 Rust 编写，构建于编译器 Cranelift 之上。Wasmtime 完全开源，符合 WASI 标准，还支持与 C/C++、Python 、.NET 、Go 和其他编程语言集成，可运行在 Windows/Linux/macOS 等平台。\u003c/p\u003e\n\u003cp\u003eShopify 已经在他们的生产环境使用 Wasmtime 长达 14 个月。Shopify 于 2021 年 7 月从另一个 WebAssembly 引擎切换到 Wasmtime 。切换后，Shopify 的平均执行性能提升了大约 50%。Fastly 于 2022 年 3 月从另一个 WebAssembly 引擎切换到 Wasmtime 。切换后，Fastly 的执行时间优化了大约 50%。此外，Fastly 每秒请求数的增加幅度从 72% 到 163% 不等。Fastly 还使用 Wasmtime 处理了数万亿个请求...\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://t.me/kejiqu/320\" rel=\"nofollow\"\u003e转自\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "IBMall",
+      "PubDate": "2022-09-22T04:21:54Z"
+    },
+    {
+      "Title": "TikTok LIVE 国际化直播数据 BP 热招岗位 - 酷工作",
+      "Link": "https://www.v2ex.com/t/882110",
+      "Description": "\u003ch1\u003e背景信息\u003c/h1\u003e\n\u003cp\u003eTikTok LIVE 业务一路高歌猛进，业务表现持续超出预期，发展空间非常具有想象力。国际化直播数据 BP 团队致力于构建完善的数据体系，探索和落地基于业务场景的数据解决方案，为业务的发展持续赋能。目前我们在国内北京、深圳，以及新加坡皆有 Base ，欢迎各路英雄好汉加入，一起做大事！\u003c/p\u003e\n\u003ch2\u003e[国际化直播] 数仓研发工程师（实时 /离线）\u003c/h2\u003e\n\u003ch3\u003e职位描述\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e负责国际化直播业务的离线与实时数据仓库的构建，如数据模型的设计，ETL 实施，性能优化以及相关技术问题的解决。\u003c/li\u003e\n\u003cli\u003e深入业务，合理建设指标体系、报表体系，与数据 PM 紧密合作，探索和落地基于业务场景的数据解决方案。\u003c/li\u003e\n\u003cli\u003e参与数据治理工作，提升数据易用性及数据质量，做好数据资产沉淀，发挥数据价值。\u003c/li\u003e\n\u003cli\u003e应对国际化环境下复杂政策带来的对数据体系的巨大挑战。\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003e职位要求\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e熟练掌握数据仓库实施方法论、深入了解数据仓库体系，并支撑过实际业务场景。\u003c/li\u003e\n\u003cli\u003e熟练掌握 Hadoop/Hive/Spark/Flink 等大数据技术，熟练掌握 SQL 以及性能调优，熟悉一门编程语言(如 Python/Java 等）。\u003c/li\u003e\n\u003cli\u003e善于沟通，对业务敏感，能快速理解业务，具备优秀的技术与业务结合能力。\u003c/li\u003e\n\u003c/ol\u003e\n\u003chr/\u003e\n\u003ch2\u003e[国际化直播] 数据研发实习生\u003c/h2\u003e\n\u003ch3\u003e职位描述\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e协助国际化直播业务的离线数据仓库的构建，如数据模型的设计，ETL 实施，性能优化以及相关技术问题的解决。\u003c/li\u003e\n\u003cli\u003e深入业务，协助建设指标体系、报表体系，负责日常数据需求的对接和交付。\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003e职位要求\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e全日制本科及以上学历，计算机 /大数据相关专业或者有相关课程与实践，有扎实的计算机基础知识。\u003c/li\u003e\n\u003cli\u003e熟练掌握数据结构与算法，至少掌握一门编程语言（ C/C++/JAVA/Python 等），熟悉 mysql 等常见数据库，能用 SQL 解决常见的问题。\u003c/li\u003e\n\u003cli\u003e对 Hive/Hadoop/Spark 等常见的大数据技术有一定的认识，有实践经验可优先。\u003c/li\u003e\n\u003cli\u003e对数据仓库理论有一定的认识，有实践经验可优先。\u003c/li\u003e\n\u003cli\u003e思路清晰、善于思考，有良好的沟通能力和协作精神，能够长期实习的优先。\u003c/li\u003e\n\u003c/ol\u003e\n\u003chr/\u003e\n\u003ch1\u003eLocation\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e北京：紫金数码 4 号楼\u003c/li\u003e\n\u003cli\u003e深圳：深圳湾创新科技中心 B 座\u003c/li\u003e\n\u003cli\u003eSingapore：GuocoTower\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003e联系方式 WX：eW91bmdfZWdn\u003c/strong\u003e\u003c/p\u003e\n",
+      "Author": "hcnysa",
+      "PubDate": "2022-09-22T04:12:21Z"
+    },
+    {
+      "Title": "求一个网站 里面有各种 数学 物理 (中学) 知识点的概念 - 问与答",
+      "Link": "https://www.v2ex.com/t/882109",
+      "Description": "附带有一个反向链接笔记的关系图，网站作者提供 PDF 版本 好像还是付费的。\u003cbr /\u003e\u003cbr /\u003e大佬们有知道的吗？",
+      "Author": "godloveplay",
+      "PubDate": "2022-09-22T04:05:47Z"
+    },
+    {
       "Title": "滴滴 2023 届校招，内推码 NTADaYM - 酷工作",
       "Link": "https://www.v2ex.com/t/882108",
       "Description": "\u003cp\u003e滴滴 2023 校招开始啦，100 多个职位，欢迎新同学们加入，可使用我的推荐码(内推码) \u003cstrong\u003eNTADaYM\u003c/strong\u003e 进入内推通道  \u003c/p\u003e\n\u003cp\u003e投递方式：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e进入校招内推官网 \u003ca href=\"https://campus.didiglobal.com/\" rel=\"nofollow\"\u003ehttps://campus.didiglobal.com/\u003c/a\u003e ，或者微信搜索 \u003cstrong\u003e滴滴校园招聘\u003c/strong\u003e 进行投递  \u003c/li\u003e\n\u003cli\u003e填写推荐码(内推码)：\u003cstrong\u003eNTADaYM\u003c/strong\u003e \u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e欢迎将推荐码 \u003cstrong\u003eNTADaYM\u003c/strong\u003e 发给班级同学、学校同学共享。有问题也可以添加我的微信 trinea  \u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://public-cdn.mokahr.com/didiglobal/1ae2bb15-c0d0-4985-a523-703e835315d5.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e滴滴生活\u003c/strong\u003e\u003cbr/\u003e\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://public-cdn.mokahr.com/didiglobal/093249d7-357f-410b-9e2a-d6f1cb51f2a6.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e全面回报体系\u003c/strong\u003e\u003cbr/\u003e\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://public-cdn.mokahr.com/didiglobal/f2a9b8a0-ddcc-44a3-92ee-d457c506870a.jpg\"/\u003e\u003c/p\u003e\n",
