@@ -81,16 +81,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "请问有人在win 10上安装过go-callvis吗？",
-      "Link": "https://studygolang.com/topics/15850#reply6",
-      "Description": "\u003cp\u003e如题，用mingw编译报错呢。有没有成功编译的方案，感谢感谢。\u003c/p\u003e\n",
+      "Title": "tcp流量转发到不同的后端",
+      "Link": "https://studygolang.com/topics/15857#reply10",
+      "Description": "\u003cp\u003e想把流量发个多个后端，每个后端都可以收到内容，但我写的，每次都只有一个后端收到内容，随机的\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;flag\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;io\u0026quot;\n\t\u0026quot;net\u0026quot;\n\t\u0026quot;strings\u0026quot;\n)\n\nvar tcp_conn []net.Conn\n\nfunc main() {\n\tvar address *string\n\tvar dst *string\n\taddress = flag.String(\u0026quot;listen_address\u0026quot;, \u0026quot;127.0.0.1:8080\u0026quot;, \u0026quot;listen address\u0026quot;)\n\tdst = flag.String(\u0026quot;target_address\u0026quot;, \u0026quot;172.16.5.9:18061,172.16.5.9:18060\u0026quot;, \u0026quot;目标地址,多个地址逗号分割\u0026quot;)\n\tflag.Parse()\n\tlistener, err := net.Listen(\u0026quot;tcp\u0026quot;, *address)\n\tif err != nil {\n\t\tfmt.Println(err)\n\t}\n\tips := strings.Split(*dst, \u0026quot;,\u0026quot;)\n\tif len(ips) == 0 {\n\t\tfmt.Println(\u0026quot;目标地址不能为空\u0026quot;)\n\t\treturn\n\t}\n\tfor _, ip := range ips {\n\t\tconn, err := net.Dial(\u0026quot;tcp\u0026quot;, ip)\n\t\tif err != nil {\n\t\t\tfmt.Println(err)\n\t\t\tcontinue\n\t\t}\n\t\ttcp_conn = append(tcp_conn, conn)\n\t}\n\tfor {\n\t\tconn, err := listener.Accept()\n\t\tif err != nil {\n\t\t\tcontinue\n\t\t}\n\t\tgo handler(conn)\n\t}\n\n}\n\nfunc handler(conn net.Conn) {\n\t// defer conn.Close()\n\tfor _, dst_conn := range tcp_conn {\n\t\tgo io.Copy(dst_conn, conn)\n\t\tgo io.Copy(conn, dst_conn)\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e该如何改呢，哪位大佬帮忙看看\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "tcp流量转发到不同的后端",
-      "Link": "https://studygolang.com/topics/15857#reply10",
-      "Description": "\u003cp\u003e想把流量发个多个后端，每个后端都可以收到内容，但我写的，每次都只有一个后端收到内容，随机的\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;flag\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;io\u0026quot;\n\t\u0026quot;net\u0026quot;\n\t\u0026quot;strings\u0026quot;\n)\n\nvar tcp_conn []net.Conn\n\nfunc main() {\n\tvar address *string\n\tvar dst *string\n\taddress = flag.String(\u0026quot;listen_address\u0026quot;, \u0026quot;127.0.0.1:8080\u0026quot;, \u0026quot;listen address\u0026quot;)\n\tdst = flag.String(\u0026quot;target_address\u0026quot;, \u0026quot;172.16.5.9:18061,172.16.5.9:18060\u0026quot;, \u0026quot;目标地址,多个地址逗号分割\u0026quot;)\n\tflag.Parse()\n\tlistener, err := net.Listen(\u0026quot;tcp\u0026quot;, *address)\n\tif err != nil {\n\t\tfmt.Println(err)\n\t}\n\tips := strings.Split(*dst, \u0026quot;,\u0026quot;)\n\tif len(ips) == 0 {\n\t\tfmt.Println(\u0026quot;目标地址不能为空\u0026quot;)\n\t\treturn\n\t}\n\tfor _, ip := range ips {\n\t\tconn, err := net.Dial(\u0026quot;tcp\u0026quot;, ip)\n\t\tif err != nil {\n\t\t\tfmt.Println(err)\n\t\t\tcontinue\n\t\t}\n\t\ttcp_conn = append(tcp_conn, conn)\n\t}\n\tfor {\n\t\tconn, err := listener.Accept()\n\t\tif err != nil {\n\t\t\tcontinue\n\t\t}\n\t\tgo handler(conn)\n\t}\n\n}\n\nfunc handler(conn net.Conn) {\n\t// defer conn.Close()\n\tfor _, dst_conn := range tcp_conn {\n\t\tgo io.Copy(dst_conn, conn)\n\t\tgo io.Copy(conn, dst_conn)\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e该如何改呢，哪位大佬帮忙看看\u003c/p\u003e\n",
+      "Title": "请问有人在win 10上安装过go-callvis吗？",
+      "Link": "https://studygolang.com/topics/15850#reply6",
+      "Description": "\u003cp\u003e如题，用mingw编译报错呢。有没有成功编译的方案，感谢感谢。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
