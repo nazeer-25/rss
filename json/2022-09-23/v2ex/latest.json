@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有常见的谬论及反驳方法的网站(页)吗? - 问与答",
+      "Link": "https://www.v2ex.com/t/882482",
+      "Description": "\u003cp\u003e类似这种 \u003ca href=\"https://zhuanlan.zhihu.com/p/76796826\" rel=\"nofollow\"\u003e中医常见谬论及反驳方法\u003c/a\u003e :\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e没有中医，中国人的祖宗怎么活下来的？\u003c/li\u003e\n\u003cli\u003e反驳：繁衍不需要医学，没有医学，人类繁衍了几万年。没有中医，其他国家、其他物种繁衍生息到了今天。\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "pdog18",
+      "PubDate": "2022-09-23T10:46:45Z"
+    },
+    {
       "Title": "shardingsphere 读写分离之主从配置 - 问与答",
       "Link": "https://www.v2ex.com/t/882480",
       "Description": "\u003ch2\u003e版本是 5.1.1 ，主从数据库，分表不分库，表 sharding 没啥问题，主从的读写分离就一直不行，请求各位大佬支援。\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003espring:\n  shardingsphere:\n    datasource:\n      names: ds0,ds1\n      # 主库 1,master 数据库\n      ds0:\n       xxxxxx\n      # 从库 1,slave 数据库\n      ds1:\n        xxxxx\n    props:\n      sql-show: true\n      sql-simple: false\n      # 是否在启动时检查分表元数据一致性\n      check-table-metadata-enabled: true\n      check-duplicate-table-enabled: false\n      sql-comment-parse-enabled: false\n      sql-federation-enabled: false\n    rules:\n      # 分片\n      sharding:\n        tables:\n          xxxxxx:\n            actual-data-nodes: ds$-\u0026gt;{0..1}.xxxxx$-\u0026gt;{0..7}\n            table-strategy:\n              standard:\n                sharding-column: uid\n                sharding-algorithm-name: xxxxAl\n        default-sharding-column: uid\n        binding-tables:\n          - xxxxxx\n        broadcast-tables:\n        default-database-strategy:\n          none:\n        default-table-strategy:\n          none:\n\n\n        sharding-algorithms:\n          xxxxAl:\n            type: INLINE\n            props:\n              algorithm-expression: xxxxxx_xxxx\n      ### 读写分离\n      readwrite-splitting:\n        data-sources:\n          readwrite_ds:\n            type: Static\n            load-balancer-name: round_robin\n            props:\n              write-data-source-name: ds0\n              read-data-source-names: ds1\n        load-balancers:\n          round_robin:\n            type: ROUND_ROBIN\n\u003c/code\u003e\u003c/pre\u003e\n",
