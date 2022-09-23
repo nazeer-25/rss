@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>shardingsphere 读写分离之主从配置 - 问与答</title>
+      <link>https://www.v2ex.com/t/882480</link>
+      <description>&lt;h2&gt;版本是 5.1.1 ，主从数据库，分表不分库，表 sharding 没啥问题，主从的读写分离就一直不行，请求各位大佬支援。&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code&gt;spring:&#xA;  shardingsphere:&#xA;    datasource:&#xA;      names: ds0,ds1&#xA;      # 主库 1,master 数据库&#xA;      ds0:&#xA;       xxxxxx&#xA;      # 从库 1,slave 数据库&#xA;      ds1:&#xA;        xxxxx&#xA;    props:&#xA;      sql-show: true&#xA;      sql-simple: false&#xA;      # 是否在启动时检查分表元数据一致性&#xA;      check-table-metadata-enabled: true&#xA;      check-duplicate-table-enabled: false&#xA;      sql-comment-parse-enabled: false&#xA;      sql-federation-enabled: false&#xA;    rules:&#xA;      # 分片&#xA;      sharding:&#xA;        tables:&#xA;          xxxxxx:&#xA;            actual-data-nodes: ds$-&amp;gt;{0..1}.xxxxx$-&amp;gt;{0..7}&#xA;            table-strategy:&#xA;              standard:&#xA;                sharding-column: uid&#xA;                sharding-algorithm-name: xxxxAl&#xA;        default-sharding-column: uid&#xA;        binding-tables:&#xA;          - xxxxxx&#xA;        broadcast-tables:&#xA;        default-database-strategy:&#xA;          none:&#xA;        default-table-strategy:&#xA;          none:&#xA;&#xA;&#xA;        sharding-algorithms:&#xA;          xxxxAl:&#xA;            type: INLINE&#xA;            props:&#xA;              algorithm-expression: xxxxxx_xxxx&#xA;      ### 读写分离&#xA;      readwrite-splitting:&#xA;        data-sources:&#xA;          readwrite_ds:&#xA;            type: Static&#xA;            load-balancer-name: round_robin&#xA;            props:&#xA;              write-data-source-name: ds0&#xA;              read-data-source-names: ds1&#xA;        load-balancers:&#xA;          round_robin:&#xA;            type: ROUND_ROBIN&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>littlecold</author>
+      <pubDate>23 Sep 2022 10:29:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>搭建了一个听歌网站 - 分享创造</title>
+      <link>https://www.v2ex.com/t/882479</link>
+      <description>&lt;p&gt;收藏一些被下架的歌曲，和自己喜欢的歌。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.88900.net&#34; rel=&#34;nofollow&#34;&gt;https://www.88900.net&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>TigerJie</author>
+      <pubDate>23 Sep 2022 10:29:44 +0000</pubDate>
+    </item>
+    <item>
       <title>请教一下 w10/11 系统 Win+q 搜索栏里会出现广告怎么关闭？ - 问与答</title>
       <link>https://www.v2ex.com/t/882477</link>
       <description>&lt;p&gt;如题：w11 的找到关闭的地方了 但是 w10  目前没找到在那里关闭这个&lt;/p&gt;&#xA;</description>
