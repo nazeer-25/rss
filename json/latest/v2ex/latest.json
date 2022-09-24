@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "[深圳 工业富联 Devops 云原生开发 2-3 人] - 求职",
+      "Link": "https://www.v2ex.com/t/882710",
+      "Description": "\u003cp\u003eHC 解锁了 ，欢迎大家投递 CV\n基本要求：计科、软专、通信、自动控制等工程类专业，暂时不接受远程哈\n岗位：立足 Kubernetes 开发 CaaS 平台，技术栈 golang\n行业：工业互联网\n待遇：15-25K\nCV 可以发邮箱 \u003ca href=\"mailto:job.mars.wu@gmail.com\"\u003ejob.mars.wu@gmail.com\u003c/a\u003e\nxdm 冲🧐\u003c/p\u003e\n",
+      "Author": "Marsmwu",
+      "PubDate": "2022-09-24T17:52:23Z"
+    },
+    {
+      "Title": "簡單的 Windows 右鍵菜單管理腳本 - 分享创造",
+      "Link": "https://www.v2ex.com/t/882709",
+      "Description": "\u003cp\u003e有些軟件有提供“在此位置打開 XXX”的 Windows 右鍵菜單，用起來很便捷。習慣了之後想給很多軟件，尤其是各種命令行環境給安排進右鍵菜單。一開始是手寫註冊表 REG 文件來弄，但是多了之後就開始尋找腳本化的方案。\u003c/p\u003e\n\u003cp\u003e後來找到的方案大部分都是基於 SharpShell 的。但是 SharpShell 太複雜了不好加自己想要的功能，生成的圖標也是經常大小有問題。\u003c/p\u003e\n\u003cp\u003e於是我寫了這個 0 依賴的 Golang 腳本，通過 JSON 配置文件自動去更新註冊表做到管理右鍵菜單。這樣要改什麼都非常方便。JSON 配置也容易拿來做備份和恢復。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/rixtox/context-menu-manager\" rel=\"nofollow\"\u003ehttps://github.com/rixtox/context-menu-manager\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://github.com/rixtox/context-menu-manager/raw/master/public/screenshot.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "rix",
+      "PubDate": "2022-09-24T17:52:14Z"
+    },
+    {
       "Title": "意外的发现 Python3.10 标准库 hashlib 的 sha256 比 sha256sum 以及 go1.19 的都要快两倍以上 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/882708",
       "Description": "\u003cp\u003eRT 将近 3 倍的性能提升（ 0.7s vs 2.0s ）\u003c/p\u003e\n\u003cp\u003e截止发帖已经知道答案了 Py 不讲武德 调用了 openssl 带了 SIMD 加速\u003cbr/\u003e\n很好奇为啥 go 这么慢 还想着把我的小工具用 go 重写一遍 现在想法没这么迫切了（笑死\u003cbr/\u003e\n另外请教下 go 里怎么同时算 hash 会快一点（同一个超大文件的 md5 、sha1 、sha256 等）\u003c/p\u003e\n\u003cp\u003e测试原始信息\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-text\"\u003e测试平台 i7 1165G7\n缓冲大小均为 4*1024*1024 即 4MiB\n其中 py 跑在 wsl1 （ Ubuntu22.04 ）里\n理论上会比跑在 win 里的 go 更慢（结果快了三倍 笑死\n\nPython 3.10.4 (main, Jun 29 2022, 12:14:53) [GCC 11.2.0] on linux\ngo version go1.19.1 windows/amd64\n\nopenssl 信息\nversion: 3.0.2\nbuilt on: Mon Jul  4 11:20:23 2022 UTC\noptions: bn(64,64)\ncompiler: gcc -fPIC -pthread -m64 -Wa,--noexecstack -Wall -Wa,--noexecstack -g -O2 -ffile-prefix-map=/build/openssl-Q8dQt3/openssl-3.0.2=. -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -DOPENSSL_TLS_SECURITY_LEVEL=2 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -Wdate-time -D_FORTIFY_SOURCE=2\nCPUINFO: OPENSSL_ia32cap=0xfedaf387ffebffff:0x405fc6f3bfa7ab\nThe 'numbers' are in 1000s of bytes per second processed.\ntype             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes\nsha256          131816.90k   378560.56k   953040.44k  1468024.83k  1816342.93k  1818028.71k\n\u003c/code\u003e\u003c/pre\u003e\n",

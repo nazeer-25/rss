@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>[深圳 工业富联 Devops 云原生开发 2-3 人] - 求职</title>
+      <link>https://www.v2ex.com/t/882710</link>
+      <description>&lt;p&gt;HC 解锁了 ，欢迎大家投递 CV&#xA;基本要求：计科、软专、通信、自动控制等工程类专业，暂时不接受远程哈&#xA;岗位：立足 Kubernetes 开发 CaaS 平台，技术栈 golang&#xA;行业：工业互联网&#xA;待遇：15-25K&#xA;CV 可以发邮箱 &lt;a href=&#34;mailto:job.mars.wu@gmail.com&#34;&gt;job.mars.wu@gmail.com&lt;/a&gt;&#xA;xdm 冲🧐&lt;/p&gt;&#xA;</description>
+      <author>Marsmwu</author>
+      <pubDate>24 Sep 2022 17:52:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>簡單的 Windows 右鍵菜單管理腳本 - 分享创造</title>
+      <link>https://www.v2ex.com/t/882709</link>
+      <description>&lt;p&gt;有些軟件有提供“在此位置打開 XXX”的 Windows 右鍵菜單，用起來很便捷。習慣了之後想給很多軟件，尤其是各種命令行環境給安排進右鍵菜單。一開始是手寫註冊表 REG 文件來弄，但是多了之後就開始尋找腳本化的方案。&lt;/p&gt;&#xA;&lt;p&gt;後來找到的方案大部分都是基於 SharpShell 的。但是 SharpShell 太複雜了不好加自己想要的功能，生成的圖標也是經常大小有問題。&lt;/p&gt;&#xA;&lt;p&gt;於是我寫了這個 0 依賴的 Golang 腳本，通過 JSON 配置文件自動去更新註冊表做到管理右鍵菜單。這樣要改什麼都非常方便。JSON 配置也容易拿來做備份和恢復。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/rixtox/context-menu-manager&#34; rel=&#34;nofollow&#34;&gt;https://github.com/rixtox/context-menu-manager&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://github.com/rixtox/context-menu-manager/raw/master/public/screenshot.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>rix</author>
+      <pubDate>24 Sep 2022 17:52:14 +0000</pubDate>
+    </item>
+    <item>
       <title>意外的发现 Python3.10 标准库 hashlib 的 sha256 比 sha256sum 以及 go1.19 的都要快两倍以上 - Go 编程语言</title>
       <link>https://www.v2ex.com/t/882708</link>
       <description>&lt;p&gt;RT 将近 3 倍的性能提升（ 0.7s vs 2.0s ）&lt;/p&gt;&#xA;&lt;p&gt;截止发帖已经知道答案了 Py 不讲武德 调用了 openssl 带了 SIMD 加速&lt;br/&gt;&#xA;很好奇为啥 go 这么慢 还想着把我的小工具用 go 重写一遍 现在想法没这么迫切了（笑死&lt;br/&gt;&#xA;另外请教下 go 里怎么同时算 hash 会快一点（同一个超大文件的 md5 、sha1 、sha256 等）&lt;/p&gt;&#xA;&lt;p&gt;测试原始信息&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;测试平台 i7 1165G7&#xA;缓冲大小均为 4*1024*1024 即 4MiB&#xA;其中 py 跑在 wsl1 （ Ubuntu22.04 ）里&#xA;理论上会比跑在 win 里的 go 更慢（结果快了三倍 笑死&#xA;&#xA;Python 3.10.4 (main, Jun 29 2022, 12:14:53) [GCC 11.2.0] on linux&#xA;go version go1.19.1 windows/amd64&#xA;&#xA;openssl 信息&#xA;version: 3.0.2&#xA;built on: Mon Jul  4 11:20:23 2022 UTC&#xA;options: bn(64,64)&#xA;compiler: gcc -fPIC -pthread -m64 -Wa,--noexecstack -Wall -Wa,--noexecstack -g -O2 -ffile-prefix-map=/build/openssl-Q8dQt3/openssl-3.0.2=. -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -DOPENSSL_TLS_SECURITY_LEVEL=2 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -Wdate-time -D_FORTIFY_SOURCE=2&#xA;CPUINFO: OPENSSL_ia32cap=0xfedaf387ffebffff:0x405fc6f3bfa7ab&#xA;The &#39;numbers&#39; are in 1000s of bytes per second processed.&#xA;type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes&#xA;sha256          131816.90k   378560.56k   953040.44k  1468024.83k  1816342.93k  1818028.71k&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
