@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>一个诡异的 bug: IOS16 自定义锁屏，选择自己的照片，结果一直提示“无法载入照片” - iPhone</title>
+      <link>https://www.v2ex.com/t/882690</link>
+      <description>&lt;p&gt;我点“再试一次”，依然出不来&lt;/p&gt;&#xA;&lt;p&gt;再点，多点几次“再试一次”，可以看到照片了，但是在滑动选择照片的过程中，又给我白屏了，提示“无法载入照片”&lt;/p&gt;&#xA;&lt;p&gt;所以搞得根本无法用自己照片做锁屏壁纸了-------&lt;/p&gt;&#xA;&lt;p&gt;大家遇到这个 bug 了吗？？&lt;/p&gt;&#xA;&lt;p&gt;我确实是把照片放 icloud 的，但是查看服务器状态也没出问题呀&lt;/p&gt;&#xA;&lt;p&gt;手机空间和 icloud 空间也绝对够，我才 10 几张照片&lt;/p&gt;&#xA;</description>
+      <author>applelove</author>
+      <pubDate>24 Sep 2022 15:01:58 +0000</pubDate>
+    </item>
+    <item>
       <title>对协程的理解 - 程序员</title>
       <link>https://www.v2ex.com/t/882689</link>
       <description>&lt;p&gt;以前对协程的概念是很模糊的，搞不清协程到底是什么，有人说&lt;code&gt;goroutine&lt;/code&gt;才是协程，&lt;code&gt;yield&lt;/code&gt;不是协程，为了搞清楚疑惑，我总结了几点&lt;/p&gt;&#xA;&lt;h3&gt;什么是协程？&lt;/h3&gt;&#xA;&lt;p&gt;1 、可以&lt;code&gt;主动让出&lt;/code&gt;，和&lt;code&gt;被动恢复&lt;/code&gt;，这里不针对具体语言的实现&lt;/p&gt;&#xA;&lt;p&gt;2 、让出和恢复不需要 CPU 调度，由用户（写代码的人）根据逻辑完成&lt;/p&gt;&#xA;&lt;p&gt;3 、协程在语言的实现有不同，Go 的 goroutine ，JavaScript 的 Promise ，Rust 的 Future ，PHP 的 yield 、都是协程的实现&lt;/p&gt;&#xA;&lt;h3&gt;协程解决了什么问题？&lt;/h3&gt;&#xA;&lt;p&gt;如 Java 使用的 nio 有非常好的性能，单线程的 JavaScript 异步 io 也很出色，可为什么到了协程这块我就会陷入一个误区那就是协程肯定比异步快，因为 Go 语言所以接触到了协程，感觉协程就是 Go 语言的（先入为主的概念），其它语言就是没有（或者不是 Go 那样开启协程也不是协程，如 yield ）&lt;/p&gt;&#xA;&lt;p&gt;先回顾一下异步是什么样的，函数立即执行，有结果后执行回调函数，业务复杂也就会有回调地狱的问题&lt;/p&gt;&#xA;&lt;p&gt;io 可以分为两个阶段，io 发起(10ms)，io 完成(300ms),异步不就是这样吗，io 发起后立即返回，剩下的时间可以去执行其它代码&lt;/p&gt;&#xA;&lt;p&gt;那协程又是什么样的，记住最重要的一点，协程是可以主动让出的，被动恢复，可以想象一下，当 io 发起后，我让出执行权，io 完成时恢复执行，这是不是就解决了回调地狱的问题呢？&lt;/p&gt;&#xA;&lt;p&gt;所以协程是解决回调地狱的问题，编写同步代码，异步执行！&lt;/p&gt;&#xA;&lt;h3&gt;总结&lt;/h3&gt;&#xA;&lt;p&gt;单线程下，同一时刻只有一个协程在运行（之前老和并行搞混）&lt;/p&gt;&#xA;&lt;p&gt;协程用于 io 密集场景，也就是利用等 io 的这段时间去执行其它的代码，异步不也是这样吗？协程和异步是互补的关系&lt;/p&gt;&#xA;&lt;p&gt;像 php 的 yield 、JavaScript 的 Promise 、Rust 的 Future 都是协程的本质实现&lt;/p&gt;&#xA;&lt;p&gt;goroutine 要单独拿出来说，它远远超出了协程的本质，它有一个强大的调度器&lt;/p&gt;&#xA;&lt;p&gt;欢迎交流讨论，提成不同的看法~&lt;/p&gt;&#xA;</description>
