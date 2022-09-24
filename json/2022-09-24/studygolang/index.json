@@ -39,13 +39,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "架构实施策略参考",
-      "Link": "https://studygolang.com/topics/15866#reply1",
-      "Description": "\u003col\u003e\n\u003cli\u003e\u003cp\u003e框架、组件、依赖类库的引入，需经过评审。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e每个模块的设计，或设计变更，在代码提交前需提交 \u0026ldquo;概要结构流程图\u0026rdquo;。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e项目开始前，应通读指导原则，按照原则进行开发活动。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e明确要求使用的组件、框架、类库，和明确禁用的组件、框架、类库是为了保持产品的简洁设计和后期维护的一致性等；并且用于满足架构目标。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e确定计分奖惩游戏规则，识别常规工作程序和特殊风险、创新等。建议使用个人方式，成为信息和沟通网络的核心节点。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e确立隔级反馈原则，和当前层级设置反馈原则。\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "tcp流量转发到不同的后端",
       "Link": "https://studygolang.com/topics/15857#reply10",
       "Description": "\u003cp\u003e想把流量发个多个后端，每个后端都可以收到内容，但我写的，每次都只有一个后端收到内容，随机的\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;flag\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;io\u0026quot;\n\t\u0026quot;net\u0026quot;\n\t\u0026quot;strings\u0026quot;\n)\n\nvar tcp_conn []net.Conn\n\nfunc main() {\n\tvar address *string\n\tvar dst *string\n\taddress = flag.String(\u0026quot;listen_address\u0026quot;, \u0026quot;127.0.0.1:8080\u0026quot;, \u0026quot;listen address\u0026quot;)\n\tdst = flag.String(\u0026quot;target_address\u0026quot;, \u0026quot;172.16.5.9:18061,172.16.5.9:18060\u0026quot;, \u0026quot;目标地址,多个地址逗号分割\u0026quot;)\n\tflag.Parse()\n\tlistener, err := net.Listen(\u0026quot;tcp\u0026quot;, *address)\n\tif err != nil {\n\t\tfmt.Println(err)\n\t}\n\tips := strings.Split(*dst, \u0026quot;,\u0026quot;)\n\tif len(ips) == 0 {\n\t\tfmt.Println(\u0026quot;目标地址不能为空\u0026quot;)\n\t\treturn\n\t}\n\tfor _, ip := range ips {\n\t\tconn, err := net.Dial(\u0026quot;tcp\u0026quot;, ip)\n\t\tif err != nil {\n\t\t\tfmt.Println(err)\n\t\t\tcontinue\n\t\t}\n\t\ttcp_conn = append(tcp_conn, conn)\n\t}\n\tfor {\n\t\tconn, err := listener.Accept()\n\t\tif err != nil {\n\t\t\tcontinue\n\t\t}\n\t\tgo handler(conn)\n\t}\n\n}\n\nfunc handler(conn net.Conn) {\n\t// defer conn.Close()\n\tfor _, dst_conn := range tcp_conn {\n\t\tgo io.Copy(dst_conn, conn)\n\t\tgo io.Copy(conn, dst_conn)\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e该如何改呢，哪位大佬帮忙看看\u003c/p\u003e\n",
@@ -70,6 +63,13 @@
       "Title": "请问如何识别各个函数之间的调用关系？",
       "Link": "https://studygolang.com/topics/15864#reply6",
       "Description": "\u003cp\u003e如题，前几天研究了一下go-callvis工具，发现尝试各种方法都在windows上安装不上，而且回复的人也不多，有没有更普及、更易用的方法？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "架构实施策略参考",
+      "Link": "https://studygolang.com/topics/15866#reply1",
+      "Description": "\u003col\u003e\n\u003cli\u003e\u003cp\u003e框架、组件、依赖类库的引入，需经过评审。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e每个模块的设计，或设计变更，在代码提交前需提交 \u0026ldquo;概要结构流程图\u0026rdquo;。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e项目开始前，应通读指导原则，按照原则进行开发活动。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e明确要求使用的组件、框架、类库，和明确禁用的组件、框架、类库是为了保持产品的简洁设计和后期维护的一致性等；并且用于满足架构目标。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e确定计分奖惩游戏规则，识别常规工作程序和特殊风险、创新等。建议使用个人方式，成为信息和沟通网络的核心节点。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e确立隔级反馈原则，和当前层级设置反馈原则。\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
