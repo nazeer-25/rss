@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "甲骨文 arm 机子 dd 之后的配置 - 云计算",
+      "Link": "https://www.v2ex.com/t/882851",
+      "Description": "\u003cp\u003e久闻甲骨文大名，昨天手痒注册成功。首尔开了台 4C24G 的 arm 机子，然后将系统从自带的 ubuntu22 dd 成了 debian11 。现在遇到的问题是：\u003cbr/\u003e\n1.想把机子从 50G 扩容成 100G ，oracle 面板上改好后，怎么在系统里配置好？官方给出的命令是 \u003cbr/\u003e \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esudo dd iflag=direct if=/dev/\u0026lt;device_name\u0026gt; of=/dev/null count=1\n\t\techo \"1\" | sudo tee /sys/class/block/\u0026lt;device_name\u0026gt;/device/rescan\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e不知道 debian 默认的 device_name 是哪个，我直接将\u003ccode\u003elsblk\u003c/code\u003e列出来的 sda 代入进去了。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eNAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT\nsda      8:0    0  100G  0 disk\n|-sda1   8:1    0  512M  0 part /boot/efi\n`-sda2   8:2    0 48.5G  0 part /\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e现在 sda 从 50G 变成了 100G ，怎么在不影响旧数据的情况下，把多出来的 50G 加到 sda2 上面？ \u003cbr/\u003e\n2.本来还有个 sda3 ，是 oracle 默认从硬盘割了 1G 当虚拟内存。昨天手贱通过\u003ccode\u003efdisk\u003c/code\u003e删了，导致现在看不到这部分空间，也不知道怎么恢复。/etc/fstab 文件残存现状：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# \u0026lt;file system\u0026gt; \u0026lt;mount point\u0026gt;   \u0026lt;type\u0026gt;  \u0026lt;options\u0026gt;       \u0026lt;dump\u0026gt;  \u0026lt;pass\u0026gt;\n# / was on /dev/sda2 during installation\nUUID=084dce62-6a77-4bd8-84a1-eed88fe62190 /               ext4    errors=remount-ro 0       1\n# /boot/efi was on /dev/sda1 during installation\nUUID=FA3A-B134  /boot/efi       vfat    umask=0077      0       1\n# swap was on /dev/sda3 during installation\nUUID=b873df30-ac88-4426-bccf-710e19b831df none            swap    sw              0       0\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e3.oracle 修改磁盘读写速度成最高（ VPU/GB:120 ），需要启用多路径。dd 之后，官方给的解决措施不太好参考，有大佬知道如何开启多路径吗？\u003cbr/\u003e\n希望 v 友们不吝赐教，每条建议我都会去尝试的。\u003c/p\u003e\n",
+      "Author": "skybig",
+      "PubDate": "2022-09-25T12:53:21Z"
+    },
+    {
+      "Title": "Mac 妙控键盘切换输出设备 - 配件",
+      "Link": "https://www.v2ex.com/t/882850",
+      "Description": "\u003cp\u003e设备如下:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e2021mbp\u003c/li\u003e\n\u003cli\u003e外接显示器\u003c/li\u003e\n\u003cli\u003e妙控键盘\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003embp 开盖，扩展模式连外接显示器。如何通过无线模式的妙控键盘在显示器和 mbp 切换输出文字呢？\u003c/p\u003e\n",
+      "Author": "jiujiutang",
+      "PubDate": "2022-09-25T12:49:31Z"
+    },
+    {
+      "Title": "求怎么去除/128 的 ipv6 地址 - OpenWrt",
+      "Link": "https://www.v2ex.com/t/882849",
+      "Description": "\u003cp\u003e因为要在 openwrt 路由器里 ddns ，但是 ddns 老是用这个 /128 的 ipv6 可能是因为他排在上面。请问改怎么去除呀。谢谢。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgur.com/xZ0MaIX\" rel=\"nofollow\"\u003e\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/xZ0MaIX.jpg\" title=\"source: imgur.com\"/\u003e\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "cxlwhx",
+      "PubDate": "2022-09-25T12:46:01Z"
+    },
+    {
+      "Title": "AI 可以超分/补帧，那能提升歌曲音质吗？求推荐这类服务/软件，最好是对日语流行歌优化的，价格无所谓。发现收藏的一些歌全网都只有 128kbps 版本。 - 音乐",
+      "Link": "https://www.v2ex.com/t/882848",
+      "Description": "",
+      "Author": "edis0n0",
+      "PubDate": "2022-09-25T12:43:51Z"
+    },
+    {
+      "Title": "JavaScript 函数无法读取到函数外的变量是什么原因？ - JavaScript",
+      "Link": "https://www.v2ex.com/t/882847",
+      "Description": "\u003cp\u003e为什么 createDomTree 无法获取到 test 这个变量？ test 是定义在 createDomTree()之外的。\u003c/p\u003e\n\u003cpre\u003evar app = function() {\n    this.sidebar = {\n    \ttest: 1,\n        createDomTree: function() {\n            console.log(test)\n        }\n    }\n}\n\nconsole.log(new app().sidebar); // {test: 1, createDomTree: ƒ}\nnew app().sidebar.createDomTree(); // Uncaught ReferenceError: test is not defined\n\u003c/pre\u003e",
+      "Author": "hblevins",
+      "PubDate": "2022-09-25T12:43:43Z"
+    },
+    {
+      "Title": "现在携程（或者其他的卖票平台）的火车票抢票服务真的有用吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/882846",
+      "Description": "\u003cp\u003e在没有余票的时候，看下来大概有如下的抢票通道：\u003c/p\u003e\n\u003cp\u003e1 、跨站余票监控，少买或者多买几站\u003c/p\u003e\n\u003cp\u003e2 、12306 官方的候补通道（指定起点终点）\u003c/p\u003e\n\u003cp\u003e3 、人工专抢，不知道这个是怎么弄的，真的有作用吗\u003c/p\u003e\n",
+      "Author": "huyujievip",
+      "PubDate": "2022-09-25T12:38:50Z"
+    },
+    {
       "Title": "小米出的无线充电宝充 iPhone 怎么样？ - Apple",
       "Link": "https://www.v2ex.com/t/882845",
       "Description": "\u003ca target=\"_blank\" href=\"https://www.mi.com/shop/buy/detail?product_id=16519\" rel=\"nofollow noopener\"\u003ehttps://www.mi.com/shop/buy/detail?product_id=16519\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e这价格，这配置，看着很心动啊。",
