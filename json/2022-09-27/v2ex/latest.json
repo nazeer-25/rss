@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "我想要通过命令行执行一个程序 类似于 Java -jar xxx.jar,然后获得该程序的进程 ID，并稍后通过进程 ID 判断该进程是否存活？但是在系统中找不到我之前获得的进程号，求帮助？ - Java",
+      "Link": "https://www.v2ex.com/t/883408",
+      "Description": "\u003cp\u003e我想要通过命令行执行一个程序 类似于 java -jar xxx.jar,然后获得该程序的进程 ID ，并稍后通过进程 ID 判断该进程是否存活。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e//start a process\nString command = \"...\";\nProcessBuilder pb = new ProcessBuilder(command);\nProcess process = pb.start();\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e//get the pid of process\nif (System.getProperty(\"os.name\").toLowerCase().contains(\"mac\")) {\n                Class\u0026lt;?\u0026gt; clazz = Class.forName(\"java.lang.UNIXProcess\");\n                field = clazz.getDeclaredField(\"pid\");\n                ReflectionUtils.makeAccessible(field);\n                pid = (Integer) field.get(process);\n            }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e最后我希望通过进程 id 判断该进程是否存活，但是我在查进程的时候发现 根本查不到我的那个进程号\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e// judge the process is alive or not. By pid.\nif (System.getProperty(Constants.SYSTEM_NAME).toLowerCase().contains(\"linux\") || System.getProperty(Constants.SYSTEM_NAME).toLowerCase().contains(\"mac\")) {\n            process = RuntimeUtil.exec(BIN_BASH + \" -c\" + \" ps -elf | grep \" + pid);\n        }\n\n        if(process != null){\n            String line;\n            try(InputStream in = process.getInputStream();\n                BufferedReader br = new BufferedReader(new InputStreamReader(in,StandardCharsets.UTF_8))){\n                while((line = br.readLine()) != null){\n                    if(line.contains(pid)){\n//输出流中读不到我之前获得的那个进程 ID\n                        return true;\n                    }\n                }\n            } catch (IOException e) {\n               //exception handle\n            }\n        }\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "gzk329",
+      "PubDate": "2022-09-27T16:47:34Z"
+    },
+    {
       "Title": "哔哩哔哩网页端开始检测去广告插件了 - 哔哩哔哩",
       "Link": "https://www.v2ex.com/t/883406",
       "Description": "\u003cp\u003eB 站首页，在浏览器开启 AdGuard 后网页顶部会有一个黄色横幅，内容：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e检测到您的页面展示可能受到浏览器插件影响，建议您将当前页面加入插件白名单\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e为了防止有隐水印，就不放截图了，有兴趣可以自己复现一下。\u003c/p\u003e\n",
