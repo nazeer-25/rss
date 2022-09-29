@@ -4,9 +4,9 @@
   "Description": "",
   "Items": [
     {
-      "Title": "xxl-job 里定时任务触发实现 - Java",
+      "Title": "xxl-job 里定时任务触发实现疑问 - Java",
       "Link": "https://www.v2ex.com/t/883875",
-      "Description": "\u003cp\u003e今天在想 java 中的定时任务的功能是怎么实现的？\u003c/p\u003e\n\u003cp\u003e先看了 ScheduledExecutorService ，里面的实现简单的理解是\nDelayQueue 死循环调用 Condition 类的 await()，等待时间结束后，会最终 signal()自己，完成了延时的定时执行？\n\u003ca href=\"https://imgse.com/i/xnBxnf\" rel=\"nofollow\"\u003e\u003cimg alt=\"xnBxnf.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2022/09/29/xnBxnf.jpg\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e又想看下之前工作中了解过的 xxl-job 是怎么完成的，源码看不懂，这篇文章解释了一下，\u003ca href=\"https://zhuanlan.zhihu.com/p/356696236\" rel=\"nofollow\"\u003ehttps://zhuanlan.zhihu.com/p/356696236\u003c/a\u003e\n可以理解为死循环中有个线程不断的再查数据库的 xxl-job 中 5 秒内需要执行的任务，然后判断\n\u003ca href=\"https://imgse.com/i/xnDEj0\" rel=\"nofollow\"\u003e\u003cimg alt=\"xnDEj0.md.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2022/09/29/xnDEj0.md.jpg\"/\u003e\u003c/a\u003e\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e今天在想 java 中的定时任务的功能是怎么实现的？\u003c/p\u003e\n\u003cp\u003e先看了 ScheduledExecutorService ，里面的实现简单的理解是\nDelayQueue 死循环调用 Condition 类的 await()，等待时间结束后，return q.poll(，完成了延时的定时执行？\n\u003ca href=\"https://imgse.com/i/xnBxnf\" rel=\"nofollow\"\u003e\u003cimg alt=\"xnBxnf.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2022/09/29/xnBxnf.jpg\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e又想看下之前工作中了解过的 xxl-job 是怎么完成的，源码看不懂，这篇文章解释了一下，\u003ca href=\"https://zhuanlan.zhihu.com/p/356696236\" rel=\"nofollow\"\u003ehttps://zhuanlan.zhihu.com/p/356696236\u003c/a\u003e\n可以理解为死循环中有个线程不断的再查数据库的 xxl-job 中 5 秒内需要执行的任务，然后判断，定时任务一般是这么实现的吗\n\u003ca href=\"https://imgse.com/i/xnDEj0\" rel=\"nofollow\"\u003e\u003cimg alt=\"xnDEj0.md.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2022/09/29/xnDEj0.md.jpg\"/\u003e\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "rqxiao",
       "PubDate": "2022-09-29T09:52:37Z"
     },
