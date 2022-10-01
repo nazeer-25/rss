@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Socket 接收字节报错： System.OutOfMemoryException:“Exception_WasThrown” - C#</title>
+      <link>https://www.v2ex.com/t/884298</link>
+      <description>以下是读取 Socket 的粘连接收代码&lt;br /&gt; &lt;br /&gt; private List&amp;lt;byte&amp;gt; PacketData = new List&amp;lt;byte&amp;gt;();//包池&lt;br /&gt; private void OnReceive(Socket client, byte[] bytes)&lt;br /&gt; {&lt;br /&gt;      PacketData.AddRange(bytes);//添加数据 &lt;br /&gt;      while (true)&lt;br /&gt;      {&lt;br /&gt;          if (PacketData.Count &amp;lt; 4) return; //数据不够读取包长，响应字节留给下一次在读取&lt;br /&gt;          byte[] contentLenBytes = PacketData.GetRange(0, 4).ToArray();//前 4 字节是包长&lt;br /&gt;          int len = BitConverter.ToInt32(contentLenBytes, 0);//转换 int &lt;br /&gt;          &lt;br /&gt;          if (PacketData.Count &amp;lt; len) return;//包长不完整，就忽略本次读取，留给下一次读取&lt;br /&gt;          &lt;br /&gt;          &lt;br /&gt;          &lt;br /&gt;          &lt;br /&gt;          //这句报错：System.OutOfMemoryException:“Exception_WasThrown”&lt;br /&gt;          var pack = PacketData.GetRange(4, len);//读取包内容   &lt;br /&gt;          &lt;br /&gt;          &lt;br /&gt;          &lt;br /&gt;          &lt;br /&gt;          byte[] fullData = pack.ToArray();&lt;br /&gt;          &lt;br /&gt;          PacketData.RemoveRange(0, len+4);//移除已读取的内容&lt;br /&gt;      }&lt;br /&gt; }&lt;br /&gt; &lt;br /&gt; &lt;br /&gt; &lt;br /&gt; 上面 var pack = PacketData.GetRange(4, len);这句报 System.OutOfMemoryException:“Exception_WasThrown”的错，一开始运行正常，当运行 2 个小时左右就会报这个错。不知道是什么原因。。。&lt;br /&gt; 试了各种方法都无法解决。。头疼</description>
+      <author>atfeel</author>
+      <pubDate>01 Oct 2022 17:12:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>秋招 gg，想做开源方向可行吗 - 程序员</title>
+      <link>https://www.v2ex.com/t/884297</link>
+      <description>如题所示，秋招投了一堆，笔试测评也做了一堆，面试也没几个，到现在还是 0offer 。&lt;br /&gt;目前有个想法就是，给一些国内开源公司的主要项目做贡献，稳定的那种，因为目前有个项目也是比较喜欢，感觉方向也是比较契合，所以就想给这个项目贡献一下，也是 assign 了一两个 issue 准备做。&lt;br /&gt;这么做的原因也是看到这个公司有在招人，并且自己还是有点小小的技术理想的，想潜心一下技术。&lt;br /&gt;想知道大佬们的看法如何😂，是潜心做贡献去面这家公司，还是说找其他的啥公司。</description>
+      <author>CrazyCollin</author>
+      <pubDate>01 Oct 2022 17:10:38 +0000</pubDate>
+    </item>
+    <item>
       <title>ios16 safari 网站注册时弹出推荐强密码后卡死 - iOS</title>
       <link>https://www.v2ex.com/t/884296</link>
       <description>手机型号 iPhone13 &lt;br /&gt;ios 版本 16.0.2&lt;br /&gt;打开 Safari 任意网站的注册页面后&lt;br /&gt;点击注册密码的文本框后会自动弹出 &#34;iPhone 为此网站推荐了强密码&#34;&lt;br /&gt;在这个时候，点击&#34;使用强密码&#34;、&#34;其他选项…&#34;，包括右上角的&#34;完成&#34;，甚至此时返回桌面都会导致 Safari 界面卡死。</description>
