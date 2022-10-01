@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>airpods pro2 到货了，但是系统是 IOS15 的 首次开盖竟然没有弹窗 控制中心也没有显示图标是默认蓝牙的 - AirPods</title>
+      <link>https://www.v2ex.com/t/884213</link>
+      <description>&lt;p&gt;很奇怪，然后为啥我连接后我另外一台手机也会自动连接，查找功能里面也没有提示这个设备。&lt;/p&gt;&#xA;</description>
+      <author>vanvan00097</author>
+      <pubDate>01 Oct 2022 07:20:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>说完 chrome，大家再来讨论下 firefox 记住密码的安全性 - 问与答</title>
+      <link>https://www.v2ex.com/t/884212</link>
+      <description>😆</description>
+      <author>hgyhyx</author>
+      <pubDate>01 Oct 2022 07:17:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>装完宝塔，外网访问面板是 ipv6，打不卡怎么办呢？ - 程序员</title>
+      <link>https://www.v2ex.com/t/884211</link>
+      <description>&lt;p&gt;装完宝塔，外网访问面板是 ipv6 ，打不卡怎么办呢？&lt;/p&gt;&#xA;</description>
+      <author>alex58</author>
+      <pubDate>01 Oct 2022 07:15:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>一部 iPhone 能同时使用支付宝和 Apple Pay 坐地铁吗 - iPhone</title>
+      <link>https://www.v2ex.com/t/884210</link>
+      <description>一部 iPhone ，2 个人坐地铁；&lt;br /&gt;同时用 ApplePay 给一个人支付地铁费用；同时用同一台 iPhone 的支付宝地铁乘车码给自己支付地铁费，可以不？不冲突吧？</description>
+      <author>bingshuiyixian</author>
+      <pubDate>01 Oct 2022 07:14:53 +0000</pubDate>
+    </item>
+    <item>
+      <title>新协程并发脚本语言的问世 - 分享创造</title>
+      <link>https://www.v2ex.com/t/884209</link>
+      <description>&lt;p&gt;今天的主人公名为——&lt;a href=&#34;https://github.com/Water-Melon/Melang&#34; rel=&#34;nofollow&#34;&gt;Melang&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;这是一款“新”的脚本语言，然而其已经默默问世了 6 年之久。&lt;/p&gt;&#xA;&lt;p&gt;下面笔者就带你走进 Melang world 。&lt;/p&gt;&#xA;&lt;h2&gt;What is Melang&lt;/h2&gt;&#xA;&lt;p&gt;Melang 是一款协程并发脚本语言。它是一款解释型，而非编译型语言。&lt;/p&gt;&#xA;&lt;p&gt;在 Melang 中，每一个脚本任务都是一个&lt;strong&gt;协程&lt;/strong&gt;。而多个脚本任务即可以同时在同一个线程中处理，也可以在多个线程间处理。&lt;/p&gt;&#xA;&lt;p&gt;这与 Go 的协程非常相似，但是 Melang 中的协程并不需要主动让出 cpu 执行权限或者调用特定函数来间接让出 CPU 执行权限。而是按解释器执行一定操作后自动切换任务执行。这也就免除了开发者需要考虑切换时机的问题。&lt;/p&gt;&#xA;&lt;p&gt;在 Melang 中，所有的脚本代码逻辑都是同步的。但是实际都是由解释器异步进行的。这就免除了很多对异步编程不熟悉的开发者的上手难度。&lt;/p&gt;&#xA;&lt;p&gt;同时，为了让开发者可以更快的入手，语言的语法与 C 语言非常相似，因此对 C 熟悉的开发者将会很容易上手开发。&lt;/p&gt;&#xA;&lt;p&gt;下面那就让我们一起 Hello, world ！&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;//hello.m&#xA;sys = import(&#39;sys&#39;);&#xA;&#xA;sys.print(&#34;Hello, World!&#34;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;执行：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;$ melang hello.m&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;你将看到：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;Hello, World!&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;协程并发与协程池&lt;/h2&gt;&#xA;&lt;p&gt;在 Melang 中，每一个脚本任务都是相互隔离的。然而有时我们也需要让不同任务之间可以相互通信来彼此协作，因此 Melang 的库函数中提供了消息队列模块，使得这一想法成为可能。&lt;/p&gt;&#xA;&lt;p&gt;然而基于这一机制，我们很容易衍生出一种新的池结构模型——协程池。&lt;/p&gt;&#xA;&lt;p&gt;即，主协程可用于分配资源，而一组工作协程可以通过消息机制接收资源并各自进行处理。这与传统的线程池模型非常相似。&lt;/p&gt;&#xA;&lt;p&gt;下面我们就来看一个使用协程池实现的最简单的 HTTP 服务器：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;/* filename: server.m */&#xA;net = import(&#39;net&#39;);&#xA;mq = import(&#39;mq&#39;);&#xA;&#xA;listenfd = net.tcp_listen(&#39;127.0.0.1&#39;, &#39;80&#39;);&#xA;for (i = 0; i &amp;lt; 4; ++i) {&#xA;    eval(&#39;processor.mln&#39;, i);&#xA;}&#xA;while (1) {&#xA;    fd = net.tcp_accept(listenfd);&#xA;    mq.send(&#39;test&#39;, fd);&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;/* filename: processor.m */&#xA;sys = import(&#39;sys&#39;);&#xA;net = import(&#39;net&#39;);&#xA;mq = import(&#39;mq&#39;);&#xA;&#xA;sys.print(EVAL_DATA);&#xA;while (1) {&#xA;    fd = mq.recv(&#39;test&#39;);&#xA;    ret = net.tcp_recv(fd);&#xA;    if (ret) {&#xA;        net.tcp_send(fd, &#34;HTTP/1.1 200 OK\r\nContent-Length: 1\r\n\r\na\r\n\r\n&#34;);&#xA;    }fi&#xA;    net.tcp_close(fd);&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这两个代码文件分别为：主协程（ server.m ）与工作协程（ processor.m ）。&lt;/p&gt;&#xA;&lt;p&gt;主协程（ server.m ）创建了 4 个工作协程（ processor.m ），然后就进入死循环等待客户端 TCP 的建立。&lt;/p&gt;&#xA;&lt;p&gt;工作协程（ processor.m ）则是在死循环中，从主协程处收到已建立的 TCP 套接字，然后从 TCP 上收取请求，然后发送 HTTP 响应，最后关闭套接字。&lt;/p&gt;&#xA;&lt;p&gt;下面，我们可以在命令行中使用如下命令启动脚本：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ melang server.m -t=2&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这里，-t=2 的含义是，让解释器启动两个线程来处理这 5 个协程（ 1server+4processor ）。&lt;/p&gt;&#xA;&lt;p&gt;启动后，就可以使用 curl 或者 ab 之类的工具进行访问了。&lt;/p&gt;&#xA;&lt;h2&gt;小结&lt;/h2&gt;&#xA;&lt;p&gt;综上，Melang 是一个：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;脚本语言&lt;/li&gt;&#xA;&lt;li&gt;抢占式任务调度语言&lt;/li&gt;&#xA;&lt;li&gt;协程并发语言&lt;/li&gt;&#xA;&lt;li&gt;同步代码异步执行的语言&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;除此之外，Melang 还融合了响应式编程、运算符重载、反射、注入等等特色。&lt;/p&gt;&#xA;&lt;p&gt;感谢您的阅读！&lt;/p&gt;&#xA;</description>
+      <author>monkeyNik</author>
+      <pubDate>01 Oct 2022 07:14:48 +0000</pubDate>
+    </item>
+    <item>
       <title>弄了个用 docker-compose 安装常用软件的项目-docker-install-everything - 分享创造</title>
       <link>https://www.v2ex.com/t/884208</link>
       <description>&lt;p&gt;各位 v 友们，长假快乐。&lt;/p&gt;&#xA;&lt;p&gt;项目介绍：&#xA;在平时的工作和学习中，笔者会经常使用 docker ，个人是不太喜欢 &lt;code&gt;docker run&lt;/code&gt; 方式去启动容器的，使用 docker-compose 管理容器较多。尽可能的“多配置少命令”。&#xA;如是就将平时常用的一些服务整理了下，弄了个项目。&lt;/p&gt;&#xA;&lt;p&gt;已支持列表：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;apollo&lt;/li&gt;&#xA;&lt;li&gt;beanstalkd&lt;/li&gt;&#xA;&lt;li&gt;elk&lt;/li&gt;&#xA;&lt;li&gt;jira&lt;/li&gt;&#xA;&lt;li&gt;MinIO&lt;/li&gt;&#xA;&lt;li&gt;MinIO-cluster&lt;/li&gt;&#xA;&lt;li&gt;redis&lt;/li&gt;&#xA;&lt;li&gt;redis-cluster&lt;/li&gt;&#xA;&lt;li&gt;wikijs&lt;/li&gt;&#xA;&lt;li&gt;wordpress&lt;/li&gt;&#xA;&lt;li&gt;yapi&lt;/li&gt;&#xA;&lt;li&gt;Yearning&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;项目地址：&lt;a href=&#34;https://github.com/FX-Max/docker-install-everything&#34; rel=&#34;nofollow&#34;&gt;docker-install-everything&lt;/a&gt;&lt;/p&gt;&#xA;</description>
