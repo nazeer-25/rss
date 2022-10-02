@@ -4,6 +4,69 @@
   "Description": "",
   "Items": [
     {
+      "Title": "小程序 globalData undefined 如何解决 - 微信",
+      "Link": "https://www.v2ex.com/t/884328",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-//封装\"\u003efunction request(requestMapping, data, requestWay, contentType) {\n  wx.showLoading({\n    title: '请稍后',\n  })\n  return new Promise(function(resolve, reject) {\n    console.log('请求中。。。。。')\n    wx.request({\n      url: '自己的服务器地址' + requestMapping,\n      data: data,\n      header: {\n        'content-type': contentType // 默认值\n      },\n      timeout: 3000,\n      method: requestWay,\n      success(res) {\n        //console.log(res)\n        if (res.data.success == false || res.data.statusCode == 404) {\n          reject(res)\n        } else {\n          resolve(res)\n        }\n      },\n      fail: (e) =\u0026gt; {  \n        wx.showToast({\n          title: '连接失败',\n          icon: 'none'\n        })},\n      complete: () =\u0026gt; {\n        wx.hideLoading()\n      }\n    })\n  })\n}\n\n﻿//获取 openid\nfunction getOpenId(app, that){\n  return new Promise(function (resolve, reject) {\n        wx.login({\n          success: function (yes) {\n            // 发送 res.code 到后台换取 openId, sessionKey, unionId\n            var requestMapping = '/testopenid'\n            var data = {\n              code: yes.code\n            }\n            var requestWay = 'GET'\n            var contentType = 'application/json'\n            var p =request(requestMapping, data, requestWay, contentType)\n            p.then(res =\u0026gt; {\n              //console.log(res) 做一些后续操作\n              app.globalData.openId = res.data;\n                    resolve(res)\n            }).catch(e =\u0026gt; {\n              reject(e)  \n            })\n          },\n          fail(e) {\n            console.log(e)\n          }\n        })  \n  })\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003egetOpenId(getApp(),this);\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"RUNOOB 图标\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"http://mmbiz.qpic.cn/mmbiz_png/p6SkCZiajBT3w5FhP7Zib2VRXQiahCicPgH5JqrmpocC3DRKBqIuDM1IRphCYNUoVANMfRBD2XYwOQiaKh0XJicAianuA/0?wx_fmt=png\"/\u003e\u003c/p\u003e\n",
+      "Author": "autoname",
+      "PubDate": "2022-10-02T02:43:59Z"
+    },
+    {
+      "Title": "MacBook 双系统 Windows 启动后似乎键盘和触摸板不生效 - 问与答",
+      "Link": "https://www.v2ex.com/t/884327",
+      "Description": "电脑一直双系统，Windows 一年进一次那种想看看 Windows 更新。但是不久前下载了一个 Parallels Desmtop ，居然可以在 macos 里打开这个双系统的 Windows 。但是现在也只能从这里面正常进入，如果 Mac 开机选择 Windows 进入，到了锁屏后输入键盘、移动触摸板，界面上都没有任何反应，唯独按关机键可以关机，以及 touch bar 也是黑屏。",
+      "Author": "CSGO",
+      "PubDate": "2022-10-02T02:43:45Z"
+    },
+    {
+      "Title": "Win10 开 SMB，电视无线连接，播放电影卡顿 - NAS",
+      "Link": "https://www.v2ex.com/t/884326",
+      "Description": "\u003cp\u003ePVE 放在客厅，Win10 是 PVE 里面虚拟出来的，显卡是 1660s ，开 SMB 的盘是刚买的西数红盘 4T ，其他 PVE 虚拟的操作系统如 Linux 测试播放好像没有问题。\u003c/p\u003e\n\u003cp\u003e电视是自如租房的电视，在主卧，通过无线连接客厅的路由器，正常在线播放电视 /电影没有问题，但是播放 Win10 里面的电影就会卡顿，具体表现为一播一停、然后反复，期间并未快进或快退。\u003c/p\u003e\n\u003cp\u003e自如这电视只对 MP4 支持比较好，播放得也是 2.1G 的 MP4 文件\u003c/p\u003e\n\u003cp\u003e不知道瓶颈在哪儿，怎么测试，还望师傅们帮忙指点。\u003c/p\u003e\n",
+      "Author": "hanssx",
+      "PubDate": "2022-10-02T02:43:01Z"
+    },
+    {
+      "Title": "预算 1.5K-3K，想给妈妈换个拍照摄像好一些的安卓机 - 问与答",
+      "Link": "https://www.v2ex.com/t/884324",
+      "Description": "\u003cp\u003e老妈日常使用就是发抖音、微信朋友圈，拍照摄像清晰一点，续航能支撑中度应用一天。CPU 性能没太大要求，连续刷抖音不会太发热（从不玩游戏）。上一个手机还是三年前给她买的荣耀 9X ，续航是真顶，可惜拍照效果属实有些过时了\u003c/p\u003e\n",
+      "Author": "rajesh941",
+      "PubDate": "2022-10-02T02:39:18Z"
+    },
+    {
+      "Title": "双网卡都访问内网，其中一张网卡只做远程连接用（用于个人笔记本连接内网电脑），会有什么安全问题吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/884323",
+      "Description": "\u003cp\u003e如题，一般的行为管理工具能够设置相关策略吗，请安全的大佬帮忙解答下\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/09/03/26a3a7abf255ad80.jpg\"/\u003e\u003c/p\u003e\n",
+      "Author": "lyrics1510",
+      "PubDate": "2022-10-02T02:32:17Z"
+    },
+    {
+      "Title": "dexie.js 求助 - 程序员",
+      "Link": "https://www.v2ex.com/t/884322",
+      "Description": "\u003cp\u003e我尝试使用 vite+dexie ，想在 webworker 使用 dexie 防止阻塞主线程，dev 时可以正常跑，build 时就会循环编译，不知道有没有大佬能帮帮我...🥲\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"reproduce gif\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://user-images.githubusercontent.com/78338239/193280247-24da4be8-4836-48b3-a49d-9a90dc94df72.gif\"/\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e调用\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eimport Dexie from 'dexie'\nimport dbWorker from './worker?worker'\n\nexport const db = new Dexie('test')\ndb.version(1).stores({\n  test: '++id, test'\n})\nconst worker = new dbWorker()\nexport function test(data: string) {\n  worker.postMessage(data)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003eworker\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eimport { db } from './index'\nself.addEventListener('message', event =\u0026gt; {\n  console.log(db)\n})\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e复现： \u003ca href=\"https://github.com/subframe7536/issue-dexie\" rel=\"nofollow\"\u003ehttps://github.com/subframe7536/issue-dexie\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "subframe75361",
+      "PubDate": "2022-10-02T02:13:22Z"
+    },
+    {
+      "Title": "github，有没有 vue3 hooks 集合或实用的程序集合 - GitHub",
+      "Link": "https://www.v2ex.com/t/884321",
+      "Description": "\u003cp\u003egithub ，有没有 vue3 hooks 集合或实用的程序集合\u003c/p\u003e\n",
+      "Author": "jahnsli",
+      "PubDate": "2022-10-02T02:10:21Z"
+    },
+    {
+      "Title": "看了 shuax 的文章，给大家提个醒 - 分享发现",
+      "Link": "https://www.v2ex.com/t/884320",
+      "Description": "\u003cp\u003e文章很长，自行查看：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://shuax.com/\" rel=\"nofollow\"\u003ehttps://shuax.com/\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "letitbesqzr",
+      "PubDate": "2022-10-02T02:06:18Z"
+    },
+    {
+      "Title": "喝咖啡导致早醒怎么办? - 生活",
+      "Link": "https://www.v2ex.com/t/884319",
+      "Description": "\u003cp\u003e我昨天 7 点喝的咖啡,12 点上的床,今天早上 4 点就醒了\u003c/p\u003e\n",
+      "Author": "chenqh",
+      "PubDate": "2022-10-02T01:53:51Z"
+    },
+    {
       "Title": "求教如何屏蔽百度百家号 - 问与答",
       "Link": "https://www.v2ex.com/t/884318",
       "Description": "\u003cp\u003e一直用 hosts 文件，屏蔽垃圾网站，节省精力。\n这几天发现，百家号又可以正常访问了\nhosts 的其他网站正常屏蔽状态，不能访问\u003c/p\u003e\n\u003cp\u003e想请教一下\n①百度是怎么做到的\n②有什么简单方法可以屏蔽掉百家号\u003c/p\u003e\n",

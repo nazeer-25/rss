@@ -4,6 +4,69 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>小程序 globalData undefined 如何解决 - 微信</title>
+      <link>https://www.v2ex.com/t/884328</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-//封装&#34;&gt;function request(requestMapping, data, requestWay, contentType) {&#xA;  wx.showLoading({&#xA;    title: &#39;请稍后&#39;,&#xA;  })&#xA;  return new Promise(function(resolve, reject) {&#xA;    console.log(&#39;请求中。。。。。&#39;)&#xA;    wx.request({&#xA;      url: &#39;自己的服务器地址&#39; + requestMapping,&#xA;      data: data,&#xA;      header: {&#xA;        &#39;content-type&#39;: contentType // 默认值&#xA;      },&#xA;      timeout: 3000,&#xA;      method: requestWay,&#xA;      success(res) {&#xA;        //console.log(res)&#xA;        if (res.data.success == false || res.data.statusCode == 404) {&#xA;          reject(res)&#xA;        } else {&#xA;          resolve(res)&#xA;        }&#xA;      },&#xA;      fail: (e) =&amp;gt; {  &#xA;        wx.showToast({&#xA;          title: &#39;连接失败&#39;,&#xA;          icon: &#39;none&#39;&#xA;        })},&#xA;      complete: () =&amp;gt; {&#xA;        wx.hideLoading()&#xA;      }&#xA;    })&#xA;  })&#xA;}&#xA;&#xA;﻿//获取 openid&#xA;function getOpenId(app, that){&#xA;  return new Promise(function (resolve, reject) {&#xA;        wx.login({&#xA;          success: function (yes) {&#xA;            // 发送 res.code 到后台换取 openId, sessionKey, unionId&#xA;            var requestMapping = &#39;/testopenid&#39;&#xA;            var data = {&#xA;              code: yes.code&#xA;            }&#xA;            var requestWay = &#39;GET&#39;&#xA;            var contentType = &#39;application/json&#39;&#xA;            var p =request(requestMapping, data, requestWay, contentType)&#xA;            p.then(res =&amp;gt; {&#xA;              //console.log(res) 做一些后续操作&#xA;              app.globalData.openId = res.data;&#xA;                    resolve(res)&#xA;            }).catch(e =&amp;gt; {&#xA;              reject(e)  &#xA;            })&#xA;          },&#xA;          fail(e) {&#xA;            console.log(e)&#xA;          }&#xA;        })  &#xA;  })&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;getOpenId(getApp(),this);&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;RUNOOB 图标&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;http://mmbiz.qpic.cn/mmbiz_png/p6SkCZiajBT3w5FhP7Zib2VRXQiahCicPgH5JqrmpocC3DRKBqIuDM1IRphCYNUoVANMfRBD2XYwOQiaKh0XJicAianuA/0?wx_fmt=png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>autoname</author>
+      <pubDate>02 Oct 2022 02:43:59 +0000</pubDate>
+    </item>
+    <item>
+      <title>MacBook 双系统 Windows 启动后似乎键盘和触摸板不生效 - 问与答</title>
+      <link>https://www.v2ex.com/t/884327</link>
+      <description>电脑一直双系统，Windows 一年进一次那种想看看 Windows 更新。但是不久前下载了一个 Parallels Desmtop ，居然可以在 macos 里打开这个双系统的 Windows 。但是现在也只能从这里面正常进入，如果 Mac 开机选择 Windows 进入，到了锁屏后输入键盘、移动触摸板，界面上都没有任何反应，唯独按关机键可以关机，以及 touch bar 也是黑屏。</description>
+      <author>CSGO</author>
+      <pubDate>02 Oct 2022 02:43:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>Win10 开 SMB，电视无线连接，播放电影卡顿 - NAS</title>
+      <link>https://www.v2ex.com/t/884326</link>
+      <description>&lt;p&gt;PVE 放在客厅，Win10 是 PVE 里面虚拟出来的，显卡是 1660s ，开 SMB 的盘是刚买的西数红盘 4T ，其他 PVE 虚拟的操作系统如 Linux 测试播放好像没有问题。&lt;/p&gt;&#xA;&lt;p&gt;电视是自如租房的电视，在主卧，通过无线连接客厅的路由器，正常在线播放电视 /电影没有问题，但是播放 Win10 里面的电影就会卡顿，具体表现为一播一停、然后反复，期间并未快进或快退。&lt;/p&gt;&#xA;&lt;p&gt;自如这电视只对 MP4 支持比较好，播放得也是 2.1G 的 MP4 文件&lt;/p&gt;&#xA;&lt;p&gt;不知道瓶颈在哪儿，怎么测试，还望师傅们帮忙指点。&lt;/p&gt;&#xA;</description>
+      <author>hanssx</author>
+      <pubDate>02 Oct 2022 02:43:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>预算 1.5K-3K，想给妈妈换个拍照摄像好一些的安卓机 - 问与答</title>
+      <link>https://www.v2ex.com/t/884324</link>
+      <description>&lt;p&gt;老妈日常使用就是发抖音、微信朋友圈，拍照摄像清晰一点，续航能支撑中度应用一天。CPU 性能没太大要求，连续刷抖音不会太发热（从不玩游戏）。上一个手机还是三年前给她买的荣耀 9X ，续航是真顶，可惜拍照效果属实有些过时了&lt;/p&gt;&#xA;</description>
+      <author>rajesh941</author>
+      <pubDate>02 Oct 2022 02:39:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>双网卡都访问内网，其中一张网卡只做远程连接用（用于个人笔记本连接内网电脑），会有什么安全问题吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/884323</link>
+      <description>&lt;p&gt;如题，一般的行为管理工具能够设置相关策略吗，请安全的大佬帮忙解答下&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/09/03/26a3a7abf255ad80.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>lyrics1510</author>
+      <pubDate>02 Oct 2022 02:32:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>dexie.js 求助 - 程序员</title>
+      <link>https://www.v2ex.com/t/884322</link>
+      <description>&lt;p&gt;我尝试使用 vite+dexie ，想在 webworker 使用 dexie 防止阻塞主线程，dev 时可以正常跑，build 时就会循环编译，不知道有没有大佬能帮帮我...🥲&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;reproduce gif&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://user-images.githubusercontent.com/78338239/193280247-24da4be8-4836-48b3-a49d-9a90dc94df72.gif&#34;/&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;调用&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;import Dexie from &#39;dexie&#39;&#xA;import dbWorker from &#39;./worker?worker&#39;&#xA;&#xA;export const db = new Dexie(&#39;test&#39;)&#xA;db.version(1).stores({&#xA;  test: &#39;++id, test&#39;&#xA;})&#xA;const worker = new dbWorker()&#xA;export function test(data: string) {&#xA;  worker.postMessage(data)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;worker&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;import { db } from &#39;./index&#39;&#xA;self.addEventListener(&#39;message&#39;, event =&amp;gt; {&#xA;  console.log(db)&#xA;})&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;复现： &lt;a href=&#34;https://github.com/subframe7536/issue-dexie&#34; rel=&#34;nofollow&#34;&gt;https://github.com/subframe7536/issue-dexie&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>subframe75361</author>
+      <pubDate>02 Oct 2022 02:13:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>github，有没有 vue3 hooks 集合或实用的程序集合 - GitHub</title>
+      <link>https://www.v2ex.com/t/884321</link>
+      <description>&lt;p&gt;github ，有没有 vue3 hooks 集合或实用的程序集合&lt;/p&gt;&#xA;</description>
+      <author>jahnsli</author>
+      <pubDate>02 Oct 2022 02:10:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>看了 shuax 的文章，给大家提个醒 - 分享发现</title>
+      <link>https://www.v2ex.com/t/884320</link>
+      <description>&lt;p&gt;文章很长，自行查看：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://shuax.com/&#34; rel=&#34;nofollow&#34;&gt;https://shuax.com/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>letitbesqzr</author>
+      <pubDate>02 Oct 2022 02:06:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>喝咖啡导致早醒怎么办? - 生活</title>
+      <link>https://www.v2ex.com/t/884319</link>
+      <description>&lt;p&gt;我昨天 7 点喝的咖啡,12 点上的床,今天早上 4 点就醒了&lt;/p&gt;&#xA;</description>
+      <author>chenqh</author>
+      <pubDate>02 Oct 2022 01:53:51 +0000</pubDate>
+    </item>
+    <item>
       <title>求教如何屏蔽百度百家号 - 问与答</title>
       <link>https://www.v2ex.com/t/884318</link>
       <description>&lt;p&gt;一直用 hosts 文件，屏蔽垃圾网站，节省精力。&#xA;这几天发现，百家号又可以正常访问了&#xA;hosts 的其他网站正常屏蔽状态，不能访问&lt;/p&gt;&#xA;&lt;p&gt;想请教一下&#xA;①百度是怎么做到的&#xA;②有什么简单方法可以屏蔽掉百家号&lt;/p&gt;&#xA;</description>
