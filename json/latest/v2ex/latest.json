@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "敏感文本过滤怎么做？ - 问与答",
+      "Link": "https://www.v2ex.com/t/884412",
+      "Description": "RT ，不想买现成的服务，如果要自建的话，有什么比较合适方案么\u003cbr /\u003eV2EX 是怎么做的？",
+      "Author": "Aloento",
+      "PubDate": "2022-10-02T14:15:18Z"
+    },
+    {
+      "Title": "这两天腾讯云 HK 服务器是不是很慢？ - 全球工单系统",
+      "Link": "https://www.v2ex.com/t/884411",
+      "Description": "\u003cp\u003e感觉时快时慢的，翻墙后又很正常。\u003cbr/\u003e\n难道是即将开会的原因？\u003c/p\u003e\n",
+      "Author": "coloz",
+      "PubDate": "2022-10-02T14:11:17Z"
+    },
+    {
+      "Title": "控制面板电源选项那里有几个无效条目，请教如何删除 - 问与答",
+      "Link": "https://www.v2ex.com/t/884410",
+      "Description": "\u003cp\u003e是 ThinkPad 的电源管理，软件已经不存在了，也没有适合这个机型的软件可以安装，应该是从 win7 一路升级到 win10 过程中被删除了，或者其他原因，就留了这么几个条目在这里，一点就报错，不知哪位遇到过，请教如何删除他们。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/pgpMkzz.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/t3vx1nm.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "nowheretoseek",
+      "PubDate": "2022-10-02T14:08:43Z"
+    },
+    {
       "Title": "关于 Kubernetes 的搭建的账户的认证问题 - Kubernetes",
       "Link": "https://www.v2ex.com/t/884409",
       "Description": "\u003cp\u003e开启了一个\u003ccode\u003eapi-server\u003c/code\u003e，如何具有权限访问这个服务\u003c/p\u003e\n\u003ch2\u003e开启\u003ccode\u003eapi-server\u003c/code\u003e\u003c/h2\u003e\n\u003cp\u003e开启的\u003ccode\u003eapi-server\u003c/code\u003e 脚本如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e/root/k8s/kubernetes/server/bin/kube-apiserver  \\\n--log-dir=/root/k8s/kubernetes/log/kube-apiserver  \\\n--log-file=/root/k8s/kubernetes/log/kube-apiserver/log.log \\\n--logtostderr=true  \\\n--allow-privileged=true  \\\n--bind-address=0.0.0.0  \\\n--secure-port=6443  \\\n--advertise-address=192.168.123.78 \\\n--service-cluster-ip-range=10.96.0.0/12  \\\n--service-node-port-range=30000-32767  \\\n--etcd-servers=https://192.168.123.78:2379,https://192.168.123.79:2379,https://192.168.123.80:2379 \\\n--etcd-cafile=/root/certs/ca.pem \\\n--etcd-certfile=/root/certs/etcd.pem \\\n--etcd-keyfile=/root/certs/etcd-key.pem \\\n--tls-cert-file=/root/certs/api-server.pem  \\\n--tls-private-key-file=/root/certs/api-server-key.pem \\\n--client-ca-file=/root/certs/ca.pem  \\\n--kubelet-client-certificate=/root/certs/client.pem  \\\n--kubelet-client-key=/root/certs/client-key.pem  \\\n--service-account-key-file=/root/certs/api-server.pem  \\\n--service-account-signing-key-file=/root/certs/api-server-key.pem  \\\n--service-account-issuer=https://kubernetes.default.svc.cluster.local \\\n--kubelet-preferred-address-types=Hostname,InternalDNS,InternalIP,ExternalDNS,ExternalIP \\\n--authorization-mode=RBAC,Node  \\\n--enable-bootstrap-token-auth=true  \\\n--requestheader-client-ca-file=/root/certs/ca.pem  \\\n--proxy-client-cert-file=/root/certs/proxy.pem  \\\n--proxy-client-key-file=/root/certs/proxy-key.pem  \\\n--requestheader-allowed-names=\"\"  \\\n--requestheader-group-headers=X-Remote-Group  \\\n--requestheader-extra-headers-prefix=X-Remote-Extra-  \\\n--requestheader-username-headers=X-Remote-User\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e尝试访问\u003c/h2\u003e\n\u003cp\u003e利用其中的\n\u003ccode\u003e--kubelet-client-certificate\u003c/code\u003e\n和\n\u003ccode\u003e--kubelet-client-key\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e生成了一个\u003ccode\u003econfig\u003c/code\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e/root/k8s/kubernetes/server/bin/kubectl config set-cluster kubernetes --certificate-authority=/root/certs/ca.pem --embed-certs=true --server=https://192.168.123.78:6443 --kubeconfig=/root/k8s/kubernetes/server/bin/admin.kubeconfig\n\n\n/root/k8s/kubernetes/server/bin/kubectl config set-credentials kubernetes-admin --client-certificate=/root/certs/client.pem --client-key=/root/certs/client-key.pem --embed-certs=true  --kubeconfig=/root/k8s/kubernetes/server/bin/admin.kubeconfig\n\n\n/root/k8s/kubernetes/server/bin/kubectl config set-context kubernetes-admin@kubernetes --cluster=kubernetes --user=kubernetes-admin --kubeconfig=/root/k8s/kubernetes/server/bin/admin.kubeconfig\n\n\n/root/k8s/kubernetes/server/bin/kubectl config use-context kubernetes-admin@kubernetes --kubeconfig=/root/k8s/kubernetes/server/bin/admin.kubeconfig\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e然后当我用\u003ccode\u003eadmin.kubeconfig\u003c/code\u003e进行访问的时候,出现了 403 的问题\n\u003ccode\u003e./kubectl get cs --kubeconfig=/root/k8s/kubernetes/server/bin/admin.kubeconfig -v=9\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e\u0026lt;\u0026lt;\u0026lt;\u0026lt;\u0026lt;\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eResponse Body: {\"kind\":\"Status\",\"apiVersion\":\"v1\",\"metadata\":{},\"status\":\"Failure\",\"message\":\"forbidden: User \\\"system:anonymous\\\" cannot get path \\\"/api\\\"\",\"reason\":\"Forbidden\",\"details\":{},\"code\":403}\nI1002 21:44:12.604038  227095 round_trippers.go:466] curl -v -XGET  -H \"Accept: application/json, */*\" -H \"User-Agent: kubectl/v1.25.2 (linux/amd64) kubernetes/5835544\" 'https://192.168.123.78:6443/apis?timeout=32s'\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e有大佬知道是什么原因吗， 或者说一个新开的 API-SERVER 的所谓的管理员账号密码是在哪里= =，如何访问\u003ccode\u003eapi-server\u003c/code\u003e呢\u003c/p\u003e\n",
