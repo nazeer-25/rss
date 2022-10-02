@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ConcurrentDictionary 有什么办法确保一次添加多项的原子性吗? - .NET</title>
+      <link>https://www.v2ex.com/t/884402</link>
+      <description>&lt;pre&gt;&lt;code&gt;    private readonly ConcurrentDictionary&amp;lt;int, string&amp;gt; Dict = new();&#xA;&#xA;    // 如何保证原子性?&#xA;    public void AddMore(IEnumerable&amp;lt;(int, string)&amp;gt; items)&#xA;    {&#xA;        foreach ((int key, string? value) in items)&#xA;        {&#xA;            Dict.TryAdd(key, value);&#xA;        }&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>bthulu</author>
+      <pubDate>02 Oct 2022 12:57:38 +0000</pubDate>
+    </item>
+    <item>
       <title>目前主流虚拟化为啥不支持克隆完整开机状态的虚拟机？ - Linux</title>
       <link>https://www.v2ex.com/t/884401</link>
       <description>&lt;p&gt;1.虚拟机，开机，打开一个记事本程序，随便输入一些字符串，然后给虚拟机做快照，该快照为开机快照。&lt;/p&gt;&#xA;&lt;p&gt;接着，无论此虚拟机，仍然是开机状态，还是已经被关机，都可以通过该开机快照，直接恢复到之前的开机状态。&lt;/p&gt;&#xA;&lt;p&gt;所谓的开机状态，指的是，恢复开机快照后，之前打开的记事本程序，以及记事本上随机输入的字符串，仍然还在。&lt;/p&gt;&#xA;&lt;p&gt;2.但是，目前无论 VMware 还是 KVM ，我都没发现，能够克隆开机状态的虚拟机，并且开机后，会直接还原到克隆时的状态，也就是那个记事本程序 + 随机输入的字符串仍然存在。&lt;/p&gt;&#xA;&lt;p&gt;虽然目前是能够克隆开机的虚拟机，但克隆完成后，开机，是无法恢复到克隆时的开机状态的，开机后，记事本程序就没了。&lt;/p&gt;&#xA;&lt;p&gt;3.我觉得，既然 VMware 与 KVM 都支持开机时的完整状态快照，那为什么不能支持开机时的完整状态克隆呢？&lt;/p&gt;&#xA;</description>
