@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>今天听说一个玄学算法，写了一下，确实玄学？ - 程序员</title>
+      <link>https://www.v2ex.com/t/884426</link>
+      <description>&lt;p&gt;假设有 3 个门编号分别为 0 ，1 ，2 ，其中只有 1 个门后面有奖品&#xA;主持人先打开一个不存在奖品的门，剩下两个门你随机打开一个，中奖概率是多少？&#xA;答案不是 50%&#xA;算法写的也确实不是，是写得不对吗？&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascropt&#34;&gt;(async ()=&amp;gt;{&#xA;  let gotTimes = 0&#xA;  let missTimes = 0&#xA;  let failTimes = 0&#xA;  let testTimes = 100000&#xA;  while( --testTimes &amp;gt; 0) {&#xA;    const targetGateNo = parseInt(Math.random()*10**10)%3 // 0/1/2&#xA;    let gates = []&#xA;    for (let i=0; i&amp;lt;2; i++) {&#xA;      gates.push(i===targetGateNo)&#xA;    }&#xA;    const randomNo = parseInt(Math.random()*10**10)%3 // 0/1/2&#xA;    if (gates[randomNo]) {&#xA;      failTimes++&#xA;      continue&#xA;    }&#xA;    let randomNo2 = parseInt(Math.random()*10**10)%3&#xA;    while(randomNo2===randomNo) {&#xA;      randomNo2 = parseInt(Math.random()*10**10)%3&#xA;    }&#xA;    if (gates[randomNo2]) {&#xA;      gotTimes ++&#xA;      continue&#xA;    }&#xA;    missTimes ++&#xA;  }&#xA;  console.log(gotTimes/(gotTimes+missTimes), gotTimes, missTimes)&#xA;})()&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;剩下两个选一个，下意识觉得概率应该 50%才对，但是执行后是 0.28 左右&lt;/p&gt;&#xA;</description>
+      <author>estk</author>
+      <pubDate>02 Oct 2022 16:55:35 +0000</pubDate>
+    </item>
+    <item>
       <title>求推荐 NAS 用的文件管理器 - 问与答</title>
       <link>https://www.v2ex.com/t/884425</link>
       <description>FE 文件管理器的 Samba 基本是够用了，但是在线解压和压缩这种功能还是要在 NAS 上找个文件管理器才行，目前用的是荒野无灯 Filebrowser ，年久失修小毛病很多，可道云 易有云 Cloudreve 这几个私有云的解压功能支持不是很好，并不能解压 7z 和 rar 文件，可能群晖和威联通之类品牌 NAS 的系统套件才有这种基础功能</description>
