@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求解 MySQL 8.0 Left Join 的表使用 PARTITION 分区的问题 - MySQL</title>
+      <link>https://www.v2ex.com/t/884818</link>
+      <description>&lt;pre&gt;&lt;code&gt;SELECT&#xA;&#x9;mhy_order.id AS id,&#xA;&#x9;mhy_order.id AS orderId,&#xA;&#x9;mhy_trademark.id AS trademarkId,&#xA;&#x9;mhy_trademark_type.id AS typeId,&#xA;&#x9;mhy_order.order_type AS type,&#xA;&#x9;mhy_trademark_type.type AS category,&#xA;&#x9;mhy_trademark.`name` AS trademark,&#xA;&#x9;mhy_trademark_type.registration_number AS registrationNumber,&#xA;&#x9;mhy_applicant.`name` AS applicantName,&#xA;&#x9;mhy_applicant.message_corp AS messageCorp,&#xA;&#x9;IFNULL( mhy_order.complete, &#39;否&#39; ) AS isComplete,&#xA;&#x9;mhy_applicant.custom_name AS contactUser,&#xA;&#x9;mhy_order.charge AS charge,&#xA;&#x9;mhy_order.notification_method AS noticeType,&#xA;&#x9;mhy_order.notification_time AS noticeTime,&#xA;&#x9;sys_user.username AS salesman,&#xA;&#x9;mhy_order_progress.gen_time AS messageTime,&#xA;&#x9;ROW_NUMBER() over ( PARTITION BY mhy_order_progress.order_id ORDER BY mhy_order_progress.gen_time DESC ) RowNum,&#xA;&#x9;&#xA;FROM&#xA;&#x9;`mhy_trademark_type`&#xA;&#x9;JOIN mhy_trademark ON `mhy_trademark_type`.trademark_id = mhy_trademark.id&#xA;&#x9;JOIN mhy_order ON mhy_trademark.order_id = mhy_order.id&#xA;&#x9;JOIN mhy_applicant ON mhy_order.applicant_id = mhy_applicant.id&#xA;&#x9;JOIN `sys_user` ON `sys_user`.user_id = mhy_order.create_user_id -- JOIN mhy_applicant as tp ON mhy_order.transferor_id = tp.id&#xA;&#x9;LEFT JOIN mhy_order_progress ON mhy_order_progress.order_id = mhy_order.id&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;目前的 SQL 就是这样 还是比较简单的，关键在于待分组的表 mhy_order_progress 是 left join 的，可能关联不到这张表。 导致 ```PARTITION BY mhy_order_progress.order_id`` 执行时，数据都跑一个分区里了，因为 mhy_order_progress.order_id 都是 null 。&lt;/p&gt;&#xA;&lt;p&gt;数据库是 mysql8.0 最新版本。这个 SQL 还有个非常长的 where 以及分页。&lt;/p&gt;&#xA;</description>
+      <author>coderstory</author>
+      <pubDate>05 Oct 2022 14:53:10 +0000</pubDate>
+    </item>
+    <item>
       <title>原来 AirPods Pro 一代的硬件是会“老化”的 - Apple</title>
       <link>https://www.v2ex.com/t/884817</link>
       <description>上周去 Apple Store 修耳机，去的路上感觉开了降噪就像是没开一样，甚至都有打算修好了直接现场提二代。&lt;br /&gt;&lt;br /&gt;天才吧检测后现场更换双耳，戴上后好像一切都回来了，降噪效果很棒，对比提升非常大（虽然还是没法和二代比，但是差距不大）。&lt;br /&gt;&lt;br /&gt;之前一直以为是 Apple 故意负优化更新，结果发现 AirPods Pro 一代的硬件也会“老化”。&lt;br /&gt;&lt;br /&gt;天才吧工程师也告诉我，即使不属于声音维修计划内的耳机也会出现问题，用久了，就会出现问题。</description>
