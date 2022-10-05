@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Twitter 疑似接入 CN2 GT - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/884820",
+      "Description": "\u003cp\u003e测试 IP: 104.244.42.13\u003c/p\u003e\n\u003cp\u003e不过看着好像回程没有 CN2🤔\u003c/p\u003e\n",
+      "Author": "LGA1150",
+      "PubDate": "2022-10-05T15:19:59Z"
+    },
+    {
       "Title": "求解 MySQL 8.0 Left Join 的表使用 PARTITION 分区的问题 - MySQL",
       "Link": "https://www.v2ex.com/t/884818",
       "Description": "\u003cpre\u003e\u003ccode\u003eSELECT\n\tmhy_order.id AS id,\n\tmhy_order.id AS orderId,\n\tmhy_trademark.id AS trademarkId,\n\tmhy_trademark_type.id AS typeId,\n\tmhy_order.order_type AS type,\n\tmhy_trademark_type.type AS category,\n\tmhy_trademark.`name` AS trademark,\n\tmhy_trademark_type.registration_number AS registrationNumber,\n\tmhy_applicant.`name` AS applicantName,\n\tmhy_applicant.message_corp AS messageCorp,\n\tIFNULL( mhy_order.complete, '否' ) AS isComplete,\n\tmhy_applicant.custom_name AS contactUser,\n\tmhy_order.charge AS charge,\n\tmhy_order.notification_method AS noticeType,\n\tmhy_order.notification_time AS noticeTime,\n\tsys_user.username AS salesman,\n\tmhy_order_progress.gen_time AS messageTime,\n\tROW_NUMBER() over ( PARTITION BY mhy_order_progress.order_id ORDER BY mhy_order_progress.gen_time DESC ) RowNum,\n\t\nFROM\n\t`mhy_trademark_type`\n\tJOIN mhy_trademark ON `mhy_trademark_type`.trademark_id = mhy_trademark.id\n\tJOIN mhy_order ON mhy_trademark.order_id = mhy_order.id\n\tJOIN mhy_applicant ON mhy_order.applicant_id = mhy_applicant.id\n\tJOIN `sys_user` ON `sys_user`.user_id = mhy_order.create_user_id -- JOIN mhy_applicant as tp ON mhy_order.transferor_id = tp.id\n\tLEFT JOIN mhy_order_progress ON mhy_order_progress.order_id = mhy_order.id\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e目前的 SQL 就是这样 还是比较简单的，关键在于待分组的表 mhy_order_progress 是 left join 的，可能关联不到这张表。 导致 ```PARTITION BY mhy_order_progress.order_id`` 执行时，数据都跑一个分区里了，因为 mhy_order_progress.order_id 都是 null 。\u003c/p\u003e\n\u003cp\u003e数据库是 mysql8.0 最新版本。这个 SQL 还有个非常长的 where 以及分页。\u003c/p\u003e\n",
@@ -137,13 +144,6 @@
       "PubDate": "2022-10-05T12:36:43Z"
     },
     {
-      "Title": "沿海地区买房考虑战争因素是多虑了嘛？ - 问与答",
-      "Link": "https://www.v2ex.com/t/884790",
-      "Description": "\u003cp\u003e继上个月到威海看房后做了一些调研，目前心理上是能接受在威海买房。老婆是海边长大的(非威海土著)，想要一套山海之间的房子，不为投资升值，只为理想。最早明年下手，迫于经济形势，还要继续观望。\u003c/p\u003e\n\u003cp\u003e这两天朝鲜韩国互扔飞弹，让我联想到这个问题：如果有朝一日发生战争，威海作为海上距离离韩国最近的城市是否会受到影响？\u003c/p\u003e\n",
-      "Author": "heyyyy",
-      "PubDate": "2022-10-05T12:21:46Z"
-    },
-    {
       "Title": "如何将大量 Apple 自带记事本 Notes 笔记导出到 Jophin 中（Markdown） - Markdown",
       "Link": "https://www.v2ex.com/t/884789",
       "Description": "\u003cp\u003e大段复制，尤其是图片的，不能一次性复制，还需要手动来完成，非常耗时间。\n感觉是 Markdown 编辑器不行导致的\u003c/p\u003e\n\u003cp\u003e想问问 v 友有没有好的办法？\n同时求一个比 Joplin 更好的 Markdown 编辑器，比如说支持替换和查找功能的\u003c/p\u003e\n",
@@ -240,6 +240,13 @@
       "Description": "发个自己造的轮子，待办管理，全网同步，完全免费。\u003cbr /\u003e\u003cbr /\u003e以天级别为基本单元，比较适合及时性不高的任务管理，\u003cbr /\u003e\u003cbr /\u003e上图为敬：![界面截图]( \u003ca target=\"_blank\" href=\"https://tva1.sinaimg.cn/large/006y8mN6gy1h6ujqj5r2sj31su0u0n11.jpg\" rel=\"nofollow noopener\"\u003ehttps://tva1.sinaimg.cn/large/006y8mN6gy1h6ujqj5r2sj31su0u0n11.jpg\u003c/a\u003e)\u003cbr /\u003e\u003cbr /\u003e地址： \u003ca target=\"_blank\" href=\"https://tortoisedo.xyz/\" rel=\"nofollow noopener\"\u003ehttps://tortoisedo.xyz/\u003c/a\u003e ，欢迎注册使用！",
       "Author": "ppppppp123",
       "PubDate": "2022-10-05T09:38:35Z"
+    },
+    {
+      "Title": "沿海地区买房考虑战争因素是多虑了嘛？ - 问与答",
+      "Link": "https://www.v2ex.com/t/884790",
+      "Description": "\u003cp\u003e继上个月到威海看房后做了一些调研，目前心理上是能接受在威海买房。老婆是海边长大的(非威海土著)，想要一套山海之间的房子，不为投资升值，只为理想。最早明年下手，迫于经济形势，还要继续观望。\u003c/p\u003e\n\u003cp\u003e这两天朝鲜韩国互扔飞弹，让我联想到这个问题：如果有朝一日发生战争，威海作为海上距离离韩国最近的城市是否会受到影响？\u003c/p\u003e\n",
+      "Author": "heyyyy",
+      "PubDate": "2022-10-05T12:21:46Z"
     },
     {
       "Title": "小软件收到第一个会员订阅 - 程序员",
