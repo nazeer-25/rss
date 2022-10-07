@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "EasyMosdns 分享简单好用的 DoH 与开源策略供研究使用 - DNS",
+      "Link": "https://www.v2ex.com/t/885061",
+      "Description": "\u003cp\u003eEasyMosdns 项目自发布以来，得到了 V2EX 小伙伴们的一致好评，感谢大家的认可 : D\u003c/p\u003e\n\u003cp\u003e项目地址： \u003ca href=\"https://github.com/pmkol/easymosdns\" rel=\"nofollow\"\u003ehttps://github.com/pmkol/easymosdns\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e简化 Mosdns 基本功能使用的辅助脚本，仅需几分钟即可搭建一台支持 ECS 的无污染 DNS 服务器。\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e放出这个 DoH 的初衷是为了给开源项目 EasyMosDNS 测试规则，不提供公共 DNS 服务，发现直接使用的小伙伴越来越多，日解析量已经突破千万，所以优化了一下性能，分享全新版本的 DoH ，继续供大家研究测试使用。\u003c/p\u003e\n\u003ch4\u003eDoH 地址：[\u003ca href=\"https://apad.pro/dns-doh/\" rel=\"nofollow\"\u003e前往查看\u003c/a\u003e]\u003c/h4\u003e\n\u003chr/\u003e\n\u003cp\u003e本次更新，做了大量优化与调整：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e修复了因 ECS 缓存导致 DNS 解析不准的 Bug\u003c/li\u003e\n\u003cli\u003e解决了 DNS 泄露国内节点的问题 (仅默认节点不泄露)\u003c/li\u003e\n\u003cli\u003e更换了 CDN 厂商防止攻击造成宕机\u003c/li\u003e\n\u003cli\u003e增加了 1 组境内节点规则 CN (即路由器上经常使用的境内 DNS 返回 IP 判断分流的规则)\u003c/li\u003e\n\u003cli\u003e增加了 6 组境外节点规则 HK/TW/JP/SG/RU/US\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr/\u003e\n\u003cp\u003e发现很多小伙伴并不知道这个项目同时也在维护 DNS 规则库，同时分享出来，适用于 DNS 分流。\u003c/p\u003e\n\u003ch4\u003eDNS 规则库地址：[\u003ca href=\"https://github.com/pmkol/easymosdns/tree/rules\" rel=\"nofollow\"\u003e前往查看\u003c/a\u003e]\u003c/h4\u003e\n\u003chr/\u003e\n\u003ch4\u003e这个 DoH 有什么不同：\u003c/h4\u003e\n\u003cul\u003e\n\u003cli\u003e开源策略\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e对于安全而言这是最有说服力的。\u003c/p\u003e\n\u003cp\u003e举例说一条大家比较关注的，如何平衡 ECS 信息与隐私保护：源码中可见对 ECS 信息做了模糊处理，例如你的 IP 为 1.3.5.7 ，处理后的 ECS 信息为 1.3.5.0/24 ，对于部分境外域名，强制更改 ECS 信息为与真实 IP 无关联但不会影响解析效果的数值。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e加密隧道\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e严格来讲，国内无论用 UDP/TCP/DoT/DoH/DoQ 哪种方式，直接去查询海外 DNS 都是不可靠的，还可能不定期出现阻断，因为这些访问方式都有明显的特征可以识别，当然如果没有多大访问量又不在意的话，也没什么大问题。\u003c/p\u003e\n\u003cp\u003e通过境外服务器查询海外域名才是可靠的，但境外查询的结果又如何传递国内，仅在境外服务器搭建 DNS 依旧会出现上述的问题，所以需要自建加密隧道，与远程服务器加密通信完成 DNS 的查询。其中对线路与加密方案的选择，是有少许技术含量的，否则访问量稍大就会出现 TCP 阻断。这也是我唯一没有公开的自研方案。\u003c/p\u003e\n\u003cp\u003e普通用户只需要了解这个 DoH 是在境外服务器查询的海外域名的即可，由于提供 DoH 的服务器在境内，查询速度有质的提升，可以通过以下两个网站，分辨检测境内与境外 DNS 的分流情况。\u003c/p\u003e\n\u003cp\u003e[境内] \u003ca href=\"https://nstool.netease.com/\" rel=\"nofollow\"\u003ehttps://nstool.netease.com/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e[境外] \u003ca href=\"https://browserleaks.com/dns\" rel=\"nofollow\"\u003ehttps://browserleaks.com/dns\u003c/a\u003e\u003c/p\u003e\n\u003chr/\u003e\n\u003ch4\u003e这里做个科普：\u003c/h4\u003e\n\u003cp\u003e很多代理工具默认内置了海外 DNS ，开启代理时海外 DNS 是通过远程代理服务器访问的，所以普通用户才会对 DNS 这里的影响无感，上文提到的加密隧道也类似这个原理，只是要做远超过客户端请求量的技术改进。\u003c/p\u003e\n\u003cp\u003e如果代理使用的是白名单模式，最优的 DNS 选择方案，就是本地 DNS 使用 DNSPOD 或 AliDNS 这类大厂的 EDNS ，远程 DNS 使用代理工具内置或 Google 、OpenDNS 、CloudFlare 等几家知名的海外 DNS ，乱折腾只是浪费时间。\u003c/p\u003e\n\u003cp\u003e但如果代理使用的是 GFW 黑名单模式，那么就会出现污染问题。这是因为黑名单与污染名单里的域名并不一致，当被污染的域名不在黑名单时，该域名就会返回污染结果。\u003c/p\u003e\n\u003cp\u003e所以对于无污染 DNS 的正确用法，应当是在本地名单中的域名，使用 DNSPOD 或 AliDNS 这类大厂的 EDNS ，其它全部使用无污染 DNS 进行查询。即实现代理走 GFW 名单节约流量，DNS 走白名单准确解析的效果。当然一些懒人会选择直接全部使用无污染 DNS ，但请确保这个 DNS 服务器在国内且延迟不高，不然真的会很慢。\u003c/p\u003e\n\u003chr/\u003e\n\u003ch4\u003e如果你是普通用户：\u003c/h4\u003e\n\u003cp\u003e我已将常见问题写入介绍页，基本能回答 90%以上的问题，使用问题可以加介绍页里的电报群，与群里的小伙伴们讨论，毕竟个人精力实在有限，没法在线回答问题。\u003c/p\u003e\n\u003ch4\u003e如果你是自建 DNS 用户：\u003c/h4\u003e\n\u003cp\u003e首先感谢各位免费无污染 DNS 搭建者们的认可，我不抵制私人搭建的公共 DNS 将这个 DoH 作为上游使用，还会很高兴帮助到更多人，事实上目前已有约 40%的查询量来自多家私人搭建的 DNS 。\u003c/p\u003e\n\u003cp\u003e只要求一点，做好缓存与 QPS 限制，减少对我 DoH 的请求量。因为之前发生过攻击事件，经查证我的服务器并未直接受到攻击，全部攻击 IP 均来自一些私人搭建的 DNS 服务器，当这些 DNS 被攻击后，攻击流量同时也转发到了我的服务器，最终形成连锁攻击导致我的服务器也宕机了几小时。\u003c/p\u003e\n\u003cp\u003e目前的处理策略，对于因没做缓存造成查询量明显超过普通用户的下游 DNS ，会转发海外处理，减少国内服务器的压力，对未做 QPS 限制且对服务器造成业务影响的下游 DNS ，会自动封禁。当然我更建议使用我已经开源的规则，在本地服务器上做分流，当出现超时后再请求我的 DoH 体验会更佳。\u003c/p\u003e\n\u003ch4\u003e最后想说的：\u003c/h4\u003e\n\u003cp\u003e维护不易，如果可以，给 EasyMosDNS 开源项目\u003ca href=\"https://github.com/pmkol/easymosdns\" rel=\"nofollow\"\u003e点颗星\u003c/a\u003e吧！\u003c/p\u003e\n",
+      "Author": "PMkol",
+      "PubDate": "2022-10-07T09:45:37Z"
+    },
+    {
       "Title": "Pixel 7 \u0026 7 Pro 内置 VPN（属 Google One 套餐，无额外收费） - Pixel",
       "Link": "https://www.v2ex.com/t/885060",
       "Description": "\u003cp\u003e话说 Pixel 节点好寂静，最新的消息居然是 9 天前～ \u003c/p\u003e\n\u003cp\u003e手持 4a 备用，我很喜欢 4a 的轻巧手感，拍照画质日常用也不错，还有就是无限量图片备份，虽然有压缩但是在我丢失一块移动硬盘后，发觉便捷才是最好的\u003c/p\u003e\n",
@@ -107,13 +114,6 @@
       "Description": "\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e配件\u003c/th\u003e\n\u003cth\u003e型号\u003c/th\u003e\n\u003cth\u003e价格\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e主板\u003c/td\u003e\n\u003ctd\u003e华硕 TUF GAMING B660M-PLUS WIFI D4 重炮手 套装\u003c/td\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eCPU\u003c/td\u003e\n\u003ctd\u003e英特尔 i7-12700\u003c/td\u003e\n\u003ctd\u003e3080\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e内存\u003c/td\u003e\n\u003ctd\u003e威刚 XPG 威龙 DDR4 3200 32G * 2\u003c/td\u003e\n\u003ctd\u003e1358\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e硬盘\u003c/td\u003e\n\u003ctd\u003e西部数据 SN770 M.2 Pcie4.0\u003c/td\u003e\n\u003ctd\u003e699\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e散热\u003c/td\u003e\n\u003ctd\u003e利民 AXP90-X53\u003c/td\u003e\n\u003ctd\u003e197\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e电源\u003c/td\u003e\n\u003ctd\u003e长城 金牌 500w v5 全模组\u003c/td\u003e\n\u003ctd\u003e349\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e机箱\u003c/td\u003e\n\u003ctd\u003e酷冷魔神 x40 机箱\u003c/td\u003e\n\u003ctd\u003e98\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e合计\u003c/td\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003ctd\u003e5781\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e铁皮机箱差不到哪去，不容易坏的零件淘宝买，容易坏的、重要的京东买，品牌都是耳熟能详的。\u003c/p\u003e\n\u003cp\u003e我采用的是外置电源的方案，所以能兼顾到主机大小、性能、价格、散热、携带性。\u003c/p\u003e\n\u003cp\u003e正常大小的背包都能轻松的放进去主机和电源。\u003c/p\u003e\n\u003cp\u003e散热，日常使用 27-40℃。\u003c/p\u003e\n\u003cp\u003e噪音，电源没有，cpu 风扇有一点，稍微专注工作就没什么感觉。\u003c/p\u003e\n\u003cp\u003e效果：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"效果\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/ELP2bLP.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e电源和扎带可以随时拿下来，合体稳定性杠杠的，本来想让老爹打孔，他说扎带就可以了，又方便。\u003c/p\u003e\n\u003cp\u003e女性朋友说好丑啊，哈哈，我觉得刚刚好。\u003c/p\u003e\n",
       "Author": "sugarkeek",
       "PubDate": "2022-10-07T08:15:33Z"
-    },
-    {
-      "Title": "YouTube Premium 开车啦 - 宽带症候群",
-      "Link": "https://www.v2ex.com/t/885037",
-      "Description": "\u003cp\u003e土耳其 YouTube Premium 美国家庭组，6 人新车，补 5 人，年付 40 ，跳车不退，翻车退款。\ntel: aHR0cHM6Ly90Lm1lL21vbnN0ZXIxOTk1MTAK\u003c/p\u003e\n",
-      "Author": "ea3ba5c0",
-      "PubDate": "2022-10-07T08:11:03Z"
     },
     {
       "Title": "为何只有苹果还在用这种 Rubber Gasket，特别容易老化 - Apple",
@@ -249,13 +249,6 @@
       "PubDate": "2022-10-07T06:42:00Z"
     },
     {
-      "Title": "哪里有可用的阿根廷或者土耳其的 daili？ - 宽带症候群",
-      "Link": "https://www.v2ex.com/t/885016",
-      "Description": "\u003cp\u003e免费最好，就用一下，开 youtube premium 用。\n收费的也行，别太贵。\n试用了几个，基本都连不上，各种绑定信用卡，超麻烦。\u003c/p\u003e\n",
-      "Author": "ea3ba5c0",
-      "PubDate": "2022-10-07T06:41:18Z"
-    },
-    {
       "Title": "WeChat on Apple Watch 如何调整语音消息的音量 - Apple",
       "Link": "https://www.v2ex.com/t/885015",
       "Description": "\u003cp\u003e在手表上点击播放微信语音消息时外放音量特别小，没找到可以调整音量的地方。我记得早期版本可以调整来着，最新的版本没了？\u003c/p\u003e\n",
@@ -282,6 +275,20 @@
       "Description": "\u003cp\u003e之前上大学的时候，经常会在学校附近的咖啡馆约一些外国朋友练习口语，这几年因为疫情，大多回国了，现在在深圳工作，周六周日想找一个咖啡馆或者英语角锻炼一下口语，大家有了解的推荐一下！\u003c/p\u003e\n",
       "Author": "gordon96",
       "PubDate": "2022-10-07T06:07:29Z"
+    },
+    {
+      "Title": "YouTube Premium 开车啦 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/885037",
+      "Description": "\u003cp\u003e土耳其 YouTube Premium 美国家庭组，6 人新车，补 5 人，年付 40 ，跳车不退，翻车退款。\ntel: aHR0cHM6Ly90Lm1lL21vbnN0ZXIxOTk1MTAK\u003c/p\u003e\n",
+      "Author": "ea3ba5c0",
+      "PubDate": "2022-10-07T08:11:03Z"
+    },
+    {
+      "Title": "哪里有可用的阿根廷或者土耳其的 daili？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/885016",
+      "Description": "\u003cp\u003e免费最好，就用一下，开 youtube premium 用。\n收费的也行，别太贵。\n试用了几个，基本都连不上，各种绑定信用卡，超麻烦。\u003c/p\u003e\n",
+      "Author": "ea3ba5c0",
+      "PubDate": "2022-10-07T06:41:18Z"
     },
     {
       "Title": "坐标 杭州 有哪些好一点英语角吗 现在 - 杭州",
