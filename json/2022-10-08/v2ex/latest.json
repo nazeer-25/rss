@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "[ Python ] 关于轮询的问题 http 还是 socketIO - 程序员",
+      "Link": "https://www.v2ex.com/t/885328",
+      "Description": "\u003cp\u003e现在就是有个长轮询的场景， 反正结果是在 redis 中， 现在就是考虑更好的进行交互。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003ehttp 长轮询， 不过缺点挺明显的。1.不及时(假设 1s)，2.服务器压力大\u003c/li\u003e\n\u003cli\u003esocketIo\n为什么用 socketIo  因为 socket 一对多要开很多线程，socketIo 支持异步， 原理没有深究 都是第一次用。  \u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e后端架构 flask + gunicorn （后期在加 nginx 均衡 多台服务器）\ngunicorn 采用多进程+ 多线程 配置 \u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e如果是用 http 轮询的话，除了压力比 socketIO 大，感觉问题不大。（采用这个方案更简单实现）\u003c/li\u003e\n\u003cli\u003e如果用 socketIO ，那问题就多了， 官网显示 gunicorn + socketIO 只能采用单进程。而且如果要 nginx 动态均衡的话会出现 粘性会话 问题。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e下面是官网原话\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e带有 Gunicorn 的 Eventlet \n如上所述运行 eventlet WSGI 服务器的替代方法是使用 gunicorn ，这是一个功能齐全的纯 Python Web 服务器。gunicorn 下启动应用程序的命令如下所示：\n\n$ gunicorn -k eventlet -w 1 module:app\n由于其负载均衡算法的限制，gunicorn 只能与一个工作进程一起使用，因此该-w 选项不能设置为大于 1 的值。单个 eventlet 工作人员可以处理大量并发客户端，每个客户端由一个 greenlet 处理.\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e采用 socketIO + nginx 动态均衡(假设端口 5000 ，5001) ，会出现 连接 5000 后，如何保证后续所有的 socketIo 请求 全部指向 5000 而不是 5001 ，反之一样。\u003c/p\u003e\n\u003cp\u003e唉\n如果采用 socketIO + Gunicorn 那么 Gunicorn 只能开一个进程。\n如果采用 http + Gunicorn 可多进程多线程 但消息不及时。服务器压力大。感觉也不是很好。毕竟都 2022 了。\u003c/p\u003e\n\u003cp\u003e个人还是倾向 socketIO ， 很纠结啊\n有没有经验的兄弟 socketIO + Gunicorn 部署过的。有什么要注意的吗？ 资料太少了\u003c/p\u003e\n",
+      "Author": "hhhhhh123",
+      "PubDate": "2022-10-08T09:30:51Z"
+    },
+    {
+      "Title": "屏幕使用时间多设备同步紊乱 - Apple",
+      "Link": "https://www.v2ex.com/t/885327",
+      "Description": "iPhone 上永远只有 iPhone 和 Mac ，不出现 iPad\u003cbr /\u003e\u003cbr /\u003eiPad 上有 iPhone 选项，但不刷新\u003cbr /\u003e\u003cbr /\u003eMac 上除了自身，其他两个都不刷新\u003cbr /\u003e\u003cbr /\u003eiOS 16.0.2 - iPad OS 16.1beta4 - macOS 12.6",
+      "Author": "shineonme",
+      "PubDate": "2022-10-08T09:28:12Z"
+    },
+    {
       "Title": "刚续了今年的车险，分享点经验 - 分享发现",
       "Link": "https://www.v2ex.com/t/885326",
       "Description": "\u003ch2\u003e4s 店渠道和保险专员渠道的差别\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e价格几乎一样，4s 店也能拿到保险专员给你的价格\u003c/li\u003e\n\u003cli\u003e4s 店有额外福利，比如两张喷漆券（价值 1000 ，也就是喷两个面的材料和工时费，实际上轻微的钣金也会免费给弄好），如果技术好不容易剐蹭的可以选机油券以及保养工时券\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e4s 店渠道和支付宝渠道的差别\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e支付宝更简单，一键查看多家报价，一键购买，减少沟通成本\u003c/li\u003e\n\u003cli\u003e\n支付宝的报价\u003cul\u003e\n\u003cli\u003e交强险，商业险都要比 4s 店渠道低一点点\u003c/li\u003e\n\u003cli\u003e附加的乘驾驶险，意外险金额很低\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e总结\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e支付宝：300W 第三者+交强险+车损+司机和乘客各 1 万的意外险总费用：2860 左右\u003c/li\u003e\n\u003cli\u003e4s 店：300W 第三者+交强险+车损+司机和乘客座位险各 30 万+意外险各 10 万+2 张喷漆券+200 线上购物优惠券：2990\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e还有两个情况：\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e部分车辆的车船税今年减半了（我的从 360 变成了 180 ，这个保险公司也不清楚怎么回事）\u003c/li\u003e\n\u003cli\u003e国家对第三者险有政策支持，买 200W 和 300W 总体优惠完价格几乎一样\u003c/li\u003e\n\u003c/ul\u003e\n",
