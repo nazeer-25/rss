@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "nodejs 调用 dubbo 接口报错 - Node.js",
+      "Link": "https://www.v2ex.com/t/885654",
+      "Description": "如题，对 nodejs 还不熟悉。按这里的指引，尝试用 dubbo-js 调用 dubbo-samples 的 sayhello 接口。一共两个文件,dubbo-test.ts 的内容如下\u003cbr /\u003e`\u003cbr /\u003eimport { Dubbo } from 'apache-dubbo-consumer'\u003cbr /\u003eimport { Zk} from 'apache-dubbo-registry'\u003cbr /\u003eimport {HelloService} from './service'\u003cbr /\u003e\u003cbr /\u003econst dubbo = new Dubbo\u0026lt;typeof HelloService\u0026gt;({\u003cbr /\u003e\tapplication: {name: 'dubbo-node-bff'},    // 标记调用方，信息存储在注册中心，方便排查问题\u003cbr /\u003e  registry: Zk({ connect: '192.168.1.122:2181' }), // 以 Zk 作为注册中心，详细的初始化参考 @\u003ca target=\"_blank\" href=\"/member/apache\" rel=\"nofollow noopener\"\u003eapache\u003c/a\u003e/dubbo-registry 的 api\u003cbr /\u003e  services:HelloService,                                 // 代理的服务                      // boolean 可选参数 是否开启对 dubbox 的支持\u003cbr /\u003e  dubboInvokeTimeout:15,                       // number 可选参数 最大超时时间 默认 5s\u003cbr /\u003e                          // string 可选参数 设置 dubbo 版本\u003cbr /\u003e                          // 设置调用元数据 可选参数\u003cbr /\u003e});\u003cbr /\u003e//main method\u003cbr /\u003edubbo.service.HelloService.sayHello('dd');\u003cbr /\u003e`\u003cbr /\u003eservice.ts 的内容如下：\u003cbr /\u003e`\u003cbr /\u003eimport { Dubbo, TDubboCallResult } from 'apache-dubbo-consumer'\u003cbr /\u003e\u003cbr /\u003e// 获取更好的代码提示\u003cbr /\u003eexport interface IHelloService {\u003cbr /\u003e  sayHello(name: string): TDubboCallResult\u0026lt;string\u0026gt;\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003eexport const HelloService = (dubbo: Dubbo) =\u0026gt; \u003cbr /\u003e   dubbo.proxyService\u0026lt;IHelloService\u0026gt;({\u003cbr /\u003e   \tdubboInterface: 'org.apache.dubbo.service.HelloService',\u003cbr /\u003e    methods: {\u003cbr /\u003e      sayHello(name: string) {\u003cbr /\u003e        return [name] // 此处为代理方法，不需要具体的实现，我们只需要将参数透传即可，这样 dubbo-consumer 就可以获取完整的服务信息\u003cbr /\u003e      }\u003cbr /\u003e    }\u003cbr /\u003e   })\u003cbr /\u003e`\u003cbr /\u003e但是运行一直报错：Property 'HelloService' does not exist on type 'TDubboService\u0026lt;(dubbo: Dubbo\u0026lt;Object\u0026gt;) =\u0026gt; IHelloService\u0026gt;'.\u003cbr /\u003e这是要什么修改呢？希望大家能够多多指点",
+      "Author": "873792861",
+      "PubDate": "2022-10-09T17:26:57Z"
+    },
+    {
+      "Title": "一觉醒来，刀圈又有了个新瓜 - DotA",
+      "Link": "https://www.v2ex.com/t/885653",
+      "Description": "\u003cp\u003e[煊正 cp 出事！煊宝男朋友出来长文锤煊宝，还想要回刷给煊宝的一百万，孙正这是成黄毛了？]  \u003ca href=\"https://www.bilibili.com/video/BV1DR4y197yT?share_source=copy_web\u0026amp;vd_source=da2ed393fbf82731df6cf9205f6cb4d1\" rel=\"nofollow\"\u003ehttps://www.bilibili.com/video/BV1DR4y197yT?share_source=copy_web\u0026amp;vd_source=da2ed393fbf82731df6cf9205f6cb4d1\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e（这是个正在更新中的合集）\u003c/p\u003e\n",
+      "Author": "leimao",
+      "PubDate": "2022-10-09T17:26:07Z"
+    },
+    {
       "Title": "是不是只有赫曼米勒的椅子才有支持动态坐姿的功能？ - 问与答",
       "Link": "https://www.v2ex.com/t/885652",
       "Description": "\u003cp\u003e动态坐姿这个词是从这个视频看到的： [先看评测]\u003ca href=\"https://youtu.be/cist5QiK-yw?t=1824\" rel=\"nofollow\"\u003ehttps://youtu.be/cist5QiK-yw?t=1824\u003c/a\u003e\u003cbr/\u003e\n我理解为能够全自动调节后背的角度，而不需要手动的调整，现在公司的椅子就是 HM 的 Sayl ，这个功能真的很舒服，爱不释手\u003cbr/\u003e\n看了一圈，似乎只有赫曼米勒家的椅子才支持这个功能，前几天还特地去 HM 线下店（上海）体验了一圈，他们家所有人体工学椅都支持这个功能  \u003c/p\u003e\n\u003cp\u003e只是价格都很贵（参考 JD 旗舰店）：\u003cbr/\u003e\n最便宜的是 HM Sayl ，价格 7000+（公司里就是这款，不过应该是企业阉割定制版，只保留了核心功能）\u003cbr/\u003e\n我坐着最舒服的是 HM Cosm ，价格 16000+（高背，算是有头枕）\u003cbr/\u003e\n最出名的款应该是 HM Aeron ，价格 14000+  \u003c/p\u003e\n\u003cp\u003e想请教一下，是否只有 HM 支持动态坐姿，有便宜点的平替么？ HM 实在太贵了\u003cbr/\u003e\n或者有无比较靠谱的购买 HM 的渠道？对比了一下区别在于售后质保，官方购买是官方质保 12 年，其他店铺购买的则归店铺质保，价格往往会便宜一半，虽然有的是店铺也是质保 12 年，但能开这么久的店应该很少\u003c/p\u003e\n",
