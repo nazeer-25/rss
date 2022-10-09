@@ -4,9 +4,51 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>一种可能的翻墙思路，请 V 友们交流指正 - 程序员</title>
+      <link>https://www.v2ex.com/t/885522</link>
+      <description>&lt;p&gt;根据最近我个人了解的各方面消息，提出一种可能的翻墙思路，概要如下，烦请各位 V 友批评指正：&lt;/p&gt;&#xA;&lt;p&gt;核心思路: &lt;strong&gt;XTLS 的改进、IPv6 段对段、IP 跳变抗干扰&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;需求：IPv4 、IPv6 双栈服务器，并且 IPv6 拥有大段地址（至少大于 /128 ）且包含国内优化&lt;/p&gt;&#xA;&lt;p&gt;通信思路：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;问题 1：有传言称 GFW 可识别 TLS-over-TLS ，所以为了避免被识别，还是得采用 XTLS ，并且得解决 XTLS 存在的流量特征的问题(TLS1.3 的连接中出现 TLS1.2 特征的流量)&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;解决：如果对方网站使用的 TLS 版本与当前连接相同，就直接将 TLS 拼接起来，如果不同，则使用 Shadowsocks 这种强加密协议掩盖 TLS 的特征。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;问题 2：加密套件选择什么呢？&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;解决：有疑似 GFW 的内部人员透露，SM （商密）加密套件现在在白名单内，可以使用带 AEAD 的 SM （商密）加密套件建立 TLS 连接。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;我的思路：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;1 、IPv4 建立网站，提供 HTTPS 服务,带 AEAD 的 SM （商密）加密套件建立 TLS 连接。当检测到连接方是翻墙服务的客户端以后（ IPv4 实现客户端鉴权以及 TLS 连接的建立），在提供的网页内容中加入“私货”，也就是继续进行 TLS 通信的下一个 IPv6 地址，这个时候，&lt;strong&gt;保存当前通信状态&lt;/strong&gt;，使用 IPv6 地址继续与翻墙客户端进行通信，而 IPv4 连接的任务已经完毕，可以关闭 TLS 连接了。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;2 、IPv6 地址进行短暂的通信，然后在随机延迟时间过后向客户端发送一个 IPv6 地址段下的其他 IPv6 地址，将当前通信状态切换到这个新的 IPv6 地址上（ 0 RTT ），通过不断的跳变，实现所谓的 “跳 IP 通信”。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;解决痛点：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;1 、解决了 IPv4 通信中单 IP 流量大的问题，&lt;strong&gt;避免&lt;/strong&gt;通过流量模型判断 IP 地址是否违规&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;2 、解决了单地址&lt;strong&gt;长连接&lt;/strong&gt;带来的干扰问题&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;3 、高价值的 IPv4 地址暴露的时间变短，避免高价值的 IPv4 地址被封禁。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;4 、既然是跳变，我们可以控制跳变的概率，让 GFW 错判服务器拥有的 IPv6 的范围，甚至实现更多花活&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>MNIST</author>
+      <pubDate>09 Oct 2022 06:37:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>如何不通过第三方软件让 Mac 实现 iPhone iPad Airplay 到多个外置音响一样的功能 - Apple</title>
+      <link>https://www.v2ex.com/t/885521</link>
+      <description>&lt;p&gt;不是通过蓝牙，那个系统自带能搞定。并且蓝牙会时不时出现音乐不同步情况。&lt;/p&gt;&#xA;&lt;p&gt;我想通过 wifi 方式 Airplay 到多个外置音响。目前 Mac 只有系统自带的 iTunes Music 和 quciktime 支持。其他软件或者网页音乐无法实现&lt;/p&gt;&#xA;&lt;p&gt;但是 iPhone iPad 却支持 AirPlay ，不管网页还是第三方 app&lt;/p&gt;&#xA;&lt;p&gt;目前使用 Airfoil 和 AirParrot 实现，但是总闲麻烦，请问 Mac OS 自身如何实现这个功能？&lt;/p&gt;&#xA;</description>
+      <author>nztomoto</author>
+      <pubDate>09 Oct 2022 06:34:59 +0000</pubDate>
+    </item>
+    <item>
+      <title>求助 v 友，寻职业/实习机会（广州/佛山） - 酷工作</title>
+      <link>https://www.v2ex.com/t/885520</link>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;寻求一个后端开发程序员的工作 /实习机会，不求薪酬，只为转行。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;[自我介绍]&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;我是 Winson ，本科毕业三年，读的社会科学类专业，目前有 7 个月的项目开发经验。2022 年初参加 Bootcamp 学的 Java 后端开发，主要技术栈是 SSM 。我和同学用 SSM 开发了一个跟闲鱼类似的租物平台，引入 Elasticsearch 开发了平台的产品搜索功能。&#xA;我的简历在 &lt;a href=&#34;https://github.com/Winson-030/resume/blob/main/%E6%9D%8E%E6%B0%B8%E6%9D%B0%E6%B1%82%E8%81%8C%E5%88%9D%E7%BA%A7Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%A8%8B%E5%BA%8F%E5%91%98-.pdf&#34; rel=&#34;nofollow&#34;&gt;这里&lt;/a&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;我目前的技术栈&lt;ol&gt;&#xA;&lt;li&gt;SpringBoot 、MySQL 、MyBatis 、Vue.js 整合开发&lt;/li&gt;&#xA;&lt;li&gt;Linux 服务器，Docker 容器部署和运维&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;感兴趣的领域&lt;ol&gt;&#xA;&lt;li&gt;web3 ，区块链。正在入门 nodejs 和智能合约&lt;/li&gt;&#xA;&lt;li&gt;容器开发。正在学习 Docker 容器的部署和开发&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;9 月份从 Bootcamp 毕业后根据自己的实际情况写好简历（老师不建议我们包装简历）在招聘网站上投了一个多月，岗位是初级 Java 开发，大部分都是外包公司。只有两次网上的笔试（提交无后续），大多都是已读不回。有些拒绝我的原因是我没有实际的工作经验，这让我非常纳闷，找不到工作压根没有工作经验。在此期间也尝试投了些实习岗位，也是没结果。这样的经历对我打击不小，实在没想到投了几百份简历连面试机会都少得可怜，都不知道是就业市场的问题还是我的问题。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;现在的想法&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;想在广州、佛山找一个后端开发的岗位，只求成功转行攒经验、不求薪酬。&lt;/p&gt;&#xA;&lt;p&gt;希望广佛两地的 v 友可以提供合适的岗位信息和求职建议，帮助我找到工作，谢谢。&lt;/p&gt;&#xA;</description>
+      <author>winson030</author>
+      <pubDate>09 Oct 2022 06:33:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>发现一个多 mysql 管理框架 可以研究下 - 分享发现</title>
+      <link>https://www.v2ex.com/t/885519</link>
+      <description>&lt;p&gt;在分享 &lt;a href=&#34;https://v2ex.com/t/88543&#34; rel=&#34;nofollow&#34;&gt;https://v2ex.com/t/88543&lt;/a&gt; 申请免费 mysql 空间时，发现一个 mysql 管理框架，觉得值得研究。&lt;/p&gt;&#xA;&lt;p&gt;作为一个用于部署、扩展和管理大型 MySQL 实例集群的数据库解决方案，Vitess 结合了 Mysql 数据库的许多重要功能和 NoSQL 数据库的可扩展性。它的架构设计使你可以在公共或私有云架构中像在物理机上一样有效地运行它。它结合并扩展了许多重要的 MySQL 功能和 NoSQL 数据库的可扩展性。Vitess 可以帮助你解决以下问题。&lt;/p&gt;&#xA;&lt;p&gt;支持您对 MySQL 数据库进行切分，以扩展 MySQL 数据库，而不需要对您的应用进行太大的改动。&#xA;从物理机迁移到私有云或公共云。&#xA;部署和管理大量的 MySQL 实例。&#xA;Vitess 包括使用与本地查询协议兼容的 JDBC 和 Go 数据库驱动程序。此外，它还实现了 mysql 服务器协议，几乎与任何其他语言兼容。&lt;/p&gt;&#xA;&lt;p&gt;自 2011 年以来，Vitess 一直为 YouTube 拥有的数据库提供服务，现在已经被许多公司采用并用于实际生产。&lt;/p&gt;&#xA;&lt;p&gt;二．项目地址&#xA;地址： &lt;a href=&#34;https://github.com/vitessio/vitess&#34; rel=&#34;nofollow&#34;&gt;https://github.com/vitessio/vitess&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;文档： &lt;a href=&#34;https://vitess.io/zh/docs/&#34; rel=&#34;nofollow&#34;&gt;https://vitess.io/zh/docs/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>ggvm</author>
+      <pubDate>09 Oct 2022 06:32:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>macOS13 好像已经解决了 M1 上频繁读写硬盘的问题 - macOS</title>
+      <link>https://www.v2ex.com/t/885517</link>
+      <description>&lt;p&gt;开机三天 launchd 、kernel_task 和 mds_stores 三个进程写入不到 30G ，之前一天好几十 G&lt;/p&gt;&#xA;</description>
+      <author>xtinput</author>
+      <pubDate>09 Oct 2022 06:27:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>外卖被偷了，反手又偷了别人的，我做的对吗？ - 生活</title>
+      <link>https://www.v2ex.com/t/885516</link>
+      <description>&lt;p&gt;小区被封，外卖被偷，一气之下拿了份别人的外卖，点的干锅，肉都是变质的太难吃了。。&lt;/p&gt;&#xA;</description>
+      <author>proletarius</author>
+      <pubDate>09 Oct 2022 06:26:23 +0000</pubDate>
+    </item>
+    <item>
       <title>各个论坛中， Python 代码片段中的变量命名方式，为什么那么多千奇百怪的？ - 问与答</title>
       <link>https://www.v2ex.com/t/885515</link>
-      <description>最近无聊在看 python 的时候发现许多 python 例子写的乱七八糟的。变量名奇奇怪怪，有的全篇使用（ a,b,c,d ）。有使用大驼峰的，也有使用小驼峰的，还有使用（ a_xxxx,b_xxxx,c_xxxx ）看的我一头雾水。方法名字也是有的使用小驼峰，有的使用下划线。&lt;br /&gt;而且我发现 python 的例子，都特别喜欢用简写 一个功能性的函数 setData 简写成 sda&lt;br /&gt;&lt;br /&gt;真就写 python 全看自己喜欢怎么样写就怎么样写呗。</description>
+      <description>最近无聊在看 python 的时候发现许多 python 例子写的乱七八糟的。变量名奇奇怪怪，有的全篇使用（ a,b,c,d ）。有使用大驼峰的，也有使用小驼峰的，还有使用（ a_xxxx,b_xxxx,c_xxxx ）有时候看的我一头雾水。方法名字也是有的使用小驼峰，有的使用下划线。&lt;br /&gt;而且我发现 python 的例子，都特别喜欢用简写 一个功能性的函数 setData 简写成 sda&lt;br /&gt;&lt;br /&gt;真就写 python 全看自己喜欢怎么样写就怎么样写呗。</description>
       <author>BenchWidth</author>
       <pubDate>09 Oct 2022 06:24:28 +0000</pubDate>
     </item>
