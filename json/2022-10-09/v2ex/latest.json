@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有办法禁止场所码的语音播报吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/885508",
+      "Description": "\u003cp\u003e进地铁的时候需要扫场所码，一般这个时候都在听歌，于是场所码打开之后的语音中断了正在播放的音乐。而且，音乐还不会自动恢复播放，需要再去音乐 app 点击播放才能继续。\u003c/p\u003e\n\u003cp\u003e这个实在是太烦了，而且播报我不需要听，地铁的人也不要听，那这个东西怎么才能禁止呢\u003c/p\u003e\n",
+      "Author": "MasonXu",
+      "PubDate": "2022-10-09T05:54:38Z"
+    },
+    {
+      "Title": "移动的宽带和电信比，究竟差距有多少？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/885507",
+      "Description": "\u003cp\u003e现在是山东电信的 300M/30M 上行宽带，有公网 IP 。用起来感觉还不错。\u003c/p\u003e\n\u003cp\u003e移动最近有活动，转过去可以办 1000M 的宽带，手机流量还更多。\u003c/p\u003e\n\u003cp\u003e移动的宽带和电信，用起来究竟差多少？\u003c/p\u003e\n\u003cp\u003e已知：\u003c/p\u003e\n\u003cp\u003e1 、移动没有公网 IPV4 。\u003c/p\u003e\n\u003cp\u003e请问：\u003c/p\u003e\n\u003cp\u003e1 、是否有公网 V6 ？\u003c/p\u003e\n\u003cp\u003e2 、是否支持桥接模式？\u003c/p\u003e\n\u003cp\u003e3 、晚高峰性能如何？\u003c/p\u003e\n\u003cp\u003e4 、如果连境外 VPS 是什么速度？现在用 IPV6 连新加坡亚马逊云，包括晚高峰基本可以跑满。\u003c/p\u003e\n\u003cp\u003e谢谢！\u003c/p\u003e\n",
+      "Author": "richchang",
+      "PubDate": "2022-10-09T05:48:59Z"
+    },
+    {
+      "Title": "SpringAOP 的执行顺序到底是怎么样的？ - 程序员",
+      "Link": "https://www.v2ex.com/t/885506",
+      "Description": "\u003cp\u003e我使用\u003ccode\u003espring-boot-starter-parent 2.7.4\u003c/code\u003e测试了一下，得到的结论是这样的：\n（我的切点的方法就是输出“汪汪汪”）\u003c/p\u003e\n\u003cp\u003e不使用\u003ccode\u003e@Around\u003c/code\u003e通知：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003ebefore ......\n汪汪汪\nafterReturning ......\nafter ......\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e使用\u003ccode\u003e@Around\u003c/code\u003e通知：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003earound before......\nbefore ......\n汪汪汪\nafterReturning ......\nafter ......\naround after......\n\u003c/code\u003e\u003c/pre\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e按照网上的说法，应该顺序是这样的：\u003ccode\u003earound before\u003c/code\u003e -\u0026gt; \u003ccode\u003ebefore\u003c/code\u003e -\u0026gt; \u003ccode\u003e切点方法\u003c/code\u003e -\u0026gt; \u003ccode\u003earound after\u003c/code\u003e -\u0026gt; \u003ccode\u003eafter\u003c/code\u003e -\u0026gt; \u003ccode\u003eafter returning\u003c/code\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e为什么我的测试结果中\u003ccode\u003eafterReturning\u003c/code\u003e竟然还跑到\u003ccode\u003eafter\u003c/code\u003e的前面去了, \u003ccode\u003earound after\u003c/code\u003e 跑到最后面去了？\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e我的\u003ccode\u003e@Aspect\u003c/code\u003e代码`\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e@Aspect\npublic class MyAspect {\n\n    @Pointcut(\"execution(* com.example.springboot_test_1005.Dog.bark(..))\")\n    public void pointCut() {\n    }\n\n    @Before(\"pointCut()\")\n    public void before() {\n        System.out.println(\"before ......\");\n    }\n\n    @After(\"pointCut()\")\n    public void after() {\n        System.out.println(\"after ......\");\n    }\n\n    @AfterReturning(\"pointCut()\")\n    public void afterReturning() {\n        System.out.println(\"afterReturning ......\");\n    }\n\n    @AfterThrowing(\"pointCut()\")\n    public void afterThrowing() {\n        System.out.println(\"afterThrowing ......\");\n    }\n\n    @Around(\"pointCut()\")\n    public void around(ProceedingJoinPoint jp) throws Throwable {\n        System.out.println(\"around before......\");\n        // 回调目标对象的原有方法\n        jp.proceed();\n        System.out.println(\"around after......\");\n    }\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e被代理的类：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e@Component\npublic class Dog {\n    void bark(){\n        System.out.println(\"汪汪汪\");\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "movq",
+      "PubDate": "2022-10-09T05:48:04Z"
+    },
+    {
       "Title": "我上谷歌老是抽风怎么回事，过段时间就这样。 - 问与答",
       "Link": "https://www.v2ex.com/t/885505",
       "Description": "\u003ca target=\"_blank\" href=\"http://www.google.com\" rel=\"nofollow noopener\"\u003ewww.google.com\u003c/a\u003e 意外终止了连接。\u003cbr /\u003e请试试以下办法：\u003cbr /\u003e\u003cbr /\u003e检查网络连接\u003cbr /\u003e检查代理服务器和防火墙\u003cbr /\u003e运行 Windows 网络诊断\u003cbr /\u003eERR_CONNECTION_CLOSED\u003cbr /\u003e\u003cbr /\u003e机场是私人小飞机，与此同时别的网站都正常比如 V2EX ，判断是谷歌主动被我 block 了",
