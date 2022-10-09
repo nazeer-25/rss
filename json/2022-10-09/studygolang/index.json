@@ -60,13 +60,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "需要番蔷的,氪穴尚往的,上古哥查资料的,由馆的,推特的,P站的,这个很靠谱稳定,我已用2年多",
-      "Link": "https://studygolang.com/topics/15906#reply0",
-      "Description": "\u003cp\u003e\u003cstrong\u003e需要番蔷的,氪穴尚往的,这家很不错,稳定流畅有售后\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e出国尚往地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e出国尚往地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e出国尚往地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e出国尚往地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e出国尚往地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "请问go语言在数据库运维领域有什么比较适合的场景或者经典开源项目吗？",
       "Link": "https://studygolang.com/topics/15905#reply0",
       "Description": "\u003cp\u003e如题。\n想了解下：\n1.在数据库运维领域有什么比较好的场景可以用GOLANG开发？或者用golang编写的比较好的数据库。\n2.有没有数据库运维领域比较经典的开源项目可参考学习。\u003c/p\u003e\n",
@@ -182,6 +175,13 @@
       "Title": "只有xx.key和xx.pem时，https客户端如何避免中间人攻击，确保证书没问题？",
       "Link": "https://studygolang.com/topics/15892#reply4",
       "Description": "\u003cp\u003e我通过阿里云申请的证书里面只有\u003ccode\u003exx.pem\u003c/code\u003e和\u003ccode\u003exx.key\u003c/code\u003e这两个文件，我查找了很多证书相关的资料，客户端确认服务器证书貌似需要\u003ccode\u003eca.crt\u003c/code\u003e这种CA证书，我没有这个。然后我查了下中间人攻击就是有人替换了证书让客户端以为证书没问题，但实际用的是中间人给的证书。\u003c/p\u003e\n\n\u003cp\u003e所以我尝试如下代码，不知道可不可以防止中间人攻击，我的客户端直接读取\u003ccode\u003exx.pem\u003c/code\u003e文件和go库连接https服务器获取的证书内容进行比较，如果不一样则说明被篡改，终止当前连接。我不知道我这样做对不对，有没有大佬确认一下，或者有更好方案啊？\u003c/p\u003e\n\n\u003cp\u003e原始需求就是当只有\u003ccode\u003exx.pem\u003c/code\u003e和\u003ccode\u003exx.key\u003c/code\u003e服务器证书文件时，如何保证客户端连接是没有问题的？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;bytes\u0026quot;\n\t\u0026quot;crypto/tls\u0026quot;\n\t\u0026quot;crypto/x509\u0026quot;\n\t\u0026quot;encoding/pem\u0026quot;\n\t\u0026quot;errors\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;io\u0026quot;\n\t\u0026quot;net/http\u0026quot;\n\t\u0026quot;os\u0026quot;\n)\n\nfunc main() {\n\terr := getPem()\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\terr = httpGet()\n\tif err != nil {\n\t\tpanic(err)\n\t}\n}\n\nvar (\n\tpemRawCerts [][]byte // xx.pem读取的原始数据\n\terrCheckPem = errors.New(\u0026quot;check xx.pem error\u0026quot;)\n)\n\nfunc getPem() error {\n\tcertPEMBlock, err := os.ReadFile(`xxx.pem`)\n\tif err != nil {\n\t\treturn err\n\t}\n\n\tvar certDERBlock *pem.Block\n\tfor {\n\t\tcertDERBlock, certPEMBlock = pem.Decode(certPEMBlock)\n\t\tif certDERBlock == nil {\n\t\t\tbreak\n\t\t}\n\n\t\tif certDERBlock.Type == \u0026quot;CERTIFICATE\u0026quot; {\n\t\t\ttmp := make([]byte, len(certDERBlock.Bytes))\n\t\t\tcopy(tmp, certDERBlock.Bytes)\n\t\t\tpemRawCerts = append(pemRawCerts, tmp)\n\t\t}\n\t}\n\treturn nil\n}\n\nfunc httpGet() error {\n\tc := http.Client{\n\t\tTransport: \u0026amp;http.Transport{\n\t\t\tTLSClientConfig: \u0026amp;tls.Config{\n\t\t\t\tVerifyPeerCertificate: func(data [][]byte, verifiedChains [][]*x509.Certificate) error {\n\t\t\t\t\tif len(data) == len(pemRawCerts) {\n\t\t\t\t\t\tfor i := len(data) - 1; i \u0026gt;= 0; i-- {\n\t\t\t\t\t\t\tif !bytes.Equal(data[i], pemRawCerts[i]) {\n\t\t\t\t\t\t\t\treturn errCheckPem\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t\t// 只有当证书的每一项都正确才确定当前连接没问题\n\t\t\t\t\t\treturn nil\n\t\t\t\t\t}\n\t\t\t\t\treturn errCheckPem\n\t\t\t\t},\n\t\t\t},\n\t\t},\n\t}\n\n\tresp, err := c.Get(\u0026quot;https://xxx.com\u0026quot;)\n\tif err != nil {\n\t\treturn err\n\t}\n\tdefer resp.Body.Close()\n\n\tn, err := io.Copy(io.Discard, resp.Body)\n\tfmt.Println(n)\n\treturn err\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "需要番蔷的,氪穴尚往的,上古哥查资料的,由馆的,推特的,P站的,这个很靠谱稳定,我已用2年多",
+      "Link": "https://studygolang.com/topics/15906#reply0",
+      "Description": "\u003cp\u003e\u003cstrong\u003e需要番蔷的,氪穴尚往的,这家很不错,稳定流畅有售后\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e出国尚往地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e出国尚往地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e出国尚往地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e出国尚往地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e出国尚往地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
