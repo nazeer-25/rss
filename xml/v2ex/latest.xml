@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>用 vscode 远程腾讯云服务器开发，偶发性服务器失联 - 问与答</title>
+      <link>https://www.v2ex.com/t/885541</link>
+      <description>服务器平时挺正常，几个月不管都不会有问题&lt;br /&gt;&lt;br /&gt;一旦用 vscode 远程上去改点东西，就会出现服务器失联，22 端口还有其他几个端口都不通了，必须去控制台重启。而且这种现象并不规律，有时候 vscode 刚连上服务器就失联了，有时候过了几个小时才会失联。&lt;br /&gt;&lt;br /&gt;请问有人知道这是怎么回事吗？</description>
+      <author>jpyl0423</author>
+      <pubDate>09 Oct 2022 07:48:46 +0000</pubDate>
+    </item>
+    <item>
       <title>国庆假期结束后首次破防：医生说你得哮喘了，别养猫了 - 生活</title>
       <link>https://www.v2ex.com/t/885540</link>
       <description>&lt;p&gt;好烦上来吐槽一下。&lt;/p&gt;&#xA;&lt;p&gt;国庆有一天晚上咳得厉害，呼吸类似风箱那种，很不舒服，节后就去医院看了。&lt;/p&gt;&#xA;&lt;p&gt;医生看了一氧化氮指标，说是我这超了正常值 10 倍，呼吸测试 FEV 改善率也快到哮喘标准了，说是基本上肯定算哮喘了。我说那我们家 4 只猫还能不能养？医生说还是别养了。。。&lt;/p&gt;&#xA;&lt;p&gt;我 TM 真是烦透了这个臭皮囊，年纪越来越大，毛病越来越多，骨密度低、结石、腰突、痔疮等等等等，健身速度赶不上身体崩坏速度，真的无奈。。。&lt;/p&gt;&#xA;&lt;p&gt;猫是绝对不会放弃的，跟我对象的缘分有一半是猫给的，我爱我的毛儿子女儿！！！&lt;/p&gt;&#xA;</description>
@@ -79,13 +86,6 @@
       <description>想要通过 Emoji 字符来展示表情，例如😀,但是这些字符需要一个一个复制，不是很方便。&lt;br /&gt;倒是有了一个微博的 json ，但是内容是图片的 URL 形式，感觉不太方便，想问下有没有直接能展示微博 Emoji 字符的 JSON 文件</description>
       <author>sonders</author>
       <pubDate>09 Oct 2022 06:44:04 +0000</pubDate>
-    </item>
-    <item>
-      <title>一种可能的绕过国家互联网安全网关的思路，请 V 友们交流指正 - 程序员</title>
-      <link>https://www.v2ex.com/t/885522</link>
-      <description>&lt;p&gt;根据最近我个人了解的各方面消息，提出一种可能的绕过国家互联网安全网关的思路，概要如下，烦请各位 V 友批评指正：&lt;/p&gt;&#xA;&lt;p&gt;核心思路: &lt;strong&gt;XTLS 的改进、IPv6 段对段、IP 跳变抗干扰&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;需求：IPv4 、IPv6 双栈服务器，并且 IPv6 拥有大段地址（至少大于 /128 ）且包含国内优化&lt;/p&gt;&#xA;&lt;p&gt;通信思路：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;问题 1：有传言称国家互联网安全网关可识别 TLS-over-TLS ，所以为了避免被识别，还是得采用 XTLS ，并且得解决 XTLS 存在的流量特征的问题(TLS1.3 的连接中出现 TLS1.2 特征的流量)&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;解决：如果对方网站使用的 TLS 版本与当前连接相同，就直接将 TLS 拼接起来，如果不同，则使用 Shadowsocks-2022 这种强加密协议掩盖 TLS 的特征。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;问题 2：加密套件选择什么呢？&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;解决：有疑似国家互联网安全网关的内部人员透露，SM （商密）加密套件现在在白名单内，可以使用带 AEAD 的 SM （商密）加密套件建立 TLS 连接。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;我的思路：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;1 、IPv4 建立网站，提供 HTTPS 服务,带 AEAD 的 SM （商密）加密套件建立 TLS 连接。当检测到连接方是本服务的客户端以后（ IPv4 实现客户端鉴权以及 TLS 连接的建立），在提供的网页内容中加入“私货”，也就是继续进行 TLS 通信的下一个 IPv6 地址，这个时候，&lt;strong&gt;保存当前通信状态&lt;/strong&gt;，使用 IPv6 地址继续与客户端进行通信，而 IPv4 连接的任务已经完毕，可以关闭 TLS 连接了。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;2 、IPv6 地址进行短暂的通信，然后在随机延迟时间过后向客户端发送一个 IPv6 地址段下的其他 IPv6 地址，将当前通信状态切换到这个新的 IPv6 地址上（ 0 RTT ），通过不断的跳变，实现所谓的 “跳 IP 通信”。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;解决痛点：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;1 、解决了 IPv4 通信中单 IP 流量大的问题，&lt;strong&gt;避免&lt;/strong&gt;通过流量模型判断 IP 地址是否违规&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;2 、解决了单地址&lt;strong&gt;长连接&lt;/strong&gt;带来的干扰问题&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;3 、高价值的 IPv4 地址暴露的时间变短，避免高价值的 IPv4 地址被封禁。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;4 、既然是跳变，我们可以控制跳变的概率，让国家互联网安全网关错判服务器拥有的 IPv6 的范围，甚至实现更多花活&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
-      <author>MNIST</author>
-      <pubDate>09 Oct 2022 06:37:13 +0000</pubDate>
     </item>
     <item>
       <title>如何不通过第三方软件让 Mac 实现 iPhone iPad Airplay 到多个外置音响一样的功能 - Apple</title>
@@ -258,6 +258,13 @@
       <description>&lt;p&gt;Airpods Pro 20 年 10 月份之后入手的 可惜刚好错过 Apple 官网的售后服务计划。还好当时买了 ac+但偶发杂音不是很常发生于是选择不去管他。&#xA;最近耳机续航跟链接不稳定了，正巧最近二代降噪发布了正犹豫换 突然想起保险还在 两年过去了刚好快到期临近 AC+的有效服务期限 赶紧查看保修政策。&#xA;使用两年了明显感觉硅胶耳塞氧化变黄变形（耳洞很大 但是只能戴 S 码的耳塞 预装的 M 塞会提示没有戴好）降噪效果有时候在地铁上像没打开一样（貌似这种设备 元器件就是设计寿命 2 三年的样子） 但是机器本身使用并无特别严重的故障或者损伤 但是资本主义羊毛 不薅难受啊 在知乎上看到有人说泡水或者摔坏可以走 ac+。试了试泡水 结果一夜之后照样可以连接使用（ Apple 质量真的可以）遂尝试 浸泡饱和浓盐水（洗鼻盐生理盐水疯狂加量）。泡一会儿电池盒就开始冒黑色的碎屑跟黄色液体。好吓人啊该不会爆炸吧（笑）。过一会儿 耳机开始声音奇怪 但是还能出声 只能用 「查找 app 」的寻找并播放声音 功能让他强制链接。搞了半天也只是声音变小（此刻膜拜质量哈哈哈）电池壳也只是金属触点发黑 表面有氧化痕迹放进去还能给耳机充电 我天绝了。但这样基本也能去送修了 于是紧急预约淮海路直营店 竟然还能约到当天嘿嘿美滋滋。&#xA;到店签到 等了半天（全是修 MBP 的，修耳机的也不少）天才小哥简单询问了下 我描述是玩水上项目浸海水了 就拿去检测了 并提到了是否有 ac+ 有的话要提供购买的发票或者订单号（翻了半天邮箱找到了 但是官网里面购买记录真的找不到了冻得小伙伴告知下往期记录咋找）&#xA;等了一会儿小哥出来直接说目前的政策是直接支付¥199 换新的机器 但是你的个性化激光镌刻就没了哦 然后故障设备他们回请收签字 blabla 。询问了支付方式就去拿收款机器跟新的设备（左右耳机、电池盒是分开装的盒子另外硅胶耳垫也是两组单独包装的）&lt;img alt=&#34;WX20221009-下午 120051@2x&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i2.100024.xyz/2022/10/09/jw919a.webp&#34;/&gt;&#xA;小哥把新设备都从盒子里拿出来并把旧设备放进这个盒子里。然后这个盒子连同设备一起拿走了。付款后 交代我第一次绑定 iCloud 前请把耳机取出来充电池盒 大概 10 几分钟后再把耳机放进去一起充电不然耳机是充不进去多少的（好贴心呀）&lt;img alt=&#34;WX20221009-下午 120007@2x&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i2.100024.xyz/2022/10/09/jwbj44.webp&#34;/&gt;&#xA;整个换机过程加上等待 25 分钟左右（外面毛毛雨真的冷死）&#xA;付完款立刻收到了维修记录凭证的邮件 写的还蛮长的 竟然所有费用加起来竟然 2000 多什么鬼 比原价还高？&#xA;&lt;img alt=&#34;WX20221009-上午 115346@2x&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i2.100024.xyz/2022/10/09/jwd1l9.webp&#34;/&gt;&#xA;最后小哥拿着 ipad 跟我讲原本的 ac+还剩 20 天仍然算数。但是新设备的质保是即日起 90 天 blabla 。&lt;/p&gt;&#xA;&lt;p&gt;总结这种只换不修的东西还是买 AC+吧 至少用的舒心 不用小心翼翼啦 ps ，最近发现「查找 APP 」可以设置离开 XX 位置提示。这样停车的时候把耳机放在车里就能找车了 很棒！好评&lt;/p&gt;&#xA;</description>
       <author>kouros</author>
       <pubDate>09 Oct 2022 04:21:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>一种可能的绕过国家互联网安全网关的思路，请 V 友们交流指正 - 程序员</title>
+      <link>https://www.v2ex.com/t/885522</link>
+      <description>&lt;p&gt;根据最近我个人了解的各方面消息，提出一种可能的绕过国家互联网安全网关的思路，概要如下，烦请各位 V 友批评指正：&lt;/p&gt;&#xA;&lt;p&gt;核心思路: &lt;strong&gt;XTLS 的改进、IPv6 段对段、IP 跳变抗干扰&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;需求：IPv4 、IPv6 双栈服务器，并且 IPv6 拥有大段地址（至少大于 /128 ）且包含国内优化&lt;/p&gt;&#xA;&lt;p&gt;通信思路：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;问题 1：有传言称国家互联网安全网关可识别 TLS-over-TLS ，所以为了避免被识别，还是得采用 XTLS ，并且得解决 XTLS 存在的流量特征的问题(TLS1.3 的连接中出现 TLS1.2 特征的流量)&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;解决：如果对方网站使用的 TLS 版本与当前连接相同，就直接将 TLS 拼接起来，如果不同，则使用 Shadowsocks-2022 这种强加密协议掩盖 TLS 的特征。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;问题 2：加密套件选择什么呢？&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;解决：有疑似国家互联网安全网关的内部人员透露，SM （商密）加密套件现在在白名单内，可以使用带 AEAD 的 SM （商密）加密套件建立 TLS 连接。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;我的思路：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;1 、IPv4 建立网站，提供 HTTPS 服务,带 AEAD 的 SM （商密）加密套件建立 TLS 连接。当检测到连接方是本服务的客户端以后（ IPv4 实现客户端鉴权以及 TLS 连接的建立），在提供的网页内容中加入“私货”，也就是继续进行 TLS 通信的下一个 IPv6 地址，这个时候，&lt;strong&gt;保存当前通信状态&lt;/strong&gt;，使用 IPv6 地址继续与客户端进行通信，而 IPv4 连接的任务已经完毕，可以关闭 TLS 连接了。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;2 、IPv6 地址进行短暂的通信，然后在随机延迟时间过后向客户端发送一个 IPv6 地址段下的其他 IPv6 地址，将当前通信状态切换到这个新的 IPv6 地址上（ 0 RTT ），通过不断的跳变，实现所谓的 “跳 IP 通信”。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;解决痛点：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;1 、解决了 IPv4 通信中单 IP 流量大的问题，&lt;strong&gt;避免&lt;/strong&gt;通过流量模型判断 IP 地址是否违规&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;2 、解决了单地址&lt;strong&gt;长连接&lt;/strong&gt;带来的干扰问题&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;3 、高价值的 IPv4 地址暴露的时间变短，避免高价值的 IPv4 地址被封禁。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;4 、既然是跳变，我们可以控制跳变的概率，让国家互联网安全网关错判服务器拥有的 IPv6 的范围，甚至实现更多花活&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>MNIST</author>
+      <pubDate>09 Oct 2022 06:37:13 +0000</pubDate>
     </item>
     <item>
       <title>AirPods Pro 2 连接 Mac 经常断开 - Apple</title>
