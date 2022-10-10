@@ -18,23 +18,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "请问go语言在数据库运维领域有什么比较适合的场景或者经典开源项目吗？",
-      "Link": "https://studygolang.com/topics/15905#reply2",
-      "Description": "\u003cp\u003e如题。\n想了解下：\n1.在数据库运维领域有什么比较好的场景可以用GOLANG开发？或者用golang编写的比较好的数据库。\n2.有没有数据库运维领域比较经典的开源项目可参考学习。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "Go实战项目之分页加载【开源十年出品】",
       "Link": "https://studygolang.com/articles/35897#reply1",
       "Description": "\u003cp\u003e一个深漂近10年的程序员立志用未来10年时间去维护一个项目，这个项目的功能未定，用到什么就做什么，遇到什么就写什么。其主要目的有二，一为加深自己的技术深度，二为其他学习者提供参考。\u003c/p\u003e\n\n\u003cp\u003e感兴趣的可以跟着我一起做这个项目，不收费、不套路、人间自有真情在。\u003c/p\u003e\n\n\u003cp\u003e备注：前面项目中用到的代码已经分享到GitHub中去了，并且以后所有项目中会出现的代码都会提交上去，欢迎查阅。\u003c/p\u003e\n\n\u003cp\u003e地址：\u003ca href=\"https://github.com/kaiyuan10nian/kaiyuan10nian\"\u003ehttps://github.com/kaiyuan10nian/kaiyuan10nian\u003c/a\u003e 感兴趣的可以点个star哦~开源十年项目的更新首发于公众号：计算机自学平台，有兴趣的小伙伴可以持续关注，并欢迎各位加我的微信(kaiyuan10nian)跟我一起完成并推动项目的发展。\u003c/p\u003e\n\n\u003ch3\u003eGo实战项目之分页加载\u003c/h3\u003e\n\n\u003cp\u003e这个功能是前几天就实现了的，忘记提交上去，在开始下一步之前先把这个功能简单介绍一下。\u003c/p\u003e\n\n\u003cp\u003e分页加载在日常开发中非常常见，如：\u003c/p\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003eXXX记录明细\u003c/p\u003e\n\n\u003cp\u003eXXX文章列表\u003c/p\u003e\n\n\u003cp\u003eXXX好友列表\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cp\u003e分页加载好处多多，我们经常会遇到在数据较多的情况下前端一次性加载会比较吃力，处理不好甚至会导致前端的OOM（前几年某知名大型blogAPP就出现过这个BUG）。总之，分页加载肯定是针对这种大量数据报表式的展示最友好的处理方式了。\u003c/p\u003e\n\n\u003cp\u003e其实对于后端开发人员来说实现起来也非常简单，核心思想就是：*根据偏移量分多次查询数据即可*。\u003c/p\u003e\n\n\u003cp\u003e下面我们分析下对原项目的改动是如何一步一步实现的：\u003c/p\u003e\n\n\u003ch4\u003e第一步 添加了两个字段分别是page和size\u003c/h4\u003e\n\n\u003cp\u003epage是页码数，是我们计算偏移量的一个重要元素，之所以设置这个字段是为了方面前端分页使用；\u003c/p\u003e\n\n\u003cp\u003esize是每页的数据条目数，也是我们计算偏移量的重要元素，这个字段控制每页返回的数据条目数；\u003c/p\u003e\n\n\u003cp\u003e首先在接口中获取这两个字段：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epage,_ := strconv.Atoi(ctx.DefaultQuery(\u0026quot;page\u0026quot;,\u0026quot;1\u0026quot;))\nsize,_ := strconv.Atoi(ctx.DefaultQuery(\u0026quot;size\u0026quot;,\u0026quot;10\u0026quot;))\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e其中设置了默认值，如果前端不给传这两个字段，我们默认为第一页且条目数为10条。\u003c/p\u003e\n\n\u003cp\u003e然后先去查一下一共有多少条数据：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\tvar total int\n\tc.DB.Model(\u0026amp;model.Article{}).Count(\u0026amp;total)\n\tif total == 0 {\n\t\tresponse.Fail(ctx,\u0026quot;文章不存在,请创建\u0026quot;,nil)\n\t\treturn\n\t}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e查询总条目数的目的就是确定我们库中是否有足够的数据去给前端提供，这里我仅仅判断了0条目状态下的处理，你也可以在这里去添加于页码等不相符的逻辑，比如我们一共只有9条数据，你前端穿了一个page=2并且size=10的值给我，那么可以在这里判断后告诉你：请求数据不足等信息。\u003c/p\u003e\n\n\u003ch4\u003e第二步 计算偏移量\u003c/h4\u003e\n\n\u003cp\u003e每次去查数据库的时候，我们先看下前端用户给的是什么值，根据用户需求去查对应的数据：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eoffset := (page-1)*size\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e比如，用户传入page=1\u0026amp;size=5,那么这里的offset=（1-1）*5=0，偏移量就是0就意味着我们不需要在查数据库是跳过偏移量，直接从第一条开始查够5条后返回给前端即可。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eif err := c.DB.Order(\u0026quot;id DESC\u0026quot;).Offset(offset).Limit(size).Find(\u0026amp;articles).Error;err != nil{\n\t\tresponse.Fail(ctx,\u0026quot;查询失败\u0026quot;,nil)\n\t\treturn\n\t}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e上面这段代码实现了偏移量为offset，一共要size条数，并按照id排序的数据给了articles对象。\u003c/p\u003e\n\n\u003ch4\u003e最后 返回结果给前端\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go \"\u003eresponse.Success(ctx,gin.H{\u0026quot;articles\u0026quot;:articles, \u0026quot;page\u0026quot;: page,\u0026quot;total\u0026quot;: total},\u0026quot;请求成功\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e直接把数据送回前端，over~\u003c/p\u003e\n\n\u003cp\u003e完整代码如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e//文章列表\nfunc (c ArticleController) List(ctx *gin.Context) {\n\tpage,_ := strconv.Atoi(ctx.DefaultQuery(\u0026quot;page\u0026quot;,\u0026quot;1\u0026quot;))\n\tsize,_ := strconv.Atoi(ctx.DefaultQuery(\u0026quot;size\u0026quot;,\u0026quot;10\u0026quot;))\n\n\tvar total int\n\tc.DB.Model(\u0026amp;model.Article{}).Count(\u0026amp;total)\n\tif total == 0 {\n\t\tresponse.Fail(ctx,\u0026quot;文章不存在,请创建\u0026quot;,nil)\n\t\treturn\n\t}\n\tvar articles []model.Article\n\toffset := (page-1)*size\n\tif err := c.DB.Order(\u0026quot;id DESC\u0026quot;).Offset(offset).Limit(size).Find(\u0026amp;articles).Error;err != nil{\n\t\tresponse.Fail(ctx,\u0026quot;查询失败\u0026quot;,nil)\n\t\treturn\n\t}\n\t//返回结果\n\tresponse.Success(ctx,gin.H{\u0026quot;articles\u0026quot;:articles, \u0026quot;page\u0026quot;: page,\u0026quot;total\u0026quot;: total},\u0026quot;请求成功\u0026quot;)\n\treturn\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e完事！\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "使用OpenTelemetry进行端到端跟踪",
-      "Link": "https://studygolang.com/articles/35896#reply0",
-      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -53,23 +39,23 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "请问go语言在数据库运维领域有什么比较适合的场景或者经典开源项目吗？",
+      "Link": "https://studygolang.com/topics/15905#reply2",
+      "Description": "\u003cp\u003e如题。\n想了解下：\n1.在数据库运维领域有什么比较好的场景可以用GOLANG开发？或者用golang编写的比较好的数据库。\n2.有没有数据库运维领域比较经典的开源项目可参考学习。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "使用OpenTelemetry进行端到端跟踪",
+      "Link": "https://studygolang.com/articles/35896#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "[视频分享] Go 语言 Excelize 基础库教程 1.1 Excelize 介绍",
       "Link": "https://studygolang.com/topics/15902#reply3",
       "Description": "\u003cp align=\"center\"\u003e\u003ca href=\"https://www.bilibili.com/video/BV12P4y1t7WA\"\u003e\u003cimg src=\"https://static.golangjob.cn/221009/adc9f1b88129b8b614131015dba15d7a.jpg\" title=\"Go 语言 Excelize 基础库视频课程 1.1 Excelize 介绍\" width=\"500\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003eExcelize 是 Go 语言编写的用于操作电子表格文档的基础库，持 XLAM / XLSM / XLSX / XLTM / XLTX 等多种文档格式，可应用于各类报表平台、云计算、边缘计算等系统。本系列教程将带您由浅入深了解并学习 Excelize 开源基础库的使用，帮助您在处理 Excel 文档时，更加从容、得心应手。学习本课程你将收获：基础环境搭建与配置、导入导出 Excel 文档、复杂表格创建与处理、熟练掌握 Excelize。可通过如下视频平台观看：\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://www.bilibili.com/video/BV12P4y1t7WA\"\u003eBilibili\u003c/a\u003e |  \u003ca href=\"https://edu.csdn.net/course/detail/32663\"\u003eCSDN (讲义与源代码下载)\u003c/a\u003e | \u003ca href=\"https://www.ixigua.com/7022131835195163143\"\u003e西瓜视频\u003c/a\u003e | \u003ca href=\"https://www.douyin.com/video/7022133025882361100\"\u003e抖音\u003c/a\u003e  | \u003ca href=\"https://v.youku.com/v_show/id_XNTgxMzg3NzIzNg==.htm\"\u003e优酷\u003c/a\u003e | \u003ca href=\"https://developer.aliyun.com/live/250067\"\u003e阿里云\u003c/a\u003e | \u003ca href=\"https://cloud.tencent.com/developer/video/32655\"\u003e腾讯云\u003c/a\u003e | \u003ca href=\"https://www.youtube.com/watch?v=qaqVpagnxhg\"\u003eYoutube\u003c/a\u003e | \u003ca href=\"https://www.udemy.com/course/excelize-zh\"\u003eUdemy (讲义与源代码下载)\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "用go写一个仓库管理系统，需要什么技术？难吗？纯新手",
-      "Link": "https://studygolang.com/topics/15901#reply3",
-      "Description": "\u003cp\u003e最近，需要写一个仓库管理系统，第一次写这种项目，所以想请教一下各位大佬。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "大神是如何学习 Go 语言之写快速解决Bug和报错,是有一套方法的，度娘是靠不住的，不信你进来看，这里的每个人都用的上",
-      "Link": "https://studygolang.com/topics/15903#reply1",
-      "Description": "\u003cp\u003e谷哥啊，里面的资料比度娘全的多，也不会有乱七八糟的东西\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e怎么上谷哥? 看下面\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e出国地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -81,9 +67,23 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "用go写一个仓库管理系统，需要什么技术？难吗？纯新手",
+      "Link": "https://studygolang.com/topics/15901#reply3",
+      "Description": "\u003cp\u003e最近，需要写一个仓库管理系统，第一次写这种项目，所以想请教一下各位大佬。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "[gorm]关联查询问题",
       "Link": "https://studygolang.com/topics/15904#reply3",
       "Description": "\u003cp\u003e我有type如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Citizen struct {\n\tgorm.Model\n\tName string `gorm:\u0026quot;unique\u0026quot;`\n\tIDc IDCard `gorm:\u0026quot;foreignKey:CitizenID\u0026quot;`\n}\n\ntype IDCard struct {\n\tgorm.Model\n\tColor     string\n\tCitizenID int \n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e创建若干数据：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\tc1 := \u0026amp;Citizen{Name: \u0026quot;Citizen_1\u0026quot;, IDc: IDCard{Color: \u0026quot;yellow\u0026quot;}}\n\tc2 := \u0026amp;Citizen{Name: \u0026quot;Citizen_2\u0026quot;, IDc: IDCard{Color: \u0026quot;yellow\u0026quot;}}\n\tc3 := \u0026amp;Citizen{Name: \u0026quot;Citizen_3\u0026quot;, IDc: IDCard{Color: \u0026quot;red\u0026quot;}}\n\tc4 := \u0026amp;Citizen{Name: \u0026quot;Citizen_4\u0026quot;, IDc: IDCard{Color: \u0026quot;ready\u0026quot;}}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e现在我想要查询一个时间段中建立的Citizen数据, 并且他们的IDCard颜色中带有\u0026rdquo;re\u0026rdquo;：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\n\tvar result []Citizen\n\tss := _db\n\t//筛选时间\n\tss = ss.Where(\u0026quot;created_at BETWEEN ? AND ?\u0026quot;, time.Unix(0, 0), time.Unix(time.Now().Unix()+100, 0))\n\t//筛选 IDCard 颜色： 查询所有IDCard.color中带有 “re” 的 Citizen\n\tss = ss.Joins(\u0026quot;IDc\u0026quot;).Where(\u0026quot;color LIKE ?\u0026quot;, \u0026quot;%\u0026quot;+\u0026quot;re\u0026quot;+\u0026quot;%\u0026quot;)\n\t//查询结果\n\tss = ss.Preload(\u0026quot;IDc\u0026quot;).Find(\u0026amp;result)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e但是报了错 :\u003ccode\u003eambiguous column name: created_at\u003c/code\u003e, 这个是因为两个表中都有这个字段，产生的。我应该如何将这个条件应用到Citizen表中？\u003c/p\u003e\n\n\u003cp\u003edebug sql:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "大神是如何学习 Go 语言之写快速解决Bug和报错,是有一套方法的，度娘是靠不住的，不信你进来看，这里的每个人都用的上",
+      "Link": "https://studygolang.com/topics/15903#reply1",
+      "Description": "\u003cp\u003e谷哥啊，里面的资料比度娘全的多，也不会有乱七八糟的东西\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e怎么上谷哥? 看下面\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e出国地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
