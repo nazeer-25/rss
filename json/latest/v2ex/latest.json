@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "在硬路由上 fakeip 与 ipv6 真是完美组合 - 路由器",
+      "Link": "https://www.v2ex.com/t/885940",
+      "Description": "路由器的 redir 模式常规模式是分流在 clash 之前，代理的流量相当于软路由的工作模式，相当吃路由器性能\u003cbr /\u003e启 fakeip 后，clash 接管全部流量，分流在 clash 中处理，相当于彻底变身软路由了，其实已经失去了硬路由的特性，但是谁让 fakeip 好用呢\u003cbr /\u003e\u003cbr /\u003e如果只是开启 ipv4 的 fake ip 透明代理并开启 ipv6 ，v6 流量并不经过 clash 直连，变相实现了 v4 、v6 的分流：v6 国内流量走路由器直连，v4 走 clash 代理\u003cbr /\u003e\u003cbr /\u003e当然前提需要在 dns 下点小功夫，不然需要代理的流量会因为 ipv6 直连抢先返回失败结果，导致翻墙失效",
+      "Author": "Aaron325",
+      "PubDate": "2022-10-10T21:54:14Z"
+    },
+    {
       "Title": "没写过 PHP ，临时需要，有 V 友能帮忙把这 20 行 JavaScript 移植到 PHP 吗？ - PHP",
       "Link": "https://www.v2ex.com/t/885938",
       "Description": "\u003cpre\u003e\u003ccode\u003efunction convert(input = \"\") {\n    let pdst = input.toUpperCase().trim();\n    let pit = [];\n    let isg = \"\";\n    while (/[0-9A-Z]+/.exec(pdst) !== null) {\n        let data = /[0-9A-Z]+/.exec(pdst);\n        if (data !== null) {\n            let pd = data[0];\n            let pdt = pd.length;\n            if (/[0-9]+/.test(pd) \u0026amp;\u0026amp; pd.length \u0026lt; 8) isg += pd;\n            if (isg.length == 15) pd = isg;\n            if (isg.length \u0026gt;= 15) isg = \"\";\n            if (/[0-9]+/.test(pd) \u0026amp;\u0026amp; pd.length == 11 \u0026amp;\u0026amp; pd.substring(0, 1).toLowerCase() == \"s\") pit.push(pd.trim().substring(1, 11));\n            if (/[0-9]+/.test(pd) \u0026amp;\u0026amp; pd.length == 13 \u0026amp;\u0026amp; pd.substring(0, 1).toLowerCase() == \"s\") pit.push(pd.trim().substring(1, 13));\n            if ((/[0-9]+/.test(pd) \u0026amp;\u0026amp; pd.length == 15) || pd.length == 12 || pd.length == 10 || (/[0-9]+/.test(pd) \u0026amp;\u0026amp; pd.length == 8)) pit.push(pd);\n            pdst = pdst.substring(pdt).trim();\n        }\n    }\n    return Array.from(new Set(pit));\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
