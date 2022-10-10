@@ -39,16 +39,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "用go写一个仓库管理系统，需要什么技术？难吗？纯新手",
-      "Link": "https://studygolang.com/topics/15901#reply3",
-      "Description": "\u003cp\u003e最近，需要写一个仓库管理系统，第一次写这种项目，所以想请教一下各位大佬。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "大神是如何学习 Go 语言之写快速解决Bug和报错,是有一套方法的，度娘是靠不住的，不信你进来看，这里的每个人都用的上",
-      "Link": "https://studygolang.com/topics/15903#reply1",
-      "Description": "\u003cp\u003e谷哥啊，里面的资料比度娘全的多，也不会有乱七八糟的东西\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e怎么上谷哥? 看下面\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e出国地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n",
+      "Title": "请问go语言在数据库运维领域有什么比较适合的场景或者经典开源项目吗？",
+      "Link": "https://studygolang.com/topics/15905#reply2",
+      "Description": "\u003cp\u003e如题。\n想了解下：\n1.在数据库运维领域有什么比较好的场景可以用GOLANG开发？或者用golang编写的比较好的数据库。\n2.有没有数据库运维领域比较经典的开源项目可参考学习。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -67,9 +60,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "请问go语言在数据库运维领域有什么比较适合的场景或者经典开源项目吗？",
-      "Link": "https://studygolang.com/topics/15905#reply2",
-      "Description": "\u003cp\u003e如题。\n想了解下：\n1.在数据库运维领域有什么比较好的场景可以用GOLANG开发？或者用golang编写的比较好的数据库。\n2.有没有数据库运维领域比较经典的开源项目可参考学习。\u003c/p\u003e\n",
+      "Title": "用go写一个仓库管理系统，需要什么技术？难吗？纯新手",
+      "Link": "https://studygolang.com/topics/15901#reply3",
+      "Description": "\u003cp\u003e最近，需要写一个仓库管理系统，第一次写这种项目，所以想请教一下各位大佬。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -77,6 +70,13 @@
       "Title": "[gorm]关联查询问题",
       "Link": "https://studygolang.com/topics/15904#reply3",
       "Description": "\u003cp\u003e我有type如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Citizen struct {\n\tgorm.Model\n\tName string `gorm:\u0026quot;unique\u0026quot;`\n\tIDc IDCard `gorm:\u0026quot;foreignKey:CitizenID\u0026quot;`\n}\n\ntype IDCard struct {\n\tgorm.Model\n\tColor     string\n\tCitizenID int \n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e创建若干数据：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\tc1 := \u0026amp;Citizen{Name: \u0026quot;Citizen_1\u0026quot;, IDc: IDCard{Color: \u0026quot;yellow\u0026quot;}}\n\tc2 := \u0026amp;Citizen{Name: \u0026quot;Citizen_2\u0026quot;, IDc: IDCard{Color: \u0026quot;yellow\u0026quot;}}\n\tc3 := \u0026amp;Citizen{Name: \u0026quot;Citizen_3\u0026quot;, IDc: IDCard{Color: \u0026quot;red\u0026quot;}}\n\tc4 := \u0026amp;Citizen{Name: \u0026quot;Citizen_4\u0026quot;, IDc: IDCard{Color: \u0026quot;ready\u0026quot;}}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e现在我想要查询一个时间段中建立的Citizen数据, 并且他们的IDCard颜色中带有\u0026rdquo;re\u0026rdquo;：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\n\tvar result []Citizen\n\tss := _db\n\t//筛选时间\n\tss = ss.Where(\u0026quot;created_at BETWEEN ? AND ?\u0026quot;, time.Unix(0, 0), time.Unix(time.Now().Unix()+100, 0))\n\t//筛选 IDCard 颜色： 查询所有IDCard.color中带有 “re” 的 Citizen\n\tss = ss.Joins(\u0026quot;IDc\u0026quot;).Where(\u0026quot;color LIKE ?\u0026quot;, \u0026quot;%\u0026quot;+\u0026quot;re\u0026quot;+\u0026quot;%\u0026quot;)\n\t//查询结果\n\tss = ss.Preload(\u0026quot;IDc\u0026quot;).Find(\u0026amp;result)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e但是报了错 :\u003ccode\u003eambiguous column name: created_at\u003c/code\u003e, 这个是因为两个表中都有这个字段，产生的。我应该如何将这个条件应用到Citizen表中？\u003c/p\u003e\n\n\u003cp\u003edebug sql:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "大神是如何学习 Go 语言之写快速解决Bug和报错,是有一套方法的，度娘是靠不住的，不信你进来看，这里的每个人都用的上",
+      "Link": "https://studygolang.com/topics/15903#reply1",
+      "Description": "\u003cp\u003e谷哥啊，里面的资料比度娘全的多，也不会有乱七八糟的东西\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e怎么上谷哥? 看下面\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e出国地址[\u003ca href=\"https://www.zhujiechong.top\"\u003ehttps://www.zhujiechong.top\u003c/a\u003e]\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -144,13 +144,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "业务开发框架 ARP4G (一个go语言实现的简化应用开发的框架)",
-      "Link": "https://studygolang.com/p/1130#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "北京五道口顶级游戏公司中台部门招go开发",
       "Link": "https://studygolang.com/topics/15208#reply33",
       "Description": "\u003cp\u003e此岗位长期有效\u003c/p\u003e\n\n\u003cp\u003e公司网站:  \u003ca href=\"https://www.hortorgames.com/\"\u003ehttps://www.hortorgames.com/\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e坐标: 北京-海淀-五道口\u003c/p\u003e\n\n\u003cp\u003e职责: 负责中台部门通用服务如登录, 注册, 支付, 统计等功能的开发\u003c/p\u003e\n\n\u003cp\u003e要求: 扎实的数据结构与算法等计算机基础知识, 熟悉Redis, MongoDB等后端技术\u003c/p\u003e\n\n\u003cp\u003e薪资: 25-35k  15薪\u003c/p\u003e\n\n\u003cp\u003e福利: 双休, 极少加班, 反对内卷, 3公里内2k租房补贴, 每年两次晋升机会, 豪横年会, 工作和技术氛围好\u003c/p\u003e\n\n\u003cp\u003e联系方式:  加wx  xbtb1354  备注 go内推此岗位长期有效, 长期招聘游戏前后端, 策划美术运营等\u003c/p\u003e\n",
@@ -168,6 +161,20 @@
       "Title": "答疑解惑请问接口的用途比函数好在哪？",
       "Link": "https://studygolang.com/topics/15894#reply6",
       "Description": "\u003cp\u003e小白一枚，平时用函数比较多，写习惯了，感觉很多事都能搞定，可能是自己接触的需求都太low了。\n没用过接口，请问在实际项目中函数和接口的优劣是啥？哪些方面接口比函数好？好在哪？\n感谢各位大牛指导！\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "[杭州][20K-40K] NFTGO 招聘go工程师 （不加班，可远程，web3，工程师文化，产品top3）",
+      "Link": "https://studygolang.com/topics/15425#reply13",
+      "Description": "\u003cp\u003e#关于我们#\n链坊科技 (\u003ca href=\"https://byterum.com\"\u003ehttps://byterum.com\u003c/a\u003e) 是一家区块链技术驱动的创新公司，旨在利用区块链赋能数字文化，让文化成为资产，建立数字世界的文化之林。我们专注于区块链应用技术研究与创新模式设计，研发基于区块链的创新产品应用，探索加密数字经济与文化、数字资产的结合方式。\u003c/p\u003e\n\n\u003cp\u003e1、我们明星产品 NFTGo.io，目前垂直领域全球 top3，领先的一站式 NFT 数据聚合平台，志在成为 “NFT 的 Bloomberg”，NFTGo 旨在聚合，分析并呈现全网 NFT 数据，提供搜索引擎、数据可视化、稀有度查询，巨鲸追踪、NFT 打新功能。\n2、🇨🇳🇺🇸🇸🇬🇰🇷都有我们的作战小队，拥有斯坦福大学、哈佛大学、高丽大学、浙江大学等背景\n3、我们扁平化管理，不打卡，时间灵活（≥10 点半后到公司 + 每周 1-2 天远程）\n4、我们资金充裕，去年融资 5000 万 RMB，今年马上又有一笔大额融资会到位\n5、我们氛围和组织文化全面 web3，我们相互帮助共同成长，一起改变世界，show yourself\n6、我们核心团队浙大系，在区块链行业内有超过 4 年的从业经历，有丰富的产品研发与运营经验\u003c/p\u003e\n\n\u003cp\u003e#职位要求#\n负责服务端功能模块的架构设计与业务逻辑开发；\n负责与区块链系统的交互中间层开发；\n负责资产数据采集及区块链节点维护。\u003c/p\u003e\n\n\u003cp\u003e#基本要求#\n熟悉 Java/Node.js/Golang/Python/.NET 等任一门后端语言；\n熟悉 MySQL/Mongodb/LevelDB 等任一数据库，有高并发任务经验者优先；\n熟悉网络编程与异步模型者优先；\n熟悉 Docker 容器化部署者优先；\n优秀的学习能力；\n学历本科及以上。\u003c/p\u003e\n\n\u003cp\u003e#加分项#\n有区块链经验及良好的英语读写能力加分\u003c/p\u003e\n\n\u003cp\u003e#薪资及其他待遇#\n1、具备市场竞争力的薪资\n2、灵活的工作时间，甚至不需要每天来公司\n3、搬家到距离公司 2 公里内的，发放搬家补贴\n4、通勤距离在 10 公里以上的，报销打车交通费\n5、周末加班 2 倍工资补贴\n6、部门团建，公费 outing\n7、这个非常时代没有无名小辈，我们被委以重任，一起探索未来改变世界\n8、我们希望能让你保持初心做自己，永远充满希望保持斗志\u003c/p\u003e\n\n\u003cp\u003e#其他信息#\n1、结果导向：好的结果才是我们奋斗的目标，只关注过程是无意义的\n2、创业精神：你不是螺丝钉，我们是一起并肩作战改变世界的伙伴\n3、让我试试：面对难题与挑战，糟糕工程师会将 “不可能” 挂在嘴边，而卓越工程师通常会说 “让我试试”\n4、敢为人先：勇于去从事别人没有从事过的事情\n5、坦诚相待：建立信任需要长期的坦诚以待，而摧毁信任只需要几次谎言\n6、负责到底：对于任何你接手的工作，请负责到底\n7、直来直往：职级、履历不重要，谁能发现问题，谁方案能解决问题，谁说的有道理，谁就是老大\u003c/p\u003e\n\n\u003cp\u003e联系方式\nEmail：yujiangli@byterum.com\n微信：daisy66666688888888\n备注：微信是 6 个 6 和 8 个 8 。。。辛苦老铁\u003c/p\u003e\n\n\u003cp\u003e周末双休 10 点半后到公司 1-2 天远程\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "业务开发框架 ARP4G (一个go语言实现的简化应用开发的框架)",
+      "Link": "https://studygolang.com/p/1130#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -224,13 +231,6 @@
       "Title": "北京五道口顶级游戏公司中台部门招go开发",
       "Link": "https://studygolang.com/topics/15208#reply32",
       "Description": "\u003cp\u003e此岗位长期有效\u003c/p\u003e\n\n\u003cp\u003e公司网站:  \u003ca href=\"https://www.hortorgames.com/\"\u003ehttps://www.hortorgames.com/\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e坐标: 北京-海淀-五道口\u003c/p\u003e\n\n\u003cp\u003e职责: 负责中台部门通用服务如登录, 注册, 支付, 统计等功能的开发\u003c/p\u003e\n\n\u003cp\u003e要求: 扎实的数据结构与算法等计算机基础知识, 熟悉Redis, MongoDB等后端技术\u003c/p\u003e\n\n\u003cp\u003e薪资: 25-35k  15薪\u003c/p\u003e\n\n\u003cp\u003e福利: 双休, 极少加班, 反对内卷, 3公里内2k租房补贴, 每年两次晋升机会, 豪横年会, 工作和技术氛围好\u003c/p\u003e\n\n\u003cp\u003e联系方式:  加wx  xbtb1354  备注 go内推此岗位长期有效, 长期招聘游戏前后端, 策划美术运营等\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "[杭州][20K-40K] NFTGO 招聘go工程师 （不加班，可远程，web3，工程师文化，产品top3）",
-      "Link": "https://studygolang.com/topics/15425#reply13",
-      "Description": "\u003cp\u003e#关于我们#\n链坊科技 (\u003ca href=\"https://byterum.com\"\u003ehttps://byterum.com\u003c/a\u003e) 是一家区块链技术驱动的创新公司，旨在利用区块链赋能数字文化，让文化成为资产，建立数字世界的文化之林。我们专注于区块链应用技术研究与创新模式设计，研发基于区块链的创新产品应用，探索加密数字经济与文化、数字资产的结合方式。\u003c/p\u003e\n\n\u003cp\u003e1、我们明星产品 NFTGo.io，目前垂直领域全球 top3，领先的一站式 NFT 数据聚合平台，志在成为 “NFT 的 Bloomberg”，NFTGo 旨在聚合，分析并呈现全网 NFT 数据，提供搜索引擎、数据可视化、稀有度查询，巨鲸追踪、NFT 打新功能。\n2、🇨🇳🇺🇸🇸🇬🇰🇷都有我们的作战小队，拥有斯坦福大学、哈佛大学、高丽大学、浙江大学等背景\n3、我们扁平化管理，不打卡，时间灵活（≥10 点半后到公司 + 每周 1-2 天远程）\n4、我们资金充裕，去年融资 5000 万 RMB，今年马上又有一笔大额融资会到位\n5、我们氛围和组织文化全面 web3，我们相互帮助共同成长，一起改变世界，show yourself\n6、我们核心团队浙大系，在区块链行业内有超过 4 年的从业经历，有丰富的产品研发与运营经验\u003c/p\u003e\n\n\u003cp\u003e#职位要求#\n负责服务端功能模块的架构设计与业务逻辑开发；\n负责与区块链系统的交互中间层开发；\n负责资产数据采集及区块链节点维护。\u003c/p\u003e\n\n\u003cp\u003e#基本要求#\n熟悉 Java/Node.js/Golang/Python/.NET 等任一门后端语言；\n熟悉 MySQL/Mongodb/LevelDB 等任一数据库，有高并发任务经验者优先；\n熟悉网络编程与异步模型者优先；\n熟悉 Docker 容器化部署者优先；\n优秀的学习能力；\n学历本科及以上。\u003c/p\u003e\n\n\u003cp\u003e#加分项#\n有区块链经验及良好的英语读写能力加分\u003c/p\u003e\n\n\u003cp\u003e#薪资及其他待遇#\n1、具备市场竞争力的薪资\n2、灵活的工作时间，甚至不需要每天来公司\n3、搬家到距离公司 2 公里内的，发放搬家补贴\n4、通勤距离在 10 公里以上的，报销打车交通费\n5、周末加班 2 倍工资补贴\n6、部门团建，公费 outing\n7、这个非常时代没有无名小辈，我们被委以重任，一起探索未来改变世界\n8、我们希望能让你保持初心做自己，永远充满希望保持斗志\u003c/p\u003e\n\n\u003cp\u003e#其他信息#\n1、结果导向：好的结果才是我们奋斗的目标，只关注过程是无意义的\n2、创业精神：你不是螺丝钉，我们是一起并肩作战改变世界的伙伴\n3、让我试试：面对难题与挑战，糟糕工程师会将 “不可能” 挂在嘴边，而卓越工程师通常会说 “让我试试”\n4、敢为人先：勇于去从事别人没有从事过的事情\n5、坦诚相待：建立信任需要长期的坦诚以待，而摧毁信任只需要几次谎言\n6、负责到底：对于任何你接手的工作，请负责到底\n7、直来直往：职级、履历不重要，谁能发现问题，谁方案能解决问题，谁说的有道理，谁就是老大\u003c/p\u003e\n\n\u003cp\u003e联系方式\nEmail：yujiangli@byterum.com\n微信：daisy66666688888888\n备注：微信是 6 个 6 和 8 个 8 。。。辛苦老铁\u003c/p\u003e\n\n\u003cp\u003e周末双休 10 点半后到公司 1-2 天远程\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
