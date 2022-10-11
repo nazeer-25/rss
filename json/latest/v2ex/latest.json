@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "美区 AppleOne 中杯 25/月 月付 [还有车位] - 分享发现",
+      "Link": "https://www.v2ex.com/t/886209",
+      "Description": "\u003cp\u003e包含\u003c/p\u003e\n\u003cp\u003eApple Music\nApple TV+\nApple Arcade\niCloud+ 200G 共享\u003c/p\u003e\n\u003cp\u003e需要的请留下 vx ，或将 vx 发送到邮箱 \u003ca href=\"mailto:pixies.06vapor@icloud.com\"\u003epixies.06vapor@icloud.com\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "Damastes",
+      "PubDate": "2022-10-11T15:38:08Z"
+    },
+    {
+      "Title": "K8S 大搬家求救 - Kubernetes",
+      "Link": "https://www.v2ex.com/t/886208",
+      "Description": "\u003ch3\u003e故事背景\u003c/h3\u003e\n\u003cp\u003e首先是，HomeLab 上起了个 K8S 集群，Master 用了一台 Phicomm N1 ，Worker 用 ESXi 起了两台 8C16G 的 Ubuntu 的 VM 。配合 TrueNAS 提供 NFS 、MySQL 作为 Storage 跑了几个应用。\u003c/p\u003e\n\u003ch3\u003e灾难开始\u003c/h3\u003e\n\u003cp\u003ePhicomm N1 装完 Master 的时候感觉这小身板还是能跑得动的。直到我用 Helm 试图装 Prometheus 全家桶的时候，我就知道错了……负载满了，然后炸 swap ，被迫重启。虽然 N1 上有 taint 不会调度应用 Pod ，controller-manager 和 scheduler 半年均重启了 800+次。\u003c/p\u003e\n\u003ch3\u003e试图拯救\u003c/h3\u003e\n\u003cp\u003eN1 的表现让我不得不重新整合一下资源。重新收拾了一下 ESXi 的机器，包括将 TrueNAS 拆回物理机部署，以及将原来的两个 Worker delete 掉，直接物理机部署 Ubuntu ，作为 Master 重新加入进集群。去掉新机器上 NoSchedule 的 taint 后，整个集群又可以欢快的跑起来了。\u003c/p\u003e\n\u003ch3\u003e新的问题\u003c/h3\u003e\n\u003cp\u003e现在最危险的操作就是如何下掉 Phicomm N1 这个 Master 了。不敢贸然的直接 delete node ，不了解是否会有问题。主要是不了解是否需要重新签发证书，去避免原有的 n1 这个域名不可用带来集群不可用。\u003c/p\u003e\n\u003ch3\u003e回头思考\u003c/h3\u003e\n\u003cp\u003eN1 这类羸弱的 4 核 A53+2G 规格显然是吃不消 Kubernetes 这类应用的。是否有比较合适的用途？目前有在考虑准备拿来当 Ceph 的 Mon 节点，凑数做一些 Quorum 工作。或者说如何能在 Kubernetes 上仅跑跑 etcd 之类的？\u003c/p\u003e\n",
+      "Author": "ccde8259",
+      "PubDate": "2022-10-11T15:37:16Z"
+    },
+    {
       "Title": "当微信炸号了，才发现我们绑了太多的东西在一个广东民营企业的 app 上 - 微信",
       "Link": "https://www.v2ex.com/t/886207",
       "Description": "\u003cp\u003e今天微信炸号，微信团队提示说，已禁用你所有社交功能。大概估算了下炸号的损失，绑定的各种公众号、小程序就拜拜了，各种会员也就作罢，聊天朋友圈如果算社交被禁用也说得过去，但是发现最大的问题是：\u003c/p\u003e\n\u003cp\u003e学校群里面需要接龙算不算社交？街道网格员让微信里填这干那又算不算社交？如果不算，为啥这些事要在广东一家民营企业霸王条款的 app 上进行？\u003c/p\u003e\n\u003cp\u003e真的希望微信一家独大的现状能有人打破。奈何身边不懂技术的人都不会换别的 app ，运营商的飞信 易信又沦为诈骗温床。。。。哎。。。。\u003c/p\u003e\n",
