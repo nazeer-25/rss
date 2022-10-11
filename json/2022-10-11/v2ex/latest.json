@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Alder Lake iGPU 硬解不稳定, 过一段时间就崩溃 - NAS",
+      "Link": "https://www.v2ex.com/t/886164",
+      "Description": "RT, 试过 jellyfin 和 plex, 都是同样问题\u003cbr /\u003e\u003cbr /\u003eCPU i5-12400\u003cbr /\u003e\u003cbr /\u003eproxmox 内核 5.19 pve 屏蔽 i915 并直通 UHD730 给 vm\u003cbr /\u003e\u003cbr /\u003evm 内核 5.19 debian\u003cbr /\u003ei915 驱动是最新的 git 版本\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-\" rel=\"nofollow noopener\"\u003ehttps://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-\u003c/a\u003e \u003cbr /\u003efirmware.git/tree/i915/\u003cbr /\u003e\u003cbr /\u003e症状:\u003cbr /\u003eplex 第一次 QSV 解码正常, 第二次就崩溃, 有时甚至导致整个 vm 一起崩溃.\u003cbr /\u003e\u003cbr /\u003ejellyfin 就是随机发生, 但是最多转码不到 2 小时左右就一定会崩溃, 有时也会导致整个 vm 崩溃.\u003cbr /\u003e\u003cbr /\u003e重启 vm 后会恢复正常一段时间, 然后循环以上问题.\u003cbr /\u003e\u003cbr /\u003edmesg 的 log 里充斥着大量的 GPU HANG 错误\u003cbr /\u003e[14744.308200] i915 0000:01:00.0: [drm] GPU HANG: ecode 12:1:6c857647\u003cbr /\u003e[14744.308226] i915 0000:01:00.0: [drm] GPU HANG: ecode 12:1:2bbd900d\u003cbr /\u003e[14744.310261] i915 0000:01:00.0: [drm] Resetting rcs0 for CS error\u003cbr /\u003e[14744.312004] i915 0000:01:00.0: [drm] Resetting rcs0 for CS error\u003cbr /\u003e[14746.852832] i915 0000:01:00.0: [drm] GPU HANG: ecode 12:0:00000000\u003cbr /\u003e[14746.852853] i915 0000:01:00.0: [drm] Resetting rcs0 for stopped heartbeat on rcs0\u003cbr /\u003e[14747.934811] i915 0000:01:00.0: [drm] GPU HANG: ecode 12:1:6c857647\u003cbr /\u003e[14747.934836] i915 0000:01:00.0: [drm] GPU HANG: ecode 12:1:2bbd900d\u003cbr /\u003e[14747.936869] i915 0000:01:00.0: [drm] Resetting rcs0 for CS error\u003cbr /\u003e[14747.938664] i915 0000:01:00.0: [drm] Resetting rcs0 for CS error\u003cbr /\u003e\u003cbr /\u003e看到这个贴子\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://www.reddit.com/r/PleX/comments/whpgv6/what_is_the_current_state_of_intel_alder_lake/\" rel=\"nofollow noopener\"\u003ehttps://www.reddit.com/r/PleX/comments/whpgv6/what_is_the_current_state_of_intel_alder_lake/\u003c/a\u003e\u003cbr /\u003e发现 plex 的问题出在 Intel Compute Runtime 的版本上, 只能等官方适配.\u003cbr /\u003e\u003cbr /\u003ejellyfin 就算装了最新的 runtime 配合最新的内核版本和驱动, 还是会有崩溃的问题, 虽然坚持的时间比 plex 久一些. 说明 intel 的 linux 上游驱动还是没写好...\u003cbr /\u003e而且大小核调度之类的新特性可能到内核版本 6.xx 才会优化到位, 至少等一年.\u003cbr /\u003e\u003cbr /\u003e总结:\u003cbr /\u003e截至 2022 年 10 月 11 日 要组 nas 的朋友要么买不带核显的 12gen 配个解码显卡.要么还是买 10 代 iGPU.",
+      "Author": "zx900930",
+      "PubDate": "2022-10-11T11:24:09Z"
+    },
+    {
       "Title": "帮一个朋友问问，捷豹 xel 这款车怎么样？ - 汽车",
       "Link": "https://www.v2ex.com/t/886163",
       "Description": "",
