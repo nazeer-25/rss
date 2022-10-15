@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "想通过蒲公英安装无忧行测试版，发现始终无法看到描述文件，是 ios16 的问题吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/887149",
+      "Description": "",
+      "Author": "Andreas8",
+      "PubDate": "2022-10-15T08:43:34Z"
+    },
+    {
+      "Title": "iPhone 铃声不能用 iTunes/Music 导入 m4r 了么？妈的苹果你这厮。。。 - iOS",
+      "Link": "https://www.v2ex.com/t/887148",
+      "Description": "\u003cp\u003e我试了，我咋现在导不了。我手机上还是 7-8 年前导入的铃声。\u003cbr/\u003e\n妈的，真你妈抠\u003c/p\u003e\n",
+      "Author": "intellectual",
+      "PubDate": "2022-10-15T08:40:56Z"
+    },
+    {
+      "Title": "debian 无法自动引导进入系统，需要手动 EFI Shell 才可以，是什么原因？ - 问与答",
+      "Link": "https://www.v2ex.com/t/887147",
+      "Description": "\u003cp\u003e系统：openmediavault5\nSSD：板载 msata ，其他盘在 boot menu 里都看不到。\u003c/p\u003e\n\u003cp\u003e今天停电后开机，就无法进入系统了。\n开机提示：1 、主板 logo 界面右下角 显示 A2 。无法进入 bios 设置。所有按键无效\n2 、偶尔能进去，黑屏一个 _  一直闪。\u003c/p\u003e\n\u003cp\u003e以为是 msata 的 ssd 坏掉了，通过 PE 备份到一个新 SSD 上，但是主板好像无法识别到其他的 sata 口，只能识别板载的 msata 和优盘。不插优盘和 msata 后，插入新的 sata SSD 会直接进入 EFI Shell 查了下资料。通过以下命令，可以进入系统，并正常运行\u003c/p\u003e\n\u003cp\u003efs0：\u003c/p\u003e\n\u003cp\u003ecd EFI\u003c/p\u003e\n\u003cp\u003ecd debian\u003c/p\u003e\n\u003cp\u003egrubx64.efi\u003c/p\u003e\n\u003cp\u003e抱着试一下的想法，取下 SSD ，把 msata 盘插回去，进入 bios 选择 EFI Shell 启动，重复上面的命令，也可以进入系统，并正常运行。\u003c/p\u003e\n\u003cp\u003e但是重启如果不进入 EFI Shell ，就会黑屏一个 _  一直闪\u003c/p\u003e\n\u003cp\u003e这个是啥问题，如何解决呢？\u003c/p\u003e\n\u003cp\u003ePS：克隆后的 sata SSD ，装入其他的主机，启动，可以正常进入系统，无需其他操作。\u003c/p\u003e\n",
+      "Author": "Jays",
+      "PubDate": "2022-10-15T08:34:13Z"
+    },
+    {
+      "Title": "[接] 怎么用 Java 的并发类 ConcurrentHashMap 抛出 ConcurrentModificationException？ - 程序员",
+      "Link": "https://www.v2ex.com/t/887146",
+      "Description": "\u003cp\u003eFor aggregate operations such as putAll and clear, concurrent retrievals may reflect insertion or removal of only some entries. Similarly, Iterators, Spliterators and Enumerations return elements reflecting the state of the hash table at some point at or since the creation of the iterator/enumeration. They do not throw ConcurrentModificationException. However, iterators are designed to be used by only one thread at a time. \u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html\" rel=\"nofollow\"\u003ehttps://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e经 V 友提醒，去看了下 javadoc ，然后发现了这句描述，于是决定复现：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003epublic class Main {\n\n    private static ConcurrentHashMap\u0026lt;String,String\u0026gt; concurrentHashMap = new ConcurrentHashMap\u0026lt;\u0026gt;();\n\n    public static void main(String[] args) {\n\n        for(int i = 0 ; i \u0026lt; 100000 ; i++){\n            concurrentHashMap.put(\"Key\"+i,\"Value\"+i);\n        }\n\n        new Thread(new Runnable() {\n            @Override\n            public void run() {\n                for (Map.Entry\u0026lt;String, String\u0026gt; entry : concurrentHashMap.entrySet()){\n                    System.out.println(\"1key:\"+entry.getKey()+\",value:\"+entry.getValue());\n                }\n            }\n        }).start();\n\n        new Thread(new Runnable() {\n            @Override\n            public void run() {\n                for (Map.Entry\u0026lt;String, String\u0026gt; entry : concurrentHashMap.entrySet()){\n                    System.out.println(\"2key:\"+entry.getKey()+\",value:\"+entry.getValue());\n                }\n            }\n        }).start();\n\n        new Thread(new Runnable() {\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e结果还是没有任何问题。然后我还有用线程在这个多线程遍历的同时去给其增加删除元素，量级也是 10 万，因为客户手机文件也差不多这个数量，结果还是没问题。\u003c/p\u003e\n\u003cp\u003e所以我想问一下，有办法\u003cstrong\u003e复现\u003c/strong\u003e吗？\u003c/p\u003e\n",
+      "Author": "nnegier",
+      "PubDate": "2022-10-15T08:33:25Z"
+    },
+    {
+      "Title": "人美心善无所不知的 v2er，请问开了火箭以后 chrome 上网几分钟就断开了 - macOS",
+      "Link": "https://www.v2ex.com/t/887145",
+      "Description": "\u003cp\u003e手机用火箭正常，所以不是节点的问题\n还原了火箭设置也不能解决，开了火箭以后 chrome 上网几分钟就断开了，换个节点几分钟又断开了\nimac 环境\u003c/p\u003e\n",
+      "Author": "xiaocongcong",
+      "PubDate": "2022-10-15T08:32:34Z"
+    },
+    {
       "Title": ".net framework4.8 GRPC 生成代码生成时找不到 - .NET",
       "Link": "https://www.v2ex.com/t/887144",
       "Description": "\u003cp\u003e一个 WPF 程序，想用做 GRPC 客户端，照这个例子走的\n\u003ca href=\"https://grpc.io/docs/languages/csharp/quickstart/\" rel=\"nofollow\"\u003ehttps://grpc.io/docs/languages/csharp/quickstart/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e客户端的 generated code 已经生成到 /obj/debug/Protos 了\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eGreet.cs\u003c/li\u003e\n\u003cli\u003eGreetGrpc.cs\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e在 IDE 中可以正常显示，goto declaration 也能用。\n但 build 报错：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e  MainWindow.xaml.cs(45, 23): [CS0246] 未能找到类型或命名空间名“Greeter”(是否缺少 using 指令或程序集引用?)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e要怎么配置啊😭\u003c/p\u003e\n",
