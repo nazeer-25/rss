@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>[求助] docker 容器无法连接外网，折腾了好久没搞定。 - Docker</title>
+      <link>https://www.v2ex.com/t/887160</link>
+      <description>&lt;p&gt;尝试了网上各种方法还是不行，请大家帮忙看看是哪里的原因&lt;/p&gt;&#xA;&lt;h2&gt;宿主机配置&lt;/h2&gt;&#xA;&lt;h3&gt;brctl show&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;docker0         8000.8aa94e25aa49       no              vethdd1f0f9&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;ip addr&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;docker0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc noqueue state UP group default qlen 1000&#xA;    link/ether 8a:a9:4e:25:aa:49 brd ff:ff:ff:ff:ff:ff&#xA;    inet 172.17.10.1/24 scope global docker0&#xA;       valid_lft forever preferred_lft forever&#xA;    inet6 fe80::18c9:95ff:fe72:fa1e/64 scope link &#xA;       valid_lft forever preferred_lft forever&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;docker daemon.json&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;{&#xA;  &#34;registry-mirrors&#34;: [&#34;https://3laho3y3.mirror.aliyuncs.com&#34;],&#xA;  &#34;graph&#34;: &#34;/home/docker/lib&#34;,&#xA;  &#34;bip&#34;:&#34;172.17.10.1/24&#34;,&#xA;  &#34;dns&#34;:[&#34;114.114.114.114&#34;]&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;主机 ipv4 转发开启&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;sysctl -p&#xA;vm.nr_hugepages = 1208&#xA;vm.nr_hugepages = 1208&#xA;vm.nr_hugepages = 1208&#xA;net.ipv4.ip_forward = 1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;docker 容器&lt;/h2&gt;&#xA;&lt;h3&gt;ip route&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;bash-5.1# ip route&#xA;default via 172.17.10.1 dev eth0 &#xA;172.17.10.0/24 dev eth0 scope link  src 172.17.10.2 &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;dns 配置&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;bash-5.1# cat /etc/resolv.conf &#xA;nameserver 114.114.114.114&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;ping 外网、域名不通&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;bash-5.1# ping 114.114.114.114&#xA;PING 114.114.114.114 (114.114.114.114): 56 data bytes&#xA;^C&#xA;--- 114.114.114.114 ping statistics ---&#xA;26 packets transmitted, 0 packets received, 100% packet loss&#xA;bash-5.1# curl baidu.com&#xA;curl: (6) Could not resolve host: baidu.com&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;重启网络、docker 服务、重建 docker 网络都不行，实在不知道是哪里问题-_-&lt;/p&gt;&#xA;</description>
+      <author>quadrapop</author>
+      <pubDate>15 Oct 2022 09:50:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>你家的自来水 TDS 这几日升高了吗？ - 上海</title>
+      <link>https://www.v2ex.com/t/887159</link>
+      <description>&lt;p&gt;前几天有传闻说长江水位枯竭导致咸潮入侵，上海关闭两个取水口，甚至说上海会断水。&#xA;我不大相信真的会断水或者水污染到一定程度，但是测了下 TDS ，发现翻了一倍。&#xA;前几个月测过一次，是 130 左右的样子，最近是 280 左右的样子。&#xA;不清楚是个例（譬如因为管道整修等）还是普遍情况？&lt;/p&gt;&#xA;</description>
+      <author>Zien</author>
+      <pubDate>15 Oct 2022 09:45:30 +0000</pubDate>
+    </item>
+    <item>
       <title>知乎上半年净亏 8 亿，再造一个信息高密度平台？ - 奇思妙想</title>
       <link>https://www.v2ex.com/t/887158</link>
       <description>知乎的内容战略逐渐转向视频，通过视频去获取信息效率并不高&lt;br /&gt;内容生产者也在吐槽知乎的内容生态和运营策略&lt;br /&gt;知乎在自己主要领域——信息高密度的内容，并没有太多关注&lt;br /&gt;以信息高密度为主题出发，有很多可以发散的方向&lt;br /&gt;近几年热度比较高的内容形式：思维导图、知识库、在线文档和笔记、播客、语音聊天室&lt;br /&gt;挑战：社区类产品赚钱都难</description>
