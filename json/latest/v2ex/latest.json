@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教各位大牛，现在有办法能直接挂载 internet 上的 ISO 来装操作系统吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/887172",
+      "Description": "需求很简单 描述一下：\u003cbr /\u003e1 、虚拟机安装（尝鲜）。虚拟机宿主机可以上外网。可以下载 ISO 镜像。协议是 http 的 get 吧。\u003cbr /\u003e2 、不想过多占用硬盘空间，对安装时间没有要求，是否有什么工具可以转 http 为本地“虚拟化软件”可以识别的直接挂在的办法？\u003cbr /\u003e\u003cbr /\u003e大概就是这个需求，其实我是想用 vmws 来安装下深度 linux 尝尝鲜。但是不想下载几个 G 的 ISO 镜像了",
+      "Author": "intoext",
+      "PubDate": "2022-10-15T10:35:37Z"
+    },
+    {
+      "Title": "macos13beta 可以使用的 NTFS 读取工具 - macOS",
+      "Link": "https://www.v2ex.com/t/887171",
+      "Description": "\u003cp\u003em1pro 升级了 macOS13beta 后，发现之前系统安装的 NTFS for Mac 和 TTuxera 都不能使用了，请问现在有啥工具可以读写 NTFS 呢，还有 xtraFinder 也不能用\u003c/p\u003e\n",
+      "Author": "khunwang",
+      "PubDate": "2022-10-15T10:33:27Z"
+    },
+    {
+      "Title": "悲报：韩国 sk판교数据中心火灾， kakao daum 等服务被影响 - 互联网",
+      "Link": "https://www.v2ex.com/t/887170",
+      "Description": "悲报\u003cbr /\u003e韩国也数据中心着火了\u003cbr /\u003e这次是 sk 的\u003cbr /\u003ekakao 废了一半……\u003cbr /\u003edaum 基本相关服务都 503 了\u003cbr /\u003e想想上次 kt 的 bgp 大爆炸仿佛就在上次\u003cbr /\u003e\u003cbr /\u003e或许 KT(2021): 다음 목표는 SK의 다음의 서버🫠🫠 按照这个情况明年会不会 lg 啊",
+      "Author": "yaoyao1128",
+      "PubDate": "2022-10-15T10:32:13Z"
+    },
+    {
+      "Title": "vue3 在插槽里面用父组件传过来的数据的属性引用遇到语法检测： unknown，怎么修改。 - Vue.js",
+      "Link": "https://www.v2ex.com/t/887169",
+      "Description": "\u003cp\u003e这个不是我的代码我也看不懂，所以想问问大家怎么解决？我在想是不是跟默认插槽有关\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/10/15/94a0faf9dc466c2a.png\"/\u003e\n下方会放父组件和子组件的代码：\u003c/p\u003e\n\u003ch1\u003e父组件：\u003c/h1\u003e\n\u003cpre\u003e\u003ccode class=\"language-vue\"\u003e\u0026lt;template\u0026gt;\n  \u0026lt;div class=\"user\"\u0026gt;\n    \u0026lt;page-search :searchFormConfig=\"searchFormConfig\" /\u0026gt;\n\n    \u0026lt;div class=\"content\"\u0026gt;\n      \u0026lt;hy-table :listData=\"userList\" :propList=\"propList\"\u0026gt;\n        \u0026lt;template #status=\"scope\"\u0026gt;\n          \u0026lt;el-button\u0026gt;{{ scope.row.enable ? \"启用\" : \"禁用\" }}\u0026lt;/el-button\u0026gt;\n        \u0026lt;/template\u0026gt;\n        \u0026lt;template #createAt=\"scope\"\u0026gt;\n          \u0026lt;strong\u0026gt;{{ scope.row.createAt }}\u0026lt;/strong\u0026gt;\n        \u0026lt;/template\u0026gt;\n      \u0026lt;/hy-table\u0026gt;\n    \u0026lt;/div\u0026gt;\n  \u0026lt;/div\u0026gt;\n\u0026lt;/template\u0026gt;\n\n\u0026lt;script lang=\"ts\"\u0026gt;\nimport { defineComponent, computed } from \"vue\";\n//引入搜索模板\nimport PageSearch from \"@/components/page-search\";\n//引入 user 组件的数据和配置\nimport { searchFormConfig } from \"./config/search.config\";\n\nimport { useStore } from \"@/store\";\n\nimport hyTable from \"@/base-ui/table\";\n\nexport default defineComponent({\n  name: \"user\",\n  components: {\n    PageSearch,\n    hyTable\n  },\n  setup() {\n    const userList = computed(() =\u0026gt; store.state.system.userList);\n    const userCount = computed(() =\u0026gt; store.state.system.userCount);\n\n    const propList = [\n      { prop: \"name\", label: \"用户名\", minWidth: \"100\" },\n      { prop: \"realname\", label: \"真实姓名\", minWidth: \"100\" },\n      { prop: \"cellphone\", label: \"电话号码\", minWidth: \"100\" },\n      { prop: \"enable\", label: \"状态\", minWidth: \"100\", slotName: \"enable\" },\n      {\n        prop: \"createAt\",\n        label: \"创建时间\",\n        minWidth: \"250\",\n        slotName: \"createAt\"\n      },\n      {\n        prop: \"updateAt\",\n        label: \"更新时间\",\n        minWidth: \"250\",\n        slotName: \"updateAt\"\n      }\n    ];\n\n    return {\n      searchFormConfig,\n      userList,\n      propList\n    };\n  }\n});\n\u0026lt;/script\u0026gt;\n\n\u0026lt;style scoped\u0026gt;\n.content {\n  padding: 20px;\n  border-top: 20px solid #f5f5f5;\n}\n\u0026lt;/style\u0026gt;\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch1\u003e子组件\u003c/h1\u003e\n\u003cpre\u003e\u003ccode class=\"language-vue\"\u003e\u0026lt;template\u0026gt;\n  \u0026lt;div class=\"hy-table\"\u0026gt;\n    \u0026lt;el-table :data=\"listData\" border style=\"width: 100%\"\u0026gt;\n      \u0026lt;template v-for=\"propItem in propList\" :key=\"propItem.prop\"\u0026gt;\n        \u0026lt;el-table-column v-bind=\"propItem\" align=\"center\"\u0026gt;\n          \u0026lt;template #default=\"scope\"\u0026gt;\n            \u0026lt;slot :name=\"propItem.slotName\" :row=\"scope.row\"\u0026gt;\n              {{ scope.row[propItem.prop] }}\n            \u0026lt;/slot\u0026gt;\n          \u0026lt;/template\u0026gt;\n        \u0026lt;/el-table-column\u0026gt;\n      \u0026lt;/template\u0026gt;\n    \u0026lt;/el-table\u0026gt;\n  \u0026lt;/div\u0026gt;\n\u0026lt;/template\u0026gt;\n\n\u0026lt;script lang=\"ts\"\u0026gt;\nimport { defineComponent } from \"vue\";\n\nexport default defineComponent({\n  props: {\n    listData: {\n      type: Array,\n      require: true\n    },\n    propList: {\n      type: Array,\n      require: true\n    }\n  },\n  setup() {\n    return {};\n  }\n});\n\u0026lt;/script\u0026gt;\n\n\u0026lt;style scoped\u0026gt;\u0026lt;/style\u0026gt;\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "slmakm",
+      "PubDate": "2022-10-15T10:26:32Z"
+    },
+    {
       "Title": "大家的 Airpods Pro2 有电流音或者音爆吗？ - Apple",
       "Link": "https://www.v2ex.com/t/887168",
       "Description": "\u003cp\u003e如题，首发买的 Airpods Pro2 有电流音，换货之后还是有电流音 /音爆（切歌、点亮屏幕），大家有遇到这种情况吗？是硬件的问题还是固件版本的问题？ 另外在纠结要不要买 AC+\u003c/p\u003e\n",
