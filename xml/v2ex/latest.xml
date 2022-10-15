@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>20221015 午夜俱乐部 - 天黑以后</title>
+      <link>https://www.v2ex.com/t/887211</link>
+      <description>&lt;p&gt;又是平淡的一天。明天要和一群陌生人去露营玩耍，感觉玩不起来，不行的话就当透明人吧。或许这样让自己多认识些人可以改变下我死水一般的生活吧。真改变不了也没啥，试着接受这样的自己也挺好的。就这样吧。&lt;/p&gt;&#xA;</description>
+      <author>samohyes</author>
+      <pubDate>15 Oct 2022 15:25:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>各位程序员大佬，在线求助一个代码设计问题! 大数据，对某个时间范围的历史数据，执行删除+插入操作的最佳实践是什么？？我用的 ClickHouse，本质上是事务问题。目前有 2 个疑问请教大家，附上我的思考过程......感觉我要提桶跑路了 - 程序员</title>
+      <link>https://www.v2ex.com/t/887210</link>
+      <description>&lt;h3&gt;如题，各位，之前用的是 PostgreSQL ，现在迁移到 ClickHouse ，请教关于 ClickHouse 的 2 个问题：&lt;/h3&gt;&#xA;&lt;h3&gt;我们有一些数据从第三方 API 来，表示某天某个国家某个 APP 的点击数和花了多少钱，&lt;/h3&gt;&#xA;&lt;p&gt;数据表的字段大概这样：&lt;br/&gt;&#xA;date:    数据时间（主键）&lt;br/&gt;&#xA;coutry:   国家 （主键）&lt;br/&gt;&#xA;app:    应用名（主键）&lt;br/&gt;&#xA;clicks:  点击数 （整数&lt;br/&gt;&#xA;spends:  花费的金额 （浮点数）  &lt;/p&gt;&#xA;&lt;h3&gt;现在的需求是这样：&lt;/h3&gt;&#xA;&lt;p&gt;第三方 API 提供的历史数据可能有变化，需要及时处理，以便于报表能够及时更新&lt;br/&gt;&#xA;比如：&lt;br/&gt;&#xA;今天是 2022 年 10 月 15 日，但 2022 年 1 月 1 日~2022 年 1 月 10 日的历史数据需要更新&lt;br/&gt;&#xA;那应该先删除 2022 年 1 月 1 日~2022 年 1 月 10 日的历史数据，再插入&lt;strong&gt;该时间范围&lt;/strong&gt;新的数据  &lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;该时间范围&lt;/strong&gt;数据更新操作，产生了下面三种情况： &lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;对于 date+country+app 维度，历史数据和新数据都有，相当于覆盖了历史数据  &lt;/li&gt;&#xA;&lt;li&gt;对于 date+country+app 维度，历史数据没有，相当于新加了数据  &lt;/li&gt;&#xA;&lt;li&gt;对于 date+country+app 维度，历史数据有，但新数据没有，相当于删了该数据  &lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3&gt;有两个问题想要请教大家：&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;对于这种场景，ClickHouse 有没有什么最佳实践？&lt;br/&gt;&#xA;我通过互联网了解到，只能先删除，然后轮询数据库，等删除结束了再插入        &lt;/li&gt;&#xA;&lt;li&gt;基于问题 1 ，我知道 ClickHouse 没有事务，并且删除和插入都是异步的，也都不是原子的，&lt;br/&gt;&#xA;假如某个时间范围的数据需要更新，并且有多个并行任务，&lt;br/&gt;&#xA;同时对 &lt;strong&gt;该时间范围&lt;/strong&gt; 的历史数据，执行删除+插入的动作，&lt;br/&gt;&#xA;ClickHouse 能够保证数据最终正确吗？ （保证最后一个任务的删除+插入数据是完整的）&lt;br/&gt;&#xA;这种情况业务上不想加锁该咋办？（业务原因确实会遇到这样的问题）   &lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;我的思考过程： &lt;/p&gt;&#xA;&lt;h3&gt;方案 1 用版本号解决，只插入数据，每批新数据都是比旧数据的版本号大&lt;/h3&gt;&#xA;&lt;p&gt;该方案有问题，比如数据时间范围是 2022 年 1 月~2022 年 12 月，版本号是 1&lt;br/&gt;&#xA;这时候删除+插入 2022 年 6 月的数据，版本号是 2&#xA;如果我按照 2022 年 1 月到 2022 年 12 月聚合数据，我得咋查出来啊？？&#xA;再就是没办法表示已经删除的数据，除非增加一列，is_deleted ，问题是我怎么查询。。。&lt;/p&gt;&#xA;&lt;h3&gt;方案 2 在数据表设计一个更新时间字段，类似版本号 V2 版本&lt;/h3&gt;&#xA;&lt;p&gt;该方案的问题在于，删除数据是要删除比当前时间小的数据，那么问题来了&#xA;假如有这种情况：&#xA;任务 1 一共 100 条数据，插入了 50 条还没插完，这时候任务 2 开始执行了&#xA;因为任务 1 的更新时间要小于任务 2 ，任务 2 会先执行删除操作，所以会不会出现删不全的数据?&lt;/p&gt;&#xA;</description>
+      <author>v2exblog</author>
+      <pubDate>15 Oct 2022 15:20:12 +0000</pubDate>
+    </item>
+    <item>
       <title>可能是模仿 v2，用来做购物社区最好的设计，不知道作者在不在这里 - 问与答</title>
       <link>https://www.v2ex.com/t/887209</link>
       <description>&lt;p&gt;&lt;a href=&#34;http://geekhub.com&#34; rel=&#34;nofollow&#34;&gt;geekhub.com&lt;/a&gt;&#xA;今天发现这个网站，发现设计的很好看，模仿 v2 的界面，但是创新了购物的频道&#xA;让我想起了早起的 appletuan&#xA;不知掉这个程序的作者在不在这里&lt;/p&gt;&#xA;</description>
