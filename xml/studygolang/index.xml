@@ -40,6 +40,10 @@
       <link>https://studygolang.com/resources/15546#reply0</link>
     </item>
     <item>
+      <title>Hyperlnsight：监控产品中的“超能力战神”</title>
+      <link>https://studygolang.com/articles/35907#reply0</link>
+    </item>
+    <item>
       <title>求问：for-range 在循环 channel 的时候，在 channel 里面没有数据的时候，为什么没有结束循环</title>
       <link>https://studygolang.com/topics/15916#reply3</link>
       <description>&lt;p&gt;萌新求问：&#xA;在下面的一段程序中，我们创建了一个容量为 4 的 channel，然后启动 goroutine 去遍历这个 channel。然后主协程往 channel 里面写入数据。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我的问题是：go 底层是如何实现的，为什么 goroutine 中的 for-range，不会在 ch &amp;lt;- 6 这一步，就直接结束了遍历呢？毕竟后面的数据，还没有写入到 channel 中，而且，我在 for-range 的过程中，sleep 了 5 秒&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;time&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;ch := make(chan int, 4)&#xA;&#x9;quitChan := make(chan bool)&#xA;&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for v := range ch {&#xA;&#x9;&#x9;&#x9;fmt.Println(v)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;quitChan &amp;lt;- true // 通知用的channel，表示这里的程序已经执行完了&#xA;&#x9;}()&#xA;&#xA;&#x9;ch &amp;lt;- 1&#xA;&#x9;ch &amp;lt;- 2&#xA;&#x9;ch &amp;lt;- 3&#xA;&#x9;ch &amp;lt;- 4&#xA;&#x9;ch &amp;lt;- 5&#xA;&#x9;ch &amp;lt;- 6&#xA;&#x9;fmt.Println(&amp;quot;sleep 5 second&amp;quot;)&#xA;&#x9;time.Sleep(time.Second * 5)&#xA;&#x9;// goroutine 里面的 for range，为什么不会在执行到这一步的时候，就结束了循环了&#xA;&#x9;ch &amp;lt;- 7&#xA;&#x9;ch &amp;lt;- 8&#xA;&#x9;ch &amp;lt;- 9&#xA;&#x9;close(ch)  // 用完关闭channel&#xA;&#x9;&amp;lt;-quitChan // 接到channel通知后解除阻塞，这也是channel的一种用法&#xA;}&#xA;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
