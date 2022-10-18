@@ -81,6 +81,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "求问：for-range 在循环 channel 的时候，在 channel 里面没有数据的时候，为什么没有结束循环",
+      "Link": "https://studygolang.com/topics/15916#reply4",
+      "Description": "\u003cp\u003e萌新求问：\n在下面的一段程序中，我们创建了一个容量为 4 的 channel，然后启动 goroutine 去遍历这个 channel。然后主协程往 channel 里面写入数据。\u003c/p\u003e\n\n\u003cp\u003e我的问题是：go 底层是如何实现的，为什么 goroutine 中的 for-range，不会在 ch \u0026lt;- 6 这一步，就直接结束了遍历呢？毕竟后面的数据，还没有写入到 channel 中，而且，我在 for-range 的过程中，sleep 了 5 秒\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;time\u0026quot;\n)\n\nfunc main() {\n\tch := make(chan int, 4)\n\tquitChan := make(chan bool)\n\n\tgo func() {\n\t\tfor v := range ch {\n\t\t\tfmt.Println(v)\n\t\t}\n\t\tquitChan \u0026lt;- true // 通知用的channel，表示这里的程序已经执行完了\n\t}()\n\n\tch \u0026lt;- 1\n\tch \u0026lt;- 2\n\tch \u0026lt;- 3\n\tch \u0026lt;- 4\n\tch \u0026lt;- 5\n\tch \u0026lt;- 6\n\tfmt.Println(\u0026quot;sleep 5 second\u0026quot;)\n\ttime.Sleep(time.Second * 5)\n\t// goroutine 里面的 for range，为什么不会在执行到这一步的时候，就结束了循环了\n\tch \u0026lt;- 7\n\tch \u0026lt;- 8\n\tch \u0026lt;- 9\n\tclose(ch)  // 用完关闭channel\n\t\u0026lt;-quitChan // 接到channel通知后解除阻塞，这也是channel的一种用法\n}\n\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "Hyperlnsight：监控产品中的“超能力战神”",
       "Link": "https://studygolang.com/articles/35907#reply0",
       "Description": "",
@@ -112,13 +119,6 @@
       "Title": "`properties` - Java `Properties` 格式内容的解析器，编码解码库",
       "Link": "https://studygolang.com/resources/15544#reply0",
       "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "求问：for-range 在循环 channel 的时候，在 channel 里面没有数据的时候，为什么没有结束循环",
-      "Link": "https://studygolang.com/topics/15916#reply4",
-      "Description": "\u003cp\u003e萌新求问：\n在下面的一段程序中，我们创建了一个容量为 4 的 channel，然后启动 goroutine 去遍历这个 channel。然后主协程往 channel 里面写入数据。\u003c/p\u003e\n\n\u003cp\u003e我的问题是：go 底层是如何实现的，为什么 goroutine 中的 for-range，不会在 ch \u0026lt;- 6 这一步，就直接结束了遍历呢？毕竟后面的数据，还没有写入到 channel 中，而且，我在 for-range 的过程中，sleep 了 5 秒\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;time\u0026quot;\n)\n\nfunc main() {\n\tch := make(chan int, 4)\n\tquitChan := make(chan bool)\n\n\tgo func() {\n\t\tfor v := range ch {\n\t\t\tfmt.Println(v)\n\t\t}\n\t\tquitChan \u0026lt;- true // 通知用的channel，表示这里的程序已经执行完了\n\t}()\n\n\tch \u0026lt;- 1\n\tch \u0026lt;- 2\n\tch \u0026lt;- 3\n\tch \u0026lt;- 4\n\tch \u0026lt;- 5\n\tch \u0026lt;- 6\n\tfmt.Println(\u0026quot;sleep 5 second\u0026quot;)\n\ttime.Sleep(time.Second * 5)\n\t// goroutine 里面的 for range，为什么不会在执行到这一步的时候，就结束了循环了\n\tch \u0026lt;- 7\n\tch \u0026lt;- 8\n\tch \u0026lt;- 9\n\tclose(ch)  // 用完关闭channel\n\t\u0026lt;-quitChan // 接到channel通知后解除阻塞，这也是channel的一种用法\n}\n\n\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
