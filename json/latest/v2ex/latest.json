@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "很焦虑 找不到目标 - 问与答",
+      "Link": "https://www.v2ex.com/t/888183",
+      "Description": "1.一闲下来的时候就感觉很焦虑\u003cbr /\u003e2.工作的时候很忙没这种感觉\u003cbr /\u003e3.没有什么兴趣爱好",
+      "Author": "Misty99",
+      "PubDate": "2022-10-19T09:52:44Z"
+    },
+    {
       "Title": "我博客某些链接访问被 301 重定向的奇怪现象 - 程序员",
       "Link": "https://www.v2ex.com/t/888182",
       "Description": "\u003cp\u003e博客地址 \u003ca href=\"https://brad.9iqu.cn\" rel=\"nofollow\"\u003ehttps://brad.9iqu.cn\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e我的博客是使用 hexo 搭建的博客，有些链接会被重定向，不知道这是 hexo 的问题，还是我 nginx 配置的问题。\u003c/p\u003e\n\u003cp\u003e比如我博客里面有个页面 a 标签地址是 \u003ca href=\"https://brad.9iqu.cn/tags\" rel=\"nofollow\"\u003ehttps://brad.9iqu.cn/tags\u003c/a\u003e ，然后它就非要给我 301 重定向到 \u003ca href=\"https://brad.9iqu.cn/tags/\" rel=\"nofollow\"\u003ehttps://brad.9iqu.cn/tags/\u003c/a\u003e 。反正不带 /后缀的导航标签，基本都被重定向，感觉这样有点影响性能\u003c/p\u003e\n\u003cp\u003e下面是我的 nginx 配置\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e#重定向到 https 请求\nserver {\n  listen          80;\n  server_name     brad.9iqu.cn;\n  return          301 https://$server_name$request_uri;\n}\n\n#https\nserver {\n    listen       443 ssl http2 ; #SSL 访问端口号为 443\n    server_name  brad.9iqu.cn;\n    ssl_certificate cert/1_brad.9iqu.cn_bundle.crt; #证书文件\n    ssl_certificate_key cert/2_brad.9iqu.cn.key; #私钥文件\n    ssl_session_timeout 5m;\n    ssl_protocols TLSv1 TLSv1.1 TLSv1.2; #按照这个协议配置\n    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;#按照这个套件配置\n    ssl_prefer_server_ciphers on;\n\n    #charset koi8-r;\n\n    #access_log  logs/host.access.log  main;\n\n    location / {\n        root  /www/hexo-blog/public;\n        index index.html index.htm index.php;\n    }\n\n    # redirect server error pages to the static page /50x.html\n    error_page   500 502 503 504  /50x.html;\n    location = /50x.html {\n        root   html;\n    }\n\n    # deny access to .htaccess files, if Apache's document root\n    location ~ /\\.ht {\n        deny  all;\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",

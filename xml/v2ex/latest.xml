@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>很焦虑 找不到目标 - 问与答</title>
+      <link>https://www.v2ex.com/t/888183</link>
+      <description>1.一闲下来的时候就感觉很焦虑&lt;br /&gt;2.工作的时候很忙没这种感觉&lt;br /&gt;3.没有什么兴趣爱好</description>
+      <author>Misty99</author>
+      <pubDate>19 Oct 2022 09:52:44 +0000</pubDate>
+    </item>
+    <item>
       <title>我博客某些链接访问被 301 重定向的奇怪现象 - 程序员</title>
       <link>https://www.v2ex.com/t/888182</link>
       <description>&lt;p&gt;博客地址 &lt;a href=&#34;https://brad.9iqu.cn&#34; rel=&#34;nofollow&#34;&gt;https://brad.9iqu.cn&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;我的博客是使用 hexo 搭建的博客，有些链接会被重定向，不知道这是 hexo 的问题，还是我 nginx 配置的问题。&lt;/p&gt;&#xA;&lt;p&gt;比如我博客里面有个页面 a 标签地址是 &lt;a href=&#34;https://brad.9iqu.cn/tags&#34; rel=&#34;nofollow&#34;&gt;https://brad.9iqu.cn/tags&lt;/a&gt; ，然后它就非要给我 301 重定向到 &lt;a href=&#34;https://brad.9iqu.cn/tags/&#34; rel=&#34;nofollow&#34;&gt;https://brad.9iqu.cn/tags/&lt;/a&gt; 。反正不带 /后缀的导航标签，基本都被重定向，感觉这样有点影响性能&lt;/p&gt;&#xA;&lt;p&gt;下面是我的 nginx 配置&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#重定向到 https 请求&#xA;server {&#xA;  listen          80;&#xA;  server_name     brad.9iqu.cn;&#xA;  return          301 https://$server_name$request_uri;&#xA;}&#xA;&#xA;#https&#xA;server {&#xA;    listen       443 ssl http2 ; #SSL 访问端口号为 443&#xA;    server_name  brad.9iqu.cn;&#xA;    ssl_certificate cert/1_brad.9iqu.cn_bundle.crt; #证书文件&#xA;    ssl_certificate_key cert/2_brad.9iqu.cn.key; #私钥文件&#xA;    ssl_session_timeout 5m;&#xA;    ssl_protocols TLSv1 TLSv1.1 TLSv1.2; #按照这个协议配置&#xA;    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;#按照这个套件配置&#xA;    ssl_prefer_server_ciphers on;&#xA;&#xA;    #charset koi8-r;&#xA;&#xA;    #access_log  logs/host.access.log  main;&#xA;&#xA;    location / {&#xA;        root  /www/hexo-blog/public;&#xA;        index index.html index.htm index.php;&#xA;    }&#xA;&#xA;    # redirect server error pages to the static page /50x.html&#xA;    error_page   500 502 503 504  /50x.html;&#xA;    location = /50x.html {&#xA;        root   html;&#xA;    }&#xA;&#xA;    # deny access to .htaccess files, if Apache&#39;s document root&#xA;    location ~ /\.ht {&#xA;        deny  all;&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
