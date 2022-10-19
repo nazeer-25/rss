@@ -4,7 +4,35 @@
   "Description": "",
   "Items": [
     {
-      "Title": "[瓜] 69.7 - 20 = 39.7 元即可购买 Vscode 代码编辑器官方中文版 - Visual Studio Code",
+      "Title": "我博客某些链接访问被 301 重定向的奇怪现象 - 程序员",
+      "Link": "https://www.v2ex.com/t/888182",
+      "Description": "\u003cp\u003e博客地址 \u003ca href=\"https://brad.9iqu.cn\" rel=\"nofollow\"\u003ehttps://brad.9iqu.cn\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e我的博客是使用 hexo 搭建的博客，有些链接会被重定向，不知道这是 hexo 的问题，还是我 nginx 配置的问题。\u003c/p\u003e\n\u003cp\u003e比如我博客里面有个页面 a 标签地址是 \u003ca href=\"https://brad.9iqu.cn/tags\" rel=\"nofollow\"\u003ehttps://brad.9iqu.cn/tags\u003c/a\u003e ，然后它就非要给我 301 重定向到 \u003ca href=\"https://brad.9iqu.cn/tags/\" rel=\"nofollow\"\u003ehttps://brad.9iqu.cn/tags/\u003c/a\u003e 。反正不带 /后缀的导航标签，基本都被重定向，感觉这样有点影响性能\u003c/p\u003e\n\u003cp\u003e下面是我的 nginx 配置\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e#重定向到 https 请求\nserver {\n  listen          80;\n  server_name     brad.9iqu.cn;\n  return          301 https://$server_name$request_uri;\n}\n\n#https\nserver {\n    listen       443 ssl http2 ; #SSL 访问端口号为 443\n    server_name  brad.9iqu.cn;\n    ssl_certificate cert/1_brad.9iqu.cn_bundle.crt; #证书文件\n    ssl_certificate_key cert/2_brad.9iqu.cn.key; #私钥文件\n    ssl_session_timeout 5m;\n    ssl_protocols TLSv1 TLSv1.1 TLSv1.2; #按照这个协议配置\n    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;#按照这个套件配置\n    ssl_prefer_server_ciphers on;\n\n    #charset koi8-r;\n\n    #access_log  logs/host.access.log  main;\n\n    location / {\n        root  /www/hexo-blog/public;\n        index index.html index.htm index.php;\n    }\n\n    # redirect server error pages to the static page /50x.html\n    error_page   500 502 503 504  /50x.html;\n    location = /50x.html {\n        root   html;\n    }\n\n    # deny access to .htaccess files, if Apache's document root\n    location ~ /\\.ht {\n        deny  all;\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "brader",
+      "PubDate": "2022-10-19T09:48:55Z"
+    },
+    {
+      "Title": "好像很多主板在安装独显后就会自动屏蔽掉 cpu 自带的核显,我通过修改 bios 配置将核显再开出来后,能够在系统下正常看到设备,那么请问各位大佬为什么不默认一起启用呢? - 问与答",
+      "Link": "https://www.v2ex.com/t/888181",
+      "Description": "\u003cp\u003e主要疑问点如下\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e如果默认禁用核显后,将无法利用核显的功能,这等于 cpu 资源的浪费吗?\u003c/li\u003e\n\u003cli\u003e如果手动开启了核显,有哪些可能的隐患(或者说默认禁用核显的理由是)?\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "a33291",
+      "PubDate": "2022-10-19T09:45:24Z"
+    },
+    {
+      "Title": "有不需要认证的国内 IP 代理平台推荐嘛？ - 分享发现",
+      "Link": "https://www.v2ex.com/t/888180",
+      "Description": "背景\u003cbr /\u003e\t因为做的爬虫业务，虽然正规但是也怕被代理平台出卖，现在大部分国内的代理平台都需要实名认证，找了几家国外的平台还没有找到满足需求的，求各位大大们分享一下啦。如果有免费的代理池也可以推荐一下呀\u003cbr /\u003e\u003cbr /\u003e目前的需求如下\u003cbr /\u003e 1. 动态 IP 池(最好可以支持隧道代理)，每次请求都是不同 IP\u003cbr /\u003e 2. 最好是国外的平台，并且有国内 IP 的资源",
+      "Author": "brazz",
+      "PubDate": "2022-10-19T09:41:51Z"
+    },
+    {
+      "Title": "问大佬一个 nginx 错误日志的问题。 - 问与答",
+      "Link": "https://www.v2ex.com/t/888179",
+      "Description": "一直没留意网站的问题……直到我尝试用迅雷下载一个东西之后 就报错了。。\u003cbr /\u003e但如果我用浏览器的链接另存为 就不会有问题。一旦使用下载工具 就会无法下载。\u003cbr /\u003e\u003cbr /\u003e搜了一下 跟这个情况差不多。\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://trac.nginx.org/nginx/ticket/1438\" rel=\"nofollow noopener\"\u003ehttps://trac.nginx.org/nginx/ticket/1438\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e我的部分日志：\u003cbr /\u003e2022/10/19 16:38:10 [error] 8807#0: *10989 open() ＂隐藏文件路径＂ failed (2: No such file or directory), client: \u003ca target=\"_blank\" href=\"http://172.71.XXX.XXX\" rel=\"nofollow noopener\"\u003e172.71.XXX.XXX\u003c/a\u003e, server: \u003ca target=\"_blank\" href=\"http://down.ddk.xyz\" rel=\"nofollow noopener\"\u003edown.ddk.xyz\u003c/a\u003e, request: ＂ GET /隐藏文件路径.mp4 HTTP/2.0 ＂, host: ＂ \u003ca target=\"_blank\" href=\"http://down.ddk.xyz\" rel=\"nofollow noopener\"\u003edown.ddk.xyz\u003c/a\u003e ＂\u003cbr /\u003e\u003cbr /\u003e求教解决方法 /思路。感激不已。",
+      "Author": "yanwen",
+      "PubDate": "2022-10-19T09:41:48Z"
+    },
+    {
+      "Title": "[瓜] 69.7 - 20 = 39.7 元即可购买 Vscode 代码编辑器官方中文版 - 程序员",
       "Link": "https://www.v2ex.com/t/888177",
       "Description": "\u003ca target=\"_blank\" href=\"https://i.imgur.com/XgLB2Dm.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/XgLB2Dm.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://github.com/microsoft/vscode/issues/163798\" rel=\"nofollow noopener\"\u003ehttps://github.com/microsoft/vscode/issues/163798\u003c/a\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://qnw.shaid.top/vscode/index.html\" rel=\"nofollow noopener\"\u003ehttps://qnw.shaid.top/vscode/index.html\u003c/a\u003e",
       "Author": "WillBC",
