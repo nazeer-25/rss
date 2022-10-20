@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "golang 的 data race 示例，没太理解 - 问与答",
+      "Link": "https://www.v2ex.com/t/888503",
+      "Description": "\u003cp\u003e代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\nfunc main() {\n\tc := make(chan bool)\n\tm := make(map[string]string)\n\tgo func() {\n\t\tm[\"1\"] = \"a\" // First conflicting access.\n\t\tc \u0026lt;- true\n\t}()\n\tm[\"2\"] = \"b\" // Second conflicting access.\n\t\u0026lt;-c\n\tfor k, v := range m {\n\t\tfmt.Println(k, v)\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e执行 \u003ccode\u003ego run -race test.go\u003c/code\u003e,结果为\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eWARNING: DATA RACE\nWrite at 0x00c00011c180 by goroutine 7:\n  runtime.mapassign_faststr()\n      /usr/local/Cellar/go/1.18/libexec/src/runtime/map_faststr.go:203 +0x0\n  main.main.func1()\n      /Users/admin/Downloads/test.go:9 +0x50\n\nPrevious write at 0x00c00011c180 by main goroutine:\n  runtime.mapassign_faststr()\n      /usr/local/Cellar/go/1.18/libexec/src/runtime/map_faststr.go:203 +0x0\n  main.main()\n      /Users/admin/Downloads/test.go:12 +0x127\n\nGoroutine 7 (running) created at:\n  main.main()\n      /Users/admin/Downloads/test.go:8 +0x10a\n==================\n1 a\n2 b\nFound 1 data race(s)\nexit status 66\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e官方文档： \u003ca href=\"https://go.dev/doc/articles/race_detector\" rel=\"nofollow\"\u003ehttps://go.dev/doc/articles/race_detector\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e大概了解了一下 Memory Model ，还有 CPU 的乱序执行什么的，对这个例子还是不太理解，有没有大佬指点一二。\u003c/p\u003e\n",
+      "Author": "wtfedc",
+      "PubDate": "2022-10-20T10:52:26Z"
+    },
+    {
+      "Title": "在 b 站看人直播写代码感觉挺有意思的 - 分享发现",
+      "Link": "https://www.v2ex.com/t/888502",
+      "Description": "\u003cp\u003e那种没什么人看的小主播，一边写代码一边聊天，感觉挺好的，有时候整个直播间就我一个人，我都不敢走，怕他不播了。\u003c/p\u003e\n\u003cp\u003e我喜欢看小众的，有一种找同类的感觉，比如有的小主播用 linux ，用平铺式桌面，用 neovim ，写 go 和 rust ，小众 buff 叠满，我就很喜欢。\u003c/p\u003e\n\u003cp\u003e可惜这样的主播太少了，v 站的大佬们有空的时候也搞搞直播吧，就当是玩了。\u003c/p\u003e\n",
+      "Author": "v2defy",
+      "PubDate": "2022-10-20T10:47:44Z"
+    },
+    {
       "Title": "吐槽下， IOS 真应该规范下接口， app 的启动广告，跳过广告按钮，应该统一在下方，且按钮加大 - Apple",
       "Link": "https://www.v2ex.com/t/888500",
       "Description": "\u003cp\u003e现在基本都在左上或右上方，根本不方便操作，有时候不方便时，就得等广告结束，点了有的还点不准。\n最可气的是，每次程序切出切回来，都会有（程序并没有被杀掉）\u003c/p\u003e\n\u003cp\u003e另外顺便问下，IOS 下，现在有什么方便的能去 app 启动广告的软件\u003c/p\u003e\n",
