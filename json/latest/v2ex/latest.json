@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "手贱删除了个 windows 分区，还好没格式化，用一堆数据恢复软件都可以扫到，但没有 license key - 程序员",
+      "Link": "https://www.v2ex.com/t/888505",
+      "Description": "\u003cp\u003e比如 diskgeninus ， 就是没有 license key, 不知道谁可以分享个？\u003c/p\u003e\n\u003cp\u003e另外如果不用这些数据恢复软件的话，有什么更好的方法？\u003c/p\u003e\n",
+      "Author": "Cify",
+      "PubDate": "2022-10-20T11:02:57Z"
+    },
+    {
       "Title": "golang 的 data race 示例，没太理解 - 问与答",
       "Link": "https://www.v2ex.com/t/888503",
       "Description": "\u003cp\u003e代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\nfunc main() {\n\tc := make(chan bool)\n\tm := make(map[string]string)\n\tgo func() {\n\t\tm[\"1\"] = \"a\" // First conflicting access.\n\t\tc \u0026lt;- true\n\t}()\n\tm[\"2\"] = \"b\" // Second conflicting access.\n\t\u0026lt;-c\n\tfor k, v := range m {\n\t\tfmt.Println(k, v)\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e执行 \u003ccode\u003ego run -race test.go\u003c/code\u003e,结果为\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eWARNING: DATA RACE\nWrite at 0x00c00011c180 by goroutine 7:\n  runtime.mapassign_faststr()\n      /usr/local/Cellar/go/1.18/libexec/src/runtime/map_faststr.go:203 +0x0\n  main.main.func1()\n      /Users/admin/Downloads/test.go:9 +0x50\n\nPrevious write at 0x00c00011c180 by main goroutine:\n  runtime.mapassign_faststr()\n      /usr/local/Cellar/go/1.18/libexec/src/runtime/map_faststr.go:203 +0x0\n  main.main()\n      /Users/admin/Downloads/test.go:12 +0x127\n\nGoroutine 7 (running) created at:\n  main.main()\n      /Users/admin/Downloads/test.go:8 +0x10a\n==================\n1 a\n2 b\nFound 1 data race(s)\nexit status 66\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e官方文档： \u003ca href=\"https://go.dev/doc/articles/race_detector\" rel=\"nofollow\"\u003ehttps://go.dev/doc/articles/race_detector\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e大概了解了一下 Memory Model ，还有 CPU 的乱序执行什么的，对这个例子还是不太理解，有没有大佬指点一二。\u003c/p\u003e\n",
