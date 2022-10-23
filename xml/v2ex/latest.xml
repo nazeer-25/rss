@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>写了个归档 github stars 的小工具，也可以用来创建自己的 awesome - 程序员</title>
+      <link>https://www.v2ex.com/t/889122</link>
+      <description>&lt;p&gt;地址：&lt;a href=&#34;https://github.com/xiaoler/mystars&#34; rel=&#34;nofollow&#34;&gt;https://github.com/xiaoler/mystars&lt;/a&gt;&lt;/p&gt;&#xA;&lt;br/&gt;&#xA;逻辑很简单，就是拉完个人的所有 star ，按语言分类，语言按首字母排序。&#xA;&lt;p&gt;go 的，没做 release ，自用自取&lt;/p&gt;&#xA;</description>
+      <author>Scholer</author>
+      <pubDate>23 Oct 2022 08:03:24 +0000</pubDate>
+    </item>
+    <item>
+      <title>VoNR 视频通话卡顿问题及猜测 - 问与答</title>
+      <link>https://www.v2ex.com/t/889121</link>
+      <description>&lt;p&gt;目前，国内大部分运营商都开通（绝大多数是悄悄开通，用户只需要打开开关就可以无感知使用）了 VoNR 这一业务，旨在解决 EPSFB 导致的漏话 /长时间无法接通的问题。但本人在使用过程中，发现视频通话，尤其是跨运营商的通话经常出现卡顿的问题，特提出一些猜想：&#xA;No.1 传输问题&#xA;经过抓包分析，目前视频通话使用了 QCI2 ，平均码率 6Mbps ，相比于某绿信的 1.5Mbps 是碾压级别的。而且通话过程中，丢包率较低，理论上讲不应该导致卡顿。&#xA;No.2 编解码问题&#xA;本人测试了多种终端，遇到不流畅的画面时，处理措施也不同，有的是卡在最后，有的是白屏。因此猜测是编解码问题导致的。&lt;/p&gt;&#xA;</description>
+      <author>dugz</author>
+      <pubDate>23 Oct 2022 08:03:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>Chrome 右键翻译，怎么 fix？ - Google</title>
+      <link>https://www.v2ex.com/t/889119</link>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;系统: Windows 10&lt;/li&gt;&#xA;&lt;li&gt;Chrome: 103.0.5060.114&lt;/li&gt;&#xA;&lt;li&gt;装了 扩展 &lt;code&gt;Proxy SwitchyOmega&lt;/code&gt; 和 &lt;code&gt;Google 翻译&lt;/code&gt;, 并在里面配了&lt;code&gt;googleapis&lt;/code&gt;的规则，所以翻译扩展是 ok 的。但右键翻译用不了&lt;/li&gt;&#xA;&lt;li&gt;然后我猜 右键翻译 可能不走 代理扩展，但它是会使用系统代理的(不像 curl 命令，不使用系统代理)，所以我就去配置系统代理（用过早期版本的 Windows 都知道，现在的 Windows 保留着两套设置界面，一套是新的我也不知道叫啥(位置是在设置-网络-代理)，一套是以前的就是控制面板-Internet 选项，但不管用哪个只是界面不同而已）&lt;/li&gt;&#xA;&lt;li&gt;我还先去试了 hosts 的方案，但试了几个 ip ，都不行，然后才去试 系统代理 的方式&lt;/li&gt;&#xA;&lt;li&gt;&#xA;去配置 pac, 起初我用的是 &lt;code&gt;file://&lt;/code&gt; 来指向，但不行，所以我觉得可能它不支持 file ，查了下，然后就改为&lt;code&gt;http://&lt;/code&gt;指向&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://learn.microsoft.com/zh-cn/troubleshoot/developer/browsers/administration/cannot-read-pac-file#cause&#34; rel=&#34;nofollow&#34;&gt;https://learn.microsoft.com/zh-cn/troubleshoot/developer/browsers/administration/cannot-read-pac-file#cause&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;我选了 Everything 里的 http 服务器来架设，因为上面的链接里说 &lt;code&gt;MIME 类型, 如果没有，PAC 文件的扩展名必须是 .dat 、 .js 、 .pac 或 .jvs 。&lt;/code&gt; 但还是不行，WHY?&lt;/li&gt;&#xA;&lt;li&gt;&#xA;pac 资料&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Proxy_auto-config&#34; rel=&#34;nofollow&#34;&gt;https://en.wikipedia.org/wiki/Proxy_auto-config&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file&#34; rel=&#34;nofollow&#34;&gt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// 我的 pac 文件内容&#xA;function FindProxyForURL(url, host) {&#xA;    if (host == &#34;translate.googleapis.com&#34;) {&#xA;        return &#34;HTTP &amp;lt;IP&amp;gt;:&amp;lt;端口&amp;gt;&#34;;&#xA;    }&#xA;&#xA;    return &#34;DIRECT&#34;;&#xA;}&#xA;&#xA;// 甚至，我把 SwitchyOmega 里的导出为 pac 来试，也不行&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>JinTianYi456</author>
+      <pubDate>23 Oct 2022 07:56:35 +0000</pubDate>
+    </item>
+    <item>
       <title>上架 appstrore 应用请教支付的一个问题 - 程序员</title>
       <link>https://www.v2ex.com/t/889118</link>
       <description>&lt;p&gt;产品是用 electron 做的&lt;/p&gt;&#xA;&lt;p&gt;升级会员 支付我想直接使用支付宝生成二维码扫码支付&lt;/p&gt;&#xA;&lt;p&gt;支付这块不走 appstore&lt;/p&gt;&#xA;&lt;p&gt;这样上架会有什么问题吗？&lt;/p&gt;&#xA;&lt;p&gt;第一次做不是很清楚 有大佬知道吗&lt;/p&gt;&#xA;</description>
@@ -13,7 +34,7 @@
     <item>
       <title>问下大家有什么好的方法记忆事情发生的时间、地点？ - 程序员</title>
       <link>https://www.v2ex.com/t/889117</link>
-      <description>&lt;p&gt;记忆对知识学习的重要性是不言而喻的，就个人体会来说，场景化的记忆效果是最好的。想跟大家了解一下如何记录事件发生的时间、地点比较方便有效？&lt;/p&gt;&#xA;&lt;p&gt;我个人可以先举一个自己的例子：&#xA;1 、左手代表的是上周的周 1-5 ，右手是本周的周 1-5 ，手心和手背代表对应周六和周天。（没事时就会掐手算算~.~）&lt;/p&gt;&#xA;&lt;p&gt;2 、将比较熟悉的家里面作为记录历史长河中事件的场景，客厅是中国的、卧室是自己出生后事情发生的事件（更多的是关于自己的成长），然后根据客厅和卧室的布局和物件，将时间和地点对号入座。&lt;/p&gt;&#xA;&lt;p&gt;以上的方法有时 时间和地点会有交叉，想问下大家有什么好的方法去记忆一些逻辑性不是很强的内容？&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;记忆对知识学习的重要性是不言而喻的，就个人体会来说，场景化的记忆效果是最好的。想跟大家了解一下如何记录事件发生的时间、地点比较方便有效？&lt;/p&gt;&#xA;&lt;p&gt;我个人可以先举一个自己的例子：&lt;/p&gt;&#xA;&lt;p&gt;1 、左手代表的是上周的周 1-5 ，右手是本周的周 1-5 ，手心和手背代表对应周六和周天。（没事时就会掐手算算~.~）&lt;/p&gt;&#xA;&lt;p&gt;2 、将比较熟悉的家里面作为记录历史长河中事件的场景，客厅是中国的、卧室是自己出生后事情发生的事件（更多的是关于自己的成长），然后根据客厅和卧室的布局和物件，将时间和地点对号入座。&lt;/p&gt;&#xA;&lt;p&gt;以上的方法有时 时间和地点会有交叉，想问下大家有什么好的方法去记忆一些逻辑性不是很强的内容？&lt;/p&gt;&#xA;&lt;p&gt;其他类型的自己的记忆技巧也可以分享一下&lt;/p&gt;&#xA;</description>
       <author>cocoking</author>
       <pubDate>23 Oct 2022 07:50:44 +0000</pubDate>
     </item>

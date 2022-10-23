@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "写了个归档 github stars 的小工具，也可以用来创建自己的 awesome - 程序员",
+      "Link": "https://www.v2ex.com/t/889122",
+      "Description": "\u003cp\u003e地址：\u003ca href=\"https://github.com/xiaoler/mystars\" rel=\"nofollow\"\u003ehttps://github.com/xiaoler/mystars\u003c/a\u003e\u003c/p\u003e\n\u003cbr/\u003e\n逻辑很简单，就是拉完个人的所有 star ，按语言分类，语言按首字母排序。\n\u003cp\u003ego 的，没做 release ，自用自取\u003c/p\u003e\n",
+      "Author": "Scholer",
+      "PubDate": "2022-10-23T08:03:24Z"
+    },
+    {
+      "Title": "VoNR 视频通话卡顿问题及猜测 - 问与答",
+      "Link": "https://www.v2ex.com/t/889121",
+      "Description": "\u003cp\u003e目前，国内大部分运营商都开通（绝大多数是悄悄开通，用户只需要打开开关就可以无感知使用）了 VoNR 这一业务，旨在解决 EPSFB 导致的漏话 /长时间无法接通的问题。但本人在使用过程中，发现视频通话，尤其是跨运营商的通话经常出现卡顿的问题，特提出一些猜想：\nNo.1 传输问题\n经过抓包分析，目前视频通话使用了 QCI2 ，平均码率 6Mbps ，相比于某绿信的 1.5Mbps 是碾压级别的。而且通话过程中，丢包率较低，理论上讲不应该导致卡顿。\nNo.2 编解码问题\n本人测试了多种终端，遇到不流畅的画面时，处理措施也不同，有的是卡在最后，有的是白屏。因此猜测是编解码问题导致的。\u003c/p\u003e\n",
+      "Author": "dugz",
+      "PubDate": "2022-10-23T08:03:01Z"
+    },
+    {
+      "Title": "Chrome 右键翻译，怎么 fix？ - Google",
+      "Link": "https://www.v2ex.com/t/889119",
+      "Description": "\u003cul\u003e\n\u003cli\u003e系统: Windows 10\u003c/li\u003e\n\u003cli\u003eChrome: 103.0.5060.114\u003c/li\u003e\n\u003cli\u003e装了 扩展 \u003ccode\u003eProxy SwitchyOmega\u003c/code\u003e 和 \u003ccode\u003eGoogle 翻译\u003c/code\u003e, 并在里面配了\u003ccode\u003egoogleapis\u003c/code\u003e的规则，所以翻译扩展是 ok 的。但右键翻译用不了\u003c/li\u003e\n\u003cli\u003e然后我猜 右键翻译 可能不走 代理扩展，但它是会使用系统代理的(不像 curl 命令，不使用系统代理)，所以我就去配置系统代理（用过早期版本的 Windows 都知道，现在的 Windows 保留着两套设置界面，一套是新的我也不知道叫啥(位置是在设置-网络-代理)，一套是以前的就是控制面板-Internet 选项，但不管用哪个只是界面不同而已）\u003c/li\u003e\n\u003cli\u003e我还先去试了 hosts 的方案，但试了几个 ip ，都不行，然后才去试 系统代理 的方式\u003c/li\u003e\n\u003cli\u003e\n去配置 pac, 起初我用的是 \u003ccode\u003efile://\u003c/code\u003e 来指向，但不行，所以我觉得可能它不支持 file ，查了下，然后就改为\u003ccode\u003ehttp://\u003c/code\u003e指向\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://learn.microsoft.com/zh-cn/troubleshoot/developer/browsers/administration/cannot-read-pac-file#cause\" rel=\"nofollow\"\u003ehttps://learn.microsoft.com/zh-cn/troubleshoot/developer/browsers/administration/cannot-read-pac-file#cause\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e我选了 Everything 里的 http 服务器来架设，因为上面的链接里说 \u003ccode\u003eMIME 类型, 如果没有，PAC 文件的扩展名必须是 .dat 、 .js 、 .pac 或 .jvs 。\u003c/code\u003e 但还是不行，WHY?\u003c/li\u003e\n\u003cli\u003e\npac 资料\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://en.wikipedia.org/wiki/Proxy_auto-config\" rel=\"nofollow\"\u003ehttps://en.wikipedia.org/wiki/Proxy_auto-config\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file\" rel=\"nofollow\"\u003ehttps://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003e// 我的 pac 文件内容\nfunction FindProxyForURL(url, host) {\n    if (host == \"translate.googleapis.com\") {\n        return \"HTTP \u0026lt;IP\u0026gt;:\u0026lt;端口\u0026gt;\";\n    }\n\n    return \"DIRECT\";\n}\n\n// 甚至，我把 SwitchyOmega 里的导出为 pac 来试，也不行\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "JinTianYi456",
+      "PubDate": "2022-10-23T07:56:35Z"
+    },
+    {
       "Title": "上架 appstrore 应用请教支付的一个问题 - 程序员",
       "Link": "https://www.v2ex.com/t/889118",
       "Description": "\u003cp\u003e产品是用 electron 做的\u003c/p\u003e\n\u003cp\u003e升级会员 支付我想直接使用支付宝生成二维码扫码支付\u003c/p\u003e\n\u003cp\u003e支付这块不走 appstore\u003c/p\u003e\n\u003cp\u003e这样上架会有什么问题吗？\u003c/p\u003e\n\u003cp\u003e第一次做不是很清楚 有大佬知道吗\u003c/p\u003e\n",
@@ -13,7 +34,7 @@
     {
       "Title": "问下大家有什么好的方法记忆事情发生的时间、地点？ - 程序员",
       "Link": "https://www.v2ex.com/t/889117",
-      "Description": "\u003cp\u003e记忆对知识学习的重要性是不言而喻的，就个人体会来说，场景化的记忆效果是最好的。想跟大家了解一下如何记录事件发生的时间、地点比较方便有效？\u003c/p\u003e\n\u003cp\u003e我个人可以先举一个自己的例子：\n1 、左手代表的是上周的周 1-5 ，右手是本周的周 1-5 ，手心和手背代表对应周六和周天。（没事时就会掐手算算~.~）\u003c/p\u003e\n\u003cp\u003e2 、将比较熟悉的家里面作为记录历史长河中事件的场景，客厅是中国的、卧室是自己出生后事情发生的事件（更多的是关于自己的成长），然后根据客厅和卧室的布局和物件，将时间和地点对号入座。\u003c/p\u003e\n\u003cp\u003e以上的方法有时 时间和地点会有交叉，想问下大家有什么好的方法去记忆一些逻辑性不是很强的内容？\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e记忆对知识学习的重要性是不言而喻的，就个人体会来说，场景化的记忆效果是最好的。想跟大家了解一下如何记录事件发生的时间、地点比较方便有效？\u003c/p\u003e\n\u003cp\u003e我个人可以先举一个自己的例子：\u003c/p\u003e\n\u003cp\u003e1 、左手代表的是上周的周 1-5 ，右手是本周的周 1-5 ，手心和手背代表对应周六和周天。（没事时就会掐手算算~.~）\u003c/p\u003e\n\u003cp\u003e2 、将比较熟悉的家里面作为记录历史长河中事件的场景，客厅是中国的、卧室是自己出生后事情发生的事件（更多的是关于自己的成长），然后根据客厅和卧室的布局和物件，将时间和地点对号入座。\u003c/p\u003e\n\u003cp\u003e以上的方法有时 时间和地点会有交叉，想问下大家有什么好的方法去记忆一些逻辑性不是很强的内容？\u003c/p\u003e\n\u003cp\u003e其他类型的自己的记忆技巧也可以分享一下\u003c/p\u003e\n",
       "Author": "cocoking",
       "PubDate": "2022-10-23T07:50:44Z"
     },
