@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求问前端多媒体编辑器是怎么实现的 - 程序员</title>
+      <link>https://www.v2ex.com/t/889547</link>
+      <description>&lt;p&gt;有音频和视频时间轴和轨道，可以加图层，并且编辑情况可以在虚拟显示界面上实时展示&lt;/p&gt;&#xA;&lt;p&gt;在显示界面上可以拖拽文字，图片位置&lt;/p&gt;&#xA;&lt;p&gt;点击时间轴任意时间，都可以看到那一刻的画面&lt;/p&gt;&#xA;</description>
+      <author>unt</author>
+      <pubDate>24 Oct 2022 16:27:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>无聊测测打字速度 - 输入法</title>
+      <link>https://www.v2ex.com/t/889546</link>
+      <description>&lt;p&gt;&lt;strong&gt;测试地址：&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://10fastfingers.com/competition/6356baea8faa7&#34; rel=&#34;nofollow&#34;&gt;https://10fastfingers.com/competition/6356baea8faa7&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>mopig</author>
+      <pubDate>24 Oct 2022 16:23:43 +0000</pubDate>
+    </item>
+    <item>
       <title>我写了个假的 Gitlab Runner，可以运行自己的测试和编译自己，在每个星期四运行 job 还会有特殊效果（狗头） - 分享创造</title>
       <link>https://www.v2ex.com/t/889545</link>
       <description>&lt;h1&gt;Github 仓库&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/nanmu42/tart&#34; rel=&#34;nofollow&#34;&gt;https://github.com/nanmu42/tart&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1&gt;摘要&lt;/h1&gt;&#xA;&lt;p&gt;蛋挞是一个教学目的，非官方的 Gitlab Runner ，通过简明地实现 Gitlab Runner 功能的一个子集，展示 Gitlab Runner 的设计和实现方法。&lt;/p&gt;&#xA;&lt;p&gt;举个例子，蛋挞可以&lt;a href=&#34;https://jihulab.com/nanmu42/tart/-/jobs/4980020&#34; rel=&#34;nofollow&#34;&gt;运行自己的 CI job ，运行自己的测试和编译自己&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;特色：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;折腾；&lt;/li&gt;&#xA;&lt;li&gt;使用&lt;a href=&#34;https://firecracker-microvm.github.io/&#34; rel=&#34;nofollow&#34;&gt;Firecracker&lt;/a&gt;和&lt;code&gt;/dev/kvm&lt;/code&gt;，让每个 job 在一个&lt;strong&gt;两秒内&lt;/strong&gt;启动的虚拟机中运行，我目前没在公开资料里查到这么做的；&lt;/li&gt;&#xA;&lt;li&gt;代码量少，大概 2000 行实现了 Gitlab Runner 的核心功能：job 的获取、执行、环境隔离、日志和结果的上报；&lt;/li&gt;&#xA;&lt;li&gt;在每个星期四运行 job 会有特殊效果。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;只实现了核心功能，产物上传、service 这些功能是不支持的。换句话说，不要用于生产环境（真的会有人这么做吗）。&lt;/p&gt;&#xA;&lt;h2&gt;使用方法&lt;/h2&gt;&#xA;&lt;p&gt;蛋挞需要在可以访问&lt;code&gt;/dev/kvm&lt;/code&gt;的 Linux 环境下运行：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo setfacl -m u:${USER}:rw /dev/kvm&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;从 release 页面下载蛋挞和 Firecracker 的二进制，并将它们置于&lt;code&gt;$PATH&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;从 release 页面下载 RootFS 和 Linux 内核，把它们放到工作文件夹，比如&lt;code&gt;~/tart&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;为 tart 创建的虚拟机预先配置网络，请参考&lt;code&gt;rootfs/&lt;a href=&#34;http://setup-tuntap.sh&#34; rel=&#34;nofollow&#34;&gt;setup-tuntap.sh&lt;/a&gt;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;cd 到工作文件夹&lt;/li&gt;&#xA;&lt;li&gt;注册 tart 为你项目的 Gitlab Runner：&lt;code&gt;tart register --endpoint &lt;a href=&#34;https://gitlab.example.com&#34; rel=&#34;nofollow&#34;&gt;https://gitlab.example.com&lt;/a&gt; --token your_token_here &amp;gt; tart.toml&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;启动 tart：&lt;code&gt;tart run&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;在 Gitlab 上触发 CI ，为了确保 job 会调度到 tart 上，你可能得禁用项目的 shared runner&lt;/li&gt;&#xA;&lt;li&gt;观看 tart 工作（或者爆炸）&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;编译方式&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;make&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;产物在&lt;code&gt;bin&lt;/code&gt;文件夹中。&lt;/p&gt;&#xA;&lt;p&gt;虚拟机的 RootFS 和 Linux 内核编译请参考&lt;code&gt;rootfs&lt;/code&gt;文件夹。&lt;/p&gt;&#xA;&lt;h2&gt;为啥叫蛋挞？&lt;/h2&gt;&#xA;&lt;p&gt;我喜欢吃蛋挞。&lt;/p&gt;&#xA;&lt;h2&gt;许可证&lt;/h2&gt;&#xA;&lt;p&gt;MIT&lt;/p&gt;&#xA;&lt;p&gt;请自由享受和贡献开源。&lt;/p&gt;&#xA;&lt;p&gt;第三方项目许可证请参阅&lt;code&gt;&lt;a href=&#34;http://THIRD_PARTY_LICENSES.md&#34; rel=&#34;nofollow&#34;&gt;THIRD_PARTY_LICENSES.md&lt;/a&gt;&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;logo 的照片来自于 Ashley Byrd on Unsplash ，Gopher 在&lt;a href=&#34;https://gopherize.me/&#34; rel=&#34;nofollow&#34;&gt;gopherize.me&lt;/a&gt;生成。&lt;/p&gt;&#xA;</description>
