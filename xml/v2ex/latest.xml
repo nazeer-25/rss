@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>服务器转发资源实现跨域是否可行？ - 问与答</title>
+      <link>https://www.v2ex.com/t/889471</link>
+      <description>`&lt;a target=&#34;_blank&#34; href=&#34;http://assets.domainA.com&#34; rel=&#34;nofollow noopener&#34;&gt;assets.domainA.com&lt;/a&gt;` 的资源不支持跨域，`&lt;a target=&#34;_blank&#34; href=&#34;http://domainB.com&#34; rel=&#34;nofollow noopener&#34;&gt;domainB.com&lt;/a&gt;` 却希望跨域请求其上的资源，我打算在 `&lt;a target=&#34;_blank&#34; href=&#34;http://domainB.com&#34; rel=&#34;nofollow noopener&#34;&gt;domainB.com&lt;/a&gt;` 上做中转，即，`&lt;a target=&#34;_blank&#34; href=&#34;http://domainB.com&#34; rel=&#34;nofollow noopener&#34;&gt;domainB.com&lt;/a&gt;`发请求到自身的服务器，由服务器请求`&lt;a target=&#34;_blank&#34; href=&#34;http://assets.domainA.com&#34; rel=&#34;nofollow noopener&#34;&gt;assets.domainA.com&lt;/a&gt;`，得到结果后返回给前端。&lt;br /&gt;&lt;br /&gt;这样会不会有性能问题或其他我没想到的问题？&lt;br /&gt;&lt;br /&gt;```typescript&lt;br /&gt;// &lt;a target=&#34;_blank&#34; href=&#34;http://domainB.com&#34; rel=&#34;nofollow noopener&#34;&gt;domainB.com&lt;/a&gt; 服务端 (Next.js)&lt;br /&gt;// api/cors.ts&lt;br /&gt;&lt;br /&gt;import request from &#39;request&#39;&lt;br /&gt;&lt;br /&gt;export default function cors(req, res) {&lt;br /&gt;  const queryUrl = req.query.assets&lt;br /&gt;  const requestCallback = (err, _, body) =&amp;gt; {&lt;br /&gt;    if (err || !body) {&lt;br /&gt;      res.status(408).json({&lt;br /&gt;        data: `request failed: ${err?.message}`&lt;br /&gt;      })&lt;br /&gt;    }&lt;br /&gt;  }&lt;br /&gt;  request(queryUrl, requestCallback).pipe(res)&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;```</description>
+      <author>xiaoming1992</author>
+      <pubDate>24 Oct 2022 10:20:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>南京靠谱机会： FPGA 工程师，薪水： 20-40k，不加班，双休 - 酷工作</title>
+      <link>https://www.v2ex.com/t/889470</link>
+      <description>任职要求：&lt;br /&gt;1. 本科 4 年，硕士 2 年以上 FPGA 数字电路设计经验&lt;br /&gt;2. 熟悉主流 FPGA （ intel ，xilinx ）或 ASIC （ synopsys ）的数字电路开发环境&lt;br /&gt;3. 能独立完成逻辑设计及验证测试&lt;br /&gt;4. 熟悉时序分析及约束&lt;br /&gt;5. 有 SLVS-EC 、MIPI 等图像传感器接口，以及 DDR3 ，以太网等常用高速接口设计经验者优先&lt;br /&gt;6. 有数字信号处理 ，图像处理，自动控制等算法设计经验者优先&lt;br /&gt;7. 有航天，军工领域工作经验者优先&lt;br /&gt;岗位职责：&lt;br /&gt;1. 根据项目需求完成 FPGA 相关设计，包括架构设计、逻辑设计、验证测试、时钟约束、模块划分等；&lt;br /&gt;2. 负责 FPGA 相关驱动及流程文档的编写工作&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;微信：18621580540&lt;br /&gt;邮箱： daisyzhao@greatconsulting.club</description>
+      <author>fancyfrees</author>
+      <pubDate>24 Oct 2022 10:19:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>Mac 和 Windows 局域网共享不能双向实现 - macOS</title>
+      <link>https://www.v2ex.com/t/889469</link>
+      <description>&lt;p&gt;同时设置好了 Mac 和 Windows 的网络共享选项。在 Windows 系统中的 Networks 里输入了 &lt;code&gt;\\macIp&lt;/code&gt; 成功打开了 Mac 上共享的文件夹。但是反过来在 Mac 的 Finder &amp;gt; Go &amp;gt; Connect to Server 中输入 &lt;code&gt;smb://windowsIp&lt;/code&gt; 却出现问题，如图中所示:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;很大把握确定 username 和 password 没有输入错误，随机输入密码也是相同提示。&lt;/li&gt;&#xA;&lt;li&gt;搜索到很多相关问题但是没有得到答案，自己对网络也不是很懂，希望各位不吝赐教，感谢&lt;/li&gt;&#xA;&lt;li&gt;参考过的教程，类似这些：&#xA;&lt;a href=&#34;https://www.makeuseof.com/tag/how-to-easily-share-files-across-mac-windows-computers/&#34; rel=&#34;nofollow&#34;&gt;教程 1&lt;/a&gt;&#xA;&lt;a href=&#34;https://service.uoregon.edu/TDClient/2030/Portal/KB/ArticleDet?ID=33750&#34; rel=&#34;nofollow&#34;&gt;教程 2&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;p1&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/D0RzFi1.jpg&#34;/&gt;&#xA;&lt;img alt=&#34;p2&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/yFserx4.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>occupied</author>
+      <pubDate>24 Oct 2022 10:17:10 +0000</pubDate>
+    </item>
+    <item>
+      <title>[深圳/北京/上海/杭州/新加坡/山景城] 字节跳动 - 国际支付部门内推 - 酷工作</title>
+      <link>https://www.v2ex.com/t/889468</link>
+      <description>&lt;p&gt;业务靠谱，持续扩张，详细内容看海报，欢迎加微信享受一对一 VIP 支持！&#xA;X19mcmFuY2l6X18=&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/KCDZZSq.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>jacobz</author>
+      <pubDate>24 Oct 2022 10:10:43 +0000</pubDate>
+    </item>
+    <item>
       <title>mac m1 air istate cpu 温度是 0 这正常吗 - 问与答</title>
       <link>https://www.v2ex.com/t/889467</link>
       <description>CPU temp:               0.0°C &lt;br /&gt;&lt;br /&gt;是不是该送修了。。。</description>
