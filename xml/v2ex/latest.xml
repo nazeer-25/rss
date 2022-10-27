@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ubiquity 框架怎么国内一点资料都没有 - PHP</title>
+      <link>https://www.v2ex.com/t/890548</link>
+      <description>&lt;p&gt;没人用这个玩意吗&#xA;&lt;a href=&#34;https://github.com/phpMv/ubiquity&#34; rel=&#34;nofollow&#34;&gt;https://github.com/phpMv/ubiquity&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://ubiquity.kobject.net/&#34; rel=&#34;nofollow&#34;&gt;https://ubiquity.kobject.net/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>luodaoyi</author>
+      <pubDate>27 Oct 2022 18:43:22 +0000</pubDate>
+    </item>
+    <item>
       <title>搞了好久的，终于为 SDB 增加了 lua 脚本 - Go 编程语言</title>
       <link>https://www.v2ex.com/t/890547</link>
       <description>&lt;h2&gt;SDB 背后的思考 ———— lua 脚本支持&lt;/h2&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;lua 脚本是酷炫的，Redis 、Nginx 等开源项目都可以内嵌 lua 实现业务逻辑。所以 SDB 也打算支撑 lua 脚本。还好找到了优秀的开源项目：&lt;a href=&#34;https://github.com/yuin/gopher-lua&#34; rel=&#34;nofollow&#34;&gt;gopher-lua&lt;/a&gt; 。&lt;/p&gt;&#xA;&lt;h3&gt;初始化&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;L := lua.NewState()&#xA;defer L.Close()&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;方法注册&lt;/h3&gt;&#xA;&lt;p&gt;将 SDB 的方法注册到 lua 脚本中，以 LCount 为例子：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;L.SetGlobal(&#34;LCount&#34;, L.NewFunction(func(L *lua.LState) int {&#xA;&#x9;userKey := L.CheckString(1)&#xA;&#x9;luaLogger.Printf(&#34;[LCount] userKey: %s&#34;, userKey)&#xA;&#xA;&#x9;res, err := luaService.list.Count(batch, []byte(userKey))&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;L.RaiseError(&#34;%s&#34;, err)&#xA;&#x9;}&#xA;&#x9;L.Push(lua.LNumber(res))&#xA;&#x9;return 1&#xA;}))&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;如何保证事务操作？&lt;/h3&gt;&#xA;&lt;p&gt;lua 脚本是灵活的，在上面我们可以写很多的业务逻辑，如果我们在 lua 中用了：LLPush 、LRPush 如何能保证多个方法是操作是事务的呢？也比较简单，我们只需要创建一个 batch 对象，执行完我们的 lua 脚本后进行 commit 。保证执行每一次脚本是事务的。&lt;/p&gt;&#xA;&lt;h3&gt;加锁逻辑？&lt;/h3&gt;&#xA;&lt;p&gt;这其实是最容易被忽略的一点。对比 Redis 来说，由于是单线程的，所以 lua 脚本是不需要考虑锁的。&lt;/p&gt;&#xA;&lt;p&gt;但是 SDB 不同，SDB 首先是支持多线程的，那么对 userKey 的写操作会进行加锁。lua 脚本在某种程度上破坏了对单个 userKey 的加锁策略。&lt;/p&gt;&#xA;&lt;p&gt;首先 lua 脚本得让用户传入会操作的 userKey 列表，然后对每个 userKey 进行加锁。只有获取了所有锁，lua 脚本才能开始运行。&lt;/p&gt;&#xA;&lt;p&gt;但这是不够的，可能会出现死锁问题。如当一个 lua 脚本操作 a 、b 两个 userKey ，另一个 lua 脚本操作 b 、d 两个 userKey 。假设 d 和 a 的锁是同一把。就会出现死锁的问题。&lt;/p&gt;&#xA;&lt;p&gt;防止死锁的解决方法也很简单，只需要保证先对 lua 脚本的 userKey 按某种顺序依次获取锁既可。&lt;/p&gt;&#xA;</description>

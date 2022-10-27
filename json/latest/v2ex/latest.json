@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "ubiquity 框架怎么国内一点资料都没有 - PHP",
+      "Link": "https://www.v2ex.com/t/890548",
+      "Description": "\u003cp\u003e没人用这个玩意吗\n\u003ca href=\"https://github.com/phpMv/ubiquity\" rel=\"nofollow\"\u003ehttps://github.com/phpMv/ubiquity\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://ubiquity.kobject.net/\" rel=\"nofollow\"\u003ehttps://ubiquity.kobject.net/\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "luodaoyi",
+      "PubDate": "2022-10-27T18:43:22Z"
+    },
+    {
       "Title": "搞了好久的，终于为 SDB 增加了 lua 脚本 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/890547",
       "Description": "\u003ch2\u003eSDB 背后的思考 ———— lua 脚本支持\u003c/h2\u003e\n\u003chr/\u003e\n\u003cp\u003elua 脚本是酷炫的，Redis 、Nginx 等开源项目都可以内嵌 lua 实现业务逻辑。所以 SDB 也打算支撑 lua 脚本。还好找到了优秀的开源项目：\u003ca href=\"https://github.com/yuin/gopher-lua\" rel=\"nofollow\"\u003egopher-lua\u003c/a\u003e 。\u003c/p\u003e\n\u003ch3\u003e初始化\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eL := lua.NewState()\ndefer L.Close()\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e方法注册\u003c/h3\u003e\n\u003cp\u003e将 SDB 的方法注册到 lua 脚本中，以 LCount 为例子：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eL.SetGlobal(\"LCount\", L.NewFunction(func(L *lua.LState) int {\n\tuserKey := L.CheckString(1)\n\tluaLogger.Printf(\"[LCount] userKey: %s\", userKey)\n\n\tres, err := luaService.list.Count(batch, []byte(userKey))\n\tif err != nil {\n\t\tL.RaiseError(\"%s\", err)\n\t}\n\tL.Push(lua.LNumber(res))\n\treturn 1\n}))\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e如何保证事务操作？\u003c/h3\u003e\n\u003cp\u003elua 脚本是灵活的，在上面我们可以写很多的业务逻辑，如果我们在 lua 中用了：LLPush 、LRPush 如何能保证多个方法是操作是事务的呢？也比较简单，我们只需要创建一个 batch 对象，执行完我们的 lua 脚本后进行 commit 。保证执行每一次脚本是事务的。\u003c/p\u003e\n\u003ch3\u003e加锁逻辑？\u003c/h3\u003e\n\u003cp\u003e这其实是最容易被忽略的一点。对比 Redis 来说，由于是单线程的，所以 lua 脚本是不需要考虑锁的。\u003c/p\u003e\n\u003cp\u003e但是 SDB 不同，SDB 首先是支持多线程的，那么对 userKey 的写操作会进行加锁。lua 脚本在某种程度上破坏了对单个 userKey 的加锁策略。\u003c/p\u003e\n\u003cp\u003e首先 lua 脚本得让用户传入会操作的 userKey 列表，然后对每个 userKey 进行加锁。只有获取了所有锁，lua 脚本才能开始运行。\u003c/p\u003e\n\u003cp\u003e但这是不够的，可能会出现死锁问题。如当一个 lua 脚本操作 a 、b 两个 userKey ，另一个 lua 脚本操作 b 、d 两个 userKey 。假设 d 和 a 的锁是同一把。就会出现死锁的问题。\u003c/p\u003e\n\u003cp\u003e防止死锁的解决方法也很简单，只需要保证先对 lua 脚本的 userKey 按某种顺序依次获取锁既可。\u003c/p\u003e\n",
