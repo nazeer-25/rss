@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Deno 反向代理解决前端跨域问题以及将 http 转为 https - Node.js</title>
+      <link>https://www.v2ex.com/t/890862</link>
+      <description>&lt;p&gt;前端在调用别人 api 时经常遇到跨域或者 https 无法调用 http 的问题，通过反代即可解决。&#xA;&lt;a href=&#34;http://deno.com&#34; rel=&#34;nofollow&#34;&gt;deno.com&lt;/a&gt; 提供免费的 NodeJS 环境，在其官网后台新建应用，在 playground 粘贴代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;import { serve } from &#34;https://deno.land/std@0.155.0/http/server.ts&#34;&#xA;serve(async (req: Request) =&amp;gt; {&#xA;  const url = new URL(req.url)&#xA;  const targetUrl = url.href.replace(`${url.origin}/`, &#39;&#39;)&#xA;  let urlObj: any&#xA;  try {&#xA;    urlObj = new URL(targetUrl)&#xA;  } catch (e) {&#xA;    console.error(e.message)&#xA;  }&#xA;  if ([&#39;http:&#39;, &#39;https:&#39;].indexOf(urlObj?.protocol) &amp;gt; -1) {&#xA;    let res = await fetch(targetUrl, {&#xA;      headers: req.headers,&#xA;      method: req.method,&#xA;      body: req.body,&#xA;    })&#xA;    let headers = {}&#xA;    res.headers.forEach((value, key) =&amp;gt; {&#xA;      headers[key] = value&#xA;    })&#xA;    if (&#39;*&#39; !== headers[&#39;Access-Control-Allow-Origin&#39;]?.trim()&#xA;      &amp;amp;&amp;amp; &#39;*&#39; !== headers[&#39;access-control-allow-origin&#39;]?.trim()) {&#xA;      headers[&#39;Access-Control-Allow-Origin&#39;] = &#39;*&#39;&#xA;    }&#xA;    return new Response(res.body, { headers, status: res.status })&#xA;  }&#xA;  return new Response(&#xA;    `Usage: ${url.origin}/https://deno.com/deploy/docs/pricing-and-limits`)&#xA;})&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>estk</author>
+      <pubDate>28 Oct 2022 15:44:24 +0000</pubDate>
+    </item>
+    <item>
       <title>现在海外亚马逊买东西多久能收货？ - 问与答</title>
       <link>https://www.v2ex.com/t/890861</link>
       <description>日亚要多久？美亚要多久？</description>

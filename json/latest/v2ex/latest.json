@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Deno 反向代理解决前端跨域问题以及将 http 转为 https - Node.js",
+      "Link": "https://www.v2ex.com/t/890862",
+      "Description": "\u003cp\u003e前端在调用别人 api 时经常遇到跨域或者 https 无法调用 http 的问题，通过反代即可解决。\n\u003ca href=\"http://deno.com\" rel=\"nofollow\"\u003edeno.com\u003c/a\u003e 提供免费的 NodeJS 环境，在其官网后台新建应用，在 playground 粘贴代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eimport { serve } from \"https://deno.land/std@0.155.0/http/server.ts\"\nserve(async (req: Request) =\u0026gt; {\n  const url = new URL(req.url)\n  const targetUrl = url.href.replace(`${url.origin}/`, '')\n  let urlObj: any\n  try {\n    urlObj = new URL(targetUrl)\n  } catch (e) {\n    console.error(e.message)\n  }\n  if (['http:', 'https:'].indexOf(urlObj?.protocol) \u0026gt; -1) {\n    let res = await fetch(targetUrl, {\n      headers: req.headers,\n      method: req.method,\n      body: req.body,\n    })\n    let headers = {}\n    res.headers.forEach((value, key) =\u0026gt; {\n      headers[key] = value\n    })\n    if ('*' !== headers['Access-Control-Allow-Origin']?.trim()\n      \u0026amp;\u0026amp; '*' !== headers['access-control-allow-origin']?.trim()) {\n      headers['Access-Control-Allow-Origin'] = '*'\n    }\n    return new Response(res.body, { headers, status: res.status })\n  }\n  return new Response(\n    `Usage: ${url.origin}/https://deno.com/deploy/docs/pricing-and-limits`)\n})\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "estk",
+      "PubDate": "2022-10-28T15:44:24Z"
+    },
+    {
       "Title": "现在海外亚马逊买东西多久能收货？ - 问与答",
       "Link": "https://www.v2ex.com/t/890861",
       "Description": "日亚要多久？美亚要多久？",
