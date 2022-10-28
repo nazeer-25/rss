@@ -81,13 +81,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "求教golang使用utf-8编码，那么为什么int16类型可以存储汉字",
-      "Link": "https://studygolang.com/topics/15927#reply3",
-      "Description": "\u003cp\u003e汉字 \u0026lsquo;中\u0026rsquo; 在utf-8中占用3个字节，为什么int16类型可以存储呢，谢谢\u003c/p\u003e\n\n\u003cp\u003epackage main\u003c/p\u003e\n\n\u003cp\u003eimport \u0026ldquo;fmt\u0026rdquo;\u003c/p\u003e\n\n\u003cp\u003efunc main(){\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003evar ch int16 = '中'\n\n\nfmt.Printf(\u0026quot;%c\u0026quot;,ch)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "panic: runtime error: invalid memory address or nil pointer dereference | 关于nil 无效的指针引用的问题",
       "Link": "https://studygolang.com/articles/35926#reply0",
       "Description": "\u003cp\u003e\u003cstrong\u003e今天我们说一个nil无效指针引用报错的问题\u003c/strong\u003e 🐒 ,\u003c/p\u003e\n\n\u003cp\u003e错误抛出了 , 但是具体出错逻辑还是要具体分析一下,\u003c/p\u003e\n\n\u003cp\u003e涉及到的知识点涵盖了go基本的语法, 函数, 以及linux的文件知识, 超出code范围的内容不在讨论范围\u003c/p\u003e\n\n\u003cp\u003e下方code是一段通过切片完成输入缓冲的文件I/O函数\u003c/p\u003e\n\n\u003cp\u003e但是当你做出一些I -\u0026gt;O之间的额外修改可能会崩掉, 也许你可能换一种写法, 但是学习嘛, 不寒碜\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc SliceRead(f *os.File) {\n\t// 缓冲区大小\n\tconst BUF_SIZE = 512\n\n\tvar buf [BUF_SIZE]byte\n\n\tfor {\n\t\t// 这里有一个写法(非语法), 当switch的条件表达式省略(赋值语句不算), switch语句以无条件形式运行\n\t\t// buf[:] 创建了一个buf数组的完整切片\n\t\tswitch nr, err := f.Read(buf[:]); true {\n\t\tcase nr \u0026lt; 0:\n\t\t\tfmt.Fprintf(os.Stderr, \u0026quot;读取错误 %s\\n\u0026quot;, err.Error())\n\t\t\tos.Exit(1)\n\t\tcase nr == 0:\n\t\t\treturn\n\t\tcase nr \u0026gt; 0:\n\n\t\t\t// 逐字打印输入的参数到标准输出\n\t\t\t// byte转string-\u0026gt;byte\n\t\t\tstr_value := []byte(\u0026quot;标准输出 -- \u0026quot; + string(buf[0:nr]))\n\n\t\t\t// fmt.Fprintf(os.Stdout, \u0026quot;%s\\n\u0026quot;, string(str_value))\n\t\t\tnw, ew := os.Stdout.Write(str_value)\n\t\t\tif ew != nil {\n\t\t\t\tfmt.Println(\u0026quot;写入输出出错\u0026quot;)\n\t\t\t}\n\t\t\tfmt.Println(nw)\n\n\t\t\t// 此处会有空指针引用错误: 无效的内存地址/零指针取消引用\n\t\t\t// 分析: 此时nr为os.File read返回文件读取到的字节数\n\t\t\t// nw是 os File write 返回文件写入的字节数\n\t\t\tif nw != nr {\n\t\t\t\t// 此处因为我们改变了写入输出的字节数(拼接了其他字符进来, 导致字节数其实增大了) 所以一定会触发\n\n\t\t\t\t/**\n\t\t\t\t * 此处Fprintf函数 将第二,第三参数格式化后写入标准错误并输出, Fprintf的第一参是一个实现了io.Writer接口的变量 返回值必须为非nil类型的错误(https://studygolang.com/static/pkgdoc/pkg/io.htm#Writer),\n\t\t\t\t * 此时逻辑上出现了问题:\n\t\t\t\t * 当nw!=nr时 并不一定是文件读写出错了, 因为读和写的过程中会有很多中间操作, 例如我们对最终要写出的内容的修改,\n\t\t\t\t * 所以此时其实是正常写入输出的, ew的值为nil ,\n\t\t\t\t * nil在go中是一个零值, nil是预定义的标识符,代表指针pointer, 通道channel, 函数func, 接口interface,映射map, 或者切片slice的零值\n\t\t\t\t * 所以此时我们的动作变为 即将向标准错误中输出一个零值 所以在Fprintf\n\t\t\t\t */\n\t\t\t\tfmt.Fprintf(os.Stderr, \u0026quot;写入错误: %s\\n\u0026quot;, ew.Error())\n\t\t\t}\n\n\t\t}\n\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -144,6 +137,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "【成都】招聘 Golang 工程师",
+      "Link": "https://studygolang.com/topics/15909#reply5",
+      "Description": "\u003ch4\u003e开悟平台\u003c/h4\u003e\n\n\u003cp\u003e开悟是腾讯牵头构建的 \u003cstrong\u003eAI 多智能体与复杂决策开放研究平台\u003c/strong\u003e，依托 \u003cstrong\u003e王者荣耀\u003c/strong\u003e 和 AI Lab 在算法、算力、实验场景方面的核心优势，为学术研究人员和算法开发者开放的国内领先、国际一流研究与应用探索平台。\u003c/p\u003e\n\n\u003cp\u003e平台官网: \u003ca href=\"https://aiarena.tencent.com\"\u003ehttps://aiarena.tencent.com\u003c/a\u003e\u003c/p\u003e\n\n\u003ch4\u003e说明\u003c/h4\u003e\n\n\u003col\u003e\n\u003cli\u003e以下所有岗位签署腾讯全资子公司: 成都实娱商管\u003c/li\u003e\n\u003cli\u003e投递方式: 微信添加 lailin306755605(请注明招聘) 或邮箱发送 me@lailin.xyz\u003cbr\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003ch4\u003eGolang 后端开发 (Web 后端)\u003c/h4\u003e\n\n\u003ch5\u003e岗位职责\u003c/h5\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e根据产品需求，参与开悟平台后台的设计开发工作，与前端开发、产品、测试密切合作完成功能目标，并能实时跟进解决产品、用户反馈的问题\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e负责服务拆解与程序优化\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003ch5\u003e岗位要求\u003c/h5\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e本科以上学历，1 年以上后端开发经验\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e熟悉 Golang 开发语言，及常用框架，了解 PHP/Python/Shell 等任一脚本语言\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e熟练掌握 MySQL、redis 等数据库，熟悉 protobuf, json 等数据格式。\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e熟悉 tcp/ip http 等网络通信协议\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e掌握 git 代码管理工具，拥有良好的编码习惯，熟悉单元测试的编写\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e有微服务框架经验，机器学习等相关经验者优先\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "深圳小破网站寻找兼职",
       "Link": "https://studygolang.com/topics/14747#reply35",
       "Description": "\u003cp\u003e各位大佬，我有个go语言写得小破网站，想找一个兼职运营, 后台是go，前端是nuxt吧（vue的架构？）\u003c/br\u003e\n主要是平时的一些小bug，例如消息弹出错误之类的帮忙改改\u003c/br\u003e\n同时，也想新加一些小功能，但是这些工作比较佛，没有时间进度\u003c/br\u003e\n有没有大佬能接的啊\u003c/br\u003e\n我的这个小破站给钱不多，不过要是合得来可以以后做些别的事，本人在一家顶级投资机构搬砖。\u003c/br\u003e\n有兴趣的小伙伴可以发简历到electronwang@qq.com\n谢谢~有没有前端的小伙伴啊， vue，nuxt框架~~~\u003c/p\u003e\n",
@@ -154,6 +154,13 @@
       "Title": "vscode配置",
       "Link": "https://studygolang.com/topics/13475#reply5",
       "Description": "\u003cp\u003evscode配置golang环境，一直报\u003ccode\u003efound module \u0026quot;github.com/go-delve/delve\u0026quot; twice in the workspace\u003c/code\u003e是什么情况\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "求教golang使用utf-8编码，那么为什么int16类型可以存储汉字",
+      "Link": "https://studygolang.com/topics/15927#reply3",
+      "Description": "\u003cp\u003e汉字 \u0026lsquo;中\u0026rsquo; 在utf-8中占用3个字节，为什么int16类型可以存储呢，谢谢\u003c/p\u003e\n\n\u003cp\u003epackage main\u003c/p\u003e\n\n\u003cp\u003eimport \u0026ldquo;fmt\u0026rdquo;\u003c/p\u003e\n\n\u003cp\u003efunc main(){\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003evar ch int16 = '中'\n\n\nfmt.Printf(\u0026quot;%c\u0026quot;,ch)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },

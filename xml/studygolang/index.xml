@@ -55,11 +55,6 @@
       <description>&lt;p&gt;go的基本数据类型都有默认值。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;那么现在遇到一个问题，使用结构体映射前端传来的参数，有时候某些参数会为空或者默认值也是有意义的。&#xA;比如：&#xA;&#x9;结构体中有个成员是int类型 int的默认值是0 ，但是0值在我的业务逻辑中有其具体意义。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;想请教各位在前端-后端-数据库这个过程中怎么处理这个问题的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;目前已知集中解决方案：&#xA;&#x9;1、业务中有具体意义的内容规避掉默认值，但这个显然有点因噎废食了。&#xA;&#x9;2、budiler设计，这个也是比较麻烦。&#xA;&#x9;3、指针类型，但是需要在整个流程中进行多次处理，也麻烦。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;请教大家有没有别的什么看法。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;谢谢大家。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>求教golang使用utf-8编码，那么为什么int16类型可以存储汉字</title>
-      <link>https://studygolang.com/topics/15927#reply3</link>
-      <description>&lt;p&gt;汉字 &amp;lsquo;中&amp;rsquo; 在utf-8中占用3个字节，为什么int16类型可以存储呢，谢谢&lt;/p&gt;&#xA;&#xA;&lt;p&gt;package main&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import &amp;ldquo;fmt&amp;rdquo;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func main(){&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;var ch int16 = &#39;中&#39;&#xA;&#xA;&#xA;fmt.Printf(&amp;quot;%c&amp;quot;,ch)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>panic: runtime error: invalid memory address or nil pointer dereference | 关于nil 无效的指针引用的问题</title>
       <link>https://studygolang.com/articles/35926#reply0</link>
       <description>&lt;p&gt;&lt;strong&gt;今天我们说一个nil无效指针引用报错的问题&lt;/strong&gt; 🐒 ,&lt;/p&gt;&#xA;&#xA;&lt;p&gt;错误抛出了 , 但是具体出错逻辑还是要具体分析一下,&lt;/p&gt;&#xA;&#xA;&lt;p&gt;涉及到的知识点涵盖了go基本的语法, 函数, 以及linux的文件知识, 超出code范围的内容不在讨论范围&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下方code是一段通过切片完成输入缓冲的文件I/O函数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;但是当你做出一些I -&amp;gt;O之间的额外修改可能会崩掉, 也许你可能换一种写法, 但是学习嘛, 不寒碜&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;func SliceRead(f *os.File) {&#xA;&#x9;// 缓冲区大小&#xA;&#x9;const BUF_SIZE = 512&#xA;&#xA;&#x9;var buf [BUF_SIZE]byte&#xA;&#xA;&#x9;for {&#xA;&#x9;&#x9;// 这里有一个写法(非语法), 当switch的条件表达式省略(赋值语句不算), switch语句以无条件形式运行&#xA;&#x9;&#x9;// buf[:] 创建了一个buf数组的完整切片&#xA;&#x9;&#x9;switch nr, err := f.Read(buf[:]); true {&#xA;&#x9;&#x9;case nr &amp;lt; 0:&#xA;&#x9;&#x9;&#x9;fmt.Fprintf(os.Stderr, &amp;quot;读取错误 %s\n&amp;quot;, err.Error())&#xA;&#x9;&#x9;&#x9;os.Exit(1)&#xA;&#x9;&#x9;case nr == 0:&#xA;&#x9;&#x9;&#x9;return&#xA;&#x9;&#x9;case nr &amp;gt; 0:&#xA;&#xA;&#x9;&#x9;&#x9;// 逐字打印输入的参数到标准输出&#xA;&#x9;&#x9;&#x9;// byte转string-&amp;gt;byte&#xA;&#x9;&#x9;&#x9;str_value := []byte(&amp;quot;标准输出 -- &amp;quot; + string(buf[0:nr]))&#xA;&#xA;&#x9;&#x9;&#x9;// fmt.Fprintf(os.Stdout, &amp;quot;%s\n&amp;quot;, string(str_value))&#xA;&#x9;&#x9;&#x9;nw, ew := os.Stdout.Write(str_value)&#xA;&#x9;&#x9;&#x9;if ew != nil {&#xA;&#x9;&#x9;&#x9;&#x9;fmt.Println(&amp;quot;写入输出出错&amp;quot;)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;fmt.Println(nw)&#xA;&#xA;&#x9;&#x9;&#x9;// 此处会有空指针引用错误: 无效的内存地址/零指针取消引用&#xA;&#x9;&#x9;&#x9;// 分析: 此时nr为os.File read返回文件读取到的字节数&#xA;&#x9;&#x9;&#x9;// nw是 os File write 返回文件写入的字节数&#xA;&#x9;&#x9;&#x9;if nw != nr {&#xA;&#x9;&#x9;&#x9;&#x9;// 此处因为我们改变了写入输出的字节数(拼接了其他字符进来, 导致字节数其实增大了) 所以一定会触发&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;/**&#xA;&#x9;&#x9;&#x9;&#x9; * 此处Fprintf函数 将第二,第三参数格式化后写入标准错误并输出, Fprintf的第一参是一个实现了io.Writer接口的变量 返回值必须为非nil类型的错误(https://studygolang.com/static/pkgdoc/pkg/io.htm#Writer),&#xA;&#x9;&#x9;&#x9;&#x9; * 此时逻辑上出现了问题:&#xA;&#x9;&#x9;&#x9;&#x9; * 当nw!=nr时 并不一定是文件读写出错了, 因为读和写的过程中会有很多中间操作, 例如我们对最终要写出的内容的修改,&#xA;&#x9;&#x9;&#x9;&#x9; * 所以此时其实是正常写入输出的, ew的值为nil ,&#xA;&#x9;&#x9;&#x9;&#x9; * nil在go中是一个零值, nil是预定义的标识符,代表指针pointer, 通道channel, 函数func, 接口interface,映射map, 或者切片slice的零值&#xA;&#x9;&#x9;&#x9;&#x9; * 所以此时我们的动作变为 即将向标准错误中输出一个零值 所以在Fprintf&#xA;&#x9;&#x9;&#x9;&#x9; */&#xA;&#x9;&#x9;&#x9;&#x9;fmt.Fprintf(os.Stderr, &amp;quot;写入错误: %s\n&amp;quot;, ew.Error())&#xA;&#x9;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -98,6 +93,11 @@
       <description>&lt;p&gt;求解：M1苹果笔记本，在动态的build  plugin时，&#xA;在执行 pligun.Open时，报错：plugin was built with a different version of package internal/cpu&lt;/p&gt;&#xA;&#xA;&lt;p&gt;报错信息如上，求解&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>【成都】招聘 Golang 工程师</title>
+      <link>https://studygolang.com/topics/15909#reply5</link>
+      <description>&lt;h4&gt;开悟平台&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;开悟是腾讯牵头构建的 &lt;strong&gt;AI 多智能体与复杂决策开放研究平台&lt;/strong&gt;，依托 &lt;strong&gt;王者荣耀&lt;/strong&gt; 和 AI Lab 在算法、算力、实验场景方面的核心优势，为学术研究人员和算法开发者开放的国内领先、国际一流研究与应用探索平台。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;平台官网: &lt;a href=&#34;https://aiarena.tencent.com&#34;&gt;https://aiarena.tencent.com&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;说明&lt;/h4&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;以下所有岗位签署腾讯全资子公司: 成都实娱商管&lt;/li&gt;&#xA;&lt;li&gt;投递方式: 微信添加 lailin306755605(请注明招聘) 或邮箱发送 me@lailin.xyz&lt;br&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;h4&gt;Golang 后端开发 (Web 后端)&lt;/h4&gt;&#xA;&#xA;&lt;h5&gt;岗位职责&lt;/h5&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;p&gt;根据产品需求，参与开悟平台后台的设计开发工作，与前端开发、产品、测试密切合作完成功能目标，并能实时跟进解决产品、用户反馈的问题&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;负责服务拆解与程序优化&lt;/p&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;h5&gt;岗位要求&lt;/h5&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;p&gt;本科以上学历，1 年以上后端开发经验&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;熟悉 Golang 开发语言，及常用框架，了解 PHP/Python/Shell 等任一脚本语言&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;熟练掌握 MySQL、redis 等数据库，熟悉 protobuf, json 等数据格式。&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;熟悉 tcp/ip http 等网络通信协议&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;掌握 git 代码管理工具，拥有良好的编码习惯，熟悉单元测试的编写&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;有微服务框架经验，机器学习等相关经验者优先&lt;/p&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+    </item>
+    <item>
       <title>深圳小破网站寻找兼职</title>
       <link>https://studygolang.com/topics/14747#reply35</link>
       <description>&lt;p&gt;各位大佬，我有个go语言写得小破网站，想找一个兼职运营, 后台是go，前端是nuxt吧（vue的架构？）&lt;/br&gt;&#xA;主要是平时的一些小bug，例如消息弹出错误之类的帮忙改改&lt;/br&gt;&#xA;同时，也想新加一些小功能，但是这些工作比较佛，没有时间进度&lt;/br&gt;&#xA;有没有大佬能接的啊&lt;/br&gt;&#xA;我的这个小破站给钱不多，不过要是合得来可以以后做些别的事，本人在一家顶级投资机构搬砖。&lt;/br&gt;&#xA;有兴趣的小伙伴可以发简历到electronwang@qq.com&#xA;谢谢~有没有前端的小伙伴啊， vue，nuxt框架~~~&lt;/p&gt;&#xA;</description>
@@ -106,6 +106,11 @@
       <title>vscode配置</title>
       <link>https://studygolang.com/topics/13475#reply5</link>
       <description>&lt;p&gt;vscode配置golang环境，一直报&lt;code&gt;found module &amp;quot;github.com/go-delve/delve&amp;quot; twice in the workspace&lt;/code&gt;是什么情况&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>求教golang使用utf-8编码，那么为什么int16类型可以存储汉字</title>
+      <link>https://studygolang.com/topics/15927#reply3</link>
+      <description>&lt;p&gt;汉字 &amp;lsquo;中&amp;rsquo; 在utf-8中占用3个字节，为什么int16类型可以存储呢，谢谢&lt;/p&gt;&#xA;&#xA;&lt;p&gt;package main&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import &amp;ldquo;fmt&amp;rdquo;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func main(){&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;var ch int16 = &#39;中&#39;&#xA;&#xA;&#xA;fmt.Printf(&amp;quot;%c&amp;quot;,ch)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go 服务中 HTTP 请求的生命周期</title>
