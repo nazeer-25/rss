@@ -60,6 +60,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "闲聊级探讨：为什么对指针的定义使用*符号而不是\u0026",
+      "Link": "https://studygolang.com/topics/15936#reply0",
+      "Description": "\u003ch4\u003e闲聊级探讨：为什么对指针的定义使用*符号而不是\u0026amp;\u003c/h4\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e前言：本问题是一个闲的蛋疼的关于编程语法设计的讨论，建立在已经弄明白*和\u0026amp;俩符号用法的前提上。\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cp\u003e关于指针的*和\u0026amp;的用法，c家族的好几门语言都通用这样的语法（这里用go举例）：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\tvar a int = 3\n\tvar b *int = \u0026amp;a\n\n\tprintln(a)\n\tprintln(\u0026amp;a)\n\tprintln(b)\n\tprintln(*b)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e我们都知道，*int代表int的指针，但是综合*b的用法来看，是不是设计成用\u0026amp;int来代表指针更清晰明确一些？\u003c/p\u003e\n\n\u003cp\u003e定义时*int的含义：一个指向int数据的指针\n使用*b时的含义：沿着指针b的地址取出它所指向的int值\n是不是感觉完全不挨着？我们学习这部分内容是应该也都是必须在脑内刻意强调该符号用于定义时和用于操作时的截然不同的含义的吧？\u003c/p\u003e\n\n\u003cp\u003e如果用\u0026amp;代替*呢？\n此时第二句变成了var b \u0026amp;int = \u0026amp;a\n概念上，一是定义了b，类型是int的地址（\u0026amp;｜address），二是取出数据a（int）的地址，赋值给b\n这个\u0026amp;int不是更为一目了然的代表对一个指针的定义吗？\u003c/p\u003e\n\n\u003chr\u003e\n\n\u003cp\u003e同时，从*和\u0026amp;互为逆运算的角度考虑也是一样的：\n依然基于上面的例子，用 \u003cstrong\u003e“var b *int”\u003c/strong\u003e 定义指针时，对*b怎么理解？对一个 \u003cstrong\u003e*int类型的对象\u003c/strong\u003e 进行了*操作吧，伪代码类似于*(*int类型的对象)，然而操作结果却是一个 \u003cstrong\u003eint类型的对象\u003c/strong\u003e（也即例子中的a本身），怎么看都特别反直觉吧，明明叠俩*了，最后这俩却消失了，是不是很容易增加疑惑？\n但是如果用\u0026amp;表示指针的定义呢？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003evar b \u0026amp;int\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e*b的操作就是类似于*(\u0026amp;int类型的对象)，\u0026amp;和*互为逆运算，抵消了，这条语法的返回值是一个int值，是不是就很清晰简明了？\u003c/p\u003e\n\n\u003chr\u003e\n\n\u003ch4\u003e所以最后纳闷的点就是，当初c语言的大老们为啥要这么设计，用*而不是\u0026amp;，是有啥我辈尚未理解的深层含义或者高瞻远瞩吗？\u003c/h4\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "用没有不用lame等 非golang的库  实现wav文件转换为mp3文件？",
+      "Link": "https://studygolang.com/topics/15933#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "请教：module模式下，如何设置可以让go get始终使用git来下载包，环境变量GOVCS无效？",
       "Link": "https://studygolang.com/topics/15934#reply6",
       "Description": "\u003cp\u003e因工作内网不能连接外网，本人在内网服务器布置了gitblit，把一些用到的开源项目git仓库导入到内网使用，在module模式下，github.com的包使用git url的insteadOf进行替换：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e[url \u0026quot;http://用户名@内网IP/~用户名/\u0026quot;]\n\tinsteadOf =github.com/用户名/\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003ego get能够正常工作。\u003c/p\u003e\n\n\u003cp\u003e但是golang.org/x之类的包，由于不是默认使用git来下载，需要向地址：https://包名?go-get=1发送请求，来确认VCS和仓库地址，造成无法正常使用。\u003c/p\u003e\n\n\u003cp\u003e也尝试设置\u003ccode\u003eGOVCS=*:git\u003c/code\u003e，依然无效。\u003c/p\u003e\n\n\u003cp\u003e请问是否有办法设置go get始终使用git来下载？这样我可以使用git url的insteadOf进行替换为内网地址，或者有其他更好的解决办法？\u003c/p\u003e\n",
@@ -81,13 +95,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "闲聊级探讨：为什么对指针的定义使用*符号而不是\u0026",
-      "Link": "https://studygolang.com/topics/15936#reply0",
-      "Description": "\u003ch4\u003e闲聊级探讨：为什么对指针的定义使用*符号而不是\u0026amp;\u003c/h4\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e前言：本问题是一个闲的蛋疼的关于编程语法设计的讨论，建立在已经弄明白*和\u0026amp;俩符号用法的前提上。\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cp\u003e关于指针的*和\u0026amp;的用法，c家族的好几门语言都通用这样的语法（这里用go举例）：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\tvar a int = 3\n\tvar b *int = \u0026amp;a\n\n\tprintln(a)\n\tprintln(\u0026amp;a)\n\tprintln(b)\n\tprintln(*b)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e我们都知道，*int代表int的指针，但是综合*b的用法来看，是不是设计成用\u0026amp;int来代表指针更清晰明确一些？\u003c/p\u003e\n\n\u003cp\u003e定义时*int的含义：一个指向int数据的指针\n使用*b时的含义：沿着指针b的地址取出它所指向的int值\n是不是感觉完全不挨着？我们学习这部分内容是应该也都是必须在脑内刻意强调该符号用于定义时和用于操作时的截然不同的含义的吧？\u003c/p\u003e\n\n\u003cp\u003e如果用\u0026amp;代替*呢？\n此时第二句变成了var b \u0026amp;int = \u0026amp;a\n概念上，一是定义了b，类型是int的地址（\u0026amp;｜address），二是取出数据a（int）的地址，赋值给b\n这个\u0026amp;int不是更为一目了然的代表对一个指针的定义吗？\u003c/p\u003e\n\n\u003chr\u003e\n\n\u003cp\u003e同时，从*和\u0026amp;互为逆运算的角度考虑也是一样的：\n依然基于上面的例子，用 \u003cstrong\u003e“var b *int”\u003c/strong\u003e 定义指针时，对*b怎么理解？对一个 \u003cstrong\u003e*int类型的对象\u003c/strong\u003e 进行了*操作吧，伪代码类似于*(*int类型的对象)，然而操作结果却是一个 \u003cstrong\u003eint类型的对象\u003c/strong\u003e（也即例子中的a本身），怎么看都特别反直觉吧，明明叠俩*了，最后这俩却消失了，是不是很容易增加疑惑？\n但是如果用\u0026amp;表示指针的定义呢？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003evar b \u0026amp;int\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e*b的操作就是类似于*(\u0026amp;int类型的对象)，\u0026amp;和*互为逆运算，抵消了，这条语法的返回值是一个int值，是不是就很清晰简明了？\u003c/p\u003e\n\n\u003chr\u003e\n\n\u003ch4\u003e所以最后纳闷的点就是，当初c语言的大老们为啥要这么设计，用*而不是\u0026amp;，是有啥我辈尚未理解的深层含义或者高瞻远瞩吗？\u003c/h4\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "go-carbon 2.2.0 版本发布， 轻量级、语义化、对开发者友好的Golang时间处理库",
       "Link": "https://studygolang.com/topics/15935#reply0",
       "Description": "\u003cp\u003ecarbon 是一个轻量级、语义化、对开发者友好的 golang 时间处理库，支持链式调用。\u003c/p\u003e\n\n\u003cp\u003e目前已被 \u003ca href=\"https://github.com/avelino/awesome-go#date-and-time\" title=\"awesome-go\"\u003eawesome-go\u003c/a\u003e 收录，如果您觉得不错，请给个 star 吧\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/golang-module/carbon\" title=\"github.com/golang-module/carbon\"\u003egithub.com/golang-module/carbon\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://gitee.com/golang-module/carbon\" title=\"gitee.com/golang-module/carbon\"\u003egitee.com/golang-module/carbon\u003c/a\u003e\u003c/p\u003e\n\n\u003ch4\u003e安装使用\u003c/h4\u003e\n\n\u003ch5\u003eGolang 版本大于等于1.16\u003c/h5\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 使用 github 库\ngo get -u github.com/golang-module/carbon/v2\n\nimport (\n \t\u0026quot;github.com/golang-module/carbon/v2\u0026quot;\n )\n\n// 使用 gitee 库\ngo get -u gitee.com/golang-module/carbon/v2\n\nimport (\n \t\u0026quot;gitee.com/golang-module/carbon/v2\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003eGolang 版本小于1.16\u003c/h5\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 使用 github 库\ngo get -u github.com/golang-module/carbon\n\nimport (\n\t \u0026quot;github.com/golang-module/carbon\u0026quot;\n )\n\n// 使用 gitee 库\ngo get -u gitee.com/golang-module/carbon\n\nimport (\n\t \u0026quot;gitee.com/golang-module/carbon\u0026quot;\n )\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003e更新日志\u003c/h5\u003e\n\n\u003cul\u003e\n\u003cli\u003e优化 Parse () 方法，更加智能和通用\u003c/li\u003e\n\u003cli\u003e优化错误文案\u003c/li\u003e\n\u003cli\u003e修复 DiffInMonths () 方法 bug\u003c/li\u003e\n\u003cli\u003e修复部分文档描述错误\u003c/li\u003e\n\u003c/ul\u003e\n",
@@ -98,13 +105,6 @@
       "Title": "go1.19.2安装失败，超时",
       "Link": "https://studygolang.com/topics/15932#reply4",
       "Description": "\u003cp\u003e\u003ca href=\"https://studygolang.com/dl/golang/go1.19.2.windows-amd64.msi\"\u003ehttps://studygolang.com/dl/golang/go1.19.2.windows-amd64.msi\u003c/a\u003e\ngo1.19.2安装失败，超时\u003cimg src=\"https://static.golangjob.cn/221026/126a4bf6036a788ec1e2fc298baf855c.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e电脑 win11 + i9 10900k，任务管理器显示无响应，重复如是。\nchoco 更新到最新后安装页同样报错，连接失败。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "用没有不用lame等 非golang的库  实现wav文件转换为mp3文件？",
-      "Link": "https://studygolang.com/topics/15933#reply0",
-      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
