@@ -4,6 +4,181 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请问下 Python 需要用到树结构 一般用什么库? - 程序员",
+      "Link": "https://www.v2ex.com/t/890636",
+      "Description": "",
+      "Author": "mahufong",
+      "PubDate": "2022-10-28T03:21:10Z"
+    },
+    {
+      "Title": "Windows Dev Kit 2023 (ARM64 32GB+512GB) 开箱分享 - 分享发现",
+      "Link": "https://www.v2ex.com/t/890635",
+      "Description": "\u003cp\u003e1.Geekbench 单核 1088 多核 5819 。Speedometer 134 分\u003c/p\u003e\n\u003cp\u003e2.电源是 90W ，类似 Surface 电源设计，是 DC 圆口\u003c/p\u003e\n\u003cp\u003e3.整个机器没有 Surface 标识，取而代之的是 Windows 和田牌 logo\u003c/p\u003e\n\u003cp\u003e4.比预期中的要小，要薄，要轻\u003c/p\u003e\n\u003cp\u003e5.在这上面跑 Windows 11 ARM 速度体感非常快\u003c/p\u003e\n\u003cp\u003e\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/fjg1pXbl.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/kDiore9l.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/38tVNk5l.jpg\"/\u003e\u003c/p\u003e\n",
+      "Author": "qq316107934",
+      "PubDate": "2022-10-28T03:17:03Z"
+    },
+    {
+      "Title": "Linux 如何减少拷贝大文件到 USB 磁盘时的错误风险 - Linux",
+      "Link": "https://www.v2ex.com/t/890634",
+      "Description": "\u003cp\u003e\u003cstrong\u003e需求是从一个服务器通过 5T 叠瓦 USB 移动硬盘转移多个包含 2T 大量文件的文件夹到另一个服务器\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e目前是一边用 tar | pigz 压缩到硬盘，另一边用 pigz | tar 解压，想着简单压缩能保证如果数据有错误在解压时会报错，不需要校验所有文件特征码\u003c/p\u003e\n\u003cp\u003e现在问题是按这个方法处理时其中一个 2T 文件夹在解压时报错了，感觉磁盘随机写入错误背一部分锅，想请教如何保证这种复制能一次成功的概率？或者有没有其他方法？\u003c/p\u003e\n",
+      "Author": "laqow",
+      "PubDate": "2022-10-28T03:16:16Z"
+    },
+    {
+      "Title": "Linux fd 5 是什么文件描述符 - 问与答",
+      "Link": "https://www.v2ex.com/t/890633",
+      "Description": "\u003cp\u003e用 strace docker build.....的过程中，发现在 npm install --registry=\u003ca href=\"http://xxx.com\" rel=\"nofollow\"\u003exxx.com\u003c/a\u003e 那一步，有些问题：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eread(5, 0xc00048d000, 4096)             = -1 EAGAIN (Resource temporarily unavailable)\nepoll_pwait(4, {{EPOLLOUT, {u32=3554582280, u64=139937884053256}}}, 128, 0, NULL) = 1\nepoll_pwait(4, {{EPOLLIN|EPOLLOUT, {u32=3554582280, u64=139937884053256}}}, 128, -1, NULL) = 1\nfutex(0x7f45d8a0b0d0, FUTEX_WAKE_PRIVATE, 1) = 1\nread(5, \"33\\r\\n{\\\"stream\\\":\\\" ---\\\\u003e Runnin\"..., 4096) = 57\nwrite(1, \" ---\u0026gt; Running in 161d1d6bb0fc\\n\", 30 ---\u0026gt; Running in 161d1d6bb0fc\n) = 30\nread(5, 0xc00048d000, 4096)             = -1 EAGAIN (Resource temporarily unavailable)\nepoll_pwait(4, {}, 128, 0, NULL)        = 0\nepoll_pwait(4, // [在这卡住不动了] \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e有两个不太理解的地方，请老哥指点：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003efd 4 5 ，分别表示什么，google 没人说清楚，都是说 1 2 3 的\u003c/li\u003e\n\u003cli\u003e我 ping/curl registry 地址是没问题的，在另一台设备 npm install --registry 也是正常的，现在我该如何排查🤏\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch4\u003e补充\u003c/h4\u003e\n\u003cp\u003e根据 linux read 的描述\n\u003cstrong\u003essize_t read(int\u003c/strong\u003e \u003cem\u003efd\u003c/em\u003e\u003cstrong\u003e, void *\u003c/strong\u003e\u003cem\u003ebuf\u003c/em\u003e\u003cstrong\u003e, size_t\u003c/strong\u003e \u003cem\u003ecount\u003c/em\u003e\u003cstrong\u003e);\u003c/strong\u003e \u003c/p\u003e\n\u003cp\u003eread() attempts to read up to count bytes from \u003cstrong\u003efile descriptor fd\u003c/strong\u003e into the buffer starting at buf.\u003c/p\u003e\n",
+      "Author": "wtfedc",
+      "PubDate": "2022-10-28T03:15:59Z"
+    },
+    {
+      "Title": "2022 了。有没有了解 PMP 的考试学习渠道呀？ - 问与答",
+      "Link": "https://www.v2ex.com/t/890632",
+      "Description": "线上考试还是线下考试呀。\u003cbr /\u003e英语要求高吗。\u003cbr /\u003e费用如何。感谢。",
+      "Author": "foreverstandbyu",
+      "PubDate": "2022-10-28T03:15:29Z"
+    },
+    {
+      "Title": "单从带宽上来说， M1 Max 的 400GB/s 内存，是不是相当于 16 通道的 DDR4 3200？ - 问与答",
+      "Link": "https://www.v2ex.com/t/890631",
+      "Description": "\u003cp\u003e毕竟双通道 DDR4 3200 相当于是 51.2G/s\u003c/p\u003e\n\u003cp\u003e或者说六通道的 DDR5 8400 ？\u003c/p\u003e\n\u003cp\u003e我在平时的日常使用中没什么很明显的感受。\n所以对于某些特别吃内存速度的应用，能把这 400GB/s 的内存速度完全发挥出来吗？\u003c/p\u003e\n",
+      "Author": "MrLonely",
+      "PubDate": "2022-10-28T03:12:34Z"
+    },
+    {
+      "Title": "vless + ng + tls 端口一直被封，请问各位大佬 ip 和域名需要一起换吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/890630",
+      "Description": "\u003cp\u003e前天换了 ip 和端口，今天又被封，难受啊，各位大佬有什么解决方案吗。今天套了 cloudflare ，这次不知道能撑多久\u003c/p\u003e\n",
+      "Author": "JaaaaackZheng",
+      "PubDate": "2022-10-28T03:10:04Z"
+    },
+    {
+      "Title": "mysql 8.0.21-8.0.26 优化了子查询一些操作？，提升蛮大的 - Python",
+      "Link": "https://www.v2ex.com/t/890629",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-sql\"\u003eselect\nCASE\n     WHEN (`ticket`.num IS NOT NULL) THEN 'web'\n     WHEN (`ticket`.num IS NULL) THEN (SELECT CASE\n                                                   WHEN (`channel`.`NAME` = '渠道 1')\n                                                   THEN 'app'\n                                                   WHEN (`channel`.`NAME` = '渠道 2')\n                                                   THEN '小程序'\n                                                   ELSE '其他' END AS channel\n       FROM `channel`,\n            `sreq`\n       WHERE `channel`.`chanid` = `S_SRV_REQ`.`chanid`\n         AND `ticket`.req_id = `sreq`.`REQ_ID`\n       LIMIT 1) END AS channel\nfrom ticket where ...;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-21.html#mysqld-8-0-21-optimizer:%7E:text=%E5%B0%9D%E8%AF%95%E5%AF%B9%E4%BB%BB%E4%BD%95-,%E5%85%B7%E6%9C%89,-%E5%AD%90%E5%8F%A5%E7%9A%84%E6%9F%A5%E8%AF%A2\" rel=\"nofollow\"\u003ehttps://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-21.html#mysqld-8-0-21-optimizer:~:text=%E5%B0%9D%E8%AF%95%E5%AF%B9%E4%BB%BB%E4%BD%95-,%E5%85%B7%E6%9C%89,-%E5%AD%90%E5%8F%A5%E7%9A%84%E6%9F%A5%E8%AF%A2\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003esql 大概这样，脱敏了下字段信息\u003c/li\u003e\n\u003cli\u003e之前用的 mysql8.0.20 里面的子查询 没有用到索引，走了全表,升级了 8.0.26 走索引了，一模一样的的表结构，只是升级了 mysql 版本，性能提升 10 几倍了，从 6s 到  0.6s\u003c/li\u003e\n\u003cli\u003e看了下文档貌似是 8.0.21 优化了子查询？\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "wuwukai007",
+      "PubDate": "2022-10-28T03:06:41Z"
+    },
+    {
+      "Title": "出京东 plus 年 65、豪华绿钻年 75 - 京东",
+      "Link": "https://www.v2ex.com/t/890627",
+      "Description": "自助购买：\u003ca target=\"_blank\" href=\"http://www.567faka.cn\" rel=\"nofollow noopener\"\u003ewww.567faka.cn\u003c/a\u003e ，京东 app 内提示开通上限了也可以继续开，有问题随时联系绿色软件：mcard567",
+      "Author": "blackbeardd",
+      "PubDate": "2022-10-28T03:04:52Z"
+    },
+    {
+      "Title": "macbook pro 14 通过 typec 线外接 dell U2720qm 使用一段时间右侧边缘变暗，重启可恢复 - Dell",
+      "Link": "https://www.v2ex.com/t/890626",
+      "Description": "mbp 14 通过显示器赠送的 typec 线外接显示器，使用几个小时后，右侧变暗，可通过重启显示器恢复，但是通过 HDMI 线外接不会出现故障。会不会是之前升级固件导致（现在固件号：M2T105 ）\u003cbr /\u003e联系戴尔官方客服，对方同意上门换新，但是我的显示器超过一年保修了，只能换良品。由于故障不是很严重，暂时还没打算走售后换新。\u003cbr /\u003e现在打算购入一根新的 usb3.2gen2 数据线测试一下.\u003cbr /\u003e不知道 V 友有没有碰到类似情况。",
+      "Author": "shenlc",
+      "PubDate": "2022-10-28T03:01:38Z"
+    },
+    {
+      "Title": "最近使用 pycharm 时候发现一个很奇怪的问题. - Python",
+      "Link": "https://www.v2ex.com/t/890625",
+      "Description": "\u003cp\u003e先简单说一下环境:\u003c/p\u003e\n\u003cp\u003eMacbook Pro 2020 M1 chip 16GB Ram, pycharm version: 2022.1.4 professional\u003c/p\u003e\n\u003cp\u003e每次当我在 code 里把数据写到文件里(例如把数组写到 txt 里), pycharm 都要等很久才会在左边出现新文件, 如果我手动点\u003ccode\u003ereload from the disk\u003c/code\u003e会稍微加快一点新文件出现速度, 但是这是饮鸠止渴.\u003c/p\u003e\n\u003cp\u003e请问有人遇到过和我一样的问题吗? 这很影响效率.\u003c/p\u003e\n\u003cp\u003e感谢帮助\u003c/p\u003e\n",
+      "Author": "Allonsy",
+      "PubDate": "2022-10-28T02:57:11Z"
+    },
+    {
+      "Title": "只备份照片需要 NAS 吗 - NAS",
+      "Link": "https://www.v2ex.com/t/890623",
+      "Description": "\u003cp\u003e只想用来方便的备份照片，自己还好，主要是想方便家里老人用手机操作，感觉用 NAS 最方便，但其它功能用不上，性价比有点低，大佬们有什么好的解决方案吗\u003c/p\u003e\n",
+      "Author": "gaodq",
+      "PubDate": "2022-10-28T02:56:44Z"
+    },
+    {
+      "Title": "xbox 手柄换 ps 手柄 - 深圳",
+      "Link": "https://www.v2ex.com/t/890622",
+      "Description": "自己手里有个 xbox 手柄，有连接线和无线接收器，没怎么用，但也有使用痕迹，想换个 ps5 的手柄，优先深圳本地面交。",
+      "Author": "WEARE9201",
+      "PubDate": "2022-10-28T02:56:10Z"
+    },
+    {
+      "Title": "给父亲买红米 note12p、note11TP(+) 和 k50 怎样选择？ - 小米",
+      "Link": "https://www.v2ex.com/t/890620",
+      "Description": "\u003cp\u003e父亲在用 realme 手机，他经常反馈手机屏幕自己解锁了（我设置了指纹，密码键盘和人脸识别）。有时候我会接到父亲电话，就是放在裤带误触。昨天父亲反馈这种情况影响很大，影响了他工作，意思就是想换手机了。\u003c/p\u003e\n\u003cp\u003e看了一晚上手机，本来想换回去华为的。看了一圈华为手机，同价位下硬件都惨不忍睹。只能把目标放在小米上了。\u003c/p\u003e\n\u003cp\u003e小米的红米 note12p U 竟然是天玑 1080 ，看了一圈是一颗中端 U 。本着买新不买旧，但是矛盾在于 note11TP(+) 和 k50 又是 8100...\u003c/p\u003e\n\u003cp\u003e一下子选择困难了。 预算都 2000 元上下。\u003c/p\u003e\n",
+      "Author": "Felldeadbird",
+      "PubDate": "2022-10-28T02:50:06Z"
+    },
+    {
+      "Title": "纯新手， 30w 左右买什么车合适 - 问与答",
+      "Link": "https://www.v2ex.com/t/890619",
+      "Description": "家里之前都没有车，也没咋开过车，所以很多都不太懂",
+      "Author": "Chanlarin",
+      "PubDate": "2022-10-28T02:50:06Z"
+    },
+    {
+      "Title": "求推荐 mac 邮件客户端 - macOS",
+      "Link": "https://www.v2ex.com/t/890618",
+      "Description": "只有 1 个要求：状态栏可以 [即时] 显示新邮件数量（不需要打开软件，再点接收按钮）\u003cbr /\u003e\u003cbr /\u003e试了 6,7 个，都没有状态栏显示；唯一有显示的 EdisonMail 又不能实时显示新邮件数量（还得进软件点按钮）\u003cbr /\u003e\u003cbr /\u003e价格希望在 100 人民币以内，当然免费最好了。谢谢啦",
+      "Author": "wjx0912",
+      "PubDate": "2022-10-28T02:49:27Z"
+    },
+    {
+      "Title": "tg 群组搜索机器人 - Telegram",
+      "Link": "https://www.v2ex.com/t/890616",
+      "Description": "\u003cp\u003e以前用的 TG 群组娘，刚发现不知道啥时候机器人不行了，请问有类似的可以推给我一个吗，感激不尽\u003c/p\u003e\n",
+      "Author": "vacuitym",
+      "PubDate": "2022-10-28T02:45:33Z"
+    },
+    {
+      "Title": "到底啥时候能有永久禁止 APP 访问剪切板功能 - iOS",
+      "Link": "https://www.v2ex.com/t/890615",
+      "Description": "如果能有禁止写剪切板功能就更好了",
+      "Author": "littlewing",
+      "PubDate": "2022-10-28T02:45:21Z"
+    },
+    {
+      "Title": "纯新手，第一辆车求推荐 - 问与答",
+      "Link": "https://www.v2ex.com/t/890613",
+      "Description": "\u003cp\u003e家里之前都没有车，也没咋开过车，所以很多都不太懂。然后对国产和合资啥的也不太看重，想着先买辆凑合开着，颜值高点，然后价格 10W 左右先开着，这样第一辆车就当练手，万一有个刮蹭也不心疼。其实，买了也是扔家里，一年可能都不会开上几次。\n所以，前段时间网上看了逸动，好像还可以，但是没着急买，现在又出了锐程 plus 和艾瑞泽 8 ，感觉好像也挺不错，就不知道，选哪个了，如果像我这种情况，如果买车买个什么样的呢，求推荐啊\u003c/p\u003e\n",
+      "Author": "l947",
+      "PubDate": "2022-10-28T02:41:35Z"
+    },
+    {
+      "Title": "2022 年了，请问现在 vscode 写 Java 的体验如何？ - 程序员",
+      "Link": "https://www.v2ex.com/t/890611",
+      "Description": "是否可以超越 eclipse javaEE 版本？\u003cbr /\u003e能否实现 idea 那种自动联想？",
+      "Author": "egoistttt",
+      "PubDate": "2022-10-28T02:39:02Z"
+    },
+    {
+      "Title": "请教一下，关于 ipv6 - 问与答",
+      "Link": "https://www.v2ex.com/t/890610",
+      "Description": "\u003cp\u003e[电子监听、全国断网，棱镜门背后，中国如何从末路狂奔到世界之巅-哔哩哔哩]  \u003ca href=\"https://b23.tv/r6VxMlI\" rel=\"nofollow\"\u003ehttps://b23.tv/r6VxMlI\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eipv6 真的有这么重要吗，或者说 ipv6 相较 v4 有什么明显的优势嘛？\u003c/p\u003e\n",
+      "Author": "yukunZhan9",
+      "PubDate": "2022-10-28T02:38:00Z"
+    },
+    {
+      "Title": "出信用卡权益 京东 e 卡 30 元 /7 张 \r\n97 折 28 一张 。 - 京东",
+      "Link": "https://www.v2ex.com/t/890609",
+      "Description": "提供手机号充值。先到先得\u003cbr /\u003ewx:a2ltbWFyb18=",
+      "Author": "mapperv",
+      "PubDate": "2022-10-28T02:34:58Z"
+    },
+    {
+      "Title": "[20221028] 115 网盘 115 元/年了 - 问与答",
+      "Link": "https://www.v2ex.com/t/890608",
+      "Description": "\u003cp\u003e送了 5 张铁粉券，每张可以 115 元开通一年的会员，这是准备收割一波吗？\u003c/p\u003e\n",
+      "Author": "shcolo",
+      "PubDate": "2022-10-28T02:34:40Z"
+    },
+    {
+      "Title": "谁来给讲讲，交易区最近都在团的那个短信收发模块有什么用？ - 问与答",
+      "Link": "https://www.v2ex.com/t/890607",
+      "Description": "\u003cp\u003e不是做嵌入式开发的，只是好奇，看大家都在团，也想搞一个玩玩，但是不懂这东西对于个人的应用场景到底是什么，能干嘛？有没有大神给讲讲，另外有没有相关资料可以提供的。\u003c/p\u003e\n",
+      "Author": "jellyspot",
+      "PubDate": "2022-10-28T02:34:13Z"
+    },
+    {
+      "Title": "为什么就是没有人愿意升级到最新的 JDK？ - Java",
+      "Link": "https://www.v2ex.com/t/890606",
+      "Description": "\u003cp\u003e这是我非常不理解的一件事，如果说老项目有历史包袱，那么新项目呢？ 如果说 8 以上担心 费用问题，不是有 openjdk 吗？\u003c/p\u003e\n\u003cp\u003e如果说 你做不了主，那么项目 leader 为什么不愿意用新的呢？站在公司外的角度来看，项目 leader 也是 java 开发者之一，他不是另一个群体。\u003c/p\u003e\n",
+      "Author": "Joker123456789",
+      "PubDate": "2022-10-28T02:33:42Z"
+    },
+    {
       "Title": "VirtualBox 安装 macOS 13 Ventura 虚拟机，第一步鼠标就卡住了，要按一个鼠标键，这可咋整 - 程序员",
       "Link": "https://www.v2ex.com/t/890605",
       "Description": "\u003cp\u003e主机：Win 10\u003c/p\u003e\n\u003cp\u003e昨天在 macOS Catalina 虚拟机上下载了最新的 macOS Ventura ，做好了启动盘，没办法 这玩意不更新 xcode 什么的都更新不了\u003c/p\u003e\n\u003cp\u003eVMware 新开虚拟机安装系统整个过程很流畅，没有什么问题，但安装好后死活启动不了，反复重启\u003c/p\u003e\n\u003cp\u003e今天换 VirtualBox 试一下，也能从启动盘启动，但进不了安装界面，启动后一直卡在了下图这个界面，10 块钱的鼠标没有这个键啊😂 感觉只要进了安装界面，VirtualBox 上应该能安装成功，现在卡在了这里可咋整😶\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://wx4.sinaimg.cn/mw1024/a32300cdgy1h7ks9ydvpqj20rz0jy74r.jpg\"/\u003e\u003c/p\u003e\n",
