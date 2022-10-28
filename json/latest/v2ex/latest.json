@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教一下 control plane 节点高可用的一些细节问题 - Kubernetes",
+      "Link": "https://www.v2ex.com/t/890865",
+      "Description": "\u003cp\u003e\u003cimg alt=\"Stacked etcd topology\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://d33wubrfki0l68.cloudfront.net/d1411cded83856552f37911eb4522d9887ca4e83/b94b2/images/kubeadm/kubeadm-ha-topology-stacked-etcd.svg\"/\u003e\n有两个问题\u003cbr/\u003e\n1.在堆叠的 etcd 拓扑结构中，节点中的 etcd 只和本节点的 kube-apiserver 通信，这样如何保证三个节点数据一致性\u003cbr/\u003e\n2.三个 control plane 节点是依靠领导选举（ leader election ）选出一位做主，其他备，还是三个节点一起服务\u003cbr/\u003e\n3.如果是同时只有一个 control plane 节点工作，是如何把负载均衡到另外两个备节点的流量请求发送到主节点呢\u003c/p\u003e\n\u003cp\u003e希望能有确切的文档能阅读，刚接触 k8s ，感谢~\u003c/p\u003e\n",
+      "Author": "seers",
+      "PubDate": "2022-10-28T16:12:23Z"
+    },
+    {
+      "Title": "请教大佬一个 docker build 的问题，困扰了好几天一直无解 - 问与答",
+      "Link": "https://www.v2ex.com/t/890864",
+      "Description": "\u003cp\u003e执行 docker build 的时候，在第四步报错了。但是同样的命令，我用 docker run -it tongweb:7.0.4.4 bash 进去执行又是可以的。非常奇怪\u003c/p\u003e\n\u003ch2\u003e=\u0026gt; ERROR [4/4] RUN sh /package/Install_TW7.0.4.4_Enterprise_Linux.bin -i silent -f install.properties                                                                         37.1s\u003c/h2\u003e\n\u003cblockquote\u003e\n\u003cp\u003e[4/4] RUN sh /package/Install_TW7.0.4.4_Enterprise_Linux.bin -i silent -f install.properties:                                                                                     \u003c/p\u003e\n\u003c/blockquote\u003e\n\u003chr/\u003e\n\u003cp\u003eexecutor failed running [/bin/sh -c sh /package/Install_TW7.0.4.4_Enterprise_Linux.bin -i silent -f install.properties]: exit code: 1\u003c/p\u003e\n",
+      "Author": "jack80342",
+      "PubDate": "2022-10-28T16:10:55Z"
+    },
+    {
+      "Title": "开车违章了，老哥们帮忙看下会怎么处罚 - 问与答",
+      "Link": "https://www.v2ex.com/t/890863",
+      "Description": "在最左侧车道，左转向灯绿灯，直行灯红灯。\u003cbr /\u003e\u003cbr /\u003e车道允许直行和左转。\u003cbr /\u003e\u003cbr /\u003e看眼前的灯是绿灯就直接直行过去了。没反应过来绿灯其实是左转向的。\u003cbr /\u003e\u003cbr /\u003e老哥们，这个会怎么处罚呀？\u003cbr /\u003e\u003cbr /\u003e看网上，有说是闯红灯，有说是不按指示标志行驶的，懂的老哥讨论下。",
+      "Author": "yumenawei",
+      "PubDate": "2022-10-28T16:09:19Z"
+    },
+    {
       "Title": "Deno 反向代理解决前端跨域问题以及将 http 转为 https - Node.js",
       "Link": "https://www.v2ex.com/t/890862",
       "Description": "\u003cp\u003e前端在调用别人 api 时经常遇到跨域或者 https 无法调用 http 的问题，通过反代即可解决。\n\u003ca href=\"http://deno.com\" rel=\"nofollow\"\u003edeno.com\u003c/a\u003e 提供免费的 NodeJS 环境，在其官网后台新建应用，在 playground 粘贴代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eimport { serve } from \"https://deno.land/std@0.155.0/http/server.ts\"\nserve(async (req: Request) =\u0026gt; {\n  const url = new URL(req.url)\n  const targetUrl = url.href.replace(`${url.origin}/`, '')\n  let urlObj: any\n  try {\n    urlObj = new URL(targetUrl)\n  } catch (e) {\n    console.error(e.message)\n  }\n  if (['http:', 'https:'].indexOf(urlObj?.protocol) \u0026gt; -1) {\n    let res = await fetch(targetUrl, {\n      headers: req.headers,\n      method: req.method,\n      body: req.body,\n    })\n    let headers = {}\n    res.headers.forEach((value, key) =\u0026gt; {\n      headers[key] = value\n    })\n    if ('*' !== headers['Access-Control-Allow-Origin']?.trim()\n      \u0026amp;\u0026amp; '*' !== headers['access-control-allow-origin']?.trim()) {\n      headers['Access-Control-Allow-Origin'] = '*'\n    }\n    return new Response(res.body, { headers, status: res.status })\n  }\n  return new Response(\n    `Usage: ${url.origin}/https://deno.com/deploy/docs/pricing-and-limits`)\n})\n\u003c/code\u003e\u003c/pre\u003e\n",
