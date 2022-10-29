@@ -4,6 +4,75 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Vue 子组件双向绑定父组件数据对象内部多个属性，应该用什么方式实现？ - Vue.js</title>
+      <link>https://www.v2ex.com/t/890909</link>
+      <description>&lt;p&gt;假设父组件数据对象 parentData 的结构为:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;{&#xA;  a: xxx,&#xA;  b: yyy,&#xA;（后续会添加其他属性）&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;现在需要写一个可以编辑 parentData 的 component ，能像这样使用：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;EditorComponent v-model:parent-data=&#34;parentData&#34;/&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在 EditorComponent 里，有两个 input 可以修改 a 、b 这两个属性。由于子组件不能直接修改父组件的数据，emit update 又只能对 parentData 做整块的赋值，所以目前的思路如下&lt;/p&gt;&#xA;&lt;p&gt;先在 EditorComponent 内部复制一份 dataCopy：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;data: {&#xA;  dataCopy = null&#xA;},&#xA;watch: {&#xA;  parentData: {&#xA;    deep: true,&#xA;    handler: function (val) {&#xA;      this.dataCopy = val&#xA;    }&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后有两种处理方式：&lt;/p&gt;&#xA;&lt;p&gt;1.&lt;br/&gt;&#xA;两个 input 绑定 dataCopy 的数据：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;input v-model=&#34;dataCopy.a&#34;/&amp;gt;&#xA;&amp;lt;input v-model=&#34;dataCopy.b&#34;/&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这样的话，如果要更新 parentData ，得在 dataCopy 上加一个 watcher ，然后&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;this.$emit(&#39;update:parentData&#39;, val)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但这似乎是不可取的，会造成来回无限更新&lt;/p&gt;&#xA;&lt;p&gt;2.&lt;br/&gt;&#xA;把 input 的 v-model 拆开，加两个方法 updateA 、updateB：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;input :value=&#34;dataCopy.a&#34; @input=&#34;updateA&#34;/&amp;gt;&#xA;&amp;lt;input :value=&#34;dataCopy.b&#34; @input=&#34;updateB&#34;/&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后在每个 update 里把 event 的值先赋给 dataCopy ，再&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;this.$emit(&#39;update:parentData&#39;, this.dataCopy)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这样属性一多就很麻烦很臃肿了&lt;/p&gt;&#xA;&lt;p&gt;所以实现这样一个 EditorComponent 的规范思路应该是怎样的？（只看了基础教学就上手做了，不知道是否漏掉了什么重要概念……）&lt;/p&gt;&#xA;</description>
+      <author>ignor</author>
+      <pubDate>29 Oct 2022 03:09:10 +0000</pubDate>
+    </item>
+    <item>
+      <title>Xeon Platinum 第三代 P 结尾的和不带 P 的有啥区别？ - 服务器</title>
+      <link>https://www.v2ex.com/t/890908</link>
+      <description>&lt;p&gt;主要比较的是 8358 和 8358P&lt;/p&gt;&#xA;&lt;p&gt;查了半天资料也没搞清楚。Intel 文档里面写的是“专为 iaas 设计”，但是面板属性上 8358P 不如 8358 。搞不懂这个 P 是啥意思，有没有懂哥说一说&lt;/p&gt;&#xA;</description>
+      <author>leavelet</author>
+      <pubDate>29 Oct 2022 03:05:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>现在看韩剧或美剧都在什么地方看？ - 剧集</title>
+      <link>https://www.v2ex.com/t/890906</link>
+      <author>zhuwd</author>
+      <pubDate>29 Oct 2022 03:02:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>airpods pro 2 代相比 1 代有啥改进点？ - Apple</title>
+      <link>https://www.v2ex.com/t/890905</link>
+      <description>airpods pro 1 代 现在比 2 代便宜好多，不知道 2 代有啥更好地方？</description>
+      <author>quzard</author>
+      <pubDate>29 Oct 2022 03:01:27 +0000</pubDate>
+    </item>
+    <item>
+      <title>macOS13 + iOS16 终于支持 FaceTime 在设备间切换了 - Apple</title>
+      <link>https://www.v2ex.com/t/890904</link>
+      <description>&lt;p&gt;这个功能这么晚才支持，感觉很不合理&lt;/p&gt;&#xA;</description>
+      <author>Lnz</author>
+      <pubDate>29 Oct 2022 02:59:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>美国卡问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/890903</link>
+      <description>&lt;p&gt;tb 上的 ultra mobile paygo 卡买来后申请 Google voice ，然后卡不用了注销，google voice 会有影响吗&lt;/p&gt;&#xA;</description>
+      <author>dakeqi</author>
+      <pubDate>29 Oct 2022 02:58:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>电信和移动两条 1000M 线路 openwrt 下行不能聚合吗 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/890901</link>
+      <description>&lt;p&gt;如题，我 shenzhen 电信+移动两条各自 1000M 的宽带，其中电信带宽是 1000/50 ，移动带宽 1000/40,各自用的华为 MA5671A 猫棒+hellotek2.5G 收发器各一套,连到 N5105 的 2.5G 软路由两个 WAN 口上，然后多线多拨，wan1 口电信 3 拨加 wan2 口移动 1 拨，配置负载均衡，default balance 四个 vwan 的负载各 25%。测速发现下行怎么着最高也只有 1200M 没有聚合到 2000M?? 上行倒是聚合了测得峰值有 180-200 左右。&lt;/p&gt;&#xA;&lt;p&gt;谁能说说怎么回事？另外如果我把电信升级到 2000M ，客服说要换万兆猫（ XGPON?)，那我的 MA5671A 还能兼容吗？&lt;/p&gt;&#xA;</description>
+      <author>galaxyskyknight2</author>
+      <pubDate>29 Oct 2022 02:44:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>the usb-c iPhone won&#39;t happen - iPhone</title>
+      <link>https://www.v2ex.com/t/890900</link>
+      <description>&lt;div class=&#34;embedded_video_wrapper&#34;&gt;&lt;iframe src=&#34;https://www.youtube.com/embed/jO83ARJiOfQ&#34; class=&#34;embedded_video&#34; allowfullscreen=&#34;&#34; type=&#34;text/html&#34; id=&#34;ytplayer&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;&lt;/div&gt;</description>
+      <author>ChrisFreeMan</author>
+      <pubDate>29 Oct 2022 02:43:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>后端语言选哪个: C#, Java , Go, Rust? - 程序员</title>
+      <link>https://www.v2ex.com/t/890899</link>
+      <description>&lt;p&gt;会 nodejs, 但想多学一门后端语言, 请问下列哪个在今后的 10 年~20 年最有钱景?&lt;/p&gt;&#xA;&lt;p&gt;C#, Java, Go, Rust?&lt;/p&gt;&#xA;</description>
+      <author>Angela2022</author>
+      <pubDate>29 Oct 2022 02:38:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>亲爱的前端朋友们，是时候让接口对接更轻松一点了，来看看这个 - 分享创造</title>
+      <link>https://www.v2ex.com/t/890898</link>
+      <description>&lt;h1&gt;api-typing&lt;/h1&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/10/29/SiGxg4KdZ5LhwIA.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h2&gt;一个强类型提示的 http 客户端框架（基于 axios ）&lt;/h2&gt;&#xA;&lt;h3&gt;亲爱的前端同事们，你是否受够了和后端每天不断地对接口，调整接口路径和传参格式？是否疲于查看后端的回参文档？是否疲于人肉查看同步每次更新后的接口字段变更？是时候让这些工作更加简单轻松一点了。&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/yinzhenyu-su/api-typing&#34; rel=&#34;nofollow&#34;&gt;快来这里看看吧&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>yinzhenyu</author>
+      <pubDate>29 Oct 2022 02:30:29 +0000</pubDate>
+    </item>
+    <item>
       <title>快充终于质变到量变了， 210 瓦， 9 分钟， 0%-100% - 分享发现</title>
       <link>https://www.v2ex.com/t/890897</link>
       <description>&lt;p&gt;量产版应该是靠谱的，不是实验室了，9 分钟充满几乎把充电变成加油了，而且是在 2k 价位机型搭载，相信旗舰机搭载毫无问题&lt;/p&gt;&#xA;&lt;p&gt;魔改：&#xA;使用了 C to C 定制线（ 10.5A 大电流）&lt;/p&gt;&#xA;&lt;p&gt;虽然 USB PD3.1 已经支持 240 瓦功率，但是支持的是最大 48V * 5A ，与小米低压大电流技术方向不符。&lt;/p&gt;&#xA;&lt;p&gt;不过使用 20V * 10.5A 的技术方向也有好处，那就是低于人体安全电压 36V 。技术路线不同&lt;/p&gt;&#xA;&lt;p&gt;Redmi Note 12 探索版，￥ 2399 起售&lt;/p&gt;&#xA;&lt;p&gt;0 分钟，电量 0%，总容量 4300mah&lt;/p&gt;&#xA;&lt;p&gt;1 分钟，充电至 16%，峰值功率达到了 190W ，持续时间 20 秒左右；&lt;/p&gt;&#xA;&lt;p&gt;2 分钟，充电至 27%，132W 左右；&lt;/p&gt;&#xA;&lt;p&gt;3 分钟，充电至 40%，130W 左右；&lt;/p&gt;&#xA;&lt;p&gt;4 分钟，充电至 50%，132W 左右；&lt;/p&gt;&#xA;&lt;p&gt;5 分钟，充电至 61%，133W ；&lt;/p&gt;&#xA;&lt;p&gt;6 分钟，充电至 72%，112W ；&lt;/p&gt;&#xA;&lt;p&gt;7 分钟，充电至 85%，115W ；&lt;/p&gt;&#xA;&lt;p&gt;8 分钟，充电至 93%，82W ；&lt;/p&gt;&#xA;&lt;p&gt;9 分钟，充电至 99%，56W ；&lt;/p&gt;&#xA;&lt;p&gt;9 分 12 秒，UI 充电至 100%，45W ；&lt;/p&gt;&#xA;&lt;p&gt;10 分 37 秒，完全充满，0.61W 。&lt;/p&gt;&#xA;</description>
