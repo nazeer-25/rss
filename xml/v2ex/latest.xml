@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请问腾讯云境内的服务器是不是用不了苹果的推送？ - 程序员</title>
+      <link>https://www.v2ex.com/t/891159</link>
+      <description>&lt;p&gt;之前香港的服务器，怎么发怎么有，腾讯云上海发 10 次大概能成功 1 ～ 2 次，还是经过几次重试才发出去（排除基本的证书、环境配置问题）&lt;/p&gt;&#xA;&lt;p&gt;我没用极光推送什么的，就直接用第三方包直接使用苹果的推送服务，我现在有点搞不清楚是腾讯云的问题，还是国内服务器就做不了这个事情，还是比如我的宿主机系统有蹊跷的其他问题，你们有在国内服务器用苹果官方推送的么？&lt;/p&gt;&#xA;</description>
+      <author>Phishion</author>
+      <pubDate>30 Oct 2022 06:55:35 +0000</pubDate>
+    </item>
+    <item>
+      <title>OpenWrt 多网口桥接配置求助 - OpenWrt</title>
+      <link>https://www.v2ex.com/t/891158</link>
+      <description>&lt;h3&gt;设备&lt;/h3&gt;&#xA;&lt;p&gt;N5105 软路由 + 四网口&lt;/p&gt;&#xA;&lt;h3&gt;环境&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;宿主机 PVE + 原版 OpenWrt 21.02.5 ，直通了三个网口给 OpenWrt&#xA;在 OpenWrt 系统中显示如下：&lt;/li&gt;&#xA;&lt;li&gt;ETH0: LAN (pve 桥接接口即 pve 管理端口)&lt;/li&gt;&#xA;&lt;li&gt;ETH1: WAN&lt;/li&gt;&#xA;&lt;li&gt;ETH2: 未使用&lt;/li&gt;&#xA;&lt;li&gt;ETH3: 未使用&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;需求和问题&lt;/h3&gt;&#xA;&lt;p&gt;想要将 ETH2 和 ETH3 口也作为 LAN 口使用，但是我配置完后只有 ETH0 可以上网，ETH2 和 ETH3 死活无法上网，但插在这两个口上可以获取到 IP 地址，说明 DHCP 是正常的，ping 主路由 10.0.0.1 也超时不同，有大佬帮看看哪里的配置有什么问题么？&lt;/p&gt;&#xA;&lt;h3&gt;配置如下&lt;/h3&gt;&#xA;&lt;p&gt;br-lan 是 op 默认的桥接接口，默认只勾选了 ETH0 ，我这里将 ETH2 和 ETH3 也勾上：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://tva1.sinaimg.cn/large/008vxvgGgy1h7nbc02qovj31ah0u0q5j.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;然后保存应用，br-lan 处确实显示了三个口：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://tva1.sinaimg.cn/large/008vxvgGgy1h7nbe955g3j31pu0u0aeu.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;防火墙也是刷完的默认配置，没有动过：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://tva1.sinaimg.cn/large/008vxvgGgy1h7nbm02u0jj31dj0u0416.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;最后附上 /etc/config/network 配置：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;config interface &#39;loopback&#39;&#xA;        option device &#39;lo&#39;&#xA;        option proto &#39;static&#39;&#xA;        option ipaddr &#39;127.0.0.1&#39;&#xA;        option netmask &#39;255.0.0.0&#39;&#xA;&#xA;config globals &#39;globals&#39;&#xA;        option ula_prefix &#39;fd56:8027:32c2::/48&#39;&#xA;&#xA;config device&#xA;        option name &#39;br-lan&#39;&#xA;        option type &#39;bridge&#39;&#xA;        list ports &#39;eth0&#39;&#xA;        list ports &#39;eth2&#39;&#xA;        list ports &#39;eth3&#39;&#xA;&#xA;config interface &#39;lan&#39;&#xA;        option device &#39;br-lan&#39;&#xA;        option proto &#39;static&#39;&#xA;        option netmask &#39;255.255.255.0&#39;&#xA;        option ipaddr &#39;10.0.0.1&#39;&#xA;&#xA;config interface &#39;wan&#39;&#xA;        option device &#39;eth1&#39;&#xA;        option proto &#39;pppoe&#39;&#xA;        option username &#39;********&#39;&#xA;        option password &#39;********&#39;&#xA;        option ipv6 &#39;auto&#39;&#xA;&#xA;config interface &#39;wan6&#39;&#xA;        option device &#39;eth1&#39;&#xA;        option proto &#39;dhcpv6&#39;&#xA;&#xA;config interface &#39;docker&#39;&#xA;        option device &#39;docker0&#39;&#xA;        option proto &#39;none&#39;&#xA;        option auto &#39;0&#39;&#xA;&#xA;config device&#xA;        option type &#39;bridge&#39;&#xA;        option name &#39;docker0&#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>Melodyer</author>
+      <pubDate>30 Oct 2022 06:54:55 +0000</pubDate>
+    </item>
+    <item>
       <title>标准指法适合编程吗 - 程序员</title>
       <link>https://www.v2ex.com/t/891157</link>
       <description>&lt;p&gt;自己正在熟悉标准的指法,用来打字的体验是可以的,但是用来打代码就感觉各种不适应&#xA;我认为无法接受的缺陷:小拇指需要使用的频率太高了,[];&#39;/=-+&#xA;太折磨了真的,小拇指保护协会抗议&lt;/p&gt;&#xA;</description>
