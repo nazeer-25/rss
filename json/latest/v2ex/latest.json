@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "分享一个可以 blink nvim 光标的映射 - Vim",
+      "Link": "https://www.v2ex.com/t/891601",
+      "Description": "\u003cp\u003e有时候移动光标以后，或者从其他地方切回 nvim 窗口，会找不到光标在哪，所以我做了一个映射，让光标闪动，帮助我们快速定位光标。代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-lua\"\u003elocal keymap = vim.keymap\nlocal uv = vim.loop\n\nkeymap.set(\"n\", \"\u0026lt;leader\u0026gt;cb\", function()\n  local cnt = 0\n  local blink_times = 7\n  local timer = uv.new_timer()\n\n  timer:start(0, 100, vim.schedule_wrap(function()\n    vim.cmd[[\n      set cursorcolumn!\n      set cursorline!\n    ]]\n\n    if cnt == blink_times then\n      timer:close()\n    end\n\n    cnt = cnt + 1\n  end))\nend)\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003enormal 状态下，按 \u003ccode\u003e\u0026lt;leader\u0026gt;cb\u003c/code\u003e，光标就会自动闪动。支持的 nvim 版本：nvim 0.8.0+\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e我的 nvim 配置： \u003ca href=\"https://github.com/jdhao/nvim-config\" rel=\"nofollow\"\u003ehttps://github.com/jdhao/nvim-config\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e来 nvim 中文讨论群讨论 nvim 使用： \u003ca href=\"https://t.me/nvim_zh\" rel=\"nofollow\"\u003ehttps://t.me/nvim_zh\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "jdhao",
+      "PubDate": "2022-10-31T14:15:57Z"
+    },
+    {
+      "Title": "iOS 版 Surge 三人车自用俩，富裕一个需要的联系 - Surge",
+      "Link": "https://www.v2ex.com/t/891600",
+      "Description": "\u003cp\u003e135 元 ，订阅更新到明年 11 月 14 号！后续更新费用平摊！需要的联系电报：@JasonJia\u003c/p\u003e\n",
+      "Author": "jiazhixin",
+      "PubDate": "2022-10-31T14:15:46Z"
+    },
+    {
       "Title": "犹豫 Pico4 还是 Quest 2 ... 求打醒 - 虚拟现实",
       "Link": "https://www.v2ex.com/t/891598",
       "Description": "\u003cp\u003ePico 4 似乎价格更好，硬件体验比 Quest 2 来的更好。\u003c/p\u003e\n\u003cp\u003e但是 Quest 2 的生态似乎更完善。\u003c/p\u003e\n",
