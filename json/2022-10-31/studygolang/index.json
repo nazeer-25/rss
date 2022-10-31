@@ -34,7 +34,7 @@
     {
       "Title": "golang如何实现清空单链表",
       "Link": "https://studygolang.com/topics/15944#reply0",
-      "Description": "\u003cp\u003e最近在用golang练习单链表的一些问题，在清空链表的时候遇到了困难，仿照c的写法写了下面的方法：\nfunc (headNode *nodeList) Clear() {\n\tvar p, q *nodeList\n\tp = headNode\n\tfor p != nil {\n\t\tq = p.Next\n\t\tp = nil\n\t\tp = q\n\t}\n}\nc的写法是一环一环把各个节点的空间用free函数释放出来\n但是我这个p=nil的写法似乎不能起到c当中的free的效果，而是会起到如下例子的效果\nfunc main() {\n\tnl := \u0026amp;nodeList{1, nil}\n\tnl1 := nl\n\tfmt.Println(nl == nl1) //true\n\tnl1 = nil\n\tfmt.Println(nl == nl1) //false\n\tfmt.Println(nl, nl1)   // \u0026amp;{1 \u003cnil\u003e }  \u003cnil\u003e\n}\nnl1=nil的写法其实是重新赋值了。golang当中有啥方法能实现free吗，或者golang如何清空整个单链表，请大佬赐教\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e我想实现c语言的free函数的效果，把链表一个环节一个环节清空\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
