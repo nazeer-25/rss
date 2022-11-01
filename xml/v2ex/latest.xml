@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>江苏联通到 AWS 日本已经开始绕路新加坡 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/891860</link>
+      <description>&lt;p&gt;以前延迟只有 60ms 左右，现在 160ms 。带宽也只能跑到 30M 左右了。&lt;/p&gt;&#xA;&lt;p&gt;怀念以前的日子。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/2Q1olCi5.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>villivateur</author>
+      <pubDate>01 Nov 2022 10:41:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>惊喜, 原来手指甲难看也是可以修复的 - 分享发现</title>
+      <link>https://www.v2ex.com/t/891859</link>
+      <description>&lt;p&gt;自己的手指甲很软， 包括大指甲， 而且特别难看，20 多年来一直没有什么办法，反正我医院也去过， 都说叫我补钙， 也没有什么&#xA;用。 有一天我看了新闻， 说是把水果套个外套， 水果就能长成各种形状， 我突然脑洞打开， 这手指甲不也能这么搞吗？ 贴个指甲壳， 就能规范好形状。 下面是我淘宝淘的 5 块钱的指甲戴出来的效果， 对比左右手的指甲。&lt;/p&gt;&#xA;&lt;p&gt;下面是对比图&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://www.hualigs.cn/image/00072165d3957.jpg&#34;/&gt;&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i0.hdslb.com/bfs/album/8e4129aabc25c84a270ced3c88556fdbfe0fd348.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>jeesk</author>
+      <pubDate>01 Nov 2022 10:40:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>nginx 反向代理时怎么针对文件类型来决定缓存与否？ - NGINX</title>
+      <link>https://www.v2ex.com/t/891858</link>
+      <description>&lt;p&gt;前端 nginx 使用反向代理与我的后端一起工作，我想只缓存特定文件类型，比如图像文件，&#xA;但它似乎根本不起作用，$no_cache 总是输出默认值“proxy”，当我访问图片类文件时本应该输出“0”&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;map $upstream_http_content_type $no_cache {&#xA;  default proxy;&#xA;  &#34;~*image&#34;  0;&#xA;}&#xA;proxy_store on;&#xA;proxy_temp_path /tmp/ngx_cache;&#xA;proxy_cache_path /tmp/ngx_cache/pcache levels=1:2 use_temp_path=on keys_zone=pcache:10m inactive=14d max_size=3g;&#xA;log_format upstreamlog &#39;$server_addr:$host:$server_port $remote_addr:$remote_port $remote_user [$time_local] &#39;&#xA;                         &#39;&#34;$request&#34; $status $request_length $body_bytes_sent [$request_time] &#39;&#xA;                         &#39;&#34;$http_referer&#34; &#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34; - &#39;&#xA;                        &#39;upstream: $upstream_addr - $upstream_status - upstream_response_time: $upstream_response_time $upstream_http_content_type $skip_cache : $no_cache&#39;;&#xA;&#xA;server{&#xA;.....&#xA;if ($skip_cache = false){&#xA;    set $skip_cache 0;&#xA;}&#xA;if ($no_cache = false){&#xA;    set $no_cache 0;&#xA;}&#xA;if ($request_method = POST) {&#xA;    set $skip_cache 1;&#xA;}  &#xA;if ($query_string != &#34;&#34;) {&#xA;    set $skip_cache 1;&#xA;}  &#xA;if ($http_cache_control ~* &#34;private&#34;) {&#xA;    set $skip_cache 1;&#xA;}  &#xA;if ($upstream_http_cache_control ~* &#34;private&#34;) {&#xA;    set $skip_cache 1;&#xA;}&#xA;&#xA; location / {&#xA;&#xA;   proxy_cache_key &#34;$http_host$uri$is_args$args&#34;;&#xA;   proxy_cache pcache;&#xA;   add_header X-Cache-Status $upstream_cache_status;&#xA;   proxy_cache_bypass $http_pragma $http_authorization $skip_cache;&#xA;   proxy_no_cache $http_pragma $http_authorization $skip_cache $no_cache;&#xA;   proxy_pass http://$backend;&#xA;   access_log /dev/stdout upstreamlog;&#xA; }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;curl 测试结果&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;HTTP/1.1 200 OK&#xA;Server: nginx&#xA;Date: Sun, 30 Oct 2022 17:22:56 GMT&#xA;Content-Type: image/jpeg&#xA;Content-Length: 56769&#xA;Connection: keep-alive&#xA;Last-Modified: Tue, 19 Jul 2022 03:27:34 GMT&#xA;ETag: &#34;62d624a6-ddc1&#34;&#xA;Cache-Control: public, max-age=604800, s-maxage=1209600, stale-if-error=400&#xA;X-Cache-Status: MISS&#xA;Accept-Ranges: bytes&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;日志里显示输出的&lt;code&gt;$no_cache&lt;/code&gt;始终是 proxy&#xA;为什么&lt;code&gt;$upstream_http_content_type&lt;/code&gt;没有正确匹配到“0”值呢？&lt;/p&gt;&#xA;</description>
+      <author>renothing</author>
+      <pubDate>01 Nov 2022 10:39:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>目前 Windows 有没有媲美 macbook pro 的笔记本？ - 问与答</title>
+      <link>https://www.v2ex.com/t/891857</link>
+      <description>目前在用 macbook pro ，想看看 Windows 有没有什么牛逼的笔记本能达到 macbook pro 的水准。想了一些标准：&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;+ 外观设计轻薄，别太丑和笨重&lt;br /&gt;&lt;br /&gt;+ 性能强劲，运行程序软件不卡顿&lt;br /&gt;&lt;br /&gt;+ 质量好耐用，像 macbook 一样，至少用个四五年没问题&lt;br /&gt;&lt;br /&gt;+ 32g + 1T SSD&lt;br /&gt;&lt;br /&gt;+ 屏幕显示效果犀利，不过达到 mac 水平有点难？&lt;br /&gt;&lt;br /&gt;+ 高清 1080 p 摄像头</description>
+      <author>jdhao</author>
+      <pubDate>01 Nov 2022 10:37:16 +0000</pubDate>
+    </item>
+    <item>
       <title>https://cravatar.cn/ 报 502 了，有替代产品可选么？ - 全球工单系统</title>
       <link>https://www.v2ex.com/t/891854</link>
       <description>&lt;p&gt;cravatar 能调用 qq 的头像，挺好用的，但今天突然报 502 了，有没有替代产品？&lt;/p&gt;&#xA;</description>
