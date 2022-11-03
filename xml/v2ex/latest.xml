@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>使用 nix 包管理器解决 glibc 兼容问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/892346</link>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;优势&lt;br/&gt;&#xA;当软件包依赖版本不一致时，nix 包管理可以兼容较新版本，且安装软件包时是无需 root 权限&lt;br/&gt;&#xA;例如，安装 mongodb 时，mongodb 使用的 glibc 版本较高&lt;br/&gt;&#xA;而 glibc 又是系统基础组件，不能随便升级(系统上已安装其他应用依赖旧的 glibc)    &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;安装 nix&lt;br/&gt;&#xA;&lt;code&gt;sh &amp;lt;(curl -L &lt;a href=&#34;https://nixos.org/nix/install&#34; rel=&#34;nofollow&#34;&gt;https://nixos.org/nix/install&lt;/a&gt;) --no-daemon&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;搜索软件包    &lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://search.nixos.org/&#34; rel=&#34;nofollow&#34;&gt;https://search.nixos.org/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;更新添加包订阅    &lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code&gt;nix-channel --add https://nixos.org/channels/nixpkgs-unstable&#xA;nix-channel --update&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;安装非官方安全包   &lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code&gt;export NIXPKGS_ALLOW_UNFREE=1&#xA;nix-env -iA nixpkgs.mongodb-5&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;运行 mongo&lt;br/&gt;&#xA;&lt;code&gt;nix-shell -p  mongodb-5 --run &#34;mongo --version&#34;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>novolunt</author>
+      <pubDate>03 Nov 2022 04:53:29 +0000</pubDate>
+    </item>
+    <item>
       <title>现在主流的群聊 app 技术是什么？怎么实现质检的？ - 问与答</title>
       <link>https://www.v2ex.com/t/892344</link>
       <description>WebRTC 走服务器会延迟，直接 p2p 的话又没法质检，他们怎么实现实时语音质检的？</description>
