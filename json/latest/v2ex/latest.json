@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如何通过 vpn 实现本地电脑与 k8s 集群的 Pod 互通 - Kubernetes",
+      "Link": "https://www.v2ex.com/t/892829",
+      "Description": "\u003cp\u003e我将 nacos 、微服务网关部署在服务器上的 k8s 集群，又在集群中部署了 WireGuard 用来组网，但操作发现连上 vpn 后，本地电脑可以访问 k8s 上的资源，但 k8s 上的 pod 无法访问本地电脑。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e具体问题\u003c/strong\u003e：在连接 vpn 下，本地电脑运行一个微服务，并注册到 k8s 上的 nacos ，请求微服务网关，无法转发到本地电脑。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e猜测原因\u003c/strong\u003e：WireGuard 收不到微服务网关发送的数据，需要添加路由表将\u003ccode\u003e10.8.0.0/24\u003c/code\u003e转发到 WireGuard 容器 IP ，但没找到 Calico 添加路由表的文档。\u003c/p\u003e\n\u003cp\u003e请教，怎么解决上述问题，似乎通过划分路由表也不太好，容器的 ip 改了就不行了\u003c/p\u003e\n",
+      "Author": "NipGeihou",
+      "PubDate": "2022-11-04T20:11:20Z"
+    },
+    {
       "Title": "在公网 IPv4 严重缺乏的今天，最简单的获取方式是连接上海的公共 WiFi - 宽带症候群",
       "Link": "https://www.v2ex.com/t/892826",
       "Description": "\u003cp\u003e无数的 V 友为了稀缺的公网 IPV4 与运营商打的不可开交，你有工信部投诉，我有 NAT4444 ，打的有来有回，可谓是百花齐放。不过说到底，公网 IPv4 数量确实是不太够。\u003c/p\u003e\n\u003cp\u003e最近在上海的商场里，因为 5G 信号不太好，随手连接了公共 Wifi ChinaNet ，这一看都惊呆了，竟然是拿到的是公网地址 101.92.x.x ，而且经过测试，是真实有效的公网地址，出口 IP 也是这个地址。\u003c/p\u003e\n\u003cp\u003e同时在手机上开了个 TCP 测试，监听端口，让朋友从别的地方连接，也可以正常连上。 正正经经的公网了属于是。\u003c/p\u003e\n\u003cp\u003e子网是 255.255.240.0 ，也就是说这个无线 AP 下分配了 4096 个 IP 地址。\n天，上海得有多少接入点，一个接入点给 4000 多个公网 IP ，真奢侈啊。\u003c/p\u003e\n\u003cp\u003e直接分配的公网 IP:\n\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://app.hnust.edu.cn/img01/2022/11/05/b353579095489.jpg\"/\u003e\n百度查 IP 一致：\n\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://app.hnust.edu.cn/img01/2022/11/05/d8e34d59b3643.jpg\"/\u003e\n监听端口，朋友可以正常建联：\n\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://app.hnust.edu.cn/img01/2022/11/05/d90b7c4c22aa9.jpg\"/\u003e\u003c/p\u003e\n",
