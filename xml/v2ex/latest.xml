@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教如何定时重发 rxjs 的 webSocket multiplex 的 subMsg - 问与答</title>
+      <link>https://www.v2ex.com/t/892866</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-ts&#34;&gt;subscribe&amp;lt;T, R&amp;gt;(data: T, topic: string, namespace = &#39;&#39;) {&#xA;    &#xA;        const uniKey = namespace + topic&#xA;        const source = this.webSocket.multiplex(&#xA;            () =&amp;gt; {&#xA;            &#x9;// 这个 subMsg 想要被定时重发&#xA;                const subscribeData: Messages.Client.Subscribe&amp;lt;T&amp;gt; = {&#xA;                    data,&#xA;                    topic,&#xA;                    nsp: namespace,&#xA;                    cmd: COMMAND.MESSAGE_CMD_SUBSCRIBE,&#xA;                }&#xA;                return subscribeData&#xA;            },&#xA;            () =&amp;gt; {&#xA;                const unSubScribeData: Messages.Client.UnSubscribe = {&#xA;                    topic,&#xA;                    cmd: COMMAND.MESSAGE_CMD_UNSUBSCRIBE,&#xA;                }&#xA;                return unSubScribeData&#xA;            },&#xA;            (message) =&amp;gt; {&#xA;                if (message.cmd === COMMAND.MESSAGE_CMD_PUBLISH) {&#xA;                    const msg = message as Messages.Server.Subscribed&amp;lt;R&amp;gt;&#xA;                    const subKey = msg.nsp + msg.topic&#xA;                    return subKey === uniKey&#xA;                }&#xA;                return false&#xA;            }&#xA;        )&#xA;        return source.subscribe()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在封装一个即时通讯业务 SDK ，需要实现一个 subscribe 订阅方法，发送到服务端的订阅消息需要被定时重发，用来实现消息的续订的效果（无法通过心跳等其他方式维系），也就是需要定时重发 multiplex 这边的 subMsg ，但不重生生成一个订阅源，请教一下应该如何实现？&lt;/p&gt;&#xA;</description>
+      <author>akulamatata</author>
+      <pubDate>05 Nov 2022 03:42:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>微软： Outlook 将于明年底不再向个人提供个性化电子邮件地址服务 - 分享发现</title>
+      <link>https://www.v2ex.com/t/892865</link>
+      <description>我的评价是，傻逼微软。&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://www.ithome.com/0/651/422.htm&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.ithome.com/0/651/422.htm&lt;/a&gt;</description>
+      <author>Love4Taylor</author>
+      <pubDate>05 Nov 2022 03:41:37 +0000</pubDate>
+    </item>
+    <item>
       <title>现在这个时间点入 MBA M1 算不算 49 入国军 - MacBook Air</title>
       <link>https://www.v2ex.com/t/892864</link>
       <description>&lt;p&gt;刚需 macOS ，已经玩了将近 10 年的黑苹果了，想入个笔记本，玩黑的实在是心累了，想入个白的了。&lt;/p&gt;&#xA;&lt;p&gt;对性能要求不算高，PHP 后端开发、Python 及前端吧，大多就是后端那一套➕Chrome 微信这些，MBA 应该是够了，在我自己的 NUC 上试过，只上 8G 内存的话，常用的那些软件同时打开内存有点不够，多开几个标签页 swap 直接干上 2G ，活动管理器内存压力也黄了。&lt;/p&gt;&#xA;&lt;p&gt;8G 的话 PDD 百亿补贴能做到 6000 以内，京东看了下历史价格去年双十一做到了 6500+，官网翻新现在是 6800 左右。&lt;/p&gt;&#xA;&lt;p&gt;如果上到 16G 的话，之前官翻 16+256 的话有过 8069 的价格，不知道后面还能不能蹲到；目前发现官网走教育优惠 16+256 是 8549 。&lt;/p&gt;&#xA;&lt;p&gt;花 8000+买个两年前发布的数码产品，想想有点不值啊，加钱上 M2 Pro 的话对比隔壁 x86 最新的的 H 系列处理器，CPU 性能来说，又觉得性价比实在是低。&lt;/p&gt;&#xA;&lt;p&gt;要是明年出的出的 M3 还是 M2 这种挤牙膏的还好，要是性能像 M1 对比前代 Intel 那种提升，那真是背刺了。&lt;/p&gt;&#xA;</description>
