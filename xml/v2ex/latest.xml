@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>30 而立 有没有过来人经验指点迷津 - 生活</title>
+      <link>https://www.v2ex.com/t/892940</link>
+      <description>&lt;p&gt;也是一个老程序了.先自我介绍下&lt;br/&gt;&#xA;工作时间：8 年&#xA;技术栈:&#xA;1.1: Windows 桌面软件 2 年&#xA;1.2: 游戏服务器 6 年&#xA;开发语言: C++ / lua  / shell 为主&#xA;开发过游戏框架 /大型游戏 /游戏服务器 leader&#xA;一直混迹在三线公司以下,其他语言也偶尔接触下 java/golang/docker/python/前端其他附带工具偶尔用用,当然 临时凑合用下 不商业化 仅仅方便自己&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;前 6 年混迹在 深圳 /广州 打工, 没什么职业规划 现在在长沙(老家湖南)算一个某中大型游戏公司做个小弟&#xA;曾今 20 年也有考雅思混个水硕  润土澳 /新西兰 的想法 奈何没坚持下来. 雅思考过一次 5 分.太渣心&#xA;学历全日制大专 成考本科 但是拿到了学士学位.&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>Twan</author>
+      <pubDate>05 Nov 2022 09:38:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>React Native Webview 监听网页内部资源加载的探索 - React</title>
+      <link>https://www.v2ex.com/t/892939</link>
+      <description>&lt;p&gt;React Native Webview 组件没有自带的方式可以监听网页内部资源的加载（ jpg, png, js, css, mp3 等），曲线实现方式：用 js 注入定时器到网页，网页里获取节点的 src 属性并 postMessage 给 native ，以 img 节点为例：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;import { WebView } from &#39;react-native-webview&#39;&#xA;let srcs:string[] = []&#xA;export default function WebviewScreen() {&#xA;  return (&#xA;    &amp;lt;WebView &#xA;      source={{ uri: &#39;https://www.bing.com/images&#39; }}&#xA;      useWebKit={true}&#xA;      allowsBackForwardNavigationGestures&#xA;      allowsInlineMediaPlayback&#xA;      injectedJavaScriptBeforeContentLoaded = {`&#xA;        setInterval(()=&amp;gt;{&#xA;          const nodes = document.querySelectorAll(&#39;img&#39;)&#xA;          for (const node of nodes) {&#xA;            window.ReactNativeWebView.postMessage(node.src)&#xA;          }&#xA;        }, 2000)&#xA;      `}&#xA;      onMessage = {msg=&amp;gt;{&#xA;        const src = msg.nativeEvent?.data?.trim()&#xA;        if (src &amp;amp;&amp;amp; -1===srcs.indexOf(src)) {&#xA;          console.log(&#39;onMessage&#39;, new Date(), src)&#xA;          srcs.push(src)&#xA;        }&#xA;      }}&#xA;    /&amp;gt;&#xA;  );&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;也可以用于 video 等其它带有 src 的节点&lt;/p&gt;&#xA;&lt;p&gt;缺点：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;只能定时不能监听&lt;/li&gt;&#xA;&lt;li&gt;如果 crc 属性里是 blob:// 则会得到空字符串&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>estk</author>
+      <pubDate>05 Nov 2022 09:32:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>go 新手，为啥这个导包会报错啊/(ㄒoㄒ)/~~ - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/892938</link>
+      <description>&lt;pre&gt;&lt;code&gt;ubuntu@ubuntu:~$ go mod tidy&#xA;...&#xA;go: finding module for package github.com/hashicorp/hcl/json/parser&#xA;go: finding module for package github.com/hashicorp/hcl/hcl/printer&#xA;go: finding module for package github.com/hashicorp/hcl/hcl/ast&#xA;go: finding module for package github.com/hashicorp/hcl/hcl/parser&#xA;...&#xA;github.com/spf13/viper imports github.com/spf13/viper/internal/encoding/hcl imports github.com/hashicorp/hcl/hcl/printer: module github.com/hashicorp/hcl@latest found (v1.0.0), but does not contain package github.com/hashicorp/hcl/hcl/printer&#xA;...&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ubuntu@ubuntu:~$ go env&#xA;GO111MODULE=&#34;on&#34;&#xA;...&#xA;GOVERSION=&#34;go1.19.2&#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;最离谱的是 &lt;code&gt;root&lt;/code&gt; 用户使用 &lt;code&gt;go mod tidy&lt;/code&gt; 没问题，但两个用户 &lt;code&gt;GOPATH&lt;/code&gt; 下导的 &lt;code&gt;hcl&lt;/code&gt; 包一摸一样，搞不清白，求助 ┭┮﹏┭┮&lt;/p&gt;&#xA;</description>
+      <author>xunle</author>
+      <pubDate>05 Nov 2022 09:30:49 +0000</pubDate>
+    </item>
+    <item>
       <title>土耳其 apple 礼品卡 oyunfor 买不了？ - Apple</title>
       <link>https://www.v2ex.com/t/892937</link>
       <description>&lt;p&gt;用了 visa 和 master 都不行，没有付款成功，什么情况？&lt;/p&gt;&#xA;</description>
