@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "rsync 开了校验后，我没看见它的校验过程 - Linux",
+      "Link": "https://www.v2ex.com/t/893072",
+      "Description": "\u003cp\u003e1.首先，我觉得，任何文件传输软件，在开了校验功能后，那么传输文件的流程，应该是这样的：\u003c/p\u003e\n\u003cp\u003eA.把文件，从 src 位置传输到 dest 位置。\u003c/p\u003e\n\u003cp\u003eB.把 dest 的文件，读回来，与 src 进行对比。\n对比有很多种方式，比如逐字节对比，或者 hash 对比，等等。但无论如何，文件传输软件，需要一个把文件从 dest 读回来的过程。\u003c/p\u003e\n\u003cp\u003e比如 Windows 上的文件传输软件 FastCopy 或 TeraCopy ，在勾选校验功能后，在完成文件复制后，都会有一个文件校验过程。\u003c/p\u003e\n\u003cp\u003e2.rsync 的问题。\u003c/p\u003e\n\u003cp\u003eOS Version: Debian 11 (bullseye)\u003c/p\u003e\n\u003cp\u003ersync Version: version 3.2.3  protocol version 31\u003c/p\u003e\n\u003cp\u003ecommand:\nrsync --verbose --checksum --links --keep-dirlinks --hard-links --executability --sparse --checksum-choice=xxh128 --ignore-times --human-readable --progress /srcHostPath root@DestHostIP:/destHostPath\u003c/p\u003e\n\u003cp\u003e用它传一个 GB 大小的文件。\u003c/p\u003e\n\u003cp\u003e我专门指定了参数 checksum ，来让它进行校验。\u003c/p\u003e\n\u003cp\u003e问题是，开了这个参数后，传输前，会等待很长一段时间，感觉像是 rsync 在读取文件进行校验，但我不知道为啥要这么设计。\u003c/p\u003e\n\u003cp\u003e在传输完成后，整个复制过程就完成了，感觉 rsync 并没有把该文件，从 dest 再读取回来，进行验证。\u003c/p\u003e\n\u003cp\u003e请问是我参数用错了？还是 rsync 在打开校验参数后，并没有在文件传输完成后进行校验？\u003c/p\u003e\n",
+      "Author": "documentzhangx66",
+      "PubDate": "2022-11-06T07:24:33Z"
+    },
+    {
       "Title": "windows 远程访问问题 - 问与答",
       "Link": "https://www.v2ex.com/t/893071",
       "Description": "我想从外面访问家里的 windows server 电脑。家里同一个路由器下，两台电脑间访问没问题的；但是从 frp stcp 中转了一次之后，我怎么都连接不上。我很头疼。\u003cbr /\u003e\u003cbr /\u003e这个 Microsoft Remote Desktop ，他的连接过程我看到有两个步骤，第一步是同意使用证书，是可以的；第二步是建立连接，是失败了的。我就卡在了这里。\u003cbr /\u003e\u003cbr /\u003e技术知识水平有限，可以寻求一下网友们的帮助吗？",
