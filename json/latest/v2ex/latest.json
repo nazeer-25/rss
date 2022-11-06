@@ -4,6 +4,55 @@
   "Description": "",
   "Items": [
     {
+      "Title": "sqldb：一个利用 Go 泛型及反射简化数据库模型操作的库 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/893132",
+      "Description": "\u003ch1\u003esqldb 简介\u003c/h1\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/YLonely/sqldb\" rel=\"nofollow\"\u003esqldb\u003c/a\u003e是一个用 Go 编写的，使用泛型以及反射简化数据库模型(Model)操作的库。\n其利用泛型定义了一组在业务代码操作数据库模型时常用的方法：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Model[T any] interface {\n\tColumns() T\n\tCreate(ctx context.Context, entity *T) error\n\tGet(ctx context.Context, opts []OpQueryOption) (*T, error)\n\tList(ctx context.Context, opts ListOptions) ([]*T, uint64, error)\n\tUpdate(ctx context.Context, query FilterOptions, opts []UpdateOption) (uint64, error)\n\tDelete(ctx context.Context, opts FilterOptions) error\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其中\u003ccode\u003eColumns()\u003c/code\u003e方法被用来获取模型各字段在数据库中的列名。\nsqldb 同时使用\u003ca href=\"https://gorm.io/\" rel=\"nofollow\"\u003eGorm\u003c/a\u003e库提供了对上述接口的一个实现。\u003c/p\u003e\n\u003ch1\u003e使用\u003c/h1\u003e\n\u003ch2\u003e定义模型\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype User struct {\n\tID      sqldb.Column[uint64] `gorm:\"column:id;primaryKey\"`\n\tName    sqldb.Column[string] `gorm:\"column:user_name\"`\n\tAge     sqldb.Column[*int]\n\tCreatedAt sqldb.Column[time.Time]\n\tDeletedAt sqldb.Column[gorm.DeletedAt]\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e利用泛型结构\u003ccode\u003eColumn\u003c/code\u003e对模型各字段进行定义。\u003c/p\u003e\n\u003ch2\u003e初始化并使用模型\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003eimport (\n\t\"context\"\n\n\t\"github.com/YLonely/sqldb\"\n\tsqlgorm \"github.com/YLonely/sqldb/gorm\"\n)\n\nfunc main(){\n\t// 使用 gorm 打开并连接数据库\n\tdsn := \"user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4\u0026amp;parseTime=True\u0026amp;loc=Local\"\n  \tdb, err := gorm.Open(mysql.Open(dsn), \u0026amp;gorm.Config{})\n\tif err != nil{\n\t\tpanic(err)\n\t}\n\t\n\t// 初始化模型\n\tvar Users sqldb.Model[User] = sqlgorm.NewModel[User](db)\n\tctx := context.Background()\n\n\t// 创建 User 实例\n\tage := 10\n\tu := \u0026amp;User{\n\t\tName: sqldb.NewColumn(\"test\"),\n\t\tAge: sqldb.NewColumn(\u0026amp;age),\n\t}\n\t_ = Users.Create(ctx, u)\n\n\t// 使用 Get 方法获取 User 实例\n\tu, err := Users.Get(ctx, []sqldb.OpQueryOption{\n\t\t{\n        \t// 使用 Columns().Name 引用 User 模型的 Name 字段\n\t\t\tColumn: Users.Columns().Name\n\t\t\tOp: OpEq,\n\t\t\tValue: \"test\",\n\t\t}, //  或者可以使用预定义的构造方法 sqldb.NewEqualOption(Users.Columns().Name, \"test\")\n\t})\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch1\u003e亮点\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e借助泛型为模型字段增加功能且不牺牲可读性\u003c/li\u003e\n\u003cli\u003e提供一套可复用方法方便对各类模型进行操作\u003c/li\u003e\n\u003cli\u003e提供 Columns()方法方便对模型的列进行引用，开发者无需判断实际的列名，无需在代码中书写\"string literals\"\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "loneybw",
+      "PubDate": "2022-11-06T12:23:46Z"
+    },
+    {
+      "Title": "来看我写会儿代码,不提 PR 不回家🥺 - 程序员",
+      "Link": "https://www.v2ex.com/t/893131",
+      "Description": "\u003cp\u003e\u003ca href=\"http://live.bilibili.com/23961175\" rel=\"nofollow\"\u003ehttp://live.bilibili.com/23961175\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "andyJado",
+      "PubDate": "2022-11-06T12:23:14Z"
+    },
+    {
+      "Title": "大家用的什么椅子? - 程序员",
+      "Link": "https://www.v2ex.com/t/893130",
+      "Description": "\u003cp\u003e那个赫尔曼实在太贵了,大佬们\u003c/p\u003e\n",
+      "Author": "chenqh",
+      "PubDate": "2022-11-06T12:23:03Z"
+    },
+    {
+      "Title": "有人收到过这种邮件吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/893129",
+      "Description": "\u003ca target=\"_blank\" href=\"https://i.imgur.com/oNguObC.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/oNguObC.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e这是 A 片广告吗？但是发件人地址是：workspace-noreply@google.com 啊，现在发广告还能这么发的？\u003cbr /\u003e\u003cbr /\u003e去掉那段广告翻译了下，感觉就是 Google Workspace 发的，但是我没有在用 Google Workspace 。。。\u003cbr /\u003e你好后面还多了个逗号。。\u003cbr /\u003e\u003cbr /\u003e\u0026gt; 你好， ，\u003cbr /\u003e\u0026gt; 您的管理员已重置您的 Google 帐户密码\u003cbr /\u003e\u0026gt; 单击下面的重置密码以设置新密码。 为确保您的帐户安全，请遵循这些密码指南。\u003cbr /\u003e\u0026gt; \u003cbr /\u003e\u0026gt; 重新定义密码\u003cbr /\u003e\u0026gt; \u003cbr /\u003e\u0026gt; 为了您的安全，密码重置链接将在 48 小时后过期。 在此期限之后，请联系您的管理员以重置您的密码。\u003cbr /\u003e\u0026gt; \u003cbr /\u003e\u0026gt; 此致，\u003cbr /\u003e\u0026gt; Google Workspace 小组\u003cbr /\u003e\u0026gt; \u003cbr /\u003e\u0026gt; 您已通过电子邮件收到此强制性服务通知，旨在让您了解产品或您的 Google Workspace 帐户的重要变化。",
+      "Author": "francis59",
+      "PubDate": "2022-11-06T12:22:16Z"
+    },
+    {
+      "Title": "nginx 反代 halo 8090 端口 +SSL，网站一会能访问一会不行 - Linux",
+      "Link": "https://www.v2ex.com/t/893128",
+      "Description": "这是 nginx 代码\u003cbr /\u003euser nginx nginx;\u003cbr /\u003eworker_processes 1;\u003cbr /\u003e事件 {\u003cbr /\u003eworker_connections 1024;\u003cbr /\u003e}\u003cbr /\u003eHTTP {\u003cbr /\u003einclude mime.types; default_type application/octet-stream; sendfile on; keepalive_timeout 65; server {\u003cbr /\u003elisten 80; server_name \u003ca target=\"_blank\" href=\"http://www.xxxx.me\" rel=\"nofollow noopener\"\u003ewww.xxxx.me\u003c/a\u003e; client_max_body_size 1024m; location / { proxy_set_header HOST $host; proxy_set_header X-Forwarded-Proto $scheme;\u003cbr /\u003eproxy_set_header X-Real-IP $remote_addr;\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003eproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\u003cbr /\u003e\u003cbr /\u003eproxy_pass http://127.0.0.1:8090;\u003cbr /\u003e}\u003cbr /\u003eerror_page 500 502 503 504 /50x.html;\u003cbr /\u003e\u003cbr /\u003elocation = /50x.html {\u003cbr /\u003eroot html;\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e}\u003cbr /\u003eserver  {\u003cbr /\u003elisten 443 SSL;\u003cbr /\u003e\u003cbr /\u003eserver_name \u003ca target=\"_blank\" href=\"http://xxxx.me\" rel=\"nofollow noopener\"\u003exxxx.me\u003c/a\u003e \u003ca target=\"_blank\" href=\"http://www.xxxxx.me\" rel=\"nofollow noopener\"\u003ewww.xxxxx.me\u003c/a\u003e;\u003cbr /\u003e\u003cbr /\u003essl_certificate /usr/local/nginx/cert/\u003ca target=\"_blank\" href=\"http://xxxx.me/cert1.pem;\" rel=\"nofollow noopener\"\u003exxxx.me/cert1.pem;\u003c/a\u003e\u003cbr /\u003essl_certificate_key /usr/local/nginx/cert/\u003ca target=\"_blank\" href=\"http://xxxx.me/privkey1.pem;\" rel=\"nofollow noopener\"\u003exxxx.me/privkey1.pem;\u003c/a\u003e\u003cbr /\u003essl_session_timeout 5 米;\u003cbr /\u003essl_ciphers ECDHE-RSA-AES128-GCM-SHA256：ECDHE：ECDH：AES：HIGH：！空：！空：！ MD5：！哎呀：！ RC4;\u003cbr /\u003essl_protocols TLSv1 TLSv1.1 TLSv1.2;\u003cbr /\u003essl_prefer_server_ciphers;\u003cbr /\u003e\u003cbr /\u003elocation / { proxy_set_header HOST $host; proxy_set_header X-Forwarded-Proto $scheme; proxy_set_header X-Real-IP $remote_addr;\u003cbr /\u003eproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003eproxy_pass http://127.0.0.1:8090/;\u003cbr /\u003e        }\u003cbr /\u003e    }   \u003cbr /\u003e}",
+      "Author": "spr1ngs",
+      "PubDate": "2022-11-06T12:20:53Z"
+    },
+    {
+      "Title": "春招想找 Java 后端工作，目前的准备情况是这样的，想知道大家有什么建议 - 程序员",
+      "Link": "https://www.v2ex.com/t/893127",
+      "Description": "\u003cp\u003e因为楼主不是 CS 科班的，所以准备得比较晚，感觉现在这种情况只能春招了，想看下大家有什么建议\u003c/p\u003e\n\u003cp\u003e目前已经学习的知识：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e基础知识：数据结构、OS 、计网、组成原理、数据库\u003c/li\u003e\n\u003cli\u003eJava 语言基础、一些 JVM 知识\u003c/li\u003e\n\u003cli\u003e框架知识方面，看过《深入浅出 Spring Boot 2.x 》\u003c/li\u003e\n\u003cli\u003e看过《 Redis 设计与实现》\u003c/li\u003e\n\u003cli\u003eLeetCode 刷了 300 题\u003c/li\u003e\n\u003cli\u003e数据库方面：学校上过数据库课程，也刷过 CMU 的 15-445 （写过一个简单的数据库），但这些和业务代码关系不大。而且重要的是和具体的数据库（比如 MySQL ）的知识脱节了。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e目前自己觉得还需要补充的知识\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e数据库需要找本书看（比如《高性能 MySQL 》）\u003c/li\u003e\n\u003cli\u003e看 OS 、计网的面经。因为我只是在学校上过，并没有系统准备过面试\u003c/li\u003e\n\u003cli\u003e做一个 Java 后端的比较复杂的项目，例如秒杀商城之类的。重点放在高并发优化上面。\u003c/li\u003e\n\u003cli\u003eJava 的并发编程我没有学习过，所以要专门学习一下\u003c/li\u003e\n\u003cli\u003eLinux 相关的内容需要专门准备吗？\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e简历上面的话，感觉也没有什么可写的，我想可以写一下这些：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e一个 Java 后端秒杀商城的项目。这个应该是符合工作要求的重点\u003c/li\u003e\n\u003cli\u003e15-445 的 C++数据库可以写上去\u003c/li\u003e\n\u003cli\u003e刷过 MIT 的 6.S081 的 OS 课程，也可以写上去\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e想了下后面两个项目有点，怎么说呢，比较牵强（不知道是不是），但也没别的可写了。\u003c/p\u003e\n\u003cp\u003e其实想想的话当初应该准备下 C++后端的，要学习的东西可能比 Java 的少一点（也难一点）。不过也只是猜测。\u003c/p\u003e\n\u003cp\u003e大家有什么学习建议呢？像 elastic search ，rabbitMQ ，mongoDB 这种需要专门学吗？感觉东西比较多比较杂\u003c/p\u003e\n\u003cp\u003e简历项目也希望大家能提一下建议\u003c/p\u003e\n",
+      "Author": "movq",
+      "PubDate": "2022-11-06T12:15:49Z"
+    },
+    {
+      "Title": "家里闲置性能不错的小服务器几台，电费不计家宽上行 30M 下行 1000M 能做点什么? - 问与答",
+      "Link": "https://www.v2ex.com/t/893126",
+      "Description": "前段时间折腾软路由上瘾，买了 6005,5105,7505,i3 8100,5800u 一大堆突然发现不知道做什么好了\u003cbr /\u003e电信家宽，1000M 下行 30M 上行，没有公网 IP 但是有国内服务器 frp 小水管大概 10M...\u003cbr /\u003e\u003cbr /\u003e机器共五台，平均配置 4 核 16G 1T 固态...\u003cbr /\u003e\u003cbr /\u003e指令集除了 6005 5105 没有 AVX 其他几台都是全的\u003cbr /\u003e\u003cbr /\u003e之前跑游戏服务器但最近朋友都玩够了没啥新联机游戏了\u003cbr /\u003e然后自己搭了 vs 远程开发,ios 开发环境,安卓开发环境,各种调试环境,code server,k8s,但是都是备着平时也不怎么用得到机器负载一直特别低，又都是低功耗型开着满载也没多少电费感觉很浪费想拿来干点什么有意义的事情(不需要赚钱)\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003eNAS 不需要已经有了，谢谢大家\u003cbr /\u003e如果是公网服务类的希望是不吃上行的那种，家宽上行确实太拉胯了",
+      "Author": "RatioPattern",
+      "PubDate": "2022-11-06T12:13:38Z"
+    },
+    {
       "Title": "现在还有什么低配要求， macOS 能玩的 MMORPG 游戏吗，除了魔兽世界。 - macOS",
       "Link": "https://www.v2ex.com/t/893124",
       "Description": "有的时候真的需要放松一下，打算去另一个世界里滋养一下精神，顺便来点轻微的社交。一个人无聊的快疯了。",
