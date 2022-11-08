@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "[分享]今天是我签到第 100 天的日子 - 分享发现",
+      "Link": "https://www.v2ex.com/t/893705",
+      "Description": "\u003cp\u003e这里的人好有趣的，说话声音又好听，我爱死你们了\u003c/p\u003e\n",
+      "Author": "foufoufm",
+      "PubDate": "2022-11-08T14:56:34Z"
+    },
+    {
       "Title": "取消重复的 axios 请求时如何避免失败？ - Vue.js",
       "Link": "https://www.v2ex.com/t/893704",
       "Description": "\u003cp\u003e我尝试在 Axios 中取消重复请求，但它可能仍会发送重复请求。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eimport type { AxiosRequestConfig } from 'axios';\n\nexport default class CancelRequest {\n\n  pendingRequestList: Map\u0026lt;any, any\u0026gt;;\n\n  constructor() {\n    this.pendingRequestList = new Map();\n  }\n\n\n  addPendingRequest = (config: AxiosRequestConfig) =\u0026gt; {\n    const { method, url, params, data } = config;\n    const controller = new AbortController();\n    config.signal = controller.signal;\n    const uniqueKey = [method, url, JSON.stringify(params), JSON.stringify(data)].join('\u0026amp;');\n    this.pendingRequestList.set(uniqueKey, controller);\n  };\n\n \n  removePendingRequest(config: AxiosRequestConfig) {\n    const { method, url, params, data } = config;\n    const uniqueKey = [method, url, JSON.stringify(params), JSON.stringify(data)].join('\u0026amp;');\n    if (this.pendingRequestList.has(uniqueKey)) {\n      this.pendingRequestList.get(uniqueKey).abort();\n      this.pendingRequestList.delete(uniqueKey);\n    }\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
