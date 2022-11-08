@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "取消重复的 axios 请求时如何避免失败？ - Vue.js",
+      "Link": "https://www.v2ex.com/t/893704",
+      "Description": "\u003cp\u003e我尝试在 Axios 中取消重复请求，但它可能仍会发送重复请求。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eimport type { AxiosRequestConfig } from 'axios';\n\nexport default class CancelRequest {\n\n  pendingRequestList: Map\u0026lt;any, any\u0026gt;;\n\n  constructor() {\n    this.pendingRequestList = new Map();\n  }\n\n\n  addPendingRequest = (config: AxiosRequestConfig) =\u0026gt; {\n    const { method, url, params, data } = config;\n    const controller = new AbortController();\n    config.signal = controller.signal;\n    const uniqueKey = [method, url, JSON.stringify(params), JSON.stringify(data)].join('\u0026amp;');\n    this.pendingRequestList.set(uniqueKey, controller);\n  };\n\n \n  removePendingRequest(config: AxiosRequestConfig) {\n    const { method, url, params, data } = config;\n    const uniqueKey = [method, url, JSON.stringify(params), JSON.stringify(data)].join('\u0026amp;');\n    if (this.pendingRequestList.has(uniqueKey)) {\n      this.pendingRequestList.get(uniqueKey).abort();\n      this.pendingRequestList.delete(uniqueKey);\n    }\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "jahnsli",
+      "PubDate": "2022-11-08T14:47:01Z"
+    },
+    {
+      "Title": "目前显示器是 fight 5k, 双 dp 才能实现 5K 显示，手头的电脑是 M1 air, 要哪些扩展坞或者转换头 才能实现 5K 的显示呢？ - 问与答",
+      "Link": "https://www.v2ex.com/t/893703",
+      "Description": "",
+      "Author": "andyboyce",
+      "PubDate": "2022-11-08T14:42:06Z"
+    },
+    {
       "Title": "上海幼升小给我整 emo 了 - 问与答",
       "Link": "https://www.v2ex.com/t/893702",
       "Description": "明年准备幼升小了，想着大房子暂时换不起，准备花钱上一个中等偏上的小学，然后找了几个中介问了问价格\u003cbr /\u003e得到的报价直接让我大半年工资没了，普通人伤不起\u003cbr /\u003e\u003cbr /\u003e普通的第二梯队的小学报价 35w \u003cbr /\u003e普通的第三梯队的小学报价 20w",
