@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "reqwest 的性能为啥这么差？ - Rust",
+      "Link": "https://www.v2ex.com/t/893742",
+      "Description": "\u003ch3\u003e1. reqwest\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003e#[macro_use]\nextern crate timeit;\n\nfn main() -\u0026gt; Result\u0026lt;(), Box\u0026lt;dyn std::error::Error\u0026gt;\u0026gt; {\n    timeit!({\n        let _ = reqwest::blocking::get(\"http://localhost/\")?\n            .text()?;\n    });\n    Ok(())\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e2. chttp\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003euse chttp::prelude::*;\n\n#[macro_use]\nextern crate timeit;\n\nfn main() -\u0026gt; Result\u0026lt;(), Box\u0026lt;dyn std::error::Error\u0026gt;\u0026gt; {\n    timeit!({\n        let _ = chttp::get(\"http://localhost/\")?\n            .text()?;\n    });\n    Ok(())\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e3. python requests\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003eimport requests\n%timeit requests.get('http://localhost/').text\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e输出：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003ereqwest\n10 loops: 40.283526 ms\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003echttp\n1000 loops: 264.017153 µs\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003erequests\n1.56 ms ± 27 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003ereqwest 换成 http1.0 协议也不变\u003c/p\u003e\n\u003cp\u003elocalhost 是本地 nginx\u003c/p\u003e\n\u003cp\u003e这性能比 python requsts 都慢了几十倍，有点夸张\u003c/p\u003e\n",
+      "Author": "ayang23",
+      "PubDate": "2022-11-09T00:45:18Z"
+    },
+    {
+      "Title": "新版照片应用已经支持 iCloud - Windows",
+      "Link": "https://www.v2ex.com/t/893740",
+      "Description": "\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://cdn-std.droplr.net/files/acc_501093/Y18xRv\"/\u003e\u003c/p\u003e\n\u003cp\u003e早晨发现照片应用又更新了，打开发现已经开始支持读取 iCloud 照片。马上下载 iCloud for Windows 实验一下，iCloud for Windows 登录碰到点问题，很快解决，目前使用体验良好。\u003c/p\u003e\n",
+      "Author": "Kawnnor",
+      "PubDate": "2022-11-09T00:32:10Z"
+    },
+    {
       "Title": ".NET 7 正式发布 - .NET",
       "Link": "https://www.v2ex.com/t/893739",
       "Description": "\u003cp\u003e\u003ca href=\"https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/\" rel=\"nofollow\"\u003ehttps://devblogs.microsoft.com/dotnet/announcing-dotnet-7/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e一块发布的还有 C# 11 ，F# 7 ，Visual Studio 17.4 ，MAUI\u003c/p\u003e\n\u003cp\u003e.NET Conf 2022 \u003ca href=\"https://www.dotnetconf.net\" rel=\"nofollow\"\u003ehttps://www.dotnetconf.net\u003c/a\u003e\u003c/p\u003e\n",
