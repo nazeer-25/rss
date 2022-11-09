@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>让 iPhone X 以及之前的机型支持广电卡 - iPhone</title>
+      <link>https://www.v2ex.com/t/893955</link>
+      <description>&lt;p&gt;广电官方给出的设备列表：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://shouji.10099.com.cn/list/&#34; rel=&#34;nofollow&#34;&gt;https://shouji.10099.com.cn/list/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;官方说只支持 2018 年以及之后的设备，也就是起码得是 iPhone XR 才行。&lt;/p&gt;&#xA;&lt;p&gt;而且还要自己额外设置一下 APN 才能使用：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://shouji.10099.com.cn/list/tips.html?img=iphone.png&#34; rel=&#34;nofollow&#34;&gt;https://shouji.10099.com.cn/list/tips.html?img=iphone.png&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;但是 iPhone X 以及之前的机型在硬件上是支持广电的频段的，而且广电是共享移动的基站，&#xA;所以只要让广电的卡强制使用移动的 ipcc 配置就可以了。&lt;/p&gt;&#xA;&lt;p&gt;对于不再系统内置 ipcc 配置列表中的 sim 卡，使用的是 Unknown.bundle 这里的配置。&lt;/p&gt;&#xA;&lt;p&gt;把 CMCC_cn.bundle 改名为 Unknown.bundle ，再制作成 ipcc 文件刷入 iPhone 就可以了。&lt;/p&gt;&#xA;&lt;p&gt;实测可以接打电话、收发短信、4G 上网，除了不能激活 iMessage ，不知道是不是接受不了境外短信的原因。&lt;/p&gt;&#xA;&lt;p&gt;CMCC_cn.bundle 可以从 ipsw 文件中提取，ipsw 解压后，在 System/Library/Carrier Bundles/iPhone 路径下可以找到。&lt;/p&gt;&#xA;&lt;p&gt;符合自己设备的 ipsw 可以从 &lt;a href=&#34;http://ipsw.me&#34; rel=&#34;nofollow&#34;&gt;ipsw.me&lt;/a&gt; 上下载，把后缀改为 zip 就可以解压了。&lt;/p&gt;&#xA;&lt;p&gt;制作 ipcc 的方法：&lt;/p&gt;&#xA;&lt;p&gt;新建一个名称为 Payload 的目录，把 CMCC_cn.bundle 改名为 Unknown.bundle 移动到 Payload 目录中，然后把 Payload 目录压缩为 Payload.zip ，再改名为 Unknown.ipcc&lt;/p&gt;&#xA;&lt;p&gt;刷入 ipcc 到 iPhone 的方法：&lt;/p&gt;&#xA;&lt;p&gt;在终端下执行命令：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;defaults write com.apple.AMPDevicesAgent carrier-testing -bool YES&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在 Finder 中找到接入的手机，按下 &lt;code&gt;⌥&lt;/code&gt;(Option) 然后点击 &#34;检查更新&#34;，选择刚才制作的 ipcc 文件。&lt;/p&gt;&#xA;&lt;p&gt;刷入后配置就自动生效了，如果不行可以开关一下飞行模式。&lt;/p&gt;&#xA;</description>
+      <author>weeei</author>
+      <pubDate>09 Nov 2022 12:41:44 +0000</pubDate>
+    </item>
+    <item>
       <title>你们在图书 APP 上有遇到过这个问题吗 - iPhone</title>
       <link>https://www.v2ex.com/t/893953</link>
       <description>&lt;p&gt;刚用图书 APP 看书，遇到一个奇怪的问题，每天打开时当前页数不是昨天翻的最后一页，而是几天前翻过的页码，每次都要手动向后翻。。&lt;/p&gt;&#xA;&lt;p&gt;这是 bug 还是 feature 呢&lt;/p&gt;&#xA;</description>
