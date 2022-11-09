@@ -4,9 +4,44 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有云电脑为啥没有云电视？ - 奇思妙想",
+      "Link": "https://www.v2ex.com/t/893910",
+      "Description": "\u003cp\u003e现在买个电视，用两年就卡的不行得换电视或者加盒子，妥妥的消费主义陷阱\u003c/p\u003e\n\u003cp\u003e前两天看云栖大会上介绍的云电脑，从安全方面考虑就联想到家庭版的云电脑，然后想到电视这个事情。能不能把电视和家里的台式机进行结合。只买一个电视面板，通过有线和无线的方式和台式机进行连接，把处理工作都放到台式机上。这样是不是电视是不是可以用很久。\u003c/p\u003e\n\u003cp\u003e如果家里安装服务器去实现家庭版的云电脑，云手机，各种各样的云设备。现在的技术应该会比较难实现。\u003c/p\u003e\n\u003cp\u003e电视和电脑的结合这应该是家庭版云的最简单实现的一个步骤吧，有对电视行业比较了解的老哥吗？讨论一下这个想法能不能实现\u003c/p\u003e\n",
+      "Author": "gaozizhong",
+      "PubDate": "2022-11-09T09:15:20Z"
+    },
+    {
+      "Title": "Rust 闭包可变借用参数生命周期如何处理? - Rust",
+      "Link": "https://www.v2ex.com/t/893906",
+      "Description": "\u003cp\u003e想在闭包参数里传可变借用，需要如何解决生命周期问题？\u003c/p\u003e\n\u003cp\u003erustc 1.65.0\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e296 |       do_demo(|demo| async move {\n    |  ______________-----_^\n    | |              |   |\n    | |              |   return type of closure `impl Future\u0026lt;Output = String\u0026gt;` contains a lifetime `'2`\n    | |              has type `\u0026amp;'1 mut Demo`\n297 | |         println!(\"demo: {:?}\", demo);\n298 | |         demo.print_mut();\n299 | |         format!(\"test demo, id: {}\", demo.id)\n300 | |     })\n    | |_____^ returning this value requires that `'1` must outlive `'2`\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003euse std::future::Future;\n\n#[derive(Debug)]\nstruct Demo {\n    id: i32,\n    name: String,\n}\n\nimpl Demo {\n    fn print(self) {\n        println!(\"id:{}, name:{:?}\", self.id, self.name);\n    }\n    fn print_mut(\u0026amp;mut self) {\n        println!(\"id:{}, name:{:?}\", self.id, self.name);\n    }\n}\n\nasync fn do_demo\u0026lt;F, U\u0026gt;(mut f: F) -\u0026gt; Result\u0026lt;(), String\u0026gt;\nwhere\n    F: for\u0026lt;'a\u0026gt; FnMut(\u0026amp;'a Demo) -\u0026gt; U,\n    U: Future\u0026lt;Output = String\u0026gt;,\n{\n    let demo = Demo {\n        id: 1,\n        name: \"test\".to_string(),\n    };\n\n    let ret = f(\u0026amp;demo).await;\n\n    demo.print();\n\n    println!(\"f() ret: {:?}\", ret);\n\n    Ok(())\n}\n\n#[tokio::test]\nasync fn demo() {\n    do_demo(|demo| async move {\n        println!(\"demo: {:?}\", demo);\n        demo.print_mut();\n        format!(\"test demo, id: {}\", demo.id)\n    })\n    .await\n    .unwrap();\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "bianweiall",
+      "PubDate": "2022-11-09T09:11:42Z"
+    },
+    {
+      "Title": "GOOGLE VOICE 搞了批发价 不知道有没有大佬批量要？ - 优惠信息",
+      "Link": "https://www.v2ex.com/t/893905",
+      "Description": "\u003cp\u003e小站 \u003ca href=\"http://www.86ct.org\" rel=\"nofollow\"\u003ewww.86ct.org\u003c/a\u003e\n库存还有很多\n怕发卡站被黑 所以不敢大量上架\u003c/p\u003e\n",
+      "Author": "wufeng",
+      "PubDate": "2022-11-09T09:08:52Z"
+    },
+    {
+      "Title": "陪我五年多的键盘坏掉了 - 随想",
+      "Link": "https://www.v2ex.com/t/893904",
+      "Description": "17 年 3 月买的罗技 mk240 ，差不多也是从那个时候开始自学编程，陪我走了好几个地方，工作中也一直使用它。\u003cbr /\u003e\u003cbr /\u003e今天用 VSCode 写代码时发现间歇性的打不出来问号，也不能切换注释了，最后发现是 alt 和 shift 键坏了，有些感伤，京东又买了个 mk240 接替它。",
+      "Author": "Danswerme",
+      "PubDate": "2022-11-09T09:08:44Z"
+    },
+    {
+      "Title": "新国标电动车，小刀小罗曼电动车怎么解除限速？ - 问与答",
+      "Link": "https://www.v2ex.com/t/893903",
+      "Description": "如题，买了一辆新国标小电驴，结果限速比较蛋疼，甚至没有部分自行车快，想问一下怎么解除限速",
+      "Author": "hex2en",
+      "PubDate": "2022-11-09T09:08:26Z"
+    },
+    {
       "Title": "北京校招 Offer 如何选：大厂 or 央企 - 职场话题",
       "Link": "https://www.v2ex.com/t/893902",
-      "Description": "小弟河北环京贫困带人，非 CS 科班本硕，非 C7/双一流专业毕业，不能走北京计划单列落户，以下岗都是大数据开发。\u003cbr /\u003e\u003cbr /\u003e三个 Offer：\u003cbr /\u003e\u003cbr /\u003eA. 阿里云，还没谈薪，预估 24k*16 （白菜）\u003cbr /\u003e\u003cbr /\u003eB. 快手, 25k*16 + 2k 房补。\u003cbr /\u003e\u003cbr /\u003eC. 航旅纵横，央企互联网子公司，15k*13.3 ，签字费 3 万，租房补贴 1.5w/年，工作节奏 9:30-20:00 ，解决北京户口\u003cbr /\u003e\u003cbr /\u003e家庭条件县城小康水平，家人比较看重稳定性，推荐选 C 。\u003cbr /\u003e\u003cbr /\u003e我个人比较倾向于 A ，主要是因为自己不太想在北京长期发展（住房、教育、政治环境等），所以觉得在国内的“稳定”不太重要。想润的想法和家人交流过，家人建议先拿个北京户口、找好队友，之后想润再润。\u003cbr /\u003e\u003cbr /\u003e求大家给小弟一点建议。",
+      "Description": "小弟河北环京贫困带人，非 CS 科班本硕，非 C7/双一流专业毕业，不能走北京计划单列落户，以下岗都是大数据开发。\u003cbr /\u003e\u003cbr /\u003e三个 Offer：\u003cbr /\u003e\u003cbr /\u003eA. 阿里云，还没谈薪，预估 24k*16 （白菜）\u003cbr /\u003e\u003cbr /\u003eB. 快手, 25k*16 + 2k 房补。\u003cbr /\u003e\u003cbr /\u003eC. 航旅纵横，央企互联网子公司，15k*13.3 ，签字费 3 万，租房补贴 1.5w/年，工作节奏 9:30-20:00 ，解决北京户口\u003cbr /\u003e\u003cbr /\u003e家庭条件县城小康水平，家人比较看重稳定性，推荐选 C 。\u003cbr /\u003e\u003cbr /\u003e我个人比较倾向于 A ，主要是因为：\u003cbr /\u003e1. 自己不太想在北京长期发展（住房、教育、政治环境等），所以觉得在北京的“稳定”不太重要。想润的想法和家人交流过，家人建议先拿个北京户口、找好队友，之后想润再润。\u003cbr /\u003e2. 校招去大厂之后跳槽会灵活一些。\u003cbr /\u003e3. 户口问题想通过后面找女朋友解决。\u003cbr /\u003e\u003cbr /\u003e求大家给小弟一点建议。",
       "Author": "dilibaba",
       "PubDate": "2022-11-09T09:01:47Z"
     },

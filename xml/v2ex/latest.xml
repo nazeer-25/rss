@@ -4,9 +4,44 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有云电脑为啥没有云电视？ - 奇思妙想</title>
+      <link>https://www.v2ex.com/t/893910</link>
+      <description>&lt;p&gt;现在买个电视，用两年就卡的不行得换电视或者加盒子，妥妥的消费主义陷阱&lt;/p&gt;&#xA;&lt;p&gt;前两天看云栖大会上介绍的云电脑，从安全方面考虑就联想到家庭版的云电脑，然后想到电视这个事情。能不能把电视和家里的台式机进行结合。只买一个电视面板，通过有线和无线的方式和台式机进行连接，把处理工作都放到台式机上。这样是不是电视是不是可以用很久。&lt;/p&gt;&#xA;&lt;p&gt;如果家里安装服务器去实现家庭版的云电脑，云手机，各种各样的云设备。现在的技术应该会比较难实现。&lt;/p&gt;&#xA;&lt;p&gt;电视和电脑的结合这应该是家庭版云的最简单实现的一个步骤吧，有对电视行业比较了解的老哥吗？讨论一下这个想法能不能实现&lt;/p&gt;&#xA;</description>
+      <author>gaozizhong</author>
+      <pubDate>09 Nov 2022 09:15:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>Rust 闭包可变借用参数生命周期如何处理? - Rust</title>
+      <link>https://www.v2ex.com/t/893906</link>
+      <description>&lt;p&gt;想在闭包参数里传可变借用，需要如何解决生命周期问题？&lt;/p&gt;&#xA;&lt;p&gt;rustc 1.65.0&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;296 |       do_demo(|demo| async move {&#xA;    |  ______________-----_^&#xA;    | |              |   |&#xA;    | |              |   return type of closure `impl Future&amp;lt;Output = String&amp;gt;` contains a lifetime `&#39;2`&#xA;    | |              has type `&amp;amp;&#39;1 mut Demo`&#xA;297 | |         println!(&#34;demo: {:?}&#34;, demo);&#xA;298 | |         demo.print_mut();&#xA;299 | |         format!(&#34;test demo, id: {}&#34;, demo.id)&#xA;300 | |     })&#xA;    | |_____^ returning this value requires that `&#39;1` must outlive `&#39;2`&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;use std::future::Future;&#xA;&#xA;#[derive(Debug)]&#xA;struct Demo {&#xA;    id: i32,&#xA;    name: String,&#xA;}&#xA;&#xA;impl Demo {&#xA;    fn print(self) {&#xA;        println!(&#34;id:{}, name:{:?}&#34;, self.id, self.name);&#xA;    }&#xA;    fn print_mut(&amp;amp;mut self) {&#xA;        println!(&#34;id:{}, name:{:?}&#34;, self.id, self.name);&#xA;    }&#xA;}&#xA;&#xA;async fn do_demo&amp;lt;F, U&amp;gt;(mut f: F) -&amp;gt; Result&amp;lt;(), String&amp;gt;&#xA;where&#xA;    F: for&amp;lt;&#39;a&amp;gt; FnMut(&amp;amp;&#39;a Demo) -&amp;gt; U,&#xA;    U: Future&amp;lt;Output = String&amp;gt;,&#xA;{&#xA;    let demo = Demo {&#xA;        id: 1,&#xA;        name: &#34;test&#34;.to_string(),&#xA;    };&#xA;&#xA;    let ret = f(&amp;amp;demo).await;&#xA;&#xA;    demo.print();&#xA;&#xA;    println!(&#34;f() ret: {:?}&#34;, ret);&#xA;&#xA;    Ok(())&#xA;}&#xA;&#xA;#[tokio::test]&#xA;async fn demo() {&#xA;    do_demo(|demo| async move {&#xA;        println!(&#34;demo: {:?}&#34;, demo);&#xA;        demo.print_mut();&#xA;        format!(&#34;test demo, id: {}&#34;, demo.id)&#xA;    })&#xA;    .await&#xA;    .unwrap();&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>bianweiall</author>
+      <pubDate>09 Nov 2022 09:11:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>GOOGLE VOICE 搞了批发价 不知道有没有大佬批量要？ - 优惠信息</title>
+      <link>https://www.v2ex.com/t/893905</link>
+      <description>&lt;p&gt;小站 &lt;a href=&#34;http://www.86ct.org&#34; rel=&#34;nofollow&#34;&gt;www.86ct.org&lt;/a&gt;&#xA;库存还有很多&#xA;怕发卡站被黑 所以不敢大量上架&lt;/p&gt;&#xA;</description>
+      <author>wufeng</author>
+      <pubDate>09 Nov 2022 09:08:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>陪我五年多的键盘坏掉了 - 随想</title>
+      <link>https://www.v2ex.com/t/893904</link>
+      <description>17 年 3 月买的罗技 mk240 ，差不多也是从那个时候开始自学编程，陪我走了好几个地方，工作中也一直使用它。&lt;br /&gt;&lt;br /&gt;今天用 VSCode 写代码时发现间歇性的打不出来问号，也不能切换注释了，最后发现是 alt 和 shift 键坏了，有些感伤，京东又买了个 mk240 接替它。</description>
+      <author>Danswerme</author>
+      <pubDate>09 Nov 2022 09:08:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>新国标电动车，小刀小罗曼电动车怎么解除限速？ - 问与答</title>
+      <link>https://www.v2ex.com/t/893903</link>
+      <description>如题，买了一辆新国标小电驴，结果限速比较蛋疼，甚至没有部分自行车快，想问一下怎么解除限速</description>
+      <author>hex2en</author>
+      <pubDate>09 Nov 2022 09:08:26 +0000</pubDate>
+    </item>
+    <item>
       <title>北京校招 Offer 如何选：大厂 or 央企 - 职场话题</title>
       <link>https://www.v2ex.com/t/893902</link>
-      <description>小弟河北环京贫困带人，非 CS 科班本硕，非 C7/双一流专业毕业，不能走北京计划单列落户，以下岗都是大数据开发。&lt;br /&gt;&lt;br /&gt;三个 Offer：&lt;br /&gt;&lt;br /&gt;A. 阿里云，还没谈薪，预估 24k*16 （白菜）&lt;br /&gt;&lt;br /&gt;B. 快手, 25k*16 + 2k 房补。&lt;br /&gt;&lt;br /&gt;C. 航旅纵横，央企互联网子公司，15k*13.3 ，签字费 3 万，租房补贴 1.5w/年，工作节奏 9:30-20:00 ，解决北京户口&lt;br /&gt;&lt;br /&gt;家庭条件县城小康水平，家人比较看重稳定性，推荐选 C 。&lt;br /&gt;&lt;br /&gt;我个人比较倾向于 A ，主要是因为自己不太想在北京长期发展（住房、教育、政治环境等），所以觉得在国内的“稳定”不太重要。想润的想法和家人交流过，家人建议先拿个北京户口、找好队友，之后想润再润。&lt;br /&gt;&lt;br /&gt;求大家给小弟一点建议。</description>
+      <description>小弟河北环京贫困带人，非 CS 科班本硕，非 C7/双一流专业毕业，不能走北京计划单列落户，以下岗都是大数据开发。&lt;br /&gt;&lt;br /&gt;三个 Offer：&lt;br /&gt;&lt;br /&gt;A. 阿里云，还没谈薪，预估 24k*16 （白菜）&lt;br /&gt;&lt;br /&gt;B. 快手, 25k*16 + 2k 房补。&lt;br /&gt;&lt;br /&gt;C. 航旅纵横，央企互联网子公司，15k*13.3 ，签字费 3 万，租房补贴 1.5w/年，工作节奏 9:30-20:00 ，解决北京户口&lt;br /&gt;&lt;br /&gt;家庭条件县城小康水平，家人比较看重稳定性，推荐选 C 。&lt;br /&gt;&lt;br /&gt;我个人比较倾向于 A ，主要是因为：&lt;br /&gt;1. 自己不太想在北京长期发展（住房、教育、政治环境等），所以觉得在北京的“稳定”不太重要。想润的想法和家人交流过，家人建议先拿个北京户口、找好队友，之后想润再润。&lt;br /&gt;2. 校招去大厂之后跳槽会灵活一些。&lt;br /&gt;3. 户口问题想通过后面找女朋友解决。&lt;br /&gt;&lt;br /&gt;求大家给小弟一点建议。</description>
       <author>dilibaba</author>
       <pubDate>09 Nov 2022 09:01:47 +0000</pubDate>
     </item>
