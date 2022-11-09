@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Ubuntu 上 百度网盘客户端篡改 html 文件默认打开方式问题，如何管理文件访问权限？ - 程序员</title>
+      <link>https://www.v2ex.com/t/894000</link>
+      <description>&lt;p&gt;本来 html 文件默认是 Chrome 打开的，每次启动百度网盘后都会被它重新设置。在 Ubutu 上配置默认启动应用的文件位于 ~/.config/mimeapps.list &lt;/p&gt;&#xA;&lt;p&gt;考虑如何阻止 /opt/baidunetdisk/baidunetdisk 修改这个文件，进一步引申到如何限制一个进程能够访问的文件？&lt;/p&gt;&#xA;&lt;p&gt;在 Linux 上权限边界是 User 而不是应用，任何在当前用户下运行的应用都能获得当前登录用户的所有权限，所以 chmod 设置读写权限没用，它能改回来。&lt;/p&gt;&#xA;&lt;p&gt;考虑利用 Sandbox 机制，对进程访问文件系统进行隔离，比如利用 chroot 或者 docker ，但是这这玩意只有通过 .deb 包的形式安装。另外 Ubuntu 上有一种 AppArmor 机制可以对进程的资源访问进行限制，可以配置进程允许访问资源的 profile 并让进程在此 profile 下运行。&lt;/p&gt;&#xA;&lt;p&gt;另外就是直接把文件设置为 unmutable, 可以通过命令 chattr +i ~/.config/mimeapps.list 完成，这样除了 root 用户其他用户都不能修改此文件，但是这样正常默认应用设置也会受限制，也比较麻烦。&lt;/p&gt;&#xA;&lt;p&gt;总之 Linux 上好像没有自带按照进程细分的文件访问权限管理办法，还有其他思路吗？&lt;/p&gt;&#xA;&lt;p&gt;参考阅读链接：&#xA;&lt;a href=&#34;https://security.stackexchange.com/questions/193832/prevent-apps-from-having-full-access-to-user-files&#34; rel=&#34;nofollow&#34;&gt;https://security.stackexchange.com/questions/193832/prevent-apps-from-having-full-access-to-user-files&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>juejinloop</author>
+      <pubDate>09 Nov 2022 17:08:02 +0000</pubDate>
+    </item>
+    <item>
       <title>debian 阿里源慢 - 程序员</title>
       <link>https://www.v2ex.com/t/893999</link>
       <description>&lt;p&gt;&lt;a href=&#34;http://mirrors.aliyun.com&#34; rel=&#34;nofollow&#34;&gt;mirrors.aliyun.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;只有几百 k ，我联通 300M 的宽带，用清华的源就不会&lt;/p&gt;&#xA;&lt;p&gt;有解决办法吗&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://cdn-github.dunhanson.site/img/202211100104120.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
