@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "React.useEffect 的效果，为什么还跟帧率有关？ bug 到底出在哪里？ - React",
+      "Link": "https://www.v2ex.com/t/894109",
+      "Description": "\u003cp\u003e下面是最小 demo ，逻辑很简单：count 随着鼠标滚轮滚动，不断增加++，通过{divs}渲染出 count 。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003econst useWheel = (count:number, setCount)=\u0026gt;{\n    let refDiv = useRef\u0026lt;HTMLDivElement\u0026gt;(null);\n    useEffect(()=\u0026gt;{\n        let el = refDiv.current;\n        let callback = (ev:WheelEvent)=\u0026gt;{\n            ev.preventDefault();\n            setCount(count+Math.floor(Math.abs(ev.deltaY/5)));\n        };\n        el.addEventListener(\"wheel\", callback, {passive:false});\n        return (()=\u0026gt;{el.removeEventListener('wheel', callback);});\n    }, [count]);\n    return refDiv;\n}\n\nexport const Main = (props)=\u0026gt;{\n    let [count, setCount] = useState\u0026lt;number\u0026gt;(0);\n    let wheel = useWheel(count, setCount);\n    let divs = (new Array\u0026lt;number\u0026gt;(25000)).fill(0).map((v,i)=\u0026gt;(\u0026lt;div key={i+count}\u0026gt;{i+count}\u0026lt;/div\u0026gt;));\n    return (\u0026lt;div ref={wheel}\u0026gt;\n                {divs}\n            \u0026lt;/div\u0026gt; );\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但实际上，渲染的 count 会有「忽增忽减」的现象，感觉不正常。而如果把 25000 条改为 50 条，渲染帧率提高，就不会有同样的问题了。\u003c/p\u003e\n\u003cp\u003e上面的例子里，useEffect 是依赖 count 的，按我的理解，count 更新会触发 useEffect 调用。而 useEffect 里面用到的 count 就是最新的值，那为什么结果会「忽增忽减」呢？\u003c/p\u003e\n\u003cp\u003e修改 setCount 为函数形式，好像就解决这个问题了。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esetCount((pre)=\u0026gt;pre+Math.floor(Math.abs(ev.deltaY/5)));\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但我不理解这里的逻辑：为什么改之前的会有问题呢？难道 useEffect 用的不是最新的 count 吗？\u003c/p\u003e\n",
+      "Author": "sillydaddy",
+      "PubDate": "2022-11-10T04:56:44Z"
+    },
+    {
+      "Title": "分享一下你在 b 站发现的宝藏 up？ Java 技术类最好 - 程序员",
+      "Link": "https://www.v2ex.com/t/894108",
+      "Description": "\u003cp\u003e如题，个人收集的如下\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e尚硅谷 \u003ca href=\"https://space.bilibili.com/302417610/?spm_id_from=333.999.0.0\" rel=\"nofollow\"\u003ehttps://space.bilibili.com/302417610/?spm_id_from=333.999.0.0\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e楠哥教你学 Java \u003ca href=\"https://space.bilibili.com/434617924?spm_id_from=333.337.0.0\" rel=\"nofollow\"\u003ehttps://space.bilibili.com/434617924?spm_id_from=333.337.0.0\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e郑清  \u003ca href=\"https://space.bilibili.com/510086367?spm_id_from=333.337.search-card.all.click\" rel=\"nofollow\"\u003ehttps://space.bilibili.com/510086367?spm_id_from=333.337.search-card.all.click\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e大头菜 Java  \u003ca href=\"https://space.bilibili.com/317080675?spm_id_from=333.337.0.0\" rel=\"nofollow\"\u003ehttps://space.bilibili.com/317080675?spm_id_from=333.337.0.0\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e我是大彬呀。对话类，比较有趣  \u003ca href=\"https://space.bilibili.com/1729916794?spm_id_from=333.337.0.0\" rel=\"nofollow\"\u003ehttps://space.bilibili.com/1729916794?spm_id_from=333.337.0.0\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e大龄程序员在帝都  \u003ca href=\"https://space.bilibili.com/485594100?spm_id_from=333.337.search-card.all.click\" rel=\"nofollow\"\u003ehttps://space.bilibili.com/485594100?spm_id_from=333.337.search-card.all.click\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e干货满满张哈希  \u003ca href=\"https://space.bilibili.com/31359187?spm_id_from=333.337.0.0\" rel=\"nofollow\"\u003ehttps://space.bilibili.com/31359187?spm_id_from=333.337.0.0\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e青空の霞光  \u003ca href=\"https://space.bilibili.com/37737161/?spm_id_from=333.999.0.0\" rel=\"nofollow\"\u003ehttps://space.bilibili.com/37737161/?spm_id_from=333.999.0.0\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e听涛 YG  \u003ca href=\"https://space.bilibili.com/8724675/?spm_id_from=333.999.0.0\" rel=\"nofollow\"\u003ehttps://space.bilibili.com/8724675/?spm_id_from=333.999.0.0\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e寒食君 \u003ca href=\"https://space.bilibili.com/1578320/video\" rel=\"nofollow\"\u003ehttps://space.bilibili.com/1578320/video\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e经典鸡翅。主要讲面试题 \u003ca href=\"https://space.bilibili.com/386498238/?spm_id_from=333.999.0.0\" rel=\"nofollow\"\u003ehttps://space.bilibili.com/386498238/?spm_id_from=333.999.0.0\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e希望各位大佬不吝赐教\u003c/p\u003e\n",
+      "Author": "yurong3333333333",
+      "PubDate": "2022-11-10T04:55:35Z"
+    },
+    {
+      "Title": "你的手机不是你的手机 - iPhone",
+      "Link": "https://www.v2ex.com/t/894105",
+      "Description": "\u003cp\u003e国行 16.1.1 阉割 Airdrop 一直设置 “所有人” 权限，还有之前的指南针经纬度软件推送阉割，有感\u003c/p\u003e\n\u003cp\u003e虽然说国行阉割了 FaceTime Audio 、某 Emoji ，对于 App 首次打开增加网络权限（这个是否是缺点因人而异），买国行 iPhone 之前还是有心理预期的。\u003c/p\u003e\n\u003cp\u003e不过买了之后再软件二次阉割，这个就挺 emmm...\u003c/p\u003e\n\u003cp\u003e你的手机不是你的手机，之后可能性无限大\u003c/p\u003e\n",
+      "Author": "levineet",
+      "PubDate": "2022-11-10T04:51:26Z"
+    },
+    {
+      "Title": "Win10 LTSC 内存溢出这么严重 - 全球工单系统",
+      "Link": "https://www.v2ex.com/t/894104",
+      "Description": "\u003cp\u003egit push 的时候提示内存不足\u003c/p\u003e\n\u003cp\u003e打开任务管理器就是这样\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2022/11/10/7727952f51522d7f.png\"/\u003e\u003c/p\u003e\n\u003cp\u003eSystem 是因为有个 8G 的内存盘\nVmmen 是 WSL 和 Docker\u003c/p\u003e\n\u003cp\u003e内存容量是 64G ，80% 约 50g ，怎么也看不出 50g 如何分配的\u003c/p\u003e\n",
+      "Author": "ColinZeb",
+      "PubDate": "2022-11-10T04:45:19Z"
+    },
+    {
+      "Title": "🤢 现在都广告真是小刀拉皮燕子.开了眼了 - iPhone",
+      "Link": "https://www.v2ex.com/t/894103",
+      "Description": "\u003cp\u003e抖音 快手之流等\u003c/p\u003e\n\u003cp\u003e之前是 启动页面 轻微正常晃动到手机就跳转 京东淘宝 没法打断\u003c/p\u003e\n\u003cp\u003e现在是视频流里面 轻微正常晃动到手机也跳转\u003c/p\u003e\n\u003cp\u003e可以举报了吧\u003c/p\u003e\n",
+      "Author": "fatelight",
+      "PubDate": "2022-11-10T04:44:18Z"
+    },
+    {
       "Title": "✅双 11 必备！ [85％高佣] ✅淘宝高佣返利机器人,京东唯品会抖音返利 - 推广",
       "Link": "https://www.v2ex.com/t/894102",
       "Description": "\u003cp\u003e今天晚上 就开始 双十一 购物节了，v 友们 应该或多或少的都会买点东西\u003c/p\u003e\n\u003cp\u003e特来推荐一下 我跟小伙伴 开发跟运营的购物返利机器人 跟 公众号 \u003c/p\u003e\n\u003cp\u003eps: 我们 近期还开通了 微信支付商户，这点也跟外面个人搭建的机器人 有很大的区别\u003c/p\u003e\n\u003cp\u003e20 年做到现在，将近两年稳定运行，公司主体，有公众号跟企微机器人🤖️ 绝不跑路！！！\u003c/p\u003e\n\u003cp\u003e税前 85%高佣返利机器人、支持  淘宝、京东、PDD ，唯品会、 抖音 美团外卖 饿了么\u003c/p\u003e\n\u003cp\u003e支持查优惠券，支持购物返利赚佣金，支持邀请提成，2 元起提，提现秒到\u003c/p\u003e\n\u003cp\u003e给 v 友都按 \u003cstrong\u003e85%佣金永久 设置\u003c/strong\u003e ，税前 85%,算下来基本和自己走联盟是一样的。不搞偷偷调比例那一套。\u003c/p\u003e\n\u003cp\u003e同行、店淘，刷 /dan 的请高抬贵手，发现直接拉黑。\u003c/p\u003e\n\u003cp\u003e如果用了我的机器人的，可以加客服，有问题随时问。\u003c/p\u003e\n\u003cp\u003e微信扫码加好友或直接搜索：fsq66689 加好友\u003c/p\u003e\n\u003cp\u003e[加好友后，请发送关键词： \u003cstrong\u003ev 友\u003c/strong\u003e    这样系统会自动设置 85%永久高佣，无需等待即可下单] \u003c/p\u003e\n\u003cp\u003e↓↓↓↓↓↓↓↓↓↓ 不用下载 APP ， 直接微信发商品链接就能使用 ，方便快捷！\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://image.ymxlass.com/20221110122853_WdsZ7L_v2ex.jpeg\"/\u003e\u003c/p\u003e\n\u003cp\u003e这个是 微信支付商户 处理的提现打款图\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://image.ymxlass.com/20221023162721_f157wp_4161666513628_.pic.jpeg\"/\u003e\u003c/p\u003e\n",
