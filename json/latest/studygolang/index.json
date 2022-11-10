@@ -40,7 +40,7 @@
     },
     {
       "Title": "json序列化内存高问题",
-      "Link": "https://studygolang.com/articles/35948#reply0",
+      "Link": "https://studygolang.com/articles/35948#reply1",
       "Description": "\u003cp\u003e最近一个ws服务，出现内存高问题。通过pprof查看了一下是json在序列化时候内存很高。后来我换成了easyjson，也没有解决这个问题，我想是不是我分配对象过多，然后我使用了对象池，问题依旧没有得到解决。这个服务数据量是很大，推送出去的数据大小也不固定，小到几b，大到十几kb，一两Mb的都有。看了一下easyjson源码，底层也是维护了一个缓冲池，会根据分配的不用size给出对应的缓冲池。但是我就没想通为什么内存会这么高。下面是一些高内存图片:\n\u003cimg src=\"https://static.golangjob.cn/221110/84c840b63cc519833a010cba9f987d06.png\" alt=\"image.png\" /\u003e\n这是heap图片\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221110/09489239579c9342a27d0f02333b5e84.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e这个是监控的内存数据，每个一段时间就几百MB的涨。\u003c/p\u003e\n\n\u003cp\u003e问题是，其他类型的ws服务没有这问题，就这个数据量大点的服务有问题。\u003c/p\u003e\n\n\u003cp\u003e有人遇到同样的情况吗？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -161,6 +161,13 @@
       "Title": "《Go题库·6》Go和java比有什么不同?",
       "Link": "https://studygolang.com/topics/15615#reply15",
       "Description": "\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e面试企业\u003c/strong\u003e 虾皮、知乎\t\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch2\u003e答案（溪尾）\u003c/h2\u003e\n\n\u003cp\u003eGo也称为Golang，是一种开源编程语言，Go可以轻松构建可靠，简单和高效的软件。Go是键入的静态编译语言。Go语言提供垃圾收机制，CSP风格的并发性，内存安全性和结构类型。\u003c/p\u003e\n\n\u003cp\u003eJava是一种用于一般用途的计算机编程语言，它是基于类的，并发的和面向对象的。Java专门设计为包含很少的实现依赖项。Java应用程序在JVM（Java虚拟机）上运行。它是当今最著名的编程语言之一。Java是一种用于为多个平台开发软件的编程语言。Java应用程序上的编译代码或字节码可以在大多数操作系统上运行，包括Linux，Mac操作系统和Linux。Java的大部分语法都源自C ++和C语言。\u003c/p\u003e\n\n\u003cp\u003ego语言和java之间的区别\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e函数重载\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eGo上不允许函数重载，必须具有方法和函数的唯一名称；\u003c/p\u003e\n\n\u003cp\u003ejava允许函数重载。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e速度\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003ego的速度比java快\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e多态\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eJava默认允许多态。而Go没有。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e路由配置\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eGo语言使用HTTP协议进行路由配置；\u003c/p\u003e\n\n\u003cp\u003ejava使用Akka.routing.ConsistentHashingRouter和Akka.routing.ScatterGatherFirstCompletedRouter进行路由配置。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e可扩展性\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eGo代码可以自动扩展到多个核心；而，Java并不总是具有足够的可扩展性。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e继承\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eGo语言的继承通过匿名组合完成：基类以Struct的方式定义，子类只需要把基类作为成员放在子类的定义中，支持多继承；\u003c/p\u003e\n\n\u003cp\u003eJava的继承通过extends关键字完成，不支持多继承。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "json序列化内存高问题",
+      "Link": "https://studygolang.com/articles/35948#reply0",
+      "Description": "\u003cp\u003e最近一个ws服务，出现内存高问题。通过pprof查看了一下是json在序列化时候内存很高。后来我换成了easyjson，也没有解决这个问题，我想是不是我分配对象过多，然后我使用了对象池，问题依旧没有得到解决。这个服务数据量是很大，推送出去的数据大小也不固定，小到几b，大到十几kb，一两Mb的都有。看了一下easyjson源码，底层也是维护了一个缓冲池，会根据分配的不用size给出对应的缓冲池。但是我就没想通为什么内存会这么高。下面是一些高内存图片:\n\u003cimg src=\"https://static.golangjob.cn/221110/84c840b63cc519833a010cba9f987d06.png\" alt=\"image.png\" /\u003e\n这是heap图片\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221110/09489239579c9342a27d0f02333b5e84.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e这个是监控的内存数据，每个一段时间就几百MB的涨。\u003c/p\u003e\n\n\u003cp\u003e问题是，其他类型的ws服务没有这问题，就这个数据量大点的服务有问题。\u003c/p\u003e\n\n\u003cp\u003e有人遇到同样的情况吗？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
