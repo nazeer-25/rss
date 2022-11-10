@@ -4,6 +4,55 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>12 代酷睿环境下，将 hyper-v 监控程序计划程序类型修改为 classic 会导致 Vmware 虚拟机无法屏蔽小核运行 - 分享发现</title>
+      <link>https://www.v2ex.com/t/894133</link>
+      <description>[ 1/背景：折腾 Hyper-v 的 CPU 控制] &lt;br /&gt;&lt;br /&gt;为了在 Hyper-v 体验处理器资源控制（如限制单个虚拟机占宿主机系统资源的百分比等等），需要将 hypervisorschedulertype 从默认的 root 调整为 classic 或 core ，否则 Hyper-v 会提示“Hyper-V 未配置为启用处理器资源控制。”原因如下：&lt;br /&gt;&lt;br /&gt;“启用虚拟机监控程序根计划程序时，不支持 Hyper-V 提供的虚拟机处理器资源控制，因为根操作系统的计划程序逻辑正在全局管理主机资源，并且不知道 VM 的特定配置设置。 每个 VM 的 Hyper-V 处理器资源控制（例如上限、权重和保留）仅适用于虚拟机监控程序直接控制 VP 计划（如经典和核心计划程序类型）。”&lt;br /&gt;&lt;br /&gt;（ &lt;a target=&#34;_blank&#34; href=&#34;https://learn.microsoft.com/zh-cn/windows-server/virtualization/hyper-v/manage/manage-hyper-v-scheduler-types&#34; rel=&#34;nofollow noopener&#34;&gt;https://learn.microsoft.com/zh-cn/windows-server/virtualization/hyper-v/manage/manage-hyper-v-scheduler-types&lt;/a&gt; ）&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt; [ 2/问题：Vmware 的 CPU 调度失控] &lt;br /&gt;&lt;br /&gt;在正常情况下，Vmware WorkStation 最近的几个版本已经实现和 Hyper-V 并存。但在 12 代酷睿兼容性方面，Vmware/微软或者 intel 历时一年依旧没有解决 Vmware 负载随机性跑在小核被大核围观的问题。目前可以通过设置 vmware-vmx.exe 的 CPU 相关性或通过 vmx 配置文件解决。&lt;br /&gt;&lt;br /&gt;为体验 Hyper-v 的处理器资源限制问题，根据官方文档并参考相关教程，在终端 /Powershell （管理员权限）下运行指令：&lt;br /&gt;bcdedit /set hypervisorschedulertype Classic 。&lt;br /&gt;重启后发现，与 Hyper-V 同时并存的 Vmware 性能出现问题。&lt;br /&gt;&lt;br /&gt;表现为，在 12 代酷睿 Win11 环境下，为 Vmware 虚拟机设置 CPU 相关性无任何效果，Vmware 几乎所有负载跑在了小核，任务管理器修改 /ProcessLasso/修改电源计划类型 /在 vmx 配置文件中屏蔽小核……所有传统的调度控制方法均无效。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt; [ 3/解决：放弃 Hyper-v 自带的 CPU 资源控制] &lt;br /&gt;&lt;br /&gt;第一时间想到肯定是上述 Hyper-V 虚拟机监控程序计划程序类型的调整导致问题产生。&lt;br /&gt;重新回到终端 /Powershell （管理员权限）下运行指令：bcdedit /set hypervisorschedulertype Root&lt;br /&gt;重启后发现，Vmware 的 CPU 调度恢复正常，所有负载均跑在大核上。&lt;br /&gt;实测证明，12 代酷睿不适合使用 Hyper-v 的 CPU 资源控制功能。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt; [ 4/附言：vmware 兼容性遗留问题] &lt;br /&gt;在 Win11+12 代酷睿环境下，Hyper-v 与 Vmware 共存时，使用任何方法控制 vmware 虚拟机的 CPU 相关性，都有概率导致 vmware 虚拟机无法启动（一般为初次启动时 /或者在已经运行 2 个 vmware 虚拟机后开启第 3 个），提示“无法打开…….vmx”。此时无需按照网上通说教程从主板完全屏蔽小核，或者放弃屏蔽小核，只需要在 Vmware WorkStation 虚拟机界面疯狂鼠标左键点击“开启此虚拟机”。&lt;br /&gt;&lt;br /&gt;实测，设置 Vmware 的相关性只需要调整 vmware-vmx.exe 和 mksSandbox.exe （这个是否需要存疑，但我个人习惯时同时设置），但如果手抖将 vmware.exe 也设置了 CPU 相关性，会导致 vmware 虚拟机 100%无法开启（即上述“无法打开…….vmx”提示），此时疯狂点开机也无济于事。</description>
+      <author>wangyuyang3</author>
+      <pubDate>10 Nov 2022 06:21:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有开源的 OSS 存储服务 - 问与答</title>
+      <link>https://www.v2ex.com/t/894131</link>
+      <description>&lt;p&gt;满足几个要求：&lt;/p&gt;&#xA;&lt;p&gt;1 可以支持本地存储以及 S3 、阿里 OSS 等第三方存储服务。&lt;/p&gt;&#xA;&lt;p&gt;2 对外提供类似 S3 或者阿里 OSS 的 API ，比如 bucket 这种概念，主要是想让客户端直接用现成的第三方 SDK 进行上传。&lt;/p&gt;&#xA;&lt;p&gt;3 尽可能轻量。&lt;/p&gt;&#xA;&lt;p&gt;找来一圈没找到。&lt;/p&gt;&#xA;</description>
+      <author>wangxiaoaer</author>
+      <pubDate>10 Nov 2022 06:19:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>转让或合租绿云机器 - VPS</title>
+      <link>https://www.v2ex.com/t/894130</link>
+      <description>&lt;p&gt;转让或合租绿云机器&#xA;目前绿云机器 StoragePromoJP ，KVM Storage JP ，1C 1G 内存（还有 1G SWAP ，这样算的话就是 2G?），200GB HDD ，循環出帳金額&#xA;$28.80 USD 。目前大硬盘我没需求了，考虑合租（个人只自建 rss ）或者转让。如果转让我也不知道行情，大家可以讨论一下，都好说。&lt;/p&gt;&#xA;</description>
+      <author>littlerainer</author>
+      <pubDate>10 Nov 2022 06:17:53 +0000</pubDate>
+    </item>
+    <item>
+      <title>有哪位大兄弟有靠谱、源头加抖音粉丝的资源吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/894129</link>
+      <description>&lt;p&gt;有哪位大兄弟有靠谱（比较稳定，不跑路）、源头（没有中间商赚差价）加抖音粉丝 /赞 /评论 /分享的资源吗&lt;/p&gt;&#xA;</description>
+      <author>ucyo</author>
+      <pubDate>10 Nov 2022 06:17:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>周六福足金戒指钢印只刻了足金没有 999 - 问与答</title>
+      <link>https://www.v2ex.com/t/894128</link>
+      <description>&lt;p&gt;请教一下，这个正常吗？&#xA;说是 5D 工艺，最新的工艺，这种都是一口价的戒指。&#xA;周六福，不是六福珠宝哈&lt;/p&gt;&#xA;</description>
+      <author>9420JackT</author>
+      <pubDate>10 Nov 2022 06:17:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>tailwindcss 和组件库怎么结合？ - 前端开发</title>
+      <link>https://www.v2ex.com/t/894127</link>
+      <description>&lt;p&gt;很多 tailwind 组件库都是直接提供 html 片段，不做任何封装，但他们提供的能力都很弱，感觉现在写起来都退回到原生年代了。&lt;/p&gt;&#xA;&lt;p&gt;最好的应该是 headless/ui ，这种理念我觉得很好，但没找到其他类似的组件库。&lt;/p&gt;&#xA;&lt;p&gt;平时常用的 element-plus dom 封装地比较深，我不知道该怎么跟 tailwind 结合，有什么好的最佳实践吗？&lt;/p&gt;&#xA;</description>
+      <author>vevlins</author>
+      <pubDate>10 Nov 2022 06:16:58 +0000</pubDate>
+    </item>
+    <item>
+      <title>成都联通 wireguard udp 被 ban 了 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/894126</link>
+      <description>联通家宽有公网 ip ，docker 跑 wg server 方便远程回家，开大会前比较稳，某天开始突然无法连接，到现在会议过了还没恢复，换端口也不行，有遇到的么？&lt;br /&gt;&lt;br /&gt;测试端口是通的&lt;br /&gt;&lt;br /&gt;nc -v -u &lt;a target=&#34;_blank&#34; href=&#34;http://home.example.com&#34; rel=&#34;nofollow noopener&#34;&gt;home.example.com&lt;/a&gt; 38404&lt;br /&gt;Connection to &lt;a target=&#34;_blank&#34; href=&#34;http://home.example.com&#34; rel=&#34;nofollow noopener&#34;&gt;home.example.com&lt;/a&gt; (&lt;a target=&#34;_blank&#34; href=&#34;http://xxx.xxx.xxx.xxx&#34; rel=&#34;nofollow noopener&#34;&gt;xxx.xxx.xxx.xxx&lt;/a&gt;) 38404 port [udp/*] succeeded!&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;wg 客户端就是连不上，包括手机、电脑。wg 手机版只能原生 udp 通讯，没法 udp2raw 套一层，如果用公网 vps + frp 转发又会降速，很恶心。</description>
+      <author>photon006</author>
+      <pubDate>10 Nov 2022 06:16:30 +0000</pubDate>
+    </item>
+    <item>
       <title>PVE 无 7.2 法连接 shell 和 console - Linux</title>
       <link>https://www.v2ex.com/t/894125</link>
       <description>&lt;p&gt;烦请 V2 友友指点一下下&lt;/p&gt;&#xA;&lt;p&gt;点击的时候弹出报错显示：connection failed(Error 500: Timeout while waiting for port &#39;5901&#39; to get ready!)&lt;/p&gt;&#xA;&lt;p&gt;日志错误描述：&#xA;failed waiting for client: Cannot assign requested address (os error 99)&#xA;TASK ERROR: command &#39;/usr/bin/termproxy 5901 --path /vms/100 --perm VM.Console -- /usr/bin/dtach -A /var/run/dtach/vzctlconsole100 -r winch -z lxc-console -n 100 -e -1&#39; failed: exit code 1&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;上述问题无法 google 到确切办法，一般就是叫删掉证书重启网络服务，换成 firefox ，装 java ，开端口。以上方法均有尝试，无解。ps：原来显示要 5900 ，我已经用 nc 开了 5900 ，现在就报 5901……日志描述里面的错误小白不懂是啥意思，也不知道怎么修。小白我已黔驴技穷，大佬有空还烦劳您指点一下我。&lt;/p&gt;&#xA;</description>
