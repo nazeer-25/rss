@@ -56,11 +56,6 @@
       <link>https://studygolang.com/p/1133#reply0</link>
     </item>
     <item>
-      <title>如何编写可测试的go代码？</title>
-      <link>https://studygolang.com/topics/15959#reply0</link>
-      <description>&lt;p&gt;最开始我非常摒弃 Java 那种什么都要写接口的编码风格，但是后来发现如果不写接口，注入依赖的话 代码的可测性就很差，这个有其他办法实现么？如果直接面向实现的话，在写单端测试的时候，是不是只能通过monkey这样的框架替换呢？&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>求教一个用户徽章数据表设计问题</title>
       <link>https://studygolang.com/topics/15960#reply5</link>
       <description>&lt;p&gt;用户表&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type User struct {&#xA;&#x9;Id        int64&#xA;&#x9;Username  string&#xA;&#x9;Password  string&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;徽章表&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Badges struct {&#xA;&#xA;&#x9;Name        string     //徽章名称&#xA;&#x9;Icon        string    //徽章图标&#xA;&#x9;Condition   string    //徽章条件&#xA;&#x9;IsAuto      uint8     //是否自动发放:1-是/0-否&#xA;&#x9;IsShow      uint8     //是否显示:1-是/0-否&#xA;&#x9;IsSystem    uint8     //是否系统徽章:1-是/0-否&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;我的想法是 用户可以拥有多个徽章，但是只能佩戴一个，在首页就显示佩戴的那个徽章，而在个人主页就列出出用户拥有的所有徽章作为选择，请问我这个数据表要怎么设计呢？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;萌新的问题可能有些傻，大佬们不要笑话哦&lt;/p&gt;&#xA;</description>
@@ -78,6 +73,11 @@
       <title>请问 go 获取 post 请求返回体的 字符类型为[]uint8, 但是是 xml 的格式，怎么转换成 json</title>
       <link>https://studygolang.com/topics/15958#reply2</link>
       <description>&lt;p&gt;body, err := ioutil.ReadAll(res.Body)&lt;br&gt;&#xA;fmt.Println(&amp;ldquo;post send success&amp;rdquo;)&lt;br&gt;&#xA;fmt.Printf(&amp;ldquo;type is %T\n&amp;rdquo;, body)&lt;br&gt;&#xA;fmt.Printf(&amp;ldquo;body is %#v\n&amp;rdquo;, body)&lt;br&gt;&#xA;结果：&lt;br&gt;&#xA;post send success&lt;br&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;type is []uint8&lt;br&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&amp;lt;?xml version=&amp;ldquo;1.0&amp;rdquo; encoding=&amp;ldquo;utf-8&amp;rdquo; ?&amp;gt;&lt;returnsms&gt;&lt;br&gt;&#xA;&lt;errorstatus&gt;&lt;br&gt;&#xA;&lt;error&gt;2&lt;/error&gt;&lt;br&gt;&#xA;&lt;remark&gt;sign 参数错误&lt;/remark&gt;&lt;br&gt;&#xA;&lt;/errorstatus&gt;&lt;br&gt;&#xA;&lt;/returnsms&gt;&lt;br&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;body is []byte{0x3c, 0x3f, 0x78, 0x6d, 0x6c, 0x20, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x3d, 0x22, 0x31, 0x2e, 0x30, 0x22, 0x20, 0x65, 0x6e, 0x63, 0x6f, 0x64, 0x69, 0x6e, 0x67, 0x3d, 0x22, 0x75, 0x74, 0x66, 0x2d, 0x38, 0x22, 0x20, 0x3f, 0x&#xA;3e, 0x3c, 0x72, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x73, 0x6d, 0x73, 0x3e, 0xa, 0x20, 0x3c, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x3e, 0xa, 0x20, 0x3c, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x3e, 0x32, 0x3c, 0x2f, 0x65, 0x72, 0x7&#xA;2, 0x6f, 0x72, 0x3e, 0xa, 0x20, 0x3c, 0x72, 0x65, 0x6d, 0x61, 0x72, 0x6b, 0x3e, 0x73, 0x69, 0x67, 0x6e, 0xe5, 0x8f, 0x82, 0xe6, 0x95, 0xb0, 0xe9, 0x94, 0x99, 0xe8, 0xaf, 0xaf, 0x3c, 0x2f, 0x72, 0x65, 0x6d, 0x61, 0x72, 0x6b, 0x3e, 0xa, 0x20, 0x3c&#xA;, 0x2f, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x3e, 0xa, 0x20, 0x3c, 0x2f, 0x72, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x73, 0x6d, 0x73, 0x3e, 0xa, 0x20}&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>如何编写可测试的go代码？</title>
+      <link>https://studygolang.com/topics/15959#reply0</link>
+      <description>&lt;p&gt;最开始我非常摒弃 Java 那种什么都要写接口的编码风格，但是后来发现如果不写接口，注入依赖的话 代码的可测性就很差，这个有其他办法实现么？如果直接面向实现的话，在写单端测试的时候，是不是只能通过monkey这样的框架替换呢？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>json序列化内存高问题</title>
