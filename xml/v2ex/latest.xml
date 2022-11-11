@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>shell 脚本中调用 adb 出现的奇怪显现象 - 问与答</title>
+      <link>https://www.v2ex.com/t/894571</link>
+      <description>&lt;p&gt;注释掉 adb 那行，一切正常；&lt;/p&gt;&#xA;&lt;p&gt;有 adb 那行，外层循环只执行一次。&lt;/p&gt;&#xA;&lt;p&gt;排查离 bug 一整天，最终确定如下最小复现代码。实际业务是 adb 后面还有别的操作，内层循环检查状态。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;➜  /tmp cat tt.sh&#xA;while read -r current&#xA;do&#xA;    # adb shell input tap 1 2&#xA;    n=3&#xA;    while [ $n -gt 0 ]&#xA;    do&#xA;        echo $current $n&#xA;        n=$((n-1))&#xA;        [ $n -eq 1 ] &amp;amp;&amp;amp; break&#xA;    done&#xA;    echo $current done&#xA;done &amp;lt; &amp;lt;(echo aa bb cc | tr &#39; &#39; &#39;\n&#39;)&#xA;➜  /tmp bash tt.sh&#xA;aa 3&#xA;aa 2&#xA;aa done&#xA;bb 3&#xA;bb 2&#xA;bb done&#xA;cc 3&#xA;cc 2&#xA;cc done&#xA;➜  /tmp cat tt.sh&#xA;while read -r current&#xA;do&#xA;    adb shell input tap 1 2&#xA;    n=3&#xA;    while [ $n -gt 0 ]&#xA;    do&#xA;        echo $current $n&#xA;        n=$((n-1))&#xA;        [ $n -eq 1 ] &amp;amp;&amp;amp; break&#xA;    done&#xA;    echo $current done&#xA;done &amp;lt; &amp;lt;(echo aa bb cc | tr &#39; &#39; &#39;\n&#39;)&#xA;➜  /tmp bash tt.sh&#xA;aa 3&#xA;aa 2&#xA;aa done&#xA;➜  /tmp&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>hicdn</author>
+      <pubDate>11 Nov 2022 11:16:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>出以前的搬瓦工套餐, 有需要的嘛 - VPS</title>
+      <link>https://www.v2ex.com/t/894570</link>
+      <description>&lt;p&gt;刚好要到期续费了&#xA;SPECIAL 10G KVM PROMO V3 - LOS ANGELES - CN2&#xA;Annually: $28.19&#xA;联系绿色:d2VuczA3&lt;/p&gt;&#xA;</description>
+      <author>wens07</author>
+      <pubDate>11 Nov 2022 11:10:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>发现 macOS 端的 Safari 可以识别和选中图片、视频里的文字 - Apple</title>
+      <link>https://www.v2ex.com/t/894569</link>
+      <description>&lt;p&gt;可以直接选中图片和视频中的文字复制粘贴，希望其他浏览器尽快跟进&lt;/p&gt;&#xA;</description>
+      <author>Rhianu</author>
+      <pubDate>11 Nov 2022 11:08:51 +0000</pubDate>
+    </item>
+    <item>
       <title>传说中的涩图生成器 - Python</title>
       <link>https://www.v2ex.com/t/894568</link>
       <description>&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;结果能不能生成呢&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;我用 &lt;a href=&#34;https://huggingface.co/blog/stable_diffusion&#34; rel=&#34;nofollow&#34;&gt;https://huggingface.co/blog/stable_diffusion&lt;/a&gt; 这个搭了一个，大家来试试吧&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;使用说明见 &lt;a href=&#34;https://blog.shangao.tech/posts/try-diffusion/&#34; rel=&#34;nofollow&#34;&gt;https://blog.shangao.tech/posts/try-diffusion/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;由于服务器资源有限，请大家温柔一点&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;多点下右上角，可以升级资源哦&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>

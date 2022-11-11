@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "shell 脚本中调用 adb 出现的奇怪显现象 - 问与答",
+      "Link": "https://www.v2ex.com/t/894571",
+      "Description": "\u003cp\u003e注释掉 adb 那行，一切正常；\u003c/p\u003e\n\u003cp\u003e有 adb 那行，外层循环只执行一次。\u003c/p\u003e\n\u003cp\u003e排查离 bug 一整天，最终确定如下最小复现代码。实际业务是 adb 后面还有别的操作，内层循环检查状态。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e➜  /tmp cat tt.sh\nwhile read -r current\ndo\n    # adb shell input tap 1 2\n    n=3\n    while [ $n -gt 0 ]\n    do\n        echo $current $n\n        n=$((n-1))\n        [ $n -eq 1 ] \u0026amp;\u0026amp; break\n    done\n    echo $current done\ndone \u0026lt; \u0026lt;(echo aa bb cc | tr ' ' '\\n')\n➜  /tmp bash tt.sh\naa 3\naa 2\naa done\nbb 3\nbb 2\nbb done\ncc 3\ncc 2\ncc done\n➜  /tmp cat tt.sh\nwhile read -r current\ndo\n    adb shell input tap 1 2\n    n=3\n    while [ $n -gt 0 ]\n    do\n        echo $current $n\n        n=$((n-1))\n        [ $n -eq 1 ] \u0026amp;\u0026amp; break\n    done\n    echo $current done\ndone \u0026lt; \u0026lt;(echo aa bb cc | tr ' ' '\\n')\n➜  /tmp bash tt.sh\naa 3\naa 2\naa done\n➜  /tmp\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "hicdn",
+      "PubDate": "2022-11-11T11:16:13Z"
+    },
+    {
+      "Title": "出以前的搬瓦工套餐, 有需要的嘛 - VPS",
+      "Link": "https://www.v2ex.com/t/894570",
+      "Description": "\u003cp\u003e刚好要到期续费了\nSPECIAL 10G KVM PROMO V3 - LOS ANGELES - CN2\nAnnually: $28.19\n联系绿色:d2VuczA3\u003c/p\u003e\n",
+      "Author": "wens07",
+      "PubDate": "2022-11-11T11:10:40Z"
+    },
+    {
+      "Title": "发现 macOS 端的 Safari 可以识别和选中图片、视频里的文字 - Apple",
+      "Link": "https://www.v2ex.com/t/894569",
+      "Description": "\u003cp\u003e可以直接选中图片和视频中的文字复制粘贴，希望其他浏览器尽快跟进\u003c/p\u003e\n",
+      "Author": "Rhianu",
+      "PubDate": "2022-11-11T11:08:51Z"
+    },
+    {
       "Title": "传说中的涩图生成器 - Python",
       "Link": "https://www.v2ex.com/t/894568",
       "Description": "\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e结果能不能生成呢\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e我用 \u003ca href=\"https://huggingface.co/blog/stable_diffusion\" rel=\"nofollow\"\u003ehttps://huggingface.co/blog/stable_diffusion\u003c/a\u003e 这个搭了一个，大家来试试吧\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e使用说明见 \u003ca href=\"https://blog.shangao.tech/posts/try-diffusion/\" rel=\"nofollow\"\u003ehttps://blog.shangao.tech/posts/try-diffusion/\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e由于服务器资源有限，请大家温柔一点\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e多点下右上角，可以升级资源哦\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n",
