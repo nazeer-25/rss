@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "适用于掌机、平板等的双系统/多系统快捷切换方法 - 操作系统",
+      "Link": "https://www.v2ex.com/t/895112",
+      "Description": "\u003cblockquote\u003e\n\u003cp\u003e众所周知，GRUB2 在内的众多 UEFI 引导加载器都不支持触摸屏、摇杆等设备，唯一支持触摸屏的 WBM 却又不能引导非 Windows 。而且，大多数该类设备的 BIOS 也不支持触摸屏、摇杆等进行操作。这也就意味着，此类设备想要切换系统，大多需要外接 USB 键盘+USB HUB 。相较于此类便携设备，为了切系统的外设比设备本体还要大，颇为不便。\n由于 X86 掌机的流行，我也为此所困，故特此制作了在系统内的快捷“重启换系统”。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e重启换系统分 Linux 和 Windows 侧，核心代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eWin2Lin:\nbcdedit /set {fwbootmgr} DEFAULT {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} | shutdown -r -t 0\nLin2Win:\nefibootmgr | grep \"Windows Boot Manager\" | tail -n 1 | head -c 8 | tail -c 4 | xargs sudo efibootmgr -n ; sleep 1s ; sudo systemctl reboot\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e注意事项：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eWin2Lin 中的\u003ccode\u003e{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\u003c/code\u003e需要替换为您 Linux 系统启动器的\u003ccode\u003e固件应用程序\u003c/code\u003e的\u003ccode\u003e标识符\u003c/code\u003e。标识符需要使用管理员权限运行命令\u003ccode\u003ebcdedit /enum firmware\u003c/code\u003e获取：\u003c/li\u003e\n\u003c/ol\u003e\n\u003cpre\u003e\u003ccode\u003e……\n\n固件应用程序(101fffff)\n-------------------------------\n标识符                  {00001111-2222-3333-cccc-ddddeeeeffff}\ndevice                  partition=X:\npath                    \\EFI\\Boot\\Bootx64.efi\ndescription             Linux\n\n……\n\u003c/code\u003e\u003c/pre\u003e\n\u003col\u003e\n\u003cli\u003eLin2Win 只会自动启动第一个名为“Windows Boot Manager”的固件应用程序。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e为便于使用，我也写了.bat\u0026amp;.sh 的安装脚本，Win2Lin 的快捷方式中的标识符同样需要修改。\n\u003ca href=\"https://huangsijun17.lanzouw.com/ipY9W0fwe3fa\" rel=\"nofollow\"\u003ehttps://huangsijun17.lanzouw.com/ipY9W0fwe3fa\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "huangsijun17",
+      "PubDate": "2022-11-14T06:07:34Z"
+    },
+    {
       "Title": "有没有熟悉腾讯 tars 框架和 probuffer 数据格式的，有个远程私活 - 酷工作",
       "Link": "https://www.v2ex.com/t/895110",
       "Description": "\u003cp\u003e主要是做交通检测器接入、实时交通拥堵接、车联网车载设备等等。\n预算高。\n详情加 v 联系： \u003ca href=\"https://i.imgtg.com/2022/10/31/Rxh2p.jpg\" rel=\"nofollow\"\u003ehttps://i.imgtg.com/2022/10/31/Rxh2p.jpg\u003c/a\u003e\n备注 tars\u003c/p\u003e\n",
