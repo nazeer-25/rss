@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>无聊统计了一下今年的 Spotify 听歌情况 - Spotify</title>
+      <link>https://www.v2ex.com/t/895369</link>
+      <description>抖音 DJ 版是真的上头（捂脸&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/4JL8cNo.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/4JL8cNo.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;</description>
+      <author>tediorelee</author>
+      <pubDate>15 Nov 2022 04:24:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>大家的 wifi6 局域网网速能达到多少? 400Mbits/s 还有哪些优化的注意事项 - 问与答</title>
+      <link>https://www.v2ex.com/t/895367</link>
+      <description>&lt;p&gt;我是 MacBook pro(2021 M1) + iphone 13 + 华硕 灵耀 Pro AX11000M 三频无线路由器&lt;br/&gt;&#xA;用 iperf3 测试, 电脑和手机局域网传输速度只有 400Mbits/s, 才 50M/s 呀&lt;br/&gt;&#xA;测试的时候, 笔记本和手机都是紧挨着路由器, 如果换个房间, 就只有 200Mbit/s 了&lt;br/&gt;&#xA;我现在对这个速度不满意, 但是不清楚这是不是 wifi6 的实际极限了.&lt;br/&gt;&#xA;如果还能优化, 有哪些我需要注意的?&lt;/p&gt;&#xA;</description>
+      <author>DinoStray</author>
+      <pubDate>15 Nov 2022 04:20:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于 nodejs 对数据库操作产生重复数据的问题(幂等性) - 程序员</title>
+      <link>https://www.v2ex.com/t/895366</link>
+      <description>&lt;p&gt;网上查了一些，但那些文章写的云里雾里(可能是我搜索的关键字不对吧？)&lt;/p&gt;&#xA;&lt;p&gt;想问问各位大佬是如何做的 （ nodejs+mongodb ）&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;功能计数器&lt;/strong&gt;: 每有一个请求访问网站就会+1 ，并保存到数据库中(每个页面有自己的计数器，也就是 pv 统计)&lt;/p&gt;&#xA;&lt;p&gt;伪代码:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// 假设请求服务器的时候 nodejs 会调用这个方法&#xA;// id 为页面的唯一表示&#xA;function counter(id){&#xA;  // 如果数据库中没有数据则插入、否则修改并+1&#xA;  const result = db.select(id)&#xA;  if(result){&#xA;    result.pv++&#xA;    db.update(id, { pv: result.pv })&#xA;    return result&#xA;  }&#xA;  db.insert(id, { pv: 1 })&#xA;  return { pv:1 }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;strong&gt;问题 1&lt;/strong&gt;: 假设一开始数据库中并无某个页面数据，这时突然来了两个(以上)请求(id 相同)，那么当调用 &lt;code&gt;counter()&lt;/code&gt; 时会先查询数据库中是否有数据，此时第一个请求开始 &lt;code&gt;select&lt;/code&gt; 发现数据库中并无数据，但还没来得及 &lt;code&gt;insert&lt;/code&gt; 第二个请求就开始了 &lt;code&gt;select&lt;/code&gt; ，此时第二个请求也发现数据库并无数据，最后就会执行两个插入操作导致数据重复&lt;/p&gt;&#xA;&lt;p&gt;实际结果:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;[&#xA;  {_id: 1, id: &#34;A&#34;, pv: 1}, &#xA;  {_id: 2, id: &#34;A&#34;, pv: 1}&#xA;]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;期望结果:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;[&#xA;  {_id: 1, id: &#34;A&#34;, pv: 2}&#xA;]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;strong&gt;问题 2&lt;/strong&gt;: 假设数据库中已有一条数据 &lt;code&gt;[{_id: 1, id: &#34;A&#34;, pv: 1}]&lt;/code&gt;，突然来了 3 个(以上)请求，3 个请求都会去查询数据库，得到的结果全部相同 pv 都是 1 ，这 3 个请求都会执行 &lt;code&gt;update&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;实际结果:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;[&#xA;  {_id: 1, id: &#34;A&#34;, pv: 2}&#xA;]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;期望结果:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;[&#xA;  {_id: 1, id: &#34;A&#34;, pv: 4}&#xA;]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>lete</author>
+      <pubDate>15 Nov 2022 04:16:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>疑似所有套了 cf 的网站都无法访问，怎么解决 pt 的问题呢？ - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/895365</link>
+      <description>&lt;p&gt;这几天 pt 突然开始没有任何连接了，排查了一下，似乎连 cloudflare 的主站都在无法直连了&lt;br/&gt;&#xA;用 curl -v ，可以看到所有 IP 都不可用&#xA;网络是武汉电信&lt;br/&gt;&#xA;用的机场会封禁 pt ，检测到 announce 关键词会触发审计。尝试让 pt 的 tracker 连接走代理，之后就触发了审计规则导致连接被阻断&lt;/p&gt;&#xA;</description>
+      <author>systemcall</author>
+      <pubDate>15 Nov 2022 04:15:14 +0000</pubDate>
+    </item>
+    <item>
       <title>有哪些支持私有化部署的文档服务 - 程序员</title>
       <link>https://www.v2ex.com/t/895364</link>
       <description>&lt;p&gt;公司在搭建内部的文档系统，在考虑自己搭建一套，数据需要放在自己的服务器上。请问有哪些供应商可以提供这个服务。&lt;/p&gt;&#xA;</description>
