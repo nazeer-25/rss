@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "minio 登陆迷之报错 - 程序员",
+      "Link": "https://www.v2ex.com/t/895451",
+      "Description": "\u003cp\u003e这是我的 minio docker-compose.ymal \u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yaml\"\u003eversion: '3'\n\nservices:\n  server:\n    image: minio/minio:RELEASE.2022-08-25T07-17-05Z\n    command: server --console-address \":9001\" /data\n    environment:\n      MINIO_ROOT_USER: miniocloud\n      MINIO_ROOT_PASSWORD: SZdqALPJwarkDy9\n      MINIO_DOMAIN: minio.dnsl.in\n      MINIO_BROWSER_REDIRECT_URL: https://xxx.yyy.dnsl.in\n      MINIO_SERVER_URL: https://yyy.dnsl.in\n    healthcheck:\n      test: [\"CMD\", \"curl\", \"-f\", \"https://minio.dnsl.in/minio/health/live\"]\n      interval: 30s\n      timeout: 20s\n      retries: 3\n    volumes:\n      - /home/soft/minio/data:/data\n      - /home/soft/minio/config:/root/.minio \n    ports:\n      - \"9000:9000\"\n      - \"9001:9001\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e外面分别用 nginx 反代 9000 和 9001 然后挂上 Https 证书\u003c/p\u003e\n\u003cp\u003e但是 在登陆的时候\u003c/p\u003e\n\u003cp\u003e会返回\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\"code\":401,\"detailedMessage\":\"invalid Login\",\"message\":\"invalid Login\"}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e密码是按照我配置的进行登陆的 而且我前天还登陆过 只是昨天更换了 SSL 证书 但是这个应该和 SSL 证书没啥关系吧，毕竟我也没配置 SSL 证书 这是反代理 挂的\u003c/p\u003e\n\u003cp\u003e有经验的老哥帮忙看看是不是 yaml 或者哪里的做法有问题\u003c/p\u003e\n",
+      "Author": "blankmiss",
+      "PubDate": "2022-11-15T08:58:26Z"
+    },
+    {
       "Title": "各位 V 友，如何下载阿里云盘相册 - NAS",
       "Link": "https://www.v2ex.com/t/895450",
       "Description": "\u003cp\u003e如题。\n如何批量下载阿里云盘中的相册到本地 Nas 或本地磁盘上，暂时没找到办法。\u003c/p\u003e\n",
