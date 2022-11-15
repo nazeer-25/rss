@@ -22,6 +22,11 @@
       <description>&lt;p&gt;大家好啊,世界您好啊，请多关照哈。。。。。。。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>GinAdmin 更新</title>
+      <link>https://studygolang.com/topics/15964#reply0</link>
+      <description>&lt;p&gt;github地址：&lt;a href=&#34;https://github.com/gphper/ginadmin&#34;&gt;https://github.com/gphper/ginadmin&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;增加对数据源支持&lt;/li&gt;&#xA;&lt;li&gt;替换成yaml配置文件&lt;/li&gt;&#xA;&lt;li&gt;添加air热更新配置文件&lt;/li&gt;&#xA;&lt;li&gt;优化路由配置&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+    </item>
+    <item>
       <title>【公告】寻找社区日常运营、功能开发、维护 自愿者</title>
       <link>https://studygolang.com/topics/4092#reply259</link>
       <description>&lt;p&gt;本站 2013 年上线以来，得到国内广大 gopher 们的支持，也让我有动力一直开发、维护着。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;随着 go 越来越流行，学习 go 的人也越来越多，本社区用户量也越来越大，而我个人的精力有限。为了给社区用户提供更好的服务，希望有自愿者加入社区，一起维护、运营本站。招募的自愿者包括：&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;日常网站运营 —— 比如晨读文章推荐、周推荐等；&lt;strong&gt;特别欢迎在校大学生；&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;功能开发、维护 —— 参与开发本站功能；板块维护、管理者等；&lt;/li&gt;&#xA;&lt;li&gt;活动组织、宣传者 —— 组织社区用户参与互动，和外界联系拉赞助等；&lt;/li&gt;&#xA;&lt;li&gt;翻译 —— Go 相关教程、文章、资讯等的翻译；&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;其他你想到的，也可以和我沟通~ 根据情况，会提供奖励~&lt;/p&gt;&#xA;&#xA;&lt;p&gt;项目开源的，参与开发，可以直接 fork + PR，参与其他的可以加我微信 gopherstudio 联系。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;项目地址：&lt;a href=&#34;https://github.com/studygolang/studygolang&#34;&gt;https://github.com/studygolang/studygolang&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.studygolang.com/static/img/gopherstudio2.png?imageView2/2/w/154&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&#xA;</description>
@@ -70,11 +75,6 @@
       <title>Goravel 让微服务间通讯如此简单，省出来的时间想干点啥干点啥吧</title>
       <link>https://studygolang.com/articles/35957#reply0</link>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/goravel/goravel&#34; title=&#34;Goravel&#34;&gt;Goravel&lt;/a&gt;  升级 v1.4，使微服务间请求更加简单一体化。No bb, show the code.&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Goravel 是一个功能完备、具有良好扩展能力的 Golang Web 应用程序框架。风格与 Laravel 保持一致，让 PHPer 不用学习新的框架，也可以愉快的玩转 Golang！&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;h2&gt;服务端&lt;/h2&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;p&gt;定义接口&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;func (r *UserController) GetUser(ctx context.Context, req *grpcuser.UserRequest) (*grpcuser.UserResponse, error) {&#xA;&#x9;return &amp;amp;grpcuser.UserResponse{Name: &amp;quot;Goravel&amp;quot;}, nil&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;运行服务&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;facades.Grpc.Run(facades.Config.GetString(&amp;quot;grpc.host&amp;quot;))&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;h2&gt;客户端&lt;/h2&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;p&gt;配置服务&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;facades.Config.Add(&amp;quot;grpc&amp;quot;, map[string]interface{}{&#xA;&#x9;&amp;quot;clients&amp;quot;: map[string]any{&#xA;&#x9;&#x9;&amp;quot;user&amp;quot;: map[string]any{&#xA;&#x9;&#x9;&#x9;&amp;quot;host&amp;quot;:         config.Env(&amp;quot;GRPC_USER_HOST&amp;quot;, &amp;quot;&amp;quot;),&#xA;&#x9;&#x9;&#x9;&amp;quot;interceptors&amp;quot;: []string{&amp;quot;trace&amp;quot;},&#xA;&#x9;&#x9;},&#xA;&#x9;},&#xA;})&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;发起请求&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;func (r *ServiceImpl) GetUser(ctx context.Context, userID uint64) (*grpcuser.User, error) {&#xA;&#x9;// 创建客户端实例&#xA;&#x9;client, _ := facades.Grpc.Client(ctx, &amp;quot;user&amp;quot;)&#xA;&#x9;// 注册服务&#xA;&#x9;userServiceClient := grpcuser.NewUserServiceClient(client)&#xA;&#x9;// 调用接口&#xA;&#x9;resp, _ := userServiceClient.GetUser(ctx, &amp;amp;grpcuser.UserRequest{&#xA;&#x9;   UserID: userID,&#xA;&#x9;})&#xA;&#xA;&#xA;&#x9;return resp.Data, nil&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;Over, 欢迎 Star、PR、Issues!&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>GinAdmin 更新</title>
-      <link>https://studygolang.com/topics/15964#reply0</link>
-      <description>&lt;p&gt;github地址：&lt;a href=&#34;https://github.com/gphper/ginadmin&#34;&gt;https://github.com/gphper/ginadmin&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;增加对数据源支持&lt;/li&gt;&#xA;&lt;li&gt;替换成yaml配置文件&lt;/li&gt;&#xA;&lt;li&gt;添加air热更新配置文件&lt;/li&gt;&#xA;&lt;li&gt;优化路由配置&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
     </item>
     <item>
       <title>golang使用json格式实现增删查改</title>
