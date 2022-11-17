@@ -4,6 +4,146 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>IOS 文案类 APP，有兴趣的欢迎来体验使用! - 分享创造</title>
+      <link>https://www.v2ex.com/t/895853</link>
+      <description>&lt;h2&gt;介绍:&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;应用截图&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/VMz8jX6.jpg&#34;/&gt;&#xA;栏目包括：句子语录，脑筋急转弯，毒鸡汤，土味情话，绕口令，民间谚语，歇后语，谜语，你画我猜等等。&lt;/p&gt;&#xA;&lt;p&gt;多种主题可供选择。&lt;/p&gt;&#xA;&lt;p&gt;支持搜索功能。&lt;/p&gt;&#xA;&lt;p&gt;海报生成功能。&lt;/p&gt;&#xA;&lt;h2&gt;地址:&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://apps.apple.com/cn/app/id1633438520&#34; rel=&#34;nofollow&#34;&gt;https://apps.apple.com/cn/app/id1633438520&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;激活:&lt;/h2&gt;&#xA;&lt;p&gt;应用属于独立开发，简约无广告，大部分功能都是免费的。如果你比较感兴趣需要激活 VIP 的话，可以点击应用内&#34;问题反馈&#34;输入:来自 V 站，VIP 免费获取。记得留下联系邮箱，后续才能通过邮件的方式告知您如何激活哟。&lt;/p&gt;&#xA;&lt;p&gt;最后希望能给个 5 星好评哦，谢谢大家的支持！！&lt;/p&gt;&#xA;</description>
+      <author>fly63</author>
+      <pubDate>17 Nov 2022 02:06:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>[mysql] 混乱的时区 - MySQL</title>
+      <link>https://www.v2ex.com/t/895852</link>
+      <description>&lt;h1&gt;[mysql] 混乱的时区&lt;/h1&gt;&#xA;&lt;p&gt;Link: &lt;a href=&#34;https://github.com/j2gg0s/j2gg0s/blob/main/20221116_mysql_%E6%B7%B7%E4%B9%B1%E7%9A%84%E6%97%B6%E5%8C%BA.md&#34; rel=&#34;nofollow&#34;&gt;https://github.com/j2gg0s/j2gg0s/blob/main/20221116_mysql_%E6%B7%B7%E4%B9%B1%E7%9A%84%E6%97%B6%E5%8C%BA.md&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;MySQL 的时间类型, 无论是 TIMESTAMP 还是 DATETIME, 都是不带时区信息.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_binary_resultset.html&#34; rel=&#34;nofollow&#34;&gt;Binary Protocol&lt;/a&gt; 中对应的数据类型&#xA;&lt;a href=&#34;https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_binary_resultset.html#sect_protocol_binary_resultset_row_value_date&#34; rel=&#34;nofollow&#34;&gt;MYSQL_TYPE_DATETIME&lt;/a&gt;&#xA;和 &lt;a href=&#34;https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_binary_resultset.html#sect_protocol_binary_resultset_row_value_date&#34; rel=&#34;nofollow&#34;&gt;MYSQL_TYPE_TIMESTAMP&lt;/a&gt;&#xA;都没有任何字段来传递时区信息. &lt;a href=&#34;https://github.com/go-sql-driver/mysql&#34; rel=&#34;nofollow&#34;&gt;go-sql-driver/mysql&lt;/a&gt;&#xA;中解析时间类型的 &lt;a href=&#34;https://github.com/go-sql-driver/mysql/blob/master/packets.go#L1314&#34; rel=&#34;nofollow&#34;&gt;parseBinaryDateTime&lt;/a&gt;&#xA;和 &lt;a href=&#34;https://github.com/go-sql-driver/mysql/blob/v1.6.0/packets.go#L780&#34; rel=&#34;nofollow&#34;&gt;parseDateTime&lt;/a&gt;&#xA;也没有从 server 返回的内容中解析出时间类型.&lt;/p&gt;&#xA;&lt;p&gt;MySQL 将时区附加在链接上, 每个链接都有对应的时区,&#xA;在没有明确指定的情况下默认是 server 的时区.&lt;/p&gt;&#xA;&lt;p&gt;链接的时区对 TIMESTAMP 和 DATETIME 的影响却又大不相同.&#xA;当插入或更新 TIMESTAMP 时, MySQL 会将更新的内容从链接的时区转换到 UTC 再存储.&#xA;当查询 TIMESTAMP 时, MySQL 会将读取的内容从 UTC 转换到链接的时区再展示.&#xA;而 DATETIME 的插入, 更新和查询却完全不受链接时区的影响.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;&#34; rel=&#34;nofollow&#34;&gt;go-sql-driver/mysql&lt;/a&gt; 类似的 driver 或者 orm,&#xA;一定程度上不区分 TIMESTAMP 和 DATETIME 又进一步加剧了混乱.&#xA;当然这不是 &lt;a href=&#34;&#34; rel=&#34;nofollow&#34;&gt;go-sql-driver/mysql&lt;/a&gt; 的问题, &lt;a href=&#34;&#34; rel=&#34;nofollow&#34;&gt;go-sql-driver/mysql&lt;/a&gt; 的实现质量还是非常又保证的.&lt;/p&gt;&#xA;&lt;p&gt;上述的总总, 在写入和读取的代码不是同一套时, 格外的明显.&#xA;&lt;a href=&#34;./examples/mysql-stamp&#34; rel=&#34;nofollow&#34;&gt;examples/mysql-stamp&lt;/a&gt; 中构造了几个典型的例子验证理解.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;mysql&amp;gt; SELECT * FROM visitor;&#xA;+----+--------+---------------------+---------------------+---------------------+&#xA;| id | name   | visited_timestamp   | visited_datetime    | created_at          |&#xA;+----+--------+---------------------+---------------------+---------------------+&#xA;|  1 | j2gg0s | 2022-11-16 22:17:00 | 2022-11-16 22:17:00 | 2022-11-16 14:18:29 |&#xA;+----+--------+---------------------+---------------------+---------------------+&#xA;1 row in set (0.01 sec)&#xA;&#xA;mysql&amp;gt; SET @@session.time_zone=&#39;+08:00&#39;;&#xA;Query OK, 0 rows affected (0.00 sec)&#xA;&#xA;mysql&amp;gt; SELECT * FROM visitor;&#xA;+----+--------+---------------------+---------------------+---------------------+&#xA;| id | name   | visited_timestamp   | visited_datetime    | created_at          |&#xA;+----+--------+---------------------+---------------------+---------------------+&#xA;|  1 | j2gg0s | 2022-11-17 06:17:00 | 2022-11-16 22:17:00 | 2022-11-16 22:18:29 |&#xA;+----+--------+---------------------+---------------------+---------------------+&#xA;1 row in set (0.00 sec)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;func ExampleStamp() {&#xA;&#x9;for i, dsn := range []string{&#xA;&#x9;&#x9;&#34;root:root@tcp(127.0.0.1:3306)/j2gg0s?parseTime=true&#34;,&#xA;&#x9;&#x9;&#34;root:root@tcp(127.0.0.1:3306)/j2gg0s?parseTime=true&amp;amp;loc=Asia%2FShanghai&#34;,&#xA;&#x9;&#x9;&#34;root:root@tcp(127.0.0.1:3306)/j2gg0s?parseTime=true&#34;,&#xA;&#x9;} {&#xA;&#x9;&#x9;db, err := sql.Open(&#34;mysql&#34;, dsn)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;panic(err)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if i == 2 {&#xA;&#x9;&#x9;&#x9;db.Exec(&#34;SET @@session.time_zone=&#39;+08:00&#39;&#34;)&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;rows, err := db.Query(&#34;SELECT * FROM visitor&#34;)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;panic(err)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;for rows.Next() {&#xA;&#x9;&#x9;&#x9;var id int64&#xA;&#x9;&#x9;&#x9;var name string&#xA;&#x9;&#x9;&#x9;var visitedTimeStamp, visitedDateTime time.Time&#xA;&#x9;&#x9;&#x9;var createdAt time.Time&#xA;&#x9;&#x9;&#x9;err := rows.Scan(&amp;amp;id, &amp;amp;name, &amp;amp;visitedTimeStamp, &amp;amp;visitedDateTime, &amp;amp;createdAt)&#xA;&#x9;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;&#x9;panic(err)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;fmt.Println(id, name, visitedTimeStamp.Format(time.RFC3339), visitedDateTime.Format(time.RFC3339))&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;db.Close()&#xA;&#x9;}&#xA;&#x9;// Output:&#xA;&#x9;// 1 j2gg0s 2022-11-16T22:17:00Z 2022-11-16T22:17:00Z&#xA;&#x9;// 1 j2gg0s 2022-11-16T22:17:00+08:00 2022-11-16T22:17:00+08:00&#xA;&#x9;// 1 j2gg0s 2022-11-17T06:17:00Z 2022-11-16T22:17:00Z&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>GopherDaily</author>
+      <pubDate>17 Nov 2022 02:06:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>有台服务器，被安全策略强制开启自身防火墙，并且 deny any，如何绕过这种限制？ - 程序员</title>
+      <link>https://www.v2ex.com/t/895851</link>
+      <description>&lt;p&gt;求大家先绕过是否合法性的探讨&lt;/p&gt;&#xA;&lt;p&gt;只讨论技术层面&lt;/p&gt;&#xA;&lt;p&gt;因为在这台服务器 A 上跑的任何服务，别人来访问服务器 A ，都会被服务器自身防火墙给拒掉。而我们是没有办法动这个防火墙的策略的。&lt;/p&gt;&#xA;&lt;p&gt;但是服务器 A 本身可以和外面主动建立连接，这个方向的数据流，防火墙是没有做任何限制的。&lt;/p&gt;&#xA;&lt;p&gt;所以，我在想，有没有其他类似方法，是否能找一台中转服务器 B&lt;/p&gt;&#xA;&lt;p&gt;让这台有限制的服务器 A 主动先和中转服务器 B 建立连接 TCP 连接。然后利用这条 B 和 A 中间建立的端口号和连接，保持这条 session 不断。&lt;/p&gt;&#xA;&lt;p&gt;然后作为客户端 C 去跟服务器 B 建立连接，利用 B 和 A 建立的连接传输数据。。&lt;/p&gt;&#xA;&lt;p&gt;从而避开 A 自身的防火墙限制。&lt;/p&gt;&#xA;&lt;p&gt;请问有类似的解决方案吗？&lt;/p&gt;&#xA;</description>
+      <author>mrzx</author>
+      <pubDate>17 Nov 2022 02:06:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>有多少想润出商都的？ - 郑州</title>
+      <link>https://www.v2ex.com/t/895850</link>
+      <description>近一个多月以来，因为疫情防控的诸多蜜汁操作，商都频频出圈。&lt;br /&gt;&lt;br /&gt;身边讨论润出商都的声音，越来越多。&lt;br /&gt;&lt;br /&gt;不晓得诸位是怎么想的？</description>
+      <author>mxu1216</author>
+      <pubDate>17 Nov 2022 02:05:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>web3 独角兽公司招聘全栈工程师（远程工作） - 分享发现</title>
+      <link>https://www.v2ex.com/t/895849</link>
+      <description>&lt;p&gt;职位职责&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;承担日常的前端+后端需求开发 more important&lt;/li&gt;&#xA;&lt;li&gt;总结归纳问题并形成良性推动 &lt;/li&gt;&#xA;&lt;li&gt;编写测试用例和系统文档 &lt;/li&gt;&#xA;&lt;li&gt;对底层服务器进行维护 &lt;/li&gt;&#xA;&lt;li&gt;对于用户反馈的 Bug 能够跟进解决&#xA;职位要求&lt;/li&gt;&#xA;&lt;li&gt;前端: Vue 框架 + ⻚面实现 &lt;/li&gt;&#xA;&lt;li&gt;后端: Django &lt;/li&gt;&#xA;&lt;li&gt;DB: Mysql+Mongo &lt;/li&gt;&#xA;&lt;li&gt;代码协作工具:Gitlab+Sentry &lt;/li&gt;&#xA;&lt;li&gt;云服务商:阿里云&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;薪资待遇面议&#xA;有意者请联系 WeChat: DoraHacksR&lt;/p&gt;&#xA;</description>
+      <author>ZTDora</author>
+      <pubDate>17 Nov 2022 02:04:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>2.5G 内网需求， 4125 工控机做软路由是否一个好选择？ - 问与答</title>
+      <link>https://www.v2ex.com/t/895848</link>
+      <description>&lt;p&gt;RT ，家里有 453d mini ，带两个 2.5G 口，双十一给常开机的 PC 买了个 usb 2.5G ，本想再买一个 2.5G 交换机，4 网口以上价格不菲；&#xA;有 ATV ，需要科学，目前是 HN8346X6-C 光猫拨号,硬路由是红米 AX6 ，刷了 shellclash 但感觉不是很稳;&#xA;之前折腾过 5105 工控机，感觉也不甚稳定，可能是发热的原因但也不想再外接风扇；&#xA;综上，想着不如上 4125 工控机做软路由，虽然没有交换芯片但应该也能满足日常使用？各位大佬有更好的建议吗？&#xA;以及，如果上 4125 软路由，个人倾向上 openwrt ，是物理安装好还是 pve+openwrt 呢？&#xA;谢谢&lt;/p&gt;&#xA;</description>
+      <author>millllie</author>
+      <pubDate>17 Nov 2022 02:04:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>[求助] Git 合并解决冲突疑问 - git</title>
+      <link>https://www.v2ex.com/t/895847</link>
+      <description>&lt;p&gt;两个分支 fea ，master&lt;/p&gt;&#xA;&lt;p&gt;fea 往 master 合并，解决完冲突 push 时，会把 mater 的其他改动同步到 fea 分支上，有办法不同步这些吗？&lt;/p&gt;&#xA;</description>
+      <author>lixiangzhixin</author>
+      <pubDate>17 Nov 2022 02:03:59 +0000</pubDate>
+    </item>
+    <item>
+      <title>15 款 Mac，计划这周去升级运存到 16G，顺便看看有没换主板升 cpu 的必要 - 分享发现</title>
+      <link>https://www.v2ex.com/t/895846</link>
+      <description>&lt;p&gt;迫于念旧(qiong)，目前还在用 15 款 13.3 寸 Mac ，型号 A1502 ，i5 处理器来当主力开发，开几个 vscode 风扇就狂转。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;企业微信 20221117-095405@2x.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2022/11/17/zfkTmM6RXhO1Edg.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;闲来无事在 b 站、某音上刷到了 mac 能升级运存，需要专业的焊接更换，所以找了几家了解了一下：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;店铺&lt;/th&gt;&#xA;&lt;th&gt;价格&lt;/th&gt;&#xA;&lt;th&gt;质保&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;店铺 1 ，北京线下中关村科贸，有网店(评论还不错)&lt;/td&gt;&#xA;&lt;td&gt;1. 8G 升到 16G ，550 ；&lt;br/&gt;&lt;br/&gt;2.升级 cpu 到 i7 五代(需换主板)，运存 8-&amp;gt;16 ，总共 1500 多&lt;/td&gt;&#xA;&lt;td&gt;6 个月&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;店铺 2 ，某音发现，中关村，每天在直播维修&lt;/td&gt;&#xA;&lt;td&gt;8G 升到 16G ，800&lt;/td&gt;&#xA;&lt;td&gt;3 个月&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;br/&gt;&#xA;&lt;p&gt;对第一家感觉还算不错，不知道升级 cpu 还有没必要了&lt;/p&gt;&#xA;&lt;p&gt;查了下店家应该是用同款 A1502 型号的顶配版来换到我 Mac 里，也就是 i7 五代，16G 运存，不知道更换后速度能提升多少，还是说单纯升下运存得了，同志们有更换过的可以分享下经验😏&lt;/p&gt;&#xA;&lt;p&gt;计划这周六日过去看看，同时也想同步大家，如果有像我一样念旧的年轻人，咱们手里的丐版 Mac 是有机会重焕生机的😂&lt;/p&gt;&#xA;</description>
+      <author>mrant</author>
+      <pubDate>17 Nov 2022 02:03:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>MBEDTLS 使用 TLS1.3 - 信息安全</title>
+      <link>https://www.v2ex.com/t/895845</link>
+      <description>&lt;p&gt;我下载了 mbedtls_v3.2.1,想测试 TLS1.3 。按照文档描述，我取消注释了 mbedtls_config.h 中的 MBEDTLS_SSL_PROTO_TLS1_3 宏。&lt;/p&gt;&#xA;&lt;p&gt;接着编译、运行./ssl_client2 force_version=tls13,但是结果是建立 TLS1.3 失败。&#xA;如果运行./ssl_client2 min_version=tls13 max_version=tls13 ,则通过 TLS1.2 与服务器建连成功&lt;/p&gt;&#xA;&lt;p&gt;我想问下有没有用 mbedtls 测过 TLS1.3 的，帮我看下需要修改什么，才能让我正常运行官方示例程序。&lt;/p&gt;&#xA;</description>
+      <author>lestly</author>
+      <pubDate>17 Nov 2022 02:01:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>日亚 Apple TV 4K 2022 无法清关，郁闷 - Apple</title>
+      <link>https://www.v2ex.com/t/895844</link>
+      <description>两天前收到了邮件通知，这个订单是不是就终结了，想要买还得重新下单？</description>
+      <author>Exp</author>
+      <pubDate>17 Nov 2022 02:01:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>公司项目刚有点盈利苗头，同事就找我换皮偷偷外面干 - 问与答</title>
+      <link>https://www.v2ex.com/t/895843</link>
+      <description>&lt;p&gt;说外面有人出资换皮，让我帮忙搭建服务器，基于职业道德，如何拒绝优雅的拒绝？&#xA;这年头的人都是各种想搞钱，个人一直都是安安稳稳的打工人，对搞钱没有太热衷&lt;/p&gt;&#xA;</description>
+      <author>XSDo</author>
+      <pubDate>17 Nov 2022 02:00:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>搬了新的住的地方，是公寓类型的房子，房东不给拉网线，求推荐大流量卡 - 问与答</title>
+      <link>https://www.v2ex.com/t/895842</link>
+      <description>&lt;p&gt;和房东沟通了很多次，还是不给拉网线，最终答应送我一个 300M 的网络，测试了下，是共享网络，房东自己拉了光纤，通过爱快路由器把网络分了出来，晚上延时达到 300 多，丢包率接近 50%，上传速度限制到 1mb 一秒都不到。&#xA;网上要打游戏之类的，推荐大流量卡&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imgse.com/i/zet8pj&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;zet8pj.md.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2022/11/17/zet8pj.md.jpg&#34;/&gt;&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>a1274598858</author>
+      <pubDate>17 Nov 2022 01:57:19 +0000</pubDate>
+    </item>
+    <item>
+      <title>QQ 域名邮箱的 @ MX 解析如何和 @ Cname 解析问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/895841</link>
+      <description>用的腾讯云的解析： &lt;a target=&#34;_blank&#34; href=&#34;https://cln.sh/SQYy6v&#34; rel=&#34;nofollow noopener&#34;&gt;https://cln.sh/SQYy6v&lt;/a&gt;&lt;br /&gt;若 @ MX 解析 用默认， @ Cname 也用默认，是不会有问题；       ✅&lt;br /&gt;若 @ MX 解析 用默认， @ Cname 也用境内，@ MX 解析 就会失效    ❌&lt;br /&gt;&lt;br /&gt;但现在我有需求，需要同时有两个 @ Cname ，一个默认一个境内。&lt;br /&gt;&lt;br /&gt;是否有大佬知道通过什么方法比如 @ MX 解析多设置几条“电线、联通、境内、境外”+ @ Cname “境内、境外”啥的组合能达到同时存在吗？&lt;br /&gt;&lt;br /&gt;或者有什么工具可以靠谱查询我现在设置是否生效的网站？不然我设置一圈，要等大约 1 天 QQ 域名邮箱才提醒我 MX 失效。</description>
+      <author>CSGO</author>
+      <pubDate>17 Nov 2022 01:52:10 +0000</pubDate>
+    </item>
+    <item>
+      <title>谷歌广告在国内部分省份无法展示了？ - 分享发现</title>
+      <link>https://www.v2ex.com/t/895840</link>
+      <description>&lt;p&gt;最近发现没开发代理的时候，那些原本挂了谷歌广告的网站全部都没广告了显示一个空白，请求显示无法加载资源，不知道是被墙了还是谷歌在调整。&lt;/p&gt;&#xA;&lt;p&gt;广东 IP 貌似都不行，四川的貌似可以，其他地区不知道是不是也有问题。&lt;/p&gt;&#xA;</description>
+      <author>ashin</author>
+      <pubDate>17 Nov 2022 01:44:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>闲鱼上 switch 包含数字版游戏的机子能买吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/895839</link>
+      <description>&lt;p&gt;闲鱼上卖 switch 送一大堆数字版游戏的。1699 价格，有购买记录，是不是有问题，能否改掉绑定的所有信息呢？能入手吗？&lt;/p&gt;&#xA;</description>
+      <author>Daus123</author>
+      <pubDate>17 Nov 2022 01:41:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教大佬电视串流 steam 方案，我是 A 卡，索尼 90h，千兆网 - 问与答</title>
+      <link>https://www.v2ex.com/t/895837</link>
+      <description>昨天试了 steam link 可以串流空洞骑士，xbox 手柄连接电脑或者电视感觉都有延迟。然后我试了大表哥 2 黑屏只能看到右下角左轮枪进度条。还有什么方式</description>
+      <author>tutou</author>
+      <pubDate>17 Nov 2022 01:38:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>在 docker 执行 git 很慢是什么原因? - git</title>
+      <link>https://www.v2ex.com/t/895836</link>
+      <description>&lt;p&gt;在公司服务器中下载 image 镜像到本地,git status, git add, git commit 这些命令都很慢, 都运行几个小时,我查了一下在我一个人用服务器时候也是很慢, 另外在 docker 而是直接在硬盘上的代码运行就是正常的, 这种情况是什么原因导致?&lt;/p&gt;&#xA;</description>
+      <author>yhm2046</author>
+      <pubDate>17 Nov 2022 01:37:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>在折腾用 pyside2 开发界面 碰到 sqlite3 问题 - Python</title>
+      <link>https://www.v2ex.com/t/895835</link>
+      <description>&lt;h2&gt;情况介绍&lt;/h2&gt;&#xA;&lt;p&gt;非程序员，python 基础也是一塌糊涂（相当于入门的脚尖落地，后脚跟还在空中）&lt;/p&gt;&#xA;&lt;h2&gt;说重点&lt;/h2&gt;&#xA;&lt;p&gt;用 designer 拉一个界面出来，再仿一款老的软件，做一个界面出来。&#xA;软件就 增删改查 + 清除 五个按钮（目前是这样），数据库用 sqlite ，软件界面有一个区域展示内容。&lt;/p&gt;&#xA;&lt;p&gt;搜索了一圈搜索引擎，有用 PySide2.QtSql 、sqlite3 模块，&#xA;python 可以用 sqlite3 操作 sqlite 数据库&#xA;Qt SQL 模块包含多个类，实现数据库的连接，数据获取与界面显示，数据与界面之间使用 Model/View 结构，方便的实现数据的显示和操作。&lt;/p&gt;&#xA;&lt;p&gt;哪位懂的大佬介绍下这两个东西？&#xA;另外我在第二大段的第一句话中，就说明了需求，这个用 PySide2.QtSql 、sqlite3 ，哪个能实现，还是说两个都能实现？&lt;/p&gt;&#xA;</description>
+      <author>buyan3303</author>
+      <pubDate>17 Nov 2022 01:36:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>i5 12400F+B660M 台式机，配 2060s 还是 1660s 显卡？ - 问与答</title>
+      <link>https://www.v2ex.com/t/895834</link>
+      <description>主要是用 switch 模拟器玩游戏，其他的就玩玩 LOL 了，大型 3A 游戏应该不会玩</description>
+      <author>gniviliving</author>
+      <pubDate>17 Nov 2022 01:26:58 +0000</pubDate>
+    </item>
+    <item>
+      <title>Apple music 家庭车上车的滴滴 - Apple</title>
+      <link>https://www.v2ex.com/t/895833</link>
+      <description>&lt;p&gt;2.5/月 wx 联系方式：MjQwMjUzNjA0NQ==&lt;/p&gt;&#xA;</description>
+      <author>sonLucky</author>
+      <pubDate>17 Nov 2022 01:24:38 +0000</pubDate>
+    </item>
+    <item>
       <title>Waymo open dataset 数据集下载后，如何解压 - 3D</title>
       <link>https://www.v2ex.com/t/895832</link>
       <description>&lt;p&gt;waymo 数据集下载下来是 tar files ，在不同的文件夹中，请问有人知道什么方式解压最方便吗？&#xA;是需要进入不同文件夹，执行 ls *.tar.gz | xargs -n1 tar xzvf&#xA;请问有人用过这个数据集吗？&#xA;OpenPCDET 和 MMLab, 对于解压方式，是不是也应该不也一样？&lt;/p&gt;&#xA;</description>
