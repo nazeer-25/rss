@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Apple TV 上可否美区下载应用，用国区账号恢复内购？ - Apple TV",
+      "Link": "https://www.v2ex.com/t/896193",
+      "Description": "\u003cp\u003e像 infuse 之类，我用国区付费内购的，能否先美区下载应用，再登录国区账号恢复？\u003c/p\u003e\n",
+      "Author": "NeoChen",
+      "PubDate": "2022-11-18T05:21:42Z"
+    },
+    {
+      "Title": "node ffi 如何处理 char * ,int * 参数 - 程序员",
+      "Link": "https://www.v2ex.com/t/896192",
+      "Description": "\u003cp\u003e有个 dylib 中个这样的函数 ，填充\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-c\"\u003eint t_test( char buffer[100], int *outLen);\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eimport ffi from \"ffi-napi\"\nimport ref from \"ref-napi\"\nvar libm = ffi.Library('libticketenc.dylib', {\n    't_test': [ 'int', [ \"pointer\" ,\"int *\"] ]\n});\n\n\nvar bf = new Uint8Array(100)\nvar outLen = 0\nlibm.t_test(bf,outLen) // error\n\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e也就是如何调用 类似于 CCCrypt 这样的函数\u003c/p\u003e\n",
+      "Author": "liuidetmks",
+      "PubDate": "2022-11-18T05:20:12Z"
+    },
+    {
       "Title": "XGPU 云游戏如何稳定 1080p 画质？ - 游戏",
       "Link": "https://www.v2ex.com/t/896191",
       "Description": "\u003cp\u003e上班摸鱼的时候试了试 XGPU 的云游戏，延迟不错，但是画质一直是 720p ，流量锁定在 1.6M 左右。仔细研究了下，发现是通过浏览器的 navigator.connection 来检测网络状况：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eisLowBandwidthConnection() {\n  var e, t, n, r, a, i;\n  if (!navigator.connection)\n    return !1;\n  if (navigator.connection.rtt \u0026amp;\u0026amp; navigator.connection.rtt \u0026gt;= 100 \u0026amp;\u0026amp; navigator.connection.downlink \u0026amp;\u0026amp; navigator.connection.downlink \u0026lt;= 10)\n    return null === (t = null === (e = this.options) || void 0 === e ? void 0 : e.logger) || void 0 === t || t.info(\"Low bandwidth connection detected\", { rtt: navigator.connection.rtt, downlink: navigator.connection.downlink }), !0;\n  if (navigator.connection.effectiveType \u0026amp;\u0026amp; [\"slow-2g\", \"2g\", \"3g\"].includes(navigator.connection.effectiveType))\n    return null === (r = null === (n = this.options) || void 0 === n ? void 0 : n.logger) || void 0 === r || r.info(\"Low bandwidth connection detected\", { effectiveType: navigator.connection.effectiveType }), !0;\n  const o = navigator.connection.type;\n  if (o) {\n    const e = 3 === o || 4 === o || /^[23]g$/.test(o);\n    return e \u0026amp;\u0026amp; (null === (i = null === (a = this.options) || void 0 === a ? void 0 : a.logger) || void 0 === i || i.info(\"Low bandwidth connection detected\", { code: o })), e\n  }\n  return !1\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e所以简单粗暴的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eObject.defineProperty(window.navigator, 'connection', {\n  get: function () {\n    return {onchange: null, effectiveType: '4g', rtt: 50, downlink: 10, saveData: false}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e发现并不行，各位有没有什么好办法？\u003c/h2\u003e\n\u003cp\u003e小技巧：\n无需加速器玩 XGPU 云游戏：浏览器安装插件 \u003ca href=\"https://chrome.google.com/webstore/detail/x-forwarded-for-header/hkghghbnihliadkabmlcmcgmffllglin/related\" rel=\"nofollow\"\u003eX-Forwarded-For Header\u003c/a\u003e，添加一个韩国 ip ，比如：14.95.33.210 ，即可无需加速器玩云游戏了，方法来自：\u003ca href=\"https://ngabbs.com/read.php?tid=34325589\u0026amp;forder_by=postdatedesc\u0026amp;rand=311\" rel=\"nofollow\"\u003e链接\u003c/a\u003e\u003c/p\u003e\n",
