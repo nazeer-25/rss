@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有朋友最近买过 14 寸 MacBook Pro 吗，帮忙指指路 - Apple</title>
+      <link>https://www.v2ex.com/t/896280</link>
+      <description>这两天想买一个 M1 Pro 的 mac ，看了下 pdd 和淘宝麦克先生店，价格差不多在 11200 ，想问下这是好价吗~&lt;br /&gt;&lt;br /&gt;或者还有没有其他性价比高的购买渠道推荐~~&lt;br /&gt;&lt;br /&gt;等等党有点等不下去了😂</description>
+      <author>K2mr</author>
+      <pubDate>18 Nov 2022 10:11:37 +0000</pubDate>
+    </item>
+    <item>
+      <title>Apple Store 日服 充值 - Apple</title>
+      <link>https://www.v2ex.com/t/896279</link>
+      <description>&lt;p&gt;V 站的大佬们，之前淘宝遍地横行的外服 apple 储值卡，现在都消失了；&lt;/p&gt;&#xA;&lt;p&gt;现在手里的银行卡，都无法绑定自己的日服账号；&lt;/p&gt;&#xA;&lt;p&gt;求助：如何才能给自己的 apple 账户充值&lt;/p&gt;&#xA;</description>
+      <author>L0L</author>
+      <pubDate>18 Nov 2022 10:10:32 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于容器化部署 vue 项目思路讨论 - 程序员</title>
+      <link>https://www.v2ex.com/t/896278</link>
+      <description>如题，现在有一个需求是有多个前端的 vue 项目想要用 docker swarm 部署&lt;br /&gt;现在有个思路是想要将每个应用打包成不同的镜像，再拉起容器运行，想问下大家有没有建议或者更好的思路</description>
+      <author>jdOY</author>
+      <pubDate>18 Nov 2022 10:06:53 +0000</pubDate>
+    </item>
+    <item>
       <title>react 使用 hooks，遇到问题，没有想到好的解决办法 - 问与答</title>
       <link>https://www.v2ex.com/t/896276</link>
       <description>&lt;h3&gt;想要封装一个 useUrlState&lt;/h3&gt;&#xA;&lt;p&gt;useUrlState 是我封装的 hooks ，返回 state 和 stateSetter&#xA;&lt;br/&gt;&#xA;另外如果在多个组件中使用同一个 key&lt;em&gt;（ useUrlState 的第一个参数）&lt;/em&gt;，那么组件之间就可以共享 setter 和 state&#xA;&lt;br/&gt;&#xA;以下是 API 调用的形式：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;  const [searchWord, searchWordSet] = useUrlState(&#34;searchWord&#34;, &#34;&#34;);&#xA;  const [filterStatus, filterStatusSet] = useUrlState(&#34;filterStatus&#34;, &#34;&#34;);&#xA;&#xA;  &amp;lt;input value={searchWord} onChange={e=&amp;gt;searchWordSet(e.target.value)}/&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;实现是这样的&lt;/h3&gt;&#xA;&lt;p&gt;在 react-router v6 基础山，封装了一下 &lt;a href=&#34;https://reactrouter.com/en/main/hooks/use-search-params&#34; rel=&#34;nofollow&#34;&gt;useSearchParams&lt;/a&gt; ：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;import { useCallback, useEffect } from &#34;react&#34;;&#xA;import { useSearchParams, NavigateOptions } from &#34;react-router-dom&#34;;&#xA;export const navigateOptions: NavigateOptions = {&#xA;  replace: true,&#xA;};&#xA;&#xA;const useUrlState = (key: string, state: string) =&amp;gt; {&#xA;  const [searchParams, setSearchParams] = useSearchParams();&#xA;&#xA;  useEffect(() =&amp;gt; {&#xA;    const hasStateInUrl = searchParams.has(key);&#xA;    const urlState = searchParams.get(key) || &#34;&#34;;&#xA;    if (!hasStateInUrl &amp;amp;&amp;amp; urlState !== state) {&#xA;      searchParams.set(key, state);&#xA;      setSearchParams(searchParams, navigateOptions);&#xA;    }&#xA;  }, [searchParams, state, key]);&#xA;&#xA;  const setter = useCallback(&#xA;    (newState: string) =&amp;gt; {&#xA;      searchParams.set(key, newState);&#xA;      setSearchParams(searchParams, navigateOptions);&#xA;    },&#xA;    [key, searchParams]&#xA;  );&#xA;&#xA;  return [searchParams.get(key) || state, setter] as const;&#xA;};&#xA;export default useUrlState;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;出现一个问题&lt;/h3&gt;&#xA;&lt;p&gt;正常情况下使用表现良好，但是如果出现连续的 setter ，例如&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;const [pageSize,pageSizeSet]=useUrlstate(&#34;pageSize&#34;,&#34;10&#34;);&#xA;const [pageIndex,pageIndexSet]=useUrlstate(&#34;pageIndex&#34;,&#34;1&#34;);&#xA;&#xA;//下面是连续调用 setter&#xA;onPagingChange({ pageIndex, pageSize }) {&#xA;            pageSizeSet(pageSize);&#xA;            pageIndexSet(pageIndex)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;连续的 setter 的第一个不会生效，例如👆的代码 pageSizeSet 就不会生效。&#xA;&lt;br/&gt;&#xA;原因是因为两个 setter 执行起点是一样的，最后只有后面那个覆盖前面的&#xA;&lt;br/&gt;&#xA;我尝试 setSearchParams 接受变更函数来更改 url ，结果依旧会产生覆盖的 bug 。&lt;/p&gt;&#xA;&lt;p&gt;求解决思路&lt;/p&gt;&#xA;</description>
