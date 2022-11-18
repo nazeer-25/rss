@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "react 使用 hooks，遇到问题，没有想到好的解决办法 - 问与答",
+      "Link": "https://www.v2ex.com/t/896276",
+      "Description": "\u003ch3\u003e想要封装一个 useUrlState\u003c/h3\u003e\n\u003cp\u003euseUrlState 是我封装的 hooks ，返回 state 和 stateSetter\n\u003cbr/\u003e\n另外如果在多个组件中使用同一个 key\u003cem\u003e（ useUrlState 的第一个参数）\u003c/em\u003e，那么组件之间就可以共享 setter 和 state\n\u003cbr/\u003e\n以下是 API 调用的形式：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003e  const [searchWord, searchWordSet] = useUrlState(\"searchWord\", \"\");\n  const [filterStatus, filterStatusSet] = useUrlState(\"filterStatus\", \"\");\n\n  \u0026lt;input value={searchWord} onChange={e=\u0026gt;searchWordSet(e.target.value)}/\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e实现是这样的\u003c/h3\u003e\n\u003cp\u003e在 react-router v6 基础山，封装了一下 \u003ca href=\"https://reactrouter.com/en/main/hooks/use-search-params\" rel=\"nofollow\"\u003euseSearchParams\u003c/a\u003e ：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003eimport { useCallback, useEffect } from \"react\";\nimport { useSearchParams, NavigateOptions } from \"react-router-dom\";\nexport const navigateOptions: NavigateOptions = {\n  replace: true,\n};\n\nconst useUrlState = (key: string, state: string) =\u0026gt; {\n  const [searchParams, setSearchParams] = useSearchParams();\n\n  useEffect(() =\u0026gt; {\n    const hasStateInUrl = searchParams.has(key);\n    const urlState = searchParams.get(key) || \"\";\n    if (!hasStateInUrl \u0026amp;\u0026amp; urlState !== state) {\n      searchParams.set(key, state);\n      setSearchParams(searchParams, navigateOptions);\n    }\n  }, [searchParams, state, key]);\n\n  const setter = useCallback(\n    (newState: string) =\u0026gt; {\n      searchParams.set(key, newState);\n      setSearchParams(searchParams, navigateOptions);\n    },\n    [key, searchParams]\n  );\n\n  return [searchParams.get(key) || state, setter] as const;\n};\nexport default useUrlState;\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e出现一个问题\u003c/h3\u003e\n\u003cp\u003e正常情况下使用表现良好，但是如果出现连续的 setter ，例如\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003econst [pageSize,pageSizeSet]=useUrlstate(\"pageSize\",\"10\");\nconst [pageIndex,pageIndexSet]=useUrlstate(\"pageIndex\",\"1\");\n\n//下面是连续调用 setter\nonPagingChange({ pageIndex, pageSize }) {\n            pageSizeSet(pageSize);\n            pageIndexSet(pageIndex)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e连续的 setter 的第一个不会生效，例如👆的代码 pageSizeSet 就不会生效。\n\u003cbr/\u003e\n原因是因为两个 setter 执行起点是一样的，最后只有后面那个覆盖前面的\n\u003cbr/\u003e\n我尝试 setSearchParams 接受变更函数来更改 url ，结果依旧会产生覆盖的 bug 。\u003c/p\u003e\n\u003cp\u003e求解决思路\u003c/p\u003e\n",
+      "Author": "Envov",
+      "PubDate": "2022-11-18T10:02:26Z"
+    },
+    {
+      "Title": "杭州有便宜实惠的眼镜店吗？ - 杭州",
+      "Link": "https://www.v2ex.com/t/896275",
+      "Description": "最近想配个眼镜，众所周知眼镜是个暴利行业，怎么能少被坑点，找到物美价廉的眼镜",
+      "Author": "filannn",
+      "PubDate": "2022-11-18T09:58:08Z"
+    },
+    {
       "Title": "RackNerd，美国便宜 VPS 低至 $10 / 年 - VPS",
       "Link": "https://www.v2ex.com/t/896274",
       "Description": "\u003cp\u003e\u003ca href=\"https://www.wangdu.site/course/1266.html\" rel=\"nofollow\"\u003e2022 黑色星期五：RackNerd ，美国便宜 VPS 低至 $10 / 年～\u003c/a\u003e:整理了一下正在优惠的 VPS ，有需要的可以看看\u003c/p\u003e\n",
