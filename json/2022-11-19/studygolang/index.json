@@ -46,16 +46,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "如何在不使用xml库和第三方库的情况下解析xml ？",
-      "Link": "https://studygolang.com/articles/35965#reply3",
-      "Description": "\u003cp\u003e请各位发表一下个人见解\u003c/p\u003e\n",
+      "Title": "最近刚出的go1.19.2",
+      "Link": "https://studygolang.com/topics/15977#reply0",
+      "Description": "\u003cp\u003e\u003ca href=\"https://lin.xet.tech/s/1nXdgl最新发现的go1.19.2感觉不错分享给大家。我用500积分买的注册就送1000积分，白嫖到手![go语言后端开发需求分析.jpg](https://static.golangjob.cn/221119/9f43e390310c9c2f745bdc782151f940.jpg)![5\"\u003ehttps://lin.xet.tech/s/1nXdgl最新发现的go1.19.2感觉不错分享给大家。我用500积分买的注册就送1000积分，白嫖到手![go语言后端开发需求分析.jpg](https://static.golangjob.cn/221119/9f43e390310c9c2f745bdc782151f940.jpg)![5\u003c/a\u003e 项目经验话术.jpg](\u003ca href=\"https://static.golangjob.cn/221119/6aef01290670f244582969dd16ce9a11.jpg\"\u003ehttps://static.golangjob.cn/221119/6aef01290670f244582969dd16ce9a11.jpg\u003c/a\u003e)\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "最近刚出的go1.19.2",
-      "Link": "https://studygolang.com/topics/15977#reply0",
-      "Description": "\u003cp\u003e\u003ca href=\"https://lin.xet.tech/s/1nXdgl最新发现的go1.19.2感觉不错分享给大家。我用500积分买的注册就送1000积分，白嫖到手![go语言后端开发需求分析.jpg](https://static.golangjob.cn/221119/9f43e390310c9c2f745bdc782151f940.jpg)![5\"\u003ehttps://lin.xet.tech/s/1nXdgl最新发现的go1.19.2感觉不错分享给大家。我用500积分买的注册就送1000积分，白嫖到手![go语言后端开发需求分析.jpg](https://static.golangjob.cn/221119/9f43e390310c9c2f745bdc782151f940.jpg)![5\u003c/a\u003e 项目经验话术.jpg](\u003ca href=\"https://static.golangjob.cn/221119/6aef01290670f244582969dd16ce9a11.jpg\"\u003ehttps://static.golangjob.cn/221119/6aef01290670f244582969dd16ce9a11.jpg\u003c/a\u003e)\u003c/p\u003e\n",
+      "Title": "Go微服务",
+      "Link": "https://studygolang.com/topics/15978#reply1",
+      "Description": "\u003cp\u003e如何开始学微服务？先学哪个再到哪个。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -67,9 +67,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Go微服务",
-      "Link": "https://studygolang.com/topics/15978#reply0",
-      "Description": "\u003cp\u003e如何开始学微服务？先学哪个再到哪个。\u003c/p\u003e\n",
+      "Title": "如何在不使用xml库和第三方库的情况下解析xml ？",
+      "Link": "https://studygolang.com/articles/35965#reply3",
+      "Description": "\u003cp\u003e请各位发表一下个人见解\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -161,6 +161,13 @@
       "Title": "请问怎么读取未知编码的文本呢？",
       "Link": "https://studygolang.com/topics/15952#reply3",
       "Description": "\u003cp\u003e目前电脑上有一些网上下载的txt文件，有不少读出来都是乱码，看了下格式有uft-16，utf-8（Bom有的带，有的不带）gb2312，还有一些是其他国家的语言编码，比如日语的，很乱。\u003c/p\u003e\n\n\u003cp\u003e转格式的库都需要提前知道编码格式，这种大家是怎么处理的呢？\u003c/p\u003e\n\n\u003cp\u003e感谢回答，我目前只找到一个库 \u0026ldquo;github.com/saintfish/chardet\u0026rdquo;，有十年的历史了，哈哈。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;bytes\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;io\u0026quot;\n\t\u0026quot;io/ioutil\u0026quot;\n\t\u0026quot;log\u0026quot;\n\t\u0026quot;os\u0026quot;\n\n\t\u0026quot;github.com/paulrosania/go-charset/charset\u0026quot;\n\t_ \u0026quot;github.com/paulrosania/go-charset/data\u0026quot;\n\t\u0026quot;github.com/saintfish/chardet\u0026quot;\n)\n\nfunc main() {\n\tfilePath := \u0026quot;e:\\\\demo.txt\u0026quot;\n\tFileHandle, err := os.Open(filePath)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer FileHandle.Close()\n\tbuffer := make([]byte, 1024)\n\tn, err := FileHandle.Read(buffer)\n\t// 控制条件,根据实际调整\n\tif err != nil \u0026amp;\u0026amp; err != io.EOF {\n\t\tlog.Println(err)\n\t}\n\t// 如下代码打印出每次读取的文件块(字节数)\n\t//fmt.Println(string(buffer[:n]))\n\ttext := buffer[:n]\n\tdetector := chardet.NewTextDetector()\n\tresult, err := detector.DetectBest(text)\n\tif err == nil {\n\t\tfmt.Printf(\n\t\t\t\u0026quot;Detected charset is %s, language is %s\u0026quot;,\n\t\t\tresult.Charset,\n\t\t\tresult.Language)\n\t\tr, err := charset.NewReader(result.Charset, bytes.NewReader(text))\n\t\tif err != nil {\n\t\t\tlog.Fatal(err)\n\t\t}\n\t\tresult, err := ioutil.ReadAll(r)\n\t\tif err != nil {\n\t\t\tlog.Fatal(err)\n\t\t}\n\t\tfmt.Printf(\u0026quot;%s\\n\u0026quot;, result)\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e效果还行\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go微服务",
+      "Link": "https://studygolang.com/topics/15978#reply0",
+      "Description": "\u003cp\u003e如何开始学微服务？先学哪个再到哪个。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
