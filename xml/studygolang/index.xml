@@ -33,7 +33,7 @@
     </item>
     <item>
       <title>Go微服务</title>
-      <link>https://studygolang.com/topics/15978#reply1</link>
+      <link>https://studygolang.com/topics/15978#reply2</link>
       <description>&lt;p&gt;如何开始学微服务？先学哪个再到哪个。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
@@ -112,6 +112,11 @@
       <title>请问怎么读取未知编码的文本呢？</title>
       <link>https://studygolang.com/topics/15952#reply3</link>
       <description>&lt;p&gt;目前电脑上有一些网上下载的txt文件，有不少读出来都是乱码，看了下格式有uft-16，utf-8（Bom有的带，有的不带）gb2312，还有一些是其他国家的语言编码，比如日语的，很乱。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;转格式的库都需要提前知道编码格式，这种大家是怎么处理的呢？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;感谢回答，我目前只找到一个库 &amp;ldquo;github.com/saintfish/chardet&amp;rdquo;，有十年的历史了，哈哈。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;bytes&amp;quot;&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;io&amp;quot;&#xA;&#x9;&amp;quot;io/ioutil&amp;quot;&#xA;&#x9;&amp;quot;log&amp;quot;&#xA;&#x9;&amp;quot;os&amp;quot;&#xA;&#xA;&#x9;&amp;quot;github.com/paulrosania/go-charset/charset&amp;quot;&#xA;&#x9;_ &amp;quot;github.com/paulrosania/go-charset/data&amp;quot;&#xA;&#x9;&amp;quot;github.com/saintfish/chardet&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;filePath := &amp;quot;e:\\demo.txt&amp;quot;&#xA;&#x9;FileHandle, err := os.Open(filePath)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatal(err)&#xA;&#x9;}&#xA;&#x9;defer FileHandle.Close()&#xA;&#x9;buffer := make([]byte, 1024)&#xA;&#x9;n, err := FileHandle.Read(buffer)&#xA;&#x9;// 控制条件,根据实际调整&#xA;&#x9;if err != nil &amp;amp;&amp;amp; err != io.EOF {&#xA;&#x9;&#x9;log.Println(err)&#xA;&#x9;}&#xA;&#x9;// 如下代码打印出每次读取的文件块(字节数)&#xA;&#x9;//fmt.Println(string(buffer[:n]))&#xA;&#x9;text := buffer[:n]&#xA;&#x9;detector := chardet.NewTextDetector()&#xA;&#x9;result, err := detector.DetectBest(text)&#xA;&#x9;if err == nil {&#xA;&#x9;&#x9;fmt.Printf(&#xA;&#x9;&#x9;&#x9;&amp;quot;Detected charset is %s, language is %s&amp;quot;,&#xA;&#x9;&#x9;&#x9;result.Charset,&#xA;&#x9;&#x9;&#x9;result.Language)&#xA;&#x9;&#x9;r, err := charset.NewReader(result.Charset, bytes.NewReader(text))&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;log.Fatal(err)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;result, err := ioutil.ReadAll(r)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;log.Fatal(err)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;fmt.Printf(&amp;quot;%s\n&amp;quot;, result)&#xA;&#x9;}&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;效果还行&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>Go微服务</title>
+      <link>https://studygolang.com/topics/15978#reply1</link>
+      <description>&lt;p&gt;如何开始学微服务？先学哪个再到哪个。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go微服务</title>
