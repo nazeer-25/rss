@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "16 号线周浦东、鹤沙航城有转租/出租 一室户么？ - 上海",
+      "Link": "https://www.v2ex.com/t/896652",
+      "Description": "\u003cp\u003e最好是大房东，3000 左右， 两居也可以考虑\u003c/p\u003e\n",
+      "Author": "mygao666",
+      "PubDate": "2022-11-20T13:47:29Z"
+    },
+    {
       "Title": "一个帮助合并 state 的自定义 hook` 大家看看有啥问题· - React",
       "Link": "https://www.v2ex.com/t/896645",
       "Description": "\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e\nimport { useCallback, useState } from 'react';\n\nconst getType = (value) =\u0026gt; {\n  const type = Object.prototype.toString.call(value);\n  if (type === '[object Object]') {\n    return 'isObject'\n  } else if (type === '[object Array]') {\n    return 'isArray'\n  }\n  return typeof value;\n}\n\nconst useMerge = (initialState) =\u0026gt; {\n  const [state, setState] = useState(initialState);\n  const stateType = getType(initialState);\n\n  const handleMerge = useCallback((handleObject = {}) =\u0026gt; {\n\n    const { id, type, value } = handleObject;\n    const merge = (state) =\u0026gt; {\n      let mergeData = {};\n      if (stateType === 'isObject') {\n        mergeData = {\n          ...state,\n          ...value\n        }\n      }\n      if (stateType === 'isArray') {\n        if (type === 'remove') {\n          mergeData = state.filter((item) =\u0026gt; {\n            return item.id !== id\n          })\n        }\n\n        if (type === 'add') {\n          mergeData = [...state, value];\n        }\n\n        if (type === 'update') {\n          mergeData = state.map((item) =\u0026gt; {\n            if (item.id === id) {\n              return {\n                ...item,\n                ...value\n              }\n            }\n            return item;\n          })\n        }\n      }\n      return mergeData;\n    }\n\n    setState((prevState) =\u0026gt; merge(prevState))\n  }, [])\n\n  return [state, handleMerge];\n}\n\nexport default useMerge;\n\n\u003c/code\u003e\u003c/pre\u003e\n",

@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>16 号线周浦东、鹤沙航城有转租/出租 一室户么？ - 上海</title>
+      <link>https://www.v2ex.com/t/896652</link>
+      <description>&lt;p&gt;最好是大房东，3000 左右， 两居也可以考虑&lt;/p&gt;&#xA;</description>
+      <author>mygao666</author>
+      <pubDate>20 Nov 2022 13:47:29 +0000</pubDate>
+    </item>
+    <item>
       <title>一个帮助合并 state 的自定义 hook` 大家看看有啥问题· - React</title>
       <link>https://www.v2ex.com/t/896645</link>
       <description>&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;&#xA;import { useCallback, useState } from &#39;react&#39;;&#xA;&#xA;const getType = (value) =&amp;gt; {&#xA;  const type = Object.prototype.toString.call(value);&#xA;  if (type === &#39;[object Object]&#39;) {&#xA;    return &#39;isObject&#39;&#xA;  } else if (type === &#39;[object Array]&#39;) {&#xA;    return &#39;isArray&#39;&#xA;  }&#xA;  return typeof value;&#xA;}&#xA;&#xA;const useMerge = (initialState) =&amp;gt; {&#xA;  const [state, setState] = useState(initialState);&#xA;  const stateType = getType(initialState);&#xA;&#xA;  const handleMerge = useCallback((handleObject = {}) =&amp;gt; {&#xA;&#xA;    const { id, type, value } = handleObject;&#xA;    const merge = (state) =&amp;gt; {&#xA;      let mergeData = {};&#xA;      if (stateType === &#39;isObject&#39;) {&#xA;        mergeData = {&#xA;          ...state,&#xA;          ...value&#xA;        }&#xA;      }&#xA;      if (stateType === &#39;isArray&#39;) {&#xA;        if (type === &#39;remove&#39;) {&#xA;          mergeData = state.filter((item) =&amp;gt; {&#xA;            return item.id !== id&#xA;          })&#xA;        }&#xA;&#xA;        if (type === &#39;add&#39;) {&#xA;          mergeData = [...state, value];&#xA;        }&#xA;&#xA;        if (type === &#39;update&#39;) {&#xA;          mergeData = state.map((item) =&amp;gt; {&#xA;            if (item.id === id) {&#xA;              return {&#xA;                ...item,&#xA;                ...value&#xA;              }&#xA;            }&#xA;            return item;&#xA;          })&#xA;        }&#xA;      }&#xA;      return mergeData;&#xA;    }&#xA;&#xA;    setState((prevState) =&amp;gt; merge(prevState))&#xA;  }, [])&#xA;&#xA;  return [state, handleMerge];&#xA;}&#xA;&#xA;export default useMerge;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
