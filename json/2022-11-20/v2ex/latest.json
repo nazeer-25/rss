@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "关于 nginx 做 tcp 反代的域名解析设置 - 问与答",
+      "Link": "https://www.v2ex.com/t/896523",
+      "Description": "\u003cp\u003e关于 nginx 做 tcp 反代的域名解析设置\u003c/p\u003e\n\u003cp\u003e现在通过 nginx stream 模块做 tcp 反向代理\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-nginx\"\u003estream {\n\n  upstream example-ser{\n        server example.com:1234;\n  }\n\n\n  server {\n      listen 1234;\n      proxy_connect_timeout 10s;\n      proxy_timeout 10s;\n      proxy_pass example-ser;\n  }\n\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如果 \u003ca href=\"http://example.com\" rel=\"nofollow\"\u003eexample.com\u003c/a\u003e 的地址解析出现变化，nginx 还是转发到原先的 IP 地址。\u003c/p\u003e\n\u003cp\u003e在 stream 模块内使用 set 提示报错\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-nginx\"\u003estream {  \n\tresolver 223.5.5.5 valid=60s;\n  set $example-ser example.com:1234;\n  \n    server {\n      listen 1234;\n      proxy_connect_timeout 10s;\n      proxy_timeout 10s;\n      proxy_pass $example-ser;\n  }\n}\n\n#报错\nnginx[21518]: nginx: [emerg] \"set\" directive is not allowed here in\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eHTTP 或 HTTPS 我都是使用 resolver 加 set 变量方法做的，tcp 四层现在不知道怎么配置。\u003c/p\u003e\n\u003cp\u003e求解答，谢谢\u003c/p\u003e\n",
+      "Author": "manfred4527",
+      "PubDate": "2022-11-20T01:54:28Z"
+    },
+    {
       "Title": "Surge iOS 三人车， 135/人 - Surge",
       "Link": "https://www.v2ex.com/t/896519",
       "Description": "vx: WXVrdW5fX1pob3U=功能订阅有效期到 2023 年 11 月 20 日",
