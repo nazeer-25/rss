@@ -4,6 +4,33 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>给戴尔整笑了 - 服务器</title>
+      <link>https://www.v2ex.com/t/896749</link>
+      <description>&lt;p&gt;公司采购一台服务器，联系戴尔售前让安装系统后发过来。&lt;/p&gt;&#xA;&lt;p&gt;我：能安装 Ubuntu/Debian 吗？&lt;/p&gt;&#xA;&lt;p&gt;售前：不行，只能 CentOS/RHEL ，而且不能是 CentOS7 。&lt;/p&gt;&#xA;&lt;p&gt;我：那就安装 CentOS 最新版吧。&lt;/p&gt;&#xA;&lt;p&gt;然后售前发回来一张默认账号密码分配的图，上面写着有 Ubuntu...&lt;/p&gt;&#xA;&lt;p&gt;到货之后开机发现是已经在去年 EOL 的 CentOS stream 8 ，默认下连 yum update 都不行，gg 。&lt;/p&gt;&#xA;&lt;p&gt;还好不是我要用的机器:p&lt;/p&gt;&#xA;</description>
+      <author>sodayo</author>
+      <pubDate>21 Nov 2022 03:51:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教个 ELK 中, logstash 根据不同主机的 `tags` 来指定索引的问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/896746</link>
+      <description>&lt;p&gt;现在有多台主机, 需要把不同的日志分到不同的 es 索引上. 目前的 &lt;code&gt;logstash&lt;/code&gt; 配置是:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt; input {&#xA;       beats {&#xA;         port =&amp;gt; 9090&#xA;         client_inactivity_timeout =&amp;gt; 3600&#xA;      }&#xA;    }&#xA;    output {&#xA;      if [tags] in &#34;oa&#34; {&#xA;        elasticsearch {&#xA;          action =&amp;gt; &#34;index&#34;&#xA;          hosts =&amp;gt; [&#34;http://es:9200&#34;]&#xA;          index  =&amp;gt; &#34;oa-log-%{+YYYY-MM-dd}&#34;&#xA;          user =&amp;gt; &#34;user&#34;&#xA;          password =&amp;gt; &#34;user_pwd&#34;&#xA;        }&#xA;      }&#xA;      if [tags] in &#34;kernel-log&#34; {&#xA;        elasticsearch {&#xA;          action =&amp;gt; &#34;index&#34;&#xA;          hosts =&amp;gt; [&#34;http://es:9200&#34;]&#xA;          index  =&amp;gt; &#34;kernel-log-%{+YYYY-MM-dd}&#34;&#xA;          user =&amp;gt; &#34;user&#34;&#xA;          password =&amp;gt; &#34;user_pwd&#34;&#xA;        }&#xA;  }&#xA;     } &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;其中一台主机的 filebeat 配置:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;filebeat.inputs:&#xA;- type: log&#xA;  enabled: true&#xA;  paths:&#xA;    - /var/log/oa/*.log&#xA;  tags: [&#34;oa-1-192-ACCESS&#34;]&#xA;  fields:&#xA;    index: oa-log-%{+YYYY-MM-dd}&#xA;filebeat.config.modules:&#xA;  path: ${path.config}/modules.d/*.yml&#xA;  reload.enabled: true&#xA;output.logstash:&#xA;  hosts: [&#34;logstash:9090&#34;]&#xA;  enabled: true&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;没有根据 &lt;code&gt;tags&lt;/code&gt; 指定索引的时候, 是正常的.&lt;/p&gt;&#xA;&lt;p&gt;现在添加 &lt;code&gt;if&lt;/code&gt; 字段后, 发现 &lt;code&gt;es&lt;/code&gt; 上没有自动创建这个索引.&#xA;&lt;code&gt;es&lt;/code&gt; 中也允许自动创建 &lt;code&gt;oa*&lt;/code&gt;, &lt;code&gt;kernel*&lt;/code&gt; 这俩索引了&#xA;ES 新手. 麻烦请教下这个问题&lt;/p&gt;&#xA;</description>
+      <author>proxychains</author>
+      <pubDate>21 Nov 2022 03:40:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>前端学习后端，语言选择 - 程序员</title>
+      <link>https://www.v2ex.com/t/896745</link>
+      <description>&lt;p&gt;前端一名，想要学习后端，有 node 基础(CRUD)，期望从 java/python/go 中选一门进行学习，老哥们给点意见&lt;/p&gt;&#xA;</description>
+      <author>TaoLoading</author>
+      <pubDate>21 Nov 2022 03:38:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>想知道大家的常用浏览器 - 问与答</title>
+      <link>https://www.v2ex.com/t/896743</link>
+      <author>catvoo</author>
+      <pubDate>21 Nov 2022 03:36:28 +0000</pubDate>
+    </item>
+    <item>
       <title>有没有办法在 iPhone 上实现类似 Time Machine 的功能 - 问与答</title>
       <link>https://www.v2ex.com/t/896741</link>
       <description>晚上睡觉的时候自动备份数据</description>

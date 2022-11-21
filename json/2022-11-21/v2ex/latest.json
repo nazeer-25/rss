@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "给戴尔整笑了 - 服务器",
+      "Link": "https://www.v2ex.com/t/896749",
+      "Description": "\u003cp\u003e公司采购一台服务器，联系戴尔售前让安装系统后发过来。\u003c/p\u003e\n\u003cp\u003e我：能安装 Ubuntu/Debian 吗？\u003c/p\u003e\n\u003cp\u003e售前：不行，只能 CentOS/RHEL ，而且不能是 CentOS7 。\u003c/p\u003e\n\u003cp\u003e我：那就安装 CentOS 最新版吧。\u003c/p\u003e\n\u003cp\u003e然后售前发回来一张默认账号密码分配的图，上面写着有 Ubuntu...\u003c/p\u003e\n\u003cp\u003e到货之后开机发现是已经在去年 EOL 的 CentOS stream 8 ，默认下连 yum update 都不行，gg 。\u003c/p\u003e\n\u003cp\u003e还好不是我要用的机器:p\u003c/p\u003e\n",
+      "Author": "sodayo",
+      "PubDate": "2022-11-21T03:51:14Z"
+    },
+    {
+      "Title": "请教个 ELK 中, logstash 根据不同主机的 `tags` 来指定索引的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/896746",
+      "Description": "\u003cp\u003e现在有多台主机, 需要把不同的日志分到不同的 es 索引上. 目前的 \u003ccode\u003elogstash\u003c/code\u003e 配置是:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yml\"\u003e input {\n       beats {\n         port =\u0026gt; 9090\n         client_inactivity_timeout =\u0026gt; 3600\n      }\n    }\n    output {\n      if [tags] in \"oa\" {\n        elasticsearch {\n          action =\u0026gt; \"index\"\n          hosts =\u0026gt; [\"http://es:9200\"]\n          index  =\u0026gt; \"oa-log-%{+YYYY-MM-dd}\"\n          user =\u0026gt; \"user\"\n          password =\u0026gt; \"user_pwd\"\n        }\n      }\n      if [tags] in \"kernel-log\" {\n        elasticsearch {\n          action =\u0026gt; \"index\"\n          hosts =\u0026gt; [\"http://es:9200\"]\n          index  =\u0026gt; \"kernel-log-%{+YYYY-MM-dd}\"\n          user =\u0026gt; \"user\"\n          password =\u0026gt; \"user_pwd\"\n        }\n  }\n     } \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其中一台主机的 filebeat 配置:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yml\"\u003efilebeat.inputs:\n- type: log\n  enabled: true\n  paths:\n    - /var/log/oa/*.log\n  tags: [\"oa-1-192-ACCESS\"]\n  fields:\n    index: oa-log-%{+YYYY-MM-dd}\nfilebeat.config.modules:\n  path: ${path.config}/modules.d/*.yml\n  reload.enabled: true\noutput.logstash:\n  hosts: [\"logstash:9090\"]\n  enabled: true\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e没有根据 \u003ccode\u003etags\u003c/code\u003e 指定索引的时候, 是正常的.\u003c/p\u003e\n\u003cp\u003e现在添加 \u003ccode\u003eif\u003c/code\u003e 字段后, 发现 \u003ccode\u003ees\u003c/code\u003e 上没有自动创建这个索引.\n\u003ccode\u003ees\u003c/code\u003e 中也允许自动创建 \u003ccode\u003eoa*\u003c/code\u003e, \u003ccode\u003ekernel*\u003c/code\u003e 这俩索引了\nES 新手. 麻烦请教下这个问题\u003c/p\u003e\n",
+      "Author": "proxychains",
+      "PubDate": "2022-11-21T03:40:08Z"
+    },
+    {
+      "Title": "前端学习后端，语言选择 - 程序员",
+      "Link": "https://www.v2ex.com/t/896745",
+      "Description": "\u003cp\u003e前端一名，想要学习后端，有 node 基础(CRUD)，期望从 java/python/go 中选一门进行学习，老哥们给点意见\u003c/p\u003e\n",
+      "Author": "TaoLoading",
+      "PubDate": "2022-11-21T03:38:49Z"
+    },
+    {
+      "Title": "想知道大家的常用浏览器 - 问与答",
+      "Link": "https://www.v2ex.com/t/896743",
+      "Description": "",
+      "Author": "catvoo",
+      "PubDate": "2022-11-21T03:36:28Z"
+    },
+    {
       "Title": "有没有办法在 iPhone 上实现类似 Time Machine 的功能 - 问与答",
       "Link": "https://www.v2ex.com/t/896741",
       "Description": "晚上睡觉的时候自动备份数据",
