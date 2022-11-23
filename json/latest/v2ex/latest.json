@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Magician-Web3 1.0.3 发布啦，可以根据 inputData 里的数据 进行监控了 - 以太坊",
+      "Link": "https://www.v2ex.com/t/897393",
+      "Description": "\u003cp\u003eMagician-Web3 是一个区块链开发工具包。它由两个功能组成。一个是扫描区块链，根据开发者的需要监控交易。另一个是对 web3j 的一些二次打包，可以减少开发者在一些常见场景下的工作量。它计划支持三种链，ETH （ BSC 、POLYGAN 等）、SOL 和 TRON\u003c/p\u003e\n\u003ch2\u003e本次更新的点\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e新增 InputDataFilter ，可以更加精准的根据 inputData 进行监控了\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e改变扫描模式，现在只需要设定一个起始块就好了，程序会按照一定的频率从起始块往后扫描，不再需要设置每轮扫描块数\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eWeb3j 的扩展部分，修改了私钥的传入方式\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003eInputDataFilter\u003c/h2\u003e\n\u003cp\u003e如果你想监控，某合约内的某函数 被调用的交易\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003epublic EthMonitorFilter ethMonitorFilter() {\n        return EthMonitorFilter.builder()\n                .setToAddress(\"0x552115849813d334C58f2757037F68E2963C4c5e\") // 合约地址\n                .setInputDataFilter( // 根据 inputData 筛选\n                        InputDataFilter.create()\n                                .setFunctionCode(\"0xadasasdf\") // 被调用的函数编码（ inputData 前十位）\n                );\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如果 有一个合约 [0x552115849813d334C58f2757037F68E2963C4c5e], 里面有一个函数是 transferFrom (address from, address to, uint256 amount)\u003c/p\u003e\n\u003cp\u003e你想 实现一个监控：如果有人用这个合约里的这个函数，将代币转给 [0x552115849813d334C58f2757037F68E2963C4c5e] 时，就触发 Monitor 事件，那么你可以这样写\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003epublic EthMonitorFilter ethMonitorFilter() {\n        return EthMonitorFilter.builder()\n                .setToAddress(\"0x552115849813d334C58f2757037F68E2963C4c5e\") // 合约地址\n                .setInputDataFilter( // 根据 inputData 筛选\n                        InputDataFilter.create()\n                                .setFunctionCode(ERC20.TRANSFER_FROM.getFunctionCode()) // 被调用的函数编码（ inputData 前十位）\n                                .setTypeReferences( // 此方法的参数列表（仅类型）\n                                        new TypeReference\u0026lt;Address\u0026gt;(){}, // 第一个参数的类型\n                                        new TypeReference\u0026lt;Address\u0026gt;(){}, // 第二个参数的类型\n                                        new TypeReference\u0026lt;Uint256\u0026gt;(){} // 第三个参数的类型\n                                )\n                                .setValue(null, \"0x552115849813d334C58f2757037F68E2963C4c5e\", null)// 筛选第二个参数（ to ） = 0x552115849813d334C58f2757037F68E2963C4c5e\n                );\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e只需要设置起始块\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003eMagicianBlockchainScan.create()\n        .setRpcUrl(\"https://data-seed-prebsc-1-s1.binance.org:8545/\")\n        .setChainType(ChainType.ETH)\n        .setScanPeriod(5000) \n        .setScanSize(1000) // 这个配置项已经被彻底移除了，不再需要配置了\n        .setBeginBlockNumber(BigInteger.valueOf(24318610))\n        .addEthMonitorEvent(new EventOne())\n        .addEthMonitorEvent(new EventTwo())\n        .addEthMonitorEvent(new EventThree())\n        .start();\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e扫描的逻辑换成了从起始块 按照一定的频率 一块一块的往后扫，不再是以前的 每轮扫描多少块了\u003c/p\u003e\n\u003ch2\u003eWeb3j 的扩展部分，修改了私钥的传入方式\u003c/h2\u003e\n\u003cp\u003e这种方式已经淘汰了\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003eEthHelper ethHelper = MagicianWeb3.getEthBuilder().getEth(web3j, privateKey);\n\nEthContract ethContract = MagicianWeb3.getEthBuilder().getEthContract(web3j, privateKey);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e现在换成了，在调用方法时 才传入，目的是为了解决：如果有多个地址 需要发起交易，可以只用一个对象解决\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e// 转账\nTransactionReceipt transactionReceipt = ethHelper.transfer(\n            toAddress,\n            privateKey, // 调用方法时传入私钥\n            BigDecimal.valueOf(1),\n            Convert.Unit.ETHER\n);\n\n\n// 往合约里写入数据\nSendResultModel sendResultModel = ethContract.sendRawTransaction(\n                    fromAddress, \n                    contractAddress, \n                    privateKey, // 调用方法时传入私钥\n                    new BigInteger(\"1200000\"),\n                    new BigInteger(\"800000\"),\n                    ethAbiCodec.getInputData(\n                            \"transfer\",\n                            new Address(toAddress),\n                            new Uint256(new BigInteger(\"1000000000000000000\"))\n                    )\n            );\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可以访问官网了解更多：\u003ca href=\"https://magician-io.com\" rel=\"nofollow\"\u003ehttps://magician-io.com\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "Joker123456789",
+      "PubDate": "2022-11-23T08:56:34Z"
+    },
+    {
       "Title": "搭建公司内部的 IP 电话系统， 大家有厂家和方案推荐么？ - 分享发现",
       "Link": "https://www.v2ex.com/t/897391",
       "Description": "公司内部用的电话系统，大家现在还用 PBX 来搭建么？\u003cbr /\u003e有没有什么新的技术可以建议。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e用量大概 1000 ～ 3000 台。\u003cbr /\u003e\u003cbr /\u003e成本要尽量低，不要太高，方便扩容和适配未来应用。",
@@ -107,13 +114,6 @@
       "Description": "\u003cp\u003e每过一段时间就提示重新输入密码，真的很烦，不输的话就收不到邮件。我去 outlook 邮件设置里面找也没有找到相关选项，请问你们是怎么解决的？\u003c/p\u003e\n",
       "Author": "daoba007",
       "PubDate": "2022-11-23T07:31:55Z"
-    },
-    {
-      "Title": "不得不佩服咱的造词能力，自从不让判定次密接后改判定“核心密接”和“一般密接”了 - 问与答",
-      "Link": "https://www.v2ex.com/t/897369",
-      "Description": "",
-      "Author": "HFX3389",
-      "PubDate": "2022-11-23T07:28:51Z"
     },
     {
       "Title": "我们把「待办清单+日程安排+文档内容三合一」做了个待办聚合功能 - 分享创造",
@@ -240,6 +240,13 @@
       "Description": "\u003cp\u003e一直以来，我都是按照 图片 /视频 /游戏 等分类，并存放在硬盘中\u003c/p\u003e\n\u003cp\u003e这样会带来两个问题：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e有些东西是配套的，可能同时包含文字、视频、图片\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e直接出现在文件系统中，经常在“最近文件“之类的地方蹦出来\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eNotion 似乎可以解决，可以非常灵活地排列组合不同的信息，但私密性不够\u003c/p\u003e\n\u003cp\u003eDEVONthink 似乎也可以解决，但他是单纯的文件管理系统，在内容的排列上有所欠缺\u003c/p\u003e\n",
       "Author": "callmesmc",
       "PubDate": "2022-11-23T06:32:05Z"
+    },
+    {
+      "Title": "不得不佩服咱的造词能力，自从不让判定次密接后改判定“核心密接”和“一般密接”了 - 问与答",
+      "Link": "https://www.v2ex.com/t/897369",
+      "Description": "",
+      "Author": "HFX3389",
+      "PubDate": "2022-11-23T07:28:51Z"
     },
     {
       "Title": "大家都来说说黑五有什么好物推荐的？ - 问与答",
