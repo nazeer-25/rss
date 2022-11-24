@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Fav: 命令行收藏夹, 主要用于收藏文件/文件夹路径 - 分享创造</title>
+      <link>https://www.v2ex.com/t/897561</link>
+      <description>&lt;p&gt;Fav 是一个只有字符界面的命令行收藏夹, 主要用于收藏文件 /文件夹路径,&#xA;另外用来收藏常用的 命令 /网址 也很合适.&lt;/p&gt;&#xA;&lt;p&gt;特点:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;基本原理极致简单&lt;/li&gt;&#xA;&lt;li&gt;代码非常简单&lt;/li&gt;&#xA;&lt;li&gt;意外地好用&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;基本用法示例&lt;/h2&gt;&#xA;&lt;p&gt;假设已经登记了 3 行内容:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;/path/to/folder&#xA;https://example.com&#xA;C:\User\XiaoMei\&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;使用本程序登记的全部数据, 记录在一个纯文本文件中, 如上所示.&lt;br/&gt;&#xA;(不是 JSON, 不是 YAML, 完全不需要考虑格式与字符转义, 就是纯文本, 一行一句.)&lt;/p&gt;&#xA;&lt;p&gt;执行命令 &lt;code&gt;fav&lt;/code&gt; 会显示收藏列表:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;1. /path/to/folder&#xA;2. https://example.com&#xA;3. C:\User\XiaoMei\abc.txt&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;执行命令 &lt;code&gt;fav 2&lt;/code&gt; 会在屏幕上打印 &lt;code&gt;&lt;a href=&#34;https://example.com&#34; rel=&#34;nofollow&#34;&gt;https://example.com&lt;/a&gt;&lt;/code&gt;, 同时复制到剪贴板.&lt;/p&gt;&#xA;&lt;p&gt;执行命令 &lt;code&gt;vim $(fav 3)&lt;/code&gt; 相当于执行 &lt;code&gt;vim C:\User\XiaoMei\abc.txt&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;执行命令 &lt;code&gt;fav -del 2&lt;/code&gt; 可以删除第 2 行, 结果变成:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;1. /path/to/folder&#xA;2.&#xA;3. C:\User\XiaoMei\abc.txt&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;strong&gt;重点: 序号与内容的对应关系不会变&lt;/strong&gt;, 这是本程序的最重要的特性.&lt;/p&gt;&#xA;&lt;p&gt;后续使用命令 &lt;code&gt;fav -add&lt;/code&gt; 新增内容会自动填补空缺.&lt;/p&gt;&#xA;&lt;p&gt;如果要改变顺序, 或修改其中一行的内容, 可以直接打开原始数据文件, 直接修改即可.&lt;/p&gt;&#xA;&lt;p&gt;例如, 假设第 1 行就是原始数据文件的路径, 那么执行命令&#xA;&lt;code&gt;vim $(fav 1)&lt;/code&gt; 就能直接打开文件进行编辑, 非常方便.&lt;/p&gt;&#xA;&lt;p&gt;执行命令 &lt;code&gt;fav -info&lt;/code&gt; 可以找到原始数据文件的位置, 使用命令&#xA;&lt;code&gt;fav -add /path/to/file.txt&lt;/code&gt; (其中 &#39;/path/to/file.txt&#39; 改为具体的文件路径)&#xA;添加路径到收藏列表中, 以后就可以通过上述方法方便地打开文件了.&lt;/p&gt;&#xA;&lt;h2&gt;搜索&lt;/h2&gt;&#xA;&lt;p&gt;可以采用符合命令行习惯方法进行搜索, 例如:&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;fav |grep abcd&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;如果使用 &lt;a href=&#34;https://github.com/BurntSushi/ripgrep&#34; rel=&#34;nofollow&#34;&gt;ripgrep&lt;/a&gt;, 则是&#xA;&lt;code&gt;fav |rg -i abcd&lt;/code&gt; 其中 &lt;code&gt;-i&lt;/code&gt; 表示不分大小写.&lt;/p&gt;&#xA;&lt;h2&gt;源代码&lt;/h2&gt;&#xA;&lt;p&gt;本程序的源代码基本上就是一个文件 &lt;a href=&#34;https://github.com/ahui2016/py-scripts/blob/main/src/fav.py&#34; rel=&#34;nofollow&#34;&gt;https://github.com/ahui2016/py-scripts/blob/main/src/fav.py&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;全部代码只有 100 行左右, 极致简单, 下面介绍了通过源码进行本地安装的方法,&#xA;另外你也可以采用其它方法, 比如自己打包发布到 PyPI.&lt;/p&gt;&#xA;&lt;p&gt;由于这个小工具的原理与代码是如此之简单, 你也可以用自己熟悉的语言改写,&#xA;只要花很少时间即可, 从此拥有一个命令行收藏夹, 还蛮好用的.&lt;/p&gt;&#xA;&lt;p&gt;我自己是在 Windows 里使用, 将 Windows Terminal 固定在任务栏第一位,&#xA;按 Win+1 就能调出终端使用命令行工具.&lt;/p&gt;&#xA;&lt;h2&gt;安装与使用&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;源码仓库及安装方法 &lt;a href=&#34;https://github.com/ahui2016/py-scripts&#34; rel=&#34;nofollow&#34;&gt;py-scripts&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;详细使用方法 &lt;a href=&#34;https://github.com/ahui2016/py-scripts/blob/main/docs/fav-usage.md&#34; rel=&#34;nofollow&#34;&gt;fav-usage.md&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>SuperMild</author>
+      <pubDate>24 Nov 2022 04:24:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>[北京] 海外业务公司招聘，目前是线上面试，看机会的可以来试试 - 酷工作</title>
+      <link>https://www.v2ex.com/t/897559</link>
+      <description>&lt;p&gt;专注海外用户，已在系统工具、休闲游戏、内容资讯三大产品矩阵中累计服务了全球数亿用户。产品多次被谷歌官方推荐，创始团队背景系全球初代移动应用出海开发者，业务骨干来自于字节、美团、京东、掌游等互联网应用和游戏厂商。&lt;/p&gt;&#xA;&lt;p&gt;地点北京，产品经理、数据开发、数仓开发、游戏动效、Unity 开发工程师、游戏 UI 设计师等诸多产品研发设计岗位在招。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://app.mokahr.com/m/recommendation-apply/amber2021/36360?sharePageId=2104085&amp;amp;recommendCode=NTAM3qF&amp;amp;codeType=1&amp;amp;code=091Qcz200QH4WO1qh2200wodOg2Qcz2l&amp;amp;state=3#/recommendation/page/2104085&#34; rel=&#34;nofollow&#34;&gt;点击查看招聘信息&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;内推成功，奖金我们五五开&lt;/p&gt;&#xA;</description>
+      <author>wubuwei</author>
+      <pubDate>24 Nov 2022 04:18:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>通过视频标题分析国人 xp - 分享发现</title>
+      <link>https://www.v2ex.com/t/897558</link>
+      <description>&lt;p&gt;我从某知名网站获取了大量视频标题，然后通过关键词统计频率，得到了一些有意思的数据，我想可以从中一窥国人的 xp 情况。&lt;/p&gt;&#xA;&lt;p&gt;文章地址： &lt;a href=&#34;https://hsingko.github.io/post/2022/11/24/ml-in-china/&#34; rel=&#34;nofollow&#34;&gt;https://hsingko.github.io/post/2022/11/24/ml-in-china/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>vigack</author>
+      <pubDate>24 Nov 2022 04:14:35 +0000</pubDate>
+    </item>
+    <item>
       <title>笔记软件 Craft 1 年订阅价 5 折优惠 - 优惠信息</title>
       <link>https://www.v2ex.com/t/897557</link>
       <description>嗯，和去年 &lt;a target=&#34;_blank&#34; href=&#34;/t/815171&#34; rel=&#34;nofollow noopener&#34;&gt;/t/815171&lt;/a&gt; 比他们把基础价格提高了，所以其实还是 $30 的年付价格。付款时输入 HAPPYBD 即可享受。&lt;br /&gt;&lt;br /&gt;购买链接 -&amp;gt; &lt;a target=&#34;_blank&#34; href=&#34;https://www.craft.do/pricing&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.craft.do/pricing&lt;/a&gt;</description>

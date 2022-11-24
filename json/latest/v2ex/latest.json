@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Fav: 命令行收藏夹, 主要用于收藏文件/文件夹路径 - 分享创造",
+      "Link": "https://www.v2ex.com/t/897561",
+      "Description": "\u003cp\u003eFav 是一个只有字符界面的命令行收藏夹, 主要用于收藏文件 /文件夹路径,\n另外用来收藏常用的 命令 /网址 也很合适.\u003c/p\u003e\n\u003cp\u003e特点:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e基本原理极致简单\u003c/li\u003e\n\u003cli\u003e代码非常简单\u003c/li\u003e\n\u003cli\u003e意外地好用\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e基本用法示例\u003c/h2\u003e\n\u003cp\u003e假设已经登记了 3 行内容:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-text\"\u003e/path/to/folder\nhttps://example.com\nC:\\User\\XiaoMei\\\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e使用本程序登记的全部数据, 记录在一个纯文本文件中, 如上所示.\u003cbr/\u003e\n(不是 JSON, 不是 YAML, 完全不需要考虑格式与字符转义, 就是纯文本, 一行一句.)\u003c/p\u003e\n\u003cp\u003e执行命令 \u003ccode\u003efav\u003c/code\u003e 会显示收藏列表:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-text\"\u003e1. /path/to/folder\n2. https://example.com\n3. C:\\User\\XiaoMei\\abc.txt\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e执行命令 \u003ccode\u003efav 2\u003c/code\u003e 会在屏幕上打印 \u003ccode\u003e\u003ca href=\"https://example.com\" rel=\"nofollow\"\u003ehttps://example.com\u003c/a\u003e\u003c/code\u003e, 同时复制到剪贴板.\u003c/p\u003e\n\u003cp\u003e执行命令 \u003ccode\u003evim $(fav 3)\u003c/code\u003e 相当于执行 \u003ccode\u003evim C:\\User\\XiaoMei\\abc.txt\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e执行命令 \u003ccode\u003efav -del 2\u003c/code\u003e 可以删除第 2 行, 结果变成:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-text\"\u003e1. /path/to/folder\n2.\n3. C:\\User\\XiaoMei\\abc.txt\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003e重点: 序号与内容的对应关系不会变\u003c/strong\u003e, 这是本程序的最重要的特性.\u003c/p\u003e\n\u003cp\u003e后续使用命令 \u003ccode\u003efav -add\u003c/code\u003e 新增内容会自动填补空缺.\u003c/p\u003e\n\u003cp\u003e如果要改变顺序, 或修改其中一行的内容, 可以直接打开原始数据文件, 直接修改即可.\u003c/p\u003e\n\u003cp\u003e例如, 假设第 1 行就是原始数据文件的路径, 那么执行命令\n\u003ccode\u003evim $(fav 1)\u003c/code\u003e 就能直接打开文件进行编辑, 非常方便.\u003c/p\u003e\n\u003cp\u003e执行命令 \u003ccode\u003efav -info\u003c/code\u003e 可以找到原始数据文件的位置, 使用命令\n\u003ccode\u003efav -add /path/to/file.txt\u003c/code\u003e (其中 '/path/to/file.txt' 改为具体的文件路径)\n添加路径到收藏列表中, 以后就可以通过上述方法方便地打开文件了.\u003c/p\u003e\n\u003ch2\u003e搜索\u003c/h2\u003e\n\u003cp\u003e可以采用符合命令行习惯方法进行搜索, 例如:\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003efav |grep abcd\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e如果使用 \u003ca href=\"https://github.com/BurntSushi/ripgrep\" rel=\"nofollow\"\u003eripgrep\u003c/a\u003e, 则是\n\u003ccode\u003efav |rg -i abcd\u003c/code\u003e 其中 \u003ccode\u003e-i\u003c/code\u003e 表示不分大小写.\u003c/p\u003e\n\u003ch2\u003e源代码\u003c/h2\u003e\n\u003cp\u003e本程序的源代码基本上就是一个文件 \u003ca href=\"https://github.com/ahui2016/py-scripts/blob/main/src/fav.py\" rel=\"nofollow\"\u003ehttps://github.com/ahui2016/py-scripts/blob/main/src/fav.py\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e全部代码只有 100 行左右, 极致简单, 下面介绍了通过源码进行本地安装的方法,\n另外你也可以采用其它方法, 比如自己打包发布到 PyPI.\u003c/p\u003e\n\u003cp\u003e由于这个小工具的原理与代码是如此之简单, 你也可以用自己熟悉的语言改写,\n只要花很少时间即可, 从此拥有一个命令行收藏夹, 还蛮好用的.\u003c/p\u003e\n\u003cp\u003e我自己是在 Windows 里使用, 将 Windows Terminal 固定在任务栏第一位,\n按 Win+1 就能调出终端使用命令行工具.\u003c/p\u003e\n\u003ch2\u003e安装与使用\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e源码仓库及安装方法 \u003ca href=\"https://github.com/ahui2016/py-scripts\" rel=\"nofollow\"\u003epy-scripts\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e详细使用方法 \u003ca href=\"https://github.com/ahui2016/py-scripts/blob/main/docs/fav-usage.md\" rel=\"nofollow\"\u003efav-usage.md\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "SuperMild",
+      "PubDate": "2022-11-24T04:24:18Z"
+    },
+    {
+      "Title": "[北京] 海外业务公司招聘，目前是线上面试，看机会的可以来试试 - 酷工作",
+      "Link": "https://www.v2ex.com/t/897559",
+      "Description": "\u003cp\u003e专注海外用户，已在系统工具、休闲游戏、内容资讯三大产品矩阵中累计服务了全球数亿用户。产品多次被谷歌官方推荐，创始团队背景系全球初代移动应用出海开发者，业务骨干来自于字节、美团、京东、掌游等互联网应用和游戏厂商。\u003c/p\u003e\n\u003cp\u003e地点北京，产品经理、数据开发、数仓开发、游戏动效、Unity 开发工程师、游戏 UI 设计师等诸多产品研发设计岗位在招。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://app.mokahr.com/m/recommendation-apply/amber2021/36360?sharePageId=2104085\u0026amp;recommendCode=NTAM3qF\u0026amp;codeType=1\u0026amp;code=091Qcz200QH4WO1qh2200wodOg2Qcz2l\u0026amp;state=3#/recommendation/page/2104085\" rel=\"nofollow\"\u003e点击查看招聘信息\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e内推成功，奖金我们五五开\u003c/p\u003e\n",
+      "Author": "wubuwei",
+      "PubDate": "2022-11-24T04:18:05Z"
+    },
+    {
+      "Title": "通过视频标题分析国人 xp - 分享发现",
+      "Link": "https://www.v2ex.com/t/897558",
+      "Description": "\u003cp\u003e我从某知名网站获取了大量视频标题，然后通过关键词统计频率，得到了一些有意思的数据，我想可以从中一窥国人的 xp 情况。\u003c/p\u003e\n\u003cp\u003e文章地址： \u003ca href=\"https://hsingko.github.io/post/2022/11/24/ml-in-china/\" rel=\"nofollow\"\u003ehttps://hsingko.github.io/post/2022/11/24/ml-in-china/\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "vigack",
+      "PubDate": "2022-11-24T04:14:35Z"
+    },
+    {
       "Title": "笔记软件 Craft 1 年订阅价 5 折优惠 - 优惠信息",
       "Link": "https://www.v2ex.com/t/897557",
       "Description": "嗯，和去年 \u003ca target=\"_blank\" href=\"/t/815171\" rel=\"nofollow noopener\"\u003e/t/815171\u003c/a\u003e 比他们把基础价格提高了，所以其实还是 $30 的年付价格。付款时输入 HAPPYBD 即可享受。\u003cbr /\u003e\u003cbr /\u003e购买链接 -\u0026gt; \u003ca target=\"_blank\" href=\"https://www.craft.do/pricing\" rel=\"nofollow noopener\"\u003ehttps://www.craft.do/pricing\u003c/a\u003e",
