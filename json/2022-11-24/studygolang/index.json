@@ -74,13 +74,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "官方文档 中文文档 还是英文的",
-      "Link": "https://studygolang.com/articles/35972#reply2",
-      "Description": "\u003cp\u003e官方文档 中文文档 还是英文的\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "使用ComPDFKit以编程方式编辑PDF文件",
       "Link": "https://studygolang.com/topics/15986#reply0",
       "Description": "\u003ch2\u003e\u003cstrong\u003e导入 PDF 文件\u003c/strong\u003e\u003c/h2\u003e\n\n\u003cp\u003e\u003cbr\u003e一旦完成集成 ComPDFKit PDF SDK，就可以通过 CPDFDocument 对象打开和显示 PDF 文档。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e// Get the path of a PDF\nstring filePath =\u0026quot;\u0026quot;;\nvar dlg = new OpenFileDialog();\ndlg.Filter = \u0026quot;PDF Files (*.pdf)|*.pdf\u0026quot;;\nif (dlg.ShowDialog() == true)\n{\nfilePath = dlg.FileName;\n}\nelse\n{\nreturn;\n}\n// Initialize a CPDFDocument object with the path to the PDF file\n\nCPDFDocument document = CPDFDocument.InitWithFilePath(filePath);\nif(document==null)\n{\nreturn;\n}\nif(document.ErrorType != CPDFDocumentError.CPDFDocumentErrorSuccess\n\u0026amp;\u0026amp; document.ErrorType != CPDFDocumentError.CPDFDocumentPasswordError)\n{\nreturn;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cbr\u003e\u003c/p\u003e\n\n\u003ch2\u003e\u003cstrong\u003e编辑PDF\u003c/strong\u003e\u003c/h2\u003e\n\n\u003cp\u003e\u003cbr\u003eComPDFKit包含了成熟完整的PDF功能，包括查看、编辑、注释、填表、转换、安全、编辑、OCR、导航等。在下一节中，我们将介绍如何实现这些功能。如果您对其他功能感兴趣，请阅读相关文档或博客。\u003c/p\u003e\n\n\u003cp\u003e\u003cbr\u003e1. 插入 PDF 页面：\u003c/p\u003e\n\n\u003cp\u003e假设您要添加另一个 PDF 文件中的第一个 PDF 页面。并且您想在第一个 PDF 页面之前添加页面。按照此处的代码示例并尝试执行此操作。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eCPDFDocument otherDocument = CPDFDocument.InitWithFilePath(\u0026quot;***\u0026quot;);\ndocument.ImportPagesAtIndex(otherDocument, \u0026quot;0\u0026quot;, 0);\notherDocument.Release();\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cbr\u003e2. Annotation：添加文字说明\u003c/p\u003e\n\n\u003cp\u003e插入 PDF 页面后，还需要进行其他处理。例如，当一行字可能需要更多细节来解释时，您可以使用文本注释。在这里，您可以找到有关如何添加文本注释的方法。\u003c/p\u003e\n\n\u003cp\u003e\u003cbr\u003e3. 注释：突出 PDF 的内容\u003c/p\u003e\n\n\u003cp\u003e现在，您需要突出一些关键字。ComPDFKit 支持执行此操作的常规方法，例如突出显示、下划线、墨水等。以下代码显示了在第 5 页高亮显示所有关键字“Step”的方法。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eCPDFPage page = document.PageAtIndex(4);\nif (page == null)\n    return;\n\nList rects = new List();\nCPDFTextPage textPage = page.GetTextPage();\nCPDFTextSearcher searcher = new CPDFTextSearcher();\nint findIndex = 0;\n\nif (searcher.FindStart(textPage, \u0026quot;Step\u0026quot;, C_Search_Options.Search_Case_Sensitive, findIndex))\n{\n    CRect textRect = new CRect();\n    string textContent = \u0026quot;\u0026quot;;\n    while (searcher.FindNext(page, textPage, ref textRect, ref textContent, ref findIndex))\n    {\n        rects.Add(textRect);\n    }\n}\nsearcher.FindClose();\n\nCPDFHighlightAnnotation highlight = page.CreateAnnot(C_ANNOTATION_TYPE.C_ANNOTATION_HIGHLIGHT) as CPDFHighlightAnnotation;\nbyte[] color = { 0, 255, 0 };\nhighlight.SetColor(color);\nhighlight.SetTransparency(120);\nhighlight.SetQuardRects(rects);\nhighlight.UpdateAp();\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cbr\u003e4. 保存所做的更改\u003c/p\u003e\n\n\u003cp\u003e完成所有更改后，我们可以保存它并完成我们的使用。这是将您所做的所有更改保存在新 PDF 文件中的代码方法。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003edocument.WriteToFilePath(\u0026quot;newFilePath\u0026quot;);\ndocument.Release();\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -98,6 +91,13 @@
       "Title": "尝试用xorm根据结构体建sqlite表，字段类型与长度与结构定义不符合",
       "Link": "https://studygolang.com/topics/15983#reply5",
       "Description": "\u003cp\u003e结构体示例：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype CsTable struct {\n    Id     int64  `xorm:\u0026quot;pk autoincr\u0026quot;`\n    Name   string `xorm:\u0026quot;varchar(40) notnull unique\u0026quot;`\n    Type   string `xorm:\u0026quot;varchar(40)\u0026quot;`\n    Remark string `xorm:\u0026quot;varchar(1024)\u0026quot;`\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e根据此结构体建表代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eerr = engine.Sync2(new(CsTable))\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e运行后用Navicat查看新建的表\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221122/d87a1ad4f1e4979decdd0440967a54d0.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e为什么字段类型与长度与结构体定义不符？\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e尝试用gorm根据结构体建sqlite表，字段类型与长度与结构定义相符合。但是更希望能找到xorm的解决方案。\u003c/p\u003e\n\n\u003cp\u003e哪位大佬能帮忙解答一下，感谢！\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "官方文档 中文文档 还是英文的",
+      "Link": "https://studygolang.com/articles/35972#reply2",
+      "Description": "\u003cp\u003e官方文档 中文文档 还是英文的\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
