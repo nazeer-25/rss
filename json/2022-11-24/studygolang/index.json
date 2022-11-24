@@ -53,9 +53,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "优维低代码：页面标题",
-      "Link": "https://studygolang.com/articles/35974#reply0",
-      "Description": "",
+      "Title": "尝试用xorm根据结构体建sqlite表，字段类型与长度与结构定义不符合",
+      "Link": "https://studygolang.com/topics/15983#reply5",
+      "Description": "\u003cp\u003e结构体示例：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype CsTable struct {\n    Id     int64  `xorm:\u0026quot;pk autoincr\u0026quot;`\n    Name   string `xorm:\u0026quot;varchar(40) notnull unique\u0026quot;`\n    Type   string `xorm:\u0026quot;varchar(40)\u0026quot;`\n    Remark string `xorm:\u0026quot;varchar(1024)\u0026quot;`\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e根据此结构体建表代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eerr = engine.Sync2(new(CsTable))\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e运行后用Navicat查看新建的表\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221122/d87a1ad4f1e4979decdd0440967a54d0.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e为什么字段类型与长度与结构体定义不符？\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e尝试用gorm根据结构体建sqlite表，字段类型与长度与结构定义相符合。但是更希望能找到xorm的解决方案。\u003c/p\u003e\n\n\u003cp\u003e哪位大佬能帮忙解答一下，感谢！\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -81,6 +81,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "优维低代码：页面标题",
+      "Link": "https://studygolang.com/articles/35974#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "游戏打点分析系统",
       "Link": "https://studygolang.com/topics/15988#reply0",
       "Description": "\u003cp\u003e需求背景：开发一套游戏打点分析系统，游戏打点就是：游戏服务器/游戏客户端通过打点接口上报玩家游戏数据，这个过程会非常高的并发以及非常大的数据量，因暂时没考虑使用大数据Bi之类，所以目前暂定架构选择如图（省略开发细节中Redis的使用）：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221123/63e5117766ce33075b61a98d855a53d6.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e后台分析系统\u003c/strong\u003e：使用PHP、Nginx、Mysql实现，因为后台分析系统计算量比较小（最多就是一些求和、求比例操作）且数据都已计算好，支持把Mysql中的数据查出来就好了，所以使用PHP实现，压力应该不会太大\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e打点接口\u003c/strong\u003e：使用Golang、Kafka、Mysql实现，这部分主要是游戏打点会有很大的并发和数据计算量，所以考虑的使用Go，因为数据量很大，同时并发计算都很大，所以引入了Kafka,也就是异步计算\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e具体的流程：\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e1.Client客户端打点通过GoLang开发的接口将打点数据上报至打点平台，存入KafKa\u003c/p\u003e\n\n\u003cp\u003e2.Go同时消费Kafka内数据，将消费结果写入Dot Mysql的同时，将对应结果写入后台分析系统的Mysql主库中\u003c/p\u003e\n\n\u003cp\u003e3.后台分析系统Mysql 通过主从同步将数据从Mysql 主库中同步到从库中\u003c/p\u003e\n\n\u003cp\u003e4.使用PHP查询从库，展示数据\u003c/p\u003e\n\n\u003cp\u003e我是后端小白，求各位高人指点，哪里需要改进或者有什么坑，或者有更好的方式\u003c/p\u003e\n",
@@ -98,13 +105,6 @@
       "Title": "go-dongle 0.1.3 版本发布， 轻量级、语义化、对开发者友好的 Golang 编码解码、加密解密库",
       "Link": "https://studygolang.com/topics/15985#reply0",
       "Description": "\u003cp\u003e\u003ccode\u003eDongle\u003c/code\u003e 是一个轻量级、语义化、对开发者友好的 golang 编码解码、加密解密库\u003c/p\u003e\n\n\u003cp\u003e\u003ccode\u003eDongle\u003c/code\u003e 已被 \u003ca href=\"https://github.com/avelino/awesome-go#security\" title=\"awesome-go\"\u003eawesome-go\u003c/a\u003e 收录, 如果您觉得不错，请给个 star 吧\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/golang-module/dongle\" title=\"github.com/golang-module/dongle\"\u003egithub.com/golang-module/dongle\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://gitee.com/golang-module/dongle\" title=\"gitee.com/golang-module/dongle\"\u003egitee.com/golang-module/dongle\u003c/a\u003e\u003c/p\u003e\n\n\u003ch5\u003e安装使用\u003c/h5\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 使用 github 库\ngo get -u github.com/golang-module/dongle\n\nimport (\n \u0026quot;github.com/golang-module/dongle\u0026quot;)\n\n// 使用 gitee 库\ngo get -u gitee.com/golang-module/dongle\n\nimport (\n \u0026quot;gitee.com/golang-module/dongle\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003e更新日志\u003c/h5\u003e\n\n\u003cul\u003e\n\u003cli\u003e新增对 base62 编码、解码支持\u003c/li\u003e\n\u003cli\u003e新增对 base91 编码、解码支持\u003c/li\u003e\n\u003cli\u003e新增对 base100 编码、解码支持\u003c/li\u003e\n\u003cli\u003e新增对 sm3 加密支持\u003c/li\u003e\n\u003cli\u003e修复文档部分描述错误\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch5\u003e功能清单\u003c/h5\u003e\n\n\u003cul\u003e\n\u003cli\u003e[x] Hex 编码、解码\u003c/li\u003e\n\u003cli\u003e[x] Base16 编码、解码\u003c/li\u003e\n\u003cli\u003e[x] Base32 编码、解码\u003c/li\u003e\n\u003cli\u003e[x] Base58 编码、解码\u003c/li\u003e\n\u003cli\u003e[x] Base62 编码、解码\u003c/li\u003e\n\u003cli\u003e[x] Base64 编码、解码\u003c/li\u003e\n\u003cli\u003e[x] Base64URL 编码、解码\u003c/li\u003e\n\u003cli\u003e[x] SafeURL 编码、解码\u003c/li\u003e\n\u003cli\u003e[x] Base85 编码、解码\u003c/li\u003e\n\u003cli\u003e[x] Base91 编码、解码\u003c/li\u003e\n\u003cli\u003e[x] Base100 编码、解码\u003c/li\u003e\n\u003cli\u003e[x] Md4 加密\u003c/li\u003e\n\u003cli\u003e[x] Hmac-md4 加密\u003c/li\u003e\n\u003cli\u003e[x] Md5 加密\u003c/li\u003e\n\u003cli\u003e[x] Hmac-md5 加密\u003c/li\u003e\n\u003cli\u003e[x] Sha1 加密\u003c/li\u003e\n\u003cli\u003e[x] Hmac-sha1 加密\u003c/li\u003e\n\u003cli\u003e[x] Sha224 加密\u003c/li\u003e\n\u003cli\u003e[x] Hmac-sha224 加密\u003c/li\u003e\n\u003cli\u003e[x] Sha256 加密\u003c/li\u003e\n\u003cli\u003e[x] Hmac-sha256 加密\u003c/li\u003e\n\u003cli\u003e[x] Sha384 加密\u003c/li\u003e\n\u003cli\u003e[x] Hmac-sha384 加密\u003c/li\u003e\n\u003cli\u003e[x] Sha512 加密\u003c/li\u003e\n\u003cli\u003e[x] Hmac-sha512 加密\u003c/li\u003e\n\u003cli\u003e[ ] Rc2 加密\u003c/li\u003e\n\u003cli\u003e[x] Rc4 加密\u003c/li\u003e\n\u003cli\u003e[ ] Rc5 加密\u003c/li\u003e\n\u003cli\u003e[ ] Rc6 加密\u003c/li\u003e\n\u003cli\u003e[ ] Dsa 加密、解密\u003c/li\u003e\n\u003cli\u003e[ ] Tea 加密、解密\u003c/li\u003e\n\u003cli\u003e[ ] Xtea 加密、解密\u003c/li\u003e\n\u003cli\u003e[x] Rsa-PKCS1Pem/PKCS8Pem 加密、解密\u003c/li\u003e\n\u003cli\u003e[x] Aes-ECB/CBC/CTR/CFB/OFB-NoPadding/ZeroPadding/PKCS5Padding/PKCS7Padding 加密、解密\u003c/li\u003e\n\u003cli\u003e[x] Dde-ECB/CBC/CTR/CFB/OFB-NoPadding/ZeroPadding/PKCS5Padding/PKCS7Padding 加密、解密\u003c/li\u003e\n\u003cli\u003e[x] 3des-ECB/CBC/CTR/CFB/OFB-NoPadding/ZeroPadding/PKCS5Padding/PKCS7Padding 加密、解密\u003c/li\u003e\n\u003cli\u003e[ ] Sm2 加密、解密\u003c/li\u003e\n\u003cli\u003e[x] Sm3 加密\u003c/li\u003e\n\u003cli\u003e[ ] Sm4 加密、解密\u003c/li\u003e\n\u003cli\u003e[ ] Sm7 加密、解密\u003c/li\u003e\n\u003cli\u003e[ ] Sm9 加密、解密\u003c/li\u003e\n\u003cli\u003e[ ] Rsa 签名、验签\u003c/li\u003e\n\u003cli\u003e[ ] Dsa 签名、验签\u003c/li\u003e\n\u003c/ul\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "尝试用xorm根据结构体建sqlite表，字段类型与长度与结构定义不符合",
-      "Link": "https://studygolang.com/topics/15983#reply5",
-      "Description": "\u003cp\u003e结构体示例：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype CsTable struct {\n    Id     int64  `xorm:\u0026quot;pk autoincr\u0026quot;`\n    Name   string `xorm:\u0026quot;varchar(40) notnull unique\u0026quot;`\n    Type   string `xorm:\u0026quot;varchar(40)\u0026quot;`\n    Remark string `xorm:\u0026quot;varchar(1024)\u0026quot;`\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e根据此结构体建表代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eerr = engine.Sync2(new(CsTable))\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e运行后用Navicat查看新建的表\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221122/d87a1ad4f1e4979decdd0440967a54d0.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e为什么字段类型与长度与结构体定义不符？\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e尝试用gorm根据结构体建sqlite表，字段类型与长度与结构定义相符合。但是更希望能找到xorm的解决方案。\u003c/p\u003e\n\n\u003cp\u003e哪位大佬能帮忙解答一下，感谢！\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
