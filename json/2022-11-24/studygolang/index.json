@@ -32,13 +32,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "游戏打点分析系统",
-      "Link": "https://studygolang.com/topics/15988#reply0",
-      "Description": "\u003cp\u003e需求背景：开发一套游戏打点分析系统，游戏打点就是：游戏服务器/游戏客户端通过打点接口上报玩家游戏数据，这个过程会非常高的并发以及非常大的数据量，因暂时没考虑使用大数据Bi之类，所以目前暂定架构选择如图（省略开发细节中Redis的使用）：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221123/63e5117766ce33075b61a98d855a53d6.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e后台分析系统\u003c/strong\u003e：使用PHP、Nginx、Mysql实现，因为后台分析系统计算量比较小（最多就是一些求和、求比例操作）且数据都已计算好，支持把Mysql中的数据查出来就好了，所以使用PHP实现，压力应该不会太大\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e打点接口\u003c/strong\u003e：使用Golang、Kafka、Mysql实现，这部分主要是游戏打点会有很大的并发和数据计算量，所以考虑的使用Go，因为数据量很大，同时并发计算都很大，所以引入了Kafka,也就是异步计算\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e具体的流程：\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e1.Client客户端打点通过GoLang开发的接口将打点数据上报至打点平台，存入KafKa\u003c/p\u003e\n\n\u003cp\u003e2.Go同时消费Kafka内数据，将消费结果写入Dot Mysql的同时，将对应结果写入后台分析系统的Mysql主库中\u003c/p\u003e\n\n\u003cp\u003e3.后台分析系统Mysql 通过主从同步将数据从Mysql 主库中同步到从库中\u003c/p\u003e\n\n\u003cp\u003e4.使用PHP查询从库，展示数据\u003c/p\u003e\n\n\u003cp\u003e我是后端小白，求各位高人指点，哪里需要改进或者有什么坑，或者有更好的方式\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "golang实现的一套 A 股提醒系统",
       "Link": "https://studygolang.com/topics/15990#reply0",
       "Description": "\u003ch1\u003e\u003ca href=\"https://github.com/xxjwxc/shares\"\u003eshares\u003c/a\u003e\u003c/h1\u003e\n\n\u003ch3\u003e功能\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cp\u003eA 股量化交易系统\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e后台开发语言 Go/Python \u003ca href=\"https://github.com/gmsec/gmsec\"\u003egmsec\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003egormt 嵌入，自动数据库代码生成 \u003ca href=\"https://github.com/xxjwxc/gormt\"\u003egorm 自动构建(gormt)\u003c/a\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e分时任务,盯盘助手,研报股评,每日监控,微信提醒，玩转组织，AI 智能\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003euniapp 小程序端\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003e欢迎微信扫码体验\u003c/h3\u003e\n\n\u003cp\u003e\u003cimg src=\"http://tva1.sinaimg.cn/large/006MvKbTly1h2fclsxvwkj31bi0hcag8.jpg\" alt=\"show\" /\u003e\u003c/p\u003e\n\n\u003ch2\u003e\u003ca href=\"https://github.com/xxjwxc/shares\"\u003e传送门\u003c/a\u003e\u003c/h2\u003e\n\n\u003ch3\u003e实际效果图\u003c/h3\u003e\n\n\u003cp\u003e\u003cimg src=\"https://tva1.sinaimg.cn/large/006MvKbTgy1h8fbjtgbgjj30u01uowm6.jpg\" alt=\"show\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://tva1.sinaimg.cn/large/006MvKbTgy1h8fbkkrjpvj30u01uoqb7.jpg\" alt=\"show\" /\u003e\n\u003cimg src=\"https://tva1.sinaimg.cn/large/006MvKbTgy1h8fbkxje3tj30u01uo45y.jpg\" alt=\"show\" /\u003e\u003c/p\u003e\n",
@@ -63,6 +56,13 @@
       "Title": "优维低代码：页面标题",
       "Link": "https://studygolang.com/articles/35974#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "游戏打点分析系统",
+      "Link": "https://studygolang.com/topics/15988#reply0",
+      "Description": "\u003cp\u003e需求背景：开发一套游戏打点分析系统，游戏打点就是：游戏服务器/游戏客户端通过打点接口上报玩家游戏数据，这个过程会非常高的并发以及非常大的数据量，因暂时没考虑使用大数据Bi之类，所以目前暂定架构选择如图（省略开发细节中Redis的使用）：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221123/63e5117766ce33075b61a98d855a53d6.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e后台分析系统\u003c/strong\u003e：使用PHP、Nginx、Mysql实现，因为后台分析系统计算量比较小（最多就是一些求和、求比例操作）且数据都已计算好，支持把Mysql中的数据查出来就好了，所以使用PHP实现，压力应该不会太大\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e打点接口\u003c/strong\u003e：使用Golang、Kafka、Mysql实现，这部分主要是游戏打点会有很大的并发和数据计算量，所以考虑的使用Go，因为数据量很大，同时并发计算都很大，所以引入了Kafka,也就是异步计算\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e具体的流程：\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e1.Client客户端打点通过GoLang开发的接口将打点数据上报至打点平台，存入KafKa\u003c/p\u003e\n\n\u003cp\u003e2.Go同时消费Kafka内数据，将消费结果写入Dot Mysql的同时，将对应结果写入后台分析系统的Mysql主库中\u003c/p\u003e\n\n\u003cp\u003e3.后台分析系统Mysql 通过主从同步将数据从Mysql 主库中同步到从库中\u003c/p\u003e\n\n\u003cp\u003e4.使用PHP查询从库，展示数据\u003c/p\u003e\n\n\u003cp\u003e我是后端小白，求各位高人指点，哪里需要改进或者有什么坑，或者有更好的方式\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
