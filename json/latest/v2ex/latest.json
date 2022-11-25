@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "发现一个 v2 镜像站 - 分享发现",
+      "Link": "https://www.v2ex.com/t/897947",
+      "Description": "\u003cp\u003e\u003ca href=\"https://www.nuomiphp.com/\" rel=\"nofollow\"\u003ehttps://www.nuomiphp.com/\u003c/a\u003e\n本来在 google 上搜问题，进去之后发现一些帖子之前在 v2 上见过，结果进首页一看还真是 v2 的镜像😂\n但是也不完全是镜像，貌似账号和 v2 是独立的\u003c/p\u003e\n",
+      "Author": "lightemper",
+      "PubDate": "2022-11-25T11:19:11Z"
+    },
+    {
+      "Title": "Magician-Web3 1.0.5 发布啦，加入了负载均衡 和 重试策略 - 以太坊",
+      "Link": "https://www.v2ex.com/t/897946",
+      "Description": "\u003cp\u003eMagician-Web3 是一个区块链开发工具包。它由两个功能组成。一个是扫描区块链，根据开发者的需要监控交易。另一个是对 web3j 的一些二次打包，可以减少开发者在一些常见场景下的工作量。它计划支持三种链，ETH （ BSC 、POLYGAN 等）、SOL 和 TRON\u003c/p\u003e\n\u003ch2\u003e本次更新的点\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e加入了负载均衡，只要配置多个 RPC URL 即可自动轮询，可以将流量分散给多个节点，不用一直盯着一个节点 “祸害了”\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e加入了重试策略，当出现了某些意外的原因 导致区块被跳过扫描，那么被跳过的区块高度将进入重试策略，你可以自己进行处理\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e修改了一点点细节\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e负载均衡\u003c/h2\u003e\n\u003cp\u003e直接设置多个 rpc 地址即可\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003eMagicianBlockchainScan.create()\n                    .setRpcUrl(\n                            // 可以设置 1 到 n 个 rpc 地址了，超过一个将自动轮询使用\n                            EthRpcInit.create()\n                                    .addRpcUrl(\"https://data-seed-prebsc-1-s1.binance.org:8545\")\n                                    .addRpcUrl(\"https://data-seed-prebsc-2-s1.binance.org:8545\")\n                                    .addRpcUrl(\"https://data-seed-prebsc-1-s2.binance.org:8545\")\n                    )\n                    .setScanPeriod(1000)\n                    .setBeginBlockNumber(BlockEnums.LAST_BLOCK_NUMBER.getValue())\n                    .addEthMonitorEvent(new EventOne())\n                    .addEthMonitorEvent(new EventThree())\n                    .setRetryStrategy(new EthRetry())\n                    .start();\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e重试策略\u003c/h2\u003e\n\u003cp\u003e在符合以下两个条件时，会触发重试策略，两个条件必须全都符合 才会触发重试\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e当前正在扫描的块高 是空的（块不存在 或者 块里面没交易）\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e当前正在扫描的块高 \u0026lt; 链上的最新块高\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e当上面两个条件同时符合的时候，扫描任务会跳过这个块，然后继续扫描下一个块，同时 重试策略会收到被跳过的块高， 你可以在重试策略里 自己处理\u003c/p\u003e\n\u003ch3\u003e创建一个重试策略\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003epublic class EthRetry implements RetryStrategy {\n\n    @Override\n    public void retry(BigInteger blockNumber) {\n        \n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e将重试策略添加到扫描任务中\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003eMagicianBlockchainScan.create()\n        .setRetryStrategy(new EthRetry())// 调用这个方法添加\n        .start();\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e需要注意线程数量的配置\u003c/h3\u003e\n\u003cp\u003e如果你此时开了一个扫块任务 + 一个 重试策略，那么需要占用两个线程，所以参数必须传 2\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e// 初始化线程池，核心线程数必须 \u0026gt;= 扫块的任务数量 + 重试策略的数量\nEventThreadPool.init(2);\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e细节调整\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e扫描频率最低可以设置 500 毫秒\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e设置 RPC 地址的 传参类型变了\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e由于第二点的优化，现在可以根据 RPC 地址的类型来判断你要扫描什么链了，所以去除了 ChainType 的设置\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003eMagicianBlockchainScan.create()\n                    .setRpcUrl(// 这里发生了改变\n                            EthRpcInit.create()\n                                    .addRpcUrl(\"https://data-seed-prebsc-1-s1.binance.org:8545\")\n                                    .addRpcUrl(\"https://data-seed-prebsc-2-s1.binance.org:8545\")\n                                    .addRpcUrl(\"https://data-seed-prebsc-1-s2.binance.org:8545\")\n                    )\n                    .setScanPeriod(1000)// 这个参数最低可以设置为 500 了\n                    .setBeginBlockNumber(BlockEnums.LAST_BLOCK_NUMBER.getValue())\n                    .addEthMonitorEvent(new EventOne())\n                    .addEthMonitorEvent(new EventThree())\n                    .setRetryStrategy(new EthRetry())\n                    .start();\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可以访问官网了解更多：\u003ca href=\"https://magician-io.com\" rel=\"nofollow\"\u003ehttps://magician-io.com\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "Joker123456789",
+      "PubDate": "2022-11-25T11:18:18Z"
+    },
+    {
+      "Title": "二合一 win 板关机状态一天掉电 25%正常吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/897945",
+      "Description": "买了个二合一 win 板，前一阵子插电使用，没感觉出来，这几天带出来用，发现掉电特别快。不死心，满电后关机放了一天来看，从 100%掉到了 74%。跟客服理论，居然跟我说是正常的，我简直日了狗了，从来没见过哪个平板是关机掉电掉成这样的。大家觉得呢，我想退货了。",
+      "Author": "winstars",
+      "PubDate": "2022-11-25T11:14:21Z"
+    },
+    {
       "Title": "hexo 分类和标签统一管理 - 问与答",
       "Link": "https://www.v2ex.com/t/897944",
       "Description": "\u003cp\u003ehexo 用 front matter 的方式给文档添加元数据，包括分类和标签，但有时候需要统一管理分类、标签，一篇一篇文章去修改比较麻烦，大家有什么好的方式吗？\u003c/p\u003e\n",
