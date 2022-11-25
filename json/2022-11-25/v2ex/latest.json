@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "2022 自学 IOS 开发一款一般复杂的应用 - 问与答",
+      "Link": "https://www.v2ex.com/t/897869",
+      "Description": "\u003cp\u003e请教一下\n1 、自学 OC 还是 Swift 还是都需要学，自学的话一天 2 小时大概需要多少天\n2 、小公司安卓版本快开发完了，所以准备自学下 IOS ，准备开发 IOS 版本，IOS 版本自学的，大概需要开发多少天\n3 、是不是可以直接用 React Native 开发 Native 版本，就不用学 IOS 了\u003c/p\u003e\n",
+      "Author": "IAmAnonymous",
+      "PubDate": "2022-11-25T07:00:46Z"
+    },
+    {
+      "Title": "分享砸壳后的 ipa 文件有隐私泄露风险吗 一个好用的免费 iOS App 被开发者下架了 疑似没交年费因为上架刚好 363 天 群里有人要 我有半年前折腾越狱的时候随手备份的 ipa 分享会泄露和我设备或 Apple ID 有关的内容吗 - iDev",
+      "Link": "https://www.v2ex.com/t/897868",
+      "Description": "",
+      "Author": "edis0n0",
+      "PubDate": "2022-11-25T06:56:29Z"
+    },
+    {
+      "Title": "iOS app 上架 App Store - 程序员",
+      "Link": "https://www.v2ex.com/t/897867",
+      "Description": "\u003cp\u003e一、证书的导出\n1.1 前期工作\n首先你需要有一个苹果的开发者帐号，一个 Mac 系统。\n如果没有帐号可以在打开    \n其中有两项需要你自己填：\n第一个 Name ，用来描述你的 AppId ，这个随便填，没有什么限制，\u003cem\u003e\u003cstrong\u003e是项目名称，这样方便自己辨识（不允许中文哦）；\n第二项 Bundle ID (App ID Suffix)，这是你 appid 的后缀，这个需要仔细。因为这个内容和你的程序直接相关，后面很多地方要用到，\u003c/strong\u003e\u003c/em\u003e是 com.yourcompany.yourappname 的格式，我用的是项目中的 Bundle ID （反正这样是最保险的）\u003c/p\u003e\n\u003cp\u003e第三项 App Services ，默认会选择 2 项，不能修改，只需要选择上自己需要的服务即可，不知道在哪里看到说是必须要选上推送，否则后面就没有办法修改了，但是我自己测试的是可以修改的。如果不放心的同学可以选择上哦！\n然后点击 Continue 确认没有错的话直接点击 Submit 后点击 Done 即完成 App Id 的创建\n1.3 创建证书\n1.3.1 、先创建一个证书请求文件        \n这儿需要一个 Mac 系统。以下内容以 OS X Yosemite 系统为例，另外版本差别不是很大。\n首先打开应用程序-实用工具-钥匙串访问（ KEY CHAIN ）,在证书助理中，选择\"从证书颁发机构求证书\"，如下图：\u003c/p\u003e\n\u003cp\u003e在下图所示的界面，你的电子邮件地址：填你申请 idp 的电子邮件地址，常用名称，默认就好，CA 空，选择存贮到磁盘，点击\"继续\"：\u003c/p\u003e\n\u003cp\u003e选择保存的位置，比如选择桌面。下一步点击完成，你就可以看到你的桌面多了一个 CertificateSigningRequest.certSigningRequest 的证书请求文件。注：CSR 文件尽量每个证书都制作一次，将常用名称区分开来，因为该常用名称是证书中的密钥的名字。\n1.3.2 制作 Provisioning Profile 证书文件\n1.3.2.1 开发者证书的制作：登陆到开发者中心，找到证书配置的版块，选择\n，点击右上角的加号：\u003c/p\u003e\n\u003cp\u003e发布证书和开发者证书需要操作两次，分别创建，开发者证书用于真机调试，发布证书用于提交到 AppStore 。\u003c/p\u003e\n\u003cp\u003e然后下一步，会提示创建 CSR 文件，也就是证书签名请求文件。\u003c/p\u003e\n\u003cp\u003e直接选择我们上一步保存在桌面的 CertificateSigningRequest.certSigningRequest 的证书请求文件即可。\n提交上去后就会生成一个 cer 证书，如图所示，有效期为一年。\u003c/p\u003e\n\u003cp\u003e点击 DownLoad ，双击安装。（如果安装不上，可以直接将证书文件拖拽到钥匙串访问的列表中）\n1.3.2.2 Provisioning Profile 证书制作：到这一步证书还没凑全，想提交 AppStore 还需要 PP 证书。\u003c/p\u003e\n\u003cp\u003e点击 Provisioning Profiles ，然后点击右上角的加号。\u003c/p\u003e\n\u003cp\u003e该流程也需要进行两次，分别创建开发用的 PP 证书和发布的 PP 证书。\u003c/p\u003e\n\u003cp\u003e下一步的选择项里会自动检测匹配你的 AppID ，另外下拉项中还可以选择 wildCard 格式。\n注意：wildCard 格式的证书没有推送，PassCard 等服务的应用，慎重选择。           继续，这里有一个区别，因为 PP 证书的开发者证书需要真机调试，所以我们需要绑定真机，这里因为之前我添加过一些设备，所以这里就可以直  接全选添加，如果没有的话，需要将真机的 udid 复制出来在此添加，在发布 PP 文件中，是没有这一步的。\u003c/p\u003e\n\u003cp\u003e之后就是输入一个 PP 证书的名字了，然后生成，下载保存，双击就添加到 Xcode 中，这样在真机调试或者发布时，就可以分别有不同的 PP 证书与其对应。 [其实可以不用下载保存，具体原因后面会介绍到]\n1.4  配置项目环境\n1.4.1 Account 的配置\nXcode——\u0026gt;Preferences 就会出现 Account 的配置界面，如图：\u003c/p\u003e\n\u003cp\u003e点击+可以选择 Add Apple ID ；点击 View Details 可以查看该 Apple Id 下的 Certificates 和 Provisioning Profile 证书文件，在这里你可以点击下载。\n1.4.2 项目的配置\n在项目 Targets 下的 Identity 中，Team 选择对应的 Apple ID 即可\n在 XCode 的项目设置里，Provisioning Profile 就可以选择对应的证书。\u003c/p\u003e\n\u003cp\u003e前期的准备工作就算完成了。\u003c/p\u003e\n\u003cp\u003e二、    ipa 打包\n2.1 Archive 在线打包\n在真机状态下选择 Product——\u0026gt;Archive(如果不是真机状态下，Archive 会是灰色不可用的)，成功会弹出如下图：\u003c/p\u003e\n\u003cp\u003e网上说先点击 Validate 进行验证，虽说验证的过程有点小慢，但是为了审核顺利点，还是验证下为好（有次 validate 一直不成功，直接导出 ipa 的安装包也没错误，因为不上传到市场，所以暂时没有遇到问题。这算是应付公差，不建议使用哦）。\n验证成功后点击 Export 导出 ipa 的包用与上传即可。\u003c/p\u003e\n\u003cp\u003e三、ipa 提交 App Store\n3.1  在 itunes 中创建程序\n登录开发者中心，选择 Itunes Connect ，进入后选择“我的 App”如下图：\u003c/p\u003e\n\u003cp\u003e点击左上角的+选择“新建 App”，根据自己的 app 然后填写相应的信息即可，因为项目较多，就不一一讲解了，但是其中的注意事项会写到：\u003c/p\u003e\n\u003cp\u003e1 、选择语言的时候，简体中文是 Simplified Chinese ，不要再找 Chinese 了，找不到的（我就是）\n2 、套装 ID 与 SKU 主要是 app 的唯一标识吧，我是用的项目中 Bundle Identifier 的内容，即 com.company.projectname\n(App 信息以及价格与定价根据 app 不同自己填写就可以了)\n3.上传 App Icon 的时候，注意那个问号哦，需要上传 1024*1024 的，而且不能有圆角效果哦！\u003c/p\u003e\n\u003cp\u003e4.这里需要不同屏幕的截图，可以直接用模拟机运行后截图。待模拟器运行开始的时候，按住 cmd+S, 模拟器的屏幕截图就直接保存在桌面上了。\n5.上传的时候会提示“无法载入文件”的问题。原因是：截图保存的文件名有中文，修改下截图名称即可！\u003c/p\u003e\n\u003cp\u003e6.屏幕尺寸大家都可以查到，为了自己方便，简单备注下：\n4.7 英寸 ——\u0026gt;iphone6          5.5 英寸——\u0026gt;iphone 6 plus       4 英寸 ——\u0026gt;iphone5S            3.5 英寸 ——\u0026gt; iphone 4S\u003c/p\u003e\n\u003cp\u003e7 、ipa 包的上传：我使用的是 Applicaton Loader\u003c/p\u003e\n\u003cp\u003e点击选取，选择导出的 ipa 的文件，然后选择对应的信息，成功之后，30 分钟~1 小时差不多久可以在“构建版本”首次的话会直接提交 app ，如果有多个版本的话，需要在这里选择对应需要审核的版本即可\n8 、不要忘记填写测试账号，否则会被拒的，而且一定要跟服务器同事说好，不要删除测试账号，否则同样被拒（我就遇到了）\n9 、还有个 IDFA 的广告得到选择，看着提示如果出现偏差感觉都要搞砸的样子，所以找到网上一个选择，应该不会出错\u003c/p\u003e\n\u003cp\u003e大功告成了，希望可以帮到别人，也希望自己不要忘记\u003c/p\u003e\n\u003cp\u003e参考文档：\n链接 1： \u003ca href=\"http://bbs.umeng.com/thread-5420-1-1.html%C2%A0\" rel=\"nofollow\"\u003ehttp://bbs.umeng.com/thread-5420-1-1.html \u003c/a\u003e    [如何防止应用因获取 IDFA 被拒] \u003c/p\u003e\n",
+      "Author": "Gnny1222",
+      "PubDate": "2022-11-25T06:55:45Z"
+    },
+    {
       "Title": "Airpods 的离奇 Bug 求解 - Apple",
       "Link": "https://www.v2ex.com/t/897866",
       "Description": "\u003cp\u003e我的是 Airpods 第一代产品，一直轻度使用挺好的。\n最近发现一个离奇 bug ，突然出现的。比如连接耳机看视频，暂停视频，耳机就会中断连接，再播放视频就变成手机外放了。\n今天测试微信，也变成这样，挂断电话后，耳机就断了；再打电话过来，就变成手机免提外放，社死啊！！！\n仔细观察手机状态，会发现，暂停视频或者挂断电话后，手机蓝牙被关闭了，大概 3 秒后，蓝牙自动恢复开启。\n测试了其他 app ，比如 Spotify ，暂停音乐，就不会有这个问题。\u003c/p\u003e\n\u003cp\u003e这到底是 app ，还是耳机，或者是手机硬件问题啊？？？\u003c/p\u003e\n",
@@ -16,6 +37,13 @@
       "Description": "\u003cp\u003e目前团队有若干招聘名额，主要的工作地点在杭州，广告核心业务，不是很卷，感兴趣的同学可以直接投递简历看看机会  \u003ca href=\"https://job.toutiao.com/s/rbj9Kw7\" rel=\"nofollow\"\u003ehttps://job.toutiao.com/s/rbj9Kw7\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e团队介绍\u003c/h2\u003e\n\u003cp\u003e商业化技术团队支持字节跳动包括抖音 /今日头条 /番茄小说 /火山 /西瓜以及海外全系产品的广告变现技术，依托字节跳动的海量数据，专注于为全球客户提供最佳的商业推广方式与方案。亿级流量持续升级，亿级收入持续增长，我们的团队遍布北京、上海、杭州以及海外各地，在这里，你将面对最复杂的广告场景，最大的数据量级，完成最有挑战的工作。\u003c/p\u003e\n\u003ch2\u003e职位描述\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e负责抖音端变现创意样式相关开发，探索提供更高效的研发模式；\u003c/li\u003e\n\u003cli\u003e与业务团队配合完成整体项目规划、设计与开发；\u003c/li\u003e\n\u003cli\u003e负责创意样式产品相关的前沿技术方向的探索；\u003c/li\u003e\n\u003cli\u003e与团队配合完成整体项目规划、设计与开发。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e职位要求\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e1 - 5 年工作经验，本科及以上学历，具备良好的代码风格和编码习惯；\u003c/li\u003e\n\u003cli\u003e掌握 JavaScript ，CSS 基础特性和能力；有 hybrid 、跨端能力开发经验。\u003c/li\u003e\n\u003cli\u003e对主流 MVVM 框架 (React/Vue/Angular) 有一定理解，至少对其中一种有深入应用；\u003c/li\u003e\n\u003cli\u003e熟悉 Webpack ，Rollup ，Vue-cli 等工具，具有前端工程化开发的基本思维；\u003c/li\u003e\n\u003cli\u003e掌握网页加载、渲染的原理和机制，有一定的性能优化实践经验；\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e加分项\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e熟悉 TypeScript\u003c/li\u003e\n\u003cli\u003e具备一定的后端开发经验，对 Node/Golang 有一些了解\u003c/li\u003e\n\u003cli\u003e熟悉视频等创意相关的技术应用场景\u003c/li\u003e\n\u003c/ul\u003e\n",
       "Author": "Tinple",
       "PubDate": "2022-11-25T06:54:17Z"
+    },
+    {
+      "Title": "目前有大佬自建 vpn 不套 cdn 的吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/897864",
+      "Description": "\u003cp\u003e今年特殊时期被封端口，封 ip 之后就套了 cdn ，速度变得特别慢。虽然优选 ip 后速度加快了一点，但还是浪费了我 gia 的线路啊，哭了 QAQ 。想不戴套，但又怕被封\u003c/p\u003e\n",
+      "Author": "JaaaaackZheng",
+      "PubDate": "2022-11-25T06:50:12Z"
     },
     {
       "Title": "Android Studio 经常出现 Resources$NotFoundException - Android",
