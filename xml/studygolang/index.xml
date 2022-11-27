@@ -32,12 +32,12 @@
       <description>&lt;p&gt;golang使用protobuf多文件如何合并？我希望通过import将两个proto文件生成一个文件，但是结果要么是类型未定义，要么是完全分开的两个文件，请问大神问题出在何处（输入输出地址都没有问题），感谢。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;主文件试图引入test2.proto当中定义的枚举&#xA;syntax=&amp;quot;proto3&amp;quot;;&#xA;package day;&#xA;option go_package=&amp;quot;./day&amp;quot;; &#xA;import &amp;quot;test2.proto&amp;quot;; //引入&#xA;message Person{&#xA;  string name=1;&#xA;  int32 age=2;&#xA;  day.Sex sex=4; //导入其他包的内容应该这样使用,day包中的Sex内容&#xA;  repeated string hobbies=3; &#xA;};&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;被导入包test2.proto当中的内容&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;syntax=&amp;quot;proto3&amp;quot;;&#xA;package day;&#xA;option go_package=&amp;quot;./day&amp;quot;;&#xA;enum Sex{&#xA;    male=0; //枚举类型从零开始&#xA;    female=1;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h6&gt;运行结果及报错内容&lt;/h6&gt;&#xA;&#xA;&lt;p&gt;我是用的终端命令如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;protoc --go_out=. test1.proto &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;以上命令生成了一个文件，但是会出现关于Sex类型未定义的报错，也就是test2文件未引入&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;protoc --go_out=. test1.proto test2.proto&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;以上生成了两个文件都在package day之中，类型定义很完全，但是我只想生成一个总的文件，这两个文件之间并没有合并，仍然是相互独立的，只是因为同在package day之中而共享了变量，因此不会出现类型未定义的报错&lt;/p&gt;&#xA;&#xA;&lt;p&gt;此外，就算import 之后加上public修饰，也是毫无区别，另外想请问一下import public的用法&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>优维EasyOps，打造新一代运维新方式</title>
-      <link>https://studygolang.com/articles/35980#reply0</link>
-    </item>
-    <item>
       <title>好消息 突破：IM开源项目OpenIM采用wasm技术实现jssdk</title>
       <link>https://studygolang.com/articles/35981#reply0</link>
+    </item>
+    <item>
+      <title>优维EasyOps，打造新一代运维新方式</title>
+      <link>https://studygolang.com/articles/35980#reply0</link>
     </item>
     <item>
       <title>测试编辑，删除</title>
