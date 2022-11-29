@@ -32,6 +32,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "go快速生成树形结构",
+      "Link": "https://studygolang.com/topics/15995#reply0",
+      "Description": "\u003ch1\u003e(tree.go)[\u003ca href=\"https://gitee.com/wgdong/ginfast/blob/master/util/tree.go\"\u003ehttps://gitee.com/wgdong/ginfast/blob/master/util/tree.go\u003c/a\u003e]\u003c/h1\u003e\n\n\u003ch2\u003e功能\u003c/h2\u003e\n\n\u003cul\u003e\n\u003cli\u003e通用生成函数\u003c/li\u003e\n\u003cli\u003e自定义主节点\u003c/li\u003e\n\u003cli\u003e自定义关系依赖对象\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch2\u003e测试例子\u003c/h2\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage util\n\nimport (\n\t\u0026quot;encoding/json\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;testing\u0026quot;\n)\n\ntype Menu struct {\n\tID       uint\n\tPID      uint\n\tName     string\n\tChildren []Menu `json:\u0026quot;children,omitempty\u0026quot;`\n}\n\nfunc TestTree(t *testing.T) {\n\tv := []Menu{{\n\t\tID:   1,\n\t\tPID:  0,\n\t\tName: \u0026quot;0-1\u0026quot;,\n\t}, {\n\t\tID:   2,\n\t\tPID:  1,\n\t\tName: \u0026quot;1-2\u0026quot;,\n\t}, {\n\t\tID:  3,\n\t\tPID: 2,\n\t}, {\n\t\tID:   4,\n\t\tPID:  1,\n\t\tName: \u0026quot;1-4\u0026quot;,\n\t}, {\n\t\tID:   5,\n\t\tPID:  2,\n\t\tName: \u0026quot;1-3\u0026quot;,\n\t}, {\n\t\tID:   6,\n\t\tPID:  0,\n\t\tName: \u0026quot;0-6\u0026quot;,\n\t}}\n\tr := TreeSlice(v, func(i int) bool { return v[i].PID == 1 }, func(i, j int) bool { return v[i].ID == v[j].PID })\n\tb, _ := json.Marshal(r)\n\tfmt.Printf(\u0026quot;%s\\n\u0026quot;, b)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "go怎么全局安装非二进制包？",
       "Link": "https://studygolang.com/topics/15992#reply5",
       "Description": "\u003cp\u003e我用 go get，它提醒我用 go install。我用了 go install，它提醒我只能装二进制包。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e\n$ go get github.com/gorilla/mux\ngo: go.mod file not found in current directory or any parent directory.\n\t'go get' is no longer supported outside a module.\n\tTo build and install a command, use 'go install' with a version,\n\tlike 'go install example.com/cmd@latest'\n\tFor more information, see https://golang.org/doc/go-get-install-deprecation\n\tor run 'go help get' or 'go help install'.\n\n\n$ go get github.com/gorilla/mux@latest\ngo: go.mod file not found in current directory or any parent directory.\n\t'go get' is no longer supported outside a module.\n\tTo build and install a command, use 'go install' with a version,\n\tlike 'go install example.com/cmd@latest'\n\tFor more information, see https://golang.org/doc/go-get-install-deprecation\n\tor run 'go help get' or 'go help install'.\n\n\u003c/code\u003e\u003c/pre\u003e\n",
