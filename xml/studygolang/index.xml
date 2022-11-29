@@ -28,6 +28,10 @@
       <description>&lt;p&gt;首先，让我们定义一个规则：用户只能访问自己创建的文章。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;facades.Gate.Define(&amp;quot;update-post&amp;quot;, func(ctx context.Context, arguments map[string]any) *access.Response {&#xA;  user := ctx.Value(&amp;quot;user&amp;quot;).(models.User)&#xA;  post := arguments[&amp;quot;post&amp;quot;].(models.Post)&#xA;  &#xA;  if user.ID == post.UserID {&#xA;    return access.NewAllowResponse()&#xA;  } else {&#xA;    return access.NewDenyResponse(&amp;quot;error&amp;quot;)&#xA;  }&#xA;})&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;然后判断单个权限：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;if facades.Gate.Allows(&amp;quot;update-post&amp;quot;, map[string]any{&#xA;  &amp;quot;post&amp;quot;: post,&#xA;}) {&#xA;  // todo&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;你也可以同时判断多个权限：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;if facades.Gate.Any([]string{&amp;quot;update-post&amp;quot;, &amp;quot;delete-post&amp;quot;}, map[string]any{&#xA;  &amp;quot;post&amp;quot;: post,&#xA;}) {&#xA;  // 用户可以提交update或delete...&#xA;}&#xA;&#xA;if facades.Gate.None([]string{&amp;quot;update-post&amp;quot;, &amp;quot;delete-post&amp;quot;}, map[string]any{&#xA;  &amp;quot;post&amp;quot;: post,&#xA;}) {&#xA;  // 用户不可以提交update和delete...&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;你甚至可以定义 &lt;code&gt;Before&lt;/code&gt; 与 &lt;code&gt;After&lt;/code&gt; 进行授权前后的拦截，详见文档。&#xA;Over, 就是如此简单！&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;关于 Goravel&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/goravel/goravel&#34;&gt;Goravel&lt;/a&gt; 是一个功能完备、具有良好扩展能力的 Web 应用程序框架。作为一个起始脚手架帮助 Golang 开发者快速构建自己的应用。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;框架风格与 Laravel 保持一致，让 PHPer 不用学习新的框架，也可以愉快的玩转 Golang！致敬 Laravel！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Welcome star, PR and issues！&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>在线工具推荐</title>
+      <link>https://studygolang.com/resources/15554#reply0</link>
+    </item>
+    <item>
       <title>优维低代码：Redirect 路由重定向&amp;If 条件渲染</title>
       <link>https://studygolang.com/articles/35983#reply0</link>
     </item>
@@ -50,10 +54,6 @@
       <title>golang使用protobuf多文件如何合并？</title>
       <link>https://studygolang.com/topics/15993#reply0</link>
       <description>&lt;p&gt;golang使用protobuf多文件如何合并？我希望通过import将两个proto文件生成一个文件，但是结果要么是类型未定义，要么是完全分开的两个文件，请问大神问题出在何处（输入输出地址都没有问题），感谢。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;主文件试图引入test2.proto当中定义的枚举&#xA;syntax=&amp;quot;proto3&amp;quot;;&#xA;package day;&#xA;option go_package=&amp;quot;./day&amp;quot;; &#xA;import &amp;quot;test2.proto&amp;quot;; //引入&#xA;message Person{&#xA;  string name=1;&#xA;  int32 age=2;&#xA;  day.Sex sex=4; //导入其他包的内容应该这样使用,day包中的Sex内容&#xA;  repeated string hobbies=3; &#xA;};&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;被导入包test2.proto当中的内容&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;syntax=&amp;quot;proto3&amp;quot;;&#xA;package day;&#xA;option go_package=&amp;quot;./day&amp;quot;;&#xA;enum Sex{&#xA;    male=0; //枚举类型从零开始&#xA;    female=1;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h6&gt;运行结果及报错内容&lt;/h6&gt;&#xA;&#xA;&lt;p&gt;我是用的终端命令如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;protoc --go_out=. test1.proto &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;以上命令生成了一个文件，但是会出现关于Sex类型未定义的报错，也就是test2文件未引入&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;protoc --go_out=. test1.proto test2.proto&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;以上生成了两个文件都在package day之中，类型定义很完全，但是我只想生成一个总的文件，这两个文件之间并没有合并，仍然是相互独立的，只是因为同在package day之中而共享了变量，因此不会出现类型未定义的报错&lt;/p&gt;&#xA;&#xA;&lt;p&gt;此外，就算import 之后加上public修饰，也是毫无区别，另外想请问一下import public的用法&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>在线工具推荐</title>
-      <link>https://studygolang.com/resources/15554#reply0</link>
     </item>
     <item>
       <title>请教：module模式下，如何设置可以让go get始终使用git来下载包，环境变量GOVCS无效？</title>
