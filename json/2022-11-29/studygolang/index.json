@@ -60,6 +60,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "golang使用protobuf多文件如何合并？",
+      "Link": "https://studygolang.com/topics/15993#reply0",
+      "Description": "\u003cp\u003egolang使用protobuf多文件如何合并？我希望通过import将两个proto文件生成一个文件，但是结果要么是类型未定义，要么是完全分开的两个文件，请问大神问题出在何处（输入输出地址都没有问题），感谢。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e主文件试图引入test2.proto当中定义的枚举\nsyntax=\u0026quot;proto3\u0026quot;;\npackage day;\noption go_package=\u0026quot;./day\u0026quot;; \nimport \u0026quot;test2.proto\u0026quot;; //引入\nmessage Person{\n  string name=1;\n  int32 age=2;\n  day.Sex sex=4; //导入其他包的内容应该这样使用,day包中的Sex内容\n  repeated string hobbies=3; \n};\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e被导入包test2.proto当中的内容\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003esyntax=\u0026quot;proto3\u0026quot;;\npackage day;\noption go_package=\u0026quot;./day\u0026quot;;\nenum Sex{\n    male=0; //枚举类型从零开始\n    female=1;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch6\u003e运行结果及报错内容\u003c/h6\u003e\n\n\u003cp\u003e我是用的终端命令如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eprotoc --go_out=. test1.proto \n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e以上命令生成了一个文件，但是会出现关于Sex类型未定义的报错，也就是test2文件未引入\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eprotoc --go_out=. test1.proto test2.proto\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e以上生成了两个文件都在package day之中，类型定义很完全，但是我只想生成一个总的文件，这两个文件之间并没有合并，仍然是相互独立的，只是因为同在package day之中而共享了变量，因此不会出现类型未定义的报错\u003c/p\u003e\n\n\u003cp\u003e此外，就算import 之后加上public修饰，也是毫无区别，另外想请问一下import public的用法\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "优维低代码：Redirect 路由重定向\u0026If 条件渲染",
       "Link": "https://studygolang.com/articles/35983#reply0",
       "Description": "",
@@ -70,13 +77,6 @@
       "Title": "go怎么全局安装非二进制包？",
       "Link": "https://studygolang.com/topics/15992#reply5",
       "Description": "\u003cp\u003e我用 go get，它提醒我用 go install。我用了 go install，它提醒我只能装二进制包。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e\n$ go get github.com/gorilla/mux\ngo: go.mod file not found in current directory or any parent directory.\n\t'go get' is no longer supported outside a module.\n\tTo build and install a command, use 'go install' with a version,\n\tlike 'go install example.com/cmd@latest'\n\tFor more information, see https://golang.org/doc/go-get-install-deprecation\n\tor run 'go help get' or 'go help install'.\n\n\n$ go get github.com/gorilla/mux@latest\ngo: go.mod file not found in current directory or any parent directory.\n\t'go get' is no longer supported outside a module.\n\tTo build and install a command, use 'go install' with a version,\n\tlike 'go install example.com/cmd@latest'\n\tFor more information, see https://golang.org/doc/go-get-install-deprecation\n\tor run 'go help get' or 'go help install'.\n\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "golang使用protobuf多文件如何合并？",
-      "Link": "https://studygolang.com/topics/15993#reply0",
-      "Description": "\u003cp\u003egolang使用protobuf多文件如何合并？我希望通过import将两个proto文件生成一个文件，但是结果要么是类型未定义，要么是完全分开的两个文件，请问大神问题出在何处（输入输出地址都没有问题），感谢。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e主文件试图引入test2.proto当中定义的枚举\nsyntax=\u0026quot;proto3\u0026quot;;\npackage day;\noption go_package=\u0026quot;./day\u0026quot;; \nimport \u0026quot;test2.proto\u0026quot;; //引入\nmessage Person{\n  string name=1;\n  int32 age=2;\n  day.Sex sex=4; //导入其他包的内容应该这样使用,day包中的Sex内容\n  repeated string hobbies=3; \n};\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e被导入包test2.proto当中的内容\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003esyntax=\u0026quot;proto3\u0026quot;;\npackage day;\noption go_package=\u0026quot;./day\u0026quot;;\nenum Sex{\n    male=0; //枚举类型从零开始\n    female=1;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch6\u003e运行结果及报错内容\u003c/h6\u003e\n\n\u003cp\u003e我是用的终端命令如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eprotoc --go_out=. test1.proto \n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e以上命令生成了一个文件，但是会出现关于Sex类型未定义的报错，也就是test2文件未引入\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eprotoc --go_out=. test1.proto test2.proto\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e以上生成了两个文件都在package day之中，类型定义很完全，但是我只想生成一个总的文件，这两个文件之间并没有合并，仍然是相互独立的，只是因为同在package day之中而共享了变量，因此不会出现类型未定义的报错\u003c/p\u003e\n\n\u003cp\u003e此外，就算import 之后加上public修饰，也是毫无区别，另外想请问一下import public的用法\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
