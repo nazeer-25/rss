@@ -4,18 +4,46 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求教 os.readfile 内存溢出的问题 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/898889</link>
+      <description>&lt;p&gt;求教一个内存溢出的问题&#xA;pprof 显示在 os.readfile 上有大量内存占用无法释放&#xA;请问我下面的写法具体哪里有问题&#xA;已经尝试很多办法，都没效果&#xA;恳请赐教&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var GMap=map[string]string&#xA;&#xA;func DomainMapLoadFromFile() {&#xA;&#x9;GMap=make(map[string]string,10)&#xA;&#x9;//尝试解决内存溢出&#xA;&#x9;fileStr := ReadAll(&#34;DataMap&#34;, &#34;CacheMap&#34;)&#xA;&#x9;contentStrArr := strings.Split(*fileStr, &#34;\n&#34;)&#xA;&#x9;contentLen := len(contentStrArr)&#xA;&#x9;contentArr := make([]string, contentLen)&#xA;&#x9;copy(contentArr, contentStrArr)&#xA;&#x9;var wg sync.WaitGroup&#xA;&#x9;wg.Add(contentLen)&#xA;&#x9;for i := range contentArr {&#xA;&#x9;&#x9;go func(content string) {&#xA;&#x9;&#x9;&#x9;infoArr := strings.Split(content, &#34;|&#34;)&#xA;&#x9;&#x9;&#x9;var deviceId int64&#xA;&#x9;&#x9;&#x9;l := len(infoArr)&#xA;&#x9;&#x9;&#x9;if l == 2 {&#xA;&#x9;&#x9;&#x9;&#x9;data1 = infoArr[0]&#xA;&#x9;&#x9;&#x9;&#x9;data2 = infoArr[1]&#xA;&#x9;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;&#x9;fmt.Println(&#34;不符合长度 5-6 的数据，content：&#34; + content)&#xA;&#x9;&#x9;&#x9;&#x9;wg.Done()&#xA;&#x9;&#x9;&#x9;&#x9;return&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;GMap[data1]=data2&#xA;&#x9;&#x9;&#x9;wg.Done()&#xA;&#x9;&#x9;}(contentArr[i])&#xA;&#x9;}&#xA;&#x9;wg.Wait()&#xA;}&#xA;&#xA;func ReadAll(fileName, dirName string) *string {&#xA;&#x9;content, _ := os.ReadFile(GetFilePathPWD(fileName, dirName))&#xA;&#x9;contentStr := string(content)&#xA;&#x9;return &amp;amp;contentStr&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>sealinfree</author>
+      <pubDate>29 Nov 2022 12:53:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>pixel 1 来同步照片到 google photo 问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/898888</link>
+      <description>目前用 FolderSync 通过 dropbox 同步照片到 pixel 1 然后在同步到 google photo&lt;br /&gt;之前可以，但是最近 FolderSync 应该是被后台杀了，所以经常会失败&lt;br /&gt;想问问有没有什么办法来解决这个问题</description>
+      <author>bishop</author>
+      <pubDate>29 Nov 2022 12:52:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>帖子排序计算方式，怎么排序才能平衡热门和最新呢？ - 程序员</title>
+      <link>https://www.v2ex.com/t/898887</link>
+      <description>&lt;p&gt;其实就是怎么控制 发布时间 和 回复数量 的权重的问题&lt;/p&gt;&#xA;&lt;p&gt;v2ex 是怎么计算的呢？&lt;/p&gt;&#xA;</description>
+      <author>as9567585</author>
+      <pubDate>29 Nov 2022 12:46:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>3 年前端，求一份远程工作，另外大佬看看我的简历如果找远程还有什么欠缺的 - 求职</title>
+      <link>https://www.v2ex.com/t/898886</link>
+      <description>技术栈：Vue2/3+Ts+Vite&lt;br /&gt;&lt;br /&gt;网页简历 ：&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://cv.ilcode.cn&#34; rel=&#34;nofollow noopener&#34;&gt;https://cv.ilcode.cn&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;网页打不开试试关闭外网，服务器在国内。</description>
+      <author>wsrfde</author>
+      <pubDate>29 Nov 2022 12:45:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教一个微信精准推送 - 程序员</title>
+      <link>https://www.v2ex.com/t/898885</link>
+      <description>&lt;p&gt;1 ，员工关注了某公众号&#xA;2 、假如电脑上有一个员工报销表，表内名称有：姓名、证件号、报销款、报销金额等。&#xA;3 、想法：把报销表上传到某地方后，报销表上证件号、姓名与员工证件号、姓名一致的，公众号对就自动推送消息给该员工&#xA;4 、报销表每月多份&#xA;5 、员工在关注时如何保存其姓名和证件号？保存在哪里为好？&#xA;6 、用最简洁方法做到精准推送呢？&#xA;小白，勿笑！&#xA;谢谢。&lt;/p&gt;&#xA;</description>
+      <author>abbb</author>
+      <pubDate>29 Nov 2022 12:44:23 +0000</pubDate>
+    </item>
+    <item>
       <title>[北京] 阿里本地生活零售方向 急招前端 - 酷工作</title>
       <link>https://www.v2ex.com/t/898883</link>
       <description>&lt;h2&gt;什么业务&lt;/h2&gt;&#xA;&lt;p&gt;在饿了么平台上卖菜、卖花、卖药、卖水果、卖日用品，除了外卖美食，其他到家的服务都由本地零售团队提供。&lt;/p&gt;&#xA;&lt;h2&gt;什么团队&lt;/h2&gt;&#xA;&lt;p&gt;我们是本地生活-本地零售大前端技术团队，base 在北京-望京-浦项中心。&#xA;主要负责“饿了么”平台上的所有零售业务场景的 to B 、to C 、品牌营销中台的大前端研发工作，终端覆盖支付宝、微信小程序、Electron PC 应用、PC / Mobile H5 应用、Android/iOS 原生 /动态化研发等不同技术栈。 脚踏实地，求真务实，我们用一行行代码，认真解决每一个问题。&lt;/p&gt;&#xA;&lt;h2&gt;技术机遇&lt;/h2&gt;&#xA;&lt;p&gt;作为本地生活大板块的重点孵化业务，零售整体业务持续良性增长。零售是阿里的本行，淘宝在过去的技术演进路线已经非常清晰地表明零售领域面临的技术机遇是广阔和深入的。 目前，我们在基础应用体验、稳定性体系、数据体系、多端研发、基础应用基建等领域都面临着诸多技术挑战与机遇。&lt;/p&gt;&#xA;&lt;h2&gt;求贤若渴&lt;/h2&gt;&#xA;&lt;p&gt;我们需要有丰富经验的前端人才加入消费导购交易链路、商家经营平台、内部运营平台等系统的产品研发和技术建设工作。&lt;/p&gt;&#xA;&lt;h2&gt;基础要求：&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;2-8 年前端研发经验，985/211 本科院校 或 一线互联网公司背景&lt;/li&gt;&#xA;&lt;li&gt;熟悉 W3C 标准，掌握 Javascript/Typescrpit 语言，CSS 布局，熟悉浏览器、小程序等不同平台的平台特性、能力&lt;/li&gt;&#xA;&lt;li&gt;熟练使用 React/Vue 中的一种框架，并理解关键性技术原理，掌握 React 优先&lt;/li&gt;&#xA;&lt;li&gt;对前端技术充满热情，不断学习新技术，并不断在尝试在业务中应用&lt;/li&gt;&#xA;&lt;li&gt;独立分析、解决问题的能力&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;加分项：&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;有小程序、微前端、React Native 等领域的业务实践经验&lt;/li&gt;&#xA;&lt;li&gt;有丰富的性能优化实践，端到端的参与、设计过性能优化方案、性能埋点方案等，并取得了较好的技术成果与业务价值&lt;/li&gt;&#xA;&lt;li&gt;对前端工程技术体系，如构建、编译、分发、加载等领域有完整理解或工程实践&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;简历投递邮箱 dgl178636[AT]&lt;a href=&#34;http://alibaba-inc.com&#34; rel=&#34;nofollow&#34;&gt;alibaba-inc.com&lt;/a&gt;&lt;/h2&gt;&#xA;</description>
       <author>rlog</author>
       <pubDate>29 Nov 2022 12:21:11 +0000</pubDate>
-    </item>
-    <item>
-      <title>没有脑机接口的情况下，如何仅通过淘宝和京东的消费记录，筛选出反 dang 叛国分子？ - 问与答</title>
-      <link>https://www.v2ex.com/t/898881</link>
-      <description>&lt;p&gt;军管时，或者全国精神文明整顿运动和严打运动时，特别法庭需要居民的未处置违法行为，比如 piao 畅、避税、疫情漏申报、非法翻墙等。已客观发生的行为，社会工程学是能够解决的，最近两年通过社会工程算法训练，大数据+AI 已经构建好 14 亿人的未处置违法行为数据库，可供安全部门随时调用。&#xA;但目前的难题是，思维及意识形态方面的筛查。另一方面，网络发言往往口是心非，消费行为才是最有说服力的分析素材。此外，脑机接口和人体芯片的研发依然处于攻坚阶段。所以，居民意识形态数据库标签化工作，只能靠算法摸索。全国 A 类监控对象数据库构建，目前很大程度依靠人工，效率低下。&lt;/p&gt;&#xA;</description>
-      <author>realradiolover</author>
-      <pubDate>29 Nov 2022 12:12:33 +0000</pubDate>
     </item>
     <item>
       <title>请问还有这样发布便宜机场的测速频道吗？ - 程序员</title>
@@ -218,6 +246,13 @@
       <description>&lt;p&gt;业务用了十几台腾讯云节点（便宜）爬数据，汇总到阿里云的中心服务器（用久了迁移麻烦），之间通过简易对称加密+HTTP （无 TLS ）传输（爬一条传一条，每个节点都是几千并发地上报）（屎山代码，之前写爬虫的人离职了，没人愿意动）&lt;/p&gt;&#xA;&lt;p&gt;最近调高上报线程数量后发现爬得更慢了，iftop 显示节点的 5Mbps 上行带宽中 7.1Mbps （没写错）（腾讯云面板看总实际上传速率是 5.8Mbps ），被中心服务器占满了，但中心服务器上用 iftop 看从这些节点的下行速度只有不到 30Kbps ，研究了很久也分析不出来多出来的带宽被用到了哪里？我知道阿里和腾讯云间会互相丢包，但也不至于丢 99%的包吧。&lt;/p&gt;&#xA;&lt;p&gt;（非互联网企业，代码都是能用就行，完全没有什么架构之类的东西）&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;-------------------结帖 我看错了，中心服务器的下行带宽也是 7Mbps ，我把上行当成下行了----------------------&lt;/strong&gt;&lt;/p&gt;&#xA;</description>
       <author>edis0n0</author>
       <pubDate>29 Nov 2022 09:05:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>没有脑机接口的情况下，如何仅通过淘宝和京东的消费记录，筛选出反 dang 叛国分子？ - 问与答</title>
+      <link>https://www.v2ex.com/t/898881</link>
+      <description>&lt;p&gt;军管时，或者全国精神文明整顿运动和严打运动时，特别法庭需要居民的未处置违法行为，比如 piao 畅、避税、疫情漏申报、非法翻墙等。已客观发生的行为，社会工程学是能够解决的，最近两年通过社会工程算法训练，大数据+AI 已经构建好 14 亿人的未处置违法行为数据库，可供安全部门随时调用。&#xA;但目前的难题是，思维及意识形态方面的筛查。另一方面，网络发言往往口是心非，消费行为才是最有说服力的分析素材。此外，脑机接口和人体芯片的研发依然处于攻坚阶段。所以，居民意识形态数据库标签化工作，只能靠算法摸索。全国 A 类监控对象数据库构建，目前很大程度依靠人工，效率低下。&lt;/p&gt;&#xA;</description>
+      <author>realradiolover</author>
+      <pubDate>29 Nov 2022 12:12:33 +0000</pubDate>
     </item>
     <item>
       <title>有没有跟我一样的 - 生活</title>
