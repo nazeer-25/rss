@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>[求教]安全的远程桌面方案？ - Windows</title>
+      <link>https://www.v2ex.com/t/899032</link>
+      <description>&lt;p&gt;最近因为 yq 需要远程办公。&lt;/p&gt;&#xA;&lt;h2&gt;当前解决方案&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;主要是使用 Windows 的远程桌面 + 端口映射。&lt;/li&gt;&#xA;&lt;li&gt;办公室的电脑，台式机，系统是 Win11 ，都开启了远程桌面，登录用户设置强密码。&lt;/li&gt;&#xA;&lt;li&gt;网络有外网 IP ，可以设置路由器的端口映射，把 win11 的远程桌面端口，映射到外网 IP 端口。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;缺点&lt;/h2&gt;&#xA;&lt;p&gt;担心基于登录用户的密码验证不够安全。而且远程桌面的端口直接映射到外网，不是一个好的做法。&lt;/p&gt;&#xA;&lt;h2&gt;加强安全性的方案&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;由于办公室有部署 Debian 的电脑，可以使用 SSH 建立 Socks 作为办公室内网的入口。远程桌面基于该 Socks 连接，不用映射端口到外网。Linux 上的 Remmina 可以使用，但微软官方的远程桌面客户端（包括 iOS 和 Android ），不支持任何方式的网络代理。&lt;/li&gt;&#xA;&lt;li&gt;微软的方案，应该是“远程桌面网关”。这个没玩过，需要再研究。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;疑问&lt;/h2&gt;&#xA;&lt;p&gt;大家有无更好的解决方案？&lt;/p&gt;&#xA;</description>
+      <author>fox0001</author>
+      <pubDate>30 Nov 2022 03:46:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>system.img 和 vendor.img 刷到手机上，文件缺失 - Android</title>
+      <link>https://www.v2ex.com/t/899031</link>
+      <description>&lt;p&gt;起因是编译 aosp 后，手机进不去系统，可以接上回 &lt;a href=&#34;https://www.v2ex.com/t/893452#reply5&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/893452#reply5&lt;/a&gt;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;排查过 dmesg 后，发现了可能的错误处&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;[    2.175159] init: Couldn&#39;t load property file &#39;/system/etc/prop.default&#39;: open() failed: No such file or directory: No such file or directory&#xA;[    2.178152] init: Couldn&#39;t load property file &#39;/system/build.prop&#39;: open() failed: No such file or directory: No such file or directory&#xA;[    2.178183] init: Couldn&#39;t load property file &#39;/vendor/default.prop&#39;: open() failed: No such file or directory: No such file or directory&#xA;[    2.178209] init: Couldn&#39;t load property file &#39;/vendor/build.prop&#39;: open() failed: No such file or directory: No such file or directory&#xA;...&#xA;[    2.182834] init: Parsing file /system/etc/init...&#xA;[    2.182866] init: Unable to read config file &#39;/system/etc/init&#39;: open() failed: No such file or directory&#xA;[    2.182895] init: Parsing file /product/etc/init...&#xA;[    2.182924] init: Unable to read config file &#39;/product/etc/init&#39;: open() failed: No such file or directory&#xA;...&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;后续排查: &lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;然后用 adb 查看了手机，确实没有这些配置文件。并且整个 vendor 目录下都是空的，重新&lt;code&gt;make vendorimage &amp;amp;&amp;amp; flash vendor&lt;/code&gt;还是没有文件。&lt;/li&gt;&#xA;&lt;li&gt;用&lt;code&gt;simg2img&lt;/code&gt;把编译好的&lt;code&gt;system.img&lt;/code&gt;和&lt;code&gt;vendor.img&lt;/code&gt;解包后，&lt;strong&gt;发现里面是有这些文件的&lt;/strong&gt;，所以文件为什么没能写入到手机里面？&lt;/li&gt;&#xA;&lt;li&gt;起初用的是&lt;code&gt;fastboot flashall -w&lt;/code&gt;，后面换成下面的方式，还是无效&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre&gt;&lt;code&gt;#双清&#xA;fastboot erase cache&#xA;fastboot erase userdata&#xA;&#xA;#刷入 boot&#xA;fastboot flash boot_a boot.img&#xA;fastboot flash boot_b boot.img&#xA;&#xA;#刷入 system.img&#xA;fastboot flash system system.img&#xA;fastboot flash system_b system_other.img&#xA;&#xA;#刷入驱动&#xA;fastboot flash vendor vendor.img&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;strong&gt;所以，现在有点麻，有没有大佬知道问题出在哪里？&lt;/strong&gt;&lt;/p&gt;&#xA;</description>
+      <author>StonyGround</author>
+      <pubDate>30 Nov 2022 03:45:20 +0000</pubDate>
+    </item>
+    <item>
       <title>求助， Git 误操作点到撤销所有更改，能否恢复！ - 程序员</title>
       <link>https://www.v2ex.com/t/899029</link>
       <description>刚接触 Git ，命令不怎么熟悉，当时是在桌面 Git Bash 的，然后再 VS 里面写了些改动。所有改动都没有进行 commit 操作，然后误操作点到了撤销所有更改。桌面文件丢失 70%。目前桌面能看到隐藏文件夹.git ，请问还有救吗？&lt;br /&gt;文件夹截图👉&lt;a target=&#34;_blank&#34; href=&#34;https://3o.hk/image/0Jpoz&#34; rel=&#34;nofollow noopener&#34;&gt;https://3o.hk/image/0Jpoz&lt;/a&gt;</description>
