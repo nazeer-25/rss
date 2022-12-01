@@ -39,6 +39,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "优维低代码：Redirect 路由重定向\u0026If 条件渲染",
+      "Link": "https://studygolang.com/articles/35983#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "请教关闭TCP监听时的争用问题",
       "Link": "https://studygolang.com/topics/15997#reply8",
       "Description": "\u003cp\u003e我一个TCP服务，希望从外部关闭Listener，但这样就在listener.Close()与listener.Accept()之间产生了race。请教有什么好的解决办法？\n简单的示例代码如下, 加\u0026rdquo;-race\u0026rdquo;参数运行，再ctrl+c退出运行，就会报race问题：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;log\u0026quot;\n\t\u0026quot;net\u0026quot;\n\t\u0026quot;os\u0026quot;\n\t\u0026quot;os/signal\u0026quot;\n\t\u0026quot;syscall\u0026quot;\n\t\u0026quot;time\u0026quot;\n)\n\nvar listener *net.TCPListener\n\n// tcp服务\nfunc tcpServer() {\n\taddr, err := net.ResolveTCPAddr(\u0026quot;tcp4\u0026quot;, \u0026quot;:6666\u0026quot;)\n\tif err != nil {\n\t\tlog.Fatalln(err)\n\t}\n\tlistener, err = net.ListenTCP(\u0026quot;tcp4\u0026quot;, addr)\n\tif err != nil {\n\t\tlog.Fatalln(err)\n\t}\n\n\tfor {\n\t\tc, err := listener.AcceptTCP()\n\t\tif err != nil {\n\t\t\tif err.(*net.OpError).Err == net.ErrClosed {\n\t\t\t\tlog.Println(\u0026quot;listener closed\u0026quot;)\n\t\t\t\treturn\n\t\t\t}\n\t\t\tlog.Println(err)\n\t\t\tcontinue\n\t\t}\n\t\tconnHandler(c)\n\t}\n}\n\n// 新连接处理\nfunc connHandler(c *net.TCPConn) {\n\tdefer func() {\n\t\tc.Close()\n\t\tlog.Printf(\u0026quot;%s closed\u0026quot;, c.RemoteAddr().String())\n\t}()\n\tlog.Printf(\u0026quot;New connection: %s\u0026quot;, c.RemoteAddr().String())\n\tbuf := make([]byte, 128)\n\tfor {\n\t\tn, err := c.Read(buf)\n\t\tif err != nil {\n\t\t\treturn\n\t\t}\n\t\tlog.Println(buf[:n])\n\t}\n}\n\n// 关闭listener\nfunc listenerClose() {\n\tif listener != nil {\n\t\tlistener.Close()\n\t}\n}\n\nfunc main() {\n\tsigs := make(chan os.Signal, 1)\n\tsignal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)\n\tgo tcpServer()\n\t\u0026lt;-sigs\n\tlistenerClose()\n\ttime.Sleep(time.Millisecond * 200)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -70,13 +77,6 @@
       "Title": "go快速生成树形结构",
       "Link": "https://studygolang.com/topics/15995#reply0",
       "Description": "\u003ch1\u003e(tree.go)[\u003ca href=\"https://gitee.com/wgdong/ginfast/blob/master/util/tree.go\"\u003ehttps://gitee.com/wgdong/ginfast/blob/master/util/tree.go\u003c/a\u003e]\u003c/h1\u003e\n\n\u003ch2\u003e功能\u003c/h2\u003e\n\n\u003cul\u003e\n\u003cli\u003e通用生成函数\u003c/li\u003e\n\u003cli\u003e自定义主节点\u003c/li\u003e\n\u003cli\u003e自定义关系依赖对象\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch2\u003e测试例子\u003c/h2\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage util\n\nimport (\n\t\u0026quot;encoding/json\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;testing\u0026quot;\n)\n\ntype Menu struct {\n\tID       uint\n\tPID      uint\n\tName     string\n\tChildren []Menu `json:\u0026quot;children,omitempty\u0026quot;`\n}\n\nfunc TestTree(t *testing.T) {\n\tv := []Menu{{\n\t\tID:   1,\n\t\tPID:  0,\n\t\tName: \u0026quot;0-1\u0026quot;,\n\t}, {\n\t\tID:   2,\n\t\tPID:  1,\n\t\tName: \u0026quot;1-2\u0026quot;,\n\t}, {\n\t\tID:  3,\n\t\tPID: 2,\n\t}, {\n\t\tID:   4,\n\t\tPID:  1,\n\t\tName: \u0026quot;1-4\u0026quot;,\n\t}, {\n\t\tID:   5,\n\t\tPID:  2,\n\t\tName: \u0026quot;1-3\u0026quot;,\n\t}, {\n\t\tID:   6,\n\t\tPID:  0,\n\t\tName: \u0026quot;0-6\u0026quot;,\n\t}}\n\tr := TreeSlice(v, func(i int) bool { return v[i].PID == 1 }, func(i, j int) bool { return v[i].ID == v[j].PID })\n\tb, _ := json.Marshal(r)\n\tfmt.Printf(\u0026quot;%s\\n\u0026quot;, b)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "优维低代码：Redirect 路由重定向\u0026If 条件渲染",
-      "Link": "https://studygolang.com/articles/35983#reply0",
-      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
