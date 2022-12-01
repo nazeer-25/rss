@@ -4,6 +4,96 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>500 元无线键盘求推荐 - 机械键盘</title>
+      <link>https://www.v2ex.com/t/899245</link>
+      <description>情况是用了一年半的罗技 mx keys 出过两次问题，京东竟然退款了，由于我发现那个键盘的耐操程度有点太差了，灰尘啊渣滓啊都很容易让键盘不好使，所以还是搞机械键盘吧&lt;br /&gt;求推荐 500 左右的键盘，因为听说好多键盘的无线都垃圾，我的选择困难症一下子上来了，目前看了 vgn v98pro(网上文章说无线不稳定)，杜伽 k320w(因为在 v 站收过一个老哥的 k320 觉得质感什么的都挺好，但有看到 v 友说 k320W 连接不稳定)，罗技 G613 有点难看不想要，希望有老哥推荐一个键盘，还是说都不稳定，将就用得了</description>
+      <author>hjq632233317</author>
+      <pubDate>01 Dec 2022 01:29:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>WireGuard 组网 两个对端服务访问异常 - 程序员</title>
+      <link>https://www.v2ex.com/t/899244</link>
+      <description>&lt;h2&gt;基本情况&lt;/h2&gt;&#xA;&lt;p&gt;一台 &lt;code&gt;macOS&lt;/code&gt; 电脑，在移动宽带家用宽带内网中，路由器下发的 &lt;code&gt;IP: 192.168.1.207&lt;/code&gt; &lt;/p&gt;&#xA;&lt;p&gt;一台 &lt;code&gt;Ubuntu&lt;/code&gt; 云主机，是腾讯云轻量服务器，内网 &lt;code&gt;IP: 10.0.24.5&lt;/code&gt; ，公网 &lt;code&gt;IP: 20.111.10.10&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;structure&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://cdn.jsdelivr.net/gh/kerwino/pic@main/uPic/structure-20221201085031728.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;在两台设备上配置了 &lt;code&gt;WireGuard&lt;/code&gt; ，其中&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;code&gt;Ubuntu&lt;/code&gt; 的 &lt;code&gt;WireGuard IP: 10.66.66.1&lt;/code&gt; ，监听端口 &lt;code&gt;61000&lt;/code&gt; &lt;ul&gt;&#xA;&lt;li&gt;对端 &lt;code&gt;AllowedIPs: 10.66.66.2/32, 192.168.1.1/24&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;code&gt;macOS&lt;/code&gt; 的 &lt;code&gt;WireGuard IP: 10.66.66.2&lt;/code&gt; ，&lt;ul&gt;&#xA;&lt;li&gt;对端  &lt;code&gt;AllowedIPs: 0.0.0.0/0, ::/0&lt;/code&gt; &lt;/li&gt;&#xA;&lt;li&gt;对端 &lt;code&gt;EndPoint: 20.111.10.10:61000&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;预计实现的目标&lt;/h2&gt;&#xA;&lt;p&gt;在 &lt;code&gt;WireGuard&lt;/code&gt; 的每个 &lt;code&gt;Peer&lt;/code&gt; 可以访问到各自的局域网内的服务&lt;/p&gt;&#xA;&lt;p&gt;我在两个设备上 &lt;code&gt;80&lt;/code&gt; 端口分别部署了 &lt;code&gt;web&lt;/code&gt; 服务。同时 &lt;code&gt;Home Router&lt;/code&gt; 的 &lt;code&gt;80&lt;/code&gt; 也有 &lt;code&gt;web&lt;/code&gt; 服务。&lt;/p&gt;&#xA;&lt;h2&gt;现状与问题&lt;/h2&gt;&#xA;&lt;p&gt;&lt;code&gt;macOS&lt;/code&gt; 无法 &lt;code&gt;ping&lt;/code&gt; 通 &lt;code&gt;Ubuntu&lt;/code&gt;，但是反过来可以。 &lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;Ubuntu&lt;/code&gt; 无法访问 &lt;code&gt;macOS&lt;/code&gt; 上的 &lt;code&gt;web&lt;/code&gt; 服务，但是反过来可以。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;status&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://cdn.jsdelivr.net/gh/kerwino/pic@main/uPic/status02.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h2&gt;调试信息&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;macOS ping Ubuntu WireGuard IP&lt;/code&gt; &lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;myname@mac ~&amp;gt; ping 10.66.66.1&#xA;PING 10.66.66.1 (10.66.66.1): 56 data bytes&#xA;Request timeout for icmp_seq 0&#xA;Request timeout for icmp_seq 1&#xA;^C&#xA;--- 10.66.66.1 ping statistics ---&#xA;3 packets transmitted, 0 packets received, 100.0% packet loss&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;myname@mac ~&amp;gt; sudo tcpdump host 10.66.66.1 -nn&#xA;tcpdump: data link type PKTAP&#xA;tcpdump: verbose output suppressed, use -v or -vv for full protocol decode&#xA;listening on pktap, link-type PKTAP (Apple DLT_PKTAP), capture size 262144 bytes&#xA;09:08:45.842669 IP 198.18.0.1 &amp;gt; 10.66.66.1: ICMP echo request, id 3660, seq 0, length 64&#xA;09:08:45.842826 IP 192.168.1.207 &amp;gt; 10.66.66.1: ICMP echo request, id 30738, seq 0, length 64&#xA;09:08:46.845281 IP 198.18.0.1 &amp;gt; 10.66.66.1: ICMP echo request, id 3660, seq 1, length 64&#xA;09:08:46.845528 IP 192.168.1.207 &amp;gt; 10.66.66.1: ICMP echo request, id 30738, seq 1, length 64&#xA;09:08:47.849243 IP 198.18.0.1 &amp;gt; 10.66.66.1: ICMP echo request, id 3660, seq 2, length 64&#xA;09:08:47.849486 IP 192.168.1.207 &amp;gt; 10.66.66.1: ICMP echo request, id 30738, seq 2, length 64&#xA;^C&#xA;6 packets captured&#xA;28 packets received by filter&#xA;0 packets dropped by kernel&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;macOS ping Ubuntu LAN IP&lt;/code&gt; &lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;myname@mac ~ [2]&amp;gt; ping 10.0.24.5&#xA;PING 10.0.24.5 (10.0.24.5): 56 data bytes&#xA;Request timeout for icmp_seq 0&#xA;Request timeout for icmp_seq 1&#xA;^C&#xA;--- 10.0.24.5 ping statistics ---&#xA;3 packets transmitted, 0 packets received, 100.0% packet loss&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;myname@mac ~&amp;gt; sudo tcpdump host 10.0.24.5 -nn&#xA;tcpdump: data link type PKTAP&#xA;tcpdump: verbose output suppressed, use -v or -vv for full protocol decode&#xA;listening on pktap, link-type PKTAP (Apple DLT_PKTAP), capture size 262144 bytes&#xA;09:10:32.262418 IP 198.18.0.1 &amp;gt; 10.0.24.5: ICMP echo request, id 29772, seq 0, length 64&#xA;09:10:32.262692 IP 192.168.1.207 &amp;gt; 10.0.24.5: ICMP echo request, id 57874, seq 0, length 64&#xA;09:10:33.264108 IP 198.18.0.1 &amp;gt; 10.0.24.5: ICMP echo request, id 29772, seq 1, length 64&#xA;09:10:33.264379 IP 192.168.1.207 &amp;gt; 10.0.24.5: ICMP echo request, id 57874, seq 1, length 64&#xA;09:10:34.265250 IP 198.18.0.1 &amp;gt; 10.0.24.5: ICMP echo request, id 29772, seq 2, length 64&#xA;09:10:34.265511 IP 192.168.1.207 &amp;gt; 10.0.24.5: ICMP echo request, id 57874, seq 2, length 64&#xA;^C&#xA;6 packets captured&#xA;44 packets received by filter&#xA;0 packets dropped by kernel&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;Ubuntu ping macOS LAN IP&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;myname@rus ~&amp;gt; ping 192.168.1.207&#xA;PING 192.168.1.207 (192.168.1.207) 56(84) bytes of data.&#xA;^C&#xA;--- 192.168.1.207 ping statistics ---&#xA;5 packets transmitted, 0 received, 100% packet loss, time 4096ms&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;myname@rus ~&amp;gt; sudo tcpdump -i wg0 -nn&#xA;tcpdump: verbose output suppressed, use -v or -vv for full protocol decode&#xA;listening on wg0, link-type RAW (Raw IP), capture size 262144 bytes&#xA;09:14:47.520387 IP 10.66.66.1 &amp;gt; 192.168.1.207: ICMP echo request, id 16, seq 1, length 64&#xA;09:14:48.544447 IP 10.66.66.1 &amp;gt; 192.168.1.207: ICMP echo request, id 16, seq 2, length 64&#xA;09:14:49.568440 IP 10.66.66.1 &amp;gt; 192.168.1.207: ICMP echo request, id 16, seq 3, length 64&#xA;09:14:50.592437 IP 10.66.66.1 &amp;gt; 192.168.1.207: ICMP echo request, id 16, seq 4, length 64&#xA;09:14:51.616445 IP 10.66.66.1 &amp;gt; 192.168.1.207: ICMP echo request, id 16, seq 5, length 64&#xA;^C&#xA;5 packets captured&#xA;5 packets received by filter&#xA;0 packets dropped by kernel&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;Ubuntu curl macOS&lt;/code&gt; 任何地址都没响应，而且没有终端输出，&lt;code&gt;tcpdump&lt;/code&gt; 也没有输出。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;请大家指点。&lt;/p&gt;&#xA;</description>
+      <author>extiing</author>
+      <pubDate>01 Dec 2022 01:29:10 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问一般计算收货地址距离怎么实现？ - 程序员</title>
+      <link>https://www.v2ex.com/t/899243</link>
+      <description>目前用的 redis 的 geo 计算，但是用户收货地址变动性很大，不太适合长期保存，且订单完结后数据就用不上了，每次请求去新增，计算完成后删除的话又感觉有些啰嗦，有什么两全其美的办法吗？</description>
+      <author>Lexgni</author>
+      <pubDate>01 Dec 2022 01:25:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>RSS 阅读器 - 快捷键 - 分享发现</title>
+      <link>https://www.v2ex.com/t/899242</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://webfollow.c?r=https://v2ex.com&#34; rel=&#34;nofollow&#34;&gt;webfollow.cc&lt;/a&gt; 最近重构了 键盘事件无障碍（快捷键）&lt;/p&gt;&#xA;&lt;p&gt;有以下快捷键：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;left right up down 在订阅源和文章列表文章之间跳转&lt;/li&gt;&#xA;&lt;li&gt;enter 打开选中&lt;/li&gt;&#xA;&lt;li&gt;a d 文章切换&lt;/li&gt;&#xA;&lt;li&gt;w s 文章滚动&lt;/li&gt;&#xA;&lt;li&gt;q 退出 e 内嵌视图 r 阅读视图 t 打开源网站&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;阅读常用功能都可以键盘快捷键操作了&lt;/p&gt;&#xA;</description>
+      <author>summerLast</author>
+      <pubDate>01 Dec 2022 01:24:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>115 推出 8000 元长期 VIP - 分享发现</title>
+      <link>https://www.v2ex.com/t/899241</link>
+      <description>这次用词比较奇特，没有使用“永久 VIP”的说法，而是“无终止日期，长期有效”&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/pGoGGrG.jpg&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/pGoGGrG.jpg&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;</description>
+      <author>yoa1q7y</author>
+      <pubDate>01 Dec 2022 01:20:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>十一月挑战完成了吗？十二月挑战是什么？ -  WATCH</title>
+      <link>https://www.v2ex.com/t/899240</link>
+      <author>0o0O0o0O0o</author>
+      <pubDate>01 Dec 2022 01:19:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>深圳噪音 - 生活</title>
+      <link>https://www.v2ex.com/t/899239</link>
+      <description>如果深圳这块地当做一个人的话，那他职业要么是鸡要么是鸭，天天被草，掀了再铺，铺了又掀，如此反复，还浪费资源</description>
+      <author>xuxinglin8888</author>
+      <pubDate>01 Dec 2022 01:19:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>PyScript, Pyhon in HTML - Python</title>
+      <link>https://www.v2ex.com/t/899238</link>
+      <description>&lt;a target=&#34;_blank&#34; href=&#34;https://pyscript.net/&#34; rel=&#34;nofollow noopener&#34;&gt;https://pyscript.net/&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;由 Anaconda 发起， 刚刚起步， 使用 wasm 执行， 可以和 JavaScript 一起使用~&lt;br /&gt;&lt;br /&gt;对于数据科学来说， 应该很有用处了~</description>
+      <author>Davic1</author>
+      <pubDate>01 Dec 2022 01:15:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>PDF 于不同软件下的打印问题 - 字体排印</title>
+      <link>https://www.v2ex.com/t/899237</link>
+      <description>&lt;p&gt;同一份 PDF 文档，同一台打印机，使用 Firefox 执行打印与使用 Adobe Acrobat 执行打印的效果不太一样。&lt;/p&gt;&#xA;&lt;p&gt;如图所示，使用 Firefox 执行打印的 PDF 字体没有 Acrobat 清晰。使用的字体是思源宋体。&lt;/p&gt;&#xA;&lt;p&gt;还想请教各位，是软件问题、字体问题还是打印机问题？&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;使用 Firefox 执行打印的 PDF 字体没有 Acrobat 清晰&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://files.catbox.moe/eg7vku.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>Vectorst</author>
+      <pubDate>01 Dec 2022 01:13:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>macos 最新版 spotlight 打开输入几个单词后卡顿。。 - macOS</title>
+      <link>https://www.v2ex.com/t/899236</link>
+      <description>&lt;p&gt;mbp2018...&#xA;存储只用了 80g 文件也不多啊，前几个月重装了系统&#xA;cmd+空格 输入第一个字母就开始卡 2s 人麻了&lt;/p&gt;&#xA;&lt;p&gt;在搜索设置关掉了好多设置才缓解了点&lt;/p&gt;&#xA;&lt;p&gt;以前系统都没这种感觉。。。&lt;/p&gt;&#xA;</description>
+      <author>polobug</author>
+      <pubDate>01 Dec 2022 01:04:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>油猴脚本恢复黑白网页为彩色 - 分享发现</title>
+      <link>https://www.v2ex.com/t/899235</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://greasyfork.org/zh-CN/scripts/399478-%E6%88%91%E8%A6%81%E5%BD%A9%E8%89%B2&#34; rel=&#34;nofollow&#34;&gt;https://greasyfork.org/zh-CN/scripts/399478-%E6%88%91%E8%A6%81%E5%BD%A9%E8%89%B2&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;我要彩色&#xA;恢复黑白网页为彩色&lt;/p&gt;&#xA;&lt;p&gt;本版本优势&#xA;更轻的内存占用&#xA;更快的反应速度，中间无任何延迟&lt;/p&gt;&#xA;</description>
+      <author>VZMZZZ</author>
+      <pubDate>01 Dec 2022 01:04:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>电脑用着突然出现了一条黑线，有人有这种情况吗 - Apple</title>
+      <link>https://www.v2ex.com/t/899233</link>
+      <description>&lt;p&gt;电脑是 M1 Pro ，买了还没一年，一直外接一个显示器使用，没磕没碰，使用中突然发现屏幕出现了一条黑线&#xA;&lt;img alt=&#34;Untitled&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://tvax3.sinaimg.cn/large/7eb90a9cly1h8o10cr5qij23402c0ng9.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>g190875565</author>
+      <pubDate>01 Dec 2022 01:00:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>iOS 端有类似于 macOS 的热键监听的 api 吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/899232</link>
+      <description>搜了半天没搜到....&lt;br /&gt;&lt;br /&gt;就是在 iPad/iPhone 外接键盘时或者在 m1 mac 上运行移动端 app 时，我需要监听一些常用的快捷键，比如 cmd+C/V ，自己 app 实现对应的功能&lt;br /&gt;&lt;br /&gt;找不到相关的 api 呢......</description>
+      <author>BeyondBouds</author>
+      <pubDate>01 Dec 2022 00:56:13 +0000</pubDate>
+    </item>
+    <item>
       <title>一亩三分地上哪里可以买共享会员账号？ - 问与答</title>
       <link>https://www.v2ex.com/t/899231</link>
       <description>&lt;p&gt;这个会员价格也太贵了吧。。。。&lt;/p&gt;&#xA;&lt;img alt=&#34;会员&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.postimg.cc/4N0KQh1j/huiyuan.jpg&#34;/&gt;</description>

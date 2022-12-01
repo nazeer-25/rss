@@ -4,6 +4,97 @@
   "Description": "",
   "Items": [
     {
+      "Title": "500 元无线键盘求推荐 - 机械键盘",
+      "Link": "https://www.v2ex.com/t/899245",
+      "Description": "情况是用了一年半的罗技 mx keys 出过两次问题，京东竟然退款了，由于我发现那个键盘的耐操程度有点太差了，灰尘啊渣滓啊都很容易让键盘不好使，所以还是搞机械键盘吧\u003cbr /\u003e求推荐 500 左右的键盘，因为听说好多键盘的无线都垃圾，我的选择困难症一下子上来了，目前看了 vgn v98pro(网上文章说无线不稳定)，杜伽 k320w(因为在 v 站收过一个老哥的 k320 觉得质感什么的都挺好，但有看到 v 友说 k320W 连接不稳定)，罗技 G613 有点难看不想要，希望有老哥推荐一个键盘，还是说都不稳定，将就用得了",
+      "Author": "hjq632233317",
+      "PubDate": "2022-12-01T01:29:12Z"
+    },
+    {
+      "Title": "WireGuard 组网 两个对端服务访问异常 - 程序员",
+      "Link": "https://www.v2ex.com/t/899244",
+      "Description": "\u003ch2\u003e基本情况\u003c/h2\u003e\n\u003cp\u003e一台 \u003ccode\u003emacOS\u003c/code\u003e 电脑，在移动宽带家用宽带内网中，路由器下发的 \u003ccode\u003eIP: 192.168.1.207\u003c/code\u003e \u003c/p\u003e\n\u003cp\u003e一台 \u003ccode\u003eUbuntu\u003c/code\u003e 云主机，是腾讯云轻量服务器，内网 \u003ccode\u003eIP: 10.0.24.5\u003c/code\u003e ，公网 \u003ccode\u003eIP: 20.111.10.10\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"structure\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://cdn.jsdelivr.net/gh/kerwino/pic@main/uPic/structure-20221201085031728.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e在两台设备上配置了 \u003ccode\u003eWireGuard\u003c/code\u003e ，其中\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003ccode\u003eUbuntu\u003c/code\u003e 的 \u003ccode\u003eWireGuard IP: 10.66.66.1\u003c/code\u003e ，监听端口 \u003ccode\u003e61000\u003c/code\u003e \u003cul\u003e\n\u003cli\u003e对端 \u003ccode\u003eAllowedIPs: 10.66.66.2/32, 192.168.1.1/24\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003ccode\u003emacOS\u003c/code\u003e 的 \u003ccode\u003eWireGuard IP: 10.66.66.2\u003c/code\u003e ，\u003cul\u003e\n\u003cli\u003e对端  \u003ccode\u003eAllowedIPs: 0.0.0.0/0, ::/0\u003c/code\u003e \u003c/li\u003e\n\u003cli\u003e对端 \u003ccode\u003eEndPoint: 20.111.10.10:61000\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e预计实现的目标\u003c/h2\u003e\n\u003cp\u003e在 \u003ccode\u003eWireGuard\u003c/code\u003e 的每个 \u003ccode\u003ePeer\u003c/code\u003e 可以访问到各自的局域网内的服务\u003c/p\u003e\n\u003cp\u003e我在两个设备上 \u003ccode\u003e80\u003c/code\u003e 端口分别部署了 \u003ccode\u003eweb\u003c/code\u003e 服务。同时 \u003ccode\u003eHome Router\u003c/code\u003e 的 \u003ccode\u003e80\u003c/code\u003e 也有 \u003ccode\u003eweb\u003c/code\u003e 服务。\u003c/p\u003e\n\u003ch2\u003e现状与问题\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003emacOS\u003c/code\u003e 无法 \u003ccode\u003eping\u003c/code\u003e 通 \u003ccode\u003eUbuntu\u003c/code\u003e，但是反过来可以。 \u003c/p\u003e\n\u003cp\u003e\u003ccode\u003eUbuntu\u003c/code\u003e 无法访问 \u003ccode\u003emacOS\u003c/code\u003e 上的 \u003ccode\u003eweb\u003c/code\u003e 服务，但是反过来可以。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"status\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://cdn.jsdelivr.net/gh/kerwino/pic@main/uPic/status02.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e调试信息\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003emacOS ping Ubuntu WireGuard IP\u003c/code\u003e \u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-txt\"\u003emyname@mac ~\u0026gt; ping 10.66.66.1\nPING 10.66.66.1 (10.66.66.1): 56 data bytes\nRequest timeout for icmp_seq 0\nRequest timeout for icmp_seq 1\n^C\n--- 10.66.66.1 ping statistics ---\n3 packets transmitted, 0 packets received, 100.0% packet loss\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-txt\"\u003emyname@mac ~\u0026gt; sudo tcpdump host 10.66.66.1 -nn\ntcpdump: data link type PKTAP\ntcpdump: verbose output suppressed, use -v or -vv for full protocol decode\nlistening on pktap, link-type PKTAP (Apple DLT_PKTAP), capture size 262144 bytes\n09:08:45.842669 IP 198.18.0.1 \u0026gt; 10.66.66.1: ICMP echo request, id 3660, seq 0, length 64\n09:08:45.842826 IP 192.168.1.207 \u0026gt; 10.66.66.1: ICMP echo request, id 30738, seq 0, length 64\n09:08:46.845281 IP 198.18.0.1 \u0026gt; 10.66.66.1: ICMP echo request, id 3660, seq 1, length 64\n09:08:46.845528 IP 192.168.1.207 \u0026gt; 10.66.66.1: ICMP echo request, id 30738, seq 1, length 64\n09:08:47.849243 IP 198.18.0.1 \u0026gt; 10.66.66.1: ICMP echo request, id 3660, seq 2, length 64\n09:08:47.849486 IP 192.168.1.207 \u0026gt; 10.66.66.1: ICMP echo request, id 30738, seq 2, length 64\n^C\n6 packets captured\n28 packets received by filter\n0 packets dropped by kernel\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003emacOS ping Ubuntu LAN IP\u003c/code\u003e \u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-txt\"\u003emyname@mac ~ [2]\u0026gt; ping 10.0.24.5\nPING 10.0.24.5 (10.0.24.5): 56 data bytes\nRequest timeout for icmp_seq 0\nRequest timeout for icmp_seq 1\n^C\n--- 10.0.24.5 ping statistics ---\n3 packets transmitted, 0 packets received, 100.0% packet loss\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-txt\"\u003emyname@mac ~\u0026gt; sudo tcpdump host 10.0.24.5 -nn\ntcpdump: data link type PKTAP\ntcpdump: verbose output suppressed, use -v or -vv for full protocol decode\nlistening on pktap, link-type PKTAP (Apple DLT_PKTAP), capture size 262144 bytes\n09:10:32.262418 IP 198.18.0.1 \u0026gt; 10.0.24.5: ICMP echo request, id 29772, seq 0, length 64\n09:10:32.262692 IP 192.168.1.207 \u0026gt; 10.0.24.5: ICMP echo request, id 57874, seq 0, length 64\n09:10:33.264108 IP 198.18.0.1 \u0026gt; 10.0.24.5: ICMP echo request, id 29772, seq 1, length 64\n09:10:33.264379 IP 192.168.1.207 \u0026gt; 10.0.24.5: ICMP echo request, id 57874, seq 1, length 64\n09:10:34.265250 IP 198.18.0.1 \u0026gt; 10.0.24.5: ICMP echo request, id 29772, seq 2, length 64\n09:10:34.265511 IP 192.168.1.207 \u0026gt; 10.0.24.5: ICMP echo request, id 57874, seq 2, length 64\n^C\n6 packets captured\n44 packets received by filter\n0 packets dropped by kernel\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003eUbuntu ping macOS LAN IP\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-txt\"\u003emyname@rus ~\u0026gt; ping 192.168.1.207\nPING 192.168.1.207 (192.168.1.207) 56(84) bytes of data.\n^C\n--- 192.168.1.207 ping statistics ---\n5 packets transmitted, 0 received, 100% packet loss, time 4096ms\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-txt\"\u003emyname@rus ~\u0026gt; sudo tcpdump -i wg0 -nn\ntcpdump: verbose output suppressed, use -v or -vv for full protocol decode\nlistening on wg0, link-type RAW (Raw IP), capture size 262144 bytes\n09:14:47.520387 IP 10.66.66.1 \u0026gt; 192.168.1.207: ICMP echo request, id 16, seq 1, length 64\n09:14:48.544447 IP 10.66.66.1 \u0026gt; 192.168.1.207: ICMP echo request, id 16, seq 2, length 64\n09:14:49.568440 IP 10.66.66.1 \u0026gt; 192.168.1.207: ICMP echo request, id 16, seq 3, length 64\n09:14:50.592437 IP 10.66.66.1 \u0026gt; 192.168.1.207: ICMP echo request, id 16, seq 4, length 64\n09:14:51.616445 IP 10.66.66.1 \u0026gt; 192.168.1.207: ICMP echo request, id 16, seq 5, length 64\n^C\n5 packets captured\n5 packets received by filter\n0 packets dropped by kernel\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003eUbuntu curl macOS\u003c/code\u003e 任何地址都没响应，而且没有终端输出，\u003ccode\u003etcpdump\u003c/code\u003e 也没有输出。\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr/\u003e\n\u003cp\u003e请大家指点。\u003c/p\u003e\n",
+      "Author": "extiing",
+      "PubDate": "2022-12-01T01:29:10Z"
+    },
+    {
+      "Title": "请问一般计算收货地址距离怎么实现？ - 程序员",
+      "Link": "https://www.v2ex.com/t/899243",
+      "Description": "目前用的 redis 的 geo 计算，但是用户收货地址变动性很大，不太适合长期保存，且订单完结后数据就用不上了，每次请求去新增，计算完成后删除的话又感觉有些啰嗦，有什么两全其美的办法吗？",
+      "Author": "Lexgni",
+      "PubDate": "2022-12-01T01:25:51Z"
+    },
+    {
+      "Title": "RSS 阅读器 - 快捷键 - 分享发现",
+      "Link": "https://www.v2ex.com/t/899242",
+      "Description": "\u003cp\u003e\u003ca href=\"https://webfollow.c?r=https://v2ex.com\" rel=\"nofollow\"\u003ewebfollow.cc\u003c/a\u003e 最近重构了 键盘事件无障碍（快捷键）\u003c/p\u003e\n\u003cp\u003e有以下快捷键：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eleft right up down 在订阅源和文章列表文章之间跳转\u003c/li\u003e\n\u003cli\u003eenter 打开选中\u003c/li\u003e\n\u003cli\u003ea d 文章切换\u003c/li\u003e\n\u003cli\u003ew s 文章滚动\u003c/li\u003e\n\u003cli\u003eq 退出 e 内嵌视图 r 阅读视图 t 打开源网站\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e阅读常用功能都可以键盘快捷键操作了\u003c/p\u003e\n",
+      "Author": "summerLast",
+      "PubDate": "2022-12-01T01:24:17Z"
+    },
+    {
+      "Title": "115 推出 8000 元长期 VIP - 分享发现",
+      "Link": "https://www.v2ex.com/t/899241",
+      "Description": "这次用词比较奇特，没有使用“永久 VIP”的说法，而是“无终止日期，长期有效”\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/pGoGGrG.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/pGoGGrG.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e",
+      "Author": "yoa1q7y",
+      "PubDate": "2022-12-01T01:20:00Z"
+    },
+    {
+      "Title": "十一月挑战完成了吗？十二月挑战是什么？ -  WATCH",
+      "Link": "https://www.v2ex.com/t/899240",
+      "Description": "",
+      "Author": "0o0O0o0O0o",
+      "PubDate": "2022-12-01T01:19:36Z"
+    },
+    {
+      "Title": "深圳噪音 - 生活",
+      "Link": "https://www.v2ex.com/t/899239",
+      "Description": "如果深圳这块地当做一个人的话，那他职业要么是鸡要么是鸭，天天被草，掀了再铺，铺了又掀，如此反复，还浪费资源",
+      "Author": "xuxinglin8888",
+      "PubDate": "2022-12-01T01:19:13Z"
+    },
+    {
+      "Title": "PyScript, Pyhon in HTML - Python",
+      "Link": "https://www.v2ex.com/t/899238",
+      "Description": "\u003ca target=\"_blank\" href=\"https://pyscript.net/\" rel=\"nofollow noopener\"\u003ehttps://pyscript.net/\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e由 Anaconda 发起， 刚刚起步， 使用 wasm 执行， 可以和 JavaScript 一起使用~\u003cbr /\u003e\u003cbr /\u003e对于数据科学来说， 应该很有用处了~",
+      "Author": "Davic1",
+      "PubDate": "2022-12-01T01:15:28Z"
+    },
+    {
+      "Title": "PDF 于不同软件下的打印问题 - 字体排印",
+      "Link": "https://www.v2ex.com/t/899237",
+      "Description": "\u003cp\u003e同一份 PDF 文档，同一台打印机，使用 Firefox 执行打印与使用 Adobe Acrobat 执行打印的效果不太一样。\u003c/p\u003e\n\u003cp\u003e如图所示，使用 Firefox 执行打印的 PDF 字体没有 Acrobat 清晰。使用的字体是思源宋体。\u003c/p\u003e\n\u003cp\u003e还想请教各位，是软件问题、字体问题还是打印机问题？\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"使用 Firefox 执行打印的 PDF 字体没有 Acrobat 清晰\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://files.catbox.moe/eg7vku.jpg\"/\u003e\u003c/p\u003e\n",
+      "Author": "Vectorst",
+      "PubDate": "2022-12-01T01:13:20Z"
+    },
+    {
+      "Title": "macos 最新版 spotlight 打开输入几个单词后卡顿。。 - macOS",
+      "Link": "https://www.v2ex.com/t/899236",
+      "Description": "\u003cp\u003embp2018...\n存储只用了 80g 文件也不多啊，前几个月重装了系统\ncmd+空格 输入第一个字母就开始卡 2s 人麻了\u003c/p\u003e\n\u003cp\u003e在搜索设置关掉了好多设置才缓解了点\u003c/p\u003e\n\u003cp\u003e以前系统都没这种感觉。。。\u003c/p\u003e\n",
+      "Author": "polobug",
+      "PubDate": "2022-12-01T01:04:56Z"
+    },
+    {
+      "Title": "油猴脚本恢复黑白网页为彩色 - 分享发现",
+      "Link": "https://www.v2ex.com/t/899235",
+      "Description": "\u003cp\u003e\u003ca href=\"https://greasyfork.org/zh-CN/scripts/399478-%E6%88%91%E8%A6%81%E5%BD%A9%E8%89%B2\" rel=\"nofollow\"\u003ehttps://greasyfork.org/zh-CN/scripts/399478-%E6%88%91%E8%A6%81%E5%BD%A9%E8%89%B2\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e我要彩色\n恢复黑白网页为彩色\u003c/p\u003e\n\u003cp\u003e本版本优势\n更轻的内存占用\n更快的反应速度，中间无任何延迟\u003c/p\u003e\n",
+      "Author": "VZMZZZ",
+      "PubDate": "2022-12-01T01:04:39Z"
+    },
+    {
+      "Title": "电脑用着突然出现了一条黑线，有人有这种情况吗 - Apple",
+      "Link": "https://www.v2ex.com/t/899233",
+      "Description": "\u003cp\u003e电脑是 M1 Pro ，买了还没一年，一直外接一个显示器使用，没磕没碰，使用中突然发现屏幕出现了一条黑线\n\u003cimg alt=\"Untitled\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://tvax3.sinaimg.cn/large/7eb90a9cly1h8o10cr5qij23402c0ng9.jpg\"/\u003e\u003c/p\u003e\n",
+      "Author": "g190875565",
+      "PubDate": "2022-12-01T01:00:01Z"
+    },
+    {
+      "Title": "iOS 端有类似于 macOS 的热键监听的 api 吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/899232",
+      "Description": "搜了半天没搜到....\u003cbr /\u003e\u003cbr /\u003e就是在 iPad/iPhone 外接键盘时或者在 m1 mac 上运行移动端 app 时，我需要监听一些常用的快捷键，比如 cmd+C/V ，自己 app 实现对应的功能\u003cbr /\u003e\u003cbr /\u003e找不到相关的 api 呢......",
+      "Author": "BeyondBouds",
+      "PubDate": "2022-12-01T00:56:13Z"
+    },
+    {
       "Title": "一亩三分地上哪里可以买共享会员账号？ - 问与答",
       "Link": "https://www.v2ex.com/t/899231",
       "Description": "\u003cp\u003e这个会员价格也太贵了吧。。。。\u003c/p\u003e\n\u003cimg alt=\"会员\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.postimg.cc/4N0KQh1j/huiyuan.jpg\"/\u003e",
