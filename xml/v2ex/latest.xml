@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有点疑问，关于端口方面的 - 问与答</title>
+      <link>https://www.v2ex.com/t/899715</link>
+      <description>&lt;p&gt;旧笔记本装了 pve  pve 里装了 ubuntu 然后装了 docker&lt;br/&gt;&#xA;就想着搞点东西玩，现在搞了几个数据库 还有 alist&lt;br/&gt;&#xA;最近了解到了 bitwarden 密码管理，也想着弄个上去玩玩&#xA;但是有个问题是，这个项目端口是 80 ， 于是想找了下想修改端口的方法，但是并没有找到多少是教如何改掉它 80 端口的&lt;br/&gt;&#xA;虽然可以设置端口映射，但是 docker 内如果有另外一个项目也是 80 端口的呢？&lt;br/&gt;&#xA;就很困扰&lt;br/&gt;&#xA;有人说用 nginx ，我没怎么用过，看了下入门视频，即使用 nginx ，它端口还是 80 呀，就好奇怪&lt;/p&gt;&#xA;</description>
+      <author>helee9199</author>
+      <pubDate>02 Dec 2022 14:16:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>练习实现 cdylib,卡住了,有没有使用类似技术开源的项目可以学习一下？ - Rust</title>
+      <link>https://www.v2ex.com/t/899714</link>
+      <description>&lt;p&gt;现有项目由 rust 实现，现在希望将部分功能封装为 C 动态库,给其他语言使用。C 库 API 使用流程是这样的：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;// 不透明指针,需要使用方持有&#xA;#define Ctx void *;&#xA;&#xA;// 第 1 步 初始化 Ctx,然后将指针传给使用方&#xA;int32_t ctx_open(Ctx *ctx);&#xA;&#xA;// 第 2 步 调用相关功能接口时,需要将 ctx 传&#xA;int32_t ctx_use(Ctx ctx);&#xA;&#xA;// 第 3 步 使用方用该方法来完成资源释放&#xA;int32_t ctx_close(Ctx ctx);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;对 rust unsafe 部分不熟悉，在裸指针转换以及 Ctx 生命周期维护上卡住了。&lt;/p&gt;&#xA;&lt;p&gt;我现在的代码大概是这样的&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;pub type Ptr = *mut ffi::c_void;&#xA;&#xA;#[no_mangle]&#xA;pub extern &#34;C&#34; fn ctx_open(handle: *mut Ptr) -&amp;gt; i32 {&#xA;    let ctx: Box&amp;lt;Ctx&amp;gt; = Box::new(Ctx {  });&#xA;    let ptr = Box::&amp;lt;Ctx&amp;gt;::into_raw(ctx);&#xA;    let ptr = ptr as Ptr;&#xA;    unsafe {*handle = ptr};&#xA;    0&#xA;    // 我希望 ctx 不会因为离开作用域而自动 drop,我不确定以上代码是否正确&#xA;}&#xA;&#xA;#[no_mangle]&#xA;pub extern &#34;C&#34; fn ctx_use(handle: Ptr) -&amp;gt; i32 {&#xA;    //  这应该需要将 handle 转换为 Ctx 可可变借用(如果不是借用,可能会导致 Ctx 对象在这个函数结束就释放了),不知道怎么做&#xA;}&#xA;&#xA;#[no_mangle]&#xA;pub extern &#34;C&#34; fn ctx_close&amp;lt;&#39;a&amp;gt;(handle: Ptr)-&amp;gt; i32 {&#xA;    let mut ctx = unsafe { Box::&amp;lt;Ctx&amp;gt;::from_raw(handle as *mut Ctx)};&#xA;    unsafe {drop(yy)};&#xA;    0&#xA;    // 释放掉资源，不知道是否正确&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>wsa10054</author>
+      <pubDate>02 Dec 2022 14:13:57 +0000</pubDate>
+    </item>
+    <item>
       <title>windows11 经常出现右键菜单鼠标没法点击，但用键盘可以操作选项的情况 - Windows</title>
       <link>https://www.v2ex.com/t/899713</link>
       <description>&lt;p&gt;重启电脑或者重启 N 次资源管理器可以解决，但是实在是太麻烦了。&lt;/p&gt;&#xA;&lt;p&gt;有碰到过这种情况的大佬吗，你们是怎么解决的？&lt;/p&gt;&#xA;</description>
@@ -44,13 +58,6 @@
       <description>是这样，通过 webdav 播放阿里云盘，kodi 经常卡顿。&lt;br /&gt;可通过群晖同步，显示同步下载的速度能到 70MBps ，这个速度已经很快了，完全满足蓝光双杜比原盘的速率。&lt;br /&gt;比如，我将 A 影片（大概 80G ）已经同步到 nas ，然后同时同步其他阿里云盘的影片，同时 kodi 局域网播放 A 影片，显示：群晖局域网上传速率是 12MBps 左右（播放电影），同步下载速率 70MBps 左右。&lt;br /&gt;但如果直接用 kodi 通过 webdav 在线播放 A 影片，就会卡顿。&lt;br /&gt;&lt;br /&gt;难道阿里云盘能够区分在线播放和下载？给不同的速度？&lt;br /&gt;&lt;br /&gt;另，同步下载我设定的条件是同时下载 10 个文件，所以速度达到 70 。昨天只同步两个影片，速度就只有 25 左右。。莫非阿里云盘限制每个文件只能到 12 左右？</description>
       <author>redegg</author>
       <pubDate>02 Dec 2022 13:45:52 +0000</pubDate>
-    </item>
-    <item>
-      <title>长期远程 UX 交互设计师职位！ 30-38K - 酷工作</title>
-      <link>https://www.v2ex.com/t/899707</link>
-      <description>&lt;p&gt;UE 用户体验 /UX 交互设计师 /文案师 /UED 大师&#xA;薪资 30-38K 可谈，另有奖金！&#xA;请咨询 HR 电报 TG：@fc18866&#xA;3 轮面试&#xA;1 、优化系统后台、前端文案和交互，简化用户理解难度，降低学习成本、提高易用性；&#xA;2 、产品结构、流程、功能、界面、用户体验、交互功能等进行研究，配合产品优化原型和文案、交互等；&#xA;3 、参与竞品研究，用户反馈和数据分析，进行产品可用性和易用性测试和评估；&#xA;4 、负责 UI 界面优化的需求，并兼顾相关的立项与跟进验收；&#xA;6 、坚守以用户为中心的设计理念，遵从交互设计规范，从用户视角的设计进行沟通和落地；&#xA;7 、与视觉设计、产品设计等角色密切沟通合作，参与具体的用户访谈和可用性测试；&#xA;8 、根据公司战略规划进行计划并落地实施；&#xA;1 、至少 1 年博彩、棋牌或支付行业经验，且为美术 /产品等相关岗位；&#xA;2 、善于总结，精通文案，对文案进行提炼和优化，熟悉博彩行业用语；&#xA;3 、善于沟通，能明白需求方诉求及痛点，简化文案和用户理解能力；&#xA;4 、优秀的审美能力，敏锐的用户体验的观察力，分析能力、简单易懂一针见血的交互设计能力；&#xA;5 、精通 AXURE 、Xmind 、PS 等工具，熟悉 UCD 方法和工作流程，熟悉主流的 UX 设计工具，熟悉 iOS 或 Android 设计规范，拥有较好的逻辑思维并积累较丰富的移动 APP 设计经验；&#xA;6 、工作态度积极，具有良好的工作协作能力、团队合作精神，善于沟通；&#xA;7 、有强迫症或完美主义者优先。&lt;/p&gt;&#xA;</description>
-      <author>elenoratori123</author>
-      <pubDate>02 Dec 2022 13:22:37 +0000</pubDate>
     </item>
     <item>
       <title>[求救] HTML 如何让浏览器缓存图片重新加载，不是刷新 - 问与答</title>
@@ -256,6 +263,13 @@
       <description>起因：&lt;br /&gt;公司园区停车费太贵，比较安全的路边停车的位置比较远，早上来公司后会停在路边，路不是主干道路，交警时不时会贴条。&lt;br /&gt;&lt;br /&gt;贴条之前手机会收到短信通知，12123 的 app 也会发送通知，提醒尽快挪车，10 分钟内挪走就不会有问题，下楼到路边一分钟内就能到。&lt;br /&gt;&lt;br /&gt;ios 绝大部分应用都是系统通知铃声，很难区分，短信铃声可以设置明显一些，但是还是容易跟垃圾短信混淆，之前有一次工作太认真，没有注意到通知导致被贴条，虽然是首次违章没有罚款扣分，但是难免后面还是会遇到这种情况。&lt;br /&gt;&lt;br /&gt;需求：&lt;br /&gt;收到短信、app 通知后，手机能有比较容易感知到提醒，及时挪车，减少背贴条扣分罚款的可能&lt;br /&gt;&lt;br /&gt;目前想到的被否定的方案&lt;br /&gt;1 、快捷指令自动化：app 收到指定短信并匹配关键字后执行后续操作，可以选择播放声音等，但是不能自动执行，要点击通知运行操作；目前只有部分触发场景可以自动执行不需要点击，否定此方案。&lt;br /&gt;2 、mac 电脑运行自动化软件，监听信息 app 的内容，触发强提醒或者声音等等操作，弊端是不在电脑前时候仍然起不到提醒作用。&lt;br /&gt;3 、加钱，停园区地下车库</description>
       <author>lichen0501</author>
       <pubDate>02 Dec 2022 09:43:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>长期远程 UX 交互设计师职位！ 30-38K - 酷工作</title>
+      <link>https://www.v2ex.com/t/899707</link>
+      <description>&lt;p&gt;UE 用户体验 /UX 交互设计师 /文案师 /UED 大师&#xA;薪资 30-38K 可谈，另有奖金！&#xA;请咨询 HR 电报 TG：@fc18866&#xA;3 轮面试&#xA;1 、优化系统后台、前端文案和交互，简化用户理解难度，降低学习成本、提高易用性；&#xA;2 、产品结构、流程、功能、界面、用户体验、交互功能等进行研究，配合产品优化原型和文案、交互等；&#xA;3 、参与竞品研究，用户反馈和数据分析，进行产品可用性和易用性测试和评估；&#xA;4 、负责 UI 界面优化的需求，并兼顾相关的立项与跟进验收；&#xA;6 、坚守以用户为中心的设计理念，遵从交互设计规范，从用户视角的设计进行沟通和落地；&#xA;7 、与视觉设计、产品设计等角色密切沟通合作，参与具体的用户访谈和可用性测试；&#xA;8 、根据公司战略规划进行计划并落地实施；&#xA;1 、至少 1 年博彩、棋牌或支付行业经验，且为美术 /产品等相关岗位；&#xA;2 、善于总结，精通文案，对文案进行提炼和优化，熟悉博彩行业用语；&#xA;3 、善于沟通，能明白需求方诉求及痛点，简化文案和用户理解能力；&#xA;4 、优秀的审美能力，敏锐的用户体验的观察力，分析能力、简单易懂一针见血的交互设计能力；&#xA;5 、精通 AXURE 、Xmind 、PS 等工具，熟悉 UCD 方法和工作流程，熟悉主流的 UX 设计工具，熟悉 iOS 或 Android 设计规范，拥有较好的逻辑思维并积累较丰富的移动 APP 设计经验；&#xA;6 、工作态度积极，具有良好的工作协作能力、团队合作精神，善于沟通；&#xA;7 、有强迫症或完美主义者优先。&lt;/p&gt;&#xA;</description>
+      <author>elenoratori123</author>
+      <pubDate>02 Dec 2022 13:22:37 +0000</pubDate>
     </item>
     <item>
       <title>关于闲鱼上《江苏中石油永久 88 折》的风险 - 汽车</title>
