@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "chatGPT 回答 V2EX 热点问题 - 分享发现",
+      "Link": "https://www.v2ex.com/t/899920",
+      "Description": "\u003cp\u003echatGPT 是 OpenAI 最近上线的 AI 聊天模型。\u003cbr/\u003e下面👇是它对 V2EX 热点问题的回答。\u003cbr/\u003e\u003cbr/\u003e\u003cimg alt=\"https://imgur.com/tWAwq9p\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://imgur.com/tWAwq9p\"/\u003e\u003cbr/\u003e\u003cbr/\u003e来源： \u003ca href=\"https://twitter.com/clowwindy/status/1598979812831657984?s=46\u0026amp;t=vmhQTlXiTyHv66CZT9DRqw\" rel=\"nofollow\"\u003ehttps://twitter.com/clowwindy/status/1598979812831657984?s=46\u0026amp;t=vmhQTlXiTyHv66CZT9DRqw\u003c/a\u003e\u003cbr/\u003e\u003c/p\u003e\n",
+      "Author": "wheeler",
+      "PubDate": "2022-12-03T23:03:57Z"
+    },
+    {
       "Title": "PHP 写的老屎山代码经常出现字符串转浮点数时小一点点的情况，排查了一晚上还没解决，请 v 友帮忙看看 - PHP",
       "Link": "https://www.v2ex.com/t/899919",
       "Description": "\u003cp\u003e经常出现例如用户充值 1 元到账 0.994 元这类情况，导致用户余额无法购买商品\u003c/p\u003e\n\u003cp\u003e以下是充值部分业务逻辑代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-php\"\u003e$paidCredit = checkStringSign($invoice-\u0026gt;credit);\nif (isset($user-\u0026gt;Credits) \u0026amp;\u0026amp; $user-\u0026gt;Credits != \"\") {\n    $currentCredit = checkStringSign($user-\u0026gt;Credits);\n}\n$currentCredit = $currentCredit + $paidCredit;\n$updatedCredit = signString($currentCredit);\n$updatePricePlanId = \"\";\nif ($paidCredit \u0026gt; 99.5 \u0026amp;\u0026amp; $user-\u0026gt;RiskyScore \u0026lt; 1) {\n    $updatePricePlanId = \",RiskyScore=0\";\n}\n$query = \"UPDATE users SET Credits = '$updatedCredit' $updatePricePlanId WHERE UserId = '$user-\u0026gt;UserId'\";\n$objDBCD14-\u0026gt;execute($query);\n$comments = $out_trade_no;\n$updateQuery = \"update payments set Paid=1,TransactionId='$trade_no' WHERE PaymentId = '$out_trade_no' \";\n$objDBCD14-\u0026gt;execute($updateQuery);\n$paymentId = $payments-\u0026gt;PaymentId;\n$objDBCD14-\u0026gt;execute(\"INSERT INTO topUpRecords SET UserId ='$user-\u0026gt;UserId', Credits = '$paidCredit', CreditsLeft = '$updatedCredit', Comments = '$comments'\");\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ccode\u003e$invoice\u003c/code\u003e 中记录的金额是正确的\n\u003ccode\u003etopUpRecords\u003c/code\u003e 中记录的金额就变成 0.994 了\u003c/p\u003e\n\u003cp\u003e但又不是 100%复现，排查了一晚上还没找出问题\ncheckStringSign 和 signString 接受的参数都是字符串，signString 内部逻辑是把字符串通过简单变换签名后将签名用 \u003ccode\u003e.{sign}\u003c/code\u003e 的格式附加在末尾，checkStringSign 内部逻辑是根据最后一个.分隔原文和签名，验签成功则返回原文，否则抛出错误，其中都不含显式的 cast 逻辑。\u003c/p\u003e\n\u003cp\u003e不熟悉 PHP ，之前写这个程序的人已经离职了，临时翻文档学的\u003c/p\u003e\n",
