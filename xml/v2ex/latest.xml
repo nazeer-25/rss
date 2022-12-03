@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Edge 更新后给我整不会了 - 问与答</title>
+      <link>https://www.v2ex.com/t/899829</link>
+      <description>首页有关 Surface Pro 9 的两个推广窗口乱码，请教下修复方法</description>
+      <author>FishGrazier</author>
+      <pubDate>03 Dec 2022 08:52:47 +0000</pubDate>
+    </item>
+    <item>
       <title>golang 咋这么恶心，解压 zip 文件居然要一大串代码，这不应该是语言内置一行搞定的吗？ - Go 编程语言</title>
       <link>https://www.v2ex.com/t/899827</link>
       <description>&lt;p&gt;这简直不能忍啊&lt;/p&gt;&#xA;&lt;p&gt;C#版&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ZipFile.ExtractToDirectory(&#34;source&#34;, &#34;target&#34;);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;Golang 版&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;func Unzip(src, dest string) error {&#xA;    r, err := zip.OpenReader(src)&#xA;    if err != nil {&#xA;        return err&#xA;    }&#xA;    defer func() {&#xA;        if err := r.Close(); err != nil {&#xA;            panic(err)&#xA;        }&#xA;    }()&#xA;&#xA;    os.MkdirAll(dest, 0755)&#xA;&#xA;    // Closure to address file descriptors issue with all the deferred .Close() methods&#xA;    extractAndWriteFile := func(f *zip.File) error {&#xA;        rc, err := f.Open()&#xA;        if err != nil {&#xA;            return err&#xA;        }&#xA;        defer func() {&#xA;            if err := rc.Close(); err != nil {&#xA;                panic(err)&#xA;            }&#xA;        }()&#xA;&#xA;        path := filepath.Join(dest, f.Name)&#xA;&#xA;        // Check for ZipSlip (Directory traversal)&#xA;        if !strings.HasPrefix(path, filepath.Clean(dest) + string(os.PathSeparator)) {&#xA;            return fmt.Errorf(&#34;illegal file path: %s&#34;, path)&#xA;        }&#xA;&#xA;        if f.FileInfo().IsDir() {&#xA;            os.MkdirAll(path, f.Mode())&#xA;        } else {&#xA;            os.MkdirAll(filepath.Dir(path), f.Mode())&#xA;            f, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, f.Mode())&#xA;            if err != nil {&#xA;                return err&#xA;            }&#xA;            defer func() {&#xA;                if err := f.Close(); err != nil {&#xA;                    panic(err)&#xA;                }&#xA;            }()&#xA;&#xA;            _, err = io.Copy(f, rc)&#xA;            if err != nil {&#xA;                return err&#xA;            }&#xA;        }&#xA;        return nil&#xA;    }&#xA;&#xA;    for _, f := range r.File {&#xA;        err := extractAndWriteFile(f)&#xA;        if err != nil {&#xA;            return err&#xA;        }&#xA;    }&#xA;&#xA;    return nil&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
