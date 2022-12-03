@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>PHP 写的老屎山代码经常出现字符串转浮点数时小一点点的情况，排查了一晚上还没解决，请 v 友帮忙看看 - PHP</title>
+      <link>https://www.v2ex.com/t/899919</link>
+      <description>&lt;p&gt;经常出现例如用户充值 1 元到账 0.994 元这类情况，导致用户余额无法购买商品&lt;/p&gt;&#xA;&lt;p&gt;以下是充值部分业务逻辑代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;$paidCredit = checkStringSign($invoice-&amp;gt;credit);&#xA;if (isset($user-&amp;gt;Credits) &amp;amp;&amp;amp; $user-&amp;gt;Credits != &#34;&#34;) {&#xA;    $currentCredit = checkStringSign($user-&amp;gt;Credits);&#xA;}&#xA;$currentCredit = $currentCredit + $paidCredit;&#xA;$updatedCredit = signString($currentCredit);&#xA;$updatePricePlanId = &#34;&#34;;&#xA;if ($paidCredit &amp;gt; 99.5 &amp;amp;&amp;amp; $user-&amp;gt;RiskyScore &amp;lt; 1) {&#xA;    $updatePricePlanId = &#34;,RiskyScore=0&#34;;&#xA;}&#xA;$query = &#34;UPDATE users SET Credits = &#39;$updatedCredit&#39; $updatePricePlanId WHERE UserId = &#39;$user-&amp;gt;UserId&#39;&#34;;&#xA;$objDBCD14-&amp;gt;execute($query);&#xA;$comments = $out_trade_no;&#xA;$updateQuery = &#34;update payments set Paid=1,TransactionId=&#39;$trade_no&#39; WHERE PaymentId = &#39;$out_trade_no&#39; &#34;;&#xA;$objDBCD14-&amp;gt;execute($updateQuery);&#xA;$paymentId = $payments-&amp;gt;PaymentId;&#xA;$objDBCD14-&amp;gt;execute(&#34;INSERT INTO topUpRecords SET UserId =&#39;$user-&amp;gt;UserId&#39;, Credits = &#39;$paidCredit&#39;, CreditsLeft = &#39;$updatedCredit&#39;, Comments = &#39;$comments&#39;&#34;);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;code&gt;$invoice&lt;/code&gt; 中记录的金额是正确的&#xA;&lt;code&gt;topUpRecords&lt;/code&gt; 中记录的金额就变成 0.994 了&lt;/p&gt;&#xA;&lt;p&gt;但又不是 100%复现，排查了一晚上还没找出问题&#xA;checkStringSign 和 signString 接受的参数都是字符串，signString 内部逻辑是把字符串通过简单变换签名后将签名用 &lt;code&gt;.{sign}&lt;/code&gt; 的格式附加在末尾，checkStringSign 内部逻辑是根据最后一个.分隔原文和签名，验签成功则返回原文，否则抛出错误，其中都不含显式的 cast 逻辑。&lt;/p&gt;&#xA;&lt;p&gt;不熟悉 PHP ，之前写这个程序的人已经离职了，临时翻文档学的&lt;/p&gt;&#xA;</description>
+      <author>edis0n0</author>
+      <pubDate>03 Dec 2022 22:49:20 +0000</pubDate>
+    </item>
+    <item>
       <title>Windows 11 是否应该一直打开 HDR？ - 问与答</title>
       <link>https://www.v2ex.com/t/899918</link>
       <description>&lt;p&gt;讨论限定在 OLED DisplayHDR True Black 电视 / 显示器上，比如 LG C2 电视，Alienware 34 Curved QD-OLED 显示器等。IPS HDR 400 显示器打开 HDR 属于负收益，不进行讨论。我的问题：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;一直打开 HDR ，普通 SDR 内容是不是反而会颜色不准，Windows 的“映射”方案是什么原理，是有损的吗？&lt;/li&gt;&#xA;&lt;li&gt;Windows 11 Auto HDR 的效果怎么样，有办法定量分析 SDR 还是 Auto HDR 好吗？&lt;/li&gt;&#xA;&lt;li&gt;所以最优解是不是根据具体的内容，手动切换 SDR / HDR ？&lt;/li&gt;&#xA;&lt;li&gt;HDR 内容主要在于游戏和视频。那么看网页的时候，是不是 SDR 更适合？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
