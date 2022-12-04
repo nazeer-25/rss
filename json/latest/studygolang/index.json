@@ -53,13 +53,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go-event 是 go 实现的事件及事件订阅",
-      "Link": "https://studygolang.com/topics/16001#reply0",
-      "Description": "\u003cp\u003ego-event 是 go 实现的事件及事件订阅。\n包括常规的事件设置和触发，然后包括的是事件订阅。\u003c/p\u003e\n\n\u003cp\u003e项目地址为: \u003ca href=\"https://github.com/deatil/go-event\"\u003ehttps://github.com/deatil/go-event\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e安装:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ego get -u github.com/deatil/go-event\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e使用方法:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eimport (\n    \u0026quot;fmt\u0026quot;\n    \u0026quot;github.com/deatil/go-event/event\u0026quot;\n)\n\n// 事件注册\nevent.Listen(\u0026quot;data.error\u0026quot;, func(data any) {\n    fmt.Println(data)\n})\n\n// 事件触发\neventData := \u0026quot;index data\u0026quot;\nevent.Dispatch(\u0026quot;data.error\u0026quot;, eventData)\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "golang使用protobuf多文件如何合并？",
       "Link": "https://studygolang.com/topics/15993#reply2",
       "Description": "\u003cp\u003egolang使用protobuf多文件如何合并？我希望通过import将两个proto文件生成一个文件，但是结果要么是类型未定义，要么是完全分开的两个文件，请问大神问题出在何处（输入输出地址都没有问题），感谢。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e主文件试图引入test2.proto当中定义的枚举\nsyntax=\u0026quot;proto3\u0026quot;;\npackage day;\noption go_package=\u0026quot;./day\u0026quot;; \nimport \u0026quot;test2.proto\u0026quot;; //引入\nmessage Person{\n  string name=1;\n  int32 age=2;\n  day.Sex sex=4; //导入其他包的内容应该这样使用,day包中的Sex内容\n  repeated string hobbies=3; \n};\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e被导入包test2.proto当中的内容\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003esyntax=\u0026quot;proto3\u0026quot;;\npackage day;\noption go_package=\u0026quot;./day\u0026quot;;\nenum Sex{\n    male=0; //枚举类型从零开始\n    female=1;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch6\u003e运行结果及报错内容\u003c/h6\u003e\n\n\u003cp\u003e我是用的终端命令如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eprotoc --go_out=. test1.proto \n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e以上命令生成了一个文件，但是会出现关于Sex类型未定义的报错，也就是test2文件未引入\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eprotoc --go_out=. test1.proto test2.proto\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e以上生成了两个文件都在package day之中，类型定义很完全，但是我只想生成一个总的文件，这两个文件之间并没有合并，仍然是相互独立的，只是因为同在package day之中而共享了变量，因此不会出现类型未定义的报错\u003c/p\u003e\n\n\u003cp\u003e此外，就算import 之后加上public修饰，也是毫无区别，另外想请问一下import public的用法\u003c/p\u003e\n",
@@ -98,6 +91,13 @@
       "Title": "go的for有些打印会被跳过，不知道什么原因",
       "Link": "https://studygolang.com/topics/16000#reply5",
       "Description": "\u003cpre\u003e\u003ccode\u003efor i := 1; i \u0026lt; 101; i++ {\n\tfor j := 1; j \u0026lt;= i; j++ {\n\t\tst := \u0026quot;A\u0026quot;\n\t\tfmt.Print(st)\n\t}\n\tfmt.Println(\u0026quot;\u0026quot;, i)\n\t//fmt.Println(\u0026quot;这里是i的次数：\u0026quot;, i)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221201/538d67153d37eaf08a1d9c04d43ad370.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221201/5d5adff3420b97fb26cc8375832a9245.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go-event 是 go 实现的事件及事件订阅",
+      "Link": "https://studygolang.com/topics/16001#reply0",
+      "Description": "\u003cp\u003ego-event 是 go 实现的事件及事件订阅。\n包括常规的事件设置和触发，然后包括的是事件订阅。\u003c/p\u003e\n\n\u003cp\u003e项目地址为: \u003ca href=\"https://github.com/deatil/go-event\"\u003ehttps://github.com/deatil/go-event\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e安装:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ego get -u github.com/deatil/go-event\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e使用方法:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eimport (\n    \u0026quot;fmt\u0026quot;\n    \u0026quot;github.com/deatil/go-event/event\u0026quot;\n)\n\n// 事件注册\nevent.Listen(\u0026quot;data.error\u0026quot;, func(data any) {\n    fmt.Println(data)\n})\n\n// 事件触发\neventData := \u0026quot;index data\u0026quot;\nevent.Dispatch(\u0026quot;data.error\u0026quot;, eventData)\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
