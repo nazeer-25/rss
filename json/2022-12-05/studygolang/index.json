@@ -33,7 +33,7 @@
     },
     {
       "Title": "reader.ReadString('\\n')这样怎么会报错？",
-      "Link": "https://studygolang.com/topics/16007#reply0",
+      "Link": "https://studygolang.com/topics/16007#reply1",
       "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003ereader := bufio.NewReader(strReader)\n\nr, _ = reader.ReadString('\\n')\n//r, _ = reader.ReadString([]byte(\u0026quot;\\n\u0026quot;)[0])\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e第一个报错：cannot use reader.ReadString(\u0026lsquo;\\n\u0026rsquo;) (value of type string) as type rune in assignment\u003c/p\u003e\n\n\u003cp\u003e第二个报错：cannot use reader.ReadString([]byte(\u0026ldquo;\\n\u0026rdquo;)[0]) (value of type string) as type rune in assignment\u003c/p\u003e\n\n\u003cp\u003ego版本1.19.3，上面这两种方法不都是没错的吗？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -74,6 +74,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "请教关闭TCP监听时的争用问题",
+      "Link": "https://studygolang.com/topics/15997#reply13",
+      "Description": "\u003cp\u003e我一个TCP服务，希望从外部关闭Listener，但这样就在listener.Close()与listener.Accept()之间产生了race。请教有什么好的解决办法？\n简单的示例代码如下, 加\u0026rdquo;-race\u0026rdquo;参数运行，再ctrl+c退出运行，就会报race问题：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;log\u0026quot;\n\t\u0026quot;net\u0026quot;\n\t\u0026quot;os\u0026quot;\n\t\u0026quot;os/signal\u0026quot;\n\t\u0026quot;syscall\u0026quot;\n\t\u0026quot;time\u0026quot;\n)\n\nvar listener *net.TCPListener\n\n// tcp服务\nfunc tcpServer() {\n\taddr, err := net.ResolveTCPAddr(\u0026quot;tcp4\u0026quot;, \u0026quot;:6666\u0026quot;)\n\tif err != nil {\n\t\tlog.Fatalln(err)\n\t}\n\tlistener, err = net.ListenTCP(\u0026quot;tcp4\u0026quot;, addr)\n\tif err != nil {\n\t\tlog.Fatalln(err)\n\t}\n\n\tfor {\n\t\tc, err := listener.AcceptTCP()\n\t\tif err != nil {\n\t\t\tif err.(*net.OpError).Err == net.ErrClosed {\n\t\t\t\tlog.Println(\u0026quot;listener closed\u0026quot;)\n\t\t\t\treturn\n\t\t\t}\n\t\t\tlog.Println(err)\n\t\t\tcontinue\n\t\t}\n\t\tconnHandler(c)\n\t}\n}\n\n// 新连接处理\nfunc connHandler(c *net.TCPConn) {\n\tdefer func() {\n\t\tc.Close()\n\t\tlog.Printf(\u0026quot;%s closed\u0026quot;, c.RemoteAddr().String())\n\t}()\n\tlog.Printf(\u0026quot;New connection: %s\u0026quot;, c.RemoteAddr().String())\n\tbuf := make([]byte, 128)\n\tfor {\n\t\tn, err := c.Read(buf)\n\t\tif err != nil {\n\t\t\treturn\n\t\t}\n\t\tlog.Println(buf[:n])\n\t}\n}\n\n// 关闭listener\nfunc listenerClose() {\n\tif listener != nil {\n\t\tlistener.Close()\n\t}\n}\n\nfunc main() {\n\tsigs := make(chan os.Signal, 1)\n\tsignal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)\n\tgo tcpServer()\n\t\u0026lt;-sigs\n\tlistenerClose()\n\ttime.Sleep(time.Millisecond * 200)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "go怎么全局安装非二进制包？",
       "Link": "https://studygolang.com/topics/15992#reply7",
       "Description": "\u003cp\u003e我用 go get，它提醒我用 go install。我用了 go install，它提醒我只能装二进制包。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e\n$ go get github.com/gorilla/mux\ngo: go.mod file not found in current directory or any parent directory.\n\t'go get' is no longer supported outside a module.\n\tTo build and install a command, use 'go install' with a version,\n\tlike 'go install example.com/cmd@latest'\n\tFor more information, see https://golang.org/doc/go-get-install-deprecation\n\tor run 'go help get' or 'go help install'.\n\n\n$ go get github.com/gorilla/mux@latest\ngo: go.mod file not found in current directory or any parent directory.\n\t'go get' is no longer supported outside a module.\n\tTo build and install a command, use 'go install' with a version,\n\tlike 'go install example.com/cmd@latest'\n\tFor more information, see https://golang.org/doc/go-get-install-deprecation\n\tor run 'go help get' or 'go help install'.\n\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -91,13 +98,6 @@
       "Title": "golang数值型字符串比较大小",
       "Link": "https://studygolang.com/articles/30948#reply1",
       "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "请教关闭TCP监听时的争用问题",
-      "Link": "https://studygolang.com/topics/15997#reply12",
-      "Description": "\u003cp\u003e我一个TCP服务，希望从外部关闭Listener，但这样就在listener.Close()与listener.Accept()之间产生了race。请教有什么好的解决办法？\n简单的示例代码如下, 加\u0026rdquo;-race\u0026rdquo;参数运行，再ctrl+c退出运行，就会报race问题：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;log\u0026quot;\n\t\u0026quot;net\u0026quot;\n\t\u0026quot;os\u0026quot;\n\t\u0026quot;os/signal\u0026quot;\n\t\u0026quot;syscall\u0026quot;\n\t\u0026quot;time\u0026quot;\n)\n\nvar listener *net.TCPListener\n\n// tcp服务\nfunc tcpServer() {\n\taddr, err := net.ResolveTCPAddr(\u0026quot;tcp4\u0026quot;, \u0026quot;:6666\u0026quot;)\n\tif err != nil {\n\t\tlog.Fatalln(err)\n\t}\n\tlistener, err = net.ListenTCP(\u0026quot;tcp4\u0026quot;, addr)\n\tif err != nil {\n\t\tlog.Fatalln(err)\n\t}\n\n\tfor {\n\t\tc, err := listener.AcceptTCP()\n\t\tif err != nil {\n\t\t\tif err.(*net.OpError).Err == net.ErrClosed {\n\t\t\t\tlog.Println(\u0026quot;listener closed\u0026quot;)\n\t\t\t\treturn\n\t\t\t}\n\t\t\tlog.Println(err)\n\t\t\tcontinue\n\t\t}\n\t\tconnHandler(c)\n\t}\n}\n\n// 新连接处理\nfunc connHandler(c *net.TCPConn) {\n\tdefer func() {\n\t\tc.Close()\n\t\tlog.Printf(\u0026quot;%s closed\u0026quot;, c.RemoteAddr().String())\n\t}()\n\tlog.Printf(\u0026quot;New connection: %s\u0026quot;, c.RemoteAddr().String())\n\tbuf := make([]byte, 128)\n\tfor {\n\t\tn, err := c.Read(buf)\n\t\tif err != nil {\n\t\t\treturn\n\t\t}\n\t\tlog.Println(buf[:n])\n\t}\n}\n\n// 关闭listener\nfunc listenerClose() {\n\tif listener != nil {\n\t\tlistener.Close()\n\t}\n}\n\nfunc main() {\n\tsigs := make(chan os.Signal, 1)\n\tsignal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)\n\tgo tcpServer()\n\t\u0026lt;-sigs\n\tlistenerClose()\n\ttime.Sleep(time.Millisecond * 200)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -161,6 +161,20 @@
       "Title": "请教：module模式下，如何设置可以让go get始终使用git来下载包，环境变量GOVCS无效？",
       "Link": "https://studygolang.com/topics/15934#reply11",
       "Description": "\u003cp\u003e因工作内网不能连接外网，本人在内网服务器布置了gitblit，把一些用到的开源项目git仓库导入到内网使用，在module模式下，github.com的包使用git url的insteadOf进行替换：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e[url \u0026quot;http://用户名@内网IP/~用户名/\u0026quot;]\n\tinsteadOf =github.com/用户名/\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003ego get能够正常工作。\u003c/p\u003e\n\n\u003cp\u003e但是golang.org/x之类的包，由于不是默认使用git来下载，需要向地址：https://包名?go-get=1发送请求，来确认VCS和仓库地址，造成无法正常使用。\u003c/p\u003e\n\n\u003cp\u003e也尝试设置\u003ccode\u003eGOVCS=*:git\u003c/code\u003e，依然无效。\u003c/p\u003e\n\n\u003cp\u003e请问是否有办法设置go get始终使用git来下载？这样我可以使用git url的insteadOf进行替换为内网地址，或者有其他更好的解决办法？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "reader.ReadString('\\n')这样怎么会报错？",
+      "Link": "https://studygolang.com/topics/16007#reply0",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003ereader := bufio.NewReader(strReader)\n\nr, _ = reader.ReadString('\\n')\n//r, _ = reader.ReadString([]byte(\u0026quot;\\n\u0026quot;)[0])\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e第一个报错：cannot use reader.ReadString(\u0026lsquo;\\n\u0026rsquo;) (value of type string) as type rune in assignment\u003c/p\u003e\n\n\u003cp\u003e第二个报错：cannot use reader.ReadString([]byte(\u0026ldquo;\\n\u0026rdquo;)[0]) (value of type string) as type rune in assignment\u003c/p\u003e\n\n\u003cp\u003ego版本1.19.3，上面这两种方法不都是没错的吗？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "请教关闭TCP监听时的争用问题",
+      "Link": "https://studygolang.com/topics/15997#reply12",
+      "Description": "\u003cp\u003e我一个TCP服务，希望从外部关闭Listener，但这样就在listener.Close()与listener.Accept()之间产生了race。请教有什么好的解决办法？\n简单的示例代码如下, 加\u0026rdquo;-race\u0026rdquo;参数运行，再ctrl+c退出运行，就会报race问题：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;log\u0026quot;\n\t\u0026quot;net\u0026quot;\n\t\u0026quot;os\u0026quot;\n\t\u0026quot;os/signal\u0026quot;\n\t\u0026quot;syscall\u0026quot;\n\t\u0026quot;time\u0026quot;\n)\n\nvar listener *net.TCPListener\n\n// tcp服务\nfunc tcpServer() {\n\taddr, err := net.ResolveTCPAddr(\u0026quot;tcp4\u0026quot;, \u0026quot;:6666\u0026quot;)\n\tif err != nil {\n\t\tlog.Fatalln(err)\n\t}\n\tlistener, err = net.ListenTCP(\u0026quot;tcp4\u0026quot;, addr)\n\tif err != nil {\n\t\tlog.Fatalln(err)\n\t}\n\n\tfor {\n\t\tc, err := listener.AcceptTCP()\n\t\tif err != nil {\n\t\t\tif err.(*net.OpError).Err == net.ErrClosed {\n\t\t\t\tlog.Println(\u0026quot;listener closed\u0026quot;)\n\t\t\t\treturn\n\t\t\t}\n\t\t\tlog.Println(err)\n\t\t\tcontinue\n\t\t}\n\t\tconnHandler(c)\n\t}\n}\n\n// 新连接处理\nfunc connHandler(c *net.TCPConn) {\n\tdefer func() {\n\t\tc.Close()\n\t\tlog.Printf(\u0026quot;%s closed\u0026quot;, c.RemoteAddr().String())\n\t}()\n\tlog.Printf(\u0026quot;New connection: %s\u0026quot;, c.RemoteAddr().String())\n\tbuf := make([]byte, 128)\n\tfor {\n\t\tn, err := c.Read(buf)\n\t\tif err != nil {\n\t\t\treturn\n\t\t}\n\t\tlog.Println(buf[:n])\n\t}\n}\n\n// 关闭listener\nfunc listenerClose() {\n\tif listener != nil {\n\t\tlistener.Close()\n\t}\n}\n\nfunc main() {\n\tsigs := make(chan os.Signal, 1)\n\tsignal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)\n\tgo tcpServer()\n\t\u0026lt;-sigs\n\tlistenerClose()\n\ttime.Sleep(time.Millisecond * 200)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     }
