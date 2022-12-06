@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有人发现么, 今天电信访问 github 被解析到了国家反诈中心 - 问与答",
+      "Link": "https://www.v2ex.com/t/900485",
+      "Description": "",
+      "Author": "w950888",
+      "PubDate": "2022-12-06T05:52:49Z"
+    },
+    {
+      "Title": "如何开机自启 Seata Server 和 Nacos（或者说 Tomcat/基于 Tomcat 开发的程序），试了好多方案都不行 - Linux",
+      "Link": "https://www.v2ex.com/t/900484",
+      "Description": "\u003cp\u003e如题，Seata 和 Nacos 的自启问题。\u003c/p\u003e\n\u003cp\u003e很久之前我提过一个类似的问题，\u003ca href=\"https://www.v2ex.com/t/887703\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/887703\u003c/a\u003e ，当时就是需要执行 Tomcat 的启动脚本，不过当时用 rc-local 解决了，现在却怎么也启动不了了。\u003c/p\u003e\n\u003cp\u003e这种基于 tomcat 开发的程序大多是有一个启动脚本，执行该脚本后后会自动在后台启动对应的程序。\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e现在已经尝试过的方案：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003erc-local ，无法启动且没法调试，不知道哪里出错；\u003c/li\u003e\n\u003cli\u003ecrontab(@reboot)，同上；\u003c/li\u003e\n\u003cli\u003eSystemd ，有报错，但是不知道如何解决\u003c/li\u003e\n\u003c/ol\u003e\n\u003chr/\u003e\n\u003cp\u003esystemd 的 service 文件：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-ini\"\u003e[Unit]\nDescription = NacOS\nAfter = network.target syslog.target\nWants = network.target\n\n[Service]\nType=forking\nEnvironment = \"JAVA_HOME=/usr/local/jdk1.8.0_291\"\nEnvironment = \"JRE_HOME=/usr/local/jdk1.8.0_291/jre\"\nEnvironment = \"CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib\"\nEnvironment = \"PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin\"\nExecStart=/opt/nacos/bin/startup.sh -m standalone\n#ExecStop=/opt/nacos/bin/shutdown.sh\n\n[Install]\nWantedBy = multi-user.target\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e报错：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-txt\"\u003e● nacos.service - NacOS\n   Loaded: loaded (/etc/systemd/system/nacos.service; enabled; vendor preset: disabled)\n   Active: failed (Result: exit-code) since Tue 2022-12-06 13:35:11 CST; 1min 47s ago\n  Process: 1048 ExecStart=/opt/nacos/bin/startup.sh -m standalone (code=exited, status=0/SUCCESS)\n Main PID: 1278 (code=exited, status=127)\n\nDec 06 13:35:09 localhost.localdomain systemd[1]: Starting NacOS...\nDec 06 13:35:09 localhost.localdomain startup.sh[1048]: /opt/nacos/bin/startup.sh: line 19: uname: command not found\nDec 06 13:35:09 localhost.localdomain startup.sh[1048]: /opt/nacos/bin/startup.sh: line 108: sed: command not found\nDec 06 13:35:11 localhost.localdomain startup.sh[1048]: /usr/local/jdk1.8.0_291/bin/java  -Xms2048m -Xmx2048m -Xmn256m -Dnacos.st...:+Prin\nDec 06 13:35:11 localhost.localdomain startup.sh[1048]: nacos is starting with standalone\nDec 06 13:35:11 localhost.localdomain startup.sh[1048]: nacos is starting ，you can check the /opt/nacos/logs/start.out\nDec 06 13:35:11 localhost.localdomain systemd[1]: Started NacOS.\nDec 06 13:35:11 localhost.localdomain systemd[1]: nacos.service: main process exited, code=exited, status=127/n/a\nDec 06 13:35:11 localhost.localdomain systemd[1]: Unit nacos.service entered failed state.\nDec 06 13:35:11 localhost.localdomain systemd[1]: nacos.service failed.\nHint: Some lines were ellipsized, use -l to show in full.\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ccode\u003e/opt/nacos/logs/start.out\u003c/code\u003e内容：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-out\"\u003e/usr/local/jdk1.8.0_291/bin/java  -Xms2048m -Xmx2048m -Xmn256m -Dnacos.standalone=true -Dnacos.member.list= -Djava.ext.dirs=/usr/local/jdk1.8.0_291/jre/lib/ext:/usr/local/jdk1.8.0_291/lib/ext -Xloggc:/opt/nacos/logs/nacos_gc.log -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=100M -Dloader.path=/opt/nacos/plugins/health,/opt/nacos/plugins/cmdb -Dnacos.home=/opt/nacos -jar /opt/nacos/target/nacos-server.jar  --spring.config.additional-location=file:/opt/nacos/conf/ --logging.config=/opt/nacos/conf/nacos-logback.xml --server.max-http-header-size=524288\n/opt/nacos/bin/startup.sh: line 142: nohup: command not found\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "LxnChan",
+      "PubDate": "2022-12-06T05:51:53Z"
+    },
+    {
+      "Title": "最后的问题 - 分享发现",
+      "Link": "https://www.v2ex.com/t/900483",
+      "Description": "\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.uuu.ovh/imgs/2022/12/06/53a02017de8bf205.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "zbatman",
+      "PubDate": "2022-12-06T05:51:21Z"
+    },
+    {
+      "Title": "关于 ChatGPT 封禁的一些看法? - 问与答",
+      "Link": "https://www.v2ex.com/t/900482",
+      "Description": "\u003cp\u003e首先摆明我的观点，我比较厌烦在正常的问题下有人用 ChatGPT 生成的话术进行回答。\u003c/p\u003e\n\u003cp\u003e在原来的规则基础上貌似还达不到封禁的程度，是否有必要制定新的关于 ChatGPT 的规则后再封禁账号，而不是直接封禁，这种封禁行为是否有些过于主观？\u003c/p\u003e\n\u003cp\u003e仅仅讨论这个话题，如果此贴有 ChatGPT 回复，一律 block 。\u003c/p\u003e\n",
+      "Author": "shuxhan",
+      "PubDate": "2022-12-06T05:49:27Z"
+    },
+    {
       "Title": "关于 little snitch 耗电问题，求大神解答一下 - macOS",
       "Link": "https://www.v2ex.com/t/900480",
       "Description": "\u003cp\u003e目前想用 little snitch 禁用搜狗输入法，但经过测试，搜狗输入法很顽强，每秒都尝试联网。\u003c/p\u003e\n\u003cp\u003e这样会增加 little snitch 耗电程度吗\u003c/p\u003e\n",
