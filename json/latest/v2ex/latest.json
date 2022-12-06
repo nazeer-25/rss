@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "怎么制作 YouTube 的讲解动画？ - 问与答",
+      "Link": "https://www.v2ex.com/t/900449",
+      "Description": "像 YouTuber 维思维的那种风格，我也想做 YouTube ,但我不想真人出镜 。动画这种表达方式还不错，我比较喜欢维思维，甚至更偏向日式的画风，要用什么软件吗？感觉应该不难吧？",
+      "Author": "numberator",
+      "PubDate": "2022-12-06T03:37:45Z"
+    },
+    {
+      "Title": "一种基于 MitM 保证每次扫描场所码都是 24 小时 - Surge",
+      "Link": "https://www.v2ex.com/t/900448",
+      "Description": "\u003cp\u003e原理如下\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003esurge 安装根证书\u003c/li\u003e\n\u003cli\u003e开启 https 请求修改\u003c/li\u003e\n\u003cli\u003esurge 添加如下脚本\u003c/li\u003e\n\u003cli\u003e开启 MitM 解密 HTTP 流量\u003c/li\u003e\n\u003cli\u003e在脚本中设置 URL 正则\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e已经在某西部城市测试成功。但这个发现比较晚，现在已经放开了，即便不再做核酸。\n原理是基于 https 的中间人攻击\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eDate.prototype.format = function(fmt) { \n var o = { \n \"M+\" : this.getMonth()+1,                 //月份 \n \"d+\" : this.getDate(),                    //日 \n \"h+\" : this.getHours(),                   //小时 \n \"m+\" : this.getMinutes(),                 //分 \n \"s+\" : this.getSeconds(),                 //秒 \n \"q+\" : Math.floor((this.getMonth()+3)/3), //季度 \n \"S\" : this.getMilliseconds()             //毫秒 \n }; \n if(/(y+)/.test(fmt)) {\n fmt=fmt.replace(RegExp.$1, (this.getFullYear()+\"\").substr(4 - RegExp.$1.length)); \n }\n for(var k in o) {\n if(new RegExp(\"(\"+ k +\")\").test(fmt)){\n fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : ((\"00\"+ o[k]).substr((\"\"+ o[k]).length)));\n }\n }\n return fmt; \n}\n\nlet body = JSON.parse($response.body); \nlet currentTime = body.data.currentTime\nvar checkTime = new Date().format(\"yyyy/MM/dd 18:21:01\");\nbody.data.detTime = checkTime;\nbody.data.collectTime = checkTime;\nbody.data.todayCollectTime = checkTime;\nbody.data.detOrg=\"xx 检验所\"\nbody.data.cardNum=24;\nbody = JSON.stringify(body);\n$done({body});\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "albertofwb",
+      "PubDate": "2022-12-06T03:36:34Z"
+    },
+    {
       "Title": "快过年了，要买酒回家了，自己家喝，也买给大伯、小叔家喝，太贵的买不起，泸州老窖 600+块钱 6 瓶的酒，有没有大佬知道口感怎么样 - 问与答",
       "Link": "https://www.v2ex.com/t/900447",
       "Description": "如题：",
