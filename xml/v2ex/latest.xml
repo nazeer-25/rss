@@ -4,6 +4,19 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>k3s 中的负载均衡如何能够直接把域名解析到当前节点的 pod? - Kubernetes</title>
+      <link>https://www.v2ex.com/t/901082</link>
+      <description>&lt;p&gt;背景：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;最近刚开始使用 k8s, 用多台服务器组了集群，服务器在不同地区，服务器之间网速较慢。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;load balancer 用的是 k3s 自带的，ingress type 是 traefik 。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;我将网站 pod 部署在了 nodeA 节点, nodeA, nodeB 不在同一地区。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;然后我理解的目前我的网站被访问时的路径是：&lt;/p&gt;&#xA;&lt;p&gt;user requset ---[1]--&amp;gt; node A(svclb-pod) ---[2]---&amp;gt; node B(traefik service 所在节点) ---[3]---&amp;gt; nodeA(website-pod)-----&amp;gt; response 反向传回去&lt;/p&gt;&#xA;&lt;p&gt;我希望请求到 load balancer 之后，直接就能转发到 nodeA （&lt;strong&gt;website-pod&lt;/strong&gt;），而不经过跨地区的网络传输。&lt;/p&gt;&#xA;&lt;p&gt;也就是 user request -----&amp;gt; nodeA(svclb-pod)----&amp;gt;nodeA(website-pod)----&amp;gt;response&lt;/p&gt;&#xA;&lt;p&gt;这样不跨地区访问 nodeB 之后，网站速度就能更快一些。请问有办法实现这种需求吗？&lt;/p&gt;&#xA;&lt;p&gt;刚接触 k8s ，如果有描述不恰当的地方还请谅解。&lt;/p&gt;&#xA;</description>
+      <author>cyjme</author>
+      <pubDate>08 Dec 2022 06:47:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>iPhone Pro max 太重了，直角边框还搁手，小拇指吃不消。不喜欢带壳，有没有直接贴在背面底部区域的贴纸，或是皮革，不用把整个背面全贴上，就只要让小拇指区域舒服一点的东西。 - Apple</title>
+      <link>https://www.v2ex.com/t/901081</link>
+      <author>luckyzd</author>
+      <pubDate>08 Dec 2022 06:46:24 +0000</pubDate>
+    </item>
+    <item>
       <title>小白部署 V2Ray + ws + tls - 程序员</title>
       <link>https://www.v2ex.com/t/901080</link>
       <description>&lt;h2&gt;服务器：腾讯云新加坡应用服务器 centos7.9&lt;/h2&gt;&#xA;&lt;p&gt;安装 v2ray：&lt;/p&gt;&#xA;&lt;p&gt;传输协议：[4]Websocket + TLS&lt;/p&gt;&#xA;&lt;p&gt;V2Ray 端口：默认随机&lt;/p&gt;&#xA;&lt;p&gt;是否开启广告拦截：默认 N&lt;/p&gt;&#xA;&lt;p&gt;是否配置 Shadowsocks:默认 N&lt;/p&gt;&#xA;&lt;p&gt;是否启用直接配置(会帮我自动安装运行 caddy)&lt;/p&gt;&#xA;&lt;p&gt;域名解析验证成功。&lt;/p&gt;&#xA;&lt;p&gt;443 端口和 80 端口防火墙都开了，v2ray 默认的那个端口防火墙没开。&lt;/p&gt;&#xA;&lt;h2&gt;配置如下：&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;WX20221208-141627@2x.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;http://tva1.sinaimg.cn/large/aa9984degy1h8wdzsbwwlj20oa03qq3v.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;WX20221208-141619@2x.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;http://tva1.sinaimg.cn/mw690/aa9984degy1h8we0i003nj20ve0xw45l.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;WX20221208-143200@2x.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;http://tva1.sinaimg.cn/mw690/aa9984degy1h8we2nn7zyj20ju0lgq8m.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;然后下载 v2rayX mac 客户端&lt;/p&gt;&#xA;&lt;p&gt;点击 configure 新建服务，填写配置信息，然后 load core 。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;WX20221208-143542@2x.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;http://tva1.sinaimg.cn/mw690/aa9984dely1h8we7ujmj1j20fq0psjv8.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;WX20221208-143514@2x.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;http://tva1.sinaimg.cn/mw690/aa9984dely1h8we821b2yj20um0rw44x.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;h2&gt;无法使用，请问 V 友这是怎么回事，我该如何一步一步排查。&lt;/h2&gt;&#xA;</description>
