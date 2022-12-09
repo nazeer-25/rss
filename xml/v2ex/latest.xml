@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>新装的 Debian 系统如何启用域名解析功能？ - 问与答</title>
+      <link>https://www.v2ex.com/t/901473</link>
+      <description>新的 Debian 系统没有附加功能安装，但是存在：/etc/resolv.conf ，内容为：nameserver 8.8.8.8&lt;br /&gt;&lt;br /&gt;此时 ping &lt;a target=&#34;_blank&#34; href=&#34;http://qq.com&#34; rel=&#34;nofollow noopener&#34;&gt;qq.com&lt;/a&gt; 结果为：ping: &lt;a target=&#34;_blank&#34; href=&#34;http://qq.com&#34; rel=&#34;nofollow noopener&#34;&gt;qq.com&lt;/a&gt; Temporary failure in name resolution&lt;br /&gt;&lt;br /&gt;也就是没法解析任何域名（即没法使用 /etc/resolv.conf 来解析域名）&lt;br /&gt;&lt;br /&gt;搜索了下，根据这篇文章 &lt;a target=&#34;_blank&#34; href=&#34;https://phoenixnap.com/kb/temporary-failure-in-name-resolution&#34; rel=&#34;nofollow noopener&#34;&gt;https://phoenixnap.com/kb/temporary-failure-in-name-resolution&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;使用命令：sudo systemctl restart systemd-resolved.service 启用了 systemd-resolved 服务，然后 ping 结果正常可以解析域名了。&lt;br /&gt;&lt;br /&gt;但是在 netstat 中出现了若干端口占用：&lt;br /&gt;tcp        0      0 0.0.0.0:5355            0.0.0.0:*               LISTEN      862/systemd-resolve&lt;br /&gt;tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      862/systemd-resolve&lt;br /&gt;tcp6       0      0 :::5355                 :::*                    LISTEN      862/systemd-resolve&lt;br /&gt;udp        0      0 0.0.0.0:5355            0.0.0.0:*                           862/systemd-resolve&lt;br /&gt;udp        0      0 127.0.0.53:53           0.0.0.0:*                           862/systemd-resolve&lt;br /&gt;udp6       0      0 :::5355                 :::*                                862/systemd-resolve&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;比较奇怪，其他的机器没有使用这个 systemd-resolved ，并没有这些端口占用，仍可以解析域名&lt;br /&gt;&lt;br /&gt;新机器如果只需要 ping 能解析出域名，应该怎么使 /etc/resolv.conf 生效？</description>
+      <author>61162833</author>
+      <pubDate>09 Dec 2022 23:25:28 +0000</pubDate>
+    </item>
+    <item>
       <title>S3 不支持移动 API 是出于什么考虑的？ - 云计算</title>
       <link>https://www.v2ex.com/t/901472</link>
       <author>edis0n0</author>
