@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "springboot+mybatis 查询 oracle 无响应，直接执行 sql 正常返回结果 - Oracle",
+      "Link": "https://www.v2ex.com/t/901384",
+      "Description": "\u003cp\u003e最近生产上碰到这么一个问题，百思不得其解。\u003c/p\u003e\n\u003cp\u003e一张表数据量大了，就做了按月分区。具体做法是先重命名旧表，然后新建分区表，后从旧表往新表导数据。\u003c/p\u003e\n\u003cp\u003e刚开始没注意，后面就发现，程序提交的\u003ccode\u003eSELECT COUNT(*)\u003c/code\u003e语句就是查不到结果，一直无响应最后接口请求超时，这个 SELECT 语句关联了三张表，包含上面新建的分区表。\u003c/p\u003e\n\u003cp\u003e奇怪的是，从日志中将 sql 拎出来直接执行，又能得到结果。但是从程序日志里看这个 sql 就是一直没有查到结果。\u003c/p\u003e\n\u003cp\u003e通过查询 V$SESSION 、V$SQL 等表，发现程序提交的 sql 都处在 ACTIVE 状态，事件类型是\u003ccode\u003e'latch:cache buffers chains\u003c/code\u003e，把会话杀掉也试过，还是不行，依旧是程序发起的查询无响应，直接执行 sql 就可以。\u003c/p\u003e\n\u003cp\u003e后来问公司 DBA ，他让执行下 \u003ccode\u003eanalyze table 表名 compute statistics\u003c/code\u003e,几张关联表都执行了下，后面就正常了。\u003c/p\u003e\n\u003cp\u003e这是什么原理？有懂的大神帮忙解答下吗？\u003c/p\u003e\n",
+      "Author": "hubin0203",
+      "PubDate": "2022-12-09T08:52:12Z"
+    },
+    {
+      "Title": "开源的库存管理系统 - 问与答",
+      "Link": "https://www.v2ex.com/t/901383",
+      "Description": "\u003cp\u003e大佬们，可以推荐一个开源的库存管理系统吗？\u003c/p\u003e\n\u003cp\u003e目前想用来管理种子，需求有：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e每个品种的剩余种子数\u003c/li\u003e\n\u003cli\u003e每个品种的多张图片\u003c/li\u003e\n\u003cli\u003e每个品种存放地点等信息\u003c/li\u003e\n\u003cli\u003e可以方便查询，出库入库即可，需求不多\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e有推荐的吗？\u003c/p\u003e\n",
+      "Author": "Alan3",
+      "PubDate": "2022-12-09T08:48:37Z"
+    },
+    {
+      "Title": "我开源的百度地图 GL 版 Vue3 组件库发布了 1.0 - 开源软件",
+      "Link": "https://www.v2ex.com/t/901382",
+      "Description": "\u003cp\u003evue-baidu-map-gl 是基于百度地图 JavaScript GL 版（使用了 WebGL 对地图、覆盖物等进行渲染，支持 3D 视角展示地图） API 封装设计的 Vue3 组件 + hooks 库，开箱即用。\u003c/p\u003e\n\u003cp\u003e经过将近 40 个版本的迭代，社区小伙伴的使用反馈和优化，两个多月的努力，Vue3-baidu-map-gl 组件库终于发布了！！🎉。目前版本组件覆盖了大部分百度地图 Api 功能，还有 hooks 助力开发，以及详细的文档，非常的 nice!! 项目中有需求的小伙伴可以试试。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e🚀 自动加载百度地图 SDK ，将百度地图繁琐的 Api 封装进组件，你只需关注组件本身\u003c/li\u003e\n\u003cli\u003e📦 20+ 高质量的开箱即用 Vue 3 组件以及 8+ hooks 封装\u003c/li\u003e\n\u003cli\u003e📐 遵循直觉的、简约的 Api 设计\u003c/li\u003e\n\u003cli\u003e⚡ Composition Api ，更好的性能\u003c/li\u003e\n\u003cli\u003e🔨 完整的 TypeScript 支持，更好的体验\u003c/li\u003e\n\u003cli\u003e🧩 tree shaking 支持，模块分包，只打包你想要的的\u003c/li\u003e\n\u003cli\u003e🌏 基于百度地图 Gl 版 SDK ，通过 WebGL 对地图、覆盖物等进行渲染，支持 3D 视角展示地图\u003c/li\u003e\n\u003cli\u003e🖇️ 组件同时兼容纯净式大驼峰命名(\u003ccode\u003eMap\u003c/code\u003e)和短横线命名(\u003ccode\u003eb-map\u003c/code\u003e)\u003c/li\u003e\n\u003cli\u003e🚀 支持 volar ，组件提供完善的代码提示\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003eGitHub: \u003ca href=\"https://github.com/yue1123/vue3-baidu-map-gl\" rel=\"nofollow\"\u003ehttps://github.com/yue1123/vue3-baidu-map-gl\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e文档: \u003ca href=\"https://yue1123.github.io/vue3-baidu-map-gl/\" rel=\"nofollow\"\u003ehttps://yue1123.github.io/vue3-baidu-map-gl/\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n",
+      "Author": "yue1123",
+      "PubDate": "2022-12-09T08:46:13Z"
+    },
+    {
+      "Title": "顺丰小程序挂了？ - 问与答",
+      "Link": "https://www.v2ex.com/t/901381",
+      "Description": "",
+      "Author": "fasling",
+      "PubDate": "2022-12-09T08:45:32Z"
+    },
+    {
+      "Title": "做了一个 ChatGPT 的黑客帝国主题 - 分享创造",
+      "Link": "https://www.v2ex.com/t/901380",
+      "Description": "\u003ca target=\"_blank\" href=\"https://github.com/lvwzhen/ChatGPT-Matrix-Style\" rel=\"nofollow noopener\"\u003ehttps://github.com/lvwzhen/ChatGPT-Matrix-Style\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"/i/T2z3013u.png\" rel=\"nofollow noopener\" target=\"_blank\" title=\"在新窗口打开图片 T2z3013u.png\"\u003e\u003cimg src=\"//i.v2ex.co/T2z3013u.png\" class=\"embedded_image\"\u003e\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cdiv class=\"embedded_video_wrapper\"\u003e\u003ciframe src=\"https://www.youtube.com/embed/A8OHPfjOmvg\" class=\"embedded_video\" allowfullscreen=\"\" type=\"text/html\" id=\"ytplayer\" frameborder=\"0\"\u003e\u003c/iframe\u003e\u003c/div\u003e",
+      "Author": "lvwzhen",
+      "PubDate": "2022-12-09T08:44:46Z"
+    },
+    {
       "Title": "就要搬新家了，有没有什么让自己快乐的东西可以推荐一下 - 问与答",
       "Link": "https://www.v2ex.com/t/901379",
       "Description": "电视 烤箱 洗地机等电器都有了，软体家具也多少买了点\u003cbr /\u003e\u003cbr /\u003e刚好也双 12 了，有啥特别能让人快乐的东西可以推荐一下吗",
