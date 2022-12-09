@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教一个关于 Python 绘图的问题，我写了一段代码，随机挑选一张图片给图片中间加上一个半透明的黑色正方形，但是最后生成的图片中间黑色的正方形都是不透明的。\r\n\r\n这是哪里出问题?了 - 问与答",
+      "Link": "https://www.v2ex.com/t/901271",
+      "Description": "import os\u003cbr /\u003eimport random\u003cbr /\u003efrom PIL import Image, ImageDraw\u003cbr /\u003e\u003cbr /\u003e# 随机选择当前目录中的一张图片\u003cbr /\u003eimage_files = [f for f in os.listdir('.') if f.endswith('.jpg')]\u003cbr /\u003eimage_file = random.choice(image_files)\u003cbr /\u003e\u003cbr /\u003e# 缩放图片\u003cbr /\u003eim = Image.open(image_file)\u003cbr /\u003eim = im.resize((900, 383))\u003cbr /\u003e\u003cbr /\u003e# 创建 ImageDraw 对象，用于绘制图形\u003cbr /\u003edraw = ImageDraw.Draw(im)\u003cbr /\u003e\u003cbr /\u003e# 绘制黑色正方形\u003cbr /\u003ex = im.width // 2 - 150\u003cbr /\u003ey = im.height // 2 - 150\u003cbr /\u003edraw.rectangle((x, y, x + 300, y + 300), fill='black')\u003cbr /\u003e\u003cbr /\u003e# 绘制白色边框\u003cbr /\u003edraw.rectangle((x, y, x + 300, y + 300), outline='white')\u003cbr /\u003e\u003cbr /\u003e# 创建 000 文件夹\u003cbr /\u003eif not os.path.exists('000'):\u003cbr /\u003e    os.mkdir('000')\u003cbr /\u003e\u003cbr /\u003e# 保存图片到 000 文件夹\u003cbr /\u003eim.save(os.path.join('000', image_file))",
+      "Author": "y4nssss",
+      "PubDate": "2022-12-09T02:35:29Z"
+    },
+    {
       "Title": "我把 eagle 图片管理工具搬到了线上 - 分享创造",
       "Link": "https://www.v2ex.com/t/901270",
       "Description": "\u003cp\u003e之前写了个\u003ca href=\"https://www.v2ex.com/t/897798\" rel=\"nofollow\"\u003ejson-server 版本的 eagle-api\u003c/a\u003e。就萌生了把 eagle 客户端当成管理系统，每次修改同步到服务器，生成新的 api 。\u003c/p\u003e\n\u003cp\u003e初步的想法得以实现，来看哈效果 \u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e网站 - \u003ca href=\"https://rao.pics\" rel=\"nofollow\"\u003erao.pics\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eapi - \u003ca href=\"https://json-server.rao.pics\" rel=\"nofollow\"\u003ejson-server.rao.pics\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e后续想法：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e把 json-server 替换为 sqlite ，json-server 搜索数组还是存在一些缺陷，不是那么好做。\u003c/li\u003e\n\u003cli\u003e使用 nocodb 管理 sqlite\u003c/li\u003e\n\u003cli\u003e继续完善网站其他展示功能\u003c/li\u003e\n\u003c/ul\u003e\n",
