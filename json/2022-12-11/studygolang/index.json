@@ -40,7 +40,7 @@
     },
     {
       "Title": "请教个context应用场景的问题",
-      "Link": "https://studygolang.com/topics/16022#reply1",
+      "Link": "https://studygolang.com/topics/16022#reply2",
       "Description": "\u003cp\u003e我遇到一个\u003cstrong\u003econtext\u003c/strong\u003e应用场景问题，有点疑惑，来向各位先进请教。\u003c/p\u003e\n\n\u003cp\u003e我在某个\u003cstrong\u003eRedis\u003c/strong\u003e操作函数中，要将一系列\u003cstrong\u003eKey\u003c/strong\u003e的值进行修改。伪代码如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e  // 创建一个2秒超时的context\n  ctx, cancel := context.WithTimeout(context.Background(), time.Second * 2)\n  defer cancel()\n  // 获取所有匹配的Keys（数量不定）\n  keys, err := redis.Keys(ctx, \u0026quot;device_*\u0026quot;)\n  // ...\n\n  // 循环，更新Key的值\n  for _, key := range keys {\n    newValue := getNewValue(key)\n    // 疑惑是下面这几句，假设循环可能有几千或上万次，\n    // 那么下面用到的context(也是设置2秒超时)，是每次都创建一个新的？还是另有它法？\n    ctx, cancel := context.WithTimeout(context.Background(), time.Second * 2)\n    defer cancel()\n    _, err = redis.Set(ctx, key, newValue )\n    // ...\n  }\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -154,6 +154,13 @@
       "Title": "全职可长期远程办公招资深主程级别Go开发工程师（薪资35-45K）",
       "Link": "https://studygolang.com/topics/16012#reply0",
       "Description": "\u003cp\u003e有兴趣请咨询TG电报：@w4262\u003c/p\u003e\n\n\u003cp\u003e主程Go开发工程师JD如下：\n硬性要求：\n精通游戏服务器逻辑框架、系统架构、脚本引擎、内存管理、性能分析、测试、安全性等技术？\n有RPC服务器开发经验？\n有GRPC和大厅业务经验？\n资深Go/主程级Go业务开发\n35-45K+奖金 可在谈\n2-3轮面试\n1、负责GRPC和大厅业务；\n2、负责需求评审、大厅框架搭建、规划和设计；负责解决方案、架构优化方案；\n3、负责代码编写、规范和标准设定；\n4、负责大数据、高并发、高承载设计；\n5、负责棋牌游戏、休闲游戏维护迭代升级\n6、负责公司后端架构的搭建和优化，持续优化服务的可用性、伸缩性、稳定性；\n1、精通Golang语言，五年以上golang经验，其中2年架构经验；\n2、精通数据结构和算法，深入理解多线程、net/http等相关技术；\n3、具备良好的编码习惯，结构清晰，命名规范，逻辑性强，代码冗余率低；\n4、精通Golang常用框架，深入了解框架提供的特性及其实现原理细节；\n5、有大规模分布式系统的设计和开发经验，能独立完成系统的设计及开发；\n6、精通MySQL数据库，熟练MySQL索引优化、查询优化的能力；\n7、精通多种非关系型数据库，如Redis, Mencached，理解其使用场景及限制；\n8、精通分布式系统，掌握多种服务框架和消息中间件，了解其实现原理；\n9、精通Internet常用协议，如HTTP、TCP/IP和RESTful、RESTAPI规范；\n10、精通Golang微服务、Docker部署、有RPC服务器开发经验；\n11、精通游戏服务器逻辑框架、系统架构、脚本引擎、内存管理、性能分析、测试、安全性等技术\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "请教个context应用场景的问题",
+      "Link": "https://studygolang.com/topics/16022#reply1",
+      "Description": "\u003cp\u003e我遇到一个\u003cstrong\u003econtext\u003c/strong\u003e应用场景问题，有点疑惑，来向各位先进请教。\u003c/p\u003e\n\n\u003cp\u003e我在某个\u003cstrong\u003eRedis\u003c/strong\u003e操作函数中，要将一系列\u003cstrong\u003eKey\u003c/strong\u003e的值进行修改。伪代码如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e  // 创建一个2秒超时的context\n  ctx, cancel := context.WithTimeout(context.Background(), time.Second * 2)\n  defer cancel()\n  // 获取所有匹配的Keys（数量不定）\n  keys, err := redis.Keys(ctx, \u0026quot;device_*\u0026quot;)\n  // ...\n\n  // 循环，更新Key的值\n  for _, key := range keys {\n    newValue := getNewValue(key)\n    // 疑惑是下面这几句，假设循环可能有几千或上万次，\n    // 那么下面用到的context(也是设置2秒超时)，是每次都创建一个新的？还是另有它法？\n    ctx, cancel := context.WithTimeout(context.Background(), time.Second * 2)\n    defer cancel()\n    _, err = redis.Set(ctx, key, newValue )\n    // ...\n  }\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
