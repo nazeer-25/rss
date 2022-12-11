@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>做了一个 spotify 照片生成的小程序，欢迎大家体验 - 分享创造</title>
+      <link>https://www.v2ex.com/t/901754</link>
+      <description>&lt;p&gt;算是个小众玩具，没啥人玩&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;http://tva3.sinaimg.cn/large/63211452gy1h902ue4ttpj20by0by76d.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>needpp</author>
+      <pubDate>11 Dec 2022 11:07:40 +0000</pubDate>
+    </item>
+    <item>
       <title>[Spring Boot] 字段 eMail 被 Jackson 序列化为全小写的 email 的原因以及解决办法 - 编程</title>
       <link>https://www.v2ex.com/t/901753</link>
       <description>&lt;p&gt;直接举例说明。Spring Boot 版本是 v2.7.5 ，Jackson 默认版本，Jackson 的&lt;code&gt;property-naming-strategy&lt;/code&gt;是默认的&lt;code&gt;LOWER_CAMEL_CASE&lt;/code&gt;，使用了 Lombok 。&lt;/p&gt;&#xA;&lt;p&gt;我现在有个 DTO：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Getter&#xA;@Setter&#xA;public class HelloReq {&#xA;&#xA;    private String eMail;&#xA;    private String bColor;&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;有个 RestController 方法：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    @PostMapping(value = &#34;/public/testWord&#34;)&#xA;    public HelloReq testDatetimeObj(@RequestBody HelloReq req) {&#xA;        return req;&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;当 Post 一个 JSON 过去：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{&#xA;    &#34;eMail&#34;: &#34;eMail@gmail1.com&#34;,&#xA;    &#34;email&#34;: &#34;email@gmail2.com&#34;,&#xA;    &#34;bcolor&#34;: &#34;blue&#34;,&#xA;    &#34;bColor&#34;: &#34;black&#34;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;响应的是：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{&#xA;    &#34;email&#34;: &#34;email@gmail2.com&#34;,&#xA;    &#34;bcolor&#34;: &#34;blue&#34;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;也就是说 DTO 中&lt;code&gt;aBcd&lt;/code&gt;形式的字段在序列化和反序列化时被当做&lt;code&gt;abcd&lt;/code&gt;处理了。&lt;/p&gt;&#xA;&lt;p&gt;各位知道是什么原因吗？有什么解决办法。&lt;/p&gt;&#xA;&lt;p&gt;目前是通过&lt;code&gt;@JsonProperty(&#34;bColor&#34;)&lt;/code&gt;注解解决这个问题，请问还有什么全局的办法吗？&lt;/p&gt;&#xA;</description>
