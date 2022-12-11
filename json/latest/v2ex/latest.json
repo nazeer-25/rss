@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "[Spring Boot] 字段 eMail 被 Jackson 序列化为全小写的 email 的原因以及解决办法 - 编程",
+      "Link": "https://www.v2ex.com/t/901753",
+      "Description": "\u003cp\u003e直接举例说明。Spring Boot 版本是 v2.7.5 ，Jackson 默认版本，Jackson 的\u003ccode\u003eproperty-naming-strategy\u003c/code\u003e是默认的\u003ccode\u003eLOWER_CAMEL_CASE\u003c/code\u003e，使用了 Lombok 。\u003c/p\u003e\n\u003cp\u003e我现在有个 DTO：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e@Getter\n@Setter\npublic class HelloReq {\n\n    private String eMail;\n    private String bColor;\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e有个 RestController 方法：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e    @PostMapping(value = \"/public/testWord\")\n    public HelloReq testDatetimeObj(@RequestBody HelloReq req) {\n        return req;\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e当 Post 一个 JSON 过去：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n    \"eMail\": \"eMail@gmail1.com\",\n    \"email\": \"email@gmail2.com\",\n    \"bcolor\": \"blue\",\n    \"bColor\": \"black\"\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e响应的是：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n    \"email\": \"email@gmail2.com\",\n    \"bcolor\": \"blue\"\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e也就是说 DTO 中\u003ccode\u003eaBcd\u003c/code\u003e形式的字段在序列化和反序列化时被当做\u003ccode\u003eabcd\u003c/code\u003e处理了。\u003c/p\u003e\n\u003cp\u003e各位知道是什么原因吗？有什么解决办法。\u003c/p\u003e\n\u003cp\u003e目前是通过\u003ccode\u003e@JsonProperty(\"bColor\")\u003c/code\u003e注解解决这个问题，请问还有什么全局的办法吗？\u003c/p\u003e\n",
+      "Author": "zeyexe",
+      "PubDate": "2022-12-11T11:01:51Z"
+    },
+    {
       "Title": "开发一个 chatgpt 注册机 - 程序员",
       "Link": "https://www.v2ex.com/t/901752",
       "Description": "\u003cp\u003e刚看到 \u003ca href=\"https://chatgpt.sbaliyun.com/\" rel=\"nofollow\"\u003ehttps://chatgpt.sbaliyun.com/\u003c/a\u003e 底部 已经出了注册机 可以批量注册账号\n请问下各位大神 这种注册机开发起来麻烦吗？大概需要多少钱\n我猜对于会写代码的这种情况一定不难\u003c/p\u003e\n",
