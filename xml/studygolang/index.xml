@@ -37,11 +37,6 @@
       <link>https://studygolang.com/articles/35994#reply0</link>
     </item>
     <item>
-      <title>文章</title>
-      <link>https://studygolang.com/articles/35992#reply0</link>
-      <description>&lt;p&gt;文章&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>请教个context应用场景的问题</title>
       <link>https://studygolang.com/topics/16022#reply6</link>
       <description>&lt;p&gt;我遇到一个&lt;strong&gt;context&lt;/strong&gt;应用场景问题，有点疑惑，来向各位先进请教。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我在某个&lt;strong&gt;Redis&lt;/strong&gt;操作函数中，要将一系列&lt;strong&gt;Key&lt;/strong&gt;的值进行修改。伪代码如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;  // 创建一个2秒超时的context&#xA;  ctx, cancel := context.WithTimeout(context.Background(), time.Second * 2)&#xA;  defer cancel()&#xA;  // 获取所有匹配的Keys（数量不定）&#xA;  keys, err := redis.Keys(ctx, &amp;quot;device_*&amp;quot;)&#xA;  // ...&#xA;&#xA;  // 循环，更新Key的值&#xA;  for _, key := range keys {&#xA;    newValue := getNewValue(key)&#xA;    // 疑惑是下面这几句，假设循环可能有几千或上万次，&#xA;    // 那么下面用到的context(也是设置2秒超时)，是每次都创建一个新的？还是另有它法？&#xA;    ctx, cancel := context.WithTimeout(context.Background(), time.Second * 2)&#xA;    defer cancel()&#xA;    _, err = redis.Set(ctx, key, newValue )&#xA;    // ...&#xA;  }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -49,6 +44,11 @@
     <item>
       <title>文本</title>
       <link>https://studygolang.com/articles/35993#reply0</link>
+    </item>
+    <item>
+      <title>文章</title>
+      <link>https://studygolang.com/articles/35992#reply0</link>
+      <description>&lt;p&gt;文章&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>我愿称之为最好用的golang并发控制库</title>
