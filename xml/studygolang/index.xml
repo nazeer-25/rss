@@ -24,7 +24,7 @@
     </item>
     <item>
       <title>请问这个泛型如何使用，字符串拼接</title>
-      <link>https://studygolang.com/topics/16023#reply3</link>
+      <link>https://studygolang.com/topics/16023#reply4</link>
       <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/221211/894dbcad95d3ae7c09fbf786b2a9afb0.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
@@ -108,6 +108,11 @@
       <title>golang替换字符串中的图片链接，如何提升性能呢？</title>
       <link>https://studygolang.com/topics/16015#reply0</link>
       <description>&lt;p&gt;给定字符串&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;content=&amp;quot;&amp;lt;span class=&amp;quot;&amp;quot;&amp;gt;&amp;lt;img class=&amp;quot;wscnph&amp;quot; src=&amp;quot;https://static.images.net/202233142551646287375.jpg&amp;quot;&amp;gt;&amp;lt;img class=&amp;quot;wscnph&amp;quot; src=&amp;quot;https://static.images.net/202233142551646287377.jpg&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;使用正则匹配图片链接，然后上传图片到阿里云oss,获得图片的链接，然后替换字符串中图片的链接，如果给定的字符串中图片很多，怎样才能提高图片上传替换的速度&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;func Upload(url string) string {&#xA;    // 创建OSSClient实例。&#xA;    client, err := oss.New(Endpoint, key, AccessKeySecret)&#xA;    if err != nil {&#xA;        fmt.Println(&amp;quot;Error:&amp;quot;, err)&#xA;        os.Exit(-1)&#xA;    }&#xA;    t1 := time.Now().Unix()&#xA;    if ti1 != t1 { //如果时间戳不一样,那么归零&#xA;        long = 0&#xA;    }&#xA;    ti1 = t1&#xA;    long++&#xA;    obj := fmt.Sprintf(&amp;quot;article/%d%d.png&amp;quot;, t1, long)&#xA;    // 获取存储空间。&#xA;    bucket, err := client.Bucket(BucketName)&#xA;    if err != nil {&#xA;        fmt.Println(&amp;quot;Error:&amp;quot;, err)&#xA;        os.Exit(-1)&#xA;    }&#xA;&#xA;    // 上传Byte数组。&#xA;    err = bucket.PutObject(obj, bytes.NewReader(ReadImgData(url)))&#xA;    if err != nil {&#xA;        fmt.Println(&amp;quot;Error:&amp;quot;, err)&#xA;        os.Exit(-1)&#xA;    }&#xA;    return &amp;quot;https://&amp;quot; + BucketName + &amp;quot;.&amp;quot; + Endpoint + &amp;quot;/&amp;quot; + obj&#xA;}&#xA;func RepImages(htmls string) string {&#xA;    var imgRE = regexp.MustCompile(`&amp;lt;img[^&amp;gt;]+\bsrc=[&amp;quot;&#39;]([^&amp;quot;&#39;]+)[&amp;quot;&#39;]`)&#xA;    imgs := imgRE.FindAllStringSubmatch(htmls, -1)&#xA;    out := make([]string, len(imgs))&#xA;    myImage := &amp;quot;&amp;quot;&#xA;    resHtml := htmls&#xA;    for i := range out {&#xA;        if ! strings.HasPrefix(imgs[i][1], &amp;quot;https://static.images.net&amp;quot;) {&#xA;            myImage = Upload(imgs[i][1])&#xA;            resHtml = strings.Replace(resHtml, imgs[i][1], myImage, -1)&#xA;            out[i] = imgs[i][1]&#xA;            fmt.Println(strconv.Itoa(i), out[i])&#xA;        }&#xA;    }&#xA;    fmt.Println(resHtml)&#xA;    return resHtml&#xA;}&#xA;&#xA;func main() {&#xA;    //a := BcryptHash(&amp;quot;admin123$&amp;quot;)&#xA;    //fmt.Print(a)&#xA;    content := &amp;quot;&amp;lt;span class=\&amp;quot;\&amp;quot;&amp;gt;&amp;lt;img class=\&amp;quot;wscnph\&amp;quot; src=\&amp;quot;https://static.images.net/2022331359421646287182.jpg\&amp;quot;&amp;gt;&amp;lt;img class=\&amp;quot;wscnph\&amp;quot; src=\&amp;quot;https://static.images.net/202233135942164628718777.jpg\&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;&#xA;    RepImages(content)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>请问这个泛型如何使用，字符串拼接</title>
+      <link>https://studygolang.com/topics/16023#reply3</link>
+      <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/221211/894dbcad95d3ae7c09fbf786b2a9afb0.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>底层逻辑-理解Go语言的本质</title>
