@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请问大家知道有哪些国外的游戏账号交易平台吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/902197</link>
+      <description>目前只知道 G2G&lt;br /&gt;想问还有没有其他的平台</description>
+      <author>r00t7</author>
+      <pubDate>13 Dec 2022 06:41:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>SwiftUI 中如何优化下面这种场景? - Swift</title>
+      <link>https://www.v2ex.com/t/902196</link>
+      <description>&lt;p&gt;封装了几个网络请求:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;class API: ObservableObject {&#xA;    @Published private(set) var isAccessTokenValid = false&#xA;    @AppStorage(&#34;Passcode&#34;) var passcode: String = &#34;&#34;&#xA;    @AppStorage(&#34;AccessToken&#34;) var accessToken: String = &#34;&#34;&#xA;    @AppStorage(&#34;RefreshToken&#34;) var refreshToken: String = &#34;&#34;&#xA;    privite func request() async throws -&amp;gt; (T?, URLResponse?) where T : Decodable {&#xA;       // 省略具体实现&#xA;    }&#xA;    func request1() async throws -&amp;gt; SomeResponseType {}&#xA;    func request2() async throws -&amp;gt; SomeResponseType {}&#xA;    func request3() async throws -&amp;gt; SomeResponseType {}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在 &lt;code&gt;@main&lt;/code&gt; 中, 使用 &lt;code&gt;.environmentObject(API())&lt;/code&gt; 将网络请求加入到全局环境中, 在每个页面用到它的地方使用 &lt;code&gt;@EnvironmentObject var api: API&lt;/code&gt; 来获取.&lt;/p&gt;&#xA;&lt;p&gt;比如进入页面 A 需要进行网络请求, 则:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;struct A: View {&#xA;  @EnvironmentObject var api: API&#xA;  @State private var data: [SomeResponseType] = []&#xA;  var body: View {&#xA;    VStack {}&#xA;    .task {&#xA;      let r = try? await api.request1()&#xA;      if let d = r {&#xA;        data = d&#xA;      }&#xA;    }&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但这样的代码是 UIKit 的思路, 在 SwiftUI 中应该使用 Model 层进行网络请求, 应该这样添加一层 Model:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;class ModelA: ObservableObject {&#xA;  @Published var data: [SomeResponseType]&#xA;  init() {&#xA;    // do the request and then init data using the response&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在页面中只需要&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;struct A: View {&#xA;  @StateObject private var model = ModelA()&#xA;  var body: View {&#xA;    VStack {&#xA;      model.data...&#xA;    }&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但现在问题出现了, 在 Model 里面无法直接使用上面封装的 API, 也就是在 model 的初始化函数中, 无法获取 environment 数据. 于是只能修改一下 API, 使其变成单例:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;class API: ObservableObject {&#xA;   static let shared = API()&#xA;   ...&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这样在 model 里直接可以使用它了.&lt;/p&gt;&#xA;&lt;p&gt;虽然这样看起来解决了, 但感觉代码结构还需要调整一下, 但不知道如何调整. 请大佬指点指点&lt;/p&gt;&#xA;</description>
+      <author>FaiChou</author>
+      <pubDate>13 Dec 2022 06:38:47 +0000</pubDate>
+    </item>
+    <item>
       <title>iPad 充电口问题 - Apple</title>
       <link>https://www.v2ex.com/t/902195</link>
       <description>手上有个一代 10.5 的 ipad pro ，用着一直挺好。前几天被小朋友连着充电器和机身摔了。好巧不巧，正好把整个 lighting 金属口全部扎实的断在充电口里了，全塞满了。用过热熔胶，没用。请教下，除了去售后，是否还有别的方法。谢谢 另，售后加钱还能换到新的么？数据怎么办。。</description>

@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请问大家知道有哪些国外的游戏账号交易平台吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/902197",
+      "Description": "目前只知道 G2G\u003cbr /\u003e想问还有没有其他的平台",
+      "Author": "r00t7",
+      "PubDate": "2022-12-13T06:41:50Z"
+    },
+    {
+      "Title": "SwiftUI 中如何优化下面这种场景? - Swift",
+      "Link": "https://www.v2ex.com/t/902196",
+      "Description": "\u003cp\u003e封装了几个网络请求:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-swift\"\u003eclass API: ObservableObject {\n    @Published private(set) var isAccessTokenValid = false\n    @AppStorage(\"Passcode\") var passcode: String = \"\"\n    @AppStorage(\"AccessToken\") var accessToken: String = \"\"\n    @AppStorage(\"RefreshToken\") var refreshToken: String = \"\"\n    privite func request() async throws -\u0026gt; (T?, URLResponse?) where T : Decodable {\n       // 省略具体实现\n    }\n    func request1() async throws -\u0026gt; SomeResponseType {}\n    func request2() async throws -\u0026gt; SomeResponseType {}\n    func request3() async throws -\u0026gt; SomeResponseType {}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在 \u003ccode\u003e@main\u003c/code\u003e 中, 使用 \u003ccode\u003e.environmentObject(API())\u003c/code\u003e 将网络请求加入到全局环境中, 在每个页面用到它的地方使用 \u003ccode\u003e@EnvironmentObject var api: API\u003c/code\u003e 来获取.\u003c/p\u003e\n\u003cp\u003e比如进入页面 A 需要进行网络请求, 则:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estruct A: View {\n  @EnvironmentObject var api: API\n  @State private var data: [SomeResponseType] = []\n  var body: View {\n    VStack {}\n    .task {\n      let r = try? await api.request1()\n      if let d = r {\n        data = d\n      }\n    }\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但这样的代码是 UIKit 的思路, 在 SwiftUI 中应该使用 Model 层进行网络请求, 应该这样添加一层 Model:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-swift\"\u003eclass ModelA: ObservableObject {\n  @Published var data: [SomeResponseType]\n  init() {\n    // do the request and then init data using the response\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在页面中只需要\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estruct A: View {\n  @StateObject private var model = ModelA()\n  var body: View {\n    VStack {\n      model.data...\n    }\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但现在问题出现了, 在 Model 里面无法直接使用上面封装的 API, 也就是在 model 的初始化函数中, 无法获取 environment 数据. 于是只能修改一下 API, 使其变成单例:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eclass API: ObservableObject {\n   static let shared = API()\n   ...\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这样在 model 里直接可以使用它了.\u003c/p\u003e\n\u003cp\u003e虽然这样看起来解决了, 但感觉代码结构还需要调整一下, 但不知道如何调整. 请大佬指点指点\u003c/p\u003e\n",
+      "Author": "FaiChou",
+      "PubDate": "2022-12-13T06:38:47Z"
+    },
+    {
       "Title": "iPad 充电口问题 - Apple",
       "Link": "https://www.v2ex.com/t/902195",
       "Description": "手上有个一代 10.5 的 ipad pro ，用着一直挺好。前几天被小朋友连着充电器和机身摔了。好巧不巧，正好把整个 lighting 金属口全部扎实的断在充电口里了，全塞满了。用过热熔胶，没用。请教下，除了去售后，是否还有别的方法。谢谢 另，售后加钱还能换到新的么？数据怎么办。。",
