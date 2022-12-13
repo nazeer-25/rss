@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "我的 M1 14 寸的 Web 服务 QPS 很低，是我的环境有问题吗？ - Apple",
+      "Link": "https://www.v2ex.com/t/902263",
+      "Description": "\u003cp\u003e同一个代码，测试结果: \u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eM1 的 Web 服务压测 QPS 大概只有 2000 左右 (M1 14 寸: 系统 Ventura ，16G 内存)\u003c/li\u003e\n\u003cli\u003e虚拟机里 QPS 轻松上 10000 (CentOS 7, 8G 内存，Intel(R) Xeon(R) CPU E5-2678 v3 @ 2.50GHz)\u003c/li\u003e\n\u003cli\u003e记得 2019 年的时候使用 2014 MacBook Pro 15 寸的压测，也是 ping-pong 这样的简单请求，SpringMVC 代码，QPS 能上 8000 (CPU 好像是 Intel 双核 2.7G ，系统好像是 macOS 9 ，8G 内存)\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e测试程序: 用 go gin 写了个最简单的 Web 服务\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003erouter.GET(\"/api/test\", func(c *gin.Context) {\n\tc.IndentedJSON(200, gin.H{\n\t\t\"name\": \"alice\",\n\t})\n})\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eM1 Mac 本机压测过程:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e命令行启动: \u003ccode\u003enohup ./main \u0026gt; /dev/null 2\u0026gt;\u0026amp;1 \u0026amp;\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e压测命令: \u003ccode\u003eab -c 20 -n 10000 http://localhost:8080/api/tes\u003c/code\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e虚拟机 Linux 本机压测过程:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eMac 上交叉编译为 Linux 可执行程序: \u003ccode\u003eCGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e命令行启动: \u003ccode\u003enohup ./main \u0026gt; /dev/null 2\u0026gt;\u0026amp;1 \u0026amp;\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e压测命令: \u003ccode\u003eab -c 20 -n 10000 http://localhost:8080/api/tes\u003c/code\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e上面同样的程序，使用 SpringBoot 写了一个进行压测，在 M1 Mac 上的 QPS 和 Go 程序的结果几乎一样，CPU 使用情况也差不多。\u003c/p\u003e\n",
+      "Author": "jorneyr",
+      "PubDate": "2022-12-13T09:40:07Z"
+    },
+    {
       "Title": "Surge For IOS 拼车， 3 缺 2 - Surge",
       "Link": "https://www.v2ex.com/t/902262",
       "Description": "\u003cp\u003eSurge For IOS 3 缺 2\u003c/p\u003e\n\u003cp\u003e115/位。微信：bGlwYW4tc3V6aG91\u003c/p\u003e\n",

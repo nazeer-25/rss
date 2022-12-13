@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>我的 M1 14 寸的 Web 服务 QPS 很低，是我的环境有问题吗？ - Apple</title>
+      <link>https://www.v2ex.com/t/902263</link>
+      <description>&lt;p&gt;同一个代码，测试结果: &lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;M1 的 Web 服务压测 QPS 大概只有 2000 左右 (M1 14 寸: 系统 Ventura ，16G 内存)&lt;/li&gt;&#xA;&lt;li&gt;虚拟机里 QPS 轻松上 10000 (CentOS 7, 8G 内存，Intel(R) Xeon(R) CPU E5-2678 v3 @ 2.50GHz)&lt;/li&gt;&#xA;&lt;li&gt;记得 2019 年的时候使用 2014 MacBook Pro 15 寸的压测，也是 ping-pong 这样的简单请求，SpringMVC 代码，QPS 能上 8000 (CPU 好像是 Intel 双核 2.7G ，系统好像是 macOS 9 ，8G 内存)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;测试程序: 用 go gin 写了个最简单的 Web 服务&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;router.GET(&#34;/api/test&#34;, func(c *gin.Context) {&#xA;&#x9;c.IndentedJSON(200, gin.H{&#xA;&#x9;&#x9;&#34;name&#34;: &#34;alice&#34;,&#xA;&#x9;})&#xA;})&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;M1 Mac 本机压测过程:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;命令行启动: &lt;code&gt;nohup ./main &amp;gt; /dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;压测命令: &lt;code&gt;ab -c 20 -n 10000 http://localhost:8080/api/tes&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;虚拟机 Linux 本机压测过程:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Mac 上交叉编译为 Linux 可执行程序: &lt;code&gt;CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;命令行启动: &lt;code&gt;nohup ./main &amp;gt; /dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;压测命令: &lt;code&gt;ab -c 20 -n 10000 http://localhost:8080/api/tes&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;上面同样的程序，使用 SpringBoot 写了一个进行压测，在 M1 Mac 上的 QPS 和 Go 程序的结果几乎一样，CPU 使用情况也差不多。&lt;/p&gt;&#xA;</description>
+      <author>jorneyr</author>
+      <pubDate>13 Dec 2022 09:40:07 +0000</pubDate>
+    </item>
+    <item>
       <title>Surge For IOS 拼车， 3 缺 2 - Surge</title>
       <link>https://www.v2ex.com/t/902262</link>
       <description>&lt;p&gt;Surge For IOS 3 缺 2&lt;/p&gt;&#xA;&lt;p&gt;115/位。微信：bGlwYW4tc3V6aG91&lt;/p&gt;&#xA;</description>
