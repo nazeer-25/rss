@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>IPv6 Docker 跑 BT 的方案和问题 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/902568</link>
+      <description>&lt;h2&gt;需求&lt;/h2&gt;&#xA;&lt;p&gt;BT 的机制会将本机的 IPv6“昭告天下”，可能会引来外部刺探，抵消 IPv6 超大地址空间的天然安全优势。&lt;br/&gt;&#xA;因此，想用 Docker 给 BT 分配一个独立的 IPv6 。  &lt;/p&gt;&#xA;&lt;h2&gt;实现方式&lt;/h2&gt;&#xA;&lt;p&gt;我在&lt;a href=&#34;https://www.v2ex.com/t/877910&#34; rel=&#34;nofollow&#34;&gt;过去的帖子&lt;/a&gt;有讨论过类似的做法，简单过一下。  &lt;/p&gt;&#xA;&lt;p&gt;建一个 macvlan 网卡：  &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;docker network create -d macvlan \&#xA;  --subnet=192.168.x.0/24  \&#xA;  --gateway=192.168.x.1 \&#xA;  --ipv6 --subnet=fd00:8::/80 \&#xA;  -o parent=外网网卡 \&#xA;  -o macvlan_mode=bridge macvlan1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;开一个 BT 的 Docker：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;docker run -d \&#xA;  --name=qbittorrent \&#xA;  -e PUID=??? \ #防止文件权限都是 root 影响其他应用&#xA;  -e PGID=??? \&#xA;  -e TZ=Asia/Shanghai \&#xA;  -e WEBUI_PORT=6666 \ &#xA;  --ip=192.168.x.211 --net=macvlan1\&#xA;  --add-host=tracker.example.com:9.9.9.9 \  #固定 tracker 为 IPv4 地址，减少双栈上报的问题&#xA;  -v 配置路径:/config \&#xA;  -v 下载路径:/downloads \&#xA;  --restart unless-stopped \&#xA;  linuxserver/qbittorrent:4.4.5&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;要远程访问 IPv6 Docker ，一种是直接 DDNS ，&lt;a href=&#34;https://www.v2ex.com/t/877910&#34; rel=&#34;nofollow&#34;&gt;过去的帖子&lt;/a&gt;讨论过。但配 SSL 还是有点小麻烦，这里选择在宿主的反代上统一处理，也顺便隐藏了 WebUI 入口。然而 macvlan 默认禁止宿主访问，可以参考网友的方案（&lt;a href=&#34;https://post.smzdm.com/p/awkv40k4/&#34; rel=&#34;nofollow&#34;&gt;国内&lt;/a&gt; &lt;a href=&#34;https://blog.thelazyfox.xyz/give-access-to-host-from-docker-containers-macvlan/&#34; rel=&#34;nofollow&#34;&gt;国外&lt;/a&gt;）来绕过：  &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ip link add brmv0 link 外网网卡 type macvlan mode bridge&#xA;ip addr add 192.168.x.210/32 dev brmv0 #子网中未用过的 IP&#xA;ip link set brmv0 up&#xA;ip route add 192.168.x.211/32 dev brmv0 #目标 Docker 的 IP&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如此宿主就能通过 192.168.x.211:6666 访问容器。重启会失效，可以加入到开机脚本。顺便一提，也可用 IPv6 的私有段来互通。&lt;/p&gt;&#xA;&lt;h2&gt;小问题&lt;/h2&gt;&#xA;&lt;p&gt;如此配置，IPv4 的 UPnP 工作如常，容器能从路由获取 SLAAC IPv6 并正常访问，系统重启后亦是如此。  &lt;/p&gt;&#xA;&lt;p&gt;从回报到 tracker 的信息来看，IPv4 是公网 IP ，但 IPv6 却是 [::]。&lt;br/&gt;&#xA;此时在配置界面修改 BT 的监听端口或者网络接口一次，IPv6 上报就会变为容器的公网 IPv6 。&lt;br/&gt;&#xA;但容器只要重启，IPv6 上报的问题就会再次出现。  &lt;/p&gt;&#xA;&lt;p&gt;尽管只是一个小问题，还是让人有点头疼，尝试修改了多项 qBittorrent 的配置也未能解决。&lt;br/&gt;&#xA;个人推测，可能是 qBittorrent 启动得“太快”了，以至于网络接口还没来得及配置好 IPv6 。而当配置完成后，软件也没有及时更新信息。    &lt;/p&gt;&#xA;&lt;p&gt;于是，想到了一种简单粗暴的办法：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;docker exec -it qbittorrent vi /init&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在靠前的位置插入：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;sleep 5&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;保存后再重启容器，IPv6 回报的问题就消失了。  &lt;/p&gt;&#xA;&lt;p&gt;考虑到 IPv6 配置延迟的问题可能会在不止这一个场景下出现，而且这个办法实在有失优雅，所以发出来想了解一下是否有更好的解决方案。&lt;/p&gt;&#xA;</description>
+      <author>LnTrx</author>
+      <pubDate>14 Dec 2022 14:26:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>之前在 v 站上看到一个可以将 url 网站生成一个可分享的卡片图片，叫什么？ - 问与答</title>
+      <link>https://www.v2ex.com/t/902567</link>
+      <description>之前在 v 站上看到一个可以将 url 网站生成一张可分享的卡片图片，上面有二维码，可以自定义样式啥的。找了好久，实在想不起来叫什么了，有人有知道的麻烦告诉下，感谢</description>
+      <author>shelken</author>
+      <pubDate>14 Dec 2022 14:25:06 +0000</pubDate>
+    </item>
+    <item>
       <title>各位道友，有喜欢日式冲煮的么？ - 咖啡</title>
       <link>https://www.v2ex.com/t/902566</link>
       <description>&lt;p&gt;还有多少道友现在还在用法兰绒冲？&lt;/p&gt;&#xA;&lt;h2&gt;目前手上的壶：&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;kalita 红鹤 *1 铜锤纹象鼻 *1 &lt;/li&gt;&#xA;&lt;li&gt;月兔印 搪瓷 *4 不锈钢 700 *1 &lt;/li&gt;&#xA;&lt;li&gt;yukiwa b 渕 *1 M7 *1 &lt;/li&gt;&#xA;&lt;li&gt;早川 1000 *1&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;滤布：&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;kono&lt;/li&gt;&#xA;&lt;li&gt;大坊&lt;/li&gt;&#xA;&lt;li&gt;老妈 DIY&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;绿色交流软件：aHl5Z2gwMQ==&lt;/p&gt;&#xA;&lt;p&gt;PS:这个 Node 的热度真心越来越低了... ...如题，俺也来趴一下坟，看看还有幸存的么？&lt;/p&gt;&#xA;</description>
