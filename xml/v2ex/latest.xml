@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>channel 的关闭时机 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/902426</link>
+      <description>&lt;p&gt;go 新人请教大佬一个关闭 channel 的问题，发送端逻辑是历遍一堆目录，把里面的文件发送到 chan ，递归方式实现。这里的 chan 关闭有什么方法。&lt;/p&gt;&#xA;&lt;p&gt;目前这个代码跑起来的问题是会一直阻塞，要手动关闭&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;func main() {&#xA;&#x9;var wg sync.WaitGroup&#xA;&#xA;&#x9;objchan := make(chan []string, 10)&#xA;&#xA;&#x9;wg.Add(1)&#xA;&#x9;go func(och &amp;lt;-chan []string) {&#xA;&#x9;&#x9;defer wg.Done()&#xA;&#x9;&#x9;for objs := range och {&#xA;&#x9;&#x9;&#x9;do_something(objs)&#xA;&#x9;&#x9;}&#xA;&#x9;}(objchan)&#xA;&#xA;&#x9;for _, perfix := range []string{&#34;test&#34;, &#34;tc&#34;} {&#xA;&#x9;&#x9;go Getfile(perfix, objchan)&#xA;&#x9;}&#xA;&#xA;&#x9;wg.Wait()&#xA;}&#xA;&#xA;func Getfile(dir string, filechan chan&amp;lt;- []string) {&#xA;&#x9;// send files &#xA;    ...&#xA;    filechan &amp;lt;- files&#xA;    // 子目录递归&#xA;    if dir {&#xA;    &#x9;go Getfile(dir, filechan)&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>zong400</author>
+      <pubDate>14 Dec 2022 03:56:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>群晖 Synology Audio Station 音乐软件如何添加 mms 协议的广播电台网址？ - NAS</title>
+      <link>https://www.v2ex.com/t/902425</link>
+      <description>&lt;p&gt;群晖 Synology Audio Station 音乐软件只能添加 http 协议广播电台网址，即使输入 mms 协议地址也会在点击确定按钮后强制转换为 http 字符，有如下两个问题：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;如何成功添加 mms 协议地址？//目前网络大部分是这种地址。&lt;/li&gt;&#xA;&lt;li&gt;有无 http 协议地址的音乐广播电台推荐？//github 或搜索都找不到能用的地址。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>Apol1oBelvedere</author>
+      <pubDate>14 Dec 2022 03:55:53 +0000</pubDate>
+    </item>
+    <item>
       <title>Mac ventur 更新 13.1，出现重大 bug - macOS</title>
       <link>https://www.v2ex.com/t/902424</link>
       <description>&lt;h1&gt;系统设置&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;点开系统设置&lt;/li&gt;&#xA;&lt;li&gt;点 appleid &lt;/li&gt;&#xA;&lt;li&gt;设置卡死，看 cpu 占用率，appleid （系统设置）占用百分之 50&lt;/li&gt;&#xA;&lt;li&gt;强行点里面的 icloud 可以出现画面要等，最后 icloud 变成空白&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;重启&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;重启之后还是依旧如此不知道大家没有问题&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>

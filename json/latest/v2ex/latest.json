@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "channel 的关闭时机 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/902426",
+      "Description": "\u003cp\u003ego 新人请教大佬一个关闭 channel 的问题，发送端逻辑是历遍一堆目录，把里面的文件发送到 chan ，递归方式实现。这里的 chan 关闭有什么方法。\u003c/p\u003e\n\u003cp\u003e目前这个代码跑起来的问题是会一直阻塞，要手动关闭\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efunc main() {\n\tvar wg sync.WaitGroup\n\n\tobjchan := make(chan []string, 10)\n\n\twg.Add(1)\n\tgo func(och \u0026lt;-chan []string) {\n\t\tdefer wg.Done()\n\t\tfor objs := range och {\n\t\t\tdo_something(objs)\n\t\t}\n\t}(objchan)\n\n\tfor _, perfix := range []string{\"test\", \"tc\"} {\n\t\tgo Getfile(perfix, objchan)\n\t}\n\n\twg.Wait()\n}\n\nfunc Getfile(dir string, filechan chan\u0026lt;- []string) {\n\t// send files \n    ...\n    filechan \u0026lt;- files\n    // 子目录递归\n    if dir {\n    \tgo Getfile(dir, filechan)\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "zong400",
+      "PubDate": "2022-12-14T03:56:04Z"
+    },
+    {
+      "Title": "群晖 Synology Audio Station 音乐软件如何添加 mms 协议的广播电台网址？ - NAS",
+      "Link": "https://www.v2ex.com/t/902425",
+      "Description": "\u003cp\u003e群晖 Synology Audio Station 音乐软件只能添加 http 协议广播电台网址，即使输入 mms 协议地址也会在点击确定按钮后强制转换为 http 字符，有如下两个问题：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e如何成功添加 mms 协议地址？//目前网络大部分是这种地址。\u003c/li\u003e\n\u003cli\u003e有无 http 协议地址的音乐广播电台推荐？//github 或搜索都找不到能用的地址。\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "Apol1oBelvedere",
+      "PubDate": "2022-12-14T03:55:53Z"
+    },
+    {
       "Title": "Mac ventur 更新 13.1，出现重大 bug - macOS",
       "Link": "https://www.v2ex.com/t/902424",
       "Description": "\u003ch1\u003e系统设置\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e点开系统设置\u003c/li\u003e\n\u003cli\u003e点 appleid \u003c/li\u003e\n\u003cli\u003e设置卡死，看 cpu 占用率，appleid （系统设置）占用百分之 50\u003c/li\u003e\n\u003cli\u003e强行点里面的 icloud 可以出现画面要等，最后 icloud 变成空白\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1\u003e重启\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e重启之后还是依旧如此不知道大家没有问题\u003c/li\u003e\n\u003c/ul\u003e\n",
