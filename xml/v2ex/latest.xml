@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>奇怪的 DNS 问题，太多程序能修改系统 DNS 了 - Linux</title>
+      <link>https://www.v2ex.com/t/902759</link>
+      <description>最近在用 tailscale ，这虚拟组网工具配置起来超简单，太爱这样的工具了，在我所有的 windows 操作机和 Linux VPS 上安装都非常顺利，唯独在我的 Arch Linux 笔记本电脑上出了问题：启动 tailscale 后能连同虚拟网的 IP ，但是 DNS 有问题，无法使用 VPS 作为出口（ exit node ）。按照官网的说明调整了还是没用。&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://tailscale.com/kb/1188/linux-dns/#dhcp-dhclient-overwriting-etcresolvconf&#34; rel=&#34;nofollow noopener&#34;&gt;https://tailscale.com/kb/1188/linux-dns/#dhcp-dhclient-overwriting-etcresolvconf&lt;/a&gt;&lt;br /&gt;最后发现是 Arch Linux 的 dhcpcd 在自动更新 resolv.conf 导致的，最终解决方法如下：&lt;br /&gt;&lt;br /&gt;#不要让 dhcpcd 接管 resolv.conf ，增加如下配置&lt;br /&gt;&lt;br /&gt;vim /etc/dhcpcd.conf&lt;br /&gt;nohook resolv.conf&lt;br /&gt;&lt;br /&gt;systemctl reload dhcpcd&lt;br /&gt;&lt;br /&gt;#不要让 NetworkManager 接管 resolv.conf&lt;br /&gt;&lt;br /&gt;vim /etc/NetworkManager/NetworkManager.conf 文件：&lt;br /&gt;[main]&lt;br /&gt;dns=none&lt;br /&gt;&lt;br /&gt;systemctl reload NetworkManager&lt;br /&gt;&lt;br /&gt;#让 systemd-resolved 接管 resolv.conf&lt;br /&gt;&lt;br /&gt;ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf&lt;br /&gt;&lt;br /&gt;systemctl enable --now systemd-resolved&lt;br /&gt;&lt;br /&gt;#重启 tailscaled&lt;br /&gt;systemctl restart tailscaled&lt;br /&gt;&lt;br /&gt;问题解决。&lt;br /&gt;&lt;br /&gt;在 Linux 平台上，能设置系统 DNS 的程序，真是不少，看来以后要多注意了。</description>
+      <author>dbg</author>
+      <pubDate>15 Dec 2022 08:36:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>顶瓜瓜 App，让老父亲来提醒你的坐姿 - 分享创造</title>
+      <link>https://www.v2ex.com/t/902758</link>
+      <description>前几天拙作 App 《顶瓜瓜》获得了一次 App Store Today 推荐，趁热更新一下。&lt;br /&gt;&lt;br /&gt;现在坐姿提醒加了一个自定义提示音的录制功能。&lt;br /&gt;&lt;br /&gt;&lt;div class=&#34;embedded_video_wrapper&#34;&gt;&lt;iframe src=&#34;https://www.youtube.com/embed/BZbeflqX6oQ&#34; class=&#34;embedded_video&#34; allowfullscreen=&#34;&#34; type=&#34;text/html&#34; id=&#34;ytplayer&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;&lt;/div&gt;&lt;br /&gt;之前孩子写作业坐不直，现在可能坐不住了，😁哈哈&lt;br /&gt;&lt;br /&gt;感受父爱不用等，一起来感受老父亲的呵护（呵斥）</description>
+      <author>haozes</author>
+      <pubDate>15 Dec 2022 08:35:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>很认真的提个问题，我该不该回老家给父母传阳 - 问与答</title>
+      <link>https://www.v2ex.com/t/902756</link>
+      <description>&lt;p&gt;我前几天阳了，但是症状很轻，才两天就差不多满血复活了。&lt;/p&gt;&#xA;&lt;p&gt;我哥建议我把这个病毒带回老家让我父母染上，反正迟早都要阳，还不如找个症状轻的阳。&lt;/p&gt;&#xA;&lt;p&gt;我是觉得这个操作有点骚，其实父母在老家不一定会阳，还让我故意千里投毒。而且也不知道同一毒株在不同的人身上，症状差异会不会很大?&lt;/p&gt;&#xA;</description>
+      <author>tuding</author>
+      <pubDate>15 Dec 2022 08:34:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有人盼着自己🐑了的，或者有什么办法尽快确认的。 - 生活</title>
+      <link>https://www.v2ex.com/t/902755</link>
+      <description>据说阳性之后一段时间内不会再复发，总怕现在不🐑以后再🐑耽误事。&lt;br /&gt;&lt;br /&gt;这么说可能有点奇怪，但是其实心情和你知道项目近期就要交付，但是你的项目进度为 0 ，你又不知道到底是三天交付还是一周交付的感觉。&lt;br /&gt;&lt;br /&gt;今天和同学聊天，他也是这种想法，但又有些人觉得自己是哪个“天选之子”，就不论如何也不会生病。&lt;br /&gt;不知道 v 站的各位是怎么想的。就想和各位讨论一下。</description>
+      <author>IdJoel</author>
+      <pubDate>15 Dec 2022 08:31:18 +0000</pubDate>
+    </item>
+    <item>
       <title>docker 映射出来的文件权限怎么调整? - Docker</title>
       <link>https://www.v2ex.com/t/902754</link>
       <description>&lt;p&gt;比如我的 linux 用户是 &lt;code&gt;abc&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;以 nextcloud docker 为例, 默认是以 &lt;code&gt;www-data&lt;/code&gt; 用户跑的, 所以映射出来的文件权限也是 &lt;code&gt;www-data&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;怎么修改映射的文件权限归属是 &lt;code&gt;abc&lt;/code&gt;&lt;/p&gt;&#xA;</description>
