@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求助，我想反代 ipv6，但是报错了 - 问与答</title>
+      <link>https://www.v2ex.com/t/902775</link>
+      <description>&lt;p&gt;用 cf 太慢，我想用 nginx 反代&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;    proxy_pass http://[2409:8a4c:8004:f433:a0f2:15b:78d2:9327];&#xA;    proxy_set_header Host rw2.cc;&#xA;    proxy_set_header X-Real-IP $remote_addr;&#xA;    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#xA;    proxy_set_header REMOTE-HOST $remote_addr;&#xA;    &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;服务器环境是&#xA;OpenResty 1.21.4.1&lt;/p&gt;&#xA;&lt;p&gt;求助大佬解答&lt;/p&gt;&#xA;</description>
+      <author>honkew</author>
+      <pubDate>15 Dec 2022 10:01:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>广东移动是如何检测到的 - 互联网</title>
+      <link>https://www.v2ex.com/t/902774</link>
+      <description>&lt;a target=&#34;_blank&#34; href=&#34;https://s3.bmp.ovh/imgs/2022/12/14/6c80a41afa24f39d.png&#34; rel=&#34;nofollow noopener&#34;&gt;https://s3.bmp.ovh/imgs/2022/12/14/6c80a41afa24f39d.png&lt;/a&gt;</description>
+      <author>a413128</author>
+      <pubDate>15 Dec 2022 09:56:33 +0000</pubDate>
+    </item>
+    <item>
       <title>Nodejs request 模块和 https 模块请求同一个文件 uri 时， request 模块请求失败 - Node.js</title>
       <link>https://www.v2ex.com/t/902773</link>
       <description>&lt;p&gt;神奇的是，使用 https 模块时可以正常访问 uri 并保存在本地，但是使用 request 模块时请求都发不出去，百思不得其解，报错信息如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;Error: tunneling socket could not be established, cause=getaddrinfo ENOTFOUND 7890&#xA;    at ClientRequest.onError (D:\www\BWK_Spider\node_modules\tunnel-agent\index.js:177:17)&#xA;    at Object.onceWrapper (node:events:642:26)&#xA;    at ClientRequest.emit (node:events:527:28)&#xA;    at Socket.socketErrorListener (node:_http_client:454:9)&#xA;    at Socket.emit (node:events:527:28)&#xA;    at emitErrorNT (node:internal/streams/destroy:157:8)&#xA;    at emitErrorCloseNT (node:internal/streams/destroy:122:3)&#xA;    at processTicksAndRejections (node:internal/process/task_queues:83:21) {&#xA;  code: &#39;ECONNRESET&#39;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;request 模块代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;const request = require(&#34;request&#34;);&#xA;const fs = require(&#34;fs&#34;);&#xA;&#xA;request(&#34;https://xxx.xx.xx/20_C12100030.pdf&#34;)&#xA;  .pipe(fs.createWriteStream(&#34;C:\\Users\\444\\Desktop\\20_C12100030.pdf&#34;))&#xA;  .on(&#34;close&#34;, function (err) {&#xA;    console.log(&#34;下载完成&#34;);&#xA;    console.log(err);&#xA;  })&#xA;  .on(&#34;error&#34;, function (err) {&#xA;    console.log(err);&#xA;  });&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;https 模块代码&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;const https = require(&#34;https&#34;);&#xA;&#xA;const file = fs.createWriteStream(&#xA;  &#34;C:\\Users\\444\\Desktop\\20_C12100030.pdf&#34;&#xA;);&#xA;https&#xA;  .get(&#34;https://xxx.xx.xx/20_C12100030.pdf&#34;, (response) =&amp;gt; {&#xA;    console.log(&#34;请求成功&#34;);&#xA;    response.pipe(file);&#xA;&#xA;    // after download completed close filestream&#xA;    file.on(&#34;finish&#34;, () =&amp;gt; {&#xA;      file.close();&#xA;      console.log(&#34;Download Completed&#34;);&#xA;    });&#xA;  })&#xA;  .on(&#34;error&#34;, (err) =&amp;gt; {&#xA;    console.log(&#34;Error: &#34;, err.message);&#xA;  });&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;有遇到这种情况的吗？网上搜索都说是 npm 代理导致的，但实际不是，否则使用 https 模块时也应该是请求发不出去才对。&lt;/p&gt;&#xA;</description>
