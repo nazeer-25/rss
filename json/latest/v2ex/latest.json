@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "macOS 下，如何在日历里插入指向邮件的链接呢？ - 问与答",
+      "Link": "https://www.v2ex.com/t/903013",
+      "Description": "omnifocus 可以，把邮件拖进去就会生成链接。\u003cbr /\u003e\u003cbr /\u003e不知道为何各种日历 app 都不支持此功能。\u003cbr /\u003e\u003cbr /\u003e网上搜到了手动添加的方法， 但点链接后，\u003ca target=\"_blank\" href=\"http://mail.app\" rel=\"nofollow noopener\"\u003email.app\u003c/a\u003e 会报错，说找不到邮件。\u003cbr /\u003e\u003cbr /\u003e有知道如何解决的么？",
+      "Author": "ttgo",
+      "PubDate": "2022-12-16T09:27:09Z"
+    },
+    {
+      "Title": "IDEA 更新版本后， copilot 退出了登录，并且登录授权无效 - 程序员",
+      "Link": "https://www.v2ex.com/t/903012",
+      "Description": "\u003cp\u003e前几天，我高兴的更新了 IDEA 和其中的所有插件，但是更新完我发现，Copilot 退出了登录。\n我尝试再次登录它（国内给他墙了，我开了代理），浏览器页面显示成功授权，IDEA 也授权完毕，但是 copilot 还是处于未登录状态，真的吐了。\n最后吐槽一句，国内自己搞的垃圾，还不允许用别人的产品，什么得行，终究还是和以前不一样咯，自己没本事还打击别人的，进个 hub 还要开魔法才可以。\u003c/p\u003e\n",
+      "Author": "janyork",
+      "PubDate": "2022-12-16T09:25:06Z"
+    },
+    {
+      "Title": "flask + nginx + uwsgi +docker-compose - Python",
+      "Link": "https://www.v2ex.com/t/903011",
+      "Description": "\u003cp\u003edocker-compose.yml:\u003c/p\u003e\n\u003cp\u003eversion: \"3.3\"\u003c/p\u003e\n\u003cp\u003eservices:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e  flask_app:\n\n    build: ./flask_app  \n\n    container_name: flask_app\n\n    restart: always\n\n    environment:             \n      - APP_NAME=MyFlaskApp\n\n    expose:                  \n      - 8080\n\n  nginx:\n    build: ./nginx\n\n    container_name: nginx\n\n    restart: always\n\n    ports:                  \n      - \"80:80\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003enginx.conf\u003c/p\u003e\n\u003cp\u003eserver {\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003elisten 80;                    \ncharset UTF-8;\nclient_max_body_size 30M;\nlocation / {\n    include uwsgi_params;\n    uwsgi_pass flask:8080;   \n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e}\u003c/p\u003e\n\u003cp\u003euwsgi.ini\u003c/p\u003e\n\u003cp\u003e[uwsgi]\nwsgi-file = \u003ca href=\"http://app.py\" rel=\"nofollow\"\u003eapp.py\u003c/a\u003e\u003cbr/\u003e\ncallable = app\u003cbr/\u003e\nsocket = :8080\u003cbr/\u003e\nprocesses = 4\u003cbr/\u003e\nthreads = 2\u003cbr/\u003e\nmaster = true\u003cbr/\u003e\nchmod-socket = 660\u003cbr/\u003e\nvacuum = true\u003cbr/\u003e\ndie-on-term = true\u003cbr/\u003e\nbuffer-size = 65535\u003cbr/\u003e\nlimit-post = 104857600\u003cbr/\u003e\nlogto = /flask_app/app.log\u003c/p\u003e\n\u003cp\u003eDockerfile\u003c/p\u003e\n\u003cp\u003eFROM python:3.6\u003c/p\u003e\n\u003cp\u003eWORKDIR /app\u003c/p\u003e\n\u003cp\u003eADD . /app\u003c/p\u003e\n\u003cp\u003eRUN pip install -r requirements.txt\u003c/p\u003e\n\u003cp\u003eCMD [\"uwsgi\", \"uwsgi.ini\"]\u003c/p\u003e\n\u003cp\u003e以上分别是我 docker-compose, nginx, uwsgi 以及 dockerfile 的配置，但是启动话只有 nginx 启动了，另外一个一直在重启的状态，求解\u003c/p\u003e\n",
+      "Author": "ymglucas",
+      "PubDate": "2022-12-16T09:23:50Z"
+    },
+    {
+      "Title": "写了个 v 站抽奖小工具 - 分享创造",
+      "Link": "https://www.v2ex.com/t/903010",
+      "Description": "\u003cp\u003e特点：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e爬取回帖用户，并对回帖用户进行了去重，去除了楼主的回帖\u003c/li\u003e\n\u003cli\u003e使用了 xmr 实时区块高度作为随机数种子，保证了每次抽奖的公平性\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e示例：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e$ python3 main.py\n请输入帖子 ID: 666666\n请输入抽奖人数: 5\n符合条件的用户共有 33 人\n当前时间: 2022-12-16 09:13:49  \n当前区块高度: 2778411\n抽奖结果: \nleesheen\nduskpark\nGladoos\nEdwardYoung\nmaemual\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e仓库链接 \u003ca href=\"https://github.com/wcwac/v2ex-lottery\" rel=\"nofollow\"\u003ehttps://github.com/wcwac/v2ex-lottery\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "shoa",
+      "PubDate": "2022-12-16T09:21:55Z"
+    },
+    {
+      "Title": "垃圾百度怎么还不倒闭！ - 问与答",
+      "Link": "https://www.v2ex.com/t/903009",
+      "Description": "搜索个本地医院的官网，全特么是广告。",
+      "Author": "pianjiao",
+      "PubDate": "2022-12-16T09:21:48Z"
+    },
+    {
       "Title": "腾讯云会封 853 端口吗 - 程序员",
       "Link": "https://www.v2ex.com/t/903008",
       "Description": "\u003cp\u003e在腾讯云上搭建了 adguardhome,目前 ios,mac,win11 都可以使用 doh,唯独安卓只支持 dot(使用 853 端口),腾讯云会封吗\u003c/p\u003e\n",
