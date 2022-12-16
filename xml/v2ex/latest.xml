@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>家用 WiFi 6 和漫游的 ap 选购问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/902905</link>
+      <description>&lt;p&gt;前段时间宽带出了些小问题，请电信师傅上门换猫的时候突然想起来网络拓扑已经 3 年没动过了。&lt;/p&gt;&#xA;&lt;p&gt;打算这次趁这个新鲜劲换 WiFi 6 + 漫游(k/v)。各位有什么经验或者想法欢迎提出。&lt;/p&gt;&#xA;&lt;p&gt;弱电箱里有入户猫 + Ubnt ER-X (桥接 PPPoE 有线主路由) + 4 条铜线(CAT5e/CAT6) &lt;/p&gt;&#xA;&lt;p&gt;=&amp;gt; 连接饭厅和两个房间里(EX7000 EX6150 n 年前的 Mi3R-openwrt)AP&lt;/p&gt;&#xA;&lt;p&gt;现在打算把各个原有的 AP 换成支持 WiFi6+千兆+支持漫游的，ER-X 不打算动了（别的放不进）。各个 AP 还是保持网线回 ER-X 。&lt;/p&gt;&#xA;&lt;p&gt;看过 TP-Link 家易展的方案，但是不知道实际效果如何，麻烦各位如果有使用可以提供些建议。&lt;/p&gt;&#xA;&lt;p&gt;还有一个小疑问，TP 的易展都是有一个易展路由作为主路由的，但是 ER-X 不动的情况下，每个易展路由都只能在 ap 模式下使用，这样易展的漫游会有影响吗&lt;/p&gt;&#xA;</description>
+      <author>mijazz</author>
+      <pubDate>16 Dec 2022 03:51:24 +0000</pubDate>
+    </item>
+    <item>
+      <title>vue3+ts 根据路由来写生成侧边栏菜单, 总感觉 ts 用起来太别扭, 教教我正确用法 - Vue.js</title>
+      <link>https://www.v2ex.com/t/902903</link>
+      <description>&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;&#xA;  &amp;lt;div class=&#34;sidebar&#34;&amp;gt;&#xA;    &amp;lt;div&amp;gt;{{ t(&#39;menu.dashboard&#39;) }}&amp;lt;/div&amp;gt;&#xA;    &amp;lt;n-scrollbar&amp;gt;&#xA;      &amp;lt;n-menu :options=&#34;menuOptions&#34; /&amp;gt;&#xA;    &amp;lt;/n-scrollbar&amp;gt;&#xA;  &amp;lt;/div&amp;gt;&#xA;&amp;lt;/template&amp;gt;&#xA;&#xA;&amp;lt;script lang=&#34;ts&#34; setup&amp;gt;&#xA;import { h, Component, ref, watch } from &#39;vue&#39;&#xA;import { useI18n } from &#39;vue-i18n&#39;&#xA;import { RouteRecordRaw, RouterLink } from &#39;vue-router&#39;&#xA;import { useRouter } from &#39;vue-router&#39;&#xA;import { computed } from &#39;vue&#39;&#xA;import { useAppStore } from &#39;@/store&#39;&#xA;import type { MenuOption } from &#39;naive-ui&#39;&#xA;import { NIcon } from &#39;naive-ui&#39;&#xA;import { DashboardOutlined as DashboardIcon } from &#39;@vicons/antd&#39;&#xA;&#xA;const router = useRouter()&#xA;&#xA;const { t, locale } = useI18n()&#xA;&#xA;console.log(router.getRoutes())&#xA;const appStore = useAppStore()&#xA;const routers = computed(() =&amp;gt; {&#xA;  return appStore.routers.filter(value =&amp;gt; !value.meta?.hidden)&#xA;})&#xA;const menuOptions = ref&amp;lt;MenuOption[]&amp;gt;([])&#xA;&#xA;const iconMap: { [index: string]: any } = {&#xA;  Dashboard: DashboardIcon&#xA;}&#xA;&#xA;function renderIcon(icon: Component) {&#xA;  return () =&amp;gt; h(NIcon, null, { default: () =&amp;gt; h(icon) })&#xA;}&#xA;&#xA;const genMenu = () =&amp;gt; {&#xA;  menuOptions.value = []&#xA;  for (const item of routers.value) {&#xA;    const children = []&#xA;    for (const item2 of item?.children || []) {&#xA;      children.push({&#xA;        label: () =&amp;gt;&#xA;          h(&#xA;            RouterLink,&#xA;            {&#xA;              to: {&#xA;                name: item2.name&#xA;              }&#xA;            },&#xA;            { default: () =&amp;gt; t(item2.meta?.locale as string) }&#xA;          ),&#xA;        key: item2.name as string&#xA;      })&#xA;    }&#xA;    const menu: MenuOption = {&#xA;      key: item.name as string,&#xA;      label: t(item.meta?.locale as string),&#xA;      icon: renderIcon(iconMap[item.name as string]),&#xA;      children&#xA;    }&#xA;    // eslint-disable-next-line @typescript-eslint/ban-ts-comment&#xA;    // @ts-ignore&#xA;    menuOptions.value.push(menu)&#xA;  }&#xA;}&#xA;&#xA;genMenu()&#xA;&#xA;watch(&#xA;  () =&amp;gt; locale.value,&#xA;  () =&amp;gt; {&#xA;    genMenu()&#xA;  }&#xA;)&#xA;&amp;lt;/script&amp;gt;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;vue-router 的类型 RouteRecordRaw, 一个属性有好几种类型, 然后用起来 ts 总是报类型不匹配, 用了大量 as string 来解决报错, 好难受, 我之前都是写 js, 可能对 ts 理解有误, 怎么才能优雅的使用, 有个报错说我嵌套太深, 还不得不用 // @&lt;a href=&#34;/member/ts-ignore&#34;&gt;ts-ignore&lt;/a&gt; 来解决&lt;/p&gt;&#xA;</description>
+      <author>xpyusrs</author>
+      <pubDate>16 Dec 2022 03:49:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>领导专门拉了个会批斗了我一番。大伙帮忙看下，我的设计思路很离谱么 - 程序员</title>
+      <link>https://www.v2ex.com/t/902902</link>
+      <description>一大早，技术 Leader 专门拉了个会把所有技术拉过来开会，没有指名道姓但是基本上主要就是批我。看来真把领导气坏了，hhhh&lt;br /&gt;&lt;br /&gt;前情：&lt;br /&gt;产品有个需求，我们开会对过，大概 1 前端 1 后端的小活动，具体为&lt;br /&gt;在现有业务某个入口，根据一定条件展示优惠券。能领取优惠券的用户，发一下验证码，然后调用另一个团队领优惠券的接口。有部分黑名单用户不能领，还有些其他小限制，比如只能领一次，优惠券会过期之类的。&lt;br /&gt;&lt;br /&gt;是一个低频活动，每天几千 PV 左右的入口展示量级这样。&lt;br /&gt;&lt;br /&gt;我的思路：&lt;br /&gt;Redis 里存黑名单用户，大概 1w 人，可以动态增删。&lt;br /&gt;两张 Mysql 表&lt;br /&gt;&lt;br /&gt;一张存优惠券，包括优惠券的名字，数量，金额，一些关联条件等等。&lt;br /&gt;一张存领取记录，用户信息，优惠券 id ，时间，用来判断用户是不是领过。&lt;br /&gt;&lt;br /&gt;写了大概一千字的设计文档，包含接口定义等等，预计 1 周开发时间吧，我觉得是个比较小的需求，产品的预期也是先简单做一下看看效果，毕竟量也不大。写完美滋滋发给领导，然后遭到（女）领导的狂喷：&lt;br /&gt;&lt;br /&gt;我草你这啥啊设计的，完全不符合你的职级啊！&lt;br /&gt;「什么东西都按需求白描，就不会有好的架构。」&lt;br /&gt;&lt;br /&gt;「你现在设计的服务，最大的问题就是太沉浸在需求里了，不能高于需求，设计的太死了，自己给自己留的余地太少。」&lt;br /&gt;&lt;br /&gt;「尽量要把每个能力都抽象出来，可配置，不然就又只能重构，设计阶段就是干这个事情的，如果只是需求 by 需求的做，随便找个外包搞就行了。」&lt;br /&gt;&lt;br /&gt;我......&lt;br /&gt;咱就是说，一个小的发放优惠券活动，也没人跟我说要做个「活动中台」啊。&lt;br /&gt;这么一个小的验证性需求，一定要搞个巨复杂的系统出来吗。我们都做过太多无用的业务，最烦的就是过度设计。你设计的再完善最后也不可能满足产品所有需求，难不成啥需求都得做一套低代码平台出来么。&lt;br /&gt;&lt;br /&gt;好的架构应当是随着业务的发展生长出来的不是么。&lt;br /&gt;&lt;br /&gt;所以老板到底想要的是啥子呢？想满足用户的需求可真难啊。</description>
+      <author>xiaotianhu</author>
+      <pubDate>16 Dec 2022 03:49:05 +0000</pubDate>
+    </item>
+    <item>
       <title>rewind.ai 开始付费公测了🤔 - Apple</title>
       <link>https://www.v2ex.com/t/902901</link>
       <description>一个月 20 刀，还挺贵的。</description>
