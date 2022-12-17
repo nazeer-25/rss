@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有没有 1k 到 1k5 左右好玩的电子产品 - 问与答",
+      "Link": "https://www.v2ex.com/t/903173",
+      "Description": "\u003cp\u003e今年活干得好，领导说年底奖励一个礼物，1k-1k5 左右，不能是钱只能是东西，想了想都不知道买啥好，来头脑风暴一下，AirPods 已有，其他苹果全家桶这个价格也买不到，机械键盘也有，狗屁王也有。\u003c/p\u003e\n",
+      "Author": "seers",
+      "PubDate": "2022-12-17T10:17:56Z"
+    },
+    {
+      "Title": "请教一下，为什么会输出`Unclosed connection`警告？ - Python",
+      "Link": "https://www.v2ex.com/t/903171",
+      "Description": "\u003cp\u003e请教一下，为什么会输出\u003ccode\u003eUnclosed connection\u003c/code\u003e警告？\u003cbr/\u003e\n我在\u003ccode\u003e__aexit__\u003c/code\u003e明明已经\u003ccode\u003eclose\u003c/code\u003e了\u003cbr/\u003e\n看官方的 issue 说是什么要\u003ccode\u003eaiohttp==4.0\u003c/code\u003e才能解决？\n不知道我写的代码有没有问题\u003cbr/\u003e\n现在我的解决方式屏蔽了这个\u003ccode\u003ewarning\u003c/code\u003e\u003cbr/\u003e\n麻烦各位了🥺  \u003c/p\u003e\n\u003ch2\u003e版本\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003ePython 3.9.15\u003c/li\u003e\n\u003cli\u003eaiohttp==3.8.3\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e输出\u003c/h2\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2022/12/17/zHvwsU.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e代码\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003e# -*- coding: utf-8 -*-\nimport asyncio\n\nfrom aiohttp import ClientResponse, ClientTimeout\n\nfrom common import config\n\nfrom aiohttp_retry import RetryClient, ClientSession\n\n\nclass Request:\n\n    def __init__(self, *args, **kwargs):\n        self.client_session = ClientSession()\n        self.retry_client = RetryClient(client_session=self.client_session)\n        self.request = self.retry_client.request(*args, **kwargs)\n\n    async def __aenter__(self) -\u0026gt; ClientResponse:\n        return await self.request\n\n    async def __aexit__(self, exc_type, exc_val, exc_tb):\n        await self.client_session.close()\n        await self.retry_client.close()\n\n\ndef get(url, params=None, headers=None):\n    if headers is None:\n        headers = {}\n    if params is None:\n        params = {}\n    return request(\"GET\", url, params=params, headers={\n        **config.http['headers'], **headers\n    })\n\n\ndef request(method, url, params=None, headers=None, data=None):\n    if headers is None:\n        headers = {}\n    if params is None:\n        params = {}\n    if data is None:\n        data = {}\n\n    return Request(\n        method, config.http['http_proxy'] + url,\n        params=params, proxy=config.http['proxy'],\n        headers={**config.http['headers'], **headers},\n        data=data, ssl=False,\n        timeout=ClientTimeout(total=config.http['timeout']))\n\n\ndef post(url, data=None, headers=None):\n    if headers is None:\n        headers = {}\n    if data is None:\n        data = {}\n    return request(\"POST\", url, data=data, headers={\n        **config.http['headers'], **headers\n    })\n\n\nif __name__ == '__main__':\n    async def test():\n        for i in range(100):\n            async with request(\"GET\", \"https://www.baidu.com\") as r:\n                print(r.status)\n    asyncio.get_event_loop().run_until_complete(test())\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "lizhien",
+      "PubDate": "2022-12-17T10:12:18Z"
+    },
+    {
+      "Title": "求方案：自动播报各种 sns 上自己的 timeline 内容正文， Android 端 - 问与答",
+      "Link": "https://www.v2ex.com/t/903170",
+      "Description": "如题。比如 B 站，蓝鸟，红 dit 等等。",
+      "Author": "voidtools",
+      "PubDate": "2022-12-17T10:11:46Z"
+    },
+    {
+      "Title": "小白从宫崎英高产生的疑惑,游戏制作最重要的不是程序员是游戏制作人吗? - 问与答",
+      "Link": "https://www.v2ex.com/t/903169",
+      "Description": "\u003cp\u003e看游戏玩家老是说宫崎英高是神,小岛秀夫是神....然后查了一下,\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e宫崎英高 是游戏制作人.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e然后查了一下游戏制作人工作, 开发总监和 创意总监\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e我是知道 PM 之类的项目经理压力大,来自大领导之类的客户之类的压力.但是意思是说如果一家公司有很多钱 就能出很好的作品吗,感觉这个肯定不成立.\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e小白....\u003c/p\u003e\n",
+      "Author": "jingcoco",
+      "PubDate": "2022-12-17T10:10:54Z"
+    },
+    {
       "Title": "京东越来越没下限了，下单强行绑定移动电话卡... - 问与答",
       "Link": "https://www.v2ex.com/t/903168",
       "Description": "\u003cp\u003e下单页面强制绑定，必须下单后才能取消...不知道是否会对个人信息有影响？有遇到的 v2er 么？\u003c/p\u003e\n",
