@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>为啥这个配置反代 google,点击图标还是跳转 www.google.com? - 问与答</title>
+      <link>https://www.v2ex.com/t/903275</link>
+      <description>&lt;p&gt;这是 nginx 配置,其他 ok.但是点击图标还是跳转 &lt;a href=&#34;http://www.google.com&#34; rel=&#34;nofollow&#34;&gt;www.google.com&lt;/a&gt;?&lt;/p&gt;&#xA;&lt;p&gt;已经用 sub_filter 替换了哈~~&lt;/p&gt;&#xA;&lt;p&gt;感谢&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;1222222.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://7up.pics/images/2022/12/18/1222222.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;location / {&#xA;&#x9;&#x9;proxy_ssl_name www.google.com;&#xA;&#x9;&#x9;proxy_ssl_server_name on;&#xA;&#x9;&#x9;proxy_redirect off;&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;proxy_pass https://www.google.com;&#xA;&#x9;&#x9;proxy_set_header Host www.google.com;&#xA;&#x9;&#x9;proxy_set_header X-Real-IP $remote_addr;&#xA;&#x9;&#x9;proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;proxy_cookie_domain www.google.com mydomain.com; # 将 www.google.com 域名中发送的 cookie ，都重写为 mydomain.com 域名中的 cookie 。&#xA;&#x9;&#x9;proxy_set_header User-Agent $http_user_agent;&#xA;&#x9;&#x9;proxy_set_header Referer www.google.com;&#xA;&#x9;&#x9;proxy_set_header Accept-Encoding &#34;&#34;;&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;sub_filter &#39;www.google.com&#39; &#39;mydomain.com&#39;;&#xA;&#x9;&#x9;sub_filter_once off;&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;if ($http_user_agent ~* (baiduspider|360spider|haosouspider|googlebot|soso|bing|sogou|yahoo|sohu-search|yodao|YoudaoBot|robozilla|msnbot|MJ12bot|NHN|Twiceler)) {&#xA;&#x9;&#x9;return  403;&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>jsjcjsjc</author>
+      <pubDate>18 Dec 2022 05:17:31 +0000</pubDate>
+    </item>
+    <item>
       <title>发烧第二天，现在都还是 38 度，问下大家吃什么退烧药。 - 问与答</title>
       <link>https://www.v2ex.com/t/903273</link>
       <description>&lt;p&gt;吃了复方氨酚烷胺片和 999 感冒灵，没什么效果。&#xA;阳不阳不清楚，没检测，估计是了，我几个同事也是一样。&lt;/p&gt;&#xA;</description>
