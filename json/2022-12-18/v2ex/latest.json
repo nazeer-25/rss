@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "电信 IPv6 无前缀(IPv6-PD)下发内网 IPv6 问题讨论 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/903292",
+      "Description": "\u003cp\u003e背景：陕西电信，OpenWrt 拨号，光猫桥接\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eOpenWrt 22.03.2\nodhcpd-ipv6only 2022-03-22-860ca900-1\nodhcp6c 2022-08-05-7d21e8d8-18 \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e起因是某天半夜 pppoe 突然断线重播，起来一看下发的 IPv6-PD 前缀没了，只剩了一个 /64 地址分配给路由器，下面的设备全部没有 IPv6 地址\u003c/p\u003e\n\u003cp\u003e换用 relay 方法尝试之后，能分配到地址了，但是 OpenWrt 日志一直报错，内网设备无法访问 v6 网站\n报错:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eodhcpd[1605]: Failed to send to 240e:xxx%wan@pppoe-wan (Bad file descriptor)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e配置\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003econfig dhcp 'lan'\n\toption interface 'lan'\n\toption start '100'\n\toption limit '150'\n\toption leasetime '12h'\n\toption dhcpv4 'server'\n\toption ra 'relay'\n\toption ndp 'relay'\n\toption dhcpv6 'relay'\n\nconfig dhcp 'wan'\n\toption interface 'wan'\n\toption ignore '1'\n\toption master '1'\n\toption ra 'relay'\n\toption ndp 'relay'\n\toption dhcpv6 'relay'\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e参考 \u003ca href=\"https://www.v2ex.com/t/496832#r_6295993\" rel=\"nofollow\"\u003ev2ex LGA1150 的回复链接\u003c/a\u003e 发现用内网设备 ping 了一下路由器就好了？？？最后通过手动加路由表解决。\u003c/p\u003e\n\u003cp\u003e之前说是 odhcpd 的 bug 但是已经过了 4 年，还没有修复吗？版本也更新了很多了。\u003c/p\u003e\n",
+      "Author": "alicespace",
+      "PubDate": "2022-12-18T06:40:21Z"
+    },
+    {
       "Title": "MacBook pro（M1 pro）从 Ventura 降级至 Monterey 后出现很多 bug - macOS",
       "Link": "https://www.v2ex.com/t/903291",
       "Description": "\u003cp\u003e新 MBP （ 14 英寸）刚买不久，预装的是 Monterey ，顺滑。手贱升级了 Ventura ，觉得系统设置大改不习惯、台前调度用不到、某些常用软件的更新还不及时，所以联系了下水果客服，按步骤抹盘、在线重装 Monterey ，新系统出现的 bug 包括不限于以下几点：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e打开第三方软件很慢，如 Chrome 、Edge （等待五秒以上，一打开就是 2 个重复窗口）\u003c/li\u003e\n\u003cli\u003e活动检测器刷新数据非常慢、非常慢\u003c/li\u003e\n\u003cli\u003e重启或开机时外接键盘有一半几率不识别\u003c/li\u003e\n\u003cli\u003e随航时而死机\u003c/li\u003e\n\u003cli\u003e随航时发出噼里啪啦的电流声（没找出是 MBP 还是 iPad 的声音）\u003c/li\u003e\n\u003cli\u003e保存文档变得很慢，比如 Illustrator\u003c/li\u003e\n\u003cli\u003e打开某些软件时不显示窗口，如活动检测器只出现在程序坞中、安装包只以虚拟光驱的状态出现在桌面上，总之就是让你以为它根本没有打开\u003c/li\u003e\n\u003cli\u003e使用时有风扇声（之前完全没有），大概是发热明显了？只开了 Illustrator\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e是在线重装的系统太考验网速了吗？难道是安装时丢包了？但是，不完整的安装包，肯定是无法正常安装的不是嘛……（哭\u003c/p\u003e\n",
