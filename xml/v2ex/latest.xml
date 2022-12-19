@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ping 可以访问，但是 curl 和 wget 都不可以，会是什么原因 - Linux</title>
+      <link>https://www.v2ex.com/t/903538</link>
+      <description>&lt;p&gt;项目需要访问单点认证的网址&#xA;单点认证那边是没问题的，防火墙也是开的，其他地方没有做限制的了&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# curl -v https://login.XXX.com/XXX/login -4&#xA;* About to connect() to login.jxcia.com port 443 (#0)&#xA;*   Trying 117.XX.XX.X...&#xA;* Connection refused&#xA;* Failed connect to login.XXX.com:443; Connection refused&#xA;* Closing connection 0&#xA;curl: (7) Failed connect to login.XXX.com:443; Connection refused&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;ip addr 输出了很多的虚拟网卡，有没有可能跟这个有关&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# ip addr&#xA;1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000&#xA;    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00&#xA;    inet 127.0.0.1/8 scope host lo&#xA;       valid_lft forever preferred_lft forever&#xA;    inet6 ::1/128 scope host &#xA;       valid_lft forever preferred_lft forever&#xA;91906: vethbcb7517@if91905: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc noqueue master docker_gwbridge state UP group default &#xA;    link/ether fa:0f:2e:xx:xx:xx brd ff:ff:ff:ff:ff:ff link-netnsid 17&#xA;    inet6 fe80::f80f:2eff:fe14:85c8/64 scope link &#xA;       valid_lft forever preferred_lft forever&#xA;2: ens18: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000&#xA;    link/ether fe:fc:fe:52:0c:be brd ff:ff:ff:ff:ff:ff&#xA;    inet 10.10.2.13/24 brd 10.10.2.255 scope global noprefixroute ens18&#xA;       valid_lft forever preferred_lft forever&#xA;    inet 172.198.0.11/20 brd 172.198.15.255 scope global noprefixroute ens18&#xA;       valid_lft forever preferred_lft forever&#xA;    inet6 fe80::3307:1b7b:406a:9543/64 scope link noprefixroute &#xA;       valid_lft forever preferred_lft forever&#xA;3: virbr0: &amp;lt;NO-CARRIER,BROADCAST,MULTICAST,UP&amp;gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000&#xA;    link/ether 52:54:00:15:da:c4 brd ff:ff:ff:ff:ff:ff&#xA;    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0&#xA;       valid_lft forever preferred_lft forever&#xA;94980: veth32e54a5@if94979: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc noqueue master docker_gwbridge state UP group default &#xA;    link/ether 02:69:2a:b4:aa:77 brd ff:ff:ff:ff:ff:ff link-netnsid 28&#xA;    inet6 fe80::69:2aff:feb4:aa77/64 scope link &#xA;       valid_lft forever preferred_lft forever&#xA;4: virbr0-nic: &amp;lt;BROADCAST,MULTICAST&amp;gt; mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000&#xA;    link/ether 52:54:00:15:da:c4 brd ff:ff:ff:ff:ff:ff&#xA;5: docker_gwbridge: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc noqueue state UP group default &#xA;    link/ether 02:42:60:58:c0:c2 brd ff:ff:ff:ff:ff:ff&#xA;    inet 172.200.0.1/16 brd 172.200.255.255 scope global docker_gwbridge&#xA;       valid_lft forever preferred_lft forever&#xA;    inet6 fe80::42:60ff:fe58:c0c2/64 scope link &#xA;       valid_lft forever preferred_lft forever&#xA;94982: veth03890d9@if94981: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc noqueue master docker_gwbridge state UP group default &#xA;    link/ether b2:6b:9c:5d:5a:79 brd ff:ff:ff:ff:ff:ff link-netnsid 27&#xA;    inet6 fe80::b06b:9cff:fe5d:5a79/64 scope link &#xA;       valid_lft forever preferred_lft forever&#xA;6: docker0: &amp;lt;NO-CARRIER,BROADCAST,MULTICAST,UP&amp;gt; mtu 1500 qdisc noqueue state DOWN group default &#xA;    link/ether 02:42:2a:8a:be:13 brd ff:ff:ff:ff:ff:ff&#xA;    inet 172.199.0.1/16 brd 172.199.255.255 scope global docker0&#xA;       valid_lft forever preferred_lft forever&#xA;91916: vethd710460@if91915: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc noqueue master docker_gwbridge state UP group default &#xA;    link/ether 5e:b0:64:db:8e:c4 brd ff:ff:ff:ff:ff:ff link-netnsid 18&#xA;    inet6 fe80::5cb0:64ff:fedb:8ec4/64 scope link &#xA;       valid_lft forever preferred_lft forever&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>twofox</author>
+      <pubDate>19 Dec 2022 09:14:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>小米 Buds 4 耳机，给大家避个坑 - 分享发现</title>
+      <link>https://www.v2ex.com/t/903537</link>
+      <description>说明书扫码，iOS 版本的 App 还没上线。这音质，人声一股硬铁片摩擦的声音。低音？不存在的！一丁点儿都没得！客服到是挺速度，给完差评就打电话过来了。说是要用 App 更新一下。我也知道啊，可问题是我没得安卓手机啊，就算暂时找人借一下手机更新了，以后呢？您内 iOS 的 App 嘛时候上线啊？&lt;br /&gt;&lt;br /&gt;不过有一说一，这耳机去噪效果做的还是可以的（不是很强，但至少能做出效果，很不容易）&lt;br /&gt;&lt;br /&gt;看别人的购买经验，学着用 EQ 调了下，虽然还是没低音，但至少人声不再像被人捏着脖子的鸭子叫了&lt;br /&gt;&lt;br /&gt;另外，哪位大佬有经验的能不能给个 EQ 的调整图，我来抄抄，先谢过啦</description>
+      <author>newaccount</author>
+      <pubDate>19 Dec 2022 09:12:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>谈谈将 chatgpt 整合进搜索的一种方法 - 分享发现</title>
+      <link>https://www.v2ex.com/t/903536</link>
+      <description>&lt;p&gt;目前已经有了一个 chatgpt for Google 扩展，可以在搜索结果页右侧展示 chatgpt 的结果。&lt;/p&gt;&#xA;&lt;p&gt;如果以一种对话框的形式呈现，是不是效果会更好呢？&lt;/p&gt;&#xA;</description>
+      <author>searchpreview</author>
+      <pubDate>19 Dec 2022 09:11:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>Python /Django 用人大金仓数据库 有有经验的吗 - Python</title>
+      <link>https://www.v2ex.com/t/903535</link>
+      <description>&lt;p&gt;在金仓官网下载了 python 连接金仓数据库的驱动包 ksycopg2 ，并阅读了官方文档，但还是卡在了 python 导入 ksycopg2 包这一步。&lt;/p&gt;&#xA;&lt;p&gt;系统是 windows x64 ，金仓官方提供的 python 驱动包只支持 python3.5 也装了，VC12 运行时也装了。按照指导将 ksycopg2 文件夹放在了 python 的 site-packages 文件夹下。&lt;/p&gt;&#xA;&lt;p&gt;然后就是测试该包能不能导入，卡在这里。pip list 一下也没有这个包，cmd 进入 python 模式 import ksycopg2 报错&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;Traceback (most recent call last):&#xA;  File &#34;&amp;lt;stdin&amp;gt;&#34;, line 1, in &amp;lt;module&amp;gt;&#xA;  File &#34;C:\Users\***\AppData\Local\Programs\Python\Python35\lib\site-packages\ksycopg2\__init__.py&#34;, line 51, in &amp;lt;module&amp;gt;&#xA;    from ksycopg2._ksycopg import (                     # noqa&#xA;ImportError: DLL load failed: 找不到指定的模块。&#xA;&amp;gt;&amp;gt;&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;是我哪里操作不对吗= =&lt;/p&gt;&#xA;</description>
+      <author>IVeverKB</author>
+      <pubDate>19 Dec 2022 09:06:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>不想走流程 做核酸和给那些 完全不认真看核酸码的地方了 - 问与答</title>
+      <link>https://www.v2ex.com/t/903534</link>
+      <description>&lt;p&gt;之前记得有个网址 可以自己生产健康码 请问是哪个&lt;/p&gt;&#xA;</description>
+      <author>vanvan00097</author>
+      <pubDate>19 Dec 2022 09:06:26 +0000</pubDate>
+    </item>
+    <item>
       <title>是个别体质问题，还是 TP 的路由真的不咋地？ - 宽带症候群</title>
       <link>https://www.v2ex.com/t/903533</link>
       <description>&lt;p&gt;型号是 XDR6080 ，买来当 AP 用的，经常遇到 iPhone 信号满格但提示这个 Wifi 无网络连接，自动跳成了流量。除了苹果设备，家里的 Android 也会这种问题，现象和苹果设备类似，型号满但上不了网。&lt;/p&gt;&#xA;&lt;p&gt;以前用的闲鱼收的洋垃圾二手 Aruba ，虽然速度慢，但稳的一批。&lt;/p&gt;&#xA;</description>
