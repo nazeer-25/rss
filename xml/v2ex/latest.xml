@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>群晖 916+ 虚拟机 openwrt 千兆跑不满 - OpenWrt</title>
+      <link>https://www.v2ex.com/t/903588</link>
+      <description>家里原来电信 200M ，最近活动加了 10 块升级了个套餐，宽带到千兆，送了个万兆光猫（千兆 Lan 口）和 WIFI6 路由器（没用）。&lt;br /&gt;我家里的拓扑就是光猫桥接，接到 916+NAS ，NAS 虚拟机 openwrt ，接出来到两个 Linksys MX8400 做 AP 。&lt;br /&gt;这样的情况，内网千兆是没有问题的，NAS 电脑有线双向拷贝都是 113MB/s&lt;br /&gt;这次换了千兆，以为有线随随便便测速应该外网能 940Mbps ，结果打脸，&lt;a target=&#34;_blank&#34; href=&#34;http://speedtest.cn&#34; rel=&#34;nofollow noopener&#34;&gt;speedtest.cn&lt;/a&gt; ，广东电信测速，还是师傅自己的设备直连我的 NAS LAN 口，测速都只有 700 左右，师傅自己直连光猫拨号，貌似能测到 900 多。&lt;br /&gt;我觉得应该是 openwrt 固件有问题（一个多月没更新了），然后我就让师傅走了，自己编译了新的 5.15.83 ，好像是快了点，现在广东电信测速有线能到 850 左右。但是还是从来没有上过 900 。&lt;br /&gt;916 是 N3710 的四核四线程 CPU ，我 VMM 里给 openwrt 分配了 4 个核心，保留 3 个核心，1G 内存。测速到 850 的时候我观察了 htop ，四个线程大概都在 80%，难道这个是因为 CPU 太老了吗？？&lt;br /&gt;&lt;br /&gt;ps：我换过 ikuai 试验，更惨……&lt;br /&gt;ps2：我网卡换过 e1000 ，只能跑 200 多，确实 virto 网卡性能最好&lt;br /&gt;ps3：从 nas lan 口接出来后，都是串联的，nas--主 AP--次 AP--电脑，就是直接拿路由器自带的 LAN 口来做交换机了没有单独的交换机。这个会影响吗，局域网都没有问题的话……</description>
+      <author>eightsheep</author>
+      <pubDate>19 Dec 2022 12:46:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>刚看到一篇文章 - 分享发现</title>
+      <link>https://www.v2ex.com/t/903587</link>
+      <description>&lt;p&gt;现在都这样了？&#xA;&lt;a href=&#34;https://www.163.com/dy/article/HOTGMLQ50553K5ZV.html?f=post2020_dy_recommends&#34; rel=&#34;nofollow&#34;&gt;https://www.163.com/dy/article/HOTGMLQ50553K5ZV.html?f=post2020_dy_recommends&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>y4nssss</author>
+      <pubDate>19 Dec 2022 12:43:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>求一个旁路由辅助 apple tv 观看 Netflix 和 Disney+的正确姿势 - 问与答</title>
+      <link>https://www.v2ex.com/t/903586</link>
+      <description>前段时间买的 atv 最新款，最近被流媒体折磨中，尝试过很多办法，都不能持续有效的保证每次打开电视都能正常观看，特来寻求 v 友的帮助&lt;br /&gt;&lt;br /&gt;网络结构：&lt;br /&gt;光猫到 openwrt 软路由（主），下面接所有的设备。NAS 上虚拟机跑了一个 openwrt2 （旁）专门给 atv 用；&lt;br /&gt;&lt;br /&gt;openwrt （主）做 DHCP 服务器，开启了 IPV6 （因为没有 v4 公网所以为了能够在外面用 wireguard 回家必须得打开 ipv6 ）&lt;br /&gt;&lt;br /&gt;openwrt2 （旁）已关闭 DHCP ，禁用 IPV6&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/2AFvkdP.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/2AFvkdP.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/e7Noa9U.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/e7Noa9U.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;尝试过用 HelloWorld 插件，开启分流，atv 网络设置选择手动并指定网关为 openwrt2 （旁），这时 atv 可以短暂正常使用 Netflix 和 Disney+（为什么说短暂因为后面过了一段时间就不行了）&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/hb1O350.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/hb1O350.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;后面放弃了 HelloWorld 插件，换用 openclash （本意是不太想用 openclash 因为配置有点复杂而且前两年用的时候老是出问题）开启 fake ip 模式，切换到了 meta 内核并启用了域名探测，打开了流媒体增强，其他配置项没有做特别改动，同上设置 atv 网关之后，还是无法正常使用 Netflix 和 Disney&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/weEmvNk.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/weEmvNk.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/MT1ZMDn.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/MT1ZMDn.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;我还把装有 surge 的 mac 掏出来了，打开增强模式，指定 atv 的网关和 dns 到 surge ，这个时候 Netflix 可以加载，但是速度很慢并且仅能观看自制剧，Disney 同上两种办法提示报错无法加载内容&lt;br /&gt;&lt;br /&gt;一些线索：&lt;br /&gt;1. 由于需要经常玩游戏用加速器等，所以主 openwrt 上并没有使用 openclash ，只开了一个 ssrp ，作为一些设备（ nas 和平板等）的代理使用，不知道开了两层代理会有影响吗？尝试过关掉主 openwrt 上的 ssrp 貌似也没有作用&lt;br /&gt;&lt;br /&gt;2. 在 Netflix 和 Disney 报错不能加载的情况下，YouTube 之类的都是能够正常使用的&lt;br /&gt;&lt;br /&gt;3. 使用的机场是 Immtelecom 和花云，流媒体解锁上应该没啥问题，在 pc 和其他端都能够正常使用&lt;br /&gt;&lt;br /&gt;4. clash 规则使用的是这些，之前也以为是我配置的规则问题，然后也用了 openclash 里面的配置生成功能，一样没法使用&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/StreamingMedia/Video/DisneyPlus.list&#34; rel=&#34;nofollow noopener&#34;&gt;https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/StreamingMedia/Video/DisneyPlus.list&lt;/a&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/StreamingMedia/Video/Netflix.list&#34; rel=&#34;nofollow noopener&#34;&gt;https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/StreamingMedia/Video/Netflix.list&lt;/a&gt;</description>
+      <author>tediorelee</author>
+      <pubDate>19 Dec 2022 12:37:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>怎么理解用 TSS 恢复任务的执行，里面用到的 LDT 段选择子？ - 程序员</title>
+      <link>https://www.v2ex.com/t/903585</link>
+      <description>&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s3.bmp.ovh/imgs/2022/12/19/d475be1a726cf080.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;根据书上内容，当切换到新任务,当前任务会指向一个新的 TSS ，TSS 里面会保存 恢复任务需要的东西。上图红框的这几个选择子，都依赖从当前的任务的 LDT 里，去取属于自己的段描述符。&lt;/p&gt;&#xA;&lt;p&gt;对于上图的 LDT segment selector ，我不是很理解，不是应该存任务的 LDTR 里面的值（ 32 的基地址，和 16 的偏移地址），这样就可以直接拿这个值来装入 LDTR 寄存器里面，就可以识别到新的 LDT 了。或者说，&lt;strong&gt;我觉得保存 LDT 在哪里这个信息，不应该用到选择子阿&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;但是现在，却是一个 LDT 的选择子，难道说 可以用这个选择子从 GDT 里面取到一个段描述符吗，并把里面的地址 作为 LDTR 的基地址？但就算是这样，他也没有保存到 LDT 的界限是多少阿！&lt;/p&gt;&#xA;</description>
+      <author>amiwrong123</author>
+      <pubDate>19 Dec 2022 12:35:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于 NodeJS 在 Windows 上杀死启动的进程问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/903584</link>
+      <description>&lt;p&gt;环境：Electron + NodeJS(windows10 ，不考虑 Linux)。&lt;/p&gt;&#xA;&lt;p&gt;程序是这样的：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;node 使用 &lt;code&gt;spawn&lt;/code&gt;，传入 execFile （有可能只是个 &lt;code&gt;xxx.bat&lt;/code&gt; 脚本）和 args ，启动了一个 java 进程（监听端口 8080 ）。&lt;/li&gt;&#xA;&lt;li&gt;返回的 &lt;code&gt;child_process&lt;/code&gt; 有一个 PID （如 11111 ），但它是属于启动的 cmd 的 PID ，实际 java 进程的 PID 是 22222 。&lt;/li&gt;&#xA;&lt;li&gt;退出前，使用 &lt;code&gt;taskkill /T /F /PID 11111&lt;/code&gt;，能把这两个进程直接杀掉，但是！该 8080 端口还有很多状态为 &lt;code&gt;TIME_WAIT&lt;/code&gt; 的连接没被一同 kill 掉，导致端口一直是被占用的状态。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;当然，如果我直接用任务管理器将 java 进程强制终止，那就就没有 &lt;code&gt;TIME_WAIT&lt;/code&gt; 的连接了，但是好像没办法使用代码这么干。&lt;/p&gt;&#xA;&lt;p&gt;求教各位大佬，怎么才能一劳永逸的直接杀死进程。&lt;/p&gt;&#xA;&lt;p&gt;PS: 并不知道这个进程的名称（就没办法用 &lt;code&gt;taskkill /F /IM ${name}&lt;/code&gt; 来杀进程）是啥。&lt;/p&gt;&#xA;</description>
+      <author>FakerLeung</author>
+      <pubDate>19 Dec 2022 12:35:04 +0000</pubDate>
+    </item>
+    <item>
       <title>傲梅也出了个远程桌面工具，大家可以试试 - 分享发现</title>
       <link>https://www.v2ex.com/t/903582</link>
       <description>&lt;p&gt;名字叫 AnyViewer ，地址： &lt;a href=&#34;https://www.anyviewer.cn/&#34; rel=&#34;nofollow&#34;&gt;https://www.anyviewer.cn/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;如果可以的话，用我的带尾巴的链接注册吧： &lt;a href=&#34;https://www.anyviewer.cn/sign.html?params=mTe5paAo000oObcBu9m6XdUGGhoDUVib7VToo00oDXJ9FR748AAO0O0O&#34; rel=&#34;nofollow&#34;&gt;https://www.anyviewer.cn/sign.html?params=mTe5paAo000oObcBu9m6XdUGGhoDUVib7VToo00oDXJ9FR748AAO0O0O&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;好不好用我还不知道，还没有测试，不知道速度怎么样。&lt;/p&gt;&#xA;&lt;p&gt;现在可以免费领 4 年会员：&#xA;安装完登录后点击昵称右边箭头-&amp;gt;输入以下两个激活码，可以领 4 年会员&#xA;8033-8826-8278-E404&#xA;BA24-E088-CABA-654C&lt;/p&gt;&#xA;&lt;p&gt;有条件的朋友可以做个测试，看看速度怎么样。&lt;/p&gt;&#xA;</description>
