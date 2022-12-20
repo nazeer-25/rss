@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "月相 有什么用途？ - 问与答",
+      "Link": "https://www.v2ex.com/t/903695",
+      "Description": "很多很多手机和电脑上的 app 与插件都支持显示月相，\u003cbr /\u003e\u003cbr /\u003e一直不明白，这玩意儿有啥用图？？",
+      "Author": "ttgo",
+      "PubDate": "2022-12-20T03:59:49Z"
+    },
+    {
+      "Title": "阳了，嗓子疼，有好办法么 - 问与答",
+      "Link": "https://www.v2ex.com/t/903694",
+      "Description": "\u003cp\u003e阳了，吃了头痛粉，身上没其他症状，但是现在嗓子跟吞刀片一样，大家有什么好办法或者容易买到的药物推荐吗\u003c/p\u003e\n",
+      "Author": "yw121141111",
+      "PubDate": "2022-12-20T03:59:40Z"
+    },
+    {
+      "Title": "macos2macos 远程连接 Jump Desktop 不显示 remote user - Apple",
+      "Link": "https://www.v2ex.com/t/903693",
+      "Description": "\u003cp\u003e\u003cstrong\u003e场景\u003c/strong\u003e：MacOS 远程 MacOS\u003c/p\u003e\n\u003cp\u003e在远端 MacOS 上部署好 Jump Desktop Connect ，添加 remote acess user 。\u003c/p\u003e\n\u003cp\u003e在客户机上用 Jump Desktop 登录上 remote user ，但是远端的机器始终不显示，也就无法使用 Fluid Remote Desktop 模式。\u003c/p\u003e\n\u003cp\u003e尝试用 Google 登录、Apple 登录，均尝试过，都不行。\u003c/p\u003e\n\u003cp\u003e有 V 友遇到过类似的问题吗？\u003c/p\u003e\n",
+      "Author": "sshang",
+      "PubDate": "2022-12-20T03:59:11Z"
+    },
+    {
       "Title": "nginx 配置完访问网站提示“您的连接不是私密连接” - NGINX",
       "Link": "https://www.v2ex.com/t/903691",
       "Description": "\u003cp\u003e本人 nginx 新手\u003c/p\u003e\n\u003cp\u003e背景说明：\n1 、路由器开通了公网地址，通过 shareddns 自动更新域名解析（ ali ），同时做了内网的端口转发。\n2 、自己有一个虚拟黑群晖，黑群晖通过 \u003ca href=\"http://acme.sh\" rel=\"nofollow\"\u003eacme.sh\u003c/a\u003e 使用 ali 的 RAM API （用户为 A ）生成了泛域名（ \u003ca href=\"http://xxx.com\" rel=\"nofollow\"\u003exxx.com\u003c/a\u003e ）;所有 docker 服务能通过黑群晖的反向代理，在公网使用 https 的域名+转发的端口方式访问进来。\n3 、考虑到黑群晖性能瓶颈问题，也为了方便在 web 端管理内网的所有东西，搭了一个新的 centos7.6 ，并且完善了相应的工具，可以在内网成功实现 web 端的访问。\u003c/p\u003e\n\u003cp\u003e需求及条件描述：\nport1 = 本身的端口\nport2 = 转发的端口\u003c/p\u003e\n\u003cp\u003e1 、能通过 \u003ca href=\"https://xxx.com:port2\" rel=\"nofollow\"\u003ehttps://xxx.com:port2\u003c/a\u003e 的方式访问到内网 centos 里 docker 中的某一个容器的应用服务。\n2 、已经做了对应端口转发及 nginx 配置（附后）\n3 、centos 容器中的网络端口未使用 host 方式。\n4 、centos 本地可通过 http://ip:port1 的方式正常访问。\n5 、内网可通过 http://ip:port 的方式访问\n6 、不做 https 的话，在外网可通过 \u003ca href=\"http://xxx.com:port2\" rel=\"nofollow\"\u003ehttp://xxx.com:port2\u003c/a\u003e 的方式进行不安全的访问\n7 、centos 的 nginx 通过 \u003ca href=\"http://acme.sh\" rel=\"nofollow\"\u003eacme.sh\u003c/a\u003e 生成了证书并且跟 nginx 服务做了关联，能自动更新证书（域名依旧是：\u003ca href=\"http://xxx.com\" rel=\"nofollow\"\u003exxx.com\u003c/a\u003e ） ---- 之前使用新的 RAM API 生成，后来改成跟黑群晖一样的 API 生成\n8 、centos 的 hosts 及 hostname 都设置了 \u003ca href=\"http://xxx.com\" rel=\"nofollow\"\u003exxx.com\u003c/a\u003e\n9 、已关闭 SELinux ，防火墙对应端口已放开\u003c/p\u003e\n\u003cp\u003e问题来了：\n在 nginx 上监听 port 的 ssl,再用 \u003ca href=\"https://xxx.com:port2\" rel=\"nofollow\"\u003ehttps://xxx.com:port2\u003c/a\u003e 的方式访问就提示“您的连接不是私密连接”\u003c/p\u003e\n\u003cp\u003e请问该如何修改呢。恳请大佬支招，感谢！\u003c/p\u003e\n\u003cp\u003e附 ngixn 配置：\u003c/p\u003e\n\u003cp\u003e默认配置中，通过 include /etc/nginx/vhost/*.conf; 额外引入\u003c/p\u003e\n\u003cp\u003eserver {\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\tlisten port2 ssl;\n\tssl_certificate /etc/nginx/ssl/xxx.com.cer; \n\tssl_certificate_key /etc/nginx/ssl/xxx.com.key;\n\tserver_name  xxx.com;\n\n\tssl_session_cache shared:SSL:1m;\n\tssl_session_timeout  10m;\n\tssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;\n\tssl_prefer_server_ciphers on;\n\n\tclient_max_body_size 10M;\n\tlocation / {\n\t\tproxy_pass http://ip:port1;\n\t\tproxy_redirect http://$host/ http://$http_host/;\n\t\tproxy_set_header X-Real-IP $remote_addr;\n\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n\t\tproxy_set_header Host $host;\n\n            }\n\n    }\n\u003c/code\u003e\u003c/pre\u003e\n",
