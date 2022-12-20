@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "nginx 配置完访问网站提示“您的连接不是私密连接” - NGINX",
+      "Link": "https://www.v2ex.com/t/903691",
+      "Description": "\u003cp\u003e本人 nginx 新手\u003c/p\u003e\n\u003cp\u003e背景说明：\n1 、路由器开通了公网地址，通过 shareddns 自动更新域名解析（ ali ），同时做了内网的端口转发。\n2 、自己有一个虚拟黑群晖，黑群晖通过 \u003ca href=\"http://acme.sh\" rel=\"nofollow\"\u003eacme.sh\u003c/a\u003e 使用 ali 的 RAM API （用户为 A ）生成了泛域名（ \u003ca href=\"http://xxx.com\" rel=\"nofollow\"\u003exxx.com\u003c/a\u003e ）;所有 docker 服务能通过黑群晖的反向代理，在公网使用 https 的域名+转发的端口方式访问进来。\n3 、考虑到黑群晖性能瓶颈问题，也为了方便在 web 端管理内网的所有东西，搭了一个新的 centos7.6 ，并且完善了相应的工具，可以在内网成功实现 web 端的访问。\u003c/p\u003e\n\u003cp\u003e需求及条件描述：\nport1 = 本身的端口\nport2 = 转发的端口\u003c/p\u003e\n\u003cp\u003e1 、能通过 \u003ca href=\"https://xxx.com:port2\" rel=\"nofollow\"\u003ehttps://xxx.com:port2\u003c/a\u003e 的方式访问到内网 centos 里 docker 中的某一个容器的应用服务。\n2 、已经做了对应端口转发及 nginx 配置（附后）\n3 、centos 容器中的网络端口未使用 host 方式。\n4 、centos 本地可通过 http://ip:port1 的方式正常访问。\n5 、内网可通过 http://ip:port 的方式访问\n6 、不做 https 的话，在外网可通过 \u003ca href=\"http://xxx.com:port2\" rel=\"nofollow\"\u003ehttp://xxx.com:port2\u003c/a\u003e 的方式进行不安全的访问\n7 、centos 的 nginx 通过 \u003ca href=\"http://acme.sh\" rel=\"nofollow\"\u003eacme.sh\u003c/a\u003e 生成了证书并且跟 nginx 服务做了关联，能自动更新证书（域名依旧是：\u003ca href=\"http://xxx.com\" rel=\"nofollow\"\u003exxx.com\u003c/a\u003e ） ---- 之前使用新的 RAM API 生成，后来改成跟黑群晖一样的 API 生成\n8 、centos 的 hosts 及 hostname 都设置了 \u003ca href=\"http://xxx.com\" rel=\"nofollow\"\u003exxx.com\u003c/a\u003e\n9 、已关闭 SELinux ，防火墙对应端口已放开\u003c/p\u003e\n\u003cp\u003e问题来了：\n在 nginx 上监听 port 的 ssl,再用 \u003ca href=\"https://xxx.com:port2\" rel=\"nofollow\"\u003ehttps://xxx.com:port2\u003c/a\u003e 的方式访问就提示“您的连接不是私密连接”\u003c/p\u003e\n\u003cp\u003e请问该如何修改呢。恳请大佬支招，感谢！\u003c/p\u003e\n\u003cp\u003e附 ngixn 配置：\u003c/p\u003e\n\u003cp\u003e默认配置中，通过 include /etc/nginx/vhost/*.conf; 额外引入\u003c/p\u003e\n\u003cp\u003eserver {\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\tlisten port2 ssl;\n\tssl_certificate /etc/nginx/ssl/xxx.com.cer; \n\tssl_certificate_key /etc/nginx/ssl/xxx.com.key;\n\tserver_name  xxx.com;\n\n\tssl_session_cache shared:SSL:1m;\n\tssl_session_timeout  10m;\n\tssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;\n\tssl_prefer_server_ciphers on;\n\n\tclient_max_body_size 10M;\n\tlocation / {\n\t\tproxy_pass http://ip:port1;\n\t\tproxy_redirect http://$host/ http://$http_host/;\n\t\tproxy_set_header X-Real-IP $remote_addr;\n\t\tproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n\t\tproxy_set_header Host $host;\n\n            }\n\n    }\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "wolfcdd",
+      "PubDate": "2022-12-20T03:48:36Z"
+    },
+    {
+      "Title": "现在谷歌搜索似乎不自动跳转.hk 了？ - 问与答",
+      "Link": "https://www.v2ex.com/t/903690",
+      "Description": "\u003cp\u003e只有我一个人这样吗\u003c/p\u003e\n",
+      "Author": "butbut",
+      "PubDate": "2022-12-20T03:46:53Z"
+    },
+    {
       "Title": "功能 A 完成，但未上线。开始搞功能 B，但同时 B 里又需要 A 里的一部分代码 - git",
       "Link": "https://www.v2ex.com/t/903688",
       "Description": "\u003cp\u003e各位遇到这种情况时，一般是从主分支上切一个新的，还是就在 A 的基础上切一个分支来搞？\u003c/p\u003e\n",
