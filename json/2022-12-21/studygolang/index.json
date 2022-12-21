@@ -32,13 +32,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "一种安全加密文件的方式，文件可以实现自校验，防止文件损坏和篡改",
-      "Link": "https://studygolang.com/topics/16047#reply0",
-      "Description": "\u003cp\u003e\u003ca href=\"https://www.cnblogs.com/janbar/p/16994689.html\"\u003ehttps://www.cnblogs.com/janbar/p/16994689.html\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "C++ 访问注册表（64位系统）",
       "Link": "https://studygolang.com/topics/16048#reply0",
       "Description": "\u003cp\u003e1、问题描述\nHKEY_LOCAL_MACHINE\\Software\\Wow6432Node\\XXXX中“Wow6432Node”在32位Windows上则不存在，怎么统一处理？\n2、问题分析\nEither KEY_WOW64_32KEY or KEY_WOW64_64KEY can be specified. If both flags are specified, the function fails with ERROR_INVALID_PARAMETER.\n  Windows Server 2008, Windows Vista, Windows Server 2003, and Windows XP: If both flags are specified, the function’s behavior is undefined.\u003c/p\u003e\n\n\u003cp\u003e指示 64 位注册表上的Windows应在 32 位注册表视图上运行。 此标志被 32 位或 32 位Windows。 有关详细信息，请参阅 访问备用注册表视图。\nKEY _ WOW64 _ 64KEY (0x0100)\n指示 64 位注册表上的Windows应在 64 位注册表视图上运行。 此标志被 32 位或 32 位Windows。 有关详细信息，请参阅 访问备用注册表视图。此标志必须与此表中查询或访问注册表值的其他标志结合使用 OR 运算符。Windows 2000： 不支持此标志。此标志必须与此表中查询或访问注册表值的其他标志结合使用 OR 运算符。Windows 2000： 不支持此标志。\u003c/p\u003e\n\n\u003cp\u003e不要尝试Wow6432Node，因为32位Windows没有。\u003c/p\u003e\n\n\u003cp\u003e64bit系统的注册表分32 位注册表项和64位注册表项两部分。\n在64bit系统下，通过regedit中查看到指定路径下的注册表项均为64位注册表项，而32位注册表项被重定位到：HKEY_LOCAL_MACHINE\\Software\\WOW6432Node\u003c/p\u003e\n\n\u003cdl\u003e\n\u003cdt\u003e比如，同在64bit系统下，使用如下代码访问注册表：\u003c/dt\u003e\n\u003c/dl\u003e\n\n\u003cp\u003e::RegOpenKeyEx(HKEY_LOCAL_MACHINE, _T(\u0026ldquo;Software\\Sobey\\MPC \u0026ldquo;), 0, KEY_ALL_ACCESS, \u0026amp;hKey)\u003c/p\u003e\n\n\u003cp\u003e如果应用程序为32bit子系统，那么实际访问的注册表位置为（默认操作）：\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Sobey\\MPC\u003c/p\u003e\n\n\u003cp\u003e而如果应用程序为64bit子系统，那么实际访问的注册表位置将会是（默认操作）：\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Sobey\\MPC\u003c/p\u003e\n\n\u003cp\u003e3、程序编写\n编程过程中，可以使用KEY_WOW64_64KEY和KEY_WOW64_32KEY明确的指定操作64位注册表项或者32位注册表项。\u003c/p\u003e\n\n\u003cp\u003e在32bit子系统应用程序中，可以用如下方式明确指定访问64bit注册表项，程序代码：\n::RegOpenKeyEx(HKEY_LOCAL_MACHINE, _T(\u0026ldquo;Software\\Sobey\\MPC \u0026ldquo;), 0, KEY_ALL_ACCESS | KEY_WOW64_64KEY, \u0026amp;hKey)\n注意关键字KEY_WOW64_64KEY；这种方式写入的注册表项将会确切的位于位置：\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Sobey\\MPC\n在64bit子系统应用程序中，可以用如下方式明确指定访问32bit注册表项，程序代码：\n::RegOpenKeyEx(HKEY_LOCAL_MACHINE, _T(\u0026ldquo;Software\\Sobey\\MPC\\Test\u0026rdquo;), 0, KEY_ALL_ACCESS | KEY_WOW64_32KEY, \u0026amp;hKey)\n注意关键字KEY_WOW64_32KEY, 这种方式写入的注册表项将会确切的位于位置：\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Sobey\\MPC（使用regedit工具软件对应的位置）。\n4、注意事项\n4.1 使用HKEY_CURRENT_USER\n上述说明只针对HKEY_LOCAL_MACHINE主键而言，HKEY_CURRENT_USER主键下没有类似情况；当访问HKEY_CURRENT_USER主键时，明确指定KEY_WOW64_64KEY和KEY_WOW64_32KEY标志也没有意义。\n总之，尽可能使用HKEY_CURRENT_USER主键来保存用户配置吧。\u003c/p\u003e\n\n\u003cp\u003e4.2 使用HKEY_LOCAL_MACHINE\n在64位电脑上操作以HKEY_LOCAL_MACHINE主键的时候，首先保证一下几项：\n请用户以管理员权限或Administrator管理员账户来执行应用程序。\n默认情况下，在64位系统上，32位程序访问32位注册表，64位程序访问64位注册表。\n32位程序需要访问64位注册表，需要添加KEY_WOW64_64KEY标志；\n64位程序需要访问32位注册表，需要添加KEY_WOW64_32KEY标志；\n如未指定则按照默认的处理。目前64位系统上的32位注册表位于HKCU/HKLM下的\\SOFTWARE\\Wow6432Node，但不要直接访问该键。\n4.3 使用HKEY_CLASSES_ROOT\n注意字符集。VS新版都默认Unicode字符集。\nHKEY_CLASSES_ROOT主键虽然不区分32位和64位注册表，但需要管理员权限才能进行创建子项操作。此外读写操作不需要管理员权限。\n4.4 权限\n一般不要使用KEY_ALL_ACCESS。对于只读访问，指定KEY_READ，对于读/写KEY_READ|KEY_WRITE。如果指定的特权超出了所需的数量，则最终可能一无所获，或者迫使用户始终以管理员权限运行程序。通常，它是一种通用的安全性方法，称为\u0026rdquo;最小特权原则\u0026rdquo;。\n当然将KEY_ALL_ACCESS改为KEY_QUERY_VALUE，应用程序就能在所有的平台上正常运行了。\u003c/p\u003e\n",
@@ -53,6 +46,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "一种安全加密文件的方式，文件可以实现自校验，防止文件损坏和篡改",
+      "Link": "https://studygolang.com/topics/16047#reply0",
+      "Description": "\u003cp\u003e\u003ca href=\"https://www.cnblogs.com/janbar/p/16994689.html\"\u003ehttps://www.cnblogs.com/janbar/p/16994689.html\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "gin\\gorm\\api项目快速开发模板",
+      "Link": "https://studygolang.com/topics/16044#reply0",
+      "Description": "\u003ch1\u003e\u003ca href=\"https://gitee.com/dontls/apifast\"\u003eapifast\u003c/a\u003e\u003c/h1\u003e\n\n\u003ch2\u003e功能列表\u003c/h2\u003e\n\n\u003cul\u003e\n\u003cli\u003e代码生成\u003c/li\u003e\n\u003cli\u003e插件式注册api模块\u003c/li\u003e\n\u003cli\u003emysql、postgresql、sqlite, gorm快速切换及常用方法封装\u003c/li\u003e\n\u003cli\u003eexcel快速导出\u003c/li\u003e\n\u003cli\u003e服务注册\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "go get 指定一个版本的包，却报错另一个版本不存在，这啥情况",
       "Link": "https://studygolang.com/topics/16046#reply0",
       "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221220/6bd78d37e39b5cf0b98d25df030f18ac.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
@@ -63,13 +70,6 @@
       "Title": "大神推荐的上网利器,查gu歌看由管，度娘找不到的资料这里都有,很难找的好东西",
       "Link": "https://studygolang.com/topics/16045#reply0",
       "Description": "\u003cp\u003e点击直达官网[\u003ca href=\"https://www.chainuk.top\"\u003ehttps://www.chainuk.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e点击直达官网[\u003ca href=\"https://www.chainuk.top\"\u003ehttps://www.chainuk.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e点击直达官网[\u003ca href=\"https://www.chainuk.top\"\u003ehttps://www.chainuk.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e点击直达官网[\u003ca href=\"https://www.chainuk.top\"\u003ehttps://www.chainuk.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e点击直达官网[\u003ca href=\"https://www.chainuk.top\"\u003ehttps://www.chainuk.top\u003c/a\u003e]\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "gin\\gorm\\api项目快速开发模板",
-      "Link": "https://studygolang.com/topics/16044#reply0",
-      "Description": "\u003ch1\u003e\u003ca href=\"https://gitee.com/dontls/apifast\"\u003eapifast\u003c/a\u003e\u003c/h1\u003e\n\n\u003ch2\u003e功能列表\u003c/h2\u003e\n\n\u003cul\u003e\n\u003cli\u003e代码生成\u003c/li\u003e\n\u003cli\u003e插件式注册api模块\u003c/li\u003e\n\u003cli\u003emysql、postgresql、sqlite, gorm快速切换及常用方法封装\u003c/li\u003e\n\u003cli\u003eexcel快速导出\u003c/li\u003e\n\u003cli\u003e服务注册\u003c/li\u003e\n\u003c/ul\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
