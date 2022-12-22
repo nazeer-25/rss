@@ -67,13 +67,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "gin\\gorm\\api项目快速开发模板",
-      "Link": "https://studygolang.com/topics/16044#reply0",
-      "Description": "\u003ch1\u003e\u003ca href=\"https://gitee.com/dontls/apifast\"\u003eapifast\u003c/a\u003e\u003c/h1\u003e\n\n\u003ch2\u003e功能列表\u003c/h2\u003e\n\n\u003cul\u003e\n\u003cli\u003e代码生成\u003c/li\u003e\n\u003cli\u003e插件式注册api模块\u003c/li\u003e\n\u003cli\u003emysql、postgresql、sqlite, gorm快速切换及常用方法封装\u003c/li\u003e\n\u003cli\u003eexcel快速导出\u003c/li\u003e\n\u003cli\u003e服务注册\u003c/li\u003e\n\u003c/ul\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "golang替换字符串中的图片链接，如何提升性能呢？",
       "Link": "https://studygolang.com/topics/16015#reply3",
       "Description": "\u003cp\u003e给定字符串\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003econtent=\u0026quot;\u0026lt;span class=\u0026quot;\u0026quot;\u0026gt;\u0026lt;img class=\u0026quot;wscnph\u0026quot; src=\u0026quot;https://static.images.net/202233142551646287375.jpg\u0026quot;\u0026gt;\u0026lt;img class=\u0026quot;wscnph\u0026quot; src=\u0026quot;https://static.images.net/202233142551646287377.jpg\u0026quot;\u0026gt;\u0026lt;/span\u0026gt;\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e使用正则匹配图片链接，然后上传图片到阿里云oss,获得图片的链接，然后替换字符串中图片的链接，如果给定的字符串中图片很多，怎样才能提高图片上传替换的速度\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc Upload(url string) string {\n    // 创建OSSClient实例。\n    client, err := oss.New(Endpoint, key, AccessKeySecret)\n    if err != nil {\n        fmt.Println(\u0026quot;Error:\u0026quot;, err)\n        os.Exit(-1)\n    }\n    t1 := time.Now().Unix()\n    if ti1 != t1 { //如果时间戳不一样,那么归零\n        long = 0\n    }\n    ti1 = t1\n    long++\n    obj := fmt.Sprintf(\u0026quot;article/%d%d.png\u0026quot;, t1, long)\n    // 获取存储空间。\n    bucket, err := client.Bucket(BucketName)\n    if err != nil {\n        fmt.Println(\u0026quot;Error:\u0026quot;, err)\n        os.Exit(-1)\n    }\n\n    // 上传Byte数组。\n    err = bucket.PutObject(obj, bytes.NewReader(ReadImgData(url)))\n    if err != nil {\n        fmt.Println(\u0026quot;Error:\u0026quot;, err)\n        os.Exit(-1)\n    }\n    return \u0026quot;https://\u0026quot; + BucketName + \u0026quot;.\u0026quot; + Endpoint + \u0026quot;/\u0026quot; + obj\n}\nfunc RepImages(htmls string) string {\n    var imgRE = regexp.MustCompile(`\u0026lt;img[^\u0026gt;]+\\bsrc=[\u0026quot;']([^\u0026quot;']+)[\u0026quot;']`)\n    imgs := imgRE.FindAllStringSubmatch(htmls, -1)\n    out := make([]string, len(imgs))\n    myImage := \u0026quot;\u0026quot;\n    resHtml := htmls\n    for i := range out {\n        if ! strings.HasPrefix(imgs[i][1], \u0026quot;https://static.images.net\u0026quot;) {\n            myImage = Upload(imgs[i][1])\n            resHtml = strings.Replace(resHtml, imgs[i][1], myImage, -1)\n            out[i] = imgs[i][1]\n            fmt.Println(strconv.Itoa(i), out[i])\n        }\n    }\n    fmt.Println(resHtml)\n    return resHtml\n}\n\nfunc main() {\n    //a := BcryptHash(\u0026quot;admin123$\u0026quot;)\n    //fmt.Print(a)\n    content := \u0026quot;\u0026lt;span class=\\\u0026quot;\\\u0026quot;\u0026gt;\u0026lt;img class=\\\u0026quot;wscnph\\\u0026quot; src=\\\u0026quot;https://static.images.net/2022331359421646287182.jpg\\\u0026quot;\u0026gt;\u0026lt;img class=\\\u0026quot;wscnph\\\u0026quot; src=\\\u0026quot;https://static.images.net/202233135942164628718777.jpg\\\u0026quot;\u0026gt;\u0026lt;/span\u0026gt;\u0026quot;\n    RepImages(content)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -91,6 +84,13 @@
       "Title": "深圳小破网站寻找兼职",
       "Link": "https://studygolang.com/topics/14747#reply37",
       "Description": "\u003cp\u003e各位大佬，我有个go语言写得小破网站，想找一个兼职运营, 后台是go，前端是nuxt吧（vue的架构？）\u003c/br\u003e\n主要是平时的一些小bug，例如消息弹出错误之类的帮忙改改\u003c/br\u003e\n同时，也想新加一些小功能，但是这些工作比较佛，没有时间进度\u003c/br\u003e\n有没有大佬能接的啊\u003c/br\u003e\n我的这个小破站给钱不多，不过要是合得来可以以后做些别的事，本人在一家顶级投资机构搬砖。\u003c/br\u003e\n有兴趣的小伙伴可以发简历到electronwang@qq.com\n谢谢~有没有前端的小伙伴啊， vue，nuxt框架~~~\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "gin\\gorm\\api项目快速开发模板",
+      "Link": "https://studygolang.com/topics/16044#reply0",
+      "Description": "\u003ch1\u003e\u003ca href=\"https://gitee.com/dontls/apifast\"\u003eapifast\u003c/a\u003e\u003c/h1\u003e\n\n\u003ch2\u003e功能列表\u003c/h2\u003e\n\n\u003cul\u003e\n\u003cli\u003e代码生成\u003c/li\u003e\n\u003cli\u003e插件式注册api模块\u003c/li\u003e\n\u003cli\u003emysql、postgresql、sqlite, gorm快速切换及常用方法封装\u003c/li\u003e\n\u003cli\u003eexcel快速导出\u003c/li\u003e\n\u003cli\u003e服务注册\u003c/li\u003e\n\u003c/ul\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
