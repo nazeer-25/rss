@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "nftables 防火墙问题，请大佬指教！ - 问与答",
+      "Link": "https://www.v2ex.com/t/904153",
+      "Description": "\u003cp\u003e这是目前设定的规则\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003etable inet filter {\n\tchain input {\n\t\ttype filter hook input priority filter; policy drop;\n\t\tct state established,related counter accept\n\t\tct state invalid counter packets drop\n\t\tip protocol icmp accept\n\t\ticmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem, echo-request, mld-listener-query, nd-router-solicit, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert } accept\n\t\tiifname \"lo\" counter packets 0 bytes 0 accept\n\t\ttcp dport xxx counter accept\n\t\tmeta nftrace set 1\n\t}\n\n\tchain ips {\n\t\ttype filter hook input priority filter - 2; policy accept;\n\t\tip saddr 1.1.1.1 counter accept\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这是 tracing 调试日志（ drop 日志）\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003etrace id ab8ac050 inet filter ips packet: iif \"eth0\" ether saddr 00:2a:6a:a4:8c:c1 ether daddr 00:16:3e:73:d4:5a ip saddr 1.1.1.1 ip daddr 2.2.2.2 ip dscp 0x01 ip ecn not-ect ip ttl 113 ip id 4681 ip protocol tcp ip length 52 tcp sport 10551 tcp dport 23237 tcp flags == syn tcp window 64240\ntrace id ab8ac050 inet filter ips rule meta nftrace set 1 (verdict continue)\ntrace id ab8ac050 inet filter ips verdict continue\ntrace id ab8ac050 inet filter ips policy accept\n\ntrace id ab8ac050 inet filter input packet: iif \"eth0\" ether saddr 00:2a:6a:a4:8c:c1 ether daddr 00:16:3e:73:d4:5a ip saddr 1.1.1.1 ip daddr 2.2.2.2 ip dscp 0x01 ip ecn not-ect ip ttl 113 ip id 4681 ip protocol tcp ip length 52 tcp sport 10551 tcp dport 23237 tcp flags == syn tcp window 64240\ntrace id ab8ac050 inet filter input rule meta nftrace set 1 (verdict continue)\ntrace id ab8ac050 inet filter input verdict continue\ntrace id ab8ac050 inet filter input policy drop\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这是 tracing 调试日志（ accept 日志）\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003etrace id b1cb1361 inet filter ips packet: iif \"eth0\" ether saddr 00:2a:6a:a4:8c:c1 ether daddr 00:16:3e:73:d4:5a ip saddr 3.3.3.3 ip daddr 2.2.2.2 ip dscp 0x01 ip ecn not-ect ip ttl 113 ip id 19123 ip protocol tcp ip length 64 tcp sport 6678 tcp dport 23237 tcp flags == 0x18 tcp window 1026\ntrace id b1cb1361 inet filter ips rule meta nftrace set 1 (verdict continue)\ntrace id b1cb1361 inet filter ips verdict continue\ntrace id b1cb1361 inet filter ips policy accept\n\ntrace id b1cb1361 inet filter input packet: iif \"eth0\" ether saddr 00:2a:6a:a4:8c:c1 ether daddr 00:16:3e:73:d4:5a ip saddr 3.3.3.3 ip daddr 2.2.2.2 ip dscp 0x01 ip ecn not-ect ip ttl 113 ip id 19123 ip protocol tcp ip length 64 tcp sport 6678 tcp dport 23237 tcp flags == 0x18 tcp window 1026\ntrace id b1cb1361 inet filter input rule ct state established,related counter packets 1262 bytes 160127 accept (verdict accept)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e描述：3.3.3.3 已经通过 ssh 登录到 2.2.2.2 服务器，accept 日志最后检查 tcp 状态通过了防火墙\n我的问题是：ips chain 里面的 IP 无法通过防火墙，请大佬指点！\u003c/p\u003e\n",
+      "Author": "Nm9L",
+      "PubDate": "2022-12-22T09:04:45Z"
+    },
+    {
+      "Title": "在新阶段的情况下，新冠的群体免疫可能难以实现 - 问与答",
+      "Link": "https://www.v2ex.com/t/904152",
+      "Description": "\u003cp\u003e新加坡已经感染六成多，疫苗接种率百分之九十几，但是依然没有实现群体免疫，因为存在变异。\n\u003ca href=\"https://k.sina.com.cn/article_5948368544_1628ce6a002701baml.html?from=health\" rel=\"nofollow\"\u003ehttps://k.sina.com.cn/article_5948368544_1628ce6a002701baml.html?from=health\u003c/a\u003e\n对此你怎么看？\u003c/p\u003e\n",
+      "Author": "codingAlex",
+      "PubDate": "2022-12-22T08:59:52Z"
+    },
+    {
+      "Title": "同事嫌弃是病毒 - 生活",
+      "Link": "https://www.v2ex.com/t/904151",
+      "Description": "\u003cp\u003e杨了一个多星期，已经好多了，来上班。在公司也戴口罩，就路过某某同事的旁边，说叫我离远点，说是病毒源，因为是公司第一个爆出来杨的，好想给他一板凳\u003c/p\u003e\n",
+      "Author": "zhengzhou",
+      "PubDate": "2022-12-22T08:57:48Z"
+    },
+    {
       "Title": "有没有和我一样，淘宝买东西会避开天猫店铺呢？ - 问与答",
       "Link": "https://www.v2ex.com/t/904150",
       "Description": "\u003cp\u003e在天猫上买东西，质量不好投诉还无用。\n最近发生一件很气人的事情，天猫买 50 个 n95 口罩，不仅迟迟拖着不发货，最终发货还只发了 110 个医用口罩，投诉都没用的。\u003c/p\u003e\n",
