@@ -4,6 +4,19 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>假如送别人的药导致出了医疗事故，需要负责吗 - 程序员</title>
+      <link>https://www.v2ex.com/t/904267</link>
+      <author>walker001</author>
+      <pubDate>23 Dec 2022 03:30:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>mkfifo 控制并发，如何优雅显示进度条？ - Linux</title>
+      <link>https://www.v2ex.com/t/904266</link>
+      <description>&lt;p&gt;代码 1 ，并发&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/usr/bin/env sh&#xA;# 管道&#xA;tmp_fifofile=/tmp/1001.fifo              &#xA;mkfifo $tmp_fifofile&#xA;exec 1001&amp;lt;&amp;gt; $tmp_fifofile&#xA;rm $tmp_fifofile&#xA;&#xA;# 线程数&#xA;thread=4&#xA;for i in `seq $thread`&#xA;do&#xA;    echo &amp;gt;&amp;amp;1001             &#xA;done&#xA;&#xA;for i in {1..254}&#xA;do&#xA;    read -u 1001&#xA;    {&#xA;&#x9;&#x9;sleep 0.5&#xA;&#x9;&#x9;echo &amp;gt;&amp;amp;1001           &#xA;    }&amp;amp;          #  并发执行&#xA;done&#xA;wait&#xA;exec 1001&amp;gt;&amp;amp;-                # 释放文件描述符&#xA;echo &#34;all finish...&#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;代码 2 进度条&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/usr/bin/env sh&#xA;i=0&#xA;b=&#34;&#34;&#xA;array=(&#39;-&#39; &#39;\\&#39; &#39;|&#39; &#39;/&#39;)&#xA;while [ $i -le 100 ]&#xA;do&#xA;&#x9;let idx=i%4&#xA;&#x9;printf &#34;\e[34m\033[40m[%-100s]\e[32m\033[40m [%d%%] \e[30m \033[42m [%c] \e[0m\r&#34; &#34;$b&#34; &#34;$i&#34; &#34;${array[$idx]}&#34;&#xA;&#x9;b+=&#39;#&#39;&#xA;&#x9;sleep 0.02&#xA;&#x9;let i++&#xA;done&#xA;echo &#39;&#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;b=&#34;&#34;&#xA;do&#xA;    {   &#xA;&#x9;# 想在代码 1 这，显示进度条&#xA;&#x9;b+=&#34;#&#34;  &#xA;&#x9;echo &#34;$b&#34;&#xA;        # b 的结果 永远等于#，不能叠加&#xA;    }&amp;amp;&#xA;done&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;export b 环境变量也不行&#xA;想不到别的方法了&#xA;如果是 python ，global 声明一下就好了&lt;/p&gt;&#xA;&lt;p&gt;想把两段代码结合在一起，或者有没相关控制并发显示进度条的例子？&lt;/p&gt;&#xA;</description>
+      <author>levenwindy</author>
+      <pubDate>23 Dec 2022 03:30:13 +0000</pubDate>
+    </item>
+    <item>
       <title>用了阿里 dns 和腾讯 dns，卡到生活不能自理 - 问与答</title>
       <link>https://www.v2ex.com/t/904265</link>
       <description>&lt;p&gt;昨晚改的，当时也没注意。&lt;br/&gt;&#xA;今天起来，发现很卡。&lt;br/&gt;&#xA;刚开始还没有想明白为什么。&lt;br/&gt;&#xA;以为仅仅是墙发威了。&lt;br/&gt;&#xA;后来发现 jd 和 taobao 也是不是的打不开。&lt;br/&gt;&#xA;按理说 223 和 119 也不至于差到无法解析啊？  &lt;/p&gt;&#xA;&lt;p&gt;用的是电信的宽带。&lt;br/&gt;&#xA;何故呢？&lt;/p&gt;&#xA;</description>
