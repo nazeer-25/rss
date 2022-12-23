@@ -25,13 +25,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "VMware vsan丢失的VMDK文件的数据恢复与数据导出方法",
-      "Link": "https://studygolang.com/topics/16049#reply0",
-      "Description": "\u003cp\u003e当天晚上在做虚拟机迁移的时候，在vsphere里面复制一个20TB的虚拟机VMDK文件，人就走了，第二天到机房看了一下整个存储空间是变少了的，估算差不多，也没仔细看，看着复制的虚拟机文件能启动，为了省空间，就把源虚拟机VDMK文件删了，结果没一会办公室就说很多附件看不到了，我才发现该虚拟机内只有系统盘，没有数据盘，之前我是建了2个vmdk文件，一个1T的系统盘，1个20TB的数据盘，现在虚拟机下那个20TB的vmdk文件变成1kb去了，查了日志发现是复制的时候出错中断了，在vsphere里面的集群监控界面，里面有个虚拟对象，可以看到这个虚拟盘，但是显示组件状态为缺失，一顿操作无果后尝试找过数据恢复公司，但是对方一看就说我这个是虚拟化平台，Vsan分布式存储，开口就是六七十万，要价太高了， 自己在网上到处找解决办法，最后自己成功解决。\u003c/p\u003e\n\n\u003cp\u003e解决办法我给大家分享一波\u003c/p\u003e\n\n\u003cp\u003e1，起初是多方了解多个数据恢复公司，还喊我付了上门费后，但是来机房看后，要价都太高了，光是几家恢复公司的上门费就花了1万多，要价都要几十万，实在没那么重要的文件值得掏这个钱，然后我顺便也了解了很多，因为我自己也懂点这方面的，以前用软件帮公司其他部门的恢复过一些删除的文档那些，最后在一个公众号上发现了一篇文章，看了下思路，就自己学了一下，下面就是我这次的处理过程，大家可以参考一哈\u003c/p\u003e\n\n\u003cp\u003e2，我删文件这个vsan集群空间有160TB，一共有10台存储，我把每台存储的硬盘都直接用直通卡接到一台win10的物理机里面，又从其他存储里面腾了200TB左右的空间，用光纤挂到这个物理机里面，最后在网上用winhex这个软件，按照网上的教程把每一台存储的物理盘和缓存盘都克隆成一个.dd后缀的文件\u003c/p\u003e\n\n\u003cp\u003e3，整个集群的存储里面的硬盘都克隆后，再启动原来的集群，在vsphere里面，选择这个虚拟机所在的集群，点击监控，往下拉有个虚拟对象，在里面可以看到这个20TB的虚拟磁盘的ID信息，把这个ID记下来，然后下载了一个VMware vsan数据恢复系统1.0的恢复工具，按照说明，选择了VMware vsan，选择克隆的.dd的文件，还要选择对应的缓存盘的克隆的dd文件，然后输入刚刚记下来的虚拟对象ID，设置保存路径，就开始了自动扫描了，扫描完成后，有个弹窗，喊继续选择克隆的.dd文件和对应的缓存盘克隆的dd文件,最后经过不断的切换克隆的dd文件，大概花了七八天时间，直到把所有克隆的dd文件都选择了一遍，最后在保存路径下面生成了一个后缀是data.vmdk的文件\u003c/p\u003e\n\n\u003cp\u003e4，那个文章里面说对DD文件解析成功后，就可以得到真实数据DD，我用这个软件选择打开这DD文件，点进去就开始跑进度条解析扫描，扫描完后就看到了我原来删除的虚拟机里面的所有文件，最后我把这些文件全部导了出来，最后我再在虚拟机下面建了一个新的20TB的vmdk，然后把文件上传进去了。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "go如何创建一个GBK编码的文件",
       "Link": "https://studygolang.com/topics/16050#reply1",
       "Description": "\u003cp\u003ego如何创建一个GBK编码的文件\u003c/p\u003e\n",
@@ -39,16 +32,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "小程序上线发布后，实现版本自动更新，用户无感知",
-      "Link": "https://studygolang.com/topics/16051#reply0",
-      "Description": "\u003cp\u003e\u003cstrong\u003e直接上代码，用的都是小程序的API。\u003c/strong\u003e\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e/**\n * 检测当前的小程序是否是最新版本，判断是否需要下载、更新当前小程序\n */\nfunction checkUpdateVersion() {\n  //判断小程序版本是否可以使用小程序更新机制API\n  if (wx.canIUse('getUpdateManager')) {\n    //创建 UpdateManager 实例\n    const updateManager = wx.getUpdateManager();\n    //检测版本更新\n    updateManager.onCheckForUpdate(function(res) {\n      // 请求完新版本信息的回调\n      if (res.hasUpdate) {\n        //监听小程序有版本更新事件\n        updateManager.onUpdateReady(function() {\n          //调用 applyUpdate 应用新版本并重启 （ 此处进行了自动更新操作）\n          updateManager.applyUpdate();\n        })\n        updateManager.onUpdateFailed(function() {\n          // 新版本下载失败\n          wx.showModal({\n            title: '已经有新版本喽~',\n            content: '请您删除当前小程序，到微信 “发现-小程序” 页，重新搜索打开哦~',\n          })\n        })\n      }\n    })\n  } else {\n    wx.showModal({\n      title: '溫馨提示',\n      content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'\n    })\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003ePS: 未来的你，一定会感谢今天拼命努力的自己！\u003c/h5\u003e\n",
+      "Title": "VMware vsan丢失的VMDK文件的数据恢复与数据导出方法",
+      "Link": "https://studygolang.com/topics/16049#reply0",
+      "Description": "\u003cp\u003e当天晚上在做虚拟机迁移的时候，在vsphere里面复制一个20TB的虚拟机VMDK文件，人就走了，第二天到机房看了一下整个存储空间是变少了的，估算差不多，也没仔细看，看着复制的虚拟机文件能启动，为了省空间，就把源虚拟机VDMK文件删了，结果没一会办公室就说很多附件看不到了，我才发现该虚拟机内只有系统盘，没有数据盘，之前我是建了2个vmdk文件，一个1T的系统盘，1个20TB的数据盘，现在虚拟机下那个20TB的vmdk文件变成1kb去了，查了日志发现是复制的时候出错中断了，在vsphere里面的集群监控界面，里面有个虚拟对象，可以看到这个虚拟盘，但是显示组件状态为缺失，一顿操作无果后尝试找过数据恢复公司，但是对方一看就说我这个是虚拟化平台，Vsan分布式存储，开口就是六七十万，要价太高了， 自己在网上到处找解决办法，最后自己成功解决。\u003c/p\u003e\n\n\u003cp\u003e解决办法我给大家分享一波\u003c/p\u003e\n\n\u003cp\u003e1，起初是多方了解多个数据恢复公司，还喊我付了上门费后，但是来机房看后，要价都太高了，光是几家恢复公司的上门费就花了1万多，要价都要几十万，实在没那么重要的文件值得掏这个钱，然后我顺便也了解了很多，因为我自己也懂点这方面的，以前用软件帮公司其他部门的恢复过一些删除的文档那些，最后在一个公众号上发现了一篇文章，看了下思路，就自己学了一下，下面就是我这次的处理过程，大家可以参考一哈\u003c/p\u003e\n\n\u003cp\u003e2，我删文件这个vsan集群空间有160TB，一共有10台存储，我把每台存储的硬盘都直接用直通卡接到一台win10的物理机里面，又从其他存储里面腾了200TB左右的空间，用光纤挂到这个物理机里面，最后在网上用winhex这个软件，按照网上的教程把每一台存储的物理盘和缓存盘都克隆成一个.dd后缀的文件\u003c/p\u003e\n\n\u003cp\u003e3，整个集群的存储里面的硬盘都克隆后，再启动原来的集群，在vsphere里面，选择这个虚拟机所在的集群，点击监控，往下拉有个虚拟对象，在里面可以看到这个20TB的虚拟磁盘的ID信息，把这个ID记下来，然后下载了一个VMware vsan数据恢复系统1.0的恢复工具，按照说明，选择了VMware vsan，选择克隆的.dd的文件，还要选择对应的缓存盘的克隆的dd文件，然后输入刚刚记下来的虚拟对象ID，设置保存路径，就开始了自动扫描了，扫描完成后，有个弹窗，喊继续选择克隆的.dd文件和对应的缓存盘克隆的dd文件,最后经过不断的切换克隆的dd文件，大概花了七八天时间，直到把所有克隆的dd文件都选择了一遍，最后在保存路径下面生成了一个后缀是data.vmdk的文件\u003c/p\u003e\n\n\u003cp\u003e4，那个文章里面说对DD文件解析成功后，就可以得到真实数据DD，我用这个软件选择打开这DD文件，点进去就开始跑进度条解析扫描，扫描完后就看到了我原来删除的虚拟机里面的所有文件，最后我把这些文件全部导了出来，最后我再在虚拟机下面建了一个新的20TB的vmdk，然后把文件上传进去了。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go get 指定一个版本的包，却报错另一个版本不存在，这啥情况",
-      "Link": "https://studygolang.com/topics/16046#reply0",
-      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221220/6bd78d37e39b5cf0b98d25df030f18ac.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Title": "小程序上线发布后，实现版本自动更新，用户无感知",
+      "Link": "https://studygolang.com/topics/16051#reply0",
+      "Description": "\u003cp\u003e\u003cstrong\u003e直接上代码，用的都是小程序的API。\u003c/strong\u003e\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e/**\n * 检测当前的小程序是否是最新版本，判断是否需要下载、更新当前小程序\n */\nfunction checkUpdateVersion() {\n  //判断小程序版本是否可以使用小程序更新机制API\n  if (wx.canIUse('getUpdateManager')) {\n    //创建 UpdateManager 实例\n    const updateManager = wx.getUpdateManager();\n    //检测版本更新\n    updateManager.onCheckForUpdate(function(res) {\n      // 请求完新版本信息的回调\n      if (res.hasUpdate) {\n        //监听小程序有版本更新事件\n        updateManager.onUpdateReady(function() {\n          //调用 applyUpdate 应用新版本并重启 （ 此处进行了自动更新操作）\n          updateManager.applyUpdate();\n        })\n        updateManager.onUpdateFailed(function() {\n          // 新版本下载失败\n          wx.showModal({\n            title: '已经有新版本喽~',\n            content: '请您删除当前小程序，到微信 “发现-小程序” 页，重新搜索打开哦~',\n          })\n        })\n      }\n    })\n  } else {\n    wx.showModal({\n      title: '溫馨提示',\n      content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'\n    })\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003ePS: 未来的你，一定会感谢今天拼命努力的自己！\u003c/h5\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -77,6 +70,13 @@
       "Title": "一种安全加密文件的方式，文件可以实现自校验，防止文件损坏和篡改",
       "Link": "https://studygolang.com/topics/16047#reply0",
       "Description": "\u003cp\u003e\u003ca href=\"https://www.cnblogs.com/janbar/p/16994689.html\"\u003ehttps://www.cnblogs.com/janbar/p/16994689.html\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go get 指定一个版本的包，却报错另一个版本不存在，这啥情况",
+      "Link": "https://studygolang.com/topics/16046#reply0",
+      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221220/6bd78d37e39b5cf0b98d25df030f18ac.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
