@@ -46,20 +46,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "一种安全加密文件的方式，文件可以实现自校验，防止文件损坏和篡改",
-      "Link": "https://studygolang.com/topics/16047#reply0",
-      "Description": "\u003cp\u003e\u003ca href=\"https://www.cnblogs.com/janbar/p/16994689.html\"\u003ehttps://www.cnblogs.com/janbar/p/16994689.html\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "go get 指定一个版本的包，却报错另一个版本不存在，这啥情况",
-      "Link": "https://studygolang.com/topics/16046#reply0",
-      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221220/6bd78d37e39b5cf0b98d25df030f18ac.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "VMware vsan丢失的VMDK文件的数据恢复与数据导出方法",
       "Link": "https://studygolang.com/topics/16049#reply0",
       "Description": "\u003cp\u003e当天晚上在做虚拟机迁移的时候，在vsphere里面复制一个20TB的虚拟机VMDK文件，人就走了，第二天到机房看了一下整个存储空间是变少了的，估算差不多，也没仔细看，看着复制的虚拟机文件能启动，为了省空间，就把源虚拟机VDMK文件删了，结果没一会办公室就说很多附件看不到了，我才发现该虚拟机内只有系统盘，没有数据盘，之前我是建了2个vmdk文件，一个1T的系统盘，1个20TB的数据盘，现在虚拟机下那个20TB的vmdk文件变成1kb去了，查了日志发现是复制的时候出错中断了，在vsphere里面的集群监控界面，里面有个虚拟对象，可以看到这个虚拟盘，但是显示组件状态为缺失，一顿操作无果后尝试找过数据恢复公司，但是对方一看就说我这个是虚拟化平台，Vsan分布式存储，开口就是六七十万，要价太高了， 自己在网上到处找解决办法，最后自己成功解决。\u003c/p\u003e\n\n\u003cp\u003e解决办法我给大家分享一波\u003c/p\u003e\n\n\u003cp\u003e1，起初是多方了解多个数据恢复公司，还喊我付了上门费后，但是来机房看后，要价都太高了，光是几家恢复公司的上门费就花了1万多，要价都要几十万，实在没那么重要的文件值得掏这个钱，然后我顺便也了解了很多，因为我自己也懂点这方面的，以前用软件帮公司其他部门的恢复过一些删除的文档那些，最后在一个公众号上发现了一篇文章，看了下思路，就自己学了一下，下面就是我这次的处理过程，大家可以参考一哈\u003c/p\u003e\n\n\u003cp\u003e2，我删文件这个vsan集群空间有160TB，一共有10台存储，我把每台存储的硬盘都直接用直通卡接到一台win10的物理机里面，又从其他存储里面腾了200TB左右的空间，用光纤挂到这个物理机里面，最后在网上用winhex这个软件，按照网上的教程把每一台存储的物理盘和缓存盘都克隆成一个.dd后缀的文件\u003c/p\u003e\n\n\u003cp\u003e3，整个集群的存储里面的硬盘都克隆后，再启动原来的集群，在vsphere里面，选择这个虚拟机所在的集群，点击监控，往下拉有个虚拟对象，在里面可以看到这个20TB的虚拟磁盘的ID信息，把这个ID记下来，然后下载了一个VMware vsan数据恢复系统1.0的恢复工具，按照说明，选择了VMware vsan，选择克隆的.dd的文件，还要选择对应的缓存盘的克隆的dd文件，然后输入刚刚记下来的虚拟对象ID，设置保存路径，就开始了自动扫描了，扫描完成后，有个弹窗，喊继续选择克隆的.dd文件和对应的缓存盘克隆的dd文件,最后经过不断的切换克隆的dd文件，大概花了七八天时间，直到把所有克隆的dd文件都选择了一遍，最后在保存路径下面生成了一个后缀是data.vmdk的文件\u003c/p\u003e\n\n\u003cp\u003e4，那个文章里面说对DD文件解析成功后，就可以得到真实数据DD，我用这个软件选择打开这DD文件，点进去就开始跑进度条解析扫描，扫描完后就看到了我原来删除的虚拟机里面的所有文件，最后我把这些文件全部导了出来，最后我再在虚拟机下面建了一个新的20TB的vmdk，然后把文件上传进去了。\u003c/p\u003e\n",
@@ -81,6 +67,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "一种安全加密文件的方式，文件可以实现自校验，防止文件损坏和篡改",
+      "Link": "https://studygolang.com/topics/16047#reply0",
+      "Description": "\u003cp\u003e\u003ca href=\"https://www.cnblogs.com/janbar/p/16994689.html\"\u003ehttps://www.cnblogs.com/janbar/p/16994689.html\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "golang替换字符串中的图片链接，如何提升性能呢？",
       "Link": "https://studygolang.com/topics/16015#reply4",
       "Description": "\u003cp\u003e给定字符串\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003econtent=\u0026quot;\u0026lt;span class=\u0026quot;\u0026quot;\u0026gt;\u0026lt;img class=\u0026quot;wscnph\u0026quot; src=\u0026quot;https://static.images.net/202233142551646287375.jpg\u0026quot;\u0026gt;\u0026lt;img class=\u0026quot;wscnph\u0026quot; src=\u0026quot;https://static.images.net/202233142551646287377.jpg\u0026quot;\u0026gt;\u0026lt;/span\u0026gt;\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e使用正则匹配图片链接，然后上传图片到阿里云oss,获得图片的链接，然后替换字符串中图片的链接，如果给定的字符串中图片很多，怎样才能提高图片上传替换的速度\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc Upload(url string) string {\n    // 创建OSSClient实例。\n    client, err := oss.New(Endpoint, key, AccessKeySecret)\n    if err != nil {\n        fmt.Println(\u0026quot;Error:\u0026quot;, err)\n        os.Exit(-1)\n    }\n    t1 := time.Now().Unix()\n    if ti1 != t1 { //如果时间戳不一样,那么归零\n        long = 0\n    }\n    ti1 = t1\n    long++\n    obj := fmt.Sprintf(\u0026quot;article/%d%d.png\u0026quot;, t1, long)\n    // 获取存储空间。\n    bucket, err := client.Bucket(BucketName)\n    if err != nil {\n        fmt.Println(\u0026quot;Error:\u0026quot;, err)\n        os.Exit(-1)\n    }\n\n    // 上传Byte数组。\n    err = bucket.PutObject(obj, bytes.NewReader(ReadImgData(url)))\n    if err != nil {\n        fmt.Println(\u0026quot;Error:\u0026quot;, err)\n        os.Exit(-1)\n    }\n    return \u0026quot;https://\u0026quot; + BucketName + \u0026quot;.\u0026quot; + Endpoint + \u0026quot;/\u0026quot; + obj\n}\nfunc RepImages(htmls string) string {\n    var imgRE = regexp.MustCompile(`\u0026lt;img[^\u0026gt;]+\\bsrc=[\u0026quot;']([^\u0026quot;']+)[\u0026quot;']`)\n    imgs := imgRE.FindAllStringSubmatch(htmls, -1)\n    out := make([]string, len(imgs))\n    myImage := \u0026quot;\u0026quot;\n    resHtml := htmls\n    for i := range out {\n        if ! strings.HasPrefix(imgs[i][1], \u0026quot;https://static.images.net\u0026quot;) {\n            myImage = Upload(imgs[i][1])\n            resHtml = strings.Replace(resHtml, imgs[i][1], myImage, -1)\n            out[i] = imgs[i][1]\n            fmt.Println(strconv.Itoa(i), out[i])\n        }\n    }\n    fmt.Println(resHtml)\n    return resHtml\n}\n\nfunc main() {\n    //a := BcryptHash(\u0026quot;admin123$\u0026quot;)\n    //fmt.Print(a)\n    content := \u0026quot;\u0026lt;span class=\\\u0026quot;\\\u0026quot;\u0026gt;\u0026lt;img class=\\\u0026quot;wscnph\\\u0026quot; src=\\\u0026quot;https://static.images.net/2022331359421646287182.jpg\\\u0026quot;\u0026gt;\u0026lt;img class=\\\u0026quot;wscnph\\\u0026quot; src=\\\u0026quot;https://static.images.net/202233135942164628718777.jpg\\\u0026quot;\u0026gt;\u0026lt;/span\u0026gt;\u0026quot;\n    RepImages(content)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -98,6 +91,13 @@
       "Title": "深圳小破网站寻找兼职",
       "Link": "https://studygolang.com/topics/14747#reply37",
       "Description": "\u003cp\u003e各位大佬，我有个go语言写得小破网站，想找一个兼职运营, 后台是go，前端是nuxt吧（vue的架构？）\u003c/br\u003e\n主要是平时的一些小bug，例如消息弹出错误之类的帮忙改改\u003c/br\u003e\n同时，也想新加一些小功能，但是这些工作比较佛，没有时间进度\u003c/br\u003e\n有没有大佬能接的啊\u003c/br\u003e\n我的这个小破站给钱不多，不过要是合得来可以以后做些别的事，本人在一家顶级投资机构搬砖。\u003c/br\u003e\n有兴趣的小伙伴可以发简历到electronwang@qq.com\n谢谢~有没有前端的小伙伴啊， vue，nuxt框架~~~\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go get 指定一个版本的包，却报错另一个版本不存在，这啥情况",
+      "Link": "https://studygolang.com/topics/16046#reply0",
+      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/221220/6bd78d37e39b5cf0b98d25df030f18ac.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
