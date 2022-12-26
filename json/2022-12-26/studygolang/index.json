@@ -39,16 +39,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "小程序上线发布后，实现版本自动更新，用户无感知",
-      "Link": "https://studygolang.com/topics/16051#reply0",
-      "Description": "\u003cp\u003e\u003cstrong\u003e直接上代码，用的都是小程序的API。\u003c/strong\u003e\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e/**\n * 检测当前的小程序是否是最新版本，判断是否需要下载、更新当前小程序\n */\nfunction checkUpdateVersion() {\n  //判断小程序版本是否可以使用小程序更新机制API\n  if (wx.canIUse('getUpdateManager')) {\n    //创建 UpdateManager 实例\n    const updateManager = wx.getUpdateManager();\n    //检测版本更新\n    updateManager.onCheckForUpdate(function(res) {\n      // 请求完新版本信息的回调\n      if (res.hasUpdate) {\n        //监听小程序有版本更新事件\n        updateManager.onUpdateReady(function() {\n          //调用 applyUpdate 应用新版本并重启 （ 此处进行了自动更新操作）\n          updateManager.applyUpdate();\n        })\n        updateManager.onUpdateFailed(function() {\n          // 新版本下载失败\n          wx.showModal({\n            title: '已经有新版本喽~',\n            content: '请您删除当前小程序，到微信 “发现-小程序” 页，重新搜索打开哦~',\n          })\n        })\n      }\n    })\n  } else {\n    wx.showModal({\n      title: '溫馨提示',\n      content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'\n    })\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003ePS: 未来的你，一定会感谢今天拼命努力的自己！\u003c/h5\u003e\n",
+      "Title": "求解答 go怎么样在运行之后删除自身",
+      "Link": "https://studygolang.com/topics/16052#reply1",
+      "Description": "\u003cp\u003e目前尝试了remove方法不行 直接调用win系统命令或者编写bat脚本也不行 求大佬解答\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "求解答 go怎么样在运行之后删除自身",
-      "Link": "https://studygolang.com/topics/16052#reply1",
-      "Description": "\u003cp\u003e目前尝试了remove方法不行 直接调用win系统命令或者编写bat脚本也不行 求大佬解答\u003c/p\u003e\n",
+      "Title": "小程序上线发布后，实现版本自动更新，用户无感知",
+      "Link": "https://studygolang.com/topics/16051#reply0",
+      "Description": "\u003cp\u003e\u003cstrong\u003e直接上代码，用的都是小程序的API。\u003c/strong\u003e\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e/**\n * 检测当前的小程序是否是最新版本，判断是否需要下载、更新当前小程序\n */\nfunction checkUpdateVersion() {\n  //判断小程序版本是否可以使用小程序更新机制API\n  if (wx.canIUse('getUpdateManager')) {\n    //创建 UpdateManager 实例\n    const updateManager = wx.getUpdateManager();\n    //检测版本更新\n    updateManager.onCheckForUpdate(function(res) {\n      // 请求完新版本信息的回调\n      if (res.hasUpdate) {\n        //监听小程序有版本更新事件\n        updateManager.onUpdateReady(function() {\n          //调用 applyUpdate 应用新版本并重启 （ 此处进行了自动更新操作）\n          updateManager.applyUpdate();\n        })\n        updateManager.onUpdateFailed(function() {\n          // 新版本下载失败\n          wx.showModal({\n            title: '已经有新版本喽~',\n            content: '请您删除当前小程序，到微信 “发现-小程序” 页，重新搜索打开哦~',\n          })\n        })\n      }\n    })\n  } else {\n    wx.showModal({\n      title: '溫馨提示',\n      content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'\n    })\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003ePS: 未来的你，一定会感谢今天拼命努力的自己！\u003c/h5\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
