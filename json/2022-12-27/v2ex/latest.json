@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教个 golang 自定义 interface 作 函数形参 的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/904948",
+      "Description": "\u003cp\u003e代码如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epackage main\n\n\ntype ObjForGroupBy interface {\n\tGetValueForGroupBy() string\n}\n\nfunc GroupBy(data []ObjForGroupBy) map[string][]ObjForGroupBy {\n\tvar result = make(map[string][]ObjForGroupBy)\n\tfor _, obj := range data {\n\t\tstrV := obj.GetValueForGroupBy()\n\t\tresult[strV] = append(result[strV], obj)\n\t}\n\treturn result\n}\n\ntype Course struct {\n\tDay string\n}\n\nfunc (c Course) GetValueForGroupBy() string {\n\treturn c.Day\n}\n\n\nfunc main() {\n\tvar courses []Course\n\tcourses = append(courses, Course{Day: \"Monday\"})\n\tGroupBy(courses)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e报错为\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ecannot use courses (variable of type []Course) as type []ObjForGroupBy in argument to GroupBy\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e搞的我有点懵，是我理解错了 interface 吗？传单数 ObjForGroupBy 的函数，可以正常用，传 slice 就不行。来个朋友指点一下\u003c/p\u003e\n",
+      "Author": "wtfedc",
+      "PubDate": "2022-12-27T07:06:59Z"
+    },
+    {
       "Title": "android 的 gsi/treble 大家用上了么？ - Android",
       "Link": "https://www.v2ex.com/t/904947",
       "Description": "\u003cp\u003e记得好多年前 Google 就宣传 Treble 项目，并且使用 Generic System Image 来分离 Android 和 Vendor 之间的内容。说只要支持 treble ，那么 Android 升级的时候，只要刷新 system 分区，就可以升级安卓版本。\u003c/p\u003e\n\u003cp\u003e因为 android 和 vendor 之间使用 HIDL 进行了正确的隔离，即使新的安卓系统，也可以使用旧的驱动。\u003c/p\u003e\n\u003cp\u003e我手头有个 pixel ，搜索了谷歌的官方固件，好像只支持到 Android 10 。还有可能刷 GSI 升级到 Android 12/13 么？\u003c/p\u003e\n",

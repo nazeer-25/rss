@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教个 golang 自定义 interface 作 函数形参 的问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/904948</link>
+      <description>&lt;p&gt;代码如下&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;&#xA;type ObjForGroupBy interface {&#xA;&#x9;GetValueForGroupBy() string&#xA;}&#xA;&#xA;func GroupBy(data []ObjForGroupBy) map[string][]ObjForGroupBy {&#xA;&#x9;var result = make(map[string][]ObjForGroupBy)&#xA;&#x9;for _, obj := range data {&#xA;&#x9;&#x9;strV := obj.GetValueForGroupBy()&#xA;&#x9;&#x9;result[strV] = append(result[strV], obj)&#xA;&#x9;}&#xA;&#x9;return result&#xA;}&#xA;&#xA;type Course struct {&#xA;&#x9;Day string&#xA;}&#xA;&#xA;func (c Course) GetValueForGroupBy() string {&#xA;&#x9;return c.Day&#xA;}&#xA;&#xA;&#xA;func main() {&#xA;&#x9;var courses []Course&#xA;&#x9;courses = append(courses, Course{Day: &#34;Monday&#34;})&#xA;&#x9;GroupBy(courses)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;报错为&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;cannot use courses (variable of type []Course) as type []ObjForGroupBy in argument to GroupBy&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;搞的我有点懵，是我理解错了 interface 吗？传单数 ObjForGroupBy 的函数，可以正常用，传 slice 就不行。来个朋友指点一下&lt;/p&gt;&#xA;</description>
+      <author>wtfedc</author>
+      <pubDate>27 Dec 2022 07:06:59 +0000</pubDate>
+    </item>
+    <item>
       <title>android 的 gsi/treble 大家用上了么？ - Android</title>
       <link>https://www.v2ex.com/t/904947</link>
       <description>&lt;p&gt;记得好多年前 Google 就宣传 Treble 项目，并且使用 Generic System Image 来分离 Android 和 Vendor 之间的内容。说只要支持 treble ，那么 Android 升级的时候，只要刷新 system 分区，就可以升级安卓版本。&lt;/p&gt;&#xA;&lt;p&gt;因为 android 和 vendor 之间使用 HIDL 进行了正确的隔离，即使新的安卓系统，也可以使用旧的驱动。&lt;/p&gt;&#xA;&lt;p&gt;我手头有个 pixel ，搜索了谷歌的官方固件，好像只支持到 Android 10 。还有可能刷 GSI 升级到 Android 12/13 么？&lt;/p&gt;&#xA;</description>
