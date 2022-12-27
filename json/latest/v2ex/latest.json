@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "mac 上的虚拟内存关闭后,为什么还是会有虚拟内存存在 - Apple",
+      "Link": "https://www.v2ex.com/t/904961",
+      "Description": "\u003cp\u003e问一下各位大佬,我根据网上的教程.使用这个命令把 mac 上的虚拟内存关闭了\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://image.guiyunweb.com/2021/20221227.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e但关闭后我发现内存一高还是会有虚拟内存,而且内存降低下来后,交换内存也不会消失,这究竟是怎么一回事\u003c/p\u003e\n\u003cp\u003e电脑是 macbook pro 2022 m2 16G 256G 内存\n系统是最新的 13.1\u003c/p\u003e\n",
+      "Author": "guiyun",
+      "PubDate": "2022-12-27T07:58:26Z"
+    },
+    {
       "Title": "求教：如果实现 Ctrl+Shift+5 切换 [通用→增广] ？ - 中州韻",
       "Link": "https://www.v2ex.com/t/904960",
       "Description": "\u003cp\u003e使用小鹤双拼方案。\u003c/p\u003e\n\u003cp\u003e在 double_pinyin_flypy.custom.yaml 配置的开关：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e  switches:\n    - name: ascii_mode\t# reset 0 的作用是当从其它输入方案切换到本方案时，\n      reset: 0\t# 重设为指定的状态，而不保留在前一个方案中设定的状态。\n      states: [ 中文, 西文 ]\t# 选择输入方案后通常需要立即输入中文，故重设 ascii_mode = 0.\n    - name: simplification\n      reset: 1\t# 增加这一行：默认启用「繁→简」转换。\n      states: [ 漢字, 汉字 ]\n    - name: full_shape\n      states: [ 半角, 全角 ]\n      reset: 0\n    - name: gbk\t#生僻字开关\n      reset: 1\n      states: [ 增廣, 常用 ]\n    - name: ascii_punct\n      states: [ 。，, ．， ]\n      reset: 0\n\n  engine/filters:\n    - simplifier\n    - uniquifier\n    - charset_filter@gbk\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在 default.custom.yaml 配置的快捷键：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e  \"key_binder/bindings\":\n    - {accept: \"Control+Shift+5\", toggle: extended_charset, when: always}\t# 通用 /增广切换（显示生僻字）\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e目前只能依靠 \u003ccode\u003eControl+grave\u003c/code\u003e 进行 [通用→增广] 切换，这样更复杂需要更多步骤。如何实现 \u003ccode\u003eCtrl+Shift+5\u003c/code\u003e 进行快速切换？谢谢各位指点。\u003c/p\u003e\n",
