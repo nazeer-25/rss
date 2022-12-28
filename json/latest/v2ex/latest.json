@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "c 语言双指针的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/905091",
+      "Description": "\u003cp\u003e\u003ca href=\"https://www.cs.yale.edu/homes/aspnes/pinewiki/C(2f)AvlTree.html\" rel=\"nofollow\"\u003ehttps://www.cs.yale.edu/homes/aspnes/pinewiki/C(2f)AvlTree.html\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-C\"\u003e   3 typedef struct avlNode *AvlTree;\n   5 /* empty avl tree is just a null pointer */\n   6 \n   7 #define AVL_EMPTY (0)\n   8 \n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-c\"\u003e   9 struct avlNode {\n  10     struct avlNode *child[2];    /* left and right */\n  11     int key;\n  12     int height;\n  13 };\n  14 \n  87 static void\n  88 avlRotate(AvlTree *root, int d)\n  89 {\n  90     AvlTree oldRoot;\n  91     AvlTree newRoot;\n  92     AvlTree oldMiddle;\n  93 \n  94     oldRoot = *root;\n  95     newRoot = oldRoot-\u0026gt;child[d];\n  96     oldMiddle = newRoot-\u0026gt;child[!d];\n  97 \n  98     oldRoot-\u0026gt;child[d] = oldMiddle;\n  99     newRoot-\u0026gt;child[!d] = oldRoot;\n 100     *root = newRoot;\n 101 \n 102     /* update heights */\n 103     avlFixHeight((*root)-\u0026gt;child[!d]);   /* old root */\n 104     avlFixHeight(*root);                /* new root */\n 105 }\n 106 \n 107 \n 108 /* rebalance at node if necessary */\n 109 /* also fixes height */\n 110 static void\n 111 avlRebalance(AvlTree *t)\n 112 {\n 113     int d;\n 114 \n 115     if(*t != AVL_EMPTY) {\n 116         for(d = 0; d \u0026lt; 2; d++) {\n 117             /* maybe child[d] is now too tall */\n 118             if(avlGetHeight((*t)-\u0026gt;child[d]) \u0026gt; avlGetHeight((*t)-\u0026gt;child[!d]) + 1) {\n 119                 /* imbalanced! */\n 120                 /* how to fix it? */\n 121                 /* need to look for taller grandchild of child[d] */\n 122                 if(avlGetHeight((*t)-\u0026gt;child[d]-\u0026gt;child[d]) \u0026gt; avlGetHeight((*t)-\u0026gt;child[d]-\u0026gt;child[!d])) {\n 123                     /* same direction grandchild wins, do single rotation */\n 124                     avlRotate(t, d);\n 125                 } else {\n 126                     /* opposite direction grandchild moves up, do double rotation */\n 127                     avlRotate(\u0026amp;(*t)-\u0026gt;child[d], !d);\n 128                     avlRotate(t, d);\n 129                 }\n 130 \n 131                 return;   /* avlRotate called avlFixHeight */\n 132             }\n 133         }\n 134                   \n 135         /* update height */\n 136         avlFixHeight(*t);\n 137     }\n 138 }\n 139 \n 140 /* insert into tree */\n 141 /* this may replace root, which is why we pass\n 142  * in a AvlTree * */\n 143 void\n 144 avlInsert(AvlTree *t, int key)\n 145 {\n 146     /* insertion procedure */\n 147     if(*t == AVL_EMPTY) {\n 148         /* new t */\n 149         *t = malloc(sizeof(struct avlNode));\n 150         assert(*t);\n 151 \n 152         (*t)-\u0026gt;child[0] = AVL_EMPTY;\n 153         (*t)-\u0026gt;child[1] = AVL_EMPTY;\n 154 \n 155         (*t)-\u0026gt;key = key;\n 156 \n 157         (*t)-\u0026gt;height = 1;\n 158 \n 159         /* done */\n 160         return;\n 161     } else if(key == (*t)-\u0026gt;key) {\n 162         /* nothing to do */\n 163         return;\n 164     } else {\n 165         /* do the insert in subtree */\n 166         avlInsert(\u0026amp;(*t)-\u0026gt;child[key \u0026gt; (*t)-\u0026gt;key], key);\n 167 \n 168         avlRebalance(t);\n 169 \n 170         return;\n 171     }\n 172 }\n\u003c/code\u003e\u003c/pre\u003e\n\u003col\u003e\n\u003cli\u003e这个实现中，avlRotate, avlRebalance, avlInsert 都用了双指针，我的理解是作者特意用了双指针。 双指针相比于直接用指针有什么特别的优势么？\u003c/li\u003e\n\u003cli\u003eavl tree ，red black tree 还有什么写的很好的可以多学习下的实现么？\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "Or2",
+      "PubDate": "2022-12-28T02:37:14Z"
+    },
+    {
+      "Title": "三星的 990pro 这款新出的 SSD，还有 0E 门事件吗？ - SSD",
+      "Link": "https://www.v2ex.com/t/905090",
+      "Description": "\u003cp\u003e有谁测试过？\u003c/p\u003e\n",
+      "Author": "mrzx",
+      "PubDate": "2022-12-28T02:36:46Z"
+    },
+    {
+      "Title": "这个特殊时间段医护压力是不是特别大？希望他们能挺过来。 - 程序员",
+      "Link": "https://www.v2ex.com/t/905089",
+      "Description": "\u003cp\u003e没什么别的。就是觉得现在这个时间段他们肯定很辛苦。也想了解一下最近医院的内部情况如何，希望能一起共同挺过这个时间段💪。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://i.imgur.com/5wv9wog.jpg\" rel=\"nofollow\"\u003ehttps://i.imgur.com/5wv9wog.jpg\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "13936",
+      "PubDate": "2022-12-28T02:35:33Z"
+    },
+    {
+      "Title": "阿拉伯文字的艺术、设计和开发 - 设计",
+      "Link": "https://www.v2ex.com/t/905088",
+      "Description": "\u003cp\u003e上次发了篇人生感悟，被喷“割韭菜”、“快进到直播带货”，感觉那样引流的确体验不好，于是就主动下沉了。\u003c/p\u003e\n\u003cp\u003e这次不搞发一半再引流了，直接上链接！\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e因为最近在研究网页的 RTL 适配，促使我了解了一些阿拉伯书法和字体的知识。越了解越觉得应该把这个优秀且丰富多样的艺术介绍给不知道的人。然而中文世界里相关信息比较散乱，于是我决定把这段时间搜集到的信息整理成文章。\u003c/p\u003e\n\u003cp\u003e本系列文章分为 3 篇，将从设计师 /开发者的视角，从艺术、设计到开发，三个方向来介绍阿拉伯文字。\u003c/p\u003e\n\u003cp\u003e第一篇从艺术角度，介绍阿拉伯文的历史，字体的种类和特点，书法的应用。\u003c/p\u003e\n\u003cp\u003e第二篇从设计角度，介绍 RTL 布局的特点，应该如何为这种布局进行设计。\u003c/p\u003e\n\u003cp\u003e第三篇本打算从 web 开发角度，以一个网页 demo 为例，介绍如何将一个 LTR 主流布局转换成 RTL 布局。但是后来发现了一个巴勒斯坦设计师写的指南就挺好，没必要再把里面内容复述一遍。于是帮他翻译了一下，最后一篇就改为这篇译文。\u003c/p\u003e\n\u003cp\u003e传送门：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://darmau.design/article/arabic-script-1/\" rel=\"nofollow\"\u003e阿拉伯文字的艺术、设计和开发：伊斯兰书法和字体\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://darmau.design/article/arabic-script-2/\" rel=\"nofollow\"\u003e阿拉伯文字的艺术、设计和开发：RTL 布局的设计要点\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/a2UfKhOAIwAcxKp2n5-OPg\" rel=\"nofollow\"\u003e阿拉伯文字的艺术、设计和开发：前端适配指南\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e公众号点了我就能有一分钱广告费版：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/dRm271aDu_JI5gYZgPRLGg\" rel=\"nofollow\"\u003e阿拉伯文字的艺术、设计和开发：伊斯兰书法和字体\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/2Af2ZIKnT_I6M1f4JjUf0w\" rel=\"nofollow\"\u003e阿拉伯文字的艺术、设计和开发：RTL 布局的设计要点\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://mp.weixin.qq.com/s/a2UfKhOAIwAcxKp2n5-OPg\" rel=\"nofollow\"\u003eRTL-阿拉伯 /希伯来文的界面设计和前端适配指南\u003c/a\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003cstrong\u003e如果觉得对你有帮助，评论点赞转发都是很好的表达方式\u003c/strong\u003e\u003c/p\u003e\n",
+      "Author": "leedarmau",
+      "PubDate": "2022-12-28T02:34:38Z"
+    },
+    {
       "Title": "放开了，过年可以去新加坡或者日本玩玩吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/905087",
       "Description": "三年了，想出国旅个游。",
