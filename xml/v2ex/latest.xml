@@ -4,9 +4,23 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>这个 class 是什么意思 - C++</title>
+      <link>https://www.v2ex.com/t/905238</link>
+      <description>&lt;p&gt;正在研究 c++标准库的代码， 我用的是 VS2019 ，在~VS 2019\Microsoft Visual Studio\VC\Tools\MSVC\14.22.27905\include\utility 文件内，有关 swap 的函数，其中一个重载如下&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;// FUNCTION TEMPLATE swap&#xA;template &amp;lt;class _Ty, size_t _Size, class&amp;gt; //这个 class&#xA;inline void swap(_Ty (&amp;amp;_Left)[_Size], _Ty (&amp;amp;_Right)[_Size])&#xA;    _NOEXCEPT_COND(_Is_nothrow_swappable&amp;lt;_Ty&amp;gt;::value) { // exchange arrays stored at _Left and _Right&#xA;    if (&amp;amp;_Left != &amp;amp;_Right) { // worth swapping, swap ranges&#xA;        _Ty* _First1 = _Left;&#xA;        _Ty* _Last1  = _First1 + _Size;&#xA;        _Ty* _First2 = _Right;&#xA;        for (; _First1 != _Last1; ++_First1, ++_First2) {&#xA;            _STD iter_swap(_First1, _First2);&#xA;        }&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这个 swap 函数还有个重载版本，也有这个情况&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;template &amp;lt;class _Ty, class&amp;gt; //这里也是同样&#xA;inline void swap(_Ty&amp;amp; _Left, _Ty&amp;amp; _Right) _NOEXCEPT_COND(is_nothrow_move_constructible_v&amp;lt;_Ty&amp;gt;&amp;amp;&amp;amp;&#xA;        is_nothrow_move_assignable_v&amp;lt;_Ty&amp;gt;) { // exchange values stored at _Left and _Right&#xA;    _Ty _Tmp = _STD move(_Left);&#xA;    _Left    = _STD move(_Right);&#xA;    _Right   = _STD move(_Tmp);&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我像问下这个 class 是什么意思&lt;/p&gt;&#xA;</description>
+      <author>LuckyPocketWatch</author>
+      <pubDate>28 Dec 2022 13:42:27 +0000</pubDate>
+    </item>
+    <item>
+      <title>不靠应用市场，请问各位是如何管理 app 版本升级的 - 程序员</title>
+      <link>https://www.v2ex.com/t/905237</link>
+      <description>&lt;p&gt;原理不用讲，很简单，讲实现。&lt;/p&gt;&#xA;&lt;p&gt;是自建版本发布 web 管理系统，还是有什么现成的平台和工具。&lt;/p&gt;&#xA;&lt;p&gt;uniapp 的升级中心用起来是挺好，但是需要用恶心的云函数和云空间，能不能低成本把它改装下变成自己的东西。&lt;/p&gt;&#xA;</description>
+      <author>unt</author>
+      <pubDate>28 Dec 2022 13:42:11 +0000</pubDate>
+    </item>
+    <item>
       <title>除了 FTP FTPS SFTP 就没有一个原生支持断点续传的协议吗？ - 宽带症候群</title>
       <link>https://www.v2ex.com/t/905236</link>
-      <description>FTP(S)被动模式要开多个端口，不喜欢&lt;br /&gt;SFTP 就算套 OpenV P N 跨国传输还是只有 15Mbps 左右（单线程 Speedtest 稳稳跑满本地带宽）</description>
+      <description>FTP(S)被动模式要开多个端口，不喜欢&lt;br /&gt;SFTP 就算套 OpenVPN 跨国传输还是只有 15Mbps 左右（单线程 Speedtest 稳稳随时跑满本地 100Mbps 带宽，不可能是 VPN 节点的问题，实际上我之前测试过美国&amp;lt;-&amp;gt;德国间传输偶尔也会出现这么低的速度，用别的协议就没问题，研究了很久也不知道是为什么）&lt;br /&gt;S3 倒是可以，但是没有移动对象 API ，100GB 的文件夹改个名需要先复制一遍再删除，慢得离谱&lt;br /&gt;（ OpenVPN 套了 Azure 沪港加密隧道，不会被墙检测）</description>
       <author>edis0n0</author>
       <pubDate>28 Dec 2022 13:36:40 +0000</pubDate>
     </item>
