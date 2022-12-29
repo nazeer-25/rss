@@ -33,6 +33,11 @@
       <description>&lt;pre&gt;&lt;code&gt;mapj1 := make(map[string]interface{})&#xA;&#x9;mapj1[&amp;quot;name&amp;quot;] = &amp;quot;名1&amp;quot;&#xA;&#x9;mapj1[&amp;quot;config&amp;quot;] = `{&amp;quot;is_ok&amp;quot;,&amp;quot;yes&amp;quot;}`&#xA;&#x9;b1, _ := json.Marshal(mapj1)&#xA;&#x9;fmt.Println(string(b1))&#xA;&#xA;结果：{&amp;quot;config&amp;quot;:&amp;quot;{\&amp;quot;is_ok\&amp;quot;,\&amp;quot;yes\&amp;quot;}&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;名1&amp;quot;}&#xA;&#xA;我要实现效果：&#xA;{&amp;quot;name&amp;quot;:&amp;quot;名1&amp;quot;,&amp;quot;config&amp;quot;:{&amp;quot;is_ok&amp;quot;,&amp;quot;yes&amp;quot;}}&#xA;&#xA;&#xA;请问我是哪里没有做对？&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
+      <title>一个菜鸡有段代码不动 又划水的大佬吗 来解答下</title>
+      <link>https://studygolang.com/topics/16056#reply6</link>
+      <description>&lt;pre&gt;&lt;code&gt;var b = ((*[1 &amp;lt;&amp;lt; 8]int)(unsafe.Pointer(&amp;amp;a[0])))[:len(a):cap(a)]&#xA;&#xA;&#xA;sort.Ints(b)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
       <title>go-dongle 0.2.3 版本发布，一个轻量级、语义化的 golang 编码解码、加密解密库</title>
       <link>https://studygolang.com/topics/16055#reply1</link>
       <description>&lt;p&gt;dongle 是一个轻量级、语义化、对开发者友好的 Golang 编码解码和加密解密库&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;Dongle&lt;/code&gt; 已被 &lt;a href=&#34;https://github.com/avelino/awesome-go#security&#34; title=&#34;awesome-go&#34;&gt;awesome-go&lt;/a&gt; 收录, 如果您觉得不错，请给个 star 吧&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/golang-module/dongle&#34; title=&#34;github.com/golang-module/dongle&#34;&gt;github.com/golang-module/dongle&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://gitee.com/golang-module/dongle&#34; title=&#34;gitee.com/golang-module/dongle&#34;&gt;gitee.com/golang-module/dongle&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;更新日志&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;增加对 &lt;code&gt;shake128&lt;/code&gt; 哈希算法的支持&lt;/li&gt;&#xA;&lt;li&gt;增加对 &lt;code&gt;shake256&lt;/code&gt; 哈希算法的支持&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;功能清单&lt;/strong&gt;&#xA;- [x] Hex 编码、解码&#xA;- [x] Base16 编码、解码&#xA;- [x] Base32 编码、解码&#xA;- [x] Base58 编码、解码&#xA;- [x] Base62 编码、解码&#xA;- [x] Base64 编码、解码&#xA;- [x] Base64URL 编码、解码&#xA;- [x] SafeURL 编码、解码&#xA;- [x] Base85 编码、解码&#xA;- [x] Base91 编码、解码&#xA;- [x] Base100 编码、解码&#xA;- [x] Morse(摩斯) 编码、解码&#xA;- [x] Md2 加密&#xA;- [x] Md4 加密&#xA;- [x] Md5 加密&#xA;- [x] Sha1 加密&#xA;- [x] Sha3-224 加密&#xA;- [x] Sha3-256 加密&#xA;- [x] Sha3-384 加密&#xA;- [x] Sha3-512 加密&#xA;- [x] Sha224 加密&#xA;- [x] Sha256 加密&#xA;- [x] Sha384 加密&#xA;- [x] Sha512 加密&#xA;- [x] Sha512-224 加密&#xA;- [x] Sha512-256 加密&#xA;- [x] Shake128 加密&#xA;- [x] Shake256 加密&#xA;- [x] Ripemd160 加密&#xA;- [x] Hmac-md2 加密&#xA;- [x] Hmac-md4 加密&#xA;- [x] Hmac-md5 加密&#xA;- [x] Hmac-sha1 加密&#xA;- [x] Hmac-sha3-224 加密&#xA;- [x] Hmac-sha3-256 加密&#xA;- [x] Hmac-sha3-384 加密&#xA;- [x] Hmac-sha3-512 加密&#xA;- [x] Hmac-sha224 加密&#xA;- [x] Hmac-sha256 加密&#xA;- [x] Hmac-sha384 加密&#xA;- [x] Hmac-sha512 加密&#xA;- [x] Hmac-sha512-224 加密&#xA;- [x] Hmac-sha512-256 加密&#xA;- [x] Hmac-ripemd160 加密&#xA;- [x] Hmac-sm3 加密&#xA;- [ ] Rc2 加密、解密&#xA;- [x] Rc4 加密、解密&#xA;- [ ] Rc5 加密、解密&#xA;- [ ] Rc6 加密、解密&#xA;- [x] Tea 加密、解密&#xA;- [ ] Xtea 加密、解密&#xA;- [x] Aes 加密、解密&#xA;- [x] Blowfish 加密、解密&#xA;- [x] Des 加密、解密&#xA;- [x] 3Des 加密、解密&#xA;- [x] Rsa 加密、解密&#xA;- [ ] Ecc 加密、解密&#xA;- [ ] Sm2 加密、解密&#xA;- [x] Sm3 加密&#xA;- [ ] Sm4 加密、解密&#xA;- [ ] Sm7 加密、解密&#xA;- [ ] Sm9 加密、解密&#xA;- [x] Bcrypt 签名、验签&#xA;- [x] Ed25519 签名、验签&#xA;- [x] Rsa 签名、验签&#xA;- [ ] Dsa 签名、验签&lt;/p&gt;&#xA;</description>
@@ -46,11 +51,6 @@
       <title>推荐你认为好的Go资源</title>
       <link>https://studygolang.com/topics/11096#reply51</link>
       <description>&lt;p&gt;社区是一个互助平台，大家的资源应该互相共享，一起推动 Go 的发展，提升每个人的 Go 水平。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如果你有好的 Go 资源，包括但不限于：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;网站&lt;/li&gt;&#xA;&lt;li&gt;图书&lt;/li&gt;&#xA;&lt;li&gt;工具&lt;/li&gt;&#xA;&lt;li&gt;项目&lt;/li&gt;&#xA;&lt;li&gt;库&lt;/li&gt;&#xA;&lt;li&gt;教程&lt;/li&gt;&#xA;&lt;li&gt;博客&lt;/li&gt;&#xA;&lt;li&gt;。。。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;欢迎留言，给出你的推荐理由和网址。谢谢！&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>一个菜鸡有段代码不动 又划水的大佬吗 来解答下</title>
-      <link>https://studygolang.com/topics/16056#reply6</link>
-      <description>&lt;pre&gt;&lt;code&gt;var b = ((*[1 &amp;lt;&amp;lt; 8]int)(unsafe.Pointer(&amp;amp;a[0])))[:len(a):cap(a)]&#xA;&#xA;&#xA;sort.Ints(b)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>优维低代码：关联微应用和Feature Flags 特性开关</title>
