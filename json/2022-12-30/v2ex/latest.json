@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "不用第三方 auth 库纯手写的情况下，怎么处理例如 passwd 或 token 之类的敏感信息？ - 问与答",
+      "Link": "https://www.v2ex.com/t/905721",
+      "Description": "\u003cp\u003e因为有需要通过 keycloak 进行授权的需求，一开始是想找看有没有官方提供的 lib ，结果发现因为各种原因（比如说框架太新、依赖没更上等）并没有能用的，强行找一个的结果就是出现各种诡异的错误（比如说 userid 始终为 null ）。\u003c/p\u003e\n\u003cp\u003e然后考虑能不能直接调用 http 请求，自行拼接 header 和 body……postman 测试完全可以，只要自己记得保存 access_token 和 refresh_token 就行了。但是问题来了……\u003c/p\u003e\n\u003cp\u003e把登入时需要的信息保存下来，也就是大概会创建一个长这样的 store：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e{\n    client_id: string, client_secret: string, ...\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e而且在调用 http request 的时候，也会把用户名和密码直接传过去。如果在浏览器里面打断点的话，可以直接取得当前的用户名和密码。就算是 app client ，也是可以通过 hack 进内存的方式获得这些敏感信息的吧。\u003c/p\u003e\n\u003cp\u003e如果把这些 passwd 和 token 在 store 里面 encrypt 的话，问题在于和 keycloak 通信的时候需要传输这个 token 本身，也就是说 encrypt 的内容必须能够被解密，在已知源代码或源代码产生物的时候，这样就意味着白加密了。\u003c/p\u003e\n\u003cp\u003e那么一般对待这些敏感信息的话，该用什么方式来处理以防止信息泄漏呢？\u003c/p\u003e\n\u003cp\u003e话说过来也看了一下现在在用的客户端开发的框架里面的非官方 keycloak 封装库……感觉就是直接在 http api 上封装了一层，压根没有讨论到加密的内容……所以大概也是不符合要求的了。\u003c/p\u003e\n",
+      "Author": "netabare",
+      "PubDate": "2022-12-30T23:53:34Z"
+    },
+    {
+      "Title": "无法登录 + 无法清空垃圾箱 Bug 求助 - macOS",
+      "Link": "https://www.v2ex.com/t/905720",
+      "Description": "\u003cp\u003e在某次不小心将硬盘装满后，噩梦就开始了。不过目前已经腾出 600GB+ 空间。\u003c/p\u003e\n\u003cp\u003e问题 1：\u003c/p\u003e\n\u003cp\u003e当前账号无法登录，输入密码后进度条卡在 55% 的样子不再前进。\u003c/p\u003e\n\u003cp\u003e登录其他账号，再切换至主账号，可顺利进入桌面。\u003c/p\u003e\n\u003cp\u003e尝试进入安全模式，尽量关闭所有启动项，问题依旧。\u003c/p\u003e\n\u003cp\u003e问题 2：\u003c/p\u003e\n\u003cp\u003e垃圾箱无法清空，点击清空后，进度条一直加载。\u003c/p\u003e\n\u003cp\u003e可以手工一项一项从垃圾箱中删除，将垃圾箱清空。但是但凡扔进去一个新文件（比如空文件夹），清空时开始一直加载。\u003c/p\u003e\n\u003cp\u003e网络搜索提示“删除当前用户 .Trash 文件夹”，但是实际操作提示权限不足，lsof 命令也没有占用 .Trash 的结果。\u003c/p\u003e\n\u003cp\u003e问题 3：\u003c/p\u003e\n\u003cp\u003e在我写这篇帖子的时候，我想查硬盘空间，发现设置 - General - Storage 这一项也点不开了。\u003c/p\u003e\n\u003cp\u003e救命！\u003c/p\u003e\n\u003cp\u003e系统版本：Ventura 13.1\u003c/p\u003e\n\u003cp\u003eM1 Pro MBP\u003c/p\u003e\n",
+      "Author": "oIMOo",
+      "PubDate": "2022-12-30T23:50:38Z"
+    },
+    {
       "Title": "蹲一个在 wsl2 下映射 V100 显卡的方式 - 问与答",
       "Link": "https://www.v2ex.com/t/905719",
       "Description": "\u003cp\u003eRt ，手头有数张 V100 ，但是跑模型必须在 linux 下。目前采用的方法是双系统切 ubuntu 跑，但很不方便。\u003c/p\u003e\n\u003cp\u003e之前尝试过 WSL 然而一直提示显卡访问错误，后来查阅文档发现不支持 Tesla 系列（因为 Tesla 系列没有 wddm 模式）\u003c/p\u003e\n\u003cp\u003e然而我看 github 有人成功用 V100 跑在 wsl 里，莫非是有什么特殊技巧？\u003c/p\u003e\n\u003cp\u003e蹲一个大佬解答\u003c/p\u003e\n",
