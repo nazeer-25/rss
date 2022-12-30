@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "clash 透明代理设置 - 问与答",
+      "Link": "https://www.v2ex.com/t/905664",
+      "Description": "\u003cp\u003e刚折腾 clash 的透明代理，旁网关的方式，失败了。\u003c/p\u003e\n\u003cp\u003e参考网上的介绍的最简单的方式：主路由 openwrt 端就设置一个地方：DHCP-Options 部分设置为\u003c/p\u003e\n\u003cp\u003e3,192.168.2.5(旁路网关的 ip)\u003cbr/\u003e\n6,192.168.2.5(旁路网关的 ip)  \u003c/p\u003e\n\u003cp\u003e然后旁路网关首先开了转发：net.ipv4.ip_forward=1 ，然后运行 clash premium ，开启 tun 和 dns ，这两部分内容如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003edns:\nenable: true\nlisten: 0.0.0.0:53\nenhanced-mode: fake-ip\nnameserver:\n  - 114.114.114.114\nfallback:\n  - 8.8.8.8\n  \ntun:\nenable: true\nstack: system # or gvisor\ndns-hijack:\n  - any:53\n  - tcp://any:53\nauto-route: true\nauto-detect-interface: true\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是原先 clash 代理部分工作正常的，一旦在 openwrt 中将 DNS 设置到旁路网关，就整个断网了，不知道是哪里没有设置对？\u003c/p\u003e\n",
+      "Author": "code4world",
+      "PubDate": "2022-12-30T11:22:15Z"
+    },
+    {
       "Title": "服务器被打了，有没有预防的方案 - 程序员",
       "Link": "https://www.v2ex.com/t/905662",
       "Description": "\u003cp\u003e刚刚有个人告诉我在看文档的时候，我的网站突然就访问不了了\u003c/p\u003e\n\u003cp\u003e连了一下 ssh ，发现连接超时，登了一下阿里云，发现 CPU 直接飙到 99\u003c/p\u003e\n\u003cp\u003e应该是 ddos ，我的服务器没有套 cdn ，所以对外的直接是本机的公网 ip ，除了套 cdn ，对于这种攻击有没有什么预防方法，亦或是及时的救援方法\u003c/p\u003e\n\u003cp\u003e我之前想过能不能买三台或者是更多，当第一台服务器挂了的时候马上切换到第二台，这种想法可行吗\u003c/p\u003e\n",
