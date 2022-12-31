@@ -18,13 +18,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "docker安装gitea",
-      "Link": "https://studygolang.com/articles/36010#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "ug环球一比一18148855579",
       "Link": "https://studygolang.com/articles/36011#reply0",
       "Description": "\u003cp\u003eGo语言中文网\n分享\n首页 文章\nhello_wbm\n从零学习 Go 语言（22）：Go 语言中如何开源自己写的包给别人用?\nhello_wbm · 2020-07-01 08:36:35 · 1211 次点击 · 预计阅读时间 5 分钟 · 不到1分钟之前 开始浏览\u003cbr\u003e\n这是一个创建于 2020-07-01 08:36:35 的文章，其中的信息可能已经有所发展或是发生改变。\n第一次，站长亲自招 Gopher 了\u0026gt;\u0026gt;\u0026gt;\u003c/p\u003e\n\n\u003cp\u003e在线博客：\u003ca href=\"http://golang.iswbm.com/\"\u003ehttp://golang.iswbm.com/\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003eGithub：\u003ca href=\"https://github.com/iswbm/GolangCodingTime\"\u003ehttps://github.com/iswbm/GolangCodingTime\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e通常之前的学习，我们知道了在 Go 的项目中，可以 import 一个托管在远程仓库的模块，这个模块在我们使用 go get 的时候，会下载到本地。\u003c/p\u003e\n\n\u003cp\u003e既然是放在远程仓库上，意味着所有人都可以发布，并且所以人也都可以使用。\u003c/p\u003e\n\n\u003cp\u003e今天就来学习一下，如何发布一个开源的模块，并且使用它。\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e新建仓库\n先在你的 Github 上新建一个仓库，记得选 Public（默认）\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e然后你会得到一个仓库地址，在你的电脑上 使用 git clone 命令克隆下来\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e编写模块代码\n使用前面学过的 go mod init 命令进行初始化，注意这里的模块名，填写我们的git仓库地址（但是要去掉.git哈）\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e\u003cspan class=\"math inline\"\u003e\\( git clone https://github.com/BingmingWong/goutils.git\n\\)\u003c/span\u003e go mod init github.com/BingmingWong/goutils\u003c/p\u003e\n\n\u003cp\u003e然后新建一个 hash 文件夹，存放编写的一个计算 md5 值工具包，编辑 md5.go\u003c/p\u003e\n\n\u003cp\u003epackage hash\u003c/p\u003e\n\n\u003cp\u003eimport (\n    \u0026ldquo;crypto/md5\u0026rdquo;\n    \u0026ldquo;encoding/hex\u0026rdquo;\n    \u0026ldquo;errors\u0026rdquo;\n    \u0026ldquo;fmt\u0026rdquo;\n    \u0026ldquo;io\u0026rdquo;\n    \u0026ldquo;os\u0026rdquo;\n)\u003c/p\u003e\n\n\u003cp\u003e// get file md5\nfunc FileMd5(filename string) (string, error) {\n    file, err := os.Open(filename)\n    if err != nil {\n    return \u0026ldquo;\u0026rdquo;, errors.New(\n        fmt.Sprintf(\u0026ldquo;md5.go hash.FileMd5 os open error %v\u0026rdquo;, err))\n    }\n    h := md5.New()\n    _, err = io.Copy(h, file)\n    if err != nil {\n        return \u0026ldquo;\u0026rdquo;, errors.New(fmt.Sprintf(\u0026ldquo;md5.go hash.FileMd5 io copy error %v\u0026rdquo;, err))\n    }\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003ereturn hex.EncodeToString(h.Sum(nil)), nil\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n\n\u003cp\u003e// get string md5\nfunc StringMd5(s string) string {\n    md5 := md5.New()\n    md5.Write([]byte(s))\n    return hex.EncodeToString(md5.Sum(nil))\n}\n由于我们使用的都是内置包，没有引入第三方的包，所以接下来可以把你刚刚那些新增的文件，全部 push 到 git 仓库。\u003c/p\u003e\n\n\u003cp\u003e\u003cspan class=\"math inline\"\u003e\\( git add -A\n\\)\u003c/span\u003e git commit -m \u0026ldquo;Add a md5 function\u0026rdquo;\n$ git push\n3. 发布版本\n一切完成后，刷新我们的仓库，就可以看到我们的刚刚上传的项目代码了，点击 release 发布一个版本\u003c/p\u003e\n\n\u003cp\u003e然后像下图一样，添加一些版本说明\u003c/p\u003e\n\n\u003cp\u003e最后点击一个 Publish release，就发布了一个版本\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e如何使用？\n使用 go get 命令下载我们的发布的模块\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e$ go get github.com/BingmingWong/goutils\u003c/p\u003e\n\n\u003cp\u003e再使用 tree 命令，查看一下我们下载的包已经放入了 $GOPATH/pkg/mod 下。\u003c/p\u003e\n\n\u003cp\u003e有一点很有趣的是，我的 Github 用户名（BingmingWong）是有大写字母的，下载下来后，在目录中大写字母会对应变成 !小写字母，如下所示\u003c/p\u003e\n\n\u003cp\u003e这个用户名看起来有点非主流，你要想改的话，也是可以的。如果你有其他的开源项目，github 并不会为你做重定向，你需要自己评估这个风险。\u003c/p\u003e\n\n\u003cp\u003e回过头来，我还是继续讲如何使用吧。\u003c/p\u003e\n\n\u003cp\u003e下载下来后，我们试着去调用一下他的函数，有一点需要注意的是，在这个示例里，你不能使用 github.com/BingmingWong/goutils 去导入，因为在这个目录下并没有 package，所以你必须导入 github.com/BingmingWong/goutils/hash 。\u003c/p\u003e\n\n\u003cp\u003e整个过程如下所示，供你参考：\u003c/p\u003e\n",
@@ -35,6 +28,13 @@
       "Title": "内网穿透工具访问不了https协议的gin框架服务",
       "Link": "https://studygolang.com/topics/16061#reply0",
       "Description": "\u003cp\u003egolang服务报错 2022/12/31 13:14:11 http: TLS handshake error from 127.0.0.1:52871: EOF；\n浏览器访问报错 Client sent an HTTP request to an HTTPS server.\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "docker安装gitea",
+      "Link": "https://studygolang.com/articles/36010#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
