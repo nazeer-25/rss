@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>我的 Pixel 3 电源键和音量键都坏了，无法开机……但 BL 锁是解掉了的， USB 调试也应该是打开的。我该怎么让 Pixel 3 开机呢？ - 问与答</title>
+      <link>https://www.v2ex.com/t/906014</link>
+      <description>我用 Pixel 1 试了一下，发现只有开机了以后 adb devices 才能检测到设备……</description>
+      <author>wbzd</author>
+      <pubDate>02 Jan 2023 02:25:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>各位玩 PT 都用的啥盘啊？ - NAS</title>
+      <link>https://www.v2ex.com/t/906013</link>
+      <description>PT 新手， 现在手里有一个 QNAP-453Bmini （ 4 盘位） 目前只放了一块酷狼 4T. 现在快满了。&lt;br /&gt;&lt;br /&gt;这块盘上除了 PT 下载的数据之外也放了一些其他的个人数据。而且听说 PT 费盘，我这有几个疑问：&lt;br /&gt;&lt;br /&gt;1. 现在要买快新的硬盘来挂 PT ， 应该买多大容量 /什么品牌的盘好？&lt;br /&gt;2. 新硬盘只用来放 PT 的数据， 是不是要隔离使用？ 还是直接扩充的现有的存储池中？</description>
+      <author>Davic1</author>
+      <pubDate>02 Jan 2023 02:24:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>iPhone 上的微信数据恢复很慢 - Apple</title>
+      <link>https://www.v2ex.com/t/906012</link>
+      <description>&lt;p&gt;刚换手机，从 iCloud 恢复数据。微信的数据占大头，有 65G 。&#xA;从昨天下午 4 点开始恢复数据，到现在 20 个小时过去了，其他所有 App 都恢复了，就微信还在恢复。。。&#xA;如果取消恢复，从 iPad 上同步微信数据会不会快一些？ iPad 上也有微信，数据基本上和手机是同步的。&lt;/p&gt;&#xA;</description>
+      <author>blues9</author>
+      <pubDate>02 Jan 2023 02:17:26 +0000</pubDate>
+    </item>
+    <item>
       <title>求各位大佬给些报表优化的思路? - MySQL</title>
       <link>https://www.v2ex.com/t/906010</link>
       <description>&lt;p&gt;现在客户要求这么一张报表&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://tvax3.sinaimg.cn/large/005S7MDjly1h91185f999j31p20vrwjl.jpg&#34;/&gt;&#xA;横向为年龄&#xA;竖向为项目名称&#xA;有各种条件每次客户进入页面都要点击一下开始分析，报表生成起来很慢，现在要求优化，加上了缓存，但是第一次生成报表的时候还是需要等待，想用计划任务跑一下，但是想到了各种搜索条件组合起来有很多情况，没有实施，求优化思路！&lt;/p&gt;&#xA;&lt;p&gt;当前表结构&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;CREATE TABLE `xx_table1` (&#xA;  `id` bigint NOT NULL,&#xA;  `code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT &#39;&#39; COMMENT &#39;编号&#39;,&#xA;  `full_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT &#39;&#39; COMMENT &#39;姓名&#39;,&#xA;  `gender` tinyint NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;性别&#39;,&#xA;  `age` smallint DEFAULT &#39;0&#39; COMMENT &#39;年龄&#39;,&#xA;  `idcard` varchar(33) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT &#39;&#39; COMMENT &#39;身份证号&#39;,&#xA;  `resident_address` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT &#39;常驻地址&#39;,&#xA;  `resident_address_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT &#39;常驻地址行政编码&#39;,&#xA;  `registered_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT &#39;户籍地址&#39;,&#xA;  `registered_address_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT &#39;户籍地址行政编码&#39;,&#xA;  `birthday` date DEFAULT &#39;0000-00-00&#39; COMMENT &#39;生日&#39;,&#xA;  `dead_date` datetime DEFAULT NULL COMMENT &#39;死亡日期&#39;,&#xA;  `dead_place_code` bigint NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;死亡地点&#39;,&#xA;  `family_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT &#39;家属姓名&#39;,&#xA;  `family_tel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT &#39;家属联系电话&#39;,&#xA;  `created_at` datetime DEFAULT NULL COMMENT &#39;创建时间&#39;,&#xA;  `created_by` bigint NOT NULL COMMENT &#39;创建人&#39;,&#xA;  `is_audit` tinyint NOT NULL DEFAULT &#39;1&#39; COMMENT &#39;是否审核&#39;,&#xA;  `audit_by` bigint DEFAULT NULL COMMENT &#39;审核人&#39;,&#xA;  `audit_at` datetime DEFAULT NULL COMMENT &#39;审核时间&#39;,&#xA;  `year` int NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;年份&#39;,&#xA;  `item_id` int NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;项目 id&#39;,&#xA;  `area_code` bigint DEFAULT &#39;0&#39; COMMENT &#39;地区代码&#39;,&#xA;  PRIMARY KEY (`id`) USING BTREE,&#xA;  KEY `p_fi_idx` (`full_name`,`idcard`) USING BTREE&#xA;) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT=&#39;XX 表&#39;;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;索引还没加&lt;/p&gt;&#xA;&lt;p&gt;数据量大于 100W!&lt;/p&gt;&#xA;&lt;p&gt;想到了把数据跑成单表，但是没做过，不知道要怎么写，不知道单表要怎么建，求大老指点&lt;/p&gt;&#xA;</description>

@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "我的 Pixel 3 电源键和音量键都坏了，无法开机……但 BL 锁是解掉了的， USB 调试也应该是打开的。我该怎么让 Pixel 3 开机呢？ - 问与答",
+      "Link": "https://www.v2ex.com/t/906014",
+      "Description": "我用 Pixel 1 试了一下，发现只有开机了以后 adb devices 才能检测到设备……",
+      "Author": "wbzd",
+      "PubDate": "2023-01-02T02:25:50Z"
+    },
+    {
+      "Title": "各位玩 PT 都用的啥盘啊？ - NAS",
+      "Link": "https://www.v2ex.com/t/906013",
+      "Description": "PT 新手， 现在手里有一个 QNAP-453Bmini （ 4 盘位） 目前只放了一块酷狼 4T. 现在快满了。\u003cbr /\u003e\u003cbr /\u003e这块盘上除了 PT 下载的数据之外也放了一些其他的个人数据。而且听说 PT 费盘，我这有几个疑问：\u003cbr /\u003e\u003cbr /\u003e1. 现在要买快新的硬盘来挂 PT ， 应该买多大容量 /什么品牌的盘好？\u003cbr /\u003e2. 新硬盘只用来放 PT 的数据， 是不是要隔离使用？ 还是直接扩充的现有的存储池中？",
+      "Author": "Davic1",
+      "PubDate": "2023-01-02T02:24:17Z"
+    },
+    {
+      "Title": "iPhone 上的微信数据恢复很慢 - Apple",
+      "Link": "https://www.v2ex.com/t/906012",
+      "Description": "\u003cp\u003e刚换手机，从 iCloud 恢复数据。微信的数据占大头，有 65G 。\n从昨天下午 4 点开始恢复数据，到现在 20 个小时过去了，其他所有 App 都恢复了，就微信还在恢复。。。\n如果取消恢复，从 iPad 上同步微信数据会不会快一些？ iPad 上也有微信，数据基本上和手机是同步的。\u003c/p\u003e\n",
+      "Author": "blues9",
+      "PubDate": "2023-01-02T02:17:26Z"
+    },
+    {
       "Title": "求各位大佬给些报表优化的思路? - MySQL",
       "Link": "https://www.v2ex.com/t/906010",
       "Description": "\u003cp\u003e现在客户要求这么一张报表\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://tvax3.sinaimg.cn/large/005S7MDjly1h91185f999j31p20vrwjl.jpg\"/\u003e\n横向为年龄\n竖向为项目名称\n有各种条件每次客户进入页面都要点击一下开始分析，报表生成起来很慢，现在要求优化，加上了缓存，但是第一次生成报表的时候还是需要等待，想用计划任务跑一下，但是想到了各种搜索条件组合起来有很多情况，没有实施，求优化思路！\u003c/p\u003e\n\u003cp\u003e当前表结构\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003eCREATE TABLE `xx_table1` (\n  `id` bigint NOT NULL,\n  `code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '编号',\n  `full_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '姓名',\n  `gender` tinyint NOT NULL DEFAULT '0' COMMENT '性别',\n  `age` smallint DEFAULT '0' COMMENT '年龄',\n  `idcard` varchar(33) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '身份证号',\n  `resident_address` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '常驻地址',\n  `resident_address_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '常驻地址行政编码',\n  `registered_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '户籍地址',\n  `registered_address_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '户籍地址行政编码',\n  `birthday` date DEFAULT '0000-00-00' COMMENT '生日',\n  `dead_date` datetime DEFAULT NULL COMMENT '死亡日期',\n  `dead_place_code` bigint NOT NULL DEFAULT '0' COMMENT '死亡地点',\n  `family_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '家属姓名',\n  `family_tel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '家属联系电话',\n  `created_at` datetime DEFAULT NULL COMMENT '创建时间',\n  `created_by` bigint NOT NULL COMMENT '创建人',\n  `is_audit` tinyint NOT NULL DEFAULT '1' COMMENT '是否审核',\n  `audit_by` bigint DEFAULT NULL COMMENT '审核人',\n  `audit_at` datetime DEFAULT NULL COMMENT '审核时间',\n  `year` int NOT NULL DEFAULT '0' COMMENT '年份',\n  `item_id` int NOT NULL DEFAULT '0' COMMENT '项目 id',\n  `area_code` bigint DEFAULT '0' COMMENT '地区代码',\n  PRIMARY KEY (`id`) USING BTREE,\n  KEY `p_fi_idx` (`full_name`,`idcard`) USING BTREE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='XX 表';\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e索引还没加\u003c/p\u003e\n\u003cp\u003e数据量大于 100W!\u003c/p\u003e\n\u003cp\u003e想到了把数据跑成单表，但是没做过，不知道要怎么写，不知道单表要怎么建，求大老指点\u003c/p\u003e\n",
