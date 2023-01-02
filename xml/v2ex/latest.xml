@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>做了个工具追踪国内变异株的情况 - 分享发现</title>
+      <link>https://www.v2ex.com/t/906136</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/Last-Order/china-variants-report&#34; rel=&#34;nofollow&#34;&gt;https://github.com/Last-Order/china-variants-report&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;花了一点时间做的一个小工具，数据的来源是各省 CDC/研究机构 /医院上传到 GISAID 的测序数据，目前手动更新数据。独有功能是支持分省份查询，毕竟，中国很大。&lt;/p&gt;&#xA;&lt;p&gt;数据起点是 2022 年 12 月 1 日，因为 12 月才有来自中国上传的大量数据，之前的数据太少、时间间隔大，没有统计意义。&lt;/p&gt;&#xA;&lt;p&gt;目前港澳台数据暂缺，后续会补上。&lt;/p&gt;&#xA;</description>
+      <author>EridanusSora</author>
+      <pubDate>02 Jan 2023 16:18:45 +0000</pubDate>
+    </item>
+    <item>
       <title>关于 Redis 的 PTTL 命令的一个疑惑 - Java</title>
       <link>https://www.v2ex.com/t/906135</link>
       <description>&lt;p&gt;PTTL 命令的伪代码：&lt;/p&gt;&#xA;&lt;p&gt;def PTTL(key):&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#键不存在于数据库&#xA;if key not in redisDb.dict&#xA;&#x9;return -2&#xA;    &#xA;#尝试获取键的过期时间&#xA;#如果键没有设置过期时间，那么 expire_time_in_ms 将为 none&#xA;expire_time_in_ms = redisDb.expires.get(key)&#xA;&#xA;#键没有设置过期时间&#xA;if expire_time_in_ms is None:&#xA;   return -1&#xA;   &#xA;#获取当前时间&#xA;now_ms = get_current_unix_timestamp_in_ms()&#xA;&#xA;#返回过期时间&#xA;return expire_time_in_ms - now_ms&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;就这个方法而言，为什么 redis 要返回-2 和-1 来表示键不存在于数据库中和键没有设置过期时间，因为 redis 过期的键不会被立即清除掉，expire_time_in_ms-now_ms 是会存在-2 和-1 ，这样不是会造成误判嘛，-2 的话到无所谓应该反正过期了，也可以理解为该键不存在于数据库中（当然不能使用 PTTL 命令来判断一个 key 是否存在），但是-1 的话含义就差老大了&lt;/p&gt;&#xA;</description>
