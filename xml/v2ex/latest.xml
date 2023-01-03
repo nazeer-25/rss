@@ -4,6 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>朋友们，高德和百度导航上面违法拍照提示谁比较准啊？ - 汽车</title>
+      <link>https://www.v2ex.com/t/906296</link>
+      <description>&lt;p&gt;元旦租个车，有两个违章&#xA;1.最右侧只能直行的道路右转了&#xA;2.最右侧只能左转的道路，右边有个停车场，直接从这个车道靠右进停车场了。&lt;/p&gt;&#xA;&lt;p&gt;还在实习期比较怕扣分，租车又没提示有违章。&#xA;看了下高德地图导航说这两个地方都没有违法拍照，百度地图高航说这两个地方都有违法拍照。各位经验看哪个准额？&lt;/p&gt;&#xA;</description>
+      <author>Yancey</author>
+      <pubDate>03 Jan 2023 08:40:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>suricata http.request_body 和 http_client_body 的区别？ - 信息安全</title>
+      <link>https://www.v2ex.com/t/906295</link>
+      <description>&lt;p&gt;我现在的工作是写入侵检测规则，suricata 关于 http 协议关键字部分也好好看了，但依然有问题不太懂。&#xA;官方手册 v6.0.9 中章节 6.12.20 中指出：&#xA;&lt;code&gt;http.request_body&lt;/code&gt; replaces the previous keyword name: &lt;code&gt;http_client_body&lt;/code&gt;. You may continue +to use the previous name, but it’s recommended that rules be converted to use +the new name.&#xA;实际上，我测试了一下，似乎不能直接替代：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# 没问题&#xA;alert http any any -&amp;gt; any any (msg:&#34;Victure WR1200 系统命令执行漏洞 (CVE-2021-43283)&#34;; flow:to_server,established; content:&#34;password=&#34;; http_client_body; nocase; sid:650013; rev:1; gid:879013; priority:4;)&#xA;&#xA;# 单纯只是把上面的 http_client_body 替换成了 http.request_body 报 error：nocase needs preceding content option&#xA;# 翻译过来是：nocase 需要前面的内容选项&#xA;alert http any any -&amp;gt; any any (msg:&#34;Victure WR1200 系统命令执行漏洞 (CVE-2021-43283)&#34;; flow:to_server,established; content:&#34;password=&#34;; http.request_body; nocase; sid:650014; rev:1; gid:879014; priority:4;)&#xA;&#xA;# 如果把 nocase 放到 content 的后面。报 error：rule 650015 setup buffer http_client_body but didn&#39;t add matches to it&#xA;# 翻译过来是：规则 650015 设置缓冲区 http_client_body 但没有添加匹配项&#xA;alert http any any -&amp;gt; any any (msg:&#34;Victure WR1200 系统命令执行漏洞 (CVE-2021-43283)&#34;; flow:to_server,established; content:&#34;password=&#34;; nocase; http.request_body; sid:650015; rev:1; gid:879015; priority:4;)&#xA;&#xA;# 如果把 http.request_body 放到 content 的前面，无报错&#xA;alert http any any -&amp;gt; any any (msg:&#34;Victure WR1200 系统命令执行漏洞 (CVE-2021-43283)&#34;; flow:to_server,established; http.request_body; content:&#34;password=&#34;; nocase; sid:650016; rev:1; gid:879016; priority:4;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;所以，我感觉 http_client_body 是 content modifier ，而 http.request_body 是 sticky buffer 。&#xA;不知道我的理解对不对？&lt;/p&gt;&#xA;</description>
+      <author>hack2xia</author>
+      <pubDate>03 Jan 2023 08:39:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>在外包汇丰工作，被通知裁员了 - 职场话题</title>
+      <link>https://www.v2ex.com/t/906294</link>
+      <description>&lt;p&gt;果然防不胜防，在汇丰工作不到一年被裁员了，完全是看项目组有没有钱让你呆过新的一年，项目没钱，就直接释放掉这批人了。&#xA;现在最尴尬的是，现在简历不好写，因为进了一个外包。想问下 v2er ，我现在这个情况怎么办？ base 广州，五年 java ，简历这块都不知道怎么写了。因为这大半年来的项目都是做类似于网关的活，没有任何业务，也不需要接触任何业务。&#xA;或者有内推吗，java ...&lt;/p&gt;&#xA;</description>
+      <author>337136897</author>
+      <pubDate>03 Jan 2023 08:39:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>replit 是怎么做到为每个项目都分配一个容器的？ - 程序员</title>
+      <link>https://www.v2ex.com/t/906293</link>
+      <description>&lt;p&gt;看了下他好像是为每个项目都分配一个 ubuntu 容器，代码都是在容器中执行，容器的配置还挺高的 8 核 64G ，有时候 128G ，估计是共享的&lt;/p&gt;&#xA;&lt;p&gt;执行 rm -rf --no-preserve-root /也没事，应为设置了权限，apt 装不了东西，只能用 nix 包管理器，预设有的命令才能使用&lt;/p&gt;&#xA;&lt;p&gt;好奇 replit 容器这块都是用的什么技术来实现，看 /proc/self/cgroup 用的是 docker ，在具体就不是很懂了，有没熟悉这块的同学说说原理&lt;/p&gt;&#xA;</description>
+      <author>king888</author>
+      <pubDate>03 Jan 2023 08:39:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>黑苹果电流声（滋滋声）问题 - macOS</title>
+      <link>https://www.v2ex.com/t/906291</link>
+      <description>&lt;p&gt;主板: 微星 B660M&#xA;CPU: 12490F&#xA;WIFI/蓝牙：奋威 T919&#xA;显卡：RX6600&#xA;磁盘：WD SN850&lt;/p&gt;&#xA;&lt;p&gt;苹果系统：13.1&lt;/p&gt;&#xA;&lt;p&gt;发现两种电流声：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;移动鼠标或者触控板，就会产生电流声（滋滋声）。&lt;/li&gt;&#xA;&lt;li&gt;下载文件或者插入 USB 移动硬盘，也会产生电流声。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;第一种通过显卡降频，可以很大程度解决。参考： &lt;a href=&#34;https://www.v2ex.com/t/809512&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/809512&lt;/a&gt;&#xA;第二种目前没有办法，有没有同学知道解决方法的？&lt;/p&gt;&#xA;</description>
+      <author>createwindow</author>
+      <pubDate>03 Jan 2023 08:35:58 +0000</pubDate>
+    </item>
+    <item>
+      <title>各位大佬公司内的版本迭代什么流程 - 程序员</title>
+      <link>https://www.v2ex.com/t/906290</link>
+      <description>各位大佬公司内的版本迭代什么流程?&lt;br /&gt;&lt;br /&gt;目前有俩问题很困惑:&lt;br /&gt;&lt;br /&gt;1. spring cloud 的多个应用在部署时,互相依赖的 Maven.Jar,是提前构建好推送到私服,还是 jenkins 过程中构建依赖 Jar?&lt;br /&gt;2. 多个环境 譬如 开发 /测试 abcde/预发 abcde/演示 abcde/生产 从测试环境开始 是不是应该生产测试演示各个环境共用一个镜像?&lt;br /&gt;3. mysql 数据库 结构的变动可以通过 liquidbase 或是 flyway 实现迁移,但是业务数据怎么办,譬如系统新补充了一些菜单和角色,都是运营后台创建的,每次发布之前比对数据库记录 SQL 吗?&lt;br /&gt;4. 配置中心的修改咋整</description>
+      <author>seagull7558</author>
+      <pubDate>03 Jan 2023 08:34:35 +0000</pubDate>
+    </item>
+    <item>
       <title>某种禁用更新的方法 macOS 10.14.6+ - macOS</title>
       <link>https://www.v2ex.com/t/906289</link>
       <description>&lt;p&gt;从 macwk 的 macOS 小助手中获得&lt;/p&gt;&#xA;&lt;p&gt;禁用&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate CatalogURL http://su.example.com:8088/index.sucatalog&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;恢复&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;sudo defaults delete /Library/Preferences/com.apple.SoftwareUpdate CatalogURL&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;执行完成后重新打开一次更新检查就可以了。&lt;/p&gt;&#xA;</description>
