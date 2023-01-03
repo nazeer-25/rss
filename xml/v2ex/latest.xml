@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>retrofit2 Cannot deserialize instance of ` Java .util.ArrayList&lt; Java .lang.Object&gt;` out of START_OBJECT token - Java</title>
+      <link>https://www.v2ex.com/t/906281</link>
+      <description>&lt;p&gt;我用 retrofit2 传了一个 List&amp;lt;String&amp;gt; 作为返回值，提示是这个无法反序列化&#xA;我在网上查，是不能传输 List 吗？只能传 String ？&lt;/p&gt;&#xA;</description>
+      <author>gzk329</author>
+      <pubDate>03 Jan 2023 08:00:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>Linux 运维 面试问题：你们服务器遇到最多的问题是什么 - Linux</title>
+      <link>https://www.v2ex.com/t/906280</link>
+      <description>&lt;p&gt;没有啥实际经验 业务运维经验  一直做到服务器硬件运维 大哥们这个问题应该怎么回答  软件方面的问题&lt;/p&gt;&#xA;</description>
+      <author>spr1ngs</author>
+      <pubDate>03 Jan 2023 07:58:50 +0000</pubDate>
+    </item>
+    <item>
       <title>有没有 AES CBC 模式，填充，加初始向量的加解密代码例子？ - 信息安全</title>
       <link>https://www.v2ex.com/t/906279</link>
       <description>&lt;p&gt;我的代码是 go 写的。&#xA;Go 官方提供了 AES CBC 模式，加初始向量，不填充的代码例子： &lt;a href=&#34;https://pkg.go.dev/crypto/cipher#example-NewCBCEncrypter&#34; rel=&#34;nofollow&#34;&gt;https://pkg.go.dev/crypto/cipher#example-NewCBCEncrypter&lt;/a&gt;&#xA;缺点是原文必须是 BlockSize 的整数倍。&lt;/p&gt;&#xA;&lt;p&gt;目前网上很多 AES CBC 模式，填充的代码例子。&lt;/p&gt;&#xA;&lt;p&gt;我对照两个方案，综合起来，自己写了一套 AES CBC 模式，填充，加初始向量的加解密代码。&#xA;但是没有找到类似的可供参考的例子，不知道是否可行。&#xA;想麻烦这方面的专业人士帮忙看下。&#xA;其中加密代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;&#xA;// pkcs7Padding 数据填充。&#xA;func pkcs7Padding(data []byte, blockSize int) []byte {&#xA;&#x9;padding := blockSize - len(data)%blockSize&#xA;&#x9;padText := bytes.Repeat([]byte{byte(padding)}, padding)&#xA;&#x9;return append(data, padText...)&#xA;}&#xA;&#xA;// AesCBCEncrypt AES 加密，CBC 模式。&#xA;func AesCBCEncrypt(plaintext []byte, key []byte) ([]byte, error) {&#xA;&#x9;block, err := aes.NewCipher(key)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return nil, err&#xA;&#x9;}&#xA;&#xA;&#x9;padded := pkcs7Padding(plaintext, block.BlockSize())&#xA;&#xA;&#x9;ciphertext := make([]byte, aes.BlockSize+len(padded))&#xA;&#x9;iv := ciphertext[:aes.BlockSize]&#xA;&#x9;_, err = io.ReadFull(rand.Reader, iv)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return nil, err&#xA;&#x9;}&#xA;&#xA;&#x9;mode := cipher.NewCBCEncrypter(block, iv)&#xA;&#x9;mode.CryptBlocks(ciphertext[aes.BlockSize:], padded)&#xA;&#x9;return ciphertext, nil&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>

@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "retrofit2 Cannot deserialize instance of ` Java .util.ArrayList\u003c Java .lang.Object\u003e` out of START_OBJECT token - Java",
+      "Link": "https://www.v2ex.com/t/906281",
+      "Description": "\u003cp\u003e我用 retrofit2 传了一个 List\u0026lt;String\u0026gt; 作为返回值，提示是这个无法反序列化\n我在网上查，是不能传输 List 吗？只能传 String ？\u003c/p\u003e\n",
+      "Author": "gzk329",
+      "PubDate": "2023-01-03T08:00:18Z"
+    },
+    {
+      "Title": "Linux 运维 面试问题：你们服务器遇到最多的问题是什么 - Linux",
+      "Link": "https://www.v2ex.com/t/906280",
+      "Description": "\u003cp\u003e没有啥实际经验 业务运维经验  一直做到服务器硬件运维 大哥们这个问题应该怎么回答  软件方面的问题\u003c/p\u003e\n",
+      "Author": "spr1ngs",
+      "PubDate": "2023-01-03T07:58:50Z"
+    },
+    {
       "Title": "有没有 AES CBC 模式，填充，加初始向量的加解密代码例子？ - 信息安全",
       "Link": "https://www.v2ex.com/t/906279",
       "Description": "\u003cp\u003e我的代码是 go 写的。\nGo 官方提供了 AES CBC 模式，加初始向量，不填充的代码例子： \u003ca href=\"https://pkg.go.dev/crypto/cipher#example-NewCBCEncrypter\" rel=\"nofollow\"\u003ehttps://pkg.go.dev/crypto/cipher#example-NewCBCEncrypter\u003c/a\u003e\n缺点是原文必须是 BlockSize 的整数倍。\u003c/p\u003e\n\u003cp\u003e目前网上很多 AES CBC 模式，填充的代码例子。\u003c/p\u003e\n\u003cp\u003e我对照两个方案，综合起来，自己写了一套 AES CBC 模式，填充，加初始向量的加解密代码。\n但是没有找到类似的可供参考的例子，不知道是否可行。\n想麻烦这方面的专业人士帮忙看下。\n其中加密代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\n// pkcs7Padding 数据填充。\nfunc pkcs7Padding(data []byte, blockSize int) []byte {\n\tpadding := blockSize - len(data)%blockSize\n\tpadText := bytes.Repeat([]byte{byte(padding)}, padding)\n\treturn append(data, padText...)\n}\n\n// AesCBCEncrypt AES 加密，CBC 模式。\nfunc AesCBCEncrypt(plaintext []byte, key []byte) ([]byte, error) {\n\tblock, err := aes.NewCipher(key)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\tpadded := pkcs7Padding(plaintext, block.BlockSize())\n\n\tciphertext := make([]byte, aes.BlockSize+len(padded))\n\tiv := ciphertext[:aes.BlockSize]\n\t_, err = io.ReadFull(rand.Reader, iv)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\tmode := cipher.NewCBCEncrypter(block, iv)\n\tmode.CryptBlocks(ciphertext[aes.BlockSize:], padded)\n\treturn ciphertext, nil\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
