@@ -4,9 +4,23 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有没有 AES CBC 模式，填充，加初始向量的加解密代码例子？ - 信息安全</title>
+      <link>https://www.v2ex.com/t/906279</link>
+      <description>&lt;p&gt;我的代码是 go 写的。&#xA;Go 官方提供了 AES CBC 模式，加初始向量，不填充的代码例子： &lt;a href=&#34;https://pkg.go.dev/crypto/cipher#example-NewCBCEncrypter&#34; rel=&#34;nofollow&#34;&gt;https://pkg.go.dev/crypto/cipher#example-NewCBCEncrypter&lt;/a&gt;&#xA;缺点是原文必须是 BlockSize 的整数倍。&lt;/p&gt;&#xA;&lt;p&gt;目前网上很多 AES CBC 模式，填充的代码例子。&lt;/p&gt;&#xA;&lt;p&gt;我对照两个方案，综合起来，自己写了一套 AES CBC 模式，填充，加初始向量的加解密代码。&#xA;但是没有找到类似的可供参考的例子，不知道是否可行。&#xA;想麻烦这方面的专业人士帮忙看下。&#xA;其中加密代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;&#xA;// pkcs7Padding 数据填充。&#xA;func pkcs7Padding(data []byte, blockSize int) []byte {&#xA;&#x9;padding := blockSize - len(data)%blockSize&#xA;&#x9;padText := bytes.Repeat([]byte{byte(padding)}, padding)&#xA;&#x9;return append(data, padText...)&#xA;}&#xA;&#xA;// AesCBCEncrypt AES 加密，CBC 模式。&#xA;func AesCBCEncrypt(plaintext []byte, key []byte) ([]byte, error) {&#xA;&#x9;block, err := aes.NewCipher(key)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return nil, err&#xA;&#x9;}&#xA;&#xA;&#x9;padded := pkcs7Padding(plaintext, block.BlockSize())&#xA;&#xA;&#x9;ciphertext := make([]byte, aes.BlockSize+len(padded))&#xA;&#x9;iv := ciphertext[:aes.BlockSize]&#xA;&#x9;_, err = io.ReadFull(rand.Reader, iv)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return nil, err&#xA;&#x9;}&#xA;&#xA;&#x9;mode := cipher.NewCBCEncrypter(block, iv)&#xA;&#x9;mode.CryptBlocks(ciphertext[aes.BlockSize:], padded)&#xA;&#x9;return ciphertext, nil&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>1800x</author>
+      <pubDate>03 Jan 2023 07:54:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>乐视宣布实行每周四天半工作制：每周三弹性工作半天？ - 问与答</title>
+      <link>https://www.v2ex.com/t/906277</link>
+      <description>&lt;p&gt;乐视宣布实行每周四天半工作制：每周三弹性工作半天&lt;/p&gt;&#xA;</description>
+      <author>betainCao</author>
+      <pubDate>03 Jan 2023 07:51:37 +0000</pubDate>
+    </item>
+    <item>
       <title>求推荐好用的 Macbook 扩展坞，支持 USB 和 TypeC 就行 - Apple</title>
       <link>https://www.v2ex.com/t/906276</link>
-      <description>用过飞利浦和绿联的，感觉都不怎么好用，求推荐</description>
+      <description>&lt;p&gt;用过飞利浦和绿联的，感觉都不怎么好用，求推荐&#xA;PS: M1 MacbookPro&lt;/p&gt;&#xA;</description>
       <author>leo7476040305</author>
       <pubDate>03 Jan 2023 07:46:57 +0000</pubDate>
     </item>
@@ -25,7 +39,7 @@
       <pubDate>03 Jan 2023 07:33:41 +0000</pubDate>
     </item>
     <item>
-      <title>宋江与花荣 - 分享发现</title>
+      <title>宋江与花荣 - 随想</title>
       <link>https://www.v2ex.com/t/906273</link>
       <description>&lt;p&gt;宋江救了刘高老婆后，花荣埋怨他说：“刘高贪污腐败，他老婆更不是个好东西，把好好的青州地面搞得盗匪丛生，民不聊生”；宋江竟然说：“你和刘高是同事，应该隐其恶扬其善，处理好同事关系”。可见宋江在所谓“爱民如子”方面还不如花荣，他只是比较擅长做官，一天想着报效朝廷好升官而已。像宋江这种货色，按理说对于兄弟不够意思，只想着自己的做官梦，对民众来说，此人与强盗无异；他这“忠义”二字是怎么来的，愿意跟随他的那些强盗们图的又是啥？&lt;/p&gt;&#xA;</description>
       <author>god7d</author>

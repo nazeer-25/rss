@@ -4,9 +4,23 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有没有 AES CBC 模式，填充，加初始向量的加解密代码例子？ - 信息安全",
+      "Link": "https://www.v2ex.com/t/906279",
+      "Description": "\u003cp\u003e我的代码是 go 写的。\nGo 官方提供了 AES CBC 模式，加初始向量，不填充的代码例子： \u003ca href=\"https://pkg.go.dev/crypto/cipher#example-NewCBCEncrypter\" rel=\"nofollow\"\u003ehttps://pkg.go.dev/crypto/cipher#example-NewCBCEncrypter\u003c/a\u003e\n缺点是原文必须是 BlockSize 的整数倍。\u003c/p\u003e\n\u003cp\u003e目前网上很多 AES CBC 模式，填充的代码例子。\u003c/p\u003e\n\u003cp\u003e我对照两个方案，综合起来，自己写了一套 AES CBC 模式，填充，加初始向量的加解密代码。\n但是没有找到类似的可供参考的例子，不知道是否可行。\n想麻烦这方面的专业人士帮忙看下。\n其中加密代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\n// pkcs7Padding 数据填充。\nfunc pkcs7Padding(data []byte, blockSize int) []byte {\n\tpadding := blockSize - len(data)%blockSize\n\tpadText := bytes.Repeat([]byte{byte(padding)}, padding)\n\treturn append(data, padText...)\n}\n\n// AesCBCEncrypt AES 加密，CBC 模式。\nfunc AesCBCEncrypt(plaintext []byte, key []byte) ([]byte, error) {\n\tblock, err := aes.NewCipher(key)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\tpadded := pkcs7Padding(plaintext, block.BlockSize())\n\n\tciphertext := make([]byte, aes.BlockSize+len(padded))\n\tiv := ciphertext[:aes.BlockSize]\n\t_, err = io.ReadFull(rand.Reader, iv)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\tmode := cipher.NewCBCEncrypter(block, iv)\n\tmode.CryptBlocks(ciphertext[aes.BlockSize:], padded)\n\treturn ciphertext, nil\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "1800x",
+      "PubDate": "2023-01-03T07:54:18Z"
+    },
+    {
+      "Title": "乐视宣布实行每周四天半工作制：每周三弹性工作半天？ - 问与答",
+      "Link": "https://www.v2ex.com/t/906277",
+      "Description": "\u003cp\u003e乐视宣布实行每周四天半工作制：每周三弹性工作半天\u003c/p\u003e\n",
+      "Author": "betainCao",
+      "PubDate": "2023-01-03T07:51:37Z"
+    },
+    {
       "Title": "求推荐好用的 Macbook 扩展坞，支持 USB 和 TypeC 就行 - Apple",
       "Link": "https://www.v2ex.com/t/906276",
-      "Description": "用过飞利浦和绿联的，感觉都不怎么好用，求推荐",
+      "Description": "\u003cp\u003e用过飞利浦和绿联的，感觉都不怎么好用，求推荐\nPS: M1 MacbookPro\u003c/p\u003e\n",
       "Author": "leo7476040305",
       "PubDate": "2023-01-03T07:46:57Z"
     },
@@ -25,7 +39,7 @@
       "PubDate": "2023-01-03T07:33:41Z"
     },
     {
-      "Title": "宋江与花荣 - 分享发现",
+      "Title": "宋江与花荣 - 随想",
       "Link": "https://www.v2ex.com/t/906273",
       "Description": "\u003cp\u003e宋江救了刘高老婆后，花荣埋怨他说：“刘高贪污腐败，他老婆更不是个好东西，把好好的青州地面搞得盗匪丛生，民不聊生”；宋江竟然说：“你和刘高是同事，应该隐其恶扬其善，处理好同事关系”。可见宋江在所谓“爱民如子”方面还不如花荣，他只是比较擅长做官，一天想着报效朝廷好升官而已。像宋江这种货色，按理说对于兄弟不够意思，只想着自己的做官梦，对民众来说，此人与强盗无异；他这“忠义”二字是怎么来的，愿意跟随他的那些强盗们图的又是啥？\u003c/p\u003e\n",
       "Author": "god7d",
