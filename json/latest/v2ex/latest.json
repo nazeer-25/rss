@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "PS2 接口的键盘问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/906858",
+      "Description": "\u003cp\u003e\u003cbr/\u003e朋友送了我一副键盘，迫于办公主机只支持 ps2 接口的键盘，没办法，只能到网上买了 usb 转 ps2 的转接头，发现完全没用。请问有遇到类似问题的 V 友吗？\u003cbr/\u003e\u003cbr/\u003e谢谢。\u003cbr/\u003e\u003c/p\u003e\n",
+      "Author": "wheeler",
+      "PubDate": "2023-01-05T13:56:44Z"
+    },
+    {
+      "Title": "MySQL 里 FOREIGN KEY 的 CASCADE 、RESTRICT 选项有优先级吗？ - MySQL",
+      "Link": "https://www.v2ex.com/t/906856",
+      "Description": "\u003cp\u003e我有歌手、专辑和单曲三张表，关系如下：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"restrict_cascade.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://upload-images.jianshu.io/upload_images/12536041-0e99530f4b834e64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240\"/\u003e\u003c/p\u003e\n\u003cp\u003e如果删除歌手，专辑和单曲会被删除；\u003c/p\u003e\n\u003cp\u003e但，专辑被删除前，单曲会阻止专辑被删除；\u003c/p\u003e\n\u003cp\u003e现在我删除张三报错了（在 Django ORM 构建的这种关系是可以将张三删除的）\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003eDELETE FROM Artist WHERE id=1; # 无法删除 张三\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e请问有没有大佬了解 MySQL 里外键的 CASCADE 、RESTRICT 选项有没有优先级？或其它什么机制？\u003c/p\u003e\n\u003cp\u003e我测试的表结构及数据如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003eCREATE TABLE Artist(# 歌手\n\tid INT PRIMARY KEY,\n\tNAME VARCHAR(10)\n)\n\nCREATE TABLE Album(# 专辑\n\tid INT PRIMARY KEY,\n\tartist VARCHAR(10),\n\tartist_id INT,\n\tFOREIGN KEY (artist_id)\tREFERENCES Artist(id) \n\tON DELETE CASCADE ON UPDATE CASCADE # 歌手被删除时，他的专辑跟随一起被删除\n)\n\nCREATE TABLE Song(# 单曲\n\tid INT PRIMARY KEY,\n\tNAME VARCHAR(10),\n\tartist_id INT,\n\talbum_id INT,\n\tFOREIGN KEY (album_id) REFERENCES Album(id) \n\tON DELETE RESTRICT ON UPDATE RESTRICT,# 专辑被删除前，单曲阻止专辑被删除\n\tFOREIGN KEY (artist_id) REFERENCES Artist(id) \n\tON DELETE CASCADE ON UPDATE CASCADE# 歌手被删除时，单曲跟随一起被删除\n)\n\nINSERT INTO Artist VALUES (1, \"张三\"), (2, \"李四\"); # 添加两名歌手：张三、李四\nINSERT INTO Album VALUES (1, \"光专辑\", 1), (2, \"夜专辑\", 2); # 添加两张专辑：光专辑 属于 张三，夜专辑 属于 李四\nINSERT INTO Song VALUES (1, \"太阳\", 1, 1), (2, \"月亮\", 1, 2); # 添加两首单曲：太阳 属于 张三的光专辑，月亮 属于 夜专辑（但不属于李四的单曲，而是属于张三的单曲）\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "XiiLii",
+      "PubDate": "2023-01-05T13:52:29Z"
+    },
+    {
       "Title": "play 商店有啥值得买的 APP 推荐吗 - Android",
       "Link": "https://www.v2ex.com/t/906855",
       "Description": "\u003cp\u003e送了 15 港币的券。。。考虑用掉\u003c/p\u003e\n",
