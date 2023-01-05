@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>12306 居然又被拿出来讨论了，我想发表一些自己的见解 - 程序员</title>
+      <link>https://www.v2ex.com/t/906853</link>
+      <description>&lt;p&gt;首先说一下，我才疏学浅，技术能力并不过关，技术方面我能讨论的不多。&lt;/p&gt;&#xA;&lt;p&gt;不过这些年我对铁路的了解应该在这个论坛里比大部分人多，我想说一说我了解的铁路方面的事，以及 12306 的一些细节。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;12306 只是一个前端网站，他的作用是将售票核心网的接口暴露出来，供除了车站售票处之外的其他旅客调用。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;铁路现在是各个路局各自为政，每趟旅客列车都是有所属路局的，售票核心网的服务器其实是在各个路局内。举个例子：郑州水灾的时候郑州局所辖列车票务业务短暂中断过一段时间，因为郑州局的机房在-1 层，被水淹了。而快速恢复则是因为铁科院内部对各个路局的设备都有一套备份，所以切过去就好了。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;目前铁路单纯售票业务计算压力并不大，因为一趟车他就那么几千的座位，而每趟车之间在售票业务上没有什么关联，可以加服务器简单解决。而且售票核心网事实上已经很多年没有大改过了，这些年实名制、电子客票、积分兑换，都是修修补补级别的。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;12306 最大的压力在查询余票，因为这个功能直面旅客，相当于被 DDOS 了。这个确实是靠多级缓存+云服务等实现的，至于技术是阿里还是铁科院提供，我不能确定。想必各位都有这样的经历：在买票时，明明显示有票提交后却报无票 or 自己显示没票，别人就显示有票。这个恰好能说明在这种量级下，保持缓存一致性是很困难的。（车站售票窗口以及车站自动售票机应该是可以直连售票核心网的，如果是想买临近要出发的列车，可以尝试在人不多的售票窗口让他给你刷一刷，或者在自动售票机上刷，比自己在手机上刷有用的多）&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;铁路在售票不联网之前，每趟车会为其经过的车站提前分配票额 /位置的，这个机制至今仍在沿用。这种机制就造成了所谓的区间限售（一趟北京南到上海虹桥的车，你搜全程有票，搜天津南到上海虹桥就没票，实际上就是预先把大部分票额分配给了北京南）以及很多人感受附近的人似乎一起下车等。这种区间限售，客观上减缓了售票系统计算的压力，也提高了铁路的利润率（还是比如北京南到上海虹桥的车，如果天津南到上海虹桥被买走了，那这个座位北京南到天津南就很难被卖出去），当然客观上会造成对短途旅客以及出发 /目的为小站的旅客的不便。（ PS. 以前区间限售几乎都是开车前 24 小时解除，不过现在似乎这个时间变的随机了，就像退票随机延迟返回票池一样）&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;售票最大的压力还是来自于刚起售的时候，等到解除限售之后，虽然牵一发动全身的情况会很严重，但是这个请求量并不大。我个人推测，解除限售时间的动态变动，其实应该和售票系统压力与票卖的好不好都有一些关系。不过这两个原因之间本身就是关联的。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;铁路关于减缓售票压力所做的努力，其实除了技术之外还有很多行政方面的手段。比如之前提到的区间限售就是一种，还有大家可见的不同站起售时间不同、候补购票以及购票等候队列等。12306 的成功是多管齐下的结果。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;现在 12306 我个人觉得软件还算好用，当然前提是不要打开 F12 看 Ajax 请求，不然可能发现在同一个请求下，变量能有好几种命名方式及传递方式（这段话和主题无关，纯粹是看见之后感到有些惊奇）&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;也许这个帖子可能会让一些人觉得我认为 12306 没什么技术难度。但是我想说，我无法判断他到底有多难，我只知道他既不像有些人说的那么简单，也不像有些人说的那么难。（好像是句废话）&lt;/p&gt;&#xA;&lt;p&gt;其实我发这个帖子，主要是觉得大家关于 12306 技术的讨论好像和我了解到的不太一样。希望大家能平和讨论，无论对方持什么观点，尽量不要人身攻击。&lt;/p&gt;&#xA;</description>
+      <author>epis2048</author>
+      <pubDate>05 Jan 2023 13:13:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>用 quickconnect 有风险吗？ - NAS</title>
+      <link>https://www.v2ex.com/t/906852</link>
+      <description>绑定了手机号。白裙不用又有点可惜。。</description>
+      <author>meppy</author>
+      <pubDate>05 Jan 2023 13:12:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有什么写代码推荐的 macOS 布局机械键盘？ - 机械键盘</title>
+      <link>https://www.v2ex.com/t/906851</link>
+      <description>&lt;p&gt;如题，预算 ¥500 ，78 和 87 键皆可，但要是 macOS 布局，声音吵的就算了吧。&lt;/p&gt;&#xA;</description>
+      <author>JasonXing</author>
+      <pubDate>05 Jan 2023 13:09:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>我开发了一款海外社交 App, 有运营人员吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/906850</link>
+      <description>&lt;p&gt;已上架了 Google Play 与 App store,目前每天只有 50 人左右注册，有没有海外运营与 ASO 高手，求合作。&lt;/p&gt;&#xA;</description>
+      <author>CareiOS</author>
+      <pubDate>05 Jan 2023 13:08:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>windows 默认屏保由什么负责渲染？ - 问与答</title>
+      <link>https://www.v2ex.com/t/906849</link>
+      <description>一个奇怪现象，在 cpu 占用率达到 100%的时候，自动开启的屏保会出现严重的卡顿，但是手动开启的却能流畅显示</description>
+      <author>FishGrazier</author>
+      <pubDate>05 Jan 2023 13:07:27 +0000</pubDate>
+    </item>
+    <item>
       <title>有没有大神知道 Mac 字典这种原生点击单词去下一个单词是怎么实现的？ - 程序员</title>
       <link>https://www.v2ex.com/t/906848</link>
       <description>&lt;p&gt;就是点击任意一个单词就可以去下一个单词 然后持续点下去 这种交互在原生 macOS 和 iOS 里面是怎么实现的呢？怎么能选择一个字呢？甚至这个选择中文的时候可以选择词组。&lt;/p&gt;&#xA;&lt;p&gt;想做一个类似的字典 App 练手但是不知道要跨平台做这个的最佳实践是怎么样的。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Imgur&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/jnW5bmz.gif&#34;/&gt;&lt;/p&gt;&#xA;</description>
