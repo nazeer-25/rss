@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "openwrt 22.03 配置 dnspod ddns 服务 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/906763",
+      "Description": "\u003cp\u003eipv6 ddns 模式下的\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003econfig ddns \"global\"\n\toption ddns_dateformat \"%F %R\"\n#\toption ddns_rundir \"/var/run/ddns\"\n#\toption ddns_logdir \"/var/log/ddns\"\n\toption ddns_loglines \"250\"\n\toption upd_privateip \"0\"\n\nconfig service \"dnspod\"\n\toption service_name\t\"dnspod.cn\"\n\toption lookup_host\t\"xyz.wuruxu.cn\"\n\toption domain\t\t\"xyz.wuruxu.cn\"\n\toption username\t\t\"帐号中心 /API 密钥 /DNSPod Token/ID\"\n\toption password\t\t\"帐号中心 /API 密钥 /DNSPod Token/Token\"\n\toption use_ipv6\t\t\"1\"\n\toption enabled\t\t\"1\"\n\toption use_https\t\"1\"\n\toption ip_source\t\"script\"\n\toption ip_script\t'/sbin/ip -6 addr show dev pppoe-wan scope global | sed -e\"s/^.*inet6 \\([^ ]*\\)\\/.*$/\\1/;t;d\"'\n\t#option interface\t\"wan6\"\n\t#option ip_source\t\"network\"\n\t#option ip_network\t\"wan\"\n\t#option ip_interface     \"pppoe-wan\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eipv4 ddns 模式    \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003econfig service \"dnspod\"\n\toption service_name\t\"dnspod.cn\"\n\toption lookup_host\t\"xyz.wuruxu.cn\"\n\toption domain\t\t\"xyz.wuruxu.cn\"\n\toption username\t\t\"帐号中心 /API 密钥 /DNSPod Token/ID\"\n\toption password\t\t\"帐号中心 /API 密钥 /DNSPod Token/Token\"\n\toption use_ipv6         \"0\"\n\toption enabled          \"1\"\n\toption check_interval\t\"10\"\n\toption use_https        \"1\"\n\toption interface\t\"wan\"\n\toption ip_source\t\"network\"\n\toption ip_network\t\"wan\"\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "wuruxu",
+      "PubDate": "2023-01-05T07:24:55Z"
+    },
+    {
       "Title": "macos 更新系统之后，每次开机都会弹出一堆后台项目已添加 - 问与答",
       "Link": "https://www.v2ex.com/t/906762",
       "Description": "\u003cp\u003e每次开机都会弹出一堆后台项目已添加，这个有办法解决吗？\n\u003cimg alt=\"QQ20230102-103219@2x.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2023/01/05/Ms4jck7agP1FlnO.png\"/\u003e\u003c/p\u003e\n",
