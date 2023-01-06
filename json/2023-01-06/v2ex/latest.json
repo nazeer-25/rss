@@ -4,7 +4,28 @@
   "Description": "",
   "Items": [
     {
-      "Title": "Java 小小写个开源 OAuth 客户端工具 - 程序员",
+      "Title": "有没试过用 webview 套 vant h5 成功上架 app store 的 - 程序员",
+      "Link": "https://www.v2ex.com/t/907088",
+      "Description": "\u003cp\u003e公司有个项目要做成客户端，要分发 Android 和 iOS ， 我只写过 vue, 项目实在太赶了，大概要 3 月中要 UAT, 没时间学 RN, flutter ， 打算用 webview 套 vant 売,但是怕卡在上架那\n如果不可以的话为什么 uniapp, ionic 这些非渲染原生组件的 app 可以过苹果的审核？\u003c/p\u003e\n",
+      "Author": "wingkwanli888",
+      "PubDate": "2023-01-06T13:05:10Z"
+    },
+    {
+      "Title": "如何将虚拟机内容导出到云 - 问与答",
+      "Link": "https://www.v2ex.com/t/907087",
+      "Description": "\u003cp\u003e在虚拟机内（ Vmware 虚拟 Centos 系统）部署了一套程序，现在想在外网提供服务，因为各种依赖、环境还有数据库重新部署太麻烦了，有没有什么方法能将虚拟机内的东西导出到阿里、腾讯等公有云上呢？谢谢各位大佬指点。\u003c/p\u003e\n",
+      "Author": "jy02201949",
+      "PubDate": "2023-01-06T13:04:01Z"
+    },
+    {
+      "Title": "你们买的八方云机场可以用吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/907086",
+      "Description": "",
+      "Author": "milohamle",
+      "PubDate": "2023-01-06T13:00:25Z"
+    },
+    {
+      "Title": "Java 小小写个开源 OAuth 客户端工具 - OAuth",
       "Link": "https://www.v2ex.com/t/907085",
       "Description": "\u003cp\u003e目前正在适配常见的国外平台，迟一些会做国内的像 QQ 微信 WB 百度 阿里 什么的\u003c/p\u003e\n\u003cp\u003e欢迎 Star 跟进！ Github：\u003ca href=\"https://github.com/hanbings/fluocean\" rel=\"nofollow\"\u003eFluocean\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"Fluocean\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.328888.xyz/2023/01/06/kkOwy.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e主要特性：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e常见的 OAuth 平台适配\u003c/li\u003e\n\u003cli\u003e支持自定义 State 生成器、自定义 Http 客户端、自定义 Json 解析器\u003c/li\u003e\n\u003cli\u003e提供通用默认实现以便支持未适配 OAuth 平台\u003c/li\u003e\n\u003cli\u003e默认 Http 客户端实现支持 Socks 代理\u003c/li\u003e\n\u003cli\u003e可爱\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eGithub OAuth 示例\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e洋流提供了许多的重载方法，用于应对不同情况下的请求，有些带自有请求头的，也有要求必须要 Scope 的。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e// 创建 OAuth 原始处理器\nOAuth\u0026lt;GithubAccess, GithubAccess.Wrong\u0026gt; oauth = new GithubOAuth(\n\t\"id\",\n\t\"secret\",\n\t\"https://exmaple.com/api/v0/login/oauth/github/callback\"\n);\n\n// 生成授权 url\nString url = oauth.authorize();\n// 生成带参数或指定 scope\nString spec = oauth.authorize(List.of(\"email\"), Map.of(\"Accept\", \"application/json\"));\n        \n//解析回调的 url 并获取 token\n// 输入原始 url 自动解析 code 以及 state\noauth.token(\"url\");\n// 更改回调地址\noauth.token(\"url\", \"redirect\");\n// 手动指定参数\noauth.token(\"code\", \"state\", \"redirect\");\n        \n// 处理返回值\noauth.token(\"code\", \"state\", \"redirect\")\n\t.succeed(data -\u0026gt; System.out.println(data.accessToken()))\n\t.fail(wrong -\u0026gt; System.out.println(wrong.errorDescription()))\n\t.except(throwable -\u0026gt; System.out.println(throwable.getMessage()));\n        \n// 假设请求成功 直接获取数据\nGithubAccess access = oauth.token(\"code\", \"state\", \"redirect\").data();\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003e使用 Socks 代理\u003c/strong\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003eoauth.proxy(() -\u0026gt;\n\tnew Request.Proxy(\n\t\tProxy.Type.SOCKS,\n\t\t\"127.0.0.1\",\n\t\t10086,\n\t\t\"username\",\n\t\t\"password\"\n\t)\n);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003e更换 State 生成器\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e默认随机生成 UUID 并设置 300 秒有效期\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003eoauth.state(\n    Lazy.of(() -\u0026gt; new OAuthState(300, () -\u0026gt; UUID.randomUUID().toString()))\n);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003e更换 Http 客户端\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e默认使用 Okhttp 发起请求\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e// 实现比较繁杂 就不展示啦 x\noauth.request(Lazy.of(OAuthRequest::new));\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003e更换 Json 解析器\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e默认使用 Gson 作为 Json 解析器\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003eoauth.serialization(\n\tLazy.of(() -\u0026gt; new Serialization() {\n\t\tfinal Gson gson = new Gson();\n\n\t\t@Override\n\t\tpublic \u0026lt;T\u0026gt; T object(Class\u0026lt;T\u0026gt; type, String raw) {\n\t\t\treturn gson.fromJson(raw, type);\n\t\t}\n\n\t\t@Override\n\t\tpublic \u0026lt;K, V\u0026gt; Map\u0026lt;K, V\u0026gt; map(Class\u0026lt;K\u0026gt; key, Class\u0026lt;V\u0026gt; value, String raw) {\n\t\t\treturn gson.fromJson(raw, new TypeToken\u0026lt;Map\u0026lt;K, V\u0026gt;\u0026gt;() {\n\t\t\t}.getType());\n\t\t}\n\n\t\t@Override\n\t\tpublic \u0026lt;T\u0026gt; List\u0026lt;T\u0026gt; list(Class\u0026lt;T\u0026gt; type, String raw) {\n\t\t\treturn gson.fromJson(raw, new TypeToken\u0026lt;List\u0026lt;T\u0026gt;\u0026gt;() {\n\t\t\t}.getType());\n\t\t}\n\t})\n);\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "hanbings",
