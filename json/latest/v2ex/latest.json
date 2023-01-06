@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Spring-kafka 指定分区消费者，发现消费者不活动 - Java",
+      "Link": "https://www.v2ex.com/t/907017",
+      "Description": "\u003ch2\u003e问题\u003c/h2\u003e\n\u003cp\u003e问题最近想试试 kafka 的相关操作，在 spring-kafka 3.0.1 版本下。发现当我指定消费者去消费指定分区时，kafka 无法检测到该消费者(消费组内无消费者)，但是却可以正常消费。\n如果不指定，而是由 kafka 自动平衡消费者的话，就可以检测到\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://hexo-1302895213.cos.ap-shanghai.myqcloud.com/blog/202301061534543.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e示例代码\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e\n// 该代码正常\n@KafkaListener(id = \"consumer-all\", clientIdPrefix = \"consumer-all\", topics = \"topic1\", groupId = \"mygroup\", concurrency = \"1\")\npublic void listenAllOne(ConsumerRecord\u0026lt;?, ?\u0026gt; consumerRecord, Acknowledgment ack) {\n\tSystem.out.println(\"这是第一个消费者-----\"+consumerRecord.toString());\n    ack.acknowledge();\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e\n// 该消费者可以正常消费，但是无法被 kafka 检测到\n@KafkaListener(id=\"consumer-1\", clientIdPrefix = \"consumer-1\", topicPartitions = {@TopicPartition(topic = \"topic2\", partitionOffsets = @PartitionOffset(partition = \"0,1\", initialOffset = \"0\"))}, groupId = \"mygroup1\", concurrency = \"1\")\npublic void listenTop1(ConsumerRecord\u0026lt;?, ?\u0026gt; consumerRecord, Acknowledgment ack) {\n    System.out.println(\"这是第一个分区消费者-----\"+consumerRecord.toString());\n    ack.acknowledge();\n}\n\n@KafkaListener(id=\"consumer-2\", clientIdPrefix = \"consumer-2\", topicPartitions = {@TopicPartition(topic = \"topic2\", partitionOffsets = @PartitionOffset(partition = \"2,3\", initialOffset = \"0\"))}, groupId = \"mygroup1\", concurrency = \"1\")\npublic void listenTop2(ConsumerRecord\u0026lt;?, ?\u0026gt; consumerRecord, Acknowledgment ack) {\n    System.out.println(\"这是第二个分区消费者-----\"+consumerRecord.toString());\n    ack.acknowledge();\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "loveaeen",
+      "PubDate": "2023-01-06T07:35:09Z"
+    },
+    {
+      "Title": "腾讯视频会员 低至 41 一年 - 分享发现",
+      "Link": "https://www.v2ex.com/t/907016",
+      "Description": "\u003cp\u003e云闪付的活动\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://mall.95516.com/newmobile/goods/202211010076001?channel=7%3Cimg\" rel=\"nofollow\"\u003ehttps://mall.95516.com/newmobile/goods/202211010076001?channel=7%3Cimg\u003c/a\u003e\n买了券之后，ysf-我的-票券-腾讯视频\n5.7 折一点击使用-腾讯视频年卡 41\u003c/p\u003e\n",
+      "Author": "zpfhbyx",
+      "PubDate": "2023-01-06T07:34:43Z"
+    },
+    {
+      "Title": "纯血 ROG 上带的雷电 4 的口能输出独立显卡的画面吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/907015",
+      "Description": "\u003cp\u003e最近要组电脑 但是某你们都懂的显示器只有 c 口\n但现在的 4090 一个带 usb-c 的都没有\n然后我看 rog 系列的 crosshair 带 usb4.0 maxiums 带雷电 4\n有人知道这些主板上的雷电接口和 usb4.0 接口\n能输出 4090 的画面吗？还是只能输出 cpu 自带核显的？\n问华硕的店员都不知道......\u003c/p\u003e\n",
+      "Author": "catalysia",
+      "PubDate": "2023-01-06T07:34:42Z"
+    },
+    {
+      "Title": "请教怎么查询某个大公司所拥有的所有域名？ - 问与答",
+      "Link": "https://www.v2ex.com/t/907014",
+      "Description": "比如我想查推特公司所有的域名，以及 IP ，然后整理成列表，请问该怎么做？一级域名即可",
+      "Author": "leewi9coder",
+      "PubDate": "2023-01-06T07:30:44Z"
+    },
+    {
       "Title": "go 封装随机数生成 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/907013",
       "Description": "\u003cp\u003e想要封装一个随机数函数生成 类似于 ts 的这样\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003efunction random(min?: number, max?: number): number {\n  min = min === undefined ? Number.MIN_SAFE_INTEGER : min;\n  max = max === undefined ? Number.MAX_SAFE_INTEGER : max;\n  return Math.floor(Math.random() * (max - min + 1)) + min;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e想用上 go 的泛型 但是底层随机数都是 rand.类型 一下子不知道怎么写了\n试了下 interface + switch(.type) 感觉不是很优雅\n有没有 go 大佬 指点一下\u003c/p\u003e\n",
