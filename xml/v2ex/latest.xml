@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Golang 范型问题, 如何让接口方法接受未在接口范型参数中声明的类型 - 问与答</title>
+      <link>https://www.v2ex.com/t/907378</link>
+      <description>&lt;p&gt;例如现有 Result 和 Option 两种类型&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;type Result[T any] struct {&#xA;&#x9;Error  err&#xA;&#x9;Value T&#xA;}&#xA;&#xA;type Option[T any] sturct {&#xA;&#x9;None  bool&#xA;&#x9;Some T&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;现有一个 Option[string], 我想把它转换成 int, 但是 string 可能不合法, 所以写一个函数返回 Option[int]&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;func MyAtoI(string a) Option[int]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是希望给类似 Result 和 Option 这样的容器实现一种接口 I, 包含一个叫 Bind 的方法, 这个方法负责把容器打开, 把参数应用到容器的内容物上, 并返回另一个实现了接口 I 的容器, 例如&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;var optionInt Option[int] = result.Bind(MyAtoI)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我想象中 Bind 的签名是&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;type I[T any] interface {&#xA;    Bind[U any](func(T any) I[U]) I[U] // interface method must have no type parameters&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是会报错: interface method must have no type parameters, 需要把类型参数放到接口签名里&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;type I[T, U any] interface {&#xA;&#x9;Bind(func(T any) I[T, U]) I[T, U]&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但这样 Bind 返回的类型就只能是 I[T, U]了, 不符合预期, 如何让 Bind 可以返回任意的 I 呢&lt;/p&gt;&#xA;</description>
+      <author>yangbin9317</author>
+      <pubDate>08 Jan 2023 08:40:30 +0000</pubDate>
+    </item>
+    <item>
       <title>关于前端 CSS 的环绕问题有大佬会吗 - 问与答</title>
       <link>https://www.v2ex.com/t/907377</link>
       <description>&lt;h3&gt;问题&lt;/h3&gt;&#xA;&lt;p&gt;如下图一样的盒子，怎么让绿色的盒子补到红色盒子的间隙处&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;5e694016c66ec13d653ba112326509b1c5289266.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.locimg.com/2023/01/08/a506aad45c97d.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;预想效果图&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;4eb6fa6a8e9593d05ce44ac9e49b29fcd3b4e830.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.locimg.com/2023/01/08/38d071f476968.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&#x9;效果图为手动改 div 布局做出来的。我的疑惑点在于怎么用 css 动态（响应式）实现环绕的效果，因为在渲染前我并不知道盒子的大小&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -23,13 +30,6 @@
       <description>&lt;p&gt;50 出 有意联系&lt;/p&gt;&#xA;&lt;p&gt;17.10 分的&lt;/p&gt;&#xA;&lt;p&gt;9 排 10&lt;/p&gt;&#xA;</description>
       <author>pigmen</author>
       <pubDate>08 Jan 2023 08:00:39 +0000</pubDate>
-    </item>
-    <item>
-      <title>有做过 iOS 小组件的工程师吗，求合作 - 酷工作</title>
-      <link>https://www.v2ex.com/t/907373</link>
-      <description>&lt;p&gt;价格详谈，有意者请尽快联系我。&lt;/p&gt;&#xA;</description>
-      <author>Kelvin777</author>
-      <pubDate>08 Jan 2023 07:53:37 +0000</pubDate>
     </item>
     <item>
       <title>surge ios 找两个车友 - Surge</title>
@@ -247,6 +247,13 @@
       <description>&lt;p&gt;目的是所有的微信记录在一处，任何地方只需要浏览器就可以访问并继续聊天。&#xA;不用远程桌面是觉得整个系统远程过去，杀鸡用牛刀了，而且牛刀有时候也不好用。&lt;/p&gt;&#xA;</description>
       <author>beijiaoff</author>
       <pubDate>08 Jan 2023 03:44:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>有做过 iOS 小组件的工程师吗，求合作 - 酷工作</title>
+      <link>https://www.v2ex.com/t/907373</link>
+      <description>&lt;p&gt;价格详谈，有意者请尽快联系我。&lt;/p&gt;&#xA;</description>
+      <author>Kelvin777</author>
+      <pubDate>08 Jan 2023 07:53:37 +0000</pubDate>
     </item>
     <item>
       <title>有没有阳完一直咳嗽的老哥去医院看过的，医生都给开了啥药啊？ - 问与答</title>

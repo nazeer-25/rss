@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Golang 范型问题, 如何让接口方法接受未在接口范型参数中声明的类型 - 问与答",
+      "Link": "https://www.v2ex.com/t/907378",
+      "Description": "\u003cp\u003e例如现有 Result 和 Option 两种类型\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003etype Result[T any] struct {\n\tError  err\n\tValue T\n}\n\ntype Option[T any] sturct {\n\tNone  bool\n\tSome T\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e现有一个 Option[string], 我想把它转换成 int, 但是 string 可能不合法, 所以写一个函数返回 Option[int]\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efunc MyAtoI(string a) Option[int]\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是希望给类似 Result 和 Option 这样的容器实现一种接口 I, 包含一个叫 Bind 的方法, 这个方法负责把容器打开, 把参数应用到容器的内容物上, 并返回另一个实现了接口 I 的容器, 例如\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003evar optionInt Option[int] = result.Bind(MyAtoI)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我想象中 Bind 的签名是\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003etype I[T any] interface {\n    Bind[U any](func(T any) I[U]) I[U] // interface method must have no type parameters\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是会报错: interface method must have no type parameters, 需要把类型参数放到接口签名里\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003etype I[T, U any] interface {\n\tBind(func(T any) I[T, U]) I[T, U]\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但这样 Bind 返回的类型就只能是 I[T, U]了, 不符合预期, 如何让 Bind 可以返回任意的 I 呢\u003c/p\u003e\n",
+      "Author": "yangbin9317",
+      "PubDate": "2023-01-08T08:40:30Z"
+    },
+    {
       "Title": "关于前端 CSS 的环绕问题有大佬会吗 - 问与答",
       "Link": "https://www.v2ex.com/t/907377",
       "Description": "\u003ch3\u003e问题\u003c/h3\u003e\n\u003cp\u003e如下图一样的盒子，怎么让绿色的盒子补到红色盒子的间隙处\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"5e694016c66ec13d653ba112326509b1c5289266.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.locimg.com/2023/01/08/a506aad45c97d.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e预想效果图\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"4eb6fa6a8e9593d05ce44ac9e49b29fcd3b4e830.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.locimg.com/2023/01/08/38d071f476968.png\"/\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\t效果图为手动改 div 布局做出来的。我的疑惑点在于怎么用 css 动态（响应式）实现环绕的效果，因为在渲染前我并不知道盒子的大小\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -23,13 +30,6 @@
       "Description": "\u003cp\u003e50 出 有意联系\u003c/p\u003e\n\u003cp\u003e17.10 分的\u003c/p\u003e\n\u003cp\u003e9 排 10\u003c/p\u003e\n",
       "Author": "pigmen",
       "PubDate": "2023-01-08T08:00:39Z"
-    },
-    {
-      "Title": "有做过 iOS 小组件的工程师吗，求合作 - 酷工作",
-      "Link": "https://www.v2ex.com/t/907373",
-      "Description": "\u003cp\u003e价格详谈，有意者请尽快联系我。\u003c/p\u003e\n",
-      "Author": "Kelvin777",
-      "PubDate": "2023-01-08T07:53:37Z"
     },
     {
       "Title": "surge ios 找两个车友 - Surge",
@@ -247,6 +247,13 @@
       "Description": "\u003cp\u003e目的是所有的微信记录在一处，任何地方只需要浏览器就可以访问并继续聊天。\n不用远程桌面是觉得整个系统远程过去，杀鸡用牛刀了，而且牛刀有时候也不好用。\u003c/p\u003e\n",
       "Author": "beijiaoff",
       "PubDate": "2023-01-08T03:44:16Z"
+    },
+    {
+      "Title": "有做过 iOS 小组件的工程师吗，求合作 - 酷工作",
+      "Link": "https://www.v2ex.com/t/907373",
+      "Description": "\u003cp\u003e价格详谈，有意者请尽快联系我。\u003c/p\u003e\n",
+      "Author": "Kelvin777",
+      "PubDate": "2023-01-08T07:53:37Z"
     },
     {
       "Title": "有没有阳完一直咳嗽的老哥去医院看过的，医生都给开了啥药啊？ - 问与答",
