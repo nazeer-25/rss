@@ -25,6 +25,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "RULEX：Golang嵌入式边缘网关开发框架",
+      "Link": "https://studygolang.com/resources/15557#reply2",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "听说gorilla/websocket停止维护了, 快来试试gws吧",
       "Link": "https://studygolang.com/articles/36028#reply0",
       "Description": "\u003ch4\u003e亮点\u003c/h4\u003e\n\n\u003cul\u003e\n\u003cli\u003e无依赖\u003c/li\u003e\n\u003cli\u003e不需要开启额外协程监听消息, 处理各种事件\u003c/li\u003e\n\u003cli\u003e读写消息不返回错误, 它们在gws内部被适当的处理了\u003c/li\u003e\n\u003cli\u003e事件驱动\u003c/li\u003e\n\u003cli\u003e通过了 autobahn-testsuite 所有的WebSocket Protocol测试用例\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch4\u003e安装\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003ego get -v github.com/lxzan/gws@latest\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e核心接口\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Event interface {\n    OnOpen(socket *Conn)\n    OnError(socket *Conn, err error)\n    OnClose(socket *Conn, code uint16, reason []byte)\n    OnPing(socket *Conn, payload []byte)\n    OnPong(socket *Conn, payload []byte)\n    OnMessage(socket *Conn, message *Message)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e快速开始\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;github.com/lxzan/gws\u0026quot;\n\t\u0026quot;net/http\u0026quot;\n)\n\nfunc main() {\n\tvar config = \u0026amp;gws.Config{\n\t\tCompressEnabled:   true,\n\t\tCheckTextEncoding: true,\n\t\tMaxContentLength:  32 * 1024 * 1024,\n\t\tResponseHeader:    http.Header{\u0026quot;Server\u0026quot;: []string{\u0026quot;gws\u0026quot;}},\n\t}\n\tvar handler = new(WebSocket)\n\thttp.HandleFunc(\u0026quot;/connect\u0026quot;, func(writer http.ResponseWriter, request *http.Request) {\n\t\tsocket, err := gws.Accept(writer, request, handler, config)\n\t\tif err != nil {\n\t\t\treturn\n\t\t}\n\t\tsocket.Listen()\n\t})\n\n\t_ = http.ListenAndServe(\u0026quot;:3000\u0026quot;, nil)\n}\n\ntype WebSocket struct{}\n\nfunc (c *WebSocket) OnClose(socket *gws.Conn, code uint16, reason []byte) {\n\tfmt.Printf(\u0026quot;onclose: code=%d, payload=%s\\n\u0026quot;, code, string(reason))\n}\n\nfunc (c *WebSocket) OnError(socket *gws.Conn, err error) {\n\tfmt.Printf(\u0026quot;onerror: err=%s\\n\u0026quot;, err.Error())\n}\n\nfunc (c *WebSocket) OnOpen(socket *gws.Conn) {\n\tprintln(\u0026quot;connected\u0026quot;)\n}\n\nfunc (c *WebSocket) OnPing(socket *gws.Conn, payload []byte) {\n\tfmt.Printf(\u0026quot;onping: payload=%s\\n\u0026quot;, string(payload))\n\tsocket.WritePong(payload)\n}\n\nfunc (c *WebSocket) OnPong(socket *gws.Conn, payload []byte) {}\n\nfunc (c *WebSocket) OnMessage(socket *gws.Conn, message *gws.Message) {\n\tsocket.WriteMessage(message.Typ(), message.Bytes())\n\tmessage.Close()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e测试\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003edocker run -it --rm \\\n    -v ${PWD}/config:/config \\\n    -v ${PWD}/reports:/reports \\\n    crossbario/autobahn-testsuite \\\n    wstest -m fuzzingclient -s /config/fuzzingclient.json\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230108/eb6c7644e96abbd6d7f387a43c2a66a5.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
@@ -32,16 +39,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "RULEX：Golang嵌入式边缘网关开发框架",
-      "Link": "https://studygolang.com/resources/15557#reply1",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "全职长期远程职位，需要资深golang游戏开发",
-      "Link": "https://studygolang.com/topics/16076#reply0",
-      "Description": "\u003cp\u003etg : @A11inhr     邮箱：Webmasterfool@outlook.com\u003c/p\u003e\n\n\u003cp\u003egoalng游戏服务器开发（30-45k）\n岗位职责：\n负责游戏服务器的功能开发以及维护\n任职要求：\n1. 熟悉golang，熟悉golang游戏开发；\n2. 熟悉常用算法、数据结构、tcp/ip/http等网络协议；\n3. 熟悉mysql、redis等常用数据库、缓存；\n4. 熟悉棋牌、电玩等游戏类型项目、有相关经验优先；\n5. 熟悉c++、java等语言优先；\u003c/p\u003e\n\n\u003cp\u003e还需要的远程岗位是：\n1. 高级渗透测试工程师\n2. 移动端流媒体开发（至少7年移动端开发经验，要求会flutter、C++、OC 、swift、FFMpeg、ijkplayer）\n3. nodejs后端开发工程师\n4. UI专家（需10年经验、做测试题）\n5. CDN研发\n6. CDN基础构架师\n7. 高级网络工程师（需新加坡籍）\n8. 高级DBA（需新加坡籍）\n9. 高级运维工程师（需新加坡籍）\n10. 高级Flutter开发工程师（需远程1-2月之后需出国入职）\n11. 高级Vue前端工程师（1月20号开始面试、需远程1-2月之后需出国入职）\n12. 高级测试工程师（1月20号开始面试、需远程1-2月之后需出国入职）\u003c/p\u003e\n\n\u003cp\u003e无备注的都是长期全职国内远程\u003c/p\u003e\n\n\u003cp\u003e薪资范围：大约20-60k之间，岗位之间有所差异具体面议\u003c/p\u003e\n\n\u003cp\u003e工作时间：基本都是10am-7pm，单休，具体视公司与部门情况而定\u003c/p\u003e\n\n\u003cp\u003e私信请说明来自go中文网，表明来意与身份还有所需岗位\u003c/p\u003e\n\n\u003cp\u003e推荐朋友入职有红包\u003c/p\u003e\n",
+      "Title": "创建自己的PASA集群控制面板",
+      "Link": "https://studygolang.com/articles/36026#reply0",
+      "Description": "\u003cp\u003e推荐用PASA最新版本：2023.1\u003c/p\u003e\n\n\u003cp\u003e附项目链接： \u003ca href=\"https://github.com/PasaWorld/pasa/releases\"\u003ehttps://github.com/PasaWorld/pasa/releases\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e安装方式：\u003c/p\u003e\n\n\u003cp\u003ewindows下载: \u003ca href=\"https://pasagit.oss-cn-hangzhou.aliyuncs.com/windows/pasa.exe\"\u003ehttps://pasagit.oss-cn-hangzhou.aliyuncs.com/windows/pasa.exe\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003elinux下载: \u003ca href=\"https://pasagit.oss-cn-hangzhou.aliyuncs.com/linux/pasa\"\u003ehttps://pasagit.oss-cn-hangzhou.aliyuncs.com/linux/pasa\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e运行后浏览器打开： \u003ca href=\"http://127.0.0.1:8888/pasa\"\u003ehttp://127.0.0.1:8888/pasa\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230105/8db4f6ec8bdfbc28ef37359bfb5e2e46.png\" alt=\"su04.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -60,9 +60,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "创建自己的PASA集群控制面板",
-      "Link": "https://studygolang.com/articles/36026#reply0",
-      "Description": "\u003cp\u003e推荐用PASA最新版本：2023.1\u003c/p\u003e\n\n\u003cp\u003e附项目链接： \u003ca href=\"https://github.com/PasaWorld/pasa/releases\"\u003ehttps://github.com/PasaWorld/pasa/releases\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e安装方式：\u003c/p\u003e\n\n\u003cp\u003ewindows下载: \u003ca href=\"https://pasagit.oss-cn-hangzhou.aliyuncs.com/windows/pasa.exe\"\u003ehttps://pasagit.oss-cn-hangzhou.aliyuncs.com/windows/pasa.exe\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003elinux下载: \u003ca href=\"https://pasagit.oss-cn-hangzhou.aliyuncs.com/linux/pasa\"\u003ehttps://pasagit.oss-cn-hangzhou.aliyuncs.com/linux/pasa\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e运行后浏览器打开： \u003ca href=\"http://127.0.0.1:8888/pasa\"\u003ehttp://127.0.0.1:8888/pasa\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230105/8db4f6ec8bdfbc28ef37359bfb5e2e46.png\" alt=\"su04.png\" /\u003e\u003c/p\u003e\n",
+      "Title": "全职长期远程职位，需要资深golang游戏开发",
+      "Link": "https://studygolang.com/topics/16076#reply0",
+      "Description": "\u003cp\u003etg : @A11inhr     邮箱：Webmasterfool@outlook.com\u003c/p\u003e\n\n\u003cp\u003egoalng游戏服务器开发（30-45k）\n岗位职责：\n负责游戏服务器的功能开发以及维护\n任职要求：\n1. 熟悉golang，熟悉golang游戏开发；\n2. 熟悉常用算法、数据结构、tcp/ip/http等网络协议；\n3. 熟悉mysql、redis等常用数据库、缓存；\n4. 熟悉棋牌、电玩等游戏类型项目、有相关经验优先；\n5. 熟悉c++、java等语言优先；\u003c/p\u003e\n\n\u003cp\u003e还需要的远程岗位是：\n1. 高级渗透测试工程师\n2. 移动端流媒体开发（至少7年移动端开发经验，要求会flutter、C++、OC 、swift、FFMpeg、ijkplayer）\n3. nodejs后端开发工程师\n4. UI专家（需10年经验、做测试题）\n5. CDN研发\n6. CDN基础构架师\n7. 高级网络工程师（需新加坡籍）\n8. 高级DBA（需新加坡籍）\n9. 高级运维工程师（需新加坡籍）\n10. 高级Flutter开发工程师（需远程1-2月之后需出国入职）\n11. 高级Vue前端工程师（1月20号开始面试、需远程1-2月之后需出国入职）\n12. 高级测试工程师（1月20号开始面试、需远程1-2月之后需出国入职）\u003c/p\u003e\n\n\u003cp\u003e无备注的都是长期全职国内远程\u003c/p\u003e\n\n\u003cp\u003e薪资范围：大约20-60k之间，岗位之间有所差异具体面议\u003c/p\u003e\n\n\u003cp\u003e工作时间：基本都是10am-7pm，单休，具体视公司与部门情况而定\u003c/p\u003e\n\n\u003cp\u003e私信请说明来自go中文网，表明来意与身份还有所需岗位\u003c/p\u003e\n\n\u003cp\u003e推荐朋友入职有红包\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -70,6 +70,13 @@
       "Title": "优维低代码：I18n 国际化",
       "Link": "https://studygolang.com/articles/36025#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "gorm 中如何每天创建新表？",
+      "Link": "https://studygolang.com/topics/16066#reply5",
+      "Description": "\u003cp\u003e使用 gin + gorm，会按时每天创建新表或通过前端提交的信息创建新表，这些表结构不变，只是表名不同，怎么在 gorm 里创建关系映射呢？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -137,13 +144,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "gorm 中如何每天创建新表？",
-      "Link": "https://studygolang.com/topics/16066#reply4",
-      "Description": "\u003cp\u003e使用 gin + gorm，会按时每天创建新表或通过前端提交的信息创建新表，这些表结构不变，只是表名不同，怎么在 gorm 里创建关系映射呢？\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "一个快速生成web和微服务代码工具sponge",
       "Link": "https://studygolang.com/topics/16071#reply0",
       "Description": "\u003cp\u003e\u003ca href=\"https://github.com/zhufuyi/sponge\"\u003esponge\u003c/a\u003e 是一个微服务框架，一个快速创建web和微服务代码工具。sponge拥有丰富的生成代码命令，一共生成12种不同功能代码，这些功能代码可以组合成完整的服务(类似人为打散的海绵细胞可以自动重组成一个新的海绵)。微服务代码功能包括日志、服务注册与发现、注册中心、限流、熔断、链路跟踪、指标监控、pprof性能分析、统计、缓存、CICD等功能。代码解耦模块化设计，包括了从开发到部署完整工程，常用代码和脚本是自动生成，只需在按照代码模板去编写业务逻辑代码，使得开发效率提高不少。\u003c/p\u003e\n\n\u003cp\u003e\u003cbr\u003e\u003c/p\u003e\n\n\u003ch3\u003esponge 生成代码框架\u003c/h3\u003e\n\n\u003cp\u003e生成代码基于\u003cstrong\u003eYaml\u003c/strong\u003e、\u003cstrong\u003eSQL DDL\u003c/strong\u003e和\u003cstrong\u003eProtocol buffers\u003c/strong\u003e三种方式，每种方式拥有生成不同功能代码，生成代码的框架图如下所示：\u003c/p\u003e\n\n\u003cp align=\"center\"\u003e\n\u003cimg width=\"1200px\" src=\"https://static.golangjob.cn/230103/cbe37c5bd2e8a4cc4be20f7915088165.png\"\u003e\n\u003c/p\u003e\n\n\u003cp\u003e\u003cbr\u003e\u003c/p\u003e\n\n\u003ch3\u003e微服务框架\u003c/h3\u003e\n\n\u003cp\u003esponge创建的微服务代码框架如图下图所示，这是典型的微服务分层结构，具有高性能，高扩展性，包含常用的服务治理功能。\u003c/p\u003e\n\n\u003cp align=\"center\"\u003e\n\u003cimg width=\"800px\" src=\"https://static.golangjob.cn/230103/688c17049d33ff365ca2e703e0392323.png\"\u003e\n\u003c/p\u003e\n\n\u003cp\u003e\u003cbr\u003e\u003c/p\u003e\n\n\u003ch3\u003e安装\u003c/h3\u003e\n\n\u003cp\u003e\u003cstrong\u003e(1) 安装 sponge\u003c/strong\u003e\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003ego install github.com/zhufuyi/sponge/cmd/sponge@latest\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cstrong\u003e(2) 安装依赖插件和工具\u003c/strong\u003e\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003esponge init\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e如果有插件安装出错(\u003ccode\u003eprotoc\u003c/code\u003e除外), 执行命令重试 \u003ccode\u003esponge tools --install\u003c/code\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cbr\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e(3) 安装 protoc\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003eprotoc 下载地址 \u003ccode\u003ehttps://github.com/protocolbuffers/protobuf/releases/tag/v3.20.3\u003c/code\u003e， 然后把 \u003cstrong\u003eprotoc\u003c/strong\u003e 二进制文件添加到系统path下。\u003c/p\u003e\n\n\u003cp\u003e\u003cbr\u003e\u003c/p\u003e\n\n\u003cp\u003e💡 注意：\u003c/p\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e如果使用windows环境, 还需要安装额外依赖工具, 安装详情看 \u003ca href=\"https://github.com/zhufuyi/sponge/blob/main/assets/sponge-doc-cn.md#21-window%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%B7%A5%E5%85%B7\"\u003ewindows dependency tools\u003c/a\u003e.\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cp\u003e\u003cbr\u003e\u003c/p\u003e\n\n\u003ch3\u003e快速开始\u003c/h3\u003e\n\n\u003cp\u003e启动命令行的UI服务：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003esponge run\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e在浏览器访问 \u003ccode\u003ehttp://localhost:24631\u003c/code\u003e。\u003c/p\u003e\n\n\u003cp\u003e💡 注意：\u003c/p\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e不要在sponge二进制文件所在的目录下执行 \u0026ldquo;sponge run\u0026rdquo;命令，否则生成代码时会报错：\u003c/p\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003eexec: \u0026ldquo;sponge\u0026rdquo;: cannot run executable found relative to current directory\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/blockquote\u003e\n\n\u003cp\u003e\u003cbr\u003e\u003c/p\u003e\n\n\u003cp\u003e根据sql生成web项目代码的一个示例如下图所示：\u003c/p\u003e\n\n\u003cp align=\"center\"\u003e\n\u003cimg width=\"1500px\" src=\"https://static.golangjob.cn/230103/0821b17050121c9b9978b31bafdc79fc.gif\"\u003e\n\u003c/p\u003e\n\n\u003cp\u003e下载web项目代码后，执行命令启动服务：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e# 更新swagger文档\nmake docs\n\n# 编译和运行服务\nmake run\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cbr\u003e\u003c/p\u003e\n\n\u003cp\u003e生成其他类型代码可以自己尝试。\u003c/p\u003e\n\n\u003cp\u003e\u003cbr\u003e\u003cbr\u003e\u003c/p\u003e\n",
@@ -161,6 +161,20 @@
       "Title": "末期大咖云集：可观测性的应用创新与落地研讨会",
       "Link": "https://studygolang.com/articles/36023#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "RULEX：Golang嵌入式边缘网关开发框架",
+      "Link": "https://studygolang.com/resources/15557#reply1",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "gorm 中如何每天创建新表？",
+      "Link": "https://studygolang.com/topics/16066#reply4",
+      "Description": "\u003cp\u003e使用 gin + gorm，会按时每天创建新表或通过前端提交的信息创建新表，这些表结构不变，只是表名不同，怎么在 gorm 里创建关系映射呢？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
