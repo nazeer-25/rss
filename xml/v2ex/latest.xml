@@ -4,6 +4,26 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>mybatis-plus 使用 IPage 分页，手写 sql 报错的问题求指教 - Java</title>
+      <link>https://www.v2ex.com/t/907670</link>
+      <description>&lt;p&gt;如题&lt;/p&gt;&#xA;&lt;p&gt;报错内容如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;### The error may involve defaultParameterMap&#xA;### The error occurred while setting parameters&#xA;### SQL: SELECT * FROM(         SELECT bwi.id AS word_id,                      bwi.word_spell,                      bwi.view_chapter_id               FROM auto_student_test_question astq                        LEFT JOIN base_word_info bwi ON astq.word_id = bwi.id               WHERE astq.del_flag = &#39;0&#39;                 AND astq.`status` = &#39;0&#39;                 AND astq.class_code = ?                 AND astq.student_code = ?                 AND astq.book_id = ?                 AND astq.test_result = &#39;2&#39;               UNION               SELECT bwi.id AS word_id,                      bwi.word_spell,                      bwi.view_chapter_id               FROM word_student_note wsn                        LEFT JOIN base_word_info bwi ON wsn.word_id = bwi.id               WHERE wsn.del_flag = &#39;0&#39;                 AND wsn.`status` = &#39;0&#39;                 AND wsn.class_code = ?                 AND wsn.student_code = ?                 AND wsn.book_id = ?                 AND wsn.error_count != 0) unionTable LIMIT ?,?&#xA;### Cause: java.lang.ClassCastException: java.lang.String cannot be cast to java.lang.Integer&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;1.service 代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;List&amp;lt;ClassErrorWordResponse&amp;gt; words = autoClassNoteService.selectStudentErrorWordInfo(request.getPage(),&#xA;                request.getClassCode(), request.getStudentCode(), request.getBookId());&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;2.Mapper.java 代码&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;List&amp;lt;ClassErrorWordResponse&amp;gt; selectStudentErrorWordInfo(@Param(&#34;page&#34;) Page&amp;lt;ClassErrorWordResponse&amp;gt; page, @Param(&#34;classCode&#34;) String classCode, @Param(&#34;studentCode&#34;) String studentCode, @Param(&#34;bookId&#34;) Long bookId);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;3.mapper.xml 代码&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;SELECT DISTINCT &#xA;&#x9;a.word_id,&#xA;    a.word_spell,&#xA;    a.view_chapter_id&#xA;FROM(&#xA;        SELECT bwi.id AS word_id,&#xA;                     bwi.word_spell,&#xA;                     bwi.view_chapter_id&#xA;              FROM auto_student_test_question astq&#xA;                       LEFT JOIN base_word_info bwi ON astq.word_id = bwi.id&#xA;              WHERE astq.del_flag = &#39;0&#39;&#xA;                AND astq.`status` = &#39;0&#39;&#xA;                AND astq.class_code = #{classCode}&#xA;                AND astq.student_code = #{studentCode}&#xA;                AND astq.book_id = #{bookId}&#xA;                AND astq.test_result = &#39;2&#39;&#xA;              UNION&#xA;              SELECT bwi.id AS word_id,&#xA;                     bwi.word_spell,&#xA;                     bwi.view_chapter_id&#xA;              FROM word_student_note wsn&#xA;                       LEFT JOIN base_word_info bwi ON wsn.word_id = bwi.id&#xA;              WHERE wsn.del_flag = &#39;0&#39;&#xA;                AND wsn.`status` = &#39;0&#39;&#xA;                AND wsn.class_code = #{classCode}&#xA;                AND wsn.student_code = #{studentCode}&#xA;                AND wsn.book_id = #{bookId}&#xA;                AND wsn.error_count != 0) a&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;各种尝试感觉是因为最外层的子查询导致的，sql 是没问题的，打印出来的 sql 丢 navicat 里正常运行，并且如果不分页的话 sql 也正常，只要带着分页就会报错。大家有遇到过的吗？&lt;/p&gt;&#xA;</description>
+      <author>jiobanma</author>
+      <pubDate>09 Jan 2023 09:23:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>浏览微博能否根据评论数量排序？ - 问与答</title>
+      <link>https://www.v2ex.com/t/907669</link>
+      <author>saltTeemo</author>
+      <pubDate>09 Jan 2023 09:20:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>你们都有备用机场嘛？是什么呢？ - 分享发现</title>
+      <link>https://www.v2ex.com/t/907668</link>
+      <description>最近看到那个讨论一元机场的帖子(&lt;a target=&#34;_blank&#34; href=&#34;http://v2ex.com/t/906651&#34; rel=&#34;nofollow noopener&#34;&gt;v2ex.com/t/906651&lt;/a&gt; )，好多人说把一元机场当备用机场。&lt;br /&gt;当时上头直接买了 11 元一年的套餐，现在突然觉得自己好像用不着备用机场。仔细想了想，这种一元的机场跑路的概率远大于我的主用机场。拿来当备用机场岂不是备用了个寂寞？主机场还没挂，备用机场先凉了。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;好奇，想知道大家手上都有几个机场 /vps 用来防失联呢？真的有必要搞备用嘛？你觉得最好的备用机场又是哪个机场呢？</description>
+      <author>IzayakI</author>
+      <pubDate>09 Jan 2023 09:19:26 +0000</pubDate>
+    </item>
+    <item>
       <title>有什么途径可以去越南做开发吗 - 问与答</title>
       <link>https://www.v2ex.com/t/907667</link>
       <description>&lt;p&gt;年纪大了 想逃离 zuguo ，去越南做 it 然后包个小妹做老婆 照顾我的起居生活什么的，在中国应该很难找到合适的对象了，主要是我不配 身高只有 166cm ，国女都要求 175 以上，有房有车&lt;/p&gt;&#xA;</description>
