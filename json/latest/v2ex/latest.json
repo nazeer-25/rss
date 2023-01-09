@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "gin 中间件怎么传值 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/907558",
+      "Description": "\u003cp\u003e//中间件里边是这样定义的\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\t\tvar user models.User\n\t\tres := pkg.Db.Model(\u0026amp;models.User{}).Where(\"accid = ?\", accid).\n\t\t\tWhere(\"token = ?\", token).\n\t\t\tWhere(\"token_expire \u0026gt;= ?\", time.Now().Unix()).Find(\u0026amp;user)\n\t\tif res.Error != nil {\n\t\t\tpkg.Fail(c, 403, \"用户 token 已失效\", nil)\n\t\t\tc.Abort()\n\t\t\treturn\n\t\t}\n\t\tc.Set(\"user\", user)\n        \n        \n        \n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e\tuser, ok := c.Get(\"user\")\n\tif !ok {\n\t\treturn errors.New(\"获取用户信息失败\"), nil\n\t}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是在方法里边获取报错\u003c/p\u003e\n",
+      "Author": "awanganddong",
+      "PubDate": "2023-01-09T03:55:41Z"
+    },
+    {
+      "Title": "关于子类和父类同时实现某一接口的疑惑 - Java",
+      "Link": "https://www.v2ex.com/t/907555",
+      "Description": "\u003cp\u003e在阅读 JDK 源码的时候，发现了很多子类在父类已经实现了某一接口的情况下，依旧选择去实现这一接口。有没有大佬能解释一下这么做的原因？是为了提升代码可读性吗？随文附上\u003ccode\u003eLinkedHashMap\u003c/code\u003e的例子：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003epublic class LinkedHashMap\u0026lt;K,V\u0026gt;\n    extends HashMap\u0026lt;K,V\u0026gt;\n    implements Map\u0026lt;K,V\u0026gt;\n{ // 省略实现 }\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e上面代码中，\u003ccode\u003eLinkedHashMap\u003c/code\u003e和\u003ccode\u003eHashMap\u003c/code\u003e都实现了\u003ccode\u003eMap\u003c/code\u003e接口。\u003c/p\u003e\n",
+      "Author": "lucasji",
+      "PubDate": "2023-01-09T03:53:30Z"
+    },
+    {
       "Title": "吐槽外包甲方 - 职场话题",
       "Link": "https://www.v2ex.com/t/907554",
       "Description": "\u003cp\u003e和朋友接了一家国企的外包，说是国企，但是实际上感觉是那种“公私合营”的那种，有一家国企控股是小股东，然后还有一个私人是大股东。看到这家公司这个股比成分，一开始不太愿意接，感觉肯定会有坑，结果真的有。\u003c/p\u003e\n\u003cp\u003e谈的时候甲方说是这个项目对于他们来说有一定难度，因此虽然外包给我们了但是希望他们那边也出两个人一起参与，心里戈登一下感觉后背一凉。他们要求驻场办公，然后使用他们的 git 服务器，然后我就惊奇的发现他们的领导和他的一个下属竟然不会使用 git ，准确的说是对于代码版本管理工具缺乏概念。\u003c/p\u003e\n\u003cp\u003e干了几天就发现他们喜欢好几天都不拉取代码，也不 push 代码，大量修改以后一合并立刻跳出海量的冲突，他们这时候懵逼了就要求我来给他们解决冲突，在那里合并了一天代码的我真的想跟他们说：要不别合并了，直接撤销了吧，我来重写。\u003c/p\u003e\n\u003cp\u003e后来又发现他们的那个下属，有时候解决不了的冲突也不吭声，直接选择强行覆盖，真的很无语。\u003c/p\u003e\n\u003cp\u003e跟他们沟通不要使用 VS 自带的 git ，因为这玩意就是个半成品，经常造成时间线混乱，但是他们说这个就很好用，没发现有什么 bug……\u003c/p\u003e\n\u003cp\u003e至于什么代码质量，别提了，这俩人一个工作十年，一个工作四年，写的代码简直不能看。我觉得他们不是来帮忙，而是来添乱。\u003c/p\u003e\n\u003cp\u003e唉，要不是年底了挣不到钱，我肯定不接这样的外包，说是工作十几年了实际上是一坨什么样的垃圾。\u003c/p\u003e\n",
