@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Java 和 Python 抉择 - 程序员</title>
+      <link>https://www.v2ex.com/t/907740</link>
+      <description>请教前辈们一个问题，我现在的实习工作每天使用的是 Python ，主要是爬虫和脚本自动化。等今年六月毕业后还是想往大数据开发方向发展，因为之前学的语言是 Java ，今天突然发现 Java 都快忘干净了。很迷茫，不知道是选择 Java 还是 Python 作为第一语言。麻烦前辈们给点意见</description>
+      <author>R1der</author>
+      <pubDate>09 Jan 2023 14:54:35 +0000</pubDate>
+    </item>
+    <item>
+      <title>Alan 的 Docker 容器学习笔记 - 程序员</title>
+      <link>https://www.v2ex.com/t/907739</link>
+      <description>&lt;p&gt;（本文的内容主要来源于 Google 、百科和学过的一些专栏，目前没有实际的企业级应用容器化部署经验，写的比较浅薄见笑了）&lt;/p&gt;&#xA;&lt;h2&gt;为什么会接触到 Docker&lt;/h2&gt;&#xA;&lt;p&gt;运维同学使用 k8s 将业务迁移上云时遇到一些问题解决不了，需要我去验证一下并帮助解决问题。了解到容器是 k8s 的基础，并且根据我对问题的推测认为主要原因是文件目录没有挂载，所以我决定学习一下 Docker.&lt;/p&gt;&#xA;&lt;h2&gt;Docker 容器&lt;/h2&gt;&#xA;&lt;p&gt;Docker 这东西使用起来一点都不复杂，跟着 Docker 官网的说明，聪明的程序员十来分钟应该就能搞定，即使像我一样不太聪明的，结合 Google 上的部署教程 1 小时左右的时间也能搞定。&lt;/p&gt;&#xA;&lt;p&gt;简单来说，它就是个小工具，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux 或 Windows 操作系统的机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。&lt;/p&gt;&#xA;&lt;h2&gt;遇到的是什么问题，这个问题的根本原因是什么，如何解决?&lt;/h2&gt;&#xA;&lt;p&gt;问题描述：容器无法获取到宿主机的设备信息，具体点说就是无法在容器上执行 dmidecode 命令。&lt;/p&gt;&#xA;&lt;p&gt;想要解决这个问题，需要先了解一下执行 dmidecode 命令需要具备的条件以及容器的实现机制。&lt;/p&gt;&#xA;&lt;h3&gt;dmidecode 命令&lt;/h3&gt;&#xA;&lt;p&gt;dmidecode 命令可以让你在 Linux 系统下获取有关硬件方面的信息包括 UUID 、BIOS 、系统、主板、处理器、内存、缓存等等。&lt;/p&gt;&#xA;&lt;h4&gt;&lt;strong&gt;常用用法如下（需要 root 权限）：&lt;/strong&gt;&lt;/h4&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-plain&#34;&gt;[root@localhost ~]$ dmidecode                          # 打印所有硬件信息&#xA;[root@localhost ~]$ dmidecode -q                       # 打印所有硬件信息，比较简洁[root@localhost ~]$ dmidecode -h                       # 获取帮助&#xA;[root@localhost ~]$ dmidecode | grep &#39;Product Name&#39;    # 以过滤的方式来查看指定的硬件信息&#xA;[root@localhost ~]$ dmidecode --type bios        # 查看 BIOS 相关的硬件信息&#xA;[root@localhost ~]$ dmidecode --type system      # 查看系统相关的硬件信息&#xA;[root@localhost ~]$ dmidecode --type baseboard   # 查看主板相关的硬件信息&#xA;[root@localhost ~]$ dmidecode --type chassis     # 查看机箱相关的硬件信息&#xA;[root@localhost ~]$ dmidecode --type processor   # 查看处理器相关的硬件信息&#xA;[root@localhost ~]$ dmidecode --type memory      # 查看内存相关的硬件信息&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我们不可能每次都使用 root 权限执行命令，这时候我们可以提前使用 chmod + s 升级目录权限。&lt;em&gt;chmod&lt;/em&gt; &lt;em&gt;+s&lt;/em&gt; 就是给某个文件以 suid 权限，当一个具有执行权限的文件设置 SUID 权限后，用户执行这个文件时将以文件所有者的身份执行。&lt;/p&gt;&#xA;&lt;p&gt;具体代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-plain&#34;&gt;chmod +s /usr/sbin/dmidecode&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;或者&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-plain&#34;&gt;sudo chmod +s /usr/sbin/dmidecode&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;再来看看容器背后的实现机制&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;容器的两大关键技术 Namespace 和 Cgroups&lt;/strong&gt;。我看过的教程都说，理解了这两个概念，基本上就能彻底搞懂容器的核心原理了。我的感受是，虽然没有彻底搞懂容器的核心原理，但是对容器的实现机制有一个大概的了解，然后能搞清楚运维同学提到的问题为什么会出现了。&lt;/p&gt;&#xA;&lt;h2&gt;下面开始分享我学习两大关键技术的经验：&lt;/h2&gt;&#xA;&lt;h3&gt;首先我是跟着教程用容器启动服务&lt;/h3&gt;&#xA;&lt;p&gt;具体的做法是先创建一个镜像，然后用这个镜像启动一个容器，也就是启动我们的 jar 包。（具体的操作可以看 Docker 官网教程）此时我们的项目就已经被 Docker 隔离在了一个跟宿主机完全不同的世界当中，这个世界可以称之为“沙盒”。“沙盒”的进程、网络还有文件系统都是独立的。&lt;/p&gt;&#xA;&lt;h3&gt;然后就是思考 Docker 容器实现“沙盒”的技术手段。&lt;/h3&gt;&#xA;&lt;h4&gt;首先是学习实现“边界”的手段 Namespace&lt;/h4&gt;&#xA;&lt;p&gt;也就是思考容器的独立运行环境到底是怎么创造的。&lt;/p&gt;&#xA;&lt;p&gt;容器是一个“单进程”模型，是一种特殊的进程。容器对被隔离应用的进程空间做了手脚，使得这些进程之间”相互隔离“，不能访问彼此的资源，这种技术，就是 Linux 里面的 Namespace 机制。&lt;/p&gt;&#xA;&lt;p&gt;这种隔离有两个作用：第一是可以充分地利用系统的资源，也就是说在一台宿主机上可以运行多个容器；第二是保证了安全性，因为不同容器之间不能访问对方的资源&lt;strong&gt;。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;容器的网络和文件系统不一样，如何做到的呢？&lt;/p&gt;&#xA;&lt;p&gt;其实这里依靠的是 Network Namespace 和 Mount Namespace：&lt;/p&gt;&#xA;&lt;p&gt;Mount Namespace ，用于让被隔离进程只看到当前 Namespace 里的挂载点信息；&lt;/p&gt;&#xA;&lt;p&gt;Network Namespace ，用于让被隔离进程看到当前 Namespace 里的网络设备和配置。&lt;/p&gt;&#xA;&lt;p&gt;当然除了上面这些，Linux 操作系统还提供了 Mount 、UTS 、IPC 、Network 和 User 这些 Namespace ，用来对各种不同的进程上下文进行“障眼法”操作。&lt;/p&gt;&#xA;&lt;p&gt;这些 Namespace 尽管类型不同，但都是为了隔离容器资源，正是通过在创建容器进程时，指定了这个进程所需要启用的一组 Namespace 参数。所以，容器就只能“看”到当前 Namespace 所限定的资源、文件、设备、状态，或者配置。而对于宿主机以及其他不相关的内容，它就完全看不到了。&lt;/p&gt;&#xA;&lt;h4&gt;再就是学习约束“边界”的手段 Cgroups&lt;/h4&gt;&#xA;&lt;p&gt;上面我们学习了，容器，是一种特殊的进程，它使用 Namespace 实现“障眼法”，&lt;strong&gt;即它的“视线”被操作系统做了限制，只能“看到”某些指定的内容&lt;/strong&gt;。但对于宿主机来说在宿主机真实的进程空间里，这些被“隔离”了的进程跟其他进程并没有太大区别。也就是说这种做法有个问题就是：&lt;strong&gt;隔离得不彻底&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;虽然容器之间在 Namespace“障眼法”的干扰下相互之间看不到对方容器内的情况。但是宿主机上，它与其他所有进程之间依然是平等的竞争关系。这就意味着，容器表面上被隔离了起来，但是它所能够使用到的资源（比如 CPU 、内存、磁盘、网络带宽），却是可以随时被宿主机上的其他进程（或者其他容器）占用的。&lt;/p&gt;&#xA;&lt;p&gt;所以我们要对容器做一些限制，实现限制的技术手段就是 Linux Cgroups ，全称是 Linux Control Group 。它最主要的作用，就是限制一个进程组能够使用的资源上限，包括 CPU 、内存、磁盘、网络带宽等等。&lt;/p&gt;&#xA;&lt;p&gt;在今天的分享中，我就不和大家去深入学习 Cgroups 了。感兴趣的同学可以自行 Google 学习一下。&lt;/p&gt;&#xA;&lt;h2&gt;问题的答案&lt;/h2&gt;&#xA;&lt;p&gt;dmidecode 命令和容器背后的实现机制讲完了，但运维同学提出的问题好像还没有解决，我直接把答案放出来吧。&lt;/p&gt;&#xA;&lt;p&gt;如果要在 docker 容器中运行 dmidecode 命令，那么要将宿主机的如下两个目录挂载到容器中。&#xA;\1. /sbin/dmidecode --这个目录是 dmidecode 程序的目录，如果不挂载那么容器中识别不了 dmidecode 命令。&#xA;\2. /dev/mem --dmidecode 调用时会使用到 mem 这个文件，如果不挂载会找不到文件。&#xA;\3. 在启动时增加 --privileged 这个参数，让容器获得近似于宿主机 root 的权限。&#xA;完整的运行命令如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-plain&#34;&gt;docker run -d --privileged -v /sbin/dmidecode:/sbin/dmidecode -v /dev/mem:/dev/mem --name my-demo -p 9090:8080 demo&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;(以近似于 root 的权限用后台模式启动 demo 这个镜像，取别名为 my-demo ，并挂载两个宿主机目录到容器中，将容器的 8080 端口映射到宿主机 9090 端口)&lt;/p&gt;&#xA;&lt;p&gt;总结一下，其实容器中想要用的任何东西，无论是文件还是程序还是什么别的，都可以通过挂载的形式从宿主机中挂载到容器中，让容器中可以访问到。&lt;/p&gt;&#xA;&lt;h2&gt;安全性问题&lt;/h2&gt;&#xA;&lt;p&gt;Docker 容器确实非常火热也很好用，但是在生产环境下当 Docker 运行在云提供商平台上时，安全性变得更加复杂，所以企业生产环境需要特别注意容器安全问题。&lt;/p&gt;&#xA;&lt;p&gt;比如说，上文使用 Privileged 参数，让容器获得近似于宿主机 root 的权限，这个配置就是不安全的。&lt;/p&gt;&#xA;&lt;h3&gt;为什么这个 Privileged 配置不安全？&lt;/h3&gt;&#xA;&lt;p&gt;如果配置了 privileged 参数，容器就可以获取所有的 capabilities ，那什么是 capabilities 呢？&lt;/p&gt;&#xA;&lt;p&gt;Linux capabilities：对于任意一个进程，在做任意一个特权操作的时候，都需要有这个特权操作对应的 capability 。&lt;/p&gt;&#xA;&lt;p&gt;privileged 由于包含了所有的 capabilities, 这样容器就可以轻易获取宿主机上的所有资源，这会对宿主机的安全产生威胁。类似于 root 权限的概念。&lt;/p&gt;&#xA;&lt;p&gt;所以，我们要根据容器中进程需要的最少特权来赋予 capabilities 。添加权限的参数是 --cap-add ，具体要授权什么 capabilities 可以 Google 搜索“linux capabilities 手册”了解。&lt;/p&gt;&#xA;&lt;h2&gt;一些思考&lt;/h2&gt;&#xA;&lt;p&gt;写了这么多其实只是学习了一些表面的东西。可能有同学会问我为什么不深入地去学习，比如说探究 Cgroups 、Namespace 原理，深入学习容器进程、网络、安全、存储、内存模块，甚至是自己去实现 Docker 。&lt;/p&gt;&#xA;&lt;p&gt;对此我的回答是，在深入学习容器之前我需要先去学习 linux 和一点 C,这不是我现阶段想做的事情。&lt;/p&gt;&#xA;&lt;h2&gt;最后&lt;/h2&gt;&#xA;&lt;p&gt;我把上面的答案告诉运维同学后，他们反馈说，用 K8s 挂载不了上面提到的目录。限于我目前对 K8s 不了解，这个问题他们也不着急，所以只能暂时搁置一下，等我学完 k8s 再去解决。学习完 k8s 之后我会和今天一样把学习经验分享出来。我在微信公众号发表了本文的英文版（借助了翻译软件），如果您感兴趣可以关注一下我: ProgrammerAlan 。&lt;/p&gt;&#xA;&lt;h2&gt;作者简介&lt;/h2&gt;&#xA;&lt;p&gt;鑫茂，深圳，Java 开发工程师，2022 年 3 月参加工作。&lt;/p&gt;&#xA;&lt;p&gt;喜读思维方法、哲学心理学以及历史等方面的书，偶尔写些文字。&lt;/p&gt;&#xA;&lt;p&gt;希望通过文章，结识更多同道中人。如果你对我感兴趣欢迎添加我的联系方式，可以一起讨论如何赚钱，实现共同富裕。&lt;/p&gt;&#xA;</description>
+      <author>ProgrammerAlan</author>
+      <pubDate>09 Jan 2023 14:53:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>毕业了有点迷茫..求赐教 - 问与答</title>
+      <link>https://www.v2ex.com/t/907738</link>
+      <description>怎么说呢..好丢脸&lt;br /&gt;本硕都是在国内某个 qs 排名前 50 的大学读的&lt;br /&gt;但实际上除了课程做过的一些很简单的项目以外基本没什么项目经验&lt;br /&gt;有过一段实习经历但是没做出来什么东西&lt;br /&gt;现在基本上只会写 python ，c++和 java 学过现在都忘了&lt;br /&gt;因为延毕了一段时间所以很自卑，甚至都不敢去找工作&lt;br /&gt;现在毕业了赋闲在家&lt;br /&gt;&lt;br /&gt;现在就是在刷 leetcode 和复习操作系统、计算机网络之类的基础知识，打算过一两个月去找工作&lt;br /&gt;不知道目前这样操作行不行..请各位大大赐教，不胜感激！！</description>
+      <author>piggie18</author>
+      <pubDate>09 Jan 2023 14:48:59 +0000</pubDate>
+    </item>
+    <item>
+      <title>招聘远程岗位——前端开发工程师、UI 设计师 - 酷工作</title>
+      <link>https://www.v2ex.com/t/907736</link>
+      <description>远程-前端开发工程师&lt;br /&gt;&lt;br /&gt;3-5 年，专科及以上&lt;br /&gt;&lt;br /&gt;月薪：18-23K 一位，25-30K 一位&lt;br /&gt;&lt;br /&gt;职位亮点：双休、五险一金、远程办公、年终奖&lt;br /&gt;&lt;br /&gt;岗位职责：&lt;br /&gt;1.负责项目移动端 h5 、网页版开发；&lt;br /&gt;2.高度还原设计图、处理各种兼容性问题；&lt;br /&gt;3.配合后台工程师连调。&lt;br /&gt;&lt;br /&gt;岗位要求：&lt;br /&gt;1.计算机相关专业，具有 2 年以上互联网项目 /移动应用的前端开发经验；&lt;br /&gt;1. 精通 html css js ；&lt;br /&gt;2. 移动端 h5 开发经验,了解各种在手机上面的兼容性问题，以及对应的解决方案，性能优化等；&lt;br /&gt;3. 精通 Reactjs 框架，以及 react 周边生态；&lt;br /&gt;4. 熟悉 nodejs ，webpack ；&lt;br /&gt;5.有较强的责任心和良好的沟通能力，能够快速定位并解决问题，具备较强的学习能力。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;远程-UI 设计师&lt;br /&gt;&lt;br /&gt;3-5 年，本科及以上&lt;br /&gt;&lt;br /&gt;薪资：18-25K/月&lt;br /&gt;&lt;br /&gt;职位亮点：双休、五险一金、远程办公、年终奖&lt;br /&gt;&lt;br /&gt;工作职责：&lt;br /&gt;1.负责公司 PC 、移动端的 UI 界面设计；&lt;br /&gt;2.对产品界面进行持续优化，提升用户体验并不断优化；&lt;br /&gt;3.跟进产品研发，确保最终实现与设计输出物一致；&lt;br /&gt;4.制定和维护产品的 UI 设计标准和规范；&lt;br /&gt;&lt;br /&gt;任职要求：&lt;br /&gt;1 、设计相关专业背景，本科及以上学历；&lt;br /&gt;2 、3 年以上用户体验设计相关经验，有完整项目经验；&lt;br /&gt;3 、具有良好逻辑思维能力，可以快速理解和分解设计需求&lt;br /&gt;4 、熟练使用 UI 设计相关软件，熟悉 iOS 和 Android 设计规范；&lt;br /&gt;5 、有社交化 app 设计或者金融行业设计者优先。&lt;br /&gt;&lt;br /&gt;以上职位欢迎自荐推荐，简历以及作品可发送至邮箱 sunne@dingtalk.com.</description>
+      <author>scsunne</author>
+      <pubDate>09 Jan 2023 14:48:18 +0000</pubDate>
+    </item>
+    <item>
       <title>求助，修改 微信一键登录 的账号名称和头像 - 问与答</title>
       <link>https://www.v2ex.com/t/907735</link>
       <description>请问一下 有没有人知道怎么修改 微信一键登录 的账号名称和头像&lt;br /&gt;最多有三个的那个名称和头像&lt;br /&gt;谢谢</description>
@@ -44,13 +72,6 @@
       <description>&lt;p&gt;平时看大家都说这不公平，那不公义的，好像都在为这个社会愤愤不平，原来感情自己不是即得利益者呢。&lt;/p&gt;&#xA;&lt;p&gt;看到这篇帖子&lt;a href=&#34;https://www.v2ex.com/t/907498#reply113&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/907498#reply113&lt;/a&gt;，越发的觉得，没救了，就连在程序员扎堆，学历普遍偏高的社区，也对超速这种不合法的行为，没有半点反省的想法，且非常自豪。&lt;/p&gt;&#xA;&lt;p&gt;真是大开眼界。&lt;/p&gt;&#xA;</description>
       <author>arvin01</author>
       <pubDate>09 Jan 2023 14:30:08 +0000</pubDate>
-    </item>
-    <item>
-      <title>诺大的华夏大地容不下一个小小的 github. - 问与答</title>
-      <link>https://www.v2ex.com/t/907729</link>
-      <description>&lt;p&gt;我使用的是 socks5 代理，隔几天 github 就登陆不上了，连 push 都 push 不了，然后就只能重新生成 key.&#xA;心里真是一万个草泥马在奔腾， 大家有解决这个问题的妙招没？ 我这里的网络 dns github 已经被污染成 localhost 了。&lt;/p&gt;&#xA;&lt;p&gt;跪求对抗这种机制的妙招。&lt;/p&gt;&#xA;</description>
-      <author>jeesk</author>
-      <pubDate>09 Jan 2023 14:19:27 +0000</pubDate>
     </item>
     <item>
       <title>关于背调，离职理由需要一致吗？ - 问与答</title>
@@ -232,6 +253,13 @@
       <description>&lt;div&gt;&#xA; 已组四年家庭共享，Apple One 上线就升级订阅了，现招车友两名，希望稳定不费事，至少预交半年费用，按现汇率折算。 &#xA; &lt;br/&gt;服务包括 Apple Music 、Apple TV+、Apple Arcade 、iCloud+200G （有 iCloud 需求的请找高级版的车，200G 不顶用），另外本人长期订阅 Marginnote OCR Pro ，会一直共享。&#xA; &lt;br/&gt;&#xA;&lt;br/&gt;联系 VX：Q05fMl9WaWN0b3J5&#xA;&lt;/div&gt;</description>
       <author>WaylonHo</author>
       <pubDate>09 Jan 2023 10:26:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>诺大的华夏大地容不下一个小小的 github. - 问与答</title>
+      <link>https://www.v2ex.com/t/907729</link>
+      <description>&lt;p&gt;我使用的是 socks5 代理，隔几天 github 就登陆不上了，连 push 都 push 不了，然后就只能重新生成 key.&#xA;心里真是一万个草泥马在奔腾， 大家有解决这个问题的妙招没？ 我这里的网络 dns github 已经被污染成 localhost 了。&lt;/p&gt;&#xA;&lt;p&gt;跪求对抗这种机制的妙招。&lt;/p&gt;&#xA;</description>
+      <author>jeesk</author>
+      <pubDate>09 Jan 2023 14:19:27 +0000</pubDate>
     </item>
     <item>
       <title>科学上网，服务器上开透明代理方法很多，但是如何才能不代理本机 - 宽带症候群</title>
