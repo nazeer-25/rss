@@ -4,7 +4,28 @@
   "Description": "",
   "Items": [
     {
-      "Title": "服务器的 ssh 服务可以接收新的连接，但是不能用 telnet 连接其他机器的 ssh 服务？ - Linux",
+      "Title": "关于处理导入 excel 的数据一个问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/907969",
+      "Description": "\u003cp\u003e想知道大家平时都是怎么处理导入的 excel 数据的。\n目前我知道的有两种方法:\n1 、批量的进行读、校验、保存\n2 、每行数据进行单独处理\n因为目前在改公司的一个老项目时，发现他需要对 excel 某个字段的唯一性进行校验。此时是批量处理的话，由于在处理导入数据前期有对校验所需用的数据进行一次缓存，那么在处理导入数据的过程中，如果在客户端手动的添加了一条与 excel 冲突的数据，并不会影响 excel 中数据的保存(按理来说冲突的那条数据应该无法被保存)。然后如果时单独处理的话，那么会造成大量的数据库连接。\u003c/p\u003e\n",
+      "Author": "zvvvvv",
+      "PubDate": "2023-01-10T09:11:10Z"
+    },
+    {
+      "Title": "新人求解惑， AList 是否必须部署在本地电脑上？ - 问与答",
+      "Link": "https://www.v2ex.com/t/907968",
+      "Description": "我理解 AList 必须部署在内网，才能更好的发挥作用，如果在云上找一台 1M 带宽的机器部署，依然没啥用呀",
+      "Author": "xabcstack",
+      "PubDate": "2023-01-10T09:10:40Z"
+    },
+    {
+      "Title": "关于群晖备份 livephoto 问题 - NAS",
+      "Link": "https://www.v2ex.com/t/907967",
+      "Description": "\u003cp\u003e群晖 6.1.XX 可以备份 livephoto 吗？\u003c/p\u003e\n\u003cp\u003e如果不能 哪个系统可以备份？\u003c/p\u003e\n\u003cp\u003e有没有第三方套件可以备份？\u003c/p\u003e\n",
+      "Author": "tysb777",
+      "PubDate": "2023-01-10T09:07:40Z"
+    },
+    {
+      "Title": "机器 A 的 ssh 服务可以接收新的连接，但是不能用 telnet 连接机器 B 的 ssh 服务？ - Linux",
       "Link": "https://www.v2ex.com/t/907966",
       "Description": "\u003cp\u003e机器 A 的 ssh 服务可以接收新的连接，但是不能用 telnet 连接机器 B 的 ssh 服务，会是什么原因呢？\u003c/p\u003e\n\u003cp\u003e当前环境是：\u003cbr/\u003e\n机器 A：172.31.15.148\u003cbr/\u003e\n机器 B：172.31.6.159\u003cbr/\u003e\n两机器在同一内网，linux 内核是 5.10.157 ，均有 ssh 服务\u003cbr/\u003e\n机器 A 已经有 102610 个连接了，此时 telnet 机器 B 不行：  \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e[root@ip-172-31-15-148 ~]# ss -s\nTotal: 102810\nTCP:   102635 (estab 102610, closed 1, orphaned 0, timewait 1)\n\n[root@ip-172-31-15-148 ~]# telnet 172.31.6.159 22\nTrying 172.31.6.159...\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e而机器 B 可以 telnet 机器 A：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e[root@ip-172-31-6-159 ~]# telnet 172.31.15.148 22\nTrying 172.31.15.148...\nConnected to 172.31.15.148.\nEscape character is '^]'.\nSSH-2.0-OpenSSH_7.4\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e机器 A 释放了它的 102610 个连接后，telnet 机器 B 是 ok 的\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e[root@ip-172-31-15-148 ~]# telnet 172.31.6.159 22\nTrying 172.31.6.159...\nConnected to 172.31.6.159.\nEscape character is '^]'.\nSSH-2.0-OpenSSH_7.4\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这会是什么原因呢？或者怎么排查呢？我用\u003ccode\u003estrace telnet 172.31.6.159 22\u003c/code\u003e查看是卡在 connect 系统调用上。\u003c/p\u003e\n",
       "Author": "xing393939",
