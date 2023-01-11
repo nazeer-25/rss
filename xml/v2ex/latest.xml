@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>nginx 如何判断 server_name - NGINX</title>
+      <link>https://www.v2ex.com/t/908296</link>
+      <description>&lt;p&gt;有这样的配置在监听 80 端口&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;server {&#xA;    listen       80;&#xA;    server_name  www.domain.cc&#xA;        cloud.domain.cc&#xA;        mail.domain.cc&#xA;        blog.domain.cc&#xA;        linux.domain.cc&#xA;        tools.domain.cc&#xA;        notebook.domain.cc&#xA;        domain.cc;&#xA;&#xA;    return 301 https://$host$request_uri;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我想要判断访问的 host 是否在 &lt;code&gt;server_name&lt;/code&gt; 里面&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;server {&#xA;    listen       80;&#xA;    server_name  www.domain.cc&#xA;        cloud.domain.cc&#xA;        mail.domain.cc&#xA;        blog.domain.cc&#xA;        linux.domain.cc&#xA;        tools.domain.cc&#xA;        notebook.domain.cc&#xA;        domain.cc;&#xA;    #region 这里应该怎么写?&#xA;    if ($host not in server_name) {&#xA;      # 在此返回 404 结束&#xA;      return 404;&#xA;      exit;&#xA;    }&#xA;    #endregion&#xA;&#xA;    return 301 https://$host$request_uri;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>bronana</author>
+      <pubDate>11 Jan 2023 19:44:45 +0000</pubDate>
+    </item>
+    <item>
       <title>仅网页浏览和视频播放, 板+U+内存, 预算 2k 以内 - 硬件</title>
       <link>https://www.v2ex.com/t/908294</link>
       <description>厅里的 htpc 旧机器, cpu i3 6100, 2x4G ddr3, 256G sata ssd, 开网页微信都有点吃力了.&lt;br /&gt;而且因为强升了 win11, 最近经常出现鼠标点击失灵的问题,得按 ctrl+alt+del 再按取消才能暂时恢复正常.&lt;br /&gt;看微软官方论坛说是 cpu 不支持导致的 bug, 而且看评论是这个 bug 都一年多了没有修, 估计是不会修了.&lt;br /&gt;又懒得重装系统, 想着反正用着卡卡的, 而且旧主板 pcie2.0 插网卡也跑不到 2.5G 带宽, 不如升下级.&lt;br /&gt;&lt;br /&gt;机箱(matx 中塔),电源(Seasonic 450w 铜牌),ssd(sandisk 256g)暂时可以不用换, 需要换的是板+U+内存.&lt;br /&gt;&lt;br /&gt;不知有啥推荐的, 此机器常年不关机, 应用仅有 Chrome + 微信 + 视频播放, 给老人用的.&lt;br /&gt;&lt;br /&gt;性能要求 2000 元内尽可能高, 因为下一次换可能又是 8 年后了, 自己有现成的 2.5g 和 10g 网卡, 主板没带 2.5g 网卡也无所谓, 不需要 wifi.</description>
