@@ -4,7 +4,7 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>nginx 如何判断 server_name - NGINX</title>
+      <title>想请教大家 nginx 如何判断 server_name - NGINX</title>
       <link>https://www.v2ex.com/t/908296</link>
       <description>&lt;p&gt;有这样的配置在监听 80 端口&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;server {&#xA;    listen       80;&#xA;    server_name  www.domain.cc&#xA;        cloud.domain.cc&#xA;        mail.domain.cc&#xA;        blog.domain.cc&#xA;        linux.domain.cc&#xA;        tools.domain.cc&#xA;        notebook.domain.cc&#xA;        domain.cc;&#xA;&#xA;    return 301 https://$host$request_uri;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我想要判断访问的 host 是否在 &lt;code&gt;server_name&lt;/code&gt; 里面&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;server {&#xA;    listen       80;&#xA;    server_name  www.domain.cc&#xA;        cloud.domain.cc&#xA;        mail.domain.cc&#xA;        blog.domain.cc&#xA;        linux.domain.cc&#xA;        tools.domain.cc&#xA;        notebook.domain.cc&#xA;        domain.cc;&#xA;    #region 这里应该怎么写?&#xA;    if ($host not in server_name) {&#xA;      # 在此返回 404 结束&#xA;      return 404;&#xA;      exit;&#xA;    }&#xA;    #endregion&#xA;&#xA;    return 301 https://$host$request_uri;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
       <author>bronana</author>

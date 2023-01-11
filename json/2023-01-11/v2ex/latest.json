@@ -4,7 +4,7 @@
   "Description": "",
   "Items": [
     {
-      "Title": "nginx 如何判断 server_name - NGINX",
+      "Title": "想请教大家 nginx 如何判断 server_name - NGINX",
       "Link": "https://www.v2ex.com/t/908296",
       "Description": "\u003cp\u003e有这样的配置在监听 80 端口\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eserver {\n    listen       80;\n    server_name  www.domain.cc\n        cloud.domain.cc\n        mail.domain.cc\n        blog.domain.cc\n        linux.domain.cc\n        tools.domain.cc\n        notebook.domain.cc\n        domain.cc;\n\n    return 301 https://$host$request_uri;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我想要判断访问的 host 是否在 \u003ccode\u003eserver_name\u003c/code\u003e 里面\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eserver {\n    listen       80;\n    server_name  www.domain.cc\n        cloud.domain.cc\n        mail.domain.cc\n        blog.domain.cc\n        linux.domain.cc\n        tools.domain.cc\n        notebook.domain.cc\n        domain.cc;\n    #region 这里应该怎么写?\n    if ($host not in server_name) {\n      # 在此返回 404 结束\n      return 404;\n      exit;\n    }\n    #endregion\n\n    return 301 https://$host$request_uri;\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "bronana",
