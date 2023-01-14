@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "防火墙真的部署到省级设备了吧 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/908904",
+      "Description": "\u003cp\u003e\u003cimg alt=\"111\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2023/01/14/YDeZtCR7PiSo5uF.jpg\"/\u003e\n除浙江省外无一幸免，昨天给境内服务器用一下代理一下 git ip 就 ban 了。。。\u003c/p\u003e\n",
+      "Author": "kleos",
+      "PubDate": "2023-01-14T06:57:56Z"
+    },
+    {
+      "Title": "termius 在更新之后，启动时会先白屏好几秒 - 问与答",
+      "Link": "https://www.v2ex.com/t/908903",
+      "Description": "\u003cp\u003e关闭重启依然白屏，重装 termius 依然如此\u003c/p\u003e\n",
+      "Author": "muhairen",
+      "PubDate": "2023-01-14T06:57:07Z"
+    },
+    {
+      "Title": "查找一款请求代理工具 - 问与答",
+      "Link": "https://www.v2ex.com/t/908902",
+      "Description": "场景：A 主机访问不了墙外，但是 B 主机可以，A ，B 主机不是同一个内网，A 可通过域名访问 B 的 nginx (\u003ca target=\"_blank\" href=\"http://b.host.com\" rel=\"nofollow noopener\"\u003eb.host.com\u003c/a\u003e)\u003cbr /\u003e\u003cbr /\u003e墙外有一个接口，如： \u003ca target=\"_blank\" href=\"https://api.foo.com/bar\" rel=\"nofollow noopener\"\u003ehttps://api.foo.com/bar\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003eA 主机发起请求 POST \u003ca target=\"_blank\" href=\"https://api.foo.com/bar?baz=quz\" rel=\"nofollow noopener\"\u003ehttps://api.foo.com/bar?baz=quz\u003c/a\u003e   request body={\"name\":\"hello\"} 被墙了。\u003cbr /\u003eB 主机发起请求是可以的\u003cbr /\u003e\u003cbr /\u003e有没有这样的工具，类似工具： \u003ca target=\"_blank\" href=\"https://ghproxy.com\" rel=\"nofollow noopener\"\u003ehttps://ghproxy.com\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003eB 启动服务，A 请求 \u003ca target=\"_blank\" href=\"http://b.host.com/proxy/https://api.foo.com/bar?baz=quz\" rel=\"nofollow noopener\"\u003ehttp://b.host.com/proxy/https://api.foo.com/bar?baz=quz\u003c/a\u003e   request body={\"name\":\"hello\"}\u003cbr /\u003e\u003cbr /\u003e这时候，B 通过 nginx ，获取出 /proxy/ 后面的 url ，再通过代理工具进行转发，响应给 A ？\u003cbr /\u003e\u003cbr /\u003e有大佬知道这样的工具吗？\u003cbr /\u003e或者，不用代理工具，通过 B nginx 配置 rewrite 和 pass_proxy 也达到这种目的？\u003cbr /\u003e\u003cbr /\u003ePS：nginx 小白，不太懂配置=_=",
+      "Author": "oneisall8955",
+      "PubDate": "2023-01-14T06:56:56Z"
+    },
+    {
+      "Title": "老板觉得“黄河安澜”暨绿色优质农产品博览会 这个名字，黄河安澜不合适，大佬们能不能帮忙想个名字 - 问与答",
+      "Link": "https://www.v2ex.com/t/908901",
+      "Description": "\u003cp\u003e未来 zf 想在沿黄办一个国际范、引领性的黄河流域绿色优质农产品的博览会，我给起了个名字，老板觉得不够洋气，黄河安澜四个字也不合适，有没有网友帮着想个名字\u003c/p\u003e\n",
+      "Author": "cun123",
+      "PubDate": "2023-01-14T06:55:54Z"
+    },
+    {
+      "Title": "各位大神们，请教一个 nginx 反代问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/908900",
+      "Description": "\u003cp\u003e我的 http8008 端口起了一个哪吒面板的服务，目前用 \u003ca href=\"http://域名.com:8008\" rel=\"nofollow\"\u003ehttp://域名.com:8008\u003c/a\u003e 访问服务正常\n我现在想用 https 反代  我希望的结果是当我访问 \u003ca href=\"https://域名.com/nezha/的时候，可以正常的访问哪吒服务\" rel=\"nofollow\"\u003ehttps://域名.com/nezha/的时候，可以正常的访问哪吒服务\u003c/a\u003e\n我的 nginx 配置如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003elocation ^~ /nezha/\n        {\n         proxy_redirect off;\n         proxy_read_timeout 1200s;\n\t proxy_pass http://127.0.0.1:8008/;\n         proxy_set_header X-Real-IP $remote_addr;\n         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n         proxy_set_header Host $host;\n         proxy_set_header Upgrade-Insecure-Requests 1;\n         proxy_set_header X-Forwarded-Proto https;\n         \n        }\n        location ~* /(static)/.*\\.(gif|jpg|jpeg|bmp|png|js|css)$\n                {\n                proxy_pass http://127.0.0.1:8008;#访问路径及端口\n                }\n\n        location /ws {        \n        proxy_redirect off;\n        proxy_pass http://127.0.0.1:8008;      # 转发\n        proxy_set_header Host $host;\n        proxy_set_header X-Real_IP $remote_addr;\n        proxy_set_header X-Forwarded-For $remote_addr:$remote_port;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;   # 升级协议头 websocket\n        proxy_set_header Connection upgrade;\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我遇到的问题是，目前首页可以正常使用，但当我点击哪吒面板的其他功能时，页面的链接是 \u003ca href=\"https://域名.com/service\" rel=\"nofollow\"\u003ehttps://域名.com/service\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e此时 nginx 就代理失败了，页面无法正常访问，请问怎么做才能让我在点击哪吒面板其他功能时,页面的地址是 \u003ca href=\"https://域名.com/nezha/service\" rel=\"nofollow\"\u003ehttps://域名.com/nezha/service\u003c/a\u003e 呢\u003c/p\u003e\n",
+      "Author": "wang794822947",
+      "PubDate": "2023-01-14T06:52:34Z"
+    },
+    {
       "Title": "js 编辑 HTML 字符串，有推荐的方法吗？ - 程序员",
       "Link": "https://www.v2ex.com/t/908899",
       "Description": "后端返回 html 网页的字符串，我需要将字符串里添加一段固定的\u0026lt;div\u0026gt;标签和给字符串里 table 添加属性 border='1'。  \u003cbr /\u003e大佬们有什么推荐的方法或者库吗？",
