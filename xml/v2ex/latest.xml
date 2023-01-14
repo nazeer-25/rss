@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求助，我的极为先进的 mac 系统这是又咋了 - macOS</title>
+      <link>https://www.v2ex.com/t/908970</link>
+      <description>&lt;p&gt;昨天一切正常；&#xA;到现在没有关机，也没有重启过，打开机器使用，拷贝个文件，不管是啥，都要输入密码或者指纹，这是啥情况啊？&lt;/p&gt;&#xA;</description>
+      <author>fearlessaaa</author>
+      <pubDate>14 Jan 2023 15:14:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>中国联通好像收不到国外的短信？ - 分享发现</title>
+      <link>https://www.v2ex.com/t/908969</link>
+      <description>&lt;p&gt;由于某些原因需要注册 WhatsApp ，发现一直收不到验证短信 /电话。&#xA;但是在“中国联通”App 上已经确认开通了“国际漫游”以及“国际短信接收”服务。&lt;/p&gt;&#xA;&lt;p&gt;尝试发送国际短信给 Google Voice 的号码可以接收到，但是 Google Voice 回复提示发送失败（不确定是不是因为 Google Voice 没有充值）。&lt;/p&gt;&#xA;&lt;p&gt;尝试使用了 &lt;a href=&#34;https://globfone.com/send-text-online/&#34; rel=&#34;nofollow&#34;&gt;https://globfone.com/send-text-online/&lt;/a&gt; 这个服务给我的号码发送短信，提示发送成功但也没收到短信。&lt;/p&gt;&#xA;&lt;p&gt;尝试过联系 WhatsApp 的客服，也没有给出有效的解决方案。但是 WhatsApp 后台确实显示短信发送失败了。客服说验证手机号码是唯一的注册手段。&lt;/p&gt;&#xA;&lt;p&gt;各位有遇到过类似的情况吗？&lt;/p&gt;&#xA;</description>
+      <author>zjhzxhz</author>
+      <pubDate>14 Jan 2023 15:12:43 +0000</pubDate>
+    </item>
+    <item>
       <title>关于 ZeroMQ 的若干问题 - 程序员</title>
       <link>https://www.v2ex.com/t/908968</link>
       <description>&lt;h2&gt;背景问题&lt;/h2&gt;&#xA;&lt;p&gt;最近在搬一些把 Python 解释器嵌入到 C++中砖（ Windows 下），虽然能搬，但并不是什么特别愉快的体验：要屏蔽应用对 Python 的显式依赖，所以通过 C 接口在 C++和 Python 之间传递数据和错误信息，C 接口下面又用 Cython 来进行数据转换和函数调用，基本上是这样的：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;C++ ⇌ C ⇌ Cython ⇌ Python&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;还有个麻烦是这个过程中 C++，Cython ，Python 没法一起 debug （ C++用的 CLion 开发，Cython 和 Python 用的 PyCharm ），而且 Cython 的 debug 只能进入到生成的 cpp 中，不过还好，能定位问题在哪个 Cython 函数，很多时候只能在 Cython 中加 print 来看传递的参数 (如果有更好的办法请教教我 o(╥﹏╥)o)&lt;/p&gt;&#xA;&lt;p&gt;总之，坑，特别多的坑，即使用了 Cython 不直接用 Python 的 C API 也要写不少代码，而且 Python 解释器在应用进程，如果没照顾好它在运行中的情绪，轻则自己崩掉，重则一起崩掉，不管哪种情况应用基本要重启了。&lt;/p&gt;&#xA;&lt;h2&gt;新的解决方案&lt;/h2&gt;&#xA;&lt;p&gt;不清楚什么时候在哪儿看到过 RPC(Remote Procedure Call)的概念, 然后经过一番谷噜，看到了这篇博客 &lt;a href=&#34;https://opensource.com/article/20/3/zeromq-c-python&#34; rel=&#34;nofollow&#34;&gt;https://opensource.com/article/20/3/zeromq-c-python&lt;/a&gt; 作者开头提到的困境跟我现在经历的差不多（其实给 Python 写扩展还好啦，Python 生态就是这样来的，反过来把 Python 当成库用才更头疼）。作者提到 ZeroMQ 是这种问题的解决方案（ ZeroMQ 我是在 V2 看到过相关讨论的，虽然当时可能并不清楚这东西多有用）。经过翻阅一些文档看了一些例子，我对以上背景问题也有了以下基于 ZeroMQ 的设想方案:&lt;/p&gt;&#xA;&lt;p&gt;C++中启动一个 Python 脚本，该脚本运行在独立进程中作为一个服务等待请求； C++通过发送请求传递需要处理的参数给 Python ，Python 处理后把结果发送回去；要是传递的参数不合适导致服务崩了，没关系，重启该 Python 脚本继续服务，修改参数再传（如果是 Python 解释器嵌入 C++则只能启动一次关闭一次，无法重新启动）；完事儿后 C++可以传递特殊参数优雅地停止该服务。而且开发时各个模块我都可以在各自的开发环境中 debug 了╰(&lt;em&gt;°▽°&lt;/em&gt;)╯！&lt;/p&gt;&#xA;&lt;p&gt;有了这种方式后的确打开了编写应用的新世界大门（即使仅仅是本地的桌面应用），用合适的语言和工具编写独立的功能模块，然后通过 ZeroMQ 将各个独立模块连接起来构成整个系统。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;前景是美好的，但是实践起来肯定有坑，所以想请熟知 ZeroMQ 并用其在应用中摸爬滚打过的前辈们现身说法，谈谈自己对 ZeroMQ 看法，分享一些观点和经验，踩过的坑，缺点以及克服方法。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2&gt;关于 ZeroMQ 的若干问题&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Hintjens 大神的这份遗产 &lt;a href=&#34;https://zguide.zeromq.org/&#34; rel=&#34;nofollow&#34;&gt;https://zguide.zeromq.org/&lt;/a&gt; 主要讲了 HowTo ，有没有讲解底层原理的一些资料呢？&lt;/li&gt;&#xA;&lt;li&gt;C 源码暂时没有时间和精力去啃，缺乏一些关键的背景知识也啃不动，所以需要哪些背景知识才能很好的理解其中的各种概念呢？&lt;/li&gt;&#xA;&lt;li&gt;想了解使用 ZeroMQ 各种 pattern 时底层究竟发生了什么？数据是怎么从一个地方传到另一个地方的？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;在我的观念里至少要了解到某个工具的一些基本的底层原理才能更好的使用该工具。ZeroMQ 是一个值得深入了解的工具。&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;明天调休继续上班，到时再来看各位的回复&lt;/em&gt;&lt;/p&gt;&#xA;</description>
