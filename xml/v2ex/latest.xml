@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>腾讯 CDN 爆计费漏洞，每月可能产生数千元 https 请求费用 - 云计算</title>
+      <link>https://www.v2ex.com/t/908877</link>
+      <description>&lt;p&gt;腾讯 CDN 在 2023 年 1 月 5 日开始对 cdn 的 https 请求计费。价格为每万次请求 0.05 元 /万次请求。&lt;/p&gt;&#xA;&lt;p&gt;但是在恶意攻击时，用户会产生天价的可能会产生费用。&lt;/p&gt;&#xA;&lt;p&gt;比如一个随便主机，可以每秒钟发起 220 次 https 请求，每分钟发起 13000 次请求。每小时 80 万次。&#xA;这样一天下来会有约 100 元的 https 请求费用。一个月会有 3000 的请求费用。&lt;/p&gt;&#xA;&lt;p&gt;下面的信息是被攻击后的流量和请求数：&lt;/p&gt;&#xA;&lt;p&gt;总流量&#xA;65.16 GB&#xA;平均流量命中率&#xA;56.3 %&#xA;请求数&#xA;2602.35 万&lt;/p&gt;&#xA;&lt;p&gt;如果你在腾讯云里预存的费用较多，恭喜你要当冤大头了。 估计预存费用用完后才发现。&lt;/p&gt;&#xA;&lt;p&gt;如果你发现了被攻击，然后按照腾讯官方的建议，需要设置 CDN 业务的 QPS 、IP 黑名单、区域限制。这样请求的状态码为 514 。不计费。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://cloud.tencent.com/document/product/228/11201#m2-5&#34; rel=&#34;nofollow&#34;&gt;https://cloud.tencent.com/document/product/228/11201#m2-5&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Q：IP 限频产生的 HTTPS 请求数是否计费？&#xA;A：IP 限频、IP 黑白名单、区域访问控制产生的 HTTPS 拒绝请求均不纳入 HTTPS 计费数据，状态码为 514 。&lt;/p&gt;&#xA;&lt;p&gt;Q：IP 黑白名单产生的 HTTPS 请求数是否计费？&#xA;A：IP 限频、IP 黑白名单、区域访问控制产生的 HTTPS 拒绝请求均不纳入 HTTPS 计费数据，状态码为 514 。&lt;/p&gt;&#xA;&lt;p&gt;上面的措施中，IP 黑名单、区域访问控制，都是被攻击后的针对攻击者 IP 和区域的事后措施。唯有 QPS 可以事先设定，预防攻击导致的费用。&lt;/p&gt;&#xA;&lt;p&gt;然而，不幸的是，腾讯 CDN 业务的 https 计费可能是推出太仓促，上述规则并不一定生效。设置 QPS 后，请求的状态码为 403 ，仍然会计费。 打电话找客服，客服说先扣费。 如果确认是设置了 QPS ，下个月会返还。&lt;/p&gt;&#xA;&lt;p&gt;xxxxx  2023-01-14 11:51:06&#xA;你们的方案是 现在你们的业务系统有问题。&#xA;每小时会扣 5 元，每天扣 120 ，每月 3600 先扣费。 然后在下个月再返回给我？&#xA;为什么你们的业务逻辑问题，需要用户承担这部分费用？&lt;/p&gt;&#xA;&lt;p&gt;腾讯云工程师 2023-01-14 11:53:26&#xA;您好，配置 ip 黑名单后依然先返回 403 状态，未返回 514 不计费问题这边会尽快进行修复解决；&lt;/p&gt;&#xA;&lt;p&gt;对于先扣费，再退您费用的方案这边再沟通核实下，请稍等。&lt;/p&gt;&#xA;&lt;p&gt;没法子，只能先停了腾讯的 CDN 业务。客户也建议我停掉，要不就先把存几千块，让计费系统先扣了再算账。&lt;/p&gt;&#xA;</description>
+      <author>yangtzi</author>
+      <pubDate>14 Jan 2023 04:46:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>人手一个直播平台，我的树洞也加了直播功能。 - 程序员</title>
+      <link>https://www.v2ex.com/t/908876</link>
+      <description>&lt;p&gt;每个人都可以输入自己的树洞名字，设置密码即可成为管理员。&#xA;私密聊天，信息是全加密的，采用 aes 加密。key 和 iv 都是分表后存储，树洞名字采用 md5 后索引匹配的加密聊天记录。&lt;/p&gt;&#xA;&lt;p&gt;花了 3 天时间实现的直播功能，RTCPeerConnection 实现的。&#xA;尝试过使用 peerjs 后来发现必须双方提供媒体文件，只适合点对点视频的场景。&lt;/p&gt;&#xA;&lt;p&gt;入口： &lt;a href=&#34;https://www.treeholes.cc/?treeholename=%E7%9C%8B%E8%A7%86%E9%A2%91&#34; rel=&#34;nofollow&#34;&gt;https://www.treeholes.cc/?treeholename=%E7%9C%8B%E8%A7%86%E9%A2%91&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;灵感来源于 jojo 的鹦鹉直播：&lt;a href=&#34;http://jojo.icepie.net&#34; rel=&#34;nofollow&#34;&gt;jojo.icepie.net&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>rui6ye</author>
+      <pubDate>14 Jan 2023 04:44:26 +0000</pubDate>
+    </item>
+    <item>
       <title>iCloud 能否把镜像模式改为扩展存储模式 - iCloud</title>
       <link>https://www.v2ex.com/t/908875</link>
       <description>&lt;p&gt;比如我手机上总共有 1 万张照片 但我只想在手机本地保留第 1-5000 张照片，icloud 上保存第 5000-10000 张。有没有可能实现或者替代软件（免费的最好）&lt;/p&gt;&#xA;&lt;p&gt;现在的镜像模式，只要手机上删除一张照片或一个视频，iCloud 上也同步删除那张照片和视频。无非就是一个相同的备份。&lt;/p&gt;&#xA;</description>
