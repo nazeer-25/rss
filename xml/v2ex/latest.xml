@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于 MySQL 的 Java 驱动主从分离的连接方式 jdbc:mysql:replication - 程序员</title>
+      <link>https://www.v2ex.com/t/908919</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-source-replica-replication-connection.html&#34; rel=&#34;nofollow&#34;&gt;https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-source-replica-replication-connection.html&lt;/a&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;Connection conn = DriverManager.getConnection(&#34;jdbc:mysql:replication://source,replica1,replica2,replica3/test&#34;,props);&#xA;// Perform read/write work on the source by setting the read-only flag to &#34;false&#34;&#xA;conn.setReadOnly(false);&#xA;conn.setAutoCommit(false);&#xA;conn.createStatement().executeUpdate(&#34;UPDATE some_table ....&#34;);&#xA;conn.commit();&#xA;// Now, do a query from a replica, the driver automatically picks one from the list&#xA;conn.setReadOnly(true);&#xA;ResultSet rs = conn.createStatement().executeQuery(&#34;SELECT a,b FROM alt_table&#34;);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;按照官方文档说明写了个 demo 实验，我写的时候必须 setReadOnly(false)，读的时候 setReadOnly(true)才生效，如果是事务，我还得设置回 false 。一套下来，我还得自己写代码控制，还不如按照网上其他的方案用包分离或者注解指定数据源。&lt;/p&gt;&#xA;&lt;p&gt;此外，MySQL 官方还有个 MySQL proxy 的东西貌似也是这个操作，就让我很无语。&lt;/p&gt;&#xA;&lt;p&gt;不知道是我理解的不够，还是说这东西真的是垃圾？望大佬指点&lt;/p&gt;&#xA;</description>
+      <author>studyrun</author>
+      <pubDate>14 Jan 2023 09:02:37 +0000</pubDate>
+    </item>
+    <item>
+      <title>大家自建的 VPS 应用,备份数据都用啥方案? - VPS</title>
+      <link>https://www.v2ex.com/t/908918</link>
+      <description>&lt;p&gt;像虚拟主机自带备份哈,但是毕竟大家都是玩廉价 VPS 的,有个意外也很正常哈.&#xA;有啥通用的备份方案吗?感谢&lt;/p&gt;&#xA;</description>
+      <author>jsjcjsjc</author>
+      <pubDate>14 Jan 2023 09:01:49 +0000</pubDate>
+    </item>
+    <item>
       <title>有没有 Kotlin 讲协程比较好的书籍或博客连载 - Kotlin</title>
       <link>https://www.v2ex.com/t/908917</link>
       <description>&lt;p&gt;我目前只搜到一本书是专门讲协程的《深入理解 Kotlin 协程》，我估摸着我目前看不太懂，希望可以有其它的推荐，通过练习可以深入浅出自己弄一些协程框架的那种。&lt;/p&gt;&#xA;</description>
