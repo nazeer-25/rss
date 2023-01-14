@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于 400 Bad Request - NGINX</title>
+      <link>https://www.v2ex.com/t/908912</link>
+      <description>&lt;p&gt;请教大家一个问题，现在有一个场景，在一个局域网内的一台 Liunx 主机上，在 8080 端口运行一个 http 服务，然后用 Nginx 443 端口转发 8080 端口，然后在局域网的出口路由器上配置了端口转发，WAN 端口 9000 转发内网 Nginx 的 443 端口.当访问 https://domain:9000 时是正常的，但是 http://domain:9000 会报&#34;The plain HTTP request was sent to HTTPS port&#34;，在网上搜索一番后，大多数解决方法是在 Nginx 上添加一段:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;server {&#xA;    listen 80;&#xA;    server_name doamin;&#xA;    return 301 https://$host$request_uri;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但好像和我这个情景不太匹配。&#xA;下面是我的 Nginx 配置:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;map $http_upgrade $connection_upgrade {&#xA;    default keep-alive;  &#xA;    &#39;websocket&#39; upgrade; &#xA;}&#xA;server {&#xA;    listen 443 ssl;&#xA;    server_name domain;&#xA;    ssl_certificate  /opt/cert/fullchain.cer;&#xA;    ssl_certificate_key  /opt/cert/site.key;&#xA;    client_max_body_size 500M;&#xA;    if ($host != &#34;domain&#34;) {&#xA;          return 404;&#xA;    }&#xA;&#xA;    location / {&#xA;        proxy_pass http://localhost:8080;&#xA;        proxy_set_header        Host $http_host;&#xA;        proxy_set_header        X-Real-IP $remote_addr;&#xA;        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;&#xA;        proxy_set_header        X-Forwarded-Proto $scheme;&#xA;&#xA;    }&#xA;    location /notifications/hub {&#xA;        proxy_pass http://localhost:3012;&#xA;        proxy_set_header        Host $http_host;&#xA;        proxy_set_header        X-Real-IP $remote_addr;&#xA;        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;&#xA;        proxy_set_header        X-Forwarded-Proto $scheme;&#xA;        proxy_http_version 1.1;&#xA;        proxy_set_header Upgrade $http_upgrade;&#xA;        proxy_set_header Connection $connection_upgrade;&#xA;&#xA;    }&#xA;    location /notifications/hub/negotitate {&#xA;        proxy_pass http://localhost:8080;&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;请问现在需要做哪些操作可以让 http://domain:9000 自动转到 https://domain:9000&lt;/p&gt;&#xA;</description>
+      <author>liang00</author>
+      <pubDate>14 Jan 2023 08:10:49 +0000</pubDate>
+    </item>
+    <item>
       <title>一个直男却喜欢女生专有色是否正常 - 问与答</title>
       <link>https://www.v2ex.com/t/908910</link>
       <description>&lt;p&gt;我是一个直男，以前一直以来都喜欢黑色或深色，Thinkpad 黑色版本手机 平板，黑色汽车。&lt;/p&gt;&#xA;&lt;p&gt;但最近这几年忽然也开始喜欢各种纯白色 淡粉色 紫色之类五彩缤纷的颜色&lt;/p&gt;&#xA;&lt;p&gt;具体表现，更偏向白色的车，白色键盘 白色或粉色鼠标 白色或银色电脑。&lt;/p&gt;&#xA;&lt;p&gt;但我并没有任何弯曲倾向。请问这正常吗？&lt;/p&gt;&#xA;</description>

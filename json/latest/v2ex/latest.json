@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "关于 400 Bad Request - NGINX",
+      "Link": "https://www.v2ex.com/t/908912",
+      "Description": "\u003cp\u003e请教大家一个问题，现在有一个场景，在一个局域网内的一台 Liunx 主机上，在 8080 端口运行一个 http 服务，然后用 Nginx 443 端口转发 8080 端口，然后在局域网的出口路由器上配置了端口转发，WAN 端口 9000 转发内网 Nginx 的 443 端口.当访问 https://domain:9000 时是正常的，但是 http://domain:9000 会报\"The plain HTTP request was sent to HTTPS port\"，在网上搜索一番后，大多数解决方法是在 Nginx 上添加一段:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eserver {\n    listen 80;\n    server_name doamin;\n    return 301 https://$host$request_uri;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但好像和我这个情景不太匹配。\n下面是我的 Nginx 配置:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003emap $http_upgrade $connection_upgrade {\n    default keep-alive;  \n    'websocket' upgrade; \n}\nserver {\n    listen 443 ssl;\n    server_name domain;\n    ssl_certificate  /opt/cert/fullchain.cer;\n    ssl_certificate_key  /opt/cert/site.key;\n    client_max_body_size 500M;\n    if ($host != \"domain\") {\n          return 404;\n    }\n\n    location / {\n        proxy_pass http://localhost:8080;\n        proxy_set_header        Host $http_host;\n        proxy_set_header        X-Real-IP $remote_addr;\n        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header        X-Forwarded-Proto $scheme;\n\n    }\n    location /notifications/hub {\n        proxy_pass http://localhost:3012;\n        proxy_set_header        Host $http_host;\n        proxy_set_header        X-Real-IP $remote_addr;\n        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header        X-Forwarded-Proto $scheme;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection $connection_upgrade;\n\n    }\n    location /notifications/hub/negotitate {\n        proxy_pass http://localhost:8080;\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e请问现在需要做哪些操作可以让 http://domain:9000 自动转到 https://domain:9000\u003c/p\u003e\n",
+      "Author": "liang00",
+      "PubDate": "2023-01-14T08:10:49Z"
+    },
+    {
       "Title": "一个直男却喜欢女生专有色是否正常 - 问与答",
       "Link": "https://www.v2ex.com/t/908910",
       "Description": "\u003cp\u003e我是一个直男，以前一直以来都喜欢黑色或深色，Thinkpad 黑色版本手机 平板，黑色汽车。\u003c/p\u003e\n\u003cp\u003e但最近这几年忽然也开始喜欢各种纯白色 淡粉色 紫色之类五彩缤纷的颜色\u003c/p\u003e\n\u003cp\u003e具体表现，更偏向白色的车，白色键盘 白色或粉色鼠标 白色或银色电脑。\u003c/p\u003e\n\u003cp\u003e但我并没有任何弯曲倾向。请问这正常吗？\u003c/p\u003e\n",
