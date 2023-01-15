@@ -4,9 +4,9 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>利用 openwrt 讓未裝 Tailscale 的設備也能訪問其網絡的方法 - OpenWrt</title>
+      <title>利用 openwrt 路由器 讓未裝 Tailscale 的設備也能訪問其網絡的方法 - 宽带症候群</title>
       <link>https://www.v2ex.com/t/909143</link>
-      <description>我是這樣子做的，大家也可以參考一下。&lt;br /&gt;&lt;br /&gt;1.使用 opkg 安裝 tailscale&lt;br /&gt;&lt;br /&gt;2.啟動它：&lt;br /&gt;tailscale up --accept-dns=false ----accept-routes 然後登錄&lt;br /&gt;&lt;br /&gt;3.網頁介面 網路-防火牆-基本設定 將頁面上半部分的 入站數據、出站數據、轉發 都設置為允許（不是頁面下半部分的）&lt;br /&gt;&lt;br /&gt;4.找到網頁介面中的 網路-防火牆-自定義規則 （或者相關的頁面）輸入以下內容後 點擊網頁上的 重載防火牆&lt;br /&gt; 按鈕&lt;br /&gt;iptables -I FORWARD -i tailscale0 -j ACCEPT&lt;br /&gt;ip6tables -I FORWARD -i tailscale0 -j ACCEPT&lt;br /&gt;iptables -I FORWARD -o tailscale0 -j ACCEPT&lt;br /&gt;ip6tables -I FORWARD -o tailscale0 -j ACCEPT&lt;br /&gt;iptables -t nat -I POSTROUTING -o tailscale0 -j MASQUERADEMASQUERADE&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;然後就可以隨便找一台局域網裡的設備來訪問 Tailscale 網路中的主機了。</description>
+      <description>我是這樣子做的，大家也可以參考一下。&lt;br /&gt;總思路是：讓路由器充當網關，來讓局域網中的未安裝程式或者無法安裝程式的設備訪問 Tailscale 網絡中的成員。&lt;br /&gt;&lt;br /&gt;1.使用 opkg 安裝 tailscale&lt;br /&gt;&lt;br /&gt;2.啟動它：&lt;br /&gt;tailscale up --accept-dns=false ----accept-routes 然後登錄&lt;br /&gt;&lt;br /&gt;3.網頁介面 網路-防火牆-基本設定 將頁面上半部分的 入站數據、出站數據、轉發 都設置為允許（不是頁面下半部分的）&lt;br /&gt;&lt;br /&gt;4.找到網頁介面中的 網路-防火牆-自定義規則 （或者相關的頁面）輸入以下內容後 點擊網頁上的 重載防火牆&lt;br /&gt; 按鈕&lt;br /&gt;iptables -I FORWARD -i tailscale0 -j ACCEPT&lt;br /&gt;ip6tables -I FORWARD -i tailscale0 -j ACCEPT&lt;br /&gt;iptables -I FORWARD -o tailscale0 -j ACCEPT&lt;br /&gt;ip6tables -I FORWARD -o tailscale0 -j ACCEPT&lt;br /&gt;iptables -t nat -I POSTROUTING -o tailscale0 -j MASQUERADE&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;然後就可以隨便找一台局域網裡的設備來訪問 Tailscale 網路中的主機了。&lt;br /&gt;&lt;br /&gt;副作用是 如果需要用到代理功能的話 那麼 代理路由自身流量 這個功能也就失效了 不過不影響局域網中的設備</description>
       <author>viberconnection</author>
       <pubDate>15 Jan 2023 14:27:25 +0000</pubDate>
     </item>
