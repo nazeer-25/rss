@@ -60,6 +60,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "新手问题，如何解决用gin做的api接口经常无响应？",
+      "Link": "https://studygolang.com/topics/16078#reply6",
+      "Description": "\u003cp\u003e用gin做了一些api接口，经常运行中挂掉，处于访问无响应的状态，只能重启解决。用netstat -ano查看端口状态，处于CLOSE_WAIT。用wireshark监测确实可以看到有访问进来，但是gin没有相应。这些api有些是访问数据库返回结果的，有些是访问其它外部接口再返回结果的。单独每个api都用postman测试过几千次，并无逻辑问题。但就是运行中偶发变成无响应状态，无响应状态时数据库无死锁（排除数据库问题）。起初我猜测是不是访问其它外部接口超时所致，后来访问外部接口加入了超时5秒的限制，无效。后来猜测是gin自身未设置超时，于是改成如下启动参数\u003c/p\u003e\n\n\u003cp\u003e\u0026amp;http.Server{\n    Addr:           address,\n    Handler:        router,\n    ReadTimeout:    10 * time.Second,\n    WriteTimeout:   10 * time.Second,\n    MaxHeaderBytes: 1 \u0026lt;\u0026lt; 20,\n  }\u003c/p\u003e\n\n\u003cp\u003e仍然无效。请问在api中访问其它外部接口有什么需要注意的地方？是否会引起gin自身无响应？如何能让gin在api请求失败后超时不影响其它访问？\n求指教，新手拜谢\n\u003cimg src=\"https://static.golangjob.cn/230111/c900447c0e802a62880fd2afc44c9ce2.png\" alt=\"代码.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e下面是对外访问接口时候，使用的get,post方法，加了5秒超时\n\u003cimg src=\"https://static.golangjob.cn/230115/bd7b8ebb9c266ab98c1a6d64b291d18e.png\" alt=\"get.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230115/ccd673eb6077707076ead82851dec9a4.png\" alt=\"post.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "Mac M1 Golang debug 问题解决方法",
       "Link": "https://studygolang.com/topics/14402#reply3",
       "Description": "\u003cp\u003eMac M1 使用Golang IDE进行debug，需要进行以下设置\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e安装arm64版本的的golang\n下载地址：\u003ca href=\"https://golang.google.cn/dl/\"\u003ehttps://golang.google.cn/dl/\u003c/a\u003e\n\u003cimg src=\"https://static.studygolang.com/211014/ee0dd99194be6834e5b846b7464a07a2.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e下载安装arm64的Golang IDE\n下载地址：\u003ca href=\"https://www.jetbrains.com/go/download/#section=mac\"\u003ehttps://www.jetbrains.com/go/download/#section=mac\u003c/a\u003e\n\u003cimg src=\"https://static.studygolang.com/211014/4a2a635e98101e8191b235f016ac3f49.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003ego env 查看环境配置，下图圈起来的两个必须为arm64\n\u003cimg src=\"https://static.studygolang.com/211014/24d2825fd32b4aa87ac54e1f3c856705.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e如果GOARCH=\u0026ldquo;amd64\u0026rdquo;，可以在run配置里修改一下\n\u003cimg src=\"https://static.studygolang.com/211014/7e955c9e3e05a0fc2b7bc1646a719868.png\" alt=\"image.png\" /\u003e\n\u003cimg src=\"https://static.studygolang.com/211014/7a08d9a604963670e87800f2224c3598.png\" alt=\"image.png\" /\u003e\n\u003cimg src=\"https://static.studygolang.com/211014/b88fa979b9caa8315249e4aaf694bef0.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e如果第3，第4不正确，会导致debug没有任何报错，断点无效的问题。好久没上来，发现图裂了步骤1、2就不补充了\u003c/p\u003e\n\n\u003cp\u003e步骤3中，是指 go env 后 GOARCH= 和 GOHOSTARCH= 的值\u003c/p\u003e\n\n\u003cp\u003eGOHOSTARCH 和你系统安装的golang版本有关，可以去下载 arm64 版本的golang安装\u003c/p\u003e\n\n\u003cp\u003e步骤4中\nGOARCH=\u0026ldquo;amd64\u0026rdquo; 的话 -\u0026gt; Run/Debug Configurations\n在 Configuration 栏目下， 配置 Environment：GOARCH=arm64\nApply -\u0026gt; OK\u003c/p\u003e\n\n\u003cp\u003e补充：升级了新系统版本之后，有出现过以下报错：\n\u003ccode\u003ecould not launch process: debugserver or lldb-server not found: install XCode's command line tools or lldb-server\u003c/code\u003e\u003c/p\u003e\n\n\u003cp\u003e解决：\n打开「终端」，输入：xcode-select \u0026ndash;install，等待安装完成\u003c/p\u003e\n",
@@ -116,13 +123,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "新手问题，如何解决用gin做的api接口经常无响应？",
-      "Link": "https://studygolang.com/topics/16078#reply5",
-      "Description": "\u003cp\u003e用gin做了一些api接口，经常运行中挂掉，处于访问无响应的状态，只能重启解决。用netstat -ano查看端口状态，处于CLOSE_WAIT。用wireshark监测确实可以看到有访问进来，但是gin没有相应。这些api有些是访问数据库返回结果的，有些是访问其它外部接口再返回结果的。单独每个api都用postman测试过几千次，并无逻辑问题。但就是运行中偶发变成无响应状态，无响应状态时数据库无死锁（排除数据库问题）。起初我猜测是不是访问其它外部接口超时所致，后来访问外部接口加入了超时5秒的限制，无效。后来猜测是gin自身未设置超时，于是改成如下启动参数\u003c/p\u003e\n\n\u003cp\u003e\u0026amp;http.Server{\n    Addr:           address,\n    Handler:        router,\n    ReadTimeout:    10 * time.Second,\n    WriteTimeout:   10 * time.Second,\n    MaxHeaderBytes: 1 \u0026lt;\u0026lt; 20,\n  }\u003c/p\u003e\n\n\u003cp\u003e仍然无效。请问在api中访问其它外部接口有什么需要注意的地方？是否会引起gin自身无响应？如何能让gin在api请求失败后超时不影响其它访问？\n求指教，新手拜谢\n\u003cimg src=\"https://static.golangjob.cn/230111/c900447c0e802a62880fd2afc44c9ce2.png\" alt=\"代码.png\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "站长的每日一题在哪里能看到历史题目吗?",
       "Link": "https://studygolang.com/topics/16069#reply9",
       "Description": "\u003cp\u003eRT\u003c/p\u003e\n",
@@ -154,6 +154,13 @@
       "Title": "这是一个du娘没有的搜索学习看资讯的好网站你肯定用得上的",
       "Link": "https://studygolang.com/topics/16086#reply0",
       "Description": "\u003cp\u003e点击直达[\u003ca href=\"https://www.chainuk.top\"\u003ehttps://www.chainuk.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e点击直达[\u003ca href=\"https://www.chainuk.top\"\u003ehttps://www.chainuk.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e点击直达[\u003ca href=\"https://www.chainuk.top\"\u003ehttps://www.chainuk.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e点击直达[\u003ca href=\"https://www.chainuk.top\"\u003ehttps://www.chainuk.top\u003c/a\u003e]\u003c/p\u003e\n\n\u003cp\u003e点击直达[\u003ca href=\"https://www.chainuk.top\"\u003ehttps://www.chainuk.top\u003c/a\u003e]\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "新手问题，如何解决用gin做的api接口经常无响应？",
+      "Link": "https://studygolang.com/topics/16078#reply5",
+      "Description": "\u003cp\u003e用gin做了一些api接口，经常运行中挂掉，处于访问无响应的状态，只能重启解决。用netstat -ano查看端口状态，处于CLOSE_WAIT。用wireshark监测确实可以看到有访问进来，但是gin没有相应。这些api有些是访问数据库返回结果的，有些是访问其它外部接口再返回结果的。单独每个api都用postman测试过几千次，并无逻辑问题。但就是运行中偶发变成无响应状态，无响应状态时数据库无死锁（排除数据库问题）。起初我猜测是不是访问其它外部接口超时所致，后来访问外部接口加入了超时5秒的限制，无效。后来猜测是gin自身未设置超时，于是改成如下启动参数\u003c/p\u003e\n\n\u003cp\u003e\u0026amp;http.Server{\n    Addr:           address,\n    Handler:        router,\n    ReadTimeout:    10 * time.Second,\n    WriteTimeout:   10 * time.Second,\n    MaxHeaderBytes: 1 \u0026lt;\u0026lt; 20,\n  }\u003c/p\u003e\n\n\u003cp\u003e仍然无效。请问在api中访问其它外部接口有什么需要注意的地方？是否会引起gin自身无响应？如何能让gin在api请求失败后超时不影响其它访问？\n求指教，新手拜谢\n\u003cimg src=\"https://static.golangjob.cn/230111/c900447c0e802a62880fd2afc44c9ce2.png\" alt=\"代码.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
