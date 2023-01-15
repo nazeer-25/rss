@@ -4,9 +4,16 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>最近开始玩 ros，也顺便做点贡献 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/909144</link>
+      <description>最近用 ros 在虚拟机上弄了个软路由，初步建成，工作正常。觉得 ros 的功能确实太多了，于是到 ros 官网上准备学习下，没想到官网的资料那么全，但都是英文，大概浏览了下，感觉有些内容对理解 ros 的功能挺有帮助的，于是突然冒出个想法，想把这些文档都翻译成中文，方便大家学习和查阅。要知道官网上的文档都是最新的内容，现在网上能找到的一些教程基本都是基于 6.x 的&lt;br /&gt;&lt;br /&gt;本人翻译的文档都放在 rtd 上，完全免费，地址在这里&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://mikrotik-doc-cn.readthedocs.io/zh/latest/index.html&#34; rel=&#34;nofollow noopener&#34;&gt;https://mikrotik-doc-cn.readthedocs.io/zh/latest/index.html&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;现在翻译了两个章节，先放出来给大家看看，后面会不定期更新。因为是利用业余时间翻译的，而且有些内容确实太专业了，可能翻译的并不完全正确，忘大家见谅。</description>
+      <author>linuxgo</author>
+      <pubDate>15 Jan 2023 14:41:12 +0000</pubDate>
+    </item>
+    <item>
       <title>利用 openwrt 路由器 讓未裝 Tailscale 的設備也能訪問其網絡的方法 - 宽带症候群</title>
       <link>https://www.v2ex.com/t/909143</link>
-      <description>我是這樣子做的，大家也可以參考一下。&lt;br /&gt;總思路是：讓路由器充當網關，來讓局域網中的未安裝程式或者無法安裝程式的設備訪問 Tailscale 網絡中的成員。&lt;br /&gt;&lt;br /&gt;1.使用 opkg 安裝 tailscale&lt;br /&gt;&lt;br /&gt;2.啟動它：&lt;br /&gt;tailscale up --accept-dns=false ----accept-routes 然後登錄&lt;br /&gt;&lt;br /&gt;3.網頁介面 網路-防火牆-基本設定 將頁面上半部分的 入站數據、出站數據、轉發 都設置為允許（不是頁面下半部分的）&lt;br /&gt;&lt;br /&gt;4.找到網頁介面中的 網路-防火牆-自定義規則 （或者相關的頁面）輸入以下內容後 點擊網頁上的 重載防火牆&lt;br /&gt; 按鈕&lt;br /&gt;iptables -I FORWARD -i tailscale0 -j ACCEPT&lt;br /&gt;ip6tables -I FORWARD -i tailscale0 -j ACCEPT&lt;br /&gt;iptables -I FORWARD -o tailscale0 -j ACCEPT&lt;br /&gt;ip6tables -I FORWARD -o tailscale0 -j ACCEPT&lt;br /&gt;iptables -t nat -I POSTROUTING -o tailscale0 -j MASQUERADE&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;然後就可以隨便找一台局域網裡的設備來訪問 Tailscale 網路中的主機了。&lt;br /&gt;&lt;br /&gt;副作用是 如果需要用到代理功能的話 那麼 代理路由自身流量 這個功能也就失效了 不過不影響局域網中的設備</description>
+      <description>我是這樣子做的，大家也可以參考一下。&lt;br /&gt;總思路是：讓路由器充當網關，來讓局域網中的未安裝程式或者無法安裝程式的設備訪問 Tailscale 網絡中的成員。&lt;br /&gt;&lt;br /&gt;1.使用 opkg 安裝 tailscale&lt;br /&gt;&lt;br /&gt;2.啟動它：&lt;br /&gt;tailscale up --accept-dns=false ----accept-routes 然後登錄 推薦順便前往網頁控制關閉  key expire&lt;br /&gt;&lt;br /&gt;3.網頁介面 網路-防火牆-基本設定 將頁面上半部分的 入站數據、出站數據、轉發 都設置為允許（不是頁面下半部分的）&lt;br /&gt;&lt;br /&gt;4.找到網頁介面中的 網路-防火牆-自定義規則 （或者相關的頁面）輸入以下內容後 點擊網頁上的 重載防火牆&lt;br /&gt; 按鈕&lt;br /&gt;iptables -I FORWARD -i tailscale0 -j ACCEPT&lt;br /&gt;ip6tables -I FORWARD -i tailscale0 -j ACCEPT&lt;br /&gt;iptables -I FORWARD -o tailscale0 -j ACCEPT&lt;br /&gt;ip6tables -I FORWARD -o tailscale0 -j ACCEPT&lt;br /&gt;iptables -t nat -I POSTROUTING -o tailscale0 -j MASQUERADE&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;然後就可以隨便找一台局域網裡的設備來訪問 Tailscale 網路中的主機了。&lt;br /&gt;&lt;br /&gt;副作用是 如果需要用到代理功能的話 那麼 代理路由自身流量 這個功能也就失效了 不過不影響局域網中的設備</description>
       <author>viberconnection</author>
       <pubDate>15 Jan 2023 14:27:25 +0000</pubDate>
     </item>
