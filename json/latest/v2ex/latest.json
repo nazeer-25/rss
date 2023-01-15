@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Windows 使用在线账户后设置本地 Pin 码，在线账户的认证实在是难，连不上啊 - Windows",
+      "Link": "https://www.v2ex.com/t/909022",
+      "Description": "\u003cp\u003e在不进行全局科学上网的情况下，第一次 pin 很难搞定，你们有类似的情况么？\n我现在是采用曲线救国的方法，每次新装系统都是不直接使用在线账户，先建立本地账户，设置好 pin ，只要本地账户认证就可以了，然后有了 pin 以后，本地账户再转在线账户，pin 码是保持的，太不合理了。\n另外就是使用家庭账户，添加新的账户登录也是麻烦得很，基本上 Windows 的在线账户体系就是废掉的了。\u003c/p\u003e\n",
+      "Author": "thtznet",
+      "PubDate": "2023-01-15T03:19:51Z"
+    },
+    {
+      "Title": "关于服务器的咨询 - 问与答",
+      "Link": "https://www.v2ex.com/t/909021",
+      "Description": "\u003cp\u003e能够运行 qq 机器人（ mirai 框架）和网络代理服务的服务器最低需要什配置，求推荐\u003c/p\u003e\n",
+      "Author": "AtomForX",
+      "PubDate": "2023-01-15T03:19:42Z"
+    },
+    {
+      "Title": "问一个 websockets 的问题 - WebSocket",
+      "Link": "https://www.v2ex.com/t/909020",
+      "Description": "\u003cpre\u003e\u003ccode\u003e我用 python 写了一个 websockets 例子， 服务端和客户端在一台服务器上就可以正常通信，\n放在不同的服务器就会提示\nerror：websockets.exceptions.InvalidMessage: did not receive a valid HTTP response 。\n是不是网络的问题，不过我服务器防火墙上的端口都打开了。\n\nsever.py 服务端\n\n\nimport asyncio\nimport websockets\n\n# 检测客户端权限，用户名密码通过才能退出循环\nasync def check_permit(websocket):\n    while True:\n        recv_str = await websocket.recv()\n        cred_dict = recv_str.split(\":\")\n        print(\"接受\",cred_dict)\n        if cred_dict[0] == \"admin\" and cred_dict[1] == \"123456\":\n            response_str = \"congratulation, you have connect with server\\r\\nnow, you can do something else\"\n            await websocket.send(response_str)\n            return True\n        else:\n            response_str = \"sorry, the username or password is wrong, please submit again\"\n            await websocket.send(response_str)\n\n# 接收客户端消息并处理，这里只是简单把客户端发来的返回回去\nasync def recv_msg(websocket):\n    while True:\n        recv_text = await websocket.recv()\n        print(\"消息:\",str(recv_text))\n        response_text = f\"your submit context: {recv_text}\"\n        await websocket.send(response_text)\n\n# 服务器端主逻辑\n# websocket 和 path 是该函数被回调时自动传过来的，不需要自己传\nasync def main_logic(websocket, path):\n    await check_permit(websocket)\n\n    await recv_msg(websocket)\n\nstart_server = websockets.serve(main_logic, '0.0.0.0', 8765)\n\nasyncio.get_event_loop().run_until_complete(start_server)\nasyncio.get_event_loop().run_forever()\n\n\n\n#### client.py 客户端\n\nimport asyncio\nimport websockets\n\n# 向服务器端认证，用户名密码通过才能退出循环\nasync def auth_system(websocket):\n    while True:\n        cred_text = input(\"please enter your username and password: \")\n        await websocket.send(cred_text)\n        response_str = await websocket.recv()\n        if \"congratulation\" in response_str:\n            return True\n\n# 向服务器端发送认证后的消息\nasync def send_msg(websocket):\n    while True:\n        _text = input(\"please enter your context: \")\n        if _text == \"exit\":\n            print(f'you have enter \"exit\", goodbye')\n            await websocket.close(reason=\"user exit\")\n            return False\n        await websocket.send(_text)\n        recv_text = await websocket.recv()\n        print(f\"{recv_text}\")\n\n# 客户端主逻辑\nasync def main_logic():\n    async with websockets.connect('ws://(server 公网 ip):8765') as websocket:\n        await auth_system(websocket)\n\n        await send_msg(websocket)\n\nasyncio.get_event_loop().run_until_complete(main_logic())\n\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "longmeier90",
+      "PubDate": "2023-01-15T03:19:24Z"
+    },
+    {
+      "Title": "很好奇宝塔面板禁 ICMP 是基于 Linux 的哪项服务实现的？ - CentOS",
+      "Link": "https://www.v2ex.com/t/909019",
+      "Description": "\u003ch2\u003e纳闷 云服务商 面板的 防火墙 acl 也都全部放行了，系统的 firewalld 也 Service firewalld stop 了。但是 ICMP 还是不通。直到我关闭了宝塔面板的禁 ICMP 才恢复正常。\n虽然现在 ICMP 恢复了，但是我更纳闷了，我都停掉 firewalld.service 了为什么宝塔还可以禁掉服务器的 ICMP ？我看了一下服务器上 ufw 和 iptables 貌似都是没装的。\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://drive.huyun.cf/index.php/s/upFlqSbgotDmIBz/download?path=%2F\u0026amp;files=%E5%AE%9D%E5%A1%94%E7%A6%81ICMP.png\"/\u003e\u003c/h2\u003e\n\u003cp\u003eVPS 环境：系统 CentOS 7 2009 ，云服务商 腾讯云\u003c/p\u003e\n",
+      "Author": "haikouwang",
+      "PubDate": "2023-01-15T03:13:57Z"
+    },
+    {
       "Title": "求推荐个性价比高的刮胡刀需要刮鬓角功能 - 问与答",
       "Link": "https://www.v2ex.com/t/909018",
       "Description": "\u003cp\u003e性价比高，挂的干净就好，鬓角长的很快\u003c/p\u003e\n",

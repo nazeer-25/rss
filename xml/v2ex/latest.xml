@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Windows 使用在线账户后设置本地 Pin 码，在线账户的认证实在是难，连不上啊 - Windows</title>
+      <link>https://www.v2ex.com/t/909022</link>
+      <description>&lt;p&gt;在不进行全局科学上网的情况下，第一次 pin 很难搞定，你们有类似的情况么？&#xA;我现在是采用曲线救国的方法，每次新装系统都是不直接使用在线账户，先建立本地账户，设置好 pin ，只要本地账户认证就可以了，然后有了 pin 以后，本地账户再转在线账户，pin 码是保持的，太不合理了。&#xA;另外就是使用家庭账户，添加新的账户登录也是麻烦得很，基本上 Windows 的在线账户体系就是废掉的了。&lt;/p&gt;&#xA;</description>
+      <author>thtznet</author>
+      <pubDate>15 Jan 2023 03:19:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于服务器的咨询 - 问与答</title>
+      <link>https://www.v2ex.com/t/909021</link>
+      <description>&lt;p&gt;能够运行 qq 机器人（ mirai 框架）和网络代理服务的服务器最低需要什配置，求推荐&lt;/p&gt;&#xA;</description>
+      <author>AtomForX</author>
+      <pubDate>15 Jan 2023 03:19:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>问一个 websockets 的问题 - WebSocket</title>
+      <link>https://www.v2ex.com/t/909020</link>
+      <description>&lt;pre&gt;&lt;code&gt;我用 python 写了一个 websockets 例子， 服务端和客户端在一台服务器上就可以正常通信，&#xA;放在不同的服务器就会提示&#xA;error：websockets.exceptions.InvalidMessage: did not receive a valid HTTP response 。&#xA;是不是网络的问题，不过我服务器防火墙上的端口都打开了。&#xA;&#xA;sever.py 服务端&#xA;&#xA;&#xA;import asyncio&#xA;import websockets&#xA;&#xA;# 检测客户端权限，用户名密码通过才能退出循环&#xA;async def check_permit(websocket):&#xA;    while True:&#xA;        recv_str = await websocket.recv()&#xA;        cred_dict = recv_str.split(&#34;:&#34;)&#xA;        print(&#34;接受&#34;,cred_dict)&#xA;        if cred_dict[0] == &#34;admin&#34; and cred_dict[1] == &#34;123456&#34;:&#xA;            response_str = &#34;congratulation, you have connect with server\r\nnow, you can do something else&#34;&#xA;            await websocket.send(response_str)&#xA;            return True&#xA;        else:&#xA;            response_str = &#34;sorry, the username or password is wrong, please submit again&#34;&#xA;            await websocket.send(response_str)&#xA;&#xA;# 接收客户端消息并处理，这里只是简单把客户端发来的返回回去&#xA;async def recv_msg(websocket):&#xA;    while True:&#xA;        recv_text = await websocket.recv()&#xA;        print(&#34;消息:&#34;,str(recv_text))&#xA;        response_text = f&#34;your submit context: {recv_text}&#34;&#xA;        await websocket.send(response_text)&#xA;&#xA;# 服务器端主逻辑&#xA;# websocket 和 path 是该函数被回调时自动传过来的，不需要自己传&#xA;async def main_logic(websocket, path):&#xA;    await check_permit(websocket)&#xA;&#xA;    await recv_msg(websocket)&#xA;&#xA;start_server = websockets.serve(main_logic, &#39;0.0.0.0&#39;, 8765)&#xA;&#xA;asyncio.get_event_loop().run_until_complete(start_server)&#xA;asyncio.get_event_loop().run_forever()&#xA;&#xA;&#xA;&#xA;#### client.py 客户端&#xA;&#xA;import asyncio&#xA;import websockets&#xA;&#xA;# 向服务器端认证，用户名密码通过才能退出循环&#xA;async def auth_system(websocket):&#xA;    while True:&#xA;        cred_text = input(&#34;please enter your username and password: &#34;)&#xA;        await websocket.send(cred_text)&#xA;        response_str = await websocket.recv()&#xA;        if &#34;congratulation&#34; in response_str:&#xA;            return True&#xA;&#xA;# 向服务器端发送认证后的消息&#xA;async def send_msg(websocket):&#xA;    while True:&#xA;        _text = input(&#34;please enter your context: &#34;)&#xA;        if _text == &#34;exit&#34;:&#xA;            print(f&#39;you have enter &#34;exit&#34;, goodbye&#39;)&#xA;            await websocket.close(reason=&#34;user exit&#34;)&#xA;            return False&#xA;        await websocket.send(_text)&#xA;        recv_text = await websocket.recv()&#xA;        print(f&#34;{recv_text}&#34;)&#xA;&#xA;# 客户端主逻辑&#xA;async def main_logic():&#xA;    async with websockets.connect(&#39;ws://(server 公网 ip):8765&#39;) as websocket:&#xA;        await auth_system(websocket)&#xA;&#xA;        await send_msg(websocket)&#xA;&#xA;asyncio.get_event_loop().run_until_complete(main_logic())&#xA;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>longmeier90</author>
+      <pubDate>15 Jan 2023 03:19:24 +0000</pubDate>
+    </item>
+    <item>
+      <title>很好奇宝塔面板禁 ICMP 是基于 Linux 的哪项服务实现的？ - CentOS</title>
+      <link>https://www.v2ex.com/t/909019</link>
+      <description>&lt;h2&gt;纳闷 云服务商 面板的 防火墙 acl 也都全部放行了，系统的 firewalld 也 Service firewalld stop 了。但是 ICMP 还是不通。直到我关闭了宝塔面板的禁 ICMP 才恢复正常。&#xA;虽然现在 ICMP 恢复了，但是我更纳闷了，我都停掉 firewalld.service 了为什么宝塔还可以禁掉服务器的 ICMP ？我看了一下服务器上 ufw 和 iptables 貌似都是没装的。&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://drive.huyun.cf/index.php/s/upFlqSbgotDmIBz/download?path=%2F&amp;amp;files=%E5%AE%9D%E5%A1%94%E7%A6%81ICMP.png&#34;/&gt;&lt;/h2&gt;&#xA;&lt;p&gt;VPS 环境：系统 CentOS 7 2009 ，云服务商 腾讯云&lt;/p&gt;&#xA;</description>
+      <author>haikouwang</author>
+      <pubDate>15 Jan 2023 03:13:57 +0000</pubDate>
+    </item>
+    <item>
       <title>求推荐个性价比高的刮胡刀需要刮鬓角功能 - 问与答</title>
       <link>https://www.v2ex.com/t/909018</link>
       <description>&lt;p&gt;性价比高，挂的干净就好，鬓角长的很快&lt;/p&gt;&#xA;</description>
