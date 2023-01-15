@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "go 协程请求数据 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/909006",
+      "Description": "\u003cp\u003e我一个接口里边，需要多次操作数据库，现在想通过协程来实现。\n下边这个 demo 是一个样例，\n我在 resp 怎么区分协程的返回值，这里边还有些不太清晰。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efunc main() {\n    var ch = make(chan []byte)\n    go request(\"https://www.baidu.com\", ch)\n    go request(\"https://www.taobao.com\", ch)\n    go request(\"https://www.google.com\", ch)\n\n    i := 0\n    timer := time.NewTimer(time.Second * 3)\nL:\n    for {\n        select {\n        case \u0026lt;-timer.C:\n            break L\n        case resp := \u0026lt;-ch:\n            fmt.Printf(\"%d\\n\", len(resp))\n            // 接收 3 个之后关闭 chan\n            i++\n            if i == 3 {\n                close(ch)\n                break L\n            }\n        }\n    }\n    // more code...\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "awanganddong",
+      "PubDate": "2023-01-15T01:58:31Z"
+    },
+    {
+      "Title": "心态崩了，面了 9 家公司，面过 8 家，但几乎没有公司发 offer 下来 - 职场话题",
+      "Link": "https://www.v2ex.com/t/909005",
+      "Description": "楼主现在在芯片原厂做嵌入式，主要技术栈是 cortex-m 底层和 rtos 。近期有跑路的想法，于是从 10 月份开始陆陆续续进行面试。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e列一下面试情况：\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e1. 大疆。 大疆车载部门，面试的时候聊的不错，面试后就说面试没过，后面打听了下原因，估计是我不接受加班到 10 点。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e2. 大普。 做 ssd 的，一面面过了，由于我不接受大小周，后面就没进行面试了。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e3. 国科 XX 。在重庆做车载操作系统，软件总工是谢老师，在 Linux 圈子小有名气的。目前还没谈薪，过两天回重庆面谈，不知道从深圳回重庆还有涨薪的机会没。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e4. 嘉楠。 做 AI 芯片的，软件负责人找了我蛮多次，我都以不想去北京拒绝了，后面因为其他事情，还是打算去北京，所以就面了下。面试的时候聊的不错，问题都能会回答上，面试完后，又聊了两个小时。第二天就反馈说不合适，蛮难受的。看简历就知道合不合适，何必浪费大家时间呢。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e5. 蔚来。做车架仿真的。面了 4 轮，面评也不错，但是 offer 没发下来。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e6. 矽昌。做 WiFi 芯片的，面了 2 轮，但是个人对 WiFi 领域不是很感兴趣，没推进了。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e7. 小米。 操作系统部门，面了 7 轮，面评也很好，后面说集团暂停招聘了。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e8. 奕行。 新创立的车载芯片公司，面试聊的不错，也聊了薪资，但是后面反馈老板卡的严，offer 没批下来。最难受的一家。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e9. 元戎。做自动驾驶的，面了 4 轮，薪资白菜价，拒了。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e说实话，面到现在，感觉很累了，但是罗列下了，基本每家都反馈面评很好，面试推进也很顺利，但就是没下来 offer ，不知道是啥原因，裂开了。",
+      "Author": "zzz22333",
+      "PubDate": "2023-01-15T01:51:26Z"
+    },
+    {
       "Title": "老哥们知道怎么远程 ssh 到 KVM 的 guest 系统吗？ - 程序员",
       "Link": "https://www.v2ex.com/t/909004",
       "Description": "\u003cp\u003e最近要初始化一个服务器，配置比较高，想装 KVM ，然后切成几个 Linux 。\u003c/p\u003e\n\u003cp\u003e发现网上的教程多数都是图形界面的，我手上的是 server 系统。\u003c/p\u003e\n\u003cp\u003e然后看到有成功安装虚拟机的，也是用 \u003ccode\u003evirsh console\u003c/code\u003e 登录的，不知道能不能直接在本地 pc 直接 ssh 到目标虚拟机？\u003c/p\u003e\n\u003cp\u003e服务器的宿主系统是 Ubuntu ，谢谢大家\u003c/p\u003e\n",
