@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "大家有没有碰到过同样的 iPhone 和 mac 同步问题？ - macOS",
+      "Link": "https://www.v2ex.com/t/909344",
+      "Description": "\u003cp\u003eiPhone 和 IPAD 下载的软件，自动在 MBP M1PRO 上同步下载软件\n1 、mac appstore 取消了同步下载软件\n2 、均退出过账户重新登录\n还是没有效果，按照官方客服说的再 安全模式下登录后，IPHONE 下载软件后 mbp 还是同样自动下载了。\n我记得是更新 13 系统后出现的问题。\n有没大神遇到过，请教一下！\u003c/p\u003e\n",
+      "Author": "aircargo",
+      "PubDate": "2023-01-16T11:38:45Z"
+    },
+    {
       "Title": "一个关于合约里面取链下数据的问题？ - 问与答",
       "Link": "https://www.v2ex.com/t/909341",
       "Description": "\u003cp\u003e一般的情况下，是可以类似于 chainlink 这类语言机，取到链下 http 的数据。\u003c/p\u003e\n\u003cp\u003e最近看到一个 \u003ca href=\"https://www.apollox.finance/\" rel=\"nofollow\"\u003ehttps://www.apollox.finance/\u003c/a\u003e\n声称：链上存取款，链下交易引擎撮合交易\u003c/p\u003e\n\u003cp\u003e他在取款的时候，是通过前端发了一个 trasanction 到他的\n\u003ca href=\"https://bscscan.com/address/0x3e71726dbba7ce4e63b9ee58cf462184dc4c9737\" rel=\"nofollow\"\u003ehttps://bscscan.com/address/0x3e71726dbba7ce4e63b9ee58cf462184dc4c9737\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e看他这个 claim 的实现\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e    function claim(bytes calldata message, bytes calldata signature) external notPaused {\n        address signer = source(message, signature);\n        require(signer == truthHolder, \"only accept truthHolder signed message\");\n\n        (uint256 id, address payable to, bool isBNB, address currency, uint256 amount, uint256 deadline) = abi.decode(message, (uint256, address, bool, address, uint256, uint256));\n        require(claimHistory[id] == 0, \"already claimed\");\n        require(isBNB || supportCurrency[currency], \"currency not support\");\n        require(block.timestamp \u0026lt; deadline, \"already passed deadline\");\n\n        claimHistory[id] = block.number;\n        _transfer(to, isBNB, currency, amount);\n        emit Claimed(id, to, isBNB, currency, amount, deadline);\n    }\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e例：一个 claim 的 tx： \u003ca href=\"https://bscscan.com/tx/0x83f9f4cdda6d5ae3183a3239b4d6ddb4e0c980756817766aba415f0e7cc16836\" rel=\"nofollow\"\u003ehttps://bscscan.com/tx/0x83f9f4cdda6d5ae3183a3239b4d6ddb4e0c980756817766aba415f0e7cc16836\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e貌似就是完全通过前端页面构造的取款金额，然后调用小狐狸签名，上链请求，合约没有做啥检查。。。\n请教高手，他这种业务，大概是怎么实现的。。。\u003c/p\u003e\n",
