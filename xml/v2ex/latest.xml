@@ -6,7 +6,7 @@
     <item>
       <title>[请教]String 的 new String(Byte[]) 和 getByte() 转换的理解不能 - Java</title>
       <link>https://www.v2ex.com/t/909356</link>
-      <description>请看以下代码&lt;br /&gt;&lt;br /&gt;byte[] a1 = //某个文件读出来的字节数组;&lt;br /&gt;System.out.println(&#34;a1:&#34; + Base64.getEncoder().encodeToString(a1));&lt;br /&gt;String tmp = new String(a1);&lt;br /&gt;System.out.println(&#34;a1:&#34; + Base64.getEncoder().encodeToString(tmp.getBytes()));&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;我认为，打印的两行的结果应该是相同的，然而现实是，它们不相同。连长度都发生变化了&lt;br /&gt;&lt;br /&gt;我知道字符串是存在编码问题的，但是我同时觉得，只要同一台电脑上，这个默认编码是相同的，因此不应该存在编码问题。&lt;br /&gt;&lt;br /&gt;同时我去查了 String 的底层实现，它的底层存储应该是 char ，这里我知道当我们 new String(a1), a1 肯定是被解析成了多个 char ，我原本以为，就算 a1 里有很多不能被识别为字符的字节数据，char 也应该可以以读字节的方式来处理。但现实好像不是这样的。&lt;br /&gt;&lt;br /&gt;请教这个转化过程中到底发生了什么样的魔法？导致一进一出数据就不一样了</description>
+      <description>请看以下代码&lt;br /&gt;&lt;br /&gt;byte[] a1 = //某个 excel 文件读出来的字节数组，xls ，非 xlsx;&lt;br /&gt;System.out.println(&#34;a1:&#34; + Base64.getEncoder().encodeToString(a1));&lt;br /&gt;String tmp = new String(a1);&lt;br /&gt;System.out.println(&#34;a2:&#34; + Base64.getEncoder().encodeToString(tmp.getBytes()));&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;这里面的要素是，a1 的数据里有很多肯定不是可见字符串。&lt;br /&gt;&lt;br /&gt;我认为，打印的两行的结果应该是相同的，然而现实是，它们不相同。连长度都发生变化了&lt;br /&gt;&lt;br /&gt;我知道字符串是存在编码问题的，但是我同时觉得，只要同一台电脑上，这个默认编码是相同的，因此不应该存在编码问题。&lt;br /&gt;&lt;br /&gt;同时我去查了 String 的底层实现，它的底层存储应该是 char ，这里我知道当我们 new String(a1), a1 肯定是被解析成了多个 char ，我原本以为，就算 a1 里有很多不能被识别为字符的字节数据，char 也应该可以以读字节的方式来处理。但现实好像不是这样的。&lt;br /&gt;&lt;br /&gt;请教这个转化过程中到底发生了什么样的魔法？导致一进一出数据就不一样了</description>
       <author>abcbuzhiming</author>
       <pubDate>16 Jan 2023 12:55:05 +0000</pubDate>
     </item>
