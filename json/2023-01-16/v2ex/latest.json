@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "一个关于合约里面取链下数据的问题？ - 问与答",
+      "Link": "https://www.v2ex.com/t/909341",
+      "Description": "\u003cp\u003e一般的情况下，是可以类似于 chainlink 这类语言机，取到链下 http 的数据。\u003c/p\u003e\n\u003cp\u003e最近看到一个 \u003ca href=\"https://www.apollox.finance/\" rel=\"nofollow\"\u003ehttps://www.apollox.finance/\u003c/a\u003e\n声称：链上存取款，链下交易引擎撮合交易\u003c/p\u003e\n\u003cp\u003e他在取款的时候，是通过前端发了一个 trasanction 到他的\n\u003ca href=\"https://bscscan.com/address/0x3e71726dbba7ce4e63b9ee58cf462184dc4c9737\" rel=\"nofollow\"\u003ehttps://bscscan.com/address/0x3e71726dbba7ce4e63b9ee58cf462184dc4c9737\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e看他这个 claim 的实现\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e    function claim(bytes calldata message, bytes calldata signature) external notPaused {\n        address signer = source(message, signature);\n        require(signer == truthHolder, \"only accept truthHolder signed message\");\n\n        (uint256 id, address payable to, bool isBNB, address currency, uint256 amount, uint256 deadline) = abi.decode(message, (uint256, address, bool, address, uint256, uint256));\n        require(claimHistory[id] == 0, \"already claimed\");\n        require(isBNB || supportCurrency[currency], \"currency not support\");\n        require(block.timestamp \u0026lt; deadline, \"already passed deadline\");\n\n        claimHistory[id] = block.number;\n        _transfer(to, isBNB, currency, amount);\n        emit Claimed(id, to, isBNB, currency, amount, deadline);\n    }\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e例：一个 claim 的 tx： \u003ca href=\"https://bscscan.com/tx/0x83f9f4cdda6d5ae3183a3239b4d6ddb4e0c980756817766aba415f0e7cc16836\" rel=\"nofollow\"\u003ehttps://bscscan.com/tx/0x83f9f4cdda6d5ae3183a3239b4d6ddb4e0c980756817766aba415f0e7cc16836\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e貌似就是完全通过构造的取款金额，没有做啥检查。。。\n请教高手，他这种业务，大概是怎么实现的。。。\u003c/p\u003e\n",
+      "Author": "dreamramon",
+      "PubDate": "2023-01-16T11:25:56Z"
+    },
+    {
+      "Title": "旁氏骗局真害人，如何向邻居追讨投资的钱？真实事件 - 问与答",
+      "Link": "https://www.v2ex.com/t/909340",
+      "Description": "前两天，听到我家里跟邻居追债，想起这事，每到年底都家里人都会催邻居还钱，但邻居就是不还钱，邻居全家都在上班，2 个孙子，有房子，车子是电车十多万开 DD 那种。叫邻居先还一些也不还，每月退一些也不还，年底催下也说没有。欠我们家大概 10 多万。怎么办呢？怎样才能让邻居还钱，那是家里人血汗钱啊！\u003cbr /\u003e\u003cbr /\u003e事情是这样的：\u003cbr /\u003e四五年前，P2P 最疯狂，没暴雷的时候，家里人听邻居说放几万每月就有不错的收入（我当时听到就强烈反对，不要贪，跑路了钱肯定找不回来）。可是父母就不听我的，执意要打钱过去所谓投资，可能因为是邻居觉得对方跑不掉，对方也肯签个字据，所以就安心投资了。可天有不测风云，都暴雷了，国家出面打击了。\u003cbr /\u003e邻居自己应该可亏了不少钱，暂时都是拿不回来，邻居其实是中间人，给到另外 1 个打麻将认识的 A ，A 又不知转到哪个 BC,现在都只能追 A ，但 A 完全不接电话，完全不出现，人间蒸发那样。所以这笔债务只能找邻居还，但邻居自己也亏了，老是说没钱，这样欠着都好几年了，就是不还，哎！！！",
+      "Author": "lakie",
+      "PubDate": "2023-01-16T11:25:22Z"
+    },
+    {
       "Title": "求一个馒头站邀请 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/909339",
       "Description": "\u003cp\u003e1 月 10 日 pttime 开放注册申请了一个账号，目前新手考核已经通过。迫于 pttime 站时不时无法登录，想去大站看看。\u003c/p\u003e\n\u003cp\u003eOP 基本情况如下：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e电信 500M 宽带，上行 50M ，有公网 IPv4 地址；\u003c/li\u003e\n\u003cli\u003eNAS 16T 存储空间，长期在线；\u003c/li\u003e\n\u003cli\u003eMikrotik 路由器，RouterOS 10 年以上经验，会配置各种网络设置。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e想求一个馒头邀请，会珍惜账号，认真经营。\u003c/p\u003e\n\u003cp\u003ee-mail：我的 V 站用户名 @\u003ca href=\"/member/gmail\"\u003egmail\u003c/a\u003e.com\u003c/p\u003e\n\u003cp\u003e附 pttime 数据（个人页显示新用户考核未通过，实际数据已满足通过条件，可能要在考核期结束才显示已通过）：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"新手考核通过\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.luodc.cn/v2ex/newbie_pass.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"个人页\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.luodc.cn/v2ex/user_file.png\"/\u003e\u003c/p\u003e\n",
