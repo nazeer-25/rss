@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教这是什么字体？ - 程序员</title>
+      <link>https://www.v2ex.com/t/909366</link>
+      <description>&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/cKWPJFh.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/cKWPJFh.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;很多 mv 里面看到过。还有没有类似的呢</description>
+      <author>wjx0912</author>
+      <pubDate>16 Jan 2023 14:11:19 +0000</pubDate>
+    </item>
+    <item>
+      <title>心得分享，如何组织入口文件 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/909365</link>
+      <description>&lt;p&gt;这里讨论的是不用框架只用工具库（ Toolkit ）的情况，否则组织形式只能按照框架的规定，也就没什么讨论空间了。&lt;/p&gt;&#xA;&lt;p&gt;其实同样的思路还可以用来组织具体的业务代码，整合第三方服务等不少场景。&#xA;这里先讲个大概，等过年回家之后再整理篇完整的博客。&lt;/p&gt;&#xA;&lt;p&gt;入口部分主要是声明退出方式，然后开始初始化流程。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// cmd/app/main.go&#xA;package main&#xA;&#xA;func main() {&#xA;&#x9;// 在第一次收到 SIG_INT ，SIG_TERM 时结束 Context ，&#xA;&#x9;// 第二次收到时 os.Exit()&#xA;&#x9;ctx, cancel := module.GracefulContext()&#xA;&#x9;defer cancel()&#xA;&#xA;&#x9;// 执行业务逻辑&#xA;&#x9;if err := business.Run(ctx); err != nil {&#xA;&#x9;&#x9;log.Fatalf(&#34;Error exit: %s&#34;, err)&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;组装第一层程序结构，主要是：命令行，外部依赖，端口监听。&#xA;这里以常见的 HTTP 服务器为例。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// business/app.go&#xA;package business&#xA;&#xA;type App struct {&#xA;&#x9;module.CLI    // 命令行&#xA;&#x9;module.SQLite // 数据库&#xA;&#x9;module.HTTP   // HTTP 服务&#xA;}&#xA;&#xA;func Run(ctx context.Context) (err error) {&#xA;&#x9;var app App&#xA;&#x9;return module.Run(ctx, &amp;amp;app)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;code&gt;module.Run()&lt;/code&gt; 会依次初始化 App 中声明的每个 module ，然后运行所有实现了 &lt;code&gt;Run()&lt;/code&gt; 的 module 。&lt;/p&gt;&#xA;&lt;p&gt;初始化的大致流程为：&lt;code&gt;module1.PreInit() -&amp;gt; module1.Init() -&amp;gt; module1.PostInit() -&amp;gt; module2.PreInit() -&amp;gt; ...&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;至于模块如何声明，就以 &lt;code&gt;module.SQLite&lt;/code&gt; 为例：其中 &lt;code&gt;Init()&lt;/code&gt; 和 &lt;code&gt;Close()&lt;/code&gt; 都是 module 的可选接口。&#xA;&lt;code&gt;module.HTTP&lt;/code&gt; 还需要实现 &lt;code&gt;Run()&lt;/code&gt;。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// internal/module/sqlite.go&#xA;package module&#xA;&#xA;type SQLite struct {&#xA;&#x9;DSN string&#xA;&#x9;DB  *sql.DB&#xA;}&#xA;&#xA;func (m *SQLite) Init(ctx context.Context) (err error) {&#xA;&#x9;if m.DB, err = sql.Open(&#34;sqlite3&#34;, m.DSN); err != nil {&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#xA;&#x9;ctx, cancel := context.WithTimeout(ctx, time.Second)&#xA;&#x9;defer cancel()&#xA;&#xA;&#x9;return m.DB.PingContext(ctx)&#xA;}&#xA;&#xA;func (m *SQLite) Close() error {&#xA;&#x9;return m.DB.Close()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;code&gt;module.HTTP&lt;/code&gt; 和 &lt;code&gt;module.CLI&lt;/code&gt; 代码比较长就不贴了，完整的 Demo 在 Github： &lt;a href=&#34;https://github.com/GotaX/module-demo&#34; rel=&#34;nofollow&#34;&gt;https://github.com/GotaX/module-demo&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;有疑问或者想分享下自己是如何组织代码的也欢迎留言讨论。&lt;/p&gt;&#xA;</description>
+      <author>Gota</author>
+      <pubDate>16 Jan 2023 14:11:01 +0000</pubDate>
+    </item>
+    <item>
       <title>可以自定义微信红包封面了 - 分享创造</title>
       <link>https://www.v2ex.com/t/909364</link>
       <description>&lt;p&gt;点发红包，下面就能自定义了，但是要发视频号和 8 个赞&lt;/p&gt;&#xA;</description>

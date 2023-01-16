@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教这是什么字体？ - 程序员",
+      "Link": "https://www.v2ex.com/t/909366",
+      "Description": "\u003ca target=\"_blank\" href=\"https://i.imgur.com/cKWPJFh.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/cKWPJFh.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e很多 mv 里面看到过。还有没有类似的呢",
+      "Author": "wjx0912",
+      "PubDate": "2023-01-16T14:11:19Z"
+    },
+    {
+      "Title": "心得分享，如何组织入口文件 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/909365",
+      "Description": "\u003cp\u003e这里讨论的是不用框架只用工具库（ Toolkit ）的情况，否则组织形式只能按照框架的规定，也就没什么讨论空间了。\u003c/p\u003e\n\u003cp\u003e其实同样的思路还可以用来组织具体的业务代码，整合第三方服务等不少场景。\n这里先讲个大概，等过年回家之后再整理篇完整的博客。\u003c/p\u003e\n\u003cp\u003e入口部分主要是声明退出方式，然后开始初始化流程。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// cmd/app/main.go\npackage main\n\nfunc main() {\n\t// 在第一次收到 SIG_INT ，SIG_TERM 时结束 Context ，\n\t// 第二次收到时 os.Exit()\n\tctx, cancel := module.GracefulContext()\n\tdefer cancel()\n\n\t// 执行业务逻辑\n\tif err := business.Run(ctx); err != nil {\n\t\tlog.Fatalf(\"Error exit: %s\", err)\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e组装第一层程序结构，主要是：命令行，外部依赖，端口监听。\n这里以常见的 HTTP 服务器为例。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// business/app.go\npackage business\n\ntype App struct {\n\tmodule.CLI    // 命令行\n\tmodule.SQLite // 数据库\n\tmodule.HTTP   // HTTP 服务\n}\n\nfunc Run(ctx context.Context) (err error) {\n\tvar app App\n\treturn module.Run(ctx, \u0026amp;app)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ccode\u003emodule.Run()\u003c/code\u003e 会依次初始化 App 中声明的每个 module ，然后运行所有实现了 \u003ccode\u003eRun()\u003c/code\u003e 的 module 。\u003c/p\u003e\n\u003cp\u003e初始化的大致流程为：\u003ccode\u003emodule1.PreInit() -\u0026gt; module1.Init() -\u0026gt; module1.PostInit() -\u0026gt; module2.PreInit() -\u0026gt; ...\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e至于模块如何声明，就以 \u003ccode\u003emodule.SQLite\u003c/code\u003e 为例：其中 \u003ccode\u003eInit()\u003c/code\u003e 和 \u003ccode\u003eClose()\u003c/code\u003e 都是 module 的可选接口。\n\u003ccode\u003emodule.HTTP\u003c/code\u003e 还需要实现 \u003ccode\u003eRun()\u003c/code\u003e。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// internal/module/sqlite.go\npackage module\n\ntype SQLite struct {\n\tDSN string\n\tDB  *sql.DB\n}\n\nfunc (m *SQLite) Init(ctx context.Context) (err error) {\n\tif m.DB, err = sql.Open(\"sqlite3\", m.DSN); err != nil {\n\t\treturn\n\t}\n\n\tctx, cancel := context.WithTimeout(ctx, time.Second)\n\tdefer cancel()\n\n\treturn m.DB.PingContext(ctx)\n}\n\nfunc (m *SQLite) Close() error {\n\treturn m.DB.Close()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ccode\u003emodule.HTTP\u003c/code\u003e 和 \u003ccode\u003emodule.CLI\u003c/code\u003e 代码比较长就不贴了，完整的 Demo 在 Github： \u003ca href=\"https://github.com/GotaX/module-demo\" rel=\"nofollow\"\u003ehttps://github.com/GotaX/module-demo\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e有疑问或者想分享下自己是如何组织代码的也欢迎留言讨论。\u003c/p\u003e\n",
+      "Author": "Gota",
+      "PubDate": "2023-01-16T14:11:01Z"
+    },
+    {
       "Title": "可以自定义微信红包封面了 - 分享创造",
       "Link": "https://www.v2ex.com/t/909364",
       "Description": "\u003cp\u003e点发红包，下面就能自定义了，但是要发视频号和 8 个赞\u003c/p\u003e\n",
