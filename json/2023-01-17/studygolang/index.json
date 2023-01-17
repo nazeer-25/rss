@@ -88,6 +88,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "注册中心究竟应该实现CAP中的哪两点？",
+      "Link": "https://studygolang.com/topics/15803#reply1",
+      "Description": "\u003cp\u003eCAP as the base of Cluster System.\nCnsistency: all node see the same data at the same time.\nAvailability: read and write always succeed.\nP: the system continues to operate despite arbitrary message loss or failure of part of the system.\u003c/p\u003e\n\n\u003cp\u003e以上是CAP的概念。\n场景与动作如下：\n1） 注册中心的作用是作为一个“公共电话薄”作用，每个“worker”可以把“电话薄”在本地留存一份副本；\n2） 每个“woker”上线（up）或下线（down）的动作，最好同步感知，以免因节点路由引发错误，导致更上一层做处理。\n3） 多个注册中心中其一下线，不应当影响“worker”的执行，并且worker中保存了副本数据。\u003c/p\u003e\n\n\u003cp\u003e基于以上动作，要保证业务间（处于上层）通讯被正确路由；C 很重要，用于保存实时数据。\n基于以上动作，注册中心异常不应影响业务，P 很重要。\n并且，worker注册下线的异常应由服务启动或关闭时自行重试选择节点。A 不是很重要。\u003c/p\u003e\n\n\u003cp\u003e所以，注册中心应实现为 CP ；推荐使用 ETCD\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "新手问题，如何解决用gin做的api接口经常无响应？",
       "Link": "https://studygolang.com/topics/16078#reply9",
       "Description": "\u003cp\u003e用gin做了一些api接口，经常运行中挂掉，处于访问无响应的状态，只能重启解决。用netstat -ano查看端口状态，处于CLOSE_WAIT。用wireshark监测确实可以看到有访问进来，但是gin没有相应。这些api有些是访问数据库返回结果的，有些是访问其它外部接口再返回结果的。单独每个api都用postman测试过几千次，并无逻辑问题。但就是运行中偶发变成无响应状态，无响应状态时数据库无死锁（排除数据库问题）。起初我猜测是不是访问其它外部接口超时所致，后来访问外部接口加入了超时5秒的限制，无效。后来猜测是gin自身未设置超时，于是改成如下启动参数\u003c/p\u003e\n\n\u003cp\u003e\u0026amp;http.Server{\n    Addr:           address,\n    Handler:        router,\n    ReadTimeout:    10 * time.Second,\n    WriteTimeout:   10 * time.Second,\n    MaxHeaderBytes: 1 \u0026lt;\u0026lt; 20,\n  }\u003c/p\u003e\n\n\u003cp\u003e仍然无效。请问在api中访问其它外部接口有什么需要注意的地方？是否会引起gin自身无响应？如何能让gin在api请求失败后超时不影响其它访问？\n求指教，新手拜谢\n\u003cimg src=\"https://static.golangjob.cn/230111/c900447c0e802a62880fd2afc44c9ce2.png\" alt=\"代码.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e下面是对外访问接口时候，使用的get,post方法，加了5秒超时\n\u003cimg src=\"https://static.golangjob.cn/230115/bd7b8ebb9c266ab98c1a6d64b291d18e.png\" alt=\"get.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230115/ccd673eb6077707076ead82851dec9a4.png\" alt=\"post.png\" /\u003e\u003c/p\u003e\n",
