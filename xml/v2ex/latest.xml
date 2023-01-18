@@ -6,12 +6,12 @@
     <item>
       <title>celery 和 gunicorn 的不同 pool 模式,我测下来 sync 性能最好😓 - Python</title>
       <link>https://www.v2ex.com/t/909720</link>
-      <description>&lt;ul&gt;&#xA;&lt;li&gt;起先是线上把 gevent 改成 sync 性能提高了 60%，线上任务主要是 数据库查询和接口请求 io 任务&lt;/li&gt;&#xA;&lt;li&gt;数据库查询是 django ORM&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code&gt; 比较纳闷常识是 io 任务用 gevent ，&#xA; 然后本地模拟了个简单接口，锁 id mysql 查询一条数据&#xA; 分别用 gevent ，sync ，threads&#xA; 结果是 sync &amp;gt; threads &amp;gt; gevent&#xA; sync 和 threads 性能差别不大，gevent 只有前两个的 60%不到&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;gunicorn 也是，简单的锁 id 接口，sync &amp;gt; threads &amp;gt; gevent&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;起先是线上把 gevent 改成 sync 性能提高了 60%，线上任务主要是 数据库查询和接口请求 io 任务&lt;/li&gt;&#xA;&lt;li&gt;所有数据库查询是 django ORM 和 python-elasticsearch&lt;/li&gt;&#xA;&lt;li&gt;启动方式:  &lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;gt; celery -A app worker -Q xxx -P gevent -c 30&#xA;&amp;gt; celery -A app worker -Q xxx  -c 8&#xA;&amp;gt; celery -A app worker -Q xxx  -c 30 -P threads&#xA;&amp;gt; gunicorn app -k gevent -w 8 --worker-connections=200&#xA;&amp;gt; gunicorn app -k gthread -w 4 --threads=20&#xA;&amp;gt; gunicorn app -k sync -w 8&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt; 比较纳闷常识是 io 任务用 gevent &#xA; 处于好奇，本地模拟了下简单的 celery io 任务&#xA; celery 任务里，本地模拟了个 task ，锁 id mysql 查询一条数据&#xA; 分别用 gevent ，sync ，threads&#xA; 结果是 sync &amp;gt; threads &amp;gt; gevent&#xA; sync 和 threads 性能差别不大，gevent 只有前两个的 60%不到&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;gunicorn 也是，简单的锁 id 接口，sync &amp;gt; threads &amp;gt; gevent&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
       <author>wuwukai007</author>
       <pubDate>18 Jan 2023 07:24:12 +0000</pubDate>
     </item>
     <item>
-      <title>为什么安卓 13 的兼容性这么离谱? - 问与答</title>
+      <title>为什么安卓 13 的兼容性这么差? - 问与答</title>
       <link>https://www.v2ex.com/t/909719</link>
       <description>最近更新到安卓 13,发现大部分软件都需要更新才能正常打开,否则要么持续白屏要么直接崩溃闪退,11 到 12 那会也没这么严重的兼容问题啊. &lt;br /&gt;找到了光速虚拟机来解决 13 一些 app 打不开的问题,结果虚拟机先打不来了,酷安的教程倒是很神,把包里的 int 改成 number 竟然就能正常使用了,真的神奇</description>
       <author>paopjian</author>
