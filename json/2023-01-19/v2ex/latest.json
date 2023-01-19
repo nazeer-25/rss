@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "nginx 代理 wordpress, /wp-admin/ 不加斜杠就会出现 Error: socket hang up - NGINX",
+      "Link": "https://www.v2ex.com/t/909853",
+      "Description": "\u003cp\u003e\u003ca href=\"http://abc.com/wp-admin/\" rel=\"nofollow\"\u003ehttp://abc.com/wp-admin/\u003c/a\u003e 正常\n\u003ca href=\"http://abc.com/wp-admin\" rel=\"nofollow\"\u003ehttp://abc.com/wp-admin\u003c/a\u003e 就会出现 Error: socket hang up\n浏览器的地址栏会变成 \u003ca href=\"http://abc.com:8000/wp-admin/%EF%BC%8C%E7%BD%91%E9%A1%B5%E6%98%BE%E7%A4%BA\" rel=\"nofollow\"\u003ehttp://abc.com:8000/wp-admin/，网页显示\u003c/a\u003e This page isn’t working, \u003ca href=\"http://abc.com\" rel=\"nofollow\"\u003eabc.com\u003c/a\u003e doestn't send any data. ERR_EMPTY_RESPONSE\u003c/p\u003e\n\u003ch1\u003ecat wordpress.conf\u003c/h1\u003e\n\u003cp\u003eserver {\nlisten 8000;\nroot /var/www/wordpress;\nindex index.php;\nlocation / {\ntry_files $uri $uri/ /index.php?$args;\n}\nlocation ~ .php$ {\ninclude fastcgi_params;\nfastcgi_intercept_errors on;\nfastcgi_pass unix:/run/php/php7.4-fpm.sock;\nfastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;\t\n}\n}\u003c/p\u003e\n\u003ch1\u003ecat wordpress-proxy.conf\u003c/h1\u003e\n\u003cp\u003eserver {\nlisten 80;\nserver_name \u003ca href=\"http://abc.com\" rel=\"nofollow\"\u003eabc.com\u003c/a\u003e;\nlocation / {\nproxy_set_header Host $host;\nproxy_set_header X-Real-IP $remote_addr;\nproxy_pass \u003ca href=\"http://127.0.0.1:8000%3B\" rel=\"nofollow\"\u003ehttp://127.0.0.1:8000;\u003c/a\u003e\n}\n}\u003c/p\u003e\n",
+      "Author": "YuxiangLuo",
+      "PubDate": "2023-01-19T04:09:55Z"
+    },
+    {
+      "Title": "Linux 通过 rsync 同步到群晖报错 code 255 - Linux",
+      "Link": "https://www.v2ex.com/t/909852",
+      "Description": "用群晖的备份，设置 redhat 为 rsync 服务器，通过 ssh shell 模式，账号密码输入后报 rsync code 255, ssl 认证失败，这个是什么原因？找不到资料",
+      "Author": "wq2020wdm",
+      "PubDate": "2023-01-19T04:06:42Z"
+    },
+    {
+      "Title": "Linux 下用 tar 和 zip 压缩文件夹有啥区别 - 程序员",
+      "Link": "https://www.v2ex.com/t/909851",
+      "Description": "\u003cp\u003e需要定时备份一个文件夹，大概 300m ，该文件夹下有多个子文件夹和各种文件。\u003c/p\u003e\n\u003cp\u003e采用的思路是压缩该文件夹上传到其他地址。\u003c/p\u003e\n\u003cp\u003e搜了下压缩文件夹的命令，发现大多数教程都推荐的 tar 命令，但是我发现 zip 命令更简单好用啊。\u003c/p\u003e\n\u003cp\u003e就压缩的结果来看，tar.gz 和.zip 有区别吗？\u003c/p\u003e\n\u003cp\u003e为什么我会有一种用 tar 命令更高级的感觉？\u003c/p\u003e\n",
+      "Author": "ggp1ot2",
+      "PubDate": "2023-01-19T04:06:40Z"
+    },
+    {
+      "Title": "最新版 edge 有网站导航，这是微软的锅还是微软中国的锅 - 问与答",
+      "Link": "https://www.v2ex.com/t/909850",
+      "Description": "\u003cp\u003e觉得 edge 浏览器还蛮好的，但是动不动就要喂东西给用户吃是什么意思？\u003c/p\u003e\n\u003cp\u003e如果是微软中国的锅，请问如何切到国际版的，如果是微软的锅，我就重回 firefox 了\u003c/p\u003e\n",
+      "Author": "mazyi",
+      "PubDate": "2023-01-19T04:03:24Z"
+    },
+    {
       "Title": "TCL 电视如何进入工厂模式 - 问与答",
       "Link": "https://www.v2ex.com/t/909849",
       "Description": "请教下 TCL 电视如何进入工厂模式，遥控器没有数字按键？谢谢",
@@ -72,13 +100,6 @@
       "Description": "\u003cp\u003e请教下各位大佬\n1 、是不是 PC 也可以玩 XBOX 的游戏 只需要开通 xgp 就可以了吗？\n2 、是只能玩 xbox 的一部分游戏，还是所有游戏，大概占比多少？\n3 、如果 PC 也能玩 xbox 的游戏包括独占，，那 XBOX 在国内市场不是很惨淡吗。。\u003c/p\u003e\n",
       "Author": "lookingmoon",
       "PubDate": "2023-01-19T03:04:31Z"
-    },
-    {
-      "Title": "YouTube Premium 美区账号会员 还有 5 个车位 上车联系 - 分享发现",
-      "Link": "https://www.v2ex.com/t/909839",
-      "Description": "年付：60rmb\u003cbr /\u003e跳车不退\u003cbr /\u003etelegram: \u003ca target=\"_blank\" href=\"https://t.me/stanZZ\" rel=\"nofollow noopener\"\u003ehttps://t.me/stanZZ\u003c/a\u003e",
-      "Author": "Haaaaaat",
-      "PubDate": "2023-01-19T03:04:21Z"
     },
     {
       "Title": "[佛系顺风车] 上海到苏州，车找人 - 旅行",
@@ -282,6 +303,13 @@
       "Description": "以美元的方式提现至香港的银行账户，金额较少，低频。每次大概 1000 左右的 rmb\u003cbr /\u003e\u003cbr /\u003e目前虚拟币在 imtoken 中，有哪些服务可以通过银行，把 usdt 以 usd 的形式转到香港银行账户？",
       "Author": "zzm88104",
       "PubDate": "2023-01-18T17:17:26Z"
+    },
+    {
+      "Title": "YouTube Premium 美区账号会员 还有 5 个车位 上车联系 - 分享发现",
+      "Link": "https://www.v2ex.com/t/909839",
+      "Description": "年付：60rmb\u003cbr /\u003e跳车不退\u003cbr /\u003etelegram: \u003ca target=\"_blank\" href=\"https://t.me/stanZZ\" rel=\"nofollow noopener\"\u003ehttps://t.me/stanZZ\u003c/a\u003e",
+      "Author": "Haaaaaat",
+      "PubDate": "2023-01-19T03:04:21Z"
     },
     {
       "Title": "小程序差一点合作成功 - 程序员",
