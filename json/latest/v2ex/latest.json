@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "分享一个能够帮你作出艰难决定的网站，还有解决国内 Firebase 可用性问题的姿势 - 分享发现",
+      "Link": "https://www.v2ex.com/t/910062",
+      "Description": "\u003cp\u003e公司的产品，Rationale, 让 AI 帮你做利弊分析，啥事都能让他说出点利弊来，挺萌的。\u003c/p\u003e\n\u003cp\u003e这是一个 prompt programming 的产品，\n大致原理是使用一系列 prompt 模版和机器翻译，最终定向地让 text-davinci-003 生成反馈。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://rationale.jina.ai\" rel=\"nofollow\"\u003ehttps://rationale.jina.ai\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://rationale.jinaai.cn\" rel=\"nofollow\"\u003ehttps://rationale.jinaai.cn\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e然而这并不是本帖的重点，重点是这是一个 Firebase 应用。\nFirebase 在国内是和谷歌连坐封掉的，但我看网上中英文都没法搜到解决国内 Firebase 可用性问题的资料，所以这里分享一下。\n这次老夫踩坑的主要是浏览器，所以这里只谈浏览器。\u003c/p\u003e\n\u003cp\u003e大致包括以下几个要点，\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e源站地址需要既能访问 Google ，又能被国内访问\u003c/li\u003e\n\u003cli\u003eService Worker 请求劫持\u003c/li\u003e\n\u003cli\u003eNginx 反向代理\u003c/li\u003e\n\u003cli\u003e同域登录验证\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eService Worker 是这个方案的基础，使用 SW 可以劫持页面上的所有请求，所以只要把谷歌的请求截取并通过代理访问，页面内就好像和谷歌直接通信一样，并且这种效果是跨标签页的。\u003c/p\u003e\n\u003cp\u003e既然是通过代理访问，那么必然需要一台代理服务器，并且因为客户端是浏览器，全程需要在 http 和域内完成。\n经过老夫的踩坑，发现 Nginx 是可用的，原本想使用 Node.js ， 然而 FireStore 死活返回 400 ，即便 node.js 内使用 http2 连接上游也是一样，据我推测可能需要代理两侧都使用 http2 。\u003c/p\u003e\n\u003cp\u003e具体来讲，nginx 配置中 proxy_pass 给某个请求头的值，并删掉这个请求头，形成一个有通用性的代理，SW 中截取谷歌的请求，将原域名设置到请求头里，访问代理的域名。\n同时再搞定代理这个域名自己的 CORS 跨域，随手加上一个 Referrer 检查防止滥用。\u003c/p\u003e\n\u003cp\u003e另外还需要解决登录时的跳转问题。Firebase 的默认 \u003ccode\u003eauthDomain\u003c/code\u003e 一般是 \u003ccode\u003e[app-id].firebaseapp.com\u003c/code\u003e, 这会跳出应用自己的域外，SW 代理会失去效果。 所以需要把 \u003ccode\u003eauthDomain\u003c/code\u003e 设成相同域。\n具体操作上把 \u003ccode\u003e/__/auth/\u003c/code\u003e 反代到 \u003ccode\u003e[app-id].firebaseapp.com\u003c/code\u003e， 这也是官方文档中提到并且推荐的方式。\u003c/p\u003e\n\u003cp\u003e至此在域内解决了 Google 服务的可访问性问题。目前就走出这一条可行的路，如果有其他姿势也欢迎交流。\u003c/p\u003e\n\u003cp\u003e值得注意的是，这个 SW 代理是项目无关的，理论上讲可以放在任何网站内解决域内任何被封服务的可用性问题。推广一下，服务的区域限制也可以用这种方式绕过甚至做区域的自由切换。\u003c/p\u003e\n\u003cp\u003e最后，\n因为是基于 SW 的代理，所以不支持 SW 的环境是没有这种效果的。iOS 上包括微信和 Chrome 在内，除 Safari 之外的任何网页，都在此列。\n安卓上的体验是可以的，微信内也有 SW 。\u003c/p\u003e\n",
+      "Author": "nomagick",
+      "PubDate": "2023-01-20T09:51:54Z"
+    },
+    {
+      "Title": "当 Mac mini 成为机顶盒，请问在沙发上优雅的控制方案是什么？ - Apple",
+      "Link": "https://www.v2ex.com/t/910061",
+      "Description": "\u003cp\u003e毕竟 Mac 系统的生态比 ATV 要丰富和方便，所以随着 m2 Mac mini 发布，我在闲鱼上 2900 搞了一台 m1 Mac mini 乞丐版当机顶盒，替代 NUC11 的 Win 。\n尽管有老黄家的神盾，但是我作为一个懒人，还是喜欢 Mac 或 Win 系统。\n更重要的是，这不会被爱优腾各种投屏限制，喜欢 web 就用 web ，喜欢客户端就客户端。\n之前 NUC11 的 Win 系统当机顶盒的时候，要看个片儿还得用键鼠，尽管是无线的，但是不太优雅。\n现在换成 Mac mini 后，我想着怎么方便家人，让她可以坐沙发上，按遥控器啥的，就可以看电视（ IPTV ），或者爱优腾上的剧集。\n或者给孩子播放歌曲、英文动画片啥的。\n现在已经把登录的账号密码设空、开机自动登录了，大家如果有用 Mac mini 当机顶盒的，推荐一下？\u003c/p\u003e\n",
+      "Author": "maizero",
+      "PubDate": "2023-01-20T09:46:24Z"
+    },
+    {
       "Title": "安卓有什么可以代替 iOS 提醒事项的 APP - Apple",
       "Link": "https://www.v2ex.com/t/910060",
       "Description": "\u003cp\u003e如题，试过了微软的 To Do ，感觉还是差点意思。\u003c/p\u003e\n",
