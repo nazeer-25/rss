@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "运营日历 - 分享创造",
+      "Link": "https://www.v2ex.com/t/910039",
+      "Description": "\u003cp\u003e整理了下各国家主要节日，跨境运营人是不是可以用得到？\n\u003ca href=\"https://92752.com/\" rel=\"nofollow\"\u003ehttps://92752.com/\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "dev937",
+      "PubDate": "2023-01-20T06:06:51Z"
+    },
+    {
+      "Title": "求推荐简约的博客 cms 平台 以前一直用 hexo 不能跨平台写 还是决定用动态博客了 - 问与答",
+      "Link": "https://www.v2ex.com/t/910038",
+      "Description": "1.最好自带免登录的评论系统\u003cbr /\u003e2.页面精简 wordpress 有没有精简主题推荐？",
+      "Author": "HuPu",
+      "PubDate": "2023-01-20T06:06:00Z"
+    },
+    {
       "Title": "DNS over IPsec Transport Mode - 奇思妙想",
       "Link": "https://www.v2ex.com/t/910037",
       "Description": "\u003cp\u003eIPsec 的 Tunnel 模式被广泛采用，但其实 IPsec 还有 Transport 模式，可以用来给任何协议添加加密\u003c/p\u003e\n\u003cp\u003eIPsec 软件这里选择了 strongSwan ，配置 /etc/swanctl/conf.d/dns.conf 即可\u003c/p\u003e\n\u003cp\u003eA 端（国内，记得把 100.64.0.1 改成国内机器的公网 ip ）：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003econnections {\n\tdns {\n\t\tversion = 2\n\t\tlocal_addrs  = 100.64.0.1\n\t\tremote_addrs = 100.64.0.2\n\t\tproposals = aes128gcm16-prfsha256-ecp256\n\t\tmobike = no\n\t\tdpd_delay = 20\n\t\t\n\t\tlocal {\n\t\t\tauth = psk\n\t\t\tid = 100.64.0.1\n\t\t}\n\t\t\n\t\tremote {\n\t\t\tauth = psk\n\t\t\tid = 100.64.0.2\n\t\t}\n\t\t\n\t\tchildren {\n\t\t\ttransport {\n\t\t\t\tesp_proposals = aes128gcm128-x25519\n\t\t\t\tstart_action = trap\n\t\t\t\tlocal_ts  = 100.64.0.1[udp/any]\n\t\t\t\tremote_ts = 100.64.0.2[udp/53]\n\t\t\t\tmode = transport\n\t\t\t}\n\t\t}\t\t\n\t}\n}\n\nsecrets {\n\tike-psk {\n\t\tsecret = IxwmdgyTsUwpobnrCP5hQka4PFNzYL3FPqRkv9CWec8=\n\t\tid-a = 100.64.0.1\n\t\tid-b = 100.64.0.2\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eB 端（国外，local 和 remote 交换一下即可，记得把 100.64.0.2 改成国外机器的公网 ip ）：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\t\tchildren {\n\t\t\ttransport {\n\t\t\t\tesp_proposals = aes128gcm128-x25519\n\t\t\t\tstart_action = trap\n\t\t\t\tlocal_ts  = 100.64.0.2[udp/53]\n\t\t\t\tremote_ts = 100.64.0.1[udp/any]\n\t\t\t\tmode = transport\n\t\t\t}\n\t\t}\t\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在 B 端（国外）跑一个 coredns：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e. {\n\tbind 127.0.0.53\n\twhoami\n\terratic\n\tlog\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eerratic 插件的作用就是不管查询什么域名，返回的都是 192.0.2.53 和 2001:DB8::53\u003c/p\u003e\n\u003cp\u003e然后在国内机器上用 nslookup 查询谷歌域名：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003enslookup www.google.com 100.64.0.2\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e查询出来的结果应该是 192.0.2.53 和 2001:DB8::53\u003c/p\u003e\n\u003cp\u003e在双边机器上查看 IPsec 流量统计：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eip -s xfrm state\n\u003c/code\u003e\u003c/pre\u003e\n",

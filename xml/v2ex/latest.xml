@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>运营日历 - 分享创造</title>
+      <link>https://www.v2ex.com/t/910039</link>
+      <description>&lt;p&gt;整理了下各国家主要节日，跨境运营人是不是可以用得到？&#xA;&lt;a href=&#34;https://92752.com/&#34; rel=&#34;nofollow&#34;&gt;https://92752.com/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>dev937</author>
+      <pubDate>20 Jan 2023 06:06:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>求推荐简约的博客 cms 平台 以前一直用 hexo 不能跨平台写 还是决定用动态博客了 - 问与答</title>
+      <link>https://www.v2ex.com/t/910038</link>
+      <description>1.最好自带免登录的评论系统&lt;br /&gt;2.页面精简 wordpress 有没有精简主题推荐？</description>
+      <author>HuPu</author>
+      <pubDate>20 Jan 2023 06:06:00 +0000</pubDate>
+    </item>
+    <item>
       <title>DNS over IPsec Transport Mode - 奇思妙想</title>
       <link>https://www.v2ex.com/t/910037</link>
       <description>&lt;p&gt;IPsec 的 Tunnel 模式被广泛采用，但其实 IPsec 还有 Transport 模式，可以用来给任何协议添加加密&lt;/p&gt;&#xA;&lt;p&gt;IPsec 软件这里选择了 strongSwan ，配置 /etc/swanctl/conf.d/dns.conf 即可&lt;/p&gt;&#xA;&lt;p&gt;A 端（国内，记得把 100.64.0.1 改成国内机器的公网 ip ）：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;connections {&#xA;&#x9;dns {&#xA;&#x9;&#x9;version = 2&#xA;&#x9;&#x9;local_addrs  = 100.64.0.1&#xA;&#x9;&#x9;remote_addrs = 100.64.0.2&#xA;&#x9;&#x9;proposals = aes128gcm16-prfsha256-ecp256&#xA;&#x9;&#x9;mobike = no&#xA;&#x9;&#x9;dpd_delay = 20&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;local {&#xA;&#x9;&#x9;&#x9;auth = psk&#xA;&#x9;&#x9;&#x9;id = 100.64.0.1&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;remote {&#xA;&#x9;&#x9;&#x9;auth = psk&#xA;&#x9;&#x9;&#x9;id = 100.64.0.2&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;children {&#xA;&#x9;&#x9;&#x9;transport {&#xA;&#x9;&#x9;&#x9;&#x9;esp_proposals = aes128gcm128-x25519&#xA;&#x9;&#x9;&#x9;&#x9;start_action = trap&#xA;&#x9;&#x9;&#x9;&#x9;local_ts  = 100.64.0.1[udp/any]&#xA;&#x9;&#x9;&#x9;&#x9;remote_ts = 100.64.0.2[udp/53]&#xA;&#x9;&#x9;&#x9;&#x9;mode = transport&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#x9;&#x9;&#xA;&#x9;}&#xA;}&#xA;&#xA;secrets {&#xA;&#x9;ike-psk {&#xA;&#x9;&#x9;secret = IxwmdgyTsUwpobnrCP5hQka4PFNzYL3FPqRkv9CWec8=&#xA;&#x9;&#x9;id-a = 100.64.0.1&#xA;&#x9;&#x9;id-b = 100.64.0.2&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;B 端（国外，local 和 remote 交换一下即可，记得把 100.64.0.2 改成国外机器的公网 ip ）：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&#x9;&#x9;children {&#xA;&#x9;&#x9;&#x9;transport {&#xA;&#x9;&#x9;&#x9;&#x9;esp_proposals = aes128gcm128-x25519&#xA;&#x9;&#x9;&#x9;&#x9;start_action = trap&#xA;&#x9;&#x9;&#x9;&#x9;local_ts  = 100.64.0.2[udp/53]&#xA;&#x9;&#x9;&#x9;&#x9;remote_ts = 100.64.0.1[udp/any]&#xA;&#x9;&#x9;&#x9;&#x9;mode = transport&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#x9;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在 B 端（国外）跑一个 coredns：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;. {&#xA;&#x9;bind 127.0.0.53&#xA;&#x9;whoami&#xA;&#x9;erratic&#xA;&#x9;log&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;erratic 插件的作用就是不管查询什么域名，返回的都是 192.0.2.53 和 2001:DB8::53&lt;/p&gt;&#xA;&lt;p&gt;然后在国内机器上用 nslookup 查询谷歌域名：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;nslookup www.google.com 100.64.0.2&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;查询出来的结果应该是 192.0.2.53 和 2001:DB8::53&lt;/p&gt;&#xA;&lt;p&gt;在双边机器上查看 IPsec 流量统计：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ip -s xfrm state&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
