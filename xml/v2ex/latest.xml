@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>openwrt 没有 wg-quick 脚本的情况下，纯脚本实现 wg server /client - OpenWrt</title>
+      <link>https://www.v2ex.com/t/910362</link>
+      <description>&lt;p&gt;RT,&lt;/p&gt;&#xA;&lt;p&gt;openwrt 上没有 wg-quick ， 不过官方给了实现方法。&lt;a href=&#34;https://openwrt.org/docs/guide-user/services/vpn/wireguard/server&#34; rel=&#34;nofollow&#34;&gt;https://openwrt.org/docs/guide-user/services/vpn/wireguard/server&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;对于不熟悉 uci 的，十分不友好。&lt;/p&gt;&#xA;&lt;h4&gt;下面，以纯 shell 脚本实现&lt;/h4&gt;&#xA;&lt;pre&gt;&lt;code&gt;#!/bin/sh&#xA;&#xA;#创建接口 wg0&#xA;ip link add wg0 type wireguard&#xA;&#xA;#up 接口&#xA;sleep 1&#xA;ip link set mtu 1420 up dev wg0&#xA;&#xA;#设置接口地址&#xA;sleep 1&#xA;ip -4 address add 10.0.1.1 dev wg0&#xA;&#xA;#添加路由&#xA;sleep 1&#xA;ip route add 10.0.1.0/24 dev wg0&#xA;&#xA;#加载配置文件&#xA;wg setconf wg0 /etc/wireguard/wg0.conf&#xA;&#xA;sleep 1&#xA;iptables -I FORWARD -i wg0 -j ACCEPT&#xA;iptables -I FORWARD -o wg0 -j ACCEPT&#xA;iptables -I INPUT -i wg0 -j ACCEPT&#xA;iptables -t nat -A POSTROUTING -o br-lan -j MASQUERADE&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h4&gt;/etc/wireguard/wg0.conf&lt;/h4&gt;&#xA;&lt;pre&gt;&lt;code&gt;[Interface]&#xA;PrivateKey = &#xA;ListenPort = 443&#xA;&#xA;[PEER]&#xA;PUBLICKEY = &#xA;ALLOWEDIPS = 10.0.1.2/32&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h4&gt;ps&lt;/h4&gt;&#xA;&lt;p&gt;家宽，有公网 ip 的，443 udp 似乎没有封？&lt;/p&gt;&#xA;</description>
+      <author>azure2023us</author>
+      <pubDate>23 Jan 2023 09:53:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>电视盒子突然不能看 Disney+ 和 Netflix 了，试过很多办法，实在没办法，求助 - OpenWrt</title>
+      <link>https://www.v2ex.com/t/910361</link>
+      <description>&lt;p&gt;[设备情况] ：&#xA;软路由是 R2S ，用的旁路由模式，系统是：ImmortalWrt.&lt;/p&gt;&#xA;&lt;p&gt;电视盒子是：google chromecast.&lt;/p&gt;&#xA;&lt;p&gt;用的是 passwall ，线路是优质线路，没有任何问题。常用的是美国线路。&lt;/p&gt;&#xA;&lt;p&gt;日常是在电视上看节目，设备组合用了两三年了，YouTube,Netflix,Disney+,HBO,prime video 都是一直能看的。&lt;/p&gt;&#xA;&lt;p&gt;[故障情况] ：&#xA;最近一两个月开始，先是 Disney+ 出现错误 83 代码，不让看。之后是 Netflix 的自制剧提示代理不让看（只能看部分非自制剧）&lt;/p&gt;&#xA;&lt;p&gt;家中手机和电脑没有连软路由，就没有以上问题，可以正常观看 Disney+和 Netflix 。&lt;/p&gt;&#xA;&lt;p&gt;联系我的线路提供商得知，其线路也是正常的，没有掉解锁等问题，该线路上其他用户观看 Disney+和 Netflix 也是正常。&lt;/p&gt;&#xA;&lt;p&gt;[尝试解决过的办法] ：&lt;/p&gt;&#xA;&lt;p&gt;1.更换线路服务商，没用。&#xA;2.重新设置软路由和 passwall ，没用。&#xA;3.passwall 直接设置为全局，没用。&#xA;4.passwall“访问控制”中加入盒子 ip ，没用。&#xA;5.在白名单内加入 Disney+和 Netflix 的所有可能 IP,没用。&lt;/p&gt;&#xA;&lt;p&gt;[解决线索] ：&lt;/p&gt;&#xA;&lt;p&gt;最近有很多人出现这个问题，都是无法解决，有人提供的思维是和 DNS 有关，需要从这个角度去解决。&lt;/p&gt;&#xA;&lt;p&gt;本人技术小白，还请各位指教一下解决办法，十分感谢。&lt;/p&gt;&#xA;</description>
+      <author>XXXXXDDDDD</author>
+      <pubDate>23 Jan 2023 09:50:16 +0000</pubDate>
+    </item>
+    <item>
       <title>tailscale ios 客户端有办法使用自定义服务器吗 - 程序员</title>
       <link>https://www.v2ex.com/t/910360</link>
       <author>ajaxpost</author>

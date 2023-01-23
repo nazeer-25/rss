@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "openwrt 没有 wg-quick 脚本的情况下，纯脚本实现 wg server /client - OpenWrt",
+      "Link": "https://www.v2ex.com/t/910362",
+      "Description": "\u003cp\u003eRT,\u003c/p\u003e\n\u003cp\u003eopenwrt 上没有 wg-quick ， 不过官方给了实现方法。\u003ca href=\"https://openwrt.org/docs/guide-user/services/vpn/wireguard/server\" rel=\"nofollow\"\u003ehttps://openwrt.org/docs/guide-user/services/vpn/wireguard/server\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e对于不熟悉 uci 的，十分不友好。\u003c/p\u003e\n\u003ch4\u003e下面，以纯 shell 脚本实现\u003c/h4\u003e\n\u003cpre\u003e\u003ccode\u003e#!/bin/sh\n\n#创建接口 wg0\nip link add wg0 type wireguard\n\n#up 接口\nsleep 1\nip link set mtu 1420 up dev wg0\n\n#设置接口地址\nsleep 1\nip -4 address add 10.0.1.1 dev wg0\n\n#添加路由\nsleep 1\nip route add 10.0.1.0/24 dev wg0\n\n#加载配置文件\nwg setconf wg0 /etc/wireguard/wg0.conf\n\nsleep 1\niptables -I FORWARD -i wg0 -j ACCEPT\niptables -I FORWARD -o wg0 -j ACCEPT\niptables -I INPUT -i wg0 -j ACCEPT\niptables -t nat -A POSTROUTING -o br-lan -j MASQUERADE\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4\u003e/etc/wireguard/wg0.conf\u003c/h4\u003e\n\u003cpre\u003e\u003ccode\u003e[Interface]\nPrivateKey = \nListenPort = 443\n\n[PEER]\nPUBLICKEY = \nALLOWEDIPS = 10.0.1.2/32\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4\u003eps\u003c/h4\u003e\n\u003cp\u003e家宽，有公网 ip 的，443 udp 似乎没有封？\u003c/p\u003e\n",
+      "Author": "azure2023us",
+      "PubDate": "2023-01-23T09:53:49Z"
+    },
+    {
+      "Title": "电视盒子突然不能看 Disney+ 和 Netflix 了，试过很多办法，实在没办法，求助 - OpenWrt",
+      "Link": "https://www.v2ex.com/t/910361",
+      "Description": "\u003cp\u003e[设备情况] ：\n软路由是 R2S ，用的旁路由模式，系统是：ImmortalWrt.\u003c/p\u003e\n\u003cp\u003e电视盒子是：google chromecast.\u003c/p\u003e\n\u003cp\u003e用的是 passwall ，线路是优质线路，没有任何问题。常用的是美国线路。\u003c/p\u003e\n\u003cp\u003e日常是在电视上看节目，设备组合用了两三年了，YouTube,Netflix,Disney+,HBO,prime video 都是一直能看的。\u003c/p\u003e\n\u003cp\u003e[故障情况] ：\n最近一两个月开始，先是 Disney+ 出现错误 83 代码，不让看。之后是 Netflix 的自制剧提示代理不让看（只能看部分非自制剧）\u003c/p\u003e\n\u003cp\u003e家中手机和电脑没有连软路由，就没有以上问题，可以正常观看 Disney+和 Netflix 。\u003c/p\u003e\n\u003cp\u003e联系我的线路提供商得知，其线路也是正常的，没有掉解锁等问题，该线路上其他用户观看 Disney+和 Netflix 也是正常。\u003c/p\u003e\n\u003cp\u003e[尝试解决过的办法] ：\u003c/p\u003e\n\u003cp\u003e1.更换线路服务商，没用。\n2.重新设置软路由和 passwall ，没用。\n3.passwall 直接设置为全局，没用。\n4.passwall“访问控制”中加入盒子 ip ，没用。\n5.在白名单内加入 Disney+和 Netflix 的所有可能 IP,没用。\u003c/p\u003e\n\u003cp\u003e[解决线索] ：\u003c/p\u003e\n\u003cp\u003e最近有很多人出现这个问题，都是无法解决，有人提供的思维是和 DNS 有关，需要从这个角度去解决。\u003c/p\u003e\n\u003cp\u003e本人技术小白，还请各位指教一下解决办法，十分感谢。\u003c/p\u003e\n",
+      "Author": "XXXXXDDDDD",
+      "PubDate": "2023-01-23T09:50:16Z"
+    },
+    {
       "Title": "tailscale ios 客户端有办法使用自定义服务器吗 - 程序员",
       "Link": "https://www.v2ex.com/t/910360",
       "Description": "",
