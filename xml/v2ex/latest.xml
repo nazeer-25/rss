@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>大众的车机的 wlan 有区域限制吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/910363</link>
+      <description>大众速腾 23 款。今天早上从深圳出发去东莞，刚进入东莞境内，无线 carplay 断开，导航中断，而且再也无法连接，车机提示“很抱歉，车内 wlan 在该区不可用”，停车查看 wlan 和移动热点也变灰了，搞得连不上导航，开车分心，把后视镜也撞碎了。回深圳后，发现它又能用了，所以 wlan 看上去确实有区域限制？只能买车的城市使用？我是深圳买的车，问了 4 儿子那几个客服。就知道让重启，再也啥都不懂。车机是 866B 系统</description>
+      <author>eggt</author>
+      <pubDate>23 Jan 2023 10:11:05 +0000</pubDate>
+    </item>
+    <item>
       <title>openwrt 没有 wg-quick 脚本的情况下，纯脚本实现 wg server /client - OpenWrt</title>
       <link>https://www.v2ex.com/t/910362</link>
       <description>&lt;p&gt;RT,&lt;/p&gt;&#xA;&lt;p&gt;openwrt 上没有 wg-quick ， 不过官方给了实现方法。&lt;a href=&#34;https://openwrt.org/docs/guide-user/services/vpn/wireguard/server&#34; rel=&#34;nofollow&#34;&gt;https://openwrt.org/docs/guide-user/services/vpn/wireguard/server&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;对于不熟悉 uci 的，十分不友好。&lt;/p&gt;&#xA;&lt;h4&gt;下面，以纯 shell 脚本实现&lt;/h4&gt;&#xA;&lt;pre&gt;&lt;code&gt;#!/bin/sh&#xA;&#xA;ip link add wg0 type wireguard&#xA;&#xA;sleep 1&#xA;ip link set mtu 1420 up dev wg0&#xA;&#xA;sleep 1&#xA;ip -4 address add 10.0.1.1 dev wg0&#xA;&#xA;sleep 1&#xA;ip route add 10.0.1.0/24 dev wg0&#xA;&#xA;wg setconf wg0 /etc/wireguard/wg0.conf&#xA;&#xA;sleep 1&#xA;iptables -I FORWARD -i wg0 -j ACCEPT&#xA;iptables -I FORWARD -o wg0 -j ACCEPT&#xA;iptables -I INPUT -i wg0 -j ACCEPT&#xA;iptables -t nat -A POSTROUTING -o br-lan -j MASQUERADE&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h4&gt;/etc/wireguard/wg0.conf&lt;/h4&gt;&#xA;&lt;pre&gt;&lt;code&gt;[Interface]&#xA;PrivateKey = &#xA;ListenPort = 443&#xA;&#xA;[PEER]&#xA;PUBLICKEY = &#xA;ALLOWEDIPS = 10.0.1.2/32&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h4&gt;ps&lt;/h4&gt;&#xA;&lt;p&gt;家宽，有公网 ip 的，443 udp 似乎没有封？&lt;/p&gt;&#xA;</description>
