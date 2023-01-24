@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>开源 C 语言库 Melon： Cron 格式解析 - C</title>
+      <link>https://www.v2ex.com/t/910476</link>
+      <description>&lt;p&gt;本文介绍开源 C 语言库 Melon 的 cron 格式解析。&lt;/p&gt;&#xA;&lt;p&gt;关于 Melon 库，这是一个开源的 C 语言库，它具有：开箱即用、无第三方依赖、安装部署简单、中英文文档齐全等优势。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/Water-Melon/Melon&#34; rel=&#34;nofollow&#34;&gt;Github repo&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;简介&lt;/h2&gt;&#xA;&lt;p&gt;cron 也就是我们常说的 Crontab 中的时间格式，格式如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;*  *  *  *  *&#xA;分 时 日  月 周&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;例如：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;30 21 * * * &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;表示：每晚的 21:30&lt;/p&gt;&#xA;&lt;h2&gt;使用&lt;/h2&gt;&#xA;&lt;p&gt;Melon 中 cron 格式解析器会将上述格式解析成一个&lt;code&gt;time_t&lt;/code&gt;类型值。使用代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &#34;mln_cron.h&#34;&#xA;#include &amp;lt;stdio.h&amp;gt;&#xA;&#xA;int main(void)&#xA;{&#xA;    char p[] = &#34;* * * * *;&#xA;    mln_string_t s;&#xA;    mln_string_nset(&amp;amp;s, p, sizeof(p)-1);&#xA;    time_t now = time(NULL);&#xA;    time_t next = mln_cron_parse(&amp;amp;s, now);&#xA;    printf(&#34;%lu %lu %s\n&#34;, (unsigned long)now, (unsigned long)next, ctime(&amp;amp;next));&#xA;    return 0;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可以看到，本例中，cron 格式为&lt;code&gt;* * * * *&lt;/code&gt;，含义即是每分钟。&lt;/p&gt;&#xA;&lt;p&gt;程序流程大致：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;初始化格式字符串&lt;/li&gt;&#xA;&lt;li&gt;获取当前系统秒值&lt;/li&gt;&#xA;&lt;li&gt;将当前秒值作为参考基数，来计算该 cron 格式的秒级时间戳，即下一秒的时间值&lt;/li&gt;&#xA;&lt;li&gt;输出 cron 解析器返回的秒值及其格式化字符串内容&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Melon 中 cron 解析器在&lt;code&gt;mln_cron.h&lt;/code&gt;中，使用时需要&lt;code&gt;include&lt;/code&gt;进来。&lt;/p&gt;&#xA;&lt;p&gt;另外需注意，在 Melon 中，cron 暂时不支持&lt;code&gt;-&lt;/code&gt;表示范围值。&lt;/p&gt;&#xA;&lt;h2&gt;结语&lt;/h2&gt;&#xA;&lt;p&gt;cron 格式解析目前能支持的格式是 crontab 的一个子集，后续随着使用需求可能会再进行扩展。&lt;/p&gt;&#xA;&lt;p&gt;另外，欢迎各位对 Melon 感兴趣的读者访问其&lt;a href=&#34;https://github.com/Water-Melon/Melon&#34; rel=&#34;nofollow&#34;&gt;Github 仓库&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;感谢阅读！&lt;/p&gt;&#xA;</description>
+      <author>monkeyNik</author>
+      <pubDate>24 Jan 2023 11:22:56 +0000</pubDate>
+    </item>
+    <item>
       <title>老婆一年多没上班了。 - 生活</title>
       <link>https://www.v2ex.com/t/910475</link>
       <description>&lt;p&gt;上一份工作干了三个月。上一份工作之前又是大半年不上班。连着几年都是这种上一阵子，歇半年一年的情况。她家里人不知道她上班是这个状态。&lt;/p&gt;&#xA;&lt;p&gt;我全职远程工作，家里饭是我烧，碗是随机我俩一人洗。洗衣服打扫卫生她也做，没那么勤快，总而言之是够不上家庭主妇的地步。&lt;/p&gt;&#xA;&lt;p&gt;年前我被老板优化了，本来不多的薪资砍了一半。&lt;/p&gt;&#xA;&lt;p&gt;现在我坐在老婆位于农村的家里受冻。有种要爆发的冲动。&lt;/p&gt;&#xA;</description>
