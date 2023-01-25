@@ -4,9 +4,16 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请问武汉市或者黄冈市有没有靠谱的正骨推拿医生或者诊所医院 - 武汉",
+      "Link": "https://www.v2ex.com/t/910579",
+      "Description": "\u003cp\u003e老丈人在黄冈，前两年上楼梯搬东西腰闪了，膝盖也会疼，最近通过刮痧之后，有改善；想问下论坛的铁子们有没有武汉和黄冈的靠谱正骨推拿医生推荐\u003c/p\u003e\n",
+      "Author": "Sidney",
+      "PubDate": "2023-01-25T07:34:34Z"
+    },
+    {
       "Title": "通过 wg 访问 V2EX 出现访问不可用的原因找到了！ - 分享发现",
       "Link": "https://www.v2ex.com/t/910577",
-      "Description": "\u003cp\u003eRT ，\u003c/p\u003e\n\u003cp\u003e这个问题困扰了很久，之前也问过，都说是 mtu 的问题，其实根本不是。\u003c/p\u003e\n\u003ch4\u003e根本原因\u003c/h4\u003e\n\u003cp\u003e是因为 V2EX 启用了 quic （用的 cf 的 cdn ，且开启了 quic ）。\u003c/p\u003e\n\u003ch4\u003e解决办法\u003c/h4\u003e\n\u003cp\u003ewireguard server 上使用 iptables 禁止 443 udp 数据包\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eiptables -N QUIC\niptables -I QUIC -d \u0026lt;your_vps_ip\u0026gt; -j ACCEPT\niptables -A QUIC -j REJECT\niptables -I FORWARD -i eth0 -p udp --dport 443 -j QUIC\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e或者 用一条 iptables ，禁止 forward all 443 udp packages\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eiptables -I FORWARD -i eth0 -p udp --dport 443 -j REJECT\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Description": "\u003cp\u003eRT ，\u003c/p\u003e\n\u003cp\u003e这个问题困扰了很久，之前也问过，都说是 mtu 的问题，其实根本不是。\u003c/p\u003e\n\u003ch4\u003e根本原因\u003c/h4\u003e\n\u003cp\u003e是因为 V2EX 启用了 quic （用的 cf 的 cdn ，且开启了 quic ）。\n通过这个连接可以查看 quic 支持情况。\u003ca href=\"https://v2ex.com/cdn-cgi/trace\" rel=\"nofollow\"\u003ehttps://v2ex.com/cdn-cgi/trace\u003c/a\u003e\u003c/p\u003e\n\u003ch4\u003e解决办法\u003c/h4\u003e\n\u003cp\u003ewireguard server 上使用 iptables 禁止 443 udp 数据包\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eiptables -N QUIC\niptables -I QUIC -d \u0026lt;your_vps_ip\u0026gt; -j ACCEPT\niptables -A QUIC -j REJECT\niptables -I FORWARD -i eth0 -p udp --dport 443 -j QUIC\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e或者 用一条 iptables ，禁止 forward all 443 udp packages\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eiptables -I FORWARD -i eth0 -p udp --dport 443 -j REJECT\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "azure2023us",
       "PubDate": "2023-01-25T07:29:45Z"
     },
