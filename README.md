@@ -44,6 +44,3 @@ Report Issue: https://github.com/chyroc/grss/issues
 | 知乎书店 - 新书抢鲜 | [JSON](./json/latest/zhihu/bookstore/newest.json) | [RSS](./xml/zhihu/bookstore/newest.xml) | [HTML](./html/zhihu/bookstore/newest/index.html) |
 | 竹白 - 察说花园 | [JSON](./json/latest/zhubai/post/chasays.json) | [RSS](./xml/zhubai/post/chasays.xml) | [HTML](./html/zhubai/post/chasays/index.html) |
 | 竹白 - 捕蛇者说 newsletter | [JSON](./json/latest/zhubai/post/pythonhunter.json) | [RSS](./xml/zhubai/post/pythonhunter.xml) | [HTML](./html/zhubai/post/pythonhunter/index.html) |
-| 竹白 - 产品鸭 | [JSON](./json/latest/zhubai/post/produck.json) | [RSS](./xml/zhubai/post/produck.xml) | [HTML](./html/zhubai/post/produck/index.html) |
-| 竹白 - Old-Ideas-Store | [JSON](./json/latest/zhubai/post/oistore.json) | [RSS](./xml/zhubai/post/oistore.xml) | [HTML](./html/zhubai/post/oistore/index.html) |
-| 竹白 - DecoHack周刊 | [JSON](./json/latest/zhubai/post/decohack.json) | [RSS](./xml/zhubai/post/decohack.xml) | [HTML](./html/zhubai/post/decohack/index.html) |
