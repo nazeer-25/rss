@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "通过 wg 访问 V2EX 出现访问不可用的原因找到了！ - 分享发现",
+      "Link": "https://www.v2ex.com/t/910577",
+      "Description": "\u003cp\u003eRT ，\u003c/p\u003e\n\u003cp\u003e这个问题困扰了很久，之前也问过，都说是 mtu 的问题，其实根本不是。\u003c/p\u003e\n\u003ch4\u003e根本原因\u003c/h4\u003e\n\u003cp\u003e是因为 V2EX 启用了 quic （用的 cf 的 cdn ，且开启了 quic ）。\u003c/p\u003e\n\u003ch4\u003e解决办法\u003c/h4\u003e\n\u003cp\u003ewireguard server 上使用 iptables 禁止 443 udp 数据包\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eiptables -N QUIC\niptables -I QUIC -d \u0026lt;your_vps_ip\u0026gt; -j ACCEPT\niptables -A QUIC -j REJECT\niptables -I FORWARD -i eth0 -p udp --dport 443 -j QUIC\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e或者 用一条 iptables ，禁止 forward all 443 udp packages\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eiptables -I FORWARD -i eth0 -p udp --dport 443 -j REJECT\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "azure2023us",
+      "PubDate": "2023-01-25T07:29:45Z"
+    },
+    {
       "Title": "我想到一个渐进式英语学习方法 - 奇思妙想",
       "Link": "https://www.v2ex.com/t/910576",
       "Description": "\u003cp\u003e最近几年的单词量，都来源于同事说话时候夹带的单词，比如：\u003c/p\u003e\n\u003cp\u003e·连 whole picture 都没有，你现在做什么做？\n·这个事情不 make sense\u003c/p\u003e\n\u003cp\u003e自己学英语时候又学不进去，是因为一句话直接看看不懂。，是不是能搞个英语学习网，\n用户进来能选择看 5%、10%、15%、20%……100%的英语，\n这样选个自己能接受的级别，又能看内容，又能轻松的记单词，\u003c/p\u003e\n\u003cp\u003e大家觉得怎么样？\u003c/p\u003e\n",
