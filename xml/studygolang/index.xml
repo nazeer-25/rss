@@ -17,6 +17,11 @@
       <link>https://studygolang.com/resources/15559#reply0</link>
     </item>
     <item>
+      <title>新手问题，如何解决用gin做的api接口经常无响应？</title>
+      <link>https://studygolang.com/topics/16078#reply12</link>
+      <description>&lt;p&gt;用gin做了一些api接口，经常运行中挂掉，处于访问无响应的状态，只能重启解决。用netstat -ano查看端口状态，处于CLOSE_WAIT。用wireshark监测确实可以看到有访问进来，但是gin没有相应。这些api有些是访问数据库返回结果的，有些是访问其它外部接口再返回结果的。单独每个api都用postman测试过几千次，并无逻辑问题。但就是运行中偶发变成无响应状态，无响应状态时数据库无死锁（排除数据库问题）。起初我猜测是不是访问其它外部接口超时所致，后来访问外部接口加入了超时5秒的限制，无效。后来猜测是gin自身未设置超时，于是改成如下启动参数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&amp;amp;http.Server{&#xA;    Addr:           address,&#xA;    Handler:        router,&#xA;    ReadTimeout:    10 * time.Second,&#xA;    WriteTimeout:   10 * time.Second,&#xA;    MaxHeaderBytes: 1 &amp;lt;&amp;lt; 20,&#xA;  }&lt;/p&gt;&#xA;&#xA;&lt;p&gt;仍然无效。请问在api中访问其它外部接口有什么需要注意的地方？是否会引起gin自身无响应？如何能让gin在api请求失败后超时不影响其它访问？&#xA;求指教，新手拜谢&#xA;&lt;img src=&#34;https://static.golangjob.cn/230111/c900447c0e802a62880fd2afc44c9ce2.png&#34; alt=&#34;代码.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下面是对外访问接口时候，使用的get,post方法，加了5秒超时&#xA;&lt;img src=&#34;https://static.golangjob.cn/230115/bd7b8ebb9c266ab98c1a6d64b291d18e.png&#34; alt=&#34;get.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230115/ccd673eb6077707076ead82851dec9a4.png&#34; alt=&#34;post.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>MyBatis内存溢出，设置的运行堆内存28G，还是溢出了~ 大家研究一下啊，程序启动运行了12个小时左右发生的</title>
       <link>https://studygolang.com/topics/16106#reply1</link>
       <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230119/804e272eced4c84c4bf3db75d85c8017.png&#34; alt=&#34;内存溢出-2.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230119/71618b983388bd1f4f2b33daec1c318f.png&#34; alt=&#34;内存溢出.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
@@ -49,11 +54,6 @@
       <title>寻找golang兼职或者合作, 前期兼职可不收费工作.</title>
       <link>https://studygolang.com/topics/16104#reply0</link>
       <description>&lt;p&gt;需要的单位或个人请联系我. wx: php005&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>新手问题，如何解决用gin做的api接口经常无响应？</title>
-      <link>https://studygolang.com/topics/16078#reply11</link>
-      <description>&lt;p&gt;用gin做了一些api接口，经常运行中挂掉，处于访问无响应的状态，只能重启解决。用netstat -ano查看端口状态，处于CLOSE_WAIT。用wireshark监测确实可以看到有访问进来，但是gin没有相应。这些api有些是访问数据库返回结果的，有些是访问其它外部接口再返回结果的。单独每个api都用postman测试过几千次，并无逻辑问题。但就是运行中偶发变成无响应状态，无响应状态时数据库无死锁（排除数据库问题）。起初我猜测是不是访问其它外部接口超时所致，后来访问外部接口加入了超时5秒的限制，无效。后来猜测是gin自身未设置超时，于是改成如下启动参数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&amp;amp;http.Server{&#xA;    Addr:           address,&#xA;    Handler:        router,&#xA;    ReadTimeout:    10 * time.Second,&#xA;    WriteTimeout:   10 * time.Second,&#xA;    MaxHeaderBytes: 1 &amp;lt;&amp;lt; 20,&#xA;  }&lt;/p&gt;&#xA;&#xA;&lt;p&gt;仍然无效。请问在api中访问其它外部接口有什么需要注意的地方？是否会引起gin自身无响应？如何能让gin在api请求失败后超时不影响其它访问？&#xA;求指教，新手拜谢&#xA;&lt;img src=&#34;https://static.golangjob.cn/230111/c900447c0e802a62880fd2afc44c9ce2.png&#34; alt=&#34;代码.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下面是对外访问接口时候，使用的get,post方法，加了5秒超时&#xA;&lt;img src=&#34;https://static.golangjob.cn/230115/bd7b8ebb9c266ab98c1a6d64b291d18e.png&#34; alt=&#34;get.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230115/ccd673eb6077707076ead82851dec9a4.png&#34; alt=&#34;post.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>这是一个du娘没有的搜索学习看资讯的好网站你肯定用得上</title>
@@ -107,6 +107,11 @@
       <title>初来乍到，多多关照</title>
       <link>https://studygolang.com/topics/16098#reply0</link>
       <description>&lt;p&gt;初来乍到，多多关照&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新手问题，如何解决用gin做的api接口经常无响应？</title>
+      <link>https://studygolang.com/topics/16078#reply11</link>
+      <description>&lt;p&gt;用gin做了一些api接口，经常运行中挂掉，处于访问无响应的状态，只能重启解决。用netstat -ano查看端口状态，处于CLOSE_WAIT。用wireshark监测确实可以看到有访问进来，但是gin没有相应。这些api有些是访问数据库返回结果的，有些是访问其它外部接口再返回结果的。单独每个api都用postman测试过几千次，并无逻辑问题。但就是运行中偶发变成无响应状态，无响应状态时数据库无死锁（排除数据库问题）。起初我猜测是不是访问其它外部接口超时所致，后来访问外部接口加入了超时5秒的限制，无效。后来猜测是gin自身未设置超时，于是改成如下启动参数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&amp;amp;http.Server{&#xA;    Addr:           address,&#xA;    Handler:        router,&#xA;    ReadTimeout:    10 * time.Second,&#xA;    WriteTimeout:   10 * time.Second,&#xA;    MaxHeaderBytes: 1 &amp;lt;&amp;lt; 20,&#xA;  }&lt;/p&gt;&#xA;&#xA;&lt;p&gt;仍然无效。请问在api中访问其它外部接口有什么需要注意的地方？是否会引起gin自身无响应？如何能让gin在api请求失败后超时不影响其它访问？&#xA;求指教，新手拜谢&#xA;&lt;img src=&#34;https://static.golangjob.cn/230111/c900447c0e802a62880fd2afc44c9ce2.png&#34; alt=&#34;代码.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下面是对外访问接口时候，使用的get,post方法，加了5秒超时&#xA;&lt;img src=&#34;https://static.golangjob.cn/230115/bd7b8ebb9c266ab98c1a6d64b291d18e.png&#34; alt=&#34;get.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230115/ccd673eb6077707076ead82851dec9a4.png&#34; alt=&#34;post.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>MyBatis内存溢出，设置的运行堆内存28G，还是溢出了~ 大家研究一下啊，程序启动运行了12个小时左右发生的</title>
