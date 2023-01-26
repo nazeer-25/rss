@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "昨天去降话费套餐 - 程序员",
+      "Link": "https://www.v2ex.com/t/910710",
+      "Description": "\u003cp\u003e我现在是 78 元套餐,想要降到 59,今天那人来回拔电话,说 59 这个套餐,流量超出的是 30 元一 G,我还能说什么,只能不降了咯\u003c/p\u003e\n",
+      "Author": "chenqh",
+      "PubDate": "2023-01-26T06:54:37Z"
+    },
+    {
+      "Title": "有非常熟悉 WIN Cmd 批处理的高手吗？ for 循环每次赋予环境变量，会有问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/910709",
+      "Description": "\u003cpre\u003e\u003ccode\u003eset Clicount=32\n\n@REM do creat client file\nfor /l %%a in (2,1,%Clicount%) do (\n\n@REM get rand ASCII code.\n@REM 每个循环需要一个不同的随机字符串，并把随机字符串赋到%RANDSTR%，给其它程序使用，自撸了 python 生成随机数+pyinstaller ，打包成成 rand.exe,放在.\\bin 下面\n@REM 下面我按网上能找到的两种做法，CMD 环境或程序输出，获取输出内容到%RANDSTR%\n\n@REM 做法一:\n.\\bin\\randstr.exe -l8 -d8\u0026gt;.\\tmp\\randstr.txt\nset /p RANDSTR=\u0026lt;.\\tmp\\randstr.txt\ndel /q .\\tmp\\randstr.txt\n@REM 方法一，在第一个循环周期内，%RANDSTR%会被正确赋值，被其它程序正确使用，\n@REM 在第二个循环周期开始，会变成空值\n\n@REM 做法二：\n@FOR /F %%i IN ('.\\bin\\randstr.exe -l8 -d8') DO @set RANDSTR=%%i\n@REM 方法二：在第一个循环周期内，%RANDSTR%可以正确被赋值\n@REM 在第二个循环周期开始，%RANDSTR%不会变化，往后的循环周期，%RANDSTR%都是第一次的值\n@REM 猜测是，批处理环境不能在 FOR 里面嵌套 FOR ？\n\n@REM 怎么办？ 或者有没有其他变通的方式，使得 for /l %%a in (2,1,%Clicount%)这个循环里，可以正常%RANDSTR%赋值？\n\n@.\\bin\\rar a -hp%rarpasswd% -k -ep1 -m5 %clientdir%\\RARpacket\\x86\\x86_%%a_%RANDSTR%.rar C:\\xxxxx\\xxxxx\\x86\\.\n\n@REM End of do creat client files packet.\n)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e#自己随手写的随机字符串,没讲究，能用就可以了\nimport sys\nimport random\nimport string\n\n\nhelpStr = \"\"\"\ncommand: randStr -option len\noption:\n       -l  Letter,'Aa-Zz'\n       -d  Number,'0-9'\n       -c  Chars,'@$#_%?'\n\"\"\"\n\nletters = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz'\nnumbers = '0123456789'\nchars = '@$#_%?'\n\nif __name__ == '__main__':\n\n    if len(sys.argv) == 1:\n        print('Options error...')\n        print(helpStr)\n        sys.exit()\n\n    optionStr = (((''.join(sys.argv[1:])).replace(' ','')).replace('-','')).strip()\n\n    rChar = ''\n\n    if len(optionStr) \u0026gt;= 2:\n        optionList = []\n        tmpStr = ''\n        if optionStr[0].isalpha():\n            tmpStr = ''.join(optionStr[0])\n            for c in optionStr[1:]:\n                if c.isdigit():\n                    tmpStr = tmpStr + c\n                if c.isalpha():\n                    optionList.append(tmpStr)\n                    tmpStr = c\n            else:\n                optionList.append(tmpStr)\n\n        set_optionList = list(set(optionList))\n\n        for i in set_optionList:\n            if i[0] == 'l':\n                for c in range(int(i[1:])):\n                    randNum = random.randint(0, len(letters))\n                    rChar += letters[randNum - 1]\n\n            if i[0] == 'd':\n                for c in range(int(i[1:])):\n                    randNum = random.randint(0, len(numbers))\n                    rChar += numbers[randNum - 1]\n\n            if i[0] == 'c':\n                for c in range(int(i[1:])):\n                    randNum = random.randint(0, len(chars))\n                    rChar += chars[randNum - 1]\n\n        if rChar:\n            rCharList = list(rChar)\n            random.shuffle(rCharList)\n            print(''.join(rCharList))\n    else:\n        print('Options error...')\n        print(helpStr)\n        sys.exit()\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "qazwsxkevin",
+      "PubDate": "2023-01-26T06:50:22Z"
+    },
+    {
       "Title": "在乡村道路撞到人，责任应该怎么说呢？ - 问与答",
       "Link": "https://www.v2ex.com/t/910708",
       "Description": "表舅结婚，在村子里办酒，吃过农村喜酒的应该知道，好几桌，然后小孩子又多，有个看起来三四岁的小孩子，突然跑马路上，被一辆 suv 撞倒了，所幸车速不快，小孩子没有明显外伤，不过家长操作看得我血压飙升，抱起来摸一摸、摇一摇、晃一晃，把所有禁忌犯了个遍，这要是有个内伤，简直就是二次伤害。\u003cbr /\u003e\u003cbr /\u003e撞人的车主倒是还好，车上的一个女的说话难听，怪没管好小孩，胆子大差点被打，所幸有人劝住（结婚一村子亲朋好友在这）\u003cbr /\u003e\u003cbr /\u003e后面我表舅陪着去医院了，因为村里，要去县城，可怜我表舅新婚之日。\u003cbr /\u003e\u003cbr /\u003e关于责任上划分，我觉得车主肯定有责任，但按律法来判定应该不是主责，我感知上当时车速低于 40 码，其次是小孩子突然冲出来，但中国是人情社会，很多时候交警为了社会和谐，会给撞人车主全责，原因是因为行人属于弱势一方。\u003cbr /\u003e\u003cbr /\u003e其次就是乡村道路跟城里不一样，从情理上，乡村道路那属于人家的路，你外来车辆就应该让人。",
