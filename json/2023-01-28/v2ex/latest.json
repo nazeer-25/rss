@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "云上贵州 iCloud 打开共享图库后没法更新照片 - Apple",
+      "Link": "https://www.v2ex.com/t/911002",
+      "Description": "\u003cp\u003eiCloud 空间是足够的，之前手残打开了共享图库然后就没法同步照片了，使用 iCloud 网页端查看是异常提示是不支持共享区域，请问是因为中国大陆不支持该功能吗？请问这么解决这个问题？（目前是手机端没法同步完成，没法关闭共享图库）\u003c/p\u003e\n\u003cp\u003e已经联系过 Apple 的高级技术支持了，最终回复是工程部已经在排查问题，等 OTA 更新，会修复的但不知道什么时候（非常的傲慢）\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eerror : \"SHARE_REGION_UNSUPPORTED\" errorClass : \"ACCESS_DENIED\" reason : \"Zone type not available\" serverErrorCode : \"ACCESS_DENIED\"\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "daizheng1998",
+      "PubDate": "2023-01-28T03:01:23Z"
+    },
+    {
+      "Title": "想买辆好点的车，很纠结麻烦各位帮我分析分析 - 生活",
+      "Link": "https://www.v2ex.com/t/911001",
+      "Description": "是这样的，这次买车是刚需，估计春天就搬到新家，需要早晚通勤，单程 20KM 。\u003cbr /\u003e之前没买过车，想开的时候就去扫共享汽车。\u003cbr /\u003e\u003cbr /\u003e个人情况：快 30 岁了，房贷已经还清，这次春节回去订婚之后女方给的陪嫁加上自己的钱，手里有 50w ，之前一直梦想买一台宝马 530 ，懂车帝翻来覆去也看了一年了...\u003cbr /\u003e\u003cbr /\u003e但是，但是这次钱够了坦白的讲内心却更纠结，把小家庭的 50w 全花掉买个消耗品是不是太贵了\u003cbr /\u003e\u003cbr /\u003e想问一下老哥们，我这种情况该不该买",
+      "Author": "wxw752",
+      "PubDate": "2023-01-28T03:00:57Z"
+    },
+    {
+      "Title": "一分钟读论文：《影响大规模敏捷软件开发按时交付的因素》 - 程序员",
+      "Link": "https://www.v2ex.com/t/911000",
+      "Description": "\u003cp\u003e荷兰代尔夫特理工大学与荷兰国际集团 (ING) 合著的论文《 Factors Affecting On-Time Delivery in Large-Scale Agile Software Development 》 对来自 ING 的 635 名工程师进行调查，分析了 185 个团队和 2,208 个 Epic 数据集。发现：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e需求细化、任务依赖性、组织一致性、组织政治和团队的地理分布\u003c/code\u003e被认为对及时的软件交付有最大的影响。\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003e项目规模、依赖项数量、历史交付绩效、团队熟悉度和开发人员经验\u003c/code\u003e是解释软件交付进度偏差的最重要变量。\u003c/li\u003e\n\u003cli\u003e因素按层次相互作用：组织因素被认为与人员因素相互作用，进而影响技术因素。技术因素被认为对及时的软件交付有直接影响。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e阅读全文：\u003ca href=\"https://unbug.github.io/Factors-Affecting-On-Time-Delivery-in-Large-Scale-Agile-Software-Development/\" rel=\"nofollow\"\u003e一分钟读论文：《影响大规模敏捷软件开发按时交付的因素》\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "Micropaper",
+      "PubDate": "2023-01-28T03:00:55Z"
+    },
+    {
       "Title": "Go 的范型怎么把 Response[指定类型] 转换为 Response[any] - 程序员",
       "Link": "https://www.v2ex.com/t/910999",
       "Description": "\u003cp\u003e问题: Go 的范型怎么把 Response[指定类型] 转换为 Response[any].\u003c/p\u003e\n\u003cp\u003e下面的示例代码在 [3] 部分进行类型转换的时候报错 cannot use rsp2 (variable of type Response[map[string]string]) as Response[any] value in assignment 。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)\n\ntype Response[T any] struct {\n\tCode    int    `json:\"code\"`           // 业务逻辑相关的 code ，不是 HTTP Status Code\n\tSuccess bool   `json:\"success\"`        // 业务逻辑处理成功时为 true ，错误时为 false\n\tMsg     string `json:\"msg\"`            // 请求的描述\n\tData    T      `json:\"data,omitempty\"` // 请求的 payload\n}\n\nfunc main() {\n\n}\n\nfunc foo[T any]() Response[any] {\n\t// [1] 创建范型对象\n\trsp1 := Response[map[string]string]{\n\t\tCode:    200,\n\t\tSuccess: true,\n\t\tData:    map[string]string{\"1\": \"one\", \"2\": \"two\"},\n\t}\n\n\t// [2] 范型序列化\n\tb, _ := json.Marshal(rsp1)\n\tfmt.Println(string(b))\n\n\t// [3] 范型反序列化\n\tvar rsp2 Response[map[string]string]\n\tjson.Unmarshal(b, \u0026amp;rsp2)\n\tfmt.Printf(\"%+v\\n\", rsp2)\n\n\t// [4] 范型向上类型转换\n\t// 相当于 Java 的范型用 ? 来接收任意类型的范型如\n\t//     List\u0026lt;String\u0026gt; list1 = new LinkedList\u0026lt;\u0026gt;();\n\t//     List\u0026lt;?\u0026gt; list2 = list1;\n\trsp3 := Response[any]{}\n\trsp3 = rsp2 // 错误: cannot use rsp2 (variable of type Response[map[string]string]) as Response[any] value in assignment\n\n\treturn rsp3\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
