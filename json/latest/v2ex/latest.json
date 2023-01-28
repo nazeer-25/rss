@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "现在基本每个云厂商人手一个云 IDE 产品，比较好奇有人用吗？适合什么场景？ - 程序员",
+      "Link": "https://www.v2ex.com/t/911076",
+      "Description": "",
+      "Author": "yuthelloworld",
+      "PubDate": "2023-01-28T07:09:45Z"
+    },
+    {
+      "Title": "oracle 出了适配 M 系列芯片的镜像没有哦！？ - MacBook Pro",
+      "Link": "https://www.v2ex.com/t/911074",
+      "Description": "\u003cp\u003e今年六月分买的 m1 pro 但是项目开发用的是 oracle ，一直都是用的公司服务器的数据库，尝试过用 docker 安装，但是一直没有 arm 架构的镜像，amd 的能够安装成功，但是连接数据库就会一直报错 [没有访问权限] ，本来想用套娃的方式，在 docker 中安装运行 Linux ，然后在 Linux 中安装 oracle ，但是好多教程说不可行。。。\u003c/p\u003e\n",
+      "Author": "Aboceder",
+      "PubDate": "2023-01-28T07:04:51Z"
+    },
+    {
+      "Title": "安卓刷机后输入法使用 - 问与答",
+      "Link": "https://www.v2ex.com/t/911073",
+      "Description": "k50u 刷了欧版后一直在用自带的谷歌键盘，但是在打中文时感觉很麻烦，有没有好用的国内输入法？",
+      "Author": "Hanson666",
+      "PubDate": "2023-01-28T07:03:27Z"
+    },
+    {
       "Title": "折腾 Google One VPN 的第二个部分 - 分享发现",
       "Link": "https://www.v2ex.com/t/911072",
       "Description": "\u003cp\u003e先前在\u003ca href=\"https://www.v2ex.com/t/910836\" rel=\"nofollow\"\u003e这个帖子\u003c/a\u003e进行了一些 Google One VPN （下简称 vpn ）进行了一些连接尝试，首先大概说一下 Google One VPN 的连接路由：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e先访问\u003ccode\u003e*.cloud.cupronickel.goog\u003c/code\u003e来判断连接者所在的地区（仅使用 IP 判断）\u003c/li\u003e\n\u003cli\u003e通过解析\u003ccode\u003e*.g\u003ca href=\"http://-tun.com\" rel=\"nofollow\"\u003e-tun.com\u003c/a\u003e\u003c/code\u003e来拿到分配的目的代理服务器（下简称目的代理），但是这个过程不一定，有可能是直接下发 IP\u003c/li\u003e\n\u003cli\u003e通过系统尝试\u003cstrong\u003e直接连接\u003c/strong\u003e到目的代理，然后客户端尝试通过\u003ccode\u003e8.8.8.8\u003c/code\u003e解析并访问检测服务器\u003c/li\u003e\n\u003cli\u003e连接成功 /失败重试\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e在这期间发现几个现象（除了 Windows ，虚拟机抓出来的包啥也没有，很奇怪）：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e除了\u003c/strong\u003e安卓设备，其他平台分配到的目的代理端口号都是\u003ccode\u003e443\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e欺骗地区检测服务器的 IP 如果比较烂会被拒绝连接，目前测试下只有套了层 Warp 的可以保证连接成功\u003c/li\u003e\n\u003cli\u003e通过反复删除系统添加的 VPN 连接无法影响拿到的目的代理的端口和地址\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e那么第一个现象，直接影响连接，虽然我听说过运营商打压 udp ，但是不知道为什么把 443/udp 直接给掐了，我使用联通进行测试，前贴也有 v 友反馈。\u003c/p\u003e\n\u003cp\u003e第二个，也就是一些 IP 连不上\u003cstrong\u003e目的代理\u003c/strong\u003e，也就是说能欺骗检测位置的，但是目的代理不让你连。\u003c/p\u003e\n\u003cp\u003e第三个，也就是说在 iOS ，macOS 上我暂时没找到方案来获得非 443 端口的目的代理\u003c/p\u003e\n\u003ch1\u003e代理规则\u003c/h1\u003e\n\u003cp\u003e我总结出来了如下配置，适用于 clash：\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003econfig.yaml\u003c/code\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yaml\"\u003erule-providers:\n  google_vpn:\n    type: http\n    behavior: ipcidr\n    url: \"URL\"\n    path: ./ruleset/google_vpn.yaml\n    interval: 86400 \nscript:\n    shortcuts:\n      google_vpn: match_provider('google_vpn') and dst_port == 443 and network == 'udp'\nrules:\n  - DOMAIN-SUFFIX,cloud.cupronickel.goog,🪜谷歌梯子\n  - SCRIPT,google_vpn,🪜谷歌梯子\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ccode\u003egoogle_vpn.yaml\u003c/code\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yaml\"\u003epayload:\n  - '136.22.64.0/24'\n  - '136.22.65.0/24'\n  - '136.22.67.0/24'\n  - '136.22.76.0/24'\n  - '136.22.83.0/24'\n  - '136.22.85.0/24'\n  - '136.22.86.0/24'\n  - '136.22.87.0/24'\n  - '136.22.92.0/24'\n  - '136.22.93.0/24'\n  - '136.22.94.0/24'\n  - '136.22.95.0/24'\n  - '136.22.96.0/24'\n  - '136.22.97.0/24'\n  - '136.22.98.0/24'\n  - '136.22.99.0/24'\n  - '136.22.100.0/24'\n  - '136.22.101.0/24'\n  - '136.22.102.0/24'\n  - '136.22.103.0/24'\n  - '136.22.104.0/24'\n  - '136.22.105.0/24'\n  - '136.22.106.0/24'\n  - '136.22.107.0/24'\n  - '136.22.108.0/24'\n  - '136.22.109.0/24'\n  - '136.22.110.0/24'\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eIP 通过查询到 asn:36492 ，可以访问\u003ca href=\"https://whois.ipip.net/AS36492\" rel=\"nofollow\"\u003e这里\u003c/a\u003e查看，只写了一些我目前遇到的 IP 范围，不是很全，比较懒可以直接上\u003ccode\u003e/23\u003c/code\u003e\u003c/p\u003e\n\u003ch1\u003e拿来做落地\u003c/h1\u003e\n\u003cp\u003e我开始想，能不能像代理链一样，在自己的服务器上搞一个？想了一下比较直接的方案应该是\u003ccode\u003e安卓 Docker\u003c/code\u003e，但是转念一想，好像还需要 play 服务，脑子就开始怕起来了。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e但是\u003c/strong\u003e，你会发现，像国内不能连到 443/udp 的问题用代理去连不也是一种代理链吗？\u003c/p\u003e\n\u003cp\u003e所以这个问题可以往\u003ccode\u003e更优雅\u003c/code\u003e发展，看谷歌什么时候推出 Linux 客户端吧。\u003c/p\u003e\n\u003ch1\u003e解锁情况\u003c/h1\u003e\n\u003cp\u003eIP 很好，能拿来搞 Google Voice ，奈飞直接看（甚至能直接进注册），访问谷歌没有遇到过验证码了，延迟很不错。\u003c/p\u003e\n\u003ch2\u003e游戏加速器？没问题。\u003c/h2\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://files.mdnice.com/user/39773/6ccdaa2a-e773-4ac5-abcb-811fb33e86aa.jpg\"/\u003e\n能当游戏（加减）速器！延迟 100 多，只能说能玩，至少能成为高 Ping 战士。\u003c/p\u003e\n\u003cp\u003e当然这是在套了一层代理的情况下，我认为直连的情况会优秀不少。\u003c/p\u003e\n\u003ch1\u003e理想情况\u003c/h1\u003e\n\u003cp\u003e那么就现在来看，离很不错还差一点点（所有客户端都能+推出 warp-cli 类似的东西）。\u003c/p\u003e\n\u003cp\u003e以后完全可以：免费搜来的机场节点+vpn ，客户端只要不主动切换网络环境，与目标代理的连接就一直是稳的。\u003c/p\u003e\n\u003cp\u003e持续使用成本完全可以保持在 \u003cstrong\u003e3 块钱 /月\u003c/strong\u003e 左右（家庭共享分摊后），还带 333G 的谷歌存储，还有 9 折谷歌商店买机器（拿来凑数的）\u003c/p\u003e\n\u003ch1\u003e最后\u003c/h1\u003e\n\u003cp\u003e最后的最后，我的车还剩一个位置，谷歌账户要求美区，我主页有纸飞机。\u003c/p\u003e\n",
