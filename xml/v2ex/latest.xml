@@ -4,6 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Go 的范型怎么把 Response[指定类型] 转换为 Response[any] - 程序员</title>
+      <link>https://www.v2ex.com/t/910999</link>
+      <description>&lt;p&gt;问题: Go 的范型怎么把 Response[指定类型] 转换为 Response[any].&lt;/p&gt;&#xA;&lt;p&gt;下面的示例代码在 [3] 部分进行类型转换的时候报错 cannot use rsp2 (variable of type Response[map[string]string]) as Response[any] value in assignment 。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;encoding/json&#34;&#xA;&#x9;&#34;fmt&#34;&#xA;)&#xA;&#xA;type Response[T any] struct {&#xA;&#x9;Code    int    `json:&#34;code&#34;`           // 业务逻辑相关的 code ，不是 HTTP Status Code&#xA;&#x9;Success bool   `json:&#34;success&#34;`        // 业务逻辑处理成功时为 true ，错误时为 false&#xA;&#x9;Msg     string `json:&#34;msg&#34;`            // 请求的描述&#xA;&#x9;Data    T      `json:&#34;data,omitempty&#34;` // 请求的 payload&#xA;}&#xA;&#xA;func main() {&#xA;&#xA;}&#xA;&#xA;func foo[T any]() Response[any] {&#xA;&#x9;// [1] 创建范型对象&#xA;&#x9;rsp1 := Response[map[string]string]{&#xA;&#x9;&#x9;Code:    200,&#xA;&#x9;&#x9;Success: true,&#xA;&#x9;&#x9;Data:    map[string]string{&#34;1&#34;: &#34;one&#34;, &#34;2&#34;: &#34;two&#34;},&#xA;&#x9;}&#xA;&#xA;&#x9;// [2] 范型序列化&#xA;&#x9;b, _ := json.Marshal(rsp1)&#xA;&#x9;fmt.Println(string(b))&#xA;&#xA;&#x9;// [3] 范型反序列化&#xA;&#x9;var rsp2 Response[map[string]string]&#xA;&#x9;json.Unmarshal(b, &amp;amp;rsp2)&#xA;&#x9;fmt.Printf(&#34;%+v\n&#34;, rsp2)&#xA;&#xA;&#x9;// [4] 范型向上类型转换&#xA;&#x9;// 相当于 Java 的范型用 ? 来接收任意类型的范型如&#xA;&#x9;//     List&amp;lt;String&amp;gt; list1 = new LinkedList&amp;lt;&amp;gt;();&#xA;&#x9;//     List&amp;lt;?&amp;gt; list2 = list1;&#xA;&#x9;rsp3 := Response[any]{}&#xA;&#x9;rsp3 = rsp2 // 错误: cannot use rsp2 (variable of type Response[map[string]string]) as Response[any] value in assignment&#xA;&#xA;&#x9;return rsp3&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>jorneyr</author>
+      <pubDate>28 Jan 2023 02:52:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>求推家一款做 seo 的程序。 - 程序员</title>
+      <link>https://www.v2ex.com/t/910998</link>
+      <description>&lt;p&gt;自己准备试着做一下 seo ，优化优化网站。主要还是想省时省力。最好不涉及版权。&lt;/p&gt;&#xA;</description>
+      <author>bigdaxin</author>
+      <pubDate>28 Jan 2023 02:51:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教各位 V 友，孩子几岁开始学习电脑编程基础比较好？ - 问与答</title>
+      <link>https://www.v2ex.com/t/910997</link>
+      <description>小孩子大概几岁开始接触电脑基础比较好？&lt;br /&gt;有什么推荐的比如 ：辅导班、学习班吗？&lt;br /&gt;9 岁的小朋友是不是年纪太小？</description>
+      <author>musk123</author>
+      <pubDate>28 Jan 2023 02:50:02 +0000</pubDate>
+    </item>
+    <item>
+      <title>Logi Options+ 支持 Masrer 2s 系列了 - 分享发现</title>
+      <link>https://www.v2ex.com/t/910996</link>
+      <description>&lt;p&gt;昨天重装系统发现的，应该已经支持一段时间了。使用下来还不错，UI 也有提升&lt;br/&gt;&lt;br/&gt;&lt;img alt=&#34;IMG_0391.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/01/28/cQFlV64jBUhEWpg.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>biidbiid</author>
+      <pubDate>28 Jan 2023 02:48:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>不想工作还是怎么的 - 生活</title>
+      <link>https://www.v2ex.com/t/910995</link>
+      <description>&lt;p&gt;一到放假做什么事都精神，除夕那天还去了图书馆泡了一天 背着电脑…接着那几天都早起出去了 没睡懒觉&lt;/p&gt;&#xA;&lt;p&gt;现在假期结束快 11 点了却在床上躺着 一点都不想干啥事…和以前一样 上班就不想起床…一到周末就早起 不想睡懒觉了&lt;/p&gt;&#xA;</description>
+      <author>never2023</author>
+      <pubDate>28 Jan 2023 02:47:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>第一次开车的疑问 - 问与答</title>
+      <link>https://www.v2ex.com/t/910994</link>
+      <description>&lt;p&gt;1.汽车隔音太好了咋整，只能一直开着窗吗？车外有没有麦克风啥的把外面的鸣笛声传进来？（前几天开村里的路，看不到弯后面的车，由于冬天关着窗，没听到对方鸣笛，还好我减速了，不然撞上了。吓了一跳）&lt;/p&gt;&#xA;&lt;p&gt;2.汽车 A 柱挡视野，左转的时候每次都得偏斜身子看？&lt;/p&gt;&#xA;</description>
+      <author>sadfQED2</author>
+      <pubDate>28 Jan 2023 02:45:34 +0000</pubDate>
+    </item>
+    <item>
       <title>哎，过年因为相亲的事和爸妈闹得不愉快，初三就跑了 - 生活</title>
       <link>https://www.v2ex.com/t/910993</link>
       <description>&lt;p&gt;op92 年大龄单身青年，今年 1 月 9 号请假回的家，然后开始相亲之旅。见的第一个妹子是我姑姑介绍的，99 年的，比较有感觉，然后开始追了，到了最后妹子父母堂哥堂姐全都对我比较满意（听我姑姑说的），但是追了七八天出去吃饭看电影剧本杀啥的都玩了，到了大年三十那天妹子说不想结婚，只想玩玩，只能作罢。然后大年初二见了另一个妹子，看完后我对爸妈说没感觉，我妈说我没资格挑，赶紧去追，让我约她出来玩，但是妹子微信说只想微信聊聊，我把情况说了我妈还是让我去她家玩，我就受不了开车直接回深圳了。哎，我只想愉快的过个好年，父母说的我都尽量满足，但是他们太着急了也没啥好结果，现在闹得我心里空落落的&lt;/p&gt;&#xA;</description>

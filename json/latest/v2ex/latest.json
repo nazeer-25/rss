@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Go 的范型怎么把 Response[指定类型] 转换为 Response[any] - 程序员",
+      "Link": "https://www.v2ex.com/t/910999",
+      "Description": "\u003cp\u003e问题: Go 的范型怎么把 Response[指定类型] 转换为 Response[any].\u003c/p\u003e\n\u003cp\u003e下面的示例代码在 [3] 部分进行类型转换的时候报错 cannot use rsp2 (variable of type Response[map[string]string]) as Response[any] value in assignment 。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)\n\ntype Response[T any] struct {\n\tCode    int    `json:\"code\"`           // 业务逻辑相关的 code ，不是 HTTP Status Code\n\tSuccess bool   `json:\"success\"`        // 业务逻辑处理成功时为 true ，错误时为 false\n\tMsg     string `json:\"msg\"`            // 请求的描述\n\tData    T      `json:\"data,omitempty\"` // 请求的 payload\n}\n\nfunc main() {\n\n}\n\nfunc foo[T any]() Response[any] {\n\t// [1] 创建范型对象\n\trsp1 := Response[map[string]string]{\n\t\tCode:    200,\n\t\tSuccess: true,\n\t\tData:    map[string]string{\"1\": \"one\", \"2\": \"two\"},\n\t}\n\n\t// [2] 范型序列化\n\tb, _ := json.Marshal(rsp1)\n\tfmt.Println(string(b))\n\n\t// [3] 范型反序列化\n\tvar rsp2 Response[map[string]string]\n\tjson.Unmarshal(b, \u0026amp;rsp2)\n\tfmt.Printf(\"%+v\\n\", rsp2)\n\n\t// [4] 范型向上类型转换\n\t// 相当于 Java 的范型用 ? 来接收任意类型的范型如\n\t//     List\u0026lt;String\u0026gt; list1 = new LinkedList\u0026lt;\u0026gt;();\n\t//     List\u0026lt;?\u0026gt; list2 = list1;\n\trsp3 := Response[any]{}\n\trsp3 = rsp2 // 错误: cannot use rsp2 (variable of type Response[map[string]string]) as Response[any] value in assignment\n\n\treturn rsp3\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "jorneyr",
+      "PubDate": "2023-01-28T02:52:36Z"
+    },
+    {
+      "Title": "求推家一款做 seo 的程序。 - 程序员",
+      "Link": "https://www.v2ex.com/t/910998",
+      "Description": "\u003cp\u003e自己准备试着做一下 seo ，优化优化网站。主要还是想省时省力。最好不涉及版权。\u003c/p\u003e\n",
+      "Author": "bigdaxin",
+      "PubDate": "2023-01-28T02:51:41Z"
+    },
+    {
+      "Title": "请教各位 V 友，孩子几岁开始学习电脑编程基础比较好？ - 问与答",
+      "Link": "https://www.v2ex.com/t/910997",
+      "Description": "小孩子大概几岁开始接触电脑基础比较好？\u003cbr /\u003e有什么推荐的比如 ：辅导班、学习班吗？\u003cbr /\u003e9 岁的小朋友是不是年纪太小？",
+      "Author": "musk123",
+      "PubDate": "2023-01-28T02:50:02Z"
+    },
+    {
+      "Title": "Logi Options+ 支持 Masrer 2s 系列了 - 分享发现",
+      "Link": "https://www.v2ex.com/t/910996",
+      "Description": "\u003cp\u003e昨天重装系统发现的，应该已经支持一段时间了。使用下来还不错，UI 也有提升\u003cbr/\u003e\u003cbr/\u003e\u003cimg alt=\"IMG_0391.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2023/01/28/cQFlV64jBUhEWpg.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "biidbiid",
+      "PubDate": "2023-01-28T02:48:23Z"
+    },
+    {
+      "Title": "不想工作还是怎么的 - 生活",
+      "Link": "https://www.v2ex.com/t/910995",
+      "Description": "\u003cp\u003e一到放假做什么事都精神，除夕那天还去了图书馆泡了一天 背着电脑…接着那几天都早起出去了 没睡懒觉\u003c/p\u003e\n\u003cp\u003e现在假期结束快 11 点了却在床上躺着 一点都不想干啥事…和以前一样 上班就不想起床…一到周末就早起 不想睡懒觉了\u003c/p\u003e\n",
+      "Author": "never2023",
+      "PubDate": "2023-01-28T02:47:41Z"
+    },
+    {
+      "Title": "第一次开车的疑问 - 问与答",
+      "Link": "https://www.v2ex.com/t/910994",
+      "Description": "\u003cp\u003e1.汽车隔音太好了咋整，只能一直开着窗吗？车外有没有麦克风啥的把外面的鸣笛声传进来？（前几天开村里的路，看不到弯后面的车，由于冬天关着窗，没听到对方鸣笛，还好我减速了，不然撞上了。吓了一跳）\u003c/p\u003e\n\u003cp\u003e2.汽车 A 柱挡视野，左转的时候每次都得偏斜身子看？\u003c/p\u003e\n",
+      "Author": "sadfQED2",
+      "PubDate": "2023-01-28T02:45:34Z"
+    },
+    {
       "Title": "哎，过年因为相亲的事和爸妈闹得不愉快，初三就跑了 - 生活",
       "Link": "https://www.v2ex.com/t/910993",
       "Description": "\u003cp\u003eop92 年大龄单身青年，今年 1 月 9 号请假回的家，然后开始相亲之旅。见的第一个妹子是我姑姑介绍的，99 年的，比较有感觉，然后开始追了，到了最后妹子父母堂哥堂姐全都对我比较满意（听我姑姑说的），但是追了七八天出去吃饭看电影剧本杀啥的都玩了，到了大年三十那天妹子说不想结婚，只想玩玩，只能作罢。然后大年初二见了另一个妹子，看完后我对爸妈说没感觉，我妈说我没资格挑，赶紧去追，让我约她出来玩，但是妹子微信说只想微信聊聊，我把情况说了我妈还是让我去她家玩，我就受不了开车直接回深圳了。哎，我只想愉快的过个好年，父母说的我都尽量满足，但是他们太着急了也没啥好结果，现在闹得我心里空落落的\u003c/p\u003e\n",
