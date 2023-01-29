@@ -24,7 +24,7 @@
     </item>
     <item>
       <title>新手问题，如何解决用gin做的api接口经常无响应？</title>
-      <link>https://studygolang.com/topics/16078#reply13</link>
+      <link>https://studygolang.com/topics/16078#reply14</link>
       <description>&lt;p&gt;用gin做了一些api接口，经常运行中挂掉，处于访问无响应的状态，只能重启解决。用netstat -ano查看端口状态，处于CLOSE_WAIT。用wireshark监测确实可以看到有访问进来，但是gin没有相应。这些api有些是访问数据库返回结果的，有些是访问其它外部接口再返回结果的。单独每个api都用postman测试过几千次，并无逻辑问题。但就是运行中偶发变成无响应状态，无响应状态时数据库无死锁（排除数据库问题）。起初我猜测是不是访问其它外部接口超时所致，后来访问外部接口加入了超时5秒的限制，无效。后来猜测是gin自身未设置超时，于是改成如下启动参数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&amp;amp;http.Server{&#xA;    Addr:           address,&#xA;    Handler:        router,&#xA;    ReadTimeout:    10 * time.Second,&#xA;    WriteTimeout:   10 * time.Second,&#xA;    MaxHeaderBytes: 1 &amp;lt;&amp;lt; 20,&#xA;  }&lt;/p&gt;&#xA;&#xA;&lt;p&gt;仍然无效。请问在api中访问其它外部接口有什么需要注意的地方？是否会引起gin自身无响应？如何能让gin在api请求失败后超时不影响其它访问？&#xA;求指教，新手拜谢&#xA;&lt;img src=&#34;https://static.golangjob.cn/230111/c900447c0e802a62880fd2afc44c9ce2.png&#34; alt=&#34;代码.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下面是对外访问接口时候，使用的get,post方法，加了5秒超时&#xA;&lt;img src=&#34;https://static.golangjob.cn/230115/bd7b8ebb9c266ab98c1a6d64b291d18e.png&#34; alt=&#34;get.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230115/ccd673eb6077707076ead82851dec9a4.png&#34; alt=&#34;post.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
@@ -108,6 +108,11 @@
       <title>新手求助gin包导包问题，感激不尽</title>
       <link>https://studygolang.com/topics/16099#reply5</link>
       <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230116/e8de4ae15f4523257a3f2c3da62c86b7.png&#34; alt=&#34;1.png&#34; /&gt;&#xA;&lt;img src=&#34;https://static.golangjob.cn/230116/86c5b51db9a0f2ab44606bbb926b7730.png&#34; alt=&#34;2.png&#34; /&gt;&#xA;这是报的错误&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230116/80d941f1f425ee814ac4da1a66394730.png&#34; alt=&#34;3.png&#34; /&gt;&#xA;&lt;img src=&#34;https://static.golangjob.cn/230116/b0c02287e543f39110750bc48f7a4c53.png&#34; alt=&#34;5.png&#34; /&gt;&#xA;这是环境变量&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230116/c226f660f0e7eddcf0c0612dee7522ba.png&#34; alt=&#34;4.png&#34; /&gt;&#xA;这个cmd安装的gin包&#xA;小白求救，已经被折磨两整天了&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新手问题，如何解决用gin做的api接口经常无响应？</title>
+      <link>https://studygolang.com/topics/16078#reply13</link>
+      <description>&lt;p&gt;用gin做了一些api接口，经常运行中挂掉，处于访问无响应的状态，只能重启解决。用netstat -ano查看端口状态，处于CLOSE_WAIT。用wireshark监测确实可以看到有访问进来，但是gin没有相应。这些api有些是访问数据库返回结果的，有些是访问其它外部接口再返回结果的。单独每个api都用postman测试过几千次，并无逻辑问题。但就是运行中偶发变成无响应状态，无响应状态时数据库无死锁（排除数据库问题）。起初我猜测是不是访问其它外部接口超时所致，后来访问外部接口加入了超时5秒的限制，无效。后来猜测是gin自身未设置超时，于是改成如下启动参数&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&amp;amp;http.Server{&#xA;    Addr:           address,&#xA;    Handler:        router,&#xA;    ReadTimeout:    10 * time.Second,&#xA;    WriteTimeout:   10 * time.Second,&#xA;    MaxHeaderBytes: 1 &amp;lt;&amp;lt; 20,&#xA;  }&lt;/p&gt;&#xA;&#xA;&lt;p&gt;仍然无效。请问在api中访问其它外部接口有什么需要注意的地方？是否会引起gin自身无响应？如何能让gin在api请求失败后超时不影响其它访问？&#xA;求指教，新手拜谢&#xA;&lt;img src=&#34;https://static.golangjob.cn/230111/c900447c0e802a62880fd2afc44c9ce2.png&#34; alt=&#34;代码.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下面是对外访问接口时候，使用的get,post方法，加了5秒超时&#xA;&lt;img src=&#34;https://static.golangjob.cn/230115/bd7b8ebb9c266ab98c1a6d64b291d18e.png&#34; alt=&#34;get.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230115/ccd673eb6077707076ead82851dec9a4.png&#34; alt=&#34;post.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
   </channel>
 </rss>
