@@ -32,13 +32,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "有没有人 有拼多多 自动上货软件的源代码 拿出来分享一下？或者拼多多上货助手的源代码。",
-      "Link": "https://studygolang.com/topics/16113#reply0",
-      "Description": "\u003cp\u003e如题\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "请问 xorm 使用Insert 插入数据后 怎么获取插入数据的自增长ID",
       "Link": "https://studygolang.com/topics/16115#reply3",
       "Description": "\u003cp\u003e使用 Insert 插入数据后 怎么获取插入数据的自增长ID\u003c/p\u003e\n",
@@ -56,6 +49,13 @@
       "Title": "基于 SLO 告警（Part 1）：基础概念",
       "Link": "https://studygolang.com/topics/16114#reply0",
       "Description": "\u003cp\u003e看过 Google《网站可靠性工作手册》一书的朋友都知道，该书在第一部分重点讲解了基于 SLO 的告警监控相关知识，可见基于 SLO 的监控告警依然成为一种趋势，那在实际工作中，我们该如何实施和落地 SLO 监控告警呢？\u003c/p\u003e\n\n\u003cp\u003e今天我们就来看看第一部分，基于 SLO 监控告警的一些基础概念。\u003c/p\u003e\n\n\u003ch3\u003e为什么需要基于 SLO 告警\u003c/h3\u003e\n\n\u003cp\u003e基于 SLO 告警相对于传统告警方法，它能够做到：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e告警基于具体症状（SLIs），而不是具体原因。\u003c/li\u003e\n\u003cli\u003e可以触发不同级别的告警信息（一般警告可以生成工单，严重告警直接 OnCall）。\u003c/li\u003e\n\u003cli\u003e会考虑时间和数量两个维度（特定时间的错误速率和错误数量）。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e这些能力带来的直接好处包括但不限于：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e正确的时间触发正确的告警（重要的告警可以立即触发，不重要的可以适当延迟）。\u003c/li\u003e\n\u003cli\u003e有效减少告警疲劳。\u003c/li\u003e\n\u003cli\u003e减少误报和漏报。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003e什么是 SLI\u003c/h3\u003e\n\n\u003cp\u003eSLI 全称为 Service level indicator 及服务水平指标，它是一种量化您的服务如何响应用户的方法，而我们 SLO 是完全依赖 SLI 的。\u003c/p\u003e\n\n\u003cp\u003e对于用户而言什么是好/坏的服务呢？举个例子：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e状态码 \u0026gt;= 500 可视为错误。\u003c/li\u003e\n\u003cli\u003e请求延迟 \u0026gt; 200ms 可视为错误。\u003c/li\u003e\n\u003cli\u003e进程运行非 0 状态码退出可视为错误。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e通常我们可以使用事件来衡量它：(good/bad) 数量 / total 数量。\u003c/p\u003e\n\n\u003ch3\u003e什么是 SLO\u003c/h3\u003e\n\n\u003cp\u003eSLO 全称为 Service level objective及服务水平目标。通常它是一个百分比，表示您的服务在特定时间段内可能出现多少 SLI 错误。\u003c/p\u003e\n\n\u003ch3\u003e什么是错误预算\u003c/h3\u003e\n\n\u003cp\u003e错误预算是您在特定时间段内可以拥有的错误数量，这是由 SLO 驱动的。\u003c/p\u003e\n\n\u003cp\u003e举个例子：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eSLI 错误：状态码 \u0026gt;= 500 所有请求\u003c/li\u003e\n\u003cli\u003e时间周期：30天\u003c/li\u003e\n\u003cli\u003eSLO：99.9%\u003c/li\u003e\n\u003cli\u003e错误预算：0.0999 (100-99.9)%\u003c/li\u003e\n\u003cli\u003e30 天总请求数：10000\u003c/li\u003e\n\u003cli\u003e允许的错误请求数：9.99 (10000 * 0.0999 / 100)\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e如果我们有超过 9.99 个 \u0026gt;=500 的请求响应，我们将燃烧更多的可用预算，如果我们有更少的错误，这个时间周期内的错误预算还有富余。\u003c/p\u003e\n\n\u003ch3\u003e什么是燃烧率\u003c/h3\u003e\n\n\u003cp\u003e这里燃烧率指燃烧错误预算的速度。这是基于 SLO 的告警的关键，一般我们根据多个窗口周期的不同错误预算燃烧率来进行告警。\u003c/p\u003e\n\n\u003cp\u003e不同燃烧率举例：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e1: 您在预期期间消耗了 100% 的错误预算（例如，如果 30 天，则刚好 30 天消耗完毕）\u003c/li\u003e\n\u003cli\u003e2: 您在预期期间内消耗了 200% 的错误预算（例如，如果是 30 天，则 15 天消耗完毕）。\u003c/li\u003e\n\u003cli\u003e60: 您在预期周期内消耗了 6000% 的错误预算（例如，如果周期为 30 天，则 12 小时消耗完毕）。\u003c/li\u003e\n\u003cli\u003e1080: 您在预期周期内消耗了 108000% 的错误预算（例如，如果周期为 30 天，则 40 分钟消耗完毕）。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003e什么是 ticket 和 page 告警\u003c/h3\u003e\n\n\u003cp\u003e我们一般使用多窗口、多燃烧率策略进行告警，针对不同的 SLI，不同周期不同燃烧率，我们会产生不同级别的告警信息，主要包括 ticket 和 page 两种。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003epage: 指严重告警，需要发送通知重要频道，触发 oncall 等。\u003c/li\u003e\n\u003cli\u003eticket：指一般告警，可以发送不重要的频到，生成对应工单等。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e它们触发的逻辑略有不同，page 触发速度更快，但需要更快的错误预算消耗率，而 ticket 告警的触发速度要慢一些，并且需要更低且较为恒定的错误预算消耗率。\u003c/p\u003e\n\n\u003ch3\u003e总结\u003c/h3\u003e\n\n\u003cp\u003e本文是《基于 SLO 告警》系列第 1 篇，主要讲解了 SLO 监控告警基础知识，在后面文章中我将陆续讲解其实战内容，系列文章大致分为 5 篇，欢迎大家关注。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e基于 SLO 告警（Part 1）：基础概念篇\u003c/li\u003e\n\u003cli\u003e基于 SLO 告警（Part 2）：为什么使用 MWMB 方法\u003c/li\u003e\n\u003cli\u003e基于 SLO 告警（Part 3）：开源项目 sloth 使用\u003c/li\u003e\n\u003cli\u003e基于 SLO 告警（Part 4）：开源项目 pyrra 使用\u003c/li\u003e\n\u003cli\u003e基于 SLO 告警（Part 5）：SLO 多租户与服务化\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e更多文章，请关注微信公号： \u003ca href=\"https://mp.weixin.qq.com/s/7p5IrthGqM-XcYHU2YqXmw\"\u003ehttps://mp.weixin.qq.com/s/7p5IrthGqM-XcYHU2YqXmw\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "有没有人 有拼多多 自动上货软件的源代码 拿出来分享一下？或者拼多多上货助手的源代码。",
+      "Link": "https://studygolang.com/topics/16113#reply0",
+      "Description": "\u003cp\u003e如题\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
