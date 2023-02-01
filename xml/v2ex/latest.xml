@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求教 Docker Componse 部署 mysql 配置默认密码失效 - 程序员</title>
+      <link>https://www.v2ex.com/t/912233</link>
+      <description>&lt;p&gt;想自己搭一个博客（ halo&lt;/p&gt;&#xA;&lt;p&gt;按照文档&lt;a href=&#34;https://docs.halo.run/getting-started/install/docker-compose&#34; rel=&#34;nofollow&#34; title=&#34;Halo Documents&#34;&gt;Halo Documents&lt;/a&gt;通过 docker componse 创建 Halo + MySQL 的实例。halo 启动报错，连接数据库 Access denied&lt;/p&gt;&#xA;&lt;p&gt;参考&lt;a href=&#34;https://blog.csdn.net/qq_36493719/article/details/104246271&#34; rel=&#34;nofollow&#34;&gt;https://blog.csdn.net/qq_36493719/article/details/104246271&lt;/a&gt;未解决&lt;/p&gt;&#xA;&lt;p&gt;docker-componse.yml:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;version: &#34;3&#34;&#xA;&#xA;services:&#xA;  halo:&#xA;    image: halohub/halo:2.1.0&#xA;    container_name: halo&#xA;    restart: on-failure:3&#xA;    depends_on:&#xA;      halodb:&#xA;        condition: service_healthy&#xA;    networks:&#xA;      halo_network:&#xA;    volumes:&#xA;      - ./:/root/.halo2&#xA;    ports:&#xA;      - 6666:8090&#xA;    command:&#xA;      - --spring.r2dbc.url=r2dbc:pool:mysql://xxx:3316/halo&#xA;      - --spring.r2dbc.username=root&#xA;      # MySQL 的密码，请保证与下方 MYSQL_ROOT_PASSWORD 的变量值一致。&#xA;      - --spring.r2dbc.password= halodb&#xA;      - --spring.sql.init.platform=mysql&#xA;      # 外部访问地址，请根据实际需要修改&#xA;      - --halo.external-url=http://xxx/&#xA;      # 初始化的超级管理员用户名&#xA;      - --halo.security.initializer.superadminusername=admin&#xA;      # 初始化的超级管理员密码&#xA;      - --halo.security.initializer.superadminpassword=pwd@halo&#xA;&#xA;  halodb:&#xA;    image: mysql:8.0.31&#xA;    container_name: halodb&#xA;    restart: on-failure:3&#xA;    networks:&#xA;      halo_network:&#xA;    command:&#xA;      - --default-authentication-plugin=mysql_native_password&#xA;      - --character-set-server=utf8mb4&#xA;      - --collation-server=utf8mb4_general_ci&#xA;      - --explicit_defaults_for_timestamp=true&#xA;    volumes:&#xA;      - ./mysql:/var/lib/mysql&#xA;      - ./mysqlBackup:/data/mysqlBackup&#xA;      - ./mysqlConf/my.cnf:/etc/mysql/my.cnf&#xA;    ports:&#xA;      - 3316:3306&#xA;    healthcheck:&#xA;      test: [&#34;CMD&#34;, &#34;mysqladmin&#34;, &#34;ping&#34;, &#34;-h&#34;, &#34;127.0.0.1&#34;, &#34;--silent&#34;]&#xA;      interval: 3s&#xA;      retries: 5&#xA;      start_period: 30s&#xA;    environment:&#xA;      MYSQL_ROOT_PASSWORD: halodb&#xA;      TZ: Asia/Shanghai&#xA;      MYSQL_DATABASE: halo&#xA;&#xA;networks:&#xA;  halo_network:&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>cMoon</author>
+      <pubDate>01 Feb 2023 05:57:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>挂载的磁盘断开后, 如何禁止写入目录 - 问与答</title>
+      <link>https://www.v2ex.com/t/912232</link>
+      <description>&lt;p&gt;如题：&lt;/p&gt;&#xA;&lt;p&gt;现有一个目录 /mnt/nas, 平常把一块硬盘挂载到 /mnt/nas, 每天会有数据写入 /mnt/nas&lt;/p&gt;&#xA;&lt;p&gt;请问, 当挂载的磁盘断开时, 如何禁止写入 /mnt/nas , 以避免系统盘被撑爆 ?&lt;/p&gt;&#xA;</description>
+      <author>sincerebrave</author>
+      <pubDate>01 Feb 2023 05:52:26 +0000</pubDate>
+    </item>
+    <item>
       <title>气色不好怎么改善 - 问与答</title>
       <link>https://www.v2ex.com/t/912231</link>
       <description>从小就气色不好，身体素质也感觉没有同龄人好。&lt;br /&gt;以前尝试看过中医，但是那药喝不下嘴...&lt;br /&gt;有没什么食补或运动方式，能让脸色、唇色看起来有血色一点。</description>
@@ -81,7 +95,7 @@
       <pubDate>01 Feb 2023 05:11:21 +0000</pubDate>
     </item>
     <item>
-      <title>cloudflare 已经成为我访问自由互联网的严重阻碍 - 科技</title>
+      <title>cloudflare 已经成为我访问自由互联网的严重阻碍 - 宽带症候群</title>
       <link>https://www.v2ex.com/t/912219</link>
       <description>感觉最近 2 年 cf 的屏蔽已经越来越严重了，很多网站不挂代理慢 /上不起，挂代理又可能被 cf 拦截，还要切换尝试很多节点找能用的节点，以最近火热的 chatgpt 为例，要么提示 site owner may have set restrictions ，要么就是 site owner 禁止了你的访问，但官方不大可能设置那么多限制，更大可能是被 cf 的风控策略识别为风险访问从而阻止，而现在用 cf 的网站越来越多。。。&lt;br /&gt;&lt;br /&gt;自建节点访问通过率貌似高得多，不过我平时有多个国家的访问需求，一般都是购买节点，看起来还得准备一个自建节点才够。</description>
       <author>rekulas</author>

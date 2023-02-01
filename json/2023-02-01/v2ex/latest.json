@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "求教 Docker Componse 部署 mysql 配置默认密码失效 - 程序员",
+      "Link": "https://www.v2ex.com/t/912233",
+      "Description": "\u003cp\u003e想自己搭一个博客（ halo\u003c/p\u003e\n\u003cp\u003e按照文档\u003ca href=\"https://docs.halo.run/getting-started/install/docker-compose\" rel=\"nofollow\" title=\"Halo Documents\"\u003eHalo Documents\u003c/a\u003e通过 docker componse 创建 Halo + MySQL 的实例。halo 启动报错，连接数据库 Access denied\u003c/p\u003e\n\u003cp\u003e参考\u003ca href=\"https://blog.csdn.net/qq_36493719/article/details/104246271\" rel=\"nofollow\"\u003ehttps://blog.csdn.net/qq_36493719/article/details/104246271\u003c/a\u003e未解决\u003c/p\u003e\n\u003cp\u003edocker-componse.yml:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yml\"\u003eversion: \"3\"\n\nservices:\n  halo:\n    image: halohub/halo:2.1.0\n    container_name: halo\n    restart: on-failure:3\n    depends_on:\n      halodb:\n        condition: service_healthy\n    networks:\n      halo_network:\n    volumes:\n      - ./:/root/.halo2\n    ports:\n      - 6666:8090\n    command:\n      - --spring.r2dbc.url=r2dbc:pool:mysql://xxx:3316/halo\n      - --spring.r2dbc.username=root\n      # MySQL 的密码，请保证与下方 MYSQL_ROOT_PASSWORD 的变量值一致。\n      - --spring.r2dbc.password= halodb\n      - --spring.sql.init.platform=mysql\n      # 外部访问地址，请根据实际需要修改\n      - --halo.external-url=http://xxx/\n      # 初始化的超级管理员用户名\n      - --halo.security.initializer.superadminusername=admin\n      # 初始化的超级管理员密码\n      - --halo.security.initializer.superadminpassword=pwd@halo\n\n  halodb:\n    image: mysql:8.0.31\n    container_name: halodb\n    restart: on-failure:3\n    networks:\n      halo_network:\n    command:\n      - --default-authentication-plugin=mysql_native_password\n      - --character-set-server=utf8mb4\n      - --collation-server=utf8mb4_general_ci\n      - --explicit_defaults_for_timestamp=true\n    volumes:\n      - ./mysql:/var/lib/mysql\n      - ./mysqlBackup:/data/mysqlBackup\n      - ./mysqlConf/my.cnf:/etc/mysql/my.cnf\n    ports:\n      - 3316:3306\n    healthcheck:\n      test: [\"CMD\", \"mysqladmin\", \"ping\", \"-h\", \"127.0.0.1\", \"--silent\"]\n      interval: 3s\n      retries: 5\n      start_period: 30s\n    environment:\n      MYSQL_ROOT_PASSWORD: halodb\n      TZ: Asia/Shanghai\n      MYSQL_DATABASE: halo\n\nnetworks:\n  halo_network:\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "cMoon",
+      "PubDate": "2023-02-01T05:57:00Z"
+    },
+    {
+      "Title": "挂载的磁盘断开后, 如何禁止写入目录 - 问与答",
+      "Link": "https://www.v2ex.com/t/912232",
+      "Description": "\u003cp\u003e如题：\u003c/p\u003e\n\u003cp\u003e现有一个目录 /mnt/nas, 平常把一块硬盘挂载到 /mnt/nas, 每天会有数据写入 /mnt/nas\u003c/p\u003e\n\u003cp\u003e请问, 当挂载的磁盘断开时, 如何禁止写入 /mnt/nas , 以避免系统盘被撑爆 ?\u003c/p\u003e\n",
+      "Author": "sincerebrave",
+      "PubDate": "2023-02-01T05:52:26Z"
+    },
+    {
       "Title": "气色不好怎么改善 - 问与答",
       "Link": "https://www.v2ex.com/t/912231",
       "Description": "从小就气色不好，身体素质也感觉没有同龄人好。\u003cbr /\u003e以前尝试看过中医，但是那药喝不下嘴...\u003cbr /\u003e有没什么食补或运动方式，能让脸色、唇色看起来有血色一点。",
@@ -81,7 +95,7 @@
       "PubDate": "2023-02-01T05:11:21Z"
     },
     {
-      "Title": "cloudflare 已经成为我访问自由互联网的严重阻碍 - 科技",
+      "Title": "cloudflare 已经成为我访问自由互联网的严重阻碍 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/912219",
       "Description": "感觉最近 2 年 cf 的屏蔽已经越来越严重了，很多网站不挂代理慢 /上不起，挂代理又可能被 cf 拦截，还要切换尝试很多节点找能用的节点，以最近火热的 chatgpt 为例，要么提示 site owner may have set restrictions ，要么就是 site owner 禁止了你的访问，但官方不大可能设置那么多限制，更大可能是被 cf 的风控策略识别为风险访问从而阻止，而现在用 cf 的网站越来越多。。。\u003cbr /\u003e\u003cbr /\u003e自建节点访问通过率貌似高得多，不过我平时有多个国家的访问需求，一般都是购买节点，看起来还得准备一个自建节点才够。",
       "Author": "rekulas",
