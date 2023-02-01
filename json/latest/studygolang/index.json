@@ -67,13 +67,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "优维科技入选“投资家网2022年企业服务领域创新企业Top30”榜单",
-      "Link": "https://studygolang.com/articles/36034#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "定时任务和调度的工具库 coming",
       "Link": "https://studygolang.com/topics/16033#reply1",
       "Description": "\u003ch1\u003ecoming\u003c/h1\u003e\n\n\u003cp\u003e//coming 是一个原生的任务调度系统，目前给出了定时任务和计划任务的解决方案\u003c/p\u003e\n\n\u003cp\u003e\u003cem\u003e已实现功能\u003c/em\u003e:\n1.添加定时任务\u003c/p\u003e\n\n\u003cp\u003e2.构造顺序工作链\u003c/p\u003e\n\n\u003cp\u003e3.实现暂停/重启功能\u003c/p\u003e\n\n\u003cp\u003e4.可循环执行功能，已实现，需要手动\u003c/p\u003e\n\n\u003cp\u003e任务调度\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;time\u0026quot;\n\t\n\t\u0026quot;github.com/alexanyang/coming\u0026quot;\n)\n\nfunc main() {\n\ttask := coming.NewTask()\n\ttask.Add(func(this *coming.Task, i int) error {\n\t\tfmt.Printf(\u0026quot;%s 执行第一个任务，序号：%v \\n\u0026quot;, time.Now(), i)\n\t\tthis.PushData(fmt.Sprintf(\u0026quot;第一个任务结果，序号：%v\u0026quot;, i))\n\t\ttime.Sleep(2 * time.Second)\n\t\treturn nil\n\t}).Add(func(this *coming.Task, i int) error {\n\t\tfmt.Printf(\u0026quot;%s 执行第二个任务，序号：%v \\n\u0026quot;, time.Now(), i)\n\t\tthis.PushData(fmt.Sprintf(\u0026quot;第二个任务结果，序号：%v\u0026quot;, i))\n\t\ttime.Sleep(2 * time.Second)\n\t\treturn nil\n\t}).Add(func(this *coming.Task, i int) error {\n\t\tfmt.Printf(\u0026quot;%s 执行第三个任务，序号：%v \\n\u0026quot;, time.Now(), i)\n\t\tthis.PushData(fmt.Sprintf(\u0026quot;第三个任务结果，序号：%v\u0026quot;, i))\n\t\ttime.Sleep(2 * time.Second)\n\t\treturn nil\n\t})\n\t// 检查操作是否成功\n\tif err := task.Error(); err != nil {\n\t\tfmt.Println(err)\n\t\treturn\n\t}\n\tfmt.Printf(\u0026quot;%s: 任务Start\\n\u0026quot;, time.Now())\n\tif err := task.Start(); err != nil {\n\t\tfmt.Println(err)\n\t\treturn\n\t}\n\tfmt.Printf(\u0026quot;%s: 任务数量：%v, and run\\n\u0026quot;, time.Now(), task.Len())\n\tif err := task.Run(); err != nil {\n\t\tfmt.Println(err)\n\t\treturn\n\t}\n\ttime.Sleep(1 * time.Second)\n\tfmt.Printf(\u0026quot;%s: 暂停中\\n\u0026quot;, time.Now())\n\ttask.Pause()\n\n\tgo func() {\n\t\ttime.Sleep(5 * time.Second)\n\t\tfmt.Printf(\u0026quot;%s: resume\\n\u0026quot;, time.Now())\n\t\ttask.Resume()\n\t}()\n\t//fmt.Println(\u0026quot;stop\u0026quot;)\n\t//task.Stop()\n\t//开始等待结束\n\tfmt.Printf(\u0026quot;%s: main等待执行完成 \\n\u0026quot;, time.Now())\n\ttask.WaitFinish()\n\tfmt.Printf(\u0026quot;%s: main执行完成\\n\u0026quot;, time.Now())\n\tfmt.Println(\u0026quot;获取结果回调:\u0026quot;)\n\tcall, _ := task.Call()\n\tif len(call) \u0026gt; 0 {\n\t\tfor k, v := range call {\n\t\t\tfmt.Printf(\u0026quot;结果 %v:%v \\n\u0026quot;, k, v)\n\t\t}\n\t}\n\ttime.Sleep(2 * time.Second)\n\tfmt.Println(\u0026quot;结果输出完成\u0026quot;)\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e运行定时任务\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc TestNewSchedule(t *testing.T) {\n    //ANY 分别对应时分秒,hour,minute,second\n\tcoming.NewDailySchedule(ANY, ANY, ANY,\u0026quot;每秒任务\u0026quot;, func(t time.Time) {\n    \t\tfmt.Printf(\u0026quot;现在时间是%s,定时执行中\\n\u0026quot;, t)\n    \t})  \n    //延时关闭才能看到协程输出\n    time.Sleep(5 * time.Second)\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -104,6 +97,13 @@
     {
       "Title": "实时采集日志",
       "Link": "https://studygolang.com/resources/15558#reply4",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "优维科技入选“投资家网2022年企业服务领域创新企业Top30”榜单",
+      "Link": "https://studygolang.com/articles/36034#reply0",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
