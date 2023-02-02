@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>我觉得星际穿越也不咋好看，反正整个的调调不舒服 - 生活</title>
+      <link>https://www.v2ex.com/t/912669</link>
+      <description>&lt;p&gt;很多人说球 2 堪比穿越，我是觉得穿越不比球 2 好看。虽然我觉得球 2 也一般。&#xA;老美拍过的另一部我觉得挺好看的，名字忘了，一个男的在飞船里提前醒了，然后因为孤独，弄醒了另一个女的~~&lt;/p&gt;&#xA;</description>
+      <author>eibici</author>
+      <pubDate>02 Feb 2023 10:40:40 +0000</pubDate>
+    </item>
+    <item>
       <title>为什么是 1？这行代码的结果 - 问与答</title>
       <link>https://www.v2ex.com/t/912668</link>
       <description>&lt;p&gt;简单描述下代码：&lt;/p&gt;&#xA;&lt;p&gt;static 变量 i&lt;/p&gt;&#xA;&lt;p&gt;线程 1：尝试把 i 设为 1&lt;/p&gt;&#xA;&lt;p&gt;线程 2：尝试把 i 设为 2 ，如果 i 为 1 ，print i&lt;/p&gt;&#xA;&lt;p&gt;不断运行线程 1 和 2&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;public class Main {&#xA;&#xA;    // static 变量 i&#xA;    static volatile Integer i = 0;&#xA;&#xA;    public static void main(String[] args) throws Exception {&#xA;&#xA;        // 线程 1&#xA;        Thread thread1 = new Thread(()-&amp;gt;{&#xA;            synchronized(i) {&#xA;                try {&#xA;&#xA;                    i = 1;&#xA;                    Thread.sleep(100);&#xA;                } catch (InterruptedException e) {&#xA;                    throw new RuntimeException(e);&#xA;                }&#xA;            }&#xA;        });&#xA;&#xA;        // 线程 2&#xA;        Thread thread2 = new Thread(()-&amp;gt;{&#xA;            synchronized (i) {&#xA;                try {&#xA;&#xA;                    i = 2;&#xA;                    Thread.sleep(100);&#xA;                    if (i == 1) {&#xA;                        System.out.println(&#34;1&#34;); // 实际运行结果为 1&#xA;                    }&#xA;                } catch (InterruptedException e) {&#xA;                    throw new RuntimeException(e);&#xA;                }&#xA;            }&#xA;        });&#xA;&#xA;        // 不断运行线程 1 和 2&#xA;        while (true) {&#xA;            new Thread(thread1).start();&#xA;            new Thread(thread2).start();&#xA;        }&#xA;    }&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;为什么运行的结果是 1&lt;/p&gt;&#xA;&lt;p&gt;还请各位大佬不吝赐教（抱拳），&lt;/p&gt;&#xA;&lt;p&gt;谢谢各位大哥&lt;/p&gt;&#xA;</description>

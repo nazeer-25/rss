@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "我觉得星际穿越也不咋好看，反正整个的调调不舒服 - 生活",
+      "Link": "https://www.v2ex.com/t/912669",
+      "Description": "\u003cp\u003e很多人说球 2 堪比穿越，我是觉得穿越不比球 2 好看。虽然我觉得球 2 也一般。\n老美拍过的另一部我觉得挺好看的，名字忘了，一个男的在飞船里提前醒了，然后因为孤独，弄醒了另一个女的~~\u003c/p\u003e\n",
+      "Author": "eibici",
+      "PubDate": "2023-02-02T10:40:40Z"
+    },
+    {
       "Title": "为什么是 1？这行代码的结果 - 问与答",
       "Link": "https://www.v2ex.com/t/912668",
       "Description": "\u003cp\u003e简单描述下代码：\u003c/p\u003e\n\u003cp\u003estatic 变量 i\u003c/p\u003e\n\u003cp\u003e线程 1：尝试把 i 设为 1\u003c/p\u003e\n\u003cp\u003e线程 2：尝试把 i 设为 2 ，如果 i 为 1 ，print i\u003c/p\u003e\n\u003cp\u003e不断运行线程 1 和 2\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epublic class Main {\n\n    // static 变量 i\n    static volatile Integer i = 0;\n\n    public static void main(String[] args) throws Exception {\n\n        // 线程 1\n        Thread thread1 = new Thread(()-\u0026gt;{\n            synchronized(i) {\n                try {\n\n                    i = 1;\n                    Thread.sleep(100);\n                } catch (InterruptedException e) {\n                    throw new RuntimeException(e);\n                }\n            }\n        });\n\n        // 线程 2\n        Thread thread2 = new Thread(()-\u0026gt;{\n            synchronized (i) {\n                try {\n\n                    i = 2;\n                    Thread.sleep(100);\n                    if (i == 1) {\n                        System.out.println(\"1\"); // 实际运行结果为 1\n                    }\n                } catch (InterruptedException e) {\n                    throw new RuntimeException(e);\n                }\n            }\n        });\n\n        // 不断运行线程 1 和 2\n        while (true) {\n            new Thread(thread1).start();\n            new Thread(thread2).start();\n        }\n    }\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e为什么运行的结果是 1\u003c/p\u003e\n\u003cp\u003e还请各位大佬不吝赐教（抱拳），\u003c/p\u003e\n\u003cp\u003e谢谢各位大哥\u003c/p\u003e\n",
