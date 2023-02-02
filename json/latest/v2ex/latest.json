@@ -4,7 +4,14 @@
   "Description": "",
   "Items": [
     {
-      "Title": "[Remote 工作经验] 寻求关于 如何争取 package 构成以及薪资发放 的经验 - 远程工作",
+      "Title": "[MySQL 相关]生产环境和开发环境同一条语句 explain 都不一样，以及到底走没走索引呢？ - MySQL",
+      "Link": "https://www.v2ex.com/t/912616",
+      "Description": "\u003cp\u003e源于领导让优化 sql 语句，网上搜了半天自己摸索了半天\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-mysql\"\u003eSELECT\n\ta.order_name AS \"orderName\",\n\ta.recipe_name AS \"recipeName\",\n\ta.part_no AS \"partNo\",\n\ta.part_type AS \"partType\",\n\tSUM( weight_set ) AS weightSet,\n\tSUM( weight_act ) AS weightAct,\n\ta.create_by AS \"createBy.id\",\n\ta.create_date AS \"createDate\",\n\ta.update_by AS \"updateBy.id\",\n\ta.update_date AS \"updateDate\",\n\ta.remarks AS \"remarks\",\n\ta.del_flag AS \"delFlag\" \nFROM\n\tmes_compound_component a USE index (update_date)\nWHERE\n\ta.del_flag = '0' \n\tAND a.is_invalid = '0' \n\tAND a.update_date BETWEEN \"2022-12-01 00:00:00\" AND \"2023-02-01 16:22:57\"\n\tAND a.recipe_name like \"%B-%\"\nGROUP BY\n\ta.part_no\nORDER BY\n\ta.recipe_name\n\u0026gt; OK\n\u0026gt; 查询时间: 0.934s\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是 explain 的结果是这样的\n\u003ca href=\"https://imgur.com/a/fIK5qFp\" rel=\"nofollow\"\u003e开发环境 MYSQL\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e生产环境用的 explain\n\u003ca href=\"https://imgur.com/a/qut4pkE\" rel=\"nofollow\"\u003e生产环境 MYSQL\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e开发环境：\n如果使用 force index 的话要 20s 才能查出数据，但是使用 use index 的话就是 1s 不到。用的是普通的固态硬盘\n生产环境：\n不管 force index 或者是 use index 都要 180s 左右，而且目测是机械硬盘组成的服务器。\u003c/p\u003e\n\u003cp\u003e现在想请教一下到底怎么办才可以让服务器也能优化到 20s 以内的查询？\u003c/p\u003e\n",
+      "Author": "cencoroll",
+      "PubDate": "2023-02-02T08:05:20Z"
+    },
+    {
+      "Title": "[Remote 工作经验] 寻求关于 如何争取 package 构成以及薪资发放 的经验 - 酷工作",
       "Link": "https://www.v2ex.com/t/912615",
       "Description": "\u003cp\u003e背景：\nOP 人在国内,最近跟一个北美 startup 的 CEO 聊得挺好，不过还没沟通怎么开 package 以及怎么签合同、打钱等等问题，所以来征求一些经验，如果有小伙伴们有 remote 工作的社群，也欢迎分享出来造福大家哈哈哈\u003c/p\u003e\n\u003cp\u003e对方公司的情况：\n目前就十来个人，做 AIGC 相关的 platform ，虽然已经融了两轮 seed ，但是看起来管理流程并不完善，全员在美国境内 remote ，所以估计我的这个情况他们也不知道怎么办，需要我自己提前计划好；\u003c/p\u003e\n\u003cp\u003e我的情况：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e工资发放问题：暂时没有香港卡（如果需要可以去开），不太喜欢用比特币收工资这种形式（主要是法币交易越来越紧张），所以考虑：（ 1 ）走 wise 之类的汇款，手续费挺亏的，而且不排除被今年金税四期的大棒砸到；（ 2 ）搞个境外卡，不急着换 RMB ；想征求大家的一些经验。\u003c/li\u003e\n\u003cli\u003eEquity：我理解这种 startup 一般都会在 package 里面加入相当数量的 option （画大饼），我的问题是，作为完全远程的外国人，我如果拿了这种 option ，是不是几乎没有办法保证我的权益？比如将来 cash out 或者转 RSU 等等。应该有哪些必备的法律文件用来证明我的这部分权益呢？\u003c/li\u003e\n\u003cli\u003e合同问题：如果签 full-time 的工作合同，而我并不从现在的工作离职，会存在任何法律风险吗？因为我目前是在一家国企事业单位，其实不离职也能兼顾，那我能不能当个“渣男”脚踩两只船？\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e暂时有这些疑惑，欢迎有经验的小伙伴一起讨论或是给建议\u003c/p\u003e\n",
       "Author": "cky951113",
@@ -65,13 +72,6 @@
       "Description": "公众号，欢迎关注： \u003ca target=\"_blank\" href=\"https://mp.weixin.qq.com/s/zUtILhwe7XWdR5HQrKBKTg\" rel=\"nofollow noopener\"\u003ehttps://mp.weixin.qq.com/s/zUtILhwe7XWdR5HQrKBKTg\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e毕业之后，在工作和日常中的学习，很多时候需要一个「 aware of 」的能力作为前提。整天研究学习方法，咋咋做笔记，其实大部分普通人的学习能力有差别但是不会特别夸张。\u003cbr /\u003e\u003cbr /\u003e但是如何在做事儿的过程中，意识到「这有问题」，进而触发自己的反思机制，才能总结提高，学到东西。\u003cbr /\u003e\u003cbr /\u003e比如写代码的时候有一个思想，「 don't repeat yourself 」，看到别人或者自己写的代码重复了另一个部分，立刻触发一种「浑身难受」的感觉，从而开始怀疑和反思整体架构的设计是不是合理。但你知道，很多人即便知道这句话，对此也是毫无感触的，你如果对他指出问题他也能进行修改，但是自己不会主动去 aware 。\u003cbr /\u003e\u003cbr /\u003e回到我自己身上，常年与机器打交道，对人的反应就不够敏感。跟领导汇报经常被喷，其实领导是有自己的偏好的，对错不谈，想减少挨骂的次数就要放弃自己的哲学，去领悟领导的意思；我吃了很多次亏才意识到这个问题，但敏感的人估计一两次就懂了，成为领导眼里「很机灵」的那个人了吧。\u003cbr /\u003e\u003cbr /\u003e这种开关式的触发机制，我的感觉，跟方法论的关系不是很大，你每天学习一个道理，在遇到事情的时候也未必就会触发到那条「方法论」。一方面这个跟你的审美情趣有很大关系，比如我看到代码里的重复部分，出于审美的考虑就会觉得这玩意 Ugly ；领导觉得我的代码里出现了某些触发了她的关键词就会觉得 Ugly ；那种看着不爽，浑身难受的感觉，很多时候大概是出于潜意识里的一种审美考虑。\u003cbr /\u003e\u003cbr /\u003e就像人们常说的，好的设计，一定是美的。\u003cbr /\u003e\u003cbr /\u003e所以培养审美，是很有道理，很有意义的。",
       "Author": "xiaotianhu",
       "PubDate": "2023-02-02T07:45:24Z"
-    },
-    {
-      "Title": "不知道还能顶几年,这句话有什么梗吗?被 QQ 屏蔽了 - 问与答",
-      "Link": "https://www.v2ex.com/t/912605",
-      "Description": "在群里聊天时聊到自己笔记本用了 3 年了,\"不知道还能顶几年\",然后发现这句话居然发不出去\u003cbr /\u003e尝试了很多组合,只有一个字不差发这句话,别人是看不到的(我因为用了 icalingua 提示我发送不成功,才发现的)\u003cbr /\u003e和群友想来想去没想明白这句话有什么问题需要被屏蔽,还必须是完全等于才屏蔽",
-      "Author": "yuejieyao",
-      "PubDate": "2023-02-02T07:41:45Z"
     },
     {
       "Title": "请教各位大佬关于 IOS 固件版本的升级与降级 - 问与答",
@@ -310,6 +310,13 @@
       "Description": "\u003cp\u003e1 ，Cubox\u003c/p\u003e\n\u003cp\u003e主要是网页收藏，工具类，教程相关的都放到 Cubox 里，当作自己的资料库使用，利用 tag 可以快速检索到，目前使用的是免费版，也够用了。\u003c/p\u003e\n\u003cp\u003e2 ，DS note （群晖套件）\u003c/p\u003e\n\u003cp\u003e个人笔记，主要记录自己创作的内容，或者 cubox 中收藏的有技术含量的，不随时间过时的东西，转移到 DS note 中，消化吸收，经常阅读。\u003c/p\u003e\n\u003cp\u003e3 ，Memos\u003c/p\u003e\n\u003cp\u003e自建日记类服务，主要当作日记本或者闪念胶囊使用，记录日常 get 到的知识点。\u003c/p\u003e\n\u003cp\u003e4 ，iOS 备忘录\u003c/p\u003e\n\u003cp\u003e生活类笔记，主要记录日常琐事和个人隐私类内容。\u003c/p\u003e\n",
       "Author": "Pogbag",
       "PubDate": "2023-02-02T05:54:32Z"
+    },
+    {
+      "Title": "不知道还能顶几年,这句话有什么梗吗?被 QQ 屏蔽了 - 问与答",
+      "Link": "https://www.v2ex.com/t/912605",
+      "Description": "在群里聊天时聊到自己笔记本用了 3 年了,\"不知道还能顶几年\",然后发现这句话居然发不出去\u003cbr /\u003e尝试了很多组合,只有一个字不差发这句话,别人是看不到的(我因为用了 icalingua 提示我发送不成功,才发现的)\u003cbr /\u003e和群友想来想去没想明白这句话有什么问题需要被屏蔽,还必须是完全等于才屏蔽",
+      "Author": "yuejieyao",
+      "PubDate": "2023-02-02T07:41:45Z"
     },
     {
       "Title": "相看两相厌 - 问与答",
