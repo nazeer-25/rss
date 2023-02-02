@@ -110,29 +110,5 @@
       <link>https://studygolang.com/topics/15999#reply12</link>
       <description>&lt;p&gt;【问题原因：】&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1：我在 func PP2 函数 使用map转JSON ，json.Marshal(obj) 返回[]byte 在string(str) 得到string 但是返回 客户端直接报错&#xA;，如果我直接使用 str :=&amp;ldquo;JSON信息&amp;rdquo;， 客户端调用OK。 【初步怀疑DLL服务端不能使用GO代码】，不知道有没有人遇到过这个问题。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2：原理很简单：就是 客户端吧数据传给DLL，然后DLL处理完毕，返回特定字符串我！并非整数 需要字符串返回的&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3：我听说CGO调用CString后 貌似需要 C.free是否字符串 防止内存溢出， 不知道加哪里的&lt;/p&gt;&#xA;&#xA;&lt;p&gt;dll服务端代码部分：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;&#xA;&#xA;package main&#xA;&#xA;// #include &amp;lt;stdio.h&amp;gt;&#xA;// #include &amp;lt;stdlib.h&amp;gt;&#xA;import (&#xA;&#x9;&amp;quot;C&amp;quot;&#xA;)&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;//&amp;quot;unsafe&amp;quot;&#xA;)&#xA;&#xA;//export PP2&#xA;func PP2(msg2 *C.char) *C.char {&#xA;&#x9;//只能使用str :=&amp;quot;字符串&amp;quot;，如果使用以下map组合JSON 客户端调用马上报错&#xA;&#x9;//map1 := make(map[string]string)&#xA;&#x9;//map1[&amp;quot;a&amp;quot;] = &amp;quot;1&amp;quot;&#xA;&#x9;//map1[&amp;quot;b&amp;quot;] = &amp;quot;2&amp;quot;&#xA;&#x9;//map1[&amp;quot;c&amp;quot;] = &amp;quot;3&amp;quot;&#xA;&#x9;//json1, _ := Serialize(map1)*/ //这个函数用的是json.Marshal(obj) 返回[]byte 转换后实际还是string&#xA;&#x9;//var str string = string(json1)&#xA;&#xA;&#x9;str := `{&amp;quot;a&amp;quot;:&amp;quot;111&amp;quot;,&amp;quot;b&amp;quot;:&amp;quot;2&amp;quot;,&amp;quot;c&amp;quot;:&amp;quot;3&amp;quot;}`&#xA;&#x9;msg2 = C.CString(str)&#xA;&#x9;return msg2&#xA;}&#xA;&#xA;func Serialize(obj interface{}) (b []byte, err error) {&#xA;&#x9;b, err = json.Marshal(obj)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return nil, err&#xA;&#x9;}&#xA;&#x9;return b, nil&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;调用客户端：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;func main() {&#xA;&#xA;&#x9;//重来&#xA;&#x9;dll3 := syscall.NewLazyDLL(&amp;quot;mokuai2.dll&amp;quot;)&#xA;&#xA;&#x9;f := dll3.NewProc(&amp;quot;PP2&amp;quot;)&#xA;&#xA;&#x9;r, _, _ := f.Call(uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(&amp;quot;AAAA&amp;quot;)))) //StringBytePtr&#xA;&#xA;&#x9;//获取C返回指针&#xA;&#x9;p := (*byte)(unsafe.Pointer(r))&#xA;&#xA;&#x9;data := make([]byte, 0)&#xA;&#xA;&#x9;for *p != 0 {&#xA;&#x9;&#x9;data = append(data, *p)&#xA;&#x9;&#x9;r += unsafe.Sizeof(byte(0))&#xA;&#x9;&#x9;p = (*byte)(unsafe.Pointer(r))&#xA;&#x9;}&#xA;&#xA;&#x9;name := string(data)&#xA;&#xA;&#x9;fmt.Println(name)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
-    <item>
-      <title>反射怎么通过地址修改结构体中的值</title>
-      <link>https://studygolang.com/topics/16108#reply4</link>
-      <description>&lt;pre&gt;&lt;code&gt;type student struct {&#xA;&#x9;&#x9;id           int&#xA;&#x9;&#x9;name     string&#xA;&#x9;&#x9;age     string&#xA;}&#xA;&#xA;func Inform(){&#xA;&#x9;var ss student&#xA;&#x9;ss.id = 1&#xA;&#x9;ss.name = &amp;quot;小小&amp;quot;&#xA;&#x9;ss.age = 18&#xA;&#x9;StudentData(&amp;amp;ss)  // 这里面传的是地址&#xA; &#x9;&#xA;&#x9;fmt.Println(&amp;quot;ss:&amp;quot;,ss)&#xA;}&#xA;&#xA;func StudentData(params interface{}){&#xA;&#x9;// 1：怎么通过反射获取外部传进来的结构体中的成员地址&#xA;&#x9;// 2：通过反射修改的结构体中成员的值&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;查了一晚上，如果不是结构体只是普通的变量如int之类的，那传入地址给interface后，通过反射修改值可以实现了，但是换成结构体传入地址后怎么试都不行，蒙了……&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>MyBatis内存溢出，设置的运行堆内存28G，还是溢出了~ 大家研究一下啊，程序启动运行了12个小时左右发生的</title>
-      <link>https://studygolang.com/topics/16106#reply1</link>
-      <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230119/804e272eced4c84c4bf3db75d85c8017.png&#34; alt=&#34;内存溢出-2.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230119/71618b983388bd1f4f2b33daec1c318f.png&#34; alt=&#34;内存溢出.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>请问 xorm 使用Insert 插入数据后 怎么获取插入数据的自增长ID</title>
-      <link>https://studygolang.com/topics/16115#reply2</link>
-      <description>&lt;p&gt;使用 Insert 插入数据后 怎么获取插入数据的自增长ID&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>Golang Context Package Tutorial</title>
-      <link>https://studygolang.com/resources/15559#reply0</link>
-    </item>
-    <item>
-      <title>请问 xorm 使用Insert 插入数据后 怎么获取插入数据的自增长ID</title>
-      <link>https://studygolang.com/topics/16115#reply1</link>
-      <description>&lt;p&gt;使用 Insert 插入数据后 怎么获取插入数据的自增长ID&lt;/p&gt;&#xA;</description>
-    </item>
   </channel>
 </rss>
