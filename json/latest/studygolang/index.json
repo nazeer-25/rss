@@ -18,13 +18,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Strings in Golang",
-      "Link": "https://studygolang.com/resources/15560#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "请教一下，业务中如何封装缓存+mysql的查询逻辑比较好",
       "Link": "https://studygolang.com/topics/16121#reply0",
       "Description": "\u003cp\u003e尝试写了一个demo，但是感觉不够灵活，有没有最佳实践可以参考一下？主要目的是解耦缓存逻辑与业务逻辑\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage cache\n\nimport \u0026quot;context\u0026quot;\n\n//对缓存的个性化设置，如最大空间、过期时间等如何加入，处理缓存一致性、缓存穿透等问题？\ntype Cache interface {\n\tGet(ctx context.Context, key string, ret interface{}) error\n\tSet(ctx context.Context, key string, value interface{}) error\n}\n\ntype RedisCache struct {\n\tclient int //假设是redis client\n}\n\nfunc (rc RedisCache) Get(ctx context.Context, key string, ret interface{}) error {\n\treturn nil\n}\n\nfunc (rc RedisCache) Set(ctx context.Context, key string, value interface{}) error {\n\treturn nil\n}\n\n\ntype Service struct {\n\tredis Cache\n\tgoCache Cache\n\tmysql int\n}\n\ntype mysqlGetFunc func(ctx context.Context, key string, ret interface{}) error\n\n\ntype Data1 struct {\n\n}\n\n//也可以做成一个接口\nfunc (s *Service) GetDataFunc(ctx context.Context, mf mysqlGetFunc, key string, ret interface{}, caches ... Cache) error {\n\tfor _, c := range caches {\n\t\terr := c.Get(ctx, key, \u0026amp;ret)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t//if d exist -\u0026gt; return\n\t}\n\n\terr := mf(ctx, key, \u0026amp;ret)\n\tif err != nil {\n\t\treturn err\n\t}\n\n\tfor _, c := range caches {\n\t\t//update cache\n\t\tc.Set(ctx, key, ret)\n\t}\n\n\treturn nil\n}\n\nfunc (s *Service) GetData1(ctx context.Context, key string, caches ... Cache) ([]*Data1, error){\n\n\tret := make([]*Data1, 0)\n\ts.GetDataFunc(ctx, nil /*mysql.GetData1()*/, key, \u0026amp;ret, caches...)\n\n\treturn nil, nil\n}\n\nvar _ Cache = (*RedisCache)(nil)\n\nfunc test() {\n\tservice := \u0026amp;Service{redis: RedisCache{client: 1} }\n\tservice.GetData1(context.Background(), \u0026quot;key\u0026quot;)\n\tservice.GetData1(context.Background(), \u0026quot;key\u0026quot;, service.redis)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -34,6 +27,13 @@
     {
       "Title": "1月更新！EasyOps® 28+新功能“狂飙”上线~",
       "Link": "https://studygolang.com/articles/36038#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Strings in Golang",
+      "Link": "https://studygolang.com/resources/15560#reply0",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
