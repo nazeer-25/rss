@@ -4,6 +4,69 @@
   "Description": "",
   "Items": [
     {
+      "Title": "腾讯云轻量服务器内存溢出，导致服务不可用 - 服务器",
+      "Link": "https://www.v2ex.com/t/912802",
+      "Description": "\u003cp\u003e打印日志 /var/log/messages 如下： \u003ca href=\"https://files.catbox.moe/sjktiv.txt\" rel=\"nofollow\"\u003ehttps://files.catbox.moe/sjktiv.txt\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e提交工单说是 YDservice 导致的，如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eFeb  2 15:43:43 erp kernel: YDService invoked oom-killer: gfp_mask=0x201da, order=0, oom_score_adj=0\nFeb  2 15:43:43 erp kernel: YDService cpuset=/ mems_allowed=0\nFeb  2 15:43:43 erp kernel: CPU: 3 PID: 145762 Comm: YDService Kdump: loaded Tainted: G               ------------ T 3.10.0-1160.76.1.el7.x86_64 #1\nFeb  2 15:43:43 erp kernel: Hardware name: Tencent Cloud CVM, BIOS seabios-1.9.1-qemu-project.org 04/01/2014\nFeb  2 15:43:43 erp kernel: Call Trace:\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffba5865c9\u0026gt;] dump_stack+0x19/0x1b\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffba581668\u0026gt;] dump_header+0x90/0x229\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffb9f06a42\u0026gt;] ? ktime_get_ts64+0x52/0xf0\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffb9f5e0ff\u0026gt;] ? delayacct_end+0x8f/0xb0\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffb9fc25ad\u0026gt;] oom_kill_process+0x2cd/0x490\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffb9fc1f9d\u0026gt;] ? oom_unkillable_task+0xcd/0x120\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffb9fc2c9a\u0026gt;] out_of_memory+0x31a/0x500\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffb9fc9894\u0026gt;] __alloc_pages_nodemask+0xad4/0xbe0\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffba0193b8\u0026gt;] alloc_pages_current+0x98/0x110\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffb9fbe057\u0026gt;] __page_cache_alloc+0x97/0xb0\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffb9fc1000\u0026gt;] filemap_fault+0x270/0x420\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffc0579756\u0026gt;] ext4_filemap_fault+0x36/0x50 [ext4]\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffb9fee7da\u0026gt;] __do_fault.isra.61+0x8a/0x100\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffb9feed8c\u0026gt;] do_read_fault.isra.63+0x4c/0x1b0\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffb9ff65d0\u0026gt;] handle_mm_fault+0xa20/0xfb0\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffba594653\u0026gt;] __do_page_fault+0x213/0x500\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffba594a26\u0026gt;] trace_do_page_fault+0x56/0x150\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffba593fa2\u0026gt;] do_async_page_fault+0x22/0xf0\nFeb  2 15:43:43 erp kernel: [\u0026lt;ffffffffba5907a8\u0026gt;] async_page_fault+0x28/0x30\nFeb  2 15:43:43 erp kernel: Mem-Info:\nFeb  2 15:43:43 erp kernel: active_anon:1066364 inactive_anon:702010 isolated_anon:0#012 active_file:7190 inactive_file:13796 isolated_file:0#012 unevictable:0 dirty:7 writeback:1 unstable:0#012 slab_reclaimable:22147 slab_unreclaimable:31150#012 mapped:1269 shmem:162 pagetables:32924 bounce:0#012 free:26222 free_pcp:963 free_cma:0\nFeb  2 15:43:43 erp kernel: Node 0 DMA free:15892kB min:132kB low:164kB high:196kB active_anon:0kB inactive_anon:0kB active_file:0kB inactive_file:0kB unevictable:0kB isolated(anon):0kB isolated(file):0kB present:15992kB managed:15908kB mlocked:0kB dirty:0kB writeback:0kB mapped:0kB shmem:0kB slab_reclaimable:0kB slab_unreclaimable:16kB kernel_stack:0kB pagetables:0kB unstable:0kB bounce:0kB free_pcp:0kB local_pcp:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:0 all_unreclaimable? yes\nFeb  2 15:43:43 erp kernel: lowmem_reserve[]: 0 2830 7802 7802\nFeb  2 15:43:43 erp kernel: Node 0 DMA32 free:53216kB min:24468kB low:30584kB high:36700kB active_anon:1178284kB inactive_anon:1309888kB active_file:18644kB inactive_file:30232kB unevictable:0kB isolated(anon):0kB isolated(file):0kB present:3129208kB managed:2898776kB mlocked:0kB dirty:24kB writeback:4kB mapped:3624kB shmem:164kB slab_reclaimable:47604kB slab_unreclaimable:66460kB kernel_stack:28704kB pagetables:51644kB unstable:0kB bounce:0kB free_pcp:2120kB local_pcp:364kB free_cma:0kB writeback_tmp:0kB pages_scanned:5386 all_unreclaimable? no\nFeb  2 15:43:43 erp kernel: lowmem_reserve[]: 0 0 4971 4971\nFeb  2 15:43:43 erp kernel: Node 0 Normal free:44576kB min:42976kB low:53720kB high:64464kB active_anon:3087172kB inactive_anon:1498152kB active_file:10632kB inactive_file:21084kB unevictable:0kB isolated(anon):0kB isolated(file):0kB present:5242880kB managed:5093932kB mlocked:0kB dirty:4kB writeback:0kB mapped:1452kB shmem:484kB slab_reclaimable:40984kB slab_unreclaimable:58124kB kernel_stack:72672kB pagetables:80052kB unstable:0kB bounce:0kB free_pcp:2024kB local_pcp:240kB free_cma:0kB writeback_tmp:0kB pages_scanned:35383 all_unreclaimable? no\nFeb  2 15:43:43 erp kernel: lowmem_reserve[]: 0 0 0 0\nFeb  2 15:43:43 erp kernel: Node 0 DMA: 1*4kB (U) 0*8kB 1*16kB (U) 0*32kB 2*64kB (U) 1*128kB (U) 1*256kB (U) 0*512kB 1*1024kB (U) 1*2048kB (M) 3*4096kB (M) = 15892kB\nFeb  2 15:43:43 erp kernel: Node 0 DMA32: 2633*4kB (UEM) 302*8kB (UEM) 485*16kB (UEM) 451*32kB (EM) 155*64kB (EM) 66*128kB (UEM) 5*256kB (E) 0*512kB 0*1024kB 0*2048kB 0*4096kB = 54788kB\nFeb  2 15:43:43 erp kernel: Node 0 Normal: 787*4kB (UEM) 804*8kB (UEM) 854*16kB (UEM) 328*32kB (UEM) 134*64kB (UEM) 19*128kB (EM) 0*256kB 0*512kB 0*1024kB 0*2048kB 0*4096kB = 44748kB\nFeb  2 15:43:43 erp kernel: Node 0 hugepages_total=0 hugepages_free=0 hugepages_surp=0 hugepages_size=1048576kB\nFeb  2 15:43:43 erp kernel: Node 0 hugepages_total=0 hugepages_free=0 hugepages_surp=0 hugepages_size=2048kB\nFeb  2 15:43:43 erp kernel: 26945 total pagecache pages\nFeb  2 15:43:43 erp kernel: 6381 pages in swap cache\nFeb  2 15:43:43 erp kernel: Swap cache stats: add 7984839, delete 7978489, find 45854679/47861074\nFeb  2 15:43:43 erp kernel: Free swap  = 0kB\nFeb  2 15:43:43 erp kernel: Total swap = 4194300kB\nFeb  2 15:43:43 erp kernel: 2097020 pages RAM\nFeb  2 15:43:43 erp kernel: 0 pages HighMem/MovableOnly\nFeb  2 15:43:43 erp kernel: 94866 pages reserved\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e看不太明白，请教下是 YDservice 导致的，还是 chrome 进程（日志文件中）太多导致的？\u003c/p\u003e\n",
+      "Author": "s609926202",
+      "PubDate": "2023-02-03T02:54:49Z"
+    },
+    {
+      "Title": "html5 手机网页如何模拟内存溢出，或者崩溃。 - 程序员",
+      "Link": "https://www.v2ex.com/t/912801",
+      "Description": "\u003cp\u003e我使用 const array = new ArrayBuffer(1024 * 1024 * 2000) 好像模拟不出来。\u003c/p\u003e\n",
+      "Author": "jeesk",
+      "PubDate": "2023-02-03T02:50:02Z"
+    },
+    {
+      "Title": "被欠薪了，公司的操作合法吗？ - 酷工作",
+      "Link": "https://www.v2ex.com/t/912800",
+      "Description": "背景：我司 22 年来经营不善，项目一直没有回款，从 22 年 9 月开始每月只发半薪（当时说后面会补，但目前一直没下落，问了说不知道），春节回来通知从 23 年 1 月开始都先只发半薪，剩下的根据公司的营收决定是否发放，以及发放多少。\u003cbr /\u003e\u003cbr /\u003e求助：22 年欠的钱怎么才能要回来？ 23 年的新规目前没有公司发文以及公告是否合法？如果不合法，该怎么维护自己的权益？",
+      "Author": "alen0206",
+      "PubDate": "2023-02-03T02:47:46Z"
+    },
+    {
+      "Title": "大佬们 如何保持一个 软件在 windows 后台运行 比如 动态解析软件 ddns go - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/912799",
+      "Description": "\u003cp\u003e如何保持 软件在 windows 后台一直运行  开机自动启动 并且一直在后台运行  \u003c/p\u003e\n\u003cp\u003e比如  动态解析软件  ddns go  \u003c/p\u003e\n\u003cp\u003e感谢回复\u003c/p\u003e\n",
+      "Author": "testing668",
+      "PubDate": "2023-02-03T02:43:55Z"
+    },
+    {
+      "Title": "问下关于前端怎么根据值来生成对应的颜色 - JavaScript",
+      "Link": "https://www.v2ex.com/t/912798",
+      "Description": "\u003cp\u003e0 分表示 green\n10 分表示 red\n现在想通过给一个任意的 0-10 的之间的分值如 3.6 返回 color 到 green 中间的 16 进制色值\n想问问大佬这个该怎么实现\u003c/p\u003e\n",
+      "Author": "allisone",
+      "PubDate": "2023-02-03T02:42:50Z"
+    },
+    {
+      "Title": "aws IAM 和 root 用户的问题？ - 程序员",
+      "Link": "https://www.v2ex.com/t/912797",
+      "Description": "\u003cp\u003e使用 IAM 用户创建的 ec2 ，root 用户直接有权限进入吗？\u003c/p\u003e\n",
+      "Author": "deweixu",
+      "PubDate": "2023-02-03T02:42:20Z"
+    },
+    {
+      "Title": "FFF - 通用 \u0026 高扩展性的 Front Matter 参数格式 - 分享创造",
+      "Link": "https://www.v2ex.com/t/912796",
+      "Description": "\u003cp\u003e\u003ca href=\"https://fff.js.org\" rel=\"nofollow\"\u003e文档\u003c/a\u003e | \u003ca href=\"https://github.com/importantimport/fff\" rel=\"nofollow\"\u003eGitHub\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e感觉各家 Front Matter 都太过简单——所以我写了一个足够复杂的，就是这样。\u003c/p\u003e\n\u003ch2\u003e特点\u003c/h2\u003e\n\u003cp\u003e命名我参考了 \u003ca href=\"https://microformats.org/wiki/microformats2\" rel=\"nofollow\"\u003emicroformats2\u003c/a\u003e 和 \u003ca href=\"https://jsonfeed.org/version/1.1\" rel=\"nofollow\"\u003eJSON Feed\u003c/a\u003e，同时用下划线作为分隔符（而不是在 YAML 看起来很别扭的 camelCase ），看起来会规整一些。\u003c/p\u003e\n\u003ch3\u003e与 microformats2 兼容\u003c/h3\u003e\n\u003cp\u003e例如 \u003ccode\u003ebookmark_of\u003c/code\u003e, \u003ccode\u003elike_of\u003c/code\u003e, \u003ccode\u003erepost_of\u003c/code\u003e, \u003ccode\u003ein_reply_to\u003c/code\u003e 四种提及类型... 懒得写了，可以在文档里看\u003c/p\u003e\n\u003ch3\u003eflags\u003c/h3\u003e\n\u003cp\u003e\u003cdel\u003e立 flag\u003c/del\u003e 灵感源于 \u003ccode\u003echrome://flags\u003c/code\u003e。可以减少需要额外定义的变量：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yaml\"\u003e# before\ndraft: true\nvisibility: 'unlisted'\n\n# after\nflags:\n  - draft\n  - unlisted\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e对象媒体\u003c/h3\u003e\n\u003cp\u003e为媒体文件如 \u003ccode\u003eimage\u003c/code\u003e 提供了接近 HTML 的扩展性，同时也支持仅 \u003ccode\u003esrc\u003c/code\u003e 的简洁格式。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yaml\"\u003e# string\nimage: 'https://fff.local/images/foo.avif'\n\n# object\nimage:\n  src: 'https://fff.local/images/foo.avif'\n  alt: 'lorem ipsum'\n  figcaption: 'lorem ipsum'\n  sources:\n    - srcset: 'https://fff.local/images/foo444.avif'\n      media: '(min-width:444px)'\n    - srcset: 'https://fff.local/images/foo666.avif'\n      media: '(min-width:666px)'\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e包\u003c/h2\u003e\n\u003ch3\u003e\u003ccode\u003efff-flavored-frontmatter\u003c/code\u003e\u003c/h3\u003e\n\u003cp\u003e类型定义和一些工具函数，比如帖文类型发现和转换为对应的 JSON Feed 对象\u003c/p\u003e\n\u003ch3\u003e\u003ccode\u003eremark-fff\u003c/code\u003e\u003c/h3\u003e\n\u003cp\u003eRemark 插件，用于将其他 SSG 的 Front Matter 转换为 FFF\u003c/p\u003e\n\u003cp\u003e目前支持 \u003ca href=\"https://mdsvex.com\" rel=\"nofollow\"\u003eMDsveX\u003c/a\u003e (Svelte / SvelteKit) 和 \u003ca href=\"https://astro.build\" rel=\"nofollow\"\u003eAstro\u003c/a\u003e，之后会兼容更多环境\u003c/p\u003e\n\u003ch3\u003e\u003ccode\u003emarkdown-it-fff\u003c/code\u003e\u003c/h3\u003e\n\u003cp\u003e上面插件的 Markdown-It 版本，需要配合 \u003ccode\u003e@mdit-vue/plugin-frontmatter\u003c/code\u003e 食用\u003c/p\u003e\n\u003ch3\u003e\u003ccode\u003eindiekit-preset-fff\u003c/code\u003e\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://getindiekit.com\" rel=\"nofollow\"\u003eIndiekit\u003c/a\u003e 的 FFF 预设，默认 postTypes 为 Urara\u003c/p\u003e\n",
+      "Author": "M9l7chlLGv",
+      "PubDate": "2023-02-03T02:42:17Z"
+    },
+    {
+      "Title": "大家关于 Damus 有啥看法，这个可以取代电报吗？ - 分享发现",
+      "Link": "https://www.v2ex.com/t/912795",
+      "Description": "如题。\u003cbr /\u003e不知道大家有些什么想法。\u003cbr /\u003enpub14dls9f9g04nx08wpymjgeh4f0dhdexpr2zukmpgx0300kdv9cyzqm3yf8l",
+      "Author": "yyyh",
+      "PubDate": "2023-02-03T02:35:15Z"
+    },
+    {
+      "Title": "apple watch 使用华为表带 -  WATCH",
+      "Link": "https://www.v2ex.com/t/912794",
+      "Description": "这段时间看了下市面上的表带，大概分成了这几种：\u003cbr /\u003e\u003cbr /\u003e三方皮革表带：很多主打手工制作、同款皮料，大多模仿爱马仕，价格 150 及以上，做得稍好的甚至有溢价；\u003cbr /\u003e官方老款方扣：最感兴趣的，淘宝里有部分库存，真假难辨，如果买来能临时用用，后面能把五金拆下来再利用当然也可以；\u003cbr /\u003e官方皮革回环：这玩意儿用了皮革，但跟皮革表带似乎又没啥关系，不喜欢；\u003cbr /\u003e官方现代风扣：实体店看过，不适配 45mm ，不喜欢（而且看起来很单薄，很容易断的样子）；\u003cbr /\u003e\u003cbr /\u003e后面在 B 站看到有人介绍用带生耳的连接器，直接使用华为表带，所以我也试了下。\u003cbr /\u003e表带感觉比之前买的第三方的好不少，但是连接器仍然是淘宝买的，精度太差，只能临时用用，如果有靠谱的连接器就好了，上手效果感觉挺好，选择范围也多了。\u003cbr /\u003e有些仿官方连接器出现了螺丝掉落的情况，这种生耳感觉更稳，可惜目前没找到质量过硬的。\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/R2n8O7K.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/R2n8O7K.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/4PlkOvy.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/4PlkOvy.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e",
+      "Author": "o0",
+      "PubDate": "2023-02-03T02:33:27Z"
+    },
+    {
       "Title": "纠结是入手 M2 Pro 的 Mac mini 还是 M1 Max 的 Mac Studio - Apple",
       "Link": "https://www.v2ex.com/t/912793",
       "Description": "\u003cp\u003e主要需求是剪视频，也会做一些自娱自乐的 Unity 2D 项目。\n在 YouTube 上看了 M1 Max 的 Mac Studio 和 M2 Pro 的 Mac mini 的对比，M2 Pro 竟然在某些对比中能胜过 M1 Max ，在另一些对比中也能不相上下。\n考虑到 Mac mini 加内存到 32g 之后也和基础款 Mac studio 基本差不多价格了，在这两者间有点犹豫。虽然感觉 Mac studio 多了很多接口很方便，但是又有点害怕苹果下半年出个 M2 的 Mac studio 。\n各位有什么建议吗？\u003c/p\u003e\n",
