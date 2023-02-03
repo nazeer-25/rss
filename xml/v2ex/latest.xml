@@ -4,6 +4,62 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>纠结是入手 M2 Pro 的 Mac mini 还是 M1 Max 的 Mac Studio - Apple</title>
+      <link>https://www.v2ex.com/t/912793</link>
+      <description>&lt;p&gt;主要需求是剪视频，也会做一些自娱自乐的 Unity 2D 项目。&#xA;在 YouTube 上看了 M1 Max 的 Mac Studio 和 M2 Pro 的 Mac mini 的对比，M2 Pro 竟然在某些对比中能胜过 M1 Max ，在另一些对比中也能不相上下。&#xA;考虑到 Mac mini 加内存到 32g 之后也和基础款 Mac studio 基本差不多价格了，在这两者间有点犹豫。虽然感觉 Mac studio 多了很多接口很方便，但是又有点害怕苹果下半年出个 M2 的 Mac studio 。&#xA;各位有什么建议吗？&lt;/p&gt;&#xA;</description>
+      <author>esrkforward</author>
+      <pubDate>03 Feb 2023 02:27:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>Mysql 查询写入时对表级所的疑问 - MySQL</title>
+      <link>https://www.v2ex.com/t/912792</link>
+      <description>&lt;p&gt;业务：第三方回调，同时会 post 多条过来，为防重复插入，加事务表级锁。&lt;/p&gt;&#xA;&lt;p&gt;假设有表如下：&lt;code&gt;a, b, c&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;处理函数如下。结果在查表 c 时，报错 &lt;code&gt;1100 Table &#39;c&#39; was not locked with LOCK TABLES&lt;/code&gt;，事务不是在 fun2 里就已经处理完毕了吗，为何还会出现这个提示？&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;function fun()&#xA;{&#xA;&#x9;if (xxx) {&#xA;    &#x9;fun2();&#xA;    }&#xA;    &#xA;    // 查表 c&#xA;    $db-&amp;gt;query(&#34;select * from c&#34;);&#xA;}&#xA;&#xA;// 事务查询，表级锁&#xA;function fun2()&#xA;{&#xA;&#x9;$db-&amp;gt;startTrans();&#xA;    $db-&amp;gt;execute(&#34;LOCK TABLE a WRITE, b WRITE, c READ;&#34;);&#xA;    $db-&amp;gt;query(&#34;select * from a&#34;);&#xA;    $db-&amp;gt;query(&#34;select * from b&#34;);&#xA;    $db-&amp;gt;execute(&#34;update a set name = &#39;xx&#39; where ...&#34;);&#xA;    $db-&amp;gt;commit();&#xA;&#x9;$db-&amp;gt;execute(&#34;UNLOCK TABLES;&#34;);&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>s609926202</author>
+      <pubDate>03 Feb 2023 02:23:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>求一款可以设置规则或关闭 ipv6 防火墙的路由器 - 硬件</title>
+      <link>https://www.v2ex.com/t/912791</link>
+      <description>&lt;p&gt;搭建家庭服务器，准备配置 ipv6 外网访问，光猫设置了桥接，奈何自用的小米路由器不支持关闭 ipv6 防火墙，京东上有不带防火墙的路由器，但是不知道是不是默认允许 ipv6 入站。预算 200 左右。&lt;/p&gt;&#xA;</description>
+      <author>yuewenjie</author>
+      <pubDate>03 Feb 2023 02:21:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>《云数据库是不是智商税？》 - 分享发现</title>
+      <link>https://www.v2ex.com/t/912790</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/c8bpK4o3H7-EyRqVdNDndQ&#34; rel=&#34;nofollow&#34;&gt;https://mp.weixin.qq.com/s/c8bpK4o3H7-EyRqVdNDndQ&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;摘抄一些：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;公有云的秘密就在这里：用廉价的存算资源获客，用云数据库杀猪。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;在我职业生涯的第一站中，一次杀猪经历让我记忆犹新：作为前几个被逼上 A 云的内部 BU ，A 云直接出工程师加入手把手提供上云服务。用 ODPS 全家桶换掉了自建的大数据 /数据库全家桶。应该说服务确实不错，只不过每年的存储计算开销从千万出头飙升到接近一亿，利润几乎都转移到 A 云了。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;确实，有时候云厂商会提供性能足够好的本地的 NVME SSD ，但都会非常鸡贼的设定各种限制条件，来避免用户来使用 EC2 来自建数据库。AWS 的限制方式是 ephemeral storage ，这种本地盘一旦遇上 EC2 重启就自动抹干净了。阿里云的限制方式是给你卖天价，例如 ESSD PL3 定价为 38.4 ¥ / GB·年，一块 3.2TB 的磁盘用一年要收 12 万，好家伙，用一年这钱够你买 20 块这样的磁盘了。所以在成本上，无论是 RDS 本体还是存储，都是纯纯的杀猪智商税。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;所以，云厂商赚的钱，要么是 VC 投出来的朝不保夕的科技创企，要么是信息不对称人傻钱多的大户，要么是灰色空间比云溢价还高的特殊单位，要么是个人站长 /学生 /VPN 用户。聪明的高净值客户，谁会放着便宜舒适的大 House 不住，跑去挤着租住方舱医院人才公寓呢？&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>azuginnen</author>
+      <pubDate>03 Feb 2023 02:20:32 +0000</pubDate>
+    </item>
+    <item>
+      <title>能解析域名 ping 通服务器但无法访问是不是运营商搞的鬼 - 问与答</title>
+      <link>https://www.v2ex.com/t/912789</link>
+      <description>不同网络环境和 dns 下测试，蜂窝网络下 ping 出 ip 和 wifi 下一致，延时高出很多，访问 80 及其他端口皆失败，nginx 未收到请求，测试了同机房的同 ip 段服务器结果都一样。&lt;br /&gt;域名和 ip 都没有 dns 污染，且多地区检测之后极少数地区运营商下出现这个情况，有什么解决办法？</description>
+      <author>kaiki</author>
+      <pubDate>03 Feb 2023 02:18:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于不交社保的一些设想，请大家研讨一下 - 问与答</title>
+      <link>https://www.v2ex.com/t/912787</link>
+      <description>写在最开始：这个想法和方案呢，纯为我自己考虑，或者说起码不是给有户口等方面影响的城市所设想的。但其他很多城市应该也是可以参考的。&lt;br /&gt;&lt;br /&gt;个人情况简介：本人今年 30 周岁。上海工作了几年回家发展（ 2 线中游城市吧）。在上海交了几年社保，回家到现在为止应该有四五年了，交了大概不到 2 年社保（当时在单位上班）。目前自己开小公司创业，距离上一次交社保应该有 2 年 gap 了。&lt;br /&gt;&lt;br /&gt;本设想的一些现实依据以及对未来的判断：&lt;br /&gt;1 、如果交社保，因为我只是开个小公司所以理论上来说，个人和公司部分都是我承担的，所以我按 1300/月来计算。&lt;br /&gt;&lt;br /&gt;2 、根据最新的政策，以及全球的趋势，退休年龄肯定会越来越迟。所以我按 65 周岁计算，我还需要交 35 年社保。&lt;br /&gt;&lt;br /&gt;3 、我对未来的判断，现在社会发展的速度非常快（以前可能 10-20 年不会有大变动，但现在 3-5 年就翻天覆地）加上老龄化日益凸显，所以我分析社保政策以及我退休以后享受到的政策肯定比现在有变化，且大概率是比现在差的。&lt;br /&gt;&lt;br /&gt;4 、我计划每个月拿出 1300-1500 来定投黄金（至于为什么不选其他金融产品，这个就不过多讨论了吧，大概的原因就是我们这个世界货币体系是金本位，其余钞票货币都只是符号而已，或许定投 30 年基金也能赚很多，但这需要有一定的投资经验，不适用于大部分人，且这项投资最关键是求稳，黄金我认为是有这个能力的）。&lt;br /&gt;&lt;br /&gt;5 、这么计算下来，到我退休我共计需要交 55-60W 人民币的社保。&lt;br /&gt;&lt;br /&gt;分析下交不交的利弊。&lt;br /&gt;&lt;br /&gt;交社保：&lt;br /&gt;好处：&lt;br /&gt;1 、很高比例的住院报销，这也是我目前最纠结的点。&lt;br /&gt;2 、每个月可以有一定的医保卡余额来买药，也就相当于现金了，毕竟头疼感冒是肯定会有的。&lt;br /&gt;3 、其余的工伤 /生育 /失业说实话，在我看来聊胜于无。&lt;br /&gt;4 、退休以后每个月可以领到一笔退休金。关于退休金，我目前身边亲戚退休，交的社保年限不高也不低的，大概在 2300-2700 这个区间（刚退休三五年后面还会慢慢涨），因为我如果目前交社保，我认为基本最后退休了计算下来应该也是在这个区间，所以我按这个退休金在目前社会通胀以及我的城市和我个人家庭消费水准来判断，对我来说基本就是零花钱，也就是说，聊胜于无。当然，这并不代表说我是富二代或者怎么样，只是现在一个月 2000 多，实在算不上多吧？不要杠什么最低标准的什么的，咱就按用着 iphone ，电脑用 macbook ，汽油加 95 的个人和家庭来说。&lt;br /&gt;&lt;br /&gt;缺点：&lt;br /&gt;1 、我个人对退休政策以及未来世界整体 [养老金] 的发展趋势持悲观态度，我认为最后可能是赔的。&lt;br /&gt;2 、在国家看来我是无业状态，在办信用卡等一些情景下会有影响。&lt;br /&gt;3 、活到 100 岁的话，可能领的退休金是多的。。。&lt;br /&gt;4 、住院所有的费用自己全额支付。&lt;br /&gt;&lt;br /&gt;我整合了一下我的需求，不求赚只要不赔就行，所以：&lt;br /&gt;55-60W 元的本金定投黄金，从 30 岁到死住院看病够不够。&lt;br /&gt;我们家没什么遗传病，爷爷奶奶姥姥姥爷身体都挺好的，我身体虽然算不上多健壮，起码没什么常年的病。&lt;br /&gt;&lt;br /&gt;各位彦祖们怎么看？（此贴并非针对最近的政策新闻，而是因为我一直没交社保所以早有这个想法）</description>
+      <author>Milicense</author>
+      <pubDate>03 Feb 2023 02:10:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>悄然兴起全职开源工作者薪酬竞争力完全不输职业软件工程师 - 程序员</title>
+      <link>https://www.v2ex.com/t/912786</link>
+      <description>&lt;p&gt;越来越多的开源项目流失优秀的研发，于是全职开源维护者变成了悄然兴起的职业。Google Go 工程师去年前辞去工作尝试转行成为全职开源工作者，并同时为需要专业开源维护者的企业服务，报酬总额和 Google 工作相当。甚至可以自己选择客户。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;阅读全文：&lt;a href=&#34;https://words.filippo.io/full-time-maintainer/&#34; rel=&#34;nofollow&#34;&gt;I’M NOW A FULL-TIME PROFESSIONAL OPEN SOURCE MAINTAINER&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://unbug.github.io/&#34; rel=&#34;nofollow&#34;&gt;「一分钟读论文」用学术打造你的思维。&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;</description>
+      <author>Micropaper</author>
+      <pubDate>03 Feb 2023 02:04:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>有什么软件能模拟 http 接口访问不稳定的情况？ - 问与答</title>
+      <link>https://www.v2ex.com/t/912785</link>
+      <description>&lt;p&gt;目前做的项目需要大量调用另外一个系统的 http 接口获取数据，&lt;br/&gt;&#xA;由于系统设计缺陷，一次获取数据调用接口次数非常大。&lt;br/&gt;&#xA;对方系统忙的时候，偶尔会返回 502 错误。&lt;br/&gt;&#xA;我这边做了接口调用异常的处理，不过目前没办法测试，最近测试的时候，对方返回都是正常的。&lt;br/&gt;&#xA;对方系统已经成型，我这边无法控制  &lt;/p&gt;&#xA;&lt;p&gt;我在想有没有这样的软件，能代理我的访问，按配置概率随机返回一些错误码，其他时候返回正确的访问结果。&#xA;希望各位赐教。&lt;/p&gt;&#xA;</description>
+      <author>piaochen0</author>
+      <pubDate>03 Feb 2023 02:04:50 +0000</pubDate>
+    </item>
+    <item>
       <title>关于啃老这件事 - 问与答</title>
       <link>https://www.v2ex.com/t/912784</link>
       <description>&lt;p&gt;我有个朋友。  &lt;/p&gt;&#xA;&lt;p&gt;苏北人，最近想买车。原先预算是 15w 左右，但是由于最近特斯拉狂降价，有点想买 modelY 。  &lt;/p&gt;&#xA;&lt;p&gt;但是买车的钱自己只能出 10%，剩下的 90%都得爸妈来承担，他现在很纠结，觉得给家里人的压力太大了，因为他爸妈已经为他在苏南某发达城市购置了新房，目前正在装修（装修钱也是爸妈出）。  &lt;/p&gt;&#xA;&lt;p&gt;还有一个细节，他已经跟他爸妈开过口了，爸妈表示你想买就买。  &lt;/p&gt;&#xA;&lt;p&gt;想听听大家的意见，到底是满足自己的欲望还是为父母考虑，尽这份孝道。&lt;/p&gt;&#xA;</description>
