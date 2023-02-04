@@ -25,6 +25,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "一款golang编写的开源的分布式锁 支持redis/zookeeper/etcd 实现",
+      "Link": "https://studygolang.com/topics/16119#reply1",
+      "Description": "\u003ch2\u003edistributed-lock\u003c/h2\u003e\n\n\u003ch3\u003e介绍\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e可以指定redis/etcd/zookeeper实现\u003c/li\u003e\n\u003cli\u003eredis的实现使用了lua脚本加解锁、watch机制续约锁、并且参考了redission用频道通知获取锁失败的客户端，减轻了redis的压力\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/chuckchann/distributed-lock\"\u003egithub连接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "从源码自己编译一个golang玩玩",
+      "Link": "https://studygolang.com/articles/36036#reply1",
+      "Description": "\u003cp\u003e今天在编译一个“东西”居然提示一个错误\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003elinux_amd64/link: running gcc failed: exit status 1\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e网上有人说，这个可能是 gcc的版本与 golang 之前编译的版本不一样导致，建议自己用本机环境编译golang源码。于是在  go.dev上面下载了最新的源码 go1.20(昨天看还在rc，今天已经正式发布了，庆祝一下）到本机。解压之后进入其目录，准备编译；操作如下\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003ewget https://go.dev/dl/go1.20.src.tar.gz\ntar zxvf go1.20.src.tar.gz\ncd go/src\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230202/15d3ea64fc2b441fbb66f5fa3280c94d.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e经过一段时间的等待后：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e##### ../misc/cgo/testgodefs\nPASS\n\n##### ../misc/cgo/testso\nok  \tmisc/cgo/testso\t0.718s\n\n##### ../misc/cgo/testsovar\nok  \tmisc/cgo/testsovar\t0.720s\n\n##### ../misc/cgo/testcarchive\nSKIP - short mode and $GO_BUILDER_NAME not set\n\n##### ../misc/cgo/testcshared\nSKIP - short mode and $GO_BUILDER_NAME not set\n\n##### ../misc/cgo/testshared\nok  \tmisc/cgo/testshared\t28.882s\n\n##### ../misc/cgo/testplugin\nok  \tmisc/cgo/testplugin\t0.001s\n\n##### ../misc/cgo/testsanitizers\nPASS\n\n##### ../misc/cgo/errors\nPASS\n\n##### ../test/bench/go1\nok  \ttest/bench/go1\t0.028s [no tests to run]\n\n##### ../test\n\n##### cmd/api\nok  \tcmd/api\t41.140s\n\nALL TESTS PASSED\n---\nInstalled Go for linux/amd64 in /home/simon/src/go\nInstalled commands in /home/simon/src/go/bin\n*** You need to add /home/simon/src/go/bin to your PATH.\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e全部正常 pass 居然一次编译成功了。可见golang的源码真是很了不起，估计是对诸多环境做了校验。\u003c/p\u003e\n\n\u003cp\u003e接着把他配置到 系统当中，运行 go env 正常。\u003c/p\u003e\n\n\u003cp\u003e然后回到之前编译失败的软件，继续\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003emake geth\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e也是一路绿灯，成功了 ！\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "1月更新！EasyOps® 28+新功能“狂飙”上线~",
       "Link": "https://studygolang.com/articles/36038#reply0",
       "Description": "",
@@ -35,13 +49,6 @@
       "Title": "请教一下，业务中如何封装缓存+mysql的查询逻辑比较好",
       "Link": "https://studygolang.com/topics/16121#reply0",
       "Description": "\u003cp\u003e尝试写了一个demo，但是感觉不够灵活，有没有最佳实践可以参考一下？主要目的是解耦缓存逻辑与业务逻辑\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage cache\n\nimport \u0026quot;context\u0026quot;\n\n//对缓存的个性化设置，如最大空间、过期时间等如何加入，处理缓存一致性、缓存穿透等问题？\ntype Cache interface {\n\tGet(ctx context.Context, key string, ret interface{}) error\n\tSet(ctx context.Context, key string, value interface{}) error\n}\n\ntype RedisCache struct {\n\tclient int //假设是redis client\n}\n\nfunc (rc RedisCache) Get(ctx context.Context, key string, ret interface{}) error {\n\treturn nil\n}\n\nfunc (rc RedisCache) Set(ctx context.Context, key string, value interface{}) error {\n\treturn nil\n}\n\n\ntype Service struct {\n\tredis Cache\n\tgoCache Cache\n\tmysql int\n}\n\ntype mysqlGetFunc func(ctx context.Context, key string, ret interface{}) error\n\n\ntype Data1 struct {\n\n}\n\n//也可以做成一个接口\nfunc (s *Service) GetDataFunc(ctx context.Context, mf mysqlGetFunc, key string, ret interface{}, caches ... Cache) error {\n\tfor _, c := range caches {\n\t\terr := c.Get(ctx, key, \u0026amp;ret)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t//if d exist -\u0026gt; return\n\t}\n\n\terr := mf(ctx, key, \u0026amp;ret)\n\tif err != nil {\n\t\treturn err\n\t}\n\n\tfor _, c := range caches {\n\t\t//update cache\n\t\tc.Set(ctx, key, ret)\n\t}\n\n\treturn nil\n}\n\nfunc (s *Service) GetData1(ctx context.Context, key string, caches ... Cache) ([]*Data1, error){\n\n\tret := make([]*Data1, 0)\n\ts.GetDataFunc(ctx, nil /*mysql.GetData1()*/, key, \u0026amp;ret, caches...)\n\n\treturn nil, nil\n}\n\nvar _ Cache = (*RedisCache)(nil)\n\nfunc test() {\n\tservice := \u0026amp;Service{redis: RedisCache{client: 1} }\n\tservice.GetData1(context.Background(), \u0026quot;key\u0026quot;)\n\tservice.GetData1(context.Background(), \u0026quot;key\u0026quot;, service.redis)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "一款golang编写的开源的分布式锁 支持redis/zookeeper/etcd 实现",
-      "Link": "https://studygolang.com/topics/16119#reply1",
-      "Description": "\u003ch2\u003edistributed-lock\u003c/h2\u003e\n\n\u003ch3\u003e介绍\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e可以指定redis/etcd/zookeeper实现\u003c/li\u003e\n\u003cli\u003eredis的实现使用了lua脚本加解锁、watch机制续约锁、并且参考了redission用频道通知获取锁失败的客户端，减轻了redis的压力\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/chuckchann/distributed-lock\"\u003egithub连接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -63,13 +70,6 @@
       "Title": "ISM Web组态监控系统",
       "Link": "https://studygolang.com/topics/16120#reply0",
       "Description": "\u003cp\u003eISM 是由本人自主设计、研发的Web组态软件，拥有为电力能源、水利、物联网、工业互联网、智慧城市、智慧医疗、智慧农业、IT运维等提供解决方案的可视化平台。ISM具有跨平台、高效、可扩展、实时监控、动态交互、等特点，最大程度减少研发和运维的成本，并致力于普通业务人员0代码开发实现web组态、SCADA等场景。\n    ISM是免费不开源软件，不区分收费和免费概念，完全免费给企业和个人使用。终身免费升级。\n\u003cimg src=\"https://static.golangjob.cn/230202/ea20729090e2e0be5dcc96753158ecfb.png\" alt=\"2987a3fe08a24e3db561f38dda023366.png\" /\u003e\u003cimg src=\"https://static.golangjob.cn/230202/db133ab4c7b7a676850c917103cb0e0a.png\" alt=\"66863e4f54d14cd79fb1dd814a178a65.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e网站：www.ismctl.com\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "从源码自己编译一个golang玩玩",
-      "Link": "https://studygolang.com/articles/36036#reply1",
-      "Description": "\u003cp\u003e今天在编译一个“东西”居然提示一个错误\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003elinux_amd64/link: running gcc failed: exit status 1\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e网上有人说，这个可能是 gcc的版本与 golang 之前编译的版本不一样导致，建议自己用本机环境编译golang源码。于是在  go.dev上面下载了最新的源码 go1.20(昨天看还在rc，今天已经正式发布了，庆祝一下）到本机。解压之后进入其目录，准备编译；操作如下\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003ewget https://go.dev/dl/go1.20.src.tar.gz\ntar zxvf go1.20.src.tar.gz\ncd go/src\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230202/15d3ea64fc2b441fbb66f5fa3280c94d.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e经过一段时间的等待后：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e##### ../misc/cgo/testgodefs\nPASS\n\n##### ../misc/cgo/testso\nok  \tmisc/cgo/testso\t0.718s\n\n##### ../misc/cgo/testsovar\nok  \tmisc/cgo/testsovar\t0.720s\n\n##### ../misc/cgo/testcarchive\nSKIP - short mode and $GO_BUILDER_NAME not set\n\n##### ../misc/cgo/testcshared\nSKIP - short mode and $GO_BUILDER_NAME not set\n\n##### ../misc/cgo/testshared\nok  \tmisc/cgo/testshared\t28.882s\n\n##### ../misc/cgo/testplugin\nok  \tmisc/cgo/testplugin\t0.001s\n\n##### ../misc/cgo/testsanitizers\nPASS\n\n##### ../misc/cgo/errors\nPASS\n\n##### ../test/bench/go1\nok  \ttest/bench/go1\t0.028s [no tests to run]\n\n##### ../test\n\n##### cmd/api\nok  \tcmd/api\t41.140s\n\nALL TESTS PASSED\n---\nInstalled Go for linux/amd64 in /home/simon/src/go\nInstalled commands in /home/simon/src/go/bin\n*** You need to add /home/simon/src/go/bin to your PATH.\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e全部正常 pass 居然一次编译成功了。可见golang的源码真是很了不起，估计是对诸多环境做了校验。\u003c/p\u003e\n\n\u003cp\u003e接着把他配置到 系统当中，运行 go env 正常。\u003c/p\u003e\n\n\u003cp\u003e然后回到之前编译失败的软件，继续\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003emake geth\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e也是一路绿灯，成功了 ！\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
