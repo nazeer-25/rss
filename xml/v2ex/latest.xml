@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>元宵节快乐！请问广东移动 TR069 还能同城互通吗 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/913383</link>
+      <description>&lt;p&gt;各位小伙伴元宵节快乐！请问广东移动的 TR069 或者 IPTV 内网还可以同城互通吗&lt;/p&gt;&#xA;</description>
+      <author>why812182493</author>
+      <pubDate>05 Feb 2023 10:14:35 +0000</pubDate>
+    </item>
+    <item>
       <title>Magician-Scanning 支持 Tron 链了 - 区块链</title>
       <link>https://www.v2ex.com/t/913380</link>
       <description>&lt;p&gt;本次更新主要是增加了对 Tron 的支持，但是由于本人近期非常忙，所以只开发了基础功能，对 Tron 的扫描暂时不支持过滤器，监听器里面会收到所有扫描到的交易记录，需要由开发者自己去判断筛选交易记录。&lt;/p&gt;&#xA;&lt;p&gt;直接采用的 http API ，没有增加任何依赖&lt;/p&gt;&#xA;&lt;h2&gt;创建一个 Tron 监听器&lt;/h2&gt;&#xA;&lt;p&gt;条件过滤器还在开发中，可以关注后续更新，call 方法会接收到所有扫描到的交易信息，需要您自己判断筛&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**&#xA; * 创建一个类，实现 TronMonitorEvent 接口即可&#xA; */&#xA;public class TronEventOne implements TronMonitorEvent {&#xA;&#xA;        /**&#xA;         * transactionModel 对象里包含此条交易的所有信息&#xA;         */&#xA;        @Override&#xA;        public void call(TransactionModel transactionModel) {&#xA;                System.out.println(&#34;TRON 成功了！！！&#34;);&#xA;                System.out.println(&#34;TRON, txID: &#34; + transactionModel.getTronTransactionModel().getTxID());&#xA;        }&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;开启一个扫描任务&lt;/h2&gt;&#xA;&lt;p&gt;下面标出了跟 ETH 扫块任务的两个区别，除此之外，再无其他区&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// 初始化线程池，核心线程数必须 &amp;gt;= 全局的扫块的任务数量 + 全局的重试策略的数量&#xA;// 这是一个全局配置，不管你开了几个任务，不管你需要扫描几条链，几种链，都只需要写一次这句代码&#xA;EventThreadPool.init(1);&#xA;&#xA;MagicianBlockchainScan.create()&#xA;        .setRpcUrl(&#xA;                // 跟 ETH 的区别一，这里需要用 TronRpcInit&#xA;                TronRpcInit.create()&#xA;                        .addRpcUrl(&#34;https://api.shasta.trongrid.io/wallet&#34;)&#xA;        )&#xA;        .addTronMonitorEvent(new TronEventOne()) // 跟 ETH 的区别二，添加监听器需要用 addTronMonitorEvent&#xA;        .start();&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;更多详情可以访问官网文档：&lt;a href=&#34;https://magician-io.com/cn&#34; rel=&#34;nofollow&#34;&gt;https://magician-io.com/cn&lt;/a&gt;&lt;/p&gt;&#xA;</description>
