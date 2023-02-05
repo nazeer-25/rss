@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Magician-Scanning 支持 Tron 链了 - 区块链",
+      "Link": "https://www.v2ex.com/t/913380",
+      "Description": "\u003cp\u003e本次更新主要是增加了对 Tron 的支持，但是由于本人近期非常忙，所以只开发了基础功能，对 Tron 的扫描暂时不支持过滤器，监听器里面会收到所有扫描到的交易记录，需要由开发者自己去判断筛选交易记录。\u003c/p\u003e\n\u003cp\u003e直接采用的 http API ，没有增加任何依赖\u003c/p\u003e\n\u003ch2\u003e创建一个 Tron 监听器\u003c/h2\u003e\n\u003cp\u003e条件过滤器还在开发中，可以关注后续更新，call 方法会接收到所有扫描到的交易信息，需要您自己判断筛\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e/**\n * 创建一个类，实现 TronMonitorEvent 接口即可\n */\npublic class TronEventOne implements TronMonitorEvent {\n\n        /**\n         * transactionModel 对象里包含此条交易的所有信息\n         */\n        @Override\n        public void call(TransactionModel transactionModel) {\n                System.out.println(\"TRON 成功了！！！\");\n                System.out.println(\"TRON, txID: \" + transactionModel.getTronTransactionModel().getTxID());\n        }\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e开启一个扫描任务\u003c/h2\u003e\n\u003cp\u003e下面标出了跟 ETH 扫块任务的两个区别，除此之外，再无其他区\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e// 初始化线程池，核心线程数必须 \u0026gt;= 全局的扫块的任务数量 + 全局的重试策略的数量\n// 这是一个全局配置，不管你开了几个任务，不管你需要扫描几条链，几种链，都只需要写一次这句代码\nEventThreadPool.init(1);\n\nMagicianBlockchainScan.create()\n        .setRpcUrl(\n                // 跟 ETH 的区别一，这里需要用 TronRpcInit\n                TronRpcInit.create()\n                        .addRpcUrl(\"https://api.shasta.trongrid.io/wallet\")\n        )\n        .addTronMonitorEvent(new TronEventOne()) // 跟 ETH 的区别二，添加监听器需要用 addTronMonitorEvent\n        .start();\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e更多详情可以访问官网文档：\u003ca href=\"https://magician-io.com/cn\" rel=\"nofollow\"\u003ehttps://magician-io.com/cn\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "Joker123456789",
+      "PubDate": "2023-02-05T10:02:51Z"
+    },
+    {
+      "Title": "请教下多终端相册照片管理的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/913379",
+      "Description": "\u003cp\u003e周末整理相册，\n主要是手机拍的生活日常和小孩生活片刻，常年累月数量 20000 多张吧，\n但是，这些是多个手机拍的，然后在不同的地方备份，\u003c/p\u003e\n\u003cp\u003e形成了以下局面：\n1.同个照片有相同或不同的命名；\n2.相同命名但是不同内容的照片；\u003c/p\u003e\n\u003cp\u003e周末我整理了下统一放到了 NAS 极空间，\n但是极空间的相册功能看起来不怎么好用；\u003c/p\u003e\n\u003cp\u003e现在想把照片下载到 PC 或 MAC 下，然后去重整理好，再放回 NAS 。\u003c/p\u003e\n\u003cp\u003e问题：PC 或 MAC 有什么软件可以完成。\u003c/p\u003e\n",
+      "Author": "zzii",
+      "PubDate": "2023-02-05T10:02:29Z"
+    },
+    {
       "Title": "你们的 iPhone 横条烧屏了吗 - 问与答",
       "Link": "https://www.v2ex.com/t/913378",
       "Description": "昨天滑到多任务的时候，看到横条有点白色阴影，烧屏了。OLED 真不行啊，才不到 2 年。",

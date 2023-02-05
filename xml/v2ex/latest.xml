@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Magician-Scanning 支持 Tron 链了 - 区块链</title>
+      <link>https://www.v2ex.com/t/913380</link>
+      <description>&lt;p&gt;本次更新主要是增加了对 Tron 的支持，但是由于本人近期非常忙，所以只开发了基础功能，对 Tron 的扫描暂时不支持过滤器，监听器里面会收到所有扫描到的交易记录，需要由开发者自己去判断筛选交易记录。&lt;/p&gt;&#xA;&lt;p&gt;直接采用的 http API ，没有增加任何依赖&lt;/p&gt;&#xA;&lt;h2&gt;创建一个 Tron 监听器&lt;/h2&gt;&#xA;&lt;p&gt;条件过滤器还在开发中，可以关注后续更新，call 方法会接收到所有扫描到的交易信息，需要您自己判断筛&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**&#xA; * 创建一个类，实现 TronMonitorEvent 接口即可&#xA; */&#xA;public class TronEventOne implements TronMonitorEvent {&#xA;&#xA;        /**&#xA;         * transactionModel 对象里包含此条交易的所有信息&#xA;         */&#xA;        @Override&#xA;        public void call(TransactionModel transactionModel) {&#xA;                System.out.println(&#34;TRON 成功了！！！&#34;);&#xA;                System.out.println(&#34;TRON, txID: &#34; + transactionModel.getTronTransactionModel().getTxID());&#xA;        }&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;开启一个扫描任务&lt;/h2&gt;&#xA;&lt;p&gt;下面标出了跟 ETH 扫块任务的两个区别，除此之外，再无其他区&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// 初始化线程池，核心线程数必须 &amp;gt;= 全局的扫块的任务数量 + 全局的重试策略的数量&#xA;// 这是一个全局配置，不管你开了几个任务，不管你需要扫描几条链，几种链，都只需要写一次这句代码&#xA;EventThreadPool.init(1);&#xA;&#xA;MagicianBlockchainScan.create()&#xA;        .setRpcUrl(&#xA;                // 跟 ETH 的区别一，这里需要用 TronRpcInit&#xA;                TronRpcInit.create()&#xA;                        .addRpcUrl(&#34;https://api.shasta.trongrid.io/wallet&#34;)&#xA;        )&#xA;        .addTronMonitorEvent(new TronEventOne()) // 跟 ETH 的区别二，添加监听器需要用 addTronMonitorEvent&#xA;        .start();&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;更多详情可以访问官网文档：&lt;a href=&#34;https://magician-io.com/cn&#34; rel=&#34;nofollow&#34;&gt;https://magician-io.com/cn&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>Joker123456789</author>
+      <pubDate>05 Feb 2023 10:02:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教下多终端相册照片管理的问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/913379</link>
+      <description>&lt;p&gt;周末整理相册，&#xA;主要是手机拍的生活日常和小孩生活片刻，常年累月数量 20000 多张吧，&#xA;但是，这些是多个手机拍的，然后在不同的地方备份，&lt;/p&gt;&#xA;&lt;p&gt;形成了以下局面：&#xA;1.同个照片有相同或不同的命名；&#xA;2.相同命名但是不同内容的照片；&lt;/p&gt;&#xA;&lt;p&gt;周末我整理了下统一放到了 NAS 极空间，&#xA;但是极空间的相册功能看起来不怎么好用；&lt;/p&gt;&#xA;&lt;p&gt;现在想把照片下载到 PC 或 MAC 下，然后去重整理好，再放回 NAS 。&lt;/p&gt;&#xA;&lt;p&gt;问题：PC 或 MAC 有什么软件可以完成。&lt;/p&gt;&#xA;</description>
+      <author>zzii</author>
+      <pubDate>05 Feb 2023 10:02:29 +0000</pubDate>
+    </item>
+    <item>
       <title>你们的 iPhone 横条烧屏了吗 - 问与答</title>
       <link>https://www.v2ex.com/t/913378</link>
       <description>昨天滑到多任务的时候，看到横条有点白色阴影，烧屏了。OLED 真不行啊，才不到 2 年。</description>
