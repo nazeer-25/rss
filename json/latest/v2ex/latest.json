@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教关于 Proxmox VE 下 SSD 的性能问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/913452",
+      "Description": "\u003cp\u003e首先说一下我的使用习惯：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e在 PVE 里安装好一个 Winodws 10 LTSC 、装好常用的软件，然后进行快照\u003c/li\u003e\n\u003cli\u003e使用一段时间之后，通过回滚快照来清除使用痕迹\u003c/li\u003e\n\u003cli\u003e如果使用系统进行一些会污染开发环境测试工作，那么测试完了之后也会回滚到刚装好系统时的快照\u003c/li\u003e\n\u003cli\u003e快照回滚频率大约为一周一次\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e在使用一个月之后，SSD 的速度会变得非常慢，无论是读写都只有 10-15MB/s\u003c/p\u003e\n\u003cp\u003e然后是磁盘设置：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eLVM Thin Pool over LUKS ，都开启了 discard\u003c/li\u003e\n\u003cli\u003e虚拟磁盘为 VirtIO SCSI ，开启 discard 、writeback\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003ePVE 服务器配置：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eE3-1245 v3\u003c/li\u003e\n\u003cli\u003e16G RAM\u003c/li\u003e\n\u003cli\u003eSSD: PNY CS900 256GB\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e我的硬需求是：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e保证磁盘是加密的，防止泄露隐私\u003c/li\u003e\n\u003cli\u003e需要有一个能够随时复原如初的 Windows ，也就是「快照」功能对我来说是不可或缺的\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e想请教一下大家这个问题有没有什么办法解决，更换性能更强的 SSD/NVME SSD 能否解决这个问题？谢谢！\u003c/p\u003e\n",
+      "Author": "baobao1270",
+      "PubDate": "2023-02-05T16:50:30Z"
+    },
+    {
+      "Title": "关于商品表多货币的设计以及收款对账表设计问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/913451",
+      "Description": "\u003ch2\u003e背景：\u003c/h2\u003e\n\u003cp\u003e公司在海外卖商品，进货价是人民币，售卖价是美元，须支持美元。\u003c/p\u003e\n\u003cp\u003e公司原有一个系统，只是单货币系统（美元），并且是购买回来的，而且还是单机版，并不支持二次开发。\u003c/p\u003e\n\u003cp\u003e每当汇率改时，老板在 Excel 计算好，售卖价，还要一个个录入，因为原系统不支持这种改法。\u003c/p\u003e\n\u003cp\u003e现在需要重新写一个系统，方便管理。\u003c/p\u003e\n\u003ch2\u003e要求：\u003c/h2\u003e\n\u003cp\u003e1.支持多货币，不止是美元，还有当地货币。\n2.支持一键汇率更改售卖价。\n3.支持版本管理，因为客户退换货时，要按当时的汇率来退换货。\u003c/p\u003e\n\u003ch2\u003e方案 1：\u003c/h2\u003e\n\u003cp\u003e设计 3 个表，一个商品表，汇率表，版本表\u003c/p\u003e\n\u003cp\u003e版本表：就版本号，ID ，时间，这几个字段，每当改汇率，或者改了商品，都+1\u003c/p\u003e\n\u003cp\u003e汇率表存汇率关系\u003c/p\u003e\n\u003cp\u003e商品表直接 rmb_purchase_price （进货价），gross_profit （毛利值），usd_sell_price （售卖价），版本号，来管理。\n相关订单快照记录版本。\u003c/p\u003e\n\u003cp\u003e改的时候直接改。\u003c/p\u003e\n\u003ch2\u003e方案 2：\u003c/h2\u003e\n\u003cp\u003e在方案 1 基础上，增加一个币种表，然后每种价格都要存在币种，值...\u003c/p\u003e\n\u003cp\u003e改动商品表，purchase_price_type （进货价格币种）, purchase_price_value （进货价格值）....\u003c/p\u003e\n\u003ch2\u003e问题\u003c/h2\u003e\n\u003cp\u003e方案 2 好像更复杂了，还是直接用方案 1 ？\u003c/p\u003e\n\u003cp\u003e为什么提出方案 2 ，我估计做完这个功能，还要做一个对账管理功能，收款方式又是多种货币，USD ，RMB ，当地货币...,外汇...，收款账户又存在多个，美国 XX 银行账户，中国 XX 银行账户。\u003c/p\u003e\n\u003cp\u003e因为现在公司财务是用 excel 来记录，并且设置好了复杂公式，每当新增行时，都要仔仔细细看公式对不对，心智负荷很大，而且有时候财务不小心弄错了，公式弄不回来，还要我去看。\u003c/p\u003e\n\u003cp\u003e这个汇率不是国际实时汇率，而是汇率变动时，公司根据国际汇率来改自己系统里面的汇率，对此我应该怎么解决公司的问题呢？\u003c/p\u003e\n",
+      "Author": "Jtyczc",
+      "PubDate": "2023-02-05T16:47:35Z"
+    },
+    {
       "Title": "考公这种职位有可能吗 - 问与答",
       "Link": "https://www.v2ex.com/t/913450",
       "Description": "\u003cp\u003e\u003cimg alt=\"zhiwei\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://imgur.com/iYIPS4B.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr/\u003e 有没有上岸的兄弟萌讲解一下\u003c/p\u003e\n",

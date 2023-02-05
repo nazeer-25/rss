@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教关于 Proxmox VE 下 SSD 的性能问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/913452</link>
+      <description>&lt;p&gt;首先说一下我的使用习惯：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在 PVE 里安装好一个 Winodws 10 LTSC 、装好常用的软件，然后进行快照&lt;/li&gt;&#xA;&lt;li&gt;使用一段时间之后，通过回滚快照来清除使用痕迹&lt;/li&gt;&#xA;&lt;li&gt;如果使用系统进行一些会污染开发环境测试工作，那么测试完了之后也会回滚到刚装好系统时的快照&lt;/li&gt;&#xA;&lt;li&gt;快照回滚频率大约为一周一次&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;在使用一个月之后，SSD 的速度会变得非常慢，无论是读写都只有 10-15MB/s&lt;/p&gt;&#xA;&lt;p&gt;然后是磁盘设置：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;LVM Thin Pool over LUKS ，都开启了 discard&lt;/li&gt;&#xA;&lt;li&gt;虚拟磁盘为 VirtIO SCSI ，开启 discard 、writeback&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;PVE 服务器配置：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;E3-1245 v3&lt;/li&gt;&#xA;&lt;li&gt;16G RAM&lt;/li&gt;&#xA;&lt;li&gt;SSD: PNY CS900 256GB&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;我的硬需求是：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;保证磁盘是加密的，防止泄露隐私&lt;/li&gt;&#xA;&lt;li&gt;需要有一个能够随时复原如初的 Windows ，也就是「快照」功能对我来说是不可或缺的&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;想请教一下大家这个问题有没有什么办法解决，更换性能更强的 SSD/NVME SSD 能否解决这个问题？谢谢！&lt;/p&gt;&#xA;</description>
+      <author>baobao1270</author>
+      <pubDate>05 Feb 2023 16:50:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于商品表多货币的设计以及收款对账表设计问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/913451</link>
+      <description>&lt;h2&gt;背景：&lt;/h2&gt;&#xA;&lt;p&gt;公司在海外卖商品，进货价是人民币，售卖价是美元，须支持美元。&lt;/p&gt;&#xA;&lt;p&gt;公司原有一个系统，只是单货币系统（美元），并且是购买回来的，而且还是单机版，并不支持二次开发。&lt;/p&gt;&#xA;&lt;p&gt;每当汇率改时，老板在 Excel 计算好，售卖价，还要一个个录入，因为原系统不支持这种改法。&lt;/p&gt;&#xA;&lt;p&gt;现在需要重新写一个系统，方便管理。&lt;/p&gt;&#xA;&lt;h2&gt;要求：&lt;/h2&gt;&#xA;&lt;p&gt;1.支持多货币，不止是美元，还有当地货币。&#xA;2.支持一键汇率更改售卖价。&#xA;3.支持版本管理，因为客户退换货时，要按当时的汇率来退换货。&lt;/p&gt;&#xA;&lt;h2&gt;方案 1：&lt;/h2&gt;&#xA;&lt;p&gt;设计 3 个表，一个商品表，汇率表，版本表&lt;/p&gt;&#xA;&lt;p&gt;版本表：就版本号，ID ，时间，这几个字段，每当改汇率，或者改了商品，都+1&lt;/p&gt;&#xA;&lt;p&gt;汇率表存汇率关系&lt;/p&gt;&#xA;&lt;p&gt;商品表直接 rmb_purchase_price （进货价），gross_profit （毛利值），usd_sell_price （售卖价），版本号，来管理。&#xA;相关订单快照记录版本。&lt;/p&gt;&#xA;&lt;p&gt;改的时候直接改。&lt;/p&gt;&#xA;&lt;h2&gt;方案 2：&lt;/h2&gt;&#xA;&lt;p&gt;在方案 1 基础上，增加一个币种表，然后每种价格都要存在币种，值...&lt;/p&gt;&#xA;&lt;p&gt;改动商品表，purchase_price_type （进货价格币种）, purchase_price_value （进货价格值）....&lt;/p&gt;&#xA;&lt;h2&gt;问题&lt;/h2&gt;&#xA;&lt;p&gt;方案 2 好像更复杂了，还是直接用方案 1 ？&lt;/p&gt;&#xA;&lt;p&gt;为什么提出方案 2 ，我估计做完这个功能，还要做一个对账管理功能，收款方式又是多种货币，USD ，RMB ，当地货币...,外汇...，收款账户又存在多个，美国 XX 银行账户，中国 XX 银行账户。&lt;/p&gt;&#xA;&lt;p&gt;因为现在公司财务是用 excel 来记录，并且设置好了复杂公式，每当新增行时，都要仔仔细细看公式对不对，心智负荷很大，而且有时候财务不小心弄错了，公式弄不回来，还要我去看。&lt;/p&gt;&#xA;&lt;p&gt;这个汇率不是国际实时汇率，而是汇率变动时，公司根据国际汇率来改自己系统里面的汇率，对此我应该怎么解决公司的问题呢？&lt;/p&gt;&#xA;</description>
+      <author>Jtyczc</author>
+      <pubDate>05 Feb 2023 16:47:35 +0000</pubDate>
+    </item>
+    <item>
       <title>考公这种职位有可能吗 - 问与答</title>
       <link>https://www.v2ex.com/t/913450</link>
       <description>&lt;p&gt;&lt;img alt=&#34;zhiwei&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://imgur.com/iYIPS4B.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;br/&gt; 有没有上岸的兄弟萌讲解一下&lt;/p&gt;&#xA;</description>
