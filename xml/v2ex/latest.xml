@@ -4,6 +4,47 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教一个关于 ES 中 term 查询的疑问 - 问与答</title>
+      <link>https://www.v2ex.com/t/913606</link>
+      <description>&lt;p&gt;刚刚学习 ES ，在使用 term 查询时，针对一个 text 类型的字段查询不到数据的疑问，希望大佬可以解释一下。&#xA;版本信息：es 8.6 ，java 客户端是 elasticsearch-java&#xA;索引中比如有两个字段 name 和 address 。其中 name 设置为 keyword 关键词，age 设置为 text ，使用 ik 分词器。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;代码如下：&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre&gt;&lt;code&gt; .properties(&#34;name&#34;, propertyBuilder -&amp;gt; propertyBuilder&#xA;                                .keyword(keyWordPropertyBuilder -&amp;gt; keyWordPropertyBuilder))&#xA;                                &#xA;.properties(&#34;address&#34;, propertyBuilder -&amp;gt; propertyBuilder&#xA;                                .text(textPropertyBuilder -&amp;gt; textPropertyBuilder.analyzer(&#34;ik_max_word&#34;).searchAnalyzer(&#34;ik_max_word&#34;))&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;插入的数据为：&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre&gt;&lt;code&gt;{&#xA;     &#34;name&#34;: &#34;王五&#34;,&#xA;     &#34;address&#34;: &#34;北京市昌平区&#34;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;term 查询&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre&gt;&lt;code&gt;.query(queryBuilder -&amp;gt; queryBuilder.term(termQueryBuilder -&amp;gt; termQueryBuilder&#xA;                                                .field(&#34;address&#34;).value(&#34;北京市昌平区&#34;))&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;该查询查询不到任何数据。&lt;/p&gt;&#xA;&lt;p&gt;看到网上说 term 属于精确查询也就是全匹配，不太明白为什么我的这个查询查不到数据？&lt;/p&gt;&#xA;</description>
+      <author>jiobanma</author>
+      <pubDate>06 Feb 2023 06:34:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>Java 有否 在不预配置类路径类名的情况下，运行态动态装载类及其依赖类的方法？ - Java</title>
+      <link>https://www.v2ex.com/t/913605</link>
+      <description>&lt;p&gt;需求：运行态、不重启，动态装载本地 /远程类。&lt;/p&gt;&#xA;&lt;p&gt;SPI 带类路径类名配置的比较容易做到。OSGi 是不是也类似的搞法？&lt;/p&gt;&#xA;&lt;p&gt;但如果要求不配置的情况下，此时如果只是装载单个无依赖类(严格说是依赖均已存在的类)，也比较容易做到。如果要进一步装载这个无依赖子类的父类啥的，想办法搞搞也能做到。&lt;/p&gt;&#xA;&lt;p&gt;但难的就是，如何把这个类的所有依赖也装载进来。&lt;/p&gt;&#xA;&lt;p&gt;想来想去，想到两个办法：&lt;/p&gt;&#xA;&lt;p&gt;1 、要么就是装载类里面自己先搞个成员，自声明需要依赖的类（但这个就要保证对所有的依赖、依赖的依赖……都要声明出来、挺难保证的）；&lt;/p&gt;&#xA;&lt;p&gt;2 、还有一种就是给个保证 100%覆盖率的对应 Tester 方法或者类内方法，预先加载 Tester 方法，循环处理掉每个 ClassNotFound 异常，做对应依赖的装载（但这个要保证 100%覆盖率、甚至是依赖类的覆盖率也要做到，也是挺容易出问题的）&lt;/p&gt;&#xA;</description>
+      <author>matepi</author>
+      <pubDate>06 Feb 2023 06:32:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>华为企业路由器由于 https 协议过期不能访问了，如何能支持 TLSv1.2 - 问与答</title>
+      <link>https://www.v2ex.com/t/913604</link>
+      <description>&lt;p&gt;有个华为路由器 AR1220E-S 之前默认开启了 https 访问（可能出场就开启了，好多年了记不清了），&#xA;现在输入管理界面 &lt;a href=&#34;http://10.1.1.1&#34; rel=&#34;nofollow&#34;&gt;http://10.1.1.1&lt;/a&gt; 就强制跳转到 &lt;a href=&#34;https://10.1.1.1&#34; rel=&#34;nofollow&#34;&gt;https://10.1.1.1&lt;/a&gt;&#xA;但是这个路由器固件使用的是 TLS 协议版本是被禁用的（应该是 TLSv1.1 ），导致现代浏览器都不支持，打不开了（以前可以忽略掉）&#xA;之前用 IE 还能打开（强制启用 TLSv1.0 协议支持），刚才试了下 IE 微软也不让用了，打开 IE 直接跳转到 edge&lt;/p&gt;&#xA;&lt;p&gt;通过 ssh 进入路由器后，禁用 https 服务&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;undo http secure-server enable&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;结果提示 &lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;请使能 HTTPS 功能。使能之后, 请重新打开浏览器登录 Web 网管。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;必须使用 https 才能访问&lt;/p&gt;&#xA;&lt;p&gt;想问下 有没相关资料 能启用 TLSv1.2 的支持&lt;/p&gt;&#xA;</description>
+      <author>ksc010</author>
+      <pubDate>06 Feb 2023 06:32:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>AnyViewer 被卡巴斯基报毒，是误报吗 - 全球工单系统</title>
+      <link>https://www.v2ex.com/t/913603</link>
+      <description>&lt;p&gt;今天突然被报毒，我寻思着傲梅也算有些名气，应该不至于藏毒，但我不是很懂安全相关，所以问问大家。&#xA;&lt;a href=&#34;https://i.imgur.com/3PCv2Tv.png&#34; rel=&#34;nofollow&#34;&gt;https://i.imgur.com/3PCv2Tv.png&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>BahuangShanren</author>
+      <pubDate>06 Feb 2023 06:31:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>求教联通公网动态 v4 的问题 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/913601</link>
+      <description>北京联通，周六打电话申请公网 v4 。直接就开通了，重启光猫后，光猫成功 PPOE 获取到公网 IP 。&lt;br /&gt;光猫下边挂有一个华硕 AX86U 动态 IP ，由光猫 DHCP 分配，光猫 DMZ 给了华硕路由器，然后路由器端口转发内网 NAS 。&lt;br /&gt;现在的问题是，华硕下边的设备无法 ping\telnet\traceroute 分配的 IP 的端口。&lt;br /&gt;外网设备（手机热点、腾讯云 VPS ）都可以 ping\telnet\traceroute 分配的 IP 的端口。&lt;br /&gt;光猫后台 traceroute\ping 都是本机一跳 0.几 ms 。不知道问题出在哪里？大佬们有什么解决思路么</description>
+      <author>byty18768</author>
+      <pubDate>06 Feb 2023 06:29:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>如果目标职位只是队员，要不要隐藏 Teamleader 经历？ - 求职</title>
+      <link>https://www.v2ex.com/t/913599</link>
+      <author>morning</author>
+      <pubDate>06 Feb 2023 06:25:43 +0000</pubDate>
+    </item>
+    <item>
       <title>网易云音乐缓存是否可以关闭？ - macOS</title>
       <link>https://www.v2ex.com/t/913598</link>
       <description>疑问：比如设置里的默认 1GB 缓存，相当于每次播放音乐，都会被缓存到 ssd 上；那如果是 chrome 浏览器播放，也是会被缓存吗？&lt;br /&gt;&lt;br /&gt;以及可以紧致它缓存，直接放内存吗？减少 ssd 读写？</description>
