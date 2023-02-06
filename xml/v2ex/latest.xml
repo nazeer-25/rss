@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>一片简单的 Nostr 学习笔记 - 分享发现</title>
+      <link>https://www.v2ex.com/t/913751</link>
+      <description>&lt;p&gt;这两天看到 Nostr 项目，感觉很有意思，写了篇学习笔记和一些想法，欢迎大家评论讨论。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://medium.com/@wcp1231/nostr-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-8671c332efc8&#34; rel=&#34;nofollow&#34;&gt;Nostr 学习笔记&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>wcp1231</author>
+      <pubDate>06 Feb 2023 13:03:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>在 IPoE 认证方式下，使用自己路由器拨号的方法 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/913750</link>
+      <description>&lt;p&gt;近期看到大家在讨论宽带拨号方式由 PPPoE 改变为了 IPoE,很多朋友在光猫桥接后无法通过路由器拨号上网。尽管我所在地区运营商（河南电信、联通与移动）依旧是 PPPoE 方式上网，但我确实挺好奇 IPoE 这个技术，所以今天去翻了一下文档，发现其实就是带有附加选项的 DHCP 。&lt;/p&gt;&#xA;&lt;p&gt;IPoE 认证技术基于 &lt;strong&gt;DHCP + option60 + option82&lt;/strong&gt;。用户终端向 BRAS 发送一条带有 option60 选项的 DHCP Discovery 报文，BRAS 将这个报文添加 option82 字段后转交给 DHCP Server ，DHCP Server 依据这些信息向 AAA 识别用户权限，下发指定的 IP 地址和配置。&lt;/p&gt;&#xA;&lt;p&gt;需要注意的是，&lt;strong&gt;AAA 认证时使用的 Username 是：MAC 地址 @option60 。&lt;/strong&gt;这意味着我们的账号信息与 MAC 地址绑定，因此需要将外网接口的 MAC 地址设置为你的光猫的 MAC 地址。&lt;/p&gt;&#xA;&lt;p&gt;在 IPoE 中，&lt;strong&gt;DHCP 的 option60 选项携带的是用于区分业务类型的字符串，如“IPTV”，“VoIP”等，也许可以在光猫设置中寻找到&lt;/strong&gt;； option82 选项是用户的线路信息，由 BRAS 自动添加，不需要用户自己配置。&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;总结以上内容，作为想要光猫桥接、让路由器拨号以获取网络完全控制权的 IPoE 用户来说，一个可行的方案是：&lt;/p&gt;&#xA;&lt;p&gt;1.查找当前光猫中用于上网的业务类型，如“INTERNET”、“INET”之类的，将其填入 DHCP Client 的 option60 中。&lt;/p&gt;&#xA;&lt;p&gt;2.将连接外网的接口的 MAC 地址设置为光猫背板贴的 MAC 地址。&lt;/p&gt;&#xA;&lt;p&gt;3.将 DHCP Client 应用到外网接口上，抛弃光猫吧！&lt;/p&gt;&#xA;&lt;p&gt;这些操作在 RouterOS 中是技术可行的，但在普通的消费级路由器里很难完成，主要是因为消费级产品不支持指定 DHCP option 的值。OpenWRT 也可以完成这个操作&lt;a href=&#34;https://openwrt.org/docs/guide-user/network/ipv4/configuration#:%7E:text=reqopts,from%20the%20server:%7E:text=from%20the%20server-,sendopts,-string&#34; rel=&#34;nofollow&#34;&gt;Set DHCP Option&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;本文只是技术可行性探讨，由于我所在的地区没有推进 IPoE ，所以我也无从试验，希望能给大家一点思路参考，毕竟，我也是个想要完全控制自己家庭网络，不希望运营商的光猫给我多叠一层 NAT 的卑微用户~&lt;/p&gt;&#xA;</description>
+      <author>weiyan</author>
+      <pubDate>06 Feb 2023 13:03:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>[远程][外企] Scenius 招聘 iOS 高级开发工程师 - 酷工作</title>
+      <link>https://www.v2ex.com/t/913749</link>
+      <description>&lt;h2&gt;公司介绍&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.joinscenius.xyz/&#34; rel=&#34;nofollow&#34;&gt;Scenius&lt;/a&gt;是一家资本雄厚的初创公司，获得世界上最好的投资者青睐，如硅谷的 Accel 和 Kleiner Perkins ，以及顶级的 web3 投资者，如 Polygon Studios 、Merit Circle ，以及 Voodoo Games 、Coinbase 、Compound 和 Etherscan 的创始人 /执行官的支持。我们的使命是激励游戏玩家，我们的目标是成为一个全球游戏中心，让玩家在一个平台上进行社交，发现游戏。&lt;/p&gt;&#xA;&lt;h2&gt;团队介绍&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;研发团队以中国人为主，日常开发用中文交流即可&lt;/li&gt;&#xA;&lt;li&gt;产品经理和设计等其他团队人员，大部分在新加坡，不需要跨时区交流&lt;/li&gt;&#xA;&lt;li&gt;全远程工作，工作地点无要求，最好在亚太时区&lt;/li&gt;&#xA;&lt;li&gt;工作时间早 9 晚 6 ，周末不加班&lt;/li&gt;&#xA;&lt;li&gt;团队成员有来自腾讯、字节和微软等国内外知名大厂的大牛，也有 ACM 区域赛金牌获得者和世界总决赛的参赛选手&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;岗位职责&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;独立的从 0 到 1 搭建一个面向客户的 iOS 应用程序&lt;/li&gt;&#xA;&lt;li&gt;搭建 iOS 应用组件库&lt;/li&gt;&#xA;&lt;li&gt;负责 iOS 应用体验优化和性能优化&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;岗位要求&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;5 年以上 iOS 工作经验&lt;/li&gt;&#xA;&lt;li&gt;本科及以上学历&lt;/li&gt;&#xA;&lt;li&gt;具有多个成熟产品开发经验，能独立承担 iOS 产品开发工作，有大型项目开发经验者优先&lt;/li&gt;&#xA;&lt;li&gt;了解软件工程的最佳实践，包括编码标准、代码审查、源代码控制管理、持续部署和测试&lt;/li&gt;&#xA;&lt;li&gt;英语：能读懂技术文档和需求文档，简单日常表达；流利表达优先&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;福利&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;有竞争力的薪酬&lt;/li&gt;&#xA;&lt;li&gt;100%远程工作&lt;/li&gt;&#xA;&lt;li&gt;与顶尖人才一起工作&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;简历投递&lt;/h2&gt;&#xA;&lt;p&gt;感兴趣的请准备中文和英文两份简历，邮件标题格式 [姓名][岗位名称]，如 &#34;张三 iOS 高级开发&#34;，发到 &lt;a href=&#34;mailto:tian+hire@joinscenius.xyz&#34;&gt;tian+hire@joinscenius.xyz&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>tianscenius</author>
+      <pubDate>06 Feb 2023 12:59:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>Cloudflare 能不能只 v4 访问走 Proxy,v6 访问走原始 dns 地址 - Cloudflare</title>
+      <link>https://www.v2ex.com/t/913748</link>
+      <description>&lt;p&gt;想把家宽 ddns 到 cloudflare,如果开启了 proxy,则所有流量都走 proxy,v6 的优势就没了.如果不开 proxy 则 v4 访问不了,在没有自己公网服务器的情况下,有没有方案实现只 v4 访问走 Proxy,v6 访问走原始 dns 地址&lt;/p&gt;&#xA;</description>
+      <author>kaiveyoung</author>
+      <pubDate>06 Feb 2023 12:56:18 +0000</pubDate>
+    </item>
+    <item>
       <title>大厂中如何晋升 - 问与答</title>
       <link>https://www.v2ex.com/t/913747</link>
       <description>&lt;p&gt;小弟今年拿了某大厂核心业务的 offer ，年中入职，因为之前没有实习过，对于大厂的工作内容和晋升制度没有什么了解，想问下各位已经工作的前辈们在大厂中如何提升自己、如何获得更好的绩效以及晋升的渠道。&lt;/p&gt;&#xA;</description>
