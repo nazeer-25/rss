@@ -4,6 +4,55 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>做个数据库系统有没有前途？ - 问与答</title>
+      <link>https://www.v2ex.com/t/913803</link>
+      <description>&lt;p&gt;由于做项目的需要，顺便用 goleveldb 封装了个数据库系统。&lt;/p&gt;&#xA;&lt;p&gt;现在完成的功能：&#xA;创建表。&#xA;默认第一个字段必须是主键&#xA;字段类型：string,int,int64,float64,time&#xA;其他字段可以设置为索引、组合索引，全文索引（无需分词库，却永远没有搜索不到的词）等。&#xA;添加、删除、修改、查询功能。&#xA;查询，可以通过主键查询，索引查询，可以是精准匹配和前缀匹配。&lt;/p&gt;&#xA;&lt;p&gt;剩下解析 sql 就是功能的各种组合。&#xA;鉴于现在的功能已经足够项目使用，以及精力有限，如果没有前途，就不继续开发下去了。&lt;/p&gt;&#xA;&lt;p&gt;项目地址： &lt;a href=&#34;https://github.com/liaoran123/xbdb&#34; rel=&#34;nofollow&#34;&gt;https://github.com/liaoran123/xbdb&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>010203kk</author>
+      <pubDate>07 Feb 2023 01:17:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>A100 买不到了，只有小显卡怎么训大模型 - 程序员</title>
+      <link>https://www.v2ex.com/t/913802</link>
+      <description>&lt;p&gt;为了达到更好的训练效果，通常炼丹师们会使用更大的模型和更大的 Batch size ，但因此带来的大显存占用，却成为不可避免的硬伤。&lt;/p&gt;&#xA;&lt;p&gt;尤其是如今 GPU 越来越贵，甚至还可能买不到......&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b14f176c452c4bfe87a6afdadc762056%7Etplv-k3u1fbpfcp-watermark.image?&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;MegEngine v1.5 及以上版本，支持动态图和静态图的显存优化，显存占用可降至 1/4 。&lt;/p&gt;&#xA;&lt;p&gt;先上对比效果&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://oscimg.oschina.net/oscnet/up-893b768c757e3cf316b0635e694acf9e05a.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;背后的逻辑很简单：计算换显存 - MegEngine 使用重计算策略，实现了用时间换空间。&lt;/p&gt;&#xA;&lt;h2&gt;使用方法&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;动态图下开启：&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;在训练代码之前只需添加一行代码：&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;megengine.dtr.enable()&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;静态图下开启：&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;在编译静态图时使用 &lt;a href=&#34;https://www.megengine.org.cn/doc/stable/zh/reference/api/megengine.jit.DTRConfig.html#megengine.jit.DTRConfig&#34; rel=&#34;nofollow&#34; title=&#34;megengine.jit.DTRConfig&#34;&gt;&lt;code&gt;DTRConfig&lt;/code&gt;&lt;/a&gt; 设置 &lt;a href=&#34;https://www.megengine.org.cn/doc/stable/zh/reference/api/megengine.jit.trace.html#megengine.jit.trace&#34; rel=&#34;nofollow&#34; title=&#34;megengine.jit.trace&#34;&gt;&lt;code&gt;trace&lt;/code&gt;&lt;/a&gt; 的参数 &lt;code&gt;dtr_config&lt;/code&gt;：&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;from&lt;/code&gt; &lt;code&gt;megengine.jit ``import&lt;/code&gt; &lt;code&gt;trace, DTRConfig&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;config ``=&lt;/code&gt; &lt;code&gt;DTRConfig(eviction_threshold``=``8``*``1024``*``*``3``)&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;@&lt;a href=&#34;/member/trace&#34;&gt;trace&lt;/a&gt;``(symbolic``=``True``, dtr_config``=``config)&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;def&lt;/code&gt; &lt;code&gt;train_func(data, label, ``*&lt;/code&gt; &lt;code&gt;, net, optimizer, gm):&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;...&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;更多使用技巧，见官方文档  &lt;a href=&#34;https://www.megengine.org.cn/doc/stable/zh/user-guide/model-development/dtr/&#34; rel=&#34;nofollow&#34;&gt;https://www.megengine.org.cn/doc/stable/zh/user-guide/model-development/dtr/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;延展阅读：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/375642263&#34; rel=&#34;nofollow&#34;&gt;https://zhuanlan.zhihu.com/p/375642263&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1Bg411c7cf?spm_id_from=333.999.0.0&#34; rel=&#34;nofollow&#34;&gt;https://www.bilibili.com/video/BV1Bg411c7cf?spm_id_from=333.999.0.0&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;To 新朋友的特别提示：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;DTR 作为 MegEngine 原生特性，无法脱离 MegEngie 独立使用。&lt;/p&gt;&#xA;&lt;p&gt;好在 MegEngine 顶层 API 基于 Python ，采取了类似于 PyTorch 的风格，已被众多用户反馈易上手，入门简单。&lt;/p&gt;&#xA;&lt;p&gt;还有丰富的用户指南文档：&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://www.megengine.org.cn/doc/stable/zh/user-guide/index.html&#34; rel=&#34;nofollow&#34;&gt;https://www.megengine.org.cn/doc/stable/zh/user-guide/index.html&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;所以，不用顾虑太多，可以勇敢尝试哦~&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;开源地址： &lt;a href=&#34;https://github.com/MegEngine/MegEngine&#34; rel=&#34;nofollow&#34;&gt;https://github.com/MegEngine/MegEngine&lt;/a&gt;   （欢迎 star~  :D&lt;/p&gt;&#xA;</description>
+      <author>MegEngineBot</author>
+      <pubDate>07 Feb 2023 01:15:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>无限循环的动漫作品 - ACG</title>
+      <link>https://www.v2ex.com/t/913801</link>
+      <description>哪些动漫作品是无限循环题材的？类似「土拨鼠日」</description>
+      <author>gap</author>
+      <pubDate>07 Feb 2023 01:14:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>大家来推荐一下自己现在喜欢听的播客 - 问与答</title>
+      <link>https://www.v2ex.com/t/913799</link>
+      <description>目前我只有一个“疯投圈”但是更新比较慢&lt;br /&gt;主要讲的是很多目前商业上的一些诠释，比较通俗易懂，能拓宽自己视野</description>
+      <author>xiaotuo</author>
+      <pubDate>07 Feb 2023 01:10:27 +0000</pubDate>
+    </item>
+    <item>
+      <title>深圳联通能申请到固定 ip 吗 - 深圳</title>
+      <link>https://www.v2ex.com/t/913797</link>
+      <description>两年之前, 刚办宽带时,试过: 1 联通客服 2 工信部&lt;br /&gt;都不行...&lt;br /&gt;&lt;br /&gt;其实 zerotier 也能连回来, 但不太稳定. 所以还是想有个固定 ip 最好.&lt;br /&gt;&lt;br /&gt;有成功案例吗? 有的话请分享下, 谢谢!&lt;br /&gt;&lt;br /&gt;ps 另外请问联通的 ipv6 是否直接就是固定 ip? 如果可以的话我就重新刷个支持 ipv6 的固件.&lt;br /&gt;ps2 另外我还有一条闲置的电信宽带, 还有几个月. 不知道能不能迁过来叠加使用?</description>
+      <author>zzm88104</author>
+      <pubDate>07 Feb 2023 01:00:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>Mac 磁盘波动较大的问题 - macOS</title>
+      <link>https://www.v2ex.com/t/913796</link>
+      <description>&lt;p&gt;一般情况，我的 Mac 磁盘应该还有二三十 G 剩余空间，然而不知道是什么原因，这个空间在某些时刻会快速压缩，比如波动成 2G ，甚至到几百兆。&lt;/p&gt;&#xA;&lt;p&gt;过一会儿，又会回到二十多 G 的剩余。&lt;/p&gt;&#xA;&lt;p&gt;这是什么情况？&lt;/p&gt;&#xA;</description>
+      <author>eryajf</author>
+      <pubDate>07 Feb 2023 00:59:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>zlibrary 可以领个人三级域名了 - 分享发现</title>
+      <link>https://www.v2ex.com/t/913795</link>
+      <description>&lt;p&gt;流程：&lt;/p&gt;&#xA;&lt;p&gt;全程代理进入 &lt;a href=&#34;https://singlelogin.me&#34; rel=&#34;nofollow&#34;&gt;https://singlelogin.me&lt;/a&gt; &lt;/p&gt;&#xA;&lt;p&gt;——注册邮箱账号&amp;amp;激活——获取私人链接——代理打开你的私链(保持登录)——正常食用&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;不要泄露您的个人域&lt;/strong&gt;(也就是返回给你的链接当密码看待)，也不要共享指向您域的链接，因为它们受您自己的密码保护。如果您无法访问您的个人域或遇到其他问题，请随时通过 &lt;a href=&#34;mailto:1libsupp@1lib.to&#34;&gt;1libsupp@1lib.to&lt;/a&gt; 联系&lt;/p&gt;&#xA;&lt;h4&gt;有啥特别？&lt;/h4&gt;&#xA;&lt;p&gt;之前都是第三方捣鼓的方案，黄了多少次大家都有数。这次不需要搭建，已经喂到嘴里了🤪。目前支持转发之 TG 、邮箱、GD 等&lt;/p&gt;&#xA;&lt;h4&gt;更多功能&lt;/h4&gt;&#xA;&lt;p&gt;个人可以设置自己的搜索喜好方式包括屏蔽一些不喜欢的资源，突出某些参数关键词，建立自己的书单，自己喜欢的读物类型。预计还在开发，搞不好成为强大的社群（像豆瓣影视&lt;/p&gt;&#xA;&lt;p&gt;不确定是否会封车，不过有邮箱都搞一个吧，以便不时之需......&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;来源：&lt;a href=&#34;http://t.me/WenboNoHeya/908&#34; rel=&#34;nofollow&#34;&gt;t.me/WenboNoHeya/908&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;&#xA;</description>
+      <author>Wenbobobo</author>
+      <pubDate>07 Feb 2023 00:57:22 +0000</pubDate>
+    </item>
+    <item>
       <title>注册 ChatGPT 验证手机号时有人遇到过这个问题吗 - 问与答</title>
       <link>https://www.v2ex.com/t/913794</link>
       <description>&lt;p&gt;手机号用的是接码平台 &lt;code&gt;sms-activate&lt;/code&gt; 的手机号，巴西、印度之类的换过好几次。每次点击 &lt;code&gt;openAI&lt;/code&gt; 验证手机号的 &lt;code&gt;Send code&lt;/code&gt; 按钮后，都会提示：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;You&#39;ve made too many phone verification requests. Please try again later or contact us through our help center at help.openai.com.&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;尝试切换节点也没用，清除 &lt;code&gt;Local Storage&lt;/code&gt; 都是以上提示。&#xA;有人遇到过这个问题吗&lt;/p&gt;&#xA;</description>
