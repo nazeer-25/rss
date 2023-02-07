@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "阅读读物拼音和中文如何在一起排版 - 前端开发",
+      "Link": "https://www.v2ex.com/t/914066",
+      "Description": "\u003cp\u003e很多阅读的， 拼音在上，中文在下  如何实现呢。\u003c/p\u003e\n\u003cp\u003e客户需求, 后台导入佛经，web 页面显示每一个字的拼音，拼音下面显示字。 \u003c/p\u003e\n\u003cp\u003e文字转拼音插件是找到了，但是怎么排版显示难住了。。 \u003c/p\u003e\n\u003cp\u003e使用的 uiapp.\u003c/p\u003e\n",
+      "Author": "v2li32",
+      "PubDate": "2023-02-07T13:11:57Z"
+    },
+    {
+      "Title": "使用 clickhouse 遇到的一个奇怪问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/914065",
+      "Description": "\u003cp\u003e我使用 \u003ccode\u003eClickhouse\u003c/code\u003e 进行 \u003ccode\u003eJSON\u003c/code\u003e 数据清洗，代码如下:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003eSELECT *\nFROM\n(\nWITH JSONExtract(\n\tfield, \n\t'Tuple(transactions Nested(hash String, blockNumber String, value String, logs Nested(address String, data String, topics Array(String))))'\n) AS parsed_json\nSELECT \n\tuntuple(arrayJoin(tupleElement(parsed_json, 'transactions'))) as tx\nFROM\n\tjsonTemp jt\nLIMIT 5\n)\nLEFT ARRAY JOIN `tx.4`;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e查询结果如下:\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/s2YFl3Z.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e我使用以下代码创建了表:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003eCREATE TABLE logsTemp\n(\n\ttxHash String,\n\ttxblockNumber String,\n\tvalue String,\n\ttxlogs Tuple\n\t(\n\t\taddress String,\n\t\ttxlogsData String,\n\t\ttopics Array(String)\n\t)\n)\nENGINE = MergeTree\nORDER BY txblockNumber\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e使用以下代码执行插入操作:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003eINSERT INTO logsTemp \nSELECT * \nFROM \n(\n  SELECT *\n  FROM\n  (\n    WITH JSONExtract(\n      field, \n      'Tuple(transactions Nested(hash String, blockNumber String, value String, logs Nested(address String, data String, topics Array(String))))'\n    ) AS parsed_json\n    SELECT \n      untuple(arrayJoin(tupleElement(parsed_json, 'transactions'))) as tx\n    FROM\n      jsonTemp jt\n  )\n  LEFT ARRAY JOIN `tx.4`\n)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e结果发现插入后 \u003ccode\u003etxlogsData\u003c/code\u003e 缺失，如下:\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/47hEbMf.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e此处使用 \u003ccode\u003eClickhouse\u003c/code\u003e 处于单机部署状态，版本为 \u003ccode\u003e22.13.1.1942\u003c/code\u003e\u003c/p\u003e\n",
+      "Author": "wangshouh",
+      "PubDate": "2023-02-07T13:11:12Z"
+    },
+    {
+      "Title": "为什么没有能解析结构的 markdown to ppt 工具？ - 奇思妙想",
+      "Link": "https://www.v2ex.com/t/914064",
+      "Description": "\u003cp\u003e感觉现在的 markdown to ppt 工具都太原始了，就是直接根据\u003ccode\u003e---\u003c/code\u003e分页后布局，需要调整平时的写作习惯，专门为了做 PPT 而写一份 markdown\u003c/p\u003e\n\u003cp\u003e如果可以根据 markdown 的一、二、三……级标题以及内容构成的树形结构，将每个叶节点智能分页，这样不是就不用专门写一份 markdown 了吗，可以复用已有的 md 文件，也不用手动输入分割线\u003c/p\u003e\n",
+      "Author": "lijiabo",
+      "PubDate": "2023-02-07T13:05:39Z"
+    },
+    {
+      "Title": "（远程外企）全职：部分岗位开放远程，其他岗位建议到现场！ - 酷工作",
+      "Link": "https://www.v2ex.com/t/914063",
+      "Description": "项目：公司主要做自主研发 IM ，IT 通讯 APP 等相关产品！\u003cbr /\u003e\u003cbr /\u003e工作时间：9 小时单休，远程岗位享受每半年带薪休假 15 天的福利（薪资范围 20-25K ，到现场另谈）\u003cbr /\u003e\u003cbr /\u003eGOlang：5 年开发含 2-3 年 GO 经验，必须有 IM 语音经验，统招本科\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003eUI 专家：10 年设计经验，需要做 UI 测试题\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003eCDN 研发：负责 CDN 研发\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003eIM QT 开发：\u003cbr /\u003e\u003cbr /\u003e岗位职责：\u003cbr /\u003e1.基于 Window/Mac 平台 QT 界面开发；\u003cbr /\u003e\u003ca target=\"_blank\" href=\"http://2.IM\" rel=\"nofollow noopener\"\u003e2.IM\u003c/a\u003e 通信软件界面 UI 开发；\u003cbr /\u003e3.参与并完成系统的整体架构设计，同时完成架构代码的编写；\u003cbr /\u003e4.系统核心.模块级编码和系统联调维护；\u003cbr /\u003e5.负责 QT 底层优化，性能提升。\u003cbr /\u003e\u003cbr /\u003e任职要求：\u003cbr /\u003e1. 本科及以上计算机相关专业，精通 C/C++；\u003cbr /\u003e2. 有 3 年以上的基于 C++，QT 开发桌面应用系统的开发经验，有 Window/Mac QT 跨平台开发经验；\u003cbr /\u003e3. 熟悉多进程. 多线程. TCP/IP 通讯. 音视频处理，Socket 编程，内存管理机制等，具备 Window/Mac 平台调试和优化的能力；\u003cbr /\u003e4. 熟练使用 ViualStudio IDE 等开发工具，熟练开发 QML 界面；\u003cbr /\u003e5. 精通 QT 工作机制，精通 QT 开发，熟练掌握 QT 布局，Model/View,自定义控件；\u003cbr /\u003e6. 有 IM 开发经验者优先\u003cbr /\u003e\u003cbr /\u003e所需技能：C++、QML 、Windows/Mac 、QT 桌面、QT 、IM 通讯、音视频编解码，ffmpeg\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e渗透测试：\u003cbr /\u003e\u003cbr /\u003e职位描述：\u003cbr /\u003e1. 负责内部红蓝对抗，持续开展实网攻防对抗，配合技术防御体系的复盘，并提出改进建议，进行效果验证，跟踪落地\u003cbr /\u003e2. 负责渗透测试相关工作，带领团队针对公司及各下属公司的 IT 基础架构、系统及网络实施渗透测试，内部外部应用系统渗透测试及推动漏洞整改\u003cbr /\u003e3. 研究最新的安全攻防对抗技术，能从攻击者视角看问题，模拟 APT 攻击，不断提升攻击的广度和深度\u003cbr /\u003e4. 基于 ATT\u0026amp;CK 及 Kill Chain 梳理攻击 TTPs ，提升模拟攻击场景的覆盖度和深度，配合 Blue Team 提升检测覆盖度\u003cbr /\u003e\u003cbr /\u003e职位要求：\u003cbr /\u003e1 、有攻防演练红蓝对抗经验，能使用 Python 编写漏洞利用工具；\u003cbr /\u003e2 、至少熟悉两种渗透测试的方法：web 渗透、移动端渗透、社工等\u003cbr /\u003e3 、对信息安全相关概念、理论和方法具有一定的了解，热爱挑战，并愿意投身于信息安全行业；\u003cbr /\u003e4 、具有良好的职业道德，具有较好的口头表达能力和文字表达能力。\u003cbr /\u003e5 、能够承担压力开展工作，并能及时和各方沟通并反馈问题，解决问题。\u003cbr /\u003e加分项：\u003cbr /\u003e1 、在 freebuf 等安全论坛上有原创文章，或在漏洞平台上有较好排名。\u003cbr /\u003e2 、具备入侵应急响应的经验\u003cbr /\u003e3 、参与实网对抗并有良好表现",
+      "Author": "xf139586",
+      "PubDate": "2023-02-07T13:03:13Z"
+    },
+    {
       "Title": "申购成功茅台 1935，有必要购买吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/914062",
       "Description": "感觉 100 块都赚不到",
