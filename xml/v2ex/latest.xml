@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Glibc 的 Malloc 有时候不会把 free 的内存还给 OS，有趣的发现 - C</title>
+      <link>https://www.v2ex.com/t/914123</link>
+      <description>&lt;p&gt;假设我们对 Glibc malloc 和 free 的实现一无所知，malloc 了一大堆内存后在挨个 free 掉，会发现 free 的顺序实际上决定是否将内存返回给 OS ，看最后一个&lt;code&gt;system bytes&lt;/code&gt;：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;还给 OS 的情况： &lt;a href=&#34;https://godbolt.org/z/9n8GMY5cd&#34; rel=&#34;nofollow&#34;&gt;https://godbolt.org/z/9n8GMY5cd&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;不还给 OS 的情况： &lt;a href=&#34;https://godbolt.org/z/467d37hh7&#34; rel=&#34;nofollow&#34;&gt;https://godbolt.org/z/467d37hh7&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;下一步是读 malloc 的源码，估计是用一个 linked list 来管理 heap 内存的&lt;/p&gt;&#xA;</description>
+      <author>dangyuluo</author>
+      <pubDate>07 Feb 2023 21:39:23 +0000</pubDate>
+    </item>
+    <item>
       <title>ChatGPT 的到来，我们处在时代拐点的边缘了吗？ - 奇思妙想</title>
       <link>https://www.v2ex.com/t/914122</link>
       <description>一直在关注 ChatGPT 和一些生成式 AI ，对未来很期待也很焦虑和担心，产生了不少对当下的思考：&lt;br /&gt;&lt;br /&gt;1.时代的发展不是线性的，而是指数级别的，ChatGPT 的到来让我觉得强人工智能可能不是很遥远的事情，大家觉得我们是否处在 AI 时代拐点的边缘？&lt;br /&gt;&lt;br /&gt;2.我觉得科技使使生产力大幅提高，同时也会让人类更卷，很多岗位都被 AI 取代，现在有 ChatGPT 有 Copilot ，以后的发展可能新工作会减少，大面积失业可能无法避免，届时我们的核心竞争力到底是什么？&lt;br /&gt;&lt;br /&gt;3.人的学习能力是有限的，AI 的学习能力是无限的，以后的信息、知识迭代只会越来越快，教育可能会成大问题，因为小孩子学习的东西可能发现长大后就过时了？&lt;br /&gt;&lt;br /&gt;4.看过赫拉利的《未来简史》里面有提到无用阶级，我们会不会成为无用阶级？我们的自我实现需求和尊严需求有一部分是源于工作的，没了工作，我们的生活会不会失去意义感？&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;我总体是比较悲观的，未来是什么样的，我总感觉不是天堂就是地狱。这种发展趋势让我有种站在风口浪尖的感觉，不知道需要做点什么来来迎接这个时代的到来。一点幼稚的碎碎念，但是很希望看看大家的讨论和想法。</description>
