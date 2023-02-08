@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "为什么很多人说 dd if=/dev/urandom 无法有效防止 zfs 已删除文件的恢复？ - 信息安全",
+      "Link": "https://www.v2ex.com/t/914196",
+      "Description": "",
+      "Author": "edis0n0",
+      "PubDate": "2023-02-08T03:12:47Z"
+    },
+    {
+      "Title": "搭建通过 cloudflare 代理的 sing-box 教程 - VPS",
+      "Link": "https://www.v2ex.com/t/914195",
+      "Description": "\u003ch3\u003e1 安装 nginx\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-sh\"\u003eyum install epel-release -y\nyum install nginx -y\nyum install nginx-mod-stream -y\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e2. 配置 nginx\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e2.1 新建目录\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sh\"\u003emkdir /etc/nginx/tcp.d\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e2.2 增加如下文件内容到 /etc/nginx/tcp.d/stream.conf\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-nginx\"\u003estream {\n    map $ssl_preread_server_name $singbox {\n            trojan.example.com trojan;\n            ws.example.com trojan-websocket;\n    }\n    upstream trojan {\n            server 127.0.0.1:52000;\n    }\n    upstream trojan-websocket {\n            server 127.0.0.1:52001;\n    }\n    server {\n            listen 443      reuseport;\n            listen [::]:443 reuseport;\n            proxy_pass      $singbox;\n            ssl_preread     on;\n            proxy_protocol  on;\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e2.3 编辑 /etc/nginx/nginx.conf, 在文件末尾添加如下一行\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-nginx\"\u003einclude /etc/nginx/tcp.d/*.conf;\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e2.4 编辑回流配置 /etc/nginx/conf.d/fallback.conf\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-nginx\"\u003eserver {\n    listen 80;\n    server_name trojan.example.com;\n    index index.html;\n    root /data/app/web/hy;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e2.5 运行 nginx\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sh\"\u003esystemctl start nginx\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e3. 安装 go\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-sh\"\u003ewget https://go.dev/dl/go1.20.linux-amd64.tar.gz\ntar xzf go1.20.linux-amd64.tar.gz\nmv go /opt/\nln -s /opt/go/bin/go /usr/local/bin/go\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e如果没有 wget 命令, 使用 yum install wget 安装\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e4. 安装 sing-box\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-sh\"\u003ego install -v github.com/sagernet/sing-box/cmd/sing-box@lates\nmv ~/go/bin/sing-box /opt/go/bin/\nln -s /opt/go/bin/sing-box /usr/local/bin/sing-box\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e5. 编辑配置文件 /etc/sing-box.conf\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n  \"log\": {\n    \"level\": \"info\"\n  },\n  \"inbounds\": [\n    {\n      \"type\": \"trojan\",\n      \"tag\": \"trojan-in\",\n      \"listen\": \"127.0.0.1\",\n      \"listen_port\": 52001,\n      \"tcp_fast_open\": true,\n      \"udp_fragment\": true,\n      \"sniff\": true,\n      \"sniff_override_destination\": false,\n      \"udp_timeout\": 300,\n      \"proxy_protocol\": true,\n      \"proxy_protocol_accept_no_header\": false,\n      \"users\": [\n        {\n          \"name\": \"whatever\",\n          \"password\": \"YOUPASSWORD\"\n        }\n      ],\n      \"tls\": {\n        \"enabled\": true,\n        \"server_name\": \"trojan.example.com\",\n        \"alpn\": [\n          \"http/1.1\"\n        ],\n        \"min_version\": \"1.2\",\n        \"max_version\": \"1.3\",\n        \"certificate_path\": \"/etc/certs/cert.pem\",\n        \"key_path\": \"/etc/certs/key.pem\"\n      },\n      \"transport\": {\n        \"type\": \"ws\",\n        \"path\": \"/wss\",\n        \"max_early_data\": 0,\n        \"early_data_header_name\": \"Sec-WebSocket-Protocol\"\n      }\n    }\n  ],\n  \"outbounds\": [\n    {\n      \"type\": \"direct\",\n      \"tag\": \"direct\"\n    }\n  ]\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e6. ssl 证书\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e6.1 新建证书目录\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sh\"\u003emkdir /etc/certs\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e6.2 去 cloudflare 上生成证书, 分别命名为 cert.pem 和 key.pem, 然后上传到 /etc/certs/目录下\n\u003cimg alt=\"cf\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.niupic.com/images/2023/02/07/ajL8.png\"/\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e7. 启动\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-sh\"\u003emkdir -p /data/logs\nnohup sing-box run -c /etc/sing-box.conf \u0026gt; /data/logs/sing.log 2\u0026gt;\u0026amp;1 \u0026amp;\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "BigGodMan",
+      "PubDate": "2023-02-08T03:08:36Z"
+    },
+    {
+      "Title": "业务字段定义变化了，数据库的字段要不要跟着变？ - MySQL",
+      "Link": "https://www.v2ex.com/t/914194",
+      "Description": "\u003cp\u003e问题发生在店铺装修的场景上，装修的配置项是 json 格式存储的，第一版的时候业务侧给的定义是边距，于是字段用的 margin ，但是后来又做了细化，变成了内边距，这时 json 里存储的 margin 对应的就是内边距的值。\u003c/p\u003e\n\u003cp\u003e第三版的时候又增加外边距，这个情况下：\u003c/p\u003e\n\u003cp\u003e存量数据该不该把 margin 映射为 padding 呢？\u003c/p\u003e\n\u003cp\u003e还是另起一个字段表示外边距，沿用 margin 表示内边距呢？\u003c/p\u003e\n\u003cp\u003e如果很多业务字段都出现这个情况，是不是都要这么做呢？\u003c/p\u003e\n",
+      "Author": "jasongzj",
+      "PubDate": "2023-02-08T03:06:38Z"
+    },
+    {
+      "Title": "求助关于老婆生孩子后打无痛，每年都会闪腰的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/914193",
+      "Description": "老婆子自打生完孩子后，这四五年几乎每年都会闪腰一两次，每次闪腰都会持续一星期左右，腰部完全用不上力气，还有些疼，看的挺心疼的。 去过几次医院检查 只是说的腰肌劳损，每次都是在医院做几天按摩，按后能舒服一点点。     \u003cbr /\u003e\u003cbr /\u003e不知道跟 打无痛针有没有关系， 有没有什么办法能彻底好？\u003cbr /\u003e\u003cbr /\u003e站里大佬们不知道有没有也是这种情况的，有没有什么解决办法",
+      "Author": "Liuman",
+      "PubDate": "2023-02-08T03:05:08Z"
+    },
+    {
       "Title": "（纯发泄）苹果的多选操作真的智障，都多选还不能批量操作 - Apple",
       "Link": "https://www.v2ex.com/t/914192",
       "Description": "\u003cp\u003e给 apple music 的播放列表加音乐，不能多选加入，批量删除还得一个个点。这不是智障是啥。\u003c/p\u003e\n",
