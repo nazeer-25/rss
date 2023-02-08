@@ -24,6 +24,9 @@ Report Issue: https://github.com/chyroc/grss/issues
 | 品玩 - 实时要闻 | [JSON](./json/latest/pingwest/status.json) | [RSS](./xml/pingwest/status.xml) | [HTML](./html/pingwest/status/index.html) |
 | Reddit - 504 Gateway Time-out | [JSON](./json/latest/reddit/community/hot/golang.json) | [RSS](./xml/reddit/community/hot/golang.xml) | [HTML](./html/reddit/community/hot/golang/index.html) |
 | Reddit - 504 Gateway Time-out | [JSON](./json/latest/reddit/community/hot/technology.json) | [RSS](./xml/reddit/community/hot/technology.xml) | [HTML](./html/reddit/community/hot/technology/index.html) |
+| Reddit - 504 Gateway Time-out | [JSON](./json/latest/reddit/community/hot/geek.json) | [RSS](./xml/reddit/community/hot/geek.xml) | [HTML](./html/reddit/community/hot/geek/index.html) |
+| 少数派专栏 - 播客那些事 | [JSON](./json/latest/sspai/column/264.json) | [RSS](./xml/sspai/column/264.xml) | [HTML](./html/sspai/column/264/index.html) |
+| 少数派专栏 - 生产力周报 | [JSON](./json/latest/sspai/column/266.json) | [RSS](./xml/sspai/column/266.xml) | [HTML](./html/sspai/column/266/index.html) |
 | 少数派 - 推荐 | [JSON](./json/latest/sspai/index.json) | [RSS](./xml/sspai/index.xml) | [HTML](./html/sspai/index/index.html) |
 | 少数派 - Matrix | [JSON](./json/latest/sspai/matrix.json) | [RSS](./xml/sspai/matrix.xml) | [HTML](./html/sspai/matrix/index.html) |
 | Go语言中文网 - 首页 | [JSON](./json/latest/studygolang/index.json) | [RSS](./xml/studygolang/index.xml) | [HTML](./html/studygolang/index/index.html) |
