@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "算法分享: Golang HTTP 动态请求路径解析 - 程序员",
+      "Link": "https://www.v2ex.com/t/914129",
+      "Description": "\u003cblockquote\u003e\n\u003cp\u003eACM 高手可以自动略过了. \u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e大家好, 我是不知名框架`uRouter`的作者, 前 ACM 铜牌选手, 今天给大家分享一个动态路由匹配算法.\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e没看过\u003ccode\u003egin\u003c/code\u003e这部分源码, 但自己实现一个也不难. 核心是一个字典树的变种, 称之为树形\u003ccode\u003eMap\u003c/code\u003e或许更为贴切.\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e代码\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport \"strings\"\n\nconst (\n\tdefaultSeparator = \"/\" // 默认路径分隔符\n\tdefaultVarPrefix = ':' // 默认变量前缀\n)\n\ntype (\n\tapiHandler struct {\n\t\tVPath string   // API 路径\n\t\tFuncs []func() // 处理函数\n\t}\n\n\trouteTree struct {\n\t\tValue    *apiHandler           // 值\n\t\tChildren map[string]*routeTree // 子节点\n\t}\n)\n\nfunc newRouteTree() *routeTree { return new(routeTree) }\n\n// 判断字符串是否为变量\nfunc isVar(s string) bool { return len(s) \u0026gt; 0 \u0026amp;\u0026amp; s[0] == defaultVarPrefix }\n\n// 分割字符串; 在原数组的基础上游走, 减少内存分配次数\nfunc split(s string, sep string) []string {\n\tvar j = 0\n\tvar list = strings.Split(s, sep)\n\tfor i, v := range list {\n\t\tif v != \"\" {\n\t\t\tlist[j] = list[i]\n\t\t\tj++\n\t\t}\n\t}\n\treturn list[:j]\n}\n\n// Set 注册接口\nfunc (c *routeTree) Set(vpath string, funcs []func()) {\n\tvar handler = \u0026amp;apiHandler{VPath: vpath, Funcs: funcs}\n\tvar list = split(handler.VPath, defaultSeparator)\n\tif len(list) == 0 {\n\t\treturn\n\t}\n\tc.doSet(c, 0, list, handler)\n}\n\nfunc (c *routeTree) doSet(node *routeTree, index int, list []string, handler *apiHandler) {\n\tvar segment = list[index]\n\tif isVar(segment) {\n\t\tsegment = \"*\"\n\t}\n\n\tvar next = node.Children[segment]\n\tif node.Children == nil {\n\t\tnode.Children = make(map[string]*routeTree)\n\t}\n\tif node.Children[segment] == nil {\n\t\tnext = \u0026amp;routeTree{}\n\t\tnode.Children[segment] = next\n\t}\n\tif index+1 == len(list) {\n\t\tnext.Value = handler\n\t} else {\n\t\tc.doSet(next, index+1, list, handler)\n\t}\n}\n\n// Get 查找接口\nfunc (c *routeTree) Get(path string) (*apiHandler, bool) {\n\tvar list = split(path, defaultSeparator)\n\tif len(list) == 0 {\n\t\treturn nil, false\n\t}\n\treturn c.doGet(c, 0, list)\n}\n\nfunc (c *routeTree) doGet(node *routeTree, index int, list []string) (*apiHandler, bool) {\n\tif index == len(list) {\n\t\treturn node.Value, true\n\t}\n\tvar segment = list[index]\n\tif v, ok := node.Children[segment]; ok {\n\t\treturn c.doGet(v, index+1, list)\n\t}\n\tif v, ok := node.Children[\"*\"]; ok {\n\t\treturn c.doGet(v, index+1, list)\n\t}\n\treturn nil, false\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003e性能测试\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e本测试共注册 1024 个接口, 每个接口分为 4 段.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003egoos: darwin\ngoarch: arm64\npkg: github.com/lxzan/uRouter\nBenchmarkRouteTree_Get-8   \t 6707703\t       168.2 ns/op\t      80 B/op\t       1 allocs/op\nPASS\nok  \tgithub.com/lxzan/uRouter\t1.433s\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "Nazz",
+      "PubDate": "2023-02-08T00:19:46Z"
+    },
+    {
+      "Title": "ChatGPT 访问被拒该如何解决？ - 问与答",
+      "Link": "https://www.v2ex.com/t/914128",
+      "Description": "访问该地址： \u003ca target=\"_blank\" href=\"https://chat.openai.com/chat\" rel=\"nofollow noopener\"\u003ehttps://chat.openai.com/chat\u003c/a\u003e 时出现如下错误提示：\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/KMlRDM9.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/KMlRDM9.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e",
+      "Author": "airbotgo",
+      "PubDate": "2023-02-08T00:18:43Z"
+    },
+    {
       "Title": "淘宝上卖的 iPhone 用的 otg 转 u 盘接头真的能读写普通文件吗 - 分享发现",
       "Link": "https://www.v2ex.com/t/914126",
       "Description": "",
@@ -242,7 +256,7 @@
       "PubDate": "2023-02-07T14:50:05Z"
     },
     {
-      "Title": "第一份工作，半导体 or 自动化该选哪个 - 酷工作",
+      "Title": "第一份工作，半导体 or 自动化该选哪个 - 职场话题",
       "Link": "https://www.v2ex.com/t/914092",
       "Description": "\u003cp\u003e各位 v 友好，我的朋友来问我两个 offer 选哪个，我觉得有点难选，大家帮忙看下选哪个\u003c/p\u003e\n\u003cp\u003e背景：211 本科，机械专业\u003c/p\u003e\n\u003cp\u003e1 .  半导体公司（民企）\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e16 年成立，已获得 2 轮融资，也有政策扶持\u003c/li\u003e\n\u003cli\u003e在上海，离家近，可以回家住\u003c/li\u003e\n\u003cli\u003e岗位是做半导体探针开发，处于研发阶段\u003c/li\u003e\n\u003cli\u003ehr 说研发部门会有项目奖金，主管说研发部门要耐得住苦\u003c/li\u003e\n\u003cli\u003e朋友没说具体年薪，当作 X\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e2 .  自控工程公司（日企）\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e主营自动化系统，在上海有 15+年，待遇=国企\u003c/li\u003e\n\u003cli\u003e在上海市中心，离家远，可能有住房补贴\u003c/li\u003e\n\u003cli\u003e岗位是做楼宇自动化\u003c/li\u003e\n\u003cli\u003e公司规模大，听说加班很多\u003c/li\u003e\n\u003cli\u003e目前还在走流程，没有太多信息\u003c/li\u003e\n\u003cli\u003e还没收到 offer ，预测会比 X 稍多一点。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e考虑到租房，最后到手的工资应该相差不大。\n第一份工作，选哪个好点，各位彦祖们给点建议\u003c/p\u003e\n",
       "Author": "lance1ot",
