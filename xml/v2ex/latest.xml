@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请问大家，目前，多个 windows 设备云剪贴板体验如何？ - 问与答</title>
+      <link>https://www.v2ex.com/t/914132</link>
+      <description>如题，平时在家里用 MacBook 配合黑苹果，体验还不错，想再买个小主机配合 win 本（已有）使用，有人可以说说 win 生态下这种多设备配合使用的体验如何嘛？谢谢大家</description>
+      <author>sekisui</author>
+      <pubDate>08 Feb 2023 00:40:02 +0000</pubDate>
+    </item>
+    <item>
+      <title>买服务器，一台硬盘 10000 小时，一台硬盘 0 小时，谁以后发生故障概率更高？ - 程序员</title>
+      <link>https://www.v2ex.com/t/914131</link>
+      <description>现在购买了两台服务器，都是：2x1TB nvme 组 raid0 。&lt;br /&gt;&lt;br /&gt;以后业务方面是读远大于写，一台两块硬盘都 10000 小时，一台两块硬盘都是 0 小时，想舍弃一台以后硬盘故障概率更高的机器，舍弃哪一台好？</description>
+      <author>kisshere</author>
+      <pubDate>08 Feb 2023 00:29:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>因为一碗面，去了一座城 - 旅行</title>
+      <link>https://www.v2ex.com/t/914130</link>
+      <description>&lt;p&gt;2023 年到了 2 月，继续推进 flag 的执行，一月一旅行，这次选择了城市。旅程应该是丰富的，除了山川湖海的美景，还有大城小镇的生活，我欣赏美景，也热爱生活&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://blog.ops-coffee.cn/r/city-china-jiangsu-zhenjiang&#34; rel=&#34;nofollow&#34;&gt;https://blog.ops-coffee.cn/r/city-china-jiangsu-zhenjiang&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;去了镇江，有对这里感兴趣的小伙伴可以看看做个参考&lt;/p&gt;&#xA;</description>
+      <author>37Y37</author>
+      <pubDate>08 Feb 2023 00:27:00 +0000</pubDate>
+    </item>
+    <item>
       <title>算法分享: Golang HTTP 动态请求路径解析 - 程序员</title>
       <link>https://www.v2ex.com/t/914129</link>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;ACM 高手可以自动略过了. &lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;pre&gt;&lt;code&gt;大家好, 我是不知名框架`uRouter`的作者, 前 ACM 铜牌选手, 今天给大家分享一个动态路由匹配算法.&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;没看过&lt;code&gt;gin&lt;/code&gt;这部分源码, 但自己实现一个也不难. 核心是一个字典树的变种, 称之为树形&lt;code&gt;Map&lt;/code&gt;或许更为贴切.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;代码&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import &#34;strings&#34;&#xA;&#xA;const (&#xA;&#x9;defaultSeparator = &#34;/&#34; // 默认路径分隔符&#xA;&#x9;defaultVarPrefix = &#39;:&#39; // 默认变量前缀&#xA;)&#xA;&#xA;type (&#xA;&#x9;apiHandler struct {&#xA;&#x9;&#x9;VPath string   // API 路径&#xA;&#x9;&#x9;Funcs []func() // 处理函数&#xA;&#x9;}&#xA;&#xA;&#x9;routeTree struct {&#xA;&#x9;&#x9;Value    *apiHandler           // 值&#xA;&#x9;&#x9;Children map[string]*routeTree // 子节点&#xA;&#x9;}&#xA;)&#xA;&#xA;func newRouteTree() *routeTree { return new(routeTree) }&#xA;&#xA;// 判断字符串是否为变量&#xA;func isVar(s string) bool { return len(s) &amp;gt; 0 &amp;amp;&amp;amp; s[0] == defaultVarPrefix }&#xA;&#xA;// 分割字符串; 在原数组的基础上游走, 减少内存分配次数&#xA;func split(s string, sep string) []string {&#xA;&#x9;var j = 0&#xA;&#x9;var list = strings.Split(s, sep)&#xA;&#x9;for i, v := range list {&#xA;&#x9;&#x9;if v != &#34;&#34; {&#xA;&#x9;&#x9;&#x9;list[j] = list[i]&#xA;&#x9;&#x9;&#x9;j++&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return list[:j]&#xA;}&#xA;&#xA;// Set 注册接口&#xA;func (c *routeTree) Set(vpath string, funcs []func()) {&#xA;&#x9;var handler = &amp;amp;apiHandler{VPath: vpath, Funcs: funcs}&#xA;&#x9;var list = split(handler.VPath, defaultSeparator)&#xA;&#x9;if len(list) == 0 {&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;c.doSet(c, 0, list, handler)&#xA;}&#xA;&#xA;func (c *routeTree) doSet(node *routeTree, index int, list []string, handler *apiHandler) {&#xA;&#x9;var segment = list[index]&#xA;&#x9;if isVar(segment) {&#xA;&#x9;&#x9;segment = &#34;*&#34;&#xA;&#x9;}&#xA;&#xA;&#x9;var next = node.Children[segment]&#xA;&#x9;if node.Children == nil {&#xA;&#x9;&#x9;node.Children = make(map[string]*routeTree)&#xA;&#x9;}&#xA;&#x9;if node.Children[segment] == nil {&#xA;&#x9;&#x9;next = &amp;amp;routeTree{}&#xA;&#x9;&#x9;node.Children[segment] = next&#xA;&#x9;}&#xA;&#x9;if index+1 == len(list) {&#xA;&#x9;&#x9;next.Value = handler&#xA;&#x9;} else {&#xA;&#x9;&#x9;c.doSet(next, index+1, list, handler)&#xA;&#x9;}&#xA;}&#xA;&#xA;// Get 查找接口&#xA;func (c *routeTree) Get(path string) (*apiHandler, bool) {&#xA;&#x9;var list = split(path, defaultSeparator)&#xA;&#x9;if len(list) == 0 {&#xA;&#x9;&#x9;return nil, false&#xA;&#x9;}&#xA;&#x9;return c.doGet(c, 0, list)&#xA;}&#xA;&#xA;func (c *routeTree) doGet(node *routeTree, index int, list []string) (*apiHandler, bool) {&#xA;&#x9;if index == len(list) {&#xA;&#x9;&#x9;return node.Value, true&#xA;&#x9;}&#xA;&#x9;var segment = list[index]&#xA;&#x9;if v, ok := node.Children[segment]; ok {&#xA;&#x9;&#x9;return c.doGet(v, index+1, list)&#xA;&#x9;}&#xA;&#x9;if v, ok := node.Children[&#34;*&#34;]; ok {&#xA;&#x9;&#x9;return c.doGet(v, index+1, list)&#xA;&#x9;}&#xA;&#x9;return nil, false&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;性能测试&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;本测试共注册 1024 个接口, 每个接口分为 4 段.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;pre&gt;&lt;code&gt;goos: darwin&#xA;goarch: arm64&#xA;pkg: github.com/lxzan/uRouter&#xA;BenchmarkRouteTree_Get-8   &#x9; 6707703&#x9;       168.2 ns/op&#x9;      80 B/op&#x9;       1 allocs/op&#xA;PASS&#xA;ok  &#x9;github.com/lxzan/uRouter&#x9;1.433s&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
