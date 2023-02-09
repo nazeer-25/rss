@@ -4,17 +4,78 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>如何正确处理大批量数据的业务 - 程序员</title>
+      <link>https://www.v2ex.com/t/914452</link>
+      <description>&lt;p&gt;Hello, all! &lt;/p&gt;&#xA;&lt;p&gt;数据库中有一大批待处理的数据，可能有百万量级，还会增长。希望定义一个接口，请求之后查询并处理好这些数据。&#xA;处理的逻辑可能涉及 RPC 之类耗时较长的代码。因此，我使用异步代码处理。伪代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// 1.查询数据库&#xA;List&amp;lt;Biz&amp;gt; bizs = queryDB();&#xA;// 2.分批次&#xA;List&amp;lt;List&amp;lt;Biz&amp;gt;&amp;gt; bizLists = Lists.partition(bizs, 1000);&#xA;// 3.异步处理 list&#xA;bizLists.forEach(list -&amp;gt; listAsyncService.handle(list));&#xA;// 4.listAsyncService#handle 也是异步处理&#xA;list.forEach(biz -&amp;gt; asyncService.handle(biz));&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;请教一下，上述代码是否合理。在数据量很大的情况下，如何避免步骤 1 出现 OOM 。&lt;/p&gt;&#xA;</description>
+      <author>ak1ak</author>
+      <pubDate>09 Feb 2023 01:13:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>用了好多年的 firefox，他的“同步”依然很迷 - 程序员</title>
+      <link>https://www.v2ex.com/t/914450</link>
+      <description>&lt;p&gt;买了新电脑，登录火狐&lt;/p&gt;&#xA;&lt;p&gt;登陆成功后，提示 &#34; 在另一台设备上登录 Firefox 以完成设置 &#34;&#xA;可是旧设备不在身边，没法继续了&lt;/p&gt;&#xA;&lt;p&gt;它本身解释说，&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&#xA;为什么是同步多个设备？&#xA;&#xA;同步服务不是一个持久备份服务，它只是在您自己的设备之间安全传输已保存的书签、历史记录和密码的一种方式。&#xA;&#xA;您应当在至少两台设备上安装 Firefox 并使用同步，以预防需要恢复时忘记了密码，那时将无法找回数据。 &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;难道火狐本身没有数据备份服务器？全靠客户端自己通信同步？这也太简陋了吧，&lt;br/&gt;&#xA;如果是规避隐私，不想沾染因果，&#xA;使用端到端加密也能保证隐私和便捷性吧  &lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;ps：我用的国内版。&lt;/p&gt;&#xA;</description>
+      <author>liuidetmks</author>
+      <pubDate>09 Feb 2023 01:12:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>[教程] OpenAI 付费或者购买 ChatGpt Plus 方法 - OpenAI</title>
+      <link>https://www.v2ex.com/t/914449</link>
+      <description>&lt;p&gt;关键词：虚拟信用卡，网络&lt;/p&gt;&#xA;&lt;p&gt;1 、开一个海外虚拟 master 信用卡(Depay ），这步稍微麻烦，注册链接：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://depay.depay.one/web-app/register-h5?invitCode=940477&#34; rel=&#34;nofollow&#34;&gt;Depay 注册&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;2 、通过币安或其他平台转 USDT 到你开好的信用卡里 （没有渠道的话可以提前放弃了）&lt;/p&gt;&#xA;&lt;p&gt;3 、 [关键]  OpenAI 付费或订阅 ChatGpt Plus 时，当时的网络必须是美国或印度的 IP （其他不知）&lt;/p&gt;&#xA;&lt;p&gt;实测 Deepl 的服务也行&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;图片&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/F4G2Fgy.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>cattrace</author>
+      <pubDate>09 Feb 2023 01:07:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>我让 chatgpt 写个心形跳动的 CSS - OpenAI</title>
+      <link>https://www.v2ex.com/t/914448</link>
+      <description>&amp;lt;html&amp;gt;&#xA;&amp;lt;head&amp;gt;&#xA;&amp;lt;title&amp;gt;1&amp;lt;/title&amp;gt;&#xA;&amp;lt;style type=&#34;text/css&#34;&amp;gt;&#xA;.heart {&#xA;  width: 50px;&#xA;  height: 50px;&#xA;  position: relative;&#xA;  margin: 50px auto;&#xA;}&#xA;&lt;p&gt;.heart:before,&#xA;.heart:after {&#xA;content: &#34;&#34;;&#xA;position: absolute;&#xA;top: 20px;&#xA;left: 25px;&#xA;width: 25px;&#xA;height: 25px;&#xA;background: #f00;&#xA;border-radius: 25px 25px 0;&#xA;transform: rotate(45deg);&#xA;transform-origin: 0 100%;&#xA;}&lt;/p&gt;&#xA;&lt;p&gt;.heart:after {&#xA;left: 0;&#xA;transform: rotate(-45deg);&#xA;transform-origin: 100% 100%;&#xA;}&lt;/p&gt;&#xA;&lt;p&gt;@&lt;a href=&#34;/member/keyframes&#34;&gt;keyframes&lt;/a&gt; heartBeat {&#xA;0% {&#xA;transform: scale(1);&#xA;}&#xA;14% {&#xA;transform: scale(1.3);&#xA;}&#xA;28% {&#xA;transform: scale(1);&#xA;}&#xA;}&lt;/p&gt;&#xA;&lt;p&gt;.heart.beat {&#xA;animation: heartBeat 1s infinite;&#xA;}&lt;/p&gt;&#xA;&amp;lt;/style&amp;gt;&#xA;&amp;lt;/head&amp;gt;&#xA;&amp;lt;body&amp;gt;&#xA;&lt;div&gt;&lt;/div&gt;&#xA;&amp;lt;/body&amp;gt;&#xA;这是个啥心形啊！我晕，不过确实蛮厉害</description>
+      <author>superdotcom</author>
+      <pubDate>09 Feb 2023 01:07:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教下搭了个 vmess ws tls， 4/5g 网络连不上 - VPS</title>
+      <link>https://www.v2ex.com/t/914447</link>
+      <description>&lt;p&gt;试了几家的 vps ，搭完之后，家里宽带出来的 wifi 和有线网都正常用，但手机用 4/5g 网络连接的话就会提示 io:read/write on closed pipe ，手机是移动卡。但去别的地方连过移动宽带的 wifi 又是能正常连的，需然偶尔也会提示那个。同样的脚本用在阿里云就没问题，但阿里的香港绕路美国太慢了。请问这是什么问题？ 4/5g 网络下 ping 服务器正常的，tracert 也能到达。有知道什么原因吗？&lt;/p&gt;&#xA;</description>
+      <author>congwing</author>
+      <pubDate>09 Feb 2023 01:05:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>Chrome 最新内核 110，不再支持 Windows 7/8 - Chrome</title>
+      <link>https://www.v2ex.com/t/914446</link>
+      <author>zxf4399</author>
+      <pubDate>09 Feb 2023 01:02:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>现在很多国内网站都不在 google play 上架吗？ - Android</title>
+      <link>https://www.v2ex.com/t/914445</link>
+      <description>豆瓣，知乎，头条，都没找到。</description>
+      <author>brucecao</author>
+      <pubDate>09 Feb 2023 00:56:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>如果巨硬在 ChatGPT 里插商业(软)广告, 用户有没有办法能够识别出来? 这种行为目前有法规约束吗? - 问与答</title>
+      <link>https://www.v2ex.com/t/914444</link>
+      <author>mobpsycho100</author>
+      <pubDate>09 Feb 2023 00:54:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教奇怪的群晖拷贝速度问题 - NAS</title>
+      <link>https://www.v2ex.com/t/914443</link>
+      <description>&lt;p&gt;群晖版本 6.2 ，手机 vivo x90&lt;/p&gt;&#xA;&lt;p&gt;手机用了 mixplorer ，拷贝群晖共享的文件，不管是 smb 还是 webdav 速度都只有 25m/s ，群晖架 iperf3 测速正常。换 win 无线网卡拷贝群晖，速度 65m/s ，正常。怀疑 mixplorer 兼容性，无线网拷贝 debian 共享的 webdav ，速度 65m/s ，正常。&lt;/p&gt;&#xA;&lt;p&gt;照网上一些说法，群晖关了 ipv6 ，还是不行。&lt;/p&gt;&#xA;</description>
+      <author>freechuzhuo</author>
+      <pubDate>09 Feb 2023 00:53:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>[记录]-2023-02-08 凌晨 在公司里玩 Persona 3 FES - 生活</title>
+      <link>https://www.v2ex.com/t/914442</link>
+      <description>&lt;p&gt;&lt;img alt=&#34;ps3.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/02/09/JCoWBYINRzmrnPf.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>PendingOni</author>
+      <pubDate>09 Feb 2023 00:51:15 +0000</pubDate>
+    </item>
+    <item>
       <title>CHATGPT 注册要用外国手机号，有哪个平台的接收验证码的成功率比较高 - 问与答</title>
       <link>https://www.v2ex.com/t/914441</link>
       <author>AC220</author>
       <pubDate>09 Feb 2023 00:47:48 +0000</pubDate>
-    </item>
-    <item>
-      <title>跟风发个美区 Youtube 拼车， 58 元/年 - YouTube</title>
-      <link>https://www.v2ex.com/t/914440</link>
-      <description>&lt;p&gt;土耳其 YouTube Premium 6 人车，美国家庭组&lt;/p&gt;&#xA;&lt;p&gt;新开车，免费试订结束日期：2023 年 3 月 9 日，过试用期收费&lt;/p&gt;&#xA;&lt;p&gt;想上车的留 tg&lt;/p&gt;&#xA;</description>
-      <author>Router2</author>
-      <pubDate>09 Feb 2023 00:40:56 +0000</pubDate>
     </item>
     <item>
       <title>在大城市漂的 90 后，应该是最绝望的年轻人吧 - 问与答</title>
@@ -238,6 +299,13 @@
       <description>比如 com/ 这是无法直接访问的，无解析。&lt;br /&gt;&lt;br /&gt;我记得有解析的 tld 应该至少有两个来着以前见过，但是现在怎么都搜不到，或者说不知道如何构造搜索语句</description>
       <author>just1</author>
       <pubDate>08 Feb 2023 13:46:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>跟风发个美区 Youtube 拼车， 58 元/年 - YouTube</title>
+      <link>https://www.v2ex.com/t/914440</link>
+      <description>&lt;p&gt;土耳其 YouTube Premium 6 人车，美国家庭组&lt;/p&gt;&#xA;&lt;p&gt;新开车，免费试订结束日期：2023 年 3 月 9 日，过试用期收费&lt;/p&gt;&#xA;&lt;p&gt;想上车的留 tg&lt;/p&gt;&#xA;</description>
+      <author>Router2</author>
+      <pubDate>09 Feb 2023 00:40:56 +0000</pubDate>
     </item>
     <item>
       <title>如何把一台 intel 芯片的 mac 作为 apple 芯片的 mac 电脑的外置磁盘 - 程序员</title>
