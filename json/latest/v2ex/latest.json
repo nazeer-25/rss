@@ -4,9 +4,30 @@
   "Description": "",
   "Items": [
     {
+      "Title": "GPS 是怎么做到同时被上亿交通工具，电子设备使用而不宕机的 - 问与答",
+      "Link": "https://www.v2ex.com/t/914634",
+      "Description": "\u003cp\u003e目前所有 GPS 卫星加起来还不到 50 颗，全球所有汽车，船只，飞机等交通工具加一起怎么说也有 10 亿，再算上天文数字般使用 GPS 的电子产品，请问是如何保持如此巨大规模的计算能力同时流畅且实时 24/7 全天候不宕机的稳定性。\u003c/p\u003e\n\u003cp\u003eps 听人说卫星上的计算芯片还不如几张高端显卡强悍，果真如此吗？\u003c/p\u003e\n",
+      "Author": "nztomoto",
+      "PubDate": "2023-02-09T08:31:44Z"
+    },
+    {
+      "Title": "尴尬的时间节点把 iPhone 屏幕摔坏，不知如何选择？ - iPhone",
+      "Link": "https://www.v2ex.com/t/914632",
+      "Description": "\u003cp\u003e把 13 mini 摔坏了，用回 XR ，感觉像个大搬砖\n不理解为什么现在的手机越出越大，13 mini 用了 9 个月大小刚刚合适，续航也没觉得有毛病\u003c/p\u003e\n\u003cp\u003e想问问 V2er 们怎么选？\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e修好 13 mini 的屏幕，维修费 1800 （犹豫的点是维修费不划算）\u003c/li\u003e\n\u003cli\u003e换台一样的 13 mini ，用到 15 mini/pro 出来\u003c/li\u003e\n\u003cli\u003e换 14 pro （高刷屏加分，双卡加分，没有灵动岛的需求，并且有点犹豫 15 系列的 type-c 和 3 nm ）\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e没有继续用 XR 的选项是因为，存储空间只有 64G 不够\u003c/p\u003e\n",
+      "Author": "zwithz1998",
+      "PubDate": "2023-02-09T08:23:46Z"
+    },
+    {
+      "Title": "尝试用高版本 Java 写了一个 either 类 - 程序员",
+      "Link": "https://www.v2ex.com/t/914630",
+      "Description": "\u003cp\u003e\u003ca href=\"https://gist.github.com/yazinnnn/2af2af906e98157966175fbc481c1f6c\" rel=\"nofollow\"\u003ehttps://gist.github.com/yazinnnn/2af2af906e98157966175fbc481c1f6c\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003ejava19 开预览\u003c/p\u003e\n\u003cp\u003e密封接口 Either,包含几个基本的成员方法:\u003c/p\u003e\n\u003cp\u003eisLeft, isRight, fold, map, mapLeft, flatMap, swap, getOrElse, getOrNull, toOptional\u003c/p\u003e\n\u003cp\u003e还有几个静态方法 catching,left,right\u003c/p\u003e\n\u003cp\u003e实现类 Left 和 Right,用 record 简单包了一下值\u003c/p\u003e\n\u003cp\u003e用 record 为了模式匹配能解构出 property,但是 record 不支持继承,所以 Either 改成了密封接口\u003c/p\u003e\n\u003cp\u003e测试代码\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e\n        var str = Either.\u0026lt;Throwable, String\u0026gt;right(\"str\");\n        var integer = Either.\u0026lt;Throwable, Integer\u0026gt;right(100);\n        var fail = Either.\u0026lt;Throwable, Integer\u0026gt;left(new RuntimeException(\"boom\"));\n        var length = str.map(s -\u0026gt; s.length());\n        var _100 = str.flatMap(s -\u0026gt; integer);\n        var _fail = _100.flatMap(i -\u0026gt; fail);\n        var r = str.fold(t -\u0026gt; 1, s -\u0026gt; 2);\n\n        System.out.println(str);\n        System.out.println(length);\n        System.out.println(integer);\n        System.out.println(fail);\n        System.out.println(_100);\n        System.out.println(_fail);\n        System.out.println(length.getOrNull());\n        System.out.println(_100.getOrNull());\n        System.out.println(_fail.getOrNull());\n        System.out.println(_fail.toOptional());\n        System.out.println(r);\n\n//        switch (str) {\n//            case Left\u0026lt;Throwable, String\u0026gt;(Throwable t) -\u0026gt; {\n//            }\n//\n//            case Right\u0026lt;Throwable, String\u0026gt;(String s) -\u0026gt; {\n//            }\n//        }\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e打印结果\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-text\"\u003eright{value=3}\nright{value=100}\nleft{value=java.lang.RuntimeException: boom}\nright{value=100}\nleft{value=java.lang.RuntimeException: boom}\n3\n100\nnull\nOptional.empty\n2\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在测试代码里尝试用模式匹配去解构 either, 居然会报缺少分支, jcp 真的是....\u003c/p\u003e\n\u003cp\u003e而且由于 java 弱鸡的类型推断,匹配出来的类型也是一坨,还不如用 fold 之类的直接写流畅\u003c/p\u003e\n",
+      "Author": "yazinnnn",
+      "PubDate": "2023-02-09T08:21:40Z"
+    },
+    {
       "Title": "HomePod2 的简单体验，感觉一般 - Apple",
       "Link": "https://www.v2ex.com/t/914629",
-      "Description": "\u003cp\u003e官网买了 2 个白色，组立体声，通过 ATV 4K 新款 128G （ ATV 网线连接路由器） eARC 连接大法电视接管电视音频。路由器为 AX86U ，梅林 Clash 分流科学上网。\u003c/p\u003e\n\u003cp\u003e优点：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e配置十分简单，接上线，iPhone 靠近一下就配置成功了，第二个配置时直接问要不要组 pair ，除了 ATV 里面要打开播放电视声音选项之外，似乎没有任何需要调节的地方了。\u003c/li\u003e\n\u003cli\u003e可以 Siri ，直接唤醒电视，听 QQ 音乐之类的，给小孩子玩还不错。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e缺点：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e延迟，ATV 播放节目没有延迟，但接在电视上的 Switch 声音有点糊，并且有延迟感。之前 eARC 的 Sonos beam2 没有这个问题\u003c/li\u003e\n\u003cli\u003e不稳定，ATV 播放流媒体时中间偶尔会出现一两次声音的停顿，之前的 Sonos 没有问题，最让人吐槽的是，有时候音量调节会失效，任何遥控器都不行，这时候需要停止播放视频 /音乐，重新开始播放才可以\u003c/li\u003e\n\u003cli\u003eSiri 出现过响应时间很长，乃至启动电视失败的问题，这个不知道是不是梯子不稳定的锅\u003c/li\u003e\n\u003cli\u003e重启和配置的时间较长，不知道是不是芯片的锅，有一次重启还导致其中一个显示 not response ，但实际上正常工作\u003c/li\u003e\n\u003cli\u003e外观设计，那个白色网面在室内灯光下有些角度看起来脏脏的，另外，对于猫主子来说，感觉是两个很好的猫抓板，幸好我家猫主子暂时对它们还没有兴趣，但十分担心是否应该买个 AC+\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e系统已更新到最新，体验还是这样，感觉 HomePod 要做家庭影音的主力音响系统还是不尽如人意。不知道如果只保留一个，不组立体声会不会稳定一点。\n最后，音质只能说还可以吧。可能房间布局环境不好，中高频比较平淡甚至稍微干涩，低频有时候有点共振的嗡嗡声，不舒服。但整体来说比 Sonos Beam2 的单体强（毕竟也更贵）。\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e官网买了 2 个白色，组立体声，通过 ATV 4K 新款 128G （ ATV 网线连接路由器） eARC 连接大法电视接管电视音频。路由器为 AX86U ，梅林 Clash 分流科学上网，因为个人习惯，Apple 大部分服务都分流走美国。\u003c/p\u003e\n\u003cp\u003e优点：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e配置十分简单，接上线，iPhone 靠近一下就配置成功了，第二个配置时直接问要不要组 pair ，除了 ATV 里面要打开播放电视声音选项之外，似乎没有任何需要调节的地方了。\u003c/li\u003e\n\u003cli\u003e可以 Siri ，直接唤醒电视，听 QQ 音乐之类的，给小孩子玩还不错。相比之下 Sonos 只能 Google Voice 或者 Alexa ，和 ATV 的配合度比较一般。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e缺点：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e延迟，ATV 播放节目没有延迟，但接在电视上的 Switch 声音有点糊，并且有延迟感。之前 eARC 的 Sonos beam2 没有这个问题\u003c/li\u003e\n\u003cli\u003e不稳定，ATV 播放流媒体时中间偶尔会出现一两次声音的停顿，之前的 Sonos 没有问题，最让人吐槽的是，好几次出现音量调节会失效问题，任何遥控器都不行，这时候需要停止播放视频 /音乐，重新开始播放才可以，Sonos 没有这个问题\u003c/li\u003e\n\u003cli\u003eSiri 出现过响应时间很长，乃至启动电视失败的问题，这个不知道是不是梯子不稳定的锅\u003c/li\u003e\n\u003cli\u003e重启和配置的时间较长，不知道是不是芯片的锅，有一次重启还导致其中一个显示 not response ，但实际上正常工作\u003c/li\u003e\n\u003cli\u003e外观设计，那个白色网面在室内灯光下有些角度看起来脏脏的，另外，对于猫主子来说，感觉是两个很好的猫抓板，幸好我家猫主子暂时对它们还没有兴趣，但十分担心是否应该买个 AC+\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e系统已更新到最新，体验还是这样，感觉 HomePod 要做家庭影音的主力音响系统还是不尽如人意。不知道如果只保留一个，不组立体声会不会稳定一点。\n最后，音质只能说还可以吧。可能房间布局环境不好，中高频比较平淡甚至稍微干涩，低频有时候有点共振的嗡嗡声，不舒服。但整体来说比 Sonos Beam2 的单体强（毕竟也更贵）。\u003c/p\u003e\n",
       "Author": "wilhexm",
       "PubDate": "2023-02-09T08:19:53Z"
     },
