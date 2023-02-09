@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "苛求各位开发大佬来指导 - 问与答",
+      "Link": "https://www.v2ex.com/t/914531",
+      "Description": "\u003cp\u003e遇到一个面试题：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e题目：假设有 100 个分类，每个分类下有至少 1000 个商品，请实现一个分页程序，要求根据客户端给定的分类 ID 和排序字段，返回下一页的数据\n代码使用 php 实现，可以依赖 Laravel 实现。其他组件如 Mysql 、Redis 等等没有限制。如果实现困难，排序字段可以假设只有一个。\n\n要求：程序运行效率较高，在商品数达到百万级别的情况下，也能高效运行\n提示：直接使用一行 sql 查询到结果的方式是无法满足高效运行的，会出现慢 sql\n\n方法示例：\n\n/**\n * @param int $categoryId 分类 ID\n * @param string $sortField 排序字段\n * @param int $page 当前第几页\n * @param int $perPage 每页数量\n */\npublic function nextPage(int $categoryId, string $sortField = 'price', int $page =1, int $perPage=20)\n{\n    ....\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e现在能想到的是先给字段加特定的索引，但是也是一条 sql 就出来了，redis 其他的没用到，请问下如何更高的提高效率\u003c/p\u003e\n\u003cp\u003e假设表结构是这样的\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e     * --------------\n     * id | goods_id | category_id | price | created_at | updated_at\n     * -------------\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "chenhua19940128",
+      "PubDate": "2023-02-09T04:19:25Z"
+    },
+    {
+      "Title": "悬浮菜单的通用 JS 库…… - JavaScript",
+      "Link": "https://www.v2ex.com/t/914530",
+      "Description": "\u003cp\u003e简单的鼠标右键菜单效果……\u003c/p\u003e\n\u003cp\u003e10 Best Context Menus In jQuery And Pure JavaScript (2023 Update) | jQuery Script\n\u003ca href=\"https://www.jqueryscript.net/blog/best-context-menus.html\" rel=\"nofollow\"\u003ehttps://www.jqueryscript.net/blog/best-context-menus.html\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eCreate Custom Context Menus In Vanilla JavaScript - context-menu.js | CSS Script\n\u003ca href=\"https://www.cssscript.com/custom-context-menus-vanilla-javascript/\" rel=\"nofollow\"\u003ehttps://www.cssscript.com/custom-context-menus-vanilla-javascript/\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "wdssmq",
+      "PubDate": "2023-02-09T04:15:38Z"
+    },
+    {
+      "Title": "广东移动和广东联通哪个连 AWS 的质量好一点？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/914529",
+      "Description": "\u003cp\u003e这两家的速度哪家的质量稳一点？\u003c/p\u003e\n",
+      "Author": "kiari",
+      "PubDate": "2023-02-09T04:14:55Z"
+    },
+    {
+      "Title": "又一个 Golang 但零分配并且泛型的动态路由 Tree - 程序员",
+      "Link": "https://www.v2ex.com/t/914528",
+      "Description": "\u003ch4\u003e首先上 Benchmark\u003c/h4\u003e\n\u003cpre\u003e\u003ccode\u003e[neno@ArchOxO tux]$ go test -benchmem -run=^$ -bench ^(BenchmarkRouteTree_Get|BenchmarkRouteTree_Set)$ github.com/ClarkQAQ/tux/tree\n\ngoos: linux\ngoarch: amd64\npkg: github.com/ClarkQAQ/tux/tree\ncpu: AMD Ryzen 7 5800H with Radeon Graphics         \nBenchmarkRouteTree_Get-16    \t130589565\t         9.593 ns/op\t       0 B/op\t       0 allocs/op\nBenchmarkRouteTree_Set-16    \t12670129\t        93.20 ns/op\t       1 B/op\t       0 allocs/op\nPASS\nok  \tgithub.com/ClarkQAQ/tux/tree\t4.477s\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e然后...\u003cdel\u003e你们可以喷我了\u003c/del\u003e\u003c/p\u003e\n\u003cp\u003e只是昨天看到 \u003ca href=\"https://www.v2ex.com/t/914129\" rel=\"nofollow\"\u003e链接\u003c/a\u003e 的 \u003ccode\u003euRouter\u003c/code\u003e 才想起来我也还有一个 Web 框架...\u003c/p\u003e\n\u003ch4\u003e核心路由树 (不到百行)\u003c/h4\u003e\n\u003cp\u003e由于想法过于疯狂导致半年前我朋友骂我是不是可乐喝多了脑袋坏了, 但是事实证明他是工作的而且还很快\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\npackage tree\n\nimport \"unsafe\"\n\nconst (\n\tasterisk = '*' // 通配符\n\tcolon    = ':' // 冒号 (路径参数)\n\tslash    = '/' // 斜杠\n)\n\n// 路由树\ntype Tree[T any] struct {\n\tchildren [255]*Tree[T] // 子路由节点\n\tvpath    []uint8       // 注册的路由路径\n\tvalue    T             // 路由方法 (methodTyp 类型)\n}\n\n// 设置路由\nfunc (t *Tree[T]) Set(route string, value T) {\n\ta := toByte(route)\n\n\tfor i := 0; i \u0026lt; len(a); i++ {\n\t\tif t.children[a[i]] == nil {\n\t\t\tt.children[a[i]] = \u0026amp;Tree[T]{}\n\t\t}\n\n\t\tt = t.children[a[i]]\n\n\t\t// 判断是否为路径参数 (例如: :name *name)\n\t\tif a[i] == colon {\n\t\t\ti = slashReader(a, i)\n\t\t} else if a[i] == asterisk {\n\t\t\tbreak\n\t\t}\n\t}\n\n\tt.value = value\n\tt.vpath = a\n}\n\n// 斜杠读取器\n// 读取到下一个斜杠或者结束, 然后返回下标位置\nfunc slashReader(a []uint8, i int) int {\n\tfor ; i \u0026lt; len(a) \u0026amp;\u0026amp; a[i] != slash; i++ {\n\t}\n\n\treturn i\n}\n\n// 获取路由\nfunc (t *Tree[T]) Get(route string) (T, []uint8) {\n\ta := toByte(route)\n\n\tfor i := 0; i \u0026lt; len(a); i++ {\n\t\tif t.children[asterisk] != nil { // 通配路径参数 (例如: *name)\n\t\t\tt = t.children[asterisk]\n\t\t\tbreak\n\t\t} else if t.children[colon] != nil { // 路径参数 (例如: :name)\n\t\t\tt = t.children[colon]\n\t\t\ti = slashReader(a, i)\n\t\t} else {\n\t\t\tif t.children[a[i]] == nil { // 路由不存在\n\t\t\t\tvar v T\n\t\t\t\treturn v, nil\n\t\t\t}\n\n\t\t\tt = t.children[a[i]]\n\t\t}\n\t}\n\n\treturn t.value, t.vpath\n}\n\n// 转换为字节切片\nfunc toByte(s string) []uint8 {\n\treturn *(*[]uint8)(unsafe.Pointer(\u0026amp;s))\n}\n\n// 以下为转换为字节切片的另一种方式, 但是效率较低, 使用他将会比前者慢 4 ns/op\n// func toByte(s string) []uint8 {\n// \treturn []uint8(s)\n// }\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "ClarkAbe",
+      "PubDate": "2023-02-09T04:14:52Z"
+    },
+    {
+      "Title": "垃圾佬们别天天 E3， E5 啦。Intel Xeon “新”（7 年前的）单路型号详解 - 服务器",
+      "Link": "https://www.v2ex.com/t/914527",
+      "Description": "\u003cp\u003e自从 Skylake 开始，E5 和 E7 被重组：E5 16xx 系列（单路）被命名为 Xeon-W 2xxx, Xeon-W 3xxx ，其他多路 E5 E7 被打散分成 Xeon 铜银金铂系列。这些 CPU 都支持 RDIMM 。\u003c/p\u003e\n\u003cp\u003eXeon-W 2xxx 和 Core 系列 HEDT CPU 是一个技术，3xxx 对应志强铜银金铂（应该就是多路处理器的弱化版）。有个例外是 Xeon-W 3175X ，本质上是 2xxx 。\u003c/p\u003e\n\u003cp\u003eXeon-W 还有一个 1xxx 系列，这个待会下面再说。\u003c/p\u003e\n\u003cp\u003e自从 Coffee lake 开始，E3 被重命名为 Xeon-E ，其技术和普通 Core 系列是一样的，不支持 RDIMM 只支持普通的 UDIMM （ ECC ）。\u003c/p\u003e\n\u003cp\u003e自 Comet lake 开始 Core 系列也衍生出了 Xeon-W 1xxx 和 Xeon-E 并行。从这里可以看出 Xeon-E 和 Xeon-W 的区分主要是 TDP 。Xeon-E 更低端（省电）一些。\u003c/p\u003e\n\u003cp\u003e怎么样，是不是很清（迷）晰（惑）？ \u003c/p\u003e\n\u003cp\u003e转载自我的长毛象： \u003ca href=\"https://c7.io/@snullp/109832835343322868\" rel=\"nofollow\"\u003ehttps://c7.io/@snullp/109832835343322868\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "sNullp",
+      "PubDate": "2023-02-09T04:14:33Z"
+    },
+    {
+      "Title": "为什么 ubuntu 不能和 windows 以及 osx 一样做到开箱即用呢？ - 程序员",
+      "Link": "https://www.v2ex.com/t/914526",
+      "Description": "\u003cp\u003e还要去配置更新源，设置中文输入法，中文输入法还有 ibus 等不同的路线？\n有点奇怪，感觉桌面已经发展的挺充分了啊。\n可是还要花费很多的时间去配置这个配置那个的。\u003c/p\u003e\n",
+      "Author": "sjmcefc2",
+      "PubDate": "2023-02-09T04:13:38Z"
+    },
+    {
       "Title": "[转]Sam Altman 精彩访谈：人工智能的崛起 - OpenAI",
       "Link": "https://www.v2ex.com/t/914525",
       "Description": "\u003ca target=\"_blank\" href=\"https://video.h5.weibo.cn/1034:4866833128554504/4866841233328789\" rel=\"nofollow noopener\"\u003ehttps://video.h5.weibo.cn/1034:4866833128554504/4866841233328789\u003c/a\u003e",
