@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "openwrt dl 目录下的 package 国内有镜像吗？ - OpenWrt",
+      "Link": "https://www.v2ex.com/t/914508",
+      "Description": "是 dl 目录下的，不是已经编译好的 image 的镜像。",
+      "Author": "huangya",
+      "PubDate": "2023-02-09T03:23:58Z"
+    },
+    {
+      "Title": "OpenAI/ChatGPT Plus 信用卡绑定总结 - OpenAI",
+      "Link": "https://www.v2ex.com/t/914507",
+      "Description": "\u003cp\u003e最近我尝试了国内实体卡、香港虚拟卡、美国虚拟卡等不下于 10 张信用卡，最后绑定 OpenAI 账户成功，据有 ChatGPT Plus 资格的网友反馈绑定 ChatGPT Plus 也没问题。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.rss.ink/imgs/2022/12/09/657fcd0755bab72a.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e根据我的尝试我大致总结了下：\u003c/p\u003e\n\u003cp\u003eOpenAI/ChatGPT Plus 支持的卡段：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e591393 （ DePay ）： \u003ca href=\"https://www.xiaoz.me/archives/18313\" rel=\"nofollow\"\u003ehttps://www.xiaoz.me/archives/18313\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e556766 （ NobePay ）： \u003ca href=\"https://www.xiaoz.me/archives/18207\" rel=\"nofollow\"\u003ehttps://www.xiaoz.me/archives/18207\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e489683 （ Qbit Visa ）,存疑\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eOpenAI/ChatGPT Plus 不支持的信用卡：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e国内招行 VISA/MASTERCARD 、全币卡\u003c/li\u003e\n\u003cli\u003e全球付香港虚拟卡\u003c/li\u003e\n\u003cli\u003e万里汇香港虚拟卡\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e更多说明可以参考我的博客： \u003ca href=\"https://www.xiaoz.me/archives/18336\" rel=\"nofollow\"\u003ehttps://www.xiaoz.me/archives/18336\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "xiaoz",
+      "PubDate": "2023-02-09T03:20:16Z"
+    },
+    {
+      "Title": "为什么 React 的后台模版这么少 - React",
+      "Link": "https://www.v2ex.com/t/914506",
+      "Description": "\u003cp\u003e为什么 React 的后台模版这么少？  \u003c/p\u003e\n\u003cp\u003eVue 可以搜出来一大堆的后台的项目，更新也比较快，React 搜出来的好多都是老版本的代码， 或者已经不维护的代码。\u003c/p\u003e\n",
+      "Author": "lishei",
+      "PubDate": "2023-02-09T03:19:16Z"
+    },
+    {
+      "Title": "Python asyncio 启动问题求助 - Python",
+      "Link": "https://www.v2ex.com/t/914505",
+      "Description": "\u003cp\u003e求助大佬们，本菜鸡非专业程序员，只会点皮毛，偶尔做个小工具都是网上抄代码，东拼西凑，现在遇到一个这样的问题不知道怎么解决，还望大佬们能帮忙看看。\u003c/p\u003e\n\u003cp\u003e我的异步函数第一种方式启动，可以正常运行，但我现在想要换成第二种启动方式，就会报错 This event loop is already running ，可能有大佬想问，第一种方式可以正常跑就行了，为啥非要作死换成第二种呢？是因为 fastapi 的路由函数是异步的，我需要在路由函数里面调用前面这个 ip 查询的异步函数，所以模拟了这样一段代码前来求助。\u003c/p\u003e\n\u003cp\u003e想问下要怎么改才能在 aaa 这个异步函数里面启动前面的 main 函数呢？\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003eimport aiohttp\nimport asyncio\n\niplist = ['1.1.1.1', '2.2.2.2', '3.3.3.3']\nresult = {}\n\nasync def get_ipinfo(ip, domain, sem):\n    params = {'ip': ip, 'dns': domain}\n    async with sem:\n        async with aiohttp.ClientSession() as session:\n            async with session.get('http://www.abc.com/', params=params) as resp:\n                res = await resp.text()\n                #res 结果写入全局变量字典中，代码省略\n\n\nasync def main(domain, sem):\n    tasks = [get_ipinfo(ip, domain, sem) for ip in iplist]\n    await asyncio.gather(*tasks)\n\n\n################   启动方式 1  ##############\n#上面的异步函数启动方式 1 ，可以正常运行\n\nif __name__ == \"__main__\":\n    sem = asyncio.Semaphore(20)\n    loop = asyncio.get_event_loop()\n    try:\n        loop.run_until_complete(main('www.test.com', sem))\n    finally:\n        loop.run_until_complete(loop.shutdown_asyncgens())\n        loop.close()\n    print(result)\n\n\n####################   启动方式 2  #####################\n#上面的异步函数启动方式 2 ，报错\n#     raise RuntimeError('This event loop is already running')\n# RuntimeError: This event loop is already running\n#\n# During handling of the above exception, another exception occurred:\n\nasync def run(domain):\n    sem = asyncio.Semaphore(20)\n    loop = asyncio.get_event_loop()\n    try:\n        loop.run_until_complete(main(domain, sem))\n    finally:\n        loop.run_until_complete(loop.shutdown_asyncgens())\n        loop.close()\n\n\nasync def aaa(domain):\n    await run(domain)\n    print(result)\n\n\nasyncio.run(aaa('www.test.com'))\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "ohayoo",
+      "PubDate": "2023-02-09T03:16:32Z"
+    },
+    {
       "Title": "在主题列表中，有的帖子右上角有一个 五角星的标识，这是什么？ - V2EX",
       "Link": "https://www.v2ex.com/t/914504",
       "Description": "比较好奇，在主题列表中，有的帖子右上角有一个 五角星的标识，这是什么？\u003cbr /\u003e\u003cbr /\u003e类似于 \u003ca target=\"_blank\" href=\"https://www.v2ex.com/t/914496\" rel=\"nofollow noopener\"\u003ehttps://www.v2ex.com/t/914496\u003c/a\u003e 这个帖子",
