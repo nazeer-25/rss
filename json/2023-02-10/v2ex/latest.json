@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "华硕路由器梅林固件+alist 简明小教程 - 路由器",
+      "Link": "https://www.v2ex.com/t/914857",
+      "Description": "\u003cp\u003e最近在折腾 alist ，碰到了不少坑点，记录一下，同时也是备忘。过程中有些不明白的地方，如果谁之前碰到过、解决了，也请指教下。\u003c/p\u003e\n\u003cp\u003e（我知道某软件中心有，但我没装某软件中心，我喜欢自己动手。）\u003c/p\u003e\n\u003cp\u003e一、背景：\u003c/p\u003e\n\u003cp\u003e路由器为华硕 AX86U/梅林固件，有台 win 家庭服务器通过有线连接路由器。\u003c/p\u003e\n\u003cp\u003e准备通过 alist 连接某数字网盘，最终通过 iPhone/iPad/MacbookPro/Apple TV （以下简称 infuse 终端）的 infuse 读取和播放 4k remux mkv 资源。\u003c/p\u003e\n\u003cp\u003e家中宽带 200M ，某三位数网盘直接下载或播放基本能跑到满速。\u003c/p\u003e\n\u003cp\u003e二、win 家庭服务器篇：\u003c/p\u003e\n\u003cp\u003e一开始把 alist 放在了 win 家庭服务器上，发现播放 4k remux mkv 资源 20-30 分钟会发生断流，症状为家庭服务器和路由器之间掉线、ping 不通，重新拔插网线可以恢复。\u003c/p\u003e\n\u003cp\u003e另外，之前 iPhone 手机通过 wifi 直接下载某数字网盘的资源，也会出现类似的断流，通过关闭 /开启 wifi 可以恢复。\u003c/p\u003e\n\u003cp\u003e因此，怀疑是 AX86U 路由器在高流量负载下会断流，网上有人说是因为 AX86U 的芯片发热造成的（看了下，此时 CPU 温度大概 70 多度）。同时，感觉大流量在路由器-win 家庭服务器-路由器-infuse 终端之间跑也是浪费资源，所以考虑把 alist 挂在路由器上。\u003c/p\u003e\n\u003cp\u003e同时，去某宝买了个散热风扇，在 PWM40%（基本没声音）的前提下，能把 AX86U 的 CPU 温度降低 20 度左右。\n具体断流是 PC 侧还是路由器侧造成的，懒得去研究了。\u003c/p\u003e\n\u003cp\u003e三、华硕 AX86U 路由器-jffs 篇：\u003c/p\u003e\n\u003cp\u003e接下来是 AX86U 路由器上安装 alist 。\n华硕路由器刷梅林固件、打开 jffs 、ssh 等等不说了，网上都能找到。win 侧我一般只用 powershell 里的 ssh 操作，不用第三方软件。\u003c/p\u003e\n\u003cp\u003e一开始我选择把 alist 装到了路由器的 jffs 上。\u003cstrong\u003e注意，装在 jffs 上存在很大的风险！\u003c/strong\u003e我会在本篇的最后面做解释。建议按照第四篇装在路由器挂载的 U 盘上。\u003c/p\u003e\n\u003cp\u003e首先，打开 powershell ，连接路由器：\n\u003ccode\u003essh admin@192.168.XX.XX\u003c/code\u003e （此处填入你自己的路由器地址）\n接下来填入密码，登录成功后会显示 /tmp/home/root#\u003c/p\u003e\n\u003cp\u003e接下来去 jffs 文件夹并创建 alist 目录\n\u003ccode\u003ecd /jffs mkdir alist cd alist\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e接下来是下载 alist ，我试过了最新的 3.10.1 和上一个版本的 3.9.2 ，都会报错，如果是 AX86U 的，不用去下这两个版本了，最后试了个 3.6.0 版本，可以正常运行，就这个版本了。\u003c/p\u003e\n\u003cp\u003e在命令行执行\n\u003ccode\u003ecurl -L \u003ca href=\"https://ghproxy.com/https://github.com/alist-org/alist/releases/download/v3.6.0/alist-linux-musl-arm64.tar.gz\" rel=\"nofollow\"\u003ehttps://ghproxy.com/https://github.com/alist-org/alist/releases/download/v3.6.0/alist-linux-musl-arm64.tar.gz\u003c/a\u003e -o /tmp/alist.tar.gz\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e接下来解压缩\n\u003ccode\u003etar zxf /tmp/alist.tar.gz -C /jffs/alist\u003c/code\u003e\n这个解压的过程有点慢，耐心等一下\u003c/p\u003e\n\u003cp\u003e解压完成后，运行测试（ alist 官方的安装说明里还要授予程序执行权限：chmod +x alist ，我自己是发现解压完就是可执行文件了）\n\u003ccode\u003e./alist\u003c/code\u003e\n如果操作说明正常弹出，再跑下服务器\n\u003ccode\u003e./alist server\u003c/code\u003e\n如果服务器正常开启，就没问题了，后面的流程和其他设备上装 alist 的设置是一样的，不再赘述。\u003c/p\u003e\n\u003cp\u003e需要开机启动的，看第五篇的脚本。\u003c/p\u003e\n\u003cp\u003e最后说下我为什么不推荐把 alist 装在 jffs 上。\nsnbforum 上反馈这几年的华硕路由器 jffs 寿命很长，可擦写 10 万次，华硕自己的 syslog 文件也往 jffs 上写（在 jffs 文件夹下 ls 能看到）。\n但是，我在 infuse 终端操作、播放测试了大约 1 小时后，根据我对 alist 文件夹的观察，daemon 文件夹下的 start.log 和 data/log 文件夹下 log.log 已经各有近 4MB 文件，而且更新是比较频繁的。本身 jffs 也就几十兆的可用容量，就算可擦写 10 万次，我觉得也坚持不了太久的。\n\u003cstrong\u003e总之，我非常非常不建议装在 jffs 上，毕竟换 U 盘比换路由器便宜多了，不是吗？\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e四、华硕 AX86U 路由器-U 盘篇：\n因为前述的原因，改为安装在 U 盘上。\u003c/p\u003e\n\u003cp\u003e准备一个不用的 U 盘，如果之前有 GPT 分区的，先清一下 GPT 分区并改为 MBR （比如使用 win 的 diskpart ）。\n插入路由器的 U 盘口，用 fdisk 建立分区。\n以上两个网上都有很多教程，不再赘述。\u003c/p\u003e\n\u003cp\u003e我碰到的坑是 ext4 格式的 u 盘有时路由器不会自动挂载，格式化成 ext2 格式后就行了，本着能用就行的原则，没有深究。\n\u003ccode\u003emkfs.ext2 /dev/sda1\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e接下来是去 U 盘文件夹并创建 alist 目录\n\u003ccode\u003ecd /tmp/mnt/sda1 mkdir alist cd alist\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e在命令行执行\n\u003ccode\u003ecurl -L \u003ca href=\"https://ghproxy.com/https://github.com/alist-org/alist/releases/download/v3.6.0/alist-linux-musl-arm64.tar.gz\" rel=\"nofollow\"\u003ehttps://ghproxy.com/https://github.com/alist-org/alist/releases/download/v3.6.0/alist-linux-musl-arm64.tar.gz\u003c/a\u003e -o /tmp/alist.tar.gz\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e接下来解压缩\n\u003ccode\u003etar zxf /tmp/alist.tar.gz -C /tmp/mnt/sda1/alist\u003c/code\u003e\n这个解压的过程有点慢，耐心等一下\u003c/p\u003e\n\u003cp\u003e解压完成后，运行测试（ alist 官方的安装说明里还要授予程序执行权限：chmod +x alist ，我自己是发现解压完就是可执行文件了）\n\u003ccode\u003e./alist\u003c/code\u003e\n如果操作说明正常弹出，再跑下服务器\n\u003ccode\u003e./alist server\u003c/code\u003e\n如果服务器正常开启，就没问题了，后面的流程和其他设备上装 alist 的设置是一样的，不再赘述。\u003c/p\u003e\n\u003cp\u003e目前用 U 盘跑有没有坑我还在测试\u003c/p\u003e\n\u003cp\u003e五、华硕 AX86U 路由器-开机启动篇：\u003c/p\u003e\n\u003cp\u003e华硕路由器 /梅林固件的启动是通过脚本实现的\n进入脚本文件夹（如果你还在 alist 的 server 进程里，可以直接按 CRTL+C 先退出）\n\u003ccode\u003ecd /jffs/scripts\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e新建 post-mount 文件并编辑（注意，此处 post-mount 名字不能改，具体见 \u003ca href=\"https://github.com/RMerl/asuswrt-merlin.ng/wiki/User-scripts\" rel=\"nofollow\"\u003ehttps://github.com/RMerl/asuswrt-merlin.ng/wiki/User-scripts\u003c/a\u003e ）\n\u003ccode\u003etouch post-mount nano post-mount\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e写入如下脚本代码\u003c/p\u003e\n\u003cp\u003ealist 文件在 U 盘的：\n\u003ccode\u003e#!/bin/sh sleep 60 /tmp/mnt/sda1/alist/alist start\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003ealist 文件在 jffs 的：\n\u003ccode\u003e#!/bin/sh sleep 60 /jffs/alist/alist start\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e按 CTRL+O 写入，按回车确定，按 CTRL-X 退出\u003c/p\u003e\n\u003cp\u003e如果要测试开机启动是否成功的话，reboot 重启即可\u003c/p\u003e\n\u003cp\u003e六、其他篇：\n1 、某三位数网盘的用户，建议 cookies 用 iPhone 客户端的（抓包可用 stream ）。年初没有买终身我后悔了。\n2 、建议别玩脱了。\u003c/p\u003e\n",
+      "Author": "gleArk",
+      "PubDate": "2023-02-10T04:25:59Z"
+    },
+    {
+      "Title": "联想的计划性报废计划?估计中招的机主不计其数了 - 硬件",
+      "Link": "https://www.v2ex.com/t/914856",
+      "Description": "见：\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://www.bilibili.com/video/BV1GM411Y7Nq/\" rel=\"nofollow noopener\"\u003ehttps://www.bilibili.com/video/BV1GM411Y7Nq/\u003c/a\u003e",
+      "Author": "nosugar",
+      "PubDate": "2023-02-10T04:23:23Z"
+    },
+    {
+      "Title": "高性能 Python 内存缓存: Theine - Python",
+      "Link": "https://www.v2ex.com/t/914855",
+      "Description": "\u003cp\u003e前段时间开源了 Python 的异步缓存框架 Cacheme ，现在把其中的内存缓存部分单独抽出来作为一个 library ，有兴趣的可以试用一下.\u003c/p\u003e\n\u003cp\u003eTheine: \u003ca href=\"https://github.com/Yiling-J/theine\" rel=\"nofollow\"\u003ehttps://github.com/Yiling-J/theine\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eBenchmarks: \u003ca href=\"https://github.com/Yiling-J/cacheme-benchmark\" rel=\"nofollow\"\u003ehttps://github.com/Yiling-J/cacheme-benchmark\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e类似于\u003ca href=\"https://github.com/ben-manes/caffeine\" rel=\"nofollow\"\u003eCaffeine(Java)\u003c/a\u003e/\u003ca href=\"https://github.com/dgraph-io/ristretto\" rel=\"nofollow\"\u003eRistretto(Go)\u003c/a\u003e/\u003ca href=\"https://github.com/moka-rs/moka\" rel=\"nofollow\"\u003eMoka(Rust)\u003c/a\u003e，具有以下特点:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e高性能，核心数据结构(W-TinyLFU, timer wheel)使用 Rust 编写\u003c/li\u003e\n\u003cli\u003eW-TinyLFU 缓存驱逐策略，流量倾斜度高的情况下有很好的命中率\u003c/li\u003e\n\u003cli\u003e通过 hierarchical timer wheel 定期自动删除过期缓存\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "matrix1010",
+      "PubDate": "2023-02-10T04:21:50Z"
+    },
+    {
+      "Title": "Nginx 静态资源代理问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/914854",
+      "Description": "\u003cp\u003e后端服务跑在 docker 里面，创建容器的时候没有映射卷，采用曲线救国的方式把容器内的文件夹手动拷贝到宿主机中，但是如果增加新的文件，宿主机中没有会导致 404 ，有没有办法在 404 的时候，直接将请求转发到后端程序处理呀？\u003c/p\u003e\n\u003cp\u003e网上有修改容器配置文件的方式，但是生产环境中容器太多了，停止会导致很多服务异常，所以不考虑这种方案。\u003c/p\u003e\n\u003cp\u003e我现在想的方案是 NGINX 静态资源 404 的时候，直接把请求转到后端服务去处理，但是不知道配置文件咋写，有咩有大佬指教一下。\u003c/p\u003e\n",
+      "Author": "Macv1994",
+      "PubDate": "2023-02-10T04:20:08Z"
+    },
+    {
+      "Title": "gnu coreutils cp 在拷贝小文件很多的大目录时是否有完全发挥出来 nvme 固态硬盘的全部性能？ - 程序员",
+      "Link": "https://www.v2ex.com/t/914853",
+      "Description": "\u003cp\u003envme 固态硬盘的单线程单队列的小文件读写速度和多线程多队列有很大差距，我在想 cp 在拷贝大目录时（比如几个 GB 大小的大型项目的源代码目录）是否只发挥出了固态硬盘的单线程单队列性能？\u003c/p\u003e\n\u003cp\u003e如果是的话，有没有什么程序能够更快的复制大目录？\u003c/p\u003e\n\u003cp\u003e另外什么工具能观测 nvme 固态的当前负载？我想知道 cp 大型目录时 ssd 是否已经完全满载。\u003c/p\u003e\n",
+      "Author": "wniming",
+      "PubDate": "2023-02-10T04:19:49Z"
+    },
+    {
       "Title": "南昌-江铜集团-铜锐信息-大量招人（前端，后端，测试，产品） - 酷工作",
       "Link": "https://www.v2ex.com/t/914852",
       "Description": "岗位具体介绍，联系微信：tang254202072",
