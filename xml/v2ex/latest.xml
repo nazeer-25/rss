@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>各位 MySQL 大手子快来，请教一个问题 - MySQL</title>
+      <link>https://www.v2ex.com/t/914927</link>
+      <description>&lt;p&gt;MySQL5.7 如何查询某个值是否在 JSON 类型的字段中呢。&lt;/p&gt;&#xA;&lt;p&gt;表结构类似这样：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-MySQL&#34;&gt;create table xxxtable&#xA;(&#xA;    id               bigint(22) auto_increment comment &#39;主键 id&#39;&#xA;        primary key,&#xA;    waring_value_msg json                                not null comment &#39;&#39;,&#xA;    names_virtual    varchar(20) as (json_unquote(json_extract(`waring_value_msg`, &#39;$.warnMonth&#39;)))&#xA;)&#xA;    comment &#39;&#39; charset = utf8;&#xA;&#xA;create index device_waring_config_names_virtual_index&#xA;    on tnor.device_waring_config (names_virtual);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;表中 json 格式的数据大致如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{&#xA;&#x9;&#34;warnMonth&#34;: [1,2],&#xA;&#x9;&#34;rouleItem&#34;: [{&#xA;&#x9;&#x9;&#34;maxValue&#34;: 10,&#xA;&#x9;&#x9;&#34;minValue&#34;: 0,&#xA;&#x9;&#x9;&#34;waringMsg&#34;: &#34;这是提示信息&#34;,&#xA;&#x9;&#x9;&#34;warnMonth&#34;: &#34;1&#34;&#xA;&#x9;}, {&#xA;&#x9;&#x9;&#34;maxValue&#34;: 20,&#xA;&#x9;&#x9;&#34;minValue&#34;: 10,&#xA;&#x9;&#x9;&#34;waringMsg&#34;: &#34;这是提示信息&#34;,&#xA;&#x9;&#x9;&#34;warnMonth&#34;: &#34;2&#34;&#xA;&#x9;}]&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;有什么办法可以通过 SQL 来查询 我给出的 warnMonth 是不是在 JSON 里面呢，类似于这种：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-MySQL&#34;&gt;select * from xxxtable where #{warnMonth} in JOSN 中的 warnMonth ;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>yukunZhan9</author>
+      <pubDate>10 Feb 2023 07:10:21 +0000</pubDate>
+    </item>
+    <item>
       <title>发现 chrome 原生支持划词翻译了 - 分享发现</title>
       <link>https://www.v2ex.com/t/914926</link>
       <description>&lt;p&gt;chrome://flags/#desktop-partial-translate&lt;/p&gt;&#xA;</description>

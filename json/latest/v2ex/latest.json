@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "各位 MySQL 大手子快来，请教一个问题 - MySQL",
+      "Link": "https://www.v2ex.com/t/914927",
+      "Description": "\u003cp\u003eMySQL5.7 如何查询某个值是否在 JSON 类型的字段中呢。\u003c/p\u003e\n\u003cp\u003e表结构类似这样：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-MySQL\"\u003ecreate table xxxtable\n(\n    id               bigint(22) auto_increment comment '主键 id'\n        primary key,\n    waring_value_msg json                                not null comment '',\n    names_virtual    varchar(20) as (json_unquote(json_extract(`waring_value_msg`, '$.warnMonth')))\n)\n    comment '' charset = utf8;\n\ncreate index device_waring_config_names_virtual_index\n    on tnor.device_waring_config (names_virtual);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e表中 json 格式的数据大致如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n\t\"warnMonth\": [1,2],\n\t\"rouleItem\": [{\n\t\t\"maxValue\": 10,\n\t\t\"minValue\": 0,\n\t\t\"waringMsg\": \"这是提示信息\",\n\t\t\"warnMonth\": \"1\"\n\t}, {\n\t\t\"maxValue\": 20,\n\t\t\"minValue\": 10,\n\t\t\"waringMsg\": \"这是提示信息\",\n\t\t\"warnMonth\": \"2\"\n\t}]\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e有什么办法可以通过 SQL 来查询 我给出的 warnMonth 是不是在 JSON 里面呢，类似于这种：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-MySQL\"\u003eselect * from xxxtable where #{warnMonth} in JOSN 中的 warnMonth ;\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "yukunZhan9",
+      "PubDate": "2023-02-10T07:10:21Z"
+    },
+    {
       "Title": "发现 chrome 原生支持划词翻译了 - 分享发现",
       "Link": "https://www.v2ex.com/t/914926",
       "Description": "\u003cp\u003echrome://flags/#desktop-partial-translate\u003c/p\u003e\n",
