@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "十年如一日的机身 一日如十年的键盘 - 问与答",
+      "Link": "https://www.v2ex.com/t/915328",
+      "Description": "\u003cp\u003eMacbook 系列的金属机身做工细腻精美扎实，就算用了 8 年 10 年，稍微清理一下，如新的一般。\u003c/p\u003e\n\u003cp\u003e但是键盘的做工用料就呵呵，用了一天就开始发光，看起来像用了好几年的。比其他品牌的笔记本更快也更容易打油\u003c/p\u003e\n\u003cp\u003e虽说键帽是 ABS 材质，但这质量远不如几千块的 pc 本，我的一台 Thinkpad 用了将近 10 年 ，键盘都没那么糟糕。\u003c/p\u003e\n\u003cp\u003e真奇怪 Apple 不用更加耐磨表面喷砂的 ABS 键帽。\u003c/p\u003e\n\u003cp\u003e1 万元的机身配 10 元的键盘。无语了\u003c/p\u003e\n",
+      "Author": "nztomoto",
+      "PubDate": "2023-02-12T03:12:48Z"
+    },
+    {
+      "Title": "nii 文件用 opencv 转换为 mp4 视频画面失真，求教 - OpenCV",
+      "Link": "https://www.v2ex.com/t/915327",
+      "Description": "\u003cp\u003enii 是一个 4d 的医学 ct 图像，尺寸为（高，宽，深度，时间）。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/4KxK64g.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e我的预期是, 取时间和另外两个维度，转换为一个 mp4 格式的视频。\u003c/p\u003e\n\u003cp\u003e我的思路，先将 nii 图片转换一个 2 维的数组，然后顺序拼成一个视频。\u003c/p\u003e\n\u003cp\u003e但是实际, 转换出来的视频画面失真，win11 系统播放器打开画面失真，qq 影音播放器打开提示视频失效。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/YPF6L2X.png\"/\u003e\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/kvVKVlo.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e源文件和转换后的文件预览地址\u003c/h2\u003e\n\u003cp\u003e\u003ca href=\"https://1drv.ms/u/s%21Ah4q2HtKB2AWg4NnYXaMslribNVlWw?e=D8ScIs\" rel=\"nofollow\"\u003ehttps://1drv.ms/u/s!Ah4q2HtKB2AWg4NnYXaMslribNVlWw?e=D8ScIs\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e代码\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e\nimport os\nimport cv2\nimport numpy as np\n\n\ndef nii2imgs_dim(nii, dim) -\u0026gt; list:\n    \"\"\"\n    将 nii 文件转换为多张图片，返回图片数组，不用中间保存，方便转换为视频\n    :param nii: nii 对象\n    :param dim: 要转换的维度\n    :return: 图片数组\n    \"\"\"\n    imgs = []\n    data = nii\n    for d3i in range(data.shape[3]):\n        # 读取 3d 文件\n        d3img = data[:, :, :, d3i]\n        # 获取 nii 文件的维度\n        d3img_shape = d3img.shape\n        # 遍历每一张图片\n        for d2j in range(d3img_shape[2]):\n            # 获取第 i 张图片\n            img = data[:, :, d2j, d3i]\n            imgs.append(img)\n\n    return imgs\n\ndef imgs2mp4(img_list, save_path):\n    \"\"\"\n    将图片数组转换为 mp4\n    :param img_list: 图片数组\n    :param save_path: 保存地址\n    :return: 空\n    \"\"\"\n    # 判断 save_path 路径是否存在，如果不存在则创建\n    if not os.path.exists(save_path):\n        os.makedirs(save_path)\n\n    # 图片数组转换为 mp4\n    img, *imgs = img_list # *imgs 表示剩下的所有元素，img 表示第一个元素，目的是为了获取图片尺寸\n    print(img.shape)\n    # img 转换为 float32\n    img = img.astype(np.float32)\n    img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)\n    height, width, layers = img.shape\n    video = cv2.VideoWriter(save_path + \"video.mp4\", cv2.VideoWriter_fourcc(*'mp4v'), 1, (width, height))\n    video.write(img)\n    for img in imgs:\n        img = img.astype(np.float32)\n\n        img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)\n\n        video.write(img)\n    video.release()\n\n\n\n\n\nimg = nib.load(file_path)\ndata = img.get_fdata()\n# nii 转换为多张图片\nimgs = nii2imgs_dim(data, 3)\n# 将图片数组转换为 mp4\nimgs2mp4(imgs, \"./tmp/\")\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "sugarkeek",
+      "PubDate": "2023-02-12T03:11:21Z"
+    },
+    {
+      "Title": "情人节给女朋友送钱，怎么给比较好 - 问与答",
+      "Link": "https://www.v2ex.com/t/915326",
+      "Description": "\u003cp\u003e女朋友换工作不久，业绩不太好，导致手头比较紧张，想给她送点钱，缓解一下经济压力，已经尝试过几种方式：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e直接支付宝转账，但是她不收\u003c/li\u003e\n\u003cli\u003e支付宝开了个亲情卡，也没有收\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e想到另外几种方式：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e我自己再开张银行卡，送给她，线下买东西可以刷那个卡。缺点是线上买东西用不了（只能绑定自己实名的卡）\u003c/li\u003e\n\u003cli\u003e用她的身份开张信用卡附属卡，但是要找她拿身份证，估计不会同意。好处是线上线下都可以用\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e请问大家有没有什么比较好的办法推荐不？\u003c/p\u003e\n",
+      "Author": "GoLand",
+      "PubDate": "2023-02-12T03:07:50Z"
+    },
+    {
+      "Title": "想要讨论一下使用 GPT 作为搜索引擎的问题 - OpenAI",
+      "Link": "https://www.v2ex.com/t/915325",
+      "Description": "\u003cp\u003e关于最近很火的 ChatGPT ，我希望我并不是因为媒体说它很厉害、很多人吹它很厉害，就认为它很厉害。我希望我能更多地了解它的原理。\n目前看大家的应用场景，我觉得主要集中在这几个方面：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e辅助生成代码、配置文件\u003c/li\u003e\n\u003cli\u003e辅助写作，特别是一些程式性的文章（例如周报、ReadMe ）\u003c/li\u003e\n\u003cli\u003e充当搜索引擎\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e关于充当搜索引擎这部份，我有一些担忧。ChatGPT 会理直气壮地返回一些事实性的错误，例如它会说鲁迅和周树人不是同一个人。Google 之前宣传的 Bard 也有类似的问题。传统的搜索引擎会返回来源，而 ChatGPT 会模糊来源，让人更难判断真伪。如果我一定要用的话，我会先用 ChatGPT 询问，然后再回到搜索引擎去寻找来源，感觉就像是多做了一步。\u003c/p\u003e\n\u003cp\u003e目前我的问题主要集中在 GPT 的训练部分。如果作为搜索引擎的话，GPT 应该需要像传统搜索引擎一样，持续不断地爬取互联网的新内容，用来训练。而关于这段训练，我有两个问题：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eGPT 的增量训练是不是非常简单？只需要把新文本当做新的训练集追加训练就好了？\u003c/li\u003e\n\u003cli\u003e如果后续发现爬取的内容有事实错误，想要 GPT 里面剔除这些内容，是不是代价非常高？基本上只能从头训练？\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e如果是这样的话，那么会不会有以下的问题：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e对返回结果进行投毒变得比较容易，特别是时事内容。在时事内容还在一些主流的媒体网站传播的时候，就利用大量的小网站或者在其他网站的评论里投毒。投毒的内容可以夹在随机的语句之中。\u003c/li\u003e\n\u003cli\u003e时事还在发展进行中，经历了“反转”，那么 GPT 是不是就很难返回最新进展。\u003c/li\u003e\n\u003cli\u003e运营公司需要消耗大量成本来剔除投毒内容，那是不是只从有声望的大网站上爬取内容就好了？这样的话，是不是互联网的内容会更加集中到大型网站里，小网站更难有出头之日？\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "hahastudio",
+      "PubDate": "2023-02-12T03:05:25Z"
+    },
+    {
       "Title": "azure 学生套餐，第一个月 15g 用完，第二个月是不是没有额度了？ - 问与答",
       "Link": "https://www.v2ex.com/t/915324",
       "Description": "RT ，\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e目前看 每天的流量出去还是在计费。请问，额度是不是没了",

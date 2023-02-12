@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>十年如一日的机身 一日如十年的键盘 - 问与答</title>
+      <link>https://www.v2ex.com/t/915328</link>
+      <description>&lt;p&gt;Macbook 系列的金属机身做工细腻精美扎实，就算用了 8 年 10 年，稍微清理一下，如新的一般。&lt;/p&gt;&#xA;&lt;p&gt;但是键盘的做工用料就呵呵，用了一天就开始发光，看起来像用了好几年的。比其他品牌的笔记本更快也更容易打油&lt;/p&gt;&#xA;&lt;p&gt;虽说键帽是 ABS 材质，但这质量远不如几千块的 pc 本，我的一台 Thinkpad 用了将近 10 年 ，键盘都没那么糟糕。&lt;/p&gt;&#xA;&lt;p&gt;真奇怪 Apple 不用更加耐磨表面喷砂的 ABS 键帽。&lt;/p&gt;&#xA;&lt;p&gt;1 万元的机身配 10 元的键盘。无语了&lt;/p&gt;&#xA;</description>
+      <author>nztomoto</author>
+      <pubDate>12 Feb 2023 03:12:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>nii 文件用 opencv 转换为 mp4 视频画面失真，求教 - OpenCV</title>
+      <link>https://www.v2ex.com/t/915327</link>
+      <description>&lt;p&gt;nii 是一个 4d 的医学 ct 图像，尺寸为（高，宽，深度，时间）。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/4KxK64g.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;我的预期是, 取时间和另外两个维度，转换为一个 mp4 格式的视频。&lt;/p&gt;&#xA;&lt;p&gt;我的思路，先将 nii 图片转换一个 2 维的数组，然后顺序拼成一个视频。&lt;/p&gt;&#xA;&lt;p&gt;但是实际, 转换出来的视频画面失真，win11 系统播放器打开画面失真，qq 影音播放器打开提示视频失效。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/YPF6L2X.png&#34;/&gt;&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/kvVKVlo.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h2&gt;源文件和转换后的文件预览地址&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://1drv.ms/u/s%21Ah4q2HtKB2AWg4NnYXaMslribNVlWw?e=D8ScIs&#34; rel=&#34;nofollow&#34;&gt;https://1drv.ms/u/s!Ah4q2HtKB2AWg4NnYXaMslribNVlWw?e=D8ScIs&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;代码&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&#xA;import os&#xA;import cv2&#xA;import numpy as np&#xA;&#xA;&#xA;def nii2imgs_dim(nii, dim) -&amp;gt; list:&#xA;    &#34;&#34;&#34;&#xA;    将 nii 文件转换为多张图片，返回图片数组，不用中间保存，方便转换为视频&#xA;    :param nii: nii 对象&#xA;    :param dim: 要转换的维度&#xA;    :return: 图片数组&#xA;    &#34;&#34;&#34;&#xA;    imgs = []&#xA;    data = nii&#xA;    for d3i in range(data.shape[3]):&#xA;        # 读取 3d 文件&#xA;        d3img = data[:, :, :, d3i]&#xA;        # 获取 nii 文件的维度&#xA;        d3img_shape = d3img.shape&#xA;        # 遍历每一张图片&#xA;        for d2j in range(d3img_shape[2]):&#xA;            # 获取第 i 张图片&#xA;            img = data[:, :, d2j, d3i]&#xA;            imgs.append(img)&#xA;&#xA;    return imgs&#xA;&#xA;def imgs2mp4(img_list, save_path):&#xA;    &#34;&#34;&#34;&#xA;    将图片数组转换为 mp4&#xA;    :param img_list: 图片数组&#xA;    :param save_path: 保存地址&#xA;    :return: 空&#xA;    &#34;&#34;&#34;&#xA;    # 判断 save_path 路径是否存在，如果不存在则创建&#xA;    if not os.path.exists(save_path):&#xA;        os.makedirs(save_path)&#xA;&#xA;    # 图片数组转换为 mp4&#xA;    img, *imgs = img_list # *imgs 表示剩下的所有元素，img 表示第一个元素，目的是为了获取图片尺寸&#xA;    print(img.shape)&#xA;    # img 转换为 float32&#xA;    img = img.astype(np.float32)&#xA;    img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)&#xA;    height, width, layers = img.shape&#xA;    video = cv2.VideoWriter(save_path + &#34;video.mp4&#34;, cv2.VideoWriter_fourcc(*&#39;mp4v&#39;), 1, (width, height))&#xA;    video.write(img)&#xA;    for img in imgs:&#xA;        img = img.astype(np.float32)&#xA;&#xA;        img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)&#xA;&#xA;        video.write(img)&#xA;    video.release()&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;img = nib.load(file_path)&#xA;data = img.get_fdata()&#xA;# nii 转换为多张图片&#xA;imgs = nii2imgs_dim(data, 3)&#xA;# 将图片数组转换为 mp4&#xA;imgs2mp4(imgs, &#34;./tmp/&#34;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>sugarkeek</author>
+      <pubDate>12 Feb 2023 03:11:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>情人节给女朋友送钱，怎么给比较好 - 问与答</title>
+      <link>https://www.v2ex.com/t/915326</link>
+      <description>&lt;p&gt;女朋友换工作不久，业绩不太好，导致手头比较紧张，想给她送点钱，缓解一下经济压力，已经尝试过几种方式：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;直接支付宝转账，但是她不收&lt;/li&gt;&#xA;&lt;li&gt;支付宝开了个亲情卡，也没有收&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;想到另外几种方式：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;我自己再开张银行卡，送给她，线下买东西可以刷那个卡。缺点是线上买东西用不了（只能绑定自己实名的卡）&lt;/li&gt;&#xA;&lt;li&gt;用她的身份开张信用卡附属卡，但是要找她拿身份证，估计不会同意。好处是线上线下都可以用&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;请问大家有没有什么比较好的办法推荐不？&lt;/p&gt;&#xA;</description>
+      <author>GoLand</author>
+      <pubDate>12 Feb 2023 03:07:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>想要讨论一下使用 GPT 作为搜索引擎的问题 - OpenAI</title>
+      <link>https://www.v2ex.com/t/915325</link>
+      <description>&lt;p&gt;关于最近很火的 ChatGPT ，我希望我并不是因为媒体说它很厉害、很多人吹它很厉害，就认为它很厉害。我希望我能更多地了解它的原理。&#xA;目前看大家的应用场景，我觉得主要集中在这几个方面：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;辅助生成代码、配置文件&lt;/li&gt;&#xA;&lt;li&gt;辅助写作，特别是一些程式性的文章（例如周报、ReadMe ）&lt;/li&gt;&#xA;&lt;li&gt;充当搜索引擎&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;关于充当搜索引擎这部份，我有一些担忧。ChatGPT 会理直气壮地返回一些事实性的错误，例如它会说鲁迅和周树人不是同一个人。Google 之前宣传的 Bard 也有类似的问题。传统的搜索引擎会返回来源，而 ChatGPT 会模糊来源，让人更难判断真伪。如果我一定要用的话，我会先用 ChatGPT 询问，然后再回到搜索引擎去寻找来源，感觉就像是多做了一步。&lt;/p&gt;&#xA;&lt;p&gt;目前我的问题主要集中在 GPT 的训练部分。如果作为搜索引擎的话，GPT 应该需要像传统搜索引擎一样，持续不断地爬取互联网的新内容，用来训练。而关于这段训练，我有两个问题：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;GPT 的增量训练是不是非常简单？只需要把新文本当做新的训练集追加训练就好了？&lt;/li&gt;&#xA;&lt;li&gt;如果后续发现爬取的内容有事实错误，想要 GPT 里面剔除这些内容，是不是代价非常高？基本上只能从头训练？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;如果是这样的话，那么会不会有以下的问题：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;对返回结果进行投毒变得比较容易，特别是时事内容。在时事内容还在一些主流的媒体网站传播的时候，就利用大量的小网站或者在其他网站的评论里投毒。投毒的内容可以夹在随机的语句之中。&lt;/li&gt;&#xA;&lt;li&gt;时事还在发展进行中，经历了“反转”，那么 GPT 是不是就很难返回最新进展。&lt;/li&gt;&#xA;&lt;li&gt;运营公司需要消耗大量成本来剔除投毒内容，那是不是只从有声望的大网站上爬取内容就好了？这样的话，是不是互联网的内容会更加集中到大型网站里，小网站更难有出头之日？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>hahastudio</author>
+      <pubDate>12 Feb 2023 03:05:25 +0000</pubDate>
+    </item>
+    <item>
       <title>azure 学生套餐，第一个月 15g 用完，第二个月是不是没有额度了？ - 问与答</title>
       <link>https://www.v2ex.com/t/915324</link>
       <description>RT ，&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;目前看 每天的流量出去还是在计费。请问，额度是不是没了</description>
