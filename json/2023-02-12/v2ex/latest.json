@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "docker 使用 nfs/smb volume 权限问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/915429",
+      "Description": "\u003cp\u003eall-in-one(boom)\ndocker 和 群晖是两个虚拟机（ PVE ）\u003c/p\u003e\n\u003cp\u003e两台的用户分别是\u003cbr/\u003e\ndockermachine\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026gt; id\nuid=1000(ubuntuuser) gid=1000(ubuntuuser) groups=1000(ubuntuuser),27(sudo),999(docker)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003edsm\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026gt; id\nuid=1026(dsmuser) gid=100(users) groups=100(users),101(administrators)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003edocker-compose.yml\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yaml\"\u003eversion: \"3.2\"\nservices:\n  heimdall:\n    image: lscr.io/linuxserver/heimdall:latest\n    container_name: heimdall\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=Asia/Shanghai\n    volumes:\n      - type: volume\n        source: nfs\n        target: /config\n        volume:\n          nocopy: true\n    ports:\n      - 80:80\n      - 443:443\n    restart: unless-stopped\nvolumes:\n  nfs:\n    driver_opts:\n      type: \"nfs\"\n      o: \"addr=dsmip,nolock,soft,rw,nfsvers=4\"\n      device: \":/pathtoheimdall\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eheimdall 报权限不对， 请问 docker 使用 nfs/smb volume 时权限怎么处理\u003c/p\u003e\n",
+      "Author": "mrleft",
+      "PubDate": "2023-02-12T10:27:05Z"
+    },
+    {
+      "Title": "网页版微博如何切换到旧版？ - 问与答",
+      "Link": "https://www.v2ex.com/t/915428",
+      "Description": "旧版一直用的好好的，重新登录了下变成新版了，尝试了网上说的修改 cookie 无效，有别的方法可以吗？",
+      "Author": "koor",
+      "PubDate": "2023-02-12T10:25:09Z"
+    },
+    {
+      "Title": "大家还完车贷房贷之类的，下一步会选择做什么 - 程序员",
+      "Link": "https://www.v2ex.com/t/915427",
+      "Description": "国内城市普通程序员工作，年龄 35 ＋，收入一般，已婚育一娃，不考虑二胎，最近房贷车贷都没了，娃上小学也没有很大开支，每年还能剩一点点。\u003cbr /\u003e\u003cbr /\u003e感觉一下没有了追求。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e换车感觉没这个追求，再买房又买不起的，索性放弃。\u003cbr /\u003e\u003cbr /\u003e想问问，你们这个阶段会选择做什么。",
+      "Author": "MangoCloud",
+      "PubDate": "2023-02-12T10:22:55Z"
+    },
+    {
+      "Title": "记录杜高斯贝给 wise 入金转账被封缘由 - 分享发现",
+      "Link": "https://www.v2ex.com/t/915426",
+      "Description": "\u003cp\u003e前些天给朋友用杜高的确能激活 wise ，激活后再用杜高给 wise 转账，直接被 wise 质疑非同名转账，要求提供证明，提供了杜高转账记录，紧接着第二天被 wise 关停。\u003c/p\u003e\n\u003cp\u003e主要原因是杜高搞反了我朋友的名和姓，例如张三 wise 户头名是 San Zhang ，而杜高的户头名是 Zhang San ，转账记录也显示 Zhang San 转给 San Zhang 。咨询杜高中文客服，中文客服说户名必须按照护照上英文名的顺序来，护照上的确是 Zhang San 。\u003c/p\u003e\n\u003cp\u003e也许杜高搞反户头姓名顺序是个例，大家还是谨慎使用杜高给 wise 入金。\u003c/p\u003e\n",
+      "Author": "aceinnes",
+      "PubDate": "2023-02-12T10:21:11Z"
+    },
+    {
       "Title": "楼主最近需要研究 arm 架构，想请教 v 友买哪款 arm 的开发板比较合适？ - 嵌入式开发",
       "Link": "https://www.v2ex.com/t/915425",
       "Description": "\u003cp\u003e树莓派 4b 又贵性能又差。\u003c/p\u003e\n\u003cp\u003erock pi 5b 目前也没有个靠谱的渠道购买，我是想买来测一测能不能跑 fedora ，如果不能我还想 7 天无理由退货的，而且我还想找个支持 1 年保修的商家购买。\u003c/p\u003e\n\u003cp\u003e还有什么 arm 的设备比较适合拿来研究的？\u003c/p\u003e\n",
