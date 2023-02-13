@@ -74,20 +74,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "大佬们求助啊！",
-      "Link": "https://studygolang.com/articles/36044#reply0",
-      "Description": "\u003cp\u003e我用Vscode适配go语言，程序可以运行，但每次调用函数他都会出现这个报错\u003cimg src=\"https://static.golangjob.cn/230210/7d15bcd15ecacafe4f1c2a1b290322ad.jpg\" alt=\"IMG_1091.jpg\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "请教下Grom关联查询",
-      "Link": "https://studygolang.com/topics/16134#reply2",
-      "Description": "\u003ch3\u003e场景\u003c/h3\u003e\n\n\u003cp\u003eA（父结构体：Person）：姓名\nB（子结构体：Hobby）：兴趣\n当查询 B 表中的\u003ccode\u003e兴趣\u003c/code\u003e时，返回的内容为（姓名，兴趣）这个用户的全部相关信息。\u003c/p\u003e\n\n\u003ch3\u003e疑问\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e应该如何操作关联查询？\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003eA\u003c/code\u003e结构体中存在\u003ccode\u003e*gorm.Model\u003c/code\u003e，\u003ccode\u003eB\u003c/code\u003e 结构体中是否也需要嵌入\u003ccode\u003e*gorm.Model\u003c/code\u003e作为表的主键\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003eCode\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;Learn/db\u0026quot;\n\t\u0026quot;database/sql/driver\u0026quot;\n\t\u0026quot;encoding/json\u0026quot;\n\t\u0026quot;errors\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\n\t\u0026quot;gorm.io/gorm\u0026quot;\n)\n\n// 定义数据类型\ntype Notes []string\n\nfunc (n Notes) Save(value interface{}) error {\n\tstr, ok := value.([]byte)\n\tif !ok {\n\t\treturn errors.New(\u0026quot;value type not match\u0026quot;)\n\t}\n\tjson.Unmarshal(str, \u0026amp;n)\n\treturn nil\n}\n\nfunc (n Notes) Value() (driver.Value, error) {\n\tstr, err := json.Marshal(\u0026amp;n)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\treturn string(str), nil\n}\n\n// 定义人相关的结构体\ntype Person struct {\n\t*gorm.Model\n\tName string `gorm:\u0026quot;column:name\u0026quot;`\n}\n\nfunc (p Person) TableName() string {\n\treturn \u0026quot;person\u0026quot;\n}\n\n// 定义爱好结构体\ntype Hobby struct {\n\t*Person\n\tCode Notes `gorm:\u0026quot;column:code\u0026quot;`\n}\n\nfunc (b Hobby) TableName() string {\n\treturn \u0026quot;hobby\u0026quot;\n}\n\nfunc main() {\n\tdb, err := db.InitDB()\n\tif err != nil {\n\t\tfmt.Println(\u0026quot;conn db err: \u0026quot;, err)\n\t}\n\tdb.AutoMigrate(\u0026amp;Person{}, \u0026amp;Hobby{})\n\n\tvar hobby Hobby = Hobby{\n\t\tCode: Notes{\u0026quot;golang\u0026quot;, \u0026quot;python\u0026quot;},\n\t}\n\n\tvar person Person = Person{\n\t\tName: \u0026quot;tom\u0026quot;,\n\t}\n\n\ttx := db.Create(\u0026amp;hobby).RowsAffected\n\ttc := db.Create(\u0026amp;person).RowsAffected\n\tfmt.Println(\u0026quot;affected rows: \u0026quot;, tx, tc)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e结果\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e表映射创建虽然没有问题，但是\u003ccode\u003eB\u003c/code\u003e表中也存有\u003ccode\u003eA\u003c/code\u003e表中的字段。那如果我不将\u003ccode\u003eB\u003c/code\u003e表使用匿名继承\u003ccode\u003eA\u003c/code\u003e表中的字段，那么得出的两张表没有关联吧。\n\u003cimg src=\"https://static.golangjob.cn/230211/ee8446a1a4522562283cfdd2b295504d.png\" alt=\"mysql\" /\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003chr\u003e\n\n\u003cp\u003e请指点～如果能有demo就更加感谢啦\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "大佬们请问这种xml格式如何取值？",
       "Link": "https://studygolang.com/topics/16133#reply3",
       "Description": "\u003cp\u003e折腾了很久没能解决，希望大佬们指点下 谢谢\n\u003cimg src=\"https://static.golangjob.cn/230211/56636f36bab1fec8dabed5cfae71bc8f.png\" alt=\"QQ图片20230211160757.png\" /\u003e\u003c/p\u003e\n",
@@ -102,6 +88,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "请教下Grom关联查询",
+      "Link": "https://studygolang.com/topics/16134#reply2",
+      "Description": "\u003ch3\u003e场景\u003c/h3\u003e\n\n\u003cp\u003eA（父结构体：Person）：姓名\nB（子结构体：Hobby）：兴趣\n当查询 B 表中的\u003ccode\u003e兴趣\u003c/code\u003e时，返回的内容为（姓名，兴趣）这个用户的全部相关信息。\u003c/p\u003e\n\n\u003ch3\u003e疑问\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e应该如何操作关联查询？\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003eA\u003c/code\u003e结构体中存在\u003ccode\u003e*gorm.Model\u003c/code\u003e，\u003ccode\u003eB\u003c/code\u003e 结构体中是否也需要嵌入\u003ccode\u003e*gorm.Model\u003c/code\u003e作为表的主键\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003eCode\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;Learn/db\u0026quot;\n\t\u0026quot;database/sql/driver\u0026quot;\n\t\u0026quot;encoding/json\u0026quot;\n\t\u0026quot;errors\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\n\t\u0026quot;gorm.io/gorm\u0026quot;\n)\n\n// 定义数据类型\ntype Notes []string\n\nfunc (n Notes) Save(value interface{}) error {\n\tstr, ok := value.([]byte)\n\tif !ok {\n\t\treturn errors.New(\u0026quot;value type not match\u0026quot;)\n\t}\n\tjson.Unmarshal(str, \u0026amp;n)\n\treturn nil\n}\n\nfunc (n Notes) Value() (driver.Value, error) {\n\tstr, err := json.Marshal(\u0026amp;n)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\treturn string(str), nil\n}\n\n// 定义人相关的结构体\ntype Person struct {\n\t*gorm.Model\n\tName string `gorm:\u0026quot;column:name\u0026quot;`\n}\n\nfunc (p Person) TableName() string {\n\treturn \u0026quot;person\u0026quot;\n}\n\n// 定义爱好结构体\ntype Hobby struct {\n\t*Person\n\tCode Notes `gorm:\u0026quot;column:code\u0026quot;`\n}\n\nfunc (b Hobby) TableName() string {\n\treturn \u0026quot;hobby\u0026quot;\n}\n\nfunc main() {\n\tdb, err := db.InitDB()\n\tif err != nil {\n\t\tfmt.Println(\u0026quot;conn db err: \u0026quot;, err)\n\t}\n\tdb.AutoMigrate(\u0026amp;Person{}, \u0026amp;Hobby{})\n\n\tvar hobby Hobby = Hobby{\n\t\tCode: Notes{\u0026quot;golang\u0026quot;, \u0026quot;python\u0026quot;},\n\t}\n\n\tvar person Person = Person{\n\t\tName: \u0026quot;tom\u0026quot;,\n\t}\n\n\ttx := db.Create(\u0026amp;hobby).RowsAffected\n\ttc := db.Create(\u0026amp;person).RowsAffected\n\tfmt.Println(\u0026quot;affected rows: \u0026quot;, tx, tc)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e结果\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e表映射创建虽然没有问题，但是\u003ccode\u003eB\u003c/code\u003e表中也存有\u003ccode\u003eA\u003c/code\u003e表中的字段。那如果我不将\u003ccode\u003eB\u003c/code\u003e表使用匿名继承\u003ccode\u003eA\u003c/code\u003e表中的字段，那么得出的两张表没有关联吧。\n\u003cimg src=\"https://static.golangjob.cn/230211/ee8446a1a4522562283cfdd2b295504d.png\" alt=\"mysql\" /\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003chr\u003e\n\n\u003cp\u003e请指点～如果能有demo就更加感谢啦\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "推荐你认为好的Go资源",
       "Link": "https://studygolang.com/topics/11096#reply58",
       "Description": "\u003cp\u003e社区是一个互助平台，大家的资源应该互相共享，一起推动 Go 的发展，提升每个人的 Go 水平。\u003c/p\u003e\n\n\u003cp\u003e如果你有好的 Go 资源，包括但不限于：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e网站\u003c/li\u003e\n\u003cli\u003e图书\u003c/li\u003e\n\u003cli\u003e工具\u003c/li\u003e\n\u003cli\u003e项目\u003c/li\u003e\n\u003cli\u003e库\u003c/li\u003e\n\u003cli\u003e教程\u003c/li\u003e\n\u003cli\u003e博客\u003c/li\u003e\n\u003cli\u003e。。。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e欢迎留言，给出你的推荐理由和网址。谢谢！\u003c/p\u003e\n",
@@ -112,6 +105,13 @@
       "Title": "QuarkGo，一款兼容：Gin、Hertz、Fiber、Zero、Echo框架的管理后台",
       "Link": "https://studygolang.com/topics/16132#reply0",
       "Description": "\u003cp\u003eQuarkGo，一款兼容：Gin、Hertz、Fiber、Zero、Echo框架的管理后台；\u003c/p\u003e\n\n\u003cp\u003e欢迎各位Star：\u003ca href=\"https://github.com/quarkcms/quark-go\"\u003ehttps://github.com/quarkcms/quark-go\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "大佬们求助啊！",
+      "Link": "https://studygolang.com/articles/36044#reply0",
+      "Description": "\u003cp\u003e我用Vscode适配go语言，程序可以运行，但每次调用函数他都会出现这个报错\u003cimg src=\"https://static.golangjob.cn/230210/7d15bcd15ecacafe4f1c2a1b290322ad.jpg\" alt=\"IMG_1091.jpg\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
