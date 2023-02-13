@@ -52,6 +52,11 @@
       <link>https://studygolang.com/articles/36046#reply0</link>
     </item>
     <item>
+      <title>推荐你认为好的Go资源</title>
+      <link>https://studygolang.com/topics/11096#reply58</link>
+      <description>&lt;p&gt;社区是一个互助平台，大家的资源应该互相共享，一起推动 Go 的发展，提升每个人的 Go 水平。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如果你有好的 Go 资源，包括但不限于：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;网站&lt;/li&gt;&#xA;&lt;li&gt;图书&lt;/li&gt;&#xA;&lt;li&gt;工具&lt;/li&gt;&#xA;&lt;li&gt;项目&lt;/li&gt;&#xA;&lt;li&gt;库&lt;/li&gt;&#xA;&lt;li&gt;教程&lt;/li&gt;&#xA;&lt;li&gt;博客&lt;/li&gt;&#xA;&lt;li&gt;。。。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;欢迎留言，给出你的推荐理由和网址。谢谢！&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>大佬们请问这种xml格式如何取值？</title>
       <link>https://studygolang.com/topics/16133#reply3</link>
       <description>&lt;p&gt;折腾了很久没能解决，希望大佬们指点下 谢谢&#xA;&lt;img src=&#34;https://static.golangjob.cn/230211/56636f36bab1fec8dabed5cfae71bc8f.png&#34; alt=&#34;QQ图片20230211160757.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
@@ -65,11 +70,6 @@
       <title>请教下Grom关联查询</title>
       <link>https://studygolang.com/topics/16134#reply2</link>
       <description>&lt;h3&gt;场景&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;A（父结构体：Person）：姓名&#xA;B（子结构体：Hobby）：兴趣&#xA;当查询 B 表中的&lt;code&gt;兴趣&lt;/code&gt;时，返回的内容为（姓名，兴趣）这个用户的全部相关信息。&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;疑问&lt;/h3&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;应该如何操作关联查询？&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;A&lt;/code&gt;结构体中存在&lt;code&gt;*gorm.Model&lt;/code&gt;，&lt;code&gt;B&lt;/code&gt; 结构体中是否也需要嵌入&lt;code&gt;*gorm.Model&lt;/code&gt;作为表的主键&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;h3&gt;Code&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;Learn/db&amp;quot;&#xA;&#x9;&amp;quot;database/sql/driver&amp;quot;&#xA;&#x9;&amp;quot;encoding/json&amp;quot;&#xA;&#x9;&amp;quot;errors&amp;quot;&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#xA;&#x9;&amp;quot;gorm.io/gorm&amp;quot;&#xA;)&#xA;&#xA;// 定义数据类型&#xA;type Notes []string&#xA;&#xA;func (n Notes) Save(value interface{}) error {&#xA;&#x9;str, ok := value.([]byte)&#xA;&#x9;if !ok {&#xA;&#x9;&#x9;return errors.New(&amp;quot;value type not match&amp;quot;)&#xA;&#x9;}&#xA;&#x9;json.Unmarshal(str, &amp;amp;n)&#xA;&#x9;return nil&#xA;}&#xA;&#xA;func (n Notes) Value() (driver.Value, error) {&#xA;&#x9;str, err := json.Marshal(&amp;amp;n)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return nil, err&#xA;&#x9;}&#xA;&#x9;return string(str), nil&#xA;}&#xA;&#xA;// 定义人相关的结构体&#xA;type Person struct {&#xA;&#x9;*gorm.Model&#xA;&#x9;Name string `gorm:&amp;quot;column:name&amp;quot;`&#xA;}&#xA;&#xA;func (p Person) TableName() string {&#xA;&#x9;return &amp;quot;person&amp;quot;&#xA;}&#xA;&#xA;// 定义爱好结构体&#xA;type Hobby struct {&#xA;&#x9;*Person&#xA;&#x9;Code Notes `gorm:&amp;quot;column:code&amp;quot;`&#xA;}&#xA;&#xA;func (b Hobby) TableName() string {&#xA;&#x9;return &amp;quot;hobby&amp;quot;&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;db, err := db.InitDB()&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;fmt.Println(&amp;quot;conn db err: &amp;quot;, err)&#xA;&#x9;}&#xA;&#x9;db.AutoMigrate(&amp;amp;Person{}, &amp;amp;Hobby{})&#xA;&#xA;&#x9;var hobby Hobby = Hobby{&#xA;&#x9;&#x9;Code: Notes{&amp;quot;golang&amp;quot;, &amp;quot;python&amp;quot;},&#xA;&#x9;}&#xA;&#xA;&#x9;var person Person = Person{&#xA;&#x9;&#x9;Name: &amp;quot;tom&amp;quot;,&#xA;&#x9;}&#xA;&#xA;&#x9;tx := db.Create(&amp;amp;hobby).RowsAffected&#xA;&#x9;tc := db.Create(&amp;amp;person).RowsAffected&#xA;&#x9;fmt.Println(&amp;quot;affected rows: &amp;quot;, tx, tc)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;结果&lt;/h3&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;表映射创建虽然没有问题，但是&lt;code&gt;B&lt;/code&gt;表中也存有&lt;code&gt;A&lt;/code&gt;表中的字段。那如果我不将&lt;code&gt;B&lt;/code&gt;表使用匿名继承&lt;code&gt;A&lt;/code&gt;表中的字段，那么得出的两张表没有关联吧。&#xA;&lt;img src=&#34;https://static.golangjob.cn/230211/ee8446a1a4522562283cfdd2b295504d.png&#34; alt=&#34;mysql&#34; /&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;hr&gt;&#xA;&#xA;&lt;p&gt;请指点～如果能有demo就更加感谢啦&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>推荐你认为好的Go资源</title>
-      <link>https://studygolang.com/topics/11096#reply58</link>
-      <description>&lt;p&gt;社区是一个互助平台，大家的资源应该互相共享，一起推动 Go 的发展，提升每个人的 Go 水平。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如果你有好的 Go 资源，包括但不限于：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;网站&lt;/li&gt;&#xA;&lt;li&gt;图书&lt;/li&gt;&#xA;&lt;li&gt;工具&lt;/li&gt;&#xA;&lt;li&gt;项目&lt;/li&gt;&#xA;&lt;li&gt;库&lt;/li&gt;&#xA;&lt;li&gt;教程&lt;/li&gt;&#xA;&lt;li&gt;博客&lt;/li&gt;&#xA;&lt;li&gt;。。。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;欢迎留言，给出你的推荐理由和网址。谢谢！&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>QuarkGo，一款兼容：Gin、Hertz、Fiber、Zero、Echo框架的管理后台</title>
