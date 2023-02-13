@@ -4,9 +4,16 @@
   "Description": "",
   "Items": [
     {
+      "Title": "十亿 mysql 数据优化，主键能否用 uid+雪花算法 id - 问与答",
+      "Link": "https://www.v2ex.com/t/915829",
+      "Description": "\u003cp\u003e背景是这样的，有一个 1T 的数据库，里面有 10 亿条数据， 表结构如下\u003c/p\u003e\n\u003cp\u003euid status pay_method refund_status create_time amount device_id xxx\u003c/p\u003e\n\u003cp\u003e业务上对这个库每天会插入几百完数据，qps 高峰在几百，有一些稍微复杂的查询（主要是会查用户全部的数据），索引不能覆盖全，需要回表的时候，IO 会被打的很高。\u003c/p\u003e\n\u003cp\u003eselect sum(amount) from xx where user_id = xx ,status =xx ,pay_method =xx\u003c/p\u003e\n\u003cp\u003e（比如这个 sql ，查到 5000 行有效数据的话，需要回表因为数据太过分散，需要去 5000 个 page 上查数据，IO 就会很差，这里 buffer pool 完全存不下 1T 的数据，讨论这种冷用户的查询）\u003c/p\u003e\n\u003cp\u003e我想的一个解决办法是，把 User_id + 雪花算法 id 当作主键，这样用户的数据都在一起，回表就不需要查 5000 个 page ，顺序 io 小几百就 ok 了。\u003c/p\u003e\n\u003cp\u003e但是 mysql 主键一般是用自增的当作索引，避免空洞和页分裂，业务场景插入 qps 不高，这种方案是更合适的吗 ？\u003c/p\u003e\n",
+      "Author": "petelin",
+      "PubDate": "2023-02-13T14:01:43Z"
+    },
+    {
       "Title": "有没有 V 友用拉杆箱通勤？ - 问与答",
       "Link": "https://www.v2ex.com/t/915828",
-      "Description": "\u003cp\u003e我有的时候去公司，痛勤时会背双肩包，里面放一个 15 寸的 MBP 、充电器之类，还是比较重的，长期以来，会让肩膀的肌肉变得紧张僵硬，然后感觉上体态会不好\u003c/p\u003e\n\u003cp\u003e我在想是不是可以考虑用拉杆箱通勤？看了一下购物网站上 18 寸或 20 寸的小拉杆箱也不错\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e我有的时候去公司，通勤时会背双肩包，里面放一个 15 寸的 MBP 、充电器之类，还是比较重的，长期以来，会让肩膀的肌肉变得紧张僵硬，然后感觉上体态会不好\u003c/p\u003e\n\u003cp\u003e我在想是不是可以考虑用拉杆箱通勤？看了一下购物网站上 18 寸或 20 寸的小拉杆箱也不错\u003c/p\u003e\n",
       "Author": "cbdyzj",
       "PubDate": "2023-02-13T13:58:29Z"
     },
