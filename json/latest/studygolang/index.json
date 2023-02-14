@@ -53,6 +53,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "gfast前后端分离的管理系统实战视频发布",
+      "Link": "https://studygolang.com/articles/36045#reply0",
+      "Description": "\u003cp\u003e基于全新Go Frame 2.3+Vue3+Element Plus开发的全栈前后端分离的管理系统\n前端采用vue-next-admin 、Vue、Element UI。\n项目实战视频：\n\u003ca href=\"https://www.bilibili.com/video/BV1gM411i7gw/\"\u003ehttps://www.bilibili.com/video/BV1gM411i7gw/\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "基于gin+vue的一站式在线开发工具平台上线了，欢迎大家提出宝贵意见",
+      "Link": "https://studygolang.com/topics/16138#reply0",
+      "Description": "\u003cp\u003e\u003ca href=\"https://tool.gouguoyin.com\"\u003ehttps://tool.gouguoyin.com\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://tool.gouguoyin.cn\"\u003ehttps://tool.gouguoyin.cn\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e本站基于 Vue + Gin 架构，由 \u003ca href=\"https://github.com/golang-module/dongle\"\u003ego-dongle\u003c/a\u003e 强力驱动，提供包括但不局限以下服务：\n- 编码解码：Unicode, Hex, Base64, UrlEncode, 摩斯码 ……\n- 哈希散列算法：Md2, Md4, Md5, Ripemd160, Sha1, ……\n- 对称加密解密：AES, DES, 3DES, Blowfish, RC4 ……\n- 非对称加密解密：RSA, ECC, ECDSA, DH ……\n- 签名验签：Bcrypt, RSA, DSA ……\n- 国密算法：Sm2, Sm3, Sm4, Sm9 ……\n- 密钥证书：密钥对生成, 密钥对校验, 密钥对格式化, 密钥对压缩 ……\u003c/p\u003e\n\n\u003cp\u003e本站承诺永久免费无广告，致力于打造干净人性化的一站式优质在线开发工具平台。\n\u003cimg src=\"https://static.golangjob.cn/230213/00f0dee0b9c8e339a57852bcce63e0e6.png\" alt=\"image.png\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/230213/aee1648831da543541ab8e7f1e84deeb.png\" alt=\"image.png\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/230213/7d41d274a6f47466b01cd07cb3fe9592.png\" alt=\"image.png\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/230213/e98bbd25a194eaade99fdaad91e69875.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "跪求antd pro 和 go 开箱即用的后台平台",
       "Link": "https://studygolang.com/topics/16139#reply3",
       "Description": "\u003cp\u003e跪求antd pro 和 go 开箱即用的后台平台\n最好是gin框架\u003c/p\u003e\n",
@@ -77,20 +91,6 @@
       "Title": "Go使用struct基于面向对象实现学生管理系统(CURD)",
       "Link": "https://studygolang.com/topics/16140#reply0",
       "Description": "\u003cp\u003eGo使用struct基于面向对象实现学生管理系统(CURD)\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;os\u0026quot;\n)\n\n/*\n写一个系统能够查看、新增、删除、学生\n 有一个物件：\n1. 它保存了一些数据 ---\u0026gt; 结构体的字段\n2. 他有三个功能     ---\u0026gt; 结构体的方法 ：面向对象编程语言的思维\n */\n\n//声明一个全局学生管理者变量\nvar sm stuMgr\n//学生信息的结构体\ntype Students struct{\n\tid uint8\n\tname string\n\t}\n\n//学生管理的结构体\ntype stuMgr struct {\n\tallStudent map[uint8]*Students\n}\n//使用构造函数\nfunc newStudents(i uint8,n string) *Students{\n\treturn \u0026amp;Students{\n\t\tid: i,\n\t\tname: n,\n\t}\n}\n\n//方法和接受者\nfunc(s stuMgr)QueryAllStudents(){\n\tfor k,v:=range s.allStudent{\n\t\tfmt.Printf(\u0026quot;学生编号:%d 学生信息:%s\\n\u0026quot;,k,v.name)\n\t}\n\tfmt.Println(\u0026quot;查询学生信息成功！\u0026quot;)\n\n}\n\nfunc(s stuMgr)AddStudents(){\n\tvar (\n\t    ii uint8\n\t    nn string\n\t)\n\tfmt.Printf(\u0026quot;请输入添加的学生编号:\u0026quot;)\n\tfmt.Scan(\u0026amp;ii)\n\t//判断输入的学生编号是否存在学生管理结构体中\n\tfor k,_:=range s.allStudent{\n\t\tfmt.Printf(\u0026quot;for添加打印学生编号%d\\n\u0026quot;,k)\n\t\tif k == ii{\n\t\t\tfmt.Printf(\u0026quot;输入的学生编号%d已存在\\n！\u0026quot;,ii)\n\t\t\treturn\n\t\t}\n\t}\n\tfmt.Printf(\u0026quot;请输入添加的学生姓名:\u0026quot;)\n\tfmt.Scan(\u0026amp;nn)\n\t//将输入的学生信息添加到stuMgr结构体中,strMgr结构体中定义的是map[uint8]*Students,需要初始化map中的*Students结构体,并将输入的信息保存在*Students结构体中\n\tnewS:=\u0026amp;Students{\n\t\tid:ii,\n\t\tname:nn,\n\t}\n\t//目前输入的信息保存在*Students结构体中,没有保存在stuMgr结构体中\n\tfmt.Printf(\u0026quot;类型是:%T\\n\u0026quot;,s.allStudent)\n\ts.allStudent[newS.id]=newS //s.allStudent是map\n\tfmt.Printf(\u0026quot;添加学生成功！学生编号:%v 学生姓名:%v\\n\u0026quot;,newS.id,newS.name)\n\n\n\n\n}\nfunc(s stuMgr)DeleteStudents(){\n\tvar (\n\t\tii uint8\n\t)\n\tfmt.Printf(\u0026quot;请输入删除的学生编号:\u0026quot;)\n\tfmt.Scan(\u0026amp;ii)\n\t//判断输入的学生编号是否存在学生管理结构体中\n\t_,ok:=s.allStudent[ii]\n\tif !ok{\n\t\tfmt.Println(\u0026quot;输入的学生编号不存在！,无法删除！\u0026quot;)\n\t\treturn\n\t}\n\tfmt.Printf(\u0026quot;学生姓名%s\\n\u0026quot;,s.allStudent[ii].name)\n\tdelete(s.allStudent,ii)\n\tfmt.Printf(\u0026quot;删除成功！学生编号%d\\n\u0026quot;,ii)\n}\n\nfunc(s stuMgr)UpdateStudents(){\n\t//从stuMgr结构体中获取所有的学生信息\n\tfmt.Println(\u0026quot;修改！！！\u0026quot;)\n\tfor k,v :=range s.allStudent{\n\t\tfmt.Printf(\u0026quot;学生编号:%d 学生名字:%s\\n\u0026quot;,k,v.name)\n\t}\n\tvar (\n\t\tii uint8\n\t\tnn string\n\t)\n\tfmt.Printf(\u0026quot;请输入需修改的学生编号:\u0026quot;)\n\tfmt.Scan(\u0026amp;ii)\n\t//判断输入的学生编号是否存在学生管理结构体中\n\t_,ok:=s.allStudent[ii]\n\tif !ok{\n\t\tfmt.Println(\u0026quot;输入的学生编号不存在！,无法修改！\u0026quot;)\n\t\treturn\n\t}\n\tfmt.Printf(\u0026quot;输入的学生编号%d对应的学生姓名%s\\n\u0026quot;,ii,s.allStudent[ii].name)\n\tfmt.Printf(\u0026quot;请输入需修改的学生姓名:\u0026quot;)\n\tfmt.Scan(\u0026amp;nn)\n\t//将输入修改的学生信息添加到stuMgr结构体中,strMgr结构体中定义的是map[uint8]*Students,需要初始化map中的*Students结构体,并将输入修改的信息保存在*Students结构体中\n\t/*\n\tupnew:=\u0026amp;Students{\n\t\tid:ii,\n\t\tname: nn,\n\t}\n\ts.allStudent[upnew.id]=upnew\n\t */\n\t//通过输入的学生编号查到stuMgr结构体定义的map的值,map的值是*Strudents结构体\n\tstustruct:=s.allStudent[ii]\n\t//获取*Strudents结构体中属性重新赋值\n\tstustruct.name=nn\n\t//将*Strudents结构体赋值到stuMgr结构体定义的map上\n\ts.allStudent[ii]=stustruct\n\tfmt.Printf(\u0026quot;修改学生信息成功！修改后的学生姓名是%s\\n\u0026quot;,stustruct.name)\n\n\n}\n\nfunc ment(){\n\tfmt.Println(\u0026quot;学生管理系统！\u0026quot;)\n\tfmt.Println(`\n            1. 查看所有学生\n\t\t\t2. 新增学生\n\t\t\t3. 删除学生\n            4. 修改学生\n\t\t\t5. 退出\n`)\n\tfmt.Println(\u0026quot;请输入编号进行操作：\u0026quot;)\n\tvar choice int8\n\tfmt.Scan(\u0026amp;choice)\n\tfmt.Printf(\u0026quot;输入的编号是:%d\\n\u0026quot;,choice)\n\tswitch choice {\n\tcase 1:\n\t\tsm.QueryAllStudents()\n\tcase 2:\n\t\tsm.AddStudents()\n\tcase 3:\n\t\tsm.DeleteStudents()\n\tcase 4:\n\t\tsm.UpdateStudents()\n\tcase 5:\n\t\tos.Exit(1)\n\tdefault:\n\t\tfmt.Println(\u0026quot;输入不合法！\u0026quot;)\n\t}\n}\n\n\n\nfunc main() {\n\t//一个系统只有一个全局管理者，如果放到for循环里面每次启动就创建一个\n\tsm=stuMgr{\n\t\tallStudent:make(map[uint8]*Students,100),\n\t}\n\tfor  {\n\t\tment()\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "gfast前后端分离的管理系统实战视频发布",
-      "Link": "https://studygolang.com/articles/36045#reply0",
-      "Description": "\u003cp\u003e基于全新Go Frame 2.3+Vue3+Element Plus开发的全栈前后端分离的管理系统\n前端采用vue-next-admin 、Vue、Element UI。\n项目实战视频：\n\u003ca href=\"https://www.bilibili.com/video/BV1gM411i7gw/\"\u003ehttps://www.bilibili.com/video/BV1gM411i7gw/\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "基于gin+vue的一站式在线开发工具平台上线了，欢迎大家提出宝贵意见",
-      "Link": "https://studygolang.com/topics/16138#reply0",
-      "Description": "\u003cp\u003e\u003ca href=\"https://tool.gouguoyin.com\"\u003ehttps://tool.gouguoyin.com\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://tool.gouguoyin.cn\"\u003ehttps://tool.gouguoyin.cn\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e本站基于 Vue + Gin 架构，由 \u003ca href=\"https://github.com/golang-module/dongle\"\u003ego-dongle\u003c/a\u003e 强力驱动，提供包括但不局限以下服务：\n- 编码解码：Unicode, Hex, Base64, UrlEncode, 摩斯码 ……\n- 哈希散列算法：Md2, Md4, Md5, Ripemd160, Sha1, ……\n- 对称加密解密：AES, DES, 3DES, Blowfish, RC4 ……\n- 非对称加密解密：RSA, ECC, ECDSA, DH ……\n- 签名验签：Bcrypt, RSA, DSA ……\n- 国密算法：Sm2, Sm3, Sm4, Sm9 ……\n- 密钥证书：密钥对生成, 密钥对校验, 密钥对格式化, 密钥对压缩 ……\u003c/p\u003e\n\n\u003cp\u003e本站承诺永久免费无广告，致力于打造干净人性化的一站式优质在线开发工具平台。\n\u003cimg src=\"https://static.golangjob.cn/230213/00f0dee0b9c8e339a57852bcce63e0e6.png\" alt=\"image.png\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/230213/aee1648831da543541ab8e7f1e84deeb.png\" alt=\"image.png\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/230213/7d41d274a6f47466b01cd07cb3fe9592.png\" alt=\"image.png\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/230213/e98bbd25a194eaade99fdaad91e69875.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
