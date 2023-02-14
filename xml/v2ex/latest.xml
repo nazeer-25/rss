@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Lost art 外服 ip 限制严重 自建的谷歌云美西区不能用 迅游加速只能自选节点碰运气 - 游戏</title>
+      <link>https://www.v2ex.com/t/916124</link>
+      <description>谷歌云俄勒冈虚拟机实例&lt;br /&gt;迅游客服说游戏 ip 禁的严 只能自己手动选节点尝试&lt;br /&gt;&lt;br /&gt;有什么好办法解决么</description>
+      <author>alex8</author>
+      <pubDate>14 Feb 2023 12:16:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>Tailscale 通过 tcp 流量转发实现无须自建 derp 节点加速国内访问 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/916123</link>
+      <description>&lt;h2&gt;Abstract&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://tailscale.com/kb/1118/custom-derp-servers/&#34; rel=&#34;nofollow&#34;&gt;https://tailscale.com/kb/1118/custom-derp-servers/&lt;/a&gt; &lt;/p&gt;&#xA;&lt;p&gt;derp server has derp service(基于 http(s) 的流量转发 tcp/443) + STUN service(udp/3478)&lt;/p&gt;&#xA;&lt;p&gt;众所周知，搭建一个 derp server 需要配置 https 证书等繁琐的流程，因此希望能通过 tcp 流量转发实现加速。&lt;/p&gt;&#xA;&lt;p&gt;Route：&lt;/p&gt;&#xA;&lt;h2&gt;derpMap&lt;/h2&gt;&#xA;&lt;p&gt;在 tailscale web admin UI 中可以配置 ACL ，其中包括 derpMap&lt;/p&gt;&#xA;&lt;p&gt;默认的 derpMap: &lt;a href=&#34;https://login.tailscale.com/derpmap/default&#34; rel=&#34;nofollow&#34;&gt;https://login.tailscale.com/derpmap/default&lt;/a&gt; &lt;/p&gt;&#xA;&lt;p&gt;（并不会一直请求，而是被 embed 在 golang binary 中）&lt;/p&gt;&#xA;&lt;h2&gt;配置&lt;/h2&gt;&#xA;&lt;p&gt;添加一个新的 region ，其 &lt;code&gt;Nodes&lt;/code&gt; 参数包含我们想要添加的转发代理节点&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{&#xA;&#x9;&#34;derpMap&#34;: {&#xA;&#x9;&#x9;&#34;OmitDefaultRegions&#34;: true,&#xA;&#x9;&#x9;&#34;Regions&#34;: {&#xA;&#x9;&#x9;&#x9;&#34;900&#34;: {&#xA;&#x9;&#x9;&#x9;&#x9;&#34;RegionID&#34;:   900,&#xA;&#x9;&#x9;&#x9;&#x9;&#34;RegionCode&#34;: &#34;hkg2&#34;,&#xA;&#x9;&#x9;&#x9;&#x9;&#34;RegionName&#34;: &#34;Tencent HK-&amp;gt;Hongkong&#34;,&#xA;&#x9;&#x9;&#x9;&#x9;&#34;Nodes&#34;: [&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;Name&#34;:     &#34;derp Tencent hk&#34;,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;RegionID&#34;: 900,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;HostName&#34;: &#34;derp20b.tailscale.com&#34;,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;DERPPort&#34;: xxxx,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;STUNPort&#34;: -1,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;IPv4&#34;:     &#34;xx.xx.xx.xx&#34;,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;},&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;Name&#34;:     &#34;stun&#34;,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;RegionID&#34;: 900,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;HostName&#34;: &#34;derp20b.tailscale.com&#34;,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;STUNOnly&#34;: true,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;},&#xA;&#x9;&#x9;&#x9;&#x9;],&#xA;&#x9;&#x9;&#x9;},&#xA;&#x9;&#x9;},&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;显而易见，如果我们用 UDP 转发来代理 STUN 服务，STUN 获取到的 external ip address 是 UDP 代理的 IP ，而不是 local agent ip ，其会直接导致服务连接失败。&lt;/p&gt;&#xA;&lt;p&gt;好在 &lt;code&gt;DERPNode&lt;/code&gt; 中的配置选项还算丰富，可以 somehow 绕过这个麻烦&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://pkg.go.dev/tailscale.com/tailcfg#DERPNode&#34; rel=&#34;nofollow&#34;&gt;https://pkg.go.dev/tailscale.com/tailcfg#DERPNode&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;HostName&lt;/code&gt; 必须是 default derpMap 中几个服务器之一（本人选择香港 derp20b ），否则 tls 报错 internal tls cert error （ journalctl -u tailscaled ）&lt;/p&gt;&#xA;&lt;p&gt;但是为此的代价是必须手动指定 &lt;code&gt;IPv4&lt;/code&gt; field ，设置为 &lt;a href=&#34;http://vx.link&#34; rel=&#34;nofollow&#34;&gt;vx.link&lt;/a&gt; tcp proxy’s IP addr ，如果 vx.link 更换了新的代理服务器，我们可能需要手动修改这个 field&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;DERPPort&lt;/code&gt; 为 &lt;a href=&#34;http://vx.link&#34; rel=&#34;nofollow&#34;&gt;vx.link&lt;/a&gt; tcp proxy’s port&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;STUNPort&lt;/code&gt; 为 -1：&lt;code&gt;To disable STUN on this node, use -1.&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;之后，再添加一个 &lt;code&gt;STUNOnly&lt;/code&gt; 为 true 的节点，&lt;code&gt;HostName&lt;/code&gt; 最好是和上边一样&lt;/p&gt;&#xA;&lt;h2&gt;效果&lt;/h2&gt;&#xA;&lt;p&gt;Routes(one way):&lt;/p&gt;&#xA;&lt;p&gt;China Mobile FTTH → &lt;a href=&#34;http://vx.link&#34; rel=&#34;nofollow&#34;&gt;vx.link&lt;/a&gt; Tencent HK →&lt;a href=&#34;http://derp20b.tailscale.com&#34; rel=&#34;nofollow&#34;&gt;derp20b.tailscale.com&lt;/a&gt; → &lt;a href=&#34;http://vx.link&#34; rel=&#34;nofollow&#34;&gt;vx.link&lt;/a&gt; Tencent HK → China Unicom 4g&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Untitled&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/Wy9QRFE.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;mtr -z &lt;a href=&#34;http://derp20b.tailscale.com&#34; rel=&#34;nofollow&#34;&gt;derp20b.tailscale.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Untitled&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/E4cAMTl.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;勉强能在高峰期获得一个能用的延迟。&lt;/p&gt;&#xA;&lt;h2&gt;不足之处&lt;/h2&gt;&#xA;&lt;p&gt;流量转发与 STUN 服务的强耦合，导致 tcp udp 流量走的是两条不同的 network path ，即 &lt;code&gt;tailscale netcheck&lt;/code&gt; 通过 STUN 服务检测到的 UDP 直连 RTT 并不等同于经过 tcp 转发后 path 的 rtt ，导致我们的最优 path 选择出错。&lt;/p&gt;&#xA;&lt;p&gt;所以无奈之举是 &lt;code&gt;OmitDefaultRegions&lt;/code&gt; 为 true ，disable 所有默认节点，只保留我们在 acl 中添加的转发节点。&lt;/p&gt;&#xA;&lt;h2&gt;结尾&lt;/h2&gt;&#xA;&lt;p&gt;注：文章内容从 notion 笔记中 CTRL-V ，文法及格式过于随意。&lt;/p&gt;&#xA;&lt;p&gt;真不是广告，流量都是自费充值。&lt;/p&gt;&#xA;</description>
+      <author>zckevin</author>
+      <pubDate>14 Feb 2023 12:15:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>miui14 没有“息屏听剧”吗？还有什么更简单方法实现工具吗？ - Android</title>
+      <link>https://www.v2ex.com/t/916122</link>
+      <description>喜欢一边干别的，一边听手机里 youtube 的视频。但是开着屏幕太费电了。现在的解决方案是，edge 打开视频页，转成“查看网页网站”，上滑退到桌面，下滑打开“通知”，点击通知里那个播放图标播放，这时候就可以息屏后台播放声音了。&lt;br /&gt;    虽然可以实现，但太繁琐了，查了查小米 12.5 出过一个“息屏听剧”的功能似乎不错，但是在我的小米 13 上一直没找到，网上也没有相关信息，请指教一下，能否更简单的实现这个功能？</description>
+      <author>brucecao</author>
+      <pubDate>14 Feb 2023 12:13:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>优酷视频下载有什么好用的推荐么 - 问与答</title>
+      <link>https://www.v2ex.com/t/916121</link>
+      <description>&lt;p&gt;想从上面下载几个视频下来, 客户端下载的都是加密的, 其他地方看不了&lt;/p&gt;&#xA;</description>
+      <author>xpyusrs</author>
+      <pubDate>14 Feb 2023 12:08:56 +0000</pubDate>
+    </item>
+    <item>
       <title>兄弟们， 5600 多的 MacBook Air m1，快忍不住剁手了！ - MacBook Air</title>
       <link>https://www.v2ex.com/t/916120</link>
       <description>某多，百亿补贴完后，丐版只要 5600 多了，看了一段时间了，心痒痒啊。&lt;br /&gt;&lt;br /&gt;主要是喜欢楔形外观，键盘，没有 bar ，安静，续航顶，唯一不太喜欢是中文键盘印字。&lt;br /&gt;&lt;br /&gt;单位禁止用自己计算机，所以基本就是平时下班用用。&lt;br /&gt;&lt;br /&gt;哎呀呀，心痒痒呀！</description>
