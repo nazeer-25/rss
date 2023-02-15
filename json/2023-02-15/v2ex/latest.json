@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "使用 k8s+helm 同时管理 saas 化部署和私有化部署 ，想问一下大家可以参考的最佳实践？ - Kubernetes",
+      "Link": "https://www.v2ex.com/t/916300",
+      "Description": "\u003cp\u003e公司的服务是属于 saas 化的一款产品，部署在华为云 k8s 集群里面。此外我们还承接针对某些客户的私有化部署，为了使部署过程更方便快捷、降低部署时因配置等导致的不稳定因素，我们决定采用 helm 来管理 k8s 配置。\u003c/p\u003e\n\u003cp\u003e我目前的想法是： \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003echarts/\n  templates/\n  environments/\n    values.dev.yaml\n    values.prod.yaml\n    values.selfhosted.yaml\n  values.yaml\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其中 templates/ 文件夹里面存放各个服务的 deployment/service 等信息，environments/ 文件夹下面存放不同环境独有的一些变量值，最外层的 values.yaml 存放不同环境下通用的一些变量值，优先级会低于 environments/ 下面的那些文件。\u003c/p\u003e\n\u003cp\u003e我们在华为云上面的服务的 k8s 配置后面也会改成使用 helm 模板渲染出的配置，这样每次更新服务配置就只改 helm 然后生成配置，能比较好地使得不同部署环境的配置是实时同步的。\u003c/p\u003e\n\u003cp\u003e我也看过 kustomize ，但是感觉用起来较为复杂了所以后面还是继续使用 helm 了。\u003c/p\u003e\n\u003cp\u003e这个只是一个很简单应该也是很常规的做法，想问一下大家有没有一些最佳实践之类的可以分享一下吗？包括更合理和全面的文件夹结构、或者说将自己的服务做成一个 helm 包（感觉这个场景并不常见...）\u003c/p\u003e\n",
+      "Author": "eephee",
+      "PubDate": "2023-02-15T05:06:00Z"
+    },
+    {
       "Title": "请问 Chrome 浏览器支持的桌面字幕功能是怎么实现的呢？ - 程序员",
       "Link": "https://www.v2ex.com/t/916299",
       "Description": "\u003cp\u003e之前在一个网站有看到过，页面的播放器能有「桌面字幕」功能，开启后，会在桌面出现一个悬浮的窗口显示字幕，神奇的是即使打开其它桌面应用，该悬浮字幕窗口依旧能正常工作，鼠标滑动到上方后还能暂停播放。\u003c/p\u003e\n\u003cp\u003e我搜了下出来的内容都是所谓的 Chrome 的实时字幕功能，实时字幕只是针对英文内容而已，而我上面说的这种是网站媒体内容自带的字幕，明显是通过什么库或者调用 Chrome 的某个接口实现的。\u003c/p\u003e\n",
