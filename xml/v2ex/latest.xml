@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求助 Vue3 用 reactive 绑定数组后 v-for 不渲染 dom - 问与答</title>
+      <link>https://www.v2ex.com/t/916435</link>
+      <description>&lt;p&gt;应该是一个低级问题，自己看了半天没看出来哪里不对，求助一下万能的 v 友。&lt;/p&gt;&#xA;&lt;p&gt;希望实现的效果：自定义了一个&amp;lt;Card /&amp;gt;组件，后端返回一个[]数组，希望 v-for 按照数组内容渲染 card 组件。&lt;/p&gt;&#xA;&lt;p&gt;目前 Card 组件正常引入，比如&lt;code&gt;&amp;lt;Card /&amp;gt;&lt;/code&gt;这句 dom 是正常渲染的，但是如果用 v-for 绑定数据后则不渲染任何东西，出错代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;&amp;lt;template&amp;gt;&#xA;  //...&#xA;  &amp;lt;Card v-for=&#34;(item, index) in items&#34;&amp;gt;&amp;lt;/Card&amp;gt;&#xA;  //...&#xA;&amp;lt;/template&amp;gt;&#xA;&#xA;// script 部分代码是先引入 reactive ，初始化一个空数组，然后 axios 获取到的后端数据加入数组的 value&#xA;import {onMounted, reactive} from &#39;vue&#39;&#xA;&#xA;const items = reactive([])&#xA;&#xA;onMounted(() =&amp;gt; {&#xA;  axios({&#xA;    // 请求部分都是正常的，通过.then(console.log(res))能正常显示数据&#xA;  })&#xA;  .then(res =&amp;gt; {&#xA;    if (res[&#34;data&#34;][&#34;success&#34;]===true) {&#xA;      items.value = res[&#34;data&#34;][&#34;array&#34;]&#xA;    }&#xA;  })&#xA;})&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;理论上按照我的想法，&lt;code&gt;items.value = res[&#34;data&#34;][&#34;array&#34;]&lt;/code&gt;这句之后应该 dom 就会渲染了，我通过 log 查看这个 value 也确实是正常的返回值而不是空值，但是实际上 dom 还是啥也没有，咋回事儿呢？&lt;/p&gt;&#xA;</description>
+      <author>Richard14</author>
+      <pubDate>15 Feb 2023 10:42:01 +0000</pubDate>
+    </item>
+    <item>
       <title>请问高德地图和百度地图哪个更好用？ - 问与答</title>
       <link>https://www.v2ex.com/t/916434</link>
       <description>&lt;p&gt;可以从导航准确度，路口红绿灯，实体商铺是否营业等方面讲解下吗？&lt;/p&gt;&#xA;</description>
