@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "是否有方法在内网代理 chatgpt 页面？ - OpenAI",
+      "Link": "https://www.v2ex.com/t/916484",
+      "Description": "是否能用 docker 实现或者什么实现内网代理 chatgpt 页面并且登陆过期后自动使用帐号密码登陆？想弄一个在内网给自己和家里人用。不用 api 是否有可能？就直接代理官方的那个页面。",
+      "Author": "shelken",
+      "PubDate": "2023-02-15T14:55:09Z"
+    },
+    {
+      "Title": "小学奥数概率题，答案不是 1/8 吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/916483",
+      "Description": "有一道题\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://imgur.com/a/WxqDFRF\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/a/WxqDFRF\u003c/a\u003e\u003cbr /\u003e大家是啥答案，不是 1/8 吗？",
+      "Author": "artemislu569",
+      "PubDate": "2023-02-15T14:54:16Z"
+    },
+    {
+      "Title": "最简单的 Go 代码实现联通的 iptv 转换为 http 流 实现类似 udpxy 的功能 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/916482",
+      "Description": "\u003cp\u003e一直在用 udpxy 看北京联通的 IPTV ，很好奇到底是怎么实现的，\u003c/p\u003e\n\u003cp\u003e但是 udpxy 的代码量还是有一些，\u003c/p\u003e\n\u003cp\u003e最近花了一晚上，终于用 go 实现了一个最简单的版本，感觉很简洁\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://gist.github.com/darren/fe449a04bfddbed09ce477e1d33d6562\" rel=\"nofollow\"\u003ehttps://gist.github.com/darren/fe449a04bfddbed09ce477e1d33d6562\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\"flag\"\n\t\"io\"\n\t\"log\"\n\t\"net\"\n\t\"net/http\"\n\t\"os\"\n\t\"strings\"\n)\n\nvar addr = flag.String(\"l\", \":18000\", \"Listening address\")\nvar iface = flag.String(\"i\", \"eth0\", \"Listening multicast interface\")\n\nvar inf *net.Interface\n\nfunc handleHTTP(w http.ResponseWriter, req *http.Request) {\n\tparts := strings.FieldsFunc(req.URL.Path, func(r rune) bool {\n\t\treturn r == '/'\n\t})\n\n\tif len(parts) \u0026lt; 2 {\n\t\tw.WriteHeader( http.StatusBadRequest)\n\t\tio.WriteString(w, \"No address specified\")\n\t\treturn\n\t}\n\n\traddr := parts[1]\n\n\taddr, err := net.ResolveUDPAddr(\"udp4\", raddr)\n\tif err != nil {\n\t\tw.WriteHeader( http.StatusBadRequest)\n\t\tio.WriteString(w, err.Error())\n\t\treturn\n\t}\n\n\tconn, err := net.ListenMulticastUDP(\"udp4\", inf, addr)\n\tif err != nil {\n\t\tw.WriteHeader( http.StatusInternalServerError)\n\t\tio.WriteString(w, err.Error())\n\t\treturn\n\t}\n\tdefer conn.Close()\n\n\tw.Header().Set(\"Content-Type\", \"application/octet-stream\")\n\tw.WriteHeader( http.StatusOK)\n\tn, err := io.Copy(w, conn)\n\tlog.Printf(\"%s %s %d [%s]\", req.RemoteAddr, req.URL.Path, n, req.UserAgent())\n}\n\nfunc main() {\n\tif os.Getppid() == 1 {\n\t\tlog.SetFlags(log.Flags() \u0026amp;^ (log.Ldate | log.Ltime))\n\t} else {\n\t\tlog.SetFlags(log.Lshortfile | log.LstdFlags)\n\t}\n\n\tflag.Parse()\n\n\tvar err error\n\tinf, err = net.InterfaceByName(*iface)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t\treturn\n\t}\n\n\tvar mux http.ServeMux\n\tmux.HandleFunc(\"/rtp/\", handleHTTP)\n\n\tlog.Fatal( http.ListenAndServe(*addr, \u0026amp;mux))\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e启动后，使用 iina 播放：iina http://localhost:18000/rtp/239.3.1.62:8112\u003c/p\u003e\n\u003cp\u003e不过这样的实现 VLC 播放器无法直接播放，\nApple TV 上某些底层 使用了 VLC 的播放器也无法播放了\n需要解析 RTP 包，把 payload 提取出来\u003c/p\u003e\n\u003cp\u003e找了一番 RTP 协议的实现，发现已经有现成的了\n\u003ca href=\"http://github.com/pion/rtp\" rel=\"nofollow\"\u003egithub.com/pion/rtp\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e具体实现可以参考 \u003ca href=\"https://github.com/darren/retv/blob/54378d16d6e1042b9259280b3a7aea50087d0518/rtp.go#L73\" rel=\"nofollow\"\u003ehttps://github.com/darren/retv/blob/54378d16d6e1042b9259280b3a7aea50087d0518/rtp.go#L73\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e下一步的想法：自动把视频流切成 segments,实现 HLS ，让浏览器也能直接播放 😄\u003c/p\u003e\n",
+      "Author": "darrh00",
+      "PubDate": "2023-02-15T14:53:35Z"
+    },
+    {
       "Title": "21 年 7 月份买的三星 970 evo plus 前几天挂了， v 友推荐靠谱的固态硬盘吧？ - 硬件",
       "Link": "https://www.v2ex.com/t/916481",
       "Description": "\u003cp\u003e21 年 7 月份买的三星 970 evo plus 1T （当时 1269 元），前几天用着突然出现 can't read superblock ，然后只读了，关机就启动不了了\u003c/p\u003e\n\u003cp\u003e虽然主要的数据不在固态硬盘上，但才用不到 2 年的硬盘就这样寄了也是没碰到过的，\u003c/p\u003e\n\u003cp\u003e所以在此问下 v 友们有没靠谱的固态硬盘推荐，速度差点也可以，先感谢了。\u003c/p\u003e\n\u003cp\u003e大家也可以分享下自己固态硬盘挂了的型号，避开这些，再次感谢\u003c/p\u003e\n",

@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>是否有方法在内网代理 chatgpt 页面？ - OpenAI</title>
+      <link>https://www.v2ex.com/t/916484</link>
+      <description>是否能用 docker 实现或者什么实现内网代理 chatgpt 页面并且登陆过期后自动使用帐号密码登陆？想弄一个在内网给自己和家里人用。不用 api 是否有可能？就直接代理官方的那个页面。</description>
+      <author>shelken</author>
+      <pubDate>15 Feb 2023 14:55:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>小学奥数概率题，答案不是 1/8 吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/916483</link>
+      <description>有一道题&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/a/WxqDFRF&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/a/WxqDFRF&lt;/a&gt;&lt;br /&gt;大家是啥答案，不是 1/8 吗？</description>
+      <author>artemislu569</author>
+      <pubDate>15 Feb 2023 14:54:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>最简单的 Go 代码实现联通的 iptv 转换为 http 流 实现类似 udpxy 的功能 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/916482</link>
+      <description>&lt;p&gt;一直在用 udpxy 看北京联通的 IPTV ，很好奇到底是怎么实现的，&lt;/p&gt;&#xA;&lt;p&gt;但是 udpxy 的代码量还是有一些，&lt;/p&gt;&#xA;&lt;p&gt;最近花了一晚上，终于用 go 实现了一个最简单的版本，感觉很简洁&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://gist.github.com/darren/fe449a04bfddbed09ce477e1d33d6562&#34; rel=&#34;nofollow&#34;&gt;https://gist.github.com/darren/fe449a04bfddbed09ce477e1d33d6562&lt;/a&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;flag&#34;&#xA;&#x9;&#34;io&#34;&#xA;&#x9;&#34;log&#34;&#xA;&#x9;&#34;net&#34;&#xA;&#x9;&#34;net/http&#34;&#xA;&#x9;&#34;os&#34;&#xA;&#x9;&#34;strings&#34;&#xA;)&#xA;&#xA;var addr = flag.String(&#34;l&#34;, &#34;:18000&#34;, &#34;Listening address&#34;)&#xA;var iface = flag.String(&#34;i&#34;, &#34;eth0&#34;, &#34;Listening multicast interface&#34;)&#xA;&#xA;var inf *net.Interface&#xA;&#xA;func handleHTTP(w http.ResponseWriter, req *http.Request) {&#xA;&#x9;parts := strings.FieldsFunc(req.URL.Path, func(r rune) bool {&#xA;&#x9;&#x9;return r == &#39;/&#39;&#xA;&#x9;})&#xA;&#xA;&#x9;if len(parts) &amp;lt; 2 {&#xA;&#x9;&#x9;w.WriteHeader( http.StatusBadRequest)&#xA;&#x9;&#x9;io.WriteString(w, &#34;No address specified&#34;)&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#xA;&#x9;raddr := parts[1]&#xA;&#xA;&#x9;addr, err := net.ResolveUDPAddr(&#34;udp4&#34;, raddr)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;w.WriteHeader( http.StatusBadRequest)&#xA;&#x9;&#x9;io.WriteString(w, err.Error())&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#xA;&#x9;conn, err := net.ListenMulticastUDP(&#34;udp4&#34;, inf, addr)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;w.WriteHeader( http.StatusInternalServerError)&#xA;&#x9;&#x9;io.WriteString(w, err.Error())&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;defer conn.Close()&#xA;&#xA;&#x9;w.Header().Set(&#34;Content-Type&#34;, &#34;application/octet-stream&#34;)&#xA;&#x9;w.WriteHeader( http.StatusOK)&#xA;&#x9;n, err := io.Copy(w, conn)&#xA;&#x9;log.Printf(&#34;%s %s %d [%s]&#34;, req.RemoteAddr, req.URL.Path, n, req.UserAgent())&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;if os.Getppid() == 1 {&#xA;&#x9;&#x9;log.SetFlags(log.Flags() &amp;amp;^ (log.Ldate | log.Ltime))&#xA;&#x9;} else {&#xA;&#x9;&#x9;log.SetFlags(log.Lshortfile | log.LstdFlags)&#xA;&#x9;}&#xA;&#xA;&#x9;flag.Parse()&#xA;&#xA;&#x9;var err error&#xA;&#x9;inf, err = net.InterfaceByName(*iface)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatal(err)&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#xA;&#x9;var mux http.ServeMux&#xA;&#x9;mux.HandleFunc(&#34;/rtp/&#34;, handleHTTP)&#xA;&#xA;&#x9;log.Fatal( http.ListenAndServe(*addr, &amp;amp;mux))&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;启动后，使用 iina 播放：iina http://localhost:18000/rtp/239.3.1.62:8112&lt;/p&gt;&#xA;&lt;p&gt;不过这样的实现 VLC 播放器无法直接播放，&#xA;Apple TV 上某些底层 使用了 VLC 的播放器也无法播放了&#xA;需要解析 RTP 包，把 payload 提取出来&lt;/p&gt;&#xA;&lt;p&gt;找了一番 RTP 协议的实现，发现已经有现成的了&#xA;&lt;a href=&#34;http://github.com/pion/rtp&#34; rel=&#34;nofollow&#34;&gt;github.com/pion/rtp&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;具体实现可以参考 &lt;a href=&#34;https://github.com/darren/retv/blob/54378d16d6e1042b9259280b3a7aea50087d0518/rtp.go#L73&#34; rel=&#34;nofollow&#34;&gt;https://github.com/darren/retv/blob/54378d16d6e1042b9259280b3a7aea50087d0518/rtp.go#L73&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;下一步的想法：自动把视频流切成 segments,实现 HLS ，让浏览器也能直接播放 😄&lt;/p&gt;&#xA;</description>
+      <author>darrh00</author>
+      <pubDate>15 Feb 2023 14:53:35 +0000</pubDate>
+    </item>
+    <item>
       <title>21 年 7 月份买的三星 970 evo plus 前几天挂了， v 友推荐靠谱的固态硬盘吧？ - 硬件</title>
       <link>https://www.v2ex.com/t/916481</link>
       <description>&lt;p&gt;21 年 7 月份买的三星 970 evo plus 1T （当时 1269 元），前几天用着突然出现 can&#39;t read superblock ，然后只读了，关机就启动不了了&lt;/p&gt;&#xA;&lt;p&gt;虽然主要的数据不在固态硬盘上，但才用不到 2 年的硬盘就这样寄了也是没碰到过的，&lt;/p&gt;&#xA;&lt;p&gt;所以在此问下 v 友们有没靠谱的固态硬盘推荐，速度差点也可以，先感谢了。&lt;/p&gt;&#xA;&lt;p&gt;大家也可以分享下自己固态硬盘挂了的型号，避开这些，再次感谢&lt;/p&gt;&#xA;</description>
