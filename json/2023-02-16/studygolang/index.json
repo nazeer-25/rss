@@ -39,6 +39,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "请问gin框架如何先返回响应，再在响应完成后绑定一个后置事件啊？",
+      "Link": "https://studygolang.com/topics/16145#reply3",
+      "Description": "\u003cp\u003e比方第一次a路由的请求，起了一个延时10秒的协程，我现在想在b路由进行的时候，如果还没到10秒，关闭这个协程，应该如何设计呢？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "大家是怎么处理结构不固定的数据（JSON格式的）",
       "Link": "https://studygolang.com/topics/16148#reply0",
       "Description": "\u003ch3\u003e场景一：\u003c/h3\u003e\n\n\u003cp\u003e自己的接口， 格式可能为\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n\tcode:0,\n\tdata: \u0026quot;任意格式\u0026quot;,\n\tmessage:\u0026quot;success\u0026quot;,\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种情况下，由于是自己的数据可控，弄一个通用的结构体, 通用的方法能解决\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Response struct {\n\tCode int\n\tData any\n\tMessage string\n}\nfunc JSONResponse(code int, data any, message string) Response {\n\treturn Response {\n\t\tCode: code,\n\t\tData: data,\n\t\tMessage: message,\n\t}\n}\n\nJSONResponse(0, []int{1,2,3}, \u0026quot;\u0026quot;)\nJSONResponse(0, map[string]string{\u0026quot;name\u0026quot;:\u0026quot;张三\u0026quot;}, \u0026quot;\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e场景二：\u003c/h3\u003e\n\n\u003cp\u003e如果要解析别人的接口, 由于data格式不固定，有什么比较便捷的方式，能解析data\u003c/p\u003e\n\n\u003cp\u003e目前想到的的方法一， 两次 \u003ccode\u003eUnmarshal\u003c/code\u003e:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode int\n\tData json.RawMessage\n\tMessage string\n}\n// 假设一种数据格式\ntype DataType struct {\n\tID string\n\tName string\n}\n\ndata := []byte{} // 假设是其他地方返回的数据\nvar msg = Response{}\njson.Unmarshal(data, \u0026amp;Response)\n\nvar data2 = DataType{}\nerr = json.Unmarshal(msg.Data, \u0026amp;data2)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e方法2:\n使用 \u003ccode\u003emap[string]any\u003c/code\u003e 来解析数据，\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode    int\n\tData    map[string]any\n\tMessage string\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种就是直接用map来接收获取，就比较简单了，\u003c/p\u003e\n\n\u003cp\u003e不知道大家有没有其他更好的方式，求分享！！谢谢🙏\u003c/p\u003e\n",
@@ -46,9 +53,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "请问gin框架如何先返回响应，再在响应完成后绑定一个后置事件啊？",
-      "Link": "https://studygolang.com/topics/16145#reply1",
-      "Description": "\u003cp\u003e比方第一次a路由的请求，起了一个延时10秒的协程，我现在想在b路由进行的时候，如果还没到10秒，关闭这个协程，应该如何设计呢？\u003c/p\u003e\n",
+      "Title": "gfast前后端分离的管理系统实战视频发布",
+      "Link": "https://studygolang.com/articles/36045#reply0",
+      "Description": "\u003cp\u003e基于全新Go Frame 2.3+Vue3+Element Plus开发的全栈前后端分离的管理系统\n前端采用vue-next-admin 、Vue、Element UI。\n项目实战视频：\n\u003ca href=\"https://www.bilibili.com/video/BV1gM411i7gw/\"\u003ehttps://www.bilibili.com/video/BV1gM411i7gw/\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -109,13 +116,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "gfast前后端分离的管理系统实战视频发布",
-      "Link": "https://studygolang.com/articles/36045#reply0",
-      "Description": "\u003cp\u003e基于全新Go Frame 2.3+Vue3+Element Plus开发的全栈前后端分离的管理系统\n前端采用vue-next-admin 、Vue、Element UI。\n项目实战视频：\n\u003ca href=\"https://www.bilibili.com/video/BV1gM411i7gw/\"\u003ehttps://www.bilibili.com/video/BV1gM411i7gw/\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "一款golang编写的开源的分布式锁 支持redis/zookeeper/etcd 实现",
       "Link": "https://studygolang.com/topics/16119#reply7",
       "Description": "\u003ch2\u003edistributed-lock\u003c/h2\u003e\n\n\u003ch3\u003e介绍\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e可以指定redis/etcd/zookeeper实现\u003c/li\u003e\n\u003cli\u003eredis的实现使用了lua脚本加解锁、watch机制续约锁、并且参考了redission用频道通知获取锁失败的客户端，减轻了redis的压力\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/chuckchann/distributed-lock\"\u003egithub连接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
@@ -147,6 +147,13 @@
       "Title": "【急招】字节消费金融业务 北京、深圳 薪资40-80k*15 职位长期有效~",
       "Link": "https://studygolang.com/topics/15911#reply15",
       "Description": "\u003cp\u003e消费金融团队急招研发工程师，北京、深圳有岗位哦！[撒花][撒花][撒花]\u003cbr\u003e\n消费金融团队，业务增长空间大，技术氛围浓厚，注重组员成长，北京、深圳均有岗位。\u003cbr\u003e\n欢迎自荐或推荐[送你小红花]\u003cbr\u003e\n\u003cstrong\u003e微信：694418247，备注：字节招聘\u003c/strong\u003e\u003cbr\u003e\n也可以留言私信联系方式~\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e职位描述\u003c/strong\u003e\n1. 参与并负责互联网信贷核心系统的设计、开发及维护；\n2. 参与并负责公司级别的618、双十一等重要活动，解决高并发场景高可用问题；\n3. 参与并负责互联网信贷业务系统的稳定性建设，报警，监控，容灾，降级等；\n4. 参与设计并实现具备可扩展性和可维护性的系统方案；\n5. 充分理解互联网信贷业务，抽象领域模型，推进中台型系统建设；\n6. 沉淀技术能力和行业经验，与平台和业务一起成长和发展。\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e职位要求\u003c/strong\u003e\n1. 本科及以上学历，2年以上工作经验，熟悉Java/PHP/C++/Go/Python中的至少一种技术语言；\n2. 深刻理解计算机原理，有良好的数据结构和算法基础；\n3. 有优秀的系统设计能力，熟练掌握数据库、缓存、消息队列的原理及应用；\n4. 学习能力强，对产品有强烈的责任心，具备良好的沟通能力和优秀的团队协作能力；\n5. 有服务治理，稳定性提升，容量规划等高可用、高并发、分布式系统的实际经验为加分项；\n6. 有大数据量下数据处理、系统/服务稳定性建设或优化的实际经验为加分项；\n7. 有金融业、银行业、信用卡、消费金融、信贷等核心系统研发经验为加分项。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "请问gin框架如何先返回响应，再在响应完成后绑定一个后置事件啊？",
+      "Link": "https://studygolang.com/topics/16145#reply1",
+      "Description": "\u003cp\u003e比方第一次a路由的请求，起了一个延时10秒的协程，我现在想在b路由进行的时候，如果还没到10秒，关闭这个协程，应该如何设计呢？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
