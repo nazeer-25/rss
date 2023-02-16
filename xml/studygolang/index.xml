@@ -41,9 +41,13 @@
       <link>https://studygolang.com/articles/36050#reply0</link>
     </item>
     <item>
-      <title>请问gin框架如何先返回响应，再在响应完成后绑定一个后置事件啊？</title>
-      <link>https://studygolang.com/topics/16145#reply3</link>
-      <description>&lt;p&gt;比方第一次a路由的请求，起了一个延时10秒的协程，我现在想在b路由进行的时候，如果还没到10秒，关闭这个协程，应该如何设计呢？&lt;/p&gt;&#xA;</description>
+      <title>Go开发的数据条件验证工具</title>
+      <link>https://studygolang.com/articles/36048#reply1</link>
+      <description>&lt;p&gt;开源地址：&lt;a href=&#34;https://github.com/miaogaolin/condition&#34;&gt;https://github.com/miaogaolin/condition&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;h1&gt;使用&lt;/h1&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;    &amp;quot;fmt&amp;quot;&#xA;&#xA;    &amp;quot;github.com/miaogaolin/condition&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;    data := map[string]interface{}{&#xA;&#x9;&#x9;&amp;quot;col1&amp;quot;: 1,&#xA;&#x9;&#x9;&amp;quot;col2&amp;quot;: &amp;quot;hello world&amp;quot;,&#xA;&#x9;&#x9;&amp;quot;col3&amp;quot;: &amp;quot;male&amp;quot;,&#xA;&#x9;}&#xA;&#x9;res, err := condition.Validate(data, `({col1}==1 and {col2} =~ &amp;quot;world&amp;quot;) or {col3} in [&amp;quot;male&amp;quot;]`)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;panic(err)&#xA;&#x9;}&#xA;&#xA;    if res {&#xA;        fmt.Println(&amp;quot;success&amp;quot;)&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;如果在验证的数据不是 Map 类型，是 Struct 类型，推荐使用 &lt;a href=&#34;https://github.com/fatih/structs&#34;&gt;https://github.com/fatih/structs&lt;/a&gt;&#xA;将 Struct 转为 Map。&lt;/p&gt;&#xA;&#xA;&lt;h1&gt;关键字&lt;/h1&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;== &#xA;&amp;gt; &#xA;&amp;lt; &#xA;&amp;gt;=&#xA;&amp;lt;=&#xA;!=&#xA;in  &#xA;not in &#xA;=~  // 包含&#xA;!= // 不包含&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;欢迎多提提问题！&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>优维低代码：Legacy Templates 构件模板</title>
+      <link>https://studygolang.com/articles/36047#reply0</link>
     </item>
     <item>
       <title>简单问下Golang以及Gin框架中有什么比较典型的ORM框架呢？</title>
@@ -51,9 +55,9 @@
       <description>&lt;p&gt;请推荐一二&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>Go开发的数据条件验证工具</title>
-      <link>https://studygolang.com/articles/36048#reply1</link>
-      <description>&lt;p&gt;开源地址：&lt;a href=&#34;https://github.com/miaogaolin/condition&#34;&gt;https://github.com/miaogaolin/condition&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;h1&gt;使用&lt;/h1&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;    &amp;quot;fmt&amp;quot;&#xA;&#xA;    &amp;quot;github.com/miaogaolin/condition&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;    data := map[string]interface{}{&#xA;&#x9;&#x9;&amp;quot;col1&amp;quot;: 1,&#xA;&#x9;&#x9;&amp;quot;col2&amp;quot;: &amp;quot;hello world&amp;quot;,&#xA;&#x9;&#x9;&amp;quot;col3&amp;quot;: &amp;quot;male&amp;quot;,&#xA;&#x9;}&#xA;&#x9;res, err := condition.Validate(data, `({col1}==1 and {col2} =~ &amp;quot;world&amp;quot;) or {col3} in [&amp;quot;male&amp;quot;]`)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;panic(err)&#xA;&#x9;}&#xA;&#xA;    if res {&#xA;        fmt.Println(&amp;quot;success&amp;quot;)&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;如果在验证的数据不是 Map 类型，是 Struct 类型，推荐使用 &lt;a href=&#34;https://github.com/fatih/structs&#34;&gt;https://github.com/fatih/structs&lt;/a&gt;&#xA;将 Struct 转为 Map。&lt;/p&gt;&#xA;&#xA;&lt;h1&gt;关键字&lt;/h1&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;== &#xA;&amp;gt; &#xA;&amp;lt; &#xA;&amp;gt;=&#xA;&amp;lt;=&#xA;!=&#xA;in  &#xA;not in &#xA;=~  // 包含&#xA;!= // 不包含&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;欢迎多提提问题！&lt;/p&gt;&#xA;</description>
+      <title>请问gin框架如何先返回响应，再在响应完成后绑定一个后置事件啊？</title>
+      <link>https://studygolang.com/topics/16145#reply3</link>
+      <description>&lt;p&gt;比方第一次a路由的请求，起了一个延时10秒的协程，我现在想在b路由进行的时候，如果还没到10秒，关闭这个协程，应该如何设计呢？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>请教一种场景的实现</title>
@@ -69,10 +73,6 @@
       <title>os/exec包执行命令问题</title>
       <link>https://studygolang.com/topics/16141#reply2</link>
       <description>&lt;p&gt;ubuntu系统，&lt;/p&gt;&#xA;&#xA;&lt;p&gt;使用&#xA;exec.Command(&amp;ldquo;bash&amp;rdquo;, &amp;ldquo;-c&amp;rdquo;, &amp;ldquo;/usr/bin/cp -rf  ./tmp/*  ./target/ &amp;ldquo;);&lt;/p&gt;&#xA;&#xA;&lt;p&gt;返回err为nil&lt;/p&gt;&#xA;&#xA;&lt;p&gt;但是用&lt;/p&gt;&#xA;&#xA;&lt;p&gt;exec.Command(&amp;rdquo;/usr/bin/cp&amp;rdquo;,&amp;ldquo;-rf&amp;rdquo;, &amp;ldquo;./tmp/*&amp;rdquo;,&amp;ldquo;./target/&amp;rdquo;);&lt;/p&gt;&#xA;&#xA;&lt;p&gt;返回err为copy file error exit status 1&lt;/p&gt;&#xA;&#xA;&lt;p&gt;请问这2者到底是啥区别呢。。。为啥第二个会报错啊。。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>优维低代码：Legacy Templates 构件模板</title>
-      <link>https://studygolang.com/articles/36047#reply0</link>
     </item>
     <item>
       <title>一款golang编写的开源的分布式锁 支持redis/zookeeper/etcd 实现</title>
