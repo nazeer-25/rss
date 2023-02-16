@@ -25,13 +25,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Go开发的数据条件验证工具",
-      "Link": "https://studygolang.com/articles/36048#reply1",
-      "Description": "\u003cp\u003e开源地址：\u003ca href=\"https://github.com/miaogaolin/condition\"\u003ehttps://github.com/miaogaolin/condition\u003c/a\u003e\u003c/p\u003e\n\n\u003ch1\u003e使用\u003c/h1\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n    \u0026quot;fmt\u0026quot;\n\n    \u0026quot;github.com/miaogaolin/condition\u0026quot;\n)\n\nfunc main() {\n    data := map[string]interface{}{\n\t\t\u0026quot;col1\u0026quot;: 1,\n\t\t\u0026quot;col2\u0026quot;: \u0026quot;hello world\u0026quot;,\n\t\t\u0026quot;col3\u0026quot;: \u0026quot;male\u0026quot;,\n\t}\n\tres, err := condition.Validate(data, `({col1}==1 and {col2} =~ \u0026quot;world\u0026quot;) or {col3} in [\u0026quot;male\u0026quot;]`)\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\n    if res {\n        fmt.Println(\u0026quot;success\u0026quot;)\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e如果在验证的数据不是 Map 类型，是 Struct 类型，推荐使用 \u003ca href=\"https://github.com/fatih/structs\"\u003ehttps://github.com/fatih/structs\u003c/a\u003e\n将 Struct 转为 Map。\u003c/p\u003e\n\n\u003ch1\u003e关键字\u003c/h1\u003e\n\n\u003cpre\u003e\u003ccode\u003e== \n\u0026gt; \n\u0026lt; \n\u0026gt;=\n\u0026lt;=\n!=\nin  \nnot in \n=~  // 包含\n!= // 不包含\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e欢迎多提提问题！\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "大家是怎么处理结构不固定的数据（JSON格式的）",
       "Link": "https://studygolang.com/topics/16148#reply0",
       "Description": "\u003ch3\u003e场景一：\u003c/h3\u003e\n\n\u003cp\u003e自己的接口， 格式可能为\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n\tcode:0,\n\tdata: \u0026quot;任意格式\u0026quot;,\n\tmessage:\u0026quot;success\u0026quot;,\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种情况下，由于是自己的数据可控，弄一个通用的结构体, 通用的方法能解决\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Response struct {\n\tCode int\n\tData any\n\tMessage string\n}\nfunc JSONResponse(code int, data any, message string) Response {\n\treturn Response {\n\t\tCode: code,\n\t\tData: data,\n\t\tMessage: message,\n\t}\n}\n\nJSONResponse(0, []int{1,2,3}, \u0026quot;\u0026quot;)\nJSONResponse(0, map[string]string{\u0026quot;name\u0026quot;:\u0026quot;张三\u0026quot;}, \u0026quot;\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e场景二：\u003c/h3\u003e\n\n\u003cp\u003e如果要解析别人的接口, 由于data格式不固定，有什么比较便捷的方式，能解析data\u003c/p\u003e\n\n\u003cp\u003e目前想到的的方法一， 两次 \u003ccode\u003eUnmarshal\u003c/code\u003e:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode int\n\tData json.RawMessage\n\tMessage string\n}\n// 假设一种数据格式\ntype DataType struct {\n\tID string\n\tName string\n}\n\ndata := []byte{} // 假设是其他地方返回的数据\nvar msg = Response{}\njson.Unmarshal(data, \u0026amp;Response)\n\nvar data2 = DataType{}\nerr = json.Unmarshal(msg.Data, \u0026amp;data2)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e方法2:\n使用 \u003ccode\u003emap[string]any\u003c/code\u003e 来解析数据，\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode    int\n\tData    map[string]any\n\tMessage string\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种就是直接用map来接收获取，就比较简单了，\u003c/p\u003e\n\n\u003cp\u003e不知道大家有没有其他更好的方式，求分享！！谢谢🙏\u003c/p\u003e\n",
@@ -60,9 +53,23 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "Go开发的数据条件验证工具",
+      "Link": "https://studygolang.com/articles/36048#reply1",
+      "Description": "\u003cp\u003e开源地址：\u003ca href=\"https://github.com/miaogaolin/condition\"\u003ehttps://github.com/miaogaolin/condition\u003c/a\u003e\u003c/p\u003e\n\n\u003ch1\u003e使用\u003c/h1\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n    \u0026quot;fmt\u0026quot;\n\n    \u0026quot;github.com/miaogaolin/condition\u0026quot;\n)\n\nfunc main() {\n    data := map[string]interface{}{\n\t\t\u0026quot;col1\u0026quot;: 1,\n\t\t\u0026quot;col2\u0026quot;: \u0026quot;hello world\u0026quot;,\n\t\t\u0026quot;col3\u0026quot;: \u0026quot;male\u0026quot;,\n\t}\n\tres, err := condition.Validate(data, `({col1}==1 and {col2} =~ \u0026quot;world\u0026quot;) or {col3} in [\u0026quot;male\u0026quot;]`)\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\n    if res {\n        fmt.Println(\u0026quot;success\u0026quot;)\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e如果在验证的数据不是 Map 类型，是 Struct 类型，推荐使用 \u003ca href=\"https://github.com/fatih/structs\"\u003ehttps://github.com/fatih/structs\u003c/a\u003e\n将 Struct 转为 Map。\u003c/p\u003e\n\n\u003ch1\u003e关键字\u003c/h1\u003e\n\n\u003cpre\u003e\u003ccode\u003e== \n\u0026gt; \n\u0026lt; \n\u0026gt;=\n\u0026lt;=\n!=\nin  \nnot in \n=~  // 包含\n!= // 不包含\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e欢迎多提提问题！\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "2022「大厂可观测」重磅回顾，12场直播，15位技术大咖洞见可观测",
       "Link": "https://studygolang.com/articles/36050#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "请教一种场景的实现",
+      "Link": "https://studygolang.com/topics/16142#reply2",
+      "Description": "\u003cul\u003e\n\u003cli\u003e框架：Gin，Gorm\u003c/li\u003e\n\u003cli\u003e数据库中使用\u003ccode\u003egorm\u003c/code\u003e映射了表单 Person\n\u003ccode\u003ego\ntype Person struct{\n*gorm.Model\nName string\nGender string\nPhone string\nQQ string\nOrders []Order\t// 关联表\n... \n}\n\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e当前端发起\u003ccode\u003eGET\u003c/code\u003e请求时，用户传入参数数量不固定，当拿到这些参数时，则去数据库查询对比，如果参数与数据库中匹配，则返回\u003ccode\u003ePerson\u003c/code\u003e表与其所有关联表的数据。这种场景应该如何实现呢？一两个参数还能使用\u003ccode\u003efor\u003c/code\u003e循环嵌套，一旦数据量大的话这样会严重影响性能。\n\u0026gt;请指点一种实现方法，当然如果有demo那更佳感激～\u003c/li\u003e\n\u003c/ul\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -77,13 +84,6 @@
       "Title": "请问gin框架如何先返回响应，再在响应完成后绑定一个后置事件啊？",
       "Link": "https://studygolang.com/topics/16145#reply3",
       "Description": "\u003cp\u003e比方第一次a路由的请求，起了一个延时10秒的协程，我现在想在b路由进行的时候，如果还没到10秒，关闭这个协程，应该如何设计呢？\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "请教一种场景的实现",
-      "Link": "https://studygolang.com/topics/16142#reply2",
-      "Description": "\u003cul\u003e\n\u003cli\u003e框架：Gin，Gorm\u003c/li\u003e\n\u003cli\u003e数据库中使用\u003ccode\u003egorm\u003c/code\u003e映射了表单 Person\n\u003ccode\u003ego\ntype Person struct{\n*gorm.Model\nName string\nGender string\nPhone string\nQQ string\nOrders []Order\t// 关联表\n... \n}\n\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e当前端发起\u003ccode\u003eGET\u003c/code\u003e请求时，用户传入参数数量不固定，当拿到这些参数时，则去数据库查询对比，如果参数与数据库中匹配，则返回\u003ccode\u003ePerson\u003c/code\u003e表与其所有关联表的数据。这种场景应该如何实现呢？一两个参数还能使用\u003ccode\u003efor\u003c/code\u003e循环嵌套，一旦数据量大的话这样会严重影响性能。\n\u0026gt;请指点一种实现方法，当然如果有demo那更佳感激～\u003c/li\u003e\n\u003c/ul\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
