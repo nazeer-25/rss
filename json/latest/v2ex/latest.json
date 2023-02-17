@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "求助大家有 vlog 设备推荐嘛 - 问与答",
+      "Link": "https://www.v2ex.com/t/917031",
+      "Description": "\u003cp\u003e老板布置的任务买一个预算 10000 以内的设备，用来拍培训视频情况，或者去现场拍摄。\n老土想到的就是手机+稳定器，之前在路上骑行，看似 moto x30 拍视频也马马虎虎，在相对静止+稳定器的室内情况应该更不会差。怕被说，还是按他的要求买个 1 万预算内的设备\u003c/p\u003e\n\u003cp\u003e自己想到的参数\n广角\n待机时间\n可更换电池\n存储空间\n无线麦克风音量收集\u003c/p\u003e\n\u003cp\u003e无关紧要\n无线传输文件\u003c/p\u003e\n\u003cp\u003e不知道大家是否有玩过，觉得心仪的设备推荐嘛，谢谢！\u003c/p\u003e\n",
+      "Author": "datocp",
+      "PubDate": "2023-02-17T12:07:09Z"
+    },
+    {
+      "Title": "国内有什么办法稳定简便的使用 ChatGPT 的方法吗 - 互联网",
+      "Link": "https://www.v2ex.com/t/917030",
+      "Description": "\u003cp\u003e求加各位大神，可以付费订阅。\u003c/p\u003e\n",
+      "Author": "xingye163",
+      "PubDate": "2023-02-17T12:01:43Z"
+    },
+    {
       "Title": "IM 中如何处理节点故障，导致消息不可靠问题？请教 - 程序员",
       "Link": "https://www.v2ex.com/t/917029",
       "Description": "\u003cp\u003e最近在做一个 IM 的开发，初次尝试 IM 开发，碰到点问题向懂这块的兄弟们请教一下。直接上图：\n\u003cimg alt=\"IM 技术方案\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/a21a931d94d94810073886cf35b5a2cd53a48b782bc66da2538048f2d3789f848b5c904d3fd61491860fc6cbb14660c9?pictype=scale\u0026amp;from=30113\u0026amp;version=3.3.3.3\u0026amp;fname=IM%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88.png\u0026amp;size=750\"/\u003e\n先简单说一下技术方案吧：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e用户登录之后与一台 server 建立连接，会话信息保存到本地（ SessionMap ），就是把 userId 和 channel 的映射关系存起来，再把 userId 和 server 所在主机 MAC 地址的映射关系存到 redis 中。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e每台 server 在启动的时候，会在 MQ 里订阅自己所在主机的 MAC 主题（这里是把主机 MAC 作为 MQ 的 Topic 用的）。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e两个 user 之间相互发消息：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e如果两个 user 在同一台主机，直接从本地 SessionMap 获取对方 channel 完成消息传递；\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e如果两个 user 在不同的主机，一个 user 发完消息后，server 端从 redis 中获取对方所在主机 MAC （假设为 MAC_2 ），然后把消息丢到 MQ 的 MAC_2 Topic 中，传递到对方主机，再从对方主机 SessionMap 中取出对方 channel ，完成消息传递；\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e如果是传给 MAC_3 上的 user ，user 不在线，就离线存储。  \u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003e现在问题是，假如说某台机器故障了，比如假设 MAC_3 故障，硬件损坏，那 MQ 中 MAC_3 Topic 中的消息会越积越多，而这个 Topic 又没有订阅者，那这部分信息该怎么处理？\u003c/strong\u003e\u003c/p\u003e\n",
