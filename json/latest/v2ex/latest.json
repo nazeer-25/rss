@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Steam、Github 域名疑似已解除 SNI 干扰（无法复现），可以正常链接了？ - 问与答",
+      "Link": "https://www.v2ex.com/t/916909",
+      "Description": "\u003cp\u003e今天早上起来，看到有人说 Steam 恢复了，不再需要加速器巴拉巴拉。。。我又去贴吧看了下，也有人这么说，于是我在好奇心的驱使下重复了当初我发的\u003cstrong\u003e复现步骤\u003c/strong\u003e。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://v2ex.com/t/758568\" rel=\"nofollow\"\u003e只要 Github 域名指向任意 IP ，该 IP 的 443 端口就会超时 3 分钟(TCPing ，80 端口正常)，求解！\u003c/a\u003e \u003cem\u003e2021-03-04\u003c/em\u003e \u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://v2ex.com/t/824179\" rel=\"nofollow\"\u003eSteam 商店 store.steampowered.com 疑似 443 端口被干扰？ ICMP 80 端口均正常\u003c/a\u003e \u003cem\u003e2021-12-24\u003c/em\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e结果发现 Steam 、Github \u003cstrong\u003e均访问正常\u003c/strong\u003e，没有像前面文章里写的那样触发 SNI 干扰机制，这个上午我来来回回测试了好几次，均\u003cstrong\u003e没有再次复现 SNI 干扰\u003c/strong\u003e的问题。\u003c/p\u003e\n\u003cp\u003e难道是墙取消了 SNI 干扰机制？还是单独对这两个网站域名解除了？还是墙在维护导致漏了？\u003cbr/\u003e\n我觉得解除 Steam 还有可能，Github 就不太可能了吧，因此感觉后者可能性会更大一些。。。\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e测试方法很简单，大家可以试试，看是否和我一样也能正常链接无干扰（我是联通）。\u003cbr/\u003e\n以下以 Steam 为例，而 Github 的话大家只需要\u003cstrong\u003e改一下域名和 IP\u003c/strong\u003e 即可：\u003c/p\u003e\n\u003chr/\u003e\n\u003ch2\u003e# 准备工具：\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eTCPing.exe\u003c/strong\u003e - \u003cem\u003e测试 80/443 端口连通性\u003c/em\u003e \u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eCurl.exe\u003c/strong\u003e - \u003cem\u003e方便指定 IP 去访问域名\u003c/em\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e这两个下载后都不需要安装，都是命令行工具，解压后在 CMD 中通过命令来运行。\u003c/p\u003e\n\u003chr/\u003e\n\u003ch2\u003e# 测试步骤：\u003c/h2\u003e\n\u003cp\u003e先开两个 CMD ，分别持续测试 80 443 端口（也可以改成其他的 Steam IP ，甚至任意海外 IP 都行）\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bat\"\u003etcping -t 23.195.84.71 80\ntcping -t 23.195.84.71 443\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e然后再开个 CMD ，指定该 IP 去访问 Steam 商店：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bat\"\u003ecurl -I -k --resolve store.steampowered.com:443:23.195.84.71 https://store.steampowered.com\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e重复这样访问，以前的时候大概只需要几次就会出现访问超时等问题，而现在我测试则都是访问成功。\u003c/p\u003e\n\u003chr/\u003e\n\u003ch2\u003e# 观察结果：\u003c/h2\u003e\n\u003cp\u003e紧接着观察 TCPing 状况， 如果此时 443 端口开始出现超时而 80 端口正常，那么代表\u003cstrong\u003e依然存在 SNI 干扰\u003c/strong\u003e，如果持续了很多次，依然都是正常的，那么可以一定程度上代表\u003cstrong\u003e已解除 SNI 干扰机制\u003c/strong\u003e。\u003c/p\u003e\n",
+      "Author": "XIU2",
+      "PubDate": "2023-02-17T03:56:35Z"
+    },
+    {
+      "Title": "某墙似乎解除了一些网站的间歇性阻断 - 分享发现",
+      "Link": "https://www.v2ex.com/t/916908",
+      "Description": "\u003cp\u003e\u003ca href=\"https://store.steampowered.com/\" rel=\"nofollow\"\u003ehttps://store.steampowered.com/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/\" rel=\"nofollow\"\u003ehttps://github.com/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e目前这两个网站访问很正常了\u003c/p\u003e\n",
+      "Author": "Divinook",
+      "PubDate": "2023-02-17T03:54:35Z"
+    },
+    {
       "Title": "二手老破小 450 万，税费要 20 万...我特么 - 上海",
       "Link": "https://www.v2ex.com/t/916907",
       "Description": "\u003cp\u003e近半年在看上海二手房，准备上车，增值税、个税、契税算起来挺蛋疼的，有时候看的房子不错，一问中介，说增值税要 20 万...我特么...\u003c/p\u003e\n\u003cp\u003e索性自己摸清规则，做了个买房计算器，专门来算做为首套刚需关心的税费、首付、贷款信息，包含了三价就低和动迁的规则，现在用起来还算挺方便。\u003c/p\u003e\n\u003cp\u003e大家可以试试，好用点个 star ～～\u003c/p\u003e\n\u003cp\u003e希望决定上车的老铁都能上到满意的车\u003c/p\u003e\n\u003cp\u003e链接：\u003ca href=\"https://github.com/simmzl/iHouse\" rel=\"nofollow\"\u003eiHouse\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/simmzl/iHouse/main/img-for-md/app.png\"/\u003e\u003c/p\u003e\n",
