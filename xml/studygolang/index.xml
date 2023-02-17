@@ -17,6 +17,11 @@
       <link>https://studygolang.com/articles/36051#reply0</link>
     </item>
     <item>
+      <title>QuarkGo 管理后台 v1.1.10 已发布！！！</title>
+      <link>https://studygolang.com/topics/16149#reply0</link>
+      <description>&lt;p&gt;QuarkGo 管理后台 v1.1.10 已发布！！！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;功能更新：&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;修复中间件bug&lt;/li&gt;&#xA;&lt;li&gt;新增站点演示&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;演示站点（香港站点，页面加载可能比较缓慢）：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;地址：&lt;a href=&#34;http://smart.quarkcms.com/admin/#/&#34;&gt;http://smart.quarkcms.com/admin/#/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;账号：administrator&#xA;密码：123456&lt;/p&gt;&#xA;&#xA;&lt;p&gt;查看详细：&lt;a href=&#34;https://github.com/quarkcms/quark-go/&#34;&gt;https://github.com/quarkcms/quark-go/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;文档地址：&lt;a href=&#34;https://www.quarkcms.com/quark-go/&#34;&gt;https://www.quarkcms.com/quark-go/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;欢迎大家共建生态，给个Star！&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>大家是怎么处理结构不固定的数据（JSON格式的）</title>
       <link>https://studygolang.com/topics/16148#reply1</link>
       <description>&lt;h3&gt;场景一：&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;自己的接口， 格式可能为&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{&#xA;&#x9;code:0,&#xA;&#x9;data: &amp;quot;任意格式&amp;quot;,&#xA;&#x9;message:&amp;quot;success&amp;quot;,&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;这种情况下，由于是自己的数据可控，弄一个通用的结构体, 通用的方法能解决&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Response struct {&#xA;&#x9;Code int&#xA;&#x9;Data any&#xA;&#x9;Message string&#xA;}&#xA;func JSONResponse(code int, data any, message string) Response {&#xA;&#x9;return Response {&#xA;&#x9;&#x9;Code: code,&#xA;&#x9;&#x9;Data: data,&#xA;&#x9;&#x9;Message: message,&#xA;&#x9;}&#xA;}&#xA;&#xA;JSONResponse(0, []int{1,2,3}, &amp;quot;&amp;quot;)&#xA;JSONResponse(0, map[string]string{&amp;quot;name&amp;quot;:&amp;quot;张三&amp;quot;}, &amp;quot;&amp;quot;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;场景二：&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;如果要解析别人的接口, 由于data格式不固定，有什么比较便捷的方式，能解析data&lt;/p&gt;&#xA;&#xA;&lt;p&gt;目前想到的的方法一， 两次 &lt;code&gt;Unmarshal&lt;/code&gt;:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;type Response struct {&#xA;&#x9;Code int&#xA;&#x9;Data json.RawMessage&#xA;&#x9;Message string&#xA;}&#xA;// 假设一种数据格式&#xA;type DataType struct {&#xA;&#x9;ID string&#xA;&#x9;Name string&#xA;}&#xA;&#xA;data := []byte{} // 假设是其他地方返回的数据&#xA;var msg = Response{}&#xA;json.Unmarshal(data, &amp;amp;Response)&#xA;&#xA;var data2 = DataType{}&#xA;err = json.Unmarshal(msg.Data, &amp;amp;data2)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;方法2:&#xA;使用 &lt;code&gt;map[string]any&lt;/code&gt; 来解析数据，&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;type Response struct {&#xA;&#x9;Code    int&#xA;&#x9;Data    map[string]any&#xA;&#x9;Message string&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;这种就是直接用map来接收获取，就比较简单了，&lt;/p&gt;&#xA;&#xA;&lt;p&gt;不知道大家有没有其他更好的方式，求分享！！谢谢🙏&lt;/p&gt;&#xA;</description>
@@ -28,11 +33,6 @@
     <item>
       <title>chat GPT终结知识类网站</title>
       <link>https://studygolang.com/articles/36049#reply0</link>
-    </item>
-    <item>
-      <title>QuarkGo 管理后台 v1.1.10 已发布！！！</title>
-      <link>https://studygolang.com/topics/16149#reply0</link>
-      <description>&lt;p&gt;QuarkGo 管理后台 v1.1.10 已发布！！！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;功能更新：&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;修复中间件bug&lt;/li&gt;&#xA;&lt;li&gt;新增站点演示&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;演示站点（香港站点，页面加载可能比较缓慢）：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;地址：&lt;a href=&#34;http://smart.quarkcms.com/admin/#/&#34;&gt;http://smart.quarkcms.com/admin/#/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;账号：administrator&#xA;密码：123456&lt;/p&gt;&#xA;&#xA;&lt;p&gt;查看详细：&lt;a href=&#34;https://github.com/quarkcms/quark-go/&#34;&gt;https://github.com/quarkcms/quark-go/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;文档地址：&lt;a href=&#34;https://www.quarkcms.com/quark-go/&#34;&gt;https://www.quarkcms.com/quark-go/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;欢迎大家共建生态，给个Star！&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>请问gin框架如何先返回响应，再在响应完成后绑定一个后置事件啊？</title>
