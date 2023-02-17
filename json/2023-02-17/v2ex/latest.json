@@ -4,7 +4,21 @@
   "Description": "",
   "Items": [
     {
-      "Title": "Steam、Github 域名疑似已解除 SNI 干扰（无法复现），可以正常链接了？ - 问与答",
+      "Title": "微信电脑客户端的视频号，是经过加密了嘛？ - 问与答",
+      "Link": "https://www.v2ex.com/t/916913",
+      "Description": "是这样的，我打算抓取微信视频号的视频，方法用的是 wireshark 配合 openwrt 上的 tcpdump 抓取指定 ip 地址。\u003cbr /\u003e当我电脑登录微信的时候，可以抓取到视频号的下载地址，也可以获取到当前视频的大小，但是这个连接不管是用浏览器下载，还是用 python 的 requests 模块下载，下载到本地后，都说视频的编码格式不支持。\u003cbr /\u003e当我用手机登录微信，也可以抓取到视频号的下载地址，这个下载地址无法通过浏览器直接下载，只能通过 Python 的 requests 模块，然后伪装请求头为微信客户端下载，手机端的地址下载后是可以播放的。\u003cbr /\u003e提这个问题，只是想问下有没有前人大佬，做过这方面的分析。",
+      "Author": "poporange",
+      "PubDate": "2023-02-17T04:12:24Z"
+    },
+    {
+      "Title": "iPad mini 使用场景有哪些？值得买吗？ - iPad",
+      "Link": "https://www.v2ex.com/t/916912",
+      "Description": "\u003cp\u003e听说要出新的 iPad mini 了，可能上高刷，想问问 mini 这个尺寸一般使用场景是什么？目前手握 2021 ipad pro 12.9 ，当草稿纸用，而且太大了，一般在床上都不会用。mini 的话，使用体验如何呢？另外，看书有新出的 10 寸 Kindle script\u003c/p\u003e\n",
+      "Author": "MID",
+      "PubDate": "2023-02-17T04:05:13Z"
+    },
+    {
+      "Title": "Steam、Github 域名疑似已解除 SNI 干扰（已无法复现），可以正常链接了？ - 问与答",
       "Link": "https://www.v2ex.com/t/916909",
       "Description": "\u003cp\u003e今天早上起来，看到有人说 Steam 恢复了，不再需要加速器巴拉巴拉。。。我又去贴吧看了下，也有人这么说，于是我在好奇心的驱使下重复了当初我发的\u003cstrong\u003e复现步骤\u003c/strong\u003e。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://v2ex.com/t/758568\" rel=\"nofollow\"\u003e只要 Github 域名指向任意 IP ，该 IP 的 443 端口就会超时 3 分钟(TCPing ，80 端口正常)，求解！\u003c/a\u003e \u003cem\u003e2021-03-04\u003c/em\u003e \u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://v2ex.com/t/824179\" rel=\"nofollow\"\u003eSteam 商店 store.steampowered.com 疑似 443 端口被干扰？ ICMP 80 端口均正常\u003c/a\u003e \u003cem\u003e2021-12-24\u003c/em\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e结果发现 Steam 、Github \u003cstrong\u003e均访问正常\u003c/strong\u003e，没有像前面文章里写的那样触发 SNI 干扰机制，这个上午我来来回回测试了好几次，均\u003cstrong\u003e没有再次复现 SNI 干扰\u003c/strong\u003e的问题。\u003c/p\u003e\n\u003cp\u003e难道是墙取消了 SNI 干扰机制？还是单独对这两个网站域名解除了？还是墙在维护导致漏了？\u003cbr/\u003e\n我觉得解除 Steam 还有可能，Github 就不太可能了吧，因此感觉后者可能性会更大一些。。。\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e当然，也不排除是升级了机制，或运气好，导致此时正好处于难以复现阶段，因此希望大家有条件的都测试下，看是否和我一样也能正常链接无干扰（我是联通），只要还有人能够复现，就说明依然存在 SNI 干扰机制。\u003cbr/\u003e\n以下以 Steam 为例，而 Github 的话大家只需要\u003cstrong\u003e改一下域名和 IP\u003c/strong\u003e 即可：\u003c/p\u003e\n\u003chr/\u003e\n\u003ch2\u003e# 准备工具：\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eTCPing.exe\u003c/strong\u003e - \u003cem\u003e测试 80/443 端口连通性\u003c/em\u003e \u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eCurl.exe\u003c/strong\u003e - \u003cem\u003e方便指定 IP 去访问域名\u003c/em\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e这两个下载后都不需要安装，都是命令行工具，解压后在 CMD 中通过命令来运行。\u003c/p\u003e\n\u003chr/\u003e\n\u003ch2\u003e# 测试步骤：\u003c/h2\u003e\n\u003cp\u003e先开两个 CMD ，分别持续测试 80 443 端口（也可以改成其他的 Steam IP ，甚至任意海外 IP 都行）\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bat\"\u003etcping -t 23.195.84.71 80\ntcping -t 23.195.84.71 443\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e然后再开个 CMD ，指定该 IP 去访问 Steam 商店：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bat\"\u003ecurl -I -k --resolve store.steampowered.com:443:23.195.84.71 https://store.steampowered.com\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e重复这样访问，以前的时候大概只需要几次就会出现访问超时等问题，而现在我测试则都是访问成功。\u003c/p\u003e\n\u003chr/\u003e\n\u003ch2\u003e# 观察结果：\u003c/h2\u003e\n\u003cp\u003e紧接着观察 TCPing 状况， 如果此时 443 端口开始出现超时而 80 端口正常，那么代表\u003cstrong\u003e依然存在 SNI 干扰\u003c/strong\u003e，如果持续了很多次，依然都是正常的，那么可以一定程度上代表\u003cstrong\u003e已解除 SNI 干扰机制\u003c/strong\u003e。\u003c/p\u003e\n",
       "Author": "XIU2",
