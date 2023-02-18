@@ -46,13 +46,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "chat GPT终结知识类网站",
-      "Link": "https://studygolang.com/articles/36049#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "大家是怎么处理结构不固定的数据（JSON格式的）",
       "Link": "https://studygolang.com/topics/16148#reply1",
       "Description": "\u003ch3\u003e场景一：\u003c/h3\u003e\n\n\u003cp\u003e自己的接口， 格式可能为\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n\tcode:0,\n\tdata: \u0026quot;任意格式\u0026quot;,\n\tmessage:\u0026quot;success\u0026quot;,\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种情况下，由于是自己的数据可控，弄一个通用的结构体, 通用的方法能解决\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Response struct {\n\tCode int\n\tData any\n\tMessage string\n}\nfunc JSONResponse(code int, data any, message string) Response {\n\treturn Response {\n\t\tCode: code,\n\t\tData: data,\n\t\tMessage: message,\n\t}\n}\n\nJSONResponse(0, []int{1,2,3}, \u0026quot;\u0026quot;)\nJSONResponse(0, map[string]string{\u0026quot;name\u0026quot;:\u0026quot;张三\u0026quot;}, \u0026quot;\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e场景二：\u003c/h3\u003e\n\n\u003cp\u003e如果要解析别人的接口, 由于data格式不固定，有什么比较便捷的方式，能解析data\u003c/p\u003e\n\n\u003cp\u003e目前想到的的方法一， 两次 \u003ccode\u003eUnmarshal\u003c/code\u003e:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode int\n\tData json.RawMessage\n\tMessage string\n}\n// 假设一种数据格式\ntype DataType struct {\n\tID string\n\tName string\n}\n\ndata := []byte{} // 假设是其他地方返回的数据\nvar msg = Response{}\njson.Unmarshal(data, \u0026amp;Response)\n\nvar data2 = DataType{}\nerr = json.Unmarshal(msg.Data, \u0026amp;data2)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e方法2:\n使用 \u003ccode\u003emap[string]any\u003c/code\u003e 来解析数据，\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode    int\n\tData    map[string]any\n\tMessage string\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种就是直接用map来接收获取，就比较简单了，\u003c/p\u003e\n\n\u003cp\u003e不知道大家有没有其他更好的方式，求分享！！谢谢🙏\u003c/p\u003e\n",
@@ -62,6 +55,13 @@
     {
       "Title": "2022「大厂可观测」重磅回顾，12场直播，15位技术大咖洞见可观测",
       "Link": "https://studygolang.com/articles/36050#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "chat GPT终结知识类网站",
+      "Link": "https://studygolang.com/articles/36049#reply0",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
