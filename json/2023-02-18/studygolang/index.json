@@ -53,20 +53,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "chat GPT终结知识类网站",
-      "Link": "https://studygolang.com/articles/36049#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Go开发的数据条件验证工具",
-      "Link": "https://studygolang.com/articles/36048#reply1",
-      "Description": "\u003cp\u003e开源地址：\u003ca href=\"https://github.com/miaogaolin/condition\"\u003ehttps://github.com/miaogaolin/condition\u003c/a\u003e\u003c/p\u003e\n\n\u003ch1\u003e使用\u003c/h1\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n    \u0026quot;fmt\u0026quot;\n\n    \u0026quot;github.com/miaogaolin/condition\u0026quot;\n)\n\nfunc main() {\n    data := map[string]interface{}{\n\t\t\u0026quot;col1\u0026quot;: 1,\n\t\t\u0026quot;col2\u0026quot;: \u0026quot;hello world\u0026quot;,\n\t\t\u0026quot;col3\u0026quot;: \u0026quot;male\u0026quot;,\n\t}\n\tres, err := condition.Validate(data, `({col1}==1 and {col2} =~ \u0026quot;world\u0026quot;) or {col3} in [\u0026quot;male\u0026quot;]`)\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\n    if res {\n        fmt.Println(\u0026quot;success\u0026quot;)\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e如果在验证的数据不是 Map 类型，是 Struct 类型，推荐使用 \u003ca href=\"https://github.com/fatih/structs\"\u003ehttps://github.com/fatih/structs\u003c/a\u003e\n将 Struct 转为 Map。\u003c/p\u003e\n\n\u003ch1\u003e关键字\u003c/h1\u003e\n\n\u003cpre\u003e\u003ccode\u003e== \n\u0026gt; \n\u0026lt; \n\u0026gt;=\n\u0026lt;=\n!=\nin  \nnot in \n=~  // 包含\n!= // 不包含\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e欢迎多提提问题！\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "大家是怎么处理结构不固定的数据（JSON格式的）",
       "Link": "https://studygolang.com/topics/16148#reply1",
       "Description": "\u003ch3\u003e场景一：\u003c/h3\u003e\n\n\u003cp\u003e自己的接口， 格式可能为\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n\tcode:0,\n\tdata: \u0026quot;任意格式\u0026quot;,\n\tmessage:\u0026quot;success\u0026quot;,\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种情况下，由于是自己的数据可控，弄一个通用的结构体, 通用的方法能解决\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Response struct {\n\tCode int\n\tData any\n\tMessage string\n}\nfunc JSONResponse(code int, data any, message string) Response {\n\treturn Response {\n\t\tCode: code,\n\t\tData: data,\n\t\tMessage: message,\n\t}\n}\n\nJSONResponse(0, []int{1,2,3}, \u0026quot;\u0026quot;)\nJSONResponse(0, map[string]string{\u0026quot;name\u0026quot;:\u0026quot;张三\u0026quot;}, \u0026quot;\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e场景二：\u003c/h3\u003e\n\n\u003cp\u003e如果要解析别人的接口, 由于data格式不固定，有什么比较便捷的方式，能解析data\u003c/p\u003e\n\n\u003cp\u003e目前想到的的方法一， 两次 \u003ccode\u003eUnmarshal\u003c/code\u003e:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode int\n\tData json.RawMessage\n\tMessage string\n}\n// 假设一种数据格式\ntype DataType struct {\n\tID string\n\tName string\n}\n\ndata := []byte{} // 假设是其他地方返回的数据\nvar msg = Response{}\njson.Unmarshal(data, \u0026amp;Response)\n\nvar data2 = DataType{}\nerr = json.Unmarshal(msg.Data, \u0026amp;data2)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e方法2:\n使用 \u003ccode\u003emap[string]any\u003c/code\u003e 来解析数据，\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode    int\n\tData    map[string]any\n\tMessage string\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种就是直接用map来接收获取，就比较简单了，\u003c/p\u003e\n\n\u003cp\u003e不知道大家有没有其他更好的方式，求分享！！谢谢🙏\u003c/p\u003e\n",
@@ -76,6 +62,13 @@
     {
       "Title": "2022「大厂可观测」重磅回顾，12场直播，15位技术大咖洞见可观测",
       "Link": "https://studygolang.com/articles/36050#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "chat GPT终结知识类网站",
+      "Link": "https://studygolang.com/articles/36049#reply0",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -91,6 +84,13 @@
       "Title": "go websocket server 测评",
       "Link": "https://studygolang.com/topics/16147#reply0",
       "Description": "\u003cp\u003ewebsocket package 那么多, 到底要怎么选? 今天为大家带来3款 go websocket 测评, 希望对您有些帮助. 测试代码仓库: \u003ca href=\"https://github.com/lxzan/go-websocket-testing\"\u003ego-websocket-testing\u003c/a\u003e .\u003c/p\u003e\n\n\u003ch4\u003ePackages\u003c/h4\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/lxzan/gws\"\u003ehttps://github.com/lxzan/gws\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/gorilla/websocket\"\u003ehttps://github.com/gorilla/websocket\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/nhooyr/websocket\"\u003ehttps://github.com/nhooyr/websocket\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch4\u003eWebSocket 协议测试 (autobahn-testsuite)\u003c/h4\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cp\u003e工具: \u003ccode\u003eautobahn-testsuite\u003c/code\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e命令:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003edocker run -it --rm \\\n-v ${PWD}/config:/config \\\n-v ${PWD}/reports:/reports \\\ncrossbario/autobahn-testsuite \\\nwstest -m fuzzingclient -s /config/fuzzingclient.json\n\u003c/code\u003e\u003c/pre\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e每个包基本都是用的默认配置, 为了节省时间, 本项测试关闭了压缩.\n可以看到, 尽管\u003ccode\u003egorilla/websocket\u003c/code\u003e 和 \u003ccode\u003enhooyr/websocket\u003c/code\u003e宣称通过了所有\u003ccode\u003eautobahn-testsuite\u003c/code\u003e测试, 但可能需要开发者额外写一些代码.\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e结果\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003epackage\u003c/th\u003e\n\u003cth\u003ePass\u003c/th\u003e\n\u003cth\u003eInfo\u003c/th\u003e\n\u003cth\u003eNon-Strict\u003c/th\u003e\n\u003cth\u003eUnclean\u003c/th\u003e\n\u003cth\u003eFailed\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003elxzan/gws\u003c/td\u003e\n\u003ctd\u003e294\u003c/td\u003e\n\u003ctd\u003e3\u003c/td\u003e\n\u003ctd\u003e4\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003c/tr\u003e\n\n\u003ctr\u003e\n\u003ctd\u003egorilla/websocket\u003c/td\u003e\n\u003ctd\u003e223\u003c/td\u003e\n\u003ctd\u003e3\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003ctd\u003e85\u003c/td\u003e\n\u003ctd\u003e75\u003c/td\u003e\n\u003c/tr\u003e\n\n\u003ctr\u003e\n\u003ctd\u003enhooyr/websocket\u003c/td\u003e\n\u003ctd\u003e173\u003c/td\u003e\n\u003ctd\u003e3\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003ctd\u003e125\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\n\u003ch4\u003e延迟测试\u003c/h4\u003e\n\n\u003cp\u003e对于一般的线上场景，它们性能都够用了，所以我只测试下延迟情况，感兴趣的朋友可以自己跑下其它负载下的压测\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cp\u003e场景: 1000连接, 每秒发送100条1KiB的消息\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e工具: \u003ccode\u003etcpkali\u003c/code\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e命令:\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003etcpkali -c 1000 --connect-rate 200 -r 100 -T 1200s -f assets/1K.txt --ws ip:port\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e结果\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230216/f27f6f6a17278d3f31ccc30ce06c4754.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230216/9b1b6b90f7a22891ad1cd2462acdd36c.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230216/28ec436cead833d8f7d8d84462e48890.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go开发的数据条件验证工具",
+      "Link": "https://studygolang.com/articles/36048#reply1",
+      "Description": "\u003cp\u003e开源地址：\u003ca href=\"https://github.com/miaogaolin/condition\"\u003ehttps://github.com/miaogaolin/condition\u003c/a\u003e\u003c/p\u003e\n\n\u003ch1\u003e使用\u003c/h1\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n    \u0026quot;fmt\u0026quot;\n\n    \u0026quot;github.com/miaogaolin/condition\u0026quot;\n)\n\nfunc main() {\n    data := map[string]interface{}{\n\t\t\u0026quot;col1\u0026quot;: 1,\n\t\t\u0026quot;col2\u0026quot;: \u0026quot;hello world\u0026quot;,\n\t\t\u0026quot;col3\u0026quot;: \u0026quot;male\u0026quot;,\n\t}\n\tres, err := condition.Validate(data, `({col1}==1 and {col2} =~ \u0026quot;world\u0026quot;) or {col3} in [\u0026quot;male\u0026quot;]`)\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\n    if res {\n        fmt.Println(\u0026quot;success\u0026quot;)\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e如果在验证的数据不是 Map 类型，是 Struct 类型，推荐使用 \u003ca href=\"https://github.com/fatih/structs\"\u003ehttps://github.com/fatih/structs\u003c/a\u003e\n将 Struct 转为 Map。\u003c/p\u003e\n\n\u003ch1\u003e关键字\u003c/h1\u003e\n\n\u003cpre\u003e\u003ccode\u003e== \n\u0026gt; \n\u0026lt; \n\u0026gt;=\n\u0026lt;=\n!=\nin  \nnot in \n=~  // 包含\n!= // 不包含\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e欢迎多提提问题！\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
