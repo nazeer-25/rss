@@ -32,13 +32,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go语言实现的真正的多层时间轮",
-      "Link": "https://studygolang.com/articles/36053#reply0",
-      "Description": "\u003ch1\u003etimewheel\u003c/h1\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e时间轮，是一种实现延迟功能（定时器）的巧妙算法，在 Netty，Zookeeper，Kafka 等各种框架中，甚至 Linux 内核中都有用到。\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch4\u003e安装\u003c/h4\u003e\n\n\u003cp\u003e\u003ccode\u003ego get -u -v github.com/itmisx/timewheel\u003c/code\u003e\u003c/p\u003e\n\n\u003ch4\u003e使用\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 直接函数调用\n{\n\t// 启动时间轮\n\t// 参数-func(interface{})\n\ttimewheel.Start(callback)\n\t// timerID，定时器id，用来删除定时器\n\t// 参数1-string，定时器id，相同的定时器id会覆盖旧的定时器\n\t// 参数2-time.Duration，定时器间隔\n\t// 参数3-interface{}，定时器数据，将传递到回调函数\n\ttimewheel.AddTimer(\u0026quot;timerID\u0026quot;, time.Second*3, \u0026quot;data\u0026quot;)\n\t// 停止定时器\n\t// 参数-string，定时器的id\n\ttimewheel.StopTimer(\u0026quot;timerID\u0026quot;)\n\ttimewheel.Stop()\n}\n\n// 结构体方法调用\n{\n\t// 参数1-time.Duration,时间轮精度\n\t// 参数2-int,时间槽数量\n\t// 参数3-func(interface{}),定时器过期回调函数\n\ttw := timewheel.New(time.Second, 60, callback)\n\ttw.Start()\n\t// timerID，定时器id，用来删除定时器\n\t// 参数1-string，定时器id，相同的定时器id会覆盖旧的定时器\n\t// 参数2-time.Duration，定时器间隔\n\t// 参数3-interface{}，定时器数据，将传递到回调函数\n\ttw.AddTimer(\u0026quot;timerID\u0026quot;, time.Second*3, \u0026quot;data\u0026quot;)\n\ttw.Stop()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003eBenchmark\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003egoos: darwin\ngoarch: amd64\npkg: 192.168.1.75/go-pkg/timewheel\ncpu: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz\nBenchmarkTimeWheel-4   \t 1000000\t      1550 ns/op\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "go语言实现的基于内存的key/value的缓存库",
       "Link": "https://studygolang.com/articles/36054#reply0",
       "Description": "\u003ch1\u003ego-cache\u003c/h1\u003e\n\n\u003cp\u003e一个基于内存的key/value的go语言存储库，支持string和hash\u003c/p\u003e\n\n\u003ch4\u003e🚀 安装\u003c/h4\u003e\n\n\u003cp\u003e\u003ccode\u003ego get -u github.com/itmisx/go-cache\u003c/code\u003e\u003c/p\u003e\n\n\u003ch4\u003e✨ 特性\u003c/h4\u003e\n\n\u003cul\u003e\n\u003cli\u003e支持过期回调函数\u003c/li\u003e\n\u003cli\u003e支持哈希字段的过期时间设置\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch4\u003e🏗️ 使用场景\u003c/h4\u003e\n\n\u003cp\u003e主要用在单机或本地缓存场景\u003c/p\u003e\n\n\u003ch4\u003e✅ 开始使用\u003c/h4\u003e\n\n\u003cul\u003e\n\u003cli\u003e设置键值，不带过期回调\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.Set(\u0026quot;key1\u0026quot;, 1, time.Second*4, nil)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e设置键值，带过期回调\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.Set(\u0026quot;key1\u0026quot;, 1, time.Second*4, func(key string, value interface{}) {\n    log.Println(\u0026quot;callback1\u0026quot;, key, value)\n})\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e设置键的过期时间\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.Expire(\u0026quot;key1\u0026quot;,time.Second*4)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e获取键值\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// found指示是否存在\nvalue,found := cache.Get(\u0026quot;key1\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e删除键\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.Del(\u0026quot;key1\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e设置hash，带过期回调\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.HSet(\u0026quot;hkey1\u0026quot;, \u0026quot;hfield1\u0026quot;, 1, time.Second*8, func(key string, field string, value interface{}) {\n    log.Println(\u0026quot;callback2\u0026quot;, key, field, value)\n})\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e设置hash字段的过期时间\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.Expire(\u0026quot;hkey1\u0026quot;,\u0026quot;hfield1\u0026quot;,time.Second*3)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e获取hash值\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// found指示是否存在\nvalue,found := cache.HGet(\u0026quot;hkey1\u0026quot;,\u0026quot;hfield1\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e删除hash字段\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.HDel(\u0026quot;hkey1\u0026quot;,\u0026quot;hfield1\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -46,16 +39,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "求问，go语言圣经里面的代码配色是那个主题",
-      "Link": "https://studygolang.com/topics/16151#reply0",
-      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230218/fa8c578f8de39e9f550cde43f037584b.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Title": "go语言实现的真正的多层时间轮",
+      "Link": "https://studygolang.com/articles/36053#reply0",
+      "Description": "\u003ch1\u003etimewheel\u003c/h1\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e时间轮，是一种实现延迟功能（定时器）的巧妙算法，在 Netty，Zookeeper，Kafka 等各种框架中，甚至 Linux 内核中都有用到。\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch4\u003e安装\u003c/h4\u003e\n\n\u003cp\u003e\u003ccode\u003ego get -u -v github.com/itmisx/timewheel\u003c/code\u003e\u003c/p\u003e\n\n\u003ch4\u003e使用\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 直接函数调用\n{\n\t// 启动时间轮\n\t// 参数-func(interface{})\n\ttimewheel.Start(callback)\n\t// timerID，定时器id，用来删除定时器\n\t// 参数1-string，定时器id，相同的定时器id会覆盖旧的定时器\n\t// 参数2-time.Duration，定时器间隔\n\t// 参数3-interface{}，定时器数据，将传递到回调函数\n\ttimewheel.AddTimer(\u0026quot;timerID\u0026quot;, time.Second*3, \u0026quot;data\u0026quot;)\n\t// 停止定时器\n\t// 参数-string，定时器的id\n\ttimewheel.StopTimer(\u0026quot;timerID\u0026quot;)\n\ttimewheel.Stop()\n}\n\n// 结构体方法调用\n{\n\t// 参数1-time.Duration,时间轮精度\n\t// 参数2-int,时间槽数量\n\t// 参数3-func(interface{}),定时器过期回调函数\n\ttw := timewheel.New(time.Second, 60, callback)\n\ttw.Start()\n\t// timerID，定时器id，用来删除定时器\n\t// 参数1-string，定时器id，相同的定时器id会覆盖旧的定时器\n\t// 参数2-time.Duration，定时器间隔\n\t// 参数3-interface{}，定时器数据，将传递到回调函数\n\ttw.AddTimer(\u0026quot;timerID\u0026quot;, time.Second*3, \u0026quot;data\u0026quot;)\n\ttw.Stop()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003eBenchmark\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003egoos: darwin\ngoarch: amd64\npkg: 192.168.1.75/go-pkg/timewheel\ncpu: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz\nBenchmarkTimeWheel-4   \t 1000000\t      1550 ns/op\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "chat GPT终结知识类网站",
-      "Link": "https://studygolang.com/articles/36049#reply0",
-      "Description": "",
+      "Title": "求问，go语言圣经里面的代码配色是那个主题",
+      "Link": "https://studygolang.com/topics/16151#reply0",
+      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230218/fa8c578f8de39e9f550cde43f037584b.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -81,6 +74,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "chat GPT终结知识类网站",
+      "Link": "https://studygolang.com/articles/36049#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "QuarkGo 管理后台 v1.1.10 已发布！！！",
       "Link": "https://studygolang.com/topics/16149#reply0",
       "Description": "\u003cp\u003eQuarkGo 管理后台 v1.1.10 已发布！！！\u003c/p\u003e\n\n\u003cp\u003e功能更新：\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e修复中间件bug\u003c/li\u003e\n\u003cli\u003e新增站点演示\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e演示站点（香港站点，页面加载可能比较缓慢）：\u003c/p\u003e\n\n\u003cp\u003e地址：\u003ca href=\"http://smart.quarkcms.com/admin/#/\"\u003ehttp://smart.quarkcms.com/admin/#/\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e账号：administrator\n密码：123456\u003c/p\u003e\n\n\u003cp\u003e查看详细：\u003ca href=\"https://github.com/quarkcms/quark-go/\"\u003ehttps://github.com/quarkcms/quark-go/\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e文档地址：\u003ca href=\"https://www.quarkcms.com/quark-go/\"\u003ehttps://www.quarkcms.com/quark-go/\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e欢迎大家共建生态，给个Star！\u003c/p\u003e\n",
@@ -98,6 +98,13 @@
       "Title": "ohUrlShortener 短链接系统 v1.8 发布，API 问题处理",
       "Link": "https://studygolang.com/topics/16146#reply0",
       "Description": "\u003cp\u003e感谢 \u003ca href=\"https://github.com/barats/ohUrlShortener/pull/18\"\u003e热心网友提交的 PR\u003c/a\u003e，ohUrlShortener 短链接系统升级处理了一个 API 接口的问题。\u003c/p\u003e\n\n\u003cp\u003e没有使用 HTTP API 接口的用户，可以忽略这个版本，但建议升级。\u003c/p\u003e\n\n\u003cp\u003e新版本下载：\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/barats/ohUrlShortener/releases/tag/v1.8\"\u003ehttps://github.com/barats/ohUrlShortener/releases/tag/v1.8\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://gitee.com/barat/ohurlshortener/releases/tag/v1.8\"\u003ehttps://gitee.com/barat/ohurlshortener/releases/tag/v1.8\u003c/a\u003e\u003c/p\u003e\n\n\u003chr\u003e\n\n\u003cp\u003e适合中小型社区网站使用的短链接服务系统，支持短链接生产、查询及 302 转向，并自带点击量统计、独立 IP 数统计、访问日志查询：\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e支持 Docker One Step Start 部署、Makefile 编译打包\u003c/li\u003e\n\u003cli\u003e支持短链接生产、查询、存储、302 转向\u003c/li\u003e\n\u003cli\u003e支持访问日志查询、访问量统计、独立 IP 数统计\u003c/li\u003e\n\u003cli\u003e支持 HTTP API 方式新建短链接、禁用 / 启用短链接、查看短链接统计信息、新建管理员、修改管理员密码\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e\u003cimg src=\"https://oscimg.oschina.net/oscnet/up-5f40a0076aa22adf20b4e1101fe9c52f643.jpg\" alt=\"screenshot\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go写的第一个网站，大家看看速度快不快？",
+      "Link": "https://studygolang.com/topics/14460#reply98",
+      "Description": "\u003cp\u003e这个是我用Go写的第一个网站，\n\u003ca href=\"https://www.qqx.com/\"\u003ehttps://www.qqx.com/\u003c/a\u003e\n大家看看速度快不快？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
