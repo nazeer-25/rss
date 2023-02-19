@@ -25,9 +25,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "大家是怎么处理结构不固定的数据（JSON格式的）",
-      "Link": "https://studygolang.com/topics/16148#reply1",
-      "Description": "\u003ch3\u003e场景一：\u003c/h3\u003e\n\n\u003cp\u003e自己的接口， 格式可能为\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n\tcode:0,\n\tdata: \u0026quot;任意格式\u0026quot;,\n\tmessage:\u0026quot;success\u0026quot;,\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种情况下，由于是自己的数据可控，弄一个通用的结构体, 通用的方法能解决\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Response struct {\n\tCode int\n\tData any\n\tMessage string\n}\nfunc JSONResponse(code int, data any, message string) Response {\n\treturn Response {\n\t\tCode: code,\n\t\tData: data,\n\t\tMessage: message,\n\t}\n}\n\nJSONResponse(0, []int{1,2,3}, \u0026quot;\u0026quot;)\nJSONResponse(0, map[string]string{\u0026quot;name\u0026quot;:\u0026quot;张三\u0026quot;}, \u0026quot;\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e场景二：\u003c/h3\u003e\n\n\u003cp\u003e如果要解析别人的接口, 由于data格式不固定，有什么比较便捷的方式，能解析data\u003c/p\u003e\n\n\u003cp\u003e目前想到的的方法一， 两次 \u003ccode\u003eUnmarshal\u003c/code\u003e:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode int\n\tData json.RawMessage\n\tMessage string\n}\n// 假设一种数据格式\ntype DataType struct {\n\tID string\n\tName string\n}\n\ndata := []byte{} // 假设是其他地方返回的数据\nvar msg = Response{}\njson.Unmarshal(data, \u0026amp;Response)\n\nvar data2 = DataType{}\nerr = json.Unmarshal(msg.Data, \u0026amp;data2)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e方法2:\n使用 \u003ccode\u003emap[string]any\u003c/code\u003e 来解析数据，\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode    int\n\tData    map[string]any\n\tMessage string\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种就是直接用map来接收获取，就比较简单了，\u003c/p\u003e\n\n\u003cp\u003e不知道大家有没有其他更好的方式，求分享！！谢谢🙏\u003c/p\u003e\n",
+      "Title": "go语言实现的真正的多层时间轮",
+      "Link": "https://studygolang.com/articles/36052#reply0",
+      "Description": "\u003ch1\u003etimewheel\u003c/h1\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e时间轮，是一种实现延迟功能（定时器）的巧妙算法，在 Netty，Zookeeper，Kafka 等各种框架中，甚至 Linux 内核中都有用到。\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch4\u003e安装\u003c/h4\u003e\n\n\u003cp\u003e\u003ccode\u003ego get -u -v github.com/itmisx/timewheel\u003c/code\u003e\u003c/p\u003e\n\n\u003ch4\u003e使用\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 直接函数调用\n{\n\t// 启动时间轮\n\t// 参数-func(interface{})\n\ttimewheel.Start(callback)\n\t// timerID，定时器id，用来删除定时器\n\t// 参数1-string，定时器id，相同的定时器id会覆盖旧的定时器\n\t// 参数2-time.Duration，定时器间隔\n\t// 参数3-interface{}，定时器数据，将传递到回调函数\n\ttimewheel.AddTimer(\u0026quot;timerID\u0026quot;, time.Second*3, \u0026quot;data\u0026quot;)\n\t// 停止定时器\n\t// 参数-string，定时器的id\n\ttimewheel.StopTimer(\u0026quot;timerID\u0026quot;)\n\ttimewheel.Stop()\n}\n\n// 结构体方法调用\n{\n\t// 参数1-time.Duration,时间轮精度\n\t// 参数2-int,时间槽数量\n\t// 参数3-func(interface{}),定时器过期回调函数\n\ttw := timewheel.New(time.Second, 60, callback)\n\ttw.Start()\n\t// timerID，定时器id，用来删除定时器\n\t// 参数1-string，定时器id，相同的定时器id会覆盖旧的定时器\n\t// 参数2-time.Duration，定时器间隔\n\t// 参数3-interface{}，定时器数据，将传递到回调函数\n\ttw.AddTimer(\u0026quot;timerID\u0026quot;, time.Second*3, \u0026quot;data\u0026quot;)\n\ttw.Stop()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003eBenchmark\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003egoos: darwin\ngoarch: amd64\npkg: 192.168.1.75/go-pkg/timewheel\ncpu: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz\nBenchmarkTimeWheel-4   \t 1000000\t      1550 ns/op\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -46,13 +46,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go语言实现的真正的多层时间轮",
-      "Link": "https://studygolang.com/articles/36052#reply0",
-      "Description": "\u003ch1\u003etimewheel\u003c/h1\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e时间轮，是一种实现延迟功能（定时器）的巧妙算法，在 Netty，Zookeeper，Kafka 等各种框架中，甚至 Linux 内核中都有用到。\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch4\u003e安装\u003c/h4\u003e\n\n\u003cp\u003e\u003ccode\u003ego get -u -v github.com/itmisx/timewheel\u003c/code\u003e\u003c/p\u003e\n\n\u003ch4\u003e使用\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 直接函数调用\n{\n\t// 启动时间轮\n\t// 参数-func(interface{})\n\ttimewheel.Start(callback)\n\t// timerID，定时器id，用来删除定时器\n\t// 参数1-string，定时器id，相同的定时器id会覆盖旧的定时器\n\t// 参数2-time.Duration，定时器间隔\n\t// 参数3-interface{}，定时器数据，将传递到回调函数\n\ttimewheel.AddTimer(\u0026quot;timerID\u0026quot;, time.Second*3, \u0026quot;data\u0026quot;)\n\t// 停止定时器\n\t// 参数-string，定时器的id\n\ttimewheel.StopTimer(\u0026quot;timerID\u0026quot;)\n\ttimewheel.Stop()\n}\n\n// 结构体方法调用\n{\n\t// 参数1-time.Duration,时间轮精度\n\t// 参数2-int,时间槽数量\n\t// 参数3-func(interface{}),定时器过期回调函数\n\ttw := timewheel.New(time.Second, 60, callback)\n\ttw.Start()\n\t// timerID，定时器id，用来删除定时器\n\t// 参数1-string，定时器id，相同的定时器id会覆盖旧的定时器\n\t// 参数2-time.Duration，定时器间隔\n\t// 参数3-interface{}，定时器数据，将传递到回调函数\n\ttw.AddTimer(\u0026quot;timerID\u0026quot;, time.Second*3, \u0026quot;data\u0026quot;)\n\ttw.Stop()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003eBenchmark\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003egoos: darwin\ngoarch: amd64\npkg: 192.168.1.75/go-pkg/timewheel\ncpu: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz\nBenchmarkTimeWheel-4   \t 1000000\t      1550 ns/op\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "小白入门各位大佬能推荐一些实战项目吗",
       "Link": "https://studygolang.com/topics/16150#reply0",
       "Description": "\u003cp\u003e小白一枚刚学go没多久希望各位大佬推荐一些实战项目\u003c/p\u003e\n",
@@ -63,6 +56,13 @@
       "Title": "优维低代码：Use Provider Hook",
       "Link": "https://studygolang.com/articles/36051#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "大家是怎么处理结构不固定的数据（JSON格式的）",
+      "Link": "https://studygolang.com/topics/16148#reply1",
+      "Description": "\u003ch3\u003e场景一：\u003c/h3\u003e\n\n\u003cp\u003e自己的接口， 格式可能为\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n\tcode:0,\n\tdata: \u0026quot;任意格式\u0026quot;,\n\tmessage:\u0026quot;success\u0026quot;,\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种情况下，由于是自己的数据可控，弄一个通用的结构体, 通用的方法能解决\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Response struct {\n\tCode int\n\tData any\n\tMessage string\n}\nfunc JSONResponse(code int, data any, message string) Response {\n\treturn Response {\n\t\tCode: code,\n\t\tData: data,\n\t\tMessage: message,\n\t}\n}\n\nJSONResponse(0, []int{1,2,3}, \u0026quot;\u0026quot;)\nJSONResponse(0, map[string]string{\u0026quot;name\u0026quot;:\u0026quot;张三\u0026quot;}, \u0026quot;\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e场景二：\u003c/h3\u003e\n\n\u003cp\u003e如果要解析别人的接口, 由于data格式不固定，有什么比较便捷的方式，能解析data\u003c/p\u003e\n\n\u003cp\u003e目前想到的的方法一， 两次 \u003ccode\u003eUnmarshal\u003c/code\u003e:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode int\n\tData json.RawMessage\n\tMessage string\n}\n// 假设一种数据格式\ntype DataType struct {\n\tID string\n\tName string\n}\n\ndata := []byte{} // 假设是其他地方返回的数据\nvar msg = Response{}\njson.Unmarshal(data, \u0026amp;Response)\n\nvar data2 = DataType{}\nerr = json.Unmarshal(msg.Data, \u0026amp;data2)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e方法2:\n使用 \u003ccode\u003emap[string]any\u003c/code\u003e 来解析数据，\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode    int\n\tData    map[string]any\n\tMessage string\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种就是直接用map来接收获取，就比较简单了，\u003c/p\u003e\n\n\u003cp\u003e不知道大家有没有其他更好的方式，求分享！！谢谢🙏\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
