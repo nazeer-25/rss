@@ -28,11 +28,6 @@
       <description>&lt;h3&gt;Code&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;&#x9;r := gin.Default()&#xA;&#xA;&#x9;r.GET(&amp;quot;/api/v1/get&amp;quot;, func(ctx *gin.Context) {&#xA;&#x9;&#x9;var query model.User&#xA;&#xA;&#x9;&#x9;ctx.ShouldBind(&amp;amp;query)&#xA;&#xA;&#x9;&#x9;fmt.Println(query)&#xA;&#xA;&#x9;&#x9;// result := db.Get(&amp;amp;query)&#xA;&#xA;&#x9;&#x9;ctx.JSON(http.StatusOK, gin.H{&#xA;&#x9;&#x9;&#x9;&amp;quot;data&amp;quot;: query,&#xA;&#x9;&#x9;})&#xA;&#x9;})&#xA;&#xA;&#x9;r.Run(&amp;quot;:80&amp;quot;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h4&gt;可以解析出关联结构体中的&lt;code&gt;Product&lt;/code&gt;字段&lt;/h4&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type User struct{&#xA;&#x9;Name string&#xA;&#x9;Password string&#xA;&#x9;Orders Order&#xA;}&#xA;&#xA;type Order struct{&#xA;&#x9;Product string&#xA;&#x9;UserID uint&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;结果：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{&#xA;    &amp;quot;data&amp;quot;: {&#xA;        &amp;quot;Name&amp;quot;: &amp;quot;jackson&amp;quot;,&#xA;        &amp;quot;Orders&amp;quot;: {&#xA;            &amp;quot;Product&amp;quot;: &amp;quot;fish&amp;quot;,&#xA;            &amp;quot;UserID&amp;quot;: 0&#xA;        }&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h4&gt;但是想通过&lt;code&gt;gorm&lt;/code&gt;实现&lt;code&gt;has many&lt;/code&gt;写法应如下，但是这种写法用&lt;code&gt;Shouldbind&lt;/code&gt;方法就不能绑定到&lt;code&gt;Order.Product&lt;/code&gt;。&lt;/h4&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type User struct{&#xA;&#x9;Name string&#xA;&#x9;Password string&#xA;&#x9;Orders []Order&#xA;}&#xA;&#xA;type Order struct{&#xA;&#x9;Product string&#xA;&#x9;UserID uint&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;结果：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{&#xA;    &amp;quot;data&amp;quot;: {&#xA;        &amp;quot;Name&amp;quot;: &amp;quot;jackson&amp;quot;,&#xA;        &amp;quot;Orders&amp;quot;: null&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;请指点一种便捷高效的查询方法，当前端传入任意数据，只要匹配设计表中字段（如User或Order中任意字段）则返回所有关联的表数据。练手写项目折腾好几天了，希望能够得到有效答案，感激不尽！&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>小白入门各位大佬能推荐一些实战项目吗</title>
-      <link>https://studygolang.com/topics/16150#reply1</link>
-      <description>&lt;p&gt;小白一枚刚学go没多久希望各位大佬推荐一些实战项目&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>求问，go语言圣经里面的代码配色是那个主题</title>
       <link>https://studygolang.com/topics/16151#reply1</link>
       <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230218/fa8c578f8de39e9f550cde43f037584b.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
@@ -41,6 +36,11 @@
       <title>go语言实现的基于内存的key/value的缓存库</title>
       <link>https://studygolang.com/articles/36054#reply1</link>
       <description>&lt;h1&gt;go-cache&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;一个基于内存的key/value的go语言存储库，支持string和hash&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;🚀 安装&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;go get -u github.com/itmisx/go-cache&lt;/code&gt;&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;✨ 特性&lt;/h4&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;支持过期回调函数&lt;/li&gt;&#xA;&lt;li&gt;支持哈希字段的过期时间设置&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;h4&gt;🏗️ 使用场景&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;主要用在单机或本地缓存场景&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;✅ 开始使用&lt;/h4&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;设置键值，不带过期回调&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;cache.Set(&amp;quot;key1&amp;quot;, 1, time.Second*4, nil)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;设置键值，带过期回调&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;cache.Set(&amp;quot;key1&amp;quot;, 1, time.Second*4, func(key string, value interface{}) {&#xA;    log.Println(&amp;quot;callback1&amp;quot;, key, value)&#xA;})&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;设置键的过期时间&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;cache.Expire(&amp;quot;key1&amp;quot;,time.Second*4)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;获取键值&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// found指示是否存在&#xA;value,found := cache.Get(&amp;quot;key1&amp;quot;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;删除键&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;cache.Del(&amp;quot;key1&amp;quot;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;设置hash，带过期回调&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;cache.HSet(&amp;quot;hkey1&amp;quot;, &amp;quot;hfield1&amp;quot;, 1, time.Second*8, func(key string, field string, value interface{}) {&#xA;    log.Println(&amp;quot;callback2&amp;quot;, key, field, value)&#xA;})&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;设置hash字段的过期时间&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;cache.Expire(&amp;quot;hkey1&amp;quot;,&amp;quot;hfield1&amp;quot;,time.Second*3)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;获取hash值&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// found指示是否存在&#xA;value,found := cache.HGet(&amp;quot;hkey1&amp;quot;,&amp;quot;hfield1&amp;quot;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;删除hash字段&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;cache.HDel(&amp;quot;hkey1&amp;quot;,&amp;quot;hfield1&amp;quot;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>小白入门各位大佬能推荐一些实战项目吗</title>
+      <link>https://studygolang.com/topics/16150#reply1</link>
+      <description>&lt;p&gt;小白一枚刚学go没多久希望各位大佬推荐一些实战项目&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>go语言实现的真正的多层时间轮</title>
@@ -55,6 +55,11 @@
     <item>
       <title>优维低代码：Use Provider Hook</title>
       <link>https://studygolang.com/articles/36051#reply0</link>
+    </item>
+    <item>
+      <title>请教一种场景的实现</title>
+      <link>https://studygolang.com/topics/16142#reply3</link>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;框架：Gin，Gorm&lt;/li&gt;&#xA;&lt;li&gt;数据库中使用&lt;code&gt;gorm&lt;/code&gt;映射了表单 Person&#xA;&lt;code&gt;go&#xA;type Person struct{&#xA;*gorm.Model&#xA;Name string&#xA;Gender string&#xA;Phone string&#xA;QQ string&#xA;Orders []Order&#x9;// 关联表&#xA;... &#xA;}&#xA;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;当前端发起&lt;code&gt;GET&lt;/code&gt;请求时，用户传入参数数量不固定，当拿到这些参数时，则去数据库查询对比，如果参数与数据库中匹配，则返回&lt;code&gt;Person&lt;/code&gt;表与其所有关联表的数据。这种场景应该如何实现呢？一两个参数还能使用&lt;code&gt;for&lt;/code&gt;循环嵌套，一旦数据量大的话这样会严重影响性能。&#xA;&amp;gt;请指点一种实现方法，当然如果有demo那更佳感激～&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
     </item>
     <item>
       <title>Go写的第一个网站，大家看看速度快不快？</title>
