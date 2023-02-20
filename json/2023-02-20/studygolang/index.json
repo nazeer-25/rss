@@ -39,6 +39,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "小白入门各位大佬能推荐一些实战项目吗",
+      "Link": "https://studygolang.com/topics/16150#reply1",
+      "Description": "\u003cp\u003e小白一枚刚学go没多久希望各位大佬推荐一些实战项目\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "求问，go语言圣经里面的代码配色是那个主题",
       "Link": "https://studygolang.com/topics/16151#reply1",
       "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230218/fa8c578f8de39e9f550cde43f037584b.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
@@ -49,13 +56,6 @@
       "Title": "go语言实现的基于内存的key/value的缓存库",
       "Link": "https://studygolang.com/articles/36054#reply1",
       "Description": "\u003ch1\u003ego-cache\u003c/h1\u003e\n\n\u003cp\u003e一个基于内存的key/value的go语言存储库，支持string和hash\u003c/p\u003e\n\n\u003ch4\u003e🚀 安装\u003c/h4\u003e\n\n\u003cp\u003e\u003ccode\u003ego get -u github.com/itmisx/go-cache\u003c/code\u003e\u003c/p\u003e\n\n\u003ch4\u003e✨ 特性\u003c/h4\u003e\n\n\u003cul\u003e\n\u003cli\u003e支持过期回调函数\u003c/li\u003e\n\u003cli\u003e支持哈希字段的过期时间设置\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch4\u003e🏗️ 使用场景\u003c/h4\u003e\n\n\u003cp\u003e主要用在单机或本地缓存场景\u003c/p\u003e\n\n\u003ch4\u003e✅ 开始使用\u003c/h4\u003e\n\n\u003cul\u003e\n\u003cli\u003e设置键值，不带过期回调\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.Set(\u0026quot;key1\u0026quot;, 1, time.Second*4, nil)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e设置键值，带过期回调\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.Set(\u0026quot;key1\u0026quot;, 1, time.Second*4, func(key string, value interface{}) {\n    log.Println(\u0026quot;callback1\u0026quot;, key, value)\n})\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e设置键的过期时间\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.Expire(\u0026quot;key1\u0026quot;,time.Second*4)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e获取键值\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// found指示是否存在\nvalue,found := cache.Get(\u0026quot;key1\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e删除键\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.Del(\u0026quot;key1\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e设置hash，带过期回调\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.HSet(\u0026quot;hkey1\u0026quot;, \u0026quot;hfield1\u0026quot;, 1, time.Second*8, func(key string, field string, value interface{}) {\n    log.Println(\u0026quot;callback2\u0026quot;, key, field, value)\n})\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e设置hash字段的过期时间\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.Expire(\u0026quot;hkey1\u0026quot;,\u0026quot;hfield1\u0026quot;,time.Second*3)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e获取hash值\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// found指示是否存在\nvalue,found := cache.HGet(\u0026quot;hkey1\u0026quot;,\u0026quot;hfield1\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e删除hash字段\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ecache.HDel(\u0026quot;hkey1\u0026quot;,\u0026quot;hfield1\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "小白入门各位大佬能推荐一些实战项目吗",
-      "Link": "https://studygolang.com/topics/16150#reply1",
-      "Description": "\u003cp\u003e小白一枚刚学go没多久希望各位大佬推荐一些实战项目\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -77,6 +77,13 @@
       "Title": "优维低代码：Use Provider Hook",
       "Link": "https://studygolang.com/articles/36051#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "大家是怎么处理结构不固定的数据（JSON格式的）",
+      "Link": "https://studygolang.com/topics/16148#reply2",
+      "Description": "\u003ch3\u003e场景一：\u003c/h3\u003e\n\n\u003cp\u003e自己的接口， 格式可能为\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n\tcode:0,\n\tdata: \u0026quot;任意格式\u0026quot;,\n\tmessage:\u0026quot;success\u0026quot;,\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种情况下，由于是自己的数据可控，弄一个通用的结构体, 通用的方法能解决\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Response struct {\n\tCode int\n\tData any\n\tMessage string\n}\nfunc JSONResponse(code int, data any, message string) Response {\n\treturn Response {\n\t\tCode: code,\n\t\tData: data,\n\t\tMessage: message,\n\t}\n}\n\nJSONResponse(0, []int{1,2,3}, \u0026quot;\u0026quot;)\nJSONResponse(0, map[string]string{\u0026quot;name\u0026quot;:\u0026quot;张三\u0026quot;}, \u0026quot;\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e场景二：\u003c/h3\u003e\n\n\u003cp\u003e如果要解析别人的接口, 由于data格式不固定，有什么比较便捷的方式，能解析data\u003c/p\u003e\n\n\u003cp\u003e目前想到的的方法一， 两次 \u003ccode\u003eUnmarshal\u003c/code\u003e:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode int\n\tData json.RawMessage\n\tMessage string\n}\n// 假设一种数据格式\ntype DataType struct {\n\tID string\n\tName string\n}\n\ndata := []byte{} // 假设是其他地方返回的数据\nvar msg = Response{}\njson.Unmarshal(data, \u0026amp;Response)\n\nvar data2 = DataType{}\nerr = json.Unmarshal(msg.Data, \u0026amp;data2)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e方法2:\n使用 \u003ccode\u003emap[string]any\u003c/code\u003e 来解析数据，\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode    int\n\tData    map[string]any\n\tMessage string\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种就是直接用map来接收获取，就比较简单了，\u003c/p\u003e\n\n\u003cp\u003e不知道大家有没有其他更好的方式，求分享！！谢谢🙏\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -105,13 +112,6 @@
       "Title": "有没有人 有拼多多 自动上货软件的源代码 拿出来分享一下？或者拼多多上货助手的源代码。",
       "Link": "https://studygolang.com/topics/16113#reply2",
       "Description": "\u003cp\u003e如题\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "大家是怎么处理结构不固定的数据（JSON格式的）",
-      "Link": "https://studygolang.com/topics/16148#reply1",
-      "Description": "\u003ch3\u003e场景一：\u003c/h3\u003e\n\n\u003cp\u003e自己的接口， 格式可能为\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n\tcode:0,\n\tdata: \u0026quot;任意格式\u0026quot;,\n\tmessage:\u0026quot;success\u0026quot;,\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种情况下，由于是自己的数据可控，弄一个通用的结构体, 通用的方法能解决\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Response struct {\n\tCode int\n\tData any\n\tMessage string\n}\nfunc JSONResponse(code int, data any, message string) Response {\n\treturn Response {\n\t\tCode: code,\n\t\tData: data,\n\t\tMessage: message,\n\t}\n}\n\nJSONResponse(0, []int{1,2,3}, \u0026quot;\u0026quot;)\nJSONResponse(0, map[string]string{\u0026quot;name\u0026quot;:\u0026quot;张三\u0026quot;}, \u0026quot;\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e场景二：\u003c/h3\u003e\n\n\u003cp\u003e如果要解析别人的接口, 由于data格式不固定，有什么比较便捷的方式，能解析data\u003c/p\u003e\n\n\u003cp\u003e目前想到的的方法一， 两次 \u003ccode\u003eUnmarshal\u003c/code\u003e:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode int\n\tData json.RawMessage\n\tMessage string\n}\n// 假设一种数据格式\ntype DataType struct {\n\tID string\n\tName string\n}\n\ndata := []byte{} // 假设是其他地方返回的数据\nvar msg = Response{}\njson.Unmarshal(data, \u0026amp;Response)\n\nvar data2 = DataType{}\nerr = json.Unmarshal(msg.Data, \u0026amp;data2)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e方法2:\n使用 \u003ccode\u003emap[string]any\u003c/code\u003e 来解析数据，\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode    int\n\tData    map[string]any\n\tMessage string\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种就是直接用map来接收获取，就比较简单了，\u003c/p\u003e\n\n\u003cp\u003e不知道大家有没有其他更好的方式，求分享！！谢谢🙏\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -147,6 +147,13 @@
       "Title": "请问gin框架如何先返回响应，再在响应完成后绑定一个后置事件啊？",
       "Link": "https://studygolang.com/topics/16145#reply3",
       "Description": "\u003cp\u003e比方第一次a路由的请求，起了一个延时10秒的协程，我现在想在b路由进行的时候，如果还没到10秒，关闭这个协程，应该如何设计呢？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "大家是怎么处理结构不固定的数据（JSON格式的）",
+      "Link": "https://studygolang.com/topics/16148#reply1",
+      "Description": "\u003ch3\u003e场景一：\u003c/h3\u003e\n\n\u003cp\u003e自己的接口， 格式可能为\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n\tcode:0,\n\tdata: \u0026quot;任意格式\u0026quot;,\n\tmessage:\u0026quot;success\u0026quot;,\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种情况下，由于是自己的数据可控，弄一个通用的结构体, 通用的方法能解决\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Response struct {\n\tCode int\n\tData any\n\tMessage string\n}\nfunc JSONResponse(code int, data any, message string) Response {\n\treturn Response {\n\t\tCode: code,\n\t\tData: data,\n\t\tMessage: message,\n\t}\n}\n\nJSONResponse(0, []int{1,2,3}, \u0026quot;\u0026quot;)\nJSONResponse(0, map[string]string{\u0026quot;name\u0026quot;:\u0026quot;张三\u0026quot;}, \u0026quot;\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e场景二：\u003c/h3\u003e\n\n\u003cp\u003e如果要解析别人的接口, 由于data格式不固定，有什么比较便捷的方式，能解析data\u003c/p\u003e\n\n\u003cp\u003e目前想到的的方法一， 两次 \u003ccode\u003eUnmarshal\u003c/code\u003e:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode int\n\tData json.RawMessage\n\tMessage string\n}\n// 假设一种数据格式\ntype DataType struct {\n\tID string\n\tName string\n}\n\ndata := []byte{} // 假设是其他地方返回的数据\nvar msg = Response{}\njson.Unmarshal(data, \u0026amp;Response)\n\nvar data2 = DataType{}\nerr = json.Unmarshal(msg.Data, \u0026amp;data2)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e方法2:\n使用 \u003ccode\u003emap[string]any\u003c/code\u003e 来解析数据，\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003etype Response struct {\n\tCode    int\n\tData    map[string]any\n\tMessage string\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这种就是直接用map来接收获取，就比较简单了，\u003c/p\u003e\n\n\u003cp\u003e不知道大家有没有其他更好的方式，求分享！！谢谢🙏\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
