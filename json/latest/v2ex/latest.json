@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "gitlab docker-file 配置域名请教 - 程序员",
+      "Link": "https://www.v2ex.com/t/917726",
+      "Description": "\u003cpre\u003e\u003ccode\u003eversion: '3.3'\nservices:\n  gitlab:\n    image: gitlab/gitlab-ce:latest\n    container_name: gitlab-ce\n    hostname: gitlab.test.com\n    restart: always\n    environment:\n      GITLAB_OMNIBUS_CONFIG: |\n        external_url 'http://gitlab.test.com:8000'\n        gitlab_rails['gitlab_shell_ssh_port'] = 22\n        puma['worker_timeout'] = 30\n        gitlab_rails['time_zone'] = 'Asia/Shanghai'\n        puma['worker_processes'] = 2\n        postgresql['shared_buffers'] = \"256MB\"\n        sidekiq['max_concurrency'] = 8\n        postgresql['max_worker_processes'] = 4\n        puma['per_worker_max_memory_mb'] = 600\n        prometheus_monitoring['enable'] = false\n        sidekiq['min_concurrency'] = 8\n    ports:\n      - \"8000:80\"\n      - \"8822:22\"\n    volumes:\n      - './gitlab/config:/etc/gitlab'\n      - './gitlab/logs:/var/log/gitlab'\n      - './gitlab/data:/var/opt/gitlab'\n    networks:\n      - gitlab\n\n  gitlab-runner:\n    image: gitlab/gitlab-runner:alpine\n    restart: always\n    depends_on:\n      - gitlab\n    volumes:\n      - ./gitlab/gitlab-runner:/etc/gitlab-runner\n      - /var/run/docker.sock:/var/run/docker.sock\n      - /bin/docker:/bin/docker\n    networks:\n      - gitlab\n\nnetworks:\n  gitlab:\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这是一份 gitlab docker 文件。现在我想配置域名来访问它，大家看下 external_url 这里是不是有问题，一直提示 502\u003c/p\u003e\n",
+      "Author": "awanganddong",
+      "PubDate": "2023-02-20T10:46:31Z"
+    },
+    {
+      "Title": "2023 年了，求推荐个拍照手机 - Android",
+      "Link": "https://www.v2ex.com/t/917725",
+      "Description": "\u003cp\u003e目前还在用 xr ，杀后台太严重了，拍照一遇到稍微亮一点的地方就眼瞎的不行。\n想换个安卓 o 尝尝鲜，主拍照其他凑合就行，预算 4k 左右。\n网上看一堆，实在搞不清都有些啥区别\u003c/p\u003e\n",
+      "Author": "msuyj1984",
+      "PubDate": "2023-02-20T10:42:35Z"
+    },
+    {
+      "Title": "斯坦福大学对 chaGPT 的介绍 ppt(可下载) - 分享发现",
+      "Link": "https://www.v2ex.com/t/917724",
+      "Description": "\u003cp\u003e\u003ca href=\"https://s.caixuan.cc/LDb9ZWEx\" rel=\"nofollow\"\u003ehttps://s.caixuan.cc/LDb9ZWEx\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "Fei22",
+      "PubDate": "2023-02-20T10:41:52Z"
+    },
+    {
+      "Title": "jellyfin / plex / emby 都用过的老哥最终选择了哪个？ - NAS",
+      "Link": "https://www.v2ex.com/t/917723",
+      "Description": "",
+      "Author": "JavenXiao",
+      "PubDate": "2023-02-20T10:40:29Z"
+    },
+    {
       "Title": "孩子有点近视了 怎么配眼镜合适一点 - 问与答",
       "Link": "https://www.v2ex.com/t/917722",
       "Description": "\u003cp\u003e我看很多网上说去宝岛验光  网上配镜  我这里也没有宝岛  是不是实体店贵很多？？\u003c/p\u003e\n",

@@ -4,6 +4,33 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>gitlab docker-file 配置域名请教 - 程序员</title>
+      <link>https://www.v2ex.com/t/917726</link>
+      <description>&lt;pre&gt;&lt;code&gt;version: &#39;3.3&#39;&#xA;services:&#xA;  gitlab:&#xA;    image: gitlab/gitlab-ce:latest&#xA;    container_name: gitlab-ce&#xA;    hostname: gitlab.test.com&#xA;    restart: always&#xA;    environment:&#xA;      GITLAB_OMNIBUS_CONFIG: |&#xA;        external_url &#39;http://gitlab.test.com:8000&#39;&#xA;        gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 22&#xA;        puma[&#39;worker_timeout&#39;] = 30&#xA;        gitlab_rails[&#39;time_zone&#39;] = &#39;Asia/Shanghai&#39;&#xA;        puma[&#39;worker_processes&#39;] = 2&#xA;        postgresql[&#39;shared_buffers&#39;] = &#34;256MB&#34;&#xA;        sidekiq[&#39;max_concurrency&#39;] = 8&#xA;        postgresql[&#39;max_worker_processes&#39;] = 4&#xA;        puma[&#39;per_worker_max_memory_mb&#39;] = 600&#xA;        prometheus_monitoring[&#39;enable&#39;] = false&#xA;        sidekiq[&#39;min_concurrency&#39;] = 8&#xA;    ports:&#xA;      - &#34;8000:80&#34;&#xA;      - &#34;8822:22&#34;&#xA;    volumes:&#xA;      - &#39;./gitlab/config:/etc/gitlab&#39;&#xA;      - &#39;./gitlab/logs:/var/log/gitlab&#39;&#xA;      - &#39;./gitlab/data:/var/opt/gitlab&#39;&#xA;    networks:&#xA;      - gitlab&#xA;&#xA;  gitlab-runner:&#xA;    image: gitlab/gitlab-runner:alpine&#xA;    restart: always&#xA;    depends_on:&#xA;      - gitlab&#xA;    volumes:&#xA;      - ./gitlab/gitlab-runner:/etc/gitlab-runner&#xA;      - /var/run/docker.sock:/var/run/docker.sock&#xA;      - /bin/docker:/bin/docker&#xA;    networks:&#xA;      - gitlab&#xA;&#xA;networks:&#xA;  gitlab:&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这是一份 gitlab docker 文件。现在我想配置域名来访问它，大家看下 external_url 这里是不是有问题，一直提示 502&lt;/p&gt;&#xA;</description>
+      <author>awanganddong</author>
+      <pubDate>20 Feb 2023 10:46:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>2023 年了，求推荐个拍照手机 - Android</title>
+      <link>https://www.v2ex.com/t/917725</link>
+      <description>&lt;p&gt;目前还在用 xr ，杀后台太严重了，拍照一遇到稍微亮一点的地方就眼瞎的不行。&#xA;想换个安卓 o 尝尝鲜，主拍照其他凑合就行，预算 4k 左右。&#xA;网上看一堆，实在搞不清都有些啥区别&lt;/p&gt;&#xA;</description>
+      <author>msuyj1984</author>
+      <pubDate>20 Feb 2023 10:42:35 +0000</pubDate>
+    </item>
+    <item>
+      <title>斯坦福大学对 chaGPT 的介绍 ppt(可下载) - 分享发现</title>
+      <link>https://www.v2ex.com/t/917724</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://s.caixuan.cc/LDb9ZWEx&#34; rel=&#34;nofollow&#34;&gt;https://s.caixuan.cc/LDb9ZWEx&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>Fei22</author>
+      <pubDate>20 Feb 2023 10:41:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>jellyfin / plex / emby 都用过的老哥最终选择了哪个？ - NAS</title>
+      <link>https://www.v2ex.com/t/917723</link>
+      <author>JavenXiao</author>
+      <pubDate>20 Feb 2023 10:40:29 +0000</pubDate>
+    </item>
+    <item>
       <title>孩子有点近视了 怎么配眼镜合适一点 - 问与答</title>
       <link>https://www.v2ex.com/t/917722</link>
       <description>&lt;p&gt;我看很多网上说去宝岛验光  网上配镜  我这里也没有宝岛  是不是实体店贵很多？？&lt;/p&gt;&#xA;</description>
