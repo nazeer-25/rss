@@ -26,7 +26,7 @@
     },
     {
       "Title": "GO有没有像PHP HOOK的方法实现呢",
-      "Link": "https://studygolang.com/topics/16153#reply1",
+      "Link": "https://studygolang.com/topics/16153#reply2",
       "Description": "\u003cp\u003e比如：正常main调用函数直接调用，可否类似PHP HOOK那样，去调用，这样main腾出来可以处理其他，否则main会卡在哪里等函数执行完毕，\u003c/p\u003e\n\n\u003cp\u003e我想过用异步，但是异步调用函数的话，貌似得不到最终的HTTPGET错误OR成功响应值，我像得到返回响应值写到SQL日志中\u003c/p\u003e\n\n\u003cp\u003efunc main(){\n\tHTTPBODY()\u003cbr\u003e\n}\u003c/p\u003e\n\n\u003cp\u003efunc HTTPBODY()string{\n\t//RESULT:GET URL\n\treturn RESULT\n}\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -35,6 +35,13 @@
       "Title": "Gin框架ShouldBind用法与gorm，has many关联的疑问",
       "Link": "https://studygolang.com/topics/16154#reply0",
       "Description": "\u003ch3\u003eCode\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\tr := gin.Default()\n\n\tr.GET(\u0026quot;/api/v1/get\u0026quot;, func(ctx *gin.Context) {\n\t\tvar query model.User\n\n\t\tctx.ShouldBind(\u0026amp;query)\n\n\t\tfmt.Println(query)\n\n\t\t// result := db.Get(\u0026amp;query)\n\n\t\tctx.JSON(http.StatusOK, gin.H{\n\t\t\t\u0026quot;data\u0026quot;: query,\n\t\t})\n\t})\n\n\tr.Run(\u0026quot;:80\u0026quot;)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e可以解析出关联结构体中的\u003ccode\u003eProduct\u003c/code\u003e字段\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype User struct{\n\tName string\n\tPassword string\n\tOrders Order\n}\n\ntype Order struct{\n\tProduct string\n\tUserID uint\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e结果：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n    \u0026quot;data\u0026quot;: {\n        \u0026quot;Name\u0026quot;: \u0026quot;jackson\u0026quot;,\n        \u0026quot;Orders\u0026quot;: {\n            \u0026quot;Product\u0026quot;: \u0026quot;fish\u0026quot;,\n            \u0026quot;UserID\u0026quot;: 0\n        }\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e但是想通过\u003ccode\u003egorm\u003c/code\u003e实现\u003ccode\u003ehas many\u003c/code\u003e写法应如下，但是这种写法用\u003ccode\u003eShouldbind\u003c/code\u003e方法就不能绑定到\u003ccode\u003eOrder.Product\u003c/code\u003e。\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype User struct{\n\tName string\n\tPassword string\n\tOrders []Order\n}\n\ntype Order struct{\n\tProduct string\n\tUserID uint\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e结果：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n    \u0026quot;data\u0026quot;: {\n        \u0026quot;Name\u0026quot;: \u0026quot;jackson\u0026quot;,\n        \u0026quot;Orders\u0026quot;: null\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e请指点一种便捷高效的查询方法，当前端传入任意数据，只要匹配设计表中字段（如User或Order中任意字段）则返回所有关联的表数据。练手写项目折腾好几天了，希望能够得到有效答案，感激不尽！\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "小白入门各位大佬能推荐一些实战项目吗",
+      "Link": "https://studygolang.com/topics/16150#reply1",
+      "Description": "\u003cp\u003e小白一枚刚学go没多久希望各位大佬推荐一些实战项目\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -63,13 +70,6 @@
       "Title": "go语言实现的真正的多层时间轮",
       "Link": "https://studygolang.com/articles/36052#reply0",
       "Description": "\u003ch1\u003etimewheel\u003c/h1\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e时间轮，是一种实现延迟功能（定时器）的巧妙算法，在 Netty，Zookeeper，Kafka 等各种框架中，甚至 Linux 内核中都有用到。\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch4\u003e安装\u003c/h4\u003e\n\n\u003cp\u003e\u003ccode\u003ego get -u -v github.com/itmisx/timewheel\u003c/code\u003e\u003c/p\u003e\n\n\u003ch4\u003e使用\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 直接函数调用\n{\n\t// 启动时间轮\n\t// 参数-func(interface{})\n\ttimewheel.Start(callback)\n\t// timerID，定时器id，用来删除定时器\n\t// 参数1-string，定时器id，相同的定时器id会覆盖旧的定时器\n\t// 参数2-time.Duration，定时器间隔\n\t// 参数3-interface{}，定时器数据，将传递到回调函数\n\ttimewheel.AddTimer(\u0026quot;timerID\u0026quot;, time.Second*3, \u0026quot;data\u0026quot;)\n\t// 停止定时器\n\t// 参数-string，定时器的id\n\ttimewheel.StopTimer(\u0026quot;timerID\u0026quot;)\n\ttimewheel.Stop()\n}\n\n// 结构体方法调用\n{\n\t// 参数1-time.Duration,时间轮精度\n\t// 参数2-int,时间槽数量\n\t// 参数3-func(interface{}),定时器过期回调函数\n\ttw := timewheel.New(time.Second, 60, callback)\n\ttw.Start()\n\t// timerID，定时器id，用来删除定时器\n\t// 参数1-string，定时器id，相同的定时器id会覆盖旧的定时器\n\t// 参数2-time.Duration，定时器间隔\n\t// 参数3-interface{}，定时器数据，将传递到回调函数\n\ttw.AddTimer(\u0026quot;timerID\u0026quot;, time.Second*3, \u0026quot;data\u0026quot;)\n\ttw.Stop()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003eBenchmark\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003egoos: darwin\ngoarch: amd64\npkg: 192.168.1.75/go-pkg/timewheel\ncpu: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz\nBenchmarkTimeWheel-4   \t 1000000\t      1550 ns/op\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "小白入门各位大佬能推荐一些实战项目吗",
-      "Link": "https://studygolang.com/topics/16150#reply0",
-      "Description": "\u003cp\u003e小白一枚刚学go没多久希望各位大佬推荐一些实战项目\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -147,6 +147,20 @@
       "Title": "go websocket server 测评",
       "Link": "https://studygolang.com/topics/16147#reply0",
       "Description": "\u003cp\u003ewebsocket package 那么多, 到底要怎么选? 今天为大家带来3款 go websocket 测评, 希望对您有些帮助. 测试代码仓库: \u003ca href=\"https://github.com/lxzan/go-websocket-testing\"\u003ego-websocket-testing\u003c/a\u003e .\u003c/p\u003e\n\n\u003ch4\u003ePackages\u003c/h4\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/lxzan/gws\"\u003ehttps://github.com/lxzan/gws\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/gorilla/websocket\"\u003ehttps://github.com/gorilla/websocket\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/nhooyr/websocket\"\u003ehttps://github.com/nhooyr/websocket\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch4\u003eWebSocket 协议测试 (autobahn-testsuite)\u003c/h4\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cp\u003e工具: \u003ccode\u003eautobahn-testsuite\u003c/code\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e命令:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003edocker run -it --rm \\\n-v ${PWD}/config:/config \\\n-v ${PWD}/reports:/reports \\\ncrossbario/autobahn-testsuite \\\nwstest -m fuzzingclient -s /config/fuzzingclient.json\n\u003c/code\u003e\u003c/pre\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e每个包基本都是用的默认配置, 为了节省时间, 本项测试关闭了压缩.\n可以看到, 尽管\u003ccode\u003egorilla/websocket\u003c/code\u003e 和 \u003ccode\u003enhooyr/websocket\u003c/code\u003e宣称通过了所有\u003ccode\u003eautobahn-testsuite\u003c/code\u003e测试, 但可能需要开发者额外写一些代码.\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e结果\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003epackage\u003c/th\u003e\n\u003cth\u003ePass\u003c/th\u003e\n\u003cth\u003eInfo\u003c/th\u003e\n\u003cth\u003eNon-Strict\u003c/th\u003e\n\u003cth\u003eUnclean\u003c/th\u003e\n\u003cth\u003eFailed\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003elxzan/gws\u003c/td\u003e\n\u003ctd\u003e294\u003c/td\u003e\n\u003ctd\u003e3\u003c/td\u003e\n\u003ctd\u003e4\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003c/tr\u003e\n\n\u003ctr\u003e\n\u003ctd\u003egorilla/websocket\u003c/td\u003e\n\u003ctd\u003e223\u003c/td\u003e\n\u003ctd\u003e3\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003ctd\u003e85\u003c/td\u003e\n\u003ctd\u003e75\u003c/td\u003e\n\u003c/tr\u003e\n\n\u003ctr\u003e\n\u003ctd\u003enhooyr/websocket\u003c/td\u003e\n\u003ctd\u003e173\u003c/td\u003e\n\u003ctd\u003e3\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003ctd\u003e0\u003c/td\u003e\n\u003ctd\u003e125\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\n\u003ch4\u003e延迟测试\u003c/h4\u003e\n\n\u003cp\u003e对于一般的线上场景，它们性能都够用了，所以我只测试下延迟情况，感兴趣的朋友可以自己跑下其它负载下的压测\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cp\u003e场景: 1000连接, 每秒发送100条1KiB的消息\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e工具: \u003ccode\u003etcpkali\u003c/code\u003e\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e命令:\u003c/p\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003etcpkali -c 1000 --connect-rate 200 -r 100 -T 1200s -f assets/1K.txt --ws ip:port\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cul\u003e\n\u003cli\u003e结果\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230216/f27f6f6a17278d3f31ccc30ce06c4754.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230216/9b1b6b90f7a22891ad1cd2462acdd36c.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230216/28ec436cead833d8f7d8d84462e48890.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "GO有没有像PHP HOOK的方法实现呢",
+      "Link": "https://studygolang.com/topics/16153#reply1",
+      "Description": "\u003cp\u003e比如：正常main调用函数直接调用，可否类似PHP HOOK那样，去调用，这样main腾出来可以处理其他，否则main会卡在哪里等函数执行完毕，\u003c/p\u003e\n\n\u003cp\u003e我想过用异步，但是异步调用函数的话，貌似得不到最终的HTTPGET错误OR成功响应值，我像得到返回响应值写到SQL日志中\u003c/p\u003e\n\n\u003cp\u003efunc main(){\n\tHTTPBODY()\u003cbr\u003e\n}\u003c/p\u003e\n\n\u003cp\u003efunc HTTPBODY()string{\n\t//RESULT:GET URL\n\treturn RESULT\n}\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "小白入门各位大佬能推荐一些实战项目吗",
+      "Link": "https://studygolang.com/topics/16150#reply0",
+      "Description": "\u003cp\u003e小白一枚刚学go没多久希望各位大佬推荐一些实战项目\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
