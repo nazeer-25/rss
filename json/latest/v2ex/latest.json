@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "一个 Rust api 开发模板 - Rust",
+      "Link": "https://www.v2ex.com/t/917709",
+      "Description": "\u003cp\u003e最近公司的一个小项目，用 Rust 练手了，觉得不错，就开源了一个 api 开发模板，大家可以试试，哈哈...\u003c/p\u003e\n\u003cp\u003e地址： \u003ca href=\"https://github.com/shenghui0779/api-tpl-rs\" rel=\"nofollow\"\u003ehttps://github.com/shenghui0779/api-tpl-rs\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "IIInsomnia",
+      "PubDate": "2023-02-20T09:58:01Z"
+    },
+    {
       "Title": "关于 Elasticsearch 的使用场景问题求指教 - 问与答",
       "Link": "https://www.v2ex.com/t/917707",
       "Description": "\u003cblockquote\u003e\n\u003cp\u003e背景：项目重构，有些负责查询想要上 ES 。之前没有使用 ES 的项目经验，网上简单的学习了一下 es 的搭建和一些 api 的调用。 但是找到的学习资料实战部分大多都是单表的数据，也都是偏简单的一些需求。所以对 es 在实际项目中的使用方式有些疑惑点，希望大佬们可以指点一二。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2\u003e问题 1\u003c/h2\u003e\n\u003cp\u003e如果所涉及到的查询业务只有单表，为了减少业务代码的开发。目前了解到的中间件是 canal ，监听 binlog ，将数据同步到 ES 中。\n想问下大家，实际使用中也是这种思路吗。\u003c/p\u003e\n\u003ch2\u003e问题 2\u003c/h2\u003e\n\u003cp\u003e如果涉及到多表关联查询，是不是只能通过业务代码往 ES 里面灌数据。\n举个实际的场景：\n比如：学生表 student 中有 id ，code ，name ，age ，address ，schoolname ，tel ... 等字段\n年级表 class 中有 id ，name ...等字段\n还有其他的一些基础数据表。\u003c/p\u003e\n\u003cp\u003e现在想实现一个学员列表的需求。\n列表中，会以学生为维度，展示其他很多表中涉及到的字段。\n搜索条件有：学员姓名，学员编码（ code ），学校，入学时间等字段。\u003c/p\u003e\n\u003cp\u003e如果基于 mysql 实现，可能需要多张业务表关联查询，甚至有些字段可能一个 sql 查不出来，需要在查询出来的结果中遍历，单独再去查询某个字段，然后赋值。这样的话，表数据比较多查询效率很慢。\u003c/p\u003e\n\u003cp\u003e如果基于 ES 来实现，我的思路是：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e写一个跑批接口，现将筛选条件需要的字段跟学生建立联系查询出来，组织成一条数据存入到 es 中，比如：学员 id ，姓名，编码，学校等。这样就可以将历史数据同步到 es 中了。\u003c/li\u003e\n\u003cli\u003e在新增修改删除基础表数据的地方，同步去修改 es 中的数据。\u003c/li\u003e\n\u003cli\u003e查询列表的时候，先去查 es 中的数据，再根据一个唯一值（比如学员 id ），然后根据唯一键查询 mysql 补足其他字段的值。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e总结：查询字段放 es ，表格字段查 mysql\u003c/p\u003e\n\u003cp\u003e我不知道我的实现思路是否使用合理和正确。如果合理的话，感觉代码的侵入性太强了。比如上述问题二，如果修改了某个基础标的数据，我还要对应的修改 es 中的数据。可能系统里我都不知道都有哪些地方修改基础数据。\u003c/p\u003e\n\u003cp\u003e希望大家可以提供一些实际工作中应对以上场景时的解决思路。如果有一些参考的教程资料关于 es 的也可以提供。\n感谢大家\u003c/p\u003e\n",
