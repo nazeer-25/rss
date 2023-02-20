@@ -4,6 +4,146 @@
   "Description": "",
   "Items": [
     {
+      "Title": "PVE 的虚拟网卡是如何设计的 - 问与答",
+      "Link": "https://www.v2ex.com/t/917510",
+      "Description": "\u003cp\u003e惯性思维:\nVM 中，虚拟机的网络可以选择桥接模式，可以通过宿主机的网卡自动分配一个与宿主机网络同网段的 IP 地址，此时相当于一个网卡下面有两个独立的设备，一个宿主机一个虚拟机，路由器中也能看到。\n在 PVE 中：\n1 ）我用的是无线网卡，配置自动生成的 vmbr0 才能连通 PVE 管理页面\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eauto wlp3s0\niface wlp3s0 inet static\n        wpa-ssid \"....\"\n        wpa-psk  ...       \n        address 192.168.0.124/24\n        gateway 192.168.0.1\n\nauto vmbr0\niface vmbr0 inet static\n        address  203.12.1.3/24\n        bridge-ports none\n        bridge-stp off\n        bridge-fd 0\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如果我改成\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eauto wlp3s0\niface wlp3s0 inet dhcp\n        wpa-ssid \"...\"\n        wpa-psk  ...       \n\nauto vmbr0\niface vmbr0 inet static\n\t\taddress 192.168.0.124/24\n        gateway 192.168.0.1\n        bridge-ports wlp3s0\n        bridge-stp off\n        bridge-fd 0\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这样就联不通 PVE 了。vmbr0 和管理页面是啥关系？\u003c/p\u003e\n\u003cp\u003e2 ）其实最终的目的是为了虚拟机选择 vmbr0 网口时，能生成一个基于路由器网段的 IP ，这样我就能用路由器的端口转发到这台虚拟机上了\u003c/p\u003e\n",
+      "Author": "PowerDi",
+      "PubDate": "2023-02-20T02:01:00Z"
+    },
+    {
+      "Title": "无锡前后端 - 酷工作",
+      "Link": "https://www.v2ex.com/t/917509",
+      "Description": "\u003cp\u003e招无锡前后端\n1 、初创小企业，\u003c/p\u003e\n\u003cp\u003e2 、后端 golang \t\t\t\t11-20k\u003c/p\u003e\n\u003cp\u003e3 、前端 React + Tailwindcss\t10-15k\u003c/p\u003e\n\u003cp\u003e4 、前期可远程（无锡地区），有项目分红。\u003c/p\u003e\n\u003cp\u003e5 、要求统招本科学历，5+年项目经验。年龄 25+，有 Python 经验优先。\u003c/p\u003e\n\u003cp\u003e联系方式 cXElMjAxNDQ0JXVGRjA4MzAwJXVGRjA5NDEx\u003c/p\u003e\n",
+      "Author": "pepecash",
+      "PubDate": "2023-02-20T02:00:36Z"
+    },
+    {
+      "Title": "macbookpro 充电用的时候麻麻的 - MacBook",
+      "Link": "https://www.v2ex.com/t/917508",
+      "Description": "\u003cp\u003e请问是正常情况吗？摸外壳会有这种感觉，漏电吧\u003c/p\u003e\n",
+      "Author": "Jason168",
+      "PubDate": "2023-02-20T01:59:52Z"
+    },
+    {
+      "Title": "上海联通 1000 兆还能办吗？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/917506",
+      "Description": "\u003cp\u003e下周搬到浦东，准备拉个联通的 1000 兆的那个，我看有人说去年年底就截至了，求问现在能不能办？顺便问问效果好不好，主要是打游戏的延迟啥的。\u003c/p\u003e\n",
+      "Author": "YDDDD",
+      "PubDate": "2023-02-20T01:52:26Z"
+    },
+    {
+      "Title": "关于 MySQL Gap Lock 和 Next-Key Lock 的一个问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/917504",
+      "Description": "\u003cp\u003eMySql 的隔离级别是可重复读\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eCREATE TABLE `t` (\n  `id` int(11) NOT NULL,\n  `c` int(11) DEFAULT NULL,\n  `d` int(11) DEFAULT NULL,\n  PRIMARY KEY (`id`),\n  KEY `c` (`c`)\n) ENGINE=InnoDB;\n\ninsert into t values(0,0,0),(5,5,5),\n(10,10,10),(15,15,15),(20,20,20),(25,25,25);\n\u003c/code\u003e\u003c/pre\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003esessionA\u003c/th\u003e\n\u003cth\u003esessionB\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003ebegin;\u003c/td\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eselect * from t where c \u0026gt;=15 and c\u0026lt;=20 order by c desc for update;\u003c/td\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003ctd\u003einsert into t (6,6,6);\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e为什么 sessionB 会阻塞?\n为什么在索引 c 上向左遍历，要扫描到 c=10 才停下来，next-key lock 会加到(5,10]？\n求解答\u003c/p\u003e\n",
+      "Author": "jiangcheng97",
+      "PubDate": "2023-02-20T01:50:40Z"
+    },
+    {
+      "Title": "知乎刷多了，总觉得三观和情绪被知乎给带歪了 - 分享发现",
+      "Link": "https://www.v2ex.com/t/917503",
+      "Description": "\u003cp\u003e15 年不知道什么原因接触到知乎，之后发现知乎是个好地方。从那开始，每天的摸鱼时光几乎都在知乎。\u003c/p\u003e\n\u003cp\u003e最近意识到一个事情，刷知乎的时候很多回答在刻意引导我的情绪，以及在向我灌输一些概念和观点。\u003c/p\u003e\n\u003cp\u003e最明显的就是关于是否生小孩，知乎上几乎所有的答案都在强调养孩子的艰难，以及对人生的坏影响。在之前几年对我的影响非常大，要不是后来自己有了小孩，就要信一辈子。除此，还有关于顶层设计的看法，还有对社会结构，人际关系等一系列问题的看法。\u003c/p\u003e\n\u003cp\u003e除了知乎，互联网上各个有人气的论坛好像都有这样的问题，我很不喜欢这种被灌输和引导的感觉。\u003c/p\u003e\n\u003cp\u003e所以大佬们有没有获取信息的好渠道，以及摸鱼的好去处？求个推荐\u003c/p\u003e\n",
+      "Author": "MonTubasa",
+      "PubDate": "2023-02-20T01:49:56Z"
+    },
+    {
+      "Title": "各位，有没可能把电视的系统刷成平板的系统！ - Android",
+      "Link": "https://www.v2ex.com/t/917502",
+      "Description": "\u003cp\u003e昨天看到电视上各种单独收费的软件，想着怎么搞才可以用我手机的会员呢\n忽然想到这个问题\u003c/p\u003e\n\u003cp\u003e或者机顶盒之类的有这样的可能么？\u003c/p\u003e\n\u003cp\u003e不是很懂硬件上的兼容和匹配之类的东西\u003c/p\u003e\n",
+      "Author": "cBlank",
+      "PubDate": "2023-02-20T01:47:59Z"
+    },
+    {
+      "Title": "btrfs 出现 corrupt leaf 的原因如何排查？ - Linux",
+      "Link": "https://www.v2ex.com/t/917501",
+      "Description": "\u003cp\u003e入手一台 Xiaomi Book Air 13 ，装 Debian testing 并使用 btrfs 作为文件系统。SSD 为 KIOXIA KBG50ZNV512G 。\u003c/p\u003e\n\u003cp\u003e短时间内出现了两次 corrupt leaf ，文件系统被挂载为只读。\u003c/p\u003e\n\u003cp\u003e重启后一切正常，btrfs scrub 或 btrfs check 均检测不到错误，smartctl 显示的 SMART 数据也没有错误。\u003c/p\u003e\n\u003cp\u003e请教下各位，这种情况该如何排查故障原因？需要换硬盘吗？\u003c/p\u003e\n",
+      "Author": "PhaSelEza",
+      "PubDate": "2023-02-20T01:47:17Z"
+    },
+    {
+      "Title": "两孩家庭，七座/六座需求，油车 SUV 大家会选哪一款？ - 汽车",
+      "Link": "https://www.v2ex.com/t/917500",
+      "Description": "电车很好，但是经常有几百公里的行程，所以不考虑纯电 /混动 /增程\u003cbr /\u003e云看车了几天，30-40w 价位：\u003cbr /\u003e1. 大众 途昂 /揽境，空间大，配置高，发动机舱还可以坐一个，但是据说地盘不太行\u003cbr /\u003e2. 福特 探险者，空间、配置、地盘都可以，2.3T 动力应该很强，但是垃圾车机不支持 carplay ，而且似乎淘宝上都没有加装 carplay 的 。长安的装配工艺也不太行\u003cbr /\u003e3. 别克 昂科旗，不太了解，就是看内饰有点老了，有车主现身说法吗？\u003cbr /\u003e4. 丰田 汉兰达 /陆放，nvh 拉垮，淘宝可以加装 carplay ，据说 30 度的坡上不了？",
+      "Author": "mrhhsg",
+      "PubDate": "2023-02-20T01:45:12Z"
+    },
+    {
+      "Title": "小巧的微信小程序样式库 - 微信",
+      "Link": "https://www.v2ex.com/t/917499",
+      "Description": "\u003ch1\u003e它能做什么？\u003c/h1\u003e\n\u003cp\u003e基本可以让你告别 wxss ，涵盖了大部分常用的样式。自己使用它写了 30+的页面，不需要再写额外的样式就能够实现常见的页面设计效果\u003c/p\u003e\n\u003ch1\u003e为什么做这个？\u003c/h1\u003e\n\u003cp\u003e一开始我是想找一个小程序垂直类的模板，找不到，找到的都太过于分散，而且五花八门。于是我就想是不是我可以做一个，然后就想着怎么做能让用户所见即所得且二次修改方便。后面的话就想到了基于 flex 的思想，通过拼错 class 的方式实现。\n还考虑到了另一个版权问题，我就想我得提供一个无版权问题的东西，于是就做了这么一个。\n当然这个可能对于一些非前端的工作者比较有用，专业的也不需要这个东西。\u003c/p\u003e\n\u003ch1\u003e开源\u003c/h1\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/vaaagle/VaaWxss\" rel=\"nofollow\"\u003ehttps://github.com/vaaagle/VaaWxss\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "vaaagle",
+      "PubDate": "2023-02-20T01:42:44Z"
+    },
+    {
+      "Title": "codepen copy 了一段代码，感觉挺好看 - 程序员",
+      "Link": "https://www.v2ex.com/t/917498",
+      "Description": "\u003cp\u003e昨晚在 codepen 找到了一段基于 flex 图文布局的代码，感觉挺好看的，用在了我的 \u003ca href=\"http://ddsl.net\" rel=\"nofollow\"\u003eddsl.net\u003c/a\u003e 网站上\u003c/p\u003e\n",
+      "Author": "wework",
+      "PubDate": "2023-02-20T01:42:23Z"
+    },
+    {
+      "Title": "有兄弟利用 github 来搭建私有 maven 库么？ - GitHub",
+      "Link": "https://www.v2ex.com/t/917497",
+      "Description": "\u003cp\u003e参考了一些文章，还是没有成功。访问的时候总是 401 或者其他的错误。\u003c/p\u003e\n\u003cp\u003e我不知道是不是要先开通\u003ccode\u003ePackage Service\u003c/code\u003e服务。免费账号是不是不可能了。\u003c/p\u003e\n\u003cp\u003e错误参考信息：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eYour request could not be authenticated by the GitHub Packages service. Please ensure your access token is valid and has the appropriate scopes configured.\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "zhwguest",
+      "PubDate": "2023-02-20T01:41:37Z"
+    },
+    {
+      "Title": "后端面试—关于系统设计与项目难点 - 职场话题",
+      "Link": "https://www.v2ex.com/t/917496",
+      "Description": "\u003cp\u003e最近想要跳槽，找了一些面试，八股文基本上都是临时抱佛脚可以抱一下，但是项目亮点和系统设计有点不知道如何下手，有几个疑问想问问大佬们的想法。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e老生常谈的项目亮点和遇到的难点是什么，这个需要说到什么粒度？比如我优化了一个本地缓存，本来是全局一个前缀树，解析字符串，根据 xxxx 的业务场景，改成了二级 map ，减小了锁的粒度。这么说是不是过于简单了？\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e面试官问了一个系统设计相关的题目：用户注册的用户名唯一，你会怎么设计。（原话，我想问一下上下文或者业务，面试官说要我自己想。）我说实现可以是插入 mysql 的时候使用主键来约束唯一性，问我还有没有别的办法，我没想出来。这种到底需要一个什么思路？要说得非常全面吗？\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e平时的工作中应该怎么挖掘和积累这种面试加分的东西？\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "balabalaXMX",
+      "PubDate": "2023-02-20T01:38:04Z"
+    },
+    {
+      "Title": "分享一个昨天在两个回收平台卖二手电脑的事情 - 问与答",
+      "Link": "https://www.v2ex.com/t/917495",
+      "Description": "\u003cp\u003e家里有一台 17 年闲置 MacBook 15 寸，都是顶配的，硬盘是 1T ，我不想放在闲鱼卖，担心别人扯皮。\u003c/p\u003e\n\u003cp\u003e去爱回收看，价格估算价格为 4600 ，昨天来上门回收说有一处磕碰，只能给 2700 。。我说这差太多了没办法买。 于是我又按照他说的磕碰，在他们小程序上选择了这个缺陷重新估价，报价 3900 。\u003c/p\u003e\n\u003cp\u003e然后我去了他们线下的门店，检测大概半小时，和我说屏幕有溢胶，其他的没问题 ，只能给 2200 = =！，我说那算了。\u003c/p\u003e\n\u003cp\u003e然后又去转转，还是选择那些机器情况流程，报价 3500 ，下午上门，检测完没问题打钱带走了。\u003c/p\u003e\n\u003cp\u003e中间又询问了两次淘宝的，一个叫易回收给了 3300 ，另一个可能是个人开的，给 2000 。大概就是这样，希望能给后面的人提供点经验。\u003c/p\u003e\n",
+      "Author": "muunala10221",
+      "PubDate": "2023-02-20T01:37:34Z"
+    },
+    {
+      "Title": "小区车位不让安充电桩的情况下，是买混动还是纯电？ - 汽车",
+      "Link": "https://www.v2ex.com/t/917494",
+      "Description": "\u003cp\u003e看中了比亚迪宋，但是是租的车位，没有买下，所以不能安充电桩。但是最近有充电桩的加油站五分钟能到，在这种情况下是买混动还是纯电合适？\u003c/p\u003e\n",
+      "Author": "DavidLeeMr",
+      "PubDate": "2023-02-20T01:36:52Z"
+    },
+    {
+      "Title": "问个很蠢的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/917492",
+      "Description": "\u003cp\u003e地方 ZF 大规模负债,做房地产的企业也大规模负债,居民买房子,买车后,也大规模负债,所以钱哪去了?难道都蒸发了?\u003c/p\u003e\n\u003cp\u003etips: 保存新主题过程中遇到一些问题：\n抱歉，内容中疑似包含敏感话题，请修改或者放弃发布\u003c/p\u003e\n",
+      "Author": "florentino",
+      "PubDate": "2023-02-20T01:34:08Z"
+    },
+    {
+      "Title": "苹果公司自己会公布 iPhone 每一代各个型号的销售数据吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/917490",
+      "Description": "我看网上基本都是靠着 14 跟 pro 的产品力、供应链减产、产品价格这些信息说 14 pro 销量大于 14\u003cbr /\u003e而看京东自营店的销售排行 14 的销量和评论明显又是多余 14 pro 的\u003cbr /\u003e\u003cbr /\u003e于是好奇苹果官方有没有类似的数据给公众？",
+      "Author": "rrZ2C",
+      "PubDate": "2023-02-20T01:31:07Z"
+    },
+    {
+      "Title": "电脑硬件升级求建议 - 硬件",
+      "Link": "https://www.v2ex.com/t/917489",
+      "Description": "\u003cp\u003e几年没有关注电脑硬件了, 最近想把电脑硬件升级一下, 求建议.\n目前电脑配置如下\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eCPU: AMD R5 1600\u003c/li\u003e\n\u003cli\u003e内存: 金士顾 DDR4 骇客神条 8Gx2\u003c/li\u003e\n\u003cli\u003e主板: 微星 B350 迫击炮\u003c/li\u003e\n\u003cli\u003e显卡: 微星红龙 1060 6G\u003c/li\u003e\n\u003cli\u003e硬盘: 三星 850EVO 256G + 浦科特 256G+ HDD 2T\u003c/li\u003e\n\u003cli\u003e电源: 海韵 Focus GX850\u003c/li\u003e\n\u003cli\u003e机箱: 先马趣造\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e这个配置目前 win11 也不能安装, 想升级下硬件安装 win11, 后续还可能会有一些剪辑视频的需求, 游戏的话, 计划等暗黑 4 出来后玩一下暗黑 4.\u003c/p\u003e\n\u003cp\u003e希望预算能尽量少一些😂\u003c/p\u003e\n\u003cp\u003e大佬们看下可以上面这些是现在没过时还可以再利用的, 哪些需要升级, 能不能推荐一些方案.\n过时的出二手的话, 价格一般是多少.\u003c/p\u003e\n",
+      "Author": "Jeremial",
+      "PubDate": "2023-02-20T01:30:41Z"
+    },
+    {
+      "Title": "我严重耳鸣一年多的治疗记录 - 生活",
+      "Link": "https://www.v2ex.com/t/917488",
+      "Description": "在虎扑发过一次，因为之前 v 站潜水时参考过相关的帖子，所以想着在这里也记录一下，如果有想参考的朋友直接看太长不看版就行了。\u003cbr /\u003e\u003cbr /\u003e一句话太长不看版：最好别治。（医院检查没问题后）\u003cbr /\u003e\u003cbr /\u003e我在很久之前就有耳鸣，当时可能是小时候一次感冒的原因，在发现耳鸣后也是照常去医院按常规方法一路检查开药点滴，没有任何效果，之后发现对生活也没什么影响，就对这个也无所谓了。\u003cbr /\u003e\u003cbr /\u003e但是前年年末的时候，因为工作原因，近距离接触了一次大噪音的机器，由于我当时戴着耳塞所以没感觉会有多大影响，但完事之后立马发现不对劲了，耳朵响的要命，做什么都无法急中精力，尤其是在有时候精力下降或者心烦的时候，耳朵里的尖啸简直让人崩溃的想要大喊。我意识到这次可能真的有点致命了，靠以前那样自己适应不太行了，于是想着主动采取点措施。\u003cbr /\u003e\u003cbr /\u003e第一自然还是去医院了，协和、同仁、首都耳鼻喉都去过，还去线下见过抖音知乎上的专家，高压氧点滴中药都做过，然而即使这回情况变得严重许多，治疗的经历却和我小时候没有什么差别，到最后依然会被专家们归结到“心理适应”。哎，一阵心窒，中间最让我郁闷的是很多医院只认自己的检查结果，所以我每换一家医院都要重头花好几百把我的耳朵做出来个一模一样的检查报告来。。窒息\u003cbr /\u003e\u003cbr /\u003e回到家呆了几个月，发现难受的要死，死活适应不了，不被理解的痛苦更让人感到无力，于是又开始寻找解决方法。\u003cbr /\u003e\u003cbr /\u003e最开始是三个月的文拉法辛，期间确实感觉高频的声音变小了一点，但低频的声音变得越来越响，但总体感觉服用期间还是比之前舒服一些的，感觉是低频的声音分散了原本高频的注意力，低频的声音不会像高频那样神经敏感，惹人烦躁。就这样服用了三个月后，准备停药看看情况，但是我去，耳鸣直接加倍了，跟旁边有个机器一样一直在响，额，失败。\u003cbr /\u003e\u003cbr /\u003e接着服用了鱼油、大豆卵磷脂一月，无用，隐隐有一点加重趋势。\u003cbr /\u003e\u003cbr /\u003e接着是 NAC （ N-乙酰半胱氨酸），原本买了很多，结果服用了两天后感觉明显升高，弃。\u003cbr /\u003e\u003cbr /\u003e复合维生素，没什么感觉。\u003cbr /\u003e\u003cbr /\u003e左旋赖氨酸，没什么感觉。\u003cbr /\u003e\u003cbr /\u003e吡啶甲酸锌，感觉到在加重。\u003cbr /\u003e\u003cbr /\u003e苹果醋，好像是心理作用，没感觉对耳鸣有什么影响，但是感觉耳朵舒服了些。\u003cbr /\u003e\u003cbr /\u003e黑芝麻，没什么感觉。\u003cbr /\u003e\u003cbr /\u003e茶氨酸，没什么感觉。\u003cbr /\u003e\u003cbr /\u003eL-苏糖酸镁，2 天弃，耳鸣明显加重。\u003cbr /\u003e\u003cbr /\u003e牛磺酸，同苹果醋，对感觉没什么影响，就感觉耳朵舒服了些。\u003cbr /\u003e\u003cbr /\u003e乳清酸锂，1 粒弃，耳鸣明显加重。\u003cbr /\u003e\u003cbr /\u003e即使在我不服药的时候，依然有耳鸣加重的感觉，这种感觉大大加重着我的焦虑，驱使着我去找新的药，即使我每次出门都戴耳塞，每天吃饭都尽量减糖减盐，依然不可避免这种加重。\u003cbr /\u003e\u003cbr /\u003e总结下来，如果有同样受耳鸣困扰的朋友看到，总结是最好别治，病友论坛上有许多幸运儿，可惜不会是我。自打有耳鸣后，我的每一次赌注都没有赢过，幸运未再降临于我。\u003cbr /\u003e\u003cbr /\u003e接下来我准备尝试生酮饮食，如果后续有什么进展会继续记录。",
+      "Author": "shenhualv7",
+      "PubDate": "2023-02-20T01:29:58Z"
+    },
+    {
+      "Title": "挑战全网最复杂的一两个 flutter UI - Flutter",
+      "Link": "https://www.v2ex.com/t/917487",
+      "Description": "\u003cp\u003e挑战全网最复杂的一两个 flutterUI ，\n现在在做直播，\n直播的动画层，\n在 flutter 上有比较明显的卡顿，\n优化后，还是有些许卡顿，\n所以 flutter 对复杂界面的处理还有些许欠缺\n可以比较下谁的界面最复杂\u003c/p\u003e\n",
+      "Author": "dd991",
+      "PubDate": "2023-02-20T01:26:44Z"
+    },
+    {
       "Title": "New Bing 手机端和 PC 端资格不一样的？ - 程序员",
       "Link": "https://www.v2ex.com/t/917486",
       "Description": "\u003cp\u003e8 号申请的，整整一周才通过。在 PC 端浏览器可以正常使用了。iOS 上用申请通过的账号登录，居然还要重新申请重新加入？\u003c/p\u003e\n",
