@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "我用 Homebrew Cask 中社区维护的规则写了一个软件残留文件清理插件 - 分享创造",
+      "Link": "https://www.v2ex.com/t/917790",
+      "Description": "\u003cp\u003e之前我就在 V2EX 就分享过用 \u003ccode\u003ebrew uninstall --zap\u003c/code\u003e 来清理软件残留，有 39 个人给我点了感谢（\u003ca href=\"https://v2ex.com/t/834735#r_11378562\" rel=\"nofollow\"\u003e地址\u003c/a\u003e）。\u003c/p\u003e\n\u003cp\u003e我是觉得 Homebrew 里这个社区维护的软件残留列表（或者说清理规则）是非常有价值的，比如我们随便找一个软件，它的 \u003ca href=\"https://github.com/Homebrew/homebrew-cask/blob/master/Casks/bitbar.rb\" rel=\"nofollow\"\u003ecask 文件\u003c/a\u003e 是这样的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e$ brew cat bitbar\ncask \"bitbar\" do\n  version \"1.10.1\"\n  sha256 \"8a7013dca92715ba80cccef98b84dd1bc8d0b4c4b603f732e006eb204bab43fa\"\n\n  url \"https://github.com/matryer/bitbar/releases/download/v#{version}/BitBar.app.zip\"\n  name \"BitBar\"\n  desc \"Utility to display the output from any script or program in the menu bar\"\n  homepage \"https://github.com/matryer/bitbar/\"\n\n  app \"BitBar.app\"\n\n  zap trash: [\n    \"~/Library/BitBar Plugins\",\n    \"~/Library/Caches/com.matryer.BitBar\",\n    \"~/Library/Preferences/com.matryer.BitBar.plist\",\n  ]\nend\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其中 \u003ccode\u003ezap\u003c/code\u003e 部分就是需要清理的遗留文件。\u003c/p\u003e\n\u003cp\u003e于是我做了一个插件可以一键扫描 Homebrew Cask 中所有软件（目前支持其中约 3400 个）的 cask 文件中的路径，找出已卸载软件的遗留文件：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.v2ex.co/Oq02jsJk.jpeg\"/\u003e\u003c/p\u003e\n\u003cp\u003e项目的源代码在 \u003ca href=\"https://github.com/jysperm/homebrew-leftover-scanner\" rel=\"nofollow\"\u003ehttps://github.com/jysperm/homebrew-leftover-scanner\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e安装：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ebrew tap jysperm/leftover-scanner\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e开始扫描：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ebrew scan-leftovers\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这个插件本身并不会删除任何文件，而是会打印出列表并引导你使用 \u003ccode\u003ebrew uninstall\u003c/code\u003e 来删除，所以不必担心误删。\u003c/p\u003e\n",
+      "Author": "jybox",
+      "PubDate": "2023-02-20T23:22:26Z"
+    },
+    {
       "Title": "支持文件级别 dedup 的对象存储服务端？ - 程序员",
       "Link": "https://www.v2ex.com/t/917789",
       "Description": "\u003cp\u003e调研了一下 Minio 和 Seaweedfs ，感觉这些实现都支持 replication 和 erasure coding ，但是不支持 dedup 。那么有支持 dedup 的对象存储实现嘛？\u003c/p\u003e\n\u003cp\u003e如果没有是不是我可以跑一个服务端 over btrfs ，然后用 brtfs 的 file level dedup ？问题在于如果用 btrfs （或者 zfs ）做底层，那 fs 层面的很多复杂功能都和软件层提供的功能重复了。\u003c/p\u003e\n",
