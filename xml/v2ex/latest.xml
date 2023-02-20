@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Nuxt3 问题求解 - 前端开发</title>
+      <link>https://www.v2ex.com/t/917730</link>
+      <description>&lt;p&gt;最近没事在学习 nuxt&lt;/p&gt;&#xA;&lt;p&gt;前端为 Nuxt3 写的，开启 SSR&lt;/p&gt;&#xA;&lt;p&gt;后端为 Node 写的服务&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;nuxt.config.ts&lt;/strong&gt;文件中设置代理&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;nitro: {&#xA;    devProxy: {&#xA;      &#39;/api/&#39;: {&#xA;        target: &#39;http://127.0.0.1:3001/api/&#39;,&#xA;        changeOrigin: true&#xA;      }&#xA;    }&#xA;  },&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在 nuxt3 项目页面中使用$fetch(&#39;/api/xxx&#39;) 可以使用且正确返回&lt;/p&gt;&#xA;&lt;p&gt;在 middleware 中间件（不是 server 的中间件）做拦截，需要请求接口判断一些东西&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;export default defineNuxtRouteMiddleware(async (to, from) =&amp;gt; {&#xA;&#x9;const result = await $fetch(&#39;/api/config/info&#39;)&#xA;  // $fetch(&#39;http://127.0.0.1:3001/api/config/info&#39;) 这样写全链接就能访问到&#xA;})&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在中间件请求$fetch(&#39;/api/config/info&#39;) 会提示 404 Page not found （似乎是把这样的接口认为是项目本身的页接口了），使用全链接接口能正常返回，但是我发现部署到服务器之后，他是在前端发起的请求？为什么，不是服务端渲染后返回的吗？&lt;/p&gt;&#xA;&lt;p&gt;问：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如何在中间件中请求 API ？&lt;/li&gt;&#xA;&lt;li&gt;写 /api/xxx 部署到服务器运行的时候，会提示 No match found for location with path ，说是本地运行的接口&lt;/li&gt;&#xA;&lt;li&gt;能不能像正常的前端项目那样，本地起代理服务器 /api 转发代理到本地方便调试、部署项目到服务器时匹配 /api 而不会报 404 Page not found 的错误？&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>PEax</author>
+      <pubDate>20 Feb 2023 11:33:01 +0000</pubDate>
+    </item>
+    <item>
       <title>需要集成个工作流，做个审批系统，有开源的可以直接用的么？ - 开源软件</title>
       <link>https://www.v2ex.com/t/917727</link>
       <description>&lt;p&gt;找了几个发现都是工作流引擎，做起来还是比较麻烦，有能直接用的么？&lt;/p&gt;&#xA;</description>

@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Nuxt3 问题求解 - 前端开发",
+      "Link": "https://www.v2ex.com/t/917730",
+      "Description": "\u003cp\u003e最近没事在学习 nuxt\u003c/p\u003e\n\u003cp\u003e前端为 Nuxt3 写的，开启 SSR\u003c/p\u003e\n\u003cp\u003e后端为 Node 写的服务\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003enuxt.config.ts\u003c/strong\u003e文件中设置代理\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003enitro: {\n    devProxy: {\n      '/api/': {\n        target: 'http://127.0.0.1:3001/api/',\n        changeOrigin: true\n      }\n    }\n  },\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在 nuxt3 项目页面中使用$fetch('/api/xxx') 可以使用且正确返回\u003c/p\u003e\n\u003cp\u003e在 middleware 中间件（不是 server 的中间件）做拦截，需要请求接口判断一些东西\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003eexport default defineNuxtRouteMiddleware(async (to, from) =\u0026gt; {\n\tconst result = await $fetch('/api/config/info')\n  // $fetch('http://127.0.0.1:3001/api/config/info') 这样写全链接就能访问到\n})\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在中间件请求$fetch('/api/config/info') 会提示 404 Page not found （似乎是把这样的接口认为是项目本身的页接口了），使用全链接接口能正常返回，但是我发现部署到服务器之后，他是在前端发起的请求？为什么，不是服务端渲染后返回的吗？\u003c/p\u003e\n\u003cp\u003e问：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e如何在中间件中请求 API ？\u003c/li\u003e\n\u003cli\u003e写 /api/xxx 部署到服务器运行的时候，会提示 No match found for location with path ，说是本地运行的接口\u003c/li\u003e\n\u003cli\u003e能不能像正常的前端项目那样，本地起代理服务器 /api 转发代理到本地方便调试、部署项目到服务器时匹配 /api 而不会报 404 Page not found 的错误？\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "PEax",
+      "PubDate": "2023-02-20T11:33:01Z"
+    },
+    {
       "Title": "需要集成个工作流，做个审批系统，有开源的可以直接用的么？ - 开源软件",
       "Link": "https://www.v2ex.com/t/917727",
       "Description": "\u003cp\u003e找了几个发现都是工作流引擎，做起来还是比较麻烦，有能直接用的么？\u003c/p\u003e\n",
