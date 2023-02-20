@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>需要集成个工作流，做个审批系统，有开源的可以直接用的么？ - 开源软件</title>
+      <link>https://www.v2ex.com/t/917727</link>
+      <description>&lt;p&gt;找了几个发现都是工作流引擎，做起来还是比较麻烦，有能直接用的么？&lt;/p&gt;&#xA;</description>
+      <author>xsi640</author>
+      <pubDate>20 Feb 2023 10:53:04 +0000</pubDate>
+    </item>
+    <item>
       <title>gitlab docker-file 配置域名请教 - 程序员</title>
       <link>https://www.v2ex.com/t/917726</link>
       <description>&lt;pre&gt;&lt;code&gt;version: &#39;3.3&#39;&#xA;services:&#xA;  gitlab:&#xA;    image: gitlab/gitlab-ce:latest&#xA;    container_name: gitlab-ce&#xA;    hostname: gitlab.test.com&#xA;    restart: always&#xA;    environment:&#xA;      GITLAB_OMNIBUS_CONFIG: |&#xA;        external_url &#39;http://gitlab.test.com:8000&#39;&#xA;        gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 22&#xA;        puma[&#39;worker_timeout&#39;] = 30&#xA;        gitlab_rails[&#39;time_zone&#39;] = &#39;Asia/Shanghai&#39;&#xA;        puma[&#39;worker_processes&#39;] = 2&#xA;        postgresql[&#39;shared_buffers&#39;] = &#34;256MB&#34;&#xA;        sidekiq[&#39;max_concurrency&#39;] = 8&#xA;        postgresql[&#39;max_worker_processes&#39;] = 4&#xA;        puma[&#39;per_worker_max_memory_mb&#39;] = 600&#xA;        prometheus_monitoring[&#39;enable&#39;] = false&#xA;        sidekiq[&#39;min_concurrency&#39;] = 8&#xA;    ports:&#xA;      - &#34;8000:80&#34;&#xA;      - &#34;8822:22&#34;&#xA;    volumes:&#xA;      - &#39;./gitlab/config:/etc/gitlab&#39;&#xA;      - &#39;./gitlab/logs:/var/log/gitlab&#39;&#xA;      - &#39;./gitlab/data:/var/opt/gitlab&#39;&#xA;    networks:&#xA;      - gitlab&#xA;&#xA;  gitlab-runner:&#xA;    image: gitlab/gitlab-runner:alpine&#xA;    restart: always&#xA;    depends_on:&#xA;      - gitlab&#xA;    volumes:&#xA;      - ./gitlab/gitlab-runner:/etc/gitlab-runner&#xA;      - /var/run/docker.sock:/var/run/docker.sock&#xA;      - /bin/docker:/bin/docker&#xA;    networks:&#xA;      - gitlab&#xA;&#xA;networks:&#xA;  gitlab:&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这是一份 gitlab docker 文件。现在我想配置域名来访问它，大家看下 external_url 这里是不是有问题，一直提示 502&lt;/p&gt;&#xA;</description>
