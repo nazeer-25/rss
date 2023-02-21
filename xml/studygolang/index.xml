@@ -42,11 +42,6 @@
       <description>&lt;p&gt;比如：正常main调用函数直接调用，可否类似PHP HOOK那样，去调用，这样main腾出来可以处理其他，否则main会卡在哪里等函数执行完毕，&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我想过用异步，但是异步调用函数的话，貌似得不到最终的HTTPGET错误OR成功响应值，我像得到返回响应值写到SQL日志中&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func main(){&#xA;&#x9;HTTPBODY()&lt;br&gt;&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func HTTPBODY()string{&#xA;&#x9;//RESULT:GET URL&#xA;&#x9;return RESULT&#xA;}&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>求问，go语言圣经里面的代码配色是那个主题</title>
-      <link>https://studygolang.com/topics/16151#reply1</link>
-      <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230218/fa8c578f8de39e9f550cde43f037584b.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>Gin框架ShouldBind用法与gorm，has many关联的疑问</title>
       <link>https://studygolang.com/topics/16154#reply0</link>
       <description>&lt;h3&gt;Code&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;&#x9;r := gin.Default()&#xA;&#xA;&#x9;r.GET(&amp;quot;/api/v1/get&amp;quot;, func(ctx *gin.Context) {&#xA;&#x9;&#x9;var query model.User&#xA;&#xA;&#x9;&#x9;ctx.ShouldBind(&amp;amp;query)&#xA;&#xA;&#x9;&#x9;fmt.Println(query)&#xA;&#xA;&#x9;&#x9;// result := db.Get(&amp;amp;query)&#xA;&#xA;&#x9;&#x9;ctx.JSON(http.StatusOK, gin.H{&#xA;&#x9;&#x9;&#x9;&amp;quot;data&amp;quot;: query,&#xA;&#x9;&#x9;})&#xA;&#x9;})&#xA;&#xA;&#x9;r.Run(&amp;quot;:80&amp;quot;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h4&gt;可以解析出关联结构体中的&lt;code&gt;Product&lt;/code&gt;字段&lt;/h4&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type User struct{&#xA;&#x9;Name string&#xA;&#x9;Password string&#xA;&#x9;Orders Order&#xA;}&#xA;&#xA;type Order struct{&#xA;&#x9;Product string&#xA;&#x9;UserID uint&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;结果：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{&#xA;    &amp;quot;data&amp;quot;: {&#xA;        &amp;quot;Name&amp;quot;: &amp;quot;jackson&amp;quot;,&#xA;        &amp;quot;Orders&amp;quot;: {&#xA;            &amp;quot;Product&amp;quot;: &amp;quot;fish&amp;quot;,&#xA;            &amp;quot;UserID&amp;quot;: 0&#xA;        }&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h4&gt;但是想通过&lt;code&gt;gorm&lt;/code&gt;实现&lt;code&gt;has many&lt;/code&gt;写法应如下，但是这种写法用&lt;code&gt;Shouldbind&lt;/code&gt;方法就不能绑定到&lt;code&gt;Order.Product&lt;/code&gt;。&lt;/h4&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type User struct{&#xA;&#x9;Name string&#xA;&#x9;Password string&#xA;&#x9;Orders []Order&#xA;}&#xA;&#xA;type Order struct{&#xA;&#x9;Product string&#xA;&#x9;UserID uint&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;结果：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{&#xA;    &amp;quot;data&amp;quot;: {&#xA;        &amp;quot;Name&amp;quot;: &amp;quot;jackson&amp;quot;,&#xA;        &amp;quot;Orders&amp;quot;: null&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;请指点一种便捷高效的查询方法，当前端传入任意数据，只要匹配设计表中字段（如User或Order中任意字段）则返回所有关联的表数据。练手写项目折腾好几天了，希望能够得到有效答案，感激不尽！&lt;/p&gt;&#xA;</description>
@@ -85,6 +80,11 @@
       <title>Go写的第一个网站，大家看看速度快不快？</title>
       <link>https://studygolang.com/topics/14460#reply99</link>
       <description>&lt;p&gt;这个是我用Go写的第一个网站，&#xA;&lt;a href=&#34;https://www.qqx.com/&#34;&gt;https://www.qqx.com/&lt;/a&gt;&#xA;大家看看速度快不快？&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>求问，go语言圣经里面的代码配色是那个主题</title>
+      <link>https://studygolang.com/topics/16151#reply1</link>
+      <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230218/fa8c578f8de39e9f550cde43f037584b.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>有没有人 有拼多多 自动上货软件的源代码 拿出来分享一下？或者拼多多上货助手的源代码。</title>
