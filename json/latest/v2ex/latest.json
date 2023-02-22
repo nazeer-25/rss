@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如何打印某个类下面的所有方法的值? - Java",
+      "Link": "https://www.v2ex.com/t/918319",
+      "Description": "\u003cp\u003e我的代码:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003eObject o = android.net.wifi.WifiInfo;\n        Class cls = o.getClass();\n        //将参数类转换为对应属性数量的 Field 类型数组（即该类有多少个属性字段 N 转换后的数组长度即为 N ）\n        Field[] fields = cls.getDeclaredFields();\n        for(int i = 0;i \u0026lt; fields.length; i ++){\n            Field f = fields[i];\n            f.setAccessible(true);\n            try {\n                Log.i(TAG,\"属性名：\"+f.getName()+\"；属性值：\"+f.get(o)+\";字段类型：\" + f.getGenericType());\n            } catch (IllegalArgumentException | IllegalAccessException e) {\n                // TODO Auto-generated catch block\n                e.printStackTrace();\n                Log.i(TAG,\"ReflectUtil error:\"+e.toString());\n            }\n        }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e实际打印:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e 属性名：accessFlags ；属性值：524289;字段类型：int\n属性名：classLoader ；属性值：null;字段类型：class java.lang.ClassLoader\n属性名：clinitThreadId ；属性值：27797;字段类型：int\n属性名：dexCache ；属性值： java.lang.DexCache@6b5075c;字段类型：class java.lang.Object\n属性名：dexClassDefIndex ；属性值：147;字段类型：int\n属性名：ifTable ；属性值：[Ljava.lang.Object;@7a5a65;字段类型：class [Ljava.lang.Object;\n属性名：name ；属性值：android.net.wifi.WifiInfo;字段类型：class java.lang.String\n属性名：objectSize ；属性值：152;字段类型：int\n属性名：status ；属性值：-536870912;字段类型：int\n属性名：serialVersionUID ；属性值：3206093459760846163;字段类型：long\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这是不对的,正确的应该是:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003eClass\u0026lt;?\u0026gt; wifiInfoClass = Class.forName(android.net.wifi.WifiInfo.class.getName());\n            Method[] methods = wifiInfoClass.getDeclaredMethods();\n            Log.i(TAG,\"total function is \" + methods.length);\n            for (Method method : methods) {\n                Log.i(TAG,\" \" + method.getName());\n\n            }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是我不知道怎么打印出所有方法的值, 求指点\u003c/p\u003e\n",
+      "Author": "yhm2046",
+      "PubDate": "2023-02-22T09:48:08Z"
+    },
+    {
       "Title": "M2 Mac Mini 外接明基 EW2880U 显示器，偏色严重怎么办 - MacBook Pro",
       "Link": "https://www.v2ex.com/t/918318",
       "Description": "\u003cp\u003e色彩描述文件选的默认的 EW2880U\u003c/p\u003e\n",
