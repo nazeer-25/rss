@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "ts 有办法隐式修改 class constructor 的类型吗? - TypeScript",
+      "Link": "https://www.v2ex.com/t/918516",
+      "Description": "\u003cp\u003e我想给 callable object 加上 function 类型提示\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e// refer to: https://medium.com/@adrien.za/creating-callable-objects-in-javascript-fbf88db9904\nclass Callable extends Function {\n  constructor() {\n    super('return arguments.callee._call(...arguments)')\n  }\n}\nclass AjaxFactory extends Callable{\n  constructor(){\n    super()\n  }\n  _call(url:string, init?:RequestInit) {\n    //middleware(init)\n    return fetch(url, init)\n  }\n  //use(middleware){...}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e每次创建新对象时，调用方总是要类型转换一下，才能获得类型提示\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003etype AjaxFactoryF = AjaxFactory \u0026amp; AjaxFactory['_call']\n\nconst request=\u0026lt;AjaxFactoryF\u0026gt;(new AjaxFactory())　//使用方要进行一下类型转换\n\n//request.use(middleware)\nrequest('http://x.com').then(resp=\u0026gt;console.log(resp))\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e有办法简化吗？隐式修改 class constructor 的类型？\u003c/p\u003e\n",
+      "Author": "a132811",
+      "PubDate": "2023-02-23T05:11:39Z"
+    },
+    {
+      "Title": "这是房子问题还是中介问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/918515",
+      "Description": "正在卖二手房，房子维护的很不错，五明的，之前卖的价格我们觉得正好，因为楼上那户也是这个价格，均价比同小区高 200 块钱 /平。  找了某佑中介，代理了一个月一个看房的都没，期间建议办贝壳好赞大约 5 次。且中途让我们降价 3 次，总共降了 9 万，好赞我们没办。最后一次降价之后，平均每天来 2 组客户看房，持续了 4 天，但是都没音讯，也没说他们的心里价位。   今天是第八天，从第四天到第八天一组客户都没来，小区据说每个月成交 20 户左右。  第五天的时候中介又建议我们办好赞。。。   我想房价不高了，已经低于我们小区均价，而且我们的装修保值，户型南北，五明的房子，性价比很高，就没办。 好赞是平台会收取放款 1%的手续费，卖不出去不花钱。。。   想不明白啥问题，一直很信任中介，甚至没找别的中介代理。\u003cbr /\u003e大佬们帮忙分析分析，可能是啥原因呀，这中介靠谱吗？能换维护人不。。下一步该咋办呀。。我感觉这中介会继续让我们办好赞，让降价。",
+      "Author": "dtgxx",
+      "PubDate": "2023-02-23T05:10:39Z"
+    },
+    {
       "Title": "薅 YouTube 的羊毛：免费无限文件存储 - 分享发现",
       "Link": "https://www.v2ex.com/t/918514",
       "Description": "看到个有趣的 \u003ca target=\"_blank\" href=\"https://github.com/DvorakDwarf/Infinite-Storage-Glitch\" rel=\"nofollow noopener\"\u003ehttps://github.com/DvorakDwarf/Infinite-Storage-Glitch\u003c/a\u003e\u003cbr /\u003e原理其实挺简单，把文件数据转成视频，上传到油管。转换出来的视频文件比原文件大很多，4+倍。\u003cbr /\u003e因为油管视频是免费无限上传的，所有理论上就可以存无限文件了。",

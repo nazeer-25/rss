@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ts 有办法隐式修改 class constructor 的类型吗? - TypeScript</title>
+      <link>https://www.v2ex.com/t/918516</link>
+      <description>&lt;p&gt;我想给 callable object 加上 function 类型提示&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;// refer to: https://medium.com/@adrien.za/creating-callable-objects-in-javascript-fbf88db9904&#xA;class Callable extends Function {&#xA;  constructor() {&#xA;    super(&#39;return arguments.callee._call(...arguments)&#39;)&#xA;  }&#xA;}&#xA;class AjaxFactory extends Callable{&#xA;  constructor(){&#xA;    super()&#xA;  }&#xA;  _call(url:string, init?:RequestInit) {&#xA;    //middleware(init)&#xA;    return fetch(url, init)&#xA;  }&#xA;  //use(middleware){...}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;每次创建新对象时，调用方总是要类型转换一下，才能获得类型提示&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;type AjaxFactoryF = AjaxFactory &amp;amp; AjaxFactory[&#39;_call&#39;]&#xA;&#xA;const request=&amp;lt;AjaxFactoryF&amp;gt;(new AjaxFactory())　//使用方要进行一下类型转换&#xA;&#xA;//request.use(middleware)&#xA;request(&#39;http://x.com&#39;).then(resp=&amp;gt;console.log(resp))&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;有办法简化吗？隐式修改 class constructor 的类型？&lt;/p&gt;&#xA;</description>
+      <author>a132811</author>
+      <pubDate>23 Feb 2023 05:11:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>这是房子问题还是中介问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/918515</link>
+      <description>正在卖二手房，房子维护的很不错，五明的，之前卖的价格我们觉得正好，因为楼上那户也是这个价格，均价比同小区高 200 块钱 /平。  找了某佑中介，代理了一个月一个看房的都没，期间建议办贝壳好赞大约 5 次。且中途让我们降价 3 次，总共降了 9 万，好赞我们没办。最后一次降价之后，平均每天来 2 组客户看房，持续了 4 天，但是都没音讯，也没说他们的心里价位。   今天是第八天，从第四天到第八天一组客户都没来，小区据说每个月成交 20 户左右。  第五天的时候中介又建议我们办好赞。。。   我想房价不高了，已经低于我们小区均价，而且我们的装修保值，户型南北，五明的房子，性价比很高，就没办。 好赞是平台会收取放款 1%的手续费，卖不出去不花钱。。。   想不明白啥问题，一直很信任中介，甚至没找别的中介代理。&lt;br /&gt;大佬们帮忙分析分析，可能是啥原因呀，这中介靠谱吗？能换维护人不。。下一步该咋办呀。。我感觉这中介会继续让我们办好赞，让降价。</description>
+      <author>dtgxx</author>
+      <pubDate>23 Feb 2023 05:10:39 +0000</pubDate>
+    </item>
+    <item>
       <title>薅 YouTube 的羊毛：免费无限文件存储 - 分享发现</title>
       <link>https://www.v2ex.com/t/918514</link>
       <description>看到个有趣的 &lt;a target=&#34;_blank&#34; href=&#34;https://github.com/DvorakDwarf/Infinite-Storage-Glitch&#34; rel=&#34;nofollow noopener&#34;&gt;https://github.com/DvorakDwarf/Infinite-Storage-Glitch&lt;/a&gt;&lt;br /&gt;原理其实挺简单，把文件数据转成视频，上传到油管。转换出来的视频文件比原文件大很多，4+倍。&lt;br /&gt;因为油管视频是免费无限上传的，所有理论上就可以存无限文件了。</description>
