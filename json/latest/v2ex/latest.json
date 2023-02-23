@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "为何 shell 脚本变量传入任意方法后会被内部的循环体的同名遍历变量的值所覆盖？ - Linux",
+      "Link": "https://www.v2ex.com/t/918639",
+      "Description": "\u003cp\u003e源码（后文 listA 和 listB 数组简称 A 数组和 B 数组）：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e#!/bin/bash\nAA(){\n    for ii in \"${listB[@]}\"; do   #|\n        :                         #| ==\u0026gt; 这 AA 方法中的 for 循环目的是遍历 B 数组，但什么都不做。\n    done                          #|\n}\n\nlistA=(1)                  #\nlistB=(a b c d)            #___这四行仅仅定义和打印出两个数组中的元素（后文结果中的前两行内容）\necho \"listA: ${listA[@]}\"  #\necho \"listB: ${listB[@]}\"  #\n\nfor ii in \"${listA[@]}\"; do\n    echo \"在 AA 方法前的值: ${ii}\" # 传 ii 给方法 AA 前看值是多少\n    AA \"${ii}\"                  # 将遍历的 ii 传给方法 AA\n    echo \"在 AA 方法后的值: ${ii}\" # 传 ii 给方法 AA 后看值是多少\ndone\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e输出结果：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003elistA: 1\nlistB: a b c d\n在 AA 方法前的值: 1\n在 AA 方法后的值: d\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可以看到：遍历数组 A 时所用的变量 ii 和方法内遍历数组 B 时所用变量是相同的，但这变量 ii 为何是全局变量啊？我尝试了以下写法：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e只在遍历数组 A 之前加入 \u003ccode\u003elocal ii\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e只在方法 AA 中遍历数组 B 之前加入 \u003ccode\u003elocal ii\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e以上两个写法都安排上\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e好像最终输出的都是 listB 数组的最后一个元素值，这又是怎么个操作？\n有点懵，以前没遇到过，有大佬解惑吗？\u003c/p\u003e\n",
+      "Author": "mylovesaber",
+      "PubDate": "2023-02-23T10:57:57Z"
+    },
+    {
       "Title": "同一代核心数相同的桌面和移动 CPU 到底有多大性能差别 - 问与答",
       "Link": "https://www.v2ex.com/t/918637",
       "Description": "在考虑下一个开发机要不要换成台式机。\u003cbr /\u003e\u003cbr /\u003e后端开发，需要用到 docker ，核心 /线程至少 16 起。",
