@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>失业/自由人/可捞/求全职或者远程 - 程序员</title>
+      <link>https://www.v2ex.com/t/918640</link>
+      <description>&lt;h1&gt;技术栈&lt;/h1&gt;&#xA;&lt;p&gt;围绕 Web 方向&lt;/p&gt;&#xA;&lt;p&gt;前端: &lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;React&lt;/li&gt;&#xA;&lt;li&gt;Vue&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;后端: &lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Ruby&lt;/li&gt;&#xA;&lt;li&gt;Node.js&lt;/li&gt;&#xA;&lt;li&gt;Python&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;最近做过的一些业务范围：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Hybrid Web H5&lt;/li&gt;&#xA;&lt;li&gt;官网&lt;/li&gt;&#xA;&lt;li&gt;中台&lt;/li&gt;&#xA;&lt;li&gt;活动&lt;/li&gt;&#xA;&lt;li&gt;SEO&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;具体可以联系我，交个朋友：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Mail(base64): bWFyay56aGFuZ3lvdW5nQHFxLmNvbQ==&lt;/li&gt;&#xA;&lt;li&gt;Wechat(base64): anNkaHpoYW5n&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>Mark24</author>
+      <pubDate>23 Feb 2023 11:13:05 +0000</pubDate>
+    </item>
+    <item>
       <title>为何 shell 脚本变量传入任意方法后会被内部的循环体的同名遍历变量的值所覆盖？ - Linux</title>
       <link>https://www.v2ex.com/t/918639</link>
       <description>&lt;p&gt;源码（后文 listA 和 listB 数组简称 A 数组和 B 数组）：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;#!/bin/bash&#xA;AA(){&#xA;    for ii in &#34;${listB[@]}&#34;; do   #|&#xA;        :                         #| ==&amp;gt; 这 AA 方法中的 for 循环目的是遍历 B 数组，但什么都不做。&#xA;    done                          #|&#xA;}&#xA;&#xA;listA=(1)                  #&#xA;listB=(a b c d)            #___这四行仅仅定义和打印出两个数组中的元素（后文结果中的前两行内容）&#xA;echo &#34;listA: ${listA[@]}&#34;  #&#xA;echo &#34;listB: ${listB[@]}&#34;  #&#xA;&#xA;for ii in &#34;${listA[@]}&#34;; do&#xA;    echo &#34;在 AA 方法前的值: ${ii}&#34; # 传 ii 给方法 AA 前看值是多少&#xA;    AA &#34;${ii}&#34;                  # 将遍历的 ii 传给方法 AA&#xA;    echo &#34;在 AA 方法后的值: ${ii}&#34; # 传 ii 给方法 AA 后看值是多少&#xA;done&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;输出结果：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;listA: 1&#xA;listB: a b c d&#xA;在 AA 方法前的值: 1&#xA;在 AA 方法后的值: d&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可以看到：遍历数组 A 时所用的变量 ii 和方法内遍历数组 B 时所用变量是相同的，但这变量 ii 为何是全局变量啊？我尝试了以下写法：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;只在遍历数组 A 之前加入 &lt;code&gt;local ii&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;只在方法 AA 中遍历数组 B 之前加入 &lt;code&gt;local ii&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;以上两个写法都安排上&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;好像最终输出的都是 listB 数组的最后一个元素值，这又是怎么个操作？&#xA;有点懵，以前没遇到过，有大佬解惑吗？&lt;/p&gt;&#xA;</description>
