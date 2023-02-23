@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>链路跟踪框架为什么要在服务消费侧创建 Span - Java</title>
+      <link>https://www.v2ex.com/t/918481</link>
+      <description>&lt;p&gt;简单过一些 APM 实现(SkyWalking, Pinpoint, Elastic-apm), 发现这些组件在发生一次调用时，都会新创建一个 Span 并将当前上下文的 Span 作为其父级. 比如对于一次调用: &lt;code&gt;HTTP Start-&amp;gt; DUBBO Consumer -&amp;gt; DUBBO Provider -&amp;gt; HTTP END&lt;/code&gt;，普遍在 HTTP 入口处创建使用一个 Span, 同时在 DUBBO Consumer 开始调用时（还没有跨越进程）会新创建一个 Span 并将相关 Trace 信息传入 Provider 侧，类似:  &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;HTTP Span1 Enter -&amp;gt; DUBBO consumer Span2 ENTER -&amp;gt; Dubbo Provider Span3 ENTER -&amp;gt; DUBBO Provider Span3 EXIT -&amp;gt; DUBBO consumer Span2 EXIT -&amp;gt; HTTP Span1 Exit.&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;请问有没有人知道 Consumer 侧的这一次 Span 创建有什么作用呢？或者说是用于解决什么问题，理论上来说这里，应该只要传入当前 Trace 信息即可，不需要插入一次 Consumer 的 Span, 如果 Span 的创建始终在被调用侧会有什么问题吗？类似:  &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;HTTP Span1 Enter -&amp;gt; Dubbo Provider Span2 ENTER -&amp;gt; DUBBO Provider Span2 EXIT -&amp;gt; HTTP Span1 Exit.&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>choice4</author>
+      <pubDate>23 Feb 2023 03:38:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>快饿死了，有 V 友说说银行驻场的外包能去吗？ - 酷工作</title>
+      <link>https://www.v2ex.com/t/918480</link>
+      <description>### ：2023 前端已死，快饿死了。&lt;br /&gt;&lt;br /&gt;* 有 V 友做过银行外包吗？&lt;br /&gt;&#x9;* （ 1 ）貌似福利不错不拖欠工资还稳定，相比其他外包有什么优势？&lt;br /&gt;    * （ 2 ）貌似有转正机会是吗？&lt;br /&gt;    * （ 3 ）银行外包每天都做什么项目 /什么技术栈的？&lt;br /&gt;&lt;br /&gt;* 现在小公司庙小妖风大，我觉得还不如去外包至少稳定不会倒闭。&lt;br /&gt;&lt;br /&gt;* 有 V 友说说吗，谢谢🙏？不想转行跑美团 /快递 /滴滴了。</description>
+      <author>Yokin</author>
+      <pubDate>23 Feb 2023 03:32:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>为什么突然 v 站收不到别人 @我的提醒了？ - 问与答</title>
+      <link>https://www.v2ex.com/t/918479</link>
+      <description>att</description>
+      <author>iamqk</author>
+      <pubDate>23 Feb 2023 03:31:17 +0000</pubDate>
+    </item>
+    <item>
       <title>量子计算机要开始加速发展了吗？ - 分享发现</title>
       <link>https://www.v2ex.com/t/918478</link>
       <description>&lt;p&gt;北京时间 2 月 23 日早间消息，据报道，根据最新发表在《自然》杂志上的文章，谷歌宣布，在纠正当前量子计算机的固有错误方面取得突破。这标志着，人类在解决量子计算最大技术障碍方面迈出了早期但可能意义重大的一步。&lt;/p&gt;&#xA;&lt;p&gt;谷歌的研究人员表示，已经找到一种方法，将量子计算机中正在处理的信息分散到多个量子比特上。这意味着，即便单个量子比特脱离了量子态，但作为一个整体的系统可以保存足够多的信息足够长时间，来完成一项计算。&#xA;根据发表在《自然》杂志上的文章，随着谷歌扩大技术的应用规模，使其在更大的量子系统上运行，错误率仅降低了 4%。但研究人员指出，这是人类首次实现，扩大量子计算机的规模没有导致错误率上升。奈文表示，这表明谷歌已经突破了“平衡点”。在此之后，进一步的发展将实现稳定的性能提升，最终带来第一台可以实际使用的量子计算机。&#xA;谷歌研究员朱利安・凯利（ Julian Kelly ）说，此次的突破来自于谷歌对量子计算机所有组件的优化，涉及量子比特的质量控制、控制软件，以及用于将计算机冷却至接近绝对零度的低温设备。这些优化将错误的数量减少到了足够低，使得扩大系统规模不会导致错误率呈现指数级上升。&#xA;谷歌将这一突破描述为建造实用量子计算机所需完成的 6 个步骤中的第二步。下一步包括完善量子计算机的工程设计，以便只需要 1000 个量子比特就可以实现所谓的“逻辑量子比特”。逻辑量子比特建立在物理量子比特之上，可以实现无差错的运行。奈文表示，谷歌相信，只要能找到如何构建 1000 个逻辑量子比特并将其连接至单个系统的方法，就可以获得一台可实用的量子计算机。&lt;/p&gt;&#xA;</description>
