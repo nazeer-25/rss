@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "chatgpt v2ray 分流 - OpenAI",
+      "Link": "https://www.v2ex.com/t/919016",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-json\"\u003e      {\n        \"type\": \"field\",\n        \"ip\": [\n          \"geoip:cloudflare\"\n        ],\n        \"port\": 443,\n        \"network\": \"udp\",\n        \"outboundTag\": \"blackhole\" // \"cloudflare-warp\"\n      },\n      {\n        \"type\": \"field\",\n        \"domain\": [\n          \"challenges.cloudflare.com\",\n          \"chat.openai.com\"\n        ],\n        \"outboundTag\": \"cloudflare-warp\"\n      }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e常用 IP 被拦了，于是试着搞了下 Cloudflare warp 分流，仅仅分流域名没用，有 443 上的 udp 流量（ HTTP/3?），为了不太影响其余网站的体验，我个人是在本地把 \u003ccode\u003egeoip:cloudflare\u003c/code\u003e 的 443 udp 流量禁了，在服务器上分流了如上两个域名。用的规则文件是 \u003ccode\u003eLoyalsoldier/v2ray-rules-dat\u003c/code\u003e。\u003c/p\u003e\n\u003cp\u003e网传的只有登录阶段检测，实测并不是，可能防护规则升级了吧。\u003c/p\u003e\n\u003cp\u003e肯定还是有点影响别的网站，不知道 v2ray 能不能不借助别的应用来实现 dns rewrite ，这样就可以把这两个域名解析到不怎么可能用到的 cloudflare ip ，然后只需要代理这一个 ip 到 warp 。\u003c/p\u003e\n",
+      "Author": "0o0O0o0O0o",
+      "PubDate": "2023-02-24T14:39:45Z"
+    },
+    {
+      "Title": "发现几年前弄的一个博客项目 - 问与答",
+      "Link": "https://www.v2ex.com/t/919015",
+      "Description": "\u003cp\u003e\u003ca href=\"https://godie.cloud\" rel=\"nofollow\"\u003ehttps://godie.cloud\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/luoshilu/iuo_blog\" rel=\"nofollow\"\u003ehttps://github.com/luoshilu/iuo_blog\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "pvgjfk",
+      "PubDate": "2023-02-24T14:35:54Z"
+    },
+    {
+      "Title": "code-davinci-002 模型的回答多少有点出乎意料 - OpenAI",
+      "Link": "https://www.v2ex.com/t/919014",
+      "Description": "最近在尝试 api 接口，一直用的是 text-davinci-003 模型，今天想试试看 code-davinci-002 ，一方面是因为政策上免费，一方面主要是个产生代码的专用接口。\u003cbr /\u003e\u003cbr /\u003e纯粹是想走通，看看能否产出代码。给他的 prompt 是 Please help me write a program using Python as the programming language, PySimpleGUI as the user interface. Click a button with the text \"Press Me\", and when you click, a pop-up message box will say \"Hello\".\u003cbr /\u003e\u003cbr /\u003e看看它能否快速给出代码，结果回答：\"This is a very simple requirement, as long as you understand the most basic\"\u003cbr /\u003e\u003cbr /\u003e这是迟早要造反呀 : D",
+      "Author": "youthfire",
+      "PubDate": "2023-02-24T14:35:32Z"
+    },
+    {
       "Title": "Excel VBA 的列号与列名(字母)转换网站 - 分享创造",
       "Link": "https://www.v2ex.com/t/919013",
       "Description": "\u003cp\u003e公司遗留了一个用了 10 多年的 Excel VBA 时不时的需要改点东西，里面代码用到列的全是直接用的数字，几百列，所以就需要用到列名与列号转换。于是就写了这个小工具部署在了 vercel 上，快速转换列号与列名。\n发出来给有同样需求的人(估计也没多少人有这需求了 =。=)，2023 年了现在还有人写 VBA 吗？\n\u003ca href=\"https://excel-col-converter.vercel.app/\" rel=\"nofollow\"\u003ehttps://excel-col-converter.vercel.app/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e代码开源\u003c/p\u003e\n\u003cp\u003e纯前端(Vue3 + Naive UI)\u003c/p\u003e\n\u003cp\u003e支持暗黑模式\u003c/p\u003e\n\u003cp\u003e移动友好\u003c/p\u003e\n\u003cp\u003e可以批量互转\u003c/p\u003e\n\u003cp\u003e支持自己 docker 私有部署\u003c/p\u003e\n\u003cp\u003e请大佬轻喷 :)\u003c/p\u003e\n",
