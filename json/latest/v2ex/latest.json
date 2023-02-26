@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "chatgpt 注册验证手机号过程中遇到问题，请求帮忙 - OpenAI",
+      "Link": "https://www.v2ex.com/t/919247",
+      "Description": "\u003cp\u003echatgpt 注册验证手机号过程中遇到 'You've made too many phone verification requests. Please try again later or contact us through our help center at \u003ca href=\"http://help.openai.com\" rel=\"nofollow\"\u003ehelp.openai.com\u003c/a\u003e.'\u003c/p\u003e\n\u003cp\u003e我等了一天之后再试还是这样，换了不同国家的号码，全局模式用美国的 Ip 访问的，有没有知道解决的方法的?\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"error\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/s4jcOHn.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "occupied",
+      "PubDate": "2023-02-26T04:46:00Z"
+    },
+    {
       "Title": "Python asyncio 求助，要被搞疯了 - Python",
       "Link": "https://www.v2ex.com/t/919246",
       "Description": "\u003cp\u003e我最近在尝试使用 FastAPI + Prefect 2(\u003cstrong\u003e2.8.3\u003c/strong\u003e)，目的是使用 FastAPI 构建的 RESTful API 触发 Prefect 构建的 Workflow 。\n代码如下：\n\u003ca href=\"http://main.py\" rel=\"nofollow\"\u003emain.py\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-Python\"\u003efrom fastapi import FastAPI\nfrom test_workflow import test\n\napp = FastAPI(\n    title=\"Data Services\",\n    description=\"REST API for data services\",\n    version=\"0.1.0\",\n)\n\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Data Services\"}\n\n@app.get(\"/test\")\ndef trigger():\n    test()\n    return \"completed\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca href=\"http://test_workflow.py\" rel=\"nofollow\"\u003etest_workflow.py\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-Python\"\u003efrom prefect import flow, task\nimport time\n\n@task\ndef sleep1():\n    print(\"sleep1\")\n    time.sleep(5)  //模拟需要一定运行时间的计算流\n    return 1\n    \n@flow()\ndef test():\n    task_1 = sleep1.submit()\n    x = task_1.result()\n    print(x)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e需首先运行下列命令开启服务：\u003c/p\u003e\n\u003cp\u003e$ prefect server start\u003c/p\u003e\n\u003cp\u003e$ uvicorn main:app --reload\u003c/p\u003e\n\u003cp\u003e如果尝试 GET /test ，会得到如下错误：\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003eRuntimeError: \u0026lt;asyncio.locks.Event object at 0x7f0de4d19bd0 [unset]\u0026gt; is bound to a different event loop\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e如果 FastAPI 中定义为异步函数\u003ccode\u003easync def trigger():\u003c/code\u003e, 则顺利运行不会报错，但问题是这样就丧失了并行性，FastAPI 一次只能处理一个 /test 请求，显然不符合需求。\u003c/p\u003e\n\u003cp\u003e想了很多办法都没法解决，有没有懂这方面的帮忙看看？\u003c/p\u003e\n",
