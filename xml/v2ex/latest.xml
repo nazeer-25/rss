@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ASP.NET Core 需要限制资源下载次数，怎么做比较好？ - 程序员</title>
+      <link>https://www.v2ex.com/t/919279</link>
+      <description>&lt;p&gt;外包客户建在流量计费的阿里云 ECS 上的在线课程网站课件下载接口被刷了，目前想限制每个账号一天内只能下载 3 次同一课件文件，怎么做比较好？如果下一半暂停了有办法统计本次流量，算百分比扣次数吗（不然怕有人写脚本下一半就停止，不断重新下载来刷流量），还是必须禁止断点续传才能防止这种情况？&lt;/p&gt;&#xA;</description>
+      <author>edis0n0</author>
+      <pubDate>26 Feb 2023 07:50:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>Spring 如何使实体中的关联项只序列化部分字段？ - Java</title>
+      <link>https://www.v2ex.com/t/919278</link>
+      <description>&lt;p&gt;刚接触 SpringBoot 不久，想请教 V 友们一个问题：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Entity&#xA;public class Task {&#xA;  // Other fields...&#xA;&#xA;  @CreatedBy&#xA;  @ManyToOne&#xA;  @JoinColumn(name = &#34;created_by&#34;, referencedColumnName = &#34;id&#34;)&#xA;  private Integer createdBy;&#xA;}&#xA;&#xA;@Entity&#xA;public class User {&#xA;  private Integer id;&#xA;  private String nickname;&#xA;  &#xA;  // Don&#39;t want to show only in Task&#xA;  private String email;&#xA;  // ...&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;实体 Task 多对一关联了实体 User ，除了添加&lt;code&gt;@JsonIgnore&lt;/code&gt;的方式，如何让 Task 作为 ResponseBody 序列化时忽略 User 中的某些字段？&lt;/p&gt;&#xA;&lt;p&gt;不想使用&lt;code&gt;@JsonIgnore&lt;/code&gt;注解的原因是还想在其他的接口中返回 User 的全部字段，还望 V 友们不吝赐教。&lt;/p&gt;&#xA;</description>
+      <author>ginakira</author>
+      <pubDate>26 Feb 2023 07:50:10 +0000</pubDate>
+    </item>
+    <item>
+      <title>macOS13.2.1 防火墙设置修改方法 - macOS</title>
+      <link>https://www.v2ex.com/t/919277</link>
+      <description>&lt;p&gt;因为未知的原因，macOS13.2.1 中在设置中无法修改防火墙的配置，具体表现为对防火墙设置如“Enable stealth mode”打开后，重新打开设置发现该设置并未开启，并且通过 ICMP 报文进行测试会发现依旧可以回应 PING 。联系苹果售后给出的解决方案只有“重装系统”，这个方法太麻烦了，并不想使用这个办法。&#xA;经过研究，发现通过 /usr/libexec/ApplicationFirewall/socketfilterfw 可以进行控制。以开启“隐身模式”为例：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;/usr/libexec/ApplicationFirewall&#xA;❯ sudo ./socketfilterfw --setstealthmode on&#xA;Password:&#xA;Stealth mode enabled&#xA;❯ sudo ./socketfilterfw --getstealthmode&#xA;Stealth mode enabled&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这样进入设置就可以发现防火墙可以被正确设置了。&lt;/p&gt;&#xA;&lt;p&gt;同样，其他的设置也可以采用同样的方式解决，其对应的完整命令如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;❯ ./socketfilterfw -h&#xA;usage: ./socketfilterfw [-d] [-l] [-k] [--getglobalstate] [--setglobalstate on | off] [--getblockall] [--setblockall on | off] [--listapps] [--getappblocked &amp;lt;path&amp;gt;] [--blockapp &amp;lt;path&amp;gt;] [--unblockapp &amp;lt;path&amp;gt;] [--add &amp;lt;path&amp;gt;] [--remove &amp;lt;path&amp;gt;] [--getallowsigned] [--setallowsigned] [--setallowsignedapp] [--getstealthmode] [--setstealthmode on | off] [--getloggingmode] [--setloggingmode on | off] [--getloggingopt] [--setloggingopt throttled | brief | detail]&#xA;firewallapp is used to control Application Firewall socket filter.&#xA;The command takes the following options that are evaluated in order,&#xA;and several options may be combined:&#xA; -h        display this help and exit&#xA; -d        turn on debugging&#xA; -l        do logging and run in daemon mode&#xA; -k        kill daemon&#xA; --getglobalstate                display if the firewall is enabled or not&#xA; --setglobalstate on | off       turn the firewall on or off&#xA; --getblockall                   show whether block all is enabled or not&#xA; --setblockall on | off          enable or disable block all option&#xA; --listapps                      display a list of paths of added applications&#xA; --getappblocked &amp;lt;path&amp;gt;          show whether connections are blocked or not for&#xA;                                 the application at &amp;lt;path&amp;gt;&#xA; --blockapp &amp;lt;path&amp;gt;               block the application at &amp;lt;path&amp;gt;&#xA; --unblockapp &amp;lt;path&amp;gt;             unblock the application at &amp;lt;path&amp;gt;&#xA; --add &amp;lt;path&amp;gt;                    add the application at &amp;lt;path&amp;gt; to the firewall&#xA; --remove &amp;lt;path&amp;gt;                 remove the application at &amp;lt;path&amp;gt; from the&#xA;                                 firewall&#xA; --getallowsigned                show whether built-in and downloaded signed applications are to&#xA;                                 automatically receive incoming connections&#xA; --setallowsigned on | off       set whether built-in signed applications are to&#xA;                                 automatically receive incoming connections or not&#xA; --setallowsignedapp on | off    set whether downloaded signed applications are to&#xA;                                 automatically receive incoming connections or not&#xA; --getstealthmode                show whether stealth mode is on or not&#xA; --setstealthmode on | off       set stealth mode on or off&#xA; --getloggingmode                show whether logging is on or not&#xA; --setloggingmode on | off       set logging to on or off&#xA; --getloggingopt                 show logging option&#xA; --setloggingopt throttled |     set logging option&#xA;                     brief |&#xA;                    detail&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>czy0538</author>
+      <pubDate>26 Feb 2023 07:49:41 +0000</pubDate>
+    </item>
+    <item>
       <title>如何选择专升本专业 - 程序员</title>
       <link>https://www.v2ex.com/t/919276</link>
       <description>&lt;p&gt;朋友在选专升本专业，他想以后做软件，问我选哪个更有前景，我是纠结不知道怎么选，软件工程专业如何，发来问问 v 友&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Evgyq.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.328888.xyz/2023/02/26/Evgyq.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
@@ -71,13 +92,6 @@
       <description>&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/oRtw7WT&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/oRtw7WT&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;很简单的时间横坐标，但是：&lt;br /&gt;&lt;br /&gt;我坐标轴类型设置的对的，日期：&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/tSWb6cV&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/tSWb6cV&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;为毛刻度就一直是 44500 ，疯了（我只想显示那 3 个时间坐标，因为刻度不是日期我始终调不了）&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/hGydrMc&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/hGydrMc&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;版本：office 365 &lt;br /&gt;&lt;br /&gt;office365 的“帮助”告诉我，坐标轴类型有文本和日期两个选择，我始终没找到官方“帮助”里的这个图：&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/Ufb89Ah&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/Ufb89Ah&lt;/a&gt;</description>
       <author>xd880616</author>
       <pubDate>26 Feb 2023 06:39:09 +0000</pubDate>
-    </item>
-    <item>
-      <title>PT 求一个 M-team 或者 🐱站的药 - 宽带症候群</title>
-      <link>https://www.v2ex.com/t/919265</link>
-      <description>&lt;p&gt;目前主力站点 hdtime&lt;/p&gt;&#xA;&lt;p&gt;家用 diy 服务器,黑群 14T ，电信小水管平时每天上传能 100-200G ， 保不死&lt;/p&gt;&#xA;&lt;p&gt;邮箱：c2hhbmd1b29AZ21haWwuY29t ，谢谢！&lt;/p&gt;&#xA;&lt;p&gt;数据如下：&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://shanguo-store.oss-cn-shanghai.aliyuncs.com/images/ptt.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
-      <author>shanguo</author>
-      <pubDate>26 Feb 2023 06:35:43 +0000</pubDate>
     </item>
     <item>
       <title>Azure 的硬盘为什么这么贵 - 云计算</title>
@@ -253,6 +267,13 @@
       <description>我记得我在哪看到过，mtu 这个限制是在 ip 层处理的，这实际上是一个 “软性”限制。按照正常的收发网络包的流程来看，肯定要经过内核协议栈，那么必定会被 ip 层处理。ip 层看到包太大，就会分包&lt;br /&gt;&lt;br /&gt;那么我的数据包要是不走内核协议栈，比如像 DPDK 这样的技术，我是不是就可以绕过 MTU 的限制，直接将一个大包交给网卡，由网卡发出去&lt;br /&gt;&lt;br /&gt;不知道这样理解对不对</description>
       <author>Aaron7Amelia</author>
       <pubDate>26 Feb 2023 02:58:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>PT 求一个 M-team 或者 🐱站的药 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/919265</link>
+      <description>&lt;p&gt;目前主力站点 hdtime&lt;/p&gt;&#xA;&lt;p&gt;家用 diy 服务器,黑群 14T ，电信小水管平时每天上传能 100-200G ， 保不死&lt;/p&gt;&#xA;&lt;p&gt;邮箱：c2hhbmd1b29AZ21haWwuY29t ，谢谢！&lt;/p&gt;&#xA;&lt;p&gt;数据如下：&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://shanguo-store.oss-cn-shanghai.aliyuncs.com/images/ptt.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>shanguo</author>
+      <pubDate>26 Feb 2023 06:35:43 +0000</pubDate>
     </item>
     <item>
       <title>hugo 的 stack 主题如何只在底部配置小广告? - 问与答</title>
