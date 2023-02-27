@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>感觉嵌入式开发的门槛不在语言而在环境上… - 问与答</title>
+      <link>https://www.v2ex.com/t/919464</link>
+      <description>&lt;p&gt;非科班前端工程师大战 ESP32 Arduino  &lt;/p&gt;&#xA;&lt;p&gt;不知道是不是因为过于底层…以前随便用的 Array.splice 在 c 上都要自己实现有点难受，当然这不是重点  &lt;/p&gt;&#xA;&lt;p&gt;屏幕（ ILI94 什么来着）和触摸（ GT911 ）想找个文档难如登天，document 根本搜不出来，example 基本都不会给你解释为什么&lt;br/&gt;&#xA;LVGL 的文档也只会给你一堆 example 让你自己感受，我现在还没搞懂 imgbtn 的左中右 imgsrc 都是什么东西&lt;br/&gt;&#xA;相比之下乐鑫的文档还算比较翔实了…  &lt;/p&gt;&#xA;&lt;p&gt;Debug 感觉也不明不白，ESP32 debugger 只能搜出乐鑫的 ESP-IDF 调试环境，Arduino 就只能看别人的  tutorial 了。现在烧录前编译没检查出来的错误就只能直接板子崩溃（也看不到哪行代码造成的崩溃），再根据内核报错猜是哪里出了问题&lt;br/&gt;&#xA;性能优化就更玄学了，CPU 占用率就是上不去但 lvgl 的 fps 也不高。memcpy 开销应该也不大吧…搜到的结论说 struct 也不怎么吃性能。搜了半天怀疑是 TCP 拥塞控制算法的问题，准备禁用掉再战  &lt;/p&gt;&#xA;&lt;p&gt;周末虽然姑且把主要逻辑做完了，但真的好怀念 Web 开发所见即所得热重载周边生态完备轻松调试的开发环境&lt;br/&gt;&#xA;之前有楼主说人都往 Web 开发挤没人写嵌入式感觉就这开发环境活该没人（划掉）市场还是会用脚投票的  &lt;/p&gt;&#xA;&lt;p&gt;最后感谢一下 USBIP 这个项目，没这玩意我估计还得去学画 PCB 板（不）不过这玩意就是真的搜 document 都搜不出来的东西了，顺带让我学习了下 USBHID 通信和 c 的数据结构（笑）&lt;/p&gt;&#xA;</description>
+      <author>KirbySD</author>
+      <pubDate>27 Feb 2023 03:54:32 +0000</pubDate>
+    </item>
+    <item>
       <title>go append 的疑问 - Go 编程语言</title>
       <link>https://www.v2ex.com/t/919461</link>
       <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import &#34;fmt&#34;&#xA;&#xA;func main() {&#xA;&#x9;// create a slice from an array&#xA;&#x9;x := [3]string{&#34;A&#34;, &#34;B&#34;, &#34;С&#34;}&#xA;&#x9;s := x[:] // a slice referencing the storage of x&#xA;&#x9;// x[1] = &#34;O&#34;&#xA;&#x9;t := append(s, &#34;D&#34;) // append items to slice s&#xA;&#x9;x[1] = &#34;O&#34;&#xA;&#x9;fmt.Println(&#34;%+v&#34;, x)&#xA;&#x9;fmt.Println(&#34;%+v&#34;, s)&#xA;&#x9;fmt.Println(&#34;%+v&#34;, t)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://go.dev/play/p/g-eGRJLteAH&#34; rel=&#34;nofollow&#34;&gt;https://go.dev/play/p/g-eGRJLteAH&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;t 为什么是 &lt;code&gt;[A B С D]&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;我的理解是 t 在 s 的基础上加了个‘D&#39; , x 改了 s, t 也要跟着变啊.&lt;/p&gt;&#xA;</description>

@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "感觉嵌入式开发的门槛不在语言而在环境上… - 问与答",
+      "Link": "https://www.v2ex.com/t/919464",
+      "Description": "\u003cp\u003e非科班前端工程师大战 ESP32 Arduino  \u003c/p\u003e\n\u003cp\u003e不知道是不是因为过于底层…以前随便用的 Array.splice 在 c 上都要自己实现有点难受，当然这不是重点  \u003c/p\u003e\n\u003cp\u003e屏幕（ ILI94 什么来着）和触摸（ GT911 ）想找个文档难如登天，document 根本搜不出来，example 基本都不会给你解释为什么\u003cbr/\u003e\nLVGL 的文档也只会给你一堆 example 让你自己感受，我现在还没搞懂 imgbtn 的左中右 imgsrc 都是什么东西\u003cbr/\u003e\n相比之下乐鑫的文档还算比较翔实了…  \u003c/p\u003e\n\u003cp\u003eDebug 感觉也不明不白，ESP32 debugger 只能搜出乐鑫的 ESP-IDF 调试环境，Arduino 就只能看别人的  tutorial 了。现在烧录前编译没检查出来的错误就只能直接板子崩溃（也看不到哪行代码造成的崩溃），再根据内核报错猜是哪里出了问题\u003cbr/\u003e\n性能优化就更玄学了，CPU 占用率就是上不去但 lvgl 的 fps 也不高。memcpy 开销应该也不大吧…搜到的结论说 struct 也不怎么吃性能。搜了半天怀疑是 TCP 拥塞控制算法的问题，准备禁用掉再战  \u003c/p\u003e\n\u003cp\u003e周末虽然姑且把主要逻辑做完了，但真的好怀念 Web 开发所见即所得热重载周边生态完备轻松调试的开发环境\u003cbr/\u003e\n之前有楼主说人都往 Web 开发挤没人写嵌入式感觉就这开发环境活该没人（划掉）市场还是会用脚投票的  \u003c/p\u003e\n\u003cp\u003e最后感谢一下 USBIP 这个项目，没这玩意我估计还得去学画 PCB 板（不）不过这玩意就是真的搜 document 都搜不出来的东西了，顺带让我学习了下 USBHID 通信和 c 的数据结构（笑）\u003c/p\u003e\n",
+      "Author": "KirbySD",
+      "PubDate": "2023-02-27T03:54:32Z"
+    },
+    {
       "Title": "go append 的疑问 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/919461",
       "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport \"fmt\"\n\nfunc main() {\n\t// create a slice from an array\n\tx := [3]string{\"A\", \"B\", \"С\"}\n\ts := x[:] // a slice referencing the storage of x\n\t// x[1] = \"O\"\n\tt := append(s, \"D\") // append items to slice s\n\tx[1] = \"O\"\n\tfmt.Println(\"%+v\", x)\n\tfmt.Println(\"%+v\", s)\n\tfmt.Println(\"%+v\", t)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca href=\"https://go.dev/play/p/g-eGRJLteAH\" rel=\"nofollow\"\u003ehttps://go.dev/play/p/g-eGRJLteAH\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003et 为什么是 \u003ccode\u003e[A B С D]\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e我的理解是 t 在 s 的基础上加了个‘D' , x 改了 s, t 也要跟着变啊.\u003c/p\u003e\n",
