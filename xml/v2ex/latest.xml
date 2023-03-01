@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>[求助] 请问为什么我的 zerotier 配合自建 moon 能打洞成功， wireguard 不可以 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/920119</link>
+      <description>我大概两年前开始使用 zerotier ，一直还是比较稳的，但是因为 zerotier 和梯子无法在 ios 设备上同时使用，在看到 surge 支持 wireguard 后，动了换成 wireguard 做穿透的心思。但是我按照说明配置好服务器端和 peer 后，发现无法像 zerotier 一样打洞成功，流量还是走的中继服务器，请问我是不是有什么设置错了？以下是我的配置文件：&lt;br /&gt;中继服务器：&lt;br /&gt;[Interface]&lt;br /&gt;Address = 198.123.5.1/24&lt;br /&gt;ListenPort = 43712&lt;br /&gt;PrivateKey = *****&lt;br /&gt;&lt;br /&gt;PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE&lt;br /&gt;PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE&lt;br /&gt;&lt;br /&gt;[Peer]&lt;br /&gt;#macbook&lt;br /&gt;PublicKey = *****&lt;br /&gt;AllowedIPs = 198.123.5.2/32&lt;br /&gt;&lt;br /&gt;[Peer]&lt;br /&gt;#desktop &lt;br /&gt;PublicKey = *****&lt;br /&gt;AllowedIPs = 198.123.5.3/32&lt;br /&gt;&lt;br /&gt;以下是两台 peers 的配置&lt;br /&gt;PEER1&lt;br /&gt;[Interface]&lt;br /&gt;PrivateKey = ****&lt;br /&gt;ListenPort = 43712&lt;br /&gt;Address = 198.123.5.2/32&lt;br /&gt;DNS = 8.8.8.8&lt;br /&gt;&lt;br /&gt;[Peer]&lt;br /&gt;PublicKey = ****&lt;br /&gt;AllowedIPs = 198.123.5.0/24&lt;br /&gt;Endpoint = 中继服务器 ip:43712&lt;br /&gt;PersistentKeepalive = 10&lt;br /&gt;&lt;br /&gt;PEER2&lt;br /&gt;[Interface]&lt;br /&gt;PrivateKey = ****&lt;br /&gt;ListenPort = 43712&lt;br /&gt;Address = 198.123.5.3/32&lt;br /&gt;DNS = 8.8.8.8&lt;br /&gt;&lt;br /&gt;[Peer]&lt;br /&gt;PublicKey = ****&lt;br /&gt;AllowedIPs = 198.123.5.0/24&lt;br /&gt;Endpoint = 中继服务器 ip:43712&lt;br /&gt;PersistentKeepalive = 10&lt;br /&gt;&lt;br /&gt;在同时开着 zerotier 和 wireguard 的情况下，我测试 zerotier 上 peer1 和 peer2 之间的延迟是 16ms 左右，但是 wireguard 上是 300+ms ， 明显是通过中继服务器的</description>
+      <author>Xiaosteven</author>
+      <pubDate>01 Mar 2023 04:34:24 +0000</pubDate>
+    </item>
+    <item>
       <title>Docker 怎么设置不经过代理 - Docker</title>
       <link>https://www.v2ex.com/t/920118</link>
       <description>&lt;p&gt;碰到个问题&lt;/p&gt;&#xA;&lt;p&gt;M1 下直接通过终端执行 curl 没问题，在容器内执行 curl 就报错（自己的业务接口，报错签名不匹配，问题是在原生终端没问题）。&lt;/p&gt;&#xA;&lt;p&gt;各种折腾后把 clashx 关掉就好了。&lt;/p&gt;&#xA;&lt;p&gt;怎么设置 docker 不经过 clashx&lt;/p&gt;&#xA;</description>

@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "[求助] 请问为什么我的 zerotier 配合自建 moon 能打洞成功， wireguard 不可以 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/920119",
+      "Description": "我大概两年前开始使用 zerotier ，一直还是比较稳的，但是因为 zerotier 和梯子无法在 ios 设备上同时使用，在看到 surge 支持 wireguard 后，动了换成 wireguard 做穿透的心思。但是我按照说明配置好服务器端和 peer 后，发现无法像 zerotier 一样打洞成功，流量还是走的中继服务器，请问我是不是有什么设置错了？以下是我的配置文件：\u003cbr /\u003e中继服务器：\u003cbr /\u003e[Interface]\u003cbr /\u003eAddress = 198.123.5.1/24\u003cbr /\u003eListenPort = 43712\u003cbr /\u003ePrivateKey = *****\u003cbr /\u003e\u003cbr /\u003ePostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE\u003cbr /\u003ePostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE\u003cbr /\u003e\u003cbr /\u003e[Peer]\u003cbr /\u003e#macbook\u003cbr /\u003ePublicKey = *****\u003cbr /\u003eAllowedIPs = 198.123.5.2/32\u003cbr /\u003e\u003cbr /\u003e[Peer]\u003cbr /\u003e#desktop \u003cbr /\u003ePublicKey = *****\u003cbr /\u003eAllowedIPs = 198.123.5.3/32\u003cbr /\u003e\u003cbr /\u003e以下是两台 peers 的配置\u003cbr /\u003ePEER1\u003cbr /\u003e[Interface]\u003cbr /\u003ePrivateKey = ****\u003cbr /\u003eListenPort = 43712\u003cbr /\u003eAddress = 198.123.5.2/32\u003cbr /\u003eDNS = 8.8.8.8\u003cbr /\u003e\u003cbr /\u003e[Peer]\u003cbr /\u003ePublicKey = ****\u003cbr /\u003eAllowedIPs = 198.123.5.0/24\u003cbr /\u003eEndpoint = 中继服务器 ip:43712\u003cbr /\u003ePersistentKeepalive = 10\u003cbr /\u003e\u003cbr /\u003ePEER2\u003cbr /\u003e[Interface]\u003cbr /\u003ePrivateKey = ****\u003cbr /\u003eListenPort = 43712\u003cbr /\u003eAddress = 198.123.5.3/32\u003cbr /\u003eDNS = 8.8.8.8\u003cbr /\u003e\u003cbr /\u003e[Peer]\u003cbr /\u003ePublicKey = ****\u003cbr /\u003eAllowedIPs = 198.123.5.0/24\u003cbr /\u003eEndpoint = 中继服务器 ip:43712\u003cbr /\u003ePersistentKeepalive = 10\u003cbr /\u003e\u003cbr /\u003e在同时开着 zerotier 和 wireguard 的情况下，我测试 zerotier 上 peer1 和 peer2 之间的延迟是 16ms 左右，但是 wireguard 上是 300+ms ， 明显是通过中继服务器的",
+      "Author": "Xiaosteven",
+      "PubDate": "2023-03-01T04:34:24Z"
+    },
+    {
       "Title": "Docker 怎么设置不经过代理 - Docker",
       "Link": "https://www.v2ex.com/t/920118",
       "Description": "\u003cp\u003e碰到个问题\u003c/p\u003e\n\u003cp\u003eM1 下直接通过终端执行 curl 没问题，在容器内执行 curl 就报错（自己的业务接口，报错签名不匹配，问题是在原生终端没问题）。\u003c/p\u003e\n\u003cp\u003e各种折腾后把 clashx 关掉就好了。\u003c/p\u003e\n\u003cp\u003e怎么设置 docker 不经过 clashx\u003c/p\u003e\n",
