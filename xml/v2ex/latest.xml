@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>4 年 goper review 简历并寻找机会 - 求职</title>
+      <link>https://www.v2ex.com/t/920457</link>
+      <description>项目名称：动力环境监控系统&lt;br /&gt;项目描述：这套系统建设的主要目的是在于为机房的正常运行提供有利的保障，在出现问题的时候能够及时有效发现，并且能够快速定点定位的发现故障，系统能自动处理或者是提醒机房维护人员进行处理。机房动力环境监控系统提供多样化的报警组、报警方式。可以通过实时数据告警数据和历史曲线直观分析系统运行情况。系统内嵌套强大报表系统。&lt;br /&gt;&lt;br /&gt;技术栈：Go,MongoDB,Mysql,influxDB,gRPC,Docker,k8s&lt;br /&gt;设计技术：&lt;br /&gt;1 ．使用协程处理大数据量的监控数据|对采集数据进行处理,每秒数量高达数万,并根据阈值判断是否发生了告警.使用协程将数据分别存到对应的平台.Mysql 存储告警信息,MongoDB 存储实时数据,influxDB 存储历史数据&lt;br /&gt;2 ．监控项表数据将近 300 万,导致相关查询慢,先试下合适的索引，能用覆盖索引的尽量用覆盖索引，几种组合 效果不太好。 通过冗余字段，只查一个表，避免联查，减少数据量。 如果数据量还是大， 可以考虑按某种东西分表了.从 10 秒降到 1s 内.&lt;br /&gt;3 ．使用协程将数据迁移，将失败的数据重新放到通道中，并比对最终数量，保证数据完整性&lt;br /&gt;4 ．容器内存过高,导致容器重启.用 pprof 分析 goroutine 数量，原来是 MongoDB 服务器写入问题，cpu 占用率高，io 高.导致上游内存增加，容器服务重启。-&amp;gt;批量写入，单点换集群.&lt;br /&gt;5 ． influxDB 写入出错,开发者解释 io 问题,无法解决.更换 ssd 并将数据按大楼分别存到不同的库中.&lt;br /&gt;责任描述：&lt;br /&gt;1.&#x9;动环项目清洗平台优化及维护&lt;br /&gt;2 ．动环项目告警事件及历史告警事件,实时数据查询&lt;br /&gt;3 ．动环项目嵌入式管理,包含嵌入式信息,设备信息.监控项实时数据&lt;br /&gt;4 ．嵌入式项目数据展示及设备导入导出,柴发启停控制.&lt;br /&gt;5 ．北向接口.控制第三方用户接口,可以看到的设备,监控项,实时数据和告警数据&lt;br /&gt;&lt;br /&gt;项目名称：云平台&lt;br /&gt;项目描述：以部署升级、监控报警、错误排查及恢复、定制等日常运维和交付的工作为主线 提升运维和交付效率。云平台提供统一可公用的组件，进一步防止重复造轮子，已经过推敲、验证过的方案来统一各产品、项目技术团队，例如统一租户、统一认证、统一基础设施等。用于应用全局规范和约束。云平台所提供的系统功能将为上层能力及规范提供基础支撑，进一步大打通、串联研发团队、测试团队、交付和运维团队的工作成果。&lt;br /&gt;技术栈：Go,MongoDB,Docker,k8s&lt;br /&gt;设计技术：&lt;br /&gt;1.&#x9;用平台标准封装程序,将应用程序转化为平台应用，进而对接平台管理功能，方便部署和排查问题&lt;br /&gt;2.&#x9;应用组,组合不同产品之间的应用,提高部署到客户现场的效率&lt;br /&gt;3.&#x9;应用导入导出功能,导出不限于平台数据,还包含 Helm 、Yaml 、Docker-compose 格式数据，以满足不同环境之前的快速部署&lt;br /&gt;4.&#x9;配置中心支持 key-value 、文本、上传文件等数据格式。并包含配置回滚、展示发布历史数据功能&lt;br /&gt;5.&#x9;使用 caddy 插件实现 Api Gateway&lt;br /&gt;6.&#x9;使用 traefik 灰度发布功能&lt;br /&gt;7.&#x9;为降低维护成本,将各个团队独有集群,按开发流程统一为不同的资源池&lt;br /&gt;8.&#x9;周期性的分析集群资源的状态并提供优化建议&lt;br /&gt;责任描述：&lt;br /&gt;1.&#x9;协助公司各产品 /技术团队,对接云平台,给出修改意见和解决方案。&lt;br /&gt;2.&#x9;收集各团队使用反馈,优化云平台功能&lt;br /&gt;3.&#x9;维护公司内和项目上集群,正常使用</description>
+      <author>bearcatpanda</author>
+      <pubDate>02 Mar 2023 04:36:39 +0000</pubDate>
+    </item>
+    <item>
       <title>Gleam 是一种类型安全且可扩展的语言，适用于 Erlang 虚拟机和 JavaScript 运行时。今天 Gleam v0.27.0 已经发布了 - Elixir 编程语言</title>
       <link>https://www.v2ex.com/t/920454</link>
       <description>&lt;p&gt;Gleam v0.27 released&lt;/p&gt;&#xA;&lt;p&gt;Gleam 是一种类型安全且可扩展的语言，适用于 Erlang 虚拟机和 JavaScript 运行时。今天 Gleam v0.27.0 已经发布了，一起来看看有什么新的吧。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://gleam.run/news/v0.27-hello-panic-goodbye-try/&#34; rel=&#34;nofollow&#34;&gt;https://gleam.run/news/v0.27-hello-panic-goodbye-try/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
