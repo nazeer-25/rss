@@ -4,6 +4,55 @@
   "Description": "",
   "Items": [
     {
+      "Title": "ChatGPT 今日发布 gpt-3.5-turbo 模型 API，同步奉上 Go SDK - 分享创造",
+      "Link": "https://www.v2ex.com/t/920414",
+      "Description": "\u003cp\u003e在之前的帖子里： \u003ca href=\"https://www.v2ex.com/t/909257\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/909257\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e我写了个 Go SDK ，包名：\u003ca href=\"http://github.com/chatgp/gpt3\" rel=\"nofollow\"\u003egithub.com/chatgp/gpt3\u003c/a\u003e, 对接了 ChatGPT 官方 API 。\u003c/p\u003e\n\u003cp\u003e今日官方 API 支持了新的对话模型 gpt-3.5-turbo ，我的 SDK 无需做任何改动，只增加了一个测试用例，可以直接使用，推荐给大家~\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e基本使用\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\"fmt\"\n\t\"log\"\n\t\"time\"\n\n\t\"github.com/chatgp/gpt3\"\n)\n\nfunc main() {\n\tapiKey := \"sk-xxx\"\n\n\t// new gpt-3 client\n\tcli, _ := gpt3.NewClient(\u0026amp;gpt3.Options{\n\t\tApiKey:  apiKey,\n\t\tTimeout: 30 * time.Second,\n\t\tDebug:   true,\n\t})\n\n\t// request api\n\turi := \"/v1/chat/completions\"\n\tparams := map[string]interface{}{\n\t\t\"model\": \"gpt-3.5-turbo\",\n\t\t\"messages\": []map[string]interface{}{\n\t\t\t{\"role\": \"user\", \"content\": \"hello 10 times\"},\n\t\t},\n\t}\n\n\tres, err := cli.Post(uri, params)\n\tif err != nil {\n\t\tlog.Fatalf(\"request api failed: %v\", err)\n\t}\n\n\tfmt.Printf(\"message is: %s\", res.Get(\"choices.0.message.content\").String())\n\t// Output: xxx\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003e测试用例：\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://blogcdn.idoustudio.com/doc/20230302105051.png\"/\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e参考：\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eChatGPT 新模型 API 文档： \u003ca href=\"https://platform.openai.com/docs/guides/chat\" rel=\"nofollow\"\u003ehttps://platform.openai.com/docs/guides/chat\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "idoubi",
+      "PubDate": "2023-03-02T02:58:12Z"
+    },
+    {
+      "Title": "技术书籍 《互联网架构的原理与优化实践》目录大纲意见收集 - 程序员",
+      "Link": "https://www.v2ex.com/t/920413",
+      "Description": "\u003cp\u003e我之前在论坛发过这个技术主题的介绍，当前状态是草稿已经基本完成。\u003c/p\u003e\n\u003cp\u003e我将草稿内容整理成了以下大纲，报备给出版社，出版社老师的意见是现在技术图书也很卷，他们是市场化的企业，要以销量、主题是否契合市场为参考，他们也担心出版了没人买，所以我想把大纲发在论坛内，征询 v2er 的意见。 看看大纲主题 程序员们是否能接受的内容!\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e如果您觉得主题内容对您的工作、学习有帮助，请在本帖内回复您的意见，我将非常感激。（负面评价我也接受）\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e主题大纲地址：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/isno/isno.github.io/blob/main/intro.pdf\" rel=\"nofollow\"\u003ehttps://github.com/isno/isno.github.io/blob/main/intro.pdf\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e草稿地址： \u003ca href=\"https://isno.github.io/\" rel=\"nofollow\"\u003ehttps://isno.github.io/\u003c/a\u003e （没有公众号，不引流）\u003c/p\u003e\n\u003cp\u003e本帖的内容，我将完全转至出版社编辑部门，感谢您的意见。\u003c/p\u003e\n",
+      "Author": "isno",
+      "PubDate": "2023-03-02T02:57:18Z"
+    },
+    {
+      "Title": "爆肝四个月，走上了开启研发这条路，一不小心研发成个虚拟空间。 - 分享创造",
+      "Link": "https://www.v2ex.com/t/920411",
+      "Description": "交作业啦：\u003cbr /\u003e老规矩，好东西先给先 V2EX 的社区小伙伴，可以进入空间使用，24 小时不打烊，空间中的语音对话，白板协作，视频通知功能，共享屏幕等操作，都开放给大家了：\u003cbr /\u003e\u003cbr /\u003eV2EX： \u003ca target=\"_blank\" href=\"https://v2ex.circleo.me/\" rel=\"nofollow noopener\"\u003ehttps://v2ex.circleo.me/\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003eDEMO： \u003ca target=\"_blank\" href=\"https://www.circleo.me/?ref=v2ex\" rel=\"nofollow noopener\"\u003ehttps://www.circleo.me/?ref=v2ex\u003c/a\u003e \u003cbr /\u003e\u003cbr /\u003e后续我在空间里添加会议室，可以支持远程会议 \u003cbr /\u003e今天因测试新功能,我为 V2EX 社区选了一个公园风，像社区一样，每个人都可以在社区中找到自己愿意待在里沟通的小同时，如果邀请同伴来到空间,也可以向对方分享屏幕，白板这些操作，希望给社区的小伙们有一个线上虚空间,方便大家随时使用。\u003cbr /\u003e\u003cbr /\u003e[CxV.png]( \u003ca target=\"_blank\" href=\"https://postimg.cc/MnSJKS3R\" rel=\"nofollow noopener\"\u003ehttps://postimg.cc/MnSJKS3R\u003c/a\u003e)\u003cbr /\u003e\u003cbr /\u003e爆肝开始\u003cbr /\u003e故事写在开头，一个有激情，一个有时间，一个想法，就这样开始了我们产品研发之路。起初，我们是想做一个小工具，无意搞出这个虚拟空间产品，回头一看多少个日夜,搞出这么大的产品好搞难阿，在产品研发过程中，我们不断进行市场调研、用户需求分析，同时也进行了多轮的原型测试和用户体验优化。我们也积极听取用户的反馈，不断调整和完善产品，因此，我们决定一起开始完善虚拟办公空间和办公室产品。\u003cbr /\u003e\u003cbr /\u003e产品支持:\u003cbr /\u003e1 、工作间自定义：可按不同工作需求来配置工作区。\u003cbr /\u003e2 、成员席位管理：满足按不同功能或业务来划分席位。\u003cbr /\u003e3 、任务专注桌面：聚焦任务的桌面，让自己有效管理时间。\u003cbr /\u003e4 、团队沟通方式：支持即时文字、语音、视频对话(支持群聊)。\u003cbr /\u003e5 、协作应用工具：支持白板、文件、屏幕共享让成员协作更简单。\u003cbr /\u003e6 、智能总结应用：利用人工智能来自动总结会议，并快速生成会议总结或任务。\u003cbr /\u003e7 、释放人力资源：让人工智能处理平凡任务，让人力聚焦创意任务，现实业务增长。\u003cbr /\u003e这是我们的产品介绍页：\u003cbr /\u003e还有好些功能我并未全部列在此，后续还有一些功能也在开发中，喜欢我们的小作品可以\u003cbr /\u003e欢迎大家给我私信或跟贴评论，感谢大家！",
+      "Author": "jianson2006",
+      "PubDate": "2023-03-02T02:52:26Z"
+    },
+    {
+      "Title": "临近毕业 都说 Java 很难找工作 该转什么方向 - 程序员",
+      "Link": "https://www.v2ex.com/t/920410",
+      "Description": "\u003cp\u003ejava 真的有那么卷吗 要是转方向的话去做什么比较好\u003c/p\u003e\n",
+      "Author": "Index98",
+      "PubDate": "2023-03-02T02:50:39Z"
+    },
+    {
+      "Title": "为什么我从 10.15.7 升级到 12.6.2，但是浏览器的 UA 还是显示 10.15.7 呢？ - macOS",
+      "Link": "https://www.v2ex.com/t/920409",
+      "Description": "",
+      "Author": "wps353",
+      "PubDate": "2023-03-02T02:50:19Z"
+    },
+    {
+      "Title": "gpt-3.5-turbo： chatGPT model API 版本发布了， 0.002 刀 1k 个 token，比 text-davinci-003 快多了，值得切换 - 问与答",
+      "Link": "https://www.v2ex.com/t/920408",
+      "Description": "\u003cp\u003eModel: The ChatGPT model family we are releasing today, gpt-3.5-turbo, is the same model used in the ChatGPT product. It is priced at $0.002 per 1k tokens, which is 10x cheaper than our existing GPT-3.5 models. It’s also our best model for many non-chat use cases—we’ve seen early testers migrate from text-davinci-003 to gpt-3.5-turbo with only a small amount of adjustment needed to their prompts.\u003c/p\u003e\n\u003cp\u003e官网消息： \u003ca href=\"https://openai.com/blog/introducing-chatgpt-and-whisper-apis\" rel=\"nofollow\"\u003ehttps://openai.com/blog/introducing-chatgpt-and-whisper-apis\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e搭建 chatgpt 交流，有个交流 q 群。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"Q 群讨论\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://zhuji188.com/wp-content/uploads/2023/03/chatgpt%E4%BA%A4%E6%B5%81.png\" title=\"Q 群讨论\"/\u003e\u003c/p\u003e\n\u003cp\u003egpt-3.5-turbo 模型的功能主要有：\u003c/p\u003e\n\u003cp\u003e-起草电子邮件或其他文章\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e编写 Python 代码\u003c/li\u003e\n\u003cli\u003e回答关于一组文件的问题\u003c/li\u003e\n\u003cli\u003e创建对话式代理\u003c/li\u003e\n\u003cli\u003e给你的软件一个自然语言界面\u003c/li\u003e\n\u003cli\u003e辅导一系列的科目\u003c/li\u003e\n\u003cli\u003e翻译语言\u003c/li\u003e\n\u003cli\u003e模拟视频游戏中的人物，以及更多\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "ggvm",
+      "PubDate": "2023-03-02T02:49:42Z"
+    },
+    {
+      "Title": "从苹果全家桶逃离 - 程序员",
+      "Link": "https://www.v2ex.com/t/920407",
+      "Description": "\u003cp\u003e看到这个贴子有感而发 \u003ca href=\"https://v2ex.com/t/920254\" rel=\"nofollow\"\u003et/920254\u003c/a\u003e\u003c/p\u003e\n\u003ch1\u003e被苹果洗脑\u003c/h1\u003e\n\u003cp\u003e大学毕业后用信用卡买了人生第一台苹果设备，13 寸的 Macbook air ，从此走上了苹果生态圈的不归路。后来无论是换电脑还是手机都会毫不犹豫的选择苹果。而且我也成功的被洗脑成了一个果蛆，被苹果的什么设计感，专注力等等理念虎的一愣一愣的，还疯狂的向周围的人安利苹果的产品。\u003c/p\u003e\n\u003cp\u003e作为一个后端程序员，我固执的喜欢 linux ，于是拥有类 unix 内核的 mac 系统就成了我的不二之选，这也是我以前一直坚持用 mac 电脑最坚实的原因，甚至觉得用 Windows 做后端开发的同学有点 low 。\u003c/p\u003e\n\u003ch1\u003e迎来转机\u003c/h1\u003e\n\u003cp\u003e去年一次意外我的 iphone 被摔的稀巴烂，看到新 iPhone 的价格我犹豫了。人到中年需要花钱的地方很多，突然有点舍不得了，于是开始尝试转向安卓手机，买个千元机先试试，就买了一部一千多点的红米。\u003c/p\u003e\n\u003cp\u003e开始也用不习惯，经常在女友面前各种吐槽它不如苹果的地方，女友提醒我说，它就没有比苹果好的地方吗。\u003c/p\u003e\n\u003cp\u003e优点，也有啊，比如可以微信双开，miui 的各种本土的便捷小功能，typec 口，快充，大电池，耳机孔，可以自由安装应用。。。。\u003c/p\u003e\n\u003cp\u003e于是慢慢的开始接受这个不完美的千元机。过了没多久，就习惯了。\u003c/p\u003e\n\u003ch1\u003e换电脑\u003c/h1\u003e\n\u003cp\u003e中午休息的两个小时我一般都是打会游戏，以前是玩 switch 打喷射战士，但是喷三的平衡性有点拉跨，就打算玩点 steam 上的游戏，mac 自然是不行了，心想换个 windows 试试吧。毕竟现在 Windows 有了 linux 子系统，应该也能满足我的需求吧。\u003c/p\u003e\n\u003cp\u003e换了之后才发现真香，wsl 应对平时的开发测试足够用了，而且是纯净的 linux ，比 mac 那个类 unix 内核好用多了。而且 jetbrain 全家桶对 wsl 的适配也很好，几乎是无感知的。\u003c/p\u003e\n\u003cp\u003e我一直引以为傲的苹果的触摸板手势操作，现在 windows 也都支持，虽然不够丝滑但是足够用了啊。\u003c/p\u003e\n\u003cp\u003e以前我还觉得后端用 windows 很 low ，现在看来，以前的我才是傻逼。\u003c/p\u003e\n\u003ch1\u003e感悟\u003c/h1\u003e\n\u003cp\u003e人总是会困在自己小世界里不想出来，我之前就是在 mac 全家桶的坑里躺着，认为除了苹果，其他的都是垃圾。但是真的走出来看看并且尝试外面的世界后，才发现以前的自己是多么狭隘。\u003c/p\u003e\n\u003ch1\u003e尾巴\u003c/h1\u003e\n\u003cp\u003e平板还是买 ipad 吧，最便宜的那款\u003c/p\u003e\n",
+      "Author": "vincent7245",
+      "PubDate": "2023-03-02T02:48:04Z"
+    },
+    {
       "Title": "一台笔记本电脑如何连接两台副屏？ - 问与答",
       "Link": "https://www.v2ex.com/t/920406",
       "Description": "\u003cp\u003e目前是笔记本+一个竖屏（ HDMI 连接），视力不好，觉得笔记本屏幕看起来还是有点吃力，想再买个显示器，笔记本买个支架搁起来。笔记本是惠普的 ZBOOK,一个雷电 3 接口和一个 HDMI 接口，请问要怎么连接两个副屏？之前借同事的显示器试过，好像只能同时显示一样的画面。\u003c/p\u003e\n",
@@ -13,7 +62,7 @@
     {
       "Title": "开一贴记录一下自己的副业征程 - 酷工作",
       "Link": "https://www.v2ex.com/t/920405",
-      "Description": "\u003cp\u003e1.初出茅庐，大学时期（ 2012-2016 ）接过几个大厂的兼职，其中有几个亮点。一个是本来是几个人工工作被我搞成自动化，期间学会了编程，开始是易语言，后来是按键精灵的 vb 最后就是 python 。另一个是本来简单地校园推广，被我搞成了从业务上的创新，一鱼三吃，直接卷死其他学校地推，做到了地区垄断，相当有意思，以后有机会展开讲一下。\n2.安逸，大学毕业，没有特意找工作，面试了大概三四次，然后也都拿到了 offer ，最后选择了现在的国企岗位，待遇在国企里面很有竞争力，工作环境也很不错，这里面同事说话各个都很好听，领导也相当照顾。一起都是那么的理所当然。这里面也有一些问题，最可怕的是拧螺丝，各种业务场景，以至于没有机会在某一个行业深入研究。当然工作还是编程相关的，只不过会有一些产品之类的工作，也会偶尔写写报告。\n3.思变，业余时间也试图过研究一些副业，比如写自媒体（基于一些数据生成一些报告），做各种小程序（工具类，资源类），最成功的的应该返利公众号，用户做到了八九千，目前赚了几万块。当然平时也会接一些脚本程序的开发，或者数据采集一类的工作。\n4.剧变，领导的领导跑路了，后来领导也跟着跑路了，剩下我在风中凌乱。现在有几个选项，等领导协调，回头我跟着提桶跑路（考虑中），或者跟着新领导干（ pass ，pass ），或者活水去其他地方（丧家之犬 pass ），回天津过小日子（考虑中），去互联网卷起（考虑中）。\n5.等待与尝试，无聊的日子使我非常不安，回顾了近几年的收获和不足，算不上蹉跎，但确实没有当年的锐意搞钱的劲头。思来想去这段时间还是继续发展副业更加靠谱，大学时期的热情仿佛又回来了。故开一贴记录一下接下来一段时间的副业开展以及自救的种种尝试。\u003c/p\u003e\n",
+      "Description": "1.初出茅庐，大学时期（ 2012-2016 ）接过几个大厂的兼职，其中有几个亮点。一个是本来是几个人工工作被我搞成自动化，期间学会了编程，开始是易语言，后来是按键精灵的 vb 最后就是 python 。另一个是本来简单地校园推广，被我搞成了从业务上的创新，一鱼三吃，直接卷死其他学校地推，做到了地区垄断，相当有意思，以后有机会展开讲一下。\u003cbr /\u003e2.安逸，大学毕业，没有特意找工作，面试了大概三四次，然后也都拿到了 offer ，最后选择了现在的国企岗位，待遇在国企里面很有竞争力，工作环境也很不错，这里面同事说话各个都很好听，领导也相当照顾。一起都是那么的理所当然。这里面也有一些问题，最可怕的是拧螺丝，各种业务场景，以至于没有机会在某一个行业深入研究。当然工作还是编程相关的，只不过会有一些产品之类的工作，也会偶尔写写报告。\u003cbr /\u003e3.思变，业余时间也试图过研究一些副业，比如写自媒体（基于一些数据生成一些报告），做各种小程序（工具类，资源类），最成功的的应该返利公众号，用户做到了八九千，目前赚了几万块。当然平时也会接一些脚本程序的开发，或者数据采集一类的工作。\u003cbr /\u003e4.剧变，领导的领导跑路了，后来领导也跟着跑路了，剩下我在风中凌乱。现在有几个选项，等领导协调，回头我跟着提桶跑路（考虑中），或者跟着新领导干（ pass ，pass ），或者活水去其他地方（丧家之犬 pass ），回天津过小日子（考虑中），去互联网卷起（考虑中）。\u003cbr /\u003e5.等待与尝试，无聊的日子使我非常不安，回顾了近几年的收获和不足，算不上蹉跎，但确实没有当年的锐意搞钱的劲头。思来想去这段时间还是继续发展副业更加靠谱，大学时期的热情仿佛又回来了。故开一贴记录一下接下来一段时间的副业开展以及自救的种种尝试。",
       "Author": "mn4940128",
       "PubDate": "2023-03-02T02:41:47Z"
     },
