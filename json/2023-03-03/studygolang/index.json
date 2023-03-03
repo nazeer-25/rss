@@ -25,13 +25,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "域名后缀树（Golang） go-domain-suffix-trie",
-      "Link": "https://studygolang.com/p/1137#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "泛型方法创建树结构数据",
       "Link": "https://studygolang.com/topics/16180#reply0",
       "Description": "\u003cp\u003e业务代码很多都需要生成树结构数据返回给前端，正好Go的泛型还没咋学习。\n所以就写了个泛型方案，以后那些需要返回树结构的业务都可以共用同一个泛型生成方案了。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;encoding/json\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;sort\u0026quot;\n)\n\nfunc main() {\n\terr := test()\n\tif err != nil {\n\t\tpanic(err)\n\t}\n}\n\nfunc test() error {\n\tvar (\n\t\t// 一般从数据库查出来的都是切片数据,这里模拟数据库的数据\n\t\ttd = []*MyTree{\n\t\t\t{1, 0, \u0026quot;top\u0026quot;},\n\t\t\t{2, 1, \u0026quot;1\u0026quot;},\n\t\t\t{21, 2, \u0026quot;11\u0026quot;},\n\t\t\t{3, 1, \u0026quot;2\u0026quot;},\n\t\t\t{31, 3, \u0026quot;21\u0026quot;},\n\t\t}\n\n\t\t// 指定排序规则\n\t\tless = func(a, b *MyTree) bool { return a.Id \u0026lt; b.Id }\n\t\t// 根据数据创建树结构\n\t\tmt = MakeTree(td, less)\n\t)\n\t// 大多数情况,都是序列化为json返回给前端\n\tb, err := json.MarshalIndent(mt, \u0026quot;\u0026quot;, \u0026quot;  \u0026quot;)\n\tif err != nil {\n\t\treturn err\n\t}\n\tfmt.Printf(\u0026quot;%T\\n%s\\n\u0026quot;, mt, b)\n\n\tst := RestoreTree(mt, less)\n\tfor i, v := range st {\n\t\tfmt.Printf(\u0026quot;index:%d,val:%#v\\n\u0026quot;, i, v)\n\t}\n\treturn nil\n}\n\n// MyTree 这里是具体业务结构\ntype MyTree struct {\n\tId       int    `json:\u0026quot;id\u0026quot;`\n\tParentId int    `json:\u0026quot;parentId\u0026quot;`\n\tData     string `json:\u0026quot;data\u0026quot;`\n}\n\nfunc (t *MyTree) IsTop() bool {\n\treturn t.ParentId == 0\n}\n\nfunc (t *MyTree) GetId() int {\n\treturn t.Id\n}\n\nfunc (t *MyTree) GetParentId() int {\n\treturn t.ParentId\n}\n\n// TreeData 下面是泛型的通用代码\n// 所有结构体都可以按照下面方式创建树结构,泛型结构体必须有下面几个方法\ntype TreeData interface {\n\tIsTop() bool\n\tGetId() int\n\tGetParentId() int\n}\n\ntype Tree[T TreeData] struct {\n\tData     T          `json:\u0026quot;data\u0026quot;`     // 树结构数据内容\n\tChildren []*Tree[T] `json:\u0026quot;children\u0026quot;` // 树结构子节点,null表示没有子节点\n}\n\nfunc MakeTree[T TreeData](data []T, less func(a, b T) bool) (res *Tree[T]) {\n\ttreeMap := make(map[int]*Tree[T], len(data))\n\tfor _, v := range data {\n\t\ttreeMap[v.GetId()] = \u0026amp;Tree[T]{Data: v}\n\t}\n\n\tfor _, val := range treeMap {\n\t\tif val.Data.IsTop() {\n\t\t\tres = val // 找到树的顶级节点\n\t\t} else if p, ok := treeMap[val.Data.GetParentId()]; ok {\n\t\t\tp.Children = append(p.Children, val)\n\t\t\tif less != nil {\n\t\t\t\tfor i := len(p.Children) - 2; i \u0026gt;= 0; i-- {\n\t\t\t\t\tif less(p.Children[i].Data, p.Children[i+1].Data) {\n\t\t\t\t\t\tbreak // 已经有序\n\t\t\t\t\t}\n\t\t\t\t\tp.Children[i], p.Children[i+1] = p.Children[i+1], p.Children[i]\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn\n}\n\nfunc RestoreTree[T TreeData](tree *Tree[T], less func(a, b T) bool) (res []T) {\n\tvar restore func(*Tree[T])\n\trestore = func(tree *Tree[T]) {\n\t\tif tree != nil {\n\t\t\tres = append(res, tree.Data)\n\t\t\tfor _, v := range tree.Children {\n\t\t\t\trestore(v)\n\t\t\t}\n\t\t}\n\t}\n\trestore(tree)\n\t// 递归还原,并按照传入规则排序\n\tif less != nil {\n\t\tsort.Slice(res, func(i, j int) bool { return less(res[i], res[j]) })\n\t}\n\treturn\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -42,6 +35,13 @@
       "Title": "Mac上从Go1.18.2升级到1.20.1版本之后运行任何Go程序都报错# command-line-arguments\nflag provided but not defined: -G",
       "Link": "https://studygolang.com/topics/16181#reply0",
       "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230304/26e3a7531bc068b337955c17a587c37c.png\" alt=\"image.png\" /\u003e\n如图所示，运行任何代码都是这样的报错，有大神遇到过这种问题吗？要怎么解决啊？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "域名后缀树（Golang） go-domain-suffix-trie",
+      "Link": "https://studygolang.com/p/1137#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -60,6 +60,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "Golang新手交流QQ群",
+      "Link": "https://studygolang.com/topics/16175#reply0",
+      "Description": "\u003cp\u003eGolang新手交流QQ群\n648726870\n欢迎新手进去大家交流\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "关于接口的方法中使用泛型,其他struct实现的问题",
       "Link": "https://studygolang.com/topics/16178#reply5",
       "Description": "\u003cp\u003e下图 接口有泛型,方法没有泛型, RealName 是实现了 Name 接口的\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230302/67ee27d87498ba6ed24fedaf7cdf2164.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e为什么 给Name接口中的Say方法使用泛型传参,RealName 就没有实现 Name 接口了\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230302/2939be68d68a091bc041e5aecb46e18d.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
@@ -70,13 +77,6 @@
       "Title": "问下GO怎么弄协程实现不等待的HTTP POST",
       "Link": "https://studygolang.com/topics/16174#reply1",
       "Description": "\u003cp\u003e问下GO怎么弄协程实现不等待的HTTP POST\u003c/p\u003e\n\n\u003cp\u003e相当于我 整理好比如100个网页，去请求POST，如果等待的话最少需要几分钟等待响应，\n我想实现体积立刻返回结束，，让协程后台去http get post\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Golang新手交流QQ群",
-      "Link": "https://studygolang.com/topics/16175#reply0",
-      "Description": "\u003cp\u003eGolang新手交流QQ群\n648726870\n欢迎新手进去大家交流\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
