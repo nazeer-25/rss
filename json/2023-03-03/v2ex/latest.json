@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "not in 查不到数据 求大佬解答 - MySQL",
+      "Link": "https://www.v2ex.com/t/920853",
+      "Description": "\u003cp\u003e现在有个表 id 列是可重复的 tid 列是不重复的\n现在需要按 id 列分组 删除 分组后第一条之后的数据\u003c/p\u003e\n\u003cp\u003eSELECT tid  FROM \u003ccode\u003etask_info\u003c/code\u003e group by id\u003c/p\u003e\n\u003cp\u003e查询到数据  这些 tid 是需要保留的\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-384299373613\"\u003e523763312515\n531589750696\n609232912408\n791117856085\n840800426753\n939049452487\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这个查询是查询需要删除的数据 排除需要保留的就是需要删除的\u003c/p\u003e\n\u003cp\u003eselect *  FROM task_info where tid not  in (SELECT tid FROM \u003ccode\u003etask_info\u003c/code\u003e group by id)\u003c/p\u003e\n\u003cp\u003e但实际这个语句查不到任何数据 tid 的数据类型是 bigint\u003c/p\u003e\n\u003cp\u003enot in 改成 in 又能查到全部数据\u003c/p\u003e\n",
+      "Author": "coderstory",
+      "PubDate": "2023-03-03T07:32:24Z"
+    },
+    {
+      "Title": "Loki 的 filename 标签为什么过了 24 小时就丢失了 - 日志处理",
+      "Link": "https://www.v2ex.com/t/920852",
+      "Description": "\u003cp\u003e应用内日志做了按天的轮转，存储时间是 7 天，通过边车容器 promtail 挂载共享卷 push 到 Loki\u003cbr/\u003e\nLoki 的话也挂载了持久卷，并且设置了 15 天存储和最大回看周期，刚部署完第一天 push 了所有的日志包括轮转日志，在 grafana 也能看到 filename 标签包含了所有文件，但是第二天查看的时候 filename 标签只有轮转日志了，举个简单的例子就是：\u003cbr/\u003e\nday1:\u003cbr/\u003e\nfilename =\u0026gt; app.log app.log.2023-03-01 app.log.2023-03-02\u003cbr/\u003e\nday2:\u003cbr/\u003e\nfilename =\u0026gt; app.log\u003cbr/\u003e\napp.log 为轮转文件，日志轮转模式为 rename-create 模式，看 Loki 文档也是推荐使用这种模式\u003cbr/\u003e\n以下为 Loki 的配置文件  \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eauth_enabled: false\nserver:\n  http_listen_port: 3100\ncommon:\n  path_prefix: /data/loki\nchunk_store_config:\n  max_look_back_period: 360h\ncompactor:\n  shared_store: filesystem\n  working_directory: /data/loki/boltdb-shipper-compactor\ningester:\n  chunk_block_size: 262144\n  chunk_idle_period: 3m\n  chunk_retain_period: 1m\n  lifecycler:\n    ring:\n      kvstore:\n        store: inmemory\n      replication_factor: 1\n  max_transfer_retries: 0\nlimits_config:\n  enforce_metric_name: false\n  reject_old_samples: true\n  reject_old_samples_max_age: 168h\nschema_config:\n  configs:\n  - from: \"2023-01-01\"\n    index:\n      period: 24h\n      prefix: index_\n    chunks:\n      period: 24h\n      prefix: chunk_\n    object_store: filesystem\n    schema: v11\n    store: boltdb-shipper\nstorage_config:\n  boltdb_shipper:\n    active_index_directory: /data/loki/boltdb-shipper-active\n    cache_location: /data/loki/boltdb-shipper-cache\n    cache_ttl: 24h\n    shared_store: filesystem\n  filesystem:\n    directory: /data/loki/chunks\ntable_manager:\n  retention_deletes_enabled: true\n  retention_period: 360h\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我估计是 schema_config 内 index 的 period 设置出的问题，我理解这个设置的意思是在 24h 后重建索引，但是不明白 Loki 重建索引的规则是什么，为什么只有 filename 的 label 丢失了，有大佬解答一下吗\u003c/p\u003e\n",
+      "Author": "Ritter",
+      "PubDate": "2023-03-03T07:30:36Z"
+    },
+    {
+      "Title": "selenium 在 Linux 环境下会在/tmp 生成很多临时文件，请问要怎么清理？ - 程序员",
+      "Link": "https://www.v2ex.com/t/920851",
+      "Description": "\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"http://qn.fologde.com/2023-03-03%2015-26-36%2010.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e之前有几百个这样的文件，我全删了，刚才又跑了一次 selenium ，又生成了几个文件。\n用 driver.quit()方法退出也不会自动清理临时文件。\u003c/p\u003e\n\u003cp\u003e因为可能有多个 selenium 跑，不能在每次启动时全部删除 /tmp 下文件，所以只能在退出时清理或者有什么办法可以清理吗？\u003c/p\u003e\n",
+      "Author": "yiyifang",
+      "PubDate": "2023-03-03T07:30:13Z"
+    },
+    {
+      "Title": "做了一个免费的 AI 工具箱 - 分享创造",
+      "Link": "https://www.v2ex.com/t/920850",
+      "Description": "\u003cp\u003e一直觉得现有的 AI 工具箱都太硬核了，要么就是对中文支持得很差，所以做了一个比较适合打工人的直白简易的产品：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://ai-toolbox.codefuture.top\" rel=\"nofollow\"\u003ehttps://ai-toolbox.codefuture.top\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e可以写周报，可以给餐厅写点评，给淘宝写评价，因为偶尔也会发小红书，所以就写了小红书文案生成器\n感谢 ChatGPT 开放接口，成本比之前少了很多。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://image-qiniu.jellow.site/FumlopupbvDokyJHhl4apLskwLS8.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e我建了一个用户群，收集了很多模版需求，还有很多产品大神帮忙提意见，欢迎加入交流！\u003c/p\u003e\n",
+      "Author": "themez",
+      "PubDate": "2023-03-03T07:28:33Z"
+    },
+    {
       "Title": "[Talentorg Joblist] 前端 React、后端 Go/远程 - 酷工作",
       "Link": "https://www.v2ex.com/t/920849",
       "Description": "职位：前端 React 、后端 Go\u003cbr /\u003e\u003cbr /\u003e远程：是\u003cbr /\u003e\u003cbr /\u003e介绍：基于文字描述生成图片的 AIGC 项目，已获千万融资，目前在开发网页产品，预计 3 月底上线。\u003cbr /\u003e\u003cbr /\u003e岗位要求：\u003cbr /\u003e\u003cbr /\u003e前端：合作期 1 个月，需要工作日可投入的时间不少于 6 小时，可接收周末加班，必须精通 React ，有 web 图形化编辑器 /3D 编辑器相关经验加分，熟悉 go 加分\u003cbr /\u003e\u003cbr /\u003e后端：偏好能长期合作，可先合作 3 个月，需要工作日可投入的时间不少于 6 小时，可接收周末加班，负责参照产品需求进行 AIGC 产品进行后端设计与实现\u003cbr /\u003e\u003cbr /\u003e链接： \u003ca target=\"_blank\" href=\"https://talentorg.com.cn/?ref=v2ex-626854\" rel=\"nofollow noopener\"\u003ehttps://talentorg.com.cn/?ref=v2ex-626854\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e欢迎订阅 TalentOrg 的远程工作机会，每天更新全网远程工作\u003cbr /\u003e也欢迎对远程工作感兴趣的同学，多多交流",
