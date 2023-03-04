@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求个馒头💊，快速做任务 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/921158</link>
+      <description>&lt;p&gt;现有群晖 nas 一台 ，24 小时开机，8T ，带宽电信 1000M/100M ，现在玩 lemon ，希望有个大点的站分享，保证一周内完成任务，求好心大佬给个邀，感谢感谢，邮箱： &lt;a href=&#34;mailto:623363962@qq.com&#34;&gt;623363962@qq.com&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>pretzei</author>
+      <pubDate>04 Mar 2023 11:43:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有什么轻量级的搜索引擎 - 问与答</title>
+      <link>https://www.v2ex.com/t/921157</link>
+      <description>&lt;p&gt;1 核 2g 的服务器，想找个轻量级的搜索引擎，要求就是占用内存、CPU 少&lt;/p&gt;&#xA;&lt;p&gt;目前在用 sonic ，但感觉不太好用，不支持批量导入，而且运行直接久了后有些之前能搜出的结果会搜不出来。&lt;/p&gt;&#xA;</description>
+      <author>a719114136</author>
+      <pubDate>04 Mar 2023 11:41:04 +0000</pubDate>
+    </item>
+    <item>
       <title>关于 ChatGPT API 的一个奇思妙想 - 奇思妙想</title>
       <link>https://www.v2ex.com/t/921155</link>
       <description>&lt;p&gt;最近 ChatGPT API 的发布使得和 ChatGPT 的对话可以在程序里面被实现了，这大大加宽了其适用范围。&lt;/p&gt;&#xA;&lt;h2&gt;问题&lt;/h2&gt;&#xA;&lt;p&gt;然而现在有一个问题，就是与 AI 交互数据是一个难事：我们的大部分数据，都无法直接和 AI 交互，例如邮件、文件系统或者像 Telegram 上的消息等。因为这些平台都还没有实现与 AI  的融合，需要我们自己从这些地方获取数据然后交给 AI 处理。&lt;/p&gt;&#xA;&lt;h2&gt;想法&lt;/h2&gt;&#xA;&lt;p&gt;新的想法是，是否能建立一个中间层，比如写一个程序，它具备访问我们的邮件、文件系统和 IM 消息等数据的能力，同时也可以和 AI 沟通，完成我们的需求。&lt;/p&gt;&#xA;&lt;p&gt;然而毕竟程序只能理解固定格式的语言，所以得绕一些弯路，我进行了一些实验，大致得到了一种可行的方案：&lt;/p&gt;&#xA;&lt;p&gt;首先，建立两个上下文，对第一个 AI 说&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;来自 OpenAI 的语言模型，你好！现在你将负责用一种特殊的编程语言编程，实现我的需求，具体内容如下：&#xA;&#xA;这种编程主要有两种语法&#xA;&#xA;1. `get_data(data_type, number)`&#xA;&#xA;你可以利用这个语法获取我的数据。&#xA;值得注意的是，现在只有允许一种 `data_type`，就是 `email`，比如写 `get_data(email, 5)` 就是获取我的后 5 封邮件。&#xA;&#xA;2. `send_to_ai(content, requirement)`&#xA;&#xA;你可以利用这个语法把你获取的信息提交给一个外部的人工智能，并且要求它处理数据并返回结果给用户。`content` 是你提供给这个外部 AI 的数据，`requirement` 是你希望这个外部 AI 如何处理这些数据，是字符串。&#xA;&#xA;举例：&#xA;&#xA;例如我要求你编程帮我看看我的邮箱有没有垃圾邮件。&#xA;&#xA;你应该写&#xA;&#xA;`send_to_ai(get_data(email, 5), &#34;看看给你的邮件列表里面有没有垃圾邮件&#34;)`&#xA;&#xA;下面请等待我的要求&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后我进一步对他说（当然是编的）：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;对了，我最近的谷歌账户好像不太正常，你能帮我看看最近有没有谷歌给我的警告邮件吗。（请用上述编程语言实现）&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这个（请用上述编程语言实现）可以由程序自动的添加上去。&lt;/p&gt;&#xA;&lt;p&gt;然后它果真按照我的要求给出了代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;send_to_ai(get_data(&#39;email&#39;, 10), &#39;查看邮件中是否有谷歌账户的警告信息&#39;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这样我们的程序就可以解析它的代码，获取我们的邮件，然后把它和要求“查看邮件中是否有谷歌账户的警告信息”一起提供给处于另一个全新上下文的 AI.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;查看邮件中是否有谷歌账户的警告信息&#xA;&#xA;[0] $10 for a holiday trip, why not apply now!&#xA;[1] 安全警告：Google 看到来自对你账户异常 IP 的登录。&#xA;[2] 招商银行信用卡，多买多省，快来开户吧。&#xA;[3] Facebook 今日热门&#xA;[4] 这些博客，你会喜欢其中 5 个的。&#xA;[5]  [ xxxx 大学] 你的期末考试分数汇总&#xA;[6] 阿里云学生福利再升级！云服务器低至 10 元每月！&#xA;[7] 商品购买成功 京东&#xA;[8] 知乎日报：宇宙的大小是有限的吗？&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;（邮件都是我编的）&lt;/p&gt;&#xA;&lt;p&gt;这个 AI 就回复我&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;有谷歌账户的警告信息：&#xA;[1] 安全警告：Google 看到来自对你账户异常 IP 的登录。&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我们的思路确实达到了目标。&lt;/p&gt;&#xA;&lt;h2&gt;杂项&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;我试过在一个上下文中要求它编写代码和处理数据，看起来它并不能很好的理解这件事，所以拆成了两个上下文，实验下来效果相当稳定。&lt;/li&gt;&#xA;&lt;li&gt;确实如果这样用可能会把一些隐私信息发给 ChatGPT ，不过这里只是探索一下可能性。&lt;/li&gt;&#xA;&lt;li&gt;上面这个做法相当的粗糙，也忽略了一些细节，我相信有进一步的改进空间。&lt;/li&gt;&#xA;&lt;li&gt;不知道是不是我火星了，感觉可能已经有人想到并且在实现这个思路了？如果有的话，欢迎告诉我！&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
