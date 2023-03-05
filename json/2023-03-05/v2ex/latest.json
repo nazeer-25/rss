@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "出投影仪、屏幕坏的 iPad mini4、显示器支架等等 - 问与答",
+      "Link": "https://www.v2ex.com/t/921409",
+      "Description": "\u003cp\u003e1 、EPSON CB-530 投影仪 闲置很久 900 ；\n2 、ipad mini4 128g ，孩子玩游戏被我摔了，扔家里很久了翻出来。350 ；\n3 、ipad air 换过屏幕换过电池，好像屏幕还有点问题。100.\n4 、乐歌显示器支架，最大是到 35 寸。160.\n5 、K2T 路由器。60\n6 、匡威的女鞋。37 码 100\u003c/p\u003e\n\u003cp\u003e小龙（ base ）：ZG9kb3NoMDAx\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.yuque.com/g/ditto-nq4mm/qgnasa/cpxwmc/collaborator/join?token=uSXvJvfnbJ1IqGRA#\" rel=\"nofollow\"\u003ehttps://www.yuque.com/g/ditto-nq4mm/qgnasa/cpxwmc/collaborator/join?token=uSXvJvfnbJ1IqGRA#\u003c/a\u003e 《杂物卖清单》\u003c/p\u003e\n",
+      "Author": "HeyDodo",
+      "PubDate": "2023-03-05T15:36:33Z"
+    },
+    {
+      "Title": "广州的城中村隔音好差啊 - 问与答",
+      "Link": "https://www.v2ex.com/t/921408",
+      "Description": "\u003cp\u003e伸手就能拿到对面衣服的楼距，邻居刷视频的外放声、洗衣机响声、清晰讲话声、下水道冲刷声让我很烦。\u003c/p\u003e\n",
+      "Author": "findjh",
+      "PubDate": "2023-03-05T15:35:07Z"
+    },
+    {
+      "Title": "Golang 邪修： Golang 的三元表达式实现 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/921406",
+      "Description": "\u003cp\u003e项目地址： \u003ca href=\"https://github.com/golang-infrastructure/go-if-expression\" rel=\"nofollow\"\u003ehttps://github.com/golang-infrastructure/go-if-expression\u003c/a\u003e\u003c/p\u003e\n\u003ch1\u003eGolang 的三元表达式实现\u003c/h1\u003e\n\u003ch1\u003e一、开发初衷\u003c/h1\u003e\n\u003cp\u003eGolang 中缺少三元表达式，就导致某些情况三元表达式一行就能搞定的事情到 Golang 里面就得写得很啰嗦，\n这是无法忍受的，\u003cdel\u003e这个库就是借助大量自定义的 if 函数来实现类似三元表达式的功能\u003c/del\u003e，最新版本是基于泛型实现的。\u003c/p\u003e\n\u003cp\u003e使用此库之前：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eif a % 2 == 0 {\n    return \"偶数\"\n} else {\n    return \"奇数\"\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e使用此库之后：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ereturn if_expression.Return(a % 2 == 0, \"偶数\", \"奇数\")\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e对比：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-diff\"\u003e- if a % 2 == 0 {\n- \treturn \"偶数\"\n- } else {\n- \treturn \"奇数\"\n- }\n+ return if_expression.Return(a % 2 == 0, \"偶数\", \"奇数\")\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e二、引入依赖\u003c/h2\u003e\n\u003cp\u003ego get 安装：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-text\"\u003ego get -u github.com/golang-infrastructure/go-if-expression\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如果你不想增加新的依赖，直接拷贝下面这段代码到你的 utils 中，泛型的实现版本非常简洁：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage if_expression\n\n// Return\n//\n//\t@Description: if 实现的三元表达式\n//\t@param boolExpression: 布尔表达式，最终返回一个布尔值\n//\t@param trueReturnValue: 当 boolExpression 返回值为 true 的时候返回的值\n//\t@param falseReturnValue: 当 boolExpression 返回值为 false 的时候返回的值\n//\t@return bool: 三元表达式的结果，为 trueReturnValue 或者 falseReturnValue 中的一个\nfunc Return[T any](boolExpression bool, trueReturnValue, falseReturnValue T) T {\n\tif boolExpression {\n\t\treturn trueReturnValue\n\t} else {\n\t\treturn falseReturnValue\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch1\u003e三、Example\u003c/h1\u003e\n\u003cp\u003e比如最常见的默认值场景：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003ethreadNum := 0\nfmt.Printf(\"线程数： %d\", if_expression.Return(threadNum == 0, 1, threadNum))\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e使用的例子：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\"fmt\"\n\tif_expression \"github.com/golang-infrastructure/go-if-expression\"\n)\n\nfunc main() {\n\n\tr := if_expression.Return(true, \"是\", \"否\")\n\tfmt.Println(r)\n\t// Output:\n\t// 是\n\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "CC11001100",
+      "PubDate": "2023-03-05T15:34:39Z"
+    },
+    {
       "Title": "准备和对象去上海玩几天,可以推荐几个值得打卡的餐厅吗？ - 上海",
       "Link": "https://www.v2ex.com/t/921404",
       "Description": "\u003cp\u003e目标是外滩附近，预算的话人均 500 以内吧，另外也求推荐几个值得玩的地方，感谢！\u003c/p\u003e\n",

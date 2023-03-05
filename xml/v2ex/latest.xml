@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>出投影仪、屏幕坏的 iPad mini4、显示器支架等等 - 问与答</title>
+      <link>https://www.v2ex.com/t/921409</link>
+      <description>&lt;p&gt;1 、EPSON CB-530 投影仪 闲置很久 900 ；&#xA;2 、ipad mini4 128g ，孩子玩游戏被我摔了，扔家里很久了翻出来。350 ；&#xA;3 、ipad air 换过屏幕换过电池，好像屏幕还有点问题。100.&#xA;4 、乐歌显示器支架，最大是到 35 寸。160.&#xA;5 、K2T 路由器。60&#xA;6 、匡威的女鞋。37 码 100&lt;/p&gt;&#xA;&lt;p&gt;小龙（ base ）：ZG9kb3NoMDAx&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.yuque.com/g/ditto-nq4mm/qgnasa/cpxwmc/collaborator/join?token=uSXvJvfnbJ1IqGRA#&#34; rel=&#34;nofollow&#34;&gt;https://www.yuque.com/g/ditto-nq4mm/qgnasa/cpxwmc/collaborator/join?token=uSXvJvfnbJ1IqGRA#&lt;/a&gt; 《杂物卖清单》&lt;/p&gt;&#xA;</description>
+      <author>HeyDodo</author>
+      <pubDate>05 Mar 2023 15:36:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>广州的城中村隔音好差啊 - 问与答</title>
+      <link>https://www.v2ex.com/t/921408</link>
+      <description>&lt;p&gt;伸手就能拿到对面衣服的楼距，邻居刷视频的外放声、洗衣机响声、清晰讲话声、下水道冲刷声让我很烦。&lt;/p&gt;&#xA;</description>
+      <author>findjh</author>
+      <pubDate>05 Mar 2023 15:35:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>Golang 邪修： Golang 的三元表达式实现 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/921406</link>
+      <description>&lt;p&gt;项目地址： &lt;a href=&#34;https://github.com/golang-infrastructure/go-if-expression&#34; rel=&#34;nofollow&#34;&gt;https://github.com/golang-infrastructure/go-if-expression&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1&gt;Golang 的三元表达式实现&lt;/h1&gt;&#xA;&lt;h1&gt;一、开发初衷&lt;/h1&gt;&#xA;&lt;p&gt;Golang 中缺少三元表达式，就导致某些情况三元表达式一行就能搞定的事情到 Golang 里面就得写得很啰嗦，&#xA;这是无法忍受的，&lt;del&gt;这个库就是借助大量自定义的 if 函数来实现类似三元表达式的功能&lt;/del&gt;，最新版本是基于泛型实现的。&lt;/p&gt;&#xA;&lt;p&gt;使用此库之前：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;if a % 2 == 0 {&#xA;    return &#34;偶数&#34;&#xA;} else {&#xA;    return &#34;奇数&#34;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;使用此库之后：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;return if_expression.Return(a % 2 == 0, &#34;偶数&#34;, &#34;奇数&#34;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;对比：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-diff&#34;&gt;- if a % 2 == 0 {&#xA;- &#x9;return &#34;偶数&#34;&#xA;- } else {&#xA;- &#x9;return &#34;奇数&#34;&#xA;- }&#xA;+ return if_expression.Return(a % 2 == 0, &#34;偶数&#34;, &#34;奇数&#34;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;二、引入依赖&lt;/h2&gt;&#xA;&lt;p&gt;go get 安装：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;go get -u github.com/golang-infrastructure/go-if-expression&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如果你不想增加新的依赖，直接拷贝下面这段代码到你的 utils 中，泛型的实现版本非常简洁：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package if_expression&#xA;&#xA;// Return&#xA;//&#xA;//&#x9;@Description: if 实现的三元表达式&#xA;//&#x9;@param boolExpression: 布尔表达式，最终返回一个布尔值&#xA;//&#x9;@param trueReturnValue: 当 boolExpression 返回值为 true 的时候返回的值&#xA;//&#x9;@param falseReturnValue: 当 boolExpression 返回值为 false 的时候返回的值&#xA;//&#x9;@return bool: 三元表达式的结果，为 trueReturnValue 或者 falseReturnValue 中的一个&#xA;func Return[T any](boolExpression bool, trueReturnValue, falseReturnValue T) T {&#xA;&#x9;if boolExpression {&#xA;&#x9;&#x9;return trueReturnValue&#xA;&#x9;} else {&#xA;&#x9;&#x9;return falseReturnValue&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h1&gt;三、Example&lt;/h1&gt;&#xA;&lt;p&gt;比如最常见的默认值场景：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;threadNum := 0&#xA;fmt.Printf(&#34;线程数： %d&#34;, if_expression.Return(threadNum == 0, 1, threadNum))&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;使用的例子：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;fmt&#34;&#xA;&#x9;if_expression &#34;github.com/golang-infrastructure/go-if-expression&#34;&#xA;)&#xA;&#xA;func main() {&#xA;&#xA;&#x9;r := if_expression.Return(true, &#34;是&#34;, &#34;否&#34;)&#xA;&#x9;fmt.Println(r)&#xA;&#x9;// Output:&#xA;&#x9;// 是&#xA;&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>CC11001100</author>
+      <pubDate>05 Mar 2023 15:34:39 +0000</pubDate>
+    </item>
+    <item>
       <title>准备和对象去上海玩几天,可以推荐几个值得打卡的餐厅吗？ - 上海</title>
       <link>https://www.v2ex.com/t/921404</link>
       <description>&lt;p&gt;目标是外滩附近，预算的话人均 500 以内吧，另外也求推荐几个值得玩的地方，感谢！&lt;/p&gt;&#xA;</description>
