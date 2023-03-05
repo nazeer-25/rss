@@ -4,16 +4,23 @@
   "Description": "",
   "Items": [
     {
-      "Title": "Surge for ios 差两人 - Surge",
-      "Link": "https://www.v2ex.com/t/921238",
-      "Description": "\u003cp\u003e「 Surge for iOS 」 3 设备车差 2 个位置，2024.2.29 到期，110 买断。过期后两人以上同意即续费，长期优先，如要换设备可自行反激活。跳车不退。\n有意的 Email： \u003ca href=\"mailto:vvllnn@icloud.com\"\u003evvllnn@icloud.com\u003c/a\u003e  tg：@penghuaifa\u003c/p\u003e\n",
-      "Author": "penghuaifa",
-      "PubDate": "2023-03-05T02:24:24Z"
+      "Title": "腾讯云域名年审问题~（每年都打电话 问你是不是 xxx， xxx 名下是不是有个 xxxx 的域名） - 问与答",
+      "Link": "https://www.v2ex.com/t/921241",
+      "Description": "\u003cp\u003e每年都打电话来来核实信息\u003c/p\u003e\n\u003cp\u003e去年打电话来核实 \u003c/p\u003e\n\u003cp\u003e有域名备案有问题：\n和绑定的腾讯云 IP 不一致 管局要求要进行整改啥的 不然超过 xx 时间 就要停止解析域名了\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e为啥不一致 老用户不如 xxx 只能注册新号买腾讯云\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e后来把域名迁移到另外一个账号下 现在过了 1 年多了 啥事儿都没\u003c/p\u003e\n\u003cp\u003e这是腾讯云自己的内部审核吗？还是遗漏了？\u003c/p\u003e\n",
+      "Author": "justin2018",
+      "PubDate": "2023-03-05T02:52:59Z"
+    },
+    {
+      "Title": "怎么要回被扣的一半薪资 - 职场话题",
+      "Link": "https://www.v2ex.com/t/921239",
+      "Description": "上次说过离职领导画饼留人，\u003cbr /\u003e实际真的是饼。\u003cbr /\u003e后面我坚持再三要走，\u003cbr /\u003e2 月 28 号最后工作日离职了。\u003cbr /\u003e\u003cbr /\u003e重点来了：\u003cbr /\u003e后面流程走了几天回公司办离职，在集团人事那各种离职文件签完字后，到最后的薪资确认单签字，发现工资扣了一半，我问人事，人太态度恶劣让我问领导，打电话给领导，领导说查一下，后面再电话就不接电话了，再打电话给领导的领导也是不接，回办公室找人，人都不在，问同事说刚刚还在，突然离开了，后面不管怎么样人家就不理你。\u003cbr /\u003e人事也同样不理你，就是各种逼你签字。\u003cbr /\u003e以前一直传言离职最后一个月工资都是给扣一半的，没任何理由。现在到自己身上发现是真的。\u003cbr /\u003e\u003cbr /\u003e需要大家出主意的：\u003cbr /\u003e薪资确认单我是也没签字的，我现在就想问问，我要怎么样才能拿回这一半薪资，不限于法律等程序。\u003cbr /\u003e\u003cbr /\u003e最后提醒大家别去大族激光包括他相关的公司，真的是比小企业坑人的大厂，具体太多就不描述了。",
+      "Author": "JasonFW",
+      "PubDate": "2023-03-05T02:26:52Z"
     },
     {
       "Title": "[dubbo]为什么两次同样的请求，协议却不一样 - Java",
       "Link": "https://www.v2ex.com/t/921237",
-      "Description": "\u003cpre\u003e\u003ccode\u003e环境：\njdk：19\ndubbo：3.2.0.beta-5\nspringboot: 3.0.4\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是我的 dubbo 过滤器\n@Activate(group = CommonConstants.CONSUMER, value = \"cookieValidationFilter\")\npublic class CookieValidationFilter implements Filter {\n    @Override\n    public Result invoke(Invoker\u0026lt;?\u0026gt; invoker, Invocation invocation) throws RpcException {\n        RpcContext context = RpcContext.getServerContext();\n        return invoker.invoke(invocation);\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是我的 controller：\n@DubboReference(protocol = \"tri\")\n    UserService userService;\n\n    @PostMapping(value = \"/sign_in\", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)\n    public ServerResponseEntity\u0026lt;Object\u0026gt; loginController(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {\n        RpcContext context = RpcContext.getServerContext();\n        System.out.println(\"rest 接口\");\n        System.out.println(context.getProtocol());\n        System.out.println(context.getRemoteAddressString());\n        System.out.println(\"-----------------------------------------\");\n        String userInfo = serverHttpRequest.getHeaders().getFirst(USERINFO);\n        ServerResponseEntity\u0026lt;Object\u0026gt; responseEntity = userService.loginService(userInfo);\n        serverHttpResponse.addCookie(ResponseCookie.from(\"COOKIE_ID\", String.valueOf(responseEntity.getData())).build());\n        return responseEntity;\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是我的 service：\n@Override\n    public ServerResponseEntity\u0026lt;Object\u0026gt; loginService(String userInfo) {\n        try {\n            responseEntity = new ServerResponseEntity\u0026lt;\u0026gt;(0, \"login success!\", Decryptor.decrypt(userInfo));\n        } catch (Exception e) {\n            logger.info(e.toString());\n        }\n        return responseEntity;\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是我的 consumer 配置文件：\nserver.port=8081\n\nspring.application.name=consumer\nspring.cloud.nacos.discovery.server-addr=192.168.220.128:8848\n\ndubbo.application.name=consumer\ndubbo.registry.address=nacos://192.168.220.128:8848\ndubbo.protocol.port=-1\ndubbo.consumer.protocol=tri\ndubbo.consumer.filter=appended\ndubbo.application.qos-port=22223\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是打印结果：\n这是客户端连续两次调用 /sign_in 的打印结果\nrest 接口\nnull\nnull:0\n-----------------------------------------\nrest 接口\ntri\nnull:0\n-----------------------------------------\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e问：为什么前后两次协议打印结果不一样，第一次 null ，第二次是 tri\u003c/p\u003e\n",
+      "Description": "\u003cpre\u003e\u003ccode\u003e环境：\njdk：19\ndubbo：3.2.0.beta-5\nspringboot: 3.0.4\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是我的 dubbo 过滤器\n@Activate(group = CommonConstants.CONSUMER, value = \"cookieValidationFilter\")\npublic class CookieValidationFilter implements Filter {\n    @Override\n    public Result invoke(Invoker\u0026lt;?\u0026gt; invoker, Invocation invocation) throws RpcException {\n        RpcContext context = RpcContext.getServerContext();\n        return invoker.invoke(invocation);\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是我的 controller：\n@DubboReference\n    UserService userService;\n\n    @PostMapping(value = \"/sign_in\", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)\n    public ServerResponseEntity\u0026lt;Object\u0026gt; loginController(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {\n        RpcContext context = RpcContext.getServerContext();\n        System.out.println(\"rest 接口\");\n        System.out.println(context.getProtocol());\n        System.out.println(context.getRemoteAddressString());\n        System.out.println(\"-----------------------------------------\");\n        String userInfo = serverHttpRequest.getHeaders().getFirst(USERINFO);\n        ServerResponseEntity\u0026lt;Object\u0026gt; responseEntity = userService.loginService(userInfo);\n        serverHttpResponse.addCookie(ResponseCookie.from(\"COOKIE_ID\", String.valueOf(responseEntity.getData())).build());\n        return responseEntity;\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是我的 service：\n@Override\n    public ServerResponseEntity\u0026lt;Object\u0026gt; loginService(String userInfo) {\n        try {\n            responseEntity = new ServerResponseEntity\u0026lt;\u0026gt;(0, \"login success!\", Decryptor.decrypt(userInfo));\n        } catch (Exception e) {\n            logger.info(e.toString());\n        }\n        return responseEntity;\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是我的 consumer 配置文件：\nserver.port=8081\n\nspring.application.name=consumer\nspring.cloud.nacos.discovery.server-addr=192.168.220.128:8848\n\ndubbo.application.name=consumer\ndubbo.registry.address=nacos://192.168.220.128:8848\ndubbo.protocol.port=-1\ndubbo.consumer.protocol=tri\ndubbo.consumer.filter=appended\ndubbo.application.qos-port=22223\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是打印结果：\n这是客户端连续两次调用 /sign_in 的打印结果\nrest 接口\nnull\nnull:0\n-----------------------------------------\nrest 接口\ntri\nnull:0\n-----------------------------------------\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e问：为什么前后两次协议打印结果不一样，第一次 null ，第二次是 tri\u003c/p\u003e\n",
       "Author": "shayang888",
       "PubDate": "2023-03-05T02:23:13Z"
     },
@@ -247,6 +254,13 @@
       "Description": "",
       "Author": "LxnChan",
       "PubDate": "2023-03-04T14:48:41Z"
+    },
+    {
+      "Title": "Surge for ios 差两人 - Surge",
+      "Link": "https://www.v2ex.com/t/921238",
+      "Description": "\u003cp\u003e「 Surge for iOS 」 3 设备车差 2 个位置，2024.2.29 到期，110 买断。过期后两人以上同意即续费，长期优先，如要换设备可自行反激活。跳车不退。\n有意的 Email： \u003ca href=\"mailto:vvllnn@icloud.com\"\u003evvllnn@icloud.com\u003c/a\u003e  tg：@penghuaifa\u003c/p\u003e\n",
+      "Author": "penghuaifa",
+      "PubDate": "2023-03-05T02:24:24Z"
     },
     {
       "Title": "拉个互助技术群聊 js, flutter, rust 等, 尽量少聊女人, 建政的就不用来了(认真.jpg) - 程序员",
