@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>做了一个 Notion AI 的平替 - 程序员</title>
+      <link>https://www.v2ex.com/t/921337</link>
+      <description>&lt;h2&gt;效果预览&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;demo&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://raw.githubusercontent.com/anc95/writely/main/assets/demo.gif&#34;/&gt;&lt;/p&gt;&#xA;&lt;h2&gt;出发点&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Notion AI 确实很好用，但就是太贵了，既买 ChatGPT 又 Notion AI 不划算，而且 ChatGPT 比 Notion AI 价格便宜很多&lt;/li&gt;&#xA;&lt;li&gt;Notion AI 只能在 Notion 里使用，我的想法是将其能力扩展到浏览器的所有平台，作为一个浏览器插件，既可以协助写作，也可以做一些滑词查询的能力（如翻译，解释语句等）&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;各位 V 友们有什么产品意见尽管提哈&lt;/p&gt;&#xA;</description>
+      <author>anc95</author>
+      <pubDate>05 Mar 2023 10:12:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>一台电脑同时使用了有线网卡和无线网卡，然后接到同一个局域网，如何优先采用有线网卡？ - 路由器</title>
+      <link>https://www.v2ex.com/t/921336</link>
+      <description>&lt;p&gt;这么问的原因，是一台工控机：&#xA;1 ，插了网线保证与服务器有线网络通畅。&#xA;2 ，为了避免 AP 与局域网线路的断开，同时又开了无线联网，跟终端设备连接到同一个局域网 AP ，设备工作在 AP 的无线下。&lt;/p&gt;&#xA;&lt;p&gt;看了路由表的配置方式，似乎两边格式相同，实测在 AP 断开网线时候，在工控机添加路由表之后有几秒钟可以 ping 通服务器，但是很快就 ping 不通了&lt;/p&gt;&#xA;</description>
+      <author>opengps</author>
+      <pubDate>05 Mar 2023 10:11:24 +0000</pubDate>
+    </item>
+    <item>
       <title>React 小白学习过程中遇到技术问题 - React</title>
       <link>https://www.v2ex.com/t/921335</link>
       <description>&lt;p&gt;最近在学习 React ，还在 CRUD 阶段，目前遇到一个问题，没找到什么原因，还望大佬们指点一二&lt;/p&gt;&#xA;&lt;p&gt;主要的问题就是我每次刷新页面，projects 和 users 接口都被调用了两次&lt;/p&gt;&#xA;&lt;p&gt;嵌套结构是&#xA;&amp;lt;App&amp;gt;&#xA;&amp;lt;ProjectListPage&amp;gt;&#xA;&amp;lt;/App&amp;gt;&lt;/p&gt;&#xA;&lt;p&gt;以下是 ProjectListPage 组件的代码，只有这个组件有处理各种状态，其他两个组件 SeachPanel 、List 都没有状态的处理&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;import React, {useEffect, useState} from &#34;react&#34;;&#xA;import {SeachPanel} from &#34;./search-panel&#34;;&#xA;import {List} from &#34;./list&#34;;&#xA;import {cleanObject, uesMount} from &#34;../../utils&#34;;&#xA;import qs from &#34;qs&#34;;&#xA;&#xA;const apiUrl = &#39;http://localhost:3001&#39;&#xA;export const ProjectListPage = () =&amp;gt;{&#xA; &#xA;    const [param,setParam] = useState({&#xA;        name: &#39;&#39;,&#xA;        personId: &#39;&#39;&#xA;    })&#xA;&#xA;    const [list,setList] = useState([])&#xA;&#xA;    // 当搜索内容改变的时候从新获取列表（默认会先执行一次）&#xA;    useEffect(()=&amp;gt;{&#xA;        fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(async (resp) =&amp;gt; {&#xA;            if (resp.ok) {&#xA;                setList(await resp.json())&#xA;            }&#xA;        })&#xA;    },[])&#xA;&#xA;    // option 用户状态&#xA;    const [users,setUsers] = useState([])&#xA;    useEffect(()=&amp;gt;{&#xA;        fetch(`${apiUrl}/users`).then(async (resp) =&amp;gt; {&#xA;            if (resp.ok) {&#xA;                setUsers(await resp.json())&#xA;            }&#xA;        })&#xA;    },[])&#xA;&#xA;    return &amp;lt;div&amp;gt;&#xA;        &amp;lt;SeachPanel users={users} param={param} setParam={setParam}/&amp;gt;&#xA;        &amp;lt;List users={users} list={list}/&amp;gt;&#xA;    &amp;lt;/div&amp;gt;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>

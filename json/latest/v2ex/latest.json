@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "做了一个 Notion AI 的平替 - 程序员",
+      "Link": "https://www.v2ex.com/t/921337",
+      "Description": "\u003ch2\u003e效果预览\u003c/h2\u003e\n\u003cp\u003e\u003cimg alt=\"demo\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/anc95/writely/main/assets/demo.gif\"/\u003e\u003c/p\u003e\n\u003ch2\u003e出发点\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003eNotion AI 确实很好用，但就是太贵了，既买 ChatGPT 又 Notion AI 不划算，而且 ChatGPT 比 Notion AI 价格便宜很多\u003c/li\u003e\n\u003cli\u003eNotion AI 只能在 Notion 里使用，我的想法是将其能力扩展到浏览器的所有平台，作为一个浏览器插件，既可以协助写作，也可以做一些滑词查询的能力（如翻译，解释语句等）\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e各位 V 友们有什么产品意见尽管提哈\u003c/p\u003e\n",
+      "Author": "anc95",
+      "PubDate": "2023-03-05T10:12:09Z"
+    },
+    {
+      "Title": "一台电脑同时使用了有线网卡和无线网卡，然后接到同一个局域网，如何优先采用有线网卡？ - 路由器",
+      "Link": "https://www.v2ex.com/t/921336",
+      "Description": "\u003cp\u003e这么问的原因，是一台工控机：\n1 ，插了网线保证与服务器有线网络通畅。\n2 ，为了避免 AP 与局域网线路的断开，同时又开了无线联网，跟终端设备连接到同一个局域网 AP ，设备工作在 AP 的无线下。\u003c/p\u003e\n\u003cp\u003e看了路由表的配置方式，似乎两边格式相同，实测在 AP 断开网线时候，在工控机添加路由表之后有几秒钟可以 ping 通服务器，但是很快就 ping 不通了\u003c/p\u003e\n",
+      "Author": "opengps",
+      "PubDate": "2023-03-05T10:11:24Z"
+    },
+    {
       "Title": "React 小白学习过程中遇到技术问题 - React",
       "Link": "https://www.v2ex.com/t/921335",
       "Description": "\u003cp\u003e最近在学习 React ，还在 CRUD 阶段，目前遇到一个问题，没找到什么原因，还望大佬们指点一二\u003c/p\u003e\n\u003cp\u003e主要的问题就是我每次刷新页面，projects 和 users 接口都被调用了两次\u003c/p\u003e\n\u003cp\u003e嵌套结构是\n\u0026lt;App\u0026gt;\n\u0026lt;ProjectListPage\u0026gt;\n\u0026lt;/App\u0026gt;\u003c/p\u003e\n\u003cp\u003e以下是 ProjectListPage 组件的代码，只有这个组件有处理各种状态，其他两个组件 SeachPanel 、List 都没有状态的处理\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eimport React, {useEffect, useState} from \"react\";\nimport {SeachPanel} from \"./search-panel\";\nimport {List} from \"./list\";\nimport {cleanObject, uesMount} from \"../../utils\";\nimport qs from \"qs\";\n\nconst apiUrl = 'http://localhost:3001'\nexport const ProjectListPage = () =\u0026gt;{\n \n    const [param,setParam] = useState({\n        name: '',\n        personId: ''\n    })\n\n    const [list,setList] = useState([])\n\n    // 当搜索内容改变的时候从新获取列表（默认会先执行一次）\n    useEffect(()=\u0026gt;{\n        fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(async (resp) =\u0026gt; {\n            if (resp.ok) {\n                setList(await resp.json())\n            }\n        })\n    },[])\n\n    // option 用户状态\n    const [users,setUsers] = useState([])\n    useEffect(()=\u0026gt;{\n        fetch(`${apiUrl}/users`).then(async (resp) =\u0026gt; {\n            if (resp.ok) {\n                setUsers(await resp.json())\n            }\n        })\n    },[])\n\n    return \u0026lt;div\u0026gt;\n        \u0026lt;SeachPanel users={users} param={param} setParam={setParam}/\u0026gt;\n        \u0026lt;List users={users} list={list}/\u0026gt;\n    \u0026lt;/div\u0026gt;\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
