@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>React 小白学习过程中遇到技术问题 - React</title>
+      <link>https://www.v2ex.com/t/921335</link>
+      <description>&lt;p&gt;最近在学习 React ，还在 CRUD 阶段，目前遇到一个问题，没找到什么原因，还望大佬们指点一二&lt;/p&gt;&#xA;&lt;p&gt;主要的问题就是我每次刷新页面，projects 和 users 接口都被调用了两次&lt;/p&gt;&#xA;&lt;p&gt;嵌套结构是&#xA;&amp;lt;App&amp;gt;&#xA;&amp;lt;ProjectListPage&amp;gt;&#xA;&amp;lt;/App&amp;gt;&lt;/p&gt;&#xA;&lt;p&gt;以下是 ProjectListPage 组件的代码，只有这个组件有处理各种状态，其他两个组件 SeachPanel 、List 都没有状态的处理&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;import React, {useEffect, useState} from &#34;react&#34;;&#xA;import {SeachPanel} from &#34;./search-panel&#34;;&#xA;import {List} from &#34;./list&#34;;&#xA;import {cleanObject, uesMount} from &#34;../../utils&#34;;&#xA;import qs from &#34;qs&#34;;&#xA;&#xA;const apiUrl = &#39;http://localhost:3001&#39;&#xA;export const ProjectListPage = () =&amp;gt;{&#xA; &#xA;    const [param,setParam] = useState({&#xA;        name: &#39;&#39;,&#xA;        personId: &#39;&#39;&#xA;    })&#xA;&#xA;    const [list,setList] = useState([])&#xA;&#xA;    // 当搜索内容改变的时候从新获取列表（默认会先执行一次）&#xA;    useEffect(()=&amp;gt;{&#xA;        fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(async (resp) =&amp;gt; {&#xA;            if (resp.ok) {&#xA;                setList(await resp.json())&#xA;            }&#xA;        })&#xA;    },[])&#xA;&#xA;    // option 用户状态&#xA;    const [users,setUsers] = useState([])&#xA;    useEffect(()=&amp;gt;{&#xA;        fetch(`${apiUrl}/users`).then(async (resp) =&amp;gt; {&#xA;            if (resp.ok) {&#xA;                setUsers(await resp.json())&#xA;            }&#xA;        })&#xA;    },[])&#xA;&#xA;    return &amp;lt;div&amp;gt;&#xA;        &amp;lt;SeachPanel users={users} param={param} setParam={setParam}/&amp;gt;&#xA;        &amp;lt;List users={users} list={list}/&amp;gt;&#xA;    &amp;lt;/div&amp;gt;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>Parker0</author>
+      <pubDate>05 Mar 2023 10:01:03 +0000</pubDate>
+    </item>
+    <item>
       <title>有啥便宜手机套餐推荐没？ - 问与答</title>
       <link>https://www.v2ex.com/t/921334</link>
       <description>&lt;p&gt;目前是移动号码，月费 78 元，现在的套餐 50G 流量和 300 分钟通话时间根本用不完，打算换个便宜的二三十块的，能携号转网更好，老哥们推荐一下&lt;/p&gt;&#xA;</description>

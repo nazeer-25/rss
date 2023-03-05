@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "React 小白学习过程中遇到技术问题 - React",
+      "Link": "https://www.v2ex.com/t/921335",
+      "Description": "\u003cp\u003e最近在学习 React ，还在 CRUD 阶段，目前遇到一个问题，没找到什么原因，还望大佬们指点一二\u003c/p\u003e\n\u003cp\u003e主要的问题就是我每次刷新页面，projects 和 users 接口都被调用了两次\u003c/p\u003e\n\u003cp\u003e嵌套结构是\n\u0026lt;App\u0026gt;\n\u0026lt;ProjectListPage\u0026gt;\n\u0026lt;/App\u0026gt;\u003c/p\u003e\n\u003cp\u003e以下是 ProjectListPage 组件的代码，只有这个组件有处理各种状态，其他两个组件 SeachPanel 、List 都没有状态的处理\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eimport React, {useEffect, useState} from \"react\";\nimport {SeachPanel} from \"./search-panel\";\nimport {List} from \"./list\";\nimport {cleanObject, uesMount} from \"../../utils\";\nimport qs from \"qs\";\n\nconst apiUrl = 'http://localhost:3001'\nexport const ProjectListPage = () =\u0026gt;{\n \n    const [param,setParam] = useState({\n        name: '',\n        personId: ''\n    })\n\n    const [list,setList] = useState([])\n\n    // 当搜索内容改变的时候从新获取列表（默认会先执行一次）\n    useEffect(()=\u0026gt;{\n        fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(async (resp) =\u0026gt; {\n            if (resp.ok) {\n                setList(await resp.json())\n            }\n        })\n    },[])\n\n    // option 用户状态\n    const [users,setUsers] = useState([])\n    useEffect(()=\u0026gt;{\n        fetch(`${apiUrl}/users`).then(async (resp) =\u0026gt; {\n            if (resp.ok) {\n                setUsers(await resp.json())\n            }\n        })\n    },[])\n\n    return \u0026lt;div\u0026gt;\n        \u0026lt;SeachPanel users={users} param={param} setParam={setParam}/\u0026gt;\n        \u0026lt;List users={users} list={list}/\u0026gt;\n    \u0026lt;/div\u0026gt;\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "Parker0",
+      "PubDate": "2023-03-05T10:01:03Z"
+    },
+    {
       "Title": "有啥便宜手机套餐推荐没？ - 问与答",
       "Link": "https://www.v2ex.com/t/921334",
       "Description": "\u003cp\u003e目前是移动号码，月费 78 元，现在的套餐 50G 流量和 300 分钟通话时间根本用不完，打算换个便宜的二三十块的，能携号转网更好，老哥们推荐一下\u003c/p\u003e\n",
