@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Surge for ios 差两人 - Surge</title>
+      <link>https://www.v2ex.com/t/921238</link>
+      <description>&lt;p&gt;「 Surge for iOS 」 3 设备车差 2 个位置，2024.2.29 到期，110 买断。过期后两人以上同意即续费，长期优先，如要换设备可自行反激活。跳车不退。&#xA;有意的 Email： &lt;a href=&#34;mailto:vvllnn@icloud.com&#34;&gt;vvllnn@icloud.com&lt;/a&gt;  tg：@penghuaifa&lt;/p&gt;&#xA;</description>
+      <author>penghuaifa</author>
+      <pubDate>05 Mar 2023 02:24:24 +0000</pubDate>
+    </item>
+    <item>
+      <title>[dubbo]为什么两次同样的请求，协议却不一样 - Java</title>
+      <link>https://www.v2ex.com/t/921237</link>
+      <description>&lt;pre&gt;&lt;code&gt;环境：&#xA;jdk：19&#xA;dubbo：3.2.0.beta-5&#xA;springboot: 3.0.4&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;这是我的 dubbo 过滤器&#xA;@Activate(group = CommonConstants.CONSUMER, value = &#34;cookieValidationFilter&#34;)&#xA;public class CookieValidationFilter implements Filter {&#xA;    @Override&#xA;    public Result invoke(Invoker&amp;lt;?&amp;gt; invoker, Invocation invocation) throws RpcException {&#xA;        RpcContext context = RpcContext.getServerContext();&#xA;        return invoker.invoke(invocation);&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;这是我的 controller：&#xA;@DubboReference(protocol = &#34;tri&#34;)&#xA;    UserService userService;&#xA;&#xA;    @PostMapping(value = &#34;/sign_in&#34;, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)&#xA;    public ServerResponseEntity&amp;lt;Object&amp;gt; loginController(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {&#xA;        RpcContext context = RpcContext.getServerContext();&#xA;        System.out.println(&#34;rest 接口&#34;);&#xA;        System.out.println(context.getProtocol());&#xA;        System.out.println(context.getRemoteAddressString());&#xA;        System.out.println(&#34;-----------------------------------------&#34;);&#xA;        String userInfo = serverHttpRequest.getHeaders().getFirst(USERINFO);&#xA;        ServerResponseEntity&amp;lt;Object&amp;gt; responseEntity = userService.loginService(userInfo);&#xA;        serverHttpResponse.addCookie(ResponseCookie.from(&#34;COOKIE_ID&#34;, String.valueOf(responseEntity.getData())).build());&#xA;        return responseEntity;&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;这是我的 service：&#xA;@Override&#xA;    public ServerResponseEntity&amp;lt;Object&amp;gt; loginService(String userInfo) {&#xA;        try {&#xA;            responseEntity = new ServerResponseEntity&amp;lt;&amp;gt;(0, &#34;login success!&#34;, Decryptor.decrypt(userInfo));&#xA;        } catch (Exception e) {&#xA;            logger.info(e.toString());&#xA;        }&#xA;        return responseEntity;&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;这是我的 consumer 配置文件：&#xA;server.port=8081&#xA;&#xA;spring.application.name=consumer&#xA;spring.cloud.nacos.discovery.server-addr=192.168.220.128:8848&#xA;&#xA;dubbo.application.name=consumer&#xA;dubbo.registry.address=nacos://192.168.220.128:8848&#xA;dubbo.protocol.port=-1&#xA;dubbo.consumer.protocol=tri&#xA;dubbo.consumer.filter=appended&#xA;dubbo.application.qos-port=22223&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;这是打印结果：&#xA;这是客户端连续两次调用 /sign_in 的打印结果&#xA;rest 接口&#xA;null&#xA;null:0&#xA;-----------------------------------------&#xA;rest 接口&#xA;tri&#xA;null:0&#xA;-----------------------------------------&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;问：为什么前后两次协议打印结果不一样，第一次 null ，第二次是 tri&lt;/p&gt;&#xA;</description>
+      <author>shayang888</author>
+      <pubDate>05 Mar 2023 02:23:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>求问怎么才能在家外面使用 plex app 啊？ - 问与答</title>
+      <link>https://www.v2ex.com/t/921236</link>
+      <description>已经内网穿透实现了 web 访问 nas 上的 plex ，但是 app 一直不行&lt;br /&gt;&lt;br /&gt;已经在服务器上配置了 自定义服务器访问 URL ，还是不行，网上也没搜到别的方案，plex 还不支持邮件技术支持，只能来请教 v2 的老哥们了</description>
+      <author>JavenXiao</author>
+      <pubDate>05 Mar 2023 02:20:58 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问一下老哥们， Raycast 有没有办法做到像 Alfred 那样不需要跳转二级窗口的逻辑？ - macOS</title>
+      <link>https://www.v2ex.com/t/921235</link>
+      <description>&lt;p&gt;如题，比如文件搜索在 alfred 中是 find 开头加空格即可&lt;/p&gt;&#xA;&lt;p&gt;但是在 Raycast 中必须输入完以后，切换到二级窗口去&lt;/p&gt;&#xA;&lt;p&gt;然后插件这块就要进入更深的窗口了，嵌套的很深啊，不如 Alfed 快速直接有效率&lt;/p&gt;&#xA;&lt;p&gt;当然 Raycast 的优势不仅是免费，还有庞大的插件市场支持，虽然说用着其实有些麻烦&lt;/p&gt;&#xA;&lt;p&gt;Alfred 官方是弄了个类似的市场，最近弄的，但是没啥东西在上面啊，很少很少……应用也不内置……&lt;/p&gt;&#xA;</description>
+      <author>neochen13</author>
+      <pubDate>05 Mar 2023 02:13:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>HACKLED-PRO - 硬件</title>
+      <link>https://www.v2ex.com/t/921233</link>
+      <description>由 HACK 实验室出品的 RGB 控制器 V1.1 ，开源硬件项目，采用 ESP32 模块，定制汉化版 WLED 固件，支持接入 HomeAssistant ，支持 WS281X 系列灯带 /灯板，支持拾音灯功能，支持 5V/12V 电平切换等&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt; [自制 RGB 光污染控制器，语音控制，WiFi 联网，接入智能家居，成本极低，全开源-哔哩哔哩]  &lt;a target=&#34;_blank&#34; href=&#34;https://b23.tv/BCzmr9v&#34; rel=&#34;nofollow noopener&#34;&gt;https://b23.tv/BCzmr9v&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt; [闲鱼]  &lt;a target=&#34;_blank&#34; href=&#34;https://m.tb.cn/h.UKsQYTw?tk=a792dR42jfK&#34; rel=&#34;nofollow noopener&#34;&gt;https://m.tb.cn/h.UKsQYTw?tk=a792dR42jfK&lt;/a&gt; CZ0001 「我在闲鱼发布了 [ HACKLABS HACKLED-PRO ] 」&lt;br /&gt;&lt;br /&gt;点击链接直接打开</description>
+      <author>droidmax61</author>
+      <pubDate>05 Mar 2023 01:55:58 +0000</pubDate>
+    </item>
+    <item>
       <title>有些 chatGPT 的账号有 120 美金 有人申请过吗 - OpenAI</title>
       <link>https://www.v2ex.com/t/921232</link>
       <description>&lt;p&gt;这个是怎么申请的&lt;/p&gt;&#xA;&lt;p&gt;有大佬说下吗&lt;/p&gt;&#xA;</description>

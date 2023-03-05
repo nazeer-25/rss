@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Surge for ios 差两人 - Surge",
+      "Link": "https://www.v2ex.com/t/921238",
+      "Description": "\u003cp\u003e「 Surge for iOS 」 3 设备车差 2 个位置，2024.2.29 到期，110 买断。过期后两人以上同意即续费，长期优先，如要换设备可自行反激活。跳车不退。\n有意的 Email： \u003ca href=\"mailto:vvllnn@icloud.com\"\u003evvllnn@icloud.com\u003c/a\u003e  tg：@penghuaifa\u003c/p\u003e\n",
+      "Author": "penghuaifa",
+      "PubDate": "2023-03-05T02:24:24Z"
+    },
+    {
+      "Title": "[dubbo]为什么两次同样的请求，协议却不一样 - Java",
+      "Link": "https://www.v2ex.com/t/921237",
+      "Description": "\u003cpre\u003e\u003ccode\u003e环境：\njdk：19\ndubbo：3.2.0.beta-5\nspringboot: 3.0.4\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是我的 dubbo 过滤器\n@Activate(group = CommonConstants.CONSUMER, value = \"cookieValidationFilter\")\npublic class CookieValidationFilter implements Filter {\n    @Override\n    public Result invoke(Invoker\u0026lt;?\u0026gt; invoker, Invocation invocation) throws RpcException {\n        RpcContext context = RpcContext.getServerContext();\n        return invoker.invoke(invocation);\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是我的 controller：\n@DubboReference(protocol = \"tri\")\n    UserService userService;\n\n    @PostMapping(value = \"/sign_in\", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)\n    public ServerResponseEntity\u0026lt;Object\u0026gt; loginController(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {\n        RpcContext context = RpcContext.getServerContext();\n        System.out.println(\"rest 接口\");\n        System.out.println(context.getProtocol());\n        System.out.println(context.getRemoteAddressString());\n        System.out.println(\"-----------------------------------------\");\n        String userInfo = serverHttpRequest.getHeaders().getFirst(USERINFO);\n        ServerResponseEntity\u0026lt;Object\u0026gt; responseEntity = userService.loginService(userInfo);\n        serverHttpResponse.addCookie(ResponseCookie.from(\"COOKIE_ID\", String.valueOf(responseEntity.getData())).build());\n        return responseEntity;\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是我的 service：\n@Override\n    public ServerResponseEntity\u0026lt;Object\u0026gt; loginService(String userInfo) {\n        try {\n            responseEntity = new ServerResponseEntity\u0026lt;\u0026gt;(0, \"login success!\", Decryptor.decrypt(userInfo));\n        } catch (Exception e) {\n            logger.info(e.toString());\n        }\n        return responseEntity;\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是我的 consumer 配置文件：\nserver.port=8081\n\nspring.application.name=consumer\nspring.cloud.nacos.discovery.server-addr=192.168.220.128:8848\n\ndubbo.application.name=consumer\ndubbo.registry.address=nacos://192.168.220.128:8848\ndubbo.protocol.port=-1\ndubbo.consumer.protocol=tri\ndubbo.consumer.filter=appended\ndubbo.application.qos-port=22223\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e这是打印结果：\n这是客户端连续两次调用 /sign_in 的打印结果\nrest 接口\nnull\nnull:0\n-----------------------------------------\nrest 接口\ntri\nnull:0\n-----------------------------------------\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e问：为什么前后两次协议打印结果不一样，第一次 null ，第二次是 tri\u003c/p\u003e\n",
+      "Author": "shayang888",
+      "PubDate": "2023-03-05T02:23:13Z"
+    },
+    {
+      "Title": "求问怎么才能在家外面使用 plex app 啊？ - 问与答",
+      "Link": "https://www.v2ex.com/t/921236",
+      "Description": "已经内网穿透实现了 web 访问 nas 上的 plex ，但是 app 一直不行\u003cbr /\u003e\u003cbr /\u003e已经在服务器上配置了 自定义服务器访问 URL ，还是不行，网上也没搜到别的方案，plex 还不支持邮件技术支持，只能来请教 v2 的老哥们了",
+      "Author": "JavenXiao",
+      "PubDate": "2023-03-05T02:20:58Z"
+    },
+    {
+      "Title": "请问一下老哥们， Raycast 有没有办法做到像 Alfred 那样不需要跳转二级窗口的逻辑？ - macOS",
+      "Link": "https://www.v2ex.com/t/921235",
+      "Description": "\u003cp\u003e如题，比如文件搜索在 alfred 中是 find 开头加空格即可\u003c/p\u003e\n\u003cp\u003e但是在 Raycast 中必须输入完以后，切换到二级窗口去\u003c/p\u003e\n\u003cp\u003e然后插件这块就要进入更深的窗口了，嵌套的很深啊，不如 Alfed 快速直接有效率\u003c/p\u003e\n\u003cp\u003e当然 Raycast 的优势不仅是免费，还有庞大的插件市场支持，虽然说用着其实有些麻烦\u003c/p\u003e\n\u003cp\u003eAlfred 官方是弄了个类似的市场，最近弄的，但是没啥东西在上面啊，很少很少……应用也不内置……\u003c/p\u003e\n",
+      "Author": "neochen13",
+      "PubDate": "2023-03-05T02:13:44Z"
+    },
+    {
+      "Title": "HACKLED-PRO - 硬件",
+      "Link": "https://www.v2ex.com/t/921233",
+      "Description": "由 HACK 实验室出品的 RGB 控制器 V1.1 ，开源硬件项目，采用 ESP32 模块，定制汉化版 WLED 固件，支持接入 HomeAssistant ，支持 WS281X 系列灯带 /灯板，支持拾音灯功能，支持 5V/12V 电平切换等\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e [自制 RGB 光污染控制器，语音控制，WiFi 联网，接入智能家居，成本极低，全开源-哔哩哔哩]  \u003ca target=\"_blank\" href=\"https://b23.tv/BCzmr9v\" rel=\"nofollow noopener\"\u003ehttps://b23.tv/BCzmr9v\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e [闲鱼]  \u003ca target=\"_blank\" href=\"https://m.tb.cn/h.UKsQYTw?tk=a792dR42jfK\" rel=\"nofollow noopener\"\u003ehttps://m.tb.cn/h.UKsQYTw?tk=a792dR42jfK\u003c/a\u003e CZ0001 「我在闲鱼发布了 [ HACKLABS HACKLED-PRO ] 」\u003cbr /\u003e\u003cbr /\u003e点击链接直接打开",
+      "Author": "droidmax61",
+      "PubDate": "2023-03-05T01:55:58Z"
+    },
+    {
       "Title": "有些 chatGPT 的账号有 120 美金 有人申请过吗 - OpenAI",
       "Link": "https://www.v2ex.com/t/921232",
       "Description": "\u003cp\u003e这个是怎么申请的\u003c/p\u003e\n\u003cp\u003e有大佬说下吗\u003c/p\u003e\n",
