@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>[ChatGPT] 欢迎分享出你目前知道的 ChatGPT 应用和套壳 ChatGPT - 分享创造</title>
+      <link>https://www.v2ex.com/t/921688</link>
+      <description>&lt;p&gt;ChatGPT 既然这么火，那么单独开一个主题，收集一些网友们做的 ChatGPT 应用和一些白嫖的套壳 ChatGPT 。&lt;/p&gt;&#xA;</description>
+      <author>LuXiaoR</author>
+      <pubDate>06 Mar 2023 10:10:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>Q: golang 错误处理，我总觉得我写的很怪，不知道怎么改 - 问与答</title>
+      <link>https://www.v2ex.com/t/921687</link>
+      <description>&lt;h1&gt;Intro&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;萌新刚刚开始写 golang&lt;/li&gt;&#xA;&lt;li&gt;总觉得哪里怪怪的&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;如下代码&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;数据源&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func Open() (*ent.Client, error) {&#xA;&#x9;dsn := fmt.Sprintf(&#34;%s:%s@tcp(%s)/ncepu&#34;, Option.Username, Option.Password, Option.Address)&#xA;&#x9;client, err := ent.Open(&#34;mysql&#34;, dsn)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return nil, err&#xA;&#x9;}&#xA;&#x9;defer func(client *ent.Client) {&#xA;&#x9;&#x9;err := client.Close()&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;log.Fatal(err)&#xA;&#x9;&#x9;}&#xA;&#x9;}(client)&#xA;&#x9;return client, nil&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;检测 id 是否存在&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func ExistClientID(clientID string) (bool, error) {&#xA;&#x9;client, err := mysql.Open()&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return false, err&#xA;&#x9;}&#xA;&#x9;return client.Authorization.Query().Where(authorization.ClientID(clientID)).Exist(context.Background())&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;最外层函数&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func PasswordAuthorizationHandler(ctx context.Context, clientID, username, password string) (userID string, err error) {&#xA;&#x9;exist, e := service.ExistClientID(clientID)&#xA;&#x9;if e != nil {&#xA;&#x9;&#x9;err = e&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;if !exist {&#xA;&#x9;&#x9;err = errors.ErrInvalidClient&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;uid, e := service.Authorization(ctx, username, password)&#xA;&#x9;if e != nil {&#xA;&#x9;&#x9;err = e&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;return uid, nil&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h1&gt;qeustion&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;1.这几段代码里的 error 会不会像我想的那样传递到最外层&lt;/li&gt;&#xA;&lt;li&gt;2.Open()函数中的 defer 这样写很难受，但又不想在每一处都写 defer close&lt;/li&gt;&#xA;&lt;li&gt;3.请大佬帮忙看看代码，优化优化&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>anonymous2351d00</author>
+      <pubDate>06 Mar 2023 10:07:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>Web 3D 模型展示 - 前端开发</title>
+      <link>https://www.v2ex.com/t/921686</link>
+      <description>&lt;p&gt;请教一个问题，类似于 &lt;a href=&#34;https://aito.auto/model/m5/360-view/&#34; rel=&#34;nofollow&#34;&gt;https://aito.auto/model/m5/360-view/&lt;/a&gt;&#xA;这种展示效果是如何实现的？&lt;/p&gt;&#xA;&lt;p&gt;要达到这种流畅度，是不是通用的 3D 模型达不到？&lt;/p&gt;&#xA;</description>
+      <author>heroin80s</author>
+      <pubDate>06 Mar 2023 10:06:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>22 届前端本科 捞一下 - 酷工作</title>
+      <link>https://www.v2ex.com/t/921685</link>
+      <description>&lt;p&gt;1.熟练使用 HTML5 、CSS3 、JavaScript(ES6)等进行网站的开发&#xA;2.熟练使用 Vue 、React 全家桶结合 Vant 、Ant 、Element 等进行项目开发。&#xA;3.熟悉原生小程序，使用 Vant 、ColorUI 等开发小程序。有多个个人设计自主开发并上线的小程序（瘢痕记、多管房&#xA;等）&#xA;4.有良好的编程习惯，对技术有追求和热情。&#xA;5.使用 Webpack 、vite 搭建项目开发环境。&#xA;6.使用 NPM 、Yarn 、Git 、SVN 等前端工具。&lt;/p&gt;&#xA;&lt;p&gt;求个工作机会，实习校招应届都可以。工作地点最好一线城市&lt;/p&gt;&#xA;</description>
+      <author>qq1668464290</author>
+      <pubDate>06 Mar 2023 10:05:27 +0000</pubDate>
+    </item>
+    <item>
       <title>需要在图片上叠加中文字符，有什么方案比 pillow 效率更高吗 - 问与答</title>
       <link>https://www.v2ex.com/t/921684</link>
       <description>&lt;p&gt;目前在派上跑了一个处理图片的程序，负责把几张 1920*1080 的图片拼在一起，然后每一张图片下面都叠加上一些介绍性文字，功能很简单，直接使用 pillow 的 ImageDraw 的 paste 和 text 方法完成&#xA;但是因为数据量比较大，派上面又跑了很多程序，执行完一次处理任务需要很久&#xA;刚才尝试用 OpenCV 重写了一遍，结果发现不能在图片上叠加中文，只能调用 pillow 的方法，为此还得把 OpenCV 的 iamge 转成 pillow 的，结果测试了一下时间反而更慢了&#xA;大家有什么办法能提高效率吗，或者说 OpenCV 有什么其他方法叠加中文吗&lt;/p&gt;&#xA;</description>
