@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>需求文档自动化快速合并的问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/921954</link>
+      <description>公司目前完整的需求文档还是 2019 年的&lt;br /&gt;这期间里面的功能模块都有更新，形成了新的需求文档，&lt;br /&gt;现在希望用新需求替换掉里面旧功能需求&lt;br /&gt;有没有什么快速或者自动化的方式，通过对比目录，把新需求功能插入或替换对应的旧需求文档中去，形成最新版本的需求文档</description>
+      <author>monkeydev</author>
+      <pubDate>07 Mar 2023 08:44:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>有老哥买了网易严选人体工学椅的吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/921953</link>
+      <description>最近想换个椅子 以前看老罗直播推荐过 怎么样&lt;br /&gt;预算 2000 以内 舒适</description>
+      <author>QGabriel</author>
+      <pubDate>07 Mar 2023 08:44:33 +0000</pubDate>
+    </item>
+    <item>
+      <title># [k8s] HPA: Horizontal Pod Autoscaling - Kubernetes</title>
+      <link>https://www.v2ex.com/t/921952</link>
+      <description>&lt;h1&gt;[k8s] HPA: Horizontal Pod Autoscaling&lt;/h1&gt;&#xA;&lt;p&gt;HPA 是 K8S 的一大利器.&#xA;通过 HPA,&#xA;我们可以让服务的 pod 数量根据特定指标自动增加或减少,&#xA;使得在高峰期有足够的资源服务请求, 在低峰期又可以避免占用过多的资源.&#xA;同时, 在 SOA 架构下, 我们也习惯通过 HPA 来避免劳心劳力的为每个微服务计算所需的资源.&lt;/p&gt;&#xA;&lt;p&gt;HPA 的几个关键参数:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;minReplicas: 允许的最小 pod 数量&lt;/li&gt;&#xA;&lt;li&gt;maxReplicas: 允许的最大 pod 数量&lt;/li&gt;&#xA;&lt;li&gt;scaleTargetRef: hpa 针对的具体资源, 一般而言是 deployment&lt;/li&gt;&#xA;&lt;li&gt;metrics&#xA;指定增加 /减少 pod 数量的标准, 常见的以 CPU 使用率来判断是否需要伸缩.&#xA;K8S 也支持其他指标, 包括用户自定义指标.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;以下案例就指定了 demo 的最小 pod 数量为 2, 最大为 8.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;spec:&#xA;  maxReplicas: 8&#xA;  minReplicas: 2&#xA;  scaleTargetRef:&#xA;    apiVersion: apps/v1&#xA;    kind: Deployment&#xA;    name: demo&#xA;  targetCPUUtilizationPercentage: 250&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;targetCPUUtilizationPercentage 是旧版本 API 中的字段,&#xA;指定了所有 pod 的 CPU 平均使用率高于 250% 是进行扩容,&#xA;低于 250% 时进行缩容.&#xA;当以 CPU 使用率为扩容缩容的标准时, 我们需要注意对应数值是与&#xA;usage/request 比较, 而不是 usage/limit.&#xA;即分子是实际使用的 CPU 时间, 分母是在 deployment 中申请的 CPU 时间.&lt;/p&gt;&#xA;&lt;p&gt;HPA 计算所需 pod 数量的公式比较直观:&#xA;&lt;code&gt;desiredReplicas = ceil[currentReplicas * ( currentMetricValue / desiredMetricValue )]&lt;/code&gt;&#xA;在上述案例中, desireMetricValue 为 250.&#xA;如果实际 CPU 使用率为 320, 当前 pod 数量为 4, 则 desiredReplicas = ceil[4 * (320/ 250)], 即 5.12 向上取整的结果 6.&lt;/p&gt;&#xA;&lt;p&gt;在实际计算中, HPA 会额外区分出 unreadyPod, missingPod 和 ignoredPod, 并根据初步计算结果选择忽视某些类型的 pod 指标再次计算, 突出一个稳.&#xA;具体逻辑可以参考 &lt;a href=&#34;https://github.com/kubernetes/kubernetes/blob/master/pkg/controller/podautoscaler/replica_calculator.go#L189&#34; rel=&#34;nofollow&#34;&gt;calcPlainMetricReplicas&lt;/a&gt;,&#xA;简单而言:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;missingPod 指没有正确获取到对应 metric 的 pod.&lt;/li&gt;&#xA;&lt;li&gt;ignoredPod 指已经或正在被删除的 pod, 和失败的 pod.&lt;/li&gt;&#xA;&lt;li&gt;&#xA;unreadyPod 包含多类情况:&lt;ul&gt;&#xA;&lt;li&gt;处于 Pending 状态的 Pod.&lt;/li&gt;&#xA;&lt;li&gt;启动不久且不是 Ready 状态的 Pod.&lt;/li&gt;&#xA;&lt;li&gt;启动不久且 CPU 信息采集时间和 Ready 时间过近.&lt;/li&gt;&#xA;&lt;li&gt;启动一段时间, 但是从未 Ready 过的 Pod.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;最后需要注意的是, 当开启了 HPA 后, 我们不应该再设置 deployment 的 spec.replicas.&#xA;否则, 当你发布时, K8S 会按照 spec.replicas 来计算诸如 rolling update 的步骤, 导致一些非预期的行为.&#xA;比如说, spec.replicas 为 6, HPA 的范围为 2 到 25, 当前实际 pod 数量为 20, 则一旦发布,&#xA;大概率会出现 14 个以上的 pod 同时被销毁, 导致服务用户请求的资源锐减, 业务出现抖动.&lt;/p&gt;&#xA;</description>
+      <author>GopherDaily</author>
+      <pubDate>07 Mar 2023 08:44:22 +0000</pubDate>
+    </item>
+    <item>
       <title>viem - 以太坊</title>
       <link>https://www.v2ex.com/t/921951</link>
       <description>&lt;a target=&#34;_blank&#34; href=&#34;https://viem.sh/docs/benchmarks.html&#34; rel=&#34;nofollow noopener&#34;&gt;https://viem.sh/docs/benchmarks.html&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;一个新的又小又快的 Ethereum JS 库。</description>
@@ -58,13 +79,6 @@
       <description>自己有经营港澳台的水帖正规的论坛&lt;br /&gt;目前用 linode 的 40 刀服务器（ 4 核 8G ）&lt;br /&gt;服务器遇到效能瓶颈想把服务器搬家&lt;br /&gt;&lt;br /&gt;原本想搬到 hetzner&lt;br /&gt;但考虑到 dcma 还有用户偶尔会上传日本 H 动漫图&lt;br /&gt;但听说 hetzner 要被投诉几次号就没了&lt;br /&gt;&lt;br /&gt;有没有啥推荐遇到投诉的话只要处理下就行的服务器提供商啊&lt;br /&gt;能放成人内容的&lt;br /&gt;预算 40~60 刀每月</description>
       <author>WebSystem</author>
       <pubDate>07 Mar 2023 08:09:20 +0000</pubDate>
-    </item>
-    <item>
-      <title>可以求个馒头药吗？不违规吧。。。 - 宽带症候群</title>
-      <link>https://www.v2ex.com/t/921942</link>
-      <description>&lt;p&gt;威联通 TS451D 4 盘共 28T ，电信 300M 公网 IP ，联通 1000M 没公网 ，买的 PTT 永久会员 ，还有阿童木和 fans 两个小站过了新手考核。&lt;a href=&#34;http://imgur.com/73iixqO&#34; rel=&#34;nofollow&#34;&gt;imgur.com/73iixqO&lt;/a&gt;  目前就想要个大站，以后就主要用大站来养老了。先谢谢各位大佬了&#xA;YWluaXlpc2l5aXNoaUBnbWFpbC5jb20=&lt;/p&gt;&#xA;</description>
-      <author>wolflin9</author>
-      <pubDate>07 Mar 2023 08:05:15 +0000</pubDate>
     </item>
     <item>
       <title>知乎的推广帖是找官方买的还是自己刷的 - 问与答</title>
@@ -275,6 +289,13 @@
       <description>&lt;p&gt;因为工作原因，手头有 3 个手机号，分别注册了 3 个微信。&lt;br/&gt;&#xA;微信 A 主力使用，绑定了招商的银行卡，&lt;br/&gt;&#xA;微信 B ，也只绑定了招商同样的银行卡，这个号也没怎么用。    &lt;/p&gt;&#xA;&lt;p&gt;新手机号 C ，周末注册了微信 C ，注册绑定了建行的卡，刚绑定后，那个微信 B ，收到一条微信官方发的提示：您尾号 xxx 的银行卡被其他微信号&#34;&#34;绑定。点击详情查看，没有加载出任何内容，是个空白的网页。      &lt;/p&gt;&#xA;&lt;p&gt;当心心里一阵发怵，立马看了下尾号，是我建行的卡。&lt;br/&gt;&#xA;微信 A 没有任何提醒。  &lt;/p&gt;&#xA;&lt;p&gt;这个提示就让我匪夷所思了，假如是我微信已经绑定过的银行卡，被其他微信绑定，收到告警，这个能理解。&lt;br/&gt;&#xA;但是我建行的卡，绑定一个其他独立的微信，也是在我名下。这样的提示意义在哪里？&lt;br/&gt;&#xA;这张建行卡之前没有绑定过任何微信相关的服务，微信是监控了我所有银行卡的信息？这样的告警机制是什么？  &lt;/p&gt;&#xA;&lt;p&gt;假如是通过身份证进行的关联，为什么平时基本不用的微信 B 收到了，作为主力使用的微信 A 没有收到？&lt;br/&gt;&#xA;其实也没多大事，就是感觉奇怪。&lt;br/&gt;&#xA;不知道大家有没有遇到这样的情况。&lt;/p&gt;&#xA;</description>
       <author>piaochen0</author>
       <pubDate>07 Mar 2023 06:52:53 +0000</pubDate>
+    </item>
+    <item>
+      <title>可以求个馒头药吗？不违规吧。。。 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/921942</link>
+      <description>&lt;p&gt;威联通 TS451D 4 盘共 28T ，电信 300M 公网 IP ，联通 1000M 没公网 ，买的 PTT 永久会员 ，还有阿童木和 fans 两个小站过了新手考核。&lt;a href=&#34;http://imgur.com/73iixqO&#34; rel=&#34;nofollow&#34;&gt;imgur.com/73iixqO&lt;/a&gt;  目前就想要个大站，以后就主要用大站来养老了。先谢谢各位大佬了&#xA;YWluaXlpc2l5aXNoaUBnbWFpbC5jb20=&lt;/p&gt;&#xA;</description>
+      <author>wolflin9</author>
+      <pubDate>07 Mar 2023 08:05:15 +0000</pubDate>
     </item>
     <item>
       <title>如何投诉中国区苹果开发者技术支持~ - Apple</title>
