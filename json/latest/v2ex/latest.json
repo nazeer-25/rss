@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "go 游戏服务器，到底要不要对每一次逻辑进行 recover？ - 问与答",
+      "Link": "https://www.v2ex.com/t/921915",
+      "Description": "每一次逻辑：逻辑服务器处理的单个玩家或内部请求。\u003cbr /\u003e主要有以下两个观点：\u003cbr /\u003e1 ，panic 直接服务直接挂掉，优点是不会产生扩散性错误，可以回档十几秒内的数据，代价是服务可能会停止一段时间\u003cbr /\u003e2 ，panic recover 住，然后确定问题改好之后再起服，修复相关错误数据，优点是停服时间更短，可以先修复了再部署，缺点是可能会产生扩散性错误，后面修复数据比较难。\u003cbr /\u003e我个人是倾向于要 recover 的，因为经过 qa 、压测之后，上线的情况 panic 的情况首先已经比较少了，我觉得保证服务器的健壮性是更好的，我们是游戏服务器，单个玩家的小概率错误不应该影响所有玩家的体验，后续进行数据修复和补偿就 ok 了。我们组内也讨论了很久这个问题。是采用的 recover 的方案，但是最近来了个资深又提起了这个问题，他属于是持有第一种观点的。不知道大家怎么看这个问题。",
+      "Author": "clikes",
+      "PubDate": "2023-03-07T07:17:34Z"
+    },
+    {
+      "Title": "国内对 chat.openai.com 的 dns 污染有哪些简单的解决办法 - 问与答",
+      "Link": "https://www.v2ex.com/t/921914",
+      "Description": "请问一下大家，目前国内对于 \u003ca target=\"_blank\" href=\"http://chat.openai.com\" rel=\"nofollow noopener\"\u003echat.openai.com\u003c/a\u003e 域名的封锁只有 DNS 污染吗？为什么我修改了电脑 DNS 服务器地址后，试了好几家 dns 提供商，chrome 和 firefox 等浏览器仍然无法正常解析到如下正确 IP 上呢，\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"http://chat.openai.com.cdn.cloudflare.net\" rel=\"nofollow noopener\"\u003echat.openai.com.cdn.cloudflare.net\u003c/a\u003e. 250 IN A 104.18.2.161, \u003ca target=\"_blank\" href=\"http://chat.openai.com.cdn.cloudflare.net\" rel=\"nofollow noopener\"\u003echat.openai.com.cdn.cloudflare.net\u003c/a\u003e. 250 IN A 104.18.3.161 \u003cbr /\u003e\u003cbr /\u003e请问一下大家有没有简单点的操作？感谢！",
+      "Author": "Kiwifruit08",
+      "PubDate": "2023-03-07T07:12:10Z"
+    },
+    {
       "Title": "谷歌推出 ServiceWeaver，后面不用在管理 Docker/k8s/CICD - Kubernetes",
       "Link": "https://www.v2ex.com/t/921913",
       "Description": "\u003cp\u003e\u003ca href=\"https://github.com/ServiceWeaver/weaver\" rel=\"nofollow\"\u003ehttps://github.com/ServiceWeaver/weaver\u003c/a\u003e\u003c/p\u003e\n",

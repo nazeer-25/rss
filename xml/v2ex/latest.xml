@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>go 游戏服务器，到底要不要对每一次逻辑进行 recover？ - 问与答</title>
+      <link>https://www.v2ex.com/t/921915</link>
+      <description>每一次逻辑：逻辑服务器处理的单个玩家或内部请求。&lt;br /&gt;主要有以下两个观点：&lt;br /&gt;1 ，panic 直接服务直接挂掉，优点是不会产生扩散性错误，可以回档十几秒内的数据，代价是服务可能会停止一段时间&lt;br /&gt;2 ，panic recover 住，然后确定问题改好之后再起服，修复相关错误数据，优点是停服时间更短，可以先修复了再部署，缺点是可能会产生扩散性错误，后面修复数据比较难。&lt;br /&gt;我个人是倾向于要 recover 的，因为经过 qa 、压测之后，上线的情况 panic 的情况首先已经比较少了，我觉得保证服务器的健壮性是更好的，我们是游戏服务器，单个玩家的小概率错误不应该影响所有玩家的体验，后续进行数据修复和补偿就 ok 了。我们组内也讨论了很久这个问题。是采用的 recover 的方案，但是最近来了个资深又提起了这个问题，他属于是持有第一种观点的。不知道大家怎么看这个问题。</description>
+      <author>clikes</author>
+      <pubDate>07 Mar 2023 07:17:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>国内对 chat.openai.com 的 dns 污染有哪些简单的解决办法 - 问与答</title>
+      <link>https://www.v2ex.com/t/921914</link>
+      <description>请问一下大家，目前国内对于 &lt;a target=&#34;_blank&#34; href=&#34;http://chat.openai.com&#34; rel=&#34;nofollow noopener&#34;&gt;chat.openai.com&lt;/a&gt; 域名的封锁只有 DNS 污染吗？为什么我修改了电脑 DNS 服务器地址后，试了好几家 dns 提供商，chrome 和 firefox 等浏览器仍然无法正常解析到如下正确 IP 上呢，&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;http://chat.openai.com.cdn.cloudflare.net&#34; rel=&#34;nofollow noopener&#34;&gt;chat.openai.com.cdn.cloudflare.net&lt;/a&gt;. 250 IN A 104.18.2.161, &lt;a target=&#34;_blank&#34; href=&#34;http://chat.openai.com.cdn.cloudflare.net&#34; rel=&#34;nofollow noopener&#34;&gt;chat.openai.com.cdn.cloudflare.net&lt;/a&gt;. 250 IN A 104.18.3.161 &lt;br /&gt;&lt;br /&gt;请问一下大家有没有简单点的操作？感谢！</description>
+      <author>Kiwifruit08</author>
+      <pubDate>07 Mar 2023 07:12:10 +0000</pubDate>
+    </item>
+    <item>
       <title>谷歌推出 ServiceWeaver，后面不用在管理 Docker/k8s/CICD - Kubernetes</title>
       <link>https://www.v2ex.com/t/921913</link>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ServiceWeaver/weaver&#34; rel=&#34;nofollow&#34;&gt;https://github.com/ServiceWeaver/weaver&lt;/a&gt;&lt;/p&gt;&#xA;</description>
