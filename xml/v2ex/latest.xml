@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>大老们，为什么我查不出来结果呢？ - MySQL</title>
+      <link>https://www.v2ex.com/t/921991</link>
+      <description>&lt;p&gt;一张表，结构简单&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;CREATE TABLE `zp_category_relation` (&#xA;  `id` bigint(20) NOT NULL,&#xA;  `aid` bigint(20) NOT NULL COMMENT &#39;文章 id&#39;,&#xA;  `cid` bigint(20) NOT NULL COMMENT &#39;分类 id&#39;,&#xA;  `extend` json DEFAULT NULL COMMENT &#39;扩展字段&#39;,&#xA;  PRIMARY KEY (`id`),&#xA;  UNIQUE KEY `acr_ac_uidx` (`aid`,`cid`)&#xA;) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT=&#39;分类的关系&#39;;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;其中一条数据为：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;INSERT INTO `zp_category_relation` (`id`, `aid`, `cid`, `extend`) VALUES (393388343615493, 393060164034565, 393041089290245, &#39;{\&#34;393041089290245\&#34;: [{\&#34;key\&#34;: \&#34;type\&#34;, \&#34;value\&#34;: \&#34;3\&#34;}]}&#39;);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;想查出 extend 列中，value=3 的数据，用的如下 sql 语句&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;SELECT * FROM `zp_category_relation` WHERE  extend-&amp;gt;&#34;$[*].key&#34; = &#34;type&#34;;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;结果为空，求教更准确的 sql 语句&lt;/p&gt;&#xA;</description>
+      <author>sunmoon1983</author>
+      <pubDate>07 Mar 2023 10:46:09 +0000</pubDate>
+    </item>
+    <item>
       <title>上了 ChatGPT 加持的 B 站字幕列表 - 分享创造</title>
       <link>https://www.v2ex.com/t/921990</link>
       <description>&lt;p&gt;之前帖子链接：&lt;a href=&#34;https://www.v2ex.com/t/907120&#34; rel=&#34;nofollow&#34;&gt;哔哩哔哩字幕列表，高效获取视频文本信息 - 浏览器扩展&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;最近更新了两个重要的功能，翻译与总结，需要填入 apikey ，以下是效果截图：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;截图&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/8LJUoA23.jpeg&#34;/&gt;&lt;/p&gt;&#xA;</description>

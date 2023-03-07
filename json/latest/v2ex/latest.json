@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "大老们，为什么我查不出来结果呢？ - MySQL",
+      "Link": "https://www.v2ex.com/t/921991",
+      "Description": "\u003cp\u003e一张表，结构简单\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eCREATE TABLE `zp_category_relation` (\n  `id` bigint(20) NOT NULL,\n  `aid` bigint(20) NOT NULL COMMENT '文章 id',\n  `cid` bigint(20) NOT NULL COMMENT '分类 id',\n  `extend` json DEFAULT NULL COMMENT '扩展字段',\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `acr_ac_uidx` (`aid`,`cid`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='分类的关系';\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其中一条数据为：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eINSERT INTO `zp_category_relation` (`id`, `aid`, `cid`, `extend`) VALUES (393388343615493, 393060164034565, 393041089290245, '{\\\"393041089290245\\\": [{\\\"key\\\": \\\"type\\\", \\\"value\\\": \\\"3\\\"}]}');\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e想查出 extend 列中，value=3 的数据，用的如下 sql 语句\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eSELECT * FROM `zp_category_relation` WHERE  extend-\u0026gt;\"$[*].key\" = \"type\";\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e结果为空，求教更准确的 sql 语句\u003c/p\u003e\n",
+      "Author": "sunmoon1983",
+      "PubDate": "2023-03-07T10:46:09Z"
+    },
+    {
       "Title": "上了 ChatGPT 加持的 B 站字幕列表 - 分享创造",
       "Link": "https://www.v2ex.com/t/921990",
       "Description": "\u003cp\u003e之前帖子链接：\u003ca href=\"https://www.v2ex.com/t/907120\" rel=\"nofollow\"\u003e哔哩哔哩字幕列表，高效获取视频文本信息 - 浏览器扩展\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e最近更新了两个重要的功能，翻译与总结，需要填入 apikey ，以下是效果截图：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"截图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.v2ex.co/8LJUoA23.jpeg\"/\u003e\u003c/p\u003e\n",
