@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "推荐个靠谱的支付 Open API 的途径 - 程序员",
+      "Link": "https://www.v2ex.com/t/922068",
+      "Description": "\u003cp\u003e国内怎么买呢？看很多虚拟卡商都是先存大巴前进去，有没有 PayPay 之类的途径。\u003c/p\u003e\n",
+      "Author": "Micropaper",
+      "PubDate": "2023-03-07T16:04:39Z"
+    },
+    {
       "Title": "请问群晖 basic 模式有办法合并存储池/空间吗 - NAS",
       "Link": "https://www.v2ex.com/t/922067",
       "Description": "\u003cp\u003e2 盘的机器，之前组了 raid1 ，发现 空间不够用，今天按照社区里的教程设置，都改成了 basic ，却发现无法合并在一起。。是 basic 模式就这样吗，还是我设置的不对，如果恢复出厂设置重新配置是否可以保证两个硬盘都是 basic 还可以合并在一个存储池？谢谢大佬们\u003c/p\u003e\n",
@@ -235,13 +242,6 @@
       "PubDate": "2023-03-07T13:26:53Z"
     },
     {
-      "Title": "请问现在破解版的软件都一般要去哪里下载，想下个 illustrator 转了一圏都是下崽器网站，感觉有点不放心。 - 问与答",
-      "Link": "https://www.v2ex.com/t/922030",
-      "Description": "",
-      "Author": "AC220",
-      "PubDate": "2023-03-07T13:25:36Z"
-    },
-    {
       "Title": "分享 golang 一种快捷自动实现查询条件构建的思路 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/922028",
       "Description": "\u003ch3\u003e之前的方案\u003c/h3\u003e\n\u003cp\u003e我之前的方案就是给每个需要查询的字段加到请求的 struct 中，然后在请求时判断是否为空，不为空时则加入到查询条件\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003etype TransferFetchReq struct {\n\tg.Meta `path:\"/transfer/fetch\" method:\"post\" sm:\"列表转账\" tags:\"转账\"`\n\ttypes.PageReq\n\tUserID int64                `json:\"user_id\" dc:\"用户 ID\"`\n}\n\n//在控制器中加入\n\nif req.UserID != 0 {\n\t\tu = u.Where(\"user_id = ?\", req.UserID)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是这样的方案需要给每个条件写一份代码，太耗时间了\u003c/p\u003e\n\u003ch3\u003e新的方案\u003c/h3\u003e\n\u003cp\u003e把时间拿去写 struct 即可，如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003etype TransferFetchFilter struct {\n\tID         int64   `json:\"id\"`\n\tCreatedAt  []int64 `json:\"created_at\" cond:\"between\" dc:\"创建时间\"`\n\tUpdatedAt  []int64 `json:\"updated_at\" cond:\"between\" dc:\"更新时间\"`\n\tFromID     int64   `json:\"from_id\" dc:\"转出用户 ID\"`\n\tDestID     int64   `json:\"dest_id\" dc:\"转入用户 ID\"`\n\tCode       string  `json:\"code\"`\n\tType       []uint  `json:\"type\" cond:\"in\"`\n\tState      []uint  `json:\"state\" cond:\"in\"`\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如上，只需要写好这样的 struct ，即可完成所有字段的查询，可以通过 cond 指定查询方法\n例如 LIKE/EQ/IN/NOTIN/between 等....\u003c/p\u003e\n\u003cp\u003e当然，前提是必须把对应的数据类型写对（否则不会生效）\u003c/p\u003e\n\u003cp\u003e例如查询方案为：IN 时 则数据类型必须是 []xxx\u003c/p\u003e\n\u003cp\u003e默认为 EQ 即等于 则不能是 slice\n默认查询字段取 json tag\n当然还可以有一个更高优先级的 tag 例如 bind\n这样可以同时对一个字段提供多种查询方法\n这样就方便多了....................\u003c/p\u003e\n",
@@ -310,6 +310,13 @@
       "Description": "\u003ch2\u003e新 UI\u003c/h2\u003e\n\u003cp\u003e\u003cimg alt=\"Imgur\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/FLJyzgm.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"Imgur\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://imgur.com/IbKZ6CP.jpg\"/\u003e\u003c/p\u003e\n\u003ch2\u003e旧 UI\u003c/h2\u003e\n\u003cp\u003e\u003cimg alt=\"Imgur\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://imgur.com/dtEvNfB.jpg\"/\u003e\n\u003cimg alt=\"Imgur\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/dtEvNfB.png\"/\u003e\u003c/p\u003e\n",
       "Author": "hamsterbase",
       "PubDate": "2023-03-07T12:31:04Z"
+    },
+    {
+      "Title": "请问现在破解版的软件都一般要去哪里下载，想下个 illustrator 转了一圏都是下崽器网站，感觉有点不放心。 - 问与答",
+      "Link": "https://www.v2ex.com/t/922030",
+      "Description": "",
+      "Author": "AC220",
+      "PubDate": "2023-03-07T13:25:36Z"
     },
     {
       "Title": "库、框架、引擎之间有什么区别和联系？ - 程序员",

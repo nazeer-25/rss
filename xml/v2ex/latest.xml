@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>推荐个靠谱的支付 Open API 的途径 - 程序员</title>
+      <link>https://www.v2ex.com/t/922068</link>
+      <description>&lt;p&gt;国内怎么买呢？看很多虚拟卡商都是先存大巴前进去，有没有 PayPay 之类的途径。&lt;/p&gt;&#xA;</description>
+      <author>Micropaper</author>
+      <pubDate>07 Mar 2023 16:04:39 +0000</pubDate>
+    </item>
+    <item>
       <title>请问群晖 basic 模式有办法合并存储池/空间吗 - NAS</title>
       <link>https://www.v2ex.com/t/922067</link>
       <description>&lt;p&gt;2 盘的机器，之前组了 raid1 ，发现 空间不够用，今天按照社区里的教程设置，都改成了 basic ，却发现无法合并在一起。。是 basic 模式就这样吗，还是我设置的不对，如果恢复出厂设置重新配置是否可以保证两个硬盘都是 basic 还可以合并在一个存储池？谢谢大佬们&lt;/p&gt;&#xA;</description>
@@ -231,12 +238,6 @@
       <pubDate>07 Mar 2023 13:26:53 +0000</pubDate>
     </item>
     <item>
-      <title>请问现在破解版的软件都一般要去哪里下载，想下个 illustrator 转了一圏都是下崽器网站，感觉有点不放心。 - 问与答</title>
-      <link>https://www.v2ex.com/t/922030</link>
-      <author>AC220</author>
-      <pubDate>07 Mar 2023 13:25:36 +0000</pubDate>
-    </item>
-    <item>
       <title>分享 golang 一种快捷自动实现查询条件构建的思路 - Go 编程语言</title>
       <link>https://www.v2ex.com/t/922028</link>
       <description>&lt;h3&gt;之前的方案&lt;/h3&gt;&#xA;&lt;p&gt;我之前的方案就是给每个需要查询的字段加到请求的 struct 中，然后在请求时判断是否为空，不为空时则加入到查询条件&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;type TransferFetchReq struct {&#xA;&#x9;g.Meta `path:&#34;/transfer/fetch&#34; method:&#34;post&#34; sm:&#34;列表转账&#34; tags:&#34;转账&#34;`&#xA;&#x9;types.PageReq&#xA;&#x9;UserID int64                `json:&#34;user_id&#34; dc:&#34;用户 ID&#34;`&#xA;}&#xA;&#xA;//在控制器中加入&#xA;&#xA;if req.UserID != 0 {&#xA;&#x9;&#x9;u = u.Where(&#34;user_id = ?&#34;, req.UserID)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是这样的方案需要给每个条件写一份代码，太耗时间了&lt;/p&gt;&#xA;&lt;h3&gt;新的方案&lt;/h3&gt;&#xA;&lt;p&gt;把时间拿去写 struct 即可，如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;type TransferFetchFilter struct {&#xA;&#x9;ID         int64   `json:&#34;id&#34;`&#xA;&#x9;CreatedAt  []int64 `json:&#34;created_at&#34; cond:&#34;between&#34; dc:&#34;创建时间&#34;`&#xA;&#x9;UpdatedAt  []int64 `json:&#34;updated_at&#34; cond:&#34;between&#34; dc:&#34;更新时间&#34;`&#xA;&#x9;FromID     int64   `json:&#34;from_id&#34; dc:&#34;转出用户 ID&#34;`&#xA;&#x9;DestID     int64   `json:&#34;dest_id&#34; dc:&#34;转入用户 ID&#34;`&#xA;&#x9;Code       string  `json:&#34;code&#34;`&#xA;&#x9;Type       []uint  `json:&#34;type&#34; cond:&#34;in&#34;`&#xA;&#x9;State      []uint  `json:&#34;state&#34; cond:&#34;in&#34;`&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如上，只需要写好这样的 struct ，即可完成所有字段的查询，可以通过 cond 指定查询方法&#xA;例如 LIKE/EQ/IN/NOTIN/between 等....&lt;/p&gt;&#xA;&lt;p&gt;当然，前提是必须把对应的数据类型写对（否则不会生效）&lt;/p&gt;&#xA;&lt;p&gt;例如查询方案为：IN 时 则数据类型必须是 []xxx&lt;/p&gt;&#xA;&lt;p&gt;默认为 EQ 即等于 则不能是 slice&#xA;默认查询字段取 json tag&#xA;当然还可以有一个更高优先级的 tag 例如 bind&#xA;这样可以同时对一个字段提供多种查询方法&#xA;这样就方便多了....................&lt;/p&gt;&#xA;</description>
@@ -305,6 +306,12 @@
       <description>&lt;h2&gt;新 UI&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Imgur&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/FLJyzgm.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Imgur&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://imgur.com/IbKZ6CP.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;h2&gt;旧 UI&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Imgur&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://imgur.com/dtEvNfB.jpg&#34;/&gt;&#xA;&lt;img alt=&#34;Imgur&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/dtEvNfB.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
       <author>hamsterbase</author>
       <pubDate>07 Mar 2023 12:31:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问现在破解版的软件都一般要去哪里下载，想下个 illustrator 转了一圏都是下崽器网站，感觉有点不放心。 - 问与答</title>
+      <link>https://www.v2ex.com/t/922030</link>
+      <author>AC220</author>
+      <pubDate>07 Mar 2023 13:25:36 +0000</pubDate>
     </item>
     <item>
       <title>库、框架、引擎之间有什么区别和联系？ - 程序员</title>
