@@ -32,6 +32,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "gws v1.4 update: 像JS一样使用WebSocket",
+      "Link": "https://studygolang.com/topics/16189#reply0",
+      "Description": "\u003cp\u003e这次更新带来了客户端支持, 与JS类似的WebSocket API\u003c/p\u003e\n\n\u003ch3\u003eExample\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;github.com/lxzan/gws\u0026quot;\n\t\u0026quot;log\u0026quot;\n)\n\nfunc main() {\n\toption := \u0026amp;gws.ClientOption{Addr: \u0026quot;ws://127.0.0.1:3000/connect\u0026quot;}\n\tsocket, _, err := gws.NewClient(new(WebSocket), option)\n\tif err != nil {\n\t\tlog.Printf(err.Error())\n\t\treturn\n\t}\n\tsocket.Listen()\n}\n\ntype WebSocket struct{}\n\nfunc (c *WebSocket) OnError(socket *gws.Conn, err error) {\n\tfmt.Printf(\u0026quot;onerror: err=%s\\n\u0026quot;, err.Error())\n}\n\nfunc (c *WebSocket) OnClose(socket *gws.Conn, code uint16, reason []byte) {\n\tfmt.Printf(\u0026quot;onclose: code=%d, payload=%s\\n\u0026quot;, code, string(reason))\n}\n\nfunc (c *WebSocket) OnPong(socket *gws.Conn, payload []byte) {\n}\n\nfunc (c *WebSocket) OnOpen(socket *gws.Conn) {\n\t_ = socket.WriteString(\u0026quot;hello, there is client\u0026quot;)\n}\n\nfunc (c *WebSocket) OnPing(socket *gws.Conn, payload []byte) {\n\tsocket.WritePong(payload)\n}\n\nfunc (c *WebSocket) OnMessage(socket *gws.Conn, message *gws.Message) {\n\tfmt.Printf(\u0026quot;recv: %s\\n\u0026quot;, message.Data.String())\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "询问一个关于 golang经常自动重启",
       "Link": "https://studygolang.com/topics/16190#reply17",
       "Description": "\u003cp\u003esystemd 守护的一个使用golang 实现的tcp服务，\n这个服务使用了github.com/jinzhu/gorm ，每隔一小时 服务就会被重启一次，毫无头绪，无从下手，哪位大神可指点指点，怎么排查\u003c/p\u003e\n",
@@ -49,13 +56,6 @@
       "Title": "ComPDFKit - 专业的PDF文档处理SDK",
       "Link": "https://studygolang.com/articles/36062#reply0",
       "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "gws v1.4 update: 像JS一样使用WebSocket",
-      "Link": "https://studygolang.com/topics/16189#reply0",
-      "Description": "\u003cp\u003e这次更新带来了客户端支持, 与JS类似的WebSocket API\u003c/p\u003e\n\n\u003ch3\u003eExample\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;github.com/lxzan/gws\u0026quot;\n\t\u0026quot;log\u0026quot;\n)\n\nfunc main() {\n\toption := \u0026amp;gws.ClientOption{Addr: \u0026quot;ws://127.0.0.1:3000/connect\u0026quot;}\n\tsocket, _, err := gws.NewClient(new(WebSocket), option)\n\tif err != nil {\n\t\tlog.Printf(err.Error())\n\t\treturn\n\t}\n\tsocket.Listen()\n}\n\ntype WebSocket struct{}\n\nfunc (c *WebSocket) OnError(socket *gws.Conn, err error) {\n\tfmt.Printf(\u0026quot;onerror: err=%s\\n\u0026quot;, err.Error())\n}\n\nfunc (c *WebSocket) OnClose(socket *gws.Conn, code uint16, reason []byte) {\n\tfmt.Printf(\u0026quot;onclose: code=%d, payload=%s\\n\u0026quot;, code, string(reason))\n}\n\nfunc (c *WebSocket) OnPong(socket *gws.Conn, payload []byte) {\n}\n\nfunc (c *WebSocket) OnOpen(socket *gws.Conn) {\n\t_ = socket.WriteString(\u0026quot;hello, there is client\u0026quot;)\n}\n\nfunc (c *WebSocket) OnPing(socket *gws.Conn, payload []byte) {\n\tsocket.WritePong(payload)\n}\n\nfunc (c *WebSocket) OnMessage(socket *gws.Conn, message *gws.Message) {\n\tfmt.Printf(\u0026quot;recv: %s\\n\u0026quot;, message.Data.String())\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
