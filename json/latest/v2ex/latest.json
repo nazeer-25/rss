@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "电梯间的魔性广告 - 奇思妙想",
+      "Link": "https://www.v2ex.com/t/922326",
+      "Description": "电梯间，尤其是写字楼电梯间的魔性广告，不知道大家有没有见过。这些广告短期内也不会换，每天乘梯几次，每次都被魔性洗脑，导致一天到晚在回放那些魔性的广告词和夸张的音乐。\u003cbr /\u003e\u003cbr /\u003e不知道有无兄弟同样苦恼？",
+      "Author": "koto",
+      "PubDate": "2023-03-08T09:35:24Z"
+    },
+    {
+      "Title": "40~60 刀有没有啥推荐美国或加拿大独服 - 服务器",
+      "Link": "https://www.v2ex.com/t/922325",
+      "Description": "\u003cp\u003e每月预算 40~60 刀左右\n网站给港澳台用户访问\n有推荐的么\u003c/p\u003e\n",
+      "Author": "WebSystem",
+      "PubDate": "2023-03-08T09:35:11Z"
+    },
+    {
+      "Title": "vmware17 虚拟机， xp SP3 系统开机爆音问题是如何解决的？ - 问与答",
+      "Link": "https://www.v2ex.com/t/922324",
+      "Description": "\u003cp\u003e无论开关机还是播放音乐都有爆音。\n看有的说开机后开启播放器可解，试了也没用。有哪位知道解决办法么？谢谢！\u003c/p\u003e\n",
+      "Author": "2232588429",
+      "PubDate": "2023-03-08T09:35:05Z"
+    },
+    {
+      "Title": "联通不同套餐真的对网速有影响吗？ - 程序员",
+      "Link": "https://www.v2ex.com/t/922323",
+      "Description": "之前一直在用阿里小宝卡套餐，最近发现 流量王超享版 不错，就换了这个套餐，也推荐我朋友换了。\u003cbr /\u003e我自己用一段时间下来暂时没感觉到差别，我朋友和我说这个套餐比较卡（我们用的都是荣耀 20 手机）。\u003cbr /\u003e\u003cbr /\u003e请问下理论上真的存在不同套餐联通给的网速不同的情况吗？需要打电话去客服投诉吗？",
+      "Author": "brader",
+      "PubDate": "2023-03-08T09:34:21Z"
+    },
+    {
+      "Title": "使用 whl 文件安装 opencv- Python 失败，有什么可能的原因 - Python",
+      "Link": "https://www.v2ex.com/t/922322",
+      "Description": "\u003cp\u003e因为服务器没有网络，需要使用 whl 文件离线安装 python 库，从 \u003ca href=\"http://pypi.org\" rel=\"nofollow\"\u003epypi.org\u003c/a\u003e 上下了一个，文件名为 opencv_python-4.5.4.58-cp36-cp36m-manylinux2014_aarch64.whl ，但是安装一直提示 is not a supported wheel on this platform\u003c/p\u003e\n\u003cp\u003e检查了一下服务器环境：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ePython 3.6.9\u003c/li\u003e\n\u003cli\u003euname 返回的信息有 Linux firefly 4.4.194+ aarch64 GNU/Linux\u003c/li\u003e\n\u003cli\u003epip.pep425tags.get_supported()查出来有('cp36', 'cp36m', 'linux_aarch64')\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e服务器是一个派，不知道会不会需要什么不一样的操作。\n之前从来没用过 wheel ，也有可能是我哪里搞错了。\n或者大家有什么其他更好的方法来离线安装 python 库吗\u003c/p\u003e\n",
+      "Author": "thMaster",
+      "PubDate": "2023-03-08T09:30:57Z"
+    },
+    {
       "Title": "如何实现一个实时转发 Stream 流的接口 - Python",
       "Link": "https://www.v2ex.com/t/922321",
       "Description": "\u003cp\u003e想写一个实时转发 Stream 流内容的接口，不怎么懂 stream 流相关的知识\u003c/p\u003e\n\u003cp\u003e之前的接口是\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003easync def index(path: str, request: Request):\n    data = await request.json()\n    resp = c.send_request(path, data)\n    headers = dict(resp.headers)\n\n    async def generate():\n        for chunk in resp.iter_lines():\n            if chunk:\n                yield chunk + b'\\n\\n'\n    return StreamingResponse(generate(), headers=headers)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e问题是，这个会等接受完全部的 Stream 流信息，才会转发，想实现的效果是实时转发 stream 流信息，具体一点就是，接收到一行或者指定大小的信息块，就转发出去。\u003c/p\u003e\n\u003cp\u003e想法是将 \u003ccode\u003eresp = c.send_request(path, data)\u003c/code\u003e这块改造成异步的，然后实时转发。\u003c/p\u003e\n\u003cp\u003e目前的代码是\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003easync def index(path: str, request: Request):\n    data = await request.json()\n    async with httpx.AsyncClient() as client:\n        async with client.stream('POST', path, json=data) as response:\n            resp_headers = dict(response.headers)\n            async def generate():\n                async for line in response.aiter_lines():\n                    if line:\n                        yield line.encode('utf-8') + b'\\n\\n'\n            return StreamingResponse(generate(), headers=resp_headers)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是会报：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003ehttpx.StreamClosed: Attempted to read or stream content, but the stream has been closed.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e不知道怎么改，求赐教\u003c/p\u003e\n",
