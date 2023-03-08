@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>如何实现一个实时转发 Stream 流的接口 - Python</title>
+      <link>https://www.v2ex.com/t/922321</link>
+      <description>&lt;p&gt;想写一个实时转发 Stream 流内容的接口，不怎么懂 stream 流相关的知识&lt;/p&gt;&#xA;&lt;p&gt;之前的接口是&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;async def index(path: str, request: Request):&#xA;    data = await request.json()&#xA;    resp = c.send_request(path, data)&#xA;    headers = dict(resp.headers)&#xA;&#xA;    async def generate():&#xA;        for chunk in resp.iter_lines():&#xA;            if chunk:&#xA;                yield chunk + b&#39;\n\n&#39;&#xA;    return StreamingResponse(generate(), headers=headers)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;问题是，这个会等接受完全部的 Stream 流信息，才会转发，想实现的效果是实时转发 stream 流信息，具体一点就是，接收到一行或者指定大小的信息块，就转发出去。&lt;/p&gt;&#xA;&lt;p&gt;想法是将 &lt;code&gt;resp = c.send_request(path, data)&lt;/code&gt;这块改造成异步的，然后实时转发。&lt;/p&gt;&#xA;&lt;p&gt;目前的代码是&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;async def index(path: str, request: Request):&#xA;    data = await request.json()&#xA;    async with httpx.AsyncClient() as client:&#xA;        async with client.stream(&#39;POST&#39;, path, json=data) as response:&#xA;            resp_headers = dict(response.headers)&#xA;            async def generate():&#xA;                async for line in response.aiter_lines():&#xA;                    if line:&#xA;                        yield line.encode(&#39;utf-8&#39;) + b&#39;\n\n&#39;&#xA;            return StreamingResponse(generate(), headers=resp_headers)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是会报：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;httpx.StreamClosed: Attempted to read or stream content, but the stream has been closed.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;不知道怎么改，求赐教&lt;/p&gt;&#xA;</description>
+      <author>WindyXu</author>
+      <pubDate>08 Mar 2023 09:26:57 +0000</pubDate>
+    </item>
+    <item>
+      <title>插件上线！体验 ChatGPT,不需要设置 key，更加便捷！好用！ - 程序员</title>
+      <link>https://www.v2ex.com/t/922320</link>
+      <description>&lt;p&gt;Chatgpt 插件上线！火速体验！&lt;/p&gt;&#xA;&lt;p&gt;使用方法：&lt;/p&gt;&#xA;&lt;p&gt;访问 &lt;a href=&#34;http://Postcat.com&#34; rel=&#34;nofollow&#34;&gt;Postcat.com&lt;/a&gt; ，直接使用 github 账号登录或者注册，然后在右上角 [插件广场] ，找到 Chatgpt 插件,安装后，点击右下角 [小机器人] ，即可使用。&lt;/p&gt;&#xA;&lt;p&gt;这个项目是开源的，Postcat 开源的 API 管理工具，有 API 相关的核心功能，还有丰富的插件广场，感兴趣的话可以给项目 Star 和 fork 一下&lt;/p&gt;&#xA;&lt;p&gt;Github:&lt;a href=&#34;https://github.com/Postcatlab/postcat&#34; rel=&#34;nofollow&#34;&gt;https://github.com/Postcatlab/postcat&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>Jack1230</author>
+      <pubDate>08 Mar 2023 09:25:38 +0000</pubDate>
+    </item>
+    <item>
       <title>awesome-aigc-prompts - 分享发现</title>
       <link>https://www.v2ex.com/t/922318</link>
       <description>&lt;p&gt;在体验过通过 ChatGPT 通过 prompt 生成对应的代码，并运行后，发现一些简单且前人已做过的工作完全可以通过 aigc 等工具生成从而提高效率。以往是面向谷歌和 stackoverflow 编程，现在又多了一个新的选项。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://weekendproject.space/posts/chat-gpt-tools/&#34; rel=&#34;nofollow&#34;&gt;ChatGPT 小工具(用 Chat GPT 编程?) aigc 编程体验&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;学习 prompts 从而花费更少的时间完成相同的工作 &lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/weekend-project-space/awesome-aigc-prompts&#34; rel=&#34;nofollow&#34;&gt;prompt engineer 从这里开始吧&lt;/a&gt;&lt;/p&gt;&#xA;</description>
