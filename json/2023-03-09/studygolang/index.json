@@ -26,15 +26,8 @@
     },
     {
       "Title": "问下表单名称为 name[1] name[2] 这种GO如何获取值啊",
-      "Link": "https://studygolang.com/topics/16193#reply1",
+      "Link": "https://studygolang.com/topics/16193#reply2",
       "Description": "\u003cpre\u003e\u003ccode\u003e问下表单名称为 name[1] name[2] 这种GO如何获取值啊\n\u0026lt;input type=\u0026quot;text\u0026quot; name=\u0026quot;name[1]\u0026quot;\u0026gt; \n\u0026lt;input type=\u0026quot;text\u0026quot; name=\u0026quot;name[2]\u0026quot;\u0026gt; \n\n我尝试用 r.Form[\u0026quot;name\u0026quot;]  r.Form[\u0026quot;name[]\u0026quot;]\n\nr.FormValue[\u0026quot;name\u0026quot;]\n\n都无法取到值！！！\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "go能遍历所有函数么?",
-      "Link": "https://studygolang.com/topics/16188#reply1",
-      "Description": "\u003cp\u003e我想要获取所有能够导出的函数的函数名.\u003c/p\u003e\n\n\u003cp\u003e比如\u003c/p\u003e\n\n\u003cp\u003efuns := reflect.AllFunction()\u003c/p\u003e\n\n\u003cp\u003efor _,fun := each funcs {\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efmt.printf(reflect.value(fun).Type.Name)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -63,6 +56,13 @@
       "Title": "gws v1.4 update: 像JS一样使用WebSocket",
       "Link": "https://studygolang.com/topics/16189#reply0",
       "Description": "\u003cp\u003e这次更新带来了客户端支持, 与JS类似的WebSocket API\u003c/p\u003e\n\n\u003ch3\u003eExample\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;github.com/lxzan/gws\u0026quot;\n\t\u0026quot;log\u0026quot;\n)\n\nfunc main() {\n\toption := \u0026amp;gws.ClientOption{Addr: \u0026quot;ws://127.0.0.1:3000/connect\u0026quot;}\n\tsocket, _, err := gws.NewClient(new(WebSocket), option)\n\tif err != nil {\n\t\tlog.Printf(err.Error())\n\t\treturn\n\t}\n\tsocket.Listen()\n}\n\ntype WebSocket struct{}\n\nfunc (c *WebSocket) OnError(socket *gws.Conn, err error) {\n\tfmt.Printf(\u0026quot;onerror: err=%s\\n\u0026quot;, err.Error())\n}\n\nfunc (c *WebSocket) OnClose(socket *gws.Conn, code uint16, reason []byte) {\n\tfmt.Printf(\u0026quot;onclose: code=%d, payload=%s\\n\u0026quot;, code, string(reason))\n}\n\nfunc (c *WebSocket) OnPong(socket *gws.Conn, payload []byte) {\n}\n\nfunc (c *WebSocket) OnOpen(socket *gws.Conn) {\n\t_ = socket.WriteString(\u0026quot;hello, there is client\u0026quot;)\n}\n\nfunc (c *WebSocket) OnPing(socket *gws.Conn, payload []byte) {\n\tsocket.WritePong(payload)\n}\n\nfunc (c *WebSocket) OnMessage(socket *gws.Conn, message *gws.Message) {\n\tfmt.Printf(\u0026quot;recv: %s\\n\u0026quot;, message.Data.String())\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go能遍历所有函数么?",
+      "Link": "https://studygolang.com/topics/16188#reply1",
+      "Description": "\u003cp\u003e我想要获取所有能够导出的函数的函数名.\u003c/p\u003e\n\n\u003cp\u003e比如\u003c/p\u003e\n\n\u003cp\u003efuns := reflect.AllFunction()\u003c/p\u003e\n\n\u003cp\u003efor _,fun := each funcs {\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efmt.printf(reflect.value(fun).Type.Name)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -154,6 +154,13 @@
       "Title": "Go写的第一个网站，大家看看速度快不快？",
       "Link": "https://studygolang.com/topics/14460#reply104",
       "Description": "\u003cp\u003e这个是我用Go写的第一个网站，\n\u003ca href=\"https://www.qqx.com/\"\u003ehttps://www.qqx.com/\u003c/a\u003e\n大家看看速度快不快？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "问下表单名称为 name[1] name[2] 这种GO如何获取值啊",
+      "Link": "https://studygolang.com/topics/16193#reply1",
+      "Description": "\u003cpre\u003e\u003ccode\u003e问下表单名称为 name[1] name[2] 这种GO如何获取值啊\n\u0026lt;input type=\u0026quot;text\u0026quot; name=\u0026quot;name[1]\u0026quot;\u0026gt; \n\u0026lt;input type=\u0026quot;text\u0026quot; name=\u0026quot;name[2]\u0026quot;\u0026gt; \n\n我尝试用 r.Form[\u0026quot;name\u0026quot;]  r.Form[\u0026quot;name[]\u0026quot;]\n\nr.FormValue[\u0026quot;name\u0026quot;]\n\n都无法取到值！！！\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
