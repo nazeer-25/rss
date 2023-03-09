@@ -32,13 +32,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "用delve的next做单步调试的过程中，如何避免命中其他协程的断点",
-      "Link": "https://studygolang.com/topics/16195#reply0",
-      "Description": "\u003cp\u003e用delve调试的时候 next做单步调试的过程中  老是切换到别的协程的断点 这种情况要怎么处理， 有没有办法绑定在一个协程呢 求大神解答\n\u003cimg src=\"https://static.golangjob.cn/230309/cb3b6af9b15c8f605a10e6b207e8a304.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "golang开发Android native程序 。遇到各种问题。",
       "Link": "https://studygolang.com/topics/16196#reply0",
       "Description": "\u003cp\u003e光写一个android linux的native程序 简单 设置平台android 然后cpu ARM64就可以了。但是有个问题 。。我想和我的C语言组合起来完成某些事情 。然后考虑用C语言编译成.a这种静态的库给cgo用。cgo用的时候报错。报一个\nld error 这种 然后 libnumber.a(number.o): not an ELF file 这种提示（文件名我用的网上一个帖子的命名）。为什么连接.a\n文件会报不是个ELF文件的错误呢 。。后来想算了。用动态的吧。。然后动态的编译过了 。。拿到Android去跑的时候 。\nlibrary \u0026ldquo;libxxxxxx.so\u0026rdquo; not found: needed by main executable 有一直报这个错误 。程序加载不进这个so。我自己写个程序dlopen去加载都好好的 。。哎。有没有朋友遇到过这个问题的呢 。望告知。感谢。\u003c/p\u003e\n",
@@ -46,9 +39,23 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "用delve的next做单步调试的过程中，如何避免命中其他协程的断点",
+      "Link": "https://studygolang.com/topics/16195#reply0",
+      "Description": "\u003cp\u003e用delve调试的时候 next做单步调试的过程中  老是切换到别的协程的断点 这种情况要怎么处理， 有没有办法绑定在一个协程呢 求大神解答\n\u003cimg src=\"https://static.golangjob.cn/230309/cb3b6af9b15c8f605a10e6b207e8a304.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "http包发送post请求，调用jenkins接口，返回400状态码(this page expects a form submission)",
       "Link": "https://studygolang.com/topics/16197#reply0",
       "Description": "\u003col\u003e\n\u003cli\u003e\u003cp\u003e运行环境\ngo 1.19.1\nwindows/amd64\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e问题描述\n通过 http 提供的 PostForm，NewRequest，Post 方法发送 post 请求，调用 jenkins pipeline 的 input 输入处理接口，始终调用无法成功，返回结果状态码为 400，消息体提示 this page expects a form submission。同样的参数和 URI 通过 curl 命令，接口可以正常调用并返回 200 状态码\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003eCURL 命令（调用结果和返回状态码都正常）\ncurl -s -w \u0026ldquo;%{http_code}\\n\u0026rdquo; -X POST \u0026lsquo;\u003ca href=\"http://liuzhichao:88cd35a7db9b614818be840370d1cef3@172.16.99.11:8080/job/dwglptyq/job/sc-cpjob/23/wfapi/inputSubmit?inputId=Inputap'\"\u003ehttp://liuzhichao:88cd35a7db9b614818be840370d1cef3@172.16.99.11:8080/job/dwglptyq/job/sc-cpjob/23/wfapi/inputSubmit?inputId=Inputap\u0026rsquo;\u003c/a\u003e -d \u0026lsquo;json={\u0026ldquo;parameter\u0026rdquo;:[{\u0026ldquo;name\u0026rdquo;:\u0026ldquo;%E9%AA%8C%E8%AF%81%E7%A0%81\u0026rdquo;,\u0026ldquo;value\u0026rdquo;:\u0026ldquo;10862\u0026rdquo;}]}\u0026rsquo;\n\u003cimg src=\"https://static.golangjob.cn/230309/647ce5ab4ed8d3614c425158aec2bf62.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003ego 的 http 包（无法调用到接口，返回错误）\n// 对于http强求，获取请求参数\nif httpMethod == \u0026ldquo;post\u0026rdquo; {\n    urlValues := url.Values{}\n    for _,m := range params {\n        fmt.Println(\u0026ldquo;key:\u0026rdquo; + m[\u0026ldquo;name\u0026rdquo;])\n        fmt.Println(\u0026ldquo;value:\u0026rdquo; + m[\u0026ldquo;value\u0026rdquo;])\n        urlValues.Set(m[\u0026ldquo;name\u0026rdquo;],m[\u0026ldquo;value\u0026rdquo;])\n    }\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eresp, _ := http.PostForm(requestUrl,urlValues)\n// resp, _ := http.PostForm(requestUrl,url.Values{\u0026quot;验证码\u0026quot;:{\u0026quot;123456\u0026quot;}})\ndefer resp.Body.Close()\nbody, _ := ioutil.ReadAll(resp.Body)\nfmt.Println(string(body))\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230309/b61aca08551ba56168cda2613becd498.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "硬核实战！使用 Go 从零构建 KV 数据库",
+      "Link": "https://studygolang.com/topics/16191#reply0",
+      "Description": "\u003cp\u003e《从零实现 KV 存储》课程，手把手教学，从第一行代码开始，支持 Rust 和 Go 两种语言，只需要熟悉 Go 基础语法即可，包教包会！\u003c/p\u003e\n\n\u003cp\u003e课程详情点这里：\n\u003ca href=\"https://w02agegxg3.feishu.cn/docx/Ktp3dBGl9oHdbOxbjUWcGdSnn3g\"\u003e从零实现 KV 存储\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -63,13 +70,6 @@
       "Title": "询问一个关于 golang经常自动重启",
       "Link": "https://studygolang.com/topics/16190#reply17",
       "Description": "\u003cp\u003esystemd 守护的一个使用golang 实现的tcp服务，\n这个服务使用了github.com/jinzhu/gorm ，每隔一小时 服务就会被重启一次，毫无头绪，无从下手，哪位大神可指点指点，怎么排查\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "硬核实战！使用 Go 从零构建 KV 数据库",
-      "Link": "https://studygolang.com/topics/16191#reply0",
-      "Description": "\u003cp\u003e《从零实现 KV 存储》课程，手把手教学，从第一行代码开始，支持 Rust 和 Go 两种语言，只需要熟悉 Go 基础语法即可，包教包会！\u003c/p\u003e\n\n\u003cp\u003e课程详情点这里：\n\u003ca href=\"https://w02agegxg3.feishu.cn/docx/Ktp3dBGl9oHdbOxbjUWcGdSnn3g\"\u003e从零实现 KV 存储\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -98,6 +98,13 @@
       "Title": "使用goframe出现了unable to open database file: out of memory (14)，不知道如何解决",
       "Link": "https://studygolang.com/topics/16187#reply0",
       "Description": "\u003cp\u003e初学者，使用goframe框架的orm查询sqlite数据库，发生了以下错误\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e=== RUN   TestORM\n\n--- FAIL: TestORM (0.01s)\n\npanic: unable to open database file: out of memory (14), SELECT * FROM `t_project` LIMIT 1 [recovered]\n\n\tpanic: unable to open database file: out of memory (14), SELECT * FROM `t_project` LIMIT 1\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e路径和数据库文件本身没有问题，使用\u0026rdquo;database/sql\u0026rdquo;这个包就可以正常查询到\u003c/p\u003e\n\n\u003cp\u003egf v2.3.2\u003c/p\u003e\n\n\u003cp\u003ego1.17.11 windows/amd64\u003c/p\u003e\n\n\u003cp\u003e下面是代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage utils\n\nimport (\n\n\t\t\u0026quot;database/sql\u0026quot;\n\n\t\t\u0026quot;fmt\u0026quot;\n\n\t\t_ \u0026quot;github.com/gogf/gf/contrib/drivers/sqlite/v2\u0026quot;\n\n\t\t\u0026quot;github.com/gogf/gf/v2/frame/g\u0026quot;\n\n\t\t\u0026quot;github.com/gosnmp/gosnmp\u0026quot;\n\n\t\t_ \u0026quot;github.com/mattn/go-sqlite3\u0026quot;\n\n\t\t\u0026quot;golang.org/x/net/context\u0026quot;\n\n\t\t\u0026quot;myapp/ZxtTool\u0026quot;\n\n\t\t\u0026quot;strconv\u0026quot;\n\n\t\t\u0026quot;testing\u0026quot;\n\n\t\t\u0026quot;time\u0026quot;\n\n)\n\nfunc TestORM(*testing.T) {\n\n\tctx := context.Background()\n\n\tone, err := g.DB(\u0026quot;main\u0026quot;).Model(\u0026quot;t_project\u0026quot;).One()\n\n\tif err != nil {\n\n\t\tpanic(err)\n\n\t}\n\n\tdefer g.DB(\u0026quot;main\u0026quot;).Close(ctx)\n\n\tfmt.Println(one)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e下面是config.yaml内的数据库配置\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003edatabase:\n\n  main:\n\n    link:  \u0026quot;sqlite::@file(E:/GoProject/myapp/flowData.db)\u0026quot;\n\n    Schema: \u0026quot;main\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Mac上从Go1.18.2升级到1.20.1版本之后运行任何Go程序都报错# command-line-arguments\nflag provided but not defined: -G",
+      "Link": "https://studygolang.com/topics/16181#reply4",
+      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230304/26e3a7531bc068b337955c17a587c37c.png\" alt=\"image.png\" /\u003e\n如图所示，运行任何代码都是这样的报错，有大神遇到过这种问题吗？要怎么解决啊？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
