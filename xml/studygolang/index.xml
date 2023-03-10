@@ -23,14 +23,14 @@
       <description>&lt;ol&gt;&#xA;&lt;li&gt;&lt;p&gt;运行环境&#xA;go 1.19.1&#xA;windows/amd64&lt;/p&gt;&lt;/li&gt;&#xA;&#xA;&lt;li&gt;&lt;p&gt;问题描述&#xA;通过 http 提供的 PostForm，NewRequest，Post 方法发送 post 请求，调用 jenkins pipeline 的 input 输入处理接口，始终调用无法成功，返回结果状态码为 400，消息体提示 this page expects a form submission。同样的参数和 URI 通过 curl 命令，接口可以正常调用并返回 200 状态码&lt;/p&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;CURL 命令（调用结果和返回状态码都正常）&#xA;curl -s -w &amp;ldquo;%{http_code}\n&amp;rdquo; -X POST &amp;lsquo;&lt;a href=&#34;http://liuzhichao:88cd35a7db9b614818be840370d1cef3@172.16.99.11:8080/job/dwglptyq/job/sc-cpjob/23/wfapi/inputSubmit?inputId=Inputap&#39;&#34;&gt;http://liuzhichao:88cd35a7db9b614818be840370d1cef3@172.16.99.11:8080/job/dwglptyq/job/sc-cpjob/23/wfapi/inputSubmit?inputId=Inputap&amp;rsquo;&lt;/a&gt; -d &amp;lsquo;json={&amp;ldquo;parameter&amp;rdquo;:[{&amp;ldquo;name&amp;rdquo;:&amp;ldquo;%E9%AA%8C%E8%AF%81%E7%A0%81&amp;rdquo;,&amp;ldquo;value&amp;rdquo;:&amp;ldquo;10862&amp;rdquo;}]}&amp;rsquo;&#xA;&lt;img src=&#34;https://static.golangjob.cn/230309/647ce5ab4ed8d3614c425158aec2bf62.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;go 的 http 包（无法调用到接口，返回错误）&#xA;// 对于http强求，获取请求参数&#xA;if httpMethod == &amp;ldquo;post&amp;rdquo; {&#xA;    urlValues := url.Values{}&#xA;    for _,m := range params {&#xA;        fmt.Println(&amp;ldquo;key:&amp;rdquo; + m[&amp;ldquo;name&amp;rdquo;])&#xA;        fmt.Println(&amp;ldquo;value:&amp;rdquo; + m[&amp;ldquo;value&amp;rdquo;])&#xA;        urlValues.Set(m[&amp;ldquo;name&amp;rdquo;],m[&amp;ldquo;value&amp;rdquo;])&#xA;    }&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;resp, _ := http.PostForm(requestUrl,urlValues)&#xA;// resp, _ := http.PostForm(requestUrl,url.Values{&amp;quot;验证码&amp;quot;:{&amp;quot;123456&amp;quot;}})&#xA;defer resp.Body.Close()&#xA;body, _ := ioutil.ReadAll(resp.Body)&#xA;fmt.Println(string(body))&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230309/b61aca08551ba56168cda2613becd498.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>用delve的next做单步调试的过程中，如何避免命中其他协程的断点</title>
-      <link>https://studygolang.com/topics/16195#reply1</link>
-      <description>&lt;p&gt;用delve调试的时候 next做单步调试的过程中  老是切换到别的协程的断点 这种情况要怎么处理， 有没有办法绑定在一个协程呢 求大神解答&#xA;&lt;img src=&#34;https://static.golangjob.cn/230309/cb3b6af9b15c8f605a10e6b207e8a304.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>go语言一般大家用什么gui写界面 用什么优势？</title>
       <link>https://studygolang.com/topics/16198#reply0</link>
       <description>&lt;p&gt;如题。。其实用go以来。感觉挺好用的 。现在能用go写的都不考虑用C++了 。但是C++我写界面是用QT。QT也挺好用的 。。遇到要写界面感觉go就不太好用了 。。不考虑web界面 。。一般go用什么写界面比较舒服 。大概率是windows下&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>用delve的next做单步调试的过程中，如何避免命中其他协程的断点</title>
+      <link>https://studygolang.com/topics/16195#reply1</link>
+      <description>&lt;p&gt;用delve调试的时候 next做单步调试的过程中  老是切换到别的协程的断点 这种情况要怎么处理， 有没有办法绑定在一个协程呢 求大神解答&#xA;&lt;img src=&#34;https://static.golangjob.cn/230309/cb3b6af9b15c8f605a10e6b207e8a304.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go 1.20.2 和 Go1.19.7 发布了</title>
