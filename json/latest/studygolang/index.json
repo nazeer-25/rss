@@ -46,6 +46,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "Go 1.20.2 和 Go1.19.7 发布了",
+      "Link": "https://studygolang.com/topics/16194#reply0",
+      "Description": "\u003cp\u003e今早，Go 官方发布了两个小版本：Go1.20.2 和 Go1.19.7，主要是因为有一个安全问题。不过同时进行了一些 Bugfix。\u003c/p\u003e\n\n\u003cp\u003e安全问题是 crypto/elliptic 包。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003ecrypto/elliptic: incorrect P-256 ScalarMult and ScalarBaseMult results\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eThe ScalarMult and ScalarBaseMult methods of the P256 Curve may return an\u003cbr\u003e\n  incorrect result if called with some specific unreduced scalars (a scalar larger\u003cbr\u003e\n  than the order of the curve).\u003c/p\u003e\n\n\u003cp\u003eThis does not impact usages of crypto/ecdsa or crypto/ecdh.\u003c/p\u003e\n\n\u003cp\u003e详见 issue：\u003ca href=\"https://go.dev/issue/58647\"\u003ehttps://go.dev/issue/58647\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e此外，还进行了一些 Bug 的修复，Go1.20.2 版本 Close 的 issue 有 17 个 :\u003ca href=\"https://github.com/golang/go/issues?q=milestone%3AGo1.20.2+label%3ACherryPickApproved\"\u003ehttps://github.com/golang/go/issues?q=milestone%3AGo1.20.2+label%3ACherryPickApproved\u003c/a\u003e，1.19.7 版本 Close 的 issue 有 7 个：\u003ca href=\"https://github.com/golang/go/issues?q=milestone%3AGo1.19.7+label%3ACherryPickApproved\"\u003ehttps://github.com/golang/go/issues?q=milestone%3AGo1.19.7+label%3ACherryPickApproved\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e跟之前一样，Go 语言中文网准备好了安装包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e你也可以使用你喜欢的方式升级试用，或用官方给出的方式试用：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230309/b5ffcb886ea0d6d57d404b2439f46bcb.png\" alt=\"go1.20.2.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "用delve的next做单步调试的过程中，如何避免命中其他协程的断点",
       "Link": "https://studygolang.com/topics/16195#reply2",
       "Description": "\u003cp\u003e用delve调试的时候 next做单步调试的过程中  老是切换到别的协程的断点 这种情况要怎么处理， 有没有办法绑定在一个协程呢 求大神解答\n\u003cimg src=\"https://static.golangjob.cn/230309/cb3b6af9b15c8f605a10e6b207e8a304.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
@@ -63,13 +70,6 @@
       "Title": "golang开发Android native程序 。遇到各种问题。",
       "Link": "https://studygolang.com/topics/16196#reply0",
       "Description": "\u003cp\u003e光写一个android linux的native程序 简单 设置平台android 然后cpu ARM64就可以了。但是有个问题 。。我想和我的C语言组合起来完成某些事情 。然后考虑用C语言编译成.a这种静态的库给cgo用。cgo用的时候报错。报一个\nld error 这种 然后 libnumber.a(number.o): not an ELF file 这种提示（文件名我用的网上一个帖子的命名）。为什么连接.a\n文件会报不是个ELF文件的错误呢 。。后来想算了。用动态的吧。。然后动态的编译过了 。。拿到Android去跑的时候 。\nlibrary \u0026ldquo;libxxxxxx.so\u0026rdquo; not found: needed by main executable 有一直报这个错误 。程序加载不进这个so。我自己写个程序dlopen去加载都好好的 。。哎。有没有朋友遇到过这个问题的呢 。望告知。感谢。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Go 1.20.2 和 Go1.19.7 发布了",
-      "Link": "https://studygolang.com/topics/16194#reply0",
-      "Description": "\u003cp\u003e今早，Go 官方发布了两个小版本：Go1.20.2 和 Go1.19.7，主要是因为有一个安全问题。不过同时进行了一些 Bugfix。\u003c/p\u003e\n\n\u003cp\u003e安全问题是 crypto/elliptic 包。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003ecrypto/elliptic: incorrect P-256 ScalarMult and ScalarBaseMult results\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eThe ScalarMult and ScalarBaseMult methods of the P256 Curve may return an\u003cbr\u003e\n  incorrect result if called with some specific unreduced scalars (a scalar larger\u003cbr\u003e\n  than the order of the curve).\u003c/p\u003e\n\n\u003cp\u003eThis does not impact usages of crypto/ecdsa or crypto/ecdh.\u003c/p\u003e\n\n\u003cp\u003e详见 issue：\u003ca href=\"https://go.dev/issue/58647\"\u003ehttps://go.dev/issue/58647\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e此外，还进行了一些 Bug 的修复，Go1.20.2 版本 Close 的 issue 有 17 个 :\u003ca href=\"https://github.com/golang/go/issues?q=milestone%3AGo1.20.2+label%3ACherryPickApproved\"\u003ehttps://github.com/golang/go/issues?q=milestone%3AGo1.20.2+label%3ACherryPickApproved\u003c/a\u003e，1.19.7 版本 Close 的 issue 有 7 个：\u003ca href=\"https://github.com/golang/go/issues?q=milestone%3AGo1.19.7+label%3ACherryPickApproved\"\u003ehttps://github.com/golang/go/issues?q=milestone%3AGo1.19.7+label%3ACherryPickApproved\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e跟之前一样，Go 语言中文网准备好了安装包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e你也可以使用你喜欢的方式升级试用，或用官方给出的方式试用：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230309/b5ffcb886ea0d6d57d404b2439f46bcb.png\" alt=\"go1.20.2.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
