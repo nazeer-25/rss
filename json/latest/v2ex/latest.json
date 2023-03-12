@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "iOS 快捷指令里用获取 URL 内容出现了诡异现象， GET 请求正常， POST 请求无反应？？ - 问与答",
+      "Link": "https://www.v2ex.com/t/923331",
+      "Description": "\u003cp\u003e不是有利用 chatGPT 让 siri 更加智能的快捷指令吗? 我给 openai 的 api 做了反向代理，在其他的应用里都用着好好的。但是唯独修改快捷指令里的 api url 就没反应了。\u003c/p\u003e\n\u003cp\u003e我先是在本地 PC 上开了一个 web 服务器，看我写的快捷指令的请求能否正常工作，一切正常，get 请求和 post 请求都可以。\n我还在路由器及服务器上抓了包，看起来也正常，http 请求很简单但是 https 的 tls 协议就看不太懂了，但是有看到数据包至少没被防火墙挡住。\u003c/p\u003e\n\u003cp\u003e最后就直接在代理服务器上开个测试的 web 服务器，nginx 配置好 proxy_pass ，结果 GET 请求就能正常返回，但是 POST 请求就无反应，nginx 日志里也没有。而且 http 访问一切正常，https 就不行。\u003c/p\u003e\n\u003cp\u003e并且我在本地使用 其他工具也都正常。情况是这样的画个表格吧。\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003emethod\u003c/th\u003e\n\u003cth\u003ehttp\u003c/th\u003e\n\u003cth\u003ehttps\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e快捷指令 GET\u003c/td\u003e\n\u003ctd\u003e✅\u003c/td\u003e\n\u003ctd\u003e✅\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e快捷指令 POST\u003c/td\u003e\n\u003ctd\u003e✅\u003c/td\u003e\n\u003ctd\u003e❌\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e浏览器 POST\u003c/td\u003e\n\u003ctd\u003e✅\u003c/td\u003e\n\u003ctd\u003e✅\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003ehttpie POST\u003c/td\u003e\n\u003ctd\u003e✅\u003c/td\u003e\n\u003ctd\u003e✅\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e我在本地用其他工具测试都一切正常  \u003ccode\u003ehttp post \u003ca href=\"https://api.test.com/v2/caht\" rel=\"nofollow\"\u003ehttps://api.test.com/v2/caht\u003c/a\u003e message=123\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003enginx 配置\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e        location /v2/ {\n            proxy_pass http://127.0.0.1:8000;\n            proxy_set_header Host api.openai.com;\n            proxy_set_header X-Real-IP $remote_addr;\n        }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003etest server\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003efrom flask import Flask, request\napp = Flask(__name__)\n\n@app.route('/v2/\u0026lt;path:path\u0026gt;', methods=['GET', 'POST'])\ndef v2_path(path):\n    if request.method == 'GET':\n        print('--GET request headers:\\n{}\\n--end header--\\n'.format(request.headers))\n        return f'Path that matches /v2/* is: {path}'\n    if request.method == 'POST':\n        print('--POST request headers:\\n{}\\n--end header--\\n'.format(request.headers))\n        data = request.get_json()\n        message = data.get('message')\n        print('--POST request body:\\nTYPE:{}\\n{}\\n--end body--\\n'.format(type(data), data))\n        return f'Path that matches /v2/* is: {path}\\n{message}'\n     \nif __name__ == '__main__':\n    app.run(host=\"127.0.0.1\", port=8000, debug=True)\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "xavierskip",
+      "PubDate": "2023-03-12T04:05:24Z"
+    },
+    {
+      "Title": "使用 Luajit 编译的 lua 能反编译吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/923330",
+      "Description": "有没有大佬熟悉？有偿安排",
+      "Author": "daimaosix",
+      "PubDate": "2023-03-12T04:00:50Z"
+    },
+    {
+      "Title": "中国沿海到底有没有已经被核污染了 - 问与答",
+      "Link": "https://www.v2ex.com/t/923329",
+      "Description": "\u003cp\u003e福岛应该排放核废水蛮久了，渤海，黄海，东海以及福建沿海的海鲜还能安全食用吗\u003c/p\u003e\n",
+      "Author": "nztomoto",
+      "PubDate": "2023-03-12T03:57:57Z"
+    },
+    {
       "Title": "Q: 关于数据库管理的软件有什么好的推荐 - 问与答",
       "Link": "https://www.v2ex.com/t/923328",
       "Description": "\u003ch1\u003eIntro\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e1.navcat 不让用了\u003c/li\u003e\n\u003cli\u003e2.dbeaver 卡卡的\u003c/li\u003e\n\u003cli\u003e3.使用 oracle,mysql,redis 等常用的数据库\u003c/li\u003e\n\u003cli\u003e4.vscode 和 datagrip 的都不太好用\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1\u003eQuestion\u003c/h1\u003e\n\u003cp\u003e有没有\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e1.驱动比较多的\u003c/li\u003e\n\u003cli\u003e2.破解也行但是收不到律师函的\u003c/li\u003e\n\u003cli\u003e3.开源的\u003c/li\u003e\n\u003cli\u003e4.响应较快\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e的客户端软件。。。啊啊啊啊啊，好难受\u003c/p\u003e\n",

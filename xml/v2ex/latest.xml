@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>iOS 快捷指令里用获取 URL 内容出现了诡异现象， GET 请求正常， POST 请求无反应？？ - 问与答</title>
+      <link>https://www.v2ex.com/t/923331</link>
+      <description>&lt;p&gt;不是有利用 chatGPT 让 siri 更加智能的快捷指令吗? 我给 openai 的 api 做了反向代理，在其他的应用里都用着好好的。但是唯独修改快捷指令里的 api url 就没反应了。&lt;/p&gt;&#xA;&lt;p&gt;我先是在本地 PC 上开了一个 web 服务器，看我写的快捷指令的请求能否正常工作，一切正常，get 请求和 post 请求都可以。&#xA;我还在路由器及服务器上抓了包，看起来也正常，http 请求很简单但是 https 的 tls 协议就看不太懂了，但是有看到数据包至少没被防火墙挡住。&lt;/p&gt;&#xA;&lt;p&gt;最后就直接在代理服务器上开个测试的 web 服务器，nginx 配置好 proxy_pass ，结果 GET 请求就能正常返回，但是 POST 请求就无反应，nginx 日志里也没有。而且 http 访问一切正常，https 就不行。&lt;/p&gt;&#xA;&lt;p&gt;并且我在本地使用 其他工具也都正常。情况是这样的画个表格吧。&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;method&lt;/th&gt;&#xA;&lt;th&gt;http&lt;/th&gt;&#xA;&lt;th&gt;https&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;快捷指令 GET&lt;/td&gt;&#xA;&lt;td&gt;✅&lt;/td&gt;&#xA;&lt;td&gt;✅&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;快捷指令 POST&lt;/td&gt;&#xA;&lt;td&gt;✅&lt;/td&gt;&#xA;&lt;td&gt;❌&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;浏览器 POST&lt;/td&gt;&#xA;&lt;td&gt;✅&lt;/td&gt;&#xA;&lt;td&gt;✅&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;httpie POST&lt;/td&gt;&#xA;&lt;td&gt;✅&lt;/td&gt;&#xA;&lt;td&gt;✅&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;我在本地用其他工具测试都一切正常  &lt;code&gt;http post &lt;a href=&#34;https://api.test.com/v2/caht&#34; rel=&#34;nofollow&#34;&gt;https://api.test.com/v2/caht&lt;/a&gt; message=123&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;nginx 配置&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;        location /v2/ {&#xA;            proxy_pass http://127.0.0.1:8000;&#xA;            proxy_set_header Host api.openai.com;&#xA;            proxy_set_header X-Real-IP $remote_addr;&#xA;        }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;test server&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from flask import Flask, request&#xA;app = Flask(__name__)&#xA;&#xA;@app.route(&#39;/v2/&amp;lt;path:path&amp;gt;&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])&#xA;def v2_path(path):&#xA;    if request.method == &#39;GET&#39;:&#xA;        print(&#39;--GET request headers:\n{}\n--end header--\n&#39;.format(request.headers))&#xA;        return f&#39;Path that matches /v2/* is: {path}&#39;&#xA;    if request.method == &#39;POST&#39;:&#xA;        print(&#39;--POST request headers:\n{}\n--end header--\n&#39;.format(request.headers))&#xA;        data = request.get_json()&#xA;        message = data.get(&#39;message&#39;)&#xA;        print(&#39;--POST request body:\nTYPE:{}\n{}\n--end body--\n&#39;.format(type(data), data))&#xA;        return f&#39;Path that matches /v2/* is: {path}\n{message}&#39;&#xA;     &#xA;if __name__ == &#39;__main__&#39;:&#xA;    app.run(host=&#34;127.0.0.1&#34;, port=8000, debug=True)&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>xavierskip</author>
+      <pubDate>12 Mar 2023 04:05:24 +0000</pubDate>
+    </item>
+    <item>
+      <title>使用 Luajit 编译的 lua 能反编译吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/923330</link>
+      <description>有没有大佬熟悉？有偿安排</description>
+      <author>daimaosix</author>
+      <pubDate>12 Mar 2023 04:00:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>中国沿海到底有没有已经被核污染了 - 问与答</title>
+      <link>https://www.v2ex.com/t/923329</link>
+      <description>&lt;p&gt;福岛应该排放核废水蛮久了，渤海，黄海，东海以及福建沿海的海鲜还能安全食用吗&lt;/p&gt;&#xA;</description>
+      <author>nztomoto</author>
+      <pubDate>12 Mar 2023 03:57:57 +0000</pubDate>
+    </item>
+    <item>
       <title>Q: 关于数据库管理的软件有什么好的推荐 - 问与答</title>
       <link>https://www.v2ex.com/t/923328</link>
       <description>&lt;h1&gt;Intro&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;1.navcat 不让用了&lt;/li&gt;&#xA;&lt;li&gt;2.dbeaver 卡卡的&lt;/li&gt;&#xA;&lt;li&gt;3.使用 oracle,mysql,redis 等常用的数据库&lt;/li&gt;&#xA;&lt;li&gt;4.vscode 和 datagrip 的都不太好用&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;Question&lt;/h1&gt;&#xA;&lt;p&gt;有没有&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;1.驱动比较多的&lt;/li&gt;&#xA;&lt;li&gt;2.破解也行但是收不到律师函的&lt;/li&gt;&#xA;&lt;li&gt;3.开源的&lt;/li&gt;&#xA;&lt;li&gt;4.响应较快&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;的客户端软件。。。啊啊啊啊啊，好难受&lt;/p&gt;&#xA;</description>
