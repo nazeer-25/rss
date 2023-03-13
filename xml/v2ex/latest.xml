@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>windows 下多线程执行 subporcess.Popen()，但子进程无法杀死 - Python</title>
+      <link>https://www.v2ex.com/t/923742</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/u012849539/article/details/117457490&#34; rel=&#34;nofollow&#34;&gt;该文章&lt;/a&gt;提到的 &lt;code&gt;shell=False&lt;/code&gt; 不起作用。&lt;/p&gt;&#xA;&lt;p&gt;简单说明：&lt;br/&gt;&#xA;一个可执行文件读取配置文件（非常多）在两秒内返回结果，即便修改 &lt;code&gt;_work_queue&lt;/code&gt; 还是会因为无法关闭相应子进程导致内存溢出。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import shlex&#xA;from concurrent.futures import ThreadPoolExecutor&#xA;&#xA;class BoundedThreadPoolExecutor(ThreadPoolExecutor):&#xA;&#xA;    def __init__(self, max_workers, max_waiting_tasks, *args, **kwargs):&#xA;        super().__init__(max_workers=max_workers, *args, **kwargs)&#xA;        self._work_queue = Queue(maxsize=max_waiting_tasks)&#xA;&#xA;&#xA;def func(conf_path):&#xA;    try:&#xA;        command = f&#34;../some.exe -d -c {conf_path}&#34;&#xA;        args = shlex.split(command)&#xA;        proc = subprocess.Popen(args=args, shell=False, stderr=subprocess.PIPE, stdout=subprocess.PIPE)&#xA;        stdout, stderr = proc.communicate(5)&#xA;    except subprocess.TimeoutExpired:&#xA;        logger.error(f&#34;pid:{proc.pid} communicate timeout&#34;)&#xA;    finally:&#xA;        proc.terminate()&#xA;    return proc&#xA;&#xA;&#xA;def callback2kill(res):&#xA;    proc = res.result()&#xA;    os.system(f&#34;taskkill /F /pid {proc.pid}&#34;)&#xA;    &#xA;&#xA;with BoundedThreadPoolExecutor(100, 500) as executor:&#xA;    for endpoint in endpoints:&#xA;        future = executor.submit(func, endpoint)&#xA;        future.add_done_callback(callback2kill)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>evemoo</author>
+      <pubDate>13 Mar 2023 18:07:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Android 上可以有库或者什么方法，抓到 TCP 报文的标志位信息么？ - Android</title>
+      <link>https://www.v2ex.com/t/923741</link>
+      <description>各位大神，现在有一个这样的需求，判断一个请求的 tcp 报文中的 Reset 标志位，是否被 Set&lt;br /&gt;&lt;br /&gt;Android 上有什么第三方库，或者其他方法，可以抓到 TCP 的报文信息么？&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;通过 wireshark 可以抓到，但是现在想在 android 代码里面获取到这个信息&lt;br /&gt;&lt;br /&gt;Reset: Not set 或者 Reset: Set</description>
+      <author>huaxiaos</author>
+      <pubDate>13 Mar 2023 18:04:10 +0000</pubDate>
+    </item>
+    <item>
       <title>Mac 用 ssd 影片盒过热问题 - 问与答</title>
       <link>https://www.v2ex.com/t/923740</link>
       <description>请问是不是要开启“当可能时候，让 disk 休息”这个选项？&lt;br /&gt;&lt;br /&gt;好像不开启所有 ssd 都会过热死亡</description>
