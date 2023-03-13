@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>水群+摸鱼 - 英雄联盟</title>
+      <link>https://www.v2ex.com/t/923606</link>
+      <description>&lt;p&gt;有没有水群或者摸鱼&#xA;求拉 VX：eXltbjE5OTQ=&lt;/p&gt;&#xA;</description>
+      <author>yymn</author>
+      <pubDate>13 Mar 2023 06:54:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>分享一个家宽开 webdav 防审查的方案 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/923605</link>
+      <description>&lt;p&gt;个人推荐的回家方案是 ss+aead ，无特征就是无证据，当然你非要说无证据也可以办你，当我没说&lt;/p&gt;&#xA;&lt;p&gt;再说回来，此方案就是纯玩，来对抗一下审查，开放了 web ，但又抓不到证据，或者说无法截图你的 webdav 界面&lt;/p&gt;&#xA;&lt;p&gt;核心原理就是 webdav 使用二级目录，不要用一级目录，这样就算抓到了 sni ，也无法通过域名来打开网站，因为一级目录为空，而二级目录是随机的一个长串，是无法通过抓包来获取到的&lt;/p&gt;&#xA;&lt;p&gt;实现方式是用 caddy+自带的 webdav 插件，配置如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;www.abc.com:777 {&#xA;encode gzip&#xA;tls www.abc.com.cer www.abc.com.key {&#xA;&#x9;protocols tls1.3&#xA;&#x9;}&#xA;&#x9;@mypath {&#xA;&#x9;&#x9;not path_regexp ^/qwert&#xA;&#x9;}&#xA;&#x9;handle @mypath {&#xA;&#x9;&#x9;abort&#x9;&#xA;&#x9;}&#xA;&#xA;&#x9;basicauth /qwert/* {&#xA;&#x9;&#x9;user hashed_password&#xA;&#x9;}&#xA;&#xA;&#x9;redir /qwert /qwert/&#xA;&#x9;webdav /qwert/* {&#xA;&#x9;&#x9;root /webdav&#xA;&#x9;&#x9;prefix /qwert&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;最后的效果就是，只有访问 https://www 点 abc 点 com:777/qwert 才会有返回，其它全部为空，而 qwert 是抓不到的，除非证书劫持，所以也就截取不了你开放的 web 界面了。当然，还是那句，如果你认为运营商不需要截图证据，凭端口什么的也可以封你宽带，当我没说好吧&lt;/p&gt;&#xA;</description>
+      <author>YGBlvcAK</author>
+      <pubDate>13 Mar 2023 06:53:57 +0000</pubDate>
+    </item>
+    <item>
+      <title>周末摸了一个 ChatGPT CLI，支持本地会话保存、恢复、分享，内容自动滚动 - 分享创造</title>
+      <link>https://www.v2ex.com/t/923604</link>
+      <description>&lt;h2&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;最近 ChatGPT 的页面不太稳定，历史会话总是打不开，花了很多时间磨合(调教)的角色都无法继续，这让我痛心疾首，暗叹核心数据还是得掌握在自己的手里。&lt;/p&gt;&#xA;&lt;p&gt;遂，翻看了一下 GPT3.5 的 CHAT API ，发现与官网不同，不是基于使用 MessageID 的 Chain 模式，而是在一次请求中附带所有的对话详情（包含用户和 AI ）。这就很有意思了，官网上的 GPT 比较矜持，你需要通过各种咒语让它进入角色，还老被拒绝。而在 API 当中，你可以直接为 AI 编写一段身份设定和开场白，让 AI 自己说出来，这样它就非常容易进入角色。&lt;/p&gt;&#xA;&lt;p&gt;这就引出了另一个可能，分享会话。以前大家通过分享咒语的方式来使用 GPT ，但非常容易被识别举报失效，被 AI 拒绝。而如果分享一组对话（类似剧本杀的剧本），让 AI 根据这一组对话继续，由于模型的语义关联性策略和链式推导特性，理论上 AI 不可能拒绝。&lt;/p&gt;&#xA;&lt;h2&gt;对话分享&lt;/h2&gt;&#xA;&lt;p&gt;对话保存在当前执行目录下的&lt;code&gt;chatgpt_cli/conversions&lt;/code&gt;当中，如果有小伙伴之间想要分享自己磨合的角色，复制出来即可。&lt;/p&gt;&#xA;&lt;p&gt;&lt;del&gt;我有一个不愿意透露姓名的朋友愿意分享一些会话出来，但出于一些考虑，它们不会出现在主要（ main ）内容里。(大家都是程序员，应该懂什么意思）&lt;/del&gt;&lt;/p&gt;&#xA;&lt;h2&gt;现有的问题&lt;/h2&gt;&#xA;&lt;p&gt;因为本来只是用来自己摸鱼玩玩用的，所以做成了 CLI 应用，而我在 go 的生态里找到的 CLI 库不是特别理想，所以交互上有些繁琐，交互代码也比较脏。&lt;/p&gt;&#xA;&lt;p&gt;并且原库在有较长的中文文本的时候，会有一些显示问题，我 fork 了原库修改了一些地方，修复了显示问题，但是不确定是否会带来其它问题.&lt;/p&gt;&#xA;&lt;p&gt;不过应用的核心模块和 UI 是分离设计的，如果有兴趣在此基础上开发其它模式应用的话，还是比较容易的。&lt;/p&gt;&#xA;&lt;h2&gt;规划&lt;/h2&gt;&#xA;&lt;p&gt;在用 API 训练了几个模型之后，个人基本决定对于长期对话场景改用 API 了，确实比官网的少了很多束缚。不过目前 CLI 的交互还是太繁琐而且反人类了，除了适合上班的时候在 Terminal 里摸鱼一无是处。&lt;/p&gt;&#xA;&lt;p&gt;下一步计划是用 RN 或者 Xamarin 写个小 APP 出来，配合一些云同步软件就可以做到随时聊天了。但我一个后端仔搞前端难度曲线有点陡峭，如果找到合适的模板可以套，再搞吧（咕咕咕）&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/pkoukk/chatgpt-cli&#34; rel=&#34;nofollow&#34;&gt;项目地址&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://postimg.cc/mcKZMSBc&#34; rel=&#34;nofollow&#34;&gt;使用预览.gif&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>pkoukk</author>
+      <pubDate>13 Mar 2023 06:53:12 +0000</pubDate>
+    </item>
+    <item>
       <title>关于对日，俺想问个问题哈 - 酷工作</title>
       <link>https://www.v2ex.com/t/923603</link>
       <description>&lt;p&gt;俺在一家对日项目的公司里已经干了快两年了，主要是开发，那些测试也会写。&lt;/p&gt;&#xA;&lt;p&gt;现在想去日本，最大的问题是俺大四的时候休学跑了，现在已经肄业了，日语也没有考级，有啥途径可以补救不（ ps：还是很想去日本）&lt;/p&gt;&#xA;</description>
