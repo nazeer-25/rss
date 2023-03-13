@@ -89,7 +89,7 @@
     },
     {
       "Title": "问下表单名称为 name[1] name[2] 这种GO如何获取值啊",
-      "Link": "https://studygolang.com/topics/16193#reply4",
+      "Link": "https://studygolang.com/topics/16193#reply5",
       "Description": "\u003cpre\u003e\u003ccode\u003e问下表单名称为 name[1] name[2] 这种GO如何获取值啊\n\u0026lt;input type=\u0026quot;text\u0026quot; name=\u0026quot;name[1]\u0026quot;\u0026gt; \n\u0026lt;input type=\u0026quot;text\u0026quot; name=\u0026quot;name[2]\u0026quot;\u0026gt; \n\n我尝试用 r.Form[\u0026quot;name\u0026quot;]  r.Form[\u0026quot;name[]\u0026quot;]\n\nr.FormValue[\u0026quot;name\u0026quot;]\n\n都无法取到值！！！\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -154,6 +154,13 @@
       "Title": "http包发送post请求，调用jenkins接口，返回400状态码(this page expects a form submission)",
       "Link": "https://studygolang.com/topics/16197#reply0",
       "Description": "\u003col\u003e\n\u003cli\u003e\u003cp\u003e运行环境\ngo 1.19.1\nwindows/amd64\u003c/p\u003e\u003c/li\u003e\n\n\u003cli\u003e\u003cp\u003e问题描述\n通过 http 提供的 PostForm，NewRequest，Post 方法发送 post 请求，调用 jenkins pipeline 的 input 输入处理接口，始终调用无法成功，返回结果状态码为 400，消息体提示 this page expects a form submission。同样的参数和 URI 通过 curl 命令，接口可以正常调用并返回 200 状态码\u003c/p\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003eCURL 命令（调用结果和返回状态码都正常）\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003ecurl -s -w \u0026quot;%{http_code}\\n\u0026quot; -X POST 'http://liuzhichao:88cd35a7db9b614818be840370d1cef3@172.16.99.11:8080/job/dwglptyq/job/sc-cpjob/23/wfapi/inputSubmit?inputId=Inputap' -d 'json={\u0026quot;parameter\u0026quot;:[{\u0026quot;name\u0026quot;:\u0026quot;%E9%AA%8C%E8%AF%81%E7%A0%81\u0026quot;,\u0026quot;value\u0026quot;:\u0026quot;10862\u0026quot;}]}'\n![image.png](https://static.golangjob.cn/230309/647ce5ab4ed8d3614c425158aec2bf62.png)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003ego 的 http 包（无法调用到接口，返回错误）\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e// 对于http强求，获取请求参数\nif httpMethod == \u0026quot;post\u0026quot; {\n    urlValues := url.Values{}\n    for _,m := range params {\n        fmt.Println(\u0026quot;key:\u0026quot; + m[\u0026quot;name\u0026quot;])\n        fmt.Println(\u0026quot;value:\u0026quot; + m[\u0026quot;value\u0026quot;])\n        urlValues.Set(m[\u0026quot;name\u0026quot;],m[\u0026quot;value\u0026quot;])\n    }\n\n    resp, _ := http.PostForm(requestUrl,urlValues)\n    // resp, _ := http.PostForm(requestUrl,url.Values{\u0026quot;验证码\u0026quot;:{\u0026quot;123456\u0026quot;}})\n    defer resp.Body.Close()\n    body, _ := ioutil.ReadAll(resp.Body)\n    fmt.Println(string(body))\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230309/b61aca08551ba56168cda2613becd498.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "问下表单名称为 name[1] name[2] 这种GO如何获取值啊",
+      "Link": "https://studygolang.com/topics/16193#reply4",
+      "Description": "\u003cpre\u003e\u003ccode\u003e问下表单名称为 name[1] name[2] 这种GO如何获取值啊\n\u0026lt;input type=\u0026quot;text\u0026quot; name=\u0026quot;name[1]\u0026quot;\u0026gt; \n\u0026lt;input type=\u0026quot;text\u0026quot; name=\u0026quot;name[2]\u0026quot;\u0026gt; \n\n我尝试用 r.Form[\u0026quot;name\u0026quot;]  r.Form[\u0026quot;name[]\u0026quot;]\n\nr.FormValue[\u0026quot;name\u0026quot;]\n\n都无法取到值！！！\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
