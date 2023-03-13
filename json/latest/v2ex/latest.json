@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "怎样才是校园网内 WOL 远程唤醒的最佳姿势？ - 问与答",
+      "Link": "https://www.v2ex.com/t/923744",
+      "Description": "\u003cp\u003e电脑已经配置了 WOL ，但是关机十几分钟后就无法唤醒了，了解了一下发现应该是路由器 MAC 和 ip 的绑定过期了。但是校园网内也没法改路由器设置，所以想问问怎样的方案才能稳定地随时唤醒？\u003c/p\u003e\n\u003cp\u003ep.s. 有一台树莓派可用\u003c/p\u003e\n",
+      "Author": "pluto0x0",
+      "PubDate": "2023-03-13T18:38:57Z"
+    },
+    {
       "Title": "windows 下多线程执行 subporcess.Popen()，但子进程无法杀死 - Python",
       "Link": "https://www.v2ex.com/t/923742",
       "Description": "\u003cp\u003e\u003ca href=\"https://blog.csdn.net/u012849539/article/details/117457490\" rel=\"nofollow\"\u003e该文章\u003c/a\u003e提到的 \u003ccode\u003eshell=False\u003c/code\u003e 不起作用。\u003c/p\u003e\n\u003cp\u003e简单说明：\u003cbr/\u003e\n一个可执行文件读取配置文件（非常多）在两秒内返回结果，即便修改 \u003ccode\u003e_work_queue\u003c/code\u003e 还是会因为无法关闭相应子进程导致内存溢出。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003eimport shlex\nfrom concurrent.futures import ThreadPoolExecutor\n\nclass BoundedThreadPoolExecutor(ThreadPoolExecutor):\n\n    def __init__(self, max_workers, max_waiting_tasks, *args, **kwargs):\n        super().__init__(max_workers=max_workers, *args, **kwargs)\n        self._work_queue = Queue(maxsize=max_waiting_tasks)\n\n\ndef func(conf_path):\n    try:\n        command = f\"../some.exe -d -c {conf_path}\"\n        args = shlex.split(command)\n        proc = subprocess.Popen(args=args, shell=False, stderr=subprocess.PIPE, stdout=subprocess.PIPE)\n        stdout, stderr = proc.communicate(5)\n    except subprocess.TimeoutExpired:\n        logger.error(f\"pid:{proc.pid} communicate timeout\")\n    finally:\n        proc.terminate()\n    return proc\n\n\ndef callback2kill(res):\n    proc = res.result()\n    os.system(f\"taskkill /F /pid {proc.pid}\")\n    \n\nwith BoundedThreadPoolExecutor(100, 500) as executor:\n    for endpoint in endpoints:\n        future = executor.submit(func, endpoint)\n        future.add_done_callback(callback2kill)\n\u003c/code\u003e\u003c/pre\u003e\n",

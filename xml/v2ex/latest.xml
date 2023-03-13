@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>怎样才是校园网内 WOL 远程唤醒的最佳姿势？ - 问与答</title>
+      <link>https://www.v2ex.com/t/923744</link>
+      <description>&lt;p&gt;电脑已经配置了 WOL ，但是关机十几分钟后就无法唤醒了，了解了一下发现应该是路由器 MAC 和 ip 的绑定过期了。但是校园网内也没法改路由器设置，所以想问问怎样的方案才能稳定地随时唤醒？&lt;/p&gt;&#xA;&lt;p&gt;p.s. 有一台树莓派可用&lt;/p&gt;&#xA;</description>
+      <author>pluto0x0</author>
+      <pubDate>13 Mar 2023 18:38:57 +0000</pubDate>
+    </item>
+    <item>
       <title>windows 下多线程执行 subporcess.Popen()，但子进程无法杀死 - Python</title>
       <link>https://www.v2ex.com/t/923742</link>
       <description>&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/u012849539/article/details/117457490&#34; rel=&#34;nofollow&#34;&gt;该文章&lt;/a&gt;提到的 &lt;code&gt;shell=False&lt;/code&gt; 不起作用。&lt;/p&gt;&#xA;&lt;p&gt;简单说明：&lt;br/&gt;&#xA;一个可执行文件读取配置文件（非常多）在两秒内返回结果，即便修改 &lt;code&gt;_work_queue&lt;/code&gt; 还是会因为无法关闭相应子进程导致内存溢出。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import shlex&#xA;from concurrent.futures import ThreadPoolExecutor&#xA;&#xA;class BoundedThreadPoolExecutor(ThreadPoolExecutor):&#xA;&#xA;    def __init__(self, max_workers, max_waiting_tasks, *args, **kwargs):&#xA;        super().__init__(max_workers=max_workers, *args, **kwargs)&#xA;        self._work_queue = Queue(maxsize=max_waiting_tasks)&#xA;&#xA;&#xA;def func(conf_path):&#xA;    try:&#xA;        command = f&#34;../some.exe -d -c {conf_path}&#34;&#xA;        args = shlex.split(command)&#xA;        proc = subprocess.Popen(args=args, shell=False, stderr=subprocess.PIPE, stdout=subprocess.PIPE)&#xA;        stdout, stderr = proc.communicate(5)&#xA;    except subprocess.TimeoutExpired:&#xA;        logger.error(f&#34;pid:{proc.pid} communicate timeout&#34;)&#xA;    finally:&#xA;        proc.terminate()&#xA;    return proc&#xA;&#xA;&#xA;def callback2kill(res):&#xA;    proc = res.result()&#xA;    os.system(f&#34;taskkill /F /pid {proc.pid}&#34;)&#xA;    &#xA;&#xA;with BoundedThreadPoolExecutor(100, 500) as executor:&#xA;    for endpoint in endpoints:&#xA;        future = executor.submit(func, endpoint)&#xA;        future.add_done_callback(callback2kill)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
