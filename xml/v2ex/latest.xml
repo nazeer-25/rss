@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>你觉得除了“性格”外，还有什么决定了命运？ - 问与答</title>
+      <link>https://www.v2ex.com/t/923958</link>
+      <description>&lt;p&gt;我觉得除了“性格”，还有“见识”和“思维方式”也一样重要。&lt;/p&gt;&#xA;&lt;p&gt;你觉得呢？&lt;/p&gt;&#xA;&lt;p&gt;还有什么非常重要的点决定了一个人的命运？&lt;/p&gt;&#xA;</description>
+      <author>sdjl</author>
+      <pubDate>14 Mar 2023 09:10:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>吐槽一下不负责的运维公司 - 程序员</title>
+      <link>https://www.v2ex.com/t/923957</link>
+      <description>&lt;p&gt;某厅机关找的运维公司&#xA;1 、机房不通知、不定时停断电&#xA;2 、单机 NTP(无卫星授时)&#xA;3 、总是出问题的 DNS&#xA;NTP 服务、DNS 服务都有免费可靠的，明明可以直接用就行了....&#xA;当然知道赚钱嘛，不寒掺。但是，都不能保持稳定性、可用性。&#xA;接触过最让人厌恶的公司，没有之一。&lt;/p&gt;&#xA;</description>
+      <author>Routeros</author>
+      <pubDate>14 Mar 2023 09:09:47 +0000</pubDate>
+    </item>
+    <item>
       <title>做了一个 Rust 的代理库（SOCKS5 等），想寻求些建议 - 分享创造</title>
       <link>https://www.v2ex.com/t/923956</link>
       <description>&lt;p&gt;同时在 Rust 官方论坛发了贴 &lt;a href=&#34;https://users.rust-lang.org/t/built-a-proxy-crate-looking-for-suggestions/90862/1&#34; rel=&#34;nofollow&#34;&gt;https://users.rust-lang.org/t/built-a-proxy-crate-looking-for-suggestions/90862/1&lt;/a&gt;，内容是一样的。&lt;/p&gt;&#xA;&lt;p&gt;刚刚用 Rust 不久，前些阵子需要在程序中用到代理，查了一趟发现没有一个通用的代理库，那就干脆自己糊一个练手了。现在刚刚做了一个看起来能用的版本，想来寻求一些意见建议。&lt;/p&gt;&#xA;&lt;p&gt;库名叫 &lt;code&gt;proxie&lt;/code&gt;，链接在此 &lt;a href=&#34;https://github.com/dynos01/proxie&#34; rel=&#34;nofollow&#34;&gt;GitHub&lt;/a&gt; &lt;a href=&#34;https://docs.rs/proxie/0.0.2/proxie/&#34; rel=&#34;nofollow&#34;&gt;docs.rs&lt;/a&gt;。当前还没来得及写文档，文档是 Cargo 生成的。基本用法如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;use tokio::{io::{AsyncWriteExt, BufReader, AsyncBufReadExt}};&#xA;use futures::future;&#xA;use proxie::{SOCKS5Proxy, tokio::AsyncProxy};&#xA;&#xA;#[tokio::main]&#xA;async fn main() {&#xA;    let n_thread = 10;&#xA;    let mut handles = vec![];&#xA;&#xA;    for _ in 0..n_thread {&#xA;        handles.push(tokio::spawn(async {&#xA;            let request = format!(&#34;GET / HTTP/1.1\r\n\r\n&#34;);&#xA;&#xA;            let server = SOCKS5Proxy::new(&#34;127.0.0.1&#34;, 1080, None);&#xA;            let mut stream = server.connect(&#34;example.com:80&#34;).await.unwrap();&#xA;&#xA;            //let mut stream = TcpStream::connect(&#34;example.com:80&#34;).await.unwrap();&#xA;            stream.write_all(request.as_bytes()).await.unwrap();&#xA;            stream.flush().await.unwrap();&#xA;&#xA;            let mut reader = BufReader::new(&amp;amp;mut stream);&#xA;            let mut buffer = String::new();&#xA;&#xA;            loop {&#xA;                reader.read_line(&amp;amp;mut buffer).await.unwrap();&#xA;&#xA;                if buffer.ends_with(&#34;\r\n\r\n&#34;) {&#xA;                    break;&#xA;                }&#xA;            }&#xA;&#xA;            print!(&#34;{}&#34;, buffer);&#xA;        }));&#xA;    }&#xA;&#xA;    future::join_all(handles).await;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;或者带认证的话&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;...&#xA;use proxie::{SOCKS5Proxy, tokio::AsyncProxy, Auth};&#xA;...&#xA;let server = SOCKS5Proxy::new(&#34;127.0.0.1&#34;, 1080, Auth::new(&#34;user&#34;, &#34;pass&#34;));&#xA;...&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;总之基本上就是在 &lt;code&gt;TcpStream&lt;/code&gt; 上套了一层壳。除此之外还有 &lt;code&gt;async-std&lt;/code&gt; 版本和同步的 &lt;code&gt;std::net&lt;/code&gt; 版本，也支持 HTTP 代理。用法都是一样的。具体的运行时用 features 打开：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;proxie = { version = &#34;0.0.2&#34;, features = [&#34;enable_tokio&#34;] }&#xA;//Available features: &#34;enable_tokio&#34;, &#34;enable_async_std&#34; and &#34;enable_sync&#34;.&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;此外是接下来的计划：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;完善文档&lt;/li&gt;&#xA;&lt;li&gt;SOCKS5 UDP 支持&lt;/li&gt;&#xA;&lt;li&gt;HTTPS 代理和 SOCKS4a 代理（低优先级，好像很少有人用）&lt;/li&gt;&#xA;&lt;li&gt;完善套的壳，把各个 &lt;code&gt;TcpStream&lt;/code&gt; 上所有的方法都实现了，实现无痛接入&lt;/li&gt;&#xA;&lt;li&gt;单元测试&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;现在比较关心的地方是这套面向用户的接口是否合理？如果可能的话还是希望尽快稳定 API 以后就不改了。感觉好像还行，听听大佬们建议。&lt;/p&gt;&#xA;&lt;p&gt;差不多就是这样了，提前感谢一切意见建议！如果有人也在寻找类似的库的话欢迎来帮忙测试一下！&lt;/p&gt;&#xA;</description>
@@ -185,7 +199,7 @@
       <pubDate>14 Mar 2023 07:22:04 +0000</pubDate>
     </item>
     <item>
-      <title>工业物联网用 ESP32 有没有搞头？ - 分享创造</title>
+      <title>工业物联网用 ESP32 有没有搞头？ - 硬件</title>
       <link>https://www.v2ex.com/t/923923</link>
       <description>&lt;p&gt;前几年各种宣传中国智造 2025 ，后来因为国际环境没怎么宣传了。现在已经和米国公开叫板了，应该又要提上来了吧。前段时间看到 eps32 一个开发板居然只要 9.9 还包邮，买了 3 个研究了下。esp32 通过 RFID 采集物料流转信息，gpio 口连设备 plc 采集生成信息，连 wifi 通过 mqtt 发送信息。一套的成本 30 都不到。那些用 PDA 扫描二维码，做领料，报工，入库，不但操作繁琐，还成本巨高。一个 PDA 就好几千。这种一个操作工发一套都行。&lt;/p&gt;&#xA;</description>
       <author>langhuishan</author>
