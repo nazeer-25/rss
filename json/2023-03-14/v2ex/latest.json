@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "似乎发现一个 telegram 可以收到验证码的方法 - 分享发现",
+      "Link": "https://www.v2ex.com/t/923970",
+      "Description": "\u003cp\u003e有很多人注册 telegram 收不到验证码\n\u003ca href=\"https://imgse.com/i/pplqz01\" rel=\"nofollow\"\u003e\u003cimg alt=\"pplqz01.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/03/14/pplqz01.jpg\"/\u003e\u003c/a\u003e\n可以看到，在 google 上搜索 telegram ，出现的第三个结果就是 telegram 收不到验证码\n有的人搜了，但是都没用\n但是我偶然间发现一个方法，可以试试\n首先，你的手机号要是联通的手机号，然后开通国际短信功能\n然后关闭 wifi ，只使用联通卡\n然后使用日本节点开全局\n打开 telegram app\np.s：不要使用网页版\n进入注册界面，国家地区选中国，手机号填写你联通手机号\n不出意外，你就可以收到验证码了\n如果还不能，那就买一个手机号吧\n不推荐买现成的号，因为卖给你的人可能会监视你的账号\u003c/p\u003e\n",
+      "Author": "hxlgg01",
+      "PubDate": "2023-03-14T09:48:09Z"
+    },
+    {
+      "Title": "出 Surge iOS 授权（一个设备） - Surge",
+      "Link": "https://www.v2ex.com/t/923968",
+      "Description": "\u003cp\u003e我买了 Surge iOS 授权，总共三个设备资格，我自己用了 2 个，现在出剩下的这个授权（激活码形式），120 元。购买时间为 2023 年 3 月 10 日，还剩大约一年的新功能资格。\u003c/p\u003e\n\u003cp\u003e联系方式：微信 dGhyZWVkaW1fbGVl (请 Base64 解码)\u003c/p\u003e\n",
+      "Author": "supergi",
+      "PubDate": "2023-03-14T09:43:17Z"
+    },
+    {
+      "Title": "m1 关不掉的小憩休眠时疯狂耗电 - MacBook",
+      "Link": "https://www.v2ex.com/t/923967",
+      "Description": "\u003cp\u003e之前没注意，昨天发现一晚上 mbp m1 待机耗了 10% 的电。\u003ccode\u003epmset -g stats\u003c/code\u003e 查到了数百个唤醒。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eTL;DR 执行 \u003ccode\u003esudo pmset -b powernap 0\u003c/code\u003e 后一晚还是 100%\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e研究了好一会，发现系统的一个巨坑，是这样：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://support.apple.com/zh-cn/guide/mac-help/mh40774/mac\" rel=\"nofollow\"\u003e官方支持\u003c/a\u003e说有「启用电能小憩」选项，但事实上 arm 芯片的没有，大概是苹果对功耗太自信了？\u003c/li\u003e\n\u003cli\u003e不仅没有，「唤醒以供网络访问」选项底下描述的描述\u003cstrong\u003e非常有误导性，听起来很像「小憩」\u003c/strong\u003e。\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2023/03/14/9mEL6VNob2K1i7F.png\"/\u003e\u003c/li\u003e\n\u003cli\u003e让人\u003cstrong\u003e误以为\u003c/strong\u003e「电能小憩」和「唤醒以供网络访问」合并了。其实并没有！小憩默认始终开启。\u003c/li\u003e\n\u003cli\u003e「唤醒以供网络访问」真正含义是：休眠时\u003cstrong\u003e被访问\u003c/strong\u003e则可以唤醒以提供服务。比如网络共享。\u003ca href=\"https://support.apple.com/zh-cn/guide/mac-help/mh27905/mac\" rel=\"nofollow\"\u003e来源\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e执行 \u003ccode\u003epmset -g custom\u003c/code\u003e 查看电源设置，可以看到 \u003ccode\u003epowernap\u003c/code\u003e \u003cstrong\u003e始终\u003c/strong\u003e是打开的。在 x86 尝试后发现这个就是「电池小憩」，而 \u003ccode\u003ewomp\u003c/code\u003e 才是 「唤醒以供网络访问」。\u003c/p\u003e\n\u003cp\u003e所以找到元凶了，一行命令干掉它：\u003ccode\u003esudo pmset -b powernap 0\u003c/code\u003e - 在电池供电下关闭小憩\n如果还不满意可以执行 \u003ccode\u003esudo pmset -b tcpkeepalive 0\u003c/code\u003e - 彻底干掉网络，但是 find my mac 也失效了。\u003c/p\u003e\n\u003cp\u003e给个对照：\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2023/03/14/dYwJMNaDCgBZvFb.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e最后看一下两个版本描述的区别（ m1 是 mac13 ，x86 是黑苹果 mac12 ）：\n\u003cimg alt=\"diff\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2023/03/14/4TiPdbO1zWNHuVn.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "Chenhe",
+      "PubDate": "2023-03-14T09:42:40Z"
+    },
+    {
       "Title": "大家的 M 芯片会不会突然变得特别卡 - macOS",
       "Link": "https://www.v2ex.com/t/923966",
       "Description": "\u003cp\u003e有过两次都是长时间开机 4-5 天左右 突然开始大风车点什么都是反应半天 之前用 intel 的时候开机一个月也没有过这种情况啊\u003c/p\u003e\n",
@@ -13,7 +34,7 @@
     {
       "Title": "有没有懂 geoserver 的 - 酷工作",
       "Link": "https://www.v2ex.com/t/923965",
-      "Description": "\u003cp\u003e数据不知道坐标系，在前端展示的图层需要偏移到数据大改的位置 ，预算充足，能搞的联系啊 ，\n数据里面有坐标的 可以做偏移盖过去。前端用的 openlayers\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e数据不知道坐标系，在前端展示的图层需要偏移到数据大改的位置 ，预算充足，能搞的联系啊 ，\n数据里面有坐标的 可以做偏移盖过去。前端用的 openlayers\nv: KZR1186785308\u003c/p\u003e\n",
       "Author": "slowTime",
       "PubDate": "2023-03-14T09:39:30Z"
     },
