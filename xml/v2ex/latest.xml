@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Mac 存储问题求助 - Apple</title>
+      <link>https://www.v2ex.com/t/923972</link>
+      <description>手持 14 寸 M1 丐版，512G 自己用绰绰有余，借别人用了一阵子，就剩余不到 100G 了，微信占了绝大额。。。有啥办法能微信搬家吗？或者说推荐外接硬盘？</description>
+      <author>sickoo</author>
+      <pubDate>14 Mar 2023 09:54:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>英语不好可以在 upwork 上找活吗 - 酷工作</title>
+      <link>https://www.v2ex.com/t/923971</link>
+      <description>哑巴英语，不会听说，只会部分读写，能在 upwork 上找活吗</description>
+      <author>bjzhou1990</author>
+      <pubDate>14 Mar 2023 09:52:13 +0000</pubDate>
+    </item>
+    <item>
       <title>似乎发现一个 telegram 可以收到验证码的方法 - 分享发现</title>
       <link>https://www.v2ex.com/t/923970</link>
       <description>&lt;p&gt;有很多人注册 telegram 收不到验证码&#xA;&lt;a href=&#34;https://imgse.com/i/pplqz01&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;pplqz01.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2023/03/14/pplqz01.jpg&#34;/&gt;&lt;/a&gt;&#xA;可以看到，在 google 上搜索 telegram ，出现的第三个结果就是 telegram 收不到验证码&#xA;有的人搜了，但是都没用&#xA;但是我偶然间发现一个方法，可以试试&#xA;首先，你的手机号要是联通的手机号，然后开通国际短信功能&#xA;然后关闭 wifi ，只使用联通卡&#xA;然后使用日本节点开全局&#xA;打开 telegram app&#xA;p.s：不要使用网页版&#xA;进入注册界面，国家地区选中国，手机号填写你联通手机号&#xA;不出意外，你就可以收到验证码了&#xA;如果还不能，那就买一个手机号吧&#xA;不推荐买现成的号，因为卖给你的人可能会监视你的账号&lt;/p&gt;&#xA;</description>
@@ -18,9 +32,9 @@
       <pubDate>14 Mar 2023 09:43:17 +0000</pubDate>
     </item>
     <item>
-      <title>m1 关不掉的小憩休眠时疯狂耗电 - MacBook</title>
+      <title>m1 关不掉的小憩休眠时疯狂耗电 - MacBook Pro</title>
       <link>https://www.v2ex.com/t/923967</link>
-      <description>&lt;p&gt;之前没注意，昨天发现一晚上 mbp m1 待机耗了 10% 的电。&lt;code&gt;pmset -g stats&lt;/code&gt; 查到了数百个唤醒。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;TL;DR 执行 &lt;code&gt;sudo pmset -b powernap 0&lt;/code&gt; 后一晚还是 100%&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;研究了好一会，发现系统的一个巨坑，是这样：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://support.apple.com/zh-cn/guide/mac-help/mh40774/mac&#34; rel=&#34;nofollow&#34;&gt;官方支持&lt;/a&gt;说有「启用电能小憩」选项，但事实上 arm 芯片的没有，大概是苹果对功耗太自信了？&lt;/li&gt;&#xA;&lt;li&gt;不仅没有，「唤醒以供网络访问」选项底下描述的描述&lt;strong&gt;非常有误导性，听起来很像「小憩」&lt;/strong&gt;。&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/03/14/9mEL6VNob2K1i7F.png&#34;/&gt;&lt;/li&gt;&#xA;&lt;li&gt;让人&lt;strong&gt;误以为&lt;/strong&gt;「电能小憩」和「唤醒以供网络访问」合并了。其实并没有！小憩默认始终开启。&lt;/li&gt;&#xA;&lt;li&gt;「唤醒以供网络访问」真正含义是：休眠时&lt;strong&gt;被访问&lt;/strong&gt;则可以唤醒以提供服务。比如网络共享。&lt;a href=&#34;https://support.apple.com/zh-cn/guide/mac-help/mh27905/mac&#34; rel=&#34;nofollow&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;执行 &lt;code&gt;pmset -g custom&lt;/code&gt; 查看电源设置，可以看到 &lt;code&gt;powernap&lt;/code&gt; &lt;strong&gt;始终&lt;/strong&gt;是打开的。在 x86 尝试后发现这个就是「电池小憩」，而 &lt;code&gt;womp&lt;/code&gt; 才是 「唤醒以供网络访问」。&lt;/p&gt;&#xA;&lt;p&gt;所以找到元凶了，一行命令干掉它：&lt;code&gt;sudo pmset -b powernap 0&lt;/code&gt; - 在电池供电下关闭小憩&#xA;如果还不满意可以执行 &lt;code&gt;sudo pmset -b tcpkeepalive 0&lt;/code&gt; - 彻底干掉网络，但是 find my mac 也失效了。&lt;/p&gt;&#xA;&lt;p&gt;给个对照：&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/03/14/dYwJMNaDCgBZvFb.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;最后看一下两个版本描述的区别（ m1 是 mac13 ，x86 是黑苹果 mac12 ）：&#xA;&lt;img alt=&#34;diff&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/03/14/4TiPdbO1zWNHuVn.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;之前没注意，昨天发现一晚上 mbp m1 待机耗了 10% 的电。&lt;code&gt;pmset -g stats&lt;/code&gt; 查到了数百个唤醒。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;TL;DR 执行 &lt;code&gt;sudo pmset -b powernap 0&lt;/code&gt; 后一晚还是 100%&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;研究了好一会，发现系统的一个巨坑，是这样：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://support.apple.com/zh-cn/guide/mac-help/mh40774/mac&#34; rel=&#34;nofollow&#34;&gt;官方支持&lt;/a&gt;说有「启用电能小憩」选项，但事实上 arm 芯片的没有，大概是苹果对功耗太自信了？&lt;/li&gt;&#xA;&lt;li&gt;不仅没有，「唤醒以供网络访问」选项底下的描述&lt;strong&gt;非常有误导性，听起来很像「小憩」&lt;/strong&gt;。&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/03/14/9mEL6VNob2K1i7F.png&#34;/&gt;&lt;/li&gt;&#xA;&lt;li&gt;让人&lt;strong&gt;误以为&lt;/strong&gt;「电能小憩」和「唤醒以供网络访问」合并了。其实并没有！小憩默认始终开启。&lt;/li&gt;&#xA;&lt;li&gt;「唤醒以供网络访问」真正含义是：休眠时&lt;strong&gt;被访问&lt;/strong&gt;则可以唤醒以提供服务。比如网络共享。&lt;a href=&#34;https://support.apple.com/zh-cn/guide/mac-help/mh27905/mac&#34; rel=&#34;nofollow&#34;&gt;来源&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;执行 &lt;code&gt;pmset -g custom&lt;/code&gt; 查看电源设置，可以看到 &lt;code&gt;powernap&lt;/code&gt; &lt;strong&gt;始终&lt;/strong&gt;是打开的。在 x86 尝试后发现这个就是「电池小憩」，而 &lt;code&gt;womp&lt;/code&gt; 才是 「唤醒以供网络访问」。&lt;/p&gt;&#xA;&lt;p&gt;所以找到元凶了，一行命令干掉它：&lt;code&gt;sudo pmset -b powernap 0&lt;/code&gt; - 在电池供电下关闭小憩&#xA;如果还不满意可以执行 &lt;code&gt;sudo pmset -b tcpkeepalive 0&lt;/code&gt; - 彻底干掉网络，但是 find my mac 也失效了。&lt;/p&gt;&#xA;&lt;p&gt;给个对照：&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/03/14/dYwJMNaDCgBZvFb.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;最后看一下两个版本描述的区别（ m1 是 mac13 ，x86 是黑苹果 mac12 ）：&#xA;&lt;img alt=&#34;diff&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/03/14/4TiPdbO1zWNHuVn.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
       <author>Chenhe</author>
       <pubDate>14 Mar 2023 09:42:40 +0000</pubDate>
     </item>
