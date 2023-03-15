@@ -33,7 +33,7 @@
     },
     {
       "Title": "前台界面怎么修改 什么格式",
-      "Link": "https://studygolang.com/topics/16210#reply0",
+      "Link": "https://studygolang.com/topics/16210#reply1",
       "Description": "\u003cp\u003e如题，我测试了好久 一个开源的项目，貌似找到前台界面了，可是修改后无效，是不是存在缓存？前台界面的后缀名是什么？感谢大神指点\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -63,13 +63,6 @@
       "Title": "高级Cocos开发【30-45k】，可远程办公。",
       "Link": "https://studygolang.com/topics/16208#reply0",
       "Description": "\u003cp\u003e月薪：30-45k，13 - 15薪\u003c/p\u003e\n\n\u003cp\u003e岗位职责\u003c/p\u003e\n\n\u003cp\u003e使用Cocos Creator进行前端游戏引擎，通信，游戏逻辑开发相关工作\n与后端开发工程师，完成交互功能，联调工作\n与产品，美术密切合作，共同开发高质量的游戏\n后续产品功能，性能优化和维护\n任职资格\u003c/p\u003e\n\n\u003cp\u003e1：3年以上游戏前端工作经验，至少有一款上线项目经验\u003c/p\u003e\n\n\u003cp\u003e2：熟悉C++ TS JS，有良好的分析能力，规范的编码风格\u003c/p\u003e\n\n\u003cp\u003e3：掌握Creator开发工具，能熟练完成游戏逻辑，UI和特效开发\u003c/p\u003e\n\n\u003cp\u003e扎实的编程基础和算法基础，熟悉常用的数据结构和算法\n熟悉各个平台的打包和发布流程\n为人正直，责任心强，工作积极主动，善于沟通，具备自学能力，能独立处理工作中遇到的问题\n加分项：熟悉web前端开发，熟练掌握Vue，React中的一种，并且有项目实践经验\u003c/p\u003e\n\n\u003cp\u003eE-mail：vasma1984@proton.me\u003c/p\u003e\n\n\u003cp\u003eTelegram：\u003ca href=\"https://t.me/kiwi1024\"\u003ehttps://t.me/kiwi1024\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Go中使用反射的动态方法调用",
-      "Link": "https://studygolang.com/topics/16204#reply0",
-      "Description": "\u003cp\u003eGo是一种静态类型的语言，提供了大量的安全性和性能。静态类型的好处之一是，编译器可以在编译时捕获错误，防止在运行时发生。\u003c/p\u003e\n\n\u003cp\u003e在Go中，方法是用语法func(receiverName receiverType) methodName(args\u0026hellip;) returnValues\u0026hellip;. 在结构或类型上定义的。例如，下面的代码在 MyType 结构上定义了一个方法 Foo:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003etype MyType struct {}\n\nfunc (mt MyType) Foo() {\n    fmt.Println(\u0026quot;Hello from Foo!\u0026quot;)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e要在MyType的一个实例上调用这个方法，我们只需在这个实例上调用这个方法：myInstance.Foo()。\u003c/p\u003e\n\n\u003cp\u003e然而，有时我们可能想写一些更灵活的代码，可以与我们在编译时不知道的类型一起工作。在这种情况下，Go提供了一种使用反射动态调用方法的机制。\u003c/p\u003e\n\n\u003cp\u003e反射是Go中一个强大的功能，它允许我们在运行时检查和操作对象，包括变量、函数和类型。通过反射，我们可以编写动态处理类型的代码，而不需要在编译时知道它们。\u003c/p\u003e\n\n\u003cp\u003ereflect包提供了一种在运行时检查和操作Go值的方法。我们可以使用reflect.Value类型来表示任何类型的值，并且我们可以调用reflect.Value上的方法来检查和修改该值。\u003c/p\u003e\n\n\u003cp\u003e要动态地调用一个结构或类型的方法，我们需要做以下工作:\u003c/p\u003e\n\n\u003cp\u003e获得一个reflect.Value，代表我们要调用方法的结构或类型的实例。\n获得一个代表我们要调用的方法的reflect.Method。\n使用reflect.Method.Func字段在实例上调用该方法。\n下面是一个例子，说明我们如何使用反射来调用一个结构上的方法:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n    \u0026quot;fmt\u0026quot;\n    \u0026quot;reflect\u0026quot;\n)\n\ntype MyType struct {}\n\nfunc (mt MyType) Foo() {\n    fmt.Println(\u0026quot;Hello from Foo!\u0026quot;)\n}\n\nfunc main() {\n    // Create an instance of MyType\n    myInstance := MyType{}\n\n    // Get a reflect.Value representing the instance\n    value := reflect.ValueOf(myInstance)\n\n    // Get a reflect.Method representing the Foo method\n    method := value.MethodByName(\u0026quot;Foo\u0026quot;)\n\n    // Call the method on the instance\n    method.Call(nil) // Prints \u0026quot;Hello from Foo!\u0026quot;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e在这个例子中，我们创建了一个MyType的实例，使用reflect.ValueOf获得一个代表该实例的reflect.Value，使用value.MethodByName获得一个代表Foo方法的reflect.Method，并使用method.Call在该实例上调用该方法。\u003c/p\u003e\n\n\u003cp\u003eCall方法需要一个reflect.Value值的片断，代表方法的参数。由于Foo不需要参数，我们传递nil。\u003c/p\u003e\n\n\u003cp\u003e注意，使用反射调用方法的效率低于直接调用方法的效率，因为它涉及到大量的间接性和类型检查。反射应该少用，只有在绝对必要时才使用。\u003c/p\u003e\n\n\u003cp\u003e动态方法调用是一个在各种情况下都有用的功能。这里有几个例子说明谁可能会使用这个功能:\u003c/p\u003e\n\n\u003cp\u003e框架开发者: 创建框架或库的开发者经常使用动态方法调用来为用户提供灵活和可定制的API。通过允许用户将方法名称指定为一个字符串，框架可以在运行时动态地调用适当的方法。\n测试框架: 测试框架通常使用动态方法调用，使用户可以用不同的方法名称和输入参数来编写测试。这使测试人员能够编写更灵活和全面的测试套件。\n数据处理管道: 涉及复杂的数据处理管道的应用程序可以使用动态方法调用来调用特定于管道的每个阶段的方法。这使得应用程序更加灵活，能够适应不同的数据处理需求。\n脚本语言: 动态方法调用是Python、Ruby和JavaScript等脚本语言的一个共同特征。这些语言经常使用动态方法调用，使用户能够与对象互动，执行任务，而不必编写大量的模板代码。\n综上所述，Go对反射的支持允许我们在运行时操作和检查数值，包括动态调用结构和类型的方法。虽然反射可以是一个强大的工具，但由于其性能开销，应该谨慎使用。\u003c/p\u003e\n\n\u003cp\u003e感兴趣的可关注：\n\u003cimg src=\"https://static.golangjob.cn/230312/1cd2b34962e62132169642ea47f16603.png\" alt=\"截屏2023-03-12 23.15.28.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -116,6 +109,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "Go中使用反射的动态方法调用",
+      "Link": "https://studygolang.com/topics/16204#reply0",
+      "Description": "\u003cp\u003eGo是一种静态类型的语言，提供了大量的安全性和性能。静态类型的好处之一是，编译器可以在编译时捕获错误，防止在运行时发生。\u003c/p\u003e\n\n\u003cp\u003e在Go中，方法是用语法func(receiverName receiverType) methodName(args\u0026hellip;) returnValues\u0026hellip;. 在结构或类型上定义的。例如，下面的代码在 MyType 结构上定义了一个方法 Foo:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003etype MyType struct {}\n\nfunc (mt MyType) Foo() {\n    fmt.Println(\u0026quot;Hello from Foo!\u0026quot;)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e要在MyType的一个实例上调用这个方法，我们只需在这个实例上调用这个方法：myInstance.Foo()。\u003c/p\u003e\n\n\u003cp\u003e然而，有时我们可能想写一些更灵活的代码，可以与我们在编译时不知道的类型一起工作。在这种情况下，Go提供了一种使用反射动态调用方法的机制。\u003c/p\u003e\n\n\u003cp\u003e反射是Go中一个强大的功能，它允许我们在运行时检查和操作对象，包括变量、函数和类型。通过反射，我们可以编写动态处理类型的代码，而不需要在编译时知道它们。\u003c/p\u003e\n\n\u003cp\u003ereflect包提供了一种在运行时检查和操作Go值的方法。我们可以使用reflect.Value类型来表示任何类型的值，并且我们可以调用reflect.Value上的方法来检查和修改该值。\u003c/p\u003e\n\n\u003cp\u003e要动态地调用一个结构或类型的方法，我们需要做以下工作:\u003c/p\u003e\n\n\u003cp\u003e获得一个reflect.Value，代表我们要调用方法的结构或类型的实例。\n获得一个代表我们要调用的方法的reflect.Method。\n使用reflect.Method.Func字段在实例上调用该方法。\n下面是一个例子，说明我们如何使用反射来调用一个结构上的方法:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n    \u0026quot;fmt\u0026quot;\n    \u0026quot;reflect\u0026quot;\n)\n\ntype MyType struct {}\n\nfunc (mt MyType) Foo() {\n    fmt.Println(\u0026quot;Hello from Foo!\u0026quot;)\n}\n\nfunc main() {\n    // Create an instance of MyType\n    myInstance := MyType{}\n\n    // Get a reflect.Value representing the instance\n    value := reflect.ValueOf(myInstance)\n\n    // Get a reflect.Method representing the Foo method\n    method := value.MethodByName(\u0026quot;Foo\u0026quot;)\n\n    // Call the method on the instance\n    method.Call(nil) // Prints \u0026quot;Hello from Foo!\u0026quot;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e在这个例子中，我们创建了一个MyType的实例，使用reflect.ValueOf获得一个代表该实例的reflect.Value，使用value.MethodByName获得一个代表Foo方法的reflect.Method，并使用method.Call在该实例上调用该方法。\u003c/p\u003e\n\n\u003cp\u003eCall方法需要一个reflect.Value值的片断，代表方法的参数。由于Foo不需要参数，我们传递nil。\u003c/p\u003e\n\n\u003cp\u003e注意，使用反射调用方法的效率低于直接调用方法的效率，因为它涉及到大量的间接性和类型检查。反射应该少用，只有在绝对必要时才使用。\u003c/p\u003e\n\n\u003cp\u003e动态方法调用是一个在各种情况下都有用的功能。这里有几个例子说明谁可能会使用这个功能:\u003c/p\u003e\n\n\u003cp\u003e框架开发者: 创建框架或库的开发者经常使用动态方法调用来为用户提供灵活和可定制的API。通过允许用户将方法名称指定为一个字符串，框架可以在运行时动态地调用适当的方法。\n测试框架: 测试框架通常使用动态方法调用，使用户可以用不同的方法名称和输入参数来编写测试。这使测试人员能够编写更灵活和全面的测试套件。\n数据处理管道: 涉及复杂的数据处理管道的应用程序可以使用动态方法调用来调用特定于管道的每个阶段的方法。这使得应用程序更加灵活，能够适应不同的数据处理需求。\n脚本语言: 动态方法调用是Python、Ruby和JavaScript等脚本语言的一个共同特征。这些语言经常使用动态方法调用，使用户能够与对象互动，执行任务，而不必编写大量的模板代码。\n综上所述，Go对反射的支持允许我们在运行时操作和检查数值，包括动态调用结构和类型的方法。虽然反射可以是一个强大的工具，但由于其性能开销，应该谨慎使用。\u003c/p\u003e\n\n\u003cp\u003e感兴趣的可关注：\n\u003cimg src=\"https://static.golangjob.cn/230312/1cd2b34962e62132169642ea47f16603.png\" alt=\"截屏2023-03-12 23.15.28.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "Golang程序员寻求兼职或者合作",
       "Link": "https://studygolang.com/topics/16202#reply0",
       "Description": "\u003cp\u003e5年golang开发经验， 2年vue前端开发经验，\u003c/p\u003e\n",
@@ -154,6 +154,13 @@
       "Title": "招聘golang工程师",
       "Link": "https://studygolang.com/topics/16179#reply6",
       "Description": "\u003cp\u003e前端开发（30-40）\n会Vue Flutter优先\u003c/p\u003e\n\n\u003cp\u003e产品经理（25-35k）\n5名\u003c/p\u003e\n\n\u003cp\u003e运维工程师（25-35k）\n有k8s经验优先\u003c/p\u003e\n\n\u003cp\u003egolang（35-45k）\n有go开发项目经验优先\u003c/p\u003e\n\n\u003cp\u003ecocos（40-50k）\n有web端经验优先\u003c/p\u003e\n\n\u003cp\u003e项目管理（18-30k）\u003c/p\u003e\n\n\u003cp\u003e视频动效设计师（18-30k）\nQQ：509364120\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "前台界面怎么修改 什么格式",
+      "Link": "https://studygolang.com/topics/16210#reply0",
+      "Description": "\u003cp\u003e如题，我测试了好久 一个开源的项目，貌似找到前台界面了，可是修改后无效，是不是存在缓存？前台界面的后缀名是什么？感谢大神指点\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
