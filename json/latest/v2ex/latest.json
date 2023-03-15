@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "React 下的 http-proxy-middleware 转发错误 - 程序员",
+      "Link": "https://www.v2ex.com/t/924252",
+      "Description": "\u003ch2\u003e最近写了一个前后端分离的框架，因为涉及到多个 API 的调用，存在跨域的问题，所以使用了 http-proxy-middleware （以下称为 HPM ）\u003c/h2\u003e\n\u003cp\u003e版本: \u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eReact 18.2.0\u003c/li\u003e\n\u003cli\u003eHPM 版本 2.0.6 npm 最新版本\n使用 Typescript\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e目标: \"/map_services/v1/getVersion\" -\u0026gt; \"http://localhost:8810/v1/getVersion\"\u003c/p\u003e\n\u003cp\u003e问题:\n1. /map_services 确实被代理了，但后端服务器显示请求的是\"http://localhost:8810/map_services/v1/getVersion\"\n即 PathRewrite 并没有生效\n2. 我发起的是 POST 请求，但后端服务器显示收到的是 GET 请求\u003c/p\u003e\n\u003ch3\u003e后端请求\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003eexport const getVersion = async (): Promise\u0026lt;string\u0026gt; =\u0026gt; {\n    return await http(\"/map_services/v1/getVersion\", {\n        method: HTTP_METHODS.POST,\n        data: {}\n    }).then((response) =\u0026gt; {\n        if (response.data !== \"\") {\n            return response.data;\n        }\n        return \"null\";\n    })\n}\nconst http = async (url: string,\n    {data, headers, ...customConfig}: IConfig = {})=\u0026gt;{\n 数据处理就不写了\n ···\n\n return await window.fetch(url, config).then(async (res) =\u0026gt; {\n        let dataRes: IRemoteResponse = await res.json();\n        if (dataRes.info !== SUCCESS_FLAG) {\n            return Promise.reject({message: \"Bad Request!\"});\n        }\n        if (dataRes.info) {\n            return dataRes;\n        } else {\n            return Promise.reject(dataRes);\n        }\n    });\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003esetupProxy.js\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e\nconst {createProxyMiddleware} = require('http-proxy-middleware');\nmodule.exports = function (app) {\napp.use(\n        '/map_services',\n        createProxyMiddleware({\n            target: 'http://localhost:8810',\n            PathRewrite: {\n                '^/map_services': '/'\n            }\n        })\n    );\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "Gav1nw",
+      "PubDate": "2023-03-15T08:50:59Z"
+    },
+    {
+      "Title": "通过 ChatGPT 可以做的一些事 - 程序员",
+      "Link": "https://www.v2ex.com/t/924251",
+      "Description": "\u003cp\u003e关于这篇文章的介绍：\u003ca href=\"https://reurl.cc/V8NvVn\" rel=\"nofollow\"\u003e文章\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e不知道可行吗？\u003c/p\u003e\n",
+      "Author": "Cundo",
+      "PubDate": "2023-03-15T08:47:39Z"
+    },
+    {
+      "Title": "已经三月中旬了，怎么感觉今年的金三银四没有以前的火热啊？ - 问与答",
+      "Link": "https://www.v2ex.com/t/924250",
+      "Description": "\u003cp\u003e以前每到这个时候各个地方都有很多的帖子的呀，感觉今年没有以前火热了。\u003c/p\u003e\n\u003cp\u003e还是说只是我自己太菜了...大佬们都在金三银四而我永远是棉花一到十二\u003c/p\u003e\n",
+      "Author": "HFX3389",
+      "PubDate": "2023-03-15T08:47:17Z"
+    },
+    {
       "Title": "选择什么方式来整理带大量图片和说明的内容? - 问与答",
       "Link": "https://www.v2ex.com/t/924249",
       "Description": "资料越来越多, 终于下定决心要好好整理一番, 结果这两天搜来搜去也没找到合适的方式或软件, 来这里问问各位.  \u003cbr /\u003e基本需求如下: \u003cbr /\u003e1. 有不少图片, 需要给图片添加各种标签及注释和分类, 方便快速检索.  \u003cbr /\u003e2. 各个分类可以添加简单的说明文档, 例如 A 大类下的 A1 子类, 添加格式化说明: 效果-1, 关键词-A/B/C, 备注-1/2/3  \u003cbr /\u003e关于第一条, 安装个素材管理软件基本就能满足需求, 但是当加入第二条时, 就很难办了, 毕竟这些素材管理软件只针对图片或视频等, 添加详细文档甚至说明里添加表格, 有些超纲.  \u003cbr /\u003e\u003cbr /\u003e不知道各位是如何实现这种需求的?",
