@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "​ Java /kotlin AST 构建相关，悬赏 200 求解，人已经麻了 - Kotlin",
+      "Link": "https://www.v2ex.com/t/924685",
+      "Description": "\u003cp\u003e写在前面：\n给出的悬赏可能在各位眼里看起来比较可笑，但对我来说这是我两天的生活费了，网上的教程乱七八糟，目前的这个架构是在 chatGPT 设计的结构上魔改的，但出了严重的问题。如果能解决这个问题，我宁愿不吃不喝两天整\n提前谢谢各位了，这项目是自己玩整的，别的都好了，就卡在一个 ast 上，虽然是自己做着玩的，但实在不想前功尽弃\u003c/p\u003e\n\u003cp\u003e这边的游戏需要设计一个可以将效果原子化和序列化的功能，由于 function 方法不可被原子化，且我这边无法使用 lua ，因此我设计了一个能输入和输出任意类型的抽象语法树，可以对其节点进行序列化和反序列化，从而使得整个树可以序列化。当前设计如下：\n有一个接口(astNode)，简称基类，有一个泛型 O ，有一个 operation 方法，输出类型是 O ，传参是 map\u0026lt;string ，object\u0026gt;\n在基类第二层的是结构化节点：叶子节点和枝干节点，都继承自第一层。\n叶子节点只存储一个值，但不能存节点，有两个泛型，一个是记录存储属性类型的，一个是记录返回类型的。叶子节点就两种，一种记录常数(constant)，比如 2x+1 里的 2 和 1.\n另一种记录未知数(param)，就是 2x+1 里的 x ，他会读取 operation 方法传过来的 map ，从里面找到对应的对象。\n枝干节点则里面可以存储叶子节点或枝干节点。\n他们有三种类型，单节点型，list 型和 pair 型，单节点的，比如提取目标怪兽的血量，里面就只需要记录一个指向怪兽的叶子节点。双节点最常见，加减乘除，operation 方法就是将两个节点 operation 的值进行运算。list 节点则是类似 in ，传入一个 list ，他从里面返回一个符合需求的值。\n然后第三层就是对运算目标的类型进行定义的层。比如 equals ，有针对数字的 equals ，有针对怪物实体的 equals ，等等，这一层将他们进行封装。\n第四层是封装层，这层会将所有泛型全部匹配，不会出现需要在外面输入泛型的情况。\n在最外侧，会有一个 tree 实体，这个实体可以访问根节点，并进行如深度搜索或者是查找节点，替换节点之类的行为。\n现在的问题是：\n我想要一个方式能将这个树序列化和反序列化，并通过读取用户输入将其转换为一个树。\n我最开始是打算从根节点向叶子节点进行构建，但我很快发现这个方法的不可操作性：因为我的树不是完全的二叉树，有常数和未知数两种没有子节点概念的树，他们只有一个 value ，而且由于我有三种不同类型的枝干节点，我无法使用一个统一的，写在基类里的 addNode 方法在节点生成后对子节点进行操作，我必须使用 if else 才行，这违背了泛型的初衷，也十分不灵活，所以我必须从最下方的叶子节点往上方构建。\n我的打算是，先筛选出所有的叶子节点，然后像搭金字塔一样，用 1 ，2 ，list 个节点将符号构建出来，然后在这个符号上再和其他符号或者节点一起搭符号，最后搭到根节点。但是这有个问题：当我在使用如 numberEqualsNode ，这种左右节点一个是 int ，另一个也是 int ，输出是 bool 的节点，我该如何判断输入的 node 的泛型是 int ？如果不判断，那么左右节点设置泛型的意义何在？\n由于 java 的泛型是在运行之后会被删掉的和注释一样的用于检查编译的东西，所以我不能直接 if node is node\u0026lt;int\u0026gt;，但那样我怎么检查这个节点？\u003c/p\u003e\n\u003cp\u003e备注：无法换语言，或者使用 lua ，但可以使用 kotlin 和 scala 。可以改变一些设计，但不能把整个底层都给刨了。\u003c/p\u003e\n",
+      "Author": "r1nice",
+      "PubDate": "2023-03-16T15:17:09Z"
+    },
+    {
+      "Title": "请教个问题，希望各位大佬指正 - 程序员",
+      "Link": "https://www.v2ex.com/t/924684",
+      "Description": "\u003cp\u003e机器：\n55 寸的触控一体机，\ni5-4200m ，\n8+128G 配置，无显卡\nwin10 下通过谷歌浏览器访问本地服务器 h5 页面\n（自组网，h3c 服务器-16 口千兆交换机-4 口千兆交换机-55 寸屏幕）；\u003c/p\u003e\n\u003cp\u003e24 块屏幕通过谷歌浏览器访问服务器中的 24 个页面，一字排开作为展示，下面是我搭到外网的链接： \u003ca href=\"http://cbdweb.137idea.com/#/page_1\" rel=\"nofollow\"\u003ehttp://cbdweb.137idea.com/#/page_1\u003c/a\u003e\u003cbr/\u003e\nvue+Laravel 写的，基本样式都是 css 或者 js ，要不就是视频和图片\n24 个页面就是把后面的 1 换成 24 数字中的任何一个就可以；\u003c/p\u003e\n\u003cp\u003e问题：\n55 寸显示器是支持 4k 显示的，芯片也基本符合 4k 转码要求，于是在 3840\u003cem\u003e2160 分辨率下打开了页面，基本上都是卡的很明显，但是 1920\u003c/em\u003e1080 下面就好很多，所以问下各位大佬，因为是 4k 屏，在不变更机器硬件配置下，在 3840*2160 分辨率下如何优化才能让自己的页面每页都比较顺畅，现在卡的非常明显的页面有 4 、9 、14 、15\u003c/p\u003e\n",
+      "Author": "minuo0day",
+      "PubDate": "2023-03-16T15:15:26Z"
+    },
+    {
+      "Title": "一个 Xcode 翻译插件：英文转中文，欢迎使用吐槽~ - 程序员",
+      "Link": "https://www.v2ex.com/t/924683",
+      "Description": "\u003cp\u003e使用 Xcode 经常需要看源码，各种英文注释经常让人头大，写了一个翻译插件\u003cbr/\u003e\n1.支持单词(带音标)、长短句(大段英文注释也是可以的)\u003cbr/\u003e\n2.以注释形式插入到源码上文\u003cbr/\u003e\n3.支持配置快捷键(我配置的是 Command+T)\u003cbr/\u003e\n4.翻译源使用有道翻译网页 api ，无后端，纯本地请求  \u003c/p\u003e\n\u003cp\u003eGithub： \u003ca href=\"https://github.com/waohqc/CodeEditorTranslater\" rel=\"nofollow\"\u003ehttps://github.com/waohqc/CodeEditorTranslater\u003c/a\u003e\u003cbr/\u003e\nAppStore： \u003ca href=\"https://apps.apple.com/cn/app/codeeditortranslater/id6445995068?mt=12\" rel=\"nofollow\"\u003ehttps://apps.apple.com/cn/app/codeeditortranslater/id6445995068?mt=12\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e附几张截图：\n\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://user-images.githubusercontent.com/93604397/225653782-75bbee2c-a142-4595-b0a3-639920c1791c.jpg\"/\u003e\n\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://user-images.githubusercontent.com/93604397/225654004-62aded06-b182-42e8-a70f-864df5a4e623.jpg\"/\u003e\n\u003cimg class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://user-images.githubusercontent.com/93604397/225654021-70d531d4-0cc5-4a63-9e5d-d443796be91f.jpg\"/\u003e\u003c/p\u003e\n",
+      "Author": "pikoqian98",
+      "PubDate": "2023-03-16T15:12:05Z"
+    },
+    {
       "Title": "珠江宽频（同轴）疑问 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/924681",
       "Description": "报装的是 200M 宽带（同轴，已改公网 IP ），但是只要有一个人 Steam 下载（跑满 100M 的速度，网卡硬件限制），整个网络丢包延迟就会剧增，网页基本打不开\u003cbr /\u003e此时用另一台电脑（网卡速度 1Gbps ）去测速，发现 Steam 下载同时，此电脑测速仅有 1Mbps 左右，但是上传速度却可以到 30Mbps\u003cbr /\u003e但是 Steam 下载完后去跑测速，却又能到 200M 。\u003cbr /\u003e这是什么情况？懵了",
