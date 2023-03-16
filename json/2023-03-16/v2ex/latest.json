@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "作为一个老 v 友的心里话 - 程序员",
+      "Link": "https://www.v2ex.com/t/924643",
+      "Description": "\u003cp\u003e我觉得有一个小气的、独断的、双标的、偏执的、玻璃心的、心胸狭窄的、目光短浅的、极度自大的、小肚鸡肠的、容不得批评的、活在自己世界的、不愿听别人声音的、不允许其他声音存在的、不能正面面对用户合理诉求的、想要扮演完美人设的、不尊重别人想法的、随意删掉别人发言的、随意封号的站长是一件很难受的事情。你会消灭所有的反对观点，你如果不同意可以正面回复，而不是删掉。\u003c/p\u003e\n",
+      "Author": "v2exshabi",
+      "PubDate": "2023-03-16T12:30:16Z"
+    },
+    {
       "Title": "PT 之旅 · 其二：邪恶的扩张（指硬盘） - 宽带症候群",
       "Link": "https://www.v2ex.com/t/924642",
       "Description": "\u003ch2\u003e顺便问一下，有点好奇 V 友们给 PT 留了多大的硬盘？\u003c/h2\u003e\n\u003cp\u003e新订购了两块 4TB 硬盘，用来换掉原来的两块 500GB 做种盘，所以现在的存储池就变成了 3+3+4+4+0.5+0.5 = 15TB 了，总算是入了门\u003c/p\u003e\n\u003cp\u003e硬盘刚到，检查无误后就格 Ext4 ，插到 NAS\u003cstrong\u003e（注意，是热插拔）\u003c/strong\u003e上了\u003c/p\u003e\n\u003cp\u003e接上去之后用\u003ccode\u003efdisk -l\u003c/code\u003e，居然看不到磁盘，以为是硬盘挂了，跳起来到隔壁房间检查，发现一切完好。后来查咕噜咕噜，才发现\u003cstrong\u003e热插拔 SATA 盘，要让系统重新扫描 SCSI 总线才行\u003c/strong\u003e，我图省事，直接执行：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003efor i in /sys/class/scsi_host/host*/scan;do echo \"- - -\" \u0026gt;$i;done\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e循环扫描，扫完之后再执行 fdisk -l ，一切正常\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.328888.xyz/2023/03/16/KGyZF.md.png\"/\u003e]\u003c/p\u003e\n\u003cp\u003e接下来就是常规操作了，blkid 查看 UUID ，编辑 fstab 和 smb.conf ，挂载上之后就开始迁移数据\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.328888.xyz/2023/03/16/KGV5Z.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e最后就是，泡杯茶，静候佳音了\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.328888.xyz/2023/03/16/KG2iA.png\"/\u003e\u003c/p\u003e\n",
