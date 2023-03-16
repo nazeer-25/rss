@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "今年 IOS17 的推出，能不能方便我们这些美区党，美区用的好累啊 - Apple",
+      "Link": "https://www.v2ex.com/t/924696",
+      "Description": "要先用美区登录手机，让 icloud 和音乐之类变成外服（拼车美区超大杯）\u003cbr /\u003e\u003cbr /\u003e然后退出 APPLE ID ，登录国行 ID 下载抖音之类的国区特有软件，下载好再退出国区 ID 登录美区 ID\u003cbr /\u003e\u003cbr /\u003e然后每周都要切换登录更新 APP ，烦死人了\u003cbr /\u003e\u003cbr /\u003e有了 IOS17 的开放第三方市场，就能美区到底了",
+      "Author": "baddyliu",
+      "PubDate": "2023-03-16T16:40:43Z"
+    },
+    {
+      "Title": "一个 LXC 容器内 smb 共享断线重连问题的解决方案 - NAS",
+      "Link": "https://www.v2ex.com/t/924695",
+      "Description": "\u003cp\u003e系统 PVE, 给 jellyfin 的 LXC 容器里用 fstab 挂载了 smb 共享.\u003c/p\u003e\n\u003cp\u003e问题是经常断连, 出现 Resource temporarily unavailable 的问题.\u003c/p\u003e\n\u003cp\u003e排查后发现是 pve 用 snapshot 模式备份的时候, 会 freeze 那个提供 smb 共享的 vm, 此时 LXC 无法访问 smb 共享, 等到备份完成后, 也不会自动重连.\u003c/p\u003e\n\u003cp\u003e而且最近又因为 ISP 突然断网导致同样的症状出现, 为了不用每次都手动 umount mount, 决定解决这个问题.\u003c/p\u003e\n\u003cp\u003e试过几个解决方案\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003ex-systemd.automount, 这个方案在 LXC 容器内行不通, lxc 也明确说了 won't fix.\u003c/li\u003e\n\u003cli\u003e用脚本检测连接状态并重新挂载, 确实可行, 但是有时候会出现 Resource busy 的问题, 断线判断逻辑也不好写, 经常 false positive 然后主动断开重连导致看到一半突然中断.\u003c/li\u003e\n\u003cli\u003e宿主机用 automount 挂载, 然后 bind mount 到 LXC 容器里. 这个非常奇怪, LXC 容器的读写并不会 trigger 宿主机的 automount, 导致 idle timeout 过后它判断没有读写自己就取消挂载了.\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e最后采用的办法就是 systemd 自己写 mount file\n比如要挂载 //10.10.10.1/media 到 /media 下\n先写 unit file:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003enano /etc/systemd/system/media.mount\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e[Unit]\nDescription=samba mount media\nRequires=network-online.target\nAfter=network-online.service\n\n[Mount]\nWhat=//10.10.10.1/media\nWhere=/media\nOptions=vers=3.1.1,credentials=/home/.smbcred,file_mode=0777,dir_mode=0777,iocharset=utf8\nType=cifs\n\n[Install]\nWantedBy=multi-user.target\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003ever 可以不用写, 默认是 3.0 我这里写 3.1.1 是因为 smb 服务器用的最新的 winserver 2022, 想用几个新的功能. 用户名密码我放到 /home/.smbcred 里给了 600 权限. 共享文件权限直接给了 777, 反正都是影音文件不是很重要, 大家可以根据自己的需要去调整.\u003c/p\u003e\n\u003cp\u003e还有如果你要挂载到 /mnt/abc_def 之类的目录下, unit file 名称里路径的 /要用-代替, 比如 /etc/systemd/system/mnt-abc_def.mount\u003c/p\u003e\n\u003cp\u003e然后启用并且运行这个服务就可以了\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esystemctl enable media.mount\nsystemctl start media.mount\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e测试过无论是 snapshot 备份, 还是直接关闭 smb 服务器再重开, 或者断开网络连接再重新连接, 挂载的 smb 共享文件夹都可以正常断线重连了.\u003c/p\u003e\n\u003cp\u003eVM 里用 fstab 挂载不会出现这个问题, 只有 LXC 容器会出现这个问题, 可能是跟一些安全机制有关吧.\u003c/p\u003e\n",
+      "Author": "zx900930",
+      "PubDate": "2023-03-16T16:37:51Z"
+    },
+    {
+      "Title": "文心一言体验分享 - 分享发现",
+      "Link": "https://www.v2ex.com/t/924694",
+      "Description": "\u003cp\u003e转发给大家看下。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://i.imgur.com/81xGWFH.jpeg\" rel=\"nofollow\"\u003ehttps://i.imgur.com/81xGWFH.jpeg\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://i.imgur.com/c7gHPOv.jpg\" rel=\"nofollow\"\u003ehttps://i.imgur.com/c7gHPOv.jpg\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://i.imgur.com/YrzQjoN.jpg\" rel=\"nofollow\"\u003ehttps://i.imgur.com/YrzQjoN.jpg\u003c/a\u003e\u003c/p\u003e\n\u003cimg alt=\"1\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/81xGWFH.jpeg\"/\u003e\n\u003cimg alt=\"2\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/c7gHPOv.jpg\"/\u003e\n\u003cimg alt=\"3\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/YrzQjoN.jpg\"/\u003e",
+      "Author": "pengpengpeng",
+      "PubDate": "2023-03-16T16:34:46Z"
+    },
+    {
       "Title": "文心一言有人体验了吗? - 分享发现",
       "Link": "https://www.v2ex.com/t/924692",
       "Description": "\u003ca target=\"_blank\" href=\"https://yiyan.baidu.com/welcome\" rel=\"nofollow noopener\"\u003ehttps://yiyan.baidu.com/welcome\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e已申请，不知道什么时候通过",
