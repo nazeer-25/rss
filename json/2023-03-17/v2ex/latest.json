@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "还是 Vue loading 过场的疑问？ - Vue.js",
+      "Link": "https://www.v2ex.com/t/924805",
+      "Description": "\u003cp\u003e原来登录界面没有等待的过场傻等，后来学习大家的都有个 Loading 或者 Checking 的过场，就用 v-if 加了。登录请求后台返回后就取消 loading ，成功了就跳转业务页面，失败就重新登录，逻辑上很简单没啥问题。\u003c/p\u003e\n\u003cp\u003e但是跑起来发现个问题，跳转的业务页面需要资源比较多，第一次加载要个 1-2 秒，这时候会即使成功了先跳出登录界面 1-2 秒，再被业务页面覆盖，这就有点尴尬。\u003c/p\u003e\n\u003cp\u003e我现在的办法是如果登录成功，就不改 loading 了，一直转到业务页面加载出来。登录失败才改 loading 。\n这个是不是不太优雅。\u003c/p\u003e\n\u003cp\u003e没进过厂，想请教这个小问题是怎么处理的？\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026lt;template\u0026gt;\n  \u0026lt;div\u0026gt;\n    \u0026lt;div v-if=\"isLoading\"\u0026gt;\n      \u0026lt;LoadingSpinner /\u0026gt;\n    \u0026lt;/div\u0026gt;\n    \u0026lt;div v-else\u0026gt;\n    //登录页面\n    ....\n    \u0026lt;/div\u0026gt;\n  \u0026lt;/div\u0026gt;\n  ...\n\u0026lt;/template\u0026gt;\n\n\u0026lt;script lang=\"ts\"\u0026gt;\n....\nconst setup(){\n    const btnClick = () =\u0026gt; {\n      if (username.value \u0026amp;\u0026amp; password.value) {\n        authStore.returnUrl = route.query.redirect;\n        isLoading.value = true;\n        authStore\n          .login(username.value, password.value)\n          .then((ret) =\u0026gt; {\n            if (ret !== 0) {\n              message.warning(\"账号或密码错误。\");\n              **isLoading.value = false; //现在在这里**\n            } else {\n              message.success(\"登录成功\");\n              router.push((route.query.redirect as LocationQueryValue) || \"/\");\n            }\n          })\n          .catch((err) =\u0026gt; {\n            console.error(err);\n          })\n          .finally(() =\u0026gt; {\n            **// isLoading.value = false; //原来在这里**\n          });\n      } else {\n        message.warning(\"请输入用户名和密码。\");\n      }\n    };\n}\n....\n\u0026lt;/script\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "elboble",
+      "PubDate": "2023-03-17T03:49:34Z"
+    },
+    {
       "Title": "CMake 文件有可用于流水线的格式化工具么？ - C++",
       "Link": "https://www.v2ex.com/t/924804",
       "Description": "\u003cp\u003eC/C++都有 clang-format 这样的格式化工具，但我并没有找到 CMake 有类似的工具。\u003c/p\u003e\n\u003cp\u003eCLion 倒是能格式化 CMake 文件，但不能在命令行和流水线里用。\u003c/p\u003e\n\u003cp\u003egithub 上搜到了一个 Python 写的\u003ca href=\"https://github.com/cheshirekow/cmake_format\" rel=\"nofollow\"\u003ecmake_format\u003c/a\u003e，但感觉用的人不多，也很久没维护了。\u003c/p\u003e\n\u003cp\u003e大家平常都怎么格式化 CMake 文件呢？\u003c/p\u003e\n",

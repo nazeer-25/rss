@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>还是 Vue loading 过场的疑问？ - Vue.js</title>
+      <link>https://www.v2ex.com/t/924805</link>
+      <description>&lt;p&gt;原来登录界面没有等待的过场傻等，后来学习大家的都有个 Loading 或者 Checking 的过场，就用 v-if 加了。登录请求后台返回后就取消 loading ，成功了就跳转业务页面，失败就重新登录，逻辑上很简单没啥问题。&lt;/p&gt;&#xA;&lt;p&gt;但是跑起来发现个问题，跳转的业务页面需要资源比较多，第一次加载要个 1-2 秒，这时候会即使成功了先跳出登录界面 1-2 秒，再被业务页面覆盖，这就有点尴尬。&lt;/p&gt;&#xA;&lt;p&gt;我现在的办法是如果登录成功，就不改 loading 了，一直转到业务页面加载出来。登录失败才改 loading 。&#xA;这个是不是不太优雅。&lt;/p&gt;&#xA;&lt;p&gt;没进过厂，想请教这个小问题是怎么处理的？&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;&#xA;  &amp;lt;div&amp;gt;&#xA;    &amp;lt;div v-if=&#34;isLoading&#34;&amp;gt;&#xA;      &amp;lt;LoadingSpinner /&amp;gt;&#xA;    &amp;lt;/div&amp;gt;&#xA;    &amp;lt;div v-else&amp;gt;&#xA;    //登录页面&#xA;    ....&#xA;    &amp;lt;/div&amp;gt;&#xA;  &amp;lt;/div&amp;gt;&#xA;  ...&#xA;&amp;lt;/template&amp;gt;&#xA;&#xA;&amp;lt;script lang=&#34;ts&#34;&amp;gt;&#xA;....&#xA;const setup(){&#xA;    const btnClick = () =&amp;gt; {&#xA;      if (username.value &amp;amp;&amp;amp; password.value) {&#xA;        authStore.returnUrl = route.query.redirect;&#xA;        isLoading.value = true;&#xA;        authStore&#xA;          .login(username.value, password.value)&#xA;          .then((ret) =&amp;gt; {&#xA;            if (ret !== 0) {&#xA;              message.warning(&#34;账号或密码错误。&#34;);&#xA;              **isLoading.value = false; //现在在这里**&#xA;            } else {&#xA;              message.success(&#34;登录成功&#34;);&#xA;              router.push((route.query.redirect as LocationQueryValue) || &#34;/&#34;);&#xA;            }&#xA;          })&#xA;          .catch((err) =&amp;gt; {&#xA;            console.error(err);&#xA;          })&#xA;          .finally(() =&amp;gt; {&#xA;            **// isLoading.value = false; //原来在这里**&#xA;          });&#xA;      } else {&#xA;        message.warning(&#34;请输入用户名和密码。&#34;);&#xA;      }&#xA;    };&#xA;}&#xA;....&#xA;&amp;lt;/script&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>elboble</author>
+      <pubDate>17 Mar 2023 03:49:34 +0000</pubDate>
+    </item>
+    <item>
       <title>CMake 文件有可用于流水线的格式化工具么？ - C++</title>
       <link>https://www.v2ex.com/t/924804</link>
       <description>&lt;p&gt;C/C++都有 clang-format 这样的格式化工具，但我并没有找到 CMake 有类似的工具。&lt;/p&gt;&#xA;&lt;p&gt;CLion 倒是能格式化 CMake 文件，但不能在命令行和流水线里用。&lt;/p&gt;&#xA;&lt;p&gt;github 上搜到了一个 Python 写的&lt;a href=&#34;https://github.com/cheshirekow/cmake_format&#34; rel=&#34;nofollow&#34;&gt;cmake_format&lt;/a&gt;，但感觉用的人不多，也很久没维护了。&lt;/p&gt;&#xA;&lt;p&gt;大家平常都怎么格式化 CMake 文件呢？&lt;/p&gt;&#xA;</description>
