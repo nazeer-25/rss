@@ -4,6 +4,55 @@
   "Description": "",
   "Items": [
     {
+      "Title": "讨论下科学冲浪的方式 - 程序员",
+      "Link": "https://www.v2ex.com/t/924791",
+      "Description": "\u003cp\u003e看到最近又有谈论网络抽风的帖子，所以分享一下我现在的方式，用了好几年了一直很稳定。\u003c/p\u003e\n\u003ch2\u003e1 用大机场的线路出境，\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e机场走的专线所以忙时也不会卡，敏感时期也不会抽风，延迟也很低。\u003c/li\u003e\n\u003cli\u003e机场线路配了负载均衡，避免单线故障\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e2 出境后落地是我自己的小弱鸡，\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e来保证 IP 只有自己用来规避烦人的验证码，以及某些网站的风的控等问题，\u003c/li\u003e\n\u003cli\u003e顺便保护了隐私（心理安慰）\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1\u003e所以的的网络大概是这个样子的：\u003c/h1\u003e\n\u003cpre\u003e\u003ccode\u003e                  韩国专线\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e境内 --\u0026gt; 机场入口 --\u0026gt;  日本专线 --\u0026gt; 机场落地 ---\u0026gt; 我的美国小鸡 ---\u0026gt; 目标网站\n美国专线\u003c/p\u003e\n\u003cp\u003e客户端用的 clash ，加一个负载均衡组用来出境，和一个 relay 组用来组织流量路径。配置大概是下面的样子\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yaml\"\u003eproxies:\n  - 机场的线路\n  ....\n  - 我的美国弱鸡\n\nproxy-groups:\n  \n  - name: '出境航线'\n    type: consistent-hashing\n    strategy: round-robin\n    proxies：\n    - 日本 1\n    - 韩国 1\n    ...\n  - name: '我的专线'\n    type: relay\n    proxies：\n    - 出境航线\n    - 我的美国弱鸡\n  - name: Proxies\n    proxies:\n    - 我的专线\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e另外落地的小弱鸡也不用太好的，只要能承受得起你自己的流量即可，便宜是最主要的，美国有好多 10 刀一年的已经足够个人使用了，我还在上面搭了网站和邮箱。\u003c/p\u003e\n",
+      "Author": "vincent7245",
+      "PubDate": "2023-03-17T03:02:31Z"
+    },
+    {
+      "Title": "请问我 Mac 用 pycharm 运行绘图程序 plt 之后为什么总是多出来 Python 图标，如图所示 - Python",
+      "Link": "https://www.v2ex.com/t/924790",
+      "Description": "\u003cp\u003e[如图所示]( \u003ca href=\"https://raw.githubusercontent.com/Mu2399/personalimagehost/master/uPic/%E6%88%AA%E5%B1%8F\" rel=\"nofollow\"\u003ehttps://raw.githubusercontent.com/Mu2399/personalimagehost/master/uPic/截屏\u003c/a\u003e 2023-03-17 10.54.15.png)\u003c/p\u003e\n\u003cp\u003e而且我没有找到图片另存为其他格式的选项。。。\n求大佬指导\u003c/p\u003e\n",
+      "Author": "MUMU2399",
+      "PubDate": "2023-03-17T03:00:48Z"
+    },
+    {
+      "Title": "贴吧的 2017 年的数据回复了 - 程序员",
+      "Link": "https://www.v2ex.com/t/924789",
+      "Description": "\u003cp\u003e抱歉。原来 2019 年底就恢复了。我刚发现，村通网了属于是。\u003c/p\u003e\n",
+      "Author": "13936",
+      "PubDate": "2023-03-17T03:00:18Z"
+    },
+    {
+      "Title": "zerotier 个人组网打洞直连优化问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/924788",
+      "Description": "\u003cp\u003e目前有一个家用宽带有公网 ip （动态）节点 A 。\n具目前使用情况来看，有公网的节点 和其他节点基本上 90%都能打通直连。\u003c/p\u003e\n\u003cp\u003e现在有其他的节点 B C ，A 和 B 、C 分别都能直连，但是 B 之间 C 不能直连。\n有什么好的方案能让 以后这种不能直连的 全部通过走 A 来实现直连？\nB→A→C 这样。\u003c/p\u003e\n",
+      "Author": "dongzhuo777",
+      "PubDate": "2023-03-17T02:58:25Z"
+    },
+    {
+      "Title": "楼上噪音要人命了，大家有什么经验分享吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/924786",
+      "Description": "昨晚又断断续续吵，像是脚跟或鞋咚地的声音，还有碰到桌子椅子拖动的声音，又不是一直吵，就半个小时一个小时左右来那么几声，凌晨两点多实在受不了，上楼理论（在这之前几天已经贴过一次纸条友好提醒）。\u003cbr /\u003e\u003cbr /\u003e敲门按门铃了几十秒，开门一女的，矢口否认不是我，我还在你留的纸条上回了不是我，留了几天才撕掉。说 11 点多就上床了，就下来上下厕所。说可能是隔壁 blabla 。\u003cbr /\u003e\u003cbr /\u003e搞的我都有点怀疑了，之前也听说过很多以为是楼上结果是隔离或者楼上好几层，甚至有楼下的。就问她是不是鞋很重，她也给我看了还算好。\u003cbr /\u003e\u003cbr /\u003e悻悻而回，结果我老婆说刚才她下床到门口的声音都听见了，这又似乎说明就是她。尝试录视频，但响几下就没声了，录不着。\u003cbr /\u003e\u003cbr /\u003e今天上午又查了些网友的案例，这个事光确定源头就很困难了，有拿玻璃杯在不同墙上听来定位的，又看谁家亮灯的，又挨个敲门说的。但这种通常安静突然响几下就没的声音，是真的很难定位。且不说定位之后怎么去交涉，交涉不了再报警或者上震楼器，又是身心俱疲。\u003cbr /\u003e\u003cbr /\u003e打算再找楼管问问最近有谁搬进来，因为之前都很安静，就最近开始吵。\u003cbr /\u003e\u003cbr /\u003e恰好老婆怀孕了，这个事就更让人头疼了。也考虑过搬家，但上次搬家就是因为楼上熊孩子在家跑，这次再搬又能避免吗。\u003cbr /\u003e\u003cbr /\u003e大家有什么好的经验或建议吗？谢谢。",
+      "Author": "qinxia",
+      "PubDate": "2023-03-17T02:56:25Z"
+    },
+    {
+      "Title": "求助，路由器插件 v2 中设置 bing.com 强制代理还是会跳转到“带有国际本的国内版”bing.com 不是 cn.bing.com。 - 问与答",
+      "Link": "https://www.v2ex.com/t/924785",
+      "Description": "\u003cp\u003e1.我确定设置域名黑名单是正确的，因为我访问 \u003ca href=\"http://ip138.com\" rel=\"nofollow\"\u003eip138.com\u003c/a\u003e 和 测试国内站显示 ip 就是梯子 ip ，\u003ca href=\"http://bing.com\" rel=\"nofollow\"\u003ebing.com\u003c/a\u003e 这个域名也没有输入错误。\u003c/p\u003e\n\u003cp\u003e2.我尝试访问 \u003ca href=\"https://www.bing.com/?setlang=cn\u0026amp;cc=US\" rel=\"nofollow\"\u003ehttps://www.bing.com/?setlang=cn\u0026amp;cc=US\u003c/a\u003e ，\u003ca href=\"https://www.bing.com/?FORM=HPCNEN\u0026amp;setmkt=en-us\u0026amp;setlang=en-us\" rel=\"nofollow\"\u003ehttps://www.bing.com/?FORM=HPCNEN\u0026amp;setmkt=en-us\u0026amp;setlang=en-us\u003c/a\u003e 。这两个也会跳转到带有“国际版”选项的 \u003ca href=\"http://bing.com\" rel=\"nofollow\"\u003ebing.com\u003c/a\u003e 。\u003c/p\u003e\n\u003cp\u003e3.当我尝试更换其他浏览器访问上面两个域名，也是带有“国际版”的 \u003ca href=\"http://bing.com\" rel=\"nofollow\"\u003ebing.com\u003c/a\u003e 无法使用 bing ai 。\u003c/p\u003e\n\u003cp\u003e4.当我打开本机 clash 的时候可以访问 \u003ca href=\"http://bing.com\" rel=\"nofollow\"\u003ebing.com\u003c/a\u003e 可以使用 bing ai 。\u003c/p\u003e\n\u003cp\u003e我想知道，是不是需要加入其他 bing 相关的域名？我在微软的账户中已经设置地区为非国内。\u003c/p\u003e\n",
+      "Author": "SelectLanguages",
+      "PubDate": "2023-03-17T02:56:03Z"
+    },
+    {
+      "Title": "QQ 桌面版提示版本低无法登陆 - Windows",
+      "Link": "https://www.v2ex.com/t/924783",
+      "Description": "\u003cp\u003e也就是 QQ 从 win10 商店下架前的最后一个版本 9.5.4 ，也用了一段时间了，今天突然提示版本低不让登录了，用手机扫二维码也不行。还有什么办法不，实在不想装大礼包 QQ……\u003c/p\u003e\n",
+      "Author": "Sekai",
+      "PubDate": "2023-03-17T02:54:21Z"
+    },
+    {
       "Title": "真的会有人在手机上做一些 API 测试相关的工作么？ - 程序员",
       "Link": "https://www.v2ex.com/t/924782",
       "Description": "\u003cp\u003e事情是这样的，今天收到一个用户反馈，说我的这个项目没做手机端适配，这样的话他就无法在手机上做 api 相关的工作了。\u003c/p\u003e\n\u003cp\u003e我也不是杠啊什么的，我就是好奇，大家真的有在手机上做 api 相关工作的需求么？\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"http://data.eolinker.com/course/fuZHSkddb180772df61c5dc0a3a96a7c730531cb5dc5587\"/\u003e\u003c/p\u003e\n",

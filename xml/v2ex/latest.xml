@@ -4,6 +4,55 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>讨论下科学冲浪的方式 - 程序员</title>
+      <link>https://www.v2ex.com/t/924791</link>
+      <description>&lt;p&gt;看到最近又有谈论网络抽风的帖子，所以分享一下我现在的方式，用了好几年了一直很稳定。&lt;/p&gt;&#xA;&lt;h2&gt;1 用大机场的线路出境，&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;机场走的专线所以忙时也不会卡，敏感时期也不会抽风，延迟也很低。&lt;/li&gt;&#xA;&lt;li&gt;机场线路配了负载均衡，避免单线故障&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;2 出境后落地是我自己的小弱鸡，&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;来保证 IP 只有自己用来规避烦人的验证码，以及某些网站的风的控等问题，&lt;/li&gt;&#xA;&lt;li&gt;顺便保护了隐私（心理安慰）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;所以的的网络大概是这个样子的：&lt;/h1&gt;&#xA;&lt;pre&gt;&lt;code&gt;                  韩国专线&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;境内 --&amp;gt; 机场入口 --&amp;gt;  日本专线 --&amp;gt; 机场落地 ---&amp;gt; 我的美国小鸡 ---&amp;gt; 目标网站&#xA;美国专线&lt;/p&gt;&#xA;&lt;p&gt;客户端用的 clash ，加一个负载均衡组用来出境，和一个 relay 组用来组织流量路径。配置大概是下面的样子&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;proxies:&#xA;  - 机场的线路&#xA;  ....&#xA;  - 我的美国弱鸡&#xA;&#xA;proxy-groups:&#xA;  &#xA;  - name: &#39;出境航线&#39;&#xA;    type: consistent-hashing&#xA;    strategy: round-robin&#xA;    proxies：&#xA;    - 日本 1&#xA;    - 韩国 1&#xA;    ...&#xA;  - name: &#39;我的专线&#39;&#xA;    type: relay&#xA;    proxies：&#xA;    - 出境航线&#xA;    - 我的美国弱鸡&#xA;  - name: Proxies&#xA;    proxies:&#xA;    - 我的专线&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;另外落地的小弱鸡也不用太好的，只要能承受得起你自己的流量即可，便宜是最主要的，美国有好多 10 刀一年的已经足够个人使用了，我还在上面搭了网站和邮箱。&lt;/p&gt;&#xA;</description>
+      <author>vincent7245</author>
+      <pubDate>17 Mar 2023 03:02:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问我 Mac 用 pycharm 运行绘图程序 plt 之后为什么总是多出来 Python 图标，如图所示 - Python</title>
+      <link>https://www.v2ex.com/t/924790</link>
+      <description>&lt;p&gt;[如图所示]( &lt;a href=&#34;https://raw.githubusercontent.com/Mu2399/personalimagehost/master/uPic/%E6%88%AA%E5%B1%8F&#34; rel=&#34;nofollow&#34;&gt;https://raw.githubusercontent.com/Mu2399/personalimagehost/master/uPic/截屏&lt;/a&gt; 2023-03-17 10.54.15.png)&lt;/p&gt;&#xA;&lt;p&gt;而且我没有找到图片另存为其他格式的选项。。。&#xA;求大佬指导&lt;/p&gt;&#xA;</description>
+      <author>MUMU2399</author>
+      <pubDate>17 Mar 2023 03:00:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>贴吧的 2017 年的数据回复了 - 程序员</title>
+      <link>https://www.v2ex.com/t/924789</link>
+      <description>&lt;p&gt;抱歉。原来 2019 年底就恢复了。我刚发现，村通网了属于是。&lt;/p&gt;&#xA;</description>
+      <author>13936</author>
+      <pubDate>17 Mar 2023 03:00:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>zerotier 个人组网打洞直连优化问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/924788</link>
+      <description>&lt;p&gt;目前有一个家用宽带有公网 ip （动态）节点 A 。&#xA;具目前使用情况来看，有公网的节点 和其他节点基本上 90%都能打通直连。&lt;/p&gt;&#xA;&lt;p&gt;现在有其他的节点 B C ，A 和 B 、C 分别都能直连，但是 B 之间 C 不能直连。&#xA;有什么好的方案能让 以后这种不能直连的 全部通过走 A 来实现直连？&#xA;B→A→C 这样。&lt;/p&gt;&#xA;</description>
+      <author>dongzhuo777</author>
+      <pubDate>17 Mar 2023 02:58:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>楼上噪音要人命了，大家有什么经验分享吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/924786</link>
+      <description>昨晚又断断续续吵，像是脚跟或鞋咚地的声音，还有碰到桌子椅子拖动的声音，又不是一直吵，就半个小时一个小时左右来那么几声，凌晨两点多实在受不了，上楼理论（在这之前几天已经贴过一次纸条友好提醒）。&lt;br /&gt;&lt;br /&gt;敲门按门铃了几十秒，开门一女的，矢口否认不是我，我还在你留的纸条上回了不是我，留了几天才撕掉。说 11 点多就上床了，就下来上下厕所。说可能是隔壁 blabla 。&lt;br /&gt;&lt;br /&gt;搞的我都有点怀疑了，之前也听说过很多以为是楼上结果是隔离或者楼上好几层，甚至有楼下的。就问她是不是鞋很重，她也给我看了还算好。&lt;br /&gt;&lt;br /&gt;悻悻而回，结果我老婆说刚才她下床到门口的声音都听见了，这又似乎说明就是她。尝试录视频，但响几下就没声了，录不着。&lt;br /&gt;&lt;br /&gt;今天上午又查了些网友的案例，这个事光确定源头就很困难了，有拿玻璃杯在不同墙上听来定位的，又看谁家亮灯的，又挨个敲门说的。但这种通常安静突然响几下就没的声音，是真的很难定位。且不说定位之后怎么去交涉，交涉不了再报警或者上震楼器，又是身心俱疲。&lt;br /&gt;&lt;br /&gt;打算再找楼管问问最近有谁搬进来，因为之前都很安静，就最近开始吵。&lt;br /&gt;&lt;br /&gt;恰好老婆怀孕了，这个事就更让人头疼了。也考虑过搬家，但上次搬家就是因为楼上熊孩子在家跑，这次再搬又能避免吗。&lt;br /&gt;&lt;br /&gt;大家有什么好的经验或建议吗？谢谢。</description>
+      <author>qinxia</author>
+      <pubDate>17 Mar 2023 02:56:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>求助，路由器插件 v2 中设置 bing.com 强制代理还是会跳转到“带有国际本的国内版”bing.com 不是 cn.bing.com。 - 问与答</title>
+      <link>https://www.v2ex.com/t/924785</link>
+      <description>&lt;p&gt;1.我确定设置域名黑名单是正确的，因为我访问 &lt;a href=&#34;http://ip138.com&#34; rel=&#34;nofollow&#34;&gt;ip138.com&lt;/a&gt; 和 测试国内站显示 ip 就是梯子 ip ，&lt;a href=&#34;http://bing.com&#34; rel=&#34;nofollow&#34;&gt;bing.com&lt;/a&gt; 这个域名也没有输入错误。&lt;/p&gt;&#xA;&lt;p&gt;2.我尝试访问 &lt;a href=&#34;https://www.bing.com/?setlang=cn&amp;amp;cc=US&#34; rel=&#34;nofollow&#34;&gt;https://www.bing.com/?setlang=cn&amp;amp;cc=US&lt;/a&gt; ，&lt;a href=&#34;https://www.bing.com/?FORM=HPCNEN&amp;amp;setmkt=en-us&amp;amp;setlang=en-us&#34; rel=&#34;nofollow&#34;&gt;https://www.bing.com/?FORM=HPCNEN&amp;amp;setmkt=en-us&amp;amp;setlang=en-us&lt;/a&gt; 。这两个也会跳转到带有“国际版”选项的 &lt;a href=&#34;http://bing.com&#34; rel=&#34;nofollow&#34;&gt;bing.com&lt;/a&gt; 。&lt;/p&gt;&#xA;&lt;p&gt;3.当我尝试更换其他浏览器访问上面两个域名，也是带有“国际版”的 &lt;a href=&#34;http://bing.com&#34; rel=&#34;nofollow&#34;&gt;bing.com&lt;/a&gt; 无法使用 bing ai 。&lt;/p&gt;&#xA;&lt;p&gt;4.当我打开本机 clash 的时候可以访问 &lt;a href=&#34;http://bing.com&#34; rel=&#34;nofollow&#34;&gt;bing.com&lt;/a&gt; 可以使用 bing ai 。&lt;/p&gt;&#xA;&lt;p&gt;我想知道，是不是需要加入其他 bing 相关的域名？我在微软的账户中已经设置地区为非国内。&lt;/p&gt;&#xA;</description>
+      <author>SelectLanguages</author>
+      <pubDate>17 Mar 2023 02:56:03 +0000</pubDate>
+    </item>
+    <item>
+      <title>QQ 桌面版提示版本低无法登陆 - Windows</title>
+      <link>https://www.v2ex.com/t/924783</link>
+      <description>&lt;p&gt;也就是 QQ 从 win10 商店下架前的最后一个版本 9.5.4 ，也用了一段时间了，今天突然提示版本低不让登录了，用手机扫二维码也不行。还有什么办法不，实在不想装大礼包 QQ……&lt;/p&gt;&#xA;</description>
+      <author>Sekai</author>
+      <pubDate>17 Mar 2023 02:54:21 +0000</pubDate>
+    </item>
+    <item>
       <title>真的会有人在手机上做一些 API 测试相关的工作么？ - 程序员</title>
       <link>https://www.v2ex.com/t/924782</link>
       <description>&lt;p&gt;事情是这样的，今天收到一个用户反馈，说我的这个项目没做手机端适配，这样的话他就无法在手机上做 api 相关的工作了。&lt;/p&gt;&#xA;&lt;p&gt;我也不是杠啊什么的，我就是好奇，大家真的有在手机上做 api 相关工作的需求么？&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;http://data.eolinker.com/course/fuZHSkddb180772df61c5dc0a3a96a7c730531cb5dc5587&#34;/&gt;&lt;/p&gt;&#xA;</description>
