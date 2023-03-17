@@ -4,6 +4,75 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>斗胆求个馒头药 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/924771</link>
+      <description>&lt;p&gt;v 站的大神比较多，求个馒头的药。。。&#xA;小站玩的挺久的了，想入个大站&lt;/p&gt;&#xA;&lt;p&gt;邮箱： &lt;a href=&#34;mailto:larryzhangq@gmail.com&#34;&gt;larryzhangq@gmail.com&lt;/a&gt;&#xA;&lt;img alt=&#34;img&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://imgloc.com/i/Kqz2Q&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>wander555</author>
+      <pubDate>17 Mar 2023 02:32:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>github 个人项目分享 - GitHub</title>
+      <link>https://www.v2ex.com/t/924770</link>
+      <description>&lt;p&gt;使用 netty 网络编程框架，基于 websocket 协议，编写的 chat 聊天服务器和客户端        &lt;a href=&#34;https://github.com/BrodyYoung/young-netty-chat&#34; rel=&#34;nofollow&#34;&gt;https://github.com/BrodyYoung/young-netty-chat&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;使用 netty 网络编程框架实现 mqtt 服务器&#xA;&lt;a href=&#34;https://github.com/BrodyYoung/young-netty-mqtt&#34; rel=&#34;nofollow&#34;&gt;https://github.com/BrodyYoung/young-netty-mqtt&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;大佬们点个赞，给点建议。&#xA;也可以分享自己的项目，互相学习。&lt;/p&gt;&#xA;</description>
+      <author>BrodyYoung</author>
+      <pubDate>17 Mar 2023 02:29:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>求助！ JPA 多表关联生成 sql 表别名重复问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/924769</link>
+      <description>&lt;p&gt;使用 JPA 多表关联注解 ManyToOne ，之类的写功能的时候，生成了这样一个 sql ，表别名是重复的，不知道为什么，&#xA;以下是片段，可以看出 tmpaymentsettlement 和  TMPAYMENTSETTLEMENTBILL 的别名是一样的，导致报错，不知道为什么，请大神解答&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;from tmpaymentsettlement tmpayments0_ left outer join TMPAYMENTSETTLEMENTBILL tmpayments0_ on tmpayments0_.ID=tmpayments0_.PAYMENTSETTLEMENTID left outer join TMPAYMENTSETTLEMENTDETAIL tmpayments1_ on tmpayments0_.ID=tmpayments1_.PAYMENTSETTLEMENTID left outer join TMPAYMENTSETTLEMENTTYPE tmpayments2_&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;附上部分表关系&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Table(name = &#34;TMPAYMENTSETTLEMENT&#34;)&#xA;public class Tmpaymentsettlement implements Serializable {&#xA;    XXX……&#xA;    &#xA;    @OneToOne(mappedBy = &#34;tmpaymentsettlement&#34;, orphanRemoval = true, fetch = FetchType.EAGER)&#xA;    @NotFound(action= NotFoundAction.IGNORE)&#xA;    @JSONField(name = &#34;TMPAYTVERIFICATTIONREL&#34;)&#xA;    private TmpaytverificattionrelC2 tmpaytverificattionrel;&#xA;&#xA;    @OneToOne(mappedBy = &#34;tmpaymentsettlement&#34;, orphanRemoval = true, fetch = FetchType.EAGER)&#xA;    @NotFound(action= NotFoundAction.IGNORE)&#xA;    @JSONField(name = &#34;BPSETTLEMENTANDRECEIPT&#34;)&#xA;    private BpsettlementandreceiptC2 bpsettlementandreceipt;&#xA;&#xA;    @OneToMany(fetch = FetchType.EAGER)&#xA;    @NotFound(action= NotFoundAction.IGNORE)&#xA;    @JoinColumn(name = &#34;PAYMENTSETTLEMENTID&#34;, referencedColumnName = &#34;ID&#34;)&#xA;    @JSONField(name = &#34;TMPAYMENTSETTLEMENTDETAIL&#34;)&#xA;    private Set&amp;lt;TmpaymentsettlementdetailC2&amp;gt; tmpaymentsettlementdetail;&#xA;&#xA;    @OneToMany(fetch = FetchType.EAGER)&#xA;    @NotFound(action= NotFoundAction.IGNORE)&#xA;    @JoinColumn(name = &#34;PAYMENTSETTLEMENTID&#34;, referencedColumnName = &#34;ID&#34;)&#xA;    @JSONField(name = &#34;TMPAYMENTSETTLEMENTTYPE&#34;)&#xA;    private Set&amp;lt;TmpaymentsettlementtypeC2&amp;gt; tmpaymentsettlementtype;&#xA;&#xA;    @OneToMany(fetch = FetchType.EAGER)&#xA;    @NotFound(action= NotFoundAction.IGNORE)&#xA;    @JoinColumn(name = &#34;PAYMENTSETTLEMENTID&#34;, referencedColumnName = &#34;ID&#34;)&#xA;    @JSONField(name = &#34;TMPAYMENTSETTLEMENTBILL&#34;)&#xA;    private Set&amp;lt;TmpaymentsettlementbillC2&amp;gt; tmpaymentsettlementbill;&#xA;        &#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;@Table(name = &#34;TMPAYMENTSETTLEMENTBILL&#34;)&#xA;这个表中没有关联 只有他本身的字段&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; @NamedEntityGraph(&#xA; ……&#xA; @NamedSubgraph(name = &#34;bpbizpaytreqpaytexectrecd&#34;, attributeNodes = @NamedAttributeNode(value =&#34;tmjsxx&#34;, subgraph = &#34;tmjsxx&#34;)),//四级延伸&#xA;                @NamedSubgraph(name = &#34;tmjsxx&#34;, attributeNodes = {&#xA;                        @NamedAttributeNode(value = &#34;tmpaymentsettlement&#34;, subgraph = &#34;tmpaymentsettlement&#34;),&#xA;                        @NamedAttributeNode(value = &#34;tmbillendorserequest&#34;, subgraph = &#34;tmbillendorserequest&#34;),&#xA;                        @NamedAttributeNode(value = &#34;tmbillingrequest&#34;, subgraph = &#34;tmbillingrequest&#34;),&#xA;                        @NamedAttributeNode(value = &#34;tmbillpayablerequest&#34;, subgraph = &#34;tmbillpayablerequest&#34;)&#xA;&#xA;                }),//五级延伸&#xA;                @NamedSubgraph(name = &#34;tmpaymentsettlement&#34;, attributeNodes = {&#xA;                        @NamedAttributeNode(value = &#34;tmpaytverificattionrel&#34;),&#xA;                        @NamedAttributeNode(value = &#34;bpsettlementandreceipt&#34;, subgraph = &#34;bpsettlementandreceipt&#34;),&#xA;                        @NamedAttributeNode(value = &#34;tmpaymentsettlementdetail&#34;),&#xA;                        @NamedAttributeNode(value = &#34;tmpaymentsettlementtype&#34;),&#xA;                        @NamedAttributeNode(value = &#34;tmpaymentsettlementbill&#34;)&#xA;                }),//五级延伸&#xA;                ……}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>qiyong</author>
+      <pubDate>17 Mar 2023 02:29:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>求解惑, mac 端微信打开图片后的类似&#39;实况文本&#39;的功能怎么实现的 - 问与答</title>
+      <link>https://www.v2ex.com/t/924768</link>
+      <description>&lt;p&gt;如题, mac 端微信图片打开大图后, 可以选中复制文本, 体验类似系统自带的&#39;live text&#39;.&#xA;这个功能是 mac 自己 ocr 实现的还是用的系统能力, 我翻了下 apple developer, 没找到 live text 接口&#xA;想在自己的聊天工具集里集成这个能力, 如果有可调用的系统方法最好了...&lt;/p&gt;&#xA;</description>
+      <author>aduo</author>
+      <pubDate>17 Mar 2023 02:28:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>gpt4 缩水了 4 小时 50 条 - OpenAI</title>
+      <link>https://www.v2ex.com/t/924767</link>
+      <description>&lt;p&gt;之前好像是 100 条&#xA;50 条好像不够用&lt;/p&gt;&#xA;&lt;p&gt;GPT-4 currently has a cap of 50 messages every 4 hours&lt;/p&gt;&#xA;</description>
+      <author>worldqiuzhi</author>
+      <pubDate>17 Mar 2023 02:28:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>推荐一个适用于大 web 时代的效率工具: webbox —— 组织你的常用网站 - 分享创造</title>
+      <link>https://www.v2ex.com/t/924764</link>
+      <description>&lt;h2&gt;动机&lt;/h2&gt;&#xA;&lt;p&gt;随着 web 应用的越来越发达，在我的工作中充斥着各种各样的标签页。常驻的与临时的标签页混杂在一起，不同需求的网页交织在一起。&lt;/p&gt;&#xA;&lt;p&gt;以我个人为例，我个人常需要 3~5 个个人网站，工作相关的网站，包括设计稿、各种在线文档、项目管理、应用发布、代码管理等需要常开 5~10 个标签页。&lt;/p&gt;&#xA;&lt;p&gt;以及更多更多临时的标签页，让我目前常规的常规现状是开启三个不同的浏览器窗口，每个窗口都创建着 20~30 个不等的标签页。&lt;/p&gt;&#xA;&lt;p&gt;管理标签页随着对在线工具愈发的依赖变成了一个刚需的要求。而常规浏览器的标签页管理方式已经无法满足更加复杂的标签页管理模式了。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;terrible-tabs.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/03/17/FQw9eDMhLp7WPcH.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h2&gt;特性&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;通过层级树来组织你的网页! 将你的页面分门别类，简单拖动就可以&lt;/li&gt;&#xA;&lt;li&gt;及时清理不常用的页面，减少不必要的内存占用！很多时候你需要的仅仅是一个后续能找到的入口&lt;/li&gt;&#xA;&lt;li&gt;分割你的浏览器空间，通过 &lt;code&gt;webbox&lt;/code&gt; 将长久的和临时的分割，&lt;/li&gt;&#xA;&lt;li&gt;记录你的组织与展开模式，确保每一次都能最快回到工作状态。不再需要浏览器记忆上一次的打开状态 —— 越来越多的标签页只会让你的浏览器难以前行&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;webbox.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/03/17/baelpWOMCmBHVLJ.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;是时候回归清爽的状态了！&lt;/p&gt;&#xA;&lt;h2&gt;立即使用&lt;/h2&gt;&#xA;&lt;p&gt;无需编译，立即下载!&lt;/p&gt;&#xA;&lt;p&gt;在&lt;a href=&#34;https://github.com/msgbyte/webbox/releases&#34; rel=&#34;nofollow&#34;&gt;这里&lt;/a&gt;可以直接获得已经预编译好的可执行文件.&lt;/p&gt;&#xA;</description>
+      <author>moonrailgun</author>
+      <pubDate>17 Mar 2023 02:22:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>微软的 Microsoft365 Copilot,PPT 大神快失业了， office 365 会员可以用吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/924763</link>
+      <author>Aruen24</author>
+      <pubDate>17 Mar 2023 02:20:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>当 C 语言、wasm、GPT 走到一起 - 分享创造</title>
+      <link>https://www.v2ex.com/t/924762</link>
+      <description>&lt;p&gt;前段时间发过一个 C 语言学习网站的贴，这一次我对网站的代码编辑做了功能升级。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0bba03c146a340e98e82a3429afdc66e%7Etplv-k3u1fbpfcp-watermark.awebp?&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;之前利用 wasm ，可以让用户在浏览器中编写和执行 C 语言代码（即便断网也可以执行，毕竟在浏览器上执行的嘛)&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/253ab78c6b294a01b9395998f172dce5%7Etplv-k3u1fbpfcp-watermark.awebp?&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;现在增加了利用 GPT3.5 ，可以对选中代码进行代码功能解释说明的功能。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/25d62588b7cd4723ab5c29d735f04f15%7Etplv-k3u1fbpfcp-watermark.awebp?&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;网址是： &lt;a href=&#34;http://melonc.io&#34; rel=&#34;nofollow&#34;&gt;http://melonc.io&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;欢迎大家来尝鲜试用呀。&lt;/p&gt;&#xA;&lt;p&gt;PS：目前 openai 的接口返回较慢，所以代码解释说明功能可能会有些慢，大家点击按钮后请耐心等待，不要狂点哈…&lt;/p&gt;&#xA;</description>
+      <author>GitContract</author>
+      <pubDate>17 Mar 2023 02:20:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>求个 Xshell and xftp ，我现在使用的一直提示不是最新的 - 程序员</title>
+      <link>https://www.v2ex.com/t/924761</link>
+      <description>&lt;p&gt;Xshell 5 能用，但是不能使用 xftp ，谁能分享一个 能使用的。&#xA;xsheell + xftp&lt;/p&gt;&#xA;</description>
+      <author>nangdiea</author>
+      <pubDate>17 Mar 2023 02:19:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>现在是只有国内找工作困难还是全世界都找工作困难 - 分享发现</title>
+      <link>https://www.v2ex.com/t/924760</link>
+      <description>如题，想问问大家这个问题</description>
+      <author>wuxidixi</author>
+      <pubDate>17 Mar 2023 02:15:49 +0000</pubDate>
+    </item>
+    <item>
       <title>想要自建私人的 web 笔记，怎么实现 wolai 的这个 md 写法？就是 code 在无序列表里面，而且还可以被折叠 - 程序员</title>
       <link>https://www.v2ex.com/t/924759</link>
       <description>想要自建个私人的 web 笔记，怎么实现 wolai 的这个 md 写法或者有支持这个写法的 md 库？就是 code 在无序列表里面，而且还可以被折叠的。&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgloc.com/i/KToXw&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgloc.com/i/KToXw&lt;/a&gt;</description>
