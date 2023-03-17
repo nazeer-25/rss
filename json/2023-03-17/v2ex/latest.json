@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "以后上古卷轴 6/GTA6，就都是 Chat NPC 的天下了？ - 游戏开发",
+      "Link": "https://www.v2ex.com/t/924908",
+      "Description": "看了一个把 AI 接入游戏的视频，老外自己扮演坏人去洗劫一个村庄，然后 NPC 向主角求饶。\u003cbr /\u003e\u003cbr /\u003e游戏作者只是拟定了一个整体框架，没有写任何游戏脚本，对话全部都是 AI 即时生成的。\u003cbr /\u003e\u003cbr /\u003e在未来，你都不知道网络游戏里和你主动打招呼的，是人类还是真 NPC 。\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://www.youtube.co.jp/watch?v=T6lswMCKyrg\" rel=\"nofollow noopener\"\u003ehttps://www.youtube.co.jp/watch?v=T6lswMCKyrg\u003c/a\u003e",
+      "Author": "tool2d",
+      "PubDate": "2023-03-17T09:22:47Z"
+    },
+    {
+      "Title": "不懂就问系列，求告之 IOS 版本夜间模式（已半成熟）开发预估时间 - 问与答",
+      "Link": "https://www.v2ex.com/t/924907",
+      "Description": "\u003cp\u003e预计实现功能：\n夜间模式可以跟随系统，额外独立的夜间模式开关。\u003c/p\u003e\n\u003cp\u003e已知进度：\nIOS 独立的夜间模式开关，夜间模式已经上线 1 年以上。\n安卓版本已经实现间模式可以跟随系统，额外独立的夜间模式开关。\u003c/p\u003e\n\u003cp\u003e问 IOS 若实现相同的功能需要多久的开发时间？\u003c/p\u003e\n",
+      "Author": "ABCDiSDR",
+      "PubDate": "2023-03-17T09:22:22Z"
+    },
+    {
+      "Title": "握鼠标久了，手腕会痛 - 问与答",
+      "Link": "https://www.v2ex.com/t/924906",
+      "Description": "\u003cp\u003e就是平时工作，一直用鼠标手腕就会很痛，我查了一下有可能是腱鞘炎，不知道各位大佬会不会有这种情况\u003c/p\u003e\n",
+      "Author": "fnblrtkgikoh",
+      "PubDate": "2023-03-17T09:17:57Z"
+    },
+    {
       "Title": "Dockerfile 的一个小问题 - Docker",
       "Link": "https://www.v2ex.com/t/924904",
       "Description": "\u003cp\u003e想构建一个容器，在项目的根目录下有一个 .env 的文件想一同复制到容器 build 后的 \u003ccode\u003e/dist\u003c/code\u003e 中，但试了好久都提示找不到环境变量，不知道怎么加入到 Dockerfile 里，想问问大家怎么添加的\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e###################\n# BUILD FOR LOCAL DEVELOPMENT\n###################\n\nFROM node:18-alpine As development\n\n# 创建应用目录\nWORKDIR /usr/src/app\n\n# 复制依赖清单到容器镜像里.\n# 这个星号通配符意思是复制 package.json 和 package-lock.json,复制到当前应用目录.\n# 首先复制这个选项可以防止在每次代码更改时重新运行 npm install.\nCOPY --chown=node:node package*.json ./\n\n# 使用 npm ci 来安装依赖而不是 npm install\nRUN npm ci\n\n# 复制安装后的依赖包到当前目录下\nCOPY --chown=node:node . .\n\n# 使用指定的用户而不是 root 权限用户\nUSER node\n\n###################\n# BUILD FOR PRODUCTION\n###################\n\nFROM node:18-alpine As build\n\nWORKDIR /usr/src/app\n\nCOPY --chown=node:node package*.json ./\n\n# 我们需要通过 Nest CLI 来执行 npm run build,这是个开发依赖，然后把安装后依赖全部复制到指定目录\nCOPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules\n\nCOPY --chown=node:node . .\n\n# 执行打包命令\nRUN npm run build\n\n# 设置生产环境变量\nENV NODE_ENV production\n\n# 运行' npm ci '会删除现有的 node_modules 目录，并传入——only=production 确保只安装了生产依赖项。这确保 node_modules 目录尽可能优化\nRUN npm ci --only=production \u0026amp;\u0026amp; npm cache clean --force\n\nUSER node\n\n###################\n# PRODUCTION\n###################\n\nFROM node:18-alpine As production\n\n# 将生产依赖和打包后的文件复制到指定目录下\nCOPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules\nCOPY --chown=node:node --from=build /usr/src/app/dist ./dist\n\n# 启动服务\nCMD [ \"node\", \"dist/main.js\" ]\n\n\u003c/code\u003e\u003c/pre\u003e\n",
