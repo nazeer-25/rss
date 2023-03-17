@@ -27,9 +27,9 @@
       <description>&lt;h2&gt;关于 Goravel&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/goravel/goravel&#34;&gt;Goravel&lt;/a&gt; 是一个功能完备、具有良好扩展能力的 Web 应用程序框架。作为一个起始脚手架帮助 Golang 开发者快速构建自己的应用。框架风格与 Laravel 保持一致，让 PHPer 不用学习新的框架，也可以愉快的玩转 Golang！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;ORM 模块上新「模型关联」，好用的飞起，有码有真相！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;### 定义模型&#xA; 一个用户可以发布多篇文章&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type User struct {&#xA;  orm.Model&#xA;  Name   string&#xA;  Posts  []*Post&#xA;}&#xA;type Post struct {&#xA;  orm.Model&#xA;  UserID   uint&#xA;  Name     string&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;查找（同时预加载关联模型）&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var user models.User&#xA;facades.Orm.Query().With(&amp;quot;Post&amp;quot;).Find(&amp;amp;user)&#xA;&#xA;// 预加载多个关联模型（嵌套预加载）&#xA;facades.Orm.Query().With(&amp;quot;Post&amp;quot;).With(&amp;quot;Phone.Contact&amp;quot;).Find(&amp;amp;user)&#xA;&#xA;// 为预加载添加约束&#xA;facades.Orm.Query().With(&amp;quot;Post&amp;quot;, &amp;quot;name = ?&amp;quot;, &amp;quot;author&amp;quot;).Find(&amp;amp;user)&#xA;facades.Orm.Query().With(&amp;quot;Post&amp;quot;, func(query orm.Query) orm.Query {&#xA;  return query.Where(&amp;quot;name = ?&amp;quot;, &amp;quot;author&amp;quot;)&#xA;}).Find(&amp;amp;book)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;延迟预加载&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var user models.User&#xA;facades.Orm.Query().Find(&amp;amp;user)&#xA;facades.Orm.Query().Load(&amp;amp;user, &amp;quot;Post&amp;quot;)&#xA;&#xA;// 为预加载添加约束&#xA;facades.Orm.Query().Load(&amp;amp;book, &amp;quot;Post&amp;quot;, &amp;quot;name = ?&amp;quot;, &amp;quot;author&amp;quot;).Find(&amp;amp;book)&#xA;facades.Orm.Query().Load(&amp;amp;book, &amp;quot;Post&amp;quot;, func(query orm.Query) orm.Query {&#xA;  return query.Where(&amp;quot;name = ?&amp;quot;, &amp;quot;author&amp;quot;)&#xA;}).Find(&amp;amp;book)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;创建（同时创建关联模型）&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;user := User{Name: &amp;quot;user&amp;quot;, Post: &amp;amp;Post{Name: &amp;quot;post&amp;quot;}}&#xA;&#xA;// 创建 User 的同时创建所有子关联&#xA;facades.Orm.Query().Select(orm.Associations).Create(&amp;amp;user)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;更多使用细节请 &lt;a href=&#34;https://github.com/goravel/goravel&#34;&gt;查看文档&lt;/a&gt;，Welcome Star, PR and Issues！&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>前台界面怎么修改 什么格式</title>
-      <link>https://studygolang.com/topics/16210#reply2</link>
-      <description>&lt;p&gt;如题，我测试了好久 一个开源的项目，貌似找到前台界面了，可是修改后无效，是不是存在缓存？前台界面的后缀名是什么？感谢大神指点&lt;/p&gt;&#xA;</description>
+      <title>并发执行的问题</title>
+      <link>https://studygolang.com/topics/16209#reply5</link>
+      <description>&lt;p&gt;请教一下，自己写了2个函数，均是持续5秒采集数据。在主函数中不加go调用的时候，总共花10秒执行完成，但是都加上go之后，执行1秒就完事儿了，也不报错，看着数据也不太合理。我理解并发执行是不是怎么着也得5秒执行完成呀，除了在main中的2个函数前面加了go没做别的设置和操作，请问是不是还需要加别的东西？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>golang招聘，社招武汉，18K~25K*14</title>
@@ -42,9 +42,9 @@
       <description>&lt;p&gt;工作8年以上，精通golang，并熟悉相关的微服务框架，有边缘计算和设备智能化相关项目经验的加分，资深岗位，地点：上海&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>并发执行的问题</title>
-      <link>https://studygolang.com/topics/16209#reply5</link>
-      <description>&lt;p&gt;请教一下，自己写了2个函数，均是持续5秒采集数据。在主函数中不加go调用的时候，总共花10秒执行完成，但是都加上go之后，执行1秒就完事儿了，也不报错，看着数据也不太合理。我理解并发执行是不是怎么着也得5秒执行完成呀，除了在main中的2个函数前面加了go没做别的设置和操作，请问是不是还需要加别的东西？&lt;/p&gt;&#xA;</description>
+      <title>前台界面怎么修改 什么格式</title>
+      <link>https://studygolang.com/topics/16210#reply2</link>
+      <description>&lt;p&gt;如题，我测试了好久 一个开源的项目，貌似找到前台界面了，可是修改后无效，是不是存在缓存？前台界面的后缀名是什么？感谢大神指点&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>go编译linux下的exec程序 可以导出函数吗</title>
