@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "chatgpt+软色情有没有变现的可能性？ - 问与答",
+      "Link": "https://www.v2ex.com/t/925104",
+      "Description": "\u003cp\u003e利用开源项目 \u003ca href=\"https://github.com/ddiu8081/chatgpt-demo\" rel=\"nofollow\"\u003ehttps://github.com/ddiu8081/chatgpt-demo\u003c/a\u003e 和网上收集的 prompt,白嫖了 cloudflare 的 pages 搭建的 chatgpt 套壳猫娘站 \u003ca href=\"https://chatcat.pages.dev/\" rel=\"nofollow\"\u003ehttps://chatcat.pages.dev/\u003c/a\u003e 上线一周,只在 github 和 v2 跟帖以及贴吧发了一贴宣传， 日均 pv/uv 大概 2k/500, 如果想搞点营收的话，有没有可能？\u003c/p\u003e\n",
+      "Author": "zhaohua",
+      "PubDate": "2023-03-18T08:37:12Z"
+    },
+    {
+      "Title": "现在买 21 款 macbook 有啥坑不? - Apple",
+      "Link": "https://www.v2ex.com/t/925101",
+      "Description": "\u003cp\u003e如题.看中了 8 核 16g512 的盖板, 假如机器没问题(未激活).能否上 applecare?\u003c/p\u003e\n",
+      "Author": "wxlwsy",
+      "PubDate": "2023-03-18T08:33:11Z"
+    },
+    {
       "Title": "各位前辈，\r\n能否帮忙看看我错误的 nginx 配置的问题是什么，\r\n虽然我最后问 ChatGPT 得到正确的配置，但是依然不知道我自己错在哪里 - 问与答",
       "Link": "https://www.v2ex.com/t/925099",
       "Description": "\u003cpre\u003e\u003ccode\u003enginx 配置了两天了，还是配置不出，我是真的菜。\n其中放弃去补了一些 nginx 的知识依然配不出，最后问的 GhatGPT 出来的。\n主要问题:http 正常，https 就无法通行。(原因很多，证书的原因，代理的原因,最主要的原因应该是我配置冲突了)\n---------废话补多说---上代码-----------------------\n--------------------------------------------------\n我:\n我的域名是 www.v2ex.com,它正常解析到 120.00.00.93 ，我的 80 ，8001 端口正常开放\n我有个 Django 程序，python3 manage.py runserveri 8001\n我的前端文件是 root /home/www/dist;\n现在需要你配置下 nginx\n1 、要求能通过 v2ex.com 访问我的网站\n2 、要求配置 https,其中证书文件域名都是 v2ex.com 的\n    ssl_certificate /home/Nginx/1_v2ex.com_bundle.crt; \n    #请填写私钥文件的相对路径或绝对路径\n    ssl_certificate_key /home/Nginx/2_v2ex.com.key; \n3 、对其中的 api 开头的都转到我的 django 程序 8001 端口\n4 、请注意 https 的问题\n\n------ChatGPT-------------------------------------\nserver {\n    listen 80;\n    listen [::]:80;\n    server_name v2ex.com www.v2ex.com;\n    return 301 https://$server_name$request_uri;\n}\nserver {\n    listen 443 ssl;\n    listen [::]:443 ssl;\n    server_name v2ex.com www.v2ex.com;\n    # SSL 证书配置\n    ssl_certificate /home/Nginx/1_v2ex.com_bundle.crt;\n    ssl_certificate_key /home/Nginx/2_v2ex.com.key;\n    location / {\n        root /home/www/dist;\n        try_files $uri $uri/ /index.html;\n    }\n    location /api {\n        proxy_pass http://127.0.0.1:8001;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n    }\n}\n------ChatGPT-------------------------------------\n------我的错误配置-------------------------------------\n    server {\n        listen 80;\n        server_name 120.00.000.93; #打码处理\n\n        # 配置静态文件目录\n        location / {\n            root /home/www/dist;\n            try_files $uri $uri/ /index.html;\n        }\n        \n        location /api {\n            proxy_pass http://120.00.000.93:8001;\n            proxy_set_header Host $host;\n            proxy_set_header X-Real-IP $remote_addr;\n            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        }\n    }\nserver {\n    listen 443 ssl; \n    server_name www.v2ex.com;\n    ssl_certificate /home/Nginx/1_v2ex.com_bundle.crt; \n    ssl_certificate_key /home/Nginx/2_v2ex.com.key; \n    ssl_session_timeout 5m;\n    ssl_protocols TLSv1.2 TLSv1.3; \n    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE; \n    ssl_prefer_server_ciphers on;\n\n  location / {\n        root /home/www/dist;\n        # 用于配合 browserHistory 使用\n        try_files $uri $uri/ /index.html;\n\n  }\n  location /api {\n      proxy_pass https://localhost:8001/;\n      proxy_set_header   X-Forwarded-Proto $scheme;\n      proxy_set_header   Host              $http_host;\n      proxy_set_header   X-Real-IP         $remote_addr;\n  }\n}\n------我的错误配置-------------------------------------\n\u003c/code\u003e\u003c/pre\u003e\n",
