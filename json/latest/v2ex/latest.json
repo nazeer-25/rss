@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "audioFlux - 一个系统的音频特征提取库,可用于深度学习 - 分享创造",
+      "Link": "https://www.v2ex.com/t/925451",
+      "Description": "\u003ch2\u003eaudioFlux\u003c/h2\u003e\n\u003cp\u003eaudioFlux 是一个 Python 和 C 实现的库，提供音频领域系统、全面、多维度的特征提取与组合，结合各种深度学习网络模型，进行音频领域的业务研发。音频特征较为全面，支持移动端，提供尽可能细粒度、体系化的特征维。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eGitHub: \u003ca href=\"https://github.com/libAudioFlux/audioFlux\" rel=\"nofollow\"\u003ehttps://github.com/libAudioFlux/audioFlux\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eDocumentation: \u003ca href=\"https://audioflux.top/\" rel=\"nofollow\"\u003ehttps://audioflux.top/\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003eOverview\u003c/h2\u003e\n\u003cp\u003eaudioFlux 基于数据流设计。它在结构上解耦了每个算法模块，可以快速有效地提取多个维度的特征。以下是主要功能体系结构图。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"feature_all\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://audioflux.top/_images/feature_all.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e可以使用多维特征组合，选择不同的深度学习网络训练，研究音频领域的各种任务，如 Classification 、Separation 、MIR 等。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"Flow\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/libAudioFlux/audioFlux/master/image/flow.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003eQuickStart\u003c/h2\u003e\n\u003cp\u003epip install audioflux\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eimport numpy as np\nimport audioflux as af\n\nimport matplotlib.pyplot as plt\nfrom audioflux.display import fill_spec\n\n# Get a 220Hz's audio file path\nsample_path = af.utils.sample_path('220')\n\n# Read audio data and sample rate\naudio_arr, sr = af.read(sample_path)\n\n# Extract mel spectrogram\nspec_arr, mel_fre_band_arr = af.mel_spectrogram(audio_arr, num=128, radix2_exp=12, samplate=sr)\nspec_arr = np.abs(spec_arr)\n\n# Extract mfcc\nmfcc_arr, _ = af.mfcc(audio_arr, cc_num=13, mel_num=128, radix2_exp=12, samplate=sr)\n\n# Display\naudio_len = audio_arr.shape[0]\n# calculate x/y-coords\nx_coords = np.linspace(0, audio_len / sr, spec_arr.shape[1] + 1)\ny_coords = np.insert(mel_fre_band_arr, 0, 0)\nfig, ax = plt.subplots()\nimg = fill_spec(spec_arr, axes=ax,\n                x_coords=x_coords, y_coords=y_coords,\n                x_axis='time', y_axis='log',\n                title='Mel Spectrogram')\nfig.colorbar(img, ax=ax)\n\nfig, ax = plt.subplots()\nimg = fill_spec(mfcc_arr, axes=ax,\n                x_coords=x_coords, x_axis='time',\n                title='MFCC')\nfig.colorbar(img, ax=ax)\n\nplt.show()\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e感兴趣的请给个 Star\u003c/h2\u003e\n\u003cp\u003eGithub: \u003ca href=\"https://github.com/libAudioFlux/audioFlux\" rel=\"nofollow\"\u003ehttps://github.com/libAudioFlux/audioFlux\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e更多实例\u003c/h2\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/libAudioFlux/audioFlux#other-examples\" rel=\"nofollow\"\u003ehttps://github.com/libAudioFlux/audioFlux#other-examples\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e欢迎探讨关于音频相关的问题\u003c/p\u003e\n",
+      "Author": "829939",
+      "PubDate": "2023-03-20T02:41:50Z"
+    },
+    {
+      "Title": "不懂就问 加息 加出来的利息是从哪出的？ - 问与答",
+      "Link": "https://www.v2ex.com/t/925449",
+      "Description": "比如你存 100w 本来利息是 3w\u003cbr /\u003e现在 gov 发个文件 说加息到 5%  利息变 5w 了\u003cbr /\u003e那多出来的 2w 谁来出呢？\u003cbr /\u003e全是银行出？ 那这个风险完全不受控制吧\u003cbr /\u003e还是谁决定加息谁来付钱？\u003cbr /\u003e\u003cbr /\u003e有人知道吗 帮忙介绍下",
+      "Author": "nightnotlate",
+      "PubDate": "2023-03-20T02:37:54Z"
+    },
+    {
+      "Title": "win10 升级到 win11 后，无法通过键盘唤醒了 - 问与答",
+      "Link": "https://www.v2ex.com/t/925448",
+      "Description": "\u003cp\u003e每次需要去按电源键，很烦，尝试过设备管理器、bIOS 设置允许唤醒，电源管理关闭 USB 选择性暂停，都没有解决。\u003c/p\u003e\n",
+      "Author": "clintme",
+      "PubDate": "2023-03-20T02:33:25Z"
+    },
+    {
+      "Title": "二线城市有没有推荐的？ - 问与答",
+      "Link": "https://www.v2ex.com/t/925447",
+      "Description": "\u003cp\u003e北漂十年，准备结束。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e本科，快到 35 了\u003c/li\u003e\n\u003cli\u003e老家河南，高考地狱级别，所以想换一个高考没这么差的\u003c/li\u003e\n\u003cli\u003e没攒多少钱，而且还不知道要回去做什么，所以希望房价不要太高\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e如果大佬们能在城市的基础上，能再加上哪个区教育更好等信息，对我会有莫大帮助。\u003c/p\u003e\n\u003cp\u003e先行感谢\u003c/p\u003e\n",
+      "Author": "magic3584",
+      "PubDate": "2023-03-20T02:28:10Z"
+    },
+    {
       "Title": "电脑配置 - 问与答",
       "Link": "https://www.v2ex.com/t/925446",
       "Description": "\u003cp\u003e求一个装机网站，在你选择你玩的游戏后，网站会自动给出相应的配置，求个这样网站\u003c/p\u003e\n",
@@ -81,7 +109,7 @@
       "PubDate": "2023-03-20T02:01:53Z"
     },
     {
-      "Title": "寻求一份稳定远程工作 - 酷工作",
+      "Title": "寻求一份稳定远程工作 - 求职",
       "Link": "https://www.v2ex.com/t/925432",
       "Description": "\u003cp\u003e##寻求一份稳定远程工作合作\n两年嵌入式软件开发,五年软件开发,三年软件项目管理\n拥有丰富的软件开发经验,熟练多种编程语言,并有丰富的区块链、电商、直播、小程序开发经验。\u003c/p\u003e\n\u003cp\u003e使用过的技术栈：\u003c/p\u003e\n\u003cp\u003e运维技术栈:Linux,Docker,K8S,CICD,ZooKeeper,Consul,Kafka,RabbitMQ\u003c/p\u003e\n\u003cp\u003eCSS 技术栈:TailwindCSS,Antd,Design,Bootstrap\u003c/p\u003e\n\u003cp\u003eReact 技术栈:Vite,Webpack,React,React Native,Nextjs,Taro,GraphQL\u003c/p\u003e\n\u003cp\u003eNode 技术栈:Electron,Fastify,Nestjs,Typeorm,,PM2\u003c/p\u003e\n\u003cp\u003ePHP 技术栈:Thinkphp,Laravel,Yaf,Yii,Swoft,Hyperf,Workerman,Swoole\u003c/p\u003e\n\u003cp\u003ePython 技术栈:Django,FastAPI,Flask\nGolang 技术栈:Gin 、Beego 、Iris\u003c/p\u003e\n\u003cp\u003ewe chat : aoigou\u003c/p\u003e\n",
       "Author": "jack1988",
