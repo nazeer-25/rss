@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请问下 electron win 自动更新问题? - 程序员",
+      "Link": "https://www.v2ex.com/t/925589",
+      "Description": "\u003col\u003e\n\u003cli\u003e软件可以正常安装, 选择文件夹\u003c/li\u003e\n\u003cli\u003e安装成功后正常提示更新, 更新流程无问题\u003c/li\u003e\n\u003cli\u003e自动更新 100%后, 系统自动安装提示弹出\u003c/li\u003e\n\u003cli\u003e确定后... 直接进入安装进度条过程, 进图条大概一半多后自动消失, 原安装软件位置(文件夹)开始被自动清空....   比如安装在了 D:/aaa 文件夹下, 自动更新后  /aaa 成了空文件夹\n有大佬知道是什么原因造成的吗? 怎么解决?\npackage.json 配置如下:\u003c/li\u003e\n\u003c/ol\u003e\n\u003cpre\u003e\u003ccode\u003e\"win\": {\n  \"target\": [\n    {\n      \"target\": \"nsis\",\n      \"arch\": [\n        \"ia32\"\n      ]\n    }\n  ],\n  \"asar\": false,\n  \"icon\": \"build/icons/icon.ico\",\n  \"artifactName\": \"${productName}.${ext}\",\n  \"verifyUpdateCodeSignature\": false\n},\n\"nsis\": {\n  \"oneClick\": false,\n  \"perMachine\": true,\n  \"allowElevation\": false,\n  \"allowToChangeInstallationDirectory\": true,\n  \"deleteAppDataOnUninstall\": true\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "nailaojiang",
+      "PubDate": "2023-03-20T08:15:11Z"
+    },
+    {
+      "Title": "tell you 网的 Windows 系统不干净 - 问与答",
+      "Link": "https://www.v2ex.com/t/925588",
+      "Description": "昨晚我哥来我这里要用电脑，结果无线一直连不上，所以今早我就在 tellyou 上下载了最新版的 Windows10 专业版，吃完午饭回来看到已经安装好了，一看并不干净啊，360 ，2345 ，爱奇艺等等！！！搞了很久才卸干净，有没有干净的系统推荐，后面这台 2015 年 i3 3400U 老电脑换固态硬盘也要重装",
+      "Author": "xuxinglin8888",
+      "PubDate": "2023-03-20T08:14:21Z"
+    },
+    {
+      "Title": "Play 版拼多多开始要求强制升级了 - 分享发现",
+      "Link": "https://www.v2ex.com/t/925587",
+      "Description": "GooglePlay 上下载的拼多多，从今天上午开始只要打开必弹窗“立即升级”，没有关闭按钮。点升级就跳转到国内应用商店。",
+      "Author": "SuperMaxine",
+      "PubDate": "2023-03-20T08:13:17Z"
+    },
+    {
+      "Title": "你们会给 GEOIP 规则加上 no-resolve 吗? - 程序员",
+      "Link": "https://www.v2ex.com/t/925586",
+      "Description": "\u003cp\u003e比如某域名经过这样的规则(暂不探讨客户端直接对 ip 发起请求情况):\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003erules:\n  # 所有的规则都没有命中, 并且前面没有 IP-CIDR\n  - IP-CIDR,203.205.0.0/16,DIRECT,no-resolve\n  - GEOIP,CN,DIRECT,no-resolve\n  - MATCH,PROXY\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这样域名不会 dns 解析, 直接走到兜底的代理, 这样国内正常的请求如果没有被前面匹配到, 则会走节点.\u003c/p\u003e\n\u003cp\u003e如果将 \u003ccode\u003eno-resolve\u003c/code\u003e 去掉, 域名会 dns 解析成 ip, 如果是国内的正常网站, 则匹配到 GEOIP 会走直连; 如果是被墙的网站, 则会返回一个污染的 ip, 此 ip 不在国内, 会走兜底的代理.\u003c/p\u003e\n\u003cp\u003e所以理论上, \u003ccode\u003eGEOIP\u003c/code\u003e 是否添加 \u003ccode\u003eno-resolve\u003c/code\u003e 与兜底策略中是否走直连和代理有关系? (当然增加一次 dns 解析也不会影响很大的网络延迟)\u003c/p\u003e\n\u003cp\u003e综上, 有两种搭配的策略:\u003c/p\u003e\n\u003ch2\u003e1. no-resolve 不解析 dns, 搭配兜底直连\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003e  - GEOIP,CN,DIRECT,no-resolve\n  - MATCH,DIRECT\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这样国内的请求会走直连没问题, 但国外的请求可能称为漏网之鱼导致无法访问. 而且再反过来看, 这样 GEOIP 就失去了意义, 去掉 GEOIP 这条规则是一样的.\u003c/p\u003e\n\u003ch2\u003e2. 解析 dns, 搭配兜底代理\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003e  - GEOIP,CN,DIRECT\n  - MATCH,PROXY\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这样进行了一次 dns 解析, 国内正常请求不会被误伤, 而国外的都会走代理, 看起来是完美解决?\u003c/p\u003e\n\u003cp\u003e所以你们都是怎么搭配的呢?\u003c/p\u003e\n",
+      "Author": "FaiChou",
+      "PubDate": "2023-03-20T08:13:17Z"
+    },
+    {
+      "Title": "如果从现在开始录入我每天的视频， 50 年后 GPT 是否会训练并产生另一个“我”呢？ - 奇思妙想",
+      "Link": "https://www.v2ex.com/t/925585",
+      "Description": "\u003cp\u003e摸鱼中，突然想到这件事。\u003c/p\u003e\n\u003cp\u003e我在想，如果 GPT 能不停的录入视频训练数据（先忽略成本），从现在开始把我每天的出门回家、工作、与他人对话聊天所见所闻都录进去。假设 50 年后我去世，数字世界是否能根据数据训练出另一个“我”？性格相同，爱好相同，记忆中的事与物也相同。\u003c/p\u003e\n\u003cp\u003e而新产生的另一个“我”，是一个全新的、独立的数字生命？还是我在数字世界中继续活着呢？\u003c/p\u003e\n\u003cp\u003e为什么想到这种问题，反而让我觉得有点伤感？\u003c/p\u003e\n",
+      "Author": "go522000",
+      "PubDate": "2023-03-20T08:11:16Z"
+    },
+    {
       "Title": "三年前端想转行租房中介有没有搞头？ - 问与答",
       "Link": "https://www.v2ex.com/t/925583",
       "Description": "先说下我的背景吧，大专狗，工作四年多了，前端干了三年，坐标西安，目前薪资一般（税前 12 ）。\u003cbr /\u003e萌生这个想法是源于周末找房子的经历，俩零零后中介，据说每个月可以赚 2-3w ，没底薪，看自己能签多少单；租出去一个房子中介费就是一个月房租，租客给一半，房东给一半，这个钱还是全拿的（以前没了解过，以为公司会抽成，可能有的是有抽成）；其中一个说最高记录一天签 7 单，收入 8k 多，听得我心痒痒，想去试试了，但是不知道他们说的是真是假，这里面有没有其它坑。\u003cbr /\u003e所以想在这里求助各位 V 友，有没有了解这行的，或者做过的，留下一点经验。",
@@ -11,7 +46,7 @@
       "PubDate": "2023-03-20T08:06:29Z"
     },
     {
-      "Title": "大家平时都在吃什么零食? - 生活",
+      "Title": "大家平时都在吃什么零食? - 问与答",
       "Link": "https://www.v2ex.com/t/925582",
       "Description": "如题,准备买一点超级干的牛肉干和黑巧,突然想到就,问下大家还有什么好吃的",
       "Author": "AMZsowhat",
