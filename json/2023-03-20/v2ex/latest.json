@@ -4,9 +4,37 @@
   "Description": "",
   "Items": [
     {
+      "Title": "你如何看待某些 APP 收集并上传所谓“用户体验数据” - 问与答",
+      "Link": "https://www.v2ex.com/t/925455",
+      "Description": "\u003cp\u003e在电脑和手机端用一些 APP 的时候，这些 APP 的开发者会放一些埋点，用于记录用户数据，称为“用户体验数据”（该数据收集方式由微软发明，并广为使用），在用户不知情且无法设置的情况下，可能每隔 1 分钟左右就会上传一次，会上传到数据分析的 API 地址，例如：\u003ca href=\"http://app-measurement.com\" rel=\"nofollow\"\u003eapp-measurement.com\u003c/a\u003e 、\u003ca href=\"http://firebaselogging-pa.googleapis.com\" rel=\"nofollow\"\u003efirebaselogging-pa.googleapis.com\u003c/a\u003e 等。\u003c/p\u003e\n\u003cp\u003e作为用户，你怎么看这个问题？\u003c/p\u003e\n\u003cp\u003e作为开发者，你有什么想分享的案例？\u003c/p\u003e\n",
+      "Author": "ikenneth",
+      "PubDate": "2023-03-20T02:55:28Z"
+    },
+    {
+      "Title": "求暗部共享的最新地址 - 问与答",
+      "Link": "https://www.v2ex.com/t/925454",
+      "Description": "",
+      "Author": "oshuanghao",
+      "PubDate": "2023-03-20T02:51:04Z"
+    },
+    {
+      "Title": "求国外稳定轻量应用服务器 web - 云计算",
+      "Link": "https://www.v2ex.com/t/925453",
+      "Description": "\u003cp\u003e准备长期持有，面向国内，苦于备案（国内不考虑）稳定性高点，线路稳定点的！\n各位前辈们，推荐一下！\u003c/p\u003e\n",
+      "Author": "dengxuetan",
+      "PubDate": "2023-03-20T02:49:35Z"
+    },
+    {
+      "Title": "小米家新出的 8kg 米家波轮洗衣机怎么样？ - 分享发现",
+      "Link": "https://www.v2ex.com/t/925452",
+      "Description": "\u003cp\u003e749\u003c/p\u003e\n\u003cp\u003e租房用，室友觉的很合适，价格便宜，容量合适，功能合适。我对小米谈不上好印象。想请教一下大家看怎么样？单纯从这款产品上说。\u003c/p\u003e\n",
+      "Author": "yuhuan66666",
+      "PubDate": "2023-03-20T02:45:12Z"
+    },
+    {
       "Title": "audioFlux - 一个系统的音频特征提取库,可用于深度学习 - 分享创造",
       "Link": "https://www.v2ex.com/t/925451",
-      "Description": "\u003ch2\u003eaudioFlux\u003c/h2\u003e\n\u003cp\u003eaudioFlux 是一个 Python 和 C 实现的库，提供音频领域系统、全面、多维度的特征提取与组合，结合各种深度学习网络模型，进行音频领域的业务研发。音频特征较为全面，支持移动端，提供尽可能细粒度、体系化的特征维。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eGitHub: \u003ca href=\"https://github.com/libAudioFlux/audioFlux\" rel=\"nofollow\"\u003ehttps://github.com/libAudioFlux/audioFlux\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eDocumentation: \u003ca href=\"https://audioflux.top/\" rel=\"nofollow\"\u003ehttps://audioflux.top/\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003eOverview\u003c/h2\u003e\n\u003cp\u003eaudioFlux 基于数据流设计。它在结构上解耦了每个算法模块，可以快速有效地提取多个维度的特征。以下是主要功能体系结构图。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"feature_all\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://audioflux.top/_images/feature_all.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e可以使用多维特征组合，选择不同的深度学习网络训练，研究音频领域的各种任务，如 Classification 、Separation 、MIR 等。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"Flow\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/libAudioFlux/audioFlux/master/image/flow.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003eQuickStart\u003c/h2\u003e\n\u003cp\u003epip install audioflux\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eimport numpy as np\nimport audioflux as af\n\nimport matplotlib.pyplot as plt\nfrom audioflux.display import fill_spec\n\n# Get a 220Hz's audio file path\nsample_path = af.utils.sample_path('220')\n\n# Read audio data and sample rate\naudio_arr, sr = af.read(sample_path)\n\n# Extract mel spectrogram\nspec_arr, mel_fre_band_arr = af.mel_spectrogram(audio_arr, num=128, radix2_exp=12, samplate=sr)\nspec_arr = np.abs(spec_arr)\n\n# Extract mfcc\nmfcc_arr, _ = af.mfcc(audio_arr, cc_num=13, mel_num=128, radix2_exp=12, samplate=sr)\n\n# Display\naudio_len = audio_arr.shape[0]\n# calculate x/y-coords\nx_coords = np.linspace(0, audio_len / sr, spec_arr.shape[1] + 1)\ny_coords = np.insert(mel_fre_band_arr, 0, 0)\nfig, ax = plt.subplots()\nimg = fill_spec(spec_arr, axes=ax,\n                x_coords=x_coords, y_coords=y_coords,\n                x_axis='time', y_axis='log',\n                title='Mel Spectrogram')\nfig.colorbar(img, ax=ax)\n\nfig, ax = plt.subplots()\nimg = fill_spec(mfcc_arr, axes=ax,\n                x_coords=x_coords, x_axis='time',\n                title='MFCC')\nfig.colorbar(img, ax=ax)\n\nplt.show()\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e感兴趣的请给个 Star\u003c/h2\u003e\n\u003cp\u003eGithub: \u003ca href=\"https://github.com/libAudioFlux/audioFlux\" rel=\"nofollow\"\u003ehttps://github.com/libAudioFlux/audioFlux\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e更多实例\u003c/h2\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/libAudioFlux/audioFlux#other-examples\" rel=\"nofollow\"\u003ehttps://github.com/libAudioFlux/audioFlux#other-examples\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e欢迎探讨关于音频相关的问题\u003c/p\u003e\n",
+      "Description": "\u003ch2\u003eaudioFlux\u003c/h2\u003e\n\u003cp\u003eaudioFlux 是一个 Python 和 C 实现的库，提供音频领域系统、全面、多维度的特征提取与组合，结合各种深度学习网络模型，进行音频领域的业务研发。音频特征较为全面，支持移动端，提供尽可能细粒度、体系化的特征维。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eGitHub: \u003ca href=\"https://github.com/libAudioFlux/audioFlux\" rel=\"nofollow\"\u003ehttps://github.com/libAudioFlux/audioFlux\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eDocumentation: \u003ca href=\"https://audioflux.top/\" rel=\"nofollow\"\u003ehttps://audioflux.top/\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003eOverview\u003c/h2\u003e\n\u003cp\u003eaudioFlux 基于数据流设计。它在结构上解耦了每个算法模块，可以快速有效地提取多个维度的特征。以下是主要功能体系结构图。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"feature_all\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://audioflux.top/_images/feature_all.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e可以使用多维特征组合，选择不同的深度学习网络训练，研究音频领域的各种任务，如 Classification 、Separation 、MIR 等。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"Flow\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/libAudioFlux/audioFlux/master/image/flow.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003eQuickStart\u003c/h2\u003e\n\u003cp\u003epip install audioflux\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eimport numpy as np\nimport audioflux as af\n\nimport matplotlib.pyplot as plt\nfrom audioflux.display import fill_spec\n\n# Get a 220Hz's audio file path\nsample_path = af.utils.sample_path('220')\n\n# Read audio data and sample rate\naudio_arr, sr = af.read(sample_path)\n\n# Extract mel spectrogram\nspec_arr, mel_fre_band_arr = af.mel_spectrogram(audio_arr, num=128, radix2_exp=12, samplate=sr)\nspec_arr = np.abs(spec_arr)\n\n# Extract mfcc\nmfcc_arr, _ = af.mfcc(audio_arr, cc_num=13, mel_num=128, radix2_exp=12, samplate=sr)\n\n# Display\naudio_len = audio_arr.shape[0]\n# calculate x/y-coords\nx_coords = np.linspace(0, audio_len / sr, spec_arr.shape[1] + 1)\ny_coords = np.insert(mel_fre_band_arr, 0, 0)\nfig, ax = plt.subplots()\nimg = fill_spec(spec_arr, axes=ax,\n                x_coords=x_coords, y_coords=y_coords,\n                x_axis='time', y_axis='log',\n                title='Mel Spectrogram')\nfig.colorbar(img, ax=ax)\n\nfig, ax = plt.subplots()\nimg = fill_spec(mfcc_arr, axes=ax,\n                x_coords=x_coords, x_axis='time',\n                title='MFCC')\nfig.colorbar(img, ax=ax)\n\nplt.show()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cimg alt=\"Spec\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://cdn.codenews.cc/blog/69718097d4dc05c9e6ea1367214fbd57.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e感兴趣的请给个 Star\u003c/h2\u003e\n\u003cp\u003eGithub: \u003ca href=\"https://github.com/libAudioFlux/audioFlux\" rel=\"nofollow\"\u003ehttps://github.com/libAudioFlux/audioFlux\u003c/a\u003e\n欢迎探讨关于音频相关的问题\u003c/p\u003e\n\u003ch2\u003e更多实例\u003c/h2\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/libAudioFlux/audioFlux#other-examples\" rel=\"nofollow\"\u003ehttps://github.com/libAudioFlux/audioFlux#other-examples\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "829939",
       "PubDate": "2023-03-20T02:41:50Z"
     },
@@ -102,13 +130,6 @@
       "PubDate": "2023-03-20T02:06:17Z"
     },
     {
-      "Title": "离开中国----分享博文 - 生活",
-      "Link": "https://www.v2ex.com/t/925433",
-      "Description": "\u003cp\u003e在 hacker news 上看到的热点（讨论人数众多）, 作者是一个在中国生活了 22 年的美人国，讲了讲为什么要回美国去，可以了解一下另一个视角的中国。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://news.ycombinator.com/item?id=35221742\" rel=\"nofollow\"\u003ehttps://news.ycombinator.com/item?id=35221742\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e这个是原博文\n\u003ca href=\"https://www.persuasion.community/p/leaving-china\" rel=\"nofollow\"\u003ehttps://www.persuasion.community/p/leaving-china\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "robot1",
-      "PubDate": "2023-03-20T02:01:53Z"
-    },
-    {
       "Title": "寻求一份稳定远程工作 - 求职",
       "Link": "https://www.v2ex.com/t/925432",
       "Description": "\u003cp\u003e##寻求一份稳定远程工作合作\n两年嵌入式软件开发,五年软件开发,三年软件项目管理\n拥有丰富的软件开发经验,熟练多种编程语言,并有丰富的区块链、电商、直播、小程序开发经验。\u003c/p\u003e\n\u003cp\u003e使用过的技术栈：\u003c/p\u003e\n\u003cp\u003e运维技术栈:Linux,Docker,K8S,CICD,ZooKeeper,Consul,Kafka,RabbitMQ\u003c/p\u003e\n\u003cp\u003eCSS 技术栈:TailwindCSS,Antd,Design,Bootstrap\u003c/p\u003e\n\u003cp\u003eReact 技术栈:Vite,Webpack,React,React Native,Nextjs,Taro,GraphQL\u003c/p\u003e\n\u003cp\u003eNode 技术栈:Electron,Fastify,Nestjs,Typeorm,,PM2\u003c/p\u003e\n\u003cp\u003ePHP 技术栈:Thinkphp,Laravel,Yaf,Yii,Swoft,Hyperf,Workerman,Swoole\u003c/p\u003e\n\u003cp\u003ePython 技术栈:Django,FastAPI,Flask\nGolang 技术栈:Gin 、Beego 、Iris\u003c/p\u003e\n\u003cp\u003ewe chat : aoigou\u003c/p\u003e\n",
@@ -186,7 +207,7 @@
       "PubDate": "2023-03-20T01:34:20Z"
     },
     {
-      "Title": "黑苹果万兆网卡给我整不会了 - 问与答",
+      "Title": "黑苹果万兆网卡给我整不会了 - macOS",
       "Link": "https://www.v2ex.com/t/925420",
       "Description": "手上有个 x520 万兆光卡，放到黑苹果里装了补丁能驱动了，但是过个十几分钟就重启，\u003cbr /\u003e有用同样网卡的黑果用户或其他万兆光卡推荐的吗？",
       "Author": "Aviciii",
@@ -249,7 +270,7 @@
       "PubDate": "2023-03-20T01:04:47Z"
     },
     {
-      "Title": "滴滴这么能打原因到底是什么？ - 问与答",
+      "Title": "滴滴这么能打原因到底是什么？ - 互联网",
       "Link": "https://www.v2ex.com/t/925410",
       "Description": "\u003ca target=\"_blank\" href=\"https://mp.weixin.qq.com/s/vj7cvmHVExYID7Tn-iBofQ\" rel=\"nofollow noopener\"\u003ehttps://mp.weixin.qq.com/s/vj7cvmHVExYID7Tn-iBofQ\u003c/a\u003e  \u003cbr /\u003e坐标三线小城，使用体验基本和文中描述的差不多。滴滴一家独大的后果是不是打车费会越来越高？",
       "Author": "gux928",
@@ -282,6 +303,13 @@
       "Description": "昨天刚买的 surge ，自己只有两个设备，所以出一个，一年后看情况商量着续费。\u003cbr /\u003e有兴趣的 tg:@Siiloo_817",
       "Author": "Siiloo",
       "PubDate": "2023-03-20T00:45:17Z"
+    },
+    {
+      "Title": "离开中国----分享博文 - 生活",
+      "Link": "https://www.v2ex.com/t/925433",
+      "Description": "\u003cp\u003e在 hacker news 上看到的热点（讨论人数众多）, 作者是一个在中国生活了 22 年的美人国，讲了讲为什么要回美国去，可以了解一下另一个视角的中国。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://news.ycombinator.com/item?id=35221742\" rel=\"nofollow\"\u003ehttps://news.ycombinator.com/item?id=35221742\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e这个是原博文\n\u003ca href=\"https://www.persuasion.community/p/leaving-china\" rel=\"nofollow\"\u003ehttps://www.persuasion.community/p/leaving-china\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "robot1",
+      "PubDate": "2023-03-20T02:01:53Z"
     },
     {
       "Title": "2019 款 mpb 最近经常 usb 失灵，重置 smc 会恢复 - Apple",
