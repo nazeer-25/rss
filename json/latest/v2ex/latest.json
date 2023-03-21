@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "推荐一个相声 评书的应用， B 站上找到的，贼齐全 - 分享发现",
+      "Link": "https://www.v2ex.com/t/925934",
+      "Description": "\u003ca target=\"_blank\" href=\"http://qiniu.ppsheep.top/index.html\" rel=\"nofollow noopener\"\u003ehttp://qiniu.ppsheep.top/index.html\u003c/a\u003e   资源贼多",
+      "Author": "ppsheep",
+      "PubDate": "2023-03-21T10:30:42Z"
+    },
+    {
+      "Title": "[git]git 的一个变基问题. - 问与答",
+      "Link": "https://www.v2ex.com/t/925933",
+      "Description": "\u003cp\u003e最开始分支是这样的\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eA-B-C(main)\n    |\n    |-D-E(dev)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e然后发现个 bug,需要合入 main 分支(对应图中的 Q), 但是开发人员误合入了 dev 分支(对应途中的 Q'), 由于 dev 也是公共分支, 不能复写历史, 只能 revert(对应图中的 Q''), 然后最终历史变为下图. 其中 Q 和 Q'是相同的修改, Q''是 Q'的 revert.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eA-B-C-Q(main)\n    |\n    |-D-E-Q'-Q''(dev)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e假设这时开发完成了, 我要把 dev 合回 main. 选择把 dev 变基到最新的 main, 但是由于 rebase 的特性, Q'被认为跟 main 上的 Q 是一样的修改, 被 rebase 自动丢弃了. 最终变为下图.\n其中 Q'''跟 Q''是等价的,是针对 Q 或者 Q'的 revert, 这样反而导致主线上的修改 Q 被 dev 回退了, 不符合最终目标.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eA-B-C-Q(main)-D'-E'-Q'''\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e有一种解决方案是变基前先将 dev 压缩为一条 commit, 缺点是丢失了历史.\n不知道 V 友们是否有更好的解决方法? 在保留 dev 分支历史的情况下.\u003c/p\u003e\n",
+      "Author": "kyonn",
+      "PubDate": "2023-03-21T10:26:08Z"
+    },
+    {
+      "Title": "支持中文的 txti 上线了 - 程序员",
+      "Link": "https://www.v2ex.com/t/925932",
+      "Description": "\u003cp\u003e链接 \u003ca href=\"https://txto.onrender.com/\" rel=\"nofollow\"\u003eTxto\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e在 v 站看到一个网站 \u003ca href=\"http://motherfuckingwebsite.com/\" rel=\"nofollow\"\u003ehttp://motherfuckingwebsite.com/\u003c/a\u003e\u003cbr/\u003e\n受到了影响，对这种草莽 txt 风有了喜欢\u003cbr/\u003e\n可惜啊，\u003ca href=\"http://txti.es\" rel=\"nofollow\"\u003etxti.es\u003c/a\u003e 不支持 unicode ，联系了不上作者，联系了作者的朋友，说作者估计不会修复这个问题了 （ \u003ca href=\"https://v2ex.com/t/923493#%EF%BC%89\" rel=\"nofollow\"\u003ehttps://v2ex.com/t/923493#）\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e寻思，我为什么不自己实现一个呢？\u003cbr/\u003e\n于是我就这么去干了\u003c/p\u003e\n\u003cp\u003e功能\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e支持中文\u003c/li\u003e\n\u003cli\u003e支持账号，也就是 \u003ca href=\"http://example.com/account/posttitle\" rel=\"nofollow\"\u003eexample.com/account/posttitle\u003c/a\u003e ,从 \u003ca href=\"http://rwtxt.com\" rel=\"nofollow\"\u003erwtxt.com\u003c/a\u003e 借鉴\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e推上搜了下，也有人把 \u003ca href=\"http://txti.es\" rel=\"nofollow\"\u003etxti.es\u003c/a\u003e 当做博客，自己浏览器存书签刷新。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e不足\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e没有做到纯浏览器展示，不过也就是输入检查，提交 XMLHttpRequest ，应该算轻的了 \u003c/li\u003e\n\u003cli\u003e没有实现无人访问 6 个月自动删除，\n因为免费的数据库有操作限制，为了节省操作\u003c/li\u003e\n\u003cli\u003e无法修改密码，根本原因也是节约 sql 操作\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eTo do or not to do\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e根据创建时间来删除 post ，或者指定生命周期？\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr/\u003e\n\u003cp\u003e用的免费的 yugabyte 数据库，和 render 托管服务，\n想来这种简单服务应该是可以应对的\u003c/p\u003e\n\u003cp\u003e代码是看了 w3cschool 后写的，键盘\u003c/p\u003e\n",
+      "Author": "liuidetmks",
+      "PubDate": "2023-03-21T10:25:16Z"
+    },
+    {
       "Title": "求一个今天刚开的九大的药 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/925931",
       "Description": "[img]\u003ca target=\"_blank\" href=\"https://s2.loli.net/2023/03/21/GuWPRwAZg6zi7s5.png\" rel=\"nofollow noopener\"\u003ehttps://s2.loli.net/2023/03/21/GuWPRwAZg6zi7s5.png\u003c/a\u003e[/img]\u003cbr /\u003e\u003cbr /\u003e10 年前在大学玩的蝴蝶，最近又开始玩了，平时喜欢看日剧，所以求一个药，nas 24 小时在线，联通双栈，百兆上传\u003cbr /\u003e\u003cbr /\u003e邮箱：d3EyMDIwd2RtQDE2My5jb20=\u003cbr /\u003e\u003cbr /\u003emt uid：287971\u003cbr /\u003e都是转种搞的上传，没刷大包，也没用盒子，用心对待各个 pt 站",
