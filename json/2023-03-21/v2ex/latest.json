@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "1Password 家庭 差一人 - Apple",
+      "Link": "https://www.v2ex.com/t/925929",
+      "Description": "\u003cp\u003e1Password 家庭 差一人 40/年\nTG：base64:VGhvcl9MYW8=\u003c/p\u003e\n",
+      "Author": "wk745",
+      "PubDate": "2023-03-21T10:00:11Z"
+    },
+    {
+      "Title": "求解： Skywalking 针对日志存储的数据结构在 MySQL 和 ES 中的不同，导致 UI 日志界面追踪 ID 无法显示的问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/925928",
+      "Description": "\u003cp\u003eSkywalking 可以将应用日志存储起来，默认为内存，可以修改为存储到 MySQL 或 ES 。\u003c/p\u003e\n\u003cp\u003e当存储端为 MySQL 时，在 Skywalking 的 UI 日志功能界面可以显示 TraceId （追踪 ID ），\u003c/p\u003e\n\u003cp\u003e但是，如果将存储端设置为 ES 时，TraceId 就无法显示，如下图：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"image-20230321175144875\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.leeqingshui.com:443/blog/image-20230321175144875.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e我看了下 Skywalking 在 MySQL 和 ES 的数据结构，在 MySQL 中是这样的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003eCREATE TABLE log\n(\n    id                  varchar(512) NOT NULL\n        PRIMARY KEY,\n    unique_id           varchar(200) NULL,\n    service_id          varchar(200) NULL,\n    service_instance_id varchar(200) NULL,\n    endpoint_id         varchar(200) NULL,\n    -- 这里存储了 trace_id\n    trace_id            varchar(150) NULL,\n    trace_segment_id    varchar(150) NULL,\n    span_id             int          NULL,\n    content_type        int          NULL,\n    content             mediumtext   NULL,\n    timestamp           bigint       NULL,\n    tags_raw_data       mediumtext   NULL,\n    tags_0              varchar(200) NULL,\n    tags_1              varchar(200) NULL,\n    tags_2              varchar(200) NULL,\n    tags_3              varchar(200) NULL,\n    tags_4              varchar(200) NULL,\n    tags_5              varchar(200) NULL,\n    tags_6              varchar(200) NULL,\n    tags_7              varchar(200) NULL,\n    tags_8              varchar(200) NULL,\n    tags_9              varchar(200) NULL,\n    tags_10             varchar(200) NULL,\n    tags_11             varchar(200) NULL,\n    tags_12             varchar(200) NULL,\n    tags_13             varchar(200) NULL,\n    tags_14             varchar(200) NULL,\n    tags_15             varchar(200) NULL,\n    tags_16             varchar(200) NULL,\n    tags_17             varchar(200) NULL,\n    tags_18             varchar(200) NULL,\n    tags_19             varchar(200) NULL,\n    time_bucket         bigint       NULL\n);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是，在 ES 中，是这样存储的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e{\n\t\"_index\": \"skywalking_log-20230321\",\n\t\"_type\": \"_doc\",\n\t\"_id\": \"bbdd208df28c4521aa436dbfd9a26a3a\",\n\t\"_version\": 1,\n\t\"_seq_no\": 132,\n\t\"_primary_term\": 1,\n\t\"found\": true,\n\t\"_source\": {\n\t\t\"unique_id\": \"bbdd208df28c4521aa436dbfd9a26a3a\",\n\t\t\"span_id\": 0,\n\t\t\"service_instance_id\": \"Z29sZGVuLXNlcnZpY2UtZmFjZQ==.1_MWJlOGE0N2QxOTM1NDM1NGEzMzJmMGNkM2ViYzQ4MzZAMTcyLjE3LjAuMQ==\",\n\t\t\"content\": \"2023-03-21 16:31:46.935 [TID:ee137820a72441a4a119ede353229b10.92.16793875068960035] INFO\",\n\t\t\"tags\": [\n\t\t\t\"level=INFO\"\n\t\t],\n\t\t\"content_type\": 1,\n\t\t\"tags_raw_data\": \"Cg0KBWxldmVsEgRJTkZPCi4KBmxvZ2dlchIkY29tLnprc2ouY29tbW9uLmxvZy5hc3BlY3QuTG9nQXNwZWN0Ch4KBnRocmVhZBIUaHR0cC1uaW8tOTIxMS1leGVjLTI=\",\n\t\t\"service_id\": \"Z29sZGVuLXNlcnZpY2UtZmFjZQ==.1\",\n\t\t\"time_bucket\": 20230321163146,\n\t\t\"timestamp\": 1679387506935\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e也就是说，其实日志在 ES 中的索引结构根本就没有 TraceId\u003c/p\u003e\n\u003cp\u003e这种情况下，需要修改什么设置才能让索引结构增加 TraceId 字段，使得 Skywalking 的 UI 界面中可以显示\nTraceId ，方便搜索。\u003c/p\u003e\n\u003cp\u003e各位大佬用 Skywalking 集成 ES 时，是怎么解决这个问题的呢？\u003c/p\u003e\n\u003cp\u003e搜索了很多文章，似乎都没有提到这个问题，难道必须通过 Logstash 再处理一层才行嘛？\u003c/p\u003e\n",
+      "Author": "leeqingshui",
+      "PubDate": "2023-03-21T09:59:57Z"
+    },
+    {
+      "Title": "想找一个能够直接使用 http 进行代理的工具 - 问与答",
+      "Link": "https://www.v2ex.com/t/925927",
+      "Description": "\u003cp\u003e可能标题看着有点疑惑\u003c/p\u003e\n\u003cp\u003e例如有时候 git 下载慢的时候就需要去配置 proxy 来加速\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003eproxy = http://127.0.0.1:7890\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是现在我用的代理工具需要开启局域网访问后才能进行 http 直接代理\u003c/p\u003e\n\u003cp\u003e我现在想找一个能够不安装工具直接就能使用 http 进行代理的工具\u003c/p\u003e\n\u003cp\u003e例如这样：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003eproxy = http://username:password@server:port\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "BenchWidth",
+      "PubDate": "2023-03-21T09:59:23Z"
+    },
+    {
       "Title": "请教 firefox 全屏播放视频异常 - Firefox",
       "Link": "https://www.v2ex.com/t/925926",
       "Description": "\u003cp\u003efirefox 全屏播放视频时，左边和上边都有一条缝隙，看起来相似整个视频往右下平移了一点。不是每次全屏都这样，退出再全屏就是正常的，似乎是双显示器下有这个问题，一个显示器暂时没发现。有没有老哥遇到过啊\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgur.com/a/40UIIUS.png\" rel=\"nofollow\"\u003ehttps://imgur.com/a/40UIIUS.png\u003c/a\u003e\u003c/p\u003e\n",
@@ -18,7 +39,7 @@
       "PubDate": "2023-03-21T09:53:01Z"
     },
     {
-      "Title": "求听听歌的邀 - 宽带症候群",
+      "Title": "求 TTG 的邀 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/925924",
       "Description": "听说 ttg 开邀了，求个 ttg 的邀，期待个有缘人，谢谢！[img]\u003ca target=\"_blank\" href=\"https://i.328888.xyz/2023/03/21/a2e8w.png\" rel=\"nofollow noopener\"\u003ehttps://i.328888.xyz/2023/03/21/a2e8w.png\u003c/a\u003e[/img]",
       "Author": "DragonL",
