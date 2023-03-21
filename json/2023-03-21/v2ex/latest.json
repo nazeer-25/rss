@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有用 iPad 连接显示器使用的 V 友吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/925775",
+      "Description": "hi 友友们，想做个问卷调查了解情况，真诚问下大家平时会用 iPad 外接显示器吗？\u003cbr /\u003e\u003cbr /\u003e问卷链接： \u003ca target=\"_blank\" href=\"https://wj.qq.com/s2/11869916/f8cb/\" rel=\"nofollow noopener\"\u003ehttps://wj.qq.com/s2/11869916/f8cb/\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e(╹ڡ╹ )寻找 ipad 外接显示器使用的朋友~~如实填写问卷会掉落感谢金，3Q ！！",
+      "Author": "yoeaa",
+      "PubDate": "2023-03-21T03:09:04Z"
+    },
+    {
       "Title": "你们在 Go 项目中如何实现分表读写的？插件？手写？代理？ - Go 编程语言",
       "Link": "https://www.v2ex.com/t/925774",
       "Description": "\u003cp\u003e苦于写了很多重复代码，想了解一下大家在 Go 的项目里面是怎么用 GORM （或者其他 MySQL 客户端，不限 ORM / Raw SQL ）来实现分表读写的？\u003c/p\u003e\n\u003cp\u003e例如 \u003ccode\u003euser_tab_00000000\u003c/code\u003e - \u003ccode\u003euser_tab_00000199\u003c/code\u003e，一共 200 张表，按 \u003ccode\u003euser_id % 200\u003c/code\u003e 来分表。\u003c/p\u003e\n\u003cp\u003e了解过的方案：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eDAO 层（或操作 DB 层）时根据传入参数计算，相关代码会出现在每个 Query 方法，例如 \u003ccode\u003eCreateUser()\u003c/code\u003e、\u003ccode\u003eGetUserByUserID()\u003c/code\u003e、\u003ccode\u003eUpdateUserByUserID()\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e挂载插件，init 时定义、注册分表字段、分表算法等等，DAO 层无特殊处理（就像在操作单表一样），实际执行的时候被改写，例如应用里执行 \u003ccode\u003eSELECT * FROM user_tab WHERE user_id = 199\u003c/code\u003e 最终会被改写成 \u003ccode\u003eSELECT * FROM user_tab_00000199 WHERE user_id = 199\u003c/code\u003e 发往 MySQL ；\u003c/li\u003e\n\u003cli\u003e应用层外挂载 MySQL 的代理，类似 ShardingSphere 这种，流程跟方案 2 类似，只是改写由外部中间件完成。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e个人感觉方案 2 是个挺好的思路但是 Go 里面好像没有什么特别好用的中间件。\u003c/p\u003e\n",
