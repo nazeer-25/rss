@@ -4,7 +4,21 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>焦虑且迷茫，我该如何选择职业发展道路，求指教 - 职场话题</title>
+      <title>你们在 Go 项目中如何实现分表读写的？插件？手写？代理？ - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/925774</link>
+      <description>&lt;p&gt;苦于写了很多重复代码，想了解一下大家在 Go 的项目里面是怎么用 GORM （或者其他 MySQL 客户端，不限 ORM / Raw SQL ）来实现分表读写的？&lt;/p&gt;&#xA;&lt;p&gt;例如 &lt;code&gt;user_tab_00000000&lt;/code&gt; - &lt;code&gt;user_tab_00000199&lt;/code&gt;，一共 200 张表，按 &lt;code&gt;user_id % 200&lt;/code&gt; 来分表。&lt;/p&gt;&#xA;&lt;p&gt;了解过的方案：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;DAO 层（或操作 DB 层）时根据传入参数计算，相关代码会出现在每个 Query 方法，例如 &lt;code&gt;CreateUser()&lt;/code&gt;、&lt;code&gt;GetUserByUserID()&lt;/code&gt;、&lt;code&gt;UpdateUserByUserID()&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;挂载插件，init 时定义、注册分表字段、分表算法等等，DAO 层无特殊处理（就像在操作单表一样），实际执行的时候被改写，例如应用里执行 &lt;code&gt;SELECT * FROM user_tab WHERE user_id = 199&lt;/code&gt; 最终会被改写成 &lt;code&gt;SELECT * FROM user_tab_00000199 WHERE user_id = 199&lt;/code&gt; 发往 MySQL ；&lt;/li&gt;&#xA;&lt;li&gt;应用层外挂载 MySQL 的代理，类似 ShardingSphere 这种，流程跟方案 2 类似，只是改写由外部中间件完成。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;个人感觉方案 2 是个挺好的思路但是 Go 里面好像没有什么特别好用的中间件。&lt;/p&gt;&#xA;</description>
+      <author>RedisMasterNode</author>
+      <pubDate>21 Mar 2023 03:04:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>求推荐豆瓣小组 - 问与答</title>
+      <link>https://www.v2ex.com/t/925773</link>
+      <description>求推荐一些豆瓣小组，你们认为有趣的、值得推荐的都可以。不限内容。谢谢大家。</description>
+      <author>Hoveray</author>
+      <pubDate>21 Mar 2023 03:03:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>焦虑且迷茫，我该如何选择职业发展道路，求指教 - 程序员</title>
       <link>https://www.v2ex.com/t/925771</link>
       <description>&lt;h3&gt;我的简介&lt;/h3&gt;&#xA;&lt;p&gt;17 年二本计科毕业。&lt;br/&gt;&#xA;刚毕业就在本省省会城市找了个大型养老公司摸鱼，因为年轻，三年以后实在受不了这样的摸鱼生活，跳槽到现在的公司，想好好卷卷 Java 技术。&lt;br/&gt;&#xA;跳槽的公司是个中型公司，没想到我这个岗也很摸鱼，现在主要负责我写的一个项目的维护，没有什么牛 X 的项目经验。但是薪水给的不错，高于本地行业平均水平，钱多事少，所以一直也不舍得走。&lt;br/&gt;&#xA;总结：毕业摸了 6 年鱼，技术一塌糊涂。&lt;/p&gt;&#xA;&lt;h3&gt;我在焦虑什么？&lt;/h3&gt;&#xA;&lt;p&gt;已经 27 了，能预想到，如果一直摸鱼下去，要是发生点啥变故，再离开现在公司的话，按照我现在的技术水平，可能就要降薪求职甚至离开这个行业了。&lt;br/&gt;&#xA;所以最近一段时间有自学，加背八股，想面下试试水。没想到几个招聘软件看下来，发现这个时间节点，本地能开到我目前薪资的企业，技术要求比我水平高不少了。&lt;br/&gt;&#xA;因此我对职业发展产生了焦虑。&lt;/p&gt;&#xA;&lt;h3&gt;接下来的路应该怎么走？&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;是继续卷技术，赶上同龄人，在本行业深耕下去；  &lt;/li&gt;&#xA;&lt;li&gt;还是学一门额外的技能，当前公司混不下去了立马转行；  &lt;/li&gt;&#xA;&lt;li&gt;还是努力备考，30 岁之前努力考本地事业单位上岸。    &lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;还是有更好的选择呢？哪条出路是比较好的努力方向呢？有没有过来人或者旁观者指导一二。&lt;/p&gt;&#xA;</description>
       <author>jccily</author>
