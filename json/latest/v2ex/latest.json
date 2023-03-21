@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "使用四层代理转发流量以复用 443，结果在浏览器地址栏暴露了转发后的端口 - NGINX",
+      "Link": "https://www.v2ex.com/t/926010",
+      "Description": "\u003cp\u003e请教一下大佬们，设置的四层代理如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estream {\n    map $ssl_preread_server_name $name {\n        www.example.com     home;    # Home Page\n\n        default     defaultpage;\n    }\n\n    upstream home {\n        server 127.0.0.1:44301;\n    }\n\n    upstream defaultpage {\n        server 127.0.0.1:44300;\n    }\n\n    server {\n        listen  443 reuseport;\n        listen  [::]:443 reuseport;\n        proxy_pass\t$name;\n        ssl_preread on;\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在七层代理的 server 里监听 44301 ，使用 location /home/ 来指向部署的服务。\n实际访问时，如果访问 \u003ca href=\"https://www.example.com/home/\" rel=\"nofollow\"\u003ehttps://www.example.com/home/\u003c/a\u003e 可以正常访问。\n但访问 \u003ca href=\"https://www.example.com/home\" rel=\"nofollow\"\u003ehttps://www.example.com/home\u003c/a\u003e 就会跳转到 \u003ca href=\"https://www.example.com:44301/home/\" rel=\"nofollow\"\u003ehttps://www.example.com:44301/home/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e由于部署的项目本身不支持自定义路径，修改源码工程量太大，已放弃通过 locaion 来指向服务的方式。\u003c/p\u003e\n\u003cp\u003e不过我还是很想知道，为啥会暴露 44301 的端口，原理是啥，是在哪个环节暴露的，应该怎么避免这个问题？\u003c/p\u003e\n",
+      "Author": "icaolei",
+      "PubDate": "2023-03-21T15:01:30Z"
+    },
+    {
+      "Title": "开源了一款支持通过 JSX 来编写 Markdown 的工具 - 分享创造",
+      "Link": "https://www.v2ex.com/t/926009",
+      "Description": "\u003ch1\u003e背景\u003c/h1\u003e\n\u003cp\u003e最初想给 REAMDE 文件添加多语言版本，想的不是直接整个复制翻译，而是跟项目中国际化一样。有尝试过写脚本通过各种函数嵌套来生成，但是不够灵活，也难以复用。心想这不就跟写前端代码很类似么，于是就谋生了通过 JSX 来生成 Markdown 的想法；由此促使该库的产生了。然后再结合其他的国际化库，就能很方便生成不同语言版本的 Markdown 文件了。\u003c/p\u003e\n\u003ch1\u003e特性\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e提供渲染生成 Markdown 语法内容的基础组件\u003c/li\u003e\n\u003cli\u003e实时渲染生成\t\u003c/li\u003e\n\u003cli\u003e支持原生 HTML\u003c/li\u003e\n\u003cli\u003e支持多个文档同时渲染\u003c/li\u003e\n\u003cli\u003e支持生成目录\u003c/li\u003e\n\u003cli\u003e支持异步渲染\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1\u003e效果图\u003c/h1\u003e\n\u003cp\u003e\u003cimg alt=\"demo\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s3.bmp.ovh/imgs/2023/03/21/1080b9ca3917b578.gif\" title=\"demo\"/\u003e\u003c/p\u003e\n\u003ch1\u003e最后\u003c/h1\u003e\n\u003cp\u003e当然适应场景应该不会局限与此，所以分享出来，欢迎各位大佬试用、指导、PR\u003c/p\u003e\n\u003cp\u003e仓库地址： \u003ca href=\"https://github.com/eyelly-wu/jsx-to-md\" rel=\"nofollow\"\u003ehttps://github.com/eyelly-wu/jsx-to-md\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "eyelly",
+      "PubDate": "2023-03-21T14:59:52Z"
+    },
+    {
+      "Title": "https://bard.google.com/ 一个来自 Google 的 AI 实验 - Google",
+      "Link": "https://www.v2ex.com/t/926008",
+      "Description": "\u003cp\u003eChatGPT 对标的东西来了，基于 LaMDA 的精调大语言模型。大家快去申请。\u003c/p\u003e\n\u003cp\u003e去年这个时候，一个 google 员工 Blake Lemoine 内部使用后\u003ca href=\"https://cajundiscordian.medium.com/is-lamda-sentient-an-interview-ea64d916d917\" rel=\"nofollow\"\u003e说这玩意有意识\u003c/a\u003e。。。于是他就被 pichai 开除了。。。\u003c/p\u003e\n",
+      "Author": "est",
+      "PubDate": "2023-03-21T14:56:06Z"
+    },
+    {
+      "Title": "找 unity 或者 h5 的网页游戏前端 - 游戏开发",
+      "Link": "https://www.v2ex.com/t/926007",
+      "Description": "\u003cp\u003e感觉首先一定要有页游开发经验吧，然后需要前端开发，有全套游戏图片素材，最好额外懂有点后端就够了，欢迎各位 V 友加入，个人、小团队都 OK 。价格再议，可长期饭票 q：2590975338\u003c/p\u003e\n",
+      "Author": "hostsir123",
+      "PubDate": "2023-03-21T14:55:41Z"
+    },
+    {
+      "Title": "国行三星 s23 值得入手嗎？有被内置什么反诈 app 吗？ - Android",
+      "Link": "https://www.v2ex.com/t/926006",
+      "Description": "国行三星 s23 值得入手嗎？有被内置什么反诈 app 吗？\u003cbr /\u003e另外国行 s23 支持 esim 吗",
+      "Author": "willsun",
+      "PubDate": "2023-03-21T14:55:25Z"
+    },
+    {
       "Title": "群晖 Download Station iOS 端管理软件，送码送码 - NAS",
       "Link": "https://www.v2ex.com/t/926004",
       "Description": "\u003cp\u003e我是个 PT 用户，群晖上重度使用 Download Station ，但是这个手机端没有对应的 app ，iOS 上有几个第三方的，要么不好用要么巨贵…… 这个 app 目前可以试用三天，试用后需要花 8 元内购，购买后可以永久使用～ \u003c/p\u003e\n\u003cp\u003e目前的功能有：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eNAS 的数据保密性太重要了，\u003cstrong\u003e这个 app 不收集任何数据，也不会向你的 NAS 之外的服务器发送任何信息\u003c/strong\u003e（这也是我很难收集 bug 的原因，有问题可以在 app 内邮件反馈我）\u003c/li\u003e\n\u003cli\u003eDownload Station 基础的功能都支持，包括查看、管理下载任务，新建任务（链接形式），查看硬盘状况，设置下载速度等等；\u003c/li\u003e\n\u003cli\u003e目前不支持，后续会逐渐增加的功能包括 IPv6 支持、新建任务支持种子文件、支持查看群晖更多信息等等。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003eiOS app store 地址： \u003ca href=\"https://apps.apple.com/cn/app/dsmate/id6445882642\" rel=\"nofollow\"\u003ehttps://apps.apple.com/cn/app/dsmate/id6445882642\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/HUXfdQH.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e兑换码：\u003c/p\u003e\n\u003cp\u003eWEJNHMRYYJMW\u003c/p\u003e\n\u003cp\u003eFP7PTF44KWLT\u003c/p\u003e\n\u003cp\u003eKFWKLY9XP9NL\u003c/p\u003e\n\u003cp\u003eY6L3JWEEMPFR\u003c/p\u003e\n\u003cp\u003eFJAE9AL7LRLX\u003c/p\u003e\n\u003cp\u003eL9RR7THKN9F9\u003c/p\u003e\n\u003cp\u003eYFELY4967NER\u003c/p\u003e\n\u003cp\u003eEEA3TPX4MK36\u003c/p\u003e\n\u003cp\u003eTTKAE3LLY7Y3\u003c/p\u003e\n\u003cp\u003eKYFP3MJ3YKPJ\u003c/p\u003e\n\u003cp\u003eKKKHA9W4AXH6\u003c/p\u003e\n\u003cp\u003eK44MWX7MNLPR\u003c/p\u003e\n\u003cp\u003eA74AMMNF744E\u003c/p\u003e\n\u003cp\u003eMW4MH9AYWM3N\u003c/p\u003e\n\u003cp\u003eJ6NAJM7MJRAN\u003c/p\u003e\n\u003cp\u003eATXKNYKXRWKX\u003c/p\u003e\n\u003cp\u003e4KXHMEP9LPRE\u003c/p\u003e\n\u003cp\u003eJ7AFXFL9PTFP\u003c/p\u003e\n\u003cp\u003eR9EFJ79NFX4N\u003c/p\u003e\n\u003cp\u003ePF6L9AHAK9HP\u003c/p\u003e\n\u003cp\u003eAXR97JEF4LXT\u003c/p\u003e\n\u003cp\u003eM9LTXWKETTKW\u003c/p\u003e\n\u003cp\u003ePAFN6RNFLA4L\u003c/p\u003e\n\u003cp\u003e4AARJ3PFJX3P\u003c/p\u003e\n\u003cp\u003eHFK4NY9KMP7L\u003c/p\u003e\n\u003cp\u003eN667KAAWMRER\u003c/p\u003e\n\u003cp\u003eYALH6FHFFTRW\u003c/p\u003e\n\u003cp\u003eN6E9JXPY333R\u003c/p\u003e\n\u003cp\u003eAFFYF7L4EFEW\u003c/p\u003e\n\u003cp\u003ePW673T9HAHPP\u003c/p\u003e\n\u003cp\u003e如何使用苹果商店的兑换码：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e打开 App Store 应用。\u003c/li\u003e\n\u003cli\u003e点击窗口右上角的账户图标。\u003c/li\u003e\n\u003cli\u003e点击“兑换礼品卡或代码”。\u003c/li\u003e\n\u003cli\u003e输入要兑换的代码，然后点击“兑换”。\u003c/li\u003e\n\u003cli\u003e如果代码有效，与代码相关的应用将开始下载到您的设备\u003c/li\u003e\n\u003c/ul\u003e\n",
@@ -13,7 +48,7 @@
     {
       "Title": "iPad mini6 的官方双面夹实际体验如何？ - iPad",
       "Link": "https://www.v2ex.com/t/926003",
-      "Description": "有人用过吗。自己用了个第三方的边缘有点硌手",
+      "Description": "\u003cdiv\u003e\n 有人用过吗。自己用了个第三方的边缘有点硌手，另外发现 mini 还挺重的上了套手感不太行，不知道官方的如何。话说 kindle 的手感才是舒服\n\u003c/div\u003e",
       "Author": "razios",
       "PubDate": "2023-03-21T14:47:54Z"
     },
