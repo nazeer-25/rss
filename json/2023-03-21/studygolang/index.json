@@ -19,7 +19,7 @@
     },
     {
       "Title": "求教yaml包中IsZero接口实现的方法",
-      "Link": "https://studygolang.com/topics/16223#reply5",
+      "Link": "https://studygolang.com/topics/16223#reply6",
       "Description": "\u003cp\u003egopkg.in/yaml.v3 这个包。谢谢\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -28,6 +28,13 @@
       "Title": "CGO amd64 错误",
       "Link": "https://studygolang.com/topics/16222#reply0",
       "Description": "\u003cp\u003e我写了一个Android平台的linux下的exe文件。用C语言编译的一个.a文件给go用。最终go编译出exe拿到linux执行 。arm64好好的 。我编译X86-64版本的时候 死活编译不过。。go这边报错\u003c/p\u003e\n\n\u003ch1\u003eruntime/cgo\u003c/h1\u003e\n\n\u003cp\u003egcc_amd64.S:27:8: error: unknown token in expression\n pushq %rbx\n       ^\ngcc_amd64.S:27:8: error: invalid operand\n pushq %rbx\n       ^\ngcc_amd64.S:28:8: error: unknown token in expression\n pushq %rbp\n       ^\ngcc_amd64.S:28:8: error: invalid operand\n pushq %rbp\n       ^\ngcc_amd64.S:29:8: error: unknown token in expression\u003c/p\u003e\n\n\u003cp\u003e都是这个文件报的错 。不知道为什么。。这个文件是个汇编代码问题 不知道问题出在哪里。。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go语言的通道疑惑",
+      "Link": "https://studygolang.com/topics/16221#reply2",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc sum(a []int, c chan int) {\n\ttotal := 0\n\tfor _, v := range a {\n\t\ttotal += v\n\t}\n\tc \u0026lt;- total \n}\n\nfunc main() {\n\ta := []int{7, 2, 8, -9, 4, 0}\n\tc := make(chan int)\n\tgo sum(a[:len(a)/2], c)  // 17\n\tgo sum(a[len(a)/2:], c) // -5\n\tx, y := \u0026lt;-c, \u0026lt;-c \n\tfmt.Println(x, y, x+y)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e为什么这段代码，\u003cstrong\u003e\u003cem\u003e变量x\u003c/em\u003e\u003c/strong\u003e输出的值是\u003cstrong\u003e\u003cem\u003e-5\u003c/em\u003e\u003c/strong\u003e，\u003cstrong\u003e\u003cem\u003e而不是17？\u003c/em\u003e\u003c/strong\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -42,13 +49,6 @@
       "Title": "go 怎么能在屏幕是直接绘制线条",
       "Link": "https://studygolang.com/topics/16218#reply1",
       "Description": "\u003cp\u003ego 怎么能在屏幕是直接绘制线条\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "go语言的通道疑惑",
-      "Link": "https://studygolang.com/topics/16221#reply2",
-      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc sum(a []int, c chan int) {\n\ttotal := 0\n\tfor _, v := range a {\n\t\ttotal += v\n\t}\n\tc \u0026lt;- total \n}\n\nfunc main() {\n\ta := []int{7, 2, 8, -9, 4, 0}\n\tc := make(chan int)\n\tgo sum(a[:len(a)/2], c)  // 17\n\tgo sum(a[len(a)/2:], c) // -5\n\tx, y := \u0026lt;-c, \u0026lt;-c \n\tfmt.Println(x, y, x+y)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e为什么这段代码，\u003cstrong\u003e\u003cem\u003e变量x\u003c/em\u003e\u003c/strong\u003e输出的值是\u003cstrong\u003e\u003cem\u003e-5\u003c/em\u003e\u003c/strong\u003e，\u003cstrong\u003e\u003cem\u003e而不是17？\u003c/em\u003e\u003c/strong\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -154,6 +154,13 @@
       "Title": "并发执行的问题",
       "Link": "https://studygolang.com/topics/16209#reply5",
       "Description": "\u003cp\u003e请教一下，自己写了2个函数，均是持续5秒采集数据。在主函数中不加go调用的时候，总共花10秒执行完成，但是都加上go之后，执行1秒就完事儿了，也不报错，看着数据也不太合理。我理解并发执行是不是怎么着也得5秒执行完成呀，除了在main中的2个函数前面加了go没做别的设置和操作，请问是不是还需要加别的东西？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "求教yaml包中IsZero接口实现的方法",
+      "Link": "https://studygolang.com/topics/16223#reply5",
+      "Description": "\u003cp\u003egopkg.in/yaml.v3 这个包。谢谢\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
