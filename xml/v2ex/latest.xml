@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>这种情况高并发时应该如何处理？ - 程序员</title>
+      <link>https://www.v2ex.com/t/926323</link>
+      <description>&lt;p&gt;场景是这样的：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;产品 K 是由 物料 A 与 物料 B ，&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;不同工厂 加工 物料 A 与 物料 B 都能得到 产品 K ，只要是物料 A 的 id 与 物料 B 的 id 一样就认为是同一个产品，产品 k 可能会有各种不同的名称。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;仓库收到 某工厂某天某个批次 产品 K 就创建或更新 商品 K：没有商品 K 就创建，已经有商品 K 就更新库存。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;商品 K ，也只认物料 a 与物料 b 来确定。&lt;/p&gt;&#xA;&lt;p&gt;现在问题是如果第 3 步是高并发时，会不会出现 2 个 商品 K ，会不会在 之前只有 1 个商品 K 时，更新的库存被覆盖错了，这种情况如何避免？&lt;/p&gt;&#xA;</description>
+      <author>zjsxwc</author>
+      <pubDate>22 Mar 2023 12:33:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>求问？如何系统的了解选择一辆车所需要的知识？或者说读懂汽车的参数？ - 问与答</title>
+      <link>https://www.v2ex.com/t/926322</link>
+      <description>今天有在考虑买车&lt;br /&gt;&lt;br /&gt;一直以来对车的各类参数都只有一个大概的认识。&lt;br /&gt;&lt;br /&gt;最近开始慢慢关注车方面的事情进行选型之后，上各种网站，发现一页一页的参数表上充斥着各种奇怪难懂的东西。没法很清晰的知道哪些是重要的，以及每一个参数里什么样的配置算是优质的。&lt;br /&gt;&lt;br /&gt;所以想问一下，有没有什么好的方法能快速的入门这方面的知识来提供一定的决策支撑？</description>
+      <author>Hidetodong</author>
+      <pubDate>22 Mar 2023 12:31:41 +0000</pubDate>
+    </item>
+    <item>
       <title>抱歉，麻煩大佬看看這段代碼問題在哪裏？ - 问与答</title>
       <link>https://www.v2ex.com/t/926319</link>
       <description>&lt;p&gt;我用 chatgpt：  &lt;/p&gt;&#xA;&lt;p&gt;寫一段代碼，使用 ffmpeg 把當前目錄下的長視頻分割成 4-8 隨機秒數的若干段視頻，並且把分割後的視頻隨機排序，但排序要確保原來相鄰的片段不再相鄰，最後按照排序后的順序合成新的視頻，輸入文件名不要固定爲 input.mp4 ，而是要遍歷當前目錄下的任意文件名視頻文件。&lt;/p&gt;&#xA;&lt;p&gt;代碼是可以運行，並且也在切割，但是切割完成，到&lt;strong&gt;最後全部刪光了，連最後的合成視頻也刪掉了&lt;/strong&gt;。問題出在哪？  &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-import&#34;&gt;import random&#xA;import glob&#xA;&#xA;# 获取当前工作目录&#xA;current_dir = os.getcwd()&#xA;&#xA;# 视频文件名，使用 glob 模块获取&#xA;video_files = glob.glob(&#34;*.mp4&#34;) + glob.glob(&#34;*.avi&#34;) + glob.glob(&#34;*.mkv&#34;)&#xA;&#xA;# 分割后的视频文件名前缀&#xA;output_file_name = &#34;output&#34;&#xA;&#xA;# 随机分割时间的范围，单位：秒&#xA;min_duration = 4&#xA;max_duration = 8&#xA;&#xA;# 对每个视频文件执行分割、随机化和合并操作&#xA;for video_file_name in video_files:&#xA;    # 获取视频文件时长&#xA;    get_duration_cmd = f&#34;ffprobe -i {video_file_name} -show_entries format=duration -v quiet -of csv=&#39;p=0&#39;&#34;&#xA;    duration = float(os.popen(get_duration_cmd).read().strip())&#xA;&#xA;    # 计算分割次数&#xA;    num_pieces = int(duration // min_duration)&#xA;&#xA;    # 分割视频&#xA;    for i in range(num_pieces):&#xA;        start_time = random.uniform(0, duration - min_duration)&#xA;        end_time = min(start_time + random.uniform(min_duration, max_duration), duration)&#xA;        output_file = f&#34;{output_file_name}_{i}.mp4&#34;&#xA;        trim_cmd = f&#34;ffmpeg -i {video_file_name} -ss {start_time} -to {end_time} -c copy -avoid_negative_ts 1 {output_file}&#34;&#xA;        os.system(trim_cmd)&#xA;&#xA;    # 随机排序分割后的视频&#xA;    pieces = os.listdir(current_dir)&#xA;    random.shuffle(pieces)&#xA;&#xA;    # 确保原来相邻的视频不再相邻&#xA;    for i in range(1, num_pieces):&#xA;        prev_file = pieces[i-1]&#xA;        curr_file = pieces[i]&#xA;        if prev_file.startswith(output_file_name) and curr_file.startswith(output_file_name):&#xA;            temp_file = f&#34;temp_{curr_file}&#34;&#xA;            os.rename(curr_file, temp_file)&#xA;            os.rename(prev_file, curr_file)&#xA;            os.rename(temp_file, prev_file)&#xA;&#xA;    # 合成分割后的视频&#xA;    concat_cmd = &#34;ffmpeg&#34;&#xA;    for i in range(num_pieces):&#xA;        input_file = f&#34;{output_file_name}_{i}.mp4&#34;&#xA;        concat_cmd += f&#34; -i {input_file}&#34;&#xA;    concat_cmd += f&#34; -filter_complex \&#34;{&#39;&#39;.join([f&#39;[{i}:0]&#39; for i in range(num_pieces)])} concat=n={num_pieces}:v=0:a=1 [a]\&#34; -map [a] {output_file_name}hhh.mp4&#34;&#xA;    os.system(concat_cmd)&#xA;&#xA;    # 删除临时视频文件&#xA;    for i in range(num_pieces):&#xA;        os.remove(f&#34;{output_file_name}_{i}.mp4&#34;)```&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
