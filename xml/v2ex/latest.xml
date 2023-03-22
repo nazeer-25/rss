@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>抱歉，麻煩大佬看看這段代碼問題在哪裏？ - 问与答</title>
+      <link>https://www.v2ex.com/t/926319</link>
+      <description>&lt;p&gt;我用 chatgpt：  &lt;/p&gt;&#xA;&lt;p&gt;寫一段代碼，使用 ffmpeg 把當前目錄下的長視頻分割成 4-8 隨機秒數的若干段視頻，並且把分割後的視頻隨機排序，但排序要確保原來相鄰的片段不再相鄰，最後按照排序后的順序合成新的視頻，輸入文件名不要固定爲 input.mp4 ，而是要遍歷當前目錄下的任意文件名視頻文件。&lt;/p&gt;&#xA;&lt;p&gt;代碼是可以運行，並且也在切割，但是切割完成，到&lt;strong&gt;最後全部刪光了，連最後的合成視頻也刪掉了&lt;/strong&gt;。問題出在哪？  &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-import&#34;&gt;import random&#xA;import glob&#xA;&#xA;# 获取当前工作目录&#xA;current_dir = os.getcwd()&#xA;&#xA;# 视频文件名，使用 glob 模块获取&#xA;video_files = glob.glob(&#34;*.mp4&#34;) + glob.glob(&#34;*.avi&#34;) + glob.glob(&#34;*.mkv&#34;)&#xA;&#xA;# 分割后的视频文件名前缀&#xA;output_file_name = &#34;output&#34;&#xA;&#xA;# 随机分割时间的范围，单位：秒&#xA;min_duration = 4&#xA;max_duration = 8&#xA;&#xA;# 对每个视频文件执行分割、随机化和合并操作&#xA;for video_file_name in video_files:&#xA;    # 获取视频文件时长&#xA;    get_duration_cmd = f&#34;ffprobe -i {video_file_name} -show_entries format=duration -v quiet -of csv=&#39;p=0&#39;&#34;&#xA;    duration = float(os.popen(get_duration_cmd).read().strip())&#xA;&#xA;    # 计算分割次数&#xA;    num_pieces = int(duration // min_duration)&#xA;&#xA;    # 分割视频&#xA;    for i in range(num_pieces):&#xA;        start_time = random.uniform(0, duration - min_duration)&#xA;        end_time = min(start_time + random.uniform(min_duration, max_duration), duration)&#xA;        output_file = f&#34;{output_file_name}_{i}.mp4&#34;&#xA;        trim_cmd = f&#34;ffmpeg -i {video_file_name} -ss {start_time} -to {end_time} -c copy -avoid_negative_ts 1 {output_file}&#34;&#xA;        os.system(trim_cmd)&#xA;&#xA;    # 随机排序分割后的视频&#xA;    pieces = os.listdir(current_dir)&#xA;    random.shuffle(pieces)&#xA;&#xA;    # 确保原来相邻的视频不再相邻&#xA;    for i in range(1, num_pieces):&#xA;        prev_file = pieces[i-1]&#xA;        curr_file = pieces[i]&#xA;        if prev_file.startswith(output_file_name) and curr_file.startswith(output_file_name):&#xA;            temp_file = f&#34;temp_{curr_file}&#34;&#xA;            os.rename(curr_file, temp_file)&#xA;            os.rename(prev_file, curr_file)&#xA;            os.rename(temp_file, prev_file)&#xA;&#xA;    # 合成分割后的视频&#xA;    concat_cmd = &#34;ffmpeg&#34;&#xA;    for i in range(num_pieces):&#xA;        input_file = f&#34;{output_file_name}_{i}.mp4&#34;&#xA;        concat_cmd += f&#34; -i {input_file}&#34;&#xA;    concat_cmd += f&#34; -filter_complex \&#34;{&#39;&#39;.join([f&#39;[{i}:0]&#39; for i in range(num_pieces)])} concat=n={num_pieces}:v=0:a=1 [a]\&#34; -map [a] {output_file_name}hhh.mp4&#34;&#xA;    os.system(concat_cmd)&#xA;&#xA;    # 删除临时视频文件&#xA;    for i in range(num_pieces):&#xA;        os.remove(f&#34;{output_file_name}_{i}.mp4&#34;)```&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>zjvbqla</author>
+      <pubDate>22 Mar 2023 12:17:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>有人用上了 fydetab duo 了吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/926318</link>
+      <description>&lt;p&gt;有没有人分享下使用体验？&lt;/p&gt;&#xA;&lt;p&gt;有意向购买个当作二合一笔记本用。&lt;/p&gt;&#xA;</description>
+      <author>feather12315</author>
+      <pubDate>22 Mar 2023 12:15:32 +0000</pubDate>
+    </item>
+    <item>
       <title>求推荐 pc 和手机相互传送的软件或者网站程序 - 程序员</title>
       <link>https://www.v2ex.com/t/926316</link>
       <description>&lt;p&gt;环境：win 和安卓&lt;/p&gt;&#xA;&lt;p&gt;需求：电脑和手机相互传输一些文字和网址或者小文件&lt;/p&gt;&#xA;&lt;p&gt;最好注重隐私，开源更好，现在在用微信传，感觉还是微信有点臃肿&lt;/p&gt;&#xA;</description>
