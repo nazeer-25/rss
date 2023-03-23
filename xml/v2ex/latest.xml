@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ChatGPT 套壳,微信小程序开源 含前后端,后端采用 quarkus,支持原生编译 - 程序员</title>
+      <link>https://www.v2ex.com/t/926542</link>
+      <description>&lt;p&gt;PS:前端有点简陋,欢迎前端大佬来帮忙改改.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/smartisanyyh/chatbot&#34; rel=&#34;nofollow&#34;&gt;github 后端地址&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/smartisanyyh/chatbot_wmp&#34; rel=&#34;nofollow&#34;&gt;github 前端地址&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h3&gt;起因 0:&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;大约两周前在 v 站上看到一个 v 友做了个 GPT 套壳 然后赚了两百块,只是在心中暗暗羡慕了一下 但是也没有想自己做,重复造轮子嘛,没意思.所以就打开了 github,看看有没有大佬开源的,发现目前开源的多半是 web,或者接入微信当个聊天机器人.而我主要是想分享给亲戚朋友用用,想着还是小程序方便点.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3&gt;经过 0:&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;在我寻找的过程中一个叫&lt;a href=&#34;https://railway.app?referralCode=jdPmwi&#34; rel=&#34;nofollow&#34;&gt;Railway&lt;/a&gt;的东西吸引了我,我也进去浅浅的尝试了一下,感觉很不错(可以自动将 github 上的代码打包部署,自动探测语言和打包方式)可以实现 github 上的项目一键部署.而且每个月有$5 的免费额度.&#xA;然后我就接着找,终于在 gitee 上找到个开源的 gpt &lt;a href=&#34;https://gitee.com/e0cia/chatgpt_wechat_font&#34; rel=&#34;nofollow&#34;&gt;小程序套壳&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;于是我就把这个开源项目部署到了&lt;a href=&#34;https://railway.app?referralCode=jdPmwi&#34; rel=&#34;nofollow&#34;&gt;Railway&lt;/a&gt;上,深度体验了下,真的很爽,几乎 0 配置,十分的丝滑.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;要是到这里就结束的话,就没有下边我要说的开源项目了.&lt;/p&gt;&#xA;&lt;h3&gt;起因 1:&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;由于&lt;a href=&#34;https://railway.app?referralCode=jdPmwi&#34; rel=&#34;nofollow&#34;&gt;Railway&lt;/a&gt;只给了$5 的免费额度,我看了下这个服务的预估消费直接就奔着$7 去了,这是要让我充钱的节奏呀,不行...&#xA;本着&lt;strong&gt;能白嫖就坚决不给钱&lt;/strong&gt;的精神,我在想怎么才能让他的内存占用更低!然后我想到了个一个一年前了解过,但是没深入研究过的东西,quarkus!这个东西不就是 cloud native 的,打包成 native excutable 那内存不就下来了吗?&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3&gt;经过 1:&lt;/h3&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;于是我就开始了接近 1.5 周的学习&amp;amp;实践,不得不说&lt;a href=&#34;https://quarkus.io/&#34; rel=&#34;nofollow&#34;&gt;quarkus&lt;/a&gt;的性能是真的好,但是写起来也真的坑呀,国内几乎没有文档可查,直接去官网找文档;&#xA;最开始我想全部使用 reactive 的形式来写后端,但是失败了,原因是&lt;a href=&#34;https://quarkus.io/&#34; rel=&#34;nofollow&#34;&gt;quarkus&lt;/a&gt;的某些组件还并不支持 reactive 的方式(比如 http basic auth),我肯定是不想写个复杂的身份校验逻辑的,但是 http auth 又不支持 reactive,没办法,要么 reactive 要么 http auth,我最终选择了后者,所以现在项目中既有 reactive 也有 imperative 的代码.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;quarkus 使用心得:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;优点&lt;ul&gt;&#xA;&lt;li&gt;速度快&lt;/li&gt;&#xA;&lt;li&gt;实现的都是 javax 的标准用起来很舒服&lt;/li&gt;&#xA;&lt;li&gt;没有启动类(不知道这算不算有点,我感觉挺爽的)&lt;/li&gt;&#xA;&lt;li&gt;可以编译为 native executable&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;缺点&lt;ul&gt;&#xA;&lt;li&gt;文档少,只有去国外找文档&lt;/li&gt;&#xA;&lt;li&gt;组件现阶段还不是特别全,不过在逐步增加(我看他们的 github 非常活跃,疯狂更新,估计以后会越来越好)&lt;/li&gt;&#xA;&lt;li&gt;如果你没有将需要反射的类注册到编译器,那么在 native 的执行文件中拿不到这个类的属性,而且也不报错...这点真的坑..(但是好像有解决办法,让他报错,或者提前知道哪些类需要注册,我还没来得及仔细研究)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;所以最后我相当于研究了下 Quarkus&amp;amp;Railway,并以这个开源项目的形式展示出来,和大家一起交流下,当然如果对项目有兴趣的,可以直接把项目拿去用,个人只需要准备好&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;一个备案域名(如果你不打算部署的话这个也可以不要)&lt;/li&gt;&#xA;&lt;li&gt;一个小程序 appid appsecret&lt;/li&gt;&#xA;&lt;li&gt;一个或多个 apikey&#xA;详细的信息都写到了 readme 里边&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;下面是小程序的体验码:&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;knows everything&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/03/23/biQL8fGtZunJach.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;再贴下内存消耗的对比图:&lt;/p&gt;&#xA;&lt;h3&gt;quarkus 的&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;quarkus.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/03/23/pdzS3cyG9s8l6ZP.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;springboot 的&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;springboot.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/03/23/Kzm8MEpRWevo3gq.jpg&#34;/&gt;&#xA;大家可以看到内存直接下降了 500m 500m 什么概念,500m 的意思就是我可以白嫖了,如果还不行,我打算把 mysql 干掉,现在大多数内存都是 mysql 用的...&lt;/p&gt;&#xA;&lt;p&gt;还有个很爽的地方!众所周知,编译成原生可执行文件非常吃电脑性能,我的是 m1 的 air 编译的时候我基本上啥都干不了,而且大概编译时间会持续 10-20 分钟不等,但是如果我们使用了 Railway 我们可以把编译这个动作交给 Railway 来做,不需要你本地编译,让 Railway 编译,而且编译是不算钱的!!!!这点真的很良心,而且 Railway 编译机器的性能真的很好,我测试的时候基本上在 5 分钟左右就编译好了!&lt;/p&gt;&#xA;&lt;p&gt;下面放个启动时间让大家爽一下:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;[io.quarkus] (main) chatbot 1.0-SNAPSHOT native (powered by Quarkus 2.16.4.Final) started in 0.198s&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这次启动的时间是包含了 flyway 执行 sql 脚本的时间的,要是没有 flyway 的话直接就是 0.0 几秒!&lt;/p&gt;&#xA;</description>
+      <author>yangyuhan12138</author>
+      <pubDate>23 Mar 2023 07:15:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>闲鱼上购买一千多元的显示器问题。。 - 问与答</title>
+      <link>https://www.v2ex.com/t/926540</link>
+      <description>准备在闲鱼上购买一台 1500 元左右的二手显示器，目前比较中意的有 LG 和飞利浦的 2K 显示器。目标在成都范围内，大家对于在闲鱼上这个价位买显示器有没有啥好的建议，比如说品牌选择还有具体型号这些,,,,</description>
+      <author>sleepPig</author>
+      <pubDate>23 Mar 2023 07:12:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>哪位大老能用白话帮我解释一下 AI 是如何训练的？ - 问与答</title>
+      <link>https://www.v2ex.com/t/926538</link>
+      <description>&lt;p&gt;它的训练是不是需要海量的数据？&lt;/p&gt;&#xA;</description>
+      <author>sunmoon1983</author>
+      <pubDate>23 Mar 2023 07:10:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>ios 有类似于 chatboost 这样可以使用自己 API 的 chat 工具么？ - 问与答</title>
+      <link>https://www.v2ex.com/t/926537</link>
+      <description>最好是免费的，毕竟是娱乐用，非生产力工具</description>
+      <author>justincnn</author>
+      <pubDate>23 Mar 2023 07:09:21 +0000</pubDate>
+    </item>
+    <item>
       <title>配眼镜相关，问一下大家的经验 - 问与答</title>
       <link>https://www.v2ex.com/t/926536</link>
       <description>请问大家配眼镜都是去实体店还是网上购物呢，我在淘宝的蔡司看了下，镜片还好，但是镜框很贵，看购物流程是选镜片、选镜框，然后加工发货&lt;br /&gt;&lt;br /&gt;去实体店会担心乱要价&lt;br /&gt;&lt;br /&gt;选哪种呢，另外有没有推荐的品牌呢</description>
