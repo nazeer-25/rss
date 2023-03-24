@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如何解决 SSL connect error - SSL",
+      "Link": "https://www.v2ex.com/t/926766",
+      "Description": "\u003cp\u003e我之前在 Manjaro 上为 Rust 的 crates 配置了 SJTU 的镜像，一直正常使用，今天发现报\u003ccode\u003eSSL connect error\u003c/code\u003e，本来以为他们镜像不正常，就换成清华的镜像，结果还是报错。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eCaused by:\nfailed to download from \u003ccode\u003e\u003ca href=\"https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/config.json\" rel=\"nofollow\"\u003ehttps://mirrors.tuna.tsinghua.edu.cn/crates.io-index/config.json\u003c/a\u003e\u003c/code\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cblockquote\u003e\n\u003cp\u003eCaused by:\n[35] SSL connect error (OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to \u003ca href=\"http://mirrors.tuna.tsinghua.edu.cn:443\" rel=\"nofollow\"\u003emirrors.tuna.tsinghua.edu.cn:443\u003c/a\u003e )\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e我试着运行\u003ccode\u003eopenssl s_client -connect \u003ca href=\"http://mirrors.tuna.tsinghua.edu.cn:443\" rel=\"nofollow\"\u003emirrors.tuna.tsinghua.edu.cn:443\u003c/a\u003e -msg\u003c/code\u003e，但结果都是 \u003cem\u003eVerify return code: 0 (ok)\u003c/em\u003e ，看起来并没有发现异常，请问这可能是什么原因导致的，应该如何解决这个问题？\u003c/p\u003e\n",
+      "Author": "xiaopanzi",
+      "PubDate": "2023-03-24T02:48:28Z"
+    },
+    {
+      "Title": "专线网络被阿里云 CDN 拉黑屏蔽？ - 分享发现",
+      "Link": "https://www.v2ex.com/t/926764",
+      "Description": "\u003cp\u003e公司有条移动的固定 IP 专线。起因是业务这块发现访问两家 ERP 品牌的网站时出现无法登录但网站可以打开的情况。如果使用的是家用电信带宽（重启光猫就换 IP 那种）就可以用。\u003c/p\u003e\n\u003cp\u003e起先下意识反应是移动网络的问题，毕竟老铁通了。但保险起见我分别联系了移动和两家 erp 的技术，一来是排查是否运营商问题，二来排查是否被两家 ERP 方屏蔽掉。\u003c/p\u003e\n\u003cp\u003e移动这块经过测试，访问其它网站速度延迟均正常，但个别页面加载存在缓慢问题。运营商用自己的线路测试发现都正常且可以正常登录我提供的测试账号，于是打算给我申请换 IP 。\u003c/p\u003e\n\u003cp\u003eERP 两家技术分别对接并进行了测试，都是在登录页面 api 接口那块出现了无响应。IP 开头都是 203 。\u003c/p\u003e\n\u003cp\u003e然后两家的判断出奇一致，阿里云 CDN 屏蔽了专线。因为专线这条供多人使用，推测可能访问频繁。其中一家 ERP 技术表示阿里云 CDN 从以前就有这个问题，并且也在一直反馈没结果，主要是专线这类会出现。目前解决方法都只能添加 host 进行解决。并且表示，即使我申请更换了专线 IP ，在正常用一段时间后也不排除会被再次屏蔽。\u003c/p\u003e\n\u003cp\u003e但这么一说的确也能解释为什么测试时别的网站能正常打开，但是个别页面存在未完全加载完转圈的情况，可能也用了阿里的 CDN 。\u003c/p\u003e\n\u003cp\u003e目前只能等两家把这个情况跟阿里反馈上去，移动这块目前没变动，因为太多业务绑定在这个 IP 上，变动需要改太多设置。\u003c/p\u003e\n\u003cp\u003e纯发出来看看有没有专线 V 友遭遇的。\u003c/p\u003e\n",
+      "Author": "ReZer0",
+      "PubDate": "2023-03-24T02:45:44Z"
+    },
+    {
+      "Title": "AdGuardHome 配合 passwall+smartdns 完全不拦截广告，求帮忙看下原因~ - 问与答",
+      "Link": "https://www.v2ex.com/t/926763",
+      "Description": "因为本人网络小白，根据网上视频做了几次，还是不拦截，想不明白哪里出了问题特在此求助~\u003cbr /\u003e\u003cbr /\u003e配置：iStoreOS ，x86/64 系统 做旁路由\u003cbr /\u003e\u003cbr /\u003e网络 - DHCP/DNS：\u003cbr /\u003e -DNS 重定向：勾选\u003cbr /\u003e -DNS 转发：127.0.0.1#1745\u003cbr /\u003e -忽略解析文件：勾选\u003cbr /\u003e -DNS 端口：53\u003cbr /\u003e\u003cbr /\u003e网络 - 接口 - LAN：\u003cbr /\u003e -DNS 服务器：127.0.0.1\u003cbr /\u003e -DHCP 服务：忽略\u003cbr /\u003e\u003cbr /\u003eAdGuardHome：\u003cbr /\u003e -重定向：作为 dnsmasq 的上游服务器\u003cbr /\u003e -上游服务器：127.0.0.1#6053 127.0.0.1#6553\u003cbr /\u003e -Bootstrap DNS servers：127.0.0.1#6053\u003cbr /\u003e -DNS 缓存：全部为 0\u003cbr /\u003e\u003cbr /\u003eSmartDNS：\u003cbr /\u003e -重定向：无\u003cbr /\u003e -主服务端口：6053\u003cbr /\u003e -第二服务：开启\u003cbr /\u003e -第二服务端口：6553\u003cbr /\u003e -分组：china 、us\u003cbr /\u003e -自定义设置：bind:6053 -group china; bind 6553 -group us\u003cbr /\u003e\u003cbr /\u003ePassWall:\u003cbr /\u003e -DNS Shunt:Dnsmasq\u003cbr /\u003e -过滤模式：Requery DNS by UDP\u003cbr /\u003e -定义端口：127.0.0.1:6553",
+      "Author": "kuanos",
+      "PubDate": "2023-03-24T02:43:42Z"
+    },
+    {
+      "Title": "求一个 hostloc 账号 - VPS",
+      "Link": "https://www.v2ex.com/t/926762",
+      "Description": "\u003cp\u003e求一个账号或者邀请码。主要是想去上面收 vps 自用。或者有 25cm 大佬能帮忙出个帖子求 vps 也行，有偿。\u003c/p\u003e\n",
+      "Author": "v2leekaif",
+      "PubDate": "2023-03-24T02:43:21Z"
+    },
+    {
       "Title": "网页上如何做到右键无法保存图片？ - 程序员",
       "Link": "https://www.v2ex.com/t/926760",
       "Description": "\u003cp\u003e本人前端小白\u003c/p\u003e\n\u003cp\u003e最近看小红书的 web 端，有几个疑惑：\n1.右键图片没有 Save as 功能\n2.资源的地址是如何被掩藏起来的，比如图片下载链接和视频下载链接\u003c/p\u003e\n",
