@@ -32,6 +32,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "gin渲染html",
+      "Link": "https://studygolang.com/topics/16227#reply2",
+      "Description": "\u003cp\u003e使用gin对模板进行渲染时，返回多余字符串\n渲染代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc render() string {\n\treturn `\u0026lt;li class=\u0026quot;nav-item\u0026quot;\u0026gt; abc \u0026lt;/li\u0026gt;`\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e模板代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-html\"\u003e\u0026lt;ul class=\u0026quot;nav nav-pills flex-row mb-auto overflow-auto\u0026quot;\u0026gt;\n        \u0026lt;li\u0026gt; abc \u0026lt;/li\u0026gt;\n        {{ .user | RenderChatList }}\n\u0026lt;/ul\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e前端实际代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-html\"\u003e\u0026lt;ul class=\u0026quot;nav nav-pills flex-row mb-auto overflow-auto\u0026quot;\u0026gt;\n\u0026lt;li\u0026gt; abc \u0026lt;/li\u0026gt;\n\u0026quot; \u0026lt;li class=\u0026quot;nav-item\u0026quot;\u0026gt; abc \u0026lt;/li\u0026gt; \u0026quot;\n\u0026lt;/ul\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e我之前仅仅用来渲染少量内容，如一个class属性，或链接的地址没有出现这样的问题，现在这个问题找好久了，gpt也不会。有没有大佬指点一下啊\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "单核go关键字连续创建协程怎么调度的？",
+      "Link": "https://studygolang.com/topics/16229#reply1",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// You can edit this code!\n// Click here and start typing.\npackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;runtime\u0026quot;\n\t\u0026quot;time\u0026quot;\n)\n\nfunc main() {\n\truntime.GOMAXPROCS(1)\n\tfor i := 0; i \u0026lt; 10; i++ {\n\t\tgo func(a int) {\n\t\t\tfmt.Println(a)\n\t\t}(i)\n\t}\n\ttime.Sleep(time.Second)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e9\n0\n1\n2\n3\n4\n5\n6\n7\n8\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这样的输出结果是怎么调度的？\n是最新创建的协程优先执行，最新就会输出9，之后就优先调度执行等待时间最久的吗？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "go操作excel文件",
       "Link": "https://studygolang.com/topics/16228#reply0",
       "Description": "\u003cp\u003e\u003ca href=\"https://github.com/cuishu/excel\"\u003ehttps://github.com/cuishu/excel\u003c/a\u003e\u003c/p\u003e\n",
@@ -49,20 +63,6 @@
       "Title": "紧跟潮流，抓住趋势，跟上全民AI的节奏，开源IM项目OpenIM产品介绍，为AIGC贡献力量",
       "Link": "https://studygolang.com/articles/36069#reply0",
       "Description": "\u003cp\u003e开源价值\u003c/p\u003e\n\n\u003cp\u003e高度自主、安全可控、开放自由，私有化部署，一切皆可控\u003c/p\u003e\n\n\u003cp\u003e透明度和可信度：开源软件的源代码是公开的，任何人都可以查看和检查代码，从而增强了软件的透明度和可信度。用户可以了解软件的内部结构和运作方式，发现和修复潜在的安全漏洞和错误。\u003c/p\u003e\n\n\u003cp\u003e自由度和可定制性：开源软件允许用户自由地使用、复制、分发和修改软件代码。用户可以根据自己的需求和要求对软件进行自定义和定制，满足不同的业务需求。\u003c/p\u003e\n\n\u003cp\u003e开放创新和协作：开源软件的源代码公开，鼓励开发者和用户之间的交流、合作和创新。开发者和用户可以通过共同参与软件的开发和测试，提高软件的质量和功能。\u003c/p\u003e\n\n\u003cp\u003e社区支持和共享：开源软件有庞大的用户和开发者社区支持，可以通过社区获得技术支持、问题解答和代码贡献等服务。社区还会共享和发布开源软件的最新版本和修复补丁，帮助用户保持软件的安全性和稳定性。\n\u003cimg src=\"https://static.golangjob.cn/230323/6801970fdd122e1b11d18106c37c9008.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003eOpenIM\u003c/p\u003e\n\n\u003cp\u003eOpenIM是由IM技术团队打造的开源即时通讯组件，包括服务端和客户端SDK，核心代码全部开源\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/OpenIMSDK/Open-IM-Server\"\u003ehttps://github.com/OpenIMSDK/Open-IM-Server\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e文档地址\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://doc.rentsoft.cn/#/\"\u003ehttps://doc.rentsoft.cn/#/\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e开发者通过集成OpenIM组件，并私有化部署服务端，可以将即时通讯、实时通讯能力快速集成到自身应用中。star 10K+ ，开发者上万人。\u003c/p\u003e\n\n\u003cp\u003eOpenIM服务端部署 以及app/pc/web快速验证流程： 浏览器清缓存后访问\u003ca href=\"https://doc.rentsoft.cn/#/v2/validation/all\"\u003ehttps://doc.rentsoft.cn/#/v2/validation/all\u003c/a\u003e （1）仅限于用户第一次初始化安装； （2）仅限于服务端有外网ip的情况； （3）仅针对未安装过mysql etcd kafka mongodb redis组件的服务器； （4）特别关注是否有warning输出；\u003cimg src=\"https://static.golangjob.cn/230323/56ff346a830db8f86d232d37d513c973.png\" alt=\"image.png\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/230323/3be38ae2aee7c1a5aad65aa17005ac5a.png\" alt=\"image.png\" /\u003e\n\u003cimg src=\"https://static.golangjob.cn/230323/2f1cc94a4257a8c5201690d15c1a765a.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e产品架构\u003c/p\u003e\n\n\u003cp\u003e产品细节\u003c/p\u003e\n\n\u003cp\u003e支持单聊，群聊，特别是十万级超级大群，企业通讯录，视频会议等，对于协同办公非常版本。\u003c/p\u003e\n\n\u003cp\u003e单聊：OpenIM 支持一对一的单聊功能，您可以在应用程序中集成相应的 API 或 SDK，以便您的用户可以通过 OpenIM 发送和接收消息。\n\u003cimg src=\"https://static.golangjob.cn/230323/1d8977d5c9bf3cfb4a692b0ef81075fc.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e群聊：除了单聊，OpenIM 还支持群聊功能。您可以在 OpenIM 上创建一个或多个群组，并将用户添加到这些群组中，让他们可以在群组内发送和接收消息。\u003cimg src=\"https://static.golangjob.cn/230323/6d4c169ba30bf839be7e0c77eb5f27cc.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e十万级超级大群：OpenIM 支持大规模群聊功能，包括支持高并发和高并发访问。它使用了分布式架构和分片技术，以确保系统的可扩展性和高可用性。同时，OpenIM 还支持多种群组管理功能，如群主转让、禁言、拉黑、踢人等，以帮助您更好地管理大规模群组。\u003c/p\u003e\n\n\u003cp\u003e企业通讯录：OpenIM 提供了企业通讯录功能，您可以将您的企业通讯录导入到 OpenIM 中，以便您的员工可以方便地查找和联系其他同事。OpenIM 还支持多种通讯录管理功能，如员工信息编辑、组织架构管理等。\n\u003cimg src=\"https://static.golangjob.cn/230323/95b3f8f149c37cb6f516114c48a0586c.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e视频会议：OpenIM 还提供了视频会议功能，让您可以在应用程序中创建和管理视频会议。OpenIM 使用高带宽和低延迟的网络连接，以确保视频和音频质量。同时，OpenIM 还支持屏幕共享、白板、录制等多种视频会议辅助功能，以满足您的协作需求。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230323/03a257d7d9c258ce9f6640140d336514.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230323/72ee3770fb58f973f7c8075864edbf68.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "gin渲染html",
-      "Link": "https://studygolang.com/topics/16227#reply2",
-      "Description": "\u003cp\u003e使用gin对模板进行渲染时，返回多余字符串\n渲染代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc render() string {\n\treturn `\u0026lt;li class=\u0026quot;nav-item\u0026quot;\u0026gt; abc \u0026lt;/li\u0026gt;`\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e模板代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-html\"\u003e\u0026lt;ul class=\u0026quot;nav nav-pills flex-row mb-auto overflow-auto\u0026quot;\u0026gt;\n        \u0026lt;li\u0026gt; abc \u0026lt;/li\u0026gt;\n        {{ .user | RenderChatList }}\n\u0026lt;/ul\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e前端实际代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-html\"\u003e\u0026lt;ul class=\u0026quot;nav nav-pills flex-row mb-auto overflow-auto\u0026quot;\u0026gt;\n\u0026lt;li\u0026gt; abc \u0026lt;/li\u0026gt;\n\u0026quot; \u0026lt;li class=\u0026quot;nav-item\u0026quot;\u0026gt; abc \u0026lt;/li\u0026gt; \u0026quot;\n\u0026lt;/ul\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e我之前仅仅用来渲染少量内容，如一个class属性，或链接的地址没有出现这样的问题，现在这个问题找好久了，gpt也不会。有没有大佬指点一下啊\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "单核go关键字连续创建协程怎么调度的？",
-      "Link": "https://studygolang.com/topics/16229#reply1",
-      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// You can edit this code!\n// Click here and start typing.\npackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;runtime\u0026quot;\n\t\u0026quot;time\u0026quot;\n)\n\nfunc main() {\n\truntime.GOMAXPROCS(1)\n\tfor i := 0; i \u0026lt; 10; i++ {\n\t\tgo func(a int) {\n\t\t\tfmt.Println(a)\n\t\t}(i)\n\t}\n\ttime.Sleep(time.Second)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e9\n0\n1\n2\n3\n4\n5\n6\n7\n8\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e这样的输出结果是怎么调度的？\n是最新创建的协程优先执行，最新就会输出9，之后就优先调度执行等待时间最久的吗？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
