@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "想获取晋江所有当天完结的书籍列表，有什么好建议？ - 奇思妙想",
+      "Link": "https://www.v2ex.com/t/927101",
+      "Description": "\u003cp\u003e官方没有这样的榜单\u003c/p\u003e\n",
+      "Author": "shadoworld",
+      "PubDate": "2023-03-25T07:47:33Z"
+    },
+    {
+      "Title": "使用 Python 连接 Redis，想用自签证书启用 tls 协议报错 - Python",
+      "Link": "https://www.v2ex.com/t/927100",
+      "Description": "\u003cp\u003e用的 python 库是 redis-py\u003c/p\u003e\n\u003cp\u003eRedis 那边不太清楚配置正确没有，但是总归是正常跑起来提供服务了，但是客户端这边连接总是提示失败，大神帮忙看看哪里的问题。\u003c/p\u003e\n\u003cp\u003e我的步骤：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e1.openssl 生成一个 rsa2048 的随机 key ，\n2.将该 key 计算成公钥并包装成 CA 证书：ca.crt\n3.openssl 再生成一个随机 key: server.key\n4.生成请求证书文件\n5.用刚才的 ca 证书生成一个认证后的证书：server.crt\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e用这三个文件启动 redis 的 tls 是成功了，但是 redis-py 客户端输入同样三个文件，连接会报错\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003econn = redis.Redis(\n    host='localhost',\n    port=6666,\n    ssl=True,\n    ssl_certfile='server.crt',\n    ssl_keyfile='server.key',\n    ssl_cert_reqs=\"required\",\n    ssl_ca_certs='ca.crt'\n)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e错误提示\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eFile \"C:\\Program Files\\Python310\\lib\\site-packages\\redis\\asyncio\\connection.py\", line 1038, in get\n    context.load_cert_chain(certfile=self.certfile, keyfile=self.keyfile)\nssl.SSLError: [X509: KEY_VALUES_MISMATCH] key values mismatch (_ssl.c:3895)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e尝试使用 redis-cli 按如下命令连接，发送命令会自动断连，也是错了\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eredis-cli -p 6666 --cert ./server.crt --key ./server.key --cacert ./ca.crt\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e搞不是太懂本地自签证书挂服务是个什么原理，正常来说 ssl 不是私钥自己持有，公钥互换公开么。服务端要求输入 keyfile 还能理解，为什么客户端也要输入 keyfile ？但是我试了试客户端把公私钥反过来照样连不上啊\u003c/p\u003e\n",
+      "Author": "Richard14",
+      "PubDate": "2023-03-25T07:41:44Z"
+    },
+    {
       "Title": "前端新手求教 vue3/vite 调试方法 - 程序员",
       "Link": "https://www.v2ex.com/t/927099",
       "Description": "\u003ch1\u003e背景:\u003c/h1\u003e\n\u003cp\u003e之前一直做后端,大部分使用 vscode 搭配一些插件进行调试\u003c/p\u003e\n\u003ch1\u003e面临的问题:\u003c/h1\u003e\n\u003cp\u003e最近刚开始接触 vue3(使用 vite 脚手架创建项目),发现貌似\"不能\"在 vscode 里面进行调试.\u003c/p\u003e\n\u003cp\u003e找了一些视频以及文档,发现都没有详细介绍过这部分.有点靠谱还是使用 vue-cli 的方式,然后配置后进行调试\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003ca href=\"https://vueschool.io/lessons/debugging-vue-apps-in-vs-code\" rel=\"nofollow\"\u003ehttps://vueschool.io/lessons/debugging-vue-apps-in-vs-code\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/vitejs/vite/discussions/4065\" rel=\"nofollow\"\u003ehttps://github.com/vitejs/vite/discussions/4065\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003ca href=\"https://vuejs.bootcss.com/cookbook/debugging-in-vscode.html\" rel=\"nofollow\"\u003ehttps://vuejs.bootcss.com/cookbook/debugging-in-vscode.html\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch1\u003e希望:\u003c/h1\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e希望有好心人能指点下 vue3/vite 是否能在 vscode 进行调试,如果可以怎么配置?\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e发散的问下,一般前端都如何进行调试的?\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n",
