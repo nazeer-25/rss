@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>无法使用 NewBing，提示 Sorry, looks like your network...解决与分析 - Bing</title>
+      <link>https://www.v2ex.com/t/927278</link>
+      <description>&lt;p&gt;&lt;strong&gt;Sorry, looks like your network settings are preventing access to this feature.&lt;/strong&gt;&#xA;省流：微软疑似封禁了部分 idc 节点，使用其他更好的代理节点或使用请求头插件伪造来源地址&lt;/p&gt;&#xA;&lt;p&gt;先说解决方法：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;换节点&lt;/li&gt;&#xA;&lt;li&gt;使用 ModHeader 等修改请求头的插件 /软件 /方式将&lt;code&gt;X-Forwarded-For&lt;/code&gt; 修改为任意非黑名单 ip(如 1.1.1.1)&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;我怎么知道我节点被封禁了？&#xA;直接访问或 curl &lt;a href=&#34;https://www.bing.com/turing/conversation/create&#34; rel=&#34;nofollow&#34;&gt;https://www.bing.com/turing/conversation/create&lt;/a&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如果返回的是&lt;code&gt;{&#34;result&#34;:{&#34;value&#34;:&#34;UnauthorizedRequest&#34;,&#34;message&#34;:&#34;Sorry, you need to login first to access this service.&#34;}&lt;/code&gt; 或任意内容，说明节点未被封禁&lt;/li&gt;&#xA;&lt;li&gt;如果返回一片空白，那就是没了&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;测试：&#xA;使用 oci(已封禁节点) 直接 get 空白&#xA;使用 oci 修改来源为 1.1.1.1 成功&#xA;使用 oci 修改来源为另一台 oci ip 失败&#xA;使用 gcp 直接 get 成功&#xA;使用 gcp 修改来源为 1.1.1.1 成功&#xA;使用 gcp 修改来源为 oci ip 失败&lt;/p&gt;&#xA;&lt;p&gt;分析：&#xA;做网站的都知道在有前端 cdn 情况下后端是没法知晓访问者的 ip 的，需要 cdn 给源站传递访客信息。&lt;/p&gt;&#xA;&lt;p&gt;最传统的方式就是让 cdn 修改 header 中的 X-Forwarded-For 为访客 ip ，后端再执行相应逻辑。&lt;/p&gt;&#xA;&lt;p&gt;但鲜有人知 header 在结构上更接近一个二元数组，而非字典，也就是说一个 header 的 key(比如 X-Forwarded-For)可以对应多个 value(1.0.0.1,1.0.0.2)&lt;/p&gt;&#xA;&lt;p&gt;而后端若采用字典方式去获取，只能解得第一个(1.0.0.1)。&lt;/p&gt;&#xA;&lt;p&gt;正常情况下，访客发出的请求 header 中是不会存在&lt;code&gt;X-Forwarded-For&lt;/code&gt;，所以 bing cdn 采取的加入访客 ip 方式应该是 append(添加，而非修改)。但当我们提前加入一个伪造的 ip ，这将成为第一个，而 cdn 添加的真实 ip 则成为第二个，使得欺骗后端防火墙认为自己的来源是第一个 ip 。换句话说，你只要把来源伪造成任意非黑名单 ip 即可。&lt;/p&gt;&#xA;&lt;p&gt;此漏洞明显，修复方式简单，故修改 header 的可能不会存留很久。&#xA;&lt;a href=&#34;https://t.me/CyanNAI/1013&#34; rel=&#34;nofollow&#34;&gt;原文出处&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>ChenYFan</author>
+      <pubDate>26 Mar 2023 08:13:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>一般开源系统演示站点禁止修改演示数据都是怎么实现的？ - 程序员</title>
+      <link>https://www.v2ex.com/t/927276</link>
+      <description>&lt;p&gt;一般开源系统的演示站点都禁止修改演示数据&lt;/p&gt;&#xA;&lt;p&gt;这是怎么实现的，&lt;/p&gt;&#xA;&lt;p&gt;比如 ThinkPHP 开发的。&lt;/p&gt;&#xA;&lt;p&gt;全局中间件？建个只有读权限的角色？&lt;/p&gt;&#xA;</description>
+      <author>tlerbao</author>
+      <pubDate>26 Mar 2023 08:10:46 +0000</pubDate>
+    </item>
+    <item>
       <title>esxi6.7 正常使用中，能直接安装 2.5G 网卡驱动吗？ - 宽带症候群</title>
       <link>https://www.v2ex.com/t/927275</link>
       <description>&lt;p&gt;我原来的机器用的是 intel 的 1G mini PCI 网卡，现在想升级一下替换成 2.5G 的 realtec RTL8125B 网卡，请问能直接在 esxi6.7 安装好 8125B 的驱动，然后替换网卡可以吗？我找到的教程，基本上都是打包进 esxi 的安装 ISO 的教程。不知道能否直接在 esxi 安装驱动，然后替换硬件？&#xA;感谢。&lt;/p&gt;&#xA;</description>
