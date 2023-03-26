@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "用过 wear os 的来看下 - Android",
+      "Link": "https://www.v2ex.com/t/927282",
+      "Description": "有没有发现，同一个对话框，wear os 和普通 android 的样式不同？\u003cbr /\u003e有没有方法修改成像普通 android 那样的样式",
+      "Author": "eyeshuaji",
+      "PubDate": "2023-03-26T08:24:55Z"
+    },
+    {
+      "Title": "discord 现在感觉是最漂亮的官方客户端 - 互联网",
+      "Link": "https://www.v2ex.com/t/927281",
+      "Description": "\u003cp\u003e那么问题来了，大家有好玩的群主推荐么？\u003c/p\u003e\n\u003cp\u003ensfw 的算了，哈哈\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"iDcfJZ.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.328888.xyz/2023/03/26/iDcfJZ.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "justincnn",
+      "PubDate": "2023-03-26T08:24:08Z"
+    },
+    {
+      "Title": "各位大佬看看我的简历有什么不足的地方， - 程序员",
+      "Link": "https://www.v2ex.com/t/927280",
+      "Description": "\u003cp\u003e对于各种建议，衷心感谢，\u003ca href=\"https://gitee.com/oliver-arrow/resume/raw/master/%E7%AE%80%E5%8E%86v10%20-%20%E5%89%AF%E6%9C%AC.pdf\" rel=\"nofollow\"\u003ehttps://gitee.com/oliver-arrow/resume/raw/master/%E7%AE%80%E5%8E%86v10%20-%20%E5%89%AF%E6%9C%AC.pdf\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "OliverArrow",
+      "PubDate": "2023-03-26T08:20:13Z"
+    },
+    {
       "Title": "无法使用 NewBing，提示 Sorry, looks like your network...解决与分析 - Bing",
       "Link": "https://www.v2ex.com/t/927278",
       "Description": "\u003cp\u003e\u003cstrong\u003eSorry, looks like your network settings are preventing access to this feature.\u003c/strong\u003e\n省流：微软疑似封禁了部分 idc 节点，使用其他更好的代理节点或使用请求头插件伪造来源地址\u003c/p\u003e\n\u003cp\u003e先说解决方法：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e换节点\u003c/li\u003e\n\u003cli\u003e使用 ModHeader 等修改请求头的插件 /软件 /方式将\u003ccode\u003eX-Forwarded-For\u003c/code\u003e 修改为任意非黑名单 ip(如 1.1.1.1)\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e我怎么知道我节点被封禁了？\n直接访问或 curl \u003ca href=\"https://www.bing.com/turing/conversation/create\" rel=\"nofollow\"\u003ehttps://www.bing.com/turing/conversation/create\u003c/a\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e如果返回的是\u003ccode\u003e{\"result\":{\"value\":\"UnauthorizedRequest\",\"message\":\"Sorry, you need to login first to access this service.\"}\u003c/code\u003e 或任意内容，说明节点未被封禁\u003c/li\u003e\n\u003cli\u003e如果返回一片空白，那就是没了\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e测试：\n使用 oci(已封禁节点) 直接 get 空白\n使用 oci 修改来源为 1.1.1.1 成功\n使用 oci 修改来源为另一台 oci ip 失败\n使用 gcp 直接 get 成功\n使用 gcp 修改来源为 1.1.1.1 成功\n使用 gcp 修改来源为 oci ip 失败\u003c/p\u003e\n\u003cp\u003e分析：\n做网站的都知道在有前端 cdn 情况下后端是没法知晓访问者的 ip 的，需要 cdn 给源站传递访客信息。\u003c/p\u003e\n\u003cp\u003e最传统的方式就是让 cdn 修改 header 中的 X-Forwarded-For 为访客 ip ，后端再执行相应逻辑。\u003c/p\u003e\n\u003cp\u003e但鲜有人知 header 在结构上更接近一个二元数组，而非字典，也就是说一个 header 的 key(比如 X-Forwarded-For)可以对应多个 value(1.0.0.1,1.0.0.2)\u003c/p\u003e\n\u003cp\u003e而后端若采用字典方式去获取，只能解得第一个(1.0.0.1)。\u003c/p\u003e\n\u003cp\u003e正常情况下，访客发出的请求 header 中是不会存在\u003ccode\u003eX-Forwarded-For\u003c/code\u003e，所以 bing cdn 采取的加入访客 ip 方式应该是 append(添加，而非修改)。但当我们提前加入一个伪造的 ip ，这将成为第一个，而 cdn 添加的真实 ip 则成为第二个，使得欺骗后端防火墙认为自己的来源是第一个 ip 。换句话说，你只要把来源伪造成任意非黑名单 ip 即可。\u003c/p\u003e\n\u003cp\u003e此漏洞明显，修复方式简单，故修改 header 的可能不会存留很久。\n\u003ca href=\"https://t.me/CyanNAI/1013\" rel=\"nofollow\"\u003e原文出处\u003c/a\u003e\u003c/p\u003e\n",
