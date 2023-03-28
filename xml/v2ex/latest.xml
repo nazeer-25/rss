@@ -4,6 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教一个数据处理的需求，寻一个高效率的解决方法？ - 程序员</title>
+      <link>https://www.v2ex.com/t/927776</link>
+      <description>&lt;h2&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;一个处理数据的需求，目前已经实现出来了，测试提出性能太低，所以请教一下，看看有没有比较好的处理实现方式，目前实现 sql 处理一部分，代码处理一部分 &lt;br/&gt;&#xA;环境：Java1.8 Mysql 8&lt;/p&gt;&#xA;&lt;h2&gt;需求&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&lt;tbody&gt;&lt;tr&gt;&#xA;&lt;th&gt;type&lt;/th&gt;&#xA;&lt;th&gt;value&lt;/th&gt;&#xA;&lt;th&gt;date&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;10.111&lt;/td&gt;&#xA;&lt;td&gt;2023-03-21 01:00:00&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;td&gt;19.111&lt;/td&gt;&#xA;&lt;td&gt;2023-03-21 01:00:00&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;td&gt;11.111&lt;/td&gt;&#xA;&lt;td&gt;2023-03-21 02:00:00&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;3&lt;/td&gt;&#xA;&lt;td&gt;12.111&lt;/td&gt;&#xA;&lt;td&gt;2023-03-21 02:00:00&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;13.111&lt;/td&gt;&#xA;&lt;td&gt;2023-03-22 11:00:00&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;14.111&lt;/td&gt;&#xA;&lt;td&gt;2023-03-22 12:00:00&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;15.111&lt;/td&gt;&#xA;&lt;td&gt;2023-03-23 11:00:00&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&#xA;&lt;p&gt;一张数据库表，如上, 用户根据某种类型添加数据，type 类型固定的 1-3,按日期插入数据，日期会重复因为是用户手动选择；&lt;br/&gt;&#xA;目标需求：按日期(yyyy-MM-dd)分组+倒序，每个类型查出最新的一条；&lt;br/&gt;&#xA;如上表数据，最终预期输出为：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{&#xA;&#x9;&#34;2023-03-21&#34;: [{&#xA;&#x9;&#x9;&#x9;&#34;type&#34;: &#34;1&#34;,&#xA;&#x9;&#x9;&#x9;&#34;value&#34;: &#34;10.111&#34;,&#xA;&#x9;&#x9;&#x9;&#34;date&#34;: &#34;2023-03-21 01:00:00&#34;&#xA;&#x9;&#x9;}, {&#xA;&#x9;&#x9;&#x9;&#34;type&#34;: &#34;2&#34;,&#xA;&#x9;&#x9;&#x9;&#34;value&#34;: &#34;11.111&#34;,&#xA;&#x9;&#x9;&#x9;&#34;date&#34;: &#34;2023-03-21 02:00:00&#34;&#xA;&#x9;&#x9;},&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#34;type&#34;: &#34;3&#34;,&#xA;&#x9;&#x9;&#x9;&#34;value&#34;: &#34;12.111&#34;,&#xA;&#x9;&#x9;&#x9;&#34;date&#34;: &#34;2023-03-21 02:00:00&#34;&#xA;&#x9;&#x9;}&#xA;&#x9;],&#xA;&#x9;&#34;2023-03-22&#34;: [{&#xA;&#x9;&#x9;&#34;type&#34;: &#34;1&#34;,&#xA;&#x9;&#x9;&#34;value&#34;: &#34;14.111&#34;,&#xA;&#x9;&#x9;&#34;date&#34;: &#34;2023-03-22 12:00:00&#34;&#xA;&#x9;}],&#xA;&#x9;&#34;2023-03-23&#34;: [{&#xA;&#x9;&#x9;&#34;type&#34;: &#34;1&#34;,&#xA;&#x9;&#x9;&#34;value&#34;: &#34;15.111&#34;,&#xA;&#x9;&#x9;&#34;date&#34;: &#34;2023-03-23 11:00:00&#34;&#xA;&#x9;}]&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;ps: 上述需求是接口里 1/5 的功能，还有后续处理&lt;br/&gt;&#xA;Ps: 代码简洁，支持使用第三方库&lt;/p&gt;&#xA;</description>
+      <author>godleon</author>
+      <pubDate>28 Mar 2023 03:00:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>framework 模块化笔记本终于更新 amd 了，准备搞个玩玩 - 硬件</title>
+      <link>https://www.v2ex.com/t/927775</link>
+      <description>https://frame.work/&lt;br /&gt;13 寸更新了 intel 13 代和 amd ryzen 7000 ，最近开启了预定&lt;br /&gt;16 寸还得等一段时间&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/9gZQBfu&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/9gZQBfu&lt;/a&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/TepFAIP&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/TepFAIP&lt;/a&gt;&lt;br /&gt;另外问下还有其他牌子的 32G\*2 5600 DDR5 套装吗?</description>
+      <author>ltltfuture</author>
+      <pubDate>28 Mar 2023 03:00:37 +0000</pubDate>
+    </item>
+    <item>
+      <title>无法绑定 depay，近期有绑定成功的兄弟吗？ - OpenAI</title>
+      <link>https://www.v2ex.com/t/927774</link>
+      <description>提示银行卡被拒绝，用的日本 IP 和日本地址都这样。</description>
+      <author>tangds99</author>
+      <pubDate>28 Mar 2023 02:59:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>GPT4 上线，送 30 张 199 次对话卡密 - 推广</title>
+      <link>https://www.v2ex.com/t/927773</link>
+      <description>&lt;p&gt;GPT4 上线，送 30 张 199 次对话卡密  &lt;/p&gt;&#xA;&lt;p&gt;送 30 张 199 次对话卡密。&lt;strong&gt;GPT4 ，十倍消耗。&lt;/strong&gt;赠送卡密无质保  &lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;使用地址：&lt;/strong&gt; &lt;a href=&#34;https://ailink.icu/&#34; rel=&#34;nofollow&#34;&gt;https://ailink.icu/&lt;/a&gt; &lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;注册后，充值中心 -&amp;gt; 卡密充值&lt;/strong&gt; &lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;还有需要的，请留下邮箱地址&lt;/strong&gt;（ base64 ）。   &lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;注：&lt;/strong&gt;&lt;br/&gt;&#xA;&lt;strong&gt;活动限今日。&lt;/strong&gt;&lt;br/&gt;&#xA;&lt;strong&gt;一个 V2EX 账号，限领一份。&lt;/strong&gt; &lt;/p&gt;&#xA;&lt;p&gt;使用 GPT4 记得开启 GPT4 功能。&lt;br/&gt;&#xA;&lt;img alt=&#34;GPT4&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://imgku.pages.dev/file/a80ee8c780779bb17a7fb.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;c61e09acb397486a97d6b3902b4830b5&lt;br/&gt;&#xA;cce76b0d9f6d4f4189cb9573b9bc8883&lt;br/&gt;&#xA;82d37824a783459a91bd384f182f9b10&lt;br/&gt;&#xA;32b3d63a4c154507b455db78b7ff462c&lt;br/&gt;&#xA;e007e3a0d1504a45b3597f6091d9d0d8&lt;br/&gt;&#xA;caeed257e92145c891e3287a6fcacac5&lt;br/&gt;&#xA;5b2131671d3a4309a26690169edb25c1&lt;br/&gt;&#xA;b34c0ecaa3ac4b96bd6713a849200df0&lt;br/&gt;&#xA;5385ddbed608436b9932634ada71a4a1&lt;br/&gt;&#xA;e1e1fcdd157642719363dacadf16e6b1&lt;br/&gt;&#xA;965ad6fa7bce4f758b26afd56f1c6e66&lt;br/&gt;&#xA;21d9bad49b5f4ee8bffb3572dbe882cf&lt;br/&gt;&#xA;e5d1fe90f24743baa1279553d2d2130f&lt;br/&gt;&#xA;8795a0ee7c154847b134939d812a29da&lt;br/&gt;&#xA;6e4de5f1c6ea4a19a6854f55984dedd4&lt;br/&gt;&#xA;750391231e984bec932a07b33a808f02&lt;br/&gt;&#xA;50c32de6b3044e5ba8df0e53a2857b9e&lt;br/&gt;&#xA;0e9861a5783341bb81e0ac19786b3dfc&lt;br/&gt;&#xA;b42b1455b151498f95705b27a134beb1&lt;br/&gt;&#xA;37e04529b038402f89eec640aa500d27&lt;br/&gt;&#xA;0c179e8e9c404360afd2f3395954511a&lt;br/&gt;&#xA;e7b93aa15ce4493987257c899b65dafe&lt;br/&gt;&#xA;cacce8b70da444ce9c713ff4a93b1a56&lt;br/&gt;&#xA;b657d9652a8947cc8e5dd9dd356105fd&lt;br/&gt;&#xA;6dab8f3f882b452fb8412f3992b6cf69&lt;br/&gt;&#xA;e1d44259e3564860b31bc13746ee5a72&lt;br/&gt;&#xA;ee764a6843914fdfa2f74d96e82f8fc4&lt;br/&gt;&#xA;ff30932891004ebe8e2a89c412ac8533&lt;br/&gt;&#xA;4c529de5709842f6887c992ac1f2427b&lt;br/&gt;&#xA;bb282193cf87459bb7ba4fb921e7225b&lt;/p&gt;&#xA;</description>
+      <author>poyanhu</author>
+      <pubDate>28 Mar 2023 02:57:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>自动驾驶真的需要路侧 MEC 吗？ - 分享发现</title>
+      <link>https://www.v2ex.com/t/927772</link>
+      <description>&lt;p&gt;目前，有一种说法认为 L4 级以上的自动驾驶需要路侧辅助。但是，沿路部署相应的支持设备是一笔很大的开销，最重要的问题是这些公共设备的成本应由谁来承担，以及如何运营管理这些设备（参考中国铁塔和三大运营商的复杂关系）&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;MEC 是车路协同边缘侧综合信息处理中心（即边缘大脑），可分为路侧 MEC 和区域 MEC 。路侧 MEC 接收来自路侧感知单元、车载单元和控制中心的信息进行处理，然后通过 RSU 通信单元发送给车载终端。&lt;/code&gt;因此，路侧设备可以降低自动驾驶车辆的算力开销，同时也可以帮助交通部门更好地统筹调度，提高通行效率，减少事故发生的可能性。&lt;/p&gt;&#xA;</description>
+      <author>timeance</author>
+      <pubDate>28 Mar 2023 02:57:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>拼夕夕百亿补贴翻车 - Apple</title>
+      <link>https://www.v2ex.com/t/927771</link>
+      <description>&lt;p&gt;在拼多多百亿补贴一家叫 apple 九图专卖店买了台 14 寸 M1 macbook pro 。16+1T 。到手后立马开箱录视频，打开来返现不对劲，怀疑是后封。后来果真如此，机器的一角有明显磕碰。还好录了开箱视频。立马找客服理论去。退货！&lt;/p&gt;&#xA;</description>
+      <author>Hanson666</author>
+      <pubDate>28 Mar 2023 02:56:20 +0000</pubDate>
+    </item>
+    <item>
       <title>dell 小主机，双网口软路由， apple tv3 闲置转让 - 路由器</title>
       <link>https://www.v2ex.com/t/927770</link>
       <description>&lt;p&gt;已经发了一个帖子，就不重复写了，请点连接看&#xA;&lt;a href=&#34;https://www.v2ex.com/t/927712&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/927712&lt;/a&gt;&lt;/p&gt;&#xA;</description>
