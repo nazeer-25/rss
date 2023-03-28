@@ -4,9 +4,16 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>一个困扰我很久的问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/927809</link>
+      <description>如果我带着当前的所有记忆回到 20 年前，&lt;br /&gt;我应该可以赚很多很多的钱，让自己成为亿万富翁&lt;br /&gt;&lt;br /&gt;但是我如果选择去考公，应该到死混不上科级&lt;br /&gt;&lt;br /&gt;结合历史看一下，咱们这套官僚系统好像千百年，即使是外族入侵（元，清）都是几乎没有很大改变的&lt;br /&gt;社会里应该有很多精英，他们的见识不止领先我二十年，但我敢断定他不一定能当上大官（市委书记级别）&lt;br /&gt;&lt;br /&gt;这是什么原因啊？</description>
+      <author>Features</author>
+      <pubDate>28 Mar 2023 04:09:22 +0000</pubDate>
+    </item>
+    <item>
       <title>求解惑，同样是向 chan 里面塞切片 - Go 编程语言</title>
       <link>https://www.v2ex.com/t/927808</link>
-      <description>&lt;p&gt;func (j *gameChannelKickJob) Produce(ctx context.Context, tasks chan&amp;lt;- interface{}) {&#xA;channels, err := dao.GetAllActiveGameChannel(ctx, model.GAME_CHANNEL_ACTIVE)&#xA;tasks &amp;lt;- channels&#xA;}&lt;/p&gt;&#xA;&lt;p&gt;上面的 channels 是一个切片，这样写通过了编译&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;func (j *gameChannelKickJob) Produce(ctx context.Context, tasks chan&amp;lt;- interface{}) {&#xA;&#x9;channels, err := dao.GetAllActiveGameChannel(ctx, model.GAME_CHANNEL_ACTIVE)&#xA;&#x9;for k,_ := range channels {&#xA;    &#x9;oneSlice := dao.GetSomeSliceData(ctx,channels[k])&#xA;        tasks &amp;lt;- oneSlice&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;当这样写，编译不通过提示 mismatched types ，同样是向 chan 塞切片，为啥啊&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;channels 是一个切片，这样写通过了编译&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; func (j *gameChannelKickJob) Produce(ctx context.Context, tasks chan&amp;lt;- interface{}) {&#xA;     channels, err := dao.GetAllActiveGameChannel(ctx, model.GAME_CHANNEL_ACTIVE)&#xA;      &#x9;tasks &amp;lt;- channels&#xA;  }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;当这样写，编译不通过提示 mismatched types ，同样是向 chan 塞切片，为啥啊&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;func (j *gameChannelKickJob) Produce(ctx context.Context, tasks chan&amp;lt;- interface{}) {&#xA;&#x9;channels, err := dao.GetAllActiveGameChannel(ctx, model.GAME_CHANNEL_ACTIVE)&#xA;&#x9;for k,_ := range channels {&#xA;    &#x9;oneSlice := dao.GetSomeSliceData(ctx,channels[k])&#xA;        tasks &amp;lt;- oneSlice&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
       <author>Bluelion</author>
       <pubDate>28 Mar 2023 04:00:50 +0000</pubDate>
     </item>

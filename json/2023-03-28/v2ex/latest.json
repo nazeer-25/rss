@@ -4,9 +4,16 @@
   "Description": "",
   "Items": [
     {
+      "Title": "一个困扰我很久的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/927809",
+      "Description": "如果我带着当前的所有记忆回到 20 年前，\u003cbr /\u003e我应该可以赚很多很多的钱，让自己成为亿万富翁\u003cbr /\u003e\u003cbr /\u003e但是我如果选择去考公，应该到死混不上科级\u003cbr /\u003e\u003cbr /\u003e结合历史看一下，咱们这套官僚系统好像千百年，即使是外族入侵（元，清）都是几乎没有很大改变的\u003cbr /\u003e社会里应该有很多精英，他们的见识不止领先我二十年，但我敢断定他不一定能当上大官（市委书记级别）\u003cbr /\u003e\u003cbr /\u003e这是什么原因啊？",
+      "Author": "Features",
+      "PubDate": "2023-03-28T04:09:22Z"
+    },
+    {
       "Title": "求解惑，同样是向 chan 里面塞切片 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/927808",
-      "Description": "\u003cp\u003efunc (j *gameChannelKickJob) Produce(ctx context.Context, tasks chan\u0026lt;- interface{}) {\nchannels, err := dao.GetAllActiveGameChannel(ctx, model.GAME_CHANNEL_ACTIVE)\ntasks \u0026lt;- channels\n}\u003c/p\u003e\n\u003cp\u003e上面的 channels 是一个切片，这样写通过了编译\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efunc (j *gameChannelKickJob) Produce(ctx context.Context, tasks chan\u0026lt;- interface{}) {\n\tchannels, err := dao.GetAllActiveGameChannel(ctx, model.GAME_CHANNEL_ACTIVE)\n\tfor k,_ := range channels {\n    \toneSlice := dao.GetSomeSliceData(ctx,channels[k])\n        tasks \u0026lt;- oneSlice\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e当这样写，编译不通过提示 mismatched types ，同样是向 chan 塞切片，为啥啊\u003c/p\u003e\n",
+      "Description": "\u003cp\u003echannels 是一个切片，这样写通过了编译\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e func (j *gameChannelKickJob) Produce(ctx context.Context, tasks chan\u0026lt;- interface{}) {\n     channels, err := dao.GetAllActiveGameChannel(ctx, model.GAME_CHANNEL_ACTIVE)\n      \ttasks \u0026lt;- channels\n  }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e当这样写，编译不通过提示 mismatched types ，同样是向 chan 塞切片，为啥啊\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efunc (j *gameChannelKickJob) Produce(ctx context.Context, tasks chan\u0026lt;- interface{}) {\n\tchannels, err := dao.GetAllActiveGameChannel(ctx, model.GAME_CHANNEL_ACTIVE)\n\tfor k,_ := range channels {\n    \toneSlice := dao.GetSomeSliceData(ctx,channels[k])\n        tasks \u0026lt;- oneSlice\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "Bluelion",
       "PubDate": "2023-03-28T04:00:50Z"
     },
