@@ -59,11 +59,6 @@
       <link>https://studygolang.com/articles/36070#reply0</link>
     </item>
     <item>
-      <title>求解在学习go语言中遇到关于**mutex**的一个问题</title>
-      <link>https://studygolang.com/topics/16233#reply1</link>
-      <description>&lt;p&gt;在一个协程中使用Mutex时，同时往无缓存的channel中写入数据，为什么没有出现死锁？（尽管在主协程中有读操作）&#xA;代码如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;func main() {&#xA;&#x9;ch1 := make(chan int)&#xA;&#x9;mutx := sync.RWMutex{}&#xA;&#x9;go func() {&#xA;&#x9;&#x9;mutx.Lock()&#xA;&#x9;&#x9;for i := 0; i &amp;lt; 10; i++ {&#xA;&#x9;&#x9;&#x9;ch1 &amp;lt;- i&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;defer close(ch1)&#xA;&#x9;&#x9;mutx.Unlock()&#xA;&#x9;}()&#xA;&#x9;for {&#xA;&#x9;&#x9;r := &amp;lt;-ch1&#xA;&#x9;&#x9;fmt.Println(r)&#xA;&#x9;&#x9;time.Sleep(time.Second)&#xA;&#x9;}&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;具体问题：&#xA;使用互斥锁之后，应该是先执行完该协程的代码才会继续执行其它代码吧？那往该协程中往无缓存channel中写入数据，应该出现死锁才对吧？&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>单核go关键字连续创建协程怎么调度的？</title>
       <link>https://studygolang.com/topics/16229#reply2</link>
       <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// You can edit this code!&#xA;// Click here and start typing.&#xA;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#x9;&amp;quot;runtime&amp;quot;&#xA;&#x9;&amp;quot;time&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;runtime.GOMAXPROCS(1)&#xA;&#x9;for i := 0; i &amp;lt; 10; i++ {&#xA;&#x9;&#x9;go func(a int) {&#xA;&#x9;&#x9;&#x9;fmt.Println(a)&#xA;&#x9;&#x9;}(i)&#xA;&#x9;}&#xA;&#x9;time.Sleep(time.Second)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;9&#xA;0&#xA;1&#xA;2&#xA;3&#xA;4&#xA;5&#xA;6&#xA;7&#xA;8&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;这样的输出结果是怎么调度的？&#xA;是最新创建的协程优先执行，最新就会输出9，之后就优先调度执行等待时间最久的吗？&lt;/p&gt;&#xA;</description>
@@ -86,6 +81,11 @@
     <item>
       <title>Go 解析日期格式-解决 parsing time xx as xx: cannot parse xx as xx 错误</title>
       <link>https://studygolang.com/articles/33293#reply1</link>
+    </item>
+    <item>
+      <title>求解在学习go语言中遇到关于**mutex**的一个问题</title>
+      <link>https://studygolang.com/topics/16233#reply1</link>
+      <description>&lt;p&gt;在一个协程中使用Mutex时，同时往无缓存的channel中写入数据，为什么没有出现死锁？（尽管在主协程中有读操作）&#xA;代码如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;func main() {&#xA;&#x9;ch1 := make(chan int)&#xA;&#x9;mutx := sync.RWMutex{}&#xA;&#x9;go func() {&#xA;&#x9;&#x9;mutx.Lock()&#xA;&#x9;&#x9;for i := 0; i &amp;lt; 10; i++ {&#xA;&#x9;&#x9;&#x9;ch1 &amp;lt;- i&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;defer close(ch1)&#xA;&#x9;&#x9;mutx.Unlock()&#xA;&#x9;}()&#xA;&#x9;for {&#xA;&#x9;&#x9;r := &amp;lt;-ch1&#xA;&#x9;&#x9;fmt.Println(r)&#xA;&#x9;&#x9;time.Sleep(time.Second)&#xA;&#x9;}&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;具体问题：&#xA;使用互斥锁之后，应该是先执行完该协程的代码才会继续执行其它代码吧？那往该协程中往无缓存channel中写入数据，应该出现死锁才对吧？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>go-encoding 是 go常用编码解码库</title>
