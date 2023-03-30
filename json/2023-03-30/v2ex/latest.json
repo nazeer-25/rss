@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "我的 blog 被 ddos 了，怀疑是在 V2EX 分享导致的 - 站长",
+      "Link": "https://www.v2ex.com/t/928545",
+      "Description": "\u003cp\u003e网站打不开，ssh 连接不上去，vps 后台看 cpu 、内存全部爆满\u003c/p\u003e\n\u003cp\u003e一开始怀疑某个程序出 bug 导致，重启之后还是一样\u003c/p\u003e\n\u003cp\u003e只能 vnc 登录，敲命令要等很久，好不容易看到 top 输出，然后 kill apache2 才行\u003c/p\u003e\n\u003cp\u003e查看 log ，一个最耗资源的 python cgi 被针对性攻击，挂了 cloudflare 也抗不住啊\u003c/p\u003e\n\u003cp\u003e最近一次分享是说我这个 blog 免注册的注册才是最好的注册，且不用密码，估计触碰到卖登录系统的人的蛋糕了\u003c/p\u003e\n\u003cp\u003e以下是 apache2 log：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e172.69.22.65 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.69.22.224 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.69.22.225 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.9 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n162.158.166.173 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.69.22.76 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.69.134.11 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n141.101.86.185 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.113 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.139 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.6 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.110 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.69.134.11 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.116 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.112 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n162.158.166.172 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.9 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.139 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.137 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n162.158.166.172 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.116 - - [30/Mar/2023:17:01:14 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.69.22.4 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n141.101.86.6 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.137 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.111 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n162.158.166.169 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.112 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.116 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n162.158.166.172 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.7 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.7 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n162.158.166.168 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.112 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n162.158.166.172 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.6 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n141.101.86.90 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n162.158.166.172 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.6 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.138 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.6 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.113 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.158.9 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.110 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.136 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n172.71.154.114 - - [30/Mar/2023:17:01:15 +0800] \"POST /api/get-captcha HTTP/1.1\" 500 593\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "duke807",
+      "PubDate": "2023-03-30T09:12:00Z"
+    },
+    {
+      "Title": "surge mac 5 车队 5 人车，有折扣 - Surge",
+      "Link": "https://www.v2ex.com/t/928544",
+      "Description": "\u003cp\u003e目前车队有 3 人，差 2 人，折扣价一个人是 117 左右，具体看到时候汇率，差距应该不会太大\u003cbr/\u003e\u003cbr/\u003e有兴趣的 vx：XuanJiiii\u003cbr/\u003e\u003c/p\u003e\n",
+      "Author": "SherloFun",
+      "PubDate": "2023-03-30T09:10:42Z"
+    },
+    {
+      "Title": "安全杀毒软件的选择 - Windows",
+      "Link": "https://www.v2ex.com/t/928541",
+      "Description": "最近打算重做 window 系统 \u003cbr /\u003e在安全杀毒软件的选择上犯难\u003cbr /\u003e360 腾讯管家 还是火绒呢\u003cbr /\u003e用火绒弹窗特别安静 \u003cbr /\u003e体验很好\u003cbr /\u003ev 友们的建议呢",
+      "Author": "mxdsy",
+      "PubDate": "2023-03-30T09:05:28Z"
+    },
+    {
+      "Title": "腾讯文档崩了！ - 全球工单系统",
+      "Link": "https://www.v2ex.com/t/928540",
+      "Description": "腾讯文档崩了！！！！\u003cbr /\u003e\u003cbr /\u003e访问超时……",
+      "Author": "Xhack",
+      "PubDate": "2023-03-30T09:04:40Z"
+    },
+    {
       "Title": "有没有基于个人知识库的 gpt 啊？ - 程序员",
       "Link": "https://www.v2ex.com/t/928539",
       "Description": "\u003cp\u003e最近试着用 gpt 生成了几篇办公用文章，但是总差点意思。\u003c/p\u003e\n\u003cp\u003e我打算输入一些相同风格，有名词解释的文章，类似个人知识库。\u003c/p\u003e\n\u003cp\u003e请问以后类似的项目或者网站吗？\u003c/p\u003e\n",
