@@ -25,15 +25,8 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go 正则向后引用，获取分组数据不符合预期(第二组少获取了一个字母)",
-      "Link": "https://studygolang.com/topics/16236#reply2",
-      "Description": "\u003cp\u003e运行环境： go 1.19.1 windows/amd64\n问题描述： 通过regexp的MustCompile得到Regexp对象的FindStringSubmatch方法进行分组捕获时，第二个分组获取的值不符合预期。\u003c/p\u003e\n\n\u003cp\u003e相关代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eREG_SQL_BAK = \u0026quot;CREATE\\\\s+TABLE\\\\s+(\\\\S+)\\\\s+AS\\\\s+SELECT.*FROM\\\\s+.(\\\\S+)\\\\s{0,}.*;\u0026quot;\n\n//解析脚本文件\nfunc parseFileContext(filePath string){\n    //获取备份表设计的原表，备份表名正则规则\n\treg_sql_bak_group := regexp.MustCompile(`(?i)` + REG_SQL_BAK)\n\n\tfi, err := os.Open(filePath)\n    if err != nil {\n        panic(err)\n    }\n\t\n\t// 创建 Reader\n    r := bufio.NewReader(fi)\n\n\t//创建SQLCheckInfo对象\n\tsCheckInfo := vo.SQLCheckInfo{\n\t}\n\n\tfor {\n\t\t// line, err := r.ReadString('\\n')\n\t\tline, err := r.ReadString(';')\n        line = strings.TrimSpace(line)\n\t\tmatch_bak := reg_sql_bak_group.FindStringSubmatch(line)\n\n\t\tif match_bak != nil {\n\t\t\tfmt.Println(line)\n\t\t\tfmt.Printf(\u0026quot;############key:%v,value:%v#############\\n\u0026quot;,match_bak[2],match_bak[1])\n\t\t}\n\t}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e当我需要解析的文本内容包含如下语句：\ncreate table test1 as\nselect * from test2;\n运行结果中第二个分组的值test2少了一个t。相关信息如下\n读的脚本文件中的内容\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230328/5c5748fa85e71b9b9912f19606f137de.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e运行相关代码后的结果\n\u003cimg src=\"https://static.golangjob.cn/230328/f8d7d371ad5d49087f359ff49930a7eb.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "go语言工具集",
-      "Link": "https://studygolang.com/resources/15566#reply0",
+      "Title": "Web组态监控系统 ISM Web组态监控系统",
+      "Link": "https://studygolang.com/p/1139#reply0",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -53,6 +46,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "go 正则向后引用，获取分组数据不符合预期(第二组少获取了一个字母)",
+      "Link": "https://studygolang.com/topics/16236#reply2",
+      "Description": "\u003cp\u003e运行环境： go 1.19.1 windows/amd64\n问题描述： 通过regexp的MustCompile得到Regexp对象的FindStringSubmatch方法进行分组捕获时，第二个分组获取的值不符合预期。\u003c/p\u003e\n\n\u003cp\u003e相关代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eREG_SQL_BAK = \u0026quot;CREATE\\\\s+TABLE\\\\s+(\\\\S+)\\\\s+AS\\\\s+SELECT.*FROM\\\\s+.(\\\\S+)\\\\s{0,}.*;\u0026quot;\n\n//解析脚本文件\nfunc parseFileContext(filePath string){\n    //获取备份表设计的原表，备份表名正则规则\n\treg_sql_bak_group := regexp.MustCompile(`(?i)` + REG_SQL_BAK)\n\n\tfi, err := os.Open(filePath)\n    if err != nil {\n        panic(err)\n    }\n\t\n\t// 创建 Reader\n    r := bufio.NewReader(fi)\n\n\t//创建SQLCheckInfo对象\n\tsCheckInfo := vo.SQLCheckInfo{\n\t}\n\n\tfor {\n\t\t// line, err := r.ReadString('\\n')\n\t\tline, err := r.ReadString(';')\n        line = strings.TrimSpace(line)\n\t\tmatch_bak := reg_sql_bak_group.FindStringSubmatch(line)\n\n\t\tif match_bak != nil {\n\t\t\tfmt.Println(line)\n\t\t\tfmt.Printf(\u0026quot;############key:%v,value:%v#############\\n\u0026quot;,match_bak[2],match_bak[1])\n\t\t}\n\t}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e当我需要解析的文本内容包含如下语句：\ncreate table test1 as\nselect * from test2;\n运行结果中第二个分组的值test2少了一个t。相关信息如下\n读的脚本文件中的内容\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230328/5c5748fa85e71b9b9912f19606f137de.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e运行相关代码后的结果\n\u003cimg src=\"https://static.golangjob.cn/230328/f8d7d371ad5d49087f359ff49930a7eb.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "3月更新！EasyOps®全平台超10项功能升级，您的需求在其中~",
       "Link": "https://studygolang.com/articles/36074#reply0",
       "Description": "",
@@ -60,8 +60,8 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Web组态监控系统 ISM Web组态监控系统",
-      "Link": "https://studygolang.com/p/1139#reply0",
+      "Title": "go语言工具集",
+      "Link": "https://studygolang.com/resources/15566#reply0",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
