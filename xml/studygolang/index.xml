@@ -23,6 +23,10 @@
       <description>&lt;p&gt;golang程序员跪求在广州兼职，可按项目进行结算。虽然不是很大神，但是我也会超级熟悉beego，NSQ，go-redis，还会reactjs android swift（会一点点）&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>3月更新！EasyOps®全平台超10项功能升级，您的需求在其中~</title>
+      <link>https://studygolang.com/articles/36074#reply0</link>
+    </item>
+    <item>
       <title>【公告】寻找社区日常运营、功能开发、维护 自愿者</title>
       <link>https://studygolang.com/topics/4092#reply262</link>
       <description>&lt;p&gt;本站 2013 年上线以来，得到国内广大 gopher 们的支持，也让我有动力一直开发、维护着。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;随着 go 越来越流行，学习 go 的人也越来越多，本社区用户量也越来越大，而我个人的精力有限。为了给社区用户提供更好的服务，希望有自愿者加入社区，一起维护、运营本站。招募的自愿者包括：&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;日常网站运营 —— 比如晨读文章推荐、周推荐等；&lt;strong&gt;特别欢迎在校大学生；&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;功能开发、维护 —— 参与开发本站功能；板块维护、管理者等；&lt;/li&gt;&#xA;&lt;li&gt;活动组织、宣传者 —— 组织社区用户参与互动，和外界联系拉赞助等；&lt;/li&gt;&#xA;&lt;li&gt;翻译 —— Go 相关教程、文章、资讯等的翻译；&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;其他你想到的，也可以和我沟通~ 根据情况，会提供奖励~&lt;/p&gt;&#xA;&#xA;&lt;p&gt;项目开源的，参与开发，可以直接 fork + PR，参与其他的可以加我微信 gopherstudio 联系。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;项目地址：&lt;a href=&#34;https://github.com/studygolang/studygolang&#34;&gt;https://github.com/studygolang/studygolang&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.studygolang.com/static/img/gopherstudio2.png?imageView2/2/w/154&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&#xA;</description>
@@ -35,10 +39,6 @@
       <title>go 正则向后引用，获取分组数据不符合预期(第二组少获取了一个字母)</title>
       <link>https://studygolang.com/topics/16236#reply2</link>
       <description>&lt;p&gt;运行环境： go 1.19.1 windows/amd64&#xA;问题描述： 通过regexp的MustCompile得到Regexp对象的FindStringSubmatch方法进行分组捕获时，第二个分组获取的值不符合预期。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;相关代码&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;REG_SQL_BAK = &amp;quot;CREATE\\s+TABLE\\s+(\\S+)\\s+AS\\s+SELECT.*FROM\\s+.(\\S+)\\s{0,}.*;&amp;quot;&#xA;&#xA;//解析脚本文件&#xA;func parseFileContext(filePath string){&#xA;    //获取备份表设计的原表，备份表名正则规则&#xA;&#x9;reg_sql_bak_group := regexp.MustCompile(`(?i)` + REG_SQL_BAK)&#xA;&#xA;&#x9;fi, err := os.Open(filePath)&#xA;    if err != nil {&#xA;        panic(err)&#xA;    }&#xA;&#x9;&#xA;&#x9;// 创建 Reader&#xA;    r := bufio.NewReader(fi)&#xA;&#xA;&#x9;//创建SQLCheckInfo对象&#xA;&#x9;sCheckInfo := vo.SQLCheckInfo{&#xA;&#x9;}&#xA;&#xA;&#x9;for {&#xA;&#x9;&#x9;// line, err := r.ReadString(&#39;\n&#39;)&#xA;&#x9;&#x9;line, err := r.ReadString(&#39;;&#39;)&#xA;        line = strings.TrimSpace(line)&#xA;&#x9;&#x9;match_bak := reg_sql_bak_group.FindStringSubmatch(line)&#xA;&#xA;&#x9;&#x9;if match_bak != nil {&#xA;&#x9;&#x9;&#x9;fmt.Println(line)&#xA;&#x9;&#x9;&#x9;fmt.Printf(&amp;quot;############key:%v,value:%v#############\n&amp;quot;,match_bak[2],match_bak[1])&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;当我需要解析的文本内容包含如下语句：&#xA;create table test1 as&#xA;select * from test2;&#xA;运行结果中第二个分组的值test2少了一个t。相关信息如下&#xA;读的脚本文件中的内容&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230328/5c5748fa85e71b9b9912f19606f137de.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;运行相关代码后的结果&#xA;&lt;img src=&#34;https://static.golangjob.cn/230328/f8d7d371ad5d49087f359ff49930a7eb.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>3月更新！EasyOps®全平台超10项功能升级，您的需求在其中~</title>
-      <link>https://studygolang.com/articles/36074#reply0</link>
     </item>
     <item>
       <title>Web组态监控系统 ISM Web组态监控系统</title>
