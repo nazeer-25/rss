@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "UU 加速器（主机加速）的部分节点， UDP 包会在约三分钟之后回程全丢 - Nintendo Switch",
+      "Link": "https://www.v2ex.com/t/928742",
+      "Description": "\u003ch2\u003e概述\u003c/h2\u003e\n\u003cp\u003e昨晚和今天（ 2023-03-30 ~ 31 ）和日常一样想摸个鱼，上线打几把大乱斗练练手，但出现了平时所没有的卡顿和断连（发生连接错误）。\n30 号晚上和 31 日上午 (尤其后者)，都有出现开一把 \u003cstrong\u003e中途必掉线\u003c/strong\u003e 的情况，很令人难过（主要是对于对手太不礼貌了，弄得像是打不过就拔网线一样）。中途掉线率几乎是 100%，不是所有节点都如此 (不过，三个“最优节点”似乎都有此问题，至少丢包卡顿是有的)。\u003c/p\u003e\n\u003cp\u003e注：丢包会造成卡顿的原因在于《任天堂明星大乱斗：特别版》的线上联机同步机制是 delay-based ，有一篇非常详细的文章，介绍了两种常见的格斗游戏线上模式的同步机制 (delay-based netcode and rollback netcode)，可以看这里：\u003ca href=\"https://arstechnica.com/gaming/2019/10/explaining-how-fighting-games-use-delay-based-and-rollback-netcode/\" rel=\"nofollow\"\u003ehttps://arstechnica.com/gaming/2019/10/explaining-how-fighting-games-use-delay-based-and-rollback-netcode/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e网络环境：江苏南京电信，有线网。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"截图：掉线惩罚\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/HfWVzb1.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e症状复现\u003c/h2\u003e\n\u003cp\u003e之前测试 UDP 代理转发的时候，整过一个发 UDP 包测试的脚本，就刚好借此来测试一下。测试脚本很简单：本地发出带序号的小 UDP 包到目标主机的高位端口，然后记录收到回应的时间间隔。超时丢包的包序号会被记录。\u003c/p\u003e\n\u003cp\u003e用来测试的脚本: \u003ca href=\"https://gist.github.com/MossTheFox/443725abc36a51fa6d9913cc94ae7cd9\" rel=\"nofollow\"\u003eGist 链接\u003c/a\u003e (写得很草率，别太较真)\u003c/p\u003e\n\u003cp\u003e这里 UU 加速器用的是路由器插件。选好加速节点之后，____ (防止服务被滥用，将主机加速的代理转移到电脑的过程略)。接下来在电脑端尝试测试连接稳定性。\u003c/p\u003e\n\u003cp\u003e下面是对于匹配的“最优节点”的发包测试结果。其中，第二轮测试使用的 15 ms 间隔是为了模拟真实游戏时的发包频率 (任天堂明星大乱斗特别版，P2P 联机，发包频率 1/60 s)。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"UDP 丢包测试\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/BZSe3VH.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e图片解释\u003c/h2\u003e\n\u003cp\u003e单看第一轮测试的丢包率，似乎还可以接受，没有出现集中丢包的情况。\u003c/p\u003e\n\u003cp\u003e但是，图中的第二轮测试在大约第三分钟时，出现了\u003cstrong\u003e所有的回程包全部丢失\u003c/strong\u003e的情况（服务端正常收到）。\u003c/p\u003e\n\u003cp\u003e这个现象在稍后又尝试测试了一下，没能复现，节点还是东京电信 6762 (服务端收到的 IP 与端口号: 103.140.240.179:23712)，倒是成就了梦寐以求的 0 丢包。但我的摸鱼时间已经没了啊（大悲）。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"同一节点的 0 丢包\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/KM0CGX5.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e另一组测试\u003c/h2\u003e\n\u003cp\u003e下图是另一组测试，测试时间是 2023-03-31 早晨 9:20 前后，是最早发现服务端可以正常收到包、回程包丢失现象的一次测试。这个测试中在回程包丢失之外，还有出现的就是较为严重的抖动。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"另一个“最优节点”的测试\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/9MR071K.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e其他节点\u003c/h2\u003e\n\u003cp\u003e有一些高延迟节点，似乎没有出现这种故障。但，由于任天堂大乱斗使用的是 delay-based netcode ，网络延迟会直接反映到操作输入延迟上，游玩体验大大降低。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"高延迟但是表现正常的节点\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/ljNZ4o2.png\"/\u003e\n\u003cem\u003e高延迟但是表现正常的节点\u003c/em\u003e\u003c/p\u003e\n\u003ch2\u003e解决方案？\u003c/h2\u003e\n\u003cp\u003e等官方修吧。\u003c/p\u003e\n\u003cp\u003e现在想打游戏的话，看样子得再开始之前甩个五分钟的 UDP 包看看。确定不掉线再去打线上。\u003c/p\u003e\n\u003cp\u003e裸连是不行的。国人玩家少，而且如果匹配到日本玩家，上面同样的目标 IP 的 UDP Ping 平均延迟在直连的情况下是 100 ms ，丢包 3%，你敢联机玩吗。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"游戏截图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/Yd2gJ8D.jpg\"/\u003e\u003c/p\u003e\n",
+      "Author": "MossFox",
+      "PubDate": "2023-03-31T05:48:20Z"
+    },
+    {
+      "Title": "分享一个 utools 上的 ChatGpt 插件-无限创建你的 Ai 好友 - 分享创造",
+      "Link": "https://www.v2ex.com/t/928741",
+      "Description": "\u003cp\u003e好工具要和大家分享\u003c/p\u003e\n\u003cp\u003eutools 插件市场搜索“chatgpt.好友”即可体验。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgse.com/i/ppyg654\" rel=\"nofollow\"\u003e\u003cimg alt=\"ppyg654.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/03/28/ppyg654.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e功能要点：\u003c/h2\u003e\n\u003cp\u003e无限创建基于(gpt-3.5-turbo 模型)的 \u003ca href=\"http://ChatGPT.Ai\" rel=\"nofollow\"\u003eChatGPT.Ai\u003c/a\u003e 好友\u003c/p\u003e\n\u003cp\u003e每个 Ai 好友都可以设置不同的参数、赋予不同的角色、指令。\u003c/p\u003e\n\u003cp\u003e每个好友都是你的独立工具和应用！！！\u003c/p\u003e\n\u003cp\u003e每个好友都是你的独立工具和应用！！！\u003c/p\u003e\n\u003cp\u003e每个好友都是你的独立工具和应用！！！\u003c/p\u003e\n\u003cp\u003e并且添加好友界面内附数百个角色指令案例可供参考。\u003c/p\u003e\n\u003ch2\u003e功能介绍：\u003c/h2\u003e\n\u003cp\u003e1 、所有 Ai 好友支持上下文连续对话、支持无限对话。\u003c/p\u003e\n\u003cp\u003e2 、每个 Ai 好友都可以独立设置角色、指令\u003c/p\u003e\n\u003cp\u003e3 、每个 Ai 都有独立的 6 个参数可调节、且支持临时调节参数\u003c/p\u003e\n\u003cp\u003e4 、每个 Ai 好友都有独立的对话记录\u003c/p\u003e\n\u003cp\u003e5 、支持删除部分对话、中断请求、重新发送请求\u003c/p\u003e\n\u003cp\u003e6 、ApiKey 和所有对话记录都经过加密之后再存储到 utools Db 中，无需担心 key 和对话数据泄漏。\u003c/p\u003e\n\u003cp\u003e7 、支持多线路切换：\u003c/p\u003e\n\u003cp\u003e(1).官方线路：需要🪜、需要 ApiKey （最稳定-推荐）\u003c/p\u003e\n\u003cp\u003e(2).免费线路：不稳定、不保证有效性\u003c/p\u003e\n\u003cp\u003e(3).无墙线路：作者自建代理，安全可靠。需要 ApiKey ，免翻墙。\u003c/p\u003e\n\u003cp\u003e(4).私有代理：支持输入自己的无墙 api 地址或免费 api 地址，独享私有代理。\u003c/p\u003e\n\u003cp\u003e🔐 当切换到免费线路时会自动从请求中排除你的 ApiKey ，保证你的 key 不会泄漏。\u003c/p\u003e\n\u003cp\u003e8 、支持流式输出：网络稳定的情况(你懂得) 再复杂的提问都可以达到 Ai 秒回消息。不过近期 openai 官网的 api 不太稳定，时快时慢。\u003c/p\u003e\n\u003cp\u003e9 、支持官网风格、聊天风格切换\u003c/p\u003e\n\u003cp\u003e10 、支持暗黑主题切换\u003c/p\u003e\n\u003cp\u003e11 、支持 enter 和 ctrl+enter 发送方式切换\u003c/p\u003e\n\u003cp\u003e12 、Ai 好友列表支持隐藏、收缩、展开 三种状态\u003c/p\u003e\n\u003cp\u003e13 、Ai 生成内容经过格式优化：\u003c/p\u003e\n\u003cp\u003e自动将网址转为链接、自动代码高亮、自动转换数学公式、自动格式化列表、表格(如有更多格式需求可以提)\u003c/p\u003e\n\u003cp\u003e14 、和 Ai 聊天，好友自动置顶，支持简拼模糊搜索好友、自动滚动到页面底部、自动聚焦输入框\u003c/p\u003e\n\u003cp\u003e15 、支持从 utools 主搜索框输入内容快速向 Ai 发送消息\u003c/p\u003e\n\u003cp\u003e16 、头像设置：内置几十个精美头像，支持上传头像、文字头像。\u003c/p\u003e\n\u003cp\u003e17 、支持甜美女声 Ai 语音播报功能：在 ai 翻译、朗诵长文时比较好用。\u003c/p\u003e\n\u003cp\u003e18 、支持导出当前情景所有对话，可导出（图片、Markdown 、HTML 、PDF ）\u003c/p\u003e\n\u003ch2\u003e使用说明\u003c/h2\u003e\n\u003cp\u003e1 、基本的功能使用在插件中都有提示信息\u003c/p\u003e\n\u003cp\u003e2 、Ai.小助手 就是通用的 chatgpt 模型，不可删除\u003c/p\u003e\n\u003cp\u003e3 、鼠标右键点击 Ai 好友即可编辑、删除、置顶 Ai 好友。\u003c/p\u003e\n\u003cp\u003e4 、Ai 回复消息时，工具栏中间的眨眼睛机器人是中断请求按钮。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgse.com/i/ppygBrV\" rel=\"nofollow\"\u003e\u003cimg alt=\"ppygBrV.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/03/28/ppygBrV.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgse.com/i/ppyg0K0\" rel=\"nofollow\"\u003e\u003cimg alt=\"ppyg0K0.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/03/28/ppyg0K0.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgse.com/i/ppygyaF\" rel=\"nofollow\"\u003e\u003cimg alt=\"ppygyaF.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/03/28/ppygyaF.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgse.com/i/ppygsVU\" rel=\"nofollow\"\u003e\u003cimg alt=\"ppygsVU.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/03/28/ppygsVU.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgse.com/i/ppygR2R\" rel=\"nofollow\"\u003e\u003cimg alt=\"ppygR2R.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/03/28/ppygR2R.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgse.com/i/ppyga2n\" rel=\"nofollow\"\u003e\u003cimg alt=\"ppyga2n.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/03/28/ppyga2n.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgse.com/i/ppyggPJ\" rel=\"nofollow\"\u003e\u003cimg alt=\"ppyggPJ.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/03/28/ppyggPJ.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgse.com/i/ppyg2G9\" rel=\"nofollow\"\u003e\u003cimg alt=\"ppyg2G9.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/03/28/ppyg2G9.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgse.com/i/ppygdvq\" rel=\"nofollow\"\u003e\u003cimg alt=\"ppygdvq.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/03/28/ppygdvq.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "lidage",
+      "PubDate": "2023-03-31T05:45:28Z"
+    },
+    {
+      "Title": "人事觉得我们软件团队能力不行，老板觉得我们朝九晚五不是程序员该干的事情。能不能毁灭: ) - 程序员",
+      "Link": "https://www.v2ex.com/t/928740",
+      "Description": "\u003cp\u003e该上线的功能都在 deadline 前上了。该修的 bug 也都及时修了。狗人事。\u003c/p\u003e\n",
+      "Author": "Renco",
+      "PubDate": "2023-03-31T05:45:19Z"
+    },
+    {
+      "Title": "QQ 邮箱新版界面怎么换回旧版 - 全球工单系统",
+      "Link": "https://www.v2ex.com/t/928739",
+      "Description": "\u003cp\u003e切换成英文再换回中文界面会保持新版，，所以怎么变回旧版。。。。\u003c/p\u003e\n",
+      "Author": "wdssmq",
+      "PubDate": "2023-03-31T05:43:05Z"
+    },
+    {
       "Title": "前端开发妹子，曾在鹅厂 4 年，区块链 1 年，迫于生存求职~ - 求职",
       "Link": "https://www.v2ex.com/t/928738",
       "Description": "React 、Vue 、Vue3 都用过。\u003cbr /\u003e英语很好，跟老外交流没问题。\u003cbr /\u003e产品型程序员，接过一句话需求并很好地 web 工具化了。\u003cbr /\u003e微信 a2F0aHlsb3ZlbW9tbw==\u003cbr /\u003e\u003cbr /\u003e今年行情不大好，也欢迎大家交流交流，救救孩子吧 T_T",
@@ -172,13 +200,6 @@
       "PubDate": "2023-03-31T03:19:05Z"
     },
     {
-      "Title": "v2rayN 这个客户端能不能加入普通的 http 代理？ - 问与答",
-      "Link": "https://www.v2ex.com/t/928708",
-      "Description": "\u003cp\u003e启用后直接走那个代理 不再经过本地 v2ray\u003cbr/\u003e\n目前看菜单里添加里没有\u003cbr/\u003e\n不知道有没有这样结合起来的客户端？   \u003c/p\u003e\n\u003cp\u003e全局性的 不只是给浏览器用\u003c/p\u003e\n",
-      "Author": "azev",
-      "PubDate": "2023-03-31T03:14:35Z"
-    },
-    {
       "Title": "iOS 上的银行 app 可以通过 nfc 读身份证，但 iOS nfc 标签功能为什么又不读身份证？ - Apple",
       "Link": "https://www.v2ex.com/t/928707",
       "Description": "",
@@ -226,6 +247,13 @@
       "Description": "\u003cp\u003e预算 1000 以内，接入设备暂定有光猫，路由，主机。主机 7x24 小时开机，闲时功耗大约在 60W 左右峰值功耗估计在 80-100W 之间，路由器是红米 AX6000 功耗不知道，光猫功耗也不知道，后续可能还需要接入一个交换机，没接触过 UPS ，各位 V 友有啥推荐吗？\u003c/p\u003e\n",
       "Author": "lingeo",
       "PubDate": "2023-03-31T02:54:43Z"
+    },
+    {
+      "Title": "v2rayN 这个客户端能不能加入普通的 http 代理？ - 问与答",
+      "Link": "https://www.v2ex.com/t/928708",
+      "Description": "\u003cp\u003e启用后直接走那个代理 不再经过本地 v2ray\u003cbr/\u003e\n目前看菜单里添加里没有\u003cbr/\u003e\n不知道有没有这样结合起来的客户端？   \u003c/p\u003e\n\u003cp\u003e全局性的 不只是给浏览器用\u003c/p\u003e\n",
+      "Author": "azev",
+      "PubDate": "2023-03-31T03:14:35Z"
     },
     {
       "Title": "关于 JavaScript 中 stream 的一些疑惑 - 程序员",
