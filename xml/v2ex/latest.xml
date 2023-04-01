@@ -4,18 +4,39 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>[分享] Colossal-AI 在消费级硬件上进行大模型训练，用更少 GPU 显存训练更大的模型 - 程序员</title>
+      <link>https://www.v2ex.com/t/928927</link>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;地址 &lt;a href=&#34;https://github.com/hpcaitech/ColossalAI&#34; rel=&#34;nofollow&#34;&gt;https://github.com/hpcaitech/ColossalAI&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;让 AI 大模型更低成本、方便易用、高效扩展。这个开源的分布式 AI 训练组件库能极大的降低文本和图像训练的硬件成本，在消费级硬件上进行大模型训练。个人 AI 时代可能要加速到来了&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>king888</author>
+      <pubDate>01 Apr 2023 01:45:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>求推荐个千兆路由器 - 问与答</title>
+      <link>https://www.v2ex.com/t/928925</link>
+      <description>最近家里刚装完宽带（电信），差个好点的路由器，求各位朋友推荐个 500 以内的路由器</description>
+      <author>di1012</author>
+      <pubDate>01 Apr 2023 01:29:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教各位路由器开启 ipv6 后 Pixel 连上 WIFI 后不断重连是什么问题呢？ - 问与答</title>
+      <link>https://www.v2ex.com/t/928924</link>
+      <description>&lt;p&gt;最近给 Pixel 恢复了一下出厂设置就变成这样了，Captive Portal Server 已设置为国内可访问的地址。 路由器不开启 ipv6 时一切正常，开启 ipv6 后 Pixel 连上 WIFI 并获取到 ipv6 地址后就会断开 WIFI ， 然后又会自动连接，并不断重复， 路由器上开启梯子 ( 仅支持 ipv4 ) 后则不会出现这个问题（这个时候 Pixel 拥有 ipv6 地址），大家知道这是什么问题吗？&lt;/p&gt;&#xA;</description>
+      <author>Danswerme</author>
+      <pubDate>01 Apr 2023 01:26:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>Copilot 是修改了地区检测方式么 - GitHub Copilot</title>
+      <link>https://www.v2ex.com/t/928923</link>
+      <description>&lt;p&gt;Copilot ，无论在 VSCode 里面还是全局代理都无法使用，报错信息如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;[INFO] [auth] [2023-04-01T01:19:36.228Z] Invalid copilot token: missing token: 403 &#xA;[ERROR] [default] [2023-04-01T01:19:36.229Z] GitHub Copilot could not connect to server. Extension activation failed: &#34;At this time, Copilot is not available in your location&#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这是它使用其他方式检测代理，还是我代理使用不对&lt;/p&gt;&#xA;</description>
+      <author>q378648220</author>
+      <pubDate>01 Apr 2023 01:22:39 +0000</pubDate>
+    </item>
+    <item>
       <title>Javascript 之奇技淫巧 - 如何模拟实现 `super` 访问父类方法的功能(与小学三年级的 ChatGPT 一起学 JS 编程) - JavaScript</title>
       <link>https://www.v2ex.com/t/928922</link>
       <description>&lt;p&gt;心智为 9 岁的 ChatGPT 大约相当于我们小学 3 年级的学生,所以让我们与小学 3 年级的 ChatGPT 一起来深入学习编程吧.&lt;/p&gt;&#xA;&lt;p&gt;下面是对 ChatGPT 的第一次提问:&lt;/p&gt;&#xA;&lt;p&gt;你知道吗?编写一个 js 函数模拟实现 &lt;code&gt;super&lt;/code&gt; 访问父类方法的功能有几种方法?哪一种方法从语法上最接近原生&lt;code&gt;super&lt;/code&gt;?&lt;/p&gt;&#xA;&lt;p&gt;要求:该函数的调用方式要从语法上尽可能的接近原生&lt;code&gt;super&lt;/code&gt;的调用方式,实现尽量简洁明了.&#xA;其中约定实现的函数名以及函数签名(返回值根据具体实现方式而定)为:  &lt;code&gt;getSuper(instance: Object)&lt;/code&gt;&lt;/p&gt;&#xA;&lt;h2&gt;ChatGPT 的第一次回答&lt;/h2&gt;&#xA;&lt;p&gt;实现 &lt;code&gt;super&lt;/code&gt; 访问父类方法的功能有以下几种方法:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;使用 &lt;code&gt;Object.getPrototypeOf&lt;/code&gt; 和 &lt;code&gt;Object.getOwnPropertyDescriptor&lt;/code&gt; 方法来获取父类的属性描述符，从而获取父类方法，并使用 &lt;code&gt;Function.prototype.call&lt;/code&gt; 方法来调用该方法:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function getSuper(instance) {&#xA;  const proto = Object.getPrototypeOf(instance);&#xA;  const descriptor = Object.getOwnPropertyDescriptor(proto, arguments.callee.caller.name);&#xA;  if (descriptor) {&#xA;    const superFunc = descriptor.value;&#xA;    return function(...args) {&#xA;      return superFunc.call(instance, ...args);&#xA;    };&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;使用原型链&#xA;&lt;code&gt;Object.getPrototypeOf()&lt;/code&gt; 和 &lt;code&gt;Reflect.getPrototypeOf()&lt;/code&gt; 都可以获取原型对象，但是 &lt;code&gt;Reflect.getPrototypeOf()&lt;/code&gt; 可以在 Proxy 对象上获取正确的原型对象，因此使用 &lt;code&gt;Reflect.getPrototypeOf()&lt;/code&gt; 可以增强代码的兼容性。具体实现代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function getSuper(instance) {&#xA;  const prototype = Reflect.getPrototypeOf(instance);&#xA;  return function(methodName, ...args) {&#xA;    const parentPrototype = Reflect.getPrototypeOf(prototype);&#xA;    const parentMethod = parentPrototype[methodName];&#xA;    if (typeof parentMethod === &#39;function&#39;) {&#xA;      return parentMethod.call(instance, ...args);&#xA;    }&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;使用 ES6 的 &lt;code&gt;Proxy&lt;/code&gt; 对象来代理子类实例的属性访问和方法调用。当子类实例的属性或方法不存在时，通过代理对象访问父类实例的属性或方法:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function getSuper(instance) {&#xA;  return new Proxy(instance, {&#xA;    get(target, prop) {&#xA;      if (prop in target) {&#xA;        return target[prop];&#xA;      } else if (prop in Object.getPrototypeOf(target)) {&#xA;        const superProp = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(target), prop);&#xA;        if (superProp.hasOwnProperty(&#39;value&#39;)) {&#xA;          return (...args) =&amp;gt; superProp.value.call(target, ...args);&#xA;        } else {&#xA;          return superProp.get.call(target);&#xA;        }&#xA;      }&#xA;    }&#xA;  });&#xA;}&#xA;&#xA;class Parent {&#xA;  constructor() {&#xA;    this.parentProperty = &#39;parent property&#39;;&#xA;  }&#xA;  parentMethod() {&#xA;    return &#39;parent method&#39;;&#xA;  }&#xA;}&#xA;&#xA;class Child extends Parent {&#xA;  constructor() {&#xA;    super();&#xA;    this.childProperty = &#39;child property&#39;;&#xA;  }&#xA;  childMethod() {&#xA;    const superMethod = getSuper(this).parentMethod;&#xA;    return `child method calling parent method: ${superMethod()}`;&#xA;  }&#xA;}&#xA;&#xA;const childInstance = new Child();&#xA;console.log(childInstance.childMethod()); // Output: &#34;child method calling parent method: parent method&#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;样例类:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;class Root {&#xA;  constructor(name) {&#xA;    this.name = name;&#xA;  }&#xA;  hi(n) {&#xA;    console.log(`hi ${n} ${this.name} from Root`);&#xA;  }&#xA;}&#xA;&#xA;class A extends Root {&#xA;  hi() {&#xA;    console.log(`hi from A`)&#xA;    super.hi(&#34;here&#34;) //replace this&#xA;}&#xA;&#xA;let a = new A(&#39;Mike&#39;)&#xA;a.hi(&#39;here&#39;) // print &#39;hi here from A&#39; and &#39;hi Mike from Root&#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;引导提问 1&lt;/h2&gt;&#xA;&lt;p&gt;ChatGPT, 你之前的回答中各个方法中都存在问题,思考下.&lt;/p&gt;&#xA;&lt;p&gt;那么,如何实现 &lt;code&gt;super&lt;/code&gt; 访问父类方法的功能,你们怎么看?&lt;/p&gt;&#xA;</description>
       <author>riceball</author>
       <pubDate>01 Apr 2023 01:13:15 +0000</pubDate>
-    </item>
-    <item>
-      <title>Surge 5 for Mac 5 人车 - Surge</title>
-      <link>https://www.v2ex.com/t/928921</link>
-      <description>&lt;p&gt;5 人车还差一位，140rmb ，每两年一次大版本付费更新，更新费用 5 人平分！需要的联系头像中电报！&lt;/p&gt;&#xA;</description>
-      <author>jiazhixin</author>
-      <pubDate>01 Apr 2023 01:10:55 +0000</pubDate>
     </item>
     <item>
       <title>三月挑战完成了吗？四月挑战是什么？ -  WATCH</title>
@@ -230,6 +251,13 @@
       <description>op 目前使用光猫+ikuai 的组合，ikuai 拨号，ipv6 分配方式为无状态&lt;br /&gt;当宽带重新拨号获取到新 IP 后，就会在设备里（ iOS/Mac/openwrt ）看到多个 ipv6 地址，应该是旧地址还没到期，此时就会无法正常访问 ipv6 服务&lt;br /&gt;当使用有状态分配 ipv6 ，租期设置很短（ 10 分钟），则基本不会出现 ipv6 无法使用的问题，重新拨号后可以立即更新 ipv6 地址&lt;br /&gt;不清楚这种现象是 ikuai 的 bug 还是 ipv6 尚不完善，有经验的大佬可以说一下吗</description>
       <author>kimigaooo</author>
       <pubDate>31 Mar 2023 14:09:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>Surge 5 for Mac 5 人车 - Surge</title>
+      <link>https://www.v2ex.com/t/928921</link>
+      <description>&lt;p&gt;5 人车还差一位，140rmb ，每两年一次大版本付费更新，更新费用 5 人平分！需要的联系头像中电报！&lt;/p&gt;&#xA;</description>
+      <author>jiazhixin</author>
+      <pubDate>01 Apr 2023 01:10:55 +0000</pubDate>
     </item>
     <item>
       <title>有没有广州联通宽带用户分享下体验？ - 宽带症候群</title>
