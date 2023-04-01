@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>AKS 和 godaddy 域名问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/929089</link>
+      <description>&lt;p&gt;楼主目前在使用 Azure 的 K8S 部署一些服务，目前域名托管在 godaddy ，现在希望 godaddy 托管的域名能请求到 aks 的 ingress 上，这个需要怎么做呢？&lt;/p&gt;&#xA;&lt;p&gt;目前看文档是走了个&lt;code&gt;loadBalancerIP&lt;/code&gt; 的 service 方案，但这样就还需要自己维护一个反向代理，有没有 ingress 的方案呢？&lt;/p&gt;&#xA;&lt;p&gt;以及目前还希望把域名的&lt;code&gt;所有&lt;/code&gt;（是*通配符的所有）子域名映射到一个 K8S 的 service ，希望统一做一个证书，这个可以实现么？&lt;/p&gt;&#xA;</description>
+      <author>annoygaga</author>
+      <pubDate>01 Apr 2023 17:34:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>召唤喜欢 F# 编程语言的同人～ - 程序员</title>
+      <link>https://www.v2ex.com/t/929088</link>
+      <description>&lt;p&gt;可以潜水；深浅话题皆可谈；尽量不要跑题；尊重彼此。还有一个要求，不要对英文有抵触，因为这里会时不时分享英文资料。&lt;/p&gt;&#xA;&lt;p&gt;F# 微信群：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;iH4t9V.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.328888.xyz/2023/04/02/iH4t9V.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>gowl</author>
+      <pubDate>01 Apr 2023 17:29:35 +0000</pubDate>
+    </item>
+    <item>
       <title>[原创] 一行 Linux 指令显示 OpenAI KEY 的余额和有效期 - 程序员</title>
       <link>https://www.v2ex.com/t/929087</link>
       <description>&lt;p&gt;查询 OpenAI KEY 余额一直不方便。花了些时间写了一行代码，可以直接输出余额和有效期。大家可以试试&lt;/p&gt;&#xA;&lt;h3&gt;一行 Linux 指令直接显示 OpenAI KEY 的余额和有效期&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;curl -s -H &#34;Authorization: Bearer [OpenAI KEY]&#34;  https://api.openai.com/dashboard/billing/credit_grants | python3 -c &#34;import sys, json, datetime; data = json.load(sys.stdin); print(data if &#39;total_granted&#39; not in data else (&#39;总 金 额：%s\n 已 使 用：%s\n 剩余金额：%s\n 截至日期：%s&#39; % (data[&#39;total_granted&#39;],data[&#39;total_used&#39;],data[&#39;total_available&#39;],datetime.datetime.fromtimestamp(data[&#39;grants&#39;][&#39;data&#39;][0][&#39;expires_at&#39;]))));&#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;在 ubuntu/debian 上测试 OK 。输出结果的样式是&lt;/h3&gt;&#xA;&lt;p&gt;总 金 额：18.0&lt;br/&gt;&#xA;已 使 用：2.28&lt;br/&gt;&#xA;剩余金额：15.72&lt;br/&gt;&#xA;截至日期：2023-06-01 08:00:00  &lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;运行前可以先 curl &lt;a href=&#34;https://api.openai.com/cdn-cgi/trace&#34; rel=&#34;nofollow&#34;&gt;https://api.openai.com/cdn-cgi/trace&lt;/a&gt; 检查 IP 是否符合 OpenAI 要求&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h3&gt;需要通过 socks5 连接 OpenAI API ，使用以下指令&lt;/h3&gt;&#xA;&lt;p&gt;先检查访问 openai api 的 IP 地址&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;curl --socks5-hostname [socks5-ip]:[port] https://api.openai.com/cdn-cgi/trace &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;再运行查询命令：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;curl -s --socks5-hostname [socks5-ip]:[port] -H &#34;Authorization: Bearer [OpenAI KEY]&#34;  https://api.openai.com/dashboard/billing/credit_grants  |  python3 -c &#34;import sys, json, datetime; data = json.load(sys.stdin); print(data if &#39;total_granted&#39; not in data else (&#39;总 金 额：%s\n 已 使 用：%s\n 剩余金额：%s\n 截至日期：%s&#39; % (data[&#39;total_granted&#39;],data[&#39;total_used&#39;],data[&#39;total_available&#39;],datetime.datetime.fromtimestamp(data[&#39;grants&#39;][&#39;data&#39;][0][&#39;expires_at&#39;]))));&#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如果 windows 安装了 python3 ，这行命令也是适用的。&lt;/p&gt;&#xA;</description>

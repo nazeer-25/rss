@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "AKS 和 godaddy 域名问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/929089",
+      "Description": "\u003cp\u003e楼主目前在使用 Azure 的 K8S 部署一些服务，目前域名托管在 godaddy ，现在希望 godaddy 托管的域名能请求到 aks 的 ingress 上，这个需要怎么做呢？\u003c/p\u003e\n\u003cp\u003e目前看文档是走了个\u003ccode\u003eloadBalancerIP\u003c/code\u003e 的 service 方案，但这样就还需要自己维护一个反向代理，有没有 ingress 的方案呢？\u003c/p\u003e\n\u003cp\u003e以及目前还希望把域名的\u003ccode\u003e所有\u003c/code\u003e（是*通配符的所有）子域名映射到一个 K8S 的 service ，希望统一做一个证书，这个可以实现么？\u003c/p\u003e\n",
+      "Author": "annoygaga",
+      "PubDate": "2023-04-01T17:34:01Z"
+    },
+    {
+      "Title": "召唤喜欢 F# 编程语言的同人～ - 程序员",
+      "Link": "https://www.v2ex.com/t/929088",
+      "Description": "\u003cp\u003e可以潜水；深浅话题皆可谈；尽量不要跑题；尊重彼此。还有一个要求，不要对英文有抵触，因为这里会时不时分享英文资料。\u003c/p\u003e\n\u003cp\u003eF# 微信群：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"iH4t9V.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.328888.xyz/2023/04/02/iH4t9V.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "gowl",
+      "PubDate": "2023-04-01T17:29:35Z"
+    },
+    {
       "Title": "[原创] 一行 Linux 指令显示 OpenAI KEY 的余额和有效期 - 程序员",
       "Link": "https://www.v2ex.com/t/929087",
       "Description": "\u003cp\u003e查询 OpenAI KEY 余额一直不方便。花了些时间写了一行代码，可以直接输出余额和有效期。大家可以试试\u003c/p\u003e\n\u003ch3\u003e一行 Linux 指令直接显示 OpenAI KEY 的余额和有效期\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003ecurl -s -H \"Authorization: Bearer [OpenAI KEY]\"  https://api.openai.com/dashboard/billing/credit_grants | python3 -c \"import sys, json, datetime; data = json.load(sys.stdin); print(data if 'total_granted' not in data else ('总 金 额：%s\\n 已 使 用：%s\\n 剩余金额：%s\\n 截至日期：%s' % (data['total_granted'],data['total_used'],data['total_available'],datetime.datetime.fromtimestamp(data['grants']['data'][0]['expires_at']))));\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e在 ubuntu/debian 上测试 OK 。输出结果的样式是\u003c/h3\u003e\n\u003cp\u003e总 金 额：18.0\u003cbr/\u003e\n已 使 用：2.28\u003cbr/\u003e\n剩余金额：15.72\u003cbr/\u003e\n截至日期：2023-06-01 08:00:00  \u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e运行前可以先 curl \u003ca href=\"https://api.openai.com/cdn-cgi/trace\" rel=\"nofollow\"\u003ehttps://api.openai.com/cdn-cgi/trace\u003c/a\u003e 检查 IP 是否符合 OpenAI 要求\u003c/strong\u003e\u003c/p\u003e\n\u003ch3\u003e需要通过 socks5 连接 OpenAI API ，使用以下指令\u003c/h3\u003e\n\u003cp\u003e先检查访问 openai api 的 IP 地址\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ecurl --socks5-hostname [socks5-ip]:[port] https://api.openai.com/cdn-cgi/trace \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e再运行查询命令：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ecurl -s --socks5-hostname [socks5-ip]:[port] -H \"Authorization: Bearer [OpenAI KEY]\"  https://api.openai.com/dashboard/billing/credit_grants  |  python3 -c \"import sys, json, datetime; data = json.load(sys.stdin); print(data if 'total_granted' not in data else ('总 金 额：%s\\n 已 使 用：%s\\n 剩余金额：%s\\n 截至日期：%s' % (data['total_granted'],data['total_used'],data['total_available'],datetime.datetime.fromtimestamp(data['grants']['data'][0]['expires_at']))));\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如果 windows 安装了 python3 ，这行命令也是适用的。\u003c/p\u003e\n",
