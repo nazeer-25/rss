@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Golang 怎么 Cancel 一个非循环子协程 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/929095",
+      "Description": "\u003cp\u003e业务背景是有一个每隔 10 秒执行一次的任务,这个任务会拿很多数据还有分析耗时会长一点,处理完后会给 chan 发数据.\n然后数据修改的时候会调用 context 的 cancel 去停止协程, 但是只能停止 10s 定时任务这个协程,不能把还在处理这个任务也停止掉,会出现脏数据传到 chan 里\n有没有什么好的方法能让他在执行一半的时候直接被 cancel 掉\u003c/p\u003e\n",
+      "Author": "hentailolicon",
+      "PubDate": "2023-04-01T19:47:29Z"
+    },
+    {
       "Title": "Linux 环境下，使用 swanctl 配置 strongswan 连接远端 IPsec 服务器 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/929094",
       "Description": "\u003cp\u003e新版都推荐 swanctl ，所以共享下 swanctl.conf 配置信息\u003cbr/\u003e\n目前看起来，比 ipsec.conf 的优点，就是把用户密码用在了一起\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eroot@myhost:/etc/strongswan.d# cat /etc/swanctl/conf.d/ec6.conf \nconnections {\n    xyz {\n        unique = never\n        version = 2\n        proposals = chacha20poly1305-sha512-x25519,aes256-sha512-modp2048,aes128-sha512-modp2048,aes256ccm96-sha384-modp2048,aes256-sha256-modp2048,aes128-sha256-modp2048,default\n        rekey_time = 0s\n        dpd_delay = 36s\n        fragmentation = accept\n        send_cert = never\n        send_certreq = yes\n        remote_addrs = xyz.domain.org\n        local_port = 4500\n        vips=0.0.0.0,::\n\n        local {\n            id = thinkpad\n            auth = eap-mschapv2\n            eap_id = myusername\n        }\n        remote {\n            id = ec6.andjs.org\n        }\n        children {\n            andjs {\n                local_ts = 10.17.0.0/24,2001:177:234:dee:1::/80\n                remote_ts = 0.0.0.0/0,::/0\n                rekey_time = 0s\n                dpd_action = clear\n                esp_proposals = chacha20poly1305,aes256gcm128,aes128gcm128,aes256ccm128,aes256\n            }\n        }\n    }\n}\n\nsecrets {\n    eap-u0 {\n        id = myusername\n        secret = \"mypassword\"\n    }\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",

@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Golang 怎么 Cancel 一个非循环子协程 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/929095</link>
+      <description>&lt;p&gt;业务背景是有一个每隔 10 秒执行一次的任务,这个任务会拿很多数据还有分析耗时会长一点,处理完后会给 chan 发数据.&#xA;然后数据修改的时候会调用 context 的 cancel 去停止协程, 但是只能停止 10s 定时任务这个协程,不能把还在处理这个任务也停止掉,会出现脏数据传到 chan 里&#xA;有没有什么好的方法能让他在执行一半的时候直接被 cancel 掉&lt;/p&gt;&#xA;</description>
+      <author>hentailolicon</author>
+      <pubDate>01 Apr 2023 19:47:29 +0000</pubDate>
+    </item>
+    <item>
       <title>Linux 环境下，使用 swanctl 配置 strongswan 连接远端 IPsec 服务器 - 宽带症候群</title>
       <link>https://www.v2ex.com/t/929094</link>
       <description>&lt;p&gt;新版都推荐 swanctl ，所以共享下 swanctl.conf 配置信息&lt;br/&gt;&#xA;目前看起来，比 ipsec.conf 的优点，就是把用户密码用在了一起&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;root@myhost:/etc/strongswan.d# cat /etc/swanctl/conf.d/ec6.conf &#xA;connections {&#xA;    xyz {&#xA;        unique = never&#xA;        version = 2&#xA;        proposals = chacha20poly1305-sha512-x25519,aes256-sha512-modp2048,aes128-sha512-modp2048,aes256ccm96-sha384-modp2048,aes256-sha256-modp2048,aes128-sha256-modp2048,default&#xA;        rekey_time = 0s&#xA;        dpd_delay = 36s&#xA;        fragmentation = accept&#xA;        send_cert = never&#xA;        send_certreq = yes&#xA;        remote_addrs = xyz.domain.org&#xA;        local_port = 4500&#xA;        vips=0.0.0.0,::&#xA;&#xA;        local {&#xA;            id = thinkpad&#xA;            auth = eap-mschapv2&#xA;            eap_id = myusername&#xA;        }&#xA;        remote {&#xA;            id = ec6.andjs.org&#xA;        }&#xA;        children {&#xA;            andjs {&#xA;                local_ts = 10.17.0.0/24,2001:177:234:dee:1::/80&#xA;                remote_ts = 0.0.0.0/0,::/0&#xA;                rekey_time = 0s&#xA;                dpd_action = clear&#xA;                esp_proposals = chacha20poly1305,aes256gcm128,aes128gcm128,aes256ccm128,aes256&#xA;            }&#xA;        }&#xA;    }&#xA;}&#xA;&#xA;secrets {&#xA;    eap-u0 {&#xA;        id = myusername&#xA;        secret = &#34;mypassword&#34;&#xA;    }&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
