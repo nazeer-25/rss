@@ -4,9 +4,16 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>[原创] 一行 Linux 指令显示 OpenAI KEY 的余额和有效期 - 程序员</title>
+      <link>https://www.v2ex.com/t/929087</link>
+      <description>&lt;p&gt;查询 OpenAI KEY 余额一直不方便。花了些时间写了一行代码，可以直接输出余额和有效期。大家可以试试&lt;/p&gt;&#xA;&lt;h3&gt;一行 Linux 指令直接显示 OpenAI KEY 的余额和有效期&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;curl -s -H &#34;Authorization: Bearer [OpenAI KEY]&#34;  https://api.openai.com/dashboard/billing/credit_grants | python3 -c &#34;import sys, json, datetime; data = json.load(sys.stdin); print(data if &#39;total_granted&#39; not in data else (&#39;总 金 额：%s\n 已 使 用：%s\n 剩余金额：%s\n 截至日期：%s&#39; % (data[&#39;total_granted&#39;],data[&#39;total_used&#39;],data[&#39;total_available&#39;],datetime.datetime.fromtimestamp(data[&#39;grants&#39;][&#39;data&#39;][0][&#39;expires_at&#39;]))));&#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;在 ubuntu/debian 上测试 OK 。输出结果的样式是&lt;/h3&gt;&#xA;&lt;p&gt;总 金 额：18.0&lt;br/&gt;&#xA;已 使 用：2.28&lt;br/&gt;&#xA;剩余金额：15.72&lt;br/&gt;&#xA;截至日期：2023-06-01 08:00:00  &lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;运行前可以先 curl &lt;a href=&#34;https://api.openai.com/cdn-cgi/trace&#34; rel=&#34;nofollow&#34;&gt;https://api.openai.com/cdn-cgi/trace&lt;/a&gt; 检查 IP 是否符合 OpenAI 要求&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h3&gt;需要通过 socks5 连接 OpenAI API ，使用以下指令&lt;/h3&gt;&#xA;&lt;p&gt;先检查访问 openai api 的 IP 地址&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;curl --socks5-hostname [socks5-ip]:[port] https://api.openai.com/cdn-cgi/trace &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;再运行查询命令：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;curl -s --socks5-hostname [socks5-ip]:[port] -H &#34;Authorization: Bearer [OpenAI KEY]&#34;  https://api.openai.com/dashboard/billing/credit_grants  |  python3 -c &#34;import sys, json, datetime; data = json.load(sys.stdin); print(data if &#39;total_granted&#39; not in data else (&#39;总 金 额：%s\n 已 使 用：%s\n 剩余金额：%s\n 截至日期：%s&#39; % (data[&#39;total_granted&#39;],data[&#39;total_used&#39;],data[&#39;total_available&#39;],datetime.datetime.fromtimestamp(data[&#39;grants&#39;][&#39;data&#39;][0][&#39;expires_at&#39;]))));&#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如果 windows 安装了 python3 ，这行命令也是适用的。&lt;/p&gt;&#xA;</description>
+      <author>yinmin</author>
+      <pubDate>01 Apr 2023 17:21:00 +0000</pubDate>
+    </item>
+    <item>
       <title>设备间接力出问题了怎么修复？ - Apple</title>
       <link>https://www.v2ex.com/t/929086</link>
-      <description>&lt;p&gt;前几天更新完 macOS （ 13.3 (22E252)） 和 iOS （(16.4(20E247))） 之后接力就出问题了，手机上访问网页 Mac 的 dock 栏不显示了，两个设备复制内容不能互相粘贴了。&lt;br/&gt;&#xA;已经尝试过开关手机和电脑上的接力，重启设备都不行。&lt;br/&gt;&#xA;有什么方法能重启一下两个设备间的接力吗？&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;前几天更新完 macOS(13.3 (22E252)) 和 iOS (16.4(20E247)) 之后接力就出问题了，手机上访问网页 Mac 的 dock 栏不显示了，两个设备复制内容不能互相粘贴了。&lt;br/&gt;&#xA;已经尝试过开关手机和电脑上的接力，重启设备都不行。&lt;br/&gt;&#xA;有什么方法能重启一下两个设备间的接力吗？&lt;br/&gt;&#xA;注：我是在公司更新的，下班回家后短暂的恢复了一段时间，可能是晚上睡觉电脑休眠了，第二天就又不行了。&lt;/p&gt;&#xA;</description>
       <author>christin</author>
       <pubDate>01 Apr 2023 17:06:49 +0000</pubDate>
     </item>

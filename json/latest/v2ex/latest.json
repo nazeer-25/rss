@@ -4,9 +4,16 @@
   "Description": "",
   "Items": [
     {
+      "Title": "[原创] 一行 Linux 指令显示 OpenAI KEY 的余额和有效期 - 程序员",
+      "Link": "https://www.v2ex.com/t/929087",
+      "Description": "\u003cp\u003e查询 OpenAI KEY 余额一直不方便。花了些时间写了一行代码，可以直接输出余额和有效期。大家可以试试\u003c/p\u003e\n\u003ch3\u003e一行 Linux 指令直接显示 OpenAI KEY 的余额和有效期\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003ecurl -s -H \"Authorization: Bearer [OpenAI KEY]\"  https://api.openai.com/dashboard/billing/credit_grants | python3 -c \"import sys, json, datetime; data = json.load(sys.stdin); print(data if 'total_granted' not in data else ('总 金 额：%s\\n 已 使 用：%s\\n 剩余金额：%s\\n 截至日期：%s' % (data['total_granted'],data['total_used'],data['total_available'],datetime.datetime.fromtimestamp(data['grants']['data'][0]['expires_at']))));\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e在 ubuntu/debian 上测试 OK 。输出结果的样式是\u003c/h3\u003e\n\u003cp\u003e总 金 额：18.0\u003cbr/\u003e\n已 使 用：2.28\u003cbr/\u003e\n剩余金额：15.72\u003cbr/\u003e\n截至日期：2023-06-01 08:00:00  \u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e运行前可以先 curl \u003ca href=\"https://api.openai.com/cdn-cgi/trace\" rel=\"nofollow\"\u003ehttps://api.openai.com/cdn-cgi/trace\u003c/a\u003e 检查 IP 是否符合 OpenAI 要求\u003c/strong\u003e\u003c/p\u003e\n\u003ch3\u003e需要通过 socks5 连接 OpenAI API ，使用以下指令\u003c/h3\u003e\n\u003cp\u003e先检查访问 openai api 的 IP 地址\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ecurl --socks5-hostname [socks5-ip]:[port] https://api.openai.com/cdn-cgi/trace \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e再运行查询命令：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ecurl -s --socks5-hostname [socks5-ip]:[port] -H \"Authorization: Bearer [OpenAI KEY]\"  https://api.openai.com/dashboard/billing/credit_grants  |  python3 -c \"import sys, json, datetime; data = json.load(sys.stdin); print(data if 'total_granted' not in data else ('总 金 额：%s\\n 已 使 用：%s\\n 剩余金额：%s\\n 截至日期：%s' % (data['total_granted'],data['total_used'],data['total_available'],datetime.datetime.fromtimestamp(data['grants']['data'][0]['expires_at']))));\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如果 windows 安装了 python3 ，这行命令也是适用的。\u003c/p\u003e\n",
+      "Author": "yinmin",
+      "PubDate": "2023-04-01T17:21:00Z"
+    },
+    {
       "Title": "设备间接力出问题了怎么修复？ - Apple",
       "Link": "https://www.v2ex.com/t/929086",
-      "Description": "\u003cp\u003e前几天更新完 macOS （ 13.3 (22E252)） 和 iOS （(16.4(20E247))） 之后接力就出问题了，手机上访问网页 Mac 的 dock 栏不显示了，两个设备复制内容不能互相粘贴了。\u003cbr/\u003e\n已经尝试过开关手机和电脑上的接力，重启设备都不行。\u003cbr/\u003e\n有什么方法能重启一下两个设备间的接力吗？\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e前几天更新完 macOS(13.3 (22E252)) 和 iOS (16.4(20E247)) 之后接力就出问题了，手机上访问网页 Mac 的 dock 栏不显示了，两个设备复制内容不能互相粘贴了。\u003cbr/\u003e\n已经尝试过开关手机和电脑上的接力，重启设备都不行。\u003cbr/\u003e\n有什么方法能重启一下两个设备间的接力吗？\u003cbr/\u003e\n注：我是在公司更新的，下班回家后短暂的恢复了一段时间，可能是晚上睡觉电脑休眠了，第二天就又不行了。\u003c/p\u003e\n",
       "Author": "christin",
       "PubDate": "2023-04-01T17:06:49Z"
     },
