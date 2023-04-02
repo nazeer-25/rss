@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Java 后端实习，还有什么互联网中小厂招人的吗？工资够房租+饭钱就行 - 酷工作</title>
+      <link>https://www.v2ex.com/t/929252</link>
+      <description>之前在大厂打杂实习过两个月（不过是 Go ），因为学校某些意外没办法干辞职了，回来发现已经错过暑期实习大部队。&lt;br /&gt;现在学校这边的麻烦事搞完了，还有招人的吗😭😭😭可以实习 4-5 个月。&lt;br /&gt;下面是自我介绍：&lt;br /&gt;普通 211 科班本硕，认真刷过 6.824 ，6.830 ，6.828 等公开课，mysql 、redis 、jvm 基础知识熟练，自认基础不错。&lt;br /&gt;Spring 那堆东西会用，有了解的程度，自认可以完成业务开发&lt;br /&gt;&lt;br /&gt;球球了给个机会吧</description>
+      <author>Tidusy</author>
+      <pubDate>02 Apr 2023 14:11:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>Restful API URL 设计问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/929251</link>
+      <description>&lt;p&gt;假如有一个博客系统，有用户管理模块，文章模块，评论模块，并且使用 JWT Token （可以解析出 userId ）&lt;/p&gt;&#xA;&lt;p&gt;那用户的文章列表、文章详情、文章的评论应该怎样设计呢？&lt;/p&gt;&#xA;&lt;p&gt;第一种：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;/users/:userId/posts&lt;/code&gt; UserController&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;/users/:userId/posts/:postId&lt;/code&gt; UserController&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;/users/:userId/posts/:postId/comments&lt;/code&gt; UserController&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;/users/:userId/posts/:postId/comments/:commentId&lt;/code&gt; UserController&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;也就是全都放在 UserController 里&lt;/p&gt;&#xA;&lt;p&gt;第二种：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;/posts&lt;/code&gt; PostController&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;/posts/:postId&lt;/code&gt; PostController&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;/posts/:postId/comments&lt;/code&gt; CommentController&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;/posts/:postId/comments/:commentId&lt;/code&gt; CommentController&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;第二种：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;/posts&lt;/code&gt; PostController&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;/posts/:postId&lt;/code&gt; PostController&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;/comments?post-id=xx&lt;/code&gt; CommentController&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;/comments/:commentId&lt;/code&gt; CommentController&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;第一种的话，因为 userId 是从用户的 headers.token 中解析出来的，所以我觉得没必要前面加上 &lt;code&gt;/users/:userId&lt;/code&gt;，除非需要管理功能，但是管理功能的 api 本来就是要跟用户端的分开来的。而且这样的话所有功能都放在 UserController 里了。&lt;/p&gt;&#xA;&lt;p&gt;第二种的话在 CommentController 里前缀是 &lt;code&gt;/posts&lt;/code&gt; 有点奇怪。&lt;/p&gt;&#xA;&lt;p&gt;所以个人偏向第三种。&lt;/p&gt;&#xA;</description>
+      <author>jerrry</author>
+      <pubDate>02 Apr 2023 14:11:02 +0000</pubDate>
+    </item>
+    <item>
       <title>请教大佬， nginx 反代时候是不是用 websocket 性能更好？ - NGINX</title>
       <link>https://www.v2ex.com/t/929249</link>
       <description>&lt;p&gt;使用 websocket:&lt;/p&gt;&#xA;&lt;p&gt;server {&#xA;listen  443 ssl http2;&#xA;............&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; &#x9;&#x9;   }&#xA;&#xA;location / {&#xA;           ............&#xA; &#x9;&#x9;proxy_http_version 1.1;&#xA; &#x9;&#x9;proxy_set_header Upgrade $http_upgrade;&#xA; &#x9;&#x9;proxy_set_header Connection &#34;upgrade&#34;;&#xA; &#x9;&#x9;   }&#xA;           .........&#xA; &#x9;&#x9;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;使用 http 1.1&lt;/p&gt;&#xA;&lt;p&gt;server {&#xA;listen  443 ssl http2;&#xA;............&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; &#x9;&#x9;   }&#xA;&#xA;location / {&#xA;           ............&#xA; &#x9;&#x9;proxy_http_version 1.1;&#xA; &#x9;&#x9;proxy_set_header Connection &#34;&#34;;&#xA; &#x9;&#x9;   }&#xA;           .........&#xA; &#x9;&#x9;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;上面两种应该都对吧？是不是第一张反代时候访问用 websocketgeng&#39;h 更好，1M 小水管想尽可能快一点。&lt;/p&gt;&#xA;</description>
