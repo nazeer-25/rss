@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "出网件 R6220 刷 openwrt - OpenWrt",
+      "Link": "https://www.v2ex.com/t/929173",
+      "Description": "家用，自己折腾写了不死 bread ，刷了 openwrt 就没用了，目前吃灰，也可以直接快递给你，没问题再 v 我 40\u003cbr /\u003e\u003cbr /\u003e [闲鱼]  \u003ca target=\"_blank\" href=\"https://m.tb.cn/h.UrTq5QT?tk=xI0tdkcOxDr\" rel=\"nofollow noopener\"\u003ehttps://m.tb.cn/h.UrTq5QT?tk=xI0tdkcOxDr\u003c/a\u003e CZ3457 「我在闲鱼发布了 [网件 R6220 ] 」\u003cbr /\u003e点击链接直接打开",
+      "Author": "Soutxx",
+      "PubDate": "2023-04-02T07:11:02Z"
+    },
+    {
+      "Title": "appletv 突然不能控制电视机开机了 - 问与答",
+      "Link": "https://www.v2ex.com/t/929172",
+      "Description": "是荣耀智慧屏，开始都可以直接 cec 控制显示器开机，用了一段时间就不能了，关机重启，重新接线都不行？有什么办法吗？",
+      "Author": "wwppp",
+      "PubDate": "2023-04-02T07:10:38Z"
+    },
+    {
+      "Title": "微信公众号实现 chatGPT 与 AI 绘画功能 - 分享创造",
+      "Link": "https://www.v2ex.com/t/929171",
+      "Description": "\u003cp\u003e基于 openai 开放的 api 接口（ GPT3.5+DALL.E ），将 chatGPT 和 AI 绘画功能集成到了微信公众号《知无涯知无不言》中，欢迎大家关注体验~\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://baobaojingling.cn/image/zhiwuyazhe.jpg\" rel=\"nofollow\"\u003e知无涯知无不言\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "skyseezhang",
+      "PubDate": "2023-04-02T07:06:15Z"
+    },
+    {
       "Title": "rust 写的程序，当配置数据在版本间存在不同的时候，怎么样存储比较妥善？ - 问与答",
       "Link": "https://www.v2ex.com/t/929170",
       "Description": "\u003cp\u003e比如两个版本间数据是这样的\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003e// For v0.0.1\npub struct AppConfig {\n    pub auto_start: bool,\n    pub version: String,\n}\n\n// For v0.0.2\npub struct AppConfig {\n    pub auto_start: bool,\n    pub language: String,\n    pub version: String,\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我当前的方案是选择用 toml 存配置，代码如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003eif let Some(proj_dirs) = ProjectDirs::from(\n        \"dev\",\n        \"\",\n        \"MyApp\"\n    ) {\n        let config_dir = proj_dirs.config_dir();\n\n        let config_file = fs::read_to_string(\n            config_dir.join(\"config.toml\")\n        );\n\n        let config: AppConfig = match config_file {\n            // 如果这里读到的是 v0.0.1 的数据，直接报错\n            Ok(file) =\u0026gt; toml::from_str(\u0026amp;file).unwrap(), \n            Err(_) =\u0026gt; AppConfig {\n                auto_start: true,\n                version: \"v0.0.2\".to_string(),\n            }\n        };\n\n        debug!(\"Initialize app config from {}\", config_dir.join(\"config.toml\").display());\n        return Ok(config);\n    } else {\n        return Err(\"failed to get app config\".to_string());\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e也有问过别人，有说用 Option 的，或者用 serde 的 field attributes 的\u003c/p\u003e\n\u003cp\u003eOption 的话，多版本好像还是会很痛苦，field attributes 估计更甚\u003c/p\u003e\n\u003cp\u003e所以有没有什么好一点的存取和解析的方法，能够在读写不同版本配置文件的时候，稍微方便点？\u003c/p\u003e\n",
