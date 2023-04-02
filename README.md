@@ -22,9 +22,8 @@ Report Issue: https://github.com/chyroc/grss/issues
 | Lobsters - Home | [JSON](./json/latest/lobste/home.json) | [RSS](./xml/lobste/home.xml) | [HTML](./html/lobste/home/index.html) |
 | 美团技术团队 - 文章 | [JSON](./json/latest/meituan_tech/article.json) | [RSS](./xml/meituan_tech/article.xml) | [HTML](./html/meituan_tech/article/index.html) |
 | 品玩 - 实时要闻 | [JSON](./json/latest/pingwest/status.json) | [RSS](./xml/pingwest/status.xml) | [HTML](./html/pingwest/status/index.html) |
-| Reddit - /r/tech: Technological innovations and changes. | [JSON](./json/latest/reddit/community/hot/tech.json) | [RSS](./xml/reddit/community/hot/tech.xml) | [HTML](./html/reddit/community/hot/tech/index.html) |
 | Reddit - /r/Technology | [JSON](./json/latest/reddit/community/hot/technology.json) | [RSS](./xml/reddit/community/hot/technology.xml) | [HTML](./html/reddit/community/hot/technology/index.html) |
-| Reddit - geek | [JSON](./json/latest/reddit/community/hot/geek.json) | [RSS](./xml/reddit/community/hot/geek.xml) | [HTML](./html/reddit/community/hot/geek/index.html) |
+| Reddit - 504 Gateway Time-out | [JSON](./json/latest/reddit/community/hot/geek.json) | [RSS](./xml/reddit/community/hot/geek.xml) | [HTML](./html/reddit/community/hot/geek/index.html) |
 | 少数派专栏 - 播客那些事 | [JSON](./json/latest/sspai/column/264.json) | [RSS](./xml/sspai/column/264.xml) | [HTML](./html/sspai/column/264/index.html) |
 | 少数派专栏 - 生产力周报 | [JSON](./json/latest/sspai/column/266.json) | [RSS](./xml/sspai/column/266.xml) | [HTML](./html/sspai/column/266/index.html) |
 | 少数派 - 推荐 | [JSON](./json/latest/sspai/index.json) | [RSS](./xml/sspai/index.xml) | [HTML](./html/sspai/index/index.html) |
@@ -42,7 +41,6 @@ Report Issue: https://github.com/chyroc/grss/issues
 | Hacker News - New Links | [JSON](./json/latest/ycombinator/newest.json) | [RSS](./xml/ycombinator/newest.xml) | [HTML](./html/ycombinator/newest/index.html) |
 | 知乎书店 - 新书抢鲜 | [JSON](./json/latest/zhihu/bookstore/newest.json) | [RSS](./xml/zhihu/bookstore/newest.xml) | [HTML](./html/zhihu/bookstore/newest/index.html) |
 | 竹白 - 察说花园 | [JSON](./json/latest/zhubai/post/chasays.json) | [RSS](./xml/zhubai/post/chasays.xml) | [HTML](./html/zhubai/post/chasays/index.html) |
-| 竹白 - 捕蛇者说 newsletter | [JSON](./json/latest/zhubai/post/pythonhunter.json) | [RSS](./xml/zhubai/post/pythonhunter.xml) | [HTML](./html/zhubai/post/pythonhunter/index.html) |
 | 竹白 - 产品鸭 | [JSON](./json/latest/zhubai/post/produck.json) | [RSS](./xml/zhubai/post/produck.xml) | [HTML](./html/zhubai/post/produck/index.html) |
 | 竹白 - Old-Ideas-Store | [JSON](./json/latest/zhubai/post/oistore.json) | [RSS](./xml/zhubai/post/oistore.xml) | [HTML](./html/zhubai/post/oistore/index.html) |
 | 竹白 - DecoHack周刊 | [JSON](./json/latest/zhubai/post/decohack.json) | [RSS](./xml/zhubai/post/decohack.xml) | [HTML](./html/zhubai/post/decohack/index.html) |
