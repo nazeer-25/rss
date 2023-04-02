@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "rust 写的程序，当配置数据在版本间存在不同的时候，怎么样存储比较妥善？ - 问与答",
+      "Link": "https://www.v2ex.com/t/929170",
+      "Description": "\u003cp\u003e比如两个版本间数据是这样的\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003e// For v0.0.1\npub struct AppConfig {\n    pub auto_start: bool,\n    pub version: String,\n}\n\n// For v0.0.2\npub struct AppConfig {\n    pub auto_start: bool,\n    pub language: String,\n    pub version: String,\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我当前的方案是选择用 toml 存配置，代码如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003eif let Some(proj_dirs) = ProjectDirs::from(\n        \"dev\",\n        \"\",\n        \"MyApp\"\n    ) {\n        let config_dir = proj_dirs.config_dir();\n\n        let config_file = fs::read_to_string(\n            config_dir.join(\"config.toml\")\n        );\n\n        let config: AppConfig = match config_file {\n            // 如果这里读到的是 v0.0.1 的数据，直接报错\n            Ok(file) =\u0026gt; toml::from_str(\u0026amp;file).unwrap(), \n            Err(_) =\u0026gt; AppConfig {\n                auto_start: true,\n                version: \"v0.0.2\".to_string(),\n            }\n        };\n\n        debug!(\"Initialize app config from {}\", config_dir.join(\"config.toml\").display());\n        return Ok(config);\n    } else {\n        return Err(\"failed to get app config\".to_string());\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e也有问过别人，有说用 Option 的，或者用 serde 的 field attributes 的\u003c/p\u003e\n\u003cp\u003eOption 的话，多版本好像还是会很痛苦，field attributes 估计更甚\u003c/p\u003e\n\u003cp\u003e所以有没有什么好一点的存取和解析的方法，能够在读写不同版本配置文件的时候，稍微方便点？\u003c/p\u003e\n",
+      "Author": "steins2628",
+      "PubDate": "2023-04-02T07:03:31Z"
+    },
+    {
+      "Title": "受不了网易云的各种 cover 翻唱，有啥替代品推荐 - 问与答",
+      "Link": "https://www.v2ex.com/t/929169",
+      "Description": "本来用了都快十年也懒得换，但最近每日推荐每次都要屏蔽三四个莫名其妙唱得跟翔一样的翻唱，甚至有不熟悉的歌还不知道是不是翻唱，反正听起来怪怪的\u003cbr /\u003e\u003cbr /\u003e有没有类似网易云每日推荐的，可以听风格类似的歌曲而不是重复听某首歌，就一个要求原唱或者经典翻唱，不要各种版本各种莫名其妙的翻唱",
+      "Author": "honmaple",
+      "PubDate": "2023-04-02T06:58:31Z"
+    },
+    {
       "Title": "低价 2.5 英寸 SATA3.0 接口的 SSD 固态哪个品牌相对靠谱一点 - 问与答",
       "Link": "https://www.v2ex.com/t/929168",
       "Description": "目前电商销售的 2.5 英寸 SATA3.0 接口的 SSD 固态 1TB 已经降到 300 左右，甚至有 200 左右的，主要品牌有“铨兴、梵想、移速、梅捷，朗科，京造......”，最近想升级一下几台古董电脑，想买几块 2.5 英寸固态硬盘，不想买到黑片，网上也没有相关芯片测试视频！请问有没有翻车的或者知道哪个品牌相对靠谱点？\u003cbr /\u003e\u003cbr /\u003e可能有人会说这么便宜还要啥自行车，但是我比较认同一位网友说的“作为产品只要你推向市场质量肯定是要保证的，哪怕是你免费送的也一样！不能因为你便宜就可以对客户的数据不负责任把。再说了现在的 ssd 颗粒就算是正片这个价也有利润”",
