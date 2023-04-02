@@ -4,9 +4,30 @@
   "Description": "",
   "Items": [
     {
+      "Title": "上海联通双宽带体验（场景配 59 低消） - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/929176",
+      "Description": "\u003cp\u003e家里一直在用上海联通的 59 低消宽带，并且 +40 升级到了 1000M 下 100M 上行和国际直通车。\u003c/p\u003e\n\u003cp\u003e在 @honeyjuice 大佬的\u003ca href=\"/t/917644\" rel=\"nofollow\"\u003e推销\u003c/a\u003e下，最近在家里又拉了一条上海联通的场景宽带。200M 上行 + 公网 IP 还是非常诱惑的（直通车开了后连 IPv6 都没了，要不都还能凑合凑合）。大上行卖 100 一个月这个价格几乎相当于不要钱（看看 IDC 托管的带宽费就知道我在说什么），\u003cdel\u003e不知道是不是上海联通的宽带滞销所以一直出这种王炸产品\u003c/del\u003e。\u003c/p\u003e\n\u003cp\u003e问了很久终于找到了可以把安装费免掉的客户经理。经理发来的截图里面几种场景都有，我最后选了主播宽带。场景宽带不能用已有宽带转，必须新办一个手机号（这个手机卡套餐很垃圾，当副卡都不值得），好在这个手机卡的月租每个月有个优惠会抵消掉所以吃灰也不心疼。合约期 12 个月，到期后不拆机就是一个月 100 块钱来续。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.v2ex.co/C7x4g4N3.jpeg\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.v2ex.co/H2d0U91z.jpeg\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.v2ex.co/7r19M2VM.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e第二天联通的销售人员亲自来到公司帮忙办理入网。交了 1200 块钱后当天下午联通工程师就打电话预约时间，晚上就到家里给装好了。\u003c/p\u003e\n\u003cp\u003e因为家里光信号比较强，联通小哥直接接了个 1 分 4 把两个 10G-EPON 光猫都接上了。我们这边 OLT 限速上行默认都是 100M ，新装的场景宽带测速也只能跑到 95M 。小哥在微信群里给后台发了消息改限速模版，过了 10 分钟后后台让重启光猫，再测试上行已经可以跑到 250M 了。\u003c/p\u003e\n\u003cp\u003e小哥走了后，把 1 分 4 去掉，直接用两根网线接到新的（场景宽带）光猫上，\u003ccode\u003eCUAdmin\u003c/code\u003e 大法进后台改成桥接后两个 LAN 口分别 PPPoE 拨号，可以场景宽带和低消宽带同时使用。上海联通根据我的测试是限制一个 MAC 地址只能拨号一次，所以用两个网口就可以同时拨两次。如果用同一个口，拨第二个账号会导致第一个断线。上海联通和电信都没有定时重播一说，只要路由器不关机一个月 IP 都不会变。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.v2ex.co/JG06BiI2.jpeg\"/\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026gt; interface/pppoe-client/monitor 0,1\n                 status: connected                   connected\n                 uptime: 2w1d2h12m18s                1w4d19h40m15s\n           active-links: 1                           1\n               encoding:                             \n           service-name:                             \n                ac-name: 0289-MAN-BAS2-XXX-ME60-X16 0289-MAN-BAS2-XXX-ME60-X16\n                 ac-mac: 70:8C:XX:XX:XX:XX           70:8C:XX:XX:XX:XX\n                    mtu: 1492                        1492\n                    mru: 1492                        1492\n          local-address: 223.XXX.XXX.XXX             100.66.XXX.XXX\n         remote-address: 223.XXX.XXX.XXX             100.66.160.1\n     local-ipv6-address: fe80::7                     \n    remote-ipv6-address: fe80::XXXX:XXXX:XXXX:XXXX\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e不过尝试把新光猫的 LOID 复制到旧光猫上看看能不能突破限速失败了，能注册但是网络不通，猜测是额外绑定了 SN 。反正新给的光猫也是 10G-EPON 的，就先不折腾了直接拔电吃灰。\u003c/p\u003e\n\u003cp\u003e这样做还有一个惊喜的地方是因为新的光猫去掉了 OLT 限速原来那条提速到 100M 的宽带现在也能够跑到 BRAS 限速模版的 120M 。实测两条宽带同时跑能跑到快 400M 上行，说明机房那边直接去掉了端口限速，而不是 @honeyjuice \u003ca href=\"/t/926969\" rel=\"nofollow\"\u003e帖子\u003c/a\u003e里说的限速到 200M 。还算比较厚道。\u003c/p\u003e\n\u003cp\u003e目前这个宽带相当于每个月 100 + 20 + 20 实现了 9929 + 公网 v4 + v6 + 400M 上行 + 2000M 下行。在 ROS 上做了分流以后用起来爽歪歪。因为有公网和大上行从外面连到家里访问资源也是飞快，以前每月给良心云的钱也省了。\u003c/p\u003e\n\u003cp\u003e最后是场景宽带上行测速镇楼：\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://www.speedtest.net/result/c/5a64f4ea-51e2-499e-99c0-ed311869629c.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "dndx",
+      "PubDate": "2023-04-02T07:19:12Z"
+    },
+    {
+      "Title": "招聘瓶颈 - 问与答",
+      "Link": "https://www.v2ex.com/t/929175",
+      "Description": "不太懂为啥现在招聘技术这么难，大家都不愿来实地办公吗，技术都去哪里啦",
+      "Author": "zz546454",
+      "PubDate": "2023-04-02T07:16:45Z"
+    },
+    {
+      "Title": "有没有把速干衣当秋衣、内衣穿的兄弟？ - 问与答",
+      "Link": "https://www.v2ex.com/t/929174",
+      "Description": "1.感觉速干衣当秋衣、内衣穿很舒服，而且运动出了汗，也能速干，不贴在身上\u003cbr /\u003e\u003cbr /\u003e2.有个困扰，就是速干衣打底的话，外面的中层  穿什么衣服（卫衣、毛衣等等）？？？    速干衣的领子会露出来，很丑~",
+      "Author": "JYL888",
+      "PubDate": "2023-04-02T07:12:54Z"
+    },
+    {
       "Title": "出网件 R6220 刷 openwrt - OpenWrt",
       "Link": "https://www.v2ex.com/t/929173",
-      "Description": "家用，自己折腾写了不死 bread ，刷了 openwrt 就没用了，目前吃灰，也可以直接快递给你，没问题再 v 我 40\u003cbr /\u003e\u003cbr /\u003e [闲鱼]  \u003ca target=\"_blank\" href=\"https://m.tb.cn/h.UrTq5QT?tk=xI0tdkcOxDr\" rel=\"nofollow noopener\"\u003ehttps://m.tb.cn/h.UrTq5QT?tk=xI0tdkcOxDr\u003c/a\u003e CZ3457 「我在闲鱼发布了 [网件 R6220 ] 」\u003cbr /\u003e点击链接直接打开",
+      "Description": "家用，自己折腾写了不死 bread ，刷了 openwrt 就没用了，目前吃灰，也可以直接快递给你，没问题再 v 我 40\u003cbr /\u003e\u003cbr /\u003e 已出，v 友闲鱼拍下",
       "Author": "Soutxx",
       "PubDate": "2023-04-02T07:11:02Z"
     },
