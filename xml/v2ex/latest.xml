@@ -4,9 +4,23 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>非常奇怪的问题 Java -jar 做成系统服务不会自动创建日志文件 - Java</title>
+      <link>https://www.v2ex.com/t/929537</link>
+      <description>&lt;p&gt;/usr/lib/systemd/system/userman.service&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;[Unit]&#xA;Description=userman webapp&#xA;After=network.target&#xA;After=mariadb.target&#xA;&#xA;[Service]&#xA;ExecStart=/usr/bin/java -jar /home/ec2-user/userman-0.0.1-SNAPSHOT.jar --spring.config.location=/home/ec2-user/config/&#xA;ExecStop=/bin/kill -15 ${MAINPID}&#xA;User=ec2-user&#xA;Restart=always&#xA;&#xA;[Install]&#xA;WantedBy=multi-user.target&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;当前登录 ec2-user 直接执行 &lt;code&gt;/usr/bin/java -jar /home/ec2-user/userman-0.0.1-SNAPSHOT.jar --spring.config.location=/home/ec2-user/config/&lt;/code&gt; 是可以在当前目录输出日志的。&lt;/p&gt;&#xA;&lt;p&gt;但是执行&lt;code&gt;sudo systemctl restart userman.service&lt;/code&gt;就不可以&lt;/p&gt;&#xA;&lt;p&gt;application.yml&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;logging:&#xA;  level:&#xA;    com.sk.userman: debug&#xA;  config: classpath:log4j2.xml&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>mafeifan</author>
+      <pubDate>03 Apr 2023 13:29:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>江苏联通 10 块升级的 1000M 的装好了，和电信比有点差别 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/929536</link>
+      <description>&lt;p&gt;1 电信换猫 联通不换&#xA;2 电信要光分要换端口 联通不换&#xA;好在联通打洞效比电信好&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;ibkQGH.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.328888.xyz/2023/04/03/ibkQGH.png&#34;/&gt;&#xA;&lt;img alt=&#34;ibk18F.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.328888.xyz/2023/04/03/ibk18F.png&#34;/&gt;&#xA;&lt;img alt=&#34;ibkYYQ.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.328888.xyz/2023/04/03/ibkYYQ.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>unpay</author>
+      <pubDate>03 Apr 2023 13:29:14 +0000</pubDate>
+    </item>
+    <item>
       <title>Spring RestTemplate Jackson 网络请求 json 类型匹配错误问题，是否有更优雅的解决方式？ - Java</title>
       <link>https://www.v2ex.com/t/929535</link>
-      <description>&lt;p&gt;以下代码意思：请求一个接口，要求返回 Result&amp;lt;GlobalUser&amp;gt;。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ResponseEntity&amp;lt;Result&amp;gt; response = restTemplate.exchange(url, HttpMethod.PUT, null, Result.class); //①&#xA;if (response.getStatusCode().is2xxSuccessful()){&#xA;&#x9;Result&amp;lt;GlobalUser&amp;gt; result = response.getBody(); &#xA;        if(result.getCode()==200){&#xA;    &#x9;    GlobalUser globalUser = result.getData(); //这行代码会出错&#xA;        }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;报错内容：java.util.LinkedHashMap cannot be cast to cn.timetr.server.bean.GlobalUser&#xA;也就是说，一个 json 对象给我匹配成键值对 HashMap 了，我估计是上面第一行代码①导致的。&lt;/p&gt;&#xA;&lt;p&gt;于是我想写成这样：ResponseEntity&amp;lt;Result&amp;lt;GlobalUser&amp;gt;&amp;gt; response = restTemplate.exchange(url, HttpMethod.PUT, null, Result&amp;lt;GlobalUser&amp;gt;.class);&#xA;但这样不行，Result&amp;lt;GlobalUser&amp;gt;.class 报错，不能这样写，但我想按这个思路寻求有何解？&#xA;当然不按这个思路，可以将报错代码用 Mapper 转换一下改成这样，GlobalUser globalUser = new ObjectMapper().convertValue(result.getData(), GlobalUser.class);，但这样就导致了每次都要转换一下并不优雅。&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;以下代码意思：请求一个接口，要求返回 Result&amp;lt;GlobalUser&amp;gt;。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ResponseEntity&amp;lt;Result&amp;gt; response = restTemplate.exchange(url, HttpMethod.PUT, null, Result.class); //①&#xA;if (response.getStatusCode().is2xxSuccessful()){&#xA;&#x9;Result&amp;lt;GlobalUser&amp;gt; result = response.getBody(); &#xA;        if(result.getCode()==200){&#xA;    &#x9;    GlobalUser globalUser = result.getData(); //这行代码会出错&#xA;        }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;报错内容：java.util.LinkedHashMap cannot be cast to cn.timetr.server.bean.GlobalUser&#xA;也就是说，一个 json 对象给我匹配成键值对 HashMap 了，我估计是上面第一行代码①导致的。&lt;/p&gt;&#xA;&lt;p&gt;于是我想写成这样：ResponseEntity&amp;lt;Result&amp;lt;GlobalUser&amp;gt;&amp;gt; response = restTemplate.exchange(url, HttpMethod.PUT, null, Result&amp;lt;GlobalUser&amp;gt;.class);&#xA;但这样不行，Result&amp;lt;GlobalUser&amp;gt;.class 报错，不能这样写，但我想按这个思路寻求有何解？&#xA;当然不按这个思路，可以将报错代码用 Mapper 转换一下改成这样，GlobalUser globalUser = new ObjectMapper().convertValue(result.getData(), GlobalUser.class);，但这样就导致了每次写相关代码都要手动转换一下并不优雅。&lt;/p&gt;&#xA;</description>
       <author>nnegier</author>
       <pubDate>03 Apr 2023 13:18:30 +0000</pubDate>
     </item>

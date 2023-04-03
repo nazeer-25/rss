@@ -4,9 +4,23 @@
   "Description": "",
   "Items": [
     {
+      "Title": "非常奇怪的问题 Java -jar 做成系统服务不会自动创建日志文件 - Java",
+      "Link": "https://www.v2ex.com/t/929537",
+      "Description": "\u003cp\u003e/usr/lib/systemd/system/userman.service\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e[Unit]\nDescription=userman webapp\nAfter=network.target\nAfter=mariadb.target\n\n[Service]\nExecStart=/usr/bin/java -jar /home/ec2-user/userman-0.0.1-SNAPSHOT.jar --spring.config.location=/home/ec2-user/config/\nExecStop=/bin/kill -15 ${MAINPID}\nUser=ec2-user\nRestart=always\n\n[Install]\nWantedBy=multi-user.target\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e当前登录 ec2-user 直接执行 \u003ccode\u003e/usr/bin/java -jar /home/ec2-user/userman-0.0.1-SNAPSHOT.jar --spring.config.location=/home/ec2-user/config/\u003c/code\u003e 是可以在当前目录输出日志的。\u003c/p\u003e\n\u003cp\u003e但是执行\u003ccode\u003esudo systemctl restart userman.service\u003c/code\u003e就不可以\u003c/p\u003e\n\u003cp\u003eapplication.yml\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003elogging:\n  level:\n    com.sk.userman: debug\n  config: classpath:log4j2.xml\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "mafeifan",
+      "PubDate": "2023-04-03T13:29:46Z"
+    },
+    {
+      "Title": "江苏联通 10 块升级的 1000M 的装好了，和电信比有点差别 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/929536",
+      "Description": "\u003cp\u003e1 电信换猫 联通不换\n2 电信要光分要换端口 联通不换\n好在联通打洞效比电信好\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"ibkQGH.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.328888.xyz/2023/04/03/ibkQGH.png\"/\u003e\n\u003cimg alt=\"ibk18F.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.328888.xyz/2023/04/03/ibk18F.png\"/\u003e\n\u003cimg alt=\"ibkYYQ.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.328888.xyz/2023/04/03/ibkYYQ.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "unpay",
+      "PubDate": "2023-04-03T13:29:14Z"
+    },
+    {
       "Title": "Spring RestTemplate Jackson 网络请求 json 类型匹配错误问题，是否有更优雅的解决方式？ - Java",
       "Link": "https://www.v2ex.com/t/929535",
-      "Description": "\u003cp\u003e以下代码意思：请求一个接口，要求返回 Result\u0026lt;GlobalUser\u0026gt;。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eResponseEntity\u0026lt;Result\u0026gt; response = restTemplate.exchange(url, HttpMethod.PUT, null, Result.class); //①\nif (response.getStatusCode().is2xxSuccessful()){\n\tResult\u0026lt;GlobalUser\u0026gt; result = response.getBody(); \n        if(result.getCode()==200){\n    \t    GlobalUser globalUser = result.getData(); //这行代码会出错\n        }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e报错内容：java.util.LinkedHashMap cannot be cast to cn.timetr.server.bean.GlobalUser\n也就是说，一个 json 对象给我匹配成键值对 HashMap 了，我估计是上面第一行代码①导致的。\u003c/p\u003e\n\u003cp\u003e于是我想写成这样：ResponseEntity\u0026lt;Result\u0026lt;GlobalUser\u0026gt;\u0026gt; response = restTemplate.exchange(url, HttpMethod.PUT, null, Result\u0026lt;GlobalUser\u0026gt;.class);\n但这样不行，Result\u0026lt;GlobalUser\u0026gt;.class 报错，不能这样写，但我想按这个思路寻求有何解？\n当然不按这个思路，可以将报错代码用 Mapper 转换一下改成这样，GlobalUser globalUser = new ObjectMapper().convertValue(result.getData(), GlobalUser.class);，但这样就导致了每次都要转换一下并不优雅。\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e以下代码意思：请求一个接口，要求返回 Result\u0026lt;GlobalUser\u0026gt;。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eResponseEntity\u0026lt;Result\u0026gt; response = restTemplate.exchange(url, HttpMethod.PUT, null, Result.class); //①\nif (response.getStatusCode().is2xxSuccessful()){\n\tResult\u0026lt;GlobalUser\u0026gt; result = response.getBody(); \n        if(result.getCode()==200){\n    \t    GlobalUser globalUser = result.getData(); //这行代码会出错\n        }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e报错内容：java.util.LinkedHashMap cannot be cast to cn.timetr.server.bean.GlobalUser\n也就是说，一个 json 对象给我匹配成键值对 HashMap 了，我估计是上面第一行代码①导致的。\u003c/p\u003e\n\u003cp\u003e于是我想写成这样：ResponseEntity\u0026lt;Result\u0026lt;GlobalUser\u0026gt;\u0026gt; response = restTemplate.exchange(url, HttpMethod.PUT, null, Result\u0026lt;GlobalUser\u0026gt;.class);\n但这样不行，Result\u0026lt;GlobalUser\u0026gt;.class 报错，不能这样写，但我想按这个思路寻求有何解？\n当然不按这个思路，可以将报错代码用 Mapper 转换一下改成这样，GlobalUser globalUser = new ObjectMapper().convertValue(result.getData(), GlobalUser.class);，但这样就导致了每次写相关代码都要手动转换一下并不优雅。\u003c/p\u003e\n",
       "Author": "nnegier",
       "PubDate": "2023-04-03T13:18:30Z"
     },
