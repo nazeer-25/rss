@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Spring RestTemplate Jackson 网络请求 json 类型匹配错误问题，是否有更优雅的解决方式？ - Java</title>
+      <link>https://www.v2ex.com/t/929535</link>
+      <description>&lt;p&gt;以下代码意思：请求一个接口，要求返回 Result&amp;lt;GlobalUser&amp;gt;。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ResponseEntity&amp;lt;Result&amp;gt; response = restTemplate.exchange(url, HttpMethod.PUT, null, Result.class); //①&#xA;if (response.getStatusCode().is2xxSuccessful()){&#xA;&#x9;Result&amp;lt;GlobalUser&amp;gt; result = response.getBody(); &#xA;        if(result.getCode()==200){&#xA;    &#x9;    GlobalUser globalUser = result.getData(); //这行代码会出错&#xA;        }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;报错内容：java.util.LinkedHashMap cannot be cast to cn.timetr.server.bean.GlobalUser&#xA;也就是说，一个 json 对象给我匹配成键值对 HashMap 了，我估计是上面第一行代码①导致的。&lt;/p&gt;&#xA;&lt;p&gt;于是我想写成这样：ResponseEntity&amp;lt;Result&amp;lt;GlobalUser&amp;gt;&amp;gt; response = restTemplate.exchange(url, HttpMethod.PUT, null, Result&amp;lt;GlobalUser&amp;gt;.class);&#xA;但这样不行，Result&amp;lt;GlobalUser&amp;gt;.class 报错，不能这样写，但我想按这个思路寻求有何解？&#xA;当然不按这个思路，可以将报错代码用 Mapper 转换一下改成这样，GlobalUser globalUser = new ObjectMapper().convertValue(result.getData(), GlobalUser.class);，但这样就导致了每次都要转换一下并不优雅。&lt;/p&gt;&#xA;</description>
+      <author>nnegier</author>
+      <pubDate>03 Apr 2023 13:18:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>问下 ie tab 插件如何避免使用授权超期 - 问与答</title>
+      <link>https://www.v2ex.com/t/929534</link>
+      <description>现在用 chrome 浏览器，偶尔会用下 ie 核心访问老网站，今天突然发现超出试用期了，大家谁知道如何继续免费试用么？本身用的次数也不多，但还不能没有，啊，谢谢</description>
+      <author>heliushao88</author>
+      <pubDate>03 Apr 2023 13:18:02 +0000</pubDate>
+    </item>
+    <item>
+      <title>社交关系处于劣势，如何改善？ - 问与答</title>
+      <link>https://www.v2ex.com/t/929533</link>
+      <description>&lt;p&gt;社交关系处于劣势，如何改善？&lt;/p&gt;&#xA;&lt;p&gt;现在有一种新型社交关系叫做搭子，就是肤浅的短期陪同玩伴，不挑男女。&#xA;我找过吃饭搭子、展会搭子、艺术展搭子、电影搭子、迪士尼搭子、动物园搭子、海洋馆搭子、节日游乐园搭子、剧本杀搭子、双人成行游戏搭子、王者游戏搭子等。被鸽率 70%是否愉快占比 50% 再联率 0%拉黑 2 个&lt;/p&gt;&#xA;&lt;p&gt;面对面和任何人（无差别男女老少各种性格各种身份熟人半熟人陌生人）说话，综合下来第一句的回复率是 40%，重复一遍的回复率是 50%，重复三遍也可能完全得不到回复。和同一个人在一起所有对话的被回复率在 60%，部分好人可能在 80%&lt;/p&gt;&#xA;&lt;p&gt;在声调、语气、礼仪、说话形式、精准匹配、为其所好等等类型都进行了很多尝试，像是我的发言被过滤了一样。总而言之就是，低人一等，无法被尊重，非常尴尬。&lt;/p&gt;&#xA;&lt;p&gt;可能原因猜测：&#xA;1.个人魅力和资历不够，和我交流对他们来说毫无意义。&#xA;2.和对方相似度过低，对方觉得我和他不是一类人，说不到一起。&#xA;3.我话太多。交流欲旺盛、因为没人和我说话导致见到人反而补偿性的话痨。&#xA;其他外在表现：&#xA;路人颜值（自我定位不好看不丑，身高体重都正常，但是现在平时都不爱化妆），&#xA;+声音难听（被一些游戏陌生人吐槽过，一起组队开麦后搭子都会逐渐闭麦，还愿意和我玩几局的都是闭麦玩，可见真的难听了，唯一有说好听都让我十分诧异是不是傻了或者奉承或者见鬼了），&#xA;+声音辨识度底（自学好长时间日语导致的发音有些混淆）&#xA;+行为举止粗糙（如果没人注意到我就整个身子散下来，发觉场合不太对才会学着调整，豪无优雅感）&#xA;+无个人成就或身份+无经济条件+逻辑思维不清晰+学习不好（一直都研究不透概率学还妄图研究博弈论，高考只能空着，现在还会阶段性梦到做题）+….&lt;/p&gt;&#xA;&lt;p&gt;———————————-&#xA;接下来再看这段成长经历描述，不用看者觉得，我也觉得…..&lt;/p&gt;&#xA;&lt;p&gt;————————————&lt;/p&gt;&#xA;&lt;p&gt;小时候被灌输了一个理念不要随波逐流，觉得标新立异很酷很潮，有时候就会做住逆反主流的行为和思想，久而久之就成了习惯和偏好。比如“不爱去人群聚集的地方，觉得很括噪”、“尝试一些别人没有尝试的东西，以凸显自己和别人不同”，有些甚至演化成了装逼行为。&lt;/p&gt;&#xA;&lt;p&gt;后来家境因故贫困，我发现这个性格很难活下去，心灵也静滞过一段时间。然后为了生存逐渐开始模仿性地学习普通人的言行，把自己伪装成一个有亲和力的人。&lt;/p&gt;&#xA;&lt;p&gt;至今依然被习惯影响着，比如“觉得钱很俗套”、“进行重复性内容是刻板行为”、“摆烂，似乎也很有个性”等等逃避现实，导致没有想方设法提升自己或者努力赚钱，现实狠狠地给我上了一课。没有经济能力=失去了几乎大半的交友资本。比如很多烧钱的爱好需要对等的身份，生活方式也不同，比如有个认识一个月逐渐高频互动的本地网友在我说准备买二手电瓶车和二手柜子之类的东西之后就默默和我断交了云云。&lt;/p&gt;&#xA;&lt;p&gt;即便如此到现在我还是不喜欢常见的 ktv 、酒吧、骑行等等，非常不合群，不爱走亲戚，不爱组团行动等等。原因可能是：意料之中的被冷落+浪费时间+不知道能获得什么好的感受+社交压力大+个人认为确实不好玩。&lt;/p&gt;&#xA;&lt;p&gt;而且还不爱网上聊天，觉得打字太累，端着手机打久了手真的疼，不是我虚或者娇情就是疼。小时候同学找我我都很久才注意到，隔空回复的结果就是对方的热情也被浇灭了。其实我和很多人说话都会斟词酌句，回复一句话可能要删掉好几遍，十分小心翼翼，不知道怎么回还会先放下手机想好久，想不出来过了一两个小时又弧了对方，让对方觉得我对他不重视。而如果对方是对我关怀的人，或者在我的舒适圈内，我则变得十分松懈和怠慢。&lt;/p&gt;&#xA;&lt;p&gt;觉得活该吧……。&lt;/p&gt;&#xA;&lt;p&gt;越来越交不到朋友。“硬聊 /强撩我自己都觉得尬，肯定不会用在别人身上”，所以主动方交给了对方。&#xA;现在有人对我好一点我都觉得是馈赠，不敢也不知道如何深入下去。我比划着接下来肯定要涉及他 /她的生活圈了，随着更多接触他们会发现我不好的地方越来越多，那还不如游离在他们的安全范围表面。&lt;/p&gt;&#xA;&lt;p&gt;或许面向另一个人可以说：你不用考虑那么多，做好自己就行。但是我太异常了，人是社会性生物，我不能这么一直单机下去。我的目标都不再是恋爱而是朋友。&lt;/p&gt;&#xA;&lt;p&gt;也有可能是我不经意地忽略了那些 90%愿意理我的人，但整体感受下来还是负面更多。或许我没有必要说那么多话，我以前的性格还挺高冷。&lt;/p&gt;&#xA;&lt;p&gt;或许我应该把自己训练成一个彬彬有礼的人设，现实中也接触过这种性格，像是从书里走出来似的。但是我怕获得不到正反馈，几年前斯巴达似的在 3 个月减下 35 斤，结果社交方面毫无优化，最多自己自信了点。而且要达到理想人设需要极高的学识，这也是难以完成的。&lt;/p&gt;&#xA;&lt;p&gt;也可能是环境原因，这个年龄已经找不到社交欲望强烈的一群人了，人家都有自己的家属要关心的事。其实在公司我发现了一个同类，在他身上看到了同样被排斥的特征。感觉他好像对我产生了同情，比如我一个人玩娱乐项目，但是吧，没有兴趣爱好重合，光靠同情是不能交朋友的。&lt;/p&gt;&#xA;&lt;p&gt;所以吧，求解。&lt;/p&gt;&#xA;</description>
+      <author>unii23i</author>
+      <pubDate>03 Apr 2023 13:11:23 +0000</pubDate>
+    </item>
+    <item>
       <title>淘宝上的静音室体验如何？ - 生活</title>
       <link>https://www.v2ex.com/t/929532</link>
       <description>&lt;p&gt;想送孩子学一个乐器：小提琴、二胡、唢呐、吉他、笛子之类的便于携带的乐器。&lt;/p&gt;&#xA;&lt;p&gt;但担心吵着邻居和家人，听说静音室不错，有人用过么，效果如何？&lt;/p&gt;&#xA;</description>
