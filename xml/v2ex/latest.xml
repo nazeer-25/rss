@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ChatGPT 客户端服务 - OpenAI</title>
+      <link>https://www.v2ex.com/t/929418</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chat.xabcai.com&#34; rel=&#34;nofollow&#34;&gt;https://chat.xabcai.com&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>xabcstack</author>
+      <pubDate>03 Apr 2023 06:36:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>小米 11 青春活力版刷 lineageos 成功，我来分享一些刷机踩坑经验 - Android</title>
+      <link>https://www.v2ex.com/t/929417</link>
+      <description>前文提要：&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://www.v2ex.com/t/928772&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.v2ex.com/t/928772&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;首先感谢大家的帮助，尤其是帖子里面几位兄弟无私的指点和回复。我现在刷好机了，分享一些踩坑的经验，希望下次刷机的同学能节约一些时间。&lt;br /&gt;&lt;br /&gt;之前刷 lineageos 不成功，我从网上随便下载了一个 miui 12.5 的 rom ，用官方的刷机工具恢复了机器。但我并没有放弃尝试，因为当初买这个机器时就是根据 lineageos device list 里面的机型买的。&lt;br /&gt;刷回到 miui 12.5 后，我继续刷 lineageos 最近的 19.1 ，刷入 boot.img 后还是无法进入 recovery 模式。&lt;br /&gt;根据官方文档说明，刷 19.1 必须要是 android 12 的版本。而我的 miui 12.5 是 android 11 。于是我在系统升级里面把 miui 升级到 13 ，android 版本升级到了 12 。&lt;br /&gt;这时我继续回去刷 lineagos ，但还是一样进不去 recovery 。本来在这时我快要放弃了，然后随便在 xda 找了个老的 lineageos 的 recovery 镜像刷入后发现能进 recovery 了。但版本很老，显示是 2021 年的版本了。这时我找到问题所在了：&lt;br /&gt;你必须刷入安卓版本为 12 的 miui 13 。 手动升级不行&lt;br /&gt;你必须刷入安卓版本为 12 的 miui 13 。 手动升级不行&lt;br /&gt;你必须刷入安卓版本为 12 的 miui 13 。 手动升级不行&lt;br /&gt;&lt;br /&gt;这时最新的 lineageos 19.1 的 recovery 能进入了，也能通过 adb sideload 刷入系统 zip 文件了。但事情到这里还没完，进入系统后发现 wifi 总是显示 connection limited ，但上网可以。这是因为 android 的 wifi 需要访问一个网址来确定网络是否正常。（狗东西，屎从上网冲浪蔓延到了服务器运维再到手机联网）。 &lt;br /&gt;这时你需要在手机开机的状态下打开 usb 调试，然后在电脑的命令行里运行如下 adb 命令，改变系统设置：&lt;br /&gt;&lt;br /&gt;adb shell &#34;settings put global captive_portal_server &lt;a target=&#34;_blank&#34; href=&#34;http://connect.rom.miui.com&#34; rel=&#34;nofollow noopener&#34;&gt;connect.rom.miui.com&lt;/a&gt;&#34;&lt;br /&gt;adb shell &#34;settings put global captive_portal_http_url &lt;a target=&#34;_blank&#34; href=&#34;http://connect.rom.miui.com/generate_204&#34; rel=&#34;nofollow noopener&#34;&gt;http://connect.rom.miui.com/generate_204&lt;/a&gt;&#34;&lt;br /&gt;adb shell settings put global ntp_server &lt;a target=&#34;_blank&#34; href=&#34;http://asia.pool.ntp.org&#34; rel=&#34;nofollow noopener&#34;&gt;asia.pool.ntp.org&lt;/a&gt;&lt;br /&gt;adb shell &#34;settings put global captive_portal_https_url &lt;a target=&#34;_blank&#34; href=&#34;https://connect.rom.miui.com/generate_204&#34; rel=&#34;nofollow noopener&#34;&gt;https://connect.rom.miui.com/generate_204&lt;/a&gt;&#34;&lt;br /&gt;&lt;br /&gt;接下来说一下怎么安装 google play 到 lineageos 。这里也很坑，步骤不对也会安装失败需要重新刷入系统 rom 。&lt;br /&gt;首先下载和你手机安卓系统版本匹配的 MindTheGapps 。然后在你 adb sideload 刷入手机系统镜像后重启手机，重新进入 recovery 模式（一定要重启）。在这里请一定要注意：&lt;br /&gt;不要直接进入手机系统激活手机&lt;br /&gt;不要直接进入手机系统激活手机&lt;br /&gt;不要直接进入手机系统激活手机&lt;br /&gt;不要直接进入手机系统激活手机&lt;br /&gt;&lt;br /&gt;重启进入 recovery 模式的 update adb ，把 MindTheGapps 的 zip 用 adb sideload 的方式刷入，中间会提示你签名验证失败，选择继续安装就好。你可能会遇到 adb sideload 无法载入，显示没有 device 。这时回到 recovery 首页的 advance 里 enable adb 即可。&lt;br /&gt;&lt;br /&gt;这时你进入新的系统后会再次让你联网激活，但屎又来了。你没科学上网就无法激活手机，但科学上网需要进入手机后才可以。网上有很多做法，我的做法是在手机最开始那个蓝色的页面，从左上角开始顺时针点击 4 个角跳过这个 google 的激活步骤。&lt;br /&gt;进入手机后，android 12 无法直接安装 apk 应用。你需要打开 usb 调试后在电脑里用 adb install 安装应用。&lt;br /&gt;&lt;br /&gt;以上就是我的一些踩坑经验，欢迎大家回复分享 android 好用的 app 。</description>
+      <author>join</author>
+      <pubDate>03 Apr 2023 06:35:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>202304 云村会员 - 分享发现</title>
+      <link>https://www.v2ex.com/t/929416</link>
+      <description>&lt;p&gt;五个名额，非黑胶会员可领&lt;/p&gt;&#xA;&lt;p&gt;ttps://&lt;a href=&#34;http://music.163.com/prime/m/gift-receive?p=WQ4ShrGm9Z7NcVofVcJwTrsLvngrk74joK0VqhEB50OVxHXbK7HOfOVln-heFcrQYFIqOQhA0WHBN0P1_23Dmh3cead7xApOC2A_MW6NPjk&amp;amp;d=ql4woiphQ95O1dyf5BSWMQ&#34; rel=&#34;nofollow&#34;&gt;music.163.com/prime/m/gift-receive?p=WQ4ShrGm9Z7NcVofVcJwTrsLvngrk74joK0VqhEB50OVxHXbK7HOfOVln-heFcrQYFIqOQhA0WHBN0P1_23Dmh3cead7xApOC2A_MW6NPjk&amp;amp;d=ql4woiphQ95O1dyf5BSWMQ&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;领取须知：&lt;/p&gt;&#xA;&lt;p&gt;1.领取 TA 赠送的礼品卡后，会自动添加对方为好友；&lt;/p&gt;&#xA;&lt;p&gt;2.该礼品卡仅限非黑胶用户领取，且每人每月最多仅能领取 1 张：&lt;/p&gt;&#xA;&lt;p&gt;3.单个用户每月仅可领取一次，不随赠送者数量增加而变化；&lt;/p&gt;&#xA;</description>
+      <author>shanghai1943</author>
+      <pubDate>03 Apr 2023 06:34:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ventuar 怎么查看蓝牙音频的解码器呢？ - macOS</title>
+      <link>https://www.v2ex.com/t/929415</link>
+      <description>我看网上说，之前的系统版本可以这样看&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/BZ1Mxx6.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/BZ1Mxx6.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;但是现在没有了&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/RwK6gjU.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/RwK6gjU.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;现在怎么能查看呢？</description>
+      <author>as9567585</author>
+      <pubDate>03 Apr 2023 06:34:11 +0000</pubDate>
+    </item>
+    <item>
       <title>海信 a5pro 和 a7 哪个合适入手？墨水屏的手机有其他推荐吗？ - 问与答</title>
       <link>https://www.v2ex.com/t/929414</link>
       <description>主要需求就是护眼和有 hifi 听歌，5g 非刚需，使用上哪个体验更好？目前京东 a7 经典版 1349 ，合适入手么？</description>
