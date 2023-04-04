@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "iOS 天气又崩了， V 友们都在用什么天气？ - iPhone",
+      "Link": "https://www.v2ex.com/t/929751",
+      "Description": "这次直接上热搜，牛批。不说月月崩那也是更三差五崩，我遇到的次数两只手都快数不过来了，当之无愧的苹果最不稳定服务。",
+      "Author": "wwbfred",
+      "PubDate": "2023-04-04T07:58:22Z"
+    },
+    {
+      "Title": "如何获取源码的 Target 不支持 RECORD_COMPONENT 的注解？ - Java",
+      "Link": "https://www.v2ex.com/t/929749",
+      "Description": "\u003cp\u003e我创建了某个 Record 类，需要获取标注在该 Record 类属性上的注解。\n可是该注解源码的 Target 的 value 里没有 [ ElementType.RECORD_COMPONENT ] 所以获取不到。\n请问在不 hook 或修改源码的情况有没有什么方法获取该注解（甚至是读取字节码的方式）？\u003c/p\u003e\n",
+      "Author": "purenothingform",
+      "PubDate": "2023-04-04T07:52:56Z"
+    },
+    {
       "Title": "关于 springboot，在启动时解密配置文件密码问题 - Java",
       "Link": "https://www.v2ex.com/t/929748",
       "Description": "\u003cp\u003e在 application.properties 里面有一个以下的属性\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-properties\"\u003espring.cloud.nacos.password=密文\ndubbo.registry.parameters.password=密文\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e百度查询在 springboot 可以通过继承 EnvironmentPostProcessor 接口来重写配置文件的属性，代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e@SneakyThrows\n@Override\npublic void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {\n    String dubboPassword = environment.getProperty(\"dubbo.registry.parameters.password\");\n    String nacosPassword = environment.getProperty(\"spring.cloud.nacos.password\");\n    dubboPassword = AESHelper.AESDecrypt(dubboPassword, BaseRSAUtils.getDefaultPublicKey());\n    nacosPassword = AESHelper.AESDecrypt(nacosPassword, BaseRSAUtils.getDefaultPublicKey());\n    Properties properties = new Properties();\n    properties.setProperty(\"dubbo.registry.parameters.password\", dubboPassword);\n    properties.setProperty(\"spring.cloud.nacos.password\", nacosPassword);\n    MutablePropertySources propertySources = environment.getPropertySources();\n    propertySources.addFirst(new PropertiesPropertySource(\"nacos-properties\", properties));\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e启动的时候，发生 nacos 会直接报错密码错误，现在猜测是 nacos 建立链接是在解密代码之前。dubbo 可以正常解密。想问一下应该怎么做，才能在 nacos 建立连接之前把配置文件进行解密\u003c/p\u003e\n",

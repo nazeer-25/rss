@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>iOS 天气又崩了， V 友们都在用什么天气？ - iPhone</title>
+      <link>https://www.v2ex.com/t/929751</link>
+      <description>这次直接上热搜，牛批。不说月月崩那也是更三差五崩，我遇到的次数两只手都快数不过来了，当之无愧的苹果最不稳定服务。</description>
+      <author>wwbfred</author>
+      <pubDate>04 Apr 2023 07:58:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>如何获取源码的 Target 不支持 RECORD_COMPONENT 的注解？ - Java</title>
+      <link>https://www.v2ex.com/t/929749</link>
+      <description>&lt;p&gt;我创建了某个 Record 类，需要获取标注在该 Record 类属性上的注解。&#xA;可是该注解源码的 Target 的 value 里没有 [ ElementType.RECORD_COMPONENT ] 所以获取不到。&#xA;请问在不 hook 或修改源码的情况有没有什么方法获取该注解（甚至是读取字节码的方式）？&lt;/p&gt;&#xA;</description>
+      <author>purenothingform</author>
+      <pubDate>04 Apr 2023 07:52:56 +0000</pubDate>
+    </item>
+    <item>
       <title>关于 springboot，在启动时解密配置文件密码问题 - Java</title>
       <link>https://www.v2ex.com/t/929748</link>
       <description>&lt;p&gt;在 application.properties 里面有一个以下的属性&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-properties&#34;&gt;spring.cloud.nacos.password=密文&#xA;dubbo.registry.parameters.password=密文&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;百度查询在 springboot 可以通过继承 EnvironmentPostProcessor 接口来重写配置文件的属性，代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@SneakyThrows&#xA;@Override&#xA;public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {&#xA;    String dubboPassword = environment.getProperty(&#34;dubbo.registry.parameters.password&#34;);&#xA;    String nacosPassword = environment.getProperty(&#34;spring.cloud.nacos.password&#34;);&#xA;    dubboPassword = AESHelper.AESDecrypt(dubboPassword, BaseRSAUtils.getDefaultPublicKey());&#xA;    nacosPassword = AESHelper.AESDecrypt(nacosPassword, BaseRSAUtils.getDefaultPublicKey());&#xA;    Properties properties = new Properties();&#xA;    properties.setProperty(&#34;dubbo.registry.parameters.password&#34;, dubboPassword);&#xA;    properties.setProperty(&#34;spring.cloud.nacos.password&#34;, nacosPassword);&#xA;    MutablePropertySources propertySources = environment.getPropertySources();&#xA;    propertySources.addFirst(new PropertiesPropertySource(&#34;nacos-properties&#34;, properties));&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;启动的时候，发生 nacos 会直接报错密码错误，现在猜测是 nacos 建立链接是在解密代码之前。dubbo 可以正常解密。想问一下应该怎么做，才能在 nacos 建立连接之前把配置文件进行解密&lt;/p&gt;&#xA;</description>
