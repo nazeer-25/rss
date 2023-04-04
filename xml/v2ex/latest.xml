@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>GPT4 开卡失败有感 - OpenAI</title>
+      <link>https://www.v2ex.com/t/929867</link>
+      <description>晚上充值了 nobepay 虚拟信用卡，换了几个卡都不行。想到 chatgpt 服务直接不接受中国的地区号码，这才是正真的墙。</description>
+      <author>zehua</author>
+      <pubDate>04 Apr 2023 15:22:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>我可能中奖了;致钛出现了 0e 然后 esxi 虚拟机全线瘫痪,实现了 all in boom - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/929866</link>
+      <description>&lt;p&gt;一开始没想到是硬盘问题;然后忍痛全盘格式化发现安装 windows 也安装不上了 &lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://i.328888.xyz/2023/04/04/ijJ6SA.png&#34; rel=&#34;nofollow&#34;&gt;https://i.328888.xyz/2023/04/04/ijJ6SA.png&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>ixixi</author>
+      <pubDate>04 Apr 2023 15:21:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>通过 Cloudflare Worker 让 OpenAI 的客户端直接使用 Azure OpenAI Service - OpenAI</title>
+      <link>https://www.v2ex.com/t/929865</link>
+      <description>&lt;p&gt;Azure OpenAI Service 很好申请, 一天就申请到了, 但是没找到好用的客户端, 因为大多数客户端都只支持 OpenAI, 它自带的 Playground 又很难用&lt;/p&gt;&#xA;&lt;p&gt;所以做了一个 cloudflare worker 的代理, 让支持 OpenAI 客户端通过它直接连 Azure&lt;/p&gt;&#xA;&lt;p&gt;不需要服务器&lt;/p&gt;&#xA;&lt;p&gt;地址: &lt;a href=&#34;https://github.com/haibbo/cf-openai-azure-proxy&#34; rel=&#34;nofollow&#34;&gt;https://github.com/haibbo/cf-openai-azure-proxy&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;尝试了多种客户端:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;opencat&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://chatkit.app/&#34; rel=&#34;nofollow&#34;&gt;https://chatkit.app/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://excing.github.io/chatgpt/&#34; rel=&#34;nofollow&#34;&gt;https://excing.github.io/chatgpt/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>haibbo</author>
+      <pubDate>04 Apr 2023 15:20:47 +0000</pubDate>
+    </item>
+    <item>
       <title>自认为仿 k8s 宣告失败，对于在客户的环境部署应用的一些思考 - 程序员</title>
       <link>https://www.v2ex.com/t/929864</link>
       <description>&lt;p&gt;我们公司的应用都是部署在客户的环境中的，评估过，在几百家财力不一，环境不一、技术人员以及水平不一的客户环境，整个 K8S 相当不现实，因为会很累，当然我知道 K3S/K3D 或许轻量，学习成本跟使用成本摆在那里。&lt;/p&gt;&#xA;&lt;p&gt;在这一两年的经验中，确立了以 docker-compose 为主体，加之其它的 12345678... 脚本完成应用、中间件、数据库的部署。&lt;/p&gt;&#xA;&lt;p&gt;随之而来的是一个维护问题，比方说，遇到被动迁移、改 IP 、换网段等这些 “破事”，环境变量各种改 IP ，Nacos 配置中心各种改 IP ，Nginx 、HAproxy 各种哔哩吧啦都要改，原来一直以来忽略了一个严重的问题，DNS 。&lt;/p&gt;&#xA;&lt;p&gt;我当然没有 Kube-DNS 、CoreDNS 还有服务发现这类的 “高科技”，docker-compose 也只是针对一台机器，其容器网络的 dns 也仅存于这个文件而已。&lt;/p&gt;&#xA;&lt;p&gt;这时候想到了 docker-swarm ，这个貌似被遗忘的产物，今天也算是挺有兴致地重做了某个应用的 docker-compose 文件，all-in-one ，把中间件数据库都放在一起了，初始化 docker-swarm 、创建 overlay 网络、中间件先 docker stack ，配置集群，启动，仿佛一切都很顺利，结果...&lt;/p&gt;&#xA;&lt;p&gt;我在 2018 年就看过一篇 2016 年的文章，就说到 docker-swarm 有着极为糟糕的性能，但是在 2023 年的今天，在最新版的 docker-ce 23.0.2 下，随意测了一下 overlay 下 redis 6.2.7 三主三从集群，&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;root@redis01:/data# redis-benchmark -n 1000000 -t set,get -P 16 -q -h localhost -p 6379 --cluster&#xA;Cluster has 3 master nodes:&#xA;&#xA;Master 0: 8ef74ab71432e2bd5affc9b804bae34eaa34a25a 172.200.1.122:6379&#xA;Master 1: 37689bd72fe71800fef7b617587b58ee9cb4a7fb 172.200.1.126:6379&#xA;Master 2: e2527a6bfa4327bb1adb6aa832a2443dc25ae654 172.200.1.128:6379&#xA;&#xA;SET: 361271.69 requests per second, p50=0.439 msec&#xA;GET: 498504.47 requests per second, p50=0.311 msec&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;再测了一下 host 下的，&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;root@cnhis:/data# redis-benchmark -n 1000000 -t set,get -P 16 -q -h localhost -p 6379 --cluster&#xA;Cluster has 3 master nodes:&#xA;&#xA;Master 0: 708760b7913c87ea2932248d3821dd5a4dc2afa1 192.168.100.244:6379&#xA;Master 1: 770211c5a234fb97fe63e2fb40a939578ccbdd3a 192.168.100.240:6379&#xA;Master 2: 304c250b7327e09a6bc4d190aa549ed0d0cfe78a 192.168.100.66:6379&#xA;&#xA;SET: 1331558.00 requests per second, p50=0.279 msec&#xA;GET: 1996008.00 requests per second, p50=0.223 msec&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;结果很明显了，我乐观了罢了。&lt;/p&gt;&#xA;&lt;p&gt;macvlan 据说性能好，但可惜没有 dns ，还要配置固定 IP ，繁琐不堪，所以...至此这个仿 k8s 的计划应该是宣告失败了，这或许是也 docker-swarm 失败的原因之一？&lt;/p&gt;&#xA;&lt;p&gt;看起来在客户环境内搭建一个 DNS 是必然的事情，或者呢？开始从 k3s/k3d 开始慢慢走向这条路吗？目前还没想通，各位有什么看法吗？&lt;/p&gt;&#xA;</description>
