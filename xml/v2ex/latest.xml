@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于 springboot，在启动时解密配置文件密码问题 - Java</title>
+      <link>https://www.v2ex.com/t/929748</link>
+      <description>&lt;p&gt;在 application.properties 里面有一个以下的属性&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-properties&#34;&gt;spring.cloud.nacos.password=密文&#xA;dubbo.registry.parameters.password=密文&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;百度查询在 springboot 可以通过继承 EnvironmentPostProcessor 接口来重写配置文件的属性，代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@SneakyThrows&#xA;@Override&#xA;public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {&#xA;    String dubboPassword = environment.getProperty(&#34;dubbo.registry.parameters.password&#34;);&#xA;    String nacosPassword = environment.getProperty(&#34;spring.cloud.nacos.password&#34;);&#xA;    dubboPassword = AESHelper.AESDecrypt(dubboPassword, BaseRSAUtils.getDefaultPublicKey());&#xA;    nacosPassword = AESHelper.AESDecrypt(nacosPassword, BaseRSAUtils.getDefaultPublicKey());&#xA;    Properties properties = new Properties();&#xA;    properties.setProperty(&#34;dubbo.registry.parameters.password&#34;, dubboPassword);&#xA;    properties.setProperty(&#34;spring.cloud.nacos.password&#34;, nacosPassword);&#xA;    MutablePropertySources propertySources = environment.getPropertySources();&#xA;    propertySources.addFirst(new PropertiesPropertySource(&#34;nacos-properties&#34;, properties));&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;启动的时候，发生 nacos 会直接报错密码错误，现在猜测是 nacos 建立链接是在解密代码之前。dubbo 可以正常解密。想问一下应该怎么做，才能在 nacos 建立连接之前把配置文件进行解密&lt;/p&gt;&#xA;</description>
+      <author>zhongpingjing</author>
+      <pubDate>04 Apr 2023 07:50:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>想转行，感觉 IT 干不动了。 - 程序员</title>
+      <link>https://www.v2ex.com/t/929747</link>
+      <description>&lt;p&gt;裸辞了一个月，面试都没有几个，想转行业，想去尝新，感觉这个行业完全积累不到太多的资源，或许是我等级太低。&lt;/p&gt;&#xA;</description>
+      <author>zhengzhou</author>
+      <pubDate>04 Apr 2023 07:49:24 +0000</pubDate>
+    </item>
+    <item>
+      <title>apple watch 有哪些久坐提醒的 app 推荐 -  WATCH</title>
+      <link>https://www.v2ex.com/t/929746</link>
+      <description>&lt;p&gt;首先排除自带的站立提醒，除了睡觉时候，没感觉到他提醒过我&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;最好是可以设置震动提醒（上班时间用）&lt;/li&gt;&#xA;&lt;li&gt;可以和捷径联动就最好了&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>sunznx</author>
+      <pubDate>04 Apr 2023 07:48:13 +0000</pubDate>
+    </item>
+    <item>
       <title>mac 微信里备份的聊天记录如何迁移 - macOS</title>
       <link>https://www.v2ex.com/t/929745</link>
       <description>&lt;p&gt;我的 mbp 是 18 款 512g 的，最近一段时间突然发现硬盘空间只有 40g 了&#xA;然后用柠檬清理工具分析了下占用，mac 微信居然占用了 200g ，其中历史聊天记录备份占用了 140g&#xA;但是尴尬的是，我在微信里既没办法删除不用的聊天记录，也没办法对这 140g 内容进行迁移&lt;/p&gt;&#xA;&lt;p&gt;针对这个问题有什么好的方案么。。。&lt;/p&gt;&#xA;&lt;p&gt;我找过什么解密微信聊天记录的工具，&#xA;但是那个只是解密之后用 html 的形式浏览，&#xA;我希望是能迁移到别的硬盘里，不要占用我的 mac 硬盘。。。&lt;/p&gt;&#xA;</description>
