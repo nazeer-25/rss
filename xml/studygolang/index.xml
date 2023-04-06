@@ -18,10 +18,6 @@
       <description>&lt;p&gt;大家好，我是 polarisxu。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;近日，Go 官方发布了 Go 1.20.3 和 Go 1.19.8，这是两个小版本，主要涉及 4 个安全更新，具体包括：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;go/parser：解析中的无限循环&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;在包含行号非常大的 //line 指令的 Go 源代码上调用任何 Parse 函数都可能由于整数溢出而导致无限循环。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;issue 地址：&lt;a href=&#34;https://go.dev/issue/59180&#34;&gt;https://go.dev/issue/59180&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;html/template: 反引号不被视为字符串定界符&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;模板没有正确地将反引号 (`) 视为 Javascript 字符串定界符，因此没有按预期转义它们。从 ES6 开始，反引号用于 JS 模板文字。如果模板在 Javascript 模板文字中包含 Go 模板操作，则操作的内容可用于终止文字，将任意 Javascript 代码注入 Go 模板。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;由于 ES6 模板文字相当复杂，并且它们本身可以进行字符串插值，我们决定简单地禁止在其中使用 Go 模板操作（例如“var a = {{.}}”），因为没有明显安全的方法允许这样做行为。这采用与 &lt;a href=&#34;https://github.com/google/safehtml&#34;&gt;https://github.com/google/safehtml&lt;/a&gt; 相同的方法。Template.Parse 现在会在遇到这样的模板时返回错误，当前未导出的 ErrorCode 值为 12。此 ErrorCode 将在下一个主要版本中导出。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;依赖此行为的用户可以使用 GODEBUG 标志 jstmpllitinterp=1 重新启用它，但需要注意的是反引号现在将被转义。这应该谨慎使用。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;issue 地址：&lt;a href=&#34;https://go.dev/issue/59234&#34;&gt;https://go.dev/issue/59234&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;net/http, net/textproto: 内存分配过多导致拒绝服务&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;HTTP 和 MIME 标头解析可能会分配大量内存，即使在解析小输入时也是如此。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;输入数据的某些异常模式可能会导致用于解析 HTTP 和 MIME 标头的通用函数分配比保存已解析标头所需的内存更多的内存。攻击者可以利用此行为导致 HTTP 服务器从一个小请求中分配大量内存，从而可能导致内存耗尽和拒绝服务。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;标头解析现在仅正确分配保存已解析标头所需的内存。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;issue 地址：&lt;a href=&#34;https://go.dev/issue/58975&#34;&gt;https://go.dev/issue/58975&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;net/http, net/textproto, mime/multipart: 过度资源消耗导致的拒绝服务&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;在处理包含大量部分的表单输入时，multipart 表单解析会消耗大量 CPU 和内存。这源于几个原因：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;mime/multipart.Reader.ReadForm 限制了解析的多部分表单可以消耗的总内存。ReadForm 可能低估了消耗的内存量，导致它接受比预期更大的输入。限制总内存并不能解决垃圾收集器因具有许多部分的表单中的大量小分配而增加的压力。ReadForm 可以分配大量短暂的缓冲区，进一步增加垃圾收集器的压力。这些因素的组合可能允许攻击者使解析多部分表单的程序消耗大量 CPU 和内存，从而可能导致拒绝服务。这会影响使用 mime/multipart.Reader.ReadForm 的程序，以及在 net/http 包中使用请求方法 FormFile、FormValue、ParseMultipartForm 和 PostFormValue 进行的表单解析。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;ReadForm 现在可以更好地估计已解析表单的内存消耗，并执行更少的短期分配。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;此外，mime/multipart.Reader 现在对已解析表单的大小施加以下限制：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;使用 ReadForm 解析的表单可能包含不超过 1000 个部分。可以使用环境变量 GODEBUG=multipartmaxparts= 调整此限制。使用 NextPart 和 NextRawPart 解析的表单部件可能包含不超过 10,000 个标头字段。此外，使用 ReadForm 解析的表单在所有部分中可能包含不超过 10,000 个标题字段。可以使用环境变量 GODEBUG=multipartmaxheaders= 调整此限制。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;issue 地址：&lt;a href=&#34;https://go.dev/issue/59153&#34;&gt;https://go.dev/issue/59153&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;从这些问题看出，很多程序可能都有使用到相关的 API，因此建议大家升级。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Go 语言中文网为大家准备了下载地址：&lt;a href=&#34;https://studygolang.com/dl&#34;&gt;https://studygolang.com/dl&lt;/a&gt;，当然，你也可以按照官方方式升级测试。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>Some common examples of Golang runtime errors</title>
-      <link>https://studygolang.com/resources/15567#reply0</link>
-    </item>
-    <item>
       <title>go 1.20.3 windows amd64安装卡住了</title>
       <link>https://studygolang.com/topics/16278#reply0</link>
       <description>&lt;p&gt;go 1.20.3 windows amd64安装卡住了，一直停留在计算需要磁盘空间的页面，十几分钟了不动，有没有人遇到同样的问题的&lt;/p&gt;&#xA;</description>
@@ -44,6 +40,10 @@
     <item>
       <title>优维CMDB：OneModel协助IT资源管理快速落地</title>
       <link>https://studygolang.com/articles/36108#reply0</link>
+    </item>
+    <item>
+      <title>Some common examples of Golang runtime errors</title>
+      <link>https://studygolang.com/resources/15567#reply0</link>
     </item>
     <item>
       <title>LAL v0.34.3发布，G711音频来了，Web UI也来了</title>
