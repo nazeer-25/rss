@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Zed 0.80.5 版本发布 - Zed</title>
+      <link>https://www.v2ex.com/t/930332</link>
+      <description>&lt;p&gt;大伙，zed 使用的如何？？？&#xA;个人用着觉得挺舒服的！&#xA;相信后面的功能一步步完善，就更加完美了！&lt;/p&gt;&#xA;</description>
+      <author>mizao</author>
+      <pubDate>06 Apr 2023 09:31:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>pillow 导出 psd 内图层的图片，透明区域本应该是白色却多出一些颜色，请问如何解决 - Python</title>
+      <link>https://www.v2ex.com/t/930331</link>
+      <description>&lt;h3&gt;场景：&lt;/h3&gt;&#xA;&lt;p&gt;psd 内图层是 cmyk 颜色模式，想要保留原本颜色进行导出，这边就用 ImageCms.profileToProfile 转换了下，但是，透明区域可以是白色或保持透明，这边是白色，却会多出一些不应该出现的颜色&lt;/p&gt;&#xA;&lt;h3&gt;错误图片,红色圈部分为多出颜色：&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;err_img&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/Z5wTYCc.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;代码如下：&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&#xA;# -- coding:UTF-8 --&#xA;from psd_tools import PSDImage&#xA;from psd_tools.constants import Resource&#xA;from PIL import ImageCms&#xA;import os&#xA;import configparser&#xA;&#xA;config = configparser.ConfigParser()&#xA;config.read(&#34;config.ini&#34;, encoding=&#34;utf-8-sig&#34;)&#xA;def getConfigValue(section, key):&#xA;    return config.get(section, key)&#xA;&#xA;# 打开 PSD 文件&#xA;psd = PSDImage.open(getConfigValue(&#34;custom&#34;, &#39;psd_path&#39;))&#xA;&#xA;# 指定分组名称&#xA;group_name = &#39;组 1&#39;&#xA;output_group_folder = &#39;psd_export_png&#39;&#xA;sub_group_name = &#39;人物&#39;&#xA;&#xA;output_icc_profile = &#39;./color_icc/AdobeRGB1998.icc&#39;&#xA;input_icc_profile = &#39;./color_icc/CoatedFOGRA39.icc&#39;&#xA;&#xA;# 遍历所有分组图层&#xA;for group in psd._layers:&#xA;    if group.is_group() and group.name == group_name:&#xA;        # 如果找到指定名称的分组图层，则导出其包含的图层&#xA;        os.makedirs(output_group_folder, exist_ok=True)&#xA;        for subgroup in group._layers:&#xA;            &#xA;            if subgroup.is_group() and subgroup.name == sub_group_name:&#xA;                for layer in subgroup._layers:&#xA;                    print(layer.name)&#xA;                    layer_image = layer.composite()&#xA;                    &#xA;                    # 如果图像是 CMYK 模式，则进行颜色空间转换&#xA;                    if layer_image.mode == &#39;CMYK&#39;:&#xA;                        layer_image = ImageCms.profileToProfile(layer_image, &#39;./color_icc/CoatedFOGRA39.icc&#39;, &#39;./color_icc/AdobeRGB1998.icc&#39;, ImageCms.Intent.RELATIVE_COLORIMETRIC, &#34;RGB&#34;)&#xA;                    layer_image.save(os.path.join(output_group_folder, f&#39;{layer.name}.png&#39;), format=&#34;PNG&#34;)&#xA;&#xA;        break&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>penll</author>
+      <pubDate>06 Apr 2023 09:27:48 +0000</pubDate>
+    </item>
+    <item>
       <title>Linux 虚拟机网卡配置问题。 - Linux</title>
       <link>https://www.v2ex.com/t/930330</link>
       <description>&lt;p&gt;虚拟机 1：192.168.3.15&#xA;虚拟机 2：192.168.4.15&#xA;我想这样配置两个虚拟机，&#xA;它们能通信吗？&#xA;可以这样配置吗？&#xA;它们算两个子网吗？&lt;/p&gt;&#xA;</description>

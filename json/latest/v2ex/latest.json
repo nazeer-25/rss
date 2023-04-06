@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Zed 0.80.5 版本发布 - Zed",
+      "Link": "https://www.v2ex.com/t/930332",
+      "Description": "\u003cp\u003e大伙，zed 使用的如何？？？\n个人用着觉得挺舒服的！\n相信后面的功能一步步完善，就更加完美了！\u003c/p\u003e\n",
+      "Author": "mizao",
+      "PubDate": "2023-04-06T09:31:15Z"
+    },
+    {
+      "Title": "pillow 导出 psd 内图层的图片，透明区域本应该是白色却多出一些颜色，请问如何解决 - Python",
+      "Link": "https://www.v2ex.com/t/930331",
+      "Description": "\u003ch3\u003e场景：\u003c/h3\u003e\n\u003cp\u003epsd 内图层是 cmyk 颜色模式，想要保留原本颜色进行导出，这边就用 ImageCms.profileToProfile 转换了下，但是，透明区域可以是白色或保持透明，这边是白色，却会多出一些不应该出现的颜色\u003c/p\u003e\n\u003ch3\u003e错误图片,红色圈部分为多出颜色：\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"err_img\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/Z5wTYCc.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e代码如下：\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e\n# -- coding:UTF-8 --\nfrom psd_tools import PSDImage\nfrom psd_tools.constants import Resource\nfrom PIL import ImageCms\nimport os\nimport configparser\n\nconfig = configparser.ConfigParser()\nconfig.read(\"config.ini\", encoding=\"utf-8-sig\")\ndef getConfigValue(section, key):\n    return config.get(section, key)\n\n# 打开 PSD 文件\npsd = PSDImage.open(getConfigValue(\"custom\", 'psd_path'))\n\n# 指定分组名称\ngroup_name = '组 1'\noutput_group_folder = 'psd_export_png'\nsub_group_name = '人物'\n\noutput_icc_profile = './color_icc/AdobeRGB1998.icc'\ninput_icc_profile = './color_icc/CoatedFOGRA39.icc'\n\n# 遍历所有分组图层\nfor group in psd._layers:\n    if group.is_group() and group.name == group_name:\n        # 如果找到指定名称的分组图层，则导出其包含的图层\n        os.makedirs(output_group_folder, exist_ok=True)\n        for subgroup in group._layers:\n            \n            if subgroup.is_group() and subgroup.name == sub_group_name:\n                for layer in subgroup._layers:\n                    print(layer.name)\n                    layer_image = layer.composite()\n                    \n                    # 如果图像是 CMYK 模式，则进行颜色空间转换\n                    if layer_image.mode == 'CMYK':\n                        layer_image = ImageCms.profileToProfile(layer_image, './color_icc/CoatedFOGRA39.icc', './color_icc/AdobeRGB1998.icc', ImageCms.Intent.RELATIVE_COLORIMETRIC, \"RGB\")\n                    layer_image.save(os.path.join(output_group_folder, f'{layer.name}.png'), format=\"PNG\")\n\n        break\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "penll",
+      "PubDate": "2023-04-06T09:27:48Z"
+    },
+    {
       "Title": "Linux 虚拟机网卡配置问题。 - Linux",
       "Link": "https://www.v2ex.com/t/930330",
       "Description": "\u003cp\u003e虚拟机 1：192.168.3.15\n虚拟机 2：192.168.4.15\n我想这样配置两个虚拟机，\n它们能通信吗？\n可以这样配置吗？\n它们算两个子网吗？\u003c/p\u003e\n",
