@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "分享一个 neovim 自动切换输入法的 lua 脚本 - Vim",
+      "Link": "https://www.v2ex.com/t/930590",
+      "Description": "\u003cp\u003e使用了一段时间 rime 输入法, 这个输入法支持 vim 模式, 用起来还是挺方便的，但是打字效果太差了。\u003cbr/\u003e\n最后还是回归了原生的输入法，为了解决切换输入法的问题写了个 lua 脚本。\u003cbr/\u003e\n这里没有使用 im-select 是因为 im-select 在 mac 上切换会偶尔失效，所以我用了这个 \u003ca href=\"https://github.com/laishulu/macism\" rel=\"nofollow\"\u003emacism\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-lua\"\u003e-- 记录当前输入法\nCurrent_input_method = vim.fn.system(\"/usr/local/bin/macism\")\n\n-- 切换到英文输入法\nfunction Switch_to_English_input_method()\n    Current_input_method = vim.fn.system(\"/usr/local/bin/macism\")\n    if Current_input_method ~= \"com.apple.keylayout.ABC\\n\" then\n        vim.fn.system(\"/usr/local/bin/macism com.apple.keylayout.ABC\")\n    end\nend\n\n-- 设置输入法\nfunction Set_input_method()\n    if Current_input_method ~= \"com.apple.keylayout.ABC\\n\" then\n        vim.fn.system(\"/usr/local/bin/macism \" .. string.gsub(Current_input_method, \"\\n\", \"\"))\n    end\nend\n\n-- 进入 normal 模式时切换为英文输入法\nvim.cmd([[\naugroup input_method\n  autocmd!\n  autocmd InsertEnter * :lua Set_input_method()\n  autocmd InsertLeave * :lua Switch_to_English_input_method()\naugroup END\n]])\n\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "yuancoder",
+      "PubDate": "2023-04-07T07:03:48Z"
+    },
+    {
+      "Title": "我反悔用 chrome 了，找个舒服的浏览器真的不容易 - Chrome",
+      "Link": "https://www.v2ex.com/t/930589",
+      "Description": "今天用了 chrome 一天，虽然比 edge 看着简洁，但是问题也不少\u003cbr /\u003e\u003cbr /\u003e开十几个 tab ，资源占用明显比 safari 多不少\u003cbr /\u003e\u003cbr /\u003e另外可能是我的错觉，chrome 很耗电，原来 m1 的 mba 改版，大半天没什么压力，用了 chrome 怎么感觉最多就半天了？\u003cbr /\u003e\u003cbr /\u003e还是因为新装的 chrome ，需要机器自己慢慢调式？",
+      "Author": "justincnn",
+      "PubDate": "2023-04-07T07:02:51Z"
+    },
+    {
       "Title": "阿里大模型“通义千问”开始试用申请 - 分享创造",
       "Link": "https://www.v2ex.com/t/930588",
       "Description": "\u003cp\u003e阿里的大模型叫“通义千问”，开始试用申请了，需要企业邮箱\n\u003ca href=\"https://tongyi.aliyun.com\" rel=\"nofollow\"\u003ehttps://tongyi.aliyun.com\u003c/a\u003e\u003c/p\u003e\n",
