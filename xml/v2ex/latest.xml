@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有偿求租 chatgpt 账号，自用应付工作不分享 - 程序员</title>
+      <link>https://www.v2ex.com/t/930617</link>
+      <description>&lt;p&gt;老板自己弄了个说这个真好用，然后让我们整一个提高工作效率。鉴于现在注册非常不友好了，所有不想折腾有偿求租 chatgpt 使用，楼主有购买 vpn 能访问 openai 官网。求助万能的程序员，不知道这个东西能否共享，可走咸鱼交易&lt;/p&gt;&#xA;</description>
+      <author>supQwer</author>
+      <pubDate>07 Apr 2023 08:51:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>IOException: 断开的管道 - 程序员</title>
+      <link>https://www.v2ex.com/t/930616</link>
+      <description>&lt;h1&gt;技术栈&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;前端&lt;/strong&gt;：react 、视频播放组件：video 标签&#xA;&lt;strong&gt;后端&lt;/strong&gt;：springboot 、minio + aws-java-sdk-s3&lt;/p&gt;&#xA;&lt;h1&gt;需求背景&lt;/h1&gt;&#xA;&lt;p&gt;要做一个在 web 页面上播放视频的功能，一个视频文件大概在 150m 左右，通过单次下载然后播放显然行不通。因此采用 http 的 Range 请求头传入每次要下载的字节长度并返回 206 状态码的方案。&lt;/p&gt;&#xA;&lt;h1&gt;Range 请求头相关知识&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;请求头&lt;/strong&gt;&#xA;Range: bytes=start-end&#xA;限制头部 例如（ bytes=884736-）&#xA;限制尾部 （ bytes=-123456 ）&#xA;分段截取 (bytes=123456-884736) 获取第一个字节 0-0&#xA;&lt;strong&gt;响应头&lt;/strong&gt;&#xA;Content-Range:bytes 0-200/3000 表示服务器返回了 0-200 个字节的数据，总共 3000 字节的数据。&#xA;Accept-Ranges:bytes 当浏览器发现 Accept-Ranges 头时，可以尝试继续中断了的下载，而不是重新开始。&#xA;Content-Type:video/mp4 表示资源类型，这里是 mp4 格式的视频&#xA;Content-Length:200 表示服务器此次返回数据是多少字节，这里是 200 字节&lt;/p&gt;&#xA;&lt;h1&gt;后端接口逻辑&lt;/h1&gt;&#xA;&lt;p&gt;根据 http 的请求头 range 获取本次要下载的 start 和 end ，然后用 s3 的分段下载 api 从 minio 获取所需文件：&#xA;GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, objectName);&#xA;getObjectRequest.withRange(start,end);&#xA;amazonS3.getObject(getObjectRequest);&lt;/p&gt;&#xA;&lt;h1&gt;前端逻辑&lt;/h1&gt;&#xA;&lt;p&gt;通过 video 标签进行分段播放：&#xA;&amp;lt;video&#xA;ref={videoRef}&#xA;// src={MINIO_RESOURCE_PREFIX + topData.file}&#xA;src=&#34;https://.../api/file/download?fileName=sample-project/03d96ab16aac4571b4e7sbcb65ea1dae.mp4&#34;&#xA;{...videoJsOptions}&#xA;&amp;gt;&amp;lt;/video&amp;gt;&lt;/p&gt;&#xA;&lt;h1&gt;遇到的问题&lt;/h1&gt;&#xA;&lt;p&gt;浏览器在进行播放的过程中，发现后台日志一直报错：&lt;strong&gt;IOException: 断开的管道 ，最严重的是，偶尔会出现 服务假死的状态，即服务的进程还在，但是所有的接口访问不通。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;有哪位大佬遇到过类似的问题，可以指点一下方向吗？&lt;/p&gt;&#xA;</description>
+      <author>Triump</author>
+      <pubDate>07 Apr 2023 08:48:38 +0000</pubDate>
+    </item>
+    <item>
       <title>有什么快速重装 Windows 系统的办法？ - 问与答</title>
       <link>https://www.v2ex.com/t/930614</link>
       <description>家里的电脑，系统用久了就感觉不干净了，有些莫名其妙的卡或者网络上偶尔莫名其妙的不顺利等等。自己能力不足找不到原因。&lt;br /&gt;&lt;br /&gt;想重装系统，之前也装过很多次系统，但是每次重装完之后，升级打补丁，安装一些软件都感觉很麻烦（比如微信、qq 、ps 等等这些需要安装才用起来顺利的软件）。因为自己又不用 360 ，腾讯管家....之类的软件，所以也没有那种集成的软件商店，所以都是去官网下的软件安装包，就是很麻烦。之前每次重装完系统都要花上两三个小时去搞软件、驱动这些东西。&lt;br /&gt;&lt;br /&gt;故有没有大佬说一下自己重装 Windows 的小技巧？如果可以麻烦各位大佬把用到的小工具地址下载地址也顺便告知一下，个人找工具的能力着实不好。感谢各位大佬</description>
