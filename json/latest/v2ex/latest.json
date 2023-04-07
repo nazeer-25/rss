@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如何看待满嘴脏话的人？ - 问与答",
+      "Link": "https://www.v2ex.com/t/930592",
+      "Description": "\u003cp\u003e和别人讨论问题，遇到点麻烦，对方总是满嘴脏话，比如 cnm 、ctm (艹你妈、艹他妈）这类。\u003c/p\u003e\n\u003cp\u003e每次听到感觉像是骂自己\u003c/p\u003e\n\u003cp\u003e现实中比较讨厌这种人\u003c/p\u003e\n\u003cp\u003e但是想了想自己偶尔也会表达我艹这种，是不是骂人我还不太确定，往往用来表示惊讶的场景\u003c/p\u003e\n\u003cp\u003e本人非常讨厌这种满嘴脏话的，家里人也有动不动就脏话的...哎\u003c/p\u003e\n\u003cp\u003e是我被社会毒打的少么，还是平时不怎么发泄情绪...\u003c/p\u003e\n",
+      "Author": "zooo",
+      "PubDate": "2023-04-07T07:09:13Z"
+    },
+    {
+      "Title": "WIN10 拖拽文件到任务栏的软件里会有延迟怎么办？ - 问与答",
+      "Link": "https://www.v2ex.com/t/930591",
+      "Description": "两台电脑的配置一样，都是 win10 系统，\u003cbr /\u003e公司的电脑正常，但是家里的电脑拖拽文件到任务栏软件里就会有延迟，\u003cbr /\u003e比如：桌面点击一张图片拖拽到任务栏里显示的 PS 软件里，当鼠标拖拽的图片到了任务栏 PS 位置的时候，不会立马进入 PS 软件界面，而是延迟 1 秒钟左右才显示 PS ，\u003cbr /\u003e不光是 PS ，所有的此类操作都是这样的，文件拖拽到任务栏里显示的一打开的文件夹等等。。\u003cbr /\u003e请问是怎么回事？",
+      "Author": "daiye",
+      "PubDate": "2023-04-07T07:08:03Z"
+    },
+    {
       "Title": "分享一个 neovim 自动切换输入法的 lua 脚本 - Vim",
       "Link": "https://www.v2ex.com/t/930590",
       "Description": "\u003cp\u003e使用了一段时间 rime 输入法, 这个输入法支持 vim 模式, 用起来还是挺方便的，但是打字效果太差了。\u003cbr/\u003e\n最后还是回归了原生的输入法，为了解决切换输入法的问题写了个 lua 脚本。\u003cbr/\u003e\n这里没有使用 im-select 是因为 im-select 在 mac 上切换会偶尔失效，所以我用了这个 \u003ca href=\"https://github.com/laishulu/macism\" rel=\"nofollow\"\u003emacism\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-lua\"\u003e-- 记录当前输入法\nCurrent_input_method = vim.fn.system(\"/usr/local/bin/macism\")\n\n-- 切换到英文输入法\nfunction Switch_to_English_input_method()\n    Current_input_method = vim.fn.system(\"/usr/local/bin/macism\")\n    if Current_input_method ~= \"com.apple.keylayout.ABC\\n\" then\n        vim.fn.system(\"/usr/local/bin/macism com.apple.keylayout.ABC\")\n    end\nend\n\n-- 设置输入法\nfunction Set_input_method()\n    if Current_input_method ~= \"com.apple.keylayout.ABC\\n\" then\n        vim.fn.system(\"/usr/local/bin/macism \" .. string.gsub(Current_input_method, \"\\n\", \"\"))\n    end\nend\n\n-- 进入 normal 模式时切换为英文输入法\nvim.cmd([[\naugroup input_method\n  autocmd!\n  autocmd InsertEnter * :lua Set_input_method()\n  autocmd InsertLeave * :lua Switch_to_English_input_method()\naugroup END\n]])\n\n\n\u003c/code\u003e\u003c/pre\u003e\n",
