@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "openai 扣款政策？ - OpenAI",
+      "Link": "https://www.v2ex.com/t/931051",
+      "Description": "\u003cp\u003e我绑了个国外的 visa ，但不知道为什么，月初付款被拒了，但实际上，我在上个月已经有几百美刀的消费了，我如果不管这账号，那岂不是这几百美刀不用付了？\u003c/p\u003e\n",
+      "Author": "XiaoBaiYa",
+      "PubDate": "2023-04-09T12:50:14Z"
+    },
+    {
+      "Title": "Cloudflare warp 的 docker 方案一键解决 chatgpt 的访问 - OpenAI",
+      "Link": "https://www.v2ex.com/t/931050",
+      "Description": "\u003cp\u003e周五的时候写了一篇解决 vps 被 openai 封 ip 的文章，看到大家很多反馈。因此如期给大家把 dockerfile 的坑排完了。\u003c/p\u003e\n\u003cp\u003e接续上篇将的近期 chatgpt 访问困难的问题，上篇是基于 ubuntu 的本地安装。使用起来还是不够快速舒服，并且假如使用的是老版的 centos7 还要切换操作系统，不方便，因此花了一点时间将 warp 的 proxy 封装成了 docker ，满足一键启动的需求，方便大家一把梭。完全基于官方文档进行部署，没有任何的坏东西再里面，大家放心搞。\u003c/p\u003e\n\u003cp\u003eDockerfile 详解：\u003c/p\u003e\n\u003cp\u003eFROM ubuntu:22.10\nLABEL mantainer=\"galtjay\u003ca href=\"mailto:galtjay@foxmail.com\"\u003egaltjay@foxmail.com\u003c/a\u003e\"\n#下边这一行主要是完成 supervisor 和 cloudflare-warp 的安装\nRUN apt update \u0026amp;\u0026amp; apt install -y curl gpg supervisor \u0026amp;\u0026amp; curl \u003ca href=\"https://pkg.cloudflareclient.com/pubkey.gpg\" rel=\"nofollow\"\u003ehttps://pkg.cloudflareclient.com/pubkey.gpg\u003c/a\u003e |  gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg \u0026amp;\u0026amp; echo \"deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] \u003ca href=\"https://pkg.cloudflareclient.com/\" rel=\"nofollow\"\u003ehttps://pkg.cloudflareclient.com/\u003c/a\u003e jammy main\" |  tee /etc/apt/sources.list.d/cloudflare-client.list \u0026amp;\u0026amp; apt update \u0026amp;\u0026amp; apt install cloudflare-warp -y \u0026amp;\u0026amp;  apt-get clean\n#生成 supervisor 守护配置文件，原本的 warp-svc 基于 systemd 进行管理，docker 内部不太好实现，切换成 supervisor 进行守护。\nRUN echo \"[program:warp-svc]\\ncommand=/bin/bash -c /usr/bin/warp-svc\\nautostart=true\\nautorestart=true\\nstartretries=3\\nstderr_logfile=/var/log/warp.log\\nstdout_logfile=/var/log/warp.log\\n\" \u0026gt; /etc/supervisor/conf.d/warp.conf\n#生成 docker 启动脚本，输出日志到控制台。每次启动会自动的完成注册，切换模式。假如各位需要嵌入现有的 license ，此处自行修改。主要修改 warp-cli --accept-tos register 这条。\nRUN echo  \"supervisord\\nsleep 5\\nwarp-cli --accept-tos register\\nwarp-cli --accept-tos  set-mode proxy\\nwarp-cli  --accept-tos connect\\ntail -f /var/log/warp.log\\n\"  \u0026gt; /\u003ca href=\"http://init.sh\" rel=\"nofollow\"\u003einit.sh\u003c/a\u003e \u0026amp;\u0026amp; chmod +x /\u003ca href=\"http://init.sh\" rel=\"nofollow\"\u003einit.sh\u003c/a\u003e\n#默认暴露 40000 端口\nEXPOSE \"40000/tcp\"\nCMD [\"bash\",\"-c\",\"/\u003ca href=\"http://init.sh\" rel=\"nofollow\"\u003einit.sh\u003c/a\u003e\"]\u003c/p\u003e\n\u003cp\u003e打包好的镜像地址，以及完整说明的文章，点击：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://watermelonwater.tech/cloudflare-warp%e7%9a%84docker%e6%96%b9%e6%a1%88%e4%b8%80%e9%94%ae%e8%a7%a3%e5%86%b3chatgpt%e7%9a%84%e8%ae%bf%e9%97%ae/\" rel=\"nofollow\"\u003ehttps://watermelonwater.tech/cloudflare-warp%e7%9a%84docker%e6%96%b9%e6%a1%88%e4%b8%80%e9%94%ae%e8%a7%a3%e5%86%b3chatgpt%e7%9a%84%e8%ae%bf%e9%97%ae/\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "galtjay",
+      "PubDate": "2023-04-09T12:47:33Z"
+    },
+    {
       "Title": "有没有靠谱的提供 chatGPT API 服务的供应商推荐呢？ - OpenAI",
       "Link": "https://www.v2ex.com/t/931049",
       "Description": "\u003cp\u003eRT ，我 openAI 账号被封了，想找靠谱的价格合适的提供上述服务的供应商，或者账号提供商啥的，兄弟们有推荐吗？\u003c/p\u003e\n",
