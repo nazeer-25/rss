@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Chatgpt 写代码 - 程序员",
+      "Link": "https://www.v2ex.com/t/931773",
+      "Description": "最近开了个新的 django 项目，用 chatgpt 写的，发现帮助还是很有限，只能解决一些片段细节的问题",
+      "Author": "yinsane",
+      "PubDate": "2023-04-11T17:17:56Z"
+    },
+    {
       "Title": "这段浮点运算代码性能为何如此低下 - 嵌入式开发",
       "Link": "https://www.v2ex.com/t/931771",
       "Description": "\u003cul\u003e\n\u003cli\u003e编译环境：ESP-IDF 4.4\u003c/li\u003e\n\u003cli\u003e运行设备：ESP32S3 ，已经在编译选项中开启性能优化模式，并把 CPU 频率调到了 240MHz 。\u003c/li\u003e\n\u003cli\u003e目的：模拟 ESP32S3 处理图片，并测试性能\u003c/li\u003e\n\u003cli\u003e问题：测试时发现，以这个参数执行下来，每次 \u003ccode\u003eESP_LOGI\u003c/code\u003e 间隔 \u003ccode\u003e163813\u003c/code\u003e 微秒，平均下来一次 float 计算要 1 微秒，与芯片性能严重不符。请问是什么原因导致的呢？\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-c\"\u003e#include \"freertos/FreeRTOS.h\"\n#include \"freertos/task.h\"\n#include \"esp_system.h\"\n#include \"esp_log.h\"\n#define M2T(X) ((unsigned int)(X) / portTICK_PERIOD_MS) // ms to tick\n\n#include \"esp_random.h\"\n\n#include \u0026lt;sys/time.h\u0026gt;\n\nstatic const char *TAG = \"main\";\n#define dataLen 14400\n\nvoid makeMatrixUint8(uint8_t *buf, int len)\n{\n\n    for (int i = 0; i \u0026lt; len; i++)\n    {\n        esp_fill_random(\u0026amp;buf[i], sizeof(uint8_t));\n    }\n}\nvoid makeMatrixFloat(float *buf, int len)\n{\n\n    for (int i = 0; i \u0026lt; len; i++)\n    {\n        esp_fill_random(\u0026amp;buf[i], sizeof(float));\n    }\n}\n\nstatic void testTask()\n{\n    uint8_t *testData1 = (uint8_t *)malloc(sizeof(uint8_t) * dataLen);\n    float *testData2 = (float *)malloc(sizeof(float) * dataLen);\n    struct timeval tv_d0;\n    struct timeval tv_d1;\n\n    while (1)\n    {\n        makeMatrixUint8(testData1, dataLen);\n        makeMatrixFloat(testData2, dataLen);\n        gettimeofday(\u0026amp;tv_d0, NULL);\n        for (int t = 0; t \u0026lt; 10; t++)\n        {\n\n            for (int i = 0; i \u0026lt; dataLen; i++)\n            {\n                testData2[i] = testData1[i] * 0.3;\n            }\n        }\n        gettimeofday(\u0026amp;tv_d1, NULL);\n        ESP_LOGI(TAG, \"%lu\", 1000000 * (tv_d1.tv_sec - tv_d0.tv_sec) + (tv_d1.tv_usec - tv_d0.tv_usec));\n        \n        vTaskDelay(1);\n    }\n}\n\nvoid app_main()\n{\n    xTaskCreate(testTask, \"servoTask\", 1024 * 4, NULL, tskIDLE_PRIORITY, NULL);\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
