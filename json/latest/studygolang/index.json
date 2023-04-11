@@ -67,16 +67,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go怎么实现并发啊",
-      "Link": "https://studygolang.com/topics/16290#reply0",
-      "Description": "\u003cp\u003e\u003ca href=\"/user/Neightly\" title=\"@Neightly\"\u003e@Neightly\u003c/a\u003e  舒服么\u003c/p\u003e\n",
+      "Title": "周刊导航栏怎么没了",
+      "Link": "https://studygolang.com/topics/16291#reply1",
+      "Description": "\u003cp\u003e周刊弄到导航栏啊，干嘛呢\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "周刊导航栏怎么没了",
-      "Link": "https://studygolang.com/topics/16291#reply0",
-      "Description": "\u003cp\u003e周刊弄到导航栏啊，干嘛呢\u003c/p\u003e\n",
+      "Title": "go怎么实现并发啊",
+      "Link": "https://studygolang.com/topics/16290#reply0",
+      "Description": "\u003cp\u003e\u003ca href=\"/user/Neightly\" title=\"@Neightly\"\u003e@Neightly\u003c/a\u003e  舒服么\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -147,6 +147,13 @@
       "Title": "《10节课学会Golang-01-Package》",
       "Link": "https://studygolang.com/topics/16280#reply0",
       "Description": "\u003cblockquote\u003e\n\u003cp\u003e项目地址：\u003ca href=\"https://github.com/Zhouchaowen/golang-tutorial\"\u003ehttps://github.com/Zhouchaowen/golang-tutorial\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e视频地址：b站：\u003ca href=\"https://www.bilibili.com/video/BV1zc411W7JZ/?share_source=copy_web\u0026amp;vd_source=6e9f5b30fe025c05ef515831e3154768\"\u003e10节课学会Golang，Go快速入门\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003ch1\u003e包\u003c/h1\u003e\n\n\u003cp\u003e在 \u003ccode\u003eGo\u003c/code\u003e 中，一个包（\u003ccode\u003ePackage\u003c/code\u003e）是一组相关的代码文件的集合，编写代码时我们通常将相同模块的代码划分到一个\u003ccode\u003ePackage\u003c/code\u003e中以便于重用和维护。每个 \u003ccode\u003eGo\u003c/code\u003e 程序都至少包含一个包，即 \u003ccode\u003emain\u003c/code\u003e 包，其中的 \u003ccode\u003emain\u003c/code\u003e 函数作为程序的入口点。我们首先来看第一个示例。\u003c/p\u003e\n\n\u003ch2\u003e入门\u003c/h2\u003e\n\n\u003cp\u003e在\u003ccode\u003egolang\u003c/code\u003e中每个可以独立运行的 \u003ccode\u003ego\u003c/code\u003e 文件都至少包含三部分\u003ccode\u003epackage main\u003c/code\u003e, \u003ccode\u003eimport\u003c/code\u003e, \u003ccode\u003efunc main()\u003c/code\u003e\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main // 定义了包名,只有定义了main的包才能独立运行\n\n// 导入: 标准库和第三方库\nimport (\n\t\u0026quot;fmt\u0026quot; // 引入一个标准库包\n)\n\n// main 函数,程序的入口\nfunc main() {\n\t// 调用标准库 fmt 在控制台打印 hello world 字符串\n\tfmt.Println(\u0026quot;hello world\u0026quot;)\n}\n\n// 通过命令行运行\n// go run main.go\n// go build main.go \u0026amp;\u0026amp; ./main\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e如代码中\u003ccode\u003epackage main\u003c/code\u003e表示当前代码隶属于\u003ccode\u003emain\u003c/code\u003e包。\u003ccode\u003emain\u003c/code\u003e包是一个特殊的包，我们的启动函数\u003ccode\u003efunc main()\u003c/code\u003e必须要定义在\u003ccode\u003epackage main\u003c/code\u003e下才能执行。\u003c/p\u003e\n\n\u003cp\u003e\u003ccode\u003eimport()\u003c/code\u003e表示要导入标准库(也可以叫做导入一个包)或第三方包, 在实际开发者会引用许多标准库和第三方包来简化业务开发。这里我们导入一个\u003ccode\u003efmt\u003c/code\u003e的标准库，这个标准库定义了一些函数在控制台输出一些信息，如\u003ccode\u003ePrintln()\u003c/code\u003e函数。\u003c/p\u003e\n\n\u003cp\u003e\u003ccode\u003efunc main()\u003c/code\u003e函数是程序入口。我们可以通过这个函数来运行我们编写的代码，我们在\u003ccode\u003efunc main()\u003c/code\u003e函数中调用\u003ccode\u003efmt\u003c/code\u003e标准库的\u003ccode\u003ePrintln()\u003c/code\u003e函数在控制台打印一个字串\u003ccode\u003ehello world\u003c/code\u003e。\u003c/p\u003e\n\n\u003ch2\u003e导入标准库\u003c/h2\u003e\n\n\u003cp\u003e上一个\u003ccode\u003eDemo\u003c/code\u003e简单介绍了\u003ccode\u003eimport()\u003c/code\u003e, 这一节我们详细介绍\u003ccode\u003eimport()\u003c/code\u003e。\u003ccode\u003eimport()\u003c/code\u003e函数用来导入标准库和第三方库，只有通过\u003ccode\u003eimport()\u003c/code\u003e导入的标准库和第三方库我们才能在当前\u003ccode\u003epackage\u003c/code\u003e下调用\u003cstrong\u003e并且只能调用该\u003ccode\u003epackage\u003c/code\u003e下已经导出的属性和函数。\u003c/strong\u003e\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\n// 导入: 标准库和第三方库\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;math/rand\u0026quot; // 导入rand库\n)\n\n// main 函数,程序的入口。\nfunc main() {\n\t// 调用标准库 fmt 在控制台打印 hello world 字符串\n\t// rand.Intn(10) 函数返回一个取值范围在[0,n)的伪随机int值，如果n\u0026lt;=0会panic。\n\tfmt.Println(\u0026quot;hello world\u0026quot;, rand.Intn(10))\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e其中 \u003ccode\u003emath/rand\u003c/code\u003e 是要导入的包的名称。一旦导入，就可以使用该包中导出的函数、变量和其他标识符，其中在\u003ccode\u003efunc main()\u003c/code\u003e函数中调用标准库(\u003ccode\u003emath/rand\u003c/code\u003e)的\u003ccode\u003erand.Intn(n)\u003c/code\u003e函数获取一个\u003ccode\u003e[0,n)\u003c/code\u003e的伪随机\u003ccode\u003eint\u003c/code\u003e值.\u003c/p\u003e\n\n\u003ch2\u003e导出函数、变量、常量和类型\u003c/h2\u003e\n\n\u003cp\u003e在\u003ccode\u003egolang\u003c/code\u003e语言中想调用\u003cstrong\u003e其它包\u003c/strong\u003e的函数、变量、常量和类型\u003cstrong\u003e需要被调用函数、变量、常量和类型是导出的（在同一包下不导出也可以使用）\u003c/strong\u003e, 导出一个函数、变量、常量和类型非常简单, \u003cstrong\u003e只需首字母大写就代表该函数或变量导出\u003c/strong\u003e。这是一种访问控制机制，用于确保只有您希望外部使用的标识符才能公开。\u003c/p\u003e\n\n\u003cp\u003e\u003ccode\u003emath\u003c/code\u003e包如下(省略一些信息和注释方便查看)\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage math\n\n.........\n\n// Integer limit values.\nconst (\n\tintSize = 32 \u0026lt;\u0026lt; (^uint(0) \u0026gt;\u0026gt; 63) // 32 or 64 // 未导出, 其余package不能调用\n\n\tMaxInt    = 1\u0026lt;\u0026lt;(intSize-1) - 1 // 导出, 其余package能调用\n\tMinInt    = -1 \u0026lt;\u0026lt; (intSize - 1)\n  \n  .........\n)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e由于 \u003ccode\u003eMaxInt\u003c/code\u003e 和 \u003ccode\u003eMinInt\u003c/code\u003e 的名称以大写字母开头，因此它们可以被导出到 \u003ccode\u003emath\u003c/code\u003e 的外部使用。如果您在另一个包中导入了 \u003ccode\u003emath\u003c/code\u003e，则可以使用以下代码访问\u003ccode\u003eMaxInt\u003c/code\u003e\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\n// 导入: 标准库和第三方库\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;math\u0026quot;\n)\n\n// main 函数,程序的入口。\nfunc main() {\n\t// 注意：在导入一个包时，你只能引用其中已导出的名字。任何“未导出”的名字在该包外均无法访问\n\n\t// 什么是导出？首字母大写代表导出,小写代表不导出\n\t//fmt.Println(\u0026quot;intSize\u0026quot;,math.intSize) // 引用未导出变量将报错\n\tfmt.Println(\u0026quot;MaxInt\u0026quot;, math.MaxInt)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e另一方面, 由于\u003ccode\u003eintSize\u003c/code\u003e的名称以小写字母开头，因此它们只能在\u003ccode\u003emath\u003c/code\u003e中使用。如果您在另一个包中导入了 \u003ccode\u003emath\u003c/code\u003e，则不能访问这个标识符。\u003c/p\u003e\n\n\u003ch2\u003e思考题\u003c/h2\u003e\n\n\u003col\u003e\n\u003cli\u003e导入\u003ccode\u003emath\u003c/code\u003e包, 通过\u003ccode\u003eSqrt\u003c/code\u003e函数求 9 的平方根并打印\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003chr\u003e\n\n\u003ch2\u003e项目地址\u003c/h2\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/Zhouchaowen/golang-tutorial\"\u003ehttps://github.com/Zhouchaowen/golang-tutorial\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "周刊导航栏怎么没了",
+      "Link": "https://studygolang.com/topics/16291#reply0",
+      "Description": "\u003cp\u003e周刊弄到导航栏啊，干嘛呢\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
