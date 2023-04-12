@@ -14,7 +14,7 @@
     </item>
     <item>
       <title>go怎么实现并发啊</title>
-      <link>https://studygolang.com/topics/16290#reply7</link>
+      <link>https://studygolang.com/topics/16290#reply8</link>
       <description>&lt;p&gt;&lt;a href=&#34;/user/Neightly&#34; title=&#34;@Neightly&#34;&gt;@Neightly&lt;/a&gt;  舒服么&lt;/p&gt;&#xA;</description>
     </item>
     <item>
@@ -102,6 +102,11 @@
       <title>两个goroutine 循环打印1~10</title>
       <link>https://studygolang.com/topics/15226#reply15</link>
       <description>&lt;p&gt;今天面试遇到&amp;rdquo;两个goroutine 循环打印1~100&amp;rdquo;&#xA;思路是一个goroutine放数据,一个goroutine读数据,可是结果却是乱序的&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;func Test_0(t *testing.T) {&#xA;&#x9;//fmt.Println(&amp;quot;123&amp;quot;)&#xA;&#x9;c1 := make(chan int)&#xA;&#x9;wg := sync.WaitGroup{}&#xA;&#x9;wg.Add(2)&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for i := 0; i &amp;lt; 10; i += 2 {&#xA;&#x9;&#x9;&#x9;c1 &amp;lt;- 1&#xA;&#x9;&#x9;&#x9;fmt.Print(i)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;wg.Done()&#xA;&#x9;}()&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for i := 1; i &amp;lt; 10; i += 2 {&#xA;&#x9;&#x9;&#x9;&amp;lt;-c1&#xA;&#x9;&#x9;&#x9;fmt.Print(i)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;wg.Done()&#xA;&#x9;}()&#xA;&#x9;wg.Wait()&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;=== RUN   Test_0&#xA;0132457689&amp;mdash; PASS: Test_0 (0.00s)&#xA;PASS&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-分割线&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-&lt;/p&gt;&#xA;&#xA;&lt;p&gt;之后看了晚上的解答,只是循环的时候从+2-&amp;gt;++,奇怪?这样就没问题呢?&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;&#xA;func Test_dongchedi(t *testing.T) {&#xA;&#x9;//fmt.Println(&amp;quot;123&amp;quot;)&#xA;&#x9;c1 := make(chan int)&#xA;&#x9;wg := sync.WaitGroup{}&#xA;&#x9;wg.Add(2)&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for i := 1; i &amp;lt;= 10; i++ {&#xA;&#x9;&#x9;&#x9;c1 &amp;lt;- 1&#xA;&#x9;&#x9;&#x9;if i%2 == 1 {&#xA;&#x9;&#x9;&#x9;&#x9;fmt.Print(i)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;wg.Done()&#xA;&#x9;}()&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for i := 1; i &amp;lt;= 10; i++ {&#xA;&#x9;&#x9;&#x9;&amp;lt;-c1&#xA;&#x9;&#x9;&#x9;if i%2 == 0 {&#xA;&#x9;&#x9;&#x9;&#x9;fmt.Print(i)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;wg.Done()&#xA;&#x9;}()&#xA;&#x9;//c1 &amp;lt;- 1&#xA;&#x9;wg.Wait()&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;=== RUN   Test_dongchedi&#xA;12345678910&amp;mdash; PASS: Test_0(0.00s)&#xA;PASS&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>go怎么实现并发啊</title>
+      <link>https://studygolang.com/topics/16290#reply7</link>
+      <description>&lt;p&gt;&lt;a href=&#34;/user/Neightly&#34; title=&#34;@Neightly&#34;&gt;@Neightly&lt;/a&gt;  舒服么&lt;/p&gt;&#xA;</description>
     </item>
   </channel>
 </rss>
