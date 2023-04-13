@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>多线程中的锁如何保证变量和可视性 - 程序员</title>
+      <link>https://www.v2ex.com/t/932290</link>
+      <description>&lt;h2&gt;C&lt;/h2&gt;&#xA;&lt;p&gt;C 语言 POSIX 线程目定义了互斥量，如果临界区的代码更新了全局变量的值，那么在临界区结束之后通过什么机制来保证全局变量的可视性？&lt;/p&gt;&#xA;&lt;h3&gt;个人猜测？&lt;/h3&gt;&#xA;&lt;p&gt;在线程 unlock 的时候刷新自己缓存的值到主存，这样的话由于互斥访问所有的线程看到的都是最新的数据，并且临界区执行完成后的刷新保证后续的线程看到的也是最新的。&lt;/p&gt;&#xA;&lt;p&gt;但是这样还有问题，就是线程是刷新线程本地的全部缓存到主存？还是只是和临界区相关变量的缓存到主存？具体的底层指令是啥或者原理是啥？ &lt;/p&gt;&#xA;&lt;h2&gt;Java&lt;/h2&gt;&#xA;&lt;p&gt;其实 Java 也有一样的问题，搜索给出的答案都是内存屏障、Happen-before 原则，但是没有看到内存屏障、Happen-before 这些东西的底层原理或者伪代码解释~&lt;/p&gt;&#xA;&lt;p&gt;希望能给出详细的解释或者权威的引用文档~&lt;/p&gt;&#xA;</description>
+      <author>Suomea</author>
+      <pubDate>13 Apr 2023 09:14:38 +0000</pubDate>
+    </item>
+    <item>
       <title>正则问题 - 问与答</title>
       <link>https://www.v2ex.com/t/932289</link>
       <description>&lt;pre&gt;&lt;code&gt;a = &#39;1411230078111&#39;&#xA;s = &#39;1411230078111ymm_Semm_87d ymm_1411230078111Semm_87d&#39;&#xA;c = 7&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;要求删除 s 里面的 c 但 a 里面的不删除&lt;/li&gt;&#xA;&lt;li&gt;a 在 s 里面的位置是不规则的，上面只是 2 个例子&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
