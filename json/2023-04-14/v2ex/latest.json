@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "istio 如何让在 pod 里请求自己的 inbound route？ - Kubernetes",
+      "Link": "https://www.v2ex.com/t/932590",
+      "Description": "\u003cp\u003e我们的服务原来是请求统一的 envoy 网关，再来分发到对应服务的。\u003c/p\u003e\n\u003cp\u003e想用 istio virtual service ，配置好 route （测试发现只能创建 inbound route ），通过\u003ccode\u003egateway=mesh\u003c/code\u003e把这些路由规则发到每个 pod 的 sidecar 里去。这样服务只要请求自己这个 pod 的 sidecar ，就能靠 sidecar 的 proxy 转发到路由规则对应的服务里去了。（也就不需要那个中心的 envoy 网关来处理集群内部点对点的请求了）\u003c/p\u003e\n\u003cp\u003e我知道，可以直接请求对应的\u003ccode\u003ea-service.namespace.svc.cluster.local\u003c/code\u003e，就能请求到 mesh 里的目标服务了。但这样我对 service 名字的管理会比较麻烦，加上一些历史原因（要改很多微服务的代码）。所以，还是希望请求同一个 host ，用 path 来做路由。\u003c/p\u003e\n\u003cp\u003e现在卡了几个问题：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e如何请求自己 pod 的 sidecar ？在不跨 pod/跨节点的情况下，最快的触发 sidecar 的 envoy inbound route rule ？\u003c/li\u003e\n\u003cli\u003evirtual service 如果出现 match 规则里带了 port(不是 80 的 port)，那个 route 规则好像就会从 sidecar 的 envoy route 规则里消失了。是不是缺什么配置？或者\u003ccode\u003egateway=mesh\u003c/code\u003e这种全局规则会有限制？\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "nicholasxuu",
+      "PubDate": "2023-04-14T09:40:13Z"
+    },
+    {
       "Title": "找到土区 AppleID 付款方式添加 OlduBil 虚拟卡时提示无法验证付款信息的问题所在了 - Apple",
       "Link": "https://www.v2ex.com/t/932589",
       "Description": "\u003cp\u003e好不容易注册好 OlduBil ，AppleID 付款方式绑定的时候提示“Cannot Verify Payment Information. Contact Apple Support for more information.”。\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://files.catbox.moe/b4rlv0.png\"/\u003e\n试过很多次，也查了 OlduBil 虚拟卡是确定能绑定到 AppleID 的。过了几天突然想起可能是 AppleID 姓名与虚拟卡的姓名不一致导致的。修改后就顺利添加成功了\u003c/p\u003e\n",
