@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "发现一个神奇的事情(辽宁家宽移动)，有大佬能给孩子解释下吗 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/932631",
+      "Description": "今天 ping 了一下 192.168.1.1 ，居然能 ping 通？！后来我还以为我内网网段设的是 192.168.1 段的，然后突然看到延迟有点高，大概 9ms ，然后我想局域网这么搞的延迟有点离谱（我还以为哪里的路由有问题了_(:з」∠)_），然后就路由追中了一下结果发现了一个神奇的结果，是跳到公网然后跳转到 192.168.1.1 了。。。。有大佬能解释下这个是什么原理吗。\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://imgur.com/a/S4LiE76\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/a/S4LiE76\u003c/a\u003e",
+      "Author": "lnaxk",
+      "PubDate": "2023-04-14T13:05:33Z"
+    },
+    {
+      "Title": "注册好了 Onekey 虚拟卡，但是不懂怎么充值啊 - OpenAI",
+      "Link": "https://www.v2ex.com/t/932630",
+      "Description": "\u003cp\u003e我主要是没有接触过虚拟货币，应该去哪买虚拟币，买哪种？我看了下充值的时候如下图\n\u003ca href=\"https://freeimage.host/i/HvaAImx\" rel=\"nofollow\"\u003e\u003cimg alt=\"HvaAImx.md.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://iili.io/HvaAImx.md.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "NanJi",
+      "PubDate": "2023-04-14T13:05:25Z"
+    },
+    {
       "Title": "JS 有哪些现成的库能够方便的对业务对象导出必要的属性(JSON)或导入 Json 对象? - 问与答",
       "Link": "https://www.v2ex.com/t/932629",
       "Description": "\u003cp\u003e常见的,业务对象中的的某些属性需要导出为 JSON 对象,或者相反,将 Json 对象的值赋值(导入)给业务对象.\n然而 Json 对象的属性名称并不一定是就是业务对象中的属性名称,也不是所有的 Json 对象的值都该被赋值(导入).\u003c/p\u003e\n\u003cp\u003e针对属性默认有如下的约定:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e属性值与默认值一样的不要导出\u003c/li\u003e\n\u003cli\u003e属性值为空(\u003ccode\u003eundefined\u003c/code\u003e)的不要导出\u003c/li\u003e\n\u003cli\u003e不可枚举的属性不要导出\u003c/li\u003e\n\u003cli\u003e以\"\u003ccode\u003e$\u003c/code\u003e\"开头的可枚举属性不要导出,但可以导入(赋值)\u003c/li\u003e\n\u003cli\u003e只读属性可以导出,但不能导入(赋值)\u003c/li\u003e\n\u003cli\u003e定义的属性默认为可读写,可枚举,可导出,可赋值\u003c/li\u003e\n\u003cli\u003e未定义的对象属性为内部属性,不可导入和赋值\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e例如,假如能够用修饰器定义属性的话:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003e@Properties\nexport class ContactWay extends AbstractModel {\n  @Property({alias:'启', type: 'Boolean', default: true}) enabled?: boolean;\n  @Property({alias:'私', type: 'Boolean', default: true}) private?: boolean;\n  @Property({alias:'类', type: 'String'}) category?: string;\n  @Property({alias:'型', type: 'String'}) type?: string;\n  @Property({alias:'值', type: 'String', encrypted: true}) value?: string | null;\n  @Property({alias:'起日', type: 'Date'}) startTime?: string | null;\n  @Property({alias:'止日', type: 'Date'}) endTime?: string | null;\n\n  constructor(options?) {\n    if (typeof options === 'string') options = {'值': options};\n    super(options);\n  }\n}\n\n@Properties\nexport class ContactPhone extends ContactWay {\n  constructor(options?) {\n    super(options);\n    this['type'] = '电话';\n  }\n}\n\n@Properties\nexport class ContactEmail extends ContactWay {\n  constructor(options?) {\n    super(options);\n    this['type'] = '邮件';\n  }\n}\n\n@Properties\nexport class ContactAddress extends ContactWay {\n  @Property({alias:'国', type: 'String', encrypted: true}) country!: string;\n  @Property({alias:'省', type: 'String', encrypted: true}) province!: string;\n  @Property({alias:'市', type: 'String', encrypted: true}) city!: string;\n  @Property({alias:'区', type: 'String', encrypted: true}) district!: string;\n  @Property({alias:'镇', type: 'String', encrypted: true}) town!: string;\n  @Property({alias:'邮编', type: 'String', encrypted: true}) zip!: string;\n\n  constructor(options?) {\n    super(options);\n    this['type'] = '地址';\n  }\n}\n\n@Properties\nexport class Contacts extends AbstractModel {\n  @Property({alias:'电话', type: arrayOf(ContactPhone), encrypted: true}) phones!: ContactPhone[];\n  @Property({alias:'地址', type: arrayOf(ContactAddress), encrypted: true}) addresses!: ContactAddress[];\n  @Property({alias:'邮件', type: arrayOf(ContactEmail), encrypted: true}) emails!: ContactEmail[];\n}\n\n// 导入\nconst contacts = new Contacts({\n  '电话': ['1234567890', {'私': false, '值': '010-1111111', '类': '单位'}],\n  '地址': [{'国': '中国', '省': '福建', '市': '...'}],\n  '邮件': ['ah@example.com']\n})\n\n// 导出\nJSON.stringify(contacts)\n{\n  \"电话\": [{\"值\": \"1234567890\", \"型\": \"电话\"}, {\"私\": false, \"值\": \"010-1111111\", \"类\": \"单位\", \"型\": \"电话\"}],\n  \"地址\": [{\"国\": \"中国\", \"省\": \"福建\", \"市\": \"...\", \"型\": \"地址\"}],\n  \"邮件\": [{\"值\": \"ah@example.com\", \"型\": \"邮件\"}]\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -11,7 +25,7 @@
       "PubDate": "2023-04-14T12:54:40Z"
     },
     {
-      "Title": "以 CPU only 模式运行 Stable Diffusion + Lora 模型 - 程序员",
+      "Title": "以 CPU only 模式运行 Stable Diffusion + Lora 模型 - 推广",
       "Link": "https://www.v2ex.com/t/932628",
       "Description": "\u003cp\u003eStable Diffusion 是一个知名文字转图像的 AI 模型\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"img\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"http://accu.cc/img/ai/stable_diffusion/01.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://accu.cc/content/ai/stable_diffusion/\" rel=\"nofollow\"\u003ehttp://accu.cc/content/ai/stable_diffusion/\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "Mohanson",
