@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有经历过『内网资源站』的年代的 v 友请进 - 分享发现</title>
+      <link>https://www.v2ex.com/t/932576</link>
+      <description>&lt;p&gt;突发奇想，想到了&lt;strong&gt;内网资源站&lt;/strong&gt;这个词，其实也不是什么新鲜玩意，就是在内网建立影音服务器，软件下载服务器等等&lt;/p&gt;&#xA;&lt;p&gt;这东西以前&lt;strong&gt;（大约十几年前，宽带接入速度还没起来或者没法起来的时候）&lt;/strong&gt;在大学校园网，大型网吧，或者说是城中村出租屋的『私人宽带 /微型宽带』上比较常见，数据源有很多，比如用户上传（多见于 FTP ），比如 BT/PT 下载。总之就是，&lt;strong&gt;把流量大头（影音，下载）尽可能在内网终结，以节省可怜的小水管外网带宽&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;现在人们在线看视频的需求高了，宽带接入条件也大大改善，内网资源站这个东西逐渐不再吃香，毕竟你不可能把快手抖音 B 站爱奇艺的视频都缓存下来罢&lt;/p&gt;&#xA;&lt;p&gt;楼主是 00 后，没经历过那个年代，不过也对此比较好奇，毕竟那算是&lt;strong&gt;互联网中立年代&lt;/strong&gt;，或者说&lt;strong&gt;互联网初创年代&lt;/strong&gt;的一份记忆（不知道这么说对不对，还望大佬轻喷）&lt;/p&gt;&#xA;&lt;p&gt;上次，我在一个电子群里和另一个群友交流过这个东西，&lt;strong&gt;现以第一人称转述他的经历如下&lt;/strong&gt;，做抛砖引玉之用&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;十几年前吧，我所在的大学，网络拓扑很简单，就是一个宿舍楼做一个二层广播域，所有寝室拉百兆网到一楼交换机，交换机再用千兆 SFP 接入其他网络（可能是入学校机房，猜的）&#xA;&#xA;那时候隔壁寝室有个哥们，在宿舍玩 PT ，挂了几块旧 IDE 硬盘，日夜炒豆声响不停，也不知道是不是有什么 py 交易，他的舍友居然没有找他麻烦&#xA;&#xA;玩 PT ，自然有很多资源。那哥们开了个 FTP 服务器，把其中一块 PT 盘挂了上去&#xA;&#xA;从此，整栋楼疯狂了，人人都来访问，他宿舍的百兆网口天天跑满。如果他下载了新片热片的高清资源，那个情况，简直可以用开元盛世来形容.......&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;不知道各位 V 友对于内网资源站有没有一份独特的记忆？分享出来让大家听听吧！&lt;/p&gt;&#xA;</description>
+      <author>MFWT</author>
+      <pubDate>14 Apr 2023 08:55:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>ChatGPT Lint - 让 ChatGPT 来 review 代码 - 分享创造</title>
+      <link>https://www.v2ex.com/t/932575</link>
+      <description>&lt;p&gt;之前做了一个使用 ChatGPT 来处理纯文本的工具 PTPT （ &lt;a href=&#34;https://v2ex.com/t/927694&#34; rel=&#34;nofollow&#34;&gt;https://v2ex.com/t/927694&lt;/a&gt; ），最近新添加了一个实用的功能：lint 。传统的 linter 一般只能在特定的语言上使用，而 ChatGPT 能自动适应各种语言，因此萌生了这个想法。&lt;/p&gt;&#xA;&lt;p&gt;在实现的过程中，进行了一些思考，也提出了一些解决方法，也一并分享出来，欢迎大家交流。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/CO7nsem.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h2&gt;存在的问题&lt;/h2&gt;&#xA;&lt;h3&gt;行号问题&lt;/h3&gt;&#xA;&lt;p&gt;给 ChatGPT 提供一整个代码文件之后，line:char 会出现丢失的情况。猜想是 tokenize 的时候丢失了。如果要解决行号，在每一行开头手动补一个行号即可。char 的问题可能无法解决，但是作为 lint 来说没有 char 也还行。&lt;/p&gt;&#xA;&lt;h3&gt;输出更有用的建议&lt;/h3&gt;&#xA;&lt;p&gt;目前经常出现一些没有用的建议或者是对语言的特性不了解、对上下文不了解等，导致模型提出一些无效的建议，需要再加人工去筛选。&#xA;猜想目前使用的是 GPT3.5 的模型，在 cursor 中，使用 GPT4 的模型，在一些比较明显的问题上，能够检测出来并给出比较有用的建议。&lt;/p&gt;&#xA;&lt;h3&gt;经常性输出 undefined/undeclared/unused 等建议&lt;/h3&gt;&#xA;&lt;p&gt;GPT 是个单向的模型，相比于 BERT ，对上下文理解能力略差。这是 GPT 先天的不足，经过 prompt 的调教暂时还无法解决。&lt;/p&gt;&#xA;&lt;h2&gt;安装&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;go install github.com/leslieleung/ptpt@latest&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;或从 &lt;a href=&#34;https://github.com/LeslieLeung/PTPT/releases&#34; rel=&#34;nofollow&#34;&gt;Release&lt;/a&gt; 下载&lt;/p&gt;&#xA;&lt;h2&gt;使用方法&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;&amp;gt; ptpt lint &amp;lt;file&amp;gt;&#xA;&amp;gt; ptpt lint -l zh &amp;lt;file&amp;gt; # 中文建议&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;项目地址： &lt;a href=&#34;https://github.com/LeslieLeung/PTPT&#34; rel=&#34;nofollow&#34;&gt;https://github.com/LeslieLeung/PTPT&lt;/a&gt;, 欢迎 star&lt;/p&gt;&#xA;</description>
+      <author>LeslieLeung</author>
+      <pubDate>14 Apr 2023 08:55:30 +0000</pubDate>
+    </item>
+    <item>
       <title>求助 chatgpt plus 支付失败 - OpenAI</title>
       <link>https://www.v2ex.com/t/932573</link>
       <description>&lt;p&gt;各位大佬：&#xA;陆陆续续折腾了 chatgpt plus 有 1,2 个月，绑卡还是不成功。 换过代理，用过机场，用过自建 vps ；换过虚拟信用卡，用过 depay ，用过 nobepay ，之前还折腾了一段 N26 ，但是 N26 中国需要居住证了，坑爹；换过账号，用 google 账号，微软账号，自建账号。各种折腾，都失败了。&lt;/p&gt;&#xA;&lt;p&gt;目前情况是，google 和微软的账号还能登录，能使用，但是就是 plus 绑卡失败，自建 vps 直接显示拒绝访问。&lt;/p&gt;&#xA;&lt;p&gt;诸位大佬又在 3 月下旬还成功绑卡的吗？ 另外有没有代绑卡的？&lt;/p&gt;&#xA;</description>
