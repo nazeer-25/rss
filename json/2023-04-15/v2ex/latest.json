@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教一个 clickhouse 和 filebeat 的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/932842",
+      "Description": "如题，当前使用 kafka filebeat clickhouse 收集网站访问日志入库. nginx 日志换成 json 格式扔到 kafka ，再在 clickhouse 分别创建实体表和 kafka 引擎表消费 kafka 中的 json 以及视图表来将 nginx 访问日志的按照 字段 分别存入 clickhouse 实体表. \u003cbr /\u003e\u003cbr /\u003efilebeat 中配置了 field_under_root. \u003cbr /\u003e\u003cbr /\u003ekafka 中对应的 topic 数据大概是这样的\u003cbr /\u003e\u003cbr /\u003e{\"@timestamp\":\"timestamp\",\"uri\":\"/abc.html\",\"http_code\":\"404\",\"remote_ip\":\"10.2.2.3\"}\u003cbr /\u003e\u003cbr /\u003e入库后实体表字段大概是这样的:  \u003cbr /\u003e\u003cbr /\u003euri http_code remote_ip\u003cbr /\u003e\u003cbr /\u003e查询的时候大概是这样的:\u003cbr /\u003e\u003cbr /\u003eselect uri, http_code, remote_ip from ngx_acc_log_entry;\u003cbr /\u003e\u003cbr /\u003e/abc.html 404 10.2.2.3\u003cbr /\u003e\u003cbr /\u003e/index.php 200 10.5.6.6\u003cbr /\u003e\u003cbr /\u003e...\u003cbr /\u003e\u003cbr /\u003e但是 iis 的日志不支持 json ,他的日志各项值是以空格为分隔符. 所以我在 filebeat 配置文件中使用 dissect 将日志转化为了 json. 在 kafka 中大概是这样的:\u003cbr /\u003e\u003cbr /\u003e{\"@timestamp\":\"timestamp\",\"dissect\":{\"uri\":\"/abc.html\",\"http_code\":\"404\",\"remote_ip\":\"10.2.2.3\"}\u003cbr /\u003e\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003e实际上我想要的数据在 dissect 这个字段内，然而在 clickhouse 中创建 kafka 引擎表的时候解析不到 dissect 这个对象中的值了.\u003cbr /\u003e\u003cbr /\u003e我尝试了两个办法：\u003cbr /\u003e\u003cbr /\u003e1. 在 clickhouse 创建 kafka 引擎表 的时候，将字段 dissect 类型设置为 Nested. 这种情况下从读到的数据是 {} ，为空.\u003cbr /\u003e\u003cbr /\u003e2. 尝试配置 filebeat 把日志需要入库的值从 \"dissect\" 下挪出来，也就是变成\u003cbr /\u003e\u003cbr /\u003e{\"@timestamp\":\"timestamp\",\"uri\":\"/abc.html\",\"http_code\":\"404\",\"remote_ip\":\"10.2.2.3\"}.\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e没找到解决方案， 不知道 v 友是否有做过这种的？",
+      "Author": "proxychains",
+      "PubDate": "2023-04-15T17:58:37Z"
+    },
+    {
       "Title": "NAT6 问题。。。 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/932841",
       "Description": "由于某些原因，必须使用 NAT6\u003cbr /\u003e一切都设置好后，ping 能通了，tcping 也能通了，路由跟踪也能通了，但是网页却打不开\u003cbr /\u003e准确来说是有时能开有时不能开\u003cbr /\u003e更准确来说是只加载了标题，有时候标题都加载不出\u003cbr /\u003e于是 Wireshark 抓包之，提示\u003cbr /\u003eTCP Spurious Retransmission\u003cbr /\u003eTCP ZeroWindow\u003cbr /\u003eTCP Retransmission\u003cbr /\u003e什么什么的，有办法解决吗？\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://imgur.com/SYLwtgL\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/SYLwtgL\u003c/a\u003e\u003cbr /\u003e尝试过调整 MTU ，WAN 调整为 1280 ，或者是 WAN 1500 ，LAN 调整 1280 ，MSS 关了又开了都没用\u003cbr /\u003e（ WAN 口 DHCP 获取 IP ，不存在 PPPoE ）",
