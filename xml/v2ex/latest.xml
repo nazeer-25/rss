@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>UCS 6200 和 Nexus 5000 的主要区别？ - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/932843</link>
+      <description>我最近在咸鱼上看到一些 UCS 6200 在卖，它们和 N5K 的硬件规格很像，每一个型号都能找到规格相近的 N5K 交换机型号，从一些文档看它们也运行 NxOS ，但它们比同规格的 N5K 卖得更便宜。这些是 Nexus 的换皮产品还是真的有什么独特的功能和限制的？</description>
+      <author>HawkinsSherpherd</author>
+      <pubDate>15 Apr 2023 18:16:04 +0000</pubDate>
+    </item>
+    <item>
       <title>请教一个 clickhouse 和 filebeat 的问题 - 问与答</title>
       <link>https://www.v2ex.com/t/932842</link>
       <description>如题，当前使用 kafka filebeat clickhouse 收集网站访问日志入库. nginx 日志换成 json 格式扔到 kafka ，再在 clickhouse 分别创建实体表和 kafka 引擎表消费 kafka 中的 json 以及视图表来将 nginx 访问日志的按照 字段 分别存入 clickhouse 实体表. &lt;br /&gt;&lt;br /&gt;filebeat 中配置了 field_under_root. &lt;br /&gt;&lt;br /&gt;kafka 中对应的 topic 数据大概是这样的&lt;br /&gt;&lt;br /&gt;{&#34;@timestamp&#34;:&#34;timestamp&#34;,&#34;uri&#34;:&#34;/abc.html&#34;,&#34;http_code&#34;:&#34;404&#34;,&#34;remote_ip&#34;:&#34;10.2.2.3&#34;}&lt;br /&gt;&lt;br /&gt;入库后实体表字段大概是这样的:  &lt;br /&gt;&lt;br /&gt;uri http_code remote_ip&lt;br /&gt;&lt;br /&gt;查询的时候大概是这样的:&lt;br /&gt;&lt;br /&gt;select uri, http_code, remote_ip from ngx_acc_log_entry;&lt;br /&gt;&lt;br /&gt;/abc.html 404 10.2.2.3&lt;br /&gt;&lt;br /&gt;/index.php 200 10.5.6.6&lt;br /&gt;&lt;br /&gt;...&lt;br /&gt;&lt;br /&gt;但是 iis 的日志不支持 json ,他的日志各项值是以空格为分隔符. 所以我在 filebeat 配置文件中使用 dissect 将日志转化为了 json. 在 kafka 中大概是这样的:&lt;br /&gt;&lt;br /&gt;{&#34;@timestamp&#34;:&#34;timestamp&#34;,&#34;dissect&#34;:{&#34;uri&#34;:&#34;/abc.html&#34;,&#34;http_code&#34;:&#34;404&#34;,&#34;remote_ip&#34;:&#34;10.2.2.3&#34;}&lt;br /&gt;&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;实际上我想要的数据在 dissect 这个字段内，然而在 clickhouse 中创建 kafka 引擎表的时候解析不到 dissect 这个对象中的值了.&lt;br /&gt;&lt;br /&gt;我尝试了两个办法：&lt;br /&gt;&lt;br /&gt;1. 在 clickhouse 创建 kafka 引擎表 的时候，将字段 dissect 类型设置为 Nested. 这种情况下从读到的数据是 {} ，为空.&lt;br /&gt;&lt;br /&gt;2. 尝试配置 filebeat 把日志需要入库的值从 &#34;dissect&#34; 下挪出来，也就是变成&lt;br /&gt;&lt;br /&gt;{&#34;@timestamp&#34;:&#34;timestamp&#34;,&#34;uri&#34;:&#34;/abc.html&#34;,&#34;http_code&#34;:&#34;404&#34;,&#34;remote_ip&#34;:&#34;10.2.2.3&#34;}.&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;没找到解决方案， 不知道 v 友是否有做过这种的？</description>

@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "UCS 6200 和 Nexus 5000 的主要区别？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/932843",
+      "Description": "我最近在咸鱼上看到一些 UCS 6200 在卖，它们和 N5K 的硬件规格很像，每一个型号都能找到规格相近的 N5K 交换机型号，从一些文档看它们也运行 NxOS ，但它们比同规格的 N5K 卖得更便宜。这些是 Nexus 的换皮产品还是真的有什么独特的功能和限制的？",
+      "Author": "HawkinsSherpherd",
+      "PubDate": "2023-04-15T18:16:04Z"
+    },
+    {
       "Title": "请教一个 clickhouse 和 filebeat 的问题 - 问与答",
       "Link": "https://www.v2ex.com/t/932842",
       "Description": "如题，当前使用 kafka filebeat clickhouse 收集网站访问日志入库. nginx 日志换成 json 格式扔到 kafka ，再在 clickhouse 分别创建实体表和 kafka 引擎表消费 kafka 中的 json 以及视图表来将 nginx 访问日志的按照 字段 分别存入 clickhouse 实体表. \u003cbr /\u003e\u003cbr /\u003efilebeat 中配置了 field_under_root. \u003cbr /\u003e\u003cbr /\u003ekafka 中对应的 topic 数据大概是这样的\u003cbr /\u003e\u003cbr /\u003e{\"@timestamp\":\"timestamp\",\"uri\":\"/abc.html\",\"http_code\":\"404\",\"remote_ip\":\"10.2.2.3\"}\u003cbr /\u003e\u003cbr /\u003e入库后实体表字段大概是这样的:  \u003cbr /\u003e\u003cbr /\u003euri http_code remote_ip\u003cbr /\u003e\u003cbr /\u003e查询的时候大概是这样的:\u003cbr /\u003e\u003cbr /\u003eselect uri, http_code, remote_ip from ngx_acc_log_entry;\u003cbr /\u003e\u003cbr /\u003e/abc.html 404 10.2.2.3\u003cbr /\u003e\u003cbr /\u003e/index.php 200 10.5.6.6\u003cbr /\u003e\u003cbr /\u003e...\u003cbr /\u003e\u003cbr /\u003e但是 iis 的日志不支持 json ,他的日志各项值是以空格为分隔符. 所以我在 filebeat 配置文件中使用 dissect 将日志转化为了 json. 在 kafka 中大概是这样的:\u003cbr /\u003e\u003cbr /\u003e{\"@timestamp\":\"timestamp\",\"dissect\":{\"uri\":\"/abc.html\",\"http_code\":\"404\",\"remote_ip\":\"10.2.2.3\"}\u003cbr /\u003e\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003e实际上我想要的数据在 dissect 这个字段内，然而在 clickhouse 中创建 kafka 引擎表的时候解析不到 dissect 这个对象中的值了.\u003cbr /\u003e\u003cbr /\u003e我尝试了两个办法：\u003cbr /\u003e\u003cbr /\u003e1. 在 clickhouse 创建 kafka 引擎表 的时候，将字段 dissect 类型设置为 Nested. 这种情况下从读到的数据是 {} ，为空.\u003cbr /\u003e\u003cbr /\u003e2. 尝试配置 filebeat 把日志需要入库的值从 \"dissect\" 下挪出来，也就是变成\u003cbr /\u003e\u003cbr /\u003e{\"@timestamp\":\"timestamp\",\"uri\":\"/abc.html\",\"http_code\":\"404\",\"remote_ip\":\"10.2.2.3\"}.\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e没找到解决方案， 不知道 v 友是否有做过这种的？",
