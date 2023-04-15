@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "怎样让浏览器使用指定的网卡？ - Linux",
+      "Link": "https://www.v2ex.com/t/932747",
+      "Description": "\u003cp\u003ecurl 可以用下面的方式通过指定的网卡发送数据\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ecurl --interface tun0 httpbin.org/ip\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e浏览器有没有类似的方式？找了半天，发现一个 hook 的方式\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-C\"\u003e#include \u0026lt;sys/socket.h\u0026gt;\n\n#define IFACE_NAME \"wl0\"\n\nint connect(int fd, const struct sockaddr *daddr, socklen_t addrlen)\n{\n        int ret;\n\n        if (daddr-\u0026gt;sa_family == AF_INET)\n                setsockopt(fd, SOL_SOCKET, SO_BINDTODEVICE, IFACE_NAME,\n                           sizeof(IFACE_NAME));\n\n        __asm__ volatile (\n                \"syscall\"\n                : [eax]\"=a\"(ret)\n                : [rax]\"a\"(42), [rdi]\"D\"(fd), [rsi]\"S\"(daddr),\n                  [rdx]\"d\"(addrlen)\n                : \"rcx\", \"r11\", \"memory\"\n        );\n\n        return ret;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003egcc -fpic -fPIC -Wall -Wextra -shared -O3 connect.c -o connect.so\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003eexport LD_PRELOAD=\"/tmp/connect.so\" curl httpbin.org/ip\n#这样对 curl 是有效的，但是对 chrome 无效\nexport LD_PRELOAD=\"/tmp/connect.so\" /opt/google/chrome/chrome --headless --disable-gpu --dump-dom --no-sandbox\n#用 root 也无效，firefox 也是这样\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e有没有人知道咋回事？\u003c/p\u003e\n",
+      "Author": "kernelpanic",
+      "PubDate": "2023-04-15T06:42:41Z"
+    },
+    {
       "Title": "Mac Surge 如何给应用添加代理？ - Surge",
       "Link": "https://www.v2ex.com/t/932745",
       "Description": "\u003cp\u003e我在请求器里面找到了那个应用的请求右键为 xxx 增加规则，不论是给域名还是 app ，给它添加了代理后但是还是不能用，这是怎么回事？或者有没有现有的解决方案？\n（ ps. 不是很想走全局代理）\u003c/p\u003e\n",

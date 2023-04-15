@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>怎样让浏览器使用指定的网卡？ - Linux</title>
+      <link>https://www.v2ex.com/t/932747</link>
+      <description>&lt;p&gt;curl 可以用下面的方式通过指定的网卡发送数据&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;curl --interface tun0 httpbin.org/ip&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;浏览器有没有类似的方式？找了半天，发现一个 hook 的方式&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;#include &amp;lt;sys/socket.h&amp;gt;&#xA;&#xA;#define IFACE_NAME &#34;wl0&#34;&#xA;&#xA;int connect(int fd, const struct sockaddr *daddr, socklen_t addrlen)&#xA;{&#xA;        int ret;&#xA;&#xA;        if (daddr-&amp;gt;sa_family == AF_INET)&#xA;                setsockopt(fd, SOL_SOCKET, SO_BINDTODEVICE, IFACE_NAME,&#xA;                           sizeof(IFACE_NAME));&#xA;&#xA;        __asm__ volatile (&#xA;                &#34;syscall&#34;&#xA;                : [eax]&#34;=a&#34;(ret)&#xA;                : [rax]&#34;a&#34;(42), [rdi]&#34;D&#34;(fd), [rsi]&#34;S&#34;(daddr),&#xA;                  [rdx]&#34;d&#34;(addrlen)&#xA;                : &#34;rcx&#34;, &#34;r11&#34;, &#34;memory&#34;&#xA;        );&#xA;&#xA;        return ret;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;gcc -fpic -fPIC -Wall -Wextra -shared -O3 connect.c -o connect.so&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;export LD_PRELOAD=&#34;/tmp/connect.so&#34; curl httpbin.org/ip&#xA;#这样对 curl 是有效的，但是对 chrome 无效&#xA;export LD_PRELOAD=&#34;/tmp/connect.so&#34; /opt/google/chrome/chrome --headless --disable-gpu --dump-dom --no-sandbox&#xA;#用 root 也无效，firefox 也是这样&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;有没有人知道咋回事？&lt;/p&gt;&#xA;</description>
+      <author>kernelpanic</author>
+      <pubDate>15 Apr 2023 06:42:41 +0000</pubDate>
+    </item>
+    <item>
       <title>Mac Surge 如何给应用添加代理？ - Surge</title>
       <link>https://www.v2ex.com/t/932745</link>
       <description>&lt;p&gt;我在请求器里面找到了那个应用的请求右键为 xxx 增加规则，不论是给域名还是 app ，给它添加了代理后但是还是不能用，这是怎么回事？或者有没有现有的解决方案？&#xA;（ ps. 不是很想走全局代理）&lt;/p&gt;&#xA;</description>
