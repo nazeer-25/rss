@@ -4,11 +4,18 @@
   "Description": "",
   "Items": [
     {
-      "Title": "有人会写合约吗？一个小活儿！给费用 - 程序员",
-      "Link": "https://www.v2ex.com/t/932906",
-      "Description": "\u003cp\u003e有人会写合约吗？一个小活儿！给费用。\n大概要求是，写一个 nft 合约 ~ \u003c/p\u003e\n\u003cp\u003e有会的留下联系方式。或者 联系邮箱 \u003ca href=\"mailto:lingguangguancha@qq.com\"\u003elingguangguancha@qq.com\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "soft101team",
-      "PubDate": "2023-04-16T05:47:01Z"
+      "Title": "如何在 Ant Design 中使用 React Hook Form? - 前端开发",
+      "Link": "https://www.v2ex.com/t/932908",
+      "Description": "\u003cp\u003e博客原文：\u003ca href=\"https://jsun.lol/blog/how-to-use-react-hook-form-in-ant-design-cn\" rel=\"nofollow\"\u003ehttps://jsun.lol/blog/how-to-use-react-hook-form-in-ant-design-cn\u003c/a\u003e\u003cbr/\u003e\n掘金：\u003ca href=\"https://juejin.cn/post/7222484074480713783\" rel=\"nofollow\"\u003ehttps://juejin.cn/post/7222484074480713783\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e前言\u003c/h2\u003e\n\u003cp\u003e先解释一下标题。我想 Ant Design 这个组件库一定是被每个 React 程序员所熟知的。作为一款由阿里背书的前端组件库，其在做后台管理等业务，尤其方便。\u003c/p\u003e\n\u003cp\u003e但是 React Hook Form 这个库，可能在国内并没有那么火。尽管 Ant Design 拥有自己的 \u003ccode\u003eForm\u003c/code\u003e 组件，但是 React Hook Form 是一个非常优秀的表单处理库\u003c/p\u003e\n\u003cp\u003e其优点在于：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e强性能，减少渲染次数\u003c/li\u003e\n\u003cli\u003e轻量无依赖\u003c/li\u003e\n\u003cli\u003e类型安全\u003c/li\u003e\n\u003cli\u003e支持多种验证库校验（如 Zod 、Yup 、Class Validator 、Ajv 等等）\u003c/li\u003e\n\u003cli\u003e支持多种 UI 库\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003eGitHub （ 3w+⭐）：\u003ca href=\"https://github.com/react-hook-form/react-hook-form\" rel=\"nofollow\"\u003ehttps://github.com/react-hook-form/react-hook-form\u003c/a\u003e\u003cbr/\u003e\n官网：\u003ca href=\"https://react-hook-form.com\" rel=\"nofollow\"\u003ehttps://react-hook-form.com\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e从功能上来说，其比 Ant Design 的 \u003ccode\u003eForm.useForm\u003c/code\u003e 要强大不少。但是 Ant Design 目前并没有官方支持 React Hook Form 。\u003c/p\u003e\n\u003ch2\u003e解决\u003c/h2\u003e\n\u003cp\u003e为了解决在 Ant Design 中使用 React Hook Form 。我为此写了一个开源库来包装 Ant Design 的 \u003ccode\u003eForm.Item\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003eGitHub: \u003ca href=\"https://github.com/jsun969/react-hook-form-antd\" rel=\"nofollow\"\u003ehttps://github.com/jsun969/react-hook-form-antd\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e示例\u003c/h2\u003e\n\u003cp\u003e\u003ca href=\"https://codesandbox.io/s/react-hook-form-antd-example-6s0i3z?file=/src/App.tsx\" rel=\"nofollow\"\u003eCodeSandbox 示例\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e其中使用了 Zod 进行表单校验\u003c/p\u003e\n\u003ch2\u003e使用\u003c/h2\u003e\n\u003ch3\u003e原表单\u003c/h3\u003e\n\u003cp\u003e首先，你可能原来有这样一个表单\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-tsx\"\u003e\u0026lt;Form onFinish={onFinish}\u0026gt;\n  \u0026lt;Form.Item\n    label=\"Username\"\n    name=\"username\"\n    rules={[\n      { required: true, message: 'Required' },\n      { max: 15, message: 'Username should be less than 15 characters' },\n    ]}\n  \u0026gt;\n    \u0026lt;Input /\u0026gt;\n  \u0026lt;/Form.Item\u0026gt;\n  \u0026lt;Form.Item\n    label=\"Password\"\n    name=\"password\"\n    rules={[{ required: true, message: 'Required' }]}\n  \u0026gt;\n    \u0026lt;Input.Password /\u0026gt;\n  \u0026lt;/Form.Item\u0026gt;\n  \u0026lt;Form.Item name=\"remember\" valuePropName=\"checked\"\u0026gt;\n    \u0026lt;Checkbox\u0026gt;Remember me\u0026lt;/Checkbox\u0026gt;\n  \u0026lt;/Form.Item\u0026gt;\n  \u0026lt;Form.Item\u0026gt;\n    \u0026lt;Button type=\"primary\" htmlType=\"submit\"\u0026gt;\n      Submit\n    \u0026lt;/Button\u0026gt;\n  \u0026lt;/Form.Item\u0026gt;\n\u0026lt;/Form\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e使用 React Hook Form\u003c/h3\u003e\n\u003cp\u003e使用 React Hook Form 的 \u003ccode\u003euseForm\u003c/code\u003e 并获取 \u003ccode\u003econtrol\u003c/code\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-ts\"\u003econst { control } = useForm({\n  defaultValues: { username: 'jsun969', password: '', remember: true },\n});\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e替换 \u003ccode\u003eForm.Item\u003c/code\u003e\u003c/h3\u003e\n\u003cp\u003e从 \u003ccode\u003ereact-hook-form-antd\u003c/code\u003e 中使用 \u003ccode\u003eFormItem\u003c/code\u003e 代替 \u003ccode\u003eForm.Item\u003c/code\u003e，将 \u003ccode\u003econtrol\u003c/code\u003e 传递给每个 \u003ccode\u003eFormItem\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e这样一来，每个 \u003ccode\u003eFormItem\u003c/code\u003e 都受到 React Hook Form 的控制，并且 \u003ccode\u003ename\u003c/code\u003e （即表单字段名）可以从 \u003ccode\u003econtrol\u003c/code\u003e 中推断\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-tsx\"\u003eimport { FormItem } from 'react-hook-form-antd';\n\n// ...\n\u0026lt;Form onFinish={onFinish}\u0026gt;\n  \u0026lt;FormItem control={control} label=\"Username\" name=\"username\"\u0026gt;\n    \u0026lt;Input /\u0026gt;\n  \u0026lt;/FormItem\u0026gt;\n  \u0026lt;FormItem control={control} label=\"Password\" name=\"password\"\u0026gt;\n    \u0026lt;Input.Password /\u0026gt;\n  \u0026lt;/FormItem\u0026gt;\n  \u0026lt;FormItem control={control} name=\"remember\" valuePropName=\"checked\"\u0026gt;\n    \u0026lt;Checkbox\u0026gt;Remember me\u0026lt;/Checkbox\u0026gt;\n  \u0026lt;/FormItem\u0026gt;\n  \u0026lt;Form.Item\u0026gt;\n    \u0026lt;Button type=\"primary\" htmlType=\"submit\"\u0026gt;\n      Submit\n    \u0026lt;/Button\u0026gt;\n  \u0026lt;/Form.Item\u0026gt;\n\u0026lt;/Form\u0026gt;;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e用表单验证库（本文中使用 Zod ，其他验证库使用方法见 \u003ca href=\"https://github.com/react-hook-form/resolvers\" rel=\"nofollow\"\u003eReact Hook Form Resolver\u003c/a\u003e）\n代替原先的 \u003ccode\u003erules\u003c/code\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-ts\"\u003eimport { zodResolver } from '@hookform/resolvers/zod';\nimport * as z from 'zod';\n\n// ...\n\nconst schema = z.object({\n  username: z\n    .string()\n    .min(1, { message: 'Required' })\n    .max(15, { message: 'Username should be less than 15 characters' }),\n  password: z.string().min(1, { message: 'Required' }),\n  remember: z.boolean(),\n});\n\nconst App = () =\u0026gt; {\n  const { control } = useForm({\n    defaultValues: { username: 'jsun969', password: '', remember: true },\n    resolver: zodResolver(schema),\n  });\n  // ...\n};\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在 \u003ccode\u003eonFinish\u003c/code\u003e 中使用 React Hook Form 的 \u003ccode\u003ehandleSubmit\u003c/code\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-tsx\"\u003econst { control, handleSubmit } = useForm(...);\n\nreturn (\n    \u0026lt;Form\n      style={{ maxWidth: 600 }}\n      onFinish={handleSubmit((data) =\u0026gt; {\n        ...\n      })}\n    \u0026gt;\n    // ...\n    \u0026lt;/Form\u0026gt;\n);\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e搞定\u003c/h2\u003e\n\u003cp\u003e如此一来，即可在 Ant Design 中很方便地使用 React Hook Form 。\u003cbr/\u003e\n以上使用教程的结果即为 \u003ca href=\"https://codesandbox.io/s/react-hook-form-antd-example-6s0i3z?file=/src/App.tsx\" rel=\"nofollow\"\u003eCodeSandbox 示例\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "jsun969",
+      "PubDate": "2023-04-16T05:53:45Z"
+    },
+    {
+      "Title": "一个不曾存在的春天 - 上海",
+      "Link": "https://www.v2ex.com/t/932907",
+      "Description": "\u003cp\u003e\u003ca href=\"https://youtu.be/rKkBK3Aq_dA\" rel=\"nofollow\"\u003ehttps://youtu.be/rKkBK3Aq_dA\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "leafre",
+      "PubDate": "2023-04-16T05:53:45Z"
     },
     {
       "Title": "现在有使用 android 原生系统+双卡双待的方案么？ - Android",
@@ -137,7 +144,7 @@
       "PubDate": "2023-04-16T03:32:52Z"
     },
     {
-      "Title": "2023 今年最好赚的是中国股票市场 - 分享发现",
+      "Title": "2023 今年最好赚的是中国股票市场 - 投资",
       "Link": "https://www.v2ex.com/t/932880",
       "Description": "\u003cp\u003e2023 年最好赚的是中国股票市场！\u003c/p\u003e\n\u003cp\u003e危机即转机，3 年口罩事件清理了泡沫，非常多的公司腰斩再腰斩。大量房地产都经历倒闭边缘。。。\u003c/p\u003e\n\u003cp\u003e现在署光初现，坚决做多。资本市场基本领先实体经济 1 年左右。参考 2008 年。。。。\u003c/p\u003e\n\u003cp\u003e欢迎来股票群吹水\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://t.me/+3eS4-JfOBDc0NDgx\" rel=\"nofollow\"\u003ehttps://t.me/+3eS4-JfOBDc0NDgx\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "illustrator199",
@@ -268,6 +275,13 @@
       "Description": "\u003cp\u003e如题，近期有个运营商域名一直在 Pihole 和 DNScloak 前头，手机里面只插了张电信卡但没有任何电信和国产 Apps 。\u003c/p\u003e\n\u003cp\u003eGoogle 一圈结果较少，初步判断是收集设备信息的营销服务，有 V 友知道详细内容吗？\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eapplecsb.crm.189.cn\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "Kenshiro",
       "PubDate": "2023-04-16T01:18:50Z"
+    },
+    {
+      "Title": "有人会写合约吗？一个小活儿！给费用 - 程序员",
+      "Link": "https://www.v2ex.com/t/932906",
+      "Description": "\u003cp\u003e有人会写合约吗？一个小活儿！给费用。\n大概要求是，写一个 nft 合约 ~ \u003c/p\u003e\n\u003cp\u003e有会的留下联系方式。或者 联系邮箱 \u003ca href=\"mailto:lingguangguancha@qq.com\"\u003elingguangguancha@qq.com\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "soft101team",
+      "PubDate": "2023-04-16T05:47:01Z"
     },
     {
       "Title": "mac 经常会发出一声提示音，但不知道是哪个进程发出的，该如何定位 - Apple",
