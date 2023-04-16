@@ -18,29 +18,15 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "网站怎么需要 ti 才能上啊？？？？",
-      "Link": "https://studygolang.com/topics/16299#reply3",
-      "Description": "\u003cp\u003e网站怎么需要 ti 才能上啊？？？？\n这体验太差了\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "go fyne库的widget包如何对控件的背景及字体颜色进行修改",
-      "Link": "https://studygolang.com/topics/16300#reply1",
-      "Description": "\u003cp\u003e运行环境： go 1.19.1 windows/amd64\u003c/p\u003e\n\n\u003cp\u003e问题描述： go fyne库的widget包如何对控件的背景及字体颜色进行修改\u003c/p\u003e\n\n\u003cp\u003e相关代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc main() {\n\t//新建一个app\n\tmApp := app.New()\n\t//新建一个窗口\n\twindow := mApp.NewWindow(\u0026quot;安全平台产品部-脚本文件检查工具\u0026quot;)\n\n\t//主界面框架布局\n\tshowWindow(window)\n\t//尺寸\n\twindow.Resize(fyne.Size{Width: 600, Height: 400})\n\t//w居中显示\n\twindow.CenterOnScreen()\n\t//循环运行\n\twindow.ShowAndRun()\n\n\terr := os.Unsetenv(\u0026quot;FYNE_FONT\u0026quot;)\n\tif err != nil {\n\t\treturn\n\t}\n}\n\nfunc showWindow(window fyne.Window){\n\t//日志输出行，想要改变此处空间的背景色及字体颜色\n\tlogLineEntry := widget.NewMultiLineEntry()\n\t//禁用输入框，不能更改数据\n\tlogLineEntry.Disable() \n\n\t//滚动控件\n\tscrollContainer := container.NewHScroll(\n        // 创建一个多行文本框\n        logLineEntry,\n    )\n\n\tctBox := container.NewVBox(scrollContainer ) //控制显示位置顺序\n\twindow.SetContent(ctBox)\n}\n\n通过相关业务业绩调用后，窗体颜色非常不好看。不知道有什么方式可以修改logLineEntry 的背景颜色\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e当前运行效果如下(非常难看)\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230413/367e1ecbcb681b919888e05e7a259443.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e另咨询下各位大佬，window窗口怎么让它的最大化按钮不可用或不显示\u003c/p\u003e\n",
+      "Title": "Go语言爱好者周刊：第 184 期",
+      "Link": "https://studygolang.com/topics/16303#reply0",
+      "Description": "\u003cp\u003e这里记录每周值得分享的 Go 语言相关内容，周日发布。本周刊开源（GitHub：\u003ca href=\"https://github.com/polaris1119/golangweekly\"\u003epolaris1119/golangweekly\u003c/a\u003e），欢迎投稿，推荐或自荐文章/软件/资源等，请\u003ca href=\"https://github.com/polaris1119/golangweekly/issues\"\u003e提交 issue\u003c/a\u003e 。\u003c/p\u003e\n\n\u003cp\u003e鉴于一些人可能没法坚持把英文文章看完，因此，周刊中会尽可能推荐优质的中文文章。优秀的英文文章，我们的 GCTT 组织会进行翻译。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://raw.githubusercontent.com/polaris1119/golangweekly/master/docs/imgs/issue184/cover.png\" alt=\"\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e题图：最小的 Go 二进制（5KB），文章链接：\u003ca href=\"https://totallygamerjet.hashnode.dev/the-smallest-go-binary-5kb\"\u003ehttps://totallygamerjet.hashnode.dev/the-smallest-go-binary-5kb\u003c/a\u003e\u003c/p\u003e\n\n\u003ch2\u003e刊首语\u003c/h2\u003e\n\n\u003cp\u003e好久没有出题目了，上次有人问起，那本周就出一道题目。\u003c/p\u003e\n\n\u003cp\u003e以下代码输出什么？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nfunc main() {\n\tvar x = []int{0, 5: 1, 2}\n\tprintln(len(x))\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003eA：3；B：6；C：7；D：8\u003c/p\u003e\n\n\u003ch2\u003e资讯\u003c/h2\u003e\n\n\u003cp\u003e1、\u003ca href=\"https://carlosbecker.com/posts/goreleaser-v1.17\"\u003eGoReleaser v1.17 发布\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e尽可能快速、轻松地交付 Go 二进制文件。\u003c/p\u003e\n\n\u003cp\u003e2、\u003ca href=\"https://blog.ferretdb.io/ferretdb-1-0-ga-opensource-mongodb-alternative/\"\u003eFerretDB 1.0 发布\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003eMongoDB 的替代品，1.0 正式发布。\u003c/p\u003e\n\n\u003cp\u003e3、\u003ca href=\"https://github.com/sashabaranov/go-openai\"\u003ego-openai 1.7 发布\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003eOpenAI 的 Golang SDK，包括 ChatGPT、GPT-3、GPT-4 等。\u003c/p\u003e\n\n\u003cp\u003e4、\u003ca href=\"https://github.com/superseriousbusiness/gotosocial\"\u003eGoToSocial 0.8 发布\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e一个用 Golang 编写的 ActivityPub 社交网络服务器。\u003c/p\u003e\n\n\u003cp\u003e5、\u003ca href=\"https://github.com/gobwas/ws\"\u003ews 1.2 发布\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e小型的 WebSocket 库。\u003c/p\u003e\n\n\u003cp\u003e6、\u003ca href=\"https://github.com/mvdan/gofumpt\"\u003egofumpt 0.5 发布\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e一个严格的 gofmt 工具。\u003c/p\u003e\n\n\u003cp\u003e7、\u003ca href=\"https://github.com/drakkan/sftpgo\"\u003eSFTPGo 2.4.5 发布\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003eGo 实现的功能齐全的 SFTP 服务器。\u003c/p\u003e\n\n\u003ch2\u003e文章\u003c/h2\u003e\n\n\u003cp\u003e1、\u003ca href=\"https://mp.weixin.qq.com/s/FL2MKlfLe59qC5rfSIOoqw\"\u003eGo1.20.3 发布了\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003eGo 官方发布了 Go 1.20.3 和 Go 1.19.8，这是两个小版本，主要涉及 4 个安全更新。\u003c/p\u003e\n\n\u003cp\u003e2、\u003ca href=\"https://mp.weixin.qq.com/s/Qyp35Q6UjtZHfwkDUWbEog\"\u003eGo 开发命令行程序指南\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e在这篇文章中，整理出一份使用 Go 语言编写 CLI 程序的指南，供大家参考。\u003c/p\u003e\n\n\u003cp\u003e3、\u003ca href=\"https://mp.weixin.qq.com/s/SVMj-PvI1l-oSlxI4zaNcw\"\u003eGoLand 2023.1 正式发布，看有哪些新功能\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003eGoLand 2023 的第一个版本 GoLand 2023.1 正式发布，新版本引入了漏洞检查器和更好的 gRPC 代码导航，并使重命名重构可用于接收器。\u003c/p\u003e\n\n\u003cp\u003e4、\u003ca href=\"https://mp.weixin.qq.com/s/e-QNv5-Ip2EcDp-S6CuXEg\"\u003e如何用一个端口同时暴露 HTTP1/2、gRPC 协议？\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e本文我们将介绍 Apache Dubbo 灵活的多协议设计原则，基于这一设计，在 Dubbo 框架底层可灵活的选用 HTTP/2、HTTP/REST、TCP、gRPC、JsonRPC、Hessian2 等任一 RPC 通信协议，同时享用统一的 API 与对等的服务治理能力。\u003c/p\u003e\n\n\u003cp\u003e5、\u003ca href=\"https://blog.jetbrains.com/zh-hans/go/2023/01/03/comprehensive-guide-to-testing-in-go/\"\u003eGo 测试综合指南\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e本文将涵盖关于 Go 测试的所有须知事项。 我们将从一个简单的测试函数开始，通过更多工具和策略帮助您掌握 Go 中的测试。\u003c/p\u003e\n\n\u003ch2\u003e开源项目\u003c/h2\u003e\n\n\u003cp\u003e1、\u003ca href=\"https://github.com/caarlos0/env\"\u003eenv\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e一个简单的零依赖库，用于将环境变量解析为结构体。\u003c/p\u003e\n\n\u003cp\u003e2、\u003ca href=\"https://github.com/thomiceli/opengist\"\u003eopengist\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e由 Git 驱动的自我托管的 Pastebin，GitHub Gist 开源替代方案。\u003c/p\u003e\n\n\u003cp\u003e3、\u003ca href=\"https://github.com/gotzmann/llama.go\"\u003ellama.go\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003ellama.go 就像纯 Go 版本的 llama.cpp，LLaMA 的 Go 实现。\u003c/p\u003e\n\n\u003cp\u003e4、\u003ca href=\"https://github.com/erni27/imcache\"\u003eimcache\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e基于泛型的内存 cache。\u003c/p\u003e\n\n\u003ch2\u003e资源\u0026amp;\u0026amp;工具\u003c/h2\u003e\n\n\u003cp\u003e1、\u003ca href=\"https://github.com/tiktoken-go/tokenizer\"\u003etokenizer\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e这是 OpenAI 分词器的纯 Go 实现。\u003c/p\u003e\n\n\u003cp\u003e2、\u003ca href=\"https://github.com/donuts-are-good/bearclaw\"\u003ebearclaw\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e快速、简单的网站生成器。\u003c/p\u003e\n\n\u003cp\u003e3、\u003ca href=\"https://changelog.com/gotime/272\"\u003eGo 播客第 272 期\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003eGPT-4 人生中最大的一次工作面试。\u003c/p\u003e\n\n\u003cp\u003e4、\u003ca href=\"https://pprof.me/\"\u003epprof.me\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e在线 pprof 文件性能瓶颈分析。\u003c/p\u003e\n\n\u003cp\u003e5、\u003ca href=\"https://goquick.dev/\"\u003egoquick\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003eGo 项目模板生成器。\u003c/p\u003e\n\n\u003cp\u003e6、\u003ca href=\"https://github.com/dwisiswant0/chatgptui\"\u003echatgptui\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e用 Go 语言编写的 ChatGPT 文本用户界面（TUI）模式。\u003c/p\u003e\n\n\u003ch2\u003e订阅\u003c/h2\u003e\n\n\u003cp\u003e这个周刊每周日发布，同步更新在\u003ca href=\"https://studygolang.com/go/weekly\"\u003eGo语言中文网\u003c/a\u003e和\u003ca href=\"https://weixin.sogou.com/weixin?query=Go%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%96%87%E7%BD%91\"\u003e微信公众号\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e微信搜索\u0026rdquo;Go语言中文网\u0026rdquo;或者扫描二维码，即可订阅。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://raw.githubusercontent.com/polaris1119/golangweekly/master/docs/imgs/wechat.png\" alt=\"wechat\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
       "Title": "优维可观测轴心产品大观：HyperInsight超融合持续可观测解决方案",
       "Link": "https://studygolang.com/articles/36115#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "[北京] PHP 转 Go 开发, 有没有实习工作的机会.",
-      "Link": "https://studygolang.com/topics/16301#reply0",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -53,13 +39,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "请教GO如何构造类似bit[255:0] 位宽的数据？",
-      "Link": "https://studygolang.com/topics/16298#reply2",
-      "Description": "\u003cp\u003e今天遇到一个问题，特向大家请教一下，想要处理256位宽和48位宽的数据， 如何构造这样的数据呢？\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "Go 中如何获取字符串的宽度",
       "Link": "https://studygolang.com/articles/36114#reply0",
       "Description": "",
@@ -67,9 +46,65 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "转发一个极客时间的超级会员账号，会员时间2026年到期",
+      "Link": "https://studygolang.com/topics/16176#reply3",
+      "Description": "\u003cp\u003e转发一个极客时间的超级会员账号，会员时间2026年到期，需要的私信聊\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "chatGPT 接入微信订阅号",
+      "Link": "https://studygolang.com/topics/16295#reply1",
+      "Description": "\u003cp\u003e实现chatGPT 接入微信订阅号功能。\n仓库地址：\u003ca href=\"https://github.com/sunanxiang/charlotter\"\u003ehttps://github.com/sunanxiang/charlotter\u003c/a\u003e\n具体使用说明在仓库说明文档中，想尝试的小伙伴可以试一下。\n实现效果可以看下图\n\u003cimg src=\"https://static.golangjob.cn/230412/e13913361678a21e264a954030716e62.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "网站怎么需要 ti 才能上啊？？？？",
+      "Link": "https://studygolang.com/topics/16299#reply3",
+      "Description": "\u003cp\u003e网站怎么需要\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "【远程】招聘Go服务端开发（税后20-35K）",
+      "Link": "https://studygolang.com/topics/16297#reply2",
+      "Description": "\u003cp\u003e项目：海外棋牌游戏\n薪资发放：USDT，入职需先自行购买全新的办公设备，后期给予报销。\u003c/p\u003e\n\n\u003cp\u003e工作内容：\n1、负责GRPC等服务端研发；\n2、根据产品需求，进行系统设计和编码；\n3、持续对系统架构进行改造和优化。\n4、负责公司后端架构的搭建和优化，持续优化服务的可用性、伸缩性、稳定性。\u003c/p\u003e\n\n\u003cp\u003e任职要求：\n1、两年以上Golang开发经验；\n2、具备良好的基本功，熟练使用基本的数据结构和算法，深入理解多线程、net/http等相关技术；\n3、具备良好的编码习惯，结构清晰，命名规范，逻辑性强，代码冗余率低；\n4、熟练掌握Golang常用框架，深入了解框架提供的特性及其实现原理细节；\n5、有大规模分布式系统的设计和开发经验，能独立完成系统的设计及开发；\n6、熟练掌握MySQL数据库，具备MySQL索引优化、查询优化的能力；\n7、熟练掌握一种以上非关系型数据库，如Redis, Mencached，理解其使用场景及限制；\n8、熟悉分布式系统，熟练掌握一种以上服务框架和消息中间件，了解其实现原理；\n9、熟悉Internet常用协议，如HTTP、TCP/IP、熟悉RESTful、RESTAPI规范；\n10、熟悉Golang微服务、Docker部署、有RPC服务器开发经验；\u003c/p\u003e\n\n\u003cp\u003e另招聘Go架构师：要求具备丰富的SAAS多租户系统架构设计经验，35-55K\u003c/p\u003e\n\n\u003cp\u003e联络方式：\n微信：a1134551535   Skype：live:.cid.c38dd8677eebbe5b      telegram：@Wiz888\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go fyne库的widget包如何对控件的背景及字体颜色进行修改",
+      "Link": "https://studygolang.com/topics/16300#reply1",
+      "Description": "\u003cp\u003e运行环境： go 1.19.1 windows/amd64\u003c/p\u003e\n\n\u003cp\u003e问题描述： go fyne库的widget包如何对控件的背景及字体颜色进行修改\u003c/p\u003e\n\n\u003cp\u003e相关代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc main() {\n\t//新建一个app\n\tmApp := app.New()\n\t//新建一个窗口\n\twindow := mApp.NewWindow(\u0026quot;安全平台产品部-脚本文件检查工具\u0026quot;)\n\n\t//主界面框架布局\n\tshowWindow(window)\n\t//尺寸\n\twindow.Resize(fyne.Size{Width: 600, Height: 400})\n\t//w居中显示\n\twindow.CenterOnScreen()\n\t//循环运行\n\twindow.ShowAndRun()\n\n\terr := os.Unsetenv(\u0026quot;FYNE_FONT\u0026quot;)\n\tif err != nil {\n\t\treturn\n\t}\n}\n\nfunc showWindow(window fyne.Window){\n\t//日志输出行，想要改变此处空间的背景色及字体颜色\n\tlogLineEntry := widget.NewMultiLineEntry()\n\t//禁用输入框，不能更改数据\n\tlogLineEntry.Disable() \n\n\t//滚动控件\n\tscrollContainer := container.NewHScroll(\n        // 创建一个多行文本框\n        logLineEntry,\n    )\n\n\tctBox := container.NewVBox(scrollContainer ) //控制显示位置顺序\n\twindow.SetContent(ctBox)\n}\n\n通过相关业务业绩调用后，窗体颜色非常不好看。不知道有什么方式可以修改logLineEntry 的背景颜色\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e当前运行效果如下(非常难看)\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230413/367e1ecbcb681b919888e05e7a259443.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e另咨询下各位大佬，window窗口怎么让它的最大化按钮不可用或不显示\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "[北京] PHP 转 Go 开发, 有没有实习工作的机会.",
+      "Link": "https://studygolang.com/topics/16301#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "请教GO如何构造类似bit[255:0] 位宽的数据？",
+      "Link": "https://studygolang.com/topics/16298#reply2",
+      "Description": "\u003cp\u003e今天遇到一个问题，特向大家请教一下，想要处理256位宽和48位宽的数据， 如何构造这样的数据呢？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "谷雨策划：从落地实践的角度探索CMDB数据运营的破局之道！",
       "Link": "https://studygolang.com/articles/36113#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "GoEasyUtils 一个轻量级的基本数据类型处理库，可以像php的array那样优雅的处理切片等服务",
+      "Link": "https://studygolang.com/articles/36072#reply2",
+      "Description": "\u003cp\u003eGo Easy Utils 是一个为 Go 开发者设计的工具库，旨在为开发者提供简单易用的工具函数和常用操作。该库拥有丰富的函数，可帮助您轻松完成各种常见的编程任务。\u003c/p\u003e\n\n\u003cp\u003eGo Easy Utils 的代码简单、易于阅读和维护。这个库遵循 Go 的最佳实践，代码注释详细，函数名和参数清晰易懂，方便使用和二次开发。此外，Go Easy Utils 的代码质量也得到了广泛的认可，并得到了社区的大力支持和贡献。\u003c/p\u003e\n\n\u003cp\u003e该工具库包含了多种实用函数，如字符串处理、文件操作、日期时间处理、加密解密、数组切片、网络请求等，可以大大提高开发效率。您可以使用这些函数来快速开发出高效可靠的应用程序。\u003c/p\u003e\n\n\u003cp\u003eGo Easy Utils 还支持 Go Modules，这使得您可以轻松地将该库与其他依赖项一起使用。此外，我们致力于在 Go 的最新版本中对该库进行测试和优化，确保它在不同的操作系统和平台上都能正常运行。\u003c/p\u003e\n\n\u003cp\u003e如果您正在寻找一个高质量、易用、易扩展的 Go 工具库，那么 Go Easy Utils 绝对是一个不错的选择。我们非常欢迎您加入我们的社区，与我们一起为 Go 的开发者们提供更好的工具和服务。\u003c/p\u003e\n\n\u003cp\u003e仓库地址：\u003ca href=\"https://github.com/jefferyjob/go-easy-utils\"\u003ehttps://github.com/jefferyjob/go-easy-utils\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -91,34 +126,6 @@
       "Title": "极课时间-Go实战训练营1期无秘",
       "Link": "https://studygolang.com/articles/36111#reply0",
       "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "转发一个极客时间的超级会员账号，会员时间2026年到期",
-      "Link": "https://studygolang.com/topics/16176#reply3",
-      "Description": "\u003cp\u003e转发一个极客时间的超级会员账号，会员时间2026年到期，需要的私信聊\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "chatGPT 接入微信订阅号",
-      "Link": "https://studygolang.com/topics/16295#reply1",
-      "Description": "\u003cp\u003e实现chatGPT 接入微信订阅号功能。\n仓库地址：\u003ca href=\"https://github.com/sunanxiang/charlotter\"\u003ehttps://github.com/sunanxiang/charlotter\u003c/a\u003e\n具体使用说明在仓库说明文档中，想尝试的小伙伴可以试一下。\n实现效果可以看下图\n\u003cimg src=\"https://static.golangjob.cn/230412/e13913361678a21e264a954030716e62.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "【远程】招聘Go服务端开发（税后20-35K）",
-      "Link": "https://studygolang.com/topics/16297#reply2",
-      "Description": "\u003cp\u003e项目：海外棋牌游戏\n薪资发放：USDT，入职需先自行购买全新的办公设备，后期给予报销。\u003c/p\u003e\n\n\u003cp\u003e工作内容：\n1、负责GRPC等服务端研发；\n2、根据产品需求，进行系统设计和编码；\n3、持续对系统架构进行改造和优化。\n4、负责公司后端架构的搭建和优化，持续优化服务的可用性、伸缩性、稳定性。\u003c/p\u003e\n\n\u003cp\u003e任职要求：\n1、两年以上Golang开发经验；\n2、具备良好的基本功，熟练使用基本的数据结构和算法，深入理解多线程、net/http等相关技术；\n3、具备良好的编码习惯，结构清晰，命名规范，逻辑性强，代码冗余率低；\n4、熟练掌握Golang常用框架，深入了解框架提供的特性及其实现原理细节；\n5、有大规模分布式系统的设计和开发经验，能独立完成系统的设计及开发；\n6、熟练掌握MySQL数据库，具备MySQL索引优化、查询优化的能力；\n7、熟练掌握一种以上非关系型数据库，如Redis, Mencached，理解其使用场景及限制；\n8、熟悉分布式系统，熟练掌握一种以上服务框架和消息中间件，了解其实现原理；\n9、熟悉Internet常用协议，如HTTP、TCP/IP、熟悉RESTful、RESTAPI规范；\n10、熟悉Golang微服务、Docker部署、有RPC服务器开发经验；\u003c/p\u003e\n\n\u003cp\u003e另招聘Go架构师：要求具备丰富的SAAS多租户系统架构设计经验，35-55K\u003c/p\u003e\n\n\u003cp\u003e联络方式：\n微信：a1134551535   Skype：live:.cid.c38dd8677eebbe5b      telegram：@Wiz888\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "GoEasyUtils 一个轻量级的基本数据类型处理库，可以像php的array那样优雅的处理切片等服务",
-      "Link": "https://studygolang.com/articles/36072#reply2",
-      "Description": "\u003cp\u003eGo Easy Utils 是一个为 Go 开发者设计的工具库，旨在为开发者提供简单易用的工具函数和常用操作。该库拥有丰富的函数，可帮助您轻松完成各种常见的编程任务。\u003c/p\u003e\n\n\u003cp\u003eGo Easy Utils 的代码简单、易于阅读和维护。这个库遵循 Go 的最佳实践，代码注释详细，函数名和参数清晰易懂，方便使用和二次开发。此外，Go Easy Utils 的代码质量也得到了广泛的认可，并得到了社区的大力支持和贡献。\u003c/p\u003e\n\n\u003cp\u003e该工具库包含了多种实用函数，如字符串处理、文件操作、日期时间处理、加密解密、数组切片、网络请求等，可以大大提高开发效率。您可以使用这些函数来快速开发出高效可靠的应用程序。\u003c/p\u003e\n\n\u003cp\u003eGo Easy Utils 还支持 Go Modules，这使得您可以轻松地将该库与其他依赖项一起使用。此外，我们致力于在 Go 的最新版本中对该库进行测试和优化，确保它在不同的操作系统和平台上都能正常运行。\u003c/p\u003e\n\n\u003cp\u003e如果您正在寻找一个高质量、易用、易扩展的 Go 工具库，那么 Go Easy Utils 绝对是一个不错的选择。我们非常欢迎您加入我们的社区，与我们一起为 Go 的开发者们提供更好的工具和服务。\u003c/p\u003e\n\n\u003cp\u003e仓库地址：\u003ca href=\"https://github.com/jefferyjob/go-easy-utils\"\u003ehttps://github.com/jefferyjob/go-easy-utils\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
