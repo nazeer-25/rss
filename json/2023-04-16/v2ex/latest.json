@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "问个 socket 相关问题——recv 接收数据 - 程序员",
+      "Link": "https://www.v2ex.com/t/932968",
+      "Description": "\u003cp\u003erecv 不保证能收到参数里缓冲区大小的数据，譬如说\u003c/p\u003e\n\u003cp\u003eint n = recv(client_socket, buffer, sizeof(buffer), 0);\u003c/p\u003e\n\u003cp\u003e假设 buffer 的大小是 16 个字节，如果客户端发送 8 个字节，recv 就返回 8\u003c/p\u003e\n\u003cp\u003e现在我的包结构是 包长度（ 2 个字节） + 包体（可变长度）\n程序先接读 2 字节包长度\nushort package_size;\nint n = recv(client_socket, （ byte *） package_size, sizeof(package_size), 0);\u003c/p\u003e\n\u003cp\u003e这个 n 会不会少于 2\n如果有这个可能，那么岂不是要重复 recv ？好像很麻烦\u003c/p\u003e\n",
+      "Author": "bbsfoo",
+      "PubDate": "2023-04-16T11:44:56Z"
+    },
+    {
       "Title": "问下各位大佬，个人可以申请 azure 的 openai 服务吗 - 问与答",
       "Link": "https://www.v2ex.com/t/932966",
       "Description": "",
