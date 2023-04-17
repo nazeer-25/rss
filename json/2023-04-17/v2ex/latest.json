@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "关于使用 socket 构造 icmp 包报错 Permission denied 的问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/933068",
+      "Description": "\u003cp\u003e背景: 接手别人的项目,添加子网时对子网所有地址进行 ping 测试\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e构造子网地址和广播地址 socket 连接时,会报\u003ccode\u003ePermissionError: [Errno 13] Permission denied\u003c/code\u003e的错误.\u003c/p\u003e\n\u003cp\u003e关于为什么要上子网地址和广播地址我也不清楚(代码专门拼接了这两个地址,这两者和对子网所有地址进行 ping 不是重复了吗)\u003c/p\u003e\n\u003cp\u003e所有,子网地址和广播地址和应该怎么构造 icmp 的包和建立 socket 连接?\u003c/p\u003e\n",
+      "Author": "bulay",
+      "PubDate": "2023-04-17T02:24:01Z"
+    },
+    {
+      "Title": "RocketMQ 消费写入 MySQL 问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/933067",
+      "Description": "\u003cp\u003e公司需求是把项目中产生的数据,实时入库到 MySQL,这些数据分别属于不同的 table.\u003c/p\u003e\n\u003cp\u003e现在的方案是把产生的数据通过 tomcat -\u0026gt; RocketMQ 的一个 topic 中,然后启用一个 MQ 消费者组合并消息(如果不合并入库次数太多也会慢),然后 batch 入库,这个方案单表没有任何问题.\u003c/p\u003e\n\u003cp\u003e如果设计到多个表入库,因为 mq 消费是顺序读取 topic 中的消息,也就导致如果\u003cstrong\u003e一个表需要入库的数据量大,那么入库时间就会长\u003c/strong\u003e,这会导致整体消费变慢,从而导致实时表不实时的问题.\u003c/p\u003e\n\u003cp\u003e这就是我现在遇到的问题\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e入库 MySQL 的时间长,解决时间长的问题(这个我目前想不到解决办法)\u003c/li\u003e\n\u003cli\u003e如果解决不了入库时间长的问题,那么就让他不影响其他表入库\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e我自己想过解决方案,针对问题 2 的\u003c/p\u003e\n\u003ch2\u003e方案\u003c/h2\u003e\n\u003cblockquote\u003e\n\u003cp\u003e从一个消费者组 改为 按表名创建消费者组,但是可用性不高\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e按表名创建消费者组,使用过一段时间,因为表比较多,然后在一个 jvm(如果多个程序分别启动不同的消费者组也不好管理)中启动那么多消费者组,首先\u003cstrong\u003e内存\u003c/strong\u003e会占用很多(应该是每个消费者组都会缓存一定数量的消息),也就是内存的大小跟实时表的数量是等比上涨的.其次我查了一下说是\u003cstrong\u003e消费者组数量\u003c/strong\u003e也不是可以无限加的,目前我们是 110 多张表,也比较多了.考虑到之后还会加表,这个方案试行了一段时间就废掉了.\u003c/p\u003e\n\u003cp\u003e或者这个方案有没有优化空间?然后就是大家有什么思路么?万分感谢!\u003c/p\u003e\n",
+      "Author": "chenfang",
+      "PubDate": "2023-04-17T02:21:01Z"
+    },
+    {
+      "Title": "怎么查询骚扰短信是从哪个平台发出的？ - 问与答",
+      "Link": "https://www.v2ex.com/t/933066",
+      "Description": "\u003cp\u003e比如我收到了一条来自于“10680868209xx”的短信，怎么查询是从阿里云短信还是哪个平台发出的呢？这样对我话我去投诉他们平台会不会好一点\u003c/p\u003e\n",
+      "Author": "god7d",
+      "PubDate": "2023-04-17T02:18:50Z"
+    },
+    {
+      "Title": "此招聘帖为最新岗位招聘帖：远程办公，招聘 ruby 工程师 - 酷工作",
+      "Link": "https://www.v2ex.com/t/933065",
+      "Description": "公司介绍：\u003cbr /\u003eMagickbase =\u0026gt; Magi(decision-making system), CKB(Common Knowledge Base), Base Products: Neuron, a full-node desktop ckb wallet CKB Explorer, ckb explorer for the layer1 GwScan, godwoken explorer for the layer2 Axon Explorer, axon explorer for the layer2 Vision: Analyzing data from three platforms in the system for decision making and providing a controller for users to drive their assets.\u003cbr /\u003e我们是一家完全分布式办公的公司，告别早晚高峰，告别无用社交，技术性管理团队。如果您已经疲于应付，可以考虑加入我们，这里没有 996 ，也没有无休止的会议，一切以项目进度为标准，基本做到零加班。你可以在家里办公，也可以在咖啡馆办公，可以在民宿里办公，也可以在风景秀丽的景区办公。等你哟~~~~ 以下为在招聘岗位，欢迎投递：\u003cbr /\u003e\u003cbr /\u003eruby or elixir 后端工程师： 职位诱惑： 远程办公 目标导向\u003cbr /\u003e\u003cbr /\u003e职位描述：\u003cbr /\u003e岗位职责\u003cbr /\u003e• 理解业务需求，负责日常产品设计与开发；\u003cbr /\u003e• 负责现有产品的性能优化；\u003cbr /\u003e• 维护区块链相关工具；\u003cbr /\u003e• 与运维合作部署并维护自己的项目。\u003cbr /\u003e职位要求\u003cbr /\u003e• 3 年以上 Ruby, Ruby on Rails 或 Elixir 实际工作经验；\u003cbr /\u003e• 良好的代码风格和编程习惯；\u003cbr /\u003e• 有数据库日常设计开发以及优化经验（ MySQL 、PostgreSQL ）；\u003cbr /\u003e• 熟悉 Git/GitHub 及 RESTful 标准； • 熟悉底层中间件、分布式技术（包括 redis 缓存、消息系统等）。\u003cbr /\u003e• 良好的英文阅读能力；\u003cbr /\u003e加分项\u003cbr /\u003e• 有拿的出手的开源项目或开源社区贡献；\u003cbr /\u003e• 有数据库调优经验；\u003cbr /\u003e• 有系统性能优化经验；\u003cbr /\u003e• 有区块链产品开发经验；\u003cbr /\u003e• 全栈开发经验.\u003cbr /\u003e附加信息：\u003cbr /\u003e工作时间：周末双休 上下班时间：09:30-18:30 面试信息：\u003cbr /\u003e面试方式：视频面试 面试轮数：1-2 轮 时间安排：一天内完成\u003cbr /\u003e补充标签：可周末面试 | 可下班后面试\u003cbr /\u003e\u003cbr /\u003e投递邮箱： jobs@magickbase.com",
+      "Author": "fangqiao1",
+      "PubDate": "2023-04-17T02:16:51Z"
+    },
+    {
       "Title": "又一个下载电报下载的工具，支持 bot 指令下载，转发，监听转发，支持上传网盘，支持下载无法转发文件 - 分享创造",
       "Link": "https://www.v2ex.com/t/933064",
       "Description": "\u003cblockquote\u003e\n\u003cp\u003e基于 Dineshkarthik 的项目， 电报视频下载，电报资源下载，跨平台，支持 web 查看下载进度 ，支持 bot 下发指令下载，支持下载已经加入的私有群但是限制下载的资源，telegram media download,Download media files from a telegram conversation/chat/channel up to 2GiB per file\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/tangyoha/telegram_media_downloader\" rel=\"nofollow\"\u003e项目地址\u003c/a\u003e\n\u003ca href=\"https://github.com/tangyoha/telegram_media_downloader/blob/master/README_CN.md\" rel=\"nofollow\"\u003e中文介绍\u003c/a\u003e\n\u003ca href=\"https://github.com/tangyoha/telegram_media_downloader/wiki/%E4%B8%AD%E6%96%87%E6%95%99%E7%A8%8B\" rel=\"nofollow\"\u003ewin 中文教程\u003c/a\u003e\n\u003ca href=\"https://github.com/tangyoha/telegram_media_downloader/wiki/Docker\" rel=\"nofollow\"\u003eDocker 教程\u003c/a\u003e\n\u003ca href=\"https://github.com/tangyoha/telegram_media_downloader/wiki/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%8B%E8%BD%BD\" rel=\"nofollow\"\u003e如何使用机器人\u003c/a\u003e\n\u003ca href=\"https://github.com/tangyoha/telegram_media_downloader/wiki/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%BF%87%E6%BB%A4%E5%99%A8\" rel=\"nofollow\"\u003e如何使用过滤器\u003c/a\u003e\u003c/p\u003e\n",
