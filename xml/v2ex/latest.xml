@@ -4,6 +4,47 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>下午出去面试，怎么请假比较好？ - 问与答</title>
+      <link>https://www.v2ex.com/t/933394</link>
+      <author>sadboy2007</author>
+      <pubDate>18 Apr 2023 03:08:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>这种链式的写法，是否易于 CR 或者维护呢？纠结中 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/933393</link>
+      <description>&lt;p&gt;这里对需求进行了简化，实际上真实的业务需求每个&lt;code&gt;Condition&lt;/code&gt;包含非常复杂的逻辑，如果全都用 if 嵌套来实现，只能拆分成一个一个的方法&lt;/p&gt;&#xA;&lt;p&gt;后来想到能否直接表示出整个链条，就改写成了下面的样子，求各位大佬帮忙看下这种写法的优缺点，&#xA;如果有更好的方法， 也请大佬们指点一二&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;log&#34;&#xA;)&#xA;&#xA;type ConditionUnitItf interface {&#xA;&#x9;Condition(interface{}) (bool, error)&#xA;}&#xA;&#xA;type ConditionUnitWrapper struct {&#xA;&#x9;Params        interface{}&#xA;&#x9;Result        interface{}&#xA;&#x9;ConditionUnit ConditionUnitItf&#xA;&#x9;TrueHandler   *ConditionUnitWrapper&#xA;&#x9;FalseHandler  *ConditionUnitWrapper&#xA;}&#xA;&#xA;// NewUnit ...&#xA;func NewUnit(unit ConditionUnitItf) *ConditionUnitWrapper {&#xA;&#x9;return &amp;amp;ConditionUnitWrapper{&#xA;&#x9;&#x9;ConditionUnit: unit,&#xA;&#x9;}&#xA;}&#xA;&#xA;// True 设置这个实例的下一个 handler&#xA;func (s *ConditionUnitWrapper) True(nextHandler *ConditionUnitWrapper) *ConditionUnitWrapper {&#xA;&#x9;s.TrueHandler = nextHandler.WithParams(s.Params)&#xA;&#x9;return s&#xA;}&#xA;&#xA;func (s *ConditionUnitWrapper) False(nextHandler *ConditionUnitWrapper) *ConditionUnitWrapper {&#xA;&#x9;s.FalseHandler = nextHandler&#xA;&#x9;return s&#xA;}&#xA;&#xA;// WithParams 给实例设置参数&#xA;func (s *ConditionUnitWrapper) WithParams(params interface{}) *ConditionUnitWrapper {&#xA;&#x9;s.Params = params&#xA;&#x9;return s&#xA;}&#xA;&#xA;func (s *ConditionUnitWrapper) SetResult(r interface{}) *ConditionUnitWrapper {&#xA;&#x9;s.Result = r&#xA;&#x9;return s&#xA;}&#xA;&#xA;// Run 构造 chain 的核心逻辑，除了叶子节点，其他的 Condition Unit 都使用了 Condition Base 的 Run 方法&#xA;func (s *ConditionUnitWrapper) Run() (*ConditionUnitWrapper, error) {&#xA;&#x9;isTrue, err := s.ConditionUnit.Condition(s.Params)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return nil, err&#xA;&#x9;}&#xA;&#xA;&#x9;if isTrue &amp;amp;&amp;amp; s.TrueHandler != nil {&#xA;&#x9;&#x9;// 这里使用 WithParams 将参数传递给 handler&#xA;&#x9;&#x9;return s.TrueHandler.WithParams(s.Params).Run()&#xA;&#x9;}&#xA;&#xA;&#x9;if !isTrue &amp;amp;&amp;amp; s.FalseHandler != nil {&#xA;&#x9;&#x9;return s.FalseHandler.WithParams(s.Params).Run()&#xA;&#x9;}&#xA;&#xA;&#x9;return s, nil&#xA;}&#xA;&#xA;// ===================== 上面是实现了，下面要实现多个 条件单元&#xA;type userParams struct {&#xA;&#x9;IsInCompany      bool   // 工作时间是否小于 10 小时&#xA;&#x9;Destination      string // 目的地是 家 还是 餐厅&#xA;&#x9;IsNeedWorkAtHome bool   // 是否在家要工作&#xA;&#x9;IsHungry         bool   // 是否饿了&#xA;&#x9;LastAction       int    // 最后的结果行为&#xA;}&#xA;&#xA;// 定义 3 个行为&#xA;const (&#xA;&#x9;HumanActionWork   = iota // 工作&#xA;&#x9;HumanActionEating        // 吃饭&#xA;&#x9;HumanActionRest          // 休息&#xA;)&#xA;&#xA;// 下面我要构造条件链路，按照当前的 user 状态(userParams) 来计算下一步的行为&#xA;&#xA;// 条件链路包含的单元为&#xA;// 1. 是否在公司&#xA;// 2. 是否回家了&#xA;// 3. 是否饿了&#xA;// 4. 是否继续工作&#xA;&#xA;// 上面出现了 4 个条件判断，所以下面我要创建四个条件单元&#xA;&#xA;// 是否下班&#xA;type UnitIsInCompany struct {&#xA;}&#xA;&#xA;// 实际的代码逻辑中，每一个 Condition 可能会包含更加复杂的逻辑&#xA;func (s UnitIsInCompany) Condition(params interface{}) (bool, error) {&#xA;&#x9;return params.(userParams).IsInCompany, nil&#xA;}&#xA;&#xA;// 是否回家&#xA;type UnitIsDestinationHome struct {&#xA;}&#xA;&#xA;func (s UnitIsDestinationHome) Condition(params interface{}) (bool, error) {&#xA;&#x9;return params.(userParams).Destination == &#34;home&#34;, nil&#xA;}&#xA;&#xA;// 是否饿了&#xA;type UnitIsHungry struct {&#xA;}&#xA;&#xA;func (s UnitIsHungry) Condition(params interface{}) (bool, error) {&#xA;&#x9;return params.(userParams).IsHungry, nil&#xA;}&#xA;&#xA;// 是否需要继续工作&#xA;type UnitIsNeedWorkAtHome struct {&#xA;}&#xA;&#xA;func (s UnitIsNeedWorkAtHome) Condition(params interface{}) (bool, error) {&#xA;&#xA;&#x9;if params.(userParams).IsNeedWorkAtHome {&#xA;&#x9;&#x9;return true, nil&#xA;&#x9;}&#xA;&#x9;return false, nil&#xA;}&#xA;&#xA;// ===================== 下面还要针对条件写叶子结点的结构&#xA;&#xA;// 对于叶子节点而言, 主要是用于收尾，调用 SetResult&#xA;type LeafUnitEchoAction struct {&#xA;}&#xA;&#xA;func (s LeafUnitEchoAction) Condition(params interface{}) (bool, error) {&#xA;&#x9;return true, nil&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;user := userParams{&#xA;&#x9;&#x9;IsInCompany:      false,&#xA;&#x9;&#x9;Destination:      &#34;home&#34;,&#xA;&#x9;&#x9;IsNeedWorkAtHome: false,&#xA;&#x9;&#x9;IsHungry:         false,&#xA;&#x9;}&#xA;&#x9;// 按照条件构造的链路为如下：&#xA;&#x9;obj, err := NewUnit(UnitIsInCompany{}).WithParams(user).&#xA;&#x9;&#x9;// 如果在公司，就工作&#xA;&#x9;&#x9;True(NewUnit(LeafUnitEchoAction{}).SetResult(HumanActionWork)).&#xA;&#x9;&#x9;// 如果不在公司，判断目的地是否是 Home&#xA;&#x9;&#x9;False(&#xA;&#x9;&#x9;&#x9;NewUnit(UnitIsDestinationHome{}).&#xA;&#x9;&#x9;&#x9;&#x9;// 回家后是否需要继续工作&#xA;&#x9;&#x9;&#x9;&#x9;True(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;NewUnit(UnitIsNeedWorkAtHome{}).&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;// 继续工作&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;True(NewUnit(LeafUnitEchoAction{}).SetResult(HumanActionWork)).&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;// 不工作就休息&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;False(NewUnit(LeafUnitEchoAction{}).SetResult(HumanActionRest))).&#xA;&#x9;&#x9;&#x9;&#x9;// 不回家，是否饿了&#xA;&#x9;&#x9;&#x9;&#x9;False(NewUnit(UnitIsHungry{}).&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;// 饿了就去餐厅吃饭&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;True(NewUnit(LeafUnitEchoAction{}).SetResult(HumanActionEating)).&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;// 不饿就休息&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;False(NewUnit(LeafUnitEchoAction{}).SetResult(HumanActionRest)))).&#xA;&#x9;&#x9;Run()&#xA;&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatalf(&#34;err is %v&#34;, err)&#xA;&#x9;}&#xA;&#xA;&#x9;// 最后通过 GetParams 获取到 LastAction&#xA;&#x9;log.Printf(&#34;action is %v&#34;, obj.Result)&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>sunshinev</author>
+      <pubDate>18 Apr 2023 03:06:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>来来来，看看五一准备 0 点出发的有多少人，自驾游去哪？ - 问与答</title>
+      <link>https://www.v2ex.com/t/933392</link>
+      <description>&lt;p&gt;我反正是这么打算的，因为 29 号要回老家有参加弟弟的订婚宴，愿人不会太多。&lt;/p&gt;&#xA;&lt;p&gt;另外，你们的出行计划是什么，自驾游去哪？&lt;/p&gt;&#xA;&lt;h3&gt;暂定计划：&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://kylebing.cn/tools/map/#/route/route-line?lineId=18&#34; rel=&#34;nofollow&#34;&gt;回家-海边-回家&lt;/a&gt;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;comeon&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://user-images.githubusercontent.com/12215982/232660170-95db4f30-4773-463d-93bb-8046b18bce22.gif&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>kylebing</author>
+      <pubDate>18 Apr 2023 03:05:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>怎么用国内银行卡收美金（工资）？ - 问与答</title>
+      <link>https://www.v2ex.com/t/933391</link>
+      <description>每收到一笔都需要到柜台操作吗？人不在国内怎么操作比较好？</description>
+      <author>louiswong2099</author>
+      <pubDate>18 Apr 2023 03:03:32 +0000</pubDate>
+    </item>
+    <item>
+      <title>iOS 17 will reportedly set the stage for sideloading apps on iPhone (techcrunch.com) - iPhone</title>
+      <link>https://www.v2ex.com/t/933390</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://techcrunch.com/2023/04/17/ios-17-will-reportedly-set-the-stage-for-sideloading-apps-on-iphone/&#34; rel=&#34;nofollow&#34;&gt;https://techcrunch.com/2023/04/17/ios-17-will-reportedly-set-the-stage-for-sideloading-apps-on-iphone/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;Discussion &lt;a href=&#34;https://news.ycombinator.com/item?id=35599315&#34; rel=&#34;nofollow&#34;&gt;https://news.ycombinator.com/item?id=35599315&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>psklf</author>
+      <pubDate>18 Apr 2023 03:02:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>量化公司招聘 C++/go 开发 - 酷工作</title>
+      <link>https://www.v2ex.com/t/933389</link>
+      <description>&lt;h1&gt;资深 C++开发&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;工作地点：上海、新加坡&lt;/li&gt;&#xA;&lt;li&gt;金融行业背景优先&lt;/li&gt;&#xA;&lt;li&gt;加分：熟悉网络编程、多线程&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;资深 go 开发&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;工作地点：上海&lt;/li&gt;&#xA;&lt;li&gt;金融行业背景优先&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;联系方式&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Jianzhang Peng, &lt;a href=&#34;mailto:pengjianzhang@gmail.com&#34;&gt;pengjianzhang@gmail.com&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>artnowben</author>
+      <pubDate>18 Apr 2023 03:01:16 +0000</pubDate>
+    </item>
+    <item>
       <title>穿得单薄，单裆部总是容易有汗，大家有什么好办法吗？ - 问与答</title>
       <link>https://www.v2ex.com/t/933388</link>
       <description>本人男性。</description>

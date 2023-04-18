@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "下午出去面试，怎么请假比较好？ - 问与答",
+      "Link": "https://www.v2ex.com/t/933394",
+      "Description": "",
+      "Author": "sadboy2007",
+      "PubDate": "2023-04-18T03:08:30Z"
+    },
+    {
+      "Title": "这种链式的写法，是否易于 CR 或者维护呢？纠结中 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/933393",
+      "Description": "\u003cp\u003e这里对需求进行了简化，实际上真实的业务需求每个\u003ccode\u003eCondition\u003c/code\u003e包含非常复杂的逻辑，如果全都用 if 嵌套来实现，只能拆分成一个一个的方法\u003c/p\u003e\n\u003cp\u003e后来想到能否直接表示出整个链条，就改写成了下面的样子，求各位大佬帮忙看下这种写法的优缺点，\n如果有更好的方法， 也请大佬们指点一二\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-golang\"\u003epackage main\n\nimport (\n\t\"log\"\n)\n\ntype ConditionUnitItf interface {\n\tCondition(interface{}) (bool, error)\n}\n\ntype ConditionUnitWrapper struct {\n\tParams        interface{}\n\tResult        interface{}\n\tConditionUnit ConditionUnitItf\n\tTrueHandler   *ConditionUnitWrapper\n\tFalseHandler  *ConditionUnitWrapper\n}\n\n// NewUnit ...\nfunc NewUnit(unit ConditionUnitItf) *ConditionUnitWrapper {\n\treturn \u0026amp;ConditionUnitWrapper{\n\t\tConditionUnit: unit,\n\t}\n}\n\n// True 设置这个实例的下一个 handler\nfunc (s *ConditionUnitWrapper) True(nextHandler *ConditionUnitWrapper) *ConditionUnitWrapper {\n\ts.TrueHandler = nextHandler.WithParams(s.Params)\n\treturn s\n}\n\nfunc (s *ConditionUnitWrapper) False(nextHandler *ConditionUnitWrapper) *ConditionUnitWrapper {\n\ts.FalseHandler = nextHandler\n\treturn s\n}\n\n// WithParams 给实例设置参数\nfunc (s *ConditionUnitWrapper) WithParams(params interface{}) *ConditionUnitWrapper {\n\ts.Params = params\n\treturn s\n}\n\nfunc (s *ConditionUnitWrapper) SetResult(r interface{}) *ConditionUnitWrapper {\n\ts.Result = r\n\treturn s\n}\n\n// Run 构造 chain 的核心逻辑，除了叶子节点，其他的 Condition Unit 都使用了 Condition Base 的 Run 方法\nfunc (s *ConditionUnitWrapper) Run() (*ConditionUnitWrapper, error) {\n\tisTrue, err := s.ConditionUnit.Condition(s.Params)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\tif isTrue \u0026amp;\u0026amp; s.TrueHandler != nil {\n\t\t// 这里使用 WithParams 将参数传递给 handler\n\t\treturn s.TrueHandler.WithParams(s.Params).Run()\n\t}\n\n\tif !isTrue \u0026amp;\u0026amp; s.FalseHandler != nil {\n\t\treturn s.FalseHandler.WithParams(s.Params).Run()\n\t}\n\n\treturn s, nil\n}\n\n// ===================== 上面是实现了，下面要实现多个 条件单元\ntype userParams struct {\n\tIsInCompany      bool   // 工作时间是否小于 10 小时\n\tDestination      string // 目的地是 家 还是 餐厅\n\tIsNeedWorkAtHome bool   // 是否在家要工作\n\tIsHungry         bool   // 是否饿了\n\tLastAction       int    // 最后的结果行为\n}\n\n// 定义 3 个行为\nconst (\n\tHumanActionWork   = iota // 工作\n\tHumanActionEating        // 吃饭\n\tHumanActionRest          // 休息\n)\n\n// 下面我要构造条件链路，按照当前的 user 状态(userParams) 来计算下一步的行为\n\n// 条件链路包含的单元为\n// 1. 是否在公司\n// 2. 是否回家了\n// 3. 是否饿了\n// 4. 是否继续工作\n\n// 上面出现了 4 个条件判断，所以下面我要创建四个条件单元\n\n// 是否下班\ntype UnitIsInCompany struct {\n}\n\n// 实际的代码逻辑中，每一个 Condition 可能会包含更加复杂的逻辑\nfunc (s UnitIsInCompany) Condition(params interface{}) (bool, error) {\n\treturn params.(userParams).IsInCompany, nil\n}\n\n// 是否回家\ntype UnitIsDestinationHome struct {\n}\n\nfunc (s UnitIsDestinationHome) Condition(params interface{}) (bool, error) {\n\treturn params.(userParams).Destination == \"home\", nil\n}\n\n// 是否饿了\ntype UnitIsHungry struct {\n}\n\nfunc (s UnitIsHungry) Condition(params interface{}) (bool, error) {\n\treturn params.(userParams).IsHungry, nil\n}\n\n// 是否需要继续工作\ntype UnitIsNeedWorkAtHome struct {\n}\n\nfunc (s UnitIsNeedWorkAtHome) Condition(params interface{}) (bool, error) {\n\n\tif params.(userParams).IsNeedWorkAtHome {\n\t\treturn true, nil\n\t}\n\treturn false, nil\n}\n\n// ===================== 下面还要针对条件写叶子结点的结构\n\n// 对于叶子节点而言, 主要是用于收尾，调用 SetResult\ntype LeafUnitEchoAction struct {\n}\n\nfunc (s LeafUnitEchoAction) Condition(params interface{}) (bool, error) {\n\treturn true, nil\n}\n\nfunc main() {\n\tuser := userParams{\n\t\tIsInCompany:      false,\n\t\tDestination:      \"home\",\n\t\tIsNeedWorkAtHome: false,\n\t\tIsHungry:         false,\n\t}\n\t// 按照条件构造的链路为如下：\n\tobj, err := NewUnit(UnitIsInCompany{}).WithParams(user).\n\t\t// 如果在公司，就工作\n\t\tTrue(NewUnit(LeafUnitEchoAction{}).SetResult(HumanActionWork)).\n\t\t// 如果不在公司，判断目的地是否是 Home\n\t\tFalse(\n\t\t\tNewUnit(UnitIsDestinationHome{}).\n\t\t\t\t// 回家后是否需要继续工作\n\t\t\t\tTrue(\n\t\t\t\t\tNewUnit(UnitIsNeedWorkAtHome{}).\n\t\t\t\t\t\t// 继续工作\n\t\t\t\t\t\tTrue(NewUnit(LeafUnitEchoAction{}).SetResult(HumanActionWork)).\n\t\t\t\t\t\t// 不工作就休息\n\t\t\t\t\t\tFalse(NewUnit(LeafUnitEchoAction{}).SetResult(HumanActionRest))).\n\t\t\t\t// 不回家，是否饿了\n\t\t\t\tFalse(NewUnit(UnitIsHungry{}).\n\t\t\t\t\t// 饿了就去餐厅吃饭\n\t\t\t\t\tTrue(NewUnit(LeafUnitEchoAction{}).SetResult(HumanActionEating)).\n\t\t\t\t\t// 不饿就休息\n\t\t\t\t\tFalse(NewUnit(LeafUnitEchoAction{}).SetResult(HumanActionRest)))).\n\t\tRun()\n\n\tif err != nil {\n\t\tlog.Fatalf(\"err is %v\", err)\n\t}\n\n\t// 最后通过 GetParams 获取到 LastAction\n\tlog.Printf(\"action is %v\", obj.Result)\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "sunshinev",
+      "PubDate": "2023-04-18T03:06:01Z"
+    },
+    {
+      "Title": "来来来，看看五一准备 0 点出发的有多少人，自驾游去哪？ - 问与答",
+      "Link": "https://www.v2ex.com/t/933392",
+      "Description": "\u003cp\u003e我反正是这么打算的，因为 29 号要回老家有参加弟弟的订婚宴，愿人不会太多。\u003c/p\u003e\n\u003cp\u003e另外，你们的出行计划是什么，自驾游去哪？\u003c/p\u003e\n\u003ch3\u003e暂定计划：\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://kylebing.cn/tools/map/#/route/route-line?lineId=18\" rel=\"nofollow\"\u003e回家-海边-回家\u003c/a\u003e\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e\u003cimg alt=\"comeon\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://user-images.githubusercontent.com/12215982/232660170-95db4f30-4773-463d-93bb-8046b18bce22.gif\"/\u003e\u003c/p\u003e\n",
+      "Author": "kylebing",
+      "PubDate": "2023-04-18T03:05:43Z"
+    },
+    {
+      "Title": "怎么用国内银行卡收美金（工资）？ - 问与答",
+      "Link": "https://www.v2ex.com/t/933391",
+      "Description": "每收到一笔都需要到柜台操作吗？人不在国内怎么操作比较好？",
+      "Author": "louiswong2099",
+      "PubDate": "2023-04-18T03:03:32Z"
+    },
+    {
+      "Title": "iOS 17 will reportedly set the stage for sideloading apps on iPhone (techcrunch.com) - iPhone",
+      "Link": "https://www.v2ex.com/t/933390",
+      "Description": "\u003cp\u003e\u003ca href=\"https://techcrunch.com/2023/04/17/ios-17-will-reportedly-set-the-stage-for-sideloading-apps-on-iphone/\" rel=\"nofollow\"\u003ehttps://techcrunch.com/2023/04/17/ios-17-will-reportedly-set-the-stage-for-sideloading-apps-on-iphone/\u003c/a\u003e\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003eDiscussion \u003ca href=\"https://news.ycombinator.com/item?id=35599315\" rel=\"nofollow\"\u003ehttps://news.ycombinator.com/item?id=35599315\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "psklf",
+      "PubDate": "2023-04-18T03:02:31Z"
+    },
+    {
+      "Title": "量化公司招聘 C++/go 开发 - 酷工作",
+      "Link": "https://www.v2ex.com/t/933389",
+      "Description": "\u003ch1\u003e资深 C++开发\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e工作地点：上海、新加坡\u003c/li\u003e\n\u003cli\u003e金融行业背景优先\u003c/li\u003e\n\u003cli\u003e加分：熟悉网络编程、多线程\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1\u003e资深 go 开发\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e工作地点：上海\u003c/li\u003e\n\u003cli\u003e金融行业背景优先\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1\u003e联系方式\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003eJianzhang Peng, \u003ca href=\"mailto:pengjianzhang@gmail.com\"\u003epengjianzhang@gmail.com\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "artnowben",
+      "PubDate": "2023-04-18T03:01:16Z"
+    },
+    {
       "Title": "穿得单薄，单裆部总是容易有汗，大家有什么好办法吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/933388",
       "Description": "本人男性。",
