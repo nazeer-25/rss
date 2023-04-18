@@ -4,7 +4,35 @@
   "Description": "",
   "Items": [
     {
-      "Title": "尝试整了个带些未来感的编辑器主题，目前支持 VSCode、iTerm2、macOS Terminal，色盲友好 - 程序员",
+      "Title": "前端要如何实现视频编辑器中的时间轴组件？ - 前端开发",
+      "Link": "https://www.v2ex.com/t/933478",
+      "Description": "类似 \u003ca target=\"_blank\" href=\"https://www.veed.io/\" rel=\"nofollow noopener\"\u003ehttps://www.veed.io/\u003c/a\u003e \u003ca target=\"_blank\" href=\"https://bilibili.clipchamp.com/\" rel=\"nofollow noopener\"\u003ehttps://bilibili.clipchamp.com/\u003c/a\u003e 等等的在线媒体编辑器，都会有一个时间轴轨道，\u003cbr /\u003e最近在在研究这个组件，市面上好像没有类似的开源项目以供参考，\u003cbr /\u003e难点在于上面的时间线和元素宽度如何对齐、以及一些吸附功能等等。\u003cbr /\u003e大家是否有什么思路？感谢！！！\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"/i/Vcu01YbG.png\" rel=\"nofollow noopener\" target=\"_blank\" title=\"在新窗口打开图片 Vcu01YbG.png\"\u003e\u003cimg src=\"//i.v2ex.co/Vcu01YbG.png\" class=\"embedded_image\"\u003e\u003c/a\u003e",
+      "Author": "hoythan",
+      "PubDate": "2023-04-18T07:37:06Z"
+    },
+    {
+      "Title": "2019 款的 Macbook Pro 15 寸的电脑升级内存靠谱么？ - Apple",
+      "Link": "https://www.v2ex.com/t/933477",
+      "Description": "\u003cp\u003e在淘宝上看到可以把 16G 内存升级成 32G ，拆下来的 16G 内存给我~换上 32G 的内存~可以当面更换，这样更换内存的方式有其他兄弟搞过么？换完后系统的稳定性如何哈？谢谢！！！\u003c/p\u003e\n",
+      "Author": "xzhome",
+      "PubDate": "2023-04-18T07:35:55Z"
+    },
+    {
+      "Title": "Golang 交叉编译的问题 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/933476",
+      "Description": "\u003cp\u003e在\u003ccode\u003eWindows\u003c/code\u003e下编写的，\u003ccode\u003eLinux\u003c/code\u003e相关的那段代码无法通过编译，提示\"Unresolved type 'Statvfs_t'\"\u003c/p\u003e\n\u003cp\u003e加了判断根据系统调用不同的函数，也不行吗？\u003c/p\u003e\n\u003cp\u003e那要怎么解决？\u003c/p\u003e\n\u003chr/\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e//go:build windows || linux\n\npackage main\n\nimport (\n\t\"fmt\"\n\t\"golang.org/x/sys/windows\"\n\t\"os\"\n\t\"runtime\"\n\t\"syscall\"\n)\n\n// 获取磁盘的可用空间。依次为 可用空间、总空间、剩余空间（包含系统保留）\n//\n// 参考 https://stackoverflow.com/a/60724929\nfunc get() (free uint64, total uint64, avail uint64, err error) {\n\twd, err := os.Getwd()\n\tif err != nil {\n\t\treturn\n\t}\n\n\tswitch runtime.GOOS {\n\tcase \"windows\":\n\t\tpathPtr, err := windows.UTF16PtrFromString(wd)\n\t\tif err != nil {\n\t\t\treturn\n\t\t}\n\t\terr = windows.GetDiskFreeSpaceEx(pathPtr, \u0026amp;free, \u0026amp;total, \u0026amp;avail)\n\t\tif err != nil {\n\t\t\treturn\n\t\t}\n\n\tcase \"linux\":\n\t\tvar stat syscall.Statvfs_t\n\t\tif err := syscall.Statvfs(wd, \u0026amp;stat); err != nil {\n\t\t\tfmt.Println(err)\n\t\t\treturn\n\t\t}\n\n\t\t// 块大小 = fragment 大小 * fragment 个数（单位为字节）\n\t\tblockSize := uint64(stat.Frsize)\n\t\t// 可用空间 = 块大小 * 可用块数（单位为字节）\n\t\tfree = stat.F_bfree * blockSize\n\t\t// 总空间 = 块大小 * 总块数（单位为字节）\n\t\ttotal = stat.F_blocks * blockSize\n\t\t// 剩余空间 = 块大小 * 剩余块数（单位为字节）\n\t\tavail = stat.F_bavail * blockSize\n\n\tdefault:\n\t\treturn 0, 0, 0, fmt.Errorf(\"未适配的平台'%s'\", runtime.GOOS)\n\t}\n\n\treturn\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "icoming",
+      "PubDate": "2023-04-18T07:33:16Z"
+    },
+    {
+      "Title": "推荐 Linux 下内网的聊天沟通工具 - Linux",
+      "Link": "https://www.v2ex.com/t/933475",
+      "Description": "聊天服务器需要在内网私有化部署。\u003cbr /\u003e\u003cbr /\u003e客户端支持 windows 、linux （ Ubuntu ）。\u003cbr /\u003e\u003cbr /\u003e用户量并不是很多，也就几百。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003ewindows 下以前用内网通、飞秋之类的，挺方便。现在有个 “信使（ iptux ）”实在太难用了",
+      "Author": "paranoiagu",
+      "PubDate": "2023-04-18T07:33:14Z"
+    },
+    {
+      "Title": "整了个带些未来感的编辑器主题，目前支持 VSCode、iTerm2、macOS Terminal，色盲友好 - 程序员",
       "Link": "https://www.v2ex.com/t/933474",
       "Description": "\u003ch1\u003e介绍\u003c/h1\u003e\n\u003cp\u003e先上个图：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003evscode 的\n\u003cimg alt=\"normal\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://github.com/hardhackerlabs/themes/raw/master/vscode/screenshots/rust-normal.png\"/\u003e\u003c/li\u003e\n\u003cli\u003eiTerm2 的\n\u003cimg alt=\"iTerm2\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://github.com/hardhackerlabs/themes/raw/master/iterm/screenshots/Iterm2%20app.png\"/\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e配色灵感来自一些 cyberpunk 风格的画作，原本想做成能发光的，但发光的看久了实在瞎眼🤦‍♂️，而且发光效果也只有 vscode 能通过 hack 的方式做到，port 不到别的编辑器上，就算了。\u003c/p\u003e\n\u003cp\u003e不同于一般的蓝黑色调为主的主题，这个主题是紫红+青色为主。为了能够长时间使用，降低了一些饱和度，虽然更柔和了，但 cyberpunk 的味儿也淡了。不过有舍有得，毕竟期望是能长期使用的。\u003c/p\u003e\n\u003cp\u003e另外用 adobe 的工具检查了对比度和色盲友好性，都 ok ，可以放心使用。\u003c/p\u003e\n\u003ch1\u003e用法\u003c/h1\u003e\n\u003cp\u003e工程在此：\u003ca href=\"https://github.com/hardhackerlabs/themes\" rel=\"nofollow\"\u003eGitHub\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eiTerm2 和 macOS Terminal 的需要手动下载后导入，VSCode 的可以直接在插件市场搜索 \u003ccode\u003eHardHacker\u003c/code\u003e 安装。\u003c/p\u003e\n\u003ch1\u003e碎碎念\u003c/h1\u003e\n\u003cp\u003eVSCode 的主题细节实在是多，最初原本想用 darcula 的工程换下色生成一下的，可是效果不满意。于是就自己手撸了一下，ChatGPT 帮了不少忙🤣。不过应该还是会有遗漏，欢迎提 issue 。\u003c/p\u003e\n\u003cp\u003e目前主要对着 Rust 、JS 、TS 、JSON 、Markdown 做过调整，其他语言看了几个，感觉也还行。同样也欢迎提 issue 。\u003c/p\u003e\n\u003cp\u003e另外 vim 的配色正在做，感兴趣的朋友可以关注一下，后面打算把 JetBrains 的也搞一下，似乎细节比 VSCode 只多不少的样子……\u003c/p\u003e\n",
       "Author": "anson0370",

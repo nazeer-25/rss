@@ -4,7 +4,35 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>尝试整了个带些未来感的编辑器主题，目前支持 VSCode、iTerm2、macOS Terminal，色盲友好 - 程序员</title>
+      <title>前端要如何实现视频编辑器中的时间轴组件？ - 前端开发</title>
+      <link>https://www.v2ex.com/t/933478</link>
+      <description>类似 &lt;a target=&#34;_blank&#34; href=&#34;https://www.veed.io/&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.veed.io/&lt;/a&gt; &lt;a target=&#34;_blank&#34; href=&#34;https://bilibili.clipchamp.com/&#34; rel=&#34;nofollow noopener&#34;&gt;https://bilibili.clipchamp.com/&lt;/a&gt; 等等的在线媒体编辑器，都会有一个时间轴轨道，&lt;br /&gt;最近在在研究这个组件，市面上好像没有类似的开源项目以供参考，&lt;br /&gt;难点在于上面的时间线和元素宽度如何对齐、以及一些吸附功能等等。&lt;br /&gt;大家是否有什么思路？感谢！！！&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;/i/Vcu01YbG.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34; title=&#34;在新窗口打开图片 Vcu01YbG.png&#34;&gt;&lt;img src=&#34;//i.v2ex.co/Vcu01YbG.png&#34; class=&#34;embedded_image&#34;&gt;&lt;/a&gt;</description>
+      <author>hoythan</author>
+      <pubDate>18 Apr 2023 07:37:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>2019 款的 Macbook Pro 15 寸的电脑升级内存靠谱么？ - Apple</title>
+      <link>https://www.v2ex.com/t/933477</link>
+      <description>&lt;p&gt;在淘宝上看到可以把 16G 内存升级成 32G ，拆下来的 16G 内存给我~换上 32G 的内存~可以当面更换，这样更换内存的方式有其他兄弟搞过么？换完后系统的稳定性如何哈？谢谢！！！&lt;/p&gt;&#xA;</description>
+      <author>xzhome</author>
+      <pubDate>18 Apr 2023 07:35:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>Golang 交叉编译的问题 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/933476</link>
+      <description>&lt;p&gt;在&lt;code&gt;Windows&lt;/code&gt;下编写的，&lt;code&gt;Linux&lt;/code&gt;相关的那段代码无法通过编译，提示&#34;Unresolved type &#39;Statvfs_t&#39;&#34;&lt;/p&gt;&#xA;&lt;p&gt;加了判断根据系统调用不同的函数，也不行吗？&lt;/p&gt;&#xA;&lt;p&gt;那要怎么解决？&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//go:build windows || linux&#xA;&#xA;package main&#xA;&#xA;import (&#xA;&#x9;&#34;fmt&#34;&#xA;&#x9;&#34;golang.org/x/sys/windows&#34;&#xA;&#x9;&#34;os&#34;&#xA;&#x9;&#34;runtime&#34;&#xA;&#x9;&#34;syscall&#34;&#xA;)&#xA;&#xA;// 获取磁盘的可用空间。依次为 可用空间、总空间、剩余空间（包含系统保留）&#xA;//&#xA;// 参考 https://stackoverflow.com/a/60724929&#xA;func get() (free uint64, total uint64, avail uint64, err error) {&#xA;&#x9;wd, err := os.Getwd()&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#xA;&#x9;switch runtime.GOOS {&#xA;&#x9;case &#34;windows&#34;:&#xA;&#x9;&#x9;pathPtr, err := windows.UTF16PtrFromString(wd)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;return&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;err = windows.GetDiskFreeSpaceEx(pathPtr, &amp;amp;free, &amp;amp;total, &amp;amp;avail)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;return&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;case &#34;linux&#34;:&#xA;&#x9;&#x9;var stat syscall.Statvfs_t&#xA;&#x9;&#x9;if err := syscall.Statvfs(wd, &amp;amp;stat); err != nil {&#xA;&#x9;&#x9;&#x9;fmt.Println(err)&#xA;&#x9;&#x9;&#x9;return&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;// 块大小 = fragment 大小 * fragment 个数（单位为字节）&#xA;&#x9;&#x9;blockSize := uint64(stat.Frsize)&#xA;&#x9;&#x9;// 可用空间 = 块大小 * 可用块数（单位为字节）&#xA;&#x9;&#x9;free = stat.F_bfree * blockSize&#xA;&#x9;&#x9;// 总空间 = 块大小 * 总块数（单位为字节）&#xA;&#x9;&#x9;total = stat.F_blocks * blockSize&#xA;&#x9;&#x9;// 剩余空间 = 块大小 * 剩余块数（单位为字节）&#xA;&#x9;&#x9;avail = stat.F_bavail * blockSize&#xA;&#xA;&#x9;default:&#xA;&#x9;&#x9;return 0, 0, 0, fmt.Errorf(&#34;未适配的平台&#39;%s&#39;&#34;, runtime.GOOS)&#xA;&#x9;}&#xA;&#xA;&#x9;return&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>icoming</author>
+      <pubDate>18 Apr 2023 07:33:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>推荐 Linux 下内网的聊天沟通工具 - Linux</title>
+      <link>https://www.v2ex.com/t/933475</link>
+      <description>聊天服务器需要在内网私有化部署。&lt;br /&gt;&lt;br /&gt;客户端支持 windows 、linux （ Ubuntu ）。&lt;br /&gt;&lt;br /&gt;用户量并不是很多，也就几百。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;windows 下以前用内网通、飞秋之类的，挺方便。现在有个 “信使（ iptux ）”实在太难用了</description>
+      <author>paranoiagu</author>
+      <pubDate>18 Apr 2023 07:33:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>整了个带些未来感的编辑器主题，目前支持 VSCode、iTerm2、macOS Terminal，色盲友好 - 程序员</title>
       <link>https://www.v2ex.com/t/933474</link>
       <description>&lt;h1&gt;介绍&lt;/h1&gt;&#xA;&lt;p&gt;先上个图：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;vscode 的&#xA;&lt;img alt=&#34;normal&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://github.com/hardhackerlabs/themes/raw/master/vscode/screenshots/rust-normal.png&#34;/&gt;&lt;/li&gt;&#xA;&lt;li&gt;iTerm2 的&#xA;&lt;img alt=&#34;iTerm2&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://github.com/hardhackerlabs/themes/raw/master/iterm/screenshots/Iterm2%20app.png&#34;/&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;配色灵感来自一些 cyberpunk 风格的画作，原本想做成能发光的，但发光的看久了实在瞎眼🤦‍♂️，而且发光效果也只有 vscode 能通过 hack 的方式做到，port 不到别的编辑器上，就算了。&lt;/p&gt;&#xA;&lt;p&gt;不同于一般的蓝黑色调为主的主题，这个主题是紫红+青色为主。为了能够长时间使用，降低了一些饱和度，虽然更柔和了，但 cyberpunk 的味儿也淡了。不过有舍有得，毕竟期望是能长期使用的。&lt;/p&gt;&#xA;&lt;p&gt;另外用 adobe 的工具检查了对比度和色盲友好性，都 ok ，可以放心使用。&lt;/p&gt;&#xA;&lt;h1&gt;用法&lt;/h1&gt;&#xA;&lt;p&gt;工程在此：&lt;a href=&#34;https://github.com/hardhackerlabs/themes&#34; rel=&#34;nofollow&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;iTerm2 和 macOS Terminal 的需要手动下载后导入，VSCode 的可以直接在插件市场搜索 &lt;code&gt;HardHacker&lt;/code&gt; 安装。&lt;/p&gt;&#xA;&lt;h1&gt;碎碎念&lt;/h1&gt;&#xA;&lt;p&gt;VSCode 的主题细节实在是多，最初原本想用 darcula 的工程换下色生成一下的，可是效果不满意。于是就自己手撸了一下，ChatGPT 帮了不少忙🤣。不过应该还是会有遗漏，欢迎提 issue 。&lt;/p&gt;&#xA;&lt;p&gt;目前主要对着 Rust 、JS 、TS 、JSON 、Markdown 做过调整，其他语言看了几个，感觉也还行。同样也欢迎提 issue 。&lt;/p&gt;&#xA;&lt;p&gt;另外 vim 的配色正在做，感兴趣的朋友可以关注一下，后面打算把 JetBrains 的也搞一下，似乎细节比 VSCode 只多不少的样子……&lt;/p&gt;&#xA;</description>
       <author>anson0370</author>
