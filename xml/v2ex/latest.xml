@@ -4,11 +4,32 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>Switch Online 家庭车 29/年 - Nintendo Switch</title>
-      <link>https://www.v2ex.com/t/933449</link>
-      <description>昨天刚开绿: ZXp2aWtpaQ==</description>
-      <author>EZVIK</author>
-      <pubDate>18 Apr 2023 06:14:42 +0000</pubDate>
+      <title>半夜起夜 - 问与答</title>
+      <link>https://www.v2ex.com/t/933453</link>
+      <description>&lt;p&gt;以前的时候向来都是一觉睡到天光，但是最近不知怎么的老是在 4 点钟醒来，基本上是被尿憋醒的。我目前是白天在办公室喝水很多，然后晚上回了家基本上就不喝水了，但是仍然会起夜，怎么再把这个生物钟掰回去呢？&lt;/p&gt;&#xA;</description>
+      <author>god7d</author>
+      <pubDate>18 Apr 2023 06:25:03 +0000</pubDate>
+    </item>
+    <item>
+      <title>完全忘了 itemMap[id]还代表了引用 - JavaScript</title>
+      <link>https://www.v2ex.com/t/933452</link>
+      <description>&lt;p&gt;在看一个掘金的帖子 &lt;a href=&#34;https://juejin.cn/post/6983904373508145189&#34; rel=&#34;nofollow&#34;&gt;https://juejin.cn/post/6983904373508145189&lt;/a&gt; “扁平数据结构转 Tree”。&lt;/p&gt;&#xA;&lt;p&gt;看的时候在想，自己很少用 Map 对象，要不试试用 Map 改造一下，结果改造失败，找了半天原因，靠同事指了出来。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;let arr = [&#xA;    { id: 1, name: &#34;部门 1&#34;, pid: 0 },&#xA;    { id: 2, name: &#34;部门 2&#34;, pid: 1 },&#xA;    { id: 3, name: &#34;部门 3&#34;, pid: 1 },&#xA;    { id: 4, name: &#34;部门 4&#34;, pid: 3 },&#xA;    { id: 5, name: &#34;部门 5&#34;, pid: 4 },&#xA;];&#xA;let result = [];&#xA;function arrayToTree1(items) {&#xA;    const result = [];&#xA;    const itemMap = {};&#xA;&#xA;    for (const item of items) {&#xA;        itemMap[item.id] = { ...item, children: [] };&#xA;    }&#xA;&#xA;    for (const item of items) {&#xA;        const id = item.id;&#xA;        const pid = item.pid;&#xA;        const treeItem = itemMap[id];&#xA;        if (pid === 0) {&#xA;            result.push(treeItem);&#xA;        } else {&#xA;            if (!itemMap[pid]) {&#xA;                itemMap[pid] = {&#xA;                    children: [],&#xA;                };&#xA;            }&#xA;            itemMap[pid].children.push(treeItem);&#xA;        }&#xA;    }&#xA;    return result;&#xA;}&#xA;result = arrayToTree1(arr);&#xA;console.log(result);&#xA;console.log(&#34;========&#34;);&#xA;&#xA;function arrayToTree2(items) {&#xA;    const result = [];&#xA;    const itemMap = new Map();&#xA;    items.map((item, index) =&amp;gt; {&#xA;        itemMap.set(item.id, { ...item, children: [] });&#xA;    });&#xA;    items.map((item, index) =&amp;gt; {&#xA;        const id = item.id;&#xA;        const pid = item.pid;&#xA;        const treeItem = itemMap.get(id);&#xA;&#xA;        if (pid === 0) {&#xA;            result.push(treeItem);&#xA;        } else {&#xA;            if (!itemMap.get(pid)) {&#xA;                itemMap.set(pid, { children: [] });&#xA;            }&#xA;&#xA;            itemMap.set(pid, {&#xA;                ...itemMap.get(pid),&#xA;                children: itemMap.get(pid).children.concat(treeItem),&#xA;            });&#xA;        }&#xA;    });&#xA;    return result;&#xA;}&#xA;result = arrayToTree2(arr);&#xA;console.log(result);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://i.v2ex.co/1G1gNIox.png&#34; rel=&#34;nofollow&#34;&gt;https://i.v2ex.co/1G1gNIox.png&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;中途甚至试着问了问 chat ，它没看出来啥区别敷衍了一下我 TAT 。后面我再想想能不能抢救一下 arrayToTree2&lt;/p&gt;&#xA;&lt;p&gt;===接上一贴：裸辞了，但是单子还没提，总之大小领导都通知了。这里的规矩是通知完点头后才能提单子，这会儿学点自己想学的，边休息变沉淀一下了。&lt;/p&gt;&#xA;</description>
+      <author>devwolf</author>
+      <pubDate>18 Apr 2023 06:22:57 +0000</pubDate>
+    </item>
+    <item>
+      <title>一起来清理下浏览器缓存吧 - Chrome</title>
+      <link>https://www.v2ex.com/t/933451</link>
+      <description>&lt;p&gt;位置: &lt;a&gt;chrome://settings/content/all&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;chrome storage used&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/ZhpATqQ.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;平时没有用过清理软件, 习惯自己去应用缓存目录手动清理, 最近发现浏览器的缓存一直没有清除, 占了好多空间, 像这个 lanhu 我 3 年没打开过, 结果一直占用着我的 5G 空间.&lt;/p&gt;&#xA;&lt;p&gt;除了 Chrome 缓存, 其余的应用缓存大概收集了一下:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;Xcode: 使用软件 cleaner for xcode&#xA;User logs:  ~/Library/Logs&#xA;gradle: ~/.gradle/caches/&#xA;Homebrew: 升级到 4.0 后可以删掉官方两个库(brew untap homebrew/cask brew untap homebrew/core)&#xA;VSCode: ~/Library/Application Support/Code/Cache&#xA;WeChat: 定期重装&#xA;QQ(NT): ~/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/nt_qq_**/nt_data&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;一起来给电脑瘦个身吧&lt;/p&gt;&#xA;</description>
+      <author>FaiChou</author>
+      <pubDate>18 Apr 2023 06:22:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>对于一个家有 1 岁 6 个月的女宝的新手宝爸，大家有什么好物推荐买给女儿的吗？ - 生活</title>
+      <link>https://www.v2ex.com/t/933450</link>
+      <description>&lt;p&gt;平时上班忙，单位离家又远，见女儿次数少，时间也短，听过欧神说人生最值的就是花出去的钱和陪伴子女的时间，深感愧疚，尤其害怕时间一长亲子关系都疏远了。&lt;/p&gt;&#xA;&lt;p&gt;各位大佬如有好的建议，请不吝赐教～&lt;/p&gt;&#xA;</description>
+      <author>pipagourd</author>
+      <pubDate>18 Apr 2023 06:17:46 +0000</pubDate>
     </item>
     <item>
       <title>目前最好用的基于 ChatGPT 的浏览器插件是什么？ - Apple</title>
@@ -23,13 +44,6 @@
       <description>可以提供腾讯云阿里云华为云折扣优惠返现以及技术支持&lt;br /&gt;国内物理机租用&lt;br /&gt;阿里云海外版&lt;br /&gt;欢迎各位老板比价&lt;br /&gt;V：1152107599&lt;br /&gt;TG：@dameizi1993</description>
       <author>mmei737201</author>
       <pubDate>18 Apr 2023 05:59:50 +0000</pubDate>
-    </item>
-    <item>
-      <title>打听前女友近况后续，解释几个没说清的点 - 问与答</title>
-      <link>https://www.v2ex.com/t/933443</link>
-      <description>&lt;p&gt;先说一下后续吧，没忍住，找前女友的一个关系不错的女生朋友问了下情况，这个女生对我不太待见，可以理解，人家不骂我一顿都算客气了吧。给我看了她朋友圈截图，还跟我说她可能要谈新的了，并且直言男方条件很好我比不上，让我别去骚扰前任。虽然不知道真假，但其实我也早有预料吧，走到今天这一步只能说我纯傻 X ，弄丢了那么好的女孩。照片上的她还是那么可爱，但是隐隐觉得已经陌生了很多，她换了新发型，感觉更时尚也更有气质了。她发的朋友圈没有配文字，不过看起来生活状态挺不错的，我说不出来自己心里什么感受，看到她照片的那一瞬间，感觉心脏都不跳了，不怕各位笑话，我在公司茶水间里边觉得呼吸不上来，顿了得有五分钟。&lt;/p&gt;&#xA;&lt;p&gt;人生没有回头路，我终于承认自己错了，但是也晚了，或许一开始就是我不配拥有幸福吧。&lt;/p&gt;&#xA;&lt;p&gt;再解释几个上个帖子里被关注的点，第一个是我有没有脚踏两只船，关于这个，我做得不够好我承认，但是也绝对没有两边吊着的意思，前任可能在等我给她道歉求和，但其实和后来这个女友见面之前，确实是已经说过了分手。后来这个女友，在真正频繁聊天之前，也清楚我有一段四年恋爱，也清楚我曾经挽回过前任，她知道并且接受，我认为自己也没有什么对不起她的地方。&lt;/p&gt;&#xA;&lt;p&gt;至于近期想要和这个女友分开，主要原因还是不够喜欢吧，虽然我承认能玩到一起去，但是就像很多人说得那样，酒肉情侣，更像凑在一起吃饭玩乐的朋友，没有那种很深的羁绊的感觉，我也承认是我不对，贪图她对我的仰慕，觉得谈了新的就能忘记旧的。&lt;/p&gt;&#xA;&lt;p&gt;其实前女友骂过我，说我对别的女生也不真诚，把别人当作缓解痛苦的工具人，那个时候我不承认，我甚至觉得如果真的谈了，我一定认真对待感情。但现在的结果来看，她说得对，她比我自己还了解我的弱根性。&lt;/p&gt;&#xA;&lt;p&gt;将来的打算是真的不会再草率进入感情了，网友的评论我都看了，建议和批评我都接受，我会好好反思自己。可能在这里对陌生人倾诉也是第一步吧，我写下一些事情的时候，自己都不敢信，我竟然曾经如此混蛋&lt;/p&gt;&#xA;</description>
-      <author>ccyy2020</author>
-      <pubDate>18 Apr 2023 05:56:56 +0000</pubDate>
     </item>
     <item>
       <title>五一去云南，挑的最便宜的机票火车票，以及还算可以的民宿 - 生活</title>
@@ -278,6 +292,20 @@
       <description>马上到期了，我看了下之前用到是电信小团圆融合套餐，一共好像是 690 多。&lt;br /&gt;问题 1：&lt;br /&gt;这个是不是可以原价续约的？&lt;br /&gt;问题 2：&lt;br /&gt;如果不能续约有啥推荐吗？单宽带或者融合宽带都行&lt;br /&gt;本人情况：&lt;br /&gt;宽带主要是玩游戏，要求不高&lt;br /&gt;手机大概有个 15G+流量就可以了</description>
       <author>SWALLOWW</author>
       <pubDate>18 Apr 2023 03:31:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>Switch Online 家庭车 29/年 - Nintendo Switch</title>
+      <link>https://www.v2ex.com/t/933449</link>
+      <description>昨天刚开绿: ZXp2aWtpaQ==</description>
+      <author>EZVIK</author>
+      <pubDate>18 Apr 2023 06:14:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>打听前女友近况后续，解释几个没说清的点 - 问与答</title>
+      <link>https://www.v2ex.com/t/933443</link>
+      <description>&lt;p&gt;先说一下后续吧，没忍住，找前女友的一个关系不错的女生朋友问了下情况，这个女生对我不太待见，可以理解，人家不骂我一顿都算客气了吧。给我看了她朋友圈截图，还跟我说她可能要谈新的了，并且直言男方条件很好我比不上，让我别去骚扰前任。虽然不知道真假，但其实我也早有预料吧，走到今天这一步只能说我纯傻 X ，弄丢了那么好的女孩。照片上的她还是那么可爱，但是隐隐觉得已经陌生了很多，她换了新发型，感觉更时尚也更有气质了。她发的朋友圈没有配文字，不过看起来生活状态挺不错的，我说不出来自己心里什么感受，看到她照片的那一瞬间，感觉心脏都不跳了，不怕各位笑话，我在公司茶水间里边觉得呼吸不上来，顿了得有五分钟。&lt;/p&gt;&#xA;&lt;p&gt;人生没有回头路，我终于承认自己错了，但是也晚了，或许一开始就是我不配拥有幸福吧。&lt;/p&gt;&#xA;&lt;p&gt;再解释几个上个帖子里被关注的点，第一个是我有没有脚踏两只船，关于这个，我做得不够好我承认，但是也绝对没有两边吊着的意思，前任可能在等我给她道歉求和，但其实和后来这个女友见面之前，确实是已经说过了分手。后来这个女友，在真正频繁聊天之前，也清楚我有一段四年恋爱，也清楚我曾经挽回过前任，她知道并且接受，我认为自己也没有什么对不起她的地方。&lt;/p&gt;&#xA;&lt;p&gt;至于近期想要和这个女友分开，主要原因还是不够喜欢吧，虽然我承认能玩到一起去，但是就像很多人说得那样，酒肉情侣，更像凑在一起吃饭玩乐的朋友，没有那种很深的羁绊的感觉，我也承认是我不对，贪图她对我的仰慕，觉得谈了新的就能忘记旧的。&lt;/p&gt;&#xA;&lt;p&gt;其实前女友骂过我，说我对别的女生也不真诚，把别人当作缓解痛苦的工具人，那个时候我不承认，我甚至觉得如果真的谈了，我一定认真对待感情。但现在的结果来看，她说得对，她比我自己还了解我的弱根性。&lt;/p&gt;&#xA;&lt;p&gt;将来的打算是真的不会再草率进入感情了，网友的评论我都看了，建议和批评我都接受，我会好好反思自己。可能在这里对陌生人倾诉也是第一步吧，我写下一些事情的时候，自己都不敢信，我竟然曾经如此混蛋&lt;/p&gt;&#xA;</description>
+      <author>ccyy2020</author>
+      <pubDate>18 Apr 2023 05:56:56 +0000</pubDate>
     </item>
     <item>
       <title>京东现在真是拿用户不当人了 - 生活</title>
