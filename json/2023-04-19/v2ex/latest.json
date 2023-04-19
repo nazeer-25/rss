@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教各位 v2er，局域网的 HTTP 代理是怎么解决直连问题的 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/933852",
+      "Description": "\u003cp\u003e无论用 clash ，还是 v2ray ，在 Windows 平台下，开启局域网 HTTP 代理，然后手机设置网络的 HTTP 代理和端口，都是可以完成访问外网的。\u003c/p\u003e\n\u003cp\u003e但是访问内网是超时的，或者说，所有的 direct 流量都不能被正确的返回。\u003c/p\u003e\n\u003cp\u003e这个问题原因倒也不难，如果是代理流量，TCP 头在经过 clash/V2ray 后都会改变，因为要代理，所以其内部做 IP 端口的映射表，收到返回流量后，再 redir 到手机上，这个过程没问题。\u003c/p\u003e\n\u003cp\u003e但是如果是 direct 流量，C/V 直接返回出去，是不会记录映射关系，但 TCP 头在经过 clash/V2ray 后还是会改变了，这时候收到的返回流量就不能正确 redir 到手机上。\u003c/p\u003e\n\u003cp\u003e这个问题在 Linux 系统下，用 iptables 可以解决，换句话说，用 tproxy 的透明代理技术，通过配置 iptables ，让 Linux 的 netfilter 去建立这个映射，而不需要 C/V 来做这个工作。这时候就不是单纯的 HTTP 代理了，而是 tproxy 的透明代理\u003c/p\u003e\n\u003cp\u003e但是在 Windows 平台下，就不清楚该怎么处理了。我感觉，既然 direct 流量都走到 C/V 里面了，那 C/V 其实也可以做到建立 IP 和端口的映射关系，真不知道这个到底是个配置项，还是就完全做不到。\u003c/p\u003e\n\u003cp\u003e也有一些链接提到这个问题，但是不清楚这个原理是什么，在我设备上也没有起作用。\u003cbr/\u003e\n\u003ca href=\"https://github.com/Fndroid/clash_for_windows_pkg/issues/3679\" rel=\"nofollow\"\u003eLink1\u003c/a\u003e\u003cbr/\u003e\n\u003ca href=\"https://mxy.cool/2020101017609/\" rel=\"nofollow\"\u003eLink2\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "wanmyj",
+      "PubDate": "2023-04-19T14:18:19Z"
+    },
+    {
       "Title": "闲鱼信用筛选还可能添加回来吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/933851",
       "Description": "\u003cp\u003e用惯了信用筛选，这几个月没办法筛选了感觉非常难过，想卖个东西上去搜下平均价都不太好搜，乱七八糟一堆结果混在一起，搜起来效率很低。\u003c/p\u003e\n",
