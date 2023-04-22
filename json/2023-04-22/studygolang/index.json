@@ -39,6 +39,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "gin 读取绝对文件路径错误",
+      "Link": "https://studygolang.com/topics/16323#reply1",
+      "Description": "\u003cp\u003e用gin写了服务，读取绝对路径下的c:\\文件，一直报无法识别文件路径，文件名等【123】错误是什么原因？只能读取当前目录下的文件吗？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "Go区块链后端工程师",
       "Link": "https://studygolang.com/topics/16319#reply0",
       "Description": "\u003cp\u003edappOS 是Web3 操作系统，币安孵化器第五季成员，通过公链虚拟化，账户抽象，SDK，DApp集成平台等产品技术，实现开发者单次部署，多链使用。\n用户在使用 DApp 时也无需关注跨链等流程，直接从统一账户与不同链上DApp交互，一键操作简单，使DApps像Web2.0的Apps一样对用户友好。\n目前，GMX、Perpetual、Benqi、QuickSwap、MakerDao、 Avalanche、KyberSwap、zkSync 等头部协议已与 dappOS 达成深度合作。\n🔗 Linktree：linktr.ee/dappos\n Deck：\u003ca href=\"https://bit.ly/41CmlH3\"\u003ehttps://bit.ly/41CmlH3\u003c/a\u003e\n💬 Calendly：\u003ca href=\"https://calendly.com/dappos01\"\u003ehttps://calendly.com/dappos01\u003c/a\u003e\n🏼USE CASE\nGMX：\u003ca href=\"https://gmx.dappos.finance/trade\"\u003ehttps://gmx.dappos.finance/trade\u003c/a\u003e\nPerpetual: \u003ca href=\"https://perp.dappos.org/\"\u003ehttps://perp.dappos.org/\u003c/a\u003e\nBenqi: \u003ca href=\"https://benqi.dappos.finance\"\u003ehttps://benqi.dappos.finance\u003c/a\u003e\nQuickswap: \u003ca href=\"https://quickswap.dappos.finance/farms\"\u003ehttps://quickswap.dappos.finance/farms\u003c/a\u003e\n联系方式：weixin 1620570491  邮箱：1620570491@qq.com\u003c/p\u003e\n",
@@ -56,13 +63,6 @@
       "Title": "使用unsafe.Pointer获取slice和map的长度",
       "Link": "https://studygolang.com/topics/16318#reply1",
       "Description": "\u003cp\u003e**获取 slice 长度 **\u003c/p\u003e\n\n\u003cp\u003e通过对slice的学习，我们知道了 slice header 的结构体定义：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\t// runtime/slice.go\ntype slice struct {\n    array unsafe.Pointer // 元素指针\n    len   int // 长度 \n    cap   int // 容量\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e调用 make 函数新建一个 slice，底层调用的是 makeslice 函数，返回的是 slice 结构体：\n\u003ccode\u003e\tfunc makeslice(et *_type, len, cap int) slice\u003c/code\u003e\n因此我们可以通过 unsafe.Pointer 和 uintptr 进行转换，得到 slice 的字段值。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\tfunc main() {\n        s := make([]int, 9, 20)\n        var Len = *(*int)(unsafe.Pointer(uintptr(unsafe.Pointer(\u0026amp;s)) + uintptr(8)))  \n        fmt.Println(Len, len(s)) // 9 9\n\tvar Cap = *(*int)(unsafe.Pointer(uintptr(unsafe.Pointer(\u0026amp;s)) + uintptr(16)))\n        fmt.Println(Cap, cap(s)) // 20 20\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e上文采用加uintptr(8)和uintptr(16),是因为底层slice结构连续的，切片变量 s 在内存中占用了连续的 3 个机器字。在 64 位架构下，一个机器字的大小为 8 个字节，因此 s 的第一个机器字是指向底层数组的指针，第二个机器字是切片的长度，第三个机器字是切片的容量。可能有些小伙伴不了解字的含义，这里和大家解释一下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e16位系统： 1个机器字---2个字节--16位bit\n32位系统： 1个机器字---4个字节--32位bit\n64位系统： 1个及其子---8个字节--64位bit\n其中：字节是内存操作的基本单位，所以uintptr(8)才能计算偏移位置。\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003eslice内存结构如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e+--------------+\n|   Ptr        |  -- 指向底层数组的指针\n+--------------+\n|   Len        |  -- 切片的长度\n+--------------+\n|   Cap        |  -- 切片的容量\n+--------------+\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003eLen，cap 的转换流程如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eLen: \u0026amp;s =\u0026gt; pointer =\u0026gt; uintptr =\u0026gt; pointer =\u0026gt; *int =\u0026gt; int\nCap: \u0026amp;s =\u0026gt; pointer =\u0026gt; uintptr =\u0026gt; pointer =\u0026gt; *int =\u0026gt; int\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e**获取 map 长度 **\u003c/p\u003e\n\n\u003cp\u003e再来看一下 map：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype hmap struct {\n        count     int\n        flags     uint8\n        B         uint8\n        noverflow uint16\n        hash0     uint32\n\tbuckets    unsafe.Pointer\n        oldbuckets unsafe.Pointer\n        nevacuate  uintptr\n\textra *mapextra\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e和 slice 不同的是，makemap 函数返回的是 hmap 的指针，注意是指针：\n\u003ccode\u003e\tfunc makemap(t *maptype, hint int64, h *hmap, bucket unsafe.Pointer) *hmap\u003c/code\u003e\n我们依然能通过 unsafe.Pointer 和 uintptr 进行转换，得到 hmap 字段的值，只不过，现在 count 变成二级指针了：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc main() {\n        mp := make(map[string]int)\n        mp[\u0026quot;qcrao\u0026quot;] = 100\n        mp[\u0026quot;stefno\u0026quot;] = 18\n\tcount := **(**int)(unsafe.Pointer(\u0026amp;mp))\n        fmt.Println(count, len(mp)) // 2 2\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003ecount 的转换过程：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\u0026amp;mp =\u0026gt; pointer =\u0026gt; **int =\u0026gt; int\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e注意：上面的转化，是因为hmap第一个成员是count，所以可以将*hmap指针转化为*int指针。转化后获取的就是count地址，然后进行(**int)取值就可以获取数量了。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "gin 读取绝对文件路径错误",
-      "Link": "https://studygolang.com/topics/16323#reply1",
-      "Description": "\u003cp\u003e用gin写了服务，读取绝对路径下的c:\\文件，一直报无法识别文件路径，文件名等【123】错误是什么原因？只能读取当前目录下的文件吗？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
