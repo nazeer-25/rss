@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>和 ChatGPT 纠缠了几个小时，总算弄明白一个问题了，但是不确定她说的对不对，再来确认一下 - 程序员</title>
+      <link>https://www.v2ex.com/t/934518</link>
+      <description>&lt;p&gt;根据她的解释，在 Linux C 编程中，如果主进程 fork 出去两个子进程 B,C 的话，B 和 C 都会拷贝一份所有打开的 file descriptor 。&lt;/p&gt;&#xA;&lt;p&gt;那么，假设主进程 fork 出去三个进程 ABC ，其中 AB 用 pipe1 连在一块，BC 用 pipe2 连在一块（三个连在一起，比如说&lt;code&gt;echo blahblahcat | grep cat | wc&lt;/code&gt;)。我发现，就算 C 不用 pipe1 ，它也必须把 pipe1 的写入口关掉。&lt;/p&gt;&#xA;&lt;p&gt;ChatGPT 进一步解释道，这是因为，Linux kernel 会监视每一个 pipe 的每一个写入口。因为 B 和 C 分属两个子进程，所以它们其实是相当于打开了两个 pipe1 的写入口。以上面那个命令行为例，B 中的&lt;code&gt;grep&lt;/code&gt;通过 pipe1 的读入口读入数据，C 中 pipe1 的写入口一直开着，就导致 kernel 没有发送 EOF ，导致&lt;code&gt;grep&lt;/code&gt;挂机。哪怕 B 把自己的 pipe1 写入口关掉都不行，因为 B 和 C 的 pipe1 写入口是两个拷贝。&lt;/p&gt;&#xA;&lt;p&gt;我又查了很久的 stackoverflow ，感觉她这个解释还是很有道理的，但是毕竟我没读过源代码，所以也不敢肯定，上来请教一下大家，她说的正确吗？&lt;/p&gt;&#xA;</description>
+      <author>levelworm</author>
+      <pubDate>22 Apr 2023 03:57:48 +0000</pubDate>
+    </item>
+    <item>
       <title>hosthatch 不能退款的吗，买了个活动大盘鸡，后悔了 - VPS</title>
       <link>https://www.v2ex.com/t/934517</link>
       <author>noneusername</author>
