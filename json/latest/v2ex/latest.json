@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "mysql 查询历史用户的疑问？ - 程序员",
+      "Link": "https://www.v2ex.com/t/934875",
+      "Description": "\u003ch1\u003e表 t\u003c/h1\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003euid\u003c/th\u003e\n\u003cth\u003estatus\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003ctd\u003e3\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003ctd\u003e3\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e查询只存在 status=1 的用户，这两种写法有什么区别吗\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eSELECT * FROM t where `status` = 1 and uid not IN (\n\nSELECT uid FROM  t as t1 WHERE `status` in (2,3) and t.uid = t1.uid\n)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003eSELECT * FROM t where `status` = 1 and uid not IN (\n\nSELECT uid FROM  t as t1 WHERE `status` in (2,3) \n)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e场景是查历史用户，即 status != 2,3 的，以上是简化的模型，两个字段都有索引\u003c/p\u003e\n\u003cp\u003e上面的多了一个子查询和外表的条件，在表数据量大的情况下性能谁更好，leader 说第一种查询效率会更高，因为它只在满足外表的条件下进行了过滤。或者有没有其他性能更好的写法？\u003c/p\u003e\n",
+      "Author": "Grocker",
+      "PubDate": "2023-04-23T12:13:47Z"
+    },
+    {
+      "Title": "奇怪的知识又增加了 - 前端开发",
+      "Link": "https://www.v2ex.com/t/934874",
+      "Description": "\u003ch4\u003e今天无意间触发了这个问题，\u003ca href=\"https://translate.google.com/?sl=auto\u0026amp;tl=zh-CN\u0026amp;text=pumkin\u0026amp;op=translate\" rel=\"nofollow\"\u003e输入“pumkin”时\u003c/a\u003e，左边输入框的内容会突然自动往右对齐,一开始以为是 bug\u003c/h4\u003e\n\u003cul\u003e\n\u003cli\u003e无聊看了下像是一个样式覆盖的问题，不过好奇，为啥简单的一个单词会导致这种页面渲染差异？\n\u003cimg alt=\"pumkin\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/j7EiFeh.gif\"/\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch5\u003e然后看了两个词（\"pumkin\",\"pumpkin\"）的数据返回结果(见下，非常规格式)，主要是多了这个\"بمكن\"?\u003c/h5\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003epumkin:\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003e363 [[\"\u003ca href=\"http://wrb.fr\" rel=\"nofollow\"\u003ewrb.fr\u003c/a\u003e\",\"MkEWBc\",\"[[\\\"بمكن\\\",null,\\\"ar\\\",[null,6],null,null,[\\\"pumkin\\\",\\\"auto\\\",\\\"zh-CN\\\",true]],[[[null,\\\"Nǐ kěyǐ\\\",null,null,null,[[\\\"你可以\\\",null,null,null,[[\\\"你可以\\\",[7],[]],[\\\"您可以\\\",[7],[]],[\\\"你能\\\",[7],[]]]]]]],\\\"zh-CN\\\",1,\\\"ar\\\",[\\\"pumkin\\\",\\\"auto\\\",\\\"zh-CN\\\",true]],\\\"ar\\\"]\",null,null,null,\"generic\"],[\"di\",43],[\"af.httprm\",42,\"-9384610829427403826\",5]] 25 [[\"e\",4,null,null,428]]\u003c/code\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003epumpkin:\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003e383 [[\"\u003ca href=\"http://wrb.fr\" rel=\"nofollow\"\u003ewrb.fr\u003c/a\u003e\",\"MkEWBc\",\"[[null,null,\\\"fi\\\",[[[0,[[[null,7]],[true]]]],7],[[\\\"pumpkin\\\",null,null,7]],null,[\\\"pumpkin\\\",\\\"auto\\\",\\\"zh-CN\\\",true]],[[[null,\\\"Nánguā\\\",null,null,null,[[\\\"南瓜\\\",null,null,null,[[\\\"南瓜\\\",[7],[]],[\\\"瓜\\\",[7],[]]]]]]],\\\"zh-CN\\\",1,\\\"fi\\\",[\\\"pumpkin\\\",\\\"auto\\\",\\\"zh-CN\\\",true]],\\\"fi\\\"]\",null,null,null,\"generic\"],[\"di\",67],[\"af.httprm\",67,\"9482603507392058431\",3]] 25 [[\"e\",4,null,null,431]]\u003c/code\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch5\u003e后面一查才发现阿拉伯语是从右到左排版的，甚至在浏览器的编辑窗口里内容是阿拉伯语时，光标左右切换都是相反的。\u003c/h5\u003e\n\u003ch4\u003e所以好奇各位大前端 ers （包括各种客户端开发者），平时是怎么统一（优雅）解决这种特殊需求的？😂\u003c/h4\u003e\n",
+      "Author": "OldCarMan",
+      "PubDate": "2023-04-23T12:08:44Z"
+    },
+    {
+      "Title": "Swift 的 Optional 如何比较包装类型的关系呢？ - Swift",
+      "Link": "https://www.v2ex.com/t/934873",
+      "Description": "\u003cpre\u003e\u003ccode\u003evar a: Int? = nil\nprint(\"\\(type(of: a))\")\nprint(\"\\(a is String?)\")\n\nvar b: Int? = 1\nprint(\"\\(type(of: b))\")\nprint(\"\\(b is String?)\")\n\n/*\noutput::\nOptional\u0026lt;Int\u0026gt;\ntrue\nOptional\u0026lt;Int\u0026gt;\nfalse\n */\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e下面是 GPT 的答案\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgur.com/icrQLyL\" rel=\"nofollow\"\u003eImgur\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "sl0000",
+      "PubDate": "2023-04-23T12:07:55Z"
+    },
+    {
+      "Title": "老哥们 求个靠谱品牌的便携显示器 - 问与答",
+      "Link": "https://www.v2ex.com/t/934872",
+      "Description": "\u003cp\u003e主要是玩 Switch 、偶尔接各种树莓派当显示器\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e看了 ROG 、联想，看到好多人评价说不行 故求一个靠谱的\u003c/p\u003e\n",
+      "Author": "justin2018",
+      "PubDate": "2023-04-23T12:07:53Z"
+    },
+    {
       "Title": "[交流]大家有没有想过用露营桌椅代替客厅家具？ - 装修",
       "Link": "https://www.v2ex.com/t/934870",
       "Description": "\u003cp\u003e如果把客厅装修成“露营风”，可能不是好主意。但是使用露营桌椅之类代替传统家具，特别是客厅，或许可行。\u003c/p\u003e\n\u003ch2\u003e优点\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e露营桌椅，相比正常桌椅、沙发，要便宜。\u003c/li\u003e\n\u003cli\u003e舒适度的话，比如月亮椅，我觉得足够舒服。\u003c/li\u003e\n\u003cli\u003e可以带去露营，或者野餐。家里无需额外空间存放露营装备。\u003c/li\u003e\n\u003cli\u003e适合小户型，收纳后还原客厅空间，做其它用途。\u003c/li\u003e\n\u003cli\u003e深受小孩子、年轻人喜爱。\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e缺点\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e老人家看了直摇头。\u003c/li\u003e\n\u003cli\u003e可能不够耐用。（换新时，多了个理由？）\u003c/li\u003e\n\u003cli\u003e不适合突出“气派”的房子。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e大家觉得如何？\u003c/p\u003e\n",

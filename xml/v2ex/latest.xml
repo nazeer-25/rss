@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>mysql 查询历史用户的疑问？ - 程序员</title>
+      <link>https://www.v2ex.com/t/934875</link>
+      <description>&lt;h1&gt;表 t&lt;/h1&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;uid&lt;/th&gt;&#xA;&lt;th&gt;status&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;3&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;td&gt;3&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;查询只存在 status=1 的用户，这两种写法有什么区别吗&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;SELECT * FROM t where `status` = 1 and uid not IN (&#xA;&#xA;SELECT uid FROM  t as t1 WHERE `status` in (2,3) and t.uid = t1.uid&#xA;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;SELECT * FROM t where `status` = 1 and uid not IN (&#xA;&#xA;SELECT uid FROM  t as t1 WHERE `status` in (2,3) &#xA;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;场景是查历史用户，即 status != 2,3 的，以上是简化的模型，两个字段都有索引&lt;/p&gt;&#xA;&lt;p&gt;上面的多了一个子查询和外表的条件，在表数据量大的情况下性能谁更好，leader 说第一种查询效率会更高，因为它只在满足外表的条件下进行了过滤。或者有没有其他性能更好的写法？&lt;/p&gt;&#xA;</description>
+      <author>Grocker</author>
+      <pubDate>23 Apr 2023 12:13:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>奇怪的知识又增加了 - 前端开发</title>
+      <link>https://www.v2ex.com/t/934874</link>
+      <description>&lt;h4&gt;今天无意间触发了这个问题，&lt;a href=&#34;https://translate.google.com/?sl=auto&amp;amp;tl=zh-CN&amp;amp;text=pumkin&amp;amp;op=translate&#34; rel=&#34;nofollow&#34;&gt;输入“pumkin”时&lt;/a&gt;，左边输入框的内容会突然自动往右对齐,一开始以为是 bug&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;无聊看了下像是一个样式覆盖的问题，不过好奇，为啥简单的一个单词会导致这种页面渲染差异？&#xA;&lt;img alt=&#34;pumkin&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/j7EiFeh.gif&#34;/&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h5&gt;然后看了两个词（&#34;pumkin&#34;,&#34;pumpkin&#34;）的数据返回结果(见下，非常规格式)，主要是多了这个&#34;بمكن&#34;?&lt;/h5&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;pumkin:&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;363 [[&#34;&lt;a href=&#34;http://wrb.fr&#34; rel=&#34;nofollow&#34;&gt;wrb.fr&lt;/a&gt;&#34;,&#34;MkEWBc&#34;,&#34;[[\&#34;بمكن\&#34;,null,\&#34;ar\&#34;,[null,6],null,null,[\&#34;pumkin\&#34;,\&#34;auto\&#34;,\&#34;zh-CN\&#34;,true]],[[[null,\&#34;Nǐ kěyǐ\&#34;,null,null,null,[[\&#34;你可以\&#34;,null,null,null,[[\&#34;你可以\&#34;,[7],[]],[\&#34;您可以\&#34;,[7],[]],[\&#34;你能\&#34;,[7],[]]]]]]],\&#34;zh-CN\&#34;,1,\&#34;ar\&#34;,[\&#34;pumkin\&#34;,\&#34;auto\&#34;,\&#34;zh-CN\&#34;,true]],\&#34;ar\&#34;]&#34;,null,null,null,&#34;generic&#34;],[&#34;di&#34;,43],[&#34;af.httprm&#34;,42,&#34;-9384610829427403826&#34;,5]] 25 [[&#34;e&#34;,4,null,null,428]]&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;pumpkin:&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;383 [[&#34;&lt;a href=&#34;http://wrb.fr&#34; rel=&#34;nofollow&#34;&gt;wrb.fr&lt;/a&gt;&#34;,&#34;MkEWBc&#34;,&#34;[[null,null,\&#34;fi\&#34;,[[[0,[[[null,7]],[true]]]],7],[[\&#34;pumpkin\&#34;,null,null,7]],null,[\&#34;pumpkin\&#34;,\&#34;auto\&#34;,\&#34;zh-CN\&#34;,true]],[[[null,\&#34;Nánguā\&#34;,null,null,null,[[\&#34;南瓜\&#34;,null,null,null,[[\&#34;南瓜\&#34;,[7],[]],[\&#34;瓜\&#34;,[7],[]]]]]]],\&#34;zh-CN\&#34;,1,\&#34;fi\&#34;,[\&#34;pumpkin\&#34;,\&#34;auto\&#34;,\&#34;zh-CN\&#34;,true]],\&#34;fi\&#34;]&#34;,null,null,null,&#34;generic&#34;],[&#34;di&#34;,67],[&#34;af.httprm&#34;,67,&#34;9482603507392058431&#34;,3]] 25 [[&#34;e&#34;,4,null,null,431]]&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h5&gt;后面一查才发现阿拉伯语是从右到左排版的，甚至在浏览器的编辑窗口里内容是阿拉伯语时，光标左右切换都是相反的。&lt;/h5&gt;&#xA;&lt;h4&gt;所以好奇各位大前端 ers （包括各种客户端开发者），平时是怎么统一（优雅）解决这种特殊需求的？😂&lt;/h4&gt;&#xA;</description>
+      <author>OldCarMan</author>
+      <pubDate>23 Apr 2023 12:08:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>Swift 的 Optional 如何比较包装类型的关系呢？ - Swift</title>
+      <link>https://www.v2ex.com/t/934873</link>
+      <description>&lt;pre&gt;&lt;code&gt;var a: Int? = nil&#xA;print(&#34;\(type(of: a))&#34;)&#xA;print(&#34;\(a is String?)&#34;)&#xA;&#xA;var b: Int? = 1&#xA;print(&#34;\(type(of: b))&#34;)&#xA;print(&#34;\(b is String?)&#34;)&#xA;&#xA;/*&#xA;output::&#xA;Optional&amp;lt;Int&amp;gt;&#xA;true&#xA;Optional&amp;lt;Int&amp;gt;&#xA;false&#xA; */&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;下面是 GPT 的答案&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imgur.com/icrQLyL&#34; rel=&#34;nofollow&#34;&gt;Imgur&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>sl0000</author>
+      <pubDate>23 Apr 2023 12:07:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>老哥们 求个靠谱品牌的便携显示器 - 问与答</title>
+      <link>https://www.v2ex.com/t/934872</link>
+      <description>&lt;p&gt;主要是玩 Switch 、偶尔接各种树莓派当显示器&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;看了 ROG 、联想，看到好多人评价说不行 故求一个靠谱的&lt;/p&gt;&#xA;</description>
+      <author>justin2018</author>
+      <pubDate>23 Apr 2023 12:07:53 +0000</pubDate>
+    </item>
+    <item>
       <title>[交流]大家有没有想过用露营桌椅代替客厅家具？ - 装修</title>
       <link>https://www.v2ex.com/t/934870</link>
       <description>&lt;p&gt;如果把客厅装修成“露营风”，可能不是好主意。但是使用露营桌椅之类代替传统家具，特别是客厅，或许可行。&lt;/p&gt;&#xA;&lt;h2&gt;优点&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;露营桌椅，相比正常桌椅、沙发，要便宜。&lt;/li&gt;&#xA;&lt;li&gt;舒适度的话，比如月亮椅，我觉得足够舒服。&lt;/li&gt;&#xA;&lt;li&gt;可以带去露营，或者野餐。家里无需额外空间存放露营装备。&lt;/li&gt;&#xA;&lt;li&gt;适合小户型，收纳后还原客厅空间，做其它用途。&lt;/li&gt;&#xA;&lt;li&gt;深受小孩子、年轻人喜爱。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;缺点&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;老人家看了直摇头。&lt;/li&gt;&#xA;&lt;li&gt;可能不够耐用。（换新时，多了个理由？）&lt;/li&gt;&#xA;&lt;li&gt;不适合突出“气派”的房子。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;大家觉得如何？&lt;/p&gt;&#xA;</description>
