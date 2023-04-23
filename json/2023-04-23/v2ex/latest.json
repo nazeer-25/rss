@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "pyqt 关闭事件的问题 AttributeError: 'RegisterWindow' object has no attribute 'closed'. Did you mean: 'close'? - 问与答",
+      "Link": "https://www.v2ex.com/t/934736",
+      "Description": "\u003cp\u003eself.registerWin.closed.connect(self.on_reg_window_closed)\n这行代码运行的时候报错 AttributeError: 'RegisterWindow' object has no attribute 'closed'. Did you mean: 'close'?\u003c/p\u003e\n\u003cp\u003eRegisterWindow 继承于 QWidget\n\u003ccode\u003eclass RegisterWindow(QWidget):\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e就是现在如果我想实现子窗口打开的时候主窗口隐藏, 反之显示, 所以这里需要用一个子窗口的关闭事件, 但是出现这个问题如何解决? \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# -*- coding: utf-8 -*-\nfrom PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout\nfrom registerWindow import RegisterWindow\nfrom PyQt6 import QtCore, QtWidgets\n\n\nclass LoginWindow(QWidget):\n    def __init__(self):\n        super().__init__()\n\n        # 设置窗口大小\n        self.setGeometry(200, 200, 400, 200)\n\n        # 创建控件\n        self.username_label = QLabel('用户名')\n        self.username_input = QLineEdit()\n        self.password_label = QLabel('密码')\n        self.password_input = QLineEdit()\n        self.login_button = QPushButton('登录')\n        self.register_button = QPushButton('注册')\n\n        # 创建布局\n        layout = QVBoxLayout()\n        layout.addWidget(self.username_label)\n        layout.addWidget(self.username_input)\n        layout.addWidget(self.password_label)\n        layout.addWidget(self.password_input)\n        layout.addWidget(self.login_button)\n        layout.addWidget(self.register_button)\n\n        # 设置布局\n        self.setLayout(layout)\n\n        # 子窗口\n        self.registerWin = RegisterWindow()\n        self.registerWin.closed.connect(self.on_reg_window_closed)\n\n        # 连接信号和槽\n        self.login_button.clicked.connect(self.on_login_button_clicked)\n        self.register_button.clicked.connect(self.on_register_button_clicked)\n\n    def on_sub_window_closed(self):\n        # 子窗口已关闭\n        print(\"子窗口已关闭\")\n\n    def on_login_button_clicked(self):\n        username = self.username_input.text()\n        password = self.password_input.text()\n\n        # 在这里可以添加验证用户输入的代码，如果验证通过则可以跳转到主界面\n\n    def on_register_button_clicked(self):\n        self.hide()\n        self.registerWin.show()\n\n    def on_reg_window_closed(self):\n        self.show()\n\n\nif __name__ == '__main__':\n    app = QApplication([])\n    login_window = LoginWindow()\n    login_window.show()\n    app.exec()\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "woshichuanqilz",
+      "PubDate": "2023-04-23T04:00:38Z"
+    },
+    {
+      "Title": "mdx = md+x - 分享发现",
+      "Link": "https://www.v2ex.com/t/934735",
+      "Description": "\u003cp\u003ex 目前有：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cinput disabled=\"\" type=\"checkbox\"/\u003e md 基础语法+变量支持 x\u003c/li\u003e\n\u003cli\u003e\u003cinput disabled=\"\" type=\"checkbox\"/\u003e 支持 import 语法\u003c/li\u003e\n\u003cli\u003e\u003cinput disabled=\"\" type=\"checkbox\"/\u003e 支持文档自动生成\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/weekend-project-space/mdx\" rel=\"nofollow\"\u003e源码\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e欢迎交流想法\u003c/p\u003e\n",
+      "Author": "summerLast",
+      "PubDate": "2023-04-23T04:00:24Z"
+    },
+    {
+      "Title": "我们是一群正在筹备数字银行(NeoBank)的金融黑客，欢迎加入我们的筹备群 - 程序员",
+      "Link": "https://www.v2ex.com/t/934734",
+      "Description": "\u003ch2\u003e首先让 ChatGPT 解释一下什么是 NeoBank：\u003c/h2\u003e\n\u003cp\u003eNeoBank 是指一类数字化银行或全线上银行，这些银行不像传统银行一样拥有实体分支机构。NeoBank 主要通过在线渠道提供银行服务，例如网站或移动应用程序。这些服务可以提供传统银行所提供的各种金融产品和服务，如存款账户、信用卡、贷款和投资产品。\u003c/p\u003e\n\u003cp\u003e金融公司开设的 NeoBank 通常是通过与已经获得银行许可的银行合作来实现的。这种合作模式被称为“银行合作”（ Banking-as-a-Service ，BaaS ），它允许金融公司借助银行的牌照和监管体系，来提供各种金融产品和服务。\u003c/p\u003e\n\u003cp\u003e具体来说，金融公司可以与银行合作，使用银行的技术平台和支付系统来提供数字化银行服务。在这种模式下，银行提供必要的技术和基础设施，以及承担监管责任，而金融公司则负责客户服务、市场营销、产品设计和运营等方面的工作。\u003c/p\u003e\n\u003cp\u003e相对于自己获得银行许可的方式，通过与银行合作开设 NeoBank 的优势在于，金融公司可以更快速、更便捷地进入数字化银行市场，并且不需要承担过多的监管责任和法律风险。\u003c/p\u003e\n\u003cp\u003e要开设一家没有银行牌照的 NeoBank ，可以考虑与已经获得银行许可的银行进行合作，或者寻求 EMI 许可并提供电子货币和支付服务。此外，还需要具备必要的技术和金融知识，以及合规和安全方面的控制能力，以确保业务的合法性和安全性。\u003c/p\u003e\n\u003ch2\u003e我们创建的数字银行(NeoBank)要解决的痛点：\u003c/h2\u003e\n\u003cp\u003e众所周知，中国大陆和全世界之间，有一道看不见且不被承认的防火墙，这堵墙导致原本像吃饭喝水一样容易的网上购物变得异常艰难。原因就在于互联网防火墙和金融防火墙导致境外网站无法直接访问，VISA 和 Master 支付卡在中国大陆很难获得（双币信用卡境外消费大概率被拒付且有被盗刷风险），境外银行账户办理难度极高且对中国用户极度不友好，人民币无法实现小额汇款至境外导致费大力气办理的境外银行账户沦落为摆设。使用最近几年流行的 USDT 虚拟币又存在学习和使用门槛高，兑换困难且存在因涉嫌洗钱而被冻结银行账户的风险。\u003c/p\u003e\n\u003cp\u003e由于风控问题和文化差异，欧美大多数银行和 Neobank ，甚至钱包 APP 都对中国客户拒之门外。这是我们的机会，我们将会设置符合中国用户的 KYC 流程，帮助中国大陆用户以最简单和快速的方式，以及最低的成本获得海外银行账户和 VISA/Master 支付卡。\u003c/p\u003e\n\u003ch2\u003e关于我们：\u003c/h2\u003e\n\u003cp\u003e我们是一群受够了中国大陆变态的金融监管和寡头统治的金融黑客。我们大多数已肉身翻墙，身处自由世界才发现，中国的金融科技和支付技术早已落后欧美国家至少 5 年。当我们还在以移动扫码支付消灭现金而沾沾自喜的事后，欧美国家早已发布 PSD2 标准（ The Second Payment Service Directive ），任何金融公司都可以在合规情况下为用户开设虚拟 IBAN 银行账户，发行标准 VISA/Master 支付卡和免 KYC 的 VISA/Master 预付费卡，甚至可以发行 Voucher 用于隐私支付。\u003c/p\u003e\n\u003cp\u003e这是一个巨大的金融业革命，意味着我们任何人都可以低门槛去开一家“银行”，这就是我们说的 NeoBank 。\u003c/p\u003e\n\u003ch2\u003e联系方式：\u003c/h2\u003e\n\u003cp\u003e如果您对我们的想法感兴趣，请加入下面的 Telegram 群。我个人 TG 可以在个人详情页找到。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e\u003ca href=\"https://t.me/fintech_hacker\" rel=\"nofollow\"\u003e金融黑客 TG 群:\u003c/a\u003e \u003ca href=\"https://t.me/fintech_hacker\" rel=\"nofollow\"\u003ehttps://t.me/fintech_hacker\u003c/a\u003e\u003c/strong\u003e\u003c/p\u003e\n",
+      "Author": "Kasim1024",
+      "PubDate": "2023-04-23T04:00:20Z"
+    },
+    {
+      "Title": "找熟悉海外支付通道市场的市场人一起创业 - 分享创造",
+      "Link": "https://www.v2ex.com/t/934733",
+      "Description": "如题\u003cbr /\u003e目前情况：软件平台已经有了，支持卡收和三方接入。需要熟悉市场和人脉的朋友加入，利益分配好说。",
+      "Author": "superboss01",
+      "PubDate": "2023-04-23T03:57:25Z"
+    },
+    {
       "Title": "surge for ios 差一个人 - Surge",
       "Link": "https://www.v2ex.com/t/934732",
       "Description": "\u003cp\u003e还没买，等人齐了在买，115 买断，到期之后可以根据新功能商量之后在决定续不续费\u003c/p\u003e\n",

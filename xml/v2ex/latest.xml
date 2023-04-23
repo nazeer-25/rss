@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>pyqt 关闭事件的问题 AttributeError: &#39;RegisterWindow&#39; object has no attribute &#39;closed&#39;. Did you mean: &#39;close&#39;? - 问与答</title>
+      <link>https://www.v2ex.com/t/934736</link>
+      <description>&lt;p&gt;self.registerWin.closed.connect(self.on_reg_window_closed)&#xA;这行代码运行的时候报错 AttributeError: &#39;RegisterWindow&#39; object has no attribute &#39;closed&#39;. Did you mean: &#39;close&#39;?&lt;/p&gt;&#xA;&lt;p&gt;RegisterWindow 继承于 QWidget&#xA;&lt;code&gt;class RegisterWindow(QWidget):&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;就是现在如果我想实现子窗口打开的时候主窗口隐藏, 反之显示, 所以这里需要用一个子窗口的关闭事件, 但是出现这个问题如何解决? &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# -*- coding: utf-8 -*-&#xA;from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout&#xA;from registerWindow import RegisterWindow&#xA;from PyQt6 import QtCore, QtWidgets&#xA;&#xA;&#xA;class LoginWindow(QWidget):&#xA;    def __init__(self):&#xA;        super().__init__()&#xA;&#xA;        # 设置窗口大小&#xA;        self.setGeometry(200, 200, 400, 200)&#xA;&#xA;        # 创建控件&#xA;        self.username_label = QLabel(&#39;用户名&#39;)&#xA;        self.username_input = QLineEdit()&#xA;        self.password_label = QLabel(&#39;密码&#39;)&#xA;        self.password_input = QLineEdit()&#xA;        self.login_button = QPushButton(&#39;登录&#39;)&#xA;        self.register_button = QPushButton(&#39;注册&#39;)&#xA;&#xA;        # 创建布局&#xA;        layout = QVBoxLayout()&#xA;        layout.addWidget(self.username_label)&#xA;        layout.addWidget(self.username_input)&#xA;        layout.addWidget(self.password_label)&#xA;        layout.addWidget(self.password_input)&#xA;        layout.addWidget(self.login_button)&#xA;        layout.addWidget(self.register_button)&#xA;&#xA;        # 设置布局&#xA;        self.setLayout(layout)&#xA;&#xA;        # 子窗口&#xA;        self.registerWin = RegisterWindow()&#xA;        self.registerWin.closed.connect(self.on_reg_window_closed)&#xA;&#xA;        # 连接信号和槽&#xA;        self.login_button.clicked.connect(self.on_login_button_clicked)&#xA;        self.register_button.clicked.connect(self.on_register_button_clicked)&#xA;&#xA;    def on_sub_window_closed(self):&#xA;        # 子窗口已关闭&#xA;        print(&#34;子窗口已关闭&#34;)&#xA;&#xA;    def on_login_button_clicked(self):&#xA;        username = self.username_input.text()&#xA;        password = self.password_input.text()&#xA;&#xA;        # 在这里可以添加验证用户输入的代码，如果验证通过则可以跳转到主界面&#xA;&#xA;    def on_register_button_clicked(self):&#xA;        self.hide()&#xA;        self.registerWin.show()&#xA;&#xA;    def on_reg_window_closed(self):&#xA;        self.show()&#xA;&#xA;&#xA;if __name__ == &#39;__main__&#39;:&#xA;    app = QApplication([])&#xA;    login_window = LoginWindow()&#xA;    login_window.show()&#xA;    app.exec()&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>woshichuanqilz</author>
+      <pubDate>23 Apr 2023 04:00:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>mdx = md+x - 分享发现</title>
+      <link>https://www.v2ex.com/t/934735</link>
+      <description>&lt;p&gt;x 目前有：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;/&gt; md 基础语法+变量支持 x&lt;/li&gt;&#xA;&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;/&gt; 支持 import 语法&lt;/li&gt;&#xA;&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;/&gt; 支持文档自动生成&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/weekend-project-space/mdx&#34; rel=&#34;nofollow&#34;&gt;源码&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;欢迎交流想法&lt;/p&gt;&#xA;</description>
+      <author>summerLast</author>
+      <pubDate>23 Apr 2023 04:00:24 +0000</pubDate>
+    </item>
+    <item>
+      <title>我们是一群正在筹备数字银行(NeoBank)的金融黑客，欢迎加入我们的筹备群 - 程序员</title>
+      <link>https://www.v2ex.com/t/934734</link>
+      <description>&lt;h2&gt;首先让 ChatGPT 解释一下什么是 NeoBank：&lt;/h2&gt;&#xA;&lt;p&gt;NeoBank 是指一类数字化银行或全线上银行，这些银行不像传统银行一样拥有实体分支机构。NeoBank 主要通过在线渠道提供银行服务，例如网站或移动应用程序。这些服务可以提供传统银行所提供的各种金融产品和服务，如存款账户、信用卡、贷款和投资产品。&lt;/p&gt;&#xA;&lt;p&gt;金融公司开设的 NeoBank 通常是通过与已经获得银行许可的银行合作来实现的。这种合作模式被称为“银行合作”（ Banking-as-a-Service ，BaaS ），它允许金融公司借助银行的牌照和监管体系，来提供各种金融产品和服务。&lt;/p&gt;&#xA;&lt;p&gt;具体来说，金融公司可以与银行合作，使用银行的技术平台和支付系统来提供数字化银行服务。在这种模式下，银行提供必要的技术和基础设施，以及承担监管责任，而金融公司则负责客户服务、市场营销、产品设计和运营等方面的工作。&lt;/p&gt;&#xA;&lt;p&gt;相对于自己获得银行许可的方式，通过与银行合作开设 NeoBank 的优势在于，金融公司可以更快速、更便捷地进入数字化银行市场，并且不需要承担过多的监管责任和法律风险。&lt;/p&gt;&#xA;&lt;p&gt;要开设一家没有银行牌照的 NeoBank ，可以考虑与已经获得银行许可的银行进行合作，或者寻求 EMI 许可并提供电子货币和支付服务。此外，还需要具备必要的技术和金融知识，以及合规和安全方面的控制能力，以确保业务的合法性和安全性。&lt;/p&gt;&#xA;&lt;h2&gt;我们创建的数字银行(NeoBank)要解决的痛点：&lt;/h2&gt;&#xA;&lt;p&gt;众所周知，中国大陆和全世界之间，有一道看不见且不被承认的防火墙，这堵墙导致原本像吃饭喝水一样容易的网上购物变得异常艰难。原因就在于互联网防火墙和金融防火墙导致境外网站无法直接访问，VISA 和 Master 支付卡在中国大陆很难获得（双币信用卡境外消费大概率被拒付且有被盗刷风险），境外银行账户办理难度极高且对中国用户极度不友好，人民币无法实现小额汇款至境外导致费大力气办理的境外银行账户沦落为摆设。使用最近几年流行的 USDT 虚拟币又存在学习和使用门槛高，兑换困难且存在因涉嫌洗钱而被冻结银行账户的风险。&lt;/p&gt;&#xA;&lt;p&gt;由于风控问题和文化差异，欧美大多数银行和 Neobank ，甚至钱包 APP 都对中国客户拒之门外。这是我们的机会，我们将会设置符合中国用户的 KYC 流程，帮助中国大陆用户以最简单和快速的方式，以及最低的成本获得海外银行账户和 VISA/Master 支付卡。&lt;/p&gt;&#xA;&lt;h2&gt;关于我们：&lt;/h2&gt;&#xA;&lt;p&gt;我们是一群受够了中国大陆变态的金融监管和寡头统治的金融黑客。我们大多数已肉身翻墙，身处自由世界才发现，中国的金融科技和支付技术早已落后欧美国家至少 5 年。当我们还在以移动扫码支付消灭现金而沾沾自喜的事后，欧美国家早已发布 PSD2 标准（ The Second Payment Service Directive ），任何金融公司都可以在合规情况下为用户开设虚拟 IBAN 银行账户，发行标准 VISA/Master 支付卡和免 KYC 的 VISA/Master 预付费卡，甚至可以发行 Voucher 用于隐私支付。&lt;/p&gt;&#xA;&lt;p&gt;这是一个巨大的金融业革命，意味着我们任何人都可以低门槛去开一家“银行”，这就是我们说的 NeoBank 。&lt;/p&gt;&#xA;&lt;h2&gt;联系方式：&lt;/h2&gt;&#xA;&lt;p&gt;如果您对我们的想法感兴趣，请加入下面的 Telegram 群。我个人 TG 可以在个人详情页找到。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://t.me/fintech_hacker&#34; rel=&#34;nofollow&#34;&gt;金融黑客 TG 群:&lt;/a&gt; &lt;a href=&#34;https://t.me/fintech_hacker&#34; rel=&#34;nofollow&#34;&gt;https://t.me/fintech_hacker&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;</description>
+      <author>Kasim1024</author>
+      <pubDate>23 Apr 2023 04:00:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>找熟悉海外支付通道市场的市场人一起创业 - 分享创造</title>
+      <link>https://www.v2ex.com/t/934733</link>
+      <description>如题&lt;br /&gt;目前情况：软件平台已经有了，支持卡收和三方接入。需要熟悉市场和人脉的朋友加入，利益分配好说。</description>
+      <author>superboss01</author>
+      <pubDate>23 Apr 2023 03:57:25 +0000</pubDate>
+    </item>
+    <item>
       <title>surge for ios 差一个人 - Surge</title>
       <link>https://www.v2ex.com/t/934732</link>
       <description>&lt;p&gt;还没买，等人齐了在买，115 买断，到期之后可以根据新功能商量之后在决定续不续费&lt;/p&gt;&#xA;</description>
