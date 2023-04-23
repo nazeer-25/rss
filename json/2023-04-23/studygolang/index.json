@@ -25,13 +25,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go有可以压缩bmp文件的库吗？",
-      "Link": "https://studygolang.com/topics/16321#reply0",
-      "Description": "\u003cp\u003eRT，原始生成图片太大，要压缩下，找了一圈都是png和jpg的\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "国内用 Dubbo 多还是 grpc 的多",
       "Link": "https://studygolang.com/topics/16322#reply3",
       "Description": "\u003ch2\u003e\u003cstrong\u003e国内用 Dubbo 多还是 gRPC 的多？\u003c/strong\u003e\u003c/h2\u003e\n\n\u003cp\u003egRPC 和 Dubbo 是近几年来，比较火的两款 RPC 的框架，很多人就在问了：在国内，是 Dubbo 用的多还是 gRPC 用的多呢？\u003c/p\u003e\n\n\u003ch3\u003e\u003cstrong\u003egRPC\u003c/strong\u003e\u003c/h3\u003e\n\n\u003cp\u003e\u003ca href=\"https://apifox.com/apiskills/introduction-to-grpc/\"\u003e\u003cstrong\u003egRPC\u003c/strong\u003e\u003c/a\u003e 是一个现代的开源高性能远程过程调用（RPC）框架，可以在任何环境中运行。它可以通过对负载平衡、跟踪、健康检查和身份验证的可插拔支持，有效地连接数据中心内和数据中心之间的服务。它也适用于分布式计算的最后一英里，将设备、移动应用程序和浏览器连接到后端服务。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/61a1e22a974d41f985bc9e491775ffff~tplv-k3u1fbpfcp-zoom-1.image\" alt=\"\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e我们可以先去到 github 克隆一个 gRPC 的项目下来并运行：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003egit clone https: //github.com/grpc/grpc-java\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e接着我们使用 maven 去启动项目，且循环 1000000 次。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003emvn exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer\nmvn exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e测出来的时间大概为：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003espend time: 126 can handle 7936 per second\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e\u003cstrong\u003eDubbo\u003c/strong\u003e\u003c/h3\u003e\n\n\u003cp\u003e\u003ca href=\"https://apifox.com/apiskills/dubbo-protocol-book/\"\u003e\u003cstrong\u003eDubbo\u003c/strong\u003e\u003c/a\u003e 是阿里巴巴出品的，是使用 Java 这种编程语言编写的，Dubbo 跟 RPC 的关系就是：Dubbo 是一种 RPC 的框架，一种分布式服务框架，体现在：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e高性能\u003c/li\u003e\n\u003cli\u003e透明化\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eDubbo 也是一种 SOA 服务的治理方案。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/440d01db9ea44f88bba76f5eea014cc9~tplv-k3u1fbpfcp-zoom-1.image\" alt=\"\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e而我们对 Dubbo 进行编码，并测试性能：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e@Service(version = \u0026quot;1.0.0\u0026quot;)\npublic class HelloServiceImpl implements HelloService {\n\n    @Override\n    public String SayHello(String name) {\n        return \u0026quot;Hello , \u0026quot;+name;\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003e@RestController\n\npublic class HelloController {\n\n    private final Long testScale = 1000000L;\n\n    @Reference(version = \u0026quot;1.0.0\u0026quot;)\n    HelloService helloService;\n\n    @GetMapping(\u0026quot;sayHello\u0026quot;)\n    public String sayHello( String name){\n        name = \u0026quot; world\u0026quot;;\n        Long now = Instant.now().getEpochSecond();\n        for(int idx = 0; idx \u0026lt; testScale; idx++){\n           System.out.println( helloService.SayHello(String.format(\u0026quot;%s:%d\u0026quot;,name,idx)));\n        }\n\n        Long duration = Instant.now().getEpochSecond() - now;\n        System.out.println(String.format(\u0026quot;can handle %d per second\u0026quot;, testScale/duration));\n        return String.format(\u0026quot;can handle %d per second\u0026quot;, testScale/duration);\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e\u003cstrong\u003e运行结果\u003c/strong\u003e\u003c/h3\u003e\n\n\u003cp\u003e我们进行运行，并查看耗时结果：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003ecan handle 12987 per second\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch2\u003e结论\u003c/h2\u003e\n\n\u003ch3\u003e\u003cstrong\u003eDubbo 性能更好，更受欢迎！\u003c/strong\u003e\u003c/h3\u003e\n\n\u003cp\u003e我们可以看出，Dubbo 的性能更加的好，且 Dubbo 是阿里巴巴出品，属于国产 RPC 框架，对于国内的开发肯定是更加友好的。\u003c/p\u003e\n\n\u003ch2\u003e知识扩展：\u003c/h2\u003e\n\n\u003cp\u003e了解更多关于 RPC 协议相关知识。\n- \u003cstrong\u003e\u003ca href=\"https://apifox.com/apiskills/comparison-of-rpc-frameworks/\"\u003e分布式 RPC 框架比较：dubbo、dubbox、motan、thrift、grpc\u003c/a\u003e\u003c/strong\u003e\n- \u003cstrong\u003e\u003ca href=\"https://apifox.com/apiskills/rpc-remote-interface-call/\"\u003eRPC 远程接口调用：详解实现和优化\u003c/a\u003e\u003c/strong\u003e\u003c/p\u003e\n",
@@ -63,6 +56,13 @@
       "Title": "gin 读取绝对文件路径错误",
       "Link": "https://studygolang.com/topics/16323#reply1",
       "Description": "\u003cp\u003e用gin写了服务，读取绝对路径下的c:\\文件，一直报无法识别文件路径，文件名等【123】错误是什么原因？只能读取当前目录下的文件吗？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go有可以压缩bmp文件的库吗？",
+      "Link": "https://studygolang.com/topics/16321#reply0",
+      "Description": "\u003cp\u003eRT，原始生成图片太大，要压缩下，找了一圈都是png和jpg的\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
