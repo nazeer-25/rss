@@ -4,9 +4,16 @@
   "Description": "",
   "Items": [
     {
+      "Title": "疯了！把系统完全加载入 cpu 缓存，吊打 ramos - 问与答",
+      "Link": "https://www.v2ex.com/t/935211",
+      "Description": "\u003cp\u003e请问这个设想有实现的吗？\n只要功率足够、散热足够就可以一直稳定运行下去？？？\u003c/p\u003e\n",
+      "Author": "acgt",
+      "PubDate": "2023-04-24T18:07:06Z"
+    },
+    {
       "Title": "Taichi 计算加速 - Python",
       "Link": "https://www.v2ex.com/t/935210",
-      "Description": "\u003cp\u003e无意间发现 Taichi 计算加速还挺快的。官网例子如下。不知道更复杂的案例效果怎么样。\n#!/usr/bin/env python\n#\u003ca href=\"http://prime_taichi.py\" rel=\"nofollow\"\u003eprime_taichi.py\u003c/a\u003e\nimport taichi as ti\nti.init(arch=ti.gpu)\n@ti.func\ndef is_prime(n: int):\nresult = True\nfor k in range(2, int(n ** 0.5) + 1):\nif n % k == 0:\nresult = False\nbreak\nreturn result\u003c/p\u003e\n\u003cp\u003e@\u003ca href=\"/member/ti\"\u003eti\u003c/a\u003e.kernel\ndef count_primes(n: int) -\u0026gt; int:\ncount = 0\nfor k in range(2, n):\nif is_prime(k):\ncount += 1\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ereturn count\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e#!/usr/bin/env python\n#\u003ca href=\"http://test.py\" rel=\"nofollow\"\u003etest.py\u003c/a\u003e\n\"\"\"Count the prime numbers in the range [1, n]\n\"\"\"\nfrom prime_taichi import count_primes\nimport time\u003c/p\u003e\n\u003cp\u003estart: int = time.time()\nprint(count_primes(10000000))\nprint(time.time()-start)\u003c/p\u003e\n\u003cp\u003e#Taichi 版本，笔记本 2070S\n[Taichi] version 1.5.0, llvm 15.0.4, commit 7b885c28, linux, python 3.10.6\n[Taichi] Starting on arch=cuda\n664579\n0.20201754570007324\n#纯 Python 版本\n664579\n83.8845808506012\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e无意间发现 Taichi 计算加速还挺快的。官网例子如下。不知道更复杂的案例效果怎么样。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e#!/usr/bin/env python\n#prime_taichi.py\nimport taichi as ti\nti.init(arch=ti.gpu)\n@ti.func\ndef is_prime(n: int):\n    result = True\n    for k in range(2, int(n ** 0.5) + 1):\n        if n % k == 0:\n            result = False\n            break\n    return result\n\n@ti.kernel\ndef count_primes(n: int) -\u0026gt; int:\n    count = 0\n    for k in range(2, n):\n        if is_prime(k):\n            count += 1\n\n    return count\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e#!/usr/bin/env python\n#test.py\n\"\"\"Count the prime numbers in the range [1, n]\n\"\"\"\nfrom prime_taichi import count_primes\nimport time\n\nstart: int = time.time()\nprint(count_primes(10000000))\nprint(time.time()-start)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e#Taichi 版本，笔记本 2070S\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e[Taichi] version 1.5.0, llvm 15.0.4, commit 7b885c28, linux, python 3.10.6\n[Taichi] Starting on arch=cuda\n664579\n0.20201754570007324\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e#纯 Python 版本\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e664579\n83.8845808506012\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "wizardyhnr",
       "PubDate": "2023-04-24T18:06:31Z"
     },
