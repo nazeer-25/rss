@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Taichi 计算加速 - Python</title>
+      <link>https://www.v2ex.com/t/935210</link>
+      <description>&lt;p&gt;无意间发现 Taichi 计算加速还挺快的。官网例子如下。不知道更复杂的案例效果怎么样。&#xA;#!/usr/bin/env python&#xA;#&lt;a href=&#34;http://prime_taichi.py&#34; rel=&#34;nofollow&#34;&gt;prime_taichi.py&lt;/a&gt;&#xA;import taichi as ti&#xA;ti.init(arch=ti.gpu)&#xA;@ti.func&#xA;def is_prime(n: int):&#xA;result = True&#xA;for k in range(2, int(n ** 0.5) + 1):&#xA;if n % k == 0:&#xA;result = False&#xA;break&#xA;return result&lt;/p&gt;&#xA;&lt;p&gt;@&lt;a href=&#34;/member/ti&#34;&gt;ti&lt;/a&gt;.kernel&#xA;def count_primes(n: int) -&amp;gt; int:&#xA;count = 0&#xA;for k in range(2, n):&#xA;if is_prime(k):&#xA;count += 1&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;return count&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;#!/usr/bin/env python&#xA;#&lt;a href=&#34;http://test.py&#34; rel=&#34;nofollow&#34;&gt;test.py&lt;/a&gt;&#xA;&#34;&#34;&#34;Count the prime numbers in the range [1, n]&#xA;&#34;&#34;&#34;&#xA;from prime_taichi import count_primes&#xA;import time&lt;/p&gt;&#xA;&lt;p&gt;start: int = time.time()&#xA;print(count_primes(10000000))&#xA;print(time.time()-start)&lt;/p&gt;&#xA;&lt;p&gt;#Taichi 版本，笔记本 2070S&#xA;[Taichi] version 1.5.0, llvm 15.0.4, commit 7b885c28, linux, python 3.10.6&#xA;[Taichi] Starting on arch=cuda&#xA;664579&#xA;0.20201754570007324&#xA;#纯 Python 版本&#xA;664579&#xA;83.8845808506012&lt;/p&gt;&#xA;</description>
+      <author>wizardyhnr</author>
+      <pubDate>24 Apr 2023 18:06:31 +0000</pubDate>
+    </item>
+    <item>
       <title>有人给 HP MS Gen8 的 PSU 换过风扇吗？ - NAS</title>
       <link>https://www.v2ex.com/t/935209</link>
       <description>&lt;p&gt;原装的风扇突然噪音起飞了，洗了下好了一点点还是起飞，于是淘宝买了个建准的风扇来换。结果换上去直接不转。&lt;/p&gt;&#xA;&lt;p&gt;原装的风扇是 12V 0.15A ，型号是 EFB0412HHD ，这个型号在淘宝上搜到的都没有 0.15A 这么大电流的。&#xA;建准的是 12V 1.4w ，算下来 0.1167A 的样子，型号是 KDE1204PKVX 。&lt;/p&gt;&#xA;&lt;p&gt;我把俩风扇往 SATA 的 12V 供电上接都能转起来，但是建准这个插在电源上就不工作，原装的插回去就正常。&lt;/p&gt;&#xA;&lt;p&gt;有人换过这风扇么，难道就 2 针的风扇都是特定型号才行？&lt;/p&gt;&#xA;</description>
