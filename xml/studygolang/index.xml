@@ -23,12 +23,12 @@
       <description>&lt;p&gt;四级域名解析，使用坦克 NS （原名：坦克 DNS）部署四级域名解析服务器，根据本篇文字去实践，你可以实现类似域名&lt;code&gt;sub.www.brand.com&lt;/code&gt;的解析。坦克 NS 是使用 Golang 开发的域名服务器应用，开发者是甘耀通。开发者也是坦克网络技术的创始人。也是这篇文字的作者。接下来，让我先做一个自我介绍。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;创业这条路很难，我在东莞摆地摊卖衣服，卖早餐，卖小商品。开始的时候什么都不懂。在东莞流水线上班很辛苦，不停的换工作，不停的寻找出路，即使环境很艰难，对我来说也没什么。有一次我在工厂有了个 Idea，想设计一个机器，这台机器可以替代人工进行作业，我把构想使用 3D 建模制作出来后交给上司，后来上司不重视。我离开了工厂。机器使用 MCU 控制。MCU 需要程序，所以我的 IT 之路也在这个构想中萌芽了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;先聊到这里，下次再聊。四级域名才是这篇文章的主题。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;成果IP&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;使用上个步骤的成果，IP：192.168.2.78。如果是公网，你的成果必须是公网 IP。&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;阿里云域名解析&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;域名解析原理都一样。就是先解析 NS记录，再把你的四级域名解析到这台 NS服务器，让你的NS服务器负责四级域名解析。所以我们一共需要配置两条记录。&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;配置 NS主机记录（NS记录）&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;添加一个 A 记录，把 &lt;code&gt;ns1.tankprint.online&lt;/code&gt; 解析到你的成果IP &lt;code&gt;192.168.2.78&lt;/code&gt;上来。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230423/3e522d36249a5617a98e0dc7a2d6177a.png&#34; alt=&#34;阿里云域名NS解析.png&#34; title=&#34;阿里云域名NS解析&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;记住，这个 IP 一定是你的公网IP，因为你执行DNS查询的时候，会到达阿里云域名解析，阿里云域名解析会查询这个 A记录，然后通过（递归或者迭代）继续查询，如果你的成果IP是局域网，公网是访问不了局域网的（可以看我的一篇文章了解&lt;a href=&#34;https://www.tankprint.online/2023/02/28/%E5%9D%A6%E5%85%8B%E8%AE%BF%E9%97%AE%E5%85%A5%E5%8F%A3%E4%B9%8B%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F.html&#34;&gt;坦克访问入口之内网穿透&lt;/a&gt;）。所以，你只能使用公网IP（我的 IP 只是给你演示解析过程，没有实际作用）。&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;四级域名父域名&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;假设你有一系列四级域名都要解析：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;a.www.tankprint.online&lt;/li&gt;&#xA;&lt;li&gt;gan.www.tankprint.online&lt;/li&gt;&#xA;&lt;li&gt;yao.www.tankprint.online&lt;/li&gt;&#xA;&lt;li&gt;ton.www.tankprint.online&lt;/li&gt;&#xA;&lt;li&gt;com.www.tankprint.online&lt;/li&gt;&#xA;&lt;li&gt;tec.www.tankprint.online&lt;/li&gt;&#xA;&lt;li&gt;bus.www.tankprint.online&lt;br&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;&lt;br&gt;&#xA;那它的父域名就是&lt;code&gt;www.tankprint.online&lt;/code&gt;，所以我们需要把它交给自己 NS服务器 解析。在阿里云解析演示：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230423/e51ed82cd3955a4a4d5c0003d6734a92.png&#34; alt=&#34;阿里云解析三级父域名.png&#34; title=&#34;阿里云解析三级父域名&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;记录类型：&lt;strong&gt;ns&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;主机记录：&lt;strong&gt;www&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;记录值：&lt;strong&gt;ns1.tankprint.online&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;为什么是&lt;code&gt;www&lt;/code&gt;，因为后面会自动加上&lt;code&gt;tankprint.online&lt;/code&gt;。添加这条记录后，你的所有基于 &lt;code&gt;www.tankprint.online&lt;/code&gt; 的四级域名阿里云的DNS服务器都会向你的DNS服务器发出递归（或者迭代）查询。比如：&lt;code&gt;a.www.tankprint.online&lt;/code&gt;。后面，你只要在自己的DNS服务器上面添加记录就可以了。&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;测试&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;到这里，你现在可以测试你的域名了，cmd执行命令：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;ping a.www.tankprint.online&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;这个命令与上一篇文章的测试命令是不一样的：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;nslookup -type=a a.www.tankprint.online 192.168.2.78&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;上一篇文章是指定自己的 DNS服务器，这篇文章是直接使用公共DNS服务器进行测试。如果测试成功，就说明你的四级域名解析成功了。如果你没有看我的上一篇文章，请看&lt;a href=&#34;https://studygolang.com/articles/36123&#34;&gt;四级域名解析（2023年）一&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;总结&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;阿里云解析域名就是先创建一个A记录到自己的 NS服务器，然后把四级域名的父域名的NS记录解析到自己的 NS服务器。只有这样，才能够成功处理问题。上篇文章描述了解决安装 坦克NS 过程的问题。这篇文章描述解决域名解析的问题。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>4月更新！EasyOps®全平台27项新功能一口气来袭~</title>
-      <link>https://studygolang.com/articles/36122#reply0</link>
-    </item>
-    <item>
       <title>Channels in Golang</title>
       <link>https://studygolang.com/resources/15569#reply0</link>
+    </item>
+    <item>
+      <title>4月更新！EasyOps®全平台27项新功能一口气来袭~</title>
+      <link>https://studygolang.com/articles/36122#reply0</link>
     </item>
     <item>
       <title>超简单！Java 项目自动生成接口文档教程</title>
@@ -40,14 +40,14 @@
       <link>https://studygolang.com/articles/36125#reply0</link>
     </item>
     <item>
-      <title>gocv分析图像玩游戏</title>
-      <link>https://studygolang.com/topics/16325#reply0</link>
-      <description>&lt;h2&gt;项目&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;项目仓库：&lt;a href=&#34;https://github.com/jan-bar/goOpenCv&#34;&gt;goOpenCv&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;连连看&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/191020/d1744d9f81cd45242d2434f1b4e4539b.gif&#34; alt=&#34;lianliankan.gif&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;麻将&lt;/h2&gt;&#xA;&#xA;&lt;h3&gt;单机版麻将&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230422/c1d86ee4018ac22fbfe6ba3e76fc8346.png&#34; alt=&#34;mj_scmj.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;腾讯麻将小程序&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230422/773d0891a5341a166e36dd7d14ce52dc.png&#34; alt=&#34;mj_tx.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;总结&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;通过学习opencv图像匹配，完成游戏作弊，感觉没用的知识又增加了。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>求一个 倒计时 中文提示</title>
       <link>https://studygolang.com/topics/16324#reply1</link>
       <description>&lt;pre&gt;&lt;code&gt;https://learnku.com/articles/21980&#xA;&#xA;以上例子 有点问题    比如它不支持 1周前 2两周前  2年前 3个月前 这种方法&#xA;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>gocv分析图像玩游戏</title>
+      <link>https://studygolang.com/topics/16325#reply0</link>
+      <description>&lt;h2&gt;项目&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;项目仓库：&lt;a href=&#34;https://github.com/jan-bar/goOpenCv&#34;&gt;goOpenCv&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;连连看&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/191020/d1744d9f81cd45242d2434f1b4e4539b.gif&#34; alt=&#34;lianliankan.gif&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;麻将&lt;/h2&gt;&#xA;&#xA;&lt;h3&gt;单机版麻将&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230422/c1d86ee4018ac22fbfe6ba3e76fc8346.png&#34; alt=&#34;mj_scmj.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;腾讯麻将小程序&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230422/773d0891a5341a166e36dd7d14ce52dc.png&#34; alt=&#34;mj_tx.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;总结&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;通过学习opencv图像匹配，完成游戏作弊，感觉没用的知识又增加了。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go写的第一个网站，大家看看速度快不快？</title>
