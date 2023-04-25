@@ -4,6 +4,61 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>这样的速度，还有提升空间吗？一个 issue 引发的性能大跃进 - 程序员</title>
+      <link>https://www.v2ex.com/t/935260</link>
+      <description>&lt;p&gt;前段时间开源了一个关于音频特征提取和分析的小项目，自己是 AI 音频领域方向的，但受限于对音频特征的理解，做研究时总感觉缺乏“底料”，所以当做是学习练手做了这个小东西。&lt;/p&gt;&#xA;&lt;p&gt;虽然是学习练手的小项目，但也信心满满，因为核心算法大部分都是 C 实现和 Python 包装的，想着怎么着也比纯 Python 实现的库快些，然后和其它相关 Python 库也做了简单的性能比对，结果确实是比较快，但没想到后面翻车了！！！&lt;/p&gt;&#xA;&lt;p&gt;两周前收到用户提的一个 issue “Speed is slow, am I miss something? ”，定眼一看大惊失色，结果上我的库是最慢的，赶紧自己电脑上跑下，没想到比用户给出的结果还要难看，这车翻得有些大了！！！&#xA;这是相关 issue 地址: &lt;a href=&#34;https://github.com/libAudioFlux/audioFlux/issues/18#issuecomment-1498371872&#34; rel=&#34;nofollow&#34;&gt;https://github.com/libAudioFlux/audioFlux/issues/18#issuecomment-1498371872&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;后面仔细分析发现，我当时测试数据样本尺寸太小，样本尺寸大时就慢了，性能主要卡在矩阵相乘上，后续优化后相比其它库都快不少，但相比 PyTorch 官方的 torchaudio 库还是存在一定的性能差距。&lt;/p&gt;&#xA;&lt;p&gt;想着认命吧，谁叫人家是 torchaudio 呢，最后经过一周的熬战，尝试 OpenBLAS ，Eigen ，MKL ，FFTW ，SIMD ，并行计算等等各种技术优化点后，详细测试了不同样本尺寸大小数据，在不同 CPU 和不同系统平台的性能对比如下图：   &lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/PiSXG9Hx.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/VdTUkm4A.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;图依次为 Linux/AMD ，macOS/Intel 下的评测结果。&lt;br/&gt;&#xA;这是详细的测评报告: &lt;a href=&#34;https://github.com/libAudioFlux/audioFlux/tree/master/benchmark&#34; rel=&#34;nofollow&#34;&gt;https://github.com/libAudioFlux/audioFlux/tree/master/benchmark&lt;/a&gt; &lt;/p&gt;&#xA;&lt;p&gt;综合来看，    &lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在 linux/amd 处理器上，audioflux 比 torchaudio 稍快，但在 linux/intel 上稍慢。    &lt;/li&gt;&#xA;&lt;li&gt;在 macOS 系统上，对于大尺寸样本数据，audioflux 比 torchaudio 快，intel 比 m1 明显； 对于小尺寸样本数据，torchaudio 比 audioflux 更快。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;经过各种艰辛的优化，比之前版本还是其它相关库都快不少，性能优化上我该做的、能做的都做了，但相比 torchaudio 还是不能完胜，希望大家点赞关注赐予我力量，期待后续性能上完胜 torchaudio ！！！&lt;/p&gt;&#xA;&lt;h3&gt;感兴趣的请给个 Star&lt;/h3&gt;&#xA;&lt;p&gt;项目地址: &lt;a href=&#34;https://github.com/libAudioFlux/audioFlux&#34; rel=&#34;nofollow&#34;&gt;https://github.com/libAudioFlux/audioFlux&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>829939</author>
+      <pubDate>25 Apr 2023 02:09:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>皆さん助けてください。 &#xD;&#xA;求 k8s 部署教程， google 上的教程参差不齐，没找到一个好用的 - Kubernetes</title>
+      <link>https://www.v2ex.com/t/935259</link>
+      <author>mengjisang</author>
+      <pubDate>25 Apr 2023 02:08:32 +0000</pubDate>
+    </item>
+    <item>
+      <title>比较友好的摩托车社区 - 问与答</title>
+      <link>https://www.v2ex.com/t/935258</link>
+      <description>&lt;p&gt;去年买了一辆灰石 300 ， 疯狂迷恋摩托车， 在车上吹风的感觉真是会上瘾&lt;/p&gt;&#xA;&lt;p&gt;打算计划去做中短途摩旅，后面还打算计算去 318 （先换车 QAQ ）， 现在还是小白一个&#xA;想看下有没有什么比较有意思友好的摩托车社区， 可以汲取一下基础知识（原先都是从&#xA;抖音上面看到）&lt;/p&gt;&#xA;&lt;p&gt;或者，也可以带带弟弟&lt;/p&gt;&#xA;&lt;p&gt;座标：厦门&lt;/p&gt;&#xA;</description>
+      <author>Gilfoylek</author>
+      <pubDate>25 Apr 2023 01:57:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>出绿云 15 刀 佛罗里达州 22 号买的，现在不要了荒废 10 刀出 - VPS</title>
+      <link>https://www.v2ex.com/t/935257</link>
+      <description>TG &lt;a target=&#34;_blank&#34; href=&#34;https://t.me/juneauce&#34; rel=&#34;nofollow noopener&#34;&gt;https://t.me/juneauce&lt;/a&gt;</description>
+      <author>junsauce</author>
+      <pubDate>25 Apr 2023 01:57:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>都 16.4.1 了， ios 锁屏通知打开还是会遇到通知列表从方框变成圆角框的问题～ - Apple</title>
+      <link>https://www.v2ex.com/t/935256</link>
+      <description>&lt;p&gt;我记得这个好几个版本之前就说修复了，这么久了，这个问题还没解决。&lt;/p&gt;&#xA;&lt;p&gt;就是解锁上滑看通知的时候，列表出来的时候，通知框都显示是方框，然后再变成圆角。&lt;/p&gt;&#xA;</description>
+      <author>snsn</author>
+      <pubDate>25 Apr 2023 01:55:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>不懂就问，关于两款显示器的选择： LG 27GP83B 和 AOC Q27G2S/D - 问与答</title>
+      <link>https://www.v2ex.com/t/935255</link>
+      <description>&lt;p&gt;平时需求是看电影 + 休闲游戏 + 少量 FPS &lt;/p&gt;&#xA;&lt;p&gt;目前挑选了这两块显示器：&#xA;LG 27GP83B ￥ 1899&#xA;AOC 27 英寸 2K 满血小金刚 MAX Q27G2S/D ￥ 1599&lt;/p&gt;&#xA;&lt;p&gt;这两个有啥性能上的差别吗？ 300 块差在哪里了&lt;/p&gt;&#xA;&lt;p&gt;如有更好的选择也可推荐一波，最好是全新且是知名品牌&lt;/p&gt;&#xA;</description>
+      <author>dwk80123</author>
+      <pubDate>25 Apr 2023 01:55:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>萌新开车上路，求助老哥们关于手动挡的技巧~ - 问与答</title>
+      <link>https://www.v2ex.com/t/935254</link>
+      <description>&lt;h2&gt;准备&lt;/h2&gt;&#xA;&lt;p&gt;开启远程工作之后在家的时间多了，加上四处玩总是溜达，渐渐萌生了自驾游的想法。&#xA;于是买了人生中的第一台车（开老爹的不算），因为预算有限，拜托做二手车生意的发小给淘了一台二手面包，手动挡，整备得挺板正了。准备开出去自驾游+日常带老爹出去钓鱼🎣&lt;/p&gt;&#xA;&lt;h2&gt;计划&lt;/h2&gt;&#xA;&lt;p&gt;由于 OP 自己拿票儿后常年在外打工，所以完全是没有开车基础可言的。所以列了一下需要学习的事项和处理方案：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;手动挡驾驶技术 （雇佣了一个本地教练，陪驾一段时间）&lt;/li&gt;&#xA;&lt;li&gt;修车技术，预备自己动手处理些简单问题（可以问发小和教练）&lt;/li&gt;&#xA;&lt;li&gt;异常天气的操作和注意事项（网络搜集资料，整理中）&lt;/li&gt;&#xA;&lt;li&gt;特殊场景的操作技巧：上坡、上高速、简单山路等等（整理中）&lt;/li&gt;&#xA;&lt;li&gt;用车日常经验：找车位、停车技巧、交通规则等等&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;求教&lt;/h2&gt;&#xA;&lt;p&gt;想请教 v 站的老哥们关于驾驶手动挡，还需要补充哪些不，也欢迎分享手动挡的心得体会~&lt;/p&gt;&#xA;&lt;p&gt;PS：因为 OP 家住城乡结合部，去的地方也不会是大城市，所以想来应该不存在城市早晚高峰走走停停的痛苦体验。&lt;/p&gt;&#xA;</description>
+      <author>niceyuri</author>
+      <pubDate>25 Apr 2023 01:55:19 +0000</pubDate>
+    </item>
+    <item>
+      <title>WARP+怎么上海电信 CN2 网络死活连不上 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/935253</link>
+      <description>&lt;p&gt;如题，手机 5G 不管电信还是移动都可以连上 cloudfare 的 WARP+移动客户端，但是换了 CN2 的网络，死活就连不上，有谁知道吗？&lt;/p&gt;&#xA;</description>
+      <author>huihuilang</author>
+      <pubDate>25 Apr 2023 01:52:32 +0000</pubDate>
+    </item>
+    <item>
       <title>有人知道北京长峰医院火灾的真实情况吗？ - 问与答</title>
       <link>https://www.v2ex.com/t/935252</link>
       <description>&lt;p&gt;看了墙内和墙外的伤亡人数，完全是两回事，有人知道具体情况吗？&lt;/p&gt;&#xA;</description>
