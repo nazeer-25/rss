@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "奇怪的 CDN 重复回源问题，源站在总是收到五分钟之前的重复请求 - 程序员",
+      "Link": "https://www.v2ex.com/t/935333",
+      "Description": "一直在用腾 X 的 CDN ，之前源站不在 X 讯，昨天半夜把源站迁移到腾 X 云了，然后测试发现某些 API 的 GET 请求会在几分钟之后重放，因为有 SSE 的请求(标准的 SSE 必须用 GET)，所以导致很严重的资源开销和数据异常。\u003cbr /\u003e\u003cbr /\u003e排查半天排除了客户端和服务端的原因，分析日志发现在 CDN 第一次回源后，大约 5~10 分钟后，会收到来自另一个 IP 完全一样的重复请求，IP 不是 CDN 的，但很分散，量也很大，不得已在源站设置 CDN 节点 IP 白名单，暂时解决了问题，腾 X 的技术支持说不是 CDN 的 IP 跟他们无关，然后他们的 CDN 节点 IP 偶尔会有变动就很蛋疼。\u003cbr /\u003e\u003cbr /\u003e我就纳闷这 TM 到底是为了啥？源站地址和请求内容只可能是在 CDN 回源的过程中被泄漏的，然后过几分钟进行重放，为啥要这样搞，就算是运营商做缓存他直接缓存 Response 不就得了，非要等几分钟重新请求一下？帮我监控 API 状态？\u003cbr /\u003e\u003cbr /\u003e希望老司机解惑一下，猜测是运营商搞得骚操作，要不就只能是腾 X\u003cbr /\u003e\u003cbr /\u003e目前想到的办法：\u003cbr /\u003e1.全部使用 POST ，要改代码，SSE 有点麻烦 \u003cbr /\u003e2.回源开启 HTTPS ，感觉有点脱裤子放屁\u003cbr /\u003e3.继续用 IP 白名单，但 CDN 节点有新增时会 403\u003cbr /\u003e\u003cbr /\u003e有没有老司机分析下原因，给点更好的解决方案\u003cbr /\u003e\u003cbr /\u003e部分重放发起 IP ，严重怀疑跟马 X 腾的 CDN 有关系,因为后两个是腾 X 云的 IP,但不是 CDN 的\u003cbr /\u003e1.13.138.5\u003cbr /\u003e129.211.163.253\u003cbr /\u003e59.83.208.105\u003cbr /\u003e129.211.167.108\u003cbr /\u003e180.101.244.12\u003cbr /\u003e129.211.167.128\u003cbr /\u003e129.211.163.253",
+      "Author": "kcnine",
+      "PubDate": "2023-04-25T05:41:52Z"
+    },
+    {
+      "Title": "小🐲在吗？请出一个翻转聊天框中头像的 feature - 微信",
+      "Link": "https://www.v2ex.com/t/935332",
+      "Description": "\u003cp\u003e最近交了一个女朋友，她给我发了个情头，可是我看到我们是背对背的，估计她那边是面对面，这很不吉利\u003c/p\u003e\n\u003cp\u003e球球🙏\u003c/p\u003e\n",
+      "Author": "via",
+      "PubDate": "2023-04-25T05:35:31Z"
+    },
+    {
+      "Title": "windows 下 electron 有什么读取 USB 读卡器的库推荐吗？ - Electron",
+      "Link": "https://www.v2ex.com/t/935331",
+      "Description": "\u003cp\u003e如题，election 实再没有，golang , python 都可以呀，求推荐!\u003c/p\u003e\n\u003cp\u003e找了 node-usb 这个库，貌似不太好用，可以读取到 USB 设备，但是我的卡放到读卡器的时候没啥反映！\u003c/p\u003e\n\u003cp\u003e使用场景就是电脑连接 USB 读卡器，然后每张卡有编号，刷卡读取到编号，然后和当前登录的会员绑定\u003c/p\u003e\n",
+      "Author": "sunmoon1983",
+      "PubDate": "2023-04-25T05:35:01Z"
+    },
+    {
       "Title": "关于网盘的一些事 - 程序员",
       "Link": "https://www.v2ex.com/t/935329",
       "Description": "个人需要提供一些文件下载，国内很多要么注册账号，登陆后才能下载，要么限速，所以，直接购买了 OVH ，搭建了 cloudreve ，OVH 是一个月不到 1 美元的，感觉用起来还行。\u003cbr /\u003e然后个人一些文件放 dropbox ，两边都做备份。\u003cbr /\u003e用 Raidrive 将 cloudreve 的网盘挂载到本地。",
@@ -30,13 +51,6 @@
       "Description": "\u003cp\u003e请求 \u003ca href=\"https://bing.com\" rel=\"nofollow\"\u003ehttps://bing.com\u003c/a\u003e 在 POSTMAN 里耗时 60ms 左右 , 而在 curl 命令行里却要 200ms\u003cbr/\u003e\n我怀疑是 TCP 链接没有复用, 每次执行 curl 命令都要重建 TCP 链接导致的, 所以想试着开启 HTTP2 Multiplexing, 官网倒是有介绍, \u003ca href=\"https://curl.se/docs/http2.html\" rel=\"nofollow\"\u003ehttps://curl.se/docs/http2.html\u003c/a\u003e 但不知道怎么开, 以及能不能在命令行中开启\u003c/p\u003e\n\u003cp\u003e以下是 CURL 命令和所输出的结果\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ecurl  \\\n-w \"time_namelookup:  %{time_namelookup}\\n time_connect:  %{time_connect}\\n time_appconnect:  %{time_appconnect}\\n time_redirect:  %{time_redirect}\\n time_pretransfer:  %{time_pretransfer}\\n time_starttransfer:  %{time_starttransfer}\\n time_total:  %{time_total}\\n\" \\\n-o /dev/null -s \\\n--http2 \\\n'https://bing.com'\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003etime_namelookup:  0.010229\ntime_connect:  0.069974\ntime_appconnect:  0.195230\ntime_redirect:  0.000000\ntime_pretransfer:  0.195348\ntime_starttransfer:  0.257910\ntime_total:  0.257964\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "5bb864e1fc775087",
       "PubDate": "2023-04-25T05:05:09Z"
-    },
-    {
-      "Title": "土鸡蛋， 30 枚一份， 58 包邮，走闲鱼 - 问与答",
-      "Link": "https://www.v2ex.com/t/935325",
-      "Description": "自家鸡蛋，第一次发帖不知道咋上图，先放咸鱼链接 [闲鱼]  \u003ca target=\"_blank\" href=\"https://m.tb.cn/h.Uq48p1R?tk=PwbHdjhkF1H\" rel=\"nofollow noopener\"\u003ehttps://m.tb.cn/h.Uq48p1R?tk=PwbHdjhkF1H\u003c/a\u003e CZ0001 「我在闲鱼发布了 [健康美味土鸡蛋农家笨鸡蛋 30 枚 59 元，辽宁包邮，可自提，] 」\u003cbr /\u003e点击链接直接打开",
-      "Author": "tb898785",
-      "PubDate": "2023-04-25T05:03:25Z"
     },
     {
       "Title": "家里长辈沉迷于低质量短视频怎么办 - 分享发现",
@@ -282,6 +296,13 @@
       "Description": "\u003cp\u003e注册公司，办个对公账户难入登天。\n下来了对公账户，单日支出限额 1 万，联系客户经理，让分几天发。\n申请提额，各种领导说不行，不符合。\u003c/p\u003e\n\u003cp\u003e我去你妈的，投诉。这就是厉害的平安银行。有钱就是爹是吧？\u003c/p\u003e\n\u003cp\u003e后面发现非常多的金融类从业者是这样，虚伪，谎话连篇，有钱就是爹是他爷，总接触有些钱的，慢慢以为自己也是。\u003c/p\u003e\n",
       "Author": "Crazy07",
       "PubDate": "2023-04-25T02:51:11Z"
+    },
+    {
+      "Title": "土鸡蛋， 30 枚一份， 58 包邮，走闲鱼 - 问与答",
+      "Link": "https://www.v2ex.com/t/935325",
+      "Description": "自家鸡蛋，第一次发帖不知道咋上图，先放咸鱼链接 [闲鱼]  \u003ca target=\"_blank\" href=\"https://m.tb.cn/h.Uq48p1R?tk=PwbHdjhkF1H\" rel=\"nofollow noopener\"\u003ehttps://m.tb.cn/h.Uq48p1R?tk=PwbHdjhkF1H\u003c/a\u003e CZ0001 「我在闲鱼发布了 [健康美味土鸡蛋农家笨鸡蛋 30 枚 59 元，辽宁包邮，可自提，] 」\u003cbr /\u003e点击链接直接打开",
+      "Author": "tb898785",
+      "PubDate": "2023-04-25T05:03:25Z"
     },
     {
       "Title": "MBP 2020 13 寸款的 cpu 在主板后面怎么找人换硅脂 - MacBook Pro",
