@@ -32,10 +32,6 @@
       <link>https://studygolang.com/articles/36126#reply0</link>
     </item>
     <item>
-      <title>优维低代码：个性化桌面配置</title>
-      <link>https://studygolang.com/articles/36125#reply0</link>
-    </item>
-    <item>
       <title>现在找工作比往年都难？投了上百个一个面试邀约都没</title>
       <link>https://studygolang.com/topics/16328#reply3</link>
       <description>&lt;p&gt;外包还有半个月要退场了。。。。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;感觉找工作比往年都难啊，投了好多，一个面试邀约都没，好慌呀。。。。&lt;/p&gt;&#xA;</description>
@@ -44,6 +40,10 @@
       <title>在 fiber/fasthttp 中使用websocket</title>
       <link>https://studygolang.com/topics/16330#reply0</link>
       <description>&lt;p&gt;这里websocket package用的是 &lt;a href=&#34;https://github.com/lxzan/gws&#34;&gt;gws&lt;/a&gt; , 只需要构造标准库的&lt;code&gt;*http.Request&lt;/code&gt;和&lt;code&gt;http.ResponseWriter&lt;/code&gt;并实现&lt;code&gt;http.Hijacker&lt;/code&gt;, 便能复用代码升级&lt;code&gt;websocket&lt;/code&gt;协议, 完整代码如下:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;bufio&amp;quot;&#xA;&#x9;fiber &amp;quot;github.com/gofiber/fiber/v2&amp;quot;&#xA;&#x9;&amp;quot;github.com/lxzan/gws&amp;quot;&#xA;&#x9;&amp;quot;log&amp;quot;&#xA;&#x9;&amp;quot;net&amp;quot;&#xA;&#x9;&amp;quot;net/http&amp;quot;&#xA;&#x9;&amp;quot;net/url&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;upgrader := gws.NewUpgrader(new(WebSocket), nil)&#xA;&#xA;&#x9;app := fiber.New(fiber.Config{})&#xA;&#xA;&#x9;app.Get(&amp;quot;/connect&amp;quot;, func(c *fiber.Ctx) error {&#xA;&#x9;&#x9;r, err := getRequest(c)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;return err&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;c.Context().HijackSetNoResponse(true)&#xA;&#x9;&#x9;c.Context().Hijack(func(conn net.Conn) {&#xA;&#x9;&#x9;&#x9;w := &amp;amp;responseWriter{&#xA;&#x9;&#x9;&#x9;&#x9;conn: conn,&#xA;&#x9;&#x9;&#x9;&#x9;brw:  bufio.NewReadWriter(bufio.NewReader(conn), nil), // gws没有使用到bufio.Writer&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;socket, err := upgrader.Accept(w, r)&#xA;&#x9;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;&#x9;log.Printf(err.Error())&#xA;&#x9;&#x9;&#x9;&#x9;return&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;socket.Listen()&#xA;&#x9;&#x9;})&#xA;&#x9;&#x9;return nil&#xA;&#x9;})&#xA;&#xA;&#x9;app.Listen(&amp;quot;:3003&amp;quot;)&#xA;}&#xA;&#xA;func getRequest(c *fiber.Ctx) (*http.Request, error) {&#xA;&#x9;URL, err := url.Parse(string(c.Request().URI().FullURI()))&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return nil, err&#xA;&#x9;}&#xA;&#xA;&#x9;var r = &amp;amp;http.Request{&#xA;&#x9;&#x9;Method: c.Method(),&#xA;&#x9;&#x9;Header: http.Header{},&#xA;&#x9;&#x9;URL:    URL,&#xA;&#x9;}&#xA;&#x9;c.Request().Header.VisitAll(func(key, value []byte) {&#xA;&#x9;&#x9;r.Header.Set(string(key), string(value))&#xA;&#x9;})&#xA;&#x9;return r, nil&#xA;}&#xA;&#xA;type responseWriter struct {&#xA;&#x9;conn net.Conn&#xA;&#x9;brw  *bufio.ReadWriter&#xA;}&#xA;&#xA;func (r *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {&#xA;&#x9;return r.conn, r.brw, nil&#xA;}&#xA;&#xA;func (r *responseWriter) Header() http.Header { return http.Header{} }&#xA;&#xA;func (r *responseWriter) Write(bytes []byte) (int, error) { return 0, nil }&#xA;&#xA;func (r *responseWriter) WriteHeader(statusCode int) { return }&#xA;&#xA;type WebSocket struct {&#xA;&#x9;gws.BuiltinEventHandler&#xA;}&#xA;&#xA;func (w WebSocket) OnMessage(socket *gws.Conn, message *gws.Message) {&#xA;&#x9;defer message.Close()&#xA;&#x9;socket.WriteMessage(message.Opcode, message.Bytes())&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>优维低代码：个性化桌面配置</title>
+      <link>https://studygolang.com/articles/36125#reply0</link>
     </item>
     <item>
       <title>超简单！Java 项目自动生成接口文档教程</title>
