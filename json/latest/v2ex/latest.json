@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "练习了两年半的 Shell - 分享创造",
+      "Link": "https://www.v2ex.com/t/935785",
+      "Description": "\u003cp\u003e有坤坤在，编程开心多了\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/AmyangXYZ/zhiyin-zsh-theme/main/demo.gif\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/AmyangXYZ/zhiyin-zsh-theme\" rel=\"nofollow\"\u003ehttps://github.com/AmyangXYZ/zhiyin-zsh-theme\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "Amyang",
+      "PubDate": "2023-04-26T20:44:25Z"
+    },
+    {
       "Title": "PHP 写了个页面，如果访问来自私有 IP 地址就允许 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/935784",
       "Description": "\u003cp\u003ePHP 写了个页面，如果访问来自私有 IP 地址就允许。家里的 ip 是 192.168.1.0/24 网段的。今天发现一个漏洞，在朋友家访问我这个页面，居然可以打开。查看 ip 发现是 10.15.25.81 。\u003c/p\u003e\n\u003cp\u003e我知道只要改成 192.168.0.0/16 网段就可以了，但是也不能保证运营商分配 192.168.0.0/16 给其他用户，虽然大概率不太可能大内网用 C 类私有地址。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026lt;?php\nif (isset($_SERVER[\"HTTP_CF_CONNECTING_IP\"])) {\n  $_SERVER['REMOTE_ADDR'] = $_SERVER[\"HTTP_CF_CONNECTING_IP\"];\n}\n$ip = $_SERVER[\"REMOTE_ADDR\"];\n\n//local access OR from my IP(through Cloudflare)\nif (\n\t(!(filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)))//check local ip\n\t|| \n\t($ip == gethostbyname('my.ddns.me'))//check public ip\n)\n{\n\t//do nothing;\n}\nelse{\n\t//go error page\n\techo \"No access\";\n?\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n",
