@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "求大佬们优化个 Dockerfile - Docker",
+      "Link": "https://www.v2ex.com/t/935775",
+      "Description": "\u003cp\u003e这个构建出来的镜像有 2.11GB ，求大佬们给点优化建议，感谢！\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# 基于镜像基础\nFROM python:3.7.9-slim\n\n# 复制当前代码文件到容器中 /app\nADD . /app1\n\n# 设置代码文件夹工作目录 /app\nWORKDIR /app1\n\n# build 镜像时运行的命令，安装所需的包\nRUN apt-get update \u0026amp;\u0026amp; apt-get -f -y install \\\n    \u0026amp;\u0026amp; apt-get install -yq gdebi \\\n    \u0026amp;\u0026amp; apt-get install -y wget \\ \n    \u0026amp;\u0026amp; apt-get install -y libqt5core5a \\\n    \u0026amp;\u0026amp; apt-get install -y gcc \\\n    \u0026amp;\u0026amp; apt install -y make \\\n    \u0026amp;\u0026amp; pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ \\\n    \u0026amp;\u0026amp; mkdir -p /usr/share/man/man1/ \\\n    \u0026amp;\u0026amp; TEMP_DEB=\"$(mktemp).deb\" \\\n    \u0026amp;\u0026amp; wget -O \"$TEMP_DEB\" 'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb' \\\n    \u0026amp;\u0026amp; apt install -yqf \"$TEMP_DEB\" \\\n    \u0026amp;\u0026amp; rm -f \"$TEMP_DEB\" \\\n    #dpkg -i wkhtmltox_0.12.6-1.buster_amd64.deb\n    \u0026amp;\u0026amp; wget http://ftp.gnu.org/gnu/binutils/binutils-2.35.tar.gz \\\n    \u0026amp;\u0026amp; tar -zxvf binutils-2.35.tar.gz \\\n    \u0026amp;\u0026amp; cd binutils-2.35 \\\n    \u0026amp;\u0026amp; ./configure \\\n    \u0026amp;\u0026amp; make \u0026amp;\u0026amp; make install \\\n    \u0026amp;\u0026amp; strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5 \\\n    \u0026amp;\u0026amp; apt install -y octave \\\n    \u0026amp;\u0026amp; apt-get clean;\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "JeffreyRSmith",
+      "PubDate": "2023-04-26T16:56:55Z"
+    },
+    {
       "Title": "突然没法选择 ChatGPT 的模型了。我是 Pro - 问与答",
       "Link": "https://www.v2ex.com/t/935774",
       "Description": "",

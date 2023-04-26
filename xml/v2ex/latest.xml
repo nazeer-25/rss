@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求大佬们优化个 Dockerfile - Docker</title>
+      <link>https://www.v2ex.com/t/935775</link>
+      <description>&lt;p&gt;这个构建出来的镜像有 2.11GB ，求大佬们给点优化建议，感谢！&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# 基于镜像基础&#xA;FROM python:3.7.9-slim&#xA;&#xA;# 复制当前代码文件到容器中 /app&#xA;ADD . /app1&#xA;&#xA;# 设置代码文件夹工作目录 /app&#xA;WORKDIR /app1&#xA;&#xA;# build 镜像时运行的命令，安装所需的包&#xA;RUN apt-get update &amp;amp;&amp;amp; apt-get -f -y install \&#xA;    &amp;amp;&amp;amp; apt-get install -yq gdebi \&#xA;    &amp;amp;&amp;amp; apt-get install -y wget \ &#xA;    &amp;amp;&amp;amp; apt-get install -y libqt5core5a \&#xA;    &amp;amp;&amp;amp; apt-get install -y gcc \&#xA;    &amp;amp;&amp;amp; apt install -y make \&#xA;    &amp;amp;&amp;amp; pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ \&#xA;    &amp;amp;&amp;amp; mkdir -p /usr/share/man/man1/ \&#xA;    &amp;amp;&amp;amp; TEMP_DEB=&#34;$(mktemp).deb&#34; \&#xA;    &amp;amp;&amp;amp; wget -O &#34;$TEMP_DEB&#34; &#39;https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb&#39; \&#xA;    &amp;amp;&amp;amp; apt install -yqf &#34;$TEMP_DEB&#34; \&#xA;    &amp;amp;&amp;amp; rm -f &#34;$TEMP_DEB&#34; \&#xA;    #dpkg -i wkhtmltox_0.12.6-1.buster_amd64.deb&#xA;    &amp;amp;&amp;amp; wget http://ftp.gnu.org/gnu/binutils/binutils-2.35.tar.gz \&#xA;    &amp;amp;&amp;amp; tar -zxvf binutils-2.35.tar.gz \&#xA;    &amp;amp;&amp;amp; cd binutils-2.35 \&#xA;    &amp;amp;&amp;amp; ./configure \&#xA;    &amp;amp;&amp;amp; make &amp;amp;&amp;amp; make install \&#xA;    &amp;amp;&amp;amp; strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5 \&#xA;    &amp;amp;&amp;amp; apt install -y octave \&#xA;    &amp;amp;&amp;amp; apt-get clean;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>JeffreyRSmith</author>
+      <pubDate>26 Apr 2023 16:56:55 +0000</pubDate>
+    </item>
+    <item>
       <title>突然没法选择 ChatGPT 的模型了。我是 Pro - 问与答</title>
       <link>https://www.v2ex.com/t/935774</link>
       <author>whileFalse</author>
