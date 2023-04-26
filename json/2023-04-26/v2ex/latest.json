@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "一会没看， GitHub 变成这样了吗？ - 分享发现",
+      "Link": "https://www.v2ex.com/t/935733",
+      "Description": "\u003cp\u003ert ，突然变这样了，你们的变了吗？\n\u003cimg alt=\"github\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.waynet.top/i/2023/04/26/xfigvk.png\"/\u003e\n搜索变这样了\n\u003cimg alt=\"github\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.waynet.top/i/2023/04/26/xgl5tw.png\"/\u003e\n感觉没之前的好用、好看\u003c/p\u003e\n",
+      "Author": "wayne3602",
+      "PubDate": "2023-04-26T12:24:21Z"
+    },
+    {
       "Title": "Android 项目中如何直接引入准备好的 .so 文件 - 程序员",
       "Link": "https://www.v2ex.com/t/935731",
       "Description": "\u003cp\u003enative 常规开发流程大概是这样的:\u003c/p\u003e\n\u003cp\u003e在 Android Studio 中创建一个项目, 项目类型选择最下面的 \"Native C++\", 名称就叫 native\u003c/p\u003e\n\u003cp\u003e这时, 在 src/main/cpp 下会出现一个 native-lib.cpp 文件和对应的 CMakeLists.txt 文件, cpp 内容如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-c++\"\u003e#include \u0026lt;jni.h\u0026gt;\n#include \u0026lt;string\u0026gt;\n\nextern \"C\" JNIEXPORT jstring JNICALL\nJava_com_example_native_MainActivity_stringFromJNI(\n        JNIEnv* env,\n        jobject /* this */) {\n    std::string hello = \"Hello from C++\";\n    return env-\u0026gt;NewStringUTF(hello.c_str());\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在 src/main/java/com/example/native/MainActivity.java 中 class MainActivity 中生成了一个对应的函数申明\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e    /**\n     * A native method that is implemented by the 'native' native library,\n     * which is packaged with this application.\n     */\n    public native String stringFromJNI();\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eJava 程序通过这个接口访问 native 代码\u003c/p\u003e\n\u003cp\u003e点击 Make Project 之后, 编译成功, 双击 build/outputs/apk/debug/app-debug.apk, 可以看到 apk 包含了 x86, x86_64, arm64_v8a, armeabi_v7a 四个平台的 \u003ca href=\"http://libnative.so\" rel=\"nofollow\"\u003elibnative.so\u003c/a\u003e 文件\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e请问有没有办法把编译出来的 .so 提取出来, 然后直接导入到一个新的 Android 工程中。这个新的工程直接把 .so 文件打包到 apk 中，新工程代码中完全不包含 C 代码？\u003c/p\u003e\n\u003cp\u003e网上部分文章说，把 .so 文件放到 libs/arm64_v8a 等目录中就行, 打包 apk 时会自动包含, 但是实测下来没有效果, 似乎还有什么其它地方需要配置\u003c/p\u003e\n",
