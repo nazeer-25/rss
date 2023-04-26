@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Android 项目中如何直接引入准备好的 .so 文件 - 程序员</title>
+      <link>https://www.v2ex.com/t/935731</link>
+      <description>&lt;p&gt;native 常规开发流程大概是这样的:&lt;/p&gt;&#xA;&lt;p&gt;在 Android Studio 中创建一个项目, 项目类型选择最下面的 &#34;Native C++&#34;, 名称就叫 native&lt;/p&gt;&#xA;&lt;p&gt;这时, 在 src/main/cpp 下会出现一个 native-lib.cpp 文件和对应的 CMakeLists.txt 文件, cpp 内容如下&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;#include &amp;lt;jni.h&amp;gt;&#xA;#include &amp;lt;string&amp;gt;&#xA;&#xA;extern &#34;C&#34; JNIEXPORT jstring JNICALL&#xA;Java_com_example_native_MainActivity_stringFromJNI(&#xA;        JNIEnv* env,&#xA;        jobject /* this */) {&#xA;    std::string hello = &#34;Hello from C++&#34;;&#xA;    return env-&amp;gt;NewStringUTF(hello.c_str());&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在 src/main/java/com/example/native/MainActivity.java 中 class MainActivity 中生成了一个对应的函数申明&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    /**&#xA;     * A native method that is implemented by the &#39;native&#39; native library,&#xA;     * which is packaged with this application.&#xA;     */&#xA;    public native String stringFromJNI();&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;Java 程序通过这个接口访问 native 代码&lt;/p&gt;&#xA;&lt;p&gt;点击 Make Project 之后, 编译成功, 双击 build/outputs/apk/debug/app-debug.apk, 可以看到 apk 包含了 x86, x86_64, arm64_v8a, armeabi_v7a 四个平台的 &lt;a href=&#34;http://libnative.so&#34; rel=&#34;nofollow&#34;&gt;libnative.so&lt;/a&gt; 文件&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;请问有没有办法把编译出来的 .so 提取出来, 然后直接导入到一个新的 Android 工程中。这个新的工程直接把 .so 文件打包到 apk 中，新工程代码中完全不包含 C 代码？&lt;/p&gt;&#xA;&lt;p&gt;网上部分文章说，把 .so 文件放到 libs/arm64_v8a 等目录中就行, 打包 apk 时会自动包含, 但是实测下来没有效果, 似乎还有什么其它地方需要配置&lt;/p&gt;&#xA;</description>
+      <author>nealot</author>
+      <pubDate>26 Apr 2023 12:02:25 +0000</pubDate>
+    </item>
+    <item>
       <title>保护手腕的最好办法还是尽量使用键盘操作 - 程序员</title>
       <link>https://www.v2ex.com/t/935730</link>
       <description>&lt;p&gt;最近搞了个那个垂直的鼠标，本来为了缓解手腕移动的不适，发现手腕更累了。&lt;/p&gt;&#xA;&lt;p&gt;最后还是使用 vim 模式操作电脑，pycharm 用 vim 插件，copliot 生成，浏览器用 vim. 熟悉电脑（ ubuntu ）的各种快捷键。&lt;/p&gt;&#xA;&lt;p&gt;把鼠标放得远远的。&lt;/p&gt;&#xA;&lt;p&gt;还有什么办法么？当然最好的办法是少用电脑。。。&lt;/p&gt;&#xA;</description>
