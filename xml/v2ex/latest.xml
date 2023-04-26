@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有北京的程序员群吗？ - 程序员</title>
+      <link>https://www.v2ex.com/t/935699</link>
+      <description>&lt;p&gt;RT&#xA;想加入，参加点线下的活动呀&lt;/p&gt;&#xA;</description>
+      <author>suley</author>
+      <pubDate>26 Apr 2023 09:26:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>spring boot ConditionalOnMissingBean 问题 - Java</title>
+      <link>https://www.v2ex.com/t/935698</link>
+      <description>&lt;p&gt;项目引用了业务日志库，使用注解 @&lt;a href=&#34;/member/EnableLogRecord&#34;&gt;EnableLogRecord&lt;/a&gt; 来自动配置库相关的 Bean ，其中有个获取当前操作人的 Bean 有 @&lt;a href=&#34;/member/ConditionalOnMissingBean&#34;&gt;ConditionalOnMissingBean&lt;/a&gt; 注解，当自定义该 Bean 的时候，以下第一种情况符合预期，第二种会启动失败，想请教下各位其中的原因及解决办法&lt;/p&gt;&#xA;&lt;p&gt;库源码：com.mzt.logapi.starter.configuration.LogRecordProxyAutoConfiguration&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;    @Bean&#xA;    @ConditionalOnMissingBean(IOperatorGetService.class)&#xA;    @Role(BeanDefinition.ROLE_APPLICATION)&#xA;    public IOperatorGetService operatorGetService() {&#xA;        return new DefaultOperatorGetServiceImpl();&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;一. 在 spring boot 启动类添加 @&lt;a href=&#34;/member/EnableLogRecord&#34;&gt;EnableLogRecord&lt;/a&gt; ，@ConditionalOnMissingBean 有效&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;@EnableLogRecord(tenant = &#34;temp&#34;)&#xA;@SpringBootApplication&#xA;public class DemoApplication {&#xA;&#xA;&#x9;public static void main(String[] args) {&#xA;&#x9;&#x9;SpringApplication.run(DemoApplication.class, args);&#xA;&#x9;}&#xA;&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;二. 在配置类添加 @&lt;a href=&#34;/member/EnableLogRecord&#34;&gt;EnableLogRecord&lt;/a&gt; ，@ConditionalOnMissingBean 无效，启动报错&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;@EnableLogRecord(tenant = &#34;temp&#34;)&#xA;@Configuration(proxyBeanMethods = false)&#xA;public class LogRecordConfiguration {&#xA;    public LogRecordConfiguration() {&#xA;    }&#xA;&#xA;    /**&#xA;     * 自定义获取操作人&#xA;     */&#xA;    @Bean&#xA;    public IOperatorGetService operatorGetService() {&#xA;        return () -&amp;gt; {&#xA;            Operator operator = new Operator();&#xA;            operator.setOperatorId(&#34;test&#34;);&#xA;            return operator;&#xA;        };&#xA;    }&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;repo: &lt;a href=&#34;https://github.com/TheLastSunset/spring-boot-ConditionalOnMissingBean-issues.git&#34; rel=&#34;nofollow&#34;&gt;https://github.com/TheLastSunset/spring-boot-ConditionalOnMissingBean-issues.git&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>mgzu</author>
+      <pubDate>26 Apr 2023 09:26:33 +0000</pubDate>
+    </item>
+    <item>
       <title>求推荐干净卫生的酒店 五一后去上海玩 - 问与答</title>
       <link>https://www.v2ex.com/t/935697</link>
       <description>之前听说全季口碑还可以 , 但是刚才去 ctrip 看了好多用户评论,发现干净卫生已经不是全季的特色了, 可能做大了就吃老本? 请大家推荐下上海干净卫生的经济型酒店, 谢谢</description>

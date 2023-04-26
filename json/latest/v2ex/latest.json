@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有北京的程序员群吗？ - 程序员",
+      "Link": "https://www.v2ex.com/t/935699",
+      "Description": "\u003cp\u003eRT\n想加入，参加点线下的活动呀\u003c/p\u003e\n",
+      "Author": "suley",
+      "PubDate": "2023-04-26T09:26:55Z"
+    },
+    {
+      "Title": "spring boot ConditionalOnMissingBean 问题 - Java",
+      "Link": "https://www.v2ex.com/t/935698",
+      "Description": "\u003cp\u003e项目引用了业务日志库，使用注解 @\u003ca href=\"/member/EnableLogRecord\"\u003eEnableLogRecord\u003c/a\u003e 来自动配置库相关的 Bean ，其中有个获取当前操作人的 Bean 有 @\u003ca href=\"/member/ConditionalOnMissingBean\"\u003eConditionalOnMissingBean\u003c/a\u003e 注解，当自定义该 Bean 的时候，以下第一种情况符合预期，第二种会启动失败，想请教下各位其中的原因及解决办法\u003c/p\u003e\n\u003cp\u003e库源码：com.mzt.logapi.starter.configuration.LogRecordProxyAutoConfiguration\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e    @Bean\n    @ConditionalOnMissingBean(IOperatorGetService.class)\n    @Role(BeanDefinition.ROLE_APPLICATION)\n    public IOperatorGetService operatorGetService() {\n        return new DefaultOperatorGetServiceImpl();\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e一. 在 spring boot 启动类添加 @\u003ca href=\"/member/EnableLogRecord\"\u003eEnableLogRecord\u003c/a\u003e ，@ConditionalOnMissingBean 有效\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e@EnableLogRecord(tenant = \"temp\")\n@SpringBootApplication\npublic class DemoApplication {\n\n\tpublic static void main(String[] args) {\n\t\tSpringApplication.run(DemoApplication.class, args);\n\t}\n\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e二. 在配置类添加 @\u003ca href=\"/member/EnableLogRecord\"\u003eEnableLogRecord\u003c/a\u003e ，@ConditionalOnMissingBean 无效，启动报错\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e@EnableLogRecord(tenant = \"temp\")\n@Configuration(proxyBeanMethods = false)\npublic class LogRecordConfiguration {\n    public LogRecordConfiguration() {\n    }\n\n    /**\n     * 自定义获取操作人\n     */\n    @Bean\n    public IOperatorGetService operatorGetService() {\n        return () -\u0026gt; {\n            Operator operator = new Operator();\n            operator.setOperatorId(\"test\");\n            return operator;\n        };\n    }\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003erepo: \u003ca href=\"https://github.com/TheLastSunset/spring-boot-ConditionalOnMissingBean-issues.git\" rel=\"nofollow\"\u003ehttps://github.com/TheLastSunset/spring-boot-ConditionalOnMissingBean-issues.git\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "mgzu",
+      "PubDate": "2023-04-26T09:26:33Z"
+    },
+    {
       "Title": "求推荐干净卫生的酒店 五一后去上海玩 - 问与答",
       "Link": "https://www.v2ex.com/t/935697",
       "Description": "之前听说全季口碑还可以 , 但是刚才去 ctrip 看了好多用户评论,发现干净卫生已经不是全季的特色了, 可能做大了就吃老本? 请大家推荐下上海干净卫生的经济型酒店, 谢谢",
