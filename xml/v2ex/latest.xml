@@ -4,7 +4,14 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>请问有那种辅助项目顶层设计的工具吗？ - 程序员</title>
+      <title>请教 OpenStack 组网中 OVS+VLAN+DVR（分布式路由）方案的几个问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/935798</link>
+      <description>各位大哥早，关于前些日子提的《关于 openstack 中网络部分与具体交换机的连接方式问题》 &lt;a target=&#34;_blank&#34; href=&#34;https://www.v2ex.com/t/933379#reply7&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.v2ex.com/t/933379#reply7&lt;/a&gt; ，通过梳理有了大概的思路，感谢给出建议的几位大哥，&lt;br /&gt;目前按照思路已经重新做了部署（ ovs+vlan 的方式+计算节点 DVR 分布式方案），具体拓扑如下图所示&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://sm.ms/image/yhUj9a53XdJgW1e&#34; rel=&#34;nofollow noopener&#34;&gt;https://sm.ms/image/yhUj9a53XdJgW1e&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;①当前环境， 控制+网络 1 台，含两块网卡；计算节点 2 台，各包含两块网卡；网络部署用 dvr 分布式路由方案；&lt;br /&gt;②网络我们使用 vlan101,openstack 管理网络，和 vlan1001-1999 实际业务网络（通过此大段可以留一些给管理交换机等 vlan ）；物理机的 eno1 ,用来走 openstack 管理网络，eno2 按需配置；&lt;br /&gt;③目前 汇聚交换机全端口 truank vlan 1001--1999 到接入层交换机；&lt;br /&gt;接入交换机的上联是 trunk vlan1001--1999,下联计算节点的端口模式 hybrid vlan 1001--1999&lt;br /&gt;④计算节点的 eno2 端口通过配置网桥，写入对应 vlan 信息，实现与接入层交换机的互通；&lt;br /&gt;⑤计算机点正常分发实例，给实例配置了对应的 vlan ip,如上图所示&lt;br /&gt;现在有几个问题要解决：&lt;br /&gt;1 、同一个计算节点下面的两个实例，是不同的 vlan,我现在需要实现 vlan 互通，具体需要做哪些内容？是计算节点 配置 br-int 还是二层交换机写路由（交换机写路由显然不太合理），计算节点的 br-int 需要如何配置？&lt;br /&gt;2 、如图所示，一个汇聚，对应两台接入，对应两台计算节点 ，对应四个实例，4 个不同 vlan ，如果要实现 vlan1001  和 vlan1003 互通 需要做哪些内容？涉及跨交换机跨 vlan 了不知道具体要配置哪些内容？&lt;br /&gt;3 、如图所示，汇聚上面，我们想直接加 一个防火墙，相当于路由器的功能，到时候防火墙坐下配置，汇聚交换机写个路由  0.0.0.0/0 下一跳地址，即可实现全网段出公网的需求，具体限制某些网段不给出公网，我们直接防火墙做策略限制即可，想问下这个思路有没有问题，是否有什么遗漏的地方？&lt;br /&gt;&lt;br /&gt;再次跪谢各位大哥！！！</description>
+      <author>unknowsll</author>
+      <pubDate>27 Apr 2023 00:31:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问有那种辅助项目顶层设计的工具吗(后端项目架构)？ - 程序员</title>
       <link>https://www.v2ex.com/t/935797</link>
       <description>&lt;p&gt;一个大一菜鸡大学牲想自己设计一下项目结构&lt;/p&gt;&#xA;&lt;p&gt;我使用的语言是 go ，现在的苦恼是对于项目数据库以及各模块的交互关系以及项目的总体结构想不到合适的方法表现出来，所以想问问各位有没有什么合适的工具能辅助设计，最好是有了大致项目后可以将结构图画出来的那种。&lt;/p&gt;&#xA;&lt;p&gt;我主要是想让项目架构表现得更加直观一些，各位有什么建议？谢谢啦&lt;/p&gt;&#xA;</description>
       <author>GoldenSheep</author>
