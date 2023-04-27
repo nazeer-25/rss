@@ -26,13 +26,14 @@ Report Issue: https://github.com/chyroc/grss/issues
 | Reddit - /r/tech: Technological innovations and changes. | [JSON](./json/latest/reddit/community/hot/tech.json) | [RSS](./xml/reddit/community/hot/tech.xml) | [HTML](./html/reddit/community/hot/tech/index.html) |
 | Reddit - /r/Technology | [JSON](./json/latest/reddit/community/hot/technology.json) | [RSS](./xml/reddit/community/hot/technology.xml) | [HTML](./html/reddit/community/hot/technology/index.html) |
 | Reddit - geek | [JSON](./json/latest/reddit/community/hot/geek.json) | [RSS](./xml/reddit/community/hot/geek.xml) | [HTML](./html/reddit/community/hot/geek/index.html) |
+| 少数派专栏 - 播客那些事 | [JSON](./json/latest/sspai/column/264.json) | [RSS](./xml/sspai/column/264.xml) | [HTML](./html/sspai/column/264/index.html) |
+| 少数派专栏 - 生产力周报 | [JSON](./json/latest/sspai/column/266.json) | [RSS](./xml/sspai/column/266.xml) | [HTML](./html/sspai/column/266/index.html) |
 | 少数派 - 推荐 | [JSON](./json/latest/sspai/index.json) | [RSS](./xml/sspai/index.xml) | [HTML](./html/sspai/index/index.html) |
 | 少数派 - Matrix | [JSON](./json/latest/sspai/matrix.json) | [RSS](./xml/sspai/matrix.xml) | [HTML](./html/sspai/matrix/index.html) |
 | Go语言中文网 - 首页 | [JSON](./json/latest/studygolang/index.json) | [RSS](./xml/studygolang/index.xml) | [HTML](./html/studygolang/index/index.html) |
 | TO-D 杂志 - 首页 | [JSON](./json/latest/todtod/index.json) | [RSS](./xml/todtod/index.xml) | [HTML](./html/todtod/index/index.html) |
 | 开发者头条 - 首页 | [JSON](./json/latest/toutiaoio/index.json) | [RSS](./xml/toutiaoio/index.xml) | [HTML](./html/toutiaoio/index/index.html) |
 | Trends.vc | [JSON](./json/latest/trends_vc/archive.json) | [RSS](./xml/trends_vc/archive.xml) | [HTML](./html/trends_vc/archive/index.html) |
-| Twitter - 我是苏畅 Origin Twitter | [JSON](./json/latest/twitter/user/origin/woshisuchang.json) | [RSS](./xml/twitter/user/origin/woshisuchang.xml) | [HTML](./html/twitter/user/origin/woshisuchang/index.html) |
 | V2EX - 全部主题 | [JSON](./json/latest/v2ex/latest.json) | [RSS](./xml/v2ex/latest.xml) | [HTML](./html/v2ex/latest/index.html) |
 | 人人都是产品经理 - 最新文章 | [JSON](./json/latest/woshipm/latest.json) | [RSS](./xml/woshipm/latest.xml) | [HTML](./html/woshipm/latest/index.html) |
 | 雪球 - 7X24快讯 | [JSON](./json/latest/xueqiu/livenews.json) | [RSS](./xml/xueqiu/livenews.xml) | [HTML](./html/xueqiu/livenews/index.html) |

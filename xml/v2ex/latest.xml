@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>修改 go websocket server 启动方式, 内存占用立省 40% ! - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/935912</link>
+      <description>&lt;p&gt;最近发布了 &lt;code&gt;gws v1.4.7&lt;/code&gt; 更新, 支持从 &lt;code&gt;tcp conn&lt;/code&gt; 直接解析 &lt;code&gt;websocket&lt;/code&gt; 协议, 降低内存占用. 大部分人使用 &lt;code&gt;go websocket server&lt;/code&gt;, 都是复用的 &lt;code&gt;http server&lt;/code&gt;, 这种劫持&lt;code&gt;http&lt;/code&gt;连接升级的方式, 最大的弊端就是浪费内存. 由于 &lt;code&gt;go http hijack&lt;/code&gt; 的缺陷, 一些内存一直得不到释放, 大概每个连接 10KB. 测试 10000 个连接的场景, 换用 Demo2 方式, 内存占用立省 42.86%!&lt;/p&gt;&#xA;&lt;h3&gt;Demo 1: hijack&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;github.com/lxzan/gws&#34;&#xA;&#x9;&#34;log&#34;&#xA;&#x9;&#34;net/http&#34;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;upgrader := gws.NewUpgrader(new(gws.BuiltinEventHandler), nil)&#xA;&#xA;&#x9;http.HandleFunc(&#34;/connect&#34;, func(writer http.ResponseWriter, request *http.Request) {&#xA;&#x9;&#x9;socket, err := upgrader.Accept(writer, request)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;log.Printf(err.Error())&#xA;&#x9;&#x9;&#x9;return&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;go socket.Listen()&#xA;&#x9;})&#xA;&#xA;&#x9;if err := http.ListenAndServe(&#34;:3000&#34;, nil); err != nil {&#xA;&#x9;&#x9;log.Fatalf(err.Error())&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;Demo 2: direct&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;github.com/lxzan/gws&#34;&#xA;&#x9;&#34;log&#34;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;srv := gws.NewServer(new(gws.BuiltinEventHandler), nil)&#xA;&#xA;&#x9;if err := srv.Run(&#34;:3001&#34;); err != nil {&#xA;&#x9;&#x9;log.Panicln(err.Error())&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;memory&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://raw.githubusercontent.com/lxzan/go-websocket-testing/main/assets/memory.pic.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>Nazz</author>
+      <pubDate>27 Apr 2023 06:03:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>库迪咖啡居然只要 8 块 8？ - 分享发现</title>
+      <link>https://www.v2ex.com/t/935911</link>
+      <description>实话讲，一开始对库迪可以说没有抱任何希望，想着这么便宜的咖啡能好喝么，后来喝了一次，只能说口感和口味感觉是比瑞幸略差的，可能是材料供应商有变化，但是只能说 8 块 8 的话，挺值得的，最起码是被现冲咖啡吧哈哈哈哈，而且想喝冰的就有冰的。&lt;br /&gt;&lt;br /&gt;然后库迪的抖音投放都是什么“瑞幸老板又开咖啡店啦”什么什么的，估计是直接给瑞幸的销量干碎了，笑死，然后瑞幸也出 9 块 9 的券了，就喜欢库迪这种鲶鱼，太棒了，又能喝到便宜手冲了，打工人狂喜。</description>
+      <author>Gtreace</author>
+      <pubDate>27 Apr 2023 06:01:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>有西安本地的技术群吗，公司打算西安组建技术团队 - 西安</title>
+      <link>https://www.v2ex.com/t/935910</link>
+      <description>&lt;p&gt;计划西安本地组建技术团队，岗位前端（ vue,react),后端（ golang 接受转 golang)，不知道有没有同学看看机会。详细 jd 会进行补充。&lt;/p&gt;&#xA;</description>
+      <author>foursking</author>
+      <pubDate>27 Apr 2023 05:59:34 +0000</pubDate>
+    </item>
+    <item>
       <title>通过微信自己备份功能到微软上， 可以解密吗？ 想直接看看自己的记录，而且在不用重新手机登陆微信 - 问与答</title>
       <link>https://www.v2ex.com/t/935909</link>
       <author>xiaoxiao168</author>
