@@ -4,16 +4,23 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Clash 如何优雅的管理自定义的规则集文件？ - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/936177</link>
+      <description>&lt;p&gt;我将机场订阅连接和 github 各种规则集融合在一起定义了一份自定义的规则集文件，方便自定义各种分流，比如最近的 ChatGPT 我会给他分配美国节点，而其他网站使用香港节点以获得最佳访问速度。&lt;/p&gt;&#xA;&lt;p&gt;但总有新的域名需要加入到规则集中，也有一些域名想临时直连试试。&lt;/p&gt;&#xA;&lt;p&gt;尝试自己在 github 维护了自己的规则集， 这样做因为我可以用 git 来提交和同步，并且可以提供 http 链接给 clash 可以通过网络来试试获取分流规则，我的配置文件一部分就如下&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;rule-providers:&#xA;  myproxy:&#xA;    type: http&#xA;    behavior: domain&#xA;    url: &#34;https://github.com/xxx/raw/master/MyProxy.yaml&#34;&#xA;    path: ./ruleset/myproxy.yaml&#xA;    interval: 3600&#xA;  mydirect:&#xA;    type: http&#xA;    behavior: domain&#xA;    url: &#34;https://github.com/xxx/Profiles/raw/master/MyDirect.yaml&#34;&#xA;    path: ./ruleset/mydirect.yaml&#xA;    interval: 3600 &#xA; &#xA;# 在自定义 Rules 中引入 &#xA;rules:&#xA;  # 自定义 Rule 开始&#xA;  - RULE-SET,myproxy,PROXY&#xA;  - RULE-SET,mydirect,DIRECT&#xA;  # 自定义 Rule 结束&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;试了一下现在这样可以，我只需要在 git 中编辑域名列表，然后 push ，在 clash 中刷新一下规则集即可应用。但手动编辑总归还是有点麻烦，我需要提交，push 。&lt;/p&gt;&#xA;&lt;p&gt;早期的时候我使用 &lt;code&gt;[SwitchyOmega]&lt;/code&gt; 浏览器插件，定义了一个全部走代理的的代理地址和端口，因为这个插件可以探测到网页的某些域名的资源加载是否正常，我可以快速的将其切换到使用直连还是使用代理，但后来发现这个插件能同步的域名列表有限，且我想要全局透明代理所以用了软路由，我在想能不能借助这个插件的能力，在检测到资源加载异常时，可以快速将一个域放到上述我定义的代理集中或者放到直连规则集中？或者大家都是怎么同步的？&lt;/p&gt;&#xA;&lt;p&gt;还有一个问题，因为我现在有多台软路由，还有多端同步需求，所以自定义的原始的分流配置文件我也要多端同步，我现在是放在七牛云上的私有空间临时导出带访问权限的 http 链接给 clash 导入用一下（因为这些不常变但也会变，主要还是），也想问大家怎么处理的。&lt;/p&gt;&#xA;</description>
+      <author>Seayon</author>
+      <pubDate>28 Apr 2023 03:57:41 +0000</pubDate>
+    </item>
+    <item>
       <title>mysql 语句中 group by 的问题 - MySQL</title>
       <link>https://www.v2ex.com/t/936176</link>
-      <description>&lt;p&gt;有个需求以用户为维度进行统计订单，并显示出用户相关信息，那么我写 sql 的时候，用下面哪种方式比较合适&lt;/p&gt;&#xA;&lt;p&gt;第一种是把用户信息相关的字段放到 group by 中，在 select 中就也可以显示相应的字段，这样一个 sql 语句就可以查询出来统计信息和用户信息。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;select count(userid), user_id ，user_name ，user_type ，user_level ...  from user group by user_id, user_name, user_type, user_level&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第二种是先按照 user_id 进行聚合统计，然后再根据 userid 查表，补全用户信息，这样就需要查两次&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;select count(userid), user_id, ...  from user group by user_id&#xA;&#xA;select ... from ... where user_id in (...)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第一种方式明显是更简单的，但是把很多冗余的字段放到 group by 的条件中，会不会有性能问题，或者第一种写法可能会带来其他问题，求助下大家的意见&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;有个需求以用户为维度进行统计订单，并显示出用户相关信息，那么我写 sql 的时候，用下面哪种方式比较合适&lt;/p&gt;&#xA;&lt;p&gt;第一种是把用户信息相关的字段放到 group by 中，在 select 中就也可以显示相应的字段，这样一个 sql 语句就可以查询出来统计信息和用户信息。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;select count(userid), user_id ，user_name ，user_type ，user_level ...  from user group by user_id, user_name, user_type, user_level&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第二种是先按照 user_id 进行聚合统计，然后再根据 userid 查表，补全用户信息，这样就需要查两次&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;select count(userid), user_id, ...  from ... group by user_id&#xA;&#xA;select ... from ... where user_id in (...)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;第一种方式明显是更简单的，但是把很多冗余的字段放到 group by 的条件中，会不会有性能问题，或者第一种写法可能会带来其他问题，求助下大家的意见，如果有更好的 sql 写法，也希望大家能够帮忙分享一下经验。&lt;/p&gt;&#xA;&lt;p&gt;ps：无论第一种还是第二种，都需要联表查询&lt;/p&gt;&#xA;</description>
       <author>sniperking1234</author>
       <pubDate>28 Apr 2023 03:51:31 +0000</pubDate>
     </item>
     <item>
       <title>成都裸辞，在纠结继续在成都找还是去其他城市 - 职场话题</title>
       <link>https://www.v2ex.com/t/936175</link>
-      <description>前两天因公司在恶心裸辞了，也知道目前行情不好，其他人也在劝，但还是裸了。现在在考虑要不要离开成都了。去北京或其他城市看看机会。之前来成都也是因为软件行业发展好、消费低、安逸等，但现在来看也都差不多。大家怎么看。我是后端开发，5 年经验但学历不高</description>
+      <description>&lt;h2&gt;目前情况&lt;/h2&gt;&#xA;&lt;p&gt;前两天因公司在恶心裸辞了，也知道目前行情不好，其他人也在劝，但还是裸了。现在在纠结是继续在成都找。还是去北京或其他城市看看机会。&lt;/p&gt;&#xA;&lt;h2&gt;个人情况&lt;/h2&gt;&#xA;&lt;p&gt;python 、golang 后端开发，5 年经验，成都在职的时候在 boss 上找了一些，并不理想，反馈很少，不知道其他地方行情怎么样&lt;/p&gt;&#xA;&lt;h2&gt;纠结点&lt;/h2&gt;&#xA;&lt;p&gt;之前来成都也是因为软件行业发展好、消费低、安逸等，但现在来看消费并不低了，安逸也不是针对打工人的，行业发展今年来说也确实不咋地。大家怎么看&lt;/p&gt;&#xA;</description>
       <author>haose</author>
       <pubDate>28 Apr 2023 03:45:34 +0000</pubDate>
     </item>
