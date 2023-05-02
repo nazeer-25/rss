@@ -4,6 +4,26 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教一个功能设计的问题，关于英语阅读的。sql 要如何设计才能方便实现，单句的翻译并可以修改呢？ - 问与答</title>
+      <link>https://www.v2ex.com/t/936841</link>
+      <description>&lt;p&gt;现在的需求是这样的。想做一个英文文章阅读的网站，文章当中的每一句话都可以点击句末的上标翻译，然后句子的下面就显示中文。当然还可以点击句末的修改按钮修改这句话。&lt;/p&gt;&#xA;&lt;p&gt;现在遇到一个问题，就是文章可以由段落或列表组成。 一个段落(p)中可能会有多个句子(span)，我现在想的是将文章的所有句子都存放在表中，根据不同的类型来判断这个句子在渲染成 html 时，应该使用哪些标签，&lt;/p&gt;&#xA;&lt;p&gt;例如句子的类型可以是&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;pb-span, 在渲染时可以是这样 &lt;code&gt;&amp;lt;p&amp;gt;&amp;lt;span&amp;gt;内容&amp;lt;/span&amp;gt;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;pe-span, 渲染时可以则是 &lt;code&gt;&amp;lt;span&amp;gt;内容&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;ulb-lib-span, 渲染时则是 &lt;code&gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;span&amp;gt;内容&amp;lt;/span&amp;gt;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;ule-lie-span, 渲染时则为 &lt;code&gt;&amp;lt;span&amp;gt;内容&amp;lt;/span&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;等等&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;b 就是 begin ，e 就是 end&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;现在数据库中的 sql 是这样的&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&#xA;create table en_article_sentence&#xA;(&#xA;    id         bigint unsigned auto_increment&#xA;        primary key,&#xA;    article_id bigint                             not null,&#xA;    type       varchar(64)                        not null,&#xA;    en         text                               null,&#xA;    zh         text                               null,&#xA;    audio      varchar(64)                        null,&#xA;    created_at datetime default CURRENT_TIMESTAMP null,&#xA;    updated_at datetime default CURRENT_TIMESTAMP null&#xA;);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;前台使用的是 react, react 语法使用的是 JSX, JSX 在使用 html 标签时，必须成对出现，所以在渲染时就不好处理了。&lt;/p&gt;&#xA;&lt;p&gt;如果我使用 &lt;code&gt;&amp;lt;div dangerouslySetInnerHTML={{__html: sentence}}&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt; 这种方式来渲染 html ， 那么就不能调用函数组件中的方法，进行修改。 如果直接根据&lt;code&gt;type&lt;/code&gt; 类型来判断，html 标签又必须成对出现。&lt;/p&gt;&#xA;&lt;p&gt;这篇帖子描述了 现在的困境 &lt;a href=&#34;https://www.v2ex.com/t/936765&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/936765&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;有 v 友说这样设计不太好，所以想要请教一下，要如何设计才能比较好的实现我上述的需求呢？&lt;/p&gt;&#xA;</description>
+      <author>morri</author>
+      <pubDate>02 May 2023 04:14:27 +0000</pubDate>
+    </item>
+    <item>
+      <title>巴区求车，有发车的司机拉拉我 - Spotify</title>
+      <link>https://www.v2ex.com/t/936840</link>
+      <author>UnknoownUser</author>
+      <pubDate>02 May 2023 04:13:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>哪里找到能稳定开发 TikTok 的机场 - 问与答</title>
+      <link>https://www.v2ex.com/t/936839</link>
+      <description>&lt;p&gt;因为工作需要集成 TikTok API ，有些功能必须要真机安装 TikTok 才能测试。&lt;/p&gt;&#xA;&lt;p&gt;之前使用魅影走旁路由是可以工作的，突然今年就不行了。试了 Nexitally 和 Expressvpn 都不行，只能登陆，但是之后一直显示授权过期。。&lt;/p&gt;&#xA;&lt;p&gt;难道只能找国外的朋友专门给我开个 VPN ？&lt;/p&gt;&#xA;</description>
+      <author>qiaobeier</author>
+      <pubDate>02 May 2023 04:06:46 +0000</pubDate>
+    </item>
+    <item>
       <title>为什么把 flask 应用放到 docker 中就不会 689 非法阻断了？ - 问与答</title>
       <link>https://www.v2ex.com/t/936838</link>
       <description>&lt;p&gt;（本人非程序员，菜鸟一个）&#xA;5.1 假期没事折腾 flask 玩，我先将一个域名（&lt;a href=&#34;http://腾讯云买的.asia&#34; rel=&#34;nofollow&#34;&gt;腾讯云买的.asia&lt;/a&gt; 玉米）解析到我的服务器上（华为云买的，在广州），如果我直接执行 flask run ，去访问域名直接 689 非法阻断，但是如果放到 docker 中，就可以恢复正常访问，昨天到现在一直可以访问。这是为什么啊？试过换浏览器，隐私模式去访问也都还可以访问。&lt;/p&gt;&#xA;</description>
