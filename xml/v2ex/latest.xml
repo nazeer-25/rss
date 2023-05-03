@@ -4,6 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>为什么很多人看重宽带的上行速度？ - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/936960</link>
+      <description>&lt;p&gt;好像&lt;a href=&#34;https://springwood.me/japan-family-network/&#34; rel=&#34;nofollow&#34;&gt;国外的家庭网络宽带&lt;/a&gt;普遍上行速度比较高，不会出现上下行不对等的情况。&lt;/p&gt;&#xA;&lt;p&gt;不过上行速度快有什么优点？请指点一下。我目前没感觉出优点来，或者说还没有发现优点……&lt;/p&gt;&#xA;</description>
+      <author>springwood</author>
+      <pubDate>03 May 2023 01:53:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>win7 安装火绒了还有必要安装 360WIN7 盾甲吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/936959</link>
+      <description>&lt;a target=&#34;_blank&#34; href=&#34;https://weishi.360.cn/win7shield.html&#34; rel=&#34;nofollow noopener&#34;&gt;https://weishi.360.cn/win7shield.html&lt;/a&gt;&lt;br /&gt;就是这个玩意</description>
+      <author>520discuz</author>
+      <pubDate>03 May 2023 01:50:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有 vert.x 或者有关注 Java 虚拟线程的群 - Java</title>
+      <link>https://www.v2ex.com/t/936958</link>
+      <description>&lt;h2&gt;一、背景&lt;/h2&gt;&#xA;&lt;p&gt;最近使用 vert.x 在开发一个 java 程序，只所以用 vert.x 就是因为它比较适合开发这类的程序。但是异步编程开发起来实在不好维护。。实现也太麻烦了，实在是太复杂了。下单完还要判断是否成功，还有循环下单等，很多时候异步实现起来非常的不好实现和阅读。&lt;/p&gt;&#xA;&lt;h2&gt;二、引入虚拟线程&lt;/h2&gt;&#xA;&lt;p&gt;目前引入的虚拟线程遇到非常大的麻烦。一般一个 verticle 绑定一个 eventloop 线程，我把虚拟线程绑定 vert.x eventloop 的线程中，，这样每个 verticle 内使用的所有虚拟线程也是它们自己平台 eventloop 线程，也就是在 verticle 使用的所有虚拟线程和自己平台线程 都是同一个线程，所以理论也是线程安全的。目前遇到的是虚拟线程和它自己的平台线程在执行 log 日志输出的时候，就会遇到死锁。也就是虚拟线程和它自己的平台线程发生了竞争 &lt;a href=&#34;http://log.info&#34; rel=&#34;nofollow&#34;&gt;log.info&lt;/a&gt; 的输出。&lt;/p&gt;&#xA;&lt;h3&gt;下面是异常日志：&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;Thread Thread[#63,vert.x-eventloop-thread-1,5,main] has been blocked for 10586 ms, time limit is 2000 ms&#xA;io.vertx.core.VertxException: Thread blocked&#xA;        at java.base/jdk.internal.misc.Unsafe.park(Native Method)&#xA;        at java.base/java.util.concurrent.locks.LockSupport.park(LockSupport.java:221)&#xA;        at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:754)&#xA;        at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:990)&#xA;        at java.base/java.util.concurrent.locks.ReentrantLock$Sync.lock(ReentrantLock.java:153)&#xA;        at java.base/java.util.concurrent.locks.ReentrantLock.lock(ReentrantLock.java:322)&#xA;        at ch.qos.logback.core.OutputStreamAppender.writeBytes(OutputStreamAppender.java:200)&#xA;        at ch.qos.logback.core.OutputStreamAppender.writeOut(OutputStreamAppender.java:193)&#xA;        at ch.qos.logback.core.OutputStreamAppender.subAppend(OutputStreamAppender.java:228)&#xA;        at ch.qos.logback.core.OutputStreamAppender.append(OutputStreamAppender.java:102)&#xA;        at ch.qos.logback.core.UnsynchronizedAppenderBase.doAppend(UnsynchronizedAppenderBase.java:85)&#xA;        at ch.qos.logback.core.spi.AppenderAttachableImpl.appendLoopOnAppenders(AppenderAttachableImpl.java:51)&#xA;        at ch.qos.logback.classic.Logger.appendLoopOnAppenders(Logger.java:272)&#xA;        at ch.qos.logback.classic.Logger.callAppenders(Logger.java:259)&#xA;        at ch.qos.logback.classic.Logger.buildLoggingEventAndAppend(Logger.java:426)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;使用 jstack -l pid 检查确实一直 block 中.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;LockSupport.class&#xA;&#xA;public static void park(Object blocker) {&#xA;        Thread t = Thread.currentThread();&#xA;        setBlocker(t, blocker);&#xA;        try {&#xA;            if (t.isVirtual()) {&#xA;                VirtualThreads.park();&#xA;            } else {&#xA;                U.park(false, 0L);&#xA;            }&#xA;        } finally {&#xA;            setBlocker(t, null);&#xA;        }&#xA;    }&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;由于 verticle 可能是很多个，可能会绑定到同一个 eventloop 线程，所以很难从代码上比较难规避不使用 eventloop 平台线程 。&lt;/p&gt;&#xA;&lt;p&gt;一般使用 ReentrantLock.lock 产生死锁的情况是什么原因呢？个人感觉跟 vert.x 关系不大，应该跟虚拟线程的有关系。&lt;/p&gt;&#xA;&lt;p&gt;目前不确定是否 ReentrantLock.lock 的问题，还是 logback 日志框架的问题。尝试直接用 ReentrantLock.lock 进行测试，额-也没有复现。。。但是用 &lt;a href=&#34;http://log.info&#34; rel=&#34;nofollow&#34;&gt;log.info&lt;/a&gt; 打印日志必现。&lt;/p&gt;&#xA;</description>
+      <author>byte10</author>
+      <pubDate>03 May 2023 01:45:57 +0000</pubDate>
+    </item>
+    <item>
+      <title>写代码，跑 AI，有笔记本推荐么？ - 问与答</title>
+      <link>https://www.v2ex.com/t/936957</link>
+      <description>&lt;p&gt;如题&lt;/p&gt;&#xA;&lt;p&gt;用途，写代码(C++ 和 前端)，跑 AI ，不玩游戏。&lt;/p&gt;&#xA;&lt;p&gt;屏幕要求不高，有专门外接 34 寸屏幕。&#xA;续航要求也不高，开会需要移动一下。&lt;/p&gt;&#xA;&lt;p&gt;预算 2w 左右，不超过 2.2 ，目前看下来，好像：&lt;/p&gt;&#xA;&lt;p&gt;华硕魔霸 7p 超能版[&lt;a href=&#34;https://item.m.jd.com/product/100054393395.html&#34; rel=&#34;nofollow&#34;&gt;https://item.m.jd.com/product/100054393395.html&lt;/a&gt;]&#xA;本来最想买这款，但这么高的配置，才 16G 内存，纯恶心人，故意的吧？英特尔的价格要贵大几千！ 2.8w 左右，肯定超预算了。加上最近 amd 烧 cpu 的事儿沸沸扬扬，也不知道影响不影响这款笔记本……&lt;/p&gt;&#xA;&lt;p&gt;联想拯救者 Y9000P2023 至尊&#xA;[&lt;a href=&#34;https://item.m.jd.com/product/100046992876.html&#34; rel=&#34;nofollow&#34;&gt;https://item.m.jd.com/product/100046992876.html&lt;/a&gt;]&#xA;无货就不说了。而且，联想的低温焊锡，不知道这款上有没有，过保就坏也是恶心人。最近，B 站也看到，联想笔记本好像插电使用时，电池还掉电？不知道具体咋回事儿……&lt;/p&gt;&#xA;&lt;p&gt;惠普的暗影精灵 9P 高能版&#xA;[&lt;a href=&#34;https://item.m.jd.com/product/10072298795661.html&#34; rel=&#34;nofollow&#34;&gt;https://item.m.jd.com/product/10072298795661.html&lt;/a&gt;]&#xA;难道只能买这款了？&lt;/p&gt;&#xA;&lt;p&gt;还有其他牌子型号可以选么？&lt;/p&gt;&#xA;&lt;p&gt;貌似这些笔记本，都没有内存容量选择项目。联想和惠普的也只有 32G 的容量。我有一台老机器，内存只有 16G ，一跑 jest (unit test 大约 1 万多个），直接就 out of memory...... &lt;/p&gt;&#xA;&lt;p&gt;另，Intel 13900HX vs. AMD 7945HX 哪个更合适一些？ &lt;/p&gt;&#xA;&lt;p&gt;谢谢！&lt;/p&gt;&#xA;</description>
+      <author>yazoox</author>
+      <pubDate>03 May 2023 01:44:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>五一和女朋友去拍婚纱照了，可是对自己的发型不满意，怎么 P 一个发型阿 - 问与答</title>
+      <link>https://www.v2ex.com/t/936956</link>
+      <description>问了拍婚纱的人，她们说她们做不了 P 头发，淘宝也问了好几家，无法换一个发型，都 2023 年了，连 P 头发也这么难做吗，V 友们有啥办法吗</description>
+      <author>lidage</author>
+      <pubDate>03 May 2023 01:37:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有哪种编码格式，高效、兼容性好、支持 go 自定义序列化和反序列化？ - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/936955</link>
+      <description>目前服务的 rpc ，都是 json rpc.&lt;br /&gt;优点自然是兼容性好、一些开源结构（比如 shopspring/decimal ）都自带 json 支持。&lt;br /&gt;如果真的遇到奇葩的，还可以自定义序列化和反序列化。&lt;br /&gt; &lt;br /&gt;但缺点：低效。&lt;br /&gt;&lt;br /&gt;找替换的话，首先想到的是 protobuf 。高效是高效，无奈使用不便，兼容性是个大问题。比如时间，就不能直接 time.Time 。&lt;br /&gt;&lt;br /&gt;看大家有没有好的替代推荐。</description>
+      <author>craftx</author>
+      <pubDate>03 May 2023 01:15:24 +0000</pubDate>
+    </item>
+    <item>
       <title>M1max 升级 13.3.1 后连接外接设备触摸板失灵 - Apple</title>
       <link>https://www.v2ex.com/t/936953</link>
       <description>&lt;p&gt;如题&#xA;昨天 m1max16 寸更新了 13.3.1 后连接任意外接设备（ usb 或者蓝牙）后触摸板就失灵了。&#xA;失灵指触摸板像钢板，无法移动按按压。&#xA;不知道大伙有没有遇到这种情况&lt;/p&gt;&#xA;</description>
