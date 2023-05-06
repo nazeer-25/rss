@@ -32,6 +32,16 @@
       <link>https://studygolang.com/articles/36134#reply0</link>
     </item>
     <item>
+      <title>反射怎么通过地址修改结构体中的值</title>
+      <link>https://studygolang.com/topics/16108#reply6</link>
+      <description>&lt;pre&gt;&lt;code&gt;type student struct {&#xA;&#x9;&#x9;id           int&#xA;&#x9;&#x9;name     string&#xA;&#x9;&#x9;age     string&#xA;}&#xA;&#xA;func Inform(){&#xA;&#x9;var ss student&#xA;&#x9;ss.id = 1&#xA;&#x9;ss.name = &amp;quot;小小&amp;quot;&#xA;&#x9;ss.age = 18&#xA;&#x9;StudentData(&amp;amp;ss)  // 这里面传的是地址&#xA; &#x9;&#xA;&#x9;fmt.Println(&amp;quot;ss:&amp;quot;,ss)&#xA;}&#xA;&#xA;func StudentData(params interface{}){&#xA;&#x9;// 1：怎么通过反射获取外部传进来的结构体中的成员地址&#xA;&#x9;// 2：通过反射修改的结构体中成员的值&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;查了一晚上，如果不是结构体只是普通的变量如int之类的，那传入地址给interface后，通过反射修改值可以实现了，但是换成结构体传入地址后怎么试都不行，蒙了……&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>d.PointerTest()可以执行,,而 Data{x:6}.PointerTest()报错,这是什么情况?</title>
+      <link>https://studygolang.com/articles/36105#reply3</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main&#xA;&#xA;import &amp;quot;fmt&amp;quot;&#xA;&#xA;type Data struct {&#xA;&#x9;x int&#xA;}&#xA;&#xA;func (self *Data) PointerTest() { &#xA;&#x9;fmt.Printf(&amp;quot;Pointer: %p\n&amp;quot;, self)&#xA;}&#xA;func main() {&#xA;&#x9;d := Data{x: 6}&#xA;&#x9;d.PointerTest()//这句可以执行&#xA;&#xA;&#x9;//Data{x:6}.PointerTest()  //这句报错&#xA;&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;d.PointerTest()可以执行,,而 Data{x:6}.PointerTest()报错,这是什么情况&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>go有可以压缩bmp文件的库吗？</title>
       <link>https://studygolang.com/topics/16321#reply3</link>
       <description>&lt;p&gt;RT，原始生成图片太大，要压缩下，找了一圈都是png和jpg的&lt;/p&gt;&#xA;</description>
