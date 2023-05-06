@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "要不要去读个非全 AI 硕士？ - 问与答",
+      "Link": "https://www.v2ex.com/t/937922",
+      "Description": "\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e从去年开始一直有想个非全硕士的想法\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e加上最近 AI 大模型各种取代常人的生活，感觉未来 3 年如何不懂 AI 的人就相当于现在不懂编程\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e想问问本科 211/985 的 V 友们，你们是啥打算，有没有想过读个非全硕士？\u003c/p\u003e\n",
+      "Author": "WhoCanBeRich",
+      "PubDate": "2023-05-06T10:13:07Z"
+    },
+    {
+      "Title": "闲来无事，做个小脚本，调用 OpenSSL 来测试各个加密算法的速度 - 程序员",
+      "Link": "https://www.v2ex.com/t/937921",
+      "Description": "\u003cp\u003e至于脚本有什么用途....大家看着办罢\u003cbr/\u003e\n用于什么什么代理测速我就管不着了\u003c/p\u003e\n\u003cp\u003e提前安装下 OpenSSL ，保存为 shell 脚本就可以直接用了\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e#!/bin/bash\n\necho \"----------------------------------------------------\"\necho \"本程序会依次执行以下算法加密性能的测试：\"\necho \"  AES-(128/256)-(CFB/CTR/GCM)\"\necho \"  Chacha20(-poly1305)\"\necho \"并横向对比输出结果\"\necho \"至于用途....看着办吧！\"\necho \"----------------------------------------------------\"\n\nopenssl speed -evp aes-128-cfb \u0026gt; 128cfb.txt\nopenssl speed -evp aes-256-cfb \u0026gt; 256cfb.txt\nopenssl speed -evp aes-128-ctr \u0026gt; 128ctr.txt\nopenssl speed -evp aes-256-ctr \u0026gt; 256ctr.txt\nopenssl speed -evp aes-128-gcm \u0026gt; 128gcm.txt\nopenssl speed -evp aes-256-gcm \u0026gt; 256gcm.txt\nopenssl speed -evp chacha20 \u0026gt; c20.txt\nopenssl speed -evp chacha20-poly1305 \u0026gt; c20p1305.txt\n\necho \"----------------------------------------------------\"\necho \"以下是测试结果，越高越好：\"\ncat 128cfb.txt | tail - -n 2\ncat 256cfb.txt | tail - -n 1\ncat 128ctr.txt | tail - -n 1\ncat 256ctr.txt | tail - -n 1\ncat 128gcm.txt | tail - -n 1\ncat 256gcm.txt | tail - -n 1\ncat c20.txt | tail - -n 1\ncat c20p1305.txt | tail - -n 1\necho \"-----------------------------------------------------\"\n\nrm 128cfb.txt \nrm 256cfb.txt\nrm 128ctr.txt\nrm 256ctr.txt\nrm 128gcm.txt\nrm 256gcm.txt\nrm c20.txt\nrm c20p1305.txt\n\necho \"测试结束\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e顺便附上我的 J1900 小工控机（做软路由用） 的测试结果\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"iamxVb.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.328888.xyz/2023/05/06/iamxVb.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e没有硬件加速，Chacha20 基本把 AES 摁着打\u003c/p\u003e\n",
+      "Author": "MFWT",
+      "PubDate": "2023-05-06T10:10:04Z"
+    },
+    {
       "Title": "如何分辨 chatgpt 3.5 和 4 - OpenAI",
       "Link": "https://www.v2ex.com/t/937920",
       "Description": "\u003cp\u003e前段时间 openai 给我发了一封邮件说我可以用 gpt4 的 api 了。\u003c/p\u003e\n\u003cp\u003e我用这个 api 自建了一个网站（ 用的这个： \u003ca href=\"https://github.com/Yidadaa/ChatGPT-Next-Web\" rel=\"nofollow\"\u003ehttps://github.com/Yidadaa/ChatGPT-Next-Web\u003c/a\u003e ），模型选择 gpt-4 。\u003c/p\u003e\n\u003cp\u003e我问它，你是基于 GPT 几的，它回答 3 ，我没搞懂是我的打开方式不对还是它不知道它是 gpt4 ，求大佬解惑。\u003c/p\u003e\n",
