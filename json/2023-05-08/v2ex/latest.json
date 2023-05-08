@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "独立开发周记 #12：尔虞我诈的互联网 - 程序员",
+      "Link": "https://www.v2ex.com/t/938197",
+      "Description": "\u003ch2\u003e2023 ，0501-0507\u003c/h2\u003e\n\u003cp\u003e这周因为身体原因卧床办公了四天，在此奉劝各位不要久坐。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.way2solo.com/photo/vulgur/be1314de-2dd1-4dfe-87dc-6002c98bfec1.jpeg?imageView2/2/w/1920/q/100\"/\u003e\u003c/p\u003e\n\u003ch2\u003e善用互联网工具的父亲\u003c/h2\u003e\n\u003cp\u003e这周孩子的学校要求每人都要参加一个画画比赛，在线提交一个作品，主题是爱家乡。提交的过程是先关注一个公众号，然后跳转到一个小程序，我一看这套路明显就不是什么正经比赛，于是就想着敷衍了事。一开始我还想在网上随便搜一张图片交上去，但是想想这样对原作者也是不太尊重，于是就用 Stable Diffusion 生成了十来个，挑了一张交了上去。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.way2solo.com/photo/vulgur/6c35f0d9-4b1c-449d-a080-88c5cd3bf4ed.jpeg?imageView2/2/w/1920/q/100\"/\u003e\u003c/p\u003e\n\u003cp\u003e众所周知，很多商家为了宣传自己，都让用户在朋友圈集赞，然后给用户一些优惠或者礼品。我和老婆都特别讨厌这种手段，之前所有这样的活动都是坚决不参加，但是娃的兴趣班也搞了这么个集赞活动，抓住了小孩子的心理，让父母集赞 28 个就可以送给孩子一个小礼物。为了让孩子得到礼物，我找到了一个「朋友圈转发截图生成工具」，分分钟就完成了这个任务。无独有偶，孩子前些天拍摄写真的影楼也让集赞，可以多添加一些照片入册，于是还是使用这个工具，大成功！\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.way2solo.com/photo/vulgur/c662fdf9-b37b-42c5-a0a9-fc2a44edb9e5.jpeg?imageView2/2/w/1920/q/100\"/\u003e\u003c/p\u003e\n\u003ch2\u003e极简时钟  (\u003ca href=\"https://apps.apple.com/cn/app/id1265404088\" rel=\"nofollow\"\u003eApp Store\u003c/a\u003e，\u003ca href=\"https://play.google.com/store/apps/details?id=com.mad.zenflipclock\" rel=\"nofollow\"\u003eGoogle Play\u003c/a\u003e)\u003c/h2\u003e\n\u003cp\u003e这周只花了两天在 ZFC iOS 上，只提交了一个 beta 版本，全是在适配和测试在 iPad 上新版本的 UI 和功能。\u003c/p\u003e\n\u003cp\u003e新版本中用到的背景图都是用 Midjourney 生成的，到目前为止已经全面更新了两版，下面这个就是被替换的其中一张，有人看出来这是什么名场面了吗？\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.way2solo.com/photo/vulgur/e15310f8-1233-4d70-9d05-a70233414e66.jpeg?imageView2/2/w/1920/q/100\"/\u003e\u003c/p\u003e\n\u003ch3\u003e微信支付服务端\u003c/h3\u003e\n\u003cp\u003e这周前几天的焦虑来自于极简时钟国内安卓版的服务端。\u003c/p\u003e\n\u003cp\u003e这个服务端写于两年前，当时为了节约成本，并没有购买云数据库，而是采用了 Parse Community 的开源项目作为 app 的数据库，只是用来存放极简时钟的支付记录。后来的极简日记就直接使用了云数据库，我就一直想着把 parse 里的数据都迁移到云数据库中，顺便统一两个 app 的 API 。\u003c/p\u003e\n\u003cp\u003e旧版的支付 API 是构建于微信支付 v2 版本的，使用的开源库也已经多年不更新了，虽然一直以来没出现任何问题，但是想着未来会拓展 API ，还是决定想在 AI 的帮助下重写极简时钟的服务端。\u003c/p\u003e\n\u003cp\u003e我一直很恐惧写后端，特别是涉及支付和数据库，就怕出事。所以后端的开发我是能拖就拖，得过且过，这也是这么久都没将迁移和升级工作付诸行动的原因。\u003c/p\u003e\n\u003cp\u003e我先是想在 ZFC 的后端项目里新建一个 v2 版本的 API ，但是写了一晚上发现代码量还不少，特别是数据库中关于读写的代码，写到后来恐惧的心理直接就将我击溃了。\u003c/p\u003e\n\u003cp\u003e后来我整理了一下思绪，突然意识到最稳妥的办法就是复用极简日记的 API ，于是在极简日记的后端项目里为 ZFC 新建了一套 API 。只花了不到半天就把新 API 写好了，还在 AI 的帮助下，整理了一下原来的代码和配置信息。最后在本地测试了一下，所有的新 API 都跑通了，这时所有的焦虑才大大缓解。\u003c/p\u003e\n\u003ch2\u003e极简日记 iOS (\u003ca href=\"https://apps.apple.com/cn/app/id1568936702\" rel=\"nofollow\"\u003eApp Store\u003c/a\u003e)\u003c/h2\u003e\n\u003cp\u003e这周提交了 1.7.5 ，修复三个 bug ，更新一波关键词。\u003c/p\u003e\n\u003cp\u003e更新后收到两个用户反馈了同一个 bug：某个月的日历中不显示日记图片，看来下周的工作内容就是捉这个虫了。\u003c/p\u003e\n\u003cp\u003eBacklog 里一直有一个想做的重磅功能，至少我还没发现其他日记 app 有做的，准备下周开始动手。\u003c/p\u003e\n\u003ch2\u003e买买买\u003c/h2\u003e\n\u003ch3\u003e咖啡\u003c/h3\u003e\n\u003cp\u003e这周在抖音上买了好多咖啡，各种各样的咖啡，家里的咖啡种类空前丰富：咖啡豆、挂耳、速溶、胶囊、浓缩液。（豆子是去年 11 月疫情期间囤的，还没喝完……）\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.way2solo.com/photo/vulgur/4f3b5e81-a320-4204-a2a5-87dc81588f24.jpeg?imageView2/2/w/1920/q/100\"/\u003e\u003c/p\u003e\n\u003ch2\u003eiPad mini 6\u003c/h2\u003e\n\u003cp\u003e我手里的 iPad Air 2 最近基本都在吃灰，之前除了给孩子下围棋用，也就是开发 app 时为了适配 iPad 才拿出来。现在孩子也不学围棋了，系统也没法升到 iPadOS 16 ，在我这里也没什么用处了。正好我妈的 iPad 3 终于坏了，这个 iPad Air 2 就给她用了。\u003c/p\u003e\n\u003cp\u003e于是就开始物色新的 iPad 测试机，最后选择了 iPad mini 6 ，便携而且性能足够用。在闲鱼上调研了两天，选中了一个信用优秀而且百次好评的卖家，没有犹豫直接下单了，没想到卖家在我付款后又说了一堆有的没的， 说什么其实是替妹妹卖的，现在的价格太便宜，怕妹妹不高兴，让我申请退款，他提高些价格再让我拍下，然后再把多出来的部分退给我……我去你的吧，退款后直接拉黑。\u003c/p\u003e\n\u003cp\u003e后来又选择了价格更低的一个卖家，选择了验货宝，希望不会被坑。可以预见的连带消费还会有各种配件，外壳、支架、Apple Pencil……\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://mp.weixin.qq.com/s/E3m2XhZ6Beobvn3iQhV78Q\" rel=\"nofollow\"\u003e公众号原文\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e往期周记\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://www.v2ex.com/t/936754#reply19\" rel=\"nofollow\"\u003e独立开发周记 #11：4 月总结、华为下架、换掉自记账\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://www.v2ex.com/t/935137#reply1\" rel=\"nofollow\"\u003e独立开发周记 #10：不明原因的下载量暴涨、调休与我无关、一个人生成就达成\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://www.v2ex.com/t/933104#reply4\" rel=\"nofollow\"\u003e独立开发周记 #9：将 Slack 接入工作流、重构的收益开始显现、AI 翻唱惊喜连连\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://www.v2ex.com/t/931256#reply1\" rel=\"nofollow\"\u003e独立开发周报 #8：开始运动\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://www.v2ex.com/t/929393#reply2\" rel=\"nofollow\"\u003e独立开发周报 #7：3 月总结\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://www.v2ex.com/t/927541#reply6\" rel=\"nofollow\"\u003e独立开发周报 #6：国内安卓不值得\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://www.v2ex.com/t/925552#reply11\" rel=\"nofollow\"\u003e独立开发周记 #5：AI 助力\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://www.v2ex.com/t/923622#reply10\" rel=\"nofollow\"\u003e独立开发周报 #4：第一次尝试 ChatGPT API\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "vulgur",
+      "PubDate": "2023-05-08T03:15:32Z"
+    },
+    {
+      "Title": "怎么样备份硬盘的文件列表？ - 问与答",
+      "Link": "https://www.v2ex.com/t/938196",
+      "Description": "备份数据的时候很多可以从重新网上下载的东西其实没必要存原件，但是想要恢复数据也起码得知道少了什么，所以想要存一份文件列表下来",
+      "Author": "KIRAYOMATO",
+      "PubDate": "2023-05-08T03:13:56Z"
+    },
+    {
+      "Title": "通勤自行车推荐 - 问与答",
+      "Link": "https://www.v2ex.com/t/938195",
+      "Description": "\u003cp\u003e楼主现在单程 40 分钟地铁，比较绕，所以比较远，想买一辆自行车解决通勤问题，顺便锻炼一下身体，预算 1000 左右，各位 v2er 有没有可以推荐的啊？看了一下，捷安特好一点的都要 2000 以上，超预算了，而且有 2000 多不如买电动车。\u003c/p\u003e\n",
+      "Author": "hekouwang123",
+      "PubDate": "2023-05-08T03:13:45Z"
+    },
+    {
+      "Title": "huggingface 挂了？ - 程序员",
+      "Link": "https://www.v2ex.com/t/938194",
+      "Description": "\u003cp\u003e有没有大兄弟推荐一些镜像源，还差几个模型没下\u003c/p\u003e\n",
+      "Author": "triangle111",
+      "PubDate": "2023-05-08T03:12:40Z"
+    },
+    {
+      "Title": "V 站被禁言最久能达到多少秒？ - 问与答",
+      "Link": "https://www.v2ex.com/t/938193",
+      "Description": "一天前，我发布了一个帖子：如何分辨 chatgpt 3.5 和 4\u003cbr /\u003e\u003cbr /\u003e里面位老哥的回复对我的帮助很大，我感谢了他，并回复了：“靠谱！”（我的最后一条回复）\u003cbr /\u003e\u003cbr /\u003e具体可在这里查看： \u003ca target=\"_blank\" href=\"https://www.v2ex.com/t/937920#reply23\" rel=\"nofollow noopener\"\u003ehttps://www.v2ex.com/t/937920#reply23\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e今天我准备帮助一位老哥关于 Ubuntu 下的代理问题，发现 “ 因为触发了 V2EX 防止低质量回复的规则，需要等待 717841 秒之后才能再度使用回复功能。”\u003cbr /\u003e\u003cbr /\u003e我心疑惑，去查看了 “低质量回复的规则”，里面是这样描述的：\u003cbr /\u003e\u003cbr /\u003e\"\"\"\u003cbr /\u003e为了所有人在这里所花费的阅读时间值得，V2EX 会使用自动程序阻挡某一类在简体中文互联网常见的无意义回复及其变种。比如下面这些：\u003cbr /\u003e\u003cbr /\u003e哦\u003cbr /\u003e呵呵\u003cbr /\u003e已阅\u003cbr /\u003e沙发\u003cbr /\u003e顶\u003cbr /\u003e路过\u003cbr /\u003e不明觉厉\u003cbr /\u003e挽尊\u003cbr /\u003e如果在 V2EX 使用了诸如上面那些无意义的方式回复一个主题，就会触发一个至少 3600 秒的锁。在这个锁解开之前，账号将无法继续使用回复功能。\u003cbr /\u003e\u003cbr /\u003e如果在技术类话题中添加和主题完全无关的灌水回复（部分例子如下），并且被管理员发现的话，无关回复会被删除，同时会被管理员手动加上一个 259200 秒的锁。\u003cbr /\u003e\u003cbr /\u003e我也不懂\u003cbr /\u003e帮顶\u003cbr /\u003e你不会用百度吗\u003cbr /\u003e第一次离楼主那么近\u003cbr /\u003e不顶不是 X 国人\u003cbr /\u003e堆砌关键字的网络暴力\u003cbr /\u003e\"\"\"\u003cbr /\u003e\u003cbr /\u003e上周六下班前发的帖子，我六点半下班，估算一下：\u003cbr /\u003e\u003cbr /\u003e周六 18:30 - 24:00：5.5 小时\u003cbr /\u003e周日一天：24 小时\u003cbr /\u003e今天到我发帖这一刻（ 10:47 ）：10.5 小时\u003cbr /\u003e未来：717841 / 60 / 60 = 199.4 小时\u003cbr /\u003e\u003cbr /\u003e一共：(5.5 + 24 + 10.5 + 199) * 60 * 60 = 860400 秒\u003cbr /\u003e860400 / 259200 = 3.319 个管理员\u003cbr /\u003e\u003cbr /\u003e各位 V 站管理员\u003cbr /\u003e我欲问，如果我触发了低质量回复规则，为什么不删除我的回复？（我的回复并没有被删除）\u003cbr /\u003e我想问，我的锁是系统自动触发还是管理员手动加锁？\u003cbr /\u003e请回答，如果是手动加锁，锁可以叠加吗？（我这锁至少需要 3.319 个管理员每个管理员加一次锁，或者一个管理员加 3.319 次锁）\u003cbr /\u003e\u003cbr /\u003e最后：我发的帖子，我回复 ”靠谱！“，告诉其他楼主这层楼的办法可行，有问题吗？",
+      "Author": "kaiger",
+      "PubDate": "2023-05-08T03:10:16Z"
+    },
+    {
+      "Title": "edge 崩溃，错误代码: STATUS_STACK_BUFFER_OVERRUN - Edge",
+      "Link": "https://www.v2ex.com/t/938192",
+      "Description": "\u003cp\u003ewindows 11\nedge version 113.0.1774.35\u003c/p\u003e\n\u003cp\u003eedge 所有的页面都打不开，包括 edge://settings/ ，edge://extensions/\nchrome 浏览器一切正常，应该不是 DNS 的问题。\n尝试在设置里修复 edge ，安装 edge-beta ，问题都未解决。\u003c/p\u003e\n",
+      "Author": "jeanriver",
+      "PubDate": "2023-05-08T03:09:47Z"
+    },
+    {
       "Title": "广州联通创维 CM5100-520，有希望在 2023 加入 ipv6 吗 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/938191",
       "Description": "\u003cp\u003e如题，目前家庭宽带使用的创维 CM5100-520 ，接入的同轴线，ISP 是广州联通。\n目前在路由器管理界面中获取不到 ipv6 地址，猜测是电缆调制解调器给拦住了，应该要设置一下 ipv4\u0026amp;ipv6 双栈(?)。（不过路由器目前还是 DHCP 连接）\n但是不知道创维 CM5100-520 的管理界面 url 和用户名密码。甚至不知道它有没有设置的能力...\u003c/p\u003e\n\u003cp\u003e就想问问有没有巨巨在同样的环境下成功用上 ipv6 了呢...\u003c/p\u003e\n",
