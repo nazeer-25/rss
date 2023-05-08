@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求技术方案： mysql 存有 10 亿条不相同的手机号哈希值，现已知可能存在个别几条相同，如何找出 - 问与答</title>
+      <link>https://www.v2ex.com/t/938445</link>
+      <description>求技术方案：mysql 存有 10 亿条不相同的手机号哈希值，现已知可能存在个别几条相同，如何找出&lt;br /&gt;&lt;br /&gt;group by count 大于 1 ？</description>
+      <author>lzz2394677796</author>
+      <pubDate>08 May 2023 22:16:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>DDNS 的替代方案 --- Cloudflare worker 302 重定向 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/938444</link>
+      <description>&lt;p&gt;一个 DDNS 的替代方案 --- Cloudflare worker 302 重定向。好像部分地区 DDNS + web 服务会被查水表，所以想到了 302 重定向。免费的 Cloudflare Worker 能实现，完美！&lt;/p&gt;&#xA;&lt;p&gt;Worker 代码如下，要在设置里绑定 KV （代码中 KV 名是“test”）。记得把 token 改一下。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;addEventListener(&#39;fetch&#39;, event =&amp;gt; {&#xA;  event.respondWith(handleRequest(event.request))&#xA;})&#xA;&#xA;async function handleRequest(request) {&#xA;  const clientIP = request.headers.get(&#39;CF-Connecting-IP&#39;)&#xA;&#xA;  const url = new URL(request.url)&#xA;  const token = url.searchParams.get(&#39;token&#39;)&#xA;&#xA;  if (token === &#34;123&#34;) {&#xA;    await test.put(&#39;ip&#39;, clientIP)&#xA;    return new Response(`Client IP: ${clientIP} Token: ${token}`)&#xA;  } else {&#xA;    let ip = await test.get(&#39;ip&#39;)&#xA;    return new Response(`${ip}`)&#xA;    //return Response.redirect(`http://${ip}:5000`, 302)&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;设置 crontab 定时任务 或者&lt;/p&gt;&#xA;&lt;p&gt;群晖 NAS 打开“控制面板”--&amp;gt;“任务计划”--&amp;gt; 新增 --&amp;gt; “用户定义的脚本”  每分钟执行。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;curl https://test123.speed.ga/?token=123&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;测试链接：&lt;/p&gt;&#xA;&lt;p&gt;打开 &lt;a href=&#34;https://test123.speed.ga/&#34; rel=&#34;nofollow&#34;&gt;https://test123.speed.ga/&lt;/a&gt; 查看 ip 。&lt;/p&gt;&#xA;&lt;p&gt;现在是查看 ip ，为了方便测试。推荐改为 302 重定向到 ip+端口。&lt;/p&gt;&#xA;&lt;p&gt;用 &lt;a href=&#34;https://test123.speed.ga/?token=123&#34; rel=&#34;nofollow&#34;&gt;https://test123.speed.ga/?token=123&lt;/a&gt; 更新访问者 ip&lt;/p&gt;&#xA;</description>
+      <author>serafin</author>
+      <pubDate>08 May 2023 22:08:34 +0000</pubDate>
+    </item>
+    <item>
       <title>[休闲益智小游戏]《消消乐世界》(Tile Matching World) 消遣时间的好玩伴！ - 分享创造</title>
       <link>https://www.v2ex.com/t/938443</link>
       <description>&lt;p&gt;《消消乐世界》 Android 手机游戏 - 好玩！减压！益智！&lt;/p&gt;&#xA;&lt;p&gt;Google Play 应用市场 安装 - &lt;a href=&#34;https://play.google.com/store/apps/details?id=com.openle.v1game.tilematching&#34; rel=&#34;nofollow&#34;&gt;https://play.google.com/store/apps/details?id=com.openle.v1game.tilematching&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;若使用中遇到问题，请留言给我！ &lt;a href=&#34;https://congci.com/&#34; rel=&#34;nofollow&#34;&gt;https://congci.com/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
