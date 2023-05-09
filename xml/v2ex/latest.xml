@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>NixOS 与 Nix Flakes 新手入门 - Linux</title>
+      <link>https://www.v2ex.com/t/938569</link>
+      <description>&lt;p&gt;好几年前就听说过 Nix ，用 DSL 来管理系统依赖，还能随时回滚到任一历史状态。 虽然听着很牛，但是不仅要多学一门语言，装个包还得写代码，当时觉得太麻烦就没研究。 但是最近搞系统迁移遇到两件麻烦事，使我决定尝试下 Nix.&lt;/p&gt;&#xA;&lt;p&gt;第一件事是在新组装的 PC 主机上安装 EndeavourOS （ Arch Linux 的一个衍生发行版），因为旧系统也是 EndeavourOS 系统，安装完为了省事，我就直接把旧电脑的 Home 目录 rsync 同步到了新 PC 上。 这一同步就出了问题，所有功能都工作正常，但是视频播放老是卡住，firefox/chrome/mpv 都会卡住，网上找各种资料都没解决，还是我灵光一闪想到是不是 Home 目录同步的锅，清空了 Home 目录，问题立马就解决了…后面又花好长时间从旧电脑一点点恢复 Home 目录下的东西。&lt;/p&gt;&#xA;&lt;p&gt;第二件事是，想尝鲜 wayland ，把桌面从 i3wm 换成了 sway ，但是因为用起来区别不明显，再加上诸多不便（ hidpi 、sway 配置调优要花时间精力，另外我用的是 sway 官方不支持的 nvidia 显卡），就还是回退到了 i3wm 。结果回退后，每次系统刚启动时，有一段时间 firefox/thunar 等 GUI 程序会一直卡着，要大概 1 分钟后才能正常启动…&lt;/p&gt;&#xA;&lt;p&gt;发生第二件事时我就懒得折腾了，想到归根结底还是系统没有版本控制跟回滚机制，导致系统出了问题不能还原，装新系统时各种软件包也全靠自己手工从旧机器导出软件包清单，再在新机器安装恢复。就打算干脆换成 NixOS 试试。&lt;/p&gt;&#xA;&lt;p&gt;然后就研究了半个月 Nix 与 Flakes ，将 PC 从之前用的 EndeavourOS 切换到了 NixOS 。&lt;/p&gt;&#xA;&lt;p&gt;我折腾的第一步是在我 homelab 上开了台 NixOS 虚拟机，在这台虚拟机里把我物理机的 EndeavourOS i3 配置迁移到 NixOS + Flakes ，还原出了整个桌面环境。&#xA;在虚拟机里搞定后问题就不大了，直接备份好我办公电脑的 Home 目录、软件清单，然后将系统重装为 NixOS ，再 git clone 我调试好的 NixOS 配置，改一改硬盘挂载相关的参数，额外补充下 Nvidia 显卡相关的 NixOS 配置，最后一行命令部署配置。几行命令就在我全新的 NixOS 系统上还原出了整个 i3 桌面环境跟我的常用软件，那一刻真的很有成就感！&lt;/p&gt;&#xA;&lt;p&gt;NixOS 的回滚能力给了我非常大的底气，使我前几天我又进一步迁移到了 hyprland 桌面，确实比 i3 香多了，它的动画效果我吹爆！（在以前 EndeavourOS 上我肯定是不太敢做这样的切换的，原因前面已经解释过了——万一把系统搞出问题，会非常麻烦。）&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://thiscute.world/posts/nixos-and-flake-basics/screenshot_2023-05-07-21-21.webp&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;如果看完上面这些，你对 NixOS 也产生了一些兴趣，如下是我最近折腾时记录的 NixOS 新手笔记~&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://thiscute.world/posts/nixos-and-flake-basics/&#34; rel=&#34;nofollow&#34;&gt;https://thiscute.world/posts/nixos-and-flake-basics/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>ryan4yin</author>
+      <pubDate>09 May 2023 04:23:57 +0000</pubDate>
+    </item>
+    <item>
+      <title>[微信小程序前端速成] 之前写了个小程序样式库，最近录了一些教程上传到了 Bilibili,适合那些刚入门的 - 微信</title>
+      <link>https://www.v2ex.com/t/938568</link>
+      <description>这个教程适合微信小程序刚入门的，就是知道大概的语法。通过看此教程，能够快速达到复刻页面的效果。&lt;br /&gt;如果有需要的大家可以进来看看，俺是来想推广一下&lt;br /&gt;github:&lt;a target=&#34;_blank&#34; href=&#34;https://github.com/vaaagle/VaaWxss&#34; rel=&#34;nofollow noopener&#34;&gt;https://github.com/vaaagle/VaaWxss&lt;/a&gt;&lt;br /&gt;bilibili:&lt;a target=&#34;_blank&#34; href=&#34;https://www.bilibili.com/video/BV1fz4y1h75F/&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.bilibili.com/video/BV1fz4y1h75F/&lt;/a&gt;</description>
+      <author>vaaagle</author>
+      <pubDate>09 May 2023 04:20:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>深圳电信打电话让+30 升级千兆，这合理吗 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/938566</link>
+      <description>&lt;p&gt;现在在用城中村融合套餐 99/月的资费，带宽是 300M/30M ，电话那边说加 30 月租升级 1000M/50M ，我感觉有点坑就拒绝了，而且看别人分享有的+10 块就能升，为啥到我这变 30 了。。。&lt;/p&gt;&#xA;</description>
+      <author>storyxc</author>
+      <pubDate>09 May 2023 04:18:58 +0000</pubDate>
+    </item>
+    <item>
+      <title>2023 年独立开发者这条路还能走下去吗 - 程序员</title>
+      <link>https://www.v2ex.com/t/938565</link>
+      <description>&lt;p&gt;一直有做独立开发者的想法，工作了很多年，现在 30 多岁了，去年决心从上海一家外企辞职了，辞职后就全职做自己的产品，这款产品其实酝酿了很久，在辞职前一年做这款产品的 idea 就产生了，后面反复想了很久，也做了一个 demo ，最后还是决定辞职全职来做。到今年五一假期后 iOS 和 Android 都上线了，上线后在小红书和即刻发帖推了一下，从结果来看反响平平，小红书有几十个赞几十个收藏没什么评论，即刻更少，老实说心里感觉还蛮失落的，人家做 up 主可能花一个星期做一条视频就有几十万播放几百评论，我 tm 用了大半年投出去什么水花都没有，我知道视频和应用不同品类没法比，但这个结果还是让我挺迷茫的，不知道还要不要继续做下去，对于这个产品的想法我其实还有很多，但是我 30 多了，不是刚毕业几年的时候可以不计成本一直做。如果不做我又该做什么，职场是不想回了，这年纪回去也没什么竞争力，回老家也不知道能做什么，以前和朋友开玩笑说如果做不下去就去送外卖，现在这还真是个需要认真考虑的选项了。&lt;/p&gt;&#xA;&lt;p&gt;关于产品，名字叫「数据方舟」，目标是做一个通用型数据记录与分析工具，跟市面上很多应用的区别是大部分应用都是针对某个场景的，像记账，打卡，健康记录方面的应用很多，我做的这个通用型就是不针对具体场景，像记账这类比较常见的场景你可以找到对应的 app 来记录，但总有一些长尾的需求是没有被满足的，这是我想到的目标用户，其它所谓通用型的工具也有，我们都知道的是电子表格 Excel ，但是 Excel 在手机上不方便主要针对的还是工作场景，数据方舟可以通过自定义模版，配置图表满足绝大部分这方面的需求。&lt;/p&gt;&#xA;&lt;p&gt;有兴趣的可以下载试用，现在是全免费的，App Store 搜数据方舟，Google play 搜 Data ark 就可以找到，帮我看下是推广的问题，还是压根就没这个需求。&lt;/p&gt;&#xA;</description>
+      <author>taosimple</author>
+      <pubDate>09 May 2023 04:14:06 +0000</pubDate>
+    </item>
+    <item>
       <title>求解 vscode 配置全局 Eslint 的正确方式 - JavaScript</title>
       <link>https://www.v2ex.com/t/938564</link>
       <description>&lt;h4&gt;需求&lt;/h4&gt;&#xA;&lt;p&gt;想配置一个全局的 &lt;code&gt;Eslint&lt;/code&gt; 规则，如 &lt;code&gt;E:\eslint.js&lt;/code&gt;，这样在一些平时的脚本中也能让 &lt;code&gt;vscode&lt;/code&gt; 使用，这些脚本可能也就 30 行的一个 &lt;code&gt;index.js&lt;/code&gt;，不想每次去额外生成 &lt;code&gt;.eslintrc.js&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;并且项目中如有 &lt;code&gt;.eslintrc.js&lt;/code&gt;，全局的配置将被覆盖&lt;/p&gt;&#xA;&lt;h4&gt;找到的一些资料&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;官方 &lt;a href=&#34;https://zh-hans.eslint.org/docs/latest/integrate/nodejs-api#-new-eslintoptions&#34; rel=&#34;nofollow&#34;&gt;文档&lt;/a&gt;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;overrideConfigFile&lt;/code&gt; 是全局覆盖本地 需求正相反&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;baseConfig&lt;/code&gt; 是 merger 的关系，而且不支持文件&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Github issue 提到好像并不愿意支持 &lt;a href=&#34;https://github.com/microsoft/vscode-eslint/issues/1073&#34; rel=&#34;nofollow&#34;&gt;https://github.com/microsoft/vscode-eslint/issues/1073&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4&gt;求解&lt;/h4&gt;&#xA;&lt;p&gt;难道只能每个项目去生成 &lt;code&gt;.eslintrc.js&lt;/code&gt; 了么…… 这么搞好麻烦，而且我自定义的 Eslint 文件内容还挺多的&lt;/p&gt;&#xA;</description>
