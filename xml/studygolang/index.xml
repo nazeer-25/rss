@@ -109,43 +109,5 @@
       <title>持续测试：DevOps时代质量保证的关键</title>
       <link>https://studygolang.com/articles/36134#reply0</link>
     </item>
-    <item>
-      <title>go websocket推送优化</title>
-      <link>https://studygolang.com/articles/36121#reply4</link>
-      <description>&lt;h2&gt;ws推送优化&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;1、写多读少的情况，使用epoll 避免创建读的协程。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2、分片存储连接，降低锁的粒度，提高推送的并发。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3、写的时候使用缓存，批量定时写入，减少系统调用、协程的调度。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4、直接使用tcp连接升级。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;5、零拷贝。&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;1、epoll&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;1、实现参考，&lt;a href=&#34;https://github.com/eranyanay/1m-go-websockets&#34;&gt;https://github.com/eranyanay/1m-go-websockets&lt;/a&gt;   只适用在写多读少的情况下，并且读之后的业务耗时的操作不要太频繁。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/eranyanay/1m-go-websockets/blob/master/3_optimize_ws_goroutines/server.go&#34;&gt;https://github.com/eranyanay/1m-go-websockets/blob/master/3_optimize_ws_goroutines/server.go&lt;/a&gt; 这里读的时候要考虑到半消息的情况，&lt;a href=&#34;https://studygolang.com/topics/13377&#34;&gt;https://studygolang.com/topics/13377&lt;/a&gt;  当收到websocket数据包不全的情况下，go net官方库当不可读的时候是会阻塞的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我自己写的一个测试 github.com/gobwas/ws 提供了非常灵活的用法我们可以可以直接将一个websocket数据包转为字节。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() { {&#xA;     dialer := gws.DefaultDialer&#xA;     conn, _, _, err := dialer.Dial(context.Background(), &amp;quot;ws://10.18.13.129:8989/ws&amp;quot;)&#xA;     if err != nil {&#xA;        log.Fatalln(&amp;quot;err&amp;quot;, err)&#xA;    }&#xA;&#xA;     message := NewMessage(gws.OpText, []byte(&amp;quot;abcdefjhigklmnopqrusasdflsdfasdl&amp;quot;))&#xA;     b, _ := message.ToBytes()&#xA;     conn.Write(b[:5])&#xA;     log.Println(&amp;quot;发送前5个字节&amp;quot;)&#xA;     time.Sleep(time.Second * 3)&#xA;     conn.Write(b[5:])&#xA;     log.Println(&amp;quot;发送后面的字节&amp;quot;)&#xA;&#xA;     select {}&#xA; }&#xA;&#xA;   type Message struct {&#xA;    messageType gws.OpCode&#xA;    data        []byte&#xA;}&#xA;&#xA;func NewMessage(code gws.OpCode, data []byte) Message {&#xA;    return Message{&#xA;        messageType: code,&#xA;        data:        data,&#xA;    }&#xA;}&#xA;func (m Message) ToBytes()([]byte, error) {&#xA;&#x9;var res bytes.Buffer&#xA;&#x9;frame := gws.NewFrame(m.messageType, true, m.data)&#xA;&#x9;if err := gws.WriteFrame(&amp;amp;res, frame); err != nil {&#xA;&#x9;&#x9;return nil, err&#xA;&#x9;}&#xA;&#x9;return res.Bytes(), nil&#xA;}&#xA;2023/04/18 18:09:55 发送前5个字节&#xA;2023/04/18 18:09:58 发送后面的字节&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {&#xA;    engine := gin.New()&#xA;    engine.GET(&amp;quot;/ws&amp;quot;, Connect)&#xA;    engine.Run(&amp;quot;:8989&amp;quot;)&#xA;}&#xA;func Connect(c *gin.Context) {&#xA;    var httpUpgrade gws.HTTPUpgrader&#xA;    conn, _, _, err := httpUpgrade.Upgrade(c.Request, c.Writer)&#xA;    if err != nil {&#xA;       return&#xA;   }&#xA;&#xA;    if err != nil {&#xA;       return&#xA;   }&#xA;     frame, err := gws.ReadFrame(conn)&#xA;       if err != nil {&#xA;          log.Println(&amp;quot;err&amp;quot;, err)&#xA;          return&#xA;      }&#xA;    log.Println(string(frame.Payload))&#xA;&#x9;//最终要等到数据全部到，go net官方库当不可读的时候是阻塞的。&#xA;   2023/04/18 18:09:58 abcdefjhigklmnopqrusasdflsdfasdl&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;解决方法：使用syscall.Read读取，如果没有读完一整条websocket消息的话，就缓存起来，不阻塞，读的起始位置就回退到上次读出完整数据的位置，这里需要自己diy bufio.Reader 缓存没有读完的消息。&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;2、使用写缓存&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;如果在小包特别多得情况下，直接发送会有很多系统调用,gmp模型，每一次系统调用go都会有一次调度 会消耗cpu。pprof分析，也是system.write占用cpu比较高，在实时性要求不高的情况下，我们可以批量定时写入。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;得益于github.com/gobwas/ws 提供的非常灵活的用法，我们可以暂时将我们要写的数据转为websocket数据包缓存起来。批量定时写入&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt; type Message struct {&#xA;    messageType gws.OpCode&#xA;    data        []byte&#xA;}&#xA;func (m Message) ToBytes()([]byte, error) {&#xA;&#x9;var res bytes.Buffer&#xA;&#x9;frame := gws.NewFrame(m.messageType, true, m.data)&#xA;&#x9;if err := gws.WriteFrame(&amp;amp;res, frame); err != nil {&#xA;&#x9;&#x9;return nil, err&#xA;&#x9;}&#xA;&#x9;return res.Bytes(), nil&#xA;}&#xA;for {&#xA;    select {&#xA;       case data := &amp;lt;-conn.write:&#xA;       if _, err := conn.writeBuf.Write(data); err != nil {&#xA;          return&#xA;      }&#xA;      //writeBuf 为*bufio.Writer。&#xA;       case &amp;lt;-conn.writeRate.C:&#xA;    &#xA;       //写到连接中&#xA;       if conn.writeBuf.Available() &amp;gt; 0 {&#xA;          if err := conn.writeBuf.Flush(); err != nil {&#xA;             return&#xA;         }&#xA;      }&#xA;&#xA;   }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;3、分片存储连接&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;主要是参考&lt;a href=&#34;https://github.com/owenliang/go-push&#34;&gt;https://github.com/owenliang/go-push&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;主要的思路是分区存储连接，降低锁的粒度和推送的并发度。&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;4、零拷贝&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;在大包多的情况是使用零拷贝，好像也会提高性能。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/308054212&#34;&gt;https://zhuanlan.zhihu.com/p/308054212&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/wSaJYg-HqnYY4SdLA2Zzaw&#34;&gt;https://mp.weixin.qq.com/s/wSaJYg-HqnYY4SdLA2Zzaw&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;5、基于tcp升级&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;github.com/gobwas/ws 也有直接基于tcp升级的用法，避免http分配的4k读缓存。&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;6、具体代码&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;具体代码仓库地址 github.com/luxun9527/gpush   练习时长还没到两年半，还有很多不完善的地方主要是提供一个实现的思路 如果对您有帮助，请帮我点一下star。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang初学者， 求实战项目</title>
-      <link>https://studygolang.com/articles/36135#reply1</link>
-      <description>&lt;p&gt;本人现在运维岗， 想学一门正经编程语言， 目前看过一遍golang基础， 实战视频也在慢慢看。&lt;br&gt;&#xA;想请教下大佬们， 有没有适合初学者的实战项目，最好是能多人一起合作做的， 我觉得我还是更适合在实战中学习。（如果能当免费苦力最好了&lt;/p&gt;&#xA;&#xA;&lt;p&gt;提前拜谢orz&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>数据库修改数据疑问</title>
-      <link>https://studygolang.com/topics/16337#reply1</link>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;在维护一个自己的 wordpress 站点，因为不会 php，主题也是买的，想自己动手实现一些功能也挺棘手。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;Q：想用 go 写一个定时插件，每天定时将收费帖子公开，数据如下：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230428/f8e03a6945aa1bb36f5e995cfe02b347.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;其中表单存在两个字段&lt;code&gt;meta_key&lt;/code&gt;，&lt;code&gt;meta_value&lt;/code&gt;。当&lt;code&gt;meta_key = allow_view&lt;/code&gt;、&lt;code&gt;meta_value = pay&lt;/code&gt;时，这个帖子就是付费帖子，当&lt;code&gt;meta_value = null&lt;/code&gt;时，这个帖子就是免费的。但因为这是分表，每个&lt;code&gt;post_id&lt;/code&gt;不一定为帖子，所以一直想不通该如何定位根据&lt;code&gt;meta_key&lt;/code&gt;修改&lt;code&gt;meta_value&lt;/code&gt;的值，请指点。使用 gorm 或者 原生 sql 实现都好。谢谢～～&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>Kubernetes系统精讲 Go语言实战K8S集群可视化</title>
-      <link>https://studygolang.com/articles/36133#reply0</link>
-    </item>
-    <item>
-      <title>从前端上传webp格式的图片，go读取到点文件后缀怎么是.dat的</title>
-      <link>https://studygolang.com/topics/16334#reply2</link>
-      <description>&lt;p&gt;从前端上传webp格式的图片，go读取到点文件后缀怎么是.dat的&#xA;&lt;img src=&#34;https://static.golangjob.cn/230427/28e5f0bbc9380d5801f809ac3bdebfe9.png&#34; alt=&#34;111.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>从前端上传webp格式的图片，go读取到点文件后缀怎么是.dat的</title>
-      <link>https://studygolang.com/topics/16334#reply1</link>
-      <description>&lt;p&gt;从前端上传webp格式的图片，go读取到点文件后缀怎么是.dat的&#xA;&lt;img src=&#34;https://static.golangjob.cn/230427/28e5f0bbc9380d5801f809ac3bdebfe9.png&#34; alt=&#34;111.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang初学者， 求实战项目</title>
-      <link>https://studygolang.com/articles/36135#reply0</link>
-      <description>&lt;p&gt;本人现在运维岗， 想学一门正经编程语言， 目前看过一遍golang基础， 实战视频也在慢慢看。&lt;br&gt;&#xA;想请教下大佬们， 有没有适合初学者的实战项目，最好是能多人一起合作做的， 我觉得我还是更适合在实战中学习。（如果能当免费苦力最好了&lt;/p&gt;&#xA;&#xA;&lt;p&gt;提前拜谢orz&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>分享开源轻量的 golang pprof 快速分析工具</title>
-      <link>https://studygolang.com/resources/15570#reply0</link>
-    </item>
   </channel>
 </rss>
