@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "各位打算母亲节送啥给妈妈呀 - 生活",
+      "Link": "https://www.v2ex.com/t/938670",
+      "Description": "送啥比较好呢经？目前也不在父母身边。",
+      "Author": "Salticey",
+      "PubDate": "2023-05-09T09:46:17Z"
+    },
+    {
+      "Title": "[吐槽] conda 真是太难用了！\r\n如何优雅地管理 Python 环境？ - Python",
+      "Link": "https://www.v2ex.com/t/938669",
+      "Description": "\u003cp\u003e如题，已经在 anaconda 上折腾了不知道多久，我现在已经彻底放弃使用 conda 了，看到一个比较新的包管理器 pdm ，但是 pycharm 现在还不支持，所以就用 virtualenv 了\u003c/p\u003e\n\u003cp\u003e首先，我的机器是 archlinux ，然后现在还是大二学生，SRTP 项目是机器学习方向的，然后其他比赛也需要用到 numpy, pandas, pytorch 这一堆东西\u003c/p\u003e\n\u003cp\u003e当我还在用 windows 时，根本不 care 什么虚拟环境，啥包都是无脑装到系统解释器，当时需要的科学计算有关的库，最多就是 numpy,pytorch.matplotlib 这些东西，也没有啥版本要求，直接用最新的版本，用的库也不是很多，这种方法没啥问题\u003c/p\u003e\n\u003cp\u003e然后主力切换到 linux 后，我发现 linux 的 python 系统解释器很重要，因为它是系统依赖之一，也出现过不规范操作，导致 python 一个解析 JSON 的库出错，然后 pip 依赖这个库，导致 pip 也不能工作，还有一次手贱卸载了一个不知道是干啥用的库，导致有些软件用不了了，从此我只敢在系统解析器安装 requests 这种比较小的库，用来写爬虫，其他都安装到虚拟环境\u003c/p\u003e\n\u003cp\u003e后来，因为想尝试一下 conda ，所以我安装了 conda ，遇到第一个问题就是，安装后在我的 shell 里没有 conda 这个命令，然后网上找到的教程，他们的 conda 基本都是安装到用户的家，而我安装到 /opt 下的，没法借鉴。后来我从 aur 里发现，打包的人说“为了不污染环境，把 conda 作为一个函数在 shell 中调用，导入这个函数需要执行一个脚本”，然后我把这个脚本加到了\u003ccode\u003e~/.zshrc\u003c/code\u003e里，登录就执行一遍，这个问题折腾了几小时\u003c/p\u003e\n\u003cp\u003e再后来，我发现 conda 安装库老是卡死，先声明，我已经搭建了一个透明代理的环境，网络是不存在问题的，它总是卡在解析依赖的地方，实在不想等\u003c/p\u003e\n\u003cp\u003e有一次 archlinux 系统更新的时候，archlinux 的包管理器 pacman 检测到\u003ccode\u003e/opt/anaconda/...\u003c/code\u003e下面很多头文件冲突了，没法安装系统更新，我在 reddit 找到了类似的问题，解决办法：卸载 conda ，安装系统更新，重新安装 conda 。 代价就是，我的一堆环境全部重新安装。。。\u003c/p\u003e\n\u003cp\u003e最后一次，也就是一天前，我执行一行代码，从 \u003ca href=\"http://raw.githubusercontent.com\" rel=\"nofollow\"\u003eraw.githubusercontent.com\u003c/a\u003e 下载一个 scv 文件，遇到一个问题：ssl 证书不能验证\u003c/p\u003e\n\u003cp\u003e其实之前我就发现，当我进入 conda 的环境时，使用\u003ccode\u003ecurl\u003c/code\u003e命令，用的不是系统的 curl,而是\u003ccode\u003e/opt/anaconda/bin/curl\u003c/code\u003e命令，然后使用 curl 命令从 \u003ca href=\"http://raw.githubusercontent.com\" rel=\"nofollow\"\u003eraw.githubusercontent.com\u003c/a\u003e 下载一个文件时，也出现了同样的问题：ssl 证书不能验证。当时我用\u003ccode\u003e/usr/bin/curl\u003c/code\u003e来简单地避开了这个问题\u003c/p\u003e\n\u003cp\u003e但是，这次 python 代码需要从 \u003ca href=\"http://raw.githubusercontent.com\" rel=\"nofollow\"\u003eraw.githubusercontent.com\u003c/a\u003e 下载 csv 文件，没有一个方法能 workaround 掉这个问题，然后我 google 了几小时，大概是\"conda ssl\", \"conda ssl certificate\", \"conda curl ssl\", \"conda lack of ssl certificate”，都没有找到这个问题\u003c/p\u003e\n\u003cp\u003e我尝试过：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e浏览器打开 \u003ca href=\"http://raw.githubusercontent.com\" rel=\"nofollow\"\u003eraw.githubusercontent.com\u003c/a\u003e ，导出 pem 文件，加入到 conda 环境下的 ssl 证书文件末尾\u003c/li\u003e\n\u003cli\u003e复制系统的 ssl 证书，覆盖 conda 的证书文件\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e都没有 work\u003cbr/\u003e\n所以我再也不想使用 conda 了，浪费了我太多时间在这些没用的地方  \u003c/p\u003e\n\u003cp\u003e最开始考虑使用 docker 管理 python 环境，但是有两个问题\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003edocker 里的 python 解释器，它能运行图形化界面吗？比如 PyQt ，matplotlib 等等，这个问题我没有试过，存疑\u003c/li\u003e\n\u003cli\u003epycharm 怎么使用 docker 里的解释器？我尝试过，似乎是这么一个逻辑，创建 docker 容器时添加了一个-rm 参数，退出容器时自动销毁，下次进入时，会从 docker image 重新创建一全新的容器，优点就是这个容器是绝对干净的，缺点就是：1. 安装的其他库都会随着 docker 容器一起被删除  2. 有时候需要对库文件作出修改，比如 matplotlib 不能画中文图表，需要对库文件作出修改才能画\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e现在作为一个折中，使用 virtualenv ，这个东西好用吗？我想其实也不太好用\n因为每次进入都太麻烦了！\u003c/p\u003e\n\u003cp\u003e大佬们是如何解决的？求指点！\u003c/p\u003e\n",
+      "Author": "vituralfuture",
+      "PubDate": "2023-05-09T09:45:25Z"
+    },
+    {
       "Title": "跨区域数据同步交互，怎么解决数据一致性和网络延迟问题 - 程序员",
       "Link": "https://www.v2ex.com/t/938667",
       "Description": "场景 比如 公司有一部分服务是部署在北美和欧洲的，大部分统计和管理后台的业务服务部署在亚太和中国，\u003cbr /\u003e那么问题来了，部署统计和管理后台有一半的业务是需要北美和欧洲提供的接口来做数据支撑\u003cbr /\u003e这样就导致要跨区域来请求对方的服务，导致接口响应非常慢，\u003cbr /\u003e还有一个问题是高峰并发请求，常常会导致数据不一致，这个跟数据库存在多个导致的。\u003cbr /\u003e有没有什么好的解决方案最好是开源的？\u003cbr /\u003e\u003cbr /\u003e比如只用一个时序数据库来解决这个问题？然后部署到不同区域，不同解决由时序数据库内部同步机制来解决？",
