@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "苹果内购统计数据请教 - 程序员",
+      "Link": "https://www.v2ex.com/t/939158",
+      "Description": "我是需要做一些内购订阅的 新增订阅、续订、退款、取消订阅的数据统计，目前是自己实现做了一个后台统计报表，已经做好了。\u003cbr /\u003e但我发现日积月累下来，数据量有点恐怖啊。\u003cbr /\u003e我的做法是，我服务端表里存储了所有用户的票据，然后每天晚上定时任务拿着票据去请求苹果的 \u003ca target=\"_blank\" href=\"https://buy.itunes.apple.com/verifyReceipt\" rel=\"nofollow noopener\"\u003ehttps://buy.itunes.apple.com/verifyReceipt\u003c/a\u003e 接口，从 latest_receipt_info 得到内购订阅数据，把里面的数据统计整理出 每日的 新增订阅、续订、退款、取消订阅。\u003cbr /\u003e目前已经差不多有 20000 条票据，晚上这个任务得跑几个小时吧，暂时还能跑完的，但是我担心以后慢慢多起来了，这个太久了，跑不完。\u003cbr /\u003e不知道我这个保存票据每日去拉数据的思路是不是对的，做过的朋友帮忙指点一下。\u003cbr /\u003e\u003cbr /\u003e之前做这个需求，有咨询 V 友，给我推荐了 RevenueCat ，我大致尝试了一下，客户端或者服务端集成都行，那个报表数据免费版的没那么丰富，收费版的我没体验到，但是我试了免费版的，他只支持监听 100 个票据，我服务端再推送，他就说超出上限了，付费的话，也不知道公司愿不愿意，所以后面我也就放弃用这个，没有推荐公司采用。",
+      "Author": "brader",
+      "PubDate": "2023-05-11T04:27:53Z"
+    },
+    {
+      "Title": "一个桌面软件打算这样改造：置于服务器上，开发 web 页面提供多用户访问使用 - 问与答",
+      "Link": "https://www.v2ex.com/t/939157",
+      "Description": "\u003cp\u003e桌面软件是 QT 开发的，感觉挺复杂，这个有什么实现思路。\u003c/p\u003e\n",
+      "Author": "azev",
+      "PubDate": "2023-05-11T04:24:50Z"
+    },
+    {
       "Title": "分享一个合并 protobuf 的小工具 - 分享创造",
       "Link": "https://www.v2ex.com/t/939156",
       "Description": "\u003cp\u003e\u003ca href=\"https://github.com/joesonw/oneproto\" rel=\"nofollow\"\u003ehttps://github.com/joesonw/oneproto\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e用来把多个 protobuf 合并为一个(如果 package 不同,通过 nested message 来区别命名空间)\u003c/p\u003e\n\u003cp\u003e用来解决项目大了, protobuf 之间难免会产生相互引用. 但是放在不同的文件中, 维护性又更好, 于是产生了这个小工具\u003c/p\u003e\n\u003cp\u003e例子\u003c/p\u003e\n\u003cp\u003euser.proto\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esyntax = 'proto3';\noption go_package = 'generated/proto;pb';\n\npackage example.com.users;\n\nimport \"proto/group.proto\";\n\nmessage User {\n    string id = 1;\n    string name = 2;\n    string email = 3;\n    string password = 4;\n    string created_at = 5;\n    string updated_at = 6;\n    repeated groups.Group groups = 7;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003egroup.proto\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esyntax = 'proto3';\noption go_package = 'generated/proto;pb';\n\npackage example.com.groups;\n\nimport \"proto/user.proto\";\n\nmessage Group {\n  string name = 1;\n  repeated users.User users = 2;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e产生的文件\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esyntax = 'proto3';\noption go_package = 'generated/proto;pb';\n\npackage example.com;\n\nmessage groups {\n    message Group {\n        string name = 1;\n        repeated users.User users = 2;\n    }\n\n}\n\nmessage users {\n    message User {\n        string id = 1;\n        string name = 2;\n        string email = 3;\n        string password = 4;\n        string created_at = 5;\n        string updated_at = 6;\n        repeated groups.Group groups = 7;\n    }\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e希望能帮助到有需要的人\u003c/p\u003e\n",
