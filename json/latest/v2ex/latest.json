@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教下 AWS， GCP 使用体验对比 - 程序员",
+      "Link": "https://www.v2ex.com/t/939150",
+      "Description": "\u003cp\u003e这个是我之前的问题：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://v2ex.com/t/934279#reply99\" rel=\"nofollow\"\u003ehttps://v2ex.com/t/934279#reply99\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e最后调研发现 GCP 技术确实很香，AlloyDB ，k8s ，以及 function 看上去都挺不错的，而且网络还比 AWS 好不少\u003c/p\u003e\n\u003cp\u003e现在想请教下，正常使用下 GCP 的 oncall 以及各种服务水平相比 AWS 如何？有没有什么踩坑血泪史？\u003c/p\u003e\n\u003cp\u003e主要使用组件\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eDB\u003c/li\u003e\n\u003cli\u003ek8s\u003c/li\u003e\n\u003cli\u003es3\u003c/li\u003e\n\u003cli\u003eFunction （偏 container 的用法非简单 function ）\u003c/li\u003e\n\u003cli\u003e网络（主要是欧美）\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e希望是技术香的同时，服务水平很高，坑少（或者有坑我能查得到）\u003c/p\u003e\n",
+      "Author": "aljun",
+      "PubDate": "2023-05-11T03:51:30Z"
+    },
+    {
+      "Title": "iptables LOG 的一些特殊问题 - Linux",
+      "Link": "https://www.v2ex.com/t/939149",
+      "Description": "\u003cp\u003e需求：两个 IP 组 gA gB 来源的要独立分别记录日志统计，除开这两个组的所有 IP 来源另外记录，实现规则如下\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003eiptables -t mangle -A -p tcp -m tcp --dport 443 -m set --match-set gA src -j LOG --log-prefix \"group a access: \"\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eiptables -t mangle -A -p tcp -m tcp --dport 443 -m set --match-set gB src -j LOG --log-prefix \"group b access: \"\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eiptables -t mangle -A -p tcp -m tcp --dport 443 -j LOG --log-prefix \"other access: \"\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e现在的问题是 gA gB 的来源除了触发规则 1 或 2 还同时会触发规则 3 ，原因我看是说：LOG 是一个例外，不遵循匹配即中止的原则，虽然 ! match-set 可以这样取反但是 match-set 后面我没有看到过同时跟两条 IPset 的情况，那么这个问题有没有什么方便的办法，还是只能重新建立一个包含 gA gB 新 ipset 组来实现？\u003c/p\u003e\n",
+      "Author": "acbot",
+      "PubDate": "2023-05-11T03:50:36Z"
+    },
+    {
+      "Title": "关于系统并发问题，请各位 V 友帮忙分析下。 - 问与答",
+      "Link": "https://www.v2ex.com/t/939148",
+      "Description": "\u003cp\u003e公司业务是物联网方向的，开发产品是共享充电桩，现在系统到了瓶颈期目前已经部署的在线设备量 1500 台左右系统预计部署 1w+。最近发现随着设备量的递增系统方面出现了 BUG ，不确定是否是并发问题还是程序代码问题，五一前以为是 SQL 问题然针对慢 SQL 一顿优化可以系统卡顿问题已解决，但是设备消息处理问题还是没解决，1000 台设备在线 30 秒最少有 1000 条消息。也没确定出现问题的原因。\n业务流程是这样的，用户小程序扫码设备进入选择充电界面这时候会连接一个 WebSocket 并订阅一个设备的消息主题。当用户选择端口开启充电时，服务器会下发指令给设备，设备开启充电时会返回开启端口成功的指令到服务器，在服务再将消息处理之后使用 ws 推送给前端小程序表示订单已开启。\n目前出现的问题是用户扫码开启端口充电时后台没有推送 WS 消息，导致订单处于为正常开启的状态（故障）其实设备已经回复开启成功了但是服务器还没有处理过来。出现问题的时间都是高峰期（下午六七点）。系统到这个点进行中订单有 800 多个。但是系统有时候会出现此问题有时候有没有。\n目前问题不好确定导致不好下手解决，根据观察到的问题可能是出在高并发，WebSocket\n使用的 Java 开发，处理设备业务消息使用线程池，WebSocket 、单服务、服务器 8 核 16G 。麻烦各位 V 友帮忙分析下。有好的设计思路和框架也可以向我提供。我可以跟公司申请有偿\u003c/p\u003e\n",
+      "Author": "SANJI59",
+      "PubDate": "2023-05-11T03:50:30Z"
+    },
+    {
+      "Title": "surge for mac 5 人车，先出 3 个车位 - Surge",
+      "Link": "https://www.v2ex.com/t/939147",
+      "Description": "\u003cp\u003e刚买的还热乎的 surge for mac 140 买断，后续更新再沟通\nw base64: c2ExODg0NDA3NQ==\u003c/p\u003e\n",
+      "Author": "sescapelife",
+      "PubDate": "2023-05-11T03:50:23Z"
+    },
+    {
+      "Title": "[深圳地域]华为云低码平台/大前端基础设施团队 - 酷工作",
+      "Link": "https://www.v2ex.com/t/939146",
+      "Description": "\u003cp\u003e还在为没有技术提升而苦恼吗？还在为没有志同道合的团队而嗟叹吗？我们是华为云上最大的公共前端团队，有组件体系，企业级框架及低代码平台，Web IDE 及前端流程数字化平台，体验度量与监控等多类型，业务涉及 serverless ，区块链，webassembly 等前沿技术，为华为云上 70+内外部服务提供前端基础设施及平台能力。也是唯一一个加入 tc39,参与制定 JavaScript 语言标准的组织，提倡工作与生活平衡，官网： \u003ca href=\"https://devui.design/home\" rel=\"nofollow\"\u003ehttps://devui.design/home\u003c/a\u003e ，掘金 \u003ca href=\"https://juejin.im/user/712139267650141/posts\" rel=\"nofollow\"\u003ehttps://juejin.im/user/712139267650141/posts\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e在这里，你能遇到：\u003c/p\u003e\n\u003cp\u003e0 ）负责华为云 DevOps/低码产品平台的前端架构设计及持续优化。参与华为云低码平台基础能力建设，包括不限于低码标准，画布，工具链，渲染器 /适配器，D2C ，AI 及语音识别辅助应用生成等前端领域相关能力建设；\u003c/p\u003e\n\u003cp\u003e1 ）对前端安全 /稳定性 /效率的持续思考：大型前端团队（几十个团队一起）协同开发与效率工程优化问题，你的一个 idea 可以被应用到几十个商用云服务上，你的 idea 是行业内领先的，天然站在行业顶点视角看问题；\u003c/p\u003e\n\u003cp\u003e2 ）对体验的持续追求，并通过工具探索量化体验，优化体验，追求用户体验的极致；\u003c/p\u003e\n\u003cp\u003e3 ）对行业内新技术的不断探索与落地，紧跟行业技术发展趋势，甚至做到引领，这是一个有技术追求 /业务场景 /志同道合小伙伴的团队。\u003c/p\u003e\n\u003cp\u003e有意向咨询微：GLW5299629\u003c/p\u003e\n",
+      "Author": "myzhibie",
+      "PubDate": "2023-05-11T03:47:05Z"
+    },
+    {
       "Title": "想问下杭州餐饮店特别少的原因 - 杭州",
       "Link": "https://www.v2ex.com/t/939145",
       "Description": "\u003cp\u003e很多地方找不到吃饭的地方，而且关店时间特别早\u003c/p\u003e\n\u003cp\u003e而且街上没有小摊\u003c/p\u003e\n\u003cp\u003e是规划的原因还是有什么特别的法规吗\u003c/p\u003e\n",
