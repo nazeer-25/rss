@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "分享一个合并 protobuf 的小工具 - 分享创造",
+      "Link": "https://www.v2ex.com/t/939156",
+      "Description": "\u003cp\u003e\u003ca href=\"https://github.com/joesonw/oneproto\" rel=\"nofollow\"\u003ehttps://github.com/joesonw/oneproto\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e用来把多个 protobuf 合并为一个(如果 package 不同,通过 nested message 来区别命名空间)\u003c/p\u003e\n\u003cp\u003e用来解决项目大了, protobuf 之间难免会产生相互引用. 但是放在不同的文件中, 维护性又更好, 于是产生了这个小工具\u003c/p\u003e\n\u003cp\u003e例子\u003c/p\u003e\n\u003cp\u003euser.proto\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esyntax = 'proto3';\noption go_package = 'generated/proto;pb';\n\npackage example.com.users;\n\nimport \"proto/group.proto\";\n\nmessage User {\n    string id = 1;\n    string name = 2;\n    string email = 3;\n    string password = 4;\n    string created_at = 5;\n    string updated_at = 6;\n    repeated groups.Group groups = 7;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003egroup.proto\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esyntax = 'proto3';\noption go_package = 'generated/proto;pb';\n\npackage example.com.groups;\n\nimport \"proto/user.proto\";\n\nmessage Group {\n  string name = 1;\n  repeated users.User users = 2;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e产生的文件\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esyntax = 'proto3';\noption go_package = 'generated/proto;pb';\n\npackage example.com;\n\nmessage groups {\n    message Group {\n        string name = 1;\n        repeated users.User users = 2;\n    }\n\n}\n\nmessage users {\n    message User {\n        string id = 1;\n        string name = 2;\n        string email = 3;\n        string password = 4;\n        string created_at = 5;\n        string updated_at = 6;\n        repeated groups.Group groups = 7;\n    }\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e希望能帮助到有需要的人\u003c/p\u003e\n",
+      "Author": "joesonw",
+      "PubDate": "2023-05-11T04:14:24Z"
+    },
+    {
       "Title": "如何申请 OpenAI GPT-4 API：简单步骤与成功技巧 - OpenAI",
       "Link": "https://www.v2ex.com/t/939154",
       "Description": "\u003cp\u003e整理和总结了下 OpenAI GPT-4 API 的申请方法和技巧，不全文复制了，有需要的可以参考： \u003ca href=\"https://blog.aiservices.tech/78.html\" rel=\"nofollow\"\u003ehttps://blog.aiservices.tech/78.html\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e上述链接需要魔法上网打开\u003c/strong\u003e\u003c/p\u003e\n\u003ch3\u003e可能增加通过 GPT-4 API 成功率的因素\u003c/h3\u003e\n\u003cp\u003eOpenAI 并没有透露具体的审核规则，以下是网友总结分享，可能增加成功率的一些因素，仅做参考。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e您的账号开通了 ChatGPT Plus\u003c/li\u003e\n\u003cli\u003e您的 OpenAI 账户已绑定信用卡\u003c/li\u003e\n\u003cli\u003e您经常调用 OpenAI API ，并产生过成功的付费账单\u003c/li\u003e\n\u003c/ul\u003e\n",
@@ -51,13 +58,6 @@
       "Description": "\u003cp\u003e公司业务是物联网方向的，开发产品是共享充电桩，现在系统到了瓶颈期目前已经部署的在线设备量 1500 台左右系统预计部署 1w+。最近发现随着设备量的递增系统方面出现了 BUG ，不确定是否是并发问题还是程序代码问题，五一前以为是 SQL 问题然针对慢 SQL 一顿优化可以系统卡顿问题已解决，但是设备消息处理问题还是没解决，1000 台设备在线 30 秒最少有 1000 条消息。也没确定出现问题的原因。\n业务流程是这样的，用户小程序扫码设备进入选择充电界面这时候会连接一个 WebSocket 并订阅一个设备的消息主题。当用户选择端口开启充电时，服务器会下发指令给设备，设备开启充电时会返回开启端口成功的指令到服务器，在服务再将消息处理之后使用 ws 推送给前端小程序表示订单已开启。\n目前出现的问题是用户扫码开启端口充电时后台没有推送 WS 消息，导致订单处于为正常开启的状态（故障）其实设备已经回复开启成功了但是服务器还没有处理过来。出现问题的时间都是高峰期（下午六七点）。系统到这个点进行中订单有 800 多个。但是系统有时候会出现此问题有时候有没有。\n目前问题不好确定导致不好下手解决，根据观察到的问题可能是出在高并发，WebSocket\n使用的 Java 开发，处理设备业务消息使用线程池，WebSocket 、单服务、服务器 8 核 16G 。麻烦各位 V 友帮忙分析下。有好的设计思路和框架也可以向我提供。我可以跟公司申请有偿\u003c/p\u003e\n",
       "Author": "SANJI59",
       "PubDate": "2023-05-11T03:50:30Z"
-    },
-    {
-      "Title": "surge for mac 5 人车，先出 3 个车位 - Surge",
-      "Link": "https://www.v2ex.com/t/939147",
-      "Description": "\u003cp\u003e刚买的还热乎的 surge for mac 140 买断，后续更新再沟通\nw base64: c2ExODg0NDA3NQ==\u003c/p\u003e\n",
-      "Author": "sescapelife",
-      "PubDate": "2023-05-11T03:50:23Z"
     },
     {
       "Title": "[深圳地域]华为云低码平台/大前端基础设施团队 - 酷工作",
@@ -289,6 +289,13 @@
       "Description": "\u003cp\u003e官方手机端无法登录,v2 设置了全局翻墙.打开手机端没确认手机号之前右上角的盾牌是转圈状态, 点盾牌后是设置代理之类的,因为我用了 v2vay 就没管.输入号码后点击确认 就一直转圈.\u003c/p\u003e\n\u003cp\u003e另外说明,我的 web 端是一直在线的.打开电脑端后不用登录,一切正常\u003c/p\u003e\n\u003cp\u003e但是就不能用手机端登录\u003c/p\u003e\n",
       "Author": "kk520149492",
       "PubDate": "2023-05-11T02:32:13Z"
+    },
+    {
+      "Title": "surge for mac 5 人车，先出 3 个车位 - Surge",
+      "Link": "https://www.v2ex.com/t/939147",
+      "Description": "\u003cp\u003e刚买的还热乎的 surge for mac 140 买断，后续更新再沟通\nw base64: c2ExODg0NDA3NQ==\u003c/p\u003e\n",
+      "Author": "sescapelife",
+      "PubDate": "2023-05-11T03:50:23Z"
     },
     {
       "Title": "昨天尝试了一下 poetry，发现 pycharm 里面直接安装依赖会报错 - 问与答",

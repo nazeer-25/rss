@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>分享一个合并 protobuf 的小工具 - 分享创造</title>
+      <link>https://www.v2ex.com/t/939156</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/joesonw/oneproto&#34; rel=&#34;nofollow&#34;&gt;https://github.com/joesonw/oneproto&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;用来把多个 protobuf 合并为一个(如果 package 不同,通过 nested message 来区别命名空间)&lt;/p&gt;&#xA;&lt;p&gt;用来解决项目大了, protobuf 之间难免会产生相互引用. 但是放在不同的文件中, 维护性又更好, 于是产生了这个小工具&lt;/p&gt;&#xA;&lt;p&gt;例子&lt;/p&gt;&#xA;&lt;p&gt;user.proto&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;syntax = &#39;proto3&#39;;&#xA;option go_package = &#39;generated/proto;pb&#39;;&#xA;&#xA;package example.com.users;&#xA;&#xA;import &#34;proto/group.proto&#34;;&#xA;&#xA;message User {&#xA;    string id = 1;&#xA;    string name = 2;&#xA;    string email = 3;&#xA;    string password = 4;&#xA;    string created_at = 5;&#xA;    string updated_at = 6;&#xA;    repeated groups.Group groups = 7;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;group.proto&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;syntax = &#39;proto3&#39;;&#xA;option go_package = &#39;generated/proto;pb&#39;;&#xA;&#xA;package example.com.groups;&#xA;&#xA;import &#34;proto/user.proto&#34;;&#xA;&#xA;message Group {&#xA;  string name = 1;&#xA;  repeated users.User users = 2;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;产生的文件&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;syntax = &#39;proto3&#39;;&#xA;option go_package = &#39;generated/proto;pb&#39;;&#xA;&#xA;package example.com;&#xA;&#xA;message groups {&#xA;    message Group {&#xA;        string name = 1;&#xA;        repeated users.User users = 2;&#xA;    }&#xA;&#xA;}&#xA;&#xA;message users {&#xA;    message User {&#xA;        string id = 1;&#xA;        string name = 2;&#xA;        string email = 3;&#xA;        string password = 4;&#xA;        string created_at = 5;&#xA;        string updated_at = 6;&#xA;        repeated groups.Group groups = 7;&#xA;    }&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;希望能帮助到有需要的人&lt;/p&gt;&#xA;</description>
+      <author>joesonw</author>
+      <pubDate>11 May 2023 04:14:24 +0000</pubDate>
+    </item>
+    <item>
       <title>如何申请 OpenAI GPT-4 API：简单步骤与成功技巧 - OpenAI</title>
       <link>https://www.v2ex.com/t/939154</link>
       <description>&lt;p&gt;整理和总结了下 OpenAI GPT-4 API 的申请方法和技巧，不全文复制了，有需要的可以参考： &lt;a href=&#34;https://blog.aiservices.tech/78.html&#34; rel=&#34;nofollow&#34;&gt;https://blog.aiservices.tech/78.html&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;上述链接需要魔法上网打开&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h3&gt;可能增加通过 GPT-4 API 成功率的因素&lt;/h3&gt;&#xA;&lt;p&gt;OpenAI 并没有透露具体的审核规则，以下是网友总结分享，可能增加成功率的一些因素，仅做参考。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;您的账号开通了 ChatGPT Plus&lt;/li&gt;&#xA;&lt;li&gt;您的 OpenAI 账户已绑定信用卡&lt;/li&gt;&#xA;&lt;li&gt;您经常调用 OpenAI API ，并产生过成功的付费账单&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
@@ -51,13 +58,6 @@
       <description>&lt;p&gt;公司业务是物联网方向的，开发产品是共享充电桩，现在系统到了瓶颈期目前已经部署的在线设备量 1500 台左右系统预计部署 1w+。最近发现随着设备量的递增系统方面出现了 BUG ，不确定是否是并发问题还是程序代码问题，五一前以为是 SQL 问题然针对慢 SQL 一顿优化可以系统卡顿问题已解决，但是设备消息处理问题还是没解决，1000 台设备在线 30 秒最少有 1000 条消息。也没确定出现问题的原因。&#xA;业务流程是这样的，用户小程序扫码设备进入选择充电界面这时候会连接一个 WebSocket 并订阅一个设备的消息主题。当用户选择端口开启充电时，服务器会下发指令给设备，设备开启充电时会返回开启端口成功的指令到服务器，在服务再将消息处理之后使用 ws 推送给前端小程序表示订单已开启。&#xA;目前出现的问题是用户扫码开启端口充电时后台没有推送 WS 消息，导致订单处于为正常开启的状态（故障）其实设备已经回复开启成功了但是服务器还没有处理过来。出现问题的时间都是高峰期（下午六七点）。系统到这个点进行中订单有 800 多个。但是系统有时候会出现此问题有时候有没有。&#xA;目前问题不好确定导致不好下手解决，根据观察到的问题可能是出在高并发，WebSocket&#xA;使用的 Java 开发，处理设备业务消息使用线程池，WebSocket 、单服务、服务器 8 核 16G 。麻烦各位 V 友帮忙分析下。有好的设计思路和框架也可以向我提供。我可以跟公司申请有偿&lt;/p&gt;&#xA;</description>
       <author>SANJI59</author>
       <pubDate>11 May 2023 03:50:30 +0000</pubDate>
-    </item>
-    <item>
-      <title>surge for mac 5 人车，先出 3 个车位 - Surge</title>
-      <link>https://www.v2ex.com/t/939147</link>
-      <description>&lt;p&gt;刚买的还热乎的 surge for mac 140 买断，后续更新再沟通&#xA;w base64: c2ExODg0NDA3NQ==&lt;/p&gt;&#xA;</description>
-      <author>sescapelife</author>
-      <pubDate>11 May 2023 03:50:23 +0000</pubDate>
     </item>
     <item>
       <title>[深圳地域]华为云低码平台/大前端基础设施团队 - 酷工作</title>
@@ -286,6 +286,13 @@
       <description>&lt;p&gt;官方手机端无法登录,v2 设置了全局翻墙.打开手机端没确认手机号之前右上角的盾牌是转圈状态, 点盾牌后是设置代理之类的,因为我用了 v2vay 就没管.输入号码后点击确认 就一直转圈.&lt;/p&gt;&#xA;&lt;p&gt;另外说明,我的 web 端是一直在线的.打开电脑端后不用登录,一切正常&lt;/p&gt;&#xA;&lt;p&gt;但是就不能用手机端登录&lt;/p&gt;&#xA;</description>
       <author>kk520149492</author>
       <pubDate>11 May 2023 02:32:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>surge for mac 5 人车，先出 3 个车位 - Surge</title>
+      <link>https://www.v2ex.com/t/939147</link>
+      <description>&lt;p&gt;刚买的还热乎的 surge for mac 140 买断，后续更新再沟通&#xA;w base64: c2ExODg0NDA3NQ==&lt;/p&gt;&#xA;</description>
+      <author>sescapelife</author>
+      <pubDate>11 May 2023 03:50:23 +0000</pubDate>
     </item>
     <item>
       <title>昨天尝试了一下 poetry，发现 pycharm 里面直接安装依赖会报错 - 问与答</title>
