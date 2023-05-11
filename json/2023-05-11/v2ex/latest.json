@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "虽然关评论了，但是能发出来也不容易 - 职场话题",
+      "Link": "https://www.v2ex.com/t/939114",
+      "Description": "县城公务员，在体制里“循环”\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://www.huxiu.com/article/1469323.html\" rel=\"nofollow noopener\"\u003ehttps://www.huxiu.com/article/1469323.html\u003c/a\u003e",
+      "Author": "yumenawei",
+      "PubDate": "2023-05-11T02:52:49Z"
+    },
+    {
       "Title": "问下家用服务器部署博客域名怎么隐藏端口号 - 问与答",
       "Link": "https://www.v2ex.com/t/939112",
       "Description": "目前家里服务器是两台淘汰电脑组的 pve 集群\u003cbr /\u003e\u003cbr /\u003e域名是泛解析 cname 到 ddns 域名，ddns 域名解析到家宽动态公网 ip ，家宽 80 和 443 端口都被运营商 ban 了\u003cbr /\u003e路由器解析 30443 和 30080 两个端口到家里 elb 负载均衡（ k3s 内），ingress 是 traefik ，service 用的 LoadBalance 的 type ，traefik 走 Route 规则根据二级域名反向代理到具体的容器内\u003cbr /\u003e\u003cbr /\u003e泛解析域名：*.public.xxxx.cn\u003cbr /\u003eddns 域名:\u003ca target=\"_blank\" href=\"http://ddns.xxxx.cn\" rel=\"nofollow noopener\"\u003eddns.xxxx.cn\u003c/a\u003e\u003cbr /\u003e博客域名地址：\u003ca target=\"_blank\" href=\"http://blog.public.xxxx.cn:30443\" rel=\"nofollow noopener\"\u003eblog.public.xxxx.cn:30443\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e之前是 k8s 部署在云服务器上，但是用下来 5 年要好几千块钱，就迁移到本地了，之前尝试过 dns 解析使用隐性 url ，但是本质就是域名解析到供养商那边的一个 iframe 页面，博客实际上在 iframe 里面，确实能隐藏掉端口号，但是影响 seo ，\u003cbr /\u003e想问下有更好的办法吗，难道说一定要嫖个带公网 ip 的云服务器才行了？",
@@ -242,18 +249,18 @@
       "PubDate": "2023-05-11T00:33:35Z"
     },
     {
-      "Title": "资深处男请过来人答疑 - 问与答",
-      "Link": "https://www.v2ex.com/t/939066",
-      "Description": "\u003cp\u003e说起来惭愧，老实人一个，已经工作了还没有那个过\u003cbr/\u003e\n有几个问题非常疑惑，很幼稚的问题，还请有经验的过人指点迷津  \u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e有一点包皮，那个的时候会有什么影响？\u003c/li\u003e\n\u003cli\u003e对于女性，有被干的爽这么一个说法嘛？有什么条件嘛（心情，分人，年龄等）？我在想男的器大活好，妹子就会很爽，那样岂不是任何时间地点都，甚至强行都可以让妹子爽？感觉很不科学\u003c/li\u003e\n\u003cli\u003e女性的那个地方，真的是越干越黑？是否存在怎么干都不黑或者没干就黑的例子？还有这个东西和年龄有关系嘛\u003c/li\u003e\n\u003cli\u003e和处女那个，不设就不会破坏处女膜？\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e在这方面完全不懂，请各位鞭策\u003c/p\u003e\n",
-      "Author": "renhou",
-      "PubDate": "2023-05-11T00:16:59Z"
-    },
-    {
       "Title": "docker macvlan 环境 nat ipv6 连不通外网 - Docker",
       "Link": "https://www.v2ex.com/t/939065",
       "Description": "Host: 一台 x86 的 ubuntu 做的路由, 桥接光猫拨号\u003cbr /\u003eeth0： 连光猫 192.168.1.0/24\u003cbr /\u003eeth1： 内网连交换器 192.168.0.0/24\u003cbr /\u003ewide-dhcp6c + dnsmasq 获取 slaac 地址和 ra 广播，路由以及内网机器外网 ipv6 都正常获取。\u003cbr /\u003e\u003cbr /\u003edocker 配置:\u003cbr /\u003ecat /etc/docker/daemon.json\u003cbr /\u003e{\u003cbr /\u003e     \"data-root\":\"/data/docker\",\u003cbr /\u003e     \"bip\": \"10.20.0.1/16\",\u003cbr /\u003e    \"ipv6\": true,\u003cbr /\u003e    \"fixed-cidr-v6\": \"fd00:5::/80\",\u003cbr /\u003e    \"ip6tables\": true,\u003cbr /\u003e     \"experimental\": true\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003ebridge network 方式的 container 通过 ipv6 nat 方式能访问 ipv6 外部网络\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003emacvlan 配置步骤:\u003cbr /\u003edocker network create -d macvlan --subnet=192.168.0.0/24 --ip-range=192.168.0.192/26 --gateway=192.168.0.10 --ipv6  --subnet=fd00:8::/80 --gateway=fd00:8::1 -o macvlan_mode=bridge  -o parent=eth1 macnet\u003cbr /\u003eip link add macvlan link eth1 type macvlan mode bridge\u003cbr /\u003eip addr add 192.168.0.10/24 dev macvlan\u003cbr /\u003eip -6 addr add fd00:8::1 dev macvlan\u003cbr /\u003eifconfig macvlan up\u003cbr /\u003eip route add 192.168.0.192/26 dev macvlan\u003cbr /\u003eip -6 route add fd00:8::/80 dev macvlan\u003cbr /\u003e\u003cbr /\u003e测试 container\u003cbr /\u003edocker run -d  --restart=always  --net=macnet --ip=192.168.0.254 --name=mtool_vlan praqma/network-multitool\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003econtainer 内部 ip 地址：\u003cbr /\u003eeth0      Link encap:Ethernet  HWaddr 02:42:C0:A8:00:FE\u003cbr /\u003e          inet addr:192.168.0.254  Bcast:192.168.0.255  Mask:255.255.255.0\u003cbr /\u003e          inet6 addr: fe80::42:c0ff:fea8:fe/64 Scope:Link\u003cbr /\u003e          inet6 addr: fd00:8::2/80 Scope:Global\u003cbr /\u003e          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1\u003cbr /\u003e          RX packets:65 errors:0 dropped:0 overruns:0 frame:0\u003cbr /\u003e          TX packets:27 errors:0 dropped:0 overruns:0 carrier:0\u003cbr /\u003e          collisions:0 txqueuelen:0\u003cbr /\u003e          RX bytes:17957 (17.5 KiB)  TX bytes:2356 (2.3 KiB)\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e具体问题如下：\u003cbr /\u003efd00:8::2 ping 的通 fd00:8::1\u003cbr /\u003efd00:8::2 ping 不通 host 里 macvlan 以外的其他 ipv6 网络\u003cbr /\u003e内网 192.168.0.0/24 网段的能 ping 通 fd00:8::1 ，  ping 不通 fd00:8::2\u003cbr /\u003ebridge 网络 fd00:5::/80 的 container 能 ping 通 fd00:8::2, 但反过来不行， 这点我是最不能理解的\u003cbr /\u003e\u003cbr /\u003ehost 上面的内核设置, 路由，以及 iptables SNAT 规则都检查了，应该没问题，一来这台 host 一直跑主路由， 二来 bridge 模式的 container 能 nat ipv6 方式访问外网，macvlan 的 ipv6 我也是配置的 nat 方式, 两者应该没什么区别。",
       "Author": "aries1998",
       "PubDate": "2023-05-11T00:13:26Z"
+    },
+    {
+      "Title": "资深处男请过来人答疑 - 问与答",
+      "Link": "https://www.v2ex.com/t/939066",
+      "Description": "\u003cp\u003e说起来惭愧，老实人一个，已经工作了还没有那个过\u003cbr/\u003e\n有几个问题非常疑惑，很幼稚的问题，还请有经验的过人指点迷津  \u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e有一点包皮，那个的时候会有什么影响？\u003c/li\u003e\n\u003cli\u003e对于女性，有被干的爽这么一个说法嘛？有什么条件嘛（心情，分人，年龄等）？我在想男的器大活好，妹子就会很爽，那样岂不是任何时间地点都，甚至强行都可以让妹子爽？感觉很不科学\u003c/li\u003e\n\u003cli\u003e女性的那个地方，真的是越干越黑？是否存在怎么干都不黑或者没干就黑的例子？还有这个东西和年龄有关系嘛\u003c/li\u003e\n\u003cli\u003e和处女那个，不设就不会破坏处女膜？\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e在这方面完全不懂，请各位鞭策\u003c/p\u003e\n",
+      "Author": "renhou",
+      "PubDate": "2023-05-11T00:16:59Z"
     },
     {
       "Title": "Google Ads - Google",
