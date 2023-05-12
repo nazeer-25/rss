@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "使用 spring data redis 序列化无法序列化父类属性。ObjectMapper 单独使用是可以序列化父类属性的。 - 程序员",
+      "Link": "https://www.v2ex.com/t/939580",
+      "Description": "\u003cp\u003e有办法打开 @\u003ca href=\"/member/CachePut\"\u003eCachePut\u003c/a\u003e 的调试日志吗\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e@Bean\npublic RedisTemplate\u0026lt;String, Object\u0026gt; redisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {\n\t// 设置序列化\n\tJackson2JsonRedisSerializer\u0026lt;Object\u0026gt; jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer\u0026lt;Object\u0026gt;(Object.class);\n\tObjectMapper om = new ObjectMapper();\n\tom.setVisibility(PropertyAccessor.ALL, Visibility.ANY);\n\tom.enableDefaultTyping(DefaultTyping.NON_FINAL);\n\tjackson2JsonRedisSerializer.setObjectMapper(om);\n\tRedisTemplate\u0026lt;String, Object\u0026gt; redisTemplate = new RedisTemplate\u0026lt;String, Object\u0026gt;();\n\tredisTemplate.setConnectionFactory(lettuceConnectionFactory);\n\tRedisSerializer\u0026lt;?\u0026gt; stringSerializer = new StringRedisSerializer();\n\tredisTemplate.setKeySerializer(stringSerializer);// key 序列化\n\tredisTemplate.setValueSerializer(jackson2JsonRedisSerializer);// value 序列化\n\tredisTemplate.setHashKeySerializer(stringSerializer);// Hash key 序列化\n\tredisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);// Hash value 序列化\n\tredisTemplate.afterPropertiesSet();\n\treturn redisTemplate;\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "xpc",
+      "PubDate": "2023-05-12T09:35:40Z"
+    },
+    {
+      "Title": "K8s 小工具: 轻松排查 Pod 重启原因，自动收集 Pod 重启的原因、日志、事件等信息 - Kubernetes",
+      "Link": "https://www.v2ex.com/t/939579",
+      "Description": "\u003cp\u003e我们 \u003cstrong\u003e开源\u003c/strong\u003e 了公司内部使用的 K8s 小工具，欢迎大家点个 \u003cstrong\u003e🌟 star\u003c/strong\u003e！。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e地址: \u003ca href=\"https://github.com/airwallex/k8s-pod-restart-info-collector\" rel=\"nofollow\"\u003ehttps://github.com/airwallex/k8s-pod-restart-info-collector\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e简介: A simple K8s customer controller that \u003cstrong\u003ewatches for Pods changes and collects K8s Pod restart reasons, logs, and events to Slack channel when a Pod restarts.\u003c/strong\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e截图:\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg alt=\"图片 1\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://camo.githubusercontent.com/73e6aed1aab5c7a9c897fa5fac1240ba5e172a6c9ffa4018a882012f912b5a2e/68747470733a2f2f6d69726f2e6d656469756d2e636f6d2f6d61782f313230302f312a69465165574b485a76337a7a4a43386c67695a746a412e706e67\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"图片 2\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://camo.githubusercontent.com/b394a049d5d34f78e186ac8695c23611e1afb1fcf6ae9ada8b31bbd1f44fc905/68747470733a2f2f6d69726f2e6d656469756d2e636f6d2f6d61782f313230302f312a6d767a5868624e6551434a39426c68316f44483475772e706e67\"/\u003e\u003c/p\u003e\n",
+      "Author": "able",
+      "PubDate": "2023-05-12T09:34:49Z"
+    },
+    {
+      "Title": "小米智能摄像机 2 AI 增强版，有人进入立即卡死 - 智能家电",
+      "Link": "https://www.v2ex.com/t/939578",
+      "Description": "\u003ch2\u003e[问题描述]\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e在米家 App 里点击摄像机，进入顺畅、画面清晰，看似无任何问题。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e一旦有人进入镜头范围 1~3 秒，摄像机画面卡死，TF 卡不记录，重启后恢复①的状态。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e在米家 App 里转动摄像机角度或复位摄像机，点击过快，问题如②，重启后恢复①的状态。\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e[网络环境]\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e光猫＋软路由拨号＋交换机＋硬路由组有线 mesh 当 AP 。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eOpenwrt 里 passwall 整体设为“大陆列表之外”模式。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eDNS 插件\u003cstrong\u003e均没有\u003c/strong\u003e开启，如 adguard home 、smartdns 等。\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e[初步排查]\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e重置摄像机，问题依旧。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e拔出 TF 卡，问题依旧。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e把摄像机寄修小米之家，返修后问题依旧。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e在 passwall 里把摄像机设为“不代理”，问题依旧。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e手机断开 Wi-Fi 、关闭圈 X ，5G 环境下重复 [问题描述] 操作，问题复现；\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e请异地的家人在米家 App 里重复 [问题描述] 操作，问题复现。\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e[现状]\u003c/h2\u003e\n\u003cp\u003e妈蛋，本人已疯。隐约感觉是网络问题，但不知道怎么设置；小概率是摄像机本身问题，但维修没好转，头疼🤢\u003c/p\u003e\n\u003cp\u003e如有大佬遇到相似问题，望不吝指导，感谢啊！\u003c/p\u003e\n",
+      "Author": "dgy125",
+      "PubDate": "2023-05-12T09:34:45Z"
+    },
+    {
+      "Title": "想换个手机，原本想买 13P 的结果电商的 14P 居然比 13P 还便宜！ - 问与答",
+      "Link": "https://www.v2ex.com/t/939577",
+      "Description": "这是什么情况，13P 按理说都发布了快 2 年了咋还比 14P 贵勒？是因为 14P 没有什么提升么还是啥。 搞不懂",
+      "Author": "YaNanGe",
+      "PubDate": "2023-05-12T09:33:50Z"
+    },
+    {
+      "Title": "WireGuard 和普通的 VPN 有什么区别，看不太懂… - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/939576",
+      "Description": "\u003cp\u003e看了几篇文章没看明白，Wireguard 和 VPN 在工作原理上不一样吗？\u003c/p\u003e\n",
+      "Author": "lopssh",
+      "PubDate": "2023-05-12T09:33:41Z"
+    },
+    {
       "Title": "有没有有点内容质量的，介绍 chrome 各种插件的网站或者博客啥的，可以分享一下~谢谢 - 问与答",
       "Link": "https://www.v2ex.com/t/939575",
       "Description": "",
