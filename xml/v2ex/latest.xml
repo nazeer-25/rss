@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教各位在 TS 中怎样对一个联合类型进行类型收窄呢？ - 问与答</title>
+      <link>https://www.v2ex.com/t/939619</link>
+      <description>&lt;p&gt;React 组件的 Props 接收一个 config 数组，config 数组里面是 React 组件或者自定义配置；如果是 React 组件则直接渲染，否则按照配置项进行渲染。&lt;/p&gt;&#xA;&lt;p&gt;目前我是通过&lt;code&gt;typeof&lt;/code&gt;来判断&lt;code&gt;Item&lt;/code&gt;的类型，请教各位有没有更优雅的方法呢？&lt;/p&gt;&#xA;&lt;p&gt;代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;interface ItemConfig {&#xA;    name: string,&#xA;    type: string&#xA;}&#xA;&#xA;type Config = ItemConfig | React.FC;&#xA;&#xA;interface XProps {&#xA;&#x9;config: Config[]&#xA;}&#xA;&#xA;const Components = ({ config } : XProps) =&amp;gt; {&#xA;    return (&#xA;        &amp;lt;div&amp;gt;&#xA;            {&#xA;                config.map(Item =&amp;gt; {&#xA;                    if (typeof Item === &#34;function&#34;) {&#xA;                        if (React.isValidElement(Item)) {&#xA;                            // 如果是 React 组件&#xA;                            return &amp;lt;Item /&amp;gt;;&#xA;                        }&#xA;&#xA;                        return null;&#xA;                    }&#xA;                    &#xA;                    // 如果是自定义配置&#xA;                    &#xA;                    ...&#xA;                    &#xA;                    return ...&#xA;                })&#xA;            }&#xA;        &amp;lt;/div&amp;gt;&#xA;    );&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>Danswerme</author>
+      <pubDate>12 May 2023 12:25:03 +0000</pubDate>
+    </item>
+    <item>
       <title>安卓平板横屏时和手机竖屏时微信视频通话，手机端看平板是倒 90 度的问题 - 程序员</title>
       <link>https://www.v2ex.com/t/939616</link>
       <description>&lt;p&gt;有没有大佬改过这样的问题&lt;/p&gt;&#xA;</description>
