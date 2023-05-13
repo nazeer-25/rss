@@ -53,6 +53,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "优维低代码实践：数据模型设计",
+      "Link": "https://studygolang.com/articles/36144#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "apple apple",
       "Link": "https://studygolang.com/p/1140#reply0",
       "Description": "",
@@ -70,13 +77,6 @@
       "Title": "我的OpenAI库发布了！！！",
       "Link": "https://studygolang.com/articles/36142#reply0",
       "Description": "\u003cp\u003echatGPT正式发布已经有段时间了，这段时间我也深度体验了chatGPT的魅力。\u003c/p\u003e\n\n\u003cp\u003eOpenAI除了提供网页版的chatGPT，还通过api的形式提供了很多其它服务，包括文字纠错、图片生成、音频转换等等。\u003c/p\u003e\n\n\u003cp\u003e作为程序员，即使有现成的\u003ca href=\"https://github.com/sashabaranov/go-openai\"\u003eopenai库\u003c/a\u003e，但还是免不了想自己造轮子，所以就有\u003ca href=\"https://github.com/mengbin92/openai\"\u003e这个openai库\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e当前这个库刚刚开发完成，还有很多需要优化的地方，所要实现的功能都是\u003ca href=\"https://platform.openai.com/docs/api-reference\"\u003eOpenAI API\u003c/a\u003e提供的，目前已经完成了以下接口的开发：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://platform.openai.com/docs/api-reference/models\"\u003eModels\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://platform.openai.com/docs/api-reference/completions\"\u003eCompletions\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://platform.openai.com/docs/api-reference/chat\"\u003eChat\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://platform.openai.com/docs/api-reference/edits\"\u003eEdits\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://platform.openai.com/docs/api-reference/images\"\u003eImages\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://platform.openai.com/docs/api-reference/embeddings\"\u003eEmbeddings\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://platform.openai.com/docs/api-reference/audio\"\u003eAudio\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://platform.openai.com/docs/api-reference/files\"\u003eFiles\u003c/a\u003e\u003cbr\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://platform.openai.com/docs/api-reference/fine-tunes\"\u003eFine-tunes\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://platform.openai.com/docs/api-reference/moderations\"\u003eModerations\u003c/a\u003e\u003cbr\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e\u003ca href=\"https://platform.openai.com/docs/api-reference/engines\"\u003eEngines\u003c/a\u003e已经废弃，其功能由\u003ca href=\"https://platform.openai.com/docs/api-reference/models\"\u003eModels\u003c/a\u003e提供。\u003c/p\u003e\n\n\u003cp\u003e在项目的\u003ccode\u003ecmd\u003c/code\u003e目录下提供了一个简单地http服务，实现了对上面接口的调用。\u003c/p\u003e\n\n\u003cp\u003e以下是chatGPT的接口调用的简单示例：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;context\u0026quot;\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;os\u0026quot;\n\n\t\u0026quot;github.com/mengbin92/openai\u0026quot;\n)\n\nfunc main() {\n\tclient := openai.NewClient(\u0026quot;your token\u0026quot;, \u0026quot;your org\u0026quot;, \u0026quot;proxy\u0026quot;)\n\n\tresp, err := client.CreateChatCompletion(\n\t\tcontext.Background(),\n\t\t\u0026amp;openai.ChatCompletionRequset{\n\t\t\tModel: openai.GPT3Dot5Turbo,\n\t\t\tMessages: []openai.Message{\n\t\t\t\t{Role: openai.ChatMessageRoleUser, Content: \u0026quot;hi!\u0026quot;},\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tfmt.Printf(\u0026quot;CreateChatCompletion error: %s\\n\u0026quot;, err.Error())\n\t\tos.Exit(-1)\n\t}\n\tfmt.Println(resp.Choices[0].Message.Content)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003chr\u003e\n\n\u003cdiv align=\"center\"\u003e\n  \u003cimg src=\"https://static.golangjob.cn/230511/4c8dc612c30f71b63d4cc08834331d2d.jpg\" alt=\"孟斯特\"\u003e\n\u003c/div\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e声明：本作品采用\u003ca href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh\"\u003e署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)\u003c/a\u003e进行许可，使用时请注明出处。\u003cbr\u003e\nAuthor: \u003ca href=\"mengbin1992@outlook.com\"\u003emengbin\u003c/a\u003e\u003cbr\u003e\nblog: \u003ca href=\"mengbin.top\"\u003emengbin\u003c/a\u003e\u003cbr\u003e\nGithub: \u003ca href=\"https://mengbin92.github.io/\"\u003emengbin92\u003c/a\u003e\u003cbr\u003e\ncnblogs: \u003ca href=\"https://www.cnblogs.com/lianshuiwuyi/\"\u003e恋水无意\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003chr\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "优维低代码实践：数据模型设计",
-      "Link": "https://studygolang.com/articles/36144#reply0",
-      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
