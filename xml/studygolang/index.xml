@@ -13,10 +13,6 @@
       <description>&lt;p&gt;大家好，我是 polarisxu。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我来招人了，欢迎优秀的你来和我成为同事！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;先简单介绍下我们公司。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;公司简介&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;公司名称：北京深维智信科技有限公司，是一家专注在会话智能领域的初创公司，立志通过音视频、AI、NLP、机器学习、会话智能等技术为销售团队赋能，通过会话智能数据分析为销售提供一站式协同解决方案，用科学方法打造明星销售团队，把优秀销售能力复制到每一笔交易。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;公司的联合创始团队来自一线互联网公司，由超过十年的人工智能技术专家、产品设计专家、资深系统架构师和音视频专家组成，在人工智能和音视频技术上产品技术创新经验丰富，对互联网产品有深刻理解。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;目前获得 GGV 纪源资本的投资。GGV 纪源资本是一家专注于全球早中期企业的风险投资公司，管理共17支基金，92亿美元资产，在硅谷、旧金山、上海、北京、新加坡设有办公室。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;GGV 纪源资本关注消费及新零售、互联网服务、前沿科技、企业服务和云等领域的创业公司，投资过包括阿里巴巴、滴滴出行、去哪儿、Airbnb、满帮集团、今日头条等400多家公司。截止2020年底，GGV有281家在管企业。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;GGV纪源资本对全球市场长期专注，深入本地化耕耘，交融贯通，积累了独特的资源，鼎力支持创业者不断开拓创新。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;招聘职位：服务端开发工程师&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;工作职责：&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;参与高性能系统的架构设计及研发，研究高稳定性、高可用性的系统架构设计；&lt;/li&gt;&#xA;&lt;li&gt;协助团队攻克各种数据隔离、系统解耦、效率优化等方面的技术难关；&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;任职资格：&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;本科以上学历，计算机相关专业；&lt;/li&gt;&#xA;&lt;li&gt;热爱计算机科学和互联网技术，精通至少一门编程语言，包括但不仅限于：Python、Golang；&lt;/li&gt;&#xA;&lt;li&gt;掌握扎实的计算机基础知识，深入理解数据结构、算法和操作系统知识，熟悉面向对象与设计模式知识；&lt;/li&gt;&#xA;&lt;li&gt;有优秀的逻辑分析能力，能够对业务逻辑进行合理的抽象和拆分；&lt;/li&gt;&#xA;&lt;li&gt;有强烈的求知欲，优秀的学习和沟通能力。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;薪资范围：12k~25k，工作经验 1~3 年，优秀应届生也欢迎。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Base 北京&lt;/p&gt;&#xA;&#xA;&lt;p&gt;在人工智能大浪潮下，一起用这么先进的技术为企业、为社会左右价值的事情，期待你的加入！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;欢迎优秀的你来和我成为同事！&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>优维低代码实践：数据模型设计</title>
-      <link>https://studygolang.com/articles/36144#reply0</link>
-    </item>
-    <item>
       <title>goroutine 数据竞争的问题</title>
       <link>https://studygolang.com/topics/16349#reply0</link>
       <description>&lt;p&gt;&amp;rdquo;`&#xA;func main() {&#xA;&#x9;// listen to incoming udp packets&#xA;&#x9;udpServer, err := net.ListenPacket(&amp;ldquo;udp&amp;rdquo;, &amp;ldquo;:1053&amp;rdquo;)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatal(err)&#xA;&#x9;}&#xA;&#x9;defer udpServer.Close()&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;buf := make([]byte, 1024)&#xA;&#xA;for {&#xA;&#x9;//buf := make([]byte, 1024)&#xA;&#x9;n, addr, err := udpServer.ReadFrom(buf)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;continue&#xA;&#x9;}&#xA;&#x9;tmp := buf[:n]&#xA;&#x9;fmt.Println(&amp;quot;tmp====&amp;quot;, len(tmp), cap(tmp), hex.EncodeToString(tmp))&#xA;&#x9;go response(udpServer, addr, tmp)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func response(udpServer net.PacketConn, addr net.Addr, buf []byte) {&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;fmt.Println(len(buf), string(buf), hex.EncodeToString(buf))&#xA;&#xA;time := time.Now().Format(time.ANSIC)&#xA;responseStr := fmt.Sprintf(&amp;quot;time received: %v. Your message: %v!&amp;quot;, time, string(buf))&#xA;&#xA;udpServer.WriteTo([]byte(responseStr), addr)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&amp;ldquo;`&lt;/p&gt;&#xA;&#xA;&lt;p&gt;一个 udp 的客户端发送 &amp;ldquo;hello&amp;rdquo; 到这个 udp的服务器，同时期望会正确的显示 hello.&#xA;但是由于 response 会被操作系统在不可预知的情况下调度，或者说这个 hello 对应的 response 执行了 len(buf)后被操作系统挂起&#xA;另一个 udp 的客户端发送 &amp;ldquo;world&amp;rdquo; 到这个 udp的服务器,此时前面的那个 response 被操作系统重新调度,此时会打印出 &amp;ldquo;world&amp;rdquo;,而不是预期的 &amp;ldquo;hello&amp;rdquo; ，不知道我判断对不对&#xA;多调多谢&lt;/p&gt;&#xA;</description>
@@ -24,6 +20,10 @@
     <item>
       <title>token-go 一个轻量级登录权限库</title>
       <link>https://studygolang.com/resources/15571#reply0</link>
+    </item>
+    <item>
+      <title>优维低代码实践：数据模型设计</title>
+      <link>https://studygolang.com/articles/36144#reply0</link>
     </item>
     <item>
       <title>golang有没有那种 查询数据库，直接返回 map[string]interface{}  或者类似的类型?</title>
