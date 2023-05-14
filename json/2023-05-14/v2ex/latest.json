@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "不喜欢 V2EX 点击回复要重刷新页面 - 程序员",
+      "Link": "https://www.v2ex.com/t/939987",
+      "Description": "",
+      "Author": "zhengzhongzhao",
+      "PubDate": "2023-05-14T21:23:11Z"
+    },
+    {
       "Title": "从项目里抽了个 Node.js rate limiter 出来，基于 Redis sorted set，支持多窗口限频 - 分享创造",
       "Link": "https://www.v2ex.com/t/939986",
       "Description": "\u003cp\u003e项目地址 \u003ca href=\"https://github.com/vilic/rateman\" rel=\"nofollow\"\u003ehttps://github.com/vilic/rateman\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eimport ms from 'ms';\nimport {RateLimiter, RateLimitExceededError} from 'rateman';\n\nconst rateLimiter = new RateLimiter({\n  name: 'user',\n  windows: [\n    {span: ms('1m'), limit: 10},\n    {span: ms('1h'), limit: 100},\n  ],\n});\n\ntry {\n  await rateLimiter.attempt('\u0026lt;user id\u0026gt;');\n} catch (error) {\n  if (error instanceof RateLimitExceededError) {\n    // ...\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eExpress\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eapp.use((req, _res, next) =\u0026gt; {\n  const ip = req.headers['x-forwarded-for'] || req.ip;\n\n  void rateLimiter.attempt(ip).then(\n    () =\u0026gt; next(),\n    error =\u0026gt; next(error),\n  );\n});\n\u003c/code\u003e\u003c/pre\u003e\n",
