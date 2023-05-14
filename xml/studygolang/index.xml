@@ -22,9 +22,18 @@
       <link>https://studygolang.com/resources/15571#reply0</link>
     </item>
     <item>
+      <title>goroutine 数据竞争的问题</title>
+      <link>https://studygolang.com/topics/16349#reply0</link>
+      <description>&lt;p&gt;&amp;rdquo;`&#xA;func main() {&#xA;&#x9;// listen to incoming udp packets&#xA;&#x9;udpServer, err := net.ListenPacket(&amp;ldquo;udp&amp;rdquo;, &amp;ldquo;:1053&amp;rdquo;)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatal(err)&#xA;&#x9;}&#xA;&#x9;defer udpServer.Close()&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;buf := make([]byte, 1024)&#xA;&#xA;for {&#xA;&#x9;//buf := make([]byte, 1024)&#xA;&#x9;n, addr, err := udpServer.ReadFrom(buf)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;continue&#xA;&#x9;}&#xA;&#x9;tmp := buf[:n]&#xA;&#x9;fmt.Println(&amp;quot;tmp====&amp;quot;, len(tmp), cap(tmp), hex.EncodeToString(tmp))&#xA;&#x9;go response(udpServer, addr, tmp)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func response(udpServer net.PacketConn, addr net.Addr, buf []byte) {&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;fmt.Println(len(buf), string(buf), hex.EncodeToString(buf))&#xA;&#xA;time := time.Now().Format(time.ANSIC)&#xA;responseStr := fmt.Sprintf(&amp;quot;time received: %v. Your message: %v!&amp;quot;, time, string(buf))&#xA;&#xA;udpServer.WriteTo([]byte(responseStr), addr)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&amp;ldquo;`&lt;/p&gt;&#xA;&#xA;&lt;p&gt;一个 udp 的客户端发送 &amp;ldquo;hello&amp;rdquo; 到这个 udp的服务器，同时期望会正确的显示 hello.&#xA;但是由于 response 会被操作系统在不可预知的情况下调度，或者说这个 hello 对应的 response 执行了 len(buf)后被操作系统挂起&#xA;另一个 udp 的客户端发送 &amp;ldquo;world&amp;rdquo; 到这个 udp的服务器,此时前面的那个 response 被操作系统重新调度,此时会打印出 &amp;ldquo;world&amp;rdquo;,而不是预期的 &amp;ldquo;hello&amp;rdquo; ，不知道我判断对不对&#xA;多调多谢&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>项目中全局变量的管理，各位有啥经验吗？</title>
       <link>https://studygolang.com/topics/16346#reply1</link>
       <description>&lt;p&gt;构思新框架中，看看大家有啥建议&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>优维低代码实践：数据模型设计</title>
+      <link>https://studygolang.com/articles/36144#reply0</link>
     </item>
     <item>
       <title>发现一个 ChatGPT 可用的链接地址，没事问问 ChatGPT 问题，很好玩啊！</title>
@@ -34,15 +43,6 @@
     <item>
       <title>apple apple</title>
       <link>https://studygolang.com/p/1140#reply0</link>
-    </item>
-    <item>
-      <title>goroutine 数据竞争的问题</title>
-      <link>https://studygolang.com/topics/16349#reply0</link>
-      <description>&lt;p&gt;&amp;rdquo;`&#xA;func main() {&#xA;&#x9;// listen to incoming udp packets&#xA;&#x9;udpServer, err := net.ListenPacket(&amp;ldquo;udp&amp;rdquo;, &amp;ldquo;:1053&amp;rdquo;)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatal(err)&#xA;&#x9;}&#xA;&#x9;defer udpServer.Close()&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;buf := make([]byte, 1024)&#xA;&#xA;for {&#xA;&#x9;//buf := make([]byte, 1024)&#xA;&#x9;n, addr, err := udpServer.ReadFrom(buf)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;continue&#xA;&#x9;}&#xA;&#x9;tmp := buf[:n]&#xA;&#x9;fmt.Println(&amp;quot;tmp====&amp;quot;, len(tmp), cap(tmp), hex.EncodeToString(tmp))&#xA;&#x9;go response(udpServer, addr, tmp)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func response(udpServer net.PacketConn, addr net.Addr, buf []byte) {&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;fmt.Println(len(buf), string(buf), hex.EncodeToString(buf))&#xA;&#xA;time := time.Now().Format(time.ANSIC)&#xA;responseStr := fmt.Sprintf(&amp;quot;time received: %v. Your message: %v!&amp;quot;, time, string(buf))&#xA;&#xA;udpServer.WriteTo([]byte(responseStr), addr)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&amp;ldquo;`&lt;/p&gt;&#xA;&#xA;&lt;p&gt;一个 udp 的客户端发送 &amp;ldquo;hello&amp;rdquo; 到这个 udp的服务器，同时期望会正确的显示 hello.&#xA;但是由于 response 会被操作系统在不可预知的情况下调度，或者说这个 hello 对应的 response 执行了 len(buf)后被操作系统挂起&#xA;另一个 udp 的客户端发送 &amp;ldquo;world&amp;rdquo; 到这个 udp的服务器,此时前面的那个 response 被操作系统重新调度,此时会打印出 &amp;ldquo;world&amp;rdquo;,而不是预期的 &amp;ldquo;hello&amp;rdquo; ，不知道我判断对不对&#xA;多调多谢&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>优维低代码实践：数据模型设计</title>
-      <link>https://studygolang.com/articles/36144#reply0</link>
     </item>
     <item>
       <title>两个goroutine 循环打印1~10</title>
