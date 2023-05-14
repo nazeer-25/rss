@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Windows11 又出 bug， visio 卡死 - 程序员</title>
+      <link>https://www.v2ex.com/t/939903</link>
+      <description>&lt;p&gt;最新版本的 Windows 11 ，打开 visio 后编辑文件时候，放大缩小都会导致内存和 CPU 暴涨到 100%&lt;/p&gt;&#xA;&lt;p&gt;我试了好几个 Visio 版本，都不能解决问题&lt;/p&gt;&#xA;&lt;p&gt;最后下载虚拟机装了个 win10 ，完美解决&lt;/p&gt;&#xA;&lt;p&gt;等毕业就装回 win10&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;VZbcVb.jpeg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.328888.xyz/2023/05/14/VZbcVb.jpeg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>nativeBoy</author>
+      <pubDate>14 May 2023 09:06:35 +0000</pubDate>
+    </item>
+    <item>
+      <title>用 ebpf 可以定位到服务器这边会偶尔丢掉 syn 包，如何进一步定位具体是什么原因丢包的？ - Linux</title>
+      <link>https://www.v2ex.com/t/939902</link>
+      <description>&lt;p&gt;机器 A 向机器 B 建立 TCP 连接，当建立了 20 万的连接后，想建立新的连接就很慢。&lt;/p&gt;&#xA;&lt;p&gt;此时在机器 A 上用 tcpdump 抓包可以看到：有的连接可以正常三次握手，有的连接需要发多个 syn 包，有的连续发 6 次 syn 包无响应后应用层就报错了。&lt;/p&gt;&#xA;&lt;p&gt;在机器 B 上用 ebpf 来捕获 kfree_skb 的调用，可以发现内核的确是丢包了，但是如何知道为什么会丢包呢？不知道谁能解答。此时内核日志无异常，cpu 和内存也很充足。我是用的 bpftrace 定位的，bpftrace 的执行脚本如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;kprobe:kfree_skb&#xA;{&#xA;        $skb = (struct sk_buff*) arg0;&#xA;        $ip_header = ((struct iphdr *) ($skb-&amp;gt;head + $skb-&amp;gt;network_header));&#xA;        // 这里只捕获 daddr 是 192.168.2.120 的包&#xA;        if ($ip_header-&amp;gt;daddr == 0x7802a8c0)&#xA;        {&#xA;                $tcp_header= ((struct tcphdr *) ($skb-&amp;gt;head + $skb-&amp;gt;network_header + ($ip_header-&amp;gt;ihl &amp;lt;&amp;lt; 2)));&#xA;                $sport = $tcp_header-&amp;gt;source;&#xA;                $dport = $tcp_header-&amp;gt;dest;&#xA;                $dport = ($dport &amp;gt;&amp;gt; 8) | (($dport &amp;lt;&amp;lt; 8) &amp;amp; 0xff00);&#xA;                $sport = ($sport &amp;gt;&amp;gt; 8) | (($sport &amp;lt;&amp;lt; 8) &amp;amp; 0xff00);&#xA;                // 这里只捕获 dport 是 8100 的包&#xA;                if ($dport == 8100) {&#xA;                        time(&#34;%H:%M:%S &#34;);&#xA;                        printf(&#34;%s:%d &amp;gt; %s:%d\n&#34;, ntop($ip_header-&amp;gt;saddr), $sport, ntop($ip_header-&amp;gt;daddr), $dport);&#xA;                }&#xA;        }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>xing393939</author>
+      <pubDate>14 May 2023 09:00:54 +0000</pubDate>
+    </item>
+    <item>
       <title>使用 resilio sync - 问与答</title>
       <link>https://www.v2ex.com/t/939901</link>
       <description>原本是用来备份手机文件到电脑上，遇到一点疑惑，就是不知道怎么理解“在文件夹存档中存储已删除的文件”这句话，不知道在哪个存档能找到那些在手机上被删除的文件</description>
@@ -177,7 +191,7 @@
       <pubDate>14 May 2023 06:04:28 +0000</pubDate>
     </item>
     <item>
-      <title>怎么合理避税 - 问与答</title>
+      <title>怎么合理避税 - 职场话题</title>
       <link>https://www.v2ex.com/t/939866</link>
       <description>虫虫打工人，税太高了，每月那点减免不够看，有什么可以避税的途径吗。看网上有拿香港身份的，但好像也不能免税。开公司这种又太不现实了</description>
       <author>ikn0wzxc</author>
