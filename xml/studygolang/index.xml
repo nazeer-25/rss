@@ -23,22 +23,22 @@
       <description>&lt;h2&gt;介绍&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;一个简单的web应用程序demo，用作连接到ssh服务器的ssh客户端。它是用go+xterm.js编写的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;本项目只是一个demo，只做参考用，后续会写一个正式版本，敬请期待！&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;模块&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;模块交互图&#xA;&lt;img src=&#34;https://www.rushui.net/posts/go-webssh-demo/webssh.png&#34; alt=&#34;模块交互图&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;前端ui&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;使用xterm.js实现 demo版本只用了简单的html，达到效果就OK&lt;/p&gt;&#xA;&#xA;&lt;p&gt;前端有个FitAddon插件，在html版本上用了，后面还是用vue+xterm.js实现前端吧。&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;后端&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;从交互图上可以看出，项目有两大功能，一个是ssh交互，一个是回放。在ssh通讯的过程中，交互的数据会被保存下来，这一步要录屏。&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;websocket&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;前端ui与ssh服务器通讯的桥梁，&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;terminal&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;封装各种shell的控制台。包含本地shell、远程ssh和k8s中pod的shell&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;replay&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;包含录屏与回放两种功能。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;SSH服务器&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;输入下面命令建立一个ssh服务器，本demo提供了这个模拟ssh服务的默认参数，开箱即用。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker run -d -p 222:22 --rm bimg/alpine-ssh&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;ssh服务项目地址：&#xA;&lt;a href=&#34;https://github.com/basicimage/alpine-ssh&#34;&gt;https://github.com/basicimage/alpine-ssh&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;效果&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://www.rushui.net/posts/go-webssh-demo/demo.png&#34; alt=&#34;效果&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;项目地址&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/go-webssh/demo&#34;&gt;https://github.com/go-webssh/demo&lt;/a&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>token-go 一个轻量级登录权限库</title>
+      <link>https://studygolang.com/resources/15571#reply0</link>
+    </item>
+    <item>
       <title>goroutine 数据竞争的问题</title>
       <link>https://studygolang.com/topics/16349#reply0</link>
       <description>&lt;p&gt;&amp;rdquo;`&#xA;func main() {&#xA;&#x9;// listen to incoming udp packets&#xA;&#x9;udpServer, err := net.ListenPacket(&amp;ldquo;udp&amp;rdquo;, &amp;ldquo;:1053&amp;rdquo;)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatal(err)&#xA;&#x9;}&#xA;&#x9;defer udpServer.Close()&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;buf := make([]byte, 1024)&#xA;&#xA;for {&#xA;&#x9;//buf := make([]byte, 1024)&#xA;&#x9;n, addr, err := udpServer.ReadFrom(buf)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;continue&#xA;&#x9;}&#xA;&#x9;tmp := buf[:n]&#xA;&#x9;fmt.Println(&amp;quot;tmp====&amp;quot;, len(tmp), cap(tmp), hex.EncodeToString(tmp))&#xA;&#x9;go response(udpServer, addr, tmp)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func response(udpServer net.PacketConn, addr net.Addr, buf []byte) {&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;fmt.Println(len(buf), string(buf), hex.EncodeToString(buf))&#xA;&#xA;time := time.Now().Format(time.ANSIC)&#xA;responseStr := fmt.Sprintf(&amp;quot;time received: %v. Your message: %v!&amp;quot;, time, string(buf))&#xA;&#xA;udpServer.WriteTo([]byte(responseStr), addr)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&amp;ldquo;`&lt;/p&gt;&#xA;&#xA;&lt;p&gt;一个 udp 的客户端发送 &amp;ldquo;hello&amp;rdquo; 到这个 udp的服务器，同时期望会正确的显示 hello.&#xA;但是由于 response 会被操作系统在不可预知的情况下调度，或者说这个 hello 对应的 response 执行了 len(buf)后被操作系统挂起&#xA;另一个 udp 的客户端发送 &amp;ldquo;world&amp;rdquo; 到这个 udp的服务器,此时前面的那个 response 被操作系统重新调度,此时会打印出 &amp;ldquo;world&amp;rdquo;,而不是预期的 &amp;ldquo;hello&amp;rdquo; ，不知道我判断对不对&#xA;多调多谢&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>优维低代码实践：数据模型设计</title>
-      <link>https://studygolang.com/articles/36144#reply0</link>
-    </item>
-    <item>
-      <title>token-go 一个轻量级登录权限库</title>
-      <link>https://studygolang.com/resources/15571#reply0</link>
-    </item>
-    <item>
       <title>项目中全局变量的管理，各位有啥经验吗？</title>
       <link>https://studygolang.com/topics/16346#reply1</link>
       <description>&lt;p&gt;构思新框架中，看看大家有啥建议&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>优维低代码实践：数据模型设计</title>
+      <link>https://studygolang.com/articles/36144#reply0</link>
     </item>
     <item>
       <title>发现一个 ChatGPT 可用的链接地址，没事问问 ChatGPT 问题，很好玩啊！</title>
