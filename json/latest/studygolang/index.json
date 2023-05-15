@@ -46,6 +46,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "goroutine 数据竞争的问题",
+      "Link": "https://studygolang.com/topics/16349#reply0",
+      "Description": "\u003cp\u003e\u0026rdquo;`\nfunc main() {\n\t// listen to incoming udp packets\n\tudpServer, err := net.ListenPacket(\u0026ldquo;udp\u0026rdquo;, \u0026ldquo;:1053\u0026rdquo;)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer udpServer.Close()\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003ebuf := make([]byte, 1024)\n\nfor {\n\t//buf := make([]byte, 1024)\n\tn, addr, err := udpServer.ReadFrom(buf)\n\tif err != nil {\n\t\tcontinue\n\t}\n\ttmp := buf[:n]\n\tfmt.Println(\u0026quot;tmp====\u0026quot;, len(tmp), cap(tmp), hex.EncodeToString(tmp))\n\tgo response(udpServer, addr, tmp)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n\n\u003cp\u003efunc response(udpServer net.PacketConn, addr net.Addr, buf []byte) {\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efmt.Println(len(buf), string(buf), hex.EncodeToString(buf))\n\ntime := time.Now().Format(time.ANSIC)\nresponseStr := fmt.Sprintf(\u0026quot;time received: %v. Your message: %v!\u0026quot;, time, string(buf))\n\nudpServer.WriteTo([]byte(responseStr), addr)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u0026ldquo;`\u003c/p\u003e\n\n\u003cp\u003e一个 udp 的客户端发送 \u0026ldquo;hello\u0026rdquo; 到这个 udp的服务器，同时期望会正确的显示 hello.\n但是由于 response 会被操作系统在不可预知的情况下调度，或者说这个 hello 对应的 response 执行了 len(buf)后被操作系统挂起\n另一个 udp 的客户端发送 \u0026ldquo;world\u0026rdquo; 到这个 udp的服务器,此时前面的那个 response 被操作系统重新调度,此时会打印出 \u0026ldquo;world\u0026rdquo;,而不是预期的 \u0026ldquo;hello\u0026rdquo; ，不知道我判断对不对\n多调多谢\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "优维低代码实践：数据模型设计",
       "Link": "https://studygolang.com/articles/36144#reply0",
       "Description": "",
@@ -53,9 +60,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "goroutine 数据竞争的问题",
-      "Link": "https://studygolang.com/topics/16349#reply0",
-      "Description": "\u003cp\u003e\u0026rdquo;`\nfunc main() {\n\t// listen to incoming udp packets\n\tudpServer, err := net.ListenPacket(\u0026ldquo;udp\u0026rdquo;, \u0026ldquo;:1053\u0026rdquo;)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer udpServer.Close()\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003ebuf := make([]byte, 1024)\n\nfor {\n\t//buf := make([]byte, 1024)\n\tn, addr, err := udpServer.ReadFrom(buf)\n\tif err != nil {\n\t\tcontinue\n\t}\n\ttmp := buf[:n]\n\tfmt.Println(\u0026quot;tmp====\u0026quot;, len(tmp), cap(tmp), hex.EncodeToString(tmp))\n\tgo response(udpServer, addr, tmp)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n\n\u003cp\u003efunc response(udpServer net.PacketConn, addr net.Addr, buf []byte) {\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efmt.Println(len(buf), string(buf), hex.EncodeToString(buf))\n\ntime := time.Now().Format(time.ANSIC)\nresponseStr := fmt.Sprintf(\u0026quot;time received: %v. Your message: %v!\u0026quot;, time, string(buf))\n\nudpServer.WriteTo([]byte(responseStr), addr)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u0026ldquo;`\u003c/p\u003e\n\n\u003cp\u003e一个 udp 的客户端发送 \u0026ldquo;hello\u0026rdquo; 到这个 udp的服务器，同时期望会正确的显示 hello.\n但是由于 response 会被操作系统在不可预知的情况下调度，或者说这个 hello 对应的 response 执行了 len(buf)后被操作系统挂起\n另一个 udp 的客户端发送 \u0026ldquo;world\u0026rdquo; 到这个 udp的服务器,此时前面的那个 response 被操作系统重新调度,此时会打印出 \u0026ldquo;world\u0026rdquo;,而不是预期的 \u0026ldquo;hello\u0026rdquo; ，不知道我判断对不对\n多调多谢\u003c/p\u003e\n",
+      "Title": "转换 11111000 到 -8 怎么做",
+      "Link": "https://studygolang.com/topics/15563#reply3",
+      "Description": "\u003cp\u003e转换 11111000 到 -8 怎么做  感谢。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
