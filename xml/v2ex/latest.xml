@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>CentOS 7.5 集群使用 NIS 管理用户时存在部分用户（组）无法删除 - Linux</title>
+      <link>https://www.v2ex.com/t/940263</link>
+      <description>&lt;p&gt;集群主节点和计算节点均采用 CentOS Linux release 7.5.1804 (Core)系统。/etc/nsswitch.conf 中部分内容为：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;passwd:     files nis sss&#xA;shadow:     files nis sss&#xA;group:      files nis sss&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;code&gt;getent passwd -s nis&lt;/code&gt;的输出包括：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-passwd&#34;&gt;u2:$1$GE2edQgf$UyXuGspuf5uwbp.zK91aH0:9002:9002::/data/home/geou2:/bin/csh&#xA;u3:$1$Ddytc7s0$5yPBahgmfVyaqC0.Bur1.1:9003:9003::/data/home/geou3:/bin/csh&#xA;u1:$1$3Z52ZIDu$Od.rfOebsXRxI.nrBut1G1:9001:9001::/data/home/geou1:/bin/csh&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;code&gt;ypcat passwd&lt;/code&gt;的输出也包括&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;u2:$1$GE2edQgf$UyXuGspuf5uwbp.zK91aH0:9002:9002::/data/home/geou2:/bin/csh&#xA;u3:$1$Ddytc7s0$5yPBahgmfVyaqC0.Bur1.1:9003:9003::/data/home/geou3:/bin/csh&#xA;u1:$1$3Z52ZIDu$Od.rfOebsXRxI.nrBut1G1:9001:9001::/data/home/geou1:/bin/csh&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;使用&lt;code&gt;su&lt;/code&gt;可以切换进这些用户：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$su u1&#xA;Password:&#xA;mkdir: cannot create directory ‘/data’: Permission denied&#xA;Attempting to create directory /data/home/u1/perl5&#xA;mkdir /data: Permission denied at /usr/share/perl5/vendor_perl/local/lib.pm line 269.&#xA;BEGIN failed--compilation aborted.&#xA;[u1@mu01 /]$&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是删除和建立同名用户时会出现错误：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# userdel u1&#xA;userdel: 无法从 /etc/passwd 中移除 u1 &#xA;# useradd u1&#xA;useradd: 用户 u1 已存在&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在&lt;code&gt;/etc/{passwd, shadow}&lt;/code&gt;中没有这些用户。(还有一些对应的 group 也是这种情况）&lt;/p&gt;&#xA;&lt;p&gt;目前尝试过&lt;code&gt;cd /var/yp/; make&lt;/code&gt;，没有作用。&lt;/p&gt;&#xA;&lt;p&gt;由于需要安装一些闭源商业软件，用户名和组名必须为预设的内容。&lt;/p&gt;&#xA;&lt;p&gt;请问如何删除这些用户和组？请各位大佬不吝赐教，谢谢！&lt;/p&gt;&#xA;</description>
+      <author>upojzsb</author>
+      <pubDate>15 May 2023 16:30:11 +0000</pubDate>
+    </item>
+    <item>
       <title>刚刚一次性绑卡成功 OpenAI 的 API - OpenAI</title>
       <link>https://www.v2ex.com/t/940261</link>
       <description>&lt;p&gt;开了个 nobepay 最新的 531993 号段，折腾了一波 USDT 入金，账单地址在 Google Map 上随便找了一个俄勒冈的真实地址，然后隐私模式，开全局代理，节点我随意选了一个荷兰的，地址填写跟开卡时的一致，一次绑卡成功，比我想象的容易些。&lt;/p&gt;&#xA;</description>

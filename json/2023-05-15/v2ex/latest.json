@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "CentOS 7.5 集群使用 NIS 管理用户时存在部分用户（组）无法删除 - Linux",
+      "Link": "https://www.v2ex.com/t/940263",
+      "Description": "\u003cp\u003e集群主节点和计算节点均采用 CentOS Linux release 7.5.1804 (Core)系统。/etc/nsswitch.conf 中部分内容为：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epasswd:     files nis sss\nshadow:     files nis sss\ngroup:      files nis sss\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ccode\u003egetent passwd -s nis\u003c/code\u003e的输出包括：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-passwd\"\u003eu2:$1$GE2edQgf$UyXuGspuf5uwbp.zK91aH0:9002:9002::/data/home/geou2:/bin/csh\nu3:$1$Ddytc7s0$5yPBahgmfVyaqC0.Bur1.1:9003:9003::/data/home/geou3:/bin/csh\nu1:$1$3Z52ZIDu$Od.rfOebsXRxI.nrBut1G1:9001:9001::/data/home/geou1:/bin/csh\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ccode\u003eypcat passwd\u003c/code\u003e的输出也包括\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eu2:$1$GE2edQgf$UyXuGspuf5uwbp.zK91aH0:9002:9002::/data/home/geou2:/bin/csh\nu3:$1$Ddytc7s0$5yPBahgmfVyaqC0.Bur1.1:9003:9003::/data/home/geou3:/bin/csh\nu1:$1$3Z52ZIDu$Od.rfOebsXRxI.nrBut1G1:9001:9001::/data/home/geou1:/bin/csh\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e使用\u003ccode\u003esu\u003c/code\u003e可以切换进这些用户：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e$su u1\nPassword:\nmkdir: cannot create directory ‘/data’: Permission denied\nAttempting to create directory /data/home/u1/perl5\nmkdir /data: Permission denied at /usr/share/perl5/vendor_perl/local/lib.pm line 269.\nBEGIN failed--compilation aborted.\n[u1@mu01 /]$\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是删除和建立同名用户时会出现错误：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e# userdel u1\nuserdel: 无法从 /etc/passwd 中移除 u1 \n# useradd u1\nuseradd: 用户 u1 已存在\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在\u003ccode\u003e/etc/{passwd, shadow}\u003c/code\u003e中没有这些用户。(还有一些对应的 group 也是这种情况）\u003c/p\u003e\n\u003cp\u003e目前尝试过\u003ccode\u003ecd /var/yp/; make\u003c/code\u003e，没有作用。\u003c/p\u003e\n\u003cp\u003e由于需要安装一些闭源商业软件，用户名和组名必须为预设的内容。\u003c/p\u003e\n\u003cp\u003e请问如何删除这些用户和组？请各位大佬不吝赐教，谢谢！\u003c/p\u003e\n",
+      "Author": "upojzsb",
+      "PubDate": "2023-05-15T16:30:11Z"
+    },
+    {
       "Title": "刚刚一次性绑卡成功 OpenAI 的 API - OpenAI",
       "Link": "https://www.v2ex.com/t/940261",
       "Description": "\u003cp\u003e开了个 nobepay 最新的 531993 号段，折腾了一波 USDT 入金，账单地址在 Google Map 上随便找了一个俄勒冈的真实地址，然后隐私模式，开全局代理，节点我随意选了一个荷兰的，地址填写跟开卡时的一致，一次绑卡成功，比我想象的容易些。\u003c/p\u003e\n",
