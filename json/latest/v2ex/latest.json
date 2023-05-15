@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "关于线程池的问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/940138",
+      "Description": "\u003cp\u003e线程池有个疑问，我的机器 4 核 16G,按照最优的线程数 2n+1 来说为 9 个，但是在如下代码中\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epublic static void main(String[] args) {\n        // 创建线程池，500 个线程数\n        ExecutorService es = ThreadUtils.getInstance(\"approveProcessForBatch\", 500);\n        Map\u0026lt;Integer, Future\u0026lt;Object\u0026gt;\u0026gt; futureMap = new HashMap\u0026lt;\u0026gt;(SystemConstant.INITIAL_CAPACITY);\n        for (int i = 0; i \u0026lt;= 250; i++) {\n            // delay5s 耗时 5s\n            es.submit(() -\u0026gt; delay5s(\"\"));\n        }\n        System.out.println(\"开始执行时间：\" + DateTime.now());\n        for (int i = 0; i \u0026lt;= 100; i++) {\n            int finalI = i;\n            Future\u0026lt;Object\u0026gt; future = es.submit(() -\u0026gt; delay5s(\"当前任务\" + finalI));\n            futureMap.put(finalI, future);\n        }\n        futureMap.keySet().forEach(i -\u0026gt; {\n            try {\n                // v 是当前任务名称\n                Object v = futureMap.get(i).get();\n                System.out.println(v + \"，完成时间：\" + DateTime.now());\n            } catch (ExecutionException | InterruptedException e) {\n                throw new BusinessException(e);\n            }\n        });\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e目前设置了 500 个线程数，会在 5s 之后将 100 个任务全部完成，假如我只设置 9 个，那预计需要 250/9 * 5s 的时间，导致这个现象的原因是啥？\u003c/p\u003e\n",
+      "Author": "wholve",
+      "PubDate": "2023-05-15T07:11:36Z"
+    },
+    {
+      "Title": "Redmi Note12 Turbo 能刷外国版 ROM 吗？ - Android",
+      "Link": "https://www.v2ex.com/t/940136",
+      "Description": "\u003cp\u003e本人没有刷过，目前只在这个网站上找到相关 ROM ，请问这个网站的刷机包靠谱吗？ \u003ca href=\"https://xiaomirom.com/rom/redmi-note-12-turbo-poco-f5-marble-taiwan-fastboot-recovery-rom/#\" rel=\"nofollow\"\u003ehttps://xiaomirom.com/rom/redmi-note-12-turbo-poco-f5-marble-taiwan-fastboot-recovery-rom/#\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "s04",
+      "PubDate": "2023-05-15T07:11:07Z"
+    },
+    {
       "Title": "mysql 锁超时有什么好的方案吗？ - 程序员",
       "Link": "https://www.v2ex.com/t/940135",
       "Description": "\u003cp\u003emysql5.7 插入、更新数据时报错：Lock wait timeout exceeded; try restarting transaction 。定时同步插入、更新到其它数据库时会上行锁。历史遗留问题主键 ID 为 uuid 。目前看超时时间是默认 50s ，临时改为 100s 了。\n想不明白都是上的行锁，为啥插入不进去，不知什么原因变成表锁了。目前考虑增加硬件配置会不会好些，还是要将数据库连接池的最大数量调低。\u003c/p\u003e\n",

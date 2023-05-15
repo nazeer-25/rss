@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于线程池的问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/940138</link>
+      <description>&lt;p&gt;线程池有个疑问，我的机器 4 核 16G,按照最优的线程数 2n+1 来说为 9 个，但是在如下代码中&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;public static void main(String[] args) {&#xA;        // 创建线程池，500 个线程数&#xA;        ExecutorService es = ThreadUtils.getInstance(&#34;approveProcessForBatch&#34;, 500);&#xA;        Map&amp;lt;Integer, Future&amp;lt;Object&amp;gt;&amp;gt; futureMap = new HashMap&amp;lt;&amp;gt;(SystemConstant.INITIAL_CAPACITY);&#xA;        for (int i = 0; i &amp;lt;= 250; i++) {&#xA;            // delay5s 耗时 5s&#xA;            es.submit(() -&amp;gt; delay5s(&#34;&#34;));&#xA;        }&#xA;        System.out.println(&#34;开始执行时间：&#34; + DateTime.now());&#xA;        for (int i = 0; i &amp;lt;= 100; i++) {&#xA;            int finalI = i;&#xA;            Future&amp;lt;Object&amp;gt; future = es.submit(() -&amp;gt; delay5s(&#34;当前任务&#34; + finalI));&#xA;            futureMap.put(finalI, future);&#xA;        }&#xA;        futureMap.keySet().forEach(i -&amp;gt; {&#xA;            try {&#xA;                // v 是当前任务名称&#xA;                Object v = futureMap.get(i).get();&#xA;                System.out.println(v + &#34;，完成时间：&#34; + DateTime.now());&#xA;            } catch (ExecutionException | InterruptedException e) {&#xA;                throw new BusinessException(e);&#xA;            }&#xA;        });&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;目前设置了 500 个线程数，会在 5s 之后将 100 个任务全部完成，假如我只设置 9 个，那预计需要 250/9 * 5s 的时间，导致这个现象的原因是啥？&lt;/p&gt;&#xA;</description>
+      <author>wholve</author>
+      <pubDate>15 May 2023 07:11:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>Redmi Note12 Turbo 能刷外国版 ROM 吗？ - Android</title>
+      <link>https://www.v2ex.com/t/940136</link>
+      <description>&lt;p&gt;本人没有刷过，目前只在这个网站上找到相关 ROM ，请问这个网站的刷机包靠谱吗？ &lt;a href=&#34;https://xiaomirom.com/rom/redmi-note-12-turbo-poco-f5-marble-taiwan-fastboot-recovery-rom/#&#34; rel=&#34;nofollow&#34;&gt;https://xiaomirom.com/rom/redmi-note-12-turbo-poco-f5-marble-taiwan-fastboot-recovery-rom/#&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>s04</author>
+      <pubDate>15 May 2023 07:11:07 +0000</pubDate>
+    </item>
+    <item>
       <title>mysql 锁超时有什么好的方案吗？ - 程序员</title>
       <link>https://www.v2ex.com/t/940135</link>
       <description>&lt;p&gt;mysql5.7 插入、更新数据时报错：Lock wait timeout exceeded; try restarting transaction 。定时同步插入、更新到其它数据库时会上行锁。历史遗留问题主键 ID 为 uuid 。目前看超时时间是默认 50s ，临时改为 100s 了。&#xA;想不明白都是上的行锁，为啥插入不进去，不知什么原因变成表锁了。目前考虑增加硬件配置会不会好些，还是要将数据库连接池的最大数量调低。&lt;/p&gt;&#xA;</description>
