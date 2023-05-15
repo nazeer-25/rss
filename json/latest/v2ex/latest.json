@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如何通过 cloudflare worker 实现假装关闭网站？ - 程序员",
+      "Link": "https://www.v2ex.com/t/940204",
+      "Description": "\u003cp\u003e需求： 国内 ip 访问网站显示正在维护中，非大陆 ip 正常访问。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e使用 WAF ，直接设置来自 China 的 ip 阻止。 但是他显示的页面是 cloudflare 的禁止访问的页面，不太符合需求。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e使用 worker ，用以下的代码部署, 来自大陆的 ip 能正常阻止，但是非大陆 ip 会一直重定向：\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eexport default {\n  async fetch(request, env) {\n    let country = request.headers.get('cf-ipcountry')\n\n    if(country === 'CN') {\n      return new Response('Sorry, this page is not available.', { status: 403 })\n    }\n\n    return fetch(request)\n  }\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e请教一下大家有什么解决方法没有？ （我并不专注于 js 和网络，所以有什么我需要了解的知识，还请不吝指出，我去了解，谢谢）\u003c/p\u003e\n",
+      "Author": "Alan3",
+      "PubDate": "2023-05-15T10:31:01Z"
+    },
+    {
       "Title": "离婚了,如何告诉孩子?要不要告诉孩子? - 问与答",
       "Link": "https://www.v2ex.com/t/940203",
       "Description": "\u003cp\u003e我的上个帖子已经提到过了,和妻子不可能和好了,妻子也是个强势的人,我就算是不同意离婚,她也会起诉离婚,还不如好聚好散,协商好了,孩子归我,她也不需要出抚养费,孩子目前跟我们在一起,8 岁上一年级,我猜测离婚后大概率她会回娘家,娘家湖南永州,我家湖北黄冈,我们目前在武汉,孩子其实是不希望我们分开的,因为有时候吵架,孩子还是知道一些,她妈妈也经常当着孩子的面说我的不是,我其实很少当着孩子的面说孩子妈妈的不是的,我在想到时候孩子见不到妈妈,肯定也猜的出妈妈去外地的,再也见不到她了,我该怎么疏导孩子呢?怎么和他讲离婚这个事情呢?\u003c/p\u003e\n",
