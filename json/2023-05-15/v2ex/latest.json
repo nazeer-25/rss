@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Arc release notes 看不了 - Arc",
+      "Link": "https://www.v2ex.com/t/940140",
+      "Description": "\u003cp\u003e用了一段时间的 Arc 体验不错，唯一一点不舒服的就是每次更新完之后点开 release note 会在 Arc 里面打开一个“Easel ，但是是完全空白的。每次我都要复制 URL 到 Safari 或者 Chrome 查看更新了什么。\u003c/p\u003e\n\u003cp\u003e大家也有这个问题吗？好像是需要使用 clashx pro 的增强模式才可以代理 Easel ，有没有什么办法配置 Easel 走系统代理？\u003c/p\u003e\n",
+      "Author": "Chandleric",
+      "PubDate": "2023-05-15T07:19:20Z"
+    },
+    {
+      "Title": "1k rmb 收 OpenAI4.0API - OpenAI",
+      "Link": "https://www.v2ex.com/t/940139",
+      "Description": "\u003cp\u003e可以走闲鱼 V:d1chun\u003c/p\u003e\n",
+      "Author": "dichun",
+      "PubDate": "2023-05-15T07:19:15Z"
+    },
+    {
       "Title": "关于线程池的问题 - 程序员",
       "Link": "https://www.v2ex.com/t/940138",
       "Description": "\u003cp\u003e线程池有个疑问，我的机器 4 核 16G,按照最优的线程数 2n+1 来说为 9 个，但是在如下代码中\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epublic static void main(String[] args) {\n        // 创建线程池，500 个线程数\n        ExecutorService es = ThreadUtils.getInstance(\"approveProcessForBatch\", 500);\n        Map\u0026lt;Integer, Future\u0026lt;Object\u0026gt;\u0026gt; futureMap = new HashMap\u0026lt;\u0026gt;(SystemConstant.INITIAL_CAPACITY);\n        for (int i = 0; i \u0026lt;= 250; i++) {\n            // delay5s 耗时 5s\n            es.submit(() -\u0026gt; delay5s(\"\"));\n        }\n        System.out.println(\"开始执行时间：\" + DateTime.now());\n        for (int i = 0; i \u0026lt;= 100; i++) {\n            int finalI = i;\n            Future\u0026lt;Object\u0026gt; future = es.submit(() -\u0026gt; delay5s(\"当前任务\" + finalI));\n            futureMap.put(finalI, future);\n        }\n        futureMap.keySet().forEach(i -\u0026gt; {\n            try {\n                // v 是当前任务名称\n                Object v = futureMap.get(i).get();\n                System.out.println(v + \"，完成时间：\" + DateTime.now());\n            } catch (ExecutionException | InterruptedException e) {\n                throw new BusinessException(e);\n            }\n        });\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e目前设置了 500 个线程数，会在 5s 之后将 100 个任务全部完成，假如我只设置 9 个，那预计需要 250/9 * 5s 的时间，导致这个现象的原因是啥？\u003c/p\u003e\n",
