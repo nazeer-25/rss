@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "求推广州 Java 实习 offer - 职场话题",
+      "Link": "https://www.v2ex.com/t/940445",
+      "Description": "\u003cp\u003e本人目前大三，去年专升本上岸了广州的一所高校，在之前有过小一年工作经验，在校期间也有接些企业或个人的私活赚点小钱。今年 7 月份可到岗实习，有对我感兴趣的大佬可以加下我 wx ，我把简历发你~\u003c/p\u003e\n\u003cp\u003ewx:U1lfV0VDSEFUX0lE\u003c/p\u003e\n",
+      "Author": "LostInTV",
+      "PubDate": "2023-05-16T07:55:12Z"
+    },
+    {
+      "Title": "打包 nginx docker image 时遇到的问题 - NGINX",
+      "Link": "https://www.v2ex.com/t/940444",
+      "Description": "\u003cp\u003e我希望打包的镜像在读到某环境变量，例如 SSL=1 时，就监听 443 ssl ，相应做 80 -- 304 强制跳转。但是目前除了重写 nginx 官方镜像自带的 \u003ca href=\"http://entrypoint.sh\" rel=\"nofollow\"\u003eentrypoint.sh\u003c/a\u003e 外，没想到其他优雅的办法了。\u003c/p\u003e\n",
+      "Author": "MartinWu",
+      "PubDate": "2023-05-16T07:54:01Z"
+    },
+    {
+      "Title": "GraphAr：一款开源的图数据存储和归档的标准化文件格式 - 分享创造",
+      "Link": "https://www.v2ex.com/t/940442",
+      "Description": "\u003cp\u003eHi ，v2ers ，给大家介绍一下我们开源的标准化图数据文件格式 - \u003ca href=\"https://github.com/alibaba/GraphAr\" rel=\"nofollow\"\u003eGraphAr\u003c/a\u003e。\u003c/p\u003e\n\u003cp\u003e项目地址： \u003ca href=\"https://github.com/alibaba/GraphAr\" rel=\"nofollow\"\u003ehttps://github.com/alibaba/GraphAr\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e背景\u003c/h2\u003e\n\u003cp\u003e随着社交网络分析、数据挖掘、科学计算等应用的发展，图计算作为海量数据分析的重要组成部分，变得日益重要，业界也诞生了很多基于内存 /外存的图存储、数据库、图分析和交互式图查询引擎等。由于图计算的生态非常碎片化，存在很多不同类型的数据格式和访问模式，因此需要建立一套标准化的文件格式和访问接口来解决各种图计算系统的数据导入导出，互相访问的问题。\u003c/p\u003e\n\u003ch2\u003eGraphAr 是什么\u003c/h2\u003e\n\u003cp\u003e\u003cimg alt=\"GraphAr\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.328888.xyz/2023/05/16/ViRYjo.png\"/\u003e\u003c/p\u003e\n\u003cp\u003eGraphAr 就是为了解决不同图计算系统数据导入导出过于复杂的问题而设计的。它为图数据定义了一套标准化的、独立于计算 /存储系统的文件格式，并提供了一系列接口用来生成、访问和转换这些格式化的文件。GraphAr 可以帮助各类图计算应用或现有系统方便快捷地构建和访问图数据，它既可以作为图计算应用的直接数据源，也可以服务于图数据的导入 /导出和持久化存储，减少各类图系统之间协同工作的开销。\u003c/p\u003e\n\u003cp\u003e目前 GraphAr 项目包含：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e标准化图存储文件格式 GraphAr 的定义\u003c/li\u003e\n\u003cli\u003eC++ SDK：用于构建和读写 GraphAr 元信息及数据块文件，同时也通过抽象化的访问接口提供了一定支持外存图计算的能力\u003c/li\u003e\n\u003cli\u003eSpark SDK：用于利用 Apache Spark 高效、方便、可扩展地批量生成、加载或转化 GraphAr 文件\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e未来还会添加更多的数据类型，文件类型支持，多语言 SDK 等\u003c/p\u003e\n\u003ch2\u003e设计思路\u003c/h2\u003e\n\u003cp\u003e为了尽可能兼顾各类系统对图数据存储和访问的不同需求，GraphAr 标准化图文件格式的设计考虑了如下要点：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e尽可能利用现有的成熟的文件格式，例如 ORC 、Parquet 、CSV 等，并保持兼容性。\u003c/li\u003e\n\u003cli\u003e支持简单图及属性图，支持不同的图拓扑结构的表示方式（ COO ，CSR 和 CSC ）。\u003c/li\u003e\n\u003cli\u003e支持使用 Apache Spark/Hadoop 等非图计算引擎来方便地生成 /加载 /转换这样的格式化文件。\u003c/li\u003e\n\u003cli\u003e方便不同的单机 /分布式图计算引擎、数据库加载使用，也能支持丰富的下游计算任务，如外存图计算。\u003c/li\u003e\n\u003cli\u003e支持在保持负载文件不修改的情况下做一些日常的操作，如：添加新的属性，在图中添加一组新的类型的点 /边，通过不同类型和点和边的自由组合来构建一个新的图等。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e应用场景\u003c/h2\u003e\n\u003cp\u003eGraphAr 现已支持在多个场景中进行应用，部分已经实现的案例包括\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e接入大规模图系统 \u003ca href=\"https://github.com/alibaba/GraphScope\" rel=\"nofollow\"\u003eGraphScope\u003c/a\u003e, 为 GraphScope 系统提供图数据的导入导出。载图性能相对于从 CSV 等关系数据格式提升了\u003ca href=\"https://alibaba.github.io/GraphAr/applications/graphscope.html\" rel=\"nofollow\"\u003e6 倍\u003c/a\u003e。\u003c/li\u003e\n\u003cli\u003e通过 GraphAr 的 Spark SDK 对接典型的图数据库系统 Neo4j ，实现了将 Neo4j 数据库中的数据导出到 GraphAr 文件完成数据落盘，以及从 GraphAr 文件读取图数据并加入 /更新到 Neo4j 数据库的实例当中。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e未来\u003c/h2\u003e\n\u003cp\u003e未来随着 GraphAr 的发展成熟，我们的目标是将项目贡献到一个供应商中立的场所，例如 Apache 、LF AI \u0026amp; Data 。这将确保项目继续以开放透明的方式进行开发，并得到广泛的开发者社区的贡献。\u003c/p\u003e\n\u003cp\u003e👏 如果你对开源感兴趣，欢迎加入 \u003ca href=\"https://github.com/alibaba/GraphAr\" rel=\"nofollow\"\u003eGraphAr\u003c/a\u003e  的社区，和我们一起推进 GraphAr 的发展。\u003c/p\u003e\n\u003cp\u003e👏 如果你觉得这个项目还不错，可以在 \u003ca href=\"https://github.com/alibaba/GraphAr\" rel=\"nofollow\"\u003egithub\u003c/a\u003e 上\u003cstrong\u003e加星\u003c/strong\u003e，关注，这是对我们开发者莫大的鼓励。\u003c/p\u003e\n",
+      "Author": "aeczen",
+      "PubDate": "2023-05-16T07:51:13Z"
+    },
+    {
+      "Title": "19 款 MacBook 请求估价 - Apple",
+      "Link": "https://www.v2ex.com/t/940441",
+      "Description": "\u003cp\u003e2019 款 MacBook 可以出多少，我寻思 intel 芯片已经淘汰了，是不是出不了多少。不了解二手市场。所以来此一问。 \u003c/p\u003e\n\u003cp\u003e基本信息：办公主力。一般放公司，很少拿回家。主要是外接键盘，妙控板使用。所以外观还不错，正常使用痕迹。\u003c/p\u003e\n\u003cp\u003e配置如下图：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"配置图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.328888.xyz/2023/05/16/ViRlDJ.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "luofeiff6666",
+      "PubDate": "2023-05-16T07:50:44Z"
+    },
+    {
       "Title": "新家装修用 ac+ap 还是有线 mesh - 问与答",
       "Link": "https://www.v2ex.com/t/940440",
       "Description": "\u003cp\u003e今年新家装修，已经确定图纸准备开工。在铺设网线上决定买大唐电信的超六类，找个水平好的师傅来帮我接水晶头。房子是大平层 280 。是买几台路由器组个有线 mesh 还是在每个房间安装 ap 面板，由 ac 统一管理呢？（自己有一台软路由，ikuai 拨号，是不是必须买这个品牌的 ap 面板才可以控制？如果不买 ikuai 品牌的 ap 面板，有没有其他办法让软路由管理呢？\u003c/p\u003e\n",
