@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "家人们，你们的 api 会爆 429 错误吗 - OpenAI",
+      "Link": "https://www.v2ex.com/t/940790",
+      "Description": "\u003cpre\u003e\u003ccode\u003e{ \"error\": { \"message\": \"That model is currently overloaded with other requests. You can retry your request, or contact us through our help center at help.openai.com if the error persists. (Please include the request ID c0f94d632679c099b596f304a0303739 in your message.)\", \"type\": \"server_error\", \"param\": null, \"code\": null } }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e请求的频率确定没有超过上限，重新再请求一次就会正确返回内容。3.5 和 4.0 都会这样。\u003c/p\u003e\n\u003cp\u003e最近两天才开始频繁的报错。\u003c/p\u003e\n\u003cp\u003e请求接口的方式是使用一台 azure 服务器做 openai 接口流量代理转发。\u003c/p\u003e\n",
+      "Author": "Tdy95",
+      "PubDate": "2023-05-17T12:11:31Z"
+    },
+    {
+      "Title": "Lock-free-Stack 算法探讨 - 程序员",
+      "Link": "https://www.v2ex.com/t/940789",
+      "Description": "\u003cp\u003e这几天看了许多关于 lock-free 和 memory-reordering 的资料，在看到 C++ Concurrency in Action 时候写了一个自己理解的 lock-free 结构。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-c++\"\u003e\nclass LockFreeStack\n{\n    using T = int;\n\nprivate:\n    struct Node\n    {\n        T val;\n        Node *next;\n    };\n\npublic:\n    LockFreeStack() : head(nullptr), length(0){};\n\n    void Push(const T \u0026amp;val)\n    {\n        Node *new_node = new Node{val, nullptr};\n        Node *old_head = nullptr;\n        do\n        {\n            old_head = head.load(std::memory_order_release);\n        } while (!head.compare_exchange_strong(old_head, new_node, std::memory_order_acquire, std::memory_order_acquire));\n        new_node-\u0026gt;next = old_head;\n        length.fetch_add(1, std::memory_order_relaxed);\n    }\n};\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是和书上不一致：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-C++\"\u003eclass lock_free_stack\n{\nprivate:\n    struct node\n    {\n        std::shared_ptr\u0026lt;T\u0026gt; data;\n        node* next;\n        node(T const\u0026amp; data_):\n            data(std::make_shared\u0026lt;T\u0026gt;(data_))\n        {}\n    };\n    std::atomic\u0026lt;node*\u0026gt; head;\npublic:\n    void push(T const\u0026amp; data)\n    {\n        node* const new_node=new node(data); // 1\n        new_node-\u0026gt;next=head.load(); //2 \n        while(!head.compare_exchange_weak(new_node-\u0026gt;next,new_node)); //3\n    } \n};\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我就很疑惑，他算法中一个线程 A 如果执行到 @\u003ca href=\"/member/2\"\u003e2\u003c/a\u003e 被休眠，如果其他 push 线程 直接执行 @\u003ca href=\"/member/2\"\u003e2\u003c/a\u003e ，@3 ，修改了 head atomic 值，线程 A 不就一直卡死了吗？\u003c/p\u003e\n",
+      "Author": "Reiouf",
+      "PubDate": "2023-05-17T12:10:09Z"
+    },
+    {
       "Title": "请问有人把 Linux 桌面版安装到移动硬盘或 U 盘上长期用吗，要注意些什么 - Linux",
       "Link": "https://www.v2ex.com/t/940788",
       "Description": "\u003cp\u003e这样是不是就随时能用自己的环境了\u003c/p\u003e\n\u003cp\u003e有啥经验可以分享吗，比如用的什么版本有什么坑等\u003c/p\u003e\n\u003cp\u003e谢谢\u003c/p\u003e\n",

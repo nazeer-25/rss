@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>家人们，你们的 api 会爆 429 错误吗 - OpenAI</title>
+      <link>https://www.v2ex.com/t/940790</link>
+      <description>&lt;pre&gt;&lt;code&gt;{ &#34;error&#34;: { &#34;message&#34;: &#34;That model is currently overloaded with other requests. You can retry your request, or contact us through our help center at help.openai.com if the error persists. (Please include the request ID c0f94d632679c099b596f304a0303739 in your message.)&#34;, &#34;type&#34;: &#34;server_error&#34;, &#34;param&#34;: null, &#34;code&#34;: null } }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;请求的频率确定没有超过上限，重新再请求一次就会正确返回内容。3.5 和 4.0 都会这样。&lt;/p&gt;&#xA;&lt;p&gt;最近两天才开始频繁的报错。&lt;/p&gt;&#xA;&lt;p&gt;请求接口的方式是使用一台 azure 服务器做 openai 接口流量代理转发。&lt;/p&gt;&#xA;</description>
+      <author>Tdy95</author>
+      <pubDate>17 May 2023 12:11:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>Lock-free-Stack 算法探讨 - 程序员</title>
+      <link>https://www.v2ex.com/t/940789</link>
+      <description>&lt;p&gt;这几天看了许多关于 lock-free 和 memory-reordering 的资料，在看到 C++ Concurrency in Action 时候写了一个自己理解的 lock-free 结构。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;&#xA;class LockFreeStack&#xA;{&#xA;    using T = int;&#xA;&#xA;private:&#xA;    struct Node&#xA;    {&#xA;        T val;&#xA;        Node *next;&#xA;    };&#xA;&#xA;public:&#xA;    LockFreeStack() : head(nullptr), length(0){};&#xA;&#xA;    void Push(const T &amp;amp;val)&#xA;    {&#xA;        Node *new_node = new Node{val, nullptr};&#xA;        Node *old_head = nullptr;&#xA;        do&#xA;        {&#xA;            old_head = head.load(std::memory_order_release);&#xA;        } while (!head.compare_exchange_strong(old_head, new_node, std::memory_order_acquire, std::memory_order_acquire));&#xA;        new_node-&amp;gt;next = old_head;&#xA;        length.fetch_add(1, std::memory_order_relaxed);&#xA;    }&#xA;};&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是和书上不一致：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-C++&#34;&gt;class lock_free_stack&#xA;{&#xA;private:&#xA;    struct node&#xA;    {&#xA;        std::shared_ptr&amp;lt;T&amp;gt; data;&#xA;        node* next;&#xA;        node(T const&amp;amp; data_):&#xA;            data(std::make_shared&amp;lt;T&amp;gt;(data_))&#xA;        {}&#xA;    };&#xA;    std::atomic&amp;lt;node*&amp;gt; head;&#xA;public:&#xA;    void push(T const&amp;amp; data)&#xA;    {&#xA;        node* const new_node=new node(data); // 1&#xA;        new_node-&amp;gt;next=head.load(); //2 &#xA;        while(!head.compare_exchange_weak(new_node-&amp;gt;next,new_node)); //3&#xA;    } &#xA;};&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我就很疑惑，他算法中一个线程 A 如果执行到 @&lt;a href=&#34;/member/2&#34;&gt;2&lt;/a&gt; 被休眠，如果其他 push 线程 直接执行 @&lt;a href=&#34;/member/2&#34;&gt;2&lt;/a&gt; ，@3 ，修改了 head atomic 值，线程 A 不就一直卡死了吗？&lt;/p&gt;&#xA;</description>
+      <author>Reiouf</author>
+      <pubDate>17 May 2023 12:10:09 +0000</pubDate>
+    </item>
+    <item>
       <title>请问有人把 Linux 桌面版安装到移动硬盘或 U 盘上长期用吗，要注意些什么 - Linux</title>
       <link>https://www.v2ex.com/t/940788</link>
       <description>&lt;p&gt;这样是不是就随时能用自己的环境了&lt;/p&gt;&#xA;&lt;p&gt;有啥经验可以分享吗，比如用的什么版本有什么坑等&lt;/p&gt;&#xA;&lt;p&gt;谢谢&lt;/p&gt;&#xA;</description>
