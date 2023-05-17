@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>利用功能简单的家用设备折腾 VLAN，似乎比想象中要折腾的多 - 路由器</title>
+      <link>https://www.v2ex.com/t/940773</link>
+      <description>&lt;p&gt;起因是我想隔离家中的访客网络 WIFI ，因为会接入很多第三方的硬件。设备是 Asus RT-AX56U 热血版，只当二层交换机用，另接软路由作为网关。由于我想把所有三层功能都放在软路由中统一管理，所以并不打算使用 Asus 的路由器模式，也就用不了 Asus 自带的访客设备隔离功能了，况且 Asus 自带的隔离功能跟我想要的也不太一样&lt;/p&gt;&#xA;&lt;p&gt;其实这款设备的管理界面并不支持 VLAN 配置，经过反复搜索研究得知，他是用 Linux bridge 实现二层交换的，访客 WIFI 是 wl0.1 ，连接网关的接口是 eth0&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;admin@RT-AX56U_V2-7430:~# brctl show&#xA;bridge name     bridge id               STP enabled     interfaces&#xA;br0             8000.f02f74f27430       no              eth0&#xA;                                                        eth1&#xA;                                                        eth2&#xA;                                                        eth3&#xA;                                                        wl0.1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我想要做的是把来自 wl0.1 的数据标记上 VLAN ID ，并通过 eth0 发送到网关，实现访客网络隔离出一个独立的子网，于是我就在命令行中这样配置&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ip link add link eth0 name eth0.10 type vlan id 10&#xA;ip link set eth0.10 up&#xA;brctl addbr br1&#xA;brctl addif br1 eth0.10&#xA;brctl delif br0 wl0.1&#xA;brctl addif br1 wl0.1&#xA;ip link set br1 up&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;执行完以上命令后是这样子的&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;admin@RT-AX56U_V2-7430:~# brctl show&#xA;bridge name     bridge id               STP enabled     interfaces&#xA;br0             8000.f02f74f27430       no              eth0&#xA;                                                        eth1&#xA;                                                        eth2&#xA;                                                        eth3&#xA;br1             8000.f02f74f27431       no              eth0.10&#xA;                                                        wl0.1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;此时 wl0.1 下的设备已经能够成功跟网关通信，获取到 IP 并且也连上公网了。本来以为到这就结束了，结果突然发现，虽然 wl0.1 下的设备已经可以跟 eth0.10 通信，但是 wl0.1 自身的设备之间却无法通信了（ wl0.1 下的设备无法互相 ping ，而通过网关就可以）。&lt;/p&gt;&#xA;&lt;p&gt;我反复检查过了，在执行这段命令之前，wl0.1 下的设备是可以正常通信的，其他什么配置都没碰，路由表也检查过了没发现问题。研究半天发现一个叫 &lt;code&gt;hairpin&lt;/code&gt; 的功能有点像我遇到的情况，不过启用之后发现并没有卵用。反正来来回回研究了一整天都没有解决，现在唯一能想到的方法，就是通过网关转发访客局域网的流量，不过这也太傻了吧。。。&lt;/p&gt;&#xA;</description>
+      <author>OOPOK</author>
+      <pubDate>17 May 2023 10:38:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>如何优雅而安全的连接家里的 nas - 问与答</title>
+      <link>https://www.v2ex.com/t/940772</link>
+      <description>&lt;p&gt;今天看到这个帖子，瞬间慌了。  &lt;a href=&#34;https://v2ex.com/t/940596&#34; rel=&#34;nofollow&#34;&gt;https://v2ex.com/t/940596&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;家里有公网 ip ，200M 上传带宽，群晖 nas 一堆服务，直连惯了，中转是不可能中转的，求一个优雅而安全的方案。&lt;br/&gt;&#xA;1 不会被隔壁帖子一样断网&lt;br/&gt;&#xA;2 尽量简单优雅&lt;/p&gt;&#xA;</description>
+      <author>JuicyJ</author>
+      <pubDate>17 May 2023 10:34:13 +0000</pubDate>
+    </item>
+    <item>
       <title>外企 Kong，无加班、无内卷，顶配 Mac 配置拉满，全员配股。 - 酷工作</title>
       <link>https://www.v2ex.com/t/940771</link>
       <description>&lt;p&gt;外企 Kong ，无加班、无内卷，顶配 Mac 配置拉满，全员配股。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://fastly.jsdelivr.net/gh/filess/img10@main/2023/03/29/1680073669351-e51e450a-1825-42cd-9c1e-e757f9229682.jpeg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;我们现在热招以下岗位，英语口语可沟通，有英文面试和英文工作环境：&lt;/p&gt;&#xA;&lt;p&gt;1 ，Go （上海）- 2 个 HC ，要求熟悉 Golang 原理，底层，知道怎么调试代码，解决性能瓶颈，对数据库系统层网络层有一定认知；&lt;/p&gt;&#xA;&lt;p&gt;2 ，Gateway 开发（上海），2 个 HC （ Openresty ，Nginx ，Lua ，C ）&lt;/p&gt;&#xA;&lt;p&gt;如果您有相关经验和技能，满足基本要求，请将您的简历发送至 &lt;a href=&#34;mailto:china-hiring@konghq.com&#34;&gt;china-hiring@konghq.com&lt;/a&gt; 。&lt;/p&gt;&#xA;</description>
