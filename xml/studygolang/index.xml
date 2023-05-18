@@ -104,49 +104,5 @@
       <title>apple apple</title>
       <link>https://studygolang.com/p/1140#reply0</link>
     </item>
-    <item>
-      <title>goroutine 数据竞争的问题</title>
-      <link>https://studygolang.com/topics/16349#reply0</link>
-      <description>&lt;p&gt;&amp;rdquo;`&#xA;func main() {&#xA;&#x9;// listen to incoming udp packets&#xA;&#x9;udpServer, err := net.ListenPacket(&amp;ldquo;udp&amp;rdquo;, &amp;ldquo;:1053&amp;rdquo;)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatal(err)&#xA;&#x9;}&#xA;&#x9;defer udpServer.Close()&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;buf := make([]byte, 1024)&#xA;&#xA;for {&#xA;&#x9;//buf := make([]byte, 1024)&#xA;&#x9;n, addr, err := udpServer.ReadFrom(buf)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;continue&#xA;&#x9;}&#xA;&#x9;tmp := buf[:n]&#xA;&#x9;fmt.Println(&amp;quot;tmp====&amp;quot;, len(tmp), cap(tmp), hex.EncodeToString(tmp))&#xA;&#x9;go response(udpServer, addr, tmp)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func response(udpServer net.PacketConn, addr net.Addr, buf []byte) {&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;fmt.Println(len(buf), string(buf), hex.EncodeToString(buf))&#xA;&#xA;time := time.Now().Format(time.ANSIC)&#xA;responseStr := fmt.Sprintf(&amp;quot;time received: %v. Your message: %v!&amp;quot;, time, string(buf))&#xA;&#xA;udpServer.WriteTo([]byte(responseStr), addr)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&amp;ldquo;`&lt;/p&gt;&#xA;&#xA;&lt;p&gt;一个 udp 的客户端发送 &amp;ldquo;hello&amp;rdquo; 到这个 udp的服务器，同时期望会正确的显示 hello.&#xA;但是由于 response 会被操作系统在不可预知的情况下调度，或者说这个 hello 对应的 response 执行了 len(buf)后被操作系统挂起&#xA;另一个 udp 的客户端发送 &amp;ldquo;world&amp;rdquo; 到这个 udp的服务器,此时前面的那个 response 被操作系统重新调度,此时会打印出 &amp;ldquo;world&amp;rdquo;,而不是预期的 &amp;ldquo;hello&amp;rdquo; ，不知道我判断对不对&#xA;多调多谢&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>招募免费 Golang 程序员志愿者/实习生</title>
-      <link>https://studygolang.com/topics/16354#reply1</link>
-      <description>&lt;p&gt;项目简介： [ 使用golang实现一个微信小商城。]&lt;/p&gt;&#xA;&#xA;&lt;p&gt;工作地点： [ 远程 ]&lt;/p&gt;&#xA;&#xA;&lt;p&gt;工作时间： [ 弹性时间 ]&lt;/p&gt;&#xA;&#xA;&lt;p&gt;职责和要求：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;协助开发和维护使用 Golang 的项目。&#xA;参与编码、测试和文档编写等开发任务。&#xA;具备良好的团队合作精神，与其他团队成员协调工作。&#xA;对学习和掌握 Golang 开发技术具有热情。&#xA;具备良好的沟通能力和解决问题的能力。&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;技术项目体验：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;作为免费 Golang 程序员志愿者/实习生，您将有机会参与完整的项目开发周期，从需求分析到部署和维护。&#xA;您将与我们的专业开发团队密切合作，与经验丰富的开发人员共同工作，学习和应用最佳的开发实践。&#xA;您将参与项目决策和技术讨论，为项目的成功贡献您的想法和见解。&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;团队协作和学习机会：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;我们鼓励团队合作和知识分享，您将与我们的开发团队密切协作，共同解决技术难题和挑战。&#xA;在我们的团队中，您将有机会与优秀的开发人员互动，并从他们的经验和知识中学习。&#xA;我们提供积极的学习环境，支持您在技术领域不断成长和发展。&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;申请方式： 请将您的简历发送至 [微信:wxid3344gg]，并在注明“免费 Golang 程序员志愿者/实习生申请”。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;备注： 这是一份免费工作的招聘信息，适用于志愿者或实习生。如有需求，请务必明确该职位不提供薪资。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>招募免费 Golang 程序员志愿者/实习生</title>
-      <link>https://studygolang.com/topics/16354#reply0</link>
-      <description>&lt;p&gt;项目简介： [ 使用golang实现一个微信小商城。]&lt;/p&gt;&#xA;&#xA;&lt;p&gt;工作地点： [ 远程 ]&lt;/p&gt;&#xA;&#xA;&lt;p&gt;工作时间： [ 弹性时间 ]&lt;/p&gt;&#xA;&#xA;&lt;p&gt;职责和要求：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;协助开发和维护使用 Golang 的项目。&#xA;参与编码、测试和文档编写等开发任务。&#xA;具备良好的团队合作精神，与其他团队成员协调工作。&#xA;对学习和掌握 Golang 开发技术具有热情。&#xA;具备良好的沟通能力和解决问题的能力。&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;技术项目体验：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;作为免费 Golang 程序员志愿者/实习生，您将有机会参与完整的项目开发周期，从需求分析到部署和维护。&#xA;您将与我们的专业开发团队密切合作，与经验丰富的开发人员共同工作，学习和应用最佳的开发实践。&#xA;您将参与项目决策和技术讨论，为项目的成功贡献您的想法和见解。&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;团队协作和学习机会：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;我们鼓励团队合作和知识分享，您将与我们的开发团队密切协作，共同解决技术难题和挑战。&#xA;在我们的团队中，您将有机会与优秀的开发人员互动，并从他们的经验和知识中学习。&#xA;我们提供积极的学习环境，支持您在技术领域不断成长和发展。&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;申请方式： 请将您的简历发送至 [微信:wxid3344gg]，并在注明“免费 Golang 程序员志愿者/实习生申请”。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;备注： 这是一份免费工作的招聘信息，适用于志愿者或实习生。如有需求，请务必明确该职位不提供薪资。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>Context</title>
-      <link>https://studygolang.com/topics/16344#reply1</link>
-      <description>&lt;p&gt;首先在于知道它用在哪里，然后才是理解它的设计和实现。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;困惑了两年多的时间，翻遍了无数的文章，有价值者十不足一。&#xA;无非是分析完实现细节之后，再拿一个hello world举例子，然后就自欺欺人地结束了。hello world自然是经不起推敲的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;就像一个少年手握屠龙之技，却不知道龙在哪里。想要演示其巨大威力，观众看到的却是五毛特效。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;想起多年前学习电动力学的场景。学生不理解，教书的也不懂。&#xA;结果就是考试要有题目怎么办，把往年的题目再搬出来，负责任的还换个名字和场景（改数字是不大敢的），不负责任的原样托出。&#xA;于是就诞生了奇迹：越是难度系数高的科目，反而挂科的人少，反正翻来覆去就那几个题目。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;翻来覆去的几个题目就是电动力学版本的hello world，给不了学生真正的科学精髓。&#xA;同样hello world的文章也只是无谓地增加信息熵，毫无价值。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>被热议的DataOps，到底是什么？</title>
-      <link>https://studygolang.com/articles/36143#reply0</link>
-    </item>
-    <item>
-      <title>golang有没有那种 查询数据库，直接返回 map[string]interface{}  或者类似的类型?</title>
-      <link>https://studygolang.com/topics/16345#reply14</link>
-      <description>&lt;p&gt;for rows.Next() {&#xA;        var data string&#xA;        err = rows.Scan(&amp;amp;data)&#xA;        if err != nil {&#xA;            panic(err.Error())&#xA;        }&#xA;        results = append(results, data)&#xA;    }&lt;/p&gt;&#xA;&#xA;&lt;p&gt;类似这种 Scan 里面的个数和select的个数都要一致&lt;/p&gt;&#xA;&#xA;&lt;p&gt;请问有没有性能高的  且 直接返回数组或者map的方法??&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang有没有那种 查询数据库，直接返回 map[string]interface{}  或者类似的类型?</title>
-      <link>https://studygolang.com/topics/16345#reply13</link>
-      <description>&lt;p&gt;for rows.Next() {&#xA;        var data string&#xA;        err = rows.Scan(&amp;amp;data)&#xA;        if err != nil {&#xA;            panic(err.Error())&#xA;        }&#xA;        results = append(results, data)&#xA;    }&lt;/p&gt;&#xA;&#xA;&lt;p&gt;类似这种 Scan 里面的个数和select的个数都要一致&lt;/p&gt;&#xA;&#xA;&lt;p&gt;请问有没有性能高的  且 直接返回数组或者map的方法??&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>两个goroutine 循环打印1~10</title>
-      <link>https://studygolang.com/topics/15226#reply17</link>
-      <description>&lt;p&gt;今天面试遇到&amp;rdquo;两个goroutine 循环打印1~100&amp;rdquo;&#xA;思路是一个goroutine放数据,一个goroutine读数据,可是结果却是乱序的&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;func Test_0(t *testing.T) {&#xA;&#x9;//fmt.Println(&amp;quot;123&amp;quot;)&#xA;&#x9;c1 := make(chan int)&#xA;&#x9;wg := sync.WaitGroup{}&#xA;&#x9;wg.Add(2)&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for i := 0; i &amp;lt; 10; i += 2 {&#xA;&#x9;&#x9;&#x9;c1 &amp;lt;- 1&#xA;&#x9;&#x9;&#x9;fmt.Print(i)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;wg.Done()&#xA;&#x9;}()&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for i := 1; i &amp;lt; 10; i += 2 {&#xA;&#x9;&#x9;&#x9;&amp;lt;-c1&#xA;&#x9;&#x9;&#x9;fmt.Print(i)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;wg.Done()&#xA;&#x9;}()&#xA;&#x9;wg.Wait()&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;=== RUN   Test_0&#xA;0132457689&amp;mdash; PASS: Test_0 (0.00s)&#xA;PASS&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-分割线&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-&lt;/p&gt;&#xA;&#xA;&lt;p&gt;之后看了晚上的解答,只是循环的时候从+2-&amp;gt;++,奇怪?这样就没问题呢?&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;&#xA;func Test_dongchedi(t *testing.T) {&#xA;&#x9;//fmt.Println(&amp;quot;123&amp;quot;)&#xA;&#x9;c1 := make(chan int)&#xA;&#x9;wg := sync.WaitGroup{}&#xA;&#x9;wg.Add(2)&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for i := 1; i &amp;lt;= 10; i++ {&#xA;&#x9;&#x9;&#x9;c1 &amp;lt;- 1&#xA;&#x9;&#x9;&#x9;if i%2 == 1 {&#xA;&#x9;&#x9;&#x9;&#x9;fmt.Print(i)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;wg.Done()&#xA;&#x9;}()&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for i := 1; i &amp;lt;= 10; i++ {&#xA;&#x9;&#x9;&#x9;&amp;lt;-c1&#xA;&#x9;&#x9;&#x9;if i%2 == 0 {&#xA;&#x9;&#x9;&#x9;&#x9;fmt.Print(i)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;wg.Done()&#xA;&#x9;}()&#xA;&#x9;//c1 &amp;lt;- 1&#xA;&#x9;wg.Wait()&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;=== RUN   Test_dongchedi&#xA;12345678910&amp;mdash; PASS: Test_0(0.00s)&#xA;PASS&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang有没有那种 查询数据库，直接返回 map[string]interface{}  或者类似的类型?</title>
-      <link>https://studygolang.com/topics/16345#reply12</link>
-      <description>&lt;p&gt;for rows.Next() {&#xA;        var data string&#xA;        err = rows.Scan(&amp;amp;data)&#xA;        if err != nil {&#xA;            panic(err.Error())&#xA;        }&#xA;        results = append(results, data)&#xA;    }&lt;/p&gt;&#xA;&#xA;&lt;p&gt;类似这种 Scan 里面的个数和select的个数都要一致&lt;/p&gt;&#xA;&#xA;&lt;p&gt;请问有没有性能高的  且 直接返回数组或者map的方法??&lt;/p&gt;&#xA;</description>
-    </item>
   </channel>
 </rss>
