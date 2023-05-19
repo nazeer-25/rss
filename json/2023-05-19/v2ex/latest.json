@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "搞得我都想买一个 N 手的 iphoneX 来开通 plus 了 - OpenAI",
+      "Link": "https://www.v2ex.com/t/941434",
+      "Description": "和折腾虚拟卡比起来，这样划算吗？",
+      "Author": "qiaofanxing",
+      "PubDate": "2023-05-19T17:34:09Z"
+    },
+    {
       "Title": "Nginx 如何反代 wss 连接？ - NGINX",
       "Link": "https://www.v2ex.com/t/941433",
       "Description": "\u003cp\u003e我当前的设置时这样的，抄了很多教程，但是不懂原理感觉抄也是白抄，不管用。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eserver {\n        listen 86;\n        server_name box.example.com file.example.com files.example.com pan.example.com;\n        if ($scheme = http){\n                return 301 https://$server_name:88$request_uri;\n        }\n}\n\nmap $http_upgrade $connection_upgrade {\n        default upgrade;\n        '' close;\n}\n\nserver {\n    listen 88 ssl http2;\n    server_name box.example.com;\n    error_page 497 301 =307 https://$host:$server_port$request_uri;\n\n    ssl_certificate /etc/letsencrypt/live/box.example.com/fullchain.pem;\n    ssl_certificate_key /etc/letsencrypt/live/box.example.com/privkey.pem;\n    ssl_session_timeout 5m;\n    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;\n    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;\n    ssl_prefer_server_ciphers on;\n\n    ssl_stapling on;\n    ssl_stapling_verify on;\n    resolver 8.8.8.8 8.8.4.4 valid=300s;\n    resolver_timeout 5s;\n\n    location / {\n        proxy_pass http://localhost:8687;\n        proxy_set_header HOST $host;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-NginX-Proxy true;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection \"\";\n        proxy_max_temp_file_size 0;\n        proxy_read_timeout 500s;\n        proxy_connect_timeout 600;\n        proxy_send_timeout 240;\n    }\n\n    location /api/command/ {\n        proxy_pass http://localhost:8687;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection $connection_upgrade;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
