@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "区块链 Java 高级开发工程师（急招 2 位）35k-50k/月 有兴趣的大佬欢迎联系 - 酷工作",
+      "Link": "https://www.v2ex.com/t/941396",
+      "Description": "\u003cp\u003e工作职责：\n1 、深入发掘和分析数字货币交易所业务需求，撰写技术方案和系统设计；\n2 、参与技术方案和系统设计评审；把握复杂系统的设计，确保系统的架构质量；\n3 、系统核心部分代码编写；疑难问题的解决；\n4 、跨团队，部门推进重点核心项目，跟进项目进度，推进项目落地，并关注项目数据及结果；\n5 、对现存或未来系统进行宏观的思考，规划形成统一的框架、平台或组件；\n6 、指导和培训工程师，帮助团队成员共同取得成长；\n7 、为团队引入创新的技术、创新的解决方案，用创新的思路解决问题；\u003c/p\u003e\n\u003cp\u003e职位要求：\n1 、具有币交所开发经验，入币币交易、合约交易，对交易逻辑有深刻认知；\n2 、JAVA 基础扎实：熟练掌握数据结构、多线程编程，掌握常用的设计模式；熟悉 JVM ，包括内存模型、类加载机制以及性能优化；\n3 、精通 Web 编程，5 年及以上使用 Java 语言进行 web 开发的经验，精通 spring mvc 、orm 框架（ ibatis 或 hibernate ），熟悉前端开发（ js 、html 、css ）；\n4 、精通微服务架构，如 springcloud ；\n5 、具有高并发系统经验，能处理每秒十万单的并发；\n6 、有良好的产品思维，能够站在产品的角度下思考问题、梳理产品的技术边界；有复杂领域建模经验优先；\n7 、具有高度的抽象设计能力，思路清晰，善于思考，能够独立分析和解决问题，责任心强；\n8 、具备良好的团队合作精神和风险预判能力，对系统的压力和瓶颈针对性的优化和解决方案落地；\n9 、对行业的发展有自己的见解；能非常清晰地规划出业务和技术方向，并能够阶段性落地，拿到结果。\n10 、有数字货币交易所开发经验或 股票、外汇、数字货币、期权等行情开发经验；\n11 、了解和相信加密货币的未来，使用过至少二间交易所产品并曾进行过加密货币交易优先录。\u003c/p\u003e\n\u003cp\u003e邮箱联系： \u003ca href=\"mailto:chunzhi1204@qq.com\"\u003echunzhi1204@qq.com\u003c/a\u003e\n期待你的加入！\u003c/p\u003e\n",
+      "Author": "dudushen",
+      "PubDate": "2023-05-19T12:44:27Z"
+    },
+    {
+      "Title": "我想到一种很新的安装操作系统方式 - ipxe \u0026 kexec - Linux",
+      "Link": "https://www.v2ex.com/t/941395",
+      "Description": "\u003ch1\u003e一种通过 kexec 切换内核并安装系统的思路\u003c/h1\u003e\n\u003ch2\u003e背景\u003c/h2\u003e\n\u003ch3\u003e底层原理\u003c/h3\u003e\n\u003cp\u003eLinux 内核崩溃的时候会将当前内存的一些信息保存到硬盘方便调试并重启，而内核内核崩溃了是谁存储到信息呢？答案是另一个内核\u003c/p\u003e\n\u003cp\u003eLinux 通过 kdump 服务在自身崩溃的时候拉起自己的一个“分身”，通过特定内核参数让“分身”收集日志。\u003c/p\u003e\n\u003cp\u003e这背后的技术就是 kexec\u003c/p\u003e\n\u003cp\u003e由于 kexec 切换内核会跳过 bios 自检等环节，大大缩短重启时间（ x86 物理机开机约 5-10 分钟）\u003c/p\u003e\n\u003cp\u003e很自然的就想到，可不可以用 kexec 技术重装系统？\u003c/p\u003e\n\u003ch3\u003e必要条件\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e物理机，且硬盘需要组 RAID\u003c/li\u003e\n\u003cli\u003e机器比较多，机房人少。需要通过 pxe 装机\u003c/li\u003e\n\u003cli\u003e物理机重装\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e之所以 k 搞这么复杂，一来是因为特殊场景，二来是提高一种 k 思路和可能性。少量机器推荐通过 u 盘安装\u003c/p\u003e\n\u003ch3\u003e不直接用官方 ios 的原因是\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e系统安装之前物理机做一些操作，比如组 raid\u003c/li\u003e\n\u003cli\u003e如果不划 vlan 机器启动项又把网卡放到硬盘前面，重启就等于重装。qwq\u003c/li\u003e\n\u003cli\u003e技术探讨\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003e一次 pxe-kexec 装机流程\u003c/h3\u003e\n\u003cp\u003epxe+bootOS+kexec+官方镜像\u003c/p\u003e\n\u003ch4\u003e流程\u003c/h4\u003e\n\u003col\u003e\n\u003cli\u003eserver 机安装好 pxe/ipxe 环境。主要是基础服务如 dhcp 、tftp 、ipxe 、nginx 、dns 。能达到无人值守安装官方镜像的程度。\u003c/li\u003e\n\u003cli\u003e使用官方镜像最小化安装，然后装上装上你顺手的工具，如 fish/zsh 。配好 ssh 免密登陆。将所有数据打包到一个 initramfs 里面，配上内核这将是我们的 bootOS\u003c/li\u003e\n\u003cli\u003e步骤 2 的两个文件放到步骤 1 的相应位置。pxe 是 tftp 目录，ipxe 则是 nginx 的目录。\u003c/li\u003e\n\u003cli\u003eclient 开机等待网络引导进入 bootOS ，此时系统将完全运行在内存中\u003c/li\u003e\n\u003cli\u003e登入 bootOS ，执行组 raid 脚本升级 bmc 固件等操作，此处可以用开机自启动脚本，或者先到 server 上拿到 dhcp IP ，然后通过 ansible/paramiko 库等自动执行\u003c/li\u003e\n\u003cli\u003e将原版镜像的 ios 镜像或者里面的 vmlinuzg 和 initrd 两个文件下载到 client ，并通过 kexec 命令切换到其内核。注意不要忘了带上可以无人值守装机的内核参数\u003c/li\u003e\n\u003cli\u003e此时屏幕将看到内核引导的日志，稍等片刻将进行系统安装\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e描述的比较粗略，实际每个步骤都可以写一篇教程，当然网上也都可以搜到\u003c/p\u003e\n\u003ch2\u003epxe-kexec 相比传统 pxe 的缺点\u003c/h2\u003e\n\u003cp\u003e跟 pxe 相比可能不支持 Linux 外的一些系统，比如 esxi\u003c/p\u003e\n\u003ch2\u003e理论上可行\u003c/h2\u003e\n\u003cp\u003e不知道 bootOS 这种称呼对不对\u003c/p\u003e\n\u003cp\u003e不知道会不会有什么坑。理论上 Linux 都支持\nbootOS 做一次就能满足所有 Linux 官方镜像\u003c/p\u003e\n\u003cp\u003e不知道大家批量装机，并且时不时重装等场景是怎么做到怎么做的。\u003c/p\u003e\n",
+      "Author": "zhlxsh",
+      "PubDate": "2023-05-19T12:38:14Z"
+    },
+    {
       "Title": "移动的 8 元保号卡可以用吗 - Apple",
       "Link": "https://www.v2ex.com/t/941394",
       "Description": "主要想注册个微信 接受下验证码什么的，就这些功能\u003cbr /\u003e\u003cbr /\u003e有推荐的卡吗",
