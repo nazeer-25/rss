@@ -4,6 +4,55 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教个事务的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/941201",
+      "Description": "举个例子，支付订单：\u003cbr /\u003e1. 将订单状态改为已支付\u003cbr /\u003e2. 记录支付数据\u003cbr /\u003e3. 调用库存服务的 http api 接口，减库存并发货\u003cbr /\u003e\u003cbr /\u003e以上三个操作，需要是一个原子操作，要么一起成功，要么一起失败。\u003cbr /\u003e1 、2 好说，都是数据库操作，一个事务就 ok 。\u003cbr /\u003e但 3 是另一个类型的操作。\u003cbr /\u003e\u003cbr /\u003e我想到方案是：\u003cbr /\u003e1. 3 放在事务中，3 成功再提交事务，否则回滚。缺点是 3 会卡事务，只适用于流量特别低，3 执行很快的系统。\u003cbr /\u003e2. 3 放队列中，失败了重试。缺点有 2：a ，放队列的操作也可能失败，除非放队列的操作也放事务中； b ，3 可能永远不会成功。",
+      "Author": "craftx",
+      "PubDate": "2023-05-19T04:06:31Z"
+    },
+    {
+      "Title": "给 PWART(WebAssembly 的 JIT 轻量运行时)增加了性能测试 - 问与答",
+      "Link": "https://www.v2ex.com/t/941200",
+      "Description": "\u003cp\u003e之前写了一个 WebAssembly 的轻量运行时 PWART( \u003ca href=\"https://github.com/partic2/pwart\" rel=\"nofollow\"\u003ehttps://github.com/partic2/pwart\u003c/a\u003e , \u003ca href=\"https://gitee.com/partic/pwart\" rel=\"nofollow\"\u003ehttps://gitee.com/partic/pwart\u003c/a\u003e )，感觉 Bug 应该修差不多了，就在前两天做了一次简单的性能测试。在这次性能测试中，发现一些有趣的地方，先放测试结果。\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e\u003c/th\u003e\n\u003cth\u003eGCC (-O2)\u003c/th\u003e\n\u003cth\u003ePWART (fixed memory)\u003c/th\u003e\n\u003cth\u003ePWART (dynamic memory)\u003c/th\u003e\n\u003cth\u003eTinyCC\u003c/th\u003e\n\u003cth\u003eV8(Chrome v113)\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003eWindows10 x86_64\u003c/td\u003e\n\u003ctd\u003e2823ms\u003c/td\u003e\n\u003ctd\u003e3622ms\u003c/td\u003e\n\u003ctd\u003e2720ms\u003c/td\u003e\n\u003ctd\u003e6330ms\u003c/td\u003e\n\u003ctd\u003e2618ms\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eLinux aarch64\u003c/td\u003e\n\u003ctd\u003e1561ms\u003c/td\u003e\n\u003ctd\u003e1997ms\u003c/td\u003e\n\u003ctd\u003e2079ms\u003c/td\u003e\n\u003ctd\u003e7681ms\u003c/td\u003e\n\u003ctd\u003e1465ms\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e32 位 arm 的也稍测了下，PWART 耗时大约在 GCC -O2 的两倍，tinycc 是 GCC -O2 的三倍。32 位 x86 PWART 耗时大概在 GCC -O2 的 1.5 倍左右。\u003c/p\u003e\n\u003cp\u003eWebAssembly 里需要一段线性地址空间作为内存，PWART 就在进入函数时，将线性内存的基地址保存到局部变量，最开始因为局部变量较多，内存基址被挤到内存栈上了，每次 WASM 访问内存，都要从内存栈取出值加上偏移，此时耗时只有 2900ms 左右，后来我把内存基址固定放到寄存器中，耗时居然就增加到 3622ms ，让人十分摸不着头脑，不过在 32 位 arm 上测试这样是有 8%左右性能提升的。还有上表中，dynamic memory 模式需要每次函数返回时更新内存基址，按理来说是额外消耗，结果在 x86_64 上耗时竟然缩短了，不知道 x86 上究竟是有什么黑魔法。\u003c/p\u003e\n\u003cp\u003e虽然能理解，但我还是对 WebAssembly 不出指针类型耿耿于怀，在 JIT 实现和 API 设计上都能简单很多，虽然有 ref 特性，但感觉目前 ref 的设计比起指针还是麻烦不少，目前也不存在指向内存空间的 ref 。\u003c/p\u003e\n\u003cp\u003e性能优化还是挺难做的，有很多细节要考虑，而且不知道怎么分析性能关键点，有大佬有相关经验可以分享一下。\u003c/p\u003e\n",
+      "Author": "pursuer",
+      "PubDate": "2023-05-19T04:05:50Z"
+    },
+    {
+      "Title": "练「英语口语」的朋友看过来, 终于开发完内测了 - 分享创造",
+      "Link": "https://www.v2ex.com/t/941199",
+      "Description": "\u003cp\u003e开发了仨月终于内测了..\u003c/p\u003e\n\u003cp\u003e主打一个靠口语对话驱动剧情进展, 目前 iOS 版内测, 感兴趣的老哥加我进内测群 MTUyMTAyMzE3ODc=\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"RUNOOB 图标\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s.vipkidstatic.com/fe-static/temp/30521684468888_.pic.jpg\"/\u003e\u003c/p\u003e\n",
+      "Author": "zhangdszq",
+      "PubDate": "2023-05-19T04:04:32Z"
+    },
+    {
+      "Title": "想注册一个空壳公司，办下来大概多少钱？需要哪些资料，有没有朋友懂得 - 奇思妙想",
+      "Link": "https://www.v2ex.com/t/941197",
+      "Description": "",
+      "Author": "Befehishaber",
+      "PubDate": "2023-05-19T04:02:18Z"
+    },
+    {
+      "Title": "大家用洗地机吗？能保证把地板上的水吸走绝大部分吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/941196",
+      "Description": "\u003cp\u003e我担心水弄不干净，会渗入木地板。\u003c/p\u003e\n",
+      "Author": "stark123",
+      "PubDate": "2023-05-19T04:01:33Z"
+    },
+    {
+      "Title": "没有 V 站的时间难过吗？嘿嘿 - 问与答",
+      "Link": "https://www.v2ex.com/t/941195",
+      "Description": "",
+      "Author": "bytetony",
+      "PubDate": "2023-05-19T03:59:01Z"
+    },
+    {
+      "Title": "有个 idea，建一个线上的正向交流的互动群 - 问与答",
+      "Link": "https://www.v2ex.com/t/941194",
+      "Description": "[目的]：\u003cbr /\u003e每个人的想法和认知，没有绝对的错与对，但是我们可以观察、交流和思考，变得更好。\u003cbr /\u003e以“娱乐”的性质，来丰富我们的认知。\u003cbr /\u003e[方案]：\u003cbr /\u003e建一个 vx 群，每天发表一个议点（可以是身边实事、新闻热点、或者自己的奇想），大家可以议论、发表不同建议或者投票、总结。\u003cbr /\u003e遇到的疑惑也可以说出来，来听听大家的想法。\u003cbr /\u003e或者做一个“认知能力最强”“理解能力最强”等的排行榜。\u003cbr /\u003e每周也可以选出一个“主题发布人”，作为本周的策划、主持；\u003cbr /\u003e或者出一个任务，（比如，每个人说一下，哪句话对你的影响很大，以及为什么）；\u003cbr /\u003e发言若被大多数人认为，太偏激，或不正常，要总结，要接受和反思；\u003cbr /\u003e\u003cbr /\u003e总之这是一个 open 的空间，我只是作为提议者，把有兴趣的人召集到一块，大家有什么好的方案建议都可以提，目的是为了更好玩，更有意思，更有价值\u003cbr /\u003e[性质]：互动、交友、娱乐、积极向上、摸鱼划水\u003cbr /\u003e[要求]：不能认知固化，导向正、尊重\u003cbr /\u003e\u003cbr /\u003e感兴趣的留言，有一定人数的话，我见群拉你们",
+      "Author": "donggua997",
+      "PubDate": "2023-05-19T03:57:43Z"
+    },
+    {
       "Title": "V 友们， Mac 怎么选？？ - MacBook Pro",
       "Link": "https://www.v2ex.com/t/941193",
       "Description": "\u003cp\u003e算是第一次选购 mac ，之前的话有用过黑苹果，不过也是很久之前了\u003c/p\u003e\n\u003cp\u003e需求：\u003c/p\u003e\n\u003cp\u003e1.前端仔，需要多开 vscode ，多开模拟器\u003c/p\u003e\n\u003cp\u003e2.需要多开 chrome ，多开标签页\u003c/p\u003e\n\u003cp\u003e3.对 aigc 感兴趣，可能会要跑一下 stable diffusion\u003c/p\u003e\n\u003cp\u003e预算：\u003c/p\u003e\n\u003cp\u003e2W 打下，超 2W 就感觉有点紧张和心疼了\u003c/p\u003e\n\u003cp\u003e真心求问：\u003c/p\u003e\n\u003cp\u003e1.M1 还是 M2 ？\u003c/p\u003e\n\u003cp\u003e2.14 寸还是 16 寸？\u003c/p\u003e\n\u003cp\u003e3.32G 还是更高？\u003c/p\u003e\n\u003cp\u003e4.狗东还是官网？\u003c/p\u003e\n\u003cp\u003e5.全新还是官翻？\u003c/p\u003e\n",
