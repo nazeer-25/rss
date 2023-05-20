@@ -106,39 +106,5 @@
       <title>token-go 一个轻量级登录权限库</title>
       <link>https://studygolang.com/resources/15571#reply0</link>
     </item>
-    <item>
-      <title>项目中全局变量的管理，各位有啥经验吗？</title>
-      <link>https://studygolang.com/topics/16346#reply1</link>
-      <description>&lt;p&gt;构思新框架中，看看大家有啥建议&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>如何用Go启动一个外部程序（linux平台）</title>
-      <link>https://studygolang.com/topics/16358#reply4</link>
-      <description>&lt;p&gt;如何在Linux平台上用go拉起一个三方程序。&#xA;exec.command&#xA;os.StartProcess&#xA;syscal.Exec&#xA;以上浅试，都不行。哪位大神有办法&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>如何用Go启动一个外部程序（linux平台）</title>
-      <link>https://studygolang.com/topics/16358#reply2</link>
-      <description>&lt;p&gt;如何在Linux平台上用go拉起一个三方程序。&#xA;exec.command&#xA;os.StartProcess&#xA;syscal.Exec&#xA;以上浅试，都不行。哪位大神有办法&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>求助使用gin配合mysql实现一种查询场景</title>
-      <link>https://studygolang.com/topics/16359#reply0</link>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;场景：前端POST传入一个字段或者多个字段，gin拿到后如何处理区分传入的是什么？然后去数据库查询，如果查找了就返回这个用户的所有数据，（能被查询的字段只有：name，order_id，phone）期望的结果如：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;// 情况1&#xA;POST—&amp;gt;张三&#xA;Rturn—&amp;gt;name：张三，gender：男，age：32，order_id:123456，phone：13888888888&#xA;// 场景2&#xA;POST—&amp;gt;13888888888&#xA;Return—&amp;gt;name：张三，gender：男，age：32，order_id:123456，phone:13888888888&#xA;// 场景3&#xA;POST—&amp;gt;13888888888，654321&#xA;Return—&amp;gt;&#xA;name：张三，gender：男，age：32，order_id:123456，phone:13888888888&#xA;name：李四，gender：女，age：18，order_id:654321，phone:15555555555&#xA;// 场景4&#xA;POST—&amp;gt; N...&#xA;Return—&amp;gt; M...&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;h3&gt;数据库&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;有三张表&lt;code&gt;user&lt;/code&gt;,&lt;code&gt;order&lt;/code&gt;,&lt;code&gt;info&lt;/code&gt;&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;user 主表&lt;/h4&gt;&#xA;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;id&lt;/th&gt;&#xA;&lt;th&gt;name&lt;/th&gt;&#xA;&lt;th&gt;gender&lt;/th&gt;&#xA;&lt;th&gt;age&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;张三&lt;/td&gt;&#xA;&lt;td&gt;男&lt;/td&gt;&#xA;&lt;td&gt;32&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;td&gt;李四&lt;/td&gt;&#xA;&lt;td&gt;女&lt;/td&gt;&#xA;&lt;td&gt;18&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&#xA;&lt;h4&gt;order 分表关联 user.id&lt;/h4&gt;&#xA;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;id&lt;/th&gt;&#xA;&lt;th&gt;user_id&lt;/th&gt;&#xA;&lt;th&gt;order_id&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;123456&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;td&gt;654321&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&#xA;&lt;h4&gt;info 分表关联 user.id&lt;/h4&gt;&#xA;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;id&lt;/th&gt;&#xA;&lt;th&gt;user_id&lt;/th&gt;&#xA;&lt;th&gt;phone&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;1&lt;/td&gt;&#xA;&lt;td&gt;13888888888&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;td&gt;2&lt;/td&gt;&#xA;&lt;td&gt;15555555555&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&#xA;&lt;h3&gt;前端&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div class=&amp;quot;search-box&amp;quot;&amp;gt;&#xA;    &amp;lt;form method=&amp;quot;post&amp;quot; action=&amp;quot;/&amp;quot;&amp;gt;&#xA;        &amp;lt;input type=&amp;quot;text&amp;quot; class=&amp;quot;search-txt&amp;quot; name=&amp;quot;column&amp;quot; placeholder=&amp;quot;查询&amp;quot; /&amp;gt;&#xA;        &amp;lt;button type=&amp;quot;submit&amp;quot; class=&amp;quot;search-btn fa fa-search&amp;quot; aria-hidden=&amp;quot;true&amp;quot;&amp;gt;&amp;lt;/button&amp;gt;&#xA;    &amp;lt;/form&amp;gt;&#xA;&amp;lt;/div&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h3&gt;后端&lt;/h3&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {&#xA;&#x9;// 初始化数据库连接&#xA;&#x9;config.NewDB()&#xA;&#xA;&#x9;// 创建 gin 引擎实例&#xA;&#x9;router := gin.Default()&#xA;&#x9;router.LoadHTMLFiles(&amp;quot;./static/templates/index.html&amp;quot;)&#xA;&#x9;router.Static(&amp;quot;/static&amp;quot;, &amp;quot;./static/templates/css&amp;quot;)&#xA;&#x9;router.GET(&amp;quot;/&amp;quot;, func(c *gin.Context) {&#xA;&#x9;&#x9;c.HTML(http.StatusOK, &amp;quot;index.html&amp;quot;, gin.H{})&#xA;&#x9;})&#xA;&#x9;router.POST(&amp;quot;/&amp;quot;, func(c *gin.Context) {&#xA;&#x9;&#x9;column := c.PostForm(&amp;quot;column&amp;quot;)&#xA;&#x9;&#x9;fmt.Println(column)&#xA;&#x9;&#x9;c.HTML(http.StatusOK, &amp;quot;index.html&amp;quot;, gin.H{&#xA;&#x9;&#x9;&#x9;&amp;quot;result&amp;quot;: column,&#xA;&#x9;&#x9;})&#xA;&#x9;})&#xA;&#x9;// 启动服务&#xA;&#x9;err := router.Run()&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>如何用Go启动一个外部程序（linux平台）</title>
-      <link>https://studygolang.com/topics/16358#reply0</link>
-      <description>&lt;p&gt;如何在Linux平台上用go拉起一个三方程序。&#xA;exec.command&#xA;os.StartProcess&#xA;syscal.Exec&#xA;以上浅试，都不行。哪位大神有办法&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>优维低代码实践：数据模型设计</title>
-      <link>https://studygolang.com/articles/36144#reply0</link>
-    </item>
-    <item>
-      <title>求问golang怎么调用com组件</title>
-      <link>https://studygolang.com/topics/16308#reply4</link>
-      <description>&lt;p&gt;golang小白，最近在工作中想用golang调用com组件，但是没有获得太多有用的文档，了解到有小伙伴使用go-ole调用，奈何也没找到具体的文档用法， 毫无思路，请诸位大佬不吝赐教&lt;/p&gt;&#xA;</description>
-    </item>
   </channel>
 </rss>
