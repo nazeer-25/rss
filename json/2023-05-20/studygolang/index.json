@@ -46,6 +46,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "如何利用规则引擎实现输出当前时间",
+      "Link": "https://studygolang.com/topics/16360#reply0",
+      "Description": "\u003cp\u003e如通过字符串time.Now().Format(\u0026ldquo;2006-01-02 15:04:05\u0026rdquo;)，就返回当前时间的字符串\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "如何用Go启动一个外部程序（linux平台）",
       "Link": "https://studygolang.com/topics/16358#reply5",
       "Description": "\u003cp\u003e如何在Linux平台上用go拉起一个三方程序。\nexec.command\nos.StartProcess\nsyscal.Exec\n以上浅试，都不行。哪位大神有办法\u003c/p\u003e\n",
@@ -56,13 +63,6 @@
       "Title": "求助使用gin配合mysql实现一种查询场景",
       "Link": "https://studygolang.com/topics/16359#reply1",
       "Description": "\u003cblockquote\u003e\n\u003cp\u003e场景：前端POST传入一个字段或者多个字段，gin拿到后如何处理区分传入的是什么？然后去数据库查询，如果查找了就返回这个用户的所有数据，（能被查询的字段只有：name，order_id，phone）期望的结果如：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e// 情况1\nPOST—\u0026gt;张三\nRturn—\u0026gt;name：张三，gender：男，age：32，order_id:123456，phone：13888888888\n// 场景2\nPOST—\u0026gt;13888888888\nReturn—\u0026gt;name：张三，gender：男，age：32，order_id:123456，phone:13888888888\n// 场景3\nPOST—\u0026gt;13888888888，654321\nReturn—\u0026gt;\nname：张三，gender：男，age：32，order_id:123456，phone:13888888888\nname：李四，gender：女，age：18，order_id:654321，phone:15555555555\n// 场景4\nPOST—\u0026gt; N...\nReturn—\u0026gt; M...\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/blockquote\u003e\n\n\u003ch3\u003e数据库\u003c/h3\u003e\n\n\u003cp\u003e有三张表\u003ccode\u003euser\u003c/code\u003e,\u003ccode\u003eorder\u003c/code\u003e,\u003ccode\u003einfo\u003c/code\u003e\u003c/p\u003e\n\n\u003ch4\u003euser 主表\u003c/h4\u003e\n\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003eid\u003c/th\u003e\n\u003cth\u003ename\u003c/th\u003e\n\u003cth\u003egender\u003c/th\u003e\n\u003cth\u003eage\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003ctd\u003e张三\u003c/td\u003e\n\u003ctd\u003e男\u003c/td\u003e\n\u003ctd\u003e32\u003c/td\u003e\n\u003c/tr\u003e\n\n\u003ctr\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003ctd\u003e李四\u003c/td\u003e\n\u003ctd\u003e女\u003c/td\u003e\n\u003ctd\u003e18\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\n\u003ch4\u003eorder 分表关联 user.id\u003c/h4\u003e\n\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003eid\u003c/th\u003e\n\u003cth\u003euser_id\u003c/th\u003e\n\u003cth\u003eorder_id\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003ctd\u003e123456\u003c/td\u003e\n\u003c/tr\u003e\n\n\u003ctr\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003ctd\u003e654321\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\n\u003ch4\u003einfo 分表关联 user.id\u003c/h4\u003e\n\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003eid\u003c/th\u003e\n\u003cth\u003euser_id\u003c/th\u003e\n\u003cth\u003ephone\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003ctd\u003e1\u003c/td\u003e\n\u003ctd\u003e13888888888\u003c/td\u003e\n\u003c/tr\u003e\n\n\u003ctr\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003ctd\u003e2\u003c/td\u003e\n\u003ctd\u003e15555555555\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\n\u003ch3\u003e前端\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-html\"\u003e\u0026lt;div class=\u0026quot;search-box\u0026quot;\u0026gt;\n    \u0026lt;form method=\u0026quot;post\u0026quot; action=\u0026quot;/\u0026quot;\u0026gt;\n        \u0026lt;input type=\u0026quot;text\u0026quot; class=\u0026quot;search-txt\u0026quot; name=\u0026quot;column\u0026quot; placeholder=\u0026quot;查询\u0026quot; /\u0026gt;\n        \u0026lt;button type=\u0026quot;submit\u0026quot; class=\u0026quot;search-btn fa fa-search\u0026quot; aria-hidden=\u0026quot;true\u0026quot;\u0026gt;\u0026lt;/button\u0026gt;\n    \u0026lt;/form\u0026gt;\n\u0026lt;/div\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e后端\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc main() {\n\t// 初始化数据库连接\n\tconfig.NewDB()\n\n\t// 创建 gin 引擎实例\n\trouter := gin.Default()\n\trouter.LoadHTMLFiles(\u0026quot;./static/templates/index.html\u0026quot;)\n\trouter.Static(\u0026quot;/static\u0026quot;, \u0026quot;./static/templates/css\u0026quot;)\n\trouter.GET(\u0026quot;/\u0026quot;, func(c *gin.Context) {\n\t\tc.HTML(http.StatusOK, \u0026quot;index.html\u0026quot;, gin.H{})\n\t})\n\trouter.POST(\u0026quot;/\u0026quot;, func(c *gin.Context) {\n\t\tcolumn := c.PostForm(\u0026quot;column\u0026quot;)\n\t\tfmt.Println(column)\n\t\tc.HTML(http.StatusOK, \u0026quot;index.html\u0026quot;, gin.H{\n\t\t\t\u0026quot;result\u0026quot;: column,\n\t\t})\n\t})\n\t// 启动服务\n\terr := router.Run()\n\tif err != nil {\n\t\treturn\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "如何利用规则引擎实现输出当前时间",
-      "Link": "https://studygolang.com/topics/16360#reply0",
-      "Description": "\u003cp\u003e如通过字符串time.Now().Format(\u0026ldquo;2006-01-02 15:04:05\u0026rdquo;)，就返回当前时间的字符串\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
