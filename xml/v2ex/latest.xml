@@ -4,7 +4,14 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>[杭州] 求一名 TTS 算法工程师 - 酷工作</title>
+      <title>这恐怕是目前最臭的 CheckSum 算法。 - 程序员</title>
+      <link>https://www.v2ex.com/t/941677</link>
+      <description>&lt;p&gt;这恐怕是目前最臭的 CheckSum 算法。现在 Xcode 用 MD5 或 SHA-1 都会跳警告，真的很烦人，非得逼着你用 SHA-256 ；但是 CryptoKit 的 SHA-256 要求 target 得至少 macOS 10.15 才可以，就很头痛。所以就自己弄了这么一个 CheckSum 算法（用 CRC32 改的），反正不是用于资安用途，就不要紧。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;// MARK: - YJSNPI Hash Calculation Method&#xA;public enum YJSNPI {&#xA;  private static let table: [UInt32] = (0 ... 255).map { i -&amp;gt; UInt32 in&#xA;    (0 ..&amp;lt; 8).reduce(UInt32(i)) { c, _ in&#xA;      ((c % 2) * 0xE114_D514) ^ (c &amp;gt;&amp;gt; 1)&#xA;    }&#xA;  }&#xA;  public static func checksum(bytes: [UInt8]) -&amp;gt; UInt32 {&#xA;    ~(bytes.reduce(~UInt32(0)) { crc, byte in&#xA;      (crc &amp;gt;&amp;gt; 8) ^ table[(Int(crc) ^ Int(byte)) &amp;amp; 0xFF]&#xA;    })&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>ShikiSuen</author>
+      <pubDate>21 May 2023 04:54:27 +0000</pubDate>
+    </item>
+    <item>
+      <title>[杭州地区] sos！求一名 TTS 算法工程师 - 酷工作</title>
       <link>https://www.v2ex.com/t/941676</link>
       <description>一、 岗位职责：&lt;br /&gt;1. 负责语音合成等相关算法的研究和开发工作；&lt;br /&gt;2. 负责基于大数据的 TTS 模型训练、调参等工作；&lt;br /&gt;3. 负责跟踪并探索国内外最新的语音合成相关先进技术，并能将其落地到公司的产品中。&lt;br /&gt;&lt;br /&gt;二、 岗位要求：&lt;br /&gt;1. 计算机、数学相关专业本科及以上学历；&lt;br /&gt;2. 熟悉常见语音合成模型，包括但不限于基于端到端的 Tacotron 、FastSpeech 、VITS 等；&lt;br /&gt;3. 有良好的沟通表达能力和团队合作精神；&lt;br /&gt;4. 有具体工程落地经验者优先；&lt;br /&gt;5. 有歌声合成 SVS 相关经验者优先。&lt;br /&gt;&lt;br /&gt;关于我们：&lt;br /&gt;我们的技术团队成员来自腾讯、网易、Steam 蒸汽平台、喜马拉雅等一线大厂。核心成员毕业于 IIT 、东北大学等国内外一流院校。曾参与过多种云端应用的研发，拥有丰富的云原生开发经验。在推荐算法、NLP 、深度学习等方面拥有自主探索与开发的能力。&lt;br /&gt;&lt;br /&gt;关于项目：&lt;br /&gt;公司是由浙江知名企业投资，公司致力于动画、漫画、虚拟偶像、数字人的制作，原创 IP 的孵化。目前公司制作原创科幻动画、科幻漫画以及数字人全流程制作。我们是一家专注虚拟人内容，以及数字人技术的企业。</description>
       <author>Agness</author>
