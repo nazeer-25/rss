@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>分享一下白嫖 OpenAI 的经历 - OpenAI</title>
+      <link>https://www.v2ex.com/t/941678</link>
+      <description>3.20 ，第一次开通 ChatGPT PLUS ，使用的是 Depay 虚拟卡，前几次都是拒付，多刷新几次网页就支付成功了&lt;br /&gt;&lt;br /&gt;4.20 ，是续费日，Depay 余额充足服务器正常，我打开订阅页面，订阅状态变化如下：&lt;br /&gt;&#x9;您的方案将于 2023 年 4 月 20 日续订-&amp;gt;您的方案即将续订-&amp;gt;您的方案将于 2023 年 5 月 20 日续订-&amp;gt;不显示续订日期&lt;br /&gt;4.21 ，没有收到扣款通知和邮件、Depay 没有账单记录、ChatGPT PLUS 还在，订阅页面显示您所有的钱已收回，自此开始了一个月的 ChatGPT PLUS 白嫖&lt;br /&gt;&lt;br /&gt;5.20 ，PLUS 会员掉了，但是之前申请的三个插件（ Browsing 、Plugin 和 Code Interpreter ）都保留了下来，确认是基于 GPT-4 且没有了 3 小时 25 个问题的限制&lt;br /&gt;&lt;br /&gt;准备继续白嫖下去...</description>
+      <author>sandboxcn</author>
+      <pubDate>21 May 2023 04:57:31 +0000</pubDate>
+    </item>
+    <item>
       <title>这恐怕是目前最臭的 CheckSum 算法。 - 程序员</title>
       <link>https://www.v2ex.com/t/941677</link>
       <description>&lt;p&gt;这恐怕是目前最臭的 CheckSum 算法。现在 Xcode 用 MD5 或 SHA-1 都会跳警告，真的很烦人，非得逼着你用 SHA-256 ；但是 CryptoKit 的 SHA-256 要求 target 得至少 macOS 10.15 才可以，就很头痛。所以就自己弄了这么一个 CheckSum 算法（用 CRC32 改的），反正不是用于资安用途，就不要紧。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;// MARK: - YJSNPI Hash Calculation Method&#xA;public enum YJSNPI {&#xA;  private static let table: [UInt32] = (0 ... 255).map { i -&amp;gt; UInt32 in&#xA;    (0 ..&amp;lt; 8).reduce(UInt32(i)) { c, _ in&#xA;      ((c % 2) * 0xE114_D514) ^ (c &amp;gt;&amp;gt; 1)&#xA;    }&#xA;  }&#xA;  public static func checksum(bytes: [UInt8]) -&amp;gt; UInt32 {&#xA;    ~(bytes.reduce(~UInt32(0)) { crc, byte in&#xA;      (crc &amp;gt;&amp;gt; 8) ^ table[(Int(crc) ^ Int(byte)) &amp;amp; 0xFF]&#xA;    })&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
