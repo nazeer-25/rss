@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ArchBang i3，如何优雅的启用 vboxguest 的共享剪切板？ - Linux</title>
+      <link>https://www.v2ex.com/t/941987</link>
+      <description>ArchBang 是今年的最新版，在虚拟机里面安装好之后&lt;br /&gt;&lt;br /&gt;pacman -S virtualbox-guest-utils&lt;br /&gt;然后&lt;br /&gt;modprobe -a vboxguest vboxsf vboxvideo&lt;br /&gt;以及&lt;br /&gt;systemctl enable vboxservice.service&lt;br /&gt;&lt;br /&gt;这样子还不能共享剪切板，还要：&lt;br /&gt;&lt;br /&gt;VBoxClient --clipboard&lt;br /&gt;&lt;br /&gt;这样子才能共享剪切板，而且重启机器之后就失效了，还必须再运行一下 VBoxClient --clipboard 才行。&lt;br /&gt;&lt;br /&gt;没人乐意每次开机后都手打一次命令，我就想设置个开机启动，搜了一下有几个方案，一是~/.config/autostart 里面放个 desktop 文件，二是~/.config/i3/config 文件里面最后添加一句“exec VBoxClient --clipboard &amp;amp;&amp;amp; VBoxClient --draganddrop &amp;amp;&amp;amp; VBoxClient --seamless &amp;amp;&amp;amp; VBoxClient --checkhostversion &amp;amp;&amp;amp; VBoxClient --vmsvga”，三是用 systemd ，但是因为共享剪切板只是登陆桌面后需要，systemd 就不考虑了，怎么简单怎么来。&lt;br /&gt;&lt;br /&gt;但是，方案一和二都不优雅。方案一怎么都没效，.desktop 是这么写的：&lt;br /&gt;&lt;br /&gt;[Desktop Entry]&lt;br /&gt;Type=Application&lt;br /&gt;Version=1.0&lt;br /&gt;Name=VBoxGuest&lt;br /&gt;Path=/usr/bin/&lt;br /&gt;Exec=/usr/bin/VBoxClient --clipboard&lt;br /&gt;Terminal=false&lt;br /&gt;&lt;br /&gt;进桌面后不能共享剪切板，还是必须手动运行一次命令才行。&lt;br /&gt;&lt;br /&gt;方案二有效，但是不知道为什么，只要用方案二，每次进桌面鼠标都要呈现繁忙的打圈状态长达一分半钟，实在不能忍&lt;br /&gt;&lt;br /&gt;所以怎么弄呢？请大佬们给点建议，谢谢</description>
+      <author>cathedrel</author>
+      <pubDate>22 May 2023 08:41:04 +0000</pubDate>
+    </item>
+    <item>
       <title>微信语音不亮屏的问题！ - Android</title>
       <link>https://www.v2ex.com/t/941985</link>
       <description>&lt;p&gt;&lt;strong&gt;手机 A：Android 8.1&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;运行老版本微信（大致 8.0.2x 及之前的版本）在息屏状态下微信语音来电，屏幕亮起，有来电铃声，一切正常 &lt;/li&gt;&#xA;&lt;li&gt;运行新版本微信（大致 8.0.3x 及之后的版本）在息屏状态下微信语音来电，屏幕还是息屏状态不亮，有来电铃声，手动按下电源键屏幕正常显示来电窗口。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;手机 B：Android 版本大于 11 ，大致是 13&lt;/strong&gt; &lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;运行微信（大致 8.0.x 及之后的版本）在息屏状态下微信语音来电，屏幕还是息屏状态不亮，无来电铃声，手动按下电源键屏幕亮起后大约几秒正常显示来电窗口，来电铃声正常响起。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;搜索了一下说是要开启锁屏提醒，开启后问题依旧；其实我感觉是息屏状态的时候微信或者是网络断了无法拉起，但是微信是加入了自动启动，也没有找到息屏断网的设置项。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;个人觉得：&lt;/strong&gt;手机 A 应该是系统太老兼容的问题；手机 B 的问题感觉是某项权限设置有问题造成的；没有头绪&lt;/p&gt;&#xA;</description>
