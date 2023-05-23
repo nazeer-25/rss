@@ -33,7 +33,7 @@
     },
     {
       "Title": "通过pprof看到某个方法占用内存过大，大神们如何修改代码让内存占用更少？",
-      "Link": "https://studygolang.com/topics/16367#reply0",
+      "Link": "https://studygolang.com/topics/16367#reply1",
       "Description": "\u003cp\u003epprof占用内存代码如下：\n\u003cimg src=\"https://static.golangjob.cn/230523/a4c4cfdca663005c470aac139880c49a.png\" alt=\"QQ截图20230523102526.png\" /\u003e\n代码\nfunc FirewallRulesGet() ([]FWRule, error) {\n\trules := make([]FWRule, 1000)\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eu, fwPolicy, err := firewallAPIInit()\nif err != nil {\n\treturn rules, err\n}\ndefer firewallAPIRelease(u, fwPolicy)\n\nur, ep, enum, err := firewallRulesEnum(fwPolicy)\nif err != nil {\n\treturn rules, err\n}\ndefer firewallRulesEnumRealease(ur, ep)\n\nfor itemRaw, length, err := enum.Next(1); length \u0026gt; 0; itemRaw, length, err = enum.Next(1) {\n\tif err != nil {\n\t\treturn rules, fmt.Errorf(\u0026quot;failed to seek next Rule item: %s\u0026quot;, err)\n\t}\n\n\trule, err := firewallRuleParams(itemRaw)\n\tif err != nil {\n\t\treturn rules, err\n\t}\n\trules = append(rules, rule)\n}\n\nreturn rules, nil\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -154,6 +154,13 @@
       "Title": "Go 语言学习交流群（禁广告），有在学习 Go 的铁子欢迎加入。",
       "Link": "https://studygolang.com/topics/16356#reply0",
       "Description": "\u003cp\u003eGo 语言学习交流群（禁广告），有在学习 Go 的铁子欢迎加入。\n\u003cimg src=\"https://static.golangjob.cn/230518/eb456c0b74664941f2e124040e182c62.png\" alt=\"mmqrcode1684375509242.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "通过pprof看到某个方法占用内存过大，大神们如何修改代码让内存占用更少？",
+      "Link": "https://studygolang.com/topics/16367#reply0",
+      "Description": "\u003cp\u003epprof占用内存代码如下：\n\u003cimg src=\"https://static.golangjob.cn/230523/a4c4cfdca663005c470aac139880c49a.png\" alt=\"QQ截图20230523102526.png\" /\u003e\n代码\nfunc FirewallRulesGet() ([]FWRule, error) {\n\trules := make([]FWRule, 1000)\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eu, fwPolicy, err := firewallAPIInit()\nif err != nil {\n\treturn rules, err\n}\ndefer firewallAPIRelease(u, fwPolicy)\n\nur, ep, enum, err := firewallRulesEnum(fwPolicy)\nif err != nil {\n\treturn rules, err\n}\ndefer firewallRulesEnumRealease(ur, ep)\n\nfor itemRaw, length, err := enum.Next(1); length \u0026gt; 0; itemRaw, length, err = enum.Next(1) {\n\tif err != nil {\n\t\treturn rules, fmt.Errorf(\u0026quot;failed to seek next Rule item: %s\u0026quot;, err)\n\t}\n\n\trule, err := firewallRuleParams(itemRaw)\n\tif err != nil {\n\t\treturn rules, err\n\t}\n\trules = append(rules, rule)\n}\n\nreturn rules, nil\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },

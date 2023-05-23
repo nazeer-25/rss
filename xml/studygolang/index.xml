@@ -23,7 +23,7 @@
     </item>
     <item>
       <title>通过pprof看到某个方法占用内存过大，大神们如何修改代码让内存占用更少？</title>
-      <link>https://studygolang.com/topics/16367#reply0</link>
+      <link>https://studygolang.com/topics/16367#reply1</link>
       <description>&lt;p&gt;pprof占用内存代码如下：&#xA;&lt;img src=&#34;https://static.golangjob.cn/230523/a4c4cfdca663005c470aac139880c49a.png&#34; alt=&#34;QQ截图20230523102526.png&#34; /&gt;&#xA;代码&#xA;func FirewallRulesGet() ([]FWRule, error) {&#xA;&#x9;rules := make([]FWRule, 1000)&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;u, fwPolicy, err := firewallAPIInit()&#xA;if err != nil {&#xA;&#x9;return rules, err&#xA;}&#xA;defer firewallAPIRelease(u, fwPolicy)&#xA;&#xA;ur, ep, enum, err := firewallRulesEnum(fwPolicy)&#xA;if err != nil {&#xA;&#x9;return rules, err&#xA;}&#xA;defer firewallRulesEnumRealease(ur, ep)&#xA;&#xA;for itemRaw, length, err := enum.Next(1); length &amp;gt; 0; itemRaw, length, err = enum.Next(1) {&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return rules, fmt.Errorf(&amp;quot;failed to seek next Rule item: %s&amp;quot;, err)&#xA;&#x9;}&#xA;&#xA;&#x9;rule, err := firewallRuleParams(itemRaw)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return rules, err&#xA;&#x9;}&#xA;&#x9;rules = append(rules, rule)&#xA;}&#xA;&#xA;return rules, nil&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;</description>
     </item>
     <item>
@@ -108,6 +108,11 @@
       <title>Go 语言学习交流群（禁广告），有在学习 Go 的铁子欢迎加入。</title>
       <link>https://studygolang.com/topics/16356#reply0</link>
       <description>&lt;p&gt;Go 语言学习交流群（禁广告），有在学习 Go 的铁子欢迎加入。&#xA;&lt;img src=&#34;https://static.golangjob.cn/230518/eb456c0b74664941f2e124040e182c62.png&#34; alt=&#34;mmqrcode1684375509242.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>通过pprof看到某个方法占用内存过大，大神们如何修改代码让内存占用更少？</title>
+      <link>https://studygolang.com/topics/16367#reply0</link>
+      <description>&lt;p&gt;pprof占用内存代码如下：&#xA;&lt;img src=&#34;https://static.golangjob.cn/230523/a4c4cfdca663005c470aac139880c49a.png&#34; alt=&#34;QQ截图20230523102526.png&#34; /&gt;&#xA;代码&#xA;func FirewallRulesGet() ([]FWRule, error) {&#xA;&#x9;rules := make([]FWRule, 1000)&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;u, fwPolicy, err := firewallAPIInit()&#xA;if err != nil {&#xA;&#x9;return rules, err&#xA;}&#xA;defer firewallAPIRelease(u, fwPolicy)&#xA;&#xA;ur, ep, enum, err := firewallRulesEnum(fwPolicy)&#xA;if err != nil {&#xA;&#x9;return rules, err&#xA;}&#xA;defer firewallRulesEnumRealease(ur, ep)&#xA;&#xA;for itemRaw, length, err := enum.Next(1); length &amp;gt; 0; itemRaw, length, err = enum.Next(1) {&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return rules, fmt.Errorf(&amp;quot;failed to seek next Rule item: %s&amp;quot;, err)&#xA;&#x9;}&#xA;&#xA;&#x9;rule, err := firewallRuleParams(itemRaw)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return rules, err&#xA;&#x9;}&#xA;&#x9;rules = append(rules, rule)&#xA;}&#xA;&#xA;return rules, nil&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>最快的Go WebSocket Server来了, IOPS超过 gobwas/ws 五倍!</title>
