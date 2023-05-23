@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "开始！携程 VS 美团 - Apple",
+      "Link": "https://www.v2ex.com/t/942360",
+      "Description": "日常订酒店，机票都是携程，你们用哪个",
+      "Author": "Apple2023",
+      "PubDate": "2023-05-23T11:22:49Z"
+    },
+    {
       "Title": "请教，关于 C++中 char 二进制数据释放的问题 - C++",
       "Link": "https://www.v2ex.com/t/942359",
       "Description": "\u003cp\u003e今天做项目的时候遇到了这样一个需求：需要读取一个二进制到指定的数据结构中，并释放二进制数据。\n这个二进制数据大小是确定的，为 1024B 。现在我遇到两个问题：一是无论怎么释放这个 char*都会遇到 exception 。我尝试过使用 unique_ptr 进行包装，也尝试过直接使用 delete[] ptr 但都不好使。想问各位大神这种情况应该怎么释放数据？\n二是在 main 中的 memcpy 之后，任何 cout 内容都会转移到 badbit 状态，这个我没有查到相关的资料，请问这是什么情况？\n代码附上：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-c++\"\u003eint main() {\n    file_system::Block block;\n    file_system::IndexData index_data;\n    std::unique_ptr\u0026lt;char\u0026gt; data(index_data.GetBlock()); //GetBlock 返回一个 char*\n    memcpy(block.data, data.get(), sizeof(char) * block_size);\n    //data.release();\n    file_system::IndexData index_data2(\u0026amp;block);\n    for (auto \u0026amp;i: index_data2.index_vector) {\n        std::cout \u0026lt;\u0026lt; i.name;\n    }\n}\n\nchar *GetBlock() {\n            char *data = new char[block_size]; //block_size 为常数 1024\n            char *dataptr = data;\n            //max_index_size 为常数\n            for (int i = 0; i \u0026lt; max_index_size; ++i) {\n            //复制数据\n                memcpy(dataptr + sizeof(Index) * i, index_vector[i].name, sizeof(char) * name_size);\n                memcpy(dataptr + sizeof(Index) * i + sizeof(char) * name_size, \u0026amp;index_vector[i].handle, sizeof(short));\n            }\n            memcpy(dataptr + sizeof(char) * block_size - sizeof(short), \u0026amp;next_index_block_handle, sizeof(short));\n            return data;\n        }\n\u003c/code\u003e\u003c/pre\u003e\n",
