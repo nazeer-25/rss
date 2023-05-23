@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求助 github action 自动打包动态链接库 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/942313</link>
+      <description>&lt;p&gt;帮一个开源作者写的，我自己是不懂 golang 的&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;name: Build&#xA;on:&#xA;  release:&#xA;    types: [created] # 表示在创建新的 Release 时触发&#xA;permissions:&#xA;  contents: write&#xA;jobs:&#xA;  build:&#xA;    runs-on: ubuntu-latest&#xA;    steps:&#xA;    - name: Install Go 1.20.4&#xA;      uses: actions/setup-go@v2&#xA;      with:&#xA;        go-version: 1.20.4&#xA;    - uses: actions/checkout@v2&#xA;    - name: Install dependencies&#xA;      run: sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install -y build-essential&#xA;    - name: Build shared library for amd64&#xA;      run: cd libs_dist &amp;amp;&amp;amp; chmod +x * &amp;amp;&amp;amp; bash build_amd64_so.sh&#xA;    - name: Upload artifacts&#xA;      uses: actions/upload-artifact@v2&#xA;      with:&#xA;        name: libs&#xA;        path: |&#xA;          libs_dist/*.so&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;理论上不是说 golang 是支持交叉编译的嘛&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# build arm64 so&#xA;go env -w GOOS=linux&#xA;go env -w GOARCH=arm64&#xA;go build -buildmode=c-shared -o requests-go-arm64.so export.go&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我在 github 免费的 coderspace 里面测试了一下 amd64 是可以正常构建的，但是 arm 的就没办法&#xA;执行会提示&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;@dnslin ➜ /workspaces/requests/libs_dist (main) $ go env -w GOOS=linux&#xA;@dnslin ➜ /workspaces/requests/libs_dist (main) $ go env -w GOARCH=arm64&#xA;@dnslin ➜ /workspaces/requests/libs_dist (main) $ go build -buildmode=c-shared -o requests-go-arm64.so export.go&#xA;go: no Go source files&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如果不支持 一个平台构建其他平台的动态链接库 那我就不用测试了&lt;/p&gt;&#xA;</description>
+      <author>blankmiss</author>
+      <pubDate>23 May 2023 08:38:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有办法用 MacBookpro 的触控板去控制 Macmini - MacBook Pro</title>
+      <link>https://www.v2ex.com/t/942312</link>
+      <description>突发奇想，并非刚需&lt;br /&gt;目前同时拥有 MacBookpro 和 M2 macmini&lt;br /&gt;非远程桌面场景下，有没有办法用 MacBookpro 的触控板去控制 Macmini 呢？&lt;br /&gt;或者有没有办法用 iPadmini 的屏幕当触控板去控制 macmini 呢？</description>
+      <author>iovekkk</author>
+      <pubDate>23 May 2023 08:37:11 +0000</pubDate>
+    </item>
+    <item>
       <title>求推荐一些车上好玩好用的东西 - 问与答</title>
       <link>https://www.v2ex.com/t/942311</link>
       <description>&lt;p&gt;感觉车像男人的第二个家，有车之后，围绕着车买了一些东西。&lt;br/&gt;&#xA;有没有比如好玩好用的东西，可以分享一下，看看有没有喜欢的也买点。&lt;/p&gt;&#xA;&lt;p&gt;分享一下我感觉不错的东西：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;水基灭火器，必备&lt;/li&gt;&#xA;&lt;li&gt;行车记录仪 70 迈 M500&lt;/li&gt;&#xA;&lt;li&gt;ETC 支付宝&lt;/li&gt;&#xA;&lt;li&gt;挪车电话牌&lt;/li&gt;&#xA;&lt;li&gt;小米车载无线充电器，夹手机看导航，我的老车没有 CarPlay&lt;/li&gt;&#xA;&lt;li&gt;小米车载吸尘器&lt;/li&gt;&#xA;&lt;li&gt;迪卡侬的折叠椅，不定什么时候拿出来坐会&lt;/li&gt;&#xA;&lt;li&gt;抖音买的洗车毛巾 5 条￥ 13 ，喜欢自己洗车，6 元洗一次&lt;/li&gt;&#xA;&lt;li&gt;Divoom 点音的像素屏，放后车窗好看的&lt;/li&gt;&#xA;&lt;li&gt;鸡毛掸子，出门前拂一遍车上的浮尘，好用&lt;/li&gt;&#xA;&lt;li&gt;昨天超市买了个篮子，装杂物的，很不错，看下图&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://github.com/KyleBing/v2ex-image/assets/12215982/df1449dd-49b3-4531-8833-71086d7c7cb5&#34;/&gt;&lt;/p&gt;&#xA;</description>

@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "求助 github action 自动打包动态链接库 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/942313",
+      "Description": "\u003cp\u003e帮一个开源作者写的，我自己是不懂 golang 的\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yaml\"\u003ename: Build\non:\n  release:\n    types: [created] # 表示在创建新的 Release 时触发\npermissions:\n  contents: write\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n    - name: Install Go 1.20.4\n      uses: actions/setup-go@v2\n      with:\n        go-version: 1.20.4\n    - uses: actions/checkout@v2\n    - name: Install dependencies\n      run: sudo apt-get update \u0026amp;\u0026amp; sudo apt-get install -y build-essential\n    - name: Build shared library for amd64\n      run: cd libs_dist \u0026amp;\u0026amp; chmod +x * \u0026amp;\u0026amp; bash build_amd64_so.sh\n    - name: Upload artifacts\n      uses: actions/upload-artifact@v2\n      with:\n        name: libs\n        path: |\n          libs_dist/*.so\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e理论上不是说 golang 是支持交叉编译的嘛\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# build arm64 so\ngo env -w GOOS=linux\ngo env -w GOARCH=arm64\ngo build -buildmode=c-shared -o requests-go-arm64.so export.go\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我在 github 免费的 coderspace 里面测试了一下 amd64 是可以正常构建的，但是 arm 的就没办法\n执行会提示\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e@dnslin ➜ /workspaces/requests/libs_dist (main) $ go env -w GOOS=linux\n@dnslin ➜ /workspaces/requests/libs_dist (main) $ go env -w GOARCH=arm64\n@dnslin ➜ /workspaces/requests/libs_dist (main) $ go build -buildmode=c-shared -o requests-go-arm64.so export.go\ngo: no Go source files\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如果不支持 一个平台构建其他平台的动态链接库 那我就不用测试了\u003c/p\u003e\n",
+      "Author": "blankmiss",
+      "PubDate": "2023-05-23T08:38:13Z"
+    },
+    {
+      "Title": "有没有办法用 MacBookpro 的触控板去控制 Macmini - MacBook Pro",
+      "Link": "https://www.v2ex.com/t/942312",
+      "Description": "突发奇想，并非刚需\u003cbr /\u003e目前同时拥有 MacBookpro 和 M2 macmini\u003cbr /\u003e非远程桌面场景下，有没有办法用 MacBookpro 的触控板去控制 Macmini 呢？\u003cbr /\u003e或者有没有办法用 iPadmini 的屏幕当触控板去控制 macmini 呢？",
+      "Author": "iovekkk",
+      "PubDate": "2023-05-23T08:37:11Z"
+    },
+    {
       "Title": "求推荐一些车上好玩好用的东西 - 问与答",
       "Link": "https://www.v2ex.com/t/942311",
       "Description": "\u003cp\u003e感觉车像男人的第二个家，有车之后，围绕着车买了一些东西。\u003cbr/\u003e\n有没有比如好玩好用的东西，可以分享一下，看看有没有喜欢的也买点。\u003c/p\u003e\n\u003cp\u003e分享一下我感觉不错的东西：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e水基灭火器，必备\u003c/li\u003e\n\u003cli\u003e行车记录仪 70 迈 M500\u003c/li\u003e\n\u003cli\u003eETC 支付宝\u003c/li\u003e\n\u003cli\u003e挪车电话牌\u003c/li\u003e\n\u003cli\u003e小米车载无线充电器，夹手机看导航，我的老车没有 CarPlay\u003c/li\u003e\n\u003cli\u003e小米车载吸尘器\u003c/li\u003e\n\u003cli\u003e迪卡侬的折叠椅，不定什么时候拿出来坐会\u003c/li\u003e\n\u003cli\u003e抖音买的洗车毛巾 5 条￥ 13 ，喜欢自己洗车，6 元洗一次\u003c/li\u003e\n\u003cli\u003eDivoom 点音的像素屏，放后车窗好看的\u003c/li\u003e\n\u003cli\u003e鸡毛掸子，出门前拂一遍车上的浮尘，好用\u003c/li\u003e\n\u003cli\u003e昨天超市买了个篮子，装杂物的，很不错，看下图\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg alt=\"image\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://github.com/KyleBing/v2ex-image/assets/12215982/df1449dd-49b3-4531-8833-71086d7c7cb5\"/\u003e\u003c/p\u003e\n",
