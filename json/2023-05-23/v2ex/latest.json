@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有什么现成的 autogpt 能用吗？(hosted version) - 问与答",
+      "Link": "https://www.v2ex.com/t/942236",
+      "Description": "\u003cp\u003e主要是不想本地起一个服务，如果能直接用就好了\n绑信用卡也 OK\u003c/p\u003e\n\u003cp\u003e印象中之前有过几家，但是搜不到了\n只找到一家很小的（ aomni ，但感觉不太行）\u003c/p\u003e\n",
+      "Author": "cqcn1991",
+      "PubDate": "2023-05-23T04:42:55Z"
+    },
+    {
+      "Title": "iOS 上的 poe 有办法把 chatgpt 设为默认吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/942235",
+      "Description": "每次打开都是 sage 还要调到 chatgpt 怪麻烦的",
+      "Author": "Fike",
+      "PubDate": "2023-05-23T04:41:03Z"
+    },
+    {
+      "Title": "推荐：真人快打 11 骨折价！ 打包 3 个 DLC 不到 30 块 - 分享发现",
+      "Link": "https://www.v2ex.com/t/942234",
+      "Description": "\u003ch3\u003e30 块买不到吃亏，买不到上当\u003c/h3\u003e\n\u003cp\u003e真人快打 11 是一款以动作格斗为主的游戏，在 Steam 上正在进行打折促销。这款游戏拥有丰富的角色选择，每个角色都有独特的技能和打法。同时，游戏中还有丰富的模式，包括剧情模式、对战模式等，玩家可以选择自己喜欢的模式进行游戏。值得一提的是，游戏的画面效果非常出色，打斗场面非常震撼。如果你喜欢动作游戏，那么不要错过这次打折促销！\u003c/p\u003e\n\u003ch3\u003e入手地址\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://store.steampowered.com/sub/518699/\" rel=\"nofollow\"\u003ehttps://store.steampowered.com/sub/518699/\u003c/a\u003e\u003c/p\u003e\n\u003ch3\u003e订单截图（国服）\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://pic1.imgdb.cn/item/646c4316e03e90d874d44436.jpg\"/\u003e\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://pic1.imgdb.cn/item/646c4317e03e90d874d44490.jpg\"/\u003e\u003c/p\u003e\n",
+      "Author": "Xiqiuqiu",
+      "PubDate": "2023-05-23T04:40:56Z"
+    },
+    {
+      "Title": "[求职][杭州]2 年前端，欢迎各位大哥提简历修改意见。 - 求职",
+      "Link": "https://www.v2ex.com/t/942233",
+      "Description": "\u003cp\u003e学历：大专（非全日制）\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://image.fishworm.top/%E5%9C%A8%E7%BA%BF%20%E7%AE%80%E5%8E%86.pdf\" rel=\"nofollow\"\u003e简历 pdf\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003egithub: \u003ca href=\"https://github.com/fishworm96\" rel=\"nofollow\"\u003ehttps://github.com/fishworm96\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e邮箱：ZWIyYmFuX3p4aEBxcS5jb20= (base64)\u003c/p\u003e\n\u003cp\u003e对简历有意见或建议，欢迎斧正。\u003c/p\u003e\n",
+      "Author": "fishworm",
+      "PubDate": "2023-05-23T04:40:20Z"
+    },
+    {
+      "Title": "显示用户注册时间的油猴脚本 - 分享创造",
+      "Link": "https://www.v2ex.com/t/942232",
+      "Description": "\u003cp\u003e花了一点点时间，写了一个非常简单的油猴脚本，可以显示帖子回复用户的注册时间，希望在这个诸君情绪都不稳定的时代，给大家多一点的辨认信息。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e// ==UserScript==\n// @name         Aparecium\n// @namespace    http://tampermonkey.net/\n// @version      0.1\n// @description  Shows User's create time in V2ex.\n// @author       FledgeShiu\n// @copyright    No License\n// @match        *://*.v2ex.com/t/*\n// @match        *://v2ex.com/t/*\n// @icon         https://v2ex.com/static/icon-192.png\n// @grant        none\n// ==/UserScript==\n\n(function() {\n    'use strict';\n    async function run() {\n        let comment_nodes = document.querySelectorAll(\"div[id^=r_].cell\");\n        comment_nodes.forEach(async function(node){\n            const user = node.querySelectorAll(\"tr\u0026gt;td:last-child\")[0];\n            const user_info_url = user.querySelectorAll(\"strong\u0026gt;a\")[0].href;\n            const user_name = user_info_url.split('/').at(-1);\n            const response = await fetch(`https://${window.location.host}/api/members/show.json?username=${user_name}`);\n            const jsonData = await response.json();\n            const date = new Date(jsonData.created * 1000).toLocaleDateString()\n            const age_element = user.getElementsByClassName(\"ago\")[0];\n            const next_element = age_element.nextSibling\n            const empty_text = document.createTextNode('\\u00A0 \\u00A0');\n            user.insertBefore(empty_text, next_element);\n            let new_element = document.createElement(\"span\");\n            new_element.innerHTML = date;\n            new_element.classList.add(\"ago\");\n            user.insertBefore(new_element, next_element);\n        });\n    }\n    run()\n})();\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "xarthur",
+      "PubDate": "2023-05-23T04:38:57Z"
+    },
+    {
       "Title": "大家手机平时一直都开着 5G 吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/942231",
       "Description": "我在北京工作，用的是 iPhone 12 ，现在电池已经 79 了，平时不咋敢开 5G ，太费电了，而且感觉 4G 用用也够了，下载也挺快的。但是看同事都是开着 5G ，他们说也没啥特别的感觉。想问问大家平时都开着 5G 吗？北京的朋友可以说说 5G 覆盖率如何？",
