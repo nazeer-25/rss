@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "V2er 两天了，无法解析数据？测试了几个其他客户端也不行？ - iOS",
+      "Link": "https://www.v2ex.com/t/942314",
+      "Description": "\u003cp\u003e第三方只有伟途亦可思可以，其他客户端都不能浏览，空白。\nsafari 可以用，我不是一个人吧？\u003c/p\u003e\n",
+      "Author": "snake811017",
+      "PubDate": "2023-05-23T08:42:17Z"
+    },
+    {
       "Title": "求助 github action 自动打包动态链接库 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/942313",
       "Description": "\u003cp\u003e帮一个开源作者写的，我自己是不懂 golang 的\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yaml\"\u003ename: Build\non:\n  release:\n    types: [created] # 表示在创建新的 Release 时触发\npermissions:\n  contents: write\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n    - name: Install Go 1.20.4\n      uses: actions/setup-go@v2\n      with:\n        go-version: 1.20.4\n    - uses: actions/checkout@v2\n    - name: Install dependencies\n      run: sudo apt-get update \u0026amp;\u0026amp; sudo apt-get install -y build-essential\n    - name: Build shared library for amd64\n      run: cd libs_dist \u0026amp;\u0026amp; chmod +x * \u0026amp;\u0026amp; bash build_amd64_so.sh\n    - name: Upload artifacts\n      uses: actions/upload-artifact@v2\n      with:\n        name: libs\n        path: |\n          libs_dist/*.so\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e理论上不是说 golang 是支持交叉编译的嘛\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# build arm64 so\ngo env -w GOOS=linux\ngo env -w GOARCH=arm64\ngo build -buildmode=c-shared -o requests-go-arm64.so export.go\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我在 github 免费的 coderspace 里面测试了一下 amd64 是可以正常构建的，但是 arm 的就没办法\n执行会提示\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e@dnslin ➜ /workspaces/requests/libs_dist (main) $ go env -w GOOS=linux\n@dnslin ➜ /workspaces/requests/libs_dist (main) $ go env -w GOARCH=arm64\n@dnslin ➜ /workspaces/requests/libs_dist (main) $ go build -buildmode=c-shared -o requests-go-arm64.so export.go\ngo: no Go source files\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如果不支持 一个平台构建其他平台的动态链接库 那我就不用测试了\u003c/p\u003e\n",
