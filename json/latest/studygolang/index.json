@@ -39,16 +39,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "通过pprof看到某个方法占用内存过大，大神们如何修改代码让内存占用更少？",
-      "Link": "https://studygolang.com/topics/16367#reply3",
-      "Description": "\u003cp\u003epprof占用内存代码如下：\n\u003cimg src=\"https://static.golangjob.cn/230523/a4c4cfdca663005c470aac139880c49a.png\" alt=\"QQ截图20230523102526.png\" /\u003e\n代码\nfunc FirewallRulesGet() ([]FWRule, error) {\n\trules := make([]FWRule, 1000)\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eu, fwPolicy, err := firewallAPIInit()\nif err != nil {\n\treturn rules, err\n}\ndefer firewallAPIRelease(u, fwPolicy)\n\nur, ep, enum, err := firewallRulesEnum(fwPolicy)\nif err != nil {\n\treturn rules, err\n}\ndefer firewallRulesEnumRealease(ur, ep)\n\nfor itemRaw, length, err := enum.Next(1); length \u0026gt; 0; itemRaw, length, err = enum.Next(1) {\n\tif err != nil {\n\t\treturn rules, fmt.Errorf(\u0026quot;failed to seek next Rule item: %s\u0026quot;, err)\n\t}\n\n\trule, err := firewallRuleParams(itemRaw)\n\tif err != nil {\n\t\treturn rules, err\n\t}\n\trules = append(rules, rule)\n}\n\nreturn rules, nil\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n",
+      "Title": "让 chatgpt 讲解 Go 的核心源代码",
+      "Link": "https://studygolang.com/topics/16364#reply1",
+      "Description": "\u003cp\u003e通过 openai 提供的接口，令其解释 Go 源码中每个文件，每个变量，每个 func 和 struct 的作用。\u003c/p\u003e\n\n\u003cp\u003e效果不错，见后面几张图。由于接口有每分钟 3 次的限制，所以需要花些时间。目前仅限于 runtime 包，后续会完善 sync ，cmd/go 等核心包。有兴趣可以关注下，持续更新。\u003c/p\u003e\n\n\u003cp\u003e「问 chatgptGo 核心源码中每个文件，变量，结构体，方法的作用」\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/cuishuang/explain-source-code-by-chatgpt\"\u003ehttps://github.com/cuishuang/explain-source-code-by-chatgpt\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230522/9b78e4caf310ba549890806d497fb128.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230522/d265b8a052b91dd32272475673935d69.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230522/d40c7865bddaa4cde310b6c8dec94879.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "让 chatgpt 讲解 Go 的核心源代码",
-      "Link": "https://studygolang.com/topics/16364#reply1",
-      "Description": "\u003cp\u003e通过 openai 提供的接口，令其解释 Go 源码中每个文件，每个变量，每个 func 和 struct 的作用。\u003c/p\u003e\n\n\u003cp\u003e效果不错，见后面几张图。由于接口有每分钟 3 次的限制，所以需要花些时间。目前仅限于 runtime 包，后续会完善 sync ，cmd/go 等核心包。有兴趣可以关注下，持续更新。\u003c/p\u003e\n\n\u003cp\u003e「问 chatgptGo 核心源码中每个文件，变量，结构体，方法的作用」\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/cuishuang/explain-source-code-by-chatgpt\"\u003ehttps://github.com/cuishuang/explain-source-code-by-chatgpt\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230522/9b78e4caf310ba549890806d497fb128.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230522/d265b8a052b91dd32272475673935d69.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230522/d40c7865bddaa4cde310b6c8dec94879.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Title": "通过pprof看到某个方法占用内存过大，大神们如何修改代码让内存占用更少？",
+      "Link": "https://studygolang.com/topics/16367#reply3",
+      "Description": "\u003cp\u003epprof占用内存代码如下：\n\u003cimg src=\"https://static.golangjob.cn/230523/a4c4cfdca663005c470aac139880c49a.png\" alt=\"QQ截图20230523102526.png\" /\u003e\n代码\nfunc FirewallRulesGet() ([]FWRule, error) {\n\trules := make([]FWRule, 1000)\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eu, fwPolicy, err := firewallAPIInit()\nif err != nil {\n\treturn rules, err\n}\ndefer firewallAPIRelease(u, fwPolicy)\n\nur, ep, enum, err := firewallRulesEnum(fwPolicy)\nif err != nil {\n\treturn rules, err\n}\ndefer firewallRulesEnumRealease(ur, ep)\n\nfor itemRaw, length, err := enum.Next(1); length \u0026gt; 0; itemRaw, length, err = enum.Next(1) {\n\tif err != nil {\n\t\treturn rules, fmt.Errorf(\u0026quot;failed to seek next Rule item: %s\u0026quot;, err)\n\t}\n\n\trule, err := firewallRuleParams(itemRaw)\n\tif err != nil {\n\t\treturn rules, err\n\t}\n\trules = append(rules, rule)\n}\n\nreturn rules, nil\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -67,16 +67,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "接口文档工具 apicat",
-      "Link": "https://studygolang.com/p/1141#reply0",
-      "Description": "",
+      "Title": "用ChatGPT给我的公众号写了段推广语",
+      "Link": "https://studygolang.com/topics/16368#reply1",
+      "Description": "\u003cp\u003e如果你正在学习 Go 语言，或者想要了解这门语言的基础知识和应用实践，那么我的公众号 “Go语言入门之路” 是一个不错的选择。\u003c/p\u003e\n\n\u003cp\u003e在这里，你可以找到很多关于 Go 语言的教程、案例和技巧，涉及从基础语法到高级应用的方方面面，包括但不限于：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e数据类型和变量\n函数和方法\n控制流和循环\n接口和结构体\n并发编程和网络编程\nWeb 开发和数据库操作\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e我会尽可能地通过简单易懂的方式来讲解这些内容，帮助读者更好地掌握 Go 语言的核心概念和编程技术。同时也欢迎大家在公众号后台留言，提出问题和反馈意见，我会尽快回复并改进。\u003c/p\u003e\n\n\u003cp\u003e无论你是初学者还是有一定经验的开发者，都可以在 “Go语言入门之路” 中获得一些有用的知识和经验。期待你的加入！\n\u003cimg src=\"https://static.golangjob.cn/230523/e24d652a552b606bc859e33e0fcb5c1c.jpg\" alt=\"qrcode_for_gh_3982836909ff_258.jpg\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "用ChatGPT给我的公众号写了段推广语",
-      "Link": "https://studygolang.com/topics/16368#reply1",
-      "Description": "\u003cp\u003e如果你正在学习 Go 语言，或者想要了解这门语言的基础知识和应用实践，那么我的公众号 “Go语言入门之路” 是一个不错的选择。\u003c/p\u003e\n\n\u003cp\u003e在这里，你可以找到很多关于 Go 语言的教程、案例和技巧，涉及从基础语法到高级应用的方方面面，包括但不限于：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e数据类型和变量\n函数和方法\n控制流和循环\n接口和结构体\n并发编程和网络编程\nWeb 开发和数据库操作\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e我会尽可能地通过简单易懂的方式来讲解这些内容，帮助读者更好地掌握 Go 语言的核心概念和编程技术。同时也欢迎大家在公众号后台留言，提出问题和反馈意见，我会尽快回复并改进。\u003c/p\u003e\n\n\u003cp\u003e无论你是初学者还是有一定经验的开发者，都可以在 “Go语言入门之路” 中获得一些有用的知识和经验。期待你的加入！\n\u003cimg src=\"https://static.golangjob.cn/230523/e24d652a552b606bc859e33e0fcb5c1c.jpg\" alt=\"qrcode_for_gh_3982836909ff_258.jpg\" /\u003e\u003c/p\u003e\n",
+      "Title": "接口文档工具 apicat",
+      "Link": "https://studygolang.com/p/1141#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
