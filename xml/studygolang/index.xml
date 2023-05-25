@@ -33,10 +33,6 @@
       <description>&lt;p&gt;全职远程工作轻松，上下班打卡，每日花2小时左右完成分配的任务就行，薪资20-25k，合同签两年&lt;/p&gt;&#xA;&#xA;&lt;p&gt;岗位职责：&#xA;1、负责go语言开发IM服务&#xA;2、根据策划文档设计实现IM功能:&#xA;3、同产品和设计团队协作，归纳功能用例，并转化为高效的技术解决方案&#xA;4、负责高质显的设计和编码，承担重点、难点的技术攻坚&lt;/p&gt;&#xA;&#xA;&lt;p&gt;岗位要求：&#xA;1、统招本科学历、35以下优先考虑&#xA;2、2年以上实标项目开发经验有IM服务端开发经验优先(简历里需明确表明有IM及时通讯经验）&#xA;3、熟悉TCP/IP，掌握WebSocket、socket编程&#xA;4、有高负载高并发开发经验优先;&#xA;5、熟练用Redis，MySgl，SqlServer数据库中的至少一种&#xA;6、能吃苦，良好的沟通能力，富有责任心&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>海量数据高并发场景，构建Go+ES8企业级搜索微服务</title>
-      <link>https://studygolang.com/articles/36150#reply0</link>
-    </item>
-    <item>
       <title>发现一个 ChatGPT 可用的链接地址问各种 ChatGPT 的问题</title>
       <link>https://studygolang.com/topics/16370#reply0</link>
       <description>&lt;p&gt;发现一个 ChatGPT 可用的链接地址问各种 ChatGPT 的问题，点这里： &lt;a href=&#34;https://chaintz.top&#34;&gt;https://chaintz.top&lt;/a&gt; 这里： &lt;a href=&#34;https://store.chaintz.app/&#34;&gt;https://store.chaintz.app/&lt;/a&gt; 或者这里：&lt;a href=&#34;https://www.chainuk.top/&#34;&gt;https://www.chainuk.top/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
@@ -50,6 +46,10 @@
       <title>通过pprof看到某个方法占用内存过大，大神们如何修改代码让内存占用更少？</title>
       <link>https://studygolang.com/topics/16367#reply3</link>
       <description>&lt;p&gt;pprof占用内存代码如下：&#xA;&lt;img src=&#34;https://static.golangjob.cn/230523/a4c4cfdca663005c470aac139880c49a.png&#34; alt=&#34;QQ截图20230523102526.png&#34; /&gt;&#xA;代码&#xA;func FirewallRulesGet() ([]FWRule, error) {&#xA;&#x9;rules := make([]FWRule, 1000)&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;u, fwPolicy, err := firewallAPIInit()&#xA;if err != nil {&#xA;&#x9;return rules, err&#xA;}&#xA;defer firewallAPIRelease(u, fwPolicy)&#xA;&#xA;ur, ep, enum, err := firewallRulesEnum(fwPolicy)&#xA;if err != nil {&#xA;&#x9;return rules, err&#xA;}&#xA;defer firewallRulesEnumRealease(ur, ep)&#xA;&#xA;for itemRaw, length, err := enum.Next(1); length &amp;gt; 0; itemRaw, length, err = enum.Next(1) {&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return rules, fmt.Errorf(&amp;quot;failed to seek next Rule item: %s&amp;quot;, err)&#xA;&#x9;}&#xA;&#xA;&#x9;rule, err := firewallRuleParams(itemRaw)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return rules, err&#xA;&#x9;}&#xA;&#x9;rules = append(rules, rule)&#xA;}&#xA;&#xA;return rules, nil&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>海量数据高并发场景，构建Go+ES8企业级搜索微服务</title>
+      <link>https://studygolang.com/articles/36150#reply0</link>
     </item>
     <item>
       <title>用ChatGPT给我的公众号写了段推广语</title>
