@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "tailscale 回家速度不理想，求教 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/942796",
+      "Description": "\u003cp\u003e电信 300M 宽带有公网 ip ，千兆光猫设置了桥接，主路由硬件 RouterOS 设备负责拨号，副路由 Openwrt 上安装有 tailscale\n拓扑为  华为光猫---RB760---Openwrt\n最早在 RouterOS 配置了 NAT1 给 openwrt ，tailscale 的速度还凑活吧，现在关闭了 NAT1 ，tailscale 的速度就很慢了，但是凑活将就能用，网上说可通过自建 derper 的方式提速，但是我在阿里轻量云上安装并配置了 derper ，测试无法使用，下面我发出来步骤，请大家排查一下问题，谢谢了。\u003c/p\u003e\n\u003cp\u003e[安装 derper ]\nwget --no-check-certificate \u003ca href=\"https://go.dev/dl/go1.20.4.linux-amd64.tar.gz\" rel=\"nofollow\"\u003ehttps://go.dev/dl/go1.20.4.linux-amd64.tar.gz\u003c/a\u003e\ntar -xzf go1.20.4.linux-amd64.tar.gz -C /usr/local\necho 'export GOROOT=/usr/local/go' | tee -a /etc/profile\necho 'export GOPATH=/usr/local/gopath' | tee -a /etc/profile\necho 'export GOBIN=$GOPATH/bin' | tee -a /etc/profile\necho 'export PATH=$PATH:$GOROOT/bin' | tee -a /etc/profile\necho 'export PATH=$PATH:$GOPATH/bin' | tee -a /etc/profile\nsource /etc/profile\ngo version\ngo env -w GOPROXY=\u003ca href=\"https://goproxy.cn\" rel=\"nofollow\"\u003ehttps://goproxy.cn\u003c/a\u003e,direct\ngo install \u003ca href=\"http://tailscale.com/cmd/derper@main\" rel=\"nofollow\"\u003etailscale.com/cmd/derper@main\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e[阿里云申请 1 年免费证书并上传到 /home/admin/certs ]\n浏览器 https 方式打开 deeper 页面也正常\u003c/p\u003e\n\u003cp\u003e[ aliyun 上关闭了防火墙和系统内置的 firewalld ] \u003c/p\u003e\n\u003cp\u003e[启动服务如下]\ntee /etc/systemd/system/derper.service \u0026lt;\u0026lt;'EOF'\n[Unit]\nDescription=Tailscale DERP Server\nRequires=tailscaled.service\nAfter=tailscaled.service\u003c/p\u003e\n\u003cp\u003e[Service]\nType=simple\nUser=root\nRestart=always\nRestartSec=5\nExecStart=/usr/local/gopath/bin/derper -c=/root/derper.conf --hostname=\u003ca href=\"http://aliyun.111.com\" rel=\"nofollow\"\u003ealiyun.111.com\u003c/a\u003e --verify-clients -a=:7777 -stun-port=8888 -http-port=-1 -certdir=/home/admin/certs/ -certmode=manual \u003c/p\u003e\n\u003cp\u003e[Install]\nWantedBy=multi-user.target\nEOF\u003c/p\u003e\n\u003cp\u003esystemctl daemon-reload \u0026amp;\u0026amp; systemctl enable --now derper \u0026amp;\u0026amp; systemctl status derper\u003c/p\u003e\n\u003cp\u003e[官方页面里配置 ACL 规则]\n\"derpMap\": {\n\"OmitDefaultRegions\": false,\n\"Regions\": {\n\"900\": {\n\"RegionID\":   900,\n\"RegionCode\": \"aliyunderp\",\n\"Nodes\": [\n{\n\"Name\":     \"1\",\n\"RegionID\": 900,\n\"HostName\": \"\u003ca href=\"http://aliyun.111.com\" rel=\"nofollow\"\u003ealiyun.111.com\u003c/a\u003e\",\n\"STUNPort\": 7777,\n\"DERPPort\": 8888,\n},\n],\n},\n},\n},\u003c/p\u003e\n\u003cp\u003e[安装验证服务]\ndnf config-manager --add-repo \u003ca href=\"https://pkgs.tailscale.com/stable/centos/9/tailscale.repo\" rel=\"nofollow\"\u003ehttps://pkgs.tailscale.com/stable/centos/9/tailscale.repo\u003c/a\u003e\ndnf install tailscale -y\nsystemctl enable --now tailscaled\ntailscale up\u003c/p\u003e\n\u003cp\u003e测试时就有问题了，tailscale status 也显示无法连接到自建 derper 上，或者显示连接上了，使用命令 tailscale ping 不通 openwrt 和其他安装 tailscale 的设备，好奇怪，请有经验的各位大大指点指点\u003c/p\u003e\n",
+      "Author": "gearfox",
+      "PubDate": "2023-05-25T02:53:44Z"
+    },
+    {
+      "Title": "618 买 iphone14？还是等 iphone15? - 问与答",
+      "Link": "https://www.v2ex.com/t/942795",
+      "Description": "\u003cp\u003e618 的 iphone14 价格会便宜些，但是 iphone15 据说支持 type-c 接口充电？选哪个好？\u003c/p\u003e\n",
+      "Author": "JeffyChen",
+      "PubDate": "2023-05-25T02:49:28Z"
+    },
+    {
       "Title": "美区 Apple One 超大杯自用账号开车， 5 个位置年付 - iCloud",
       "Link": "https://www.v2ex.com/t/942793",
       "Description": "美区 Apple One Premium ，包含每人 333G iCloud 空间，Apple Music, Apple TV+, Fitness+, Arcade 等服务，\u003cbr /\u003e\u003cbr /\u003e车费目前按汇率计算，年付 493 元。\u003cbr /\u003e\u003cbr /\u003e需要美区 apple ID 哦！\u003cbr /\u003e\u003cbr /\u003e有兴趣的请留言",
