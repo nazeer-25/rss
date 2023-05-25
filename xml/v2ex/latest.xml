@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>老哥们我有一个在 Linux 执行 Java Process 的问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/943015</link>
+      <description>&lt;p&gt;我想将类似&#xA;ffmpeg -i “input.mkv” -i “input.chs&amp;amp;jpn.ass” -c copy &#34;output/output1.mkv&#34;&#xA;这样的命令由 Java 代码来执行&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;java&lt;/code&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;        List&amp;lt;String&amp;gt; command = new ArrayList&amp;lt;&amp;gt;();  &#xA;        command.add(ffmpegPath);  &#xA;        command.add(&#34;-i&#34;);  &#xA;        //输入视频文件 File&#xA;        command.add(file.getAbsolutePath());  &#xA;        command.add(&#34;-i&#34;);  &#xA;        //输入字幕文件 File&#xA;        command.add(sub.getAbsolutePath());  &#xA;        command.add(&#34;-c&#34;);  &#xA;        command.add(&#34;copy&#34;);  &#xA;        //拼接输出路径&#xA;        command.add((new File(out,fileName)).getAbsolutePath());&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;由于考虑多平台运行，所以路径获取和拼接都是通过 File ，没有自己加 Separate 。&lt;/p&gt;&#xA;&lt;h2&gt;在 windows 编译执行没问题，成功进行了分类&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;win 演示 1&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/G1rw5sU.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;win 演示 2&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/RnlsdIh.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h2&gt;但是在 linux,总是执行失败&lt;/h2&gt;&#xA;&lt;p&gt;Log 以后，提示是这样的：&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;INFO: &#34;/home/codeTest/ffmpegSubTest/[Kamigami&amp;amp;VCB-Studio] Boku dake ga Inai Machi [01][Ma10p_1080p][x265_flac_ac3].mkv&#34;: No such file or directory &lt;/code&gt;&#xA;&lt;img alt=&#34;linux&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/F4F9G2F.png&#34;/&gt;&#xA;其实已经分好类了，也就是说 File 对象指向是符合我预期的，只是创建文件夹利用的是 Java File 类的 mkdirs （）。&lt;/p&gt;&#xA;&lt;p&gt;那就是 ffmpeg 命令这里参数出了问题，我试过给参数再套一层双引号（&#34;&#34;)，同样是 win 编译执行 ok ，linux “No such file or directory”&lt;/p&gt;&#xA;&lt;h2&gt;请问如何处理参数问题，或者有更好的解决方案希望能赐教&lt;/h2&gt;&#xA;&lt;p&gt;java Process 在不同平台执行看了会源码没看太明白。&lt;/p&gt;&#xA;</description>
+      <author>DIO</author>
+      <pubDate>25 May 2023 14:34:36 +0000</pubDate>
+    </item>
+    <item>
       <title>618 快到了， v 友们帮我推荐性价比的椅子 - 问与答</title>
       <link>https://www.v2ex.com/t/943014</link>
       <description>长期伏案工作，右腰腰肌劳损严重，最近想入一把人体工学椅 价格控制在 3000 左右 谢谢了</description>
