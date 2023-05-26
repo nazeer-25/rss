@@ -32,9 +32,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "用ChatGPT给我的公众号写了段推广语",
-      "Link": "https://studygolang.com/topics/16368#reply1",
-      "Description": "\u003cp\u003e如果你正在学习 Go 语言，或者想要了解这门语言的基础知识和应用实践，那么我的公众号 “Go语言入门之路” 是一个不错的选择。\u003c/p\u003e\n\n\u003cp\u003e在这里，你可以找到很多关于 Go 语言的教程、案例和技巧，涉及从基础语法到高级应用的方方面面，包括但不限于：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e数据类型和变量\n函数和方法\n控制流和循环\n接口和结构体\n并发编程和网络编程\nWeb 开发和数据库操作\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e我会尽可能地通过简单易懂的方式来讲解这些内容，帮助读者更好地掌握 Go 语言的核心概念和编程技术。同时也欢迎大家在公众号后台留言，提出问题和反馈意见，我会尽快回复并改进。\u003c/p\u003e\n\n\u003cp\u003e无论你是初学者还是有一定经验的开发者，都可以在 “Go语言入门之路” 中获得一些有用的知识和经验。期待你的加入！\n\u003cimg src=\"https://static.golangjob.cn/230523/e24d652a552b606bc859e33e0fcb5c1c.jpg\" alt=\"qrcode_for_gh_3982836909ff_258.jpg\" /\u003e\u003c/p\u003e\n",
+      "Title": "gin框架利用中间件记录用户操作行为",
+      "Link": "https://studygolang.com/topics/16371#reply0",
+      "Description": "\u003ch3\u003e背景说明\u003c/h3\u003e\n\n\u003cp\u003e在项目的具体使用过程中我们很有必要去记录那个用户操作了什么这样的需求。当然实现的方式有很多，今天我们介绍一下具体怎么在gin框架中利用协成的特性异步去记录用户的的操作行为。在这里先介绍一下我个人给开源的\u003ca href=\"https://kevn.gitee.io/gsadmindoc/\"\u003egsadmin\u003c/a\u003e项目,GS Admin=gin+scui 它是golang 开发的一个企业级后台。遵循MIT开源协议。前端框架是scui,SCUI基于 Vue3、elementPlus持续性的提供独家组件和丰富的业务模板帮助你快速搭建企业级中后台前端任务。后端框架是gin,Gin是一个golang的微框架，封装比较优雅，具有快速灵活，容错方便等特点。内置了权限管理、用户管理等基础模块儿，还支持了事件服务，方便业务解耦。后续会根据用户的反馈更新内容！\u003c/p\u003e\n\n\u003ch3\u003e下面来介绍一下实现思路\u003c/h3\u003e\n\n\u003cp\u003e1、主要功能是在中间件内实现\n2、利用中间件来获取用户访问的路径\n3、用访问路径来匹配数据库内的路由信息\n4、收集需要的信息，利用协成的机制异步记录到数据库中或其他需要记录的地方\u003c/p\u003e\n\n\u003ch3\u003e\u003cstrong\u003e下面看代码\u003c/strong\u003e\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage middleware\n\nimport (\n\t\u0026quot;encoding/json\u0026quot;\n\t\u0026quot;github.com/gin-gonic/gin\u0026quot;\n\t\u0026quot;github.com/sonhineboy/gsadmin/service/app/models\u0026quot;\n\t\u0026quot;github.com/sonhineboy/gsadmin/service/app/repositorys\u0026quot;\n\t\u0026quot;github.com/sonhineboy/gsadmin/service/global\u0026quot;\n)\n\nfunc OperationLog() gin.HandlerFunc {\n\n\treturn func(c *gin.Context) {\n\n\t\tcCp := c.Copy()\n\t\tgo func() {\n\t\t\tvar (\n\t\t\t\tdoData []byte\n\t\t\t\tlog    models.OperationLog\n\t\t\t)\n\t\t\tmethod := c.Request.Method\n\t\t\t//参数\n\t\t\tif method == \u0026quot;GET\u0026quot; {\n\t\t\t\tdoData, _ = json.Marshal(cCp.Request.URL.Query())\n\t\t\t}\n\t\t\tif method == \u0026quot;POST\u0026quot; {\n\t\t\t\tdoData, _ = cCp.GetRawData()\n\t\t\t}\n\n\t\t\tclaims, ok := repositorys.GetCustomClaims(c)\n\t\t\tif ok == true {\n\t\t\t\tlog.UserId = claims.Id\n\t\t\t\tlog.UserName = claims.Name\n\t\t\t} else {\n\t\t\t\tlog.UserId = 0\n\t\t\t}\n\n\t\t\tvar where = make(map[string]interface{})\n\t\t\tvar d models.MenuApiList\n\t\t\tdb := global.Db.Model(\u0026amp;models.MenuApiList{})\n\t\t\twhere[\u0026quot;url\u0026quot;] = cCp.Request.URL.Path\n\t\t\tdb.Preload(\u0026quot;Menu\u0026quot;).Where(where).First(\u0026amp;d)\n\n\t\t\tlog.Method = cCp.Request.Method\n\t\t\tlog.DoData = string(doData)\n\t\t\tlog.Ip = cCp.ClientIP()\n\t\t\ttitle, ok := d.Menu.Meta[\u0026quot;title\u0026quot;]\n\n\t\t\tif ok {\n\t\t\t\tlog.PathName = title.(string)\n\t\t\t}\n\n\t\t\tlog.UrlPath = cCp.Request.URL.Path\n\n\t\t\tglobal.Db.Create(\u0026amp;log)\n\n\t\t}()\n\n\t\tc.Next()\n\t}\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e\u003ca href=\"https://gsadmin.suiyidian.cn/\"\u003e演示地址\u003c/a\u003e\u003c/h3\u003e\n\n\u003cp\u003e喜欢我的分享或者项目的多点点star,我们多多交流\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -46,9 +46,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "gin框架利用中间件记录用户操作行为",
-      "Link": "https://studygolang.com/topics/16371#reply0",
-      "Description": "\u003ch3\u003e背景说明\u003c/h3\u003e\n\n\u003cp\u003e在项目的具体使用过程中我们很有必要去记录那个用户操作了什么这样的需求。当然实现的方式有很多，今天我们介绍一下具体怎么在gin框架中利用协成的特性异步去记录用户的的操作行为。在这里先介绍一下我个人给开源的\u003ca href=\"https://kevn.gitee.io/gsadmindoc/\"\u003egsadmin\u003c/a\u003e项目,GS Admin=gin+scui 它是golang 开发的一个企业级后台。遵循MIT开源协议。前端框架是scui,SCUI基于 Vue3、elementPlus持续性的提供独家组件和丰富的业务模板帮助你快速搭建企业级中后台前端任务。后端框架是gin,Gin是一个golang的微框架，封装比较优雅，具有快速灵活，容错方便等特点。内置了权限管理、用户管理等基础模块儿，还支持了事件服务，方便业务解耦。后续会根据用户的反馈更新内容！\u003c/p\u003e\n\n\u003ch3\u003e下面来介绍一下实现思路\u003c/h3\u003e\n\n\u003cp\u003e1、主要功能是在中间件内实现\n2、利用中间件来获取用户访问的路径\n3、用访问路径来匹配数据库内的路由信息\n4、收集需要的信息，利用协成的机制异步记录到数据库中或其他需要记录的地方\u003c/p\u003e\n\n\u003ch3\u003e\u003cstrong\u003e下面看代码\u003c/strong\u003e\u003c/h3\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage middleware\n\nimport (\n\t\u0026quot;encoding/json\u0026quot;\n\t\u0026quot;github.com/gin-gonic/gin\u0026quot;\n\t\u0026quot;github.com/sonhineboy/gsadmin/service/app/models\u0026quot;\n\t\u0026quot;github.com/sonhineboy/gsadmin/service/app/repositorys\u0026quot;\n\t\u0026quot;github.com/sonhineboy/gsadmin/service/global\u0026quot;\n)\n\nfunc OperationLog() gin.HandlerFunc {\n\n\treturn func(c *gin.Context) {\n\n\t\tcCp := c.Copy()\n\t\tgo func() {\n\t\t\tvar (\n\t\t\t\tdoData []byte\n\t\t\t\tlog    models.OperationLog\n\t\t\t)\n\t\t\tmethod := c.Request.Method\n\t\t\t//参数\n\t\t\tif method == \u0026quot;GET\u0026quot; {\n\t\t\t\tdoData, _ = json.Marshal(cCp.Request.URL.Query())\n\t\t\t}\n\t\t\tif method == \u0026quot;POST\u0026quot; {\n\t\t\t\tdoData, _ = cCp.GetRawData()\n\t\t\t}\n\n\t\t\tclaims, ok := repositorys.GetCustomClaims(c)\n\t\t\tif ok == true {\n\t\t\t\tlog.UserId = claims.Id\n\t\t\t\tlog.UserName = claims.Name\n\t\t\t} else {\n\t\t\t\tlog.UserId = 0\n\t\t\t}\n\n\t\t\tvar where = make(map[string]interface{})\n\t\t\tvar d models.MenuApiList\n\t\t\tdb := global.Db.Model(\u0026amp;models.MenuApiList{})\n\t\t\twhere[\u0026quot;url\u0026quot;] = cCp.Request.URL.Path\n\t\t\tdb.Preload(\u0026quot;Menu\u0026quot;).Where(where).First(\u0026amp;d)\n\n\t\t\tlog.Method = cCp.Request.Method\n\t\t\tlog.DoData = string(doData)\n\t\t\tlog.Ip = cCp.ClientIP()\n\t\t\ttitle, ok := d.Menu.Meta[\u0026quot;title\u0026quot;]\n\n\t\t\tif ok {\n\t\t\t\tlog.PathName = title.(string)\n\t\t\t}\n\n\t\t\tlog.UrlPath = cCp.Request.URL.Path\n\n\t\t\tglobal.Db.Create(\u0026amp;log)\n\n\t\t}()\n\n\t\tc.Next()\n\t}\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3\u003e\u003ca href=\"https://gsadmin.suiyidian.cn/\"\u003e演示地址\u003c/a\u003e\u003c/h3\u003e\n\n\u003cp\u003e喜欢我的分享或者项目的多点点star,我们多多交流\u003c/p\u003e\n",
+      "Title": "海量数据高并发场景，构建Go+ES8企业级搜索微服务",
+      "Link": "https://studygolang.com/articles/36150#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -74,9 +74,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "海量数据高并发场景，构建Go+ES8企业级搜索微服务",
-      "Link": "https://studygolang.com/articles/36150#reply0",
-      "Description": "",
+      "Title": "用ChatGPT给我的公众号写了段推广语",
+      "Link": "https://studygolang.com/topics/16368#reply1",
+      "Description": "\u003cp\u003e如果你正在学习 Go 语言，或者想要了解这门语言的基础知识和应用实践，那么我的公众号 “Go语言入门之路” 是一个不错的选择。\u003c/p\u003e\n\n\u003cp\u003e在这里，你可以找到很多关于 Go 语言的教程、案例和技巧，涉及从基础语法到高级应用的方方面面，包括但不限于：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e数据类型和变量\n函数和方法\n控制流和循环\n接口和结构体\n并发编程和网络编程\nWeb 开发和数据库操作\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e我会尽可能地通过简单易懂的方式来讲解这些内容，帮助读者更好地掌握 Go 语言的核心概念和编程技术。同时也欢迎大家在公众号后台留言，提出问题和反馈意见，我会尽快回复并改进。\u003c/p\u003e\n\n\u003cp\u003e无论你是初学者还是有一定经验的开发者，都可以在 “Go语言入门之路” 中获得一些有用的知识和经验。期待你的加入！\n\u003cimg src=\"https://static.golangjob.cn/230523/e24d652a552b606bc859e33e0fcb5c1c.jpg\" alt=\"qrcode_for_gh_3982836909ff_258.jpg\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
