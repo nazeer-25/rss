@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>NodeJS 中 HTTP2 的一个诡异问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/943200</link>
+      <description>&lt;p&gt;客户端和服务端都是 HTTP2 。&lt;/p&gt;&#xA;&lt;p&gt;用 curl 从服务端下载数据可跑满服务器带宽（约 4MB/s ），用 NodeJS 的客户端下载只能跑到 1MB/s ，说明服务端没问题，可能是客户端的问题。&lt;/p&gt;&#xA;&lt;p&gt;但奇怪的是，把客户端的测试 URL 换成网上某个 CDN 大文件时，也能达到很高的下载速度，这样看客户端也没问题。&lt;/p&gt;&#xA;&lt;p&gt;这里附上精简后的代码。服务端：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;import fs from &#39;fs&#39;&#xA;import http2 from &#39;http2&#39;&#xA;&#xA;const h2Server = http2.createSecureServer({&#xA;  key: fs.readFileSync(&#39;ecc.key&#39;),&#xA;  cert: fs.readFileSync(&#39;ecc.cer&#39;)&#xA;})&#xA;&#xA;h2Server.on(&#39;stream&#39;, (stream) =&amp;gt; {&#xA;  stream.on(&#39;error&#39;, () =&amp;gt; {})&#xA;  stream.respond()&#xA;&#xA;  const buf = Buffer.alloc(65536)&#xA;  const next = () =&amp;gt; {&#xA;    stream.write(buf, err =&amp;gt; {&#xA;      if (err) {&#xA;        stream.end()&#xA;      } else {&#xA;        next()&#xA;      }&#xA;    })&#xA;  }&#xA;  next()&#xA;}).listen(443)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;客户端：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;import http2 from &#39;http2&#39;&#xA;&#xA;const url = new URL(&#39;https://........&#39;)&#xA;&#xA;const h2session = http2.connect(url, () =&amp;gt; {&#xA;  const stream = h2session.request({&#xA;    &#39;:path&#39;: url.pathname,&#xA;    &#39;:authority&#39;: url.host,&#xA;  })&#xA;  stream.on(&#39;response&#39;, () =&amp;gt; {&#xA;    let bps = 0&#xA;    stream.on(&#39;data&#39;, chunk =&amp;gt; {&#xA;      bps += chunk.length&#xA;    })&#xA;    setInterval(() =&amp;gt; {&#xA;      console.log(&#39;speed:&#39;, bps)&#xA;      bps = 0&#xA;    }, 1000)&#xA;  })&#xA;})&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在本地跑看不出问题，毕竟本地通信带宽极大，放到服务器上就有问题了。不知是踩到哪个坑了。。。&lt;/p&gt;&#xA;</description>
+      <author>iqoo</author>
+      <pubDate>26 May 2023 07:32:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>UpWork 现在行情怎么样？ - 职场话题</title>
+      <link>https://www.v2ex.com/t/943199</link>
+      <description>&lt;p&gt;想在上面找找远程的工作，不知道现在好不好接单。&lt;/p&gt;&#xA;</description>
+      <author>markliu2013</author>
+      <pubDate>26 May 2023 07:31:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问 HHKB 的 Classic 和 Type-S 手感上有多大区别？ - 机械键盘</title>
+      <link>https://www.v2ex.com/t/943198</link>
+      <description>&lt;p&gt;我在用 HHKB Classic ，就是有线的那一款。经常看到论坛里的人讨论 HHKB ，但没怎么看到有人对比这俩。&lt;/p&gt;&#xA;&lt;p&gt;从手感上来说，Type-S 和 Classic 有多大区别呢？还是说只是噪音大小有区别？另外 Type-S 是不是也有一个没有蓝牙只有有线的版本？&lt;/p&gt;&#xA;</description>
+      <author>pocarisweat</author>
+      <pubDate>26 May 2023 07:29:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>618 快到了，求个笔记本推荐 - 问与答</title>
+      <link>https://www.v2ex.com/t/943197</link>
+      <description>&lt;p&gt;内存：需要 32G 或者以上 ，跑编译开 chrome 浏览器，都太吃内存了&lt;/p&gt;&#xA;&lt;p&gt;CPU：intel i7 或者 i9 . amd 的 U 还没用过，不知道咋样&lt;/p&gt;&#xA;&lt;p&gt;显卡：平时不打游戏，偶尔看看直播视频&lt;/p&gt;&#xA;&lt;p&gt;之前买的是 ThinkPad T 系列，商务本还挺结实耐用的&lt;/p&gt;&#xA;</description>
+      <author>echooo0</author>
+      <pubDate>26 May 2023 07:27:11 +0000</pubDate>
+    </item>
+    <item>
       <title>Jellyfin 登录地址是 openwrt 的 ip - OpenWrt</title>
       <link>https://www.v2ex.com/t/943196</link>
       <description>&lt;p&gt;楼主在 unraid 上使用 docker 搭建特供版 jellyfin ，本来是使用轻量反代的，奈何带宽只有 8Mb ，遂直接采用 openwrt ddns+端口转发使用，结果发现 jellyfin 的活动登录地址全都变成 openwrt 的 ip 了。请教这种情况需要在 jellyfin 还是 openwrt 做设置，才能正确显示活动 ip ？&lt;/p&gt;&#xA;</description>
