@@ -28,6 +28,11 @@
       <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {&#xA;    runtime.GOMAXPROCS(1)&#xA;&#xA;    go func() {&#xA;        for i:=0;i&amp;lt;10 ;i++  {&#xA;            fmt.Println(i)&#xA;        }&#xA;    }()&#xA;&#xA;    for {}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;预想的是for独占M, goroutine不会执行，但是结果却是goroutine正常输出，这是为何？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;0&#xA;1&#xA;2&#xA;3&#xA;4&#xA;5&#xA;6&#xA;7&#xA;8&#xA;9&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;我的go版本是:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;☁  etc  go version&#xA;go version go1.17 darwin/amd64&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;我记得这个问题在《go语言高级编程》中提过。&#xA;求大佬们帮忙释怀。。。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>go语言中文网的首页被劫持了吗？有时会被跳转到一个广告页面</title>
+      <link>https://studygolang.com/topics/16374#reply2</link>
+      <description>&lt;p&gt;go语言中文网的首页被劫持了吗？有时会被跳转到一个广告页面。&#xA;其他网站访问正常不太可能是自己的问题&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>新手 求助(关于net/http包request对象请求体内容解析字节丢失问题)</title>
       <link>https://studygolang.com/topics/16375#reply6</link>
       <description>&lt;p&gt;最近开始学习使用go,刚好公司有个需求，使用jir调用webhook后做一些操作，我使用go的http包新建了一个web服务，在获取请求体是遇到了一下问题：&#xA;使用&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;data, err := ioutil.ReadAll(r.Body)&#xA;if err != nil {&#xA;&#x9;fmt.Println(&amp;quot;Error reading request body:&amp;quot;, err)&#xA;&#x9;return&#xA;}&#xA;&#xA;body := string(data)&#xA;fmt.Println(&amp;quot;Request body:&amp;quot;, body)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;读取整个请求体（请求体为json格式），发现会少一两个字符，导致结果无法用json解析。&#xA;使用&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;bufReader := bufio.NewReader(r.Body)&#xA;defer r.Body.Close()&#xA;&#xA;data := make([]byte, r.ContentLength)&#xA;_, err := bufReader.Read(data)&#xA;if err != nil {&#xA;&#x9;fmt.Println(&amp;quot;Error reading request body:&amp;quot;, err)&#xA;&#x9;return&#xA;}&#xA;&#xA;body := string(data)&#xA;fmt.Println(&amp;quot;Request body:&amp;quot;, body)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;请求体打印出出来直接少了很多内容。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;不解应该从何方向入手。&#xA;PS:我也尝试使用python flask搭建一样的服务，收到的内容是正常的&lt;/p&gt;&#xA;</description>
@@ -36,11 +41,6 @@
       <title>使用sqlx怎么批量更新</title>
       <link>https://studygolang.com/topics/16378#reply0</link>
       <description>&lt;p&gt;&lt;code&gt;UPDATE &amp;quot;dd&amp;quot;.&amp;quot;number&amp;quot; SET number_val=? WHERE id=?&lt;/code&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;已经定义了一个var number_info []numberType的切片，数据也已经放进去了&lt;/p&gt;&#xA;&#xA;&lt;p&gt;number_info[0].number_val = 123&lt;/p&gt;&#xA;&#xA;&lt;p&gt;number_info[0].id = 8&lt;/p&gt;&#xA;&#xA;&lt;p&gt;number_info[1].number_val = 99&lt;/p&gt;&#xA;&#xA;&lt;p&gt;number_info[1].id = 10&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我想批量更新要怎么处理呢，库用的是sqlx，查了很久没找到&#xA;应该不需要使用for循环来一条一条组合的执行吧&lt;/p&gt;&#xA;&#xA;&lt;p&gt;数据库使用的是postgresql&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>go语言中文网的首页被劫持了吗？有时会被跳转到一个广告页面</title>
-      <link>https://studygolang.com/topics/16374#reply2</link>
-      <description>&lt;p&gt;go语言中文网的首页被劫持了吗？有时会被跳转到一个广告页面。&#xA;其他网站访问正常不太可能是自己的问题&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>[深圳]内推golang开发工程师</title>
