@@ -23,14 +23,104 @@
       <description>&lt;p&gt;Go标准库提供了二叉堆的接口实现，源码在heap.go中。以下是其中几个核心函数。up和down分别表示自顶向下和自底向上调整二叉堆的过程。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;（1）对于down方法来说，如果发生了交换，即将节点i与其左右子树中最小的j发生了交换，则满足&lt;code&gt;i &amp;gt; i0&lt;/code&gt;返true，若没有发生交换则返回false&lt;/p&gt;&#xA;&#xA;&lt;p&gt;（2）对于up方法来说，则是不断重复地将当前节点i与其父结点j比较，若节点i的值小于节点j的值则交换（默认为小顶堆），直到遇到了根节点为止&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func up(h Interface, j int) {&#xA;&#x9;for {&#xA;&#x9;&#x9;i := (j - 1) / 2 // parent&#xA;&#x9;&#x9;if i == j || !h.Less(j, i) {&#xA;&#x9;&#x9;&#x9;break&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;h.Swap(i, j)&#xA;&#x9;&#x9;j = i&#xA;&#x9;}&#xA;}&#xA;&#xA;func down(h Interface, i0, n int) bool {&#xA;&#x9;i := i0&#xA;&#x9;for {&#xA;&#x9;&#x9;j1 := 2*i + 1&#xA;&#x9;&#x9;if j1 &amp;gt;= n || j1 &amp;lt; 0 { // j1 &amp;lt; 0 after int overflow&#xA;&#x9;&#x9;&#x9;break&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;j := j1 // left child&#xA;&#x9;&#x9;if j2 := j1 + 1; j2 &amp;lt; n &amp;amp;&amp;amp; h.Less(j2, j1) {&#xA;&#x9;&#x9;&#x9;j = j2 // = 2*i + 2  // right child&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if !h.Less(j, i) {&#xA;&#x9;&#x9;&#x9;break&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;h.Swap(i, j)&#xA;&#x9;&#x9;i = j&#xA;&#x9;}&#xA;&#x9;return i &amp;gt; i0&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;对于Remove方法，若待删除的节点i刚好是最末尾的元素则啥也不做直接调用用户提供的Pop方法将末尾元素移除即可。否则需要将节点i与末尾节点n交换，随后从i节点处自顶向下地调整堆结构使其符合二叉堆的性质。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;那么问题来了，&lt;strong&gt;为什么在down方法返false，即没有发生交换的情况下，需要从节点i开始调用up进行自底向上地调整二叉堆&lt;/strong&gt;？&lt;strong&gt;被交换到i处的末尾元素n与原先的i节点是子节点的关系，肯定不会小于节点i的值，那必定也是不比节点i的父节点的值小，即小顶堆的性质是满足的，那为何还要调用up方法呢&lt;/strong&gt;？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// Remove removes and returns the element at index i from the heap.&#xA;// The complexity is O(log n) where n = h.Len().&#xA;func Remove(h Interface, i int) any {&#xA;&#x9;n := h.Len() - 1&#xA;&#x9;if n != i {&#xA;&#x9;&#x9;h.Swap(i, n)&#xA;&#x9;&#x9;if !down(h, i, n) {&#xA;&#x9;&#x9;&#x9;up(h, i)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return h.Pop()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;Fix也是一样的情况，为何需要调用up？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;&#xA;// Fix re-establishes the heap ordering after the element at index i has changed its value.&#xA;// Changing the value of the element at index i and then calling Fix is equivalent to,&#xA;// but less expensive than, calling Remove(h, i) followed by a Push of the new value.&#xA;// The complexity is O(log n) where n = h.Len().&#xA;func Fix(h Interface, i int) {&#xA;&#x9;if !down(h, i, h.Len()) {&#xA;&#x9;&#x9;up(h, i)&#xA;&#x9;}&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
+      <title>新百胜娱乐公司游戏网址登录www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16396#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜网投公司会员怎么注册www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16395#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜娱乐公司注册游戏登陆网址  www.xbs3788.com资金安全《新浪财经》</title>
+      <link>https://studygolang.com/topics/16394#reply1</link>
+      <description>&lt;p&gt;新百胜公司娱乐注册网址www.xbs3788.com账号经理电话【电18488357813】 ， 备用vQQLGC999999——联合出品免责声明本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言新百胜网址网站现场娱 乐靠谱平台公司秉承公平，公正，公开为宗 真人实体三合一娱 乐现场,可视频认证,现场火爆,!来源：央视新闻&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜网投公司游戏注册会员官网网址www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16393#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜公司游戏官网账号游戏注册www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16392#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜娱乐官方正规的靠谱网投网站  www.xbs3788.com资金安全《新浪财经》</title>
+      <link>https://studygolang.com/topics/16390#reply1</link>
+      <description>&lt;p&gt;新百胜公司娱乐注册网址www.xbs3788.com账号经理电话【电18488357813】 ，    备用vQQLGC999999——联合出品免责声明本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言新百胜网址网站现场娱 乐靠谱平台公司秉承公平，公正，公开为宗 真人实体三合一娱 乐现场,可视频认证,现场火爆,!来源：央视新闻&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜公司网投游戏直属网址www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16389#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜公司网投会员账号注册网址www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16388#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>网上网投手机可以下载注册吗网址www.xbs3788.com《新浪财经》</title>
+      <link>https://studygolang.com/topics/16387#reply1</link>
+      <description>&lt;p&gt;新百胜公司娱乐注册网址www.xbs3788.com账号经理电话【电18488357813】 ，    备用vQQLGC999999——联合出品免责声明本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言新百胜网址网站现场娱 乐靠谱平台公司秉承公平，公正，公开为宗 真人实体三合一娱 乐现场,可视频认证,现场火爆,!来源：央视新闻&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜正规网投实体娱乐公司www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16385#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜网投游戏资金安全可靠平台www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16384#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜公司正规网投游戏靠谱平台www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16383#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>新百胜公司游戏账号申请网址www.xbs0009.com</title>
-      <link>https://studygolang.com/topics/16380#reply0</link>
+      <link>https://studygolang.com/topics/16380#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜公司游戏注册会员账号官网网站www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16391#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜待遇最高联系电话www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16386#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>缅甸老街新百胜公司网投游戏网址www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16381#reply1</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>网上网投真人现场同步平台有哪些www.xbs3788.com《新浪财经》？</title>
+      <link>https://studygolang.com/topics/16382#reply0</link>
+      <description>&lt;p&gt;新百胜公司娱乐注册网址www.xbs3788.com账号经理电话【电18488357813】 ，    备用vQQLGC999999——联合出品免责声明本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言新百胜网址网站现场娱 乐靠谱平台公司秉承公平，公正，公开为宗 真人实体三合一娱 乐现场,可视频认证,现场火爆,!来源：央视新闻&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜公司网投游戏注册会员账号网址www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16397#reply0</link>
       <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>go语言中文网的首页被劫持了吗？有时会被跳转到一个广告页面</title>
       <link>https://studygolang.com/topics/16374#reply2</link>
       <description>&lt;p&gt;go语言中文网的首页被劫持了吗？有时会被跳转到一个广告页面。&#xA;其他网站访问正常不太可能是自己的问题&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新百胜公司游戏账号申请网址www.xbs0009.com</title>
+      <link>https://studygolang.com/topics/16380#reply0</link>
+      <description>&lt;p&gt;新百胜公司注册www.xbs0009.com 微信【wy59950】微电18488337151联合出品免责声&#xA;明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐&#xA;号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储&#xA;服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、&#xA;知乎日报、热点资讯、搜狐新闻、新浪新闻总策划：莫言&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>[深圳]内推golang开发工程师</title>
