@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有多少兄弟和我一样, ip 的所有端口被封(除了 80 和 443) - 问与答",
+      "Link": "https://www.v2ex.com/t/943687",
+      "Description": "我有 2 个私用的 vps, 分别在东京和新加坡. 去年开始就发现 ssh 上不去(除非先翻).\u003cbr /\u003e\u003cbr /\u003e前端时间反复测试发现, 只有 80 和 443 可以和国内通信.\u003cbr /\u003e\u003cbr /\u003e请问这是啥操作?",
+      "Author": "cloud2000",
+      "PubDate": "2023-05-28T14:42:50Z"
+    },
+    {
+      "Title": "为什么 ssh 的延迟能有 ping 的 3 倍？ - 程序员",
+      "Link": "https://www.v2ex.com/t/943686",
+      "Description": "\u003cp\u003e甲骨云圣何塞的服务器。ssh 打字有延迟，快要到 0.7s 的程度。基本上都是在盲打了。\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003essh 192.*.*.*@username\u003c/code\u003e 用的 rsa 验证登录的。\u003c/p\u003e\n\u003cp\u003eping 出来的延迟在 200ms 左右，丢包 2%。\u003c/p\u003e\n\u003cp\u003e在 powershell 中登录，然后录屏，利用一个屏幕显示按键的软件结合进行计算延迟，延迟大概在 0.6s 的样子。\u003c/p\u003e\n\u003cp\u003e用 xshell 连接之后，延迟相同，根据右下的上传下载标志符号进行录像，延迟大致在 0.5s 的样子。\u003c/p\u003e\n\u003cp\u003e试了用代理登录，延迟基本不变，甚至可能变高了。查看 ssh 日志，登录 ip 已经发生变化。\u003c/p\u003e\n\u003cp\u003e然后用了 python 的 paramiko 模块进行 ssh 登录，计算延迟，每条指令大概在 0.5-0.7s 之间的样子。都是几乎不消耗资源的指令。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eimport paramiko\nimport time\nkey = paramiko.RSAKey.from_private_key_file(r'C:\\Users\\username\\.ssh\\id_rsa')\nssh = paramiko.SSHClient()\nssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())\nssh.connect('hostname', username='username', pkey=key)\n\nt1=time.time()\n# ssh.exec_command('cd ..')\nstdin, stdout, stderr = ssh.exec_command('ls -l')\nt2=time.time()\nprint(t2-t1)\nprint(stdout.readlines())\n\nssh.close()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eusedns no\n#GSSAPIAuthentication no\u003c/p\u003e\n",
+      "Author": "nyxsonsleep",
+      "PubDate": "2023-05-28T14:38:08Z"
+    },
+    {
       "Title": "屋漏偏逢连夜雨，继 gpt 账号被封后，刚登陆 gv 又提示被禁止使用 - OpenAI",
       "Link": "https://www.v2ex.com/t/943685",
       "Description": "\u003cp\u003e为解决 gpt 付费问题，使用虚拟卡绑定一个月后无法使用，找其它方法代替之，之后使用 googlepay 绑定美 pp ，成功绑定。（中间各种调试）\n但之后 PP 遭遇风控，需绑定手机号，花了一整晚注册 GV 未成功，遂 50 大洋直接购买 GV 号一个。购买后刚开始死活接收不到验证码，邮件联系 PP 客服两次，想着不行只能找电话了，但第二天突然能正常收到验证码，之后手机网页各种切换，终于登上 PP ，GV 成功接码绑定 PP 。以为万事大吉了。\n谁知昨晚就收到被暂停使用的邮件，直接懵逼。然后今天登陆 GV 又提示账号已被禁用。\u003c/p\u003e\n\u003cp\u003e真是一夜回到解放前，耗费了大量的时间解决 gpt 的问题，结果是毛猴子捞月亮，白忙一场。真的不想再折腾了，真的累了。\u003c/p\u003e\n",
