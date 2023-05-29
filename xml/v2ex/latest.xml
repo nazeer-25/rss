@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>哪个牌子的笔记本电脑可以和苹果抗衡啊 - 问与答</title>
+      <link>https://www.v2ex.com/t/944003</link>
+      <description>&lt;p&gt;像换个笔记本，求推荐个好用的牌子，比苹果好用的&lt;/p&gt;&#xA;</description>
+      <author>jack4536251</author>
+      <pubDate>29 May 2023 12:55:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>[TS] 分享一个类型支持非常完善的 object path package，生成的类型推断是标准的 object path - 分享创造</title>
+      <link>https://www.v2ex.com/t/944002</link>
+      <description>&lt;p&gt;之前用过涉及到 object path 的一些 package ，但是发现这些 packages 的类型支持不是特别完善，比如 lodash, react-hook-form, formik, mongodb client 等。&lt;/p&gt;&#xA;&lt;p&gt;这些 packages ，或多或少存在的几个问题是：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;没有类型约束，不能提供代码自动完成；&lt;/li&gt;&#xA;&lt;li&gt;生成的 path 不是标准的，大部分只支持 &#39;a.b.c&#39; 这种，这种 path 有一些缺点，与其他 package 不统一（例如 yup ），不能区分 object/array ，大部分都是判断如果是数字就当成数组处理，但是实际可能是 number key 的 object ；&lt;/li&gt;&#xA;&lt;li&gt;不能通过 path 反推出对应的类型。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;因为我在写 react-happy-form 这个开源项目的时候，对 object path 这块需求比较高，所以就自己单独写了 object-standard-path 这个 package：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;提供了非常完善的类型支持（包括对一些特殊类型 any, Map 等的处理）；&lt;/li&gt;&#xA;&lt;li&gt;生成的是标准的 path ；&lt;/li&gt;&#xA;&lt;li&gt;支持使用 path 对类型进行反推。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;使用起来也非常简单，没有任何依赖，1k 不到的包体积，如果有需要的话，大家可以试试 :)&lt;/p&gt;&#xA;&lt;p&gt;Repo 地址： &lt;a href=&#34;https://github.com/react-earth/object-standard-path&#34; rel=&#34;nofollow&#34;&gt;https://github.com/react-earth/object-standard-path&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;可以的话，可以小点个 star ，每个 star 都是我以后持续更新的动力，感谢！🌟&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;import { Path, PathValue, pathGet, pathSet } from &#39;object-standard-path&#39;;&#xA;&#xA;type Test = {&#xA;  value: string;&#xA;  array: {&#xA;    value: string;&#xA;  }[];&#xA;};&#xA;&#xA;type TestPath = Path&amp;lt;Test&amp;gt;;&#xA;// result: &#34;value&#34; | &#34;array&#34; | `array[${number}]` | `array[${number}].value`&#xA;&#xA;type TestPathValue = PathValue&amp;lt;Test, &#39;array[0]&#39;&amp;gt;;&#xA;// result: { value: string }&#xA;&#xA;const object = {&#xA;  array: [&#xA;    {&#xA;      value: 1,&#xA;    },&#xA;  ],&#xA;};&#xA;&#xA;const result = pathGet(object, &#39;array[0].value&#39;);&#xA;// result: 1&#xA;&#xA;pathSet(object, &#39;array[0].value&#39;, 2);&#xA;// result: { array: [{ value: 2 }] }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>EasilyJS</author>
+      <pubDate>29 May 2023 12:54:25 +0000</pubDate>
+    </item>
+    <item>
       <title>Mac mini 做网关的问题 - 程序员</title>
       <link>https://www.v2ex.com/t/944001</link>
       <description>&lt;p&gt;买了 Mac mini 打算做网关，办公室有 4 台 windows+7 台手机，都是需要 fq 的。&lt;/p&gt;&#xA;&lt;p&gt;买的 Mac mini 是 m2 8G+512, 感觉作为网关有点过剩，目前用的是 air m1 16+256 开发+办公，所以有打算将 mini 作为主力机，这样上下班就不用提电脑了。&lt;/p&gt;&#xA;&lt;p&gt;除了用作网络中枢，还要作为文件中转站，办公室需要一个共享文件夹，目前用的一台 windows 共享文件夹+smb ，现在可以替换成 mac mini 。&lt;/p&gt;&#xA;&lt;p&gt;所以有以下几个问题：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;将路由器设置网关到 mini + clash enhanced mode 还是用 surge + dhcp ？有必要上 surge 吗？需要考虑的因素是性能，4 台 windows+7 部手机的日常办公，都走这台 mini 的分流。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;屏幕共享用什么？比如我在家时候可以用手机或者 Air 控制办公室的 mini ，vnc 还是 screen sharing?&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;除了做网关+文件中转站，还有哪些玩法？毕竟是一台 24 小时开机的 arm 服务器。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
