@@ -19,8 +19,13 @@
     </item>
     <item>
       <title>for真的会独占CPU吗？</title>
-      <link>https://studygolang.com/topics/16381#reply1</link>
+      <link>https://studygolang.com/topics/16381#reply2</link>
       <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {&#xA;    runtime.GOMAXPROCS(1)&#xA;&#xA;    go func() {&#xA;        for i:=0;i&amp;lt;10 ;i++  {&#xA;            fmt.Println(i)&#xA;        }&#xA;    }()&#xA;&#xA;    for {}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;预想的是for独占M, goroutine不会执行，但是结果却是goroutine正常输出，这是为何？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;0&#xA;1&#xA;2&#xA;3&#xA;4&#xA;5&#xA;6&#xA;7&#xA;8&#xA;9&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;我的go版本是:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;☁  etc  go version&#xA;go version go1.17 darwin/amd64&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;我记得这个问题在《go语言高级编程》中提过。&#xA;求大佬们帮忙释怀。。。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新手 求助(关于net/http包request对象请求体内容解析字节丢失问题)</title>
+      <link>https://studygolang.com/topics/16375#reply7</link>
+      <description>&lt;p&gt;最近开始学习使用go,刚好公司有个需求，使用jir调用webhook后做一些操作，我使用go的http包新建了一个web服务，在获取请求体是遇到了一下问题：&#xA;使用&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;data, err := ioutil.ReadAll(r.Body)&#xA;if err != nil {&#xA;&#x9;fmt.Println(&amp;quot;Error reading request body:&amp;quot;, err)&#xA;&#x9;return&#xA;}&#xA;&#xA;body := string(data)&#xA;fmt.Println(&amp;quot;Request body:&amp;quot;, body)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;读取整个请求体（请求体为json格式），发现会少一两个字符，导致结果无法用json解析。&#xA;使用&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;bufReader := bufio.NewReader(r.Body)&#xA;defer r.Body.Close()&#xA;&#xA;data := make([]byte, r.ContentLength)&#xA;_, err := bufReader.Read(data)&#xA;if err != nil {&#xA;&#x9;fmt.Println(&amp;quot;Error reading request body:&amp;quot;, err)&#xA;&#x9;return&#xA;}&#xA;&#xA;body := string(data)&#xA;fmt.Println(&amp;quot;Request body:&amp;quot;, body)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;请求体打印出出来直接少了很多内容。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;不解应该从何方向入手。&#xA;PS:我也尝试使用python flask搭建一样的服务，收到的内容是正常的&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go标准库heap源码中的一个细节问题</title>
@@ -33,18 +38,13 @@
       <description>&lt;p&gt;&lt;code&gt;UPDATE &amp;quot;dd&amp;quot;.&amp;quot;number&amp;quot; SET number_val=? WHERE id=?&lt;/code&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;已经定义了一个var number_info []numberType的切片，数据也已经放进去了&lt;/p&gt;&#xA;&#xA;&lt;p&gt;number_info[0].number_val = 123&lt;/p&gt;&#xA;&#xA;&lt;p&gt;number_info[0].id = 8&lt;/p&gt;&#xA;&#xA;&lt;p&gt;number_info[1].number_val = 99&lt;/p&gt;&#xA;&#xA;&lt;p&gt;number_info[1].id = 10&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我想批量更新要怎么处理呢，库用的是sqlx，查了很久没找到&#xA;应该不需要使用for循环来一条一条组合的执行吧&lt;/p&gt;&#xA;&#xA;&lt;p&gt;数据库使用的是postgresql&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>go语言中文网的首页被劫持了吗？有时会被跳转到一个广告页面</title>
-      <link>https://studygolang.com/topics/16374#reply2</link>
-      <description>&lt;p&gt;go语言中文网的首页被劫持了吗？有时会被跳转到一个广告页面。&#xA;其他网站访问正常不太可能是自己的问题&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>[深圳]内推golang开发工程师</title>
       <link>https://studygolang.com/topics/16377#reply0</link>
     </item>
     <item>
-      <title>新手 求助(关于net/http包request对象请求体内容解析字节丢失问题)</title>
-      <link>https://studygolang.com/topics/16375#reply6</link>
-      <description>&lt;p&gt;最近开始学习使用go,刚好公司有个需求，使用jir调用webhook后做一些操作，我使用go的http包新建了一个web服务，在获取请求体是遇到了一下问题：&#xA;使用&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;data, err := ioutil.ReadAll(r.Body)&#xA;if err != nil {&#xA;&#x9;fmt.Println(&amp;quot;Error reading request body:&amp;quot;, err)&#xA;&#x9;return&#xA;}&#xA;&#xA;body := string(data)&#xA;fmt.Println(&amp;quot;Request body:&amp;quot;, body)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;读取整个请求体（请求体为json格式），发现会少一两个字符，导致结果无法用json解析。&#xA;使用&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;bufReader := bufio.NewReader(r.Body)&#xA;defer r.Body.Close()&#xA;&#xA;data := make([]byte, r.ContentLength)&#xA;_, err := bufReader.Read(data)&#xA;if err != nil {&#xA;&#x9;fmt.Println(&amp;quot;Error reading request body:&amp;quot;, err)&#xA;&#x9;return&#xA;}&#xA;&#xA;body := string(data)&#xA;fmt.Println(&amp;quot;Request body:&amp;quot;, body)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;请求体打印出出来直接少了很多内容。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;不解应该从何方向入手。&#xA;PS:我也尝试使用python flask搭建一样的服务，收到的内容是正常的&lt;/p&gt;&#xA;</description>
+      <title>go语言中文网的首页被劫持了吗？有时会被跳转到一个广告页面</title>
+      <link>https://studygolang.com/topics/16374#reply2</link>
+      <description>&lt;p&gt;go语言中文网的首页被劫持了吗？有时会被跳转到一个广告页面。&#xA;其他网站访问正常不太可能是自己的问题&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>代理IP如何使电子商务企业受益</title>
@@ -109,6 +109,16 @@
       <title>用ChatGPT给我的公众号写了段推广语</title>
       <link>https://studygolang.com/topics/16368#reply1</link>
       <description>&lt;p&gt;如果你正在学习 Go 语言，或者想要了解这门语言的基础知识和应用实践，那么我的公众号 “Go语言入门之路” 是一个不错的选择。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;在这里，你可以找到很多关于 Go 语言的教程、案例和技巧，涉及从基础语法到高级应用的方方面面，包括但不限于：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;数据类型和变量&#xA;函数和方法&#xA;控制流和循环&#xA;接口和结构体&#xA;并发编程和网络编程&#xA;Web 开发和数据库操作&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;我会尽可能地通过简单易懂的方式来讲解这些内容，帮助读者更好地掌握 Go 语言的核心概念和编程技术。同时也欢迎大家在公众号后台留言，提出问题和反馈意见，我会尽快回复并改进。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;无论你是初学者还是有一定经验的开发者，都可以在 “Go语言入门之路” 中获得一些有用的知识和经验。期待你的加入！&#xA;&lt;img src=&#34;https://static.golangjob.cn/230523/e24d652a552b606bc859e33e0fcb5c1c.jpg&#34; alt=&#34;qrcode_for_gh_3982836909ff_258.jpg&#34; /&gt;&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>for真的会独占CPU吗？</title>
+      <link>https://studygolang.com/topics/16381#reply1</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {&#xA;    runtime.GOMAXPROCS(1)&#xA;&#xA;    go func() {&#xA;        for i:=0;i&amp;lt;10 ;i++  {&#xA;            fmt.Println(i)&#xA;        }&#xA;    }()&#xA;&#xA;    for {}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;预想的是for独占M, goroutine不会执行，但是结果却是goroutine正常输出，这是为何？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;0&#xA;1&#xA;2&#xA;3&#xA;4&#xA;5&#xA;6&#xA;7&#xA;8&#xA;9&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;我的go版本是:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;☁  etc  go version&#xA;go version go1.17 darwin/amd64&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;我记得这个问题在《go语言高级编程》中提过。&#xA;求大佬们帮忙释怀。。。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新手 求助(关于net/http包request对象请求体内容解析字节丢失问题)</title>
+      <link>https://studygolang.com/topics/16375#reply6</link>
+      <description>&lt;p&gt;最近开始学习使用go,刚好公司有个需求，使用jir调用webhook后做一些操作，我使用go的http包新建了一个web服务，在获取请求体是遇到了一下问题：&#xA;使用&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;data, err := ioutil.ReadAll(r.Body)&#xA;if err != nil {&#xA;&#x9;fmt.Println(&amp;quot;Error reading request body:&amp;quot;, err)&#xA;&#x9;return&#xA;}&#xA;&#xA;body := string(data)&#xA;fmt.Println(&amp;quot;Request body:&amp;quot;, body)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;读取整个请求体（请求体为json格式），发现会少一两个字符，导致结果无法用json解析。&#xA;使用&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;bufReader := bufio.NewReader(r.Body)&#xA;defer r.Body.Close()&#xA;&#xA;data := make([]byte, r.ContentLength)&#xA;_, err := bufReader.Read(data)&#xA;if err != nil {&#xA;&#x9;fmt.Println(&amp;quot;Error reading request body:&amp;quot;, err)&#xA;&#x9;return&#xA;}&#xA;&#xA;body := string(data)&#xA;fmt.Println(&amp;quot;Request body:&amp;quot;, body)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;请求体打印出出来直接少了很多内容。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;不解应该从何方向入手。&#xA;PS:我也尝试使用python flask搭建一样的服务，收到的内容是正常的&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>for真的会独占CPU吗？</title>
