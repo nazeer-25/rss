@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "分享下 AMD 黑苹果使用 CoreML 加速 AI 画图需要折腾的点。 - 分享发现",
+      "Link": "https://www.v2ex.com/t/944339",
+      "Description": "\u003cp\u003e\u003ca href=\"https://github.com/apple/ml-stable-diffusion\" rel=\"nofollow\"\u003eml-stable-diffusion\u003c/a\u003e提供了 torch 到 coreml 的模型转换能力\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e手动转换模型时需要添加\u003ccode\u003e--attention-implementation ORIGINAL\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e否则默认会用到自然语言引擎。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e手动转换模型需要给 torch 打补丁\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eAMD Hackintosh torch 依赖了 Intel MKL 。可以用 amdfriend 对动态库或二进制打补丁。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e无法正常图片的话需要手动转换模型并设置 CoreML 模型精度为 FP32 。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003ecoreml_model = ct.convert(\n    torchscript_module,\n    convert_to=\"mlprogram\",\n    minimum_deployment_target=ct.target.macOS13,\n    inputs=_get_coreml_inputs(sample_inputs, args),\n    outputs=[ct.TensorType(name=name) for name in output_names],\n    compute_units=ct.ComputeUnit[args.compute_unit],\n    compute_precision=ct.precision.FLOAT32,\n    # skip_model_load=True,\n)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e整个流程搞定后 6800xt 可以 18 秒可以跑完 25 次迭代和 M1Max 32Core 的 GPU 耗时一致。\u003c/p\u003e\n",
+      "Author": "ai277014717",
+      "PubDate": "2023-05-30T14:38:16Z"
+    },
+    {
+      "Title": "所以，后来斯洛登被怎么样了？ - 问与答",
+      "Link": "https://www.v2ex.com/t/944338",
+      "Description": "晚上整理书库发现有这个人在我的书库里，就觉得好奇。本来可以狗哥一下，但是想来这里问问。这人到底算是个什么性质的，叛国吗？",
+      "Author": "maxwell29",
+      "PubDate": "2023-05-30T14:36:50Z"
+    },
+    {
+      "Title": "一个 Nginx 反向代理问题 - NGINX",
+      "Link": "https://www.v2ex.com/t/944337",
+      "Description": "\u003cp\u003e家里的内网有多个应用，现在 nginx 部署在一台单独的服务器上 192.168.2.180\n现在想改造一下访问方式变成访问：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://192.168.2.180:9444/chat\" rel=\"nofollow\"\u003ehttps://192.168.2.180:9444/chat\u003c/a\u003e 可以访问到部署的 chatgpt： \u003ca href=\"http://192.168.2.4:50021\" rel=\"nofollow\"\u003ehttp://192.168.2.4:50021\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://192.168.2.180:9444/pve\" rel=\"nofollow\"\u003ehttps://192.168.2.180:9444/pve\u003c/a\u003e 可以访问到 PVE 虚拟机 \u003ca href=\"https://192.168.2.2:8006/\" rel=\"nofollow\"\u003ehttps://192.168.2.2:8006/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://192.168.2.180:9444/adguard/\" rel=\"nofollow\"\u003ehttps://192.168.2.180:9444/adguard/\u003c/a\u003e 可以访问到 adguard 的应用 \u003ca href=\"http://192.168.2.200/\" rel=\"nofollow\"\u003ehttp://192.168.2.200/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e但是按照下面的配置，访问到的页面不全，页面各种缺失。\n是不是这样的方法不适用？？\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eworker_processes auto;\nevents {\n  worker_connections 1024;\n}\n\nhttp {\n  server {\n    listen 9444 ssl;\n    server_name 192.168.2.180;\n    ssl_certificate /etc/nginx/ssl.crt;\n    ssl_certificate_key /etc/nginx/ssl.key;\n    location /chat/ {\n      proxy_pass http://192.168.2.4:50021/;\n      proxy_set_header Host $proxy_host;\n      proxy_set_header X-Real-IP $remote_addr;\n      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n    }\n    location /pve/ {\n      proxy_pass https://192.168.2.2:8006/;\n      proxy_set_header Host $proxy_host;\n      proxy_set_header X-Real-IP $remote_addr;\n      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n      proxy_set_header Accept-Encoding \"\";\n      sub_filter_types *;\n    }\n    location /adguard/ {\n      proxy_pass http://192.168.2.200/;\n      proxy_set_header Host $proxy_host;\n      proxy_set_header X-Real-IP $remote_addr;\n      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n      proxy_set_header Accept-Encoding \"\";\n      sub_filter_types *;\n    }\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "shiyuu",
+      "PubDate": "2023-05-30T14:36:45Z"
+    },
+    {
+      "Title": "求推荐笔记本电脑，什么型号可以？ - 问与答",
+      "Link": "https://www.v2ex.com/t/944336",
+      "Description": "\u003cp\u003e对 cpu 和内存要求高，对显卡没要求，买什么本好？\u003c/p\u003e\n",
+      "Author": "jack4536251",
+      "PubDate": "2023-05-30T14:36:19Z"
+    },
+    {
       "Title": "我想做这样一个 app 各位看看有市场么 - 奇思妙想",
       "Link": "https://www.v2ex.com/t/944333",
       "Description": "\u003cp\u003e收集全国 ktv 的带班经理联系方式\n告诉他们有很多客户想找他们开包间\n然后想去某个 ktv ，就会通过这个 app 拿到经理的联系方式，去预订包房。\u003c/p\u003e\n\u003cp\u003e经理有业绩，反正永远不缺有钱人在 k 房一掷万金。\u003c/p\u003e\n\u003cp\u003e欢迎各位出谋划策，把模块一起规划下，看还能玩出什么花来\u003c/p\u003e\n",
