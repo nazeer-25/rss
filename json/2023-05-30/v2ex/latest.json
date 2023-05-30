@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "TS as const 类型提示问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/944128",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003econst OrderStatus = {\n  AWAITING_PAYMENT: {\n    value: 'AWAITING_PAYMENT',\n    label: '待支付'\n  },\n  AWAITING_DELIVER: {\n    value: 'AWAITING_DELIVER',\n    label: '待发货'\n  },\n  ...\n} as const\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e现在 OrderStatus.AWAITING_PAYMENT 是有类型提示 { value: 'AWAITING_PAYMENT', label: '待支付' } 的，我想写一个方法转换一下这个结构，变成\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003econst OrderStatusEnum = {\n  AWAITING_PAYMENT: 'AWAITING_PAYMENT',\n  AWAITING_DELIVER: 'AWAITING_DELIVER'\n} as const\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e转换方式是这样写的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003econst OrderStatusEnum = Object.keys(OrderStatus).reduce((acc, key) =\u0026gt; {\n\tacc[key] = OrderStatus[key].value\n    return acc\n}, {})\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是这样的方式 OrderStatusEnum 是没有类型提示的，怎么定义类型才能让 OrderStatusEnum.AWAITING_PAYMENT 会提示 'AWAITING_PAYMENT'？\u003c/p\u003e\n",
+      "Author": "jerrry",
+      "PubDate": "2023-05-30T03:10:55Z"
+    },
+    {
+      "Title": "坑爹，大学档案馆的对外服务平台架设在教育网的服务器上，人在国外如何访问 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/944127",
+      "Description": "\u003cp\u003e想要开大学成绩单。档案馆说要不然自己现场办，要不然就在这个平台申请我在国外，之前在办公室、用手机的移动网都没法访问，只有在家可以访问这个网站，现在突然就在家里也访问不了了，用 VPN 也不行。，它们还有个小程序，但是看样子后台也是架在教育网的，也是加载不出东西来。我对网络方面知识不足，想请问一下大家还有其他的办法可以访问国内的教育网么？过了这周日后能不能恢复呢……\u003c/p\u003e\n",
+      "Author": "cad0420",
+      "PubDate": "2023-05-30T03:09:20Z"
+    },
+    {
       "Title": "抢不到五月天演唱会的门票 - 杭州",
       "Link": "https://www.v2ex.com/t/944123",
       "Description": "\u003cp\u003e北京抢了两轮杭州抢了一轮，人生第一次看演唱会这么艰辛。\u003c/p\u003e\n",
