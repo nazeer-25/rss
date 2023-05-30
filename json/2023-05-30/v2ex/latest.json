@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "家庭存储设备推荐 - Apple",
+      "Link": "https://www.v2ex.com/t/944345",
+      "Description": "求推荐家庭存储设备，几个条件：\u003cbr /\u003e\u003cbr /\u003e1 ，能够存储数据并在本地访问管理；\u003cbr /\u003e2 ，支持局域网数据分享协议；\u003cbr /\u003e3 ，支持通过 infuse 在 Mac 上流畅地播放或快进存储设备中的视频（视频大多 4K 资源，动辄几十 G 的体量）；\u003cbr /\u003e4 ，最好能够支持，存储设备内迅雷等下载工具的资源下载；\u003cbr /\u003e5 ，家庭存储的管理系统操作成本低（这种表达很不严谨，全凭借你们的理解，能够针对小白用户易用）；\u003cbr /\u003e6 ，功耗低（基于使用时的经济成本考虑）；\u003cbr /\u003e7 ，预算 1500 元内（不含硬盘）；\u003cbr /\u003e\u003cbr /\u003e 首次接触家庭存储，不太清楚还有哪些日常使用实用的功能，因此推荐时，功能上包括上述且不限于。\u003cbr /\u003e \u003cbr /\u003e 还有几个问题想要请教：\u003cbr /\u003e \u003cbr /\u003e a ，在你们看来，家庭存储，还有哪些功能是你们比较看重的（我作为参考）；\u003cbr /\u003e b ，作为日常存储、本地访问播放 4k 视频，并且能够流畅的播放和快进，至少需要怎样的处理器的架构、处理器、和内存等的配置？\u003cbr /\u003e c ，哥哥姐姐们还有啥叮嘱，我一定洗耳恭听哈。\u003cbr /\u003e d ，另外，绿联、极空间的设备是否推荐？",
+      "Author": "TUTU2014",
+      "PubDate": "2023-05-30T15:11:05Z"
+    },
+    {
+      "Title": "有跨境支付的需求，有没有什么虚拟信用卡服务推荐的 - 问与答",
+      "Link": "https://www.v2ex.com/t/944344",
+      "Description": "如题所示，第一要求就是匿名，安全，第二，就是尽量支持大部分平台的支付。大家有什么推荐的吗？",
+      "Author": "sourwood",
+      "PubDate": "2023-05-30T15:11:01Z"
+    },
+    {
+      "Title": "暗黑 4 周五上线，有多少预购的？ - 游戏",
+      "Link": "https://www.v2ex.com/t/944343",
+      "Description": "\u003cp\u003eRT ，豪华版提前 4 天上线\u003c/p\u003e\n",
+      "Author": "LawlietZ",
+      "PubDate": "2023-05-30T15:09:31Z"
+    },
+    {
       "Title": "ChatGPT 升级了计划，支付了 20 美金，为什么调用 3.5 api 还是不能使用 - 问与答",
       "Link": "https://www.v2ex.com/t/944342",
       "Description": "\u003cp\u003eV 友们，事情是这样的，我注册了 openai 账号，拥有免费的 5 美金，我创建了 api 秘钥，通过秘钥的方式进行调用，就在昨天，免费的账户还有 0.3 美金左右，然后我就升级账号了，然后今天估计是最后 0.3 美金用完了，可是我都升级了，为什么 api 不能用了，（我的理解是：我升级了账户，那么我的 api 秘钥是免费调用的，好像并不是这样的，朋友们，我是哪个环节理解错了？提醒一下），报错提示 \u003c/p\u003e\n\u003cp\u003e{\n\"error\": {\n\"message\": \"You exceeded your current quota, please check your plan and billing details.\",\n\"type\": \"insufficient_quota\",\n\"param\": null,\n\"code\": null\n}\n}\u003c/p\u003e\n\u003cp\u003e难道是我操作错了吗？兄弟们，有知道是怎么搞的吗？\u003c/p\u003e\n",
@@ -30,13 +51,6 @@
       "Description": "\u003cp\u003e\u003ca href=\"https://github.com/apple/ml-stable-diffusion\" rel=\"nofollow\"\u003eml-stable-diffusion\u003c/a\u003e提供了 torch 到 coreml 的模型转换能力\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e手动转换模型时需要添加\u003ccode\u003e--attention-implementation ORIGINAL\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e否则默认会用到自然语言引擎。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e手动转换模型需要给 torch 打补丁\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eAMD Hackintosh torch 依赖了 Intel MKL 。可以用 amdfriend 对动态库或二进制打补丁。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e无法正常图片的话需要手动转换模型并设置 CoreML 模型精度为 FP32 。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003ecoreml_model = ct.convert(\n    torchscript_module,\n    convert_to=\"mlprogram\",\n    minimum_deployment_target=ct.target.macOS13,\n    inputs=_get_coreml_inputs(sample_inputs, args),\n    outputs=[ct.TensorType(name=name) for name in output_names],\n    compute_units=ct.ComputeUnit[args.compute_unit],\n    compute_precision=ct.precision.FLOAT32,\n    # skip_model_load=True,\n)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e整个流程搞定后 6800xt 可以 30 秒可以跑完 50 次迭代速度介于 M1 和 M2 之间。\u003c/p\u003e\n",
       "Author": "ai277014717",
       "PubDate": "2023-05-30T14:38:16Z"
-    },
-    {
-      "Title": "所以，后来斯洛登被怎么样了？ - 问与答",
-      "Link": "https://www.v2ex.com/t/944338",
-      "Description": "晚上整理书库发现有这个人在我的书库里，就觉得好奇。本来可以狗哥一下，但是想来这里问问。这人到底算是个什么性质的，叛国吗？",
-      "Author": "maxwell29",
-      "PubDate": "2023-05-30T14:36:50Z"
     },
     {
       "Title": "一个 Nginx 反向代理问题 - NGINX",
@@ -219,6 +233,13 @@
       "Description": "\u003cp\u003e目前发现成本最低且稳定的办法——将电影共享到局域网（ SMB ），然后投影仪直接访问局域网上的视频文件即可播放电影。\n比屏幕镜像稳定帧数高，也不用连线，也不用单独买什么设备，还有比这更简单的方法吗？\u003c/p\u003e\n",
       "Author": "RunPiggy",
       "PubDate": "2023-05-30T11:16:13Z"
+    },
+    {
+      "Title": "所以，后来斯洛登被怎么样了？ - 问与答",
+      "Link": "https://www.v2ex.com/t/944338",
+      "Description": "晚上整理书库发现有这个人在我的书库里，就觉得好奇。本来可以狗哥一下，但是想来这里问问。这人到底算是个什么性质的，叛国吗？",
+      "Author": "maxwell29",
+      "PubDate": "2023-05-30T14:36:50Z"
     },
     {
       "Title": "深圳的朋友快来一起看今年的 WWDC 呀！ - 深圳",
