@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Setapp 家庭老车，每人独立账号， 268/年 - macOS",
+      "Link": "https://www.v2ex.com/t/945083",
+      "Description": "\u003cp\u003e#Setapp Family Plan ，个人车队使用多年，刚有一位朋友下车，现征一位，年付 268 ，可 ZFB 或闲鱼，有 VX 群。\u003c/p\u003e\n\u003cp\u003eVX(base64):\nU3VwZXJteG0yMDE5\u003c/p\u003e\n",
+      "Author": "tedmosby",
+      "PubDate": "2023-06-01T23:05:47Z"
+    },
+    {
+      "Title": "请教大家一个 MySQL 关于意向锁与元数据锁的问题 - MySQL",
+      "Link": "https://www.v2ex.com/t/945082",
+      "Description": "\u003cp\u003eInnoDB 中的意向锁是为了更容易检测表锁和行级锁之间的冲突，但实际上 MDL （元数据锁）已经完成了这件事情。\u003c/p\u003e\n\u003cp\u003e例如事务 t1 更新表的某一行，会持有该表的元数据锁 SHARED_WRITE ，当事务 t2 去 lock tables ... 锁表时，需要先获取该表的元数据锁 SHARED_NO_READ_WRITE/SHARED_READ_ONLY , 但这两个元数据锁已经与 SHARED_WRITE 锁互斥了，t2 也会阻塞在 Waiting for table metadata lock 阶段。\u003c/p\u003e\n\u003cp\u003e所以意向锁的作用体现在哪？\u003c/p\u003e\n",
+      "Author": "SimbaPeng",
+      "PubDate": "2023-06-01T23:00:40Z"
+    },
+    {
       "Title": "关闭 Android 推送机制的一些看法和脑洞 - Android",
       "Link": "https://www.v2ex.com/t/945081",
       "Description": "\u003cp\u003e一直以来 Android 的消息推送和后台机制都是一个值得诟病的事情，哪怕到了 2023 年，到了 Android13 。\u003c/p\u003e\n\u003cp\u003e哪怕是 FCM ，也极为依赖 App 的后台机制，需要 App 保持在后台运行，在内存里存在进程，FCM 才能正常推送，如果把后台完全压死（强行停止），那 FCM 是完全没法工作的。哪怕是 FCM 所谓的代推机制也是如此，本质上还是由 App 进程推送出来的通知。\u003c/p\u003e\n\u003cp\u003e因此，许多 App 其实只是用 FCM 来拉起 App 的 Callback 函数（以微信为代表），FCM Payload 不含消息内容，而是 App 收到 FCM 拉起后，再去轮询服务器。\u003c/p\u003e\n\u003cp\u003e甚至 Google 自家的 Gmail App 都是这么干的，而且还依赖 Android 的同步机制，似乎是由 FCM 触发同步机制，把邮件同步下来后才弹出通知。如果把 Android 的同步开关关掉，Gmail 直接不推送新邮件，这 FCM 推了个寂寞嘛。\u003c/p\u003e\n\u003cp\u003e因此，如果把 iOS 设备和 Android 设备上的 Gmail App 登录同一个帐号，然后给它发邮件，你会发现永远都是 iOS 设备瞬间亮起显示通知，而 Android 设备总是慢这么几拍，快则数秒，慢则数分钟才显示新邮件通知。\u003c/p\u003e\n\u003cp\u003e这也是 Android 后台耗电 /占用系统资源 /卡顿的根源之一，特别是类原生安卓 \u0026amp; 国际常用 App （ Facebook, Instagram, Twitter, WhatsApp, Telegram 等等）。虽然新的 Android 出了一系列后台机制，限制了很多活动，但哪怕在 FCM 下，这些 App 至少都要保留进程（“运行状态”）。更何况他们是有权执行代码占用 CPU 的，虽然会有限制。\u003c/p\u003e\n\u003cp\u003e再怎么限制后台活动限制 App 资源，还是和 iOS 有本质的区别，iOS 下再多 App 对系统也没有影响（只要你的空间足够），因为把 App 从后台推掉后，是完全没有机会运行的（那个后台 App 刷新机制另当别论），就跟 Windows 里，你下载了一堆 EXE ，不运行不会占用系统任何资源，只是一堆文件罢了。\u003c/p\u003e\n\u003cp\u003e倒是近几年的国产 Android \u0026amp; 国产 App 在这方面做得不错，各家厂商有自己的完全实现代堆的机制（ mipush ，华为 push ，vivopush 等等），然后国产安卓的后台机制基本上是把 App 从后台推掉后就完全压死了（强行停止状态），各种 broadcast 都收不到，别的 App 也拉不起（国产 Android 还专门限制了链式拉起）。各家 push 则是实现了类似 iOS 的代堆，完全不依赖 App 的代码本身，不依赖后台，由系统服务代显示通知。\u003c/p\u003e\n\u003cp\u003e（顺便说个小玩意，一个 Xposed 模块，叫 fcmfix ，这个在国产安卓上配合 FCM 工作得相当好，能让 FCM 推到压死后台的 App 上，原理是在收到 FCM 时，先把 App 拉起。虽然最后也要拉起 App ，但至少在 App 没有收到消息之前没有后台活动）\u003c/p\u003e\n\u003cp\u003e既然这个问题从 Android 诞生之日起就是一个非常诟病的问题（特别是 Android2.x/4.x 时代，群魔乱舞各种牛鬼蛇神 App 互相保活就为了保持 push service 长连接，和系统和用户斗智斗勇，导致那几年安卓是卡顿的代名词），而且无论 GCM/FCM 还是现有的各国产安卓 push 机制都有一个问题：这毕竟是一个云服务，对于一些场景，比如企业内网 /本地化部署的应用，就没法上这些“云服务系统级 Push 了”，这类应用的客户端也只能长驻后台，自己维护一个长连接。根据 Android 的电源管理指南，这种情况需要加入电池优化白名单中，也就是应用的后台活动不受系统限制，才能保证消息推送的及时。\u003c/p\u003e\n\u003cp\u003e也就是说，作为一个开源且开放的操作系统，Android 本身并没有一个解决方案来解决这个问题，但这个问题在移动设备上确实是个能覆盖绝大多数应用场景的问题。\u003c/p\u003e\n\u003cp\u003e脑洞来了：\u003c/p\u003e\n\u003cp\u003e为何 Android 不实现一个系统级的，不依赖 App 后台活动的消息推送 \u0026amp; App 拉起 Callback 的协议？假如 Android 实现了这么一种协议，这个协议是开放的，你可以自己编写服务器端（当然 Google 也可以提供一个参考实现），部署在自己的服务器上，然后 App 往 Android 系统注册一个长连接（指定你的服务器 URL ），由 Android 来维护这些长连接（ KeepAlive ），注册之后就与 App 无关了，完全由系统接收数据，哪怕把 App 完全退出后台压死，消息也可以由系统代推，并且支持某种消息，能把 App 拉起并把 Payload 传给 App 处理（应用场景如音视频通话，把 App 的 Activity 拉起来弹出通话 UI 并响铃）。\u003c/p\u003e\n\u003cp\u003e虽然还是每个 App 一个长连接，但是这个长连接是由系统管理的，个人感觉哪怕装了几百个 App ，就算保持几百个 TCP 连接并不会带来太多的开销，且 App 的后台可以完全压死，不占用任何 CPU 和内存资源。而不是像安卓 2.X/4.X 时代各家 App 都运行一个“PushService”，除了维护长连接之外，还东搞西搞占用 CPU 和内存资源。这样也有助于内网 /本地化部署的企业应用能用上规范的，系统级的推送功能。\u003c/p\u003e\n",
