@@ -4,6 +4,69 @@
   "Description": "",
   "Items": [
     {
+      "Title": "process.Release() 的作用究竟是什么 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/945133",
+      "Description": "\u003cp\u003e初学 go ，最近在阅读 wireguard-go 的代码，看到其 daemonize 相关的代码，其中有如下代码段（去掉无关代码）：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\t\tpath, err := os.Executable()\n\t\tif err != nil {\n\t\t\tfmt.Printf(\"Failed to determine executable: %v\\n\", err)\n\t\t\tos.Exit(-1)\n\t\t}\n\n\t\tprocess, err := os.StartProcess(\n\t\t\tpath,\n\t\t\tos.Args,\n\t\t\tattr,\n\t\t)\n\t\tif err != nil {\n\t\t\tfmt.Printf(\"Failed to daemonize: %v\\n\", err)\n\t\t\tos.Exit(-1)\n\t\t}\n\t\tfmt.Printf(\"chile process pid is %v\\n\", process.Pid)\n\n\t\terr = process.Release()\n\t\tif err != nil {\n\t\t\tfmt.Printf(\"release process failed %v\\n\", err)\n\t\t}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其中 \u003ccode\u003eprocess.Release()\u003c/code\u003e 究竟 Release 了什么，注释中提到的是：\"Release releases any resources associated with the Process p, rendering it unusable in the future.\" ，这其中\u003ccode\u003eresources\u003c/code\u003e 指的是什么？\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/golang/go/issues/36534\" rel=\"nofollow\"\u003egithub\u003c/a\u003e中也有相关的 Issues ，提到“ I've sent the PR that specifying Release's NOOP behavior on Unix.” 其中 \"NOOP\" 是什么意思？ \u003cem\u003eNO operation 什么都不做吗？\u003c/em\u003e\u003c/p\u003e\n\u003cp\u003e我简单试验了一下，如果父进程执行完创建进程后立刻退出了，不管是否进行 Release ， 子进程都会被托管给 launchd 进程。\u003c/p\u003e\n\u003cp\u003e而如果父进程没有立即退出，进行了 Release ，这时候子进程的父进程就是创建他的进程如果子进程先退出，此时子进程就会变成一个僵尸进程。不进行 Release 的结果也是一样的。\u003c/p\u003e\n\u003cp\u003e我感到非常的混乱，Release 感觉像是什么都没有做一样，不知道我的感觉是否正确？\u003c/p\u003e\n",
+      "Author": "czy0538",
+      "PubDate": "2023-06-02T01:58:59Z"
+    },
+    {
+      "Title": "玩 PT 被运营商认为是搞 PCDN，如何对敌？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/945132",
+      "Description": "\u003cp\u003e装维来电话要上门检查，否则就要单方停机\u003c/p\u003e\n\u003cp\u003e5 个月上传 32T ，每天上传 200GB 应该不算多吧\u003c/p\u003e\n\u003cp\u003e跟着他说搞监控可行吗\u003c/p\u003e\n",
+      "Author": "Eytoyes",
+      "PubDate": "2023-06-02T01:58:42Z"
+    },
+    {
+      "Title": "上海一中法院-联璧金融开始登记退款了 - 分享发现",
+      "Link": "https://www.v2ex.com/t/945130",
+      "Description": "文章地址： \u003ca target=\"_blank\" href=\"https://mp.weixin.qq.com/s/2cYw1vYjyxjlM4gvL5amMQ\" rel=\"nofollow noopener\"\u003ehttps://mp.weixin.qq.com/s/2cYw1vYjyxjlM4gvL5amMQ\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e平台上线时间：2023 年 6 月 2 日 14 时\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e登录平台所需资料\u003cbr /\u003e\u003cbr /\u003e本人身份证、实名认证手机号码、中国农业银行 I 类借记卡。有关中国农业银行 I 类借记卡详情请咨询中国农业银行服务电话 95599 。若没有该类借记卡请至中国农业银行营业网点办理后再核对确认。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e特别告知\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e联璧金融、华夏万家均采用全面审计的方式（即未兑付金额等于总投入金额减去总兑付金额）。\u003cbr /\u003e\u003cbr /\u003e本案被害人众多，考虑到平台容量和信息安全，审计损失金额小于人民币 5000 元的被害人不列入在线核对平台，请向上海一中院提交书面材料以便退赃（包括姓名、公民身份号码、开户行、账号、金额以及本人手机号码）。",
+      "Author": "tanranran",
+      "PubDate": "2023-06-02T01:48:55Z"
+    },
+    {
+      "Title": "ios 设备自签 app 的奇怪现象 - Apple",
+      "Link": "https://www.v2ex.com/t/945125",
+      "Description": "\u003cp\u003e本人 ios 开发能力为 helloworld 水平。使用公司的开发者帐号，自签了几个 app ，方法：\n1 、将设备 uuid 加入到开发者后台\n2 、创建一个通配符的\tIDENTIFIER ，*\n3 、创建 Profiles ，选择 ios Development ，通配符 Identifier ，我的设备 uuid ，成功后下载 mobileprovision\n4 、使用 IOS app signer ，选择 tg 上下载的 ipa 安装包，证书选择我的开发者证书（已经挂靠到公司帐号），provisioning file 选择刚才下载的 mobileprovision ，点击 start 开始签名。\n5 、签名成功后，把签名后 ipa 包，上传到 \u003ca href=\"http://pgyer.com\" rel=\"nofollow\"\u003epgyer.com\u003c/a\u003e 上，ios 设备扫码安装即可。\u003c/p\u003e\n\u003cp\u003e这个步骤，是我一个 ios 菜鸡，结合网上教程自己摸索出来的。吐槽下网上教程，都比我这个方法复杂，并且要使用 xcode 。xcode 对于菜鸡水平的人坑居多，而且不同版本设置位置也不相同，我没能成功。\u003c/p\u003e\n\u003cp\u003e使用我这个方法，我成功签名了\n王国保卫战：复仇+ Arcade 版 ，可以正常存档游玩；\nInfuse 7.5.4pro 会员版，可以连接 nas 并保存信息；\u003c/p\u003e\n\u003cp\u003e但是！\n对于破解版的 you 管，遇到了问题：\n签名、安装一切正常，但使用时很不完美，每次进入 app 都需要登录 google ，不能记忆上一次的登录信息，杀死 app 后再进入还需要登录。。。但软件设置可以保存。试用了两个版本的破解 app ，都是这个现象。（但同样的 app ，如果使用巨魔 trollstore 签名，就可以正常保存登录信息，甚至首次安装可以从系统中读出我之前的登录信息）\u003c/p\u003e\n\u003cp\u003e这个问题有没有大佬遇到过，请问如何解决？\u003c/p\u003e\n",
+      "Author": "bkzly83851",
+      "PubDate": "2023-06-02T01:34:04Z"
+    },
+    {
+      "Title": "推荐一个提升 V2EX 主题回复浏览体验的油猴脚本 - V2EX.REP - 分享创造",
+      "Link": "https://www.v2ex.com/t/945124",
+      "Description": "\u003cblockquote\u003e\n\u003cp\u003eREP = Reply Experience Plus, Reply Extension Plus, Reply Enjoyment Plus, Reply, Repair\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e专注提升 V2EX 主题回复浏览体验的浏览器扩展 /用户脚本。\u003c/p\u003e\n\u003cp\u003e安装链接: \u003ca href=\"https://greasyfork.org/scripts/466589-v2ex-rep\" rel=\"nofollow\"\u003ehttps://greasyfork.org/scripts/466589-v2ex-rep\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e主要功能\u003c/h2\u003e\n\u003ch3\u003e✅ 修复有被 block 的用户时错位的楼层号\u003c/h3\u003e\n\u003cp\u003e当回复中有被屏蔽的人的回复，楼层会发生错位，你看到的楼层和其他人不一样。这个脚本可以修复楼层，保证你看到的和实际楼层一样。\u003c/p\u003e\n\u003cp\u003e实在不明白 V2EX 为什么如此设计，看到很多吐槽这个问题的帖子了，终于忍不住，开发了这个脚本。\u003c/p\u003e\n\u003cp\u003e其他脚本开发者如需要，可参考\u003ca href=\"https://github.com/v2hot/v2ex.rep/blob/main/src/modules/fix-reply-floor-numbers.ts\" rel=\"nofollow\"\u003e代码\u003c/a\u003e。\u003c/p\u003e\n\u003ch3\u003e✅ 回复时自动带上楼层号\u003c/h3\u003e\n\u003cp\u003e点击回复按钮，会自动带上楼层号，方便其他人看到你在回复哪条内容。而且楼层号是修复好的，就算有屏蔽的用户，楼层号也不用担心弄错。\u003c/p\u003e\n\u003ch3\u003e✅ 显示热门回复\u003c/h3\u003e\n\u003cp\u003e右侧栏里显示得到感谢 💗 最多的回复，回复很多时，方便快速浏览，节省时间。\u003c/p\u003e\n\u003ch3\u003e✅ 查看用户在当前主题下的所有回复与被提及的回复\u003c/h3\u003e\n\u003cp\u003e鼠标移到用户名上面，可以看到当前页面中这个用户的所有回复与被他人提及的回复。\u003c/p\u003e\n\u003cp\u003e当看到 \u003ccode\u003e@xxx\u003c/code\u003e 的回复时，可以把鼠标移到 \u003ccode\u003e@xxx\u003c/code\u003e 上面，看到这个用户都说了什么。\u003c/p\u003e\n\u003ch3\u003e✅ 一直显示感谢按钮 🙏\u003c/h3\u003e\n\u003cp\u003e如果你喜欢看到优质回复时马上发送感谢，可以打开此功能。从此不再需要用鼠标寻找感谢按钮，超级方便。\u003c/p\u003e\n\u003ch3\u003e✅ 一直显示隐藏回复按钮 🙈\u003c/h3\u003e\n\u003cp\u003e同上。\u003c/p\u003e\n\u003ch3\u003e✅ 快速发送感谢 /快速隐藏回复（ no confirm ）\u003c/h3\u003e\n\u003cp\u003e如果你是一个熟悉 V2EX 的用户，发送感谢需要花费金币已经都知道了，不用每次 confirm 一下了。打开此功能，不再看到 confirm 弹窗。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e⚠️ 以上所有功能兼容 V2EX Plus, V2EX Polish 等浏览器扩展 /脚本。兼容手机网页版 V2EX 。\n⚠️ 其他浏览器扩展 /脚本的兼容性问题以后会改善\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2\u003e页面截屏\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e设置功能，每个功能可单独开或关\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg alt=\"screenshots\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/v2hot/v2ex.rep/main/assets/v2ex.rep-screenshots-01.png\"/\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e修复有被 block 的用户时错位的楼层号，控制台可看到被屏蔽的楼层与内容\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg alt=\"screenshots\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/v2hot/v2ex.rep/main/assets/v2ex.rep-screenshots-02.png\"/\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e回复时自动带上楼层号\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg alt=\"screenshots\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/v2hot/v2ex.rep/main/assets/v2ex.rep-screenshots-03.png\"/\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e显示热门回复，点击楼层数，可直达该回复\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg alt=\"screenshots\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/v2hot/v2ex.rep/main/assets/v2ex.rep-screenshots-05.png\"/\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e鼠标移至用户名，查看该用户在当前主题下的所有回复\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg alt=\"screenshots\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/v2hot/v2ex.rep/main/assets/v2ex.rep-screenshots-06.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"screenshots\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/v2hot/v2ex.rep/main/assets/v2ex.rep-screenshots-07.png\"/\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e一直显示感谢按钮 /回复按钮\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg alt=\"screenshots\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://raw.githubusercontent.com/v2hot/v2ex.rep/main/assets/v2ex.rep-screenshots-04.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e其他\u003c/h2\u003e\n\u003cp\u003e安装链接: \u003ca href=\"https://greasyfork.org/scripts/466589-v2ex-rep\" rel=\"nofollow\"\u003ehttps://greasyfork.org/scripts/466589-v2ex-rep\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e源代码: \u003ca href=\"https://github.com/v2hot/v2ex.rep\" rel=\"nofollow\"\u003ehttps://github.com/v2hot/v2ex.rep\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e如有建议或问题，欢迎提 \u003ca href=\"https://github.com/v2hot/v2ex.rep/issues\" rel=\"nofollow\"\u003eissue\u003c/a\u003e 或 \u003ca href=\"https://github.com/v2hot/v2ex.rep/pulls\" rel=\"nofollow\"\u003ePR\u003c/a\u003e。\u003c/p\u003e\n\u003ch2\u003e其他 V2EX 脚本\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://greasyfork.org/scripts/463552-v2ex-min\" rel=\"nofollow\"\u003ev2ex.min - V2EX 极简风格\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://greasyfork.org/scripts/460718-utags-add-usertags-to-links\" rel=\"nofollow\"\u003e🏷️ 小鱼标签 (UTags) - 为链接添加用户标签，支持 V2EX\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://greasyfork.org/scripts/464541-links-helper\" rel=\"nofollow\"\u003e🔗 链接助手\u003c/a\u003e - 支持所有网站在新标签页中打开第三方网站链接（外链），在新标签页中打开符合指定规则的本站链接，解析文本链接为超链接，微信公众号文本转可点击的超链接，图片链接转图片标签，解析 Markdown 格式链接与图片标签\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "Pipecraft",
+      "PubDate": "2023-06-02T01:33:11Z"
+    },
+    {
+      "Title": "618 云服务器有推荐的吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/945123",
+      "Description": "\u003cp\u003e很早之前买的阿里云轻量级三年 200 多的服务器去年到期了，一看老用户续费不如狗，之后就一直没有重新买。\n最近看了看主流的国内厂商价格也蛮贵的，基本都是折扣只能买一年。\n唯一一个腾讯的感觉还可以。2 核 2G4M 三年 396.不知道还有没有其他的好价服务器推荐了。\u003c/p\u003e\n",
+      "Author": "jiobanma",
+      "PubDate": "2023-06-02T01:32:19Z"
+    },
+    {
+      "Title": "上上周气温变化无常，感冒了，结果一周还在咳嗽 - 问与答",
+      "Link": "https://www.v2ex.com/t/945122",
+      "Description": "去医院做了核酸跟甲流检测，都是阴性，应该是普通感冒吧，感冒恢复期久这难道是新冠后遗症？当初新冠感染得快去得也快，这一个感冒拖沓了我将近两星期。\u003cbr /\u003e主要家里人比我更早开始咳嗽，现在还在咳嗽。",
+      "Author": "Suigintou",
+      "PubDate": "2023-06-02T01:31:25Z"
+    },
+    {
+      "Title": "内购！内购！内购！ TCL 内购会员工成本价，不赚一分钱！ - 优惠信息",
+      "Link": "https://www.v2ex.com/t/945121",
+      "Description": "\u003cp\u003eTCL 内购会，电视、冰箱、洗衣机、电子锁、空调应有尽有，有意者联系\u003c/p\u003e\n\u003cp\u003e下载 TCL 之家 APP 后找我看内部价，价格不在公共平台对外公开望体谅，公司有规定谢谢。\u003c/p\u003e\n\u003cp\u003e有意者撩 vx：zzhcyb666\u003c/p\u003e\n",
+      "Author": "COLINBIN",
+      "PubDate": "2023-06-02T01:26:23Z"
+    },
+    {
+      "Title": "双线接入 IPV6 的问题 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/945120",
+      "Description": "通过关系在家里办了一条移动的专线（动态 ip 的），因为没有公司资质，不能解封 80 和 443 。就选的动态 ip 版，也申请不了 ipv6[这设定真的太操蛋了，v6 居然要单独申请]。\u003cbr /\u003e现在有几个问题:\u003cbr /\u003e1  ipv6 是我的刚需，不要什么 he 的隧道，延迟太高。我现在有另外一条家宽，也是移动的。家宽有动态的 ipv6 。有没有办法让家宽的 ipv6 使用起来？分发到同一个局域网里面让客户端获得 v6 ？比如说家宽那个线路只让他获取 ipv6 而不要 ipv4 。路由器是刷了 openwrt 的。但是不能定义双 wan ，也没有交换机设置那一项。",
+      "Author": "AS58453",
+      "PubDate": "2023-06-02T01:23:19Z"
+    },
+    {
       "Title": "Reality+Vision 用没几天就挂了 - VPS",
       "Link": "https://www.v2ex.com/t/945119",
       "Description": "各位用过 Reality 的 V 友，有没有和我一样的情况，我使用的是 Reality+Vision 的方式，这台 VPS 同时\u003cbr /\u003e   \u003cbr /\u003e   还搭了宝塔面板及京东青龙面板，用没几天 Reality 就 ping 不上挂了，IP 倒没被封，重新建一遍就好\u003cbr /\u003e   \u003cbr /\u003e   了，猜测是端口被封了，会不会跟青龙面板有关，我这流量也不大啊，我还有另外一台 VPS 是跑\u003cbr /\u003e   \u003cbr /\u003e   Trojan go+Websocket ，就稳如狗，那台纯粹跑梯子，没干别的，实测 Trojan go 的速度比 Reality 至\u003cbr /\u003e   \u003cbr /\u003e   少快 30%，对了，Reality 用的是以下一键脚本，mack-a 大佬的，我看用的人也蛮多的，应当不会有什\u003cbr /\u003e   \u003cbr /\u003e   么问题才对，\u003cbr /\u003e\u003cbr /\u003ewget -P /root -N --no-check-certificate \"\u003ca target=\"_blank\" href=\"https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh\" rel=\"nofollow noopener\"\u003ehttps://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh\u003c/a\u003e\" \u0026amp;\u0026amp; chmod 700 /root/\u003ca target=\"_blank\" href=\"http://install.sh\" rel=\"nofollow noopener\"\u003einstall.sh\u003c/a\u003e \u0026amp;\u0026amp; /root/\u003ca target=\"_blank\" href=\"http://install.sh\" rel=\"nofollow noopener\"\u003einstall.sh\u003c/a\u003e",
@@ -13,7 +76,7 @@
     {
       "Title": "求推荐 win 笔记本/可扩展成 32G/预算 5k - 问与答",
       "Link": "https://www.v2ex.com/t/945118",
-      "Description": "给家中的小兄弟帮忙买个电脑，去上 java 辅导班转行用\u003cbr /\u003e看了一圈现在都流行轻薄本板载内存，不可扩展，这是当做快消品卖了？\u003cbr /\u003e\u003cbr /\u003e- 预算 4k, 最多不超 5k 。省出来钱准备给他买个显示器\u003cbr /\u003e- 15 寸及以上，清晰度无所谓，核显就行，大就好\u003cbr /\u003e- 最好是单条 16G 的内存，以后有需要好扩展成 32G\u003cbr /\u003e- 帮人买的嘛，最好是品控、口碑好点的品牌，耐操\u003cbr /\u003e- 轻不轻薄无所谓，预算内性能尽量释放好一些吧\u003cbr /\u003e\u003cbr /\u003e我个人是用 macos,但辅导班里统一 win 省事\u003cbr /\u003e自学能力并不高，请不要推荐自学之类的，就是找口还行的饭吃",
+      "Description": "给家中的小兄弟帮忙买个电脑，去上 java 辅导班转行用\u003cbr /\u003e看了一圈现在都流行轻薄本板载内存，不可扩展，这是当做快消品卖了？\u003cbr /\u003e\u003cbr /\u003e- 预算 4k, 最多不超 5k 。省出来钱准备给他买个显示器\u003cbr /\u003e- 15 寸及以上，清晰度无所谓，核显就行，\u003cbr /\u003e- 最好是单条 16G 的内存，有扩展槽，以后可以扩展成 32G\u003cbr /\u003e- 帮人买的嘛，最好是品控、口碑好点的品牌\u003cbr /\u003e- 轻不轻薄无所谓，性能尽量释放好一些吧\u003cbr /\u003e- 第一反应是买 intel 芯片的，都是 x86 架构，理论上来说完全兼容，but 隐隐约约听到 amd 芯片不怎么兼容、有小问题，懂的麻烦说一下 amd ok 吗？\u003cbr /\u003e\u003cbr /\u003e我个人是用 macos,但辅导班里统一 win 省事\u003cbr /\u003e自学能力并不高，请不要推荐自学之类的，就是找口还行的饭吃",
       "Author": "shubiao",
       "PubDate": "2023-06-02T01:17:25Z"
     },
@@ -60,18 +123,11 @@
       "PubDate": "2023-06-02T01:03:14Z"
     },
     {
-      "Title": "想问问家人们，平时除了看 v2ex，每天还会看哪些有意思的网站？ - 问与答",
+      "Title": "想问问家人们，平时除了看 v2ex，每天还会看哪些有意思的网站？ - 互联网",
       "Link": "https://www.v2ex.com/t/945107",
       "Description": "",
       "Author": "Katttes",
       "PubDate": "2023-06-02T00:59:05Z"
-    },
-    {
-      "Title": "[远程办公] jar 混淆加密加壳 - 酷工作",
-      "Link": "https://www.v2ex.com/t/945106",
-      "Description": "\u003cp\u003e远程办公招聘 java 后端。\n时间自由只需按约定时间完成开发任务即可。\n要求：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e有良好的自主学习能力。\u003c/li\u003e\n\u003cli\u003e有良好的沟通能力。\u003c/li\u003e\n\u003cli\u003e熟练使用 jar 混淆加壳 编程语言及常用开发框架等。\u003c/li\u003e\n\u003cli\u003e熟悉 Linux 操作系统，具备 Linux 环境下的开发和部署经验。\u003c/li\u003e\n\u003cli\u003e要求做过相关项目 jar 加密混淆经验。\u003c/li\u003e\n\u003cli\u003e主要完成 spring boot 主框架加密混淆 + 插件加密混淆 保证正常调用。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e邮件 \u003ca href=\"mailto:1144749904@qq.com\"\u003e1144749904@qq.com\u003c/a\u003e\u003c/p\u003e\n",
-      "Author": "zsvc",
-      "PubDate": "2023-06-02T00:58:31Z"
     },
     {
       "Title": "代驾没干成，送了 3 周外卖，分享一下 - 职场话题",
@@ -79,13 +135,6 @@
       "Description": "\u003ch3\u003e前情：\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://www.v2ex.com/t/939001?p=1#reply190\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/939001?p=1#reply190\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e由于北京代驾排队人数较多，暂时没有开放名额，所以入职了美团和小鸟\u003c/p\u003e\n\u003ch3\u003e5 月收入\u003c/h3\u003e\n\u003cp\u003e12 号开始跑。看了上个贴子里的视频介绍，所以前期基本都是早上 5-7:20,然后回家接孩子上幼儿园。\u003c/p\u003e\n\u003cp\u003e一开始只跑早上，白天还学习，后来发现没一个面试，然后有活动的时候白天也跑了。\u003c/p\u003e\n\u003cp\u003e美团\n275 单，+1900 ，-180 （一个上午的单子已经餐损了，结果下午又流转到我这新手头上，不会操作导致餐损+违规全算在我头上了，反馈给客服也没用）\u003c/p\u003e\n\u003cp\u003e小鸟\n44 单，+280 ，-20 （保险+超时扣款）\u003c/p\u003e\n\u003cp\u003e每小时基本 20 左右，叠加活动奖励差不多能到 26.7 ，基本上 1 块 /km 。这个 km 不止是单纯商家到顾客距离，还要加上骑手接单时到商家的距离。\u003c/p\u003e\n\u003ch3\u003e工具\u003c/h3\u003e\n\u003cp\u003e国标电动车，最高 25km/h 。所以同时最多挂 3 单，那些车速快的我看到有 9 单的。\n没解速是因为外卖只是暂时的，解速以后带孩子骑行就不安全。\u003c/p\u003e\n\u003ch3\u003e平台对比\u003c/h3\u003e\n\u003cp\u003e美团\n配送一般 40 分钟，一小时可以挂 3 单\u003c/p\u003e\n\u003cp\u003e小鸟\n配送一般 30 分钟，一小时 2 单\u003c/p\u003e\n\u003cp\u003e双开特别容易超时，导致扣款，一个平台的话会帮你规划路线和合理派单。美团扣 40% 小鸟按时间 5 分钟内就几毛\u003c/p\u003e\n\u003ch3\u003e客户评价\u003c/h3\u003e\n\u003cp\u003e美团 16 好评 1 差评（系统判定顾客虚假差评了）\u003c/p\u003e\n\u003cp\u003e小鸟 3 好评 0 差评\u003c/p\u003e\n\u003ch3\u003e我对商家评价\u003c/h3\u003e\n\u003cp\u003e给了俩刷单的，因为白跑一趟，我还得找客服报备，取消订单后先扣款然后再申诉两次才退还。\u003c/p\u003e\n\u003cp\u003e有次两次申诉都失败了还扣我钱，我找客服提供了跟上个客服的聊天截图，依然对我说抱歉无法退款。最后在我表明要去别的平台投诉还才退还给我。\u003c/p\u003e\n\u003ch3\u003e收获\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e觉得挣钱不容易，不比之前坐办公室一天就大几百。现在甚至期盼下雨，因为会有天气补贴 1 单 0.5-1 块（自己都觉得心酸）\u003c/li\u003e\n\u003cli\u003e稍微没那么焦虑。虽说远远不够房租+日常开销，但好歹能有入账（其实也有点焦虑，不过在家里不能表现的太明显）\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003e求职\u003c/h3\u003e\n\u003cp\u003e普通二本，非科班，9 年 iOS ，其中 1 年 RN + 1 年 flutter 。\u003c/p\u003e\n\u003cp\u003e学习能力强。\u003c/p\u003e\n\u003cp\u003e自投 3 周没面试，特求内推。\u003c/p\u003e\n\u003cp\u003e微信 bWFnaWNfbW91c2U=\u003c/p\u003e\n\u003cp\u003e由于隐私，烦请注明 v2\u003c/p\u003e\n",
       "Author": "magic3584",
       "PubDate": "2023-06-02T00:57:38Z"
-    },
-    {
-      "Title": "国区 AM 还有一个车位，有要上车的吗？ - Apple",
-      "Link": "https://www.v2ex.com/t/945104",
-      "Description": "联系 wX\u003cbr /\u003ewakagixsx",
-      "Author": "Lnew",
-      "PubDate": "2023-06-02T00:54:42Z"
     },
     {
       "Title": "目前太阳镜有哪些品牌不错，求推荐 - 问与答",
@@ -184,6 +233,20 @@
       "Description": "最近在计划配一台电脑，想请教一下。",
       "Author": "Colorful",
       "PubDate": "2023-06-01T23:40:37Z"
+    },
+    {
+      "Title": "[远程办公] jar 混淆加密加壳 - 酷工作",
+      "Link": "https://www.v2ex.com/t/945106",
+      "Description": "\u003cp\u003e远程办公招聘 java 后端。\n时间自由只需按约定时间完成开发任务即可。\n要求：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e有良好的自主学习能力。\u003c/li\u003e\n\u003cli\u003e有良好的沟通能力。\u003c/li\u003e\n\u003cli\u003e熟练使用 jar 混淆加壳 编程语言及常用开发框架等。\u003c/li\u003e\n\u003cli\u003e熟悉 Linux 操作系统，具备 Linux 环境下的开发和部署经验。\u003c/li\u003e\n\u003cli\u003e要求做过相关项目 jar 加密混淆经验。\u003c/li\u003e\n\u003cli\u003e主要完成 spring boot 主框架加密混淆 + 插件加密混淆 保证正常调用。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e邮件 \u003ca href=\"mailto:1144749904@qq.com\"\u003e1144749904@qq.com\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "zsvc",
+      "PubDate": "2023-06-02T00:58:31Z"
+    },
+    {
+      "Title": "国区 AM 还有一个车位，有要上车的吗？ - Apple",
+      "Link": "https://www.v2ex.com/t/945104",
+      "Description": "联系 wX\u003cbr /\u003ewakagixsx",
+      "Author": "Lnew",
+      "PubDate": "2023-06-02T00:54:42Z"
     },
     {
       "Title": "Setapp 家庭老车，每人独立账号， 268/年 - macOS",
