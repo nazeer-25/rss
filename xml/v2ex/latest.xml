@@ -4,6 +4,76 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>用 Go 基于 epoll 实现一个最小化 IO 库 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/945616</link>
+      <description>&lt;p&gt;目前 Go 圈有很多款异步的网络框架:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/tidwall/evio&#34; rel=&#34;nofollow&#34;&gt;https://github.com/tidwall/evio&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/lesismal/nbio&#34; rel=&#34;nofollow&#34;&gt;https://github.com/lesismal/nbio&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/panjf2000/gnet&#34; rel=&#34;nofollow&#34;&gt;https://github.com/panjf2000/gnet&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/cloudwego/netpoll&#34; rel=&#34;nofollow&#34;&gt;https://github.com/cloudwego/netpoll&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;.......&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;排名不分先后。&lt;/p&gt;&#xA;&lt;p&gt;这里面最早的实现是 evio 。evio 也存在一些问题，之前也写过&lt;a href=&#34;https://www.syst.top/posts/go/evio/&#34; rel=&#34;nofollow&#34;&gt;evio&lt;/a&gt;文章介绍过。 其他比如 nbio 和 gnet 也写过一些源码分析。&lt;/p&gt;&#xA;&lt;p&gt;为什么会出现这些框架？之前也提到过，由于标准库 netpoll 的一些特性:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;一个 conn 一个 goroutine 导致利用率低&lt;/li&gt;&#xA;&lt;li&gt;用户无法感知 conn 状态&lt;/li&gt;&#xA;&lt;li&gt;.....&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这些框架在应用层上做了很多优化，比如:Worker Pool,Buffer,Ring Buffer,NoCopy......。&lt;/p&gt;&#xA;&lt;p&gt;都分析了好几篇的代码了，那么咋么说也得自己动手搞一个来达成学习目的。&lt;/p&gt;&#xA;&lt;p&gt;没错，这就是&lt;a href=&#34;https://github.com/wuqinqiang/easyio&#34; rel=&#34;nofollow&#34;&gt;easyio&lt;/a&gt;的由来。&lt;/p&gt;&#xA;&lt;p&gt;它是一个最小化的 IO 框架，只实现最核心的部分，加起来不超过 500 行代码。&lt;/p&gt;&#xA;&lt;p&gt;也没有用户端上层应用的优化，且目前只实现了 linux 的 epoll ，以及只能运行 tcp 协议。&lt;/p&gt;&#xA;&lt;p&gt;简单的 demo ，&lt;/p&gt;&#xA;&lt;p&gt;服务端:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;&#xA;package main&#xA;&#xA;import (&#xA;&#x9;&#34;context&#34;&#xA;&#x9;&#34;fmt&#34;&#xA;&#x9;&#34;os&#34;&#xA;&#x9;&#34;os/signal&#34;&#xA;&#x9;&#34;syscall&#34;&#xA;&#xA;&#x9;&#34;github.com/wuqinqiang/easyio&#34;&#xA;)&#xA;&#xA;var _ easyio.EventHandler = (*Handler)(nil)&#xA;&#xA;type Handler struct{}&#xA;&#xA;type EasyioKey struct{}&#xA;&#xA;type Message struct{ Msg string }&#xA;&#xA;var CtxKey EasyioKey&#xA;&#xA;func (h Handler) OnOpen(c easyio.Conn) context.Context {&#xA;&#x9;return context.WithValue(context.Background(), CtxKey, Message{Msg: &#34;helloword&#34;})&#xA;}&#xA;&#xA;func (h Handler) OnRead(ctx context.Context, c easyio.Conn) {&#xA;&#x9;_, ok := ctx.Value(CtxKey).(Message)&#xA;&#x9;if !ok {&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;var b = make([]byte, 100)&#xA;&#x9;_, err := c.Read(b)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;fmt.Println(&#34;err:&#34;, err)&#xA;&#x9;}&#xA;&#x9;fmt.Println(&#34;[Handler] read data:&#34;, string(b))&#xA;&#xA;&#x9;if _, err = c.Write(b); err != nil {&#xA;&#x9;&#x9;panic(err)&#xA;&#x9;}&#xA;}&#xA;&#xA;func (h Handler) OnClose(_ context.Context, c easyio.Conn) {&#xA;&#x9;fmt.Println(&#34;[Handler] closed&#34;, c.Fd())&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;e := easyio.New(&#34;tcp&#34;, &#34;:8090&#34;,easyio.WithNumPoller(4), easyio.WithEventHandler(Handler{}))&#xA;&#xA;&#x9;if err := e.Start(); err != nil {&#xA;&#x9;&#x9;panic(err)&#xA;&#x9;}&#xA;&#xA;&#x9;defer e.Stop()&#xA;&#xA;&#x9;c := make(chan os.Signal, 1)&#xA;&#x9;signal.Notify(c, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGINT)&#xA;&#x9;&amp;lt;-c&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;上面的代码，初始化一个 easyio ，启动一个 tcp 服务，监听端口 8090 ，options 里面设置 epoll 的数量，以及设置事件处理器。&lt;/p&gt;&#xA;&lt;p&gt;当一个新连接到来时会回调 OnOpen 函数，此时你可以设置自定义的 ctx ，那么当对应连接读事件到来 OnRead 回调，你可以拿到之前设置的 ctx ，调用 conn.Read 读取数据，且通过 Write 向对端写数据。&lt;/p&gt;&#xA;&lt;p&gt;这里需要注意的是，一个连接如果数据没读完，当 OnRead 执行结束，下一轮会继续触发回调代码，因为底层 epoll 采用的是 LT 触发方式。&lt;/p&gt;&#xA;&lt;p&gt;简单的客户端&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;fmt&#34;&#xA;&#x9;&#34;net&#34;&#xA;&#x9;&#34;os&#34;&#xA;&#x9;&#34;os/signal&#34;&#xA;&#x9;&#34;syscall&#34;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;conn, err := net.Dial(&#34;tcp&#34;, &#34;:8090&#34;)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;panic(err)&#xA;&#x9;}&#xA;&#x9;n, err := conn.Write([]byte(&#34;hello world&#34;))&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;panic(err)&#xA;&#x9;}&#xA;&#xA;&#x9;go func() {&#xA;&#x9;&#x9;b := make([]byte, 100)&#xA;&#x9;&#x9;if n, err = conn.Read(b); err != nil {&#xA;&#x9;&#x9;&#x9;panic(err)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;fmt.Println(&#34;read data:&#34;, n, string(b))&#xA;&#x9;}()&#xA;&#xA;&#x9;defer conn.Close()&#xA;&#xA;&#x9;ch := make(chan os.Signal, 1)&#xA;&#x9;signal.Notify(ch, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)&#xA;&#xA;&#x9;&amp;lt;-ch&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;源码地址:&lt;a href=&#34;https://github.com/wuqinqiang/easyio&#34; rel=&#34;nofollow&#34;&gt;https://github.com/wuqinqiang/easyio&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>RememberCurry</author>
+      <pubDate>04 Jun 2023 02:22:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>NAS 端 emby 的 OpenSubtitles 插件不工作了 - NAS</title>
+      <link>https://www.v2ex.com/t/945613</link>
+      <description>昨天晚上开始 NAS 端 emby 很多电影无法下载字幕了，能下载的也都是其他插件下载的，试了一下 Windows 上 emby 服务器还是正常的，网络也环境都一样，实在不理解了</description>
+      <author>wesleyqiu</author>
+      <pubDate>04 Jun 2023 02:16:32 +0000</pubDate>
+    </item>
+    <item>
+      <title>准备转岗软件销售，大佬们有什么建议吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/945612</link>
+      <description>做了 6 年前端被裁，社交能力差想改变一下自己，就想着转做软件销售，0 经验，大佬们有什么入门经验吗</description>
+      <author>luobogooooo</author>
+      <pubDate>04 Jun 2023 02:16:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>ios17 会有些什么新功能？ - 问与答</title>
+      <link>https://www.v2ex.com/t/945611</link>
+      <description>会开放第三方商店下载吗&lt;br /&gt;&lt;br /&gt;会有通话录音吗&lt;br /&gt;&lt;br /&gt;会有双开吗</description>
+      <author>badboy200600</author>
+      <pubDate>04 Jun 2023 02:15:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>神舟 z8da7np，插 minidp 显示器无反应 - 云修电脑</title>
+      <link>https://www.v2ex.com/t/945610</link>
+      <description>机子是神舟 z8da7np （ 12700h+3060laptop ），机子的 minidp 口是整机唯一一个独显直连口，发现如果在开机的情况下插显示器，插进去的那一瞬间整机界面直接卡死，如果关机插进去再开机就正常显示（且可以无限次热插拔）&lt;br /&gt;不知 v 友有无经验？已经被折磨怕了，售后单都打出来正准备返厂了，重新插了下却发现又可以了....&lt;br /&gt;机子是蓝天的 v150pnp ，有差不多机子的 v 友能不能帮忙测试下你们的能不能热插拔~&lt;br /&gt;测试过开博尔的 minidp 转 hdmi/用 minidp 转 dp 再接一个绿联 dp 转 hdmi</description>
+      <author>xiaowuap</author>
+      <pubDate>04 Jun 2023 02:14:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>不知不觉买了一堆便宜 VPS，买服务器居然会成瘾 - VPS</title>
+      <link>https://www.v2ex.com/t/945609</link>
+      <description>&lt;p&gt;买服务器居然也会上瘾，看到有便宜的就想买，不知不觉手里已经囤了一堆了。&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;服务商&lt;/th&gt;&#xA;&lt;th&gt;配置&lt;/th&gt;&#xA;&lt;th&gt;费用&lt;/th&gt;&#xA;&lt;th&gt;用途&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;腾讯轻量无忧&lt;/td&gt;&#xA;&lt;td&gt;1C2G&lt;/td&gt;&#xA;&lt;td&gt;190/年&lt;/td&gt;&#xA;&lt;td&gt;备案的网站、笔记、Bitwarden 、Gitea&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;腾讯云首单优惠&lt;/td&gt;&#xA;&lt;td&gt;2C4G&lt;/td&gt;&#xA;&lt;td&gt;158 马上到期了&lt;/td&gt;&#xA;&lt;td&gt;闲置&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;狗云香港&lt;/td&gt;&#xA;&lt;td&gt;1C1G&lt;/td&gt;&#xA;&lt;td&gt;100/ 年&lt;/td&gt;&#xA;&lt;td&gt;魔法、建站&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;狗云香港&lt;/td&gt;&#xA;&lt;td&gt;1C1G&lt;/td&gt;&#xA;&lt;td&gt;100/年&lt;/td&gt;&#xA;&lt;td&gt;魔法&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;野草云&lt;/td&gt;&#xA;&lt;td&gt;2C8G&lt;/td&gt;&#xA;&lt;td&gt;266/年&lt;/td&gt;&#xA;&lt;td&gt;开发测试环境&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;racknerd&lt;/td&gt;&#xA;&lt;td&gt;2C3G&lt;/td&gt;&#xA;&lt;td&gt;$32/年&lt;/td&gt;&#xA;&lt;td&gt;邮箱服务、魔法&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;racknerd&lt;/td&gt;&#xA;&lt;td&gt;1C 0.5G&lt;/td&gt;&#xA;&lt;td&gt;$10/年&lt;/td&gt;&#xA;&lt;td&gt;魔法&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;除了国内的腾讯云轻量，其他的服务器负载很低，几户算是闲置了，还能再搭建什么服务让其物尽其用呢。&lt;/p&gt;&#xA;</description>
+      <author>vincent7245</author>
+      <pubDate>04 Jun 2023 02:13:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>你们在个人电脑上是怎么管理文件的 - 问与答</title>
+      <link>https://www.v2ex.com/t/945608</link>
+      <description>&lt;p&gt;主要指项目源码，例如：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;私密的个人项目&lt;/li&gt;&#xA;&lt;li&gt;公开的个人项目&lt;/li&gt;&#xA;&lt;li&gt;fork 以待修改的项目&lt;/li&gt;&#xA;&lt;li&gt;clone/download 下来只读的项目&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;以及是否按各项目的主要语言、功能等进行分门别类。&lt;/p&gt;&#xA;&lt;p&gt;此处不关心操作系统，也不关心绝对路径，假设有一个放它们的路径，只关心相对路径的结构，例如：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;├── park&#xA;|   ├── curl&#xA;|   └── linux&#xA;└── workspace&#xA;    ├── browser-extension&#xA;    |   ├── a&#xA;    |   └── b&#xA;    └── networking&#xA;        ├── c&#xA;        └── d&#xA;&#xA;park 存放下载来的只读项目，参考自 /t/727930#r_9814514&#xA;workspace 存放开发项目，比较粗糙地进行分类&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可能相关的讨论：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://v2ex.com/t/727930&#34; rel=&#34;nofollow&#34;&gt;/t/727930&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://v2ex.com/t/828072&#34; rel=&#34;nofollow&#34;&gt;/t/828072&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>0o0O0o0O0o</author>
+      <pubDate>04 Jun 2023 02:10:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>武汉校园碾压事件，现在有没有什么车可以发动后就扫描车四周有没有人的？ - 问与答</title>
+      <link>https://www.v2ex.com/t/945606</link>
+      <description>新能源的车应该有这种功能吧？</description>
+      <author>Fixedsys</author>
+      <pubDate>04 Jun 2023 01:42:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>618 京东买了一块 rc20 1t 的 ssd 硬盘， 打算装一个外置的 MacOS，请问下有什么硬盘盒推荐吗？ - SSD</title>
+      <link>https://www.v2ex.com/t/945605</link>
+      <description>目前准备买 itgz RTL921b 的盒子，但看有的评价说有点发热。 还有说 JMS 的 JMS583 的发热会小点？有没有上手过的硬盘发热友评测一下，或者有别的推荐？&lt;br /&gt;&lt;br /&gt;用途：&lt;br /&gt;1 、外置 OS ，目前的 MBP 感觉硬盘不太够用，打算装一个外置的 MacOS ，可能时不时的插上去用了一天，跑个 Docker 什么的。&lt;br /&gt;2 、TimeMachine 备份之类的。</description>
+      <author>whooami</author>
+      <pubDate>04 Jun 2023 01:37:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>为什么再 reddit 发不了帖子? - 问与答</title>
+      <link>https://www.v2ex.com/t/945604</link>
+      <description>&lt;p&gt;用 google 账户直接登录的,发帖一直显示:Sorry, this post has been removed by the moderators of r/AskReddit.&#xA;Moderators remove posts from feeds for a variety of reasons, including keeping communities safe, civil, and true to their purpose.&#xA;这个跟 ip 和网络有关系吗? 还是其他什么原因?&lt;/p&gt;&#xA;</description>
+      <author>yhm2046</author>
+      <pubDate>04 Jun 2023 01:37:19 +0000</pubDate>
+    </item>
+    <item>
       <title>茅台小白，想给老爸买一两瓶茅台，哪里靠谱，还是就直接京东？ - 问与答</title>
       <link>https://www.v2ex.com/t/945603</link>
       <author>chichux</author>

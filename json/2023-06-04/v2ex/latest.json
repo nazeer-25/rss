@@ -4,6 +4,76 @@
   "Description": "",
   "Items": [
     {
+      "Title": "用 Go 基于 epoll 实现一个最小化 IO 库 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/945616",
+      "Description": "\u003cp\u003e目前 Go 圈有很多款异步的网络框架:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/tidwall/evio\" rel=\"nofollow\"\u003ehttps://github.com/tidwall/evio\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/lesismal/nbio\" rel=\"nofollow\"\u003ehttps://github.com/lesismal/nbio\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/panjf2000/gnet\" rel=\"nofollow\"\u003ehttps://github.com/panjf2000/gnet\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/cloudwego/netpoll\" rel=\"nofollow\"\u003ehttps://github.com/cloudwego/netpoll\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e.......\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e排名不分先后。\u003c/p\u003e\n\u003cp\u003e这里面最早的实现是 evio 。evio 也存在一些问题，之前也写过\u003ca href=\"https://www.syst.top/posts/go/evio/\" rel=\"nofollow\"\u003eevio\u003c/a\u003e文章介绍过。 其他比如 nbio 和 gnet 也写过一些源码分析。\u003c/p\u003e\n\u003cp\u003e为什么会出现这些框架？之前也提到过，由于标准库 netpoll 的一些特性:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e一个 conn 一个 goroutine 导致利用率低\u003c/li\u003e\n\u003cli\u003e用户无法感知 conn 状态\u003c/li\u003e\n\u003cli\u003e.....\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e这些框架在应用层上做了很多优化，比如:Worker Pool,Buffer,Ring Buffer,NoCopy......。\u003c/p\u003e\n\u003cp\u003e都分析了好几篇的代码了，那么咋么说也得自己动手搞一个来达成学习目的。\u003c/p\u003e\n\u003cp\u003e没错，这就是\u003ca href=\"https://github.com/wuqinqiang/easyio\" rel=\"nofollow\"\u003eeasyio\u003c/a\u003e的由来。\u003c/p\u003e\n\u003cp\u003e它是一个最小化的 IO 框架，只实现最核心的部分，加起来不超过 500 行代码。\u003c/p\u003e\n\u003cp\u003e也没有用户端上层应用的优化，且目前只实现了 linux 的 epoll ，以及只能运行 tcp 协议。\u003c/p\u003e\n\u003cp\u003e简单的 demo ，\u003c/p\u003e\n\u003cp\u003e服务端:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e\npackage main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"os\"\n\t\"os/signal\"\n\t\"syscall\"\n\n\t\"github.com/wuqinqiang/easyio\"\n)\n\nvar _ easyio.EventHandler = (*Handler)(nil)\n\ntype Handler struct{}\n\ntype EasyioKey struct{}\n\ntype Message struct{ Msg string }\n\nvar CtxKey EasyioKey\n\nfunc (h Handler) OnOpen(c easyio.Conn) context.Context {\n\treturn context.WithValue(context.Background(), CtxKey, Message{Msg: \"helloword\"})\n}\n\nfunc (h Handler) OnRead(ctx context.Context, c easyio.Conn) {\n\t_, ok := ctx.Value(CtxKey).(Message)\n\tif !ok {\n\t\treturn\n\t}\n\tvar b = make([]byte, 100)\n\t_, err := c.Read(b)\n\tif err != nil {\n\t\tfmt.Println(\"err:\", err)\n\t}\n\tfmt.Println(\"[Handler] read data:\", string(b))\n\n\tif _, err = c.Write(b); err != nil {\n\t\tpanic(err)\n\t}\n}\n\nfunc (h Handler) OnClose(_ context.Context, c easyio.Conn) {\n\tfmt.Println(\"[Handler] closed\", c.Fd())\n}\n\nfunc main() {\n\te := easyio.New(\"tcp\", \":8090\",easyio.WithNumPoller(4), easyio.WithEventHandler(Handler{}))\n\n\tif err := e.Start(); err != nil {\n\t\tpanic(err)\n\t}\n\n\tdefer e.Stop()\n\n\tc := make(chan os.Signal, 1)\n\tsignal.Notify(c, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGINT)\n\t\u0026lt;-c\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e上面的代码，初始化一个 easyio ，启动一个 tcp 服务，监听端口 8090 ，options 里面设置 epoll 的数量，以及设置事件处理器。\u003c/p\u003e\n\u003cp\u003e当一个新连接到来时会回调 OnOpen 函数，此时你可以设置自定义的 ctx ，那么当对应连接读事件到来 OnRead 回调，你可以拿到之前设置的 ctx ，调用 conn.Read 读取数据，且通过 Write 向对端写数据。\u003c/p\u003e\n\u003cp\u003e这里需要注意的是，一个连接如果数据没读完，当 OnRead 执行结束，下一轮会继续触发回调代码，因为底层 epoll 采用的是 LT 触发方式。\u003c/p\u003e\n\u003cp\u003e简单的客户端\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\"fmt\"\n\t\"net\"\n\t\"os\"\n\t\"os/signal\"\n\t\"syscall\"\n)\n\nfunc main() {\n\tconn, err := net.Dial(\"tcp\", \":8090\")\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\tn, err := conn.Write([]byte(\"hello world\"))\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\n\tgo func() {\n\t\tb := make([]byte, 100)\n\t\tif n, err = conn.Read(b); err != nil {\n\t\t\tpanic(err)\n\t\t}\n\t\tfmt.Println(\"read data:\", n, string(b))\n\t}()\n\n\tdefer conn.Close()\n\n\tch := make(chan os.Signal, 1)\n\tsignal.Notify(ch, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)\n\n\t\u0026lt;-ch\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e源码地址:\u003ca href=\"https://github.com/wuqinqiang/easyio\" rel=\"nofollow\"\u003ehttps://github.com/wuqinqiang/easyio\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "RememberCurry",
+      "PubDate": "2023-06-04T02:22:40Z"
+    },
+    {
+      "Title": "NAS 端 emby 的 OpenSubtitles 插件不工作了 - NAS",
+      "Link": "https://www.v2ex.com/t/945613",
+      "Description": "昨天晚上开始 NAS 端 emby 很多电影无法下载字幕了，能下载的也都是其他插件下载的，试了一下 Windows 上 emby 服务器还是正常的，网络也环境都一样，实在不理解了",
+      "Author": "wesleyqiu",
+      "PubDate": "2023-06-04T02:16:32Z"
+    },
+    {
+      "Title": "准备转岗软件销售，大佬们有什么建议吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/945612",
+      "Description": "做了 6 年前端被裁，社交能力差想改变一下自己，就想着转做软件销售，0 经验，大佬们有什么入门经验吗",
+      "Author": "luobogooooo",
+      "PubDate": "2023-06-04T02:16:12Z"
+    },
+    {
+      "Title": "ios17 会有些什么新功能？ - 问与答",
+      "Link": "https://www.v2ex.com/t/945611",
+      "Description": "会开放第三方商店下载吗\u003cbr /\u003e\u003cbr /\u003e会有通话录音吗\u003cbr /\u003e\u003cbr /\u003e会有双开吗",
+      "Author": "badboy200600",
+      "PubDate": "2023-06-04T02:15:06Z"
+    },
+    {
+      "Title": "神舟 z8da7np，插 minidp 显示器无反应 - 云修电脑",
+      "Link": "https://www.v2ex.com/t/945610",
+      "Description": "机子是神舟 z8da7np （ 12700h+3060laptop ），机子的 minidp 口是整机唯一一个独显直连口，发现如果在开机的情况下插显示器，插进去的那一瞬间整机界面直接卡死，如果关机插进去再开机就正常显示（且可以无限次热插拔）\u003cbr /\u003e不知 v 友有无经验？已经被折磨怕了，售后单都打出来正准备返厂了，重新插了下却发现又可以了....\u003cbr /\u003e机子是蓝天的 v150pnp ，有差不多机子的 v 友能不能帮忙测试下你们的能不能热插拔~\u003cbr /\u003e测试过开博尔的 minidp 转 hdmi/用 minidp 转 dp 再接一个绿联 dp 转 hdmi",
+      "Author": "xiaowuap",
+      "PubDate": "2023-06-04T02:14:23Z"
+    },
+    {
+      "Title": "不知不觉买了一堆便宜 VPS，买服务器居然会成瘾 - VPS",
+      "Link": "https://www.v2ex.com/t/945609",
+      "Description": "\u003cp\u003e买服务器居然也会上瘾，看到有便宜的就想买，不知不觉手里已经囤了一堆了。\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e服务商\u003c/th\u003e\n\u003cth\u003e配置\u003c/th\u003e\n\u003cth\u003e费用\u003c/th\u003e\n\u003cth\u003e用途\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e腾讯轻量无忧\u003c/td\u003e\n\u003ctd\u003e1C2G\u003c/td\u003e\n\u003ctd\u003e190/年\u003c/td\u003e\n\u003ctd\u003e备案的网站、笔记、Bitwarden 、Gitea\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e腾讯云首单优惠\u003c/td\u003e\n\u003ctd\u003e2C4G\u003c/td\u003e\n\u003ctd\u003e158 马上到期了\u003c/td\u003e\n\u003ctd\u003e闲置\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e狗云香港\u003c/td\u003e\n\u003ctd\u003e1C1G\u003c/td\u003e\n\u003ctd\u003e100/ 年\u003c/td\u003e\n\u003ctd\u003e魔法、建站\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e狗云香港\u003c/td\u003e\n\u003ctd\u003e1C1G\u003c/td\u003e\n\u003ctd\u003e100/年\u003c/td\u003e\n\u003ctd\u003e魔法\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e野草云\u003c/td\u003e\n\u003ctd\u003e2C8G\u003c/td\u003e\n\u003ctd\u003e266/年\u003c/td\u003e\n\u003ctd\u003e开发测试环境\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eracknerd\u003c/td\u003e\n\u003ctd\u003e2C3G\u003c/td\u003e\n\u003ctd\u003e$32/年\u003c/td\u003e\n\u003ctd\u003e邮箱服务、魔法\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eracknerd\u003c/td\u003e\n\u003ctd\u003e1C 0.5G\u003c/td\u003e\n\u003ctd\u003e$10/年\u003c/td\u003e\n\u003ctd\u003e魔法\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\u003c/table\u003e\u003cp\u003e除了国内的腾讯云轻量，其他的服务器负载很低，几户算是闲置了，还能再搭建什么服务让其物尽其用呢。\u003c/p\u003e\n",
+      "Author": "vincent7245",
+      "PubDate": "2023-06-04T02:13:25Z"
+    },
+    {
+      "Title": "你们在个人电脑上是怎么管理文件的 - 问与答",
+      "Link": "https://www.v2ex.com/t/945608",
+      "Description": "\u003cp\u003e主要指项目源码，例如：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e私密的个人项目\u003c/li\u003e\n\u003cli\u003e公开的个人项目\u003c/li\u003e\n\u003cli\u003efork 以待修改的项目\u003c/li\u003e\n\u003cli\u003eclone/download 下来只读的项目\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e以及是否按各项目的主要语言、功能等进行分门别类。\u003c/p\u003e\n\u003cp\u003e此处不关心操作系统，也不关心绝对路径，假设有一个放它们的路径，只关心相对路径的结构，例如：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e├── park\n|   ├── curl\n|   └── linux\n└── workspace\n    ├── browser-extension\n    |   ├── a\n    |   └── b\n    └── networking\n        ├── c\n        └── d\n\npark 存放下载来的只读项目，参考自 /t/727930#r_9814514\nworkspace 存放开发项目，比较粗糙地进行分类\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可能相关的讨论：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://v2ex.com/t/727930\" rel=\"nofollow\"\u003e/t/727930\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://v2ex.com/t/828072\" rel=\"nofollow\"\u003e/t/828072\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "0o0O0o0O0o",
+      "PubDate": "2023-06-04T02:10:06Z"
+    },
+    {
+      "Title": "武汉校园碾压事件，现在有没有什么车可以发动后就扫描车四周有没有人的？ - 问与答",
+      "Link": "https://www.v2ex.com/t/945606",
+      "Description": "新能源的车应该有这种功能吧？",
+      "Author": "Fixedsys",
+      "PubDate": "2023-06-04T01:42:26Z"
+    },
+    {
+      "Title": "618 京东买了一块 rc20 1t 的 ssd 硬盘， 打算装一个外置的 MacOS，请问下有什么硬盘盒推荐吗？ - SSD",
+      "Link": "https://www.v2ex.com/t/945605",
+      "Description": "目前准备买 itgz RTL921b 的盒子，但看有的评价说有点发热。 还有说 JMS 的 JMS583 的发热会小点？有没有上手过的硬盘发热友评测一下，或者有别的推荐？\u003cbr /\u003e\u003cbr /\u003e用途：\u003cbr /\u003e1 、外置 OS ，目前的 MBP 感觉硬盘不太够用，打算装一个外置的 MacOS ，可能时不时的插上去用了一天，跑个 Docker 什么的。\u003cbr /\u003e2 、TimeMachine 备份之类的。",
+      "Author": "whooami",
+      "PubDate": "2023-06-04T01:37:54Z"
+    },
+    {
+      "Title": "为什么再 reddit 发不了帖子? - 问与答",
+      "Link": "https://www.v2ex.com/t/945604",
+      "Description": "\u003cp\u003e用 google 账户直接登录的,发帖一直显示:Sorry, this post has been removed by the moderators of r/AskReddit.\nModerators remove posts from feeds for a variety of reasons, including keeping communities safe, civil, and true to their purpose.\n这个跟 ip 和网络有关系吗? 还是其他什么原因?\u003c/p\u003e\n",
+      "Author": "yhm2046",
+      "PubDate": "2023-06-04T01:37:19Z"
+    },
+    {
       "Title": "茅台小白，想给老爸买一两瓶茅台，哪里靠谱，还是就直接京东？ - 问与答",
       "Link": "https://www.v2ex.com/t/945603",
       "Description": "",
