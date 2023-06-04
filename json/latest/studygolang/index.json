@@ -18,6 +18,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "为什么取消了Go1.21，而采用了Go1.21.0的版本命名规则",
+      "Link": "https://studygolang.com/topics/16388#reply0",
+      "Description": "\u003cp\u003eGo语言的发展遵循了一个设计驱动的过程，任何对语言、库或工具的重大改变或增加都必须经过提议、讨论和文档化的步骤，才能被实现。\u003c/p\u003e\n\n\u003cp\u003eGo语言的版本号由三部分组成：主版本号、次版本号和修订号。例如，Go 1.20.4 表示第一代Go语言的第20个次版本的第4次修订。Go语言的版本号遵循了一个简单而清晰的原则：只有在保证向后兼容性的情况下，才会增加次版本号或修订号；如果需要引入不兼容的变化，就需要增加主版本号。这样可以保证Go语言的稳定性和一致性，也方便开发者和用户管理和使用不同版本的Go语言。\u003c/p\u003e\n\n\u003cp\u003e然而，Go语言的版本命名规则也存在一些问题和不一致。在主版本或次版本发布时，第三位数字（修订号）被省略了。例如，Go 1.20 表示第一代Go语言的第20个次版本的第0次修订。这样做可能会导致一些混淆和误解，比如在go.mod文件中使用三位数字的版本号（如go 1.20.0），而在其他地方使用两位数字的版本号（如go 1.20）；而且 Go1.20 这样的版本会让一些开发者感到困惑，不清楚他们正在运行或应该运行哪个版本。一些早期的评论也表达了类似的观点，希望第一个补丁版本能用 go1.20.0 而不是 go1.20 来命名。\u003c/p\u003e\n\n\u003cp\u003e为了解决这些问题，有人提出了一个关于Go语言的版本命名规则的提议（\u003ca href=\"https://github.com/golang/go/issues/57631）。提议的内容是，在主/次版本发布时，在第三位数字使用零，而不是省略它。例如，Go\"\u003ehttps://github.com/golang/go/issues/57631）。提议的内容是，在主/次版本发布时，在第三位数字使用零，而不是省略它。例如，Go\u003c/a\u003e 1.21.0 表示第一代Go语言的第21个次版本的第0次修订。这样可以避免一些混淆和不一致，也可以保持与go.mod文件中使用的三位数字版本号相同。\u003c/p\u003e\n\n\u003cp\u003e这个提议已经被接受，并计划在 Go 1.21 中实施。这个提议对于 Go 语言本身并没有引入任何功能或行为上的变化，只是对于版本命名规则做了一个小而合理的改进。这个改进可以让 Go 语言的版本号更加清晰和一致，也可以给开发者和用户带来一些便利。当然，这个改变也会带来一些成本，比如需要更新一些文档、代码和工具。但是，相比于它带来的好处，这些成本应该是可以接受和承担的。\u003c/p\u003e\n\n\u003cp\u003e总之，这个提议是一个关于 Go 语言的版本命名规则的改进建议，它旨在解决当前存在的一些问题和不一致，并提高 Go 语言的可用性和易用性。这个提议已经得到了社区的支持和认可，并将在未来实施。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "用post方法发送json数据失败，",
       "Link": "https://studygolang.com/topics/16386#reply2",
       "Description": "\u003cp\u003e我想要调用http.NewRequest方法到服务器接口发送json数据，但是返回的结果是失败，但是用http.Post方法到服务器接口发送json数据成功，现在想不通问题出在什么地方，请给指点一二谢谢！\n\u0026ldquo;`\npackage hrlib\u003c/p\u003e\n\n\u003cp\u003eimport (\n\t\u0026ldquo;bytes\u0026rdquo;\n\t\u0026ldquo;encoding/json\u0026rdquo;\n\t\u0026ldquo;fmt\u0026rdquo;\n\t\u0026ldquo;io/ioutil\u0026rdquo;\n\t\u0026ldquo;log\u0026rdquo;\n\t\u0026ldquo;net/http\u0026rdquo;\n\t\u0026ldquo;time\u0026rdquo;\n)\n//人员用户考勤信息\ntype kqInfo struct {\n\tUserLname string \u003ccode\u003ejson:\u0026quot;userLname\u0026quot;\u003c/code\u003e\n\tUserNo    string \u003ccode\u003ejson:\u0026quot;userNo\u0026quot;\u003c/code\u003e\n\tKssj      string \u003ccode\u003ejson:\u0026quot;kssj\u0026quot;\u003c/code\u003e\n\tJssj      string \u003ccode\u003ejson:\u0026quot;jssj\u0026quot;\u003c/code\u003e\n}\ntype userInfo struct {\n\tPageIndex int    \u003ccode\u003ejson:\u0026quot;pageIndex\u0026quot;\u003c/code\u003e\n\tPageSize  int    \u003ccode\u003ejson:\u0026quot;pageSize\u0026quot;\u003c/code\u003e\n\tSearch    kqInfo \u003ccode\u003ejson:\u0026quot;search\u0026quot;\u003c/code\u003e\n}\u003c/p\u003e\n\n\u003cp\u003e//返回一个要查询的用户对象\nfunc NewUserInfo() *userInfo {\n\tvar kssj = time.Date(2023, 6, 1, 8, 0, 0, 0, time.UTC).Format(\u0026ldquo;2006-01-02 15:04:05\u0026rdquo;)\n\tvar jssj = time.Date(2023, 6, 1, 23, 0, 0, 0, time.UTC).Format(\u0026ldquo;2006-01-02 15:04:05\u0026rdquo;)\n\treturn \u0026amp;userInfo{\n\t\tPageIndex: 1,\n\t\tPageSize:  3,\n\t\tSearch: kqInfo{\n\t\t\tUserLname: \u0026ldquo;张三\u0026rdquo;,\n\t\t\tUserNo:    \u0026ldquo;2016050395\u0026rdquo;,\n\t\t\tKssj:      kssj,\n\t\t\tJssj:      jssj,\n\t\t},\n\t}\n}\n//获取用户考勤信息\nfunc GetUser() {\n\tvar url = \u0026ldquo;\u003ca href=\"http://192.168.1.100:20039/api/kq/getKqjl\u0026quot;\"\u003ehttp://192.168.1.100:20039/api/kq/getKqjl\u0026rdquo;\u003c/a\u003e\n\tvar kqUserInfo = NewUserInfo()\n\tvar kqData,err = json.Marshal(kqUserInfo)\n\tif err != nil{\n\t\tlog.Println(\u0026ldquo;json序列化错误\u0026rdquo;)\n\t\treturn\n\t}\n\treq, err := http.NewRequest(\u0026ldquo;post\u0026rdquo;, url, bytes.NewReader(kqData))\n\tif err != nil {\n\t\tlog.Println(err)\n\t\treturn\n\t}\n\treq.Header.Set(\u0026ldquo;content-Type\u0026rdquo;, \u0026ldquo;application/json\u0026rdquo;)\n\tvar client = http.DefaultClient\n\tresp, err := client.Do(req)\n\tif err != nil {\n\t\tlog.Println(\u0026ldquo;服务端响应失败\u0026rdquo;)\n\t\treturn\n\t}\n\t//用Post这个方法返回的resp响应就没有问题\n        //resp,_:=http.Post(url,\u0026ldquo;application/json\u0026rdquo;,bytes.NewReader(kqData))\n\tdefer resp.Body.Close()\n\tbody, err := ioutil.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Println(\u0026ldquo;数据读取失败\u0026rdquo;)\n\t\treturn\n\t}\n\tfmt.Printf(\u0026ldquo;%s\\n\u0026rdquo;, body)\n}\u0026ldquo;`\u003c/p\u003e\n",
@@ -25,16 +32,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "有没有还没体验过ChatGPT的？发一个免费的， 直接在公众号里提问的",
-      "Link": "https://studygolang.com/articles/36156#reply0",
-      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230603/3c84cbea13043b86dd26c3b655e86c64.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Title": "Kong与Nginx",
+      "Link": "https://studygolang.com/articles/36155#reply0",
+      "Description": "\u003ch3\u003ekong与Nginx\u003c/h3\u003e\n\n\u003ch4\u003e1. Kong是基于Nginx开发的\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003ekong的底层网络处理是使用的nginx，基于nginx的lua编程，实现了灵活的配置；\nkong同样使用插件机制。\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e2. 完善的GUI和插件安装\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003ekong 提供了基于浏览器的web-gui，使用开启插件的方式开启流控、灰度调度、机器标量统计等功能功能；\n更重要的是： kong使用了route、service、upstream的概念，用户可在gui上方便的配置路由和负载服务\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e3. 收费与插件不可用\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003ekong是收费的，免费部分仅提供了路由（可用web-admin配置）；web-admin的权限管理机制等很多插件存在bug，基于postgresql的配置和配置文件（kong.conf）, 对数据表同步更新存在问题\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Kong与Nginx",
-      "Link": "https://studygolang.com/articles/36155#reply0",
-      "Description": "\u003ch3\u003ekong与Nginx\u003c/h3\u003e\n\n\u003ch4\u003e1. Kong是基于Nginx开发的\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003ekong的底层网络处理是使用的nginx，基于nginx的lua编程，实现了灵活的配置；\nkong同样使用插件机制。\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e2. 完善的GUI和插件安装\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003ekong 提供了基于浏览器的web-gui，使用开启插件的方式开启流控、灰度调度、机器标量统计等功能功能；\n更重要的是： kong使用了route、service、upstream的概念，用户可在gui上方便的配置路由和负载服务\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch4\u003e3. 收费与插件不可用\u003c/h4\u003e\n\n\u003cpre\u003e\u003ccode\u003ekong是收费的，免费部分仅提供了路由（可用web-admin配置）；web-admin的权限管理机制等很多插件存在bug，基于postgresql的配置和配置文件（kong.conf）, 对数据表同步更新存在问题\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Title": "有没有还没体验过ChatGPT的？发一个免费的， 直接在公众号里提问的",
+      "Link": "https://studygolang.com/articles/36156#reply0",
+      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230603/3c84cbea13043b86dd26c3b655e86c64.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
