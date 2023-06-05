@@ -19,7 +19,7 @@
     </item>
     <item>
       <title>Gin框架使用goroutine中处理模型绑定遇到问题，请教。</title>
-      <link>https://studygolang.com/topics/16391#reply3</link>
+      <link>https://studygolang.com/topics/16391#reply4</link>
       <description>&lt;p&gt;在gin代码中使用了goroutine处理POST请求过来的json数据&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以下示例代码中，绑定请求获得的data，经常除了第一次有数据以外，其它请求获得都是一个空map，这个代码有什么问题？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;有没有老大指教一下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#xA;&#x9;&amp;quot;github.com/gin-gonic/gin&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;r := gin.Default()&#xA;&#xA;    r.POST(&amp;quot;/task&amp;quot;, task)&#xA;&#xA;    r.Run()&#xA;}&#xA;&#xA;func task(c *gin.Context) {&#xA;    &#xA;    cc := c.Copy()&#xA;&#xA;    go func (c *gin.Context)  {&#xA;        data := make(map[string]interface{})&#xA;        c.ShouldBindJSON(&amp;amp;data)&#xA;        fmt.Println(&amp;quot;task start&amp;quot;)&#xA;        fmt.Println(data)&#xA;        fmt.Println(&amp;quot;task end&amp;quot;)&#xA;    } (cc)&#xA;&#xA;    c.JSON(200, gin.H{&#xA;        &amp;quot;result&amp;quot;: &amp;quot;success&amp;quot;,&#xA;    })&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
@@ -98,6 +98,11 @@
     <item>
       <title>支付工具 银联支付</title>
       <link>https://studygolang.com/p/1142#reply0</link>
+    </item>
+    <item>
+      <title>Gin框架使用goroutine中处理模型绑定遇到问题，请教。</title>
+      <link>https://studygolang.com/topics/16391#reply3</link>
+      <description>&lt;p&gt;在gin代码中使用了goroutine处理POST请求过来的json数据&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以下示例代码中，绑定请求获得的data，经常除了第一次有数据以外，其它请求获得都是一个空map，这个代码有什么问题？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;有没有老大指教一下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#xA;&#x9;&amp;quot;github.com/gin-gonic/gin&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;r := gin.Default()&#xA;&#xA;    r.POST(&amp;quot;/task&amp;quot;, task)&#xA;&#xA;    r.Run()&#xA;}&#xA;&#xA;func task(c *gin.Context) {&#xA;    &#xA;    cc := c.Copy()&#xA;&#xA;    go func (c *gin.Context)  {&#xA;        data := make(map[string]interface{})&#xA;        c.ShouldBindJSON(&amp;amp;data)&#xA;        fmt.Println(&amp;quot;task start&amp;quot;)&#xA;        fmt.Println(data)&#xA;        fmt.Println(&amp;quot;task end&amp;quot;)&#xA;    } (cc)&#xA;&#xA;    c.JSON(200, gin.H{&#xA;        &amp;quot;result&amp;quot;: &amp;quot;success&amp;quot;,&#xA;    })&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>for真的会独占CPU吗？</title>
