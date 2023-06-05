@@ -4,6 +4,125 @@
   "Description": "",
   "Items": [
     {
+      "Title": "4C-2G 来战 [ Golang Websocket 百万连接测试 ] - 程序员",
+      "Link": "https://www.v2ex.com/t/945827",
+      "Description": "\u003ch1\u003e4C-2G 来战 [ Golang Websocket 百万连接测试 ]\u003c/h1\u003e\n\u003cp\u003e代码代码： \u003ca href=\"https://github.com/lesismal/go-websocket-benchmark\" rel=\"nofollow\"\u003ehttps://github.com/lesismal/go-websocket-benchmark\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e使用框架： \u003ca href=\"https://github.com/lesismal/nbio\" rel=\"nofollow\"\u003ehttps://github.com/lesismal/nbio\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e总结：4cpu 核心，2G 内存，100 万连接，1k 数据载荷，500 万次 Echo 测试，TPS 10+万，详情请继续往下看。\u003c/p\u003e\n\u003cp\u003e看到隔壁帖子一些人上来就说这没用那没用\n\u003ca href=\"https://www.v2ex.com/t/945616\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/945616\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e想起之前自己帖子也是类似：\n\u003ca href=\"https://www.v2ex.com/t/755862\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/755862\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e之前几次也是被好些人说 nbio 这没用那没用，所以有感而发。\u003c/p\u003e\n\u003cp\u003ePS：期待 @\u003ca href=\"/member/byte10\"\u003ebyte10\u003c/a\u003e 大神百忙之中能再来与我讨论技术。\u003c/p\u003e\n\u003cp\u003e前置声明：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e绝大多数人不需要百万级连接场景的优化，但确实有公司有项目有人需要，搞这些东西就是为了满足这些需要；\u003c/li\u003e\n\u003cli\u003e标题 4C-2G 只是作为一个参考指标，用不是特别高的配置更能体现框架的承载力。采用这个配置并不是鼓励实际场景就要用这么低的配置去处理百万连接，实际场景应从实际出发；\u003c/li\u003e\n\u003cli\u003e否定别人只需要动动嘴，但技术是实在的，如果也有兄弟姐妹想说 nbio 之类的 poller 没用，请确认自己真正了解相关知识，然后带上实际的论据观点再来讨论，如果实在想这么讲，也请先看下旧帖。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e以前很多次遇到很多人先入为主地以为异步框架就是要写回调、golang 框架也如此。\n为了避免误解，这里也再对 nbio 的同步异步做下简要说明：\nnbio 底层非阻塞、异步 io ，但使用逻辑协程池处理 http 请求、websocket 消息，由于 golang 协程不像进程线程成本那么高，所以逻辑协程池 size 比 c/cpp 或者其他语言的逻辑线程数量大得多，所以用户仍然可以写同步逻辑，实际上也是这样处理的。\u003c/p\u003e\n\u003cp\u003e为了避免既当裁判又当运动员、甚至误导用户，每当有人问我性能时，我通常是建议用户以自己实测得到的性能数据为准，而不是直接相信测试库作者提供的数据。所以建议有兴趣的兄弟姐妹在自己环境进行测试。\u003c/p\u003e\n\u003cp\u003e如果测试库代码有误，欢迎 Issue/PR 来指正更正。\u003c/p\u003e\n\u003cp\u003e在这里也邀请并欢迎大家来跑下多个 go websocket 框架的测试，并留言到这里供参考：\n\u003ca href=\"https://github.com/lesismal/go-websocket-benchmark/issues/11\" rel=\"nofollow\"\u003ehttps://github.com/lesismal/go-websocket-benchmark/issues/11\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e另外：除了 nbio 以外的其他 go websocket 框架多数主要是基于 golang 标准库、每个连接一个协程，这种普通配置的硬件上无法跑到海量连接，所以百万连接测试的脚本默认只针对 nbio 自己，如果想测试更多参数，请自行修改脚本。\ngev 支持百万但不支持 TLS ，gobwas+netpoll 有 for loop 阻塞问题，所以目前没有添加它们，以后可能会添加。\u003c/p\u003e\n\u003cp\u003e下面是我的 ubuntu vm 上跑的数据，仅供参考\u003c/p\u003e\n\u003cp\u003e环境：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sh\"\u003e--------------------------------------------------------------\nos:\n\nUbuntu 20.04.6 LTS \\n \\l\n\n--------------------------------------------------------------\ncpu model:\n\nmodel name\t: AMD Ryzen 7 5800H with Radeon Graphics\n--------------------------------------------------------------\n              total        used        free      shared  buff/cache   available\nMem:       16362568      396988    15151676        1636      813904    15656380\nSwap:             0           0           0\n--------------------------------------------------------------\n# taskset 0-3, nbio server 只占 4 cpu 核心\nrun nbio_nonblocking server on cpu 0-3\n--------------------------------------------------------------\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e压测结果：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sh\"\u003e--------------------------------------------------------------\nBenchType  : Connections\nFramework  : nbio_nonblocking\nTPS        : 26545    # 每秒建立连接数\nMin        : 20ns     # 建立单个连接最小耗时\nAvg        : 74.80ms  # 建立单个连接平均耗时\nMax        : 37.67s   # 建立单个连接最大耗时（实际压测并发度大，有一些容易失败，目前测试逻辑会重试、多次重试时间导致最大值时间较长）\nTP50       : 30ns     # 前 50%次建立连接最大耗时\nTP75       : 30ns     # 前 75%次建立连接最大耗时\nTP90       : 30ns     # 前 90%次建立连接最大耗时\nTP95       : 30ns     # 前 95%次建立连接最大耗时\nTP99       : 31ns     # 前 99%次建立连接最大耗时\nUsed       : 37.67s   # 总耗时\nTotal      : 1000000  # 建立连接数\nSuccess    : 1000000  # 成功建立连接数\nFailed     : 0        # 建立连接成功数（实际压测并发度大，有一些容易失败，目前测试逻辑会重试、多次重试都失败才算失败）\nConcurrency: 2000     # 并发度（ 2000 个协程，每个协程循环建立连接）\n--------------------------------------------------------------\nBenchType  : BenchEcho\nFramework  : nbio_nonblocking\nTPS        : 113789     # 每秒 Echo 次数\nMin        : 182.56us   # 单次 Echo 最小耗时\nAvg        : 435.80ms   # 单次 Echo 平均耗时\nMax        : 1.69s      # 单次 Echo 最大耗时\nTP50       : 407.61ms   # 前 50%次 Echo 最大耗时\nTP75       : 554.56ms   # 前 75%次 Echo 最大耗时\nTP90       : 698.06ms   # 前 90%次 Echo 最大耗时\nTP95       : 800.52ms   # 前 95%次 Echo 最大耗时\nTP99       : 1.07s      # 前 99%次 Echo 最大耗时\nUsed       : 43.94s     # 总耗时\nTotal      : 5000000    # 测试 Echo 次数\nSuccess    : 5000000    # 测试 Echo 的成功次数\nFailed     : 0          # 测试 Echo 的失败次数\nConns      : 1000000    # 测试的连接数\nConcurrency: 50000      # 并发度（ 5w 个协程，每个协程循环取当前可用的连接进行 Echo ）\nPayload    : 1024       # websocket body size\nCPU Min    : 95.96%     # CPU 最小值（采集开始时较小）\nCPU Avg    : 347.80%    # CPU 平均值\nCPU Max    : 380.94%    # CPU 最大值\nMEM Min    : 1.82G      # MEM 最小值（ Benchmark 开始前有进行 Warmup ，所以起始内存最低值已经较大）\nMEM Avg    : 1.92G      # MEM 平均值\nMEM Max    : 1.94G      # MEM 最大值\n---------------------------------------------------------------------------------------------------\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "lesismal",
+      "PubDate": "2023-06-05T02:08:44Z"
+    },
+    {
+      "Title": "分享一首我很喜欢的 说唱 歌曲 - 分享发现",
+      "Link": "https://www.v2ex.com/t/945826",
+      "Description": "\u003cp\u003e我是烟台人，和东北隔渤海相望。\u003c/p\u003e\n\u003cp\u003e我没去过东北，但我一直很喜欢东北向往东北。我喜欢东北人的乐观爽朗，喜欢东北小品二人转的欢乐，大概是从小看本山大叔小品受的熏陶吧。\u003c/p\u003e\n\u003cp\u003e宝石的这首说唱，结合了二人转、民间小调，讲述了东北的兴与衰，从闯关东再到离乡的游子，我很受触动。第一遍听就顶的热泪盈眶。\u003c/p\u003e\n\u003cp\u003e👉 \u003ca href=\"https://www.bilibili.com/video/BV1BK411N7E1/?share_source=copy_web\u0026amp;vd_source=f706b59de5a4cd772801ea28aea57d2e\" rel=\"nofollow\"\u003e [宝石 Gem 《送情郎·东雪》]  \u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "iyobucuo",
+      "PubDate": "2023-06-05T02:07:33Z"
+    },
+    {
+      "Title": "618 买了绿联 DX4600+进入 BIOS - NAS",
+      "Link": "https://www.v2ex.com/t/945825",
+      "Description": "\u003cp\u003e618 买了一台绿联 DX4600+，不为别的，因为它有 HDMI 接口，在 6 月 3 日送到，体验了一下绿联的系统发现很不习惯，虽然界面不错，便萌生了给它刷个 OMV 的系统，从网上找了 DX4600 盲启动黑群晖的教程发现不论是按下 DEL 键还是 F1-F12 键，一直进入的是 grub 界面，经过不断尝试，最终发现是 Ctrl+F2 进入 BIOS ，进入 BIOS 先关闭看门狗，否则会重启\u003c/p\u003e\n\u003cp\u003e首发于 Bilibili\u003c/p\u003e\n",
+      "Author": "zhao1cheng",
+      "PubDate": "2023-06-05T02:06:56Z"
+    },
+    {
+      "Title": "windows 自带的远程桌面怎么避免操作被旁边人看到 - 问与答",
+      "Link": "https://www.v2ex.com/t/945823",
+      "Description": "\u003cp\u003e远程的时候，电脑旁边可能有人，怎样不让别人看到。\n类似 todesk 、向日葵有隐私屏的功能，但是这类软件被公司防火墙屏蔽了\u003c/p\u003e\n",
+      "Author": "0139",
+      "PubDate": "2023-06-05T02:02:23Z"
+    },
+    {
+      "Title": "使用一张照片和视频的 AI 换脸，是不是专门训练的模型哇 - OpenAI",
+      "Link": "https://www.v2ex.com/t/945822",
+      "Description": "\u003cp\u003e以我对 AI 训练的粗浅了解，正常的换脸视频，都是先对视频大量的计算之后，再将照片上的脸抠出来，再大量的计算给贴上去。\u003c/p\u003e\n\u003cp\u003e但是最近看到恶搞马老师的视频，陆续也出了很多类似的，就是一个小孩儿打针的视频，看起来像是针对每个视频单独生成换脸模型，只需要传一张照片，简单抠出来后，用那模型直接计算就能得到视频了，比以前大量计算的思路好像快不少。\u003c/p\u003e\n\u003cp\u003e视频链接： \u003ca href=\"https://www.bilibili.com/video/BV1UN411C74w/?spm_id_from=333.337.search-card.all.click\u0026amp;vd_source=acc9b7548f424e62461918b9775eefb5\" rel=\"nofollow\"\u003ehttps://www.bilibili.com/video/BV1UN411C74w/?spm_id_from=333.337.search-card.all.click\u0026amp;vd_source=acc9b7548f424e62461918b9775eefb5\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "shicang1990",
+      "PubDate": "2023-06-05T02:01:19Z"
+    },
+    {
+      "Title": "北京换到上海工作，社保该怎么操作？ - 问与答",
+      "Link": "https://www.v2ex.com/t/945821",
+      "Description": "7 月就要换到上海工作了，但现在在北京已经交了 8 年的社保，公积金已全部取出，剩余的养老、医疗保险需要 /可以转到上海吗？是否有必要，比如我如果在上海退休，如果不转的话北京这 8 年已缴的社保是如何结算的，懂哥来指教下。",
+      "Author": "miKaSaAkerMan",
+      "PubDate": "2023-06-05T01:57:51Z"
+    },
+    {
+      "Title": "我又要折腾家里网络了，求指教 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/945818",
+      "Description": "\u003cp\u003e需求：想上 appletv 看视频，想上 nas ，用 infuse 看视频（这样就可以省下偶尔看 netflix 的花费了，还有想攒些经典的动画片给我女儿以后看）\u003c/p\u003e\n\u003cp\u003e问题：1 、我现在的 openwrt 速度跑的很低（用的 openclash ），我千兆电信，国内网速以前还有 600M 现在只有 3-400M 了，我的固件好像有问题了，虽然没断过网，最近我进管理后台，经常进不去，或者操作卡死，然后只能断电重启\n2 、如果上 nas 搞 pt 家里网络该怎么改造（ pt 应该只走国内的网吧？不影响机场流量吧，规则咋弄）\u003c/p\u003e\n\u003cp\u003e现在的网络环境: 光猫=\u0026gt;r4s(桥接模式，我默认网关没改，导致只能进入软路由管理后台，进光猫的要拔线，这个有其他影响吗)=\u0026gt;交换机=\u0026gt;小米无线路由器\u003c/p\u003e\n",
+      "Author": "tutou",
+      "PubDate": "2023-06-05T01:47:53Z"
+    },
+    {
+      "Title": "轿车 ETC 重新插拔卡滴一声闪一下绿灯和滴两声不闪灯区别是啥啊？ - 问与答",
+      "Link": "https://www.v2ex.com/t/945817",
+      "Description": "\u003cp\u003e之前由于挡住视线，把 ETC 从车上扯了下来，确保开关按下去粘住后，重新激活了下。后面经常插拔卡确认是否有电。ETC 是那种没有电子屏幕的，重新插拔卡的时候，开始时滴滴两声，不闪灯。昨天晒了一上午太阳后，重新插拔就是之滴一声，还闪一下绿灯。没找到说明书，搞不懂这个是什么原因？有没有大佬懂得讲一下？\u003c/p\u003e\n",
+      "Author": "tojohnonly",
+      "PubDate": "2023-06-05T01:47:22Z"
+    },
+    {
+      "Title": "618 14 寸 macbook pro 竟然涨价了 - Apple",
+      "Link": "https://www.v2ex.com/t/945815",
+      "Description": "之前 9500 本来想入手 m1 pro 14 的，后来还是等等 618.。。\u003cbr /\u003e结果现在貌似还贵了 1000\u003cbr /\u003e\u003cbr /\u003e最终上海鲜市场花了 9500 淘了一个 14 寸 10+16 16g 1t 的 mbp 。。。21 年 12 月激活",
+      "Author": "nonone",
+      "PubDate": "2023-06-05T01:46:48Z"
+    },
+    {
+      "Title": "失业设计师开一贴记录一下品牌香薰的创业历程吧 - 推广",
+      "Link": "https://www.v2ex.com/t/945814",
+      "Description": "\u003cp\u003e上周想到在 v 站上宣传一下自己的品牌，本想着带动一下自己的店铺的人气，没想到 v 友喜欢香薰的还蛮多的，很多直接去店里下单了，着实感动。\n30 岁以前或者以前上班的的时候从来没有想过会自己创业，也没有这种勇气。但是人的变化实在是很奇妙，希望在 v 站流水账的形式记录一下自己的创业历程，能给有相同想法的朋友一点经验。\n这个帖子主要以日常记录和经验分享为主，就不广告了。对我们品牌香薰有兴趣的 v 友可以戳下这里 \u003ca href=\"https://www.v2ex.com/t/945375\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/945375\u003c/a\u003e\n另外也欢迎广大 v 友给我们提建议或者相法，或者能有商务合作更好了～\u003c/p\u003e\n\u003cp\u003e老规矩，互动每隔 50 楼送一个旅行装香薰蜡烛，帖子一直更下去就一直送\u003c/p\u003e\n",
+      "Author": "xiaocongcong",
+      "PubDate": "2023-06-05T01:45:47Z"
+    },
+    {
+      "Title": "小红薯上成都周围可以游玩的地方感觉人都挺多的 - 成都",
+      "Link": "https://www.v2ex.com/t/945813",
+      "Description": "\u003cp\u003e大家有没有那种人少清净的地方可以推荐呢\n比较休闲适合两三个人玩，可以露露营或者插插水的地方\u003c/p\u003e\n",
+      "Author": "paranoidxxx",
+      "PubDate": "2023-06-05T01:45:18Z"
+    },
+    {
+      "Title": "macOS Ventura 弹窗提示升级到 Monterey? - macOS",
+      "Link": "https://www.v2ex.com/t/945812",
+      "Description": "\u003cp\u003e\u003cimg alt=\"如图，早已是最新版 Ventura ，却还弹窗提示升级到 Monterey\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.huili.dev/2023/06/e662d81dd6b2806e40acd96b0e76453a.jpg\"/\u003e\u003c/p\u003e\n\u003cp\u003e我另一台 Monterey 年初的时候也提示过这个，以为是没到最新版 Monterey ，没太在意，结果手上这台 macbook with Ventura 竟然也提示 upgrade to Monterey ，打开 launchpad 有 install macos Monterey.app ，删除后没多久又自行安装回来了。。。这 bug 有朋友遇到过吗，咋解决的\u003c/p\u003e\n",
+      "Author": "greenlihui",
+      "PubDate": "2023-06-05T01:44:20Z"
+    },
+    {
+      "Title": "为了减少重复的 CURD 工作，我写了一个库 - 分享创造",
+      "Link": "https://www.v2ex.com/t/945811",
+      "Description": "\u003ch2\u003e动机\u003c/h2\u003e\n\u003cp\u003e在软件开发中，后台应用的开发是一个非常重要的环节。然而，很多开发者对于后台应用的开发都深恶痛绝。这是因为很多后台应用都是重复的增删改查加上一些小小的特殊逻辑。这些重复性模板上的工作非常不值得花费时间。\u003c/p\u003e\n\u003cp\u003e与此同时，我们可以看到，大部分 UI 系统都有大量相同的重复工作（如按钮、表单、排版、展示等）。同样地，大部分后台管理平台也有大量相同重复工作。如果我们能够把 UI 需求抽象成一个个 xx-design ，为什么我们后台需求不能抽象成一个开箱即用库呢？\u003c/p\u003e\n\u003ch2\u003eTushan 的特殊之处在哪里\u003c/h2\u003e\n\u003cp\u003e现在市面上有很多现成的、完整的 \u003ccode\u003exx-admin\u003c/code\u003e 应用，直接就做好了一个完整的 \u003ccode\u003eadmin\u003c/code\u003e 项目然后提供给你。直接给你提供一整套的技术栈，你只需要直接运行命令就可以启动了，然后再根据你的需求进行修改与调整。\u003c/p\u003e\n\u003cp\u003e但是这些真的好用么？一下子面对一个完整的、庞大的系统，相信很多人都是手足无措的，不得不花费大量的时间去学习文档、阅读源码的。很多刚入门的新手或者初次接触到这类系统的同学会将原因归类在自身，是自己的能力问题。但是我多年的编程经验来看，这其实并不是开发者自身的问题。\u003c/p\u003e\n\u003ch4\u003e做减法永远比做加法难\u003c/h4\u003e\n\u003cp\u003e市面上大多数系统都是做好了一个完整的应用让你去做减法，而后期当你的需求超出预设的框架时，相当于天然的背负了大量技术负债 —— 技术负债往往是因为同一个系统前期和后期的设计目的是不一样导致的，而现成的系统当然不能完全匹配上想要进行二次开发的需求。因此这就是为什么很多开发者不愿意去做一个完整系统的二次开发。\u003c/p\u003e\n\u003cp\u003e随着投入的增加，往往会面临着重构的情况。最后不得不推倒重来，这也是这类现成系统的上限所在。\u003c/p\u003e\n\u003cp\u003e而\u003ccode\u003etushan\u003c/code\u003e的设计就是想要打破传统\u003ccode\u003exx-admin\u003c/code\u003e系统上手难、开发难、学习成本高、上限低的困境。\u003c/p\u003e\n\u003cp\u003e相比于一个现成系统，\u003ccode\u003etushan\u003c/code\u003e更多的将自己定位成一个\u003cstrong\u003e工具库\u003c/strong\u003e，你可以通过提供的现成工具快速构建出一个开箱即用的后台管理平台的前端项目，而作为工具库的好处在于你可以将\u003ccode\u003etushan\u003c/code\u003e无缝的嵌入现有的前端项目中，此外，\u003ccode\u003etushan\u003c/code\u003e的学习成本是一个非常平滑的曲线而不是一个陡峭的曲线。渐进式的开发体验会让人很舒服。\u003c/p\u003e\n\u003cp\u003e相比于做减法的困难，\u003ccode\u003etushan\u003c/code\u003e正是在引导开发者做加法，而在做加法的过程中，很多重复的工作都被\u003ccode\u003eTushan\u003c/code\u003e完成了，作为业务开发者只需要专注于自己的业务即可。\u003c/p\u003e\n\u003ch2\u003eTushan 的优势\u003c/h2\u003e\n\u003ch4\u003e随着时间的投入完成度发生的变化\u003c/h4\u003e\n\u003cp\u003e在\u003ccode\u003etushan\u003c/code\u003e你可以放心的投入时间，获得一个线性的变化。而不是快速获得一个完整项目后面临难以下手的情况\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://tushan.msgbyte.com/img/docs/why/1.png\"/\u003e\u003c/p\u003e\n\u003ch4\u003e长久陪伴大于一锤子买卖\u003c/h4\u003e\n\u003cp\u003e\u003ccode\u003eTushan\u003c/code\u003e的自身定位就是一个库，而不是一个现成的系统。\u003ccode\u003eTushan\u003c/code\u003e可以提供给开发者的是快速的启动页面，也可以长久陪伴用户进行开发。\u003c/p\u003e\n\u003cp\u003e如果能够理解组件库在开发生命周期流程中的定义，那么也就可以理解\u003ccode\u003eTushan\u003c/code\u003e做的事情与定位了。\u003c/p\u003e\n\u003ch4\u003e自由度\u003c/h4\u003e\n\u003cp\u003e在用一些现成的库的时候往往对面对这样的一个问题。就是其他人做好的工作能不能很好的匹配上自己的需求？如果不匹配怎么办？\u003c/p\u003e\n\u003cp\u003e而\u003ccode\u003eTushan\u003c/code\u003e的每一块实现都是可以自由定义的，如果你没有很高的界面要求，你可以用\u003ccode\u003eTushan\u003c/code\u003e快速搭建出一套功能完备的页面，如果你有很高的自定义要求，则可以只使用一部分\u003ccode\u003etushan\u003c/code\u003e的功能，而一部分则进行自定义。\u003c/p\u003e\n\u003ch3\u003e谁在用\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://tailchat.msgbyte.com/\" rel=\"nofollow\"\u003eTailchat\u003c/a\u003e 的后台已经完全由\u003ccode\u003eTushan\u003c/code\u003e支持\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/stakeswky/fastgpt-admin\" rel=\"nofollow\"\u003efastgpt-admin\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e快速入门\u003c/h2\u003e\n\u003cp\u003e一个简单的\u003ccode\u003eTushan\u003c/code\u003e 应用大概会长成以下样子:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-tsx\"\u003eimport {\n  createTextField,\n  createEmailField,\n  createUrlField,\n  jsonServerProvider,\n  ListTable,\n  Resource,\n  Tushan,\n} from 'tushan';\n\nconst dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');\n\nfunction App() {\n  return (\n    \u0026lt;Tushan\n      basename=\"/admin\"\n      dataProvider={dataProvider}\n    \u0026gt;\n      \u0026lt;Resource\n        name=\"users\"\n        label=\"User\"\n        list={\n          \u0026lt;ListTable\n            fields={[\n              createTextField('id', {\n                label: 'ID',\n              }),\n              createTextField('name', {\n                label: 'Name',\n                list: {\n                  sort: true,\n                },\n              }),\n              createEmailField('email', {\n                label: 'Email',\n              }),\n              createUrlField('website', {\n                label: 'Website',\n              }),\n            ]}\n            action={{ create: true, detail: true, edit: true, delete: true }}\n          /\u0026gt;\n        }\n      /\u0026gt;\n    \u0026lt;/Tushan\u0026gt;\n  );\n}\n\nexport default App;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e预览效果如下:\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://tushan.msgbyte.com/img/preview/1.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://tushan.msgbyte.com/img/preview/2.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://tushan.msgbyte.com/img/preview/3.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://tushan.msgbyte.com/img/preview/4.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e相关链接\u003c/h2\u003e\n\u003cp\u003e如果觉得这个库能够帮到你或者带给你一些启发，请给个 star 支持一下\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://tushan.msgbyte.com/\" rel=\"nofollow\"\u003e官方网站\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/msgbyte/tushan\" rel=\"nofollow\"\u003eGithub\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "moonrailgun",
+      "PubDate": "2023-06-05T01:41:49Z"
+    },
+    {
+      "Title": "Java 出活真的快吗 - Java",
+      "Link": "https://www.v2ex.com/t/945809",
+      "Description": "\u003cp\u003e经常看到有人说，做自己的项目用 php 、python 、ruby 等等或者其他的什么框架，出活贼快。想具体讨论下。\u003c/p\u003e\n\u003cp\u003e正好最近我接了一个私活，是做一个 app 的后端+一个简单的后台管理系统的后端，因为 app 和前端对方已经找到相应的人了。\u003c/p\u003e\n\u003cp\u003e有个有个朋友找到我，我就选了 Java ，因为我只会用 springboot ，选别的还得重头学。\u003c/p\u003e\n\u003cp\u003e是从 0 开始搭建一个后端服务，对方给到我的内容：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e设计稿和需求文档\u003c/li\u003e\n\u003cli\u003e服务器的 ip 和基本权限，服务器上什么软件都没有，需要我自己去安装。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e功能点包括：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e用户注册登录：微信+手机，个人信息维护\u003c/li\u003e\n\u003cli\u003e选课+学习（类似得到那种买课然后上课）\u003c/li\u003e\n\u003cli\u003e一个极简版的商城（展示的内容，都是人工在管理平台配置）\u003c/li\u003e\n\u003cli\u003e学习过程中的积分体系（类似 V2EX 的铜板）\u003c/li\u003e\n\u003cli\u003e一些场景展示的广告配置。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e我只做了一个服务，把 app 端的功能和管理平台的功能都放到这同一个服务里面。\n我做的事情包括：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e部署 nginx （因为前端也要用到，我就顺便一起弄了） + java server(就是下载一个 jdk + maven), 然后通过 java -jar 运行起来。\u003c/li\u003e\n\u003cli\u003e设计所有的数据表\u003c/li\u003e\n\u003cli\u003e从 0 开始，搭建服务框架（包括可以跟踪的 log 系统，就是每个 log 都带上 traceid ），然后 CURD 。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e我做的过程中，都用了计时统计，全部弄好上线，一共花了 20 小时。（这是纯纯的动手时间，和上班那种一天 8 小时，5 小时在划水的，8 小时工作不是同一个意思。）\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e如果上面这些事，用 php 、python 、ruby 熟手，需要花多久时间呢？\u003c/p\u003e\n",
+      "Author": "javak",
+      "PubDate": "2023-06-05T01:40:26Z"
+    },
+    {
+      "Title": "急，各位 V 友，咨询公司搬迁有无赔偿问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/945808",
+      "Description": "\u003cp\u003e现在公司在北京房山，要搬迁到北京通州了，相隔六十多公里，现在老婆在这边工作孩子在这边上学要是过去每天通勤地铁 3 个多小时，开车也得一个半小时，请问这种情况能要赔偿走人吗？\u003c/p\u003e\n",
+      "Author": "songjian447",
+      "PubDate": "2023-06-05T01:40:18Z"
+    },
+    {
+      "Title": "XDM，遇到 SB 同事怎么破 - 职场话题",
+      "Link": "https://www.v2ex.com/t/945806",
+      "Description": "\u003cp\u003e旁边的同事经常性的自言自语，不管是打代码时还是摸鱼的时候。\n叽叽喳喳的，语气跌宕起伏，什么 giao ，我艹混在其中，整得我快神经衰弱了\u003c/p\u003e\n\u003cp\u003e有什么方法可以破？\u003c/p\u003e\n",
+      "Author": "leeggco",
+      "PubDate": "2023-06-05T01:38:36Z"
+    },
+    {
+      "Title": "现在做网安怎么样？ - 问与答",
+      "Link": "https://www.v2ex.com/t/945805",
+      "Description": "\u003cp\u003e工作真的难干啊难干啊\u003c/p\u003e\n",
+      "Author": "racconn",
+      "PubDate": "2023-06-05T01:36:29Z"
+    },
+    {
       "Title": "演唱会大麦上没抢到票，只能去闲鱼上找黄牛买吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/945802",
       "Description": "\u003cp\u003e有没有其他平台可以加价购买的？\u003c/p\u003e\n",
