@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "local cache 需要在集群的服务器之间做同步吗？怎么做？ - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/946056",
+      "Description": "问个问题，用 golang 的 local cache 库（如 groupcache 、bigcache 等）的时候，有两种方案：\u003cbr /\u003e1 、local cache 通过某种机制同步到集群的每台机器上;（不太确定要怎么实现，我看开源的都没有提供相应的能力，个人感觉如果有这种需求直接用 redis 就好了）\u003cbr /\u003e2 、不管这个，每台服务器维护自己的 cache;(不知道这种方案是不是有什么坑)\u003cbr /\u003e\u003cbr /\u003e有线上环境用过 local cache 的大佬吗？能一起讨论一下这个问题吗？",
+      "Author": "ben548",
+      "PubDate": "2023-06-05T12:19:57Z"
+    },
+    {
       "Title": "腾讯云轻应用服务器上遇到这种攻击属于重放攻击吗？可以怎样堵住攻击？ - 站长",
       "Link": "https://www.v2ex.com/t/946054",
       "Description": "\u003cp\u003e一直拿腾讯云轻应用服务器当 frp 用，最近想着分享一些文件给别人，开了个 nginx 服务器上传了一些静态文件让人临时下载一下。开 accesslog 看了一下，发现有时会有些来自腾讯云自己服务器在访问这些文件。一般正常人都是一批文件一起下载的，accesslog 里面看到是连续相同的 IP 在访问，但来自腾讯云的访问是单独的且一个 IP 只访问一个文件，不带重复的。我的文件名都是 20 位随机字符，而且没开目录 index ，感觉一次命中路径基本不可能。我的 frp 等对外服务都是开在各自 docker 里面，不太像 host 被挂马，挂马感觉也完全不需要再走 nginx 访问一遍下载。\u003c/p\u003e\n\u003cp\u003e想了一下会不会有可能是请求被子网内其他主机监听然后重放？症状是下面这样的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-log\"\u003eA 型攻击的日志\n114.132.203.161 - - [05/Jun/2023:11:46:32 +0800] \"GET /download/abcdefghij.jpg HTTP/1.1\" 200 5601404 \"http://xxx/download/play.html\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36\" \"-\"\n106.55.201.95 - - [05/Jun/2023:11:46:38 +0800] \"GET /download/abcdefghij.jpg HTTP/1.1\" 200 6505301 \"-\" \"-\" \"-\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e它先拿 114.132.203.161 这个重放了 play.html 的请求，没把文件下载完，然后换了个 IP 重新下载了文件。它这个 UA 看着像哪个 headless browser 的。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-log\"\u003eB 型攻击的日志\n我的 IP - - [05/Jun/2023:18:35:58 +0800] \"GET /download/cdefghijk.jpg HTTP/1.1\" 200 0 \"-\" \"curl/7.74.0\" \"-\"\n220.196.160.96 - - [05/Jun/2023:18:46:02 +0800] \"GET /download/cdefghijk.jpg HTTP/1.1\" 200 0 \"-\" \"curl/7.74.0\" \"-\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我开始以为是爬虫爬的，设了 referer 和 UA 的过滤，然后想着拿 curl 试一下，结果隔了几分钟有另外一个 IP 照着我的请求来了一次。\u003c/p\u003e\n\u003cp\u003e所以这种是腾讯云的问题吗？还有什么办法发现攻击源以及防止攻击？\u003c/p\u003e\n",
