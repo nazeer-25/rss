@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Linux 多 ip docker 指定出口问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/946040",
+      "Description": "\u003cpre\u003e\u003ccode\u003eifconfig \n\n主 Ip\nens4: flags=4163\u0026lt;UP,BROADCAST,RUNNING,MULTICAST\u0026gt;  mtu 1460\n        inet 10.168.0.7  netmask 255.255.255.255  broadcast 10.168.0.7\n\n副 ip\nens5: flags=4163\u0026lt;UP,BROADCAST,RUNNING,MULTICAST\u0026gt;  mtu 1460\n        inet 10.120.0.5  netmask 255.255.255.255  broadcast 10.120.0.5\n        \n配置路由\n\necho \"1 rt1\" | sudo tee -a /etc/iproute2/rt_tables\nip route add 10.120.0.1 src 10.120.0.5 dev ens5 table rt1\nip route add default via 10.120.0.1 dev ens5 table rt1\nip rule add from 10.120.0.5/20 table rt1\nip rule add to 10.120.0.5/20 table rt1\n\n\ndocker network create network1 --driver bridge --subnet 192.168.33.0/24\ndocker network create network2 --driver bridge --subnet 192.168.34.0/24\n\niptables -t nat -I POSTROUTING -s 192.168.33.0/24 -j SNAT --to-source 10.168.0.7\niptables -t nat -I POSTROUTING -s 192.168.34.0/24 -j SNAT --to-source 10.120.0.5\n\ndocker run -d --network network1 --name tm1 \u0026lt;Container Name\u0026gt;\ndocker run -d --network network2 --name tm2 \u0026lt;Container Name\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch1\u003etm1 容器网络正常 tm2 容器无法访问网络\u003c/h1\u003e\n",
+      "Author": "fangwenxue",
+      "PubDate": "2023-06-05T10:32:36Z"
+    },
+    {
+      "Title": "坐标杭州，能不能推荐一个实惠点的办理宽带的（想搞点企宽） - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/946039",
+      "Description": "先行谢过了.\u003cbr /\u003e如果有的话，帮忙留个 v 。感激不尽。",
+      "Author": "admin7s",
+      "PubDate": "2023-06-05T10:28:45Z"
+    },
+    {
+      "Title": "大家刮胡子的时候会把脸上其他地方的毛剃掉吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/946038",
+      "Description": "总感觉脸上除了胡子之外，其他地方都多多少少有一些毛发，能剃掉吗？",
+      "Author": "ThinkStu",
+      "PubDate": "2023-06-05T10:28:21Z"
+    },
+    {
       "Title": "我想问问从 0 到 1 再到 70 的项目要给别人是一种什么感受 - 程序员",
       "Link": "https://www.v2ex.com/t/946037",
       "Description": "\u003cp\u003e最近 Ai 挺火的，然后跟上级聊了一下，我提供了可以应用于业务，并且可落地的想法，并且我带人搭建出来了，跟大家付出很多心血过了一个多月的时间做出来了，就等着接入业务。然后就要转做另外一个 crud 的项目，把这个项目交接给别人，请问是什么样的感受\u003c/p\u003e\n",

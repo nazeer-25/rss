@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Linux 多 ip docker 指定出口问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/946040</link>
+      <description>&lt;pre&gt;&lt;code&gt;ifconfig &#xA;&#xA;主 Ip&#xA;ens4: flags=4163&amp;lt;UP,BROADCAST,RUNNING,MULTICAST&amp;gt;  mtu 1460&#xA;        inet 10.168.0.7  netmask 255.255.255.255  broadcast 10.168.0.7&#xA;&#xA;副 ip&#xA;ens5: flags=4163&amp;lt;UP,BROADCAST,RUNNING,MULTICAST&amp;gt;  mtu 1460&#xA;        inet 10.120.0.5  netmask 255.255.255.255  broadcast 10.120.0.5&#xA;        &#xA;配置路由&#xA;&#xA;echo &#34;1 rt1&#34; | sudo tee -a /etc/iproute2/rt_tables&#xA;ip route add 10.120.0.1 src 10.120.0.5 dev ens5 table rt1&#xA;ip route add default via 10.120.0.1 dev ens5 table rt1&#xA;ip rule add from 10.120.0.5/20 table rt1&#xA;ip rule add to 10.120.0.5/20 table rt1&#xA;&#xA;&#xA;docker network create network1 --driver bridge --subnet 192.168.33.0/24&#xA;docker network create network2 --driver bridge --subnet 192.168.34.0/24&#xA;&#xA;iptables -t nat -I POSTROUTING -s 192.168.33.0/24 -j SNAT --to-source 10.168.0.7&#xA;iptables -t nat -I POSTROUTING -s 192.168.34.0/24 -j SNAT --to-source 10.120.0.5&#xA;&#xA;docker run -d --network network1 --name tm1 &amp;lt;Container Name&amp;gt;&#xA;docker run -d --network network2 --name tm2 &amp;lt;Container Name&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h1&gt;tm1 容器网络正常 tm2 容器无法访问网络&lt;/h1&gt;&#xA;</description>
+      <author>fangwenxue</author>
+      <pubDate>05 Jun 2023 10:32:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>坐标杭州，能不能推荐一个实惠点的办理宽带的（想搞点企宽） - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/946039</link>
+      <description>先行谢过了.&lt;br /&gt;如果有的话，帮忙留个 v 。感激不尽。</description>
+      <author>admin7s</author>
+      <pubDate>05 Jun 2023 10:28:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>大家刮胡子的时候会把脸上其他地方的毛剃掉吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/946038</link>
+      <description>总感觉脸上除了胡子之外，其他地方都多多少少有一些毛发，能剃掉吗？</description>
+      <author>ThinkStu</author>
+      <pubDate>05 Jun 2023 10:28:21 +0000</pubDate>
+    </item>
+    <item>
       <title>我想问问从 0 到 1 再到 70 的项目要给别人是一种什么感受 - 程序员</title>
       <link>https://www.v2ex.com/t/946037</link>
       <description>&lt;p&gt;最近 Ai 挺火的，然后跟上级聊了一下，我提供了可以应用于业务，并且可落地的想法，并且我带人搭建出来了，跟大家付出很多心血过了一个多月的时间做出来了，就等着接入业务。然后就要转做另外一个 crud 的项目，把这个项目交接给别人，请问是什么样的感受&lt;/p&gt;&#xA;</description>
