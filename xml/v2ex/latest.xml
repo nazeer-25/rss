@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>是否存在一个自建文件缓存服务器软件 - 问与答</title>
+      <link>https://www.v2ex.com/t/946240</link>
+      <description>&lt;h1&gt;起因&lt;/h1&gt;&#xA;&lt;p&gt;家里有一台 NAS ，存储了不少文件，但家宽的低上传带宽、非标端口、家宽 Web 服务敏感等问题使我一直没有用它直接分享文件给别人。&lt;/p&gt;&#xA;&lt;p&gt;我现在分享文件基本都是通过搭建在一台云服务器上的 File Browser 进行的，上传文件→分享→发送链接给朋友，使用体验还是相当满意的。不像国内网盘要登录+下载客户端才能下载 /在线播放视频，还“不限速”。但是云服务器的空间有限，一般系统盘就只有几十 GB ，付费扩容又感觉没什么必要（毕竟家里已经有 NAS 了）。&lt;/p&gt;&#xA;&lt;p&gt;我当然可以定期清理很久之前共享的文件，毕竟很多录屏等内容是有时效性的，聊天话题过去了就基本不会点开第二次了。但我个人并不喜欢“链接会过期”这个概念，大概是数据仓鼠的一个体现吧，但数据就这样“丢失”了会让我感到难受。况且这些文件我大概率会在 NAS 上有备份。&lt;/p&gt;&#xA;&lt;h1&gt;需求&lt;/h1&gt;&#xA;&lt;p&gt;所以我就想找这么个文件缓存服务器，能够打通我的云服务器和 NAS 。新的文件缓存在云服务器上供快速访问，达到某个阈值（存储空间限制 /访问频率）后删除云服务器上的缓存。缓存被删除的文件再次被访问到时就“回源”，从 NAS 上拉取，并缓存一段时间。&lt;/p&gt;&#xA;&lt;p&gt;某种意义上，这有点像品牌 NAS 自带的 SSD 缓存功能，把一些最近常用的文件存到 SSD 里，HDD 当仓库盘。但我想要的是远程的、可自建的。&lt;/p&gt;&#xA;&lt;p&gt;文件共享这块的网页前端操作起来最好要简单，因为如果搭好了，我是打算让家里人用的，让他们基本完全摆脱国内网盘（除了下载别人共享的文件，这个没太大办法）。&lt;/p&gt;&#xA;&lt;h1&gt;目前找到的产品&lt;/h1&gt;&#xA;&lt;h2&gt;Nginx 配置 cache&lt;/h2&gt;&#xA;&lt;p&gt;配置 Nginx 当反代和当网页服务器我还算熟悉，但反代+缓存的配置我是还没有接触过的。&lt;/p&gt;&#xA;&lt;p&gt;稍微看了一下 Nginx Content Caching 的文档，似乎是我要找的东西。但是我有几个疑问：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;像 File Browser 和 QNAP File Station 这样的网盘服务生成出来的分享链接都是动态的一串 hash ，这种情况能正常缓存吗？&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;试了一下 File Browser 共享出来的文件（无密码），文件是存放在 &lt;code&gt;/api/public/dl/HASH&lt;/code&gt; 下的，但 DevTools 显示 Cache-Control 为 &lt;code&gt;private&lt;/code&gt;，这种情况下，Nginx 似乎是不能缓存这个内容的吧？&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;这种缓存似乎得在创建分享链接后先访问 &lt;code&gt;proxy_cache_min_uses&lt;/code&gt; 次，才能缓存到？所以我每次分享完还得最少手动访问一次才能缓存成功？不然我朋友访问第一次就是回源，会很慢吧。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;如果有朋友用过这种方案，可以分享下心得吗？感谢！&lt;/p&gt;&#xA;&lt;h2&gt;Rclone Mount&lt;/h2&gt;&#xA;&lt;p&gt;Rclone 在 mount 一个 remote 的时候，是可以设置 cache 的，感觉像是挺适合我的使用场景的。&lt;/p&gt;&#xA;&lt;p&gt;不过我之前在 Windows 上用 Rclone + WinFsp 的体验并不是特别好，有时连接不是很稳定会导致挂载的盘卡死。不知道在它的主要平台 Linux 上表现会不会好一点。&lt;/p&gt;&#xA;&lt;p&gt;如果 OK 的话，感觉 Rclone mount + File Browser 是个可行的选择。不知道是否有人有相关经验？或许过几天我有空可以试一下。&lt;/p&gt;&#xA;&lt;p&gt;但我也有一个担心：因为对于 File Browser 来说，mount 出来的是本地存储，在回源的时候延迟高一点的话不知道会不会直接请求失败。&lt;/p&gt;&#xA;&lt;h2&gt;Alist&lt;/h2&gt;&#xA;&lt;p&gt;看文档有提到缓存配置，就在之前搭好的 Alist 上用 WebDav 挂载了 NAS 试了一下，它似乎没法满足我的要求：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;存储无法自定义缓存大小，只能设置缓存到期时间，不知道是否有可能吃满服务器硬盘。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;缓存的似乎不是文件内容，而只是文件目录结构。监控服务器流量发现每次下载文件都在从 NAS 下载。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Alist 本质上是个文件列表程序，似乎更适合共享大量文件，而不是每次创建不同的共享（？）。我自己使用的体验是，共享单个文件没问题。但如果想共享单个文件夹并设置访问密码，但又不想 guest 帐户获取整个文件列表，那就得配置元信息。但要配置元信息对家人使用来说就不太友好了。不知道是我使用方法不对，还是本身就不是为这样的使用场景设计的。我希望能有 File Browser 那种简单的“网盘式”创建分享的体验。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;如果实在不行，我或许可以自己写一个这样的项目来练练手，不过如果现有方案能工作就最好了。&lt;/p&gt;&#xA;</description>
+      <author>mgrddsj</author>
+      <pubDate>06 Jun 2023 04:27:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>🔥️ 分享: voyager 源码分析笔记 - MineCraft GPT Bot 项目, 类外挂项目 - 分享创造</title>
+      <link>https://www.v2ex.com/t/946239</link>
+      <description>&lt;h2&gt;🦄 原项目说明:&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;✅️ &lt;a href=&#34;https://github.com/MineDojo/Voyager&#34; rel=&#34;nofollow&#34;&gt;voyager&lt;/a&gt;: 基于 Python + langchain + GPT(OpenAI) 写的 MineCraft Bot 框架, 实现 GPT bot 自主训练+游玩游戏.&lt;/li&gt;&#xA;&lt;li&gt;✅️ 本质上, 类似游戏外挂. 但这个项目的能力, 可以推广到很多场景应用. &lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;🔥️ annotated-voyager 源码分析:&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;✅️ 注解分支: &lt;a href=&#34;https://github.com/better-py/annotated-voyager/tree/annotated-2023-05-30&#34; rel=&#34;nofollow&#34;&gt;https://github.com/better-py/annotated-voyager/tree/annotated-2023-05-30&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;✅️ git clone 分支代码, 或者在线看,都可.&lt;/li&gt;&#xA;&lt;li&gt;✅️ 有详细的注释和各模块说明.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3&gt;注解详细说明:&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;90%的代码都有详细注解。&lt;/li&gt;&#xA;&lt;li&gt;对源码目录结构，做了详细说明。&lt;/li&gt;&#xA;&lt;li&gt;.learn() 等核心方法的注解里，解释了完整的调用链和步骤。&lt;/li&gt;&#xA;&lt;li&gt;更新了 GPT bot agents 模块注解 &amp;amp; 执行链路说明。&lt;/li&gt;&#xA;&lt;li&gt;更新 prompts 注解，可以参考学习 prompts 编写技巧。&lt;/li&gt;&#xA;&lt;li&gt;更新了 python  通过 http  post ，call mineflayer, 执行 js code 链路注释。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;基本上完整注解了. 感兴趣的可以看看. 看完, 应该能帮你快速掌握 voyager 项目.&lt;/p&gt;&#xA;</description>
+      <author>akaHenry</author>
+      <pubDate>06 Jun 2023 04:22:10 +0000</pubDate>
+    </item>
+    <item>
+      <title>国区的 PayPal 账户能转账给国外的 PayPal 账户吗？ - PayPal</title>
+      <link>https://www.v2ex.com/t/946238</link>
+      <description>上网查了一下这个问题，说不支持的和支持的都有，有没有最近用 PayPal 转过帐的，这个功能可用吗？</description>
+      <author>noob1445</author>
+      <pubDate>06 Jun 2023 04:21:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>为什么 win10，移动 ssd 下 exfat 写入速度那么慢？ - Windows</title>
+      <link>https://www.v2ex.com/t/946237</link>
+      <description>&lt;p&gt;大概 12G 的内容，每个文件都是几 mb 大小。&lt;/p&gt;&#xA;&lt;p&gt;用 NTFS ，写入和读取都能跑到 500MB/s （主板只有 usb3.0 ）&lt;/p&gt;&#xA;&lt;p&gt;同样的 usb 接口，用 exFAT ，读取 500mb/s ，但是写入只有 30mb/s （还各种波动）&lt;/p&gt;&#xA;&lt;p&gt;无论格式化的时候，簇是 128k ，还是 4k 都一样。&lt;/p&gt;&#xA;&lt;p&gt;是新买的 ssd 2T ，硬盘盒主控 JMS583&lt;/p&gt;&#xA;&lt;p&gt;在 mac 下 exFAT 4k 簇，读写都能 1G/s 以上。&lt;/p&gt;&#xA;&lt;p&gt;用 fastcopy 也没用。。。&lt;/p&gt;&#xA;&lt;p&gt;不知道是什么原因呢？&lt;/p&gt;&#xA;</description>
+      <author>qdwang</author>
+      <pubDate>06 Jun 2023 04:21:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>Vision Pro - Apple</title>
+      <link>https://www.v2ex.com/t/946236</link>
+      <description>&lt;p&gt;熬夜看了发布会，Vision Pro 出来的时候寒毛直竖&#xA;前面的各种常规系统更新（你今天就是跟 Widgets 干上了？）没仔细看&#xA;到了 One More Thing ...&#xA;截图的手停不下来&#xA;写了私人的一些看法&#xA;&lt;a href=&#34;https://mp.weixin.qq.com/s/6wn7MLi2N8bgz7gpghWvzA&#34; rel=&#34;nofollow&#34;&gt;图文总结&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;有几点想单拎出来：&lt;/p&gt;&#xA;&lt;p&gt;表面本以为是可以切换透明度，但是似乎用的是外屏显示的方式模拟了人眼的图像&#xA;以间接的方式让他人看到使用者的“真实”眼睛&#xA;供电模块像是一个磨砂铝合金表面的 MagSafe 磁吸充电宝&#xA;用一根粗粗的线连在头显上&#xA;多屏办公的人有了这个还需要买显示器吗？&#xA;界面尺寸由你定&#xA;……&lt;/p&gt;&#xA;</description>
+      <author>Wilbur4real</author>
+      <pubDate>06 Jun 2023 04:20:03 +0000</pubDate>
+    </item>
+    <item>
       <title>iOS17 的 Journal app，是不是可以替代 dayone？ - Apple</title>
       <link>https://www.v2ex.com/t/946234</link>
       <description>目前搭配快捷指令使用 dayone 挺方便的，也没订阅 dayone ；&lt;br /&gt;对 journal 挺感兴趣，但网上介绍 journal 的内容好像不多，有知道细节的精神小伙？&lt;br /&gt;&lt;br /&gt;PS: 节点应该没选错吧？</description>
