@@ -48,13 +48,13 @@
       <description>&lt;p&gt;在gin代码中使用了goroutine处理POST请求过来的json数据&lt;/p&gt;&#xA;&#xA;&lt;p&gt;以下示例代码中，绑定请求获得的data，经常除了第一次有数据以外，其它请求获得都是一个空map，这个代码有什么问题？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;有没有老大指教一下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;fmt&amp;quot;&#xA;&#xA;&#x9;&amp;quot;github.com/gin-gonic/gin&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;r := gin.Default()&#xA;&#xA;    r.POST(&amp;quot;/task&amp;quot;, task)&#xA;&#xA;    r.Run()&#xA;}&#xA;&#xA;func task(c *gin.Context) {&#xA;    &#xA;    cc := c.Copy()&#xA;&#xA;    go func (c *gin.Context)  {&#xA;        data := make(map[string]interface{})&#xA;        c.ShouldBindJSON(&amp;amp;data)&#xA;        fmt.Println(&amp;quot;task start&amp;quot;)&#xA;        fmt.Println(data)&#xA;        fmt.Println(&amp;quot;task end&amp;quot;)&#xA;    } (cc)&#xA;&#xA;    c.JSON(200, gin.H{&#xA;        &amp;quot;result&amp;quot;: &amp;quot;success&amp;quot;,&#xA;    })&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
-      <title>基于Cobra库快速开发类似kubectl一样的命令行工具框架 eryajfctl</title>
-      <link>https://studygolang.com/p/1144#reply0</link>
-    </item>
-    <item>
       <title>有时间有精力来这里打发</title>
       <link>https://studygolang.com/topics/16389#reply0</link>
       <description>&lt;p&gt;有时间有精力来这里打发&#xA;1.全 jian 皆可&#xA;2.工资五千家&#xA;3.喜爱网路相关工作&#xA;4.工作时间自由 但是要完成时数&#xA;5.宽带 电脑或高阶手机 自备&#xA;6.请加李经理 :1972815785&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>基于Cobra库快速开发类似kubectl一样的命令行工具框架 eryajfctl</title>
+      <link>https://studygolang.com/p/1144#reply0</link>
     </item>
     <item>
       <title>HTTP代理与SOCKS代理的区别</title>
