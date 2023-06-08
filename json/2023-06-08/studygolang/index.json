@@ -53,13 +53,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Gin框架使用goroutine中处理模型绑定遇到问题，请教。",
-      "Link": "https://studygolang.com/topics/16391#reply6",
-      "Description": "\u003cp\u003e在gin代码中使用了goroutine处理POST请求过来的json数据\u003c/p\u003e\n\n\u003cp\u003e以下示例代码中，绑定请求获得的data，经常除了第一次有数据以外，其它请求获得都是一个空map，这个代码有什么问题？\u003c/p\u003e\n\n\u003cp\u003e有没有老大指教一下\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\n\t\u0026quot;github.com/gin-gonic/gin\u0026quot;\n)\n\nfunc main() {\n\tr := gin.Default()\n\n    r.POST(\u0026quot;/task\u0026quot;, task)\n\n    r.Run()\n}\n\nfunc task(c *gin.Context) {\n    \n    cc := c.Copy()\n\n    go func (c *gin.Context)  {\n        data := make(map[string]interface{})\n        c.ShouldBindJSON(\u0026amp;data)\n        fmt.Println(\u0026quot;task start\u0026quot;)\n        fmt.Println(data)\n        fmt.Println(\u0026quot;task end\u0026quot;)\n    } (cc)\n\n    c.JSON(200, gin.H{\n        \u0026quot;result\u0026quot;: \u0026quot;success\u0026quot;,\n    })\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "新手问一个调试代码的问题",
       "Link": "https://studygolang.com/topics/16394#reply1",
       "Description": "\u003cp\u003e刚开始学习go，github上找了一个项目来学习，就是 \u003ca href=\"https://github.com/wwengg/douyin\"\u003ehttps://github.com/wwengg/douyin\u003c/a\u003e  。它里面用到了另一项目 goproxy，也有源码，但这个项目比较大，比较复杂，直接看我看不懂。\n使用goland调试douyin的时候，我怎么跟踪它进入goproxy代码？\n还望得到各位大大们的指导。也可以一起交流这个项目。\u003c/p\u003e\n",
@@ -84,6 +77,13 @@
       "Title": "单元测试",
       "Link": "https://studygolang.com/articles/36159#reply0",
       "Description": "\u003cp\u003e请教下你们项目中的单元测试框架都用的什么？是用一种框架还是多个框架混合使用？给推荐个比较好用的测试框架\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Gin框架使用goroutine中处理模型绑定遇到问题，请教。",
+      "Link": "https://studygolang.com/topics/16391#reply6",
+      "Description": "\u003cp\u003e在gin代码中使用了goroutine处理POST请求过来的json数据\u003c/p\u003e\n\n\u003cp\u003e以下示例代码中，绑定请求获得的data，经常除了第一次有数据以外，其它请求获得都是一个空map，这个代码有什么问题？\u003c/p\u003e\n\n\u003cp\u003e有没有老大指教一下\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\n\t\u0026quot;github.com/gin-gonic/gin\u0026quot;\n)\n\nfunc main() {\n\tr := gin.Default()\n\n    r.POST(\u0026quot;/task\u0026quot;, task)\n\n    r.Run()\n}\n\nfunc task(c *gin.Context) {\n    \n    cc := c.Copy()\n\n    go func (c *gin.Context)  {\n        data := make(map[string]interface{})\n        c.ShouldBindJSON(\u0026amp;data)\n        fmt.Println(\u0026quot;task start\u0026quot;)\n        fmt.Println(data)\n        fmt.Println(\u0026quot;task end\u0026quot;)\n    } (cc)\n\n    c.JSON(200, gin.H{\n        \u0026quot;result\u0026quot;: \u0026quot;success\u0026quot;,\n    })\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
