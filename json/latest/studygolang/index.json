@@ -18,13 +18,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "在docker 中运行go 编译报 fatal error: wrapper.h: No such file or directory 错误",
-      "Link": "https://studygolang.com/topics/16404#reply1",
-      "Description": "\u003cp\u003edocker 镜像基于 golang:1.17-alpine\n项目中有使用 这个。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e/*\n  #cgo darwin CFLAGS: -I${SRCDIR}/../../../cgo\n  #cgo darwin LDFLAGS: -L${SRCDIR}/../../../cgo -lpinyin -lstdc++\n  #cgo linux CFLAGS: -I/tmp/vivipos/cgo\n  #cgo linux LDFLAGS: -L/tmp/vivipos/cgo -lpinyin -lstdc++\n  #include \u0026quot;wrapper.h\u0026quot;\n*/\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003ccode\u003egf run main.go\u003c/code\u003e 在启动项目的时候会报错\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003efatal error: wrapper.h: No such file or directory\n    8 |   #include \u0026quot;wrapper.h\u0026quot;\n      |            ^~~~~~~~~~~\ncompilation terminated.\nexit status 2\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e请问是需要安装什么依赖？\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "一个golang初学者的练手项目",
       "Link": "https://studygolang.com/topics/16402#reply0",
       "Description": "\u003cblockquote\u003e\n\u003cp\u003e最近写了一个go语言练手项目\u003ca href=\"https://github.com/qinguoyi/osproxy\"\u003eosproxy\u003c/a\u003e和\u003ca href=\"https://github.com/qinguoyi/osproxy-grpc\"\u003eosproxy-grpc\u003c/a\u003e，代码已完全开源到github。\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cp\u003e相信不少接触go语言的读者，都是被它\u0026rdquo;极简协程\u0026rdquo;，\u0026rdquo;高并发\u0026rdquo;，\u0026rdquo;高性能\u0026rdquo;的特性所吸引，我也不例外，想着学完之后，能快速上手享受一把。\u003c/p\u003e\n\n\u003cp\u003e但当我看完基本语法，想找个练手项目时，才发现github上大部分都是博客/后台管理系统之类的，这些项目都是经验丰富的工程师快速迁移经验，写出来的go代码，对初学者不太友好；甚至不少博主推荐Docker/k8s这样的大项目，看的让人心里直打退堂鼓。\u003c/p\u003e\n\n\u003cp\u003e我也才接触go语言不久，明白初学者想快速实践，但找不到靠谱项目的心情，所以我希望这个基于go语言，非博客，非后台管理系统的项目能满足你的需求。\u003c/p\u003e\n\n\u003cp\u003e我之前有写过C++练手项目\u003ca href=\"https://github.com/qinguoyi/TinyWebServer\"\u003eTinyWebServer\u003c/a\u003e，被不少人喷，也让不少人入了服务器开发的门，所以完全不要担心\u003ca href=\"https://github.com/qinguoyi/osproxy\"\u003eosproxy\u003c/a\u003e这个项目会很复杂，但也不要担心项目让你学不到什么东西。\u003c/p\u003e\n\n\u003cp\u003e正如之前很多人对TinyWebServer的评价，\u003ca href=\"https://github.com/qinguoyi/osproxy\"\u003eosproxy\u003c/a\u003e同样是一个\u0026rdquo;麻雀虽小又五脏俱全\u0026rdquo;的项目。\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/qinguoyi/osproxy\"\u003eosproxy\u003c/a\u003e是一个使用Go语言开发的对象存储分布式代理(object-storage-distributed-proxy)，可以作为文件存储微服务，支持docker一键部署，包括但不限于以下功能：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e分布式uid及秒传，支持相同文件不同命名\u003c/li\u003e\n\u003cli\u003e分片读写，大文件上传，merge接口不用等待数据合并，分片上传完直接下载\u003c/li\u003e\n\u003cli\u003e异步任务，易扩展的event-handler，支持分片合并及其他文件处理任务\u003c/li\u003e\n\u003cli\u003e统一封装，降低业务接入复杂度，业务侧只需要存储文件uid\u003c/li\u003e\n\u003cli\u003e代理下载，不直接暴露底层存储厂商及格式\u003c/li\u003e\n\u003cli\u003e支持集群部署，proxy模块处理不同机器的分片转发\u003c/li\u003e\n\u003cli\u003e支持MinIO/腾讯COS/阿里OSS等对象存储，易于扩展\u003c/li\u003e\n\u003cli\u003e支持Docker一键部署\n\u003cimg src=\"https://static.golangjob.cn/230608/479efeeada6acd1840d0fa9e3cf06445.png\" alt=\"架构.png\" /\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e你能实践这些东西：\n* go：协程，sync包(waitgroup/once/mutex)，channel，interface(可插拔组件注册)等\n* grpc：一元RPC，服务器流RPC，客户端流RPC，RPC拦截器，RPC数据转发\n* gin：路由组，http服务转发，文件数据转发，中间件\n* gorm：简单文件元数据的存储\n* nginx：http和grpc的反向代理，及证书自签\n* redis：数据缓存，缓存与DB双写，简单的服务注册与发现，分布式锁\n* uuid：分布式ID\n* docker：dockerfile的书写，docker一键部署等\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230608/83fa7440be17b946e473476beef326f4.png\" alt=\"功能.png\" /\u003e\n以上项目仅针对初学者，望知悉。\u003c/p\u003e\n\n\u003cp\u003e最后，感谢你能看到这里。\u003c/p\u003e\n",
@@ -32,9 +25,23 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "机会就在眼前你还不来吗",
+      "Link": "https://studygolang.com/topics/16399#reply0",
+      "Description": "\u003cp\u003e机会就在眼前你还不来吗\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "Go语言Excelize开源基础库荣获2022年中国开源创新大赛一等奖",
       "Link": "https://studygolang.com/topics/16403#reply1",
       "Description": "\u003cp\u003e近日，“2022 年中国开源创新大赛”正式发布了获奖名单，Excelize 电子表格文档开源基础库荣获一等奖。\u003c/p\u003e\n\n\u003cp\u003e\u003ccenter\u003e\u003cimg src=\"https://static.golangjob.cn/230609/3e176619c503e6cb665fa7826c1f33b6.png\" alt=\"2022年中国开源创新大赛\" width=\"600\" /\u003e\u003c/center\u003e\u003c/p\u003e\n\n\u003cp\u003e2022年中国开源创新大赛在乌镇世界互联网大会上正式启动，大赛由中央网信办信息化发展局指导，中国互联网发展基金会、中国网络空间研究院、中国互联网投资基金联合主办，北京长风信息技术产业联盟承办。大赛以 “开源创新，共建生态” 为主题，围绕国家在开源人才培养和开源生态建设方面的重大战略需求，聚焦 “卡脖子” 相关技术领域以及人工智能、物联网、云原生等前沿技术领域设置开源赛道，旨在为国内开源行业的企业、开发者、创业者提供展示、交流、合作的平台，助力开源生态的高质量发展，激发开源创新活力，选拔优秀的开源项目，培养开源实践人才，助力开源生态建设。2023年5月31日下午在北京举办了“2022年中国开源创新大赛总结发布活动”。\u003c/p\u003e\n\n\u003cp\u003e\u003ccenter\u003e\u003cimg src=\"https://static.golangjob.cn/230609/4c451c9f9a0316619be5daac7ee1b14a.jpg\" alt=\"Excelize开源基础库荣获2022年中国开源创新大赛一等奖\" width=\"400\" /\u003e\u003c/center\u003e\u003c/p\u003e\n\n\u003cp\u003eExcelize (\u003ca href=\"https://github.com/xuri/excelize\"\u003ehttps://github.com/xuri/excelize\u003c/a\u003e) 是 Go 语言编写的用于操作 Office Excel 文档基础库，基于 ECMA-376，ISO/IEC 29500 国际标准。可以使用它来读取、写入由 Excel、WPS、OpenOffice 等办公软件创建的电子表格文档。支持 XLAM / XLSM / XLSX / XLTM / XLTX 等多种文档格式，高度兼容带有样式、图片(表)、透视表、切片器等复杂组件的文档，并提供流式读写支持，用于处理包含大规模数据的工作簿。可应用于各类报表平台、云计算、边缘计算等系统。自 2016 年开源以来已成为云原生应用尤其是 Go 语言开发者在处理电子表格办公文档时的热门选择，正在被广泛应用于大型互联网公司、中小企业客户和初创公司。入选 2020 Gopher China - Go 领域明星开源项目 (GSP)、2018 年开源中国码云最有价值开源项目 GVP (Gitee Most Valuable Project)。\u003c/p\u003e\n\n\u003cp\u003e未来 Excelize 还将继续秉承共享、协作和开放的开源理念，进一步加强开源社区的生态建设，让开源项目更好地发展，为推动数字化建设、提升国际竞争力、培养软件人才贡献一份力量。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "在docker 中运行go 编译报 fatal error: wrapper.h: No such file or directory 错误",
+      "Link": "https://studygolang.com/topics/16404#reply1",
+      "Description": "\u003cp\u003edocker 镜像基于 golang:1.17-alpine\n项目中有使用 这个。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e/*\n  #cgo darwin CFLAGS: -I${SRCDIR}/../../../cgo\n  #cgo darwin LDFLAGS: -L${SRCDIR}/../../../cgo -lpinyin -lstdc++\n  #cgo linux CFLAGS: -I/tmp/vivipos/cgo\n  #cgo linux LDFLAGS: -L/tmp/vivipos/cgo -lpinyin -lstdc++\n  #include \u0026quot;wrapper.h\u0026quot;\n*/\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e\u003ccode\u003egf run main.go\u003c/code\u003e 在启动项目的时候会报错\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003efatal error: wrapper.h: No such file or directory\n    8 |   #include \u0026quot;wrapper.h\u0026quot;\n      |            ^~~~~~~~~~~\ncompilation terminated.\nexit status 2\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e请问是需要安装什么依赖？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -84,13 +91,6 @@
       "Title": "推荐一款vscode上的变量命名申请，chtml代码变量命名工具",
       "Link": "https://studygolang.com/articles/36162#reply0",
       "Description": "\u003cp\u003e前置条件：需已安装vscode编辑器，编辑器下载地址为：\u003ca href=\"https://code.visualstudio.com/\"\u003ehttps://code.visualstudio.com/\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003etips:安装操作简单，下载安装包后默认下一步即可完成。\u003c/p\u003e\n\n\u003ch3\u003e如何安装：\u003c/h3\u003e\n\n\u003ch4\u003e方式一、通过链接直接安装\u003c/h4\u003e\n\n\u003cp\u003e1.前往插件下载地址：\u003ca href=\"https://marketplace.visualstudio.com/items?itemName=rcc6688899.chtmlCoder\"\u003ehttps://marketplace.visualstudio.com/items?itemName=rcc6688899.chtmlCoder\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e2.点击下载按钮即可，进入到安装步骤，根据提示即可完成安装。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230608/f93ff2d3ca1f095be111e5e3adb32988.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003ch4\u003e方式二、通过vscdoe直接安装\u003c/h4\u003e\n\n\u003cp\u003e1.打开我们的vscode，进入到如下界面，点击拓展图标，如下图：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230608/ec6c0ee3054c821f4e824829d71b4950.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e2.在弹出的扩展界面中，搜索“代码变量命名工具”,如下图会显示chtml的vscode插件\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230608/ff68c803fdf48147584c3f392cdb4fc7.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e3.点击安装按钮即可自动完成安装\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230608/56e8de83e29f38773bab645fdf86966f.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003ch3\u003e如何使用：\u003c/h3\u003e\n\n\u003cp\u003e1.按下快捷键，Ctrl+shift+p,即可弹出如下输入框\n\u003cimg src=\"https://static.golangjob.cn/230608/a34b27e5de6f156e28946232778ff44c.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e2.输入chtml，即可获取到chtml插件的使用入口如下图。\n\u003cimg src=\"https://static.golangjob.cn/230608/6bee7dddbd623c6f8c851b3303ed355b.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e3.选择chtml变量转换入口，即可弹出中文变量输入框如下图。\n\u003cimg src=\"https://static.golangjob.cn/230608/df4fe5b9638c0298c358e3665cba4a11.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e说明，另外一种是直接打开web的链接进入到web端中使用\u003c/p\u003e\n\n\u003cp\u003e4.快转方式：\u003c/p\u003e\n\n\u003cp\u003e输入中文，并选中该中文或需要转换的英文字符串，按下快捷键“alt+1”转小驼峰\u003c/p\u003e\n\n\u003cp\u003e1-5 分别对应：1小驼峰(linkA)、2大驼峰（LinkA）、3下划线法（link_a）、4前下划线法(_link_a)，5转脊柱法（linkA\\link_a\\LINK_A=\u0026gt;link-b）\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://oss.youqiong.net/tc/chtml/vscodeInfo/play1.gif\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e5.便捷功能说明\u003c/p\u003e\n\n\u003cp\u003ealt+x 英文全转小写(LINK_A=\u0026gt;link_a) or 英文全转大写(link_a=\u0026gt;LINK_A)\u003c/p\u003e\n\n\u003cp\u003ealt+v 长变量缩短 (link=\u0026gt;l)\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://oss.youqiong.net/tc/chtml/vscodeInfo/play2.gif\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "机会就在眼前你还不来吗",
-      "Link": "https://studygolang.com/topics/16399#reply0",
-      "Description": "\u003cp\u003e机会就在眼前你还不来吗\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
