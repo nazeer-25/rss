@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "ipv6 测速慢于 ipv4 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/947748",
+      "Description": "上海联通千兆，光猫中兴 f7607p ，路由器 asus ax86u 刷 merlin\u003cbr /\u003e\u003cbr /\u003e测 speedtest 选上海联通节点，测速 500-600\u003cbr /\u003e选无锡联通节点跑满 1100\u003cbr /\u003e\u003cbr /\u003e老早就发现这个问题，一直以为是上海节点出问题了。\u003cbr /\u003e\u003cbr /\u003e今天终于定位到了问题，上海节点 \u003ca target=\"_blank\" href=\"http://5g.shunicomtest.com.prod.hosts.ooklaserver.net\" rel=\"nofollow noopener\"\u003e5g.shunicomtest.com.prod.hosts.ooklaserver.net\u003c/a\u003e 解析出 v4 和 v6 两个 ip ，优先走了 v6\u003cbr /\u003e而无锡节点 \u003ca target=\"_blank\" href=\"http://speedtest2.niutk.com.prod.hosts.ooklaserver.net\" rel=\"nofollow noopener\"\u003espeedtest2.niutk.com.prod.hosts.ooklaserver.net\u003c/a\u003e 只有一个 v4 ip 。\u003cbr /\u003e如果我关闭路由器的 v6 ，走上海节点速度 v4 也跑满。\u003cbr /\u003e\u003cbr /\u003e那么问题来了：要怎么样才能让 v6 也跑满千兆呢？\u003cbr /\u003e我阅读了本论坛的这个帖子： \u003ca target=\"_blank\" href=\"https://www.v2ex.com/t/800024\" rel=\"nofollow noopener\"\u003ehttps://www.v2ex.com/t/800024\u003c/a\u003e ，然后尝试在路由器里输入\u003cbr /\u003eiptables -t mangle -A POSTROUTING -p tcp --tcp-flags SYN,RST SYN -o ppp0 -j TCPMSS --clamp-mss-to-pmtu\u003cbr /\u003eip6tables -t mangle -A POSTROUTING -p tcp --tcp-flags SYN,RST SYN -o ppp0 -j TCPMSS --clamp-mss-to-pmtu\u003cbr /\u003e\u003cbr /\u003e也不能解决问题。\u003cbr /\u003e\u003cbr /\u003e我也没有刷回华硕官方固件，我感觉是 merlin 的某个版本更新以后带来的 bug （但不十分确定）\u003cbr /\u003e\u003cbr /\u003e所以请教这种问题应该如何解决？",
+      "Author": "baraja",
+      "PubDate": "2023-06-11T07:07:46Z"
+    },
+    {
+      "Title": "202305 欧洲议会新冠肺炎峰会 - 分享发现",
+      "Link": "https://www.v2ex.com/t/947747",
+      "Description": "感觉论坛没人提，就转发一下。\u003cbr /\u003eDr. David Martin MAY 3, 2023 European Parliament - International COVID Summit III #ICS3\u003cbr /\u003e [ 20230526 欧洲议会新冠肺炎峰会完整版(中英字幕)] \u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://www.bilibili.com/video/BV1DT41147CJ\" rel=\"nofollow noopener\"\u003ehttps://www.bilibili.com/video/BV1DT41147CJ\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e并非引战帖，只是一下子把过去几年的事情都缕清了,所以发这里\u003cbr /\u003e包括时间点地点人物起因经过。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003ePS:谷歌媒体阵营的能搜到的很少，参见 youtube 评论\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003eyoutube:\u003cbr /\u003e\u003cdiv class=\"embedded_video_wrapper\"\u003e\u003ciframe src=\"https://www.youtube.com/embed/0Aw6179aUnk\" class=\"embedded_video\" allowfullscreen=\"\" type=\"text/html\" id=\"ytplayer\" frameborder=\"0\"\u003e\u003c/iframe\u003e\u003c/div\u003e\u0026amp;ab_channel=AwakeSociety",
+      "Author": "anticipated",
+      "PubDate": "2023-06-11T07:04:28Z"
+    },
+    {
       "Title": "一次 USB 接口引起的翻车事件 - NAS",
       "Link": "https://www.v2ex.com/t/947745",
       "Description": "PVE+NAS+外置 USB 硬盘柜（直通）方案。\u003cbr /\u003e之前正常使用，但是没有大规模读写场景，最近开始下载资源，发现下载速到 30MB/s 后，速度瞬间降到几百 KB/s ，然后一直持续几百 KB ，最后还把整个 PVE 系统拖垮了,所有 PVE 虚拟机都无法访问，Ping 都不行。\u003cbr /\u003e\u003cbr /\u003e找寻多次，执行一下命令后好了，至少没有出现过网络无法访问的情况。\u003cbr /\u003e\u003cbr /\u003esudo ethtool -K eno2 tso off\u003cbr /\u003e\u003cbr /\u003e但是依然没有找到 USB 速度爆慢的问题。\u003cbr /\u003e\u003cbr /\u003e最后想起了说明书，不看不知道，一看感觉好坑！\u003cbr /\u003e\u003cbr /\u003e为了美观，我把 USB 硬盘柜插到了机箱后方，四个 USB ，2 个 USB 2.0 ，自然不能选择，所以我选择了另外两个 USB 3 的其中一个口，有两个 SS （ USB 的版本命名真够辣鸡的）标志的。\u003cbr /\u003e\u003cbr /\u003e这次出现问题，多方排查，感觉就是 USB 接口的问题。然后翻开说明书，联想你真够坑的，把最好的接口放到了前面板！！！\u003cbr /\u003e\u003cbr /\u003e简单描述下：把接口从 USB 3.2 Gen1 换到了 USB3.2 Gen2 ，无线速度从之前的 30MB/s 峰值，提升到 100MB/s ，差不多慢速了。\u003cbr /\u003e\u003cbr /\u003e神奇的 USB 命名，都是 3.2 ，差距还这么大，太辣鸡了。\u003cbr /\u003e\u003cbr /\u003e把我恶心的够够的，差点抛弃 PVE 了都。",

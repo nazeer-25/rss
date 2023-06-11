@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ipv6 测速慢于 ipv4 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/947748</link>
+      <description>上海联通千兆，光猫中兴 f7607p ，路由器 asus ax86u 刷 merlin&lt;br /&gt;&lt;br /&gt;测 speedtest 选上海联通节点，测速 500-600&lt;br /&gt;选无锡联通节点跑满 1100&lt;br /&gt;&lt;br /&gt;老早就发现这个问题，一直以为是上海节点出问题了。&lt;br /&gt;&lt;br /&gt;今天终于定位到了问题，上海节点 &lt;a target=&#34;_blank&#34; href=&#34;http://5g.shunicomtest.com.prod.hosts.ooklaserver.net&#34; rel=&#34;nofollow noopener&#34;&gt;5g.shunicomtest.com.prod.hosts.ooklaserver.net&lt;/a&gt; 解析出 v4 和 v6 两个 ip ，优先走了 v6&lt;br /&gt;而无锡节点 &lt;a target=&#34;_blank&#34; href=&#34;http://speedtest2.niutk.com.prod.hosts.ooklaserver.net&#34; rel=&#34;nofollow noopener&#34;&gt;speedtest2.niutk.com.prod.hosts.ooklaserver.net&lt;/a&gt; 只有一个 v4 ip 。&lt;br /&gt;如果我关闭路由器的 v6 ，走上海节点速度 v4 也跑满。&lt;br /&gt;&lt;br /&gt;那么问题来了：要怎么样才能让 v6 也跑满千兆呢？&lt;br /&gt;我阅读了本论坛的这个帖子： &lt;a target=&#34;_blank&#34; href=&#34;https://www.v2ex.com/t/800024&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.v2ex.com/t/800024&lt;/a&gt; ，然后尝试在路由器里输入&lt;br /&gt;iptables -t mangle -A POSTROUTING -p tcp --tcp-flags SYN,RST SYN -o ppp0 -j TCPMSS --clamp-mss-to-pmtu&lt;br /&gt;ip6tables -t mangle -A POSTROUTING -p tcp --tcp-flags SYN,RST SYN -o ppp0 -j TCPMSS --clamp-mss-to-pmtu&lt;br /&gt;&lt;br /&gt;也不能解决问题。&lt;br /&gt;&lt;br /&gt;我也没有刷回华硕官方固件，我感觉是 merlin 的某个版本更新以后带来的 bug （但不十分确定）&lt;br /&gt;&lt;br /&gt;所以请教这种问题应该如何解决？</description>
+      <author>baraja</author>
+      <pubDate>11 Jun 2023 07:07:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>202305 欧洲议会新冠肺炎峰会 - 分享发现</title>
+      <link>https://www.v2ex.com/t/947747</link>
+      <description>感觉论坛没人提，就转发一下。&lt;br /&gt;Dr. David Martin MAY 3, 2023 European Parliament - International COVID Summit III #ICS3&lt;br /&gt; [ 20230526 欧洲议会新冠肺炎峰会完整版(中英字幕)] &lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://www.bilibili.com/video/BV1DT41147CJ&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.bilibili.com/video/BV1DT41147CJ&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;并非引战帖，只是一下子把过去几年的事情都缕清了,所以发这里&lt;br /&gt;包括时间点地点人物起因经过。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;PS:谷歌媒体阵营的能搜到的很少，参见 youtube 评论&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;youtube:&lt;br /&gt;&lt;div class=&#34;embedded_video_wrapper&#34;&gt;&lt;iframe src=&#34;https://www.youtube.com/embed/0Aw6179aUnk&#34; class=&#34;embedded_video&#34; allowfullscreen=&#34;&#34; type=&#34;text/html&#34; id=&#34;ytplayer&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;&lt;/div&gt;&amp;amp;ab_channel=AwakeSociety</description>
+      <author>anticipated</author>
+      <pubDate>11 Jun 2023 07:04:28 +0000</pubDate>
+    </item>
+    <item>
       <title>一次 USB 接口引起的翻车事件 - NAS</title>
       <link>https://www.v2ex.com/t/947745</link>
       <description>PVE+NAS+外置 USB 硬盘柜（直通）方案。&lt;br /&gt;之前正常使用，但是没有大规模读写场景，最近开始下载资源，发现下载速到 30MB/s 后，速度瞬间降到几百 KB/s ，然后一直持续几百 KB ，最后还把整个 PVE 系统拖垮了,所有 PVE 虚拟机都无法访问，Ping 都不行。&lt;br /&gt;&lt;br /&gt;找寻多次，执行一下命令后好了，至少没有出现过网络无法访问的情况。&lt;br /&gt;&lt;br /&gt;sudo ethtool -K eno2 tso off&lt;br /&gt;&lt;br /&gt;但是依然没有找到 USB 速度爆慢的问题。&lt;br /&gt;&lt;br /&gt;最后想起了说明书，不看不知道，一看感觉好坑！&lt;br /&gt;&lt;br /&gt;为了美观，我把 USB 硬盘柜插到了机箱后方，四个 USB ，2 个 USB 2.0 ，自然不能选择，所以我选择了另外两个 USB 3 的其中一个口，有两个 SS （ USB 的版本命名真够辣鸡的）标志的。&lt;br /&gt;&lt;br /&gt;这次出现问题，多方排查，感觉就是 USB 接口的问题。然后翻开说明书，联想你真够坑的，把最好的接口放到了前面板！！！&lt;br /&gt;&lt;br /&gt;简单描述下：把接口从 USB 3.2 Gen1 换到了 USB3.2 Gen2 ，无线速度从之前的 30MB/s 峰值，提升到 100MB/s ，差不多慢速了。&lt;br /&gt;&lt;br /&gt;神奇的 USB 命名，都是 3.2 ，差距还这么大，太辣鸡了。&lt;br /&gt;&lt;br /&gt;把我恶心的够够的，差点抛弃 PVE 了都。</description>
