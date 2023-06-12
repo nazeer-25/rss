@@ -37,19 +37,14 @@
       <link>https://studygolang.com/resources/15576#reply0</link>
     </item>
     <item>
-      <title>资源交换：Go实战训练营/进阶训练营</title>
-      <link>https://studygolang.com/topics/16405#reply0</link>
-      <description>&lt;p&gt;楼主购买了go进阶训练营和算法训练营，求购买了go实战训练营的uu交换。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>Go1.20.5 和 Go1.19.10 发布</title>
       <link>https://studygolang.com/topics/16406#reply0</link>
       <description>&lt;p&gt;近日，Go 官方发布了两个新版本 1.20.5 和 1.19.10。这两个版本包含了三个安全修复，如下：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;cmd/go: cgo 代码注入&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;当使用 cgo 时，go 命令可能在构建时生成意外的代码，导致运行一个使用 cgo 的 go 程序时出现意外的行为。这可能发生在运行一个包含有换行符的目录名的不可信模块时。使用 go 命令获取的模块（即通过\&amp;ldquo;go get\&amp;ldquo;）不受影响（使用GOPATH模式获取的模块，即GO111MODULE=off，可能受影响）。 issue &lt;a href=&#34;https://go.dev/issue/60167&#34;&gt;https://go.dev/issue/60167&lt;/a&gt;。&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;runtime: setuid/setgid 二进制文件的意外行为&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Go 运行时在一个二进制文件设置 setuid/setgid 位时没有做任何不同的处理。在 Unix 平台上，如果一个 setuid/setgid 二进制文件在执行时标准输入/输出文件描述符被关闭，打开任何文件可能导致以提升的权限读写意外的内容。类似地，如果一个 setuid/setgid 程序被终止，无论是通过 panic 还是信号，它可能泄露它的寄存器内容。issue &lt;a href=&#34;https://go.dev/issue/60272&#34;&gt;https://go.dev/issue/60272&lt;/a&gt;。&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;cmd/go: LDFLAGS 的不恰当处理&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;当使用 cgo 时，go 命令可能在构建时执行任意代码。这可能发生在运行\&amp;ldquo;go get\&amp;ldquo;获取一个恶意模块时，或者运行任何其他构建不可信代码的命令时。这可以通过链接器标志触发，通过 \&amp;rdquo;#cgo LDFLAGS\&amp;rdquo; 指令指定。issues &lt;a href=&#34;https://go.dev/issue/60305&#34;&gt;https://go.dev/issue/60305&lt;/a&gt; 和 &lt;a href=&#34;https://go.dev/issue/60306&#34;&gt;https://go.dev/issue/60306&lt;/a&gt;。&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;可以使用官方推荐的方式升级试用：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230610/3232021856c85be782ce1c35c75f3a7d.png&#34; alt=&#34;go1.20.5.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;也可以用自己喜欢的方式升级，比如我喜欢用 goup 安装升级，或到 Go 语言中文网下载最新的包：&lt;a href=&#34;https://studygolang.com/dl&#34;&gt;https://studygolang.com/dl&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;不过，这两个版本发布后，Ian Lance Taylor 指出，由于一个不幸的错误，这个变化会破坏使用 -compiler=gccgo 时&amp;rdquo;#cgo LDFLAGS&amp;rdquo; 指令的使用。大多数使用 gccgo 或 GoLLVM 的人使用的是与这些工具一起分发的 cmd/go，它不受影响。因此，我们将在下一个小版本中修复这个问题。当前的小版本 1.20.5 和 1.19.10 对于使用gccgo或GoLLVM的一些情况不幸地出现了问题。对于这次失误，官方深表歉意。（大部分人不会使用 gccgo，因此不受影响）&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>在docker 中运行go 编译报 fatal error: wrapper.h: No such file or directory 错误</title>
-      <link>https://studygolang.com/topics/16404#reply1</link>
-      <description>&lt;p&gt;docker 镜像基于 golang:1.17-alpine&#xA;项目中有使用 这个。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;/*&#xA;  #cgo darwin CFLAGS: -I${SRCDIR}/../../../cgo&#xA;  #cgo darwin LDFLAGS: -L${SRCDIR}/../../../cgo -lpinyin -lstdc++&#xA;  #cgo linux CFLAGS: -I/tmp/vivipos/cgo&#xA;  #cgo linux LDFLAGS: -L/tmp/vivipos/cgo -lpinyin -lstdc++&#xA;  #include &amp;quot;wrapper.h&amp;quot;&#xA;*/&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;gf run main.go&lt;/code&gt; 在启动项目的时候会报错&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;fatal error: wrapper.h: No such file or directory&#xA;    8 |   #include &amp;quot;wrapper.h&amp;quot;&#xA;      |            ^~~~~~~~~~~&#xA;compilation terminated.&#xA;exit status 2&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;请问是需要安装什么依赖？&lt;/p&gt;&#xA;</description>
+      <title>资源交换：Go实战训练营/进阶训练营</title>
+      <link>https://studygolang.com/topics/16405#reply0</link>
+      <description>&lt;p&gt;楼主购买了go进阶训练营和算法训练营，求购买了go实战训练营的uu交换。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go语言Excelize开源基础库荣获2022年中国开源创新大赛一等奖</title>
@@ -84,6 +79,11 @@
       <title>golang 项目源代码混淆怎么做</title>
       <link>https://studygolang.com/topics/16397#reply10</link>
       <description>&lt;p&gt;源代码混淆，主要指将go的源码的自定义的相关内容进行替换；如结构体名字，变量名，函数名，接口名。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1源代码&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;type Person struct{&#xA;&#x9;Name string&#xA;&#x9;Sex &#x9;   int&#xA;}&#xA;&#xA;var per Person&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;2被混淆后的代码&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;type PdDkkwS struct {&#xA;&#x9;SwdO string&#xA;&#x9;BOd.   int&#xA;}&#xA;var PdwdDdw PdDkkwS&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>在docker 中运行go 编译报 fatal error: wrapper.h: No such file or directory 错误</title>
+      <link>https://studygolang.com/topics/16404#reply1</link>
+      <description>&lt;p&gt;docker 镜像基于 golang:1.17-alpine&#xA;项目中有使用 这个。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;/*&#xA;  #cgo darwin CFLAGS: -I${SRCDIR}/../../../cgo&#xA;  #cgo darwin LDFLAGS: -L${SRCDIR}/../../../cgo -lpinyin -lstdc++&#xA;  #cgo linux CFLAGS: -I/tmp/vivipos/cgo&#xA;  #cgo linux LDFLAGS: -L/tmp/vivipos/cgo -lpinyin -lstdc++&#xA;  #include &amp;quot;wrapper.h&amp;quot;&#xA;*/&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;gf run main.go&lt;/code&gt; 在启动项目的时候会报错&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;fatal error: wrapper.h: No such file or directory&#xA;    8 |   #include &amp;quot;wrapper.h&amp;quot;&#xA;      |            ^~~~~~~~~~~&#xA;compilation terminated.&#xA;exit status 2&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;请问是需要安装什么依赖？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>for真的会独占CPU吗？</title>
