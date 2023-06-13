@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "话说，有那种 “输入原型图-\u003e输出设计图” 的 AI 吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/948335",
+      "Description": "\u003cp\u003e话说，我已经能自己搞定一个项目了，从和甲方谈合作、写合同、做产品设计、沟通产品、写程序、运营、写文案、管理服务器等等，我都能自己搞定了。\u003c/p\u003e\n\u003cp\u003e但是，上面这里还缺一个环节，就是：原型图 -\u0026gt; 设计图\u003c/p\u003e\n\u003cp\u003e我当然是没有能力去学习并做好设计的，术业有专攻嘛，所以我希望通过“抄袭”或 AI 的方式补上这个短板。对，你没有看错，我说的是抄袭，不是借鉴。\u003c/p\u003e\n\u003cp\u003e当然，如果有 AI 能帮我做设计就更好了，AI 做了我再在这个基础上改一改嘛。\u003c/p\u003e\n\u003cp\u003e不要问楼主为什么不加入一个团队，我之前确实在创业，不成功嘛，去年底把公司解散了，目前的状态是：我=我们公司技术部\u003c/p\u003e\n\u003cp\u003e未来我打算先做 5 年的独立的开发者，一个人搞定一个项目的那种，所以看看有没有什么办法补上自己的短板。\u003c/p\u003e\n\u003cp\u003e谢谢大家给点方法。\u003c/p\u003e\n",
+      "Author": "sdjl",
+      "PubDate": "2023-06-13T06:48:07Z"
+    },
+    {
+      "Title": "靓仔们有没有好看的红包封面～ - 问与答",
+      "Link": "https://www.v2ex.com/t/948334",
+      "Description": "去年过年前在 v2 的朋友们手里拿到了两个好看的红包封面，今天偶尔想起来已经过期了，想问问有没有老哥再分享一哈！\u003cbr /\u003e[img]\u003ca target=\"_blank\" href=\"https://i.imgur.com/049OVIz.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/049OVIz.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e[/img]",
+      "Author": "LaGeNanRen",
+      "PubDate": "2023-06-13T06:45:55Z"
+    },
+    {
+      "Title": "PostgreSQL 流复制 1 主 1 从集群，从节点多余一个不知道作用的文件 16539.1 - PostgreSQL",
+      "Link": "https://www.v2ex.com/t/948333",
+      "Description": "\u003cp\u003ePostgreSQL 流复制 1 主 1 从集群，从节点 database 目录大于 主节点 database 目录\u003c/p\u003e\n\u003ch2\u003e1 、主节点\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e# du -h base/16525\n3.0G    base/16525\n\n# ls -ahlS base/16525 | head -10\ntotal 3.0G\n-rw------- 1 postgres postgres 1.0G Jun 13 13:25 16608\n-rw------- 1 postgres postgres 1.0G Jun 13 13:25 16608.1\n-rw------- 1 postgres postgres 514M Jun 13 13:29 16608.2\n-rw------- 1 postgres postgres 429M Jun 13 13:25 16611\n-rw------- 1 postgres postgres 6.0M Jun 13 13:23 17111\n-rw------- 1 postgres postgres 808K Jun 13 11:29 16680\n-rw------- 1 postgres postgres 664K Jun 13 13:45 16608_fsm\n-rw------- 1 postgres postgres 568K Jun 13 13:23 16619\n-rw------- 1 postgres postgres 528K Jun 12 20:26 16779\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e2 、从节点\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e# du -h base/16525/\n3.2G    base/16525/\n\n# ls -ahlS base/16525 | head -10\ntotal 3.2G\n-rw------- 1 postgres postgres 1.0G Jun 13 13:25 16608\n-rw------- 1 postgres postgres 1.0G Jun 13 13:25 16608.1\n-rw------- 1 postgres postgres 514M Jun 13 13:34 16608.2\n-rw------- 1 postgres postgres 429M Jun 13 13:25 16611\n-rw------- 1 postgres postgres 257M Jun  9 14:22 16539.1\n-rw------- 1 postgres postgres 6.0M Jun 13 13:16 17111\n-rw------- 1 postgres postgres 808K Jun 13 11:29 16680\n-rw------- 1 postgres postgres 664K Jun 13 13:34 16608_fsm\n-rw------- 1 postgres postgres 568K Jun 13 13:16 16619\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e肉眼看起来是从节点多了 \u003ccode\u003e16539.1\u003c/code\u003e 文件，257M ，所以从节点目录大于主节点 0.2G 。\nls | grep 16539 这个 oid ，只存在 \u003ccode\u003e16539.1\u003c/code\u003e 一个文件\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003els -ahlS base/16525 | grep 16539\n-rw------- 1 postgres postgres 257M Jun  9 14:22 16539.1\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003esql 也查不到\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003etest=# SELECT relname\nFROM pg_class\nWHERE pg_relation_filepath(oid) = 'base/16525/16539';\n relname\n---------\n(0 rows)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e怎么排查呢？哪位大佬知道吗\u003c/p\u003e\n",
+      "Author": "oldsix2",
+      "PubDate": "2023-06-13T06:42:57Z"
+    },
+    {
       "Title": "97%电池健康度的 Apple watch S7 十个小时就从 100%掉到 10%电量了，有类似的吗 - 问与答",
       "Link": "https://www.v2ex.com/t/948332",
       "Description": "\u003cp\u003e最近这几天 Apple watch 掉电太快了，有点吃不消，日常都是息屏，也不知道为什么十个小时就没电了，好离谱，\n之前都是满电能顶两天\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/Gr7UDXb.png\"/\u003e\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/QdaImKP.png\"/\u003e\u003c/p\u003e\n",
