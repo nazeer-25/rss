@@ -39,6 +39,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "Go基于CEF的跨平台GUI框架",
+      "Link": "https://studygolang.com/resources/15576#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "一年一度！欢迎参加 2023 开发者生态系统调查",
       "Link": "https://studygolang.com/topics/16410#reply0",
       "Description": "\u003cp\u003e调查以 10 种语言提供，您还将有机会赢得以下奖品之一：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eMacBook Pro 16\u003c/li\u003e\n\u003cli\u003eNVIDIA GeForce RTX 4090 显卡\u003c/li\u003e\n\u003cli\u003eiPhone 14 Pro\u003c/li\u003e\n\u003cli\u003e价值 300 美元的 Amazon 礼品卡\u003c/li\u003e\n\u003cli\u003eJetBrains All Products Pack\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e\u003ca href=\"https://surveys.jetbrains.com/s3/developer-ecosystem-survey-2023-sh?pcode=44816435107838239\"\u003e参加开发者生态系统调查\u003c/a\u003e\u003c/p\u003e\n",
@@ -56,13 +63,6 @@
       "Title": "go windows操作系统压缩的目录liunx操作系统下解压，目录名变成文件名的一部分（windows下解压正常）",
       "Link": "https://studygolang.com/topics/16408#reply0",
       "Description": "\u003cp\u003e1、开发环境 ：go 1.19.1 windows/amd64\n2、问题描述 ：windows操作系统下压缩的目录，liunx操作系统下解压，目录名会变成文件名的一部分，windows平台下解压正常（用到archive/zip）\n3、相关代码及结果\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e//本地压缩文件\nfunc localZipFile(dst string, src string) (err error) {\n    // 创建准备写入的文件\n    fw, err := os.Create(dst)\n    defer fw.Close()\n    if err != nil {\n        return err\n    }\n\n    // 通过 fw 来创建 zip.Write\n    zw := zip.NewWriter(fw)\n    defer func() {\n        // 检测一下是否成功关闭\n        if err := zw.Close(); err != nil {\n            fmt.Println(\u0026quot;********关闭文件流出错********\u0026quot;)\n        }\n    }()\n\n    // 下面来将文件写入 zw ，因为有可能会有很多个目录及文件，所以递归处理\n    return filepath.Walk(src, func(path string, fi os.FileInfo, errBack error) (err error) {\n        if errBack != nil {\n            return errBack\n        }\n\n        // 通过文件信息，创建 zip 的文件信息\n        fh, err := zip.FileInfoHeader(fi)\n        if err != nil {\n            return\n        }\n\n        // 替换文件信息中的文件名\n        fh.Name = strings.TrimPrefix(path, string(filepath.Separator))\n        // fh.Name = strings.TrimPrefix(path, \u0026quot;/\u0026quot;)\n\n        // 这步开始没有加，会发现解压的时候说它不是个目录(Windows下压缩，解压正常。如果windows下压缩Liunx下解压，则解压后目录名成了文件名字的一部分)\n        if fi.IsDir() {\n            fh.Name += string(os.PathSeparator)\n            // fh.Name += \u0026quot;/\u0026quot;\n        }\n\n        // 写入文件信息，并返回一个 Write 结构\n        w, err := zw.CreateHeader(fh)\n        if err != nil {\n            return\n        }\n\n        // 检测，如果不是标准文件就只写入头信息，不写入文件数据到 w\n        // 如目录，也没有数据需要写\n        if !fh.Mode().IsRegular() {\n            return nil\n        }\n\n        // 打开要压缩的文件\n        fr, err := os.Open(path)\n        defer fr.Close()\n        if err != nil {\n            return\n        }\n\n        // 将打开的文件 Copy 到 w\n        _, err = io.Copy(w, fr)\n        if err != nil {\n            return\n        }\n        // 输出压缩的内容\n        // fmt.Printf(\u0026quot;成功压缩文件： %s, 共写入了 %d 个字符的数据\\n\u0026quot;, path, n)\n\n        return nil\n    })\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e4、实际结果（目录名作为了文件名的一部分。windows下解压正常）\n\u003cimg src=\"https://static.golangjob.cn/230612/ce4d4e811463d2b672635c901e630b7b.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e5、希望结果\nwindows下压缩的目录在所有平台下解压，目录结构不变\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Go基于CEF的跨平台GUI框架",
-      "Link": "https://studygolang.com/resources/15576#reply0",
-      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
