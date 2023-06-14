@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "傻逼 Safari 在处理 local 域的站点信任数据时有逻辑缺陷 - 分享发现",
+      "Link": "https://www.v2ex.com/t/948831",
+      "Description": "\u003cp\u003e触发方法如下：\u003c/p\u003e\n\u003cp\u003e1 、信任 local 域中任意自签证书网站，其信任逻辑不是在 Keychain 中信任对应证书，而是另起了一套未知逻辑（可能是通过 HSTS ）\u003c/p\u003e\n\u003cp\u003e2 、更换 local 域该网站证书（非常常见，比如某些会生成自签证书的系统重装，例：ESXi ）\u003c/p\u003e\n\u003cp\u003e3 、再次访问该 local 域名，你会发现你永远也进不去了\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"image.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://vip2.loli.io/2023/06/15/bQwIDoFCm4LV8Ag.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e目前网络上能搜到的解法：\u003c/p\u003e\n\u003cp\u003e1 、删除\u003ccode\u003e~/Library/Cookies/HSTS.plist\u003c/code\u003e并重启\u003ccode\u003ensurlstoraged\u003c/code\u003e服务；结果 Venture 根本就没有这个文件和对应的服务\u003c/p\u003e\n\u003cp\u003e2 、在\u003ccode\u003eSafari - 设置 - 隐私 - 管理网站数据\u003c/code\u003e中删除对应站点的数据，看似很靠谱，但列表中根本不展示\u003ccode\u003elocal\u003c/code\u003e域的任意站点\u003c/p\u003e\n\u003cp\u003e3 、清除所有历史记录和访问数据；未尝试也许有用，但好几年的数据说删就删下不去手\u003c/p\u003e\n\u003cp\u003e死局中，血压高\u003c/p\u003e\n",
+      "Author": "ZRS",
+      "PubDate": "2023-06-14T19:09:59Z"
+    },
+    {
       "Title": "Android 10 读取剪贴板的问题 - 问与答",
       "Link": "https://www.v2ex.com/t/948830",
       "Description": "\u003col\u003e\n\u003cli\u003e通过 shortcut 启动 Activity 后，navController.navigate 到 Fragment ，在 Activity 和 Fragment 的 onResume()中都无法读取到剪贴板\u003c/li\u003e\n\u003cli\u003e通过 widget 显示一个按钮，点击后在 onReceive 中也无法读取到剪贴板\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003eAndroid10 以后要有焦点或输入时才能获取剪贴板数据，但是\u003c/p\u003e\n\u003cp\u003e第一种情况中，通过\u003ccode\u003eshortcut\u003c/code\u003e启动后再\u003ccode\u003eonResume\u003c/code\u003e获取剪贴板，这样也是无焦点？\u003c/p\u003e\n\u003cp\u003e而手动点击导航栏转到 Fragment ，只在 Fragment 中可以读到剪贴板数据，在 Activity 中不能。\u003c/p\u003e\n\u003cp\u003e通过 shortcut 启动有什么区别导致的吗？\u003c/p\u003e\n",
