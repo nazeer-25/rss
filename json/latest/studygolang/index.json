@@ -53,6 +53,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "Go基于CEF的跨平台GUI框架",
+      "Link": "https://studygolang.com/resources/15576#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "gws v1.6.0 更新: 客户端支持通过代理拨号",
       "Link": "https://studygolang.com/topics/16412#reply2",
       "Description": "\u003cp\u003e通过 \u003ccode\u003eNewDialer\u003c/code\u003e 选项设置拨号器, 推荐使用\u003ccode\u003esocks5\u003c/code\u003e 代理. 需要引入 \u003ccode\u003egolang.org/x/net/proxy\u003c/code\u003e, 代码示例如下:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;crypto/tls\u0026quot;\n\t\u0026quot;github.com/lxzan/gws\u0026quot;\n\t\u0026quot;golang.org/x/net/proxy\u0026quot;\n\t\u0026quot;log\u0026quot;\n)\n\nfunc main() {\n\tsocket, _, err := gws.NewClient(\u0026amp;Handler{}, \u0026amp;gws.ClientOption{\n\t\tAddr:      \u0026quot;wss://example.com/connect\u0026quot;,\n\t\tTlsConfig: \u0026amp;tls.Config{InsecureSkipVerify: true},\n\t\tNewDialer: func() (gws.Dialer, error) {\n\t\t\treturn proxy.SOCKS5(\u0026quot;tcp\u0026quot;, \u0026quot;127.0.0.1:1080\u0026quot;, nil, nil)\n\t\t},\n\t})\n\tif err != nil {\n\t\tlog.Println(err.Error())\n\t\treturn\n\t}\n\tsocket.ReadLoop()\n}\n\ntype Handler struct{}\n\nfunc (h Handler) OnOpen(socket *gws.Conn) {}\n\nfunc (h Handler) OnClose(socket *gws.Conn, err error) {}\n\nfunc (h Handler) OnPing(socket *gws.Conn, payload []byte) {}\n\nfunc (h Handler) OnPong(socket *gws.Conn, payload []byte) {}\n\nfunc (h Handler) OnMessage(socket *gws.Conn, message *gws.Message) {}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003e开源不易, 感觉不错的话点个 \u003ca href=\"https://github.com/lxzan/gws\"\u003estar\u003c/a\u003e 支持吧\u003c/h5\u003e\n",
@@ -84,13 +91,6 @@
       "Title": "go windows操作系统压缩的目录liunx操作系统下解压，目录名变成文件名的一部分（windows下解压正常）",
       "Link": "https://studygolang.com/topics/16408#reply0",
       "Description": "\u003cp\u003e1、开发环境 ：go 1.19.1 windows/amd64\n2、问题描述 ：windows操作系统下压缩的目录，liunx操作系统下解压，目录名会变成文件名的一部分，windows平台下解压正常（用到archive/zip）\n3、相关代码及结果\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e//本地压缩文件\nfunc localZipFile(dst string, src string) (err error) {\n    // 创建准备写入的文件\n    fw, err := os.Create(dst)\n    defer fw.Close()\n    if err != nil {\n        return err\n    }\n\n    // 通过 fw 来创建 zip.Write\n    zw := zip.NewWriter(fw)\n    defer func() {\n        // 检测一下是否成功关闭\n        if err := zw.Close(); err != nil {\n            fmt.Println(\u0026quot;********关闭文件流出错********\u0026quot;)\n        }\n    }()\n\n    // 下面来将文件写入 zw ，因为有可能会有很多个目录及文件，所以递归处理\n    return filepath.Walk(src, func(path string, fi os.FileInfo, errBack error) (err error) {\n        if errBack != nil {\n            return errBack\n        }\n\n        // 通过文件信息，创建 zip 的文件信息\n        fh, err := zip.FileInfoHeader(fi)\n        if err != nil {\n            return\n        }\n\n        // 替换文件信息中的文件名\n        fh.Name = strings.TrimPrefix(path, string(filepath.Separator))\n        // fh.Name = strings.TrimPrefix(path, \u0026quot;/\u0026quot;)\n\n        // 这步开始没有加，会发现解压的时候说它不是个目录(Windows下压缩，解压正常。如果windows下压缩Liunx下解压，则解压后目录名成了文件名字的一部分)\n        if fi.IsDir() {\n            fh.Name += string(os.PathSeparator)\n            // fh.Name += \u0026quot;/\u0026quot;\n        }\n\n        // 写入文件信息，并返回一个 Write 结构\n        w, err := zw.CreateHeader(fh)\n        if err != nil {\n            return\n        }\n\n        // 检测，如果不是标准文件就只写入头信息，不写入文件数据到 w\n        // 如目录，也没有数据需要写\n        if !fh.Mode().IsRegular() {\n            return nil\n        }\n\n        // 打开要压缩的文件\n        fr, err := os.Open(path)\n        defer fr.Close()\n        if err != nil {\n            return\n        }\n\n        // 将打开的文件 Copy 到 w\n        _, err = io.Copy(w, fr)\n        if err != nil {\n            return\n        }\n        // 输出压缩的内容\n        // fmt.Printf(\u0026quot;成功压缩文件： %s, 共写入了 %d 个字符的数据\\n\u0026quot;, path, n)\n\n        return nil\n    })\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e4、实际结果（目录名作为了文件名的一部分。windows下解压正常）\n\u003cimg src=\"https://static.golangjob.cn/230612/ce4d4e811463d2b672635c901e630b7b.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e5、希望结果\nwindows下压缩的目录在所有平台下解压，目录结构不变\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Go基于CEF的跨平台GUI框架",
-      "Link": "https://studygolang.com/resources/15576#reply0",
-      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
