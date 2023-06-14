@@ -39,6 +39,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "4年go 中鸟仍可能会忘记的知识点：Slice与数组",
+      "Link": "https://studygolang.com/topics/16409#reply0",
+      "Description": "\u003cp\u003e虽然是4年了，但偶尔还是会弄混slice与数组，以致于有时候slice做参数传递时，导致一些不期望的结果发生。例如用slice做参数传递后，下层对slice进行相关更改，有时候生效，有时候不生效的问题。\u003c/p\u003e\n\n\u003cp\u003e如下代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc main() {\n\ta := make([]int, 4, 5)\n\tfor i := 0; i \u0026lt; 4; i++ {\n\t\ta[i] = i + 1\n\t}\n\tlogger.Infof(\u0026quot;a :%v\u0026quot;, a)\n\taaa(a)\n\tlogger.Infof(\u0026quot;a :%v  len:%d\u0026quot;, a, len(a))\n}\n\nfunc aaa(array []int) {\n\tarray = append(array, 5)\n\tlogger.Infof(\u0026quot;array :%v  len:%d\u0026quot;, array, len(array))\n\tarray[1] = 0\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出：\na :[1 2 3 4]\narray :[1 2 3 4 5]  len:5\na :[1 0 3 4]  len:4\u003c/p\u003e\n\n\u003cp\u003e在使用slice的时候，我们就要忘记数组，要记住slice的原理，slice本质也是一个结构体，只是语言进行了相当于语法糖方式的优化，使其使用起来像数组一样。但实际进行参数传递时和结构体的性质是一样的。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "gws v1.6.0 更新: 客户端支持通过代理拨号",
       "Link": "https://studygolang.com/topics/16412#reply2",
       "Description": "\u003cp\u003e通过 \u003ccode\u003eNewDialer\u003c/code\u003e 选项设置拨号器, 推荐使用\u003ccode\u003esocks5\u003c/code\u003e 代理. 需要引入 \u003ccode\u003egolang.org/x/net/proxy\u003c/code\u003e, 代码示例如下:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;crypto/tls\u0026quot;\n\t\u0026quot;github.com/lxzan/gws\u0026quot;\n\t\u0026quot;golang.org/x/net/proxy\u0026quot;\n\t\u0026quot;log\u0026quot;\n)\n\nfunc main() {\n\tsocket, _, err := gws.NewClient(\u0026amp;Handler{}, \u0026amp;gws.ClientOption{\n\t\tAddr:      \u0026quot;wss://example.com/connect\u0026quot;,\n\t\tTlsConfig: \u0026amp;tls.Config{InsecureSkipVerify: true},\n\t\tNewDialer: func() (gws.Dialer, error) {\n\t\t\treturn proxy.SOCKS5(\u0026quot;tcp\u0026quot;, \u0026quot;127.0.0.1:1080\u0026quot;, nil, nil)\n\t\t},\n\t})\n\tif err != nil {\n\t\tlog.Println(err.Error())\n\t\treturn\n\t}\n\tsocket.ReadLoop()\n}\n\ntype Handler struct{}\n\nfunc (h Handler) OnOpen(socket *gws.Conn) {}\n\nfunc (h Handler) OnClose(socket *gws.Conn, err error) {}\n\nfunc (h Handler) OnPing(socket *gws.Conn, payload []byte) {}\n\nfunc (h Handler) OnPong(socket *gws.Conn, payload []byte) {}\n\nfunc (h Handler) OnMessage(socket *gws.Conn, message *gws.Message) {}\n\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003e开源不易, 感觉不错的话点个 \u003ca href=\"https://github.com/lxzan/gws\"\u003estar\u003c/a\u003e 支持吧\u003c/h5\u003e\n",
@@ -56,13 +63,6 @@
       "Title": "代理IP是按照流量计费还是数量计费好？",
       "Link": "https://studygolang.com/articles/36165#reply0",
       "Description": "\u003cp\u003e在选择代理IP服务提供商时，一项重要的考虑因素就是计费方式。流量计费和数量计费，具体该如何进行选择呢？\u003c/p\u003e\n\n\u003cp\u003e一、流量计费方式：\n流量计费是指根据使用的代理IP流量来计费。在这种计费模式下，代理IP服务提供商通常会根据您的实际使用情况，按照您使用的流量大小收费。这种计费方式的优点如下：\n1）灵活性：流量计费可以根据实际使用情况进行动态计费，您只需支付实际使用的流量费用，更加灵活。\n2）节约成本：如果您的使用需求不是很大，只需要偶尔使用代理IP进行数据采集或访问受限网站，流量计费可以节约成本，因为您只支付实际使用的流量费用。\n3）可控性：流量计费可以帮助您更好地控制成本，您可以根据自己的需求和预算限制，灵活选择使用代理IP的流量。\n然而，流量计费方式也存在一些缺点：\n1）预估难度：由于流量计费是根据实际使用情况计费，您在使用代理IP之前很难准确预估所需的流量量，可能会出现超出预算的情况。\n2）高峰时段成本增加：如果您的代理IP使用量在某些高峰时段较大，流量计费可能会导致成本增加，需要合理规划和控制使用时间，以避免不必要的费用支出。\u003c/p\u003e\n\n\u003cp\u003e二、数量计费方式：\n数量计费是指根据购买的代理IP数量来计费。在这种计费模式下，代理IP服务提供商通常会提供一定数量的代理IP，您可以根据需求购买相应数量的代理IP。这种计费方式的优点如下：\n1）易于预估成本：数量计费可以更容易地预估成本，您可以根据预期的使用情况，选择购买适量的代理IP，避免超出预算。\n2）适合长期稳定使用：如果您需要长期稳定地使用代理IP进行数据采集、爬虫任务等，数量计费方式可能更为适合，因为您可以购买一定数量的代理IP，并长期使用而不受额外的流量计费影响。\n当然，数量计费方式同样存在一些缺点：\n1）资源利用率浮动：用户在采购一定数量的代理ip后，可能碰到因相关业务实际代理ip需求不高，导致购买的代理IP数量未能充分利用，这就可能存在ip资源闲置浪费的问题。\n2）需求变化：业务推进中，如果用户的的实际需求发生变化，就得及时调整代理IP的数量，这就可能需要重新购买或取消现有的代理IP，造成采购流程反反复复，不够灵活。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "4年go 中鸟仍可能会忘记的知识点：Slice与数组",
-      "Link": "https://studygolang.com/topics/16409#reply0",
-      "Description": "\u003cp\u003e虽然是4年了，但偶尔还是会弄混slice与数组，以致于有时候slice做参数传递时，导致一些不期望的结果发生。例如用slice做参数传递后，下层对slice进行相关更改，有时候生效，有时候不生效的问题。\u003c/p\u003e\n\n\u003cp\u003e如下代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc main() {\n\ta := make([]int, 4, 5)\n\tfor i := 0; i \u0026lt; 4; i++ {\n\t\ta[i] = i + 1\n\t}\n\tlogger.Infof(\u0026quot;a :%v\u0026quot;, a)\n\taaa(a)\n\tlogger.Infof(\u0026quot;a :%v  len:%d\u0026quot;, a, len(a))\n}\n\nfunc aaa(array []int) {\n\tarray = append(array, 5)\n\tlogger.Infof(\u0026quot;array :%v  len:%d\u0026quot;, array, len(array))\n\tarray[1] = 0\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出：\na :[1 2 3 4]\narray :[1 2 3 4 5]  len:5\na :[1 0 3 4]  len:4\u003c/p\u003e\n\n\u003cp\u003e在使用slice的时候，我们就要忘记数组，要记住slice的原理，slice本质也是一个结构体，只是语言进行了相当于语法糖方式的优化，使其使用起来像数组一样。但实际进行参数传递时和结构体的性质是一样的。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
