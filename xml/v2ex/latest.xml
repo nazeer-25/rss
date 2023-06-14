@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>万能 V 友们，可以推荐一套洗烘套装吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/948826</link>
+      <description>&lt;p&gt;想趁着 618 买套洗烘套装，现在有点不知道如何选了。&lt;br/&gt;&#xA;目前没有明确预算，大概是 10,000 到 20,000 之间吧。  &lt;/p&gt;&#xA;&lt;p&gt;自己也看过一些，比如博世的 6 系，松下的白月光系列等等，但是懂得太少，难以抉择。  &lt;/p&gt;&#xA;&lt;p&gt;洗烘将是上下叠放，水、电、排水都有预留，洗衣机不少于 10kg 的，烘干机 9kg 或者 10kg 都可以。&lt;/p&gt;&#xA;</description>
+      <author>Tumblr</author>
+      <pubDate>14 Jun 2023 16:34:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>发一篇 iCloudpd-docker 教学 - iCloud</title>
+      <link>https://www.v2ex.com/t/948825</link>
+      <description>&lt;p&gt;需要备份 iCloud 到 NAS ，所以这篇教学在猫盘（ amd64 ）基础上，但也不妨碍用在不同环境，希望我写的能比 google 到的详细。&lt;/p&gt;&#xA;&lt;p&gt;镜像是&lt;a href=&#34;https://github.com/boredazfcuk/docker-icloudpd&#34; rel=&#34;nofollow&#34;&gt;boredazfcuk/docker-icloudpd&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;步骤&lt;/h2&gt;&#xA;&lt;p&gt;群晖创建两个共享文件夹，1. docker 2. iCloud （编辑 docker 所有者权限，获得基本写读，chmod -R 755 docker ps：755 是省事，反正 ssh 只连接一次，大家看情况更改）&#xA;docker 文件夹里创建一个.mounted 文件&lt;/p&gt;&#xA;&lt;p&gt;下面开始 ssh 连接到 NAS ，本机忽略，直接跑命令。&lt;/p&gt;&#xA;&lt;p&gt;ssh 连接 NAS ，执行命令 &lt;strong&gt;id root&lt;/strong&gt;  查看 user user_id group_id （默认应该都是 0 ）&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 猫盘是群晖 7.0 ，系统 docker 有缺陷，需要额外添加 -v /dev:/dev 不是猫盘的请忽视这条提示&#xA;&#xA;docker run --name icloudpd4 -d -v docker 共享文件夹路径:/config -v iCloud 共享文件夹的路径:/iCloud --restart always --env TZ=Asia/Shanghai --env apple_id=你的苹果 id --env icloud_china=true --env auth_china=true --env download_path=/iCloud --env user=root --env user_id=0 --env group=root --env group_id=0 boredazfcuk/icloudpd&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;当 container 成功跑起来，再运行&lt;code&gt;docker exec -it icloudpd4 &lt;a href=&#34;http://sync-icloud.sh&#34; rel=&#34;nofollow&#34;&gt;sync-icloud.sh&lt;/a&gt; --Initialise&lt;/code&gt; （猫盘需要拆分开来跑，分别运行&lt;code&gt;docker exec -it icloudpd4 /bin/sh&lt;/code&gt; 、 &lt;code&gt;&lt;a href=&#34;http://sync-icloud.sh&#34; rel=&#34;nofollow&#34;&gt;sync-icloud.sh&lt;/a&gt; --Initialise&lt;/code&gt;）&lt;/p&gt;&#xA;&lt;p&gt;如果没意外，接下来就是二步认证，然后开始下载&lt;/p&gt;&#xA;&lt;h2&gt;坑&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;输入密码后显示无法写入或者 kyxxx file not exist... 多半是文件执行权限不够&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;二步认证失败... 第一次遇到并不是二步认证，是手机号码 sms 验证，但是我没收到，后面几次尝试都接受失败，于是自己登录了 &lt;a href=&#34;http://icloud.com.cn&#34; rel=&#34;nofollow&#34;&gt;icloud.com.cn&lt;/a&gt; ，登录过一遍后再去尝试二步认证，直接成功。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>sickoo</author>
+      <pubDate>14 Jun 2023 16:32:53 +0000</pubDate>
+    </item>
+    <item>
       <title>公司可以选择发美元或者发 USDC，选哪个比较靠谱呢？ - 问与答</title>
       <link>https://www.v2ex.com/t/948824</link>
       <description>&lt;p&gt;公司可以选择发美元或者发 USDC ，请教大家选哪个比较靠谱呢？&#xA;发 U 的话 C2C 换人民币会有风险。&#xA;发美元的话，结汇的时候可能会有风险。&#xA;求建议，感谢&lt;/p&gt;&#xA;</description>
