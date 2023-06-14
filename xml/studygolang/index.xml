@@ -23,6 +23,11 @@
       <description>&lt;p&gt;求推荐&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>天气炎热在家轻松转外块</title>
+      <link>https://studygolang.com/topics/16414#reply0</link>
+      <description>&lt;p&gt;天气炎热在家轻松转外块&#xA;1.全 jian 皆可&#xA;2.工资五千家&#xA;3.喜爱网路相关工作&#xA;4.工作时间自由 但是要完成时数&#xA;5.宽带 电脑或高阶手机 自备&#xA;6.请加李经理 :1972815785&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>gws v1.6.0 更新: 客户端支持通过代理拨号</title>
       <link>https://studygolang.com/topics/16412#reply2</link>
       <description>&lt;p&gt;通过 &lt;code&gt;NewDialer&lt;/code&gt; 选项设置拨号器, 推荐使用&lt;code&gt;socks5&lt;/code&gt; 代理. 需要引入 &lt;code&gt;golang.org/x/net/proxy&lt;/code&gt;, 代码示例如下:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;crypto/tls&amp;quot;&#xA;&#x9;&amp;quot;github.com/lxzan/gws&amp;quot;&#xA;&#x9;&amp;quot;golang.org/x/net/proxy&amp;quot;&#xA;&#x9;&amp;quot;log&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#x9;socket, _, err := gws.NewClient(&amp;amp;Handler{}, &amp;amp;gws.ClientOption{&#xA;&#x9;&#x9;Addr:      &amp;quot;wss://example.com/connect&amp;quot;,&#xA;&#x9;&#x9;TlsConfig: &amp;amp;tls.Config{InsecureSkipVerify: true},&#xA;&#x9;&#x9;NewDialer: func() (gws.Dialer, error) {&#xA;&#x9;&#x9;&#x9;return proxy.SOCKS5(&amp;quot;tcp&amp;quot;, &amp;quot;127.0.0.1:1080&amp;quot;, nil, nil)&#xA;&#x9;&#x9;},&#xA;&#x9;})&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Println(err.Error())&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;socket.ReadLoop()&#xA;}&#xA;&#xA;type Handler struct{}&#xA;&#xA;func (h Handler) OnOpen(socket *gws.Conn) {}&#xA;&#xA;func (h Handler) OnClose(socket *gws.Conn, err error) {}&#xA;&#xA;func (h Handler) OnPing(socket *gws.Conn, payload []byte) {}&#xA;&#xA;func (h Handler) OnPong(socket *gws.Conn, payload []byte) {}&#xA;&#xA;func (h Handler) OnMessage(socket *gws.Conn, message *gws.Message) {}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h5&gt;开源不易, 感觉不错的话点个 &lt;a href=&#34;https://github.com/lxzan/gws&#34;&gt;star&lt;/a&gt; 支持吧&lt;/h5&gt;&#xA;</description>
