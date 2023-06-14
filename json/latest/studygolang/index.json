@@ -25,6 +25,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "服务间的通讯应该使用HTTP组件还是自写RPC ？",
+      "Link": "https://studygolang.com/topics/16413#reply0",
+      "Description": "\u003ch3\u003e答案： 应该使用基于HTTP协议的组件\u003c/h3\u003e\n\n\u003ch3\u003e原因：\u003c/h3\u003e\n\n\u003col\u003e\n\u003cli\u003e接口调试方便，参数可使用http-client传递，服务端也可直接打印\u003c/li\u003e\n\u003cli\u003ehttp协议对于每个请求隐藏式的设置了id，对服务端接口调用的并发调度进行了很好的隔离（和封装）\u003c/li\u003e\n\u003cli\u003e接口同步调用模型开发方便，异步可用专用的消息队列替代\u003c/li\u003e\n\u003cli\u003e省去网路连接通路检测的复杂性\u003c/li\u003e\n\u003cli\u003ex-www-urlencoded的数据压缩性也很好\u003c/li\u003e\n\u003cli\u003eHttp协议在不断改进(http2)\u003c/li\u003e\n\u003cli\u003e安全性有https\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "一年一度！欢迎参加 2023 开发者生态系统调查",
       "Link": "https://studygolang.com/topics/16410#reply0",
       "Description": "\u003cp\u003e调查以 10 种语言提供，您还将有机会赢得以下奖品之一：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eMacBook Pro 16\u003c/li\u003e\n\u003cli\u003eNVIDIA GeForce RTX 4090 显卡\u003c/li\u003e\n\u003cli\u003eiPhone 14 Pro\u003c/li\u003e\n\u003cli\u003e价值 300 美元的 Amazon 礼品卡\u003c/li\u003e\n\u003cli\u003eJetBrains All Products Pack\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e\u003ca href=\"https://surveys.jetbrains.com/s3/developer-ecosystem-survey-2023-sh?pcode=44816435107838239\"\u003e参加开发者生态系统调查\u003c/a\u003e\u003c/p\u003e\n",
@@ -63,6 +70,13 @@
       "Title": "Go基于CEF的跨平台GUI框架",
       "Link": "https://studygolang.com/resources/15576#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "注册中心究竟应该实现CAP中的哪两点？",
+      "Link": "https://studygolang.com/topics/15803#reply2",
+      "Description": "\u003cp\u003eCAP as the base of Cluster System.\nCnsistency: all node see the same data at the same time.\nAvailability: read and write always succeed.\nP: the system continues to operate despite arbitrary message loss or failure of part of the system.\u003c/p\u003e\n\n\u003cp\u003e以上是CAP的概念。\n场景与动作如下：\n1） 注册中心的作用是作为一个“公共电话薄”作用，每个“worker”可以把“电话薄”在本地留存一份副本；\n2） 每个“woker”上线（up）或下线（down）的动作，最好同步感知，以免因节点路由引发错误，导致更上一层做处理。\n3） 多个注册中心中其一下线，不应当影响“worker”的执行，并且worker中保存了副本数据。\u003c/p\u003e\n\n\u003cp\u003e基于以上动作，要保证业务间（处于上层）通讯被正确路由；C 很重要，用于保存实时数据。\n基于以上动作，注册中心异常不应影响业务，P 很重要。\n并且，worker注册下线的异常应由服务启动或关闭时自行重试选择节点。A 不是很重要。\u003c/p\u003e\n\n\u003cp\u003e所以，注册中心应实现为 CP ；推荐使用 ETCD\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
