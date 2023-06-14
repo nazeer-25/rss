@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "xorm 的结构体字段映射 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/948727",
+      "Description": "想把公共的字段（ id,create_time,update_time...）拿出来单独放一个结构体，然后嵌套到结构体上最后映射到字段上。试了一下，发现它直接把嵌套的结构体名作为 text 类型的字段创建到了表上了。\u003cbr /\u003e\u003cbr /\u003e1.xorm 支持嵌套结构体然后映射字段吗？\u003cbr /\u003e2.xorm 能不能通过字段属性定义字段的前后顺序？\u003cbr /\u003e\u003cbr /\u003etype BaseModel struct {\u003cbr /\u003e\tId       int32     `json:\"id\" xorm:\"int pk autoincr(1) comment('用户 ID')\"`\u003cbr /\u003e\tCreateAt time.Time `json:\"create_at\" xorm:\"create_at updated comment('创建时间')\"`\u003cbr /\u003e\tUpdateAt time.Time `json:\"update_at\" xorm:\"update_at updated comment('更新时间')\"`\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003etype User struct {\u003cbr /\u003e\tUserName string `json:\"username\" xorm:\"varchar(32) notnull comment('用户名')\"`\u003cbr /\u003e\tPassword string `json:\"password\" xorm:\"varchar(32) notnull comment('用户密码')\"`\u003cbr /\u003e\tBaseModel\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003e最后出现了在数据库上的表定义是：\u003cbr /\u003eCREATE TABLE `user` (\u003cbr /\u003e  `user_name` varchar(32) NOT NULL COMMENT '用户名',\u003cbr /\u003e  `password` varchar(32) NOT NULL COMMENT '用户密码',\u003cbr /\u003e  `base_model` text\u003cbr /\u003e) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;",
+      "Author": "zanelee",
+      "PubDate": "2023-06-14T08:43:45Z"
+    },
+    {
       "Title": "有什么类似 V2EX 的网站推荐？ - 问与答",
       "Link": "https://www.v2ex.com/t/948726",
       "Description": "如题，各位 V2EXer ，能推荐一些和 V2EX 类似，适合摸鱼氛围热闹的网站或者论坛吗？谢谢了！",
