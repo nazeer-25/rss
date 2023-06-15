@@ -4,6 +4,62 @@
   "Description": "",
   "Items": [
     {
+      "Title": "哪里可以购买便宜的电影票？ - 问与答",
+      "Link": "https://www.v2ex.com/t/948918",
+      "Description": "自己没事喜欢一个人看电影 也算是自己的一种放松方式，这样自己感觉自己不会太孤单\u003cbr /\u003e看了 1 到 6 月的账单  不知不觉已经花了好多钱了。\u003cbr /\u003e想问下，有没有便宜购买电影票的驱动，因为我之前看到别人在咸鱼购买瑞幸就很便宜\u003cbr /\u003e所以问下 V 友有没有什么渠道，可以购买到便宜的电影票  ，\u003cbr /\u003e坐标深圳\u003cbr /\u003e谢谢",
+      "Author": "iyg429",
+      "PubDate": "2023-06-15T03:34:04Z"
+    },
+    {
+      "Title": "我用 GO 语言封装了一个机器学习框架，并实现了一个小型的 GPT 模型来对对联 - 分享创造",
+      "Link": "https://www.v2ex.com/t/948917",
+      "Description": "\u003ch2\u003elibgotorch\u003c/h2\u003e\n\u003cp\u003e首先利用 libtorch 库封装了一个\u003ca href=\"https://github.com/lwch/gotorch\" rel=\"nofollow\"\u003elibgotorch\u003c/a\u003e库，已支持最新的 libtorch2.0.1\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003e问题一：cgo 中返回的 tensor 对象在栈上，直接使用可能会有内存安全问题\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e我做了一层简单的封装来使其创建到堆上，但其引发的问题是需要手动管理内存，因此我编写了 mmgr 包在每一个 tensor 对象创建的时候自动加入 mmgr 的 storage 当中，最后在每一轮训练完毕后通过 GC 方法释放堆上的 tensor 对象\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003e问题二：windows 下的 libtorch 库通过 msvc 编译，提供的是 C++接口，无法在 mingw 中无法正常链接\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e解决方案是通过在封装一个动态链接库并暴露 C 语言接口，在 mingw 中即可正常链接\u003c/p\u003e\n\u003cp\u003e通过解决以上两个问题，已可以在 go 语言中使用 libtorch 库并实现自己的模型了\u003c/p\u003e\n\u003ch2\u003e对对联\u003c/h2\u003e\n\u003cp\u003e下面进入正题，我在 tnn 库中实现了一个小型的 GPT 模型来实现对对联：\u003ca href=\"https://github.com/lwch/tnn/tree/gotorch/example/couplet\" rel=\"nofollow\"\u003ecouplet\u003c/a\u003e，下面让我们来看一下最终效果\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e$ go run main.go evaluate --model model7M 晚风摇树树还挺\nload embedding...\nmodel loaded\ninputs: [472 3 462 148 148 342 1516]\nmap[4.278747:[醉] 5.084207:[润] 8.868446:[晨]]\nmap[3.8447263:[花] 4.750472:[润] 8.635651:[露]]\nmap[5.46043:[花] 6.7003703:[露] 10.768249:[润]]\nmap[4.3850584:[露] 4.875666:[润] 9.896332:[花]]\nmap[3.6241615:[红] 5.611262:[润] 10.782802:[花]]\nmap[4.3855276:[花] 5.48069:[红] 9.480111:[更]]\nmap[3.7904112:[心] 4.269902:[花] 10.3220415:[红]]\n晨露润花花更红\n\n$ go run main.go evaluate --model model7M 投石向天跟命斗\nload embedding...\nmodel loaded\ninputs: [1233 190 383 11 2623 620 490]\nmap[5.7068815:[门] 5.7826476:[问] 9.79136:[闭]]\nmap[3.0136497:[问] 3.1092193:[人] 8.903796:[门]]\nmap[3.021591:[还] 3.448888:[歌] 8.96453:[问]]\nmap[4.9368696:[地] 5.7390223:[时] 9.438878:[卷]]\nmap[3.5542138:[话] 3.858942:[时] 8.253393:[与]]\nmap[3.025545:[与] 3.2461479:[卷] 9.06726:[时]]\nmap[4.250452:[时] 4.712057:[舟] 10.401218:[争]]\n闭门问卷与时争\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e注意：该模型仅训练了开源数据集\u003ca href=\"https://github.com/wb14123/couplet-dataset\" rel=\"nofollow\"\u003ecouplet-dataset\u003c/a\u003e中的前 1 万个样本\u003c/p\u003e\n\u003cp\u003e模型的参数结构如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e+------------------------+---------+\n|          NAME          |  COUNT  |\n+------------------------+---------+\n| transformer0_attention |    1872 |\n| transformer0_dense     | 1256640 |\n| transformer0_output    | 1254960 |\n| transformer1_attention |    1872 |\n| transformer1_dense     | 1256640 |\n| transformer1_output    | 1254960 |\n| output                 | 2488596 |\n| total                  | 7515540 |\n+------------------------+---------+\n\ntrain 200, cost=2h15m7.877395694s, loss=3.665343e-02\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e整个模型共有 751 万个参数，模型包含 2 个 transformer 模块，由于在训练时只使用了 8 个 float32 来对每一个字进行表征，因此 attention 层的参数量较少，其他参数配置如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003econst embeddingDim = 8 // 8 个 float32 表示一个字向量\nconst paddingSize = 70 // 最长为 34*2 ，因此 padding 长度必须大于 68\nconst heads = 4\nconst batchSize = 128\nconst epoch = 200\nconst lr = 0.001\nconst transformerSize = 2\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e最后让我们来看看模型的泛化能力如何\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e$ go run main.go evaluate --model model7M 我是谁\nload embedding...\nmodel loaded\ninputs: [85 62 191]\nmap[4.3809786:[雨] 4.9436274:[染] 7.105626:[绿]]\nmap[3.8163047:[水] 4.013789:[东] 4.088595:[得]]\nmap[4.872726:[唱] 5.4107614:[兰] 6.3983927:[发]]\n绿得发\n\n$ go run main.go evaluate --model ./model7M 我在哪\nload embedding...\nmodel loaded\ninputs: [85 99 1151]\nmap[1.480957:[思] 2.002811:[得] 4.0260763:[寻]]\nmap[3.4100764:[女] 3.868993:[对] 4.448501:[得]]\nmap[2.2672489:[年] 2.3772364:[历] 4.946753:[谁]]\n寻得谁\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e效果不是很理想，可能还是跟训练的样本数量太少有关\u003c/p\u003e\n\u003cp\u003e另外还有一些示例可在 example 目录下找到，如使用 RNN 来学习如何画 sin 曲线等\u003c/p\u003e\n\u003cp\u003e最后是项目地址：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/lwch/gotorch\" rel=\"nofollow\"\u003ehttps://github.com/lwch/gotorch\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/lwch/tnn\" rel=\"nofollow\"\u003ehttps://github.com/lwch/tnn\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "lwch",
+      "PubDate": "2023-06-15T03:29:19Z"
+    },
+    {
+      "Title": "开源一个简单的剪切板复制历史程序， node 编写，就 30 几行代码安全可靠 - 程序员",
+      "Link": "https://www.v2ex.com/t/948916",
+      "Description": "\u003cp\u003e先上地址 \u003ca href=\"https://github.com/wurencaideli/copy-history\" rel=\"nofollow\"\u003ecopy-history \u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e采用 nodejs 编写，刚好早上没事儿做学一下 node ，还能做一个能用到的小工具，两全其美。\u003c/p\u003e\n\u003cp\u003e代码拉下来 npm install 一下就可以了，安装完后 windows 下直接点击 run.bat 就可以运行了，命令行 npm run run 也可以的\u003c/p\u003e\n",
+      "Author": "wuzhanggui",
+      "PubDate": "2023-06-15T03:26:18Z"
+    },
+    {
+      "Title": "有没有什么平台可以设计电路板？ - 问与答",
+      "Link": "https://www.v2ex.com/t/948915",
+      "Description": "\u003cp\u003e我想自己设计一个小玩意，已经用 arduino 实现了，但是 arduino 本身太大，还要插扩展板，有没有类似猪八戒这种可以找人开发软件的平台，可以找人帮我重新设计一下电路板，又能兼容我的代码。\u003c/p\u003e\n",
+      "Author": "jstony",
+      "PubDate": "2023-06-15T03:26:08Z"
+    },
+    {
+      "Title": "ios gmail app 的问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/948914",
+      "Description": "ios gmail 能正常收到邮件，通知栏能预览信息，如果不科学的情况下，就无法发邮件和查看邮件，有什么好的办法正常收发邮件吗，但不要一直开着科学工具",
+      "Author": "rivercherdeeeeee",
+      "PubDate": "2023-06-15T03:25:07Z"
+    },
+    {
+      "Title": "想润了,但是英语不太行,有什么学英语的软件吗,背单词之类的 - 问与答",
+      "Link": "https://www.v2ex.com/t/948913",
+      "Description": "\u003cp\u003e润的话找中介靠谱吗,唉\u003c/p\u003e\n",
+      "Author": "quaso",
+      "PubDate": "2023-06-15T03:24:45Z"
+    },
+    {
+      "Title": "initrd.img initrd.img.old lost+found vmlinuz vmlinuz.old 是干什么的？ - 问与答",
+      "Link": "https://www.v2ex.com/t/948912",
+      "Description": "\u003cp\u003e安装完 debian 12 （网络安装，但安装途中没连上网），安装结束后，根目录下有：\u003c/p\u003e\n\u003cp\u003einitrd.img  initrd.img.old  lost+found  vmlinuz  vmlinuz.old  目录，之前用过 linux ，但记得好像没这些目录，请问是不是安装过程出了问题呢？可以删除吗这些文件？\u003c/p\u003e\n",
+      "Author": "ly879",
+      "PubDate": "2023-06-15T03:24:39Z"
+    },
+    {
+      "Title": "Mac 优化电池连接电源自动降到 80，如果不主动点击充满电，就一直保持在 80？ - macOS",
+      "Link": "https://www.v2ex.com/t/948911",
+      "Description": "",
+      "Author": "cantonadong",
+      "PubDate": "2023-06-15T03:23:51Z"
+    },
+    {
       "Title": "小红书账号被封，有办法解吗 - 问与答",
       "Link": "https://www.v2ex.com/t/948909",
       "Description": "前段时间抢了几张演唱会门票\u003cbr /\u003e本来自己去的，发现炒的价格挺高，在小红书上发了信息转票\u003cbr /\u003e被粉丝举报封号了\u003cbr /\u003e申诉几天也没用…账号也不能注销重新注册\u003cbr /\u003e有没有什么办法？",
