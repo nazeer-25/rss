@@ -102,13 +102,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "4年go 中鸟仍可能会忘记的知识点：Slice与数组",
-      "Link": "https://studygolang.com/topics/16409#reply0",
-      "Description": "\u003cp\u003e虽然是4年了，但偶尔还是会弄混slice与数组，以致于有时候slice做参数传递时，导致一些不期望的结果发生。例如用slice做参数传递后，下层对slice进行相关更改，有时候生效，有时候不生效的问题。\u003c/p\u003e\n\n\u003cp\u003e如下代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc main() {\n\ta := make([]int, 4, 5)\n\tfor i := 0; i \u0026lt; 4; i++ {\n\t\ta[i] = i + 1\n\t}\n\tlogger.Infof(\u0026quot;a :%v\u0026quot;, a)\n\taaa(a)\n\tlogger.Infof(\u0026quot;a :%v  len:%d\u0026quot;, a, len(a))\n}\n\nfunc aaa(array []int) {\n\tarray = append(array, 5)\n\tlogger.Infof(\u0026quot;array :%v  len:%d\u0026quot;, array, len(array))\n\tarray[1] = 0\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出：\na :[1 2 3 4]\narray :[1 2 3 4 5]  len:5\na :[1 0 3 4]  len:4\u003c/p\u003e\n\n\u003cp\u003e在使用slice的时候，我们就要忘记数组，要记住slice的原理，slice本质也是一个结构体，只是语言进行了相当于语法糖方式的优化，使其使用起来像数组一样。但实际进行参数传递时和结构体的性质是一样的。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "本科毕业设计做个什么比较有趣",
       "Link": "https://studygolang.com/topics/4651#reply3",
       "Description": "\u003cp\u003e渣本，大四，实习的时候一直用的golang，毕设想用go做个东西，马上要确定毕业设计题目了，各位有什么好想法吗？\n各位道友助老夫渡劫！！！\u003c/p\u003e\n",
@@ -126,6 +119,13 @@
       "Title": "for真的会独占CPU吗？",
       "Link": "https://studygolang.com/topics/16381#reply11",
       "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc main() {\n    runtime.GOMAXPROCS(1)\n\n    go func() {\n        for i:=0;i\u0026lt;10 ;i++  {\n            fmt.Println(i)\n        }\n    }()\n\n    for {}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e预想的是for独占M, goroutine不会执行，但是结果却是goroutine正常输出，这是为何？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e我的go版本是:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003e☁  etc  go version\ngo version go1.17 darwin/amd64\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e我记得这个问题在《go语言高级编程》中提过。\n求大佬们帮忙释怀。。。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "4年go 中鸟仍可能会忘记的知识点：Slice与数组",
+      "Link": "https://studygolang.com/topics/16409#reply0",
+      "Description": "\u003cp\u003e虽然是4年了，但偶尔还是会弄混slice与数组，以致于有时候slice做参数传递时，导致一些不期望的结果发生。例如用slice做参数传递后，下层对slice进行相关更改，有时候生效，有时候不生效的问题。\u003c/p\u003e\n\n\u003cp\u003e如下代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc main() {\n\ta := make([]int, 4, 5)\n\tfor i := 0; i \u0026lt; 4; i++ {\n\t\ta[i] = i + 1\n\t}\n\tlogger.Infof(\u0026quot;a :%v\u0026quot;, a)\n\taaa(a)\n\tlogger.Infof(\u0026quot;a :%v  len:%d\u0026quot;, a, len(a))\n}\n\nfunc aaa(array []int) {\n\tarray = append(array, 5)\n\tlogger.Infof(\u0026quot;array :%v  len:%d\u0026quot;, array, len(array))\n\tarray[1] = 0\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出：\na :[1 2 3 4]\narray :[1 2 3 4 5]  len:5\na :[1 0 3 4]  len:4\u003c/p\u003e\n\n\u003cp\u003e在使用slice的时候，我们就要忘记数组，要记住slice的原理，slice本质也是一个结构体，只是语言进行了相当于语法糖方式的优化，使其使用起来像数组一样。但实际进行参数传递时和结构体的性质是一样的。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
