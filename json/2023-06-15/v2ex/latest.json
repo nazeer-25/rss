@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请问 pixel4 能装多少个 esim? - Android",
+      "Link": "https://www.v2ex.com/t/949019",
+      "Description": "",
+      "Author": "cksuenlan",
+      "PubDate": "2023-06-15T08:24:03Z"
+    },
+    {
+      "Title": "遇到一个 JS 语法错误, 加了分号就可以运行 - JavaScript",
+      "Link": "https://www.v2ex.com/t/949018",
+      "Description": "\u003cp\u003edemo 在 \u003ca href=\"http://jsfiddle.net/ausaki/ahnvLub0/5/\" rel=\"nofollow\"\u003ejsfiddle\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e对 JS 不太熟悉, Google 上搜了一些关键词(semicolon anonymous function syntax error)没找到答案. 为什么一定要在调用匿名函数的上一行语句添加加分号?\u003c/p\u003e\n",
+      "Author": "lxy42",
+      "PubDate": "2023-06-15T08:21:14Z"
+    },
+    {
+      "Title": "有懂 golang 的吗，可以解释下这段代码吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/949017",
+      "Description": "\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\ntype Job interface {\n\tDo()\n}\ntype Worker struct {\n\tid         int\n\tjobChannel chan Job\n\tdone       chan bool\n}\ntype Pool struct {\n\tworkers  []*Worker\n\tjobQueue chan Job\n\twg       sync.WaitGroup\n}\n\nfunc NewWorker(id int, wg *sync.WaitGroup) *Worker {\n\tworker := Worker{\n\t\tid:         id,\n\t\tjobChannel: make(chan Job),\n\t\tdone:       make(chan bool),\n\t}\n\tgo func() {\n\t\tfor job := range worker.jobChannel {\n\t\t\tjob.Do()\n\t\t}\n\t\twg.Done()\n\t}()\n\treturn \u0026amp;worker\n}\nfunc NewPool(numWorkers int) *Pool {\n\tpool := Pool{\n\t\tworkers:  make([]*Worker, numWorkers),\n\t\tjobQueue: make(chan Job),\n\t}\n\tfor i := 0; i \u0026lt; numWorkers; i++ {\n\t\tpool.workers[i] = NewWorker(i, \u0026amp;pool.wg)\n\t}\n\tgo pool.run()\n\treturn \u0026amp;pool\n}\nfunc (w *Worker) Start(job Job) {\n\tw.jobChannel \u0026lt;- job\n}\nfunc (w *Worker) Stop() {\n\tclose(w.jobChannel)\n\t\u0026lt;-w.done\n}\nfunc (p *Pool) run() {\n\tfor job := range p.jobQueue {\n\t\tworker := p.getAvailableWorker()\n\t\tworker.Start(job)\n\t}\n\tfor _, worker := range p.workers {\n\t\tworker.Stop()\n\t}\n\tp.wg.Done()\n}\nfunc (p *Pool) getAvailableWorker() *Worker {\n\tfor {\n\t\tfor _, worker := range p.workers {\n\t\t\tselect {\n\t\t\tcase \u0026lt;-worker.done:\n\t\t\tdefault:\n\t\t\t\treturn worker\n\t\t\t}\n\t\t}\n\t}\n}\nfunc (p *Pool) Submit(job Job) {\n\tp.wg.Add(1)\n\tp.jobQueue \u0026lt;- job\n}\nfunc (p *Pool) Shutdown() {\n\tclose(p.jobQueue)\n\tp.wg.Wait()\n}\n\ntype PrintJob struct {\n\tid int\n}\n\nfunc (pj PrintJob) Do() {\n\tfmt.Printf(\"Printing job %d\\n\", pj.id)\n}\nfunc main() {\n\tpool := NewPool(5)\n\tfor i := 0; i \u0026lt; 10; i++ {\n\t\tpool.Submit(PrintJob{id: i})\n\t}\n\tpool.Shutdown()\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "jack4536251",
+      "PubDate": "2023-06-15T08:19:48Z"
+    },
+    {
       "Title": "2023 年了，小米空调能买吗？ - 小米",
       "Link": "https://www.v2ex.com/t/949016",
       "Description": "\u003cp\u003e2023 年了，小米空调能买吗？ 1.5P 的一级能效，看着很便宜。有用过的朋友评价下吗？噪音，故障率等等。\u003c/p\u003e\n",

@@ -4,6 +4,26 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请问 pixel4 能装多少个 esim? - Android</title>
+      <link>https://www.v2ex.com/t/949019</link>
+      <author>cksuenlan</author>
+      <pubDate>15 Jun 2023 08:24:03 +0000</pubDate>
+    </item>
+    <item>
+      <title>遇到一个 JS 语法错误, 加了分号就可以运行 - JavaScript</title>
+      <link>https://www.v2ex.com/t/949018</link>
+      <description>&lt;p&gt;demo 在 &lt;a href=&#34;http://jsfiddle.net/ausaki/ahnvLub0/5/&#34; rel=&#34;nofollow&#34;&gt;jsfiddle&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;对 JS 不太熟悉, Google 上搜了一些关键词(semicolon anonymous function syntax error)没找到答案. 为什么一定要在调用匿名函数的上一行语句添加加分号?&lt;/p&gt;&#xA;</description>
+      <author>lxy42</author>
+      <pubDate>15 Jun 2023 08:21:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>有懂 golang 的吗，可以解释下这段代码吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/949017</link>
+      <description>&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;fmt&#34;&#xA;&#x9;&#34;sync&#34;&#xA;)&#xA;&#xA;type Job interface {&#xA;&#x9;Do()&#xA;}&#xA;type Worker struct {&#xA;&#x9;id         int&#xA;&#x9;jobChannel chan Job&#xA;&#x9;done       chan bool&#xA;}&#xA;type Pool struct {&#xA;&#x9;workers  []*Worker&#xA;&#x9;jobQueue chan Job&#xA;&#x9;wg       sync.WaitGroup&#xA;}&#xA;&#xA;func NewWorker(id int, wg *sync.WaitGroup) *Worker {&#xA;&#x9;worker := Worker{&#xA;&#x9;&#x9;id:         id,&#xA;&#x9;&#x9;jobChannel: make(chan Job),&#xA;&#x9;&#x9;done:       make(chan bool),&#xA;&#x9;}&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for job := range worker.jobChannel {&#xA;&#x9;&#x9;&#x9;job.Do()&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;wg.Done()&#xA;&#x9;}()&#xA;&#x9;return &amp;amp;worker&#xA;}&#xA;func NewPool(numWorkers int) *Pool {&#xA;&#x9;pool := Pool{&#xA;&#x9;&#x9;workers:  make([]*Worker, numWorkers),&#xA;&#x9;&#x9;jobQueue: make(chan Job),&#xA;&#x9;}&#xA;&#x9;for i := 0; i &amp;lt; numWorkers; i++ {&#xA;&#x9;&#x9;pool.workers[i] = NewWorker(i, &amp;amp;pool.wg)&#xA;&#x9;}&#xA;&#x9;go pool.run()&#xA;&#x9;return &amp;amp;pool&#xA;}&#xA;func (w *Worker) Start(job Job) {&#xA;&#x9;w.jobChannel &amp;lt;- job&#xA;}&#xA;func (w *Worker) Stop() {&#xA;&#x9;close(w.jobChannel)&#xA;&#x9;&amp;lt;-w.done&#xA;}&#xA;func (p *Pool) run() {&#xA;&#x9;for job := range p.jobQueue {&#xA;&#x9;&#x9;worker := p.getAvailableWorker()&#xA;&#x9;&#x9;worker.Start(job)&#xA;&#x9;}&#xA;&#x9;for _, worker := range p.workers {&#xA;&#x9;&#x9;worker.Stop()&#xA;&#x9;}&#xA;&#x9;p.wg.Done()&#xA;}&#xA;func (p *Pool) getAvailableWorker() *Worker {&#xA;&#x9;for {&#xA;&#x9;&#x9;for _, worker := range p.workers {&#xA;&#x9;&#x9;&#x9;select {&#xA;&#x9;&#x9;&#x9;case &amp;lt;-worker.done:&#xA;&#x9;&#x9;&#x9;default:&#xA;&#x9;&#x9;&#x9;&#x9;return worker&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;func (p *Pool) Submit(job Job) {&#xA;&#x9;p.wg.Add(1)&#xA;&#x9;p.jobQueue &amp;lt;- job&#xA;}&#xA;func (p *Pool) Shutdown() {&#xA;&#x9;close(p.jobQueue)&#xA;&#x9;p.wg.Wait()&#xA;}&#xA;&#xA;type PrintJob struct {&#xA;&#x9;id int&#xA;}&#xA;&#xA;func (pj PrintJob) Do() {&#xA;&#x9;fmt.Printf(&#34;Printing job %d\n&#34;, pj.id)&#xA;}&#xA;func main() {&#xA;&#x9;pool := NewPool(5)&#xA;&#x9;for i := 0; i &amp;lt; 10; i++ {&#xA;&#x9;&#x9;pool.Submit(PrintJob{id: i})&#xA;&#x9;}&#xA;&#x9;pool.Shutdown()&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>jack4536251</author>
+      <pubDate>15 Jun 2023 08:19:48 +0000</pubDate>
+    </item>
+    <item>
       <title>2023 年了，小米空调能买吗？ - 小米</title>
       <link>https://www.v2ex.com/t/949016</link>
       <description>&lt;p&gt;2023 年了，小米空调能买吗？ 1.5P 的一级能效，看着很便宜。有用过的朋友评价下吗？噪音，故障率等等。&lt;/p&gt;&#xA;</description>
