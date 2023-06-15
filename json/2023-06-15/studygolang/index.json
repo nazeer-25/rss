@@ -32,6 +32,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "求助一个问题，关于协程和gorm的",
+      "Link": "https://studygolang.com/articles/36166#reply7",
+      "Description": "\u003ch3\u003e一切都源于我开发中发现的一个bug，简单描述就是 先insert 了一条数据，然后开启了一个协程，直接进行查询刚才插入的数据，竟然没查到。\u003c/h3\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e代码如下\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc Test(t *testing.T) {\n\n\trecord := \u0026amp;model.ContentCoursePracticeRecord{\n\t\tCid:      0,\n\t\tUid:      1,\n\t\tComplete: 1,\n\t\tType:     2,\n\t\tDuration: 100,\n\t\tCtime:    time.Now(),\n\t\tUptime:   time.Now(),\n\t}\n\terr := dao.ContentCoursePracticeRecordDao.Create(record)\n\tassert.Equal(t, err, nil)\n\tgo func() {\n\t\t// 查询0元购活动\n\t\tvar (\n\t\t\tduration int\n\t\t)\n\n\t\tdb, err := utils.GetDB()\n\n\t\tif err != nil {\n\t\t\tassert.Equal(t, err, nil)\n\t\t}\n\n\t\tif ret := db.Model(\u0026amp;model.ContentCoursePracticeRecord{}).\n\t\t\tWhere(\u0026quot;isdel = 0 and uid = ?\u0026quot;, 1).\n\t\t\tWhere(\u0026quot;ctime \u0026gt;= ?\u0026quot;, time.Now().Format(\u0026quot;2006-01-02\u0026quot;)).\n\t\t\tSelect(\u0026quot;sum(duration) as duration\u0026quot;).\n\t\t\tFind(\u0026amp;duration); ret.Error != nil {\n\t\t\t// 此处报错 ，说明没有数据\n\t\t\t//sql: Scan error on column index 0, name \u0026quot;duration\u0026quot;: converting NULL to int is unsupported\n\t\t\tassert.Equal(t, err, nil)\n\t\t}\n\t}()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e他不是一个必现的问题，我也没有成功复现出来\n后来把查询从写成挪出去就没有问题了，但是也没有想明白问题？望各位大佬指点！\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "天气炎热在家轻松转外块",
+      "Link": "https://studygolang.com/topics/16414#reply0",
+      "Description": "\u003cp\u003e天气炎热在家轻松转外块\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "萌新，vs编辑器运行错误，大佬站站台",
       "Link": "https://studygolang.com/topics/16415#reply1",
       "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230614/1ef69e9212012da0a439e9ebece426f7.png\" alt=\"企业微信截图_16867250697864.png\" /\u003e\u003c/p\u003e\n",
@@ -56,20 +70,6 @@
       "Title": "在家工作轻松自在速来",
       "Link": "https://studygolang.com/topics/16416#reply0",
       "Description": "\u003cp\u003e在家工作轻松自在速来\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "求助一个问题，关于协程和gorm的",
-      "Link": "https://studygolang.com/articles/36166#reply7",
-      "Description": "\u003ch3\u003e一切都源于我开发中发现的一个bug，简单描述就是 先insert 了一条数据，然后开启了一个协程，直接进行查询刚才插入的数据，竟然没查到。\u003c/h3\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e代码如下\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc Test(t *testing.T) {\n\n\trecord := \u0026amp;model.ContentCoursePracticeRecord{\n\t\tCid:      0,\n\t\tUid:      1,\n\t\tComplete: 1,\n\t\tType:     2,\n\t\tDuration: 100,\n\t\tCtime:    time.Now(),\n\t\tUptime:   time.Now(),\n\t}\n\terr := dao.ContentCoursePracticeRecordDao.Create(record)\n\tassert.Equal(t, err, nil)\n\tgo func() {\n\t\t// 查询0元购活动\n\t\tvar (\n\t\t\tduration int\n\t\t)\n\n\t\tdb, err := utils.GetDB()\n\n\t\tif err != nil {\n\t\t\tassert.Equal(t, err, nil)\n\t\t}\n\n\t\tif ret := db.Model(\u0026amp;model.ContentCoursePracticeRecord{}).\n\t\t\tWhere(\u0026quot;isdel = 0 and uid = ?\u0026quot;, 1).\n\t\t\tWhere(\u0026quot;ctime \u0026gt;= ?\u0026quot;, time.Now().Format(\u0026quot;2006-01-02\u0026quot;)).\n\t\t\tSelect(\u0026quot;sum(duration) as duration\u0026quot;).\n\t\t\tFind(\u0026amp;duration); ret.Error != nil {\n\t\t\t// 此处报错 ，说明没有数据\n\t\t\t//sql: Scan error on column index 0, name \u0026quot;duration\u0026quot;: converting NULL to int is unsupported\n\t\t\tassert.Equal(t, err, nil)\n\t\t}\n\t}()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e他不是一个必现的问题，我也没有成功复现出来\n后来把查询从写成挪出去就没有问题了，但是也没有想明白问题？望各位大佬指点！\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "天气炎热在家轻松转外块",
-      "Link": "https://studygolang.com/topics/16414#reply0",
-      "Description": "\u003cp\u003e天气炎热在家轻松转外块\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
