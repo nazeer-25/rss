@@ -4,6 +4,62 @@
   "Description": "",
   "Items": [
     {
+      "Title": "NAS 每天关机会损伤硬盘吗？ - NAS",
+      "Link": "https://www.v2ex.com/t/948882",
+      "Description": "\u003cp\u003e请教大家一个问题，以下哪种方式对硬盘损伤更大？\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eNAS24 小时持续开机\u003c/li\u003e\n\u003cli\u003e每晚 2 点-6 点关机\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "itskingname",
+      "PubDate": "2023-06-15T02:20:51Z"
+    },
+    {
+      "Title": "2023 年了，西安有什么不能错过的美食吗！ - 西安",
+      "Link": "https://www.v2ex.com/t/948881",
+      "Description": "\u003cp\u003e之前有个帖子： \u003ca href=\"https://www.v2ex.com/t/710197\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/710197\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e去西安很大一部分为了吃。其他平台软广太多，而且大多网红店。\n西安或者去过西安的老哥们能否推荐一下，万分感谢！\u003c/p\u003e\n\u003cp\u003e推荐格式: 位置 + 店名 + 推荐理由(可选)\u003c/p\u003e\n",
+      "Author": "jooks",
+      "PubDate": "2023-06-15T02:19:09Z"
+    },
+    {
+      "Title": "永远不要使用二级域名作为 Linux Hostname - 程序员",
+      "Link": "https://www.v2ex.com/t/948880",
+      "Description": "\u003cp\u003e最近发现了使用二级域名作为 Linux Hostname 会有坑，甚至还会造成潜在的信息安全问题。因此写了一篇博客，总结如下，全文可以在 \u003ca href=\"https://josephcz.xyz/technology/linux/never-use-2ld-as-hostname/\" rel=\"nofollow\"\u003ehttps://josephcz.xyz/technology/linux/never-use-2ld-as-hostname/\u003c/a\u003e 阅读\u003c/p\u003e\n\u003ch3\u003e如果我们使用二级域名作为 Hostname\u003c/h3\u003e\n\u003cp\u003e倘若我们将服务器的 Hostname 切换为二级域名，例如 \u003ccode\u003eexample[.]com\u003c/code\u003e 时，会发生什么呢？在这里我们假设一个没有被任何人注册的域名，例如 \u003ccode\u003esome-not-registered-domain[.]com\u003c/code\u003e；并假设 \u003ccode\u003ecom[.]com\u003c/code\u003e 这一域名被恶意人士注册。\u003c/p\u003e\n\u003cp\u003e接下来，我们使用 \u003ccode\u003eping\u003c/code\u003e 命令，加上需要解析的域名，看看实际访问的域名时哪一个：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"ping 命令结果对比图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://blog-static-1251131545.file.myqcloud.com/post/2023/06-14-never-use-2ld-as-hostname/Table-1.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e是的，在使用二级域名作为 Hostname 的情况下，当 ping 一个尚未注册的域名 \u003ccode\u003esome-not-registered-domain[.]com\u003c/code\u003e 时，由于 Hostname 和 Search Domain 的配置，会自动 fallback 到 \u003ccode\u003esome-not-registered-domain[.]com[.]com\u003c/code\u003e 上！遗憾的是，不管是否使用 Search Domain ，这个问题都存在——而将 Hostanme 设置为 FQDN 让这个问题更加隐蔽了。\u003c/p\u003e\n\u003cp\u003e这个问题不仅影响了 ping 、curl ，也影响了几乎所有使用 glibc 的程序：OpenSSL 、MySQL 、Nginx 、Apache……等等。如果它们的某个功能需要解析域名，则都会有同样的问题。\u003c/p\u003e\n\u003cp\u003e未被注册的域名值得警惕，但是这一问题如果发生在你自己的域名上呢？\u003c/p\u003e\n\u003ch3\u003e如果我们使用已经被注册的域名作为 Hostname\u003c/h3\u003e\n\u003cp\u003e回到我遇到的问题上来。我刚刚设置了 \u003ccode\u003eapi-v2023[.]josephcz[.]xyz\u003c/code\u003e 这一域名的解析。而 DNS 解析的生效需要时间，在递归 DNS 未获取到生效的记录的情况下，会返回一个空记录。而空记录和 NXDOMAIN 错误一样，会触发 Search Domain 的 fallback 机制。因此，服务器上对 \u003ccode\u003eapi-v2023[.]josephcz[.]xyz\u003c/code\u003e 全部被发送到了 \u003ccode\u003eapi-v2023[.]josephcz[.]xyz[.]xyz\u003c/code\u003e。\u003c/p\u003e\n\u003cp\u003e使用 \u003ccode\u003etcpdump -i ens3 -nt -s 500 port domain\u003c/code\u003e 命令可以清楚地看到这一过程：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eIP 10.0.0.12.57943 \u0026gt; 1.1.1.1.53: 27244+ A? api-v2023[.]josephcz[.]xyz. (35)\nIP 10.0.0.12.57943 \u0026gt; 1.1.1.1.53: 19043+ AAAA? api-v2023[.]josephcz[.]xyz. (35)\nIP 1.1.1.1.53 \u0026gt; 10.0.0.12.57943: 19043 0/1/0 (106)\nIP 1.1.1.1.53 \u0026gt; 10.0.0.12.57943: 27244 0/1/0 (106)\nIP 10.0.0.12.46092 \u0026gt; 1.1.1.1.53: 51629+ A? api-v2023[.]josephcz[.]xyz[.]xyz. (39)\nIP 10.0.0.12.46092 \u0026gt; 1.1.1.1.53: 61104+ AAAA? api-v2023[.]josephcz[.]xyz[.]xyz. (39)\nIP 1.1.1.1.53 \u0026gt; 10.0.0.12.46092: 51629 3/0/0 CNAME xyz[.]xyz., A 52.9.36.254, A 54.241.183.58 (85)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e好在 XYZ 域名的注册局保留了 \u003ccode\u003eXYZ[.]XYZ\u003c/code\u003e。但是如果换成解析其他域名，例如 \u003ccode\u003esome-api-host[.]aws\u003c/code\u003e 或者 \u003ccode\u003epki[.]goog\u003c/code\u003e，而相关域名的注册局又忘记保留了 \u003ccode\u003eaws\u003c/code\u003e、\u003ccode\u003egoog\u003c/code\u003e 之类的域名呢？\u003c/p\u003e\n\u003ch2\u003e结论\u003c/h2\u003e\n\u003cp\u003e在设置 Linux 的 Hostname 时，永远不要使用一个二级域名——无论是将 Hostname 设置为 FQDN 还是配置 Search Domain 。永远使用一个三级或以上的、受你自己控制的域名作为 Hostname 。\u003c/p\u003e\n\u003cp\u003e此外，启用强制性的 TLS 并正确部署证书信任也可以在一定程度上缓解这一问题——由于对方无法获得正确的 TLS 证书，即使解析被 fallback 到恶意攻击者的域名上，也难以窃取你的机密信息。\u003c/p\u003e\n",
+      "Author": "baobao1270",
+      "PubDate": "2023-06-15T02:17:28Z"
+    },
+    {
+      "Title": "618 想买个平板，该怎么选 - 问与答",
+      "Link": "https://www.v2ex.com/t/948879",
+      "Description": "目前备选的\u003cbr /\u003eipad air 5 64g 太小，担心新款内存更大，m1 芯片\u003cbr /\u003e\u003cbr /\u003eipad 9 便宜，但是底部还是那种实体按键，整体性能也不如 air5\u003cbr /\u003e\u003cbr /\u003e小米 6 pro  我现在日常用小米 k40 比较多，小米妙享中心能联动\u003cbr /\u003e\u003cbr /\u003e需求\u003cbr /\u003e看 pdf 、微信读书、看视频",
+      "Author": "southsala",
+      "PubDate": "2023-06-15T02:16:13Z"
+    },
+    {
+      "Title": "有什么有趣又能参与的开源前端项目吗 - 程序员",
+      "Link": "https://www.v2ex.com/t/948878",
+      "Description": "\u003cp\u003e最近进入到了一个瓶颈期，想要参与一些有趣，有深度的开源项目建设，各位大佬有没有推荐的，让我这个菜鸡为社区贡献一份力量\u003c/p\u003e\n",
+      "Author": "flyFatSeal",
+      "PubDate": "2023-06-15T02:16:05Z"
+    },
+    {
+      "Title": "怎么设置定期在企业微信中群发通知？ - 问与答",
+      "Link": "https://www.v2ex.com/t/948877",
+      "Description": "怎么设置定期在企业微信中群发通知？\u003cbr /\u003e急用，谢谢！！",
+      "Author": "miaomiao2014",
+      "PubDate": "2023-06-15T02:13:18Z"
+    },
+    {
+      "Title": "付费找大佬看个问题 - 云计算",
+      "Link": "https://www.v2ex.com/t/948876",
+      "Description": "\u003cp\u003e创建在 ceph 块设备上的 vm  io 非常慢。\u003c/p\u003e\n",
+      "Author": "YSMAN",
+      "PubDate": "2023-06-15T02:12:21Z"
+    },
+    {
+      "Title": "水深火热？各位身边有感受到吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/948875",
+      "Description": "\u003cp\u003e\u003ca href=\"https://www.imagehub.cc/image/949033de6f6207d9e3b00ebfffeba020.fo5DGS\" rel=\"nofollow\"\u003e\u003cimg alt=\"949033de6f6207d9e3b00ebfffeba020.md.jpeg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.imagehub.cc/images/2023/06/15/949033de6f6207d9e3b00ebfffeba020.md.jpeg\"/\u003e\u003c/a\u003e\n\u003ca href=\"https://www.imagehub.cc/image/fae769605a2913b546f62db94599b7e1.fo5AIt\" rel=\"nofollow\"\u003e\u003cimg alt=\"fae769605a2913b546f62db94599b7e1.md.jpeg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.imagehub.cc/images/2023/06/15/fae769605a2913b546f62db94599b7e1.md.jpeg\"/\u003e\u003c/a\u003e\n\u003ca href=\"https://www.imagehub.cc/image/0ae2dff1d920ef5577d27bead9b42bf5.fo5S9L\" rel=\"nofollow\"\u003e\u003cimg alt=\"0ae2dff1d920ef5577d27bead9b42bf5.md.jpeg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.imagehub.cc/images/2023/06/15/0ae2dff1d920ef5577d27bead9b42bf5.md.jpeg\"/\u003e\u003c/a\u003e\n\u003ca href=\"https://www.imagehub.cc/image/563fe713b262eb40e75d8f90cb34ac0d.foAddB\" rel=\"nofollow\"\u003e\u003cimg alt=\"563fe713b262eb40e75d8f90cb34ac0d.md.jpeg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.imagehub.cc/images/2023/06/15/563fe713b262eb40e75d8f90cb34ac0d.md.jpeg\"/\u003e\u003c/a\u003e\n\u003ca href=\"https://www.imagehub.cc/image/0a04753ecdbd12b3902f4b3e24c032b1.foAfOq\" rel=\"nofollow\"\u003e\u003cimg alt=\"0a04753ecdbd12b3902f4b3e24c032b1.md.jpeg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.imagehub.cc/images/2023/06/15/0a04753ecdbd12b3902f4b3e24c032b1.md.jpeg\"/\u003e\u003c/a\u003e\n\u003ca href=\"https://www.imagehub.cc/image/2c7d6eb49936a7f47b4b84b7d44575e8.foAryU\" rel=\"nofollow\"\u003e\u003cimg alt=\"2c7d6eb49936a7f47b4b84b7d44575e8.md.jpeg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.imagehub.cc/images/2023/06/15/2c7d6eb49936a7f47b4b84b7d44575e8.md.jpeg\"/\u003e\u003c/a\u003e\n\u003ca href=\"https://www.imagehub.cc/image/322ba49f761311e1e70f2364f0f4a7b5.foA1q0\" rel=\"nofollow\"\u003e\u003cimg alt=\"322ba49f761311e1e70f2364f0f4a7b5.md.jpeg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.imagehub.cc/images/2023/06/15/322ba49f761311e1e70f2364f0f4a7b5.md.jpeg\"/\u003e\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "FransicZhang",
+      "PubDate": "2023-06-15T02:07:30Z"
+    },
+    {
       "Title": "有没有人觉得前几年疫情期间的全远程办公特别爽？ - 问与答",
       "Link": "https://www.v2ex.com/t/948869",
       "Description": "纯个人感受， 我的生活没受影响，不出门就不出门呗，反正在家里也挺好的。\u003cbr /\u003e\u003cbr /\u003e我在家基本上每工作 2 小时，就去打几盘游戏；遇到不想回复的人，就直接把状态设成会议中，过两天再回；我和我媳妇儿都远程，一人一个房间，谁也不影响谁，还能随时随地来一发。。\u003cbr /\u003e\u003cbr /\u003e现在我们公司是每周最少来 3 天。",
