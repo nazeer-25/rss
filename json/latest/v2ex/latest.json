@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "听说要考六级了，有没有同时考过 6 级和雅思的说下哪个难 - 问与答",
+      "Link": "https://www.v2ex.com/t/949429",
+      "Description": "\u003cp\u003e高中毕业以后就出国了所以其实没考过四六级，但是听的太多了，朋友也总在说。\u003c/p\u003e\n\u003cp\u003e有没有同时考过四六级和雅思的朋友讲讲雅思 7 分相当于 6 级多少分的水平，我朋友圈里有个朋友秀六级 600 分，我是可以心里偷偷觉得我英语还是比他好一点呢，还是他英语比我好？\u003c/p\u003e\n\u003cp\u003e我是裸考 7 但是感觉是运气好达到了水平上限，听力阅读基本已经是我的极限，写作和口语我感觉我叫我复习半年也不一定能再提 0.5 分。。。\u003c/p\u003e\n",
+      "Author": "Richard14",
+      "PubDate": "2023-06-16T15:02:25Z"
+    },
+    {
       "Title": "一个 C 语言问题， newlib 的 sprintf 是不是线程安全的？ - 问与答",
       "Link": "https://www.v2ex.com/t/949428",
       "Description": "\u003ch1\u003e前情\u003c/h1\u003e\n\u003cp\u003enewlib 是一个 C 库，经常用于嵌入式的开发中。有大佬把 newlib (4.3.0) 移植到了 switch 的自制开发环境中，这是前情。\u003c/p\u003e\n\u003ch1\u003e问题\u003c/h1\u003e\n\u003cp\u003e最近发现我写的一个程序使用大佬最新的 newlib (4.3.0) 依赖编译，会出现随机的蓝屏。通过查看，发现是视频播放器（ libmpv ）会调用 vsnprintf ，这个函数多线程调用运行不稳定。\u003c/p\u003e\n\u003cp\u003e同时通过编写示例代码，发现不仅仅是 vsnprintf ，vsprintf 、sprintf 、snprintf 在使用的时候都会出现这样的问题。\u003c/p\u003e\n\u003ch1\u003e进一步分析\u003c/h1\u003e\n\u003col\u003e\n\u003cli\u003e只有在格式化字符中包含部分格式符时才会有这个问题，比如 \"%f\"，是因为为了计算的更精确，newlib 会在浮点数格式化时调用 _Balloc 动态申请一点内存。问题出在多线程调用 _Balloc 里。\u003c/li\u003e\n\u003cli\u003emalloc 是没有问题的，我猜是因为有实现 malloc 锁\u003c/li\u003e\n\u003cli\u003e老版本(基于 4.2.0 的修改版)也是没有问题的，对比代码也没看出来啥。\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch1\u003e我的疑问\u003c/h1\u003e\n\u003cp\u003e因为这个在老版本没有问题，新版本出了问题，所以我推测可能是大佬最新版 (4.3.0) 修改版哪里没改好出的问题。\u003c/p\u003e\n\u003cp\u003e给大佬提了\u003ca href=\"https://github.com/devkitPro/newlib/issues/27\" rel=\"nofollow\"\u003eissue (devkitPro/newlib/issues/27)\u003c/a\u003e，能看到大佬最近在写别的，没理我，我也没好意思继续追问（卑微～）。\u003c/p\u003e\n\u003cp\u003e想问问有 newlib 使用经验的兄弟们：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003esprintf 本身就不是线程安全的吗？\u003c/li\u003e\n\u003cli\u003e这个问题可能是什么原因导致的呢？\u003c/li\u003e\n\u003c/ol\u003e\n",
