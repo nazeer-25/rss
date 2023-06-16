@@ -25,6 +25,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "求助一个问题，关于协程和gorm的",
+      "Link": "https://studygolang.com/articles/36166#reply9",
+      "Description": "\u003ch3\u003e一切都源于我开发中发现的一个bug，简单描述就是 先insert 了一条数据，然后开启了一个协程，直接进行查询刚才插入的数据，竟然没查到。\u003c/h3\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e代码如下\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc Test(t *testing.T) {\n\n\trecord := \u0026amp;model.ContentCoursePracticeRecord{\n\t\tCid:      0,\n\t\tUid:      1,\n\t\tComplete: 1,\n\t\tType:     2,\n\t\tDuration: 100,\n\t\tCtime:    time.Now(),\n\t\tUptime:   time.Now(),\n\t}\n\terr := dao.ContentCoursePracticeRecordDao.Create(record)\n\tassert.Equal(t, err, nil)\n\tgo func() {\n\t\t// 查询0元购活动\n\t\tvar (\n\t\t\tduration int\n\t\t)\n\n\t\tdb, err := utils.GetDB()\n\n\t\tif err != nil {\n\t\t\tassert.Equal(t, err, nil)\n\t\t}\n\n\t\tif ret := db.Model(\u0026amp;model.ContentCoursePracticeRecord{}).\n\t\t\tWhere(\u0026quot;isdel = 0 and uid = ?\u0026quot;, 1).\n\t\t\tWhere(\u0026quot;ctime \u0026gt;= ?\u0026quot;, time.Now().Format(\u0026quot;2006-01-02\u0026quot;)).\n\t\t\tSelect(\u0026quot;sum(duration) as duration\u0026quot;).\n\t\t\tFind(\u0026amp;duration); ret.Error != nil {\n\t\t\t// 此处报错 ，说明没有数据\n\t\t\t//sql: Scan error on column index 0, name \u0026quot;duration\u0026quot;: converting NULL to int is unsupported\n\t\t\tassert.Equal(t, err, nil)\n\t\t}\n\t}()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e他不是一个必现的问题，我也没有成功复现出来\n后来把查询从写成挪出去就没有问题了，但是也没有想明白问题？望各位大佬指点！\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "string类型转换也会有内存溢出问题？",
       "Link": "https://studygolang.com/topics/16417#reply6",
       "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230615/8910525c3b6c6bc7e71f7711fa712448.png\" alt=\"111.png\" /\u003e\u003cbr\u003e\nbody := string(b)\n就这一行代码，通过pprof查看内存占用过多。其中b类型是[]byte，而body类型是string。\u003c/p\u003e\n\n\u003cp\u003e刚开始以为是getBody导致的，因为使用http.Client处理不当导致内存溢出问题，但修改了多次，pprof指示的都是body := string(b)这一行内存占用过多。\u003c/p\u003e\n\n\u003cp\u003e而getBody中返回值已经限制b的返回长度不超过200*1024，但运行几天后，依然会内存溢出而被系统杀掉的情况。难道是官方的string类型转换有bug？\u003c/p\u003e\n\n\u003cp\u003e/var/log/messages系统日志如下：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-text\"\u003eJun 14 18:03:04 VM-8-5-centos kernel: Out of memory: Kill process 9568 (data-center) score 322 or sacrifice child\nJun 14 18:03:04 VM-8-5-centos kernel: Killed process 9568 (data-center), UID 0, total-vm:1984540kB, anon-rss:1256132kB, file-rss:0kB, shmem-rss:0kB\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e另外这个GetTitle是在多协程里面运行的，但是这个是局部变量，为什么会有此类问题呢？请高人指点，如何解决\u003c/p\u003e\n",
@@ -56,13 +63,6 @@
       "Title": "在家工作轻松自在速来",
       "Link": "https://studygolang.com/topics/16416#reply0",
       "Description": "\u003cp\u003e在家工作轻松自在速来\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "求助一个问题，关于协程和gorm的",
-      "Link": "https://studygolang.com/articles/36166#reply7",
-      "Description": "\u003ch3\u003e一切都源于我开发中发现的一个bug，简单描述就是 先insert 了一条数据，然后开启了一个协程，直接进行查询刚才插入的数据，竟然没查到。\u003c/h3\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e代码如下\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc Test(t *testing.T) {\n\n\trecord := \u0026amp;model.ContentCoursePracticeRecord{\n\t\tCid:      0,\n\t\tUid:      1,\n\t\tComplete: 1,\n\t\tType:     2,\n\t\tDuration: 100,\n\t\tCtime:    time.Now(),\n\t\tUptime:   time.Now(),\n\t}\n\terr := dao.ContentCoursePracticeRecordDao.Create(record)\n\tassert.Equal(t, err, nil)\n\tgo func() {\n\t\t// 查询0元购活动\n\t\tvar (\n\t\t\tduration int\n\t\t)\n\n\t\tdb, err := utils.GetDB()\n\n\t\tif err != nil {\n\t\t\tassert.Equal(t, err, nil)\n\t\t}\n\n\t\tif ret := db.Model(\u0026amp;model.ContentCoursePracticeRecord{}).\n\t\t\tWhere(\u0026quot;isdel = 0 and uid = ?\u0026quot;, 1).\n\t\t\tWhere(\u0026quot;ctime \u0026gt;= ?\u0026quot;, time.Now().Format(\u0026quot;2006-01-02\u0026quot;)).\n\t\t\tSelect(\u0026quot;sum(duration) as duration\u0026quot;).\n\t\t\tFind(\u0026amp;duration); ret.Error != nil {\n\t\t\t// 此处报错 ，说明没有数据\n\t\t\t//sql: Scan error on column index 0, name \u0026quot;duration\u0026quot;: converting NULL to int is unsupported\n\t\t\tassert.Equal(t, err, nil)\n\t\t}\n\t}()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e他不是一个必现的问题，我也没有成功复现出来\n后来把查询从写成挪出去就没有问题了，但是也没有想明白问题？望各位大佬指点！\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -133,6 +133,13 @@
       "Title": "4年go 中鸟仍可能会忘记的知识点：Slice与数组",
       "Link": "https://studygolang.com/topics/16409#reply0",
       "Description": "\u003cp\u003e虽然是4年了，但偶尔还是会弄混slice与数组，以致于有时候slice做参数传递时，导致一些不期望的结果发生。例如用slice做参数传递后，下层对slice进行相关更改，有时候生效，有时候不生效的问题。\u003c/p\u003e\n\n\u003cp\u003e如下代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc main() {\n\ta := make([]int, 4, 5)\n\tfor i := 0; i \u0026lt; 4; i++ {\n\t\ta[i] = i + 1\n\t}\n\tlogger.Infof(\u0026quot;a :%v\u0026quot;, a)\n\taaa(a)\n\tlogger.Infof(\u0026quot;a :%v  len:%d\u0026quot;, a, len(a))\n}\n\nfunc aaa(array []int) {\n\tarray = append(array, 5)\n\tlogger.Infof(\u0026quot;array :%v  len:%d\u0026quot;, array, len(array))\n\tarray[1] = 0\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e输出：\na :[1 2 3 4]\narray :[1 2 3 4 5]  len:5\na :[1 0 3 4]  len:4\u003c/p\u003e\n\n\u003cp\u003e在使用slice的时候，我们就要忘记数组，要记住slice的原理，slice本质也是一个结构体，只是语言进行了相当于语法糖方式的优化，使其使用起来像数组一样。但实际进行参数传递时和结构体的性质是一样的。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "求助一个问题，关于协程和gorm的",
+      "Link": "https://studygolang.com/articles/36166#reply7",
+      "Description": "\u003ch3\u003e一切都源于我开发中发现的一个bug，简单描述就是 先insert 了一条数据，然后开启了一个协程，直接进行查询刚才插入的数据，竟然没查到。\u003c/h3\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e代码如下\u003c/p\u003e\n\u003c/blockquote\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc Test(t *testing.T) {\n\n\trecord := \u0026amp;model.ContentCoursePracticeRecord{\n\t\tCid:      0,\n\t\tUid:      1,\n\t\tComplete: 1,\n\t\tType:     2,\n\t\tDuration: 100,\n\t\tCtime:    time.Now(),\n\t\tUptime:   time.Now(),\n\t}\n\terr := dao.ContentCoursePracticeRecordDao.Create(record)\n\tassert.Equal(t, err, nil)\n\tgo func() {\n\t\t// 查询0元购活动\n\t\tvar (\n\t\t\tduration int\n\t\t)\n\n\t\tdb, err := utils.GetDB()\n\n\t\tif err != nil {\n\t\t\tassert.Equal(t, err, nil)\n\t\t}\n\n\t\tif ret := db.Model(\u0026amp;model.ContentCoursePracticeRecord{}).\n\t\t\tWhere(\u0026quot;isdel = 0 and uid = ?\u0026quot;, 1).\n\t\t\tWhere(\u0026quot;ctime \u0026gt;= ?\u0026quot;, time.Now().Format(\u0026quot;2006-01-02\u0026quot;)).\n\t\t\tSelect(\u0026quot;sum(duration) as duration\u0026quot;).\n\t\t\tFind(\u0026amp;duration); ret.Error != nil {\n\t\t\t// 此处报错 ，说明没有数据\n\t\t\t//sql: Scan error on column index 0, name \u0026quot;duration\u0026quot;: converting NULL to int is unsupported\n\t\t\tassert.Equal(t, err, nil)\n\t\t}\n\t}()\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e他不是一个必现的问题，我也没有成功复现出来\n后来把查询从写成挪出去就没有问题了，但是也没有想明白问题？望各位大佬指点！\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
