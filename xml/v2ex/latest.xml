@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>一个 C 语言问题， newlib 的 sprintf 是不是线程安全的？ - 问与答</title>
+      <link>https://www.v2ex.com/t/949428</link>
+      <description>&lt;h1&gt;前情&lt;/h1&gt;&#xA;&lt;p&gt;newlib 是一个 C 库，经常用于嵌入式的开发中。有大佬把 newlib (4.3.0) 移植到了 switch 的自制开发环境中，这是前情。&lt;/p&gt;&#xA;&lt;h1&gt;问题&lt;/h1&gt;&#xA;&lt;p&gt;最近发现我写的一个程序使用大佬最新的 newlib (4.3.0) 依赖编译，会出现随机的蓝屏。通过查看，发现是视频播放器（ libmpv ）会调用 vsnprintf ，这个函数多线程调用运行不稳定。&lt;/p&gt;&#xA;&lt;p&gt;同时通过编写示例代码，发现不仅仅是 vsnprintf ，vsprintf 、sprintf 、snprintf 在使用的时候都会出现这样的问题。&lt;/p&gt;&#xA;&lt;h1&gt;进一步分析&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;只有在格式化字符中包含部分格式符时才会有这个问题，比如 &#34;%f&#34;，是因为为了计算的更精确，newlib 会在浮点数格式化时调用 _Balloc 动态申请一点内存。问题出在多线程调用 _Balloc 里。&lt;/li&gt;&#xA;&lt;li&gt;malloc 是没有问题的，我猜是因为有实现 malloc 锁&lt;/li&gt;&#xA;&lt;li&gt;老版本(基于 4.2.0 的修改版)也是没有问题的，对比代码也没看出来啥。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1&gt;我的疑问&lt;/h1&gt;&#xA;&lt;p&gt;因为这个在老版本没有问题，新版本出了问题，所以我推测可能是大佬最新版 (4.3.0) 修改版哪里没改好出的问题。&lt;/p&gt;&#xA;&lt;p&gt;给大佬提了&lt;a href=&#34;https://github.com/devkitPro/newlib/issues/27&#34; rel=&#34;nofollow&#34;&gt;issue (devkitPro/newlib/issues/27)&lt;/a&gt;，能看到大佬最近在写别的，没理我，我也没好意思继续追问（卑微～）。&lt;/p&gt;&#xA;&lt;p&gt;想问问有 newlib 使用经验的兄弟们：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;sprintf 本身就不是线程安全的吗？&lt;/li&gt;&#xA;&lt;li&gt;这个问题可能是什么原因导致的呢？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>xfangs</author>
+      <pubDate>16 Jun 2023 14:49:20 +0000</pubDate>
+    </item>
+    <item>
       <title>后备式 ups 是否可以给服务器使用 - 硬件</title>
       <link>https://www.v2ex.com/t/949427</link>
       <description>最近想给机架服务器购换一个容量更大的 ups ，以应对小区施工的不定时断电，网上看了一圈在线式 ups 容量与后备式相同的情况下要贵不少钱，且在线式更费电，而且考虑到后备 ups 的反应也不慢不至于让设备关机，但不知道是否会对服务器造成损伤，所以想问各位大佬以下后备式 ups 给服务器使用是否会对服务器有损伤和是否安全？&lt;br /&gt;能否给非商用不盈利的服务器使用后备式 ups</description>
