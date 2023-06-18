@@ -4,6 +4,12 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请问截止 2023/06Win 远程控制 Mac 最好的方案是？ - 问与答</title>
+      <link>https://www.v2ex.com/t/949695</link>
+      <author>asdqaz</author>
+      <pubDate>18 Jun 2023 05:36:21 +0000</pubDate>
+    </item>
+    <item>
       <title>Clash 规则能否做到优先 Select，若失败自动按顺序使用某几个特定节点，如果还是失败进行 url-test。如果 Select 恢复，则回到 Select 节点 - 互联网</title>
       <link>https://www.v2ex.com/t/949694</link>
       <description>&lt;p&gt;假设我有个一组节点，其中 n1 n2 n3 为低倍率节点，我希望通常情况都优先使用低倍率节点。&lt;/p&gt;&#xA;&lt;p&gt;我想要配置如下优先级&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;优先 select （可选范围是全部节点，日常我从中选中低倍率的）&lt;/li&gt;&#xA;&lt;li&gt;如果节点崩了使用 fallback （挨个尝试低倍率节点 n1 n2 n3 ）&lt;/li&gt;&#xA;&lt;li&gt;如果还是失败，则 url-test 剩下的节点&lt;/li&gt;&#xA;&lt;li&gt;（重要）如果 select 节点恢复了，则自动切回 select&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;我按照我对文档的理解，大概做了如下配置，通过 proxy-group 的嵌套功能：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;proxy-groups:&#xA;  - name: PROXY&#xA;    type: fallback&#xA;    proxies:&#xA;      - Select&#xA;      - Fallback&#xA;      - UrlTest&#xA;  - name: Select&#xA;    type: select&#xA;    use:&#xA;      - ...&#xA;  - name: Fallback&#xA;    type: fallback&#xA;    use:&#xA;      - ...&#xA;    filter: &#34;低倍率&#34;&#xA;  - name: UrlTest&#xA;    type: url-test&#xA;    use:&#xA;      - ...&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这里我有两个疑虑：&lt;/p&gt;&#xA;&lt;p&gt;1：这里我让最终的 PROXY 组进行嵌套，使用 fallback 类型，并自动尝试 Select -&amp;gt; Fallback -&amp;gt; UrlTest&lt;/p&gt;&#xA;&lt;p&gt;不知道这样的 fallback 类型是不是合理？&lt;/p&gt;&#xA;&lt;p&gt;2：这里是能实现我前面提到的 1-3 功能，但是我发现 Select 节点回归正常后，clash 并不会再重新按照 proxies 的优先级重新选择使用 Select ，而是一直保持之前 fallback 选中的节点&lt;/p&gt;&#xA;&lt;p&gt;有没有方式能实现恢复后重新优先使用 Select 的操作？&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;有没有熟悉 Clash 规则的朋友帮忙解答下，万分感谢&lt;/p&gt;&#xA;</description>
