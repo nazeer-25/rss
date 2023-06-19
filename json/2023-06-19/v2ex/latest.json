@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "被马斯克的励志震撼到了 - 随想",
+      "Link": "https://www.v2ex.com/t/950132",
+      "Description": "\u003cp\u003eyoutu 上的采访，每周工作 100 小时，别人用一年做到的市场他用四个月…太多值得人学习的了!偶像!\u003c/p\u003e\n",
+      "Author": "nbafive",
+      "PubDate": "2023-06-19T14:19:28Z"
+    },
+    {
       "Title": "有人用 sing-box 的 ios 端吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/950130",
       "Description": "\u003cp\u003e求教一下怎么配置？\u003c/p\u003e\n\u003cp\u003e找 github ，copy 改了几个参数，没成功连上。\u003c/p\u003e\n\u003cp\u003e改了这三个参数看起来应该是 domain ，port ，obfs 三个参数吧。\u003c/p\u003e\n\u003cp\u003e我用 v2rayn 的自定义核心，用的 hysteria 的 config ，参数一样的话是能联网的。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\"server\": \"domain.com\",\n\"server_port\": port123456,\n\"auth_str\": \"obfs123456789\",\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e配置\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n    \"log\": {\n        \"level\": \"info\",\n        \"timestamp\": true\n    },\n    \"route\": {\n        \"rules\": [\n            {\n                \"geosite\": [\n                    \"cn\",\n                    \"private\"\n                ],\n                \"geoip\": [\n                    \"private\"\n                ],\n                \"outbound\": \"direct\"\n            }\n        ]\n    },\n    \"inbounds\": [\n        {\n            \"type\": \"mixed\",\n            \"tag\": \"mixed-in\",\n            \"listen\": \"::\",\n            \"listen_port\": 10000,\n            \"set_system_proxy\": false\n        }\n    ],\n    \"outbounds\": [\n        {\n            \"type\": \"hysteria\",\n            \"tag\": \"proxy\",\n            \"server\": \"domain.com\",\n            \"server_port\": port123456,\n            \"up_mbps\": 10,\n            \"down_mbps\": 20,\n            \"auth_str\": \"obfs123456789\",\n            \"tls\": {\n                \"enabled\": true,\n                \"server_name\": \"\",\n                \"alpn\": [\n                    \"h3\"\n                ]\n            }\n        },\n        {\n            \"type\": \"direct\",\n            \"tag\": \"direct\"\n        }\n    ]\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
