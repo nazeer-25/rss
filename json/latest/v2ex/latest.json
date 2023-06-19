@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "每月一争, 为什么 JWT 这么多诟病, 什么下线设备登录 JWT 不是很容易解决吗? - 问与答",
+      "Link": "https://www.v2ex.com/t/949924",
+      "Description": "\u003cp\u003eJWT 的基本就不再过多阐述\u003c/p\u003e\n\u003cp\u003e思考的问题前提: 比如我们面对一个千万级用户的系统.\n* 客户端需要和服务端交互, 假设 50% 的接口需要校验\n* 10% 的接口需要获取个人信息\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e如果是 token 那么代表着 50% 的流量都需要去查 db(任何 db 都可以)\u003c/li\u003e\n\u003cli\u003e如果用 jwt 我可以减少到 10%, 甚至更少\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr/\u003e\n\u003ch4\u003e至于常见的 JWT 诟病解决方案\u003c/h4\u003e\n\u003cul\u003e\n\u003cli\u003e\n两个小时没操作自动掉线\u003cul\u003e\n\u003cli\u003e分钟级别过期 access_token, 2h 过期 refresh_token, 完全可以做到\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n黑名单, 强制下线功能\u003cul\u003e\n\u003cli\u003e分钟即被过期 access_token, token 里包含信息 {uid: xxxx, token_version: xxx}\u003c/li\u003e\n\u003cli\u003e修改密码, 或者强制下线, 修改 db 里的 token_version\u003c/li\u003e\n\u003cli\u003e当要刷新 token 的时候, 校验客户端 token 里的 token_version 是否等于 db 里的 token_version, 不等于强制下线.(是在每一次去校验还是在刷新 token 的时候去校验都可以)\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n单台设备下线, 这个我认为是业务的逻辑\u003cul\u003e\n\u003cli\u003e分钟即被过期 access_token, token 里包含信息 {uid: xxxx, device_id: xxx}\u003c/li\u003e\n\u003cli\u003e当要刷新 token 的时候, 校验客户端黑名单 db 里是否包含这个 device_id\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e为什么要用 JWT ?\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e使用 token 会有千万级用户请求 * (存 token + 查 token redis)... 用户名,xxx 存储, \u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e下线, 黑名单为什么不直接存储 token ?\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003etoken 可能千万级别, 但是黑名单保守估计不会超过 1w, 并且我可以把黑名单 token 有效期设置成 refres_token 的有效期(极大的减少了黑名单 token 的数量), 这样子当黑名单过期了, 那么 refresh_token 也不能再使用了(如果去颁发, 在黑名单中也颁发不了)\u003c/li\u003e\n\u003cli\u003e如果一个用户可能登录 5 个设备, 那么存储的 token 量就是 1000w * 5, 而 jwt 就是 0 ~ 黑名单数量\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "seth19960929",
+      "PubDate": "2023-06-19T04:13:04Z"
+    },
+    {
+      "Title": "「小程序」论文素材一查通，手机摸鱼找素材，简单又实用~ - 分享创造",
+      "Link": "https://www.v2ex.com/t/949923",
+      "Description": "功能只有一个：关键词查找素材段落。\u003cbr /\u003e\u003cbr /\u003e非常简单，一图概括：\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/JzEXfH7.png\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/JzEXfH7.png\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e扫上图中的码，或微信搜索 论文素材一查通 即可访问。\u003cbr /\u003e\u003cbr /\u003e感谢使用，希望能帮到有需要的人😆",
+      "Author": "n3r0",
+      "PubDate": "2023-06-19T04:06:44Z"
+    },
+    {
       "Title": "到底是哪个环节泄露了我的个人信息？ - 问与答",
       "Link": "https://www.v2ex.com/t/949922",
       "Description": "和同事一起订了机票出去旅游，今天早上刚值机没多久就收到了归属地是吉林的个人电话，对面还是一口东南亚口音说航班延误了，问我是改签还是退票我给挂了，后面找官方客服确认航班没有问题。\u003cbr /\u003e\u003cbr /\u003e对面能准确说出我的名字、航班信息，同事没有收到诈骗电话。\u003cbr /\u003e\u003cbr /\u003e1 、我和同事一起在携程订的票\u003cbr /\u003e2 、一起在航旅纵横值机",
