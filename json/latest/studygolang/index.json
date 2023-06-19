@@ -53,6 +53,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "为什么会在零点的时候还会执行一次计划呢？",
+      "Link": "https://studygolang.com/topics/16426#reply6",
+      "Description": "\u003cp\u003e计划是要在每天的17点执行，为什么还会在零点的时候还会执行一次计划呢？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003ecat main.go\npackage main\n\nimport (\n\t\u0026quot;log\u0026quot;\n\n\t\u0026quot;github.com/robfig/cron/v3\u0026quot;\n)\n\n//计划任务\nfunc Crontab(spec string, f func()) (cron.EntryID, error) {\n\tvar c = cron.New(cron.WithSeconds())\n\tid, err := c.AddFunc(spec, f)\n\tc.Start()\n\treturn id, err\n}\nfunc sayHello() {\n\tlog.Println(\u0026quot;hello world!\u0026quot;)\n}\nfunc main() {\n\t// 秒0-59 分钟0-59 小时0-23 天或月1-31天 月1-12 星期0-6\n\tvar spec string = \u0026quot;0 0 */17 * * ?\u0026quot;\n\tCrontab(spec, sayHello)\n\tselect {}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003etail nohup.out \n2023/06/17 17:00:00 hello world!\n2023/06/18 00:00:00 hello world!\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "推荐你认为好的Go资源",
       "Link": "https://studygolang.com/topics/11096#reply60",
       "Description": "\u003cp\u003e社区是一个互助平台，大家的资源应该互相共享，一起推动 Go 的发展，提升每个人的 Go 水平。\u003c/p\u003e\n\n\u003cp\u003e如果你有好的 Go 资源，包括但不限于：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e网站\u003c/li\u003e\n\u003cli\u003e图书\u003c/li\u003e\n\u003cli\u003e工具\u003c/li\u003e\n\u003cli\u003e项目\u003c/li\u003e\n\u003cli\u003e库\u003c/li\u003e\n\u003cli\u003e教程\u003c/li\u003e\n\u003cli\u003e博客\u003c/li\u003e\n\u003cli\u003e。。。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e欢迎留言，给出你的推荐理由和网址。谢谢！\u003c/p\u003e\n",
@@ -60,9 +67,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "为什么会在零点的时候还会执行一次计划呢？",
-      "Link": "https://studygolang.com/topics/16426#reply6",
-      "Description": "\u003cp\u003e计划是要在每天的17点执行，为什么还会在零点的时候还会执行一次计划呢？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003ecat main.go\npackage main\n\nimport (\n\t\u0026quot;log\u0026quot;\n\n\t\u0026quot;github.com/robfig/cron/v3\u0026quot;\n)\n\n//计划任务\nfunc Crontab(spec string, f func()) (cron.EntryID, error) {\n\tvar c = cron.New(cron.WithSeconds())\n\tid, err := c.AddFunc(spec, f)\n\tc.Start()\n\treturn id, err\n}\nfunc sayHello() {\n\tlog.Println(\u0026quot;hello world!\u0026quot;)\n}\nfunc main() {\n\t// 秒0-59 分钟0-59 小时0-23 天或月1-31天 月1-12 星期0-6\n\tvar spec string = \u0026quot;0 0 */17 * * ?\u0026quot;\n\tCrontab(spec, sayHello)\n\tselect {}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003etail nohup.out \n2023/06/17 17:00:00 hello world!\n2023/06/18 00:00:00 hello world!\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Title": "找实习期十个月立即到岗的实习工作",
+      "Link": "https://studygolang.com/topics/16424#reply0",
+      "Description": "\u003cp\u003e本人是一名大三计算机专业的本科生，可以使用Go语言去做一些与数据库连接的项目，希望找到一份实习工作，实习期可以长达十个月，可以立即到岗，工资面议，希望各位hr能给个机会\n邮箱:501120319@qq.com\n电话:18733811613\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -77,13 +84,6 @@
       "Title": "调用sql server提示慢查询，是怎么回事？",
       "Link": "https://studygolang.com/topics/16425#reply0",
       "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230617/cb2b3f2c0ce7aa06f6525a04558226e3.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "找实习期十个月立即到岗的实习工作",
-      "Link": "https://studygolang.com/topics/16424#reply0",
-      "Description": "\u003cp\u003e本人是一名大三计算机专业的本科生，可以使用Go语言去做一些与数据库连接的项目，希望找到一份实习工作，实习期可以长达十个月，可以立即到岗，工资面议，希望各位hr能给个机会\n邮箱:501120319@qq.com\n电话:18733811613\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
