@@ -81,13 +81,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "推荐你认为好的Go资源",
-      "Link": "https://studygolang.com/topics/11096#reply60",
-      "Description": "\u003cp\u003e社区是一个互助平台，大家的资源应该互相共享，一起推动 Go 的发展，提升每个人的 Go 水平。\u003c/p\u003e\n\n\u003cp\u003e如果你有好的 Go 资源，包括但不限于：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e网站\u003c/li\u003e\n\u003cli\u003e图书\u003c/li\u003e\n\u003cli\u003e工具\u003c/li\u003e\n\u003cli\u003e项目\u003c/li\u003e\n\u003cli\u003e库\u003c/li\u003e\n\u003cli\u003e教程\u003c/li\u003e\n\u003cli\u003e博客\u003c/li\u003e\n\u003cli\u003e。。。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e欢迎留言，给出你的推荐理由和网址。谢谢！\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "为什么会在零点的时候还会执行一次计划呢？",
       "Link": "https://studygolang.com/topics/16426#reply6",
       "Description": "\u003cp\u003e计划是要在每天的17点执行，为什么还会在零点的时候还会执行一次计划呢？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003ecat main.go\npackage main\n\nimport (\n\t\u0026quot;log\u0026quot;\n\n\t\u0026quot;github.com/robfig/cron/v3\u0026quot;\n)\n\n//计划任务\nfunc Crontab(spec string, f func()) (cron.EntryID, error) {\n\tvar c = cron.New(cron.WithSeconds())\n\tid, err := c.AddFunc(spec, f)\n\tc.Start()\n\treturn id, err\n}\nfunc sayHello() {\n\tlog.Println(\u0026quot;hello world!\u0026quot;)\n}\nfunc main() {\n\t// 秒0-59 分钟0-59 小时0-23 天或月1-31天 月1-12 星期0-6\n\tvar spec string = \u0026quot;0 0 */17 * * ?\u0026quot;\n\tCrontab(spec, sayHello)\n\tselect {}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre\u003e\u003ccode\u003etail nohup.out \n2023/06/17 17:00:00 hello world!\n2023/06/18 00:00:00 hello world!\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -119,6 +112,13 @@
       "Title": "用post方法发送json数据失败，",
       "Link": "https://studygolang.com/topics/16386#reply6",
       "Description": "\u003cp\u003e我想要调用http.NewRequest方法到服务器接口发送json数据，但是返回的结果是失败，但是用http.Post方法到服务器接口发送json数据成功，现在想不通问题出在什么地方，请给指点一二谢谢！\n\u0026ldquo;`\npackage hrlib\u003c/p\u003e\n\n\u003cp\u003eimport (\n\t\u0026ldquo;bytes\u0026rdquo;\n\t\u0026ldquo;encoding/json\u0026rdquo;\n\t\u0026ldquo;fmt\u0026rdquo;\n\t\u0026ldquo;io/ioutil\u0026rdquo;\n\t\u0026ldquo;log\u0026rdquo;\n\t\u0026ldquo;net/http\u0026rdquo;\n\t\u0026ldquo;time\u0026rdquo;\n)\n//人员用户考勤信息\ntype kqInfo struct {\n\tUserLname string \u003ccode\u003ejson:\u0026quot;userLname\u0026quot;\u003c/code\u003e\n\tUserNo    string \u003ccode\u003ejson:\u0026quot;userNo\u0026quot;\u003c/code\u003e\n\tKssj      string \u003ccode\u003ejson:\u0026quot;kssj\u0026quot;\u003c/code\u003e\n\tJssj      string \u003ccode\u003ejson:\u0026quot;jssj\u0026quot;\u003c/code\u003e\n}\ntype userInfo struct {\n\tPageIndex int    \u003ccode\u003ejson:\u0026quot;pageIndex\u0026quot;\u003c/code\u003e\n\tPageSize  int    \u003ccode\u003ejson:\u0026quot;pageSize\u0026quot;\u003c/code\u003e\n\tSearch    kqInfo \u003ccode\u003ejson:\u0026quot;search\u0026quot;\u003c/code\u003e\n}\u003c/p\u003e\n\n\u003cp\u003e//返回一个要查询的用户对象\nfunc NewUserInfo() *userInfo {\n\tvar kssj = time.Date(2023, 6, 1, 8, 0, 0, 0, time.UTC).Format(\u0026ldquo;2006-01-02 15:04:05\u0026rdquo;)\n\tvar jssj = time.Date(2023, 6, 1, 23, 0, 0, 0, time.UTC).Format(\u0026ldquo;2006-01-02 15:04:05\u0026rdquo;)\n\treturn \u0026amp;userInfo{\n\t\tPageIndex: 1,\n\t\tPageSize:  3,\n\t\tSearch: kqInfo{\n\t\t\tUserLname: \u0026ldquo;张三\u0026rdquo;,\n\t\t\tUserNo:    \u0026ldquo;2016050395\u0026rdquo;,\n\t\t\tKssj:      kssj,\n\t\t\tJssj:      jssj,\n\t\t},\n\t}\n}\n//获取用户考勤信息\nfunc GetUser() {\n\tvar url = \u0026ldquo;\u003ca href=\"http://192.168.1.100:20039/api/kq/getKqjl\u0026quot;\"\u003ehttp://192.168.1.100:20039/api/kq/getKqjl\u0026rdquo;\u003c/a\u003e\n\tvar kqUserInfo = NewUserInfo()\n\tvar kqData,err = json.Marshal(kqUserInfo)\n\tif err != nil{\n\t\tlog.Println(\u0026ldquo;json序列化错误\u0026rdquo;)\n\t\treturn\n\t}\n\treq, err := http.NewRequest(\u0026ldquo;post\u0026rdquo;, url, bytes.NewReader(kqData))\n\tif err != nil {\n\t\tlog.Println(err)\n\t\treturn\n\t}\n\treq.Header.Set(\u0026ldquo;content-Type\u0026rdquo;, \u0026ldquo;application/json\u0026rdquo;)\n\tvar client = http.DefaultClient\n\tresp, err := client.Do(req)\n\tif err != nil {\n\t\tlog.Println(\u0026ldquo;服务端响应失败\u0026rdquo;)\n\t\treturn\n\t}\n\t//用Post这个方法返回的resp响应就没有问题\n        //resp,_:=http.Post(url,\u0026ldquo;application/json\u0026rdquo;,bytes.NewReader(kqData))\n\tdefer resp.Body.Close()\n\tbody, err := ioutil.ReadAll(resp.Body)\n\tif err != nil {\n\t\tlog.Println(\u0026ldquo;数据读取失败\u0026rdquo;)\n\t\treturn\n\t}\n\tfmt.Printf(\u0026ldquo;%s\\n\u0026rdquo;, body)\n}\u0026ldquo;`\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "推荐你认为好的Go资源",
+      "Link": "https://studygolang.com/topics/11096#reply60",
+      "Description": "\u003cp\u003e社区是一个互助平台，大家的资源应该互相共享，一起推动 Go 的发展，提升每个人的 Go 水平。\u003c/p\u003e\n\n\u003cp\u003e如果你有好的 Go 资源，包括但不限于：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e网站\u003c/li\u003e\n\u003cli\u003e图书\u003c/li\u003e\n\u003cli\u003e工具\u003c/li\u003e\n\u003cli\u003e项目\u003c/li\u003e\n\u003cli\u003e库\u003c/li\u003e\n\u003cli\u003e教程\u003c/li\u003e\n\u003cli\u003e博客\u003c/li\u003e\n\u003cli\u003e。。。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e欢迎留言，给出你的推荐理由和网址。谢谢！\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
