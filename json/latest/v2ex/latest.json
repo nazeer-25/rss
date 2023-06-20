@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Go 问题请教 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/950468",
+      "Description": "\u003cp\u003e有大佬可以帮忙看看 SendToProc 这个函数里 select+slice 会 panic 吗？感谢感谢🙏\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc init() {\n\tChan = make(chan *GenData, 500000)\n}\n\nvar Chan chan *GenData\n\ntype SendQueue struct {\n\tqueue []*GenData\n\tsize  int\n}\n\ntype GenData struct {\n\ts string\n}\n\nfunc SendToProc() error {\n\tgo func() {\n\t\tbatchSize := 100\n\t\ttc := time.NewTicker(time.Millisecond * 100)\n\t\tsq := \u0026amp;SendQueue{\n\t\t\tqueue: make([]*GenData, 0),\n\t\t\tsize:  0,\n\t\t}\n\t\tfor {\n\t\t\tselect {\n\t\t\tcase g := \u0026lt;-Chan:\n\t\t\t\tsq.queue = append(sq.queue, g)\n\t\t\t\tsq.size++\n\t\t\t\tif sq.size == batchSize {\n\t\t\t\t\tsend(sq.queue)\n\t\t\t\t\tsq.queue = sq.queue[:0]\n\t\t\t\t\tsq.size = 0\n\t\t\t\t}\n\t\t\tcase \u0026lt;-tc.C:\n\t\t\t\tif sq.size \u0026gt; 0 {\n\t\t\t\t\tsend(sq.queue)\n\t\t\t\t\tsq.queue = sq.queue[:0]\n\t\t\t\t\tsq.size = 0\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}()\n\treturn nil\n}\n\nfunc send(sendList []*GenData) {\n\tfor i, v := range sendList {\n\t\tfmt.Println(i, v)\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "folivora",
+      "PubDate": "2023-06-20T14:09:00Z"
+    },
+    {
       "Title": "codepen.io 的编辑框.本地运行 - 程序员",
       "Link": "https://www.v2ex.com/t/950467",
       "Description": "\u003cp\u003e某天我随机点击了一条链接,打开看是一串书签字符串,然后点开是 codepen 的编辑框. 是书签运行的.但是我怎么都找不到了.请问各位大佬能给一段书签么\u003c/p\u003e\n\u003cp\u003e而且想问一下这段书签能跑在平板的 chrome 吗\u003c/p\u003e\n",

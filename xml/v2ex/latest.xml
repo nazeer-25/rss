@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Go 问题请教 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/950468</link>
+      <description>&lt;p&gt;有大佬可以帮忙看看 SendToProc 这个函数里 select+slice 会 panic 吗？感谢感谢🙏&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func init() {&#xA;&#x9;Chan = make(chan *GenData, 500000)&#xA;}&#xA;&#xA;var Chan chan *GenData&#xA;&#xA;type SendQueue struct {&#xA;&#x9;queue []*GenData&#xA;&#x9;size  int&#xA;}&#xA;&#xA;type GenData struct {&#xA;&#x9;s string&#xA;}&#xA;&#xA;func SendToProc() error {&#xA;&#x9;go func() {&#xA;&#x9;&#x9;batchSize := 100&#xA;&#x9;&#x9;tc := time.NewTicker(time.Millisecond * 100)&#xA;&#x9;&#x9;sq := &amp;amp;SendQueue{&#xA;&#x9;&#x9;&#x9;queue: make([]*GenData, 0),&#xA;&#x9;&#x9;&#x9;size:  0,&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;for {&#xA;&#x9;&#x9;&#x9;select {&#xA;&#x9;&#x9;&#x9;case g := &amp;lt;-Chan:&#xA;&#x9;&#x9;&#x9;&#x9;sq.queue = append(sq.queue, g)&#xA;&#x9;&#x9;&#x9;&#x9;sq.size++&#xA;&#x9;&#x9;&#x9;&#x9;if sq.size == batchSize {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;send(sq.queue)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;sq.queue = sq.queue[:0]&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;sq.size = 0&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;case &amp;lt;-tc.C:&#xA;&#x9;&#x9;&#x9;&#x9;if sq.size &amp;gt; 0 {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;send(sq.queue)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;sq.queue = sq.queue[:0]&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;sq.size = 0&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}()&#xA;&#x9;return nil&#xA;}&#xA;&#xA;func send(sendList []*GenData) {&#xA;&#x9;for i, v := range sendList {&#xA;&#x9;&#x9;fmt.Println(i, v)&#xA;&#x9;}&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>folivora</author>
+      <pubDate>20 Jun 2023 14:09:00 +0000</pubDate>
+    </item>
+    <item>
       <title>codepen.io 的编辑框.本地运行 - 程序员</title>
       <link>https://www.v2ex.com/t/950467</link>
       <description>&lt;p&gt;某天我随机点击了一条链接,打开看是一串书签字符串,然后点开是 codepen 的编辑框. 是书签运行的.但是我怎么都找不到了.请问各位大佬能给一段书签么&lt;/p&gt;&#xA;&lt;p&gt;而且想问一下这段书签能跑在平板的 chrome 吗&lt;/p&gt;&#xA;</description>
