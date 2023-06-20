@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有关 AWS 的提问，被困住好久，有没有高手救救弟弟 - 问与答</title>
+      <link>https://www.v2ex.com/t/950323</link>
+      <description>&lt;h2&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;现有几个 Web APP &lt;strong&gt;共用&lt;/strong&gt;一组 Lambda ，每个 Lambda 还会在同一个 APP 的不同阶段被&lt;strong&gt;多次调用&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;h2&gt;目的&lt;/h2&gt;&#xA;&lt;p&gt;根据业务逻辑将 Lambda 调用分成几组，统计每个 Lambda 在&lt;strong&gt;各个业务逻辑组内的运行时间&lt;/strong&gt;（&lt;code&gt;Duration&lt;/code&gt;），并绘制成图表（ Graphed Metrics ）。&lt;/p&gt;&#xA;&lt;h2&gt;例&lt;/h2&gt;&#xA;&lt;p&gt;&lt;code&gt;WebAPP1&lt;/code&gt; 的业务逻辑分成了两组 &lt;code&gt;A&lt;/code&gt; 和 &lt;code&gt;B&lt;/code&gt;，&lt;code&gt;WebAPP2&lt;/code&gt; 的业务逻辑分成两组 &lt;code&gt;C&lt;/code&gt; 和 &lt;code&gt;D&lt;/code&gt;，&lt;code&gt;ABCD&lt;/code&gt; 分别调用了 &lt;code&gt;Lambda1&lt;/code&gt; 和 &lt;code&gt;Lambda2&lt;/code&gt;，想要按 &lt;code&gt;ABCD&lt;/code&gt; 生成 4 个仪表盘（ Dashboard ），每个表盘里分别显示 &lt;code&gt;Lambda1&lt;/code&gt; 和 &lt;code&gt;Lambda2&lt;/code&gt; 在一段时间内的运行时间统计图。&lt;/p&gt;&#xA;&lt;h2&gt;遇到的问题和目前为止的尝试&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Amazon CloudWatch 自带了 Metrics ，但通过免费的 Basic Metrics 得到的 &lt;code&gt;Duration&lt;/code&gt;，只能按 Lambda 函数来统计，而无法将同一个函数的 &lt;code&gt;Duration&lt;/code&gt; 根据业务逻辑进一步细分，即无法得知每次调用的 Duration 属于哪个业务逻辑组。 -&amp;gt; 于是考虑使用 Custom Metrics&lt;/li&gt;&#xA;&lt;li&gt;Custom Metrics 可以根据业务逻辑需要定义 &lt;code&gt;Diemensions&lt;/code&gt;，但同时也需要自行提供用来统计的 &lt;code&gt;Value&lt;/code&gt;。而且 Lambda 的精确运行时间只能在每次调用结束后由 AWS 自动统计得出。因此需要想办法得到 AWS 计算出来的那个 &lt;code&gt;Duration&lt;/code&gt;。-&amp;gt; 查了一下似乎没有现成的 API 可用，但 AWS 会在每次调用结束后在 CloudWatch Logs 里留下 log ，里面包含了想要得到的那个 &lt;code&gt;Duration&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;进而调查 CloudWatch Logs ，发现可以用 Logs Insights 的 Query 语法来解析 Log 文本，从而得到 AWS 自动生成的 &lt;code&gt;Duration&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;于是到此为止的思路是，每个 Lambda 在调用结束前都通过 Log 留下统计需要的信息（业务逻辑组名和函数名），并异步地触发另一个用来统计的 Lambda 。该 Lambda 首先通过 Query 来解析 Log 文本，并通过 &lt;code&gt;RequestId&lt;/code&gt; 将业务逻辑信息与 AWS 提供的 &lt;code&gt;Duration&lt;/code&gt; 匹配，生成用于 Custom Metics 的统计数据，最后推到 CloudWatch Metrics 上。&lt;/p&gt;&#xA;&lt;p&gt;那么问题来了，从 Lambda 留下 log 到可以用 Query 来搜索 CloudWatch Logs 解析 Log 文本，再到取得解析结果，每一个阶段到需要等待一段时间，具体时间尚不明确，目前粗略测试分别是 3 分钟和 5 秒。如果一次 Lambda 调用触发一回对该调用的 Log 解析和 Metrics 数据生成，就要花 3 分多的时间，似乎有些本末倒置了……毕竟处理业务逻辑也不至于用这么久，统计运行时间反倒更耗时就离谱。另外折腾半天走到这里，总感觉自己是在 XY 问题里面兜圈子。&lt;/p&gt;&#xA;&lt;p&gt;如果 AWS 能有某种现成功能来解决是再好不过的了，但翻文档看得要吐血也没什么头绪，希望群佬指点迷津：有没有什么其他更好的解法？如果当前思路大体尚可，该如何优化上述问题，还有哪些需要注意的问题？最后，如何从更宏观的视角来掌握 AWS 里的这些东西？&lt;/p&gt;&#xA;&lt;p&gt;感谢阅读，先行谢过！&lt;/p&gt;&#xA;</description>
+      <author>enchilada2020</author>
+      <pubDate>20 Jun 2023 06:42:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>Surge for Mac 5 - Apple</title>
+      <link>https://www.v2ex.com/t/950322</link>
+      <description>Surge for Mac 5 （ 5 人车）永久版本买断拼车，已购，145RMB/人，缺 3 人，联系 tg: JTQwaWhoaGt6</description>
+      <author>ihhhkz</author>
+      <pubDate>20 Jun 2023 06:41:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>珠海有啥地方可以玩的吗，打算毕业和女朋友逛逛 - 生活</title>
+      <link>https://www.v2ex.com/t/950321</link>
+      <description>&lt;p&gt;就是想问问大家有啥建议，有哪几家店好吃的，哪里好玩的&lt;/p&gt;&#xA;</description>
+      <author>ricardichen</author>
+      <pubDate>20 Jun 2023 06:38:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>openBase 关闭了 - 程序员</title>
+      <link>https://www.v2ex.com/t/950320</link>
+      <description>&lt;p&gt;一直在用 openbase 找一下开源好用的第三方库，现在有哪些类似的网站推荐吗？&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;图&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/GTYf8lp.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>fzcf</author>
+      <pubDate>20 Jun 2023 06:37:58 +0000</pubDate>
+    </item>
+    <item>
       <title>api.cloudflare.com 疑似被墙 - 宽带症候群</title>
       <link>https://www.v2ex.com/t/950319</link>
       <description>&lt;p&gt;&lt;a href=&#34;http://api.cloudflare.com&#34; rel=&#34;nofollow&#34;&gt;api.cloudflare.com&lt;/a&gt; 疑似被墙。目前导致爱快的 ddns 失效。&#xA;本地测试 IPV4 ping 测试超时，ipv6 ping 测试正常。&lt;/p&gt;&#xA;&lt;p&gt;爱快是有获取到 IPV6 地址的，但是怎么用呢。。。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imgse.com/i/pC8KFCd&#34; rel=&#34;nofollow&#34;&gt;&lt;img alt=&#34;pC8KFCd.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s1.ax1x.com/2023/06/20/pC8KFCd.png&#34;/&gt;&lt;/a&gt;&lt;/p&gt;&#xA;</description>
