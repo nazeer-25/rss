@@ -28,6 +28,11 @@
       <description>&lt;p&gt;公司名称：北京知知丫丫科技有限公司&lt;/p&gt;&#xA;&#xA;&lt;p&gt;公司情况：专注于知识创作和知识协同，核心成员为二次创业，经验丰富&lt;/p&gt;&#xA;&#xA;&lt;p&gt;公司地址：北京市海淀区东北旺北京中关村软件园孵化器&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;职位描述：&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;云服务/边缘服务架构设计和研发工作&lt;/li&gt;&#xA;&lt;li&gt;后台服务性能分析和架构优化&lt;/li&gt;&#xA;&lt;li&gt;挖掘和分析业务需求&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;职位要求：&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;1年以上Go语言实际项目经验，3年以上开发经验，计算机或相关专业，全日制本科以上学历&lt;/li&gt;&#xA;&lt;li&gt;熟练使用Git，Docker，熟悉Linux常用命令，了解K8s或K3s&lt;/li&gt;&#xA;&lt;li&gt;常用中间件的应用和维护，如TiDB，Mysql，Redis，Kafka，ES等&lt;/li&gt;&#xA;&lt;li&gt;良好的代码风格&lt;/li&gt;&#xA;&lt;li&gt;较强的学习和沟通能力，团队合作精神&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;满足以下任意一项者，可优先考虑：&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;区块链项目开发经验&lt;/li&gt;&#xA;&lt;li&gt;数据库系统开发经验&lt;/li&gt;&#xA;&lt;li&gt;Rsync/Syncthing/xDrive类似文件同步系统开发经验&lt;/li&gt;&#xA;&lt;li&gt;人工智能基础理论，Pytorch或Tensorflow实际项目经验&lt;/li&gt;&#xA;&lt;li&gt;基于go-micro，go-zero，go-kratos等微服务框架实际项目经验&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;薪资福利：&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;有竞争力的薪酬&lt;/li&gt;&#xA;&lt;li&gt;完善的福利制度&lt;/li&gt;&#xA;&lt;li&gt;每周双休和年假保证&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;联系方式：&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Email：hr@zhizhiyaya.cn&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>推荐你认为好的Go资源</title>
+      <link>https://studygolang.com/topics/11096#reply61</link>
+      <description>&lt;p&gt;社区是一个互助平台，大家的资源应该互相共享，一起推动 Go 的发展，提升每个人的 Go 水平。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如果你有好的 Go 资源，包括但不限于：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;网站&lt;/li&gt;&#xA;&lt;li&gt;图书&lt;/li&gt;&#xA;&lt;li&gt;工具&lt;/li&gt;&#xA;&lt;li&gt;项目&lt;/li&gt;&#xA;&lt;li&gt;库&lt;/li&gt;&#xA;&lt;li&gt;教程&lt;/li&gt;&#xA;&lt;li&gt;博客&lt;/li&gt;&#xA;&lt;li&gt;。。。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;欢迎留言，给出你的推荐理由和网址。谢谢！&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>为什么会在零点的时候还会执行一次计划呢？</title>
       <link>https://studygolang.com/topics/16426#reply7</link>
       <description>&lt;p&gt;计划是要在每天的17点执行，为什么还会在零点的时候还会执行一次计划呢？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;cat main.go&#xA;package main&#xA;&#xA;import (&#xA;&#x9;&amp;quot;log&amp;quot;&#xA;&#xA;&#x9;&amp;quot;github.com/robfig/cron/v3&amp;quot;&#xA;)&#xA;&#xA;//计划任务&#xA;func Crontab(spec string, f func()) (cron.EntryID, error) {&#xA;&#x9;var c = cron.New(cron.WithSeconds())&#xA;&#x9;id, err := c.AddFunc(spec, f)&#xA;&#x9;c.Start()&#xA;&#x9;return id, err&#xA;}&#xA;func sayHello() {&#xA;&#x9;log.Println(&amp;quot;hello world!&amp;quot;)&#xA;}&#xA;func main() {&#xA;&#x9;// 秒0-59 分钟0-59 小时0-23 天或月1-31天 月1-12 星期0-6&#xA;&#x9;var spec string = &amp;quot;0 0 */17 * * ?&amp;quot;&#xA;&#x9;Crontab(spec, sayHello)&#xA;&#x9;select {}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;tail nohup.out &#xA;2023/06/17 17:00:00 hello world!&#xA;2023/06/18 00:00:00 hello world!&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -40,11 +45,6 @@
     <item>
       <title>Go GC：了解便利背后的开销</title>
       <link>https://studygolang.com/articles/36171#reply0</link>
-    </item>
-    <item>
-      <title>推荐你认为好的Go资源</title>
-      <link>https://studygolang.com/topics/11096#reply61</link>
-      <description>&lt;p&gt;社区是一个互助平台，大家的资源应该互相共享，一起推动 Go 的发展，提升每个人的 Go 水平。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如果你有好的 Go 资源，包括但不限于：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;网站&lt;/li&gt;&#xA;&lt;li&gt;图书&lt;/li&gt;&#xA;&lt;li&gt;工具&lt;/li&gt;&#xA;&lt;li&gt;项目&lt;/li&gt;&#xA;&lt;li&gt;库&lt;/li&gt;&#xA;&lt;li&gt;教程&lt;/li&gt;&#xA;&lt;li&gt;博客&lt;/li&gt;&#xA;&lt;li&gt;。。。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;欢迎留言，给出你的推荐理由和网址。谢谢！&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>调用sql server提示慢查询，是怎么回事？</title>
