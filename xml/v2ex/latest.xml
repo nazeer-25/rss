@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>半吊子如何操作 k8s 升级 - Kubernetes</title>
+      <link>https://www.v2ex.com/t/950259</link>
+      <description>&lt;p&gt;集群在 20 个节点以内，k8s 版本已经落后好多个版本了（八九个），近期证书会过期，看更换证书的流程也挺麻烦的，想着要不一块把 k8s 升级了。鉴于运维不在了，我头有点大。      &lt;/p&gt;&#xA;&lt;p&gt;之前尝试过上云，感觉太不灵活了，踩了几个坑就停下来了。&lt;/p&gt;&#xA;&lt;p&gt;如果升级的话，是用 kubeadm upgrade 一步步升级，还是重新开 20 个机器，装上最新版 k8s ，把服务都重新部署一遍呢。  &lt;/p&gt;&#xA;&lt;p&gt;我们跑的服务晚上停一阵也没关系。  &lt;/p&gt;&#xA;&lt;p&gt;请大家给点建议，或者跨 N 多版本升级，容易出现什么坑，提点一下&lt;/p&gt;&#xA;</description>
+      <author>wtfedc</author>
+      <pubDate>20 Jun 2023 03:31:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>一个 Java Optional + Stream 重构的小例子 - Java</title>
+      <link>https://www.v2ex.com/t/950258</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public Optional&amp;lt;MyLog&amp;gt; lastLog(Collection&amp;lt;Long&amp;gt; shopIds) {&#xA;    List&amp;lt;Long&amp;gt; allAppIds = StreamUtils.map(appDao.findAll(), App::getId);&#xA;    List&amp;lt;MyLog&amp;gt; logs = new ArrayList&amp;lt;&amp;gt;();&#xA;    shopIds.forEach(sid -&amp;gt; {&#xA;        allAppIds.forEach(aid -&amp;gt; {&#xA;            MyLog lastLog = logDao.findLast(aid, sid, null, LocalDate.now().plusDays(1));&#xA;            if (Objects.nonNull(lastLog)) {&#xA;                logs.add(lastLog);&#xA;            }&#xA;        });&#xA;    });&#xA;    if (CollectionUtils.isEmpty(logs)) {&#xA;        return Optional.empty();&#xA;    }&#xA;    logs.sort(Comparator.comparing(MyLog::getTime));&#xA;    return Optional.of(Iterables.getLast(logs));&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;&#xA;public Optional&amp;lt;MyLog&amp;gt; lastLog(Collection&amp;lt;Long&amp;gt; shopIds) {&#xA;    if (shopIds.isEmpty()) {&#xA;        return Optional.empty();&#xA;    }&#xA;    var allAppIds = appDao.findAllId();&#xA;    var end = LocalDate.now().plusDays(1);&#xA;    return shopIds.stream()&#xA;            .flatMap(shopId -&amp;gt; allAppIds.stream().flatMap(appId -&amp;gt; logDao.findLast(appId, shopId, end).stream()))&#xA;            .max(Comparator.comparing(MyLog::getTime));&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我们用的 java 11 ，部分方法 java 8 可能没有&lt;/p&gt;&#xA;&lt;p&gt;类名和方法名有做部分处理&lt;/p&gt;&#xA;&lt;p&gt;原来的方法不知道为什么主动用了 optional 但还是写成这么一大坨&lt;/p&gt;&#xA;&lt;p&gt;调整后的 early return 其实也能合并到 optional 里串起来，不过想想还是算了，反倒显得更麻烦&lt;/p&gt;&#xA;&lt;p&gt;另外这个 max 是 idea 自动提示的调整，一开始是照着原方法的思路写成 sorted + findFirst&lt;/p&gt;&#xA;&lt;p&gt;idea 很多 warning 都可以很方便的 alt + enter 直接重构掉&lt;/p&gt;&#xA;&lt;p&gt;copilot 锐评：&#xA;Overall, the refactored implementation is more concise and readable than the original implementation, and makes use of functional programming constructs to achieve the same result. It also avoids the use of nested loops, which can be harder to read and understand.&lt;/p&gt;&#xA;</description>
+      <author>TWorldIsNButThis</author>
+      <pubDate>20 Jun 2023 03:28:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>chatgpt 提示被 blocked 了 - 问与答</title>
+      <link>https://www.v2ex.com/t/950257</link>
+      <description>&lt;p&gt;尝试过开启 Chrome 隐身模式以及切换梯子节点，在 ip138 上已显示为美国的 ip ，用的是一元机场的梯子，目前问题依旧。&lt;/p&gt;&#xA;&lt;p&gt;有老哥能指导一下的么？&lt;/p&gt;&#xA;&lt;p&gt;感谢。&lt;/p&gt;&#xA;</description>
+      <author>shanghai1943</author>
+      <pubDate>20 Jun 2023 03:27:54 +0000</pubDate>
+    </item>
+    <item>
       <title>有什么可以可靠 7x24 小时运行的低功耗主机？或迷你主机 - 问与答</title>
       <link>https://www.v2ex.com/t/950255</link>
       <description>&lt;p&gt;最近迷你主机尘嚣直上，我自己的几个需求：&lt;/p&gt;&#xA;&lt;p&gt;1 、在单台性能超过或接近 2 个 n100 的基础上，性能价格比不比 n100 差太多&#xA;2 、双网口，但不一定需要 2.5G 、千兆亦可&#xA;3 、支持 hdmi2.0 ，4Kx60hz 至少&#xA;4 、无扇最优、或者低速大风扇，保证 7x24 做有压力的服务器能够稳定运行&#xA;5 、长期运行功耗可接受，电费友好，至少不能比 2 个 n100 电费差太多&lt;/p&gt;&#xA;</description>

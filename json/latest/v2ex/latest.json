@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "半吊子如何操作 k8s 升级 - Kubernetes",
+      "Link": "https://www.v2ex.com/t/950259",
+      "Description": "\u003cp\u003e集群在 20 个节点以内，k8s 版本已经落后好多个版本了（八九个），近期证书会过期，看更换证书的流程也挺麻烦的，想着要不一块把 k8s 升级了。鉴于运维不在了，我头有点大。      \u003c/p\u003e\n\u003cp\u003e之前尝试过上云，感觉太不灵活了，踩了几个坑就停下来了。\u003c/p\u003e\n\u003cp\u003e如果升级的话，是用 kubeadm upgrade 一步步升级，还是重新开 20 个机器，装上最新版 k8s ，把服务都重新部署一遍呢。  \u003c/p\u003e\n\u003cp\u003e我们跑的服务晚上停一阵也没关系。  \u003c/p\u003e\n\u003cp\u003e请大家给点建议，或者跨 N 多版本升级，容易出现什么坑，提点一下\u003c/p\u003e\n",
+      "Author": "wtfedc",
+      "PubDate": "2023-06-20T03:31:41Z"
+    },
+    {
+      "Title": "一个 Java Optional + Stream 重构的小例子 - Java",
+      "Link": "https://www.v2ex.com/t/950258",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-java\"\u003epublic Optional\u0026lt;MyLog\u0026gt; lastLog(Collection\u0026lt;Long\u0026gt; shopIds) {\n    List\u0026lt;Long\u0026gt; allAppIds = StreamUtils.map(appDao.findAll(), App::getId);\n    List\u0026lt;MyLog\u0026gt; logs = new ArrayList\u0026lt;\u0026gt;();\n    shopIds.forEach(sid -\u0026gt; {\n        allAppIds.forEach(aid -\u0026gt; {\n            MyLog lastLog = logDao.findLast(aid, sid, null, LocalDate.now().plusDays(1));\n            if (Objects.nonNull(lastLog)) {\n                logs.add(lastLog);\n            }\n        });\n    });\n    if (CollectionUtils.isEmpty(logs)) {\n        return Optional.empty();\n    }\n    logs.sort(Comparator.comparing(MyLog::getTime));\n    return Optional.of(Iterables.getLast(logs));\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e\npublic Optional\u0026lt;MyLog\u0026gt; lastLog(Collection\u0026lt;Long\u0026gt; shopIds) {\n    if (shopIds.isEmpty()) {\n        return Optional.empty();\n    }\n    var allAppIds = appDao.findAllId();\n    var end = LocalDate.now().plusDays(1);\n    return shopIds.stream()\n            .flatMap(shopId -\u0026gt; allAppIds.stream().flatMap(appId -\u0026gt; logDao.findLast(appId, shopId, end).stream()))\n            .max(Comparator.comparing(MyLog::getTime));\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我们用的 java 11 ，部分方法 java 8 可能没有\u003c/p\u003e\n\u003cp\u003e类名和方法名有做部分处理\u003c/p\u003e\n\u003cp\u003e原来的方法不知道为什么主动用了 optional 但还是写成这么一大坨\u003c/p\u003e\n\u003cp\u003e调整后的 early return 其实也能合并到 optional 里串起来，不过想想还是算了，反倒显得更麻烦\u003c/p\u003e\n\u003cp\u003e另外这个 max 是 idea 自动提示的调整，一开始是照着原方法的思路写成 sorted + findFirst\u003c/p\u003e\n\u003cp\u003eidea 很多 warning 都可以很方便的 alt + enter 直接重构掉\u003c/p\u003e\n\u003cp\u003ecopilot 锐评：\nOverall, the refactored implementation is more concise and readable than the original implementation, and makes use of functional programming constructs to achieve the same result. It also avoids the use of nested loops, which can be harder to read and understand.\u003c/p\u003e\n",
+      "Author": "TWorldIsNButThis",
+      "PubDate": "2023-06-20T03:28:39Z"
+    },
+    {
+      "Title": "chatgpt 提示被 blocked 了 - 问与答",
+      "Link": "https://www.v2ex.com/t/950257",
+      "Description": "\u003cp\u003e尝试过开启 Chrome 隐身模式以及切换梯子节点，在 ip138 上已显示为美国的 ip ，用的是一元机场的梯子，目前问题依旧。\u003c/p\u003e\n\u003cp\u003e有老哥能指导一下的么？\u003c/p\u003e\n\u003cp\u003e感谢。\u003c/p\u003e\n",
+      "Author": "shanghai1943",
+      "PubDate": "2023-06-20T03:27:54Z"
+    },
+    {
       "Title": "有什么可以可靠 7x24 小时运行的低功耗主机？或迷你主机 - 问与答",
       "Link": "https://www.v2ex.com/t/950255",
       "Description": "\u003cp\u003e最近迷你主机尘嚣直上，我自己的几个需求：\u003c/p\u003e\n\u003cp\u003e1 、在单台性能超过或接近 2 个 n100 的基础上，性能价格比不比 n100 差太多\n2 、双网口，但不一定需要 2.5G 、千兆亦可\n3 、支持 hdmi2.0 ，4Kx60hz 至少\n4 、无扇最优、或者低速大风扇，保证 7x24 做有压力的服务器能够稳定运行\n5 、长期运行功耗可接受，电费友好，至少不能比 2 个 n100 电费差太多\u003c/p\u003e\n",
