@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>github 更新 UI - 程序员</title>
+      <link>https://www.v2ex.com/t/950473</link>
+      <description>&lt;p&gt;主题是白色色调。和之前黑色改版很大。大家觉得怎么样&lt;/p&gt;&#xA;</description>
+      <author>Thecosy</author>
+      <pubDate>20 Jun 2023 14:27:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>Java 很强，但是 Java 的路还很长 - Java</title>
+      <link>https://www.v2ex.com/t/950472</link>
+      <description>&lt;p&gt;看了隔壁吹爆 java21 的帖子之后，我去详细研读了下 Java21 的新特性。&lt;/p&gt;&#xA;&lt;p&gt;首先承认，这么多年了，Java 的强已经被证明了，毋庸质疑，但是 Java 也有各种弱点（这里就不说了）。&lt;/p&gt;&#xA;&lt;p&gt;其次，Java21 两大更新：虚拟线程正式版，分代 ZGC 。确实也非常的好，但是远没到吹爆的程度。&lt;/p&gt;&#xA;&lt;p&gt;尤其是虚拟线程，这个光秃秃的虚拟线程，如果没有配套的话，完全不足以促使现有框架大规模适配，这是我仔细阅读 Java21 相关 JEP 之后的感觉。&lt;/p&gt;&#xA;&lt;p&gt;因为和虚拟线程配套的两个重要特性在 Java21 上还是预览版，还不是正式版，所以目前虚拟线程场景虽然正式版了，但是场景还很受限。&lt;/p&gt;&#xA;&lt;p&gt;和虚拟线程配套的两个重要特性是：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;结构性并发： &lt;a href=&#34;https://openjdk.org/jeps/453&#34; rel=&#34;nofollow&#34;&gt;https://openjdk.org/jeps/453&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;范围值： &lt;a href=&#34;https://openjdk.org/jeps/446&#34; rel=&#34;nofollow&#34;&gt;https://openjdk.org/jeps/446&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;有兴趣的朋友，我也强烈建议大家仔细阅读下，读完了，一定回过头来同意我上面的观点——虚拟线程虽好，但还需要完善配套。&lt;/p&gt;&#xA;&lt;p&gt;只有一个虚拟线程，现有框架就不会大量跟进，那么生态就不会有大变化，基本还是还目前一样。&lt;/p&gt;&#xA;&lt;p&gt;然而等这两个配套上正式，框架肯定是基于 LTS 开发，然而下个 LTS 版本是 2 年后了，也就是 2025 年 9 月。又是几年过去了。&lt;/p&gt;&#xA;&lt;p&gt;不过，很巧的是，2025 年正好是 Java 的 30 岁（ 1995 年开始算），希望到时候 30 而立的 Java 正能立起来吧。&lt;/p&gt;&#xA;</description>
+      <author>karottc</author>
+      <pubDate>20 Jun 2023 14:24:04 +0000</pubDate>
+    </item>
+    <item>
       <title>求问 Wireguard 相关配置 - Linux</title>
       <link>https://www.v2ex.com/t/950471</link>
       <description>&lt;p&gt;现在搭好了一个 Wireguard 的服务端，这里姑且称为 ServerA 。ServerA 上生成了一对 PublicKey 和 PrivateKey ，这里称为 PubKeyA 和 PrivKeyA 。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;ServerA 的 wg0.conf 配置文件如下：&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt;[Interface]&#xA;Address = 10.0.0.1/24&#xA;SaveConfig = true&#xA;ListenPort = 51820&#xA;PrivateKey = PrivKeyA&#xA;PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE&#xA;PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;随后通过 systemd 启动 Wireguard ，并通过命令看到 Wireguard 正在运行：&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;interface: wg0&#xA;  public key: PubKeyA&#xA;  private key: (hidden)&#xA;  listening port: 51820&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;构建客户端配置文件&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt;[Interface]&#xA;PrivateKey = &#xA;Address = 10.0.0.1/24&#xA;&#xA;[Peer]&#xA;PublicKey = &#xA;AllowedIPs = 0.0.0.0/0&#xA;Endpoint = myserver.cn:51820&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;这个时候 Windows 端的 Wireguard 会自动生成一组公钥私钥，那么在&lt;strong&gt;客户端的配置文件&lt;/strong&gt;中应该用哪个公钥和哪个私钥呢&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
