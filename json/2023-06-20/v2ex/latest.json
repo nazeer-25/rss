@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "怎么样变得很优秀! - 问与答",
+      "Link": "https://www.v2ex.com/t/950267",
+      "Description": "\u003cp\u003e如题…口才好 气质好 等等\u003c/p\u003e\n",
+      "Author": "nbafive",
+      "PubDate": "2023-06-20T03:48:50Z"
+    },
+    {
+      "Title": "openwrt 的访客 vlan， tproxy 端口开放疑问 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/950266",
+      "Description": "设备 A：friendly r5c, immortalwrt 23.05-rc1\u003cbr /\u003e设备 B：Hyper-v ，openwrt 22.03\u003cbr /\u003e\u003cbr /\u003e两台设备配置基本是一样的，用 keepalived 做 vrrp ，r5c 是 master ，hyper-v 是 backup 。\u003cbr /\u003e\u003cbr /\u003e访客网络默认到路由器的 INPUT 是 DROP\u003cbr /\u003econfig zone                   \u003cbr /\u003e        option name 'guestlaniot'\u003cbr /\u003e        option input 'DROP'\u003cbr /\u003e        option output 'ACCEPT'\u003cbr /\u003e        option forward 'REJECT'\u003cbr /\u003e        list network 'guestlan'\u003cbr /\u003e        list network 'iot'\u003cbr /\u003e允许 UDP 53 ，67-68 ，546-547\u003cbr /\u003e允许 TCP 1080 （这是 v2ray 的 redirect 端口，命令如下：）\u003cbr /\u003enft add rule v2ray prerouting meta l4proto tcp ip daddr @\u003ca target=\"_blank\" href=\"/member/gfwlist_set\" rel=\"nofollow noopener\"\u003egfwlist_set\u003c/a\u003e counter redirect to :1080\u003cbr /\u003e原本使 nftables 的 redirect 做透明代理，使用以上配置时访客网络是能正常打开互联网网站的。\u003cbr /\u003e\u003cbr /\u003e前两天从 redirect 更换为 tproxy ，tproxy 端口仍为 TCP 1080:\u003cbr /\u003enft add rule tproxy prerouting meta l4proto { tcp, udp } ip daddr @\u003ca target=\"_blank\" href=\"/member/gfwlist_set\" rel=\"nofollow noopener\"\u003egfwlist_set\u003c/a\u003e counter tproxy to :1080 meta mark set 0x00000001\u003cbr /\u003e\u003cbr /\u003ebr-lan 正常打开互联网网站，但访客网络打开互联网网站均超时(非 gfwlist 的网站正常)，使用 tcping 测试也超时。\u003cbr /\u003e\u003cbr /\u003e最后向访客网络开放 TCP 80,443 ，这样就能正常打开互联网网站了。就是说 tproxy 下开放 1080 端口出来没有用了?\u003cbr /\u003econfig rule\u003cbr /\u003e        option name 'GuestIOT-Allow-TransparentProxy'\u003cbr /\u003e        list proto 'tcp'   \u003cbr /\u003e        option src 'guestlaniot'\u003cbr /\u003e        option dest_port '1080 80 443'\u003cbr /\u003e        option target 'ACCEPT\u003cbr /\u003e        \u003cbr /\u003e那这样我不就是要把路由器的所有端口都要开放给访客了?有什么方法开放端口，但不让访客访问路由器的 web 界面?",
+      "Author": "titanium98118",
+      "PubDate": "2023-06-20T03:48:20Z"
+    },
+    {
+      "Title": "要不要回二线城市，比如成都 - 酷工作",
+      "Link": "https://www.v2ex.com/t/950265",
+      "Description": "\u003cp\u003e请 v 友们帮忙给点建议\n本人三年大厂测试 /测开经验，技术栈是 python 、golang\n感觉一线生活太过紧凑，想找一个相对轻松点工作\n不知道是继续在一线找个外企还是直接回二线城市，比如成都\u003c/p\u003e\n",
+      "Author": "0tachikoma0",
+      "PubDate": "2023-06-20T03:40:04Z"
+    },
+    {
       "Title": "远程全职岗位招聘 - 酷工作",
       "Link": "https://www.v2ex.com/t/950263",
       "Description": "远程全职，各个岗位都有招聘，薪资对标中大厂，氛围宽松，极少加班，可加 telegram skying001 联系\u003cbr /\u003e\u003cbr /\u003e后端只有 java 岗位，其他方向（前端、产品、测试、UI 、移动端、数据分析师等等）也有招聘\u003cbr /\u003e\u003cbr /\u003e备注：需要交易所、区块链相关经验或者金融、交易经验",

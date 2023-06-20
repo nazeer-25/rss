@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>怎么样变得很优秀! - 问与答</title>
+      <link>https://www.v2ex.com/t/950267</link>
+      <description>&lt;p&gt;如题…口才好 气质好 等等&lt;/p&gt;&#xA;</description>
+      <author>nbafive</author>
+      <pubDate>20 Jun 2023 03:48:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>openwrt 的访客 vlan， tproxy 端口开放疑问 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/950266</link>
+      <description>设备 A：friendly r5c, immortalwrt 23.05-rc1&lt;br /&gt;设备 B：Hyper-v ，openwrt 22.03&lt;br /&gt;&lt;br /&gt;两台设备配置基本是一样的，用 keepalived 做 vrrp ，r5c 是 master ，hyper-v 是 backup 。&lt;br /&gt;&lt;br /&gt;访客网络默认到路由器的 INPUT 是 DROP&lt;br /&gt;config zone                   &lt;br /&gt;        option name &#39;guestlaniot&#39;&lt;br /&gt;        option input &#39;DROP&#39;&lt;br /&gt;        option output &#39;ACCEPT&#39;&lt;br /&gt;        option forward &#39;REJECT&#39;&lt;br /&gt;        list network &#39;guestlan&#39;&lt;br /&gt;        list network &#39;iot&#39;&lt;br /&gt;允许 UDP 53 ，67-68 ，546-547&lt;br /&gt;允许 TCP 1080 （这是 v2ray 的 redirect 端口，命令如下：）&lt;br /&gt;nft add rule v2ray prerouting meta l4proto tcp ip daddr @&lt;a target=&#34;_blank&#34; href=&#34;/member/gfwlist_set&#34; rel=&#34;nofollow noopener&#34;&gt;gfwlist_set&lt;/a&gt; counter redirect to :1080&lt;br /&gt;原本使 nftables 的 redirect 做透明代理，使用以上配置时访客网络是能正常打开互联网网站的。&lt;br /&gt;&lt;br /&gt;前两天从 redirect 更换为 tproxy ，tproxy 端口仍为 TCP 1080:&lt;br /&gt;nft add rule tproxy prerouting meta l4proto { tcp, udp } ip daddr @&lt;a target=&#34;_blank&#34; href=&#34;/member/gfwlist_set&#34; rel=&#34;nofollow noopener&#34;&gt;gfwlist_set&lt;/a&gt; counter tproxy to :1080 meta mark set 0x00000001&lt;br /&gt;&lt;br /&gt;br-lan 正常打开互联网网站，但访客网络打开互联网网站均超时(非 gfwlist 的网站正常)，使用 tcping 测试也超时。&lt;br /&gt;&lt;br /&gt;最后向访客网络开放 TCP 80,443 ，这样就能正常打开互联网网站了。就是说 tproxy 下开放 1080 端口出来没有用了?&lt;br /&gt;config rule&lt;br /&gt;        option name &#39;GuestIOT-Allow-TransparentProxy&#39;&lt;br /&gt;        list proto &#39;tcp&#39;   &lt;br /&gt;        option src &#39;guestlaniot&#39;&lt;br /&gt;        option dest_port &#39;1080 80 443&#39;&lt;br /&gt;        option target &#39;ACCEPT&lt;br /&gt;        &lt;br /&gt;那这样我不就是要把路由器的所有端口都要开放给访客了?有什么方法开放端口，但不让访客访问路由器的 web 界面?</description>
+      <author>titanium98118</author>
+      <pubDate>20 Jun 2023 03:48:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>要不要回二线城市，比如成都 - 酷工作</title>
+      <link>https://www.v2ex.com/t/950265</link>
+      <description>&lt;p&gt;请 v 友们帮忙给点建议&#xA;本人三年大厂测试 /测开经验，技术栈是 python 、golang&#xA;感觉一线生活太过紧凑，想找一个相对轻松点工作&#xA;不知道是继续在一线找个外企还是直接回二线城市，比如成都&lt;/p&gt;&#xA;</description>
+      <author>0tachikoma0</author>
+      <pubDate>20 Jun 2023 03:40:04 +0000</pubDate>
+    </item>
+    <item>
       <title>远程全职岗位招聘 - 酷工作</title>
       <link>https://www.v2ex.com/t/950263</link>
       <description>远程全职，各个岗位都有招聘，薪资对标中大厂，氛围宽松，极少加班，可加 telegram skying001 联系&lt;br /&gt;&lt;br /&gt;后端只有 java 岗位，其他方向（前端、产品、测试、UI 、移动端、数据分析师等等）也有招聘&lt;br /&gt;&lt;br /&gt;备注：需要交易所、区块链相关经验或者金融、交易经验</description>
