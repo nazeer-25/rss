@@ -4,6 +4,55 @@
   "Description": "",
   "Items": [
     {
+      "Title": "本人前端，想接触 Java ，怎么入门好 - 问与答",
+      "Link": "https://www.v2ex.com/t/950395",
+      "Description": "",
+      "Author": "jaween",
+      "PubDate": "2023-06-20T08:57:51Z"
+    },
+    {
+      "Title": "618 就买了把罗技 mx keys 键盘，问问 jd 全保换新服务 - 生活",
+      "Link": "https://www.v2ex.com/t/950394",
+      "Description": "jd 上之前完成过一单全保换新，99 块钱的充电宝买了 1 年全保换新，7 个月鼓包了，由于不再生产了，就折了 90%原价退钱给我了。\u003cbr /\u003e这次 400 多买键盘，花了 57“巨款”买了个 3 年全保换新，放公司敲 3 年代码（公司键盘太辣鸡），坏了直接换新。\u003cbr /\u003e配合 master3 鼠标和 smart actions 功能，个人觉得实用性拉满（吐槽 flow 功能跨屏拉胯，尤其是鼠标带着键盘一起 flow 跨屏）。\u003cbr /\u003e3 年能用坏吗？如何在合适的时间把键盘用坏呢？ jd 会不会拒保高价值商品？手动狗头",
+      "Author": "wsn",
+      "PubDate": "2023-06-20T08:54:46Z"
+    },
+    {
+      "Title": "成都经济的支柱 - 成都",
+      "Link": "https://www.v2ex.com/t/950392",
+      "Description": "\u003cp\u003e我住在一个西藏某机关开发的小区，里面很多住户都是西藏该机关退休的公务员。你懂的，武侯又名小拉萨。\u003c/p\u003e\n\u003cp\u003e我妈人缘好，跟邻居打成一片。根据她了解到的情况：\u003c/p\u003e\n\u003cp\u003e这些西藏退休公务员退休金非常高，比如某老头每月 2 万 5 。钱多到没处花，天天买各种保健品和乱七八糟的东西上。\u003c/p\u003e\n\u003cp\u003e旁边一个小区更了不得，应该是军队上的干部，他们退休金据说达到 3 万以上，家里子女不上班，就在家伺候老人。\u003c/p\u003e\n\u003cp\u003e前者的数据可以确定，后者的数据因为是转述，我没法确定真实性。各位自己判断吧。\u003c/p\u003e\n\u003cp\u003e为什么成都就业这么拉垮，却看起来这么繁荣？因为有大量不用工作的人在这里生活。他们撑起了成都的消费市场。\u003c/p\u003e\n\u003cp\u003e你们交的养老保险就拿去养这些人了。\u003c/p\u003e\n\u003cp\u003e你每个月拿出三分之一收入养老干部，这是赢一次。他们早早屯了好几套房，你还得给他们交房租，这是赢两次。等到你买房，还可能从他们手里买二手房，他们赢三次。等你需要用医保和养老的时候，发现钱早已经花完，他们的财富转变成了温哥华西的大豪斯，他们赢四次。\u003c/p\u003e\n\u003cp\u003e我真的不甘心一辈子被同一批人压榨，我要是有孩子还得被他们孩子压榨。\u003c/p\u003e\n\u003cp\u003e这种邪恶的国家赶紧亡，早亡早重生。\u003c/p\u003e\n",
+      "Author": "leedarmau",
+      "PubDate": "2023-06-20T08:53:33Z"
+    },
+    {
+      "Title": "paypal 支付问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/950391",
+      "Description": "\u003cp\u003e这是封装的方法：\u003c/p\u003e\n\u003cp\u003eprivate function _connectByCURL($url, $body, $http_header = false, $identify = false)\n{\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e    $ch = @curl_init();\n\n    if (!$ch) {\n        $this-\u0026gt;_logs[] = $this-\u0026gt;paypal-\u0026gt;l('Connect failed with CURL method');\n    } else {\n        $this-\u0026gt;_logs[] = $this-\u0026gt;paypal-\u0026gt;l('Connect with CURL method successful');\n        $this-\u0026gt;_logs[] = '\u0026lt;b\u0026gt;'.$this-\u0026gt;paypal-\u0026gt;l('Sending this params:').'\u0026lt;/b\u0026gt;';\n        $this-\u0026gt;_logs[] = $body;\n        for ($attempt = 0; $attempt \u0026lt; 3; $attempt++) {\n            @curl_setopt($ch, CURLOPT_URL, 'https://' . $url);\n\n            if ($identify) {\n                @curl_setopt($ch, CURLOPT_USERPWD, Configuration::get('PAYPAL_LOGIN_CLIENT_ID') . ':' . Configuration::get('PAYPAL_LOGIN_SECRET'));\n            }\n\n            @curl_setopt($ch, CURLOPT_POST, true);\n            if ($body) {\n                @curl_setopt($ch, CURLOPT_POSTFIELDS, $body);\n            }\n\n            @curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);\n            @curl_setopt($ch, CURLOPT_HEADER, false);\n            @curl_setopt($ch, CURLOPT_TIMEOUT, 30);\n            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);\n            @curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);\n            @curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);\n            //@curl_setopt($ch, CURLOPT_SSLVERSION, Configuration::get('PAYPAL_VERSION_TLS_CHECKED') == '1.2' ? 6 : 1);\n\n            @curl_setopt($ch, CURLOPT_VERBOSE, false);\n            if ($http_header) {\n                @curl_setopt($ch, CURLOPT_HTTPHEADER, $http_header);\n            }\n\n            $result = @curl_exec($ch);\n\n            if (!$result) {\n                $this-\u0026gt;_logs[] = $this-\u0026gt;paypal-\u0026gt;l('Send with CURL method failed ! Error:').' '.curl_error($ch);\n                if (curl_errno($ch)) {\n                    die(var_dump(curl_error($ch)));\n                    $this-\u0026gt;_logPaypal(curl_error($ch));\n                }\n                sleep(1);\n            } else {\n                $this-\u0026gt;_logs[] = $this-\u0026gt;paypal-\u0026gt;l('Send with CURL method successful');\n                break;\n            }\n        }\n\n\n\n        @curl_close($ch);\n    }\n    return $result ? $result : false;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e调用这个 paypal nvp 接口时不时就报这个错误  OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to \u003ca href=\"http://api-3t.paypal.com:443\" rel=\"nofollow\"\u003eapi-3t.paypal.com:443\u003c/a\u003e ，或者 SSL connection timeout ，或者 OpenSSL/1.1.1u: error:14094438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error ，是什么原因导致的啊，导致网站支付经常跳转失败\u003c/p\u003e\n",
+      "Author": "rivercherdeeeeee",
+      "PubDate": "2023-06-20T08:52:31Z"
+    },
+    {
+      "Title": "m1pro 用 chrome 打开稍微大点的网页假卡死 - macOS",
+      "Link": "https://www.v2ex.com/t/950390",
+      "Description": "上个月发现的问题，Chrome 打开稍微大点的网页就会转彩虹圈 10 几秒甚至 20 秒页面才能出来，也不是多么复杂的网页。类似于下面的百度百科这样都会卡 10 秒，看了下任务管理器，内存 cpu 都没什么大的负载，就单开一个标签也会，用 Safari 就一切正常。不知道有没有遇到相同情况的朋友，有无好的解决方案。\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://baike.baidu.com/item/%E8%B4%B7%E6%AC%BE%E5%B8%82%E5%9C%BA%E6%8A%A5%E4%BB%B7%E5%88%A9%E7%8E%87/23704794?fromtitle=LPR\u0026amp;fromid=8821373\u0026amp;fr=aladdin\" rel=\"nofollow noopener\"\u003ehttps://baike.baidu.com/item/%E8%B4%B7%E6%AC%BE%E5%B8%82%E5%9C%BA%E6%8A%A5%E4%BB%B7%E5%88%A9%E7%8E%87/23704794?fromtitle=LPR\u0026amp;fromid=8821373\u0026amp;fr=aladdin\u003c/a\u003e",
+      "Author": "ShakuganShana",
+      "PubDate": "2023-06-20T08:47:06Z"
+    },
+    {
+      "Title": "程序员回二线找工作，成都 vs 西安？ - 职场话题",
+      "Link": "https://www.v2ex.com/t/950389",
+      "Description": "隔壁帖子去成都找工作的，好像都在说成都不太行，都是电话客服销售，那西安怎么样？比成都更难？\u003cbr /\u003e我有两个朋友已回西安，都是家在那边，谈了妹子买了房背房贷中，虽然工作非大厂，但感觉生活更多姿多彩了，相比之下一线大厂打工，也挺没劲的",
+      "Author": "loveumozart",
+      "PubDate": "2023-06-20T08:45:11Z"
+    },
+    {
+      "Title": "求助: 给 openAI 充值的靠谱方式 - 程序员",
+      "Link": "https://www.v2ex.com/t/950388",
+      "Description": "\u003ch3\u003e求助\u003c/h3\u003e\n\u003cp\u003e大家是用 gpt 的话, 有啥靠谱的方式充值不?\u003c/p\u003e\n",
+      "Author": "kevin1452",
+      "PubDate": "2023-06-20T08:44:54Z"
+    },
+    {
       "Title": "AirBuddy 拼车 5 人，每人 8 元 - macOS",
       "Link": "https://www.v2ex.com/t/950387",
       "Description": "\u003cp\u003e如题，今天买的，还有 4 个坑位，一共花了 40 元，每人 8 元\u003c/p\u003e\n\u003cp\u003e感兴趣的老铁联系 vx\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003eecho \"ZW1oaGJtaDFibmdLCg==\" | base64 -d |  base64 -d\n\u003c/code\u003e\u003c/pre\u003e\n",
