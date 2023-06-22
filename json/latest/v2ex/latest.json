@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "cloudflare warp 客户端的 proxy 模式无法上网 - Cloudflare",
+      "Link": "https://www.v2ex.com/t/950811",
+      "Description": "\u003cp\u003e我在不同的系统上都试过 warp 的 proxy 模式，都是无法上网。\n本地 win/mac/linux ， 国外 vps 上都试过，proxy 模式都不通外网。\u003c/p\u003e\n\u003cp\u003e以 macos 为例，warp 全局模式上网是正常，但是转为 proxy 模式，连接 cf 网络能成功，socks 端口在本机 40000 ，使用浏览器插件 SwitchyOmega 走 socks5 连接这个端口，无法上网； warp+ 还是团队账号都一样的情况。\u003c/p\u003e\n\u003cp\u003e在终端输入 system_profiler SPNetworkDataType | grep \"SOCKS Proxy\"，\n显示：\nSOCKS Proxy Enabled: Yes\nSOCKS Proxy Port: 40000\nSOCKS Proxy Server: 127.0.0.1\nSOCKS Proxy Enabled: No\nSOCKS Proxy Port: 1081\nSOCKS Proxy Server: 127.0.0.1\nSOCKS Proxy Enabled: No\nSOCKS Proxy Port: 1081\nSOCKS Proxy Server: 127.0.0.1\u003c/p\u003e\n\u003cp\u003e根据这个输出，说明 warp 的 socks5 服务是正常开启了的；\n然后终端 curl --proxy socks5://127.0.0.1:40000 \u003ca href=\"https://www.cloudflare.com/cdn-cgi/trace/\" rel=\"nofollow\"\u003ehttps://www.cloudflare.com/cdn-cgi/trace/\u003c/a\u003e, 获得输出信息 warp=plus ，说明 warp 是开启了且连接到了 cf 网络的。\u003c/p\u003e\n\u003cp\u003e再尝试 curl --proxy socks5://127.0.0.1:40000 其他网站，例如 \u003ca href=\"http://google.com\" rel=\"nofollow\"\u003egoogle.com\u003c/a\u003e \u003ca href=\"http://bing.com\" rel=\"nofollow\"\u003ebing.com\u003c/a\u003e 返回了一些奇怪的东西，但看起来不是正常主页的 html ； \u003ca href=\"http://ifconfig.me\" rel=\"nofollow\"\u003eifconfig.me\u003c/a\u003e \u003ca href=\"http://ip.sb\" rel=\"nofollow\"\u003eip.sb\u003c/a\u003e 这些会返回 ip 地址；\u003c/p\u003e\n\u003cp\u003e翻了很久 google 都没找到类似的情况，cf 官方也是说 proxy 模式用 socks 工具连接就 ok ，没提及有什么其他的设置。 大家用 proxy mode 都正常吗？\u003c/p\u003e\n",
+      "Author": "exiaduck",
+      "PubDate": "2023-06-22T02:30:20Z"
+    },
+    {
+      "Title": "小火箭自动切换节点是啥情况？ - 问与答",
+      "Link": "https://www.v2ex.com/t/950810",
+      "Description": "\u003cp\u003e就是那个翻的软件。\u003cbr/\u003e\u003cbr/\u003e我选择美国的一个节点，结果在访问 twitter 后，他自动切换到了香港的节点。\u003cbr/\u003e\u003cbr/\u003e今天我访问 chatgpt 客户端时出现的，突然提示所在地区不可用，去看小火煎，结果选的依然是美国节点，但是实际连接的是香港节点。\u003c/p\u003e\n",
+      "Author": "s609926202",
+      "PubDate": "2023-06-22T02:29:51Z"
+    },
+    {
+      "Title": "请教一个旁路网关的设置问题 - 路由器",
+      "Link": "https://www.v2ex.com/t/950809",
+      "Description": "\u003cp\u003e背景：有个入户移动网关，ip \u003ccode\u003e192.168.1.1\u003c/code\u003e，lan 口插了 2 个设备,摄像头\u003ccode\u003e192.168.1.2\u003c/code\u003e, 路由器\u003ccode\u003e192.168.1.4\u003c/code\u003e,路由器 lan 口插了一台玩客云 192.168.0.105 ，玩客云作为旁路网关配置在路由器的 dhcp 中，其他设备都是连接的路由器\u003c/p\u003e\n\u003cp\u003e问题：我的电脑 192.168.0.106,无法访问摄像头 192.168.1.2 ，在玩客云中可以访问\u003c/p\u003e\n\u003cp\u003e请问怎么样配置才能让我的电脑可以访问到摄像头 192.168.1.2\u003c/p\u003e\n\u003cp\u003e玩客云 nat 规则：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-code\"\u003e# 设置策略路由\nip rule add fwmark 1 table 100\nip route add local 0.0.0.0/0 dev lo table 100\n\n# 代理局域网设备\niptables -t mangle -N V2RAY\niptables -t mangle -A V2RAY -d 127.0.0.1/32 -j RETURN\niptables -t mangle -A V2RAY -d 224.0.0.0/4 -j RETURN\niptables -t mangle -A V2RAY -d 255.255.255.255/32 -j RETURN\niptables -t mangle -A V2RAY -d 192.168.0.0/16 -p tcp -j RETURN # 直连局域网，避免 V2Ray 无法启动时无法连网关的 SSH ，如果你配置的是其他网段（如 10.x.x.x 等），则修改成自己的\niptables -t mangle -A V2RAY -d 192.168.0.0/16 -p udp ! --dport 53 -j RETURN # 直连局域网，53 端口除外（因为要使用 V2Ray 的 DNS)\niptables -t mangle -A V2RAY -j RETURN -m mark --mark 0xff    # 直连 SO_MARK 为 0xff 的流量(0xff 是 16 进制数，数值上等同与上面 V2Ray 配置的 255)，此规则目的\n是解决 v2ray 占用大量 CPU （ https://github.com/v2ray/v2ray-core/issues/2621 ）\niptables -t mangle -A V2RAY -p udp -j TPROXY --on-ip 127.0.0.1 --on-port 12345 --tproxy-mark 1 # 给 UDP 打标记 1 ，转发至 12345 端口\niptables -t mangle -A V2RAY -p tcp -j TPROXY --on-ip 127.0.0.1 --on-port 12345 --tproxy-mark 1 # 给 TCP 打标记 1 ，转发至 12345 端口\niptables -t mangle -A PREROUTING -j V2RAY # 应用规则\n\n# 代理网关本机\niptables -t mangle -N V2RAY_MASK\niptables -t mangle -A V2RAY_MASK -d 224.0.0.0/4 -j RETURN\niptables -t mangle -A V2RAY_MASK -d 255.255.255.255/32 -j RETURN\niptables -t mangle -A V2RAY_MASK -d 192.168.0.0/16 -p tcp -j RETURN # 直连局域网\niptables -t mangle -A V2RAY_MASK -d 192.168.0.0/16 -p udp ! --dport 53 -j RETURN # 直连局域网，53 端口除外（因为要使用 V2Ray 的 DNS ）\niptables -t mangle -A V2RAY_MASK -j RETURN -m mark --mark 0xff    # 直连 SO_MARK 为 0xff 的流量(0xff 是 16 进制数，数值上等同与上面 V2Ray 配置的 255)，此规则目的是避免代理本机(网关)流量出现回环问题\niptables -t mangle -A V2RAY_MASK -p udp -j MARK --set-mark 1   # 给 UDP 打标记，重路由\niptables -t mangle -A V2RAY_MASK -p tcp -j MARK --set-mark 1   # 给 TCP 打标记，重路由\niptables -t mangle -A OUTPUT -j V2RAY_MASK # 应用规则\n\n# 新建 DIVERT 规则，避免已有连接的包二次通过 TPROXY ，理论上有一定的性能提升\niptables -t mangle -N DIVERT\niptables -t mangle -A DIVERT -j MARK --set-mark 1\niptables -t mangle -A DIVERT -j ACCEPT\niptables -t mangle -I PREROUTING -p tcp -m socket -j DIVERT\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "linjinbao6666",
+      "PubDate": "2023-06-22T02:29:24Z"
+    },
+    {
       "Title": "iCloud 家庭车 国区 每人 400G 有效期至 23 年 12 月 22 日 只需 30rmb - iCloud",
       "Link": "https://www.v2ex.com/t/950807",
       "Description": "\u003cp\u003e如题，目前缺三\u003c/p\u003e\n\u003cp\u003e有意加 V：d2VlZHl3aW5k\u003c/p\u003e\n",
