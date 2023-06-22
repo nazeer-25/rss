@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请问目前哪些本地 AI 模型的代码能力比较强? 8G 显存的情况下. - 问与答",
+      "Link": "https://www.v2ex.com/t/950930",
+      "Description": "因为特殊需求, 需要离线查代码相关资料. \u003cbr /\u003e\u003cbr /\u003e或者请问有这方面的排行榜 /测试表吗",
+      "Author": "chackchackGO",
+      "PubDate": "2023-06-22T13:43:23Z"
+    },
+    {
+      "Title": "入学率降低后，是不是会带来兼职潮，推荐几款兼职软件？ - 问与答",
+      "Link": "https://www.v2ex.com/t/950929",
+      "Description": "兼职猫：外卖员岗位太多\u003cbr /\u003e\u003cbr /\u003e青团社：分类好一点，有零售店员，服务生等，外卖员岗也无法屏蔽\u003cbr /\u003e\u003cbr /\u003e58 同城：没试过\u003cbr /\u003e\u003cbr /\u003eboss 直聘：兼职类回复太慢，全职类接近 51 化，回复速度慢",
+      "Author": "xiangcheng42",
+      "PubDate": "2023-06-22T13:43:16Z"
+    },
+    {
+      "Title": "怎么使用（浪费）闲置下行带宽？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/950928",
+      "Description": "\u003cp\u003e突然发现仪表盘的数值很养眼，有没有什么东西可以持续跑满下行宽带的？ PT 刷流除外。\u003c/p\u003e\n",
+      "Author": "AMaiNya",
+      "PubDate": "2023-06-22T13:42:38Z"
+    },
+    {
       "Title": "Python 写力扣每日一题时遇到的困惑 - 问与答",
       "Link": "https://www.v2ex.com/t/950927",
       "Description": "\u003cp\u003e下面两种代码基本是一样的，但是第一种会出现错误的答案。\u003c/p\u003e\n\u003cp\u003e在写这种 bfs 之类的题目时，我经常会遇到这个问题。\u003c/p\u003e\n\u003cp\u003e其实我大概知道原因，就是变量自动变了，但还是很困惑，不知道到底是哪里变的。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-Python\"\u003eclass Solution:\n    def pondSizes(self, land: List[List[int]]) -\u0026gt; List[int]:\n        m = len(land)\n        n = len(land[0])\n        \n        res = []\n        for i,row in enumerate(land):\n            for j, v in enumerate(row):\n                if v == 0:\n                    q = [(i,j)]\n                    land[i][j] = 1\n                    cnt = 1\n                    while q:\n                        # print(q)\n                        tmp = q\n                        q = []\n                        for (i,j) in tmp:\n                            for dx in range(-1,2):\n                                for dy in range(-1,2):\n                                    if dx == dy == 0:\n                                        continue\n                                    x = i + dx\n                                    y = j + dy\n                                    if 0 \u0026lt;= x \u0026lt; m and 0 \u0026lt;= y \u0026lt; n and land[x][y] == 0:\n                                        cnt += 1\n                                        q.append((x,y))\n                                        land[x][y] = 1\n                   \n                    res.append(cnt)\n        return sorted(res)\nprint(Solution().pondSizes([[0,2,1,0],[0,1,0,1],[1,1,0,1],[0,1,0,1]]))\n[1, 2, 5]\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-Python\"\u003eclass Solution:\n    def pondSizes(self, land: List[List[int]]) -\u0026gt; List[int]:\n        m = len(land)\n        n = len(land[0])\n        def bfs(i,j):\n            q = [(i,j)]\n            land[i][j] = 1\n            cnt = 1\n            while q:\n                # print(q)\n                tmp = q\n                q = []\n                for (i,j) in tmp:\n                    for dx in range(-1,2):\n                        for dy in range(-1,2):\n                            if dx == dy == 0:\n                                continue\n                            x = i + dx\n                            y = j + dy\n                            if 0 \u0026lt;= x \u0026lt; m and 0 \u0026lt;= y \u0026lt; n and land[x][y] == 0:\n                                cnt += 1\n                                land[x][y] = -1\n                                q.append((x,y))\n            return cnt\n        res = []\n        for i,row in enumerate(land):\n            for j, v in enumerate(row):\n                if v == 0:\n                    cnt = bfs(i,j)\n                    res.append(cnt)\n        return sorted(res)\n\n\nprint(Solution().pondSizes([[0,2,1,0],[0,1,0,1],[1,1,0,1],[0,1,0,1]]))\n[1, 2, 4]\n\u003c/code\u003e\u003c/pre\u003e\n",
