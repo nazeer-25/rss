@@ -4,6 +4,33 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>游戏加速器都用的什么技术？ - 游戏</title>
+      <link>https://www.v2ex.com/t/950866</link>
+      <description>&lt;p&gt;有没有业内人士科普一下&lt;/p&gt;&#xA;</description>
+      <author>lmkyl</author>
+      <pubDate>22 Jun 2023 07:35:10 +0000</pubDate>
+    </item>
+    <item>
+      <title>我这套 nginx 反向代理设置有问题吗？帮忙看看各位大佬。 - NGINX</title>
+      <link>https://www.v2ex.com/t/950865</link>
+      <description>web 应用是 vue+java&lt;br /&gt;在内网服务器&lt;br /&gt;&lt;br /&gt;nginx.conf 配置如下：&lt;br /&gt;#user  nobody;&lt;br /&gt;worker_processes  auto;&lt;br /&gt;&lt;br /&gt;#error_log  logs/error.log;&lt;br /&gt;#error_log  logs/error.log  notice;&lt;br /&gt;#error_log  logs/error.log  info;&lt;br /&gt;&lt;br /&gt;#pid        logs/nginx.pid;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;events {&lt;br /&gt;    worker_connections  65535;&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;http {&lt;br /&gt;    gzip on;&lt;br /&gt;    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;&lt;br /&gt;    gzip_min_length 1000;&lt;br /&gt;    gzip_disable &#34;msie6&#34;;&lt;br /&gt;    proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=my_cache:10m inactive=60m;&lt;br /&gt;    proxy_cache_key &#34;$scheme$request_method$host$request_uri&#34;;&lt;br /&gt;    proxy_cache_valid 200 206 60m;&lt;br /&gt;    proxy_cache_valid 404      1m;&lt;br /&gt;    keepalive_timeout 65;&lt;br /&gt;    keepalive_requests 100;&lt;br /&gt;    tcp_nopush on;&lt;br /&gt;    client_max_body_size 200m;&lt;br /&gt;    include       mime.types;&lt;br /&gt;    default_type  application/octet-stream;&lt;br /&gt;    sendfile        on;&lt;br /&gt;    proxy_connect_timeout 300s;&lt;br /&gt;    proxy_send_timeout 300s;&lt;br /&gt;    proxy_read_timeout 300s;&lt;br /&gt;    proxy_buffer_size 64k;&lt;br /&gt;    proxy_buffers   4 32k;&lt;br /&gt;    proxy_busy_buffers_size 64k;&lt;br /&gt;    proxy_temp_file_write_size 64k;&lt;br /&gt;include vhost/*.conf;&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;vhost 里的文件是这样写的：&lt;br /&gt;server {&lt;br /&gt;        listen       8081;&lt;br /&gt;        server_name  localhost;&lt;br /&gt;        client_max_body_size 100M;&lt;br /&gt;&lt;br /&gt;        location / {&lt;br /&gt;            root   /data/xxx/dist/;&lt;br /&gt;            index  index.html;&lt;br /&gt;            try_files $uri $uri/ /index.html;&lt;br /&gt;        }&lt;br /&gt;&#x9;location ^~/mall_war/ {&lt;br /&gt;            proxy_pass http://localhost:8900;&lt;br /&gt;        }&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;然后我在腾讯云上的公网服务器的 nginx 对他做反向代理，nginx.conf 配置一样，然后我的反向代理文件是这样写的&lt;br /&gt;upstream test{&lt;br /&gt;&#x9;server &lt;a target=&#34;_blank&#34; href=&#34;http://xxx.xxx.xxx.xxx:8081&#34; rel=&#34;nofollow noopener&#34;&gt;xxx.xxx.xxx.xxx:8081&lt;/a&gt;;&lt;br /&gt;}&lt;br /&gt;server {&lt;br /&gt;        listen 443 ssl;&lt;br /&gt;        server_name &lt;a target=&#34;_blank&#34; href=&#34;http://test.abc.com&#34; rel=&#34;nofollow noopener&#34;&gt;test.abc.com&lt;/a&gt;;&lt;br /&gt;        ssl_certificate &#34;/usr/local/nginx/ssl/test.abc.com.pem&#34;;&lt;br /&gt;        ssl_certificate_key &#34;/usr/local/nginx/ssl/test.abc.com.key&#34;;&lt;br /&gt;        location / {&lt;br /&gt;                proxy_pass http://test;&lt;br /&gt;                proxy_set_header Host $http_host;&lt;br /&gt;                proxy_set_header X-Real-IP $remote_addr;&lt;br /&gt;                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&lt;br /&gt;                proxy_pass_request_headers      on;&lt;br /&gt;&#x9;&#x9;proxy_http_version 1.1;&lt;br /&gt;&#x9;&#x9;proxy_set_header Connection &#34;&#34;;&lt;br /&gt;        }&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;现在就是几个人访问也一直报错&lt;br /&gt;upstream prematurely closed connection while reading response header from upstream&lt;br /&gt;一直报这个错误&lt;br /&gt;&lt;br /&gt;是网络问题？还是 nginx 配置有问题？&lt;br /&gt;请大佬帮忙看看，实在不懂咋搞了。</description>
+      <author>mikaelson</author>
+      <pubDate>22 Jun 2023 07:33:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>貌似 F-droid 也被墙了 - 问与答</title>
+      <link>https://www.v2ex.com/t/950864</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://ping.sx/ping?t=f-droid.org&#34; rel=&#34;nofollow&#34;&gt;DNS 污染&lt;/a&gt; + SNI 连接重置（测试: &lt;code&gt;curl -v -H &#34;Host:&lt;a href=&#34;http://f-droid.org&#34; rel=&#34;nofollow&#34;&gt;f-droid.org&lt;/a&gt;&#34; &#34;&lt;a href=&#34;https://f-droid.org&#34; rel=&#34;nofollow&#34;&gt;https://f-droid.org&lt;/a&gt;&#34; --resolve &lt;a href=&#34;http://f-droid.org:443&#34; rel=&#34;nofollow&#34;&gt;f-droid.org:443&lt;/a&gt;:136.243.44.143&lt;/code&gt; ）&lt;/p&gt;&#xA;</description>
+      <author>bollld607</author>
+      <pubDate>22 Jun 2023 07:33:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>warp+和 zero trust 都不行了 显示 unable to connect - 分享发现</title>
+      <link>https://www.v2ex.com/t/950863</link>
+      <author>cyngn</author>
+      <pubDate>22 Jun 2023 07:30:45 +0000</pubDate>
+    </item>
+    <item>
       <title>大家现在生日都是怎么过的呢？ - 问与答</title>
       <link>https://www.v2ex.com/t/950862</link>
       <description>从小都过农历生日，每年端午节正好生日，但是今年一个人在图书馆写论文有点孤单，月底答辩也不能提前走，舍友不是一个专业的，每天都在做实验。&lt;br /&gt;很多 V 站的老师们应该都工作了，大家生日都是怎么过的呢？</description>
