@@ -4,6 +4,33 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Python 写力扣每日一题时遇到的困惑 - 问与答</title>
+      <link>https://www.v2ex.com/t/950927</link>
+      <description>&lt;p&gt;下面两种代码基本是一样的，但是第一种会出现错误的答案。&lt;/p&gt;&#xA;&lt;p&gt;在写这种 bfs 之类的题目时，我经常会遇到这个问题。&lt;/p&gt;&#xA;&lt;p&gt;其实我大概知道原因，就是变量自动变了，但还是很困惑，不知道到底是哪里变的。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-Python&#34;&gt;class Solution:&#xA;    def pondSizes(self, land: List[List[int]]) -&amp;gt; List[int]:&#xA;        m = len(land)&#xA;        n = len(land[0])&#xA;        &#xA;        res = []&#xA;        for i,row in enumerate(land):&#xA;            for j, v in enumerate(row):&#xA;                if v == 0:&#xA;                    q = [(i,j)]&#xA;                    land[i][j] = 1&#xA;                    cnt = 1&#xA;                    while q:&#xA;                        # print(q)&#xA;                        tmp = q&#xA;                        q = []&#xA;                        for (i,j) in tmp:&#xA;                            for dx in range(-1,2):&#xA;                                for dy in range(-1,2):&#xA;                                    if dx == dy == 0:&#xA;                                        continue&#xA;                                    x = i + dx&#xA;                                    y = j + dy&#xA;                                    if 0 &amp;lt;= x &amp;lt; m and 0 &amp;lt;= y &amp;lt; n and land[x][y] == 0:&#xA;                                        cnt += 1&#xA;                                        q.append((x,y))&#xA;                                        land[x][y] = 1&#xA;                   &#xA;                    res.append(cnt)&#xA;        return sorted(res)&#xA;print(Solution().pondSizes([[0,2,1,0],[0,1,0,1],[1,1,0,1],[0,1,0,1]]))&#xA;[1, 2, 5]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-Python&#34;&gt;class Solution:&#xA;    def pondSizes(self, land: List[List[int]]) -&amp;gt; List[int]:&#xA;        m = len(land)&#xA;        n = len(land[0])&#xA;        def bfs(i,j):&#xA;            q = [(i,j)]&#xA;            land[i][j] = 1&#xA;            cnt = 1&#xA;            while q:&#xA;                # print(q)&#xA;                tmp = q&#xA;                q = []&#xA;                for (i,j) in tmp:&#xA;                    for dx in range(-1,2):&#xA;                        for dy in range(-1,2):&#xA;                            if dx == dy == 0:&#xA;                                continue&#xA;                            x = i + dx&#xA;                            y = j + dy&#xA;                            if 0 &amp;lt;= x &amp;lt; m and 0 &amp;lt;= y &amp;lt; n and land[x][y] == 0:&#xA;                                cnt += 1&#xA;                                land[x][y] = -1&#xA;                                q.append((x,y))&#xA;            return cnt&#xA;        res = []&#xA;        for i,row in enumerate(land):&#xA;            for j, v in enumerate(row):&#xA;                if v == 0:&#xA;                    cnt = bfs(i,j)&#xA;                    res.append(cnt)&#xA;        return sorted(res)&#xA;&#xA;&#xA;print(Solution().pondSizes([[0,2,1,0],[0,1,0,1],[1,1,0,1],[0,1,0,1]]))&#xA;[1, 2, 4]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>vthe</author>
+      <pubDate>22 Jun 2023 13:20:02 +0000</pubDate>
+    </item>
+    <item>
+      <title>银行是怎么拿到个人升学信息的呢？ - 问与答</title>
+      <link>https://www.v2ex.com/t/950926</link>
+      <description>&lt;p&gt;我有张建行卡是七八年前办的，预留个人身份信息还是七八年的工作地；今天建行发短信提醒我更新个人身份信息，否则将暂停账户交易。&lt;/p&gt;&#xA;&lt;p&gt;我在建行微信公众号内根据指引跳转到建行 APP 更新个人身份信息时，职业变成了学生，通讯地址变成了本科院校的地址（我前段时间专升本了，但是录取通知书还没发下来）； 我还没有入学，银行是从哪里拿到我的升学信息的呢？&lt;/p&gt;&#xA;</description>
+      <author>Danswerme</author>
+      <pubDate>22 Jun 2023 13:18:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>光威天策 ddr4 内存条有没坑? - 分享发现</title>
+      <link>https://www.v2ex.com/t/950925</link>
+      <description>月初有活动搞了 2 条天策 ddr4 3200 32G 内存, 回来就发现用 memtest 有很多错误, 网上搜说是用满内存时会闪退蓝屏之类的, 平时使用基本无感.&lt;br /&gt;&lt;br /&gt;今天智能电表到了就突发奇想试试烤机的功率, 结果 aida64 一分钟就退出了, 再加上前天蓝屏了一次, 现在心里有点堵, 这是掉坑里了么?</description>
+      <author>shinession</author>
+      <pubDate>22 Jun 2023 13:17:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>2302 年了， 现在才开始学 PHP ， 是否太晚了？ - PHP</title>
+      <link>https://www.v2ex.com/t/950924</link>
+      <author>xiaoxiao168</author>
+      <pubDate>22 Jun 2023 13:11:59 +0000</pubDate>
+    </item>
+    <item>
       <title>不管是 b 站还是油管，哪个视频是你认为看过的最好看的视频 - 生活</title>
       <link>https://www.v2ex.com/t/950921</link>
       <description>科幻，生活，美食等等都可以&lt;br /&gt;我先来 &lt;div class=&#34;embedded_video_wrapper&#34;&gt;&lt;iframe src=&#34;https://www.youtube.com/embed/_eRKRMexLUQ&#34; class=&#34;embedded_video&#34; allowfullscreen=&#34;&#34; type=&#34;text/html&#34; id=&#34;ytplayer&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;&lt;/div&gt;</description>
