@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Homelab | 架构设计与实现-High-level design - 分享发现",
+      "Link": "https://www.v2ex.com/t/950985",
+      "Description": "\u003ch2\u003e一 ：介绍\u003c/h2\u003e\n\u003cp\u003e这个家庭实验室的 IT 基础架构，从最初的设计到最终实现差不多历时大半年，花了不少时间，也花了一点金钱。\u003c/p\u003e\n\u003cp\u003e时间自不用说，上班期间的摸鱼，包括下班时间的“加班”；金钱花费上包括软硬件的费用，例如域名，Handsome 主题，云主机，云存储，还有一个放置在家里的 X86 小盒子和一个 ARM 的树莓派，总共花费差不多 3K ，以后还会有每年 300 人民币云主机的固定费用。以后在这个项目上的时间花销才是真正的无底洞，生命不息，折腾不止。\u003c/p\u003e\n\u003cp\u003e基于此，大多数互联网服务，像博客，网盘，视频，下载，邮箱，代码仓库等等，都可以借助开源项目自建自用，随时随地。\u003c/p\u003e\n\u003ch2\u003e二： 清单\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e域名：\u003c/p\u003e\n\u003cp\u003esamliu.tech 从腾讯云购买，为了方便申请 SSL 证书，目前托管在 Cloudflare 。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e云主机：\u003c/p\u003e\n\u003cp\u003eHostdare,一家在漂亮国的，不那么知名的老牌主机商家,配置不重要，线路才是重点。最大带宽 50Mb ，电信双向 CN2 GIA 线路，联通和移动直连，平时 RTT\u0026lt; 200ms ，，高峰 RTT\u0026lt;300ms,高峰期间也很稳定，极少丢包。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e云存储：\u003c/p\u003e\n\u003cp\u003e腾讯云 COS ，作为博客图床使用，因此即使主机在远在米国，国内访问体验也是非常不错的，目前没有配置 CDN 。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eX86 主机和 ARM 主机：\u003c/p\u003e\n\u003cp\u003ehomelab 大部分东西关于这部分，放置在家中，7x24 。使用 Proxmox 系统虚拟化，Docker 进程虚拟化。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eLet's Encrypt\n一个用来申请免费 SSL 证书的互联网服务，借助自动化脚本，第一次配置完成后，后续就不用关注了，包括证书续期，全自动。\n[post cid=\"1396\" /]\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg alt=\"homelab_hld-1.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://blog-samliu-tech-1300751433.cos.ap-shanghai.myqcloud.com/typecho-content/2023/01/19/1674110636.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e三： 云上部分\u003c/h2\u003e\n\u003cp\u003e云主机有一个固定的公网 IP ，系统 Ubuntu 12 。域名目前由 Cloudflare 托管，在上面自定义 DNS 记录。\u003c/p\u003e\n\u003cp\u003eNginx 作为一级反向代理服务器，接受来自用户侧的流量，主要代理 Web 流量，依据 Http 协议中不同 host 字段，即不同域名，转发到后端不同服务。后端部署的服务，例如 两个不同类型的博客：\u003c/p\u003e\n\u003cp\u003e基于 Typecho 平台： \u003ca href=\"https://homelab.samliu.tech\" rel=\"nofollow\"\u003ehttps://homelab.samliu.tech\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e基于 Wordpress 平台： \u003ca href=\"https://blog.samliu.tech\" rel=\"nofollow\"\u003ehttps://blog.samliu.tech\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e当然还有一些独立的 docker-based 的应用，例如 Letsencrypt,用于自动化处理关于证书的所有事情。\n对于一些对时延不敏感的应用，则可以部署在另一个后端，'Homelab'本地环境。云主机此时会充当流量转发的角色，基于策略，转发不同流量到‘Homelab’本地环境，可以是 Web 流量，也可以是普通 TCP/UPD 流量。\u003c/p\u003e\n\u003cp\u003e完成转发任务的组件是一个开源项目 FRP ，它可以基于端口转发 TCP/UDP 流量，也可以基于域名转发 HTTP （ S ）流量，充当 Web 反向代理。在云上部署 FRP server 端，’Homelab‘本地部署 FRP client 端，此时的 FRP server ，对于 web 流量而言，其实也是作为一个二级 反向代理，出于证书集中管理和会话建立效率问题考虑，云上主机终结所有 HTTPS 流量，对于去往’Homelab‘的 web 流量，只转发 http 流量，frp tunnel 自身有加密功能，安全性可以保证。\u003c/p\u003e\n\u003cp\u003e[scode type=\"yellow\"]会话建立效率问题：对于弱网环境，例如丢包或者高时延线路，TCP 三次握手，以及 TLS 1-4 次握手，会严重拉高服务响应时间，表现就是网站打开很慢，基于 UDP 的 HTTP3 ，对此场景完美适配[/scode]\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"homelab_hld-2.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://blog-samliu-tech-1300751433.cos.ap-shanghai.myqcloud.com/typecho-content/2023/01/19/1674110638.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e四： 云下部分\u003c/h2\u003e\n\u003cp\u003e’Homelab‘环境下的 X86 小鸡，部署免费开源 Proxmox 虚拟化系统，一个 VMWare Vsphere 的替代方案。\n目前有如下 VM：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eDebian 11：主力系统，部署各种应用，大部分也是 docker-based 的应用\u003c/li\u003e\n\u003cli\u003eOpenMediaVault:一个开源的 NAS 系统\u003c/li\u003e\n\u003cli\u003eOpenWrt: Bypass GFW\u003c/li\u003e\n\u003cli\u003eWin10: 图形化工作台\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eARM 小鸡，主要用于尝试一些 ARM 应用，当然亦可以部署 ARM 版本的 Proxmox 。\u003c/p\u003e\n\u003cp\u003e在 Debian VM 上，有一些特殊的基础架构应用，前面提到的 FRP：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eFRP client：\u003c/strong\u003e用于与 FRP server 建立隧道，并充当二级反向代理\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eNPM(Nginx Proxy Management):\u003c/strong\u003e\n开源的 Nginx 的图形化项目，方便管理配置一些 Nginx 的功能，以及集成一些其他功能，这里它作为三级\u003cbr/\u003e\n反向代理，接受来自 FRP Tunnel 的 http web 流量，然后分发到真正的应用端。FRP 当然也可以直接转\n发流量到应用端，但是对于需要经常变动的后端应用来说，FRP 管理起来不太方便,NPM 就更容易一些，\n更完美的方案其实是 Traefik,当部署基于 Docker 的应用时，会自动变更相关反向代理配置，部署即上线。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eNext terminal:\u003c/strong\u003e 这个其实是一个基于 Web 的管理平台，跨平台的管理内网 IT 资产，随时随地\u003c/li\u003e\n\u003cli\u003e**Wireguard:**下一代 VPN 解决方案，这里也是用于连接内网，便于管理，当然需要安装 wireguard 客户端\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cimg alt=\"homelab_hld-3.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://blog-samliu-tech-1300751433.cos.ap-shanghai.myqcloud.com/typecho-content/2023/01/19/1674110640.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e五： 生命不息，折腾不止\u003c/h2\u003e\n\u003cp\u003e上述基础架构部署完成后，就可以聚焦应用本身了，Docker Hub 大市场，Github 菜市场，任你...博客，网盘，视频，下载，邮箱，代码仓库等等\u003c/p\u003e\n",
+      "Author": "shunagliu008",
+      "PubDate": "2023-06-23T02:29:27Z"
+    },
+    {
+      "Title": "求助，群晖无法删除 QuickConnect 证书 - 问与答",
+      "Link": "https://www.v2ex.com/t/950984",
+      "Description": "已经关闭了 QuickConnect ，已经设置其他证书为默认证书，就是删不掉，删除选项为灰色",
+      "Author": "1dian01",
+      "PubDate": "2023-06-23T02:23:18Z"
+    },
+    {
+      "Title": "高考成绩出来了，应该选什么学校和专业呢，大家指点下 - 教育",
+      "Link": "https://www.v2ex.com/t/950983",
+      "Description": "\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://blog.jdqiong.cn/d682472b-0ce0-4dde-9648-b54c8e12e5ea.webp\"/\u003e\n坐标：江西\u003c/p\u003e\n\u003cp\u003e学科：理科\u003c/p\u003e\n\u003cp\u003e我的一个堂妹，性格文静，理科成绩很好，我自己学的专业是计算机专业，算是蹭上了最后一班车，现在计算机行业已经要回归传统行业了，她大学毕业再读个研就是 7 年后，那时候都不知道会发生什么变化。\u003c/p\u003e\n\u003cp\u003e我的看法是未来 AI 是一个方向，最稳的估计还是医师公，她妈想让她读师范当老师，她自己说想读数学。\u003c/p\u003e\n\u003cp\u003e说一下她家里的情况，还算小康，有房有车，有四个兄妹，她是老二，有个姐姐已经当上了老师，两个小的在上初中。\u003c/p\u003e\n\u003cp\u003e这是我在 chatgpt 搜的趋势，选专业这个事还是要慎重，最怕入错行，希望大家给给建议！~\u003c/p\u003e\n",
+      "Author": "dongdongdong",
+      "PubDate": "2023-06-23T02:21:52Z"
+    },
+    {
+      "Title": "tailscale 全局代理 - 问与答",
+      "Link": "https://www.v2ex.com/t/950981",
+      "Description": "\u003cp\u003e今天尝试了一下 tailscale ，发现确实是可以轻松的异地组网，但是在使用 datagrip 等软件尝试连接远程数据库的时候发现并不能连上，（确认组网正常）。\u003c/p\u003e\n\u003cp\u003e一开始在公司电脑 A 上安装了 tailscale 并开启了 subnets ，设置了相应的网段，希望连接到公司同一局域网下电脑 B 的数据库（用的局域网 ip ），但是发现 datagrip 显示连接不上，反复捣鼓，还是不行。\u003c/p\u003e\n\u003cp\u003e后来转而连接电脑 A 的数据库（用的 tailscale 提供的 ip ）也不行。\u003c/p\u003e\n\u003cp\u003e个人猜测是不是 tailscale 并没代理 datagrip 这类软件，或者说需要在 datagrip 里单独设置 proxy ，但是个人实在不知道该怎么解决，求助各位 v 友\u003c/p\u003e\n",
+      "Author": "t202201",
+      "PubDate": "2023-06-23T02:05:27Z"
+    },
+    {
+      "Title": "diy nas 安装 esxi 缺少一个可用的 pcie 网卡 - 问与答",
+      "Link": "https://www.v2ex.com/t/950980",
+      "Description": "\u003cp\u003enas 纯小白一个，想请教一下各位大手子用的什么网卡适配，我在 vmware 官网找的 i225v 网卡说适配 esxi 8.0 ，但是京东买的时候客服又告诉我不持支 esxi ，现在迷茫中，求网卡推荐\u003c/p\u003e\n",
+      "Author": "maybebetter",
+      "PubDate": "2023-06-23T02:04:14Z"
+    },
+    {
       "Title": "百度输入法 vs 微信输入法 - iPhone",
       "Link": "https://www.v2ex.com/t/950978",
       "Description": "我说的 ios 端，目前用的百度输入法",
