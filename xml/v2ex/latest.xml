@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>一段 Go 代码输出疑惑 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/951250</link>
+      <description>&lt;p&gt;下面的代码中，为什么会输出 5,6,7,8,9 啊？难道不是应该输出 6,7,8,9 吗？&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import &#34;log&#34;&#xA;&#xA;func NewRingBuffer(inCh, outCh chan int) *ringBuffer {&#xA;&#x9;return &amp;amp;ringBuffer{&#xA;&#x9;&#x9;inCh:  inCh,&#xA;&#x9;&#x9;outCh: outCh,&#xA;&#x9;}&#xA;}&#xA;&#xA;type ringBuffer struct {&#xA;&#x9;inCh  chan int&#xA;&#x9;outCh chan int&#xA;}&#xA;&#xA;func (r *ringBuffer) Run() {&#xA;&#x9;for v := range r.inCh {&#xA;&#x9;&#x9;select {&#xA;&#x9;&#x9;case r.outCh &amp;lt;- v:&#xA;&#x9;&#x9;default:&#xA;&#x9;&#x9;&#x9;&amp;lt;-r.outCh // pop one item from outchan&#xA;&#x9;&#x9;&#x9;r.outCh &amp;lt;- v&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;close(r.outCh)&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;inCh := make(chan int)&#xA;&#x9;outCh := make(chan int, 4)&#xA;&#x9;rb := NewRingBuffer(inCh, outCh)&#xA;&#x9;go rb.Run()&#xA;&#xA;&#x9;for i := 0; i &amp;lt; 10; i++ {&#xA;&#x9;&#x9;inCh &amp;lt;- i&#xA;&#x9;}&#xA;&#xA;&#x9;close(inCh)&#xA;&#xA;&#x9;for res := range outCh {&#xA;&#x9;&#x9;fmt.Println(res)&#xA;&#x9;}&#xA;&#xA;}&#xA;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>CarrieBauch</author>
+      <pubDate>24 Jun 2023 10:55:10 +0000</pubDate>
+    </item>
+    <item>
       <title>OpenWrt 使用 tailscale 异地组网后，怎么实现两地的内网设备在不安装 tailscale 的情况下相互访问 - OpenWrt</title>
       <link>https://www.v2ex.com/t/951249</link>
       <description>&lt;p&gt;有 2 个局域网，每个局域网都是 OpenWrt 主路由。之前是在这 2 个 OpenWrt 主路由上部署了 zerotier 进行异地组网，在 zerotier 网站上配置好了各个局域网的内网路由表，然后这 2 个局域网下的设备无需安装 zerotier 的 app ，就可以相互进行访问了。&lt;/p&gt;&#xA;&lt;p&gt;但是现在 2 个 OpenWrt 主路由换为 tailscale 异地组网后，也在 tailscale 网站上配置好了 2 个局域网的子网网段，用 tailscale status 命令查看，可以看到 2 个 OpenWrt 之间是打洞成功的（ direct ），但是 2 个局域网下的设备不能相互访问。。&lt;/p&gt;&#xA;&lt;p&gt;有个奇怪的现象就是，比如 A 局域网的设备访问 B 局域网的 OpenWrt 的管理页面（ tailscale 分配的 IP ），是不能打开的，但是如果在这个 IP 地址后面加上端口确能访问到这个 OpenWrt 对应的服务，比如 x.x.x.x:5244 就能打开 alist 的界面，同理可以加端口服务到其他服务，但就是不能打开 OpenWrt 的主页面，提示“Forbidden,&#xA;Rejected request from RFC1918 IP to public server address&#34;...&lt;/p&gt;&#xA;&lt;p&gt;是不是 tailscale 在进行异地组网后，内网设备在不安装 tailscale 客户端的情况下，是不支持相互访问的？？一定要按照 tailscale 客户端才行？？？&lt;/p&gt;&#xA;</description>

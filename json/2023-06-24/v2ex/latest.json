@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "一段 Go 代码输出疑惑 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/951250",
+      "Description": "\u003cp\u003e下面的代码中，为什么会输出 5,6,7,8,9 啊？难道不是应该输出 6,7,8,9 吗？\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport \"log\"\n\nfunc NewRingBuffer(inCh, outCh chan int) *ringBuffer {\n\treturn \u0026amp;ringBuffer{\n\t\tinCh:  inCh,\n\t\toutCh: outCh,\n\t}\n}\n\ntype ringBuffer struct {\n\tinCh  chan int\n\toutCh chan int\n}\n\nfunc (r *ringBuffer) Run() {\n\tfor v := range r.inCh {\n\t\tselect {\n\t\tcase r.outCh \u0026lt;- v:\n\t\tdefault:\n\t\t\t\u0026lt;-r.outCh // pop one item from outchan\n\t\t\tr.outCh \u0026lt;- v\n\t\t}\n\t}\n\tclose(r.outCh)\n}\n\nfunc main() {\n\tinCh := make(chan int)\n\toutCh := make(chan int, 4)\n\trb := NewRingBuffer(inCh, outCh)\n\tgo rb.Run()\n\n\tfor i := 0; i \u0026lt; 10; i++ {\n\t\tinCh \u0026lt;- i\n\t}\n\n\tclose(inCh)\n\n\tfor res := range outCh {\n\t\tfmt.Println(res)\n\t}\n\n}\n\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "CarrieBauch",
+      "PubDate": "2023-06-24T10:55:10Z"
+    },
+    {
       "Title": "OpenWrt 使用 tailscale 异地组网后，怎么实现两地的内网设备在不安装 tailscale 的情况下相互访问 - OpenWrt",
       "Link": "https://www.v2ex.com/t/951249",
       "Description": "\u003cp\u003e有 2 个局域网，每个局域网都是 OpenWrt 主路由。之前是在这 2 个 OpenWrt 主路由上部署了 zerotier 进行异地组网，在 zerotier 网站上配置好了各个局域网的内网路由表，然后这 2 个局域网下的设备无需安装 zerotier 的 app ，就可以相互进行访问了。\u003c/p\u003e\n\u003cp\u003e但是现在 2 个 OpenWrt 主路由换为 tailscale 异地组网后，也在 tailscale 网站上配置好了 2 个局域网的子网网段，用 tailscale status 命令查看，可以看到 2 个 OpenWrt 之间是打洞成功的（ direct ），但是 2 个局域网下的设备不能相互访问。。\u003c/p\u003e\n\u003cp\u003e有个奇怪的现象就是，比如 A 局域网的设备访问 B 局域网的 OpenWrt 的管理页面（ tailscale 分配的 IP ），是不能打开的，但是如果在这个 IP 地址后面加上端口确能访问到这个 OpenWrt 对应的服务，比如 x.x.x.x:5244 就能打开 alist 的界面，同理可以加端口服务到其他服务，但就是不能打开 OpenWrt 的主页面，提示“Forbidden,\nRejected request from RFC1918 IP to public server address\"...\u003c/p\u003e\n\u003cp\u003e是不是 tailscale 在进行异地组网后，内网设备在不安装 tailscale 客户端的情况下，是不支持相互访问的？？一定要按照 tailscale 客户端才行？？？\u003c/p\u003e\n",
