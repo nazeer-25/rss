@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "北漂八年，准备近期搬家回津 - 北京",
+      "Link": "https://www.v2ex.com/t/952019",
+      "Description": "\u003cp\u003e自 2016 年元旦后从天津来到北京，正式开启北漂生涯，现在已过去七年有余。\u003c/p\u003e\n\u003cp\u003e在北京先后就职过四家公司，但从未踏入任何一家一、二、三线互联网公司，一直在小公司间转悠。但好在待过的公司都不加班，所以也从未体验过 996 、007 。虽薪资不高，但勉强能达到北京程序员平均工资水平。\u003c/p\u003e\n\u003cp\u003e存款为 0 ；在天津购入两套小房，勉强够住，房贷总负债 100 多万；一辆十几万的代步车；压力不大不小，近期打算卖一套清掉负债，但天津房子是真难卖！\u003c/p\u003e\n\u003cp\u003e人到中年，已有妻孩，在北京没房没车实在不变，也受够了这里的拥挤，再加孩子明年该上小学，于是决定结束北漂，回天津躺平过日子去了。\u003c/p\u003e\n\u003cp\u003e北京是个好地方，有山有水，有直达老家的高铁，周末可以骑车跑山，但对于买不起房、摇不到号的我来说还是不够友好，希望以后不用再回来。。。\u003c/p\u003e\n",
+      "Author": "summersnow521",
+      "PubDate": "2023-06-27T03:34:05Z"
+    },
+    {
+      "Title": "压力测试软件有推荐的吗？要支持大报文的 - 程序员",
+      "Link": "https://www.v2ex.com/t/952018",
+      "Description": "\u003cp\u003e压力测试软件有推荐的吗？要支持大 json 报文的，报文几十 KB\u003c/p\u003e\n\u003cp\u003e之前用 jmeter ，报文大的话界面很卡\u003c/p\u003e\n\u003cp\u003e有其他好用的推荐吗？\u003c/p\u003e\n",
+      "Author": "qviqvi",
+      "PubDate": "2023-06-27T03:32:26Z"
+    },
+    {
+      "Title": "请教一个 spring cloud + gateway+nacos 服务隔离的最佳实践 - 问与答",
+      "Link": "https://www.v2ex.com/t/952017",
+      "Description": "\u003cp\u003eDEV 、TEST 用 nacos 的 namespace 做隔离，两个环境之间的隔离没有问题。\u003cbr/\u003e\n针对 DEV 目前也是单独部署了一整套前后端应用，这一套环境是独立可用。  \u003c/p\u003e\n\u003cp\u003e开发人员使用 DEV 启动一个服务 A ，也会注册到 nacos 上，这样服务 A 就有了两个实例 A1 和 A2 ，A1 是 DEV 环境服务器上的服务，A2 是开发本地的服务。\u003cbr/\u003e\n假设一个请求涉及到了三个服务，在 A2 加入之前，请求链路是这样的：\u003cbr/\u003e\nB--\u0026gt;A1--C\u003cbr/\u003e\n当 A2 加入后，请求链路会随机负载到：\u003cbr/\u003e\nB--\u0026gt;A2--C 或 B--\u0026gt;A1--C      \u003c/p\u003e\n\u003cp\u003e那么期望是：\u003cbr/\u003e\n如何可以让[某些请求]固定走 B--\u0026gt;A2--C 这条链路从而实现请求的隔离？\u003cbr/\u003e\n通过 nacos 的 group 能做到服务的隔离，但是请求上要如何区分出来 group ？\u003c/p\u003e\n",
+      "Author": "uSy62nMkdH",
+      "PubDate": "2023-06-27T03:31:04Z"
+    },
+    {
+      "Title": "[折腾] 使用 MQTT / Python / Grafana 实现小米路由器网速查看与统计 - 分享创造",
+      "Link": "https://www.v2ex.com/t/952016",
+      "Description": "\u003cp\u003e\u003ca href=\"https://www.mi.com/r6000\" rel=\"nofollow\"\u003e小米 AX6000\u003c/a\u003e 路由器虽然身形巨大无比，但自带的网速查看功能却十分简陋，约等于没有。幸好系统是基于 OpenWrt 的，可以自己动手实现一个。\u003c/p\u003e\n\u003ch2\u003eStep 1: 寻找数据\u003c/h2\u003e\n\u003ch3\u003e命令：\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-sh\"\u003eubus call trafficd hw '{\"debug\": true}'\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cimg alt=\"trafficd\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://github.com/CaoZ/RouterStat/raw/master/docs/trafficd.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e简单的命令却寻觅最久，机缘巧合之下才发现... 使用时加入 \u003ccode\u003edebug\u003c/code\u003e 参数以获得更多信息。\u003c/p\u003e\n\u003cbr/\u003e\n\u003ch2\u003eStep 2：加工处理\u003c/h2\u003e\n\u003cp\u003e有了数据源就好做了，定时采样加工处理再展示即可。小米路由器自带了一部分 MQTT 工具，因此使用 MQTT 将数据源转发给电脑处理并入库，再使用 Grafana 做展示。即使电脑不一直开机也没关系，通过配置，MQTT broker 可持久化暂存未处理消息。\u003c/p\u003e\n\u003ch3\u003e2.1 安装 \u003ca href=\"https://mosquitto.org/\" rel=\"nofollow\"\u003eMosquitto broker\u003c/a\u003e 2.0\u003c/h3\u003e\n\u003cp\u003e小强系统自带了 MQTT client ，只需安装支持 MQTT v5 的 broker 即可。手动下载 ipk 文件，解压后获得可执行文件（\u003ccode\u003e.\\data.tar.gz\\.\\usr\\sbin\\mosquitto\u003c/code\u003e），将其上传到路由器中并注册为服务。如果 opkg 可用更佳。\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003eCortex-A53\u003c/code\u003e: \u003ca href=\"http://mirrors.aliyun.com/openwrt/releases/22.03-SNAPSHOT/packages/aarch64_cortex-a53/packages/mosquitto-nossl_2.0.15-1_aarch64_cortex-a53.ipk\" rel=\"nofollow\"\u003emosquitto-nossl_2.0.15-1_aarch64_cortex-a53.ipk\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003e更多\u003c/code\u003e： \u003ca href=\"https://mirrors.aliyun.com/openwrt/releases/22.03-SNAPSHOT/packages/\" rel=\"nofollow\"\u003ehttps://mirrors.aliyun.com/openwrt/releases/22.03-SNAPSHOT/packages/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e创建配置文件：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/CaoZ/RouterStat/blob/master/docs/mosquitto.conf\" rel=\"nofollow\"\u003e/etc/mosquitto.conf\u003c/a\u003e:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-conf\"\u003e# log_dest file /tmp/log/mosquitto.log\nuser root\nbind_address 0.0.0.0\nallow_anonymous true\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/CaoZ/RouterStat/blob/master/docs/mosquitto-2\" rel=\"nofollow\"\u003e/etc/init.d/mosquitto-2\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sh\"\u003e#!/bin/sh /etc/rc.common\n\nSTART=50\n\nstart() {\n    /data/cz/bin/mosquitto-2 -c /etc/mosquitto.conf -d\n    return 0\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e2.2 定时采样\u003c/h3\u003e\n\u003cp\u003e创建 \u003ccode\u003ecron job\u003c/code\u003e 实现定时采样，可结合 \u003ccode\u003esleep\u003c/code\u003e 实现分钟内采样。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sh\"\u003e* * * * * ubus -S call trafficd hw '{\"debug\": true}' | mosquitto_pub -t 'home/router-stat' -q 2 -i client_pub -l -D publish user-property timestamp $(date +%s) \u0026gt;/dev/null 2\u0026gt;\u0026amp;1\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e2.3 \u003ca href=\"https://github.com/CaoZ/RouterStat\" rel=\"nofollow\"\u003e编写程序解析数据并入库\u003c/a\u003e\u003c/h3\u003e\n\u003cp\u003e使用 Python 编写 MQTT 消费者程序，解析数据并写入数据库。如果是 Windows 可以使用 \u003ca href=\"https://nssm.cc\" rel=\"nofollow\"\u003enssm\u003c/a\u003e 将其\u003ca href=\"https://github.com/CaoZ/RouterStat/blob/master/docs/install.bat\" rel=\"nofollow\"\u003e注册为服务\u003c/a\u003e。\u003c/p\u003e\n\u003cp\u003e配置在 \u003ca href=\"https://github.com/CaoZ/RouterStat/blob/master/app/config.py\" rel=\"nofollow\"\u003econfig.py\u003c/a\u003e 中。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/CaoZ/RouterStat/blob/master/docs/schema.sql\" rel=\"nofollow\"\u003e创建所需表：\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003eCREATE TABLE router_stat (\n\tid INTEGER NOT NULL AUTO_INCREMENT,\n\tip VARCHAR(15),\n\tmac CHAR(17),\n\tnetwork ENUM('2.4G','5G','Ethernet','Unknown'),\n\tdevice VARCHAR(255),\n\trx_rate INTEGER,\n\ttx_rate INTEGER,\n\ttimestamp DATETIME,\n\tPRIMARY KEY (id)\n);\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e2.4 安装 \u003ca href=\"https://grafana.com\" rel=\"nofollow\"\u003eGrafana\u003c/a\u003e 并创建监控面板\u003c/h3\u003e\n\u003cp\u003e有了数据就可以用 Grafana 自由的创建监控面板了~\u003c/p\u003e\n\u003cp\u003e比如创建一个 \u003ccode\u003eTime series\u003c/code\u003e 面板来查看上传下载总速度：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003eselect sum(rx_rate) as rx_rate, sum(tx_rate) as tx_rate, unix_timestamp(timestamp) as time from home.router_stat where $__timeFilter(timestamp) group by timestamp\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eScreenshot:\u003c/h2\u003e\n\u003cp\u003e\u003cimg alt=\"监控面板\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://github.com/CaoZ/RouterStat/raw/master/docs/screenshot.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "caoz",
+      "PubDate": "2023-06-27T03:27:24Z"
+    },
+    {
+      "Title": "哪家云服务支持 AI 流式输出的敏感词检测？ - 问与答",
+      "Link": "https://www.v2ex.com/t/952014",
+      "Description": "\u003cp\u003e为了合规，不知道哪家云服务支持 AI 流式输出的敏感词检测？\n我看了下，好多都是给整段文本检测，并没有流式输出实时检测服务，这个大家有没有好的解决方案\u003c/p\u003e\n",
+      "Author": "gaobh",
+      "PubDate": "2023-06-27T03:22:31Z"
+    },
+    {
+      "Title": "糟糕,用了很久的土耳其 iCloud 涨价啦 - iCloud",
+      "Link": "https://www.v2ex.com/t/952013",
+      "Description": "\u003cp\u003e想着有一天会涨价,还是来了 2t 130 里拉 相当与 36rmb , 也算划算吧..\u003c/p\u003e\n",
+      "Author": "kuawo",
+      "PubDate": "2023-06-27T03:21:47Z"
+    },
+    {
       "Title": "两个月前做了一个基于 chat-gpt 的直连网站，给朋友在免费使用， 现在也发出来给 v 友们免费使用。 - 分享创造",
       "Link": "https://www.v2ex.com/t/952012",
       "Description": "\u003cp\u003e\u003ca href=\"https://www.lifemindx.com/\" rel=\"nofollow\"\u003ehttps://www.lifemindx.com/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/SLPrAAj.png\"/\u003e \u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/lXJEst7.png\"/\u003e \u003c/p\u003e\n\u003cp\u003e特点：\n1： 语音播放\u003c/p\u003e\n\u003cp\u003e2： 内置上百个角色，可自己创建新的\u003c/p\u003e\n\u003cp\u003e3： 可以生成图片\u003c/p\u003e\n\u003cp\u003e4： 试用 10 次， 输入自己的 token 后可以一直使用。\u003c/p\u003e\n\u003cp\u003e5：ios 可以将应用添加到桌面，更加便捷使用\u003c/p\u003e\n",
@@ -13,7 +55,7 @@
     {
       "Title": "搬瓦工上架 The Plan v2 套餐 - VPS",
       "Link": "https://www.v2ex.com/t/952011",
-      "Description": "\u003cp\u003e相比 The plan 流量翻倍，价格为$119 每年，\u003ca href=\"https://bandwagonhost.com/the-plan-v2?aff=70195\" rel=\"nofollow\"\u003e购买链接\u003c/a\u003e （带 aff ）。\u003c/p\u003e\n\u003cp\u003e记得使用优惠码：BWHNCXNVXV （优惠 6.81%）\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eThe Plan v2 Specs\nImagine our legendary Limited Edition plan but on steroids:\nDouble SSD: 20 GB 40 GB RAID-10\nDouble RAM: 1 GB 2 GB\nDouble CPU: 1 core 2 cores\nDouble-Double Monthly Transfer: 500 GB 2000 GB\n\nDatacenters: up to 5 datacenters 17 datacenters:\nSydney, Australia: 2.5 Gbps\nNew Jersey, USA: 1 Gbps\nNew York, USA: 2.5 Gbps\nAmsterdam, Netherlands, EUNL_3/ i3d: 1 Gbps\nAmsterdam, Netherlands, EUNL_9/ China Unicom: 2.5 Gbps\nLos Angeles, USA, USCA_2/ QNET: 1 Gbps\nLos Angeles, USA, USCA_3/ CN2 GT: 1 Gbps\nLos Angeles, USA, USCA_4/ MCOM: 1 Gbps\nLos Angeles, USA, USCA_6/ CN2GIA-E: 2.5 Gbps\nLos Angeles, USA, USCA_8/ ZNET: 1 Gbps\nLos Angeles, USA, USCA_9/ CN2GIA: 1 Gbps\nVancouver, Canada 2.5 Gbps\nVancouver, Canada CN2GIA 2.5 Gbps\nFremont, USA/ HE: 2.5 Gbps\nHong Kong: 2.5 Gbps\nOsaka, Japan: 2.5 Gbps\nDubai, UAE: 2.5 Gbps\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Description": "\u003cp\u003e相比 The plan 流量翻倍，价格为$119 每年（使用优惠码后价格为$110.90 ），\u003ca href=\"https://bandwagonhost.com/the-plan-v2?aff=70195\" rel=\"nofollow\"\u003e购买链接\u003c/a\u003e （带 aff ）。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e记得使用优惠码：BWHNCXNVXV （优惠 6.81%）\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e相比 The Plan 价格贵了一点，但是流量翻倍了，需要的不要错过。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e新用户最好使用一个新邮箱注册购买搬瓦工，方便以后不需要的时候带原始邮箱出掉。\u003c/strong\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eThe Plan v2 Specs\nImagine our legendary Limited Edition plan but on steroids:\nDouble SSD: 20 GB 40 GB RAID-10\nDouble RAM: 1 GB 2 GB\nDouble CPU: 1 core 2 cores\nDouble-Double Monthly Transfer: 500 GB 2000 GB\n\nDatacenters: up to 5 datacenters 17 datacenters:\nSydney, Australia: 2.5 Gbps\nNew Jersey, USA: 1 Gbps\nNew York, USA: 2.5 Gbps\nAmsterdam, Netherlands, EUNL_3/ i3d: 1 Gbps\nAmsterdam, Netherlands, EUNL_9/ China Unicom: 2.5 Gbps\nLos Angeles, USA, USCA_2/ QNET: 1 Gbps\nLos Angeles, USA, USCA_3/ CN2 GT: 1 Gbps\nLos Angeles, USA, USCA_4/ MCOM: 1 Gbps\nLos Angeles, USA, USCA_6/ CN2GIA-E: 2.5 Gbps\nLos Angeles, USA, USCA_8/ ZNET: 1 Gbps\nLos Angeles, USA, USCA_9/ CN2GIA: 1 Gbps\nVancouver, Canada 2.5 Gbps\nVancouver, Canada CN2GIA 2.5 Gbps\nFremont, USA/ HE: 2.5 Gbps\nHong Kong: 2.5 Gbps\nOsaka, Japan: 2.5 Gbps\nDubai, UAE: 2.5 Gbps\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "wxxxcxx",
       "PubDate": "2023-06-27T03:18:48Z"
     },
