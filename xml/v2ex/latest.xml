@@ -4,6 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>什么方法可以让 Android 向 iOS 传输文件的 - Android</title>
+      <link>https://www.v2ex.com/t/952110</link>
+      <description>场景是一个没有显示屏的 android 工控机，然后 iOS 手机从里面取图片。&lt;br /&gt;试了蓝牙 Ble ，好像本来就不是传文件的，传输速率太慢。&lt;br /&gt;Android 的 ap 热点好像开启比较麻烦，目前成功开启的方案 ssid 和密码是随机的，没有显示屏也不好连。&lt;br /&gt;现在是不是只能加个路由器在局域网里面传了。</description>
+      <author>beisilu</author>
+      <pubDate>27 Jun 2023 08:06:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>最近升级了一下家里的网络设备 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/952109</link>
+      <description>&lt;p&gt;一直在关注的朋友可能知道，我在去年的时候开始做一个新的 macOS 上的原生应用 &lt;a href=&#34;https://planetable.xyz&#34; rel=&#34;nofollow&#34;&gt;Planet&lt;/a&gt;。Planet 本质上是一个带有图形界面的 Markdown 编辑器加静态网站生成器，然后比较特别的是内置了 IPFS 节点。所以用 Planet 构建好网站之后，就可以直接通过内置的 IPFS 服务器向互联网提供服务。&lt;/p&gt;&#xA;&lt;p&gt;比如这是我新的中文博客的 IPFS 地址：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://ipfs.io/ipns/k51qzi5uqu5dgbfw2poynnynor8h9kqqoxmzdrxy4h4wnzx1x5p4n40ijtosxk/&#34; rel=&#34;nofollow&#34;&gt;https://ipfs.io/ipns/k51qzi5uqu5dgbfw2poynnynor8h9kqqoxmzdrxy4h4wnzx1x5p4n40ijtosxk/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;其中 k51 开头的那串很长的字符串就是 IPNS 地址，可以进一步绑定到其他基于 blockchain 的域名服务上，比如 ENS 和 .bit ，然后通过他们的公共网关，就可以在普通浏览器上访问：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://olivida.eth.limo/&#34; rel=&#34;nofollow&#34;&gt;https://olivida.eth.limo/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://olivida.bit.site/&#34; rel=&#34;nofollow&#34;&gt;https://olivida.bit.site/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;那么如果 Planet 应用是跑在笔记本电脑上怎么办？毕竟笔记本是不可能整天 24 小时开机来作为服务器的。所以我的解决方案是在家里的 Linux 服务器上也安装了 go-ipfs 服务器进程，然后在 crontab 里加上这样一句，就可以不到 1 分钟的延迟，让 Linux 服务器和跑在笔记本上的 Planet 应用里发布的网站实现数据同步：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;* * * * * /usr/local/bin/ipfs pin add /ipns/k51qzi5uqu5dgbfw2poynnynor8h9kqqoxmzdrxy4h4wnzx1x5p4n40ijtosxk&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后这么跑了一段时间之后，遇到了一件尴尬的事情——有的时候家里的网关就卡住了，只能拔电重启，但是过一段时间就又不行了。&lt;/p&gt;&#xA;&lt;p&gt;家里用的是一台 2017 年入手的 UniFi Security Gateway 。应该是 UniFi 出品的最小的一台网关了。因为没有风扇，所以很安静。但我发现每次它卡住的时候，表面温度都到了烫手的程度，估计是 Linux 服务器上的 IPFS 带来的负载。因为那台 Linux 服务器上不只是 pin 了我自己的 IPFS 网站，也 pin 了很多朋友的内容，比如 Justin 的枫言枫语播客的 IPFS 版本（里面有 5GB 的音频内容）：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://justinyan.eth.limo/&#34; rel=&#34;nofollow&#34;&gt;https://justinyan.eth.limo/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;所以估计是 USG 不太够了。其实 2017 年我最先入手的是 UniFi 的 Security Gateway Pro 4 。理论上 USG-PRO-4 的性能，在现在这样的时候场景里也是够的，但是因为那个机器的风扇稍微有点响，所以后来才换成了没有风扇的 USG 小机器。&lt;/p&gt;&#xA;&lt;p&gt;反正也用了 6 年了，要不升个级？于是我开始研究 2023 年能买到的 UniFi 的最新的网关产品。&lt;/p&gt;&#xA;&lt;h2&gt;UniFi Dream Machine SE&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/FG81C264.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://store.ui.com.cn/collections/unifi-network-unifi-os-consoles/products/dream-machine-se&#34; rel=&#34;nofollow&#34;&gt;UDM-SE&lt;/a&gt; 是 UniFi 的网关产品里最新的一个型号。外形和 USG-PRO-4 差不多，都是 rack mount 造型。但不同于通常的 rack mount 设备的工业化质感，UniFi 专业网关产品的表面是一种类似银色 Mac mini 的质感。你可以想象如果苹果的 Xserve 产品线还在继续出新品的话，大概就是这样的质感。UDM-SE 左侧多了一块小屏幕，可以用来看到实时的网速和进行一些简单的设置。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/xpccVwQ9.jpeg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;入手之前在 Reddit 和 YouTube 上搜了一下关于风扇噪音是否有人吐槽，然后基本上没有看到，于是就入手了。开机之后没有让我失望——风扇相比 USG-PRO-4 进步很大，很安静。于是塞进电视机柜里用也完全没有问题。&lt;/p&gt;&#xA;&lt;p&gt;除了内部的 CPU 升级，UDM-SE 还提供了一个单独的 2.5G 的 WAN Uplink 网口，这样将来如果宽带运营商提供 2G 的下行，那么就可以用上了。&lt;/p&gt;&#xA;&lt;p&gt;因为 UDM-SE 本身就可以跑 UniFi Network 及内置了硬盘接口，所以这次升级不仅换下了之前的 USG ，同时之前专门用来跑 UniFi Network 的 UCK-G2 也换下了。&lt;/p&gt;&#xA;&lt;p&gt;整个替换过程很顺畅，把 UCK-G2 里的配置文件备份，然后导入新的 UDM-SE ，就可以开始用了。&lt;/p&gt;&#xA;&lt;p&gt;UniFi Network 是 UniFi OS 中用于管理所有网络设备的控制软件。通过 UniFi Network ，可以很清晰看到和管理整个网络中所有 UniFi 设备，及所有用户设备的状态。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/K8gZZj2Q.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;对于网络使用过程中的很多场景，UniFi Network 都提供了简便的图形化的配置方式，比如 Site-to-Site VPN 、兼容古董设备的单独的 SSID 配置、IPv4/IPv6 各自的防火墙设置等等。这些配置在这次升级设备的时候，在一个备份文件里就可以导出导入。UniFi Network （之前的名字是 UniFi Controller ）是我这么多年一直都在用 UniFi 产品的一个主要原因。&lt;/p&gt;&#xA;&lt;p&gt;关于兼容古董设备的单独的 SSID 配置，我前段时间在中古店淘到了一台 2006 年上市的 Palm 设备 SONY TH-55 ，通过在 UniFi Network 里单独配置了一个 802.11b 的 SSID ，成功让这台古董设备连上了网。&lt;/p&gt;&#xA;&lt;h2&gt;Switch Flex XG&lt;/h2&gt;&#xA;&lt;p&gt;这次升级还同时增加了 &lt;a href=&#34;https://store.ui.com.cn/collections/unifi-network-switching/products/unifi-flex-xg&#34; rel=&#34;nofollow&#34;&gt;Flex XG&lt;/a&gt; 用于这几年新增的几台 10G 设备：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;iMac Pro&lt;/li&gt;&#xA;&lt;li&gt;QNAP NAS&lt;/li&gt;&#xA;&lt;li&gt;Mac Studio&lt;/li&gt;&#xA;&lt;li&gt;Mac Mini M1&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Flex XG 是一台很小巧的 10G 设备，提供 4 个 10G 的以太网口，和一个 1G 的 PoE+ 口，主要用于给设备供电。设备在运行的时候很安静，和 10G 设备一起放在桌面正好。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/ZAqMXZNy.jpeg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;最近几年 UniFi 的产品线进行了很多扩充，已经不仅仅只是网络设备。在 US 的 Early Access 商店里，甚至开始出现网络供电和控制的 LED 面板、EV 充电站等等，都可以用一套 UniFi Network 控制软件管理起来。&lt;/p&gt;&#xA;&lt;p&gt;如果你也打算入坑 UniFi ，欢迎在这里讨论技术细节，我会尽我所能回答我知道的。&lt;/p&gt;&#xA;</description>
+      <author>Livid</author>
+      <pubDate>27 Jun 2023 08:05:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>windows11 如何禁用 Teams 快捷键 - 程序员</title>
+      <link>https://www.v2ex.com/t/952108</link>
+      <description>&lt;p&gt;windows11 自带了 Teams, 我是 macbook 安装的 windows11 ，因为习惯经常误触 win+c ，mac 上是复制文本的功能，但是在 windows 上 Win+C 打开 Microsoft Teams ，因此 Teams 经常偷袭我，请教大佬们怎么 disable 这个快捷键. 能彻底删除最好.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://pic1.zhimg.com/80/v2-d08cd9d0f6fe8520011e82364fe098b4_1440w.webp&#34; rel=&#34;nofollow&#34;&gt;https://pic1.zhimg.com/80/v2-d08cd9d0f6fe8520011e82364fe098b4_1440w.webp&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://pic1.zhimg.com/80/v2-d08cd9d0f6fe8520011e82364fe098b4_1440w.webp&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>aapeli</author>
+      <pubDate>27 Jun 2023 08:03:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>校园网 ssh 阻断, 换端口没有用, 是什么原因 - 问与答</title>
+      <link>https://www.v2ex.com/t/952107</link>
+      <description>&lt;h2&gt;情况&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;校园网总是阻断我对特定服务器的 ssh, 并且更换 ssh 端口无效&lt;/li&gt;&#xA;&lt;li&gt;这个阻断很有意思, 比如我不能 ssh 到阿里云的时候可以 ssh 到腾讯云&lt;/li&gt;&#xA;&lt;li&gt;肯定是网络问题而不是服务器的问题, 换成手机热点或者换个网络就立马可以连了&lt;/li&gt;&#xA;&lt;li&gt;阻断时间通常在几分钟到一小时之间, 一般是十几分钟后又可以连了&lt;/li&gt;&#xA;&lt;li&gt;在 ssh 阻断的过程中, 服务器上部署的 web 服务都是可以通过域名或 ip 访问的&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;本人网络小白一个, 想问问各位高手, 问题是啥, 以及这种阻断是为何?&lt;/p&gt;&#xA;</description>
+      <author>wubalabadub</author>
+      <pubDate>27 Jun 2023 07:58:59 +0000</pubDate>
+    </item>
+    <item>
+      <title>寻找 flutter 工程师 - 酷工作</title>
+      <link>https://www.v2ex.com/t/952106</link>
+      <description>&lt;p&gt;有没有熟悉 flutter 的小伙伴，有个项目需要帮忙，项目制。有时间的麻烦留一下微信，感谢~&lt;/p&gt;&#xA;</description>
+      <author>liushuigs</author>
+      <pubDate>27 Jun 2023 07:58:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>隔窗无线输电方案？ - 问与答</title>
+      <link>https://www.v2ex.com/t/952105</link>
+      <description>想隔窗无线输电接一个摄像头，9v 20 瓦，摄像头是圆口输入非 usb ，有没有现成或者简单自制的方案</description>
+      <author>ppbaozi</author>
+      <pubDate>27 Jun 2023 07:57:55 +0000</pubDate>
+    </item>
+    <item>
       <title>关于恋爱和婚姻，为什么我身边的和网络上的完全不一样？ - 问与答</title>
       <link>https://www.v2ex.com/t/952104</link>
       <description>&lt;p&gt;网络上传递给我的信息是，很多年轻人都不愿意恋爱结婚，更不想要孩子，离婚率也很高等等。&lt;/p&gt;&#xA;&lt;p&gt;但我身边的情况和这完全相反，我的同事和朋友大部分都选择了结婚，结婚的有一部分要了孩子，有一部分由于经济压力晚几年要，没有想单身或不婚的。认识的里面有一部分女性是单身，原因是要求比较高，能匹配的男性太少。但是男性里面，95 之前的，我认识的就一个单身的，当然了我认识的也基本都是做开发的，其他圈子的我不了解，毕竟在这里讨论，做开发的比较多，或许能有些共鸣。&lt;/p&gt;&#xA;&lt;p&gt;在说说我，95 后单身，身边的 95 后单身的倒是有一些，我不想单身，只不过无论是相亲还是追女生都失败了，如果有合适的肯定还是想恋爱结婚的，虽然单身生活我感觉也不错。&lt;/p&gt;&#xA;&lt;p&gt;回到问题本身，是不是大家还是愿意恋爱结婚的，只不过现在社会环境和风气不太好？还是说真的就和网络上说的一样，根本不打算结婚，一直享受单身生活？&lt;/p&gt;&#xA;</description>
