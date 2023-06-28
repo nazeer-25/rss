@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "猫棒可以设置 vlan tag 吗？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/952494",
+      "Description": "\u003cp\u003e用的是海信 10g epon ltf7263.\u003c/p\u003e\n\u003cp\u003e现在的需求是从路由器 ethernet 那边的包过来不带 tag ，然后从 pon 口出去的时候打上 tag 。或者反方向要去 tag 。海信的页面也没有相关设置。默认是透传。这就造成了路由器那边如果想拨号成功，需要自己加或者去 tag 。不是很方便，也降低了路由器那边的性能。还有些人是中间加个交换机来加减 tag 。猫棒和路由器都插在交换机上。这样就要个带网关的交换机，更加不方便了。\u003c/p\u003e\n\u003cp\u003e我的感觉是这是一个基本功能。可以看到光猫上都有。可能小众产品，海信页面上不做吧。有人知道是否有命令行方式吗？\u003c/p\u003e\n\u003cp\u003e备注：无需考虑 iptv 问题。\u003c/p\u003e\n",
+      "Author": "huangya",
+      "PubDate": "2023-06-28T11:15:14Z"
+    },
+    {
+      "Title": "我有一个域名，在互联网的 dns 上指向一个公网 IP，请问有什么简单的方法能让它在家指向局域网的某个 IP - 问与答",
+      "Link": "https://www.v2ex.com/t/952493",
+      "Description": "\u003cp\u003e这样在家能直接享受局域网的网速，多好\u003c/p\u003e\n",
+      "Author": "Jiajin",
+      "PubDate": "2023-06-28T11:14:56Z"
+    },
+    {
       "Title": "说说用 nuxt 写了个博客的体验 - 程序员",
       "Link": "https://www.v2ex.com/t/952490",
       "Description": "\u003cp\u003e之前一直用的 hugo ，想用 cusdis 作为评论系统，又不想直接加载使用 iframe 加载，之前用过 vue ，就想用 nuxt 写个博客试试水。\u003c/p\u003e\n\u003cp\u003ehugo 很好，生成快，社区活跃，但用起来总像带着镣铐跳舞：翻文档找 api ，编辑在 IDE 里一片红的 HTML 模板。。。\u003c/p\u003e\n\u003cp\u003e说说用 nuxt 写博客的体验：一路过关斩将的畅快感。\u003c/p\u003e\n\u003ch2\u003emarkdown 渲染\u003c/h2\u003e\n\u003cp\u003e首先，markdown 渲染直接拉出来 \u003ca href=\"https://content.nuxtjs.org/\" rel=\"nofollow\"\u003enuxt-content\u003c/a\u003e  就搞定了 ，之前的 md 几乎一点没改，把 quick start 的例子复制上，连路由带渲染直接齐活了，直接增强了我试水的信心。\u003c/p\u003e\n\u003cp\u003e文章的目录直接使用 \u003ccode\u003enuxt-content\u003c/code\u003e 的 \u003ccode\u003econtent-list\u003c/code\u003e 组件搞定，\u003ccode\u003eshortcode\u003c/code\u003e 直接用\u003ccode\u003eInline components\u003c/code\u003e 平替。\u003c/p\u003e\n\u003cp\u003e纯属为了体验，也用了 YAML 和 CSV 分别用来存关于页的内容和一个类似说说的内容，也没啥问题。\u003c/p\u003e\n\u003ch2\u003e多语言\u003c/h2\u003e\n\u003cp\u003e用 \u003ca href=\"https://v8.i18n.nuxtjs.org/\" rel=\"nofollow\"\u003e@nuxtjs/i18n\u003c/a\u003e没费太大功夫，不同语言的文章分目录管理，\u003ccode\u003elocalePath\u003c/code\u003e 函数处理了路由，不用各种 \u003ccode\u003eif-else\u003c/code\u003e，几乎没啥代码量。\u003c/p\u003e\n\u003ch2\u003e暗黑模式\u003c/h2\u003e\n\u003cp\u003e\u003ca href=\"https://color-mode.nuxtjs.org/\" rel=\"nofollow\"\u003e@nuxtjs/color-mode\u003c/a\u003e 和 \u003ca href=\"https://tailwindcss.nuxtjs.org/\" rel=\"nofollow\"\u003e@nuxtjs/tailwindcss\u003c/a\u003e 用着也很舒服。\u003c/p\u003e\n\u003ch2\u003eRSS\u003c/h2\u003e\n\u003cp\u003e用 \u003ca href=\"https://www.npmjs.com/package/rss\" rel=\"nofollow\"\u003eRSS\u003c/a\u003e包配合 nuxt-content  , 找了篇博客，复制上也能用了。\u003c/p\u003e\n\u003ch2\u003e评论\u003c/h2\u003e\n\u003cp\u003erailway.app 跑了个 cusdis ，自己写了个组件调开放接口，是最费功夫的部分。\n还遇到个小坑，请求时的\u003ccode\u003epageId\u003c/code\u003e和响应结果里的\u003ccode\u003epageId\u003c/code\u003e有点子不同，响应结果里的\u003ccode\u003epageId\u003c/code\u003e是根据请求的\u003ccode\u003eId\u003c/code\u003e生成的，使用响应结果里的\u003ccode\u003epageId\u003c/code\u003e作为请求参数，会重新生成一个新的\u003ccode\u003ePage\u003c/code\u003e，这样生成的评论可以在管理后台看到，但在开放接口里请求不到，排查了好大一会 Orz 。\u003c/p\u003e\n\u003ch2\u003e最后\u003c/h2\u003e\n\u003cp\u003e最让我感觉爽的是，想用 turnstile 给评论的表单做个验证，也有\u003ca href=\"https://nuxt.com/modules/turnstile/changelog\" rel=\"nofollow\"\u003enuxt-turnstile\u003c/a\u003e可以用。\u003c/p\u003e\n\u003cp\u003e整个流程下来，最多的时间花在熟悉 nuxt 上了（之前只用过 vue ），花在功能业务上时间很少，或者说功能做起来都比较顺利，显得时间短。\u003c/p\u003e\n\u003cp\u003e对我来说（用过 vue ，但前端菜🐔），用 nuxt 完成博客文章列表、文章渲染、代码高亮、多语言、暗黑模式等等，比写一个 hugo 的主题要简单的多（各种 api 看的头大），感觉大家都可以去试试哈哈😄。\u003c/p\u003e\n",
