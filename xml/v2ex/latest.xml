@@ -4,6 +4,26 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>救救孩子，有个关于令牌桶算法限流的业务问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/952980</link>
+      <description>背景：&lt;br /&gt;1 、亚马逊提供的接口有 QPS 限制，并且他们是根据令牌桶算法对用户进行限制的，拿创建报表的接口举例，该接口每秒恢复 0.0167 个令牌，令牌最大容量为 15 个&lt;br /&gt;2 、为解决服务频繁触发亚马逊接口 QPS 的问题，这边也实现了个令牌桶算法，在调用亚马逊接口前，先内部去拿令牌，拿到了再去请求接口，并且这个令牌桶的令牌恢复速率、最大容量都跟亚马逊的保持一致&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;令牌桶算法实现：&lt;br /&gt;参考 lua 脚本 &lt;a target=&#34;_blank&#34; href=&#34;https://gist.github.com/ptarjan/e38f45f2dfe601419ca3af937fff574d#file-request_rate_limiter-lua&#34; rel=&#34;nofollow noopener&#34;&gt;https://gist.github.com/ptarjan/e38f45f2dfe601419ca3af937fff574d#file-request_rate_limiter-lua&lt;/a&gt;&lt;br /&gt;每次拿令牌时，根据令牌恢复速率、上次剩余令牌数、上次请求时间，重新计算当前可用令牌数和当前时间，并存回 redis&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;问题：&lt;br /&gt;由于亚马逊调用接口的耗时问题，导致两边令牌无法对上，即我这边刚恢复了 1 个令牌，但亚马逊那边令牌还没恢复到 1 ，这时调用接口会报 QPS 限制。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;举例：&lt;br /&gt;假设令牌 1 分钟恢复一个，现在我的可用令牌数刚好恢复到 1 个，于是服务拿到这个令牌去请求亚马逊接口，结果亚马逊接口请求了 1 分钟才返回给我结果（亚马逊扣除令牌的行为一定比我晚，具体晚多少则未知）。&lt;br /&gt;因为过了 1 分钟，我这边可用令牌又恢复了 1 个，于是继续调用亚马逊接口，但亚马逊此时的可用令牌数还没恢复到 1 ，所以给我报 QPS 限制（这时两边的令牌已经对不上了，因为我这边刚把令牌扣成 0 ，但亚马逊那边刚要恢复到 1 ）&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;已思考过的解决方案：&lt;br /&gt;&#x9;核心想法：只要保证我的令牌恢复跟亚马逊相比是延迟的、滞后的，那我能拿到令牌就说明请求亚马逊接口大概率是没问题的。&lt;br /&gt;&#x9;实现 1：在请求亚马逊接口后，若当前的可用令牌数大于 1 则正常扣掉 1 ，若小于 1 则不将令牌数重新计算、只将 redis 记录的上次请求时间重置为当前时间（保证该行为只会消耗小于或等于 1 个令牌）&lt;br /&gt;&#x9;实现 2：放慢我这边的令牌恢复速率，例如亚马逊每秒恢复 0.0167 个令牌，那我就每秒只恢复 0.0117 个&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;自己仅想出这两种解决方案，不知道大佬们有没其他思路可以救下孩子 orz</description>
+      <author>mercurius</author>
+      <pubDate>30 Jun 2023 04:25:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问 ios 现在有没有文件或者相册加密的软件？不需要同步 - 问与答</title>
+      <link>https://www.v2ex.com/t/952979</link>
+      <author>1145148964</author>
+      <pubDate>30 Jun 2023 04:23:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>2023 求推荐适配群晖 218p 的盘 - NAS</title>
+      <link>https://www.v2ex.com/t/952978</link>
+      <description>&lt;p&gt;2019 年买的 218play ，主要拿来放 1080p 的剧，当时只上了两个 2T 5400 转 希捷酷狼做 raid 1 。&#xA;中间也没啥时间折腾。&lt;/p&gt;&#xA;&lt;p&gt;现在一个手机都 256G 了，电脑+手机备份+要看的新美剧越存越多，撑不住了……&lt;/p&gt;&#xA;&lt;p&gt;之前硬盘好像出过小问题，但影响不大。&#xA;现在对硬盘没太关注，不知道继续入酷狼 10-16T 如何？还是推荐其他品牌？&lt;/p&gt;&#xA;&lt;p&gt;主要就是做苹果全家桶备份+视频存储，其他照片文件啥的没啥要求，主力习惯 Google 全家桶。&lt;/p&gt;&#xA;</description>
+      <author>pnongrata</author>
+      <pubDate>30 Jun 2023 04:21:26 +0000</pubDate>
+    </item>
+    <item>
       <title>chatgpt 支付页面怎么样才能出现 google pay - 程序员</title>
       <link>https://www.v2ex.com/t/952976</link>
       <author>noneusername</author>
