@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "泛型存 List 的一个问题 - C#",
+      "Link": "https://www.v2ex.com/t/953228",
+      "Description": "\u003cp\u003e最近在看视频学习 untiy 没有源码，跟着视频做遇到一个问题。\u003c/p\u003e\n\u003cp\u003e就是实现继承单例“MySingletonBase”，管理基类“ManagerBase”继承“MySingletonBase”实现单例，“UIManager”又继承“ManagerBase”，现在的问题就是假如有好多个“ManagerBase”的实现类怎么存到一个“List\u0026lt;ManagerBase\u0026lt;MonoBehaviour\u0026gt;\u0026gt; Managers = new List\u0026lt;ManagerBase\u0026lt;MonoBehaviour\u0026gt;\u0026gt;()”里面，主要就是那个泛型“T”不知道怎么处理，一直提示类型不对。\u003c/p\u003e\n\u003cp\u003e看视频就看到“UIManager : ManagerBase\u0026lt;UIManager\u0026gt;”是这么写，至于 List 怎么改都存不进去，存进去后主要就是遍历执行 ManagerBase 的方法，泛型 T 对于“ManagerBase”也没有什么用，只为了传给“MySingletonBase”。\u003c/p\u003e\n\u003cp\u003e怎么才能正常存 List 并遍历执行 ManagerBase 的方法？\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eusing System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\n\npublic class MySingletonBase \u0026lt;T\u0026gt; : MonoBehaviour where T : MonoBehaviour\n{\n\n    private static T instance;\n\n    public static T Instance\n    {\n        get\n        {\n            return instance;\n        }\n    }\n\n    void Awake() {\n        instance = this as T;\n    }\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003eusing System;\nusing System.Collections;\nusing System.Collections.Generic;\nusing Net;\nusing UnityEngine;\n\npublic abstract class ManagerBase\u0026lt;T\u0026gt; : MySingletonBase\u0026lt;T\u0026gt; where T : MonoBehaviour\n{\n    public List\u0026lt;MonoBase\u0026gt; Monos = new List\u0026lt;MonoBase\u0026gt;();\n\n    public void Register(MonoBase monoBase)\n    {\n        if (!Monos.Contains(monoBase))\n        {\n            Monos.Add(monoBase);\n        }\n    }\n    \n    ....\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003eusing System;\nusing System.Collections;\nusing System.Collections.Generic;\nusing Net;\nusing UnityEngine;\n\npublic class UIManager : ManagerBase\u0026lt;UIManager\u0026gt;\n{\n    protected override byte GetMessageType()\n    {\n        return MessageType.Type_Acount;\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "exqibao",
+      "PubDate": "2023-07-01T04:44:00Z"
+    },
+    {
       "Title": "7 月份要加入深圳打工人部队了，工作地点在深圳福田 有租房推荐的吗？ - 深圳",
       "Link": "https://www.v2ex.com/t/953227",
       "Description": "\u003cp\u003e可以接受合租共用洗手间，当然有单间带独卫的最好，预算不会太高，有认识一些中介或者有房东在出租房子吗？\u003c/p\u003e\n",
