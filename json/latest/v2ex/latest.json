@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如果数据库后期表字段修改了或者增加了， Mybatis 的实体类、Mapper 都要重新生成一遍吗？甚至一些修改的字段已经侵入到 service 层了，那是不是 service 层的代码也要进行修改呀？ - Java",
+      "Link": "https://www.v2ex.com/t/953353",
+      "Description": "\u003cp\u003e如果数据库后期\u003cstrong\u003e表字段\u003c/strong\u003e修改了或者增加了，Mybatis 的\u003cstrong\u003e实体类、Mapper\u003c/strong\u003e都要重新生成一遍吗？\n甚至一些修改的字段已经侵入到 service 层了，那是不是 service 层的代码也要进行修改？\n有没有在不修改原有代码的基础上进行扩展的方法？\n代码新人，一点小小的疑惑，勿喷。\u003c/p\u003e\n",
+      "Author": "kachu673",
+      "PubDate": "2023-07-01T16:38:05Z"
+    },
+    {
+      "Title": "推特提示\"抱歉，你受到速度限制。请稍等片刻，然后再试一次。\" - 程序员",
+      "Link": "https://www.v2ex.com/t/953352",
+      "Description": "\u003cp\u003e\u003cimg alt=\"b4113f21642d5b4f58338a6e4b235bd1.jpeg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i2.mjj.rip/2023/07/02/b4113f21642d5b4f58338a6e4b235bd1.jpeg\"/\u003e\n好像是出现问题了\u003c/p\u003e\n",
+      "Author": "Alloyt",
+      "PubDate": "2023-07-01T16:35:54Z"
+    },
+    {
       "Title": "构建 jdk8+selenium 镜像运行会产生僵尸进行 - 程序员",
       "Link": "https://www.v2ex.com/t/953351",
       "Description": "\u003cp\u003e1 、基础镜像\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-dockerfile\"\u003eFROM debian:bullseye\nRUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \u0026amp;\u0026amp; echo 'Asia/Shanghai' \u0026gt;/etc/timezone \u0026amp;\u0026amp; mkdir -p /opt\nADD chromedriver /opt/chromedriver\nRUN chmod +x /opt/chromedriver\nADD OpenJDK8U-jdk_x64_linux_hotspot_8u352b08.tar.gz /opt\nENV JAVA_HOME /opt/jdk8u352-b08\nENV PATH PATH $PATH:$JAVA_HOME/bin\nENV LANG C.UTF-8\nENV LANGUAGE C.UTF-8\nENV LC_ALL C.UTF-8\nRUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \u0026amp;\u0026amp; apt-get update -y \u0026amp;\u0026amp; apt-get install chromium -y \u0026amp;\u0026amp; chromium -version \u0026amp;\u0026amp; apt-get install ttf-wqy-microhei ttf-wqy-zenhei -y \nCMD [\"bash\"]\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e2 、java 镜像\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-dockerfile\"\u003eFROM harbor.******.com/library/temurin-jdk8-selenium:109.0.5414.74\nRUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime\nRUN echo 'Asia/Shanghai' \u0026gt;/etc/timezone\nADD target/moose-custom-api.jar /data/java/\nWORKDIR /data/java/\nRUN echo '' \u0026gt; application.yml\nENTRYPOINT [\"java\",  \"-jar\", \"moose-custom-api.jar\", \"--spring.config.location=application.yml\"]\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e3 、僵尸进程\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2023/07/02/HXaVMz78wRKJDyY.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e4 、措施（无用）\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e    try {\n    \t...\n    } finally {\n    \t// exit\n    \tdriver.close();\n    \tdriver.quit();\n    }\n\u003c/code\u003e\u003c/pre\u003e\n",
