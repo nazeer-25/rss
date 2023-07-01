@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>PVE8 更改国内源的地址有了吗? - 程序员</title>
+      <link>https://www.v2ex.com/t/953229</link>
+      <description>&lt;p&gt;PVE8 也就发布不到 1 周, 请问有人发布了国内源了吗?&lt;/p&gt;&#xA;&lt;p&gt;另外那个 pvetools 的脚本有人发布对应 PVE8 的更新了吗?&lt;/p&gt;&#xA;</description>
+      <author>Eaglemask</author>
+      <pubDate>01 Jul 2023 04:53:42 +0000</pubDate>
+    </item>
+    <item>
       <title>泛型存 List 的一个问题 - C#</title>
       <link>https://www.v2ex.com/t/953228</link>
       <description>&lt;p&gt;最近在看视频学习 untiy 没有源码，跟着视频做遇到一个问题。&lt;/p&gt;&#xA;&lt;p&gt;就是实现继承单例“MySingletonBase”，管理基类“ManagerBase”继承“MySingletonBase”实现单例，“UIManager”又继承“ManagerBase”，现在的问题就是假如有好多个“ManagerBase”的实现类怎么存到一个“List&amp;lt;ManagerBase&amp;lt;MonoBehaviour&amp;gt;&amp;gt; Managers = new List&amp;lt;ManagerBase&amp;lt;MonoBehaviour&amp;gt;&amp;gt;()”里面，主要就是那个泛型“T”不知道怎么处理，一直提示类型不对。&lt;/p&gt;&#xA;&lt;p&gt;看视频就看到“UIManager : ManagerBase&amp;lt;UIManager&amp;gt;”是这么写，至于 List 怎么改都存不进去，存进去后主要就是遍历执行 ManagerBase 的方法，泛型 T 对于“ManagerBase”也没有什么用，只为了传给“MySingletonBase”。&lt;/p&gt;&#xA;&lt;p&gt;怎么才能正常存 List 并遍历执行 ManagerBase 的方法？&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;using System.Collections;&#xA;using System.Collections.Generic;&#xA;using UnityEngine;&#xA;&#xA;public class MySingletonBase &amp;lt;T&amp;gt; : MonoBehaviour where T : MonoBehaviour&#xA;{&#xA;&#xA;    private static T instance;&#xA;&#xA;    public static T Instance&#xA;    {&#xA;        get&#xA;        {&#xA;            return instance;&#xA;        }&#xA;    }&#xA;&#xA;    void Awake() {&#xA;        instance = this as T;&#xA;    }&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;using System;&#xA;using System.Collections;&#xA;using System.Collections.Generic;&#xA;using Net;&#xA;using UnityEngine;&#xA;&#xA;public abstract class ManagerBase&amp;lt;T&amp;gt; : MySingletonBase&amp;lt;T&amp;gt; where T : MonoBehaviour&#xA;{&#xA;    public List&amp;lt;MonoBase&amp;gt; Monos = new List&amp;lt;MonoBase&amp;gt;();&#xA;&#xA;    public void Register(MonoBase monoBase)&#xA;    {&#xA;        if (!Monos.Contains(monoBase))&#xA;        {&#xA;            Monos.Add(monoBase);&#xA;        }&#xA;    }&#xA;    &#xA;    ....&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;using System;&#xA;using System.Collections;&#xA;using System.Collections.Generic;&#xA;using Net;&#xA;using UnityEngine;&#xA;&#xA;public class UIManager : ManagerBase&amp;lt;UIManager&amp;gt;&#xA;{&#xA;    protected override byte GetMessageType()&#xA;    {&#xA;        return MessageType.Type_Acount;&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
