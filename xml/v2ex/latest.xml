@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Twitter 不好用了，长毛象走一波 - 分享发现</title>
+      <link>https://www.v2ex.com/t/953441</link>
+      <description>&lt;p&gt;RT&lt;/p&gt;&#xA;&lt;p&gt;@&lt;a href=&#34;/member/huguadao&#34;&gt;huguadao&lt;/a&gt;@m.cmx.im 欢迎互 Fo ，今天推特官方客户端都不好用了&lt;/p&gt;&#xA;&lt;p&gt;长毛象要是能在虚拟主机上搭建的话就好了，可以搞个只有一个帐号的小小岛，个人域名又没白买😄&lt;/p&gt;&#xA;</description>
+      <author>huguadao</author>
+      <pubDate>02 Jul 2023 08:52:21 +0000</pubDate>
+    </item>
+    <item>
       <title>刚发现 C 语言命名初始化语法糖（Designated Initializers）依赖标准库的 memset 和 memcpy - 分享发现</title>
       <link>https://www.v2ex.com/t/953440</link>
       <description>&lt;pre&gt;&lt;code&gt;struct proc test_proc_1 = {&#xA;      .name = &#34;test_proc_1&#34;,&#xA;      .pid = 1,&#xA;      .hartid = 0,&#xA;      .state = PROC_READY,&#xA;      .cpu = {&#xA;          .pc = (u64)&amp;amp;test_proc_1,&#xA;      }};&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这段代码在链接的时候提示：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;undefined reference to `memset&#39;&#xA;undefined reference to `memcpy&#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;让 ChatGPT 给我实现了一下，编译链接进去就好了。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#include &#34;kstring.h&#34;&#xA;&#xA;void *memset(void *s, int c, size_t n)&#xA;{&#xA;  unsigned char *p = s;&#xA;  while (n--)&#xA;    *p++ = (unsigned char)c;&#xA;  return s;&#xA;}&#xA;&#xA;void *memcpy(void *dest, const void *src, size_t n)&#xA;{&#xA;  unsigned char *d = dest;&#xA;  const unsigned char *s = src;&#xA;  while (n--)&#xA;    *d++ = *s++;&#xA;  return dest;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>

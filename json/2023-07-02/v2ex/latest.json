@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Twitter 不好用了，长毛象走一波 - 分享发现",
+      "Link": "https://www.v2ex.com/t/953441",
+      "Description": "\u003cp\u003eRT\u003c/p\u003e\n\u003cp\u003e@\u003ca href=\"/member/huguadao\"\u003ehuguadao\u003c/a\u003e@m.cmx.im 欢迎互 Fo ，今天推特官方客户端都不好用了\u003c/p\u003e\n\u003cp\u003e长毛象要是能在虚拟主机上搭建的话就好了，可以搞个只有一个帐号的小小岛，个人域名又没白买😄\u003c/p\u003e\n",
+      "Author": "huguadao",
+      "PubDate": "2023-07-02T08:52:21Z"
+    },
+    {
       "Title": "刚发现 C 语言命名初始化语法糖（Designated Initializers）依赖标准库的 memset 和 memcpy - 分享发现",
       "Link": "https://www.v2ex.com/t/953440",
       "Description": "\u003cpre\u003e\u003ccode\u003estruct proc test_proc_1 = {\n      .name = \"test_proc_1\",\n      .pid = 1,\n      .hartid = 0,\n      .state = PROC_READY,\n      .cpu = {\n          .pc = (u64)\u0026amp;test_proc_1,\n      }};\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这段代码在链接的时候提示：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eundefined reference to `memset'\nundefined reference to `memcpy'\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e让 ChatGPT 给我实现了一下，编译链接进去就好了。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e#include \"kstring.h\"\n\nvoid *memset(void *s, int c, size_t n)\n{\n  unsigned char *p = s;\n  while (n--)\n    *p++ = (unsigned char)c;\n  return s;\n}\n\nvoid *memcpy(void *dest, const void *src, size_t n)\n{\n  unsigned char *d = dest;\n  const unsigned char *s = src;\n  while (n--)\n    *d++ = *s++;\n  return dest;\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
