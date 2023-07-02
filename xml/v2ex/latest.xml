@@ -4,9 +4,16 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>刚发现 C 语言命名初始化语法糖（Designated Initializers）依赖标准库的 memset 和 memcpy - 分享发现</title>
+      <link>https://www.v2ex.com/t/953440</link>
+      <description>&lt;pre&gt;&lt;code&gt;struct proc test_proc_1 = {&#xA;      .name = &#34;test_proc_1&#34;,&#xA;      .pid = 1,&#xA;      .hartid = 0,&#xA;      .state = PROC_READY,&#xA;      .cpu = {&#xA;          .pc = (u64)&amp;amp;test_proc_1,&#xA;      }};&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这段代码在链接的时候提示：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;undefined reference to `memset&#39;&#xA;undefined reference to `memcpy&#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;让 ChatGPT 给我实现了一下，编译链接进去就好了。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#include &#34;kstring.h&#34;&#xA;&#xA;void *memset(void *s, int c, size_t n)&#xA;{&#xA;  unsigned char *p = s;&#xA;  while (n--)&#xA;    *p++ = (unsigned char)c;&#xA;  return s;&#xA;}&#xA;&#xA;void *memcpy(void *dest, const void *src, size_t n)&#xA;{&#xA;  unsigned char *d = dest;&#xA;  const unsigned char *s = src;&#xA;  while (n--)&#xA;    *d++ = *s++;&#xA;  return dest;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>yuanix</author>
+      <pubDate>02 Jul 2023 08:50:39 +0000</pubDate>
+    </item>
+    <item>
       <title>叙利亚成色的 iPhone XR 还有什么价值吗？ - iPhone</title>
       <link>https://www.v2ex.com/t/953439</link>
-      <description>翻箱子找到了之前被我生气砸烂的 iphone ，想发掘一下剩余价值。&lt;br /&gt;成色已经没法形容了，但是能冲进去电、faceID 也是好的，屏幕背光模组可以亮，但是屏幕已经废掉了。想问下各位 V 友，这样的 iphone 还能拿来干啥？&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/i7gdRuu.jpg&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/i7gdRuu.jpg&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/VRo4frC.jpg&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/VRo4frC.jpg&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;</description>
+      <description>翻箱子找到了之前被我生气砸烂的 iphone ，想发掘一下剩余价值。&lt;br /&gt;成色已经没法形容了，但是能冲进去电、faceID 也是好的，屏幕背光模组可以亮，但是屏幕已经废掉了。想问下各位 V 友，这样的 iphone 还能拿来干啥？&lt;br /&gt;&lt;br /&gt;### 补充&lt;br /&gt;1. 由于中框、屏幕损毁严重，部分结构件也松动了，修复的价值几乎没有了；&lt;br /&gt;2. 不想卖给二手贩子，怕信息泄漏，因为里面的数据不知道如何抹掉。&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/i7gdRuu.jpg&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/i7gdRuu.jpg&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/VRo4frC.jpg&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/VRo4frC.jpg&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;</description>
       <author>rossroma</author>
       <pubDate>02 Jul 2023 08:46:01 +0000</pubDate>
     </item>
