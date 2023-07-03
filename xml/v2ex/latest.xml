@@ -4,9 +4,36 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>github 改版 - 问与答</title>
+      <link>https://www.v2ex.com/t/953613</link>
+      <description>点浏览器的后退，地址栏更新了，页面没变，有时候变了，但是很慢，你们是这样吗？</description>
+      <author>mmuggle</author>
+      <pubDate>03 Jul 2023 03:37:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>周末折腾软路由，把 openwrt 换成了 iKuai，分享一下过程。 - 分享发现</title>
+      <link>https://www.v2ex.com/t/953612</link>
+      <description>&lt;p&gt;之前光猫改桥接用 openwrt 拨号，新建的 LAN 获取不到 IPv6 ，重启 WAN 口，新建的 LAN 时不时还会无法联网，后来又改回光猫拨号了。&lt;/p&gt;&#xA;&lt;p&gt;周末想着继续用光猫拨号真是白瞎了我的软路由了，没有公网 IPv4 ，IPv6 还被光猫挡着不能从外部访问，就很难受，看朋友用的 iKuai ，说比较稳定，就准备给软路由重新装个系统。&lt;/p&gt;&#xA;&lt;p&gt;首先从官网下载了 IMG 镜像文件，直接写入软路由的硬盘，然后信心满满的启动了软路由，结果启动后发现插哪个网口都没有获取到 IP ，真的很懵，没办法，给软路由接上显示器和键鼠，重新开机，发现开机后直接进了 BIOS 界面，没有启动系统。一番搜索发现写入 IMG 镜像的方式不支持 UEFI 启动，就很无语，openwrt 都能这么玩，iKuai 要用 UEFI 启动必须用 iso 文件安装。&lt;/p&gt;&#xA;&lt;p&gt;用 iso 文件安装系统以后看到系统成功启动，设置了 lan1 的网卡和地址，心想终于弄好了，拔掉显示器和键鼠把软路由放回原处启动，结果还是没有获取到 IP ，真的是卧槽了，再搜发现 iKuai 默认没有开启 DHCP ，要手动设置 IP 才能连接上，等连上去后自己新建 DHCP 服务，再设置 WAN 口，还有系统设置的基础设置里有个上网模式，一定不要改成路由模式，没有仔细看下面的帮助提示就选了个路由模式，结果不能上网，只能用 NAT 模式。&lt;/p&gt;&#xA;&lt;p&gt;确认 iKuai 能正常工作了，就把光猫又改成了桥接模式，再次尝试用 iKuai 进行拨号，尝试了一下，原有的 LAN 和新建的 LAN 能正常获取到 IPv6 ，工作也很稳定，用手机网络访问家里的 IPv6 地址也都正常。&lt;/p&gt;&#xA;&lt;p&gt;因为没有用光猫做路由，所以防火墙就没了，IPv6 相当于完全敞开的状态，需要每个设备自身都开启防火墙才行，但是局域网内有对外开放访问需求的也就只有一台 NAS ，于是想用设置 iKuai 来做防火墙。&lt;/p&gt;&#xA;&lt;p&gt;iKuai 的 ACL 规则默认是空的，允许所有流量，不做任何限制，所以只需要添加阻止的规则，尝试添加规则时发现 IPv4 的协议选项有 6 个，分别是：tcp 、udp 、tcp+udp 、icmp 、gre 、任意，IPv6 的协议选项只有 3 个，分别是：tcp 、udp 、任意。&lt;/p&gt;&#xA;&lt;p&gt;如果想要外部 IP 能够 ping 通内部设备的 IPv6 就不能选择阻断任意协议，这里没有单独列出 ICMPv6 ，但是选择任意的话就会阻止。&lt;/p&gt;&#xA;&lt;p&gt;首先阻止从外部访问内部的 IPv6 ，规则如下（如果不想阻止 ICMPv6 需要分别添加 tcp 和 udp ，不能选任意）：&lt;br/&gt;&#xA;协议栈：IPv6&lt;br/&gt;&#xA;协议：任意&lt;br/&gt;&#xA;动作：阻断&lt;br/&gt;&#xA;方向：转发&lt;br/&gt;&#xA;连接方向匹配：原始方向（不能选择关闭，否则会把应答方向的入站一起阻断，导致无法上网）&lt;br/&gt;&#xA;进接口：wan1  &lt;/p&gt;&#xA;&lt;p&gt;不需要单独设置允许 lan 到 wan 的转发，没有阻止的都是允许的。&lt;/p&gt;&#xA;&lt;p&gt;接下来阻止外部访问路由器的 WAN 口，只需要把上面规则里的方向改为进即可。&lt;/p&gt;&#xA;&lt;p&gt;因为 IPv6 与 IPv4 的工作方式稍有不同，如果阻止 IPv6 的 WAN 口任意协议入站，为了保证能够正常收到 IPv6 前缀，需要单独放行 IPv6 协议栈的 UDP546,547 端口，否则会出现 WAN 口有 IPv6 地址，但是 IPv6 前缀是空的，导致 LAN 口没法分配 IPv6 。&lt;/p&gt;&#xA;&lt;p&gt;IPv6 的内网配置如下：&lt;br/&gt;&#xA;内网接口：lan1&lt;br/&gt;&#xA;配置类型：自动获取&lt;br/&gt;&#xA;绑定外网线路：wan1&lt;br/&gt;&#xA;前缀分配长度：自动&lt;br/&gt;&#xA;DHCPv6：开启&lt;br/&gt;&#xA;DHCPv6 模式：无状态  &lt;/p&gt;&#xA;&lt;p&gt;前面阻止了 IPv6 WAN 口原始方向的转发，需要将内网设置暴露出去就需要再添加一条允许的 ACL 规则，允许的规则优先级高于阻断的规则, 比如需要放行 NAS 的 5001 端口。&lt;/p&gt;&#xA;&lt;p&gt;协议栈：IPv6&lt;br/&gt;&#xA;协议：tcp&lt;br/&gt;&#xA;动作：允许&lt;br/&gt;&#xA;方向：转发&lt;br/&gt;&#xA;连接方向匹配：原始方向&lt;br/&gt;&#xA;目的地址: ::9209:d2ff:fe39:89c2/::ffff:ffff:ffff:ffff (表示固定后缀为::9209:d2ff:fe39:89c2 的的 IPv6 地址，这一段查看设备 IP 的时候有个 fe80::9209:d2ff:fe39:89c2 ，就是 fe80 后面的一段)&lt;br/&gt;&#xA;目的端口：5001&lt;br/&gt;&#xA;进接口：wan1&lt;br/&gt;&#xA;出接口：lan1  &lt;/p&gt;&#xA;&lt;p&gt;这个时候 NAS 的 5001 端口就可以从外部正常访问了。&lt;/p&gt;&#xA;</description>
+      <author>peasant</author>
+      <pubDate>03 Jul 2023 03:36:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>土区 iCloud 订阅价格翻倍，有备选方案吗？ - iCloud</title>
+      <link>https://www.v2ex.com/t/953610</link>
+      <description>&lt;p&gt;刚刚收到 Apple 的邮件，正文如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;你好：&#x9;&#xA;&#xA;感谢你订阅“包含 2 TB 储存空间的 iCloud+ 方案”。此订阅项目即将发生变更。&#x9;&#xA;&#xA;Apple 将把此订阅项目的价格从 ₺64,99/月提高至 ₺129,99/月。自₺129,99 起，你的订阅将以 月/8 月 1 日的价格续期，直到你取消为止。要进一步了解或取消订阅，请查看订阅。&#x9;&#xA; &#xA;此致&#xA;Apple&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>yohance</author>
+      <pubDate>03 Jul 2023 03:32:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>初生婴儿奶粉求推荐 - 问与答</title>
+      <link>https://www.v2ex.com/t/953609</link>
+      <author>novaline</author>
+      <pubDate>03 Jul 2023 03:30:46 +0000</pubDate>
+    </item>
+    <item>
       <title>学习前端中，感觉 css 最难，怎么办？ - 前端开发</title>
       <link>https://www.v2ex.com/t/953607</link>
-      <description>&lt;p&gt;Android 老码农，Flutter 三年经验。&lt;br/&gt;&#xA;最近在学 Web 开发。&lt;br/&gt;&#xA;目标是能从 0 开始独立做简单的 Web 。  &lt;/p&gt;&#xA;&lt;p&gt;感觉比起 Vue ，React ，Angular 之类框架本身(至少简单 Web 不用学的很深入)，CSS 更让我觉得困难。  &lt;/p&gt;&#xA;&lt;p&gt;我现在的难题是，一个界面，怎么布局，怎么摆，感觉很困难。&lt;br/&gt;&#xA;写起来很有挫折。&#xA;写一点，卡一点，查一点。  &lt;/p&gt;&#xA;&lt;p&gt;找了一些 css 教程，学完感觉似乎没有改善。&lt;br/&gt;&#xA;这种只能靠多练习？&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;Android 老码农，Flutter 三年经验。&lt;br/&gt;&#xA;最近在学 Web 开发。&lt;br/&gt;&#xA;目标是能从 0 开始独立做简单的 Web 。  &lt;/p&gt;&#xA;&lt;p&gt;感觉比起 Vue ，React ，Angular 之类框架本身(至少简单 Web 不用学的很深入)，CSS 更让我觉得困难。  &lt;/p&gt;&#xA;&lt;p&gt;我现在的难题是，一个界面，怎么布局，怎么摆，感觉很困难。&lt;br/&gt;&#xA;写起来很有挫折。&#xA;写一点，卡一点，查一点。  &lt;/p&gt;&#xA;&lt;p&gt;找了一些 CSS 教程，学完感觉似乎没有改善。&lt;br/&gt;&#xA;这种只能靠多练习？&lt;/p&gt;&#xA;</description>
       <author>KT0J</author>
       <pubDate>03 Jul 2023 03:28:34 +0000</pubDate>
     </item>
