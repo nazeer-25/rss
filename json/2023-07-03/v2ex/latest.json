@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "移动硬盘连 USB3 接口会卡死资源管理器是怎么回事 - 问与答",
+      "Link": "https://www.v2ex.com/t/953646",
+      "Description": "\u003cp\u003e如题，一个很奇怪的情况。有一个绿联的 SATA 固态硬盘盒，里面有一张 SSD 。硬盘本身应该是没什么问题的，在笔记本电脑上所有接口都可以正确识别并操作，SMART 信息也正常。但是台式机一旦插 USB3 的口就会直接卡死资源管理器，盘符也出不来，插 2.0 的口正常。\u003c/p\u003e\n\u003cp\u003eSSD 里面本来有一个 Windows11 ，后来发现无法在台式机启动（卡转圈圈）才发现这个问题。\u003c/p\u003e\n\u003cp\u003e印象中本来台式机插 3.0 的口也是正常的，后来某次更新了 BIOS 之后就成这样了，不知道有没有有经验的 V 友知道如何解决。\u003c/p\u003e\n\u003cp\u003e主板是华硕 Z790-PRIME-D4\u003c/p\u003e\n",
+      "Author": "neteroster",
+      "PubDate": "2023-07-03T05:29:30Z"
+    },
+    {
+      "Title": "请教一个 rust 问题！ - 问与答",
+      "Link": "https://www.v2ex.com/t/953645",
+      "Description": "\u003cp\u003e有一段代码不是很理解，为什么第一段代码会卡住，不会出结果？\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003euse futures; // 0.3.28\nuse futures::future;\nuse futures::executor::block_on;\nuse futures::channel::mpsc::unbounded;\nuse futures::pin_mut;\nuse futures::SinkExt;\nuse futures::StreamExt;\nuse futures::future::Either;\n\n\nfn main() {\n    let (mut tx, rx) = unbounded::\u0026lt;i32\u0026gt;(); \n    let x = async {\n        for i in 0..100 {\n            tx.send(i).await.expect(\"send failed\");\n        }\n    };\n    let y = rx.collect::\u0026lt;Vec\u0026lt;_\u0026gt;\u0026gt;();\n    pin_mut!(x, y);\n    block_on(async {\n        match future::select(x, y).await {\n            Either::Left((_, y)) =\u0026gt; {\n                let res = y.await;\n                println!(\"{:?}\", res);\n            },\n            Either::Right((res, _)) =\u0026gt; {\n                println!(\"{:?}\", res);\n            }\n        }\n    });\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e而这一段代码可以运行，不会卡住\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-rust\"\u003euse futures; // 0.3.28\nuse futures::future;\nuse futures::executor::block_on;\nuse futures::channel::mpsc::unbounded;\nuse futures::pin_mut;\nuse futures::SinkExt;\nuse futures::StreamExt;\nuse futures::future::Either;\n\n\nfn main() {\n    let (mut tx, rx) = unbounded::\u0026lt;i32\u0026gt;(); \n    let x = async move {\n        for i in 0..100 {\n            tx.send(i).await.expect(\"send failed\");\n        }\n    };\n    let y = rx.collect::\u0026lt;Vec\u0026lt;_\u0026gt;\u0026gt;();\n    pin_mut!(x, y);\n    block_on(async {\n        match future::select(x, y).await {\n            Either::Left((_, y)) =\u0026gt; {\n                let res = y.await;\n                println!(\"{:?}\", res);\n            },\n            Either::Right((res, _)) =\u0026gt; {\n                println!(\"{:?}\", res);\n            }\n        }\n    });\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca href=\"https://play.rust-lang.org/?version=stable\u0026amp;mode=debug\u0026amp;edition=2021\u0026amp;gist=93279dc2efa847c746c260de3ca9c8ef\" rel=\"nofollow\"\u003erust playgroud\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "52funny",
+      "PubDate": "2023-07-03T05:27:57Z"
+    },
+    {
+      "Title": "比亚迪上半年销量翻番，按照这个趋势，比亚迪会成为下一个丰田吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/953644",
+      "Description": "",
+      "Author": "name1991",
+      "PubDate": "2023-07-03T05:23:50Z"
+    },
+    {
+      "Title": "求推荐折叠电动滑板车+手机支架，要在加拿大送外卖时使用 - 问与答",
+      "Link": "https://www.v2ex.com/t/953643",
+      "Description": "年后要上学，打算课余时间送外卖补贴家用，加拿大这边 Costco 的的电动滑板车都很贵，好一点的税前 1999 刀，税后 1999*1.15=2298.85 ，汇率按 5.3 ，相当于人民币 12183 ，太贵了。还是从国内海运一个过来比较划算。\u003cbr /\u003e\u003cbr /\u003e求推荐国内靠谱的电动滑板车，要求如下：\u003cbr /\u003e1 、能折叠，这样能锁在学校的更衣柜里，上课的时候不担心被偷\u003cbr /\u003e2 、续航 40km 以上\u003cbr /\u003e3 、减震好\u003cbr /\u003e4 、能固定手机支架，送外卖的时候能看下导航\u003cbr /\u003e\u003cbr /\u003e感谢！",
+      "Author": "ZC3746",
+      "PubDate": "2023-07-03T05:21:59Z"
+    },
+    {
       "Title": "Siri 居然会根据“日历”里的假期来提醒关掉闹钟 - Apple",
       "Link": "https://www.v2ex.com/t/953642",
       "Description": "RT ，因为是 Independence day ，所以 Siri 居然会提醒，好神奇！\u003cbr /\u003e图： \u003ca target=\"_blank\" href=\"https://imgur.com/a/KKhTYVr\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/a/KKhTYVr\u003c/a\u003e",
