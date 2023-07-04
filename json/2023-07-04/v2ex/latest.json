@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "关于消息推送方案的讨论 - Redis",
+      "Link": "https://www.v2ex.com/t/953983",
+      "Description": "背景：运营可以配置无上限的活动，在活动列表和详情中，用户可以进行关注，关注后需要在活动开始前 15 分钟向推送活动开始的通知消息。\u003cbr /\u003e当前方案：创建完活动之后向延迟队列中投递一个执行时间为（活动开始时间-15 分钟）的任务，目前关注用户存储在 redis 的 zset 中，向延迟队列中投递的是活动的 id 信息，延迟队列消费到这条消息的时候，从关注的用户 zset 中拉取用户 id 进行消息推送。\u003cbr /\u003e延迟队列的设计：目前是依赖 redis ，生产者向 redis 的 zset 中投递 task 信息，score 是活动的通知时间（活动开始时间-15 分钟），然后轮询这个 task 的 redis key ，读取到期是任务信息，读取到之后将该任务信息投递到 redis 的 list （通过 rpush ）中，消费者则一直读取这个 list 队列（通过 lpop ）。\u003cbr /\u003e目前想探讨的是：这个方案是否在活动很多的时候导致推送消息的延迟（虽然可以通过增加消费者来缓解，正常哪怕是一个活动有百万级别的活动关注者（极其罕见），从 redis 的 zset 中分页拉取出来并投递消息，一般处理时长不会超过 10 分钟）\u003cbr /\u003e但是隐隐约约还是觉得是不是还有更好的方案呢？可以尽量减少延迟的方案。",
+      "Author": "ben548",
+      "PubDate": "2023-07-04T06:32:30Z"
+    },
+    {
+      "Title": "我开始玩 mastodon 了，打算试试纯英文水贴，有没有一样的，让我关注你，和你互动，顺便求推荐一些关注的 hashtag 或者话题或者人。 - 程序员",
+      "Link": "https://www.v2ex.com/t/953982",
+      "Description": "",
+      "Author": "ChrisFreeMan",
+      "PubDate": "2023-07-04T06:31:53Z"
+    },
+    {
+      "Title": "chatgpt + reddit 有什么好的阅读方案吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/953980",
+      "Description": "\u003cp\u003e有什么方案可以快速提取有价值的信息？ 各位分享下姿势\u003c/p\u003e\n",
+      "Author": "scalaer",
+      "PubDate": "2023-07-04T06:26:21Z"
+    },
+    {
+      "Title": "求推荐洗发水和牙膏 - 生活",
+      "Link": "https://www.v2ex.com/t/953979",
+      "Description": "\u003cp\u003e洗发水和牙膏快要用完了。\n之前都是去超市随便买，也没关注牌子什么的，现在想看看大家的情况，求推荐。\u003c/p\u003e\n\u003cp\u003e我之前的话，洗发水就是飘柔清扬；牙膏就是黑人的绿茶龙井。\u003c/p\u003e\n",
+      "Author": "zrc199021",
+      "PubDate": "2023-07-04T06:25:08Z"
+    },
+    {
       "Title": "Build In Public #5 twitter 内容拆分预览 - 分享创造",
       "Link": "https://www.v2ex.com/t/953976",
       "Description": "\u003cp\u003e我开始尝试独立开发这条路，公开自己开发过程中遇到的问题和思考，最近在开发一款浏览器插件，主要功能是在多平台同步发布内容，计划支持的平台：微博、即刻和 twitter 。\n仓库地址： \u003ca href=\"https://github.com/lban2049/note-sync\" rel=\"nofollow\"\u003ehttps://github.com/lban2049/note-sync\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e今天添加了三个功能：\n1 、输入框添加了清空，方便操作。\n2 、添加了 twitter 内容拆分预览功能，可以方便看到超长内容会拆分成什么样，如果不满意，可以手动调整结构。\n3 、优化了内容超长的判断和拆分逻辑。\u003c/p\u003e\n\u003cp\u003etwitter 单条推的长度限制是 280 个字符，我之前以为中文限制是 140 ，不完全对，当文本中混杂着标点符号、英文时，这个限制是不固定的，会再长一点，之前写的拆分逻辑简单了，可以优化的更好一点，拆的太短，分隔结果实在难受。\u003c/p\u003e\n\u003cp\u003etwitter 的文档中有关于字符如何计算的解释：\n\u003ca href=\"https://developer.twitter.com/en/docs/counting-characters\" rel=\"nofollow\"\u003ehttps://developer.twitter.com/en/docs/counting-characters\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e并提供了开源的依赖包，包含计算推文长度的方法：\n\u003ca href=\"https://github.com/twitter/twitter-text\" rel=\"nofollow\"\u003ehttps://github.com/twitter/twitter-text\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e通过这个依赖包提供的方法，更精准的计算了推文的长度，当超长或者不够加“1/3”这种小尾巴的时候我会分隔为两段，自己写内容的时候，再注意下长度，主动去分成多段，目前效果还不错。\u003c/p\u003e\n\u003cp\u003e昨天发布之后，有朋友建议可以在描述中添加一些界面截图，纯文字太单调，今天已经补充上去了。本来是准备加的，但是以为还需要准备图床，就先放下了，今天查了下，github 的 readme 是支持相对路径的，直接把图片放到仓库中就可以了。\u003c/p\u003e\n",
