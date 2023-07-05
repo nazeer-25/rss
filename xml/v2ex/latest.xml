@@ -4,6 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>买了个 Photoshop 一年订阅，来个一起合租的啊 - Photoshop</title>
+      <link>https://www.v2ex.com/t/954338</link>
+      <description>&lt;p&gt;150 一年，也可 45 季付，只能一个设备，据说 ios 端没有设备限制，还没试过，可以看支付宝信用&lt;/p&gt;&#xA;</description>
+      <author>blycoris</author>
+      <pubDate>05 Jul 2023 08:45:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>大佬们，求指点微服务后端项目 - 程序员</title>
+      <link>https://www.v2ex.com/t/954337</link>
+      <description>&lt;p&gt;谷粒商城 or 黑马头条 或者还有其他更好的？？因为没学过微服务，最近想找个项目好好学一下，看到谷粒商城和黑马头条推荐的比较多，看了一下技术栈好像也差不多，不过课程时间差太多了，《商城》 100h ，《头条》 23h ，但是不知道实际学习内容如何，相信很多人都和我一样，所以希望学过的 uu 们，可以给个建议，大家讨论一下!!!!&lt;/p&gt;&#xA;</description>
+      <author>skucloud</author>
+      <pubDate>05 Jul 2023 08:43:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>腾讯云边缘安全加速（EdgeOne）之图片优化 - 问与答</title>
+      <link>https://www.v2ex.com/t/954336</link>
+      <description>&lt;h2&gt;应用背景&lt;/h2&gt;&#xA;&lt;p&gt;前面已经介绍过 EdgeOne 的基本使用方法（参见 &lt;a href=&#34;https://www.rehiy.com/post/479/&#34; rel=&#34;nofollow&#34;&gt;腾讯云下一代 CDN （ EdgeOne/边缘安全加速）开箱即用&lt;/a&gt; 一文），本文将介绍如何使用 &lt;code&gt;EdgeOne Worker&lt;/code&gt; 实现图片格式转换。&lt;/p&gt;&#xA;&lt;p&gt;通过云边缘函数实现自动优化图片格式，可以提升页面加载速度，优化图片加速性能，进而提高网站的用户体验。&lt;/p&gt;&#xA;&lt;h2&gt;产品简介&lt;/h2&gt;&#xA;&lt;p&gt;腾讯云边缘函数（ Edge Functions ）提供了 EdgeOne 边缘节点的 Serverless 代码执行环境，只需编写业务函数代码并设置触发规则，无需配置和管理服务器等基础设施，即可在靠近用户的边缘节点上弹性、安全地运行代码。&lt;/p&gt;&#xA;&lt;p&gt;目前该功能已公测上线，个人版优惠后仅 9.9 元/月，最近一段时间用下来，感觉还是方便的，尤其是处理图片缩放和格式转化的时候，使用免费的边缘函数来实现，香飘四野啊~~&lt;/p&gt;&#xA;&lt;p&gt;套餐信息请查阅&lt;a href=&#34;https://buy.cloud.tencent.com/edgeone&#34; rel=&#34;nofollow&#34;&gt;产品购买地址&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;实现步骤&lt;/h2&gt;&#xA;&lt;p&gt;官方最佳实践示例代码通过判断浏览器类型来设置转化格式，但是判断逻辑过于简单，容易产生误判导致返回不支持的编码格式。本文通过获取请求头中的 &lt;code&gt;Accept&lt;/code&gt; 信息，来识别浏览器支持的图片类型，并使用 &lt;code&gt;fetch API&lt;/code&gt; 获取源站图片，根据浏览器支持的图片编码类型对图片进行格式转换，以实现图片自适应格式的效果。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;接入 EdgeOne ，参见 &lt;a href=&#34;https://cloud.tencent.com/document/product/1552/87601&#34; rel=&#34;nofollow&#34;&gt;从零开始快速接入 EdgeOne&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;启用 &lt;code&gt;站点加速 &amp;gt; 媒体处理 &amp;gt; 图片缩放&lt;/code&gt; 功能，参见 &lt;a href=&#34;https://cloud.tencent.com/document/product/1552/84731&#34; rel=&#34;nofollow&#34;&gt;EdgeOne 图片处理&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;创建 Worker ，并将以下 &lt;code&gt;边缘函数代码&lt;/code&gt; 复制到 &lt;code&gt;代码编辑器&lt;/code&gt; 中，参见 &lt;a href=&#34;https://cloud.tencent.com/document/product/1552/82012&#34; rel=&#34;nofollow&#34;&gt;边缘函数（ EdgeOne Functions ）快速指引&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;设置 Worker 触发规则，匹配类型选择 &lt;code&gt;文件后缀&lt;/code&gt;，运算符选择 &lt;code&gt;等于&lt;/code&gt;，值输入 &lt;code&gt;png&lt;/code&gt;、&lt;code&gt;jpg&lt;/code&gt;、&lt;code&gt;jpeg&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;5.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://www.rehiy.com/usr/uploads/2023/06/3696153194.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;验证函数是否按照预期运行，您可通过在浏览器或 Curl 发起请求测验，查看返回的头信息是否包含&lt;code&gt;Backend-Option&lt;/code&gt;，以及其值是否为&lt;code&gt;{&#34;eo&#34;:{&#34;image&#34;:{&#34;format&#34;:&#34;avif&#34;}}}&lt;/code&gt;或&lt;code&gt;{&#34;eo&#34;:{&#34;image&#34;:{&#34;format&#34;:&#34;webp&#34;}}}&lt;/code&gt;。若包含且值正确，则表示函数已按照预期运行&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;6.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://www.rehiy.com/usr/uploads/2023/06/3041710812.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;另外还支持调整图片尺寸，使用示例 &lt;code&gt;&lt;a href=&#34;https://www.rehiy.com/logo.png?100x100&#34; rel=&#34;nofollow&#34;&gt;https://www.rehiy.com/logo.png?100x100&lt;/a&gt;&lt;/code&gt;，其中 &lt;code&gt;100x100&lt;/code&gt; 代表 &lt;code&gt;长 x 宽&lt;/code&gt;，如果其中一个为 &lt;code&gt;0&lt;/code&gt; 则表示对应的边自适应&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;边缘函数代码&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**&#xA; * 图片转换 for EdgeOne Worker&#xA; * @url https://www.rehiy.com/post/505/&#xA; * @author Rehiy&#xA; */&#xA;&#xA;async function handleEvent(request) {&#xA;    const uObj = new URL(request.url);&#xA;    const resize = uObj.search.match(/(\d+)x(\d+)/);&#xA;    const accept = request.headers.get(&#39;Accept&#39;);&#xA;&#xA;    const option = {&#xA;        eo: {&#xA;            image: {},&#xA;            cacheKey: request.url,&#xA;        }&#xA;    };&#xA;&#xA;    if (resize) {&#xA;        if (resize[1] &amp;gt; 0) {&#xA;            option.eo.image.width = +resize[1];&#xA;        }&#xA;        if (resize[2] &amp;gt; 0) {&#xA;            option.eo.image.height = +resize[2];&#xA;        }&#xA;    }&#xA;&#xA;    for (const format of [&#39;avif&#39;, &#39;webp&#39;, &#39;jp2&#39;, &#39;jxr&#39;, &#39;heif&#39;]) {&#xA;        if (accept.includes(format)) {&#xA;            option.eo.image.format = format;&#xA;            option.eo.cacheKey += &#39;.&#39; + format;&#xA;            break;&#xA;        }&#xA;    }&#xA;&#xA;    const resp = await fetch(request, option);&#xA;    resp.headers.set(&#39;Backend-Option&#39;, JSON.stringify(option));&#xA;    resp.headers.set(&#39;Vary&#39;, &#39;Accept&#39;);&#xA;&#xA;    return resp;&#xA;}&#xA;&#xA;// eo listener&#xA;&#xA;addEventListener(&#39;fetch&#39;, event =&amp;gt; {&#xA;    event.passThroughOnException();&#xA;    event.respondWith(handleEvent(event.request));&#xA;});&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>panisertoller</author>
+      <pubDate>05 Jul 2023 08:43:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于联想电脑以方便“新手”用户而作的恶 - Windows</title>
+      <link>https://www.v2ex.com/t/954335</link>
+      <description>&lt;p&gt;由于原有 Mac 无法满足工作的需求，再加上囊中羞涩，故出了 Mac mini ，换了一台 Windows 的本子。&lt;/p&gt;&#xA;&lt;p&gt;选择过程不多赘述，选了 Thinkbook 16P 这款电脑。目前国产的 Win 本子都是激活后不让退的，本子到手之后激活了 Office ，用淘宝买的 Key 将系统换成了 Win11 专业版（出厂为家庭版）。&lt;/p&gt;&#xA;&lt;p&gt;系统换完之后卸载联想预装的种种软件，只保留了一个人工智障助手（方便切换显示模式）。&lt;/p&gt;&#xA;&lt;p&gt;我以为电脑系统已经算干净的了，不会被国产软件的骚操作劫持，直到前几天我打开一个 psd 文件的时候他询问我打开方式，默认推荐是联想软件商店，但是我已经很确定卸载了这款软件。&#xA;且在系统设置中找不到这款软件的相关信息，无法修改无默认设置的后缀文件打开方式，即为陌生后缀文件打开方式都是联想应用商店。&lt;/p&gt;&#xA;&lt;p&gt;在网上寻找解决方式，看到已经有人在论坛反应这个问题，原贴：&#xA;&lt;a href=&#34;https://mclub.lenovo.com.cn/thread-7831526-1-1.html&#34; rel=&#34;nofollow&#34;&gt;https://mclub.lenovo.com.cn/thread-7831526-1-1.html&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;终于顺利解决问题，下方官方对于此种行为的答复是：首先，非常感谢楼主的分享。 这个打开未知文件关联软件的功能主要是针对新手用户无法打开未知格式文件提供帮助。后续我们也会不断改善该功能&lt;/p&gt;&#xA;&lt;p&gt;对于我这种有那么一点电脑知识的人去解决这个问题还需要去搜一圈，对于很多电脑使用经验匮乏的人是不是只能用他安排好的方式去下载各种他推荐的软件，同时他可以拿着在他安排好方式的软件下载渠道的数据去和软件供应商谈条件。&lt;/p&gt;&#xA;&lt;p&gt;怪我偷懒，没有彻底的重装系统，但是联想啊，能不能当个人啊。&lt;/p&gt;&#xA;</description>
+      <author>c7in7</author>
+      <pubDate>05 Jul 2023 08:42:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>感觉 iPhone 电池健康度有作假吧?停留在 88%好久好久了 - Apple</title>
+      <link>https://www.v2ex.com/t/954334</link>
+      <description>&lt;p&gt;如题,不知道有木有同样的人...&lt;/p&gt;&#xA;</description>
+      <author>kuawo</author>
+      <pubDate>05 Jul 2023 08:39:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>招人开发或购买一套程序化广告 DSP 系统源码 - 酷工作</title>
+      <link>https://www.v2ex.com/t/954333</link>
+      <description>需要一套 DSP 系统源码，用于对接外部 ADX 或 SSP 。&lt;br /&gt;你把系统搭建起来，我登录浏览功能模块。&lt;br /&gt;支付支持 USDT 、BTC ，也可以当面现金交易。&lt;br /&gt;&lt;br /&gt;大概包含以下功能模块：&lt;br /&gt;1 、客户管理模块：广告主管理和代理商管理&lt;br /&gt;2 、投放管理模块：效果投放（广告计划、策略、创意）和素材库（元素库、模板库、素材库）&lt;br /&gt;3 、流量管理：媒体方平台管理和竞价点位管理（流量接入和放量配置）&lt;br /&gt;4 、报表：整体报表、订单报表、策略报表&lt;br /&gt;5 、资产管理：人群包管理&lt;br /&gt;6 、工具：监测预警、转化归因、操作日志&lt;br /&gt;7 、系统管理：用户管理、角色管理、权限管理、菜单配置、日志管理（后台操作日志）&lt;br /&gt;8 、账号：个人中心&lt;br /&gt;&lt;br /&gt;联系方式(Base64):&lt;br /&gt;tg:  VG9tbXlIb3BwZXI=&lt;br /&gt;wx: ODc2NDUxNjAw</description>
+      <author>timogen</author>
+      <pubDate>05 Jul 2023 08:37:44 +0000</pubDate>
+    </item>
+    <item>
       <title>兄弟们，大批量生成 Excel，用什么技术方案？ - 问与答</title>
       <link>https://www.v2ex.com/t/954332</link>
       <description>&lt;p&gt;我每个月，要把上万张网络图片，分别整理进大约 100 个 excel 里面。&lt;/p&gt;&#xA;&lt;p&gt;excel 不支持嵌入网络图片，所以我要一边下载图片，一边生成 excel 。&lt;/p&gt;&#xA;&lt;p&gt;目前是用网页本地运行 exceljs 做的。&lt;/p&gt;&#xA;&lt;p&gt;感觉速度有点慢，每次要 3 个小时左右，才能处理完全部的图片。&lt;/p&gt;&#xA;&lt;p&gt;兄弟们有没有更好的技术方案推荐？&lt;/p&gt;&#xA;</description>
