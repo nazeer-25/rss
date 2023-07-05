@@ -46,6 +46,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "需要大量网络电商客服",
+      "Link": "https://studygolang.com/topics/16462#reply0",
+      "Description": "\u003cp\u003e需要大量网络电商客服\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "go项目容器化，依赖的redis没有写入内容",
       "Link": "https://studygolang.com/topics/16458#reply1",
       "Description": "\u003cp\u003ego 项目容器化，依赖redis，项目的redis怎么配置啊？我的redis host写docker-compose.yaml文件中 redis的名称，也配置了network，定时服务能起来并运行了，结果redis里面没有写入数据？\u003c/p\u003e\n\n\u003cp\u003e这是项目的redis配置\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e[redis]\nhost = 'redis'\nport = 6379\npassword = ''\nnetwork = 'main'\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e下面的是docker-compose.yaml\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eversion: '2.0'\n\nservices:\n  redis:\n    image: 'redis:6'\n    ports:\n      - '6379:6379'\n    networks:\n      - main\n    container_name: miracle-redis\n  goapp:\n    build:\n      context: ./lightning\n      dockerfile: Dockerfile\n    container_name: lightning\n    expose:\n      - \u0026quot;8080\u0026quot;\n    ports:\n      - \u0026quot;8080:8080\u0026quot;\n    environment:\n      TZ: \u0026quot;Asia/Shanghai\u0026quot;\n    volumes:\n      - /root/flyme/lightning:/app\n    depends_on:\n      - redis\n    restart: on-failure\nnetworks:\n  main:\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003eredis 连接客户端代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;github.com/go-redis/redis/v8\u0026quot;\n\tprobing \u0026quot;github.com/prometheus-community/pro-bing\u0026quot;\n\t\u0026quot;lightning/setting\u0026quot;\n\t\u0026quot;regexp\u0026quot;\n\t\u0026quot;strconv\u0026quot;\n)\n\nvar RedisClient = redis.NewClient(\u0026amp;redis.Options{\n\tAddr:     setting.Config.Redis.Host + \u0026quot;:\u0026quot; + strconv.Itoa(setting.Config.Redis.Port),\n\tPassword: setting.Config.Redis.Password,\n\tDB:       8,\n\tNetwork:  setting.Config.Redis.Network,\n})\n\nvar RedisStorageClient = redis.NewClient(\u0026amp;redis.Options{\n\tAddr:     setting.Config.Redis.Host + \u0026quot;:\u0026quot; + strconv.Itoa(setting.Config.Redis.Port),\n\tPassword: setting.Config.Redis.Password,\n\tDB:       3,\n\tNetwork:  setting.Config.Redis.Network,\n})\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e找了好久没找到问题，我的Python项目中，redis host配置直接使用\u003ccode\u003eredis\u003c/code\u003e就可以了，也不用配置network，求指导\u003c/p\u003e\n",
