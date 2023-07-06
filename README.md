@@ -34,7 +34,6 @@ Report Issue: https://github.com/chyroc/grss/issues
 | TO-D 杂志 - 首页 | [JSON](./json/latest/todtod/index.json) | [RSS](./xml/todtod/index.xml) | [HTML](./html/todtod/index/index.html) |
 | 开发者头条 - 首页 | [JSON](./json/latest/toutiaoio/index.json) | [RSS](./xml/toutiaoio/index.xml) | [HTML](./html/toutiaoio/index/index.html) |
 | Trends.vc | [JSON](./json/latest/trends_vc/archive.json) | [RSS](./xml/trends_vc/archive.xml) | [HTML](./html/trends_vc/archive/index.html) |
-| Twitter - 我是苏畅 Origin Twitter | [JSON](./json/latest/twitter/user/origin/woshisuchang.json) | [RSS](./xml/twitter/user/origin/woshisuchang.xml) | [HTML](./html/twitter/user/origin/woshisuchang/index.html) |
 | V2EX - 全部主题 | [JSON](./json/latest/v2ex/latest.json) | [RSS](./xml/v2ex/latest.xml) | [HTML](./html/v2ex/latest/index.html) |
 | 人人都是产品经理 - 最新文章 | [JSON](./json/latest/woshipm/latest.json) | [RSS](./xml/woshipm/latest.xml) | [HTML](./html/woshipm/latest/index.html) |
 | 雪球 - 7X24快讯 | [JSON](./json/latest/xueqiu/livenews.json) | [RSS](./xml/xueqiu/livenews.xml) | [HTML](./html/xueqiu/livenews/index.html) |
