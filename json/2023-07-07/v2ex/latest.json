@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "最近在尝试用 seata，发现文档非常不详细，折腾了一天才搞好一个简单的案例，真的是一步一个坑，这不会又是一个 KPI 项目吧 - 程序员",
+      "Link": "https://www.v2ex.com/t/954950",
+      "Description": "\u003cp\u003e部署服务端还好，相对来讲还算成功。但是客户端问题就大了，我是在 spring cloud 中集成 seata ，seata 版本采用最新的 1.6.1 ，过程中真的不是这里有问题就是那里有问题，github 倒是有个 seata-samples 项目，但其中的 springcloud-nacos-seata 项目示例还是去年的，里面的 seata 版本竟然还用的 1.4.2 。官网更是直接没有告诉你该怎么在 spring cloud 中集成。\u003c/p\u003e\n\u003cp\u003e给我的感觉像是一个存粹的 KPI 项目\u003c/p\u003e\n",
+      "Author": "itechnology",
+      "PubDate": "2023-07-07T09:54:06Z"
+    },
+    {
       "Title": "这段代码,事务还执行吗? - 程序员",
       "Link": "https://www.v2ex.com/t/954946",
       "Description": "\u003cp\u003e各位大佬们,小白请教一下,这段代码还会执行事务吗?用的 MybatisPlus,缩略代码如下\u003c/p\u003e\n\u003cp\u003e@\u003ca href=\"/member/Repository\"\u003eRepository\u003c/a\u003e\npublic class xxxRepository extends ServiceImpl\u003cxxxmapper, xxxdo=\"\"\u003e {\u003c/xxxmapper,\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e@Resource\nprivate TransactionTemplate transactionTemplate;\n\npublic boolean saveOrUpdate(xxxx) {\n    List\u0026lt;xxxDO\u0026gt; insertList = new ArrayList\u0026lt;\u0026gt;();\n    List\u0026lt;xxxDO\u0026gt; updateList = new ArrayList\u0026lt;\u0026gt;();\n    transactionTemplate.execute((status) -\u0026gt; {\n        this.saveBatch(insertList);\n        this.updateBatchById(updateList);\n        return Boolean.TRUE;\n    });\n    return Boolean.TRUE;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e}\u003cbr/\u003e\n这段代码中 saveBatch 和 updateBatchById 是 mybatisplus 的方法,用的 @Transactional(rollbackFor = Exception.class)注解修饰,在继承的情况下,@Transactional 拥有事务的能力是因为 spring aop 生成代理了对象，这种方法直接调用了 this 对象的方法不会生成事务\n但是,在此之外我还用了编程式事务包住了他们,这个编程式事务会生效吗?\n麻烦各位大佬了\u003c/p\u003e\n",
