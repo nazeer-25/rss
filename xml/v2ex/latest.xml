@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>如何将某些特殊 app 的密码保存到 iOS 钥匙串中？ - iOS</title>
+      <link>https://www.v2ex.com/t/954729</link>
+      <description>主用 iOS 钥匙串、Bitwarden 保存密码信息。&lt;br /&gt;&lt;br /&gt;场景 1&lt;br /&gt;iOS 系统自带「备忘录」设置单独的密码，在指纹/FaceID 无效的情况下使用。&lt;br /&gt;尝试：&lt;br /&gt;&#x9;1 ）钥匙串不能直接识别并添加，无法知道「网站」地址；&lt;br /&gt;    2 ） Bitwarden 虽然可以保存密码，但无法匹配密码项，也无法正常填充。&lt;br /&gt;问题：如何让 iOS 钥匙串自动识别「备忘录」并填充密码？「网站」字段如何填写？&lt;br /&gt;&lt;br /&gt;场景 2&lt;br /&gt;某些银行 app 、滴滴出行、地方政务 app ，密码框不用密码填充组件，或者干脆不允许使用密码管理器，甚至不允许粘贴。&lt;br /&gt;有没有特别的方法方便密码识别、填充？&lt;br /&gt;&lt;br /&gt;场景 3&lt;br /&gt;单 app 多密码。某 app 即有账号登录密码，还有「应用内密码」，如 Bitwarden 。&lt;br /&gt;这类的用 iOS 钥匙串、Bitwarden 如何处理？</description>
+      <author>airbotgo</author>
+      <pubDate>07 Jul 2023 00:15:27 +0000</pubDate>
+    </item>
+    <item>
+      <title>TypeScript 的索引定义和原有字段类型冲突有什么技巧？ - TypeScript</title>
+      <link>https://www.v2ex.com/t/954728</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.typescriptlang.org/play?noPropertyAccessFromIndexSignature=true#code/C4TwDgpgBAQghgJygXigbwFBSgOzgWwgC4oBnYBASxwHMMBfKAMnSygG0BrCEE8q2gF0SAETjAIDDBgAmEAMYAbRNHkB7HOSgAjRCXgIMiiMChwUOxADo8hIyZ0XdCdgHIAHq8HT1m084AmfUQLNFwCYigPTyh6Hw0tZwBmUPDCEmjXWLNSWER7fwCnRAC3T28gA&#34; rel=&#34;nofollow&#34;&gt;PlayGround&lt;/a&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-ts&#34;&gt;type Bar = {&#xA;  name: string&#xA;} &amp;amp; { // A: 这行为什么必需呢？官方文档里也没写清楚&#xA;  [key: string]: Date&#xA;}&#xA;&#xA;declare const bar: Bar&#xA;let a = bar.name // 正确的得到 string&#xA;let b = bar[&#39;x&#39;] // 正确的得到 Date&#xA;&#xA;const bar2: Bar = { name: &#39;xx&#39; } // B: 这里为什么报错？&#xA;&#xA;const bar3 = { name: &#39;xx&#39; } as Bar // C: 难道所有地方都要强制转换？&#xA;let b2 = bar2[&#39;x&#39;]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>makelove</author>
+      <pubDate>07 Jul 2023 00:13:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>Json 解析丢失子类信息 - Java</title>
+      <link>https://www.v2ex.com/t/954727</link>
+      <description>&lt;p&gt;子类们的共同父类：BasePlugin&lt;/p&gt;&#xA;&lt;p&gt;生成 Json ，子类信息都可以很好的输出&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;String json = new Gson().toJson(list);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是，如果从 Json 中解析泛型类，它的子类的信息就获取不到，无法类型强转&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;Type type = new TypeToken&amp;lt;List&amp;lt;BasePlugin&amp;gt;&amp;gt;() {&#xA;}.getType();&#xA;return new Gson().fromJson(json, type);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这个有可能解决吗？&lt;/p&gt;&#xA;</description>
+      <author>nnegier</author>
+      <pubDate>07 Jul 2023 00:12:58 +0000</pubDate>
+    </item>
+    <item>
       <title>Redis 7.2 Issue 分析：流数据读写导致的“死锁”问题 - 程序员</title>
       <link>https://www.v2ex.com/t/954726</link>
       <description>&lt;p&gt;Redis 项目中，一个名为 “[BUG] Deadlock with streams on redis 7.2” 的 issue 12290 吸引了我的注意。这个 bug 中，redis 服务器在处理特定的客户端请求时陷入了死循环，这个现象在 redis 这样的高性能、高可靠性的数据库系统中是极为罕见的。&lt;/p&gt;&#xA;&lt;p&gt;直接从 Github Release 7.2-rc2 下载 Reids 7.2 的源码，然后编译二进制。这里编译指令带上这两个 Flag make REDIS_CFLAGS=&#34;&lt;code&gt;-Og -fno-omit-frame-pointer&lt;/code&gt;&#34;，方便后续分析工具能够拿到堆栈信息。复现步骤很简单，启动 Redis server ，接着运行 &lt;a href=&#34;http://feeder.py&#34; rel=&#34;nofollow&#34;&gt;feeder.py&lt;/a&gt; 和 &lt;a href=&#34;http://subscriber.py&#34; rel=&#34;nofollow&#34;&gt;subscriber.py&lt;/a&gt; 这两个脚本。我们会看到订阅者在处理部分流之后会阻塞住，不再有输出。同时 Redis 进程的 CPU 直接飙到了 100%，新的 redis client 也连不上去服务器了，如下图。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;CPU 占用&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/UusIrVG.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;完整讨论在：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://selfboot.cn/2023/06/14/bug_redis_deadlock_1/&#34; rel=&#34;nofollow&#34;&gt;Redis Issue 分析：流数据读写导致的“死锁”问题(1)&lt;/a&gt;&lt;br/&gt;&#xA;&lt;a href=&#34;https://selfboot.cn/2023/06/16/bug_redis_deadlock_2/&#34; rel=&#34;nofollow&#34;&gt;Redis Issue 分析：流数据读写导致的“死锁”问题(2)&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;第 2 篇其实还有待继续深挖&lt;/p&gt;&#xA;</description>

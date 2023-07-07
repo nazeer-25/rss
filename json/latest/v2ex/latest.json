@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "如何将某些特殊 app 的密码保存到 iOS 钥匙串中？ - iOS",
+      "Link": "https://www.v2ex.com/t/954729",
+      "Description": "主用 iOS 钥匙串、Bitwarden 保存密码信息。\u003cbr /\u003e\u003cbr /\u003e场景 1\u003cbr /\u003eiOS 系统自带「备忘录」设置单独的密码，在指纹/FaceID 无效的情况下使用。\u003cbr /\u003e尝试：\u003cbr /\u003e\t1 ）钥匙串不能直接识别并添加，无法知道「网站」地址；\u003cbr /\u003e    2 ） Bitwarden 虽然可以保存密码，但无法匹配密码项，也无法正常填充。\u003cbr /\u003e问题：如何让 iOS 钥匙串自动识别「备忘录」并填充密码？「网站」字段如何填写？\u003cbr /\u003e\u003cbr /\u003e场景 2\u003cbr /\u003e某些银行 app 、滴滴出行、地方政务 app ，密码框不用密码填充组件，或者干脆不允许使用密码管理器，甚至不允许粘贴。\u003cbr /\u003e有没有特别的方法方便密码识别、填充？\u003cbr /\u003e\u003cbr /\u003e场景 3\u003cbr /\u003e单 app 多密码。某 app 即有账号登录密码，还有「应用内密码」，如 Bitwarden 。\u003cbr /\u003e这类的用 iOS 钥匙串、Bitwarden 如何处理？",
+      "Author": "airbotgo",
+      "PubDate": "2023-07-07T00:15:27Z"
+    },
+    {
+      "Title": "TypeScript 的索引定义和原有字段类型冲突有什么技巧？ - TypeScript",
+      "Link": "https://www.v2ex.com/t/954728",
+      "Description": "\u003cp\u003e\u003ca href=\"https://www.typescriptlang.org/play?noPropertyAccessFromIndexSignature=true#code/C4TwDgpgBAQghgJygXigbwFBSgOzgWwgC4oBnYBASxwHMMBfKAMnSygG0BrCEE8q2gF0SAETjAIDDBgAmEAMYAbRNHkB7HOSgAjRCXgIMiiMChwUOxADo8hIyZ0XdCdgHIAHq8HT1m084AmfUQLNFwCYigPTyh6Hw0tZwBmUPDCEmjXWLNSWER7fwCnRAC3T28gA\" rel=\"nofollow\"\u003ePlayGround\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-ts\"\u003etype Bar = {\n  name: string\n} \u0026amp; { // A: 这行为什么必需呢？官方文档里也没写清楚\n  [key: string]: Date\n}\n\ndeclare const bar: Bar\nlet a = bar.name // 正确的得到 string\nlet b = bar['x'] // 正确的得到 Date\n\nconst bar2: Bar = { name: 'xx' } // B: 这里为什么报错？\n\nconst bar3 = { name: 'xx' } as Bar // C: 难道所有地方都要强制转换？\nlet b2 = bar2['x']\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "makelove",
+      "PubDate": "2023-07-07T00:13:41Z"
+    },
+    {
+      "Title": "Json 解析丢失子类信息 - Java",
+      "Link": "https://www.v2ex.com/t/954727",
+      "Description": "\u003cp\u003e子类们的共同父类：BasePlugin\u003c/p\u003e\n\u003cp\u003e生成 Json ，子类信息都可以很好的输出\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eString json = new Gson().toJson(list);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是，如果从 Json 中解析泛型类，它的子类的信息就获取不到，无法类型强转\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eType type = new TypeToken\u0026lt;List\u0026lt;BasePlugin\u0026gt;\u0026gt;() {\n}.getType();\nreturn new Gson().fromJson(json, type);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这个有可能解决吗？\u003c/p\u003e\n",
+      "Author": "nnegier",
+      "PubDate": "2023-07-07T00:12:58Z"
+    },
+    {
       "Title": "Redis 7.2 Issue 分析：流数据读写导致的“死锁”问题 - 程序员",
       "Link": "https://www.v2ex.com/t/954726",
       "Description": "\u003cp\u003eRedis 项目中，一个名为 “[BUG] Deadlock with streams on redis 7.2” 的 issue 12290 吸引了我的注意。这个 bug 中，redis 服务器在处理特定的客户端请求时陷入了死循环，这个现象在 redis 这样的高性能、高可靠性的数据库系统中是极为罕见的。\u003c/p\u003e\n\u003cp\u003e直接从 Github Release 7.2-rc2 下载 Reids 7.2 的源码，然后编译二进制。这里编译指令带上这两个 Flag make REDIS_CFLAGS=\"\u003ccode\u003e-Og -fno-omit-frame-pointer\u003c/code\u003e\"，方便后续分析工具能够拿到堆栈信息。复现步骤很简单，启动 Redis server ，接着运行 \u003ca href=\"http://feeder.py\" rel=\"nofollow\"\u003efeeder.py\u003c/a\u003e 和 \u003ca href=\"http://subscriber.py\" rel=\"nofollow\"\u003esubscriber.py\u003c/a\u003e 这两个脚本。我们会看到订阅者在处理部分流之后会阻塞住，不再有输出。同时 Redis 进程的 CPU 直接飙到了 100%，新的 redis client 也连不上去服务器了，如下图。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"CPU 占用\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/UusIrVG.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e完整讨论在：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://selfboot.cn/2023/06/14/bug_redis_deadlock_1/\" rel=\"nofollow\"\u003eRedis Issue 分析：流数据读写导致的“死锁”问题(1)\u003c/a\u003e\u003cbr/\u003e\n\u003ca href=\"https://selfboot.cn/2023/06/16/bug_redis_deadlock_2/\" rel=\"nofollow\"\u003eRedis Issue 分析：流数据读写导致的“死锁”问题(2)\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e第 2 篇其实还有待继续深挖\u003c/p\u003e\n",
