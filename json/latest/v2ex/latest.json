@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "对 redis 的 zset 做分片的时候怎么选择分片个数 - Redis",
+      "Link": "https://www.v2ex.com/t/955072",
+      "Description": "背景：活动场景，用户可以订阅活动，订阅完会在活动开始前收到开始的通知，目前了解到如果是热门活动订阅人数可能超过百万，但是有些不怎么热门的活动可能只有数百人或者人数是 0 。\u003cbr /\u003e现状：关注人数存在 redis 的 zset 中，每个活动有一个独立的 zset 。发送 push 消息通知的时候，是分页遍历 zset ，逐个发送通知。可能在关注数超百万的时候需要较长的处理时间（比如超过 5 分钟）。\u003cbr /\u003e要求：希望在推送消息时尽可能的快，低延时。\u003cbr /\u003e为了达到这个要求，选择对 zset 做分片，分片的规则是：按订阅用户的 userid 做 hash 取值，取值结果按分片数取模，在分配到相应的 zset 分片上。\u003cbr /\u003e问题：zset 数据除了承担 push 消息通知的数据源之外，还用于查询用户是否订阅该活动的状态查询（这个没啥问题，找到对应的分片，然后查询 zscore 即可）和订阅总数计算的角色。如果我为了某些活动可能超过百万的关注订阅数，而设置 1024 个 zset 分片，是不是意味着绝大多数的活动，为了计算总数都要去做 1024 次 zcount 再将 result 相加才能得到结果？感觉也不是很好的设计。。。。（当然也可以总数单独维护，不通过 zset 分片结果相加获取，就是这样又增加了存储成本）\u003cbr /\u003e大家觉得该怎么做比较合适呢？",
+      "Author": "ben548",
+      "PubDate": "2023-07-08T04:09:50Z"
+    },
+    {
+      "Title": "vue3 项目 bit 和 yarn 混用, yarn 安装导致依赖丢失 - 程序员",
+      "Link": "https://www.v2ex.com/t/955071",
+      "Description": "\u003cp\u003e每次使用 yarn 安装库后都会丢失 bit 安装的依赖, 请问有没有什么好的解决办法呢?\u003c/p\u003e\n\u003cp\u003eIDE: JetBrain IDEA 2022\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://bit.dev/\" rel=\"nofollow\"\u003ehttps://bit.dev/\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://yarnpkg.com\" rel=\"nofollow\"\u003ehttps://yarnpkg.com\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "Ng8023",
+      "PubDate": "2023-07-08T04:07:58Z"
+    },
+    {
       "Title": "记得以前可以买电信的 wifi，按小时计算，现在还有吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/955070",
       "Description": "是不是 cmcc 打头的那些 wifi",
