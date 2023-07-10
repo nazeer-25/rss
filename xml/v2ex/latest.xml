@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>PostgreSQL 如何多列 shard 分片? - PostgreSQL</title>
+      <link>https://www.v2ex.com/t/955631</link>
+      <description>&lt;pre&gt;&lt;code&gt;SELECT &#xA;    distinct(token_address),&#xA;    CONCAT(&#39;0x&#39;, SUBSTRING(token_address::text FROM 3)) as token,&#xA;    sum(amount) as amount&#xA;    FROM (&#xA;    -- 转入&#xA;        SELECT &#xA;        &#34;to&#34; as address,&#xA;        value as amount,&#xA;        tr.contract_address as token_address&#xA;        FROM erc20.&#34;ERC20_evt_Transfer&#34; tr, address&#xA;        WHERE &#34;to&#34; = address&#xA;    -- 转出&#xA;        UNION ALL&#xA;        SELECT &#xA;        &#34;from&#34; as address,&#xA;        -value as amount,&#xA;        tr.contract_address as token_address&#xA;        FROM erc20.&#34;ERC20_evt_Transfer&#34; tr, address&#xA;        WHERE &#34;from&#34; = address&#xA;    ) as t&#xA;    GROUP BY 1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这是一个查询以太坊 erc20 token 转账的记录&lt;/p&gt;&#xA;&lt;p&gt;ERC20_evt_Transfer 这个表如果使用 citus 来 shard &lt;/p&gt;&#xA;&lt;p&gt;按道理来讲, from 和 to 都应该设置为 shard column, 但是这样的话要搞两个 shard table ，就很浪费硬盘空间。&lt;/p&gt;&#xA;&lt;p&gt;ERC20_evt_Transfer 这个表，大约 400g&lt;/p&gt;&#xA;</description>
+      <author>dw2693734d</author>
+      <pubDate>10 Jul 2023 13:48:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>如何对三维模型进行 360 度旋转录屏以便连续播放时稳定无缝衔接？有推荐工具或脚本吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/955630</link>
+      <description>如何对三维模型进行 360 度旋转录屏（ GIF 格式）以便连续播放时稳定无缝衔接？形成一种毫无顿挫衔接感的无穷无尽的效果，目前手工肉眼观察转动总是抖动或者旋转角度不准确导致连续播放时有瑕疵。&lt;br /&gt;有推荐工具或脚本吗？</description>
+      <author>Apol1oBelvedere</author>
+      <pubDate>10 Jul 2023 13:48:21 +0000</pubDate>
+    </item>
+    <item>
       <title>有没有清除没有用的环境变量软件？ - Windows</title>
       <link>https://www.v2ex.com/t/955629</link>
       <author>xxl123456</author>
