@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "想找一个尽量简单能播放 NAS 里歌曲的播放器 - Android",
+      "Link": "https://www.v2ex.com/t/955560",
+      "Description": "\u003cp\u003e对现成设备的儿歌曲库不满意，所以自己下了点儿歌，想让家人通过蓝牙音箱播放。家里的蓝牙音箱除了蓝牙啥都不支持，所以得用手机来放。手机和 NAS 在一个局域网内，歌曲可以通过各种协议分享出来。\u003c/p\u003e\n\u003cp\u003e需求：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e最好能做到打开自动播放。或者一点即播。\u003c/li\u003e\n\u003cli\u003e界面越简单越好。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e对安卓不熟悉，找了几个常见的 App 都不是很满意。烦请大家推荐推荐。\u003c/p\u003e\n",
+      "Author": "mhqschen",
+      "PubDate": "2023-07-10T08:30:59Z"
+    },
+    {
+      "Title": "怎样保持推流内容和数据同步？ - 问与答",
+      "Link": "https://www.v2ex.com/t/955559",
+      "Description": "\u003cp\u003e有个需求，数据来源分别是雷达数据和摄像头视频流数据，摄像头视频流可以使用 webrtc 或者 rtmp 等推流，现在有个问题是没法保证视频流和雷达数据是同一时刻的，\u003cbr/\u003e\n我想到一个解决方案：\n后台使用 ffmpeg 对 rtmp 视频流解析获取每一帧的时间戳，然后在后台代码里根据时间戳找到对应雷达数据的那一帧，这样就对应上了，\u003cbr/\u003e\n\u003cstrong\u003e但是怎样把视频流推送到前端播放呢？\u003c/strong\u003e如果使用 websocket 把每一帧内容发给前端显示倒是可以，但是感觉使用 websocket 来传输并显示图片帧的方式效果不好，请问还有其他好方案吗？\u003c/p\u003e\n",
+      "Author": "pkxutao",
+      "PubDate": "2023-07-10T08:30:50Z"
+    },
+    {
+      "Title": "求问：腾讯文档的企业版的内容如何快速简单的导出到个人版或者下载到电脑 - 问与答",
+      "Link": "https://www.v2ex.com/t/955557",
+      "Description": "\u003cp\u003e目前只能一个一个点击进详情页，然后导出成 word ，太慢了\u003c/p\u003e\n",
+      "Author": "darry7",
+      "PubDate": "2023-07-10T08:23:53Z"
+    },
+    {
       "Title": "对于 go 来说，如何设计一个优雅的链式操作？ - Go 编程语言",
       "Link": "https://www.v2ex.com/t/955556",
       "Description": "\u003cp\u003e假设以最简单的加减乘除举例\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Money struct {\n\tamount int64\n    currency string\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e想要实现\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003emoney.new(123.12, \"USD\").Add(456).Mul(123).toStr()\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e这里面，先初始化成 money ，然后做运算，最后 toStr 成科学计数法的格式。当然，每一步都可以拆开，比如先初始化，然后 add ，得到的 money 最后通过参数传给其他方法运行，在另外的方法里面可以继续计算或者格式化输出。\u003c/p\u003e\n\u003cp\u003e这里，new 可能报错，比如溢出、格式不正确，add 、mul 都有可能溢出。\u003c/p\u003e\n\u003cp\u003e如果是 java 来实现，可以很好的 try catch 包起来，但是放到 go 里面，因为只能通过 return value 来判断，感觉很难设计出都能兼容上面方式的代码。\u003c/p\u003e\n\u003cp\u003e要么就是在 tostr 最后计算的时候判断前面所有报错\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003eif m, err := money.new(123.12, \"USD\"); err != nil {\n\tm := m.Add(456).Mul(123)\n    if val, err := m.toStr(); err != nil {\n    \t...\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e要么就是每一步都判断，错误存入 money 对象中，需要的时候判断\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003em := money.new(123.12, \"USD\")\nif Errors.isError(m) {\n\t... \n}\n\nm := Add(456).Mul(123);\nif Errors.isError(val) {\n\t... \n}\n\nval := m.toStr()\nif Errors.isError(val) {\n\t... \n}\n\nor \n\nval := money.new(123.12, \"USD\").Add(456).Mul(123).toStr()\nif Errors.isError(val) {\n\t... \n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e刚学习 go ，希望能得到大家的一些中肯建议，感谢！\u003c/p\u003e\n",
