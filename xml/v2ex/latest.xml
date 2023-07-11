@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有个关于关于 nginx https 的疑惑，下面贴一个 nginx 配置 - 问与答</title>
+      <link>https://www.v2ex.com/t/955847</link>
+      <description>backserver 是后端服务，访问 &lt;a target=&#34;_blank&#34; href=&#34;https://abc.com.cn/backserver/xxx&#34; rel=&#34;nofollow noopener&#34;&gt;https://abc.com.cn/backserver/xxx&lt;/a&gt; 流量应该会被 ssl 加密吧，可是 proxy_pass 里是 http 协议，到了这里就算是走 http 协议了吗，这样安全吗？大家都是怎么配置的&lt;br /&gt;server {&lt;br /&gt;        listen 80;&lt;br /&gt;        listen 443 ssl;&lt;br /&gt;        server_name  &lt;a target=&#34;_blank&#34; href=&#34;http://abc.com.cn&#34; rel=&#34;nofollow noopener&#34;&gt;abc.com.cn&lt;/a&gt;;&lt;br /&gt;        ssl_certificate  ssl_key/server.pem;&lt;br /&gt;        ssl_certificate_key  ssl_key/server.key;&lt;br /&gt;&lt;br /&gt;         location / {&lt;br /&gt;           return 301 https://$host$request_uri;&lt;br /&gt;        }&lt;br /&gt;        location /backserver {&lt;br /&gt;            proxy_pass http://backserver;&lt;br /&gt;            proxy_set_header Host  $Host;&lt;br /&gt;            proxy_set_header x-forwarded-for $remote_addr;&lt;br /&gt;            proxy_set_header X-Real-IP $remote_addr;&lt;br /&gt;            add_header Cache-Control no-store;&lt;br /&gt;            add_header Pragma  no-cache;&lt;br /&gt;            proxy_http_version 1.1;&lt;br /&gt;            proxy_set_header Connection &#34;&#34;;&lt;br /&gt;            client_max_body_size 1024m;&lt;br /&gt;            proxy_read_timeout 7200s;&lt;br /&gt;            proxy_send_timeout 1800s;&lt;br /&gt;            proxy_connect_timeout 1800s; &lt;br /&gt;        }&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;    upstream backserver {&lt;br /&gt;       sticky;&lt;br /&gt;       server  10.11.0.1:8080;&lt;br /&gt;       server  10.11.0.2:8080;&lt;br /&gt;       server  10.11.0.3:8080;&lt;br /&gt;       server  10.11.0.4:8080;&lt;br /&gt;    }</description>
+      <author>EggplantLover</author>
+      <pubDate>11 Jul 2023 07:17:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>咨询下，移动设备出入境会有什么问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/955846</link>
+      <description>hello ，各位如果携带电脑、u 盘或者移动硬盘会有核查吗，出入境应该避免哪些坑</description>
+      <author>2022study</author>
+      <pubDate>11 Jul 2023 07:14:10 +0000</pubDate>
+    </item>
+    <item>
       <title>你们准备在 Threads 做什么账号创业？ - 问与答</title>
       <link>https://www.v2ex.com/t/955845</link>
       <description>100 million users in 5 days&lt;br /&gt;流量已有，用户已有，全新的平台&lt;br /&gt;&lt;br /&gt;你们有做账号的想法了吗？打算做什么账号？认为什么账号能火？&lt;br /&gt;至少网黄应该火不了，fb 的监管印象里要比蓝鸟狠得多</description>

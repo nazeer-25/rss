@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有个关于关于 nginx https 的疑惑，下面贴一个 nginx 配置 - 问与答",
+      "Link": "https://www.v2ex.com/t/955847",
+      "Description": "backserver 是后端服务，访问 \u003ca target=\"_blank\" href=\"https://abc.com.cn/backserver/xxx\" rel=\"nofollow noopener\"\u003ehttps://abc.com.cn/backserver/xxx\u003c/a\u003e 流量应该会被 ssl 加密吧，可是 proxy_pass 里是 http 协议，到了这里就算是走 http 协议了吗，这样安全吗？大家都是怎么配置的\u003cbr /\u003eserver {\u003cbr /\u003e        listen 80;\u003cbr /\u003e        listen 443 ssl;\u003cbr /\u003e        server_name  \u003ca target=\"_blank\" href=\"http://abc.com.cn\" rel=\"nofollow noopener\"\u003eabc.com.cn\u003c/a\u003e;\u003cbr /\u003e        ssl_certificate  ssl_key/server.pem;\u003cbr /\u003e        ssl_certificate_key  ssl_key/server.key;\u003cbr /\u003e\u003cbr /\u003e         location / {\u003cbr /\u003e           return 301 https://$host$request_uri;\u003cbr /\u003e        }\u003cbr /\u003e        location /backserver {\u003cbr /\u003e            proxy_pass http://backserver;\u003cbr /\u003e            proxy_set_header Host  $Host;\u003cbr /\u003e            proxy_set_header x-forwarded-for $remote_addr;\u003cbr /\u003e            proxy_set_header X-Real-IP $remote_addr;\u003cbr /\u003e            add_header Cache-Control no-store;\u003cbr /\u003e            add_header Pragma  no-cache;\u003cbr /\u003e            proxy_http_version 1.1;\u003cbr /\u003e            proxy_set_header Connection \"\";\u003cbr /\u003e            client_max_body_size 1024m;\u003cbr /\u003e            proxy_read_timeout 7200s;\u003cbr /\u003e            proxy_send_timeout 1800s;\u003cbr /\u003e            proxy_connect_timeout 1800s; \u003cbr /\u003e        }\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003e    upstream backserver {\u003cbr /\u003e       sticky;\u003cbr /\u003e       server  10.11.0.1:8080;\u003cbr /\u003e       server  10.11.0.2:8080;\u003cbr /\u003e       server  10.11.0.3:8080;\u003cbr /\u003e       server  10.11.0.4:8080;\u003cbr /\u003e    }",
+      "Author": "EggplantLover",
+      "PubDate": "2023-07-11T07:17:15Z"
+    },
+    {
+      "Title": "咨询下，移动设备出入境会有什么问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/955846",
+      "Description": "hello ，各位如果携带电脑、u 盘或者移动硬盘会有核查吗，出入境应该避免哪些坑",
+      "Author": "2022study",
+      "PubDate": "2023-07-11T07:14:10Z"
+    },
+    {
       "Title": "你们准备在 Threads 做什么账号创业？ - 问与答",
       "Link": "https://www.v2ex.com/t/955845",
       "Description": "100 million users in 5 days\u003cbr /\u003e流量已有，用户已有，全新的平台\u003cbr /\u003e\u003cbr /\u003e你们有做账号的想法了吗？打算做什么账号？认为什么账号能火？\u003cbr /\u003e至少网黄应该火不了，fb 的监管印象里要比蓝鸟狠得多",
