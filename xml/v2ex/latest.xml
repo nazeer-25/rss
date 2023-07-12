@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>青岛酒店价这么高 - 问与答</title>
+      <link>https://www.v2ex.com/t/956159</link>
+      <description>&lt;p&gt;暑假了，公司恰巧开了个青岛的团，直接报名，才发现青岛酒店这么高，暑假这么长，为什么推的这么高呢&lt;/p&gt;&#xA;</description>
+      <author>namgking</author>
+      <pubDate>12 Jul 2023 06:37:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>造了个小工具 KCPTube，用于转发 UDP 及 TCP，适合偏爱使用 KCP 的用户，尤其是 Windows 与 FreeBSD 用户 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/956158</link>
+      <description>&lt;p&gt;去年年底我做了个 UDPHop ，用途是端口跳跃躲避运营商 QoS 。其实这个 UDPHop 是从 KCPTube 裁剪而成的，目的之一是测试一下端口跳跃的效果好不好。从目前的情况来看，有用，只要当地运营商的限制不是特别严重（什么叫做特别严重，比如：UDP 流量升高就 QoS 一刀切，全部端口号都受影响）。&lt;/p&gt;&#xA;&lt;p&gt;经过半年多的时间，KCPTube 也做得差不多了，基本可以稳定使用：&#xA;&lt;a href=&#34;https://github.com/cnbatch/kcptube&#34; rel=&#34;nofollow&#34;&gt;https://github.com/cnbatch/kcptube&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1&gt;特点&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;无条件端口跳跃（服务器单端口模式时客户端照样更换发送端口）&lt;/li&gt;&#xA;&lt;li&gt;服务器端能够同时监听大范围端口，无须防火墙辅助转发&lt;/li&gt;&#xA;&lt;li&gt;可以用 KCP 转发 UDP ，适合游戏玩家（我之所以做这个工具，主要就是因为 kcptun 不支持转发 UDP ）&lt;/li&gt;&#xA;&lt;li&gt;小流量的情况下，转发数据所增加的延迟很低&lt;/li&gt;&#xA;&lt;li&gt;自带中继模式，想要做成「 KCPTube 客户端↔KCPTube 中继↔KCPTube 服务端」这种链路的话，单独写个配置文件就行&lt;/li&gt;&#xA;&lt;li&gt;有个专门的选项压榨 KCP 转发能力&lt;/li&gt;&#xA;&lt;li&gt;支持 AES-OCB （ GCM 也能用）&lt;/li&gt;&#xA;&lt;li&gt;自带 STUN 打洞功能（这样就不需要反向模式啦）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;同其它 UDP 转发软件相比较&lt;/h1&gt;&#xA;&lt;p&gt;我知道一定会有人问的（上次 UDPHop 就有人问过），所以不如提前写出来。&lt;/p&gt;&#xA;&lt;h2&gt;kcptun&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;kcptun 支持数据压缩，KCPTube 不支持（我觉得没必要压缩）&lt;/li&gt;&#xA;&lt;li&gt;kcptun 可以自己设置各种缓冲区大小，KCPTube 不打算这样做（获得的改善不明显）&lt;/li&gt;&#xA;&lt;li&gt;kcptun 可以提供各种 Log 的写入方式，KCPTube 能提供的运行信息非常少（懒得做）&lt;/li&gt;&#xA;&lt;li&gt;kcptun 的 mux 功能很完善，KCPTube 相比之下实在是简单粗暴&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;Hysteria&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Hysteria 支持 socks5 与 HTTP 代理协议，KCPTube 不提供此功能（也不打算提供，毕竟套一个 shadowsocks 就行了）&lt;/li&gt;&#xA;&lt;li&gt;Hysteria 支持 Linux 透明代理，KCPTube 不提供此功能&lt;/li&gt;&#xA;&lt;li&gt;Hysteria 支持 TUN / TAP 模式，KCPTube 不提供此功能（套个 VPN 程序就行了）&lt;/li&gt;&#xA;&lt;li&gt;Hysteria 同样提供了丰富的 Log 级别，KCPTube 相比之下几乎不输出运行信息&lt;/li&gt;&#xA;&lt;li&gt;Hysteria 吞吐量上限远比 KCP 高，所以 KCPTube 的吞吐量再高都比不上 Hysteria ，喜欢跑满千兆带宽的用户请继续用 Hysteria 。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;以上两者都支持“TCP 伪装”模式，KCPTube 不打算这样做。原因之一，就是 Windows 使用 TCP 伪装需要管理员权限，而我不想这么麻烦。于是才有了无条件端口跳跃。&lt;/p&gt;&#xA;&lt;p&gt;以上两者都支持苹果设备，理论上 KCPTube 也可以支持，只不过我没苹果设备，不知道如何编译，更无法测试实际效果。&lt;/p&gt;&#xA;&lt;p&gt;以上两者都提供了 x86-32 二进制可执行文件，理论上 KCPTube 也可以提供，只不过我觉得毫无必要。&lt;/p&gt;&#xA;&lt;p&gt;如果用着 Hysteria 已经用得好好的，能满足需求，请继续使用 Hysteria ，不必再问我“与 Hysteria 相比有什么好处”。&#xA;因为 Hysteria 并不使用 KCP ，而且提供的功能很不一样，我不知道如何继续回应相关提问。&lt;/p&gt;&#xA;&lt;h1&gt;其它补充&lt;/h1&gt;&#xA;&lt;p&gt;待转发的 UDP 流量太大了怎么办？很简单，过量的数据包一律丢弃。毕竟这是 UDP 。无脑照单全收只会造成 OOM 。&lt;/p&gt;&#xA;&lt;p&gt;Linux 用户可能需要手动增大 fd limit ，要不然端口监听范围太大时会出错。&lt;/p&gt;&#xA;&lt;p&gt;我个人不喜欢写 json ，也不喜欢写 xml ，更不喜欢写一大堆参数，所以使用了 OpenVPN 和 WireGuard 的方式，用 conf 配置文件。（虽然这两个 VPN 都支持一大堆参数）&lt;/p&gt;&#xA;&lt;p&gt;对了，我还做了个外观简陋的配置生成器：&#xA;&lt;a href=&#34;https://github.com/cnbatch/KCPTubeGenerator&#34; rel=&#34;nofollow&#34;&gt;https://github.com/cnbatch/KCPTubeGenerator&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;可能会有人问有没有一键脚本，答案：无。&lt;/p&gt;&#xA;&lt;p&gt;不过呢，我有提供 FreeBSD 可用的启动配置，适合 FreeBSD 及衍生系统（包括 pfsense opensense GhostBSD ）。Windows 就更简单了，按住配置文件拖到 exe 图标就能运行，不需要一键脚本。&lt;/p&gt;&#xA;</description>
+      <author>cnbatch</author>
+      <pubDate>12 Jul 2023 06:35:50 +0000</pubDate>
+    </item>
+    <item>
       <title>深圳游泳场所求推荐 - 深圳</title>
       <link>https://www.v2ex.com/t/956157</link>
       <description>&lt;p&gt;哪个地方的游泳馆人能稍微少一些？&lt;/p&gt;&#xA;&lt;p&gt;我坐标宝安，宝体人太多了。&lt;/p&gt;&#xA;&lt;p&gt;求附近的靠谱的游泳馆。&lt;/p&gt;&#xA;</description>
