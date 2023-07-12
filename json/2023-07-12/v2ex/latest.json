@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "安卓手机运行 Python 脚本，实现手机操作自动化 - Python",
+      "Link": "https://www.v2ex.com/t/956266",
+      "Description": "\u003cp\u003e我看这个节点下正好有一个 python 操作安卓的帖子：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://www.v2ex.com/t/956097\" rel=\"nofollow\"\u003ehttps://www.v2ex.com/t/956097\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e那我也分享下使用 python 控制安卓手机的操作，我这个方法无需电脑，只需要一部安卓手机即可操作。\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e这篇文章主要介绍如何\u003cstrong\u003e在安卓手机上运行 python 代码\u003c/strong\u003e从而\u003cstrong\u003e控制安卓手机进行模拟操作\u003c/strong\u003e的方法。仅适用于安卓 11 及以上系统。\u003c/p\u003e\n\u003ch1\u003e文章由来：\u003c/h1\u003e\n\u003cp\u003e文章的由来起源于我一个想法：我手上有一块闲置的 esp8266 单片机，想要用它来做一个\u003cstrong\u003e手机小说翻页器\u003c/strong\u003e，但是难点在于如何在手机上接收信号并模拟操作，而且 python 代码并不支持安卓系统运行。经过我的一番努力，找到了两种方式，并成功制作小说翻页器，一种方式就是本文中使用 python 控制手机，另一种是使用 auto.js 软件控制。\u003c/p\u003e\n\u003cp\u003e给大家看看我最终制作好的手机翻页器成品效果：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://www.lingchenbox.xyz/video/xiaoshuofanyeqi.mp4\" rel=\"nofollow\"\u003ehttps://www.lingchenbox.xyz/video/xiaoshuofanyeqi.mp4\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e不过今天分享的仅仅是制作这个小工具的一环——\u003cstrong\u003e如何实现使用 python 模拟手机操作\u003c/strong\u003e。\u003c/p\u003e\n\u003cp\u003e如果大家对这个手机小说翻页小工具的制作过程感兴趣的话，可以给我留言，感兴趣的人多的话，我写篇文章或者录个视频来分享这个工具的完整制作过程。\u003c/p\u003e\n\u003cp\u003e言归正传，接下来我们介绍\u003cstrong\u003e使用 python 模拟手机操作\u003c/strong\u003e的方法：此方法不是网上有些人说的用数据线连接电脑，然后再在电脑上运行 python 控制手机，而是\u003cstrong\u003e仅需一部安卓手机，在安卓手机上运行 python ，从而控制手机\u003c/strong\u003e。\u003c/p\u003e\n\u003ch1\u003e具体做法：\u003c/h1\u003e\n\u003ch2\u003e你可以直接看视频：\u003c/h2\u003e\n\u003cp\u003e如何用 python 控制手机？  \u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://www.lingchenbox.xyz/video/PyControlMobile.mp4\" rel=\"nofollow\"\u003ehttps://www.lingchenbox.xyz/video/PyControlMobile.mp4\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e需要的工具：\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003etermux （安卓软件，自行搜索下载）\u003c/li\u003e\n\u003cli\u003eshizuku （安卓软件，自行下载）\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e实现原理：\u003c/h2\u003e\n\u003cp\u003eshizuku 这个软件的作用是不用手机连接电脑也能在手机上使用 adb 命令。\u003c/p\u003e\n\u003cp\u003etermux 是一个模拟 linux 的软件，使用它可以运行 linux 命令。\u003c/p\u003e\n\u003cp\u003e使用 shizuku 赋予 termux 运行 adb 命令的权限，这一步需要按照 shizuku 的官方教程引导做，比较复杂，我这里省略。\u003c/p\u003e\n\u003cp\u003e然后在 termux 中运行 adb 命令来实现控制手机的效果。\u003c/p\u003e\n\u003ch2\u003e简单模拟手机操作例子：\u003c/h2\u003e\n\u003cp\u003e\u003cstrong\u003e运行单条命令\u003c/strong\u003e：\u003c/p\u003e\n\u003cp\u003e在 termux 中安装好 python 后，比如在 python 中输入以下代码可以实现按下音量+的效果。\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003eos.system(\"sh rish -c 'input keyevent 24'\")\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e其中\u003ccode\u003esh rish -c\u003c/code\u003e作用是使用 termux 启动一个拥有输入 adb 命令权限的终端窗口，-c 的作用是将后续的代码作为命令输入；\u003ccode\u003einput keyevent 24\u003c/code\u003e是 adb 命令，模拟按下音量＋键。你也可以查询一些其它的 adb 命令比如\"截屏\"，\"点击手机上某个坐标\"等。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e运行多条命令方法 1\u003c/strong\u003e：\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003eos.system(\"sh rish -c 'input keyevent 24 \u0026amp;\u0026amp; input keyevent 24'\"\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e上述命令的效果是按下两次音量+键。\u0026amp;\u0026amp;符号的作用是运行完上面一条命令之后再运行后面的命令，和 windows 的 cmd 中的用法一样。\u003c/p\u003e\n\u003cp\u003e\u003cem\u003e演示\u003c/em\u003e：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://www.lingchenbox.xyz/video/python_adb.mp4\" rel=\"nofollow\"\u003ehttps://www.lingchenbox.xyz/video/python_adb.mp4\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003e运行多条命令方法 2\u003c/strong\u003e：\u003c/p\u003e\n\u003cp\u003e这种方法就是在 python 脚本中编写代码来实现，详细请参照本文第一个视频 5min 之后的部分。\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e欢迎大家分享大家知道的可以在安卓上使用 python 进行自动化操作的方法~\u003c/p\u003e\n\u003cp\u003e拜拜。\u003c/p\u003e\n",
+      "Author": "jiager",
+      "PubDate": "2023-07-12T12:08:48Z"
+    },
+    {
+      "Title": "是整个市场不景气，还是说程序员行业不景气了 - 问与答",
+      "Link": "https://www.v2ex.com/t/956265",
+      "Description": "\u003cp\u003e现在 Java 市场怎么样，白菜价很多吗\u003c/p\u003e\n",
+      "Author": "AlfredNing",
+      "PubDate": "2023-07-12T12:07:01Z"
+    },
+    {
+      "Title": "如何实现系统本身无网络访问权限，仅 docker 可以访问网络？ - 问与答",
+      "Link": "https://www.v2ex.com/t/956264",
+      "Description": "",
+      "Author": "61162833",
+      "PubDate": "2023-07-12T12:04:06Z"
+    },
+    {
       "Title": "R4S 用 5V3A/9V2.22A 的 PD 头，会烧掉吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/956263",
       "Description": "单 5V4A 输出的品牌头真的好难找，没 3C 认证的杂牌头又怕烧掉，毕竟需要长期插着供电的，想找个安全点的充电头。",
