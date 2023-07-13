@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "ZeroTier 组网求教 - 问与答",
+      "Link": "https://www.v2ex.com/t/956597",
+      "Description": "\u003cp\u003e有两个网络。每个网络中分别有一台 PVE lxc 容器加入了 zerotier 网络，两台容器都分别开启了 ip 转发功能\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# sysctl -p /etc/sysctl.conf \nnet.ipv4.ip_forward = 1\nnet.ipv6.conf.all.forwarding = 1\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e网络 A \u003ccode\u003e192.168.100.0/24\u003c/code\u003e, 容器 IP \u003ccode\u003e192.168.100.17\u003c/code\u003e, zerotier 网络 IP \u003ccode\u003e192.168.196.10\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e网络 A 网关 \u003ccode\u003e192.168.100.1\u003c/code\u003e 已配置到 \u003ccode\u003e192.168.88.0/24\u003c/code\u003e 的静态路由表，网关指向 \u003ccode\u003e192.168.100.17\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e网络 B \u003ccode\u003e192.168.88.0/24\u003c/code\u003e, 容器 IP \u003ccode\u003e192.168.88.17\u003c/code\u003e, zerotier 网络 IP \u003ccode\u003e192.168.196.20\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e网络 B 网关 \u003ccode\u003e192.168.88.1\u003c/code\u003e 已配置到 \u003ccode\u003e192.168.100.0/24\u003c/code\u003e 的静态路由表，网关指向 \u003ccode\u003e192.168.88.17\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e现在想在网络 A 中一台没安装 zerotier 的设备访问网络 B 的一个服务，做成类似 tailscale 的 \u003ccode\u003esite-to-site networking\u003c/code\u003e 的效果。目前卡住了，希望有懂的大佬指导一下。\u003c/p\u003e\n\u003cp\u003e现在网络 A 设备可以 ping 通网络 B 的 IP\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e127 % ping 192.168.88.4\nPING 192.168.88.4 (192.168.88.4): 56 data bytes\n64 bytes from 192.168.88.4: icmp_seq=0 ttl=61 time=20.505 ms\n64 bytes from 192.168.88.4: icmp_seq=1 ttl=61 time=20.898 ms\n64 bytes from 192.168.88.4: icmp_seq=2 ttl=61 time=19.442 ms\n64 bytes from 192.168.88.4: icmp_seq=3 ttl=61 time=20.777 ms\n^C\n--- 192.168.88.4 ping statistics ---\n4 packets transmitted, 4 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 19.442/20.405/20.898/0.574 ms\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003etraceroute 也可以看到路径是正确的，\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e130 % traceroute 192.168.88.4\ntraceroute to 192.168.88.4 (192.168.88.4), 64 hops max, 52 byte packets\n 1  router.lan (192.168.100.1)  2.426 ms  1.142 ms  0.999 ms\n 2  192.168.100.17 (192.168.100.17)  2.035 ms  1.504 ms  1.394 ms\n 3  192.168.196.20 (192.168.196.20)  21.345 ms  19.377 ms  19.187 ms\n 4  192.168.88.4 (192.168.88.4)  19.880 ms  19.652 ms  20.723 ms\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是浏览器访问时直接提示 connection reset. 使用 curl 请求时，也提示被 reset\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e% curl http://192.168.88.4          \ncurl: (56) Recv failure: Connection reset by peer\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e有没有大佬知道这个应该怎么解决, 是我缺少配置步骤了吗\u003c/p\u003e\n",
+      "Author": "Jeremial",
+      "PubDate": "2023-07-13T14:29:55Z"
+    },
+    {
+      "Title": "刚才看到有人在讨论 gitee ，不会真有人用 gitee 吧 - 问与答",
+      "Link": "https://www.v2ex.com/t/956596",
+      "Description": "gitee 的关键词审核及其弱智，官方的库都能屏蔽，除了速度快，就没有其它优势了",
+      "Author": "chenjia404",
+      "PubDate": "2023-07-13T14:28:18Z"
+    },
+    {
       "Title": "开源一款我写的 cms - 分享创造",
       "Link": "https://www.v2ex.com/t/956595",
       "Description": "\u003cp\u003e开源一款我写的简单轻量的内容管理系统，后端采用 golang 驱动\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/deep-project/moss\" rel=\"nofollow\"\u003ehttps://github.com/deep-project/moss\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e后台支持 12 种语言包，支持明暗双色切换，数据库支持 mysql 、sqlite 、postgresql\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"后台\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/07/13/pChvC59.jpg\"/\u003e\n\u003cimg alt=\"后台暗色\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/07/13/pChv9UJ.jpg\"/\u003e\n（后台略有调整，以实际为准）\u003c/p\u003e\n\u003chr/\u003e\n\u003ch3\u003e能力一般，水平有限，不喜勿喷！\u003c/h3\u003e\n\u003ch3\u003e喜欢的小伙伴请给个 star\u003c/h3\u003e\n",
