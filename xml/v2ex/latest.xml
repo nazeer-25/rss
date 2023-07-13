@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>24 届请各位大佬指点一下简历 - 职场话题</title>
+      <link>https://www.v2ex.com/t/956601</link>
+      <description>&lt;p&gt;普通一本，211 硕&#xA;半科班选手，研究方向主要是图像识别算法方面，自知找工作困难&#xA;因为项目需要做 java ，打算找工作就这个方向了&lt;/p&gt;&#xA;&lt;p&gt;第三个项目可能需要删了，因为和找的工作不契合&#xA;偏行银行国企吧，私企中厂也能接受，大厂能力有限&lt;/p&gt;&#xA;&lt;p&gt;感谢指点！&#xA;&lt;a href=&#34;https://imgse.com/i/pC4C9UO&#34; rel=&#34;nofollow&#34;&gt;https://imgse.com/i/pC4C9UO&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>Borch</author>
+      <pubDate>13 Jul 2023 14:42:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>[虚心请教]关于邮件追踪的问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/956600</link>
+      <description>发送邮件给收件人，怎样获知对方是否下载了邮件中的附件，是否打开了邮件中的附件呢?&lt;br /&gt;&lt;br /&gt;常规的文件类型，如 word,pdf 等。</description>
+      <author>Koral</author>
+      <pubDate>13 Jul 2023 14:41:30 +0000</pubDate>
+    </item>
+    <item>
       <title>ZeroTier 组网求教 - 问与答</title>
       <link>https://www.v2ex.com/t/956597</link>
       <description>&lt;p&gt;有两个网络。每个网络中分别有一台 PVE lxc 容器加入了 zerotier 网络，两台容器都分别开启了 ip 转发功能&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# sysctl -p /etc/sysctl.conf &#xA;net.ipv4.ip_forward = 1&#xA;net.ipv6.conf.all.forwarding = 1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;网络 A &lt;code&gt;192.168.100.0/24&lt;/code&gt;, 容器 IP &lt;code&gt;192.168.100.17&lt;/code&gt;, zerotier 网络 IP &lt;code&gt;192.168.196.10&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;网络 A 网关 &lt;code&gt;192.168.100.1&lt;/code&gt; 已配置到 &lt;code&gt;192.168.88.0/24&lt;/code&gt; 的静态路由表，网关指向 &lt;code&gt;192.168.100.17&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;网络 B &lt;code&gt;192.168.88.0/24&lt;/code&gt;, 容器 IP &lt;code&gt;192.168.88.17&lt;/code&gt;, zerotier 网络 IP &lt;code&gt;192.168.196.20&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;网络 B 网关 &lt;code&gt;192.168.88.1&lt;/code&gt; 已配置到 &lt;code&gt;192.168.100.0/24&lt;/code&gt; 的静态路由表，网关指向 &lt;code&gt;192.168.88.17&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;现在想在网络 A 中一台没安装 zerotier 的设备访问网络 B 的一个服务，做成类似 tailscale 的 &lt;code&gt;site-to-site networking&lt;/code&gt; 的效果。目前卡住了，希望有懂的大佬指导一下。&lt;/p&gt;&#xA;&lt;p&gt;现在网络 A 设备可以 ping 通网络 B 的 IP&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;127 % ping 192.168.88.4&#xA;PING 192.168.88.4 (192.168.88.4): 56 data bytes&#xA;64 bytes from 192.168.88.4: icmp_seq=0 ttl=61 time=20.505 ms&#xA;64 bytes from 192.168.88.4: icmp_seq=1 ttl=61 time=20.898 ms&#xA;64 bytes from 192.168.88.4: icmp_seq=2 ttl=61 time=19.442 ms&#xA;64 bytes from 192.168.88.4: icmp_seq=3 ttl=61 time=20.777 ms&#xA;^C&#xA;--- 192.168.88.4 ping statistics ---&#xA;4 packets transmitted, 4 packets received, 0.0% packet loss&#xA;round-trip min/avg/max/stddev = 19.442/20.405/20.898/0.574 ms&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;traceroute 也可以看到路径是正确的，&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;130 % traceroute 192.168.88.4&#xA;traceroute to 192.168.88.4 (192.168.88.4), 64 hops max, 52 byte packets&#xA; 1  router.lan (192.168.100.1)  2.426 ms  1.142 ms  0.999 ms&#xA; 2  192.168.100.17 (192.168.100.17)  2.035 ms  1.504 ms  1.394 ms&#xA; 3  192.168.196.20 (192.168.196.20)  21.345 ms  19.377 ms  19.187 ms&#xA; 4  192.168.88.4 (192.168.88.4)  19.880 ms  19.652 ms  20.723 ms&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是浏览器访问时直接提示 connection reset. 使用 curl 请求时，也提示被 reset&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;% curl http://192.168.88.4          &#xA;curl: (56) Recv failure: Connection reset by peer&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;有没有大佬知道这个应该怎么解决, 是我缺少配置步骤了吗&lt;/p&gt;&#xA;</description>
