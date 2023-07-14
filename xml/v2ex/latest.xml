@@ -4,6 +4,26 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>chatgpt 老是在正确答案后说一些废话（比如解释啥的），这可能让我接口的等待时间变长， prompt 怎么改进，可以让他少说废话 - 程序员</title>
+      <link>https://www.v2ex.com/t/956720</link>
+      <description>&lt;p&gt;chatgpt 老是在正确答案后说一些废话（比如解释啥的），这可能让我接口的等待时间变长，prompt 怎么改进，可以让他少说废话。&lt;/p&gt;&#xA;</description>
+      <author>hackingwu</author>
+      <pubDate>14 Jul 2023 04:02:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>docker image 分层的问题 - Linux</title>
+      <link>https://www.v2ex.com/t/956719</link>
+      <description>&lt;p&gt;不知道有人碰到过没有&lt;/p&gt;&#xA;&lt;p&gt;就是 gitlab ci 的时候，会 build docker image ，再 push 到 registry 上，我用的是公有云&#xA;的容器镜像服务，所以希望每次 push 都能做到尽可能小的增量&lt;/p&gt;&#xA;&lt;p&gt;project 是 java springboot 的工程，每次都会生成一个 jar 包，这个 jar 包大概 200m ，如果&#xA;用类似&#xA;&lt;code&gt;COPY xxxx.jar /app&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;这样的 Dockerfile ，每次 jar 这一层就要上传 200m+&lt;/p&gt;&#xA;&lt;p&gt;所以采用了 jar 包分层的技术，用&#xA;&lt;code&gt;$ java -Djarmode=layertools -jar target/xxx.jar extract&lt;/code&gt;&#xA;得到四个目录，&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;Step 7/11 : COPY dependencies/ /app&#xA; ---&amp;gt; 9831e5b6f9ae&#xA;Step 8/11 : COPY spring-boot-loader/ /app&#xA; ---&amp;gt; 82f47422bade&#xA;Step 9/11 : COPY snapshot-dependencies/ /app&#xA; ---&amp;gt; 24658da80ea8&#xA;Step 10/11 : COPY application/ /app&#xA; ---&amp;gt; 6d47ede4decb&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这样每次 ci 的时候，前三个目录基本没有变化，这样生成 docker image 的 layer 是不变的&#xA;，每次 push 只会 push step 10 之后的内容&lt;/p&gt;&#xA;&lt;p&gt;这种方法在本地没有问题  mvn clean package... docker build -t ..., docker push&#xA;...显示只需要 push 最后一个 layer&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;e44c9b0a313a: Pushed&#xA;5732f7831cbe: Layer already exists&#xA;48d1ef8e0017: Layer already exists&#xA;025a15bbce04: Layer already exists&#xA;8460ea9541f4: Layer already exists&#xA;de24004afe49: Layer already exists&#xA;a52fcbff5465: Layer already exists&#xA;767f936afb51: Layer already exists&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后在 gitlab ci 里，显示每次还是要 push 多个 layer&lt;/p&gt;&#xA;&lt;p&gt;看了一下日志，每次 gitlab ci 里 build 的时候，&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;Status: Downloaded newer image for ccr.ccs.tencentyun.com/.../xx:latest&#xA; ---&amp;gt; 08909e73839f&#xA;Step 2/11 : ENV AppName xxx-system&#xA; ---&amp;gt; Running in b66bf82ba02d&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;Step1 的 hash 值是一样的，但是 Step 2 的 hash 值就发生变化了，理论上相同的操作应该产&#xA;生相同的 hash 值&lt;/p&gt;&#xA;</description>
+      <author>guoguobaba</author>
+      <pubDate>14 Jul 2023 04:00:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>大家跟人说话的时候，会看别人眼睛吗 - 程序员</title>
+      <link>https://www.v2ex.com/t/956718</link>
+      <author>jtcc</author>
+      <pubDate>14 Jul 2023 03:57:23 +0000</pubDate>
+    </item>
+    <item>
       <title>在线机翻 srt 字幕工具 - 分享创造</title>
       <link>https://www.v2ex.com/t/956715</link>
       <description>&lt;p&gt;字幕作为观众跨越语言障碍的桥梁，扮演着重要的角色。但是，手动翻译字幕既费时又费力，对于一般用户来说是个挑战。为了解决这个问题，我们推出了一款简单易用的在线机翻 SRT 字幕工具，帮助你快速生成翻译字幕。&lt;/p&gt;&#xA;&lt;p&gt;主要特点：&lt;/p&gt;&#xA;&lt;p&gt;自动翻译：只需上传原始的 SRT 字幕文件，工具会自动将其翻译成中文。告别手动逐句翻译的麻烦，节省宝贵的时间和精力。&lt;/p&gt;&#xA;&lt;p&gt;多语言支持：我们的工具支持多种常见的语言，例如英语、西班牙语、法语、德语和日语等。都支持翻译成中文。&lt;/p&gt;&#xA;&lt;p&gt;时间同步：工具不仅会翻译字幕文本，还会保持字幕的时间同步性。这意味着生成的翻译字幕将与原始字幕完美匹配，无需担心字幕与视频不同步的问题。&lt;/p&gt;&#xA;&lt;p&gt;导出与分享：完成翻译后，你可以将字幕文件导出到电脑上，或直接与团队成员分享。导出的字幕文件与各种视频播放器和编辑软件兼容，方便使用和分享。&lt;/p&gt;&#xA;&lt;p&gt;结语：&#xA;在线机翻 SRT 字幕工具是一个简单实用的工具，让你轻松翻译字幕。无论你是专业字幕翻译人员，还是需要为自己的视频添加字幕，都能从中受益。试试我们的在线工具，让字幕翻译变得简单又高效！&lt;/p&gt;&#xA;&lt;p&gt;访问地址： &lt;a href=&#34;https://srttran.leavesc.com&#34; rel=&#34;nofollow&#34;&gt;https://srttran.leavesc.com&lt;/a&gt;&lt;/p&gt;&#xA;</description>
