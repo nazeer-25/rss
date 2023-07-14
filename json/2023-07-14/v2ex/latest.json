@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "问下 v 友们都用什么工具快捷录制.gif - 问与答",
+      "Link": "https://www.v2ex.com/t/956864",
+      "Description": "\u003cp\u003eRT ，类似于截屏软件的操作，可以框选指定区域进行录屏然后生成 GIF 格式的文件\u003c/p\u003e\n",
+      "Author": "shiquda",
+      "PubDate": "2023-07-14T12:49:23Z"
+    },
+    {
       "Title": "Python 要如何处理直接从直接 bytes 进行百分号编码的 url query? - Python",
       "Link": "https://www.v2ex.com/t/956863",
       "Description": "\u003cp\u003e我现在有一些 url 的 query 是直接从 bytes 进行百分号编码之后拼接成的。\u003c/p\u003e\n\u003cp\u003e但是 python 的 \u003ccode\u003eurllib.parse.parse_qs\u003c/code\u003e 的解析是基于 str 的，默认所有的 query 都是百分比编码的字符串，在解析的时候会先解析为 bytes ，然后 \u003ccode\u003ebytes.decode(encoding=encoding)\u003c/code\u003e 转成字符串。\u003c/p\u003e\n\u003cp\u003e所以用 \u003ccode\u003eparse_qs\u003c/code\u003e 无法解析这些 query string 。\u003c/p\u003e\n\u003cp\u003e标准库里同时提供了 \u003ccode\u003eunquote_to_bytes\u003c/code\u003e，但是并没有对应的 \u003ccode\u003eparse_qs_to_bytes\u003c/code\u003e 来解析整个 query string ，有什么简单地办法来处理这个 query ？\u003c/p\u003e\n\u003cp\u003e如果要自己手动分割 query string 的话感觉相当于要重新实现 \u003ccode\u003eparse_qs\u003c/code\u003e 了\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003efrom urllib.parse import parse_qs, quote, unquote_to_bytes, urlparse\n\n\nraw_bytes = bytes.fromhex('123456789abcdef123456789abcdef123456789a')\n\nurl = f'https://example.com/?q={quote(raw_bytes)}'\nprint(url)\n\nassert unquote_to_bytes(quote(raw_bytes)) == raw_bytes\n\nparsed_q = parse_qs(urlparse(url).query).get(\"q\")[0].encode()\nprint(parsed_q.hex())  # 12345678efbfbdefbfbdefbfbdefbfbd234567efbfbdefbfbdefbfbdefbfbd12345678efbfbd\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca href=\"https://gist.github.com/trim21/b60d3999bea03bcac403380d4b157a02\" rel=\"nofollow\"\u003ehttps://gist.github.com/trim21/b60d3999bea03bcac403380d4b157a02\u003c/a\u003e\u003c/p\u003e\n",
