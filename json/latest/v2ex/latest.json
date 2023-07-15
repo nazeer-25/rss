@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "收 j1900 小主机，搭建 k8s - Kubernetes",
+      "Link": "https://www.v2ex.com/t/956938",
+      "Description": "兄弟们，有吃灰的带价来",
+      "Author": "buxiangqiaodaima",
+      "PubDate": "2023-07-15T02:04:51Z"
+    },
+    {
+      "Title": "OpenWrt 暴露 IPv6 端口的正确姿势是什么？ - OpenWrt",
+      "Link": "https://www.v2ex.com/t/956937",
+      "Description": "\u003cul\u003e\n\u003cli\u003e光猫拨号，光猫关闭防火墙\u003c/li\u003e\n\u003cli\u003eOpenWrt 路由器（ 22.05 或者 23.05 ）默认防火墙如下：\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003econfig defaults\n\toption input 'REJECT'\n\toption output 'ACCEPT'\n\toption forward 'REJECT'\n\toption synflood_protect '1'\n\nconfig zone\n\toption name 'lan'\n\tlist network 'lan'\n\toption input 'ACCEPT'\n\toption output 'ACCEPT'\n\toption forward 'ACCEPT'\n\nconfig zone\n\toption name 'wan'\n\tlist network 'wan'\n\tlist network 'wan6'\n\toption input 'REJECT'\n\toption output 'ACCEPT'\n\toption forward 'REJECT'\n\toption masq '1'\n\toption mtu_fix '1'\n\nconfig forwarding\n\toption src 'lan'\n\toption dest 'wan'\n\nconfig rule\n\toption name 'Allow-DHCP-Renew'\n\toption src 'wan'\n\toption proto 'udp'\n\toption dest_port '68'\n\toption target 'ACCEPT'\n\toption family 'ipv4'\n\nconfig rule\n\toption name 'Allow-Ping'\n\toption src 'wan'\n\toption proto 'icmp'\n\toption icmp_type 'echo-request'\n\toption family 'ipv4'\n\toption target 'ACCEPT'\n\nconfig rule\n\toption name 'Allow-IGMP'\n\toption src 'wan'\n\toption proto 'igmp'\n\toption family 'ipv4'\n\toption target 'ACCEPT'\n\nconfig rule\n\toption name 'Allow-DHCPv6'\n\toption src 'wan'\n\toption proto 'udp'\n\toption dest_port '546'\n\toption family 'ipv6'\n\toption target 'ACCEPT'\n\nconfig rule\n\toption name 'Allow-MLD'\n\toption src 'wan'\n\toption proto 'icmp'\n\toption src_ip 'fe80::/10'\n\tlist icmp_type '130/0'\n\tlist icmp_type '131/0'\n\tlist icmp_type '132/0'\n\tlist icmp_type '143/0'\n\toption family 'ipv6'\n\toption target 'ACCEPT'\n\nconfig rule\n\toption name 'Allow-ICMPv6-Input'\n\toption src 'wan'\n\toption proto 'icmp'\n\tlist icmp_type 'echo-request'\n\tlist icmp_type 'echo-reply'\n\tlist icmp_type 'destination-unreachable'\n\tlist icmp_type 'packet-too-big'\n\tlist icmp_type 'time-exceeded'\n\tlist icmp_type 'bad-header'\n\tlist icmp_type 'unknown-header-type'\n\tlist icmp_type 'router-solicitation'\n\tlist icmp_type 'neighbour-solicitation'\n\tlist icmp_type 'router-advertisement'\n\tlist icmp_type 'neighbour-advertisement'\n\toption limit '1000/sec'\n\toption family 'ipv6'\n\toption target 'ACCEPT'\n\nconfig rule\n\toption name 'Allow-ICMPv6-Forward'\n\toption src 'wan'\n\toption dest '*'\n\toption proto 'icmp'\n\tlist icmp_type 'echo-request'\n\tlist icmp_type 'echo-reply'\n\tlist icmp_type 'destination-unreachable'\n\tlist icmp_type 'packet-too-big'\n\tlist icmp_type 'time-exceeded'\n\tlist icmp_type 'bad-header'\n\tlist icmp_type 'unknown-header-type'\n\toption limit '1000/sec'\n\toption family 'ipv6'\n\toption target 'ACCEPT'\n\nconfig rule\n\toption name 'Allow-IPSec-ESP'\n\toption src 'wan'\n\toption dest 'lan'\n\toption proto 'esp'\n\toption target 'ACCEPT'\n\nconfig rule\n\toption name 'Allow-ISAKMP'\n\toption src 'wan'\n\toption dest 'lan'\n\toption dest_port '500'\n\toption proto 'udp'\n\toption target 'ACCEPT'\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003e自己添加的规则如下：\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003econfig rule\n\toption name 'allow_ssh_1'\n\tlist proto 'tcp'\n\toption src 'wan'\n\toption dest_port '22 222'\n\toption target 'ACCEPT'\n\toption family 'ipv6'\n\nconfig rule\n\toption name 'allow_ssh_2'\n\toption family 'ipv6'\n\tlist proto 'tcp'\n\toption src 'wan'\n\toption dest '*'\n\toption dest_port '22 222'\n\toption target 'ACCEPT'\n\nconfig redirect\n\toption dest 'lan'\n\toption target 'DNAT'\n\toption name 'forward_ssh'\n\toption src 'wan'\n\toption src_dport '222'\n\toption dest_ip '240*:\u0026lt;目标设备\u0026gt;'\n\toption dest_port '22'\n\tlist proto 'tcp'\n\tlist proto 'icmp'\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其中 \u003ccode\u003e240*:\u0026lt;目标设备\u0026gt;\u003c/code\u003e 是想暴露 22 端口的设备，是通过网线直连 OpenWrt 路由器的，自身没有防火墙限制。\u003c/p\u003e\n\u003cp\u003e这样设置后：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eOpenWrt 路由器访问 \u003ccode\u003e240*:\u0026lt;目标设备\u0026gt;\u003c/code\u003e，通\u003c/li\u003e\n\u003cli\u003e远程访问 OpenWrt 路由器自身的 ssh （ 22 端口），通\u003c/li\u003e\n\u003cli\u003e远程访问 OpenWrt 路由器转发的 ssh （ 222 端口），不通\u003c/li\u003e\n\u003cli\u003e远程访问设备的 ssh （ \u003ccode\u003e240*:\u0026lt;目标设备\u0026gt;\u003c/code\u003e 的 22 端口），不通\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e按照我的理解，第 0 和 第 1 点成功的话，第 2 点一定能成功才对\u003c/p\u003e\n",
+      "Author": "0o0O0o0O0o",
+      "PubDate": "2023-07-15T02:03:53Z"
+    },
+    {
+      "Title": "[内推] 小红书内容发布客户端， base 北京/广州 - 酷工作",
+      "Link": "https://www.v2ex.com/t/956936",
+      "Description": "小红书内容发布客户端还有 hc\u003cbr /\u003e\u003cbr /\u003e架构和业务两个方向可选\u003cbr /\u003e\u003cbr /\u003ebese 北京/广州\u003cbr /\u003e\u003cbr /\u003e大小周，早 10 晚 9\u003cbr /\u003e\u003cbr /\u003e其他部门也有 hc\u003cbr /\u003e\u003cbr /\u003e感兴趣微信私聊：Flywith24",
+      "Author": "Flywith24",
+      "PubDate": "2023-07-15T01:57:21Z"
+    },
+    {
+      "Title": "k8s 前景 - Kubernetes",
+      "Link": "https://www.v2ex.com/t/956934",
+      "Description": "\u003cp\u003e楼主是 24 届应届生，本来是学 go 的 意外拿了税友的运维 offer 。\n目前在这里实习一周了，主要就是和 k8s 相关的，现在还在学习的阶段\nmentor 也给我制定了详细的计划，大概就是系统学个一个月 k8s 吧，做一个技术分享\u003c/p\u003e\n\u003cp\u003e我个人对公司和岗位还挺满意的吧，公司不卷，有点像国企，团队氛围还不错，上班吃零食嗑瓜子\nk8s 也算是 go 开发的锦上添花吧\u003c/p\u003e\n\u003cp\u003e但是对于未来的职业发展还是有很大的疑惑，云原生这个赛道看网上评价都挺好，但还是不知道接下来如何发展，想问问前辈们，k8s 这个方向如何，薪资待遇怎么样\n求 v 站的大佬们指教指教后辈\u003c/p\u003e\n\u003cp\u003e垃圾小新拿去维修了，手机编辑的，格式不知道如何\u003c/p\u003e\n",
+      "Author": "robking",
+      "PubDate": "2023-07-15T01:49:55Z"
+    },
+    {
       "Title": "想搞钱，不知道做什么副业 - 问与答",
       "Link": "https://www.v2ex.com/t/956933",
       "Description": "",
