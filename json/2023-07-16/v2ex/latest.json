@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "刚干一年的 Java ,想要提升自己的技术水平,有什么比较好的途径吗,目前想要报个培训机构,下班进行线上的学习,还有什么比较好的提升方法吗,如果报培训机构,有比较好的机构可以推荐吗,拜谢各位大佬了 - 问与答",
+      "Link": "https://www.v2ex.com/t/957179",
+      "Description": "",
+      "Author": "moyuu",
+      "PubDate": "2023-07-16T10:29:04Z"
+    },
+    {
+      "Title": "下面的 Go 代码中，为什么第 17 行的 c.L.Lock() 不会一直等待锁？ - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/957178",
+      "Description": "\u003cp\u003e各位大佬，下面的 Go 代码中，当主 Goroutine 执行到 c.Wait() 的时候，第 28 行的 c.L.Lock() 肯定执行了，那么当执行到第 17 行的 c.L.Lock()，为什么程序不会一直阻塞呢？\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n\t\"time\"\n)\n\n// a goroutine that is waiting for a signal, and a goroutine that is sending signals.\n// Say we have a queue of fixed length 2, and 10 items we want to push onto the queue\nfunc main() {\n\tc := sync.NewCond(\u0026amp;sync.Mutex{})\n\tqueue := make([]interface{}, 0, 10)\n\n\tremoveFromQueue := func(delay time.Duration) {\n\t\ttime.Sleep(delay)\n\t\tc.L.Lock() // 这是第 17 行，执行到这里为什么不是一直阻塞等待锁？\n\n\t\tqueue = queue[1:]\n\n\t\tfmt.Println(\"Removed from queue\")\n\n\t\tc.L.Unlock()\n\t\tc.Signal() // let a goroutine waiting on the condition know that something has ocurred\n\t}\n\n\tfor i := 0; i \u0026lt; 10; i++ {\n\t\tc.L.Lock() // 这是 28 行，critical section\n\n\t\t// When the queue is equal to two the main goroutine is suspend\n\t\t// until a signal on the condition has been sent\n\t\tlength := len(queue)\n\t\tfmt.Println(length)\n\t\tfor len(queue) == 2 {\n\t\t\tfmt.Println(\"wait signal\")\n\t\t\tc.Wait() // 这是 36 行，等待 signal ，但是 removeFromQueue 为什么不会一直等待锁呢？\n\t\t}\n\n\t\tfmt.Println(\"Adding to queue\")\n\t\tqueue = append(queue, struct{}{})\n\n\t\tgo removeFromQueue(10 * time.Second)\n\n\t\tc.L.Unlock()\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "CarrieBauch",
+      "PubDate": "2023-07-16T10:28:01Z"
+    },
+    {
+      "Title": "手机是否存在全天候监听？在这件事发生之前，我是存疑的，但是现在我信了。 - 科技",
+      "Link": "https://www.v2ex.com/t/957177",
+      "Description": "\u003cp\u003e刚才我打开手机上的音乐，打算听一听每日推荐，结果推荐的第一首就是李荣浩的乌梅子酱，\n而我只是中午的时候用口哨简单的吹了几句乌梅子酱的副歌，仅此而已，\n手机上没有任何李荣浩的歌曲，甚至没有任何一首歌，\n近期没有听他的歌，也没有浏览过李荣浩相关的新闻，\n总而言之就是，我想象不到与这首歌任何的关联。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgur.com/a/PvWNtU4\" rel=\"nofollow\"\u003ehttps://imgur.com/a/PvWNtU4\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eMIUI14 ，给了录音权限的只有这几个 APP ，其余的都是询问。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://imgur.com/TrycSE7\" rel=\"nofollow\"\u003ehttps://imgur.com/TrycSE7\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "Jakarta",
+      "PubDate": "2023-07-16T10:22:55Z"
+    },
+    {
       "Title": "有了解新生儿落户海外的操作方式？ - 移民",
       "Link": "https://www.v2ex.com/t/957176",
       "Description": "正在备孕，夫妻都是国内身份，预计明年生，想搞个港澳台身份，容易吗？",

@@ -4,6 +4,26 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>刚干一年的 Java ,想要提升自己的技术水平,有什么比较好的途径吗,目前想要报个培训机构,下班进行线上的学习,还有什么比较好的提升方法吗,如果报培训机构,有比较好的机构可以推荐吗,拜谢各位大佬了 - 问与答</title>
+      <link>https://www.v2ex.com/t/957179</link>
+      <author>moyuu</author>
+      <pubDate>16 Jul 2023 10:29:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>下面的 Go 代码中，为什么第 17 行的 c.L.Lock() 不会一直等待锁？ - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/957178</link>
+      <description>&lt;p&gt;各位大佬，下面的 Go 代码中，当主 Goroutine 执行到 c.Wait() 的时候，第 28 行的 c.L.Lock() 肯定执行了，那么当执行到第 17 行的 c.L.Lock()，为什么程序不会一直阻塞呢？&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;fmt&#34;&#xA;&#x9;&#34;sync&#34;&#xA;&#x9;&#34;time&#34;&#xA;)&#xA;&#xA;// a goroutine that is waiting for a signal, and a goroutine that is sending signals.&#xA;// Say we have a queue of fixed length 2, and 10 items we want to push onto the queue&#xA;func main() {&#xA;&#x9;c := sync.NewCond(&amp;amp;sync.Mutex{})&#xA;&#x9;queue := make([]interface{}, 0, 10)&#xA;&#xA;&#x9;removeFromQueue := func(delay time.Duration) {&#xA;&#x9;&#x9;time.Sleep(delay)&#xA;&#x9;&#x9;c.L.Lock() // 这是第 17 行，执行到这里为什么不是一直阻塞等待锁？&#xA;&#xA;&#x9;&#x9;queue = queue[1:]&#xA;&#xA;&#x9;&#x9;fmt.Println(&#34;Removed from queue&#34;)&#xA;&#xA;&#x9;&#x9;c.L.Unlock()&#xA;&#x9;&#x9;c.Signal() // let a goroutine waiting on the condition know that something has ocurred&#xA;&#x9;}&#xA;&#xA;&#x9;for i := 0; i &amp;lt; 10; i++ {&#xA;&#x9;&#x9;c.L.Lock() // 这是 28 行，critical section&#xA;&#xA;&#x9;&#x9;// When the queue is equal to two the main goroutine is suspend&#xA;&#x9;&#x9;// until a signal on the condition has been sent&#xA;&#x9;&#x9;length := len(queue)&#xA;&#x9;&#x9;fmt.Println(length)&#xA;&#x9;&#x9;for len(queue) == 2 {&#xA;&#x9;&#x9;&#x9;fmt.Println(&#34;wait signal&#34;)&#xA;&#x9;&#x9;&#x9;c.Wait() // 这是 36 行，等待 signal ，但是 removeFromQueue 为什么不会一直等待锁呢？&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;fmt.Println(&#34;Adding to queue&#34;)&#xA;&#x9;&#x9;queue = append(queue, struct{}{})&#xA;&#xA;&#x9;&#x9;go removeFromQueue(10 * time.Second)&#xA;&#xA;&#x9;&#x9;c.L.Unlock()&#xA;&#x9;}&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>CarrieBauch</author>
+      <pubDate>16 Jul 2023 10:28:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>手机是否存在全天候监听？在这件事发生之前，我是存疑的，但是现在我信了。 - 科技</title>
+      <link>https://www.v2ex.com/t/957177</link>
+      <description>&lt;p&gt;刚才我打开手机上的音乐，打算听一听每日推荐，结果推荐的第一首就是李荣浩的乌梅子酱，&#xA;而我只是中午的时候用口哨简单的吹了几句乌梅子酱的副歌，仅此而已，&#xA;手机上没有任何李荣浩的歌曲，甚至没有任何一首歌，&#xA;近期没有听他的歌，也没有浏览过李荣浩相关的新闻，&#xA;总而言之就是，我想象不到与这首歌任何的关联。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imgur.com/a/PvWNtU4&#34; rel=&#34;nofollow&#34;&gt;https://imgur.com/a/PvWNtU4&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;MIUI14 ，给了录音权限的只有这几个 APP ，其余的都是询问。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imgur.com/TrycSE7&#34; rel=&#34;nofollow&#34;&gt;https://imgur.com/TrycSE7&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>Jakarta</author>
+      <pubDate>16 Jul 2023 10:22:55 +0000</pubDate>
+    </item>
+    <item>
       <title>有了解新生儿落户海外的操作方式？ - 移民</title>
       <link>https://www.v2ex.com/t/957176</link>
       <description>正在备孕，夫妻都是国内身份，预计明年生，想搞个港澳台身份，容易吗？</description>
