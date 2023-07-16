@@ -4,7 +4,14 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>2023 年，个人用户用 OBS 进行异地推流多机位直播可靠的方案是什么？ - 互联网</title>
+      <title>求个油管会员车队 - 生活</title>
+      <link>https://www.v2ex.com/t/957159</link>
+      <description>&lt;p&gt;youtube 的广告实在是太多了, 求个车&lt;/p&gt;&#xA;</description>
+      <author>jiuzhuans1</author>
+      <pubDate>16 Jul 2023 08:44:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>2023 年，个人用户用 OBS 进行异地推流多机位直播可靠的方案是什么？ - 问与答</title>
       <link>https://www.v2ex.com/t/957158</link>
       <description>&lt;h2&gt;需求&lt;/h2&gt;&#xA;&lt;p&gt;是这样的，本人接手了一个爱好者之间的 Apex Lengends 比赛直播的委托，我作为主台 OB 观赛。&lt;/p&gt;&#xA;&lt;p&gt;上一次我办类似直播活动是常规手段，所有人看我的电脑，然后&lt;strong&gt;解说&lt;/strong&gt;呆在一个开黑频道，看各自的观赛位。&lt;/p&gt;&#xA;&lt;p&gt;我们是怎么协调要看哪一个队伍的视角呢？纯靠讲，某一个解说发现了亮点，他就会在开黑频道里提醒大家，现在我们视角转到 XXX 队伍，然后包括我在内的所有解说立马打开 M 键地图找队伍位置，然后跳转过去。&lt;/p&gt;&#xA;&lt;p&gt;这是最原始最省事的方法，但这种操作方式终归还是会带来大概 2-3s 的延迟，难以捕捉到最即时的对战画面。&lt;/p&gt;&#xA;&lt;p&gt;因此，我在寻求一个个人用户能够搭建的，类似正规赛事的多机位导播台，让所有的解说都把他们的电脑画面集中推流到我这里，然后让我来负责画面切换，这样相比在游戏里找队伍会更加及时。&lt;/p&gt;&#xA;&lt;h2&gt;条件&lt;/h2&gt;&#xA;&lt;p&gt;目前来讲，我这边的相关条件有：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;一台上海的 2 核 4G 4Mbps 轻量服务器，目前主要作用是用来跑 Zerotier Moon ，也搭建了 OSSRS&lt;/li&gt;&#xA;&lt;li&gt;有 Zerotier 内网&lt;/li&gt;&#xA;&lt;li&gt;主台 RTX3090 的推流机器，电信 1000Mbps/50Mbps 带宽，有 IPV6&lt;/li&gt;&#xA;&lt;li&gt;有一个国内域名，但是备案时间已经来不及了，唉，备案&lt;/li&gt;&#xA;&lt;li&gt;如果有条件我可以租用新的高带宽服务器&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;目标&lt;/h2&gt;&#xA;&lt;p&gt;寻求一个方案，能使得其它用户的 OBS 输出画面能以&lt;strong&gt;尽可能低的延迟&lt;/strong&gt;传输到我这里来&lt;/p&gt;&#xA;&lt;h2&gt;解决方案&lt;/h2&gt;&#xA;&lt;p&gt;目前找寻到的主要方案（抛开那些乐色闭源软件）主要有两个派别：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;低延迟服务器中转推流：搭建一个类似 OSSRS 的后台，目前可用的项目有&lt;a href=&#34;https://ossrs.net/lts/zh-cn/docs/v5/doc/getting-started&#34; rel=&#34;nofollow&#34;&gt;OSSRS&lt;/a&gt;和&lt;a href=&#34;https://github.com/glimesh/broadcast-box&#34; rel=&#34;nofollow&#34;&gt;Broadcast Box&lt;/a&gt;，他们基本上原理类似，需要让用户推流到中转服务器上，然后由我通过 WebRTC 协议拉流获得用户的画面。&lt;/p&gt;&#xA;&lt;p&gt;优点：WebRTC 协议延迟非常低，操作对推流用户友好，只需要换个推流地址（可能顺便要&lt;a href=&#34;https://github.com/CoSMoSoftware/OBS-studio-webrtc&#34; rel=&#34;nofollow&#34;&gt;换个客户端&lt;/a&gt;）&lt;/p&gt;&#xA;&lt;p&gt;缺点：WebRTC 的推流&lt;strong&gt;强制要求 HTTPS&lt;/strong&gt;，导致海内中转服务器虽然效果好，但因为备案问题难以实施；而&lt;a href=&#34;https://b.siobud.com/&#34; rel=&#34;nofollow&#34;&gt;海外 WebRTC 中转服务器&lt;/a&gt;可以打通链路，但延迟情况不明（一旦有部分用户的 NAT 状况太差没办法走 WebRTC 的 P2P ，我猜可能会回落到中转模式？或者根本无法连接，总之海外方案的可靠性未知，我对 WebRTC 协议的细节不是非常了解）&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;NDI 模式：走&lt;a href=&#34;https://obsproject.com/forum/resources/obs-ndi-newtek-ndi%E2%84%A2-integration-into-obs-studio.528/&#34; rel=&#34;nofollow&#34;&gt;OBS-ndi&lt;/a&gt;的组网协议，让其它用户通过内网穿透异地组网的方法与我构建成一个 NDI 网络，我直接通过 NDI 获得他们的画面。&lt;/p&gt;&#xA;&lt;p&gt;优点：成熟方案对我来说省事，并且据称 NDI 的延迟效果也有毫秒级，因为面向的是专业视频工作流所以画质很好&lt;/p&gt;&#xA;&lt;p&gt;缺点：对用户来说组网复杂，我要手把手引导他们一个个安装 NDI 插件、加入 Zerotier 网络和 Moon&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;两种方案的优缺点都挺明显的，我在寻求更优的方案，或者针对这些方案问题的解决方法，有 V 友有相关的经验或者思路吗？&lt;/p&gt;&#xA;</description>
       <author>chowdpa02k413</author>
