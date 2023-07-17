@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "clash fake-ip 模式处理 UDP 和 TCP 协议时遇到的奇怪问题 - DNS",
+      "Link": "https://www.v2ex.com/t/957464",
+      "Description": "\u003cp\u003e软路由，透明代理，fake-ip 模式\u003c/p\u003e\n\u003ch2\u003e个人理解，不知道有没有错误的地方\u003c/h2\u003e\n\u003cp\u003ea. 浏览器访问一个网址必须有对应的 IP 地址，没有的话就会自动发起 DNS 查询请求\u003c/p\u003e\n\u003cp\u003eb. clash 对 DNS 请求（ UDP ）有区别与其他 UDP 协议的处理\u003c/p\u003e\n\u003ch2\u003eTCP 协议，从浏览器开始\u003c/h2\u003e\n\u003cblockquote\u003e\n\u003cp\u003e禁用 QUIC 、浏览器、电脑、clash 都没有任何 DNS 缓存记录\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e浏览器输入 \u003ca href=\"http://google.com\" rel=\"nofollow\"\u003egoogle.com\u003c/a\u003e ，首先浏览器发送一个 DNS （ UDP ）请求，查询 \u003ca href=\"http://google.com\" rel=\"nofollow\"\u003egoogle.com\u003c/a\u003e 对应的 IP 地址\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eclash 收到 DNS 请求，直接返回给浏览器一个假的 IP 地址（假设为 192.1.1.1 ），并记录这个假的 IP 地址对应的网址\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e浏览器发起 TCP 请求，访问 \u003ca href=\"http://google.com\" rel=\"nofollow\"\u003egoogle.com\u003c/a\u003e ，目标地址为：192.1.1.1\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eclash 收到来自于浏览器的数据包，查看数据包的目标 IP ，在自己的记录表里面查询 IP 有没有对应的域名\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e有对应域名\u003c/p\u003e\n\u003cp\u003e走域名匹配规则，如果没有匹配到任何规则，进行 DNS 查询，用拿到的 IP 进行 IP 匹配（这里不会拿上面的假 IP 进行匹配，而是要进行一次真正的 DNS 查询，这个过程可能会导致 DNS 泄露），DNS 查询会多路并发，主要分为：nameserver 指定的 DNS 服务器（国内的，快，但是有泄露和篡改风险），fallback 指定的 DNS 服务器（国外，慢，一定不会篡改），如果是国外的 IP 信任 fallback 结果，国内的信任 nameserver 。用查询到的 IP 做 IP 规则匹配\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e没有对应的域名\u003c/p\u003e\n\u003cp\u003e进行 IP 规则匹配\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e用匹配到的代理进行处理后续的流程....\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e发现的问题\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003ePing 命令不好使（因为 fake-ip 的原因，ping \u003ca href=\"http://googele.com\" rel=\"nofollow\"\u003egoogele.com\u003c/a\u003e ，ping 到的是 192.1.1.1 ）\u003c/li\u003e\n\u003cli\u003e基于 UDP 的游戏连不上（看网上说是因为有些基于域名连接的 UDP 必须用真实 IP ，这一点我不懂为什么？？） \u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e我的需求\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e国内游戏能够正常连接，Direct\u003c/li\u003e\n\u003cli\u003e国外游戏能够走代理\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e我想到的解决方案\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003efake-ip ，UDP 转发，绕过中国大陆 IP  [验证可行] \u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e但是我并不知道原理，功能上写的是来自中国大陆的流量不再经过内核，可是中国大陆的流量的判定不也是 Domain-DNS-GEOIP?\u003c/p\u003e\n\u003cp\u003e不开启这种方案的时候，因为我的规则列表没有任何游戏相关的规则，走域名匹配不通，然后走 IP 匹配的道路不也是 Domain-DNS-GEOIP ，为什么就进不去游戏了？\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003efake-ip-filter 添加游戏域名 [猜想可行] \u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e相当于给指定游戏不走 fake-ip 模式，回退到 redir-host\u003c/p\u003e\n\u003cp\u003e缺点：一个游戏一个游戏添加，域名收集是个大问题\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003efake-ip ，不进行 UDP 转发 [猜想可行] \u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e不知道 DNS 解析会不会受影响，根据我上面的理解 b, 应该不会受影响吧\u003c/p\u003e\n\u003cp\u003e缺点：国外游戏想走代理的也走不了，而且走 UDP 的也不止游戏啊\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e关于国外游戏代理 [不知可行与否] \u003c/p\u003e\n\u003cp\u003efake-ip, UDP 转发，规则列表添加国外游戏域名，Proxy ，是不是就可以了？\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "caneman",
+      "PubDate": "2023-07-17T08:44:53Z"
+    },
+    {
+      "Title": "大佬进，如何在 IDEA 中导出 heap dump 文件，官网推荐的方法都试过了，没有效果 - 程序员",
+      "Link": "https://www.v2ex.com/t/957463",
+      "Description": "\u003col\u003e\n\u003cli\u003e\n\u003cp\u003eidea64.exe.vmoptions 如下：\n-Xms128m\n-Xmx4096m\n-XX:ReservedCodeCacheSize=512m\n-XX:+UseG1GC\n-XX:SoftRefLRUPolicyMSPerMB=50\n-XX:CICompilerCount=2\n-XX:+HeapDumpOnOutOfMemoryError\n-XX:HeapDumpPath=D:\\tmp\n-XX:-OmitStackTraceInFastThrow\n-ea\n-Dsun.io.useCanonCaches=false\n-Djdk.http.auth.tunneling.disabledSchemes=\"\"\n-Djdk.attach.allowAttachSelf=true\n-Djdk.module.illegalAccess.silent=true\n-Dkotlinx.coroutines.debug=off\n-Dfile.encoding=UTF-8\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003erun/debug configuarions 里面也加上了 -XX:+HeapDumpOnOutOfMemoryError\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003egradle.properties 也加上了 org.gradle.jvmargs=-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=D:/heapdump\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e上述三种方式都没有效果，没有任何的 hprof 文件生成，google 了一圈没其他办法，在此求助。\u003c/p\u003e\n",
+      "Author": "kelvinaltajiin",
+      "PubDate": "2023-07-17T08:44:28Z"
+    },
+    {
+      "Title": "没有人觉得《长安三万里》很烂吗？ - 分享发现",
+      "Link": "https://www.v2ex.com/t/957462",
+      "Description": "豆瓣 8.2 ，评论内容让人看得尴尬，让我意识到豆瓣也已经不可靠了。\u003cbr /\u003e三小时尬演残缺不全的流水账，全场小孩的笑声也没几次，坐不住离场的倒是挺多，怎么有脸刷那些好评的。\u003cbr /\u003e人设、美术上讲，也完全不如之前的杨戬。",
+      "Author": "manasheep",
+      "PubDate": "2023-07-17T08:43:07Z"
+    },
+    {
       "Title": "想买空调，求推荐 - 问与答",
       "Link": "https://www.v2ex.com/t/957460",
       "Description": "\u003cp\u003e太热了，预算 2000 左右，家里卧室 13 平方左右，最好新款，然后冬天也可以制热的，防直吹~\u003c/p\u003e\n",

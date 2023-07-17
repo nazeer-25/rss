@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>clash fake-ip 模式处理 UDP 和 TCP 协议时遇到的奇怪问题 - DNS</title>
+      <link>https://www.v2ex.com/t/957464</link>
+      <description>&lt;p&gt;软路由，透明代理，fake-ip 模式&lt;/p&gt;&#xA;&lt;h2&gt;个人理解，不知道有没有错误的地方&lt;/h2&gt;&#xA;&lt;p&gt;a. 浏览器访问一个网址必须有对应的 IP 地址，没有的话就会自动发起 DNS 查询请求&lt;/p&gt;&#xA;&lt;p&gt;b. clash 对 DNS 请求（ UDP ）有区别与其他 UDP 协议的处理&lt;/p&gt;&#xA;&lt;h2&gt;TCP 协议，从浏览器开始&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;禁用 QUIC 、浏览器、电脑、clash 都没有任何 DNS 缓存记录&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;浏览器输入 &lt;a href=&#34;http://google.com&#34; rel=&#34;nofollow&#34;&gt;google.com&lt;/a&gt; ，首先浏览器发送一个 DNS （ UDP ）请求，查询 &lt;a href=&#34;http://google.com&#34; rel=&#34;nofollow&#34;&gt;google.com&lt;/a&gt; 对应的 IP 地址&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;clash 收到 DNS 请求，直接返回给浏览器一个假的 IP 地址（假设为 192.1.1.1 ），并记录这个假的 IP 地址对应的网址&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;浏览器发起 TCP 请求，访问 &lt;a href=&#34;http://google.com&#34; rel=&#34;nofollow&#34;&gt;google.com&lt;/a&gt; ，目标地址为：192.1.1.1&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;clash 收到来自于浏览器的数据包，查看数据包的目标 IP ，在自己的记录表里面查询 IP 有没有对应的域名&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;有对应域名&lt;/p&gt;&#xA;&lt;p&gt;走域名匹配规则，如果没有匹配到任何规则，进行 DNS 查询，用拿到的 IP 进行 IP 匹配（这里不会拿上面的假 IP 进行匹配，而是要进行一次真正的 DNS 查询，这个过程可能会导致 DNS 泄露），DNS 查询会多路并发，主要分为：nameserver 指定的 DNS 服务器（国内的，快，但是有泄露和篡改风险），fallback 指定的 DNS 服务器（国外，慢，一定不会篡改），如果是国外的 IP 信任 fallback 结果，国内的信任 nameserver 。用查询到的 IP 做 IP 规则匹配&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;没有对应的域名&lt;/p&gt;&#xA;&lt;p&gt;进行 IP 规则匹配&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;用匹配到的代理进行处理后续的流程....&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;发现的问题&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Ping 命令不好使（因为 fake-ip 的原因，ping &lt;a href=&#34;http://googele.com&#34; rel=&#34;nofollow&#34;&gt;googele.com&lt;/a&gt; ，ping 到的是 192.1.1.1 ）&lt;/li&gt;&#xA;&lt;li&gt;基于 UDP 的游戏连不上（看网上说是因为有些基于域名连接的 UDP 必须用真实 IP ，这一点我不懂为什么？？） &lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;我的需求&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;国内游戏能够正常连接，Direct&lt;/li&gt;&#xA;&lt;li&gt;国外游戏能够走代理&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;我想到的解决方案&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;fake-ip ，UDP 转发，绕过中国大陆 IP  [验证可行] &lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;但是我并不知道原理，功能上写的是来自中国大陆的流量不再经过内核，可是中国大陆的流量的判定不也是 Domain-DNS-GEOIP?&lt;/p&gt;&#xA;&lt;p&gt;不开启这种方案的时候，因为我的规则列表没有任何游戏相关的规则，走域名匹配不通，然后走 IP 匹配的道路不也是 Domain-DNS-GEOIP ，为什么就进不去游戏了？&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;fake-ip-filter 添加游戏域名 [猜想可行] &lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;相当于给指定游戏不走 fake-ip 模式，回退到 redir-host&lt;/p&gt;&#xA;&lt;p&gt;缺点：一个游戏一个游戏添加，域名收集是个大问题&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;fake-ip ，不进行 UDP 转发 [猜想可行] &lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;不知道 DNS 解析会不会受影响，根据我上面的理解 b, 应该不会受影响吧&lt;/p&gt;&#xA;&lt;p&gt;缺点：国外游戏想走代理的也走不了，而且走 UDP 的也不止游戏啊&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;关于国外游戏代理 [不知可行与否] &lt;/p&gt;&#xA;&lt;p&gt;fake-ip, UDP 转发，规则列表添加国外游戏域名，Proxy ，是不是就可以了？&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>caneman</author>
+      <pubDate>17 Jul 2023 08:44:53 +0000</pubDate>
+    </item>
+    <item>
+      <title>大佬进，如何在 IDEA 中导出 heap dump 文件，官网推荐的方法都试过了，没有效果 - 程序员</title>
+      <link>https://www.v2ex.com/t/957463</link>
+      <description>&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;idea64.exe.vmoptions 如下：&#xA;-Xms128m&#xA;-Xmx4096m&#xA;-XX:ReservedCodeCacheSize=512m&#xA;-XX:+UseG1GC&#xA;-XX:SoftRefLRUPolicyMSPerMB=50&#xA;-XX:CICompilerCount=2&#xA;-XX:+HeapDumpOnOutOfMemoryError&#xA;-XX:HeapDumpPath=D:\tmp&#xA;-XX:-OmitStackTraceInFastThrow&#xA;-ea&#xA;-Dsun.io.useCanonCaches=false&#xA;-Djdk.http.auth.tunneling.disabledSchemes=&#34;&#34;&#xA;-Djdk.attach.allowAttachSelf=true&#xA;-Djdk.module.illegalAccess.silent=true&#xA;-Dkotlinx.coroutines.debug=off&#xA;-Dfile.encoding=UTF-8&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;run/debug configuarions 里面也加上了 -XX:+HeapDumpOnOutOfMemoryError&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;gradle.properties 也加上了 org.gradle.jvmargs=-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=D:/heapdump&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;上述三种方式都没有效果，没有任何的 hprof 文件生成，google 了一圈没其他办法，在此求助。&lt;/p&gt;&#xA;</description>
+      <author>kelvinaltajiin</author>
+      <pubDate>17 Jul 2023 08:44:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>没有人觉得《长安三万里》很烂吗？ - 分享发现</title>
+      <link>https://www.v2ex.com/t/957462</link>
+      <description>豆瓣 8.2 ，评论内容让人看得尴尬，让我意识到豆瓣也已经不可靠了。&lt;br /&gt;三小时尬演残缺不全的流水账，全场小孩的笑声也没几次，坐不住离场的倒是挺多，怎么有脸刷那些好评的。&lt;br /&gt;人设、美术上讲，也完全不如之前的杨戬。</description>
+      <author>manasheep</author>
+      <pubDate>17 Jul 2023 08:43:07 +0000</pubDate>
+    </item>
+    <item>
       <title>想买空调，求推荐 - 问与答</title>
       <link>https://www.v2ex.com/t/957460</link>
       <description>&lt;p&gt;太热了，预算 2000 左右，家里卧室 13 平方左右，最好新款，然后冬天也可以制热的，防直吹~&lt;/p&gt;&#xA;</description>
