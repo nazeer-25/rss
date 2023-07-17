@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>C 中 local static 变量初始化是零开销的吗 - 程序员</title>
+      <link>https://www.v2ex.com/t/957344</link>
+      <description>&lt;p&gt;如下代码，第一次调用 fn 时会执行 get_value ，后续调用不会执行：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;void fn() {&#xA;    static int x = get_value();&#xA;    // ...&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如果代码里显示调用该函数，编译器可能会优化，在第一次调用前初始化。&lt;/p&gt;&#xA;&lt;p&gt;但如果通过函数指针动态调用，或者将该函数对外导出，那么每次调用 fn 时是否都要判断一下有没有初始化？&lt;/p&gt;&#xA;</description>
+      <author>iqoo</author>
+      <pubDate>17 Jul 2023 03:32:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>一直没想明白，通过代理请求 dns 有何实际意义？ - DNS</title>
+      <link>https://www.v2ex.com/t/957343</link>
+      <description>&lt;p&gt;以 Clash 为例，配置如下&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;dns:&#xA;  enable: true&#xA;  listen: 127.0.0.1:5553&#xA;  enhanced-mode: fake-ip&#xA;  nameserver:&#xA;    - tls://120.53.53.53:853&#xA;  fallback:&#xA;    - https://public.dns.iij.jp/dns-query&#xA;……&#xA;rules:&#xA;  - GEOIP,CN,DIRECT&#xA;  - MATCH,代理&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;不考虑系统 DNS 缓存和浏览器 DNS 缓存，我理解的流程是  &lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Clash 接收到 &lt;a href=&#34;http://google.com&#34; rel=&#34;nofollow&#34;&gt;google.com&lt;/a&gt; 这个域名，执行规则匹配&lt;/li&gt;&#xA;&lt;li&gt;[GEOIP,CN,DIRECT]这条规则需要域名解析，执行域名解析流程&lt;br/&gt;&#xA;2.1 使用 nameserver 解析 &lt;a href=&#34;http://google.com&#34; rel=&#34;nofollow&#34;&gt;google.com&lt;/a&gt; ，拿到一个错误(被污染)的境外 IP&lt;br/&gt;&#xA;2.2 Clash 判断此 IP 为境外 IP ，使用 fallback 重新解析，拿到正确 IP  &lt;/li&gt;&#xA;&lt;li&gt;[GEOIP,CN,DIRECT]规则不匹配，继续匹配下一条规则&lt;/li&gt;&#xA;&lt;li&gt;[MATCH,代理]规则匹配，将&lt;strong&gt;域名&lt;/strong&gt;（而不是步骤 2 解析出来的 IP ）转发到代理服务器&lt;/li&gt;&#xA;&lt;li&gt;代理服务器&lt;strong&gt;重新解析 &lt;a href=&#34;http://google.com&#34; rel=&#34;nofollow&#34;&gt;google.com&lt;/a&gt; 域名&lt;/strong&gt;，拿到正确 IP ，建立连接&lt;/li&gt;&#xA;&lt;li&gt;代理服务器返回网页内容&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;如果没有基于 IP 的规则&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;rules:&#xA;  - direct_domain,DIRECT&#xA;  - proxy_domain,代理&#xA;  - MATCH,代理&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;则只进行域名匹配，也不需要在本地域名解析&lt;/p&gt;&#xA;&lt;p&gt;参考文章&lt;br/&gt;&#xA;&lt;a href=&#34;https://github.com/Fndroid/clash_for_windows_pkg/wiki/DNS%E6%B1%A1%E6%9F%93%E5%AF%B9Clash%EF%BC%88for-Windows%EF%BC%89%E7%9A%84%E5%BD%B1%E5%93%8D&#34; rel=&#34;nofollow&#34;&gt;DNS 污染对 Clash （ for Windows ）的影响&lt;/a&gt;&lt;br/&gt;&#xA;&lt;a href=&#34;https://blog.skk.moe/post/what-happend-to-dns-in-proxy/&#34; rel=&#34;nofollow&#34;&gt;浅谈在代理环境中的 DNS 解析行为&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;综上，我的理解是包括 Clash 在内的一众代理软件，配置 dns 的意义仅在于分流和 tun 模式下的 fake-ip ，最终代理服务器会重新解析域名，拿到最近的 IP 。但是经常在一些讨论贴，或是 Clash 、mosdns 的 Issue 区看到“通过代理请求域名服务器(比如通过代理请求 8.8.4.4)”这种需求，不理解有何实际含义，请 V 友们不吝赐教。&lt;/p&gt;&#xA;</description>
+      <author>zbatman</author>
+      <pubDate>17 Jul 2023 03:30:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>[远程兼职] Fabrie 前端远程兼职，目前只有兼职 HC，欢迎大家来撩～ - 酷工作</title>
+      <link>https://www.v2ex.com/t/957342</link>
+      <description>&lt;h2&gt;看了大家的评论，没有及时回复，很抱歉，下面针对大家关心的问题做一个说明&lt;/h2&gt;&#xA;&lt;p&gt;1 、这是一个兼职岗位，需要远程工作，一般会在晚上九点左右沟通工作进度，请大家投简历之前评估一下自己的时间&lt;/p&gt;&#xA;&lt;p&gt;2 、薪资范围：大概 80 ～ 150 时薪左右（如果比较优秀，可以往上谈）&lt;/p&gt;&#xA;&lt;p&gt;3 、工作时间：平时一天工作时长最好维持在 2 ～ 3 小时周六周日 6 ～ 8 小时最佳，当然也可以视情况而定，一般根据需求合理安排时间即可&lt;/p&gt;&#xA;&lt;p&gt;4 、、是否可以转正：一般来说，现阶段没有多余的正式岗位，是无法转成正式的，只有有坑的情况下，会优先考虑合作过的同学（已经有不少同学转成正式了）&lt;/p&gt;&#xA;&lt;p&gt;5 、有时差怎么办：大家放心，和你对接的同学，会尽力支持你，文档和注释，都非常规范&lt;/p&gt;&#xA;&lt;p&gt;6 、如果有更多问题，欢迎大家加我 v 交流&lt;/p&gt;&#xA;&lt;p&gt;7 、大家如果给简历，尽量给 PDF 的（大家可以搜一下，简历模版，突出重点，这样简历会更好过）&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;Fabrie 文档是一款服务于设计、工程与教育等场景的在线协作工具，为传统实体产品开发与设计行业提供了一套提升协作效率、全流程数字化管理的在线工作台，以文档式的工具形态更好的为设计行业长尾需求提供灵活支持。Fabrie 团队核心成员来自于钉钉、Teambition 、 百度，携程、Nike 等优秀企业，以及帝国理工、皇家艺术学院、港科大、上交、复旦等国内外高校。 目前产品在快速迭代中，希望招募热爱设计、关注前沿技术以及相信工具的伙伴加入，目前有包括视觉设计、前后端开发、测试、运营等岗位，欢迎投递简历 入职配备 Mac 电脑，显示器&lt;/p&gt;&#xA;&lt;p&gt;官网 &lt;a href=&#34;http://www.fabrie.cn&#34; rel=&#34;nofollow&#34;&gt;www.fabrie.cn&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;前端岗位（兼职远程） 任职要求:&lt;/p&gt;&#xA;&lt;p&gt;大学本科及以上学历，计算机或相关专业，英语四级及以上，能够阅读英文文档； 精通 JavaScript 、HTML5 、CSS3 等基础技术，熟悉 ES6 ，ES7,Typescript,有模块化编程思想；对前端组件化有一定的运用和理解；&lt;/p&gt;&#xA;&lt;p&gt;熟练掌握 ajax 技术、http 等基础知识，了解跨域机制；&lt;/p&gt;&#xA;&lt;p&gt;3 年以上前端实际开发经验，深入理解浏览器工作原理，熟悉主流浏览器特性，能够很好地解决兼容问题、性能优化问题，熟悉响应式布局和屏幕适配技术。&lt;/p&gt;&#xA;&lt;p&gt;熟练使用 Vue 框架，熟练掌握 vuex 和 vueRouter ，熟练使用 Git 管理代码，熟悉 JQuery 、react 等； 熟悉 Canvas 、svg 等技术的优先考虑；&lt;/p&gt;&#xA;&lt;p&gt;对设计有了解有追求的优先考虑；&lt;/p&gt;&#xA;&lt;p&gt;热爱技术，有好奇心，热爱钻研前沿技术、新产品，具有快速学习能力；&lt;/p&gt;&#xA;&lt;p&gt;对页面布局具有深刻理解，注重细节，善于分析并改善产品的视觉感觉和用户体验；&lt;/p&gt;&#xA;&lt;p&gt;具有良好的沟通能力和团队合作精神、优秀的分析问题和解决问题的能力；&lt;/p&gt;&#xA;&lt;p&gt;有图像处理 /图形编辑 /地图类产品开发经验的优先考虑。&lt;/p&gt;&#xA;&lt;p&gt;有 C++ / webGL / skia 开发经验者优先&lt;/p&gt;&#xA;&lt;p&gt;投递方式 请发送您的简历至微信 15738856711(同电话号)&lt;/p&gt;&#xA;&lt;p&gt;最后，祝大家都能找到合适自己的工作，加油⛽️⛽️⛽️&lt;/p&gt;&#xA;</description>
+      <author>xiliang</author>
+      <pubDate>17 Jul 2023 03:28:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>小米 AX3000 每小时自动拨号 即断网几秒钟 会是哪里的问题 - 路由器</title>
+      <link>https://www.v2ex.com/t/957340</link>
+      <description>深圳电信 光猫桥接 ax3000 拨号 搬家前是正常的 搬完家设置基本都没动过&lt;br /&gt;每个小时固定断网 路由器黄灯几秒后正常 问了电信工作人员 是有拨号记录&lt;br /&gt;&lt;br /&gt;网线直接连光猫没这个问题 怀疑路由器问题 保修换新故障仍旧&lt;br /&gt;有遇到过这种情况么</description>
+      <author>3x1415926535</author>
+      <pubDate>17 Jul 2023 03:27:10 +0000</pubDate>
+    </item>
+    <item>
+      <title>​Solo-独立开发者交流群，一起来解决碰到的问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/957339</link>
+      <description>&lt;p&gt;作为一名独立开发者，遇到了产品的问题、被竞争对手恶意攻击的问题、运营的问题、如何盈利的问题等等。&lt;/p&gt;&#xA;&lt;p&gt;所以打算建一个交流群，来碰撞这些问题，如何进行避免这些坑，同时我来帮助协调解决这些问题。&lt;/p&gt;&#xA;&lt;p&gt;欢迎大伙儿交流和讨论~&lt;/p&gt;&#xA;&lt;p&gt;多一份收入，保证一份来源，相互帮助。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://icon-spirit.oss-cn-beijing.aliyuncs.com/WechatIMG1255.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>Baiang</author>
+      <pubDate>17 Jul 2023 03:26:51 +0000</pubDate>
+    </item>
+    <item>
       <title>有什么隐私保护比较好的网盘可以用来备份照片吗 - 问与答</title>
       <link>https://www.v2ex.com/t/957336</link>
       <description>&lt;p&gt;前两天上传一个 2 个多 G 的文件到阿里云盘，文件校验后瞬间就传上去了（阿里云盘貌似会检测系统中已经有的文件）。感觉阿里云盘虽然速度快，但是没有什么隐私可言。&lt;/p&gt;&#xA;</description>
