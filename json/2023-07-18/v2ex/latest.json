@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有没有简易的 k 歌系统推荐？ - 问与答",
+      "Link": "https://www.v2ex.com/t/957664",
+      "Description": "简单点，一体化可以连电视的。目前看到了全民 k 歌 m1 pro ，帝瓦雷合作的 3000 多不知道好不好用。",
+      "Author": "razios",
+      "PubDate": "2023-07-18T04:11:23Z"
+    },
+    {
+      "Title": "Parallels Desktop 官方限时 75 折优惠 - 优惠信息",
+      "Link": "https://www.v2ex.com/t/957663",
+      "Description": "\u003cp\u003eParallels Desktop 官网限时促销\u003c/p\u003e\n\u003cp\u003e购买地址：\u003ca href=\"https://www.jianeryi.com/go/parallels\" rel=\"nofollow\"\u003e访问\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e优惠代码：BFJULY23\u003c/p\u003e\n\u003cp\u003e优惠折扣：75 折\u003c/p\u003e\n\u003cp\u003e活动范围：包含新用户和升级用户\u003c/p\u003e\n\u003cp\u003e截止时间：2023 年 7 月 22 日 15:00\u003c/p\u003e\n\u003cp\u003e购买建议：有需要的建议购买订阅制版本\u003c/p\u003e\n",
+      "Author": "Janemini",
+      "PubDate": "2023-07-18T04:11:04Z"
+    },
+    {
       "Title": "求教大佬，线上 redis cluster 中适合使用 redis lua script 吗？以及使用时有什么注意事项？ - Redis",
       "Link": "https://www.v2ex.com/t/957661",
       "Description": "\u003cp\u003e我将一部分逻辑代码通过 lua 脚本实现，变相的实现原子操作(如下)，但之前使用 lua 脚本是遇到过 \u003ccode\u003enot in the same slot\u003c/code\u003e 的错误，感觉我的这个脚本可能与会遇到。如果我真的通过 key 加前缀的方式保证他们在同一个 slot 内是不是也会导致 cluster 处于一个不健康的集群状态。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003elocal userAttributionKey = KEYS[1];\nlocal humeSource = KEYS[2];\nlocal attributeKeys = cjson.decode(KEYS[3]);\n\nif redis.call(\"EXISTS\", userAttributionKey) == 1 then\n    -- get attribution cache\n    local res = redis.call(\"GET\", userAttributionKey);\n    if res then\n        return { 1, res };\n    end\nend\n\nlocal matchResult = {};\nlocal hits = {};\nlocal latestTime = 0;\nfor i = 1, #attributeKeys do\n    local indexInfoString = redis.call(\"GET\", attributeKeys[i]);\n    if indexInfoString then\n        local indexInfo = cjson.decode(indexInfoString);\n        local reportSource = indexInfo['report_source'];\n        local uniqId = indexInfo['uniq_id'];\n        local timestamp = tonumber(indexInfo['timestamp']);\n\n        if humeSource == '' or humeSource == indexInfo['report_source'] then\n            -- check attribute index info\n            if reportSource ~= '' and uniqId ~= '' then\n                if timestamp \u0026gt; latestTime then\n                    indexInfo['hit'] = attributeKeys[i];\n                    indexInfo['match_res'] = 'matched';\n                    matchResult = indexInfo;\n                    latestTime = timestamp;\n                end\n\n                table.insert(hits, attributeKeys[i]);\n            else\n                return redis.error_reply(\"Invalid Info:\" .. indexInfoString);\n            end\n        end\n\n        -- delete attribute key cache\n        redis.call(\"DEL\", attributeKeys[i])\n    end\nend\n\nif #hits \u0026gt; 0 then\n    matchResult['hits'] = hits;\n    local matchResultStr = cjson.encode(matchResult);\n\n    -- set attribution cache\n    redis.call(\"SET\", userAttributionKey, matchResultStr, \"EX\", ARGV[1]);\n    return { 1, matchResultStr };\nend\n\nreturn { 0, cjson.encode(matchResult) };\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e请教下大佬和前辈，我这是不是一种错误的使用方式？以及 lua script 使用时有什么注意事项？\u003c/p\u003e\n",

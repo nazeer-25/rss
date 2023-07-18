@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有没有简易的 k 歌系统推荐？ - 问与答</title>
+      <link>https://www.v2ex.com/t/957664</link>
+      <description>简单点，一体化可以连电视的。目前看到了全民 k 歌 m1 pro ，帝瓦雷合作的 3000 多不知道好不好用。</description>
+      <author>razios</author>
+      <pubDate>18 Jul 2023 04:11:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>Parallels Desktop 官方限时 75 折优惠 - 优惠信息</title>
+      <link>https://www.v2ex.com/t/957663</link>
+      <description>&lt;p&gt;Parallels Desktop 官网限时促销&lt;/p&gt;&#xA;&lt;p&gt;购买地址：&lt;a href=&#34;https://www.jianeryi.com/go/parallels&#34; rel=&#34;nofollow&#34;&gt;访问&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;优惠代码：BFJULY23&lt;/p&gt;&#xA;&lt;p&gt;优惠折扣：75 折&lt;/p&gt;&#xA;&lt;p&gt;活动范围：包含新用户和升级用户&lt;/p&gt;&#xA;&lt;p&gt;截止时间：2023 年 7 月 22 日 15:00&lt;/p&gt;&#xA;&lt;p&gt;购买建议：有需要的建议购买订阅制版本&lt;/p&gt;&#xA;</description>
+      <author>Janemini</author>
+      <pubDate>18 Jul 2023 04:11:04 +0000</pubDate>
+    </item>
+    <item>
       <title>求教大佬，线上 redis cluster 中适合使用 redis lua script 吗？以及使用时有什么注意事项？ - Redis</title>
       <link>https://www.v2ex.com/t/957661</link>
       <description>&lt;p&gt;我将一部分逻辑代码通过 lua 脚本实现，变相的实现原子操作(如下)，但之前使用 lua 脚本是遇到过 &lt;code&gt;not in the same slot&lt;/code&gt; 的错误，感觉我的这个脚本可能与会遇到。如果我真的通过 key 加前缀的方式保证他们在同一个 slot 内是不是也会导致 cluster 处于一个不健康的集群状态。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;local userAttributionKey = KEYS[1];&#xA;local humeSource = KEYS[2];&#xA;local attributeKeys = cjson.decode(KEYS[3]);&#xA;&#xA;if redis.call(&#34;EXISTS&#34;, userAttributionKey) == 1 then&#xA;    -- get attribution cache&#xA;    local res = redis.call(&#34;GET&#34;, userAttributionKey);&#xA;    if res then&#xA;        return { 1, res };&#xA;    end&#xA;end&#xA;&#xA;local matchResult = {};&#xA;local hits = {};&#xA;local latestTime = 0;&#xA;for i = 1, #attributeKeys do&#xA;    local indexInfoString = redis.call(&#34;GET&#34;, attributeKeys[i]);&#xA;    if indexInfoString then&#xA;        local indexInfo = cjson.decode(indexInfoString);&#xA;        local reportSource = indexInfo[&#39;report_source&#39;];&#xA;        local uniqId = indexInfo[&#39;uniq_id&#39;];&#xA;        local timestamp = tonumber(indexInfo[&#39;timestamp&#39;]);&#xA;&#xA;        if humeSource == &#39;&#39; or humeSource == indexInfo[&#39;report_source&#39;] then&#xA;            -- check attribute index info&#xA;            if reportSource ~= &#39;&#39; and uniqId ~= &#39;&#39; then&#xA;                if timestamp &amp;gt; latestTime then&#xA;                    indexInfo[&#39;hit&#39;] = attributeKeys[i];&#xA;                    indexInfo[&#39;match_res&#39;] = &#39;matched&#39;;&#xA;                    matchResult = indexInfo;&#xA;                    latestTime = timestamp;&#xA;                end&#xA;&#xA;                table.insert(hits, attributeKeys[i]);&#xA;            else&#xA;                return redis.error_reply(&#34;Invalid Info:&#34; .. indexInfoString);&#xA;            end&#xA;        end&#xA;&#xA;        -- delete attribute key cache&#xA;        redis.call(&#34;DEL&#34;, attributeKeys[i])&#xA;    end&#xA;end&#xA;&#xA;if #hits &amp;gt; 0 then&#xA;    matchResult[&#39;hits&#39;] = hits;&#xA;    local matchResultStr = cjson.encode(matchResult);&#xA;&#xA;    -- set attribution cache&#xA;    redis.call(&#34;SET&#34;, userAttributionKey, matchResultStr, &#34;EX&#34;, ARGV[1]);&#xA;    return { 1, matchResultStr };&#xA;end&#xA;&#xA;return { 0, cjson.encode(matchResult) };&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;请教下大佬和前辈，我这是不是一种错误的使用方式？以及 lua script 使用时有什么注意事项？&lt;/p&gt;&#xA;</description>
