@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "大家一天能喝多少水？ - 问与答",
+      "Link": "https://www.v2ex.com/t/958001",
+      "Description": "平时没有多喝水的习惯",
+      "Author": "lipu",
+      "PubDate": "2023-07-19T07:20:32Z"
+    },
+    {
+      "Title": "关于 pppoe 下 ipv6 的 wg 隧道需不需要优化 MTU - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/958000",
+      "Description": "\u003ch2\u003e先说说我对 MTU 相关的理解\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003eMTU 指链路中能通过最大数据包的大小，通常指 ip 包，比如以太网能最大传输 1500 字节 ip 包，pppoe 因为 ppp 协议占掉 8 字节，所以最大能传输 1492 字节 ip 包\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e通常，ipv4 协议头 20 字节、ipv6 协议头 40 字节，tcp 协议头 20 字节，WireGuard 协议头 40 字节，\u003ca href=\"https://baturin.org/tools/encapcalc/\" rel=\"nofollow\"\u003e此网站可以查阅\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003ewireguard 隧道的默认 MTU = 1500 - 40(最大 ip 头)- 40(wg 协议) = 1420 ，pppoe 下再 -8 = 1412\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eTCP MSS 指链路中能传输的 tcp 有效载荷的大小，1500 - 20/40(ip 头) - 20(tcp 头) = 1460(ipv4) 或 1440(ipv6)，pppoe 下 1452(ipv4) 或 1432(ipv6)\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eipv6 不支持数据包切片，且现阶段路由器基本都没有对 ipv6 默认加上 mss 钳制，所以在 pppoe 下需要手动加上 mss 钳制，一般按照 1432 设置就可以，也有人建议避免潜在麻烦直接设置到\u003ca href=\"https://datatracker.ietf.org/doc/html/rfc2460\" rel=\"nofollow\"\u003eRFC 规范\u003c/a\u003e限制的最小 ipv6 包 1280 ，mss = 1280 - 60 = 1220 （有些人说设置到 1280 并不正确）\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003emss clamping 原理：tcp 握手阶段，双边主机会在 syn 包中携带它所在链路能传输的最大 tcp 载荷信息，即 tcp-mss 信息，握手后用两边更小的那个 mss 来封装数据包。当双边主机都给出错误的 mss 信息时，通信就无法顺畅进行。例如常见的，假如双边主机都认为自己的链路 mtu 是 1500 ，当遇到遇到链路中间有 pppoe 或者其他隧道 mtu 更小的隧道时，通信就无法正常进行。mss clamping 就是修改握手数据包把双边通告的 tcp-mss 调整到能通过路由器的正确的大小。理论上只要一边是对的，就能正常通信。只需要单边 clamping\n\u003cimg alt=\"mss clamping 原理\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://pic4.zhimg.com/80/v2-c4ebd7dee22e834bc6fae27f47c3cd0b_1440w.webp\"/\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e因此除了 mss clamping ，我觉得更好的方式是修改路由器 ra 宣告 的 mtu 值到 1492 （默认 1500 ），让内网的主机知道正确的链路 mtu 。我已经抓包证实，ra mtu 改到 1492 后，内网发出的所有 syn 包的 tcp-mss 全部都是 1432 。\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003e以上我的理解如有不对的帮我指正\u003c/h3\u003e\n\u003ch2\u003e回到标题\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e根据上面第 3 条，wireguard 接口在 pppoe 下使用 ipv6 建立连接正确的 mtu 应该是 1412 ，所以不修改默认的 1420 ，连通性应该是有问题的。\n我搜索了一下确实有人遇到问题\u003c/li\u003e\n\u003c/ol\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://keremerkan.net/posts/wireguard-mtu-fixes/\" rel=\"nofollow\"\u003ehttps://keremerkan.net/posts/wireguard-mtu-fixes/\u003c/a\u003e 这个作者表示改到 1412 后解决了在 pppoe 下的连通性问题，甚至他建议改到 1280\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://www.hitoha.moe/wireguard-mtu-over-pppoe/\" rel=\"nofollow\"\u003ehttps://www.hitoha.moe/wireguard-mtu-over-pppoe/\u003c/a\u003e 这里也说了在 pppoe 下应该调到 1412 或 1400\u003c/li\u003e\n\u003c/ul\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e然而，我在默认 1420 下用的一点毛病也没有 连日本 aws 能跑到 100M ，几乎没有断流的现象。所以这个点让我有点困惑，不知道需不需要调整，还是说 routeros 对 wireguard 是有处理的？\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e如果修改的话，需要客户端和服务端一起修改，如果只改客户端（在路由器上）不加 mss clamping 反而会出现连通性问题。原因应该是路由器下的主机不知道有 wg 的存在发起 syn 还是基于 1492 的 mtu ，wg 服务端因为隧道就在主机上，他会用 1420mtu 握手，最终取小的 1420 进行通信。如果路由器客户端修改到了 1412 。他们协商的 1420 将无法通过路由器的接口。必须 clamping\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003e以上，有没有大佬能答疑解惑\u003c/h3\u003e\n",
+      "Author": "ppbaozi",
+      "PubDate": "2023-07-19T07:20:29Z"
+    },
+    {
       "Title": "在结构体中如何使用动态数组？ - C++",
       "Link": "https://www.v2ex.com/t/957998",
       "Description": "\u003cpre\u003e\u003ccode class=\"language-c++\"\u003estruct a1{\nint a;\nint b;\n};\n\nstruct bb{\na1 list[];\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e像这样在结构体 bb 中定义了 a1 类型的动态数组。\u003c/p\u003e\n\u003cp\u003e应该如何使用 bb 这个结构体？有没有代码\u003c/p\u003e\n",
