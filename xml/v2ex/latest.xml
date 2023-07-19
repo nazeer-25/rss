@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>CDC: 如何为 MySQL 做快照 - MySQL</title>
+      <link>https://www.v2ex.com/t/957943</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://debezium.io/documentation/reference/2.3/index.html&#34; rel=&#34;nofollow&#34;&gt;Debezium&lt;/a&gt; 是 &lt;a href=&#34;https://docs.confluent.io/platform/current/connect/index.html&#34; rel=&#34;nofollow&#34;&gt;Kafka Connect&lt;/a&gt; 生态体系下的一个 source connector,&#xA;支持实时将 MySQL, PostgreSQL 等数据库的变更事件转化为 Kafka 的消息.&#xA;随后, 我们可以通过种类丰富的 sink 将数据导入其他数据源.&lt;/p&gt;&#xA;&lt;p&gt;本文以 MySQL 为例, 简单介绍 &lt;a href=&#34;https://debezium.io/documentation/reference/2.3/index.html&#34; rel=&#34;nofollow&#34;&gt;Debezium&lt;/a&gt; 在初次创建 connector 时为数据库做快照的策略.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;获取读锁, 限制表结构的变更&lt;/li&gt;&#xA;&lt;li&gt;读取表结构&lt;/li&gt;&#xA;&lt;li&gt;设置事务隔离级别为 REPEATABLE READ&lt;/li&gt;&#xA;&lt;li&gt;释放读锁, 允许对表的结构和数据进行更新&lt;/li&gt;&#xA;&lt;li&gt;读取所有表的数据&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;锁&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://debezium.io/documentation/reference/2.3/index.html&#34; rel=&#34;nofollow&#34;&gt;Debezium&lt;/a&gt; 优先会选择全局读锁来限制表结构的变更,&#xA;对应 SQL &lt;code&gt;FLUSH TABLES WITH READ LOCK&lt;/code&gt;.&#xA;在无法获取全局读锁的情况下, &lt;a href=&#34;https://debezium.io/documentation/reference/2.3/index.html&#34; rel=&#34;nofollow&#34;&gt;Debezium&lt;/a&gt; 需要为每一张表单独加锁,&#xA;对应 SQL &lt;code&gt;FLUSH TABLE {} WITH READ LOCK&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;优先使用全局读锁而非表锁的主要原因在于:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://debezium.io/documentation/reference/2.3/index.html&#34; rel=&#34;nofollow&#34;&gt;Debezium&lt;/a&gt; 通过设置事务隔离级别为 RR 来保证全表数据的一致性, 读取到的都是在事务开始那一刻的快照&lt;/li&gt;&#xA;&lt;li&gt;释放表锁会同时提交当前事务, 所以在读取完全部数据前需要持有锁, 视数据规模, 写禁止会持续几分钟到几十分钟&lt;/li&gt;&#xA;&lt;li&gt;释放全局读锁并不会导致事务被提交, 所以可以在读取完表结构后即释放锁, 写禁止的时间一般小于一秒, 和数据规模无关&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;扫表&lt;/h2&gt;&#xA;&lt;p&gt;这个操作其实在业务上也会比较常见, 一些人会错误的通过不断更新 OFFSET 来实现扫全表.&#xA;在稍有规模的数据集就会发现当 OFFSET 变大时, SQL 执行的很慢.&#xA;于是更换成浮标式的分页, 即使用当前查询的主键做为下次查询的限制条件, 规避对 OFFSET 的需求.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://debezium.io/documentation/reference/2.3/index.html&#34; rel=&#34;nofollow&#34;&gt;Debezium&lt;/a&gt; 利用 &lt;a href=&#34;https://dev.mysql.com/doc/connectors/en/connector-j-reference-implementation-notes.html&#34; rel=&#34;nofollow&#34;&gt;JDBC&lt;/a&gt; 提供的 stream 概念简化了逻辑的同时, 提高了效率.&#xA;从使用上看, 通过设置 &lt;code&gt;TYPE_FORWARD_ONLY&lt;/code&gt; 和 &lt;code&gt;CONCUR_READ_ONLY&lt;/code&gt;, &lt;a href=&#34;https://dev.mysql.com/doc/connectors/en/connector-j-reference-implementation-notes.html&#34; rel=&#34;nofollow&#34;&gt;JDBC&lt;/a&gt; 会实现类似 lazy load 的效果.&#xA;先加载 &lt;code&gt;n&lt;/code&gt; 条数据, 当用户需要 n+1th 数据时再加载 &lt;code&gt;n&lt;/code&gt; 条数据.&lt;/p&gt;&#xA;&lt;p&gt;虽然没有去看 &lt;a href=&#34;https://dev.mysql.com/doc/connectors/en/connector-j-reference-implementation-notes.html&#34; rel=&#34;nofollow&#34;&gt;JDBC&lt;/a&gt; 具体的实现, 但是结合文档中提及的内容, 我们可以猜测:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://dev.mysql.com/doc/connectors/en/connector-j-reference-implementation-notes.html&#34; rel=&#34;nofollow&#34;&gt;JDBC&lt;/a&gt; 向 server 原封不动的发送了 sql.&lt;/li&gt;&#xA;&lt;li&gt;socket 读取到 n 条数据后, hang 住直到上游需要更多的数据.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>GopherDaily</author>
+      <pubDate>19 Jul 2023 04:40:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>郑州，找工作 - 酷工作</title>
+      <link>https://www.v2ex.com/t/957942</link>
+      <description>&lt;p&gt;有么在郑州的老铁&#xA;郑州有什么靠谱的公司，正常双休，正常五险一金&#xA;国企社招信息一般去哪里找类&lt;/p&gt;&#xA;</description>
+      <author>jianjian714</author>
+      <pubDate>19 Jul 2023 04:39:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>Bing chat 里开始出现广告了？ - Bing</title>
+      <link>https://www.v2ex.com/t/957941</link>
+      <description>不知道什么情况下会触发广告...&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/bcP0LAB.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/bcP0LAB.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;</description>
+      <author>silypie</author>
+      <pubDate>19 Jul 2023 04:37:49 +0000</pubDate>
+    </item>
+    <item>
       <title>想问问做 HR 的朋友，现在更看重前端程序员的哪些特质呢？ - 职场话题</title>
       <link>https://www.v2ex.com/t/957940</link>
       <description>&lt;p&gt;本人在昆明做前端，工作了五年多，最近刚从上一家公司离职。在投简历的时候发现，对比我 21 年找工作的时候，今年突然变得很难获得面试邀请。这点让我开始有些摸不到头脑。&#xA;21 年的时候我的项目经验都非常简单，技术栈积累的很少，可是依然有很多公司愿意让我去面对面交流看看。经过这两年的工作，我积累了比之前更大更多的项目经验，也学了不少的新东西，但是我突然发现我投了很多简历，几乎没有公司想让我去面试，想问问大家我的问题究竟是出在哪里呢？&#xA;我的技术栈和上应该和市场最主流的程序员差不多，就是 vue3 全家桶，react 也可以写，nodeJs 也能写一些，uniapp 也有开发经验。项目主要都是各地方的水利信息管理系统，也还是挺正经的项目。&#xA;我的年纪今年刚 30 ，学历上不是相关专业毕业，是一个农科二本院校，学农业相关专业，后期通过自学和培训进入这个行业。是否是这些条件太差所以被刷掉了呢？&#xA;希望大家可以帮我分析分析，出出主意，我现在应该怎么努力才能找到一份合适的工作呢？&lt;/p&gt;&#xA;</description>
