@@ -4,6 +4,83 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>程序员从事什么行业或工种最有前途？ - 问与答</title>
+      <link>https://www.v2ex.com/t/958198</link>
+      <description>&lt;p&gt;行业说的是类似于互联网、金融、传统行业这样的行业分类或者其细分，例如互联网里的电商、ai ，金融里的量化交易等。&#xA;工种说的是什么类型的开发工作，例如前端、后端等。其实有时候行业和工种是绑定的，有些行业没有某个工种，也有某个工种只在某个行业才有。但是，这里就分开吧。毕竟某些工种在好多行业都有。&#xA;前途说的是薪资或工作稳定性等，可以不一起考虑。&lt;/p&gt;&#xA;&lt;p&gt;之所以这样问，是因为有些行业可能未来发展会很好。在那个行业无论从事什么类型的开发，都不错。也有可能某个技术或工种无论在哪个行业都需要用，未来不管行业如何变动，这个工种都不会消失。&lt;/p&gt;&#xA;</description>
+      <author>sbldehanhan</author>
+      <pubDate>20 Jul 2023 02:01:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>在 Unity 3D 中遇到无法控制摄像头的问题，请教一下谢谢啦 - 问与答</title>
+      <link>https://www.v2ex.com/t/958197</link>
+      <description>&lt;p&gt;主要的功能就是楼层拆解，打开楼层后，镜头拉进&lt;/p&gt;&#xA;&lt;h2&gt;这个是摄像机的脚本，不知道会不会锁住摄像机导致我无法控制&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code&gt;using UnityEngine;&#xA;&#xA;public class CameraTargetMove : MonoBehaviour&#xA;{&#xA;    public Transform target;&#xA;    public Vector3 pivotOffset = Vector3.zero;&#xA;    public float distance = 117.0f;&#xA;    public float minDistance = 2f;&#xA;    public float maxDistance = 150f;&#xA;    public float zoomSpeed = 1f;&#xA;    public float xSpeed = 250.0f;&#xA;    public float ySpeed = 250.0f;&#xA;    public bool allowYTilt = true;&#xA;    public float yMinLimit = -90f;&#xA;    public float yMaxLimit = 90f;&#xA;    private float x = 0.0f;&#xA;    private float y = 0.0f;&#xA;    private float targetX = 0f;&#xA;    private float targetY = 0f;&#xA;    public float targetDistance = 117f;&#xA;&#xA;    public bool userControlEnabled = false;  // 用户控制开关&#xA;    private bool isFirstFrame = true;&#xA;    private void Start()&#xA;    {&#xA;        var angles = transform.eulerAngles;&#xA;        targetX = x = angles.x;&#xA;        targetY = y = ClampAngle(angles.y, yMinLimit, yMaxLimit);&#xA;        targetDistance = distance;&#xA;        userControlEnabled = true;&#xA;    }&#xA;&#xA;    private void LateUpdate()&#xA;    {&#xA;        if (!target) return;&#xA;&#xA;        if (userControlEnabled) {&#xA;            var scroll = Input.GetAxis(&#34;Mouse ScrollWheel&#34;);&#xA;            if (scroll &amp;gt; 0.0f) targetDistance -= zoomSpeed;&#xA;            else if (scroll &amp;lt; 0.0f)&#xA;                targetDistance += zoomSpeed;&#xA;            targetDistance = Mathf.Clamp(targetDistance, minDistance, maxDistance);&#xA;           // if (Input.GetMouseButton(1) || (Input.GetMouseButton(0) &amp;amp;&amp;amp; (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))))&#xA;            if (Input.GetMouseButton(0))&#xA;                {&#xA;                targetX += Input.GetAxis(&#34;Mouse X&#34;) * xSpeed * 0.02f;&#xA;                if (allowYTilt)&#xA;                {&#xA;                    targetY -= Input.GetAxis(&#34;Mouse Y&#34;) * ySpeed * 0.02f;&#xA;                    targetY = ClampAngle(targetY, yMinLimit, yMaxLimit);&#xA;                }&#xA;            }&#xA;&#xA;            x = targetX;&#xA;            y = targetY;&#xA;            Quaternion rotation = Quaternion.Euler(y, x, 0);&#xA;            distance = targetDistance;&#xA;            Vector3 position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position + pivotOffset;&#xA;            transform.rotation = rotation;&#xA;            transform.position = position;&#xA;&#xA;        }&#xA;       &#xA;    }&#xA;&#xA;&#xA;    private static float ClampAngle(float angle, float min, float max)&#xA;    {&#xA;        if (angle &amp;lt; -360) angle += 360;&#xA;        if (angle &amp;gt; 360) angle -= 360;&#xA;        return Mathf.Clamp(angle, min, max);&#xA;    }&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;在其他脚本处使用&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code&gt;Camera.main.transform.LookAt(new Vector3(0.1f, 97f, -8.7f));&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;img&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/xOs4CTv.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>vueli</author>
+      <pubDate>20 Jul 2023 02:00:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>昨天 iOS 上的 ins 似乎挂了 - 分享发现</title>
+      <link>https://www.v2ex.com/t/958196</link>
+      <description>&lt;p&gt;需要重新下载才行 没看到有人讨论呢&lt;/p&gt;&#xA;</description>
+      <author>ycyppq123</author>
+      <pubDate>20 Jul 2023 01:58:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>[菜鸟请教] docker 中部署 ubuntu 的作用的正确使用方式 - Docker</title>
+      <link>https://www.v2ex.com/t/958195</link>
+      <description>&lt;p&gt;经不住绿联 NAS 的超低硬件价格诱惑，整了一台。&#xA;于是开始折腾 docker ，发现在 docker 中部署 ubuntu 之后似乎没有图形界面，不能像使用独立安装的 ubuntu 那种使用。&#xA;请问这个 ubuntu 的作用是什么？如果正确使用？&lt;/p&gt;&#xA;</description>
+      <author>orangy</author>
+      <pubDate>20 Jul 2023 01:54:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>有哪些程序员画图的好工具，和如何画一个好的系统/程序流程图 - 程序员</title>
+      <link>https://www.v2ex.com/t/958194</link>
+      <description>&lt;h4&gt;有哪些程序员画图的好工具，和如何画一个好的系统/程序流程图呢？&lt;/h4&gt;&#xA;&lt;p&gt;之前都是用 processon,今天打开新建文件需要会员:joy::joy::joy:，求推荐个免费好用点的，个人使用频率也不是很高，&lt;/p&gt;&#xA;&lt;p&gt;还有就是如何学习画一个优雅的系统/程序流程图呢？平时学习总结的时候，偶尔需要用图示直观展示一下，但是感觉自己画的太过于朴素，虽然不求花里胡哨，还是希望勉强看着顺眼点&lt;/p&gt;&#xA;</description>
+      <author>nerkeler</author>
+      <pubDate>20 Jul 2023 01:54:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>现在学习 ios 的话，只学习 switf 够了吗？ - iOS</title>
+      <link>https://www.v2ex.com/t/958193</link>
+      <description>&lt;p&gt;目前想扩充一个技术栈，就是学习 ios 开发，想问下，现在只学习 switf 就够了吗，还要不要学习 OC&lt;/p&gt;&#xA;</description>
+      <author>okhao8801</author>
+      <pubDate>20 Jul 2023 01:53:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>15 万左右的车, 有推荐的吗? 性价比高点的 - 问与答</title>
+      <link>https://www.v2ex.com/t/958192</link>
+      <description>&lt;p&gt;基本都是短途使用, 第一辆车, 混动和油车都有啥推荐的&lt;/p&gt;&#xA;</description>
+      <author>shunwei</author>
+      <pubDate>20 Jul 2023 01:46:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>mac m1 合盖一晚后(未休眠)开盖后外接显示器无信号 - 问与答</title>
+      <link>https://www.v2ex.com/t/958191</link>
+      <description>同一个显示器之前在用 intel mac 的时候从没有遇到过合盖后开盖外接屏无信号的情况，也没遇到开盖熄屏后移动鼠标点亮屏幕后无信号的情况。&lt;br /&gt;        最近新换了 m1 ，13.4.1 的系统，无论是开盖情况下自动熄屏，还是合盖后重新开盖时都遇到了外接屏无信号的情况，开盖情况下外接屏无信号需要在外接屏开关按钮上关掉再开一下就能恢复，而合盖后开盖无信号，必须要重新插拔连接线才能出信号。&lt;br /&gt;对了，用的是显示器的 DP 接口，绿联拓展坞➕一条 hdmi 转 DP 的对接显示器 DP&lt;br /&gt;大家有遇到过这种情况吗？有没有解决办法</description>
+      <author>eggt</author>
+      <pubDate>20 Jul 2023 01:46:19 +0000</pubDate>
+    </item>
+    <item>
+      <title>[广州] 央企持续内推，专场招聘，当天沟通 offer，职位多，福利好 - 酷工作</title>
+      <link>https://www.v2ex.com/t/958189</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://app.mokahr.com/recommendation-apply/uniin/29103?recommendCode=NTAExY2&amp;amp;hash=%23%2Fjobs%3Fkeyword%3D&#34; rel=&#34;nofollow&#34;&gt;点击查看职位/投递&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;硬性要求：学历和学校一本及以上&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;主要职位：AI 工程师、安全运营工程师、全栈开发工程师、实施交付团队总监、方案经理、项目经理等等&lt;/p&gt;&#xA;&lt;p&gt;主要方向：安全、AI 、医疗（特别是安全方向、需求多、潜力好）&lt;/p&gt;&#xA;&lt;p&gt;公司基本情况&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;位于广州国际生物岛，真地铁上盖，国际级园区和一线江景写字楼；&lt;/li&gt;&#xA;&lt;li&gt;固定 13 薪，年终奖另算，一般 6 个月起；&lt;/li&gt;&#xA;&lt;li&gt;工资当月发，年终奖农历前发；&lt;/li&gt;&#xA;&lt;li&gt;8 险 2 金，公积金 12%且按年薪算；&lt;/li&gt;&#xA;&lt;li&gt;项目激励+每月多项补贴（电脑 /高温 /资质 /租房 /过节费等等）；&lt;/li&gt;&#xA;&lt;li&gt;多个合作食堂/餐厅（其中一个是麦当劳）+餐补高+免费宵夜+丰富过节礼品；&lt;/li&gt;&#xA;&lt;li&gt;班车+公租房+广州中小学入学指标等等；&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;等等；&lt;/p&gt;&#xA;&lt;p&gt;面试方式：&lt;a href=&#34;&#34; rel=&#34;nofollow&#34;&gt;专场招聘&lt;/a&gt;（ 7.25 ）是线下，其他时候一般是全流程视频面试&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://app.mokahr.com/recommendation-apply/uniin/29103?recommendCode=NTAExY2&amp;amp;hash=%23%2Fjobs%3Fkeyword%3D&#34; rel=&#34;nofollow&#34;&gt;扫码查看职位/投递&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;PS:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;换工作是一件经过深思熟虑的严肃事情，&lt;a href=&#34;https://www.v2ex.com/t/832674&#34; rel=&#34;nofollow&#34;&gt;之前就在 V 站发过帖内推&lt;/a&gt;，感谢大家的信任留下了联系方式哈，我很乐意帮助大家了解我司，如果你需要，请留下绿色软件的联系方式，&lt;strong&gt;我会尽我所能解答你的问题、给你有用的建议和反馈面试进度，也可以交个朋友哈&lt;/strong&gt;；&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;内推的岗位都是自有人员，不是外包，不是外包，不是外包。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;关于薪酬待遇，我个人觉得我司薪酬比不上大厂，但各种福利加起来还是挺好的；&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;关于加班情况，这个要看项目和部门的情况，我们不像传统印象里的央企，但我觉得自由度还是挺高的；&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;关于我司，主要业务是 toB 和 toG ，目前 1600+人了，发展还是挺快挺稳的；&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;关于成长和晋升，很透明，有量化标准，够积分就可以晋升加薪；&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;关于我，我是开发哈，不是 HR ，不是 HR ，不是 HR ，如果你是开发，我可以帮忙看看简历，给点意见；&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;关于投递，你可以自己投递或者留下联系我帮你投递&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>v2lhr</author>
+      <pubDate>20 Jul 2023 01:42:27 +0000</pubDate>
+    </item>
+    <item>
+      <title>给老爹找份家教工作 - 问与答</title>
+      <link>https://www.v2ex.com/t/958188</link>
+      <description>&lt;p&gt;本人老爹有近 40 年的高中数学教学经验，教学能力经我本人亲身验证是杠杠的。因往年一直听我诉苦北漂的心酸与无助，今年 60 岁退休后毅然决然的要来北京做一把上进的北漂给我这个中年人上一课。&#xA;之前一直没有关注过家教行业，今天我花了一些功夫找了一些家教平台，感觉都半死不活的，请教大家有没有什么经验可以分享一下，也好让老爹尽快接受社会的“毒打”，让他尽快成为一个合格的北漂。&lt;/p&gt;&#xA;</description>
+      <author>jerseyhero</author>
+      <pubDate>20 Jul 2023 01:40:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>Apple Watch 体能训练分类是不是毫无意义？ -  WATCH</title>
+      <link>https://www.v2ex.com/t/958187</link>
+      <description>健身选择不同运动，每分钟消耗大概都是 5 千卡，这样还搞分类是不是没实际意义，仅仅是销售口号？</description>
+      <author>CNN</author>
+      <pubDate>20 Jul 2023 01:40:16 +0000</pubDate>
+    </item>
+    <item>
       <title>提取 B 站音乐合集音频 - 生活</title>
       <link>https://www.v2ex.com/t/958185</link>
       <description>最近喜欢在 B 站听歌曲合集，但是感觉网页版 B 站好像有点卡？有没有简单方法可以把 B 站歌曲合集的音频文件提取出来。</description>
