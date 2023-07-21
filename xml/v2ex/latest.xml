@@ -4,6 +4,19 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>plus 现在还会被封号吗？ - OpenAI</title>
+      <link>https://www.v2ex.com/t/958679</link>
+      <author>Windyzhou</author>
+      <pubDate>21 Jul 2023 09:55:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问预算 1500 能买到什么样的二手安卓备用机？ - 问与答</title>
+      <link>https://www.v2ex.com/t/958678</link>
+      <description>&lt;p&gt;需求：支持无线充电、原生系统或者有类原生系统可刷、支持电信卡，看了一圈三星 S20/S21 不错，请教大家还有更适合的机器吗？&lt;/p&gt;&#xA;</description>
+      <author>Danswerme</author>
+      <pubDate>21 Jul 2023 09:52:42 +0000</pubDate>
+    </item>
+    <item>
       <title>请教：群晖 Docker 挂载文件夹时找不到 home 和 homes 文件夹怎么授权？ - NAS</title>
       <link>https://www.v2ex.com/t/958677</link>
       <description>&lt;p&gt;我记得之前有来着。不知为啥无了。&lt;/p&gt;&#xA;</description>
@@ -13,7 +26,7 @@
     <item>
       <title>在 arm 版的 pve 中建了一个 alpine lxc 容器，发现每次重启容器后网络配置都被还原 - Linux</title>
       <link>https://www.v2ex.com/t/958676</link>
-      <description>&lt;p&gt;在一台 arm vps （ 6c16g200G ） 上装了 pve ，&lt;/p&gt;&#xA;&lt;p&gt;因为只有单 ip ，网络按照文档中的&lt;code&gt;基于 iptables 的网络地址转换配置&lt;/code&gt;进行配置&lt;/p&gt;&#xA;&lt;p&gt;然后在 pve webui 中新建一个 alpine 非特权容器,网络设置中也手动设置了 ip 和网关&lt;/p&gt;&#xA;&lt;p&gt;进入容器后，发现容器没网络，进一步排查发现 /etc/network/interfaces 中的配置为 &lt;code&gt;iface vmbr0 inet dhcp&lt;/code&gt;，于是手动修改了 /etc/network/interfaces&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;auto lo&#xA;iface lo inet loopback&#xA;&#xA;auto eth0&#xA;iface eth0 inet static&#xA;address 10.10.10.100/24&#xA;gateway 10.10.10.1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;重启网络，连网正常，但。。一单容器重启，/etc/network/interfaces 文件被还原为&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;auto lo&#xA;iface lo inet loopback&#xA;&#xA;auto eth0&#xA;iface eth0 inet dhcp&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;试过把容器删除重新建一个，也一样。。&lt;/p&gt;&#xA;&lt;p&gt;arm vps 安装的是 debian 11 ，pve 用的是佛西版 &lt;a href=&#34;https://github.com/jiangcuo/Proxmox-Arm64&#34; rel=&#34;nofollow&#34;&gt;https://github.com/jiangcuo/Proxmox-Arm64&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;在一台 arm vps （ 6c16g200G ） 上装了 pve ，&lt;/p&gt;&#xA;&lt;p&gt;因为只有单 ip ，网络按照文档中的&lt;code&gt;基于 iptables 的网络地址转换配置&lt;/code&gt;进行配置&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;# The loopback network interface&#xA;auto lo&#xA;iface lo inet loopback&#xA;&#xA;# The primary network interface&#xA;allow-hotplug enp1s0&#xA;iface enp1s0 inet static&#xA;&#x9;address xxx.xxx..xxx..xxx./24&#xA;&#x9;gateway xxx..xxx..xxx..xxx.&#xA;&#x9;# dns-* options are implemented by the resolvconf package, if installed&#xA;&#x9;dns-nameservers 1.0.0.1 8.8.4.4 &#xA;iface enp1s0 inet6 dhcp&#xA;&#xA;&#xA;auto vmbr0&#xA;iface vmbr0 inet static&#xA;address  10.10.10.1/24&#xA;bridge-ports none&#xA;bridge-stp off&#xA;bridge-fd 0&#xA;post-up   echo 1 &amp;gt; /proc/sys/net/ipv4/ip_forward&#xA;post-up   iptables -t nat -A POSTROUTING -s &#39;10.10.10.0/24&#39; -o enp1s0 -j MASQUERADE&#xA;post-down iptables -t nat -D POSTROUTING -s &#39;10.10.10.0/24&#39; -o enp1s0 -j MASQUERADE&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后在 pve webui 中新建一个 alpine 非特权容器,网络设置中也手动设置了 ip 和网关&lt;/p&gt;&#xA;&lt;p&gt;进入容器后，发现容器没网络，进一步排查发现 /etc/network/interfaces 中的配置为 &lt;code&gt;iface vmbr0 inet dhcp&lt;/code&gt;，于是手动修改了 /etc/network/interfaces&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;auto lo&#xA;iface lo inet loopback&#xA;&#xA;auto eth0&#xA;iface eth0 inet static&#xA;address 10.10.10.100/24&#xA;gateway 10.10.10.1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;重启网络，连网正常，但。。一单容器重启，/etc/network/interfaces 文件被还原为&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;auto lo&#xA;iface lo inet loopback&#xA;&#xA;auto eth0&#xA;iface eth0 inet dhcp&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;试过把容器删除重新建一个，也一样。。&lt;/p&gt;&#xA;&lt;p&gt;arm vps 安装的是 debian 11 ，pve 用的是佛西版 &lt;a href=&#34;https://github.com/jiangcuo/Proxmox-Arm64&#34; rel=&#34;nofollow&#34;&gt;https://github.com/jiangcuo/Proxmox-Arm64&lt;/a&gt;&lt;/p&gt;&#xA;</description>
       <author>moxuanyuan</author>
       <pubDate>21 Jul 2023 09:50:05 +0000</pubDate>
     </item>
