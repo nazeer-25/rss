@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求教如何在 C++中优雅地实现在 C 中的 void *所能实现的部分功能 - C++</title>
+      <link>https://www.v2ex.com/t/958698</link>
+      <description>&lt;p&gt;目前手上有一个将用 C 实现的科学计算程序重写为 C++实现的任务，需要将其中大量的 C 风格实现改为 OOP 风格实现，但是目前遇到了一些实现上的问题&lt;/p&gt;&#xA;&lt;p&gt;原始程序中使用&lt;code&gt;struct&lt;/code&gt;维护一个全局计算数据结构，所有的计算 kernel 又会单独使用一系列的&lt;code&gt;struct&lt;/code&gt;来维护每个 kernel 所需要的参数。这些 kernel 参数结构体在用于保存全局计算的结构体中使用了&lt;code&gt;void *&lt;/code&gt;进行管理，然而在迁移到 C++的过程中要求不能使用&lt;code&gt;void *&lt;/code&gt;，故问一问各位大佬如何在 C++中优雅且低成本地实现类似&lt;code&gt;void *&lt;/code&gt;的功能&lt;/p&gt;&#xA;&lt;p&gt;在原始的程序中，全局计算结构体存在这样的成员&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;typedef struct {&#xA; // ...&#xA;&#xA;void *something[N];&#xA; &#xA; // ...&#xA;} GlobalStruct;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;其中这个&lt;code&gt;void *&lt;/code&gt;可能对应多个不同的结构体，各个结构体之间相互有不同的成员，例如&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;typedef struct {&#xA;&#x9;int a;&#xA;    int b;&#xA;    short c;&#xA;} A;&#xA;&#xA;typedef struct {&#xA;&#x9;int a;&#xA;    int b;&#xA;    double d;&#xA;} B;&#xA;&#xA;typedef struct {&#xA;&#x9;int a;&#xA;    int b;&#xA;} C;&#xA;&#xA;void kernel_A(A *data);&#xA;void kernel_B(B *data);&#xA;void kernel_C(C *data);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;请问有什么方法可以在 C++程序中实现在上面&lt;code&gt;void *&lt;/code&gt;的效果。&lt;/p&gt;&#xA;</description>
+      <author>shizukupr</author>
+      <pubDate>21 Jul 2023 12:17:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>将 VHDX 引入到文件存储的设想 - 分享创造</title>
+      <link>https://www.v2ex.com/t/958697</link>
+      <description>&lt;p&gt;我想探讨一下关于引入 VHDX 技术到文件存储，是否具有可行性？&lt;/p&gt;&#xA;&lt;h2&gt;VHDX 可以为数据提供类似还原点的保护。&lt;/h2&gt;&#xA;&lt;p&gt;经典的场景例如误删了某个文件，可以通过只读挂载之前的 VHDX 节点可以马上取回。&lt;/p&gt;&#xA;&lt;h2&gt;VHDX 可以跨磁盘存储。&lt;/h2&gt;&#xA;&lt;p&gt;利用父子链机制将父盘和子盘放置在不同的物理磁盘、甚至是 SMB 、ISCSI 空间，在一定程度上类似于 JBOD 阵列的效果。这样就可以将所有介质利用起来，并且由于 VHDX 是作为文件而存在的，不需要重新格式化任何介质，属于一种弹性机制。&lt;/p&gt;&#xA;&lt;h2&gt;VHDX 利于备份。&lt;/h2&gt;&#xA;&lt;p&gt;例如，利用父子链机制产生了 G1 、G2 、G3 、G4 ，4 个 VHDX ，可以将这些 VHDX 文件分别保存到不同的存储介质中，例如云盘、冷备份等等。原始 VHDX 链条的任何一块 VHDX 出现丢失（ VHDX 所在的物理磁盘损坏），都可以通过补全 VHDX 链条的方式取回数据。而每一个 VHDX 都仅仅包含所有数据的一部分（取决于建立该节点和下一个节点的时间间隔），例如一个完整的块或者扇区，因此除了第一个节点以外，都无法被单独打开使用，具有相对的安全性。&lt;/p&gt;&#xA;&lt;h2&gt;VHDX 有一定的抗病毒能力。&lt;/h2&gt;&#xA;&lt;p&gt;某些勒索病毒会把电脑上的文件加密，然后给你留下勒索信息。然而如果采用了 VHDX 技术存储，可以立即回到上一个节点取回所有文件，因为病毒所做的任何加密都只是对原有文件的修改，VHDX 仅仅是将这些修改保存到了最新的子节点里面。VHDX 文件序列（包括整条父子链，例如 G1~G4 ）本身在挂载的时候是无法被修改的，具有系统内核级别的占用。&lt;/p&gt;&#xA;&lt;h2&gt;缺点：&lt;/h2&gt;&#xA;&lt;p&gt;缺点也是有的。例如读写效率相比原生硬盘较低。同时也会占用更多的 CPU 时间。此外，VHDX 还会占用少部分空间用于记录块分配表以及元数据。&lt;/p&gt;&#xA;&lt;p&gt;VHDX 不具备任何压缩的能力，仅仅是将数据打包，提到这个就延伸出另一个用法：文件打包。使用 VHDX 来打包文件的好处在于，在传输大量数据的时候节约压缩和解压的时间，接收者仅仅只需要双击即可挂载 VHDX 文件为一个单独的盘符，然后访问里面的文件。VHDX 自从 Win8 开始已经得到了广泛支持，在 PC 市场普及很广，Linux 也有相对应的 VM 工具用于挂载。&lt;/p&gt;&#xA;&lt;h2&gt;相关软件&lt;/h2&gt;&#xA;&lt;p&gt;BOOTICE 是一个很好的软件，实现了很多 VHDX 的功能，但它利用的是系统的接口。另外，我已经完成了 VHDX Tools 的大部分开发，但由于界面还不太美观还需锤炼，所以并未发布。技术方面是根据微软的 VHDX 文档：&lt;a href=&#34;https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-vhdx/83e061f8-f6e2-4de1-91bd-5d518a43d477&#34; rel=&#34;nofollow&#34;&gt;MS-VHDX&lt;/a&gt; 自己实现的逻辑，大部分功能可以跨平台运行而无需依赖于 Powershell 接口。目前的功能主要是对 VHDX 进行管理，如果有需要的话后期会开发对文件存储相关的功能，例如创建完 VHDX 后顺便把文件系统也创建了，这样挂载完毕后就是一个可用的分区；对父子链的记录也有一定的必要。&lt;/p&gt;&#xA;&lt;h2&gt;一些问题&lt;/h2&gt;&#xA;&lt;p&gt;VHDX 技术能否真正应用于文件存储？有哪些阻碍或者不足？这不是一个刚出现的技术，而是在很多年前就被应用于虚拟化的技术，具有相当的可靠性，但似乎从未推广到文件存储。&lt;/p&gt;&#xA;&lt;p&gt;笔者的思路和见识都有限，如果你有什么疑问或想法，可以写下你的思考。&lt;/p&gt;&#xA;</description>
+      <author>shalingye</author>
+      <pubDate>21 Jul 2023 12:14:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>为啥 Swift 课程那么少？（纯讨论 - 问与答</title>
+      <link>https://www.v2ex.com/t/958696</link>
+      <description>&lt;p&gt;为啥国内关于 Swift 的课程那么少？连慕课和卖二手课的，都没有关于 Swift 的课程？&lt;/p&gt;&#xA;&lt;p&gt;我现在基本都在看国外的教程，质量也不错，只是突然产生了这个疑问。&lt;/p&gt;&#xA;</description>
+      <author>WhoCanBeRich</author>
+      <pubDate>21 Jul 2023 12:12:55 +0000</pubDate>
+    </item>
+    <item>
       <title>杭州电信只能单拨了吗 - 宽带症候群</title>
       <link>https://www.v2ex.com/t/958695</link>
       <description>问了下客服，答复：电信方保证单条宽带客户在 1 台电脑正常上正常拨号。XGPON 原因吗</description>
