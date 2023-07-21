@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>创建了一个上海本地二手商品交易群，有兴趣的加 - 上海</title>
+      <link>https://www.v2ex.com/t/958573</link>
+      <description>&lt;p&gt;只限上海本地的朋友线下交易闲置物品，扫码进群不要乱发广告不然踢出&#xA;[img]&lt;a href=&#34;https://i.imgur.com/VM5Xeds.jpg&#34; rel=&#34;nofollow&#34;&gt;https://i.imgur.com/VM5Xeds.jpg&lt;/a&gt;[/img]&lt;/p&gt;&#xA;</description>
+      <author>TIANWAIFEIMAO</author>
+      <pubDate>21 Jul 2023 05:16:35 +0000</pubDate>
+    </item>
+    <item>
+      <title>Visual Studio Code Python 扩展中的库管理 - Visual Studio Code</title>
+      <link>https://www.v2ex.com/t/958572</link>
+      <description>&lt;p&gt;Python 凭借其简单的语法和强大的库，目前已成为最流行的编程语言之一，也是最适合那些刚接触编程的人们的语言。但是，随着项目的复杂性和规模的增长，管理依赖项的复杂性也会增加。随着新用户承接更成熟的项目，他们了解了虚拟环境和管理依赖关系的重要性。虽然 Python 中的虚拟环境和库管理的好处是不可否认的，但必须承认它们带来的潜在挑战，特别是对于初学者。对于那些刚接触 Python 开发的人来说，术语、概念和各种可用的工具可能会让人不知所措。 &lt;/p&gt;&#xA;&lt;p&gt;Visual Studio Code 的 Python 扩展设置使用 &lt;strong&gt;Python：Create Environment&lt;/strong&gt; 命令简化了虚拟环境的创建。此命令可帮助任何技能水平的开发人员创建隔离的环境，每个环境都有自己的一组已安装的包和依赖项。但是，我们相信在扩展中对包管理工具的支持方面仍有提高空间。在高级设置上，库管理工具简化了安装包、解析依赖项和处理版本约束的过程。虽然有许多可用的包管理工具，但我们想看看在标准 Python 安装中包含的 &lt;code&gt;pip&lt;/code&gt; 和 &lt;code&gt;venv&lt;/code&gt; 的支持下我们可以走多远。本练习的一部分包括研究流行的库管理工具提供的常见 CLI 命令，以发现功能的交叉点，并确定 &lt;code&gt;pip&lt;/code&gt; 和 &lt;code&gt;venv&lt;/code&gt; 在哪些方面不提供直接支持。我们希望提供一个工作流程，与 &lt;strong&gt;Python：Create Environment&lt;/strong&gt; 命令来简化包管理。 &lt;/p&gt;&#xA;&lt;h1&gt;目标&lt;/h1&gt;&#xA;&lt;p&gt;作为 VS Code 的 Python 扩展的一部分，提出并实现一个有主见的工作流程，来达到： &lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;支持正在使用 Python 包和虚拟环境的初学者。 &lt;/li&gt;&#xA;&lt;li&gt;通过环境创建说明简化包管理事项。 &lt;/li&gt;&#xA;&lt;li&gt;允许第三方包管理扩展集成到工作流中以提供自己的支持。 &lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;当前提案&lt;/h1&gt;&#xA;&lt;p&gt;VS Code 中的 Python 扩展希望通过提供一个工作流程来解决库管理初学者的一个常见误区，类似于 &lt;strong&gt;Python：Create Environment&lt;/strong&gt; 命令中的工作流。但是，我们承认没有一种方法可以满足每个用户场景和偏好。最初，这些功能主要侧重于帮助处理不需要构建&lt;a href=&#34;https://packaging.python.org/en/latest/glossary/#term-Wheel&#34; rel=&#34;nofollow&#34;&gt;wheel&lt;/a&gt;文件的脚本、应用程序和项目的初学者。初学者主要关心的是实现成功的执行并确保可重复性。由于 VS Code 的 Python 扩展考虑了我们如何解决这个问题，我们希望与社区概述的标准紧密结合，但在某些领域选择固执己见。我们将此建议分为两部分进行考虑：命令覆盖率和记录用户的依赖关系。与往常一样，我们对如何改进和实现这一点持开放态度（&lt;a href=&#34;https://github.com/microsoft/vscode-python/issues/21627&#34; rel=&#34;nofollow&#34;&gt;vscode-python#21627&lt;/a&gt;）！ &lt;/p&gt;&#xA;&lt;p&gt;目前有好几种流行的依赖项和包管理工具可用。在这项研究中，我比较了 &lt;a href=&#34;https://pip.pypa.io/&#34; rel=&#34;nofollow&#34;&gt;Pip&lt;/a&gt;、&lt;a href=&#34;https://python-poetry.org/&#34; rel=&#34;nofollow&#34;&gt;Poetry&lt;/a&gt;、Hatch 、&lt;a href=&#34;https://docs.conda.io/&#34; rel=&#34;nofollow&#34;&gt;conda&lt;/a&gt;、&lt;a href=&#34;https://pdm.fming.dev/&#34; rel=&#34;nofollow&#34;&gt;PDM&lt;/a&gt; 和 &lt;a href=&#34;https://pipenv.pypa.io/&#34; rel=&#34;nofollow&#34;&gt;Pipenv&lt;/a&gt; CLI 命令，以找到它们为包管理提供的功能的交集，以及 &lt;code&gt;pip&lt;/code&gt; 和 &lt;code&gt;venv&lt;/code&gt; 没有提供这些其他工具所具有的直接支持的地方。 &lt;/p&gt;&#xA;&lt;h1&gt;我们希望在工作流程中匹配的 CLI 命令覆盖范围：&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;创建/更新依赖项文件 &lt;/li&gt;&#xA;&lt;li&gt;从文件读取、解析和安装依赖项 &lt;/li&gt;&#xA;&lt;li&gt;更新依赖项 &lt;/li&gt;&#xA;&lt;li&gt;删除库 &lt;/li&gt;&#xA;&lt;li&gt;添加库（并更新依赖项文件） &lt;/li&gt;&#xA;&lt;li&gt;创建环境 ✅ &lt;/li&gt;&#xA;&lt;li&gt;运行代码 ✅ &lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1&gt;记录依赖关系&lt;/h1&gt;&#xA;&lt;p&gt;虽然我们概述了我们希望支持的功能，但如何写下依赖项的问题仍然存在。尽管在“何处”和“如何”写下依赖关系背后没有严格的标准，但我们牢记初学者的主要动力：成功的执行和可重复性。 &lt;/p&gt;&#xA;&lt;p&gt;最初，我们认为默认设置应该是写入&lt;code&gt;requirements.txt&lt;/code&gt; 文件，包括已安装的库版本。默认情况下，选择编写版本支持用户对可重现性和易于协作工作的需求。考虑到目标受众所做工作的性质和我们的目标用法， &lt;code&gt;pyproject.toml&lt;/code&gt; 超出了范围，因为目标用户通常不会构建他们的项目，也没有直接的方法只安装 &lt;code&gt;pyproject.toml&lt;/code&gt; 文件中列出的依赖项。 &lt;/p&gt;&#xA;&lt;p&gt;虽然此工作流程最初侧重于帮助可能不舒服或不熟悉这些概念的初学者，但我们希望它也能成为更高级开发人员的工具。我们希望允许您首选的库管理器通过扩展集成到此工作流中，以支持更高级的工作流。 &lt;/p&gt;&#xA;&lt;h1&gt;结论&lt;/h1&gt;&#xA;&lt;p&gt;VS Code 中的 Python 扩展正在不断评估我们可以改善用户在扩展中的体验的方法，无论它们是否是新的。库管理是学习和使用 Python 时的核心基础，我们希望减少成功所需的障碍。与往常一样，我们很乐意听到您对我们功能的想法和反馈。有关此提案的具体反馈可以在&lt;a href=&#34;https://github.com/microsoft/vscode-python/issues/21627&#34; rel=&#34;nofollow&#34;&gt;vscode-python#21627&lt;/a&gt;上给出。&lt;/p&gt;&#xA;</description>
+      <author>winffee</author>
+      <pubDate>21 Jul 2023 05:08:52 +0000</pubDate>
+    </item>
+    <item>
       <title>出个千兆 wifi6 路由器 AX3000 - 优惠信息</title>
       <link>https://www.v2ex.com/t/958571</link>
       <description>&lt;p&gt;全新，京东刚换新的，原单去年 12 月下单，前几天售后直接换新，水星千兆 wifi6 路由器 AX3000 ，&#xA;明码 180 ，广东省内包邮&lt;/p&gt;&#xA;</description>
@@ -39,7 +53,7 @@
       <pubDate>21 Jul 2023 04:55:32 +0000</pubDate>
     </item>
     <item>
-      <title>原来 WeChat 发表情包还有保护 - 分享发现</title>
+      <title>原来 WeChat 发表情包还有保护 - 微信</title>
       <link>https://www.v2ex.com/t/958565</link>
       <description>使用微信输入法发表情真的太方便（无需跳转），今天遇到有些表情必须添加才能使用。&lt;br /&gt;测试了下微信没有这种限制。&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/SXLvAOm.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/SXLvAOm.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;</description>
       <author>CNN</author>
