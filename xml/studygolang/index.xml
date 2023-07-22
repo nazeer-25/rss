@@ -100,12 +100,12 @@
       <description>&lt;p&gt;package main&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import (&#xA;&#x9;&amp;ldquo;fmt&amp;rdquo;&#xA;&#x9;&amp;ldquo;log&amp;rdquo;&#xA;&#x9;&amp;ldquo;os&amp;rdquo;&#xA;&#x9;&amp;ldquo;path/filepath&amp;rdquo;&#xA;&#x9;&amp;ldquo;strings&amp;rdquo;&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;&amp;quot;github.com/kdomanski/iso9660&amp;quot;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func main() {&#xA;&#x9;writer, err := iso9660.NewWriter()&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Fatalf(&amp;ldquo;failed to create writer: %s&amp;rdquo;, err)&#xA;&#x9;}&#xA;&#x9;defer writer.Cleanup()&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;isoFile, err := os.OpenFile(&amp;quot;C:/output.iso&amp;quot;, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0644)&#xA;if err != nil {&#xA;&#x9;log.Fatalf(&amp;quot;failed to create file: %s&amp;quot;, err)&#xA;}&#xA;defer isoFile.Close()&#xA;&#xA;prefix := &amp;quot;F:\\&amp;quot;                                    // the prefix to remove in the output iso file&#xA;sourceFolders := []string{&amp;quot;F:\\test1&amp;quot;, &amp;quot;F:\\test2&amp;quot;} // the given directories to create an ISO file from&#xA;&#xA;for _, folderName := range sourceFolders {&#xA;&#x9;folderPath := strings.Join([]string{prefix, folderName}, &amp;quot;/&amp;quot;)&#xA;&#xA;&#x9;walk_err := filepath.Walk(folderPath, func(path string, info os.FileInfo, err error) error {&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;log.Fatalf(&amp;quot;walk: %s&amp;quot;, err)&#xA;&#x9;&#x9;&#x9;return err&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if info.IsDir() {&#xA;&#x9;&#x9;&#x9;return nil&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;outputPath := strings.TrimPrefix(path, prefix) // remove the source drive name&#xA;&#x9;&#x9;fmt.Printf(&amp;quot;Adding file: %s\n&amp;quot;, outputPath)&#xA;&#xA;&#x9;&#x9;fileToAdd, err := os.Open(path)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;log.Fatalf(&amp;quot;failed to open file: %s&amp;quot;, err)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;defer fileToAdd.Close()&#xA;&#xA;&#x9;&#x9;err = writer.AddFile(fileToAdd, outputPath)&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;log.Fatalf(&amp;quot;failed to add file: %s&amp;quot;, err)&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;return nil&#xA;&#x9;})&#xA;&#x9;if walk_err != nil {&#xA;&#x9;&#x9;log.Fatalf(&amp;quot;%s&amp;quot;, walk_err)&#xA;&#x9;}&#xA;}&#xA;&#xA;err = writer.WriteTo(isoFile, &amp;quot;Test&amp;quot;)&#xA;if err != nil {&#xA;&#x9;log.Fatalf(&amp;quot;failed to write ISO image: %s&amp;quot;, err)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>https://github.com/gravitational</title>
-      <link>https://studygolang.com/topics/16534#reply1</link>
-    </item>
-    <item>
       <title>AGS量化自动炒币机器人程式策略开发部署</title>
       <link>https://studygolang.com/articles/36204#reply0</link>
+    </item>
+    <item>
+      <title>https://github.com/gravitational</title>
+      <link>https://studygolang.com/topics/16534#reply1</link>
     </item>
     <item>
       <title>租赁算力合约挖矿系统dapp</title>
