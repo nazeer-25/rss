@@ -109,13 +109,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "关于理解go语言中的指针",
-      "Link": "https://studygolang.com/topics/16532#reply1",
-      "Description": "\u003cp\u003e要如何理解go语言中的指针啊 网上让我迷惑不清 看混了\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "朱有鹏嵌入式软件工程师完全学习路线图专题",
       "Link": "https://studygolang.com/topics/16539#reply0",
       "Description": "\u003cp\u003e嵌入式软件工程师是一种专注于嵌入式系统开发的技术职业。以下是一个完全学习指南，可以帮助您成为一名合格的嵌入式软件工程师：\u003c/p\u003e\n\n\u003cp\u003e朱有鹏嵌入式软件工程师完全学习路线图专题 下栽地止：daxiacode.com\u003c/p\u003e\n\n\u003cp\u003e掌握计算机科学基础知识：了解计算机体系结构、操作系统原理、数据结构和算法等基础知识。这些知识对理解嵌入式系统的工作原理和进行软件开发至关重要。\u003c/p\u003e\n\n\u003cp\u003e学习编程语言：熟练掌握C/C++编程语言是嵌入式软件开发的基础。了解C/C++语言的语法、特性和常用库函数。此外，掌握汇编语言也有助于深入理解底层硬件操作。\u003c/p\u003e\n\n\u003cp\u003e理解嵌入式系统架构：了解嵌入式系统的硬件组成和软件架构。学习处理器、存储器、外设接口等硬件知识，并了解嵌入式操作系统、驱动程序和应用程序的关系。\u003c/p\u003e\n\n\u003cp\u003e学习嵌入式操作系统：掌握嵌入式操作系统如Linux、FreeRTOS、uC/OS等的原理和使用方法。了解任务调度、内存管理、进程通信和设备驱动等概念，并能够进行系统配置和调试。\u003c/p\u003e\n\n\u003cp\u003e学习嵌入式软件开发工具：熟悉常用的嵌入式软件开发工具，如编译器、调试器和仿真器等。了解集成开发环境（IDE）的使用方法，掌握代码调试和性能优化技巧。\u003c/p\u003e\n\n\u003cp\u003e深入学习通信协议：了解常用的通信协议，如UART、SPI、I2C、CAN等。学习网络通信协议，如TCP/IP、HTTP等，在网络连接和通信方面有所了解。\u003c/p\u003e\n\n\u003cp\u003e实践项目经验：参与嵌入式系统开发的实际项目，通过动手实践来巩固所学知识。可以自己设计、开发和调试一个小型嵌入式系统，或者加入团队参与大型项目的开发。\u003c/p\u003e\n\n\u003cp\u003e持续学习与更新：嵌入式技术日新月异，不断学习和跟进最新的技术和发展趋势是非常重要的。关注行业动态、阅读相关书籍和文章，参加培训和技术交流会议，保持持续学习的状态。\u003c/p\u003e\n\n\u003cp\u003e请注意，以上仅为一个完整学习指南的概述，具体的学习路径和内容还需根据个人兴趣和发展方向进行调整。同时，实践和经验积累也是成为一名嵌入式软件工程师的关键，因此请尽可能多地参与实际项目并不断提升自己的实践能力。\u003c/p\u003e\n",
@@ -154,6 +147,13 @@
       "Title": "create iso by go",
       "Link": "https://studygolang.com/articles/36205#reply0",
       "Description": "\u003cp\u003epackage main\u003c/p\u003e\n\n\u003cp\u003eimport (\n\t\u0026ldquo;fmt\u0026rdquo;\n\t\u0026ldquo;log\u0026rdquo;\n\t\u0026ldquo;os\u0026rdquo;\n\t\u0026ldquo;path/filepath\u0026rdquo;\n\t\u0026ldquo;strings\u0026rdquo;\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e\u0026quot;github.com/kdomanski/iso9660\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e)\u003c/p\u003e\n\n\u003cp\u003efunc main() {\n\twriter, err := iso9660.NewWriter()\n\tif err != nil {\n\t\tlog.Fatalf(\u0026ldquo;failed to create writer: %s\u0026rdquo;, err)\n\t}\n\tdefer writer.Cleanup()\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eisoFile, err := os.OpenFile(\u0026quot;C:/output.iso\u0026quot;, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0644)\nif err != nil {\n\tlog.Fatalf(\u0026quot;failed to create file: %s\u0026quot;, err)\n}\ndefer isoFile.Close()\n\nprefix := \u0026quot;F:\\\\\u0026quot;                                    // the prefix to remove in the output iso file\nsourceFolders := []string{\u0026quot;F:\\\\test1\u0026quot;, \u0026quot;F:\\\\test2\u0026quot;} // the given directories to create an ISO file from\n\nfor _, folderName := range sourceFolders {\n\tfolderPath := strings.Join([]string{prefix, folderName}, \u0026quot;/\u0026quot;)\n\n\twalk_err := filepath.Walk(folderPath, func(path string, info os.FileInfo, err error) error {\n\t\tif err != nil {\n\t\t\tlog.Fatalf(\u0026quot;walk: %s\u0026quot;, err)\n\t\t\treturn err\n\t\t}\n\t\tif info.IsDir() {\n\t\t\treturn nil\n\t\t}\n\t\toutputPath := strings.TrimPrefix(path, prefix) // remove the source drive name\n\t\tfmt.Printf(\u0026quot;Adding file: %s\\n\u0026quot;, outputPath)\n\n\t\tfileToAdd, err := os.Open(path)\n\t\tif err != nil {\n\t\t\tlog.Fatalf(\u0026quot;failed to open file: %s\u0026quot;, err)\n\t\t}\n\t\tdefer fileToAdd.Close()\n\n\t\terr = writer.AddFile(fileToAdd, outputPath)\n\t\tif err != nil {\n\t\t\tlog.Fatalf(\u0026quot;failed to add file: %s\u0026quot;, err)\n\t\t}\n\t\treturn nil\n\t})\n\tif walk_err != nil {\n\t\tlog.Fatalf(\u0026quot;%s\u0026quot;, walk_err)\n\t}\n}\n\nerr = writer.WriteTo(isoFile, \u0026quot;Test\u0026quot;)\nif err != nil {\n\tlog.Fatalf(\u0026quot;failed to write ISO image: %s\u0026quot;, err)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "关于理解go语言中的指针",
+      "Link": "https://studygolang.com/topics/16532#reply1",
+      "Description": "\u003cp\u003e要如何理解go语言中的指针啊 网上让我迷惑不清 看混了\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     }
