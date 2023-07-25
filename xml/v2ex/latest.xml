@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>目前折疼 pve lxc 遇到的问题 - Linux</title>
+      <link>https://www.v2ex.com/t/959705</link>
+      <description>&lt;p&gt;我是在一台 arm vps 上安装 pve 来管理 lxc ，下面遇到的问题真花了很多时间才能找到问题所在。这些问题在 x86 平台，依然存在，并非 arm 平台的兼容性问题。&lt;/p&gt;&#xA;&lt;p&gt;当然，如果我用 x86 的 pve 会少走很多弯路。&lt;/p&gt;&#xA;&lt;h3&gt;1. docker in lxc 的 storage driver 问题&lt;/h3&gt;&#xA;&lt;p&gt;docker 在 lxc 中默认的 storage driver 是 vfs ，vfs 性能差和无层复用占用空间大等问题。网上有教程教如何将 storage driver 改为性能更好的 overlay2 。&lt;/p&gt;&#xA;&lt;p&gt;但问题来了，几乎所有教程都没有提及到要 docker in lxc 使用 overlay2 ，宿主机内核必须要是 5.11 及以上才能应用成功，否则 storage driver 改为 overlay2 后，docker 无法启动。&lt;/p&gt;&#xA;&lt;p&gt;而 debian 11 默认安装的内核是 5.10 ，这样导致类似我这样的小白，花了大量时间研究这个问题，才无意中发现问题所在，过程是非常痛苦及浪费时间。&lt;/p&gt;&#xA;&lt;h3&gt;2. pve 8 与 lxc 官方某些镜像的兼容性问题&lt;/h3&gt;&#xA;&lt;p&gt;刚开始，我是用 pve 7 arm 版（佛西大佬维护的版本），因为 pve 官方的 ct 模板并不提供 arm 版，所以我只能去 &lt;a href=&#34;http://linuxcontainers.org/&#34; rel=&#34;nofollow&#34;&gt;linuxcontainers.org&lt;/a&gt; 下载 arm 的镜像（我下的是 debian 12 ），然后创建 lxc 容器。&lt;/p&gt;&#xA;&lt;p&gt;创建过程没什么问题。后来因为上面 storage driver 问题通过升级内核解决后，我就直接将 arm vps 重装 debian 12 ，然后安装 pve 8 。依然用 &lt;a href=&#34;http://linuxcontainers.org/&#34; rel=&#34;nofollow&#34;&gt;linuxcontainers.org&lt;/a&gt; 下载 arm 的镜像去创建容器，但此时无法创建成功，&lt;/p&gt;&#xA;&lt;p&gt;错误信息提示“unable to open file &#39;/etc/network/interfaces.tmp.13283&#39; - No such file or directory”，无论 debian 11 还是 12 的镜像都一样有这个问题。&lt;/p&gt;&#xA;&lt;p&gt;我尝试在一台 x86 pve 8 的主机使用 &lt;a href=&#34;http://linuxcontainers.org/&#34; rel=&#34;nofollow&#34;&gt;linuxcontainers.org&lt;/a&gt; 下载 x86 的镜像去创建容器，也有同样问题。但 x86 pve 8 使用 pve 官方的 debian 12 x86 镜像，是没有问题，可以创建成功。&lt;/p&gt;&#xA;&lt;p&gt;我在上网搜索了一下，在 &lt;a href=&#34;http://forum.proxmox.com/&#34; rel=&#34;nofollow&#34;&gt;forum.proxmox.com&lt;/a&gt; 也有几个人提及这个问题（ 提及的是 mint 和 debian 镜像 ），发贴日期都是最近几个月。&lt;/p&gt;&#xA;&lt;p&gt;后来，我发现在 pve 8 arm 可以使用 alpine 镜像创建成功。奇怪的是，之前 pve 7 arm 版中使用 alpine cloud 镜像，重启容器后网络配置都被还原。&lt;/p&gt;&#xA;&lt;p&gt;所以这些兼容性问题，真是令人头疼.&lt;/p&gt;&#xA;</description>
+      <author>moxuanyuan</author>
+      <pubDate>25 Jul 2023 14:30:19 +0000</pubDate>
+    </item>
+    <item>
       <title>渡边信一郎的新作《Lazarus》预告，风格太像《星际牛仔》了，简直就是精神续作一般，泪目。 - ACG</title>
       <link>https://www.v2ex.com/t/959704</link>
       <description>&lt;div class=&#34;embedded_video_wrapper&#34;&gt;&lt;iframe src=&#34;https://www.youtube.com/embed/w0QUbIzu8ek&#34; class=&#34;embedded_video&#34; allowfullscreen=&#34;&#34; type=&#34;text/html&#34; id=&#34;ytplayer&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;&lt;/div&gt;&lt;br /&gt;人生又有盼头了，《星际牛仔》对我影响还是很大的。</description>
