@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>用 Gitlab-ci 配置 testcontainers 进行自动单元测试，流水线脚本到底怎么写啊…… - GitLab</title>
+      <link>https://www.v2ex.com/t/959656</link>
+      <description>&lt;p&gt;后端被抓来写流水线脚本，基本就是个小白，google+chatgpt 快翻烂了还是没跑通。&#xA;.gitlab-ci.yml 全文：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;default:&#xA;  image: maven:3.8.7-openjdk-18-slim&#xA;  services:&#xA;    - name: docker:dind&#xA;      command: [ &#39;--tls=false&#39; ]&#xA;&#xA;stages:&#xA;  - test&#xA;&#xA;variables:&#xA;  DOCKER_HOST: &#34;tcp://docker:2375&#34;&#xA;  DOCKER_TLS_CERTDIR: &#34;&#34;&#xA;  DOCKER_DRIVER: &#34;overlay2&#34;&#xA;&#xA;integration-test:&#xA;  stage: test&#xA;  script:&#xA;    - mvn test&#xA;    &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;就一直报错说找不到 docker host：DOCKER_HOST tcp://docker:2375 is not listening&lt;/p&gt;&#xA;&lt;p&gt;公司的 gitlab 服务器运维大哥也不知道怎么写这个脚本，是应该先开启一个 dind 服务吗？&#xA;用的是 K8s runner&lt;/p&gt;&#xA;</description>
+      <author>Emilyan</author>
+      <pubDate>25 Jul 2023 10:36:16 +0000</pubDate>
+    </item>
+    <item>
       <title>请各位大佬雅正一下我这套配置，给点修改意见，如果能提供具体型号就太好了 - NAS</title>
       <link>https://www.v2ex.com/t/959655</link>
       <description>&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;部件&lt;/th&gt;&#xA;&lt;th&gt;型号&lt;/th&gt;&#xA;&lt;th&gt;价格&lt;/th&gt;&#xA;&lt;th&gt;渠道&lt;/th&gt;&#xA;&lt;th&gt;碎碎念&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;主板&lt;/td&gt;&#xA;&lt;td&gt;B250-CS2&lt;/td&gt;&#xA;&lt;td&gt;469&lt;/td&gt;&#xA;&lt;td&gt;淘宝&lt;/td&gt;&#xA;&lt;td&gt;6 SATA + 2 m.2 + 内置 USB&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;CPU&lt;/td&gt;&#xA;&lt;td&gt;9100T&lt;/td&gt;&#xA;&lt;td&gt;340&lt;/td&gt;&#xA;&lt;td&gt;淘宝&lt;/td&gt;&#xA;&lt;td&gt;配合主板&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;散热器&lt;/td&gt;&#xA;&lt;td&gt;IS-40X V3&lt;/td&gt;&#xA;&lt;td&gt;79&lt;/td&gt;&#xA;&lt;td&gt;京东&lt;/td&gt;&#xA;&lt;td&gt;随便挑的&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;机箱&lt;/td&gt;&#xA;&lt;td&gt;JONSBO-N2&lt;/td&gt;&#xA;&lt;td&gt;699&lt;/td&gt;&#xA;&lt;td&gt;京东&lt;/td&gt;&#xA;&lt;td&gt;不想缩&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;电源&lt;/td&gt;&#xA;&lt;td&gt;钢影 Toughpower SFX 450W&lt;/td&gt;&#xA;&lt;td&gt;499&lt;/td&gt;&#xA;&lt;td&gt;京东&lt;/td&gt;&#xA;&lt;td&gt;随便挑的，可以缩&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;内存&lt;/td&gt;&#xA;&lt;td&gt;DDR4 16G *1&lt;/td&gt;&#xA;&lt;td&gt;0&lt;/td&gt;&#xA;&lt;td&gt;拆机&lt;/td&gt;&#xA;&lt;td&gt;&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;硬盘&lt;/td&gt;&#xA;&lt;td&gt;1T *5&lt;/td&gt;&#xA;&lt;td&gt;0&lt;/td&gt;&#xA;&lt;td&gt;白嫖&lt;/td&gt;&#xA;&lt;td&gt;硬盘需求不是特别大&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;系统&lt;/td&gt;&#xA;&lt;td&gt;Unraid Plus&lt;/td&gt;&#xA;&lt;td&gt;¥600&lt;/td&gt;&#xA;&lt;td&gt;official&lt;/td&gt;&#xA;&lt;td&gt;插满需要这个级别&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;系统&lt;/td&gt;&#xA;&lt;td&gt;Truenas&lt;/td&gt;&#xA;&lt;td&gt;0&lt;/td&gt;&#xA;&lt;td&gt;official&lt;/td&gt;&#xA;&lt;td&gt;在用，但是想试试 Unraid&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;strong&gt;2686&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;机箱固定后，其他没啥可选的了，主板和 CPU 其实可以换 N5105 的妖板，但是又要配笔记本内存，不想有太多电子垃圾。&lt;/p&gt;&#xA;&lt;p&gt;如果性能不够的话以后把板 U 换掉就行，目前是这个思路&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;最主要的需求是美观。&#xA;也想过用 DX4600 刷机，也是目前纠结的一点。&lt;/p&gt;&#xA;</description>
@@ -13,7 +20,7 @@
     <item>
       <title>在同时使用 M2 系列的 14&#39;MBP 和 13‘MBA 后终于不纠结了 - macOS</title>
       <link>https://www.v2ex.com/t/959654</link>
-      <description>靠在沙发上、脚并拢放茶几的姿势，把 MBA 放大腿上用真的太爽了，轻薄，两边也没有锋利的进风口，绝大部分时间不发热，尤其是空调房间。&lt;br /&gt;&lt;br /&gt;14&#39;MBP 做不到。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;就为了这个我放弃了 14 的屏幕，因为不同于手机，120fps 在动画稀少的 macOS 上和 60fps 眼睛看不出区别，当然看电影还是爽的，但是我还是选择轻薄。</description>
+      <description>靠在沙发上、脚并拢放茶几的姿势，把 MBA 放大腿上用真的太爽了，轻薄，两边也没有锋利的进风口，绝大部分时间不发热，尤其是空调房间。&lt;br /&gt;&lt;br /&gt;14&#39;MBP 做不到。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;就为了这个我放弃了 14 的屏幕，因为不同于手机，120fps 在动画稀少的 macOS 上和 60fps 眼睛看不出区别，当然看电影还是爽的，但是我可能一年就看 3 部电影的样子，而且家里有更好的电视😅</description>
       <author>yemengzhan1994</author>
       <pubDate>25 Jul 2023 10:31:00 +0000</pubDate>
     </item>
