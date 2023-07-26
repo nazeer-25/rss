@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>兄弟们我又来了，有个问题又搞不懂了，帮帮我这个菜鸟吧 - 问与答</title>
+      <link>https://www.v2ex.com/t/959908</link>
+      <description>&lt;pre&gt;&lt;code&gt;server {&#xA;    listen 80;&#xA;    listen [::]:80;&#xA;    server_name xxx.xxx.xxx;&#xA;    return 301 $host$request_uri;&#xA;}&#xA;server {&#xA;    listen 443 ssl http2;&#xA;    listen [::]:443 ssl http2;&#xA;    server_name xxx.xxx.xxx; &#xA;&#xA;    ssl_certificate   /etc/nginx/ssl/xxx.xxx.xxx.pem;&#xA;    ssl_certificate_key    /etc/nginx/ssl/xxx.xxx.xxx.key; &#xA;&#xA;    location  / {&#xA;        proxy_pass http://172.20.0.7:4000;&#xA;        proxy_set_header Host $host;&#xA;        proxy_set_header X-Real-IP $remote_addr;&#xA;        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#xA;        proxy_set_header REMOTE-HOST $remote_addr;&#xA;        proxy_set_header X-Forwarded-Proto  $scheme;&#xA;&#xA;        add_header X-Cache $upstream_cache_status;&#xA;&#xA;        proxy_set_header Accept-Encoding &#34;&#34;;&#xA;        sub_filter &#34;http://&#34; &#34;https://&#34;;&#xA;        sub_filter_once off; &#xA;    } &#xA;} &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;nginx 配置如上&#xA;现在的问题是 nginx 容器内可以访问 &lt;a href=&#34;http://172.20.0.7:4000&#34; rel=&#34;nofollow&#34;&gt;http://172.20.0.7:4000&lt;/a&gt; ，宿主机也可以访问 172.20.0.7:4000,使用服务器 ip:4000 也可以访问这个容器，但是使用域名:&lt;a href=&#34;https://xxx.xxx.xxx&#34; rel=&#34;nofollow&#34;&gt;https://xxx.xxx.xxx&lt;/a&gt; 就提示花了太长时间进行响应&#xA;443 端口也映射了。&#xA;不知道是什么问题了。。太难了。&lt;/p&gt;&#xA;</description>
+      <author>z8596007</author>
+      <pubDate>26 Jul 2023 07:26:02 +0000</pubDate>
+    </item>
+    <item>
       <title>这是个啥进程这么占内存？动态壁纸么？ - macOS</title>
       <link>https://www.v2ex.com/t/959907</link>
       <description>&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/2vhwiIR.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/2vhwiIR.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt; 这是 Sonoma 的动态壁纸么？内存占用这么高</description>
