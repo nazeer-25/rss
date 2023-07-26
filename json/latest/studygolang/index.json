@@ -25,13 +25,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "pandas中的DataFrame怎么把其中一行拆成多行？",
-      "Link": "https://studygolang.com/topics/16556#reply0",
-      "Description": "\u003cp\u003e可以使用 Pandas 中的字符串方法 str.split () 将每个单元格中的文本按照换行符分割成多行，然后使用 Pandas 的 melt () 方法将列转换为行。\u003c/p\u003e\n\n\u003cp\u003e这是一个更详细的例子，首先使用 \u003ccode\u003estr.split('\\n')\u003c/code\u003e 将一行拆分为多行，然后使用 \u003ccode\u003eexplode()\u003c/code\u003e 方法将拆分的列表转换为多行，同时保持其他列的值：\u003c/p\u003e\n\n\u003cp\u003eimport pandas as pd\u003c/p\u003e\n\n\u003ch1\u003e创建 DataFrame\u003c/h1\u003e\n\n\u003cp\u003edf = pd.DataFrame({\u0026lsquo;A\u0026rsquo;: [\u0026lsquo;1\\n2\\n3\u0026rsquo;, \u0026lsquo;4\\n5\\n6\u0026rsquo;], \u0026lsquo;B\u0026rsquo;: [\u0026lsquo;7\\n8\\n9\u0026rsquo;, \u0026lsquo;10\\n11\\n12\u0026rsquo;]})\u003c/p\u003e\n\n\u003ch1\u003e将每个单元格中的文本按照换行符分割成多行\u003c/h1\u003e\n\n\u003cp\u003edf = df.assign(A=df[\u0026lsquo;A\u0026rsquo;].str.split(\u0026lsquo;\\n\u0026rsquo;), B=df[\u0026lsquo;B\u0026rsquo;].str.split(\u0026lsquo;\\n\u0026rsquo;))\u003c/p\u003e\n\n\u003ch1\u003e使用 explode 方法将列表转换为行\u003c/h1\u003e\n\n\u003cp\u003edf = df.explode(\u0026lsquo;A\u0026rsquo;).reset_index(drop=True)\ndf = df.explode(\u0026lsquo;B\u0026rsquo;).reset_index(drop=True)\u003c/p\u003e\n\n\u003cp\u003eprint(df)\u003c/p\u003e\n\n\u003cp\u003e这将输出：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e   A   B\n0  1   7\n1  2   8\n2  3   9\n3  4  10\n4  5  11\n5  6  12\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e在这个例子中，我们只对 \u0026lsquo;A\u0026rsquo; 和 \u0026lsquo;B\u0026rsquo; 列进行了操作，但是你可以根据需要对任何列进行此操作。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "小白不要怕我们教会为止",
       "Link": "https://studygolang.com/topics/16558#reply0",
       "Description": "\u003cp\u003e小白不要怕我们教会为止\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
@@ -42,6 +35,13 @@
       "Title": "招木在线克服啦无经验可培训",
       "Link": "https://studygolang.com/topics/16557#reply0",
       "Description": "\u003cp\u003e招木在线克服啦无经验可培训\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "pandas中的DataFrame怎么把其中一行拆成多行？",
+      "Link": "https://studygolang.com/topics/16556#reply0",
+      "Description": "\u003cp\u003e可以使用 Pandas 中的字符串方法 str.split () 将每个单元格中的文本按照换行符分割成多行，然后使用 Pandas 的 melt () 方法将列转换为行。\u003c/p\u003e\n\n\u003cp\u003e这是一个更详细的例子，首先使用 \u003ccode\u003estr.split('\\n')\u003c/code\u003e 将一行拆分为多行，然后使用 \u003ccode\u003eexplode()\u003c/code\u003e 方法将拆分的列表转换为多行，同时保持其他列的值：\u003c/p\u003e\n\n\u003cp\u003eimport pandas as pd\u003c/p\u003e\n\n\u003ch1\u003e创建 DataFrame\u003c/h1\u003e\n\n\u003cp\u003edf = pd.DataFrame({\u0026lsquo;A\u0026rsquo;: [\u0026lsquo;1\\n2\\n3\u0026rsquo;, \u0026lsquo;4\\n5\\n6\u0026rsquo;], \u0026lsquo;B\u0026rsquo;: [\u0026lsquo;7\\n8\\n9\u0026rsquo;, \u0026lsquo;10\\n11\\n12\u0026rsquo;]})\u003c/p\u003e\n\n\u003ch1\u003e将每个单元格中的文本按照换行符分割成多行\u003c/h1\u003e\n\n\u003cp\u003edf = df.assign(A=df[\u0026lsquo;A\u0026rsquo;].str.split(\u0026lsquo;\\n\u0026rsquo;), B=df[\u0026lsquo;B\u0026rsquo;].str.split(\u0026lsquo;\\n\u0026rsquo;))\u003c/p\u003e\n\n\u003ch1\u003e使用 explode 方法将列表转换为行\u003c/h1\u003e\n\n\u003cp\u003edf = df.explode(\u0026lsquo;A\u0026rsquo;).reset_index(drop=True)\ndf = df.explode(\u0026lsquo;B\u0026rsquo;).reset_index(drop=True)\u003c/p\u003e\n\n\u003cp\u003eprint(df)\u003c/p\u003e\n\n\u003cp\u003e这将输出：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e   A   B\n0  1   7\n1  2   8\n2  3   9\n3  4  10\n4  5  11\n5  6  12\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e在这个例子中，我们只对 \u0026lsquo;A\u0026rsquo; 和 \u0026lsquo;B\u0026rsquo; 列进行了操作，但是你可以根据需要对任何列进行此操作。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
