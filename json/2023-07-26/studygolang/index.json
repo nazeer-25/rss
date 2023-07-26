@@ -74,6 +74,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "有没有适合新手入门的项目？",
+      "Link": "https://studygolang.com/topics/16551#reply1",
+      "Description": "\u003cp\u003e最近刚刚学习完了GO语言基础，在官方的教程（\u003ca href=\"https://tour.go-zh.org/concurrency/1）\"\u003ehttps://tour.go-zh.org/concurrency/1）\u003c/a\u003e 目前希望自己能从简单的项目入手进行一步一步配置与开发 然后慢慢熟悉项目内容与结构，github上有没有好的新手入门项目开始？或者别的地方，小型或者中型项目。用来运行学习。不知道go现在适合，或者用于什么开发，还需要掌握什么。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "golang 创建DM数据库连接实现",
+      "Link": "https://studygolang.com/topics/16554#reply1",
+      "Description": "\u003cp\u003e1、开发环境：go 1.19.1 windows/amd64\u003c/p\u003e\n\n\u003cp\u003e2、问题描述：创建DM数据库连接报 error.dsn.invalidSchema\u003c/p\u003e\n\n\u003cp\u003e3、相关代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eimport (\n    \u0026quot;database/sql\u0026quot;\n    \u0026quot;dm\u0026quot;\n    \u0026quot;fmt\u0026quot;\n    \u0026quot;io/ioutil\u0026quot;\n    \u0026quot;time\u0026quot;\n)\n\nvar db *sql.DB\nvar err error\n\nfunc main() {\n\tdriverName := \u0026quot;dm\u0026quot;\n\tdataSourceName := \u0026quot;TCM:Tcm#123@tcp(10.92.225.249:5236/dwglsvc?)\u0026quot;\n\n\tif db, err = connect(driverName, dataSourceName); err != nil {\n\t\t\tfmt.Printf(\u0026quot;%v\\n\u0026quot;,err)\n\t\t\treturn\n\t}\n}\n\nfunc connect(driverName string, dataSourceName string) (*sql.DB, error) {\n\tvar db *sql.DB\n\tvar err error\n\tif db, err = sql.Open(driverName, dataSourceName); err != nil {\n\t\t\treturn nil, err\n\t}\n\tif err = db.Ping(); err != nil {\n\t\t\treturn nil, err\n\t}\n\tfmt.Printf(\u0026quot;connect to \\\u0026quot;%s\\\u0026quot; succeed.\\n\u0026quot;, dataSourceName)\n\treturn db, nil\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e报错信息（对应到sql.Open）\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230725/1b600bea26e9132a42c4998ee7047cb3.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e希望得到正确的创建DM连接的方式，感觉dataSourceName的变量写法有问题。望得到各位大佬帮助\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "studygolang网站广告漫天飞, 用户体验这么差......",
       "Link": "https://studygolang.com/topics/16549#reply10",
       "Description": "\u003cp\u003e站长引入广告是站长的权利, 对是站长的特权,那还说个鸡毛!\u003c/p\u003e\n\n\u003cp\u003e要不忍着, 要不直接不看,此处省略2千字,吐槽完毕 .\u003c/p\u003e\n",
@@ -91,20 +105,6 @@
       "Title": "已添加逗号还是报错",
       "Link": "https://studygolang.com/articles/36212#reply4",
       "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230724/a08597c12be76dc9b50d8b34bdeb6d1a.png\" alt=\"mmexport1690191533062.png\" /\u003e\u003cimg src=\"https://static.golangjob.cn/230724/8bd603b92ebfa666780bb4c8241024a3.png\" alt=\"mmexport1690191530801.png\" /\u003e\n已经添加逗号还是报错\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "有没有适合新手入门的项目？",
-      "Link": "https://studygolang.com/topics/16551#reply1",
-      "Description": "\u003cp\u003e最近刚刚学习完了GO语言基础，在官方的教程（\u003ca href=\"https://tour.go-zh.org/concurrency/1）\"\u003ehttps://tour.go-zh.org/concurrency/1）\u003c/a\u003e 目前希望自己能从简单的项目入手进行一步一步配置与开发 然后慢慢熟悉项目内容与结构，github上有没有好的新手入门项目开始？或者别的地方，小型或者中型项目。用来运行学习。不知道go现在适合，或者用于什么开发，还需要掌握什么。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "golang 创建DM数据库连接实现",
-      "Link": "https://studygolang.com/topics/16554#reply1",
-      "Description": "\u003cp\u003e1、开发环境：go 1.19.1 windows/amd64\u003c/p\u003e\n\n\u003cp\u003e2、问题描述：创建DM数据库连接报 error.dsn.invalidSchema\u003c/p\u003e\n\n\u003cp\u003e3、相关代码\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eimport (\n    \u0026quot;database/sql\u0026quot;\n    \u0026quot;dm\u0026quot;\n    \u0026quot;fmt\u0026quot;\n    \u0026quot;io/ioutil\u0026quot;\n    \u0026quot;time\u0026quot;\n)\n\nvar db *sql.DB\nvar err error\n\nfunc main() {\n\tdriverName := \u0026quot;dm\u0026quot;\n\tdataSourceName := \u0026quot;TCM:Tcm#123@tcp(10.92.225.249:5236/dwglsvc?)\u0026quot;\n\n\tif db, err = connect(driverName, dataSourceName); err != nil {\n\t\t\tfmt.Printf(\u0026quot;%v\\n\u0026quot;,err)\n\t\t\treturn\n\t}\n}\n\nfunc connect(driverName string, dataSourceName string) (*sql.DB, error) {\n\tvar db *sql.DB\n\tvar err error\n\tif db, err = sql.Open(driverName, dataSourceName); err != nil {\n\t\t\treturn nil, err\n\t}\n\tif err = db.Ping(); err != nil {\n\t\t\treturn nil, err\n\t}\n\tfmt.Printf(\u0026quot;connect to \\\u0026quot;%s\\\u0026quot; succeed.\\n\u0026quot;, dataSourceName)\n\treturn db, nil\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e报错信息（对应到sql.Open）\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230725/1b600bea26e9132a42c4998ee7047cb3.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e希望得到正确的创建DM连接的方式，感觉dataSourceName的变量写法有问题。望得到各位大佬帮助\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
