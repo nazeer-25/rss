@@ -4,9 +4,44 @@
   "Description": "",
   "Items": [
     {
+      "Title": "留上海和回武汉之间的抉择 - 生活",
+      "Link": "https://www.v2ex.com/t/960289",
+      "Description": "\u003cp\u003e楼主老家湖北农村，毕业后来上海 IT 行业搬砖，如今 35 了，危机感渐强，经常在留上海和回武汉之间犹豫不决\u003c/p\u003e\n\u003cp\u003e上海：\n3 年前入手郊区老破小一套，公积金贷款，目前每月公积金基本能还贷。\n房子离地铁 1.2 公里，和老婆都在市区上班，通勤时间长点，也还算方便吧。\n娃在公立幼儿园上学，明年毕业，楼主有居住证积分和房产，后面上对口的公立小学没有问题，但小学一般。\n楼主顺利的话 1-2 年后可申请上海户口。\n楼主平时基本无社交，上海基本没有亲戚和朋友，生活单调，有时内心感觉挺孤独。\u003c/p\u003e\n\u003cp\u003e武汉：\n16 年入手武汉三环外新房，年初已还清商贷，交房后硬装都完成，目前空置，买家具家电就可入住。\n房子离地铁近，对口的学校也一般。\n武汉好处离双方老家都近，但是就业待遇和生活服务方面不如上海，没在武汉生活过，回去一切还得从头开始。\u003c/p\u003e\n",
+      "Author": "storm666",
+      "PubDate": "2023-07-27T09:17:05Z"
+    },
+    {
+      "Title": "Node.js 调用 ChatGPT 并实现流式传输 - 程序员",
+      "Link": "https://www.v2ex.com/t/960288",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003eimport {\n    OpenAIApi,\n    Configuration,\n    CreateChatCompletionResponse\n} from 'openai'\nimport process from 'process'\n\nconst configuration = new Configuration({\n    apiKey: 'sk-xxxxxxxxxxxx'\n})\nconst openai = new OpenAIApi(configuration)\nopenai.createChatCompletion({\n    model: 'gpt-3.5-turbo',\n    messages: [\n        { role: 'user', content: '请模仿李白写一首诗' }\n    ],\n    stream: true\n}, { responseType: 'stream' }).then(value =\u0026gt; {\n    const data = value.data as ChatData\n    data.on('data', chunk =\u0026gt; {\n        const match = chunk.toString().match(/^data: (.*)/)\n        if (!match || match[1] == '[DONE]') return\n        const res = JSON.parse(match[1])\n        const { content } = res.choices[0].delta\n        if (!content) return\n        process.stdout.write(content)\n    })\n})\n\ninterface ChatData extends CreateChatCompletionResponse {\n    /** 绑定事件 */\n    on\u0026lt;K extends keyof EventType\u0026gt;(\n        eventType: K,\n        handle: (event: EventType[K]) =\u0026gt; void\n    ): void\n}\n\ninterface EventType {\n    'data': Buffer\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "oyp",
+      "PubDate": "2023-07-27T09:17:04Z"
+    },
+    {
+      "Title": "想入手 switch，有没有大神推荐 - 问与答",
+      "Link": "https://www.v2ex.com/t/960287",
+      "Description": "\u003cp\u003e以及避坑建议之类的\u003c/p\u003e\n",
+      "Author": "TRW",
+      "PubDate": "2023-07-27T09:16:12Z"
+    },
+    {
+      "Title": "土区 spotify 余 3 个位置 - Spotify",
+      "Link": "https://www.v2ex.com/t/960286",
+      "Description": "\u003cp\u003e70/年\n可帮改区\u003c/p\u003e\n\u003cp\u003e联系：\u003ca href=\"https://t.me/SameralBot\" rel=\"nofollow\"\u003etelegram\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "viewer003",
+      "PubDate": "2023-07-27T09:12:28Z"
+    },
+    {
+      "Title": "使用 frida 抓包美团后，无法正常使用美团了 - 程序员",
+      "Link": "https://www.v2ex.com/t/960285",
+      "Description": "因为无法正常抓包，Google 一番后找到这个工具\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://github.com/r0ysue/r0capture\" rel=\"nofollow noopener\"\u003ehttps://github.com/r0ysue/r0capture\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e尝试抓了一次，美团闪退了，再次美团进入目标页面，就显示这个了，尝试卸载重装也没用\u003cbr /\u003e（抓包的是买药页面，所以买药页面进去就这样了，其他页面一切正常）\u003cbr /\u003e\u003cbr /\u003e这是被美团拉到黑名单了？\u003cbr /\u003e\u003cbr /\u003e![]( \u003ca target=\"_blank\" href=\"https://i.imgur.com/CvCjt5Y.jpeg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/CvCjt5Y.jpeg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e)",
+      "Author": "lawsiki",
+      "PubDate": "2023-07-27T09:10:11Z"
+    },
+    {
       "Title": "做了一个 chatgpt 对接的网站，用来体验 - 推广",
       "Link": "https://www.v2ex.com/t/960284",
-      "Description": "\u003cp\u003e简单的聊天网站，没啥特别的功能，主要是因为我自己节点不稳定用原生的经常断线，目前做到：\u003c/p\u003e\n\u003cp\u003e1 、mardkdown 格式渲染\u003c/p\u003e\n\u003cp\u003e2 、代码可点击复制\u003c/p\u003e\n\u003cp\u003e3 、支持 gpt4\u003c/p\u003e\n\u003cp\u003e给朋友用是采用激活码的形式，让他们用我的 key ，这边也提供了自定义 key （自定义之后可以自己切换用 3.5 还是 4.0 的 api ）。\u003c/p\u003e\n\u003cp\u003e推荐有 key 的话可以用下. 没有想体验的话可以注册之后留下邮箱，送一周的体验权限（只能体验 3.5 ，因为 4 太贵了）\u003c/p\u003e\n\u003cp\u003e如果有任何问题可以在 issure 反馈：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/vacuityv/chat-issure\" rel=\"nofollow\"\u003ehttps://github.com/vacuityv/chat-issure\u003c/a\u003e\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e简单的聊天网站，没啥特别的功能，主要是因为我自己节点不稳定用原生的经常断线，目前做到：\u003c/p\u003e\n\u003cp\u003e1 、mardkdown 格式渲染\u003c/p\u003e\n\u003cp\u003e2 、代码可点击复制\u003c/p\u003e\n\u003cp\u003e3 、支持 gpt4\u003c/p\u003e\n\u003cp\u003e网址： \u003ca href=\"https://chat.vacuity.me\" rel=\"nofollow\"\u003ehttps://chat.vacuity.me\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e给朋友用是采用激活码的形式，让他们用我的 key ，这边也提供了自定义 key （自定义之后可以自己切换用 3.5 还是 4.0 的 api ）。\u003c/p\u003e\n\u003cp\u003e推荐有 key 的话可以用下. 没有想体验的话可以注册之后留下邮箱，送一周的体验权限（只能体验 3.5 ，因为 4 太贵了）\u003c/p\u003e\n\u003cp\u003e如果有任何问题可以在 issure 反馈：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/vacuityv/chat-issure\" rel=\"nofollow\"\u003ehttps://github.com/vacuityv/chat-issure\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "vacuitym",
       "PubDate": "2023-07-27T09:09:22Z"
     },
