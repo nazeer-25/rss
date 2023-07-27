@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "minio 一个坑爹的设计 - Linux",
+      "Link": "https://www.v2ex.com/t/960165",
+      "Description": "\u003cp\u003e之前的业务系统，使用腾讯云的 cos 对象存储，每个系统对应一个 bucket ，配腾讯云的 ak\u003c/p\u003e\n\u003cp\u003e后来系统多了，我就想用 minio 做一层 wrapper ，使用一个腾讯云的 ak ，然后 minio 上自己管理 ak ，给每个系统分配一个，现在 k8s 里用 cosfs-csi 创建一个 pvc ，然后用 minio 把 pvc 创建一个 minio server\u003c/p\u003e\n\u003cp\u003e结果一个星期后，我发现，我存在腾讯云的 50 块钱都被耗光了，查询了一下，改造前的读写次数是个位数，改造后，cos 的读写每天有 160w\u003c/p\u003e\n\u003cp\u003e提了 cos 的一个工单，让他们给我传了一下访问日志，发现 minio 极其频繁的读/.minio.sys/目录，这可能存放了临时信息和 meta 信息，导致 cos 的读写每天都到 160w 次。\u003c/p\u003e\n\u003cp\u003e真 tmd 的是大坑啊\u003c/p\u003e\n\u003cp\u003e现在想想怎么改造，想把/.minio.sys 挂在一个本地 pvc 上，结果 minio 还不允许跨分区目录，估计要修改源代码了。\u003c/p\u003e\n",
+      "Author": "guoguobaba",
+      "PubDate": "2023-07-27T03:57:03Z"
+    },
+    {
+      "Title": "求一个帖子，忘了收藏。主题大概是给程序员(?)的十条建议，其中有一条是不在工位吃饭的 - 问与答",
+      "Link": "https://www.v2ex.com/t/960164",
+      "Description": "\u003cp\u003ert\u003c/p\u003e\n\u003cp\u003e谢谢各位\u003c/p\u003e\n",
+      "Author": "BaseException",
+      "PubDate": "2023-07-27T03:56:41Z"
+    },
+    {
+      "Title": "我这有两本书，可以包邮到家，今天晚八点开奖 - 推广",
+      "Link": "https://www.v2ex.com/t/960163",
+      "Description": "\u003cp\u003e貌似没有找到如何删除帖子，我把刚才发的下沉了，这次在推广节点。\n\u003cimg alt=\"IMG_7706.PNG\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.locimg.com/2023/07/27/2e001f4b8ebf8.PNG\"/\u003e\u003c/p\u003e\n",
+      "Author": "lixycoderfix",
+      "PubDate": "2023-07-27T03:55:24Z"
+    },
+    {
+      "Title": "关于房地产政策的论述，众爱卿怎么看？ - 分享发现",
+      "Link": "https://www.v2ex.com/t/960162",
+      "Description": "\u003cp\u003e一般对于政策或者数据的描述官方就这几种：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eA. 稳中向好\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cblockquote\u003e\n\u003cp\u003eB. 保持健康增长\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cblockquote\u003e\n\u003cp\u003eC. 良性循环\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cblockquote\u003e\n\u003cp\u003eD. 绷不住了🤣\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e\u003cstrong\u003e众爱卿怎么看？\u003c/strong\u003e\n(PS：下图来自朋友圈的房产销售人员)\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"微信图片_20230727113750.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://cdn.nlark.com/yuque/0/2023/jpeg/29458389/1690429831202-e4d5ce28-928f-4f0e-bead-4ed2235b1c9c.jpeg#clientId=ua909fb8f-d8f1-4\u0026amp;from=ui\u0026amp;id=u4bdd0f0e\u0026amp;originHeight=1212\u0026amp;originWidth=865\u0026amp;originalType=binary\u0026amp;ratio=1\u0026amp;rotation=0\u0026amp;showTitle=false\u0026amp;size=563493\u0026amp;status=done\u0026amp;style=none\u0026amp;taskId=u79cc7865-d790-436c-bc3c-bee7a94de1e\u0026amp;title=\"/\u003e\u003c/p\u003e\n",
+      "Author": "freepoint",
+      "PubDate": "2023-07-27T03:54:51Z"
+    },
+    {
+      "Title": "给女朋友做产品系列之：发票打印合并器（web 版） - 分享创造",
+      "Link": "https://www.v2ex.com/t/960161",
+      "Description": "财务女朋友 和 行政女朋友，以及高管女朋友，都会面临一个很麻烦的事：就是报销发票时，打印电子发票这件事\u003cbr /\u003e财务很讲究，要用两张发票打在一张 A4 纸上，又环保，又方便做凭证！\u003cbr /\u003e\u003cbr /\u003e以前，她们只能把发票截图，然后去 word 里拼在一起，再打印。\u003cbr /\u003e什么，为啥不用 PDF 编辑器？（请问有好用的 PDF 编辑器吗？）\u003cbr /\u003e\u003cbr /\u003e因此，我设计了这个 Web 版的拼合器，使用如下视频\u003cbr /\u003e\u003cbr /\u003e\u003cdiv class=\"embedded_video_wrapper\"\u003e\u003ciframe src=\"https://www.youtube.com/embed/IK2XOfFPf3I\" class=\"embedded_video\" allowfullscreen=\"\" type=\"text/html\" id=\"ytplayer\" frameborder=\"0\"\u003e\u003c/iframe\u003e\u003c/div\u003e",
+      "Author": "nwgale",
+      "PubDate": "2023-07-27T03:54:37Z"
+    },
+    {
       "Title": "有没靠谱的移民中介推荐的？ - 问与答",
       "Link": "https://www.v2ex.com/t/960160",
       "Description": "",
