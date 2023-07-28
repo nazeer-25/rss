@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "最近代理速度突然降幅很大延迟很高 - 问与答",
+      "Link": "https://www.v2ex.com/t/960693",
+      "Description": "我自己搭建的亚马逊 ec2 ，用了半年多都很稳定，平常网速能达到 20m ，最近突然就下降到 500k 左右，但是，上传依然很高能达到 150m ，请问一下是什么原因，各种协议都换过，ip 也换过，网络运营商也换过，结果都一样。没法看视频了这样😭",
+      "Author": "MaizerShuahu",
+      "PubDate": "2023-07-28T16:52:32Z"
+    },
+    {
       "Title": "golang 泛型能否支持可变参数 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/960692",
       "Description": "\u003cp\u003e以下代码中，getFunc 只支持一个参数，但我想支持多个参数。\u003c/p\u003e\n\u003cp\u003e（反射可以实现，但是不想用反射)\u003c/p\u003e\n\u003cp\u003e只基于 generic 还能进一步抽象支持多参数不？\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003epackage cache\n\nimport (\n\t\"sync\"\n\t\"testing\"\n)\n\ntype CacheFn[K comparable, V any] struct {\n\tredisMap       sync.Map\n\troutineOnceMap sync.Map\n\tgetFunc        func(K) V\n}\n\nfunc NewCacheFn[K comparable, V any](getFunc func(K) V) *CacheFn[K, V] {\n\treturn \u0026amp;CacheFn[K, V]{getFunc: getFunc}\n}\n\n// 1. 执行缓存到 redisMap 或其它存储; 2.如果多个协程同时执行时，只执行一次（其它协程被阻塞）\nfunc (c *CacheFn[K, V]) Get(key K) V {\n\tvalue, ok := c.redisMap.Load(key)\n\tif ok {\n\t\treturn value.(V)\n\t} else {\n\t\tvar once sync.Once\n\t\tonceInterface, loaded := c.routineOnceMap.LoadOrStore(key, \u0026amp;once)\n\t\tif loaded { // 如果有其它协程在执行，则等待它结束\n\t\t\toncePtr := onceInterface.(*sync.Once)\n\t\t\toncePtr.Do(func() {})\n\t\t} else { // 第一次访问，进行 DB 查询\n\t\t\tonce.Do(func() {\n\t\t\t\tvalue = c.getFunc(key)\n\t\t\t\tc.redisMap.Store(key, value)\n\t\t\t})\n\t\t}\n\t\tval, _ := c.redisMap.Load(key)\n\t\treturn val.(V)\n\t}\n}\n\nfunc TestCacheFuncWrapperGeneric(t *testing.T) {\n\ttype UserInfo struct {\n\t\tName string\n\t\tAge  int\n\t}\n\n\t// 原始函数\n\tgetUserInfoFromDb := func(name string) UserInfo {\n\t\tprintln(\"get info from db:\", name)\n\t\treturn UserInfo{Name: name}\n\t}\n\n\t// 带缓存的函数\n\tgetUserInfoFromDbWithCache := NewCacheFn(getUserInfoFromDb) // getFunc 只接受一个参数，怎么接收多个参数呢？\n\n\t// 多个协程同时执行\n\tbatchCall := func(t *testing.T, fn func()) {\n\t\tvar wg sync.WaitGroup\n\t\tfor k := 0; k \u0026lt; 10; k++ {\n\t\t\twg.Add(1)\n\t\t\tgo func(i int) {\n\t\t\t\tfn()\n\t\t\t\twg.Done()\n\t\t\t}(k)\n\t\t}\n\t\twg.Wait()\n\t}\n\n\t// 多次调用函数, 只执行一次\n\tbatchCall(t, func() {\n\t\tuserinfo := getUserInfoFromDbWithCache.Get(\"alex\")\n\t\tt.Log(userinfo)\n\t})\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
