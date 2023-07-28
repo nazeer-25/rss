@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>jstack 信息可视化对分析性能瓶颈的帮助 - Java</title>
+      <link>https://www.v2ex.com/t/960560</link>
+      <description>最近公司有一次服务器宕机，根据压测发现某些接口 QPS 只有 10 几。&lt;br /&gt;看了下那些接口的业务逻辑，有大量的接口调用、数据组装，要是挨个加日志查耗时也太慢了。&lt;br /&gt;想了想不如直接通过持续采样的方式看看线程的分布情况，如果没有问题的话，火焰图应该是比较均匀的分布，如果存在问题，应该会有比较多的线程都集中在某个方法上。&lt;br /&gt;于是做了个小工具( &lt;a target=&#34;_blank&#34; href=&#34;https://github.com/ZichunYang/jstack-2-flame-rs&#34; rel=&#34;nofollow noopener&#34;&gt;https://github.com/ZichunYang/jstack-2-flame-rs&lt;/a&gt;)&lt;br /&gt;然后直接开始压测，持续采样了一段时间的 jstack 信息生成火焰图，发现大部分线程都卡在了跨中心调用的某几个方法中，于是向上反馈跨中心调用的性能问题，经过测试同事的压测发现果然是那几个接口 QPS 太低导致的。&lt;br /&gt;&lt;br /&gt;故分享一下通过 jstack 可视化方案来高速识别性能瓶颈的方案。</description>
+      <author>ZiChun</author>
+      <pubDate>28 Jul 2023 07:24:27 +0000</pubDate>
+    </item>
+    <item>
       <title>你们的外区 spotify 是怎么订阅的？ - 问与答</title>
       <link>https://www.v2ex.com/t/960559</link>
       <description>搜了一下菲律宾 globe 卡的教程但是现在因为要实名这条路应该走不通了，求助一个简单靠谱的办法</description>
@@ -11,7 +18,7 @@
       <pubDate>28 Jul 2023 07:22:49 +0000</pubDate>
     </item>
     <item>
-      <title>[求助帖] 代码发布生产环境后， IT 总监要求我把生产变更同步测试环境？ - 问与答</title>
+      <title>[求助帖] 代码发布生产环境后， IT 总监要求我把生产变更同步其他测试环境？ - 问与答</title>
       <link>https://www.v2ex.com/t/960558</link>
       <description>&lt;p&gt;我是运维，刚入职新公司不久。公司代码环境有 3 个测试环境（ test001 、test002 和 test003 ）-&amp;gt;预发布环境（ pre ）-&amp;gt;生产环境（ prod ）。&lt;/p&gt;&#xA;&lt;p&gt;每个环境都是代码，数据库，中间件互相独立的。&lt;/p&gt;&#xA;&lt;p&gt;目前一个发版流程就是：（以 test001 环境为例）&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;master 分支合并到 test001 分支，开发提交代码到 test001 分支，Jenkins 发布到测试环境 test001&lt;/li&gt;&#xA;&lt;li&gt;测试没有问题，将 test001 分支合并到预验收分支 release ，Jenkins 构建 release 分支到预发布环境&lt;/li&gt;&#xA;&lt;li&gt;预发布环境验收没有问题，就合并 release 分支到 master 分支&lt;/li&gt;&#xA;&lt;li&gt;最后，master 克隆一个 release_xxx 发版分支，Jenkins 构建使用这个 release_xxx 分支发布到生产环境&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;发版涉及代码，数据库表结构修改，mq topic 主题增删改等。&lt;/p&gt;&#xA;&lt;p&gt;假如今天 test001 发版，那么对应的代码，数据库，中间件的修改，也要同步到 test002 和 test003 测试环境。&lt;/p&gt;&#xA;&lt;p&gt;请问各位大佬这种发布流程有没有问题？或者有没有什么优化点？&lt;/p&gt;&#xA;&lt;p&gt;真不想每次发版，我都得修改 5 个环境的配置，数据库。&lt;/p&gt;&#xA;</description>
       <author>syushin</author>
