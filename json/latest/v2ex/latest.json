@@ -4,9 +4,23 @@
   "Description": "",
   "Items": [
     {
+      "Title": "数据库设计问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/961060",
+      "Description": "\u003cp\u003e目前的数据库表结构（忽略了其他不重要字段）是：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003ecreate table if not exists tb_test(\n    `id`\tbigint unsigned auto_increment comment '主键 ID',\n    `A1` \tVARCHAR(32) DEFAULT '',\n    `B2`\tINT UNSIGNED DEFAULT 0,\n    PRIMARY KEY(`id`),\n    UNIQUE KEY(`A1`),\n    KEY (`B2`)\n);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e常用的 SQL 主要是写入、查询和统计\u003ccode\u003eB2\u003c/code\u003e字段的数量，如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003einsert ignore into tb_test(A1, B2) values('xxx', 123);\n\nselect * from tb_test where A1 = 'xxx';\n\nselect count(*) as cnt fro tb_test where B2 = 123;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e现在有个问题，这个表现在破亿了，统计 B2 字段耗时有时比较长，将来肯定越来越长，暂时升级数据库配置把耗时降到可接受范围了，目前想的方案是考虑做分表。但是用\u003ccode\u003eA1\u003c/code\u003e或者\u003ccode\u003eB2\u003c/code\u003e字段做分表字段都不是很好。\u003ccode\u003eA1\u003c/code\u003e做分表的话，要统计\u003ccode\u003eB2\u003c/code\u003e的时候需要每个表都轮询一次。\u003ccode\u003eB2\u003c/code\u003e字段做分表字段的话，要保证\u003ccode\u003eA1\u003c/code\u003e字段的唯一性，需要插入前轮询查每一个表当前插入的值是否已经存在。\u003c/p\u003e\n\u003cp\u003e请教下各位彦祖、亦菲，有没有好的建议，不只是数据库方案，其他存储也可以接受。\u003c/p\u003e\n",
+      "Author": "hfywy",
+      "PubDate": "2023-07-30T15:31:18Z"
+    },
+    {
+      "Title": "有没有一些机械专业相关的交流平台？ - 问与答",
+      "Link": "https://www.v2ex.com/t/961059",
+      "Description": "想向机械工作者的前辈们取取经",
+      "Author": "blueboycn",
+      "PubDate": "2023-07-30T15:28:05Z"
+    },
+    {
       "Title": "ChatGPT 接口国内代理 - 推广",
       "Link": "https://www.v2ex.com/t/961058",
-      "Description": "有没有老哥们需要 GPT API 的，目前可以做到现有主流商用大模型 API 集成及代理",
+      "Description": "\u003cdiv\u003e\n 有没有老哥们需要 GPT API 的，目前可以做到现有主流商用大模型 API 集成及代理\n国内可用 价格优惠 量大从优\n\u003c/div\u003e",
       "Author": "holygeek",
       "PubDate": "2023-07-30T15:23:14Z"
     },
@@ -37,13 +51,6 @@
       "Description": "\u003cp\u003e我是纯后端，主力语言是 java 、c++ 。\u003c/p\u003e\n\u003cp\u003e我就发现一个问题，有时候自己有点啥想法，或者女友需要个什么小工具，我就做不出来，主要是界面不会做，即使磕磕绊绊的弄出一个界面也巨丑无比。\u003c/p\u003e\n\u003cp\u003e经常看到有前端和全栈的同学做一些很实用的小工具，V 站就有很多同学分享他们的作品，甚至有些同学可靠其整点外快。\u003c/p\u003e\n\u003cp\u003e看得我好眼馋，也想系统的学习下前端。\u003c/p\u003e\n\u003cp\u003e我就想问下，你们平时会自己写一些小东西吗，或者会有挣外快的机会吗\u003c/p\u003e\n\u003cp\u003e我一个纯后端，除了给公司创造价值，其他啥都做不了。\u003c/p\u003e\n",
       "Author": "vincent7245",
       "PubDate": "2023-07-30T15:09:00Z"
-    },
-    {
-      "Title": "Surge iOS Pro 还有两个位置 - Surge",
-      "Link": "https://www.v2ex.com/t/961052",
-      "Description": "\u003cp\u003e120 买断，订阅一年任意更新升级，订阅到期同意就升级，跳车不退，如要换设备可自行反激活\u003c/p\u003e\n\u003cp\u003e需要联系 tg:vkyuhan\u003c/p\u003e\n",
-      "Author": "vksss",
-      "PubDate": "2023-07-30T15:02:07Z"
     },
     {
       "Title": "问一下大佬们👀铝会对手机信号有较大的影响么 - 问与答",
@@ -247,6 +254,13 @@
       "Description": "如题，NUC8 安装的黑苹果系统，但是发现不接显示器不能启动机器，接上显示器就可以正常开机，请问这是什么原因？应该如何解决？",
       "Author": "muhahaha",
       "PubDate": "2023-07-30T11:19:13Z"
+    },
+    {
+      "Title": "Surge iOS Pro 还有两个位置 - Surge",
+      "Link": "https://www.v2ex.com/t/961052",
+      "Description": "\u003cp\u003e120 买断，订阅一年任意更新升级，订阅到期同意就升级，跳车不退，如要换设备可自行反激活\u003c/p\u003e\n\u003cp\u003e需要联系 tg:vkyuhan\u003c/p\u003e\n",
+      "Author": "vksss",
+      "PubDate": "2023-07-30T15:02:07Z"
     },
     {
       "Title": "三星 T7 移动固态硬盘在电脑息屏后有影响吗 - MacBook Pro",

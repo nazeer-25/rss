@@ -4,9 +4,23 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>数据库设计问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/961060</link>
+      <description>&lt;p&gt;目前的数据库表结构（忽略了其他不重要字段）是：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;create table if not exists tb_test(&#xA;    `id`&#x9;bigint unsigned auto_increment comment &#39;主键 ID&#39;,&#xA;    `A1` &#x9;VARCHAR(32) DEFAULT &#39;&#39;,&#xA;    `B2`&#x9;INT UNSIGNED DEFAULT 0,&#xA;    PRIMARY KEY(`id`),&#xA;    UNIQUE KEY(`A1`),&#xA;    KEY (`B2`)&#xA;);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;常用的 SQL 主要是写入、查询和统计&lt;code&gt;B2&lt;/code&gt;字段的数量，如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;insert ignore into tb_test(A1, B2) values(&#39;xxx&#39;, 123);&#xA;&#xA;select * from tb_test where A1 = &#39;xxx&#39;;&#xA;&#xA;select count(*) as cnt fro tb_test where B2 = 123;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;现在有个问题，这个表现在破亿了，统计 B2 字段耗时有时比较长，将来肯定越来越长，暂时升级数据库配置把耗时降到可接受范围了，目前想的方案是考虑做分表。但是用&lt;code&gt;A1&lt;/code&gt;或者&lt;code&gt;B2&lt;/code&gt;字段做分表字段都不是很好。&lt;code&gt;A1&lt;/code&gt;做分表的话，要统计&lt;code&gt;B2&lt;/code&gt;的时候需要每个表都轮询一次。&lt;code&gt;B2&lt;/code&gt;字段做分表字段的话，要保证&lt;code&gt;A1&lt;/code&gt;字段的唯一性，需要插入前轮询查每一个表当前插入的值是否已经存在。&lt;/p&gt;&#xA;&lt;p&gt;请教下各位彦祖、亦菲，有没有好的建议，不只是数据库方案，其他存储也可以接受。&lt;/p&gt;&#xA;</description>
+      <author>hfywy</author>
+      <pubDate>30 Jul 2023 15:31:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有一些机械专业相关的交流平台？ - 问与答</title>
+      <link>https://www.v2ex.com/t/961059</link>
+      <description>想向机械工作者的前辈们取取经</description>
+      <author>blueboycn</author>
+      <pubDate>30 Jul 2023 15:28:05 +0000</pubDate>
+    </item>
+    <item>
       <title>ChatGPT 接口国内代理 - 推广</title>
       <link>https://www.v2ex.com/t/961058</link>
-      <description>有没有老哥们需要 GPT API 的，目前可以做到现有主流商用大模型 API 集成及代理</description>
+      <description>&lt;div&gt;&#xA; 有没有老哥们需要 GPT API 的，目前可以做到现有主流商用大模型 API 集成及代理&#xA;国内可用 价格优惠 量大从优&#xA;&lt;/div&gt;</description>
       <author>holygeek</author>
       <pubDate>30 Jul 2023 15:23:14 +0000</pubDate>
     </item>
@@ -37,13 +51,6 @@
       <description>&lt;p&gt;我是纯后端，主力语言是 java 、c++ 。&lt;/p&gt;&#xA;&lt;p&gt;我就发现一个问题，有时候自己有点啥想法，或者女友需要个什么小工具，我就做不出来，主要是界面不会做，即使磕磕绊绊的弄出一个界面也巨丑无比。&lt;/p&gt;&#xA;&lt;p&gt;经常看到有前端和全栈的同学做一些很实用的小工具，V 站就有很多同学分享他们的作品，甚至有些同学可靠其整点外快。&lt;/p&gt;&#xA;&lt;p&gt;看得我好眼馋，也想系统的学习下前端。&lt;/p&gt;&#xA;&lt;p&gt;我就想问下，你们平时会自己写一些小东西吗，或者会有挣外快的机会吗&lt;/p&gt;&#xA;&lt;p&gt;我一个纯后端，除了给公司创造价值，其他啥都做不了。&lt;/p&gt;&#xA;</description>
       <author>vincent7245</author>
       <pubDate>30 Jul 2023 15:09:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>Surge iOS Pro 还有两个位置 - Surge</title>
-      <link>https://www.v2ex.com/t/961052</link>
-      <description>&lt;p&gt;120 买断，订阅一年任意更新升级，订阅到期同意就升级，跳车不退，如要换设备可自行反激活&lt;/p&gt;&#xA;&lt;p&gt;需要联系 tg:vkyuhan&lt;/p&gt;&#xA;</description>
-      <author>vksss</author>
-      <pubDate>30 Jul 2023 15:02:07 +0000</pubDate>
     </item>
     <item>
       <title>问一下大佬们👀铝会对手机信号有较大的影响么 - 问与答</title>
@@ -246,6 +253,13 @@
       <description>如题，NUC8 安装的黑苹果系统，但是发现不接显示器不能启动机器，接上显示器就可以正常开机，请问这是什么原因？应该如何解决？</description>
       <author>muhahaha</author>
       <pubDate>30 Jul 2023 11:19:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>Surge iOS Pro 还有两个位置 - Surge</title>
+      <link>https://www.v2ex.com/t/961052</link>
+      <description>&lt;p&gt;120 买断，订阅一年任意更新升级，订阅到期同意就升级，跳车不退，如要换设备可自行反激活&lt;/p&gt;&#xA;&lt;p&gt;需要联系 tg:vkyuhan&lt;/p&gt;&#xA;</description>
+      <author>vksss</author>
+      <pubDate>30 Jul 2023 15:02:07 +0000</pubDate>
     </item>
     <item>
       <title>三星 T7 移动固态硬盘在电脑息屏后有影响吗 - MacBook Pro</title>
