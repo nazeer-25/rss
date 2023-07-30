@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ESXI 宕机 - 路由器</title>
+      <link>https://www.v2ex.com/t/961062</link>
+      <description>畅网的 n305 四网口工控机，底层 ESXI8.0 ，虚拟机装了 openwrt 和网心云，直通三个网口给 openwrt ，openwrt 拨号，运行一天左右就会崩溃，断网，ESXI 和 openwrt 的管理后台都进不去，必须强制关机重启才能恢复。之前没有部署网心云运行了两周一切正常，周末部署了网心云就开始出问题，我不理解的是就算网心云虚拟机崩了，也不应该影响底层 ESXI 吧，为啥会导致 ESXI 管理页面也进不去呢？有没有大佬帮忙分析下是什么原因，万分感谢🙏</description>
+      <author>ColinWang</author>
+      <pubDate>30 Jul 2023 15:43:40 +0000</pubDate>
+    </item>
+    <item>
       <title>数据库设计问题 - 程序员</title>
       <link>https://www.v2ex.com/t/961060</link>
       <description>&lt;p&gt;目前的数据库表结构（忽略了其他不重要字段）是：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;create table if not exists tb_test(&#xA;    `id`&#x9;bigint unsigned auto_increment comment &#39;主键 ID&#39;,&#xA;    `A1` &#x9;VARCHAR(32) DEFAULT &#39;&#39;,&#xA;    `B2`&#x9;INT UNSIGNED DEFAULT 0,&#xA;    PRIMARY KEY(`id`),&#xA;    UNIQUE KEY(`A1`),&#xA;    KEY (`B2`)&#xA;);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;常用的 SQL 主要是写入、查询和统计&lt;code&gt;B2&lt;/code&gt;字段的数量，如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;insert ignore into tb_test(A1, B2) values(&#39;xxx&#39;, 123);&#xA;&#xA;select * from tb_test where A1 = &#39;xxx&#39;;&#xA;&#xA;select count(*) as cnt fro tb_test where B2 = 123;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;现在有个问题，这个表现在破亿了，统计 B2 字段耗时有时比较长，将来肯定越来越长，暂时升级数据库配置把耗时降到可接受范围了，目前想的方案是考虑做分表。但是用&lt;code&gt;A1&lt;/code&gt;或者&lt;code&gt;B2&lt;/code&gt;字段做分表字段都不是很好。&lt;code&gt;A1&lt;/code&gt;做分表的话，要统计&lt;code&gt;B2&lt;/code&gt;的时候需要每个表都轮询一次。&lt;code&gt;B2&lt;/code&gt;字段做分表字段的话，要保证&lt;code&gt;A1&lt;/code&gt;字段的唯一性，需要插入前轮询查每一个表当前插入的值是否已经存在。&lt;/p&gt;&#xA;&lt;p&gt;请教下各位彦祖、亦菲，有没有好的建议，不只是数据库方案，其他存储也可以接受。&lt;/p&gt;&#xA;</description>
