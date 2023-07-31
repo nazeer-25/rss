@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于阿里云盘分享的疑问 - 互联网</title>
+      <link>https://www.v2ex.com/t/961259</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/iqHs3hwcum5/folder/627df695c6b1d4b9fc7c47d08b7ecb4e2a3a4c5a&#34; rel=&#34;nofollow&#34;&gt;https://www.aliyundrive.com/s/iqHs3hwcum5/folder/627df695c6b1d4b9fc7c47d08b7ecb4e2a3a4c5a&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;大佬来看看他这个是如何分享出来的？我转存后，发现分享不了，他做了什么手脚吗，网上搜了经验是改文件格式伪装再分享，但他这个是直接分享文件夹啊，文件夹里面包含了阿里禁止分享的 rar 文件 &lt;/p&gt;&#xA;&lt;p&gt;没看懂我说的话，自己转存一下，然后分享一下就理解了，转存后发现分享不了&lt;/p&gt;&#xA;&lt;p&gt;但我又发现，如果是改文件格式伪装再分享，别人转存是可以分享的，而上面那个分享，转存后却分享不了，这是什么骚操作吗？&lt;/p&gt;&#xA;</description>
+      <author>brwzsy0733</author>
+      <pubDate>31 Jul 2023 09:10:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>[低代码 jeecg-boot] 原来低代码真的是力大砖飞（笑 - 程序员</title>
+      <link>https://www.v2ex.com/t/961258</link>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;虽然很不爽 jeecg-boot 开源开一半的做法。但是还是需要尊重开源协议&#xA;本文声明：不提供反混淆后的代码，也不会运用于商业项目，本文仅提供学习。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;一个多月前，我在 V2 真诚地提问，低代码平台是怎么实现的动态创建表、然后立马就实现增删改查的接口的？许多大佬给出了实现思路&lt;a href=&#34;https://v2ex.com/t/951307#reply11&#34; rel=&#34;nofollow&#34;&gt;原帖&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;一个月过去了，我把 jeecg-boot 的 Online 模块给搞懂的了&lt;/p&gt;&#xA;&lt;p&gt;在 &lt;code&gt;jeecg-module-system/jeecg-system-biz/pom.xml&lt;/code&gt; 中，引入了一个 jar 包&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&#x9;&#x9;&amp;lt;dependency&amp;gt;&#xA;&#x9;&#x9;&#x9;&amp;lt;groupId&amp;gt;org.jeecgframework.boot&amp;lt;/groupId&amp;gt;&#xA;&#x9;&#x9;&#x9;&amp;lt;artifactId&amp;gt;hibernate-re&amp;lt;/artifactId&amp;gt;&#xA;&#x9;&#x9;&amp;lt;/dependency&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这个 jar 包就是 online 模块的代码&lt;/p&gt;&#xA;&lt;p&gt;通过反编译+自己的摸索后发现，online 表单开发的数据主要存储在： &lt;code&gt;onl_cgform_head&lt;/code&gt;、&lt;code&gt;onl_cgform_field&lt;/code&gt;、&lt;code&gt;onl_cgform_index&lt;/code&gt;三个表内。&lt;/p&gt;&#xA;&lt;p&gt;每次新增一个表单（&lt;code&gt;/jeecgboot/online/cgform/api/addAll&lt;/code&gt;），后端校验、补充默认字段后，通过 mybatis-plus 保存到数据库。&lt;/p&gt;&#xA;&lt;p&gt;点击同步到数据库（&lt;code&gt;online/cgform/api/doDbSynch/{code}/{synMethod}&lt;/code&gt;）：根据 code 获取上面提到的三个表的数据，然后判断 sysMethod 。如果是 force ，则先删除表再建表，如果是 normal ，则判断是不是存在表。不存在-&amp;gt;新建表。存在-&amp;gt;通过 JDBC 的 Connect.getMetaData();可以获取现在数据库所拥有的字段，然后跟用户配置的表的字段进行比较，多的字段删除，少的字段新增。所有的 DDL ，都是用过工具类，一个一个字段的生成的。生成完之后直接通过 mybatis 执行。&lt;/p&gt;&#xA;&lt;p&gt;增加数据（&lt;code&gt;jeecg-boot/online/cgform/api/form/{code} &lt;/code&gt;）：接收 json ，根据 code ，查询表的列名。遍历 json 里的数据，使用工具类生成 insert sql 。&lt;/p&gt;&#xA;&lt;p&gt;至此，jeecg-boot 的表单增删改查的原理基本上清晰了。跟我设想的什么代码热更新没有什么关系，没有黑科技，只有力大砖飞&lt;/p&gt;&#xA;</description>
+      <author>twofox</author>
+      <pubDate>31 Jul 2023 09:09:58 +0000</pubDate>
+    </item>
+    <item>
+      <title>面对自己不愿意干的工作如何调节自己 - 问与答</title>
+      <link>https://www.v2ex.com/t/961257</link>
+      <description>类似于码农的 crud 。明明知道一直这么干下去就是死路一条，唯一的办法就是解决这个困境。但是在解决这个困境之前，有非常强烈的想辞职冲动。但辞职后估计工作都会没了。。。&lt;br /&gt;&lt;br /&gt;大家有没有类似的情况，又如何调节呢</description>
+      <author>21231sv</author>
+      <pubDate>31 Jul 2023 09:07:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>[求助] 各位大佬有没有遇到公司局域网太慢的情况？ - 问与答</title>
+      <link>https://www.v2ex.com/t/961256</link>
+      <description>&lt;p&gt;事情是这样的，公司的局域网的网速只有 10mbps 太慢了，我想用自己的热点来上网&#xA;但是链接 wifi 之后优先走以太网，后来查阅之后才知道可以设置优先级（跃点），跃点月底优先级越高，WiFi 设置为 25 以太网设置成 30 这样子就差不多了。&#xA;但是！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！&#xA;我发现这样设置之后公司部分服务是可以用的，然后今天访问其他主机下的文件访问不了了，断开 wifi 就可以&#xA;大佬们有遇到这种情况的吗&#xA;求大佬求教&lt;/p&gt;&#xA;</description>
+      <author>miaosl</author>
+      <pubDate>31 Jul 2023 09:05:34 +0000</pubDate>
+    </item>
+    <item>
       <title>Is a Glass of Wine Harmless? Wrong Question (theatlantic.com) - 分享发现</title>
       <link>https://www.v2ex.com/t/961254</link>
       <description>&lt;p&gt;&lt;a href=&#34;https://www.theatlantic.com/ideas/archive/2023/07/moderate-drinking-heart-disesase-cancer/674692/&#34; rel=&#34;nofollow&#34;&gt;https://www.theatlantic.com/ideas/archive/2023/07/moderate-drinking-heart-disesase-cancer/674692/&lt;/a&gt;&lt;/p&gt;&#xA;</description>
