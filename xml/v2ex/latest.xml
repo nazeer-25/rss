@@ -4,6 +4,48 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>人体工学椅求推荐 - 问与答</title>
+      <link>https://www.v2ex.com/t/961300</link>
+      <description>曾经买过两把西昊，一开始买回来感觉还能凑活用。&lt;br /&gt;但是用了大半年吧，整把椅子就变得松松垮垮的，还有异响。质量实在是差点意思。&lt;br /&gt;&lt;br /&gt;是否有必要加钱上 Herman 了，感觉确实有点贵了。&lt;br /&gt;&lt;br /&gt;有没有什么中间价位，质量过得去的。也不用多么符合人体工学，但是至少要坐着舒服，质量够硬。</description>
+      <author>okcdz</author>
+      <pubDate>31 Jul 2023 12:05:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>spring data jpa，根本没法 lazy loading?? - 程序员</title>
+      <link>https://www.v2ex.com/t/961299</link>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;&#xA;Postgres:15.3&lt;ul&gt;&#xA;&lt;li&gt;table: accounts, reckoner, 无外键，一条 reckoner 一定能对应一条 accounts 记录&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;spring boot jpa:3.1.0, hibernate:6.2.2.Final&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Entity&#xA;public class ReckonerEntity {&#xA;&#xA;    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)&#xA;    @JoinColumn(name =  &#34;from_acct&#34;)&#xA;    private AccountsEntity fromAcctEntity;&#xA;}&#xA;&#xA;&#xA;@Entity&#xA;public class AccountsEntity { }&#xA;&#xA;&#xA;public interface ReckonerRepository extends JpaRepository&amp;lt;ReckonerEntity, UUID&amp;gt;, JpaSpecificationExecutor&amp;lt;ReckonerEntity&amp;gt; { }&#xA;&#xA;&#xA;&#xA;    @Bean&#xA;    @Transactional&#xA;    public CommandLineRunner runner() {&#xA;        return args -&amp;gt; {&#xA;            List&amp;lt;ReckonerEntity&amp;gt; reckoner = reckonerRepository.findAll();&#xA;            ReckonerEntity reckonerEntity = reckoner.get(0);&#xA;            AccountsEntity fromAcctEntity = reckonerEntity.getFromAcctEntity();&#xA;            log.info(fromAcctEntity.getName());&#xA;        };&#xA;    }&#xA;    &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;运行之后出错：&lt;strong&gt;org.hibernate.LazyInitializationException: could not initialize proxy [.....] - no Session&lt;/strong&gt; 我尝试了 transactional 所有的 propagation 都不行，这明显是懒加载的错误&lt;/p&gt;&#xA;&lt;p&gt;解决方案: &lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;entityGraph 注解的方式&lt;/li&gt;&#xA;&lt;li&gt;@Query(&#34;.. join fetch.. &#34;)的方式  &lt;/li&gt;&#xA;&lt;li&gt;配置 spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true&lt;/li&gt;&#xA;&lt;li&gt;...&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;但是这所有的解决方案本质上不都是 eager loading 吗？？&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;按照我的理解，上面的代码如果是 lazy loading 应该会 log 两条无 join 的 SQL, 但是我能查到的所有解决方案最终都会导致只生成一条 join 的 SQL&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;也就是这本质上就是 eager loading&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;如果自己实现 dao 层, entity 等所有代码不变, 也就是 @&lt;a href=&#34;/member/PersistenceContext&#34;&gt;PersistenceContext&lt;/a&gt; 注入 entityManager 的方式，可以完美的做到 lazy loading ，log 两条 SQL&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;我就不懂了，所以 spring data jpa 就是不能实现 lazy loading 吗??? 我就想要 lazy loading ，不要 eager loading 有什么办法吗&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>wganbleuthall</author>
+      <pubDate>31 Jul 2023 12:05:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>拜拜了思源笔记， S3/WebDAV 同步功能都开始收费了 - 分享发现</title>
+      <link>https://www.v2ex.com/t/961298</link>
+      <description>&lt;p&gt;最近更新思源后发现 S3 不能同步了，进入设置提示 “该功能需要登录账号后才能使用”&lt;/p&gt;&#xA;&lt;p&gt;感觉不对，S3 是我自建的 minio 干嘛都要登账号，当初就是因为不用登账号而且可以自建才选的思源。然后找了一圈才知道 S3/WebDAV 同步功能都开始收费了，而且是单独收费（这功能也包含在订阅里，所以不想单独付费的话就要订阅）&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/siyuan-note/siyuan/issues/8835&#34; rel=&#34;nofollow&#34;&gt;https://github.com/siyuan-note/siyuan/issues/8835&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/siyuan-note/siyuan/issues/8780&#34; rel=&#34;nofollow&#34;&gt;https://github.com/siyuan-note/siyuan/issues/8780&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;已经开始导出笔记了，再见了思源&lt;/p&gt;&#xA;</description>
+      <author>BeautifulSoap</author>
+      <pubDate>31 Jul 2023 12:03:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>纪念逝去的小蓝鸟，在桌面上添加小蓝鸟图标（PWA） - 分享创造</title>
+      <link>https://www.v2ex.com/t/961297</link>
+      <description>&lt;p&gt;App Store 的推特也彻底变成 X 了……😭&lt;/p&gt;&#xA;&lt;p&gt;其实就是一个 PWA ，图标和名称是曾经的推特：&lt;a href=&#34;https://github.com/phyllali/Tomb-of-AzureBird&#34; rel=&#34;nofollow&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://github.com/phyllali/Tomb-of-AzureBird/blob/main/assets/guide.png?raw=true&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;马斯克还我小鸟😭&lt;/p&gt;&#xA;</description>
+      <author>DIMOJANG</author>
+      <pubDate>31 Jul 2023 12:03:15 +0000</pubDate>
+    </item>
+    <item>
+      <title>加班太严重，何必和自己身体过不去，打酱油得了 - 程序员</title>
+      <link>https://www.v2ex.com/t/961296</link>
+      <description>&lt;p&gt;程序员&#xA;经常被要求加班加班，9 点那不算加班，时常被要求 10 点之后，甚至 2 点。而且因为是主管，还被要求监督手下加班&#xA;工资还行，这也是我坚持很久的原因。奖金看不到，项目能赚钱不知道要到什么时候&#xA;现在因为加班太多，心态有点崩溃，但是也不想辞职，要辞也要等到明年，所以就想着打酱油来调整心态&#xA;上班玩玩游戏，游戏公司允许玩游戏&#xA;碰到事情能甩的甩出去，但是核心问题还是要解决，这是立身之本&#xA;项目大概率会黄，加上加班严重，所以没什么工作激情，还是打酱油得了&#xA;老板也不要怪我工作不认真，要怪就怪加班太狠&#xA;这会上 V 站发帖就是在打酱油&lt;/p&gt;&#xA;</description>
+      <author>lcingOnTheCake</author>
+      <pubDate>31 Jul 2023 12:02:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>为什么有些 App 安装后闪退， OPPO 手机。 - Android</title>
+      <link>https://www.v2ex.com/t/961295</link>
+      <description>OPPOfindx6Pro 。apkpure 更新了个维基百科 App 。打开闪退。这种怎么解决呢</description>
+      <author>guoyan</author>
+      <pubDate>31 Jul 2023 11:58:01 +0000</pubDate>
+    </item>
+    <item>
       <title>复刻小程序：卡神日历 - 分享发现</title>
       <link>https://www.v2ex.com/t/961293</link>
       <description>小程序：卡神日历  可以管理信用卡，贷款，网贷，统计消费，账单日，还款日微信提醒，挺好用的。但感觉现在不怎么维护了，添加功能都有问题了。哪位大神来复刻一下。</description>
