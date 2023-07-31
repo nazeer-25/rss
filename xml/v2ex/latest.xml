@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求助， AWS 免费服务器被 ban，如何解决 - 问与答</title>
+      <link>https://www.v2ex.com/t/961124</link>
+      <description>申请了台 aws 免费服务器,ip 被 ban 了 2 次，重启示例后，分配了新的 IP 。&lt;br /&gt;&lt;br /&gt;这台服务器提供了 openai 的服务，我国内直连，1 个月内 ban 了 2 次。&lt;br /&gt;&lt;br /&gt;我要是套一层 cf 代理会不会好一些，延迟的啥也不管了，只要稳定就行。。&lt;br /&gt;&lt;br /&gt;话说，海外 IP 被 ban 的原因是啥？？ 我都快无语了，求助</description>
+      <author>dabingbing</author>
+      <pubDate>31 Jul 2023 02:31:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>ts 合并成 mp4 请教 - 问与答</title>
+      <link>https://www.v2ex.com/t/961123</link>
+      <description>&lt;p&gt;请教哈各位大佬，想做一个下载器放在软路由下载视频，目前视频已经正常下载，但是下载完成是 1500 多个 ts 文件，想要优雅的把它合成 mp4 ，有没有高效，快捷的方式，目前自己尝试的做法是使用 Python 调库，问了 chatgpt ，给出代码``from moviepy.editor import *&#xA;import os&lt;/p&gt;&#xA;&lt;h1&gt;获取所有 TS 文件&lt;/h1&gt;&#xA;&lt;p&gt;ts_files = [f for f in os.listdir(&#39;.&#39;) if f.endswith(&#39;.ts&#39;)]&#xA;ts_files.sort()  # 如果需要按特定顺序排序&lt;/p&gt;&#xA;&lt;h1&gt;每批合并的视频数量&lt;/h1&gt;&#xA;&lt;p&gt;batch_size = 50&lt;/p&gt;&#xA;&lt;h1&gt;临时合并的视频列表&lt;/h1&gt;&#xA;&lt;p&gt;temp_videos = []&lt;/p&gt;&#xA;&lt;h1&gt;分批合并视频&lt;/h1&gt;&#xA;&lt;p&gt;for i in range(0, len(ts_files), batch_size):&#xA;batch_files = ts_files[i:i + batch_size]&#xA;clips = [VideoFileClip(f) for f in batch_files]&#xA;video = concatenate_videoclips(clips)&#xA;temp_file = f&#34;temp_{i}.mp4&#34;&#xA;video.write_videofile(temp_file)&#xA;temp_videos.append(temp_file)&lt;/p&gt;&#xA;&lt;h1&gt;合并临时视频&lt;/h1&gt;&#xA;&lt;p&gt;final_clips = [VideoFileClip(f) for f in temp_videos]&#xA;final_video = concatenate_videoclips(final_clips)&#xA;final_video.write_videofile(&#34;final.mp4&#34;)&lt;/p&gt;&#xA;&lt;h1&gt;删除临时视频文件&lt;/h1&gt;&#xA;&lt;p&gt;for f in temp_videos:&#xA;os.remove(f)&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;这是调整后代码，之前给出的代码。第一版给出的代码如下&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;from moviepy.editor import VideoFileClip, concatenate_videoclips&#xA;import os&#xA;import gc&lt;/p&gt;&#xA;&lt;h1&gt;Define a list of video file paths&lt;/h1&gt;&#xA;&lt;p&gt;ts_files = [&#xA;&#39;video1.ts&#39;,&#xA;&#39;video2.ts&#39;,&#xA;&#39;video3.ts&#39;,&#xA;# Add more file paths&#xA;]&lt;/p&gt;&#xA;&lt;h1&gt;Create a temporary directory to store intermediate MP4 files&lt;/h1&gt;&#xA;&lt;p&gt;temp_dir = &#34;temp_mp4_files&#34;&#xA;os.makedirs(temp_dir, exist_ok=True)&lt;/p&gt;&#xA;&lt;h1&gt;Convert each TS file to MP4&lt;/h1&gt;&#xA;&lt;p&gt;mp4_files = []&#xA;for ts_file in ts_files:&#xA;clip = VideoFileClip(ts_file)&#xA;mp4_file_path = os.path.join(temp_dir, os.path.basename(ts_file).replace(&#34;.ts&#34;, &#34;.mp4&#34;))&#xA;clip.write_videofile(mp4_file_path, codec=&#34;libx264&#34;, fps=24)&#xA;clip.close()&#xA;mp4_files.append(mp4_file_path)&#xA;# Force a garbage collection to free up memory&#xA;gc.collect()&lt;/p&gt;&#xA;&lt;h1&gt;Load the MP4 clips&lt;/h1&gt;&#xA;&lt;p&gt;clips = [VideoFileClip(mp4_file) for mp4_file in mp4_files]&lt;/p&gt;&#xA;&lt;h1&gt;Concatenate the clips&lt;/h1&gt;&#xA;&lt;p&gt;final_video = concatenate_videoclips(clips, method=&#34;compose&#34;)&lt;/p&gt;&#xA;&lt;h1&gt;Save the concatenated video to an MP4 file&lt;/h1&gt;&#xA;&lt;p&gt;final_video.write_videofile(&#34;output.mp4&#34;, codec=&#34;libx264&#34;, fps=24)&lt;/p&gt;&#xA;&lt;h1&gt;Close the clips and delete temporary files&lt;/h1&gt;&#xA;&lt;p&gt;for clip in clips:&#xA;clip.close()&#xA;for mp4_file in mp4_files:&#xA;os.remove(mp4_file)&#xA;os.rmdir(temp_dir)&#xA;gc.collect()&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;这个代码好像因为打开的文件太多了报错了。&#xA;去搜了哈 ffmpeg 的教程，搜到的是，先创建一个 文件夹，把所有 ts 的路径按顺序写入一个 文件 ，然后 再执行命令`ffmpeg.exe -f concat -safe 0 -i file.txt -c copy out.mp4`就 OK 了（这个方法目前还没有尝试）。&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>wanchenyi</author>
+      <pubDate>31 Jul 2023 02:30:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>装机决赛圈， d5 光威天策和宏碁掠夺者凌霜怎么选择 - 问与答</title>
+      <link>https://www.v2ex.com/t/961122</link>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;光威天策 d5-6400 C32&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;宏碁凌霜 d5-6600 C34&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;或有其他内存推荐（除金百达，兼容性太差。&lt;/p&gt;&#xA;&lt;p&gt;另外 4070 和 70Ti 怎么选择，是否有必要多花 1K 上 Ti 。&lt;/p&gt;&#xA;</description>
+      <author>jujusama</author>
+      <pubDate>31 Jul 2023 02:27:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>win10 自带微软拼音候选字框异长 - 问与答</title>
+      <link>https://www.v2ex.com/t/961121</link>
+      <description>&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://zoer.us/file/3fdbf6ff192709c5439aa.png&#34;/&gt;&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://zoer.us/file/cfaa30c26084823acbe49.png&#34;/&gt;&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://zoer.us/file/a13779e1ef72f0d025c83.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;手上的两台电脑使用 win10 自带的微软拼音候选字框在输入某些文字的时候会出现异常的空白，除了使用兼容的旧版的微软拼音输入法外是正常的外，恢复默认设置，甚至我把其中一台系统重装了，都会出现这样的问题。&lt;/p&gt;&#xA;&lt;p&gt;不知道万能的 v 站有没有解决方法。&lt;/p&gt;&#xA;</description>
+      <author>JuSH</author>
+      <pubDate>31 Jul 2023 02:27:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>求助：噪音敏感怎么办？ - 问与答</title>
+      <link>https://www.v2ex.com/t/961120</link>
+      <description>发现自己最近变得对噪音敏感了！&lt;br /&gt;&lt;br /&gt;有时候听到突然的声音（邻居关门、楼上挪椅子等）虽然声音不大，但就会很烦躁，不停的在屋子里寻找声源。&lt;br /&gt;晚上睡觉也离不开耳塞，虽然不太舒服，但总感觉带上耳塞有一种“安全感”。&lt;br /&gt;我个人猜测可能是工作压力最近有些大，但我不知道怎么缓解这种噪音敏感？有一样情况的兄弟么？提前谢谢大家！</description>
+      <author>langmanxiaoa</author>
+      <pubDate>31 Jul 2023 02:21:21 +0000</pubDate>
+    </item>
+    <item>
       <title>假如服务器被入侵了，要检查哪些地方？ - 信息安全</title>
       <link>https://www.v2ex.com/t/961119</link>
       <description>&lt;p&gt;我淦，从来没想到我也有泄密的一天。昨天把我的内网服务开源了，开源的时候专门 copy 了一份新代码 push github 。仔仔细细检查了好多遍，考虑到单测用例有很多密钥和邮件信息，一遍又一遍检查单测文件，把大部分单测文件都删了。&lt;/p&gt;&#xA;&lt;p&gt;结果，没想到漏了一个流水线的自动编译脚本。脚本里面有核心服务器密码。泄露的是外网服务器密码。但是我把内外网服务器都组成局域网了，所有服务器可以内网 ip 互相访问。昨天早上 10 点多 push 的 github ，下午 6 点发现泄密，赶紧把外网服务器格式化了重装系统。但是我内网服务器涉及的东西太多，没法直接格式化。&lt;/p&gt;&#xA;&lt;p&gt;今天早上一起来，QQ 提示网络有风险，让我改密码。改完密码依然提示有风险。这特么是谁入侵到我内网机器上挂肉鸡了吗？检查了一遍服务器进程没看到有啥异常，假设被抓肉鸡的话，有啥专业的检查工具不？&lt;/p&gt;&#xA;&lt;p&gt;不确定是不是真的被入侵了，还是仅仅是巧合，但心里总放心不下，我淦&lt;/p&gt;&#xA;</description>

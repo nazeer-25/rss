@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "求助， AWS 免费服务器被 ban，如何解决 - 问与答",
+      "Link": "https://www.v2ex.com/t/961124",
+      "Description": "申请了台 aws 免费服务器,ip 被 ban 了 2 次，重启示例后，分配了新的 IP 。\u003cbr /\u003e\u003cbr /\u003e这台服务器提供了 openai 的服务，我国内直连，1 个月内 ban 了 2 次。\u003cbr /\u003e\u003cbr /\u003e我要是套一层 cf 代理会不会好一些，延迟的啥也不管了，只要稳定就行。。\u003cbr /\u003e\u003cbr /\u003e话说，海外 IP 被 ban 的原因是啥？？ 我都快无语了，求助",
+      "Author": "dabingbing",
+      "PubDate": "2023-07-31T02:31:09Z"
+    },
+    {
+      "Title": "ts 合并成 mp4 请教 - 问与答",
+      "Link": "https://www.v2ex.com/t/961123",
+      "Description": "\u003cp\u003e请教哈各位大佬，想做一个下载器放在软路由下载视频，目前视频已经正常下载，但是下载完成是 1500 多个 ts 文件，想要优雅的把它合成 mp4 ，有没有高效，快捷的方式，目前自己尝试的做法是使用 Python 调库，问了 chatgpt ，给出代码``from moviepy.editor import *\nimport os\u003c/p\u003e\n\u003ch1\u003e获取所有 TS 文件\u003c/h1\u003e\n\u003cp\u003ets_files = [f for f in os.listdir('.') if f.endswith('.ts')]\nts_files.sort()  # 如果需要按特定顺序排序\u003c/p\u003e\n\u003ch1\u003e每批合并的视频数量\u003c/h1\u003e\n\u003cp\u003ebatch_size = 50\u003c/p\u003e\n\u003ch1\u003e临时合并的视频列表\u003c/h1\u003e\n\u003cp\u003etemp_videos = []\u003c/p\u003e\n\u003ch1\u003e分批合并视频\u003c/h1\u003e\n\u003cp\u003efor i in range(0, len(ts_files), batch_size):\nbatch_files = ts_files[i:i + batch_size]\nclips = [VideoFileClip(f) for f in batch_files]\nvideo = concatenate_videoclips(clips)\ntemp_file = f\"temp_{i}.mp4\"\nvideo.write_videofile(temp_file)\ntemp_videos.append(temp_file)\u003c/p\u003e\n\u003ch1\u003e合并临时视频\u003c/h1\u003e\n\u003cp\u003efinal_clips = [VideoFileClip(f) for f in temp_videos]\nfinal_video = concatenate_videoclips(final_clips)\nfinal_video.write_videofile(\"final.mp4\")\u003c/p\u003e\n\u003ch1\u003e删除临时视频文件\u003c/h1\u003e\n\u003cp\u003efor f in temp_videos:\nos.remove(f)\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e这是调整后代码，之前给出的代码。第一版给出的代码如下\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003efrom moviepy.editor import VideoFileClip, concatenate_videoclips\nimport os\nimport gc\u003c/p\u003e\n\u003ch1\u003eDefine a list of video file paths\u003c/h1\u003e\n\u003cp\u003ets_files = [\n'video1.ts',\n'video2.ts',\n'video3.ts',\n# Add more file paths\n]\u003c/p\u003e\n\u003ch1\u003eCreate a temporary directory to store intermediate MP4 files\u003c/h1\u003e\n\u003cp\u003etemp_dir = \"temp_mp4_files\"\nos.makedirs(temp_dir, exist_ok=True)\u003c/p\u003e\n\u003ch1\u003eConvert each TS file to MP4\u003c/h1\u003e\n\u003cp\u003emp4_files = []\nfor ts_file in ts_files:\nclip = VideoFileClip(ts_file)\nmp4_file_path = os.path.join(temp_dir, os.path.basename(ts_file).replace(\".ts\", \".mp4\"))\nclip.write_videofile(mp4_file_path, codec=\"libx264\", fps=24)\nclip.close()\nmp4_files.append(mp4_file_path)\n# Force a garbage collection to free up memory\ngc.collect()\u003c/p\u003e\n\u003ch1\u003eLoad the MP4 clips\u003c/h1\u003e\n\u003cp\u003eclips = [VideoFileClip(mp4_file) for mp4_file in mp4_files]\u003c/p\u003e\n\u003ch1\u003eConcatenate the clips\u003c/h1\u003e\n\u003cp\u003efinal_video = concatenate_videoclips(clips, method=\"compose\")\u003c/p\u003e\n\u003ch1\u003eSave the concatenated video to an MP4 file\u003c/h1\u003e\n\u003cp\u003efinal_video.write_videofile(\"output.mp4\", codec=\"libx264\", fps=24)\u003c/p\u003e\n\u003ch1\u003eClose the clips and delete temporary files\u003c/h1\u003e\n\u003cp\u003efor clip in clips:\nclip.close()\nfor mp4_file in mp4_files:\nos.remove(mp4_file)\nos.rmdir(temp_dir)\ngc.collect()\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e这个代码好像因为打开的文件太多了报错了。\n去搜了哈 ffmpeg 的教程，搜到的是，先创建一个 文件夹，把所有 ts 的路径按顺序写入一个 文件 ，然后 再执行命令`ffmpeg.exe -f concat -safe 0 -i file.txt -c copy out.mp4`就 OK 了（这个方法目前还没有尝试）。\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "wanchenyi",
+      "PubDate": "2023-07-31T02:30:28Z"
+    },
+    {
+      "Title": "装机决赛圈， d5 光威天策和宏碁掠夺者凌霜怎么选择 - 问与答",
+      "Link": "https://www.v2ex.com/t/961122",
+      "Description": "\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e光威天策 d5-6400 C32\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003e宏碁凌霜 d5-6600 C34\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e或有其他内存推荐（除金百达，兼容性太差。\u003c/p\u003e\n\u003cp\u003e另外 4070 和 70Ti 怎么选择，是否有必要多花 1K 上 Ti 。\u003c/p\u003e\n",
+      "Author": "jujusama",
+      "PubDate": "2023-07-31T02:27:43Z"
+    },
+    {
+      "Title": "win10 自带微软拼音候选字框异长 - 问与答",
+      "Link": "https://www.v2ex.com/t/961121",
+      "Description": "\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://zoer.us/file/3fdbf6ff192709c5439aa.png\"/\u003e\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://zoer.us/file/cfaa30c26084823acbe49.png\"/\u003e\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://zoer.us/file/a13779e1ef72f0d025c83.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e手上的两台电脑使用 win10 自带的微软拼音候选字框在输入某些文字的时候会出现异常的空白，除了使用兼容的旧版的微软拼音输入法外是正常的外，恢复默认设置，甚至我把其中一台系统重装了，都会出现这样的问题。\u003c/p\u003e\n\u003cp\u003e不知道万能的 v 站有没有解决方法。\u003c/p\u003e\n",
+      "Author": "JuSH",
+      "PubDate": "2023-07-31T02:27:20Z"
+    },
+    {
+      "Title": "求助：噪音敏感怎么办？ - 问与答",
+      "Link": "https://www.v2ex.com/t/961120",
+      "Description": "发现自己最近变得对噪音敏感了！\u003cbr /\u003e\u003cbr /\u003e有时候听到突然的声音（邻居关门、楼上挪椅子等）虽然声音不大，但就会很烦躁，不停的在屋子里寻找声源。\u003cbr /\u003e晚上睡觉也离不开耳塞，虽然不太舒服，但总感觉带上耳塞有一种“安全感”。\u003cbr /\u003e我个人猜测可能是工作压力最近有些大，但我不知道怎么缓解这种噪音敏感？有一样情况的兄弟么？提前谢谢大家！",
+      "Author": "langmanxiaoa",
+      "PubDate": "2023-07-31T02:21:21Z"
+    },
+    {
       "Title": "假如服务器被入侵了，要检查哪些地方？ - 信息安全",
       "Link": "https://www.v2ex.com/t/961119",
       "Description": "\u003cp\u003e我淦，从来没想到我也有泄密的一天。昨天把我的内网服务开源了，开源的时候专门 copy 了一份新代码 push github 。仔仔细细检查了好多遍，考虑到单测用例有很多密钥和邮件信息，一遍又一遍检查单测文件，把大部分单测文件都删了。\u003c/p\u003e\n\u003cp\u003e结果，没想到漏了一个流水线的自动编译脚本。脚本里面有核心服务器密码。泄露的是外网服务器密码。但是我把内外网服务器都组成局域网了，所有服务器可以内网 ip 互相访问。昨天早上 10 点多 push 的 github ，下午 6 点发现泄密，赶紧把外网服务器格式化了重装系统。但是我内网服务器涉及的东西太多，没法直接格式化。\u003c/p\u003e\n\u003cp\u003e今天早上一起来，QQ 提示网络有风险，让我改密码。改完密码依然提示有风险。这特么是谁入侵到我内网机器上挂肉鸡了吗？检查了一遍服务器进程没看到有啥异常，假设被抓肉鸡的话，有啥专业的检查工具不？\u003c/p\u003e\n\u003cp\u003e不确定是不是真的被入侵了，还是仅仅是巧合，但心里总放心不下，我淦\u003c/p\u003e\n",
