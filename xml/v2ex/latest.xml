@@ -4,6 +4,33 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>不懂就问， V2EX 里面的 R2 面板是什么意思 - 问与答</title>
+      <link>https://www.v2ex.com/t/961631</link>
+      <author>Windyzhou</author>
+      <pubDate>01 Aug 2023 12:33:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>如何无损数据清除硬盘中的 gpt 信息而保留 mbr？ - 云修电脑</title>
+      <link>https://www.v2ex.com/t/961630</link>
+      <description>老笔记本，Lenovo e540 ，增加了内存条 8+4=12g ，更换了三星 ssd ，256g ，光驱位增加了 2t ，东芝 hdd 。&lt;br /&gt;&lt;br /&gt;ssd 应该是用三星的 ssd 克隆软件复制的，常用系统是 win7 ，中间可能我装了 win8 还是 win10 多系统。&lt;br /&gt;&lt;br /&gt;最近使用再生龙备份，一直报错。今天终于搜到，是可以 sudo -i ，然后把错误日志拷贝出来。&lt;br /&gt;&lt;br /&gt;问题，问题，问题：&lt;br /&gt;&lt;br /&gt;我的问题是，我现在 win7 启动没问题，就是克隆报错，说我磁盘同时有 mbr 和 gpt 。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;Starting /usr/sbin/ocs-sr at 2023-08-01 18:20:49 UTC...&lt;br /&gt;*****************************************************.&lt;br /&gt;Clonezilla image dir: /home/partimag&lt;br /&gt;Shutting down the Logical Volume Manager&lt;br /&gt;Finished Shutting down the Logical Volume Manager&lt;br /&gt;Found /home/partimag is using FAT file system. Set VOL_LIMIT_IN_INTERACTIVE to 4096 MB.&lt;br /&gt;The selected devices: sda2&lt;br /&gt;PS. 下次您可以直接下这样的指令:&lt;br /&gt;/usr/sbin/ocs-sr -q2 -c -j2 -z1p -i 4096 -sfsck -senc -p choose saveparts 2023-08-01-18-img sda2&lt;br /&gt;*****************************************************.&lt;br /&gt;The selected devices: sda2&lt;br /&gt;这个磁盘存在不匹配的 GPT 和 MBR 分割表: /dev/sda&lt;br /&gt;这将会搞混再生龙，使得产生的镜像文件无法使用，或者无法复制磁盘。&lt;br /&gt;你可以使用 gdisk 或者 sgdisk 来修复这个问题。例如，如何你确认 MBR 分割表才是你要的，你可以使用这个指令来将 GPT 的分割表清除，而保留 MBR 分割表:&lt;br /&gt;sudo sgdisk -z /dev/sdx&lt;br /&gt;相反的，若你确认只有 GPT 分区表是你要的，你可以使用这个指令将 MBR 分区表清除，而保留 GPT 分区表:&lt;br /&gt;sudo dd if=/dev/zero of=/dev/sdx bs=512 count=1&lt;br /&gt;//注意// (1) 将/dev/sdx 取代成上述的磁盘名称 (2) 磁盘上的资料有可能会全部丢失，因此请务必小心使用此指令。&lt;br /&gt;请修复此问题然后再启动再生龙。&lt;br /&gt;程序停止!!&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;所以，我的 win7 所在的盘，有三个分区，&lt;br /&gt;第一个是大概 200m 的 ntfs ，系统保留&lt;br /&gt;第二个是 c 盘，125g ，ntfs&lt;br /&gt;第三个是 d 盘，装软件，120g 左右，ntfs&lt;br /&gt;&lt;br /&gt;所以问题转化为，选择 mbr 或者 gpt ，我为此搜索了下。&lt;br /&gt;&lt;br /&gt;日志给的两个方法，会导致数据清楚。&lt;br /&gt;&lt;br /&gt;1.我用 ventoy 中的 win7 的 iso 镜像进入了安装程序，修复引导失败，说版本不匹配。搞不清楚咋回事。&lt;br /&gt;2.百度了，shift+f10 ，呼唤出命令行，用了 bootrec /fixmbr ，再克隆，还是提示失败&lt;br /&gt;3.ventoy 换微 pe ，用傲梅助手重建 mbr ，再克隆还是失败&lt;br /&gt;4.用 diskgenius 软件，重建 mbr ，再克隆还是失败&lt;br /&gt;&lt;br /&gt;当然，你们可能会说，有助手和 dg ，干嘛还用再生龙。直接备份可以吗？&lt;br /&gt;&lt;br /&gt;确实是可以的。而且不是这次报错，我都没意识到，原来硬盘同时保留了 mbr 和 gpt 信息。&lt;br /&gt;&lt;br /&gt;我推测，可能是我装双系统，中间装过了 win10 ，后来没用这个系统。可能信息残留在我的电脑里面。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;我的问题是，如何无损删除硬盘多余的 gpt 信息而保留 mbr 。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;我搜索了下，还没敢操作，正在系统备份。&lt;br /&gt;&lt;br /&gt;--------------------以下是搜索 chat-gpt 的回答-------------------&lt;br /&gt;&lt;br /&gt;对于删除硬盘上多余的 GPT 信息而无损数据的情况，您可以尝试以下方法：&lt;br /&gt;&lt;br /&gt;在 Windows 系统平台上，您可以使用&#34;diskpart&#34;命令行工具来删除硬盘上的 GPT 信息。请注意，在进行任何操作之前，请务必备份您的重要数据。&lt;br /&gt;&lt;br /&gt;以下是一般步骤：&lt;br /&gt;&lt;br /&gt;按下 Win + R 键，打开运行对话框。&lt;br /&gt;&lt;br /&gt;输入&#34;diskpart&#34;并按下 Enter 键，打开命令行界面。&lt;br /&gt;&lt;br /&gt;在 diskpart 命令行界面中，输入以下命令来列出可用的磁盘：&lt;br /&gt;&lt;br /&gt;list disk&lt;br /&gt;根据磁盘的大小和标识选择要操作的磁盘。例如，如果要操作磁盘 1 ，输入以下命令：&lt;br /&gt;&lt;br /&gt;select disk 1&lt;br /&gt;输入以下命令来查看磁盘的分区信息：&lt;br /&gt;&lt;br /&gt;list partition&lt;br /&gt;确认磁盘上的分区信息，并记下每个分区的编号。&lt;br /&gt;&lt;br /&gt;输入以下命令来选择要删除的分区。例如，如果要删除分区 1 ，输入以下命令：&lt;br /&gt;&lt;br /&gt;select partition 1&lt;br /&gt;输入以下命令来删除选定的分区：&lt;br /&gt;&lt;br /&gt;delete partition override&lt;br /&gt;请注意，&#34;override&#34;参数是必需的，它将强制删除分区而不会提示确认。&lt;br /&gt;&lt;br /&gt;重复步骤 7 和步骤 8 ，删除其他多余的分区。&lt;br /&gt;&lt;br /&gt;删除所有多余的分区后，输入以下命令来将磁盘转换为 MBR 分区表：&lt;br /&gt;&lt;br /&gt;convert mbr&lt;br /&gt;输入以下命令来退出 diskpart：&lt;br /&gt;&lt;br /&gt;exit&lt;br /&gt;请注意，虽然这些步骤通常不会导致数据丢失，但由于操作错误或其他因素，仍然存在数据丢失的风险。因此，在进行任何操作之前，请务必备份重要的数据。&lt;br /&gt;&lt;br /&gt;如果您对使用 diskpart 工具进行操作不太熟悉，或者遇到了困难，建议咨询专业技术人员以获取更详细的指导。&lt;br /&gt;&lt;br /&gt;-------------------------------------------------------&lt;br /&gt;另外，不清楚，硬盘前面那个 200m 的分区到底是什么，为什么是 ntfs 的格式？</description>
+      <author>balduncle</author>
+      <pubDate>01 Aug 2023 12:21:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>Mac + Edge 浏览器，如何做到看在线影片时自动生成字幕并翻译？ - 问与答</title>
+      <link>https://www.v2ex.com/t/961628</link>
+      <description>用 Chrome 浏览器可以自动生成字幕并翻译，但 Edge 不知道怎么做。</description>
+      <author>yanyuechuixue</author>
+      <pubDate>01 Aug 2023 12:19:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>黑苹果问题，显卡超过 80°就会黑屏 - 问与答</title>
+      <link>https://www.v2ex.com/t/961627</link>
+      <description>家里用的黑苹果，发现显卡温度到 80°之后就会黑屏，风扇狂转，只能重启电脑。&lt;br /&gt;尝试了 [黑苹果下风扇优化]( &lt;a target=&#34;_blank&#34; href=&#34;https://post.smzdm.com/p/a5drwqp7/&#34; rel=&#34;nofollow noopener&#34;&gt;https://post.smzdm.com/p/a5drwqp7/&lt;/a&gt;) 没效果，也尝试更换了电脑电源，也没有效果。&lt;br /&gt;&lt;br /&gt;求大佬给个解决思路, CPU 压测是 ok 的，在 windows 下压测 GPU 也是 ok 的，就是 mac 不行&lt;br /&gt;&lt;br /&gt;现状&lt;br /&gt;黑苹果型号，Mac (Retina 5K, 27-inch, 2019)&lt;br /&gt;显卡，AMD Radeon RX580 2304SP 8G 免驱动卡&lt;br /&gt;双系统，mac 10.14.6, windows 10&lt;br /&gt;CPU, 3.7 GHz Intel Core i7&lt;br /&gt;引导，clover&lt;br /&gt;kext&lt;br /&gt;├── AppleALC-1.4.2.kext&lt;br /&gt;├── IntelMausiEthernet.kext&lt;br /&gt;├── Lilu-1.6.6.kext&lt;br /&gt;├── RadeonSensor-1.1.0.kext&lt;br /&gt;├── SMCBatteryManager.kext&lt;br /&gt;├── SMCDellSensors.kext&lt;br /&gt;├── SMCLightSensor.kext&lt;br /&gt;├── SMCProcessor.kext&lt;br /&gt;├── SMCRadeonGPU-1.1.0.kext&lt;br /&gt;├── SMCSuperIO.kext&lt;br /&gt;├── USBInjectAll_v0.7.1.kext&lt;br /&gt;├── VirtualSMC.kext&lt;br /&gt;└── WhateverGreen-1.6.5.kext</description>
+      <author>HIPA</author>
+      <pubDate>01 Aug 2023 12:14:55 +0000</pubDate>
+    </item>
+    <item>
       <title>大伙帮忙看看我的银行卡是不是中奖了，传说中持身份证到柜台恢复也轮到我头上？ - 程序员</title>
       <link>https://www.v2ex.com/t/961626</link>
       <description>良民一个，无缘无故收到中行这样的短信（下图）&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/ibPQXX7.jpg&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/ibPQXX7.jpg&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;</description>
