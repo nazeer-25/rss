@@ -4,6 +4,26 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>AWS Linux2023 系统安装 supervisord，在“创建映像”后，/run/supervisor/目录丢失，进程退出 - Linux</title>
+      <link>https://www.v2ex.com/t/961759</link>
+      <description>&lt;p&gt;公司生产服务器使用的 aws 的 ec2 ，本来用的是 linux2 的系统，docker 部署 redis 等基础服务，上周五突然系统异常，&#xA;&lt;code&gt;grpc: addrConn.createTransport failed to unix:///run/containerd/containerd.sock &amp;lt;nil&amp;gt; 0 &amp;lt;nil&amp;gt;l, Err :connection error: desc =  &#34;transport: Error while dialing dial unix:///run/containerd/containerd,sock: timeout &#34;，Reconnecting...&lt;/code&gt;&#xA;出现后，服务器登陆不上，重启后也无法登陆。不是专业运维，无能为力，干脆用旧版镜像重新启动了服务。&#xA;异常后，痛定思痛，重新用 aws linux2023 的系统备用 supervisord 守护进程，管理原生部署的服务，结果，软件基本都安装好了，在做“创建映像”时，supervisord 进程会无故退出，用&lt;code&gt;sudo systemctl start supervisord&lt;/code&gt; 也无法启动，看了报错之后发现，因为缺失/run/supervisor/目录，创建后，就可以启动了。&#xA;以为是偶发，结果重新镜像再次退出进程，/run/supervisor/缺失。本来想定时对系统做映像的，如果创建会触发服务异常那就没有办法定时备份了……&lt;/p&gt;&#xA;&lt;h2&gt;请问下大家有没有碰到过类似问题，是如何处理的？&lt;/h2&gt;&#xA;&lt;p&gt;以下是部分相关配置，并未看到/run/supervisor/这个目录：&#xA;supervisord.service&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ExecStart=/usr/local/bin/supervisord -c /etc/supervisord.conf&#xA;ExecStop=/usr/local/bin/supervisorctl shutdown&#xA;ExecReload=/usr/local/bin/supervisorctl reload&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;/etc/supervisord.conf&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;[unix_http_server]&#xA;file=/var/run/supervisor/supervisor.sock   ; (the path to the socket file)&#xA;&#xA;[supervisord]&#xA;logfile=/var/log/supervisor/supervisord.log  ; (main log file;default $CWD/supervisord.log)&#xA;logfile_maxbytes=50MB       ; (max main logfile bytes b4 rotation;default 50MB)&#xA;logfile_backups=10          ; (num of main logfile rotation backups;default 10)&#xA;loglevel=info               ; (log level;default info; others: debug,warn,trace)&#xA;pidfile=/var/run/supervisord.pid ; (supervisord pidfile;default supervisord.pid)&#xA;&#xA;[supervisorctl]&#xA;serverurl=unix:///var/run/supervisor/supervisor.sock ; use a unix:// URL  for aunix socket&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>yingping</author>
+      <pubDate>02 Aug 2023 03:43:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>找了好久也没有找到 flask+mongodb 前后端分离的开源项目， v 友们有了解的吗 - Python</title>
+      <link>https://www.v2ex.com/t/961758</link>
+      <author>smallpython</author>
+      <pubDate>02 Aug 2023 03:43:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>在保修期内，免费给 iPhone 换新电池，是否可信？ - 问与答</title>
+      <link>https://www.v2ex.com/t/961756</link>
+      <description>今天在小红书看到一个帖子,真的可以换吗？&lt;br /&gt;&lt;br /&gt;地址： &lt;a target=&#34;_blank&#34; href=&#34;http://xhslink.com/ZpDtWs&#34; rel=&#34;nofollow noopener&#34;&gt;http://xhslink.com/ZpDtWs&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;坐标：北京朝阳&lt;br /&gt;&lt;br /&gt;电池健康度：88%&lt;br /&gt;&lt;br /&gt;手机：还有两个月保修期&lt;br /&gt;&lt;br /&gt;打电话咨询了客服，他们反馈说不低于 80%，不给换。能否按照小红书帖子方法更换？</description>
+      <author>wtj688</author>
+      <pubDate>02 Aug 2023 03:39:25 +0000</pubDate>
+    </item>
+    <item>
       <title>为什么国内开源项目普遍是先有英文文档，后才有中文文档甚至有的没有中文文档？ - 开源软件</title>
       <link>https://www.v2ex.com/t/961754</link>
       <description>这些年接触过不少国内开源的项目，例如阿里、腾讯、百度这些大公司或者一些个人的开发者。在项目开源初期甚至是中后期，有一些项目都缺乏中文文档，只提供英文文档。有的中文文档还是第三方翻译，非官方的。</description>
