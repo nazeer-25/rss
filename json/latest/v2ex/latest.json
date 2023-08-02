@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "35 岁了想低成本创业，大家有什么好的点子吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/961866",
+      "Description": "",
+      "Author": "happyTiger",
+      "PubDate": "2023-08-02T08:56:36Z"
+    },
+    {
+      "Title": "ai.com 跳转 x.ai 是什么梗？难道是我的环境出问题了吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/961865",
+      "Description": "浏览器输入 \u003ca target=\"_blank\" href=\"http://ai.com\" rel=\"nofollow noopener\"\u003eai.com\u003c/a\u003e ，回车，跳转到 \u003ca target=\"_blank\" href=\"http://x.ai\" rel=\"nofollow noopener\"\u003ex.ai\u003c/a\u003e ，8.2 16:56 复现。",
+      "Author": "szdosar",
+      "PubDate": "2023-08-02T08:56:35Z"
+    },
+    {
+      "Title": "[远程全职-行业黑马 WOO Network] Backend Java Engineer / Java 开发工程师 - 酷工作",
+      "Link": "https://www.v2ex.com/t/961864",
+      "Description": "\u003cp\u003e需要英文作为工作语言，需 3 年以上同职位工作经验、金融（交易）、区块链行业经验或同行业同岗位工作经验优先。职位远程全职办公，可缴纳社会保险。\n简历投递 Email： \u003ca href=\"mailto:amber.kuo@woo.network\"\u003eamber.kuo@woo.network\u003c/a\u003e\n薪资位于市场 70 分位，具体数值需面试后按工作经验确定。\n**----Work with the best--------- **\nWOO Network was incubated by Kronos Research, connecting traders, exchanges, institutions, and DeFi platforms with democratized access to the best-in-class liquidity and trading execution at zero or low cost.\u003c/p\u003e\n\u003cp\u003eThe opportunity to work among individuals who are both driven and talented is few and far between. At WOO Network we believe that Web3 is all about breaking down barriers and bringing people together closer than ever before. Our mission of progressing decentralization in an industry that stands at the forefront of innovation has fostered an environment of ingenuity, perseverance, and fulfillment.\u003c/p\u003e\n\u003cp\u003eCompany Mission and Vision\nTo inspire confidence, higher performance and joy in every user.\u003c/p\u003e\n\u003cp\u003eWe are building a world where we have more freedom and control over our finances. United by our innovative spirit and obsession with better design, we open access to the most compelling opportunities along with the tools to capture them.\u003c/p\u003e\n\u003ch2\u003eOur DNA\nIntegrity - We act with integrity at every turn.\nInnovation - We never give up seeking creative ways.\nTeamwork - We value each other’s efforts.\nOpenness - We are transparent with our processes.\nCourage - We are not afraid of mistakes.\nUrgency - We seize fleeting opportunities timely.\u003c/h2\u003e\n\u003cp\u003e岗位职责\n•  负责互联网金融平台的核心功能开发，实现支持交易的互联网技术架构\n• 实现基于 RestFul 和 WebSocket 的 API 接口，供客户接入订阅行情和执行交易\n• 建立稳健高效和高并发的交易系统，保证交易系统 7x24 小时不间断运作\n• 积极与产品和业务进行有效沟通，收集需求，并参与产品规划和方案制定\n• 提出可行性建设性解决方案，能够独立编写相关技术文档\n任职要求\n• 本科及以上学历，计算机相关专业，重点大学（ 985211 ）\n• 具有 3 年或以上相关工作经验, 曾经参与设计或开发大流量、高并发、高性能的分布式系统\n• 熟悉基本的数据结构、算法、设计模式，熟悉 Java 网络编程、多线程编程，对 JVM 原理有扎实的理解\n• 熟悉 Java Web 及微服务开发，熟悉 SpringBoot 、Spring Cloud ，MyBatis 等框架\n• 精通缓存、消息队列、搜索等工具，如：Redis 、Kafka 、Elasticsearch\n• 熟悉 Linux 操作系统，能够编写脚本及配置相应 Java 运营环境\n• 有金融相关产品研发经验，或大型互联网公司工作经验\n• 能够承担较强的工作压力，保证所负责相关领域工作进度及业务支持\n• 思路清晰，有良好的需求理解、系统分析、抽象能力和系统设计能力\n• 工作积极主动，有较强的团队合作精神，能自我驱动突破难关和解决问题\u003c/p\u003e\n",
+      "Author": "amberGuo",
+      "PubDate": "2023-08-02T08:55:54Z"
+    },
+    {
+      "Title": "《 Java 并发实战》中遇到的一个问题 - Java",
+      "Link": "https://www.v2ex.com/t/961862",
+      "Description": "\u003cp\u003e在《 java 并发实战》中\n3.4.2 使用 volatile 发布不可变对象 章节中有一段代码理解不了，希望大家能不能给一个更通俗的解释。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e    @Immutable\n    class OneValueCache {\n        private final BigInteger   lastNumber;\n        private final BigInteger[] lastFactors;\n\n        public OneValueCache(BigInteger i, BigInteger[] factors) {\n            lastNumber = i;\n            lastFactors = Arrays.copyOf(factors, factors.length);\n        }\n\n        public BigInteger[] getFactors(BigInteger i) {\n            if (lastNumber == null || !lastNumber.equals(i))\n                return null;\n            else\n                return Arrays.copyOf(lastFactors, lastFactors.length);\n        }\n    }\n\n    public class VolatileCachedFactorizer implements Servlet {\n        private volatile OneValueCache cache =\n            new OneValueCache(null, null);\n        public void service(ServletRequest req, ServletResponse resp) {\n            BigInteger i = extractFromRequest(req);\n            BigInteger[] factors = cache.getFactors(i);\n            if (factors == null) {\n                factors = factor(i);\n                cache = new OneValueCache(i, factors); // 这一行看起来不像是线程安全。\n            }\n            encodeIntoResponse(resp, factors);\n        }\n    }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这里原文解释说 VolatileCacheFactorizer 是线程安全的。但是我看起来 cache = new OneValueCache(i, factors)这行是线程不安全的。\u003c/p\u003e\n\u003cp\u003e虽然 OneValueCache 是不可变对象，但是 VolatileCachedFactorizer 里的 cache 是有可能被多个线程同时写入的吧？\u003c/p\u003e\n\u003cp\u003e希望大佬能帮忙解答一下，谢谢了。\u003c/p\u003e\n",
+      "Author": "labilixin",
+      "PubDate": "2023-08-02T08:52:51Z"
+    },
+    {
+      "Title": "年底就要结婚了，看了这么多婚后生活不幸的例子，有点恐惧了 - 问与答",
+      "Link": "https://www.v2ex.com/t/961861",
+      "Description": "",
+      "Author": "pipixiarwksb",
+      "PubDate": "2023-08-02T08:52:36Z"
+    },
+    {
       "Title": "有什么和 GPT 结合的 RSS 阅读器？ - 奇思妙想",
       "Link": "https://www.v2ex.com/t/961860",
       "Description": "\u003cp\u003e各位，有没有现成的和 GPT 结合的 RSS 阅读器？我知道一个开源的： \u003ca href=\"https://github.com/piqoni/matcha\" rel=\"nofollow\"\u003ehttps://github.com/piqoni/matcha\u003c/a\u003e ，但是这个总体来说还是没有商业的 RSS 阅读器好用，并且也比较丑。有没有那种全平台，内置了 GPT 总结内容的功能的 RSS 阅读器？\u003c/p\u003e\n",
