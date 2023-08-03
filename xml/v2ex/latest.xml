@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>跨域请求服务端返回的 304 状态码会被浏览器修改成 200，是浏览器的 BUG 吗 - Chrome</title>
+      <link>https://www.v2ex.com/t/962082</link>
+      <description>&lt;p&gt;这个问题仅出现在 Chrome 和 Edge ， 也给 chromium 官方提了 Bug 不知道会不会确认是个 BUG 。&lt;/p&gt;&#xA;&lt;p&gt;1.server code&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;const express = require(&#39;express&#39;);&#xA;const cors = require(&#39;cors&#39;);&#xA;&#xA;const app = express();&#xA;const port = 3000;&#xA;&#xA;app.use(cors({&#xA;  origin: &#39;*&#39;,&#xA;  allowedHeaders: [&#39;If-None-Match&#39;, &#39;If-Modified-Since&#39;],&#xA;  exposedHeaders: [&#39;ETag&#39;, &#39;Last-Modified&#39;, &#39;Cache-Control&#39;],&#xA;  maxAge: 86400,&#xA;}));&#xA;&#xA;app.get(&#39;/getcache&#39;, (req, res) =&amp;gt; {&#xA;  if (req.header(&#39;If-None-Match&#39;)) {&#xA;    return res.status(304).end();&#xA;  }&#xA;&#xA;  const time = Date.now();&#xA;  res.setHeader(&#39;Cache-Control&#39;, &#39;no-cache&#39;);&#xA;  res.setHeader(&#39;ETag&#39;, time);&#xA;  res.send(JSON.stringify({ time }));&#xA;});&#xA;&#xA;app.listen(port, () =&amp;gt; {&#xA;  console.log(`Server running at http://localhost:${port}`);&#xA;});&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;2.client code&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;fetch(&#39;http://localhost:3000/getcache&#39;);&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在其他网页（跨域）的控制台执行上面 fetch 请求即可，第二次请求后内容没变化但是状态码一直是 200 。用代理软件抓包发现服务端实际响应的是 304 ，在 Safrai 或者 Postman 中请求也是 304 。&lt;/p&gt;&#xA;&lt;p&gt;如果不是跨域请求，在同域请求 Chrome 是能正常显示 304 状态。&lt;/p&gt;&#xA;&lt;p&gt;不明白 chrome 会修改这个状态，实际不管是同域还是跨域都支持了协商缓存，状态码为啥要修改成 200 ？&lt;/p&gt;&#xA;</description>
+      <author>jiangzm</author>
+      <pubDate>03 Aug 2023 06:35:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>大家拍摄的照片用什么工具同步到电脑里？ - iPhone</title>
+      <link>https://www.v2ex.com/t/962081</link>
+      <description>我是每 2 个月手机数据线连接电脑，里面有很多文件夹，我都是全选然后复制到电脑的文件夹里，大家是怎么操作的</description>
+      <author>aquman888</author>
+      <pubDate>03 Aug 2023 06:34:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>重拾 n 年前写的一篇小作文: 说下 brz 这台车 - 汽车</title>
+      <link>https://www.v2ex.com/t/962080</link>
+      <description>以下是几年前写的, 因为看到很多的买车的评论所以往前翻了翻自己写的东西:&lt;br /&gt;&lt;br /&gt;--------------------------&lt;br /&gt;&lt;br /&gt;01.尴尬的定位. 很多不太了解或者没有 JDM 情怀的人见到 brz 这样一台车可能就会问两个问题,这车是不是跑车？在了解了多少钱和看了眼塑料感的内饰和狗都坐不下的后排以后就会问第二个问题: 那为什么不买个宝马呢？&lt;br /&gt;&lt;br /&gt;02. 看不见的配置. 这车就好比一盘好吃的盖浇饭, 但是肉埋在了饭里: 前置后驱，托森限滑差速器，原厂前后 215 的 ps4 轮胎, Alcantara 座椅，机械手利，电镀踏板和 6MT 的挡杆,双叉臂的后悬，最重要的是这一切加在一起也只有大约 1.2 吨的重量，而水平对置的 box 引擎赋予了这个小车机唇上 200 匹实际 140 匹的弱鸡马力. 我相信每一个注重驾驶感受的人都会理解这样的配置够不够格让它被称作驾驶者之车．现在市面上电车很多,直线加速很快,内饰豪华, 标配冰箱彩电大沙发, 但你如果注意一下车重，就会发现这些车没几乎有低于两吨的，然后你再蹲低看看轮胎,看看前后悬挂, 看看卡钳和刹车盘你就知道这些玩意性能会怎样了. 至于国产油车的研发,我认为在国内双积分和日渐严苛的排放政策的打压之下是没有未来的, 大约只会忽悠你:名字听起来很气势,样子看起来很运动,开起来其实呵呵呵. 我就不说发动机行不行,排放靠 GPF 这种坑人玩意，至少留给热血少年一个手动变速箱可选吧, 你只做自动挡难道你是大众能靠 GolfGTI 一样收割情怀？&lt;br /&gt;&lt;br /&gt;03.糟糕的乘坐体验. 太多男人(包括我自己)在开车这点上是悲哀的：车是工具,但作为驾驶者的我其实在车上是一个工具人. 工具人被期望能&#34;开好&#34;车. 所谓的&#34;开好&#34;：就是起步无顿挫转向无侧倾,变速无感知,安全舒适载着家人到达目的地．但偏偏这些要求这台车就是满足不了,它的座椅很硬要像你紧紧捆在上面, 悬挂很硬,地面上一点点的坑注起伏都会清晰的传达到每—位乘坐者的屁股上. 它的油门响应灵敏,就像是一个严格的老师. 你技术不行，起步这一脚踩深了,半联动没做好,换挡不对,这个车就会一窜一窜的. 你这时候最好祈祷坐您旁边那位有一个粗壮的脖子, 要不然她的感受就是被人一只手扣在脑门上用力的往座椅上面按,她只是吐槽几句已经算是很爱你了, 正常的反应应该是直接下车摔门而去宁肯自己走路也不受这洋罪．它的隔音等于没有，在高转速的时候你最好祈祷坐在副驾的那位也能跟你一样欣赏的了引擎的声浪. 因为高转速下引擎的声音你想忽视也忽视不了，说话几乎听不见就别说能听听音乐什么的了.&lt;br /&gt;&lt;br /&gt;04. 娇贵赢弱的身段. 没错,这车是吃细粮的-它要加 98 号油. 我们先不说油多贵,能加 98 号油的站就少,出个门加不到油就跟电车跑一半没电一样,尴尬了. 它散热差，这车在高转速下油温&lt;br /&gt;上升挺快的. 如果二档漂移或者下赛道跑不了几圈就经不起折腾了. 很多人入手改的第一项就是加油冷,毕竟都怕爆缸啊。&lt;br /&gt;&lt;br /&gt;记得很久之前看过丰田那个关于 86 的广告,刚买 86 的少年在阳光沙滩的海岸线公路飞驰,背景闪现的是跟女朋友,老婆和家人的吵架声: &lt;br /&gt;你花钱就是为了买这个破车？ 要它还是要我？&lt;br /&gt;摔东西….玻璃破碎一地,&lt;br /&gt;少年尴尬出门, &lt;br /&gt;最后画面只有一个人一辆车,&lt;br /&gt;傻笑着,&lt;br /&gt;行驶在狭长的海岸线上…&lt;br /&gt;&lt;br /&gt;所以,最后问问自己，是不是需要冰箱彩电大沙发？去做一个工具人?&lt;br /&gt;还是遵循自己的内心,去做—个驾驶者？&lt;br /&gt;&lt;br /&gt;坐不下的后排,放不下的情怀,这就是 BRZ.&lt;br /&gt;&lt;br /&gt;一辆驾驶者之车．&lt;br /&gt;&lt;br /&gt;--------------------------&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;现在我已经换了好几辆车了, BRZ 也出到 2 代了, 而我也正好苦等一年提到新车, 兑现自己承诺.&lt;br /&gt;&lt;br /&gt;这么长时间, 我看到太多人发表对手动挡的质疑:就是麻烦,慢,落后时代,只有烂车才出手动.&lt;br /&gt;但选择手动的理由从来只有最重要的一个, 我喜欢.&lt;br /&gt;&lt;br /&gt;我也由不懂驾驶变成对赛道驾驶越来越多了解,对汽车各个部件各种技术理解更深刻,通过模拟赛车游戏 GT,AC,ProjectCars,DirtRally,SLRE 等对世界各种知名赛道每条都跑了几十上百遍,对纽北由一圈标准圈速都跑不出来变成凡是喜欢的车型就一定刷出自己喜欢的圈速,知道了什么是 Caster,Camber,Toe InOut,Differential,Suspension 等各个参数对车辆动态的影响,现实中也去上海南京杭州刷了好多地方的卡丁车,也整备车辆跑了赛道,跑了山路,只是后来经历了疫情封城,没有办法出去了.&lt;br /&gt;&lt;br /&gt;我想,我应该感谢我老婆和女儿对我赛车情怀的支持,她们不嫌我买的车没有冰箱彩电大沙发,本来能舒服的带很多东西去 camping 结果做不到.&lt;br /&gt;她们愿意跟我挤在这样狭小车内空间里面,去支持我偶尔追求我的车手梦,&lt;br /&gt;正因为这样,我才能偶尔做一个驾驶者,开一辆玩具车吧.</description>
+      <author>iintothewind</author>
+      <pubDate>03 Aug 2023 06:34:06 +0000</pubDate>
+    </item>
+    <item>
       <title>如何固定图像大小，且每次拖入图片都自动设置成固定的长宽分辨率呢？ - Photoshop</title>
       <link>https://www.v2ex.com/t/962078</link>
       <description>&lt;p&gt;笔者要处理将近一千张的图片长宽分辨率参数，而一张一张的修改实在是过于机械且没有意义，请问如何能实现每次拖入图片都自动设置成固定的长宽分辨率呢？&lt;/p&gt;&#xA;</description>
