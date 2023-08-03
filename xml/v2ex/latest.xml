@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>中国移动地方营业厅的电话和电信诈骗有什么区别？？ - 问与答</title>
+      <link>https://www.v2ex.com/t/962124</link>
+      <description>接到一个本地座机拨进来的号码，上来就说是移动营业厅，我说我不需要变更套餐，也不需要任何附加服务。&lt;br /&gt;&lt;br /&gt;对方听完愣了一会，说 ：来电是通知您，下个月期为全面启用 5G ，回馈老客户巴拉巴拉，然后立马给我发了一条短信，我说我后续自己看短信操作。&lt;br /&gt;&lt;br /&gt;对方说，我需要短信验证码和后台确认是不是您本人。到这我就直接把电话挂了。&lt;br /&gt;&lt;br /&gt;我看了一眼短信，短信内容：&lt;br /&gt;&lt;br /&gt;尊敬的客户，您本次将办理升档 119 元套餐并承诺使用 12 个月每月获得 10GB 流量（ 1 、合约期：12 个月； 2 、优惠内容：合约生效当月起每月赠送 10GB 国内通用流量，到期自动取消； 3 、赔付规则：如客户提前结束优惠，可前往服务厅办理解约手续，需缴纳赔付金，按已履行合约月份*30 元/月进行赔付）；随机验证码为：345411 ，随机验证码 10 分钟后失效。本次为您服务的渠道网点：SZ00EC220891 。请确认您已知晓业务资费、合约期限、解约赔付等服务条款后提供随机验证码办理业务（服务条款请点击  &lt;a target=&#34;_blank&#34; href=&#34;http://dx.10086.cn/3dHGAQ&#34; rel=&#34;nofollow noopener&#34;&gt;http://dx.10086.cn/3dHGAQ&lt;/a&gt; 获取）。办理成功后请您关注办理成功提醒短信，谢谢！ [广东移动] &lt;br /&gt;&lt;br /&gt;妈的，真就移动是你爹呗，往死里忽悠用户。</description>
+      <author>Davic1</author>
+      <pubDate>03 Aug 2023 08:15:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>go_ognl - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/962123</link>
+      <description>&lt;h1&gt;go_ognl&lt;/h1&gt;&#xA;&lt;p&gt;关键字符&lt;code&gt;.&lt;/code&gt;、&lt;code&gt;#&lt;/code&gt;,遇到都会截断到下一层(&lt;code&gt;#&lt;/code&gt;和特殊,会将当前层展开,例如一个 struct,会将所有字段对应的值展开)&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;直接使用 &lt;code&gt;go_ognl.Get(obj,path)&lt;/code&gt; 获取需要的值,返回对象提供 &lt;code&gt;Effective()&lt;/code&gt; 判断是否有有效值, &lt;code&gt;Value()&lt;/code&gt;&#xA;返回解析后的对象,如果使用&lt;code&gt;#&lt;/code&gt;将会返回&lt;code&gt;[]interface{}{}&lt;/code&gt;,&lt;code&gt;Values()&lt;/code&gt;则直接回返回一个&lt;code&gt;[]interface{}{}&lt;/code&gt;&#xA;,同时也提供&lt;code&gt;.Get(path)&lt;/code&gt;链式调用;&lt;/li&gt;&#xA;&lt;li&gt;使用&lt;code&gt;go_ognl.Parse(obj)&lt;/code&gt; 保存为临时,可以在此基础上多次调用 &lt;code&gt;.Get(path)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;download&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go get github.com/golang-infrastructure/go-ognl&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;demo&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;fmt&#34;&#xA;&#x9;&#34;github.com/songzhibin97/go-ognl&#34;&#xA;)&#xA;&#xA;type Test struct {&#xA;&#x9;First  string&#xA;&#x9;Middle *Test&#xA;&#x9;last   int&#xA;}&#xA;&#xA;func main() {&#xA;&#x9;t1 := &amp;amp;Test{&#xA;&#x9;&#x9;First: &#34;first&#34;,&#xA;&#x9;&#x9;last:  7,&#xA;&#x9;}&#xA;&#x9;t1.Middle = t1&#xA;&#x9;fmt.Println(ognl.Get(t1, &#34;First&#34;).Value())                     // first&#xA;&#x9;fmt.Println(ognl.Get(t1, &#34;last&#34;).Value())                      // 7&#xA;&#x9;fmt.Println(ognl.Get(t1, &#34;Middle.Middle.Middle.last&#34;).Value()) // 7&#xA;&#x9;fmt.Println(ognl.Get(t1, &#34;#&#34;).Value())                         // []interface{}{&#34;first&#34;,t1,7}&#xA;&#x9;fmt.Println(ognl.Get(t1, &#34;##&#34;).Value())                        // []interface{}{&#34;first&#34;,&#34;first&#34;,t1,7,7}&#xA;&#x9;fmt.Println(ognl.Get(t1, &#34;##&#34;).Values())                       // []interface{}{&#34;first&#34;,&#34;first&#34;,t1,7,7}&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>CC11001100</author>
+      <pubDate>03 Aug 2023 08:14:59 +0000</pubDate>
+    </item>
+    <item>
+      <title>MacBook M1 Pro 左右风扇最大转速不一样 - MacBook Pro</title>
+      <link>https://www.v2ex.com/t/962122</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://imgur.com/5RGt1Tb&#34; rel=&#34;nofollow&#34;&gt;https://imgur.com/5RGt1Tb&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>klementina</author>
+      <pubDate>03 Aug 2023 08:14:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>博德之门 3 具体什么时间解锁？ - 游戏</title>
+      <link>https://www.v2ex.com/t/962121</link>
+      <description>&lt;p&gt;必须卸载抢先体验版，然后在解锁后重新下载 100 多 G 的正式版，班都不想上了&lt;/p&gt;&#xA;</description>
+      <author>ampedee</author>
+      <pubDate>03 Aug 2023 08:11:48 +0000</pubDate>
+    </item>
+    <item>
       <title>10W 左右的项目，如何更好的通过网络协作完成 - 程序员</title>
       <link>https://www.v2ex.com/t/962120</link>
       <description>接到 10W 左右的项目，涉及营销管理、会员管理、小商城订单管理&lt;br /&gt;功能不复杂，需求也比较明确了，但后期可能还会有变动&lt;br /&gt;这种项目说大不大，说小不小的项目，不想找熟人或同事做&lt;br /&gt;找熟人有个问题，都要价不便宜(都觉得自己牛)，后期让修改调整可能有点麻烦&lt;br /&gt;所以想通过网上找技术一起协作，现在前后端技术都比较成熟&lt;br /&gt;就想在网上找团队，现在不是很多技术失业或自由职业了&lt;br /&gt;未来网络远程协作会不会是趋势&lt;br /&gt;很想用实际项目尝试&lt;br /&gt;我本身是技术出身，开发、项目管理、团队协作、需求沟通都不成问题&lt;br /&gt;几年前在威客平台上找过，那边技术都很勤快客气，但现在好像有点变味&lt;br /&gt;分工大概涉及：UI 、前端、后端，我做文档、协调和测试&lt;br /&gt;网上找人 一起开发，大家有没有试过，有没有什么建议，钱要怎么分&lt;br /&gt;也想在网络协作上找到一种可靠模式，这样接接小单做，也挺有意思</description>
