@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>宽带下发的 IPv6 PD 前缀长度为 64，如何为多个接口分配原生的 IPv6 地址？ - OpenWrt</title>
+      <link>https://www.v2ex.com/t/962044</link>
+      <description>&lt;p&gt;OpenWRT 配置了三个接口：WAN, LAN, Guest ，然而，宽带运营商下发的 IPv6 PD 前缀长度为 64 ，只能把整个 /64 全分给 LAN ，这样 Guest 就没有 IPv6 地址了，如何实现让 Guest 接口也能分配到原生的 IPv6 地址？&lt;/p&gt;&#xA;&lt;p&gt;目前试过以下方案：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;对 Guest 接口使用 RA 中继，中继 WAN：有奇怪 bug ，邻居发现似乎有问题，客户端必须先 ping 一下网关才能连通 IPv6&lt;/li&gt;&#xA;&lt;li&gt;使用 Stateful DHCPv6 进一步细分 64 段（比如划分一个/66 ），但问题是一方面我的 v6 前缀是动态变化的，另一方面也没找到相关设置。而且这种方案不兼容 Android （ Android 只支持 SLAAC ，SLAAC 我记得必须要不小于/64 长度才能工作）&lt;/li&gt;&#xA;&lt;li&gt;NAT66 ，太垃圾了，而且无法硬件加速&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>kenvix</author>
+      <pubDate>03 Aug 2023 05:02:02 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有一站式虚拟一个网卡并模拟弱网络环境的工具 - 问与答</title>
+      <link>https://www.v2ex.com/t/962043</link>
+      <description>dummy 网卡界面然后用 tc 感觉怪怪的, 印象里上网工课的时候有思科或者什么的工具能干这事儿;&lt;br /&gt;&lt;br /&gt;搜到了诸如 WANem 这类十分古典的软件, 迫于年代久远许多新世纪协议栈不支持, OP 想要一个如此的软件:&lt;br /&gt;&lt;br /&gt;- 管理虚拟网卡, 不在乎虚拟方式, 但是要能够虚拟 ad-hoc.&lt;br /&gt;- 管理网络环境, 能够模拟的环境越复杂越好.&lt;br /&gt;- Linux 支持.&lt;br /&gt;&lt;br /&gt;如果各位有推荐或者指导, 不吝指教捏.</description>
+      <author>israinbow</author>
+      <pubDate>03 Aug 2023 05:00:37 +0000</pubDate>
+    </item>
+    <item>
+      <title>ARM64 开发板＋ Clash Premium 问题请教 - Linux</title>
+      <link>https://www.v2ex.com/t/962042</link>
+      <description>V2 大神多，特此求教。如违反版规，请直接删除。&lt;br /&gt;&lt;br /&gt;问题背景：&lt;br /&gt;（ 1 ）友善 NanoPi Neo2 开发板，使用第三方 Debian 11.7 固件(官网： &lt;a target=&#34;_blank&#34; href=&#34;https://sd-card-images.johang.se/），部署&#34; rel=&#34;nofollow noopener&#34;&gt;https://sd-card-images.johang.se/），部署&lt;/a&gt; Clash Premium 作为网关&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/hGxjC1F&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/hGxjC1F&lt;/a&gt;&lt;br /&gt;（ 2 ）终端：一台 Apple TV ＋ YouTube 客户端；二部安卓国行手机＋浏览器访问 &lt;a target=&#34;_blank&#34; href=&#34;https://m.youtube.com&#34; rel=&#34;nofollow noopener&#34;&gt;https://m.youtube.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;使用情况：&lt;br /&gt;（ 1 ） Neo2 开发板用作代理正常。安卓手机使用浏览器访问 &lt;a target=&#34;_blank&#34; href=&#34;https://m.youtube.com&#34; rel=&#34;nofollow noopener&#34;&gt;https://m.youtube.com&lt;/a&gt; 正常。&lt;br /&gt;（ 2 ）用作网关不正常。安卓手机使用 Kiwi 浏览器访问 &lt;a target=&#34;_blank&#34; href=&#34;https://m.youtube.com&#34; rel=&#34;nofollow noopener&#34;&gt;https://m.youtube.com&lt;/a&gt; 正常；使用 Edge 浏览器不正常。Apple TV 上 YouTube 客户端不能正常打开。&lt;br /&gt;&lt;br /&gt;问题描述：打开 Clash 的 UI 界面，在&#34;连接&#34;标签页中，可以发现终端直接使用 IP:Port 方式访问，且较多访问 114.114.114.114:53 这个 DNS 服务。但机场配置文件中并没有配置 114 这个 DNS 。&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/vLO4Hir&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/vLO4Hir&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/BAVHsaf&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/BAVHsaf&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;作为对比：树莓派 1B 使用 Raspberry Pi OS Lite (Legacy) 系统＋ Clash Premium(armv6)，使用相同的机场配置文件，用作代理和网关均正常工作。&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/DopO1VW&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/DopO1VW&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/NFCrr9Z&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/NFCrr9Z&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;初步排查 Neo2 开发板使用的第三方 Debian 11.7 固件，其网络设置配置文件&lt;br /&gt;nano /etc/systemd/network/&lt;a target=&#34;_blank&#34; href=&#34;http://eth.network&#34; rel=&#34;nofollow noopener&#34;&gt;eth.network&lt;/a&gt;&lt;br /&gt;配置文件中，无 114 DNS 相关信息。&lt;br /&gt;&lt;br /&gt;请教：Neo2 开发板网关不正常，该如何继续排查下去？</description>
+      <author>pcteams</author>
+      <pubDate>03 Aug 2023 04:59:10 +0000</pubDate>
+    </item>
+    <item>
       <title>[求教] 想开发一个自己用的 mac os 程序 - 程序员</title>
       <link>https://www.v2ex.com/t/962040</link>
       <description>&lt;h2&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;我是一名程序员，以后端为主，前端为辅；&lt;/p&gt;&#xA;&lt;h2&gt;原因&lt;/h2&gt;&#xA;&lt;p&gt;由于工作中各种事情比较杂乱，导致经常忘记、遗漏一些重要不紧急的事情；现在想把这些东西好好梳理一下，包括各种文档、各种配置、各种待办、各种软件、各种账号等；&lt;/p&gt;&#xA;&lt;h2&gt;想法&lt;/h2&gt;&#xA;&lt;p&gt;因此我想有一个统一的程序来收敛管理这些东西，但是从新开始开发会比较费时费力，所以想请教一下大家，有没有一些基础的 mac os 开源软件，我在开源的基础上调整&lt;/p&gt;&#xA;&lt;p&gt;我对这个软件的想法：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;一键触达指定页面、指定软件「像 alfred 这种」&lt;/li&gt;&#xA;&lt;li&gt;快速记录、分享相关内容、链接 「基于 alfred 开发一个脚本，符合规则直接写入某个文本」&lt;/li&gt;&#xA;&lt;li&gt;统一文档管理「自己写的文档、转载的文档」&lt;/li&gt;&#xA;&lt;li&gt;用 gpt 周期性的对文档进行归类总结&lt;/li&gt;&#xA;&lt;li&gt;周期性的提醒&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
