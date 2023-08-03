@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Python 读取大文件 chunk(block_size) 的疑惑 - Python",
+      "Link": "https://www.v2ex.com/t/962105",
+      "Description": "\u003cp\u003e生成一个 10 行的文本文件，每一行以 \"\\n\" 结尾，统计行数为 10 。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003edef generate_file():\n    with open(\"line.log\", \"w\") as f:\n        for i in range(1, 10+1):\n            f.write(f\"Line is: your target line{i} to print\\n\")\n\ndef chunked_file_reader(fp, block_size=4 * 1024):\n    while True:\n        chunk = fp.read(block_size)\n        if not chunk:\n            break\n        yield chunk\n\ndef get_line_count(fname):\n    count = 0\n    with open(fname) as fp:\n        for chunk in chunked_file_reader(fp):\n            count += chunk.count(\"\\n\")\n    return count\n\n\ngenerate_file()\nline_count = get_line_count(\"line.log\"）\n# \u0026gt; 10\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eblock_size 亦或者说 buffering 传入的大小是\u003cstrong\u003e每一行的长度\u003c/strong\u003e，count 结果会变成 9 ，求解\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003edef return_count(fname):\n    count = 0\n    with open(fname) as fp:\n        line = fp.readline()\n        for chunk in chunked_file_reader(fp, len(line)):\n            count += chunk.count(\"\\n\")\n    return count\n\n\ngenerate_file()\nline_count = get_line_count(\"line.log\"）\n# \u0026gt; 9\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "evemoo",
+      "PubDate": "2023-08-03T07:27:40Z"
+    },
+    {
+      "Title": "关于 Go 的 errors 库，应该用官方的 errors 还是 pkg/errors 呢 - 问与答",
+      "Link": "https://www.v2ex.com/t/962104",
+      "Description": "\u003cp\u003e想问问大家一般在项目中使用哪个 errors 库？\u003c/p\u003e\n\u003cp\u003e个人之前使用的都是 pkg/errors ，\u003ccode\u003eWrap\u003c/code\u003e 函数的使用频率较高，而且也提供了更多的函数\u003c/p\u003e\n\u003cp\u003e但是 errors 的 \u003ccode\u003eJoin\u003c/code\u003e 好像在 pkg/errors 中没有一个比较好的替代方案？而且 pkg/errors 的 GitHub 仓库在 2021 年就 archived 了（虽然这个库还是很流行，但不知道会不会有什么影响？）\u003c/p\u003e\n\u003cp\u003eerrors 、pkg/errors 都有的函数：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003eAs(err, target)\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003eIs(err, target)\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003eNew(text)\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003eUnwrap(err)\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eerrors 有、pkg/errors 没有的函数：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003eJoin(errs)\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003epkg/errors 有、没有的函数：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003eCause(err)\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003eErrorf(format, args)\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003eWithMessage(err, message)\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003eWithMessagef(err, format, args)\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003eWithStack(err)\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003eWrap(err, message)\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003eWrapf(err, format, args)\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "gitrebase",
+      "PubDate": "2023-08-03T07:23:06Z"
+    },
+    {
+      "Title": "做一个支持语音通话的家庭摄像头作品 - 问与答",
+      "Link": "https://www.v2ex.com/t/962103",
+      "Description": "\u003cp\u003e尽量小些，能用在猫眼里最好\u003cbr/\u003e\n貌似可以使用合宙的开发板？哪一款呢？我看有支持 4G 通话的，但不清楚哪款能传输视频流\u003cbr/\u003e\n从使用成本看是不是更应使用 wifi 网络，不使用 4G 进行通话？\u003c/p\u003e\n",
+      "Author": "azev",
+      "PubDate": "2023-08-03T07:23:01Z"
+    },
+    {
       "Title": "有谁考过 AWS SAA SAP 证书的，公司这边需要挂证书，有偿 可带联系方式来 - Amazon Web Services",
       "Link": "https://www.v2ex.com/t/962101",
       "Description": "\u003cp\u003e有哪位老哥考过 AWS SAA SAP 证书的，公司这边需要挂证书，有偿 可带联系方式来\u003c/p\u003e\n",

@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Python 读取大文件 chunk(block_size) 的疑惑 - Python</title>
+      <link>https://www.v2ex.com/t/962105</link>
+      <description>&lt;p&gt;生成一个 10 行的文本文件，每一行以 &#34;\n&#34; 结尾，统计行数为 10 。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def generate_file():&#xA;    with open(&#34;line.log&#34;, &#34;w&#34;) as f:&#xA;        for i in range(1, 10+1):&#xA;            f.write(f&#34;Line is: your target line{i} to print\n&#34;)&#xA;&#xA;def chunked_file_reader(fp, block_size=4 * 1024):&#xA;    while True:&#xA;        chunk = fp.read(block_size)&#xA;        if not chunk:&#xA;            break&#xA;        yield chunk&#xA;&#xA;def get_line_count(fname):&#xA;    count = 0&#xA;    with open(fname) as fp:&#xA;        for chunk in chunked_file_reader(fp):&#xA;            count += chunk.count(&#34;\n&#34;)&#xA;    return count&#xA;&#xA;&#xA;generate_file()&#xA;line_count = get_line_count(&#34;line.log&#34;）&#xA;# &amp;gt; 10&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;block_size 亦或者说 buffering 传入的大小是&lt;strong&gt;每一行的长度&lt;/strong&gt;，count 结果会变成 9 ，求解&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def return_count(fname):&#xA;    count = 0&#xA;    with open(fname) as fp:&#xA;        line = fp.readline()&#xA;        for chunk in chunked_file_reader(fp, len(line)):&#xA;            count += chunk.count(&#34;\n&#34;)&#xA;    return count&#xA;&#xA;&#xA;generate_file()&#xA;line_count = get_line_count(&#34;line.log&#34;）&#xA;# &amp;gt; 9&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>evemoo</author>
+      <pubDate>03 Aug 2023 07:27:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于 Go 的 errors 库，应该用官方的 errors 还是 pkg/errors 呢 - 问与答</title>
+      <link>https://www.v2ex.com/t/962104</link>
+      <description>&lt;p&gt;想问问大家一般在项目中使用哪个 errors 库？&lt;/p&gt;&#xA;&lt;p&gt;个人之前使用的都是 pkg/errors ，&lt;code&gt;Wrap&lt;/code&gt; 函数的使用频率较高，而且也提供了更多的函数&lt;/p&gt;&#xA;&lt;p&gt;但是 errors 的 &lt;code&gt;Join&lt;/code&gt; 好像在 pkg/errors 中没有一个比较好的替代方案？而且 pkg/errors 的 GitHub 仓库在 2021 年就 archived 了（虽然这个库还是很流行，但不知道会不会有什么影响？）&lt;/p&gt;&#xA;&lt;p&gt;errors 、pkg/errors 都有的函数：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;As(err, target)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;Is(err, target)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;New(text)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;Unwrap(err)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;errors 有、pkg/errors 没有的函数：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;Join(errs)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;pkg/errors 有、没有的函数：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;Cause(err)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;Errorf(format, args)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;WithMessage(err, message)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;WithMessagef(err, format, args)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;WithStack(err)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;Wrap(err, message)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;Wrapf(err, format, args)&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>gitrebase</author>
+      <pubDate>03 Aug 2023 07:23:06 +0000</pubDate>
+    </item>
+    <item>
+      <title>做一个支持语音通话的家庭摄像头作品 - 问与答</title>
+      <link>https://www.v2ex.com/t/962103</link>
+      <description>&lt;p&gt;尽量小些，能用在猫眼里最好&lt;br/&gt;&#xA;貌似可以使用合宙的开发板？哪一款呢？我看有支持 4G 通话的，但不清楚哪款能传输视频流&lt;br/&gt;&#xA;从使用成本看是不是更应使用 wifi 网络，不使用 4G 进行通话？&lt;/p&gt;&#xA;</description>
+      <author>azev</author>
+      <pubDate>03 Aug 2023 07:23:01 +0000</pubDate>
+    </item>
+    <item>
       <title>有谁考过 AWS SAA SAP 证书的，公司这边需要挂证书，有偿 可带联系方式来 - Amazon Web Services</title>
       <link>https://www.v2ex.com/t/962101</link>
       <description>&lt;p&gt;有哪位老哥考过 AWS SAA SAP 证书的，公司这边需要挂证书，有偿 可带联系方式来&lt;/p&gt;&#xA;</description>
