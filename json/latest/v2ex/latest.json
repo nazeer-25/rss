@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "abfastvpn 是什么东西？ - macOS",
+      "Link": "https://www.v2ex.com/t/962481",
+      "Description": "\u003cp\u003e今天在 macbook 的系统设置--网络--VPN 里，看到一个名为 ABFASTVPN 的 vpn ，但我完全想不起来这是什么东西，以及它怎么进入我的机器里的了，麻烦老哥们看看自己的机器有没有这个东西，或者知道的告诉一下我它的来源。\u003c/p\u003e\n",
+      "Author": "sinotw",
+      "PubDate": "2023-08-04T09:57:43Z"
+    },
+    {
+      "Title": "UU 加速器需要关闭 SELinux 才能正常运行 - 游戏",
+      "Link": "https://www.v2ex.com/t/962480",
+      "Description": "分享，貌似没人提过",
+      "Author": "thqw0925",
+      "PubDate": "2023-08-04T09:55:50Z"
+    },
+    {
+      "Title": "请教一下 TypeScript 装饰器的用法 - 程序员",
+      "Link": "https://www.v2ex.com/t/962479",
+      "Description": "\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e在写业务的时候经常需要订阅事件和取消订阅事件，通常是用\u003ccode\u003eemitter.on\u003c/code\u003e，\u003ccode\u003eemitter.off\u003c/code\u003e 来完成，如果要绑定 this 的话，会使用 emitter.on('key',this.xxx.bind(this)); 用于绑定 this\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e最近看到装饰器 \u003ccode\u003e@expression\u003c/code\u003e，在想是不是可以用装饰器的方式来给某个方法自动订阅事件，但遇到了 this 指向的问题，在装饰器内无法访问到 this ，所以想请教一下各位大神应该如何实现这种想法，谢谢，下面是我的一个实现（如果不需要 this 绑定的话是可以的，但怎么可能会不要 this 绑定呢）\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003e\nimport EventEmitter from 'node:events';\n\nconst emitter = new EventEmitter();\n\nconst on = (eventName: string) =\u0026gt; {\n    return (target: Object, methodName: string, descriptor: PropertyDescriptor) =\u0026gt; {\n\n        // 直接这样绑定可以运行\n        emitter.on(eventName, descriptor.value);\n\n\n        const value = descriptor.value;\n\n        // 如果是这种写法，就可以有 this ，但不会执行到 get()里面，写了也没用\n        return {\n            configurable: true,\n            enumerable: true,\n            get() {\n                // 这里的 this 就是 Logic ，但根本不会执行到这里面\n                const bound = value.bind(this);\n                emitter.on(eventName, bound);\n                return bound;\n            }\n        } as PropertyDescriptor\n    }\n}\n\n\nconst off = (eventName: string) =\u0026gt; {\n    return (target: Object, methodName: string, descriptor: PropertyDescriptor) =\u0026gt; {\n        // todo\n    }\n}\n\nclass Logic {\n    value = 1;\n\n    @on('eventKey')\n    onStart() {\n        console.log('onStart');\n\n        // this 是 undefined ，我想在把 this 绑定到当前对象上，应该如何在装饰器上处理？\n        console.log(this);  //\n    }\n\n\n    @off('start')\n    onDestroy() {\n\n    }\n}\n\nnew Logic();\n\n// 某些时刻会触发，这里是否模拟一下\nemitter.emit('eventKey');\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "sunny1688",
+      "PubDate": "2023-08-04T09:53:32Z"
+    },
+    {
       "Title": "请教华硕路由器下小米 13pro 偶尔 ipv6 获取地址后不能访问 ipv6 网络的问题 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/962478",
       "Description": "\u003cp\u003e路由器是华硕 ax3000 ，刷的梅林，光猫桥接模式，ax3000 拨号，其他手机电脑都能正常使用 ipv6 ，就这个小米 13pro 在多次重连 wifi 后可能出现获取到 ipv6 地址，但是打不开任何 ipv6 网站的问题，前几天天翻了一些案例，发现 ping 一下 ipv6 前缀就能连上了！\u003c/p\u003e\n\u003cp\u003e看其他人的一些案例 op 貌似和 ula 前缀有关，但是华硕好像没有使用 ula ！\u003c/p\u003e\n\u003cp\u003e求大家指教！\u003c/p\u003e\n\u003cp\u003et/875981\n这位朋友好像和我的很像，不过我这不是每次都需要 ping……\u003c/p\u003e\n",
