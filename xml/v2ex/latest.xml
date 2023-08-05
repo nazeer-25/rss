@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求蒲公英 X4C 的替代品 求推荐 - 问与答</title>
+      <link>https://www.v2ex.com/t/962607</link>
+      <description>&lt;p&gt;以前是这样用的：蒲公英 X4C 做主路由，R2S 做旁路由。R2S 里装各种插件，蒲公英 X4C 支持 SIM 卡的 4G 供网(网线和 4G 同时存在时，用前者上网，用后者做备胎)；由于蒲公英附带了组网功能，所以不必要在 R2S 上安装 zerotier 了。但缺点是：①只支持百兆，不支持千兆；②只支持 2.4G ，不支持 5G wifi ；③不支持 ipv6 。&#xA;打算把蒲公英 X4C 换掉，新的硬路由要支持 4G 的、千兆的(组网功能不一定必要，我可以在旁路由安装 zerotier)、支持 ipv6 、支持 5Ghz(有 wifi6 更好)。&lt;/p&gt;&#xA;</description>
+      <author>abc8678</author>
+      <pubDate>05 Aug 2023 05:05:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>全栈工程师，求推荐优秀的开源项目学习 - 程序员</title>
+      <link>https://www.v2ex.com/t/962606</link>
+      <description>&lt;p&gt;如题，全站工程师，五年经验，外企大厂呆久了，杂七杂八的都做了一些但都不够深入，技术有点废。&lt;/p&gt;&#xA;&lt;p&gt;上学的时候有仔细研究过 &lt;a href=&#34;https://github.com/nltk/nltk&#34; rel=&#34;nofollow&#34;&gt;nltk&lt;/a&gt; 这个包，对 Python 的理解深入了很多。后来学习 rust 的时候，参考 &lt;a href=&#34;https://github.com/rust-unofficial/awesome-rust&#34; rel=&#34;nofollow&#34;&gt;awesome-rust&lt;/a&gt; ，也学习到了很多宝贵的经验。&lt;/p&gt;&#xA;&lt;p&gt;现在想求大家推荐一些比较优秀的开源项目，领域业务不限，常规 CRUD 的 web app 就好，电商，社交，SaaS ，都可以。语言、框架也无所谓，希望能通过琢磨这些项目，学习一些优秀的设计。&lt;/p&gt;&#xA;&lt;p&gt;求工友推荐。&lt;/p&gt;&#xA;</description>
+      <author>guoshim</author>
+      <pubDate>05 Aug 2023 05:04:52 +0000</pubDate>
+    </item>
+    <item>
       <title>广东移动流量卡，默认的 DNS 似乎不能解析 AAAA 结果 - 宽带症候群</title>
       <link>https://www.v2ex.com/t/962605</link>
       <description>&lt;h2&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;高考结束后，日常骑车出游，正好看到本地高中门口有移动在搞活动，说是二三十块钱可以有定向流量和大量通用流量什么的，感觉不错，就办了一张卡（归属地是在本地的）作为手机副卡，专门上网用。在不考虑 DNS 的情况下，v4 和 v6 都是正常的。我的魔法软件之前是直接写了服务器的 v6 地址，使用起来什么毛病也没有，甚至比 v4 还稳定些&lt;/p&gt;&#xA;&lt;p&gt;家里宽带也是移动，两条线都能拿到/60 前缀，本着不用白不用的精神，把自己一个吃灰的域名拿出来做了 DDNS ，&lt;strong&gt;有且仅有 AAAA 记录，解析到软路由的 v6 地址上&lt;/strong&gt;。两条宽带具体解析到哪里不确定，看哪条先拨上号就解析到哪个，反正都能连上。&lt;/p&gt;&#xA;&lt;h2&gt;问题&lt;/h2&gt;&#xA;&lt;p&gt;因为买的魔法节点是 v4 单栈的，同时也担心隐私问题，所以实际上我在魔法的时候，还加了一台落地鸡，鸡场节点出来就进这台机器，再 v4v6 双栈出去。这样一来，普通的魔法软件设置上多多少少有点不便。我的解决方法是，在软路由上做端口转发，相当于把客户端一分为二。其他客户端就写，比如，192.168.0.233:6200 ，就连上了&lt;/p&gt;&#xA;&lt;p&gt;出门在外，懒得另外租中转服务器（以及移动流量卡似乎还会半屏蔽海外 IP 的非标端口），就尝试用这台软路由配合公网 v6 来中转连接。一开始怎么折腾也不行，日志显示无法找到目标。&lt;strong&gt;后来尝试不写 DDNS 域名，直接填地址，什么问题都没有&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;同时，又做了另一个测试：WiFi 下 ping 该域名，可以正常解析。切换到流量，就无法解析，报错 Host not found 。又找了一些 v4v6 双栈的域名来测试，使用流量卡的时候 v6 依然无法解析，v4 正常。这样就可以确定是移动的 DNS 服务器的锅了&lt;/p&gt;&#xA;&lt;h2&gt;不完美的解决方案&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;在 SagerNet 里手动设置直连 DNS 为 223.5.5.5 后问题解决。&lt;/strong&gt;但显然，这个方案仅对这个软件生效。如果我用其它软件，比如 WireGuard 什么的，依然无法解析 AAAA 结果，只能解析 A 。同时，在系统设置里设置 DNS （只能设置加密 DNS 了）为 &lt;a href=&#34;http://dns.alidns.com&#34; rel=&#34;nofollow&#34;&gt;dns.alidns.com&lt;/a&gt; ，问题也没有解决&lt;/p&gt;&#xA;&lt;p&gt;不知道各位 V 友们有什么好的解决方案？&lt;/p&gt;&#xA;</description>
