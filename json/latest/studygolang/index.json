@@ -12,14 +12,14 @@
     },
     {
       "Title": "reflect.StructOf()动态反射struct类型，创建的类型的Name()为空",
-      "Link": "https://studygolang.com/topics/16579#reply1",
+      "Link": "https://studygolang.com/topics/16579#reply2",
       "Description": "\u003cp\u003e在用reflect.StructOf()动态反射struct类型时，创建的类型的Name()为空，但正常静态创建的struct类型，Name()是有值的。\n比如：\ntype User struct {}\ntye:= reflect.TypeOf(new(User))\n此时，tye.Name()的值是：User\u003c/p\u003e\n\n\u003cp\u003e但通过reflect.StructOf()创建的结构体类型，这个方法返回值是空\u003c/p\u003e\n\n\u003cp\u003e请教各位大神，这个怎么能进行赋值，万分感谢！\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
       "Title": "有关map[string]interface{}用法求教",
-      "Link": "https://studygolang.com/topics/16580#reply1",
+      "Link": "https://studygolang.com/topics/16580#reply2",
       "Description": "\u003cp\u003e代码如下，想问下最后一个语句怎么理解？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003etype Domain_list_t map[string]interface{}\n\nvar DomainList Domain_list_t\n\n//DomainList.txt 文件存放域名列表，一行一个\nfunc LoadOrCreateDomainList() bool {\n\tbuf, err := ioutil.ReadFile(\u0026quot;./Domainlist.txt\u0026quot;)\n\tif err != nil {\n\t\treturn false\n\t}\n\n\tDomainList = make(Domain_list_t)\n\n\t//domain为Domainlist.txt里的一行，假设是第一行是 www.baidu.com\n\tfor _, domain := range strings.Split(string(buf), \u0026quot;\\n\u0026quot;) {\n\t\t//subs为domain的各级域名组成的切片 {www,baidu,com}\n\t\tsubs := strings.Split(strings.Trim(domain, \u0026quot;\\r \u0026quot;), \u0026quot;.\u0026quot;)\n\t\tif len(subs) == 0 || len(domain) == 0 || domain[0] == '#' {\n\t\t\tcontinue\n\t\t}\n\n\t\ttop := DomainList\n\t\t\n\t\t//i=2时\n\t\tfor i := len(subs) - 1; i \u0026gt;= 0; i-- {\n\t\t\t//sub[2]=\u0026quot;com\u0026quot;，top[\u0026quot;com\u0026quot;]==nil\n\t\t\tif top[subs[i]] == nil {\n\t\t\t\t//初始化top[\u0026quot;com\u0026quot;]\n\t\t\t\ttop[subs[i]] = make(Domain_list_t)\n\t\t\t}\n\t\t\t\t\n\t\t\tif i == 0 {\n\t\t\t\ttop[subs[0]].(Domain_list_t)[\u0026quot;_\u0026quot;] = true\n\t\t\t}\n\n\t\t\t//这里不明白，为啥 top[\u0026quot;com\u0026quot;] 后面还能加点号，为啥 Domain_list_t 要加括号\n\t\t\ttop = top[subs[i]].(Domain_list_t)\n\t\t}\n\t}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -140,6 +140,20 @@
       "Title": "程序员的 AI 启蒙课: ChatGPT 让你 1 人顶 3 人",
       "Link": "https://studygolang.com/articles/36216#reply2",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "reflect.StructOf()动态反射struct类型，创建的类型的Name()为空",
+      "Link": "https://studygolang.com/topics/16579#reply1",
+      "Description": "\u003cp\u003e在用reflect.StructOf()动态反射struct类型时，创建的类型的Name()为空，但正常静态创建的struct类型，Name()是有值的。\n比如：\ntype User struct {}\ntye:= reflect.TypeOf(new(User))\n此时，tye.Name()的值是：User\u003c/p\u003e\n\n\u003cp\u003e但通过reflect.StructOf()创建的结构体类型，这个方法返回值是空\u003c/p\u003e\n\n\u003cp\u003e请教各位大神，这个怎么能进行赋值，万分感谢！\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "有关map[string]interface{}用法求教",
+      "Link": "https://studygolang.com/topics/16580#reply1",
+      "Description": "\u003cp\u003e代码如下，想问下最后一个语句怎么理解？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003etype Domain_list_t map[string]interface{}\n\nvar DomainList Domain_list_t\n\n//DomainList.txt 文件存放域名列表，一行一个\nfunc LoadOrCreateDomainList() bool {\n\tbuf, err := ioutil.ReadFile(\u0026quot;./Domainlist.txt\u0026quot;)\n\tif err != nil {\n\t\treturn false\n\t}\n\n\tDomainList = make(Domain_list_t)\n\n\t//domain为Domainlist.txt里的一行，假设是第一行是 www.baidu.com\n\tfor _, domain := range strings.Split(string(buf), \u0026quot;\\n\u0026quot;) {\n\t\t//subs为domain的各级域名组成的切片 {www,baidu,com}\n\t\tsubs := strings.Split(strings.Trim(domain, \u0026quot;\\r \u0026quot;), \u0026quot;.\u0026quot;)\n\t\tif len(subs) == 0 || len(domain) == 0 || domain[0] == '#' {\n\t\t\tcontinue\n\t\t}\n\n\t\ttop := DomainList\n\t\t\n\t\t//i=2时\n\t\tfor i := len(subs) - 1; i \u0026gt;= 0; i-- {\n\t\t\t//sub[2]=\u0026quot;com\u0026quot;，top[\u0026quot;com\u0026quot;]==nil\n\t\t\tif top[subs[i]] == nil {\n\t\t\t\t//初始化top[\u0026quot;com\u0026quot;]\n\t\t\t\ttop[subs[i]] = make(Domain_list_t)\n\t\t\t}\n\t\t\t\t\n\t\t\tif i == 0 {\n\t\t\t\ttop[subs[0]].(Domain_list_t)[\u0026quot;_\u0026quot;] = true\n\t\t\t}\n\n\t\t\t//这里不明白，为啥 top[\u0026quot;com\u0026quot;] 后面还能加点号，为啥 Domain_list_t 要加括号\n\t\t\ttop = top[subs[i]].(Domain_list_t)\n\t\t}\n\t}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
