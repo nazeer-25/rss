@@ -34,10 +34,6 @@
       <link>https://studygolang.com/articles/36241#reply0</link>
     </item>
     <item>
-      <title>永续合约交易所(跟单、加杠杆、交割)功能系统开发源码部署</title>
-      <link>https://studygolang.com/articles/36234#reply0</link>
-    </item>
-    <item>
       <title>有关map[string]interface{}用法求教</title>
       <link>https://studygolang.com/topics/16580#reply2</link>
       <description>&lt;p&gt;代码如下，想问下最后一个语句怎么理解？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;type Domain_list_t map[string]interface{}&#xA;&#xA;var DomainList Domain_list_t&#xA;&#xA;//DomainList.txt 文件存放域名列表，一行一个&#xA;func LoadOrCreateDomainList() bool {&#xA;&#x9;buf, err := ioutil.ReadFile(&amp;quot;./Domainlist.txt&amp;quot;)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return false&#xA;&#x9;}&#xA;&#xA;&#x9;DomainList = make(Domain_list_t)&#xA;&#xA;&#x9;//domain为Domainlist.txt里的一行，假设是第一行是 www.baidu.com&#xA;&#x9;for _, domain := range strings.Split(string(buf), &amp;quot;\n&amp;quot;) {&#xA;&#x9;&#x9;//subs为domain的各级域名组成的切片 {www,baidu,com}&#xA;&#x9;&#x9;subs := strings.Split(strings.Trim(domain, &amp;quot;\r &amp;quot;), &amp;quot;.&amp;quot;)&#xA;&#x9;&#x9;if len(subs) == 0 || len(domain) == 0 || domain[0] == &#39;#&#39; {&#xA;&#x9;&#x9;&#x9;continue&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;top := DomainList&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;//i=2时&#xA;&#x9;&#x9;for i := len(subs) - 1; i &amp;gt;= 0; i-- {&#xA;&#x9;&#x9;&#x9;//sub[2]=&amp;quot;com&amp;quot;，top[&amp;quot;com&amp;quot;]==nil&#xA;&#x9;&#x9;&#x9;if top[subs[i]] == nil {&#xA;&#x9;&#x9;&#x9;&#x9;//初始化top[&amp;quot;com&amp;quot;]&#xA;&#x9;&#x9;&#x9;&#x9;top[subs[i]] = make(Domain_list_t)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if i == 0 {&#xA;&#x9;&#x9;&#x9;&#x9;top[subs[0]].(Domain_list_t)[&amp;quot;_&amp;quot;] = true&#xA;&#x9;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;&#x9;//这里不明白，为啥 top[&amp;quot;com&amp;quot;] 后面还能加点号，为啥 Domain_list_t 要加括号&#xA;&#x9;&#x9;&#x9;top = top[subs[i]].(Domain_list_t)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -59,6 +55,10 @@
     <item>
       <title>海外上线虚拟货币交易所平台(币安、Bitfinex、Coinbase)多语言版本搭建开发</title>
       <link>https://studygolang.com/articles/36235#reply0</link>
+    </item>
+    <item>
+      <title>永续合约交易所(跟单、加杠杆、交割)功能系统开发源码部署</title>
+      <link>https://studygolang.com/articles/36234#reply0</link>
     </item>
     <item>
       <title>推荐一个基于gin+vue3搭建的后台管理系统开源的社区全</title>
