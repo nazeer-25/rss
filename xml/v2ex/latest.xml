@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>收个 2500 美金免费额度的 OpenAI 账号 - OpenAI</title>
+      <link>https://www.v2ex.com/t/962832</link>
+      <description>&lt;p&gt;1k 吧，可以留联系方式&#xA;&lt;a href=&#34;https://t.me/lzsfh&#34; rel=&#34;nofollow&#34;&gt;https://t.me/lzsfh&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>yitdlxl</author>
+      <pubDate>06 Aug 2023 10:10:32 +0000</pubDate>
+    </item>
+    <item>
+      <title>为什么 go fiber 无法解析 alipay 的 notify 回调的参数？ - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/962831</link>
+      <description>&lt;p&gt;我现在使用的是 go fiber ，我知道的是这家伙用的是 fasthttp 。&lt;/p&gt;&#xA;&lt;p&gt;是这样的，我现在要解析支付宝返回来的回调。我发现 fiber 解析出来都是空的，但其它有两三个字段是有的：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&#xA;{&#xA;        &#34;notify_time&#34;: null,&#xA;        &#34;notify_type&#34;: null,&#xA;        &#34;notify_id&#34;: null,&#xA;        &#34;app_id&#34;: null,&#xA;        &#34;charset&#34;: [&#xA;                &#34;utf-8&#34;&#xA;        ],&#xA;        &#34;version&#34;: [&#xA;                &#34;1.0&#34;&#xA;        ],&#xA;        &#34;sign_type&#34;: null,&#xA;        &#34;sign&#34;: [&#xA;                &#34;CPwn0wkSwa7qjV+k8/RHywHyPpL7kdmadp6QSZuw+NJe5vQ8vgKJHtLKMOA8RxPTY+BWhwEqN86F3RrDU0x6gj2UttN6qOauL4ZOer7KanWmmDEjnIR5YLqPibAbo8FyuCwtNQsUXsC8A8DxjfmJg5bTyEXxcF4UMFCvDfcC55eY+UVkcu0dt6KjLag+mUOMj/+PA5KBARkegfDi0yW4J78pv5Fgb9lD1u5bM9xEHDxOt1Xo6Jf63cnsWm5ccZ+cBQFQFKr4mSUAp0gIP1o1kzvUVJqr9ISK2HFGK8ED26OjuH8bWrtcepd08I8MxvZ170oRP1in9Hpk8wEwDZjyqw==&#34;&#xA;        ],&#xA;        &#34;trade_no&#34;: null,&#xA;        &#34;out_trade_no&#34;: null,&#xA;        &#34;out_biz_no&#34;: null,&#xA;        &#34;buyer_id&#34;: null,&#xA;        &#34;buyer_logon_id&#34;: null,&#xA;        &#34;trade_status&#34;: null&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;fiber 的代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;var input common.AlipayNotifyResponse&#xA;&#xA;&#x9;if err := c.BodyParser(&amp;amp;input); err != nil {&#xA;&#x9;&#x9;fmt.Println(&#34;failed to parse JSON input&#34;)&#xA;&#x9;&#x9;return errors.New(&#34;failed to parse JSON input&#34;)&#xA;&#x9;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后我就怀疑是 fiber 的问题，试了一下用原生的 net/http 写：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;func handlePost(w http.ResponseWriter, r *http.Request) {&#xA;&#x9;w.Header().Set(&#34;Access-Control-Allow-Origin&#34;, &#34;*&#34;)&#xA;&#x9;w.Header().Set(&#34;Access-Control-Allow-Headers&#34;, &#34;*&#34;)&#xA;&#x9;r.ParseForm()&#xA;&#xA;&#x9;fmt.Println(utils.PrettyJson(r.Form))&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;发现是可以解析的：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;{&#xA;        &#34;app_id&#34;: [&#xA;                &#34;902100sdff&#34;&#xA;        ],&#xA;        &#34;auth_app_id&#34;: [&#xA;                &#34;902100sdff&#34;&#xA;        ],&#xA;        &#34;buyer_id&#34;: [&#xA;                &#34;902100sdff&#34;&#xA;        ],&#xA;        &#34;buyer_pay_amount&#34;: [&#xA;                &#34;8.00&#34;&#xA;        ],&#xA;        &#34;charset&#34;: [&#xA;                &#34;utf-8&#34;&#xA;        ],&#xA;        &#34;fund_bill_list&#34;: [&#xA;                &#34;[{\&#34;amount\&#34;:\&#34;8.00\&#34;,\&#34;fundChannel\&#34;:\&#34;ALIPAYACCOUNT\&#34;}]&#34;&#xA;        ],&#xA;        &#34;gmt_create&#34;: [&#xA;                &#34;2023-08-06 17:48:28&#34;&#xA;        ],&#xA;        &#34;gmt_payment&#34;: [&#xA;                &#34;2023-08-06 17:48:33&#34;&#xA;        ],&#xA;        &#34;invoice_amount&#34;: [&#xA;                &#34;8.00&#34;&#xA;        ],&#xA;        &#34;notify_id&#34;: [&#xA;                &#34;202308060122217483409dd7380500601571&#34;&#xA;        ],&#xA;        &#34;notify_time&#34;: [&#xA;                &#34;2023-08-06 17:48:34&#34;&#xA;        ],&#xA;       }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;现在已经有好几个接口用 fiber 写好了，不太想大改。就想问问为什么 fiber 会解析不了？有没有哪里是我要注意的&lt;/p&gt;&#xA;</description>
+      <author>elone</author>
+      <pubDate>06 Aug 2023 10:10:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有 V 友在高中是学神的？想请教下你们到底咋学习的？ - 问与答</title>
+      <link>https://www.v2ex.com/t/962830</link>
+      <description>&lt;p&gt;高中算是我拔了层皮的 3 年，每天基本只睡 5 小时，累得要死，最后还是只考上了一个普通的 985 。&lt;/p&gt;&#xA;&lt;p&gt;现在工作 6 年多了，经常会想起高中被学神碾压的日子，甚至到现在都搞不懂为什么学神那么强。&lt;/p&gt;&#xA;&lt;p&gt;经常能看到一些考清北复交的学神，倒没有我那么努力的去学习（指的是花在学习上的时间），&#xA;成绩最后逆天的好，我承认可能人之间是有 IQ 的区别，&lt;/p&gt;&#xA;&lt;p&gt;但这里我想讨论的是：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;学神们你们有没有什么觉得非常好的学习方法？或者啥开挂方法的（有收益立马奉上红包！）&lt;/li&gt;&#xA;&lt;li&gt;或者你们看到普通学生哪些学习的陋习的？&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;我先说一下我的学习方法：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;先把基本知识看一遍，想巩固的话再看一些视频教程&lt;/li&gt;&#xA;&lt;li&gt;然后去刷题，大量刷题，做总结&lt;/li&gt;&#xA;&lt;li&gt;经常复习&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>WhoCanBeRich</author>
+      <pubDate>06 Aug 2023 10:09:33 +0000</pubDate>
+    </item>
+    <item>
       <title>各位 13 系的机主，请报数你们的电池指数.... - Apple</title>
       <link>https://www.v2ex.com/t/962829</link>
       <description>13 首发 90 ，不知道这健康不？</description>
