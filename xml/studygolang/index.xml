@@ -27,6 +27,10 @@
       <description>&lt;p&gt;代码如下，想问下最后一个语句怎么理解？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;type Domain_list_t map[string]interface{}&#xA;&#xA;var DomainList Domain_list_t&#xA;&#xA;//DomainList.txt 文件存放域名列表，一行一个&#xA;func LoadOrCreateDomainList() bool {&#xA;&#x9;buf, err := ioutil.ReadFile(&amp;quot;./Domainlist.txt&amp;quot;)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return false&#xA;&#x9;}&#xA;&#xA;&#x9;DomainList = make(Domain_list_t)&#xA;&#xA;&#x9;//domain为Domainlist.txt里的一行，假设是第一行是 www.baidu.com&#xA;&#x9;for _, domain := range strings.Split(string(buf), &amp;quot;\n&amp;quot;) {&#xA;&#x9;&#x9;//subs为domain的各级域名组成的切片 {www,baidu,com}&#xA;&#x9;&#x9;subs := strings.Split(strings.Trim(domain, &amp;quot;\r &amp;quot;), &amp;quot;.&amp;quot;)&#xA;&#x9;&#x9;if len(subs) == 0 || len(domain) == 0 || domain[0] == &#39;#&#39; {&#xA;&#x9;&#x9;&#x9;continue&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;top := DomainList&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;//i=2时&#xA;&#x9;&#x9;for i := len(subs) - 1; i &amp;gt;= 0; i-- {&#xA;&#x9;&#x9;&#x9;//sub[2]=&amp;quot;com&amp;quot;，top[&amp;quot;com&amp;quot;]==nil&#xA;&#x9;&#x9;&#x9;if top[subs[i]] == nil {&#xA;&#x9;&#x9;&#x9;&#x9;//初始化top[&amp;quot;com&amp;quot;]&#xA;&#x9;&#x9;&#x9;&#x9;top[subs[i]] = make(Domain_list_t)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if i == 0 {&#xA;&#x9;&#x9;&#x9;&#x9;top[subs[0]].(Domain_list_t)[&amp;quot;_&amp;quot;] = true&#xA;&#x9;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;&#x9;//这里不明白，为啥 top[&amp;quot;com&amp;quot;] 后面还能加点号，为啥 Domain_list_t 要加括号&#xA;&#x9;&#x9;&#x9;top = top[subs[i]].(Domain_list_t)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
+      <title>程序员的 AI 启蒙课: ChatGPT 让你 1 人顶 3</title>
+      <link>https://studygolang.com/resources/15580#reply1</link>
+    </item>
+    <item>
       <title>在windows下有什么方案可以实现主程序自更新并重新启动么？</title>
       <link>https://studygolang.com/topics/16577#reply4</link>
       <description>&lt;p&gt;一直没什么头绪在windows系统下怎么实现自更新并重启启动程序，希望大佬们给点思路呢。谢谢&lt;/p&gt;&#xA;</description>
@@ -52,10 +56,6 @@
       <title>GoFly极速中后台管理系统开发框架开源可商用基于gin和vue3简洁大气后台UI实用于各种应用项目</title>
       <link>https://studygolang.com/topics/16575#reply2</link>
       <description>&lt;p&gt;一、框架介绍&#xA;我们采用前后端分离，go开发业务接口，vue开发前端界面。后台管理系统从业务上分为：总管理系统（admin端简称A端）和业务端管理系统（专门编写业务的，方便系统做出saas形系统，遇到买系统时不要单独重新部署直接再A端开一个账号就可以，业务端business简称B端）。了解更多可以去：GoFly全栈开发社区，传送地址&lt;a href=&#34;https://goflys.cn/prdetail?id=6&#34;&gt;跳转Go快速框架&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;二、优势简介&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1.基于优秀成熟框架集成，保证系统文档可靠。集成的主要有Gin、Arco Design 、Mysql等主流框架技术。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2.系统已集成开发常用基础功能，开箱即用，快速开始您业务开发，快人一步，比同行节省成本，&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3.框架提供其他开发者开发的插件，可快速安装或卸载，让开个资源共享，同意功能无需重复造车，一键安装即可使用。&#xA;框架搭建了一键CRUD生成前后端代码，建数据库一键生成，节省您的复制粘贴时间，进一步为您节省时间。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4.框架自带API接口文档管理，接口带有请求token等配置，添加接口只需配置路径和数据库或者备注，其部分信息如数据字段，系统自动根据数据库字段补齐，开发配套接口文档尽可能的为您节省一点时间。不需要其他接口文档工具复制粘贴，登录注册等时间。还有一个重点！接口文档可以一键生成接口CRUD的代码和通用的操作数据的CRUD接口，根据您的业务选择自己写接口代码、一键生成接口代码、不用写和生成代码调用通用接口。让写接口工作节省更多时间。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;5.前后端分离解耦业务，让前段人员与后端人协调开发，提高项目交付，并且可以开发出功能复杂度高的项目。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;6.前端用Vue3+TypeScript 的UI框架Arco Design，好用的UI框架前端可以设计出优秀且交互不错的界面，完善的大厂UI支持，前端开发效率也很高！&#xA;以上只是框架比较明显优势点，还有很多优势等你自己体验，我们从各个开发环节，努力为您节省每一分时间。&#xA;&lt;img src=&#34;https://static.golangjob.cn/230804/25c551bd5ba3bb5a4ce1598624c3f492.jpg&#34; alt=&#34;web_1690946576937.jpg&#34; /&gt;&lt;img src=&#34;https://static.golangjob.cn/230804/0b2f7ba892cab8b541226383343de22b.jpg&#34; alt=&#34;web_1690946614502.jpg&#34; /&gt;&#xA;&lt;img src=&#34;https://static.golangjob.cn/230804/64c56785b00f9ef8519fe8a06fa6467e.jpg&#34; alt=&#34;web_1690945511909.jpg&#34; /&gt;&lt;img src=&#34;https://static.golangjob.cn/230804/5b14c1dbf208fde93699d5767a7c127d.jpg&#34; alt=&#34;f7c95d545b8c6b2efcdc67411717dff9.jpg&#34; /&gt;&lt;img src=&#34;https://static.golangjob.cn/230804/d56158b3246333aadfd1f0ca805e7a01.jpg&#34; alt=&#34;1f3bd49b6c657eeb0c66dc9a9f71f056.jpg&#34; /&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>程序员的 AI 启蒙课: ChatGPT 让你 1 人顶 3</title>
-      <link>https://studygolang.com/resources/15580#reply1</link>
     </item>
     <item>
       <title>跨境盒子：跨境出海如何正确设置新品广告竞价？</title>
