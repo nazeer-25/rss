@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有些网页一打开 F12，就会进入 debugger 状态 - 问与答</title>
+      <link>https://www.v2ex.com/t/962757</link>
+      <description>&lt;h1&gt;这是不是网站的一种防御机制？🥲有点难受...&lt;/h1&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/45j73PpY.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;完整代码如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;((function() {&#xA;    var callbacks = [],&#xA;        timeLimit = 50,&#xA;        open = false;&#xA;    setInterval(loop, 1);&#xA;    return {&#xA;        addListener: function(fn) {&#xA;            callbacks.push(fn);&#xA;        },&#xA;        cancleListenr: function(fn) {&#xA;            callbacks = callbacks.filter(function(v) {&#xA;                return v !== fn;&#xA;            });&#xA;        }&#xA;    }&#xA;&#xA;    function loop() {&#xA;        var startTime = new Date();&#xA;        debugger;&#xA;        if (new Date() - startTime &amp;gt; timeLimit) {&#xA;            if (!open) {&#xA;                callbacks.forEach(function(fn) {&#xA;                    fn.call(null);&#xA;                });&#xA;            }&#xA;            open = true;&#xA;            window.stop();&#xA;            document.body.innerHTML = &#34;&#34;;&#xA;        } else {&#xA;            open = false;&#xA;        }&#xA;    }&#xA;})()).addListener(function() {&#xA;    window.location.reload();&#xA;});&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>ThinkStu</author>
+      <pubDate>06 Aug 2023 02:57:02 +0000</pubDate>
+    </item>
+    <item>
       <title>除了时序数据库, 还哪些服务适合对某个时间维度做 sum group by 操作 - 问与答</title>
       <link>https://www.v2ex.com/t/962756</link>
       <description>最近用 aws 的 timestream, 遇到 4 个小时服务故障.  &lt;br /&gt;官方只是简单的回复 &lt;br /&gt;&lt;br /&gt;====&lt;br /&gt;尊敬的客户您好：&lt;br /&gt;&lt;br /&gt;不好意思让您久等了，根据内部团队的讯息表示，在当时该服务出现了一些问题导致您的应用出现错误，目前该问题已被修复。&lt;br /&gt;&lt;br /&gt;造成您的不变我们深感抱歉，希望以上讯息对您有帮助，若您有其他问题请不吝在与我们联系。&lt;br /&gt;&lt;br /&gt;===&lt;br /&gt;&lt;br /&gt;有点气, 打算换其他产品, 挑了半天, 也没觉得哪个时序数据库满意.  &lt;br /&gt;最新版的 influxdb, 好像已经不支持 sql 查询了.  &lt;br /&gt;我这边业务比较简单, 就是单表的 sum group by 操作.  &lt;br /&gt;一小时几千万条数据.  &lt;br /&gt;但只保留最近 3 天数据就行.  &lt;br /&gt;最好能支持 sql 语句.&lt;br /&gt;MongoDB 适合这个场景么? 我没用过 MongoDB.</description>
@@ -44,13 +51,6 @@
       <description>不登录不让用，登陆报错：挂梯子也没用&lt;br /&gt;无法解析某些 Microsoft 云服务。请运行 Windows Internet 连接疑难解答，如果问题仍然存在，请与网络管理员联系。相关 ID: 6b948eea-3855-4947-95f7-a21e10891245&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;求教各位老哥</description>
       <author>wty95</author>
       <pubDate>06 Aug 2023 02:31:02 +0000</pubDate>
-    </item>
-    <item>
-      <title>Surge Mac 开车有人上车嘛 - Surge</title>
-      <link>https://www.v2ex.com/t/962749</link>
-      <description>&lt;p&gt;刚买一天，125/位，拉进微信群，需要的联系 TG &lt;a href=&#34;https://t.me/wars01&#34; rel=&#34;nofollow&#34;&gt;https://t.me/wars01&lt;/a&gt;&#xA;如要换设备可自行反激活，5.0 大版本内永久使用，暂定大版本更新必跟，到时候可以一起商量。&lt;/p&gt;&#xA;&lt;p&gt;同步 Loc &lt;a href=&#34;https://hostloc.com/thread-1194263-1-1.html&#34; rel=&#34;nofollow&#34;&gt;https://hostloc.com/thread-1194263-1-1.html&lt;/a&gt;&#xA;还差 3 位&lt;/p&gt;&#xA;</description>
-      <author>Wars</author>
-      <pubDate>06 Aug 2023 02:30:57 +0000</pubDate>
     </item>
     <item>
       <title>能否让多个软件共用一个字体目录 - 问与答</title>
@@ -251,6 +251,13 @@
       <description>&lt;p&gt;win11 每次关闭后，重新打开就要输入密码，连二步验证都不敢用，不然打开验证器输入搞死人。https://pic.ziyuan.wang/2023/08/05/360c59c4b592a.png&lt;/p&gt;&#xA;</description>
       <author>ufok</author>
       <pubDate>05 Aug 2023 15:33:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>Surge Mac 开车有人上车嘛 - Surge</title>
+      <link>https://www.v2ex.com/t/962749</link>
+      <description>&lt;p&gt;刚买一天，125/位，拉进微信群，需要的联系 TG &lt;a href=&#34;https://t.me/wars01&#34; rel=&#34;nofollow&#34;&gt;https://t.me/wars01&lt;/a&gt;&#xA;如要换设备可自行反激活，5.0 大版本内永久使用，暂定大版本更新必跟，到时候可以一起商量。&lt;/p&gt;&#xA;&lt;p&gt;同步 Loc &lt;a href=&#34;https://hostloc.com/thread-1194263-1-1.html&#34; rel=&#34;nofollow&#34;&gt;https://hostloc.com/thread-1194263-1-1.html&lt;/a&gt;&#xA;还差 3 位&lt;/p&gt;&#xA;</description>
+      <author>Wars</author>
+      <pubDate>06 Aug 2023 02:30:57 +0000</pubDate>
     </item>
     <item>
       <title>关于微信 callkit 的问题，希望各位大佬能回复一下 - Apple</title>

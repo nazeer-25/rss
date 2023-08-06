@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "有些网页一打开 F12，就会进入 debugger 状态 - 问与答",
+      "Link": "https://www.v2ex.com/t/962757",
+      "Description": "\u003ch1\u003e这是不是网站的一种防御机制？🥲有点难受...\u003c/h1\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.v2ex.co/45j73PpY.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e完整代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e((function() {\n    var callbacks = [],\n        timeLimit = 50,\n        open = false;\n    setInterval(loop, 1);\n    return {\n        addListener: function(fn) {\n            callbacks.push(fn);\n        },\n        cancleListenr: function(fn) {\n            callbacks = callbacks.filter(function(v) {\n                return v !== fn;\n            });\n        }\n    }\n\n    function loop() {\n        var startTime = new Date();\n        debugger;\n        if (new Date() - startTime \u0026gt; timeLimit) {\n            if (!open) {\n                callbacks.forEach(function(fn) {\n                    fn.call(null);\n                });\n            }\n            open = true;\n            window.stop();\n            document.body.innerHTML = \"\";\n        } else {\n            open = false;\n        }\n    }\n})()).addListener(function() {\n    window.location.reload();\n});\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "ThinkStu",
+      "PubDate": "2023-08-06T02:57:02Z"
+    },
+    {
       "Title": "除了时序数据库, 还哪些服务适合对某个时间维度做 sum group by 操作 - 问与答",
       "Link": "https://www.v2ex.com/t/962756",
       "Description": "最近用 aws 的 timestream, 遇到 4 个小时服务故障.  \u003cbr /\u003e官方只是简单的回复 \u003cbr /\u003e\u003cbr /\u003e====\u003cbr /\u003e尊敬的客户您好：\u003cbr /\u003e\u003cbr /\u003e不好意思让您久等了，根据内部团队的讯息表示，在当时该服务出现了一些问题导致您的应用出现错误，目前该问题已被修复。\u003cbr /\u003e\u003cbr /\u003e造成您的不变我们深感抱歉，希望以上讯息对您有帮助，若您有其他问题请不吝在与我们联系。\u003cbr /\u003e\u003cbr /\u003e===\u003cbr /\u003e\u003cbr /\u003e有点气, 打算换其他产品, 挑了半天, 也没觉得哪个时序数据库满意.  \u003cbr /\u003e最新版的 influxdb, 好像已经不支持 sql 查询了.  \u003cbr /\u003e我这边业务比较简单, 就是单表的 sum group by 操作.  \u003cbr /\u003e一小时几千万条数据.  \u003cbr /\u003e但只保留最近 3 天数据就行.  \u003cbr /\u003e最好能支持 sql 语句.\u003cbr /\u003eMongoDB 适合这个场景么? 我没用过 MongoDB.",
@@ -44,13 +51,6 @@
       "Description": "不登录不让用，登陆报错：挂梯子也没用\u003cbr /\u003e无法解析某些 Microsoft 云服务。请运行 Windows Internet 连接疑难解答，如果问题仍然存在，请与网络管理员联系。相关 ID: 6b948eea-3855-4947-95f7-a21e10891245\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e求教各位老哥",
       "Author": "wty95",
       "PubDate": "2023-08-06T02:31:02Z"
-    },
-    {
-      "Title": "Surge Mac 开车有人上车嘛 - Surge",
-      "Link": "https://www.v2ex.com/t/962749",
-      "Description": "\u003cp\u003e刚买一天，125/位，拉进微信群，需要的联系 TG \u003ca href=\"https://t.me/wars01\" rel=\"nofollow\"\u003ehttps://t.me/wars01\u003c/a\u003e\n如要换设备可自行反激活，5.0 大版本内永久使用，暂定大版本更新必跟，到时候可以一起商量。\u003c/p\u003e\n\u003cp\u003e同步 Loc \u003ca href=\"https://hostloc.com/thread-1194263-1-1.html\" rel=\"nofollow\"\u003ehttps://hostloc.com/thread-1194263-1-1.html\u003c/a\u003e\n还差 3 位\u003c/p\u003e\n",
-      "Author": "Wars",
-      "PubDate": "2023-08-06T02:30:57Z"
     },
     {
       "Title": "能否让多个软件共用一个字体目录 - 问与答",
@@ -254,6 +254,13 @@
       "Description": "\u003cp\u003ewin11 每次关闭后，重新打开就要输入密码，连二步验证都不敢用，不然打开验证器输入搞死人。https://pic.ziyuan.wang/2023/08/05/360c59c4b592a.png\u003c/p\u003e\n",
       "Author": "ufok",
       "PubDate": "2023-08-05T15:33:28Z"
+    },
+    {
+      "Title": "Surge Mac 开车有人上车嘛 - Surge",
+      "Link": "https://www.v2ex.com/t/962749",
+      "Description": "\u003cp\u003e刚买一天，125/位，拉进微信群，需要的联系 TG \u003ca href=\"https://t.me/wars01\" rel=\"nofollow\"\u003ehttps://t.me/wars01\u003c/a\u003e\n如要换设备可自行反激活，5.0 大版本内永久使用，暂定大版本更新必跟，到时候可以一起商量。\u003c/p\u003e\n\u003cp\u003e同步 Loc \u003ca href=\"https://hostloc.com/thread-1194263-1-1.html\" rel=\"nofollow\"\u003ehttps://hostloc.com/thread-1194263-1-1.html\u003c/a\u003e\n还差 3 位\u003c/p\u003e\n",
+      "Author": "Wars",
+      "PubDate": "2023-08-06T02:30:57Z"
     },
     {
       "Title": "关于微信 callkit 的问题，希望各位大佬能回复一下 - Apple",
