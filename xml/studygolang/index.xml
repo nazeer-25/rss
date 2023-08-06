@@ -30,11 +30,6 @@
       <link>https://studygolang.com/articles/36239#reply0</link>
     </item>
     <item>
-      <title>本人基于SwiftUI开发的macos本地音乐播放器 fmusic 开源了</title>
-      <link>https://studygolang.com/articles/36232#reply0</link>
-      <description>&lt;p&gt;基于SwiftUI开发的本地音乐播放器,系统最低要求macos 11.0,开发环境Xcode Version 13.4.1&#xA;1. [x] 能自动解析音频文件的，专辑信息和专辑封面图片&#xA;2. [x] 经过测试支持 [&amp;ldquo;.flac&amp;rdquo;, &amp;ldquo;.mp3&amp;rdquo;, &amp;ldquo;.wav&amp;rdquo;, &amp;ldquo;.m4a&amp;rdquo;, &amp;ldquo;.aif&amp;rdquo;, &amp;ldquo;.m4r&amp;rdquo;]音乐文件的播放&#xA;3. [x] 歌曲列表单行双击，切歌。&#xA;4. [x] 播放模式支持 顺序，循环，随机，单曲循环。&#xA;5. [x] 导入音乐文件夹，支持图标点击，菜单，快捷键方式（commd + o）三种方式&#xA;6. [x] 播放进度条，支持鼠标拖拽调整。&#xA;7. [x] 简单的收藏功能。&#xA;8. [x] 搜索，模糊匹配 歌曲名/艺术家/专辑&#xA;9. [x] 左边栏支持隐藏&#xA;10. [x] 音乐音量调整&lt;/p&gt;&#xA;&#xA;&lt;p&gt;源代码仓库地址 &lt;a href=&#34;https://github.com/wandercn/fmusic&#34;&gt;https://github.com/wandercn/fmusic&lt;/a&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>有关map[string]interface{}用法求教</title>
       <link>https://studygolang.com/topics/16580#reply2</link>
       <description>&lt;p&gt;代码如下，想问下最后一个语句怎么理解？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;type Domain_list_t map[string]interface{}&#xA;&#xA;var DomainList Domain_list_t&#xA;&#xA;//DomainList.txt 文件存放域名列表，一行一个&#xA;func LoadOrCreateDomainList() bool {&#xA;&#x9;buf, err := ioutil.ReadFile(&amp;quot;./Domainlist.txt&amp;quot;)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return false&#xA;&#x9;}&#xA;&#xA;&#x9;DomainList = make(Domain_list_t)&#xA;&#xA;&#x9;//domain为Domainlist.txt里的一行，假设是第一行是 www.baidu.com&#xA;&#x9;for _, domain := range strings.Split(string(buf), &amp;quot;\n&amp;quot;) {&#xA;&#x9;&#x9;//subs为domain的各级域名组成的切片 {www,baidu,com}&#xA;&#x9;&#x9;subs := strings.Split(strings.Trim(domain, &amp;quot;\r &amp;quot;), &amp;quot;.&amp;quot;)&#xA;&#x9;&#x9;if len(subs) == 0 || len(domain) == 0 || domain[0] == &#39;#&#39; {&#xA;&#x9;&#x9;&#x9;continue&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;top := DomainList&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;//i=2时&#xA;&#x9;&#x9;for i := len(subs) - 1; i &amp;gt;= 0; i-- {&#xA;&#x9;&#x9;&#x9;//sub[2]=&amp;quot;com&amp;quot;，top[&amp;quot;com&amp;quot;]==nil&#xA;&#x9;&#x9;&#x9;if top[subs[i]] == nil {&#xA;&#x9;&#x9;&#x9;&#x9;//初始化top[&amp;quot;com&amp;quot;]&#xA;&#x9;&#x9;&#x9;&#x9;top[subs[i]] = make(Domain_list_t)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if i == 0 {&#xA;&#x9;&#x9;&#x9;&#x9;top[subs[0]].(Domain_list_t)[&amp;quot;_&amp;quot;] = true&#xA;&#x9;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;&#x9;//这里不明白，为啥 top[&amp;quot;com&amp;quot;] 后面还能加点号，为啥 Domain_list_t 要加括号&#xA;&#x9;&#x9;&#x9;top = top[subs[i]].(Domain_list_t)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -83,6 +78,16 @@
     <item>
       <title>Django4+Vue3全新技术实战全栈项目分享</title>
       <link>https://studygolang.com/articles/36233#reply0</link>
+    </item>
+    <item>
+      <title>本人基于SwiftUI开发的macos本地音乐播放器 fmusic 开源了</title>
+      <link>https://studygolang.com/articles/36232#reply0</link>
+      <description>&lt;p&gt;基于SwiftUI开发的本地音乐播放器,系统最低要求macos 11.0,开发环境Xcode Version 13.4.1&#xA;1. [x] 能自动解析音频文件的，专辑信息和专辑封面图片&#xA;2. [x] 经过测试支持 [&amp;ldquo;.flac&amp;rdquo;, &amp;ldquo;.mp3&amp;rdquo;, &amp;ldquo;.wav&amp;rdquo;, &amp;ldquo;.m4a&amp;rdquo;, &amp;ldquo;.aif&amp;rdquo;, &amp;ldquo;.m4r&amp;rdquo;]音乐文件的播放&#xA;3. [x] 歌曲列表单行双击，切歌。&#xA;4. [x] 播放模式支持 顺序，循环，随机，单曲循环。&#xA;5. [x] 导入音乐文件夹，支持图标点击，菜单，快捷键方式（commd + o）三种方式&#xA;6. [x] 播放进度条，支持鼠标拖拽调整。&#xA;7. [x] 简单的收藏功能。&#xA;8. [x] 搜索，模糊匹配 歌曲名/艺术家/专辑&#xA;9. [x] 左边栏支持隐藏&#xA;10. [x] 音乐音量调整&lt;/p&gt;&#xA;&#xA;&lt;p&gt;源代码仓库地址 &lt;a href=&#34;https://github.com/wandercn/fmusic&#34;&gt;https://github.com/wandercn/fmusic&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>GO语言在国内大多数小公司最常用什么框架？</title>
+      <link>https://studygolang.com/topics/16500#reply9</link>
+      <description>&lt;p&gt;要国内的，不要国外排行榜。&#xA;类似 国内JAVA 用springboot ，php用tp，那GO在国内常用框架是什么？&#xA;其他像操作 数据库 redis常用的什么&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>仅三天，我用 GPT-4 生成了性能全网第一的 Golang Worker Pool，轻松打败 GitHub 万星项目</title>
