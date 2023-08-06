@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "近一个多月以来安卓 chrome 无法播放 youtube 之外的视频 - Android",
+      "Link": "https://www.v2ex.com/t/962761",
+      "Description": "\u003cp\u003e如题 一播放 web 视频就报异常 \u003c/p\u003e\n\u003cp\u003e清空 google 体系数据、重新安装下载、修改 chrome 的 vulcan 配置等方法 均无效\u003c/p\u003e\n\u003cp\u003e现在逼的用系统内置浏览器看 web 视频 请问有人知道为啥吗。。\u003c/p\u003e\n",
+      "Author": "XhivaW",
+      "PubDate": "2023-08-06T03:15:34Z"
+    },
+    {
       "Title": "有些网页一打开 F12，就会进入 debugger 状态 - 问与答",
       "Link": "https://www.v2ex.com/t/962757",
       "Description": "\u003ch1\u003e这是不是网站的一种防御机制？🥲有点难受...\u003c/h1\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.v2ex.co/45j73PpY.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e完整代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e((function() {\n    var callbacks = [],\n        timeLimit = 50,\n        open = false;\n    setInterval(loop, 1);\n    return {\n        addListener: function(fn) {\n            callbacks.push(fn);\n        },\n        cancleListenr: function(fn) {\n            callbacks = callbacks.filter(function(v) {\n                return v !== fn;\n            });\n        }\n    }\n\n    function loop() {\n        var startTime = new Date();\n        debugger;\n        if (new Date() - startTime \u0026gt; timeLimit) {\n            if (!open) {\n                callbacks.forEach(function(fn) {\n                    fn.call(null);\n                });\n            }\n            open = true;\n            window.stop();\n            document.body.innerHTML = \"\";\n        } else {\n            open = false;\n        }\n    }\n})()).addListener(function() {\n    window.location.reload();\n});\n\u003c/code\u003e\u003c/pre\u003e\n",
