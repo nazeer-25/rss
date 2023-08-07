@@ -22,19 +22,6 @@
       <description>&lt;p&gt;新入门的疑惑， 为什么 反射 reflect.Kind(1) 返回的 是 bool? 有没有大佬解释一下&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>永续合约交易所(跟单、加杠杆、交割)功能系统开发源码部署</title>
-      <link>https://studygolang.com/articles/36234#reply0</link>
-    </item>
-    <item>
-      <title>在windows下有什么方案可以实现主程序自更新并重新启动么？</title>
-      <link>https://studygolang.com/topics/16577#reply4</link>
-      <description>&lt;p&gt;一直没什么头绪在windows系统下怎么实现自更新并重启启动程序，希望大佬们给点思路呢。谢谢&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>币币交易所系统(多币对交易)开发多语言版本</title>
-      <link>https://studygolang.com/articles/36236#reply0</link>
-    </item>
-    <item>
       <title>有关map[string]interface{}用法求教</title>
       <link>https://studygolang.com/topics/16580#reply3</link>
       <description>&lt;p&gt;代码如下，想问下最后一个语句怎么理解？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;type Domain_list_t map[string]interface{}&#xA;&#xA;var DomainList Domain_list_t&#xA;&#xA;//DomainList.txt 文件存放域名列表，一行一个&#xA;func LoadOrCreateDomainList() bool {&#xA;&#x9;buf, err := ioutil.ReadFile(&amp;quot;./Domainlist.txt&amp;quot;)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return false&#xA;&#x9;}&#xA;&#xA;&#x9;DomainList = make(Domain_list_t)&#xA;&#xA;&#x9;//domain为Domainlist.txt里的一行，假设是第一行是 www.baidu.com&#xA;&#x9;for _, domain := range strings.Split(string(buf), &amp;quot;\n&amp;quot;) {&#xA;&#x9;&#x9;//subs为domain的各级域名组成的切片 {www,baidu,com}&#xA;&#x9;&#x9;subs := strings.Split(strings.Trim(domain, &amp;quot;\r &amp;quot;), &amp;quot;.&amp;quot;)&#xA;&#x9;&#x9;if len(subs) == 0 || len(domain) == 0 || domain[0] == &#39;#&#39; {&#xA;&#x9;&#x9;&#x9;continue&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;top := DomainList&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;//i=2时&#xA;&#x9;&#x9;for i := len(subs) - 1; i &amp;gt;= 0; i-- {&#xA;&#x9;&#x9;&#x9;//sub[2]=&amp;quot;com&amp;quot;，top[&amp;quot;com&amp;quot;]==nil&#xA;&#x9;&#x9;&#x9;if top[subs[i]] == nil {&#xA;&#x9;&#x9;&#x9;&#x9;//初始化top[&amp;quot;com&amp;quot;]&#xA;&#x9;&#x9;&#x9;&#x9;top[subs[i]] = make(Domain_list_t)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if i == 0 {&#xA;&#x9;&#x9;&#x9;&#x9;top[subs[0]].(Domain_list_t)[&amp;quot;_&amp;quot;] = true&#xA;&#x9;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;&#x9;//这里不明白，为啥 top[&amp;quot;com&amp;quot;] 后面还能加点号，为啥 Domain_list_t 要加括号&#xA;&#x9;&#x9;&#x9;top = top[subs[i]].(Domain_list_t)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -67,8 +54,21 @@
       <description>&lt;p&gt;​&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;简介&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;后台管理基于GoFly单服务版开发，需要了解请移步GoFly开始开发这篇文章看，CMS管理系统也是GoFly系列产品，也是方便有些企业可能有其他业务需求可以二次开发。网站内容展示部分由PHP来实现，根据我们需同时管理多个网站，所以php选择的框架需要能绑定多个网站的域名，我们找了我们熟悉的thinkphp，比较多个版本后我们选择了thinkphp5.1，满足了我们需求。不过thinkphp5.1没有做好多个域名绑定和网站标签这些功能，这些都需要我们自己动手开发。下面就是我们自己写的路由和网站标签。需要更多GoFly框架技术信息请您到&lt;a href=&#34;https://goflys.cn/home&#34;&gt;开发者社区&lt;/a&gt;，&lt;a href=&#34;https://doc.goflys.cn/docview?id=30&#34;&gt;CMS文档&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;图片预览&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230805/4984322b305296758677e0e43eac765c.png&#34; alt=&#34;微信截图_20230621011528.png&#34; /&gt;&#xA;&lt;img src=&#34;https://static.golangjob.cn/230805/f25fb6fa3b8fd53629395cda0ade2b95.png&#34; alt=&#34;123628.png&#34; /&gt;&#xA;&lt;img src=&#34;https://static.golangjob.cn/230805/8e0c9394e3d32804185f3703824b1293.png&#34; alt=&#34;微信截图_20230621011622.png&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;黑暗版&#xA;&lt;img src=&#34;https://static.golangjob.cn/230805/f78955233d064a01ee171a17421dc6d3.png&#34; alt=&#34;black_20230805161949.png&#34; /&gt;&#xA;&lt;img src=&#34;https://static.golangjob.cn/230805/227c9f6e52de5759302d0d9dedcbd1fd.png&#34; alt=&#34;blak_20230805162242.png&#34; /&gt;&lt;img src=&#34;https://static.golangjob.cn/230805/e9a2d54e1929946bf3cf5471cd1eb9ff.png&#34; alt=&#34;editor.png&#34; /&gt;&lt;img src=&#34;https://static.golangjob.cn/230805/1f80d799e6564fa5cd20703617ff05dc.png&#34; alt=&#34;微信截图_20230621011635.png&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>在windows下有什么方案可以实现主程序自更新并重新启动么？</title>
+      <link>https://studygolang.com/topics/16577#reply4</link>
+      <description>&lt;p&gt;一直没什么头绪在windows系统下怎么实现自更新并重启启动程序，希望大佬们给点思路呢。谢谢&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>币币交易所系统(多币对交易)开发多语言版本</title>
+      <link>https://studygolang.com/articles/36236#reply0</link>
+    </item>
+    <item>
       <title>海外上线虚拟货币交易所平台(币安、Bitfinex、Coinbase)多语言版本搭建开发</title>
       <link>https://studygolang.com/articles/36235#reply0</link>
+    </item>
+    <item>
+      <title>永续合约交易所(跟单、加杠杆、交割)功能系统开发源码部署</title>
+      <link>https://studygolang.com/articles/36234#reply0</link>
     </item>
     <item>
       <title>推荐一个基于gin+vue3搭建的后台管理系统开源的社区全</title>
