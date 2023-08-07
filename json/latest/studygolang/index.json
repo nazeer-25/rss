@@ -46,6 +46,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "GoFly全栈开发社区助力企业降本增效开源快速开发后台管理系统框架前后端路由自动引入前端UI组建丰富",
+      "Link": "https://studygolang.com/topics/16584#reply0",
+      "Description": "\u003cp\u003e从Go语言特性我们可以明显得出一个结论，就是Go可以为企业节省成本，不仅是开发成本，同时减少硬件成本（服务器资源）和运维成本，并且提高了开发效率。在这个每个行业都在降本增效时代，如果您好不选择Go开发项目，你的企业同比本行业竞争对手，您可能有一天会被淘汰！这不是危言耸听，从历史看，不跟上时代步伐的最终逃不出被抛弃的命运。\n为什么使用Go就非得选择一个框架呢，当然不选框架也可以开发项目。选择框架目的是为了提供开发效率，不需要自己摸索搭建基础框架。使用框架就可以一来就写业务代码，使用框架可以保证项目稳定性，好的框架已经经过无数人使用，把问题bug都处理了，还有框架很多人一起用遇到问题可以在社区讨论，还有很多社区分享的插件。\nGoFly全栈开发社区为了使用Go的开发和企业提供一个企业级应用框架，为了社区能服务好每个开发者社区也承诺永久开源快速开发后台管理系统框架。让新手初学者都可以做出企业级应用。创建社区初衷是为了让使用Go开发者能有一个纯粹技术资源共享的平台，而且也是能有一套开发规范让各自开发者分享的资源其他人也能快速使用，同一套标准，让所有开发的代码，所有我就都看懂并使用。这就是存在社区的意义。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "有关map[string]interface{}用法求教",
       "Link": "https://studygolang.com/topics/16580#reply3",
       "Description": "\u003cp\u003e代码如下，想问下最后一个语句怎么理解？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003etype Domain_list_t map[string]interface{}\n\nvar DomainList Domain_list_t\n\n//DomainList.txt 文件存放域名列表，一行一个\nfunc LoadOrCreateDomainList() bool {\n\tbuf, err := ioutil.ReadFile(\u0026quot;./Domainlist.txt\u0026quot;)\n\tif err != nil {\n\t\treturn false\n\t}\n\n\tDomainList = make(Domain_list_t)\n\n\t//domain为Domainlist.txt里的一行，假设是第一行是 www.baidu.com\n\tfor _, domain := range strings.Split(string(buf), \u0026quot;\\n\u0026quot;) {\n\t\t//subs为domain的各级域名组成的切片 {www,baidu,com}\n\t\tsubs := strings.Split(strings.Trim(domain, \u0026quot;\\r \u0026quot;), \u0026quot;.\u0026quot;)\n\t\tif len(subs) == 0 || len(domain) == 0 || domain[0] == '#' {\n\t\t\tcontinue\n\t\t}\n\n\t\ttop := DomainList\n\t\t\n\t\t//i=2时\n\t\tfor i := len(subs) - 1; i \u0026gt;= 0; i-- {\n\t\t\t//sub[2]=\u0026quot;com\u0026quot;，top[\u0026quot;com\u0026quot;]==nil\n\t\t\tif top[subs[i]] == nil {\n\t\t\t\t//初始化top[\u0026quot;com\u0026quot;]\n\t\t\t\ttop[subs[i]] = make(Domain_list_t)\n\t\t\t}\n\t\t\t\t\n\t\t\tif i == 0 {\n\t\t\t\ttop[subs[0]].(Domain_list_t)[\u0026quot;_\u0026quot;] = true\n\t\t\t}\n\n\t\t\t//这里不明白，为啥 top[\u0026quot;com\u0026quot;] 后面还能加点号，为啥 Domain_list_t 要加括号\n\t\t\ttop = top[subs[i]].(Domain_list_t)\n\t\t}\n\t}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
