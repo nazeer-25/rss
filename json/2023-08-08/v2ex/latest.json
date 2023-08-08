@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "群晖 Hyper Backup 到阿里云 OSS 设置难题 - NAS",
+      "Link": "https://www.v2ex.com/t/963577",
+      "Description": "\u003cp\u003e大家好，本人在使用群晖的 Hyper Backup 套件过程中遇到了一些麻烦无法解决或者说无法理解，所以来请教各位有经验的前辈。\u003c/p\u003e\n\u003cp\u003e我在群晖上有一些重要数据(DSM 7.2)，虽然本地做了 RAID1 以及使用 Cloud Sync 套件，但是我依然不放心，我想使用 Hyper Backup 备份到阿里云 OSS 做一些有版本的备份。我先在阿里云上创建了一个冷归档型 bucket ，然后创建了一个 RAM 用户赋予了 OSS 全部权限，同时保存好了 Access Key 和 Secret 。在我本地设置的时候，无论图片中的请求类型为\u003cstrong\u003e虚拟托管类型\u003c/strong\u003e还是\u003cstrong\u003e路径类型\u003c/strong\u003e，都能正确的获取到我创建的 bucket 。\u003c/p\u003e\n\u003cp\u003e但如果我选择\u003cstrong\u003e路径类型\u003c/strong\u003e并且打算进行下一步的时候，系统就会提示我账密不正确，图片如下：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"路径设置方案\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/NUDiOd7.png\"/\u003e \u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"账密校验失败\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/JIJ9F1b.png\"/\u003e \u003c/p\u003e\n\u003cp\u003e如果我选择\u003cstrong\u003e虚拟托管类型\u003c/strong\u003e，虽然能进行下一步并且能设置好备份的文件夹和套件，但到最后创建完成的时候，系统提示我备份目的地离线：\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"虚拟托管方案\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/HNTW6Zy.png\"/\u003e \u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"备份目的地离线\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/HO5hag9.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e会有前辈疑惑我既然能上 V 站，为什么不选择 Amzon 或者 Google 备份？因为我没有搭建整个家庭网络科学上网，同时因为挂着 PT ，我也没去捣鼓群晖科学上网。并且考虑日常上传备份的速度和一旦需要用到备份，放在国内云服务商是否会更好。同时，我理解 Cloud Sync 只是同步数据，不是我想要的带版本的备份。应该还会有前辈推荐我使用阿里云 WebDAV docker 备份，这个方案我尝试了一周，会出现莫名其妙的突然备份失败的问题，稳定性不足。\u003c/p\u003e\n\u003cp\u003e如果能有前辈帮帮忙是最好了，实在没有，那我只能买一块 2T 的 m.2 ，每天备份一下，每周末上传到云盘或者云服务商。\u003c/p\u003e\n",
+      "Author": "ZacT0ny",
+      "PubDate": "2023-08-08T23:18:46Z"
+    },
+    {
+      "Title": "关于 nginx 中 proxy_pass 指令我有些疑惑 - 问与答",
+      "Link": "https://www.v2ex.com/t/963576",
+      "Description": "\u003cpre\u003e\u003ccode\u003eupstream example {\n    server 172.0.0.1:3000;\n    server 172.0.0.2:3000;\n}\n\nserver {\n    listen 3000;\n    server_name _;\n    location / {\n        proxy_pass http://example;\n        proxy_ssl_verify off;\n        proxy_set_header Host $http_host;\n        proxy_set_header X-Real-Ip $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e对于上面这个配置，我理解的是，假如客户端请求的是 \u003ccode\u003ehttp://ip:3000/path?a=1\u0026amp;b=2\u003c/code\u003e, nginx 会根据 example 这个 upstream 选择一个后端服务器转发请求，比如 \u003ccode\u003ehttp://172.0.0.1:3000/path?a=1\u0026amp;b=2\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e但是我在工作中有碰到过如下配置:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e  location ~ ^/api/(.*) {\n      proxy_set_header Host $http_host;\n      proxy_set_header X-Real-Ip $remote_addr;\n      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n      proxy_set_header X-Forwarded-Proto $scheme;\n      proxy_pass http://172.0.0.3:31081/$1$is_args$args;\n      proxy_connect_timeout 300s;\n      proxy_send_timeout 300s;\n      proxy_read_timeout 300s;\n  }\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在这个配置中，proxy_pass 指令后面有 $is_args 、$args 这些参数。如果不加参数，客户端请求 url 上的参数就无法转发到 172.0.0.3 服务器上\u003c/p\u003e\n\u003cp\u003e我想要的是要把客户端请求 url 中的参数转发到后端，我的疑惑是什么时候 proxy_pass 指令后面需要加  $is_args 、$args 这些参数\u003c/p\u003e\n",
+      "Author": "21231sv",
+      "PubDate": "2023-08-08T23:16:10Z"
+    },
+    {
       "Title": "Surge ios 开车 2 位置 - Surge",
       "Link": "https://www.v2ex.com/t/963575",
       "Description": "115RMB 买断，后续大版本升级需要 2 人同意，费用平摊，如要换设备可自行反激活。后续大版本更新到时候再商定，个人原因跳车不退上车 tg 联系： \u003ca target=\"_blank\" href=\"https://t.me/Razaketh\" rel=\"nofollow noopener\"\u003ehttps://t.me/Razaketh\u003c/a\u003e",
