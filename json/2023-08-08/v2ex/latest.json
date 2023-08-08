@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "这个 HTTP header 导致的超时，有人遇见过吗？ - 程序员",
+      "Link": "https://www.v2ex.com/t/963579",
+      "Description": "\u003cp\u003e在实际业务中遇到了一个很奇怪的问题，服务 A 通过 HTTP 请求访问 Go 语言的服务 B ，少部分请求会超时。进一步分析发现，如果一个请求超时，其重试也一定会超时，说明针对特定请求内容，超时是必然发生的问题。通过检查服务 B 的处理日志发现，对于超时的请求，其业务逻辑处理的耗时正常。\u003c/p\u003e\n\u003cp\u003e一开始通过排除法来分析，逐步替换怀疑有问题的模块，结果并没有定位到问题。后来通过抓包，分析正常包与超时包的区别，合理猜测有问题的部分并进行验证，最终定位到原来是 Expect: 100-continue 这个请求 HTTP header 导致了这里的超时。整个排查和修复过程，踩了不少坑，记录下来可以给大家参考。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e完整内容\u003c/strong\u003e在：\n\u003ca href=\"https://selfboot.cn/2023/08/08/http_100_continue/\" rel=\"nofollow\"\u003e由 HTTP Header 引起的请求超时问题排查\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"Imgur\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/lKinHzT.png\"/\u003e\u003c/p\u003e\n\u003cp\u003eHTTP 协议中当客户端要发送一个包含大量数据的请求时（通常是 POST 或 PUT 请求），如果服务器无法处理这个请求（例如因为请求的数据格式不正确或者没有权限），那么客户端会浪费大量的资源来发送这些数据。为了解决这个问题，HTTP/1.1 引入了 Expect: 100-continue 头部，允许客户端在发送请求体前询问服务器是否愿意接收请求。如果服务器不能处理请求，客户端就可以不发送大量数据，从而节省资源。\u003c/p\u003e\n\u003cp\u003e这里具体的实现原理是把一个完整的 HTTP 请求分成两个阶段来发送。第一个阶段只发送 HTTP 请求的头部，第二个阶段在收到服务器确认后才发送 HTTP 请求的主体。从 HTTP 的角度看，仍然是一个单一的 HTTP 请求，只是改变了请求的发送方式。\u003c/p\u003e\n\u003cp\u003e这里一般靠网络库和底层的 TCP 协议来实现，当使用了”Expect: 100-continue”头部，网络库(比如 libcurl)会先只发送 Expect 部分的 TCP 数据，然后等待服务器的 100 Continue 响应。收到 TCP 回复后，网络库会接着发送请求主体的 TCP 数据包。如果服务器没有返回 100 Continue 响应，网络库可能会选择等待一段时间，然后发送请求主体，或者关闭连接。\u003c/p\u003e\n",
+      "Author": "xuelang",
+      "PubDate": "2023-08-08T23:43:27Z"
+    },
+    {
       "Title": "好后悔，在该努力的时候选择了刷手机和视频，结果现在只能干体力活 - 问与答",
       "Link": "https://www.v2ex.com/t/963578",
       "Description": "如果过去 10 年、5 年、3 年，好好练习英语听力和口语，不至于现在这样找本专业工作碰壁。\u003cbr /\u003e如果去年上 IT 网课的时候认真学习，现在说不定已经找到个朝九晚五的工作了，不用天蒙蒙亮的时候就开车 40km 干体力活。\u003cbr /\u003e\u003cbr /\u003e真的好后悔。",
