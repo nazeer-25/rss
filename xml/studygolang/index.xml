@@ -51,11 +51,6 @@
       <description>&lt;p&gt;用的go1.16.15 使用的sqlserver2008r2数据库，github.com/denisenkom/go-mssqldb&#xA;下面代码中报错，&#xA;报错的代码行为&#xA;  row = tx.QueryRow(&amp;ldquo;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) &amp;ldquo;)&#xA;  err := row.Scan(&amp;amp;guidstr, &amp;amp;currdate)&#xA; 错误信息为:unknown token type returned: token(45)&#xA; 有大佬知道这是什么原因不？有解决的方法吗？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;tx, err = xjcdb.DB.Begin()&#xA;if err != nil {&#xA;&#x9;log.Println(err.Error())&#xA;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;}&#xA;defer tx.Rollback()&#xA;&#xA;   ......&#xA;   ......&#xA;&#xA;rows, err = tx.Query(...)&#xA;if err != nil {&#xA;&#x9;log.Println(err.Error())&#xA;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;}&#xA;defer rows.Close()&#xA;&#xA;for rows.Next() {&#xA;&#x9;loop_beltcode = &amp;quot;&amp;quot;&#xA;&#x9;loop_pkfeeobj = &amp;quot;&amp;quot;&#xA;&#x9;err = rows.Scan(&amp;amp;loop_beltcode, &amp;amp;loop_pkfeeobj)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Println(err.Error())&#xA;&#x9;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;&#x9;}&#xA;&#x9;guidstr = &amp;quot;&amp;quot;&#xA;&#x9;currdate = &amp;quot;&amp;quot;&#xA;&#x9;row = tx.QueryRow(&amp;quot;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) &amp;quot;)&#xA;&#x9;err := row.Scan(&amp;amp;guidstr, &amp;amp;currdate)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;&#x9;}&#xA;            ......&#xA;            ......&#xA;  }&#xA;  .....&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
-      <title>[北京][急招] 字节火山引擎招聘GoLang后端研发工程师</title>
-      <link>https://studygolang.com/topics/16587#reply0</link>
-      <description>&lt;p&gt;职位描述：&#xA;- 负责火山引擎经营平台方向后端的架构设计与研发，推进火山引擎产商品与销售业务相关平台能力，支撑火山引擎业务发展；&#xA;- 参与产品需求讨论、研发方案设计及代码实现等，编写和维护经营平台相关技术文档；&#xA;- 解决系统中的关键问题和技术难题；&#xA;- 根据业务发展需要对相关技术做前瞻性调研工作。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;职位要求&#xA;- 本科及以上学历，计算机、通信等相关专业，5年以上工作经验；&#xA;- 熟练掌握Go/Python/C/C++/Java/PHP中至少一种语言，有扎实的基本功，理解并熟悉设计模式，精通go和熟悉go-zero者优先；&#xA;- 至少有3年以上高并发、高一致性、数据传输稳定性相关工作经验；&#xA;- 熟悉分布式系统的设计和应用，熟悉缓存、消息、负载均衡等机制，并对常见的中间件实现原理有所了解；&#xA;- 具备优秀的逻辑思维能力，对解决问题充满热情，善于分析和解决问题；&#xA;- 有较强的上进心和求知欲，善于学习新事物，良好的团队精神和沟通能力；&#xA;- 熟悉商品管理系统、交易管理系统、客户管理系统、产品管理系统、销售管理系统、项目管理系统等。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;投递链接：(请先私聊下吧)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;欢迎有意向的同学投递，有其他疑问可以加好友聊下，我的个人微信：Vengeful_Spirit&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>新入门的疑惑， 为什么 反射 reflect.Kind(1) 返回的 是 bool? 有没有大佬解释一下</title>
       <link>https://studygolang.com/topics/16583#reply2</link>
       <description>&lt;p&gt;新入门的疑惑， 为什么 反射 reflect.Kind(1) 返回的 是 bool? 有没有大佬解释一下&lt;/p&gt;&#xA;</description>
@@ -79,6 +74,11 @@
       <title>一下代码有什么问题？</title>
       <link>https://studygolang.com/articles/36242#reply2</link>
       <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;type int1 int&#xA;&#xA;type byte1 []byte&#xA;&#xA;var (&#xA;&#x9;a int1  = 0&#xA;&#x9;b byte1 = byte1{8, 9}&#xA;&#xA;&#x9;c int    = a&#xA;&#x9;d []byte = b&#xA;)&#xA;&#xA;func main() {&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>[北京][急招] 字节火山引擎招聘GoLang后端研发工程师</title>
+      <link>https://studygolang.com/topics/16587#reply0</link>
+      <description>&lt;p&gt;职位描述：&#xA;- 负责火山引擎经营平台方向后端的架构设计与研发，推进火山引擎产商品与销售业务相关平台能力，支撑火山引擎业务发展；&#xA;- 参与产品需求讨论、研发方案设计及代码实现等，编写和维护经营平台相关技术文档；&#xA;- 解决系统中的关键问题和技术难题；&#xA;- 根据业务发展需要对相关技术做前瞻性调研工作。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;职位要求&#xA;- 本科及以上学历，计算机、通信等相关专业，5年以上工作经验；&#xA;- 熟练掌握Go/Python/C/C++/Java/PHP中至少一种语言，有扎实的基本功，理解并熟悉设计模式，精通go和熟悉go-zero者优先；&#xA;- 至少有3年以上高并发、高一致性、数据传输稳定性相关工作经验；&#xA;- 熟悉分布式系统的设计和应用，熟悉缓存、消息、负载均衡等机制，并对常见的中间件实现原理有所了解；&#xA;- 具备优秀的逻辑思维能力，对解决问题充满热情，善于分析和解决问题；&#xA;- 有较强的上进心和求知欲，善于学习新事物，良好的团队精神和沟通能力；&#xA;- 熟悉商品管理系统、交易管理系统、客户管理系统、产品管理系统、销售管理系统、项目管理系统等。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;投递链接：(请先私聊下吧)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;欢迎有意向的同学投递，有其他疑问可以加好友聊下，我的个人微信：Vengeful_Spirit&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>跨境盒子：跨境电商如何打造爆款产品并增加流量引流？</title>
