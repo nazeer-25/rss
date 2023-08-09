@@ -74,6 +74,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "go rpc调用 net/rpc包报错问题求解",
+      "Link": "https://studygolang.com/topics/16593#reply0",
+      "Description": "\u003cp\u003ego version: go1.18.3 ,项目是 mod 模式\n在写好demo 执行启动 server时，遇到报错：\n\u003cimg src=\"https://static.golangjob.cn/230809/6608bfadd9712aff5b60ff4d2bfdc698.png\" alt=\"100x\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e请大神们指点一下迷津！\n源码如下：\nserver 代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;net\u0026quot;\n\t\u0026quot;net/rpc\u0026quot;\n)\n\ntype HelloService struct {\n}\n\nfunc (s *HelloService) Hello(request string, reply *string) error {\n\t*reply = \u0026quot;hello \u0026quot; + request\n\treturn nil\n}\n\nfunc main() {\n\tlistener, _ := net.Listen(\u0026quot;tcp\u0026quot;, \u0026quot;:1234\u0026quot;)\n\n\t_ = rpc.RegisterName(\u0026quot;HelloService\u0026quot;, \u0026amp;HelloService{})\n\tfor {\n        \t conn, _ := listener.Accept() // 监听连接\n\t\t go rpc.ServeConn(conn)\n\t}\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003chr\u003e\n\n\u003cp\u003eclient 端代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;net/rpc\u0026quot;\n)\n\nfunc main() {\n\t// 1、建立链接 2、\n\tclient, err := rpc.Dial(\u0026quot;tcp\u0026quot;, \u0026quot;localhost:1234\u0026quot;)\n\tif err != nil {\n\t\tpanic(\u0026quot;connect error\u0026quot;)\n\t}\n\n\tvar reply string\n\tclient.Call(\u0026quot;HelloService.Hello\u0026quot;, \u0026quot;superman\u0026quot;, \u0026amp;reply)\n\tif err != nil {\n\t\tpanic(\u0026quot;remote call failed\u0026quot;)\n\t}\n\tfmt.Println(reply)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "新入门的疑惑， 为什么 反射 reflect.Kind(1) 返回的 是 bool? 有没有大佬解释一下",
       "Link": "https://studygolang.com/topics/16583#reply2",
       "Description": "\u003cp\u003e新入门的疑惑， 为什么 反射 reflect.Kind(1) 返回的 是 bool? 有没有大佬解释一下\u003c/p\u003e\n",
