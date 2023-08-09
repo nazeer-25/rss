@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "BGP 分流 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/963813",
+      "Description": "各位大佬：\u003cbr /\u003e    请救救小弟吧。\u003cbr /\u003e目前网络情况如下\u003cbr /\u003e1.通过 vultr 的 BGP 收了 V4 的全表：\u003cbr /\u003e2.配置了配置 WireGuard ，打通了家里与 vultr 的通道\u003cbr /\u003e3.安装了 bird2 ，配置文件在/etc/bird 这么写：\u003cbr /\u003erouter id 我的 vultrIP;\u003cbr /\u003e\u003cbr /\u003einclude \"asn_cn.conf\";\u003cbr /\u003e\u003cbr /\u003eprotocol device {}\u003cbr /\u003e\u003cbr /\u003eprotocol static {\u003cbr /\u003e        ipv4 {};\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003eprotocol bgp vultr\u003cbr /\u003e{\u003cbr /\u003e        local as 我 vultr 的 AS;\u003cbr /\u003e        neighbor vultr 上面邻居 IP asvultr 上面邻居 AS;\u003cbr /\u003e        password \"BGP 密码\";\u003cbr /\u003e        source address 我 vultr 的 IP;\u003cbr /\u003e\u003cbr /\u003e  ipv4 {\u003cbr /\u003e                import all;\u003cbr /\u003e                export none;\u003cbr /\u003e  };\u003cbr /\u003e        graceful restart on;\u003cbr /\u003e        multihop 2;\u003cbr /\u003e\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003eprotocol bgp home  #这是去我家的配置\u003cbr /\u003e{\u003cbr /\u003e        local as 65533;\u003cbr /\u003e        neighbor 10.88.88.2 as 65532;\u003cbr /\u003e        source address 10.88.88.1;\u003cbr /\u003e\u003cbr /\u003e  ipv4 {\u003cbr /\u003e                import none;\u003cbr /\u003e                export filter {\u003cbr /\u003e                        #if bgp_path ~ [4134, 4809, 36678, 4837, 9929, 9808, 9394, 4538, 23910] then accept; else reject;\u003cbr /\u003e                        if bgp_path ~ china_asn then accept; else reject;\u003cbr /\u003e                };\u003cbr /\u003e  };\u003cbr /\u003e}\u003cbr /\u003e\u003cbr /\u003e其中 asn_cn.conf 文件，通过脚本自动更新了中国区的 AS 号。\u003cbr /\u003e\u003cbr /\u003eROS 里面配置 BGP：ROS---Routing---Filters 这么写了\u003cbr /\u003eif (protocol bgp) {set gw pppoe-out1;accept}\u003cbr /\u003e\u003cbr /\u003e这样是实现了所有中国区 AS 号过滤来的 IP 通过 PPPOE-out1 出去了，但是国外的路由不能走隧道 192.168.100.2 出去，出国留学不了。\u003cbr /\u003e\u003cbr /\u003e请问要这么写才能实现 bgp 分流，解决出国留学问题呢。",
+      "Author": "mowenqing",
+      "PubDate": "2023-08-09T08:55:08Z"
+    },
+    {
+      "Title": "下歌吧的下载高清音乐，不知道有没有需要 - 分享发现",
+      "Link": "https://www.v2ex.com/t/963812",
+      "Description": "\u003cp\u003e\u003ca href=\"https://xiageba.com\" rel=\"nofollow\"\u003ehttps://xiageba.com\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e都是百度网盘的内容下载，音质也很清晰，\n个人觉得搜索还可以的，看最近很多人在用，分享一下这个下歌吧网站\u003c/p\u003e\n",
+      "Author": "shhwje18",
+      "PubDate": "2023-08-09T08:53:09Z"
+    },
+    {
       "Title": "寻找 Youtube 家庭车 - YouTube",
       "Link": "https://www.v2ex.com/t/963811",
       "Description": "\u003cp\u003e近期有开油管家庭车的朋友吗？请联系我 tg:aHR0cHM6Ly90Lm1lL3RlY2hlbnRq\u003c/p\u003e\n",
