@@ -67,6 +67,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "奇怪的报错信息，unknown token type returned: token(45)",
+      "Link": "https://studygolang.com/topics/16592#reply0",
+      "Description": "\u003cp\u003e用的go1.16.15 使用的sqlserver2008r2数据库，github.com/denisenkom/go-mssqldb\n下面代码中报错，\n报错的代码行为\n  row = tx.QueryRow(\u0026ldquo;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) \u0026ldquo;)\n  err := row.Scan(\u0026amp;guidstr, \u0026amp;currdate)\n 错误信息为:unknown token type returned: token(45)\n 有大佬知道这是什么原因不？有解决的方法吗？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003etx, err = xjcdb.DB.Begin()\nif err != nil {\n\tlog.Println(err.Error())\n\treturn 0, \u0026quot;\u0026quot;, err\n}\ndefer tx.Rollback()\n\n   ......\n   ......\n\nrows, err = tx.Query(...)\nif err != nil {\n\tlog.Println(err.Error())\n\treturn 0, \u0026quot;\u0026quot;, err\n}\ndefer rows.Close()\n\nfor rows.Next() {\n\tloop_beltcode = \u0026quot;\u0026quot;\n\tloop_pkfeeobj = \u0026quot;\u0026quot;\n\terr = rows.Scan(\u0026amp;loop_beltcode, \u0026amp;loop_pkfeeobj)\n\tif err != nil {\n\t\tlog.Println(err.Error())\n\t\treturn 0, \u0026quot;\u0026quot;, err\n\t}\n\tguidstr = \u0026quot;\u0026quot;\n\tcurrdate = \u0026quot;\u0026quot;\n\trow = tx.QueryRow(\u0026quot;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) \u0026quot;)\n\terr := row.Scan(\u0026amp;guidstr, \u0026amp;currdate)\n\tif err != nil {\n\t\treturn 0, \u0026quot;\u0026quot;, err\n\t}\n            ......\n            ......\n  }\n  .....\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "[北京][急招] 字节火山引擎招聘GoLang后端研发工程师",
+      "Link": "https://studygolang.com/topics/16587#reply0",
+      "Description": "\u003cp\u003e职位描述：\n- 负责火山引擎经营平台方向后端的架构设计与研发，推进火山引擎产商品与销售业务相关平台能力，支撑火山引擎业务发展；\n- 参与产品需求讨论、研发方案设计及代码实现等，编写和维护经营平台相关技术文档；\n- 解决系统中的关键问题和技术难题；\n- 根据业务发展需要对相关技术做前瞻性调研工作。\u003c/p\u003e\n\n\u003cp\u003e职位要求\n- 本科及以上学历，计算机、通信等相关专业，5年以上工作经验；\n- 熟练掌握Go/Python/C/C++/Java/PHP中至少一种语言，有扎实的基本功，理解并熟悉设计模式，精通go和熟悉go-zero者优先；\n- 至少有3年以上高并发、高一致性、数据传输稳定性相关工作经验；\n- 熟悉分布式系统的设计和应用，熟悉缓存、消息、负载均衡等机制，并对常见的中间件实现原理有所了解；\n- 具备优秀的逻辑思维能力，对解决问题充满热情，善于分析和解决问题；\n- 有较强的上进心和求知欲，善于学习新事物，良好的团队精神和沟通能力；\n- 熟悉商品管理系统、交易管理系统、客户管理系统、产品管理系统、销售管理系统、项目管理系统等。\u003c/p\u003e\n\n\u003cp\u003e投递链接：(请先私聊下吧)\u003c/p\u003e\n\n\u003cp\u003e欢迎有意向的同学投递，有其他疑问可以加好友聊下，我的个人微信：Vengeful_Spirit\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "新入门的疑惑， 为什么 反射 reflect.Kind(1) 返回的 是 bool? 有没有大佬解释一下",
       "Link": "https://studygolang.com/topics/16583#reply2",
       "Description": "\u003cp\u003e新入门的疑惑， 为什么 反射 reflect.Kind(1) 返回的 是 bool? 有没有大佬解释一下\u003c/p\u003e\n",
@@ -98,13 +112,6 @@
       "Title": "一下代码有什么问题？",
       "Link": "https://studygolang.com/articles/36242#reply2",
       "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\ntype int1 int\n\ntype byte1 []byte\n\nvar (\n\ta int1  = 0\n\tb byte1 = byte1{8, 9}\n\n\tc int    = a\n\td []byte = b\n)\n\nfunc main() {\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "[北京][急招] 字节火山引擎招聘GoLang后端研发工程师",
-      "Link": "https://studygolang.com/topics/16587#reply0",
-      "Description": "\u003cp\u003e职位描述：\n- 负责火山引擎经营平台方向后端的架构设计与研发，推进火山引擎产商品与销售业务相关平台能力，支撑火山引擎业务发展；\n- 参与产品需求讨论、研发方案设计及代码实现等，编写和维护经营平台相关技术文档；\n- 解决系统中的关键问题和技术难题；\n- 根据业务发展需要对相关技术做前瞻性调研工作。\u003c/p\u003e\n\n\u003cp\u003e职位要求\n- 本科及以上学历，计算机、通信等相关专业，5年以上工作经验；\n- 熟练掌握Go/Python/C/C++/Java/PHP中至少一种语言，有扎实的基本功，理解并熟悉设计模式，精通go和熟悉go-zero者优先；\n- 至少有3年以上高并发、高一致性、数据传输稳定性相关工作经验；\n- 熟悉分布式系统的设计和应用，熟悉缓存、消息、负载均衡等机制，并对常见的中间件实现原理有所了解；\n- 具备优秀的逻辑思维能力，对解决问题充满热情，善于分析和解决问题；\n- 有较强的上进心和求知欲，善于学习新事物，良好的团队精神和沟通能力；\n- 熟悉商品管理系统、交易管理系统、客户管理系统、产品管理系统、销售管理系统、项目管理系统等。\u003c/p\u003e\n\n\u003cp\u003e投递链接：(请先私聊下吧)\u003c/p\u003e\n\n\u003cp\u003e欢迎有意向的同学投递，有其他疑问可以加好友聊下，我的个人微信：Vengeful_Spirit\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
