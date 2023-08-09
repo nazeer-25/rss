@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有没有股市交流群 - 问与答</title>
+      <link>https://www.v2ex.com/t/963814</link>
+      <description>&lt;p&gt;如题，想玩玩 a 股，但是不知道买啥，有没有大佬带带&lt;/p&gt;&#xA;</description>
+      <author>mrjnamei</author>
+      <pubDate>09 Aug 2023 09:04:27 +0000</pubDate>
+    </item>
+    <item>
       <title>BGP 分流 - 宽带症候群</title>
       <link>https://www.v2ex.com/t/963813</link>
       <description>各位大佬：&lt;br /&gt;    请救救小弟吧。&lt;br /&gt;目前网络情况如下&lt;br /&gt;1.通过 vultr 的 BGP 收了 V4 的全表：&lt;br /&gt;2.配置了配置 WireGuard ，打通了家里与 vultr 的通道&lt;br /&gt;3.安装了 bird2 ，配置文件在/etc/bird 这么写：&lt;br /&gt;router id 我的 vultrIP;&lt;br /&gt;&lt;br /&gt;include &#34;asn_cn.conf&#34;;&lt;br /&gt;&lt;br /&gt;protocol device {}&lt;br /&gt;&lt;br /&gt;protocol static {&lt;br /&gt;        ipv4 {};&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;protocol bgp vultr&lt;br /&gt;{&lt;br /&gt;        local as 我 vultr 的 AS;&lt;br /&gt;        neighbor vultr 上面邻居 IP asvultr 上面邻居 AS;&lt;br /&gt;        password &#34;BGP 密码&#34;;&lt;br /&gt;        source address 我 vultr 的 IP;&lt;br /&gt;&lt;br /&gt;  ipv4 {&lt;br /&gt;                import all;&lt;br /&gt;                export none;&lt;br /&gt;  };&lt;br /&gt;        graceful restart on;&lt;br /&gt;        multihop 2;&lt;br /&gt;&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;protocol bgp home  #这是去我家的配置&lt;br /&gt;{&lt;br /&gt;        local as 65533;&lt;br /&gt;        neighbor 10.88.88.2 as 65532;&lt;br /&gt;        source address 10.88.88.1;&lt;br /&gt;&lt;br /&gt;  ipv4 {&lt;br /&gt;                import none;&lt;br /&gt;                export filter {&lt;br /&gt;                        #if bgp_path ~ [4134, 4809, 36678, 4837, 9929, 9808, 9394, 4538, 23910] then accept; else reject;&lt;br /&gt;                        if bgp_path ~ china_asn then accept; else reject;&lt;br /&gt;                };&lt;br /&gt;  };&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;其中 asn_cn.conf 文件，通过脚本自动更新了中国区的 AS 号。&lt;br /&gt;&lt;br /&gt;ROS 里面配置 BGP：ROS---Routing---Filters 这么写了&lt;br /&gt;if (protocol bgp) {set gw pppoe-out1;accept}&lt;br /&gt;&lt;br /&gt;这样是实现了所有中国区 AS 号过滤来的 IP 通过 PPPOE-out1 出去了，但是国外的路由不能走隧道 192.168.100.2 出去，出国留学不了。&lt;br /&gt;&lt;br /&gt;请问要这么写才能实现 bgp 分流，解决出国留学问题呢。</description>
