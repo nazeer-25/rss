@@ -102,6 +102,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "奇怪的报错信息，unknown token type returned: token(45)",
+      "Link": "https://studygolang.com/topics/16592#reply0",
+      "Description": "\u003cp\u003e用的go1.16.15 使用的sqlserver2008r2数据库，github.com/denisenkom/go-mssqldb\n下面代码中报错，\n报错的代码行为\n  row = tx.QueryRow(\u0026ldquo;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) \u0026ldquo;)\n  err := row.Scan(\u0026amp;guidstr, \u0026amp;currdate)\n 错误信息为:unknown token type returned: token(45)\n 有大佬知道这是什么原因不？有解决的方法吗？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003etx, err = xjcdb.DB.Begin()\nif err != nil {\n\tlog.Println(err.Error())\n\treturn 0, \u0026quot;\u0026quot;, err\n}\ndefer tx.Rollback()\n\n   ......\n   ......\n\nrows, err = tx.Query(...)\nif err != nil {\n\tlog.Println(err.Error())\n\treturn 0, \u0026quot;\u0026quot;, err\n}\ndefer rows.Close()\n\nfor rows.Next() {\n\tloop_beltcode = \u0026quot;\u0026quot;\n\tloop_pkfeeobj = \u0026quot;\u0026quot;\n\terr = rows.Scan(\u0026amp;loop_beltcode, \u0026amp;loop_pkfeeobj)\n\tif err != nil {\n\t\tlog.Println(err.Error())\n\t\treturn 0, \u0026quot;\u0026quot;, err\n\t}\n\tguidstr = \u0026quot;\u0026quot;\n\tcurrdate = \u0026quot;\u0026quot;\n\trow = tx.QueryRow(\u0026quot;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) \u0026quot;)\n\terr := row.Scan(\u0026amp;guidstr, \u0026amp;currdate)\n\tif err != nil {\n\t\treturn 0, \u0026quot;\u0026quot;, err\n\t}\n            ......\n            ......\n  }\n  .....\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "React18+TS 通用后台管理系统解决方案落地实战",
       "Link": "https://studygolang.com/articles/36244#reply0",
       "Description": "",
@@ -112,13 +119,6 @@
       "Title": "go rpc调用 net/rpc包报错问题求解",
       "Link": "https://studygolang.com/topics/16593#reply1",
       "Description": "\u003cp\u003ego version: go1.18.3 ,项目是 mod 模式\n在写好demo 执行启动 server时，遇到报错：\n\u003cimg src=\"https://static.golangjob.cn/230809/6608bfadd9712aff5b60ff4d2bfdc698.png\" alt=\"100x\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e请大神们指点一下迷津！\n源码如下：\nserver 代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;net\u0026quot;\n\t\u0026quot;net/rpc\u0026quot;\n)\n\ntype HelloService struct {\n}\n\nfunc (s *HelloService) Hello(request string, reply *string) error {\n\t*reply = \u0026quot;hello \u0026quot; + request\n\treturn nil\n}\n\nfunc main() {\n\tlistener, _ := net.Listen(\u0026quot;tcp\u0026quot;, \u0026quot;:1234\u0026quot;)\n\n\t_ = rpc.RegisterName(\u0026quot;HelloService\u0026quot;, \u0026amp;HelloService{})\n\tfor {\n        \t conn, _ := listener.Accept() // 监听连接\n\t\t go rpc.ServeConn(conn)\n\t}\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003chr\u003e\n\n\u003cp\u003eclient 端代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;net/rpc\u0026quot;\n)\n\nfunc main() {\n\t// 1、建立链接 2、\n\tclient, err := rpc.Dial(\u0026quot;tcp\u0026quot;, \u0026quot;localhost:1234\u0026quot;)\n\tif err != nil {\n\t\tpanic(\u0026quot;connect error\u0026quot;)\n\t}\n\n\tvar reply string\n\tclient.Call(\u0026quot;HelloService.Hello\u0026quot;, \u0026quot;superman\u0026quot;, \u0026amp;reply)\n\tif err != nil {\n\t\tpanic(\u0026quot;remote call failed\u0026quot;)\n\t}\n\tfmt.Println(reply)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "奇怪的报错信息，unknown token type returned: token(45)",
-      "Link": "https://studygolang.com/topics/16592#reply0",
-      "Description": "\u003cp\u003e用的go1.16.15 使用的sqlserver2008r2数据库，github.com/denisenkom/go-mssqldb\n下面代码中报错，\n报错的代码行为\n  row = tx.QueryRow(\u0026ldquo;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) \u0026ldquo;)\n  err := row.Scan(\u0026amp;guidstr, \u0026amp;currdate)\n 错误信息为:unknown token type returned: token(45)\n 有大佬知道这是什么原因不？有解决的方法吗？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003etx, err = xjcdb.DB.Begin()\nif err != nil {\n\tlog.Println(err.Error())\n\treturn 0, \u0026quot;\u0026quot;, err\n}\ndefer tx.Rollback()\n\n   ......\n   ......\n\nrows, err = tx.Query(...)\nif err != nil {\n\tlog.Println(err.Error())\n\treturn 0, \u0026quot;\u0026quot;, err\n}\ndefer rows.Close()\n\nfor rows.Next() {\n\tloop_beltcode = \u0026quot;\u0026quot;\n\tloop_pkfeeobj = \u0026quot;\u0026quot;\n\terr = rows.Scan(\u0026amp;loop_beltcode, \u0026amp;loop_pkfeeobj)\n\tif err != nil {\n\t\tlog.Println(err.Error())\n\t\treturn 0, \u0026quot;\u0026quot;, err\n\t}\n\tguidstr = \u0026quot;\u0026quot;\n\tcurrdate = \u0026quot;\u0026quot;\n\trow = tx.QueryRow(\u0026quot;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) \u0026quot;)\n\terr := row.Scan(\u0026amp;guidstr, \u0026amp;currdate)\n\tif err != nil {\n\t\treturn 0, \u0026quot;\u0026quot;, err\n\t}\n            ......\n            ......\n  }\n  .....\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
