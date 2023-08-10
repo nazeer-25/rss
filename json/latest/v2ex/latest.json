@@ -4,6 +4,55 @@
   "Description": "",
   "Items": [
     {
+      "Title": "密码学敲门：防止对特定的网络服务进行探测和扫描 - 奇思妙想",
+      "Link": "https://www.v2ex.com/t/964006",
+      "Description": "在逛 Arch Wiki 的时候（虽然我不是 Arch 用户），看到了一个有意思的 Topic：Port Knocking\u003cbr /\u003e\u003cbr /\u003e然后文章的最底下提到了一个叫 fwknopd 的程序，它可以实现基于发送单个数据包，完成用户身份认证，并让防火墙自动开放端口\u003cbr /\u003e\u003cbr /\u003e然后很巧的是，这个程序 Ubuntu/Debian 都有打包，用 apt 安装就是了，于是乎就拿来玩一下，以下是过程：\u003cbr /\u003e\u003cbr /\u003e1 、在客户端执行：fwknop -D 11.22.33.44 -k --use-hmac --save-rc-stanza\u003cbr /\u003e-D ，即服务器地址，可以是域名，也可以是 ip\u003cbr /\u003e-k ，生成密钥\u003cbr /\u003e--use-hmac ，生成消息认证码\u003cbr /\u003e--save-rc-stanza ，保存参数到配置文件（.fwknoprc ）\u003cbr /\u003e\u003cbr /\u003e2 、在服务器上编辑/etc/fwknop/access.conf 文件\u003cbr /\u003e首先在文件靠近底部的地方有填写密钥和消息认证码的地方，把客户端刚刚生成的 BASE64 编码的密钥和 HMAC 都填写进去；然后在下面再加一行 FW_ACCESS_TIMEOUT 3600;（注意;符号不要漏掉），不加的话，默认敲门后只开门 30 秒\u003cbr /\u003e\u003cbr /\u003e3 、在服务器上编辑/etc/fwknop/fwknopd.conf 文件\u003cbr /\u003e在文件的末尾加上 PCAP_INTF ens5; 这是设置监听的网卡，如果要保护服务的网卡不是 eth0 ，则要加\u003cbr /\u003e\u003cbr /\u003e4 、配置防火墙默认丢弃数据包（这里要保护的协议/端口是 tcp/443 ）\u003cbr /\u003eiptables -I INPUT 1 -i ens5 -p tcp --dport 443 -j DROP\u003cbr /\u003eiptables -I INPUT 1 -i ens5 -p tcp --dport 443 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT\u003cbr /\u003e\u003cbr /\u003e5 、在服务器运行 fwknop 服务器（ fwknopd ），可以用 fwknopd -S 来检查服务器是否已运行\u003cbr /\u003e\u003cbr /\u003e6 、敲门前，在客户端运行 nmap -sS -p 443 11.22.33.44 ，由于没有敲门，结果应该是 filtered\u003cbr /\u003e\u003cbr /\u003e7 、敲门，在客户端运行 fwknop -n 11.22.33.44 -A tcp/443 -s\u003cbr /\u003e-n 查询.fwknoprc 文件中的主机名\u003cbr /\u003e-A 要访问的协议和端口\u003cbr /\u003e-s 告诉服务器在敲门成功的情况下为敲门数据包的来源地址开门\u003cbr /\u003e\u003cbr /\u003e敲了门之后运行在 11.22.33.44 ，tcp/443 上的服务应该可以被正常访问了，按照之前的设置，3600 秒之后需要重新敲门，所以可以用 crontab 每小时敲门\u003cbr /\u003e\u003cbr /\u003efwknop 默认使用 UDP/62201 进行敲门，可以配置为其他协议（ tcp, tcp_raw_socket, icmp ），以及其他端口，具体可以看 manpage\u003cbr /\u003e\u003cbr /\u003e这里需要特别说明，敲门时指定的参数-s 相当于告诉服务器，只要身份核验通过，就为敲门数据包的来源地址放行，方便，但可以被 MiTM 攻击，当很清楚自己的出口 ip 的时候，应该将-s 参数替换为 -a \u0026lt;自己的公网 ip\u0026gt;",
+      "Author": "testcaoy7",
+      "PubDate": "2023-08-10T02:42:13Z"
+    },
+    {
+      "Title": "pgadmin 无法启动到底是什么原因？ - 问与答",
+      "Link": "https://www.v2ex.com/t/964005",
+      "Description": "pgadmin4 启动的时候提示超时，最终弹出以下窗口信息，一直找不到是什么原因和解决办法\u003cbr /\u003e\u003cbr /\u003epgAdmin Runtime Environment\u003cbr /\u003e--------------------------------------------------------\u003cbr /\u003ePython Path: \"C:\\Program Files\\PostgreSQL\\15\\pgAdmin 4\\python\\python.exe\"\u003cbr /\u003eRuntime Config File: \"C:\\Users\\Administrator\\AppData\\Roaming\\pgadmin\\runtime_config.json\"\u003cbr /\u003epgAdmin Config File: \"C:\\Program Files\\PostgreSQL\\15\\pgAdmin 4\\web\\\u003ca target=\"_blank\" href=\"http://config.py\" rel=\"nofollow noopener\"\u003econfig.py\u003c/a\u003e\"\u003cbr /\u003eWebapp Path: \"C:\\Program Files\\PostgreSQL\\15\\pgAdmin 4\\web\\\u003ca target=\"_blank\" href=\"http://pgAdmin4.py\" rel=\"nofollow noopener\"\u003epgAdmin4.py\u003c/a\u003e\"\u003cbr /\u003epgAdmin Command: \"C:\\Program Files\\PostgreSQL\\15\\pgAdmin 4\\python\\python.exe -s C:\\Program Files\\PostgreSQL\\15\\pgAdmin 4\\web\\\u003ca target=\"_blank\" href=\"http://pgAdmin4.py\" rel=\"nofollow noopener\"\u003epgAdmin4.py\u003c/a\u003e\"\u003cbr /\u003eEnvironment: \u003cbr /\u003e  - ALLUSERSPROFILE: C:\\ProgramData\u003cbr /\u003e  - APPDATA: C:\\Users\\Administrator\\AppData\\Roaming\u003cbr /\u003e  - CHROME_CRASHPAD_PIPE_NAME: \\\\.\\pipe\\crashpad_3228_MLAQVRQSTTPNNSAU\u003cbr /\u003e  - CHROME_RESTART: NW.js|哎呀！ NW.js 崩溃了。要立即重新启动吗？|LEFT_TO_RIGHT\u003cbr /\u003e  - CLASSPATH: .;C:\\Program Files (x86)\\QuickTime\\QTSystem\\QTJava.zip\u003cbr /\u003e  - CommonProgramFiles: C:\\Program Files\\Common Files\u003cbr /\u003e  - CommonProgramFiles(x86): C:\\Program Files (x86)\\Common Files\u003cbr /\u003e  - CommonProgramW6432: C:\\Program Files\\Common Files\u003cbr /\u003e  - COMPUTERNAME: K461LX9NMEDR5RU\u003cbr /\u003e  - ComSpec: C:\\Windows\\system32\\cmd.exe\u003cbr /\u003e  - d: D:\\桌面技巧\u003cbr /\u003e  - FP_NO_HOST_CHECK: NO\u003cbr /\u003e  - HOMEDRIVE: C:\u003cbr /\u003e  - HOMEPATH: \\Users\\Administrator\u003cbr /\u003e  - LOCALAPPDATA: C:\\Users\\Administrator\\AppData\\Local\u003cbr /\u003e  - LOGONSERVER: \\\\K461LX9NMEDR5RU\u003cbr /\u003e  - NUMBER_OF_PROCESSORS: 4\u003cbr /\u003e  - OS: Windows_NT\u003cbr /\u003e  - Path: C:\\Program Files\\PostgreSQL\\15\\pgAdmin 4\\runtime;D:\\MySQL\\mysql-5.7.43-winx64\\bin;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Common Files\\microsoft shared\\TigerKin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\Users\\Administrator\\Desktop\\桌面整理玩具\\cow.bat;C:\\Program Files (x86)\\Common Files\\microsoft shared\\TigerKin\u003cbr /\u003e  - PATHEXT: .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC\u003cbr /\u003e  - PGADMIN_INT_KEY: 8f3195b0-0d52-4a14-aa21-f6329e7565d5\u003cbr /\u003e  - PGADMIN_INT_PORT: 60369\u003cbr /\u003e  - PGADMIN_SERVER_MODE: OFF\u003cbr /\u003e  - PROCESSOR_ARCHITECTURE: AMD64\u003cbr /\u003e  - PROCESSOR_IDENTIFIER: Intel64 Family 6 Model 60 Stepping 3, GenuineIntel\u003cbr /\u003e  - PROCESSOR_LEVEL: 6\u003cbr /\u003e  - PROCESSOR_REVISION: 3c03\u003cbr /\u003e  - ProgramData: C:\\ProgramData\u003cbr /\u003e  - ProgramFiles: C:\\Program Files\u003cbr /\u003e  - ProgramFiles(x86): C:\\Program Files (x86)\u003cbr /\u003e  - ProgramW6432: C:\\Program Files\u003cbr /\u003e  - PSModulePath: C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\\u003cbr /\u003e  - PUBLIC: C:\\Users\\Public\u003cbr /\u003e  - QTJAVA: C:\\Program Files (x86)\\QuickTime\\QTSystem\\QTJava.zip\u003cbr /\u003e  - SESSIONNAME: Console\u003cbr /\u003e  - SystemDrive: C:\u003cbr /\u003e  - SystemRoot: C:\\Windows\u003cbr /\u003e  - TEMP: C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\u003cbr /\u003e  - TigerKin: C:\\Program Files (x86)\\Common Files\\microsoft shared\\TigerKin\u003cbr /\u003e  - TMP: C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\u003cbr /\u003e  - USERDOMAIN: K461LX9NMEDR5RU\u003cbr /\u003e  - USERNAME: Administrator\u003cbr /\u003e  - USERPROFILE: C:\\Users\\Administrator\u003cbr /\u003e  - windir: C:\\Windows\u003cbr /\u003e  - windows_tracing_flags: 3\u003cbr /\u003e  - windows_tracing_logfile: C:\\BVTBin\\Tests\\installpackage\\csilogfile.log\u003cbr /\u003e  - __COMPAT_LAYER: RunAsAdmin\u003cbr /\u003e--------------------------------------------------------\u003cbr /\u003e\u003cbr /\u003eTotal spawn time to start the pgAdmin4 server: 0.039 Sec",
+      "Author": "huage",
+      "PubDate": "2023-08-10T02:41:32Z"
+    },
+    {
+      "Title": "想收集一些好玩的网页。求推荐（二） - 分享发现",
+      "Link": "https://www.v2ex.com/t/964004",
+      "Description": "\u003cp\u003e之前\u003ca href=\"https://www.v2ex.com/t/962021#reply38\" rel=\"nofollow\"\u003e求推荐了一些好玩（无聊时候可以玩的简单）的网页\u003c/a\u003e，做了一个 edge 的浏览器插件，审核通过上线了\u003ca href=\"https://microsoftedge.microsoft.com/addons/detail/bhkhkfipccjipeopnnfnjhiodafpcame\" rel=\"nofollow\"\u003eedge 插件市场\u003c/a\u003e。\n收录了大概 30 个比较无聊的小网页吧，可以试试。\n之后打算给这个插件做个 like/not like 的按钮。\n这里继续求类似网页推荐~\u003c/p\u003e\n",
+      "Author": "fujizx",
+      "PubDate": "2023-08-10T02:39:25Z"
+    },
+    {
+      "Title": "国内投国外可以远程办公公司，远程办公有没有搞头？ - 职场话题",
+      "Link": "https://www.v2ex.com/t/964003",
+      "Description": "\u003cp\u003e据说白菜价也有 8w ～ 9w 美刀一年？而且还不用加班，听着挺不错的样子。\u003c/p\u003e\n",
+      "Author": "bugmakerxs",
+      "PubDate": "2023-08-10T02:39:11Z"
+    },
+    {
+      "Title": "以下场景高通 NSS 加速生效的是？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/964002",
+      "Description": "最近想购入一款带 NSS 加速的 OpenWrt 路由器，有些疑问\u003cbr /\u003e1.基于 iptables 的 dns 劫持\u003cbr /\u003e2.多口多 WAN ，不处于混杂模式\u003cbr /\u003e3.单口多 WAN ，网卡为混杂模式\u003cbr /\u003e4.IP RULE/IP ROUTE\u003cbr /\u003e以上这些场景，nss 加速生效吗？",
+      "Author": "yulihao",
+      "PubDate": "2023-08-10T02:34:16Z"
+    },
+    {
+      "Title": "小程序也要备案了 - 分享发现",
+      "Link": "https://www.v2ex.com/t/964001",
+      "Description": "\u003cp\u003e备案系统将于 9 月 1 号上线。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://developers.weixin.qq.com/miniprogram/product/record_guidelines.html\" rel=\"nofollow\"\u003ehttps://developers.weixin.qq.com/miniprogram/product/record_guidelines.html\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "v2lhr",
+      "PubDate": "2023-08-10T02:33:03Z"
+    },
+    {
+      "Title": "现在还有进货 tesla a100 显卡的渠道不？ - 问与答",
+      "Link": "https://www.v2ex.com/t/964000",
+      "Description": "",
+      "Author": "poyanhu",
+      "PubDate": "2023-08-10T02:31:04Z"
+    },
+    {
       "Title": "一加手机从哪款开始副卡也支持电信 4G？ - 问与答",
       "Link": "https://www.v2ex.com/t/963999",
       "Description": "\u003cp\u003e记得一些老款的副卡只支持 2G 不管哪个运营商。而现在 2G 基本都撤网了。\u003c/p\u003e\n",
