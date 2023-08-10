@@ -11,13 +11,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Go1.21.0 发布了",
-      "Link": "https://studygolang.com/topics/16591#reply0",
-      "Description": "\u003cp\u003eGo1.21.0是2023年8月8日发布的Go语言的最新版本，它带来了一些语言和工具的变化。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003emin和max内置函数\u003c/strong\u003e：Go1.21.0增加了两个新的内置函数min和max，用来对任意可比较的有序类型进行最小值或最大值的操作。min和max函数可以接受一个或多个参数，并返回其中的最小值或最大值。如果参数是浮点数并且包含NaN，min和max函数会返回NaN。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eclear预定义函数\u003c/strong\u003e：Go1.21.0增加了一个clear预定义函数用来做切片和map的clear操作。对于切片，clear函数会将所有元素设置为零值，但保持切片的长度和容量不变。对于map，clear函数会删除所有键值对，得到一个空map。clear函数的使用示例在[这里]展示。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e改变panic(nil)语义\u003c/strong\u003e：Go1.21.0改变了panic(nil)的语义，使得recover函数在捕获到panic(nil)时不再返回nil，而是返回一个特定的错误类型PanicNilError。这样可以避免开发者误以为没有发生panic，而继续执行正常逻辑。\u003c/li\u003e\n\u003cli\u003e**新增标准库：slices、maps、slog 等 **：这几个库正式进入标准库了。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e还有更多其他特性或变化，可以通过官方文档了解：\u003ca href=\"https://go.dev/doc/go1.21\"\u003ehttps://go.dev/doc/go1.21\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e可以官方方式试用，也可以在 Go语言中文网下载最新版：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "go rpc调用 net/rpc包报错问题求解",
       "Link": "https://studygolang.com/topics/16593#reply1",
       "Description": "\u003cp\u003ego version: go1.18.3 ,项目是 mod 模式\n在写好demo 执行启动 server时，遇到报错：\n\u003cimg src=\"https://static.golangjob.cn/230809/6608bfadd9712aff5b60ff4d2bfdc698.png\" alt=\"100x\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e请大神们指点一下迷津！\n源码如下：\nserver 代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;net\u0026quot;\n\t\u0026quot;net/rpc\u0026quot;\n)\n\ntype HelloService struct {\n}\n\nfunc (s *HelloService) Hello(request string, reply *string) error {\n\t*reply = \u0026quot;hello \u0026quot; + request\n\treturn nil\n}\n\nfunc main() {\n\tlistener, _ := net.Listen(\u0026quot;tcp\u0026quot;, \u0026quot;:1234\u0026quot;)\n\n\t_ = rpc.RegisterName(\u0026quot;HelloService\u0026quot;, \u0026amp;HelloService{})\n\tfor {\n        \t conn, _ := listener.Accept() // 监听连接\n\t\t go rpc.ServeConn(conn)\n\t}\n\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003chr\u003e\n\n\u003cp\u003eclient 端代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\u0026quot;fmt\u0026quot;\n\t\u0026quot;net/rpc\u0026quot;\n)\n\nfunc main() {\n\t// 1、建立链接 2、\n\tclient, err := rpc.Dial(\u0026quot;tcp\u0026quot;, \u0026quot;localhost:1234\u0026quot;)\n\tif err != nil {\n\t\tpanic(\u0026quot;connect error\u0026quot;)\n\t}\n\n\tvar reply string\n\tclient.Call(\u0026quot;HelloService.Hello\u0026quot;, \u0026quot;superman\u0026quot;, \u0026amp;reply)\n\tif err != nil {\n\t\tpanic(\u0026quot;remote call failed\u0026quot;)\n\t}\n\tfmt.Println(reply)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -35,6 +28,13 @@
       "Title": "Fyne有点小问题想请教下各位大佬",
       "Link": "https://studygolang.com/topics/16594#reply0",
       "Description": "\u003cp\u003e我总结了下：\n1.Fyne的窗口可以设置为置顶吗？\n2.输入框Entry，能否设定输入框大小（高度，宽度可以用容器解决）和边框颜色、输入框里的文字大小和颜色\n3.中文方面，windows是解决了，没有任何问题；但是android中文问题应该怎么解决好，换了很多种字体还是不行，安卓中文乱码\u003c/p\u003e\n\n\u003cp\u003e希望能附上接近的代码作为参考\n万分感谢\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go1.21.0 发布了",
+      "Link": "https://studygolang.com/topics/16591#reply0",
+      "Description": "\u003cp\u003eGo1.21.0是2023年8月8日发布的Go语言的最新版本，它带来了一些语言和工具的变化。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003emin和max内置函数\u003c/strong\u003e：Go1.21.0增加了两个新的内置函数min和max，用来对任意可比较的有序类型进行最小值或最大值的操作。min和max函数可以接受一个或多个参数，并返回其中的最小值或最大值。如果参数是浮点数并且包含NaN，min和max函数会返回NaN。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eclear预定义函数\u003c/strong\u003e：Go1.21.0增加了一个clear预定义函数用来做切片和map的clear操作。对于切片，clear函数会将所有元素设置为零值，但保持切片的长度和容量不变。对于map，clear函数会删除所有键值对，得到一个空map。clear函数的使用示例在[这里]展示。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e改变panic(nil)语义\u003c/strong\u003e：Go1.21.0改变了panic(nil)的语义，使得recover函数在捕获到panic(nil)时不再返回nil，而是返回一个特定的错误类型PanicNilError。这样可以避免开发者误以为没有发生panic，而继续执行正常逻辑。\u003c/li\u003e\n\u003cli\u003e**新增标准库：slices、maps、slog 等 **：这几个库正式进入标准库了。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e还有更多其他特性或变化，可以通过官方文档了解：\u003ca href=\"https://go.dev/doc/go1.21\"\u003ehttps://go.dev/doc/go1.21\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e可以官方方式试用，也可以在 Go语言中文网下载最新版：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -60,16 +60,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "跨境盒子，让你的跨境电商之路更加顺畅！",
-      "Link": "https://studygolang.com/topics/16588#reply1",
-      "Description": "\u003cp\u003e如果你是一位跨境电商，你一定会遇到这样的问题：如何让自己的商品更好地被海外买家发现？如何快速便捷地将商品运输至国外？跨境盒子，这款专为跨境电商打造的导航工具，或许能帮你解决这些问题。\u003c/p\u003e\n\n\u003cp\u003e一、商品推广\u003c/p\u003e\n\n\u003cp\u003e跨境盒子提供了一系列的推广工具，包括一键生成海外购物车、广告优化、搜索排名提升等等。通过这些工具，你可以更加精准地将自己的商品推荐给海外买家，提高曝光率，增加销售量。\u003c/p\u003e\n\n\u003cp\u003e二、物流运输\u003c/p\u003e\n\n\u003cp\u003e跨境盒子平台上集合了各种跨境物流，为你提供优质的物流服务资源，你可以在跨境盒子上上找到适合自己的、性价比高的物流品牌，能够更加方便快捷地将商品从国内发往海外。\u003c/p\u003e\n\n\u003cp\u003e三、数据分析\u003c/p\u003e\n\n\u003cp\u003e跨境盒子提供了丰富的数据分析平台，更加全面的帮助你了解商品的销售情况、海外市场的趋势等等，为你的经营决策提供参考。同时，跨境盒子中的分析平台可以帮助你分析竞争对手的销售情况，提供优化建议，帮助你更好地应对市场变化。\u003c/p\u003e\n\n\u003cp\u003e结尾：跨境盒子，是一款专为跨境电商打造的导航工具，它为你提供了全方位的服务，帮助你更加便捷、高效地经营跨境电商业务。如果你想要让自己的跨境电商之路更加顺畅，不妨试试跨境盒子吧。（\u003ca href=\"https://box.adsfancy.com/）\"\u003ehttps://box.adsfancy.com/）\u003c/a\u003e\u003c/p\u003e\n",
+      "Title": "招聘了招聘了招聘了  月发4-6W",
+      "Link": "https://studygolang.com/topics/16590#reply3",
+      "Description": "\u003cp\u003e日本棋牌游戏公司，重要的事情先说，是正规游戏公司，不是什么乱七八糟的行业\u003c/p\u003e\n\n\u003cp\u003egolang工程师（1名）\u003c/p\u003e\n\n\u003cp\u003e1、计算机、软件、电子信息等相关专业学历\u003c/p\u003e\n\n\u003cp\u003e2、熟悉Golang编程语言，1年或1年以上服务的开发经验\u003c/p\u003e\n\n\u003cp\u003e3、扎实的计算机基础知识。包括和不限计算机网络、操作系统、常用的数据结构、算法等\u003c/p\u003e\n\n\u003cp\u003e4、熟练掌握至少一种关系型数据库和NoSQL数据库\u003c/p\u003e\n\n\u003cp\u003e5、熟悉HTTP协议，有基于RPC或REST风格的API服务开发经验\u003c/p\u003e\n\n\u003cp\u003e6、熟练Linux操作系统，熟练使用常用Linux常用命令\u003c/p\u003e\n\n\u003cp\u003e岗位要求：\n至少专升本\n棋牌经验一年以上\n年龄38岁以下\u003c/p\u003e\n\n\u003cp\u003e工作地:\n日本大阪\u003c/p\u003e\n\n\u003cp\u003e工作待遇：\n办理工签   月发4~6万人民币\u003cbr\u003e\n会给咱们交医保，社保\u003cbr\u003e\n每天100块钱人民币的饭补\u003cbr\u003e\n提供单身公寓    也可以携带家属\u003cbr\u003e\n每年有一次探亲假，每个月都有团建活动\u003c/p\u003e\n\n\u003cp\u003e补充：\n岗位是双向选择，非诚勿扰\n吹水、引战、带节奏请绕道\u003c/p\u003e\n\n\u003cp\u003e联系方式：\n手机：15618332596（微信同号）\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "招聘了招聘了招聘了  月发4-6W",
-      "Link": "https://studygolang.com/topics/16590#reply3",
-      "Description": "\u003cp\u003e日本棋牌游戏公司，重要的事情先说，是正规游戏公司，不是什么乱七八糟的行业\u003c/p\u003e\n\n\u003cp\u003egolang工程师（1名）\u003c/p\u003e\n\n\u003cp\u003e1、计算机、软件、电子信息等相关专业学历\u003c/p\u003e\n\n\u003cp\u003e2、熟悉Golang编程语言，1年或1年以上服务的开发经验\u003c/p\u003e\n\n\u003cp\u003e3、扎实的计算机基础知识。包括和不限计算机网络、操作系统、常用的数据结构、算法等\u003c/p\u003e\n\n\u003cp\u003e4、熟练掌握至少一种关系型数据库和NoSQL数据库\u003c/p\u003e\n\n\u003cp\u003e5、熟悉HTTP协议，有基于RPC或REST风格的API服务开发经验\u003c/p\u003e\n\n\u003cp\u003e6、熟练Linux操作系统，熟练使用常用Linux常用命令\u003c/p\u003e\n\n\u003cp\u003e岗位要求：\n至少专升本\n棋牌经验一年以上\n年龄38岁以下\u003c/p\u003e\n\n\u003cp\u003e工作地:\n日本大阪\u003c/p\u003e\n\n\u003cp\u003e工作待遇：\n办理工签   月发4~6万人民币\u003cbr\u003e\n会给咱们交医保，社保\u003cbr\u003e\n每天100块钱人民币的饭补\u003cbr\u003e\n提供单身公寓    也可以携带家属\u003cbr\u003e\n每年有一次探亲假，每个月都有团建活动\u003c/p\u003e\n\n\u003cp\u003e补充：\n岗位是双向选择，非诚勿扰\n吹水、引战、带节奏请绕道\u003c/p\u003e\n\n\u003cp\u003e联系方式：\n手机：15618332596（微信同号）\u003c/p\u003e\n",
+      "Title": "跨境盒子，让你的跨境电商之路更加顺畅！",
+      "Link": "https://studygolang.com/topics/16588#reply1",
+      "Description": "\u003cp\u003e如果你是一位跨境电商，你一定会遇到这样的问题：如何让自己的商品更好地被海外买家发现？如何快速便捷地将商品运输至国外？跨境盒子，这款专为跨境电商打造的导航工具，或许能帮你解决这些问题。\u003c/p\u003e\n\n\u003cp\u003e一、商品推广\u003c/p\u003e\n\n\u003cp\u003e跨境盒子提供了一系列的推广工具，包括一键生成海外购物车、广告优化、搜索排名提升等等。通过这些工具，你可以更加精准地将自己的商品推荐给海外买家，提高曝光率，增加销售量。\u003c/p\u003e\n\n\u003cp\u003e二、物流运输\u003c/p\u003e\n\n\u003cp\u003e跨境盒子平台上集合了各种跨境物流，为你提供优质的物流服务资源，你可以在跨境盒子上上找到适合自己的、性价比高的物流品牌，能够更加方便快捷地将商品从国内发往海外。\u003c/p\u003e\n\n\u003cp\u003e三、数据分析\u003c/p\u003e\n\n\u003cp\u003e跨境盒子提供了丰富的数据分析平台，更加全面的帮助你了解商品的销售情况、海外市场的趋势等等，为你的经营决策提供参考。同时，跨境盒子中的分析平台可以帮助你分析竞争对手的销售情况，提供优化建议，帮助你更好地应对市场变化。\u003c/p\u003e\n\n\u003cp\u003e结尾：跨境盒子，是一款专为跨境电商打造的导航工具，它为你提供了全方位的服务，帮助你更加便捷、高效地经营跨境电商业务。如果你想要让自己的跨境电商之路更加顺畅，不妨试试跨境盒子吧。（\u003ca href=\"https://box.adsfancy.com/）\"\u003ehttps://box.adsfancy.com/）\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
