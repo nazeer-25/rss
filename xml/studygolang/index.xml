@@ -23,19 +23,23 @@
       <description>&lt;p&gt;我总结了下：&#xA;1.Fyne的窗口可以设置为置顶吗？&#xA;2.输入框Entry，能否设定输入框大小（高度，宽度可以用容器解决）和边框颜色、输入框里的文字大小和颜色&#xA;3.中文方面，windows是解决了，没有任何问题；但是android中文问题应该怎么解决好，换了很多种字体还是不行，安卓中文乱码&lt;/p&gt;&#xA;&#xA;&lt;p&gt;希望能附上接近的代码作为参考&#xA;万分感谢&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>Go1.21.0 发布了</title>
-      <link>https://studygolang.com/topics/16591#reply0</link>
-      <description>&lt;p&gt;Go1.21.0是2023年8月8日发布的Go语言的最新版本，它带来了一些语言和工具的变化。&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;min和max内置函数&lt;/strong&gt;：Go1.21.0增加了两个新的内置函数min和max，用来对任意可比较的有序类型进行最小值或最大值的操作。min和max函数可以接受一个或多个参数，并返回其中的最小值或最大值。如果参数是浮点数并且包含NaN，min和max函数会返回NaN。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;clear预定义函数&lt;/strong&gt;：Go1.21.0增加了一个clear预定义函数用来做切片和map的clear操作。对于切片，clear函数会将所有元素设置为零值，但保持切片的长度和容量不变。对于map，clear函数会删除所有键值对，得到一个空map。clear函数的使用示例在[这里]展示。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;改变panic(nil)语义&lt;/strong&gt;：Go1.21.0改变了panic(nil)的语义，使得recover函数在捕获到panic(nil)时不再返回nil，而是返回一个特定的错误类型PanicNilError。这样可以避免开发者误以为没有发生panic，而继续执行正常逻辑。&lt;/li&gt;&#xA;&lt;li&gt;**新增标准库：slices、maps、slog 等 **：这几个库正式进入标准库了。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;还有更多其他特性或变化，可以通过官方文档了解：&lt;a href=&#34;https://go.dev/doc/go1.21&#34;&gt;https://go.dev/doc/go1.21&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可以官方方式试用，也可以在 Go语言中文网下载最新版：&lt;a href=&#34;https://studygolang.com/dl&#34;&gt;https://studygolang.com/dl&lt;/a&gt;。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>在这个平台上，你有机会获得远程项目👩🏻‍💻，实现地理套利，成为数字游民。</title>
       <link>https://studygolang.com/topics/16595#reply0</link>
       <description>&lt;p&gt;二十年前，Web2 底层技术的变革将人与互联网的距离无限拉近。二十年后，Web3 以区块链技术为基石将打破互联网寡头壁垒、将价值归还个人。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Masutaa DAO 是一个 Web3 DAO 项目：我们致力于成为最大的互联网互助社区平台，帮助全球科技人才跨区域流动。如果你想要&lt;strong&gt;更多的 IT 人脉，获得远程项目或单纯想要吐槽职场生活，看其他人的个人经历与行业发展观念&lt;/strong&gt;, 那么这里会是你最佳的去处！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;目前我们的项目正在积极共建中&lt;em&gt;期待每一位互联网人的共建共享！ 我们支持：提出宝贵建议，共享内推资源，分享生活趣事&lt;/em&gt; 这是我们的社群，欢迎大家加入：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230810/d92201dcfb0b00002acb425274ea7b7f.jpg&#34; alt=&#34;微信图片_20230712115952.jpg&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>奇怪的报错信息，unknown token type returned: token(45)</title>
-      <link>https://studygolang.com/topics/16592#reply0</link>
-      <description>&lt;p&gt;用的go1.16.15 使用的sqlserver2008r2数据库，github.com/denisenkom/go-mssqldb&#xA;下面代码中报错，&#xA;报错的代码行为&#xA;  row = tx.QueryRow(&amp;ldquo;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) &amp;ldquo;)&#xA;  err := row.Scan(&amp;amp;guidstr, &amp;amp;currdate)&#xA; 错误信息为:unknown token type returned: token(45)&#xA; 有大佬知道这是什么原因不？有解决的方法吗？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;tx, err = xjcdb.DB.Begin()&#xA;if err != nil {&#xA;&#x9;log.Println(err.Error())&#xA;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;}&#xA;defer tx.Rollback()&#xA;&#xA;   ......&#xA;   ......&#xA;&#xA;rows, err = tx.Query(...)&#xA;if err != nil {&#xA;&#x9;log.Println(err.Error())&#xA;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;}&#xA;defer rows.Close()&#xA;&#xA;for rows.Next() {&#xA;&#x9;loop_beltcode = &amp;quot;&amp;quot;&#xA;&#x9;loop_pkfeeobj = &amp;quot;&amp;quot;&#xA;&#x9;err = rows.Scan(&amp;amp;loop_beltcode, &amp;amp;loop_pkfeeobj)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Println(err.Error())&#xA;&#x9;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;&#x9;}&#xA;&#x9;guidstr = &amp;quot;&amp;quot;&#xA;&#x9;currdate = &amp;quot;&amp;quot;&#xA;&#x9;row = tx.QueryRow(&amp;quot;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) &amp;quot;)&#xA;&#x9;err := row.Scan(&amp;amp;guidstr, &amp;amp;currdate)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;&#x9;}&#xA;            ......&#xA;            ......&#xA;  }&#xA;  .....&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <title>Go1.21.0 发布了</title>
+      <link>https://studygolang.com/topics/16591#reply0</link>
+      <description>&lt;p&gt;Go1.21.0是2023年8月8日发布的Go语言的最新版本，它带来了一些语言和工具的变化。&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;min和max内置函数&lt;/strong&gt;：Go1.21.0增加了两个新的内置函数min和max，用来对任意可比较的有序类型进行最小值或最大值的操作。min和max函数可以接受一个或多个参数，并返回其中的最小值或最大值。如果参数是浮点数并且包含NaN，min和max函数会返回NaN。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;clear预定义函数&lt;/strong&gt;：Go1.21.0增加了一个clear预定义函数用来做切片和map的clear操作。对于切片，clear函数会将所有元素设置为零值，但保持切片的长度和容量不变。对于map，clear函数会删除所有键值对，得到一个空map。clear函数的使用示例在[这里]展示。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;改变panic(nil)语义&lt;/strong&gt;：Go1.21.0改变了panic(nil)的语义，使得recover函数在捕获到panic(nil)时不再返回nil，而是返回一个特定的错误类型PanicNilError。这样可以避免开发者误以为没有发生panic，而继续执行正常逻辑。&lt;/li&gt;&#xA;&lt;li&gt;**新增标准库：slices、maps、slog 等 **：这几个库正式进入标准库了。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;还有更多其他特性或变化，可以通过官方文档了解：&lt;a href=&#34;https://go.dev/doc/go1.21&#34;&gt;https://go.dev/doc/go1.21&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可以官方方式试用，也可以在 Go语言中文网下载最新版：&lt;a href=&#34;https://studygolang.com/dl&#34;&gt;https://studygolang.com/dl&lt;/a&gt;。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>React18+TS 通用后台管理系统解决方案落地实战</title>
+      <link>https://studygolang.com/articles/36244#reply0</link>
+    </item>
+    <item>
+      <title>go 项目体系</title>
+      <link>https://studygolang.com/articles/36243#reply0</link>
+      <description>&lt;p&gt;项目地址 github.com/flyerxp&lt;/p&gt;&#xA;&#xA;&lt;p&gt;github.com/flyerxp/lib 缓存，数据库，消息中间件，配置中心，日志&lt;/p&gt;&#xA;&#xA;&lt;p&gt;github.com/flyerxp/webrpclib  web和rpc 的lib&lt;/p&gt;&#xA;&#xA;&lt;p&gt;github.com/flyerxp/rpcquick  使用字节跳动的kitex 快速建立rpc&lt;/p&gt;&#xA;&#xA;&lt;p&gt;github.com/flyerxp/webquick 使用字节跳动的hertz 快速创建web&lt;/p&gt;&#xA;&#xA;&lt;p&gt;github.com/flyerxp/cronconsumer command 和 consumer&lt;/p&gt;&#xA;&#xA;&lt;p&gt;基本已经全了。可以快速建新项目了。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go语言爱好者周刊：第 172 期</title>
@@ -51,6 +55,11 @@
       <title>跨境盒子，让你的跨境电商之路更加顺畅！</title>
       <link>https://studygolang.com/topics/16588#reply1</link>
       <description>&lt;p&gt;如果你是一位跨境电商，你一定会遇到这样的问题：如何让自己的商品更好地被海外买家发现？如何快速便捷地将商品运输至国外？跨境盒子，这款专为跨境电商打造的导航工具，或许能帮你解决这些问题。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;一、商品推广&lt;/p&gt;&#xA;&#xA;&lt;p&gt;跨境盒子提供了一系列的推广工具，包括一键生成海外购物车、广告优化、搜索排名提升等等。通过这些工具，你可以更加精准地将自己的商品推荐给海外买家，提高曝光率，增加销售量。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;二、物流运输&lt;/p&gt;&#xA;&#xA;&lt;p&gt;跨境盒子平台上集合了各种跨境物流，为你提供优质的物流服务资源，你可以在跨境盒子上上找到适合自己的、性价比高的物流品牌，能够更加方便快捷地将商品从国内发往海外。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;三、数据分析&lt;/p&gt;&#xA;&#xA;&lt;p&gt;跨境盒子提供了丰富的数据分析平台，更加全面的帮助你了解商品的销售情况、海外市场的趋势等等，为你的经营决策提供参考。同时，跨境盒子中的分析平台可以帮助你分析竞争对手的销售情况，提供优化建议，帮助你更好地应对市场变化。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;结尾：跨境盒子，是一款专为跨境电商打造的导航工具，它为你提供了全方位的服务，帮助你更加便捷、高效地经营跨境电商业务。如果你想要让自己的跨境电商之路更加顺畅，不妨试试跨境盒子吧。（&lt;a href=&#34;https://box.adsfancy.com/）&#34;&gt;https://box.adsfancy.com/）&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>奇怪的报错信息，unknown token type returned: token(45)</title>
+      <link>https://studygolang.com/topics/16592#reply0</link>
+      <description>&lt;p&gt;用的go1.16.15 使用的sqlserver2008r2数据库，github.com/denisenkom/go-mssqldb&#xA;下面代码中报错，&#xA;报错的代码行为&#xA;  row = tx.QueryRow(&amp;ldquo;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) &amp;ldquo;)&#xA;  err := row.Scan(&amp;amp;guidstr, &amp;amp;currdate)&#xA; 错误信息为:unknown token type returned: token(45)&#xA; 有大佬知道这是什么原因不？有解决的方法吗？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;tx, err = xjcdb.DB.Begin()&#xA;if err != nil {&#xA;&#x9;log.Println(err.Error())&#xA;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;}&#xA;defer tx.Rollback()&#xA;&#xA;   ......&#xA;   ......&#xA;&#xA;rows, err = tx.Query(...)&#xA;if err != nil {&#xA;&#x9;log.Println(err.Error())&#xA;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;}&#xA;defer rows.Close()&#xA;&#xA;for rows.Next() {&#xA;&#x9;loop_beltcode = &amp;quot;&amp;quot;&#xA;&#x9;loop_pkfeeobj = &amp;quot;&amp;quot;&#xA;&#x9;err = rows.Scan(&amp;amp;loop_beltcode, &amp;amp;loop_pkfeeobj)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Println(err.Error())&#xA;&#x9;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;&#x9;}&#xA;&#x9;guidstr = &amp;quot;&amp;quot;&#xA;&#x9;currdate = &amp;quot;&amp;quot;&#xA;&#x9;row = tx.QueryRow(&amp;quot;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) &amp;quot;)&#xA;&#x9;err := row.Scan(&amp;amp;guidstr, &amp;amp;currdate)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;&#x9;}&#xA;            ......&#xA;            ......&#xA;  }&#xA;  .....&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>Git常用命令汇总篇（附使用详细介绍）</title>
@@ -70,15 +79,6 @@
     <item>
       <title>慕课大数据工程师2023版完结[电子书+源码+视频]</title>
       <link>https://studygolang.com/articles/36245#reply0</link>
-    </item>
-    <item>
-      <title>React18+TS 通用后台管理系统解决方案落地实战</title>
-      <link>https://studygolang.com/articles/36244#reply0</link>
-    </item>
-    <item>
-      <title>go 项目体系</title>
-      <link>https://studygolang.com/articles/36243#reply0</link>
-      <description>&lt;p&gt;项目地址 github.com/flyerxp&lt;/p&gt;&#xA;&#xA;&lt;p&gt;github.com/flyerxp/lib 缓存，数据库，消息中间件，配置中心，日志&lt;/p&gt;&#xA;&#xA;&lt;p&gt;github.com/flyerxp/webrpclib  web和rpc 的lib&lt;/p&gt;&#xA;&#xA;&lt;p&gt;github.com/flyerxp/rpcquick  使用字节跳动的kitex 快速建立rpc&lt;/p&gt;&#xA;&#xA;&lt;p&gt;github.com/flyerxp/webquick 使用字节跳动的hertz 快速创建web&lt;/p&gt;&#xA;&#xA;&lt;p&gt;github.com/flyerxp/cronconsumer command 和 consumer&lt;/p&gt;&#xA;&#xA;&lt;p&gt;基本已经全了。可以快速建新项目了。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>你的舞台你的精彩给你更多机会</title>
