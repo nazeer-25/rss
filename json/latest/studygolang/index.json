@@ -53,6 +53,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "Go1.21.0 发布了",
+      "Link": "https://studygolang.com/topics/16591#reply0",
+      "Description": "\u003cp\u003eGo1.21.0是2023年8月8日发布的Go语言的最新版本，它带来了一些语言和工具的变化。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003emin和max内置函数\u003c/strong\u003e：Go1.21.0增加了两个新的内置函数min和max，用来对任意可比较的有序类型进行最小值或最大值的操作。min和max函数可以接受一个或多个参数，并返回其中的最小值或最大值。如果参数是浮点数并且包含NaN，min和max函数会返回NaN。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eclear预定义函数\u003c/strong\u003e：Go1.21.0增加了一个clear预定义函数用来做切片和map的clear操作。对于切片，clear函数会将所有元素设置为零值，但保持切片的长度和容量不变。对于map，clear函数会删除所有键值对，得到一个空map。clear函数的使用示例在[这里]展示。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e改变panic(nil)语义\u003c/strong\u003e：Go1.21.0改变了panic(nil)的语义，使得recover函数在捕获到panic(nil)时不再返回nil，而是返回一个特定的错误类型PanicNilError。这样可以避免开发者误以为没有发生panic，而继续执行正常逻辑。\u003c/li\u003e\n\u003cli\u003e**新增标准库：slices、maps、slog 等 **：这几个库正式进入标准库了。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e还有更多其他特性或变化，可以通过官方文档了解：\u003ca href=\"https://go.dev/doc/go1.21\"\u003ehttps://go.dev/doc/go1.21\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e可以官方方式试用，也可以在 Go语言中文网下载最新版：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "Go 1.21.0 发布",
       "Link": "https://studygolang.com/articles/36246#reply0",
       "Description": "\u003cp\u003e今天,Go 团队非常兴奋地发布了 Go 1.21 版本,你可以通过访问下载页面获取它。\nGo 1.21 包括了大量新的特性和改进。这里列出了一些显著的变化;要获取完整列表,请参阅发布说明。\u003c/p\u003e\n\n\u003ch3\u003e工具改进\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e我们在 1.20 中宣布预览的 PROFILE GUIDED OPTIMIZATION (PGO) 特性现在正式可用了!如果主包目录中存在一个名为 default.pgo 的文件,go 命令将使用它来启用 PGO 构建。参见 PGO 文档以获取更多详细信息。我们对大量 Go 程序测量了 PGO 的影响,性能提升在 2-7%之间。\u003c/li\u003e\n\u003cli\u003ego 工具现在支持向后和向前的语言兼容性。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003e语言变化\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e新增内置函数:min、max 和 clear。\u003c/li\u003e\n\u003cli\u003e对泛型函数的类型推导进行了几项改进。规范中类型推导的描述已经扩展和澄清。\u003c/li\u003e\n\u003cli\u003e在未来的 Go 版本中,我们计划解决 Go 编程中最常见的陷阱之一:循环变量捕获。Go 1.21 带有该特性的预览,你可以使用环境变量在代码中启用它。参见 LoopvarExperiment wiki 页面以获取更多详细信息。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003e标准库新增\u003c/h3\u003e\n\n\u003cul\u003e\n\u003cli\u003e新增 log/slog 包,用于结构化日志记录。\u003c/li\u003e\n\u003cli\u003e新增 slices 包,用于对任意元素类型的 slice 执行常见操作。这包括通常比 sort 包更快更符合人体工程学的排序函数。\n-新增 maps 包,用于对任意键和元素类型的 map 执行常见操作。\n-新增 cmp 包,提供比较有序值的新实用程序。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003e性能改进\u003c/h3\u003e\n\n\u003cp\u003e除了启用 PGO 时的性能改进:\n- Go 编译器本身已经使用 PGO 重新构建了 1.21 版本,因此它根据主机架构的不同,构建 Go 程序的速度提升了 2-4%。\n- 由于垃圾回收器的调优,一些应用程序的尾延迟可能会减少高达 40%。\n- 使用 runtime/trace 收集跟踪信息现在在 amd64 和 arm64 上的 CPU 开销大大降低。\u003c/p\u003e\n\n\u003ch3\u003e新增对 WASI 的支持\u003c/h3\u003e\n\n\u003cp\u003eGo 1.21 增加了对 WebAssembly 系统接口 (WASI) 预览 1 (GOOS=wasip1,GOARCH=wasm)的实验性支持。\n为方便编写更通用的 WebAssembly (Wasm) 代码,编译器还支持一个新的指令来从 Wasm 主机导入函数:go:wasmimport。\u003c/p\u003e\n",
@@ -63,13 +70,6 @@
       "Title": "慕课大数据工程师2023版完结[电子书+源码+视频]",
       "Link": "https://studygolang.com/articles/36245#reply0",
       "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Go1.21.0 发布了",
-      "Link": "https://studygolang.com/topics/16591#reply0",
-      "Description": "\u003cp\u003eGo1.21.0是2023年8月8日发布的Go语言的最新版本，它带来了一些语言和工具的变化。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003emin和max内置函数\u003c/strong\u003e：Go1.21.0增加了两个新的内置函数min和max，用来对任意可比较的有序类型进行最小值或最大值的操作。min和max函数可以接受一个或多个参数，并返回其中的最小值或最大值。如果参数是浮点数并且包含NaN，min和max函数会返回NaN。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eclear预定义函数\u003c/strong\u003e：Go1.21.0增加了一个clear预定义函数用来做切片和map的clear操作。对于切片，clear函数会将所有元素设置为零值，但保持切片的长度和容量不变。对于map，clear函数会删除所有键值对，得到一个空map。clear函数的使用示例在[这里]展示。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e改变panic(nil)语义\u003c/strong\u003e：Go1.21.0改变了panic(nil)的语义，使得recover函数在捕获到panic(nil)时不再返回nil，而是返回一个特定的错误类型PanicNilError。这样可以避免开发者误以为没有发生panic，而继续执行正常逻辑。\u003c/li\u003e\n\u003cli\u003e**新增标准库：slices、maps、slog 等 **：这几个库正式进入标准库了。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e还有更多其他特性或变化，可以通过官方文档了解：\u003ca href=\"https://go.dev/doc/go1.21\"\u003ehttps://go.dev/doc/go1.21\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e可以官方方式试用，也可以在 Go语言中文网下载最新版：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
