@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "问一个数据双写与性能优化的问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/964418",
+      "Description": "背景:\u003cbr /\u003e\u003cbr /\u003e  项目的数据库是一主一从。但是从库不能给应用使用，是数据库 team 备份容灾用的。这一点挺奇怪的，也不能申请多的从库。所以应用只能连接一个主库。\u003cbr /\u003e  \u003cbr /\u003e解决方法:\u003cbr /\u003e\u003cbr /\u003e  为了减轻数据库的压力，我们将数据库的所有业务表都冗余到了 ES （ ES 是集群），哪怕是走主键查询，也走 ES 。我最开始不建议这样子做，但是因为前面的背景，我也没有什么好的 idea\u003cbr /\u003e  \u003cbr /\u003e  为了解决写的问题。我们用了 2 套解决方案：\u003cbr /\u003e  \u003cbr /\u003e1. 代码双写\u003cbr /\u003e  在应用代码里面进行双写，一个事务内：先写 db -\u0026gt; 后写 es(包括 flush)。flush 是为了让其他端能及时读取到，虽然这样做比较消耗性能。目前以我们的体量跑起来没什么问题\u003cbr /\u003e    \u003cbr /\u003e2. flink CDC\u003cbr /\u003e  读取数据库的 binlog ，然后 flink CDC 及时同步到 ES （包含所有业务表）。这个方案解决的核心问题是我们有连表查询的需求，在 ES 里面做了 2 张业务大宽表。附带方便：\u003cbr /\u003e     数据初始化数据到 ES ；\u003cbr /\u003e     方便手动刷数据库数据后就自动同步到 ES ；\u003cbr /\u003e     如果代码里面对双写有遗漏，也可以及时弥补数据的不一致\u003cbr /\u003e   \u003cbr /\u003e  注意我们是 2 套方案都用了\u003cbr /\u003e\u003cbr /\u003e我的疑惑：\u003cbr /\u003e  1. 双写采用了 2 套方案。flush 会立刻往 ES 所有节点写，这样做是不是非常不合适？而且已经有代码双写(方案 1)的前提下，flink CDC 除了解决宽表的问题，其他的单表同步是不是多余的，浪费性能？\u003cbr /\u003e  2. 在目前的条件下（数据库只能一主供应用使用），这样的解决方案是否是最优的？或者说有其他更好的方案么？\u003cbr /\u003e  \u003cbr /\u003e  PS: 我们的项目是 ToB 的，整体没有电商流量那么大",
+      "Author": "piecezzz",
+      "PubDate": "2023-08-11T04:55:52Z"
+    },
+    {
+      "Title": "流氓微信在安卓 13 后台运行--破案 - Android",
+      "Link": "https://www.v2ex.com/t/964417",
+      "Description": "# 流氓微信在安卓 13 后台运行--破案\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e在上一篇帖子发了个问题，[链接]( \u003ca target=\"_blank\" href=\"https://www.v2ex.com/t/964295)，于是在网友的解答和自己的研究下，终于搞清楚了问题所在！\" rel=\"nofollow noopener\"\u003ehttps://www.v2ex.com/t/964295)，于是在网友的解答和自己的研究下，终于搞清楚了问题所在！\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e## 结论：\u003cbr /\u003e\u003cbr /\u003e别给微信开在层应用显示这个权限，开了就会在后台流氓运行，现在关掉后，按 home 键回到主页，一会就被停用，查看后台服务也没有了，但是推送可以收到，走的是 fcm ！！！\u003cbr /\u003e\u003cbr /\u003e```",
+      "Author": "dengjunwen",
+      "PubDate": "2023-08-11T04:54:30Z"
+    },
+    {
+      "Title": "请教 IOS 订阅的 ChatGPT 能否实现 API 调用？ - 问与答",
+      "Link": "https://www.v2ex.com/t/964415",
+      "Description": "\u003cp\u003e被自己蠢到，才知道调 IOS 订阅用不了 API ，我还纳闷 GPT-4 API 开放了怎么没我份。\u003c/p\u003e\n\u003cp\u003e之前 ChatGPT 绑卡用的 Depay ，后来被风控了就注销掉帐号不敢用了，看了些 V 友开通海外信用卡的分享感觉离实现的能力还比较远，请问大家有什么好的办法吗？\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"chatgpt\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/WESbe8x.jpg\" title=\"chatgpt subscription\"/\u003e\u003c/p\u003e\n",
+      "Author": "JackieWuu",
+      "PubDate": "2023-08-11T04:48:32Z"
+    },
+    {
       "Title": "golang/mobile 真好用 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/964414",
       "Description": "iOS Swift 生态里找不到靠谱的月亮月相 + 月亮升落的轮子。\u003cbr /\u003e\u003cbr /\u003e最后找来照去是找了个 go 语言的 repo （ \u003ca target=\"_blank\" href=\"https://github.com/Starainrt/astro\" rel=\"nofollow noopener\"\u003ehttps://github.com/Starainrt/astro\u003c/a\u003e ）\u003cbr /\u003e\u003cbr /\u003e通过 golang/mobile 转成 iOS xcframework ，整个 xcframework 基础体积消耗 10M+，但是编译出来的影响没这么大。\u003cbr /\u003e\u003cbr /\u003e非常满意，奔跑着歌颂。",
