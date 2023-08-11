@@ -4,6 +4,19 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>顽狗音乐 这个用的是哪个开源 API 哪位大佬知道吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/964421</link>
+      <author>bg7759</author>
+      <pubDate>11 Aug 2023 04:59:53 +0000</pubDate>
+    </item>
+    <item>
+      <title>准备从 0 到 1 开发一个出海产品，欢迎围观 - 程序员</title>
+      <link>https://www.v2ex.com/t/964420</link>
+      <description>大家好，我是 liukaka 一名三年经验的后端程序员。&lt;br /&gt;&lt;br /&gt;准备下周开始，参加生财有术的英文工具站活动，试着从 0 到 1 开发一款出海产品&lt;br /&gt;&lt;br /&gt;欢迎添加我微信 liukaka136 一起围观交流。&lt;br /&gt;&lt;br /&gt;同时，我也建了个程序员副业交流群，欢迎交流</description>
+      <author>liukakaka</author>
+      <pubDate>11 Aug 2023 04:59:30 +0000</pubDate>
+    </item>
+    <item>
       <title>问一个数据双写与性能优化的问题 - 程序员</title>
       <link>https://www.v2ex.com/t/964418</link>
       <description>背景:&lt;br /&gt;&lt;br /&gt;  项目的数据库是一主一从。但是从库不能给应用使用，是数据库 team 备份容灾用的。这一点挺奇怪的，也不能申请多的从库。所以应用只能连接一个主库。&lt;br /&gt;  &lt;br /&gt;解决方法:&lt;br /&gt;&lt;br /&gt;  为了减轻数据库的压力，我们将数据库的所有业务表都冗余到了 ES （ ES 是集群），哪怕是走主键查询，也走 ES 。我最开始不建议这样子做，但是因为前面的背景，我也没有什么好的 idea&lt;br /&gt;  &lt;br /&gt;  为了解决写的问题。我们用了 2 套解决方案：&lt;br /&gt;  &lt;br /&gt;1. 代码双写&lt;br /&gt;  在应用代码里面进行双写，一个事务内：先写 db -&amp;gt; 后写 es(包括 flush)。flush 是为了让其他端能及时读取到，虽然这样做比较消耗性能。目前以我们的体量跑起来没什么问题&lt;br /&gt;    &lt;br /&gt;2. flink CDC&lt;br /&gt;  读取数据库的 binlog ，然后 flink CDC 及时同步到 ES （包含所有业务表）。这个方案解决的核心问题是我们有连表查询的需求，在 ES 里面做了 2 张业务大宽表。附带方便：&lt;br /&gt;     数据初始化数据到 ES ；&lt;br /&gt;     方便手动刷数据库数据后就自动同步到 ES ；&lt;br /&gt;     如果代码里面对双写有遗漏，也可以及时弥补数据的不一致&lt;br /&gt;   &lt;br /&gt;  注意我们是 2 套方案都用了&lt;br /&gt;&lt;br /&gt;我的疑惑：&lt;br /&gt;  1. 双写采用了 2 套方案。flush 会立刻往 ES 所有节点写，这样做是不是非常不合适？而且已经有代码双写(方案 1)的前提下，flink CDC 除了解决宽表的问题，其他的单表同步是不是多余的，浪费性能？&lt;br /&gt;  2. 在目前的条件下（数据库只能一主供应用使用），这样的解决方案是否是最优的？或者说有其他更好的方案么？&lt;br /&gt;  &lt;br /&gt;  PS: 我们的项目是 ToB 的，整体没有电商流量那么大</description>
