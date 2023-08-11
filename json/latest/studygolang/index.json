@@ -46,16 +46,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Go快速开发管理系统框架 goflyadmin",
-      "Link": "https://studygolang.com/p/1154#reply0",
-      "Description": "",
+      "Title": "关于打印素数的程序逻辑看不懂，谁能帮忙分析一下执行过程",
+      "Link": "https://studygolang.com/topics/16600#reply1",
+      "Description": "\u003cp\u003e// Copyright 2009 The Go Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style\n// license that can be found in the LICENSE file.package main\npackage main\u003c/p\u003e\n\n\u003cp\u003eimport \u0026ldquo;fmt\u0026rdquo;\u003c/p\u003e\n\n\u003cp\u003e// Send the sequence 2, 3, 4, \u0026hellip; to channel \u0026lsquo;ch\u0026rsquo;.\nfunc generate(ch chan int) {\n    for i := 2; ; i++ {\n        ch \u0026lt;- i // Send \u0026lsquo;i\u0026rsquo; to channel \u0026lsquo;ch\u0026rsquo;.\n    }\n}\u003c/p\u003e\n\n\u003cp\u003e// Copy the values from channel \u0026lsquo;in\u0026rsquo; to channel \u0026lsquo;out\u0026rsquo;,\n// removing those divisible by \u0026lsquo;prime\u0026rsquo;.\nfunc filter(in, out chan int, prime int) {\n    for {\n        i := \u0026lt;-in // Receive value of new variable \u0026lsquo;i\u0026rsquo; from \u0026lsquo;in\u0026rsquo;.\n        if i%prime != 0 {\n            out \u0026lt;- i // Send \u0026lsquo;i\u0026rsquo; to channel \u0026lsquo;out\u0026rsquo;.\n        }\n    }\n}\u003c/p\u003e\n\n\u003cp\u003e// The prime sieve: Daisy-chain filter processes together.\nfunc main() {\n    ch := make(chan int) // Create a new channel.\n    go generate(ch)      // Start generate() as a goroutine.\n    for {\n        prime := \u0026lt;-ch\n        fmt.Print(prime, \u0026ldquo; \u0026ldquo;)\n        ch1 := make(chan int)\n        go filter(ch, ch1, prime)\n        ch = ch1\n    }\n}\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "关于打印素数的程序逻辑看不懂，谁能帮忙分析一下执行过程",
-      "Link": "https://studygolang.com/topics/16600#reply1",
-      "Description": "\u003cp\u003e// Copyright 2009 The Go Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style\n// license that can be found in the LICENSE file.package main\npackage main\u003c/p\u003e\n\n\u003cp\u003eimport \u0026ldquo;fmt\u0026rdquo;\u003c/p\u003e\n\n\u003cp\u003e// Send the sequence 2, 3, 4, \u0026hellip; to channel \u0026lsquo;ch\u0026rsquo;.\nfunc generate(ch chan int) {\n    for i := 2; ; i++ {\n        ch \u0026lt;- i // Send \u0026lsquo;i\u0026rsquo; to channel \u0026lsquo;ch\u0026rsquo;.\n    }\n}\u003c/p\u003e\n\n\u003cp\u003e// Copy the values from channel \u0026lsquo;in\u0026rsquo; to channel \u0026lsquo;out\u0026rsquo;,\n// removing those divisible by \u0026lsquo;prime\u0026rsquo;.\nfunc filter(in, out chan int, prime int) {\n    for {\n        i := \u0026lt;-in // Receive value of new variable \u0026lsquo;i\u0026rsquo; from \u0026lsquo;in\u0026rsquo;.\n        if i%prime != 0 {\n            out \u0026lt;- i // Send \u0026lsquo;i\u0026rsquo; to channel \u0026lsquo;out\u0026rsquo;.\n        }\n    }\n}\u003c/p\u003e\n\n\u003cp\u003e// The prime sieve: Daisy-chain filter processes together.\nfunc main() {\n    ch := make(chan int) // Create a new channel.\n    go generate(ch)      // Start generate() as a goroutine.\n    for {\n        prime := \u0026lt;-ch\n        fmt.Print(prime, \u0026ldquo; \u0026ldquo;)\n        ch1 := make(chan int)\n        go filter(ch, ch1, prime)\n        ch = ch1\n    }\n}\u003c/p\u003e\n",
+      "Title": "Go快速开发管理系统框架 goflyadmin",
+      "Link": "https://studygolang.com/p/1154#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -84,13 +84,6 @@
       "Title": "虚拟币交易所理财系统开发(海外版)部署",
       "Link": "https://studygolang.com/articles/36254#reply0",
       "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "Go1.21.0 发布了",
-      "Link": "https://studygolang.com/topics/16591#reply0",
-      "Description": "\u003cp\u003eGo1.21.0是2023年8月8日发布的Go语言的最新版本，它带来了一些语言和工具的变化。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003emin和max内置函数\u003c/strong\u003e：Go1.21.0增加了两个新的内置函数min和max，用来对任意可比较的有序类型进行最小值或最大值的操作。min和max函数可以接受一个或多个参数，并返回其中的最小值或最大值。如果参数是浮点数并且包含NaN，min和max函数会返回NaN。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eclear预定义函数\u003c/strong\u003e：Go1.21.0增加了一个clear预定义函数用来做切片和map的clear操作。对于切片，clear函数会将所有元素设置为零值，但保持切片的长度和容量不变。对于map，clear函数会删除所有键值对，得到一个空map。clear函数的使用示例在[这里]展示。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e改变panic(nil)语义\u003c/strong\u003e：Go1.21.0改变了panic(nil)的语义，使得recover函数在捕获到panic(nil)时不再返回nil，而是返回一个特定的错误类型PanicNilError。这样可以避免开发者误以为没有发生panic，而继续执行正常逻辑。\u003c/li\u003e\n\u003cli\u003e**新增标准库：slices、maps、slog 等 **：这几个库正式进入标准库了。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e还有更多其他特性或变化，可以通过官方文档了解：\u003ca href=\"https://go.dev/doc/go1.21\"\u003ehttps://go.dev/doc/go1.21\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e可以官方方式试用，也可以在 Go语言中文网下载最新版：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -154,6 +147,13 @@
       "Title": "奇怪的报错信息，unknown token type returned: token(45)",
       "Link": "https://studygolang.com/topics/16592#reply0",
       "Description": "\u003cp\u003e用的go1.16.15 使用的sqlserver2008r2数据库，github.com/denisenkom/go-mssqldb\n下面代码中报错，\n报错的代码行为\n  row = tx.QueryRow(\u0026ldquo;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) \u0026ldquo;)\n  err := row.Scan(\u0026amp;guidstr, \u0026amp;currdate)\n 错误信息为:unknown token type returned: token(45)\n 有大佬知道这是什么原因不？有解决的方法吗？\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003etx, err = xjcdb.DB.Begin()\nif err != nil {\n\tlog.Println(err.Error())\n\treturn 0, \u0026quot;\u0026quot;, err\n}\ndefer tx.Rollback()\n\n   ......\n   ......\n\nrows, err = tx.Query(...)\nif err != nil {\n\tlog.Println(err.Error())\n\treturn 0, \u0026quot;\u0026quot;, err\n}\ndefer rows.Close()\n\nfor rows.Next() {\n\tloop_beltcode = \u0026quot;\u0026quot;\n\tloop_pkfeeobj = \u0026quot;\u0026quot;\n\terr = rows.Scan(\u0026amp;loop_beltcode, \u0026amp;loop_pkfeeobj)\n\tif err != nil {\n\t\tlog.Println(err.Error())\n\t\treturn 0, \u0026quot;\u0026quot;, err\n\t}\n\tguidstr = \u0026quot;\u0026quot;\n\tcurrdate = \u0026quot;\u0026quot;\n\trow = tx.QueryRow(\u0026quot;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) \u0026quot;)\n\terr := row.Scan(\u0026amp;guidstr, \u0026amp;currdate)\n\tif err != nil {\n\t\treturn 0, \u0026quot;\u0026quot;, err\n\t}\n            ......\n            ......\n  }\n  .....\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go1.21.0 发布了",
+      "Link": "https://studygolang.com/topics/16591#reply0",
+      "Description": "\u003cp\u003eGo1.21.0是2023年8月8日发布的Go语言的最新版本，它带来了一些语言和工具的变化。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003emin和max内置函数\u003c/strong\u003e：Go1.21.0增加了两个新的内置函数min和max，用来对任意可比较的有序类型进行最小值或最大值的操作。min和max函数可以接受一个或多个参数，并返回其中的最小值或最大值。如果参数是浮点数并且包含NaN，min和max函数会返回NaN。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eclear预定义函数\u003c/strong\u003e：Go1.21.0增加了一个clear预定义函数用来做切片和map的clear操作。对于切片，clear函数会将所有元素设置为零值，但保持切片的长度和容量不变。对于map，clear函数会删除所有键值对，得到一个空map。clear函数的使用示例在[这里]展示。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e改变panic(nil)语义\u003c/strong\u003e：Go1.21.0改变了panic(nil)的语义，使得recover函数在捕获到panic(nil)时不再返回nil，而是返回一个特定的错误类型PanicNilError。这样可以避免开发者误以为没有发生panic，而继续执行正常逻辑。\u003c/li\u003e\n\u003cli\u003e**新增标准库：slices、maps、slog 等 **：这几个库正式进入标准库了。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e还有更多其他特性或变化，可以通过官方文档了解：\u003ca href=\"https://go.dev/doc/go1.21\"\u003ehttps://go.dev/doc/go1.21\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e可以官方方式试用，也可以在 Go语言中文网下载最新版：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
