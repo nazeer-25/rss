@@ -37,12 +37,12 @@
       <description>&lt;p&gt;// Copyright 2009 The Go Authors. All rights reserved.&#xA;// Use of this source code is governed by a BSD-style&#xA;// license that can be found in the LICENSE file.package main&#xA;package main&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import &amp;ldquo;fmt&amp;rdquo;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// Send the sequence 2, 3, 4, &amp;hellip; to channel &amp;lsquo;ch&amp;rsquo;.&#xA;func generate(ch chan int) {&#xA;    for i := 2; ; i++ {&#xA;        ch &amp;lt;- i // Send &amp;lsquo;i&amp;rsquo; to channel &amp;lsquo;ch&amp;rsquo;.&#xA;    }&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// Copy the values from channel &amp;lsquo;in&amp;rsquo; to channel &amp;lsquo;out&amp;rsquo;,&#xA;// removing those divisible by &amp;lsquo;prime&amp;rsquo;.&#xA;func filter(in, out chan int, prime int) {&#xA;    for {&#xA;        i := &amp;lt;-in // Receive value of new variable &amp;lsquo;i&amp;rsquo; from &amp;lsquo;in&amp;rsquo;.&#xA;        if i%prime != 0 {&#xA;            out &amp;lt;- i // Send &amp;lsquo;i&amp;rsquo; to channel &amp;lsquo;out&amp;rsquo;.&#xA;        }&#xA;    }&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// The prime sieve: Daisy-chain filter processes together.&#xA;func main() {&#xA;    ch := make(chan int) // Create a new channel.&#xA;    go generate(ch)      // Start generate() as a goroutine.&#xA;    for {&#xA;        prime := &amp;lt;-ch&#xA;        fmt.Print(prime, &amp;ldquo; &amp;ldquo;)&#xA;        ch1 := make(chan int)&#xA;        go filter(ch, ch1, prime)&#xA;        ch = ch1&#xA;    }&#xA;}&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>量化交易合约跟单okex交易所机器人API开发部署</title>
-      <link>https://studygolang.com/articles/36252#reply0</link>
-    </item>
-    <item>
       <title>币安交易所自动交易API量化合约程式开发</title>
       <link>https://studygolang.com/articles/36251#reply0</link>
+    </item>
+    <item>
+      <title>量化交易合约跟单okex交易所机器人API开发部署</title>
+      <link>https://studygolang.com/articles/36252#reply0</link>
     </item>
     <item>
       <title>公链应用（DApp）智能合约开发部署</title>
