@@ -31,6 +31,11 @@
       <description>&lt;p&gt;关于我们&lt;/p&gt;&#xA;&#xA;&lt;p&gt;某大型集团公司&lt;/p&gt;&#xA;&#xA;&lt;p&gt;公司规模：万人以上&#xA;公司地址：北京朝阳区&lt;/p&gt;&#xA;&#xA;&lt;p&gt;职位描述 / 工作职责&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1、针对公司内部体系，参与构建完善的⾃动化测试解决⽅案；&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2、参与质量体系规划、建设，参与测试平台的建设；&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3、参与 devops ⼯具链的建设和维护；&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4、对⼀些前沿技术领域进⾏研究并应⽤到实际⼯作；&lt;/p&gt;&#xA;&#xA;&lt;p&gt;职位要求&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1、熟练 Java 或者 Python 语⾔，熟悉 Selenium Webdriver 框架，有接⼝测试、测试平台开发经验者优先&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2、熟练使⽤ Jmeter、Locust 类开源性能测试⼯具，有开源⼯具贡献者优先；3、熟练运⽤ SQL 语⾔&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4、熟悉 Linux 或 Unix 操作系统，熟悉 Docker 使⽤&lt;/p&gt;&#xA;&#xA;&lt;p&gt;5、熟练使⽤ Jenkins、Git 等相关持续集成⼯具&lt;/p&gt;&#xA;&#xA;&lt;p&gt;6、逻辑分析能⼒强，善于沟通，较强的学习能⼒，具备良好沟通能⼒和协作精神&lt;/p&gt;&#xA;&#xA;&lt;p&gt;7、熟悉分层⾃动化体系，具有 DevOps、敏捷项⽬经验，熟悉敏捷测试、持续集成、持续交付、持续部署、TestOps 的流程优先&lt;/p&gt;&#xA;&#xA;&lt;p&gt;8、有混沌⼯程及全链路性能测试经验尤佳&lt;/p&gt;&#xA;&#xA;&lt;p&gt;9、具备独⽴分析测试需求、设计测试⽅案、测试⽤例并进⾏测试⽂档编写及测试执⾏的能⼒&lt;/p&gt;&#xA;&#xA;&lt;p&gt;10、具备良好的产品意识，熟练使⽤ Jira 或者禅道等质量管理、缺陷管理系统 11、对技术有激情，有较⼴泛的技术覆盖&lt;/p&gt;&#xA;&#xA;&lt;p&gt;基本要求&lt;/p&gt;&#xA;&#xA;&lt;p&gt;年龄：28-37 岁&lt;/p&gt;&#xA;&#xA;&lt;p&gt;学历：公办本科以上&lt;/p&gt;&#xA;&#xA;&lt;p&gt;需要招聘平台经验两年以上（例：boss 直聘）&lt;/p&gt;&#xA;&#xA;&lt;p&gt;薪资及其他待遇&lt;/p&gt;&#xA;&#xA;&lt;p&gt;薪资税前 30k-40k，年薪 16 薪；&lt;/p&gt;&#xA;&#xA;&lt;p&gt;公司提供住房补贴&lt;/p&gt;&#xA;&#xA;&lt;p&gt;联系方式&#xA;手机：15618332596（微信同号）&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>趋向型、基于稳定的架构思想工艺原理</title>
+      <link>https://studygolang.com/articles/36259#reply0</link>
+      <description>&lt;ol&gt;&#xA;&lt;li&gt;假设新开发、新引入的程序（服务模块，基础组件）是运行不稳定的。&lt;/li&gt;&#xA;&lt;li&gt;使用经过验证过的组件和服务程序。&lt;/li&gt;&#xA;&lt;li&gt;趋向不改变运行稳定的程序，包括底层组件、服务程序等；局部更新，限定变动的范围。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+    </item>
+    <item>
       <title>sqlx里面如何操作 in ？</title>
       <link>https://studygolang.com/topics/16603#reply0</link>
       <description>&lt;p&gt;sqlx里面的in操作，还是相对比较特殊的，怎么来实现呢？直接上代码，供参考：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;package main&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import (&#xA;&#x9;&amp;ldquo;fmt&amp;rdquo;&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;_ &amp;quot;github.com/go-sql-driver/mysql&amp;quot;&#xA;&amp;quot;github.com/jmoiron/sqlx&amp;quot;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;type Hoge struct {&#xA;&#x9;ID   int    &lt;code&gt;db:&amp;quot;id&amp;quot;&lt;/code&gt;&#xA;&#x9;Name string &lt;code&gt;db:&amp;quot;name&amp;quot;&lt;/code&gt;&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func main() {&#xA;&#x9;db, err := connect()&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;panic(err)&#xA;&#x9;}&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;s := &amp;quot;SELECT * FROM hoge WHERE id IN (?)&amp;quot;&#xA;q, vs, err := sqlx.In(s, []int{2, 3})&#xA;// fmt.Printf(&amp;quot;%+v\n&amp;quot;, q)&#xA;// =&amp;gt; SELECT * FROM hoge WHERE id IN (?, ?)&#xA;if err != nil {&#xA;&#x9;panic(err)&#xA;}&#xA;&#xA;var hs []Hoge&#xA;err = db.Select(&amp;amp;hs, q, vs...)&#xA;if err != nil {&#xA;&#x9;panic(err)&#xA;}&#xA;&#xA;fmt.Printf(&amp;quot;%+v\n&amp;quot;, hs)&#xA;// =&amp;gt; [{ID:2 Name:fuga} {ID:3 Name:piyo}]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func connect() (*sqlx.DB, error) {&#xA;&#x9;return sqlx.Connect(&#xA;&#x9;&#x9;&amp;ldquo;mysql&amp;rdquo;,&#xA;&#x9;&#x9;fmt.Sprintf(&#xA;&#x9;&#x9;&#x9;&amp;ldquo;%s:%s@tcp(%s:%s)/%s&amp;rdquo;,&#xA;&#x9;&#x9;&#x9;&amp;ldquo;root&amp;rdquo;,&#xA;&#x9;&#x9;&#x9;&amp;ldquo;&amp;rdquo;,&#xA;&#x9;&#x9;&#x9;&amp;ldquo;localhost&amp;rdquo;,&#xA;&#x9;&#x9;&#x9;&amp;ldquo;3306&amp;rdquo;,&#xA;&#x9;&#x9;&#x9;&amp;ldquo;test&amp;rdquo;,&#xA;&#x9;&#x9;),&#xA;&#x9;)&#xA;}&lt;/p&gt;&#xA;</description>
@@ -64,11 +69,6 @@
     <item>
       <title>一文读懂币安交易所DeFi流动性挖矿模式部署开发</title>
       <link>https://studygolang.com/articles/36260#reply0</link>
-    </item>
-    <item>
-      <title>趋向型、基于稳定的架构思想工艺原理</title>
-      <link>https://studygolang.com/articles/36259#reply0</link>
-      <description>&lt;ol&gt;&#xA;&lt;li&gt;假设新开发、新引入的程序（服务模块，基础组件）是运行不稳定的。&lt;/li&gt;&#xA;&lt;li&gt;使用经过验证过的组件和服务程序。&lt;/li&gt;&#xA;&lt;li&gt;趋向不改变运行稳定的程序，包括底层组件、服务程序等；局部更新，限定变动的范围。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
     </item>
     <item>
       <title>一文读懂合约交易量化机器人开发运行部署规则</title>

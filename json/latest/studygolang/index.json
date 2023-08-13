@@ -46,6 +46,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "趋向型、基于稳定的架构思想工艺原理",
+      "Link": "https://studygolang.com/articles/36259#reply0",
+      "Description": "\u003col\u003e\n\u003cli\u003e假设新开发、新引入的程序（服务模块，基础组件）是运行不稳定的。\u003c/li\u003e\n\u003cli\u003e使用经过验证过的组件和服务程序。\u003c/li\u003e\n\u003cli\u003e趋向不改变运行稳定的程序，包括底层组件、服务程序等；局部更新，限定变动的范围。\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "sqlx里面如何操作 in ？",
       "Link": "https://studygolang.com/topics/16603#reply0",
       "Description": "\u003cp\u003esqlx里面的in操作，还是相对比较特殊的，怎么来实现呢？直接上代码，供参考：\u003c/p\u003e\n\n\u003cp\u003epackage main\u003c/p\u003e\n\n\u003cp\u003eimport (\n\t\u0026ldquo;fmt\u0026rdquo;\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e_ \u0026quot;github.com/go-sql-driver/mysql\u0026quot;\n\u0026quot;github.com/jmoiron/sqlx\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e)\u003c/p\u003e\n\n\u003cp\u003etype Hoge struct {\n\tID   int    \u003ccode\u003edb:\u0026quot;id\u0026quot;\u003c/code\u003e\n\tName string \u003ccode\u003edb:\u0026quot;name\u0026quot;\u003c/code\u003e\n}\u003c/p\u003e\n\n\u003cp\u003efunc main() {\n\tdb, err := connect()\n\tif err != nil {\n\t\tpanic(err)\n\t}\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003es := \u0026quot;SELECT * FROM hoge WHERE id IN (?)\u0026quot;\nq, vs, err := sqlx.In(s, []int{2, 3})\n// fmt.Printf(\u0026quot;%+v\\n\u0026quot;, q)\n// =\u0026gt; SELECT * FROM hoge WHERE id IN (?, ?)\nif err != nil {\n\tpanic(err)\n}\n\nvar hs []Hoge\nerr = db.Select(\u0026amp;hs, q, vs...)\nif err != nil {\n\tpanic(err)\n}\n\nfmt.Printf(\u0026quot;%+v\\n\u0026quot;, hs)\n// =\u0026gt; [{ID:2 Name:fuga} {ID:3 Name:piyo}]\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n\n\u003cp\u003efunc connect() (*sqlx.DB, error) {\n\treturn sqlx.Connect(\n\t\t\u0026ldquo;mysql\u0026rdquo;,\n\t\tfmt.Sprintf(\n\t\t\t\u0026ldquo;%s:%s@tcp(%s:%s)/%s\u0026rdquo;,\n\t\t\t\u0026ldquo;root\u0026rdquo;,\n\t\t\t\u0026ldquo;\u0026rdquo;,\n\t\t\t\u0026ldquo;localhost\u0026rdquo;,\n\t\t\t\u0026ldquo;3306\u0026rdquo;,\n\t\t\t\u0026ldquo;test\u0026rdquo;,\n\t\t),\n\t)\n}\u003c/p\u003e\n",
@@ -98,13 +105,6 @@
       "Title": "一文读懂币安交易所DeFi流动性挖矿模式部署开发",
       "Link": "https://studygolang.com/articles/36260#reply0",
       "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "趋向型、基于稳定的架构思想工艺原理",
-      "Link": "https://studygolang.com/articles/36259#reply0",
-      "Description": "\u003col\u003e\n\u003cli\u003e假设新开发、新引入的程序（服务模块，基础组件）是运行不稳定的。\u003c/li\u003e\n\u003cli\u003e使用经过验证过的组件和服务程序。\u003c/li\u003e\n\u003cli\u003e趋向不改变运行稳定的程序，包括底层组件、服务程序等；局部更新，限定变动的范围。\u003c/li\u003e\n\u003c/ol\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
