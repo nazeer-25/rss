@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "目前最优雅的将网站封装为 app 的方式是什么？ - 问与答",
+      "Link": "https://www.v2ex.com/t/965244",
+      "Description": "比如本站，页面已经实现了移动端兼容，\u003cbr /\u003e如果需求做一个 android/ios app ，与移动端浏览器打开一致即可无任何特殊需求\u003cbr /\u003e\u003cbr /\u003e目前最好的封装方式是什么？",
+      "Author": "61162833",
+      "PubDate": "2023-08-14T11:53:14Z"
+    },
+    {
+      "Title": "请教 ubuntu server 删除文件恢复方案 - 程序员",
+      "Link": "https://www.v2ex.com/t/965243",
+      "Description": "\u003cp\u003e阿里云 Ubuntu 22.04 64 位，mysql 用 docker 跑的，数据 -v 到宿主机目录下。\n执行 \u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edocker stop $(docker ps -aq)\ndocker image prune -a\ndocker volume prune\ndocker system prune --all --force --volumes\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e没想到，宿主机下的数据文件全没了。\n由于是临时服务器，当时没开快照。目前只能想办法使用数据恢复软件，testdisk 试过了，无法恢复。\u003c/p\u003e\n\u003cp\u003e兄弟们，有没有其他工具可以推荐一下或者方案也行。\u003c/p\u003e\n\u003cp\u003e双手准备，跑路这个方案已经准备好了\u003c/p\u003e\n",
+      "Author": "simo",
+      "PubDate": "2023-08-14T11:51:01Z"
+    },
+    {
+      "Title": "c++的单线程 mutex 问题 - C++",
+      "Link": "https://www.v2ex.com/t/965242",
+      "Description": "\u003cp\u003e今天在学习\u003ccode\u003estd::recursive_mutex\u003c/code\u003e的时候看到\u003ccode\u003estd::recursive_mutex\u003c/code\u003e的应用场景是可重入申请锁，于是写了代码进行测试，确实在循环调用的时候不会出现死锁了。之后又用\u003ccode\u003emutex\u003c/code\u003e进行了测试，但是发现在不同场景下会有不同的情况，代码如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-c++\"\u003e#include \u0026lt;iostream\u0026gt;\n#include \u0026lt;mutex\u0026gt;\nstd::recursive_mutex recursive_mutex_;\nstd::mutex mutex_;\n\nvoid func(int n) {\n    std::lock_guard\u0026lt;std::mutex\u0026gt; lock(mutex_);\n    std::cout \u0026lt;\u0026lt; \"n = \" \u0026lt;\u0026lt; n \u0026lt;\u0026lt; std::endl;\n    if (n \u0026gt; 0) {\n        func(n - 1);\n    }\n}\n\nint main() {\n    func(5);\n    return 0;\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e按照预期，以上代码应该在打印了 5 之后就一直卡主，可是在 gcc 7.5 下，直接打印了 5 4 3 2 1 ；测试了很多在线编译器都是这个现象，只有\u003ca href=\"https://www.onlinegdb.com/online_c++_compiler\" rel=\"nofollow\"\u003ehttps://www.onlinegdb.com/online_c++_compiler\u003c/a\u003e 这个在线编译器的运行结果符合预期。\u003c/p\u003e\n\u003cp\u003e请问各位大佬，这个现象的原因是什么？\n应该不是 lock_guard 的问题，因为我自己手写了 lock_guard 查看了 lock 的声明周期，确实是在 func 执行结束之后才 unlock 。\u003c/p\u003e\n",
+      "Author": "Attenton",
+      "PubDate": "2023-08-14T11:48:40Z"
+    },
+    {
       "Title": "如何使用 Selenium 保存知乎的回答为 pdf - 问与答",
       "Link": "https://www.v2ex.com/t/965241",
       "Description": "#!/usr/bin/env python3\u003cbr /\u003e\u003cbr /\u003efrom selenium import webdriver\u003cbr /\u003eimport pdfkit\u003cbr /\u003e\u003cbr /\u003e# 设置知乎回答的 URL\u003cbr /\u003eanswer_url = '\u003ca target=\"_blank\" href=\"https://www.zhihu.com/question/613031240/answer/3126667778'\" rel=\"nofollow noopener\"\u003ehttps://www.zhihu.com/question/613031240/answer/3126667778'\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e# 使用 Selenium 打开 Chrome 浏览器\u003cbr /\u003edriver = webdriver.Chrome()\u003cbr /\u003edriver.get(answer_url)\u003cbr /\u003e\u003cbr /\u003e# 等待页面加载完成\u003cbr /\u003e#driver.implicitly_wait(10)\u003cbr /\u003e\u003cbr /\u003e# 使用 pdfkit 将页面保存为 PDF\u003cbr /\u003epdfkit.from_file('temp.html', 'output.pdf')\u003cbr /\u003e\u003cbr /\u003e# 关闭浏览器\u003cbr /\u003edriver.quit()\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003echatgpt 给的答案，不太会改，跑不了",
