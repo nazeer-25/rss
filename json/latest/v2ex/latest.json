@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "公共 Git 代码库如何管理敏感信息？ - 程序员",
+      "Link": "https://www.v2ex.com/t/965318",
+      "Description": "\u003cp\u003e请问各位在公共代码库里如何管理敏感信息\n比如用户名，密码，token 等等\u003c/p\u003e\n\u003cp\u003e不知道现在企业实际在用的方法是什么\u003c/p\u003e\n\u003cp\u003e我搜到的一些方式：\u003c/p\u003e\n\u003cp\u003e一个公共 repo （存代码），一个私有 repo(放敏感信息)，公共 repo 用 submodule 调用私有 repo\u003c/p\u003e\n\u003cp\u003e或者写一个示例的密码文件比如*.json\nrepo clone 之后替换掉\u003c/p\u003e\n",
+      "Author": "ltltfuture",
+      "PubDate": "2023-08-14T22:02:27Z"
+    },
+    {
+      "Title": "使用 Socat 实验 SCTP 传输层协议 - 奇思妙想",
+      "Link": "https://www.v2ex.com/t/965317",
+      "Description": "SCTP ，132 号 IP 协议，是 TCP 、UDP 之外的另一选择\u003cbr /\u003e不幸的是，就跟 IPsec 这位难兄难弟一样，过不了 NAT\u003cbr /\u003e但不幸中的万幸，我的宽带给了公网 IPv6\u003cbr /\u003e\u003cbr /\u003e于是乎：\u003cbr /\u003e1 、香港云服务器，运行 wg ，分配地址 100.127.255.1\u003cbr /\u003e2 、有 v6 公网接入的 Ubuntu 虚拟机一台，运行 wg ，分配地址 100.127.255.2\u003cbr /\u003e3 、Ubuntu 虚拟机的隧道对端设置为 127.0.0.1:8132\u003cbr /\u003e\u003cbr /\u003e4 、在香港云服务器运行 socat：\u003cbr /\u003esocat sctp6-listen:8080,fork udp4-sendto:127.0.0.1:51820\u003cbr /\u003e\u003cbr /\u003e5 、在 Ubuntu 虚拟机 yu 运行 socat\u003cbr /\u003esocat udp4-listen:8132,fork sctp6-connect:[\u0026lt;云服务器的 v6\u0026gt;]:8080\u003cbr /\u003e\u003cbr /\u003e6 、ping 命令结果\u003cbr /\u003ePING 100.127.255.1 (100.127.255.1) 56(84) bytes of data.\u003cbr /\u003e64 bytes from 100.127.255.1: icmp_seq=1 ttl=64 time=141 ms\u003cbr /\u003e64 bytes from 100.127.255.1: icmp_seq=2 ttl=64 time=34.8 ms\u003cbr /\u003e64 bytes from 100.127.255.1: icmp_seq=3 ttl=64 time=34.8 ms\u003cbr /\u003e\u003cbr /\u003eemm ，看来封装对延迟几乎没有影响\u003cbr /\u003e\u003cbr /\u003e7 、iperf3 测速\u003cbr /\u003eiperf3 -c 100.127.255.1 -P 10 -R -O 2\u003cbr /\u003e[SUM]   0.00-10.04  sec  8.26 MBytes  6.90 Mbits/sec                  sender\u003cbr /\u003e[SUM]   0.00-10.00  sec  8.34 MBytes  6.99 Mbits/sec                  receiver\u003cbr /\u003e\u003cbr /\u003e比较拉跨……",
+      "Author": "testcaoy7",
+      "PubDate": "2023-08-14T21:59:41Z"
+    },
+    {
       "Title": "被联通标记为诈骗电话后号码无法开机 - 问与答",
       "Link": "https://www.v2ex.com/t/965316",
       "Description": "之前人一直在境外 出国前用了几年的上海联通号码开保号套餐收验证码 两三年了没用这个号码拨过一个电话\u003cbr /\u003e有一阵子一直收到一些国内的来电 对方声称我的联通号码给他们拨了骚扰电话 我接着就打了 10010 反映这个问题 当时没给我解决 又过了一段时间消停了我就没在意\u003cbr /\u003e后来回国了在机场发现没法用流量 连上机场 WiFi 跟人联络时得知我这个号码停机了且被标记成诈骗电话\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://imgur.com/Grjc3eU\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/Grjc3eU\u003c/a\u003e\u003cbr /\u003e打了 10010 让我去营业厅办理开机 我去了营业厅办理完开机 改了个 39 的套餐想着在国内期间先用着 正常使用到当天晚上 收到条短信 又给我停机了\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://imgur.com/a9l2mE8\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/a9l2mE8\u003c/a\u003e\u003cbr /\u003e再打联通电话 说是系统限制停机过两次就没法开机了 等于号码报废 停机状态也没法改回保号套餐 现在用着 39 套餐收验证码\u003cbr /\u003e出国前又去了一趟营业厅 告诉我这个是鹰眼系统识别的 我没打过诈骗电话的话不会莫名其妙被标记 说淘宝有路子可以解\u003cbr /\u003e试过这个清除标记 只是移出黑名单 没解决问题\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://imgur.com/bBKY9qY\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/bBKY9qY\u003c/a\u003e\u003cbr /\u003e投诉过工信部 显示转接到属地处理 让我发邮件给上海的相关单位 发了后面也没个结果\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://imgur.com/8nCTsgW\" rel=\"nofollow noopener\"\u003ehttps://imgur.com/8nCTsgW\u003c/a\u003e\u003cbr /\u003e有没有懂哥知道这情况该怎么办？",
