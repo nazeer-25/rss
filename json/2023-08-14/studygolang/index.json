@@ -18,16 +18,16 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "如何把你的Go服务部署在Linux服务器里面？",
-      "Link": "https://studygolang.com/topics/16602#reply1",
-      "Description": "\u003cp\u003e很多看到都会说，这不是很容易么？把程序编译好，传到服务器上面，然后直接执行进程就行了。真的这么容易么？一个很现实的问题，谁能保证你的程序百分百不出问题，如果crash崩溃退出了肿么办？难道还要运维人员整天盯着你的服务是否有挂掉，看他挂掉了，然后重新执行一下进程么？如果有一个东西，能够帮你自动监护你的进程，发现他挂了，然后立刻将他拉起该有多好。实际上，是有这个工具的，名字叫supervisor，绝大部分运维同学都是采用这个工具，来对你的程序进行监护。在Linux系统里面，通过yum install supervisor安装这个工具，然后在/etc/supervisord.d目录下面，配置对应的conf文件，把对应需要启动监护的进程，配置进去就行啦，具体怎么配置，这里就不说啦，总之，这是一个非常强大的工具，希望可以帮到你。\u003c/p\u003e\n",
+      "Title": "websocket也支持压缩的",
+      "Link": "https://studygolang.com/topics/16601#reply1",
+      "Description": "\u003cp\u003e​\n1. 解读\u003c/p\u003e\n\n\u003cp\u003e我们平常在项目中，经常会用到websocket，用来传递实时消息，或者类似IM聊天这种场景。但你知道么？websocket消息，也是支持压缩的，只是我们比较少用到她。在客户端向服务端发起连接的时候，在header里面，会带上自己支持压缩的标记，见下：这地方是不是和http header里面带上 Accept-Encoding: gzip, deflate, br，也就是客户端支持gzip压缩有点类似？\u003c/p\u003e\n\n\u003cp\u003e如果服务端也支持websocket数据压缩返回，那么她的header里面，也会带上下面的标记，意思是告诉客户端，我支持压缩，并且数据会压缩返回给你： \n​\u003cimg src=\"https://static.golangjob.cn/230812/efa1fe218593f2aa94144b7d0bb8d8b1.png\" alt=\"1png.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e这个方案已经写进了RFC：RFC 7692: Compression Extensions for WebSocket\u003c/p\u003e\n\n\u003cp\u003ewebsocket压缩之所以没有被大面积采用，我想主要还是和压缩产生的收益有关，一般用websocket，传输的数据量不会太大，数据量越小，压缩所产生的收益也就越小，所以不压缩，应该对数据传输，也不会产生很大的影响。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230812/798c34264e50633a6f31302a3972b0f0.png\" alt=\"2.png\" /\u003e\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e开源代码参考：\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003eGitHub - luisbebop/websocket-echo-deflate: Simple websocket server supporting permessage-deflate extension\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "[日本][40K-60K] cocos开发工程师",
-      "Link": "https://studygolang.com/topics/16599#reply0",
-      "Description": "\u003cp\u003e关于我们:\u003c/p\u003e\n\n\u003cp\u003e日本棋牌游戏公司，重要的事情先说，是正规游戏公司，不是什么乱七八糟的行业\u003c/p\u003e\n\n\u003cp\u003e公司规模：50 人\n公司地址：日本大阪\u003c/p\u003e\n\n\u003cp\u003e工作职责:\n1. 负责 Cocos 游戏开发、维护、拓展；\n2. 根据需求实现游戏的场景 / 系统 / UI 等效果，理解策划需求，并与设计、产品人员讨论开发需求及技术实现细节；\n3. 在保证代码质量的前提下，按时完成分配的开发任务；\n4. 能够对前端业务代码进行重构，掌握重构代码技巧；\n5. 具备对内存，运行效率，渲染效率进行优化的能力；\n6. 积极主动，能在项目中能发现问题并提出改进意见，并落地。\u003c/p\u003e\n\n\u003cp\u003e职位要求:\n1. 有 2 年以上 Cocos Creator 开发经验，熟悉 H5 打包和基础 H5 技术，打包原生；\n2. 熟悉掌握 JavaScript/Typescript，熟悉 Cocos 框架及动画，熟悉 TCP/IP、WebSocket、HTTP 等主流协议；\n3. 代码规范良好，具备一定封装能力，结构清晰、命名规范、逻辑性强；\n4. 具备良好的沟通合作技巧，较强的责任心及团队合作精神；\n5. 熟悉计算机图形学原理，对游戏资源优化、内存及性能优化有一定的研究和实战经验；熟悉某款 H5 游戏引擎源码者优先；\n6. 优秀的学习和沟通能力，并热爱游戏事业，有意愿将游戏化思维应用到其他领域；\n7. 有较强的自驱力；\u003c/p\u003e\n\n\u003cp\u003e基本要求:\n1. 学历至少专升本，全日制本科以上最好\n2. 一年以上棋牌游戏经验\n3. 年龄 38 岁以下\n4. 最近一次工作两年以上（或之前工作稳定性强）\n5. 联系沟通时，请附带简历\u003c/p\u003e\n\n\u003cp\u003e加分项:\n1. 最好做过多种类型的棋牌游戏\u003c/p\u003e\n\n\u003cp\u003e薪资及其他待遇:\n1. 办理工签 月发 4~6 万人民币\n2. 交医保、社保  每天 100 块钱人民币的饭补\n3. 提供单身公寓 也可以携带家属\n4. 每年有一次探亲假，每个月都有团建活动\u003c/p\u003e\n\n\u003cp\u003e其他信息:\n1. 岗位需要两轮面试，第一轮有面试测试\n2. 需要办理工签，因自身情况办理不了工签的勿扰\u003c/p\u003e\n\n\u003cp\u003e岗位是双向选择，非诚勿扰\n吹水、引战、带节奏的请绕道\u003c/p\u003e\n\n\u003cp\u003e联系方式:\u003c/p\u003e\n\n\u003cp\u003e手机：15618332596（微信同号）\u003c/p\u003e\n",
+      "Title": "质押矿池分红挖矿模式系统开发搭建[附源码部署实例]",
+      "Link": "https://studygolang.com/articles/36264#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -53,22 +53,8 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "sqlx里面如何操作 in ？",
-      "Link": "https://studygolang.com/topics/16603#reply0",
-      "Description": "\u003cp\u003esqlx里面的in操作，还是相对比较特殊的，怎么来实现呢？直接上代码，供参考：\u003c/p\u003e\n\n\u003cp\u003epackage main\u003c/p\u003e\n\n\u003cp\u003eimport (\n\t\u0026ldquo;fmt\u0026rdquo;\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e_ \u0026quot;github.com/go-sql-driver/mysql\u0026quot;\n\u0026quot;github.com/jmoiron/sqlx\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e)\u003c/p\u003e\n\n\u003cp\u003etype Hoge struct {\n\tID   int    \u003ccode\u003edb:\u0026quot;id\u0026quot;\u003c/code\u003e\n\tName string \u003ccode\u003edb:\u0026quot;name\u0026quot;\u003c/code\u003e\n}\u003c/p\u003e\n\n\u003cp\u003efunc main() {\n\tdb, err := connect()\n\tif err != nil {\n\t\tpanic(err)\n\t}\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003es := \u0026quot;SELECT * FROM hoge WHERE id IN (?)\u0026quot;\nq, vs, err := sqlx.In(s, []int{2, 3})\n// fmt.Printf(\u0026quot;%+v\\n\u0026quot;, q)\n// =\u0026gt; SELECT * FROM hoge WHERE id IN (?, ?)\nif err != nil {\n\tpanic(err)\n}\n\nvar hs []Hoge\nerr = db.Select(\u0026amp;hs, q, vs...)\nif err != nil {\n\tpanic(err)\n}\n\nfmt.Printf(\u0026quot;%+v\\n\u0026quot;, hs)\n// =\u0026gt; [{ID:2 Name:fuga} {ID:3 Name:piyo}]\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n\n\u003cp\u003efunc connect() (*sqlx.DB, error) {\n\treturn sqlx.Connect(\n\t\t\u0026ldquo;mysql\u0026rdquo;,\n\t\tfmt.Sprintf(\n\t\t\t\u0026ldquo;%s:%s@tcp(%s:%s)/%s\u0026rdquo;,\n\t\t\t\u0026ldquo;root\u0026rdquo;,\n\t\t\t\u0026ldquo;\u0026rdquo;,\n\t\t\t\u0026ldquo;localhost\u0026rdquo;,\n\t\t\t\u0026ldquo;3306\u0026rdquo;,\n\t\t\t\u0026ldquo;test\u0026rdquo;,\n\t\t),\n\t)\n}\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "一文读懂质押挖矿系统的多种奖金模式DAPP开发",
       "Link": "https://studygolang.com/articles/36265#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "质押矿池分红挖矿模式系统开发搭建[附源码部署实例]",
-      "Link": "https://studygolang.com/articles/36264#reply0",
       "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -81,16 +67,30 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Vue3+Vite+Vant-UI 开发双端招聘APP",
-      "Link": "https://studygolang.com/articles/36262#reply0",
-      "Description": "\u003ch3\u003edownload：\u003ca href=\"https://www.zxit666.com/6479/\"\u003eVue3+Vite+Vant-UI 开发双端招聘APP\u003c/a\u003e\u003c/h3\u003e\n\n\u003cp\u003e设计思想是一种以人为本、以处理问题为导向的创新办法论。在当今快速变化的商业环境中，企业需求经过不时创新来坚持竞争力，而设计思想则成为了一种重要的创新工具。本文将讨论设计思想的三个提升方向，以协助企业更好地应用设计思想来处理业务问题。\u003c/p\u003e\n\n\u003cp\u003e第一重提升是从设计思想的中心概念动手。设计思想是一种以人为本的创新办法论，它强调从用户需求动身，经过不时迭代和设计来发明出更好的产品或效劳。因而，企业在应用设计思想时，首先需求深化了解用户需求，并将其转化为可行的处理计划。这需求企业具备敏锐的洞察力和深化的用户研讨才能。\u003c/p\u003e\n\n\u003cp\u003e第二重提升是将设计思想融入到企业的组织文化中。设计思想不只仅是一种办法论，更是一种文化。企业需求将设计思想的中心理念融入到组织文化中，让员工可以在日常工作中自但是然地运用设计思想来处理问题。这需求企业指导者具有开放的心态和对创新的支持，同时也需求企业内部树立起一套完好的创新流程和文化。\u003c/p\u003e\n\n\u003cp\u003e第三重提升是将设计思想与数字化技术相分离。数字化技术曾经成为企业创新的重要手腕，而设计思想则能够协助企业更好天文解和满足用户需求。企业能够经过数字化技术来完成用户研讨、原型设计和快速迭代等功用，从而愈加高效地应用设计思想来处理业务问题。这需求企业具备数字化技术的应用才能，并且需求与设计师、产品经理等人员严密协作，共同推进数字化创新。\u003c/p\u003e\n\n\u003cp\u003e总之，设计思想是一种重要的创新工具，企业能够经过深化了解用户需求、将其融入组织文化、与数字化技术相分离等方式来提升设计思想的应用才能。只要不时创新，才干够在剧烈的商业竞争中坚持竞争力，并完成可持续开展。\u003c/p\u003e\n",
+      "Title": "加密货币质押机器人量化交易系统开发部署[源码规则示例]",
+      "Link": "https://studygolang.com/articles/36255#reply0",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "websocket也支持压缩的",
-      "Link": "https://studygolang.com/topics/16601#reply0",
-      "Description": "\u003cp\u003e​\n1. 解读\u003c/p\u003e\n\n\u003cp\u003e我们平常在项目中，经常会用到websocket，用来传递实时消息，或者类似IM聊天这种场景。但你知道么？websocket消息，也是支持压缩的，只是我们比较少用到她。在客户端向服务端发起连接的时候，在header里面，会带上自己支持压缩的标记，见下：这地方是不是和http header里面带上 Accept-Encoding: gzip, deflate, br，也就是客户端支持gzip压缩有点类似？\u003c/p\u003e\n\n\u003cp\u003e如果服务端也支持websocket数据压缩返回，那么她的header里面，也会带上下面的标记，意思是告诉客户端，我支持压缩，并且数据会压缩返回给你： \n​\u003cimg src=\"https://static.golangjob.cn/230812/efa1fe218593f2aa94144b7d0bb8d8b1.png\" alt=\"1png.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e这个方案已经写进了RFC：RFC 7692: Compression Extensions for WebSocket\u003c/p\u003e\n\n\u003cp\u003ewebsocket压缩之所以没有被大面积采用，我想主要还是和压缩产生的收益有关，一般用websocket，传输的数据量不会太大，数据量越小，压缩所产生的收益也就越小，所以不压缩，应该对数据传输，也不会产生很大的影响。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230812/798c34264e50633a6f31302a3972b0f0.png\" alt=\"2.png\" /\u003e\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e开源代码参考：\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003eGitHub - luisbebop/websocket-echo-deflate: Simple websocket server supporting permessage-deflate extension\u003c/p\u003e\n",
+      "Title": "如何把你的Go服务部署在Linux服务器里面？",
+      "Link": "https://studygolang.com/topics/16602#reply1",
+      "Description": "\u003cp\u003e很多看到都会说，这不是很容易么？把程序编译好，传到服务器上面，然后直接执行进程就行了。真的这么容易么？一个很现实的问题，谁能保证你的程序百分百不出问题，如果crash崩溃退出了肿么办？难道还要运维人员整天盯着你的服务是否有挂掉，看他挂掉了，然后重新执行一下进程么？如果有一个东西，能够帮你自动监护你的进程，发现他挂了，然后立刻将他拉起该有多好。实际上，是有这个工具的，名字叫supervisor，绝大部分运维同学都是采用这个工具，来对你的程序进行监护。在Linux系统里面，通过yum install supervisor安装这个工具，然后在/etc/supervisord.d目录下面，配置对应的conf文件，把对应需要启动监护的进程，配置进去就行啦，具体怎么配置，这里就不说啦，总之，这是一个非常强大的工具，希望可以帮到你。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "sqlx里面如何操作 in ？",
+      "Link": "https://studygolang.com/topics/16603#reply0",
+      "Description": "\u003cp\u003esqlx里面的in操作，还是相对比较特殊的，怎么来实现呢？直接上代码，供参考：\u003c/p\u003e\n\n\u003cp\u003epackage main\u003c/p\u003e\n\n\u003cp\u003eimport (\n\t\u0026ldquo;fmt\u0026rdquo;\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003e_ \u0026quot;github.com/go-sql-driver/mysql\u0026quot;\n\u0026quot;github.com/jmoiron/sqlx\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e)\u003c/p\u003e\n\n\u003cp\u003etype Hoge struct {\n\tID   int    \u003ccode\u003edb:\u0026quot;id\u0026quot;\u003c/code\u003e\n\tName string \u003ccode\u003edb:\u0026quot;name\u0026quot;\u003c/code\u003e\n}\u003c/p\u003e\n\n\u003cp\u003efunc main() {\n\tdb, err := connect()\n\tif err != nil {\n\t\tpanic(err)\n\t}\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003es := \u0026quot;SELECT * FROM hoge WHERE id IN (?)\u0026quot;\nq, vs, err := sqlx.In(s, []int{2, 3})\n// fmt.Printf(\u0026quot;%+v\\n\u0026quot;, q)\n// =\u0026gt; SELECT * FROM hoge WHERE id IN (?, ?)\nif err != nil {\n\tpanic(err)\n}\n\nvar hs []Hoge\nerr = db.Select(\u0026amp;hs, q, vs...)\nif err != nil {\n\tpanic(err)\n}\n\nfmt.Printf(\u0026quot;%+v\\n\u0026quot;, hs)\n// =\u0026gt; [{ID:2 Name:fuga} {ID:3 Name:piyo}]\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n\n\u003cp\u003efunc connect() (*sqlx.DB, error) {\n\treturn sqlx.Connect(\n\t\t\u0026ldquo;mysql\u0026rdquo;,\n\t\tfmt.Sprintf(\n\t\t\t\u0026ldquo;%s:%s@tcp(%s:%s)/%s\u0026rdquo;,\n\t\t\t\u0026ldquo;root\u0026rdquo;,\n\t\t\t\u0026ldquo;\u0026rdquo;,\n\t\t\t\u0026ldquo;localhost\u0026rdquo;,\n\t\t\t\u0026ldquo;3306\u0026rdquo;,\n\t\t\t\u0026ldquo;test\u0026rdquo;,\n\t\t),\n\t)\n}\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Vue3+Vite+Vant-UI 开发双端招聘APP",
+      "Link": "https://studygolang.com/articles/36262#reply0",
+      "Description": "\u003ch3\u003edownload：\u003ca href=\"https://www.zxit666.com/6479/\"\u003eVue3+Vite+Vant-UI 开发双端招聘APP\u003c/a\u003e\u003c/h3\u003e\n\n\u003cp\u003e设计思想是一种以人为本、以处理问题为导向的创新办法论。在当今快速变化的商业环境中，企业需求经过不时创新来坚持竞争力，而设计思想则成为了一种重要的创新工具。本文将讨论设计思想的三个提升方向，以协助企业更好地应用设计思想来处理业务问题。\u003c/p\u003e\n\n\u003cp\u003e第一重提升是从设计思想的中心概念动手。设计思想是一种以人为本的创新办法论，它强调从用户需求动身，经过不时迭代和设计来发明出更好的产品或效劳。因而，企业在应用设计思想时，首先需求深化了解用户需求，并将其转化为可行的处理计划。这需求企业具备敏锐的洞察力和深化的用户研讨才能。\u003c/p\u003e\n\n\u003cp\u003e第二重提升是将设计思想融入到企业的组织文化中。设计思想不只仅是一种办法论，更是一种文化。企业需求将设计思想的中心理念融入到组织文化中，让员工可以在日常工作中自但是然地运用设计思想来处理问题。这需求企业指导者具有开放的心态和对创新的支持，同时也需求企业内部树立起一套完好的创新流程和文化。\u003c/p\u003e\n\n\u003cp\u003e第三重提升是将设计思想与数字化技术相分离。数字化技术曾经成为企业创新的重要手腕，而设计思想则能够协助企业更好天文解和满足用户需求。企业能够经过数字化技术来完成用户研讨、原型设计和快速迭代等功用，从而愈加高效地应用设计思想来处理业务问题。这需求企业具备数字化技术的应用才能，并且需求与设计师、产品经理等人员严密协作，共同推进数字化创新。\u003c/p\u003e\n\n\u003cp\u003e总之，设计思想是一种重要的创新工具，企业能够经过深化了解用户需求、将其融入组织文化、与数字化技术相分离等方式来提升设计思想的应用才能。只要不时创新，才干够在剧烈的商业竞争中坚持竞争力，并完成可持续开展。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -137,13 +137,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "加密货币质押机器人量化交易系统开发部署[源码规则示例]",
-      "Link": "https://studygolang.com/articles/36255#reply0",
-      "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "虚拟币交易所理财系统开发(海外版)部署",
       "Link": "https://studygolang.com/articles/36254#reply0",
       "Description": "",
@@ -154,6 +147,20 @@
       "Title": "公链应用（DApp）智能合约开发部署",
       "Link": "https://studygolang.com/articles/36253#reply0",
       "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "[日本][40K-60K] cocos开发工程师",
+      "Link": "https://studygolang.com/topics/16599#reply0",
+      "Description": "\u003cp\u003e关于我们:\u003c/p\u003e\n\n\u003cp\u003e日本棋牌游戏公司，重要的事情先说，是正规游戏公司，不是什么乱七八糟的行业\u003c/p\u003e\n\n\u003cp\u003e公司规模：50 人\n公司地址：日本大阪\u003c/p\u003e\n\n\u003cp\u003e工作职责:\n1. 负责 Cocos 游戏开发、维护、拓展；\n2. 根据需求实现游戏的场景 / 系统 / UI 等效果，理解策划需求，并与设计、产品人员讨论开发需求及技术实现细节；\n3. 在保证代码质量的前提下，按时完成分配的开发任务；\n4. 能够对前端业务代码进行重构，掌握重构代码技巧；\n5. 具备对内存，运行效率，渲染效率进行优化的能力；\n6. 积极主动，能在项目中能发现问题并提出改进意见，并落地。\u003c/p\u003e\n\n\u003cp\u003e职位要求:\n1. 有 2 年以上 Cocos Creator 开发经验，熟悉 H5 打包和基础 H5 技术，打包原生；\n2. 熟悉掌握 JavaScript/Typescript，熟悉 Cocos 框架及动画，熟悉 TCP/IP、WebSocket、HTTP 等主流协议；\n3. 代码规范良好，具备一定封装能力，结构清晰、命名规范、逻辑性强；\n4. 具备良好的沟通合作技巧，较强的责任心及团队合作精神；\n5. 熟悉计算机图形学原理，对游戏资源优化、内存及性能优化有一定的研究和实战经验；熟悉某款 H5 游戏引擎源码者优先；\n6. 优秀的学习和沟通能力，并热爱游戏事业，有意愿将游戏化思维应用到其他领域；\n7. 有较强的自驱力；\u003c/p\u003e\n\n\u003cp\u003e基本要求:\n1. 学历至少专升本，全日制本科以上最好\n2. 一年以上棋牌游戏经验\n3. 年龄 38 岁以下\n4. 最近一次工作两年以上（或之前工作稳定性强）\n5. 联系沟通时，请附带简历\u003c/p\u003e\n\n\u003cp\u003e加分项:\n1. 最好做过多种类型的棋牌游戏\u003c/p\u003e\n\n\u003cp\u003e薪资及其他待遇:\n1. 办理工签 月发 4~6 万人民币\n2. 交医保、社保  每天 100 块钱人民币的饭补\n3. 提供单身公寓 也可以携带家属\n4. 每年有一次探亲假，每个月都有团建活动\u003c/p\u003e\n\n\u003cp\u003e其他信息:\n1. 岗位需要两轮面试，第一轮有面试测试\n2. 需要办理工签，因自身情况办理不了工签的勿扰\u003c/p\u003e\n\n\u003cp\u003e岗位是双向选择，非诚勿扰\n吹水、引战、带节奏的请绕道\u003c/p\u003e\n\n\u003cp\u003e联系方式:\u003c/p\u003e\n\n\u003cp\u003e手机：15618332596（微信同号）\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "websocket也支持压缩的",
+      "Link": "https://studygolang.com/topics/16601#reply0",
+      "Description": "\u003cp\u003e​\n1. 解读\u003c/p\u003e\n\n\u003cp\u003e我们平常在项目中，经常会用到websocket，用来传递实时消息，或者类似IM聊天这种场景。但你知道么？websocket消息，也是支持压缩的，只是我们比较少用到她。在客户端向服务端发起连接的时候，在header里面，会带上自己支持压缩的标记，见下：这地方是不是和http header里面带上 Accept-Encoding: gzip, deflate, br，也就是客户端支持gzip压缩有点类似？\u003c/p\u003e\n\n\u003cp\u003e如果服务端也支持websocket数据压缩返回，那么她的header里面，也会带上下面的标记，意思是告诉客户端，我支持压缩，并且数据会压缩返回给你： \n​\u003cimg src=\"https://static.golangjob.cn/230812/efa1fe218593f2aa94144b7d0bb8d8b1.png\" alt=\"1png.png\" /\u003e\u003c/p\u003e\n\n\u003cp\u003e这个方案已经写进了RFC：RFC 7692: Compression Extensions for WebSocket\u003c/p\u003e\n\n\u003cp\u003ewebsocket压缩之所以没有被大面积采用，我想主要还是和压缩产生的收益有关，一般用websocket，传输的数据量不会太大，数据量越小，压缩所产生的收益也就越小，所以不压缩，应该对数据传输，也不会产生很大的影响。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230812/798c34264e50633a6f31302a3972b0f0.png\" alt=\"2.png\" /\u003e\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e开源代码参考：\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003eGitHub - luisbebop/websocket-echo-deflate: Simple websocket server supporting permessage-deflate extension\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
