@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>问一个关于 Python 实现 sm2 非对称加密的问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/966450</link>
+      <description>&lt;p&gt;最近在使用 python 做一个爬虫模拟登录某个网站。发现该网站模拟登录请求的报文是加密的，通过查看 js 发现该加密方式应该使用的是国密算法 sm2 ，用的包应该是&lt;a href=&#34;https://www.npmjs.com/package/sm-crypto&#34; rel=&#34;nofollow&#34;&gt;sm-scrpto&lt;/a&gt;，也找到了公钥字符串。&lt;/p&gt;&#xA;&lt;p&gt;我只有两种思路&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;第一种方式就是通过 PyExecJS 等方法加载 js 文件获取密文，只是原网站是经过混淆的。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;第二种就是我直接在 python 端通过&lt;a href=&#34;https://github.com/duanhongyi/gmssl&#34; rel=&#34;nofollow&#34;&gt;gmssl 库&lt;/a&gt;实现加密，但是我发现 gmssl 实例化的时候需要同时传入私钥和公钥。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;现在问题是，我用 request 模拟请求的不知道使用哪种方式去生成密文，如果采用第二种办法，可不可以通过传入真公钥假私钥只实现加密就行，或者是说还有第三种更简单的方式生成密文。&lt;/p&gt;&#xA;</description>
+      <author>oreader996</author>
+      <pubDate>18 Aug 2023 07:09:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>为什么现在很多成品的 Linux 系统，都会屏蔽某些功能？ - Linux</title>
+      <link>https://www.v2ex.com/t/966449</link>
+      <description>&lt;p&gt;如题，&#xA;例如 Unraid 它连包管理器都没有。&#xA;TrueNAS Scale 有包管理器，但是却是默认禁用。不手动赋予执行权限就无法正常使用。&lt;/p&gt;&#xA;&lt;p&gt;是很多特殊的发行版都这样吗？还是说我用得太少了？&#xA;以及这些发行版这么做是有什么特别的用意吗？&lt;/p&gt;&#xA;</description>
+      <author>MSIAM</author>
+      <pubDate>18 Aug 2023 07:08:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>朋友们求助一个 echarts 相关问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/966448</link>
+      <description>&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/EPRQczH.jpg&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/EPRQczH.jpg&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;如图，数据是为 8 为单位分割，正常的数据是一条条展示并且每一点 hover 后都会展示 symbol 点，想问一下怎么可以处理成以 8 为单位分割，谢谢啦</description>
+      <author>bury</author>
+      <pubDate>18 Aug 2023 07:08:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>fastjson 泛型反序列化的诡异问题 - Java</title>
+      <link>https://www.v2ex.com/t/966447</link>
+      <description>&lt;p&gt;版本：fastjson 1.2.76&lt;/p&gt;&#xA;&lt;p&gt;环境：springboot 2.3.6&lt;/p&gt;&#xA;&lt;p&gt;问题概述：通过构造 TypeReference 实现泛型反序列化，但实际上序列化出来的并不是想要的实际类型。并且，只有在于线上的某个节点出现，且本地无法复现。&lt;/p&gt;&#xA;&lt;p&gt;简化业务逻辑代码：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;泛型类 &lt;code&gt;BaseResponse&amp;lt;T&amp;gt;&lt;/code&gt; 装载通用的接口响应，其属性 &lt;code&gt;private T data&lt;/code&gt;是不同类型的数据；&lt;/li&gt;&#xA;&lt;li&gt;普通类 &lt;code&gt;CountryResponse&lt;/code&gt; 通过 json 数据反序列出：&lt;code&gt;BaseResponse&amp;lt;CountryResponse&amp;gt;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;工具类 &lt;code&gt;HttpRequestUtil&lt;/code&gt;，有个 static 方法将接口的 response body 反序列出 &lt;code&gt;BaseResponse&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    @Setter&#xA;    @Getter&#xA;    @ToString&#xA;    public static class BaseResponse&amp;lt;T&amp;gt; {&#xA;        private Integer code;&#xA;        private String msg;&#xA;        private T data;&#xA;    }&#xA;    &#xA;    @Setter&#xA;    @Getter&#xA;    @ToString&#xA;    public static class CountryResponse {&#xA;        private String countryId;&#xA;        private String countryName;&#xA;    }&#xA;    &#xA;    public static class HttpRequestUtil {&#xA;        public static &amp;lt;T&amp;gt; List&amp;lt;T&amp;gt; doGet4List(Class&amp;lt;T&amp;gt; responseCls) {&#xA;            // 工具类方法，body 变量模拟了请求响应 {&#34;code&#34;:0,&#34;success&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;countryId&#34;:&#34;CN&#34;,&#34;countryName&#34;:&#34;China&#34;}]}&#xA;            String body = &#34;{\&#34;code\&#34;:0,\&#34;success\&#34;:true,\&#34;msg\&#34;:\&#34;success\&#34;,\&#34;data\&#34;:[{\&#34;countryId\&#34;:\&#34;CN\&#34;,\&#34;countryName\&#34;:\&#34;China\&#34;}]}&#34;;&#xA;            log.info(&#34;doGet4List result: [{}]&#34;, body);&#xA;            BaseResponse&amp;lt;List&amp;lt;T&amp;gt;&amp;gt; baseResponse = JSON.parseObject(body, new TypeReference&amp;lt;&amp;gt;(responseCls) {&#xA;            });&#xA;            return Optional.ofNullable(baseResponse).map(BaseResponse::getData).orElse(null);&#xA;        }&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;问题报错代码&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    @Test&#xA;    public void testFastJsonParse() {&#xA;        List&amp;lt;CountryResponse&amp;gt; countryResponses = HttpRequestUtil.doGet4List(CountryResponse.class);&#xA;        for (CountryResponse countryResponse : countryResponses) { // 这行报错了&#xA;            System.out.println(countryResponse.getCountryId());&#xA;        }&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;查看线上日志，报错行数是：&lt;code&gt;for (CountryResponse countryResponse : countryResponses) {&lt;/code&gt; 这一行。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;java.lang.ClassCastException: class com.alibaba.fastjson.JSONObject cannot be cast to class com.foo.entity.CountryResponse(com.alibaba.fastjson.JSONObject and com.foo.entity.CountryResponse are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader @2a2d45ba)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;猜测：countryResponses 这个 List 的元素实际上是 JSONObject 对象，遍历时候强转了一次。&lt;/p&gt;&#xA;&lt;p&gt;主要是线上的所有节点都是同样的镜像，只有某个节点会出这个错误，本地无法复现，拿相同的 json 数据去反序列，都能正确反序列出 CountryResponse 。这个工具类方法都跑了大半年了。。。&lt;/p&gt;&#xA;&lt;p&gt;自我怀疑人生 ing......&lt;/p&gt;&#xA;</description>
+      <author>oneisall8955</author>
+      <pubDate>18 Aug 2023 07:02:45 +0000</pubDate>
+    </item>
+    <item>
       <title>加域的公司电脑如何限制端口访问的？ - 问与答</title>
       <link>https://www.v2ex.com/t/966446</link>
       <description>&lt;p&gt;和连接的网络没关系，装个 Team 或者常用的代理软件都无法联网，应该是端口限制。&#xA;电脑上也没有特别奇怪的软件，不知道怎么限制的。&lt;/p&gt;&#xA;</description>
