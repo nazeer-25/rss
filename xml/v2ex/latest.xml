@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>发现响应式代码的一个比较麻烦的地方 - 问与答</title>
+      <link>https://www.v2ex.com/t/966584</link>
+      <description>&lt;p&gt;要增加一些流程，把已有的代码流 wrap 起来的时候，整个代码块会被 IDEA 重新 format ，增加一层缩进。在 git 那边可能就是动不动成千上百行的修改了。&lt;/p&gt;&#xA;&lt;p&gt;比如&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;  ...&#xA;  foo.flatMap {&#xA;    ...&#xA;  }&#xA;  .onFailure(...)&#xA;  .ifNull()&#xA;  ...&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;会变成 &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;  ...&#xA;  someProcess(...) {&#xA;    ...                // 从这里往下的都会缩进一层&#xA;    foo.flatMap {&#xA;      ...&#xA;    }&#xA;    .onFailure(...)&#xA;    .ifNull()&#xA;    ...                // 一直到这里为止&#xA;  }&#xA;  ...&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;不知道有没有什么办法可以更好地 diff 代码。毕竟实际上内层代码并没有任何改变。&lt;/p&gt;&#xA;</description>
+      <author>netabare</author>
+      <pubDate>18 Aug 2023 18:14:12 +0000</pubDate>
+    </item>
+    <item>
       <title>有人试过用 WSL 跑 Linux QQ 吗？ - 问与答</title>
       <link>https://www.v2ex.com/t/966583</link>
       <description>&lt;p&gt;最新版 Win11 ，下载 deb 包安装，解决了几个依赖问题后，成功跑了起来。也可以直接下载 AppImage 运行。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;qq&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/TJnOU8H.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;没有缩放，显得偏小；输入法比较麻烦。最大的问题是，似乎没有硬件加速&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;[4199:0818/134232.973031:ERROR:&lt;a href=&#34;http://gpu_memory_buffer_support_x11.cc&#34; rel=&#34;nofollow&#34;&gt;gpu_memory_buffer_support_x11.cc&lt;/a&gt;(44)] dri3 extension not supported.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;google-chrome 有硬件加速，GPU 占用率能观察到。&#xA;当然 WSL 的 GPU 硬件加速本来就不成熟，官方都说不一定比软件渲染快。&lt;/p&gt;&#xA;&lt;p&gt;参考资料:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps&#34; rel=&#34;nofollow&#34;&gt;https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/microsoft/wslg/issues/469&#34; rel=&#34;nofollow&#34;&gt;https://github.com/microsoft/wslg/issues/469&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/microsoft/wslg#opengl-accelerated-rendering-in-wslg&#34; rel=&#34;nofollow&#34;&gt;https://github.com/microsoft/wslg#opengl-accelerated-rendering-in-wslg&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
