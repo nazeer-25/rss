@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>香港 VPS 网页被墙，该怎么办 - VPS</title>
+      <link>https://www.v2ex.com/t/966919</link>
+      <description>&lt;p&gt;IP 能直接访问网站: 123.132.123.123&#xA;域名能访问：Jenkins  &lt;a href=&#34;http://xxx.com:8080&#34; rel=&#34;nofollow&#34;&gt;xxx.com:8080&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;域名访问网站就不能访问了 &lt;a href=&#34;http://xxx.com&#34; rel=&#34;nofollow&#34;&gt;xxx.com&lt;/a&gt;  同样的域名  自己写的网站部署 Nginx 上就不能访问了  Jenkins 却能访问。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;server {&#xA;    listen 443 ssl http2;&#xA;    server_name xxx.com;&#xA;    #填写证书文件路径&#xA;    ssl_certificate      /var/ssl/cloudflare/aidati.pem;&#xA;    #填写证书私钥文件路径 &#xA;    ssl_certificate_key  /var/ssl/cloudflare/aidati.key;&#xA; &#xA;    ssl_session_cache    shared:SSL:1m;&#xA;    ssl_session_timeout  5m;&#xA;&#x9;&#x9;&#xA;    #默认加密套件&#xA;    #ssl_ciphers  HIGH:!aNULL:!MD5;&#xA;&#x9;&#x9;&#xA;    #自定义设置使用的 TLS 协议的类型以及加密套件（以下为配置示例，请您自行评估是否需要配置）&#xA;    #TLS 协议版本越高，HTTPS 通信的安全性越高，但是相较于低版本 TLS 协议，高版本 TLS 协议对浏览器的兼容性较差。&#xA;    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;&#xA;    ssl_protocols TLSv1.3;&#xA;&#x9;&#x9;&#xA;    #表示优先使用服务端加密套件。默认开启&#xA;    ssl_prefer_server_ciphers  on;&#xA;&#xA;    # HSTS (ngx_http_headers_module is required) (63072000 seconds)&#xA;    add_header Strict-Transport-Security &#34;max-age=63072000&#34; always;&#xA;&#xA;&#xA;    location / {&#xA;        root /var/go/src/ykt-run/web/dist;&#xA;        add_header Cache-Control &#39;no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0&#39;;&#xA;        try_files $uri $uri/ /index.html;&#xA;    }&#xA;&#x9;location /api {&#xA;        proxy_set_header Host $http_host;&#xA;        proxy_set_header  X-Real-IP $remote_addr;&#xA;        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#xA;        proxy_set_header X-Forwarded-Proto $scheme;&#xA;        rewrite ^/api/(.*)$ /$1 break;  #重写&#xA;        proxy_pass http://127.0.0.1:8888; # 设置代理服务器的协议和地址&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;网站是基于 &lt;a href=&#34;https://github.com/flipped-aurora/gin-vue-admin&#34; rel=&#34;nofollow&#34;&gt;https://github.com/flipped-aurora/gin-vue-admin&lt;/a&gt; 这个框架基础上写的&lt;/p&gt;&#xA;&lt;p&gt;我自己找到解决方案 1 是国内 CND 代理，这个太费钱了，&lt;/p&gt;&#xA;&lt;p&gt;这是什么原因求大佬指导一下不费钱的解决方案&lt;/p&gt;&#xA;&lt;p&gt;小弟在这跪谢了&lt;/p&gt;&#xA;</description>
+      <author>c88155745</author>
+      <pubDate>20 Aug 2023 17:42:17 +0000</pubDate>
+    </item>
+    <item>
       <title>美国公司的思科 anyconnect 国内速度很慢怎么办？用美国漫游 esim 连接速度就很快 - 问与答</title>
       <link>https://www.v2ex.com/t/966918</link>
       <author>j20001112</author>

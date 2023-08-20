@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "香港 VPS 网页被墙，该怎么办 - VPS",
+      "Link": "https://www.v2ex.com/t/966919",
+      "Description": "\u003cp\u003eIP 能直接访问网站: 123.132.123.123\n域名能访问：Jenkins  \u003ca href=\"http://xxx.com:8080\" rel=\"nofollow\"\u003exxx.com:8080\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e域名访问网站就不能访问了 \u003ca href=\"http://xxx.com\" rel=\"nofollow\"\u003exxx.com\u003c/a\u003e  同样的域名  自己写的网站部署 Nginx 上就不能访问了  Jenkins 却能访问。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eserver {\n    listen 443 ssl http2;\n    server_name xxx.com;\n    #填写证书文件路径\n    ssl_certificate      /var/ssl/cloudflare/aidati.pem;\n    #填写证书私钥文件路径 \n    ssl_certificate_key  /var/ssl/cloudflare/aidati.key;\n \n    ssl_session_cache    shared:SSL:1m;\n    ssl_session_timeout  5m;\n\t\t\n    #默认加密套件\n    #ssl_ciphers  HIGH:!aNULL:!MD5;\n\t\t\n    #自定义设置使用的 TLS 协议的类型以及加密套件（以下为配置示例，请您自行评估是否需要配置）\n    #TLS 协议版本越高，HTTPS 通信的安全性越高，但是相较于低版本 TLS 协议，高版本 TLS 协议对浏览器的兼容性较差。\n    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;\n    ssl_protocols TLSv1.3;\n\t\t\n    #表示优先使用服务端加密套件。默认开启\n    ssl_prefer_server_ciphers  on;\n\n    # HSTS (ngx_http_headers_module is required) (63072000 seconds)\n    add_header Strict-Transport-Security \"max-age=63072000\" always;\n\n\n    location / {\n        root /var/go/src/ykt-run/web/dist;\n        add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';\n        try_files $uri $uri/ /index.html;\n    }\n\tlocation /api {\n        proxy_set_header Host $http_host;\n        proxy_set_header  X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        rewrite ^/api/(.*)$ /$1 break;  #重写\n        proxy_pass http://127.0.0.1:8888; # 设置代理服务器的协议和地址\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e网站是基于 \u003ca href=\"https://github.com/flipped-aurora/gin-vue-admin\" rel=\"nofollow\"\u003ehttps://github.com/flipped-aurora/gin-vue-admin\u003c/a\u003e 这个框架基础上写的\u003c/p\u003e\n\u003cp\u003e我自己找到解决方案 1 是国内 CND 代理，这个太费钱了，\u003c/p\u003e\n\u003cp\u003e这是什么原因求大佬指导一下不费钱的解决方案\u003c/p\u003e\n\u003cp\u003e小弟在这跪谢了\u003c/p\u003e\n",
+      "Author": "c88155745",
+      "PubDate": "2023-08-20T17:42:17Z"
+    },
+    {
       "Title": "美国公司的思科 anyconnect 国内速度很慢怎么办？用美国漫游 esim 连接速度就很快 - 问与答",
       "Link": "https://www.v2ex.com/t/966918",
       "Description": "",
