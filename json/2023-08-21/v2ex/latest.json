@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Docker 安装 Ubuntu Desktop 22.04 中文版 (支持剪贴板共享、文件共享、root 登录) - 分享创造",
+      "Link": "https://www.v2ex.com/t/967023",
+      "Description": "\u003cp\u003e分享一个用好的基于 Docker 的 Ubuntu Desktop 版本，kasmweb 公司的 ubuntu-jammy-desktop 社区版。最近研究了一下，弄出来了 root 、文件共享、中文界面显示、中文输入，感觉蛮好用的，分享给大家。\u003c/p\u003e\n\u003ch2\u003e特点和用途\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e快：1 秒部署，1 秒启动，1 秒重启，1 秒关机。\u003c/li\u003e\n\u003cli\u003e功能：已内置 chrome 、firefox 、onlyoffice 、sublime text 、vscode 等常用软件，开机即用。\u003c/li\u003e\n\u003cli\u003e方便：使用浏览器远程访问 Ubuntu Desktop ，网络部署方便。\u003c/li\u003e\n\u003cli\u003e安全：在容器里运行浏览器、收发邮件、打开文档文件，可以防止木马入侵主机。\u003c/li\u003e\n\u003cli\u003e支持中文：中文界面显示，可以支持中文输入。\u003c/li\u003e\n\u003cli\u003eroot 权限：能安装第三方软件 deb 包。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e运行环境\u003c/h2\u003e\n\u003cp\u003e至少双核 CPU (x64 或 arm64 架构)，2GB 内存，20GB 硬盘空间\u003c/p\u003e\n\u003ch2\u003e安装 Ubuntu Desktop\u003c/h2\u003e\n\u003ch3\u003e1. 下载 Ubuntu Desktop 容器\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003edocker pull kasmweb/ubuntu-jammy-desktop:1.14.0 \n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e2. 创建并运行 Ubuntu Desktop 容器\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003edocker run -d --restart=unless-stopped \\\n--name ubuntu-desktop \\\n-p 6901:6901 \\\n-e VNC_PW=password \\\n-e LANG=zh_CN.UTF-8 \\\n-e LANGUAGE=zh_CN:zh \\\n-e LC_ALL=zh_CN.UTF-8 \\\n-v /home/docker/ubuntu-desktop/shares:/home/kasm-user/shares \\\n--shm-size=512m \\\nkasmweb/ubuntu-jammy-desktop:1.14.0\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e3. 运行以下命令设置 root 密码\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003edocker exec -u root -it ubuntu-desktop passwd\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e4. 停止/启动/重启/删除 ubuntu desktop 容器\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003edocker stop/start/restart/rm ubuntu-desktop\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e使用 Ubuntu Desktop\u003c/h2\u003e\n\u003ch3\u003e1. 浏览器访问  https://服务器 ip:6901   (如果显示不正常，请按住 ctrl 后刷新页面)\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e用户名：kasm_user\n密码：password  (VNC_PW 的值)\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e2. 剪贴板共享\u003c/h3\u003e\n\u003cp\u003e使用 chrome/edge 浏览器时，支持剪贴板共享。\u003c/p\u003e\n\u003ch3\u003e3. 文件共享\u003c/h3\u003e\n\u003cp\u003e在 Ubuntu Desktop 里，将文件保存在/home/kasm-user/shares 目录下，会永久存放主机的/home/docker/ubuntu-desktop/shares 目录下，通过这个目录可实现文件共享。\u003c/p\u003e\n\u003ch3\u003e4. root 登录\u003c/h3\u003e\n\u003cp\u003e在 Ubuntu Desktop 里的终端，使用以下命令以 root 登录后可以管理系统、安装软件。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esu root --login\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e5. 中文输入法\u003c/h3\u003e\n\u003cp\u003e在网页上的 KasmVNC 的设置中，启用输入法 (IME)，即可使用浏览器所属操作系统的中文输入法 (不是 ubuntu 里的输入法)\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003emacos 切换到中文输入法，即可在 Ubuntu Desktop 输入中文了\u003c/li\u003e\n\u003cli\u003ewindows 可能需要以下设置才能使用：\n在“设置-\u0026gt;时间和语言-\u0026gt;语言-\u0026gt;首选语言”添加“英语(美国)”\n在首次使用时，将系统输入法切换成美式键盘，再切换成中文才能使用 \u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e目前还没搞定声音，按官方介绍需要安装 Kasm Workspaces ，如果有 V 友搞定了，可以介绍一下方法。\u003c/p\u003e\n",
+      "Author": "yinmin",
+      "PubDate": "2023-08-21T03:33:06Z"
+    },
+    {
+      "Title": "有什么轻量级的开源企业邮箱系统推荐 ? - 问与答",
+      "Link": "https://www.v2ex.com/t/967022",
+      "Description": "起因是我用的腾讯企业邮箱收不到 epicgames 验证码, 我不确定是谁的问题. \u003cbr /\u003e\u003cbr /\u003e不知道是被 epic 屏蔽了我的邮箱域名 (.cn 后缀)  还是被腾讯拦截了 , 网上搜了发现用 qq 邮箱也存在收不到验证码的情况\u003cbr /\u003e\u003cbr /\u003e我记得国内之前的免费企业邮箱挺多, 阿里的 腾讯的 网易的 ... 想换一家试试, 但是怕万一也被拦截 (或者不是)\u003cbr /\u003e\u003cbr /\u003e国外的企业邮箱大多数都是收费的 , 我平日里就收个验证码 ,也不发邮件, 感觉划不来\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e现在想咨询一下大家 有什么轻量一点的邮箱系统推荐 , 有一台闲置的 2C2G 的服务器, 自己搭一个邮箱服务自己用\u003cbr /\u003e顺带问一下 国内 IDC 貌似不开放邮箱端口 , 这个方案可行吗 ?",
+      "Author": "shenjinpeng",
+      "PubDate": "2023-08-21T03:31:34Z"
+    },
+    {
+      "Title": "交易所技术部门招聘安全负责人、 Java 开发、测试开发 - 酷工作",
+      "Link": "https://www.v2ex.com/t/967021",
+      "Description": "招聘安全负责人、java 开发、测试开发\u003cbr /\u003e以上所有岗位都需要交易所工作经验\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e联系方式： \u003ca target=\"_blank\" href=\"https://t.me/Ritalya\" rel=\"nofollow noopener\"\u003ehttps://t.me/Ritalya\u003c/a\u003e",
+      "Author": "ritalya",
+      "PubDate": "2023-08-21T03:31:17Z"
+    },
+    {
       "Title": "老家房子拆迁了要， 1 平米换 0.4 平米楼房，划算不划算 - 问与答",
       "Link": "https://www.v2ex.com/t/967020",
       "Description": "本想着靠拆迁一夜暴富，没成想如果上楼了不但房子面积小了，还得装修、物业、取暖，每年不少开销，上不起楼啊。大家农村拆迁都是怎么个补偿，有没有一夜暴富的。\u003cbr /\u003e注：所在地是河北农村",
