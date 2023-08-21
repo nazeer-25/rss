@@ -4,18 +4,18 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有什么方法可以去掉 iPhone 皮革壳的涂层吗？ - Apple</title>
+      <link>https://www.v2ex.com/t/967243</link>
+      <description>&lt;p&gt;用了三个月涂层就开始脱落，现在看起来有点恶心。&lt;br/&gt;&lt;br/&gt;&lt;img alt=&#34;IMG_0037.jpeg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://vip2.loli.io/2023/08/22/zUlGarCMXOSBm5P.jpg&#34;/&gt;&lt;br/&gt;&lt;br/&gt;&lt;/p&gt;&#xA;</description>
+      <author>dingwen07</author>
+      <pubDate>21 Aug 2023 22:49:18 +0000</pubDate>
+    </item>
+    <item>
       <title>Linux crontab 使用的环境变量如何与用户变量完全相同 ？ - 问与答</title>
       <link>https://www.v2ex.com/t/967242</link>
       <description>&lt;h1&gt;问题&lt;/h1&gt;&#xA;&lt;p&gt;我使用 next-terminal 作为管理 VPS 的工具，因为网络环境不好经常导致 next-terminal 的 webssh 断开，使用 screen 作为 webssh 断开快速恢复的方式，配置 crontab 重启后创建一个 screen ，配置&lt;code&gt;.bashrc&lt;/code&gt;作为每次 ssh 链接恢复 screen ，问题，使用 crontab 创建和我手动创建 screen 差异巨大，crontab 创建 screen 基本无法使用，手动创建 screen 可以使用。&lt;/p&gt;&#xA;&lt;h1&gt;自己查找&lt;/h1&gt;&#xA;&lt;p&gt;通过 Google 搜索得知要在&lt;code&gt;/etc/screenrc&lt;/code&gt;，添加&lt;code&gt;shell -$SHELL &lt;/code&gt;,可以使用用户环境变量，手动创建 screen 可以，但 crontab 创建不行，研究发现 crontab 环境变量与用户使用的环境变量差异巨大。希望 crontab 环境变量与用户变量相同。&lt;/p&gt;&#xA;&lt;h1&gt;代码&lt;/h1&gt;&#xA;&lt;h2&gt;crontab 配置&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code&gt;@reboot sleep 10 &amp;amp;&amp;amp; /usr/bin/screen -d -l -m&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;说明：用户为 www ，机器启动 10 秒后执行&lt;code&gt;/usr/bin/screen -d -l -m&lt;/code&gt;，创建 screenrc ，已废弃  &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;@reboot sleep 10 &amp;amp;&amp;amp; /home/www/.web-ssh.sh&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;说明：机器启动 10 秒后执行 /home/www/.web&lt;a href=&#34;http://-ssh.sh&#34; rel=&#34;nofollow&#34;&gt;-ssh.sh&lt;/a&gt;&lt;br/&gt;&#xA;/home/www/.web&lt;a href=&#34;http://-ssh.sh&#34; rel=&#34;nofollow&#34;&gt;-ssh.sh&lt;/a&gt; 脚本&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#!/bin/bash&#xA;source /home/www/.bash_profile&#xA;/usr/bin/screen -d -l -m&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;用于获取环境变量的脚本&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;#!/bin/bash&#xA;source /home/www/.bash_profile&#xA;env  &amp;gt;&amp;gt;/tmp/env.log 2&amp;gt;&amp;amp;1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;手动执行获取环境变量脚本&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;SHELL=/bin/bash&#xA;FLYCTL_INSTALL=/home/www/.fly&#xA;PWD=/home/www&#xA;LOGNAME=www&#xA;XDG_SESSION_TYPE=tty&#xA;MOTD_SHOWN=pam&#xA;HOME=/home/www&#xA;LANG=zh_CN.UTF-8&#xA;LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:&#xA;SSH_CONNECTION=IP 34370 IP&#xA;XDG_SESSION_CLASS=user&#xA;TERM=xterm-256color&#xA;USER=www&#xA;SHLVL=3&#xA;XDG_SESSION_ID=13&#xA;XDG_RUNTIME_DIR=/run/user/1000&#xA;SSH_CLIENT=IP 34370 22&#xA;XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop&#xA;PATH=/home/www/.fly/bin:/home/www/.fly/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin&#xA;DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus&#xA;SSH_TTY=/dev/pts/0&#xA;_=/usr/bin/env&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;crontab 执行获取环境变量脚本&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;SHELL=/bin/sh&#xA;FLYCTL_INSTALL=/home/www/.fly&#xA;PWD=/home/www&#xA;LOGNAME=www&#xA;HOME=/home/www&#xA;LANG=zh_CN.UTF-8&#xA;SHLVL=1&#xA;PATH=/home/www/.fly/bin:/usr/bin:/bin&#xA;_=/usr/bin/env&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;.bashrc 尾部添加代码，用于每次 SSH 连接恢复 screen&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;screen -r&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h1&gt;想法&lt;/h1&gt;&#xA;&lt;p&gt;要解决问题  &lt;/p&gt;&#xA;&lt;p&gt;1.crontab 使用的变量与我 SSH 登录上去使用的变量完全相同  &lt;/p&gt;&#xA;&lt;p&gt;2.修改.bashrc ，机器重启后第一次登录执行&lt;code&gt;/usr/bin/screen -d -l -m&lt;/code&gt;,再执行&lt;code&gt;screen -r&lt;/code&gt;,之后每次 SSH 连接只执行&lt;code&gt;screen -r&lt;/code&gt;,除非机器重启。（超出我能力）&lt;/p&gt;&#xA;&lt;h1&gt;额外&lt;/h1&gt;&#xA;&lt;pre&gt;&lt;code&gt;@reboot sleep 10 &amp;amp;&amp;amp; /usr/bin/screen -S next-terminal&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;不会执行&lt;/p&gt;&#xA;</description>
       <author>AaronLee</author>
       <pubDate>21 Aug 2023 22:39:41 +0000</pubDate>
-    </item>
-    <item>
-      <title>Surge5 for mac 发车， 145 一位 - Surge</title>
-      <link>https://www.v2ex.com/t/967241</link>
-      <description>&lt;p&gt;5 人车，145RMB 一位。&#xA;5 人齐即刻发车。&#xA;后续大版本升级更新到时候再商定，个人原因跳车不退。&#xA;如有需要，请联系 telegram： &lt;a href=&#34;https://t.me/+X9SQcPG9NFs4ODdl&#34; rel=&#34;nofollow&#34;&gt;https://t.me/+X9SQcPG9NFs4ODdl&lt;/a&gt;&lt;/p&gt;&#xA;</description>
-      <author>s7964926</author>
-      <pubDate>21 Aug 2023 22:34:42 +0000</pubDate>
     </item>
     <item>
       <title>Linux crontab 使用的环境变量如何与用户变量完全相同？ - 问与答</title>
@@ -31,14 +31,14 @@
       <pubDate>21 Aug 2023 22:00:56 +0000</pubDate>
     </item>
     <item>
-      <title>有哪些比较极客的邮箱能争取下，也能同时证明在 cs 领域的能力？比如 @ntp.org 的邮箱 - 问与答</title>
+      <title>有哪些比较极客的邮箱能争取下，也能同时证明在 cs 领域的能力？比如 @ntp.org 的邮箱 - 互联网</title>
       <link>https://www.v2ex.com/t/967238</link>
       <description>&lt;p&gt;比如这个链接里 &lt;a href=&#34;https://www.v2ex.com/t/114427&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/114427&lt;/a&gt;  AstroProfundis 留的 &lt;a href=&#34;http://ntp.org&#34; rel=&#34;nofollow&#34;&gt;ntp.org&lt;/a&gt; 邮箱&#xA;比如要得到 @ubuntu.com 邮箱，需要成为 member &lt;a href=&#34;https://wiki.ubuntu.com/Membership&#34; rel=&#34;nofollow&#34;&gt;https://wiki.ubuntu.com/Membership&lt;/a&gt; ，至少要贡献 6 个月。&#xA;再比如 @gnu.org 的邮箱&lt;/p&gt;&#xA;&lt;p&gt;另外一个类别，比如 &lt;a href=&#34;http://fsf.org&#34; rel=&#34;nofollow&#34;&gt;fsf.org&lt;/a&gt; 和 &lt;a href=&#34;http://linux.com&#34; rel=&#34;nofollow&#34;&gt;linux.com&lt;/a&gt; 的，是花钱就能买到，也算一个类别吧，可以考虑但优先级不如上面。并且另一个缺点是经常要续费。&lt;/p&gt;&#xA;&lt;p&gt;邮箱还是很重要，如果能很极客，又能终身拥有就更好了。&lt;/p&gt;&#xA;&lt;p&gt;坛友有其他推荐吗？如果需要在开源社区贡献争取下也是可以的。&lt;/p&gt;&#xA;&lt;p&gt;一个参考帖： &lt;a href=&#34;https://www.v2ex.com/t/839631&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/839631&lt;/a&gt;&lt;/p&gt;&#xA;</description>
       <author>cdy</author>
       <pubDate>21 Aug 2023 21:43:19 +0000</pubDate>
     </item>
     <item>
-      <title>真诚请教，美元在香港选哪个银行利息有在 5%左右的利息 - 程序员</title>
+      <title>真诚请教，美元在香港选哪个银行利息有在 5%左右的利息 - 投资</title>
       <link>https://www.v2ex.com/t/967237</link>
       <description>&lt;p&gt;周一换了 2 万美金并且通过中银转到香港中银同名账户， 预计后天能可以收到。&lt;/p&gt;&#xA;&lt;p&gt;请问选择哪个银行或者产品能够无风险的拿到 5%左右的利息呢？&lt;/p&gt;&#xA;</description>
       <author>Eaglemask</author>
@@ -294,6 +294,13 @@
       <description>具体来说我们团队是天猫超市技术部，天猫超市我认为是一个很值得一来的地方，既能够体会到平台电商怎么做，也能够体会到开一家店铺怎么赚钱。&lt;br /&gt;我们这边高并发，高资金流动，复杂互动玩法设计，场景都很多。团队稳定，业务是少有的一直在增长的业务，所以今年也有了校招 HC 。&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://talent.taotian.com/campus/qrcode/home?code=EpCsbIoiyG4qhQE2jOOUCvJvJHBJbJmwIX80GuAyWSA%3D&#34; rel=&#34;nofollow noopener&#34;&gt;https://talent.taotian.com/campus/qrcode/home?code=EpCsbIoiyG4qhQE2jOOUCvJvJHBJbJmwIX80GuAyWSA%3D&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;上面是我的内推链接，投递以后可以帮你改一改简历</description>
       <author>suikatw</author>
       <pubDate>21 Aug 2023 13:13:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>Surge5 for mac 发车， 145 一位 - Surge</title>
+      <link>https://www.v2ex.com/t/967241</link>
+      <description>&lt;p&gt;5 人车，145RMB 一位。&#xA;5 人齐即刻发车。&#xA;后续大版本升级更新到时候再商定，个人原因跳车不退。&#xA;如有需要，请联系 telegram： &lt;a href=&#34;https://t.me/+X9SQcPG9NFs4ODdl&#34; rel=&#34;nofollow&#34;&gt;https://t.me/+X9SQcPG9NFs4ODdl&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>s7964926</author>
+      <pubDate>21 Aug 2023 22:34:42 +0000</pubDate>
     </item>
     <item>
       <title>c 的 cJSON 库如何判断子子子子子节点存在这个 key, 不想一直遍历，可以怎么封装呢？ - 问与答</title>
