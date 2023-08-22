@@ -22,11 +22,6 @@
       <link>https://studygolang.com/resources/15584#reply0</link>
     </item>
     <item>
-      <title>React18+TS 通用后台管理系统解决方案落地实战(网盘分享)</title>
-      <link>https://studygolang.com/articles/36280#reply0</link>
-      <description>&lt;h3&gt;download：&lt;a href=&#34;https://www.zxit666.com/6471/&#34;&gt;React18+TS 通用后台管理系统解决方案落地实战&lt;/a&gt;&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;React 18+TS的根本概念&#xA;TypeScript&#xA;TypeScript是一种静态类型的编程言语，它能够在编译时检查代码中的类型错误，从而进步代码的可读性和可维护性1。TypeScript还支持ES6+的新特性，如类，模块，箭头函数，解构赋值等，使得代码愈加简约和现代化1。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;TypeScript能够与React框架无缝集成，只需求装置相应的类型定义文件即可。例如，要运用React 18+TS开发应用，能够执行以下命令：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;npm install &amp;ndash;save react@next react-dom@next&#xA;npm install &amp;ndash;save-dev typescript @types/react @types/react-dom&#xA;复制&#xA;这样就能够在.ts或.tsx文件中运用React和TypeScript了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;React 18&#xA;React 18是React框架的最新版本，它包含了一些严重的更新和改良2。其中最引人瞩目的是Server Components，它能够让开发者在效劳器端渲染组件，并将结果发送给客户端3。这样能够减少客户端的代码量和网络传输量，进步应用的加载速度和响应速度3。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;另一个重要的特性是Suspense，它能够让开发者在组件中声明数据依赖，并在数据加载时显现一个占位符4。这样能够防止组件在渲染过程中呈现闪烁或空白的状况，进步用户体验4。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;还有一个值得关注的特性是Concurrent Rendering，它能够让React在后台渲染更新，并在适宜的机遇显现给用户5。这样能够防止长时间的渲染任务阻塞用户交互，进步应用的流利度和稳定性5。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;要运用React 18+TS开发应用，需求配置一些实验性的特性。例如，在tsconfig.json文件中添加以下内容：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;{&#xA;  &amp;ldquo;compilerOptions&amp;rdquo;: {&#xA;    &amp;ldquo;jsx&amp;rdquo;: &amp;ldquo;react-jsx&amp;rdquo;,&#xA;    &amp;ldquo;jsxImportSource&amp;rdquo;: &amp;ldquo;react&amp;rdquo;,&#xA;    &amp;ldquo;experimentalDecorators&amp;rdquo;: true,&#xA;    &amp;ldquo;useDefineForClassFields&amp;rdquo;: true&#xA;  }&#xA;}&#xA;复制&#xA;这样就能够在.tsx文件中运用JSX语法，并启用装饰器和类字段等特性了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;React 18+TS的优势&#xA;运用React 18+TS开发前端应用有以下几个优势：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;能够应用TypeScript的类型系统和ES6+的新特性，编写愈加强健、简约和现代化的代码。&#xA;能够应用React 18的新特性，如Server Components, Suspense, Concurrent Rendering等，进步应用的性能和用户体验。&#xA;能够享用React生态系统中丰厚的资源和工具，如Create React App, Next.js, React Router, Redux, Material UI等，快速搭建和部署应用。&#xA;React 18+TS在线教育平台示例&#xA;为了展现如何运用React 18+TS构建一个在线教育平台，简单完成一个前端页面，显现课程列表和课程详情。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;首先，我们需求创立一个React 18+TS项目，能够运用Create React App工具，执行以下命令：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;npx create-react-app react18-ts-edu &amp;ndash;template typescript&#xA;cd react18-ts-edu&#xA;npm start&#xA;复制&#xA;这样就能够在阅读器中看到一个默许的页面了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;接下来，我们需求装置一些依赖库，如GraphQL, Apollo Client, Material UI等，执行以下命令：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;npm install graphql @apollo/client @material-ui/core @material-ui/icons&#xA;复制&#xA;然后，我们需求配置Apollo Client，用于与后端的GraphQL接口通讯。在src目录下创立一个apollo.ts文件，添加以下内容：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import { ApolloClient, InMemoryCache } from &amp;ldquo;@apollo/client&amp;rdquo;;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 创立一个Apollo Client实例&#xA;const client = new ApolloClient({&#xA;  // 指定后端的GraphQL接口地址&#xA;  uri: &amp;ldquo;&lt;a href=&#34;http://localhost:3000/graphql&amp;quot;&#34;&gt;http://localhost:3000/graphql&amp;rdquo;&lt;/a&gt;,&#xA;  // 创立一个内存缓存对象&#xA;  cache: new InMemoryCache(),&#xA;});&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 导出client对象&#xA;export default client;&#xA;复制&#xA;接着，我们需求修正src/index.tsx文件，运用ApolloProvider组件包裹App组件，将client对象传送给子组件。修正后的文件内容如下：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import React from &amp;ldquo;react&amp;rdquo;;&#xA;import ReactDOM from &amp;ldquo;react-dom&amp;rdquo;;&#xA;import { ApolloProvider } from &amp;ldquo;@apollo/client&amp;rdquo;;&#xA;import client from &amp;ldquo;./apollo&amp;rdquo;;&#xA;import App from &amp;ldquo;./App&amp;rdquo;;&#xA;import &amp;ldquo;./index.css&amp;rdquo;;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;ReactDOM.render(&#xA;  &lt;React.StrictMode&gt;&#xA;    // 运用ApolloProvider组件包裹App组件&lt;/p&gt;&#xA;&#xA;&lt;p&gt;,&#xA;  document.getElementById(&amp;ldquo;root&amp;rdquo;)&#xA;);&#xA;复制&#xA;接下来，我们需求创立一个CourseList组件，用于显现课程列表。在src目录下创立一个components文件夹，并在其中创立一个CourseList.tsx文件，添加以下内容：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import React, { useState } from &amp;ldquo;react&amp;rdquo;;&#xA;import { useQuery, gql } from &amp;ldquo;@apollo/client&amp;rdquo;;&#xA;import {&#xA;  Grid,&#xA;  Card,&#xA;  CardActionArea,&#xA;  CardMedia,&#xA;  CardContent,&#xA;  Typography,&#xA;  CardActions,&#xA;  Button,&#xA;} from &amp;ldquo;@material-ui/core&amp;rdquo;;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 定义一个GraphQL查询语句，用于获取课程列表&#xA;const COURSES_QUERY = gql&lt;code&gt;&#xA;  query {&#xA;    courses {&#xA;      id&#xA;      title&#xA;      cover&#xA;      price&#xA;      rating&#xA;    }&#xA;  }&#xA;&lt;/code&gt;;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 定义一个课程类型的接口，用于描绘课程的属性&#xA;interface Course {&#xA;  id: string;&#xA;  title: string;&#xA;  cover: string;&#xA;  price: number;&#xA;  rating: number;&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 定义一个CourseList组件的函数，接纳一个onSelect属性，用于传送选中的课程ID&#xA;const CourseList: React.FC&amp;lt;{ onSelect: (id: string) =&amp;gt; void }&amp;gt; = ({&#xA;  onSelect,&#xA;}) =&amp;gt; {&#xA;  // 运用useQuery钩子函数，传入查询语句，获取查询结果&#xA;  const { loading, error, data } = useQuery(COURSES_QUERY);&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 假如查询正在加载中，返回一个提示信息&#xA;  if (loading) return&#xA;Loading&amp;hellip;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;;&#xA;  // 假如查询出错了，返回一个错误信息&#xA;  if (error) return&#xA;Error :(&lt;/p&gt;&#xA;&#xA;&lt;p&gt;;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 假如查询胜利了，返回一个网格规划的课程列表&#xA;  return (&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;  {data.courses.map((course: Course) =&amp;gt; (&#xA;&#xA;&#xA;        &amp;lt;CardActionArea onClick={() =&amp;gt; onSelect(course.id)}&amp;gt;&#xA;          &amp;lt;CardMedia&#xA;            component=&amp;quot;img&amp;quot;&#xA;            alt={course.title}&#xA;            height=&amp;quot;140&amp;quot;&#xA;            image={course.cover}&#xA;            title={course.title}&#xA;          /&amp;gt;&#xA;&#xA;&#xA;              {course.title}&#xA;&#xA;&#xA;              {`价钱：${course.price}元`}&#xA;&#xA;&#xA;              {`评分：${course.rating}`}&#xA;&#xA;          &amp;lt;/CardContent&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
-    </item>
-    <item>
       <title>go奇怪的切片</title>
       <link>https://studygolang.com/articles/36281#reply2</link>
     </item>
@@ -46,6 +41,11 @@
     <item>
       <title>众筹互助合约DAPP开发合约部署</title>
       <link>https://studygolang.com/articles/36282#reply0</link>
+    </item>
+    <item>
+      <title>React18+TS 通用后台管理系统解决方案落地实战(网盘分享)</title>
+      <link>https://studygolang.com/articles/36280#reply0</link>
+      <description>&lt;h3&gt;download：&lt;a href=&#34;https://www.zxit666.com/6471/&#34;&gt;React18+TS 通用后台管理系统解决方案落地实战&lt;/a&gt;&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;React 18+TS的根本概念&#xA;TypeScript&#xA;TypeScript是一种静态类型的编程言语，它能够在编译时检查代码中的类型错误，从而进步代码的可读性和可维护性1。TypeScript还支持ES6+的新特性，如类，模块，箭头函数，解构赋值等，使得代码愈加简约和现代化1。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;TypeScript能够与React框架无缝集成，只需求装置相应的类型定义文件即可。例如，要运用React 18+TS开发应用，能够执行以下命令：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;npm install &amp;ndash;save react@next react-dom@next&#xA;npm install &amp;ndash;save-dev typescript @types/react @types/react-dom&#xA;复制&#xA;这样就能够在.ts或.tsx文件中运用React和TypeScript了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;React 18&#xA;React 18是React框架的最新版本，它包含了一些严重的更新和改良2。其中最引人瞩目的是Server Components，它能够让开发者在效劳器端渲染组件，并将结果发送给客户端3。这样能够减少客户端的代码量和网络传输量，进步应用的加载速度和响应速度3。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;另一个重要的特性是Suspense，它能够让开发者在组件中声明数据依赖，并在数据加载时显现一个占位符4。这样能够防止组件在渲染过程中呈现闪烁或空白的状况，进步用户体验4。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;还有一个值得关注的特性是Concurrent Rendering，它能够让React在后台渲染更新，并在适宜的机遇显现给用户5。这样能够防止长时间的渲染任务阻塞用户交互，进步应用的流利度和稳定性5。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;要运用React 18+TS开发应用，需求配置一些实验性的特性。例如，在tsconfig.json文件中添加以下内容：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;{&#xA;  &amp;ldquo;compilerOptions&amp;rdquo;: {&#xA;    &amp;ldquo;jsx&amp;rdquo;: &amp;ldquo;react-jsx&amp;rdquo;,&#xA;    &amp;ldquo;jsxImportSource&amp;rdquo;: &amp;ldquo;react&amp;rdquo;,&#xA;    &amp;ldquo;experimentalDecorators&amp;rdquo;: true,&#xA;    &amp;ldquo;useDefineForClassFields&amp;rdquo;: true&#xA;  }&#xA;}&#xA;复制&#xA;这样就能够在.tsx文件中运用JSX语法，并启用装饰器和类字段等特性了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;React 18+TS的优势&#xA;运用React 18+TS开发前端应用有以下几个优势：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;能够应用TypeScript的类型系统和ES6+的新特性，编写愈加强健、简约和现代化的代码。&#xA;能够应用React 18的新特性，如Server Components, Suspense, Concurrent Rendering等，进步应用的性能和用户体验。&#xA;能够享用React生态系统中丰厚的资源和工具，如Create React App, Next.js, React Router, Redux, Material UI等，快速搭建和部署应用。&#xA;React 18+TS在线教育平台示例&#xA;为了展现如何运用React 18+TS构建一个在线教育平台，简单完成一个前端页面，显现课程列表和课程详情。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;首先，我们需求创立一个React 18+TS项目，能够运用Create React App工具，执行以下命令：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;npx create-react-app react18-ts-edu &amp;ndash;template typescript&#xA;cd react18-ts-edu&#xA;npm start&#xA;复制&#xA;这样就能够在阅读器中看到一个默许的页面了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;接下来，我们需求装置一些依赖库，如GraphQL, Apollo Client, Material UI等，执行以下命令：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;npm install graphql @apollo/client @material-ui/core @material-ui/icons&#xA;复制&#xA;然后，我们需求配置Apollo Client，用于与后端的GraphQL接口通讯。在src目录下创立一个apollo.ts文件，添加以下内容：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import { ApolloClient, InMemoryCache } from &amp;ldquo;@apollo/client&amp;rdquo;;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 创立一个Apollo Client实例&#xA;const client = new ApolloClient({&#xA;  // 指定后端的GraphQL接口地址&#xA;  uri: &amp;ldquo;&lt;a href=&#34;http://localhost:3000/graphql&amp;quot;&#34;&gt;http://localhost:3000/graphql&amp;rdquo;&lt;/a&gt;,&#xA;  // 创立一个内存缓存对象&#xA;  cache: new InMemoryCache(),&#xA;});&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 导出client对象&#xA;export default client;&#xA;复制&#xA;接着，我们需求修正src/index.tsx文件，运用ApolloProvider组件包裹App组件，将client对象传送给子组件。修正后的文件内容如下：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import React from &amp;ldquo;react&amp;rdquo;;&#xA;import ReactDOM from &amp;ldquo;react-dom&amp;rdquo;;&#xA;import { ApolloProvider } from &amp;ldquo;@apollo/client&amp;rdquo;;&#xA;import client from &amp;ldquo;./apollo&amp;rdquo;;&#xA;import App from &amp;ldquo;./App&amp;rdquo;;&#xA;import &amp;ldquo;./index.css&amp;rdquo;;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;ReactDOM.render(&#xA;  &lt;React.StrictMode&gt;&#xA;    // 运用ApolloProvider组件包裹App组件&lt;/p&gt;&#xA;&#xA;&lt;p&gt;,&#xA;  document.getElementById(&amp;ldquo;root&amp;rdquo;)&#xA;);&#xA;复制&#xA;接下来，我们需求创立一个CourseList组件，用于显现课程列表。在src目录下创立一个components文件夹，并在其中创立一个CourseList.tsx文件，添加以下内容：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import React, { useState } from &amp;ldquo;react&amp;rdquo;;&#xA;import { useQuery, gql } from &amp;ldquo;@apollo/client&amp;rdquo;;&#xA;import {&#xA;  Grid,&#xA;  Card,&#xA;  CardActionArea,&#xA;  CardMedia,&#xA;  CardContent,&#xA;  Typography,&#xA;  CardActions,&#xA;  Button,&#xA;} from &amp;ldquo;@material-ui/core&amp;rdquo;;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 定义一个GraphQL查询语句，用于获取课程列表&#xA;const COURSES_QUERY = gql&lt;code&gt;&#xA;  query {&#xA;    courses {&#xA;      id&#xA;      title&#xA;      cover&#xA;      price&#xA;      rating&#xA;    }&#xA;  }&#xA;&lt;/code&gt;;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 定义一个课程类型的接口，用于描绘课程的属性&#xA;interface Course {&#xA;  id: string;&#xA;  title: string;&#xA;  cover: string;&#xA;  price: number;&#xA;  rating: number;&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 定义一个CourseList组件的函数，接纳一个onSelect属性，用于传送选中的课程ID&#xA;const CourseList: React.FC&amp;lt;{ onSelect: (id: string) =&amp;gt; void }&amp;gt; = ({&#xA;  onSelect,&#xA;}) =&amp;gt; {&#xA;  // 运用useQuery钩子函数，传入查询语句，获取查询结果&#xA;  const { loading, error, data } = useQuery(COURSES_QUERY);&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 假如查询正在加载中，返回一个提示信息&#xA;  if (loading) return&#xA;Loading&amp;hellip;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;;&#xA;  // 假如查询出错了，返回一个错误信息&#xA;  if (error) return&#xA;Error :(&lt;/p&gt;&#xA;&#xA;&lt;p&gt;;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// 假如查询胜利了，返回一个网格规划的课程列表&#xA;  return (&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;  {data.courses.map((course: Course) =&amp;gt; (&#xA;&#xA;&#xA;        &amp;lt;CardActionArea onClick={() =&amp;gt; onSelect(course.id)}&amp;gt;&#xA;          &amp;lt;CardMedia&#xA;            component=&amp;quot;img&amp;quot;&#xA;            alt={course.title}&#xA;            height=&amp;quot;140&amp;quot;&#xA;            image={course.cover}&#xA;            title={course.title}&#xA;          /&amp;gt;&#xA;&#xA;&#xA;              {course.title}&#xA;&#xA;&#xA;              {`价钱：${course.price}元`}&#xA;&#xA;&#xA;              {`评分：${course.rating}`}&#xA;&#xA;          &amp;lt;/CardContent&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>[Go内推][理想汽车][北京][30-50K·14薪]AI推理服务开发工程师</title>
@@ -92,70 +92,6 @@
       <title>关于打印素数的程序逻辑看不懂，谁能帮忙分析一下执行过程</title>
       <link>https://studygolang.com/topics/16600#reply2</link>
       <description>&lt;p&gt;// Copyright 2009 The Go Authors. All rights reserved.&#xA;// Use of this source code is governed by a BSD-style&#xA;// license that can be found in the LICENSE file.package main&#xA;package main&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import &amp;ldquo;fmt&amp;rdquo;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// Send the sequence 2, 3, 4, &amp;hellip; to channel &amp;lsquo;ch&amp;rsquo;.&#xA;func generate(ch chan int) {&#xA;    for i := 2; ; i++ {&#xA;        ch &amp;lt;- i // Send &amp;lsquo;i&amp;rsquo; to channel &amp;lsquo;ch&amp;rsquo;.&#xA;    }&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// Copy the values from channel &amp;lsquo;in&amp;rsquo; to channel &amp;lsquo;out&amp;rsquo;,&#xA;// removing those divisible by &amp;lsquo;prime&amp;rsquo;.&#xA;func filter(in, out chan int, prime int) {&#xA;    for {&#xA;        i := &amp;lt;-in // Receive value of new variable &amp;lsquo;i&amp;rsquo; from &amp;lsquo;in&amp;rsquo;.&#xA;        if i%prime != 0 {&#xA;            out &amp;lt;- i // Send &amp;lsquo;i&amp;rsquo; to channel &amp;lsquo;out&amp;rsquo;.&#xA;        }&#xA;    }&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;// The prime sieve: Daisy-chain filter processes together.&#xA;func main() {&#xA;    ch := make(chan int) // Create a new channel.&#xA;    go generate(ch)      // Start generate() as a goroutine.&#xA;    for {&#xA;        prime := &amp;lt;-ch&#xA;        fmt.Print(prime, &amp;ldquo; &amp;ldquo;)&#xA;        ch1 := make(chan int)&#xA;        go filter(ch, ch1, prime)&#xA;        ch = ch1&#xA;    }&#xA;}&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang 无顾奔溃 没有报错信息</title>
-      <link>https://studygolang.com/topics/16624#reply7</link>
-      <description>&lt;p&gt;golang 运行进程奔溃 又没报错信息  有什么软件可以检测嘛 用nohup启的  nohup.log文件里面没有报错信息&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>Go岗位更新：新增字节跳动财经-质量、Data抖音、Data推荐、Data风控部门最新招聘信息。</title>
-      <link>https://studygolang.com/topics/16625#reply0</link>
-      <description>&lt;p&gt;Go岗位更新：新增字节跳动财经-质量、Data抖音、Data推荐、Data风控部门最新招聘信息。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;岗位地点：北京、上海、杭州、深圳均有需求。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;校招社招均可内推，和优秀的人做有挑战的事。欢迎投递简历。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;💌 可内推Go岗位查询：&lt;a href=&#34;https://m.golangroadmap.com/#/post&#34;&gt;https://m.golangroadmap.com/#/post&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230821/9f136419f2db1fbbde799537763ecf67.jpg&#34; alt=&#34;zj.jpg&#34; /&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>[Go内推][理想汽车][北京][30-50K·14薪]AI推理服务开发工程师</title>
-      <link>https://studygolang.com/topics/16618#reply1</link>
-      <description>&lt;p&gt;要求3年go/python经验，满足条件的，可以扫描了解详情找我内推。&#xA;&lt;img src=&#34;https://static.golangjob.cn/230816/6bcbcf9bfbfaf0c121872e7761d9a623.jpg&#34; alt=&#34;未命名.jpg&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;这里有一个靠谱的Go岗位分享给你：&lt;a href=&#34;https://m.golangroadmap.com/#/sharepost?id=44&#34;&gt;https://m.golangroadmap.com/#/sharepost?id=44&lt;/a&gt;&#xA;GOLANG ROADMAP一个专注Go语言学习、求职的社区。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang 无顾奔溃 没有报错信息</title>
-      <link>https://studygolang.com/topics/16624#reply6</link>
-      <description>&lt;p&gt;golang 运行进程奔溃 又没报错信息  有什么软件可以检测嘛 用nohup启的  nohup.log文件里面没有报错信息&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>[Go内推][腾讯][长沙] TEG09-高级运营开发工程师</title>
-      <link>https://studygolang.com/topics/16619#reply0</link>
-      <description>&lt;p&gt;有想法来长沙做go研发的可以聊聊&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230817/512035aa3b7b90a1f9856901d9608c80.jpg&#34; alt=&#34;12.jpg&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;这里有一个靠谱的Go岗位分享给你：&lt;a href=&#34;https://m.golangroadmap.com/#/sharepost?id=43&#34;&gt;https://m.golangroadmap.com/#/sharepost?id=43&lt;/a&gt;   GOLANG ROADMAP一个专注Go语言学习、求职的社区。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang 无顾奔溃 没有报错信息</title>
-      <link>https://studygolang.com/topics/16624#reply5</link>
-      <description>&lt;p&gt;golang 运行进程奔溃 又没报错信息  有什么软件可以检测嘛 用nohup启的  nohup.log文件里面没有报错信息&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang 无顾奔溃 没有报错信息</title>
-      <link>https://studygolang.com/topics/16624#reply4</link>
-      <description>&lt;p&gt;golang 运行进程奔溃 又没报错信息  有什么软件可以检测嘛 用nohup启的  nohup.log文件里面没有报错信息&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang 无顾奔溃 没有报错信息</title>
-      <link>https://studygolang.com/topics/16624#reply3</link>
-      <description>&lt;p&gt;golang 运行进程奔溃 又没报错信息  有什么软件可以检测嘛 用nohup启的  nohup.log文件里面没有报错信息&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang 无顾奔溃 没有报错信息</title>
-      <link>https://studygolang.com/topics/16624#reply2</link>
-      <description>&lt;p&gt;golang 运行进程奔溃 又没报错信息  有什么软件可以检测嘛 用nohup启的  nohup.log文件里面没有报错信息&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang 无顾奔溃 没有报错信息</title>
-      <link>https://studygolang.com/topics/16624#reply1</link>
-      <description>&lt;p&gt;golang 运行进程奔溃 又没报错信息  有什么软件可以检测嘛 用nohup启的  nohup.log文件里面没有报错信息&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang 无顾奔溃 没有报错信息</title>
-      <link>https://studygolang.com/topics/16624#reply0</link>
-      <description>&lt;p&gt;golang 运行进程奔溃 又没报错信息  有什么软件可以检测嘛 用nohup启的  nohup.log文件里面没有报错信息&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>一文带你了解IP被封，如何进行解封</title>
-      <link>https://studygolang.com/topics/16419#reply2</link>
-      <description>&lt;p&gt;当你的IP地址被封锁时，可能会导致无法正常访问特定网站或服务。本文将为你提供一些有用的步骤和建议，帮助你解封被封锁的IP地址，恢复正常的网络访问。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;第一步：确认IP被封的原因&#xA;1.检查错误信息：当你尝试访问被封锁的网站或服务时，注意是否出现特定的错误信息。这些信息可能提供有关IP被封的线索。&#xA;2.检查黑名单或封禁记录：有些服务提供商或网站会维护黑名单或封禁记录，记录了恶意IP地址或违规行为。查找是否你的IP地址出现在这些列表中。&#xA;3.联系服务提供商：如果你无法确定IP被封的原因，或者怀疑是由于误封，请联系相关的服务提供商或网站的技术支持，寻求进一步的帮助和解释。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;第二步：采取解封措施&#xA;1.确认并纠正违规行为：如果你的IP被封是由于违反了服务提供商的使用政策或规定，确保立即停止相关违规行为，并纠正任何错误。这可以包括停止发送垃圾信息、滥用账户或进行其他违规活动。&#xA;2.更新安全软件和清理恶意软件：确保你的设备上安装了最新的安全软件和防病毒程序，并进行全面的系统扫描，清除任何可能存在的恶意软件。&#xA;3.更换IP地址：如果你的IP地址被恶意攻击或遭受了持续的封禁，联系你的互联网服务提供商（ISP），请求更换IP地址。&#xA;4.请求解封：如果你确认IP被封的原因是误封或你已经采取了纠正措施，可以向服务提供商或网站的技术支持提交解封请求。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;第三步：预防未来封锁&#xA;1.遵守使用规则和政策：遵守服务提供商的使用规则和政策，避免从事任何违规活动。阅读并理解相关的使用条款和条件，确保你的行为合法合规。&#xA;2.加强网络安全：保持你的设备和网络的安全性，定期更新安全软件和操作系统补丁，使用强密码并避免。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>go奇怪的切片</title>
-      <link>https://studygolang.com/articles/36281#reply1</link>
     </item>
   </channel>
 </rss>
