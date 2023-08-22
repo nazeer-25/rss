@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>homeassistant 门窗传感器+人体传感器如何 如何判断是离家还是回家 - 问与答</title>
+      <link>https://www.v2ex.com/t/967293</link>
+      <description>&lt;p&gt;现有设备 Aqara 的门窗传感器和人体传感器 各一个  智能灯一个&lt;/p&gt;&#xA;&lt;p&gt;门窗传感器装在门上，人体传感器装在门的上方&lt;/p&gt;&#xA;&lt;h2&gt;预期的效果是：&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;回家：进门随手关门，触发条件=门窗传感器识别到关门，环境条件=人体传感器识别到有人移动 判断为回家&#xA;后来优化 环境条件加一条 智能灯未关  可以防止开门拿外卖或临时出门误触发&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;离家：出门后关门，触发条件=门窗传感器识别到关门，环境条件=人体传感器识别到无人移动，判断为离家&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;存在的问题：&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;回家模式暂时无问题&lt;/li&gt;&#xA;&lt;li&gt;离家模式无法执行 原因：人体传感器只能识别最近 1 分钟以上有无人移动  导致不管是进门还是出门都能识别到有人移动，不存在最近一分钟无人移动的状态。&lt;/li&gt;&#xA;&lt;li&gt;Aqara 自己的 APP 上人体传感器可以自定义判断最近几分钟无人移动（最小一分钟），homeassistant 接入后只能判断有人移动和无人移动 自定义分钟无法设置&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;尝试改进离家模式：&lt;/h2&gt;&#xA;&lt;p&gt;触发条件=门窗传感器识别到关门  动作：添加大于 1 分钟的延迟（ 1 分钟内状态还是会是有人状态），然后判断是否有人，如果无人  就开启离家模式  但还是存在问题 就是进门 1 分钟内大多数情况我已离开门附近，传感器已经识别不到我了   导致人在家开启了离家模式&lt;/p&gt;&#xA;&lt;p&gt;再次尝试改进  就是进门延迟 1 分钟 没有识别到人移动，但智能灯已开（回家模式自动开的），就不开启离家模式 只有当关门关灯没人移动才开启离家模式   但在开灯的状态下 还是开启了离家模式&lt;/p&gt;&#xA;&lt;h2&gt;求教：有什么优雅的判断回家离家模式的方法吗&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;不能换智能门锁  不能换智能门锁 不能换智能门锁 &lt;/li&gt;&#xA;&lt;li&gt;最好使用现有的设备 1 个门窗传感器 人体传感器 智能灯&lt;/li&gt;&#xA;&lt;li&gt;如果无法实现可以加设备 尽量便宜的  &lt;/li&gt;&#xA;&lt;li&gt;尽量无感的  不是按键模式&lt;/li&gt;&#xA;&lt;li&gt;homeassistant 接入的传感器没有 app 上功能多 如何处理&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://vip2.loli.io/2023/08/22/ot6TuXERCP2yI8n.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;去掉环境条件后修改&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://vip2.loli.io/2023/08/22/LqzxCG4bsS8kHZr.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>worldqiuzhi</author>
+      <pubDate>22 Aug 2023 02:37:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>notion 博客网站更新了一下 ,把 notion 当作评论数据库了 - 分享发现</title>
+      <link>https://www.v2ex.com/t/967292</link>
+      <description>&lt;h1&gt;notion 博客网站更新了一下 ,把 notion 当作评论数据库了.&lt;/h1&gt;&#xA;&lt;h1&gt;&lt;a href=&#34;https://mynotion.life&#34; rel=&#34;nofollow&#34;&gt;https://mynotion.life&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;h3&gt;1.notion 数据库&lt;/h3&gt;&#xA;&lt;h3&gt;2.github 代码 fork 一下&lt;/h3&gt;&#xA;&lt;h3&gt;3.vercel 发布一下&lt;/h3&gt;&#xA;&lt;h3&gt;4.绑定一个域名,域名在 &lt;a href=&#34;http://name.com&#34; rel=&#34;nofollow&#34;&gt;name.com&lt;/a&gt; 上 5 块钱买一个.&lt;/h3&gt;&#xA;&lt;h3&gt;5.更新了评论系统,以往的评论系统需要第三方, 现在直接用 notion 当评论系统&lt;/h3&gt;&#xA;&lt;h1&gt;NOTION BLOG&lt;/h1&gt;&#xA;&lt;h2&gt;notion + next.js&lt;/h2&gt;&#xA;&lt;h3&gt;&lt;a href=&#34;https://mynotion.life&#34; rel=&#34;nofollow&#34;&gt;https://mynotion.life&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;h3&gt;支持苹果 shortcuts ， 看到喜欢的文章，一键生成 notion 的文章&lt;/h3&gt;&#xA;&lt;h4&gt;默认使用英文， 支持中文等多国语言&lt;/h4&gt;&#xA;&lt;h3&gt;大屏采用 swiper 插件&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;几个截图&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://goldeye0351.github.io/notion-plugin/images/1home.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;小屏采用苹果手表 ui&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;几个截图&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://goldeye0351.github.io/notion-plugin/images/2home.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;博客列表自动彩色分类，点击自动更新列表内容&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;几个截图&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://goldeye0351.github.io/notion-plugin/images/3blog.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;关于界面 分层 3D 质感&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;几个截图&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://goldeye0351.github.io/notion-plugin/images/5about.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;友链, 自主提交, 不用审核&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;几个截图&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://goldeye0351.github.io/notion-plugin/images/youlian.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;2023-8-16 推出基于 notion 本身的评论系统, 再也不用复杂的第三方评论系统&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;几个截图&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://goldeye0351.github.io/notion-plugin/images/pinglun1.png&#34;/&gt;&#xA;&lt;img alt=&#34;几个截图&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://goldeye0351.github.io/notion-plugin/images/pinglun2.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>goldeye0351</author>
+      <pubDate>22 Aug 2023 02:36:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>金庸武侠的背景 + 博德之门 3 的机制 - 游戏</title>
+      <link>https://www.v2ex.com/t/967291</link>
+      <description>&lt;p&gt;如果有这款游戏，里面有不同的故事线，人物线，和天龙八部一样网状叙事，不同奇遇解密获得不同秘籍，可以各种门派 build ，还可以多门派 build ，想想就很好玩，可惜，没有啊，这辈子能看到吗&lt;/p&gt;&#xA;</description>
+      <author>FreshOldMan</author>
+      <pubDate>22 Aug 2023 02:36:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>OPENAI api 被盗刷 - OpenAI</title>
+      <link>https://www.v2ex.com/t/967289</link>
+      <description>OPENAI api 被盗刷，有申诉通道吗？</description>
+      <author>janebooom</author>
+      <pubDate>22 Aug 2023 02:35:05 +0000</pubDate>
+    </item>
+    <item>
       <title>跟电信拉扯很久，终于能用 IPV6 公网 ping 通我家的路由器了。。。 - 宽带症候群</title>
       <link>https://www.v2ex.com/t/967285</link>
       <description>&lt;p&gt;但是只能 ping ，不能打开管理页，似乎也没有在 R7000 上找到公网访问管理页的设置项。&#xA;另外，在端口映射中映射了 3389 到内网 windows 的 3389 ，也是打不开。。。&#xA;直接访问内网 windows 的 IPV6 也不行。&#xA;看来还有很多没明白的地方。&lt;/p&gt;&#xA;&lt;p&gt;有高手弄过 IPV6 访问家里吗？&lt;/p&gt;&#xA;</description>
@@ -72,13 +100,6 @@
       <description>用 tailscale 进行组网时，发现自建的 derp 节点能连接，但没办法让两个设备打洞成功。derp 节点相当于一个中继器。如果两个设备打洞不成功则通过中继进行链接。&lt;br /&gt;我的网络环境是这样的：&lt;br /&gt;&lt;br /&gt;A 设备-&amp;gt;国内企业&lt;br /&gt;B 设备-&amp;gt;电信网 pc&lt;br /&gt;C 设备-&amp;gt;4G 信号&lt;br /&gt;&lt;br /&gt;自带 derp 节点 a&lt;br /&gt;derp 节点 b-&amp;gt;腾讯云 HK&lt;br /&gt;别人建的 derp 节点 c-&amp;gt; HK 但走 cn2&lt;br /&gt;别人建的 derp 节点 d-&amp;gt; 杭州阿里云&lt;br /&gt;&lt;br /&gt;节点 a ，ABC 连互相访问都不行&lt;br /&gt;节点 b ，ABC 互联，但都没办法打洞&lt;br /&gt;节点 c ，AB 能打洞，与 C 能走中继但不能打洞&lt;br /&gt;节点 d ，ABC 都能打洞&lt;br /&gt;&lt;br /&gt;从这个表现看，是否我的设备访问海外的 derp 打洞（发 udp)有问题，还是自建的 derp 有问题的可能性点呢？&lt;br /&gt;如果我有一个国内云，通过什么方法可以作为中转，到 derp 节点 b ，大佬们可以给点关键词吗？</description>
       <author>PowerDi</author>
       <pubDate>22 Aug 2023 02:02:41 +0000</pubDate>
-    </item>
-    <item>
-      <title>七十平的两室一厅可以结婚吗 - 问与答</title>
-      <link>https://www.v2ex.com/t/967274</link>
-      <description>今天有个同事聊起来他准备和他对象求婚，她对象我其实认识，算是我研究生的学妹，颜值还挺高的。&lt;br /&gt;&lt;br /&gt;不过据我所知，我这个同事的房子买在丰台区四环外，只有七十多平，我再想现在的年轻人为啥对婚姻的要求那么低了？七十平的房子住进去不难受的吗？&lt;br /&gt;&lt;br /&gt;我都想打电话给我的学妹让她再多考虑考虑了，有情真的不能饮水饱，恋爱脑也没办法</description>
-      <author>sunhuiye9999</author>
-      <pubDate>22 Aug 2023 01:58:45 +0000</pubDate>
     </item>
     <item>
       <title>shopify 二次开发 - 程序员</title>
@@ -260,6 +281,13 @@
       <description>&lt;p&gt;在大约 10 年前，国内 Gopher 的 QQ 群比较热闹，每天都是翻译文档或分享自己的心得或逐字研究 spec 。&#xA;2015 年后，国内交流更多，后面大家慢慢发现 Go 只要 1 周就能入门，后来就是半天入门，然后逼格就不够了。&#xA;Go 语言只给用户暴露了最简单的界面，为此也带来了一些其他性能或抽象的代价。&lt;/p&gt;&#xA;&lt;p&gt;如果没有泛型 Go1.17 可以认为是 Go1 的终极版本（我只用 Go1 ），但是也带来了一些瑕疵（不同人瑕疵不一样）。&#xA;作为中文和 wasm 用户，Go 确实有一点点不太友好的地方（很多不是海量并发的场景）。&lt;/p&gt;&#xA;&lt;p&gt;总体来说，对 Go 语言还是比较满意的，前 10 年靠它吃饭。&#xA;想淡出 Go 只因为后半生想用自己的语言写程序。&lt;/p&gt;&#xA;&lt;p&gt;再见 Go 语言，我准备慢慢进入下一站了...&lt;/p&gt;&#xA;</description>
       <author>chai2010</author>
       <pubDate>21 Aug 2023 23:36:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>七十平的两室一厅可以结婚吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/967274</link>
+      <description>今天有个同事聊起来他准备和他对象求婚，她对象我其实认识，算是我研究生的学妹，颜值还挺高的。&lt;br /&gt;&lt;br /&gt;不过据我所知，我这个同事的房子买在丰台区四环外，只有七十多平，我再想现在的年轻人为啥对婚姻的要求那么低了？七十平的房子住进去不难受的吗？&lt;br /&gt;&lt;br /&gt;我都想打电话给我的学妹让她再多考虑考虑了，有情真的不能饮水饱，恋爱脑也没办法</description>
+      <author>sunhuiye9999</author>
+      <pubDate>22 Aug 2023 01:58:45 +0000</pubDate>
     </item>
     <item>
       <title>有什么方法可以去掉 iPhone 皮革壳的涂层吗？ - Apple</title>

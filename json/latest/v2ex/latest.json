@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "homeassistant 门窗传感器+人体传感器如何 如何判断是离家还是回家 - 问与答",
+      "Link": "https://www.v2ex.com/t/967293",
+      "Description": "\u003cp\u003e现有设备 Aqara 的门窗传感器和人体传感器 各一个  智能灯一个\u003c/p\u003e\n\u003cp\u003e门窗传感器装在门上，人体传感器装在门的上方\u003c/p\u003e\n\u003ch2\u003e预期的效果是：\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e回家：进门随手关门，触发条件=门窗传感器识别到关门，环境条件=人体传感器识别到有人移动 判断为回家\n后来优化 环境条件加一条 智能灯未关  可以防止开门拿外卖或临时出门误触发\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e离家：出门后关门，触发条件=门窗传感器识别到关门，环境条件=人体传感器识别到无人移动，判断为离家\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e存在的问题：\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e回家模式暂时无问题\u003c/li\u003e\n\u003cli\u003e离家模式无法执行 原因：人体传感器只能识别最近 1 分钟以上有无人移动  导致不管是进门还是出门都能识别到有人移动，不存在最近一分钟无人移动的状态。\u003c/li\u003e\n\u003cli\u003eAqara 自己的 APP 上人体传感器可以自定义判断最近几分钟无人移动（最小一分钟），homeassistant 接入后只能判断有人移动和无人移动 自定义分钟无法设置\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e尝试改进离家模式：\u003c/h2\u003e\n\u003cp\u003e触发条件=门窗传感器识别到关门  动作：添加大于 1 分钟的延迟（ 1 分钟内状态还是会是有人状态），然后判断是否有人，如果无人  就开启离家模式  但还是存在问题 就是进门 1 分钟内大多数情况我已离开门附近，传感器已经识别不到我了   导致人在家开启了离家模式\u003c/p\u003e\n\u003cp\u003e再次尝试改进  就是进门延迟 1 分钟 没有识别到人移动，但智能灯已开（回家模式自动开的），就不开启离家模式 只有当关门关灯没人移动才开启离家模式   但在开灯的状态下 还是开启了离家模式\u003c/p\u003e\n\u003ch2\u003e求教：有什么优雅的判断回家离家模式的方法吗\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e不能换智能门锁  不能换智能门锁 不能换智能门锁 \u003c/li\u003e\n\u003cli\u003e最好使用现有的设备 1 个门窗传感器 人体传感器 智能灯\u003c/li\u003e\n\u003cli\u003e如果无法实现可以加设备 尽量便宜的  \u003c/li\u003e\n\u003cli\u003e尽量无感的  不是按键模式\u003c/li\u003e\n\u003cli\u003ehomeassistant 接入的传感器没有 app 上功能多 如何处理\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003cimg alt=\"image.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://vip2.loli.io/2023/08/22/ot6TuXERCP2yI8n.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e去掉环境条件后修改\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"image.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://vip2.loli.io/2023/08/22/LqzxCG4bsS8kHZr.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "worldqiuzhi",
+      "PubDate": "2023-08-22T02:37:12Z"
+    },
+    {
+      "Title": "notion 博客网站更新了一下 ,把 notion 当作评论数据库了 - 分享发现",
+      "Link": "https://www.v2ex.com/t/967292",
+      "Description": "\u003ch1\u003enotion 博客网站更新了一下 ,把 notion 当作评论数据库了.\u003c/h1\u003e\n\u003ch1\u003e\u003ca href=\"https://mynotion.life\" rel=\"nofollow\"\u003ehttps://mynotion.life\u003c/a\u003e\u003c/h1\u003e\n\u003ch3\u003e1.notion 数据库\u003c/h3\u003e\n\u003ch3\u003e2.github 代码 fork 一下\u003c/h3\u003e\n\u003ch3\u003e3.vercel 发布一下\u003c/h3\u003e\n\u003ch3\u003e4.绑定一个域名,域名在 \u003ca href=\"http://name.com\" rel=\"nofollow\"\u003ename.com\u003c/a\u003e 上 5 块钱买一个.\u003c/h3\u003e\n\u003ch3\u003e5.更新了评论系统,以往的评论系统需要第三方, 现在直接用 notion 当评论系统\u003c/h3\u003e\n\u003ch1\u003eNOTION BLOG\u003c/h1\u003e\n\u003ch2\u003enotion + next.js\u003c/h2\u003e\n\u003ch3\u003e\u003ca href=\"https://mynotion.life\" rel=\"nofollow\"\u003ehttps://mynotion.life\u003c/a\u003e\u003c/h3\u003e\n\u003ch3\u003e支持苹果 shortcuts ， 看到喜欢的文章，一键生成 notion 的文章\u003c/h3\u003e\n\u003ch4\u003e默认使用英文， 支持中文等多国语言\u003c/h4\u003e\n\u003ch3\u003e大屏采用 swiper 插件\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"几个截图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://goldeye0351.github.io/notion-plugin/images/1home.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e小屏采用苹果手表 ui\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"几个截图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://goldeye0351.github.io/notion-plugin/images/2home.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e博客列表自动彩色分类，点击自动更新列表内容\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"几个截图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://goldeye0351.github.io/notion-plugin/images/3blog.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e关于界面 分层 3D 质感\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"几个截图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://goldeye0351.github.io/notion-plugin/images/5about.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e友链, 自主提交, 不用审核\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"几个截图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://goldeye0351.github.io/notion-plugin/images/youlian.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e2023-8-16 推出基于 notion 本身的评论系统, 再也不用复杂的第三方评论系统\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"几个截图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://goldeye0351.github.io/notion-plugin/images/pinglun1.png\"/\u003e\n\u003cimg alt=\"几个截图\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://goldeye0351.github.io/notion-plugin/images/pinglun2.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "goldeye0351",
+      "PubDate": "2023-08-22T02:36:46Z"
+    },
+    {
+      "Title": "金庸武侠的背景 + 博德之门 3 的机制 - 游戏",
+      "Link": "https://www.v2ex.com/t/967291",
+      "Description": "\u003cp\u003e如果有这款游戏，里面有不同的故事线，人物线，和天龙八部一样网状叙事，不同奇遇解密获得不同秘籍，可以各种门派 build ，还可以多门派 build ，想想就很好玩，可惜，没有啊，这辈子能看到吗\u003c/p\u003e\n",
+      "Author": "FreshOldMan",
+      "PubDate": "2023-08-22T02:36:25Z"
+    },
+    {
+      "Title": "OPENAI api 被盗刷 - OpenAI",
+      "Link": "https://www.v2ex.com/t/967289",
+      "Description": "OPENAI api 被盗刷，有申诉通道吗？",
+      "Author": "janebooom",
+      "PubDate": "2023-08-22T02:35:05Z"
+    },
+    {
       "Title": "跟电信拉扯很久，终于能用 IPV6 公网 ping 通我家的路由器了。。。 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/967285",
       "Description": "\u003cp\u003e但是只能 ping ，不能打开管理页，似乎也没有在 R7000 上找到公网访问管理页的设置项。\n另外，在端口映射中映射了 3389 到内网 windows 的 3389 ，也是打不开。。。\n直接访问内网 windows 的 IPV6 也不行。\n看来还有很多没明白的地方。\u003c/p\u003e\n\u003cp\u003e有高手弄过 IPV6 访问家里吗？\u003c/p\u003e\n",
@@ -72,13 +100,6 @@
       "Description": "用 tailscale 进行组网时，发现自建的 derp 节点能连接，但没办法让两个设备打洞成功。derp 节点相当于一个中继器。如果两个设备打洞不成功则通过中继进行链接。\u003cbr /\u003e我的网络环境是这样的：\u003cbr /\u003e\u003cbr /\u003eA 设备-\u0026gt;国内企业\u003cbr /\u003eB 设备-\u0026gt;电信网 pc\u003cbr /\u003eC 设备-\u0026gt;4G 信号\u003cbr /\u003e\u003cbr /\u003e自带 derp 节点 a\u003cbr /\u003ederp 节点 b-\u0026gt;腾讯云 HK\u003cbr /\u003e别人建的 derp 节点 c-\u0026gt; HK 但走 cn2\u003cbr /\u003e别人建的 derp 节点 d-\u0026gt; 杭州阿里云\u003cbr /\u003e\u003cbr /\u003e节点 a ，ABC 连互相访问都不行\u003cbr /\u003e节点 b ，ABC 互联，但都没办法打洞\u003cbr /\u003e节点 c ，AB 能打洞，与 C 能走中继但不能打洞\u003cbr /\u003e节点 d ，ABC 都能打洞\u003cbr /\u003e\u003cbr /\u003e从这个表现看，是否我的设备访问海外的 derp 打洞（发 udp)有问题，还是自建的 derp 有问题的可能性点呢？\u003cbr /\u003e如果我有一个国内云，通过什么方法可以作为中转，到 derp 节点 b ，大佬们可以给点关键词吗？",
       "Author": "PowerDi",
       "PubDate": "2023-08-22T02:02:41Z"
-    },
-    {
-      "Title": "七十平的两室一厅可以结婚吗 - 问与答",
-      "Link": "https://www.v2ex.com/t/967274",
-      "Description": "今天有个同事聊起来他准备和他对象求婚，她对象我其实认识，算是我研究生的学妹，颜值还挺高的。\u003cbr /\u003e\u003cbr /\u003e不过据我所知，我这个同事的房子买在丰台区四环外，只有七十多平，我再想现在的年轻人为啥对婚姻的要求那么低了？七十平的房子住进去不难受的吗？\u003cbr /\u003e\u003cbr /\u003e我都想打电话给我的学妹让她再多考虑考虑了，有情真的不能饮水饱，恋爱脑也没办法",
-      "Author": "sunhuiye9999",
-      "PubDate": "2023-08-22T01:58:45Z"
     },
     {
       "Title": "shopify 二次开发 - 程序员",
@@ -261,6 +282,13 @@
       "Description": "\u003cp\u003e在大约 10 年前，国内 Gopher 的 QQ 群比较热闹，每天都是翻译文档或分享自己的心得或逐字研究 spec 。\n2015 年后，国内交流更多，后面大家慢慢发现 Go 只要 1 周就能入门，后来就是半天入门，然后逼格就不够了。\nGo 语言只给用户暴露了最简单的界面，为此也带来了一些其他性能或抽象的代价。\u003c/p\u003e\n\u003cp\u003e如果没有泛型 Go1.17 可以认为是 Go1 的终极版本（我只用 Go1 ），但是也带来了一些瑕疵（不同人瑕疵不一样）。\n作为中文和 wasm 用户，Go 确实有一点点不太友好的地方（很多不是海量并发的场景）。\u003c/p\u003e\n\u003cp\u003e总体来说，对 Go 语言还是比较满意的，前 10 年靠它吃饭。\n想淡出 Go 只因为后半生想用自己的语言写程序。\u003c/p\u003e\n\u003cp\u003e再见 Go 语言，我准备慢慢进入下一站了...\u003c/p\u003e\n",
       "Author": "chai2010",
       "PubDate": "2023-08-21T23:36:46Z"
+    },
+    {
+      "Title": "七十平的两室一厅可以结婚吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/967274",
+      "Description": "今天有个同事聊起来他准备和他对象求婚，她对象我其实认识，算是我研究生的学妹，颜值还挺高的。\u003cbr /\u003e\u003cbr /\u003e不过据我所知，我这个同事的房子买在丰台区四环外，只有七十多平，我再想现在的年轻人为啥对婚姻的要求那么低了？七十平的房子住进去不难受的吗？\u003cbr /\u003e\u003cbr /\u003e我都想打电话给我的学妹让她再多考虑考虑了，有情真的不能饮水饱，恋爱脑也没办法",
+      "Author": "sunhuiye9999",
+      "PubDate": "2023-08-22T01:58:45Z"
     },
     {
       "Title": "有什么方法可以去掉 iPhone 皮革壳的涂层吗？ - Apple",
