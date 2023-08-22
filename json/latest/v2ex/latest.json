@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "看电影《孤注一掷》，各位老哥分享一下，你有经过被诈骗的经历嘛 - 分享发现",
+      "Link": "https://www.v2ex.com/t/967294",
+      "Description": "\u003ch3\u003e自己先来吧，在网购的时候因为买东西，加了一个在网上找的卖家，被骗了几千块，虽然报了警了，2 年过去，依然没有下文，也算是自己给自己的教训了😥\u003c/h3\u003e\n",
+      "Author": "slamDunkLINk",
+      "PubDate": "2023-08-22T02:46:05Z"
+    },
+    {
       "Title": "homeassistant 门窗传感器+人体传感器如何 如何判断是离家还是回家 - 问与答",
       "Link": "https://www.v2ex.com/t/967293",
       "Description": "\u003cp\u003e现有设备 Aqara 的门窗传感器和人体传感器 各一个  智能灯一个\u003c/p\u003e\n\u003cp\u003e门窗传感器装在门上，人体传感器装在门的上方\u003c/p\u003e\n\u003ch2\u003e预期的效果是：\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e回家：进门随手关门，触发条件=门窗传感器识别到关门，环境条件=人体传感器识别到有人移动 判断为回家\n后来优化 环境条件加一条 智能灯未关  可以防止开门拿外卖或临时出门误触发\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e离家：出门后关门，触发条件=门窗传感器识别到关门，环境条件=人体传感器识别到无人移动，判断为离家\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e存在的问题：\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e回家模式暂时无问题\u003c/li\u003e\n\u003cli\u003e离家模式无法执行 原因：人体传感器只能识别最近 1 分钟以上有无人移动  导致不管是进门还是出门都能识别到有人移动，不存在最近一分钟无人移动的状态。\u003c/li\u003e\n\u003cli\u003eAqara 自己的 APP 上人体传感器可以自定义判断最近几分钟无人移动（最小一分钟），homeassistant 接入后只能判断有人移动和无人移动 自定义分钟无法设置\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e尝试改进离家模式：\u003c/h2\u003e\n\u003cp\u003e触发条件=门窗传感器识别到关门  动作：添加大于 1 分钟的延迟（ 1 分钟内状态还是会是有人状态），然后判断是否有人，如果无人  就开启离家模式  但还是存在问题 就是进门 1 分钟内大多数情况我已离开门附近，传感器已经识别不到我了   导致人在家开启了离家模式\u003c/p\u003e\n\u003cp\u003e再次尝试改进  就是进门延迟 1 分钟 没有识别到人移动，但智能灯已开（回家模式自动开的），就不开启离家模式 只有当关门关灯没人移动才开启离家模式   但在开灯的状态下 还是开启了离家模式\u003c/p\u003e\n\u003ch2\u003e求教：有什么优雅的判断回家离家模式的方法吗\u003c/h2\u003e\n\u003col\u003e\n\u003cli\u003e不能换智能门锁  不能换智能门锁 不能换智能门锁 \u003c/li\u003e\n\u003cli\u003e最好使用现有的设备 1 个门窗传感器 人体传感器 智能灯\u003c/li\u003e\n\u003cli\u003e如果无法实现可以加设备 尽量便宜的  \u003c/li\u003e\n\u003cli\u003e尽量无感的  不是按键模式\u003c/li\u003e\n\u003cli\u003ehomeassistant 接入的传感器没有 app 上功能多 如何处理\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003cimg alt=\"image.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://vip2.loli.io/2023/08/22/ot6TuXERCP2yI8n.png\"/\u003e\u003c/p\u003e\n\u003ch3\u003e去掉环境条件后修改\u003c/h3\u003e\n\u003cp\u003e\u003cimg alt=\"image.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://vip2.loli.io/2023/08/22/LqzxCG4bsS8kHZr.png\"/\u003e\u003c/p\u003e\n",

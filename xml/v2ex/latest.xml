@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>看电影《孤注一掷》，各位老哥分享一下，你有经过被诈骗的经历嘛 - 分享发现</title>
+      <link>https://www.v2ex.com/t/967294</link>
+      <description>&lt;h3&gt;自己先来吧，在网购的时候因为买东西，加了一个在网上找的卖家，被骗了几千块，虽然报了警了，2 年过去，依然没有下文，也算是自己给自己的教训了😥&lt;/h3&gt;&#xA;</description>
+      <author>slamDunkLINk</author>
+      <pubDate>22 Aug 2023 02:46:05 +0000</pubDate>
+    </item>
+    <item>
       <title>homeassistant 门窗传感器+人体传感器如何 如何判断是离家还是回家 - 问与答</title>
       <link>https://www.v2ex.com/t/967293</link>
       <description>&lt;p&gt;现有设备 Aqara 的门窗传感器和人体传感器 各一个  智能灯一个&lt;/p&gt;&#xA;&lt;p&gt;门窗传感器装在门上，人体传感器装在门的上方&lt;/p&gt;&#xA;&lt;h2&gt;预期的效果是：&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;回家：进门随手关门，触发条件=门窗传感器识别到关门，环境条件=人体传感器识别到有人移动 判断为回家&#xA;后来优化 环境条件加一条 智能灯未关  可以防止开门拿外卖或临时出门误触发&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;离家：出门后关门，触发条件=门窗传感器识别到关门，环境条件=人体传感器识别到无人移动，判断为离家&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;存在的问题：&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;回家模式暂时无问题&lt;/li&gt;&#xA;&lt;li&gt;离家模式无法执行 原因：人体传感器只能识别最近 1 分钟以上有无人移动  导致不管是进门还是出门都能识别到有人移动，不存在最近一分钟无人移动的状态。&lt;/li&gt;&#xA;&lt;li&gt;Aqara 自己的 APP 上人体传感器可以自定义判断最近几分钟无人移动（最小一分钟），homeassistant 接入后只能判断有人移动和无人移动 自定义分钟无法设置&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2&gt;尝试改进离家模式：&lt;/h2&gt;&#xA;&lt;p&gt;触发条件=门窗传感器识别到关门  动作：添加大于 1 分钟的延迟（ 1 分钟内状态还是会是有人状态），然后判断是否有人，如果无人  就开启离家模式  但还是存在问题 就是进门 1 分钟内大多数情况我已离开门附近，传感器已经识别不到我了   导致人在家开启了离家模式&lt;/p&gt;&#xA;&lt;p&gt;再次尝试改进  就是进门延迟 1 分钟 没有识别到人移动，但智能灯已开（回家模式自动开的），就不开启离家模式 只有当关门关灯没人移动才开启离家模式   但在开灯的状态下 还是开启了离家模式&lt;/p&gt;&#xA;&lt;h2&gt;求教：有什么优雅的判断回家离家模式的方法吗&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;不能换智能门锁  不能换智能门锁 不能换智能门锁 &lt;/li&gt;&#xA;&lt;li&gt;最好使用现有的设备 1 个门窗传感器 人体传感器 智能灯&lt;/li&gt;&#xA;&lt;li&gt;如果无法实现可以加设备 尽量便宜的  &lt;/li&gt;&#xA;&lt;li&gt;尽量无感的  不是按键模式&lt;/li&gt;&#xA;&lt;li&gt;homeassistant 接入的传感器没有 app 上功能多 如何处理&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://vip2.loli.io/2023/08/22/ot6TuXERCP2yI8n.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h3&gt;去掉环境条件后修改&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;image.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://vip2.loli.io/2023/08/22/LqzxCG4bsS8kHZr.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
