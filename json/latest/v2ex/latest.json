@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "中文分词时该怎样定义被误拆的专有词？ - iDev",
+      "Link": "https://www.v2ex.com/t/968016",
+      "Description": "\u003cp\u003e先来个例子：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-swift\"\u003eimport Foundation\n\nfunc tokenize(sentence: String) -\u0026gt; [String] {\n  var tokens:[String] = [String]()\n  let tagger = NSLinguisticTagger(tagSchemes: [.tokenType], options: 0)\n  tagger.string = sentence\n  let range = NSMakeRange(0, sentence.utf16.count)\n  let options: NSLinguisticTagger.Options = [.omitWhitespace, .omitPunctuation]\n  tagger.enumerateTags(in: range, unit: .word, scheme: .tokenType, options: options) { (tag, tokenRange, stop) in\n    let word = (sentence as NSString).substring(with: tokenRange)\n    tokens.append(word)\n  }\n  return tokens\n}\n\nlet texts: [String] = [\"有個大夫叫白朮，他有個徒弟叫七七。\"]\nfor text in texts {\n  let tokens = tokenize(sentence: text)\n  print(\"\\(text) --\u0026gt; \\(tokens)\")\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e直接运行该 swift 脚本，可以发现「白朮」（「白术」的繁体中文写法）被拆开了。\n该怎样定义这个词、使其不被误拆呢？\u003c/p\u003e\n",
+      "Author": "ShikiSuen",
+      "PubDate": "2023-08-24T08:33:21Z"
+    },
+    {
+      "Title": "交流下域名投资，求 v 友分享下成功经验 - 问与答",
+      "Link": "https://www.v2ex.com/t/968015",
+      "Description": "\u003cp\u003e看 aws support 会跳转到 aws ，azure support 还未跳转。\u003c/p\u003e\n\u003cp\u003e就去注册了下 azure support  \u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://azuresupport.cloud/\" rel=\"nofollow\"\u003ehttps://azuresupport.cloud/\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "scalaer",
+      "PubDate": "2023-08-24T08:32:18Z"
+    },
+    {
+      "Title": "minio 支持配置 etag 的类型吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/968014",
+      "Description": "目前有一个项目，原来是使用本地磁盘作为存储方式，现在要重构兼容一下 minio 作为我的服务端的后端存储，大概类似 docker registry 或者 harbor 的功能。目前有一个上传接口（上传任务为 uuid ， 文件 hash 为 SHA256 ）需要优化  PUT /:name/blobs/uploads/uuid?digest=xxxx(SHA256) ，之前在本地磁盘写文件的时候可以在 writeStream 写的过程中校验 hash ，现在添加一个 minio 后端，通过 putObject 接口将文件上传到 minio server 之后需要确认一下写之后的 sha256 是否与收到的一致。目前看到 \u003ca target=\"_blank\" href=\"https://github.com/minio/minio-js/blob/4f533785c89554d71944e6128b76e35e2b81279f/src/internal/client.ts#L803\" rel=\"nofollow noopener\"\u003ehttps://github.com/minio/minio-js/blob/4f533785c89554d71944e6128b76e35e2b81279f/src/internal/client.ts#L803\u003c/a\u003e 可以检查 minio server 保存的 object 的 etag ，但是好像返回的格式是 MD5 ，看到  minio client 没有相关的配置，不知道 server 部署的时候有没有相关配置 etag 。如果没有的话，只能再读一遍写的 object 再计算一次。",
+      "Author": "victimsss",
+      "PubDate": "2023-08-24T08:32:04Z"
+    },
+    {
+      "Title": "Devonthink 3 pro 出售一个激活码 - macOS",
+      "Link": "https://www.v2ex.com/t/968013",
+      "Description": "\u003cp\u003eDevonthink 3 pro 原价 199 美元（ RMB1400+），已申请上学生优惠价折扣 30%，有两个 seat ，我自己用一个，剩下来一个出售，打算出 RMB550 成本价（某宝 659 ），有需要的联系微信:Tlcheng_polisci 。\u003c/p\u003e\n",
+      "Author": "chengtl5386",
+      "PubDate": "2023-08-24T08:30:28Z"
+    },
+    {
+      "Title": "建了一个深圳互联网聊天吹水群~ - 深圳",
+      "Link": "https://www.v2ex.com/t/968012",
+      "Description": "\u003cp\u003e建了个深圳互联网吹水群，进来聊天~\n在这里，你可以畅所欲言，分享生活点滴，与大家聊天交流。发布活动邀约，建立自己的社交圈，参与线上或线下活动，还可以与大家分享搞钱的想法和过来人的经验。\u003c/p\u003e\n\u003cp\u003e扫码进群，或者留号我拉\n\u003ca href=\"https://imgse.com/i/pPYjjvq\" rel=\"nofollow\"\u003e\u003cimg alt=\"pPYjjvq.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s1.ax1x.com/2023/08/24/pPYjjvq.jpg\"/\u003e\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "nullivex",
+      "PubDate": "2023-08-24T08:29:22Z"
+    },
+    {
       "Title": "公司忽然把社保转给第三方缴纳（缴纳数额没变化），对个人有什么问题吗，有什么不妥的地方吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/968011",
       "Description": "",
