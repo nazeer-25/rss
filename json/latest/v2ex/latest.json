@@ -4,6 +4,62 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Rust 写了个简单的小程序，命令行的 TODO list app。 - 分享创造",
+      "Link": "https://www.v2ex.com/t/967847",
+      "Description": "\u003cp\u003eRust 写了个简单的小程序，命令行的 TODO list app 。\u003c/p\u003e\n\u003cp\u003e都说 Rust 难学，上手难度高，学习曲线陡峭。\u003c/p\u003e\n\u003cp\u003e其实我觉得一方面是最近 Rust 在前端领域很火，很多像我一样以 JS 为第一门语言的人，对于底层语言缺乏认知和底层思维。\u003c/p\u003e\n\u003cp\u003e另一方面，Rust 的语法非常的多，很多小伙伴看完语法之后不知道做什么项目实战，过了一段时间又忘了，导致多次从入门到放弃。我也是从入门到放弃了好几次才逐渐找到点感觉。\u003c/p\u003e\n\u003cp\u003e所以我边学边写，打算写一系列的 Rust 实战教程，给想入门 Rust 的同学。\u003c/p\u003e\n\u003cp\u003e目前是第一系列的 Rust 开发命令行程序，使用 Rust 写了个命令行 TODO LIST 。代码完成了，文章正在写。\u003c/p\u003e\n\u003cp\u003e后续系列\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eRust 和 actix 开发服务端\u003c/li\u003e\n\u003cli\u003eRust 写一个 Markdown parser\u003c/li\u003e\n\u003cli\u003eRust 开发 WebAssembly \u003c/li\u003e\n\u003cli\u003eetc.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/liruifengv/todo-rs\" rel=\"nofollow\"\u003e仓库地址\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e安装\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003ecargo install --git https://github.com/liruifengv/todo-rs\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e用法\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003e➜  ~  rodo --help\nrodo 0.1.0\nRodo is a simple todo list manager.\n\nUSAGE:\n    rodo.exe \u0026lt;SUBCOMMAND\u0026gt;\n\nOPTIONS:\n    -h, --help       Print help information\n    -V, --version    Print version information\n\nSUBCOMMANDS:\n    add       Add a todo item.\n    help      Print this message or the help of the given subcommand(s)\n    info      Show rodo info.\n    list      List all the todo items. [aliases: ls, ll, la]\n    remove    Remove a todo item. [aliases: rm]\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "liruifengv",
+      "PubDate": "2023-08-24T02:00:48Z"
+    },
+    {
+      "Title": "为什么感觉网件路由器比红米路由器好用? - 路由器",
+      "Link": "https://www.v2ex.com/t/967846",
+      "Description": "\u003cp\u003e前年买了一个红米 AX6 3000 , 感觉用的还行, 就是散热不好, 到了夏天就容易死机, 老是要重启, 前不久买了一个网件 RAX50 刷了梅林, 感觉丝般顺滑呀, 打开油管的速度感觉都快了很多(电脑的网关设置成了旁路由翻墙), 散热也设计的很好, 一点都不热, 感觉网件的路由器确实比红米的要好, 请问这是错觉吗?\u003c/p\u003e\n",
+      "Author": "jack778",
+      "PubDate": "2023-08-24T01:56:42Z"
+    },
+    {
+      "Title": "RocketMQ 的 Python 版的 SDK 内存泄漏的问题？ - Python",
+      "Link": "https://www.v2ex.com/t/967845",
+      "Description": "\u003cp\u003e各位大佬有用过 RocketMQ 的 Python 版的 SDK 吗？ 我在使用生产者循环发消息的的时候，内存一直在缓慢上升，不知道是不是使用不当造成的。\u003c/p\u003e\n\u003cp\u003ePython 版本：3.8.17\u003cbr/\u003e\nrocketmq-client-python 版本：2.0.1rc1 （自己下载的\u003ca href=\"https://github.com/apache/rocketmq-client-python\" rel=\"nofollow\"\u003emaster\u003c/a\u003e分支下手动安装的）\u003c/p\u003e\n\u003cp\u003e代码:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003edef send_message(producer, body):\n    try:\n        message = Message(\"test\")\n        message.set_body(json.dumps(body))\n        result = producer.send_sync(message)\n        print(f\"生产者发送消息状态: {str(result.status)} 消息 ID: {result.msg_id}, offset: {result.offset}\")\n        del result\n    except Exception as e:\n        print(f\"生产者发送消息失败:{repr(e)}\")\n\n    finally:\n        del message\n        gc.collect()\n\ndef producer():\n    ROCKETMQ_HOST = os.getenv(\"ROCKETMQ_HOST\")\n    ROCKETMQ_PORT = os.getenv(\"ROCKETMQ_PORT\")\n    ROCKETMQ_ACCESS_KEY = os.getenv(\"ROCKETMQ_ACCESS_KEY\")\n    ROCKETMQ_ACCESS_SECRET = os.getenv(\"ROCKETMQ_ACCESS_SECRET\")\n\n    producer = Producer('algo-producer')\n    producer.set_name_server_address(f\"{ROCKETMQ_HOST}:{ROCKETMQ_PORT}\")\n    producer.set_session_credentials(ROCKETMQ_ACCESS_KEY, ROCKETMQ_ACCESS_SECRET, \"\")\n    producer.start()\n\n    try:\n        while True:\n            body = {\"a\":'x'}\n            send_message(producer,json.dumps(body))\n            time.sleep(0.2)\n    except KeyboardInterrupt:\n        print(\"退出\")\n    finally:\n        producer.shutdown()\n\n\n\nif __name__ == '__main__':\n    producer()\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "chaizz",
+      "PubDate": "2023-08-24T01:56:30Z"
+    },
+    {
+      "Title": "吐槽： 公司一个岗位招聘两人入职竞争，最后只留一个。 - 问与答",
+      "Link": "https://www.v2ex.com/t/967844",
+      "Description": "事由： \u003cbr /\u003e1. 公司没有固定的安卓开发和产品经理（之前都是外聘/兼职）。\u003cbr /\u003e2. 上周开始说要招全职的安卓开发和产品经理。\u003cbr /\u003e\u003cbr /\u003e事件：\u003cbr /\u003e1. 同一时间入职两个安卓开发/产品经理，老总明确的跟他们说我会对你们两个人一段时间考核，公司只会留一个人。\u003cbr /\u003e\u003cbr /\u003e结果：\u003cbr /\u003e1. 真的就留了一个安卓开发。（在考核期，两个安卓每天都加班到九点多）\u003cbr /\u003e2. 产品经理两个人还在，估计过一两周也会剩下一个了",
+      "Author": "yangjirun",
+      "PubDate": "2023-08-24T01:55:43Z"
+    },
+    {
+      "Title": "有用红米手机的友友吗？咨询一下蓝牙耳机断连的问题。 - 问与答",
+      "Link": "https://www.v2ex.com/t/967843",
+      "Description": "买的是红米的蓝牙耳机，价位就 100 ，经常性断连，想问一下是手机系统不稳定的问题还是耳机的问题？\u003cbr /\u003e\u003cbr /\u003e如果是耳机问题的话有耳机推荐吗？经常会打电话打游戏或者听歌，需求量不小，希望有用红米手机的 V 友们，有好用的耳机推荐一下，最好可以知道手机的软件版本。\u003cbr /\u003e\u003cbr /\u003e帮男朋友问的，他最近跟我打电话老断连。",
+      "Author": "ArleneCheung",
+      "PubDate": "2023-08-24T01:54:02Z"
+    },
+    {
+      "Title": "新笔记本电脑空余一个 M.2 接口求推荐固态 - 问与答",
+      "Link": "https://www.v2ex.com/t/967842",
+      "Description": "容量：1T 固态硬盘\u003cbr /\u003e\u003cbr /\u003e接口：M.2 固态硬盘\u003cbr /\u003e\u003cbr /\u003e尺寸：2280\u003cbr /\u003e\u003cbr /\u003e协议：Nvme\u003cbr /\u003e\u003cbr /\u003e总线：PCIE4.0\u003cbr /\u003e\u003cbr /\u003e已占用可替换\u003cbr /\u003e\u003cbr /\u003e推荐最大容量（更大容量实测为准）：理论 2T\u003cbr /\u003e\u003cbr /\u003e空余硬盘接口:1\u003cbr /\u003e\u003cbr /\u003e尺寸：2280\u003cbr /\u003e\u003cbr /\u003e总线：PCIE4.0\u003cbr /\u003e\u003cbr /\u003e整机最大支持：理论 4T\u003cbr /\u003e\u003cbr /\u003e考虑兼容问题具体升级建议联系工程师核实\u003cbr /\u003e\u003cbr /\u003e问了客服给的参数",
+      "Author": "lifi",
+      "PubDate": "2023-08-24T01:53:52Z"
+    },
+    {
+      "Title": "b2 对象存储涨价了 - 分享发现",
+      "Link": "https://www.v2ex.com/t/967841",
+      "Description": "- 从 1T 5 美元涨到 6 美元\u003cbr /\u003e- 现在提供最高 3 倍存储免费出口流量\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://www.backblaze.com/blog/2023-product-announcement/?utm_campaign=2023%20Product%20Announcement\u0026amp;utm_medium=email\u0026amp;_hsmi=271497447\u0026amp;_hsenc=p2ANqtz--HbmCUoWDmcojxnRwBPxq-hI767IuBDF3fNkPIHMSqj7PfEWbjbewlLCAYpvaGDIMpoqOptXXJ94CsJjJWsmmoCSRr5g\u0026amp;utm_content=271497447\u0026amp;utm_source=hs_email\" rel=\"nofollow noopener\"\u003ehttps://www.backblaze.com/blog/2023-product-announcement/?utm_campaign=2023%20Product%20Announcement\u0026amp;utm_medium=email\u0026amp;_hsmi=271497447\u0026amp;_hsenc=p2ANqtz--HbmCUoWDmcojxnRwBPxq-hI767IuBDF3fNkPIHMSqj7PfEWbjbewlLCAYpvaGDIMpoqOptXXJ94CsJjJWsmmoCSRr5g\u0026amp;utm_content=271497447\u0026amp;utm_source=hs_email\u003c/a\u003e",
+      "Author": "jenlors",
+      "PubDate": "2023-08-24T01:53:35Z"
+    },
+    {
+      "Title": "safari ios 自动填充输入验证码 输入框背景变黄 怎么解决,用了很多方案都不行，有最近做过的吗 - 程序员",
+      "Link": "https://www.v2ex.com/t/967840",
+      "Description": "",
+      "Author": "Ah1998",
+      "PubDate": "2023-08-24T01:52:56Z"
+    },
+    {
       "Title": "关于中性笔，哪个好用 - 问与答",
       "Link": "https://www.v2ex.com/t/967839",
       "Description": "之前用小米巨能写，感谢下水不行，后面换了百乐 P500 舒服了，各位还有推荐吗？",

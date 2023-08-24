@@ -4,6 +4,61 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Rust 写了个简单的小程序，命令行的 TODO list app。 - 分享创造</title>
+      <link>https://www.v2ex.com/t/967847</link>
+      <description>&lt;p&gt;Rust 写了个简单的小程序，命令行的 TODO list app 。&lt;/p&gt;&#xA;&lt;p&gt;都说 Rust 难学，上手难度高，学习曲线陡峭。&lt;/p&gt;&#xA;&lt;p&gt;其实我觉得一方面是最近 Rust 在前端领域很火，很多像我一样以 JS 为第一门语言的人，对于底层语言缺乏认知和底层思维。&lt;/p&gt;&#xA;&lt;p&gt;另一方面，Rust 的语法非常的多，很多小伙伴看完语法之后不知道做什么项目实战，过了一段时间又忘了，导致多次从入门到放弃。我也是从入门到放弃了好几次才逐渐找到点感觉。&lt;/p&gt;&#xA;&lt;p&gt;所以我边学边写，打算写一系列的 Rust 实战教程，给想入门 Rust 的同学。&lt;/p&gt;&#xA;&lt;p&gt;目前是第一系列的 Rust 开发命令行程序，使用 Rust 写了个命令行 TODO LIST 。代码完成了，文章正在写。&lt;/p&gt;&#xA;&lt;p&gt;后续系列&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Rust 和 actix 开发服务端&lt;/li&gt;&#xA;&lt;li&gt;Rust 写一个 Markdown parser&lt;/li&gt;&#xA;&lt;li&gt;Rust 开发 WebAssembly &lt;/li&gt;&#xA;&lt;li&gt;etc.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/liruifengv/todo-rs&#34; rel=&#34;nofollow&#34;&gt;仓库地址&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;安装&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code&gt;cargo install --git https://github.com/liruifengv/todo-rs&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;用法&lt;/h2&gt;&#xA;&lt;pre&gt;&lt;code&gt;➜  ~  rodo --help&#xA;rodo 0.1.0&#xA;Rodo is a simple todo list manager.&#xA;&#xA;USAGE:&#xA;    rodo.exe &amp;lt;SUBCOMMAND&amp;gt;&#xA;&#xA;OPTIONS:&#xA;    -h, --help       Print help information&#xA;    -V, --version    Print version information&#xA;&#xA;SUBCOMMANDS:&#xA;    add       Add a todo item.&#xA;    help      Print this message or the help of the given subcommand(s)&#xA;    info      Show rodo info.&#xA;    list      List all the todo items. [aliases: ls, ll, la]&#xA;    remove    Remove a todo item. [aliases: rm]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>liruifengv</author>
+      <pubDate>24 Aug 2023 02:00:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>为什么感觉网件路由器比红米路由器好用? - 路由器</title>
+      <link>https://www.v2ex.com/t/967846</link>
+      <description>&lt;p&gt;前年买了一个红米 AX6 3000 , 感觉用的还行, 就是散热不好, 到了夏天就容易死机, 老是要重启, 前不久买了一个网件 RAX50 刷了梅林, 感觉丝般顺滑呀, 打开油管的速度感觉都快了很多(电脑的网关设置成了旁路由翻墙), 散热也设计的很好, 一点都不热, 感觉网件的路由器确实比红米的要好, 请问这是错觉吗?&lt;/p&gt;&#xA;</description>
+      <author>jack778</author>
+      <pubDate>24 Aug 2023 01:56:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>RocketMQ 的 Python 版的 SDK 内存泄漏的问题？ - Python</title>
+      <link>https://www.v2ex.com/t/967845</link>
+      <description>&lt;p&gt;各位大佬有用过 RocketMQ 的 Python 版的 SDK 吗？ 我在使用生产者循环发消息的的时候，内存一直在缓慢上升，不知道是不是使用不当造成的。&lt;/p&gt;&#xA;&lt;p&gt;Python 版本：3.8.17&lt;br/&gt;&#xA;rocketmq-client-python 版本：2.0.1rc1 （自己下载的&lt;a href=&#34;https://github.com/apache/rocketmq-client-python&#34; rel=&#34;nofollow&#34;&gt;master&lt;/a&gt;分支下手动安装的）&lt;/p&gt;&#xA;&lt;p&gt;代码:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def send_message(producer, body):&#xA;    try:&#xA;        message = Message(&#34;test&#34;)&#xA;        message.set_body(json.dumps(body))&#xA;        result = producer.send_sync(message)&#xA;        print(f&#34;生产者发送消息状态: {str(result.status)} 消息 ID: {result.msg_id}, offset: {result.offset}&#34;)&#xA;        del result&#xA;    except Exception as e:&#xA;        print(f&#34;生产者发送消息失败:{repr(e)}&#34;)&#xA;&#xA;    finally:&#xA;        del message&#xA;        gc.collect()&#xA;&#xA;def producer():&#xA;    ROCKETMQ_HOST = os.getenv(&#34;ROCKETMQ_HOST&#34;)&#xA;    ROCKETMQ_PORT = os.getenv(&#34;ROCKETMQ_PORT&#34;)&#xA;    ROCKETMQ_ACCESS_KEY = os.getenv(&#34;ROCKETMQ_ACCESS_KEY&#34;)&#xA;    ROCKETMQ_ACCESS_SECRET = os.getenv(&#34;ROCKETMQ_ACCESS_SECRET&#34;)&#xA;&#xA;    producer = Producer(&#39;algo-producer&#39;)&#xA;    producer.set_name_server_address(f&#34;{ROCKETMQ_HOST}:{ROCKETMQ_PORT}&#34;)&#xA;    producer.set_session_credentials(ROCKETMQ_ACCESS_KEY, ROCKETMQ_ACCESS_SECRET, &#34;&#34;)&#xA;    producer.start()&#xA;&#xA;    try:&#xA;        while True:&#xA;            body = {&#34;a&#34;:&#39;x&#39;}&#xA;            send_message(producer,json.dumps(body))&#xA;            time.sleep(0.2)&#xA;    except KeyboardInterrupt:&#xA;        print(&#34;退出&#34;)&#xA;    finally:&#xA;        producer.shutdown()&#xA;&#xA;&#xA;&#xA;if __name__ == &#39;__main__&#39;:&#xA;    producer()&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>chaizz</author>
+      <pubDate>24 Aug 2023 01:56:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>吐槽： 公司一个岗位招聘两人入职竞争，最后只留一个。 - 问与答</title>
+      <link>https://www.v2ex.com/t/967844</link>
+      <description>事由： &lt;br /&gt;1. 公司没有固定的安卓开发和产品经理（之前都是外聘/兼职）。&lt;br /&gt;2. 上周开始说要招全职的安卓开发和产品经理。&lt;br /&gt;&lt;br /&gt;事件：&lt;br /&gt;1. 同一时间入职两个安卓开发/产品经理，老总明确的跟他们说我会对你们两个人一段时间考核，公司只会留一个人。&lt;br /&gt;&lt;br /&gt;结果：&lt;br /&gt;1. 真的就留了一个安卓开发。（在考核期，两个安卓每天都加班到九点多）&lt;br /&gt;2. 产品经理两个人还在，估计过一两周也会剩下一个了</description>
+      <author>yangjirun</author>
+      <pubDate>24 Aug 2023 01:55:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>有用红米手机的友友吗？咨询一下蓝牙耳机断连的问题。 - 问与答</title>
+      <link>https://www.v2ex.com/t/967843</link>
+      <description>买的是红米的蓝牙耳机，价位就 100 ，经常性断连，想问一下是手机系统不稳定的问题还是耳机的问题？&lt;br /&gt;&lt;br /&gt;如果是耳机问题的话有耳机推荐吗？经常会打电话打游戏或者听歌，需求量不小，希望有用红米手机的 V 友们，有好用的耳机推荐一下，最好可以知道手机的软件版本。&lt;br /&gt;&lt;br /&gt;帮男朋友问的，他最近跟我打电话老断连。</description>
+      <author>ArleneCheung</author>
+      <pubDate>24 Aug 2023 01:54:02 +0000</pubDate>
+    </item>
+    <item>
+      <title>新笔记本电脑空余一个 M.2 接口求推荐固态 - 问与答</title>
+      <link>https://www.v2ex.com/t/967842</link>
+      <description>容量：1T 固态硬盘&lt;br /&gt;&lt;br /&gt;接口：M.2 固态硬盘&lt;br /&gt;&lt;br /&gt;尺寸：2280&lt;br /&gt;&lt;br /&gt;协议：Nvme&lt;br /&gt;&lt;br /&gt;总线：PCIE4.0&lt;br /&gt;&lt;br /&gt;已占用可替换&lt;br /&gt;&lt;br /&gt;推荐最大容量（更大容量实测为准）：理论 2T&lt;br /&gt;&lt;br /&gt;空余硬盘接口:1&lt;br /&gt;&lt;br /&gt;尺寸：2280&lt;br /&gt;&lt;br /&gt;总线：PCIE4.0&lt;br /&gt;&lt;br /&gt;整机最大支持：理论 4T&lt;br /&gt;&lt;br /&gt;考虑兼容问题具体升级建议联系工程师核实&lt;br /&gt;&lt;br /&gt;问了客服给的参数</description>
+      <author>lifi</author>
+      <pubDate>24 Aug 2023 01:53:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>b2 对象存储涨价了 - 分享发现</title>
+      <link>https://www.v2ex.com/t/967841</link>
+      <description>- 从 1T 5 美元涨到 6 美元&lt;br /&gt;- 现在提供最高 3 倍存储免费出口流量&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://www.backblaze.com/blog/2023-product-announcement/?utm_campaign=2023%20Product%20Announcement&amp;amp;utm_medium=email&amp;amp;_hsmi=271497447&amp;amp;_hsenc=p2ANqtz--HbmCUoWDmcojxnRwBPxq-hI767IuBDF3fNkPIHMSqj7PfEWbjbewlLCAYpvaGDIMpoqOptXXJ94CsJjJWsmmoCSRr5g&amp;amp;utm_content=271497447&amp;amp;utm_source=hs_email&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.backblaze.com/blog/2023-product-announcement/?utm_campaign=2023%20Product%20Announcement&amp;amp;utm_medium=email&amp;amp;_hsmi=271497447&amp;amp;_hsenc=p2ANqtz--HbmCUoWDmcojxnRwBPxq-hI767IuBDF3fNkPIHMSqj7PfEWbjbewlLCAYpvaGDIMpoqOptXXJ94CsJjJWsmmoCSRr5g&amp;amp;utm_content=271497447&amp;amp;utm_source=hs_email&lt;/a&gt;</description>
+      <author>jenlors</author>
+      <pubDate>24 Aug 2023 01:53:35 +0000</pubDate>
+    </item>
+    <item>
+      <title>safari ios 自动填充输入验证码 输入框背景变黄 怎么解决,用了很多方案都不行，有最近做过的吗 - 程序员</title>
+      <link>https://www.v2ex.com/t/967840</link>
+      <author>Ah1998</author>
+      <pubDate>24 Aug 2023 01:52:56 +0000</pubDate>
+    </item>
+    <item>
       <title>关于中性笔，哪个好用 - 问与答</title>
       <link>https://www.v2ex.com/t/967839</link>
       <description>之前用小米巨能写，感谢下水不行，后面换了百乐 P500 舒服了，各位还有推荐吗？</description>
