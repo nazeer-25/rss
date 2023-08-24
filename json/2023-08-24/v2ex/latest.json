@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "分享：类 unix 系统如何清理磁盘空间，以及 Mac 的磁盘空间是如何分配的？ - 程序员",
+      "Link": "https://www.v2ex.com/t/967815",
+      "Description": "\u003cp\u003e我的 Mac 是 128G 的，这么低的磁盘空间很容易爆满，如果只是通过 finder 删除一些文件，是很难真正的清理空间的。我采用的方式如下：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e先在根目录用\u003ccode\u003esudo du -sh ./* | sort -rh | head -10\u003c/code\u003e这个命令会统计当前目录下前 10 个占用最大的文件系统，并会显示他们具体占用了多少 G 的磁盘空间；\u003c/li\u003e\n\u003cli\u003e然后就是挨个进入到显示的占用最大的目录里面，继续统计，然后不停的删除不需要的文件\u003ccode\u003esudo rm -rf path/\u003c/code\u003e，真正的彻底清理空间。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e当我清理完磁盘空间后，我使用\u003ccode\u003edf -h\u003c/code\u003e查看了一下各磁盘空间的具体占用，结果\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://github.com/K-tang-mkv/K-tang-mkv.github.io/blob/main/assests/dfh.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e可以看到，各磁盘分区加起来都超过 128G 了，并且各个磁盘分区的占用和可使用也计算不对，最后查了一下 Mac 的磁盘分区技术是采用了 APFS 文件系统中的一项技术 - APFS Volume Groups 。\nAPFS Volume Groups 允许在一个物理磁盘上创建多个逻辑磁盘分区,这些逻辑分区之间可以共享空间池。也就是说,每个分区显示的“大小”是该分区可以扩展到的最大容量,而不是其已实际占用的物理空间大小。\u003c/p\u003e\n\u003cp\u003e只有当文件系统使用空间时,才会从共享空间池中动态分配物理存储空间。\u003c/p\u003e\n\u003cp\u003e所以在这里,虽然各分区的逻辑“大小”相加超过了 128G,但它们共享一个约 128G 的物理存储池,实际 occupied 物理空间还是小于等于总的物理磁盘空间。\u003c/p\u003e\n\u003cp\u003e这种机制可以提高磁盘空间的利用率和灵活性。所以不用担心各分区显示大小的总和超过了物理磁盘空间,这在 APFS 的 Volume Groups 下是正常的。\u003c/p\u003e\n",
+      "Author": "Gantnocap",
+      "PubDate": "2023-08-24T00:39:08Z"
+    },
+    {
+      "Title": "李跳跳收到腾讯的律师函，无限期停止更新 - 程序员",
+      "Link": "https://www.v2ex.com/t/967813",
+      "Description": "\u003cp\u003e李跳跳是一款在安卓系统上，利用无障碍权限进行跳过 APP 开屏广告的软件。无需联网，免费使用\u003c/p\u003e\n\u003cp\u003e根据作者的公众号显示，收到了腾讯集团的律师函，腾讯集团认为李跳跳 app 涉嫌不正当竞争，对腾讯集团旗下的 QQ 浏览器产生了影响。要求四十八小时内全网下架李跳跳\u003c/p\u003e\n\u003cp\u003e各位怎么看\u003c/p\u003e\n\u003cp\u003e反正我是觉得腾讯不要脸\u003c/p\u003e\n",
+      "Author": "Tiller",
+      "PubDate": "2023-08-24T00:25:20Z"
+    },
+    {
       "Title": "从运营商那里获取到 IPv6 地址如何正常联网？ - 问与答",
       "Link": "https://www.v2ex.com/t/967812",
       "Description": "联通宽带，已经从运营商那里获取到了 24 开头的 IPv6 公网地址。\u003cbr /\u003e测试 IPv6 访问网站的能力，都测试失败。（作为对比，手机使用数据能够成功通过测试）\u003cbr /\u003e\u003cbr /\u003e测试：\u003cbr /\u003e1 、\u003ca target=\"_blank\" href=\"https://test-ipv6.com/\" rel=\"nofollow noopener\"\u003ehttps://test-ipv6.com/\u003c/a\u003e\u003cbr /\u003e2 、\u003ca target=\"_blank\" href=\"https://ipw.cn/ipv6/\" rel=\"nofollow noopener\"\u003ehttps://ipw.cn/ipv6/\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e如何解决这个问题？",
