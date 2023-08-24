@@ -38,6 +38,16 @@
       <description>&lt;p&gt;以前撸C++，搞网络通讯的时候，你会定义struct，然后通过TCP或者UDP套接字传输数据，但这个时候，你会碰到字节对齐的问题，什么是字节对齐？这里就不详说了，感兴趣的可以去百度查查。但你知道么，Go也算是完美的继承了这个对齐，如果Go也这么搞，他也会碰到字节对齐的问题。所以，想避坑的话，最简单的方法，就是直接传JSON吧，当然，也有用protobuf来定义数据格式，最终Marshal成binary进行传输，也算是避开了这个坑。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>go-carbon 2.2.4版本发布， 轻量级、语义化、对开发者友好的Golang时间处理库</title>
+      <link>https://studygolang.com/topics/16632#reply0</link>
+      <description>&lt;p&gt;carbon 是一个轻量级、语义化、对开发者友好的 golang 时间处理库，支持链式调用。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;目前已被 &lt;a href=&#34;https://github.com/avelino/awesome-go#date-and-time&#34; title=&#34;awesome-go&#34;&gt;awesome-go&lt;/a&gt; 收录，如果您觉得不错，请给个 star 吧&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/golang-module/carbon&#34; title=&#34;github.com/golang-module/carbon&#34;&gt;github.com/golang-module/carbon&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://gitee.com/golang-module/carbon&#34; title=&#34;gitee.com/golang-module/carbon&#34;&gt;gitee.com/golang-module/carbon&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;安装使用&lt;/h4&gt;&#xA;&#xA;&lt;h5&gt;Golang 版本大于等于1.16&lt;/h5&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// 使用 github 库&#xA;go get -u github.com/golang-module/carbon/v2&#xA;&#xA;import (&#xA; &#x9;&amp;quot;github.com/golang-module/carbon/v2&amp;quot;&#xA; )&#xA;&#xA;// 使用 gitee 库&#xA;go get -u gitee.com/golang-module/carbon/v2&#xA;&#xA;import (&#xA; &#x9;&amp;quot;gitee.com/golang-module/carbon/v2&amp;quot;)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h5&gt;Golang 版本小于1.16&lt;/h5&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// 使用 github 库&#xA;go get -u github.com/golang-module/carbon&#xA;&#xA;import (&#xA;&#x9; &amp;quot;github.com/golang-module/carbon&amp;quot;&#xA; )&#xA;&#xA;// 使用 gitee 库&#xA;go get -u gitee.com/golang-module/carbon&#xA;&#xA;import (&#xA;&#x9; &amp;quot;gitee.com/golang-module/carbon&amp;quot;&#xA; )&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h5&gt;更新日志&lt;/h5&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;修复部分方法因并发读写造成的线程不安全的 bug&lt;/li&gt;&#xA;&lt;li&gt;修复 &lt;code&gt;DiffInMonths&lt;/code&gt; 方法输出错误的 bug&lt;/li&gt;&#xA;&lt;li&gt;新增 &lt;code&gt;CreateFromStdTime&lt;/code&gt; 方法，并给 &lt;code&gt;FromStdTime&lt;/code&gt;, &lt;code&gt;Time2Carbon&lt;/code&gt; , &lt;code&gt;Carbon2Time&lt;/code&gt; 方法添加弃用标识&lt;/li&gt;&#xA;&lt;li&gt;增加对波斯语的支持，由 &lt;a href=&#34;https://github.com/ErfanMomeniii&#34; title=&#34;ErfanMomeniii&#34;&gt;erfanMomeniii&lt;/a&gt; 翻译&lt;/li&gt;&#xA;&lt;li&gt;将单元测试覆盖率提升到 100%&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>Go1.21.0 发布了</title>
+      <link>https://studygolang.com/topics/16591#reply2</link>
+      <description>&lt;p&gt;Go1.21.0是2023年8月8日发布的Go语言的最新版本，它带来了一些语言和工具的变化。&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;min和max内置函数&lt;/strong&gt;：Go1.21.0增加了两个新的内置函数min和max，用来对任意可比较的有序类型进行最小值或最大值的操作。min和max函数可以接受一个或多个参数，并返回其中的最小值或最大值。如果参数是浮点数并且包含NaN，min和max函数会返回NaN。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;clear预定义函数&lt;/strong&gt;：Go1.21.0增加了一个clear预定义函数用来做切片和map的clear操作。对于切片，clear函数会将所有元素设置为零值，但保持切片的长度和容量不变。对于map，clear函数会删除所有键值对，得到一个空map。clear函数的使用示例在[这里]展示。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;改变panic(nil)语义&lt;/strong&gt;：Go1.21.0改变了panic(nil)的语义，使得recover函数在捕获到panic(nil)时不再返回nil，而是返回一个特定的错误类型PanicNilError。这样可以避免开发者误以为没有发生panic，而继续执行正常逻辑。&lt;/li&gt;&#xA;&lt;li&gt;**新增标准库：slices、maps、slog 等 **：这几个库正式进入标准库了。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;还有更多其他特性或变化，可以通过官方文档了解：&lt;a href=&#34;https://go.dev/doc/go1.21&#34;&gt;https://go.dev/doc/go1.21&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可以官方方式试用，也可以在 Go语言中文网下载最新版：&lt;a href=&#34;https://studygolang.com/dl&#34;&gt;https://studygolang.com/dl&lt;/a&gt;。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>golang 无顾奔溃 没有报错信息</title>
       <link>https://studygolang.com/topics/16624#reply12</link>
       <description>&lt;p&gt;golang 运行进程奔溃 又没报错信息  有什么软件可以检测嘛 用nohup启的  nohup.log文件里面没有报错信息&lt;/p&gt;&#xA;</description>
@@ -54,11 +64,6 @@
     <item>
       <title>基于go，gin，JWT，权限管理系统</title>
       <link>https://studygolang.com/resources/15585#reply0</link>
-    </item>
-    <item>
-      <title>Go1.21.0 发布了</title>
-      <link>https://studygolang.com/topics/16591#reply2</link>
-      <description>&lt;p&gt;Go1.21.0是2023年8月8日发布的Go语言的最新版本，它带来了一些语言和工具的变化。&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;min和max内置函数&lt;/strong&gt;：Go1.21.0增加了两个新的内置函数min和max，用来对任意可比较的有序类型进行最小值或最大值的操作。min和max函数可以接受一个或多个参数，并返回其中的最小值或最大值。如果参数是浮点数并且包含NaN，min和max函数会返回NaN。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;clear预定义函数&lt;/strong&gt;：Go1.21.0增加了一个clear预定义函数用来做切片和map的clear操作。对于切片，clear函数会将所有元素设置为零值，但保持切片的长度和容量不变。对于map，clear函数会删除所有键值对，得到一个空map。clear函数的使用示例在[这里]展示。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;改变panic(nil)语义&lt;/strong&gt;：Go1.21.0改变了panic(nil)的语义，使得recover函数在捕获到panic(nil)时不再返回nil，而是返回一个特定的错误类型PanicNilError。这样可以避免开发者误以为没有发生panic，而继续执行正常逻辑。&lt;/li&gt;&#xA;&lt;li&gt;**新增标准库：slices、maps、slog 等 **：这几个库正式进入标准库了。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;还有更多其他特性或变化，可以通过官方文档了解：&lt;a href=&#34;https://go.dev/doc/go1.21&#34;&gt;https://go.dev/doc/go1.21&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可以官方方式试用，也可以在 Go语言中文网下载最新版：&lt;a href=&#34;https://studygolang.com/dl&#34;&gt;https://studygolang.com/dl&lt;/a&gt;。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Go语言爱好者周刊：第 197 期</title>
