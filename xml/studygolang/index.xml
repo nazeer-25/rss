@@ -53,14 +53,14 @@
       <description>&lt;p&gt;虚拟币主流交易所跟单挂单量化交易是指基于虚拟货币市场的量化交易，其中跟单和挂单是常见的交易方式。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;跟单交易指的是跟随其他交易者的交易策略进行虚拟货币交易，通常是通过复制其他交易者的交易订单，或者根据其他交易者的交易信号进行交易。在虚拟货币市场中，投资者选择跟随的交易者通常是具有良好交易记录和成功经验的交易者。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;挂单交易指的是在虚拟货币市场中，通过预设一个交易价格或者条件来触发交易，当市场价格达到预设条件时，系统会自动执行交易。在量化交易中，挂单交易通常是通过程序化交易实现的，通过编写程序，设定好挂单的价格、数量和触发条件，等待市场价格的变动。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;目前，一些虚拟币交易所已经提供了程序化交易和挂单交易的功能，例如 Binance、OKEx、BitMEX、Bittrex 等。这些交易所通常提供了多种交易策略和工具，以帮助投资者进行虚拟货币的量化交易。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;由于虚拟货币市场的波动性和不确定性，编写具体的跟单挂单量化交易合约代码需要考虑到多种因素，包括交易策略、风险控制、市场情况等。此外，虚拟货币交易所提供的交易API也有所不同，因此具体的合约代码需要根据实际情况进行编写。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;导入所需的库和API&#xA;from exchange_api import BinanceAPI&#xA;from trading_bot import trading_bot&lt;/p&gt;&#xA;&#xA;&lt;p&gt;初始化BinanceAPI和trading_bot&#xA;api = BinanceAPI(api_key=’YOUR_API_KEY’, api_secret=’YOUR_API_SECRET’)&#xA;bot = trading_bot(api) 【开发VX and 飞机号telegram【ch3nguang】】&lt;/p&gt;&#xA;&#xA;&lt;p&gt;定义跟单交易的参数 【完整源码逻辑部署看我昵称】&#xA;follow_pair = (‘BTC’, ‘USDT’) # 跟单交易的货币对&#xA;follow_account = ‘YOUR_FOLLOW_ACCOUNT_NAME’ # 跟单交易的账户名&#xA;take_profit = 0.01 # 跟单交易的止盈比例&#xA;stop_loss = 0.05 # 跟单交易的止损比例&lt;/p&gt;&#xA;&#xA;&lt;p&gt;执行跟单交易&#xA;bot.follow(follow_pair, follow_account, take_profit, stop_loss)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;定义挂单交易的参数&#xA;order_pair = (‘BTC’, ‘USDT’) # 挂单交易的货币对&#xA;order_price = 60000 # 挂单交易的价格&#xA;order_amount = 0.01 # 挂单交易的数量&#xA;order_type = ‘LIMIT’ # 挂单交易的类型，可以是 MARKET 或 LIMIT&#xA;time_in_force = ‘GTC’ # 挂单交易的持续时间，可以是 GTC, GTT, FOK, IOC 等&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>字节对齐</title>
-      <link>https://studygolang.com/topics/16631#reply1</link>
-      <description>&lt;p&gt;以前撸C++，搞网络通讯的时候，你会定义struct，然后通过TCP或者UDP套接字传输数据，但这个时候，你会碰到字节对齐的问题，什么是字节对齐？这里就不详说了，感兴趣的可以去百度查查。但你知道么，Go也算是完美的继承了这个对齐，如果Go也这么搞，他也会碰到字节对齐的问题。所以，想避坑的话，最简单的方法，就是直接传JSON吧，当然，也有用protobuf来定义数据格式，最终Marshal成binary进行传输，也算是避开了这个坑。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>Go1.21.0 发布了</title>
       <link>https://studygolang.com/topics/16591#reply3</link>
       <description>&lt;p&gt;Go1.21.0是2023年8月8日发布的Go语言的最新版本，它带来了一些语言和工具的变化。&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;min和max内置函数&lt;/strong&gt;：Go1.21.0增加了两个新的内置函数min和max，用来对任意可比较的有序类型进行最小值或最大值的操作。min和max函数可以接受一个或多个参数，并返回其中的最小值或最大值。如果参数是浮点数并且包含NaN，min和max函数会返回NaN。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;clear预定义函数&lt;/strong&gt;：Go1.21.0增加了一个clear预定义函数用来做切片和map的clear操作。对于切片，clear函数会将所有元素设置为零值，但保持切片的长度和容量不变。对于map，clear函数会删除所有键值对，得到一个空map。clear函数的使用示例在[这里]展示。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;改变panic(nil)语义&lt;/strong&gt;：Go1.21.0改变了panic(nil)的语义，使得recover函数在捕获到panic(nil)时不再返回nil，而是返回一个特定的错误类型PanicNilError。这样可以避免开发者误以为没有发生panic，而继续执行正常逻辑。&lt;/li&gt;&#xA;&lt;li&gt;**新增标准库：slices、maps、slog 等 **：这几个库正式进入标准库了。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;还有更多其他特性或变化，可以通过官方文档了解：&lt;a href=&#34;https://go.dev/doc/go1.21&#34;&gt;https://go.dev/doc/go1.21&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可以官方方式试用，也可以在 Go语言中文网下载最新版：&lt;a href=&#34;https://studygolang.com/dl&#34;&gt;https://studygolang.com/dl&lt;/a&gt;。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>[杭州][25K-35K]招聘golang年轻架构师</title>
+      <link>https://studygolang.com/topics/16626#reply0</link>
+      <description>&lt;p&gt;工作职责：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1.负责公司业务，app的整体架构设计，提供完整的技术方案&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2.软件后端研发团队的管理&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3.基于系统运行现状，优化现有系统的性能，解决软件系统平台关键技术问题攻关/核心功能模块设计&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4.在项目需求不断细化的过程中校正整体的架构设计，并输出有效的技术成果&lt;/p&gt;&#xA;&#xA;&lt;p&gt;5.负责代码review，确保线上质量&lt;/p&gt;&#xA;&#xA;&lt;p&gt;任职要求：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1.本科以上学历，计算机相关专业，2年以上架构设计或交付的工作经验&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2.熟悉Linux、微服务设计、热爱开源&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3.扎实的计算机科学基础。熟练使用golang，熟悉主流常用的存储中间件如 mysql, MongoDB, redis。消息中间件kafka, mqtt等&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4.有较强的逻辑分析和组织协调能力，具有较强的责任感，沟通和处理能力&lt;/p&gt;&#xA;&#xA;&lt;p&gt;5.工作细心、有计划性，执行能力强，且具备高度的责任心、诚信的工作作风、优秀的沟通能力及团队精神&lt;/p&gt;&#xA;&#xA;&lt;p&gt;6.熟悉前后端开发。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;关于我们： 我们是由一群拥有技术梦想的小伙伴组成的年轻公司。公司崇尚自由，平等，开放，价值。 如果你怀才不遇，请到这里来。 如果你想成就一番伟大的事业，请到这里来。 如果你不愿与平庸的人为伍，请到这里来。 如果你想拥有一份快乐的工作，不要犹豫了，这里是你唯一的选择。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;联系方式 微信：EwCha97&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>PDF转Word SDK效果对比</title>
@@ -83,6 +83,11 @@
       <title>Go可以做到同等并发能力么？</title>
       <link>https://studygolang.com/topics/16629#reply10</link>
       <description>&lt;p&gt;最近联系上了在第一家公司共事过的同事，他现在自己开公司了，但一直在坚持撸C++，因为他们是证券行业，对程序的并发能力要求比较高的要求。而在这方面，也只有C++，能够满足他们的要求，所以他们从来没有考虑过更换其他语言。我和他探讨过是否可以考虑用Go，来尝试做他们的业务，因为Go语言相比C++来说，简单了很多，从业人员也逐渐增多，并发能力也不弱。这里面还有一个现实的问题，就是C++从业人员很难招，他也很害怕公司的C++开发人员流失，因为一旦流失，就很难再招到人来补位。但他还是坚持撸C++，因为他认为，一个公司用哪个技术栈，取决于最厉害的人，用哪门语言，很明显，他们公司最厉害的人，就是他自己，何必来折腾自己呢？最终还是没有说动他，不知道大家怎么看。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>字节对齐</title>
+      <link>https://studygolang.com/topics/16631#reply1</link>
+      <description>&lt;p&gt;以前撸C++，搞网络通讯的时候，你会定义struct，然后通过TCP或者UDP套接字传输数据，但这个时候，你会碰到字节对齐的问题，什么是字节对齐？这里就不详说了，感兴趣的可以去百度查查。但你知道么，Go也算是完美的继承了这个对齐，如果Go也这么搞，他也会碰到字节对齐的问题。所以，想避坑的话，最简单的方法，就是直接传JSON吧，当然，也有用protobuf来定义数据格式，最终Marshal成binary进行传输，也算是避开了这个坑。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>DeFi多重奖励代币合约挖矿模式系统开发搭建</title>
@@ -290,11 +295,6 @@
       <title>腾龙在线开户网址 【 m2007.xyz 】 第一财经</title>
       <link>https://studygolang.com/topics/16641#reply0</link>
       <description>&lt;p&gt;腾龙娱乐网址 m2007.xyz  微信 198-6950-1301 ——工夫影业许昌漯河本文来自人民日报客户端数据业务自媒体渠道，安乐哲观点娱乐娱乐剧情人物，独立博客、京东读书、视觉志、分答系管理系统平台，发布的内容要求提供元数据服来源：好看视频、中国消费网、腾讯财经、南方网、辽宁电视台、湖北广播电视台、华尔街见闻、热点资讯、云南网、凤凰新闻客户端首席创意官：刘绍棠新永和大王网址网站现场娱 乐靠谱的兼职时刻以公平，清正廉明，公开&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>[杭州][25K-35K]招聘golang年轻架构师</title>
-      <link>https://studygolang.com/topics/16626#reply0</link>
-      <description>&lt;p&gt;工作职责：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1.负责公司业务，app的整体架构设计，提供完整的技术方案&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2.软件后端研发团队的管理&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3.基于系统运行现状，优化现有系统的性能，解决软件系统平台关键技术问题攻关/核心功能模块设计&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4.在项目需求不断细化的过程中校正整体的架构设计，并输出有效的技术成果&lt;/p&gt;&#xA;&#xA;&lt;p&gt;5.负责代码review，确保线上质量&lt;/p&gt;&#xA;&#xA;&lt;p&gt;任职要求：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;1.本科以上学历，计算机相关专业，2年以上架构设计或交付的工作经验&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2.熟悉Linux、微服务设计、热爱开源&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3.扎实的计算机科学基础。熟练使用golang，熟悉主流常用的存储中间件如 mysql, MongoDB, redis。消息中间件kafka, mqtt等&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4.有较强的逻辑分析和组织协调能力，具有较强的责任感，沟通和处理能力&lt;/p&gt;&#xA;&#xA;&lt;p&gt;5.工作细心、有计划性，执行能力强，且具备高度的责任心、诚信的工作作风、优秀的沟通能力及团队精神&lt;/p&gt;&#xA;&#xA;&lt;p&gt;6.熟悉前后端开发。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;关于我们： 我们是由一群拥有技术梦想的小伙伴组成的年轻公司。公司崇尚自由，平等，开放，价值。 如果你怀才不遇，请到这里来。 如果你想成就一番伟大的事业，请到这里来。 如果你不愿与平庸的人为伍，请到这里来。 如果你想拥有一份快乐的工作，不要犹豫了，这里是你唯一的选择。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;联系方式 微信：EwCha97&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>跨境电商独立站收款有什么好的选择？</title>
