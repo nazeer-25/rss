@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请求时好像是候绕过 Nginx 中间件导致参数缺失 - 如何排查并解决请求未经过 Nginx 的问题？ - 问与答</title>
+      <link>https://www.v2ex.com/t/968310</link>
+      <description>&lt;h2&gt;背景&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;解析：百度服务器 + （腾讯云域名 + 自带免费解析）&lt;/li&gt;&#xA;&lt;li&gt;服务器端：linux + 用宝塔搭建(最新) + nginx + nestjs&lt;/li&gt;&#xA;&lt;li&gt;客户端：微信小程序 + uni-app&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;描述问题&lt;/h2&gt;&#xA;&lt;p&gt;我遇到了一个问题，有时候（虽然非常罕见,我无法复现），在向服务器发送请求时，收到的消息“request.data”是空的，并且响应中的请求头不包含 Nginx 的信息，但是状态码仍然是 200 。正常情况下，响应中会包含 Nginx 的参数，并且由于我使用的是 nestjs ，无论处理结果如何，都会统一格式化返回的数据，所以数据不可能为空 response.json({总是一个对象})&lt;/p&gt;&#xA;&lt;h2&gt;以下是出现问题时的错误截图&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;图片中显示 [4|200]（其中 200 是状态码）（ 4 表示重试了 4 次但仍然出错，当收到空数据时我会进行重试）。&lt;/li&gt;&#xA;&lt;li&gt;图片中的 xxx/user/token?t=${index} 表示 0-4 次请求（我怀疑这是缓存问题）。&lt;/li&gt;&#xA;&lt;li&gt;图片中的 &#34;h&#34;:&#34;xxx&#34; 是响应请求头数据：h: result.headers 。&lt;/li&gt;&#xA;&lt;li&gt;图片中的 &#34;s&#34;: request:ok 是响应的 msg：result.statusText 。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;test&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img1.imgtp.com/2023/08/25/UvC0cT8N.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;经常会收到这个，导致无法正常使用，因为拿不到 token&#xA;&lt;img alt=&#34;test&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img1.imgtp.com/2023/08/25/v12dNRCF.png&#34;/&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;问题判断标准&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;状态码是 200&lt;/li&gt;&#xA;&lt;li&gt;返回的 result.data 是空的（不可能空）&lt;/li&gt;&#xA;&lt;li&gt;响应请求头不包含 nginx 信息，只留下不知道哪里设置的信息 “x-request-xxx”&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;尝试过的办法&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;尝试打开 Nginx 日志进行查询，查看是否包含某个请求 t=x (t=x 前面讲了重试时会出现 0-4 ，确认请求没有经过 Nginx 处理)&lt;/li&gt;&#xA;&lt;li&gt;尝试在服务器文件中查找是否包含某个内容&#34;x-requestproxy&#34;（已排除 sys 和 proc 文件夹，但没有找到）&lt;/li&gt;&#xA;&lt;li&gt;腾讯域名解析已升级至企业版，仍然出现问题（这是我作为新手领取的免费版本）。&lt;/li&gt;&#xA;&lt;li&gt;问了 GPT 没解决，被气到了&lt;/li&gt;&#xA;&lt;li&gt;向腾讯云咨询了域名解析问题，也询问了服务器是否存在问题，但没有发现任何异常。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;为了查明问题的原因，我使用了以下命令来查找文件中是否存在包含&#34;requestproxy&#34;的内容：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;查找哪个文件有这个字段名（无收获）&#xA;find . \( -path ./sys -o -path ./proc \) -prune -o -type f -exec grep -q &#34;requestproxy-ip&#34; {} \; -print 2&amp;gt;/dev/null&#xA;&#xA;查找高频率 ip （无收获）&#xA;find . \( -path ./sys -o -path ./proc \) -prune -o -type f -exec grep -q &#34;9.141.233.128&#34; {} \; -print 2&amp;gt;/dev/null&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;错误与正常的规律&lt;/h2&gt;&#xA;&lt;h3&gt;正常情况&lt;/h3&gt;&#xA;&lt;p&gt;无论请求是否报错，正常响应中的请求头都应该包含以下内容：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;server: nginx&#xA;x-powered-by: Express&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;正常情况下，返回的数据（ data ）永远不会为空，因为 nestjs 都会格式化返回的数据。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;request.data.xxx // 不可能为空&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;异常情况（非正常返回）：&lt;/h3&gt;&#xA;&lt;p&gt;返回 http 状态码为 200 和 request:&#39;ok&#39; 并且请求响应头中会包含以下信息（注意：server 和 x-powered-by 等信息不会包含在响应头中）：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;x-requestproxy-internal-501:1&#xA;x-requestproxy-ip:[ip,ip] // 总会出 2 个美国 IP&#xA;x-requestproxy-ssl-peer-failed-verifiaction:-1&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h5&gt;另外，x-requestproxy-ip 中的某些 IP 出现频率较高，如：&lt;/h5&gt;&#xA;&lt;pre&gt;&lt;code&gt;9.141.233.128 // 这个出现频率好像挺高&#xA;9.141.177.175&#xA;9.141.140.10&#xA;9.141.140.228&#xA;9.141.142.146&#xA;9.141.176.16&#xA;9.141.176.2&#xA;11.151.86.163&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;异常情况下，data 为空，即 request.data=&#39;&#39;，没有任何内容返回。&lt;/p&gt;&#xA;</description>
+      <author>nangdiea</author>
+      <pubDate>25 Aug 2023 07:36:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>GPT 自动生成百科词条 - OpenAI</title>
+      <link>https://www.v2ex.com/t/968309</link>
+      <description>&lt;p&gt;请问一下，输入一篇文章（例如一个事件），存在 prompt 能让 ChatGPT 生成维基百科风格的词条吗（例如一个 JSON ，包含“发生时间”，“发生地点”等字段）&lt;/p&gt;&#xA;</description>
+      <author>OPLUS</author>
+      <pubDate>25 Aug 2023 07:31:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>AI + Markdown = Amarkdown.com - 分享创造</title>
+      <link>https://www.v2ex.com/t/968308</link>
+      <description>大家好, 如果你和我一样, 喜欢纯粹的码字&lt;br /&gt;&lt;br /&gt;现在大家都在用 Notion 了, 如果你和我一样喜欢复古的 Markdown 编辑器, 可以试试我新发布的产品.&lt;br /&gt;&lt;br /&gt;首先它是免费的, 我设计的策略是大部分情况你可以一直免费使用, 除非你要频繁使用 AI 部分的功能, 或创建大量的表, 收集大量数据.&lt;br /&gt;&lt;br /&gt;它的特点是解决了以下小问题:&lt;br /&gt;&lt;br /&gt;- 利用 AI 反复细化你的文档&lt;br /&gt;- 内置 Low code 设计库, 你可以在 markdown 中插入你的表单和数据&lt;br /&gt;- 帮你管理资源, 如图片、音频、视频、附件&lt;br /&gt;- 内置了一些绘图工具&lt;br /&gt;- 分享你编写的网页&lt;br /&gt;&lt;br /&gt;### 官网&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://amarkdown.com&#34; rel=&#34;nofollow noopener&#34;&gt;https://amarkdown.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;### 预览图&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/a/K18mUAB&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/a/K18mUAB&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;### 视频&lt;br /&gt;&lt;br /&gt;&lt;div class=&#34;embedded_video_wrapper&#34;&gt;&lt;iframe src=&#34;https://www.youtube.com/embed/pelCnZpnGNM&#34; class=&#34;embedded_video&#34; allowfullscreen=&#34;&#34; type=&#34;text/html&#34; id=&#34;ytplayer&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;&lt;/div&gt;</description>
+      <author>YmPillar</author>
+      <pubDate>25 Aug 2023 07:29:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>macOS 内建的右键选单翻译功能有没有对应的 API？ - iDev</title>
+      <link>https://www.v2ex.com/t/968307</link>
+      <description>&lt;p&gt;这翻译品质能跟 DeepL 有一拼，但是只能一段一段地翻译。&#xA;我想写个自己私用的 App 、利用这个 API 实现整段文章翻译。&#xA;但问题是这个 API 有没有还很难讲，所以就先上来问一下。&#xA;（我用 macOS 13 没发现与这个功能有关的系统内建独立应用，只能从右键选单叫出来、或者 Safari 整页翻译。）&lt;/p&gt;&#xA;</description>
+      <author>ShikiSuen</author>
+      <pubDate>25 Aug 2023 07:29:42 +0000</pubDate>
+    </item>
+    <item>
       <title>电视选择 65 寸 - 问与答</title>
       <link>https://www.v2ex.com/t/968306</link>
       <description>现在有几款选择 海信 E75k （ ACE2 ） ，雷鸟 鹤 6 ，海信现在有活动差不多 3000 送个手柄返现 100 ，雷鸟最低 2200 左右，现在没活动，差不多差 600 ，纸面参数海信好很多，但是我看网上海信这款信息比较少，好像还是京东合作款，不知道有没有什么问题，有没有了解的老哥说说</description>
@@ -11,7 +39,7 @@
       <pubDate>25 Aug 2023 07:28:31 +0000</pubDate>
     </item>
     <item>
-      <title>如何学习 flutter - 程序员</title>
+      <title>如何学习 flutter - Flutter</title>
       <link>https://www.v2ex.com/t/968305</link>
       <description>&lt;p&gt;前端一枚，不会 app 开发，想学习 flutter ，正确的学习路线应该是什么？&lt;/p&gt;&#xA;</description>
       <author>Taoman</author>
@@ -88,7 +116,7 @@
       <pubDate>25 Aug 2023 07:00:41 +0000</pubDate>
     </item>
     <item>
-      <title>十一去香港玩是不是一个很弱智的决定？ - 问与答</title>
+      <title>十一去香港玩是不是一个很弱智的决定？ - 旅行</title>
       <link>https://www.v2ex.com/t/968291</link>
       <description>&lt;p&gt;发现酒店、门票都贵了好多啊。&lt;/p&gt;&#xA;&lt;p&gt;现在七八百一晚的酒店，我看国庆期间都要两三千，1000 元左右的基本都是超小超小的老房间，稍微市中心一点的房间都要 2000 起步了，实在是不忍心去了香港这么贵住这么破的地方？&lt;/p&gt;&#xA;&lt;p&gt;要想舒服玩四五天一个月工资起步。&lt;/p&gt;&#xA;&lt;p&gt;而且还人多，是不是不应该计划国庆去香港。&lt;/p&gt;&#xA;&lt;p&gt;不过打工人平时也没有时间。&lt;/p&gt;&#xA;&lt;p&gt;是不是去公司加班才是正解&lt;/p&gt;&#xA;</description>
       <author>ggp1ot2</author>
