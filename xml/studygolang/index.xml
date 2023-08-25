@@ -8,11 +8,6 @@
       <link>https://studygolang.com/interview/question</link>
     </item>
     <item>
-      <title>protobuf+websocket可以做的更好么？</title>
-      <link>https://studygolang.com/topics/16630#reply1</link>
-      <description>&lt;p&gt;最近因为项目原因，接触了很多unity开发，发现他们游戏行业，普遍采用protobuf+TCP来传输数据。我有提出过一个想法来探讨，是否可以直接用websocket来代替TCP socket呢？因为他的传输格式，底层已经帮你约定好了，不用你再来约定私有协议来完成数据传输，而且他可以完美的运行在浏览器里面，可以真正做到多端兼容。unity开发也被我这个想法给镇住了，可能他们以前没有想到过这个问题，后来我了解到，可能跟他们的业务模式有关，因为他们的产品，主要是运行在APP里面，不会运行在浏览器中，所以不用考虑多端兼容的问题，自然是哪种方法更简单就用哪种了。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>字节对齐</title>
       <link>https://studygolang.com/topics/16631#reply0</link>
       <description>&lt;p&gt;以前撸C++，搞网络通讯的时候，你会定义struct，然后通过TCP或者UDP套接字传输数据，但这个时候，你会碰到字节对齐的问题，什么是字节对齐？这里就不详说了，感兴趣的可以去百度查查。但你知道么，Go也算是完美的继承了这个对齐，如果Go也这么搞，他也会碰到字节对齐的问题。所以，想避坑的话，最简单的方法，就是直接传JSON吧，当然，也有用protobuf来定义数据格式，最终Marshal成binary进行传输，也算是避开了这个坑。&lt;/p&gt;&#xA;</description>
@@ -61,6 +56,11 @@
       <link>https://studygolang.com/articles/36293#reply0</link>
     </item>
     <item>
+      <title>protobuf+websocket可以做的更好么？</title>
+      <link>https://studygolang.com/topics/16630#reply1</link>
+      <description>&lt;p&gt;最近因为项目原因，接触了很多unity开发，发现他们游戏行业，普遍采用protobuf+TCP来传输数据。我有提出过一个想法来探讨，是否可以直接用websocket来代替TCP socket呢？因为他的传输格式，底层已经帮你约定好了，不用你再来约定私有协议来完成数据传输，而且他可以完美的运行在浏览器里面，可以真正做到多端兼容。unity开发也被我这个想法给镇住了，可能他们以前没有想到过这个问题，后来我了解到，可能跟他们的业务模式有关，因为他们的产品，主要是运行在APP里面，不会运行在浏览器中，所以不用考虑多端兼容的问题，自然是哪种方法更简单就用哪种了。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>Go可以做到同等并发能力么？</title>
       <link>https://studygolang.com/topics/16629#reply9</link>
       <description>&lt;p&gt;最近联系上了在第一家公司共事过的同事，他现在自己开公司了，但一直在坚持撸C++，因为他们是证券行业，对程序的并发能力要求比较高的要求。而在这方面，也只有C++，能够满足他们的要求，所以他们从来没有考虑过更换其他语言。我和他探讨过是否可以考虑用Go，来尝试做他们的业务，因为Go语言相比C++来说，简单了很多，从业人员也逐渐增多，并发能力也不弱。这里面还有一个现实的问题，就是C++从业人员很难招，他也很害怕公司的C++开发人员流失，因为一旦流失，就很难再招到人来补位。但他还是坚持撸C++，因为他认为，一个公司用哪个技术栈，取决于最厉害的人，用哪门语言，很明显，他们公司最厉害的人，就是他自己，何必来折腾自己呢？最终还是没有说动他，不知道大家怎么看。&lt;/p&gt;&#xA;</description>
@@ -97,88 +97,6 @@
       <title>Go1.21.0 发布了</title>
       <link>https://studygolang.com/topics/16591#reply2</link>
       <description>&lt;p&gt;Go1.21.0是2023年8月8日发布的Go语言的最新版本，它带来了一些语言和工具的变化。&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;min和max内置函数&lt;/strong&gt;：Go1.21.0增加了两个新的内置函数min和max，用来对任意可比较的有序类型进行最小值或最大值的操作。min和max函数可以接受一个或多个参数，并返回其中的最小值或最大值。如果参数是浮点数并且包含NaN，min和max函数会返回NaN。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;clear预定义函数&lt;/strong&gt;：Go1.21.0增加了一个clear预定义函数用来做切片和map的clear操作。对于切片，clear函数会将所有元素设置为零值，但保持切片的长度和容量不变。对于map，clear函数会删除所有键值对，得到一个空map。clear函数的使用示例在[这里]展示。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;改变panic(nil)语义&lt;/strong&gt;：Go1.21.0改变了panic(nil)的语义，使得recover函数在捕获到panic(nil)时不再返回nil，而是返回一个特定的错误类型PanicNilError。这样可以避免开发者误以为没有发生panic，而继续执行正常逻辑。&lt;/li&gt;&#xA;&lt;li&gt;**新增标准库：slices、maps、slog 等 **：这几个库正式进入标准库了。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;还有更多其他特性或变化，可以通过官方文档了解：&lt;a href=&#34;https://go.dev/doc/go1.21&#34;&gt;https://go.dev/doc/go1.21&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可以官方方式试用，也可以在 Go语言中文网下载最新版：&lt;a href=&#34;https://studygolang.com/dl&#34;&gt;https://studygolang.com/dl&lt;/a&gt;。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>Go语言爱好者周刊：第 197 期</title>
-      <link>https://studygolang.com/topics/16582#reply1</link>
-      <description>&lt;p&gt;这里记录每周值得分享的 Go 语言相关内容，周日发布。本周刊开源（GitHub：&lt;a href=&#34;https://github.com/polaris1119/golangweekly&#34;&gt;polaris1119/golangweekly&lt;/a&gt;），欢迎投稿，推荐或自荐文章/软件/资源等，请&lt;a href=&#34;https://github.com/polaris1119/golangweekly/issues&#34;&gt;提交 issue&lt;/a&gt; 。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;鉴于一些人可能没法坚持把英文文章看完，因此，周刊中会尽可能推荐优质的中文文章。优秀的英文文章，我们的 GCTT 组织会进行翻译。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/polaris1119/golangweekly/master/docs/imgs/issue197/cover.jpeg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;题图：go env&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;资讯&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;1、&lt;a href=&#34;https://google.qualtrics.com/jfe/form/SV_4Vi4bNaMQhQdqSi?s=b&#34;&gt;Go 开发者调查开始&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;官方的调查。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2、&lt;a href=&#34;https://github.com/TypicalAM/goread&#34;&gt;goread v1.5 发布&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;一个漂亮的可以在终端中阅读你的 RSS 提要！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3、&lt;a href=&#34;https://github.com/golang/go/issues/61637&#34;&gt;提案：database/sql 增加新的 scan&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;这个 Scan 即将整行扫描为一个值的方法。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4、&lt;a href=&#34;https://github.com/beevik/ntp&#34;&gt;ntp v1.3 发布&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;用于查询你选择的网络时间协议服务器的当前时间。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;5、&lt;a href=&#34;https://github.com/elastic/go-elasticsearch&#34;&gt;ElasticSearch Go 8.9 发布&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;ElasticSearch Go 8.7 官方客户端发布。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;6、&lt;a href=&#34;https://github.com/peterbourgon/ff&#34;&gt;ff v3.4 发布&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;该库对 flag.FlagSet 进行了扩展，支持按照命令行、配置文件、环境变量的顺序进行读取。这次的更新，支持从 yaml 配置格式读取配置。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;文章&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;1、&lt;a href=&#34;https://mp.weixin.qq.com/s/cidtQEAfuFWuYveKFbFvKQ&#34;&gt;GoLand 2023.2 发布：有 AI 助手&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;改进了与 Go 模块的集成，添加了用于将函数参数迁移到方法接收器（反之亦然）的重构，提供了 Kafka 监控插件，并支持 error.Is 和 error.As，还有“新的 AI 助手插件”，因为毕竟是 2023 年了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2、&lt;a href=&#34;https://www.ardanlabs.com/blog/2023/07/getting-friendly-with-cpu-caches.html&#34;&gt;得到友好的 CPU 缓存&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;帮助 Go 开发者理解 CPU 缓存的原理和重要性，以及如何利用它们来提升程序的性能和质量。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3、&lt;a href=&#34;https://mp.weixin.qq.com/s/Wj4Vr0W-cl79Ss5VVSDr_w&#34;&gt;抽丝剥茧，记一次 Go 程序性能优化之旅&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;可以看看。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4、&lt;a href=&#34;https://mp.weixin.qq.com/s/Hq_jF5LdaM5bOwDlLCw7uA&#34;&gt;Go 语言 iota 的神奇力量&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;本文将带着大家深入探讨 iota 的神奇力量，包括 iota 的介绍和应用场景以及使用技巧和注意事项。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;5、&lt;a href=&#34;https://mp.weixin.qq.com/s/FkqCidcHlH2cadtsSft-ig&#34;&gt;Go 项目分层下的最佳 error 处理方式&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;本文将探讨 Go 项目分层下的最佳 error 处理方式。准备好了吗？准备一杯你最喜欢的饮料或茶，随着本文一探究竟吧。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;6、&lt;a href=&#34;https://mp.weixin.qq.com/s/QEBdspMhEBcCwgHouS9cKQ&#34;&gt;Go 每日一库之比标准库更快 hash 算法&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;该库是 go 语言实现的 xxHash 算法，比标准库性能更高，最终生成一个 64 位的整型 hash 值。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;7、&lt;a href=&#34;https://mp.weixin.qq.com/s/bYob9smOpmTZyrxBeIAEVg&#34;&gt;Go 语言的安全守护者&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;为了帮助开发者发现和修复这些漏洞，Go 团队在 2021 年 11 月发布了一个新的工具：Govulncheck，Go 语言的安全守护者。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;开源项目&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;1、&lt;a href=&#34;https://github.com/nikolaydubina/llama2.go&#34;&gt;llama2.go&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;LLaMA-2 Go 接口。还有另外一个 &lt;a href=&#34;https://github.com/tmc/go-llama2&#34;&gt;https://github.com/tmc/go-llama2&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2、&lt;a href=&#34;https://godocs.io/git.sr.ht/~jamesponddotco/imgdiet-go&#34;&gt;imgdiet&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;imgdiet 包利用 C 的 [libvips] 图像处理库及其 Go 绑定 [govips] 提供了简单快速的图像处理和压缩解决方案。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3、&lt;a href=&#34;https://github.com/roadrunner-server/roadrunner&#34;&gt;roadrunner&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;一个开源（MIT 许可）高性能 PHP 应用程序服务器、负载均衡器和进程管理器。它支持作为服务运行，并且能够在每个项目的基础上扩展其功能。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4、&lt;a href=&#34;https://github.com/sqlc-dev/sqlc&#34;&gt;sqlc&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;从 SQL 生成类型安全代码。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;5、&lt;a href=&#34;https://github.com/risor-io/risor&#34;&gt;risor&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;面向 Go 开发人员和 DevOps 的快速灵活的脚本语言。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;6、&lt;a href=&#34;https://github.com/deep-project/moss&#34;&gt;moss&lt;/a&gt;（作者自荐）&lt;/p&gt;&#xA;&#xA;&lt;p&gt;一款简单轻量的内容管理系统。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;7、&lt;a href=&#34;https://github.com/lxzan/gws&#34;&gt;gws&lt;/a&gt;（作者自荐）&lt;/p&gt;&#xA;&#xA;&lt;p&gt;高吞吐低消耗用户友好的 websocket server &amp;amp; client。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;资源&amp;amp;&amp;amp;工具&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;1、&lt;a href=&#34;https://pkg.go.dev/golang.org/x/tools/cmd/gonew&#34;&gt;gonew&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;一个实验性的工具，目的是为了探索如何使用项目模板来简化 Go 开发者的工作流程。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;2、&lt;a href=&#34;https://github.com/nickfiggins/tstat&#34;&gt;tstat&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;提供了一种友好的方式来查询 Go 测试输出和覆盖配置文件。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;3、&lt;a href=&#34;https://github.com/itchyny/bed&#34;&gt;bed&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Go 实现的二进制编辑器。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;4、&lt;a href=&#34;https://github.com/cuishuang/explain-source-code-by-chatgpt&#34;&gt;explain-source-code-by-chatgpt（作者自荐）&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;让 chatgpt 讲解 go 源码中每一个文件，变量，struct 和 func 的作用。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;5、&lt;a href=&#34;https://github.com/StudyPlace-io/Golang-Concurrency-Pattern-Demo&#34;&gt;Golang-Concurrency-Pattern-Demo&lt;/a&gt;（作者自荐）&lt;/p&gt;&#xA;&#xA;&lt;p&gt;提供各种常见的并发模式 demo。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;6、&lt;a href=&#34;https://github.com/chenmingyong0423/go-optioner&#34;&gt;go-optioner&lt;/a&gt;（作者自荐）&lt;/p&gt;&#xA;&#xA;&lt;p&gt;一个根据结构体定义自动生成函数选项模式（functional options pattern）代码的工具。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;订阅&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;这个周刊每周日发布，同步更新在&lt;a href=&#34;https://studygolang.com/go/weekly&#34;&gt;Go语言中文网&lt;/a&gt;和&lt;a href=&#34;https://weixin.sogou.com/weixin?query=Go%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%96%87%E7%BD%91&#34;&gt;微信公众号&lt;/a&gt;。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;微信搜索&amp;rdquo;Go语言中文网&amp;rdquo;或者扫描二维码，即可订阅。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/polaris1119/golangweekly/master/docs/imgs/wechat.png&#34; alt=&#34;wechat&#34; /&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang 无顾奔溃 没有报错信息</title>
-      <link>https://studygolang.com/topics/16624#reply12</link>
-      <description>&lt;p&gt;golang 运行进程奔溃 又没报错信息  有什么软件可以检测嘛 用nohup启的  nohup.log文件里面没有报错信息&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>更新go版本报错，invalid go version &#39;1.17.2&#39;: must match format 1.23</title>
-      <link>https://studygolang.com/topics/15378#reply1</link>
-      <description>&lt;p&gt;更新go版本报错，invalid go version &amp;lsquo;1.17.2&amp;rsquo;: must match format 1.23，哪位大神遇到过，求解&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>[杭州][25K-35K]招聘golang架构师</title>
-      <link>https://studygolang.com/articles/36268#reply5</link>
-      <description>&lt;p&gt;工作职责：&#xA;1. 负责公司业务，app的整体架构设计，提供完整的技术方案&#xA;2. 软件后端研发团队的管理&#xA;3. 基于系统运行现状，优化现有系统的性能，解决软件系统平台关键技术问题攻关/核心功能模块设计&#xA;4. 在项目需求不断细化的过程中校正整体的架构设计，并输出有效的技术成果&#xA;5. 负责代码review，确保线上质量&lt;/p&gt;&#xA;&#xA;&lt;p&gt;任职要求：&#xA;1. 本科以上学历，计算机相关专业，2年以上架构设计或交付的工作经验&#xA;2. 熟悉Linux、微服务设计、热爱开源&#xA;3. 扎实的计算机科学基础。熟练使用golang，熟悉主流常用的存储中间件如 mysql, MongoDB, redis。消息中间件kafka, mqtt等&#xA;4. 有较强的逻辑分析和组织协调能力，具有较强的责任感，沟通和处理能力&#xA;5. 工作细心、有计划性，执行能力强，且具备高度的责任心、诚信的工作作风、优秀的沟通能力及团队精神&#xA;6.熟悉前后端开发。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;关于我们：&#xA;我们是由一群拥有技术梦想的小伙伴组成的年轻公司。公司崇尚自由，平等，开放，价值。&#xA;如果你怀才不遇，请到这里来。&#xA;如果你想成就一番伟大的事业，请到这里来。&#xA;如果你不愿与平庸的人为伍，请到这里来。&#xA;如果你想拥有一份快乐的工作，不要犹豫了，这里是你唯一的选择。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;联系方式&#xA;微信：EwCha97&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>奇怪的报错信息，unknown token type returned: token(45)</title>
-      <link>https://studygolang.com/topics/16592#reply1</link>
-      <description>&lt;p&gt;用的go1.16.15 使用的sqlserver2008r2数据库，github.com/denisenkom/go-mssqldb&#xA;下面代码中报错，&#xA;报错的代码行为&#xA;  row = tx.QueryRow(&amp;ldquo;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) &amp;ldquo;)&#xA;  err := row.Scan(&amp;amp;guidstr, &amp;amp;currdate)&#xA; 错误信息为:unknown token type returned: token(45)&#xA; 有大佬知道这是什么原因不？有解决的方法吗？&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;tx, err = xjcdb.DB.Begin()&#xA;if err != nil {&#xA;&#x9;log.Println(err.Error())&#xA;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;}&#xA;defer tx.Rollback()&#xA;&#xA;   ......&#xA;   ......&#xA;&#xA;rows, err = tx.Query(...)&#xA;if err != nil {&#xA;&#x9;log.Println(err.Error())&#xA;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;}&#xA;defer rows.Close()&#xA;&#xA;for rows.Next() {&#xA;&#x9;loop_beltcode = &amp;quot;&amp;quot;&#xA;&#x9;loop_pkfeeobj = &amp;quot;&amp;quot;&#xA;&#x9;err = rows.Scan(&amp;amp;loop_beltcode, &amp;amp;loop_pkfeeobj)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Println(err.Error())&#xA;&#x9;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;&#x9;}&#xA;&#x9;guidstr = &amp;quot;&amp;quot;&#xA;&#x9;currdate = &amp;quot;&amp;quot;&#xA;&#x9;row = tx.QueryRow(&amp;quot;select cast(newid() as varchar(40)), CONVERT(CHAR(10),GETDATE(), 120) &amp;quot;)&#xA;&#x9;err := row.Scan(&amp;amp;guidstr, &amp;amp;currdate)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;return 0, &amp;quot;&amp;quot;, err&#xA;&#x9;}&#xA;            ......&#xA;            ......&#xA;  }&#xA;  .....&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>Go岗位更新：新增字节跳动财经-质量、Data抖音、Data推荐、Data风控部门最新招聘信息。</title>
-      <link>https://studygolang.com/topics/16625#reply1</link>
-      <description>&lt;p&gt;Go岗位更新：新增字节跳动财经-质量、Data抖音、Data推荐、Data风控部门最新招聘信息。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;岗位地点：北京、上海、杭州、深圳均有需求。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;校招社招均可内推，和优秀的人做有挑战的事。欢迎投递简历。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;💌 可内推Go岗位查询：&lt;a href=&#34;https://m.golangroadmap.com/#/post&#34;&gt;https://m.golangroadmap.com/#/post&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230821/9f136419f2db1fbbde799537763ecf67.jpg&#34; alt=&#34;zj.jpg&#34; /&gt;&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>[Go内推][理想汽车][北京][30-50K·14薪]AI推理服务开发工程师</title>
-      <link>https://studygolang.com/topics/16618#reply2</link>
-      <description>&lt;p&gt;要求3年go/python经验，满足条件的，可以扫描了解详情找我内推。&#xA;&lt;img src=&#34;https://static.golangjob.cn/230816/6bcbcf9bfbfaf0c121872e7761d9a623.jpg&#34; alt=&#34;未命名.jpg&#34; /&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;这里有一个靠谱的Go岗位分享给你：&lt;a href=&#34;https://m.golangroadmap.com/#/sharepost?id=44&#34;&gt;https://m.golangroadmap.com/#/sharepost?id=44&lt;/a&gt;&#xA;GOLANG ROADMAP一个专注Go语言学习、求职的社区。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>基于Go语言的滴滴DevOps重塑之路</title>
-      <link>https://studygolang.com/resources/15584#reply0</link>
-    </item>
-    <item>
-      <title>Go可以做到同等并发能力么？</title>
-      <link>https://studygolang.com/topics/16629#reply8</link>
-      <description>&lt;p&gt;最近联系上了在第一家公司共事过的同事，他现在自己开公司了，但一直在坚持撸C++，因为他们是证券行业，对程序的并发能力要求比较高的要求。而在这方面，也只有C++，能够满足他们的要求，所以他们从来没有考虑过更换其他语言。我和他探讨过是否可以考虑用Go，来尝试做他们的业务，因为Go语言相比C++来说，简单了很多，从业人员也逐渐增多，并发能力也不弱。这里面还有一个现实的问题，就是C++从业人员很难招，他也很害怕公司的C++开发人员流失，因为一旦流失，就很难再招到人来补位。但他还是坚持撸C++，因为他认为，一个公司用哪个技术栈，取决于最厉害的人，用哪门语言，很明显，他们公司最厉害的人，就是他自己，何必来折腾自己呢？最终还是没有说动他，不知道大家怎么看。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>Go可以做到同等并发能力么？</title>
-      <link>https://studygolang.com/topics/16629#reply7</link>
-      <description>&lt;p&gt;最近联系上了在第一家公司共事过的同事，他现在自己开公司了，但一直在坚持撸C++，因为他们是证券行业，对程序的并发能力要求比较高的要求。而在这方面，也只有C++，能够满足他们的要求，所以他们从来没有考虑过更换其他语言。我和他探讨过是否可以考虑用Go，来尝试做他们的业务，因为Go语言相比C++来说，简单了很多，从业人员也逐渐增多，并发能力也不弱。这里面还有一个现实的问题，就是C++从业人员很难招，他也很害怕公司的C++开发人员流失，因为一旦流失，就很难再招到人来补位。但他还是坚持撸C++，因为他认为，一个公司用哪个技术栈，取决于最厉害的人，用哪门语言，很明显，他们公司最厉害的人，就是他自己，何必来折腾自己呢？最终还是没有说动他，不知道大家怎么看。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>Go可以做到同等并发能力么？</title>
-      <link>https://studygolang.com/topics/16629#reply6</link>
-      <description>&lt;p&gt;最近联系上了在第一家公司共事过的同事，他现在自己开公司了，但一直在坚持撸C++，因为他们是证券行业，对程序的并发能力要求比较高的要求。而在这方面，也只有C++，能够满足他们的要求，所以他们从来没有考虑过更换其他语言。我和他探讨过是否可以考虑用Go，来尝试做他们的业务，因为Go语言相比C++来说，简单了很多，从业人员也逐渐增多，并发能力也不弱。这里面还有一个现实的问题，就是C++从业人员很难招，他也很害怕公司的C++开发人员流失，因为一旦流失，就很难再招到人来补位。但他还是坚持撸C++，因为他认为，一个公司用哪个技术栈，取决于最厉害的人，用哪门语言，很明显，他们公司最厉害的人，就是他自己，何必来折腾自己呢？最终还是没有说动他，不知道大家怎么看。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>protobuf+websocket可以做的更好么？</title>
-      <link>https://studygolang.com/topics/16630#reply0</link>
-      <description>&lt;p&gt;最近因为项目原因，接触了很多unity开发，发现他们游戏行业，普遍采用protobuf+TCP来传输数据。我有提出过一个想法来探讨，是否可以直接用websocket来代替TCP socket呢？因为他的传输格式，底层已经帮你约定好了，不用你再来约定私有协议来完成数据传输，而且他可以完美的运行在浏览器里面，可以真正做到多端兼容。unity开发也被我这个想法给镇住了，可能他们以前没有想到过这个问题，后来我了解到，可能跟他们的业务模式有关，因为他们的产品，主要是运行在APP里面，不会运行在浏览器中，所以不用考虑多端兼容的问题，自然是哪种方法更简单就用哪种了。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>go奇怪的切片</title>
-      <link>https://studygolang.com/articles/36281#reply2</link>
-    </item>
-    <item>
-      <title>Go可以做到同等并发能力么？</title>
-      <link>https://studygolang.com/topics/16629#reply5</link>
-      <description>&lt;p&gt;最近联系上了在第一家公司共事过的同事，他现在自己开公司了，但一直在坚持撸C++，因为他们是证券行业，对程序的并发能力要求比较高的要求。而在这方面，也只有C++，能够满足他们的要求，所以他们从来没有考虑过更换其他语言。我和他探讨过是否可以考虑用Go，来尝试做他们的业务，因为Go语言相比C++来说，简单了很多，从业人员也逐渐增多，并发能力也不弱。这里面还有一个现实的问题，就是C++从业人员很难招，他也很害怕公司的C++开发人员流失，因为一旦流失，就很难再招到人来补位。但他还是坚持撸C++，因为他认为，一个公司用哪个技术栈，取决于最厉害的人，用哪门语言，很明显，他们公司最厉害的人，就是他自己，何必来折腾自己呢？最终还是没有说动他，不知道大家怎么看。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>字符串、二进制、十六进制解析工具 bd</title>
-      <link>https://studygolang.com/p/1156#reply0</link>
-    </item>
-    <item>
-      <title>Go可以做到同等并发能力么？</title>
-      <link>https://studygolang.com/topics/16629#reply4</link>
-      <description>&lt;p&gt;最近联系上了在第一家公司共事过的同事，他现在自己开公司了，但一直在坚持撸C++，因为他们是证券行业，对程序的并发能力要求比较高的要求。而在这方面，也只有C++，能够满足他们的要求，所以他们从来没有考虑过更换其他语言。我和他探讨过是否可以考虑用Go，来尝试做他们的业务，因为Go语言相比C++来说，简单了很多，从业人员也逐渐增多，并发能力也不弱。这里面还有一个现实的问题，就是C++从业人员很难招，他也很害怕公司的C++开发人员流失，因为一旦流失，就很难再招到人来补位。但他还是坚持撸C++，因为他认为，一个公司用哪个技术栈，取决于最厉害的人，用哪门语言，很明显，他们公司最厉害的人，就是他自己，何必来折腾自己呢？最终还是没有说动他，不知道大家怎么看。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>Go可以做到同等并发能力么？</title>
-      <link>https://studygolang.com/topics/16629#reply3</link>
-      <description>&lt;p&gt;最近联系上了在第一家公司共事过的同事，他现在自己开公司了，但一直在坚持撸C++，因为他们是证券行业，对程序的并发能力要求比较高的要求。而在这方面，也只有C++，能够满足他们的要求，所以他们从来没有考虑过更换其他语言。我和他探讨过是否可以考虑用Go，来尝试做他们的业务，因为Go语言相比C++来说，简单了很多，从业人员也逐渐增多，并发能力也不弱。这里面还有一个现实的问题，就是C++从业人员很难招，他也很害怕公司的C++开发人员流失，因为一旦流失，就很难再招到人来补位。但他还是坚持撸C++，因为他认为，一个公司用哪个技术栈，取决于最厉害的人，用哪门语言，很明显，他们公司最厉害的人，就是他自己，何必来折腾自己呢？最终还是没有说动他，不知道大家怎么看。&lt;/p&gt;&#xA;</description>
     </item>
   </channel>
 </rss>
