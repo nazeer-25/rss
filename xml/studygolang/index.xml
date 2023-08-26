@@ -53,6 +53,11 @@
       <link>https://studygolang.com/articles/36299#reply0</link>
     </item>
     <item>
+      <title>golang json 编解码枚举字段映射包 - jsonmap</title>
+      <link>https://studygolang.com/articles/36294#reply0</link>
+      <description>&lt;p&gt;从数据源查出来到结构体，还需要映射返回输出，不想那么麻烦。试试这个包：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/chenhg5/jsonmap&#34;&gt;https://github.com/chenhg5/jsonmap&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;只需要在结构体的tag声明即可：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;    &amp;quot;encoding/json&amp;quot;&#xA;    &amp;quot;fmt&amp;quot;&#xA;&#xA;    &amp;quot;github.com/chenhg5/jsonmap&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#xA;    var text = `{&#xA;        &amp;quot;type&amp;quot;: &amp;quot;cow&amp;quot;&#xA;    }`&#xA;&#xA;    type Animal struct {&#xA;        Type uint8 `json:&amp;quot;type&amp;quot; jsonmap:&amp;quot;0:dog;1:cat;2:cow;3:others&amp;quot;`&#xA;    }&#xA;&#xA;    var animal = new(Animal)&#xA;    _ = json.Unmarshal([]byte(text), jsonmap.Wrap(animal))&#xA;    fmt.Printf(&amp;quot;%+v\n&amp;quot;, animal)&#xA;&#xA;    // &amp;amp;Animal{Type: 2}&#xA;&#xA;    res, _ := json.MarshalIndent(jsonmap.Wrap(animal), &amp;quot;&amp;quot;, &amp;quot;    &amp;quot;)&#xA;    fmt.Println(string(res))&#xA;&#xA;    // {&amp;quot;type&amp;quot;: &amp;quot;cow&amp;quot;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;dddd.&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>伯乐识良马 明主觅贤才</title>
       <link>https://studygolang.com/topics/16636#reply0</link>
       <description>&lt;p&gt;伯乐识良马 明主觅贤才&#xA;1.全 jian 皆可&#xA;2.工资五千家&#xA;3.喜爱网路相关工作&#xA;4.工作时间自由 但是要完成时数&#xA;5.宽带 电脑或高阶手机 自备&#xA;6.请加李经理 :1972815785&lt;/p&gt;&#xA;</description>
@@ -94,11 +99,6 @@
       <title>xmind库更新v1.0.7版本，添加一个命令行小工具</title>
       <link>https://studygolang.com/topics/16634#reply0</link>
       <description>&lt;p&gt;项目地址：&lt;a href=&#34;https://github.com/jan-bar/xmind&#34;&gt;https://github.com/jan-bar/xmind&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;原始需求是有道云笔记太难用了，我想把有道云笔记的思维导图转为xmind，结果这是会员功能。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;因此我用xmind官方Python库撸了个项目：&lt;a href=&#34;https://github.com/jan-bar/mindmap_to_xmind&#34;&gt;https://github.com/jan-bar/mindmap_to_xmind&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;后续觉得思维导图需求还是挺常见的，因此才撸了xmind库。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;同时有两种其他思维导图转换xmind的示例：&lt;a href=&#34;https://github.com/jan-bar/xmind/tree/master/convert&#34;&gt;https://github.com/jan-bar/xmind/tree/master/convert&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;相信这个项目可用满足大家在各种思维导图之间转换的需求。&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>golang json 编解码枚举字段映射包 - jsonmap</title>
-      <link>https://studygolang.com/articles/36294#reply0</link>
-      <description>&lt;p&gt;从数据源查出来到结构体，还需要映射返回输出，不想那么麻烦。试试这个包：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/chenhg5/jsonmap&#34;&gt;https://github.com/chenhg5/jsonmap&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;只需要在结构体的tag声明即可：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;package main&#xA;&#xA;import (&#xA;    &amp;quot;encoding/json&amp;quot;&#xA;    &amp;quot;fmt&amp;quot;&#xA;&#xA;    &amp;quot;github.com/chenhg5/jsonmap&amp;quot;&#xA;)&#xA;&#xA;func main() {&#xA;&#xA;    var text = `{&#xA;        &amp;quot;type&amp;quot;: &amp;quot;cow&amp;quot;&#xA;    }`&#xA;&#xA;    type Animal struct {&#xA;        Type uint8 `json:&amp;quot;type&amp;quot; jsonmap:&amp;quot;0:dog;1:cat;2:cow;3:others&amp;quot;`&#xA;    }&#xA;&#xA;    var animal = new(Animal)&#xA;    _ = json.Unmarshal([]byte(text), jsonmap.Wrap(animal))&#xA;    fmt.Printf(&amp;quot;%+v\n&amp;quot;, animal)&#xA;&#xA;    // &amp;amp;Animal{Type: 2}&#xA;&#xA;    res, _ := json.MarshalIndent(jsonmap.Wrap(animal), &amp;quot;&amp;quot;, &amp;quot;    &amp;quot;)&#xA;    fmt.Println(string(res))&#xA;&#xA;    // {&amp;quot;type&amp;quot;: &amp;quot;cow&amp;quot;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;dddd.&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>大实战-算法与数据结构高手养成-求职提升特训课</title>
