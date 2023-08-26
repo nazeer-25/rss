@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>OpenWRT 如何向光猫请求一个指定前缀的 IPv6？ - OpenWrt</title>
+      <link>https://www.v2ex.com/t/968402</link>
+      <description>&lt;p&gt;光猫拨号后 ISP PD 一个 /60 的前缀给光猫，OpenWRT 连接光猫后 PD 获取到一个 /64 的前缀，但由于它作为路由器的上一级，获取到 /64 前缀是无法再向路由器 PD 的（没有子网可以划分了）。&lt;/p&gt;&#xA;&lt;p&gt;所以如何不动光猫的情况下，使 OpenWRT 请求一个 /60 /61 /62 /63 的前缀？&lt;/p&gt;&#xA;&lt;p&gt;我尝试过设置:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;$ cat /etc/config/network&#xA;&#xA;...&#xA;&#xA;config interface &#39;WAN6&#39;&#xA;        option proto &#39;dhcpv6&#39;&#xA;        option ifname &#39;eth1&#39;&#xA;        option reqaddress &#39;try&#39;&#xA;        option reqprefix &#39;61&#39;&#xA;        option ip6prefix &#39;62&#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但这个 &lt;code&gt;reqprefix&lt;/code&gt; 不起作用，最终仍然是 /64 的前缀。&lt;/p&gt;&#xA;&lt;p&gt;看 &lt;a href=&#34;https://datatracker.ietf.org/doc/html/rfc3633#section-11.2&#34; rel=&#34;nofollow&#34;&gt;RFC 3633&lt;/a&gt; 这段描述:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;If the requesting router includes an IA_PD Prefix option in the IA_PD&#xA;option in its Solicit message, the delegating router MAY choose to&#xA;use the information in that option to select the prefix(es) or prefix&#xA;size to be delegated to the requesting router.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;也就是说 OpenWRT 的配置可以被光猫采纳，也可以不采纳。&lt;/p&gt;&#xA;&lt;p&gt;所以最终还是要登录超级管理员密码去修改光猫，或者将光猫改成桥接才可以？&lt;/p&gt;&#xA;</description>
+      <author>FaiChou</author>
+      <pubDate>26 Aug 2023 00:25:08 +0000</pubDate>
+    </item>
+    <item>
       <title>拼多多买的 iPhone 14 Plus，充电发烫正常吗？ - iPhone</title>
       <link>https://www.v2ex.com/t/968401</link>
       <description>&lt;p&gt;收到货时检查了序列号和外观，去官网查了保修状态正常（激活前显示未激活，开机激活后显示日期为当日）。但是用的过程中发现充电时发烫，有时甚至会出现系统过热保护停止充电。用过 iPhone 14 Plus 的说下有遇到吗？网上搜说快充最开始一部分电量功率大发热正常，但是到过热保护也太夸张了。买个无线充电器会不会好点？&lt;/p&gt;&#xA;</description>
