@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>用过类似 whistle 的朋友 讨论看看有没有更好的配置语法 - 程序员</title>
+      <link>https://www.v2ex.com/t/968434</link>
+      <description>&lt;h2&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;从个人使用经历来看, whistle 的配置语法经常 &lt;code&gt;不符合直觉&lt;/code&gt;. &lt;/p&gt;&#xA;&lt;p&gt;一方面是正则的匹配模式太难记, 每次过 2 天必忘, 虽然语法是简洁了, 但是实际使用效率极低.&lt;/p&gt;&#xA;&lt;p&gt;另一方面, 有些规则仅在特定条件下可用, 比如&lt;code&gt;resReplace&lt;/code&gt;, 仅在 200 响应时会生效. 先不探讨这里面的具体设计出发点, 实际使用时这种 case 真的极难 debug 确认究竟为什么我的规则不生效.&lt;/p&gt;&#xA;&lt;p&gt;思考了一下, 我想探索有没有可能设计一种更优的配置语法, 在简洁高效的同时, 易懂, 符合直觉, 且可以 debug.&lt;/p&gt;&#xA;&lt;p&gt;简单给出了以下一个 demo 版本, 供大家讨论.&lt;/p&gt;&#xA;&lt;h2&gt;配置语法规则&lt;/h2&gt;&#xA;&lt;p&gt;整体设计上保留 whistle 的 &lt;code&gt;pattern: rule&lt;/code&gt; 规则, 使用&lt;code&gt;()&lt;/code&gt;来容纳匹配规则, &lt;code&gt;{}&lt;/code&gt;来容纳匹配之后的各种操作. &lt;/p&gt;&#xA;&lt;p&gt;具体格式表现为&lt;code&gt;(filter) {...operations;}&lt;/code&gt;. &lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;filter&lt;/code&gt;可以放置多组规则, 表现为&lt;code&gt;method:params&lt;/code&gt;形式. 每个规则名对应到实现上可以是一个个独立的&lt;code&gt;function call&lt;/code&gt;. &lt;/p&gt;&#xA;&lt;p&gt;比如&lt;code&gt;(method:get, url:a.b.c)&lt;/code&gt;意为限定&lt;code&gt;method&lt;/code&gt;是 get 请求, 且 url 域名为&lt;code&gt;a.b. c&lt;/code&gt;的请求&lt;/p&gt;&#xA;&lt;p&gt;同时保留了 whistle 可以声明 data 的特性, 允许直接创建 custom method, 并在匹配规则里使用. 可以参考下方的 demo. 使用的时候可以通过&lt;code&gt;|&lt;/code&gt;符号来要求注入一些关键信息, &lt;code&gt;header&lt;/code&gt; &lt;code&gt;responseBody&lt;/code&gt;等等.&lt;/p&gt;&#xA;&lt;p&gt;匹配之后的操作类似, 在&lt;code&gt;{}&lt;/code&gt;内部声明你的 operation, 多个 operations 使用&lt;code&gt;;&lt;/code&gt;隔开.&lt;/p&gt;&#xA;&lt;p&gt;比如&lt;code&gt;{url:localhost:8080}&lt;/code&gt;表明需要将命中的请求, 转发到&lt;code&gt;localhost:8080&lt;/code&gt;这个地址.&lt;/p&gt;&#xA;&lt;h2&gt;Demo&lt;/h2&gt;&#xA;&lt;p&gt;```js&lt;/p&gt;&#xA;&lt;p&gt;function listenMsg() {&lt;/p&gt;&#xA;&lt;p&gt;window.on(&#39;message&#39;, evt =&amp;gt; console.log(evt.data))&lt;/p&gt;&#xA;&lt;p&gt;}&#xA;```&lt;/p&gt;&#xA;&lt;p&gt;```js&lt;/p&gt;&#xA;&lt;p&gt;function withCodeOk(header, body) {&lt;/p&gt;&#xA;&lt;p&gt;if (body?.code === &#39;ok&#39;) return true;&lt;/p&gt;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;&lt;p&gt;```&lt;/p&gt;&#xA;&lt;p&gt;```mock.json&lt;/p&gt;&#xA;&lt;p&gt;{&lt;/p&gt;&#xA;&lt;p&gt;&#34;code&#34;: -1,&lt;/p&gt;&#xA;&lt;p&gt;&#34;message&#34;: &#34;test non-ok code&#34;&lt;/p&gt;&#xA;&lt;p&gt;}&#xA;```&lt;/p&gt;&#xA;&lt;p&gt;// (filter) { ...operations; }&lt;/p&gt;&#xA;&lt;p&gt;(url:a.b.c) { url:127.0.0.1:8000 }&#xA;(url:&lt;a href=&#34;http://code.github.com/:path1&#34; rel=&#34;nofollow&#34;&gt;code.github.com/:path1&lt;/a&gt;) { url:&lt;a href=&#34;http://trap.mock.com/$path1&#34; rel=&#34;nofollow&#34;&gt;trap.mock.com/$path1&lt;/a&gt; }&#xA;(url:&lt;a href=&#34;http://code.github.com/&#34; rel=&#34;nofollow&#34;&gt;code.github.com/&lt;/a&gt;&lt;em&gt;?name=&lt;/em&gt;) { url:&lt;a href=&#34;http://trap.mock.com/$&#34; rel=&#34;nofollow&#34;&gt;trap.mock.com/$&lt;/a&gt;[1]?rename=$[2] }&lt;/p&gt;&#xA;&lt;p&gt;(&lt;/p&gt;&#xA;&lt;p&gt;method:post, &lt;/p&gt;&#xA;&lt;p&gt;url:*://a.b.c/api, &lt;/p&gt;&#xA;&lt;p&gt;header:content-type=application/json, &lt;/p&gt;&#xA;&lt;p&gt;withCodeOk:header|body&lt;/p&gt;&#xA;&lt;p&gt;) {&lt;/p&gt;&#xA;&lt;p&gt;resBody:mock.json;&lt;/p&gt;&#xA;&lt;p&gt;resStatus:400&lt;/p&gt;&#xA;&lt;p&gt;}&lt;/p&gt;&#xA;</description>
+      <author>branson</author>
+      <pubDate>26 Aug 2023 04:20:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>光猫桥接后不能获取 v6 前缀，路由模式下正常 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/968433</link>
+      <description>&lt;p&gt;有使用成都移动宽带的小伙伴吗？&#xA;我的光猫是 H2-2,软件版本 1.3.4 ，现在的问题是如果把光猫改成桥接模式，就无法从移动获取到 v6 前缀，&#xA;改成路由模式就一切正常。这是光猫的问题还是移动的问题？&#xA;问了移动运维，至今没有回应。&lt;/p&gt;&#xA;</description>
+      <author>tiger76</author>
+      <pubDate>26 Aug 2023 04:14:19 +0000</pubDate>
+    </item>
+    <item>
       <title>请问搜狗输入法是从哪个版本开始有截图识别文字的功能的？ - 问与答</title>
       <link>https://www.v2ex.com/t/968432</link>
       <description>RT 。谢谢！</description>
