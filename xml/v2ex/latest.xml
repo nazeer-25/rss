@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有没有健康的洗发水推荐 - 问与答</title>
+      <link>https://www.v2ex.com/t/968703</link>
+      <description>也不奢求防脱发啊、生头发什么的。就希望可以不伤害毛囊，最好把毛囊调整得健健康康的。&lt;br /&gt;预算可以大手一些，头发比较油。</description>
+      <author>asus10tu</author>
+      <pubDate>27 Aug 2023 13:46:58 +0000</pubDate>
+    </item>
+    <item>
+      <title>apple tv 长按关机无法关闭电视 - Apple TV</title>
+      <link>https://www.v2ex.com/t/968702</link>
+      <description>&lt;p&gt;设置-遥控器与设备-控制电视机和接收器（已打开）&#xA;电视设置也打开了.设置了 hdmi 有信号自动打开电视.打开 apple tv 的时候自动会打开电视.&#xA;但是长按关闭,就无法一起跟电视一起关机.&#xA;音量什么的都是正常可以调节,就无法按关机的时候和电视一起关机&lt;/p&gt;&#xA;</description>
+      <author>yiboliu</author>
+      <pubDate>27 Aug 2023 13:46:21 +0000</pubDate>
+    </item>
+    <item>
       <title>谷歌 FCM 还是建议不要走直连 - 分享发现</title>
       <link>https://www.v2ex.com/t/968701</link>
       <description>周末看了手机*#*#426#*#*的 FCM 诊断信息，心跳一直保持在 230 秒。手机是一台备用老手机，很多年了，，一般都是冲完电放一边，电池续航很差了。&lt;br /&gt;&lt;br /&gt;心跳一直在 230 秒感觉很费电，很影响续航。一开始以为是 wifi 网络问题，以为是 NAT 时间过短，就试着在路由器上转发一下增加一下 tcp 的 keepalive 。&lt;br /&gt;&lt;br /&gt;于是在路由器上执行：&lt;br /&gt;iptables -t nat -A PREROUTING -p tcp --dport 5228 -i wlan0 --to DNAT 192.168.1.1:5222&lt;br /&gt;socat TCP-LISTEN:5222,fork,reuseaddr TCP:64.233.189.188,keepcnt=3,keepidle=300,keepintvl=60&lt;br /&gt;然而半天测试下来，并没有啥用。&lt;br /&gt;&lt;br /&gt;从抓包看，最后的断开地方，看到手机有发送 client heart beat, 但是收不到应用层的 ACK （但是看到 TCP 的 ACK 是有的，偶尔还看到 client heart beat 后还有接收到 server heart beat ）。&lt;br /&gt;&lt;br /&gt;初步觉得国内虽然 &lt;a target=&#34;_blank&#34; href=&#34;http://mtalk.google.com&#34; rel=&#34;nofollow noopener&#34;&gt;mtalk.google.com&lt;/a&gt; 没有直接阻断，但是还是有干扰，要么是靠近国内的 FCM 服务器不太稳定。&lt;br /&gt;&lt;br /&gt;最后，尝试在路由器上建立 ipsec 隧道，然后让连接美国的 FCM 服务器 &lt;a target=&#34;_blank&#34; href=&#34;http://mtalk.google.com/74.125.137.188&#34; rel=&#34;nofollow noopener&#34;&gt;mtalk.google.com/74.125.137.188&lt;/a&gt;, 然后 ipsec 是走 udp 封装，所以就一直 ping 避免 UDP 的 NAT 失效。 目前测试下来，FCM 连接 7 个小时没有断开，并且心跳已经能够从 230 升到了 770,并且感觉手机电量也不再崩的那么快了。&lt;br /&gt;&lt;br /&gt;所以，我觉得路由器上通过 UDP(udp2raw)转发 TCP/5228 流量应该是个不错的方案，比起直连好很多。&lt;br /&gt;&lt;br /&gt;至于，移动数据网络上，我测试把 &lt;a target=&#34;_blank&#34; href=&#34;http://mtalk.google.com&#34; rel=&#34;nofollow noopener&#34;&gt;mtalk.google.com&lt;/a&gt; 域名解释道国内的机器上，然后在国内机器通过 UDP 把 TCP/5228 转发出去,测试下来心跳时间可以稳定到 1100 秒。&lt;br /&gt;&lt;br /&gt;结论：不要在国内放任 FCM 直连，否则会影响续航以及推送的及时性。</description>
