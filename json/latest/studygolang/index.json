@@ -53,13 +53,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "golang json 编解码枚举字段映射包 - jsonmap",
-      "Link": "https://studygolang.com/articles/36294#reply0",
-      "Description": "\u003cp\u003e从数据源查出来到结构体，还需要映射返回输出，不想那么麻烦。试试这个包：\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/chenhg5/jsonmap\"\u003ehttps://github.com/chenhg5/jsonmap\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e只需要在结构体的tag声明即可：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n    \u0026quot;encoding/json\u0026quot;\n    \u0026quot;fmt\u0026quot;\n\n    \u0026quot;github.com/chenhg5/jsonmap\u0026quot;\n)\n\nfunc main() {\n\n    var text = `{\n        \u0026quot;type\u0026quot;: \u0026quot;cow\u0026quot;\n    }`\n\n    type Animal struct {\n        Type uint8 `json:\u0026quot;type\u0026quot; jsonmap:\u0026quot;0:dog;1:cat;2:cow;3:others\u0026quot;`\n    }\n\n    var animal = new(Animal)\n    _ = json.Unmarshal([]byte(text), jsonmap.Wrap(animal))\n    fmt.Printf(\u0026quot;%+v\\n\u0026quot;, animal)\n\n    // \u0026amp;Animal{Type: 2}\n\n    res, _ := json.MarshalIndent(jsonmap.Wrap(animal), \u0026quot;\u0026quot;, \u0026quot;    \u0026quot;)\n    fmt.Println(string(res))\n\n    // {\u0026quot;type\u0026quot;: \u0026quot;cow\u0026quot;}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003edddd.\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "基于beego实现类似百度文库项目",
       "Link": "https://studygolang.com/articles/36298#reply0",
       "Description": "",
@@ -154,6 +147,13 @@
       "Title": "xmind库更新v1.0.7版本，添加一个命令行小工具",
       "Link": "https://studygolang.com/topics/16634#reply0",
       "Description": "\u003cp\u003e项目地址：\u003ca href=\"https://github.com/jan-bar/xmind\"\u003ehttps://github.com/jan-bar/xmind\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e原始需求是有道云笔记太难用了，我想把有道云笔记的思维导图转为xmind，结果这是会员功能。\u003c/p\u003e\n\n\u003cp\u003e因此我用xmind官方Python库撸了个项目：\u003ca href=\"https://github.com/jan-bar/mindmap_to_xmind\"\u003ehttps://github.com/jan-bar/mindmap_to_xmind\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e后续觉得思维导图需求还是挺常见的，因此才撸了xmind库。\u003c/p\u003e\n\n\u003cp\u003e同时有两种其他思维导图转换xmind的示例：\u003ca href=\"https://github.com/jan-bar/xmind/tree/master/convert\"\u003ehttps://github.com/jan-bar/xmind/tree/master/convert\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e相信这个项目可用满足大家在各种思维导图之间转换的需求。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "golang json 编解码枚举字段映射包 - jsonmap",
+      "Link": "https://studygolang.com/articles/36294#reply0",
+      "Description": "\u003cp\u003e从数据源查出来到结构体，还需要映射返回输出，不想那么麻烦。试试这个包：\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/chenhg5/jsonmap\"\u003ehttps://github.com/chenhg5/jsonmap\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e只需要在结构体的tag声明即可：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003epackage main\n\nimport (\n    \u0026quot;encoding/json\u0026quot;\n    \u0026quot;fmt\u0026quot;\n\n    \u0026quot;github.com/chenhg5/jsonmap\u0026quot;\n)\n\nfunc main() {\n\n    var text = `{\n        \u0026quot;type\u0026quot;: \u0026quot;cow\u0026quot;\n    }`\n\n    type Animal struct {\n        Type uint8 `json:\u0026quot;type\u0026quot; jsonmap:\u0026quot;0:dog;1:cat;2:cow;3:others\u0026quot;`\n    }\n\n    var animal = new(Animal)\n    _ = json.Unmarshal([]byte(text), jsonmap.Wrap(animal))\n    fmt.Printf(\u0026quot;%+v\\n\u0026quot;, animal)\n\n    // \u0026amp;Animal{Type: 2}\n\n    res, _ := json.MarshalIndent(jsonmap.Wrap(animal), \u0026quot;\u0026quot;, \u0026quot;    \u0026quot;)\n    fmt.Println(string(res))\n\n    // {\u0026quot;type\u0026quot;: \u0026quot;cow\u0026quot;}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003edddd.\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
