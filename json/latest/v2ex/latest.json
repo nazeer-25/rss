@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "谷歌 FCM 还是建议不要走直连 - 分享发现",
+      "Link": "https://www.v2ex.com/t/968701",
+      "Description": "周末看了手机*#*#426#*#*的 FCM 诊断信息，心跳一直保持在 230 秒。手机是一台备用老手机，很多年了，，一般都是冲完电放一边，电池续航很差了。\u003cbr /\u003e\u003cbr /\u003e心跳一直在 230 秒感觉很费电，很影响续航。一开始以为是 wifi 网络问题，以为是 NAT 时间过短，就试着在路由器上转发一下增加一下 tcp 的 keepalive 。\u003cbr /\u003e\u003cbr /\u003e于是在路由器上执行：\u003cbr /\u003eiptables -t nat -A PREROUTING -p tcp --dport 5228 -i wlan0 --to DNAT 192.168.1.1:5222\u003cbr /\u003esocat TCP-LISTEN:5222,fork,reuseaddr TCP:64.233.189.188,keepcnt=3,keepidle=300,keepintvl=60\u003cbr /\u003e然而半天测试下来，并没有啥用。\u003cbr /\u003e\u003cbr /\u003e从抓包看，最后的断开地方，看到手机有发送 client heart beat, 但是收不到应用层的 ACK （但是看到 TCP 的 ACK 是有的，偶尔还看到 client heart beat 后还有接收到 server heart beat ）。\u003cbr /\u003e\u003cbr /\u003e初步觉得国内虽然 \u003ca target=\"_blank\" href=\"http://mtalk.google.com\" rel=\"nofollow noopener\"\u003emtalk.google.com\u003c/a\u003e 没有直接阻断，但是还是有干扰，要么是靠近国内的 FCM 服务器不太稳定。\u003cbr /\u003e\u003cbr /\u003e最后，尝试在路由器上建立 ipsec 隧道，然后让连接美国的 FCM 服务器 \u003ca target=\"_blank\" href=\"http://mtalk.google.com/74.125.137.188\" rel=\"nofollow noopener\"\u003emtalk.google.com/74.125.137.188\u003c/a\u003e, 然后 ipsec 是走 udp 封装，所以就一直 ping 避免 UDP 的 NAT 失效。 目前测试下来，FCM 连接 7 个小时没有断开，并且心跳已经能够从 230 升到了 770,并且感觉手机电量也不再崩的那么快了。\u003cbr /\u003e\u003cbr /\u003e所以，我觉得路由器上通过 UDP(udp2raw)转发 TCP/5228 流量应该是个不错的方案，比起直连好很多。\u003cbr /\u003e\u003cbr /\u003e至于，移动数据网络上，我测试把 \u003ca target=\"_blank\" href=\"http://mtalk.google.com\" rel=\"nofollow noopener\"\u003emtalk.google.com\u003c/a\u003e 域名解释道国内的机器上，然后在国内机器通过 UDP 把 TCP/5228 转发出去,测试下来心跳时间可以稳定到 1100 秒。\u003cbr /\u003e\u003cbr /\u003e结论：不要在国内放任 FCM 直连，否则会影响续航以及推送的及时性。",
+      "Author": "pagxir",
+      "PubDate": "2023-08-27T13:44:40Z"
+    },
+    {
+      "Title": "求推荐踏板摩托车，价格 1 万以下，质量可靠，带 ABS 之类的安全功能 - 问与答",
+      "Link": "https://www.v2ex.com/t/968700",
+      "Description": "本人小白，没玩过摩托车，求推荐，谢谢！",
+      "Author": "ZC3746",
+      "PubDate": "2023-08-27T13:44:11Z"
+    },
+    {
+      "Title": "iPhone 15 要发布了，想要 sim+esim，应该买哪个国家（或地区）的版本？ - iPhone",
+      "Link": "https://www.v2ex.com/t/968699",
+      "Description": "\u003cp\u003e港版和澳门版以往只有单 sim 卡的版本才出 esim ，双 sim 卡槽的则不支持。\n但我觉得今年大概率不会出 sim+esim 的机器了，估计全是双 sim 卡槽。\u003c/p\u003e\n\u003cp\u003e美版现在没了 sim 卡槽，国内也无法正常用了。\u003c/p\u003e\n\u003cp\u003e剩下的我知道的感觉就是日版了或者新加坡版了？想了解一下购买不同的版本的风险大概有哪些？\u003c/p\u003e\n",
+      "Author": "justNoBody",
+      "PubDate": "2023-08-27T13:35:19Z"
+    },
+    {
       "Title": "杭州全市区都有自行车道嘛？ - 杭州",
       "Link": "https://www.v2ex.com/t/968698",
       "Description": "西湖一日游，发现有单独的人行道和自行车道，这对骑行太友好了，早知道就不租电动车，去租公路车环湖了。",
