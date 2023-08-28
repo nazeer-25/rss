@@ -81,6 +81,20 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "protobuf+TCP？",
+      "Link": "https://studygolang.com/topics/16648#reply0",
+      "Description": "\u003cp\u003e最近因为项目的需要，接触到了一些unity开发，在和他们聊的过程中发现，他们游戏行业普遍采用protobuf+TCP来进行数据传输，protobuf没问题，谷歌出品，而且支持多语言，本身生成的数据，也有考虑到数据压缩，比平常大家采用的json，实际上要小很多；但采用TCP就有点疑问了，毕竟TCP因为黏包的问题，你要解决数据传输，必须设计包头和包体，来保障数据传输的完整性。我在想，这地方是否可以采用websocket来替代呢？虽然他也是基于TCP，但其实他在设计的时候，就已经考虑到了黏包的问题，已经在协议层面解决了，而websocket的开源包也很多，可以拿来即用，最关键的是，他可以做到多端支持，windows客户端、移动APP、web都是完美支持的，后来从研发那边的了解到，他们用unity开发游戏，主要运行在App里面，基本上不会运行在浏览器里，所以不会考虑多端支持的问题，这也就难怪了。你觉得呢？\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "良禽择木而栖贤士择人而劳",
+      "Link": "https://studygolang.com/topics/16637#reply0",
+      "Description": "\u003cp\u003e良禽择木而栖贤士择人而劳\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "基于beego实现类似百度文库项目",
       "Link": "https://studygolang.com/articles/36298#reply2",
       "Description": "",
@@ -140,13 +154,6 @@
       "Title": "DeFi矿场挖矿流动性矿池存币生息合约系统开发",
       "Link": "https://studygolang.com/topics/16639#reply0",
       "Description": "\u003cp\u003eDeFi矿场挖矿流动性矿池存币生息是指，在DeFi平台上，用户可以将自己的代币存入流动性池中以获得收益。这些代币可以是USDT、USDC等稳定币，也可以是其他类型的代币。在流动性池中，不同的代币可能会对应不同的年利率，用户可以根据自己的需求选择合适的代币进行存入。\u003c/p\u003e\n\n\u003cp\u003e在流动性池中，用户的代币可以参与到不同的DeFi协议中，如Compound和Balancer等。这些协议的收益率可能不同，用户需要根据自己的风险偏好和收益需求选择合适的协议。\u003c/p\u003e\n\n\u003cp\u003e此外，流动性池中的代币还可以通过质押的方式获得更高的收益。质押是指将代币抵押在DeFi平台上以获得更多的收益。质押的代币数量和收益率也会有所不同，用户需要根据自己的实际情况进行选择。\u003c/p\u003e\n\n\u003cp\u003e总之，DeFi矿场挖矿流动性矿池存币生息是一种通过将代币存入流动性池中并参与DeFi协议和质押来获得收益的方式。用户需要根据自己的需求和实际情况进行选择，以最大化自己的收益。\u003c/p\u003e\n\n\u003cp\u003e以下是一个简单的DeFi矿场挖矿流动性矿池存币生息合约代码的示例：\u003c/p\u003e\n\n\u003cp\u003e// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0\u003c/p\u003e\n\n\u003cp\u003eimport “@openzeppelin/contracts/utils/token/ERC20/ERC20.sol”;\nimport “@openzeppelin/contracts/utils/utils.sol”;\u003c/p\u003e\n\n\u003cp\u003econtract DeFiMiningPool is ERC20 {【完整源码逻辑部署看我昵称】\n// 矿池的地址\naddress public poolAddress;// 矿池的代币合约地址  address public tokenAddress;   // 矿池的总代币数量  uint256 public totalSupply;  【VX and 飞机号telegram【ch3nguang】】// 存储用户的代币数量和地址的映射关系  mapping (address =\u0026gt; uint256) private userBalances;   // 存储矿池的总代币数量和地址的映射关系  mapping (address =\u0026gt; uint256) private poolBalances;   // 初始化矿池  constructor(address _poolAddress, address _tokenAddress) ERC20(“DeFiMiningPool”, “DFMP”) {       poolAddress = _poolAddress;       tokenAddress = _tokenAddress;       totalSupply = token.totalSupply();   }   // 添加代币到矿池  VX and 飞机号telegram【ch3nguang】function addTokenToPool(address _userAddress, uint256 _tokenAmount) public returns (uint256 remainingToken) {       require(_userAddress != address(0));       require(_tokenAmount \u0026lt;= userBalances[_userAddress]);       poolBalances[_userAddress] += _tokenAmount;       userBalances[_userAddress] -= _tokenAmount;       emit TokenAddedToPool(_userAddress, _tokenAmount);       return _tokenAmount;   }   // 从矿池中取出代币  function withdrawTokenFromPool(uint256 _withdrawAmount) public returns (uint256 remainingPoolBalance) {       require(_withdrawAmount \u0026lt;= poolBalances[msg.sender]);       userBalances[msg.sender] += _withdrawAmount;       poolBalances[msg.sender] -= _withdrawAmount;       emit TokenWithdrawnFromPool(_withdrawAmount);       return remainingPoolBalance;   }\u003c/p\u003e\n\n\u003cp\u003e}\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "良禽择木而栖贤士择人而劳",
-      "Link": "https://studygolang.com/topics/16637#reply0",
-      "Description": "\u003cp\u003e良禽择木而栖贤士择人而劳\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
