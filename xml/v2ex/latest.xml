@@ -18,7 +18,7 @@
       <pubDate>28 Aug 2023 10:34:11 +0000</pubDate>
     </item>
     <item>
-      <title>微信/wechat 内访问链接会被爬虫 - 科技</title>
+      <title>微信/wechat 内访问链接会被爬虫 - 程序员</title>
       <link>https://www.v2ex.com/t/968970</link>
       <description>&lt;p&gt;今天偶然发现 nginx 日志里，未公开的路径被陌生 ip 访问，且 ip 来源都是腾讯云的线路。猜测是 wechat 的爬虫？&lt;/p&gt;&#xA;&lt;p&gt;复现：构建一个不存在的路径，&lt;a href=&#34;https://example.com/sb-tencent&#34; rel=&#34;nofollow&#34;&gt;https://example.com/sb-tencent&lt;/a&gt;&#xA;通过 wechat 直接访问或扫码访问&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;127.0.0.1 - - [28/Aug/2023:18:18:28 +0800] ＂ GET /sb-tencent HTTP/2.0 ＂ 404 0 ＂-＂ ＂ Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.40(0x18002830) NetType/WIFI Language/en ＂&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;过一会儿后，就能看到陌生 ip 的访问&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;180.163.28.180 - - [28/Aug/2023:18:17:46 +0800] ＂ GET /sb-tencent HTTP/1.1 ＂ 404 0 ＂-＂ ＂ Mozilla/5.0 (Linux; Android 4.4.4; HUAWEI ALE-CL00 Build/HuaweiALE-CL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/53.0.2785.49 Mobile MQQBrowser/6.2 TBS/043024 Safari/537.36 MicroMessenger/6.5.4.1000 NetType/4G Language/zh_CN ＂&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;wechat 的爬虫会伪造 UA ，目前发现的有 Huawei 、Windows NT 、oppo 、vivo 、iPhone 等，且 UA 不一定包含 MicroMessenger ，例如&lt;code&gt;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;爬虫的 ip 段目前发现的有 106.55.0.0/16, 81.71.0.0/16, 180.163.0.0/16 ，24 小时工作，有的时候甚至会在次日凌晨去爬。&#xA;不知道 tx 搞这出是要干嘛，伪造 UA 去爬虫已经是属于恶意的吧&lt;/p&gt;&#xA;</description>
       <author>CNYoki</author>
