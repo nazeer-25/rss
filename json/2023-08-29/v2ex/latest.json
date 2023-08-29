@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "我们使用 Rust 构建了一个 WebRTC SFU 服务端。现在，我们发布了第一个勉强可用版本： v0.1.0 - 分享创造",
+      "Link": "https://www.v2ex.com/t/969277",
+      "Description": "\u003cp\u003e我们使用 Rust 构建了一个 WebRTC SFU 服务端，今天我们可以宣布，我们发布了第一个勉强可用版本：v0.1.0\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e支持了 WHIP/WHEP 协议\u003c/li\u003e\n\u003cli\u003e多流（房间）的支持\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e少说废话！这东西有什么用？如果你想做一个视频会议软件，那么他可以作为一个视频会议的音视频核心引擎\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/binbat/live777\" rel=\"nofollow\"\u003ehttps://github.com/binbat/live777\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "awing",
+      "PubDate": "2023-08-29T10:14:52Z"
+    },
+    {
       "Title": "如何交叉编译，有点懵了 - 问与答",
       "Link": "https://www.v2ex.com/t/969276",
       "Description": "\u003cp\u003e最近折腾随身 Wi-Fi ，看到别人开源了 at_server ，仓库如下： \u003ca href=\"https://github.com/newton-miku/jc09\" rel=\"nofollow\"\u003ehttps://github.com/newton-miku/jc09\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e我在 amd64 主机里面编译好了，编译出的执行文件在 amd64 可以运行。但是随身 Wi-Fi 是 arm64 的，需要交叉编译才可以。\u003c/p\u003e\n\u003cp\u003e里面有个 makefile 如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-text\"\u003e Makefile\nOUTDIR=build\nCC = gcc\nCFLAGS = $(shell pkg-config --cflags glib-2.0 gio-2.0)\nLIBS = $(shell pkg-config --libs glib-2.0 gio-2.0) -lpthread\n\nmain: main.c mongoose.c\n\t$(CC) -o $(OUTDIR)/main main.c mongoose.c $(CFLAGS) $(LIBS)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这个随身 Wi-Fi 的系统信息如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-shell\"\u003eroot@udx710-module:/ # uname -a\nLinux udx710-module 4.14.98 #1 SMP PREEMPT Thu Jul 27 01:59:03 UTC 2023 aarch64 GNU/Linux\nroot@udx710-module:/ # uname -r\n4.14.98\noot@udx710-module:/ # /lib/libc-2.27.so\nGNU C Library (GNU libc) stable release version 2.27.\nCopyright (C) 2018 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.\nThere is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A\nPARTICULAR PURPOSE.\nCompiled by GNU CC version 7.2.1 20171011.\nlibc ABIs: UNIQUE\nFor bug reporting instructions, please see:\n\u0026lt;http://www.gnu.org/software/libc/bugs.html\u0026gt;.\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我应该如何修改 makefile ，使用交叉编译的工具链编译出 arm64 的执行文件呢？\u003c/p\u003e\n",

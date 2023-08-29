@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>我们使用 Rust 构建了一个 WebRTC SFU 服务端。现在，我们发布了第一个勉强可用版本： v0.1.0 - 分享创造</title>
+      <link>https://www.v2ex.com/t/969277</link>
+      <description>&lt;p&gt;我们使用 Rust 构建了一个 WebRTC SFU 服务端，今天我们可以宣布，我们发布了第一个勉强可用版本：v0.1.0&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;支持了 WHIP/WHEP 协议&lt;/li&gt;&#xA;&lt;li&gt;多流（房间）的支持&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;少说废话！这东西有什么用？如果你想做一个视频会议软件，那么他可以作为一个视频会议的音视频核心引擎&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/binbat/live777&#34; rel=&#34;nofollow&#34;&gt;https://github.com/binbat/live777&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>awing</author>
+      <pubDate>29 Aug 2023 10:14:52 +0000</pubDate>
+    </item>
+    <item>
       <title>如何交叉编译，有点懵了 - 问与答</title>
       <link>https://www.v2ex.com/t/969276</link>
       <description>&lt;p&gt;最近折腾随身 Wi-Fi ，看到别人开源了 at_server ，仓库如下： &lt;a href=&#34;https://github.com/newton-miku/jc09&#34; rel=&#34;nofollow&#34;&gt;https://github.com/newton-miku/jc09&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;我在 amd64 主机里面编译好了，编译出的执行文件在 amd64 可以运行。但是随身 Wi-Fi 是 arm64 的，需要交叉编译才可以。&lt;/p&gt;&#xA;&lt;p&gt;里面有个 makefile 如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt; Makefile&#xA;OUTDIR=build&#xA;CC = gcc&#xA;CFLAGS = $(shell pkg-config --cflags glib-2.0 gio-2.0)&#xA;LIBS = $(shell pkg-config --libs glib-2.0 gio-2.0) -lpthread&#xA;&#xA;main: main.c mongoose.c&#xA;&#x9;$(CC) -o $(OUTDIR)/main main.c mongoose.c $(CFLAGS) $(LIBS)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这个随身 Wi-Fi 的系统信息如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;root@udx710-module:/ # uname -a&#xA;Linux udx710-module 4.14.98 #1 SMP PREEMPT Thu Jul 27 01:59:03 UTC 2023 aarch64 GNU/Linux&#xA;root@udx710-module:/ # uname -r&#xA;4.14.98&#xA;oot@udx710-module:/ # /lib/libc-2.27.so&#xA;GNU C Library (GNU libc) stable release version 2.27.&#xA;Copyright (C) 2018 Free Software Foundation, Inc.&#xA;This is free software; see the source for copying conditions.&#xA;There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A&#xA;PARTICULAR PURPOSE.&#xA;Compiled by GNU CC version 7.2.1 20171011.&#xA;libc ABIs: UNIQUE&#xA;For bug reporting instructions, please see:&#xA;&amp;lt;http://www.gnu.org/software/libc/bugs.html&amp;gt;.&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我应该如何修改 makefile ，使用交叉编译的工具链编译出 arm64 的执行文件呢？&lt;/p&gt;&#xA;</description>
