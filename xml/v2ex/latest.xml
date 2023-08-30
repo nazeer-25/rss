@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教： MSSQL 如何确定死锁根源 session_id？ - SQL Server</title>
+      <link>https://www.v2ex.com/t/969447</link>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;背景：MSSQL 2016 每几天死锁一次。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT sqltext.text,&#xA;       req.session_id,&#xA;       req.status,&#xA;       req.command,&#xA;       req.cpu_time,&#xA;       req.total_elapsed_time,&#xA;       req.blocking_session_id&#xA;FROM sys.dm_exec_requests req (NOLOCK)&#xA;    CROSS APPLY sys.dm_exec_sql_text(req.sql_handle) AS sqltext&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;执行上面 SQL ，通过 blocking_session_id 发现阻塞 session 最终矛头都指向是 session 134 。&#xA;但是 session 134 的状态是 suspended （ session 134 的 blocking_session_id=0 ），正常不是应该状态是 running 才可能是阻塞根源的 session 吗？&lt;/p&gt;&#xA;</description>
+      <author>idragonet</author>
+      <pubDate>30 Aug 2023 04:08:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>某壳内网穿透家里的小说服务 Reader,一天账号被封。 - 分享发现</title>
+      <link>https://www.v2ex.com/t/969446</link>
+      <description>在家里用 docker 部署了个小说服务 Reader,昨天用某壳交了 6 块开通 https 代理穿透回家。&lt;br /&gt;今天服务无法访问，连某壳账号都被封了，打了售后反馈是系统检测到域名存在涩情内容，域名和账号都被封了。&lt;br /&gt;解封需要写承诺书加身份证。涩情内容估计是有个本地小说 [ shaofu 白洁] （狗头）。。&lt;br /&gt;这些网络环境还是太危险了，还是用境外小鸡装 FRP 稳妥。</description>
+      <author>roding</author>
+      <pubDate>30 Aug 2023 04:04:42 +0000</pubDate>
+    </item>
+    <item>
       <title>Hyper-V 虚拟机为已保存-关键状态，且无法连接到虚拟机配置存储导致无法删除如何能够删除？ - Windows</title>
       <link>https://www.v2ex.com/t/969445</link>
       <description>&lt;p&gt;Hyper-V 虚拟机为已保存-关键状态，且无法连接到虚拟机配置存储导致无法删除如何能够删除？&#xA;有无误操作删除了虚拟机的文件夹及文件，导致出现已保存-关键状态，且无法连接到虚拟机配置存储。&#xA;尝试如下命令:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;Get-VM&#xA;Remove-VM -name &#34;Win1 - 2&#34; -force&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;两个命令都会出现如下报错：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;Get-VM : 由于找不到某个对象，Hyper-V 尝试在计算机“JEFFPC”上访问该对象时遇到错误。该对象可能已被删除，或者你可能没有执&#xA;行此任务的权限。请验证该计算机上的虚拟机管理服务是否正在运行。如果该服务正在运行，请尝试使用“以管理员身份运行”重新执&#xA;行此任务。&#xA;所在位置 行:1 字符: 9&#xA;+ $allVMs=Get-VM | Select -ExpandProperty Name&#xA;+         ~~~~~~&#xA;    + CategoryInfo          : ObjectNotFound: (:) [Get-VM], VirtualizationException&#xA;    + FullyQualifiedErrorId : ObjectNotFound,Microsoft.HyperV.PowerShell.Commands.GetVM&#xA;    &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;目前谷歌上没有答案能解决这样的问题，大家有什么办法吗？&lt;/p&gt;&#xA;</description>

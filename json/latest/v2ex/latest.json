@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教： MSSQL 如何确定死锁根源 session_id？ - SQL Server",
+      "Link": "https://www.v2ex.com/t/969447",
+      "Description": "\u003cul\u003e\n\u003cli\u003e背景：MSSQL 2016 每几天死锁一次。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-sql\"\u003eSELECT sqltext.text,\n       req.session_id,\n       req.status,\n       req.command,\n       req.cpu_time,\n       req.total_elapsed_time,\n       req.blocking_session_id\nFROM sys.dm_exec_requests req (NOLOCK)\n    CROSS APPLY sys.dm_exec_sql_text(req.sql_handle) AS sqltext\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e执行上面 SQL ，通过 blocking_session_id 发现阻塞 session 最终矛头都指向是 session 134 。\n但是 session 134 的状态是 suspended （ session 134 的 blocking_session_id=0 ），正常不是应该状态是 running 才可能是阻塞根源的 session 吗？\u003c/p\u003e\n",
+      "Author": "idragonet",
+      "PubDate": "2023-08-30T04:08:17Z"
+    },
+    {
+      "Title": "某壳内网穿透家里的小说服务 Reader,一天账号被封。 - 分享发现",
+      "Link": "https://www.v2ex.com/t/969446",
+      "Description": "在家里用 docker 部署了个小说服务 Reader,昨天用某壳交了 6 块开通 https 代理穿透回家。\u003cbr /\u003e今天服务无法访问，连某壳账号都被封了，打了售后反馈是系统检测到域名存在涩情内容，域名和账号都被封了。\u003cbr /\u003e解封需要写承诺书加身份证。涩情内容估计是有个本地小说 [ shaofu 白洁] （狗头）。。\u003cbr /\u003e这些网络环境还是太危险了，还是用境外小鸡装 FRP 稳妥。",
+      "Author": "roding",
+      "PubDate": "2023-08-30T04:04:42Z"
+    },
+    {
       "Title": "Hyper-V 虚拟机为已保存-关键状态，且无法连接到虚拟机配置存储导致无法删除如何能够删除？ - Windows",
       "Link": "https://www.v2ex.com/t/969445",
       "Description": "\u003cp\u003eHyper-V 虚拟机为已保存-关键状态，且无法连接到虚拟机配置存储导致无法删除如何能够删除？\n有无误操作删除了虚拟机的文件夹及文件，导致出现已保存-关键状态，且无法连接到虚拟机配置存储。\n尝试如下命令:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eGet-VM\nRemove-VM -name \"Win1 - 2\" -force\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e两个命令都会出现如下报错：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eGet-VM : 由于找不到某个对象，Hyper-V 尝试在计算机“JEFFPC”上访问该对象时遇到错误。该对象可能已被删除，或者你可能没有执\n行此任务的权限。请验证该计算机上的虚拟机管理服务是否正在运行。如果该服务正在运行，请尝试使用“以管理员身份运行”重新执\n行此任务。\n所在位置 行:1 字符: 9\n+ $allVMs=Get-VM | Select -ExpandProperty Name\n+         ~~~~~~\n    + CategoryInfo          : ObjectNotFound: (:) [Get-VM], VirtualizationException\n    + FullyQualifiedErrorId : ObjectNotFound,Microsoft.HyperV.PowerShell.Commands.GetVM\n    \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e目前谷歌上没有答案能解决这样的问题，大家有什么办法吗？\u003c/p\u003e\n",
