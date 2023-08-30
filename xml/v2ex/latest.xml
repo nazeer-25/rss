@@ -4,6 +4,54 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>官网买的 mac mini 到了，想买 surge 来用 - Surge</title>
+      <link>https://www.v2ex.com/t/969402</link>
+      <description>&lt;p&gt;有想拼车的吗， 若人数差不多就拼个 5 人的，这样划算些。&lt;/p&gt;&#xA;</description>
+      <author>idxiu</author>
+      <pubDate>30 Aug 2023 02:32:35 +0000</pubDate>
+    </item>
+    <item>
+      <title>Spring 中 Bean 注册疑问 - Java</title>
+      <link>https://www.v2ex.com/t/969401</link>
+      <description>&lt;h2&gt;DefaultListableBeanFactory #registerBeanDefinition(String beanName,BeanDefintion bean);&lt;/h2&gt;&#xA;&lt;p&gt;疑问 1：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;&#xA;&#x9;@Override&#xA;&#x9;public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition)&#xA;&#x9;&#x9;&#x9;throws BeanDefinitionStoreException {&#xA;&#xA;&#x9;&#x9;Assert.hasText(beanName, &#34;Bean name must not be empty&#34;);&#xA;&#x9;&#x9;Assert.notNull(beanDefinition, &#34;BeanDefinition must not be null&#34;);&#xA;&#xA;&#x9;&#x9;if (beanDefinition instanceof AbstractBeanDefinition) {&#xA;&#x9;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;&#x9;((AbstractBeanDefinition) beanDefinition).validate();&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;catch (BeanDefinitionValidationException ex) {&#xA;&#x9;&#x9;&#x9;&#x9;throw new BeanDefinitionStoreException(beanDefinition.getResourceDescription(), beanName,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;Validation of bean definition failed&#34;, ex);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;BeanDefinition existingDefinition = this.beanDefinitionMap.get(beanName);&#xA;&#x9;&#x9;if (existingDefinition != null) {&#xA;&#x9;&#x9;&#x9;if (!isAllowBeanDefinitionOverriding()) {&#xA;&#x9;&#x9;&#x9;&#x9;throw new BeanDefinitionOverrideException(beanName, beanDefinition, existingDefinition);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else if (existingDefinition.getRole() &amp;lt; beanDefinition.getRole()) {&#xA;&#x9;&#x9;&#x9;&#x9;// e.g. was ROLE_APPLICATION, now overriding with ROLE_SUPPORT or ROLE_INFRASTRUCTURE&#xA;&#x9;&#x9;&#x9;&#x9;if (logger.isInfoEnabled()) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;logger.info(&#34;Overriding user-defined bean definition for bean &#39;&#34; + beanName +&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;&#39; with a framework-generated bean definition: replacing [&#34; +&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;existingDefinition + &#34;] with [&#34; + beanDefinition + &#34;]&#34;);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else if (!beanDefinition.equals(existingDefinition)) {&#xA;&#x9;&#x9;&#x9;&#x9;if (logger.isDebugEnabled()) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;logger.debug(&#34;Overriding bean definition for bean &#39;&#34; + beanName +&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;&#39; with a different definition: replacing [&#34; + existingDefinition +&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;] with [&#34; + beanDefinition + &#34;]&#34;);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;&#x9;if (logger.isTraceEnabled()) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;logger.trace(&#34;Overriding bean definition for bean &#39;&#34; + beanName +&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;&#39; with an equivalent definition: replacing [&#34; + existingDefinition +&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#34;] with [&#34; + beanDefinition + &#34;]&#34;);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;this.beanDefinitionMap.put(beanName, beanDefinition);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;if (hasBeanCreationStarted()) {&#xA;&#x9;&#x9;&#x9;&#x9;// Cannot modify startup-time collection elements anymore (for stable iteration)&#xA;&#x9;&#x9;&#x9;&#x9;synchronized (this.beanDefinitionMap) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;this.beanDefinitionMap.put(beanName, beanDefinition);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;List&amp;lt;String&amp;gt; updatedDefinitions = new ArrayList&amp;lt;&amp;gt;(this.beanDefinitionNames.size() + 1);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;updatedDefinitions.addAll(this.beanDefinitionNames);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;updatedDefinitions.add(beanName);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;this.beanDefinitionNames = updatedDefinitions;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;removeManualSingletonName(beanName);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;&#x9;// Still in startup registration phase&#xA;&#x9;&#x9;&#x9;&#x9;this.beanDefinitionMap.put(beanName, beanDefinition);&#xA;&#x9;&#x9;&#x9;&#x9;this.beanDefinitionNames.add(beanName);&#xA;&#x9;&#x9;&#x9;&#x9;removeManualSingletonName(beanName);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;this.frozenBeanDefinitionNames = null;&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;if (existingDefinition != null || containsSingleton(beanName)) {&#xA;&#x9;&#x9;&#x9;resetBeanDefinition(beanName);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else if (isConfigurationFrozen()) {&#xA;&#x9;&#x9;&#x9;clearByTypeCache();&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;其中这一段代码 &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;&#xA;&#x9;if (hasBeanCreationStarted()) {&#xA;&#x9;&#x9;&#x9;&#x9;// Cannot modify startup-time collection elements anymore (for stable iteration)&#xA;&#x9;&#x9;&#x9;&#x9;synchronized (this.beanDefinitionMap) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;this.beanDefinitionMap.put(beanName, beanDefinition);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;List&amp;lt;String&amp;gt; updatedDefinitions = new ArrayList&amp;lt;&amp;gt;(this.beanDefinitionNames.size() + 1);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;updatedDefinitions.addAll(this.beanDefinitionNames);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;updatedDefinitions.add(beanName);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;this.beanDefinitionNames = updatedDefinitions;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;removeManualSingletonName(beanName);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;不太明白为啥还得判断容器是否存活，但是断点下来确实走的 else &lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;&#x9;else {&#xA;&#x9;&#x9;&#x9;// Still in startup registration phase&#xA;&#x9;&#x9;&#x9;this.beanDefinitionMap.put(beanName, beanDefinition);&#xA;&#x9;&#x9;&#x9;this.beanDefinitionNames.add(beanName);&#xA;&#x9;&#x9;&#x9;removeManualSingletonName(beanName);&#xA;&#x9;&#x9;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;希望大家能给解答一下，万分感谢 ！&lt;/p&gt;&#xA;</description>
+      <author>liuyunlong</author>
+      <pubDate>30 Aug 2023 02:31:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>v2ex 深色模式闪烁 - 问与答</title>
+      <link>https://www.v2ex.com/t/969399</link>
+      <description>在点击不同的链接或者 tab 时，会出现闪现一下白色模式，然后瞬间变深色，结果就是网页闪了一下，因为不是一直都有，不好录屏，不知道有没有遇到相同情况的？</description>
+      <author>renyijiu</author>
+      <pubDate>30 Aug 2023 02:28:58 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教没有公网 IP，如何在办公室搭建一个可以外部访问的 V-P-N？ - 问与答</title>
+      <link>https://www.v2ex.com/t/969398</link>
+      <description>&lt;p&gt;坐标深圳，需求源自于公司内部要安装一个安全加密系统，需要访问服务器，但是服务器在一个办公室内，而使用加密系统的在另外的办公室，不是同一个网络。&lt;/p&gt;&#xA;&lt;p&gt;安全加密系统的服务商采购了一个防火墙，可以搭建 V-P-N ，但是得需要公网 IP ，然而公司的网络属于普通的 ADSL 网络，没有公网 IP 。  &lt;/p&gt;&#xA;&lt;p&gt;咨询了下，公网 IP 需要每个月加 100 元。但是这个公网 IP 也是会变的吧？&#xA;如果是专线的话，价格估计要上千块钱一年，而且带宽还小。&lt;/p&gt;&#xA;&lt;p&gt;请教还有其他的办法吗？&lt;/p&gt;&#xA;</description>
+      <author>xyxc0673</author>
+      <pubDate>30 Aug 2023 02:28:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>企业的跨境 访问 google 一类的设备 大家有什么推荐吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/969397</link>
+      <author>Vientoo</author>
+      <pubDate>30 Aug 2023 02:28:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>一晚上机场流量 100G - 路由器</title>
+      <link>https://www.v2ex.com/t/969396</link>
+      <description>&lt;p&gt;前几天宽带 ipv6 没了，重新设置路由拨号开启 ipv6 。但是路由梅林猫咪插件一晚上跑了 100G 机场流量。个人猜测跟 PT 发种走 ipv6 有关。是在插件里设置 NAS 不走代理吗？&lt;/p&gt;&#xA;</description>
+      <author>nandie</author>
+      <pubDate>30 Aug 2023 02:28:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>微信的视频号小店好像使用率不高啊，为什么呢？ - 互联网</title>
+      <link>https://www.v2ex.com/t/969394</link>
+      <description>&lt;p&gt;无意冒犯、引战。想调研一下市场，很多产品凉了但是“秘而不发”，隔几个月不调研都不知道是什么情况。&lt;/p&gt;&#xA;&lt;p&gt;有赞凉了吗？我看网上说市值蒸发了 90%，大规模裁员。不知道还剩下多少产品在运营。还是被微信铲除了？&lt;/p&gt;&#xA;&lt;p&gt;最近两年新出的，微信小商店凉了吗？还是合并到视频号小店了？&lt;/p&gt;&#xA;&lt;p&gt;视频号小店能多大程度上取代微信小程序自建的商店？感觉还是小程序里面的用得多&lt;/p&gt;&#xA;&lt;p&gt;视频号小店有没有和抖音商店那些产生差异化竞争？差异在哪呢？&lt;/p&gt;&#xA;</description>
+      <author>revalue</author>
+      <pubDate>30 Aug 2023 02:27:26 +0000</pubDate>
+    </item>
+    <item>
       <title>支持 google play 和 gpay 的手机？ - 问与答</title>
       <link>https://www.v2ex.com/t/969393</link>
       <description>&lt;p&gt;目前自己的手机是小米 8 ，屏幕指纹版&lt;/p&gt;&#xA;&lt;p&gt;之前 miui 强制升级，结果用不了 google play, 然后 unlock 解锁刷了 miui 国际版，才能继续用...&lt;/p&gt;&#xA;&lt;p&gt;最近，发现要用 google pay ，发现不支持（解锁后安全验证通不过）；装 Magisk 啥的也不太会，淘宝也不接单...&lt;/p&gt;&#xA;&lt;p&gt;想着等年底过段时间换个手机&lt;/p&gt;&#xA;&lt;p&gt;不知道目前有什么手机比较通用、比较好？ iphone 的话感觉还是不考虑了...&lt;/p&gt;&#xA;</description>

@@ -4,6 +4,55 @@
   "Description": "",
   "Items": [
     {
+      "Title": "官网买的 mac mini 到了，想买 surge 来用 - Surge",
+      "Link": "https://www.v2ex.com/t/969402",
+      "Description": "\u003cp\u003e有想拼车的吗， 若人数差不多就拼个 5 人的，这样划算些。\u003c/p\u003e\n",
+      "Author": "idxiu",
+      "PubDate": "2023-08-30T02:32:35Z"
+    },
+    {
+      "Title": "Spring 中 Bean 注册疑问 - Java",
+      "Link": "https://www.v2ex.com/t/969401",
+      "Description": "\u003ch2\u003eDefaultListableBeanFactory #registerBeanDefinition(String beanName,BeanDefintion bean);\u003c/h2\u003e\n\u003cp\u003e疑问 1：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e\n\t@Override\n\tpublic void registerBeanDefinition(String beanName, BeanDefinition beanDefinition)\n\t\t\tthrows BeanDefinitionStoreException {\n\n\t\tAssert.hasText(beanName, \"Bean name must not be empty\");\n\t\tAssert.notNull(beanDefinition, \"BeanDefinition must not be null\");\n\n\t\tif (beanDefinition instanceof AbstractBeanDefinition) {\n\t\t\ttry {\n\t\t\t\t((AbstractBeanDefinition) beanDefinition).validate();\n\t\t\t}\n\t\t\tcatch (BeanDefinitionValidationException ex) {\n\t\t\t\tthrow new BeanDefinitionStoreException(beanDefinition.getResourceDescription(), beanName,\n\t\t\t\t\t\t\"Validation of bean definition failed\", ex);\n\t\t\t}\n\t\t}\n\n\t\tBeanDefinition existingDefinition = this.beanDefinitionMap.get(beanName);\n\t\tif (existingDefinition != null) {\n\t\t\tif (!isAllowBeanDefinitionOverriding()) {\n\t\t\t\tthrow new BeanDefinitionOverrideException(beanName, beanDefinition, existingDefinition);\n\t\t\t}\n\t\t\telse if (existingDefinition.getRole() \u0026lt; beanDefinition.getRole()) {\n\t\t\t\t// e.g. was ROLE_APPLICATION, now overriding with ROLE_SUPPORT or ROLE_INFRASTRUCTURE\n\t\t\t\tif (logger.isInfoEnabled()) {\n\t\t\t\t\tlogger.info(\"Overriding user-defined bean definition for bean '\" + beanName +\n\t\t\t\t\t\t\t\"' with a framework-generated bean definition: replacing [\" +\n\t\t\t\t\t\t\texistingDefinition + \"] with [\" + beanDefinition + \"]\");\n\t\t\t\t}\n\t\t\t}\n\t\t\telse if (!beanDefinition.equals(existingDefinition)) {\n\t\t\t\tif (logger.isDebugEnabled()) {\n\t\t\t\t\tlogger.debug(\"Overriding bean definition for bean '\" + beanName +\n\t\t\t\t\t\t\t\"' with a different definition: replacing [\" + existingDefinition +\n\t\t\t\t\t\t\t\"] with [\" + beanDefinition + \"]\");\n\t\t\t\t}\n\t\t\t}\n\t\t\telse {\n\t\t\t\tif (logger.isTraceEnabled()) {\n\t\t\t\t\tlogger.trace(\"Overriding bean definition for bean '\" + beanName +\n\t\t\t\t\t\t\t\"' with an equivalent definition: replacing [\" + existingDefinition +\n\t\t\t\t\t\t\t\"] with [\" + beanDefinition + \"]\");\n\t\t\t\t}\n\t\t\t}\n\t\t\tthis.beanDefinitionMap.put(beanName, beanDefinition);\n\t\t}\n\t\telse {\n\t\t\tif (hasBeanCreationStarted()) {\n\t\t\t\t// Cannot modify startup-time collection elements anymore (for stable iteration)\n\t\t\t\tsynchronized (this.beanDefinitionMap) {\n\t\t\t\t\tthis.beanDefinitionMap.put(beanName, beanDefinition);\n\t\t\t\t\tList\u0026lt;String\u0026gt; updatedDefinitions = new ArrayList\u0026lt;\u0026gt;(this.beanDefinitionNames.size() + 1);\n\t\t\t\t\tupdatedDefinitions.addAll(this.beanDefinitionNames);\n\t\t\t\t\tupdatedDefinitions.add(beanName);\n\t\t\t\t\tthis.beanDefinitionNames = updatedDefinitions;\n\t\t\t\t\tremoveManualSingletonName(beanName);\n\t\t\t\t}\n\t\t\t}\n\t\t\telse {\n\t\t\t\t// Still in startup registration phase\n\t\t\t\tthis.beanDefinitionMap.put(beanName, beanDefinition);\n\t\t\t\tthis.beanDefinitionNames.add(beanName);\n\t\t\t\tremoveManualSingletonName(beanName);\n\t\t\t}\n\t\t\tthis.frozenBeanDefinitionNames = null;\n\t\t}\n\n\t\tif (existingDefinition != null || containsSingleton(beanName)) {\n\t\t\tresetBeanDefinition(beanName);\n\t\t}\n\t\telse if (isConfigurationFrozen()) {\n\t\t\tclearByTypeCache();\n\t\t}\n\t}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其中这一段代码 \u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e\n\tif (hasBeanCreationStarted()) {\n\t\t\t\t// Cannot modify startup-time collection elements anymore (for stable iteration)\n\t\t\t\tsynchronized (this.beanDefinitionMap) {\n\t\t\t\t\tthis.beanDefinitionMap.put(beanName, beanDefinition);\n\t\t\t\t\tList\u0026lt;String\u0026gt; updatedDefinitions = new ArrayList\u0026lt;\u0026gt;(this.beanDefinitionNames.size() + 1);\n\t\t\t\t\tupdatedDefinitions.addAll(this.beanDefinitionNames);\n\t\t\t\t\tupdatedDefinitions.add(beanName);\n\t\t\t\t\tthis.beanDefinitionNames = updatedDefinitions;\n\t\t\t\t\tremoveManualSingletonName(beanName);\n\t\t\t\t}\n\t\t\t}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e不太明白为啥还得判断容器是否存活，但是断点下来确实走的 else \u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e\telse {\n\t\t\t// Still in startup registration phase\n\t\t\tthis.beanDefinitionMap.put(beanName, beanDefinition);\n\t\t\tthis.beanDefinitionNames.add(beanName);\n\t\t\tremoveManualSingletonName(beanName);\n\t\t}\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e希望大家能给解答一下，万分感谢 ！\u003c/p\u003e\n",
+      "Author": "liuyunlong",
+      "PubDate": "2023-08-30T02:31:44Z"
+    },
+    {
+      "Title": "v2ex 深色模式闪烁 - 问与答",
+      "Link": "https://www.v2ex.com/t/969399",
+      "Description": "在点击不同的链接或者 tab 时，会出现闪现一下白色模式，然后瞬间变深色，结果就是网页闪了一下，因为不是一直都有，不好录屏，不知道有没有遇到相同情况的？",
+      "Author": "renyijiu",
+      "PubDate": "2023-08-30T02:28:58Z"
+    },
+    {
+      "Title": "请教没有公网 IP，如何在办公室搭建一个可以外部访问的 V-P-N？ - 问与答",
+      "Link": "https://www.v2ex.com/t/969398",
+      "Description": "\u003cp\u003e坐标深圳，需求源自于公司内部要安装一个安全加密系统，需要访问服务器，但是服务器在一个办公室内，而使用加密系统的在另外的办公室，不是同一个网络。\u003c/p\u003e\n\u003cp\u003e安全加密系统的服务商采购了一个防火墙，可以搭建 V-P-N ，但是得需要公网 IP ，然而公司的网络属于普通的 ADSL 网络，没有公网 IP 。  \u003c/p\u003e\n\u003cp\u003e咨询了下，公网 IP 需要每个月加 100 元。但是这个公网 IP 也是会变的吧？\n如果是专线的话，价格估计要上千块钱一年，而且带宽还小。\u003c/p\u003e\n\u003cp\u003e请教还有其他的办法吗？\u003c/p\u003e\n",
+      "Author": "xyxc0673",
+      "PubDate": "2023-08-30T02:28:52Z"
+    },
+    {
+      "Title": "企业的跨境 访问 google 一类的设备 大家有什么推荐吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/969397",
+      "Description": "",
+      "Author": "Vientoo",
+      "PubDate": "2023-08-30T02:28:36Z"
+    },
+    {
+      "Title": "一晚上机场流量 100G - 路由器",
+      "Link": "https://www.v2ex.com/t/969396",
+      "Description": "\u003cp\u003e前几天宽带 ipv6 没了，重新设置路由拨号开启 ipv6 。但是路由梅林猫咪插件一晚上跑了 100G 机场流量。个人猜测跟 PT 发种走 ipv6 有关。是在插件里设置 NAS 不走代理吗？\u003c/p\u003e\n",
+      "Author": "nandie",
+      "PubDate": "2023-08-30T02:28:09Z"
+    },
+    {
+      "Title": "微信的视频号小店好像使用率不高啊，为什么呢？ - 互联网",
+      "Link": "https://www.v2ex.com/t/969394",
+      "Description": "\u003cp\u003e无意冒犯、引战。想调研一下市场，很多产品凉了但是“秘而不发”，隔几个月不调研都不知道是什么情况。\u003c/p\u003e\n\u003cp\u003e有赞凉了吗？我看网上说市值蒸发了 90%，大规模裁员。不知道还剩下多少产品在运营。还是被微信铲除了？\u003c/p\u003e\n\u003cp\u003e最近两年新出的，微信小商店凉了吗？还是合并到视频号小店了？\u003c/p\u003e\n\u003cp\u003e视频号小店能多大程度上取代微信小程序自建的商店？感觉还是小程序里面的用得多\u003c/p\u003e\n\u003cp\u003e视频号小店有没有和抖音商店那些产生差异化竞争？差异在哪呢？\u003c/p\u003e\n",
+      "Author": "revalue",
+      "PubDate": "2023-08-30T02:27:26Z"
+    },
+    {
       "Title": "支持 google play 和 gpay 的手机？ - 问与答",
       "Link": "https://www.v2ex.com/t/969393",
       "Description": "\u003cp\u003e目前自己的手机是小米 8 ，屏幕指纹版\u003c/p\u003e\n\u003cp\u003e之前 miui 强制升级，结果用不了 google play, 然后 unlock 解锁刷了 miui 国际版，才能继续用...\u003c/p\u003e\n\u003cp\u003e最近，发现要用 google pay ，发现不支持（解锁后安全验证通不过）；装 Magisk 啥的也不太会，淘宝也不接单...\u003c/p\u003e\n\u003cp\u003e想着等年底过段时间换个手机\u003c/p\u003e\n\u003cp\u003e不知道目前有什么手机比较通用、比较好？ iphone 的话感觉还是不考虑了...\u003c/p\u003e\n",
