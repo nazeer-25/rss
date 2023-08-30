@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于 macos 内存压缩的疑问, 压缩后的内存是储存在物理内存上吗? - macOS</title>
+      <link>https://www.v2ex.com/t/969594</link>
+      <description>&lt;p&gt;&lt;img alt=&#34;ScreenShot2023-08-30at8.33.20PM&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://pub-efbd4bc93de642f9a55d686f65dda39c.r2.dev/uPic/ScreenShot%202023-08-30%20at%208.33.20%20PM.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;ScreenShot2023-08-30at8.35.17PM&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://pub-efbd4bc93de642f9a55d686f65dda39c.r2.dev/uPic/ScreenShot%202023-08-30%20at%208.35.17%20PM.jpg&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;找了很多资料, 都没有很清晰的解释这个压缩内存到底是怎么回事, 问智障 GPT 直接说压缩后储存到硬盘上面去了, 直觉告诉我事情没有那么简单, 把内存交换到硬盘应该是 swap 做的事情, 而图中压缩内存应该另有玄机, 根据系统自带的进程管理器可以看到使用内存包括了应用内存锁定内存和压缩内存, 三者刚好比物理内存少 4GB, 这 4GB 被缓存文件占用了(常用文件缓存到内存提高加载速度, 比如一个 pdf 文件被 A 软件打开会缓存到内存, 此时其他软件也打开这个文件加载速度就很快了), 操作系统也就是内核占用的内存在锁定内存中(Wired Mem), 而如果这里面的 16GB 压缩内存不在物理内存而是储存在磁盘上面那物理内存空出来的 16GB 内存被谁给用了呢, 再看另外一款监控软件, 显示内存 Other 占用 16GB, 这刚好就是压缩内存大小, 所有这部分压缩内存就是储存在物理内存上的, 同时压缩内存越多表示内存负荷越高, 因为使用到压缩内存是需要实时解压缩同时还要压缩别的空闲内存给解压缩的内存腾挪出位置, 这一切都是在物理内存上完成的. &lt;/p&gt;&#xA;&lt;p&gt;但是图一末尾还要一项 Swap Used: 14.69GB, 我的理解是它并不跟压缩内存重合, 而是把压缩内存中闲置时间过长未使用的内存交换到磁盘了, 同时会腾出物理内存, 而压缩内存则是可能会在近期用到的内存.&lt;/p&gt;&#xA;&lt;p&gt;简单来说 macos 内存走向就是, 应用内存 -&amp;gt; 不活动 -&amp;gt; 压缩内存 -&amp;gt; 此时有两种情况:&#xA;1.应用唤醒 -&amp;gt; 解压缩内存 -&amp;gt; 应用内存&#xA;2.应用长时间未被唤醒 -&amp;gt; 压缩内存交换到磁盘 -&amp;gt; 物理内存腾挪出空间供新的应用内存或解压缩内存使用&lt;/p&gt;&#xA;&lt;p&gt;这样才能解释很多人说的 8GB 可以用出 16GB 的效果, 当然我没有用过 16GB 一下的机型, 其中吹嘘成分应该比较大, 如果仅仅靠 swap 技术很难做到无感知, Windows 内存管理没有怎么研究, 但是凭借我的使用体验绝对不是 macos 这种方式, linux 上面有种 zram 的内存内压缩但是好像没有流行开来, 这个技术我觉得跟 iOS 的墓碑机制一样需要 SDK 配合分析应用的行为来决定压缩内存的策略, 不然实际使用问题多多.&lt;/p&gt;&#xA;</description>
+      <author>touchmii</author>
+      <pubDate>30 Aug 2023 13:03:53 +0000</pubDate>
+    </item>
+    <item>
+      <title>公司的项目需要经常更新依赖吗？ - 前端开发</title>
+      <link>https://www.v2ex.com/t/969592</link>
+      <description>&lt;p&gt;RT ，一般更新的频率是多久呢？还是说只要能跑，就尽量不更新，一更新可能就会出现各种问题。&lt;/p&gt;&#xA;</description>
+      <author>fqy12300</author>
+      <pubDate>30 Aug 2023 13:00:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>使用 clash 开启代理之后，微信无法发送图片 - macOS</title>
+      <link>https://www.v2ex.com/t/969591</link>
+      <description>&lt;p&gt;坐标上海，电信网络 macOS 13.5 系统，Clash 选择 rule 模式开启代理之后微信可以正常文字聊天，但是对方发的表情包一直在菊花加载，然后发送出去的图片无法发送成功，都是感叹号状态。&#xA;切换过不同机场的节点，检查过 clash 的规则 wechat 是在 direct 直连规则下的。&#xA;有没有 v 友碰到过类似情况呢，我 4 月份在上海的时候还正常使用，八月底回到上海之后就出现了这种情况&lt;/p&gt;&#xA;</description>
+      <author>ZOUHUGO</author>
+      <pubDate>30 Aug 2023 12:58:40 +0000</pubDate>
+    </item>
+    <item>
       <title>求问国产手机哪款不上传 APP 列表 - 问与答</title>
       <link>https://www.v2ex.com/t/969590</link>
       <description>小弟我最近用手机下了个 APP ，马上被反诈中心风控，被打电话了解情况以及进一步的沟通。&lt;br /&gt;为什么说是因为下了 APP 导致的，因为沟通时表格上写着“下载 xxAPP”&lt;br /&gt;想问一下各位，还有什么国产手机不上传应用列表？隐私稍微好一点？&lt;br /&gt;&lt;br /&gt;注 1: 先不考虑苹果是因为安卓的很多小功能苹果没有，难受&lt;br /&gt;&lt;br /&gt;注 2: 我用的小米手机，MIUI14.04 ，关闭了所有能关的安全验证，比如安装 APP 时的安全校验等，也没有安装过反诈中心之类的软件&lt;br /&gt;&lt;br /&gt;最后，请大家给一些手机建议，但不要抨击已有环境，毕竟咱还在这里生活，问大家也是没有办法的事了</description>
