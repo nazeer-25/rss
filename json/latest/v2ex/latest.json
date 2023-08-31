@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教一个 ssh 连接服务器启动 jar 包字符集的问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/969870",
+      "Description": "\u003cp\u003e事情的经过如下（手机发的格式略乱）：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e自己的博客之前都是本地 maven 打包后，再用 mobaxterm 远程连接阿里云服务器，执行 java -jar 命令来启动的。博客里有文件上传和读取的代码，在之前（一年多）都是正常没有任何问题的。21 号的时候用家里的新电脑更新了一些代码，把博客重新部署了一下，直接用 ssh 连接上去的。\u003c/li\u003e\n\u003cli\u003e前几天在公司没事的时候用公司的 windows 电脑上的 mobaxterm 连到 r 服务器上看了下最近的日志，发现出现了很多文件读取异常（ No Such File Or Directory ）。而且观察下来发现都是中文文件读取不到了。再看了下 nginx 日志，发现很多非正常的请求，我一开始还以为是服务器被攻击把我服务器上的文件给删了导致的。去看了下文件也全都还在，便开始找其他原因。\u003c/li\u003e\n\u003cli\u003e正好当时有另外一个 bug 需要修复，于是准备先把这个 bug 修复了再慢慢去看这个文件读取问题，结果，用公司电脑重新打包上传到服务器重新启动后，文件读取失败的问题消失了。\u003c/li\u003e\n\u003cli\u003e后来用家里新电脑打了个包上传到服务器部署，然后用 jinfo 命令查看启动信息，发现里面的 file.encoding 以及 shn.jnu.encoding 都不是 UTF-8 ，而是一个叫做 ansi_x3.4-1968 的字符集。然后用公司电脑上传部署，再用 jinfo 查看，字符集就全是 UTF-8 了。\u003c/li\u003e\n\u003cli\u003e于是问题也就确定了，以前上传文件的时候是 UTF-8 编码的，现在字符集变了也就导致读取文件时找不到原来的文件了。\u003c/li\u003e\n\u003cli\u003e经过一番搜索后，有一篇文章提到了是因为 ssh 客户端的字符集不同导致的，大概意思就是 jar 包启动的时候读取的环境变量取决于 ssh 客户端。于是我也验证了一下，把家里电脑设置了环境变量 \u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003eexport LANG=en_US.UTF-8 \u003c/p\u003e\n\u003cp\u003eexport LC_ALL=en_US.UTF-8\u003c/p\u003e\n\u003cp\u003e然后重新 ssh 连接服务器重新启动 jar 包，文件读取失败的问题就消失了，jinfo 查看字符集也变成 UTF-8 了。\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e问题找到了，最好的解决办法就是启动的时候自己手动指定字符集。但是我还是没想明白，为什么启动的时候读取的是我 ssh 客户端的环境变量配置，而不是我的服务器本机配置呢？\u003c/p\u003e\n",
+      "Author": "hsuyeung",
+      "PubDate": "2023-08-31T12:15:41Z"
+    },
+    {
+      "Title": "百度正式发布了文心一言，相比于 chatgpt 和 bing ai 体验怎么样？ - 程序员",
+      "Link": "https://www.v2ex.com/t/969869",
+      "Description": "\u003cp\u003e2023 年 8 月 31 日，百度宣布文心一言率先向全社会全面开放，可下载 “文心一言 APP” 或登陆 \u003ca href=\"https://yiyan.baidu.com\" rel=\"nofollow\"\u003e“文心一言官网”\u003c/a\u003e 体验。 \u003c/p\u003e\n\u003cp\u003e文心一言，相比于 \u003ccode\u003echatgpt\u003c/code\u003e 和 \u003ccode\u003ebing ai\u003c/code\u003e 体验怎么样？有什么特色吗？\u003c/p\u003e\n",
+      "Author": "Wikey",
+      "PubDate": "2023-08-31T12:09:15Z"
+    },
+    {
+      "Title": "平白无故就被删号了是怎么回事？ - 问与答",
+      "Link": "https://www.v2ex.com/t/969868",
+      "Description": "每天连续上站打卡，今天发了一个帖子，讲自己的真实感受，就被一些人骂引战，然后号就登不上了。\u003cbr /\u003e现在用户 id 还有，是不是被杀档了？\u003cbr /\u003e我也没虚构事实，都是自己碰到的真实情况，这是为啥啊？",
+      "Author": "zib",
+      "PubDate": "2023-08-31T12:06:43Z"
+    },
+    {
+      "Title": "想花钱支持正版太难了 - 分享发现",
+      "Link": "https://www.v2ex.com/t/969867",
+      "Description": "\u003col\u003e\n\u003cli\u003e看到有趣的漫画，想买正版支持一下作者\u003c/li\u003e\n\u003cli\u003e找到作者的 twitter 账号\u003c/li\u003e\n\u003cli\u003e找到作品的推文，根据上面的商品链接跳转电商网站\u003c/li\u003e\n\u003cli\u003e注册商城账号，发现要日本 IP\u003c/li\u003e\n\u003cli\u003e登入亚麻云日本机房的服务器，搭建代理服务器\u003c/li\u003e\n\u003cli\u003e浏览器连上代理\u003c/li\u003e\n\u003cli\u003e注册商城账号\u003c/li\u003e\n\u003cli\u003e发现漫画只有纸质版，没有电子版，放弃购买\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "richangfan",
+      "PubDate": "2023-08-31T12:06:24Z"
+    },
+    {
+      "Title": "有大佬给叮咚音箱刷机吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/969866",
+      "Description": "",
+      "Author": "xiaolushuo123",
+      "PubDate": "2023-08-31T12:04:50Z"
+    },
+    {
+      "Title": "内网穿透的服务器有推荐吗？亦或者各位 NSAer，外网访问可有好的办法？ - 问与答",
+      "Link": "https://www.v2ex.com/t/969865",
+      "Description": "\u003cp\u003e家里的 NAS 马上要搬到新的房子了。\n在选择新装的宽带运营商选择上，犯了难。\n坐标宁波\n中国电信：目前家中使用的就是，从前申请到的动态公网 IP ，可以直接端口映射，使用体验很棒，虽然是 30M 上行。但是新装不清楚是否还能下发公网 IP 。\n中国联通：好便宜，但是官网渠道咨询是没有提供公网 IP 的，只能 pass 。\n中国移动：无。\nIPv6 ，因为外网使用环境无 v6 ，所以~~~没法选择。\n如果用 FRP 服务，那大于 30M 带宽的价廉物美的中转服务器，可有推荐？\n其它还有什么好办法么？感谢各位出谋划策。\u003c/p\u003e\n",
+      "Author": "xceszzy",
+      "PubDate": "2023-08-31T12:02:13Z"
+    },
+    {
       "Title": "9.16 深圳腾讯大厦，对 TVM、MLIR 感兴趣的朋友，欢迎来参加技术分享会 - 分享发现",
       "Link": "https://www.v2ex.com/t/969863",
       "Description": "\u003cp\u003e\u003cstrong\u003e比较适合关注机器学习编译、AI 编译器以及芯片开发的工程师，\u003c/strong\u003e3 月 6 月分别在上海跟北京办的 Meetup ，Q3 来到了深圳，预计 Q4 去杭州，感兴趣的朋友欢迎来线下玩！\u003c/p\u003e\n\u003cp\u003e[日程详情] \u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://p.ipic.vip/xk212c.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e为了保证到场率并 cover 一部分活动费用，我们象征性收了 ￥ 19.9 的门票钱，还请有缘人理解吧\u003c/p\u003e\n\u003cp\u003e[活动报名] \u003ca href=\"https://www.huodongxing.com/event/8717490707300\" rel=\"nofollow\"\u003eHere\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e更多详情：\u003ca href=\"https://mp.weixin.qq.com/s/Y2yrXlBpIWFrHdORmTKXiQ\" rel=\"nofollow\"\u003e活动预告 | 2023 Meet TVM · 深圳站定档 ，邀您共赴一场最前沿的 AI 编译器技术之旅！\u003c/a\u003e\u003c/p\u003e\n",

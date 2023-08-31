@@ -102,13 +102,6 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "Go开发也可以很简单，一键安装立马可以业务开发",
-      "Link": "https://studygolang.com/topics/16651#reply2",
-      "Description": "\u003cp\u003e下载代码\u003ca href=\"https://goflys.cn/prdetail?id=6\"\u003ehttps://goflys.cn/prdetail?id=6\u003c/a\u003e运行go，\n访问\u003ca href=\"http://localhost:8105/common/install/index\"\u003ehttp://localhost:8105/common/install/index\u003c/a\u003e安装即可。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230829/3bfaaec26c0f22f531c5996985f1db17.jpg\" alt=\"ys_n20230827031218.jpg\" /\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
       "Title": "高性能分布式数据库 tldb",
       "Link": "https://studygolang.com/resources/15591#reply0",
       "Description": "",
@@ -140,6 +133,20 @@
       "Title": "公链系统go语言开发基本搭建思路分享",
       "Link": "https://studygolang.com/topics/16655#reply0",
       "Description": "\u003cp\u003e当涉及到公链系统的开发，涉及到的方面非常广泛，包括共识算法、网络通信、加密算法、数据存储等多个方面。下面是一个简单的示例代码，展示了如何使用Go语言创建一个基本的公链系统。\u003c/p\u003e\n\n\u003cp\u003epackage main\u003c/p\u003e\n\n\u003cp\u003eimport (\u003cbr\u003e\n \u0026ldquo;crypto/sha256\u0026rdquo;\u003cbr\u003e\n \u0026ldquo;encoding/hex\u0026rdquo;\u003cbr\u003e\n \u0026ldquo;fmt\u0026rdquo;\u003cbr\u003e\n \u0026ldquo;time\u0026rdquo;\u003cbr\u003e\n)\u003c/p\u003e\n\n\u003cp\u003e// 定义区块结构体\u003cbr\u003e\ntype Block struct {\u003cbr\u003e\n Index     int\u003cbr\u003e\n Timestamp string\u003cbr\u003e\n Data      string\u003cbr\u003e\n Hash      string\u003cbr\u003e\n}\u003c/p\u003e\n\n\u003cp\u003e// 计算区块的哈希值\u003cbr\u003e\nfunc calculateHash(block Block) string {  【完整逻辑开发搭建可看我昵称】\n data := string(block.Index) + block.Timestamp + block.Data\u003cbr\u003e\n hash := sha256.Sum256([]byte(data))\u003cbr\u003e\n return hex.EncodeToString(hash[:])\u003cbr\u003e\n}\u003c/p\u003e\n\n\u003cp\u003e// 生成新的区块\u003cbr\u003e\nfunc generateBlock(prevBlock Block, data string) Block {\u003cbr\u003e\n timestamp := time.Now().String(【完整逻辑开发搭建可看我昵称】)\u003cbr\u003e\n block := Block{\u003cbr\u003e\n Index:     prevBlock.Index + 1,\u003cbr\u003e\n Timestamp: timestamp,\u003cbr\u003e\n Data:      data,\u003cbr\u003e\n Hash:      \u0026ldquo;\u0026rdquo;,\u003cbr\u003e\n }\u003cbr\u003e\n block.Hash = calculateHash(block)\u003cbr\u003e\n return block\u003cbr\u003e\n}\u003c/p\u003e\n\n\u003cp\u003efunc main() {\u003cbr\u003e\n // 创建创世块\u003cbr\u003e\n genesisBlock := generateBlock(Block{}, \u0026ldquo;Genesis Block\u0026rdquo;)\u003cbr\u003e\n fmt.Println(\u0026ldquo;Genesis Block:\u0026rdquo;, genesisBlock)\u003c/p\u003e\n\n\u003cp\u003e// 创建新的区块\u003cbr\u003e\n newBlock := generateBlock(genesisBlock, \u0026ldquo;New Block Data\u0026rdquo;)\u003cbr\u003e\n fmt.Println(\u0026ldquo;New Block:\u0026rdquo;, newBlock)\u003cbr\u003e\n}\u003c/p\u003e\n\n\u003cp\u003e这段代码定义了一个简单的公链系统，其中包含一个Block结构体表示区块，以及calculateHash函数用于计算区块的哈希值，generateBlock函数用于生成新的区块。在main函数中，首先创建了创世块，然后创建了一个新的区块。\u003c/p\u003e\n\n\u003cp\u003e请注意，这只是一个简单的示例代码，实际的公链系统要复杂得多，涉及到更多的功能和安全性考虑。上述代码没有涉及到共识算法、网络通信、数据存储等关键部分。在实际开发中，您需要深入了解区块链技术并使用更加完整和健壮的框架或库来构建公链系统。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "合约量化跟单自动交易[双均线策略]系统开发源码设计实现",
+      "Link": "https://studygolang.com/topics/16654#reply0",
+      "Description": "\u003cp\u003e以下是一个简单的双均线策略的示例代码，用于说明如何设计和实现量化交易策略：\u003c/p\u003e\n\n\u003cp\u003eimport pandas as pd\u003cbr\u003e\nimport numpy as np\u003cbr\u003e\nimport talib\u003c/p\u003e\n\n\u003ch1\u003e读取历史数据\u003c/h1\u003e\n\n\u003cp\u003edata = pd.read_csv(\u0026lsquo;stock_data.csv\u0026rsquo;)  【完整源码搭建开发可看我昵称】\u003c/p\u003e\n\n\u003ch1\u003e计算均线\u003c/h1\u003e\n\n\u003cp\u003eshort_mavg = talib.SMA(data[\u0026lsquo;Close\u0026rsquo;], timeperiod=5)\u003cbr\u003e\nlong_mavg = talib.SMA(data[\u0026lsquo;Close\u0026rsquo;], timeperiod=30)\u003c/p\u003e\n\n\u003ch1\u003e生成交易信号\u003c/h1\u003e\n\n\u003cp\u003esignal = np.where(short_mavg \u0026gt; long_mavg, 1, 0)\u003c/p\u003e\n\n\u003ch1\u003e计算持仓和收益\u003c/h1\u003e\n\n\u003cp\u003eposition = np.zeros(len(data))\u003cbr\u003e\nreturns = np.zeros(len(data))\u003c/p\u003e\n\n\u003cp\u003efor i in range(1, len(data)):  【完整源码搭建开发可看我昵称】\n    if signal[i] == 1:\u003cbr\u003e\n        position[i] = 1\u003cbr\u003e\n        returns[i] = data[\u0026lsquo;Close\u0026rsquo;][i] / data[\u0026lsquo;Close\u0026rsquo;][i-1] - 1\u003cbr\u003e\n    else:\u003cbr\u003e\n        position[i] = 0\u003cbr\u003e\n        returns[i] = 0\u003c/p\u003e\n\n\u003ch1\u003e计算累计收益\u003c/h1\u003e\n\n\u003cp\u003ecum_returns = np.cumprod(returns)\u003c/p\u003e\n\n\u003ch1\u003e输出结果\u003c/h1\u003e\n\n\u003cp\u003eprint(\u0026lsquo;累计收益:\u0026rsquo;, cum_returns[-1])\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go开发也可以很简单，一键安装立马可以业务开发",
+      "Link": "https://studygolang.com/topics/16651#reply2",
+      "Description": "\u003cp\u003e下载代码\u003ca href=\"https://goflys.cn/prdetail?id=6\"\u003ehttps://goflys.cn/prdetail?id=6\u003c/a\u003e运行go，\n访问\u003ca href=\"http://localhost:8105/common/install/index\"\u003ehttp://localhost:8105/common/install/index\u003c/a\u003e安装即可。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230829/3bfaaec26c0f22f531c5996985f1db17.jpg\" alt=\"ys_n20230827031218.jpg\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -266,13 +273,6 @@
       "Title": "2023年上网如何科学出入Gu歌,游Tube,推Te等web,并实现ChatGPT自由看这里",
       "Link": "https://studygolang.com/topics/16650#reply2",
       "Description": "\u003cp\u003e\u003cstrong\u003e\u003ca href=\"https://www.chainuk.top\"\u003e点击这里直达官网\u003c/a\u003e\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e\u003ca href=\"https://buy.chainjc.app\"\u003e点击这里订购套餐\u003c/a\u003e\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e这款梯子子专门支持上 ChatGPT，Google，Instrgam,Youtube, Twitter等 99% 外网的好梯子\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e一、稳定，隐蔽，安全\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e非常适合国内用户上外网使用，有多个节点多地区可以选择，在国内使用表现很稳定，很少出问题,搭配XTLS双向加密协议，上网安全隐蔽，梯子界的黑科技，可以隐藏本地IP\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e二、性价比\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e这家的话在这个服务器质量上，价格真心划算，有一个性价比套餐特别划算，我自己用这款套餐2年多了，确实很划算，主要是上网稳定省心。\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e三、有技术售后\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e这点特别重要，有在线售后真的是特别省心，可以解决遇到的所有问题和疑问，没有售后的Ti子，出了问题只能自己瞎琢磨，两眼一抹黑，这家全程售后，小白也不怕，很细心的给人指导怎么连接。\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e\u003ca href=\"https://www.chainuk.top\"\u003e点击直达官网\u003c/a\u003e\u003c/strong\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e\u003ca href=\"https://buy.chainjc.app\"\u003e点击订购套餐\u003c/a\u003e\u003c/strong\u003e\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "合约量化跟单自动交易[双均线策略]系统开发源码设计实现",
-      "Link": "https://studygolang.com/topics/16654#reply0",
-      "Description": "\u003cp\u003e以下是一个简单的双均线策略的示例代码，用于说明如何设计和实现量化交易策略：\u003c/p\u003e\n\n\u003cp\u003eimport pandas as pd\u003cbr\u003e\nimport numpy as np\u003cbr\u003e\nimport talib\u003c/p\u003e\n\n\u003ch1\u003e读取历史数据\u003c/h1\u003e\n\n\u003cp\u003edata = pd.read_csv(\u0026lsquo;stock_data.csv\u0026rsquo;)  【完整源码搭建开发可看我昵称】\u003c/p\u003e\n\n\u003ch1\u003e计算均线\u003c/h1\u003e\n\n\u003cp\u003eshort_mavg = talib.SMA(data[\u0026lsquo;Close\u0026rsquo;], timeperiod=5)\u003cbr\u003e\nlong_mavg = talib.SMA(data[\u0026lsquo;Close\u0026rsquo;], timeperiod=30)\u003c/p\u003e\n\n\u003ch1\u003e生成交易信号\u003c/h1\u003e\n\n\u003cp\u003esignal = np.where(short_mavg \u0026gt; long_mavg, 1, 0)\u003c/p\u003e\n\n\u003ch1\u003e计算持仓和收益\u003c/h1\u003e\n\n\u003cp\u003eposition = np.zeros(len(data))\u003cbr\u003e\nreturns = np.zeros(len(data))\u003c/p\u003e\n\n\u003cp\u003efor i in range(1, len(data)):  【完整源码搭建开发可看我昵称】\n    if signal[i] == 1:\u003cbr\u003e\n        position[i] = 1\u003cbr\u003e\n        returns[i] = data[\u0026lsquo;Close\u0026rsquo;][i] / data[\u0026lsquo;Close\u0026rsquo;][i-1] - 1\u003cbr\u003e\n    else:\u003cbr\u003e\n        position[i] = 0\u003cbr\u003e\n        returns[i] = 0\u003c/p\u003e\n\n\u003ch1\u003e计算累计收益\u003c/h1\u003e\n\n\u003cp\u003ecum_returns = np.cumprod(returns)\u003c/p\u003e\n\n\u003ch1\u003e输出结果\u003c/h1\u003e\n\n\u003cp\u003eprint(\u0026lsquo;累计收益:\u0026rsquo;, cum_returns[-1])\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
