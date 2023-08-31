@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教：关于 PHP -fpm 进程疑似陷入 stuck 的排查 - PHP</title>
+      <link>https://www.v2ex.com/t/969689</link>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;兄弟的公司所 to B 业务&lt;br/&gt;&#xA;后端大概就是 pg + nignx + php-fpm&lt;br/&gt;&#xA;偶然会遇到这么个问题很好奇，所以来请教 v 站的大佬们，希望各位大佬不吝赐教！&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;fpm 配置&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;贴上编译信息 + 运行配置, &lt;code&gt;php.ini&lt;/code&gt;是默认配置就不贴了&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;pre&gt;&lt;code&gt;# 版本&#xA;PHP 7.4.20 (cli) (built: Nov 29 2021 15:48:06) ( NTS )&#xA;Copyright (c) The PHP Group&#xA;Zend Engine v3.4.0, Copyright (c) Zend Technologies&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;# 编译信息&#xA;./configure  --prefix=/usr/local/php7 --exec-prefix=/usr/local/php7 --bindir=/usr/local/php7/bin --sbindir=/usr/local/php7/sbin --includedir=/usr/local/php7/include --libdir=/usr/local/php7/lib/php --mandir=/usr/local/php7/php/man --with-mhash --with-openssl --with-mysqli=shared,mysqlnd --with-pdo-mysql=shared,mysqlnd --enable-gd --with-iconv --with-zlib --with-zip --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-xml --enable-bcmath --enable-shmop --enable-sysvsem --enable-mbregex --enable-mbstring --enable-ftp --enable-pcntl --enable-sockets --with-xmlrpc --enable-soap --without-pear --with-gettext --enable-session --with-curl --with-jpeg --with-freetype --enable-opcache --enable-fpm --with-fpm-user=nginx --with-fpm-group=nginx --without-gdbm --disable-fileinfo PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;pre&gt;&lt;code&gt;# 配置&#xA;  [www]&#xA;user = nginx&#xA;group = nginx&#xA;listen = 127.0.0.1:9000&#xA;pm = dynamic&#xA;pm.max_children = 12&#xA;pm.start_servers = 2&#xA;pm.min_spare_servers = 1&#xA;pm.max_spare_servers = 3&#xA;pm.max_requests = 300&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;现象&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这个部分目前我没法定位到问题，目前没有办法复现，使用一段时间后&lt;code&gt;有概率&lt;/code&gt;出现，重启&lt;code&gt;fpm&lt;/code&gt;可解决&lt;br/&gt;&#xA;贴一个案例的现象，因为无法复现，无法贴上排查的屏显&lt;br/&gt;&#xA;服务器 &lt;code&gt;10C16G&lt;/code&gt;, 主频 &lt;code&gt;3.7GHz&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;用户反映每次刷新页面等待的时间是往常的&lt;code&gt;2 倍&lt;/code&gt;以上。(证实描述不虚)。&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;disk&lt;/code&gt;、&lt;code&gt;pg&lt;/code&gt;、&lt;code&gt;redis&lt;/code&gt;、&lt;code&gt;nginx&lt;/code&gt;都挺正常，因为每次都是重启&lt;code&gt;fpm&lt;/code&gt;能解决，应该排除了。&lt;/li&gt;&#xA;&lt;li&gt;内存：&lt;code&gt;free -h&lt;/code&gt;显示 avaliable 还有&lt;code&gt;1/3&lt;/code&gt;以上。&lt;/li&gt;&#xA;&lt;li&gt;CPU：&lt;code&gt;top&lt;/code&gt;显示平均负载在&lt;code&gt;8-10&lt;/code&gt;之间，cpu 占用高的都是&lt;code&gt;fpm&lt;/code&gt;进程。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;重点就是 cpu 平均负载满了，感觉像是某个进程陷入了死锁，一直在占用 cpu 时间，现在想了解的是：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;出现这种情况应该结合什么技能排查(能有具体案例就最好了)？&lt;/li&gt;&#xA;&lt;li&gt;是否需要后端代码层面植入什么&lt;code&gt;print stack&lt;/code&gt;机制？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;最后感谢各位路过，赐教的 V 站大佬们！&lt;/p&gt;&#xA;</description>
+      <author>skvi</author>
+      <pubDate>31 Aug 2023 02:57:32 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有哪位好哥哥给出个解决方法 - Apple</title>
+      <link>https://www.v2ex.com/t/969688</link>
+      <description>我是两个苹果手机  这个手机开热点 那个手机连 但是放下手机等一小会 就自动断开了。求好哥哥给个解决办法谢谢🙏 好人一生平安</description>
+      <author>marqueriteparler</author>
+      <pubDate>31 Aug 2023 02:56:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>现在哪个会议软件国内国外一起用体验最好？ - 程序员</title>
+      <link>https://www.v2ex.com/t/969687</link>
+      <description>视频音频延迟最小，还有屏幕共享，然后移动端和 pc 端兼顾</description>
+      <author>289396212</author>
+      <pubDate>31 Aug 2023 02:55:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>写了一个脚本，帮助你在 Mac 上一键安装 Stable Diffusion，体验 AI 绘画 - 分享创造</title>
+      <link>https://www.v2ex.com/t/969686</link>
+      <description>&lt;p&gt;之前帮公司设计装 SD ，后面想干脆写个脚本，一键安装。虽然咱们这里程序员居多，但还是和大家分享一下，欢迎讨论，共同进步。&lt;/p&gt;&#xA;&lt;h2&gt;使用方法&lt;/h2&gt;&#xA;&lt;p&gt;打开&lt;strong&gt;终端&lt;/strong&gt;后执行以下命令即可自动安装&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;/bin/bash -c &#34;$(curl -fsSL https://raw.githubusercontent.com/wy-luke/StableDiffusion-Installer-For-Mac/main/sd-installer.sh)&#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;当然，网络原因可以使用以下命令，但是后续安装可能也会由于网络原因失败，建议先保证网络通畅&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;/bin/bash -c &#34;$(curl -fsSL https://raw.fastgit.org/wy-luke/StableDiffusion-Installer-For-Mac/main/sd-installer.sh)&#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;更详细的使用说明可以看&lt;a href=&#34;https://github.com/wy-luke/StableDiffusion-Installer-For-Mac/blob/main/README_CN.md&#34; rel=&#34;nofollow&#34;&gt;这里&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;特性&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;使用 &lt;code&gt;Homebrew&lt;/code&gt; 安装一些系统依赖&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;使用 &lt;code&gt;Micromamba&lt;/code&gt; 作为 Python 包和环境管理工具。和 &lt;code&gt;Conda&lt;/code&gt; 比起来，没有 &lt;code&gt;Base&lt;/code&gt; 环境（为空），所以丝毫不会影响你的系统环境，而且更快。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;code&gt;Homebrew&lt;/code&gt; 和 &lt;code&gt;Micromamba&lt;/code&gt; 均不会被添加到你的系统环境中，保证你的系统清爽如初。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;项目&lt;a href=&#34;https://github.com/wy-luke/StableDiffusion-Installer-For-Mac&#34; rel=&#34;nofollow&#34;&gt;开源&lt;/a&gt;，欢迎提出问题，讨论分享，欢迎 Star ⭐️ ~~~&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>EatMi</author>
+      <pubDate>31 Aug 2023 02:54:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>在 little snitch 上，对 wps 进行 any connection reject， cpu 满负荷运行 - 问与答</title>
+      <link>https://www.v2ex.com/t/969684</link>
+      <description>&lt;p&gt;在 little snitch 上，对 wps 进行 any connection reject ，虽然能隔离网络，但是 cpu 满负荷运行，关闭 wps 后，cpu 立马恢复正常；换作 lulu ，同样是禁用 wps 的所有端口，cpu 一切都正常工作，同样可以实现 wps 完全隔离网络的效果&lt;/p&gt;&#xA;&lt;p&gt;对 wps 通过防火墙无非是想禁止 wps 的自动上传与同步，通过 little snitch 为什么在隔离网络的同时，wps 触发了什么进程，让 cpu 高负荷运行呢？&lt;/p&gt;&#xA;</description>
+      <author>adob51</author>
+      <pubDate>31 Aug 2023 02:52:11 +0000</pubDate>
+    </item>
+    <item>
       <title>Firefox 目前还有这种笔记扩展替代吗?（类似很多年前的 QuickFox Notes) - Firefox</title>
       <link>https://www.v2ex.com/t/969683</link>
       <description>&lt;p&gt;以前用了很长一段时间 Firefox 56.0 ，甚是怀念 QuickFox Notes 这个扩展...                       &lt;/p&gt;&#xA;&lt;p&gt;感叹一下，同时也觉得这些年，mozila 在版本迭代上用力猛，为了安全，规范越收越紧，好多扩展作者真的无法跟随节奏，以前一些很好的扩展，作者都应该觉得累了，卷不下去，看作者的 blog ，不是职业的 coder ，这些好扩展然后没了，就没了...                     &lt;/p&gt;&#xA;&lt;p&gt;1 、资料不沾上云存储&lt;br/&gt;&#xA;2 、在页面上选定文字，按快捷键，可以直接进 Notes （这个快捷方式是必须的）&lt;br/&gt;&#xA;3 、Notes 只存本地扩展管理的数据库里&lt;br/&gt;&#xA;4 、可以导出导入这些文字资料                              &lt;/p&gt;&#xA;&lt;p&gt;以前 QuickFox Notes 对收集待整理的文字，是以书签内容的方式存储在 Firefox ，后来 mozila 开通了账户同步功能后，其实也可以云同步笔记内容，只不过关了账户同步，不上云就可以了...&lt;/p&gt;&#xA;</description>
