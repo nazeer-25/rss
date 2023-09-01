@@ -67,6 +67,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "thrift的网络传输性能和需要注意的问题",
+      "Link": "https://studygolang.com/articles/36308#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "关于取minio的文件类型请帮忙指点一下",
       "Link": "https://studygolang.com/topics/16659#reply0",
       "Description": "\u003cpre\u003e\u003ccode\u003efunc ListObj() (fileInfo []ObjectType) {\n\tfileInfo = make([]ObjectType, 0)\n\tobjectCh := client.ListObjects(context.Background(), \u0026quot;cloud\u0026quot;, minio.ListObjectsOptions{\n\t\tRecursive: true,\n\t})\n\tfor fileObjects := range objectCh {\n\t\tif fileObjects.Err != nil {\n\t\t\tlog.Println(fileObjects.Err)\n\t\t\treturn nil\n\t\t}\n\t\tfileInfo = append(fileInfo, ObjectType{\n\t\t\tFileName: fileObjects.Key,\n\t\t\tFileType: fileObjects.ContentType,\n\t\t})\n\t\tfmt.Printf(\u0026quot;文件名:%s 文件类型:%s\\n\u0026quot;, fileObjects.Key,fileObjects.ContentType)\n\t}\n\treturn fileInfo\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e在调用fileObjects.ContentType的时候无法获取到ContentType的类型，请帮忙给指点一下谢谢\u003c/p\u003e\n\n\u003cp\u003e已经解决了:\n调用fileObjects.UserMetadata[\u0026ldquo;content-type\u0026rdquo;]\u003c/p\u003e\n",
@@ -98,13 +105,6 @@
       "Title": "BSC/ETH链节点质押挖矿合约系统开发源代码",
       "Link": "https://studygolang.com/topics/16656#reply0",
       "Description": "\u003cp\u003e以下是一个简单的BSC/ETH链节点质押挖矿的执行代码，仅供参考：\u003c/p\u003e\n\n\u003cp\u003eimport web3\nfrom web3.合约 import合约\u003c/p\u003e\n\n\u003cp\u003e创建web3实例\nweb3 = web3.Web3(web3.HTTPProvider(\u0026lsquo;INFURA_RPC_URL\u0026rsquo;))\u003c/p\u003e\n\n\u003cp\u003e创建BSC合约\nbsc_contract = web3.合约.Contract(web3.Web3.toChecksumAddress web3=web3)\u003c/p\u003e\n\n\u003cp\u003e获取账户私钥并解锁\naccount_address = \u0026lsquo;YOUR_ACCOUNT_ADDRESS\u0026rsquo;\nprivate_key = \u0026lsquo;YOUR_PRIVATE_KEY\u0026rsquo;\nweb3.eth.account.unlock(account_address, private_key)\u003c/p\u003e\n\n\u003cp\u003e获取账户余额并判断是否满足质押条件\nbalance = web3.eth.getBalance(account_address)\nstake_min = 10000000000000000\nif balance \u0026lt; stake_min: 【更全面的开发源码搭建可看我昵称】\nprint(\u0026lsquo;Insufficient balance for staking.\u0026rsquo;)\nelse:\u003c/p\u003e\n\n\u003ch1\u003e创建交易并发送到合约进行质押\u003c/h1\u003e\n\n\u003cp\u003edata = bsc_contract.functions.stake().encode_solidity_args()  【更全面的开发源码搭建可看我昵称】\ntx = {\u003cbr\u003e\n    \u0026lsquo;from\u0026rsquo;: account_address,\u003cbr\u003e\n    \u0026lsquo;to\u0026rsquo;: bsc_contract.address,\u003cbr\u003e\n    \u0026lsquo;data\u0026rsquo;: data,\u003cbr\u003e\n    \u0026lsquo;gas\u0026rsquo;: 2000000,\u003cbr\u003e\n    \u0026lsquo;gasPrice\u0026rsquo;: web3.toWei(\u0026lsquo;1\u0026rsquo;, \u0026lsquo;gwei\u0026rsquo;)\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "thrift的网络传输性能和需要注意的问题",
-      "Link": "https://studygolang.com/articles/36308#reply0",
-      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },

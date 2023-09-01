@@ -47,6 +47,10 @@
       <link>https://studygolang.com/articles/36309#reply0</link>
     </item>
     <item>
+      <title>thrift的网络传输性能和需要注意的问题</title>
+      <link>https://studygolang.com/articles/36308#reply0</link>
+    </item>
+    <item>
       <title>关于取minio的文件类型请帮忙指点一下</title>
       <link>https://studygolang.com/topics/16659#reply0</link>
       <description>&lt;pre&gt;&lt;code&gt;func ListObj() (fileInfo []ObjectType) {&#xA;&#x9;fileInfo = make([]ObjectType, 0)&#xA;&#x9;objectCh := client.ListObjects(context.Background(), &amp;quot;cloud&amp;quot;, minio.ListObjectsOptions{&#xA;&#x9;&#x9;Recursive: true,&#xA;&#x9;})&#xA;&#x9;for fileObjects := range objectCh {&#xA;&#x9;&#x9;if fileObjects.Err != nil {&#xA;&#x9;&#x9;&#x9;log.Println(fileObjects.Err)&#xA;&#x9;&#x9;&#x9;return nil&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;fileInfo = append(fileInfo, ObjectType{&#xA;&#x9;&#x9;&#x9;FileName: fileObjects.Key,&#xA;&#x9;&#x9;&#x9;FileType: fileObjects.ContentType,&#xA;&#x9;&#x9;})&#xA;&#x9;&#x9;fmt.Printf(&amp;quot;文件名:%s 文件类型:%s\n&amp;quot;, fileObjects.Key,fileObjects.ContentType)&#xA;&#x9;}&#xA;&#x9;return fileInfo&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;在调用fileObjects.ContentType的时候无法获取到ContentType的类型，请帮忙给指点一下谢谢&lt;/p&gt;&#xA;&#xA;&lt;p&gt;已经解决了:&#xA;调用fileObjects.UserMetadata[&amp;ldquo;content-type&amp;rdquo;]&lt;/p&gt;&#xA;</description>
@@ -69,10 +73,6 @@
       <title>BSC/ETH链节点质押挖矿合约系统开发源代码</title>
       <link>https://studygolang.com/topics/16656#reply0</link>
       <description>&lt;p&gt;以下是一个简单的BSC/ETH链节点质押挖矿的执行代码，仅供参考：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import web3&#xA;from web3.合约 import合约&lt;/p&gt;&#xA;&#xA;&lt;p&gt;创建web3实例&#xA;web3 = web3.Web3(web3.HTTPProvider(&amp;lsquo;INFURA_RPC_URL&amp;rsquo;))&lt;/p&gt;&#xA;&#xA;&lt;p&gt;创建BSC合约&#xA;bsc_contract = web3.合约.Contract(web3.Web3.toChecksumAddress web3=web3)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;获取账户私钥并解锁&#xA;account_address = &amp;lsquo;YOUR_ACCOUNT_ADDRESS&amp;rsquo;&#xA;private_key = &amp;lsquo;YOUR_PRIVATE_KEY&amp;rsquo;&#xA;web3.eth.account.unlock(account_address, private_key)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;获取账户余额并判断是否满足质押条件&#xA;balance = web3.eth.getBalance(account_address)&#xA;stake_min = 10000000000000000&#xA;if balance &amp;lt; stake_min: 【更全面的开发源码搭建可看我昵称】&#xA;print(&amp;lsquo;Insufficient balance for staking.&amp;rsquo;)&#xA;else:&lt;/p&gt;&#xA;&#xA;&lt;h1&gt;创建交易并发送到合约进行质押&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;data = bsc_contract.functions.stake().encode_solidity_args()  【更全面的开发源码搭建可看我昵称】&#xA;tx = {&lt;br&gt;&#xA;    &amp;lsquo;from&amp;rsquo;: account_address,&lt;br&gt;&#xA;    &amp;lsquo;to&amp;rsquo;: bsc_contract.address,&lt;br&gt;&#xA;    &amp;lsquo;data&amp;rsquo;: data,&lt;br&gt;&#xA;    &amp;lsquo;gas&amp;rsquo;: 2000000,&lt;br&gt;&#xA;    &amp;lsquo;gasPrice&amp;rsquo;: web3.toWei(&amp;lsquo;1&amp;rsquo;, &amp;lsquo;gwei&amp;rsquo;)&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>thrift的网络传输性能和需要注意的问题</title>
-      <link>https://studygolang.com/articles/36308#reply0</link>
     </item>
     <item>
       <title>本科毕业设计做个什么比较有趣</title>
