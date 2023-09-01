@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "家里的 HomePod 二代已经支持 “siri” 唤醒了 - Apple",
+      "Link": "https://www.v2ex.com/t/970036",
+      "Description": "\u003cul\u003e\n\u003cli\u003e手机：17.0 （ 21A5326a ）\u003c/li\u003e\n\u003cli\u003eHomePod：16.6 （ 20M73 ）\u003c/li\u003e\n\u003cli\u003eSiri 语言都设置的 中文-普通话\u003c/li\u003e\n\u003cli\u003e但是手机就无法 “siri” 唤醒\u003c/li\u003e\n\u003cli\u003eHomePod 前一两个月成功率不高，昨天试了试基本 100% 了。\u003c/li\u003e\n\u003cli\u003e少说一个“Hi”确实没那么蠢了。手机也支持后，在外面喊也没那么尴尬了感觉。\u003c/li\u003e\n\u003cli\u003e有一种直接喊 JARVIS 和 FRIDAY 的逼格😂😂😂。\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "excitedXXX",
+      "PubDate": "2023-09-01T03:32:13Z"
+    },
+    {
+      "Title": "前端状态的一个疑问 - 问与答",
+      "Link": "https://www.v2ex.com/t/970035",
+      "Description": "\u003ch2\u003e想要的效果\u003c/h2\u003e\n\u003cp\u003e调用 add 添加数据 -\u0026gt; 清空渲染器 -\u0026gt; 设置新的渲染器数据 -\u0026gt; 重新渲染\u003c/p\u003e\n\u003cp\u003e非 add 调用不清空渲染器\u003c/p\u003e\n\u003ch3\u003e传统方式\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eclass Module {\n    renderer = null; // 渲染器实例\n\n    // 手动添加数据并渲染\n    add(data) {\n        this.renderer.clear(); // 清空渲染器（如果是手动添加数据则需要先清空渲染器）\n        this.renderer.setData(data); // 更新渲染器数据\n        this.renderer.render(); // 重新渲染新数据\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e状态方式\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003eclass ModuleState {\n    needClear = false; // 标记需要清空渲染器\n    @observable data = null; // 新的渲染数据\n\n    // 手动添加数据\n    add(data) {\n    \tthis.needClear = true;\n        this.data = data;\n    }\n}\n\n// ModuleView 是异步的，ModuleState 中也拿不到 ModuleView\nclass ModuleView {\n    state = null; // ModuleState\n    renderer = null; // 渲染器实例\n\n    constructor() {\n        // 当 ModuleState.data 发生变化时，自动渲染数据\n        autorun(() =\u0026gt; this.render(this.state.data))\n    }\n\n    render(data) {\n        // 如果是手动添加数据则需要清空渲染器\n        if (this.state.needClear) {\n            this.renderer.clear();\n            this.state.needClear = false;\n        }\n        this.renderer.setData(data); // 更新渲染数据\n        this.renderer.render(); // 重新渲染新的数据\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e问题\u003c/h2\u003e\n\u003cp\u003e在状态方式中，需要额外的一个标记来表示是否需要清空渲染器。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n这个标记是全局可用的，是否合理？\u003cul\u003e\n\u003cli\u003e带来了调试上麻烦（实际情况这类标记会更多）\u003c/li\u003e\n\u003cli\u003e在传统方式中，标记相当于在 add 函数内部，是私有的\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e是否有更好的方式来处理这个标记？\u003c/li\u003e\n\u003c/ol\u003e\n",
+      "Author": "MinonHeart",
+      "PubDate": "2023-09-01T03:31:00Z"
+    },
+    {
+      "Title": "今天打开百度的首页发现百度的 ChatGPT 正式公测了 - 分享发现",
+      "Link": "https://www.v2ex.com/t/970034",
+      "Description": "今天打开百度的首页发现百度的 ChatGPT 正式公测了??? 之前的文心一言还申请了很久.\u003cbr /\u003e\u003cbr /\u003e![xxx]( \u003ca target=\"_blank\" href=\"https://ice.frostsky.com/2023/09/01/b85a482d5e8f69311c860d870e9fa7ef.png\" rel=\"nofollow noopener\"\u003ehttps://ice.frostsky.com/2023/09/01/b85a482d5e8f69311c860d870e9fa7ef.png\u003c/a\u003e)\u003cbr /\u003e\u003cbr /\u003e看起来效果不错, \u003ca target=\"_blank\" href=\"https://chat.baidu.com\" rel=\"nofollow noopener\"\u003ehttps://chat.baidu.com\u003c/a\u003e",
+      "Author": "aapeli",
+      "PubDate": "2023-09-01T03:29:13Z"
+    },
+    {
       "Title": "关于我有起床气，冲阿里前端工程师发火这件事 - 职场话题",
       "Link": "https://www.v2ex.com/t/970033",
       "Description": "今天早上\u003cbr /\u003e\u003cbr /\u003e当我正坐在电脑前赶 DDL ，床边的手机铃声响了，杭州尾号 4137 的座机\u003cbr /\u003e\u003cbr /\u003e电话接起，说了声你好，按了免提，这个空档可能对方没听清，又问了我一遍是不是 zhang yadong ，成功把我激怒了\u003cbr /\u003e\u003cbr /\u003e然后我嗓门提高了点，对方说自己是阿里的前端工程师，问我看到什么内部人才库有我的简历，问我考不考虑工作机会，我回了句暂时不考虑，最后双方沉默了几秒钟，对方先挂了电话\u003cbr /\u003e\u003cbr /\u003e唉，年轻人还是太气盛了\u003cbr /\u003e\u003cbr /\u003e发火的原因有 3 点：\u003cbr /\u003e1. 因为之前个人债务问题，支付宝催收经常慰问我，看见杭州座机打过来的就害怕\u003cbr /\u003e2. 对方知道我的姓名，我对个人信息特敏感\u003cbr /\u003e3. 起太早了，有起床气，早上 6 点多就醒了。平时 8 点半起床\u003cbr /\u003e\u003cbr /\u003e缓了半小时，电话打过去打算道歉啥的，发现座机打不通，那我就当 9 月第一天的小插曲了\u003cbr /\u003e\u003cbr /\u003e-- 贴张昨天苏州的晚霞 ---\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/IZ2yLuD.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/IZ2yLuD.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"https://i.imgur.com/By9D39z.jpg\" rel=\"nofollow noopener\" target=\"_blank\"\u003e\u003cimg src=\"https://i.imgur.com/By9D39z.jpg\" class=\"embedded_image\" rel=\"noreferrer\"\u003e\u003c/a\u003e",

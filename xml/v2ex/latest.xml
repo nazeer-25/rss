@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>家里的 HomePod 二代已经支持 “siri” 唤醒了 - Apple</title>
+      <link>https://www.v2ex.com/t/970036</link>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;手机：17.0 （ 21A5326a ）&lt;/li&gt;&#xA;&lt;li&gt;HomePod：16.6 （ 20M73 ）&lt;/li&gt;&#xA;&lt;li&gt;Siri 语言都设置的 中文-普通话&lt;/li&gt;&#xA;&lt;li&gt;但是手机就无法 “siri” 唤醒&lt;/li&gt;&#xA;&lt;li&gt;HomePod 前一两个月成功率不高，昨天试了试基本 100% 了。&lt;/li&gt;&#xA;&lt;li&gt;少说一个“Hi”确实没那么蠢了。手机也支持后，在外面喊也没那么尴尬了感觉。&lt;/li&gt;&#xA;&lt;li&gt;有一种直接喊 JARVIS 和 FRIDAY 的逼格😂😂😂。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>excitedXXX</author>
+      <pubDate>01 Sep 2023 03:32:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>前端状态的一个疑问 - 问与答</title>
+      <link>https://www.v2ex.com/t/970035</link>
+      <description>&lt;h2&gt;想要的效果&lt;/h2&gt;&#xA;&lt;p&gt;调用 add 添加数据 -&amp;gt; 清空渲染器 -&amp;gt; 设置新的渲染器数据 -&amp;gt; 重新渲染&lt;/p&gt;&#xA;&lt;p&gt;非 add 调用不清空渲染器&lt;/p&gt;&#xA;&lt;h3&gt;传统方式&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class Module {&#xA;    renderer = null; // 渲染器实例&#xA;&#xA;    // 手动添加数据并渲染&#xA;    add(data) {&#xA;        this.renderer.clear(); // 清空渲染器（如果是手动添加数据则需要先清空渲染器）&#xA;        this.renderer.setData(data); // 更新渲染器数据&#xA;        this.renderer.render(); // 重新渲染新数据&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3&gt;状态方式&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class ModuleState {&#xA;    needClear = false; // 标记需要清空渲染器&#xA;    @observable data = null; // 新的渲染数据&#xA;&#xA;    // 手动添加数据&#xA;    add(data) {&#xA;    &#x9;this.needClear = true;&#xA;        this.data = data;&#xA;    }&#xA;}&#xA;&#xA;// ModuleView 是异步的，ModuleState 中也拿不到 ModuleView&#xA;class ModuleView {&#xA;    state = null; // ModuleState&#xA;    renderer = null; // 渲染器实例&#xA;&#xA;    constructor() {&#xA;        // 当 ModuleState.data 发生变化时，自动渲染数据&#xA;        autorun(() =&amp;gt; this.render(this.state.data))&#xA;    }&#xA;&#xA;    render(data) {&#xA;        // 如果是手动添加数据则需要清空渲染器&#xA;        if (this.state.needClear) {&#xA;            this.renderer.clear();&#xA;            this.state.needClear = false;&#xA;        }&#xA;        this.renderer.setData(data); // 更新渲染数据&#xA;        this.renderer.render(); // 重新渲染新的数据&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;问题&lt;/h2&gt;&#xA;&lt;p&gt;在状态方式中，需要额外的一个标记来表示是否需要清空渲染器。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;这个标记是全局可用的，是否合理？&lt;ul&gt;&#xA;&lt;li&gt;带来了调试上麻烦（实际情况这类标记会更多）&lt;/li&gt;&#xA;&lt;li&gt;在传统方式中，标记相当于在 add 函数内部，是私有的&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;是否有更好的方式来处理这个标记？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>MinonHeart</author>
+      <pubDate>01 Sep 2023 03:31:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>今天打开百度的首页发现百度的 ChatGPT 正式公测了 - 分享发现</title>
+      <link>https://www.v2ex.com/t/970034</link>
+      <description>今天打开百度的首页发现百度的 ChatGPT 正式公测了??? 之前的文心一言还申请了很久.&lt;br /&gt;&lt;br /&gt;![xxx]( &lt;a target=&#34;_blank&#34; href=&#34;https://ice.frostsky.com/2023/09/01/b85a482d5e8f69311c860d870e9fa7ef.png&#34; rel=&#34;nofollow noopener&#34;&gt;https://ice.frostsky.com/2023/09/01/b85a482d5e8f69311c860d870e9fa7ef.png&lt;/a&gt;)&lt;br /&gt;&lt;br /&gt;看起来效果不错, &lt;a target=&#34;_blank&#34; href=&#34;https://chat.baidu.com&#34; rel=&#34;nofollow noopener&#34;&gt;https://chat.baidu.com&lt;/a&gt;</description>
+      <author>aapeli</author>
+      <pubDate>01 Sep 2023 03:29:13 +0000</pubDate>
+    </item>
+    <item>
       <title>关于我有起床气，冲阿里前端工程师发火这件事 - 职场话题</title>
       <link>https://www.v2ex.com/t/970033</link>
       <description>今天早上&lt;br /&gt;&lt;br /&gt;当我正坐在电脑前赶 DDL ，床边的手机铃声响了，杭州尾号 4137 的座机&lt;br /&gt;&lt;br /&gt;电话接起，说了声你好，按了免提，这个空档可能对方没听清，又问了我一遍是不是 zhang yadong ，成功把我激怒了&lt;br /&gt;&lt;br /&gt;然后我嗓门提高了点，对方说自己是阿里的前端工程师，问我看到什么内部人才库有我的简历，问我考不考虑工作机会，我回了句暂时不考虑，最后双方沉默了几秒钟，对方先挂了电话&lt;br /&gt;&lt;br /&gt;唉，年轻人还是太气盛了&lt;br /&gt;&lt;br /&gt;发火的原因有 3 点：&lt;br /&gt;1. 因为之前个人债务问题，支付宝催收经常慰问我，看见杭州座机打过来的就害怕&lt;br /&gt;2. 对方知道我的姓名，我对个人信息特敏感&lt;br /&gt;3. 起太早了，有起床气，早上 6 点多就醒了。平时 8 点半起床&lt;br /&gt;&lt;br /&gt;缓了半小时，电话打过去打算道歉啥的，发现座机打不通，那我就当 9 月第一天的小插曲了&lt;br /&gt;&lt;br /&gt;-- 贴张昨天苏州的晚霞 ---&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/IZ2yLuD.jpg&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/IZ2yLuD.jpg&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/By9D39z.jpg&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/By9D39z.jpg&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;</description>
