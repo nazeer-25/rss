@@ -4,6 +4,39 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>李跳跳的全网下架说明中国的软件公司大部分都是垃圾，毫无用户体验。这样的产品思维必将失败 - 分享发现</title>
+      <link>https://www.v2ex.com/t/970177</link>
+      <author>monosave</author>
+      <pubDate>01 Sep 2023 10:12:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>怎么可以查到某个域名的邮箱用的哪家邮件服务提供商？ - 程序员</title>
+      <link>https://www.v2ex.com/t/970176</link>
+      <author>hokman</author>
+      <pubDate>01 Sep 2023 10:08:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>春松科技似乎与中国科协有关？ - 问与答</title>
+      <link>https://www.v2ex.com/t/970175</link>
+      <description>[]( &lt;a target=&#34;_blank&#34; href=&#34;https://blog.csdn.net/csdn_codechina/article/details/121113033&#34; rel=&#34;nofollow noopener&#34;&gt;https://blog.csdn.net/csdn_codechina/article/details/121113033&lt;/a&gt;)&lt;br /&gt;[]( &lt;a target=&#34;_blank&#34; href=&#34;https://github.com/chatopera/docs/commit/805a8487c080e1ce8d6fae50d02e98208df1e896&#34; rel=&#34;nofollow noopener&#34;&gt;https://github.com/chatopera/docs/commit/805a8487c080e1ce8d6fae50d02e98208df1e896&lt;/a&gt;)&lt;br /&gt;&lt;br /&gt;这个手机号也是春松科技的手机号。&lt;br /&gt;素材来自谷歌，你们既然公开了手机号，应该默认允许我搜索。</description>
+      <author>mainjzb</author>
+      <pubDate>01 Sep 2023 10:07:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>请教一个 Java 问题 - Java</title>
+      <link>https://www.v2ex.com/t/970174</link>
+      <description>&lt;p&gt;目前改造一个老项目，用的 eureka+fegin 这一套&#xA;A:网页消费端  B:负责登录 C:具体业务&lt;/p&gt;&#xA;&lt;p&gt;A 在调用 B 完成登录后，把登录信息存储到 session 中，项目业务所有登录信息都从 session 中获取&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;HttpSession session = httpServletRequest.getSession();&lt;/code&gt;&#xA;&lt;code&gt;session.setAttribute(&#34;admin&#34;, admin);&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;现在由于业务需求，需要增加 token 支持第三方登录，我就在拦截器里面做了些修改&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;        &#xA;public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {&#xA;        String token = httpServletRequest.getHeader(&#34;token&#34;);&#xA;        Admin admin = getAdmin(token)&#xA;        // 假设已经获取到了用户&#xA;         HttpSession session = httpServletRequest.getSession();&#xA;        session.setAttribute(&#34;admin&#34;, admin);&#xA;&#x9;&#x9;return true ；&#xA;    }&#xA;       &#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;在登录完成后把登陆信息写到 session 中&#xA;用 postman 测试接口发现了一个问题，第一次由 A 调 C 时，在 C 业务中无法获取到 session 中的 admin 信息，null 异常，拦截器日志校验显示通过了，但是第二次调用又可以获取到 session 中的 admin 信息了。两次请求都可以在请求头了找到 token ，但是只有第一次无法获取到用户信息。&#xA;加了断点发现，第一次调用，request 并没有把 session 存放到 cookie 中放到请求头里转给 C 业务，第二次调用是有的，我看了下项目里的 fegin 转发请求头配置也是同样的，第一次请求在请求头里是找不到 cookie 的&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;@Configuration&#xA;public class FeignRequestInterceptor implements RequestInterceptor {&#xA;    @Override&#xA;    public void apply(RequestTemplate requestTemplate) {&#xA;        //通过 RequestContextHolder 获取本地请求&#xA;        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();&#xA;        if (requestAttributes == null) {&#xA;            System.out.println(&#34;requestAttributes is null&#34;);&#xA;            return;&#xA;        }&#xA;        //获取本地线程绑定的请求对象&#xA;        HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();&#xA;        //给请求模板附加本地线程头部信息，主要是 cookie 信息&#xA;        Enumeration&amp;lt;String&amp;gt; headerNames = request.getHeaderNames();&#xA;        while (headerNames.hasMoreElements()) {&#xA;            String name = headerNames.nextElement();&#xA;            Enumeration&amp;lt;String&amp;gt; values = request.getHeaders(name);&#xA;            while (values.hasMoreElements()) {&#xA;                String value = values.nextElement();&#xA;                requestTemplate.header(name, value);&#xA;            }&#xA;        }&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;想询问下问题到底出在哪里了？&lt;/p&gt;&#xA;</description>
+      <author>Asuka0947</author>
+      <pubDate>01 Sep 2023 10:07:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>在 sqlalchemy 中实现 django User.objects.get_by_id 风格 - Python</title>
+      <link>https://www.v2ex.com/t/970173</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from sqlalchemy.ext.declarative import declarative_base&#xA;from sqlalchemy.orm import DeclarativeMeta&#xA;&#xA;class BaseController:&#xA;    &#34;&#34;&#34;&#xA;    Base BaseController, implement base CRUD sqlalchemy operations&#xA;    &#34;&#34;&#34;&#xA;&#xA;    model_cls = None&#xA;    base_filter = ()&#xA;    &#xA;    def get_by_id(&#xA;        cls,&#xA;        model_id: Union[int, str],&#xA;        query_field: Union[List, tuple] = None,&#xA;        to_dict: bool = False,&#xA;        id_field: str = None,&#xA;    ) -&amp;gt; Model or None:&#xA;        session.query(cls.model_cls).filter&#xA;&#xA;&#xA;class CustomDeclarativeMeta(DeclarativeMeta):&#xA;&#xA;    def __init__(self, *args, **kwargs):&#xA;        super(CustomDeclarativeMeta, self).__init__(*args, **kwargs)&#xA;        if hasattr(self, &#39;objects&#39;):&#xA;            self.objects.model_cls = self&#xA;            self.objects.base_filter = (self.objects.model_cls.is_delete == 0,)&#xA;&#xA;&#xA;Base = declarative_base(metaclass=CustomDeclarativeMeta)&#xA;&#xA;class BaseModel(Base):&#xA;    &#34;&#34;&#34;基类表模板&#34;&#34;&#34;&#xA;&#xA;    __abstract__ = True&#xA;    objects = BaseController()&#xA;    is_delete = Column(Boolean, nullable=False, default=False, comment=&#34;是否已删除&#34;)&#xA;&#xA;&#xA;class User(BaseModel):&#xA;    nickname = Column(&#34;nickname&#34;, String(255), index=True, comment=&#34;昵称&#34;)&#xA;&#xA;&#xA;User.objects.get_by_id(1)&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>wuwukai007</author>
+      <pubDate>01 Sep 2023 10:05:17 +0000</pubDate>
+    </item>
+    <item>
       <title>周五 V2EX 的发帖人不多 - 程序员</title>
       <link>https://www.v2ex.com/t/970172</link>
       <description>&lt;p&gt;水一贴感觉周五 V2EX 的发帖人不多, 大家都在激动周末的到来?&lt;/p&gt;&#xA;</description>

@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "李跳跳的全网下架说明中国的软件公司大部分都是垃圾，毫无用户体验。这样的产品思维必将失败 - 分享发现",
+      "Link": "https://www.v2ex.com/t/970177",
+      "Description": "",
+      "Author": "monosave",
+      "PubDate": "2023-09-01T10:12:22Z"
+    },
+    {
+      "Title": "怎么可以查到某个域名的邮箱用的哪家邮件服务提供商？ - 程序员",
+      "Link": "https://www.v2ex.com/t/970176",
+      "Description": "",
+      "Author": "hokman",
+      "PubDate": "2023-09-01T10:08:33Z"
+    },
+    {
+      "Title": "春松科技似乎与中国科协有关？ - 问与答",
+      "Link": "https://www.v2ex.com/t/970175",
+      "Description": "[]( \u003ca target=\"_blank\" href=\"https://blog.csdn.net/csdn_codechina/article/details/121113033\" rel=\"nofollow noopener\"\u003ehttps://blog.csdn.net/csdn_codechina/article/details/121113033\u003c/a\u003e)\u003cbr /\u003e[]( \u003ca target=\"_blank\" href=\"https://github.com/chatopera/docs/commit/805a8487c080e1ce8d6fae50d02e98208df1e896\" rel=\"nofollow noopener\"\u003ehttps://github.com/chatopera/docs/commit/805a8487c080e1ce8d6fae50d02e98208df1e896\u003c/a\u003e)\u003cbr /\u003e\u003cbr /\u003e这个手机号也是春松科技的手机号。\u003cbr /\u003e素材来自谷歌，你们既然公开了手机号，应该默认允许我搜索。",
+      "Author": "mainjzb",
+      "PubDate": "2023-09-01T10:07:47Z"
+    },
+    {
+      "Title": "请教一个 Java 问题 - Java",
+      "Link": "https://www.v2ex.com/t/970174",
+      "Description": "\u003cp\u003e目前改造一个老项目，用的 eureka+fegin 这一套\nA:网页消费端  B:负责登录 C:具体业务\u003c/p\u003e\n\u003cp\u003eA 在调用 B 完成登录后，把登录信息存储到 session 中，项目业务所有登录信息都从 session 中获取\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003eHttpSession session = httpServletRequest.getSession();\u003c/code\u003e\n\u003ccode\u003esession.setAttribute(\"admin\", admin);\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e现在由于业务需求，需要增加 token 支持第三方登录，我就在拦截器里面做了些修改\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-java\"\u003e        \npublic boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {\n        String token = httpServletRequest.getHeader(\"token\");\n        Admin admin = getAdmin(token)\n        // 假设已经获取到了用户\n         HttpSession session = httpServletRequest.getSession();\n        session.setAttribute(\"admin\", admin);\n\t\treturn true ；\n    }\n       \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在登录完成后把登陆信息写到 session 中\n用 postman 测试接口发现了一个问题，第一次由 A 调 C 时，在 C 业务中无法获取到 session 中的 admin 信息，null 异常，拦截器日志校验显示通过了，但是第二次调用又可以获取到 session 中的 admin 信息了。两次请求都可以在请求头了找到 token ，但是只有第一次无法获取到用户信息。\n加了断点发现，第一次调用，request 并没有把 session 存放到 cookie 中放到请求头里转给 C 业务，第二次调用是有的，我看了下项目里的 fegin 转发请求头配置也是同样的，第一次请求在请求头里是找不到 cookie 的\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e@Configuration\npublic class FeignRequestInterceptor implements RequestInterceptor {\n    @Override\n    public void apply(RequestTemplate requestTemplate) {\n        //通过 RequestContextHolder 获取本地请求\n        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();\n        if (requestAttributes == null) {\n            System.out.println(\"requestAttributes is null\");\n            return;\n        }\n        //获取本地线程绑定的请求对象\n        HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();\n        //给请求模板附加本地线程头部信息，主要是 cookie 信息\n        Enumeration\u0026lt;String\u0026gt; headerNames = request.getHeaderNames();\n        while (headerNames.hasMoreElements()) {\n            String name = headerNames.nextElement();\n            Enumeration\u0026lt;String\u0026gt; values = request.getHeaders(name);\n            while (values.hasMoreElements()) {\n                String value = values.nextElement();\n                requestTemplate.header(name, value);\n            }\n        }\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e想询问下问题到底出在哪里了？\u003c/p\u003e\n",
+      "Author": "Asuka0947",
+      "PubDate": "2023-09-01T10:07:40Z"
+    },
+    {
+      "Title": "在 sqlalchemy 中实现 django User.objects.get_by_id 风格 - Python",
+      "Link": "https://www.v2ex.com/t/970173",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-python\"\u003efrom sqlalchemy.ext.declarative import declarative_base\nfrom sqlalchemy.orm import DeclarativeMeta\n\nclass BaseController:\n    \"\"\"\n    Base BaseController, implement base CRUD sqlalchemy operations\n    \"\"\"\n\n    model_cls = None\n    base_filter = ()\n    \n    def get_by_id(\n        cls,\n        model_id: Union[int, str],\n        query_field: Union[List, tuple] = None,\n        to_dict: bool = False,\n        id_field: str = None,\n    ) -\u0026gt; Model or None:\n        session.query(cls.model_cls).filter\n\n\nclass CustomDeclarativeMeta(DeclarativeMeta):\n\n    def __init__(self, *args, **kwargs):\n        super(CustomDeclarativeMeta, self).__init__(*args, **kwargs)\n        if hasattr(self, 'objects'):\n            self.objects.model_cls = self\n            self.objects.base_filter = (self.objects.model_cls.is_delete == 0,)\n\n\nBase = declarative_base(metaclass=CustomDeclarativeMeta)\n\nclass BaseModel(Base):\n    \"\"\"基类表模板\"\"\"\n\n    __abstract__ = True\n    objects = BaseController()\n    is_delete = Column(Boolean, nullable=False, default=False, comment=\"是否已删除\")\n\n\nclass User(BaseModel):\n    nickname = Column(\"nickname\", String(255), index=True, comment=\"昵称\")\n\n\nUser.objects.get_by_id(1)\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "wuwukai007",
+      "PubDate": "2023-09-01T10:05:17Z"
+    },
+    {
       "Title": "周五 V2EX 的发帖人不多 - 程序员",
       "Link": "https://www.v2ex.com/t/970172",
       "Description": "\u003cp\u003e水一贴感觉周五 V2EX 的发帖人不多, 大家都在激动周末的到来?\u003c/p\u003e\n",
