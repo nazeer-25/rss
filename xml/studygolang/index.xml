@@ -9,7 +9,7 @@
     </item>
     <item>
       <title>go里面的继承实现，父类类型做为函数入参，怎么传子类作为参数</title>
-      <link>https://studygolang.com/topics/16661#reply4</link>
+      <link>https://studygolang.com/topics/16661#reply5</link>
       <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Task struct{&#xA;  TaskExec &#xA;  Status int&#xA;  Name string&#xA;  StratTime int64&#xA;  EndTime int64&#xA;}&#xA; &#xA;type TaskExec interface{&#xA;  exec()&#xA;}&#xA; &#xA;type TaskA struct{&#xA;  Task&#xA;  ParamA string&#xA;}&#xA; &#xA;type TaskB struct{&#xA;  Task&#xA;  ParamA string&#xA;}&#xA; &#xA;func (TaskA) exec(){&#xA;  // 执行任务A的逻辑&#xA;}&#xA; &#xA;func (TaskB) exec(){&#xA;  // 执行任务B的逻辑&#xA;}&#xA; &#xA;// 执行任务，问题点在入参这里，这样写入参就只能是Task，不能传TaskA和TaskB，&#xA;// 用go有什么办法可以实现像java一样传子类做为入参&#xA;func Exec(task *Task){&#xA;  // 修改任务状态为执行中&#xA;  task.Status = 1&#xA;  // 记录任务开始执行时间&#xA;  task.StartTime = uint64(time.Now().Unix())&#xA;  // 这里还会有很共性逻辑处理被省略掉了&#xA; &#xA;  // 执行具体任务的逻辑&#xA;  task.exec()&#xA;  // 修改任务状态为执行结束&#xA;  task.Status = 2&#xA;  // 记录任务执行结束时间&#xA;  task.EndTime = uint64(time.Now().Unix())&#xA;  // 这里也是还会有很共性逻辑处理被省略掉了&#xA;}&#xA;&#xA;func main(){&#xA;  ta := TaskA{}&#xA;  tb := TaskB{}&#xA;  &#xA;  // 这里要怎么才能传子类到函数里面执行？？？？&#xA;  Exec(&amp;amp;ta)&#xA;  Exec(&amp;amp;tb)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
@@ -96,6 +96,11 @@
       <title>推荐你认为好的Go资源</title>
       <link>https://studygolang.com/topics/11096#reply64</link>
       <description>&lt;p&gt;社区是一个互助平台，大家的资源应该互相共享，一起推动 Go 的发展，提升每个人的 Go 水平。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;如果你有好的 Go 资源，包括但不限于：&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;网站&lt;/li&gt;&#xA;&lt;li&gt;图书&lt;/li&gt;&#xA;&lt;li&gt;工具&lt;/li&gt;&#xA;&lt;li&gt;项目&lt;/li&gt;&#xA;&lt;li&gt;库&lt;/li&gt;&#xA;&lt;li&gt;教程&lt;/li&gt;&#xA;&lt;li&gt;博客&lt;/li&gt;&#xA;&lt;li&gt;。。。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;欢迎留言，给出你的推荐理由和网址。谢谢！&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>go里面的继承实现，父类类型做为函数入参，怎么传子类作为参数</title>
+      <link>https://studygolang.com/topics/16661#reply4</link>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Task struct{&#xA;  TaskExec &#xA;  Status int&#xA;  Name string&#xA;  StratTime int64&#xA;  EndTime int64&#xA;}&#xA; &#xA;type TaskExec interface{&#xA;  exec()&#xA;}&#xA; &#xA;type TaskA struct{&#xA;  Task&#xA;  ParamA string&#xA;}&#xA; &#xA;type TaskB struct{&#xA;  Task&#xA;  ParamA string&#xA;}&#xA; &#xA;func (TaskA) exec(){&#xA;  // 执行任务A的逻辑&#xA;}&#xA; &#xA;func (TaskB) exec(){&#xA;  // 执行任务B的逻辑&#xA;}&#xA; &#xA;// 执行任务，问题点在入参这里，这样写入参就只能是Task，不能传TaskA和TaskB，&#xA;// 用go有什么办法可以实现像java一样传子类做为入参&#xA;func Exec(task *Task){&#xA;  // 修改任务状态为执行中&#xA;  task.Status = 1&#xA;  // 记录任务开始执行时间&#xA;  task.StartTime = uint64(time.Now().Unix())&#xA;  // 这里还会有很共性逻辑处理被省略掉了&#xA; &#xA;  // 执行具体任务的逻辑&#xA;  task.exec()&#xA;  // 修改任务状态为执行结束&#xA;  task.Status = 2&#xA;  // 记录任务执行结束时间&#xA;  task.EndTime = uint64(time.Now().Unix())&#xA;  // 这里也是还会有很共性逻辑处理被省略掉了&#xA;}&#xA;&#xA;func main(){&#xA;  ta := TaskA{}&#xA;  tb := TaskB{}&#xA;  &#xA;  // 这里要怎么才能传子类到函数里面执行？？？？&#xA;  Exec(&amp;amp;ta)&#xA;  Exec(&amp;amp;tb)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>可一键部署在本地服务器环境的开源大语言模型项目整理！</title>
