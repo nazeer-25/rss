@@ -28,6 +28,10 @@
       <description>&lt;p&gt;从事开发7年多，从java转到golang，用golang做web应用，游戏，im开发5年&#xA;最近离职，在线接活，或者全职远程，&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>thrift的网络传输性能和需要注意的问题</title>
+      <link>https://studygolang.com/articles/36308#reply0</link>
+    </item>
+    <item>
       <title>go里面的继承实现，父类类型做为函数入参，怎么传子类作为参数</title>
       <link>https://studygolang.com/topics/16661#reply5</link>
       <description>&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Task struct{&#xA;  TaskExec &#xA;  Status int&#xA;  Name string&#xA;  StratTime int64&#xA;  EndTime int64&#xA;}&#xA; &#xA;type TaskExec interface{&#xA;  exec()&#xA;}&#xA; &#xA;type TaskA struct{&#xA;  Task&#xA;  ParamA string&#xA;}&#xA; &#xA;type TaskB struct{&#xA;  Task&#xA;  ParamA string&#xA;}&#xA; &#xA;func (TaskA) exec(){&#xA;  // 执行任务A的逻辑&#xA;}&#xA; &#xA;func (TaskB) exec(){&#xA;  // 执行任务B的逻辑&#xA;}&#xA; &#xA;// 执行任务，问题点在入参这里，这样写入参就只能是Task，不能传TaskA和TaskB，&#xA;// 用go有什么办法可以实现像java一样传子类做为入参&#xA;func Exec(task *Task){&#xA;  // 修改任务状态为执行中&#xA;  task.Status = 1&#xA;  // 记录任务开始执行时间&#xA;  task.StartTime = uint64(time.Now().Unix())&#xA;  // 这里还会有很共性逻辑处理被省略掉了&#xA; &#xA;  // 执行具体任务的逻辑&#xA;  task.exec()&#xA;  // 修改任务状态为执行结束&#xA;  task.Status = 2&#xA;  // 记录任务执行结束时间&#xA;  task.EndTime = uint64(time.Now().Unix())&#xA;  // 这里也是还会有很共性逻辑处理被省略掉了&#xA;}&#xA;&#xA;func main(){&#xA;  ta := TaskA{}&#xA;  tb := TaskB{}&#xA;  &#xA;  // 这里要怎么才能传子类到函数里面执行？？？？&#xA;  Exec(&amp;amp;ta)&#xA;  Exec(&amp;amp;tb)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -69,10 +73,6 @@
       <title>BSC/ETH链节点质押挖矿合约系统开发源代码</title>
       <link>https://studygolang.com/topics/16656#reply0</link>
       <description>&lt;p&gt;以下是一个简单的BSC/ETH链节点质押挖矿的执行代码，仅供参考：&lt;/p&gt;&#xA;&#xA;&lt;p&gt;import web3&#xA;from web3.合约 import合约&lt;/p&gt;&#xA;&#xA;&lt;p&gt;创建web3实例&#xA;web3 = web3.Web3(web3.HTTPProvider(&amp;lsquo;INFURA_RPC_URL&amp;rsquo;))&lt;/p&gt;&#xA;&#xA;&lt;p&gt;创建BSC合约&#xA;bsc_contract = web3.合约.Contract(web3.Web3.toChecksumAddress web3=web3)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;获取账户私钥并解锁&#xA;account_address = &amp;lsquo;YOUR_ACCOUNT_ADDRESS&amp;rsquo;&#xA;private_key = &amp;lsquo;YOUR_PRIVATE_KEY&amp;rsquo;&#xA;web3.eth.account.unlock(account_address, private_key)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;获取账户余额并判断是否满足质押条件&#xA;balance = web3.eth.getBalance(account_address)&#xA;stake_min = 10000000000000000&#xA;if balance &amp;lt; stake_min: 【更全面的开发源码搭建可看我昵称】&#xA;print(&amp;lsquo;Insufficient balance for staking.&amp;rsquo;)&#xA;else:&lt;/p&gt;&#xA;&#xA;&lt;h1&gt;创建交易并发送到合约进行质押&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;data = bsc_contract.functions.stake().encode_solidity_args()  【更全面的开发源码搭建可看我昵称】&#xA;tx = {&lt;br&gt;&#xA;    &amp;lsquo;from&amp;rsquo;: account_address,&lt;br&gt;&#xA;    &amp;lsquo;to&amp;rsquo;: bsc_contract.address,&lt;br&gt;&#xA;    &amp;lsquo;data&amp;rsquo;: data,&lt;br&gt;&#xA;    &amp;lsquo;gas&amp;rsquo;: 2000000,&lt;br&gt;&#xA;    &amp;lsquo;gasPrice&amp;rsquo;: web3.toWei(&amp;lsquo;1&amp;rsquo;, &amp;lsquo;gwei&amp;rsquo;)&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>thrift的网络传输性能和需要注意的问题</title>
-      <link>https://studygolang.com/articles/36308#reply0</link>
     </item>
     <item>
       <title>本科毕业设计做个什么比较有趣</title>
