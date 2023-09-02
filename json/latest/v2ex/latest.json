@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "电信宽带 sg 绕道 jp - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/970393",
+      "Description": "\u003cp\u003e最近发现网速变慢了，用了 nexttrace 测试了一下，公司和小区都是电信的，都绕经东京；移动热点是正常的，电信最近是咋回事？\u003c/p\u003e\n",
+      "Author": "serialt",
+      "PubDate": "2023-09-02T11:39:07Z"
+    },
+    {
+      "Title": "现在入手 m2 macook air 合适? - Apple",
+      "Link": "https://www.v2ex.com/t/970392",
+      "Description": "迫于没有笔记本, 想整个二手官翻啥的 m2 air, 内存上 24 价格也还行, 这个时候真有必要等 m3?",
+      "Author": "MrBearin",
+      "PubDate": "2023-09-02T11:37:47Z"
+    },
+    {
+      "Title": "windows 聚焦的壁纸不错，就是上面会有几个提示烦人 - 问与答",
+      "Link": "https://www.v2ex.com/t/970391",
+      "Description": "\u003cp\u003e有办法去除聚焦的提示而只显示壁纸么\u003c/p\u003e\n",
+      "Author": "BellaCampen",
+      "PubDate": "2023-09-02T11:34:09Z"
+    },
+    {
       "Title": "使用 Tampermonkey 捕获 ChatGPT 发送前的内容 - 程序员",
       "Link": "https://www.v2ex.com/t/970390",
       "Description": "\u003cp\u003e网页端 ChatGPT 在发送消息时候，回车或者点击发送按钮后，对话框会被清空发送，如果遇到网络状况不佳，消息发送失败，则这条编辑的消息也消失了。\u003c/p\u003e\n\u003cp\u003e所以想使用 Tampermonkey 来捕获这个发送行为:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e// ==UserScript==\n// @name         ChatGPT 回车捕获\n// @namespace    http://tampermonkey.net/\n// @version      0.1\n// @description  try to take over the world!\n// @author       You\n// @match        https://chat.openai.com/*\n// @icon         https://www.google.com/s2/favicons?sz=64\u0026amp;domain=openai.com\n// @run-at       document-idle\n// @grant        none\n// ==/UserScript==\n\n(function() {\n    'use strict';\n    function run() {\n        const inputElement = document.querySelector('#prompt-textarea');\n        if (inputElement) {\n            console.log(\"[ChatGPT 回车捕获]: Hacked!\");\n            inputElement.addEventListener('keydown', function(event) {\n                if (event.keyCode === 13) {\n                    console.log(\"[ChatGPT 回车捕获]: 即将发送的内容=\u0026gt; \", inputElement.value);\n                }\n            });\n        } else {\n            console.log(\"[ChatGPT 回车捕获]: No inputElement found!\")\n        }\n    }\n    setTimeout(() =\u0026gt; {\n        run();\n    }, 3000);\n    let oldPushState = history.pushState;\n    history.pushState = function pushState() {\n        let ret = oldPushState.apply(this, arguments);\n        window.dispatchEvent(new Event('pushstate'));\n        window.dispatchEvent(new Event('locationchange'));\n        return ret;\n    };\n    let oldReplaceState = history.replaceState;\n    history.replaceState = function replaceState() {\n        let ret = oldReplaceState.apply(this, arguments);\n        window.dispatchEvent(new Event('replacestate'));\n        window.dispatchEvent(new Event('locationchange'));\n        return ret;\n    };\n    window.addEventListener('popstate', () =\u0026gt; {\n        window.dispatchEvent(new Event('locationchange'));\n    });\n    window.addEventListener('locationchange', function () {\n        setTimeout(() =\u0026gt; {\n            run();\n        }, 3000);\n    });\n})();\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e上面代码虽然能完成这项工作:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e监听 \u003ccode\u003e#prompt-textarea\u003c/code\u003e 这个输入框\u003c/li\u003e\n\u003cli\u003e当按下回车键时候将输入框内的消息输出到控制台\u003c/li\u003e\n\u003cli\u003e为了确保页面加载完成再捕获，延迟 3 秒执行\u003c/li\u003e\n\u003cli\u003e为了解决切换不同的对话导致输入框改变，监听路由改变并重新 hack\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e但这样的实现也有一些其他问题，比如页面在第 3 秒后才完全加载出来。并且只是监听了回车按键，发送按钮也是一样的逻辑（重复代码，没有写）。\u003c/p\u003e\n\u003cp\u003e所以这样做有点丑，大佬们有什么其他方法来优化一下？\u003c/p\u003e\n\u003cp\u003e比如 hack 一些内部方法:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003elet msg = null;\nconst OldTextDecoder = TextDecoder;\nTextDecoder = class {\n    constructor() {\n        this.old = new OldTextDecoder(...arguments);\n    }\n    decode() {\n        const res = this.old.decode(...arguments);\n        try {\n            msg = JSON.parse(res).message.content.parts[0];\n        } catch (e) {\n        }\n        if (msg != null \u0026amp;\u0026amp; res == \"[DONE]\") {\n            if (window.ongpt) {\n                window.ongpt(msg);\n            }\n            msg = null;\n        }\n        return res;\n    }\n};\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但这只是 hack 了 TextDecoder ，输入框发送前的消息应该如何 hack ？\u003c/p\u003e\n\u003cp\u003eps. 仅探讨技术实现，不用推荐潘多拉等第三方工具。\u003c/p\u003e\n",

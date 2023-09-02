@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>电信宽带 sg 绕道 jp - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/970393</link>
+      <description>&lt;p&gt;最近发现网速变慢了，用了 nexttrace 测试了一下，公司和小区都是电信的，都绕经东京；移动热点是正常的，电信最近是咋回事？&lt;/p&gt;&#xA;</description>
+      <author>serialt</author>
+      <pubDate>02 Sep 2023 11:39:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>现在入手 m2 macook air 合适? - Apple</title>
+      <link>https://www.v2ex.com/t/970392</link>
+      <description>迫于没有笔记本, 想整个二手官翻啥的 m2 air, 内存上 24 价格也还行, 这个时候真有必要等 m3?</description>
+      <author>MrBearin</author>
+      <pubDate>02 Sep 2023 11:37:47 +0000</pubDate>
+    </item>
+    <item>
+      <title>windows 聚焦的壁纸不错，就是上面会有几个提示烦人 - 问与答</title>
+      <link>https://www.v2ex.com/t/970391</link>
+      <description>&lt;p&gt;有办法去除聚焦的提示而只显示壁纸么&lt;/p&gt;&#xA;</description>
+      <author>BellaCampen</author>
+      <pubDate>02 Sep 2023 11:34:09 +0000</pubDate>
+    </item>
+    <item>
       <title>使用 Tampermonkey 捕获 ChatGPT 发送前的内容 - 程序员</title>
       <link>https://www.v2ex.com/t/970390</link>
       <description>&lt;p&gt;网页端 ChatGPT 在发送消息时候，回车或者点击发送按钮后，对话框会被清空发送，如果遇到网络状况不佳，消息发送失败，则这条编辑的消息也消失了。&lt;/p&gt;&#xA;&lt;p&gt;所以想使用 Tampermonkey 来捕获这个发送行为:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;// ==UserScript==&#xA;// @name         ChatGPT 回车捕获&#xA;// @namespace    http://tampermonkey.net/&#xA;// @version      0.1&#xA;// @description  try to take over the world!&#xA;// @author       You&#xA;// @match        https://chat.openai.com/*&#xA;// @icon         https://www.google.com/s2/favicons?sz=64&amp;amp;domain=openai.com&#xA;// @run-at       document-idle&#xA;// @grant        none&#xA;// ==/UserScript==&#xA;&#xA;(function() {&#xA;    &#39;use strict&#39;;&#xA;    function run() {&#xA;        const inputElement = document.querySelector(&#39;#prompt-textarea&#39;);&#xA;        if (inputElement) {&#xA;            console.log(&#34;[ChatGPT 回车捕获]: Hacked!&#34;);&#xA;            inputElement.addEventListener(&#39;keydown&#39;, function(event) {&#xA;                if (event.keyCode === 13) {&#xA;                    console.log(&#34;[ChatGPT 回车捕获]: 即将发送的内容=&amp;gt; &#34;, inputElement.value);&#xA;                }&#xA;            });&#xA;        } else {&#xA;            console.log(&#34;[ChatGPT 回车捕获]: No inputElement found!&#34;)&#xA;        }&#xA;    }&#xA;    setTimeout(() =&amp;gt; {&#xA;        run();&#xA;    }, 3000);&#xA;    let oldPushState = history.pushState;&#xA;    history.pushState = function pushState() {&#xA;        let ret = oldPushState.apply(this, arguments);&#xA;        window.dispatchEvent(new Event(&#39;pushstate&#39;));&#xA;        window.dispatchEvent(new Event(&#39;locationchange&#39;));&#xA;        return ret;&#xA;    };&#xA;    let oldReplaceState = history.replaceState;&#xA;    history.replaceState = function replaceState() {&#xA;        let ret = oldReplaceState.apply(this, arguments);&#xA;        window.dispatchEvent(new Event(&#39;replacestate&#39;));&#xA;        window.dispatchEvent(new Event(&#39;locationchange&#39;));&#xA;        return ret;&#xA;    };&#xA;    window.addEventListener(&#39;popstate&#39;, () =&amp;gt; {&#xA;        window.dispatchEvent(new Event(&#39;locationchange&#39;));&#xA;    });&#xA;    window.addEventListener(&#39;locationchange&#39;, function () {&#xA;        setTimeout(() =&amp;gt; {&#xA;            run();&#xA;        }, 3000);&#xA;    });&#xA;})();&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;上面代码虽然能完成这项工作:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;监听 &lt;code&gt;#prompt-textarea&lt;/code&gt; 这个输入框&lt;/li&gt;&#xA;&lt;li&gt;当按下回车键时候将输入框内的消息输出到控制台&lt;/li&gt;&#xA;&lt;li&gt;为了确保页面加载完成再捕获，延迟 3 秒执行&lt;/li&gt;&#xA;&lt;li&gt;为了解决切换不同的对话导致输入框改变，监听路由改变并重新 hack&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;但这样的实现也有一些其他问题，比如页面在第 3 秒后才完全加载出来。并且只是监听了回车按键，发送按钮也是一样的逻辑（重复代码，没有写）。&lt;/p&gt;&#xA;&lt;p&gt;所以这样做有点丑，大佬们有什么其他方法来优化一下？&lt;/p&gt;&#xA;&lt;p&gt;比如 hack 一些内部方法:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let msg = null;&#xA;const OldTextDecoder = TextDecoder;&#xA;TextDecoder = class {&#xA;    constructor() {&#xA;        this.old = new OldTextDecoder(...arguments);&#xA;    }&#xA;    decode() {&#xA;        const res = this.old.decode(...arguments);&#xA;        try {&#xA;            msg = JSON.parse(res).message.content.parts[0];&#xA;        } catch (e) {&#xA;        }&#xA;        if (msg != null &amp;amp;&amp;amp; res == &#34;[DONE]&#34;) {&#xA;            if (window.ongpt) {&#xA;                window.ongpt(msg);&#xA;            }&#xA;            msg = null;&#xA;        }&#xA;        return res;&#xA;    }&#xA;};&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但这只是 hack 了 TextDecoder ，输入框发送前的消息应该如何 hack ？&lt;/p&gt;&#xA;&lt;p&gt;ps. 仅探讨技术实现，不用推荐潘多拉等第三方工具。&lt;/p&gt;&#xA;</description>
