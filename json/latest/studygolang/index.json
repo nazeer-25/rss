@@ -25,6 +25,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "go里面的继承实现，父类类型做为函数入参，怎么传子类作为参数",
+      "Link": "https://studygolang.com/topics/16661#reply5",
+      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Task struct{\n  TaskExec \n  Status int\n  Name string\n  StratTime int64\n  EndTime int64\n}\n \ntype TaskExec interface{\n  exec()\n}\n \ntype TaskA struct{\n  Task\n  ParamA string\n}\n \ntype TaskB struct{\n  Task\n  ParamA string\n}\n \nfunc (TaskA) exec(){\n  // 执行任务A的逻辑\n}\n \nfunc (TaskB) exec(){\n  // 执行任务B的逻辑\n}\n \n// 执行任务，问题点在入参这里，这样写入参就只能是Task，不能传TaskA和TaskB，\n// 用go有什么办法可以实现像java一样传子类做为入参\nfunc Exec(task *Task){\n  // 修改任务状态为执行中\n  task.Status = 1\n  // 记录任务开始执行时间\n  task.StartTime = uint64(time.Now().Unix())\n  // 这里还会有很共性逻辑处理被省略掉了\n \n  // 执行具体任务的逻辑\n  task.exec()\n  // 修改任务状态为执行结束\n  task.Status = 2\n  // 记录任务执行结束时间\n  task.EndTime = uint64(time.Now().Unix())\n  // 这里也是还会有很共性逻辑处理被省略掉了\n}\n\nfunc main(){\n  ta := TaskA{}\n  tb := TaskB{}\n  \n  // 这里要怎么才能传子类到函数里面执行？？？？\n  Exec(\u0026amp;ta)\n  Exec(\u0026amp;tb)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "推荐你认为好的Go资源",
       "Link": "https://studygolang.com/topics/11096#reply65",
       "Description": "\u003cp\u003e社区是一个互助平台，大家的资源应该互相共享，一起推动 Go 的发展，提升每个人的 Go 水平。\u003c/p\u003e\n\n\u003cp\u003e如果你有好的 Go 资源，包括但不限于：\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e网站\u003c/li\u003e\n\u003cli\u003e图书\u003c/li\u003e\n\u003cli\u003e工具\u003c/li\u003e\n\u003cli\u003e项目\u003c/li\u003e\n\u003cli\u003e库\u003c/li\u003e\n\u003cli\u003e教程\u003c/li\u003e\n\u003cli\u003e博客\u003c/li\u003e\n\u003cli\u003e。。。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e欢迎留言，给出你的推荐理由和网址。谢谢！\u003c/p\u003e\n",
@@ -49,13 +56,6 @@
       "Title": "国内ChatGPT中文版，GPT4无限使用",
       "Link": "https://studygolang.com/articles/36310#reply0",
       "Description": "\u003ch3\u003e一、什么是国内ChatGPT中文版 (\u003ca href=\"https://ai-cn.net\"\u003ehttps://ai-cn.net\u003c/a\u003e)\u003c/h3\u003e\n\n\u003cp\u003eChatGPT中文站是ChatGPT在国内的镜像网站，由OpenAI GPT API驱动，支持GPT-3.5和GPT-4，与官方ChatGPT功能一般无二。ChatGPT中文站由中国的公司开发和运营，以方便国内用户使用。\n\u003cimg src=\"https://static.golangjob.cn/230901/d3223279a2fdbd44e61c3dd117579be2.png\" alt=\"v2-51007a929025763ddba7a0590ed9fe95_1440w.png\" /\u003e\u003c/p\u003e\n\n\u003ch3\u003e二、怎样使用ChatGPT中文站？\u003c/h3\u003e\n\n\u003cp\u003eChatGPT中文站是有网站、微信小程序和电脑客户端，多端互联数据互通。对于电脑浏览器，建议使用谷歌浏览器Chrome、微软浏览器Edge、火狐浏览器Firefox、QQ浏览器极速版、360浏览器极速版。\u003c/p\u003e\n\n\u003ch3\u003e三、电脑客户端\u003c/h3\u003e\n\n\u003cp\u003eChatGPT中文站提供了PC个人电脑Windows系统及MacOS苹果电脑系统客户端。用户下载后可在电脑本地打开ChatGPT中文站，更方便快捷。\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230901/cce2f1e290b7e27e7e2e4fb3e22be40d.png\" alt=\"Snipaste_2023-09-01_14-48-31.png\" /\u003e\u003c/p\u003e\n\n\u003ch3\u003e四、价格\u003c/h3\u003e\n\n\u003cp\u003e每天可免费使用500个Token，新用户登录后再送500个Token。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eToken（令牌，简写T）是ChatGPT用于计算使用量的单位。\u003c/li\u003e\n\u003cli\u003e询问和回答都需要消耗Token。\u003c/li\u003e\n\u003cli\u003e一个英文单词约等于1个Token，一个中文字约等于1.5个Token。\u003c/li\u003e\n\u003cli\u003e例如，“今天天气怎么样？”是10个Token，“what is the weather today?”是6个Token。\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e购买价格\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003e￥1元/10,000T\u003c/li\u003e\n\u003cli\u003e￥0.9元/10,000T（购买量 \u0026gt;= 100,000）\u003c/li\u003e\n\u003cli\u003e￥0.8元/10,000T（购买量 \u0026gt;= 1,000,000）\u003c/li\u003e\n\u003cli\u003e￥0.7元/10,000T（购买量 \u0026gt;= 10,000,000）\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e支付一元可购买一万个Token，大概相当于6666个中文，足够完成你的写作任务了。\u003c/p\u003e\n\n\u003cp\u003e五、ChatGPT是免费的，为什么我要付费使用ChatGPT中国站？\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e使用官方ChatGPT有门槛，需要科学上网和境外手机号注册。 这些其实也是使用成本。\u003c/li\u003e\n\u003cli\u003e如果购买号贩子的账户，随时面临被封号的风险。OpenAI在最近已经实行过大面积封号。\u003c/li\u003e\n\u003cli\u003eChatGPT是生产力工具。对于真正的使用者来说，方便高效地使用ChatGPT才是最重要的。ChatGPT中国站正好解决了这个痛点。\u003c/li\u003e\n\u003c/ol\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "go里面的继承实现，父类类型做为函数入参，怎么传子类作为参数",
-      "Link": "https://studygolang.com/topics/16661#reply5",
-      "Description": "\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Task struct{\n  TaskExec \n  Status int\n  Name string\n  StratTime int64\n  EndTime int64\n}\n \ntype TaskExec interface{\n  exec()\n}\n \ntype TaskA struct{\n  Task\n  ParamA string\n}\n \ntype TaskB struct{\n  Task\n  ParamA string\n}\n \nfunc (TaskA) exec(){\n  // 执行任务A的逻辑\n}\n \nfunc (TaskB) exec(){\n  // 执行任务B的逻辑\n}\n \n// 执行任务，问题点在入参这里，这样写入参就只能是Task，不能传TaskA和TaskB，\n// 用go有什么办法可以实现像java一样传子类做为入参\nfunc Exec(task *Task){\n  // 修改任务状态为执行中\n  task.Status = 1\n  // 记录任务开始执行时间\n  task.StartTime = uint64(time.Now().Unix())\n  // 这里还会有很共性逻辑处理被省略掉了\n \n  // 执行具体任务的逻辑\n  task.exec()\n  // 修改任务状态为执行结束\n  task.Status = 2\n  // 记录任务执行结束时间\n  task.EndTime = uint64(time.Now().Unix())\n  // 这里也是还会有很共性逻辑处理被省略掉了\n}\n\nfunc main(){\n  ta := TaskA{}\n  tb := TaskB{}\n  \n  // 这里要怎么才能传子类到函数里面执行？？？？\n  Exec(\u0026amp;ta)\n  Exec(\u0026amp;tb)\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
