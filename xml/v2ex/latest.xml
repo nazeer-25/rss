@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Golang 的泛型能干什么 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/970485</link>
+      <description>&lt;p&gt;Golang 在 1.18 版本支持了泛型, 在工作中还没有真正用过， 这几天研究了一下，脑子里最先想到的使用场景就是集合类型的处理。 &lt;/p&gt;&#xA;&lt;p&gt;常用的集合处理函数 &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;redude&lt;/code&gt;  等， 在别的语言中都是直接支持的，例如 PHP 中的 &lt;code&gt;array_map&lt;/code&gt;, &lt;code&gt;array_reduce&lt;/code&gt;。&lt;/p&gt;&#xA;&lt;p&gt;但是 golang 之中只能使用 for 循环，现在有了泛型，让实现 &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;reduce&lt;/code&gt; 变的简单了， 相比使用 &lt;code&gt;interface&lt;/code&gt;，性能也更好。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;代码实现：&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func Map[T any, R any](ts []T, f func(T) R) []R {&#xA;&#x9;nt := make([]R, 0, len(ts))&#xA;&#x9;for _, t := range ts {&#xA;&#x9;&#x9;nt = append(nt, f(t))&#xA;&#x9;}&#xA;&#x9;return nt&#xA;}&#xA;&#xA;func Reduce[T any](ts []T, f func(T, T) T, init T) T {&#xA;&#x9;t := init&#xA;&#x9;for _, tt := range ts {&#xA;&#x9;&#x9;t = f(t, tt)&#xA;&#x9;}&#xA;&#x9;return t&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;strong&gt;使用&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Person struct {&#xA;    ID   int&#xA;    Name string&#xA;}&#xA;&#xA;personList := []Person{&#xA;    { 1,&#34;zhangsan&#34;},&#xA;    { 2,&#34;lisi&#34;},&#xA;}&#xA;&#xA;names := Map(personList, func(p Person) string { return p.Name })&#xA;fmt.Println(names) // [zhangsan lisi]&#xA;&#xA;nums := []int{1,2,3,4}&#xA;total := Reduce(nums, func(a, b int) int {&#xA;    return a+b&#xA;}, 0)&#xA;fmt.Println(total) // 10&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;除了 &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;reduce&lt;/code&gt; 还有其他的函数也可以使用泛型实现。  &lt;/p&gt;&#xA;&lt;p&gt;我自己写了一个包： &lt;a href=&#34;https://github.com/lyuangg/mr&#34; rel=&#34;nofollow&#34;&gt;https://github.com/lyuangg/mr&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;实现了：&lt;code&gt;map&lt;/code&gt;, &lt;code&gt;reduce&lt;/code&gt;, &lt;code&gt;Contains&lt;/code&gt;, &lt;code&gt;ToMap&lt;/code&gt;, &lt;code&gt;Filter&lt;/code&gt;, &lt;code&gt;Diff&lt;/code&gt;, &lt;code&gt;Intersect&lt;/code&gt;, &lt;code&gt;Unique&lt;/code&gt;, &lt;code&gt;Merge&lt;/code&gt; 等函数。&lt;/p&gt;&#xA;</description>
+      <author>yuancoder</author>
+      <pubDate>03 Sep 2023 03:01:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>分享一个 自己在开发的 go grpc http 基础开发框架,请大佬帮忙吐槽指点下,想搞的规范干净些 - 分享创造</title>
+      <link>https://www.v2ex.com/t/970484</link>
+      <description>&lt;h3&gt;项目地址&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/webws/go-moda&#34; rel=&#34;nofollow&#34;&gt;https://github.com/webws/go-moda&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h3&gt;特性&lt;/h3&gt;&#xA;&lt;p&gt;零零碎碎的弄了下面功能&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;transport: 集成 http （ echo 、gin ）和 grpc 。&lt;/li&gt;&#xA;&lt;li&gt;统一服务启动入口&lt;/li&gt;&#xA;&lt;li&gt;config: 通用的配置文件读取模块，支持 toml 、yaml 和 json 格式。&lt;/li&gt;&#xA;&lt;li&gt;logger: 日志系统模块，基于 Zap,并支持全局日志和模块日志。&lt;/li&gt;&#xA;&lt;li&gt;pprof: 分析性能&lt;/li&gt;&#xA;&lt;li&gt;tracing: openTelemetry 实现微务链路追踪&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3&gt;后续&lt;/h3&gt;&#xA;&lt;p&gt;目前是结合 otel 搞一些示例代码&#xA;现在偶尔玩玩学学 k8s,打算做个简单一点的 k8s 管理系统,用我这个 api 框架康康&lt;/p&gt;&#xA;</description>
+      <author>websong188</author>
+      <pubDate>03 Sep 2023 02:58:45 +0000</pubDate>
+    </item>
+    <item>
       <title>深圳哪个影院看奥本海默最爽？ - 深圳</title>
       <link>https://www.v2ex.com/t/970482</link>
       <description>&lt;p&gt;如题。之前本来想去香港看。&lt;/p&gt;&#xA;</description>
