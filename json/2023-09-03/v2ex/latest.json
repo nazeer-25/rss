@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "Surge Mac - 5 人车 - Surge",
+      "Link": "https://www.v2ex.com/t/970487",
+      "Description": "\u003col\u003e\n\u003cli\u003e今天刚购买，有订单收据\u003c/li\u003e\n\u003cli\u003e按购买时汇率，145 元/位，中途跳车不退\u003c/li\u003e\n\u003cli\u003e如换设备，可自行反激活\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003e联系 WeChat: XzA4N18wODhfMDcxXw==\u003c/h3\u003e\n",
+      "Author": "Duccck",
+      "PubDate": "2023-09-03T03:10:05Z"
+    },
+    {
+      "Title": "求职问卷 - 深圳",
+      "Link": "https://www.v2ex.com/t/970486",
+      "Description": "\u003cp\u003e深圳的第一份工作，三个月试用期，第七天就辞退。\u003c/p\u003e\n",
+      "Author": "leibobo352333",
+      "PubDate": "2023-09-03T03:03:03Z"
+    },
+    {
       "Title": "Golang 的泛型能干什么 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/970485",
       "Description": "\u003cp\u003eGolang 在 1.18 版本支持了泛型, 在工作中还没有真正用过， 这几天研究了一下，脑子里最先想到的使用场景就是集合类型的处理。 \u003c/p\u003e\n\u003cp\u003e常用的集合处理函数 \u003ccode\u003emap\u003c/code\u003e, \u003ccode\u003eredude\u003c/code\u003e  等， 在别的语言中都是直接支持的，例如 PHP 中的 \u003ccode\u003earray_map\u003c/code\u003e, \u003ccode\u003earray_reduce\u003c/code\u003e。\u003c/p\u003e\n\u003cp\u003e但是 golang 之中只能使用 for 循环，现在有了泛型，让实现 \u003ccode\u003emap\u003c/code\u003e, \u003ccode\u003ereduce\u003c/code\u003e 变的简单了， 相比使用 \u003ccode\u003einterface\u003c/code\u003e，性能也更好。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e代码实现：\u003c/strong\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc Map[T any, R any](ts []T, f func(T) R) []R {\n\tnt := make([]R, 0, len(ts))\n\tfor _, t := range ts {\n\t\tnt = append(nt, f(t))\n\t}\n\treturn nt\n}\n\nfunc Reduce[T any](ts []T, f func(T, T) T, init T) T {\n\tt := init\n\tfor _, tt := range ts {\n\t\tt = f(t, tt)\n\t}\n\treturn t\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003e使用\u003c/strong\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003etype Person struct {\n    ID   int\n    Name string\n}\n\npersonList := []Person{\n    { 1,\"zhangsan\"},\n    { 2,\"lisi\"},\n}\n\nnames := Map(personList, func(p Person) string { return p.Name })\nfmt.Println(names) // [zhangsan lisi]\n\nnums := []int{1,2,3,4}\ntotal := Reduce(nums, func(a, b int) int {\n    return a+b\n}, 0)\nfmt.Println(total) // 10\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e除了 \u003ccode\u003emap\u003c/code\u003e, \u003ccode\u003ereduce\u003c/code\u003e 还有其他的函数也可以使用泛型实现。  \u003c/p\u003e\n\u003cp\u003e我自己写了一个包： \u003ca href=\"https://github.com/lyuangg/mr\" rel=\"nofollow\"\u003ehttps://github.com/lyuangg/mr\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e实现了：\u003ccode\u003emap\u003c/code\u003e, \u003ccode\u003ereduce\u003c/code\u003e, \u003ccode\u003eContains\u003c/code\u003e, \u003ccode\u003eToMap\u003c/code\u003e, \u003ccode\u003eFilter\u003c/code\u003e, \u003ccode\u003eDiff\u003c/code\u003e, \u003ccode\u003eIntersect\u003c/code\u003e, \u003ccode\u003eUnique\u003c/code\u003e, \u003ccode\u003eMerge\u003c/code\u003e 等函数。\u003c/p\u003e\n",
