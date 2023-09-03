@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>想在 Android 上实现一个抖音直播间弹幕读取与发送的功能 - Android</title>
+      <link>https://www.v2ex.com/t/970630</link>
+      <description>&lt;p&gt;最近自己正在做一个 side project ，想在安卓上做一个 app ，可以监控抖音直播间的弹幕，并且根据需求发送弹幕。这两天做了一些研究有如下的整理，不知道有没有做过的小伙伴可以提一些建议。前提是手机不能 root.&lt;/p&gt;&#xA;&lt;h2&gt;弹幕读取&lt;/h2&gt;&#xA;&lt;p&gt;弹幕读取的功能实现起来相对来说简单一些，因为不需要验证登录，GitHub 上已经有很多开源的项目逆向了抖音 Web App 的 websocket 接口和 protobuf 的数据结构。但是我在实现的时候发现连接抖音服务器的 websocket 服务失败。目前不知道是什么原因但是我感觉是可以解决的。&lt;/p&gt;&#xA;&lt;h2&gt;弹幕发送&lt;/h2&gt;&#xA;&lt;p&gt;弹幕发送的功能是目前主要的障碍。我搜索了一下&lt;a href=&#34;https://developer.open-douyin.com/docs/resource/zh-CN/dop/develop/openapi/data-open-service/live-data/live-interactive-data&#34; rel=&#34;nofollow&#34;&gt;抖音的 SDK&lt;/a&gt;似乎是有这个功能的，但是问了一些爱好者群里的反馈又说 SDK 目前没有开放写弹幕的接口。不知道有没有做过的小伙伴了解这个。&lt;/p&gt;&#xA;&lt;p&gt;如果不可以使用 SDK 的话，我目前总结了以下一些实现方法，想与大家一起探讨。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;和抓弹幕的方法一样，现在 web 上逆向出来整个发送弹幕的流程，再在 android 上实现。&lt;/li&gt;&#xA;&lt;li&gt;使用&lt;a href=&#34;http://selendroid.io/&#34; rel=&#34;nofollow&#34;&gt;Selendroid&lt;/a&gt;在 android 上写一个 webdriver 爬虫。我看了一下这个项目已经很久没有更新了，不知道是不是能适配新版本 android 的 webdriver 。我自己只用过 Python + Selenium 写过一些简单的爬虫项目，对 android 上使用这个项目有多少坑不太清楚哈哈。&lt;/li&gt;&#xA;&lt;li&gt;使用一些不用 root 的 Xposed 框架，例如&lt;a href=&#34;https://github.com/LSPosed/LSPatch&#34; rel=&#34;nofollow&#34;&gt;LSPatch&lt;/a&gt;来操作抖音 App 发送弹幕，（我不是专业的 Android 开发，不知道这个方法能不能实现这个功能）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;目前只想到了这些可能的解决方法，因为我在 Android 开发这方面基本是个小白，所以想请教一下厉害的小伙伴们有没有更好的解决办法，或者已经做过类似的工作的朋友也许可以分享一下经验🫡🫡🫡。&lt;/p&gt;&#xA;</description>
+      <author>daxy223</author>
+      <pubDate>03 Sep 2023 21:55:29 +0000</pubDate>
+    </item>
+    <item>
       <title>OrbStack 的 domain names 原理是什么啊？ - 程序员</title>
       <link>https://www.v2ex.com/t/970629</link>
       <description>&lt;p&gt;今天在 mac 上刚装的 OrbStack ，有一点想不通，启动 OrbStack 后就运行了这个命令启动容器，&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker run -d -p 8080:80 docker/getting-started&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;然后就能通过浏览器访问 &lt;a href=&#34;http://orb.local/%EF%BC%8C%E7%9B%B4%E6%8E%A5%E7%9C%8B%E5%88%B0%E4%B8%8B%E9%9D%A2%E7%9A%84%E9%A1%B5%E9%9D%A2&#34; rel=&#34;nofollow&#34;&gt;http://orb.local/，直接看到下面的页面&lt;/a&gt;&#xA;&lt;img class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/B59hvj3.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;然后直接浏览器访问容器的 domain-name ，也就是上图红框里的地址，就能直接访问容器服务页面，连 8080 端口号都不用加。&lt;br/&gt;&#xA;容器之间可以通过容器名互通我是知道的，但是我的宿主机是怎么直接通过&#34;容器名&#34;访问到容器的呢，我看了我本机的 hosts 文件都没有变化啊。 &lt;br/&gt;&#xA;这是什么原理呀，有没有大佬知道这个容器名和 ip:port 的映射是在哪里看？&lt;/p&gt;&#xA;</description>
