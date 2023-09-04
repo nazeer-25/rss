@@ -4,9 +4,30 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>为何 BT 协议中要用%nn 对 16 进制字符串的 info_hash 或者 peer_id 进行编码? - 问与答</title>
+      <link>https://www.v2ex.com/t/970824</link>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Note that all binary data in the URL (particularly info_hash and peer_id) must be properly escaped. This means any byte not in the set 0-9, a-z, A-Z, &#39;.&#39;, &#39;-&#39;, &#39;_&#39; and &#39;~&#39;, must be encoded using the &#34;%nn&#34; format, where nn is the hexadecimal value of the byte. (See RFC1738 for details.)   &lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;For a 20-byte hash of \x12\x34\x56\x78\x9a\xbc\xde\xf1\x23\x45\x67\x89\xab\xcd\xef\x12\x34\x56\x78\x9a,&#xA;The right encoded form is %124Vx%9A%BC%DE%F1%23Eg%89%AB%CD%EF%124Vx%9A&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;-[摘自 &lt;a href=&#34;https://wiki.theory.org/BitTorrentSpecification&#34; rel=&#34;nofollow&#34;&gt;BT 协议&lt;/a&gt;]&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;按照协议的逻辑,&lt;/p&gt;&#xA;&lt;p&gt;对于 \x12\x34\x56\x78\x9a\xbc\xde\xf1\x23\x45\x67\x89\xab\xcd\xef\x12\x34\x56\x78\x9a 这个 info_hash,每个字节的 10 进制数字如果小于等于 127 的(ascii 范围内),都先转换成 ascii 字符,然后用 encodeURIComponent 进行了编码.&lt;/p&gt;&#xA;&lt;p&gt;例如开头的字节 0x12,换算成 10 进制，等于 18 ，查 ascii 码表，18 对应的是 DC2(device control 2)，不是一个可见字符，用 encodeURIComponent 编码后返回%12 。&lt;/p&gt;&#xA;&lt;p&gt;又比如 0x34 ，换算成 10 进制，等于 52 ，查 ascii 码表，对应的是字符&#34;4&#34;。&lt;/p&gt;&#xA;&lt;p&gt;所以头两个字节经过转换后变成了 %124&lt;/p&gt;&#xA;&lt;p&gt;我的问题是,16 进制的字符表达在 URL 作为参数中应该是完全安全的&lt;/p&gt;&#xA;&lt;p&gt;16 进制也就是 0-9 以及 a-f,两个字符代表一个字节,例如上面的 16 进制字符串完全可以表示为：123456789abcdef123456789abcdef123456789a ，作为 URL 的查询参数传输也不会存在安全问题才对。&lt;/p&gt;&#xA;&lt;p&gt;这是因为历史原因约定俗成导致的，还是因为其他原因呢？&lt;/p&gt;&#xA;</description>
+      <author>xlsepiphone</author>
+      <pubDate>04 Sep 2023 09:02:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>Github 无意中翻到一个 win12 的项目，居然是初三学生写的？ - 程序员</title>
+      <link>https://www.v2ex.com/t/970823</link>
+      <description>&lt;p&gt;看了下代码量也不小，居然是个初三学生写的。项目地址如下：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/tjy-gitnub/win12&#34; rel=&#34;nofollow&#34;&gt;https://github.com/tjy-gitnub/win12&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>buludu</author>
+      <pubDate>04 Sep 2023 09:00:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>Spotify 港区 拼车/预发车 - Spotify</title>
+      <link>https://www.v2ex.com/t/970822</link>
+      <description>&lt;p&gt;68HK$的个人 plan 听着过于肉疼，试试看能不能拼的起来&#xA;2 月起拼 35/deux mon 50/季度&#xA;个人账号 人满发车 可走闲鱼&#xA;电报 @&lt;a href=&#34;/member/polarcrepe&#34;&gt;polarcrepe&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>pancakedjjb</author>
+      <pubDate>04 Sep 2023 09:00:04 +0000</pubDate>
+    </item>
+    <item>
       <title>请教下关于光猫和路由器的一些问题 - 问与答</title>
       <link>https://www.v2ex.com/t/970821</link>
-      <description>&lt;h4&gt;前提：&lt;/h4&gt;&#xA;&lt;p&gt;家里是用移动宽带 100M ，用的光猫是 pt924G ，&lt;/p&gt;&#xA;&lt;p&gt;连接光猫的终端有手机 6 个，平板 1 个，外加电脑&lt;/p&gt;&#xA;&lt;p&gt;前天晚上，我用电脑连接 wifi ，发现一直没有网，但是手机 wifi 正常，电脑用手机热点也是正常，怀疑是光猫限制终端的问题&lt;/p&gt;&#xA;&lt;h4&gt;解决办法：&lt;/h4&gt;&#xA;&lt;p&gt;1 、升级宽带 +1 元/月 升级到了 300M&lt;/p&gt;&#xA;&lt;p&gt;2 、用小米路由器 3 （ 17 年买的） 连接光猫的 LAN 口（千兆口），手机都连接小米路由器&lt;/p&gt;&#xA;&lt;h4&gt;问题&lt;/h4&gt;&#xA;&lt;p&gt;1 、才发现小米路由器 3 是百兆 wifi ，这样是不是意味着，网速不会超过 100Mbps ？需不需要换路由器？&lt;/p&gt;&#xA;&lt;p&gt;2 、我这样用路由器连接光猫有没有什么问题？因为昨天 12 点后，手机连接小米路由器的 wifi 没网，光猫的 wifi 反而有网，怀疑是 ip 冲突&lt;/p&gt;&#xA;&lt;p&gt;3 、是否需要更换光猫，光猫是 18 年底办网的时候，交钱给的，&#xA;现在移动的工作人员说可以办理 1000M 的网（加 10 元/月+360 元光猫升级费），就需要换光猫，因为家里光猫限制是 600M ，而且年限久了，有损耗&lt;/p&gt;&#xA;&lt;p&gt;谢谢大家的回复&lt;/p&gt;&#xA;</description>
+      <description>&lt;h4&gt;前提：&lt;/h4&gt;&#xA;&lt;p&gt;家里是用移动宽带 100M ，用的光猫是 pt924G ，&lt;/p&gt;&#xA;&lt;p&gt;连接光猫的终端有手机 6 个，平板 1 个，外加电脑&lt;/p&gt;&#xA;&lt;p&gt;前天晚上，我用电脑连接 wifi ，发现一直没有网，但是手机 wifi 正常，电脑用手机热点也是正常，怀疑是光猫限制终端的问题&lt;/p&gt;&#xA;&lt;h4&gt;解决办法：&lt;/h4&gt;&#xA;&lt;p&gt;1 、升级宽带 +1 元/月 升级到了 300M&lt;/p&gt;&#xA;&lt;p&gt;2 、用小米路由器 3 （ 17 年买的） 连接光猫的 LAN 口（千兆口），手机都连接小米路由器&lt;/p&gt;&#xA;&lt;h4&gt;问题&lt;/h4&gt;&#xA;&lt;p&gt;1 、才发现小米路由器 3 是百兆 wifi ，这样是不是意味着，网速不会超过 100Mbps ？需不需要换路由器？&lt;/p&gt;&#xA;&lt;p&gt;2 、我这样用路由器连接光猫有没有什么问题？因为昨天 12 点后，手机连接小米路由器的 wifi 没网，光猫的 wifi 反而有网，怀疑是 ip 冲突&lt;/p&gt;&#xA;&lt;p&gt;3 、是否需要更换光猫，光猫是 18 年底办网的时候，交钱给的，&#xA;现在移动的工作人员说可以办理 1000M 的网（加 10 元/月+360 元光猫升级费），就需要换光猫，因为家里光猫限制是 600M ，而且年限久了，有损耗&lt;/p&gt;&#xA;&lt;p&gt;表述不当的句子，敬请谅解&#xA;谢谢大家的回复&lt;/p&gt;&#xA;</description>
       <author>huangqihong</author>
       <pubDate>04 Sep 2023 08:57:38 +0000</pubDate>
     </item>
