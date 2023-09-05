@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "跟风闲置几个域名摆摊、看一眼不要钱、明码标价。 - 程序员",
+      "Link": "https://www.v2ex.com/t/971202",
+      "Description": "\u003ca target=\"_blank\" href=\"http://losercloud.com\" rel=\"nofollow noopener\"\u003elosercloud.com\u003c/a\u003e 2025 过期 屌丝云盘 399 元\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"http://poorguy.org\" rel=\"nofollow noopener\"\u003epoorguy.org\u003c/a\u003e 2033 过期 穷鬼 388 元\u003cbr /\u003e\u003cbr /\u003enew.kim 2024 过期 388 元 \u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"http://wocaonimabi.com\" rel=\"nofollow noopener\"\u003ewocaonimabi.com\u003c/a\u003e 2027 过期 388 元\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"http://saobiwang.com\" rel=\"nofollow noopener\"\u003esaobiwang.com\u003c/a\u003e 2024 过期 168 元\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"http://sex.td\" rel=\"nofollow noopener\"\u003esex.td\u003c/a\u003e 2024 过期 588 元\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"http://lv.icu\" rel=\"nofollow noopener\"\u003elv.icu\u003c/a\u003e 2024 过期 288 元\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"http://vo.icu\" rel=\"nofollow noopener\"\u003evo.icu\u003c/a\u003e 2024 过期 288 元\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"http://s.gx.cn\" rel=\"nofollow noopener\"\u003es.gx.cn\u003c/a\u003e 2025 过期 168 元\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"http://leng.fan\" rel=\"nofollow noopener\"\u003eleng.fan\u003c/a\u003e 2024 过期 冷饭 188 元\u003cbr /\u003e\u003cbr /\u003e\u003ca target=\"_blank\" href=\"http://caidaq.icu\" rel=\"nofollow noopener\"\u003ecaidaq.icu\u003c/a\u003e 2024 过期 财大气粗 288 元\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e续费几乎都是几十块\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e马化腾 1725624383",
+      "Author": "hemingcn",
+      "PubDate": "2023-09-05T12:50:56Z"
+    },
+    {
+      "Title": "出顶级 hack 域名： ht.ml 程序猿看过来 - 程序员",
+      "Link": "https://www.v2ex.com/t/971201",
+      "Description": "html 的含义不多说了，\u003ca target=\"_blank\" href=\"http://ht.ml\" rel=\"nofollow noopener\"\u003eht.ml\u003c/a\u003e 是百分百契合的 hack 域名\u003cbr /\u003e欢迎报价及咨询\u003cbr /\u003eV: seefeifei",
+      "Author": "phiiil",
+      "PubDate": "2023-09-05T12:46:35Z"
+    },
+    {
+      "Title": "博德之门细节在哪，我玩的不是一个游戏吗 - 游戏",
+      "Link": "https://www.v2ex.com/t/971200",
+      "Description": "\u003cp\u003e有些啥细节是比较惊艳但是又不容易触发的？\u003c/p\u003e\n",
+      "Author": "EmMonster",
+      "PubDate": "2023-09-05T12:45:44Z"
+    },
+    {
       "Title": "杭州联通端口全被屏蔽 - 宽带症候群",
       "Link": "https://www.v2ex.com/t/971199",
       "Description": "\u003cblockquote\u003e\n\u003cp\u003e就剩\u003ccode\u003e25\u003c/code\u003e跟\u003ccode\u003e110\u003c/code\u003e端口 是开放的 ,其他从 1 到 65535 全都是封锁的\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cblockquote\u003e\n\u003cp\u003e我网上抄了个 golang 程序测试的\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\"flag\"\n\t\"fmt\"\n\t\"net\"\n\t\"runtime\"\n\t\"time\"\n)\n\n// CheckIsOpen 检查端口是否打卡\nfunc CheckIsOpen(domain string, timeout time.Duration, portChan chan int, exitChan chan bool, openPort []int, rescan chan int) {\n\tfor {\n\t\tport, ok := \u0026lt;-portChan\n\t\tif !ok {\n\t\t\tbreak\n\t\t}\n\t\tsocket := fmt.Sprintf(\"%v:%v\", domain, port)\n\t\t_, err := net.DialTimeout(\"tcp\", socket, timeout) //发起握手操作  有回应 说明打开了端口 并且做了延时 超过一定时间 直接说明未打开\n\n\t\tdefer func() {\n\t\t\trecover()\n\t\t}()\n\n\t\tif err == nil {\n\t\t\trescan \u0026lt;- port\n\t\t\tfmt.Println(socket, \" 打开\")\n\t\t\topenPort = append(openPort, port)\n\t\t} else {\n\t\t\t//fmt.Println(socket, \" 关闭\")\n\t\t}\n\t}\n\texitChan \u0026lt;- true\n}\nfunc main() {\n\tcores := runtime.NumCPU()\n\truntime.GOMAXPROCS(cores - 1)\n\tdomainP := flag.String(\"domain\", \"\", \"请输入指定的 IP 地址\")\n\tflag.Parse()\n\tdomain := *domainP\n\n\tif domain == \"\" {\n\t\tfmt.Println(\"请输入 IP 地址\")\n\t\treturn\n\t}\n\topenPort := make([]int, 10)\n\texitChan := make(chan bool)\n\tportChan := make(chan int)\n\tresChan := make(chan int, 100)\n\tgo func() {\n\t\tfor i := 0; i \u0026lt; 65535; i++ {\n\t\t\tportChan \u0026lt;- i\n\t\t}\n\t\tclose(portChan) //及时关闭管道 使用 for 循环取出时才不会等待\n\t}()\n\ttimeout := time.Millisecond * 200\n\tfor i := 0; i \u0026lt; 18; i++ {\n\t\tgo CheckIsOpen(domain, timeout, portChan, exitChan, openPort, resChan)\n\t}\n\tfor i := 0; i \u0026lt; 18; i++ {\n\t\t\u0026lt;-exitChan\n\t}\n\tclose(exitChan)\n\tclose(resChan)\n\tfmt.Println(\"开启的端口号:\")\n\tfor {\n\t\tport, res := \u0026lt;-resChan\n\t\tif !res {\n\t\t\tbreak\n\t\t}\n\t\tfmt.Println(port)\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
