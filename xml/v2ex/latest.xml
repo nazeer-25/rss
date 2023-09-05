@@ -4,9 +4,37 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>杭州联通端口全被屏蔽 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/971199</link>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;就剩&lt;code&gt;25&lt;/code&gt;跟&lt;code&gt;110&lt;/code&gt;端口 是开放的 ,其他从 1 到 65535 全都是封锁的&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;我网上抄了个 golang 程序测试的&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main&#xA;&#xA;import (&#xA;&#x9;&#34;flag&#34;&#xA;&#x9;&#34;fmt&#34;&#xA;&#x9;&#34;net&#34;&#xA;&#x9;&#34;runtime&#34;&#xA;&#x9;&#34;time&#34;&#xA;)&#xA;&#xA;// CheckIsOpen 检查端口是否打卡&#xA;func CheckIsOpen(domain string, timeout time.Duration, portChan chan int, exitChan chan bool, openPort []int, rescan chan int) {&#xA;&#x9;for {&#xA;&#x9;&#x9;port, ok := &amp;lt;-portChan&#xA;&#x9;&#x9;if !ok {&#xA;&#x9;&#x9;&#x9;break&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;socket := fmt.Sprintf(&#34;%v:%v&#34;, domain, port)&#xA;&#x9;&#x9;_, err := net.DialTimeout(&#34;tcp&#34;, socket, timeout) //发起握手操作  有回应 说明打开了端口 并且做了延时 超过一定时间 直接说明未打开&#xA;&#xA;&#x9;&#x9;defer func() {&#xA;&#x9;&#x9;&#x9;recover()&#xA;&#x9;&#x9;}()&#xA;&#xA;&#x9;&#x9;if err == nil {&#xA;&#x9;&#x9;&#x9;rescan &amp;lt;- port&#xA;&#x9;&#x9;&#x9;fmt.Println(socket, &#34; 打开&#34;)&#xA;&#x9;&#x9;&#x9;openPort = append(openPort, port)&#xA;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;//fmt.Println(socket, &#34; 关闭&#34;)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;exitChan &amp;lt;- true&#xA;}&#xA;func main() {&#xA;&#x9;cores := runtime.NumCPU()&#xA;&#x9;runtime.GOMAXPROCS(cores - 1)&#xA;&#x9;domainP := flag.String(&#34;domain&#34;, &#34;&#34;, &#34;请输入指定的 IP 地址&#34;)&#xA;&#x9;flag.Parse()&#xA;&#x9;domain := *domainP&#xA;&#xA;&#x9;if domain == &#34;&#34; {&#xA;&#x9;&#x9;fmt.Println(&#34;请输入 IP 地址&#34;)&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;openPort := make([]int, 10)&#xA;&#x9;exitChan := make(chan bool)&#xA;&#x9;portChan := make(chan int)&#xA;&#x9;resChan := make(chan int, 100)&#xA;&#x9;go func() {&#xA;&#x9;&#x9;for i := 0; i &amp;lt; 65535; i++ {&#xA;&#x9;&#x9;&#x9;portChan &amp;lt;- i&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;close(portChan) //及时关闭管道 使用 for 循环取出时才不会等待&#xA;&#x9;}()&#xA;&#x9;timeout := time.Millisecond * 200&#xA;&#x9;for i := 0; i &amp;lt; 18; i++ {&#xA;&#x9;&#x9;go CheckIsOpen(domain, timeout, portChan, exitChan, openPort, resChan)&#xA;&#x9;}&#xA;&#x9;for i := 0; i &amp;lt; 18; i++ {&#xA;&#x9;&#x9;&amp;lt;-exitChan&#xA;&#x9;}&#xA;&#x9;close(exitChan)&#xA;&#x9;close(resChan)&#xA;&#x9;fmt.Println(&#34;开启的端口号:&#34;)&#xA;&#x9;for {&#xA;&#x9;&#x9;port, res := &amp;lt;-resChan&#xA;&#x9;&#x9;if !res {&#xA;&#x9;&#x9;&#x9;break&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;fmt.Println(port)&#xA;&#x9;}&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>luodaoyi</author>
+      <pubDate>05 Sep 2023 12:44:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>出两张新加坡 singtel hi card - 推广</title>
+      <link>https://www.v2ex.com/t/971198</link>
+      <description>&lt;p&gt;需在 app 使用护照实名&lt;/p&gt;&#xA;&lt;p&gt;开卡带 10sgd 余额，在 hi app 输入邀请码 ZWVKWDIT 可多拿 3sgd 余额&lt;/p&gt;&#xA;&lt;p&gt;此卡在漫游状态下接收短信免费，漫游通话 3 新币每分钟，发短信 1.5 新币每条，都很贵，真的要和新加坡客户沟通建议用这个号码注册无忧行和 whatsapp 搭配使用&lt;/p&gt;&#xA;&lt;p&gt;开卡激活有效期是 90 日，扣费 1.4sgd 可将号码延期三个月，综上开卡拿 13sgd 余额能保号两年半，之后每年充值 5.6sgd 进行保号&lt;/p&gt;&#xA;&lt;p&gt;价格：150&lt;/p&gt;&#xA;&lt;p&gt;联系方式：联系方式：aHR0cHM6Ly90Lm1lL2h1emkyMjIx&lt;/p&gt;&#xA;</description>
+      <author>z77ok2</author>
+      <pubDate>05 Sep 2023 12:39:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>Netflix 招 4 个人 - Netflix</title>
+      <link>https://www.v2ex.com/t/971197</link>
+      <description>&lt;h1&gt;土耳其老车（ 2023 年 3 月 28 日订购至今）&lt;/h1&gt;&#xA;&lt;p&gt;香港节点不可用，其余不限制，建议新加坡&lt;/p&gt;&#xA;&lt;h2&gt;车位价格（ 3 个月起售）&lt;/h2&gt;&#xA;&lt;p&gt;3 个月，共 45rmb&lt;/p&gt;&#xA;&lt;h2&gt;联系方式&lt;/h2&gt;&#xA;&lt;p&gt;Telegram：yuayua816&lt;/p&gt;&#xA;&lt;h2&gt;支付方式&lt;/h2&gt;&#xA;&lt;p&gt;ZFB 口令红包&lt;/p&gt;&#xA;</description>
+      <author>3we2zs</author>
+      <pubDate>05 Sep 2023 12:35:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>想办个信用卡，有什么好推荐那家银行的卡好用？ - 问与答</title>
+      <link>https://www.v2ex.com/t/971196</link>
+      <description>现在偶尔要用它来境外支付，想办个信用卡，有什么好推荐那家银行的卡好用？&lt;br /&gt;请大家推荐一张，谢谢！</description>
+      <author>Aluhao</author>
+      <pubDate>05 Sep 2023 12:34:47 +0000</pubDate>
+    </item>
+    <item>
       <title>出搬瓦工 The Plan V2 - VPS</title>
       <link>https://www.v2ex.com/t/971195</link>
-      <description>600 出搬瓦工 The Plan V2 110 刀/年冲动购入，2024 年 6 月 27 到期。修改邮箱。&lt;br /&gt;收就送 Racknerd New Year 2022 小鸡（邀请管理），2024 年 1 月到期，续费 19.78 刀/两年，线路 Los Angeles DC02 ，解锁美区奈飞非自制。&lt;br /&gt;小鸡可 push ，费用自理。&lt;br /&gt;主机详情&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;/i/diBAymTj.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34; title=&#34;在新窗口打开图片 diBAymTj.png&#34;&gt;&lt;img src=&#34;//i.v2ex.co/diBAymTj.png&#34; class=&#34;embedded_image&#34;&gt;&lt;/a&gt;&lt;br /&gt;可用机房&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;/i/8620INn5.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34; title=&#34;在新窗口打开图片 8620INn5.png&#34;&gt;&lt;img src=&#34;//i.v2ex.co/8620INn5.png&#34; class=&#34;embedded_image&#34;&gt;&lt;/a&gt;&lt;br /&gt;小鸡详情&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;/i/Y7IWS9Xe.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34; title=&#34;在新窗口打开图片 Y7IWS9Xe.png&#34;&gt;&lt;img src=&#34;//i.v2ex.co/Y7IWS9Xe.png&#34; class=&#34;embedded_image&#34;&gt;&lt;/a&gt;</description>
+      <description>600 出搬瓦工 The Plan V2 110 刀/年冲动购入，2024 年 6 月 27 到期。修改邮箱。&lt;br /&gt;收就送 Racknerd New Year 2022 小鸡（邀请管理），2024 年 1 月到期，续费 19.78 刀/两年，线路 Los Angeles DC02 ，解锁美区奈飞非自制。&lt;br /&gt;小鸡可 push ，费用自理。联系 TG：QGt1d2luZXQ=&lt;br /&gt;主机详情&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;/i/diBAymTj.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34; title=&#34;在新窗口打开图片 diBAymTj.png&#34;&gt;&lt;img src=&#34;//i.v2ex.co/diBAymTj.png&#34; class=&#34;embedded_image&#34;&gt;&lt;/a&gt;&lt;br /&gt;可用机房&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;/i/8620INn5.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34; title=&#34;在新窗口打开图片 8620INn5.png&#34;&gt;&lt;img src=&#34;//i.v2ex.co/8620INn5.png&#34; class=&#34;embedded_image&#34;&gt;&lt;/a&gt;&lt;br /&gt;小鸡详情&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;/i/Y7IWS9Xe.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34; title=&#34;在新窗口打开图片 Y7IWS9Xe.png&#34;&gt;&lt;img src=&#34;//i.v2ex.co/Y7IWS9Xe.png&#34; class=&#34;embedded_image&#34;&gt;&lt;/a&gt;</description>
       <author>darny</author>
       <pubDate>05 Sep 2023 12:30:13 +0000</pubDate>
     </item>

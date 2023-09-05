@@ -4,9 +4,37 @@
   "Description": "",
   "Items": [
     {
+      "Title": "杭州联通端口全被屏蔽 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/971199",
+      "Description": "\u003cblockquote\u003e\n\u003cp\u003e就剩\u003ccode\u003e25\u003c/code\u003e跟\u003ccode\u003e110\u003c/code\u003e端口 是开放的 ,其他从 1 到 65535 全都是封锁的\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cblockquote\u003e\n\u003cp\u003e我网上抄了个 golang 程序测试的\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003epackage main\n\nimport (\n\t\"flag\"\n\t\"fmt\"\n\t\"net\"\n\t\"runtime\"\n\t\"time\"\n)\n\n// CheckIsOpen 检查端口是否打卡\nfunc CheckIsOpen(domain string, timeout time.Duration, portChan chan int, exitChan chan bool, openPort []int, rescan chan int) {\n\tfor {\n\t\tport, ok := \u0026lt;-portChan\n\t\tif !ok {\n\t\t\tbreak\n\t\t}\n\t\tsocket := fmt.Sprintf(\"%v:%v\", domain, port)\n\t\t_, err := net.DialTimeout(\"tcp\", socket, timeout) //发起握手操作  有回应 说明打开了端口 并且做了延时 超过一定时间 直接说明未打开\n\n\t\tdefer func() {\n\t\t\trecover()\n\t\t}()\n\n\t\tif err == nil {\n\t\t\trescan \u0026lt;- port\n\t\t\tfmt.Println(socket, \" 打开\")\n\t\t\topenPort = append(openPort, port)\n\t\t} else {\n\t\t\t//fmt.Println(socket, \" 关闭\")\n\t\t}\n\t}\n\texitChan \u0026lt;- true\n}\nfunc main() {\n\tcores := runtime.NumCPU()\n\truntime.GOMAXPROCS(cores - 1)\n\tdomainP := flag.String(\"domain\", \"\", \"请输入指定的 IP 地址\")\n\tflag.Parse()\n\tdomain := *domainP\n\n\tif domain == \"\" {\n\t\tfmt.Println(\"请输入 IP 地址\")\n\t\treturn\n\t}\n\topenPort := make([]int, 10)\n\texitChan := make(chan bool)\n\tportChan := make(chan int)\n\tresChan := make(chan int, 100)\n\tgo func() {\n\t\tfor i := 0; i \u0026lt; 65535; i++ {\n\t\t\tportChan \u0026lt;- i\n\t\t}\n\t\tclose(portChan) //及时关闭管道 使用 for 循环取出时才不会等待\n\t}()\n\ttimeout := time.Millisecond * 200\n\tfor i := 0; i \u0026lt; 18; i++ {\n\t\tgo CheckIsOpen(domain, timeout, portChan, exitChan, openPort, resChan)\n\t}\n\tfor i := 0; i \u0026lt; 18; i++ {\n\t\t\u0026lt;-exitChan\n\t}\n\tclose(exitChan)\n\tclose(resChan)\n\tfmt.Println(\"开启的端口号:\")\n\tfor {\n\t\tport, res := \u0026lt;-resChan\n\t\tif !res {\n\t\t\tbreak\n\t\t}\n\t\tfmt.Println(port)\n\t}\n}\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "luodaoyi",
+      "PubDate": "2023-09-05T12:44:39Z"
+    },
+    {
+      "Title": "出两张新加坡 singtel hi card - 推广",
+      "Link": "https://www.v2ex.com/t/971198",
+      "Description": "\u003cp\u003e需在 app 使用护照实名\u003c/p\u003e\n\u003cp\u003e开卡带 10sgd 余额，在 hi app 输入邀请码 ZWVKWDIT 可多拿 3sgd 余额\u003c/p\u003e\n\u003cp\u003e此卡在漫游状态下接收短信免费，漫游通话 3 新币每分钟，发短信 1.5 新币每条，都很贵，真的要和新加坡客户沟通建议用这个号码注册无忧行和 whatsapp 搭配使用\u003c/p\u003e\n\u003cp\u003e开卡激活有效期是 90 日，扣费 1.4sgd 可将号码延期三个月，综上开卡拿 13sgd 余额能保号两年半，之后每年充值 5.6sgd 进行保号\u003c/p\u003e\n\u003cp\u003e价格：150\u003c/p\u003e\n\u003cp\u003e联系方式：联系方式：aHR0cHM6Ly90Lm1lL2h1emkyMjIx\u003c/p\u003e\n",
+      "Author": "z77ok2",
+      "PubDate": "2023-09-05T12:39:23Z"
+    },
+    {
+      "Title": "Netflix 招 4 个人 - Netflix",
+      "Link": "https://www.v2ex.com/t/971197",
+      "Description": "\u003ch1\u003e土耳其老车（ 2023 年 3 月 28 日订购至今）\u003c/h1\u003e\n\u003cp\u003e香港节点不可用，其余不限制，建议新加坡\u003c/p\u003e\n\u003ch2\u003e车位价格（ 3 个月起售）\u003c/h2\u003e\n\u003cp\u003e3 个月，共 45rmb\u003c/p\u003e\n\u003ch2\u003e联系方式\u003c/h2\u003e\n\u003cp\u003eTelegram：yuayua816\u003c/p\u003e\n\u003ch2\u003e支付方式\u003c/h2\u003e\n\u003cp\u003eZFB 口令红包\u003c/p\u003e\n",
+      "Author": "3we2zs",
+      "PubDate": "2023-09-05T12:35:14Z"
+    },
+    {
+      "Title": "想办个信用卡，有什么好推荐那家银行的卡好用？ - 问与答",
+      "Link": "https://www.v2ex.com/t/971196",
+      "Description": "现在偶尔要用它来境外支付，想办个信用卡，有什么好推荐那家银行的卡好用？\u003cbr /\u003e请大家推荐一张，谢谢！",
+      "Author": "Aluhao",
+      "PubDate": "2023-09-05T12:34:47Z"
+    },
+    {
       "Title": "出搬瓦工 The Plan V2 - VPS",
       "Link": "https://www.v2ex.com/t/971195",
-      "Description": "600 出搬瓦工 The Plan V2 110 刀/年冲动购入，2024 年 6 月 27 到期。修改邮箱。\u003cbr /\u003e收就送 Racknerd New Year 2022 小鸡（邀请管理），2024 年 1 月到期，续费 19.78 刀/两年，线路 Los Angeles DC02 ，解锁美区奈飞非自制。\u003cbr /\u003e小鸡可 push ，费用自理。\u003cbr /\u003e主机详情\u003cbr /\u003e\u003ca target=\"_blank\" href=\"/i/diBAymTj.png\" rel=\"nofollow noopener\" target=\"_blank\" title=\"在新窗口打开图片 diBAymTj.png\"\u003e\u003cimg src=\"//i.v2ex.co/diBAymTj.png\" class=\"embedded_image\"\u003e\u003c/a\u003e\u003cbr /\u003e可用机房\u003cbr /\u003e\u003ca target=\"_blank\" href=\"/i/8620INn5.png\" rel=\"nofollow noopener\" target=\"_blank\" title=\"在新窗口打开图片 8620INn5.png\"\u003e\u003cimg src=\"//i.v2ex.co/8620INn5.png\" class=\"embedded_image\"\u003e\u003c/a\u003e\u003cbr /\u003e小鸡详情\u003cbr /\u003e\u003ca target=\"_blank\" href=\"/i/Y7IWS9Xe.png\" rel=\"nofollow noopener\" target=\"_blank\" title=\"在新窗口打开图片 Y7IWS9Xe.png\"\u003e\u003cimg src=\"//i.v2ex.co/Y7IWS9Xe.png\" class=\"embedded_image\"\u003e\u003c/a\u003e",
+      "Description": "600 出搬瓦工 The Plan V2 110 刀/年冲动购入，2024 年 6 月 27 到期。修改邮箱。\u003cbr /\u003e收就送 Racknerd New Year 2022 小鸡（邀请管理），2024 年 1 月到期，续费 19.78 刀/两年，线路 Los Angeles DC02 ，解锁美区奈飞非自制。\u003cbr /\u003e小鸡可 push ，费用自理。联系 TG：QGt1d2luZXQ=\u003cbr /\u003e主机详情\u003cbr /\u003e\u003ca target=\"_blank\" href=\"/i/diBAymTj.png\" rel=\"nofollow noopener\" target=\"_blank\" title=\"在新窗口打开图片 diBAymTj.png\"\u003e\u003cimg src=\"//i.v2ex.co/diBAymTj.png\" class=\"embedded_image\"\u003e\u003c/a\u003e\u003cbr /\u003e可用机房\u003cbr /\u003e\u003ca target=\"_blank\" href=\"/i/8620INn5.png\" rel=\"nofollow noopener\" target=\"_blank\" title=\"在新窗口打开图片 8620INn5.png\"\u003e\u003cimg src=\"//i.v2ex.co/8620INn5.png\" class=\"embedded_image\"\u003e\u003c/a\u003e\u003cbr /\u003e小鸡详情\u003cbr /\u003e\u003ca target=\"_blank\" href=\"/i/Y7IWS9Xe.png\" rel=\"nofollow noopener\" target=\"_blank\" title=\"在新窗口打开图片 Y7IWS9Xe.png\"\u003e\u003cimg src=\"//i.v2ex.co/Y7IWS9Xe.png\" class=\"embedded_image\"\u003e\u003c/a\u003e",
       "Author": "darny",
       "PubDate": "2023-09-05T12:30:13Z"
     },
