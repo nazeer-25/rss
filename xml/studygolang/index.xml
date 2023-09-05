@@ -38,13 +38,13 @@
       <description>&lt;p&gt;使用http.NewRequest并发请求同一个接口（参数不一样）时，一段时间后，会提示下面这个错误：谁知道是什么原因吗&#xA;connectex: Only one usage of each socket address (protocol/network address/port) is normally permitted&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>go快速构建web项目脚手架</title>
-      <link>https://studygolang.com/articles/36313#reply1</link>
-    </item>
-    <item>
       <title>郁闷了一下午了,传个参怎么遇到这么古怪的事情了！！！</title>
       <link>https://studygolang.com/topics/16671#reply1</link>
       <description>&lt;p&gt;哪位大神帮忙给看看，郁闷了一下午了太气人了！&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;func Upload(w http.ResponseWriter, r *http.Request) {&#xA;&#x9;r.ParseMultipartForm(1024)&#xA;&#x9;_, _, err := r.FormFile(&amp;quot;upload&amp;quot;)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;w.Write([]byte(&amp;quot;文件上传错误&amp;quot;))&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;for _, fileHead := range r.MultipartForm.File[&amp;quot;upload&amp;quot;] {&#xA;&#x9;&#x9;file, err := fileHead.Open()&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;log.Println(&amp;quot;没有接收到文件&amp;quot;, err)&#xA;&#x9;&#x9;&#x9;return&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;defer file.Close()&#xA;&#x9;&#x9;buf := make([]byte, 512)&#xA;&#x9;&#x9;file.Read(buf)&#xA;&#x9;&#x9;objContentType := http.DetectContentType(buf) //用这个就报错&#xA;&#x9;&#x9;// objContentType := &amp;quot;application/pdf&amp;quot;  用这个就没问题&#xA;&#x9;&#x9;miniolib.UploadObj(fileHead.Filename, file, fileHead.Size, objContentType)&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;下面这个是UploadObj的写法&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;func UploadObj(objectName string, fp io.Reader, size int64, opt string) {&#xA;&#x9;object, err := client.PutObject(context.Background(), bucketName, objectName, fp, size, minio.PutObjectOptions{ContentType: opt})&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;log.Println(&amp;quot;上传失败：&amp;quot;, err)&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;log.Printf(&amp;quot;文件上传成功 %s of 文件大小为: %d\n&amp;quot;, objectName, object.Size)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;原因是因为file.Read读取了512个字节作为判断contentType的类型，再上传数据的时候file的完整性就没有了，所以会提示错误。&#xA;正确的写法是下面的:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;func Upload(w http.ResponseWriter, r *http.Request) {&#xA;&#x9;err := r.ParseMultipartForm(1024)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;w.Write([]byte(&amp;quot;没有上传文件,请重试&amp;quot;))&#xA;&#x9;&#x9;return&#xA;&#x9;}&#xA;&#x9;for _, fileHead := range r.MultipartForm.File[&amp;quot;upload&amp;quot;] {&#xA;&#x9;&#x9;file, err := fileHead.Open()&#xA;&#x9;&#x9;if err != nil {&#xA;&#x9;&#x9;&#x9;log.Println(err)&#xA;&#x9;&#x9;&#x9;return&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;defer file.Close()&#xA;&#x9;&#x9;objContentType := fileHead.Header[&amp;quot;Content-Type&amp;quot;]&#xA;&#x9;&#x9;miniolib.UploadObj(fileHead.Filename, file, fileHead.Size, objContentType[0])&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>go快速构建web项目脚手架</title>
+      <link>https://studygolang.com/articles/36313#reply1</link>
     </item>
     <item>
       <title>2023年稳定流畅的科学上网,梯子工具，上网稳定流畅,ChatGPT自由,支持上99%的外国网站和应用</title>
