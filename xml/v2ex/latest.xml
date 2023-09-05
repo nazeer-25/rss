@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>分享一个玩具，把 PHP 的 http 请求变为长连接，能有效降低请求的延迟 - 程序员</title>
+      <link>https://www.v2ex.com/t/971229</link>
+      <description>&lt;h1&gt;Fastcar - PHP HTTP 长连接代理&lt;/h1&gt;&#xA;&lt;h2&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;公司的一个 php 项目经常调用众多的三方平台的 api ，有 http 协议和 https 协议；由于 php-fpm 模式无法复用链接，所以每次进行 api 调用时需要经过：tcp 握手、（ tls 握手）、http 报文交互、连接关闭几个阶段；比较明显的就是接口延迟高，业务量大时出现大量的 TIME_WAIT 。&lt;/p&gt;&#xA;&lt;h2&gt;解决&lt;/h2&gt;&#xA;&lt;p&gt;使用 go 语言开发了一个网络请求代理中间件，接管 php 的网络请求，在代理程序中保持连接的复用；经测试能极大的降低网络延迟，目前已在生产环境使用。&lt;/p&gt;&#xA;&lt;h3&gt;测试百度翻译 api 的 http 和 https 请求延迟&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;http 模式下平均请求延迟降低了约 34.8%&lt;/li&gt;&#xA;&lt;li&gt;https 模式平均请求延迟降低了约 48.4%&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;Fastcar 原理简介&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;HTTPS 伪装握手：针对 https 服务的访问 Fastcar 会伪装服务端进行 TLS 握手，代替 php 程序同目标服务建立 tls 连接，并保持连接复用，能显著降低 php 短连接频繁握手导致的请求延迟。&lt;/li&gt;&#xA;&lt;li&gt;长连接支持：通过维护连接池，Fastcar 提供长连接支持，可以接管节点上所有的 php 程序网络请求，达到多服务连接共用；例如 k8s 形式单台节点上部署多个 pod 形式的业务能实现连接的共用，大大降低连接建立的开销。&lt;/li&gt;&#xA;&lt;li&gt;资源优化：Fastcar 本身非常轻量，只占用很少的系统资源；代码量极少，只依赖 go 官方库&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;开源地址&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/pretty66/fastcar&#34; rel=&#34;nofollow&#34;&gt;Fastcar github(你可以当做这是一个玩具~~)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/pretty66/fastcar&#34; rel=&#34;nofollow&#34;&gt;Fastcar github(但是他确实极大的优化了我们的业务)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/pretty66/fastcar&#34; rel=&#34;nofollow&#34;&gt;Fastcar github(开源出来希望能帮到有相同业务困扰的朋友)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;最后&lt;/h2&gt;&#xA;&lt;p&gt;如果项目采用微服务架构，且包括由 PHP 开发的微服务，而这些微服务之间通过 HTTP 进行调用，那么可以使用 Fastcar 作为 PHP 的网络请求中间件。能有效地维持长连接，降低资源开销，以及减少网络延迟。&lt;/p&gt;&#xA;</description>
+      <author>pretty66</author>
+      <pubDate>05 Sep 2023 14:58:03 +0000</pubDate>
+    </item>
+    <item>
+      <title>推荐 Java http 发包框架 - Java</title>
+      <link>https://www.v2ex.com/t/971228</link>
+      <description>佬，java 有没有符合以下需求的 http 发包框架，&lt;br /&gt;1 不要有连接池管理（不要用线程池发包，直接用调用线程发包）。&lt;br /&gt; [有这个需求原因，是因为：爬虫每一个请求都要单独设置一个 Socks5 代理，目前用的 okhttp ，设置了共享连接池和最大 dispatch ，任然有很奇怪的问题，哪怕是小小 300 并发请求，都会出现大量超时、connect reset 、以及其他奇奇怪怪错误，导致成功发包率很低，300 包基本只有 50%能发出去，其他都是各种原因失败] &lt;br /&gt;2 支持 http2.0 。&lt;br /&gt;3 可以设置 socks5 、http 代理。</description>
+      <author>loyan666</author>
+      <pubDate>05 Sep 2023 14:55:49 +0000</pubDate>
+    </item>
+    <item>
       <title>请问香港 apple store 网店支持什么银行卡 - iPhone</title>
       <link>https://www.v2ex.com/t/971227</link>
       <description>&lt;p&gt;朋友们，我想买 iPhone15pro 港版首发，现在已经找好了代取，但是还没搞懂付款问题。可以直接用银联信用卡吗？或者中银跨境通 mastercard ？还是一定要香港本地卡或者境外卡比如华侨银行和 wise 才行？&lt;/p&gt;&#xA;</description>
