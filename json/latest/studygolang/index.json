@@ -95,6 +95,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "time.duation的类型",
+      "Link": "https://studygolang.com/articles/36315#reply1",
+      "Description": "\u003cp\u003e请教一下大佬们，我在使用time.Druation()的时候，遇到了如下问题：\n1.为什么xxx这个变量是net/http.http2prefaceTimeout (10000000000)，而ccc这个变量就是正常的30s\n2.有一个项目中，使用类似于xxx这样的变量传入到接受time.Druation()变量的结构体时候，它不是真正的time.Druation()\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230903/47efbc8ddba26a6e3fee6bd8bef46837.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "郁闷了一下午了,传个参怎么遇到这么古怪的事情了！！！",
       "Link": "https://studygolang.com/topics/16671#reply1",
       "Description": "\u003cp\u003e哪位大神帮忙给看看，郁闷了一下午了太气人了！\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc Upload(w http.ResponseWriter, r *http.Request) {\n\tr.ParseMultipartForm(1024)\n\t_, _, err := r.FormFile(\u0026quot;upload\u0026quot;)\n\tif err != nil {\n\t\tw.Write([]byte(\u0026quot;文件上传错误\u0026quot;))\n\t\treturn\n\t}\n\tfor _, fileHead := range r.MultipartForm.File[\u0026quot;upload\u0026quot;] {\n\t\tfile, err := fileHead.Open()\n\t\tif err != nil {\n\t\t\tlog.Println(\u0026quot;没有接收到文件\u0026quot;, err)\n\t\t\treturn\n\t\t}\n\t\tdefer file.Close()\n\t\tbuf := make([]byte, 512)\n\t\tfile.Read(buf)\n\t\tobjContentType := http.DetectContentType(buf) //用这个就报错\n\t\t// objContentType := \u0026quot;application/pdf\u0026quot;  用这个就没问题\n\t\tminiolib.UploadObj(fileHead.Filename, file, fileHead.Size, objContentType)\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e下面这个是UploadObj的写法\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc UploadObj(objectName string, fp io.Reader, size int64, opt string) {\n\tobject, err := client.PutObject(context.Background(), bucketName, objectName, fp, size, minio.PutObjectOptions{ContentType: opt})\n\tif err != nil {\n\t\tlog.Println(\u0026quot;上传失败：\u0026quot;, err)\n\t\treturn\n\t}\n\tlog.Printf(\u0026quot;文件上传成功 %s of 文件大小为: %d\\n\u0026quot;, objectName, object.Size)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e原因是因为file.Read读取了512个字节作为判断contentType的类型，再上传数据的时候file的完整性就没有了，所以会提示错误。\n正确的写法是下面的:\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003efunc Upload(w http.ResponseWriter, r *http.Request) {\n\terr := r.ParseMultipartForm(1024)\n\tif err != nil {\n\t\tw.Write([]byte(\u0026quot;没有上传文件,请重试\u0026quot;))\n\t\treturn\n\t}\n\tfor _, fileHead := range r.MultipartForm.File[\u0026quot;upload\u0026quot;] {\n\t\tfile, err := fileHead.Open()\n\t\tif err != nil {\n\t\t\tlog.Println(err)\n\t\t\treturn\n\t\t}\n\t\tdefer file.Close()\n\t\tobjContentType := fileHead.Header[\u0026quot;Content-Type\u0026quot;]\n\t\tminiolib.UploadObj(fileHead.Filename, file, fileHead.Size, objContentType[0])\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -133,13 +140,6 @@
       "Title": "Oracle OCP 19c认证考试1Z0-082题库最新解析 第三题",
       "Link": "https://studygolang.com/articles/36316#reply0",
       "Description": "",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "time.duation的类型",
-      "Link": "https://studygolang.com/articles/36315#reply1",
-      "Description": "\u003cp\u003e请教一下大佬们，我在使用time.Druation()的时候，遇到了如下问题：\n1.为什么xxx这个变量是net/http.http2prefaceTimeout (10000000000)，而ccc这个变量就是正常的30s\n2.有一个项目中，使用类似于xxx这样的变量传入到接受time.Druation()变量的结构体时候，它不是真正的time.Druation()\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230903/47efbc8ddba26a6e3fee6bd8bef46837.png\" alt=\"image.png\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
