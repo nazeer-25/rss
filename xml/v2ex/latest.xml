@@ -4,6 +4,90 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>PDD 的 airpos pro2 值得买吗 - 问与答</title>
+      <link>https://www.v2ex.com/t/971291</link>
+      <description>PDD 的 airpos pro2 现在值得买吗，百亿补贴价 1497 ，但是过几天的发布会上会不会有新款？</description>
+      <author>hooych</author>
+      <pubDate>06 Sep 2023 01:30:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>Node.js 使用 officecrypto-tool 读取加密的 Excel 和 Word 文档, 支持 xlsx 和 docx 文件的加密 - 程序员</title>
+      <link>https://www.v2ex.com/t/971290</link>
+      <description>&lt;p&gt;Node.js 使用 &lt;code&gt;officecrypto-tool&lt;/code&gt; 读取加密的 Excel (xls, xlsx) 和 Word( docx)文档, 还支持 xlsx 和 docx 文件的加密（具体使用看文档）。暂时不支持 doc 文件的解密&lt;/p&gt;&#xA;&lt;p&gt;传送门：&lt;a href=&#34;https://www.npmjs.com/package/officecrypto-tool&#34; rel=&#34;nofollow&#34;&gt;officecrypto-tool&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;读取加密的 Excel 示例&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;一：xlsx-populate &#xA;// 只支持 xlsx ，xlsx-populate  自带了解密功能，&#xA;// 不过只支持 ecma376 agile 模式，也就是 Office 生成的加密的 docx ，&#xA;// WPS 的就不行，WPS 用的是 ecma376 standard 模式&#xA;const XlsxPopulate = require(&#39;xlsx-populate&#39;);&#xA;(async ()=&amp;gt;{&#xA;    const input = await fs.readFile(`pass_test.xlsx`);&#xA;    const output = await officeCrypto.decrypt(input, {password: &#39;123456&#39;});&#xA;    const workbook = await XlsxPopulate.fromDataAsync(output);&#xA;&#xA;    // 或者可先判断文件是否是加密的&#xA;    const isEncrypted = officeCrypto.isEncrypted(input);&#xA;    let output = input;&#xA;    if (isEncrypted) {&#xA;        output = await officeCrypto.decrypt(input, {password: &#39;123456&#39;});&#xA;    }&#xA;    const workbook = await XlsxPopulate.fromDataAsync(output);&#xA; })()&#xA;&#xA;&#xA;二：@zurmokeeper/exceljs https://www.npmjs.com/package/@zurmokeeper/exceljs&#xA;&#xA;// 只支持 xlsx @zurmokeeper/exceljs 直接内置了解密功能，完全兼容 exceljs v4.3.0&#xA;const Excel = require(&#39;@zurmokeeper/exceljs&#39;);&#xA;(async ()=&amp;gt;{&#xA;    // 从文件读取, 解密使用密码加密的 excel 文件&#xA;    const workbook = new Excel.Workbook();&#xA;    await workbook.xlsx.readFile(filename, {password:&#39;123456&#39;});&#xA;&#xA;    // 从流读取, 解密使用密码加密的 excel 文件&#xA;    const workbook = new Excel.Workbook();&#xA;    await workbook.xlsx.read(stream, {password:&#39;123456&#39;});&#xA;&#xA;    // 从 buffer 加载, 解密使用密码加密的 excel 文件&#xA;    const workbook = new Excel.Workbook();&#xA;    await workbook.xlsx.load(data, {password:&#39;123456&#39;});&#xA;})()&#xA;&#xA;三：xlsx&#xA;// xlsx 支持 xls 和 xlsx&#xA;const XLSX = require(&#39;xlsx&#39;);&#xA;(async ()=&amp;gt;{&#xA;    const input = await fs.readFile(`pass_test.xlsx`);&#xA;    // const input = await fs.readFile(`pass_test.xls`); // 或者 xls&#xA;    const output = await officeCrypto.decrypt(input, {password: &#39;123456&#39;});&#xA;    const workbook = XLSX.read(output);&#xA;&#xA;    // 或者可先判断文件是否是加密的&#xA;    const isEncrypted = officeCrypto.isEncrypted(input);&#xA;    let output = input;&#xA;    if (isEncrypted) {&#xA;        output = await officeCrypto.decrypt(input, {password: &#39;123456&#39;});&#xA;    }&#xA;    const workbook = XLSX.read(output);&#xA;})()&#xA;&#xA;四：node-xlsx&#xA;// 其实 node-xlsx 只是对 xlsx 进行了封装，里面还是调用 xlsx 去解析的&#xA;const nodeXlsx = require(&#39;node-xlsx&#39;);&#xA;(async ()=&amp;gt;{&#xA;    const input = await fs.readFile(`pass_test.xlsx`);&#xA;    // const input = await fs.readFile(`pass_test.xls`); // 或者 xls&#xA;    const output = await officeCrypto.decrypt(input, {password: &#39;123456&#39;});&#xA;    const workbook = nodeXlsx.parse(output);&#xA;&#xA;    // 或者可先判断文件是否是加密的&#xA;    const isEncrypted = officeCrypto.isEncrypted(input);&#xA;    let output = input;&#xA;    if (isEncrypted) {&#xA;        output = await officeCrypto.decrypt(input, {password: &#39;123456&#39;});&#xA;    }&#xA;    const workbook = nodeXlsx.parse(output);&#xA;})()&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;读取加密的 Word 示例&lt;/p&gt;&#xA;&lt;p&gt;使用：&lt;a href=&#34;https://www.npmjs.com/package/mammoth&#34; rel=&#34;nofollow&#34;&gt;mammoth&lt;/a&gt; &lt;a href=&#34;https://www.npmjs.com/package/officecrypto-tool&#34; rel=&#34;nofollow&#34;&gt;officecrypto-tool&lt;/a&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;const officeCrypto = require(&#39;officecrypto-tool&#39;);&#xA;const fs = require(&#39;fs&#39;).promises;&#xA;const mammoth = require(&#39;mammoth&#39;);&#xA;(async ()=&amp;gt;{&#xA;    const input = await fs.readFile(`pass_test.xlsx`);&#xA;    const output = await officeCrypto.decrypt(input, {password: &#39;123456&#39;});&#xA;    await mammoth.convertToHtml({buffer: output});&#xA;&#xA;    // 或者可先判断文件是否是加密的&#xA;    const isEncrypted = officeCrypto.isEncrypted(input);&#xA;    let output = input;&#xA;    if (isEncrypted) {&#xA;        output = await officeCrypto.decrypt(input, {password: &#39;123456&#39;});&#xA;    }&#xA;    await mammoth.convertToHtml({buffer: output});&#xA;})()&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;使用其他的 word 读取库也是一样的道理，先使用 officecrypto-tool 解密以后再用对应的库去处理&lt;/p&gt;&#xA;</description>
+      <author>zurmokeeper</author>
+      <pubDate>06 Sep 2023 01:30:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>想做个小 PHP 网站，好久不写了。大家现在开发 PHP 环境都是怎么做的？ - 程序员</title>
+      <link>https://www.v2ex.com/t/971289</link>
+      <description>&lt;p&gt;本地 lemp 环境，然后做好了再推送代码到服务器上。还是直接在远处开发服务器上面搞，修改一些自动推送到远程服务器，可以看到线上效果？&lt;/p&gt;&#xA;</description>
+      <author>edwardhodges</author>
+      <pubDate>06 Sep 2023 01:28:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>介绍一下 editablejs 一款支持多人协作的富文本编辑器 - 程序员</title>
+      <link>https://www.v2ex.com/t/971288</link>
+      <description>&lt;h2&gt;缘由&lt;/h2&gt;&#xA;&lt;p&gt;之前做法律软件的时候有个文档产品，调研了市面上的各类编辑器之后都不太符合需求所以自研了一个基于&lt;code&gt;contenteditable&lt;/code&gt;的编辑器叫&lt;code&gt;am-editor&lt;/code&gt;，随着时间的推移和公司的倒闭（详情请见&lt;a href=&#34;https://zhuanlan.zhihu.com/p/653380203&#34; rel=&#34;nofollow&#34;&gt;花 2000 万开一家软件公司并倒闭了，是一种怎样的体验&lt;/a&gt;），在闲下来的这一年的时间，我断断续续花时间重新开了一款更强大的富文本编辑器 &lt;a href=&#34;https://github.com/editablejs/editable&#34; rel=&#34;nofollow&#34;&gt;editable&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;时至今日，编辑器内核和扩展已经基本能满足日常使用，故发出来给大伙瞧瞧。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;FireShot Capture 003 - editablejs_editable_ A collaborative rich-text editor framework that _ - github.com.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/09/06/5FL1ZKzJQCPGHAE.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h2&gt;介绍&lt;/h2&gt;&#xA;&lt;p&gt;A collaborative rich-text editor framework that focuses on stability, controllability, extensibility, and performance. 一款支持多人协作的富文本编辑器框架，专注于稳定性、可控性、扩展性和性能。&lt;/p&gt;&#xA;&lt;h2&gt;预览&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;preview.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://s2.loli.net/2023/09/06/2B6msrlvTNOFcYg.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://docs.editablejs.com/playground&#34; rel=&#34;nofollow&#34;&gt;在线体验&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;在线乞讨&lt;/h2&gt;&#xA;&lt;p&gt;非常欢迎大家参与建设，如果该项目对你有所帮助，别吝啬你的小星星⭐️哈&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/editablejs/editable&#34; rel=&#34;nofollow&#34;&gt;项目 GitHub 链接  editable&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>babyoung</author>
+      <pubDate>06 Sep 2023 01:24:46 +0000</pubDate>
+    </item>
+    <item>
+      <title>为什么连接手机热点有时候不分配公网 ipv6 - 问与答</title>
+      <link>https://www.v2ex.com/t/971287</link>
+      <description>&lt;p&gt;手机自己是有 ipv6 的&lt;/p&gt;&#xA;</description>
+      <author>Str0Dytomh</author>
+      <pubDate>06 Sep 2023 01:23:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>用 electron 实现类似 QQ 的长截图(滚动截图)有办法吗？ - 分享创造</title>
+      <link>https://www.v2ex.com/t/971286</link>
+      <description>&lt;p&gt;本人现在在做 pear-rec （ &lt;a href=&#34;https://github.com/027xiguapi/pear-rec&#34; rel=&#34;nofollow&#34;&gt;https://github.com/027xiguapi/pear-rec&lt;/a&gt; )，一个用 electron 可以截图和图片编辑查看的跨平台软件，现在想实现实现类似 QQ 的长截图(滚动截图)，一直没有思路，大佬们，有知道怎么实现的吗？&#xA;&lt;img alt=&#34;1693963274597.jpg&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://x.imgs.ovh/x/2023/09/06/64f7d43905442.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>zhangkui</author>
+      <pubDate>06 Sep 2023 01:22:48 +0000</pubDate>
+    </item>
+    <item>
+      <title>010 电信把 cloudflare 都封杀了？ - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/971284</link>
+      <description>&lt;p&gt;vps 弄了一个 v2ray&#xA;裹了一层 cloudflare&#xA;昨天突然不能访问了&#xA;联通和移动都可以&#xA;就家里的电信网络不行了&#xA;55555555555555&lt;/p&gt;&#xA;</description>
+      <author>fire1980</author>
+      <pubDate>06 Sep 2023 01:20:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>Flask 如何验证前端传过来的数据 - Python</title>
+      <link>https://www.v2ex.com/t/971283</link>
+      <description>&lt;p&gt;大家在用 Flask 的时候，是如何校验数据的类型和值的？&lt;/p&gt;&#xA;&lt;p&gt;我之前用过 Django + DRF ，Django 的 &lt;strong&gt;Forms&lt;/strong&gt; 和 DRF 的 &lt;strong&gt;Serializer&lt;/strong&gt; 都很香，校验和处理数据&lt;/p&gt;&#xA;&lt;p&gt;但是 Flask 有点让我发愁，手动用大量的 if 看起来&lt;strong&gt;费时费力&lt;/strong&gt;，不太美观&lt;/p&gt;&#xA;&lt;p&gt;有没有&lt;strong&gt;现成的第三方库可以用的&lt;/strong&gt;，并且可以自定义抛出异常的类型并捕获&lt;/p&gt;&#xA;&lt;p&gt;之前看过一些 FastAPI 用的 &lt;strong&gt;Pydantic&lt;/strong&gt; 还有 &lt;strong&gt;Marshmallow&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Pydantic 抛出的异常可能我不知道正确的打开方式，不太会用&lt;/p&gt;&#xA;&lt;p&gt;比如说：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from enum import Enum&#xA;&#xA;from pydantic import (&#xA;    BaseModel,&#xA;    Field,&#xA;)&#xA;&#xA;&#xA;class HolidayTypeEnum(str, Enum):&#xA;    ANNUAL_LEAVE = &#34;annual_leave&#34;&#xA;    SICK_LEAVE = &#34;sick_leave&#34;&#xA;&#xA;&#xA;class Holiday(BaseModel):&#xA;    holiday_name: str = Field(..., description=&#34;请填写假期名称&#34;)&#xA;    holiday_type: HolidayTypeEnum = Field(..., description=&#34;请填写假期类型&#34;)&#xA;&#xA;&#xA;data = {&#xA;    &#34;holiday_name&#34;: &#34;年假&#34;,&#xA;    &#34;holiday_type&#34;: &#34;annual_leave1&#34;,&#xA;}&#xA;holiday = Holiday(**data)&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;抛出的异常是：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;pydantic.error_wrappers.ValidationError: 1 validation error for Holiday&#xA;holiday_type&#xA;  value is not a valid enumeration member; permitted: &#39;annual_leave&#39;, &#39;sick_leave&#39; (type=type_error.enum; enum_values=[&amp;lt;HolidayTypeEnum.ANNUAL_LEAVE: &#39;annual_leave&#39;&amp;gt;, &amp;lt;HolidayTypeEnum.SICK_LEAVE: &#39;sick_leave&#39;&amp;gt;])&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;如何提示给前端到底错在哪里（之前手动校验的时候，是可以直接抛出指定异常，比如说 &lt;code&gt;raise ValueError(&#34;假期类型错误，只能为 XXX 、XXX&#34;)&lt;/code&gt;）&lt;/p&gt;&#xA;&lt;p&gt;也许 Pydantic 是很好，但是&lt;strong&gt;我好像不太会用&lt;/strong&gt;，有没有大佬有&lt;strong&gt;正确的打开方式&lt;/strong&gt;，或者说&lt;strong&gt;其他可以拿来就用的第三方库&lt;/strong&gt;&lt;/p&gt;&#xA;</description>
+      <author>XueXianqi</author>
+      <pubDate>06 Sep 2023 01:19:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>坐标南京，选择电信还是联通呢？ - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/971282</link>
+      <description>&lt;p&gt;现在用的是电信 500/50 ，每个月 109 ，有公网 ip ，预计明年 2 月份宽带到期，到时候费用不优惠的话大概 159 。&lt;/p&gt;&#xA;&lt;p&gt;我父母那边用的是联通 1000/60 ，每个月 80 ，也是有公网 ip 的。&lt;/p&gt;&#xA;&lt;p&gt;比较纠结的点是电信公网 ip 直接扔掉比较可惜，现在南京电信基本要不到公网了，并且电信宽带给的余量比较大，基本能跑到 600/70 ；但是联通翻墙的体验更好，试了一个日本的 vps ，全天的 ping 都在 40 左右没有波动，也能跑满。机场的体验也好不少。整体各有优劣吧，电信贵个 1 倍左右。&lt;/p&gt;&#xA;</description>
+      <author>zhixiao</author>
+      <pubDate>06 Sep 2023 01:17:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>xcode 怎么快速将快捷键映射成 vs code 同款？ - Xcode</title>
+      <link>https://www.v2ex.com/t/971280</link>
+      <description>&lt;p&gt;在设置里面只有一个 default ，可以添加快捷键模板，但是没找到直接一键切换的，有没有兄弟知道？&lt;/p&gt;&#xA;</description>
+      <author>jstony</author>
+      <pubDate>06 Sep 2023 01:15:16 +0000</pubDate>
+    </item>
+    <item>
+      <title>寻求易飞 ERP 二次开发、寻求中台解决方案 - 程序员</title>
+      <link>https://www.v2ex.com/t/971279</link>
+      <description>中小生产企业，有致远 OA 、易飞 ERP 、和 MES 系统&lt;br /&gt;&lt;br /&gt;现状：想搭建一个中台系统，让部分使用人员简化下工作流程而不是学习三个系统，但前提是需要和 OA 、ERP 等系统打通接口。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;需求：目前只是有 OA 、ERP 的数据库，如果要对 ERP 二次开发的话除了找厂家，还有别的操作吗？&lt;br /&gt;&lt;br /&gt;     问就是原厂的二次开发太贵了，如果有接触过的大佬可以指点一番，不胜感激</description>
+      <author>sodulty</author>
+      <pubDate>06 Sep 2023 01:13:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>最近更新了一下主机，有推荐的开放式主机机箱型号吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/971278</link>
+      <description>&lt;p&gt;比较中意开放式机箱，但是对这方面不是太了解，想看看各个价位段的机箱&lt;/p&gt;&#xA;</description>
+      <author>FreshOldMan</author>
+      <pubDate>06 Sep 2023 01:09:16 +0000</pubDate>
+    </item>
+    <item>
       <title>杭州国庆后适合旅游吗 - 杭州</title>
       <link>https://www.v2ex.com/t/971277</link>
       <description>跟女朋友计划 10 月 13 号左右去杭州南京等玩几天，昨晚突然想起杭州 10 月 8 号刚好也是举办完亚运会。不知道人会不会太多！原本想着还能避开国庆高峰期。&lt;br /&gt;想问问了解的兄弟们是否推荐这个时间过去&lt;br /&gt;&lt;br /&gt;如果合适的话可以推荐一下好玩的景点和吃喝的地方捏！</description>

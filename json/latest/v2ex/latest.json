@@ -4,6 +4,90 @@
   "Description": "",
   "Items": [
     {
+      "Title": "PDD 的 airpos pro2 值得买吗 - 问与答",
+      "Link": "https://www.v2ex.com/t/971291",
+      "Description": "PDD 的 airpos pro2 现在值得买吗，百亿补贴价 1497 ，但是过几天的发布会上会不会有新款？",
+      "Author": "hooych",
+      "PubDate": "2023-09-06T01:30:50Z"
+    },
+    {
+      "Title": "Node.js 使用 officecrypto-tool 读取加密的 Excel 和 Word 文档, 支持 xlsx 和 docx 文件的加密 - 程序员",
+      "Link": "https://www.v2ex.com/t/971290",
+      "Description": "\u003cp\u003eNode.js 使用 \u003ccode\u003eofficecrypto-tool\u003c/code\u003e 读取加密的 Excel (xls, xlsx) 和 Word( docx)文档, 还支持 xlsx 和 docx 文件的加密（具体使用看文档）。暂时不支持 doc 文件的解密\u003c/p\u003e\n\u003cp\u003e传送门：\u003ca href=\"https://www.npmjs.com/package/officecrypto-tool\" rel=\"nofollow\"\u003eofficecrypto-tool\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e读取加密的 Excel 示例\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e一：xlsx-populate \n// 只支持 xlsx ，xlsx-populate  自带了解密功能，\n// 不过只支持 ecma376 agile 模式，也就是 Office 生成的加密的 docx ，\n// WPS 的就不行，WPS 用的是 ecma376 standard 模式\nconst XlsxPopulate = require('xlsx-populate');\n(async ()=\u0026gt;{\n    const input = await fs.readFile(`pass_test.xlsx`);\n    const output = await officeCrypto.decrypt(input, {password: '123456'});\n    const workbook = await XlsxPopulate.fromDataAsync(output);\n\n    // 或者可先判断文件是否是加密的\n    const isEncrypted = officeCrypto.isEncrypted(input);\n    let output = input;\n    if (isEncrypted) {\n        output = await officeCrypto.decrypt(input, {password: '123456'});\n    }\n    const workbook = await XlsxPopulate.fromDataAsync(output);\n })()\n\n\n二：@zurmokeeper/exceljs https://www.npmjs.com/package/@zurmokeeper/exceljs\n\n// 只支持 xlsx @zurmokeeper/exceljs 直接内置了解密功能，完全兼容 exceljs v4.3.0\nconst Excel = require('@zurmokeeper/exceljs');\n(async ()=\u0026gt;{\n    // 从文件读取, 解密使用密码加密的 excel 文件\n    const workbook = new Excel.Workbook();\n    await workbook.xlsx.readFile(filename, {password:'123456'});\n\n    // 从流读取, 解密使用密码加密的 excel 文件\n    const workbook = new Excel.Workbook();\n    await workbook.xlsx.read(stream, {password:'123456'});\n\n    // 从 buffer 加载, 解密使用密码加密的 excel 文件\n    const workbook = new Excel.Workbook();\n    await workbook.xlsx.load(data, {password:'123456'});\n})()\n\n三：xlsx\n// xlsx 支持 xls 和 xlsx\nconst XLSX = require('xlsx');\n(async ()=\u0026gt;{\n    const input = await fs.readFile(`pass_test.xlsx`);\n    // const input = await fs.readFile(`pass_test.xls`); // 或者 xls\n    const output = await officeCrypto.decrypt(input, {password: '123456'});\n    const workbook = XLSX.read(output);\n\n    // 或者可先判断文件是否是加密的\n    const isEncrypted = officeCrypto.isEncrypted(input);\n    let output = input;\n    if (isEncrypted) {\n        output = await officeCrypto.decrypt(input, {password: '123456'});\n    }\n    const workbook = XLSX.read(output);\n})()\n\n四：node-xlsx\n// 其实 node-xlsx 只是对 xlsx 进行了封装，里面还是调用 xlsx 去解析的\nconst nodeXlsx = require('node-xlsx');\n(async ()=\u0026gt;{\n    const input = await fs.readFile(`pass_test.xlsx`);\n    // const input = await fs.readFile(`pass_test.xls`); // 或者 xls\n    const output = await officeCrypto.decrypt(input, {password: '123456'});\n    const workbook = nodeXlsx.parse(output);\n\n    // 或者可先判断文件是否是加密的\n    const isEncrypted = officeCrypto.isEncrypted(input);\n    let output = input;\n    if (isEncrypted) {\n        output = await officeCrypto.decrypt(input, {password: '123456'});\n    }\n    const workbook = nodeXlsx.parse(output);\n})()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e读取加密的 Word 示例\u003c/p\u003e\n\u003cp\u003e使用：\u003ca href=\"https://www.npmjs.com/package/mammoth\" rel=\"nofollow\"\u003emammoth\u003c/a\u003e \u003ca href=\"https://www.npmjs.com/package/officecrypto-tool\" rel=\"nofollow\"\u003eofficecrypto-tool\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003econst officeCrypto = require('officecrypto-tool');\nconst fs = require('fs').promises;\nconst mammoth = require('mammoth');\n(async ()=\u0026gt;{\n    const input = await fs.readFile(`pass_test.xlsx`);\n    const output = await officeCrypto.decrypt(input, {password: '123456'});\n    await mammoth.convertToHtml({buffer: output});\n\n    // 或者可先判断文件是否是加密的\n    const isEncrypted = officeCrypto.isEncrypted(input);\n    let output = input;\n    if (isEncrypted) {\n        output = await officeCrypto.decrypt(input, {password: '123456'});\n    }\n    await mammoth.convertToHtml({buffer: output});\n})()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e使用其他的 word 读取库也是一样的道理，先使用 officecrypto-tool 解密以后再用对应的库去处理\u003c/p\u003e\n",
+      "Author": "zurmokeeper",
+      "PubDate": "2023-09-06T01:30:28Z"
+    },
+    {
+      "Title": "想做个小 PHP 网站，好久不写了。大家现在开发 PHP 环境都是怎么做的？ - 程序员",
+      "Link": "https://www.v2ex.com/t/971289",
+      "Description": "\u003cp\u003e本地 lemp 环境，然后做好了再推送代码到服务器上。还是直接在远处开发服务器上面搞，修改一些自动推送到远程服务器，可以看到线上效果？\u003c/p\u003e\n",
+      "Author": "edwardhodges",
+      "PubDate": "2023-09-06T01:28:43Z"
+    },
+    {
+      "Title": "介绍一下 editablejs 一款支持多人协作的富文本编辑器 - 程序员",
+      "Link": "https://www.v2ex.com/t/971288",
+      "Description": "\u003ch2\u003e缘由\u003c/h2\u003e\n\u003cp\u003e之前做法律软件的时候有个文档产品，调研了市面上的各类编辑器之后都不太符合需求所以自研了一个基于\u003ccode\u003econtenteditable\u003c/code\u003e的编辑器叫\u003ccode\u003eam-editor\u003c/code\u003e，随着时间的推移和公司的倒闭（详情请见\u003ca href=\"https://zhuanlan.zhihu.com/p/653380203\" rel=\"nofollow\"\u003e花 2000 万开一家软件公司并倒闭了，是一种怎样的体验\u003c/a\u003e），在闲下来的这一年的时间，我断断续续花时间重新开了一款更强大的富文本编辑器 \u003ca href=\"https://github.com/editablejs/editable\" rel=\"nofollow\"\u003eeditable\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e时至今日，编辑器内核和扩展已经基本能满足日常使用，故发出来给大伙瞧瞧。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"FireShot Capture 003 - editablejs_editable_ A collaborative rich-text editor framework that _ - github.com.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2023/09/06/5FL1ZKzJQCPGHAE.png\"/\u003e\u003c/p\u003e\n\u003ch2\u003e介绍\u003c/h2\u003e\n\u003cp\u003eA collaborative rich-text editor framework that focuses on stability, controllability, extensibility, and performance. 一款支持多人协作的富文本编辑器框架，专注于稳定性、可控性、扩展性和性能。\u003c/p\u003e\n\u003ch2\u003e预览\u003c/h2\u003e\n\u003cp\u003e\u003cimg alt=\"preview.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://s2.loli.net/2023/09/06/2B6msrlvTNOFcYg.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://docs.editablejs.com/playground\" rel=\"nofollow\"\u003e在线体验\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e在线乞讨\u003c/h2\u003e\n\u003cp\u003e非常欢迎大家参与建设，如果该项目对你有所帮助，别吝啬你的小星星⭐️哈\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/editablejs/editable\" rel=\"nofollow\"\u003e项目 GitHub 链接  editable\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "babyoung",
+      "PubDate": "2023-09-06T01:24:46Z"
+    },
+    {
+      "Title": "为什么连接手机热点有时候不分配公网 ipv6 - 问与答",
+      "Link": "https://www.v2ex.com/t/971287",
+      "Description": "\u003cp\u003e手机自己是有 ipv6 的\u003c/p\u003e\n",
+      "Author": "Str0Dytomh",
+      "PubDate": "2023-09-06T01:23:36Z"
+    },
+    {
+      "Title": "用 electron 实现类似 QQ 的长截图(滚动截图)有办法吗？ - 分享创造",
+      "Link": "https://www.v2ex.com/t/971286",
+      "Description": "\u003cp\u003e本人现在在做 pear-rec （ \u003ca href=\"https://github.com/027xiguapi/pear-rec\" rel=\"nofollow\"\u003ehttps://github.com/027xiguapi/pear-rec\u003c/a\u003e )，一个用 electron 可以截图和图片编辑查看的跨平台软件，现在想实现实现类似 QQ 的长截图(滚动截图)，一直没有思路，大佬们，有知道怎么实现的吗？\n\u003cimg alt=\"1693963274597.jpg\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://x.imgs.ovh/x/2023/09/06/64f7d43905442.jpg\"/\u003e\u003c/p\u003e\n",
+      "Author": "zhangkui",
+      "PubDate": "2023-09-06T01:22:48Z"
+    },
+    {
+      "Title": "010 电信把 cloudflare 都封杀了？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/971284",
+      "Description": "\u003cp\u003evps 弄了一个 v2ray\n裹了一层 cloudflare\n昨天突然不能访问了\n联通和移动都可以\n就家里的电信网络不行了\n55555555555555\u003c/p\u003e\n",
+      "Author": "fire1980",
+      "PubDate": "2023-09-06T01:20:20Z"
+    },
+    {
+      "Title": "Flask 如何验证前端传过来的数据 - Python",
+      "Link": "https://www.v2ex.com/t/971283",
+      "Description": "\u003cp\u003e大家在用 Flask 的时候，是如何校验数据的类型和值的？\u003c/p\u003e\n\u003cp\u003e我之前用过 Django + DRF ，Django 的 \u003cstrong\u003eForms\u003c/strong\u003e 和 DRF 的 \u003cstrong\u003eSerializer\u003c/strong\u003e 都很香，校验和处理数据\u003c/p\u003e\n\u003cp\u003e但是 Flask 有点让我发愁，手动用大量的 if 看起来\u003cstrong\u003e费时费力\u003c/strong\u003e，不太美观\u003c/p\u003e\n\u003cp\u003e有没有\u003cstrong\u003e现成的第三方库可以用的\u003c/strong\u003e，并且可以自定义抛出异常的类型并捕获\u003c/p\u003e\n\u003cp\u003e之前看过一些 FastAPI 用的 \u003cstrong\u003ePydantic\u003c/strong\u003e 还有 \u003cstrong\u003eMarshmallow\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003ePydantic 抛出的异常可能我不知道正确的打开方式，不太会用\u003c/p\u003e\n\u003cp\u003e比如说：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003efrom enum import Enum\n\nfrom pydantic import (\n    BaseModel,\n    Field,\n)\n\n\nclass HolidayTypeEnum(str, Enum):\n    ANNUAL_LEAVE = \"annual_leave\"\n    SICK_LEAVE = \"sick_leave\"\n\n\nclass Holiday(BaseModel):\n    holiday_name: str = Field(..., description=\"请填写假期名称\")\n    holiday_type: HolidayTypeEnum = Field(..., description=\"请填写假期类型\")\n\n\ndata = {\n    \"holiday_name\": \"年假\",\n    \"holiday_type\": \"annual_leave1\",\n}\nholiday = Holiday(**data)\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e抛出的异常是：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003epydantic.error_wrappers.ValidationError: 1 validation error for Holiday\nholiday_type\n  value is not a valid enumeration member; permitted: 'annual_leave', 'sick_leave' (type=type_error.enum; enum_values=[\u0026lt;HolidayTypeEnum.ANNUAL_LEAVE: 'annual_leave'\u0026gt;, \u0026lt;HolidayTypeEnum.SICK_LEAVE: 'sick_leave'\u0026gt;])\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如何提示给前端到底错在哪里（之前手动校验的时候，是可以直接抛出指定异常，比如说 \u003ccode\u003eraise ValueError(\"假期类型错误，只能为 XXX 、XXX\")\u003c/code\u003e）\u003c/p\u003e\n\u003cp\u003e也许 Pydantic 是很好，但是\u003cstrong\u003e我好像不太会用\u003c/strong\u003e，有没有大佬有\u003cstrong\u003e正确的打开方式\u003c/strong\u003e，或者说\u003cstrong\u003e其他可以拿来就用的第三方库\u003c/strong\u003e\u003c/p\u003e\n",
+      "Author": "XueXianqi",
+      "PubDate": "2023-09-06T01:19:49Z"
+    },
+    {
+      "Title": "坐标南京，选择电信还是联通呢？ - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/971282",
+      "Description": "\u003cp\u003e现在用的是电信 500/50 ，每个月 109 ，有公网 ip ，预计明年 2 月份宽带到期，到时候费用不优惠的话大概 159 。\u003c/p\u003e\n\u003cp\u003e我父母那边用的是联通 1000/60 ，每个月 80 ，也是有公网 ip 的。\u003c/p\u003e\n\u003cp\u003e比较纠结的点是电信公网 ip 直接扔掉比较可惜，现在南京电信基本要不到公网了，并且电信宽带给的余量比较大，基本能跑到 600/70 ；但是联通翻墙的体验更好，试了一个日本的 vps ，全天的 ping 都在 40 左右没有波动，也能跑满。机场的体验也好不少。整体各有优劣吧，电信贵个 1 倍左右。\u003c/p\u003e\n",
+      "Author": "zhixiao",
+      "PubDate": "2023-09-06T01:17:29Z"
+    },
+    {
+      "Title": "xcode 怎么快速将快捷键映射成 vs code 同款？ - Xcode",
+      "Link": "https://www.v2ex.com/t/971280",
+      "Description": "\u003cp\u003e在设置里面只有一个 default ，可以添加快捷键模板，但是没找到直接一键切换的，有没有兄弟知道？\u003c/p\u003e\n",
+      "Author": "jstony",
+      "PubDate": "2023-09-06T01:15:16Z"
+    },
+    {
+      "Title": "寻求易飞 ERP 二次开发、寻求中台解决方案 - 程序员",
+      "Link": "https://www.v2ex.com/t/971279",
+      "Description": "中小生产企业，有致远 OA 、易飞 ERP 、和 MES 系统\u003cbr /\u003e\u003cbr /\u003e现状：想搭建一个中台系统，让部分使用人员简化下工作流程而不是学习三个系统，但前提是需要和 OA 、ERP 等系统打通接口。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e需求：目前只是有 OA 、ERP 的数据库，如果要对 ERP 二次开发的话除了找厂家，还有别的操作吗？\u003cbr /\u003e\u003cbr /\u003e     问就是原厂的二次开发太贵了，如果有接触过的大佬可以指点一番，不胜感激",
+      "Author": "sodulty",
+      "PubDate": "2023-09-06T01:13:12Z"
+    },
+    {
+      "Title": "最近更新了一下主机，有推荐的开放式主机机箱型号吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/971278",
+      "Description": "\u003cp\u003e比较中意开放式机箱，但是对这方面不是太了解，想看看各个价位段的机箱\u003c/p\u003e\n",
+      "Author": "FreshOldMan",
+      "PubDate": "2023-09-06T01:09:16Z"
+    },
+    {
       "Title": "杭州国庆后适合旅游吗 - 杭州",
       "Link": "https://www.v2ex.com/t/971277",
       "Description": "跟女朋友计划 10 月 13 号左右去杭州南京等玩几天，昨晚突然想起杭州 10 月 8 号刚好也是举办完亚运会。不知道人会不会太多！原本想着还能避开国庆高峰期。\u003cbr /\u003e想问问了解的兄弟们是否推荐这个时间过去\u003cbr /\u003e\u003cbr /\u003e如果合适的话可以推荐一下好玩的景点和吃喝的地方捏！",
