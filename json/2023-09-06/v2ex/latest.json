@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "买了个迷你主机用来办公，有需要的可以参考 - 分享发现",
+      "Link": "https://www.v2ex.com/t/971309",
+      "Description": "\u003cp\u003e看了铭凡/零刻和天钡，21 年的时候买过一台天钡的，这次综合看了下还是选的这个。\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img.rss.ink/imgs/2023/09/04/e583b8c7e1f15a75.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e完整内容不全文复制了，详细内容见： \u003ca href=\"https://blog.xiaoz.org/archives/19191\" rel=\"nofollow\"\u003ehttps://blog.xiaoz.org/archives/19191\u003c/a\u003e\u003c/p\u003e\n",
+      "Author": "xiaoz",
+      "PubDate": "2023-09-06T02:14:32Z"
+    },
+    {
+      "Title": "终于实现了照片备份到 NAS 的终极方案 - NAS",
+      "Link": "https://www.v2ex.com/t/971308",
+      "Description": "\u003cp\u003e注: 虽然本主题的主要目的是分享,但严格来说算是软文吧\u003c/p\u003e\n\u003ch2\u003e为什么要存到 NAS\u003c/h2\u003e\n\u003cp\u003e一直不愿意用一些云相册或者网盘之类的服务来备份和保存自己的照片,主要是两个原因:  \u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e不想自己的隐私被这些服务方一直视奸,你传上去的照片视频肯定会被这些服务方扫描一遍的,就算没有私密的照片,我也接受不了隐私被这样侵犯  \u003c/li\u003e\n\u003cli\u003e不想自己的数据被绑架,毕竟数据是别人手上,哪天别人要跑路或者涨价,你也没有任何办法\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2\u003e过于尝试的方案\u003c/h2\u003e\n\u003ch3\u003e群晖 moments\u003c/h3\u003e\n\u003cp\u003e最开始 NAS 装了群晖,于是就用了群晖自带的 moments 来同步照片.用了一段时间后出现了一些问题:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003emoments app 几乎不再更新,体验不算差,但绝对不好,老婆总是抱怨 ios 上这不好用那不好用\u003c/li\u003e\n\u003cli\u003e与群晖绑定,因为必须搭配 moments 服务端一起使用,所以你没有任何别的选择,这让我感觉很被动\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e现在似乎群晖已经淘汰 moments 了,出了新的群晖 photos,这个我没有试用过,因为群晖硬件还是太贵了,现在已经改用 Unraid 了\u003c/p\u003e\n\u003ch3\u003ePhotoPrism - 超好用\u003c/h3\u003e\n\u003cp\u003e不得不说 PhotoPrism 确实太好用了,我最喜欢它的一点是他的兼容性很强,你只要丢给它一个目录,他就能处理里面的所有照片,并且可以在各个维度进行检索,对于超大量的照片来说真的很好用.\u003c/p\u003e\n\u003cp\u003e但问题就在于 PhotoPrism 只有服务端,把照片同步到 NAS 这个动作还要我自己想办法来完成\u003c/p\u003e\n\u003ch3\u003ePhotoSync - 不值得这个价格\u003c/h3\u003e\n\u003cp\u003e这个 app 的功能还是可以的,但是它的 UI 和交互是在是有点古老,我还需要专门用一个 app 来进行同步这个事情,最重要的是要付费才能用,我觉得不太值得,放弃.\u003c/p\u003e\n\u003ch3\u003eNextcloud - 移动端 app 太差\u003c/h3\u003e\n\u003cp\u003eNextcloud 作为网盘来说挺好用的,我尝试使用 Nextcloud 的移动端来同步相册照片.但我真的安装了安卓端 app 后,连接了我 https 反代后的 URL 居然直接崩溃了,完全没法用,放弃.\u003c/p\u003e\n\u003ch2\u003eAlist + Pho + Rclone + PhotoPrism - 终极方案\u003c/h2\u003e\n\u003cp\u003e这个方案最让我喜欢的一点是各个环节都不是耦合的,去掉其中任何一个环节都不会影响到其他环节,每个人完全可以根据自己的喜好来替换其中的某个部分.\u003c/p\u003e\n\u003ch3\u003eAlist\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://alist.nn.ci/zh/\" rel=\"nofollow\"\u003e官网\u003c/a\u003e: \u003ca href=\"https://alist.nn.ci/zh/\" rel=\"nofollow\"\u003ehttps://alist.nn.ci/zh/\u003c/a\u003e\u003cbr/\u003e\n负责把各种可用的储存映射成\u003ccode\u003ewebdav\u003c/code\u003e,支持各种云盘网盘以及本地储存\n\u003cimg alt=\"Alist\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://pho.tools/imgs/alist.jpg\"/\u003e\u003c/p\u003e\n\u003ch3\u003ePho\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://pho.tools/\" rel=\"nofollow\"\u003e官网\u003c/a\u003e: \u003ca href=\"https://pho.tools/\" rel=\"nofollow\"\u003ehttps://pho.tools/\u003c/a\u003e\u003cbr/\u003e\n负责通过\u003ccode\u003ewebdav\u003c/code\u003e上传照片到\u003ccode\u003eAlist\u003c/code\u003e映射的储存\n它很好的一点是支持加密后上传,这样就可以在网盘上做二次备份,在能避免隐私泄露的前提下多一层数据保险\u003cbr/\u003e\n而且我可以在手机上直接用这个 app 来浏览我本地和已经上传的照片,这个 app 的 UI 和交互都很好,可以直接用它来代替系统自带的相册\n\u003cimg alt=\"Pho\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://pho.tools/imgs/pho.jpg\"/\u003e\u003c/p\u003e\n\u003ch3\u003eRclone\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://rclone.org/\" rel=\"nofollow\"\u003e官网\u003c/a\u003e: \u003ca href=\"https://rclone.org/\" rel=\"nofollow\"\u003ehttps://rclone.org/\u003c/a\u003e\u003cbr/\u003e\n负责把\u003ccode\u003eAlist\u003c/code\u003e的\u003ccode\u003ewebdav\u003c/code\u003e映射到 NAS 的文件系统内,来把照片喂给 PhotoPrism\u003c/p\u003e\n\u003ch3\u003ePhotoPrism\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://www.photoprism.app/\" rel=\"nofollow\"\u003e官网\u003c/a\u003e: \u003ca href=\"https://www.photoprism.app/\" rel=\"nofollow\"\u003ehttps://www.photoprism.app/\u003c/a\u003e\u003cbr/\u003e\n最终的\"集大成者\",全家所有设备备份的照片最终全部喂到这里,即使是海量照片也能根据它快速索引到自己想找的照片\n\u003cimg alt=\"PhotoPrism\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://pho.tools/imgs/photoprism.jpg\"/\u003e\u003c/p\u003e\n\u003ch3\u003e最终效果\u003c/h3\u003e\n\u003ch4\u003e平时手机上浏览和上传\u003c/h4\u003e\n\u003cp\u003e使用\u003ccode\u003ePho\u003c/code\u003e浏览本地和最近上传的照片\u003c/p\u003e\n\u003ch4\u003e查找和浏览过去某个时候的照片\u003c/h4\u003e\n\u003cp\u003e根据信息用\u003ccode\u003ePhotoPrism\u003c/code\u003e检索即可\u003c/p\u003e\n",
+      "Author": "fregie",
+      "PubDate": "2023-09-06T02:08:06Z"
+    },
+    {
       "Title": "🚀寻找 黑帽 seo 渗透 劫持 大牛合作 上班都行 - 求职",
       "Link": "https://www.v2ex.com/t/971307",
       "Description": "\u003cp\u003e🚀寻找 黑帽 seo  渗透 劫持 大牛合作 上班都行,价格好商量\n📩 联系我，私信/联系方式： \u003ca href=\"https://t.me/wstg98564\" rel=\"nofollow\"\u003ehttps://t.me/wstg98564\u003c/a\u003e   wx lyh75889\u003c/p\u003e\n",
@@ -20,7 +34,7 @@
     {
       "Title": "选充电线、充电宝真会上瘾啊。有支持各种协议快充的完美充电宝么？ - 问与答",
       "Link": "https://www.v2ex.com/t/971305",
-      "Description": "\u003cp\u003e平时自己日常用的：iphone 14 、一加 10pro 、macbook pro\n所以需要支持的是 pd 66w 协议，一加 supervooc 协议，且支持给笔记本充电。\u003c/p\u003e\n\u003cp\u003e有这样的充电宝存在吗？\u003c/p\u003e\n\u003cp\u003e真觉得真麻烦，好像并没一两个选择。\n目前唯一支持的，好像就我现在买的黄黑色的充电宝。支持全协议的，真的挺少的...\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e平时自己日常用的：iphone 14 、一加 10pro 、macbook pro\n所以需要支持的是 pd 66w 协议，一加 supervooc 协议，且支持给笔记本充电。\n2w 以内电量能上飞机...\u003c/p\u003e\n\u003cp\u003e有这样的充电宝存在吗？\u003c/p\u003e\n\u003cp\u003e真觉得真麻烦。找了下好像并没多的选择。\n目前唯一支持的，好像就我现在买的一个黄黑色的充电宝。支持全协议的\n但实际使用又有点奇怪的问题，并不是特别理想\u003c/p\u003e\n",
       "Author": "hO0O0",
       "PubDate": "2023-09-06T02:04:27Z"
     },
