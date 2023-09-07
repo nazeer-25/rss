@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "oracle cloud 控制台登录超时 - Oracle",
+      "Link": "https://www.v2ex.com/t/971732",
+      "Description": "\u003cp\u003e之前撸了一台 Oracle 1C1G 的服务器，用于部署一些服务。这几天想要登录控制台却始终报错 [ Timeout reached ] 。无法登录上去，但是部署的服务还可以正常访问。诸位老哥有遇到这种情况吗？应该怎么处理嘞？\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"Timeout reached\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://xqmq--blog-image.oss-cn-shenzhen.aliyuncs.com/Snipaste_2023-09-07_14-39-06.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "Noicdi",
+      "PubDate": "2023-09-07T06:42:14Z"
+    },
+    {
+      "Title": "多张快捷交通卡是如何自动选择的？ - Apple",
+      "Link": "https://www.v2ex.com/t/971731",
+      "Description": "一直很好奇这件事情。\u003cbr /\u003e有两张快捷交通卡，一张上海的，一张香港的。我把上海那张录入了门禁，结果不解锁也能自动识别。\u003cbr /\u003e不通用的公交卡可能问题不大。如果两张都是内地的交通联合卡，都设置为快捷卡，刷公交地铁的时候自动选择的逻辑是什么？",
+      "Author": "shenyuzhi",
+      "PubDate": "2023-09-07T06:41:19Z"
+    },
+    {
+      "Title": "问一个数据迁移的问题 - 程序员",
+      "Link": "https://www.v2ex.com/t/971730",
+      "Description": "\u003cp\u003e现状，mysql 存了大概 1000 万条企业的数据，由于查询条件很多，所以就打算把数据迁移到 es 里面。\n用了 logstash ，每次都是全量同步。\u003c/p\u003e\n\u003cp\u003e所以有几个问题：\n1.全量同步，磁盘空间要 double 才能存的下，因为要确保数据导进来才能把原有的删除掉\n2.很慢，据说 4 个小时，看了查询语句，是直接 limit m offset n\u003c/p\u003e\n\u003cp\u003e所以想问下，有啥改进方法麽。能不能做到直接覆盖更新。\n附上 logstash 配置\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003einput {\n\n    jdbc {\n        jdbc_connection_string =\u0026gt; \"jdbc:xxx\"\n        jdbc_user =\u0026gt; \"xxx\"\n        jdbc_password =\u0026gt; \"xxx\"\n        jdbc_driver_library =\u0026gt; \"mysql-connector-java-8.0.24.jar\"\n        jdbc_driver_class =\u0026gt; \"xxx\"\n        jdbc_paging_enabled =\u0026gt; \"true\" \n        jdbc_page_size =\u0026gt; \"50000\" \n        lowercase_column_names =\u0026gt; \"false\"\n        statement_filepath =\u0026gt; \"xxx\"\n        # schedule =\u0026gt; \"* * * * *\"\n        type =\u0026gt; \"type1\"\n    }\n  \n}\n\noutput {\n    if[type] == \"type1\" {\n        elasticsearch {\n            hosts =\u0026gt; [\"localhost:9200\"]\n            index =\u0026gt; \"t_jrb_corp_df_ce\"\n            document_id =\u0026gt; \"%{regNo}\"     \n            doc_as_upsert =\u0026gt; true\n        }\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003esql 就是 select * from table 。\u003c/p\u003e\n\u003cp\u003e或者又没有其他方式，可以快速的从 mysql 导出数据到 es ，\u003c/p\u003e\n",
+      "Author": "luxinfl",
+      "PubDate": "2023-09-07T06:38:39Z"
+    },
+    {
       "Title": "鼠须管挂载小鹤双拼以后如何实现模糊拼音？ - 中州韻",
       "Link": "https://www.v2ex.com/t/971729",
       "Description": "\u003cp\u003e8 年小鹤双拼经验。之前都是使用百度拼音的小鹤双拼。\u003c/p\u003e\n\u003cp\u003e现在想使用鼠须管。但目前网上能搜索到的模糊拼音方案，都是基于鼠须管+全拼的。\u003c/p\u003e\n\u003cp\u003e大家有办法配置在双拼下面使用模糊拼音吗？成都人平翘舌不分，前后鼻音不分，打字太难受了。只需要实现『 zh/ch/sh 』\u0026lt;-\u0026gt;『 z/c/s 』和『 in/en 』\u0026lt;-\u0026gt;『 ing/eng 』和『 l 』\u0026lt;-\u0026gt;『 n 』就可以了。\u003c/p\u003e\n",
