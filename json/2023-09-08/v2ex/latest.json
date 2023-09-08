@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "一个 Oracle 11g 上的 SELECT 语句，原来需要 1-2ms，现在需要 80-150ms 了 - 问与答",
+      "Link": "https://www.v2ex.com/t/972065",
+      "Description": "琢磨了一上午没找到问题，线索如下：\u003cbr /\u003e\u003cbr /\u003e1. SQL 本身很简单，where 条件就一个 id ，索引是加好了的\u003cbr /\u003e\u003cbr /\u003e```sql\u003cbr /\u003eSELECT * FROM DRIVER WHERE id = '身份证号码'\u003cbr /\u003e```\u003cbr /\u003e\u003cbr /\u003eexplain plan 也看不出什么东西，已经是 index(unique scan)了，cost 都是个位数，也试了重建表统计\u003cbr /\u003e\u003cbr /\u003e```sql\u003cbr /\u003eEXEC DBMS_STATS.gather_table_stats('DRIVER')\u003cbr /\u003e```\u003cbr /\u003e\u003cbr /\u003e重建后几乎无变化\u003cbr /\u003e\u003cbr /\u003e2. Oracle 所在服务器基本是空载的，32core 的服务器 load average 基本不超过 1.0\u003cbr /\u003e\u003cbr /\u003e3. 这个 DRIVER 表会每 5 分钟和上游同步一次，大概几百条数据会删除然后重新插入 \u003cbr /\u003e\u003cbr /\u003e目前在试着清空表，重新导入数据。\u003cbr /\u003e\u003cbr /\u003e请大家帮忙分析下，我还真是没招了。",
+      "Author": "liuzhedash",
+      "PubDate": "2023-09-08T07:37:44Z"
+    },
+    {
+      "Title": "macOS 键盘英文输入法突然不能连打了（按住元音不放时会让选择音调） - 问与答",
+      "Link": "https://www.v2ex.com/t/972064",
+      "Description": "自带键盘与外接键盘突然都不能连打了。\u003cbr /\u003e\u003cbr /\u003e比如，按住 a 键，正常应该是，输出 1 个 a ，顿一下，然后一直连续输出 a 。\u003cbr /\u003e\u003cbr /\u003e但现在不管用了，并且按住元音的时候，会让选择声调。。。\u003cbr /\u003e\u003cbr /\u003e有遇见这个问题的么？",
+      "Author": "gpt5",
+      "PubDate": "2023-09-08T07:35:58Z"
+    },
+    {
       "Title": "整点秒杀脚本，选择什么编程语言合适？ - 问与答",
       "Link": "https://www.v2ex.com/t/972063",
       "Description": "\u003cp\u003e不同语言的执行效率是否对抢购有影响\u003c/p\u003e\n",
