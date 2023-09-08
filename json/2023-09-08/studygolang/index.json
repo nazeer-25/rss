@@ -12,15 +12,8 @@
     },
     {
       "Title": "Go 1.12.1 和 Go1.20.8 发布",
-      "Link": "https://studygolang.com/topics/16690#reply0",
+      "Link": "https://studygolang.com/topics/16690#reply1",
       "Description": "\u003cp\u003e今早，Go Team 发布了 Go1.12.1 和 Go1.20.8，这是两个小版本，主要设计安全更新。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003ecmd/go: go.mod toolchain 指令允许任意执行\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e这个指令是在 Go 1.21 中引入的，它可以被利用来在模块的根目录下执行脚本和二进制文件，当在模块内部使用 “go” 命令时。这适用于使用 “go” 命令从模块代理下载的模块，以及直接使用 VCS 软件下载的模块。issue：\u003ca href=\"https://go.dev/issue/62198\"\u003ehttps://go.dev/issue/62198\u003c/a\u003e。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003ehtml/template: 在 script 上下文中不正确地处理 HTML-like 注释\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003ehtml/template 包没有正确地处理在 \u003ccode\u003e\u0026amp;lt;script\u0026gt;\u003c/code\u003e 上下文中出现的 HMTL-like \u003ccode\u003e\u0026amp;lt;!–\u003c/code\u003e 和 \u003ccode\u003e–\u0026gt;\u003c/code\u003e 注释标记，也没有正确地处理 hashbang \u003ccode\u003e#!\u003c/code\u003e 注释标记。这可能导致模板解析器不正确地解释 \u003ccode\u003e\u0026amp;lt;script\u0026gt;\u003c/code\u003e 上下文的内容，导致 action 被不正确地转义。这可能被利用来进行 XSS 攻击。issue：\u003ca href=\"https://go.dev/issue/62196\"\u003ehttps://go.dev/issue/62196\u003c/a\u003e。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003ehtml/template: 在 script 上下文中不正确地处理特殊标签\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003ehtml/template 包没有正确地应用处理在 \u003ccode\u003e\u0026amp;lt;script\u0026gt;\u003c/code\u003e 上下文中出现的 \u003ccode\u003e\u0026amp;lt;script\u003c/code\u003e, \u003ccode\u003e\u0026amp;lt;!–\u003c/code\u003e 和 \u003ccode\u003e\u0026amp;lt;/script\u003c/code\u003e 的规则。这可能导致模板解析器过早地认为 script 上下文被终止，导致 action 被不正确地转义。这可能被利用来进行 XSS 攻击。issue：\u003ca href=\"https://go.dev/issue/62197\"\u003ehttps://go.dev/issue/62197\u003c/a\u003e。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003ecrypto/tls: 在 QUIC 连接上处理握手后消息时 panic\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e处理一个不完整的握手后消息会导致 QUIC 连接 panic。issue：\u003ca href=\"https://go.dev/issue/62266\"\u003ehttps://go.dev/issue/62266\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e可以按照官方提供的方式更新试用：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230907/7999ebf9037ef617e4264991d46de0d2.webp\" alt=\"go1.21.1.webp\" /\u003e\u003c/p\u003e\n\n\u003cp\u003eGo 语言中文网也为大家提供了最新安装包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "go-carbon 2.2.6 版本发布， 轻量级、语义化、对开发者友好的Golang时间处理库",
-      "Link": "https://studygolang.com/topics/16688#reply0",
-      "Description": "\u003cp\u003ecarbon 是一个轻量级、语义化、对开发者友好的 golang 时间处理库，支持链式调用。\u003c/p\u003e\n\n\u003cp\u003e目前已被 \u003ca href=\"https://github.com/avelino/awesome-go#date-and-time\" title=\"awesome-go\"\u003eawesome-go\u003c/a\u003e 收录，如果您觉得不错，请给个 star 吧\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/golang-module/carbon\" title=\"github.com/golang-module/carbon\"\u003egithub.com/golang-module/carbon\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://gitee.com/golang-module/carbon\" title=\"gitee.com/golang-module/carbon\"\u003egitee.com/golang-module/carbon\u003c/a\u003e\u003c/p\u003e\n\n\u003ch4\u003e安装使用\u003c/h4\u003e\n\n\u003ch5\u003eGolang 版本大于等于1.16\u003c/h5\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 使用 github 库\ngo get -u github.com/golang-module/carbon/v2\n\nimport \u0026quot;github.com/golang-module/carbon/v2\u0026quot;\n\n// 使用 gitee 库\ngo get -u gitee.com/golang-module/carbon/v2\n\nimport \u0026quot;gitee.com/golang-module/carbon/v2\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003eGolang 版本小于1.16\u003c/h5\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 使用 github 库\ngo get -u github.com/golang-module/carbon\n\nimport \u0026quot;github.com/golang-module/carbon\u0026quot;\n\n// 使用 gitee 库\ngo get -u gitee.com/golang-module/carbon\n\nimport  \u0026quot;gitee.com/golang-module/carbon\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003e更新日志\u003c/h5\u003e\n\n\u003cul\u003e\n\u003cli\u003e修复经过\u003ccode\u003ejson.Unmarshal\u003c/code\u003e解码后的时间字段时区丢失的 bug\u003c/li\u003e\n\u003cli\u003e修复 \u003ccode\u003eDiffInYears\u003c/code\u003e, \u003ccode\u003eAge\u003c/code\u003e 方法计算错误的 bug\u003c/li\u003e\n\u003cli\u003e将 \u003ccode\u003eCreateFromStdTime\u003c/code\u003e 方法从 \u003ccode\u003ecarbon.go\u003c/code\u003e 迁移到 \u003ccode\u003ecreator.go\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e将 \u003ccode\u003eToStdTime\u003c/code\u003e 方法从 \u003ccode\u003ecarbon.go\u003c/code\u003e 迁移到 \u003ccode\u003eoutputer.go\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e将 \u003ccode\u003eFromStdTime\u003c/code\u003e, \u003ccode\u003eTime2Carbon\u003c/code\u003e, \u003ccode\u003eCarbon2Time\u003c/code\u003e 等将要弃用的方法迁移到 \u003ccode\u003edeprecated.go\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e将 \u003ccode\u003estretchr/testify\u003c/code\u003e 升级到 \u003ccode\u003ev1.8.4\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -53,6 +46,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "go-carbon 2.2.6 版本发布， 轻量级、语义化、对开发者友好的Golang时间处理库",
+      "Link": "https://studygolang.com/topics/16688#reply0",
+      "Description": "\u003cp\u003ecarbon 是一个轻量级、语义化、对开发者友好的 golang 时间处理库，支持链式调用。\u003c/p\u003e\n\n\u003cp\u003e目前已被 \u003ca href=\"https://github.com/avelino/awesome-go#date-and-time\" title=\"awesome-go\"\u003eawesome-go\u003c/a\u003e 收录，如果您觉得不错，请给个 star 吧\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://github.com/golang-module/carbon\" title=\"github.com/golang-module/carbon\"\u003egithub.com/golang-module/carbon\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://gitee.com/golang-module/carbon\" title=\"gitee.com/golang-module/carbon\"\u003egitee.com/golang-module/carbon\u003c/a\u003e\u003c/p\u003e\n\n\u003ch4\u003e安装使用\u003c/h4\u003e\n\n\u003ch5\u003eGolang 版本大于等于1.16\u003c/h5\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 使用 github 库\ngo get -u github.com/golang-module/carbon/v2\n\nimport \u0026quot;github.com/golang-module/carbon/v2\u0026quot;\n\n// 使用 gitee 库\ngo get -u gitee.com/golang-module/carbon/v2\n\nimport \u0026quot;gitee.com/golang-module/carbon/v2\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003eGolang 版本小于1.16\u003c/h5\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// 使用 github 库\ngo get -u github.com/golang-module/carbon\n\nimport \u0026quot;github.com/golang-module/carbon\u0026quot;\n\n// 使用 gitee 库\ngo get -u gitee.com/golang-module/carbon\n\nimport  \u0026quot;gitee.com/golang-module/carbon\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch5\u003e更新日志\u003c/h5\u003e\n\n\u003cul\u003e\n\u003cli\u003e修复经过\u003ccode\u003ejson.Unmarshal\u003c/code\u003e解码后的时间字段时区丢失的 bug\u003c/li\u003e\n\u003cli\u003e修复 \u003ccode\u003eDiffInYears\u003c/code\u003e, \u003ccode\u003eAge\u003c/code\u003e 方法计算错误的 bug\u003c/li\u003e\n\u003cli\u003e将 \u003ccode\u003eCreateFromStdTime\u003c/code\u003e 方法从 \u003ccode\u003ecarbon.go\u003c/code\u003e 迁移到 \u003ccode\u003ecreator.go\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e将 \u003ccode\u003eToStdTime\u003c/code\u003e 方法从 \u003ccode\u003ecarbon.go\u003c/code\u003e 迁移到 \u003ccode\u003eoutputer.go\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e将 \u003ccode\u003eFromStdTime\u003c/code\u003e, \u003ccode\u003eTime2Carbon\u003c/code\u003e, \u003ccode\u003eCarbon2Time\u003c/code\u003e 等将要弃用的方法迁移到 \u003ccode\u003edeprecated.go\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e将 \u003ccode\u003estretchr/testify\u003c/code\u003e 升级到 \u003ccode\u003ev1.8.4\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "http2: client connection force closed via ClientConn.Close",
       "Link": "https://studygolang.com/topics/16692#reply0",
       "Description": "\u003cp\u003e高并发下，每隔断时间就会提示这样的错误：http2: client connection force closed via ClientConn.Close\u003c/p\u003e\n\n\u003cp\u003e下面是核心代码：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003edefaultTransport := http.DefaultTransport\ntr := *defaultTransport.(*http.Transport)\ntr.TLSClientConfig = \u0026amp;tls.Config{\n\tInsecureSkipVerify: true,\n}\ntr.MaxConnsPerHost = 30000\ntr.MaxIdleConnsPerHost = 10000\t\t\t\nclient = \u0026amp;http.Client{\n\tTransport: \u0026amp;tr,\n\tTimeout:   time.Duration(5) * time.Second,\n}\t\t\t\t\n\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -67,23 +67,9 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "你有能力，我有空间",
-      "Link": "https://studygolang.com/topics/16685#reply0",
-      "Description": "\u003cp\u003e你有能力，我有空间\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "如意工作满意薪情",
-      "Link": "https://studygolang.com/topics/16684#reply0",
-      "Description": "\u003cp\u003e如意工作满意薪情\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
-      "Author": "",
-      "PubDate": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Title": "谁知道这个错误是什么原因导致的吗？急！",
-      "Link": "https://studygolang.com/articles/36317#reply4",
-      "Description": "\u003cp\u003e使用http.NewRequest并发请求同一个接口（参数不一样）时，一段时间后，会提示下面这个错误：谁知道是什么原因吗\nconnectex: Only one usage of each socket address (protocol/network address/port) is normally permitted\u003c/p\u003e\n",
+      "Title": "go新人求助一个问题",
+      "Link": "https://studygolang.com/topics/16680#reply5",
+      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230905/3d9959561a33450d3495a2dc23331745.jpg\" alt=\"1693928149021.jpg\" /\u003e\n我要怎么给引入的三方库结构体添加json格式化时候的小写字段呢，除了自己定义之外。谢谢各位。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -109,9 +95,23 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
-      "Title": "go新人求助一个问题",
-      "Link": "https://studygolang.com/topics/16680#reply4",
-      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230905/3d9959561a33450d3495a2dc23331745.jpg\" alt=\"1693928149021.jpg\" /\u003e\n我要怎么给引入的三方库结构体添加json格式化时候的小写字段呢，除了自己定义之外。谢谢各位。\u003c/p\u003e\n",
+      "Title": "你有能力，我有空间",
+      "Link": "https://studygolang.com/topics/16685#reply0",
+      "Description": "\u003cp\u003e你有能力，我有空间\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "如意工作满意薪情",
+      "Link": "https://studygolang.com/topics/16684#reply0",
+      "Description": "\u003cp\u003e如意工作满意薪情\n1.全 jian 皆可\n2.工资五千家\n3.喜爱网路相关工作\n4.工作时间自由 但是要完成时数\n5.宽带 电脑或高阶手机 自备\n6.请加李经理 :1972815785\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "谁知道这个错误是什么原因导致的吗？急！",
+      "Link": "https://studygolang.com/articles/36317#reply4",
+      "Description": "\u003cp\u003e使用http.NewRequest并发请求同一个接口（参数不一样）时，一段时间后，会提示下面这个错误：谁知道是什么原因吗\nconnectex: Only one usage of each socket address (protocol/network address/port) is normally permitted\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -140,6 +140,20 @@
       "Title": "远程办公十大网络安全意识隐患！",
       "Link": "https://studygolang.com/topics/16682#reply0",
       "Description": "\u003cp\u003e一场突如其来的疫情改变了我们的生活，也改变了我们的工作方式。在井然有序的复工过程中，很多企业和单位都开启了远程办公模式，在保障健康和工作的同时，由于员工信息安全意识薄弱所带来的安全隐患也不可忽视。\u003c/p\u003e\n\n\u003cp\u003e在新冠肺炎抗疫得到控制的同时，我们不能忽视全民远程办公的网络安全“次生疫情”，尤其是那些伴随疫情产生的，或者加重的安全威胁！\u003c/p\u003e\n\n\u003cp\u003e以下是网络安全意识专业机构给出的远程办公安全意识十大隐患，Masutaa小编整理如下，供远程办公人员或企业网络安全部门参考备忘（只需三分钟即可让你或者你的员工快速识别并规避最常见安全隐患）：\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e01 使用未经授权的个人设备办公，缺乏安全防护\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cp\u003e子女的游戏PC、各种存在后门的盗版软件……很多人在家中办公无法做好完善的办公设备准备工作，不少人使用的是缺乏专业安全防护及控制的个人设备开展工作。更有甚者，安全意识薄弱的员工，连设置开机密码等最基础的安全操作都没有。\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e02 家人误操作、宠物趴键盘造成数据丢失\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cp\u003e关于在家办公的写照与吐槽在网络上层出不穷，熊孩子动电脑、宠物趴键盘、“办公桌”上放着牛奶等营养物资…\u003c/p\u003e\n\n\u003cp\u003e看到这些搞笑又真实的在家远程办公的场景，不禁让人忍俊不禁。但这也恰恰反映了一个网络安全隐患。以上任一家人的误操作，都会带来工作中断、数据丢失等风险。\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e03 使用家庭Wi-Fi，风险加剧\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cp\u003e为了便于记忆，很多家庭Wi-Fi密码设置简单，安全漏洞也多年未曾修补（固件更新），除了有被人蹭网的风险外，还有可能会被黑客攻击，伪造成家庭的网关，所有数据如通过这个伪造网关，会出现信息被劫持、以及被钓鱼、被诈骗等恶劣影响。\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e04 使用微信等即时通讯工具造成数据泄露\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cp\u003e特殊时期，同事之间在线交流的频率和次数达到了高峰，利用微信等即时通讯工具的便利性，快速上传下达，很多网络安全要求与规定被抛之脑后，直接用微信传递机密文件，造成数据泄漏的事件最近时有爆出。\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e05 使用社交媒体带来的信息被收集的风险\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cp\u003e在家远程办公，情绪一时难以在公私之间自由转换和隔离，很多人一时兴起会通过社交媒体抒发自己的工作情况甚至是内容，而这些看似零散的信息，却是黑客收集的资料对象，进行针对性的鱼叉钓鱼的数据跳板。\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e06 钓鱼风险激增\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cp\u003e打着企业复工给员工买口罩的旗号、冒充管理员升级账号、冒充领导索要资料等的钓鱼层出不穷，俨然即将成为网络安全的重灾区。员工如网络安全意识不强，面对形形色色的钓鱼，很难分辨真伪，规避风险。\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e07 利用公共云盘传输资料造成数据泄露\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cp\u003e很多企业并没有部署专业的远程传输资料工具或平台，无论是基于便利性，还是其他原因，在家远程办公期间，利用公共云盘传输资料成为了很多人不得已的选择，但其中蕴含的数据泄漏风险巨大，不法分子甚至提供云盘内容检索服务，可以搜索下载个人用户存放在云盘中的敏感数据。\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e08 设备突发状况，自行处理，没有及时上报\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cp\u003e办公设备出现问题虽属于突发情况，可一旦出现，就没有平时现场办公时那么方便得到专业人士的支援并且能够得到完善的解决，随之带来的是，员工自己排查或找“他人”帮忙处理，造成数据丢失或泄漏。\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e09 个人设备接入公司内部网络的风险\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cp\u003e按照各地的管理规定，目前复工的企业，基本上是一部分员工在公司办公，一部分员工是居家办公。居家办公的员工就会有个人设备接入公司内部网络的可能，而这带来的网络安全风险不言而喻。\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e10 系统、软件更新不及时造成漏洞的风险\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cp\u003e远程办公，及时进行系统升级、软件更新这些必要的安全操作，在有些员工的意识中不复存在，容易造成漏洞，成为黑客攻击的跳板。\u003c/p\u003e\n\n\u003cp\u003e网络安全，以人为本，无论在什么情况下，对员工的网络安全意识宣教都需紧跟工作，在目前普遍采用远程办公的大环境下更是如此。疫情过后，我们的工作都会回归到正常甚至到加速轨道上来，希望不要面临因为员工缺乏网络安全意识，而需要我们再回头“补漏洞”的局面。\u003c/p\u003e\n\n\u003ch4\u003e\u003cstrong\u003e关于Masutaa\u003c/strong\u003e\u003c/h4\u003e\n\n\u003cp\u003eMasutaa是个互联网从业者自由协作交流平台，链接行业内TOP10%人才！目前平台上已经有将近400名互联网尖端人才，其中近70%的从业者从业年限超3年。\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003e在这个平台上，你有机会获得远程项目，也可实现地理套利，成为数字游民！\u003c/strong\u003e\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "Go 1.12.1 和 Go1.20.8 发布",
+      "Link": "https://studygolang.com/topics/16690#reply0",
+      "Description": "\u003cp\u003e今早，Go Team 发布了 Go1.12.1 和 Go1.20.8，这是两个小版本，主要设计安全更新。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003ecmd/go: go.mod toolchain 指令允许任意执行\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e这个指令是在 Go 1.21 中引入的，它可以被利用来在模块的根目录下执行脚本和二进制文件，当在模块内部使用 “go” 命令时。这适用于使用 “go” 命令从模块代理下载的模块，以及直接使用 VCS 软件下载的模块。issue：\u003ca href=\"https://go.dev/issue/62198\"\u003ehttps://go.dev/issue/62198\u003c/a\u003e。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003ehtml/template: 在 script 上下文中不正确地处理 HTML-like 注释\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003ehtml/template 包没有正确地处理在 \u003ccode\u003e\u0026amp;lt;script\u0026gt;\u003c/code\u003e 上下文中出现的 HMTL-like \u003ccode\u003e\u0026amp;lt;!–\u003c/code\u003e 和 \u003ccode\u003e–\u0026gt;\u003c/code\u003e 注释标记，也没有正确地处理 hashbang \u003ccode\u003e#!\u003c/code\u003e 注释标记。这可能导致模板解析器不正确地解释 \u003ccode\u003e\u0026amp;lt;script\u0026gt;\u003c/code\u003e 上下文的内容，导致 action 被不正确地转义。这可能被利用来进行 XSS 攻击。issue：\u003ca href=\"https://go.dev/issue/62196\"\u003ehttps://go.dev/issue/62196\u003c/a\u003e。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003ehtml/template: 在 script 上下文中不正确地处理特殊标签\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003ehtml/template 包没有正确地应用处理在 \u003ccode\u003e\u0026amp;lt;script\u0026gt;\u003c/code\u003e 上下文中出现的 \u003ccode\u003e\u0026amp;lt;script\u003c/code\u003e, \u003ccode\u003e\u0026amp;lt;!–\u003c/code\u003e 和 \u003ccode\u003e\u0026amp;lt;/script\u003c/code\u003e 的规则。这可能导致模板解析器过早地认为 script 上下文被终止，导致 action 被不正确地转义。这可能被利用来进行 XSS 攻击。issue：\u003ca href=\"https://go.dev/issue/62197\"\u003ehttps://go.dev/issue/62197\u003c/a\u003e。\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003ecrypto/tls: 在 QUIC 连接上处理握手后消息时 panic\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e处理一个不完整的握手后消息会导致 QUIC 连接 panic。issue：\u003ca href=\"https://go.dev/issue/62266\"\u003ehttps://go.dev/issue/62266\u003c/a\u003e。\u003c/p\u003e\n\n\u003cp\u003e可以按照官方提供的方式更新试用：\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230907/7999ebf9037ef617e4264991d46de0d2.webp\" alt=\"go1.21.1.webp\" /\u003e\u003c/p\u003e\n\n\u003cp\u003eGo 语言中文网也为大家提供了最新安装包：\u003ca href=\"https://studygolang.com/dl\"\u003ehttps://studygolang.com/dl\u003c/a\u003e。\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "go新人求助一个问题",
+      "Link": "https://studygolang.com/topics/16680#reply4",
+      "Description": "\u003cp\u003e\u003cimg src=\"https://static.golangjob.cn/230905/3d9959561a33450d3495a2dc23331745.jpg\" alt=\"1693928149021.jpg\" /\u003e\n我要怎么给引入的三方库结构体添加json格式化时候的小写字段呢，除了自己定义之外。谢谢各位。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
