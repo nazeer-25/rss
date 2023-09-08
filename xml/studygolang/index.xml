@@ -47,11 +47,6 @@
       <description>&lt;p&gt;&lt;img src=&#34;https://static.golangjob.cn/230905/3d9959561a33450d3495a2dc23331745.jpg&#34; alt=&#34;1693928149021.jpg&#34; /&gt;&#xA;我要怎么给引入的三方库结构体添加json格式化时候的小写字段呢，除了自己定义之外。谢谢各位。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>谁知道这个错误是什么原因导致的吗？急！</title>
-      <link>https://studygolang.com/articles/36317#reply4</link>
-      <description>&lt;p&gt;使用http.NewRequest并发请求同一个接口（参数不一样）时，一段时间后，会提示下面这个错误：谁知道是什么原因吗&#xA;connectex: Only one usage of each socket address (protocol/network address/port) is normally permitted&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>go fyne button Disable()与Enable()</title>
       <link>https://studygolang.com/topics/16676#reply1</link>
       <description>&lt;p&gt;期望目标：写了个fyne的小工具，想要实现的操作是点击某个按钮后该按钮不可用，等处理完相关逻辑后再将按钮变为可用（包括其他的选择框也在点击按钮后不可用），同时在按钮不可用期间所有按键事件丢失&lt;/p&gt;&#xA;&#xA;&lt;p&gt;现状：在按钮的OnTapped时间中先将各个组件Disable(),处理完成后再调用Enable()。但发现点击后周四只是将相关组件置灰，暂时没去操作，带处理完按钮的处理时间后会处理按钮变亮前的操作(比如在置灰的状态下继续点了按钮，看起来当时没有响应，但待OnTapped方法执行完成调用Enable()方法后，还是处理了置灰状态的操作，只是延迟处理了）。相关代码&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;buildButton.OnTapped = func() {&#xA;&#x9;&#x9;if isInteTime() {&#xA;&#x9;&#x9;&#x9;jobName := GetJobNameByGroupNameAndServiceName(groupSelect.Selected,projectSelect.Selected)&#xA;&#x9;&#x9;&#x9;infoId := GetInfoIdByGroupNameAndServiceName(groupSelect.Selected,projectSelect.Selected)&#xA;&#xA;&#x9;&#x9;&#x9;fmt.Println(&amp;quot;###################jobName：&amp;quot; + jobName + &amp;quot;infoId:&amp;quot; + infoId + &amp;quot;################&amp;quot;)&#xA;&#x9;&#x9;&#x9;//选择服务后操作&#xA;&#x9;&#x9;&#x9;if jobName != &amp;quot;&amp;quot; &amp;amp;&amp;amp; infoId != &amp;quot;&amp;quot; {&#xA;&#x9;&#x9;&#x9;&#x9;// fmt.Println(&amp;quot;###################jobName：&amp;quot; + jobName + &amp;quot;infoId:&amp;quot; + infoId + &amp;quot;################&amp;quot;)&#xA;&#x9;&#x9;&#x9;&#x9;//根据infoId得到jenkins信息&#xA;&#x9;&#x9;&#x9;&#x9;for _, groupJobInfo := range GroupJobInfos{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if groupJobInfo.InfoId == infoId {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;//禁用按钮，选择&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;buildButton.Disable()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;appSelect.Disable()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;groupSelect.Disable()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;projectSelect.Disable()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;//执行构建&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;buildResult := utils.BuildJob(jobName,logLineEntry,groupJobInfo.JenkinsUrl,groupJobInfo.JenkinsUsername,groupJobInfo.JenkinsPassword)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;//记录日志&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;writeLog(buildResult,projectSelect.Selected)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;dialog.ShowInformation(&amp;quot;提示&amp;quot;,buildResult,win)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;//启用按钮，选择&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;appSelect.Enable()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;buildButton.Enable()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;groupSelect.Enable()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;projectSelect.Enable()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;break&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}else {&#xA;&#x9;&#x9;&#x9;&#x9;dialog.ShowInformation(&amp;quot;提示&amp;quot;,&amp;quot;请选择构建的服务&amp;quot;,win)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}else {&#xA;&#x9;&#x9;&#x9;dialog.ShowInformation(&amp;quot;提示&amp;quot;,&amp;quot;请非工作时间段使用&amp;quot;,win)&#xA;&#x9;&#x9;}&#x9;&#xA;&#x9;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -80,6 +75,11 @@
       <title>如意工作满意薪情</title>
       <link>https://studygolang.com/topics/16684#reply0</link>
       <description>&lt;p&gt;如意工作满意薪情&#xA;1.全 jian 皆可&#xA;2.工资五千家&#xA;3.喜爱网路相关工作&#xA;4.工作时间自由 但是要完成时数&#xA;5.宽带 电脑或高阶手机 自备&#xA;6.请加李经理 :1972815785&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>谁知道这个错误是什么原因导致的吗？急！</title>
+      <link>https://studygolang.com/articles/36317#reply4</link>
+      <description>&lt;p&gt;使用http.NewRequest并发请求同一个接口（参数不一样）时，一段时间后，会提示下面这个错误：谁知道是什么原因吗&#xA;connectex: Only one usage of each socket address (protocol/network address/port) is normally permitted&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>谁知道这个错误是什么原因吗？急！</title>
