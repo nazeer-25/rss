@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "C++libtorch 多线程多 GPU 推理问题 - C++",
+      "Link": "https://www.v2ex.com/t/972352",
+      "Description": "\u003cp\u003e遇到一个多 GPU 推理问题，模型是 TorchScript ，我想利用两块显卡并行推理，想法很直接：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e生成两个独立模型，model0 发送到 GPU0 上，model1 发送到 GPU1 上\u003c/li\u003e\n\u003cli\u003e将一个 batch 的数据均分成两份，sub_batch0 发送到 GPU0 上, sub_batch1 发送到 GPU1 上\u003c/li\u003e\n\u003cli\u003e在两个 c++线程中（\u003ccode\u003estd::thread\u003c/code\u003e）进行推理: \u003ccode\u003emodel0(sub_batch0)\u003c/code\u003e, \u003ccode\u003emodel1(sub_batch1)\u003c/code\u003e并行推理后收集最终结果。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e发现这样做有严重的性能问题，假如输入 batch=24,\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e在单 GPU 上，显存占用~6G ，核心利用率~100%，推理速度~33fps\u003c/li\u003e\n\u003cli\u003e在双 GPU 上（每个 GPU 获得大小为 12 的 sub_batch ），结果每张卡显存占用~15G （总 16GB ）, 核心占用率不到 50%，推理速度~44fps\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e按理说，在双 GPU 上，可以让 batch=48 ，从而每个显卡获的 sub_batch=24, 每个卡显存占用~6G, 核心利用率~100%，总的推理速度~66fps. 实际上 batch=48 直接爆显存了。\u003c/p\u003e\n\u003cp\u003e可能以上很直接的想法不符合 libtorch 或者说底层 cuda 的工作原理。请问下有朋友遇到过相同问题么？请教下如何解决。（也许需要用\u003ccode\u003etorch::nn::parallel::data_parallel\u003c/code\u003e来利用多 GPU ，我稍后尝试下）\u003c/p\u003e\n",
+      "Author": "justou",
+      "PubDate": "2023-09-09T14:08:37Z"
+    },
+    {
+      "Title": "搬瓦工日本怎么了 - VPS",
+      "Link": "https://www.v2ex.com/t/972351",
+      "Description": "一天卡的亲妈都不认识了",
+      "Author": "garyxi24",
+      "PubDate": "2023-09-09T14:07:39Z"
+    },
+    {
       "Title": "开发了一套 对接 OpenAI, ChatGPT 的网站，用 golang+vue3 实现 - 程序员",
       "Link": "https://www.v2ex.com/t/972350",
       "Description": "\u003cp\u003e开发了一套 对接  OpenAI, ChatGPT 的网站，用 golang+vue3 实现，\u003ca href=\"https://github.com/anlityli/chatait-free\" rel=\"nofollow\"\u003ehttps://github.com/anlityli/chatait-free\u003c/a\u003e\n欢迎大家来点星星\u003c/p\u003e\n",
