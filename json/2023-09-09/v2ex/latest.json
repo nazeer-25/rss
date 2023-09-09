@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "江苏常州电信 TCP 间歇性断流 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/972373",
+      "Description": "\u003cp\u003e额。。。萌新建号以来第一次发帖，主要也不知道能在哪问了。。。\u003c/p\u003e\n\u003cp\u003e现在是这个情况，我在两个区都有租房，目前两边都会出现不定时的 tcp 断流，不限于国内外而且不限于设备，手机电脑都会断，每次断三五秒到两分钟不等。。。\u003c/p\u003e\n\u003cp\u003e这情况其实持续大概有三个月了，基本每天都是这样。。。\u003c/p\u003e\n\u003cp\u003e个人手里的路由有三个，华硕灵耀 AX6600M ，华硕灵耀 XD4 ，锐捷星耀 X32 PRO ，房东的路由两个，tplink 的 WDR5620 ，中国移动 RAX3000Q ，无论开关 ax 的无线还是有线均可复现。。。\u003c/p\u003e\n\u003cp\u003e都是光猫直连路由，isp 也都是电信。。。\u003c/p\u003e\n\u003cp\u003e光猫一边是烽火 HG6540A ，另一边不详，不过看界面应该也是同款（定制的 op ）。。。\u003c/p\u003e\n\u003cp\u003e很诡异的就是似乎只断 tcp ，在 tcp 完全无法通信的时候游戏的 kcp （ udp ） 和 icmp 都可以正常使用， 至少 dns 和 ping 甚至后台挂着的 bt 都工作正常。。。\u003c/p\u003e\n\u003cp\u003e测试使用的是 deajan 的 \u003ca href=\"https://github.com/deajan/tcpping\" rel=\"nofollow\"\u003etcpping\u003c/a\u003e 和普通的 curl\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"ping 测试\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.ibb.co/wJ3crrh/QQ-20230816022332.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e八月份的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e curl -v https://www.bilibili.com/\n* Uses proxy env variable no_proxy == '172.22.112.1,localhost'\n* Uses proxy env variable https_proxy == 'http://172.22.112.1:7890/'\n*   Trying 172.22.112.1:7890...\n* Connected to (nil) (172.22.112.1) port 7890 (#0)\n* allocate connect buffer!\n* Establish HTTP proxy tunnel to www.bilibili.com:443\n\u0026gt; CONNECT www.bilibili.com:443 HTTP/1.1\n\u0026gt; Host: www.bilibili.com:443\n\u0026gt; User-Agent: curl/7.81.0\n\u0026gt; Proxy-Connection: Keep-Alive\n\u0026gt;\n\u0026lt; HTTP/1.1 200 Connection established\n\u0026lt;\n* Proxy replied 200 to CONNECT request\n* CONNECT phase completed!\n* ALPN, offering h2\n* ALPN, offering http/1.1\n*  CAfile: /etc/ssl/certs/ca-certificates.crt\n*  CApath: /etc/ssl/certs\n* TLSv1.0 (OUT), TLS header, Certificate Status (22):\n* TLSv1.3 (OUT), TLS handshake, Client hello (1):\n↑就停在这不继续了\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e九月的：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e* Connection #0 to host www.baidu.com left intact\nPS C:\\Program Files\\Git\\mingw64\\bin\u0026gt; .\\curl.exe \"https://www.baidu.com\" --verbose\n*   Trying 180.101.50.242:443...\n* connect to 180.101.50.242 port 443 failed: Timed out\n*   Trying 180.101.50.188:443...\n* connect to 180.101.50.188 port 443 failed: Timed out\n* Failed to connect to www.baidu.com port 443 after 43100 ms: Couldn't connect to server\n* Closing connection 0\ncurl: (28) Failed to connect to www.baidu.com port 443 after 43100 ms: Couldn't connect to server\n与此同时 ping 这个地址\nPS E:\\wwwroot\\dev\\lib\u0026gt; ping 180.101.50.242\n正在 Ping 180.101.50.242 具有 32 字节的数据:\n来自 180.101.50.242 的回复: 字节=32 时间=7ms TTL=53\n来自 180.101.50.242 的回复: 字节=32 时间=6ms TTL=53\n来自 180.101.50.242 的回复: 字节=32 时间=7ms TTL=53\n来自 180.101.50.242 的回复: 字节=32 时间=6ms TTL=53\n\n180.101.50.242 的 Ping 统计信息:\n    数据包: 已发送 = 4 ，已接收 = 4 ，丢失 = 0 (0% 丢失)，\n往返行程的估计时间(以毫秒为单位):\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003ecurl 的测试结果如上，之前断流时发送 curl 基本就卡在 Client hello (1) 阶段，wireshark 上看感觉就是只有发送但是完全收不到下文。。。\u003c/p\u003e\n\u003cp\u003e最近彻底变成 timeout 了。。。\u003c/p\u003e\n\u003cp\u003e测试的时候梯子不是没开就是在 direct ，应该没有关系。。。\u003c/p\u003e\n\u003cp\u003e家中路由均没有任何插件，都是原版固件加正常的麻瓜配置，拨号都是光猫拨的\u003c/p\u003e\n\u003cp\u003e以断流的频次来看似乎和当前的使用量有关，但是。。。想不明白发生了什么。。。\u003c/p\u003e\n\u003cp\u003e都不知道该怎么和电信小哥讲这个情况。。。\u003c/p\u003e\n\u003cp\u003e求支个招。。。\u003c/p\u003e\n",
+      "Author": "ntedshen",
+      "PubDate": "2023-09-09T15:50:18Z"
+    },
+    {
+      "Title": "Poe 的每日一条的 GPT4 问答被盗用了 - 问与答",
+      "Link": "https://www.v2ex.com/t/972371",
+      "Description": "\u003cp\u003e刚才打开 poe, 发现了一条葡萄牙语的关于法律问题的 GPT4 对话\u003c/p\u003e\n\u003cp\u003e这是被偷 Cookie 拿去卖了? \u003c/p\u003e\n\u003cp\u003e问题出在哪呢? \u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e用的浏览器插件和脚本都是下载量较大的一些, 无太多精力审查\u003c/li\u003e\n\u003cli\u003e账号使用 Google 直接登录的, 查了下无陌生设备\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003echatGPT 和 poe 刚出来那会就有人分享一些账户的登录 Cookie 了, 结合有关的一些 webshare 项目来看, 我认为被偷 Cookie 拿去卖的可能性较大\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"img\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/3jpdSx2.png\"/\u003e\u003c/p\u003e\n",
+      "Author": "mkoijnbhu",
+      "PubDate": "2023-09-09T15:47:39Z"
+    },
+    {
+      "Title": "CDNJSCN 上线啦~ - 分享创造",
+      "Link": "https://www.v2ex.com/t/972370",
+      "Description": "\u003cp\u003e\u003ca href=\"https://cdnjs.shssedu.ac.cn/\" rel=\"nofollow\"\u003ehttps://cdnjs.shssedu.ac.cn/\u003c/a\u003e\nCDNJSCN 是一项免费开源 CDN (国内)搜索服务，提供 CDNJS 库的搜索，加速链接转换服务，\n此外还提供 Github 、UNPKG 、Google 前端公共库、Google Fonts 加速链接的替换\n欢迎你的使用\u003c/p\u003e\n",
+      "Author": "muzihuaner",
+      "PubDate": "2023-09-09T15:46:53Z"
+    },
+    {
+      "Title": "就事论事地说，华为的高端机型究竟怎么样？ - Android",
+      "Link": "https://www.v2ex.com/t/972369",
+      "Description": "本人算是果粉，多年前试过安卓但体验上实在是无法适应，现在基本是苹果全家桶。虽然暂时不会加入安卓阵营，但看到最近华为频繁炸裂，不免想认真地问一句，华为的高端机型究竟是什么水平呢？当然主要要在安卓阵营内去比。\u003cbr /\u003e抛开海军、花粉的论调不说，就单纯地讨论具体机型表现吧，麒麟 CPU 、OS 、设计、工艺、细节创新等等，想听听大家的高论。\u003cbr /\u003e先说说我自己的体会。因为接触华为高端机的机会确实很少，听到不少论调是说 mate 和 p 系列没什么性价比，价格太高。我不懂那些软硬件的东西，只能说据我的了解华为这些年在细处的微创新还是很多的，比如自研芯片、多设备协同、最近推出的挺火的替代蓝牙的星闪技术、影像方面持续的努力，以及华为在智能家居上的努力作为。虽然说不上这些技术多么不可替代，在堪称一潭死水般的安卓市场中的确是清新另类的存在，至少他们是在老老实实做东西，加上这些年的 entity list ，对于这样一个逆境中的先行者我觉得配得上一个“孤勇者”称谓。\u003cbr /\u003e但华为那些年用力过猛的宣传、高处不胜寒的定价，加上海军给大家带来的抵触情绪（我不允许你不喜欢他），客观上是不是常常引致“盛名之下其实难副”的最主要原因呢？\u003cbr /\u003e如果有机会，我挺想体验一下华为的 mate60 pro 或 x5 的。",
+      "Author": "kelaoli",
+      "PubDate": "2023-09-09T15:45:05Z"
+    },
+    {
       "Title": "推荐 Java spring vmp、ollvm、to C 加壳工具 - 信息安全",
       "Link": "https://www.v2ex.com/t/972368",
       "Description": "佬，请问 java springboot 项目，有没有靠谱的 vpm 、ollvm 、java to c 的加壳工具诶。",
