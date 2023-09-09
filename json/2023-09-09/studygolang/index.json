@@ -39,6 +39,13 @@
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
+      "Title": "go版本的工具库",
+      "Link": "https://studygolang.com/articles/36323#reply0",
+      "Description": "",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
       "Title": "EncryptionFile发布v1.0.7版本，支持标准库cipher的全部3中加密算法接口",
       "Link": "https://studygolang.com/topics/16694#reply0",
       "Description": "\u003cp\u003e项目地址：\u003ca href=\"https://github.com/jan-bar/EncryptionFile\"\u003ehttps://github.com/jan-bar/EncryptionFile\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e之所以更新这一版，是因为有人觉得上个版本中只用到\u003ccode\u003eaes cfb\u003c/code\u003e这种流式加密算法不安全，他们希望用更安全的\u003ccode\u003eaes gcm\u003c/code\u003e加密方式。因此我看了go标准库支持\u003ccode\u003ecipher.AEAD，cipher.Stream，cipher.BlockMode\u003c/code\u003e这三种加密接口，因此这一版本直接支持这三种接口。用户还可以自定义加解密方案，只要是上面三种接口类型就可以实现数据安全加解密。\u003c/p\u003e\n\n\u003cp\u003e你也可以用我内置的 \u003ccode\u003eEncryptionFile.GenEncCipher，EncryptionFile.GenDecCipher\u003c/code\u003e 这两个方法轻松实现指定加密算法，如下所示。\u003c/p\u003e\n\n\u003cp\u003e当然你也可以自己写方法，只要实现\u003ccode\u003ecipher.AEAD，cipher.Stream，cipher.BlockMode\u003c/code\u003e这三种接口就行。\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// an encryption scheme can be specified with the built-in method\n// GenEncCipher(cipher.NewCFBEncrypter)\n// GenEncCipher(cipher.NewCTR)\n// GenEncCipher(cipher.NewOFB)\n// GenEncCipher(cipher.NewCBCEncrypter)\n// GenEncCipher(cipher.NewGCM)\nEncData(Reader, Writer, pubKey, md5.New(), GenEncCipher(cipher.NewCFBEncrypter))\n\n// an decryption scheme can be specified with the built-in method\n// GenDecCipher(cipher.NewCFBDecrypter)\n// GenDecCipher(cipher.NewCTR)\n// GenDecCipher(cipher.NewOFB)\n// GenDecCipher(cipher.NewCBCDecrypter)\n// GenDecCipher(cipher.NewGCM)\nDecData(Reader, Writer, priKey, md5.New(), GenDecCipher(cipher.NewCFBDecrypter))\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e可用学习单元测试 \u003ca href=\"https://github.com/jan-bar/EncryptionFile/blob/fb584cc5250eec2e513c2b0dd650846e8dc52ed9/EncryptionFile_test.go#L152\"\u003eTestCipher\u003c/a\u003e，掌握这个库的用法。\u003c/p\u003e\n",
