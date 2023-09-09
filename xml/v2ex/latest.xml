@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>准备在移动端 Android App 做目标检测，有没有 efficientDet-Litex 和 YoloV5 移动端模型对比数据 - 问与答</title>
+      <link>https://www.v2ex.com/t/972286</link>
+      <description>tensorflow lite &lt;br /&gt;efficientDet-Litex&lt;br /&gt;YOLO-V5 &lt;br /&gt;&lt;br /&gt;对比🆚</description>
+      <author>snowflake007</author>
+      <pubDate>09 Sep 2023 08:15:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问 Spring cloud gateway 如何在 filter 中解析请求中的文件和字符串变量呢？ - Java</title>
+      <link>https://www.v2ex.com/t/972285</link>
+      <description>&lt;p&gt;各位前辈好，因为我刚接触 Spring cloud gateway ，不太懂这个框架，想请教个问题。&lt;/p&gt;&#xA;&lt;p&gt;我这个功能逻辑是这样的：在一个自定义的局部过滤器，通过&lt;code&gt;getMultipartData()&lt;/code&gt;来解析请求中的文件和字符串变量后做一些业务逻辑，然后不继续走别的过滤器，直接返回。&lt;/p&gt;&#xA;&lt;p&gt;但是我的这份代码问题在于：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如果拦截掉这个请求，即&lt;code&gt;return exchange.getResponse().setComplete()&lt;/code&gt;并不会触发&lt;code&gt;getMultipartData()&lt;/code&gt;这个流，得不到数据；&lt;/li&gt;&#xA;&lt;li&gt;但如果放行这个请求，即&lt;code&gt;return chain.filter(exchange)&lt;/code&gt;,却可以触发这个流，获得数据。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;请问这个现象是因为什么引起呢,或者啥关键词可以提示一下？我从凌晨三四点就开始考虑这个问题了，实在无能为力。 谢谢大家。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Slf4j&#xA;@Component&#xA;public class FileFilterGatewayFilterFactory extends&#xA;        AbstractGatewayFilterFactory&amp;lt;FileFilterGatewayFilterFactory.ParamsConfig&amp;gt;{&#xA;&#xA;&#xA;    public FileFilterGatewayFilterFactory() {&#xA;        super(FileFilterGatewayFilterFactory.ParamsConfig.class);&#xA;    }&#xA;&#xA;    @Override&#xA;    public GatewayFilter apply(FileFilterGatewayFilterFactory.ParamsConfig config) {&#xA;        return new OrderedGatewayFilter(((exchange, chain) -&amp;gt; {&#xA;            parseBody(exchange,chain).subscribe();&#xA;            &#xA;            &#xA;            // 如果放行，可以触发 parseBody 里面的方法&#xA;            return chain.filter(exchange);&#xA;            &#xA;            &#xA;            // 如果不放行，parseBody 里面的方法根本不执行&#xA;            return exchange.getResponse().setComplete();&#xA;        }),10);&#xA;&#xA;    }&#xA;&#xA;    public Mono&amp;lt;Object&amp;gt; parseBody(@NotNull ServerWebExchange exchange, GatewayFilterChain chain) {&#xA;        return exchange.getMultipartData().map(multipartData -&amp;gt; {&#xA;            Map&amp;lt;String, Part&amp;gt; partMap = multipartData.toSingleValueMap();&#xA;            Part file = partMap.get(&#34;file&#34;);&#xA;            FormFieldPart bizName = (FormFieldPart) partMap.get(&#34;name&#34;);&#xA;            return Result.buildSuccessResult(&#34;成功&#34;, null);&#xA;        });&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>bai821547889</author>
+      <pubDate>09 Sep 2023 08:12:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>以当下的网络环境来看， IPv6 可以满足日常使用而开启之吗 - IPv6</title>
+      <link>https://www.v2ex.com/t/972284</link>
+      <description>坐标河北联通，是 IPv4+IPv6 双栈公网，但是打开 Merlin Clash 的 IPv6 后，iOS 的 Safari 会不正常。&lt;br /&gt;&lt;br /&gt;目前的选择就是单 IPv4 公网使用，或者关掉路由器的 Merlin Clash 使用 IPv4+IPv6 双栈公网.&lt;br /&gt;&lt;br /&gt;目前测下来，两者并没有速度上的优劣&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;如果是各位，会怎样选择？</description>
+      <author>liliang13</author>
+      <pubDate>09 Sep 2023 08:10:39 +0000</pubDate>
+    </item>
+    <item>
       <title>自荐一下我的视频：让每个程序员都能英语技术面试 - 程序员</title>
       <link>https://www.v2ex.com/t/972283</link>
       <description>&lt;p&gt;链接在这： &lt;a href=&#34;https://www.bilibili.com/video/BV1Pm4y1K7V7/?spm_id_from=333.999.0.0&amp;amp;vd_source=1b467c44a301cea703059eb872a93c8d&#34; rel=&#34;nofollow&#34;&gt;https://www.bilibili.com/video/BV1Pm4y1K7V7/?spm_id_from=333.999.0.0&amp;amp;vd_source=1b467c44a301cea703059eb872a93c8d&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;第一期视频出来 2 天了，涨了 2k 粉，好像大家还挺喜欢的。所以以后会每周定期更新视频，主要专注于用英语描述基础算法题从而帮助大家总结出编程面试相关的英文术语，发音，表达等等。包括系统设计。应该能帮助到想去外企或者润的朋友们。&lt;/p&gt;&#xA;&lt;p&gt;02 期是用两数之和两种解法，中英都描述。已经尝试放慢了语速和停顿，大家也可以当听力，如果觉得我讲的太快或者有什么拍摄视频的好建议，我都会认真采纳的。&lt;/p&gt;&#xA;&lt;p&gt;也会更新留学经历，实习工作体验，不定期访谈各大名校各种行业的人。&lt;/p&gt;&#xA;</description>
