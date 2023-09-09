@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>免翻墙免注册免费 ChatGPT 网页版 支持 claude - 分享发现</title>
+      <link>https://www.v2ex.com/t/972354</link>
+      <description>&lt;a target=&#34;_blank&#34; href=&#34;https://free.netfly.top&#34; rel=&#34;nofollow noopener&#34;&gt;https://free.netfly.top&lt;/a&gt; 登录密码 gpt2023&lt;br /&gt;&lt;br /&gt;密码定期修改，请关注 TG 或微信群获取最新通知。&lt;br /&gt;&lt;br /&gt;支持 gpt4 （不稳定）和 claude ，详细看使用说明 &lt;a target=&#34;_blank&#34; href=&#34;https://flowus.cn/share/11ac02de-b6e4-4328-abcf-11160870d7b7&#34; rel=&#34;nofollow noopener&#34;&gt;https://flowus.cn/share/11ac02de-b6e4-4328-abcf-11160870d7b7&lt;/a&gt;</description>
+      <author>axingg</author>
+      <pubDate>09 Sep 2023 14:11:59 +0000</pubDate>
+    </item>
+    <item>
       <title>C++libtorch 多线程多 GPU 推理问题 - C++</title>
       <link>https://www.v2ex.com/t/972352</link>
       <description>&lt;p&gt;遇到一个多 GPU 推理问题，模型是 TorchScript ，我想利用两块显卡并行推理，想法很直接：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;生成两个独立模型，model0 发送到 GPU0 上，model1 发送到 GPU1 上&lt;/li&gt;&#xA;&lt;li&gt;将一个 batch 的数据均分成两份，sub_batch0 发送到 GPU0 上, sub_batch1 发送到 GPU1 上&lt;/li&gt;&#xA;&lt;li&gt;在两个 c++线程中（&lt;code&gt;std::thread&lt;/code&gt;）进行推理: &lt;code&gt;model0(sub_batch0)&lt;/code&gt;, &lt;code&gt;model1(sub_batch1)&lt;/code&gt;并行推理后收集最终结果。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;发现这样做有严重的性能问题，假如输入 batch=24,&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在单 GPU 上，显存占用~6G ，核心利用率~100%，推理速度~33fps&lt;/li&gt;&#xA;&lt;li&gt;在双 GPU 上（每个 GPU 获得大小为 12 的 sub_batch ），结果每张卡显存占用~15G （总 16GB ）, 核心占用率不到 50%，推理速度~44fps&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;按理说，在双 GPU 上，可以让 batch=48 ，从而每个显卡获的 sub_batch=24, 每个卡显存占用~6G, 核心利用率~100%，总的推理速度~66fps. 实际上 batch=48 直接爆显存了。&lt;/p&gt;&#xA;&lt;p&gt;可能以上很直接的想法不符合 libtorch 或者说底层 cuda 的工作原理。请问下有朋友遇到过相同问题么？请教下如何解决。（也许需要用&lt;code&gt;torch::nn::parallel::data_parallel&lt;/code&gt;来利用多 GPU ，我稍后尝试下）&lt;/p&gt;&#xA;</description>
