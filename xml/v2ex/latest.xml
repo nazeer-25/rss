@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>关于 Atom 在 M1 Mac 上的一个 bug 体验 - 问与答</title>
+      <link>https://www.v2ex.com/t/972506</link>
+      <description>&lt;p&gt;简单来说&lt;/p&gt;&#xA;&lt;p&gt;我的 mac 在把 atom 的窗口关闭以后，就打不开了&lt;/p&gt;&#xA;&lt;p&gt;或者双击窗口边缘将窗口缩小放大（正常软件比如 safari 就是缩小放大）&lt;/p&gt;&#xA;&lt;p&gt;图 1 ，这是查看所有目前显示的窗口，可以看到 atom 的窗口只有一个图标，这是很反常的&#xA;&lt;img alt=&#34;1&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://cdn.staticaly.com/gh/B3nDan/picx-images-hosting@master/20230910/Shot-2023-09-10-at-18.53.49@2x.1dgu4bctokw0.webp&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;图 2 ，这是直接右键 dock 栏应用，查看已有窗口，可以看到目前实际窗口是有一个文件被打开的&#xA;&lt;img alt=&#34;2&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://cdn.staticaly.com/gh/B3nDan/picx-images-hosting@master/20230910/Shot-2023-09-10-at-18.54.18@2x.6m4ajl0um9hc.webp&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;图 3 ，这是直接右键 dock 栏应用，然后点击显示所有窗口的效果，亦可以看到只有图标，无任何预览&#xA;&lt;img alt=&#34;3&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://cdn.staticaly.com/gh/B3nDan/picx-images-hosting@master/20230910/Shot-2023-09-10-at-18.54.49@2x.22azktfsy6dc.webp&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;哎，第一次用就遇到这糟心事，也不知道有没有人遇到过，好累啊，技术力不够排查不出来，烦死了&lt;/p&gt;&#xA;</description>
+      <author>SillyGod</author>
+      <pubDate>10 Sep 2023 11:09:20 +0000</pubDate>
+    </item>
+    <item>
       <title>macOS 中是如何将 utun 网卡接口接管所有网络请求的？ - macOS</title>
       <link>https://www.v2ex.com/t/972504</link>
       <description>&lt;p&gt;比如使用 ClashX Pro 开启了 Enhanced Mode 后，通过 &lt;code&gt;ifconfig&lt;/code&gt; 可以看到有一个 &lt;strong&gt;utun10&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;utun10: [&#xA;    {&#xA;      address: &#39;198.18.0.1&#39;,&#xA;      netmask: &#39;255.255.0.0&#39;,&#xA;      family: &#39;IPv4&#39;,&#xA;      mac: &#39;00:00:00:00:00:00&#39;,&#xA;      internal: false,&#xA;      cidr: &#39;198.18.0.1/16&#39;&#xA;    }&#xA;]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但它是如何接管电脑上所有的网络请求的呢？ ClashX Pro 是闭源的，没有办法查看源码。&lt;/p&gt;&#xA;&lt;p&gt;通过命令 &lt;code&gt;route -n get default&lt;/code&gt; 查看默认 route 是 &lt;strong&gt;en0&lt;/strong&gt; 接口:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;   route to: default&#xA;destination: default&#xA;       mask: default&#xA;    gateway: 192.168.11.1&#xA;  interface: en0&#xA;      flags: &amp;lt;UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL&amp;gt;&#xA; recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire&#xA;       0         0         0         0         0         0      1500         0&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;难道使用 Network Extension 中的 &lt;a href=&#34;https://developer.apple.com/documentation/networkextension/packet_tunnel_provider&#34; rel=&#34;nofollow&#34;&gt;Packet Tunnel Provider&lt;/a&gt; 不需要手动设置网络的转发吗？&lt;/p&gt;&#xA;&lt;p&gt;我所理解的过程是这样的:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;新建一个 TUN 网络接口&lt;/li&gt;&#xA;&lt;li&gt;接管系统的请求&lt;/li&gt;&#xA;&lt;li&gt;将请求处理&lt;/li&gt;&#xA;&lt;li&gt;处理后的接口转发到其他网络接口&lt;/li&gt;&#xA;&lt;li&gt;收到网络请求后其他网络接口转发到 TUN 网络接口中&lt;/li&gt;&#xA;&lt;li&gt;处理收到的网络请求&lt;/li&gt;&#xA;&lt;li&gt;传递给上层应用&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;所以总结下我的问题，第二步是如何接管系统所有请求的？第四步是如何转发到其他接口的？在 Linux 中应该是需要手动写吧？在 macOS 中是用 NE 里哪一些 API ？&lt;/p&gt;&#xA;&lt;p&gt;另外，在 iOS 端也是和 macOS 一样的吧？开启 QX 应用后，在设置中可以看到有 utun 接口。类似的应用都是用 TUN 模式的（ Loon 用 TUN 和 HTTP mode 两种模式）。&lt;/p&gt;&#xA;</description>
@@ -74,13 +81,6 @@
       <pubDate>10 Sep 2023 09:55:01 +0000</pubDate>
     </item>
     <item>
-      <title>原来不配合 jc 解锁手机居然可能直接被判刑 - 问与答</title>
-      <link>https://www.v2ex.com/t/972491</link>
-      <description>前段时间学校有个人涉嫌偷拍被 jc 抓了，引发了我的思考，如果嫌疑人拒绝解锁手机的话，意味着 jc 没有证据，也就无法追究责任。于是问了有相关经历的人，他说他之前被偷过手机，结果 jc 却把他的手机没收并要求提供密码。如果这样的话，那 iPhone 再安全又能防得了什么呢</description>
-      <author>Wait845</author>
-      <pubDate>10 Sep 2023 09:49:50 +0000</pubDate>
-    </item>
-    <item>
       <title>有什么便宜的短信验证服务，注册谷歌邮箱用的 - 问与答</title>
       <link>https://www.v2ex.com/t/972489</link>
       <description>&lt;p&gt;自己用的那个注册谷歌总是收不到验证码&#xA;有什么付费的服务，注册谷歌邮箱用&lt;/p&gt;&#xA;</description>
@@ -95,7 +95,7 @@
       <pubDate>10 Sep 2023 09:45:37 +0000</pubDate>
     </item>
     <item>
-      <title>去的新公司，老板让我自己买电脑去上班。。。。 - 程序员</title>
+      <title>去的新公司，老板让我自己买电脑去上班。。。。 - 职场话题</title>
       <link>https://www.v2ex.com/t/972486</link>
       <description>&lt;p&gt;新公司不配电脑，让我自己买便宜的电脑上班。&lt;/p&gt;&#xA;</description>
       <author>hj960511</author>
@@ -260,6 +260,13 @@
       <description>那些坚持独身一生的人，有打算提前安排自己的身后事吗&lt;br /&gt;&lt;br /&gt;是否考虑死后收尸和火化问题，抑或反正死了啥都不在乎，任由尸体腐烂变臭生蛆，直到引来物业或邻居报警。&lt;br /&gt;在传统观念或者任何一种文化里，这都算是一种恶死吧，通常会被用来诅咒骂人。&lt;br /&gt;&lt;br /&gt;年级大了后行动不便，可能无意摔倒难以起身，有提前考虑该怎么办吗，还是说统统不在乎，昏迷床上就在床上等死，昏迷地上就等着烂在地上。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;另外对于自己的财产是白白贡献给银行，还是提前立遗嘱捐献等&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;很多人年轻时，信誓旦旦毫不在意老年时会遇到的问题，压根没有深思熟虑过，就爱轻飘飘的说，反正死了啥也不知道，身后事爱咋咋地，然而越是这种人，可能真到老时，反而越恐惧死亡。毕竟恐惧死亡是生命本能。&lt;br /&gt;&lt;br /&gt;还有很多已结婚或已有孩子的人，一方面特喜欢告诫别人，千万别结婚千万别生孩子，另一方面又极度宠爱甚至溺爱孩子，这种反差令人不适，犹如人格分裂。&lt;br /&gt;&lt;br /&gt;臆想和现实是有极大差别的。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;希望有真正坚持独身，年龄 30 以上的人，能谈谈想法。</description>
       <author>haha512</author>
       <pubDate>10 Sep 2023 06:44:35 +0000</pubDate>
+    </item>
+    <item>
+      <title>原来不配合 jc 解锁手机居然可能直接被判刑 - 问与答</title>
+      <link>https://www.v2ex.com/t/972491</link>
+      <description>前段时间学校有个人涉嫌偷拍被 jc 抓了，引发了我的思考，如果嫌疑人拒绝解锁手机的话，意味着 jc 没有证据，也就无法追究责任。于是问了有相关经历的人，他说他之前被偷过手机，结果 jc 却把他的手机没收并要求提供密码。如果这样的话，那 iPhone 再安全又能防得了什么呢</description>
+      <author>Wait845</author>
+      <pubDate>10 Sep 2023 09:49:50 +0000</pubDate>
     </item>
     <item>
       <title>[Help] Plex 无法识别挂载的 Alist 的文件, 提示 i/o error - Linux</title>

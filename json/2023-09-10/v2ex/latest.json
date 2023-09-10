@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "关于 Atom 在 M1 Mac 上的一个 bug 体验 - 问与答",
+      "Link": "https://www.v2ex.com/t/972506",
+      "Description": "\u003cp\u003e简单来说\u003c/p\u003e\n\u003cp\u003e我的 mac 在把 atom 的窗口关闭以后，就打不开了\u003c/p\u003e\n\u003cp\u003e或者双击窗口边缘将窗口缩小放大（正常软件比如 safari 就是缩小放大）\u003c/p\u003e\n\u003cp\u003e图 1 ，这是查看所有目前显示的窗口，可以看到 atom 的窗口只有一个图标，这是很反常的\n\u003cimg alt=\"1\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://cdn.staticaly.com/gh/B3nDan/picx-images-hosting@master/20230910/Shot-2023-09-10-at-18.53.49@2x.1dgu4bctokw0.webp\"/\u003e\u003c/p\u003e\n\u003cp\u003e图 2 ，这是直接右键 dock 栏应用，查看已有窗口，可以看到目前实际窗口是有一个文件被打开的\n\u003cimg alt=\"2\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://cdn.staticaly.com/gh/B3nDan/picx-images-hosting@master/20230910/Shot-2023-09-10-at-18.54.18@2x.6m4ajl0um9hc.webp\"/\u003e\u003c/p\u003e\n\u003cp\u003e图 3 ，这是直接右键 dock 栏应用，然后点击显示所有窗口的效果，亦可以看到只有图标，无任何预览\n\u003cimg alt=\"3\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://cdn.staticaly.com/gh/B3nDan/picx-images-hosting@master/20230910/Shot-2023-09-10-at-18.54.49@2x.22azktfsy6dc.webp\"/\u003e\u003c/p\u003e\n\u003cp\u003e哎，第一次用就遇到这糟心事，也不知道有没有人遇到过，好累啊，技术力不够排查不出来，烦死了\u003c/p\u003e\n",
+      "Author": "SillyGod",
+      "PubDate": "2023-09-10T11:09:20Z"
+    },
+    {
       "Title": "macOS 中是如何将 utun 网卡接口接管所有网络请求的？ - macOS",
       "Link": "https://www.v2ex.com/t/972504",
       "Description": "\u003cp\u003e比如使用 ClashX Pro 开启了 Enhanced Mode 后，通过 \u003ccode\u003eifconfig\u003c/code\u003e 可以看到有一个 \u003cstrong\u003eutun10\u003c/strong\u003e:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eutun10: [\n    {\n      address: '198.18.0.1',\n      netmask: '255.255.0.0',\n      family: 'IPv4',\n      mac: '00:00:00:00:00:00',\n      internal: false,\n      cidr: '198.18.0.1/16'\n    }\n]\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但它是如何接管电脑上所有的网络请求的呢？ ClashX Pro 是闭源的，没有办法查看源码。\u003c/p\u003e\n\u003cp\u003e通过命令 \u003ccode\u003eroute -n get default\u003c/code\u003e 查看默认 route 是 \u003cstrong\u003een0\u003c/strong\u003e 接口:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e   route to: default\ndestination: default\n       mask: default\n    gateway: 192.168.11.1\n  interface: en0\n      flags: \u0026lt;UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL\u0026gt;\n recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire\n       0         0         0         0         0         0      1500         0\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e难道使用 Network Extension 中的 \u003ca href=\"https://developer.apple.com/documentation/networkextension/packet_tunnel_provider\" rel=\"nofollow\"\u003ePacket Tunnel Provider\u003c/a\u003e 不需要手动设置网络的转发吗？\u003c/p\u003e\n\u003cp\u003e我所理解的过程是这样的:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e新建一个 TUN 网络接口\u003c/li\u003e\n\u003cli\u003e接管系统的请求\u003c/li\u003e\n\u003cli\u003e将请求处理\u003c/li\u003e\n\u003cli\u003e处理后的接口转发到其他网络接口\u003c/li\u003e\n\u003cli\u003e收到网络请求后其他网络接口转发到 TUN 网络接口中\u003c/li\u003e\n\u003cli\u003e处理收到的网络请求\u003c/li\u003e\n\u003cli\u003e传递给上层应用\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e所以总结下我的问题，第二步是如何接管系统所有请求的？第四步是如何转发到其他接口的？在 Linux 中应该是需要手动写吧？在 macOS 中是用 NE 里哪一些 API ？\u003c/p\u003e\n\u003cp\u003e另外，在 iOS 端也是和 macOS 一样的吧？开启 QX 应用后，在设置中可以看到有 utun 接口。类似的应用都是用 TUN 模式的（ Loon 用 TUN 和 HTTP mode 两种模式）。\u003c/p\u003e\n",
@@ -74,13 +81,6 @@
       "PubDate": "2023-09-10T09:55:01Z"
     },
     {
-      "Title": "原来不配合 jc 解锁手机居然可能直接被判刑 - 问与答",
-      "Link": "https://www.v2ex.com/t/972491",
-      "Description": "前段时间学校有个人涉嫌偷拍被 jc 抓了，引发了我的思考，如果嫌疑人拒绝解锁手机的话，意味着 jc 没有证据，也就无法追究责任。于是问了有相关经历的人，他说他之前被偷过手机，结果 jc 却把他的手机没收并要求提供密码。如果这样的话，那 iPhone 再安全又能防得了什么呢",
-      "Author": "Wait845",
-      "PubDate": "2023-09-10T09:49:50Z"
-    },
-    {
       "Title": "有什么便宜的短信验证服务，注册谷歌邮箱用的 - 问与答",
       "Link": "https://www.v2ex.com/t/972489",
       "Description": "\u003cp\u003e自己用的那个注册谷歌总是收不到验证码\n有什么付费的服务，注册谷歌邮箱用\u003c/p\u003e\n",
@@ -95,7 +95,7 @@
       "PubDate": "2023-09-10T09:45:37Z"
     },
     {
-      "Title": "去的新公司，老板让我自己买电脑去上班。。。。 - 程序员",
+      "Title": "去的新公司，老板让我自己买电脑去上班。。。。 - 职场话题",
       "Link": "https://www.v2ex.com/t/972486",
       "Description": "\u003cp\u003e新公司不配电脑，让我自己买便宜的电脑上班。\u003c/p\u003e\n",
       "Author": "hj960511",
@@ -261,6 +261,13 @@
       "Description": "那些坚持独身一生的人，有打算提前安排自己的身后事吗\u003cbr /\u003e\u003cbr /\u003e是否考虑死后收尸和火化问题，抑或反正死了啥都不在乎，任由尸体腐烂变臭生蛆，直到引来物业或邻居报警。\u003cbr /\u003e在传统观念或者任何一种文化里，这都算是一种恶死吧，通常会被用来诅咒骂人。\u003cbr /\u003e\u003cbr /\u003e年级大了后行动不便，可能无意摔倒难以起身，有提前考虑该怎么办吗，还是说统统不在乎，昏迷床上就在床上等死，昏迷地上就等着烂在地上。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e另外对于自己的财产是白白贡献给银行，还是提前立遗嘱捐献等\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e很多人年轻时，信誓旦旦毫不在意老年时会遇到的问题，压根没有深思熟虑过，就爱轻飘飘的说，反正死了啥也不知道，身后事爱咋咋地，然而越是这种人，可能真到老时，反而越恐惧死亡。毕竟恐惧死亡是生命本能。\u003cbr /\u003e\u003cbr /\u003e还有很多已结婚或已有孩子的人，一方面特喜欢告诫别人，千万别结婚千万别生孩子，另一方面又极度宠爱甚至溺爱孩子，这种反差令人不适，犹如人格分裂。\u003cbr /\u003e\u003cbr /\u003e臆想和现实是有极大差别的。\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e希望有真正坚持独身，年龄 30 以上的人，能谈谈想法。",
       "Author": "haha512",
       "PubDate": "2023-09-10T06:44:35Z"
+    },
+    {
+      "Title": "原来不配合 jc 解锁手机居然可能直接被判刑 - 问与答",
+      "Link": "https://www.v2ex.com/t/972491",
+      "Description": "前段时间学校有个人涉嫌偷拍被 jc 抓了，引发了我的思考，如果嫌疑人拒绝解锁手机的话，意味着 jc 没有证据，也就无法追究责任。于是问了有相关经历的人，他说他之前被偷过手机，结果 jc 却把他的手机没收并要求提供密码。如果这样的话，那 iPhone 再安全又能防得了什么呢",
+      "Author": "Wait845",
+      "PubDate": "2023-09-10T09:49:50Z"
     },
     {
       "Title": "[Help] Plex 无法识别挂载的 Alist 的文件, 提示 i/o error - Linux",
