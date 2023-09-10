@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>macOS 中是如何将 utun 网卡接口接管所有网络请求的？ - macOS</title>
+      <link>https://www.v2ex.com/t/972504</link>
+      <description>&lt;p&gt;比如使用 ClashX Pro 开启了 Enhanced Mode 后，通过 &lt;code&gt;ifconfig&lt;/code&gt; 可以看到有一个 &lt;strong&gt;utun10&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;utun10: [&#xA;    {&#xA;      address: &#39;198.18.0.1&#39;,&#xA;      netmask: &#39;255.255.0.0&#39;,&#xA;      family: &#39;IPv4&#39;,&#xA;      mac: &#39;00:00:00:00:00:00&#39;,&#xA;      internal: false,&#xA;      cidr: &#39;198.18.0.1/16&#39;&#xA;    }&#xA;]&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但它是如何接管电脑上所有的网络请求的呢？ ClashX Pro 是闭源的，没有办法查看源码。&lt;/p&gt;&#xA;&lt;p&gt;通过命令 &lt;code&gt;route -n get default&lt;/code&gt; 查看默认 route 是 &lt;strong&gt;en0&lt;/strong&gt; 接口:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;   route to: default&#xA;destination: default&#xA;       mask: default&#xA;    gateway: 192.168.11.1&#xA;  interface: en0&#xA;      flags: &amp;lt;UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL&amp;gt;&#xA; recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire&#xA;       0         0         0         0         0         0      1500         0&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;难道使用 Network Extension 中的 &lt;a href=&#34;https://developer.apple.com/documentation/networkextension/packet_tunnel_provider&#34; rel=&#34;nofollow&#34;&gt;Packet Tunnel Provider&lt;/a&gt; 不需要手动设置网络的转发吗？&lt;/p&gt;&#xA;&lt;p&gt;我所理解的过程是这样的:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;新建一个 TUN 网络接口&lt;/li&gt;&#xA;&lt;li&gt;接管系统的请求&lt;/li&gt;&#xA;&lt;li&gt;将请求处理&lt;/li&gt;&#xA;&lt;li&gt;处理后的接口转发到其他网络接口&lt;/li&gt;&#xA;&lt;li&gt;收到网络请求后其他网络接口转发到 TUN 网络接口中&lt;/li&gt;&#xA;&lt;li&gt;处理收到的网络请求&lt;/li&gt;&#xA;&lt;li&gt;传递给上层应用&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;所以总结下我的问题，第二步是如何接管系统所有请求的？第四步是如何转发到其他接口的？在 Linux 中应该是需要手动写吧？在 macOS 中是用 NE 里哪一些 API ？&lt;/p&gt;&#xA;&lt;p&gt;另外，在 iOS 端也是和 macOS 一样的吧？开启 QX 应用后，在设置中可以看到有 utun 接口。类似的应用都是用 TUN 模式的（ Loon 用 TUN 和 HTTP mode 两种模式）。&lt;/p&gt;&#xA;</description>
+      <author>FaiChou</author>
+      <pubDate>10 Sep 2023 10:48:07 +0000</pubDate>
+    </item>
+    <item>
       <title>求助 vlan 中组播相互转发的设置 - OpenWrt</title>
       <link>https://www.v2ex.com/t/972503</link>
       <description>&lt;p&gt;2 个 vlan ,  vlan0 用 5g wifi , vlan1 用 2.4g wifi,  两个 vlan 的组播需要相互转发.  &lt;/p&gt;&#xA;&lt;p&gt;达到在 vlan1 能把腾讯视频投到 vlan0 的电视.&lt;/p&gt;&#xA;&lt;p&gt;请教该怎么设置, 路由器 cr8808 刷的 openwrt 最新版.&lt;/p&gt;&#xA;</description>
