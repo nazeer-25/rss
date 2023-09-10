@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求救使用 Python 的 ETH 库 web3.py、py-evm 拼接 Receipt trie，遇到的问题 - Web3</title>
+      <link>https://www.v2ex.com/t/972495</link>
+      <description>&lt;pre&gt;&lt;code&gt;def _build_tree(self, transactions, receiptsRoot):&#xA;    from rlp import encode, sedes&#xA;    from trie import HexaryTrie&#xA;    from eth.rlp import receipts, logs&#xA;    def zpad(x, l):&#xA;        return b&#39;\x00&#39; * max(0, l - len(x)) + x&#xA;&#xA;    block_receipts = []&#xA;    for tx in transactions:&#xA;        rec = w3.eth.get_transaction_receipt(tx.hash.hex())&#xA;        block_receipts.append(rec)&#xA;&#xA;    trie = HexaryTrie(db={})&#xA;    for receipt in block_receipts:&#xA;        path = receipt.transactionIndex&#xA;        logs_list = []&#xA;        for l in receipt[&#39;logs&#39;]:&#xA;            log_address = zpad(sedes.big_endian_int.serialize(int(l[&#39;address&#39;][2:], 16)), 20)&#xA;            data = sedes.BigEndianInt().serialize(int(l[&#39;data&#39;].hex()[2:], 16)) if l[&#39;data&#39;] == &#39;0x&#39; else b&#39;&#39;&#xA;            logs_list.append(&#xA;                logs.Log(&#xA;                    address=log_address,&#xA;                    topics=tuple([int(t.hex()[2:], 16) for t in l[&#39;topics&#39;]]),&#xA;                    data=data&#xA;                )&#xA;            )&#xA;        receipt_obj = receipts.Receipt(&#xA;            state_root=sedes.BigEndianInt().serialize(receipt[&#39;status&#39;]),&#xA;            gas_used=int(receipt[&#39;cumulativeGasUsed&#39;]),&#xA;            logs=logs_list,&#xA;            bloom=int(receipt[&#39;logsBloom&#39;].hex()[2:], 16),&#xA;        )&#xA;        node_byte = receipt_obj.encode()&#xA;&#xA;        trie.set(sedes.BigEndianInt().serialize(path), node_byte)&#xA;&#xA;    if trie.root_hash.hex() != receiptsRoot[2:]:&#xA;        raise Exception(&#34;Failed to build receipts trie root.&#34;)&#xA;&#xA;    return trie&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;有 python 区块链大哥 能懂吗&#xA;拼接的树的 root hash 和 receipts 的 hash 对不上&#xA;trie.root_hash.hex()&#xA;receiptsRoot[2:]&lt;/p&gt;&#xA;</description>
+      <author>rainmanliu</author>
+      <pubDate>10 Sep 2023 10:05:21 +0000</pubDate>
+    </item>
+    <item>
+      <title>大家使用 vscode 的时候把 hot exit 打开了么？ - Visual Studio Code</title>
+      <link>https://www.v2ex.com/t/972494</link>
+      <description>&lt;p&gt;我是关闭了，因为我在办公室时使用台式机，回家使用笔记本，都是在远程服务器上工作。为了不至于出现脏数据，所以我关闭了 hot exit.&lt;/p&gt;&#xA;&lt;p&gt;现在不管两台电脑的事情了，只关心在办公室使用的场景（关闭了 hot exit ）。&lt;/p&gt;&#xA;&lt;p&gt;编辑了一个文件，没有保存。但是突然要开会，跑去了。回来的时候，发现电脑休眠了，打开后 vscode 提示我需要&lt;code&gt;reload window&lt;/code&gt;。&lt;/p&gt;&#xA;&lt;p&gt;好吧，我来 reload ，提示我有文件没有保存，我就点保存一下，但是提示连接已经断开了，问我是否 retry ，但是我从来没有 retry 成功过。&lt;/p&gt;&#xA;&lt;p&gt;这时候就尴尬了，眼睁睁开着自己修改的文件，没法保存到服务器。只好硬着头皮把文件内容拷贝出来，然后放弃保存，reload 成功后再贴进入。&lt;/p&gt;&#xA;&lt;p&gt;一个文件还好说，多个文件要命啊。&lt;/p&gt;&#xA;</description>
+      <author>zhwguest</author>
+      <pubDate>10 Sep 2023 10:03:39 +0000</pubDate>
+    </item>
+    <item>
       <title>有没有好用的安卓手机修改定位软件 - 问与答</title>
       <link>https://www.v2ex.com/t/972492</link>
       <description>如题，想看看能不能远程打卡</description>
