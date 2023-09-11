@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>伟大的 V 友们，给推荐一个适合建博客的或导航站的小鸡。 - 云计算</title>
+      <link>https://www.v2ex.com/t/972843</link>
+      <description>延迟低点的，访问速度快的就好。&lt;br /&gt;&lt;br /&gt;目前用的雨云-美国，打开速度还是有点慢。</description>
+      <author>Dingsi</author>
+      <pubDate>11 Sep 2023 13:14:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>独立开发周记 #30：中间人攻击 - 程序员</title>
+      <link>https://www.v2ex.com/t/972842</link>
+      <description>&lt;h1&gt;2023, 0904-0910&lt;/h1&gt;&#xA;&lt;p&gt;估计是新冠后遗症的原因，身子总是没劲，只想躺着。躺着的时候要么看剧，要么就是刷抖音，导致抖音的使用时长远超其他 app 。本来抖音在我这是放在购物分类里的，之前只有想买的东西时才会打开，现在居然沉迷各种短视频了……删掉！&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img.way2solo.com/photo/vulgur/e7448400-780d-4924-b352-0a24d912e1ee.jpeg?imageView2/2/w/1920/q/100&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;吃东西只能尝出来咸淡和一点点的甜味，咖啡还是喝不出味道，每天喝咖啡只是为了不出现戒断反应。&lt;/p&gt;&#xA;&lt;h1&gt;开学啦！&lt;/h1&gt;&#xA;&lt;p&gt;上个月国内安卓收入下降太多了，我估计是因为暑假的原因。现在已经开学一个多星期了，从活跃用户和新增用户数量上来看，确实有些回升。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img.way2solo.com/photo/vulgur/c0d9d742-3730-44e7-b592-d13ac3435fed.jpeg?imageView2/2/w/1920/q/100&#34;/&gt;&lt;/p&gt;&#xA;&lt;h1&gt;RevenueCat&lt;/h1&gt;&#xA;&lt;p&gt;这周极简时钟和极简日记都更新了一个版本，主要目的也都是一样，为了防御中间人攻击。&lt;/p&gt;&#xA;&lt;h2&gt;&lt;strong&gt;中间人攻击&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;通过开发者朋友那里才知道，居然有一个微信小程序，专门分享破解内购的脚本，极简时钟和极简日记都名列其中……RevenueCat 推出针对中间人攻击的防范方法已经有两个月了，但是我都没当回事，直到群友提醒，才后知后觉，也不知道累计了多少损失。&lt;/p&gt;&#xA;&lt;p&gt;亡羊补牢，为时未晚。&lt;/p&gt;&#xA;&lt;p&gt;极简时钟的更新很简单，就是添加了一行代码。极简日记的更新麻烦了一些，支持防御中间人攻击的 RevenueCat SDK 最低版本是 4.25 ，而极简日记里的还是 3.x ，所以还写了很多从 3.x 升级到 4.x 的代码。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img.way2solo.com/photo/vulgur/48ff7e5b-c0e2-4c54-9333-e7a4a657aec3.jpeg?imageView2/2/w/1920/q/100&#34;/&gt;&lt;/p&gt;&#xA;&lt;h2&gt;Paywalls&lt;/h2&gt;&#xA;&lt;p&gt;在升级 RevenueCat 的 SDK 时，发现 SDK 里多了一个 RevenueCatUI 的库，原来是 RC 提供了一个 Paywall 的功能。&lt;/p&gt;&#xA;&lt;p&gt;RC 的 Paywall  有三个模板，整体的风格都很简洁。Paywall 对于内购和订阅产品的配置很丰富，但是对于页面其他信息的配置就很少了。我试用了三天，最后还是放弃了，因为 RC 的 Paywall 还在 beta 阶段，我就碰到了好几次弹出加载图片错误的提示。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img.way2solo.com/photo/vulgur/30577d52-98ad-442f-82c7-e08d75843ddc.jpeg?imageView2/2/w/1920/q/100&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;今年的 WWDC23 也推出了类似的功能，在 StoreKit 里增加了 &lt;code&gt;StoreView&lt;/code&gt;、&lt;code&gt;ProductView&lt;/code&gt; 和 &lt;code&gt;SubscriptionStoreView 。&lt;/code&gt;对应的 Session 是 &lt;strong&gt;&lt;strong&gt;Meet StoreKit for SwiftUI&lt;/strong&gt;&lt;/strong&gt;，我这周又看了一遍，感觉配置起来太麻烦了，需要重写整个产品页面，于是就打消了在 iOS 17 正式版上线前加入这个功能的念头。&lt;/p&gt;&#xA;&lt;p&gt;能不改的就先不改，又不是不能用。&lt;/p&gt;&#xA;&lt;h1&gt;一些杂事&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;王国之泪通关了，解决了心理一大负担。&lt;/li&gt;&#xA;&lt;li&gt;因为经济普查，去社区做了登记。明明是线上就能解决的事，非要线下跑一趟。&lt;/li&gt;&#xA;&lt;li&gt;酱香拿铁至今没有喝，一是因为我不喝任何酒，二是因为这款咖啡不是 9.9 元。&lt;/li&gt;&#xA;&lt;li&gt;发现了一个 UI/UX 和极简日记高度相似的新 App ，第一感觉当然是不爽，第二感觉就是立志要做得比抄袭者更好，让抄袭者遥遥落后。&lt;/li&gt;&#xA;&lt;li&gt;在即刻上发了一条评论时下新闻的动态，没想到被人各种阴阳，还给我扣上了一个带节奏的帽子。现在这个舆论环境啊，还是老老实实发些人畜无害的东西吧。&lt;/li&gt;&#xA;&lt;li&gt;上周投诉名称侵权的三个 app ，刚上架的那个已经回复邮件并且改名了，另外两个久不更新的 app 还没有回复邮件，估计已经弃管了。因为这个事，我被很多人说不厚道、是小人行为、是商标流氓、not cool ，对于这些评论我都接受。也有人列举了一些客观事实，我也都承认。但是我有我自己的理由，在商言商，合规合法，仅此而已。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;引用链接&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.revenuecat.com/blog/engineering/trusted-entitlements/&#34; rel=&#34;nofollow&#34;&gt;Trusted Entitlements: Making MiTM piracy a thing of the past&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://developer.apple.com/videos/play/wwdc2023/10013/&#34; rel=&#34;nofollow&#34;&gt;Meet StoreKit for SwiftUI&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>vulgur</author>
+      <pubDate>11 Sep 2023 13:13:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>Linux 程序启动缓慢，如何查看缓慢在那里？ - Linux</title>
+      <link>https://www.v2ex.com/t/972841</link>
+      <description>&lt;p&gt;系统是 ubuntu,我用 C++写了一个程序&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;int main(){&#xA;    std::cout&amp;lt;&amp;lt;get_current_time();  &#xA;    //do something..&#xA;    std::cout&amp;lt;&amp;lt;get_current_time();&#xA;    return 0;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;编译的时候需要链接一些动态/静态库，然后运行的时候执行命令./T1,程序大约 10 秒后会打印&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;11:58:43:389&#xA;11:58:43:421&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我有没有办法知道，我输入./T1 命令到执行第一行代码 std::cout&amp;lt;&amp;lt;get_current_time();这段时间程序做了什么，有哪些步骤，每步耗时大概多少？&lt;/p&gt;&#xA;&lt;p&gt;我有 sudu 密码但没有 root 权限&lt;/p&gt;&#xA;</description>
+      <author>LuckyPocketWatch</author>
+      <pubDate>11 Sep 2023 13:12:50 +0000</pubDate>
+    </item>
+    <item>
+      <title>[上海][前端][招聘]招一个会网站设计的前端工程狮 - 酷工作</title>
+      <link>https://www.v2ex.com/t/972840</link>
+      <description>&lt;p&gt;工作城市： 上海&lt;/p&gt;&#xA;&lt;p&gt;岗位要求：&lt;/p&gt;&#xA;&lt;p&gt;1.审美在线，能熟练使用设计软件，有能力独立设计网页。&lt;/p&gt;&#xA;&lt;p&gt;2.熟悉 react 技术栈，hooks 更好。&lt;/p&gt;&#xA;&lt;p&gt;3.熟悉移动端的适配。&lt;/p&gt;&#xA;&lt;p&gt;4.css 功底好，能实现高保真的页面。&lt;/p&gt;&#xA;&lt;p&gt;月薪：20k~30k&lt;/p&gt;&#xA;&lt;p&gt;感兴趣的可以发邮箱：aW1kZWFuQHByb3Rvbi5tZQ==&lt;/p&gt;&#xA;</description>
+      <author>neverandy</author>
+      <pubDate>11 Sep 2023 13:09:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>有喜欢摄影的同学给手机加滤镜/镜头的吗 - Apple</title>
+      <link>https://www.v2ex.com/t/972839</link>
+      <description>&lt;p&gt;看别人给手机加个减光镜就可以拍出好看的照片，还可以加宽镜头拍视频。看好 freewell 的一套，价格不便宜，就是不知道用处大不大？&lt;/p&gt;&#xA;</description>
+      <author>lqcc</author>
+      <pubDate>11 Sep 2023 13:07:44 +0000</pubDate>
+    </item>
+    <item>
       <title>现在推荐买哪款。55 寸放在卧室 - SONY</title>
       <link>https://www.v2ex.com/t/972838</link>
       <description>主要用来配合 apple tv 看电影或者看剧&lt;br /&gt;老婆难得要刷刷综艺&lt;br /&gt;推荐哪款&lt;br /&gt;目前看的是 XR-55X90L 和 KD-55X85L&lt;br /&gt;推荐哪款好？ jd 比较看了下好像就材质区别。其他没什么区别</description>
