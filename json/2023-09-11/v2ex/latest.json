@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "在 go net 库实现了 I/O 多路复用的情况下，还需要自己实现一套吗？ - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/972811",
+      "Description": "\u003cpre\u003e\u003ccode\u003eln, err := net.Listen(\"tcp\", \":8080\")\nif err != nil {\n\t// handle error\n}\nfor {\n\tconn, err := ln.Accept()\n\tif err != nil {\n\t\t// handle error\n\t}\n\tgo handleConnection(conn)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这是 net package 中提供的例子\n其中的 conn 虽然操作是“阻塞”式的，但底层的 fd 都是 non-blocking 的，由 go runtime 调用 epoll 等机制监听并唤醒 goroutine 进行操作，如果将不耗时的业务也放在该 goroutine 中，耗时的业务辅以其他的异步处理，这样做会有什么问题？在实际的工程中，会怎样操作？需要在业务层实现一套 I/O 多路复用的机制吗？\u003c/p\u003e\n",
+      "Author": "assiadamo",
+      "PubDate": "2023-09-11T10:27:44Z"
+    },
+    {
+      "Title": "自考学历需要明确标注是自考吗？如果不标注是否属于学历造假？ - 职场话题",
+      "Link": "https://www.v2ex.com/t/972810",
+      "Description": "\u003cp\u003e第一学历是大专，前几年自考了某 985 大学的计算机相关学历？\u003c/p\u003e\n\u003cp\u003e招聘 APP 上学历没有自考的选项，我就填写了 985 的大学（ APP 不能手动填写，只能选择专科，本科硕士之类的，学校也只能选择）\u003c/p\u003e\n\u003cp\u003e然后接到某公司人事的电话，说和我确认下是否是该大学毕业的，要学信网可查。然后我把我学信网的毕业证 ID 报给他了，告诉他我是自考的\u003c/p\u003e\n\u003cp\u003e他说”自考的？那就不是全日制的喽？”我回复 yes\u003c/p\u003e\n\u003cp\u003e然后他说你这种自考的学历需要明确标注，想你这种不标注自考的属于学历欺诈，将来要付法律责任的。然后就挂电话了\u003c/p\u003e\n",
+      "Author": "LuckyPocketWatch",
+      "PubDate": "2023-09-11T10:23:10Z"
+    },
+    {
+      "Title": "对于交叉甚至多层交叉的场景怎么进行封装 - 编程",
+      "Link": "https://www.v2ex.com/t/972809",
+      "Description": "\u003cp\u003e标题有点抽象 具体点比如是商品和渠道和销售逻辑的关系\u003c/p\u003e\n\u003cp\u003e比如 一个集中管货的平台，一个商品可以在淘宝卖，也可以在京东卖，也可以在夕夕上卖\u003c/p\u003e\n\u003cp\u003e产品设计开始，商品+平台就是一个商品对多个渠道的关系，那么封装就是一个 ChannelAdapter 。\u003c/p\u003e\n\u003cp\u003e铺货、上货调用就是：\u003ccode\u003ePublish($goods, adapter = new Jingdong()): adater.publish($goods)\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003e其他下架、上架对应的参数调整都大同小异。\u003c/p\u003e\n\u003cp\u003e突然有一天，产品说，我们商品不同类型要开始区分销售行为了，理解就是 实体商品需要物流的，要走一个物流的逻辑，虚拟商品的，要走虚拟逻辑，虚拟还分是三方充值类的还是卡密类的。卡密类的不能在夕夕上卖，三方充值的不能在淘宝上卖。\u003c/p\u003e\n\u003cp\u003e那该怎么处理这个解耦呢\u003c/p\u003e\n\u003cp\u003e根据调用猜逻辑 \u003ccode\u003ePublish($goods, new Jingdong(), new VirtualCard())\u003c/code\u003e ? 京东这个 channel 去判断传入的是 virtualgoodsinterface 还是在 publish 这里整个映射呢？\u003c/p\u003e\n\u003cp\u003e还有，比如后台管理系统要能知道这个 goods 能上到哪个渠道，这个渠道能上哪类呢？\u003ccode\u003eGoods.GetAvailableChannel()/ Channel.GetAvailableType() / ??\u003c/code\u003e\u003c/p\u003e\n",
+      "Author": "dzdh",
+      "PubDate": "2023-09-11T10:20:01Z"
+    },
+    {
       "Title": "小米电视 S75 怎么样，有买过的 V 友吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/972808",
       "Description": "在纠结小米还是海信，或者海信子品牌 vidda",
