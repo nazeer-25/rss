@@ -4,6 +4,40 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>[go]golang 的协程池本应该是这样的 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/973059</link>
+      <description>&lt;p&gt;看过了一下 star 比较高的协程池实现，还有字节开源的实现，完全是 java/c++之类的外行实现思路&lt;/p&gt;&#xA;&lt;p&gt;协程/线程池，最基本的元件 就是 队列 + 协程/线程，M:N 模型&lt;/p&gt;&#xA;&lt;p&gt;这两个组件在 go 里边天生就有啊，为什么再搞一套 task queue 呢？&lt;/p&gt;&#xA;&lt;p&gt;控制队列容量：make(chan, cap) 第二参数就可以&lt;/p&gt;&#xA;&lt;p&gt;想要控制协程/线程数量，再辅助一个 chan 就可以了，&lt;/p&gt;&#xA;&lt;p&gt;代码实现如下，100 行搞定：&lt;/p&gt;&#xA;&lt;p&gt;我把它放到 github 上 &lt;a href=&#34;https://github.com/shaovie/gopool&#34; rel=&#34;nofollow&#34;&gt;gopool&lt;/a&gt; 喜欢的老铁可以给个 star&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// GoPool is a minimalistic goroutine pool that provides a pure Go implementation&#xA;type GoPool struct {&#xA;&#x9;noCopy&#xA;&#xA;&#x9;queueLen atomic.Int32&#xA;&#x9;doTaskN  atomic.Int32&#xA;&#x9;workerN  atomic.Int32&#xA;&#x9;options  Options&#xA;&#xA;&#x9;workerSem chan struct{}&#xA;&#x9;queue     chan func()&#xA;}&#xA;&#xA;// NewGoPool provite fixed number of goroutines, reusable. M:N model&#xA;//&#xA;// M: the number of reusable goroutines,&#xA;// N: the capacity for asynchronous task queue.&#xA;func NewGoPool(opts ...Option) *GoPool {&#xA;&#x9;opt := setOptions(opts...)&#xA;&#x9;if opt.minWorkers &amp;lt;= 0 {&#xA;&#x9;&#x9;panic(&#34;GoPool: min workers &amp;lt;= 0&#34;)&#xA;&#x9;}&#xA;&#x9;if opt.minWorkers &amp;gt; opt.maxWorkers {&#xA;&#x9;&#x9;panic(&#34;GoPool: min workers &amp;gt; max workers&#34;)&#xA;&#x9;}&#xA;&#x9;p := &amp;amp;GoPool{&#xA;&#x9;&#x9;options:   opt,&#xA;&#x9;&#x9;workerSem: make(chan struct{}, opt.maxWorkers),&#xA;&#x9;&#x9;queue:     make(chan func(), opt.queueCap),&#xA;&#x9;}&#xA;&#x9;for i := int32(0); i &amp;lt; p.options.minWorkers; i++ { // pre spawn&#xA;&#x9;&#x9;p.workerSem &amp;lt;- struct{}{}&#xA;&#x9;&#x9;go p.worker(func() {})&#xA;&#x9;}&#xA;&#x9;go p.shrink()&#xA;&#x9;return p&#xA;}&#xA;&#xA;// QueueFree returns (capacity of task-queue - length of task-queue)&#xA;func (p *GoPool) QueueFree() int {&#xA;&#x9;return int(p.options.queueCap - p.queueLen.Load())&#xA;}&#xA;&#xA;// Workers returns current the number of workers&#xA;func (p *GoPool) Workers() int {&#xA;&#x9;return int(p.workerN.Load())&#xA;}&#xA;&#xA;// Go submits a task to this pool.&#xA;func (p *GoPool) Go(task func()) {&#xA;&#x9;if task == nil {&#xA;&#x9;&#x9;panic(&#34;GoPool: Go task is nil&#34;)&#xA;&#x9;}&#xA;&#x9;select {&#xA;&#x9;case p.queue &amp;lt;- task:&#xA;&#x9;&#x9;p.queueLen.Add(1)&#xA;&#x9;case p.workerSem &amp;lt;- struct{}{}:&#xA;&#x9;&#x9;go p.worker(task)&#xA;&#x9;}&#xA;}&#xA;&#xA;func (p *GoPool) worker(task func()) {&#xA;&#x9;p.workerN.Add(1)&#xA;&#x9;defer func() {&#xA;&#x9;&#x9;&amp;lt;-p.workerSem&#xA;&#x9;&#x9;p.workerN.Add(-1)&#xA;&#x9;&#x9;if e := recover(); e != nil {&#xA;&#x9;&#x9;&#x9;if p.options.panicHandler != nil {&#xA;&#x9;&#x9;&#x9;&#x9;p.options.panicHandler(e)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}()&#xA;&#xA;&#x9;for {&#xA;&#x9;&#x9;task()&#xA;&#x9;&#x9;task = &amp;lt;-p.queue&#xA;&#x9;&#x9;if task == nil {&#xA;&#x9;&#x9;&#x9;break&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;p.doTaskN.Add(1)&#xA;&#x9;&#x9;p.queueLen.Add(-1)&#xA;&#x9;}&#xA;}&#xA;func (p *GoPool) shrink() {&#xA;&#x9;ticker := time.NewTicker(p.options.shrinkPeriod)&#xA;&#x9;defer ticker.Stop()&#xA;&#xA;&#x9;for {&#xA;&#x9;&#x9;select {&#xA;&#x9;&#x9;case &amp;lt;-ticker.C:&#xA;&#x9;&#x9;&#x9;doTaskN := p.doTaskN.Load()&#xA;&#x9;&#x9;&#x9;p.doTaskN.Store(0)&#xA;&#x9;&#x9;&#x9;if doTaskN &amp;lt; p.options.tasksBelowN {&#xA;&#x9;&#x9;&#x9;&#x9;closeN := p.workerN.Load() - p.options.minWorkers&#xA;&#x9;&#x9;&#x9;&#x9;for closeN &amp;gt; 0 {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;p.queue &amp;lt;- nil&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;closeN--&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>shaoyie</author>
+      <pubDate>12 Sep 2023 07:56:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>想了解一下大家现在的用车成本都有多少？ - 分享发现</title>
+      <link>https://www.v2ex.com/t/973058</link>
+      <author>VintageZ</author>
+      <pubDate>12 Sep 2023 07:54:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问各位大佬，咨询一下如何根据要处理的中英文混合语句 构建正则表达式规则的问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/973057</link>
+      <description>op 由于工作需要，要处理本科毕业生的毕业论文上报 jyb 抽检。需要将学生的论文 pdf 文档中的摘要里面的关键词提取出来，再填充到 excel 表格里面。学生的关键词情况示例如下：&lt;br /&gt;&lt;br /&gt;关键词:Python 多线程 目标检测 Python Flask 框架&lt;br /&gt;&lt;br /&gt;其中，&lt;br /&gt;（ 1 ）关键词后面的冒号，有的学生没有，有的学生有&lt;br /&gt;（ 2 ）关键词最多 6 个，有的学生可能只有 3 个&lt;br /&gt;（ 3 ）关键词之间有 1-4 个空格&lt;br /&gt;（ 4 ）关键词的最后结束应该是换行符\n ，这个不确定，我查了资料应该是换行符。&lt;br /&gt;&lt;br /&gt;请问规则该怎么写呢？</description>
+      <author>Takizawa</author>
+      <pubDate>12 Sep 2023 07:53:55 +0000</pubDate>
+    </item>
+    <item>
+      <title>紧跟时事，如何看待苹果手机 5g 角标“造假” - 问与答</title>
+      <link>https://www.v2ex.com/t/973056</link>
+      <description>&lt;p&gt;带着水平聊，不要骂战。聊出水平，聊出学术修养。&lt;/p&gt;&#xA;&lt;p&gt;如果安卓机这么搞，大家如何评论。&lt;/p&gt;&#xA;</description>
+      <author>jamosLi</author>
+      <pubDate>12 Sep 2023 07:53:14 +0000</pubDate>
+    </item>
+    <item>
+      <title>投诉圆通快递无果，遇到了一个全新的网购被骗套路 - 生活</title>
+      <link>https://www.v2ex.com/t/973055</link>
+      <description>我 4 月 27 号在邮政官网投诉的快递现在已经将近 5 个月都没有任何音讯，还有没有什么别的投诉渠道？&lt;br /&gt;&lt;br /&gt;我看了一些投诉攻略，不都是说这个邮政官网投诉都是很有效果的嘛，为什么我投诉了已经将近 5 个月了，没有任何回复音讯，奇了怪了。&lt;br /&gt;&lt;br /&gt;投诉截图： &lt;a target=&#34;_blank&#34; href=&#34;https://postimg.cc/bZLDBfqg&#34; rel=&#34;nofollow noopener&#34;&gt;https://postimg.cc/bZLDBfqg&lt;/a&gt;   &lt;a target=&#34;_blank&#34; href=&#34;https://postimg.cc/rDgMk80d&#34; rel=&#34;nofollow noopener&#34;&gt;https://postimg.cc/rDgMk80d&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;具体的前因后果如下&lt;br /&gt;&lt;br /&gt;我这边 4 月 16 号在淘宝上买了一件价格 295 元的连衣裙，买家寄的圆通快递 17 号发货，19 号物流显示签收。&lt;br /&gt;单号为 YT7179170529991 ， 但是实际上这个快递并没有收到。&lt;br /&gt;我联系了这个快递的配送员，电话为 18761730772 ，配送员表示这个快递他自己确实没有送过来，因为这个快递是系统内部的一个空包件，他们自己会在系统里登记为签收，实际上根本就不会送。&lt;br /&gt;&lt;br /&gt;我在淘宝上申请退款，然后卖家以物流实际上已签收这个理由来拒绝退款，退款失败之后，淘宝申请客服介入也是一样失败，&lt;br /&gt;所以我现在需要快递公司给我开一个这个件是空包件的一个证明，联系了官方客服，官方也一直不给我开通，他说这个件是实际不存在的。&lt;br /&gt;官方的说法和快递配送员的说法有出入，现在的问题就是我这个空包也拿不到，证明也不给我开，导致了我钱货两空。 淘宝卖家利用淘宝规则漏洞和当地的圆通快递勾结，专门发一些实际上不存在的虚拟空包件，这样的话订单又能显示签收，又可以让买家申请退款也直接失败。&lt;br /&gt;&lt;br /&gt;为了确保我作为消费者在网上购物的利益，我的诉求:如下如果这是一个实体存在的运单货物，那请把这个快递重新配送给我。 如果按照快递员所说，这是一个空包件，那么请给我开一个这个件是空包间的证明，我好拿着这个证明去请求淘宝赔偿我的货款。</description>
+      <author>zealer8</author>
+      <pubDate>12 Sep 2023 07:51:52 +0000</pubDate>
+    </item>
+    <item>
       <title>深圳 AIGC 海外 C 端产品公司招 web 前端--react - 前端开发</title>
       <link>https://www.v2ex.com/t/973054</link>
       <description>&lt;p&gt;岗位职责：&#xA;1 、使用 React 及相关技术进行 Web 应用的开发和维护；&#xA;2 、与后端工程师、产品经理密切合作，理解需求并提出合理的技术方案；&#xA;3 、参与产品的设计、开发、测试和上线，并保证产品质量和性能；&#xA;4 、持续关注前端技术发展和行业动态，分享并引进新技术和最佳实践；&#xA;5 、解决产品中的技术问题，为产品性能、安全、稳定性提供技术支持。&lt;/p&gt;&#xA;&lt;p&gt;任职资格：&#xA;1 、本科及以上学历，计算机相关专业，具有三年及以上 React 前端开发工作经验；&#xA;2 、熟悉 Web 前端相关技术，包括 HTML 、CSS 、JavaScript 等；&#xA;3 、熟悉常用的 Web 后端技术，如 Node.js 、Express 、RESTful API 等；&#xA;4 、了解前端性能优化和安全防范，并有实际项目经验；&#xA;5 、对互联网应用和开源技术有浓厚兴趣，积极探索并分享最新的前端技术。&lt;/p&gt;&#xA;&lt;p&gt;能力素养：&#xA;1 、具备良好的编码能力和代码风格，能够编写高质量、易维护的代码；&#xA;2 、具有全局思维和系统设计能力，能够从整体上考虑产品的性能、扩展性和可维护性；&#xA;3 、具有良好的产品意识和用户体验意识，能够在前端设计和开发过程中注重用户需求和体验；&#xA;4 、具有团队协作和沟通能力，能够有效地和跨部门的同事合作，完成产品的开发和迭代；&#xA;5 、具有积极的学习和探索精神，能够快速学习新技术并应用于实践中。&lt;/p&gt;&#xA;</description>
@@ -115,7 +149,7 @@
       <pubDate>12 Sep 2023 07:00:06 +0000</pubDate>
     </item>
     <item>
-      <title>大佬们 有没有什么方法可以加强 Notion 的提醒功能？你们的 Notion 自带的提醒功能弱鸡吗？ - 程序员</title>
+      <title>大佬们 有没有什么方法可以加强 Notion 的提醒功能？你们的 Notion 自带的提醒功能弱鸡吗？ - Notion</title>
       <link>https://www.v2ex.com/t/973033</link>
       <description>&lt;p&gt;我经常收不到提醒，而且 ios 好像也不推送，只有打开 app 才会看到红点点，导致我忘记了续费&lt;/p&gt;&#xA;&lt;p&gt;我在 notion 做了一个提醒事项，有没有办法到期自动发送短信或者推送到微信或者飞书或者 Telegram 或者 bark 吗？最好能在 pc 或者 Mac 端也能收到醒目提醒（ Mac 端只有打开 notion 客户端才能看到左上角小点，不好用）&lt;/p&gt;&#xA;&lt;p&gt;我搜索了一下有一个方法可以推送到微信，是利用的 QQ 邮箱。我不喜欢这种方式，有其他方式可以直接推送到微信吗？&lt;/p&gt;&#xA;</description>
       <author>7897894</author>

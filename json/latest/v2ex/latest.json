@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "[go]golang 的协程池本应该是这样的 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/973059",
+      "Description": "\u003cp\u003e看过了一下 star 比较高的协程池实现，还有字节开源的实现，完全是 java/c++之类的外行实现思路\u003c/p\u003e\n\u003cp\u003e协程/线程池，最基本的元件 就是 队列 + 协程/线程，M:N 模型\u003c/p\u003e\n\u003cp\u003e这两个组件在 go 里边天生就有啊，为什么再搞一套 task queue 呢？\u003c/p\u003e\n\u003cp\u003e控制队列容量：make(chan, cap) 第二参数就可以\u003c/p\u003e\n\u003cp\u003e想要控制协程/线程数量，再辅助一个 chan 就可以了，\u003c/p\u003e\n\u003cp\u003e代码实现如下，100 行搞定：\u003c/p\u003e\n\u003cp\u003e我把它放到 github 上 \u003ca href=\"https://github.com/shaovie/gopool\" rel=\"nofollow\"\u003egopool\u003c/a\u003e 喜欢的老铁可以给个 star\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// GoPool is a minimalistic goroutine pool that provides a pure Go implementation\ntype GoPool struct {\n\tnoCopy\n\n\tqueueLen atomic.Int32\n\tdoTaskN  atomic.Int32\n\tworkerN  atomic.Int32\n\toptions  Options\n\n\tworkerSem chan struct{}\n\tqueue     chan func()\n}\n\n// NewGoPool provite fixed number of goroutines, reusable. M:N model\n//\n// M: the number of reusable goroutines,\n// N: the capacity for asynchronous task queue.\nfunc NewGoPool(opts ...Option) *GoPool {\n\topt := setOptions(opts...)\n\tif opt.minWorkers \u0026lt;= 0 {\n\t\tpanic(\"GoPool: min workers \u0026lt;= 0\")\n\t}\n\tif opt.minWorkers \u0026gt; opt.maxWorkers {\n\t\tpanic(\"GoPool: min workers \u0026gt; max workers\")\n\t}\n\tp := \u0026amp;GoPool{\n\t\toptions:   opt,\n\t\tworkerSem: make(chan struct{}, opt.maxWorkers),\n\t\tqueue:     make(chan func(), opt.queueCap),\n\t}\n\tfor i := int32(0); i \u0026lt; p.options.minWorkers; i++ { // pre spawn\n\t\tp.workerSem \u0026lt;- struct{}{}\n\t\tgo p.worker(func() {})\n\t}\n\tgo p.shrink()\n\treturn p\n}\n\n// QueueFree returns (capacity of task-queue - length of task-queue)\nfunc (p *GoPool) QueueFree() int {\n\treturn int(p.options.queueCap - p.queueLen.Load())\n}\n\n// Workers returns current the number of workers\nfunc (p *GoPool) Workers() int {\n\treturn int(p.workerN.Load())\n}\n\n// Go submits a task to this pool.\nfunc (p *GoPool) Go(task func()) {\n\tif task == nil {\n\t\tpanic(\"GoPool: Go task is nil\")\n\t}\n\tselect {\n\tcase p.queue \u0026lt;- task:\n\t\tp.queueLen.Add(1)\n\tcase p.workerSem \u0026lt;- struct{}{}:\n\t\tgo p.worker(task)\n\t}\n}\n\nfunc (p *GoPool) worker(task func()) {\n\tp.workerN.Add(1)\n\tdefer func() {\n\t\t\u0026lt;-p.workerSem\n\t\tp.workerN.Add(-1)\n\t\tif e := recover(); e != nil {\n\t\t\tif p.options.panicHandler != nil {\n\t\t\t\tp.options.panicHandler(e)\n\t\t\t}\n\t\t}\n\t}()\n\n\tfor {\n\t\ttask()\n\t\ttask = \u0026lt;-p.queue\n\t\tif task == nil {\n\t\t\tbreak\n\t\t}\n\t\tp.doTaskN.Add(1)\n\t\tp.queueLen.Add(-1)\n\t}\n}\nfunc (p *GoPool) shrink() {\n\tticker := time.NewTicker(p.options.shrinkPeriod)\n\tdefer ticker.Stop()\n\n\tfor {\n\t\tselect {\n\t\tcase \u0026lt;-ticker.C:\n\t\t\tdoTaskN := p.doTaskN.Load()\n\t\t\tp.doTaskN.Store(0)\n\t\t\tif doTaskN \u0026lt; p.options.tasksBelowN {\n\t\t\t\tcloseN := p.workerN.Load() - p.options.minWorkers\n\t\t\t\tfor closeN \u0026gt; 0 {\n\t\t\t\t\tp.queue \u0026lt;- nil\n\t\t\t\t\tcloseN--\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "shaoyie",
+      "PubDate": "2023-09-12T07:56:11Z"
+    },
+    {
+      "Title": "想了解一下大家现在的用车成本都有多少？ - 分享发现",
+      "Link": "https://www.v2ex.com/t/973058",
+      "Description": "",
+      "Author": "VintageZ",
+      "PubDate": "2023-09-12T07:54:13Z"
+    },
+    {
+      "Title": "请问各位大佬，咨询一下如何根据要处理的中英文混合语句 构建正则表达式规则的问题 - 问与答",
+      "Link": "https://www.v2ex.com/t/973057",
+      "Description": "op 由于工作需要，要处理本科毕业生的毕业论文上报 jyb 抽检。需要将学生的论文 pdf 文档中的摘要里面的关键词提取出来，再填充到 excel 表格里面。学生的关键词情况示例如下：\u003cbr /\u003e\u003cbr /\u003e关键词:Python 多线程 目标检测 Python Flask 框架\u003cbr /\u003e\u003cbr /\u003e其中，\u003cbr /\u003e（ 1 ）关键词后面的冒号，有的学生没有，有的学生有\u003cbr /\u003e（ 2 ）关键词最多 6 个，有的学生可能只有 3 个\u003cbr /\u003e（ 3 ）关键词之间有 1-4 个空格\u003cbr /\u003e（ 4 ）关键词的最后结束应该是换行符\\n ，这个不确定，我查了资料应该是换行符。\u003cbr /\u003e\u003cbr /\u003e请问规则该怎么写呢？",
+      "Author": "Takizawa",
+      "PubDate": "2023-09-12T07:53:55Z"
+    },
+    {
+      "Title": "紧跟时事，如何看待苹果手机 5g 角标“造假” - 问与答",
+      "Link": "https://www.v2ex.com/t/973056",
+      "Description": "\u003cp\u003e带着水平聊，不要骂战。聊出水平，聊出学术修养。\u003c/p\u003e\n\u003cp\u003e如果安卓机这么搞，大家如何评论。\u003c/p\u003e\n",
+      "Author": "jamosLi",
+      "PubDate": "2023-09-12T07:53:14Z"
+    },
+    {
+      "Title": "投诉圆通快递无果，遇到了一个全新的网购被骗套路 - 生活",
+      "Link": "https://www.v2ex.com/t/973055",
+      "Description": "我 4 月 27 号在邮政官网投诉的快递现在已经将近 5 个月都没有任何音讯，还有没有什么别的投诉渠道？\u003cbr /\u003e\u003cbr /\u003e我看了一些投诉攻略，不都是说这个邮政官网投诉都是很有效果的嘛，为什么我投诉了已经将近 5 个月了，没有任何回复音讯，奇了怪了。\u003cbr /\u003e\u003cbr /\u003e投诉截图： \u003ca target=\"_blank\" href=\"https://postimg.cc/bZLDBfqg\" rel=\"nofollow noopener\"\u003ehttps://postimg.cc/bZLDBfqg\u003c/a\u003e   \u003ca target=\"_blank\" href=\"https://postimg.cc/rDgMk80d\" rel=\"nofollow noopener\"\u003ehttps://postimg.cc/rDgMk80d\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e具体的前因后果如下\u003cbr /\u003e\u003cbr /\u003e我这边 4 月 16 号在淘宝上买了一件价格 295 元的连衣裙，买家寄的圆通快递 17 号发货，19 号物流显示签收。\u003cbr /\u003e单号为 YT7179170529991 ， 但是实际上这个快递并没有收到。\u003cbr /\u003e我联系了这个快递的配送员，电话为 18761730772 ，配送员表示这个快递他自己确实没有送过来，因为这个快递是系统内部的一个空包件，他们自己会在系统里登记为签收，实际上根本就不会送。\u003cbr /\u003e\u003cbr /\u003e我在淘宝上申请退款，然后卖家以物流实际上已签收这个理由来拒绝退款，退款失败之后，淘宝申请客服介入也是一样失败，\u003cbr /\u003e所以我现在需要快递公司给我开一个这个件是空包件的一个证明，联系了官方客服，官方也一直不给我开通，他说这个件是实际不存在的。\u003cbr /\u003e官方的说法和快递配送员的说法有出入，现在的问题就是我这个空包也拿不到，证明也不给我开，导致了我钱货两空。 淘宝卖家利用淘宝规则漏洞和当地的圆通快递勾结，专门发一些实际上不存在的虚拟空包件，这样的话订单又能显示签收，又可以让买家申请退款也直接失败。\u003cbr /\u003e\u003cbr /\u003e为了确保我作为消费者在网上购物的利益，我的诉求:如下如果这是一个实体存在的运单货物，那请把这个快递重新配送给我。 如果按照快递员所说，这是一个空包件，那么请给我开一个这个件是空包间的证明，我好拿着这个证明去请求淘宝赔偿我的货款。",
+      "Author": "zealer8",
+      "PubDate": "2023-09-12T07:51:52Z"
+    },
+    {
       "Title": "深圳 AIGC 海外 C 端产品公司招 web 前端--react - 前端开发",
       "Link": "https://www.v2ex.com/t/973054",
       "Description": "\u003cp\u003e岗位职责：\n1 、使用 React 及相关技术进行 Web 应用的开发和维护；\n2 、与后端工程师、产品经理密切合作，理解需求并提出合理的技术方案；\n3 、参与产品的设计、开发、测试和上线，并保证产品质量和性能；\n4 、持续关注前端技术发展和行业动态，分享并引进新技术和最佳实践；\n5 、解决产品中的技术问题，为产品性能、安全、稳定性提供技术支持。\u003c/p\u003e\n\u003cp\u003e任职资格：\n1 、本科及以上学历，计算机相关专业，具有三年及以上 React 前端开发工作经验；\n2 、熟悉 Web 前端相关技术，包括 HTML 、CSS 、JavaScript 等；\n3 、熟悉常用的 Web 后端技术，如 Node.js 、Express 、RESTful API 等；\n4 、了解前端性能优化和安全防范，并有实际项目经验；\n5 、对互联网应用和开源技术有浓厚兴趣，积极探索并分享最新的前端技术。\u003c/p\u003e\n\u003cp\u003e能力素养：\n1 、具备良好的编码能力和代码风格，能够编写高质量、易维护的代码；\n2 、具有全局思维和系统设计能力，能够从整体上考虑产品的性能、扩展性和可维护性；\n3 、具有良好的产品意识和用户体验意识，能够在前端设计和开发过程中注重用户需求和体验；\n4 、具有团队协作和沟通能力，能够有效地和跨部门的同事合作，完成产品的开发和迭代；\n5 、具有积极的学习和探索精神，能够快速学习新技术并应用于实践中。\u003c/p\u003e\n",
@@ -116,7 +151,7 @@
       "PubDate": "2023-09-12T07:00:06Z"
     },
     {
-      "Title": "大佬们 有没有什么方法可以加强 Notion 的提醒功能？你们的 Notion 自带的提醒功能弱鸡吗？ - 程序员",
+      "Title": "大佬们 有没有什么方法可以加强 Notion 的提醒功能？你们的 Notion 自带的提醒功能弱鸡吗？ - Notion",
       "Link": "https://www.v2ex.com/t/973033",
       "Description": "\u003cp\u003e我经常收不到提醒，而且 ios 好像也不推送，只有打开 app 才会看到红点点，导致我忘记了续费\u003c/p\u003e\n\u003cp\u003e我在 notion 做了一个提醒事项，有没有办法到期自动发送短信或者推送到微信或者飞书或者 Telegram 或者 bark 吗？最好能在 pc 或者 Mac 端也能收到醒目提醒（ Mac 端只有打开 notion 客户端才能看到左上角小点，不好用）\u003c/p\u003e\n\u003cp\u003e我搜索了一下有一个方法可以推送到微信，是利用的 QQ 邮箱。我不喜欢这种方式，有其他方式可以直接推送到微信吗？\u003c/p\u003e\n",
       "Author": "7897894",
