@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>双一流到底是什么含金量？ - 程序员</title>
+      <link>https://www.v2ex.com/t/973063</link>
+      <description>&lt;p&gt;双一流肯定没法和 985 比，但是双一流能比上 211 吗？ &lt;/p&gt;&#xA;&lt;p&gt;双非有何双一流有啥关系？&lt;/p&gt;&#xA;</description>
+      <author>thinkm</author>
+      <pubDate>12 Sep 2023 08:06:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>刚算了下，我居然有 7 个手机号，两个移动，两个联通，一个电信，一个阿里小号，一个澳门卡，保号成本的确不高，就是数量有点多 - 分享发现</title>
+      <link>https://www.v2ex.com/t/973062</link>
+      <description>移动&lt;br /&gt;1xxxxxxxxxx    8 元保号&lt;br /&gt;1xxxxxx9799    19 每月，80G ，新办的，想试试移动卡的网速咋样，结果我发现移动的信号果然比电信/联通好一点；&lt;br /&gt;&lt;br /&gt;联通&lt;br /&gt;1xxxxxxxxxx    5 块钱日租卡，超出流量 1 块钱 1G&lt;br /&gt;1xxxxxx9527    29 流量卡（ 155G+100min 通话），尾号 9527 ，不舍得扔现在保号中&lt;br /&gt;&lt;br /&gt;电信&lt;br /&gt;1xxxxxxxxxx    5 块钱日租卡，超出流量 1 块钱 1G&lt;br /&gt;&lt;br /&gt;阿里小号&lt;br /&gt;1xxABCDABDC    反正是续费到了 2030 左右&lt;br /&gt;&lt;br /&gt;澳门&lt;br /&gt;最近没咋用，一直在每半年续费一次，每次充 50&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;无聊算了下号码着实有点多了，但是有的号码我又不想扔，平均每月成本是 8+19+5+5+5=42 ，这么一算保号成本也不多，就是手上的号码太多了。&lt;br /&gt;&lt;br /&gt;平时就主用两个手机卡，一个联通老号接收各种短信，一个流量卡，目前用的移动流量卡，给我明显的感觉是地铁人流量比较多的站，移动卡居然还能刷出视频，之前用的联通、电信遇到这种人多的站，刷不出来视频，直接提示网络异常。</description>
+      <author>alike19</author>
+      <pubDate>12 Sep 2023 08:04:59 +0000</pubDate>
+    </item>
+    <item>
+      <title>交易所技术部门招聘，分布式办公~ - 酷工作</title>
+      <link>https://www.v2ex.com/t/973060</link>
+      <description>[高级产品经理] 薪资 20-40k ，分布式 ，证券经验优先&lt;br /&gt; [测试开发工程师] 薪资 20-40k ，分布式 、交易所测试开发岗位优先，急需&lt;br /&gt; [运维] 薪资 open ，需与领导一同线下办公&lt;br /&gt; [资深前端、后端开发工程师] 薪资 20-40k ，分布式，交易所工作经验&lt;br /&gt;&lt;br /&gt;联系方式： &lt;a target=&#34;_blank&#34; href=&#34;https://t.me/Ritalya&#34; rel=&#34;nofollow noopener&#34;&gt;https://t.me/Ritalya&lt;/a&gt;</description>
+      <author>ritalya</author>
+      <pubDate>12 Sep 2023 07:57:47 +0000</pubDate>
+    </item>
+    <item>
       <title>[go]golang 的协程池本应该是这样的 - Go 编程语言</title>
       <link>https://www.v2ex.com/t/973059</link>
       <description>&lt;p&gt;看过了一下 star 比较高的协程池实现，还有字节开源的实现，完全是 java/c++之类的外行实现思路&lt;/p&gt;&#xA;&lt;p&gt;协程/线程池，最基本的元件 就是 队列 + 协程/线程，M:N 模型&lt;/p&gt;&#xA;&lt;p&gt;这两个组件在 go 里边天生就有啊，为什么再搞一套 task queue 呢？&lt;/p&gt;&#xA;&lt;p&gt;控制队列容量：make(chan, cap) 第二参数就可以&lt;/p&gt;&#xA;&lt;p&gt;想要控制协程/线程数量，再辅助一个 chan 就可以了，&lt;/p&gt;&#xA;&lt;p&gt;代码实现如下，100 行搞定：&lt;/p&gt;&#xA;&lt;p&gt;我把它放到 github 上 &lt;a href=&#34;https://github.com/shaovie/gopool&#34; rel=&#34;nofollow&#34;&gt;gopool&lt;/a&gt; 喜欢的老铁可以给个 star&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// GoPool is a minimalistic goroutine pool that provides a pure Go implementation&#xA;type GoPool struct {&#xA;&#x9;noCopy&#xA;&#xA;&#x9;queueLen atomic.Int32&#xA;&#x9;doTaskN  atomic.Int32&#xA;&#x9;workerN  atomic.Int32&#xA;&#x9;options  Options&#xA;&#xA;&#x9;workerSem chan struct{}&#xA;&#x9;queue     chan func()&#xA;}&#xA;&#xA;// NewGoPool provite fixed number of goroutines, reusable. M:N model&#xA;//&#xA;// M: the number of reusable goroutines,&#xA;// N: the capacity for asynchronous task queue.&#xA;func NewGoPool(opts ...Option) *GoPool {&#xA;&#x9;opt := setOptions(opts...)&#xA;&#x9;if opt.minWorkers &amp;lt;= 0 {&#xA;&#x9;&#x9;panic(&#34;GoPool: min workers &amp;lt;= 0&#34;)&#xA;&#x9;}&#xA;&#x9;if opt.minWorkers &amp;gt; opt.maxWorkers {&#xA;&#x9;&#x9;panic(&#34;GoPool: min workers &amp;gt; max workers&#34;)&#xA;&#x9;}&#xA;&#x9;p := &amp;amp;GoPool{&#xA;&#x9;&#x9;options:   opt,&#xA;&#x9;&#x9;workerSem: make(chan struct{}, opt.maxWorkers),&#xA;&#x9;&#x9;queue:     make(chan func(), opt.queueCap),&#xA;&#x9;}&#xA;&#x9;for i := int32(0); i &amp;lt; p.options.minWorkers; i++ { // pre spawn&#xA;&#x9;&#x9;p.workerSem &amp;lt;- struct{}{}&#xA;&#x9;&#x9;go p.worker(func() {})&#xA;&#x9;}&#xA;&#x9;go p.shrink()&#xA;&#x9;return p&#xA;}&#xA;&#xA;// QueueFree returns (capacity of task-queue - length of task-queue)&#xA;func (p *GoPool) QueueFree() int {&#xA;&#x9;return int(p.options.queueCap - p.queueLen.Load())&#xA;}&#xA;&#xA;// Workers returns current the number of workers&#xA;func (p *GoPool) Workers() int {&#xA;&#x9;return int(p.workerN.Load())&#xA;}&#xA;&#xA;// Go submits a task to this pool.&#xA;func (p *GoPool) Go(task func()) {&#xA;&#x9;if task == nil {&#xA;&#x9;&#x9;panic(&#34;GoPool: Go task is nil&#34;)&#xA;&#x9;}&#xA;&#x9;select {&#xA;&#x9;case p.queue &amp;lt;- task:&#xA;&#x9;&#x9;p.queueLen.Add(1)&#xA;&#x9;case p.workerSem &amp;lt;- struct{}{}:&#xA;&#x9;&#x9;go p.worker(task)&#xA;&#x9;}&#xA;}&#xA;&#xA;func (p *GoPool) worker(task func()) {&#xA;&#x9;p.workerN.Add(1)&#xA;&#x9;defer func() {&#xA;&#x9;&#x9;&amp;lt;-p.workerSem&#xA;&#x9;&#x9;p.workerN.Add(-1)&#xA;&#x9;&#x9;if e := recover(); e != nil {&#xA;&#x9;&#x9;&#x9;if p.options.panicHandler != nil {&#xA;&#x9;&#x9;&#x9;&#x9;p.options.panicHandler(e)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}()&#xA;&#xA;&#x9;for {&#xA;&#x9;&#x9;task()&#xA;&#x9;&#x9;task = &amp;lt;-p.queue&#xA;&#x9;&#x9;if task == nil {&#xA;&#x9;&#x9;&#x9;break&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;p.doTaskN.Add(1)&#xA;&#x9;&#x9;p.queueLen.Add(-1)&#xA;&#x9;}&#xA;}&#xA;func (p *GoPool) shrink() {&#xA;&#x9;ticker := time.NewTicker(p.options.shrinkPeriod)&#xA;&#x9;defer ticker.Stop()&#xA;&#xA;&#x9;for {&#xA;&#x9;&#x9;select {&#xA;&#x9;&#x9;case &amp;lt;-ticker.C:&#xA;&#x9;&#x9;&#x9;doTaskN := p.doTaskN.Load()&#xA;&#x9;&#x9;&#x9;p.doTaskN.Store(0)&#xA;&#x9;&#x9;&#x9;if doTaskN &amp;lt; p.options.tasksBelowN {&#xA;&#x9;&#x9;&#x9;&#x9;closeN := p.workerN.Load() - p.options.minWorkers&#xA;&#x9;&#x9;&#x9;&#x9;for closeN &amp;gt; 0 {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;p.queue &amp;lt;- nil&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;closeN--&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -22,13 +43,6 @@
       <description>op 由于工作需要，要处理本科毕业生的毕业论文上报 jyb 抽检。需要将学生的论文 pdf 文档中的摘要里面的关键词提取出来，再填充到 excel 表格里面。学生的关键词情况示例如下：&lt;br /&gt;&lt;br /&gt;关键词:Python 多线程 目标检测 Python Flask 框架&lt;br /&gt;&lt;br /&gt;其中，&lt;br /&gt;（ 1 ）关键词后面的冒号，有的学生没有，有的学生有&lt;br /&gt;（ 2 ）关键词最多 6 个，有的学生可能只有 3 个&lt;br /&gt;（ 3 ）关键词之间有 1-4 个空格&lt;br /&gt;（ 4 ）关键词的最后结束应该是换行符\n ，这个不确定，我查了资料应该是换行符。&lt;br /&gt;&lt;br /&gt;请问规则该怎么写呢？</description>
       <author>Takizawa</author>
       <pubDate>12 Sep 2023 07:53:55 +0000</pubDate>
-    </item>
-    <item>
-      <title>紧跟时事，如何看待苹果手机 5g 角标“造假” - 问与答</title>
-      <link>https://www.v2ex.com/t/973056</link>
-      <description>&lt;p&gt;带着水平聊，不要骂战。聊出水平，聊出学术修养。&lt;/p&gt;&#xA;&lt;p&gt;如果安卓机这么搞，大家如何评论。&lt;/p&gt;&#xA;</description>
-      <author>jamosLi</author>
-      <pubDate>12 Sep 2023 07:53:14 +0000</pubDate>
     </item>
     <item>
       <title>投诉圆通快递无果，遇到了一个全新的网购被骗套路 - 生活</title>
@@ -237,6 +251,13 @@
       <description>&lt;p&gt;有的估计是鼻炎；&#xA;有的喉咙不知咋的 一会咳嗽  长年发出‘en ，en （第四声）’声音很大；&lt;/p&gt;&#xA;&lt;p&gt;总之不同的人不同的声音；&lt;/p&gt;&#xA;&lt;p&gt;主要是频次很高很高；有时候真的是一分钟 4-6 次，很多时候没办法工作，会情不自禁的去数次数。。&lt;/p&gt;&#xA;&lt;p&gt;带耳机也堵不住，戴时间长了耳朵又难受；太折磨人了；&lt;/p&gt;&#xA;&lt;p&gt;你们有这种体会么；怎么搞！！！是不是要换家公司，但是换了可能又会遇到另一种声音吧；所以是不是应该反思下是不是自己的问题。。。&lt;/p&gt;&#xA;</description>
       <author>lynn000</author>
       <pubDate>12 Sep 2023 05:52:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>紧跟时事，如何看待苹果手机 5g 角标“造假” - 问与答</title>
+      <link>https://www.v2ex.com/t/973056</link>
+      <description>&lt;p&gt;带着水平聊，不要骂战。聊出水平，聊出学术修养。&lt;/p&gt;&#xA;&lt;p&gt;如果安卓机这么搞，大家如何评论。&lt;/p&gt;&#xA;</description>
+      <author>jamosLi</author>
+      <pubDate>12 Sep 2023 07:53:14 +0000</pubDate>
     </item>
     <item>
       <title>有没有前端厉害一点的大佬，想定制一个 vue 脚本 - 问与答</title>

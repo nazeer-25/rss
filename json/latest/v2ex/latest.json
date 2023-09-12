@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "双一流到底是什么含金量？ - 程序员",
+      "Link": "https://www.v2ex.com/t/973063",
+      "Description": "\u003cp\u003e双一流肯定没法和 985 比，但是双一流能比上 211 吗？ \u003c/p\u003e\n\u003cp\u003e双非有何双一流有啥关系？\u003c/p\u003e\n",
+      "Author": "thinkm",
+      "PubDate": "2023-09-12T08:06:43Z"
+    },
+    {
+      "Title": "刚算了下，我居然有 7 个手机号，两个移动，两个联通，一个电信，一个阿里小号，一个澳门卡，保号成本的确不高，就是数量有点多 - 分享发现",
+      "Link": "https://www.v2ex.com/t/973062",
+      "Description": "移动\u003cbr /\u003e1xxxxxxxxxx    8 元保号\u003cbr /\u003e1xxxxxx9799    19 每月，80G ，新办的，想试试移动卡的网速咋样，结果我发现移动的信号果然比电信/联通好一点；\u003cbr /\u003e\u003cbr /\u003e联通\u003cbr /\u003e1xxxxxxxxxx    5 块钱日租卡，超出流量 1 块钱 1G\u003cbr /\u003e1xxxxxx9527    29 流量卡（ 155G+100min 通话），尾号 9527 ，不舍得扔现在保号中\u003cbr /\u003e\u003cbr /\u003e电信\u003cbr /\u003e1xxxxxxxxxx    5 块钱日租卡，超出流量 1 块钱 1G\u003cbr /\u003e\u003cbr /\u003e阿里小号\u003cbr /\u003e1xxABCDABDC    反正是续费到了 2030 左右\u003cbr /\u003e\u003cbr /\u003e澳门\u003cbr /\u003e最近没咋用，一直在每半年续费一次，每次充 50\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e无聊算了下号码着实有点多了，但是有的号码我又不想扔，平均每月成本是 8+19+5+5+5=42 ，这么一算保号成本也不多，就是手上的号码太多了。\u003cbr /\u003e\u003cbr /\u003e平时就主用两个手机卡，一个联通老号接收各种短信，一个流量卡，目前用的移动流量卡，给我明显的感觉是地铁人流量比较多的站，移动卡居然还能刷出视频，之前用的联通、电信遇到这种人多的站，刷不出来视频，直接提示网络异常。",
+      "Author": "alike19",
+      "PubDate": "2023-09-12T08:04:59Z"
+    },
+    {
+      "Title": "交易所技术部门招聘，分布式办公~ - 酷工作",
+      "Link": "https://www.v2ex.com/t/973060",
+      "Description": "[高级产品经理] 薪资 20-40k ，分布式 ，证券经验优先\u003cbr /\u003e [测试开发工程师] 薪资 20-40k ，分布式 、交易所测试开发岗位优先，急需\u003cbr /\u003e [运维] 薪资 open ，需与领导一同线下办公\u003cbr /\u003e [资深前端、后端开发工程师] 薪资 20-40k ，分布式，交易所工作经验\u003cbr /\u003e\u003cbr /\u003e联系方式： \u003ca target=\"_blank\" href=\"https://t.me/Ritalya\" rel=\"nofollow noopener\"\u003ehttps://t.me/Ritalya\u003c/a\u003e",
+      "Author": "ritalya",
+      "PubDate": "2023-09-12T07:57:47Z"
+    },
+    {
       "Title": "[go]golang 的协程池本应该是这样的 - Go 编程语言",
       "Link": "https://www.v2ex.com/t/973059",
       "Description": "\u003cp\u003e看过了一下 star 比较高的协程池实现，还有字节开源的实现，完全是 java/c++之类的外行实现思路\u003c/p\u003e\n\u003cp\u003e协程/线程池，最基本的元件 就是 队列 + 协程/线程，M:N 模型\u003c/p\u003e\n\u003cp\u003e这两个组件在 go 里边天生就有啊，为什么再搞一套 task queue 呢？\u003c/p\u003e\n\u003cp\u003e控制队列容量：make(chan, cap) 第二参数就可以\u003c/p\u003e\n\u003cp\u003e想要控制协程/线程数量，再辅助一个 chan 就可以了，\u003c/p\u003e\n\u003cp\u003e代码实现如下，100 行搞定：\u003c/p\u003e\n\u003cp\u003e我把它放到 github 上 \u003ca href=\"https://github.com/shaovie/gopool\" rel=\"nofollow\"\u003egopool\u003c/a\u003e 喜欢的老铁可以给个 star\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003e// GoPool is a minimalistic goroutine pool that provides a pure Go implementation\ntype GoPool struct {\n\tnoCopy\n\n\tqueueLen atomic.Int32\n\tdoTaskN  atomic.Int32\n\tworkerN  atomic.Int32\n\toptions  Options\n\n\tworkerSem chan struct{}\n\tqueue     chan func()\n}\n\n// NewGoPool provite fixed number of goroutines, reusable. M:N model\n//\n// M: the number of reusable goroutines,\n// N: the capacity for asynchronous task queue.\nfunc NewGoPool(opts ...Option) *GoPool {\n\topt := setOptions(opts...)\n\tif opt.minWorkers \u0026lt;= 0 {\n\t\tpanic(\"GoPool: min workers \u0026lt;= 0\")\n\t}\n\tif opt.minWorkers \u0026gt; opt.maxWorkers {\n\t\tpanic(\"GoPool: min workers \u0026gt; max workers\")\n\t}\n\tp := \u0026amp;GoPool{\n\t\toptions:   opt,\n\t\tworkerSem: make(chan struct{}, opt.maxWorkers),\n\t\tqueue:     make(chan func(), opt.queueCap),\n\t}\n\tfor i := int32(0); i \u0026lt; p.options.minWorkers; i++ { // pre spawn\n\t\tp.workerSem \u0026lt;- struct{}{}\n\t\tgo p.worker(func() {})\n\t}\n\tgo p.shrink()\n\treturn p\n}\n\n// QueueFree returns (capacity of task-queue - length of task-queue)\nfunc (p *GoPool) QueueFree() int {\n\treturn int(p.options.queueCap - p.queueLen.Load())\n}\n\n// Workers returns current the number of workers\nfunc (p *GoPool) Workers() int {\n\treturn int(p.workerN.Load())\n}\n\n// Go submits a task to this pool.\nfunc (p *GoPool) Go(task func()) {\n\tif task == nil {\n\t\tpanic(\"GoPool: Go task is nil\")\n\t}\n\tselect {\n\tcase p.queue \u0026lt;- task:\n\t\tp.queueLen.Add(1)\n\tcase p.workerSem \u0026lt;- struct{}{}:\n\t\tgo p.worker(task)\n\t}\n}\n\nfunc (p *GoPool) worker(task func()) {\n\tp.workerN.Add(1)\n\tdefer func() {\n\t\t\u0026lt;-p.workerSem\n\t\tp.workerN.Add(-1)\n\t\tif e := recover(); e != nil {\n\t\t\tif p.options.panicHandler != nil {\n\t\t\t\tp.options.panicHandler(e)\n\t\t\t}\n\t\t}\n\t}()\n\n\tfor {\n\t\ttask()\n\t\ttask = \u0026lt;-p.queue\n\t\tif task == nil {\n\t\t\tbreak\n\t\t}\n\t\tp.doTaskN.Add(1)\n\t\tp.queueLen.Add(-1)\n\t}\n}\nfunc (p *GoPool) shrink() {\n\tticker := time.NewTicker(p.options.shrinkPeriod)\n\tdefer ticker.Stop()\n\n\tfor {\n\t\tselect {\n\t\tcase \u0026lt;-ticker.C:\n\t\t\tdoTaskN := p.doTaskN.Load()\n\t\t\tp.doTaskN.Store(0)\n\t\t\tif doTaskN \u0026lt; p.options.tasksBelowN {\n\t\t\t\tcloseN := p.workerN.Load() - p.options.minWorkers\n\t\t\t\tfor closeN \u0026gt; 0 {\n\t\t\t\t\tp.queue \u0026lt;- nil\n\t\t\t\t\tcloseN--\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n",
@@ -23,13 +44,6 @@
       "Description": "op 由于工作需要，要处理本科毕业生的毕业论文上报 jyb 抽检。需要将学生的论文 pdf 文档中的摘要里面的关键词提取出来，再填充到 excel 表格里面。学生的关键词情况示例如下：\u003cbr /\u003e\u003cbr /\u003e关键词:Python 多线程 目标检测 Python Flask 框架\u003cbr /\u003e\u003cbr /\u003e其中，\u003cbr /\u003e（ 1 ）关键词后面的冒号，有的学生没有，有的学生有\u003cbr /\u003e（ 2 ）关键词最多 6 个，有的学生可能只有 3 个\u003cbr /\u003e（ 3 ）关键词之间有 1-4 个空格\u003cbr /\u003e（ 4 ）关键词的最后结束应该是换行符\\n ，这个不确定，我查了资料应该是换行符。\u003cbr /\u003e\u003cbr /\u003e请问规则该怎么写呢？",
       "Author": "Takizawa",
       "PubDate": "2023-09-12T07:53:55Z"
-    },
-    {
-      "Title": "紧跟时事，如何看待苹果手机 5g 角标“造假” - 问与答",
-      "Link": "https://www.v2ex.com/t/973056",
-      "Description": "\u003cp\u003e带着水平聊，不要骂战。聊出水平，聊出学术修养。\u003c/p\u003e\n\u003cp\u003e如果安卓机这么搞，大家如何评论。\u003c/p\u003e\n",
-      "Author": "jamosLi",
-      "PubDate": "2023-09-12T07:53:14Z"
     },
     {
       "Title": "投诉圆通快递无果，遇到了一个全新的网购被骗套路 - 生活",
@@ -240,6 +254,13 @@
       "Description": "\u003cp\u003e有的估计是鼻炎；\n有的喉咙不知咋的 一会咳嗽  长年发出‘en ，en （第四声）’声音很大；\u003c/p\u003e\n\u003cp\u003e总之不同的人不同的声音；\u003c/p\u003e\n\u003cp\u003e主要是频次很高很高；有时候真的是一分钟 4-6 次，很多时候没办法工作，会情不自禁的去数次数。。\u003c/p\u003e\n\u003cp\u003e带耳机也堵不住，戴时间长了耳朵又难受；太折磨人了；\u003c/p\u003e\n\u003cp\u003e你们有这种体会么；怎么搞！！！是不是要换家公司，但是换了可能又会遇到另一种声音吧；所以是不是应该反思下是不是自己的问题。。。\u003c/p\u003e\n",
       "Author": "lynn000",
       "PubDate": "2023-09-12T05:52:00Z"
+    },
+    {
+      "Title": "紧跟时事，如何看待苹果手机 5g 角标“造假” - 问与答",
+      "Link": "https://www.v2ex.com/t/973056",
+      "Description": "\u003cp\u003e带着水平聊，不要骂战。聊出水平，聊出学术修养。\u003c/p\u003e\n\u003cp\u003e如果安卓机这么搞，大家如何评论。\u003c/p\u003e\n",
+      "Author": "jamosLi",
+      "PubDate": "2023-09-12T07:53:14Z"
     },
     {
       "Title": "有没有前端厉害一点的大佬，想定制一个 vue 脚本 - 问与答",
