@@ -4,9 +4,44 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>有人知道钉钉本地头像文件，文件名的命名规则吗？ - 问与答</title>
+      <link>https://www.v2ex.com/t/973077</link>
+      <description>&lt;p&gt;&lt;code&gt;C:\Users\*\AppData\Roaming\DingTalk\*_v2\AvatarFiles&lt;/code&gt;&lt;/p&gt;&#xA;</description>
+      <author>JinTianYi456</author>
+      <pubDate>12 Sep 2023 08:33:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>c++多线程实现反向代理 QPS 达到 Haproxy/Nginx 的 3 倍 - 程序员</title>
+      <link>https://www.v2ex.com/t/973075</link>
+      <description>&lt;h2&gt;NiubiX.&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/shaovie/niubix&#34; rel=&#34;nofollow&#34;&gt;项目地址&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;实验性项目，NiubiX 只提供反向代理功能，大家轻拍有不好的地方可以留言或提 issue/pr.  觉得好就点个 star ，我会持续完善它&lt;/p&gt;&#xA;&lt;p&gt;与 Nginx/Haproxy 对比测试&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Linux 5.19.0-1030-gcp #32~22.04.1-Ubuntu&lt;br/&gt;&#xA;Instacne 1 GCP cloud VM, 2 cores, 4GB RAM 10.146.0.2 (nginx,haproxy, niubix run at here)&lt;br/&gt;&#xA;Instacne 2 GCP cloud VM, 2 cores, 4GB RAM 10.146.0.3 (backend, wrk run at here)  &lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;nginx version config&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;nginx version: nginx/1.18.0 (Ubuntu)&#xA;&#xA;server {&#xA;    listen       8082 reuseport;&#xA;    server_name  localhost;&#xA;&#xA;    access_log  off;&#xA;    error_log off;&#xA;&#xA;    location / {&#xA;        proxy_pass http://10.146.0.3:8080;&#xA;        proxy_set_header X-Real-IP $remote_addr;&#xA;        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#xA;    }&#xA;}&#xA;&#xA;root         516       1  0 Aug24 ?        00:00:00 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;&#xA;www-data  417322     516  0 12:13 ?        00:00:06 nginx: worker process&#xA;www-data  417323     516  0 12:13 ?        00:00:08 nginx: worker process&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;strong&gt;haproxy version config&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;HAProxy version 2.4.22-0ubuntu0.22.04.2 2023/08/14&#xA;&#xA;listen niubix&#xA;    bind 0.0.0.0:8083&#xA;    mode http&#xA;    option forwardfor&#xA;    server s1 10.146.0.3:8080&#xA;&#xA;ps -eLf | grep haproxy&#xA;root      449421       1  449421  0    1 15:11 ?        00:00:00 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid -S /run/haproxy-master.sock&#xA;haproxy   449423  449421  449423  0    2 15:11 ?        00:00:05 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid -S /run/haproxy-master.sock&#xA;haproxy   449423  449421  449429  0    2 15:11 ?        00:00:05 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid -S /run/haproxy-master.sock&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;&lt;strong&gt;单独测试后端程序处理能力, 确保不存在吞吐量瓶颈&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;run at 10.146.0.2&#xA;&#xA;wrk -t 2 -c 100 -d 10s  http://10.146.0.3:8080/xxx&#xA;Running 10s test @ http://10.146.0.3:8080/xxx&#xA;  2 threads and 100 connections&#xA;  Thread Stats   Avg      Stdev     Max   +/- Stdev&#xA;    Latency   520.95us  203.98us   4.09ms   68.03%&#xA;    Req/Sec    59.25k     2.68k   63.62k    52.50%&#xA;  1179133 requests in 10.00s, 173.17MB read&#xA;Requests/sec: 117888.45&#xA;Transfer/sec:     17.31MB&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;为了数据真实性，我只取了 1 次测试结果，连续对 3 个服务测试截图&#xA;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://picx.zhimg.com/80/v2-835d6ae5863fb9643e82420ed1a18b1c_1440w.png?source=d16d100b&#34;/&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;对于 nginx 的数据声明一下：只有偶尔能跑到 1.7w 的 qps ，如果 proxy_pass &lt;a href=&#34;http://10.146.0.3:8080%3B&#34; rel=&#34;nofollow&#34;&gt;http://10.146.0.3:8080;&lt;/a&gt; 换到 127.0.0.1:8080 ，qps 能到 9000 qps ，至于局域网内为什么这么低通过 strace 也没看到异常，而且 cpu 也通跑满，不知道它在干嘛&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://pica.zhimg.com/80/v2-d5ae358121a2c93e4544cbea1925a020_1440w.png?source=d16d100b&#34;/&gt;&#xA;tcpdump tcp port 8080 抓包查看 niubix 实际数据，包含 X-Real-IP, XFF ，并且响应在微秒级&lt;/p&gt;&#xA;&lt;h4&gt;目前具备功能：&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;master/worker 模式，worker 采用多线程，支持配置优雅的 Reload(像 nginx 一样)，master 还是守护进程，当 worker 进程异常会马上 fork 一个新的&lt;/li&gt;&#xA;&lt;li&gt;只支持 Linux （将来也不准备跨平台）&lt;/li&gt;&#xA;&lt;li&gt;主体逻辑无锁，简单高效，可靠&lt;/li&gt;&#xA;&lt;li&gt;优雅的 acceptor/connector ，高效实现异步监听+连接&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4&gt;测试声明&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;niubix 仅提供反向代理功能&lt;/li&gt;&#xA;&lt;li&gt;niubix 支持 X-Real-IP,  X-Forwarded-For, 其他 Header 并没有解析  &lt;/li&gt;&#xA;&lt;li&gt;http parser 只是简单的解析, 并没有完全实现&lt;/li&gt;&#xA;&lt;li&gt;只是初步测试, 并没有做冒烟测试和稳定性测试以及多条件下复杂测试&lt;/li&gt;&#xA;&lt;li&gt;niubix 均衡策略使用的是 roundrobin(别的也还没实现呢), nginx/haproxy 也是一样的策略&lt;/li&gt;&#xA;&lt;li&gt;backend 测试程序 code&lt;/li&gt;&#xA;&lt;li&gt;niubix 不解析 response 内容&lt;/li&gt;&#xA;&lt;li&gt;功能逐步完善中, 基本框架是过硬的, 我相信这是一个好的开始&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4&gt;接下来开发计划&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Better HTTP parser&lt;/li&gt;&#xA;&lt;li&gt;TCP protocol + Proxy Protocol&lt;/li&gt;&#xA;&lt;li&gt;Https&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>shaoyie</author>
+      <pubDate>12 Sep 2023 08:32:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>iPhone 通话时无网络咋回事 - iPhone</title>
+      <link>https://www.v2ex.com/t/973074</link>
+      <description>&lt;p&gt;背景：1. 不使用 wifi 2. 装了 2 个电话卡，卡 1 移动的，卡 2 电信卡 3.平常正常使用卡 2 流量&#xA;现象：卡 1 通话时，卡 2 没有网络。导致通话时想找找资料很不方便&#xA;这是正常现象吗，咋解决&lt;/p&gt;&#xA;</description>
+      <author>undertow</author>
+      <pubDate>12 Sep 2023 08:31:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>V2 用的端口每天被封，咋办 - 问与答</title>
+      <link>https://www.v2ex.com/t/973071</link>
+      <description>&lt;p&gt;用的 v2 wss 几乎每天早上 6 点的样子，端口就被封，需要更换端口&lt;/p&gt;&#xA;&lt;p&gt;这可烦死人了。。&lt;/p&gt;&#xA;</description>
+      <author>icoming</author>
+      <pubDate>12 Sep 2023 08:29:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>P2P2 网络下的社交软件是如何实现消息推送的？ - 程序员</title>
+      <link>https://www.v2ex.com/t/973070</link>
+      <description>&lt;p&gt;前段时间了解到一个基于 P2P 网络的社交软件 WireMin ，自称是去中心化的，不存在服务器，也就不会宕机；且每个节点之间是平等的，永远不会被封号。&#xA;我的理解是，P2P 网络最大的弊病之一就是收消息延迟很高，全靠缘分。&#xA;但 WireMin 感觉消息通知还是相对及时的，用了一段时间感觉也还挺安全，适合畅所欲言。&#xA;想深入研究下安全性和原理，但他们官网都是英语的，看起来太费劲。&lt;a href=&#34;https://wiremin.org/&#34; rel=&#34;nofollow&#34;&gt;https://wiremin.org/&lt;/a&gt; 有懂的吗？&lt;/p&gt;&#xA;</description>
+      <author>kheow</author>
+      <pubDate>12 Sep 2023 08:27:03 +0000</pubDate>
+    </item>
+    <item>
       <title>我想骑公路车进行长达 20 多天的旅行，请问可行吗。有没有装备作弊清单。 - 旅行</title>
       <link>https://www.v2ex.com/t/973069</link>
-      <description>&lt;p&gt;由于家里需要装修，我不得不出去呆一段时间，又不想浪费银子住酒店，本人不阔，想着干一件从来没干过的事情，打算骑上我的爱车出去旅游得了，在京东上转了半天，搜集了一些基本装备但是又担心带不上那么多东西。我希望能够带上一些基本必须装备能够刚好塞进一个登山背包的。我也想着能不能隔几天住一次宾馆，搞一个单人帐篷什么的。&lt;/p&gt;&#xA;&lt;p&gt;有没有经验人士指点一二。 非常感谢🙇&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;由于家里需要装修，我不得不出去呆一段时间，又不想浪费银子住酒店，本人不阔，想着干一件从来没干过的事情，打算骑上我的爱车出去旅游得了，在京东上转了半天，搜集了一些基本装备但是又担心带不上那么多东西。我希望能够带上一些基本必须装备能够刚好塞进一个登山背包的。我也想着能不能隔几天住一次宾馆，搞一个单人帐篷什么的。&lt;/p&gt;&#xA;&lt;p&gt;有没有经验人士指点一二。 非常感谢🙇&lt;/p&gt;&#xA;&lt;p&gt;这是本人的车。 座高已经调整过了，这是以前的照片，请骑行老手放心&#xA;&lt;img alt=&#34;Imgur&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/wl0lOgO.jpg&#34;/&gt;&lt;/p&gt;&#xA;</description>
       <author>ChrisFreeMan</author>
       <pubDate>12 Sep 2023 08:21:06 +0000</pubDate>
     </item>
