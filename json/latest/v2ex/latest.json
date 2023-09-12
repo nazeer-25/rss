@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "别人移动我的自行车，把别人的车刮了，该赔偿吗？ - 问与答",
+      "Link": "https://www.v2ex.com/t/972977",
+      "Description": "\u003cp\u003e自行车停放在楼下，有人把我的车移动到了别的位置，然后车倒了把旁边的汽车刮了，这跟我完全没关系吧？现在问题是这个地方没监控，行车记录仪没拍到，车主的意思是我得自己找监控来证明是别人移动的并找到那个人，不然就得赔偿他，要是没监控的话这题怎么解呢？\u003c/p\u003e\n",
+      "Author": "coolsome",
+      "PubDate": "2023-09-12T03:23:23Z"
+    },
+    {
+      "Title": "postgresql 的 text 类型是不是很方便 - 问与答",
+      "Link": "https://www.v2ex.com/t/972976",
+      "Description": "\u003cp\u003e我公司用的是 mysql ，我自己使用过 postgresql ，我感觉日常使用上，这两个没有什么不同。但是对我来说，postgres 有一个优势：它的 text 类型不需要指定长度，而且根据\u003ca href=\"https://www.postgresql.org/docs/current/datatype-character.html\" rel=\"nofollow\"\u003e这个文档\u003c/a\u003e\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eThere is no performance difference among these three types, apart from increased storage space when using the blank-padded type, and a few extra CPU cycles to check the length when storing into a length-constrained column. While character(n) has performance advantages in some other database systems, there is no such advantage in PostgreSQL; in fact character(n) is usually the slowest of the three because of its additional storage costs. In most situations text or character varying should be used instead.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e这个不需要指定长度的类型更被推荐使用。\n我平时创建的表，大部分字段其实都是字符串类型，不用思考这个字段有多长，这不是一件非常方便的事情吗？为什么新项目选型的时候，大家还要用 mysql 呢\u003c/p\u003e\n",
+      "Author": "pxiphx891",
+      "PubDate": "2023-09-12T03:22:14Z"
+    },
+    {
+      "Title": "接私活的来谈谈 - 站长",
+      "Link": "https://www.v2ex.com/t/972975",
+      "Description": "\u003cp\u003e实力集团诚邀代理加盟\u003c/p\u003e\n\u003cp\u003e70%点位分红 + 人头费\u003c/p\u003e\n\u003cp\u003e诚邀｜ SEO ｜劫持｜站长｜爬虫｜渗透｜主播｜个人及团队加盟。\u003c/p\u003e\n\u003cp\u003eTelegram：Nian792   QQ：2027352257   微：kyqp59568\u003c/p\u003e\n",
+      "Author": "seoKy595",
+      "PubDate": "2023-09-12T03:22:04Z"
+    },
+    {
       "Title": "推广一波我写的 Mongoose 插件， mongoose-find-by-reference - Node.js",
       "Link": "https://www.v2ex.com/t/972974",
       "Description": "\u003cp\u003e\u003ca href=\"https://github.com/cheezone/mongoose-find-by-reference\" rel=\"nofollow\"\u003ehttps://github.com/cheezone/mongoose-find-by-reference\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e相信不少使用 Mongoose 的朋友都遇到过，想要在对参考字段的值进行搜索。\u003c/p\u003e\n\u003cp\u003e参考字段，也就是类似这样的字段：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e{\n    type: MongooseSchema.Types.ObjectId,\n    ref: 'XXX',\n}\n  \n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e例如我们有 Cat 这个 Model ，它有 sex （性别）、parents （父母）和 owner （主人）三个属性，ref 分别是 'Cat' 和 'Person'； Person 则有 name （名字）一个属性。\u003c/p\u003e\n\u003cp\u003e然后我们想要查询性别为女、父母的主人名字是 'Dean' 的猫，我们可能会这么写：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-ts\"\u003econst result = await catModel\n  .find({\n    $and: {\n      parents: {\n        'owner.name': 'Dean',\n      },\n      sex: 0,\n    },\n  })\n  .exec();\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但我们知道，这样只会报错。因为 parents 此刻是 ObjectId ，populate 是 Mongoose 的功能，不是 MongoDB 的。\u003c/p\u003e\n\u003cp\u003e假设使用 MongoDB 的 $lookup 呢，又麻烦，又丧失了 Mongoose 的不少便捷功能。\u003c/p\u003e\n\u003cp\u003e假设构建一个 method ，手动把搜索条件替换成符合搜索条件的 ObjectId 数组，又得特事特办，很麻烦。\u003c/p\u003e\n\u003cp\u003e所以，不如现在来使用 MongooseFindByReference 模块，它会自动把对参考字段的搜索，替换成符合搜索条件的 ObjectId 数组。\u003c/p\u003e\n\u003cp\u003e使用后，搜索条件就会被替换成：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-ts\"\u003econst oldConditions = {\n    $and: {\n      parents: {\n        'owner.name': 'Dean',\n      },\n      sex: 0,\n    },\n  };\n\nconst newConditions = {\n  $and: {\n    parents: {\n      $in: [/* 符合条件的猫的 ObjectId 数组 */],\n    },\n    sex: 0,\n  },\n};\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e欢迎下载，欢迎给 Star 嘿嘿\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003enpm i mongoose-find-by-reference\n\u003c/code\u003e\u003c/pre\u003e\n",
