@@ -28,6 +28,11 @@
       <description>&lt;p&gt;如题，去年6月一次偶然的机会从同事口中得知了DPDK可以高性能处理网络数据（非常感谢这位同事，哈哈），然后进行了一番搜索发现了ebpf这个黑科技，从此踏入ebpf的不归路(又掉了不少头发)。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;首先从xdp开始学起，了解到了 &lt;a href=&#34;https://github.com/xdp-project/xdp-tutorial&#34;&gt;https://github.com/xdp-project/xdp-tutorial&lt;/a&gt; 这个项目，安装编译环境就是一个大坑,直接劝退3个月，直到去年9月份又重新捡起来，把环境搭建成功，开始专研xdp-tutorial中的每个实验。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;后面又接触到cilium/ebpf这个库，然后把xdp-tutorial中的实验用这个库抄袭实现了一遍，顺便还把其它几个库的实验也抄了一遍，感兴趣的可以看看 &lt;a href=&#34;https://github.com/Zhouchaowen/ebpf_labs&#34;&gt;https://github.com/Zhouchaowen/ebpf_labs&lt;/a&gt; 。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;在后面接着断断续续的了解xdp的一些知识，有一次想通过xdp实现L4层的负载均衡功能，搞了几天也没有成功(好像是校验和的问题)，再次被劝退，后面也陆陆续续在了解，但是相关资料还是太少了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;直到今年4月开始学习k8s，接触到cilium这个网络插件，看了看它的源码，简直爆鸡儿难(这是人能看懂的吗？)。后来经过反复放弃，慢慢的看懂了一点点，了解到了tc ebpf和如何加载它的知识。碰巧又看到了 &lt;a href=&#34;https://github.com/gojue/ecapture&#34;&gt;https://github.com/gojue/ecapture&lt;/a&gt; 这个项目，发现很有趣，交流群里cfc4n大佬非常热心,问了不少问题都回答了(非常感谢)，又结合刚了解的tc ebpf然后产生了实现一个http接口生成器的想法(其实是我们内部一直缺少接口文档，全靠手撸，我懒就不想写这个接口文档，哈哈哈哈)，然后立刻动手建立项目，一个星期后写了第一版代码简单测试修改了一些bug发了第一个版本v0.0.1。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;目前在Linux 5.4.0-156-generic x86_64以上的内核版本应可以使用，但项目还非常初始，可能会有许多问题，希望使用的过程中有问题可以反馈，哈哈哈。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;项目地址：&lt;a href=&#34;https://github.com/Zhouchaowen/prism&#34;&gt;https://github.com/Zhouchaowen/prism&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;直接运行:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;prism -n &amp;lt;device_name&amp;gt; # device_name 网卡名称&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;Docker方式运行:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;docker run --net host --privileged --name prism -itd zmosquito/prism:v0.0.1 ./prism -n &amp;lt;device_name&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;演示视频：&lt;a href=&#34;https://www.bilibili.com/video/BV1tK4y1c7rh/&#34;&gt;https://www.bilibili.com/video/BV1tK4y1c7rh/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;感谢star，哈哈&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>sync包once小问题</title>
+      <link>https://studygolang.com/topics/16711#reply0</link>
+      <description>&lt;p&gt;Do函数里面 刚开始进来的时候，直接用0.done == 0 判断也能达到效果，atomic.LoadUint32(&amp;amp;o.done) == 0目的是啥，为了很多goroutine同时调用Do函数，减少o.m.Lock()的调用吗&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>go新人求指导go完整站点部署情况</title>
       <link>https://studygolang.com/topics/16700#reply5</link>
       <description>&lt;p&gt;我是新人，从php转go。&#xA;请教下如我后端用gin框架运行了go程序，端口设定为9001，提供接口。&#xA;那么界面是否就是用nginx搭建静态资源站点，伪静态指向到后端的用127.0.0.1:9001？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;有没有更合适的方案架设go完整站点？请指教，谢谢。&lt;/p&gt;&#xA;</description>
@@ -166,11 +171,6 @@
       <title>腾龙娱乐游戏账号在线注册网址www.TL20020.com第一财经</title>
       <link>https://studygolang.com/topics/16712#reply0</link>
       <description>&lt;p&gt;腾龙公司直属,【微信 nhmjok88备用微】【Q3546470658】腾龙公司会员开户注册官网w ww.TL20020.com网址复制到浏览器打开注册即可,取款存款联系游戏页面在线客服办理。腾龙娱乐公司位于老街双凤塔旁,腾龙公司是一家现场实体在线的信誉老牌娱乐公司,公平公正公开 资金安全二十四小时在线办理，客服24小时在线【诚聘代理】!资金安全,大额无忧,信誉老品牌!&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>腾龙娱乐公司客服怎么联系www.TL20020.com第一财经</title>
-      <link>https://studygolang.com/topics/16711#reply0</link>
-      <description>&lt;p&gt;腾龙公司注册w ww.TL20020.com——《微nhmjok88》/—《Q—3546470658》正规实体三合一娱乐，公司秉承公平，公正，公开为宗旨，联合出品免责声明：本文来自腾讯新闻客户端自媒体，该文观点仅代表作者本人，搜狐号、网易号、企鹅号、百家号系信息发布平台，本平台仅提供信息存储服来源：央视网、人民网、搜狐财经、新华网、凤凰资讯、网易新闻、知乎日报、热点资讯、搜狐新闻、新浪新闻。&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>腾龙24小时在线客服开户现场认证www.TL20020.com第一财经</title>
