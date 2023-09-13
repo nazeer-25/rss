@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Bun_python 一个让你在 bun 中直接使用 esm 语法导入 Python 包的库 - 分享创造</title>
+      <link>https://www.v2ex.com/t/973347</link>
+      <description>&lt;p&gt;看大家都在聊 bun 1.0 ，我也来凑个热闹&lt;/p&gt;&#xA;&lt;p&gt;项目地址 &lt;a href=&#34;https://github.com/codehz/bun_python&#34; rel=&#34;nofollow&#34;&gt;https://github.com/codehz/bun_python&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;demo 代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-typescript&#34;&gt;import * as np from &#39;python:numpy&#39;;&#xA;import * as plt from &#39;python:matplotlib.pyplot&#39;;&#xA;&#xA;const xpoints = np.array([1, 8]);&#xA;const ypoints = np.array([3, 10]);&#xA;&#xA;plt.plot(xpoints, ypoints);&#xA;plt.show();&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;迁移自 deno_python ，主要用于测试和学习 bun 的 FFI 和 plugin 机制的使用&lt;/p&gt;&#xA;&lt;p&gt;此外发现 bun 的 ffi 性能确实值得一提，思路和 deno ffi 一模一样，api 也大差不差，但性能却能打得过 deno ffi （当然 node napi 肯定也能秒），bun ffi 的这个思路，我在很久之前也在&lt;a href=&#34;https://github.com/codehz/tjs&#34; rel=&#34;nofollow&#34;&gt;tjs&lt;/a&gt;（该项目已废弃）也尝试过，有趣的是，同样用的 zig ，同样用的 tcc 做 native bridge ，只不过我直接把 tcc 的 api 接驳到 js 里使用，而 bun 则是生成一个 c wrapper 代码来做 bridge ，用 tcc 直接 jit 出转换的代码，性能又有进一步提升，加上 JavaScriptCore 引擎自己对 ffi 的优化（特别是相比于 v8 ）性能几乎提到了 luajit 的那种水平，deno 虽然 api 看着类似，但实现也完全不同，这大概是性能差距的来源&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;benchmark with deno_python&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.v2ex.co/1k96Q8Ex.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;此外 bun 的 plugin 机制可以直接定义 import 导入语句的行为，由于它是直接和引擎集成，因此相比于 bundle/transpiler/preprocess 的方案，它可以支持 plugin 直接给导入的模块返回对象——而无需生成一系列 export 代码（总所周知，esm 的 named export 需要静态确定），在这个场景下，实现一句话 &lt;code&gt;import * as torch from &#39;python:torch&#39;;&lt;/code&gt; 即可使用 pytorch&lt;/p&gt;&#xA;&lt;p&gt;某种意义上在 bun 里实现 deno 的 url import 也是可能的，就看有没有人做（）&lt;/p&gt;&#xA;&lt;p&gt;（话虽如此，我也不建议在玩具场景外使用 bun_python 这个库来加载和使用 python ，首先你丧失了最重要的进程隔离，其次我这个库实现的也比较粗糙，很多边界问题都没考虑到）&lt;/p&gt;&#xA;</description>
+      <author>codehz</author>
+      <pubDate>13 Sep 2023 04:19:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>推荐关于法律现实实践或者科普的资源 - 问与答</title>
+      <link>https://www.v2ex.com/t/973346</link>
+      <description>&lt;p&gt;关于刑法，公司法，合同法，劳动法以及财务分析它们的现实实践以及科普的或者各种案例的相关资源网站或者公众号&lt;/p&gt;&#xA;&lt;p&gt;在这里发现一个觉得不错的网站&lt;/p&gt;&#xA;&lt;p&gt;跟小盛律师学 &lt;a href=&#34;http://selfboot.cn/links&#34; rel=&#34;nofollow&#34;&gt;selfboot.cn/links&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>wanderingaround</author>
+      <pubDate>13 Sep 2023 04:14:56 +0000</pubDate>
+    </item>
+    <item>
+      <title>当新品发布会，比较少讨论新品而积极讨论热搜猜想问题的时候 - 问与答</title>
+      <link>https://www.v2ex.com/t/973345</link>
+      <description>&lt;p&gt;当新品发布会，比较少讨论新品而积极讨论热搜猜想问题的时候，&lt;/p&gt;&#xA;&lt;p&gt;说明什么&lt;/p&gt;&#xA;</description>
+      <author>tencentlove1</author>
+      <pubDate>13 Sep 2023 04:13:18 +0000</pubDate>
+    </item>
+    <item>
       <title>一流的公司三流的操作 - 全球工单系统</title>
       <link>https://www.v2ex.com/t/973344</link>
       <description>&lt;p&gt;小开发者迫于几个地图都收 5 万的年费找到了号称国产之星的中科星图 datacloud ，一直说的都是企业认证就有每天 300 万的免费调用量，我们用了瓦片和一些接口服务，结果今天突然发现大量接口报错，登录后台才发现突然被限额到 5w 。&lt;/p&gt;&#xA;&lt;p&gt;收钱没问题我理解，可这种没公告没通知就直接变动玩法说实话我还是第一次见。&lt;/p&gt;&#xA;&lt;p&gt;作为发开发付费我是支持的，但是这种无厘头的操作实在跟几百亿的市值无法匹配。我也不敢买，说不定啥时候又不声不响的调整。&lt;/p&gt;&#xA;&lt;p&gt;还是老老实实用高德百度吧&lt;/p&gt;&#xA;</description>
