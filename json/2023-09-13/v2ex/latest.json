@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "请教 golang 大神如何实现一些 parsable/printable 的 enum 类型 - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/973349",
+      "Description": "\u003cp\u003e程序中一大堆 enum 类型，这些 enum 类型会参与 Json 的编解码、日志打印等等。\u003c/p\u003e\n\u003cp\u003e想到最起码的方式，必须为这个 enum 类型提供一堆在值和 string 的映射关系，比如使用[]string 或者 map[int]string 。这个肯定是每个 enum 少不了的代码。假设就是 String()吧。\u003c/p\u003e\n\u003cp\u003e但是对于 Unmarshal 、String 、Marshal 、Sacn 等接口，每个类型都得写一个么？在面向对象里面，只要基类实现了这几个接口，其他的 enum 都基于这个基类来实现就好了。\u003c/p\u003e\n\u003cp\u003eGolang 中如何避免大量的代码拷贝粘贴呢？\u003c/p\u003e\n",
+      "Author": "zhwguest",
+      "PubDate": "2023-09-13T04:27:57Z"
+    },
+    {
+      "Title": "有老哥用过惠普的 g2 雷电 3 扩展坞连接 mac 吗 - macOS",
+      "Link": "https://www.v2ex.com/t/973348",
+      "Description": "\u003cp\u003e在咸鱼 215 收了个 120w 的 hp g2 雷电 3 扩展坞\n\u003cimg alt=\"\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://img14.360buyimg.com/n1/s450x450_jfs/t1/104069/1/44357/67648/64fec127F9137d85c/8f694fda202f128e.jpg.avif\"/\u003e\u003c/p\u003e\n\u003cp\u003e京东链接:\u003ca href=\"https://item.jd.com/100047820644.html#crumb-wrap\" rel=\"nofollow\"\u003ehttps://item.jd.com/100047820644.html#crumb-wrap\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003emacbook 可以扩展双屏吗?\n这个扩展坞和 zbook 哪款扩展坞哪个性价比高一些啊?\n而且这款扩展坞在京东上为什么 230w 的会比 120w 的便宜啊,都是一样的规格.....\u003c/p\u003e\n",
+      "Author": "HJSKKDXG",
+      "PubDate": "2023-09-13T04:24:05Z"
+    },
+    {
       "Title": "Bun_python 一个让你在 bun 中直接使用 esm 语法导入 Python 包的库 - 分享创造",
       "Link": "https://www.v2ex.com/t/973347",
       "Description": "\u003cp\u003e看大家都在聊 bun 1.0 ，我也来凑个热闹\u003c/p\u003e\n\u003cp\u003e项目地址 \u003ca href=\"https://github.com/codehz/bun_python\" rel=\"nofollow\"\u003ehttps://github.com/codehz/bun_python\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003edemo 代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-typescript\"\u003eimport * as np from 'python:numpy';\nimport * as plt from 'python:matplotlib.pyplot';\n\nconst xpoints = np.array([1, 8]);\nconst ypoints = np.array([3, 10]);\n\nplt.plot(xpoints, ypoints);\nplt.show();\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e迁移自 deno_python ，主要用于测试和学习 bun 的 FFI 和 plugin 机制的使用\u003c/p\u003e\n\u003cp\u003e此外发现 bun 的 ffi 性能确实值得一提，思路和 deno ffi 一模一样，api 也大差不差，但性能却能打得过 deno ffi （当然 node napi 肯定也能秒），bun ffi 的这个思路，我在很久之前也在\u003ca href=\"https://github.com/codehz/tjs\" rel=\"nofollow\"\u003etjs\u003c/a\u003e（该项目已废弃）也尝试过，有趣的是，同样用的 zig ，同样用的 tcc 做 native bridge ，只不过我直接把 tcc 的 api 接驳到 js 里使用，而 bun 则是生成一个 c wrapper 代码来做 bridge ，用 tcc 直接 jit 出转换的代码，性能又有进一步提升，加上 JavaScriptCore 引擎自己对 ffi 的优化（特别是相比于 v8 ）性能几乎提到了 luajit 的那种水平，deno 虽然 api 看着类似，但实现也完全不同，这大概是性能差距的来源\u003c/p\u003e\n\u003cp\u003e\u003cimg alt=\"benchmark with deno_python\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.v2ex.co/1k96Q8Ex.png\"/\u003e\u003c/p\u003e\n\u003cp\u003e此外 bun 的 plugin 机制可以直接定义 import 导入语句的行为，由于它是直接和引擎集成，因此相比于 bundle/transpiler/preprocess 的方案，它可以支持 plugin 直接给导入的模块返回对象——而无需生成一系列 export 代码（总所周知，esm 的 named export 需要静态确定），在这个场景下，实现一句话 \u003ccode\u003eimport * as torch from 'python:torch';\u003c/code\u003e 即可使用 pytorch\u003c/p\u003e\n\u003cp\u003e某种意义上在 bun 里实现 deno 的 url import 也是可能的，就看有没有人做（）\u003c/p\u003e\n\u003cp\u003e（话虽如此，我也不建议在玩具场景外使用 bun_python 这个库来加载和使用 python ，首先你丧失了最重要的进程隔离，其次我这个库实现的也比较粗糙，很多边界问题都没考虑到）\u003c/p\u003e\n",
