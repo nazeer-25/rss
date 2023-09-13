@@ -4,6 +4,45 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>书香门第网站 http://www.txtnovel.vip/_电信无法访问_求教 - 宽带症候群</title>
+      <link>https://www.v2ex.com/t/973550</link>
+      <description>坐标 0571 ，电信宽带，http://www.txtnovel.vip/ 这个网站被墙掉或者网站把这边的 IP 给封掉了，但同 Wi-Fi 下有手机翻墙可以访问然而其他电脑/手机无法访问，该如何解决？&lt;br /&gt;&lt;br /&gt;网站提示 [ Access to www.txtnovel.vip was denied&lt;br /&gt;You don&#39;t have authorization to view this page.&lt;br /&gt;HTTP ERROR 403 ] &lt;br /&gt;&lt;br /&gt;华硕路由器上使用了 MerlinClash ，插件中将 *.txtnovel.vip 加入代理规则，台式机无法访问&lt;br /&gt;再将 &lt;a target=&#34;_blank&#34; href=&#34;http://doubleclick.net&#34; rel=&#34;nofollow noopener&#34;&gt;doubleclick.net&lt;/a&gt; 加入代理规则，台式机依然无法访问、安卓手机无法访问、苹果手机无法访问&lt;br /&gt;&lt;br /&gt;但在同一个 Wi-Fi 下，苹果手机开启手机上的 Surge 梯子并加入规则*.txtnovel.vip 、&lt;a target=&#34;_blank&#34; href=&#34;http://doubleclick.net&#34; rel=&#34;nofollow noopener&#34;&gt;doubleclick.net&lt;/a&gt; 就可以正常打开该网页&lt;br /&gt;同一个 Wi-Fi 下以及 4G 下，安卓手机开启手机上的 Clash 并按全局转发模式，无法访问&lt;br /&gt;&lt;br /&gt;另一个 Wi-Fi 下，笔记本电脑开启 Clash 并加入规则*.txtnovel.vip 、&lt;a target=&#34;_blank&#34; href=&#34;http://doubleclick.net&#34; rel=&#34;nofollow noopener&#34;&gt;doubleclick.net&lt;/a&gt; 无法访问，苹果手机开启 Surge 并加入规则*.txtnovel.vip 、&lt;a target=&#34;_blank&#34; href=&#34;http://doubleclick.net&#34; rel=&#34;nofollow noopener&#34;&gt;doubleclick.net&lt;/a&gt; 可以正常访问&lt;br /&gt;&lt;br /&gt;初级技术宅一枚，希望大神们可以给些建议或指导，我再去学习研究，谢谢！</description>
+      <author>ifisky</author>
+      <pubDate>13 Sep 2023 14:33:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>大佬们，除了 Copilot 还有什么提高开发效率的工具？ - 程序员</title>
+      <link>https://www.v2ex.com/t/973549</link>
+      <author>taogen</author>
+      <pubDate>13 Sep 2023 14:32:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>ConcurrentHashMap put 时 ，为什么 if(fh &gt;= 0) else if (f instanceof TreeBin) 求大佬解惑 - Java</title>
+      <link>https://www.v2ex.com/t/973547</link>
+      <description>&lt;h1&gt;ConcurrentHashMap  put 有步操作真没看懂&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;我只能放一部分源码 问题是一个 if 和 else if 我怎么也想不明白  Node 的 hash 值 肯定是正数，通过 spread(key.hashCode()) 方法得到的  无论是红黑树还是链表，hash 值都是正数，所以这个 if 恒成立呀为啥还有个 else if 判断是否是红黑树，是红黑树的话用链表的方式再第一个 if 里插入不也错误的吗&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;pre&gt;&lt;code&gt;final V putVal(K key, V value, boolean onlyIfAbsent) {&#xA;        if (key == null || value == null) throw new NullPointerException();&#xA;        int hash = spread(key.hashCode());&#xA;        int binCount = 0;&#xA;        for (Node&amp;lt;K,V&amp;gt;[] tab = table;;) {&#xA;            Node&amp;lt;K,V&amp;gt; f; int n, i, fh;&#xA;            if (tab == null || (n = tab.length) == 0)&#xA;                tab = initTable();&#xA;            else if ((f = tabAt(tab, i = (n - 1) &amp;amp; hash)) == null) {&#xA;                if (casTabAt(tab, i, null,&#xA;                             new Node&amp;lt;K,V&amp;gt;(hash, key, value, null)))&#xA;                    break;                   // no lock when adding to empty bin&#xA;            }&#xA;            else if ((fh = f.hash) == MOVED)&#xA;                tab = helpTransfer(tab, f);&#xA;            else {&#xA;                V oldVal = null;&#xA;                synchronized (f) {&#xA;                    if (tabAt(tab, i) == f) {&#xA;                        if (fh &amp;gt;= 0) {   // Node 的 hash 值 肯定是正数，通过 spread(key.hashCode()) 方法得到的  无论是红黑树还是链表，hash 值都是正数，所以这个 if 恒成立呀&#xA;                            binCount = 1;&#xA;                            for (Node&amp;lt;K,V&amp;gt; e = f;; ++binCount) {&#xA;                                K ek;&#xA;                                if (e.hash == hash &amp;amp;&amp;amp;&#xA;                                    ((ek = e.key) == key ||&#xA;                                     (ek != null &amp;amp;&amp;amp; key.equals(ek)))) {&#xA;                                    oldVal = e.val;&#xA;                                    if (!onlyIfAbsent)&#xA;                                        e.val = value;&#xA;                                    break;&#xA;                                }&#xA;                                Node&amp;lt;K,V&amp;gt; pred = e;&#xA;                                if ((e = e.next) == null) {&#xA;                                    pred.next = new Node&amp;lt;K,V&amp;gt;(hash, key,&#xA;                                                              value, null);&#xA;                                    break;&#xA;                                }&#xA;                            }&#xA;                        }&#xA;                        else if (f instanceof TreeBin) {  // 对应上面 if TreeBin 继承自 Node Node 的 hashCode 是他的 key 和 value 的异或，这一点也奇怪 如果是看 Node 的 hash 的话，那更是都有可能了，怎么能这么搞&#xA;                            Node&amp;lt;K,V&amp;gt; p;&#xA;                            binCount = 2;&#xA;                            if ((p = ((TreeBin&amp;lt;K,V&amp;gt;)f).putTreeVal(hash, key,&#xA;                                                           value)) != null) {&#xA;                                oldVal = p.val;&#xA;                                if (!onlyIfAbsent)&#xA;                                    p.val = value;&#xA;                            }&#xA;                        }&#xA;                    }&#xA;                }&#xA;                if (binCount != 0) {&#xA;                    if (binCount &amp;gt;= TREEIFY_THRESHOLD)&#xA;                        treeifyBin(tab, i);&#xA;                    if (oldVal != null)&#xA;                        return oldVal;&#xA;                    break;&#xA;                }&#xA;            }&#xA;        }&#xA;        addCount(1L, binCount);&#xA;        return null;&#xA;    }&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
+      <author>weidalao</author>
+      <pubDate>13 Sep 2023 14:25:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>MacBook Pro i5 2.3GHz 13 英寸 (2017 年中) 256GB 现在市场回收能到多少钱 - Apple</title>
+      <link>https://www.v2ex.com/t/973545</link>
+      <author>YoungKing6</author>
+      <pubDate>13 Sep 2023 14:24:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>有没有免费的域名推荐的 - 问与答</title>
+      <link>https://www.v2ex.com/t/973544</link>
+      <author>ccclo</author>
+      <pubDate>13 Sep 2023 14:24:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于 obsidian 复制图片无法在本地生成 - 问与答</title>
+      <link>https://www.v2ex.com/t/973543</link>
+      <description>我的 typora 和 obsidian 都设置文件中的图片存储的相对路径为&#34;./assets&#34;&lt;br /&gt;当在文件中复制单个图片时都可以正常再 assets 文件夹内生成，但在全文复制或复制一段图片和文字时，obsidian 会出问题&lt;br /&gt;比如：我本地有一个 markdown 文档，我要复制一段图片和文字。当我复制到 typora 时，图片是单独在当前目录下的 assets 文件夹内再生成一份，文档中引用的也是相对路径&#34;./assets&#34;。但复制到 obsidian ，图片并不会在当前目录下的 assets 文件夹内再生成一份，文档中引用的是源文件中图片的绝对路径&#34;file:///E:/typora/assets&#34;(即使我的源文件也是使用的相对路径)。&lt;br /&gt;请教各位大佬，有没有什么插件之类的可以解决这个问题</description>
+      <author>SlanWyf</author>
+      <pubDate>13 Sep 2023 14:21:31 +0000</pubDate>
+    </item>
+    <item>
       <title>日版 iPhone 购买攻略 - Apple</title>
       <link>https://www.v2ex.com/t/973542</link>
       <description>&lt;p&gt;由于日版 iPhone 支持实体卡和 esim 以及 FaceTime 等功能可以使用的好处，很多人都对日版 iPhone 感兴趣。&#xA;本人在日本买过很多苹果设备，希望能够给大家一点提醒。&lt;/p&gt;&#xA;&lt;p&gt;1.由于偷税漏税现象严重，日本的 Apple store 目前无法退税。第三方店铺苹果刚发售的产品通常没有货。&#xA;2.直接线上订单到转运仓大概率直接被苹果砍单，转运仓地址基本上都是苹果的黑名单。&#xA;3.线下直接购买的话大概率让你分期购买，必须要有在留卡，并且有朋友审核不通过。&lt;/p&gt;&#xA;&lt;p&gt;推荐的购买方法是网上下单送到在日本的朋友家。&#xA;需要速度安全的话 EMS 直接寄回国内，大概两三天就到了。&#xA;能接受慢一点的话让朋友寄到转运仓转运到中国，时效取决转运仓的线路。&lt;/p&gt;&#xA;</description>

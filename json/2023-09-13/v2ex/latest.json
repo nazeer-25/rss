@@ -4,6 +4,48 @@
   "Description": "",
   "Items": [
     {
+      "Title": "书香门第网站 http://www.txtnovel.vip/_电信无法访问_求教 - 宽带症候群",
+      "Link": "https://www.v2ex.com/t/973550",
+      "Description": "坐标 0571 ，电信宽带，http://www.txtnovel.vip/ 这个网站被墙掉或者网站把这边的 IP 给封掉了，但同 Wi-Fi 下有手机翻墙可以访问然而其他电脑/手机无法访问，该如何解决？\u003cbr /\u003e\u003cbr /\u003e网站提示 [ Access to www.txtnovel.vip was denied\u003cbr /\u003eYou don't have authorization to view this page.\u003cbr /\u003eHTTP ERROR 403 ] \u003cbr /\u003e\u003cbr /\u003e华硕路由器上使用了 MerlinClash ，插件中将 *.txtnovel.vip 加入代理规则，台式机无法访问\u003cbr /\u003e再将 \u003ca target=\"_blank\" href=\"http://doubleclick.net\" rel=\"nofollow noopener\"\u003edoubleclick.net\u003c/a\u003e 加入代理规则，台式机依然无法访问、安卓手机无法访问、苹果手机无法访问\u003cbr /\u003e\u003cbr /\u003e但在同一个 Wi-Fi 下，苹果手机开启手机上的 Surge 梯子并加入规则*.txtnovel.vip 、\u003ca target=\"_blank\" href=\"http://doubleclick.net\" rel=\"nofollow noopener\"\u003edoubleclick.net\u003c/a\u003e 就可以正常打开该网页\u003cbr /\u003e同一个 Wi-Fi 下以及 4G 下，安卓手机开启手机上的 Clash 并按全局转发模式，无法访问\u003cbr /\u003e\u003cbr /\u003e另一个 Wi-Fi 下，笔记本电脑开启 Clash 并加入规则*.txtnovel.vip 、\u003ca target=\"_blank\" href=\"http://doubleclick.net\" rel=\"nofollow noopener\"\u003edoubleclick.net\u003c/a\u003e 无法访问，苹果手机开启 Surge 并加入规则*.txtnovel.vip 、\u003ca target=\"_blank\" href=\"http://doubleclick.net\" rel=\"nofollow noopener\"\u003edoubleclick.net\u003c/a\u003e 可以正常访问\u003cbr /\u003e\u003cbr /\u003e初级技术宅一枚，希望大神们可以给些建议或指导，我再去学习研究，谢谢！",
+      "Author": "ifisky",
+      "PubDate": "2023-09-13T14:33:01Z"
+    },
+    {
+      "Title": "大佬们，除了 Copilot 还有什么提高开发效率的工具？ - 程序员",
+      "Link": "https://www.v2ex.com/t/973549",
+      "Description": "",
+      "Author": "taogen",
+      "PubDate": "2023-09-13T14:32:25Z"
+    },
+    {
+      "Title": "ConcurrentHashMap put 时 ，为什么 if(fh \u003e= 0) else if (f instanceof TreeBin) 求大佬解惑 - Java",
+      "Link": "https://www.v2ex.com/t/973547",
+      "Description": "\u003ch1\u003eConcurrentHashMap  put 有步操作真没看懂\u003c/h1\u003e\n\u003cblockquote\u003e\n\u003cp\u003e我只能放一部分源码 问题是一个 if 和 else if 我怎么也想不明白  Node 的 hash 值 肯定是正数，通过 spread(key.hashCode()) 方法得到的  无论是红黑树还是链表，hash 值都是正数，所以这个 if 恒成立呀为啥还有个 else if 判断是否是红黑树，是红黑树的话用链表的方式再第一个 if 里插入不也错误的吗\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003efinal V putVal(K key, V value, boolean onlyIfAbsent) {\n        if (key == null || value == null) throw new NullPointerException();\n        int hash = spread(key.hashCode());\n        int binCount = 0;\n        for (Node\u0026lt;K,V\u0026gt;[] tab = table;;) {\n            Node\u0026lt;K,V\u0026gt; f; int n, i, fh;\n            if (tab == null || (n = tab.length) == 0)\n                tab = initTable();\n            else if ((f = tabAt(tab, i = (n - 1) \u0026amp; hash)) == null) {\n                if (casTabAt(tab, i, null,\n                             new Node\u0026lt;K,V\u0026gt;(hash, key, value, null)))\n                    break;                   // no lock when adding to empty bin\n            }\n            else if ((fh = f.hash) == MOVED)\n                tab = helpTransfer(tab, f);\n            else {\n                V oldVal = null;\n                synchronized (f) {\n                    if (tabAt(tab, i) == f) {\n                        if (fh \u0026gt;= 0) {   // Node 的 hash 值 肯定是正数，通过 spread(key.hashCode()) 方法得到的  无论是红黑树还是链表，hash 值都是正数，所以这个 if 恒成立呀\n                            binCount = 1;\n                            for (Node\u0026lt;K,V\u0026gt; e = f;; ++binCount) {\n                                K ek;\n                                if (e.hash == hash \u0026amp;\u0026amp;\n                                    ((ek = e.key) == key ||\n                                     (ek != null \u0026amp;\u0026amp; key.equals(ek)))) {\n                                    oldVal = e.val;\n                                    if (!onlyIfAbsent)\n                                        e.val = value;\n                                    break;\n                                }\n                                Node\u0026lt;K,V\u0026gt; pred = e;\n                                if ((e = e.next) == null) {\n                                    pred.next = new Node\u0026lt;K,V\u0026gt;(hash, key,\n                                                              value, null);\n                                    break;\n                                }\n                            }\n                        }\n                        else if (f instanceof TreeBin) {  // 对应上面 if TreeBin 继承自 Node Node 的 hashCode 是他的 key 和 value 的异或，这一点也奇怪 如果是看 Node 的 hash 的话，那更是都有可能了，怎么能这么搞\n                            Node\u0026lt;K,V\u0026gt; p;\n                            binCount = 2;\n                            if ((p = ((TreeBin\u0026lt;K,V\u0026gt;)f).putTreeVal(hash, key,\n                                                           value)) != null) {\n                                oldVal = p.val;\n                                if (!onlyIfAbsent)\n                                    p.val = value;\n                            }\n                        }\n                    }\n                }\n                if (binCount != 0) {\n                    if (binCount \u0026gt;= TREEIFY_THRESHOLD)\n                        treeifyBin(tab, i);\n                    if (oldVal != null)\n                        return oldVal;\n                    break;\n                }\n            }\n        }\n        addCount(1L, binCount);\n        return null;\n    }\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "weidalao",
+      "PubDate": "2023-09-13T14:25:28Z"
+    },
+    {
+      "Title": "MacBook Pro i5 2.3GHz 13 英寸 (2017 年中) 256GB 现在市场回收能到多少钱 - Apple",
+      "Link": "https://www.v2ex.com/t/973545",
+      "Description": "",
+      "Author": "YoungKing6",
+      "PubDate": "2023-09-13T14:24:51Z"
+    },
+    {
+      "Title": "有没有免费的域名推荐的 - 问与答",
+      "Link": "https://www.v2ex.com/t/973544",
+      "Description": "",
+      "Author": "ccclo",
+      "PubDate": "2023-09-13T14:24:38Z"
+    },
+    {
+      "Title": "关于 obsidian 复制图片无法在本地生成 - 问与答",
+      "Link": "https://www.v2ex.com/t/973543",
+      "Description": "我的 typora 和 obsidian 都设置文件中的图片存储的相对路径为\"./assets\"\u003cbr /\u003e当在文件中复制单个图片时都可以正常再 assets 文件夹内生成，但在全文复制或复制一段图片和文字时，obsidian 会出问题\u003cbr /\u003e比如：我本地有一个 markdown 文档，我要复制一段图片和文字。当我复制到 typora 时，图片是单独在当前目录下的 assets 文件夹内再生成一份，文档中引用的也是相对路径\"./assets\"。但复制到 obsidian ，图片并不会在当前目录下的 assets 文件夹内再生成一份，文档中引用的是源文件中图片的绝对路径\"file:///E:/typora/assets\"(即使我的源文件也是使用的相对路径)。\u003cbr /\u003e请教各位大佬，有没有什么插件之类的可以解决这个问题",
+      "Author": "SlanWyf",
+      "PubDate": "2023-09-13T14:21:31Z"
+    },
+    {
       "Title": "日版 iPhone 购买攻略 - Apple",
       "Link": "https://www.v2ex.com/t/973542",
       "Description": "\u003cp\u003e由于日版 iPhone 支持实体卡和 esim 以及 FaceTime 等功能可以使用的好处，很多人都对日版 iPhone 感兴趣。\n本人在日本买过很多苹果设备，希望能够给大家一点提醒。\u003c/p\u003e\n\u003cp\u003e1.由于偷税漏税现象严重，日本的 Apple store 目前无法退税。第三方店铺苹果刚发售的产品通常没有货。\n2.直接线上订单到转运仓大概率直接被苹果砍单，转运仓地址基本上都是苹果的黑名单。\n3.线下直接购买的话大概率让你分期购买，必须要有在留卡，并且有朋友审核不通过。\u003c/p\u003e\n\u003cp\u003e推荐的购买方法是网上下单送到在日本的朋友家。\n需要速度安全的话 EMS 直接寄回国内，大概两三天就到了。\n能接受慢一点的话让朋友寄到转运仓转运到中国，时效取决转运仓的线路。\u003c/p\u003e\n",
