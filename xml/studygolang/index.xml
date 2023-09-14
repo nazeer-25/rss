@@ -23,14 +23,14 @@
       <description>&lt;p&gt;&lt;a href=&#34;https://juejin.cn/post/7132022891721261093&#34;&gt;https://juejin.cn/post/7132022891721261093&lt;/a&gt;&#xA;注意此处的bind跨网络访问&#xA;&lt;a href=&#34;https://www.cnblogs.com/chuanzhang053/p/10929903.html&#34;&gt;https://www.cnblogs.com/chuanzhang053/p/10929903.html&lt;/a&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
+      <title>sync包once小问题</title>
+      <link>https://studygolang.com/topics/16711#reply1</link>
+      <description>&lt;p&gt;Do函数里面 刚开始进来的时候，直接用0.done == 0 判断也能达到效果，atomic.LoadUint32(&amp;amp;o.done) == 0目的是啥，为了很多goroutine同时调用Do函数，减少o.m.Lock()的调用吗&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
       <title>历时1年3个月，从零学习EBPF到写了一个HTTP接口生成器</title>
       <link>https://studygolang.com/topics/16710#reply0</link>
       <description>&lt;p&gt;如题，去年6月一次偶然的机会从同事口中得知了DPDK可以高性能处理网络数据（非常感谢这位同事，哈哈），然后进行了一番搜索发现了ebpf这个黑科技，从此踏入ebpf的不归路(又掉了不少头发)。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;首先从xdp开始学起，了解到了 &lt;a href=&#34;https://github.com/xdp-project/xdp-tutorial&#34;&gt;https://github.com/xdp-project/xdp-tutorial&lt;/a&gt; 这个项目，安装编译环境就是一个大坑,直接劝退3个月，直到去年9月份又重新捡起来，把环境搭建成功，开始专研xdp-tutorial中的每个实验。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;后面又接触到cilium/ebpf这个库，然后把xdp-tutorial中的实验用这个库抄袭实现了一遍，顺便还把其它几个库的实验也抄了一遍，感兴趣的可以看看 &lt;a href=&#34;https://github.com/Zhouchaowen/ebpf_labs&#34;&gt;https://github.com/Zhouchaowen/ebpf_labs&lt;/a&gt; 。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;在后面接着断断续续的了解xdp的一些知识，有一次想通过xdp实现L4层的负载均衡功能，搞了几天也没有成功(好像是校验和的问题)，再次被劝退，后面也陆陆续续在了解，但是相关资料还是太少了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;直到今年4月开始学习k8s，接触到cilium这个网络插件，看了看它的源码，简直爆鸡儿难(这是人能看懂的吗？)。后来经过反复放弃，慢慢的看懂了一点点，了解到了tc ebpf和如何加载它的知识。碰巧又看到了 &lt;a href=&#34;https://github.com/gojue/ecapture&#34;&gt;https://github.com/gojue/ecapture&lt;/a&gt; 这个项目，发现很有趣，交流群里cfc4n大佬非常热心,问了不少问题都回答了(非常感谢)，又结合刚了解的tc ebpf然后产生了实现一个http接口生成器的想法(其实是我们内部一直缺少接口文档，全靠手撸，我懒就不想写这个接口文档，哈哈哈哈)，然后立刻动手建立项目，一个星期后写了第一版代码简单测试修改了一些bug发了第一个版本v0.0.1。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;目前在Linux 5.4.0-156-generic x86_64以上的内核版本应可以使用，但项目还非常初始，可能会有许多问题，希望使用的过程中有问题可以反馈，哈哈哈。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;项目地址：&lt;a href=&#34;https://github.com/Zhouchaowen/prism&#34;&gt;https://github.com/Zhouchaowen/prism&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;直接运行:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;prism -n &amp;lt;device_name&amp;gt; # device_name 网卡名称&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;Docker方式运行:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;docker run --net host --privileged --name prism -itd zmosquito/prism:v0.0.1 ./prism -n &amp;lt;device_name&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;演示视频：&lt;a href=&#34;https://www.bilibili.com/video/BV1tK4y1c7rh/&#34;&gt;https://www.bilibili.com/video/BV1tK4y1c7rh/&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;感谢star，哈哈&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>sync包once小问题</title>
-      <link>https://studygolang.com/topics/16711#reply0</link>
-      <description>&lt;p&gt;Do函数里面 刚开始进来的时候，直接用0.done == 0 判断也能达到效果，atomic.LoadUint32(&amp;amp;o.done) == 0目的是啥，为了很多goroutine同时调用Do函数，减少o.m.Lock()的调用吗&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>go新人求指导go完整站点部署情况</title>
@@ -86,6 +86,11 @@
       <title>[杭州][25K-35K]招聘golang架构师</title>
       <link>https://studygolang.com/articles/36268#reply8</link>
       <description>&lt;p&gt;工作职责：&#xA;1. 负责公司业务，app的整体架构设计，提供完整的技术方案&#xA;2. 软件后端研发团队的管理&#xA;3. 基于系统运行现状，优化现有系统的性能，解决软件系统平台关键技术问题攻关/核心功能模块设计&#xA;4. 在项目需求不断细化的过程中校正整体的架构设计，并输出有效的技术成果&#xA;5. 负责代码review，确保线上质量&lt;/p&gt;&#xA;&#xA;&lt;p&gt;任职要求：&#xA;1. 本科以上学历，计算机相关专业，2年以上架构设计或交付的工作经验&#xA;2. 熟悉Linux、微服务设计、热爱开源&#xA;3. 扎实的计算机科学基础。熟练使用golang，熟悉主流常用的存储中间件如 mysql, MongoDB, redis。消息中间件kafka, mqtt等&#xA;4. 有较强的逻辑分析和组织协调能力，具有较强的责任感，沟通和处理能力&#xA;5. 工作细心、有计划性，执行能力强，且具备高度的责任心、诚信的工作作风、优秀的沟通能力及团队精神&#xA;6.熟悉前后端开发。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;关于我们：&#xA;我们是由一群拥有技术梦想的小伙伴组成的年轻公司。公司崇尚自由，平等，开放，价值。&#xA;如果你怀才不遇，请到这里来。&#xA;如果你想成就一番伟大的事业，请到这里来。&#xA;如果你不愿与平庸的人为伍，请到这里来。&#xA;如果你想拥有一份快乐的工作，不要犹豫了，这里是你唯一的选择。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;联系方式&#xA;微信：EwCha97&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>sync包once小问题</title>
+      <link>https://studygolang.com/topics/16711#reply0</link>
+      <description>&lt;p&gt;Do函数里面 刚开始进来的时候，直接用0.done == 0 判断也能达到效果，atomic.LoadUint32(&amp;amp;o.done) == 0目的是啥，为了很多goroutine同时调用Do函数，减少o.m.Lock()的调用吗&lt;/p&gt;&#xA;</description>
     </item>
   </channel>
 </rss>
