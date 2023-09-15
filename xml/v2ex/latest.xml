@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>新版发布 | Cloudpods v3.10.5 和 v3.9.13 正式发布 - 推广</title>
+      <link>https://www.v2ex.com/t/974199</link>
+      <description>&lt;h1&gt;Cloudpods v3.10.5&lt;/h1&gt;&#xA;&lt;p&gt;本期发布中，ocboot 部署脚本有较多变化，首先支持以非 root 用户执行安装流程，其次响应社区的呼吁，增加了--stack 参数，允许 Allinone 一键安装仅包含私有云（参数为 edge ）或云管（参数为 cmp ）的部署。本期亮点为 KVM 虚拟机对 GPU 的支持，不仅支持了虚拟机挂载图形模式的 GPU ，同时支持 NVIDIA 和 AMD 的 vGPU 透传。同时本期改进很多社区反馈问题，例如将 Daemon 虚拟机更名为自动启动虚拟机（由 &lt;code&gt;@fangpsh&lt;/code&gt; 建议）。修复了未正确识别 Debian 12 Cloud Image 镜像（由 &lt;code&gt;@fangpsh&lt;/code&gt; 反馈），未设置 Windows 2022 DNS （由 &lt;code&gt;@sun3book&lt;/code&gt; 反馈），采用 Docker Compose 部署的集群不能使用 CloudShell 等问题。&lt;/p&gt;&#xA;&lt;h2&gt;功能优化&lt;/h2&gt;&#xA;&lt;p&gt;[主机] 支持 VMware 主机名称和标签双向同步&lt;/p&gt;&#xA;&lt;p&gt;[主机] 支持更新 GPU 透传设备的设备类型&lt;/p&gt;&#xA;&lt;p&gt;[主机] 支持新建 KVM 主机硬盘同时指定块存储&lt;/p&gt;&#xA;&lt;p&gt;[认证] 支持消息订阅设置消息静默期&lt;/p&gt;&#xA;&lt;p&gt;[容器] 支持更新 K8s 集群 kubeconfig&lt;/p&gt;&#xA;&lt;p&gt;[容器] 支持纳管只读权限的 K8s 集群&lt;/p&gt;&#xA;&lt;p&gt;[多云] 云账号纳管后并发同步云账号相关 skus 数据，提高云账号同步速度&lt;/p&gt;&#xA;&lt;p&gt;[部署] 部署增加检查，确保使用 Python3 执行 py 脚本&lt;/p&gt;&#xA;&lt;h2&gt;问题修复&lt;/h2&gt;&#xA;&lt;p&gt;[主机] 修复系统盘和数据盘过滤逻辑不一致问题&lt;/p&gt;&#xA;&lt;p&gt;[主机] 修复虚拟机添加网卡网络参数错误问题&lt;/p&gt;&#xA;&lt;p&gt;[主机] 修复虚拟机修改安全组状态显示异常问题&lt;/p&gt;&#xA;&lt;p&gt;[主机] 修复切换镜像磁盘大小范围错误问题&lt;/p&gt;&#xA;&lt;p&gt;[主机] 修复国产海光 CPU 宿主机无法正常启动 Windows 7 等版本 Windows 虚拟机的问题&lt;/p&gt;&#xA;&lt;p&gt;[主机] 修复未能正确识别 Debian 12 Cloud Image 镜像&lt;/p&gt;&#xA;&lt;p&gt;[主机] 修复 Windows 2022 虚拟机未正确设置 DNS 服务器地址问题&lt;/p&gt;&#xA;&lt;p&gt;[网络] 修复 DNS 解析同步异常问题&lt;/p&gt;&#xA;&lt;p&gt;[主机] 修复 3D 类型 GPU 设备探测失败的问题&lt;/p&gt;&#xA;&lt;p&gt;[主机] 修复 LVM 磁盘批量创建部署失败以及 VG Deactive 失败的问题&lt;/p&gt;&#xA;&lt;p&gt;[工单] 修复通知和邮件发送异常的问题&lt;/p&gt;&#xA;&lt;p&gt;[主机] 修复部分场景 VMware 虚拟机删除失败的问题&lt;/p&gt;&#xA;&lt;p&gt;[部署] 修复 Docker Compose 部署的环境 CloudShell 无法登录的问题&lt;/p&gt;&#xA;&lt;h2&gt;新功能&lt;/h2&gt;&#xA;&lt;p&gt;[主机] 支持集成堡垒机（ JumpServer ），创建虚拟机时自动同步记录到堡垒机（企业版）&lt;/p&gt;&#xA;&lt;p&gt;[主机] 支持平台新建虚拟机时设置自定义数据（ UserData ）&lt;/p&gt;&#xA;&lt;p&gt;[主机] 支持虚拟机 vGPU 透传，包括 AMD 和 NVIDIA 的 vGPU （感谢 &lt;code&gt;广东广数网络科技有限公司&lt;/code&gt; 提供的设备支持）&lt;/p&gt;&#xA;&lt;p&gt;[容器] 支持在 AWS 上自建 K8s 集群，集成 VPC CNI 、CSI 和 LB Controller 等插件&lt;/p&gt;&#xA;&lt;p&gt;[部署] 支持以指定的非 root 用户执行 ocboot 脚本部署平台&lt;/p&gt;&#xA;&lt;p&gt;[部署] 支持部署只包含私有云（参数为 edge ）或云管（参数为 cmp ）功能的集群&lt;/p&gt;&#xA;&lt;h1&gt;Cloudpods v3.9.13&lt;/h1&gt;&#xA;&lt;h2&gt;功能优化&lt;/h2&gt;&#xA;&lt;p&gt;[镜像] 支持将多个镜像合并成一个主机镜像&lt;/p&gt;&#xA;&lt;h2&gt;问题修复&lt;/h2&gt;&#xA;&lt;p&gt;[巡检] 麒麟获取一键巡检结果的兼容性修复&lt;/p&gt;&#xA;&lt;p&gt;[主机] 修复阿里云主机 VNC 打不开问题&lt;/p&gt;&#xA;&lt;p&gt;[镜像] 修复镜像上传架构探测不正确的问题&lt;/p&gt;&#xA;&lt;h1&gt;如何升级？&lt;/h1&gt;&#xA;&lt;h2&gt;升级文档&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.cloudpods.org/zh/docs/setup/upgrade/&#34; rel=&#34;nofollow&#34;&gt;https://www.cloudpods.org/zh/docs/setup/upgrade/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;问题反馈&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/yunionio/cloudpods/issues&#34; rel=&#34;nofollow&#34;&gt;https://github.com/yunionio/cloudpods/issues&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;以上是文章的主要内容，作为融合云/多云管理/私有云/FinOps 厂商，云联壹云会持续关注这些领域的动态，分享相关的信息和技术，可以通过的官网（ &lt;a href=&#34;http://yunion.cn&#34; rel=&#34;nofollow&#34;&gt;yunion.cn&lt;/a&gt; ）或关注的公众号（云联壹云）来获取最新的信息，感谢大家的时间。&lt;/p&gt;&#xA;&lt;p&gt;原文地址： &lt;a href=&#34;https://www.yunion.cn/article/html/20230915.html&#34; rel=&#34;nofollow&#34;&gt;https://www.yunion.cn/article/html/20230915.html&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>Cloudpods</author>
+      <pubDate>15 Sep 2023 09:24:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>四通一达邮政等快递，小区总是不送上门！ - 问与答</title>
+      <link>https://www.v2ex.com/t/974197</link>
+      <description>小区 7 月份交楼，8 月份正式全面入住，刚开始各种搬家，电梯慢可以理解，但是 9 月中旬已经完成 90%入住了，除了顺丰，京东，天猫超市会送上门，其他的快递比如四通一达，邮政，EMS 都是丢到驿站。&lt;br /&gt;&lt;br /&gt;小件也就算了，下去活动活动，也就是小区附近，走路 3-5 分钟，最离谱的是大件中通也是一声不吭地丢到驿站，我买了一副客厅的长画，明确跟快递员说了这个是大件我拿不了你要送上门，快递员倒是很拽，你们小区都不送上门的，我们一个件才 8 毛钱，还要给驿站四毛钱，顺丰京东他们一个件 5 块钱呢。送不了，随便投诉，四通一达都不送。&lt;br /&gt;&lt;br /&gt;驿站的人都看不下去了，说这个大件怎么都不送，他们找来拖车帮你送到电梯口。&lt;br /&gt;&lt;br /&gt;这事儿越想语气就投诉了，第二天有人打电话说，以后大件专门给他打电话会送上门。&lt;br /&gt;&lt;br /&gt;这之后小区邻居也跟快递开始大战，纷纷要求送上门，现在偶尔有电话提前打过来，问你是放驿站还是送上门，如果选择送上门，我今天这个申通，4 天前就在派送，今天才送到。&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;邮政和韵达也很离谱，放在离小区很远的一个驿站，不是小区附近那个，得多走个 3-4 分钟。最离谱的是邮政和韵达现在是虚拟号码，尾号跟真实号码一样而已，导致收不到取件码，有时候丢在驿站一个礼拜才有人联系去取件。&lt;br /&gt;&lt;br /&gt;现在有个驿站貌似很方便，如果快递少无所谓，买的多也很烦躁，两个驿站跑去拿东西。&lt;br /&gt;&lt;br /&gt;现在没有法规监管，我个人认为最好的办法就是，我要求送上门你就必须送上门，不能拖延送达，如果我同意放驿站你就放。大件，无条件送上门。</description>
+      <author>dexlee2020</author>
+      <pubDate>15 Sep 2023 09:21:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>美区家庭 Youtube premium+Google One 2T 去年老车有账单,下车一位补 1 位有空.69/Year - Google</title>
+      <link>https://www.v2ex.com/t/974196</link>
+      <description>&lt;p&gt;后期满存升 5T 套餐&#xA;联系 T&#xA;&lt;a href=&#34;http://t.me/plsmlbb&#34; rel=&#34;nofollow&#34;&gt;t.me/plsmlbb&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>Leemik</author>
+      <pubDate>15 Sep 2023 09:19:29 +0000</pubDate>
+    </item>
+    <item>
       <title>ProRaw Max， HEIF Max 来了 - iPhone</title>
       <link>https://www.v2ex.com/t/974195</link>
       <description>&lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/a/gV7yP6U&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/a/gV7yP6U&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;如题，我们日常怎么选，HEIF MAX 是不是就够了 4800 万像素，能否有效减少之前过度锐化的问题</description>
@@ -27,7 +48,7 @@
     <item>
       <title>第一次当小组长，组员不靠谱怎么弄？ - 职场话题</title>
       <link>https://www.v2ex.com/t/974192</link>
-      <description>&lt;p&gt;不是我面试的的海外员工，和组里当时的面试官沟通后加上从个人海外一个月左右的招聘经验里看的出来他已经是当地候选人里拔尖的水平了。&#xA;年初试用期期间因为我要回国海外缺人不够果断没在试用期跟他拜拜现在感觉每天都在后悔。&lt;/p&gt;&#xA;&lt;p&gt;经过多次验证他能力范围都是他曾经接触过的东西，新的东西接受的特别慢。作为一个开发，还在纠结语言没学过需要时间适应，所以看不懂阻力的代码。&#xA;责任心比起一般国内员工相当有限，自己的任务挂了根本不管，就等着我擦屁股。似乎工作都是一次性的，没有维护的概念。&#xA;嘴上答应的很快，有些内部优化任务每次都说可以但就是等着我把这茬忘了，过一周说起来就是他正在处理。&lt;/p&gt;&#xA;&lt;p&gt;现在心里预期就是把他当伪代码执行器来用。&lt;/p&gt;&#xA;&lt;p&gt;想问问各位大佬，我应该怎么做的？是我的带教方式有问题吗&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;不是我面试的的海外员工，和组里当时的面试官沟通后加上从个人海外一个月左右的招聘经验里看的出来他已经是当地候选人里拔尖的水平了。&#xA;年初试用期期间因为我要回国海外缺人不够果断没在试用期跟他拜拜现在感觉每天都在后悔。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;经过多次验证他能力范围都是他曾经接触过的东西，新的东西接受的特别慢。作为一个开发，还在纠结语言没学过需要时间适应，所以看不懂组里的代码。&lt;/li&gt;&#xA;&lt;li&gt;责任心比起一般国内员工相当有限，自己的任务挂了根本不管，就等着我擦屁股。似乎工作都是一次性的，没有维护的概念。&lt;/li&gt;&#xA;&lt;li&gt;嘴上答应的很快，有些内部优化任务每次都说可以但就是等着我把这茬忘了，过一周说起来就是他正在处理。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;现在心里预期就是把他当伪代码执行器来用。&lt;/p&gt;&#xA;&lt;p&gt;想问问各位大佬，我应该怎么做的？是我的带教方式有问题吗&lt;/p&gt;&#xA;</description>
       <author>aumbre</author>
       <pubDate>15 Sep 2023 09:10:33 +0000</pubDate>
     </item>
