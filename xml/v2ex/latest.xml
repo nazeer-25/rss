@@ -4,6 +4,40 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>一次在 RackNerd 更换 IP 的经历 - VPS</title>
+      <link>https://www.v2ex.com/t/974172</link>
+      <description>一个月前，我在 RackNerd 使用的一台 VPS 的 IP 被封，无奈之下考虑等段时间看看会不会被解封，结果一个月过去了依旧如此。遂花 3 美元使用了更换 IP 的服务。换的新 IP 依旧是被墙的，发工单找客服，客服的回应很令人不满，他说他们不保证换的新 IP 是不被墙的，并且他们控制不了 GFW 。看到此解答后本人内心较为愤怒，毕竟花了二十多块钱还是没有题（自己的钱实在是不好赚），向客服说了一些无礼的词语，在强硬态度的压迫下，他们终于妥协，给我换了新的没有被墙的 IP 。&lt;br /&gt;相关截图： &lt;a target=&#34;_blank&#34; href=&#34;https://imgur.com/a/EsCpjrp&#34; rel=&#34;nofollow noopener&#34;&gt;https://imgur.com/a/EsCpjrp&lt;/a&gt;</description>
+      <author>azureaz</author>
+      <pubDate>15 Sep 2023 08:40:28 +0000</pubDate>
+    </item>
+    <item>
+      <title>基于腾讯云 Lighthouse 自建文本和文件翻译服务 - 云计算</title>
+      <link>https://www.v2ex.com/t/974171</link>
+      <description>&lt;p&gt;&lt;code&gt;LibreTranslate&lt;/code&gt; 是一个免费且开源的机器翻译 API ，完全自托管，易于设置。与其他 API 不同，它不依赖于像&lt;em&gt;Google&lt;/em&gt;或&lt;em&gt;Azure&lt;/em&gt;这样的专有提供商来执行翻译。相反，它的翻译引擎由开源&lt;em&gt;Argos Translate&lt;/em&gt;库提供支持。&lt;/p&gt;&#xA;&lt;p&gt;本文将引导读者通过在腾讯云&lt;em&gt;Lighthouse&lt;/em&gt;服务器部署&lt;a href=&#34;https://github.com/LibreTranslate/LibreTranslate&#34; rel=&#34;nofollow&#34;&gt;LibreTranslate&lt;/a&gt;，实现自主可控的翻译服务，且同时支持翻译文本和文件（.txt, .odt, .odp, .docx, .pptx, .epub, .html ）。&lt;/p&gt;&#xA;&lt;h2&gt;购买并配置 Lighthouse 服务器&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Lighthouse 是腾讯云推出的一款轻量应用服务器产品，它提供了高性价比、高可用性、高安全性和高灵活性的云端计算服务。具体信息参阅官方文档：&lt;a href=&#34;https://cloud.tencent.com/document/product/1207/44361&#34; rel=&#34;nofollow&#34;&gt;轻量应用服务器概述&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;为了部署 LibreTranslate 服务，我们需要购买一台&lt;strong&gt;境外&lt;/strong&gt;轻量应用服务器，并配置好相关的环境和依赖。购买步骤参见官方文档：&lt;a href=&#34;https://cloud.tencent.com/document/product/1207/56823&#34; rel=&#34;nofollow&#34;&gt;使用轻量应用服务器一键创建应用&lt;/a&gt;，**地域选择&lt;code&gt;新加坡&lt;/code&gt;，应用类型选择&lt;code&gt;k3s&lt;/code&gt;**。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;初次部署服务时，需下载大量的翻译模型，经 gz 压缩后约 6Gb 。由于网络问题，使用境内服务器部署很可能失败（解决办法见文末）。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2&gt;创建 kubernetes 部署配置文件&lt;/h2&gt;&#xA;&lt;p&gt;文件路径 &lt;code&gt;/srv/translate.yml&lt;/code&gt;，请注意修改配置文件中的域名 &lt;code&gt;&lt;a href=&#34;http://fanyi.rehiy.com&#34; rel=&#34;nofollow&#34;&gt;fanyi.rehiy.com&lt;/a&gt;&lt;/code&gt;。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;kind: Deployment&#xA;apiVersion: apps/v1&#xA;metadata:&#xA;  name: &amp;amp;name translate&#xA;  labels:&#xA;    app: *name&#xA;spec:&#xA;  selector:&#xA;    matchLabels:&#xA;      app: *name&#xA;  template:&#xA;    metadata:&#xA;      labels:&#xA;        app: *name&#xA;    spec:&#xA;      containers:&#xA;        - name: translate&#xA;          image: libretranslate/libretranslate&#xA;          env:&#xA;            - name: LT_REQ_LIMIT&#xA;              value: &#34;30&#34;&#xA;            - name: LT_THREADS&#xA;              value: &#34;4&#34;&#xA;          ports:&#xA;            - containerPort: 5000&#xA;          volumeMounts:&#xA;            - name: *name&#xA;              subPath: home&#xA;              mountPath: /home/libretranslate&#xA;      volumes:&#xA;        - name: *name&#xA;          hostPath:&#xA;            path: /srv/translate&#xA;            type: DirectoryOrCreate&#xA;---&#xA;kind: Service&#xA;apiVersion: v1&#xA;metadata:&#xA;  name: &amp;amp;name translate&#xA;  labels:&#xA;    app: *name&#xA;spec:&#xA;  selector:&#xA;    app: *name&#xA;  ports:&#xA;    - name: http&#xA;      port: 5000&#xA;      targetPort: 5000&#xA;---&#xA;kind: Ingress&#xA;apiVersion: networking.k8s.io/v1&#xA;metadata:&#xA;  name: &amp;amp;name translate&#xA;  annotations:&#xA;    traefik.ingress.kubernetes.io/router.entrypoints: web&#xA;spec:&#xA;  rules:&#xA;    - host: fanyi.rehiy.com&#xA;      http:&#xA;        paths:&#xA;          - path: /&#xA;            pathType: Prefix&#xA;            backend:&#xA;              service:&#xA;                name: *name&#xA;                port:&#xA;                  name: http&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;为防止被恶意利用，配置中将&lt;code&gt;LT_REQ_LIMIT&lt;/code&gt;设定为 30 ，读者可以根据自己的情况调整。也可以启用 TOKEN 建立需要授权的服务，参阅官方文档 &lt;a href=&#34;https://github.com/LibreTranslate/LibreTranslate#manage-api-keys&#34; rel=&#34;nofollow&#34;&gt;Manage API Keys&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2&gt;部署 LibreTranslate 服务&lt;/h2&gt;&#xA;&lt;p&gt;通过 ssh 登录服务器，执行以下命令，部署 LibreTranslate 服务。&lt;em&gt;初次部署需下载大量模型，请耐心等待配置完成。&lt;/em&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;kubectl apply -f /srv/translate.yml&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;测试 LibreTranslate 能力&lt;/h2&gt;&#xA;&lt;p&gt;作者部署的服务器已关闭外部访问能力，请务必使用自己部署的域名进行测试。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;基于浏览器访问&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://www.rehiy.com/usr/uploads/2023/09/1679816704.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;基于 API 访问&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const res = await fetch(&#34;http://fanyi.rehiy.com/translate&#34;, {&#xA;  method: &#34;POST&#34;,&#xA;  body: JSON.stringify({&#xA;    q: &#34;Hello!&#34;,&#xA;    source: &#34;en&#34;,&#xA;    target: &#34;zh&#34;&#xA;  }),&#xA;  headers: {&#34;Content-Type&#34;: &#34;application/json&#34;}&#xA;});&#xA;&#xA;console.log(await res.json());&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;如何在国内服务器部署&lt;/h2&gt;&#xA;&lt;p&gt;解决的办法有很多（比如去官网手动下载每个模型），这里提供一种简单且合规的方法：&lt;/p&gt;&#xA;&lt;p&gt;在境外部署完成后，将&lt;code&gt;/srv/translate&lt;/code&gt;目录同步到国内服务器上。这样在国内部署时就不再需要下载翻译模型，从而避开网络慢导致的问题。&lt;/p&gt;&#xA;</description>
+      <author>panisertoller</author>
+      <pubDate>15 Sep 2023 08:40:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>我觉得这算是唯一一个还算有用了插件了吧 - 问与答</title>
+      <link>https://www.v2ex.com/t/974170</link>
+      <description>&lt;p&gt;前请提要：&#xA;1 、上线了个除 gpt4.0 外其他全部免费的镜像站： &lt;a href=&#34;https://maymay5.com&#34; rel=&#34;nofollow&#34;&gt;https://maymay5.com&lt;/a&gt;&#xA;自定义插件开发以来虽然做的都是些很无聊的功能&#xA;我认为究其原因，就是使用了免费的资源，类似如图这种的付费资源，就显得有用很多&#xA;&lt;img alt=&#34;alt 属性文本&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>maymayblog</author>
+      <pubDate>15 Sep 2023 08:39:36 +0000</pubDate>
+    </item>
+    <item>
+      <title>做个调查， 28 岁-34 岁还没有结婚的人进！ - 程序员</title>
+      <link>https://www.v2ex.com/t/974169</link>
+      <author>hj960511</author>
+      <pubDate>15 Sep 2023 08:38:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>最近大家讨论出国游，老哥们帮我看看这种团购真实性 - 问与答</title>
+      <link>https://www.v2ex.com/t/974168</link>
+      <description>&lt;p&gt;如题，最近看了好多老哥讨论去泰国，我就去某音搜索了解了一下，于是最近老是刷到这种 999 包来回机票，2599 来回机票包五晚酒店啥的直播。最开始我是不信的，最近和一个开旅行社的老哥喝酒，问了这件事 他说是真的，三千左右的价格就差不多，便宜的要让买东西...我迷茫了。老哥们有经验的来帮我看看呗，钱被骗了可以再挣，腰子没了是真没了啊&#xA;&lt;a href=&#34;https://i.imgur.com/xUe2G0D.jpg&#34; rel=&#34;nofollow&#34;&gt;https://i.imgur.com/xUe2G0D.jpg&lt;/a&gt;&#xA;&lt;a href=&#34;https://i.imgur.com/MF6LSsR.jpg&#34; rel=&#34;nofollow&#34;&gt;https://i.imgur.com/MF6LSsR.jpg&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>key0323</author>
+      <pubDate>15 Sep 2023 08:37:26 +0000</pubDate>
+    </item>
+    <item>
       <title>准备冲 watch s9，问下大家都买的什么颜色 -  WATCH</title>
       <link>https://www.v2ex.com/t/974167</link>
       <description>&lt;p&gt;看了下官网的预览图，感觉黑色表盘看着顺眼些，但能搭配的腕带的颜色有限。想问问大家都是怎么搭配表盘颜色和腕带款式的。&lt;/p&gt;&#xA;</description>
