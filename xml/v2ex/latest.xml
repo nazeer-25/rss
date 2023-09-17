@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>基于 fastText 的自然语言识别工具，支持浏览器和 Node.js 环境 - 程序员</title>
+      <link>https://www.v2ex.com/t/974611</link>
+      <description>&lt;p&gt;偶然看到 Google 官方在 B 站发的视频 &lt;a href=&#34;https://www.bilibili.com/video/BV1Gp4y1A7RA?t=344.8&#34; rel=&#34;nofollow&#34;&gt;https://www.bilibili.com/video/BV1Gp4y1A7RA?t=344.8&lt;/a&gt; 发现 WebAssembly 真好玩，特别提到了 &lt;a href=&#34;https://github.com/facebookresearch/fastText&#34; rel=&#34;nofollow&#34;&gt;fastText&lt;/a&gt; 这个基于 AI 模型的工具，一上头就打算试试把它搬到浏览器会怎样。&lt;/p&gt;&#xA;&lt;p&gt;先在 npm 搜索了一下，基本都是只支持 Node 环境使用的，有一个包 &lt;a href=&#34;https://github.com/DreamOfIce/fastText.wasm&#34; rel=&#34;nofollow&#34;&gt;fasttext.wasm&lt;/a&gt; 说是支持浏览器环境的，结果在 Next.js 中一试直接裂开，各种报错 😂&lt;/p&gt;&#xA;&lt;p&gt;兴致上来了就一心想着搬到浏览器上，先在原仓库上各种魔改，始终解决不了问题，最后确定应该是要分离浏览器和 Node 环境的实现的，从而能方便的避免各种问题。&lt;/p&gt;&#xA;&lt;p&gt;各种踩坑之后终于搞定了，现在已部署两个环境，欢迎体验：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Vite &lt;a href=&#34;https://fasttext-wasm-js.vercel.app/Demo&#34; rel=&#34;nofollow&#34;&gt;https://fasttext-wasm-js.vercel.app/Demo&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Next.js &lt;a href=&#34;https://awesome-exhibition.vercel.app/awesome/fasttext.wasm.js&#34; rel=&#34;nofollow&#34;&gt;https://awesome-exhibition.vercel.app/awesome/fasttext.wasm.js&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这次实现涉及到的技术点汇总一下&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;WebAssembly&lt;/li&gt;&#xA;&lt;li&gt;Git Submodules&lt;/li&gt;&#xA;&lt;li&gt;Xmake&lt;/li&gt;&#xA;&lt;li&gt;分环境开发打包 wasm 和库代码&lt;strong&gt;（最大问题）&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;按照 fastText 官方的流程无法编译，所幸 &lt;a href=&#34;https://github.com/DreamOfIce/fastText.wasm&#34; rel=&#34;nofollow&#34;&gt;fasttext.wasm&lt;/a&gt; 有个基于 Xmake 的编译，刚安装怎么也编译不了，最后稀里糊涂把 Xmake 的路走通了 😂&lt;/p&gt;&#xA;&lt;p&gt;能编译之后就是另一个问题，如何分环境编译，找 emcc 和 Xmake 各种文档研究怎么分环境打包，所幸官方对此&lt;a href=&#34;https://github.dev/emscripten-core/emscripten/blob/0be5b609412d5b07f8157528df8e5088dae84858/emcc.py#L160&#34; rel=&#34;nofollow&#34;&gt;早已实现&lt;/a&gt;，注入 xmake.lua 的参数也是连蒙带猜可算是注入进去了。&lt;/p&gt;&#xA;&lt;p&gt;这一路都是靠玄学通关的，如果编译 wasm 的第一步失败的话，我大概就直接弃坑了。最后写了个简单的 &lt;a href=&#34;https://codesandbox.io/p/sandbox/language-detect-benchmark-7fcwf4?file=/index.ts&#34; rel=&#34;nofollow&#34;&gt;benchmark&lt;/a&gt; 测试了一下，效果是真不错。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/aCpqJPZ.png&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>theprimone</author>
+      <pubDate>17 Sep 2023 10:19:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>现在买 MacBookAir M1 哪里比较划算？ - MacBook Air</title>
+      <link>https://www.v2ex.com/t/974610</link>
+      <description>&lt;p&gt;京东教育优惠卖掉耳机，7000 左右入手 16+256 怎么样，原本想 8000 左右入 M2 的 16+256 ，但是硬盘半速有点坑，还是算了&lt;/p&gt;&#xA;</description>
+      <author>boronboron</author>
+      <pubDate>17 Sep 2023 10:15:29 +0000</pubDate>
+    </item>
+    <item>
       <title>打算找个存储小说内容的方案，问有哪些地方可以免费存储？ - 程序员</title>
       <link>https://www.v2ex.com/t/974609</link>
       <description>&lt;p&gt;我会将章节标题存储到数据库，文章内容字多存储在第三方平台，例如网盘、社交平台或笔记网站。由于文章内容较多，选择存储在第三方平台可以节省数据库的存储空间。&lt;/p&gt;&#xA;&lt;h3&gt;我想到利用平台功能进行存储&lt;/h3&gt;&#xA;&lt;p&gt;社交平台：（语雀、有道笔记...）利用社交平台的草稿、或者发布功能进行永久存储，然后读取 html 拿到内容&#xA;网盘：利用网盘、然后分析上传下载而进行存储和读取，因为很多网盘送 xxT 、又不会过期&lt;/p&gt;&#xA;&lt;p&gt;GitHub: GitHub 的容量较小，并且在国内访问速度可能较慢。&lt;/p&gt;&#xA;&lt;p&gt;七牛云: 付费，不给钱可能存储的东西就没了。&lt;/p&gt;&#xA;&lt;p&gt;百度云网盘: 提供 API 进行下载和上传，容量扩容也比较方便。但是下载操作相对麻烦，需要先获取列表再进行下载。&lt;/p&gt;&#xA;&lt;p&gt;蓝奏: 不限制速度和容量，但需要自行分析请求并构建上传和下载的 API 。研究成本较高，可能加密或者有下载限制什么的&lt;/p&gt;&#xA;&lt;p&gt;存储纯文本，访问速度要快，因为要请求第三方获取内容：client=&amp;gt; serve 请求第三方 =&amp;gt; 返回文字&lt;/p&gt;&#xA;&lt;h2&gt;有哪些存储方案？&lt;/h2&gt;&#xA;</description>
