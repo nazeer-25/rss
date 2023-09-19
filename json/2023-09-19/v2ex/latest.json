@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "iPad Pro11 英寸第一代，屏幕距离保护被砍了。。。。 - iPad",
+      "Link": "https://www.v2ex.com/t/975329",
+      "Description": "\u003cp\u003e我是从 iPadOS17 测试版一路更新到正式版的，之前测试版屏幕距离保护的功能一直可以用，结果一到正式版就给你直接砍没了。。。这又不是硬件不支持😓\u003c/p\u003e\n",
+      "Author": "Jyuagd",
+      "PubDate": "2023-09-19T13:12:09Z"
+    },
+    {
+      "Title": "问大伙个 cicd 的问题, 如何用 node 写了一个类似 github 的 webhook 的回调用来触发构建部署？我用 gpt 生成的代码一直不生效 - 问与答",
+      "Link": "https://www.v2ex.com/t/975328",
+      "Description": "\u003cp\u003egit 仓库平台用的是阿里云效\u003c/p\u003e\n\u003cp\u003e我把脚本在服务器上执行后，测试 webhook 一直失败，网上也没查到有用的解决办法\u003c/p\u003e\n\u003cp\u003e云效的 webhook 配置：\nurl: http://服务器 ip:2333/build\nsecret: xxxx\u003c/p\u003e\n\u003cp\u003e下面是 gpt 生成的脚本\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-js\"\u003econst http = require('http');\nconst { exec } = require('child_process');\n\nconst PORT = 2333;\nconst WEBHOOK_SECRET = 'xxxx';\n\nconst server = http.createServer((req, res) =\u0026gt; {\n  if (req.method === 'POST' \u0026amp;\u0026amp; req.url === '/build') {\n    let body = '';\n\n    req.on('data', (chunk) =\u0026gt; {\n      body += chunk;\n    });\n\n    req.on('end', () =\u0026gt; {\n      const codeupEventHeader = req.headers['codeup-event'];\n      const xCodeupToken = req.headers['x-codeup-token'];\n\n      if (codeupEventHeader === 'Push Hook' \u0026amp;\u0026amp; xCodeupToken === WEBHOOK_SECRET) {\n        let repoName = '';\n        try {\n          const data = JSON.parse(body);\n          repoName = data.repository.name;\n        } catch (error) {\n          console.error('无法解析 JSON 数据:', error);\n          res.statusCode = 400;\n          res.end('无效的 JSON 数据');\n          return;\n        }\n\n        switch (repoName) {\n          case 'fuex-merchant':\n            exec('sudo chmod -R 777 /opt/fuex-frontend/fuex-merchant/ \u0026amp;\u0026amp; sudo chmod -R 777 /var/www/fuex-frontend/merchant \u0026amp;\u0026amp; sudo /opt/fuex-frontend/fuex-merchant/build-prod.sh', (error, stdout, stderr) =\u0026gt; {\n              if (error) {\n                console.error('构建失败:', error);\n                res.statusCode = 500;\n                res.end('构建失败');\n              } else {\n                console.log('构建成功');\n                res.statusCode = 200;\n                res.end('构建成功');\n              }\n            });\n            break;\n          default:\n            console.error('未知的仓库名称:', repoName);\n            res.statusCode = 400;\n            res.end('未知的仓库名称');\n            break;\n        }\n      } else {\n        console.error('无效的请求');\n        res.statusCode = 400;\n        res.end('无效的请求');\n      }\n    });\n  } else {\n    res.statusCode = 404;\n    res.end('Not Found');\n  }\n})\nserver.listen(PORT, '0.0.0.0', () =\u0026gt; {\n  console.log(`Webhook 服务器运行在端口 ${PORT}`);\n})\n\n\n\u003c/code\u003e\u003c/pre\u003e\n",
+      "Author": "YepW",
+      "PubDate": "2023-09-19T13:11:34Z"
+    },
+    {
+      "Title": "Apple 这种经销商正规吗？据说 22 号就有货可以直接提 - Apple",
+      "Link": "https://www.v2ex.com/t/975327",
+      "Description": "官网查到的这种 \u003ca target=\"_blank\" href=\"https://locate.apple.com/cn/zh/sales\" rel=\"nofollow noopener\"\u003ehttps://locate.apple.com/cn/zh/sales\u003c/a\u003e\u003cbr /\u003e\u003cbr /\u003e![]( \u003ca target=\"_blank\" href=\"https://picdm.sunbangyan.cn/2023/09/19/ys78eu.png\" rel=\"nofollow noopener\"\u003ehttps://picdm.sunbangyan.cn/2023/09/19/ys78eu.png\u003c/a\u003e)\u003cbr /\u003e\u003cbr /\u003e聊天记录\u003cbr /\u003e\u003cbr /\u003e店长:\u003cbr /\u003e现在预订 22 开售\u003cbr /\u003e店长:\u003cbr /\u003e按预定先后顺序取机\u003cbr /\u003e我:\u003cbr /\u003e 人多吗现在\u003cbr /\u003e我:\u003cbr /\u003e现在顶大概啥时候能拿到货呢，\u003cbr /\u003e店长:\u003cbr /\u003e是的，有几十个，\u003cbr /\u003e店长:\u003cbr /\u003e不出问题的话现在预订 22 号能取机",
+      "Author": "Torys",
+      "PubDate": "2023-09-19T13:06:00Z"
+    },
+    {
       "Title": "MagicBee 支持 Instagram 了，免费好用的社交媒体增长助手。 - 分享创造",
       "Link": "https://www.v2ex.com/t/975326",
       "Description": "\u003cp\u003e经过两个版本的迭代了，终于支持 Instagram 平台了。\u003c/p\u003e\n\u003cp\u003e除了 Twitter ，现在可以通过 MagicBee 在 IG 上点赞、评论、关注。\u003c/p\u003e\n\u003cp\u003e在新手期，没有追随者，精心准备的内容，没人看、没人点赞、没人评论、更没人关注。\u003c/p\u003e\n\u003cp\u003e现在加入 MagicBee 立即增长你的社交网络，扩大影响力！\u003c/p\u003e\n\u003cp\u003e刚刚剪了个视频，打算下个版本发布到应用商店，新鲜出炉，快来抢先看吧！\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.youtube.com/watch?v=0wWAEXFtqhE\" rel=\"nofollow\"\u003ehttps://www.youtube.com/watch?v=0wWAEXFtqhE\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eP.S. \u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e现在加入即可获得 100 积分，能换 100 个赞 or 50 个评论 or 10 个转发 or 6 个粉丝。\u003c/li\u003e\n\u003cli\u003e通过邀请链接加入的奖励「受邀者」和「邀请者」各 500 积分，快来加入吧！\u003c/li\u003e\n\u003c/ol\u003e\n",
