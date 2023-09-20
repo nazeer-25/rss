@@ -4,7 +4,14 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
-      <title>有比较各个存储架构的性能测试的网站吗？ - 程序员</title>
+      <title>关于缓存一致性问题，不知道我这个方案是否可行 - Redis</title>
+      <link>https://www.v2ex.com/t/975618</link>
+      <description>&lt;p&gt;数据库和缓存的数据一致性问题是 Web 开发中经常碰到的，一般我们都是采用 cache aside 方案，比如&lt;a href=&#34;https://cloud.tencent.com/developer/article/1932934&#34; rel=&#34;nofollow&#34;&gt;这篇文章&lt;/a&gt;介绍的。最近参考&lt;a href=&#34;https://tech.ipalfish.com/blog/2020/04/07/fb-memcache/&#34; rel=&#34;nofollow&#34;&gt;Scaling Memcache at Facebook&lt;/a&gt;，我想到了一个基于 redis 的简化版本，不知是否可行，希望大家帮忙参考下：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;cacheMiss 时，生成一个对应 cacheKey 的 leaseId （ redis 生成一个值：key 是&lt;code&gt;cacheKey + &#34;_id&#34;&lt;/code&gt;，value 是随机数，expireTime=10 秒，若 key 已存在则失败），若生成 leaseId 失败则等待并重试。&lt;/li&gt;&#xA;&lt;li&gt;cacheMiss 后，先查 db 再更新缓存，但更新缓存的时候，需要检查 leaseId 是否有效（ redis 是否存在 key=&lt;code&gt;cacheKey + &#34;_id&#34;&lt;/code&gt;、value=leaseId 的值）&lt;/li&gt;&#xA;&lt;li&gt;每次更新 db 后，删除缓存，同时删除 leaseId （ redis 删除 key=&lt;code&gt;cacheKey + &#34;_id&#34;&lt;/code&gt;的值）&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;这样有什么问题吗？&lt;/p&gt;&#xA;</description>
+      <author>xing393939</author>
+      <pubDate>20 Sep 2023 09:46:05 +0000</pubDate>
+    </item>
+    <item>
+      <title>有比较各个存储架构的性能测试的网站吗？ - 数据库</title>
       <link>https://www.v2ex.com/t/975617</link>
       <description>&lt;p&gt;简单介绍不同存储架构(比如 mysql ，ES ，ClickHouse)的使用场景，以及性能比对，比如 mysql 和 Es 同样可以做全文索引，性能对比如何？&lt;/p&gt;&#xA;</description>
       <author>jiangwenjie</author>
@@ -13,7 +20,7 @@
     <item>
       <title>Surge 5 for Mac 车招人 - Surge</title>
       <link>https://www.v2ex.com/t/975616</link>
-      <description>&lt;p&gt;5 人车,一个坑 145&lt;/p&gt;&#xA;&lt;p&gt;v:&#39;bGlzYW5zZXZlbnR5&#39;&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;5 人车,一个坑 145&lt;/p&gt;&#xA;&lt;p&gt;v:&#39;bGlzYW5zZXZlbnR5&#39;&lt;/p&gt;&#xA;&lt;p&gt;t:&lt;a href=&#34;https://t.me/+6V-g5ddPZC0wZTI9&#34; rel=&#34;nofollow&#34;&gt;https://t.me/+6V-g5ddPZC0wZTI9&lt;/a&gt;&lt;/p&gt;&#xA;</description>
       <author>Aicnet</author>
       <pubDate>20 Sep 2023 09:40:50 +0000</pubDate>
     </item>

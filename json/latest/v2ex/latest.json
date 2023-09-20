@@ -4,7 +4,14 @@
   "Description": "",
   "Items": [
     {
-      "Title": "有比较各个存储架构的性能测试的网站吗？ - 程序员",
+      "Title": "关于缓存一致性问题，不知道我这个方案是否可行 - Redis",
+      "Link": "https://www.v2ex.com/t/975618",
+      "Description": "\u003cp\u003e数据库和缓存的数据一致性问题是 Web 开发中经常碰到的，一般我们都是采用 cache aside 方案，比如\u003ca href=\"https://cloud.tencent.com/developer/article/1932934\" rel=\"nofollow\"\u003e这篇文章\u003c/a\u003e介绍的。最近参考\u003ca href=\"https://tech.ipalfish.com/blog/2020/04/07/fb-memcache/\" rel=\"nofollow\"\u003eScaling Memcache at Facebook\u003c/a\u003e，我想到了一个基于 redis 的简化版本，不知是否可行，希望大家帮忙参考下：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003ecacheMiss 时，生成一个对应 cacheKey 的 leaseId （ redis 生成一个值：key 是\u003ccode\u003ecacheKey + \"_id\"\u003c/code\u003e，value 是随机数，expireTime=10 秒，若 key 已存在则失败），若生成 leaseId 失败则等待并重试。\u003c/li\u003e\n\u003cli\u003ecacheMiss 后，先查 db 再更新缓存，但更新缓存的时候，需要检查 leaseId 是否有效（ redis 是否存在 key=\u003ccode\u003ecacheKey + \"_id\"\u003c/code\u003e、value=leaseId 的值）\u003c/li\u003e\n\u003cli\u003e每次更新 db 后，删除缓存，同时删除 leaseId （ redis 删除 key=\u003ccode\u003ecacheKey + \"_id\"\u003c/code\u003e的值）\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e这样有什么问题吗？\u003c/p\u003e\n",
+      "Author": "xing393939",
+      "PubDate": "2023-09-20T09:46:05Z"
+    },
+    {
+      "Title": "有比较各个存储架构的性能测试的网站吗？ - 数据库",
       "Link": "https://www.v2ex.com/t/975617",
       "Description": "\u003cp\u003e简单介绍不同存储架构(比如 mysql ，ES ，ClickHouse)的使用场景，以及性能比对，比如 mysql 和 Es 同样可以做全文索引，性能对比如何？\u003c/p\u003e\n",
       "Author": "jiangwenjie",
@@ -13,7 +20,7 @@
     {
       "Title": "Surge 5 for Mac 车招人 - Surge",
       "Link": "https://www.v2ex.com/t/975616",
-      "Description": "\u003cp\u003e5 人车,一个坑 145\u003c/p\u003e\n\u003cp\u003ev:'bGlzYW5zZXZlbnR5'\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e5 人车,一个坑 145\u003c/p\u003e\n\u003cp\u003ev:'bGlzYW5zZXZlbnR5'\u003c/p\u003e\n\u003cp\u003et:\u003ca href=\"https://t.me/+6V-g5ddPZC0wZTI9\" rel=\"nofollow\"\u003ehttps://t.me/+6V-g5ddPZC0wZTI9\u003c/a\u003e\u003c/p\u003e\n",
       "Author": "Aicnet",
       "PubDate": "2023-09-20T09:40:50Z"
     },
