@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>双开的游戏窗口属性 bug - Python</title>
+      <link>https://www.v2ex.com/t/975782</link>
+      <description>&lt;p&gt;在上一个问题&lt;a href=&#34;https://www.v2ex.com/t/973131&#34; rel=&#34;nofollow&#34;&gt;《 pywin32 实现的鼠标后台点击功能略有不足》&lt;/a&gt;多番试验的基础上，发现问题的症结在于强制双开了原本不支持双开的应用导致的窗口属性存在 bug&lt;/p&gt;&#xA;&lt;h3&gt;双开方法&lt;/h3&gt;&#xA;&lt;p&gt;PC 端微信通过批处理双开，或者点选快捷方式后迅速点击两次回车键双开，分别登录两个账号后各自打开小程序游戏窗口&lt;/p&gt;&#xA;&lt;h3&gt;问题描述&lt;/h3&gt;&#xA;&lt;p&gt;使用 pywin32 的 PostMessage 方法&lt;strong&gt;在后台&lt;/strong&gt;向窗口发送鼠标点击事件，双开的两个窗口一个正常，另外一个会抢前台窗口焦点。&#xA;参考&lt;a href=&#34;https://stackoverflow.com/questions/6804251/not-take-focus-but-allow-interaction&#34; rel=&#34;nofollow&#34;&gt;Not take focus, but allow interaction?&lt;/a&gt;的方法，使用 &lt;code&gt;SetWindowLong(hwnd, GWL_EXSTYLE, WS_EX_NOACTIVATE)&lt;/code&gt; 设置窗口 &lt;code&gt;WS_EX_NOACTIVATE&lt;/code&gt; 属性，强制使窗口无法激活，使用 spyxx 查看窗体属性验证设置命令执行正常&lt;/p&gt;&#xA;&lt;p&gt;对于能后台接收鼠标消息的正常窗体有效，表现为窗口无法接收键盘输入&lt;/p&gt;&#xA;&lt;p&gt;而无法后台接收鼠标消息（会抢活动窗口焦点）的窗体小概率生效，大多数情况无效。&lt;/p&gt;&#xA;&lt;p&gt;请教大侠，有没有方法补全这种窗体 bug ，使之能正常接收后台鼠标消息&lt;/p&gt;&#xA;</description>
+      <author>lon91ong</author>
+      <pubDate>21 Sep 2023 02:27:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>帮我看看这种写法会导致内存泄漏吗？ - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/975780</link>
+      <description>&lt;p&gt;type X struct {&#xA;a string&#xA;b string&#xA;}&lt;/p&gt;&#xA;&lt;p&gt;type XS struct {&#xA;x    []X&#xA;time time.Time&#xA;}&lt;/p&gt;&#xA;&lt;p&gt;var (&#xA;global = make(map[string]*XS, 0)&#xA;)&lt;/p&gt;&#xA;&lt;p&gt;func goLoop() {&#xA;....&#xA;p := make([]X, 0)&#xA;....mysqlDB.where(&#34;123&#34;).find(&amp;amp;p)....&#xA;global[&#34;123&#34;] = &amp;amp;XS{&#xA;time:time.Now(),&#xA;x:p,&#xA;}&#xA;...&#xA;}&#xA;帮我看看这种写法会导致内存泄漏吗？&lt;/p&gt;&#xA;&lt;p&gt;代码如上&lt;/p&gt;&#xA;&lt;p&gt;情况一、假如每秒都会起很多个 goLoop()协程，它很快就会执行完毕（不会出现它被阻塞的情况），协程退出。&#xA;现象：通过 k8s 的 top pod 命令发现程序占用的内存在稳步上升，仅仅几个小时，从最开始的个位数，上升到 200+。&lt;/p&gt;&#xA;&lt;p&gt;情况二、内存上升到 200+后，停止新调用 goLoop()。然后等待几个小时&#xA;现象：内存先是稍微下降一点点，然后一直维持到 200+。&lt;/p&gt;&#xA;&lt;p&gt;按理说用过了的变量会被系统自动 GC 的呀，上面的代码我怎么看都没发现哪里有内存泄漏。&lt;/p&gt;&#xA;</description>
+      <author>cqcsdzmt</author>
+      <pubDate>21 Sep 2023 02:26:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>激光电视怎么样，有用过的大佬分享下！ - 问与答</title>
+      <link>https://www.v2ex.com/t/975779</link>
+      <description>激光电视怎么样，有用过的大佬分享下！！！投影仪和激光电视选哪个好点，万元左右有推荐品牌和型号吗？</description>
+      <author>LengSe9</author>
+      <pubDate>21 Sep 2023 02:22:15 +0000</pubDate>
+    </item>
+    <item>
       <title>Node 使用 Redis 如何处理因异步取值不准确的问题？ - Node.js</title>
       <link>https://www.v2ex.com/t/975777</link>
       <description>&lt;p&gt;大概描述一下应用场景：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;app.get(&#34;/handle-work/:workid&#34;, async (req, res) =&amp;gt; {&#xA;&#x9;const workid = req.params.workid;&#xA;    &#xA;    const work = await client.get(workid);&#xA;    if (!work) {&#xA;    &#x9;res.send(&#34;The work already done:&#34; + workid);&#xA;        return;&#xA;    }&#xA;    &#xA;    // do something sync&#xA;    &#xA;    // clean redis cache&#xA;&#x9;await client.del(workid);&#xA;    &#xA;  &#x9;res.send(&#34;Handle:&#34; + workid);&#xA;});&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这种写法可能会导致一个 workid 被处理两次。 应该如何避免呢？ 谢谢&lt;/p&gt;&#xA;</description>
@@ -11,7 +32,7 @@
       <pubDate>21 Sep 2023 02:16:04 +0000</pubDate>
     </item>
     <item>
-      <title>就最近新闻网易员工事件，我们打工人如何防止职场 PUA - 问与答</title>
+      <title>就最近新闻网易员工事件，我们打工人如何防止职场 PUA - 程序员</title>
       <link>https://www.v2ex.com/t/975776</link>
       <description>&lt;p&gt;知乎链接： &lt;a href=&#34;https://www.zhihu.com/question/621998618/answer/3212181174&#34; rel=&#34;nofollow&#34;&gt;https://www.zhihu.com/question/621998618/answer/3212181174&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;打工人如何防止职场 PUA 了&lt;/p&gt;&#xA;</description>
       <author>rookie8</author>
@@ -34,7 +55,7 @@
     <item>
       <title>大量操作 dict 内元素时有什么能省略 dict 名字的语法糖？ - Python</title>
       <link>https://www.v2ex.com/t/975773</link>
-      <description>&lt;p&gt;标题可能描述的不够具体。大致操作是从 json 读入数据，经过一通计算，用 python-docx-replace 替换模版快速生成文档。代码举例（省略数字格式化字符串部分）：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;dict = json.load(xxx)&#xA;dict[A]=dict[B]+dict[C]&#xA;dict[D]=dict[E]-dict[F]&#xA;dict[G]=dict[H]*dict[I]&#xA;dict[J]=dict[K]/dict[L]&#xA;...&#xA;docx_replace(doc, **dict)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;个人觉得写这么多&lt;code&gt;dict[]&lt;/code&gt;可读性实在太差，于是采用了如下写法（我知道不妥，但是想不出更好的），被 LD 批评很不 Pythonic 。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;dict = json.load(xxx)&#xA;locals().update(dict)&#xA;A=B+C&#xA;D=E-F&#xA;G=H*I&#xA;J=K/L&#xA;...&#xA;dict.update({key: value for (key, value) in locals().items() if type(value) == int or type(value) == float})&#xA;docx_replace(doc, **dict)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;求助各位高人有没有更合理的写法？&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;标题可能描述的不够具体。大致操作是从 json 读入数据，经过一通计算，用 python-docx-replace 替换模版快速生成文档。代码举例（省略数字格式化字符串部分）：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;dict = json.load(xxx)&#xA;dict[A]=dict[B]+dict[C]&#xA;dict[D]=dict[E]-dict[F]&#xA;dict[G]=dict[H]*dict[I]&#xA;dict[J]=dict[K]/dict[L]&#xA;...&#xA;docx_replace(doc, **dict)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;因为实际代码是很长的数学公式，个人觉得写这么多&lt;code&gt;dict[]&lt;/code&gt;可读性实在太差，于是采用了如下写法（我知道不妥，但是想不出更好的），被 LD 批评很不 Pythonic 。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;dict = json.load(xxx)&#xA;locals().update(dict)&#xA;A=B+C&#xA;D=E-F&#xA;G=H*I&#xA;J=K/L&#xA;...&#xA;dict.update({key: value for (key, value) in locals().items() if type(value) == int or type(value) == float})&#xA;docx_replace(doc, **dict)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;求助各位高人有没有更合理的写法？&lt;/p&gt;&#xA;</description>
       <author>xuegy</author>
       <pubDate>21 Sep 2023 02:11:23 +0000</pubDate>
     </item>

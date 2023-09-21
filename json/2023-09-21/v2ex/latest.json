@@ -4,6 +4,27 @@
   "Description": "",
   "Items": [
     {
+      "Title": "双开的游戏窗口属性 bug - Python",
+      "Link": "https://www.v2ex.com/t/975782",
+      "Description": "\u003cp\u003e在上一个问题\u003ca href=\"https://www.v2ex.com/t/973131\" rel=\"nofollow\"\u003e《 pywin32 实现的鼠标后台点击功能略有不足》\u003c/a\u003e多番试验的基础上，发现问题的症结在于强制双开了原本不支持双开的应用导致的窗口属性存在 bug\u003c/p\u003e\n\u003ch3\u003e双开方法\u003c/h3\u003e\n\u003cp\u003ePC 端微信通过批处理双开，或者点选快捷方式后迅速点击两次回车键双开，分别登录两个账号后各自打开小程序游戏窗口\u003c/p\u003e\n\u003ch3\u003e问题描述\u003c/h3\u003e\n\u003cp\u003e使用 pywin32 的 PostMessage 方法\u003cstrong\u003e在后台\u003c/strong\u003e向窗口发送鼠标点击事件，双开的两个窗口一个正常，另外一个会抢前台窗口焦点。\n参考\u003ca href=\"https://stackoverflow.com/questions/6804251/not-take-focus-but-allow-interaction\" rel=\"nofollow\"\u003eNot take focus, but allow interaction?\u003c/a\u003e的方法，使用 \u003ccode\u003eSetWindowLong(hwnd, GWL_EXSTYLE, WS_EX_NOACTIVATE)\u003c/code\u003e 设置窗口 \u003ccode\u003eWS_EX_NOACTIVATE\u003c/code\u003e 属性，强制使窗口无法激活，使用 spyxx 查看窗体属性验证设置命令执行正常\u003c/p\u003e\n\u003cp\u003e对于能后台接收鼠标消息的正常窗体有效，表现为窗口无法接收键盘输入\u003c/p\u003e\n\u003cp\u003e而无法后台接收鼠标消息（会抢活动窗口焦点）的窗体小概率生效，大多数情况无效。\u003c/p\u003e\n\u003cp\u003e请教大侠，有没有方法补全这种窗体 bug ，使之能正常接收后台鼠标消息\u003c/p\u003e\n",
+      "Author": "lon91ong",
+      "PubDate": "2023-09-21T02:27:42Z"
+    },
+    {
+      "Title": "帮我看看这种写法会导致内存泄漏吗？ - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/975780",
+      "Description": "\u003cp\u003etype X struct {\na string\nb string\n}\u003c/p\u003e\n\u003cp\u003etype XS struct {\nx    []X\ntime time.Time\n}\u003c/p\u003e\n\u003cp\u003evar (\nglobal = make(map[string]*XS, 0)\n)\u003c/p\u003e\n\u003cp\u003efunc goLoop() {\n....\np := make([]X, 0)\n....mysqlDB.where(\"123\").find(\u0026amp;p)....\nglobal[\"123\"] = \u0026amp;XS{\ntime:time.Now(),\nx:p,\n}\n...\n}\n帮我看看这种写法会导致内存泄漏吗？\u003c/p\u003e\n\u003cp\u003e代码如上\u003c/p\u003e\n\u003cp\u003e情况一、假如每秒都会起很多个 goLoop()协程，它很快就会执行完毕（不会出现它被阻塞的情况），协程退出。\n现象：通过 k8s 的 top pod 命令发现程序占用的内存在稳步上升，仅仅几个小时，从最开始的个位数，上升到 200+。\u003c/p\u003e\n\u003cp\u003e情况二、内存上升到 200+后，停止新调用 goLoop()。然后等待几个小时\n现象：内存先是稍微下降一点点，然后一直维持到 200+。\u003c/p\u003e\n\u003cp\u003e按理说用过了的变量会被系统自动 GC 的呀，上面的代码我怎么看都没发现哪里有内存泄漏。\u003c/p\u003e\n",
+      "Author": "cqcsdzmt",
+      "PubDate": "2023-09-21T02:26:52Z"
+    },
+    {
+      "Title": "激光电视怎么样，有用过的大佬分享下！ - 问与答",
+      "Link": "https://www.v2ex.com/t/975779",
+      "Description": "激光电视怎么样，有用过的大佬分享下！！！投影仪和激光电视选哪个好点，万元左右有推荐品牌和型号吗？",
+      "Author": "LengSe9",
+      "PubDate": "2023-09-21T02:22:15Z"
+    },
+    {
       "Title": "Node 使用 Redis 如何处理因异步取值不准确的问题？ - Node.js",
       "Link": "https://www.v2ex.com/t/975777",
       "Description": "\u003cp\u003e大概描述一下应用场景：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eapp.get(\"/handle-work/:workid\", async (req, res) =\u0026gt; {\n\tconst workid = req.params.workid;\n    \n    const work = await client.get(workid);\n    if (!work) {\n    \tres.send(\"The work already done:\" + workid);\n        return;\n    }\n    \n    // do something sync\n    \n    // clean redis cache\n\tawait client.del(workid);\n    \n  \tres.send(\"Handle:\" + workid);\n});\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这种写法可能会导致一个 workid 被处理两次。 应该如何避免呢？ 谢谢\u003c/p\u003e\n",
@@ -11,7 +32,7 @@
       "PubDate": "2023-09-21T02:16:04Z"
     },
     {
-      "Title": "就最近新闻网易员工事件，我们打工人如何防止职场 PUA - 问与答",
+      "Title": "就最近新闻网易员工事件，我们打工人如何防止职场 PUA - 程序员",
       "Link": "https://www.v2ex.com/t/975776",
       "Description": "\u003cp\u003e知乎链接： \u003ca href=\"https://www.zhihu.com/question/621998618/answer/3212181174\" rel=\"nofollow\"\u003ehttps://www.zhihu.com/question/621998618/answer/3212181174\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e打工人如何防止职场 PUA 了\u003c/p\u003e\n",
       "Author": "rookie8",
@@ -34,7 +55,7 @@
     {
       "Title": "大量操作 dict 内元素时有什么能省略 dict 名字的语法糖？ - Python",
       "Link": "https://www.v2ex.com/t/975773",
-      "Description": "\u003cp\u003e标题可能描述的不够具体。大致操作是从 json 读入数据，经过一通计算，用 python-docx-replace 替换模版快速生成文档。代码举例（省略数字格式化字符串部分）：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edict = json.load(xxx)\ndict[A]=dict[B]+dict[C]\ndict[D]=dict[E]-dict[F]\ndict[G]=dict[H]*dict[I]\ndict[J]=dict[K]/dict[L]\n...\ndocx_replace(doc, **dict)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e个人觉得写这么多\u003ccode\u003edict[]\u003c/code\u003e可读性实在太差，于是采用了如下写法（我知道不妥，但是想不出更好的），被 LD 批评很不 Pythonic 。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edict = json.load(xxx)\nlocals().update(dict)\nA=B+C\nD=E-F\nG=H*I\nJ=K/L\n...\ndict.update({key: value for (key, value) in locals().items() if type(value) == int or type(value) == float})\ndocx_replace(doc, **dict)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e求助各位高人有没有更合理的写法？\u003c/p\u003e\n",
+      "Description": "\u003cp\u003e标题可能描述的不够具体。大致操作是从 json 读入数据，经过一通计算，用 python-docx-replace 替换模版快速生成文档。代码举例（省略数字格式化字符串部分）：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edict = json.load(xxx)\ndict[A]=dict[B]+dict[C]\ndict[D]=dict[E]-dict[F]\ndict[G]=dict[H]*dict[I]\ndict[J]=dict[K]/dict[L]\n...\ndocx_replace(doc, **dict)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e因为实际代码是很长的数学公式，个人觉得写这么多\u003ccode\u003edict[]\u003c/code\u003e可读性实在太差，于是采用了如下写法（我知道不妥，但是想不出更好的），被 LD 批评很不 Pythonic 。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edict = json.load(xxx)\nlocals().update(dict)\nA=B+C\nD=E-F\nG=H*I\nJ=K/L\n...\ndict.update({key: value for (key, value) in locals().items() if type(value) == int or type(value) == float})\ndocx_replace(doc, **dict)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e求助各位高人有没有更合理的写法？\u003c/p\u003e\n",
       "Author": "xuegy",
       "PubDate": "2023-09-21T02:11:23Z"
     },
