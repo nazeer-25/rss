@@ -4,6 +4,41 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ipv6 p2p 远程真是个好东西 - 分享发现</title>
+      <link>https://www.v2ex.com/t/975958</link>
+      <description>&lt;p&gt;用过 teamviewer 绿色版，todesk ，向日葵（向日葵还开了超级会员）一直都不太得劲，要么不够稳定，要么鼠标在不同程序里有 bug ，某天突发奇想关路由器 ipv6 防火墙然后开微软远程桌面，意外的丝滑，就是窗口拖动卡卡的，不知道是不是由于上行宽带不够（ 100mbps ）&lt;/p&gt;&#xA;&lt;p&gt;换了 parsec 开鼠标键盘沉浸模式，关闭悬浮 overlay 按钮后，经常会让我忘记我在用远程机&#xA;（甚至能打 cs2 ，输入延迟带来的手感和蓝牙键鼠打差不多 hhhhh ）&lt;/p&gt;&#xA;</description>
+      <author>LongLights</author>
+      <pubDate>21 Sep 2023 10:01:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>谁懂网络技术呀 - 问与答</title>
+      <link>https://www.v2ex.com/t/975957</link>
+      <description>&lt;p&gt;请问谁懂网络技术呀&#xA;请与我联系&lt;/p&gt;&#xA;</description>
+      <author>kexuejia</author>
+      <pubDate>21 Sep 2023 10:01:24 +0000</pubDate>
+    </item>
+    <item>
+      <title>关于后台系统的前端开发，大家是会选择现成的 template 还是直接用前端框架+组件库手搓 - 前端开发</title>
+      <link>https://www.v2ex.com/t/975956</link>
+      <description>&lt;p&gt;如题，现在有一些后台系统的现成 template 类似 react-admin, vue-element-plus-admin 之类的&lt;/p&gt;&#xA;&lt;p&gt;因为之前在公司写的产品都是 react + mui 之类的 UI 库，然后自己根据需求整理和封装各种组件，Layout&lt;/p&gt;&#xA;&lt;p&gt;现在接手了一个后台系统，是用现成 template 改的（ vue-element-plus-admin ），使用过程中发现各种封装非常繁琐，一个 Form 可能包了好几层，找一个属性找半天。用起来感觉还不如直接自己 tailwind component 重新写&lt;/p&gt;&#xA;&lt;p&gt;想看看大伙都是怎么做/想的 xd&lt;/p&gt;&#xA;</description>
+      <author>Grea</author>
+      <pubDate>21 Sep 2023 10:01:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>ES 查询的 scroll_id 不会变，我真的服了。。 - 程序员</title>
+      <link>https://www.v2ex.com/t/975955</link>
+      <description>&lt;h2&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;今天做 codereview 发现以下的代码是有问题的，然后我解释说明这部分代码是有问题的，但是他坚持说没问题，生产也没问题。所以我就怀疑是数据量小，所以根本没有翻页，或者翻页一次就结束了。&lt;/p&gt;&#xA;&lt;p&gt;然后我就在本地进行调试，最后发现 scrollId 不会变的，后面换了 60w 的数据继续测试，也不会改变，我真顶你的个肺。&lt;/p&gt;&#xA;&lt;p&gt;测试代码：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;// 第一次查询&#xA;SearchScrollHits&amp;lt;Book&amp;gt; searchHits = elasticsearchRestTemplate.searchScrollStart(6000, nativeSearchQuery, Book.class, IndexCoordinates.of(&#34;book&#34;));&#xA;String scrollId = searchScrollHits.getScrollId();&#xA;while (searchHits.hasSearchHits()) {&#xA;    for (SearchHit&amp;lt;Book&amp;gt; searchHit : searchHits.getSearchHits()) {&#xA;        this.execute(searchHit.getContent());&#xA;    }&#xA;    // 后续查询&#xA;    searchHits = elasticsearchRestTemplate.searchScrollContinue(scrollId, 6000, Book.class, IndexCoordinates.of(&#34;book&#34;));&#xA;    // 他的代码不存在这行的 scrollId = searchHits.getScrollId();&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;因为 scrollId 在非分片的情况下是不会变的，所以即使不用 scrollId = searchHits.getScrollId(); 它也能正常跑，我也是醉了。。。这 tmd 瞎猫碰上死老鼠。&lt;/p&gt;&#xA;&lt;p&gt;没啥好说的，他代码确实可以跑，ES 也没有用到分片，所以结果也是对的，领导也没说啥😂。&lt;/p&gt;&#xA;&lt;h2&gt;网上的答案&lt;/h2&gt;&#xA;&lt;p&gt;scrollid 可能不变，scroll 得到的 doc 是会变的。&lt;/p&gt;&#xA;&lt;p&gt;scrollid 保留的是 shard 信息，假如 scroll 查询语句需要路由到 100 个 shard 上查。&#xA;scrollid 会比较长，记录这 100 个 shard 。有可能从开始到完成都需要路由到这 100 个 shard ，shardid 都不会变化😒，也有可能随着不断进行 scroll ，需要路由到的 shard 越来越少，shardId 也会越来越短。&lt;/p&gt;&#xA;&lt;p&gt;那么如果 shardid 不变，es 如何每次拿到不同的数据呢？通过 lastEmittedDoc 保留每个 shard 上应取数据在优先队列中的位置信息，并在 fetch 阶段更新 lastEmittedDoc(因为经过全局排序之后，在 fetch 阶段才能确定在不同 shard 上面取多少条数据)。&lt;/p&gt;&#xA;&lt;h2&gt;BTW&lt;/h2&gt;&#xA;&lt;p&gt;虽然我打赌输了，但是我还是不认为那个代码是对的，即使代码是可以正常跑，运行结果也是对的。当然我也不会去改，爱咋滴咋滴，能跑就行。我是坚持不了，尊重他人的思想和认知。&lt;/p&gt;&#xA;&lt;p&gt;如果是你们会怎么处理呢😂。&lt;/p&gt;&#xA;</description>
+      <author>byte10</author>
+      <pubDate>21 Sep 2023 10:01:10 +0000</pubDate>
+    </item>
+    <item>
+      <title>在校学生能去香港开汇丰的卡吗 - 香港</title>
+      <link>https://www.v2ex.com/t/975954</link>
+      <description>准备国庆后找个人少的时间去香港开卡，za 和 livi 是肯定能办下了，但就是想整个汇丰玩玩。先说下目前的条件：&lt;br /&gt;&lt;br /&gt;1.已成年无收入在校学生&lt;br /&gt;2.有工行双币信用卡（不过没有额度）&lt;br /&gt;3.拿不出 1k 港币预存&lt;br /&gt;4.不投资，拿来日常消费以及收加密币，听说开户理由为投资通过几率更高&lt;br /&gt;&lt;br /&gt;不知道这样能不能开到汇丰 one ，如果开不到能不能选别的银行</description>
+      <author>zhishixiang</author>
+      <pubDate>21 Sep 2023 09:57:31 +0000</pubDate>
+    </item>
+    <item>
       <title>Bartender5 会上线 Setapp 可以不用急着买 - Apple</title>
       <link>https://www.v2ex.com/t/975953</link>
       <description>发邮件问了开发者，说是一周内会上架 Setapp</description>

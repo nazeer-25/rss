@@ -4,6 +4,41 @@
   "Description": "",
   "Items": [
     {
+      "Title": "ipv6 p2p 远程真是个好东西 - 分享发现",
+      "Link": "https://www.v2ex.com/t/975958",
+      "Description": "\u003cp\u003e用过 teamviewer 绿色版，todesk ，向日葵（向日葵还开了超级会员）一直都不太得劲，要么不够稳定，要么鼠标在不同程序里有 bug ，某天突发奇想关路由器 ipv6 防火墙然后开微软远程桌面，意外的丝滑，就是窗口拖动卡卡的，不知道是不是由于上行宽带不够（ 100mbps ）\u003c/p\u003e\n\u003cp\u003e换了 parsec 开鼠标键盘沉浸模式，关闭悬浮 overlay 按钮后，经常会让我忘记我在用远程机\n（甚至能打 cs2 ，输入延迟带来的手感和蓝牙键鼠打差不多 hhhhh ）\u003c/p\u003e\n",
+      "Author": "LongLights",
+      "PubDate": "2023-09-21T10:01:43Z"
+    },
+    {
+      "Title": "谁懂网络技术呀 - 问与答",
+      "Link": "https://www.v2ex.com/t/975957",
+      "Description": "\u003cp\u003e请问谁懂网络技术呀\n请与我联系\u003c/p\u003e\n",
+      "Author": "kexuejia",
+      "PubDate": "2023-09-21T10:01:24Z"
+    },
+    {
+      "Title": "关于后台系统的前端开发，大家是会选择现成的 template 还是直接用前端框架+组件库手搓 - 前端开发",
+      "Link": "https://www.v2ex.com/t/975956",
+      "Description": "\u003cp\u003e如题，现在有一些后台系统的现成 template 类似 react-admin, vue-element-plus-admin 之类的\u003c/p\u003e\n\u003cp\u003e因为之前在公司写的产品都是 react + mui 之类的 UI 库，然后自己根据需求整理和封装各种组件，Layout\u003c/p\u003e\n\u003cp\u003e现在接手了一个后台系统，是用现成 template 改的（ vue-element-plus-admin ），使用过程中发现各种封装非常繁琐，一个 Form 可能包了好几层，找一个属性找半天。用起来感觉还不如直接自己 tailwind component 重新写\u003c/p\u003e\n\u003cp\u003e想看看大伙都是怎么做/想的 xd\u003c/p\u003e\n",
+      "Author": "Grea",
+      "PubDate": "2023-09-21T10:01:22Z"
+    },
+    {
+      "Title": "ES 查询的 scroll_id 不会变，我真的服了。。 - 程序员",
+      "Link": "https://www.v2ex.com/t/975955",
+      "Description": "\u003ch2\u003e背景\u003c/h2\u003e\n\u003cp\u003e今天做 codereview 发现以下的代码是有问题的，然后我解释说明这部分代码是有问题的，但是他坚持说没问题，生产也没问题。所以我就怀疑是数据量小，所以根本没有翻页，或者翻页一次就结束了。\u003c/p\u003e\n\u003cp\u003e然后我就在本地进行调试，最后发现 scrollId 不会变的，后面换了 60w 的数据继续测试，也不会改变，我真顶你的个肺。\u003c/p\u003e\n\u003cp\u003e测试代码：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e// 第一次查询\nSearchScrollHits\u0026lt;Book\u0026gt; searchHits = elasticsearchRestTemplate.searchScrollStart(6000, nativeSearchQuery, Book.class, IndexCoordinates.of(\"book\"));\nString scrollId = searchScrollHits.getScrollId();\nwhile (searchHits.hasSearchHits()) {\n    for (SearchHit\u0026lt;Book\u0026gt; searchHit : searchHits.getSearchHits()) {\n        this.execute(searchHit.getContent());\n    }\n    // 后续查询\n    searchHits = elasticsearchRestTemplate.searchScrollContinue(scrollId, 6000, Book.class, IndexCoordinates.of(\"book\"));\n    // 他的代码不存在这行的 scrollId = searchHits.getScrollId();\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e因为 scrollId 在非分片的情况下是不会变的，所以即使不用 scrollId = searchHits.getScrollId(); 它也能正常跑，我也是醉了。。。这 tmd 瞎猫碰上死老鼠。\u003c/p\u003e\n\u003cp\u003e没啥好说的，他代码确实可以跑，ES 也没有用到分片，所以结果也是对的，领导也没说啥😂。\u003c/p\u003e\n\u003ch2\u003e网上的答案\u003c/h2\u003e\n\u003cp\u003escrollid 可能不变，scroll 得到的 doc 是会变的。\u003c/p\u003e\n\u003cp\u003escrollid 保留的是 shard 信息，假如 scroll 查询语句需要路由到 100 个 shard 上查。\nscrollid 会比较长，记录这 100 个 shard 。有可能从开始到完成都需要路由到这 100 个 shard ，shardid 都不会变化😒，也有可能随着不断进行 scroll ，需要路由到的 shard 越来越少，shardId 也会越来越短。\u003c/p\u003e\n\u003cp\u003e那么如果 shardid 不变，es 如何每次拿到不同的数据呢？通过 lastEmittedDoc 保留每个 shard 上应取数据在优先队列中的位置信息，并在 fetch 阶段更新 lastEmittedDoc(因为经过全局排序之后，在 fetch 阶段才能确定在不同 shard 上面取多少条数据)。\u003c/p\u003e\n\u003ch2\u003eBTW\u003c/h2\u003e\n\u003cp\u003e虽然我打赌输了，但是我还是不认为那个代码是对的，即使代码是可以正常跑，运行结果也是对的。当然我也不会去改，爱咋滴咋滴，能跑就行。我是坚持不了，尊重他人的思想和认知。\u003c/p\u003e\n\u003cp\u003e如果是你们会怎么处理呢😂。\u003c/p\u003e\n",
+      "Author": "byte10",
+      "PubDate": "2023-09-21T10:01:10Z"
+    },
+    {
+      "Title": "在校学生能去香港开汇丰的卡吗 - 香港",
+      "Link": "https://www.v2ex.com/t/975954",
+      "Description": "准备国庆后找个人少的时间去香港开卡，za 和 livi 是肯定能办下了，但就是想整个汇丰玩玩。先说下目前的条件：\u003cbr /\u003e\u003cbr /\u003e1.已成年无收入在校学生\u003cbr /\u003e2.有工行双币信用卡（不过没有额度）\u003cbr /\u003e3.拿不出 1k 港币预存\u003cbr /\u003e4.不投资，拿来日常消费以及收加密币，听说开户理由为投资通过几率更高\u003cbr /\u003e\u003cbr /\u003e不知道这样能不能开到汇丰 one ，如果开不到能不能选别的银行",
+      "Author": "zhishixiang",
+      "PubDate": "2023-09-21T09:57:31Z"
+    },
+    {
       "Title": "Bartender5 会上线 Setapp 可以不用急着买 - Apple",
       "Link": "https://www.v2ex.com/t/975953",
       "Description": "发邮件问了开发者，说是一周内会上架 Setapp",
