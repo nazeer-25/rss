@@ -10,7 +10,6 @@
     <item>
       <title>如何限制http.HandleFunc并发数量？</title>
       <link>https://studygolang.com/topics/16746#reply6</link>
-      <description>&lt;pre&gt;&lt;code&gt;func xHandle(w http.ResponseWriter, r *http.Request) {&#xA;    fmt.Printf(&amp;quot;new request: %p\n&amp;quot;, r)&#xA;    w.Write([]byte(&amp;quot;Hello\n&amp;quot;))&#xA;    for {}&#xA;}&#xA;&#xA;func main() {&#xA;    http.HandleFunc(&amp;quot;/&amp;quot;, xHandle)&#xA;    http.ListenAndServe(&amp;quot;:8080&amp;quot;, nil)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;对于每一个http请求，http服务都会启动一个go routine 来调用xHandle函数。目前搜到的资料都是在xHandle内部做并发数控制，就是说等http服务启go routine后，发现超限了再直接退出。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我想问的是如何从源头上控制http服务的go routine数量，也是当go routine到达上限后，都不用启动go routine回调xHandle,直接在底层响应500给客户端？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>golang 结合 cobra 使用 chatgpt qdrant 实现 ai知识库 cli</title>
@@ -58,7 +57,6 @@
     <item>
       <title>sync包once小问题</title>
       <link>https://studygolang.com/topics/16711#reply18</link>
-      <description>&lt;p&gt;Do函数里面 刚开始进来的时候，直接用0.done == 0 判断也能达到效果，atomic.LoadUint32(&amp;amp;o.done) == 0目的是啥，为了很多goroutine同时调用Do函数，减少o.m.Lock()的调用吗&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>求大牛，谁知道这个错误是什么原因啊？protocol error: received DATA after END_STREAM</title>
