@@ -10,6 +10,7 @@
     <item>
       <title>如何限制http.HandleFunc并发数量？</title>
       <link>https://studygolang.com/topics/16746#reply6</link>
+      <description>&lt;pre&gt;&lt;code&gt;func xHandle(w http.ResponseWriter, r *http.Request) {&#xA;    fmt.Printf(&amp;quot;new request: %p\n&amp;quot;, r)&#xA;    w.Write([]byte(&amp;quot;Hello\n&amp;quot;))&#xA;    for {}&#xA;}&#xA;&#xA;func main() {&#xA;    http.HandleFunc(&amp;quot;/&amp;quot;, xHandle)&#xA;    http.ListenAndServe(&amp;quot;:8080&amp;quot;, nil)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;对于每一个http请求，http服务都会启动一个go routine 来调用xHandle函数。目前搜到的资料都是在xHandle内部做并发数控制，就是说等http服务启go routine后，发现超限了再直接退出。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我想问的是如何从源头上控制http服务的go routine数量，也是当go routine到达上限后，都不用启动go routine回调xHandle,直接在底层响应500给客户端？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>golang 结合 cobra 使用 chatgpt qdrant 实现 ai知识库 cli</title>
@@ -48,6 +49,7 @@
     <item>
       <title>【公告】寻找社区日常运营、功能开发、维护 自愿者</title>
       <link>https://studygolang.com/topics/4092#reply263</link>
+      <description>&lt;p&gt;本站 2013 年上线以来，得到国内广大 gopher 们的支持，也让我有动力一直开发、维护着。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;随着 go 越来越流行，学习 go 的人也越来越多，本社区用户量也越来越大，而我个人的精力有限。为了给社区用户提供更好的服务，希望有自愿者加入社区，一起维护、运营本站。招募的自愿者包括：&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;日常网站运营 —— 比如晨读文章推荐、周推荐等；&lt;strong&gt;特别欢迎在校大学生；&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;功能开发、维护 —— 参与开发本站功能；板块维护、管理者等；&lt;/li&gt;&#xA;&lt;li&gt;活动组织、宣传者 —— 组织社区用户参与互动，和外界联系拉赞助等；&lt;/li&gt;&#xA;&lt;li&gt;翻译 —— Go 相关教程、文章、资讯等的翻译；&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;其他你想到的，也可以和我沟通~ 根据情况，会提供奖励~&lt;/p&gt;&#xA;&#xA;&lt;p&gt;项目开源的，参与开发，可以直接 fork + PR，参与其他的可以加我微信 gopherstudio 联系。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;项目地址：&lt;a href=&#34;https://github.com/studygolang/studygolang&#34;&gt;https://github.com/studygolang/studygolang&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;img src=&#34;https://static.studygolang.com/static/img/gopherstudio2.png?imageView2/2/w/154&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>REST API设计模式和反模式</title>
@@ -57,6 +59,7 @@
     <item>
       <title>sync包once小问题</title>
       <link>https://studygolang.com/topics/16711#reply18</link>
+      <description>&lt;p&gt;Do函数里面 刚开始进来的时候，直接用0.done == 0 判断也能达到效果，atomic.LoadUint32(&amp;amp;o.done) == 0目的是啥，为了很多goroutine同时调用Do函数，减少o.m.Lock()的调用吗&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>求大牛，谁知道这个错误是什么原因啊？protocol error: received DATA after END_STREAM</title>
