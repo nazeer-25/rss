@@ -13,7 +13,7 @@
     {
       "Title": "如何限制http.HandleFunc并发数量？",
       "Link": "https://studygolang.com/topics/16746#reply6",
-      "Description": "",
+      "Description": "\u003cpre\u003e\u003ccode\u003efunc xHandle(w http.ResponseWriter, r *http.Request) {\n    fmt.Printf(\u0026quot;new request: %p\\n\u0026quot;, r)\n    w.Write([]byte(\u0026quot;Hello\\n\u0026quot;))\n    for {}\n}\n\nfunc main() {\n    http.HandleFunc(\u0026quot;/\u0026quot;, xHandle)\n    http.ListenAndServe(\u0026quot;:8080\u0026quot;, nil)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e对于每一个http请求，http服务都会启动一个go routine 来调用xHandle函数。目前搜到的资料都是在xHandle内部做并发数控制，就是说等http服务启go routine后，发现超限了再直接退出。\u003c/p\u003e\n\n\u003cp\u003e我想问的是如何从源头上控制http服务的go routine数量，也是当go routine到达上限后，都不用启动go routine回调xHandle,直接在底层响应500给客户端？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -62,14 +62,14 @@
     {
       "Title": "代码整洁之道：程序员的职业素养（十一）",
       "Link": "https://studygolang.com/topics/16741#reply0",
-      "Description": "",
+      "Description": "\u003ch1\u003e预估\u003c/h1\u003e\n\n\u003cp\u003e预估是软件开发中一项重要而又困难的活动。它既关乎业务价值，又影响开发团队的声誉。然而，预估经常成为业务人员和开发人员之间的障碍，造成双方的不信任和沟通困难。在这篇文章中，我将探讨预估的挑战以及如何提高预估的准确性和可信度。\u003c/p\u003e\n\n\u003cp\u003e首先，让我们回顾一下预估的本质。预估是一种猜测，它是基于对任务复杂性和开发人员能力的理性判断。然而，不同的人对预估有不同的理解。业务方往往将预估视为承诺，期望开发人员按时交付。而开发人员则将预估视为猜测，他们知道在软件开发中难以避免的不确定性。因此，为了解决这一障碍，我们需要建立相互理解和信任的基础。\u003c/p\u003e\n\n\u003cp\u003e为了提高预估的准确性和可信度，以下是几点建议：\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e拆分任务：将大任务拆分成小任务，以便更精确地估算工时。拆分任务有助于理解任务的本质和可能的风险因素。同时，拆分任务还可以减少对预估结果的影响，因为小任务的预估错误相对较小。\u003c/li\u003e\n\u003cli\u003e利用专业知识：专业开发人员应该利用自己的经验和知识来提高预估的准确性。他们应该深入了解项目的需求和技术细节，以便更好地评估任务的复杂性和可能的挑战。\u003c/li\u003e\n\u003cli\u003e合作讨论：预估不应该是一个孤立的活动。开发人员应该与团队中的其他成员进行合作讨论，共同评估任务的工时和风险。通过集思广益，可以更全面地考虑各种因素，提高预估的准确性。\u003c/li\u003e\n\u003cli\u003e透明沟通：开发人员应该与业务方进行透明沟通，将预估结果以概率的形式呈现，说明可能的不确定性和风险。这样可以帮助业务方更好地理解预估结果，并做出相应的计划和决策。\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e最后，我想分享我的独特见解。预估是一项艺术而非科学。它受到许多因素的影响，包括任务的复杂性、开发人员的经验和技能、项目的紧急程度等等。因此，预估永远不可能完全准确。然而，通过不断学习和改进，我们可以逐渐提高预估的准确性和可信度。同时，预估也是一项团队活动，需要各方的共同努力和理解。只有通过相互合作和沟通，我们才能在预估中取得更好的结果。\u003c/p\u003e\n\n\u003cp\u003e在软件开发中，预估是一项必不可少的活动。尽管它具有挑战性，但通过合理的方法和团队的共同努力，我们可以提高预估的准确性和可信度。最重要的是，预估应该被视为一种沟通和计划的工具，而不是承诺的保证。只有通过透明和合作的方式，我们才能在预估中取得更好的结果，并实现成功的项目交付。\u003c/p\u003e\n\n\u003cblockquote\u003e\n\u003cp\u003e关注公众号【爱发白日梦的后端】分享技术干货、读书笔记、开源项目、实战经验、高效开发工具等，您的关注将是我的更新动力！\u003c/p\u003e\n\u003c/blockquote\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
     {
       "Title": "【公告】寻找社区日常运营、功能开发、维护 自愿者",
       "Link": "https://studygolang.com/topics/4092#reply263",
-      "Description": "",
+      "Description": "\u003cp\u003e本站 2013 年上线以来，得到国内广大 gopher 们的支持，也让我有动力一直开发、维护着。\u003c/p\u003e\n\n\u003cp\u003e随着 go 越来越流行，学习 go 的人也越来越多，本社区用户量也越来越大，而我个人的精力有限。为了给社区用户提供更好的服务，希望有自愿者加入社区，一起维护、运营本站。招募的自愿者包括：\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e日常网站运营 —— 比如晨读文章推荐、周推荐等；\u003cstrong\u003e特别欢迎在校大学生；\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003e功能开发、维护 —— 参与开发本站功能；板块维护、管理者等；\u003c/li\u003e\n\u003cli\u003e活动组织、宣传者 —— 组织社区用户参与互动，和外界联系拉赞助等；\u003c/li\u003e\n\u003cli\u003e翻译 —— Go 相关教程、文章、资讯等的翻译；\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e其他你想到的，也可以和我沟通~ 根据情况，会提供奖励~\u003c/p\u003e\n\n\u003cp\u003e项目开源的，参与开发，可以直接 fork + PR，参与其他的可以加我微信 gopherstudio 联系。\u003c/p\u003e\n\n\u003cp\u003e项目地址：\u003ca href=\"https://github.com/studygolang/studygolang\"\u003ehttps://github.com/studygolang/studygolang\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.studygolang.com/static/img/gopherstudio2.png?imageView2/2/w/154\" alt=\"\" /\u003e\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -83,7 +83,7 @@
     {
       "Title": "sync包once小问题",
       "Link": "https://studygolang.com/topics/16711#reply18",
-      "Description": "",
+      "Description": "\u003cp\u003eDo函数里面 刚开始进来的时候，直接用0.done == 0 判断也能达到效果，atomic.LoadUint32(\u0026amp;o.done) == 0目的是啥，为了很多goroutine同时调用Do函数，减少o.m.Lock()的调用吗\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -97,7 +97,7 @@
     {
       "Title": "Go 1.22 将修复 for 循环变量的问题",
       "Link": "https://studygolang.com/topics/16663#reply1",
-      "Description": "",
+      "Description": "\u003cp\u003e上月正式发布的 Go 1.21 修改了 for 循环变量的语义（预览阶段，点此查看详情）。\u003c/p\u003e\n\n\u003cp\u003e现在，Go 团队表示 Go 1.22 会将这项特性发布为正式功能。\u003c/p\u003e\n\n\u003cp\u003e根据 Go 开发团队技术 leader Russ Cox (rsc) 的介绍，Go 开发者经常会犯的错误是在循环迭代结束后，保留​​对循环变量的引用，此时它会采用预期之外的新值。\u003c/p\u003e\n\n\u003cp\u003e例如下面的程序：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc main() {\n    done := make(chan bool)\n\n    values := []string{\u0026quot;a\u0026quot;, \u0026quot;b\u0026quot;, \u0026quot;c\u0026quot;}\n    for _, v := range values {\n        go func() {\n            fmt.Println(v)\n            done \u0026lt;- true\n        }()\n    }\n\n    // wait for all goroutines to complete before exiting\n    for _ = range values {\n        \u0026lt;-done\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e其创建的三个 goroutine 都用于打印相同的变量 v，因此它们只会打印出 “c”, “c”, “c”，而不是按顺序打印 “a”, “b”, 和 “c”。\u003c/p\u003e\n\n\u003cp\u003e从 Go1.21 开始，开发者可以启用 GOEXPERIMENT=loopvar 来构建 Go 程序，以解决上文提到的 for 循环变量问题。\u003c/p\u003e\n\n\u003cp\u003e构建命令：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eGOEXPERIMENT=loopvar go install my/program\nGOEXPERIMENT=loopvar go build my/program\nGOEXPERIMENT=loopvar go test my/program\nGOEXPERIMENT=loopvar go test my/program -bench=.\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e现在 Go 开发团队表示，从 Go1.22 开始，新的 for 循环语义将会在 go.mod 文件中的 Go 版本大于等于 Go1.22 下默认启用。\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -111,7 +111,7 @@
     {
       "Title": "go jenkins 客户端有啥推荐的包？",
       "Link": "https://studygolang.com/topics/16740#reply2",
-      "Description": "",
+      "Description": "\u003cp\u003e\u003ca href=\"https://github.com/bndr/gojenkins\"\u003ehttps://github.com/bndr/gojenkins\u003c/a\u003e 这个包看这个帖子评论设计得不好，且是阉割版\u003ca href=\"https://studygolang.com/topics/16313?fr=sidebar\"\u003ehttps://studygolang.com/topics/16313?fr=sidebar\u003c/a\u003e\n还有其他包推荐吗\n主要就是用来跑脚本，跟踪任务状态\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
