@@ -12,7 +12,7 @@
     },
     {
       "Title": "如何限制http.HandleFunc并发数量？",
-      "Link": "https://studygolang.com/topics/16746#reply5",
+      "Link": "https://studygolang.com/topics/16746#reply6",
       "Description": "\u003cpre\u003e\u003ccode\u003efunc xHandle(w http.ResponseWriter, r *http.Request) {\n    fmt.Printf(\u0026quot;new request: %p\\n\u0026quot;, r)\n    w.Write([]byte(\u0026quot;Hello\\n\u0026quot;))\n    for {}\n}\n\nfunc main() {\n    http.HandleFunc(\u0026quot;/\u0026quot;, xHandle)\n    http.ListenAndServe(\u0026quot;:8080\u0026quot;, nil)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e对于每一个http请求，http服务都会启动一个go routine 来调用xHandle函数。目前搜到的资料都是在xHandle内部做并发数控制，就是说等http服务启go routine后，发现超限了再直接退出。\u003c/p\u003e\n\n\u003cp\u003e我想问的是如何从源头上控制http服务的go routine数量，也是当go routine到达上限后，都不用启动go routine回调xHandle,直接在底层响应500给客户端？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
@@ -112,6 +112,13 @@
       "Title": "go jenkins 客户端有啥推荐的包？",
       "Link": "https://studygolang.com/topics/16740#reply2",
       "Description": "\u003cp\u003e\u003ca href=\"https://github.com/bndr/gojenkins\"\u003ehttps://github.com/bndr/gojenkins\u003c/a\u003e 这个包看这个帖子评论设计得不好，且是阉割版\u003ca href=\"https://studygolang.com/topics/16313?fr=sidebar\"\u003ehttps://studygolang.com/topics/16313?fr=sidebar\u003c/a\u003e\n还有其他包推荐吗\n主要就是用来跑脚本，跟踪任务状态\u003c/p\u003e\n",
+      "Author": "",
+      "PubDate": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Title": "如何限制http.HandleFunc并发数量？",
+      "Link": "https://studygolang.com/topics/16746#reply5",
+      "Description": "\u003cpre\u003e\u003ccode\u003efunc xHandle(w http.ResponseWriter, r *http.Request) {\n    fmt.Printf(\u0026quot;new request: %p\\n\u0026quot;, r)\n    w.Write([]byte(\u0026quot;Hello\\n\u0026quot;))\n    for {}\n}\n\nfunc main() {\n    http.HandleFunc(\u0026quot;/\u0026quot;, xHandle)\n    http.ListenAndServe(\u0026quot;:8080\u0026quot;, nil)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e对于每一个http请求，http服务都会启动一个go routine 来调用xHandle函数。目前搜到的资料都是在xHandle内部做并发数控制，就是说等http服务启go routine后，发现超限了再直接退出。\u003c/p\u003e\n\n\u003cp\u003e我想问的是如何从源头上控制http服务的go routine数量，也是当go routine到达上限后，都不用启动go routine回调xHandle,直接在底层响应500给客户端？\u003c/p\u003e\n",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
