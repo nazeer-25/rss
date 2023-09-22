@@ -69,7 +69,7 @@
     {
       "Title": "【公告】寻找社区日常运营、功能开发、维护 自愿者",
       "Link": "https://studygolang.com/topics/4092#reply263",
-      "Description": "\u003cp\u003e本站 2013 年上线以来，得到国内广大 gopher 们的支持，也让我有动力一直开发、维护着。\u003c/p\u003e\n\n\u003cp\u003e随着 go 越来越流行，学习 go 的人也越来越多，本社区用户量也越来越大，而我个人的精力有限。为了给社区用户提供更好的服务，希望有自愿者加入社区，一起维护、运营本站。招募的自愿者包括：\u003c/p\u003e\n\n\u003col\u003e\n\u003cli\u003e日常网站运营 —— 比如晨读文章推荐、周推荐等；\u003cstrong\u003e特别欢迎在校大学生；\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003e功能开发、维护 —— 参与开发本站功能；板块维护、管理者等；\u003c/li\u003e\n\u003cli\u003e活动组织、宣传者 —— 组织社区用户参与互动，和外界联系拉赞助等；\u003c/li\u003e\n\u003cli\u003e翻译 —— Go 相关教程、文章、资讯等的翻译；\u003c/li\u003e\n\u003c/ol\u003e\n\n\u003cp\u003e其他你想到的，也可以和我沟通~ 根据情况，会提供奖励~\u003c/p\u003e\n\n\u003cp\u003e项目开源的，参与开发，可以直接 fork + PR，参与其他的可以加我微信 gopherstudio 联系。\u003c/p\u003e\n\n\u003cp\u003e项目地址：\u003ca href=\"https://github.com/studygolang/studygolang\"\u003ehttps://github.com/studygolang/studygolang\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\"https://static.studygolang.com/static/img/gopherstudio2.png?imageView2/2/w/154\" alt=\"\" /\u003e\u003c/p\u003e\n",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
@@ -97,7 +97,7 @@
     {
       "Title": "Go 1.22 将修复 for 循环变量的问题",
       "Link": "https://studygolang.com/topics/16663#reply1",
-      "Description": "\u003cp\u003e上月正式发布的 Go 1.21 修改了 for 循环变量的语义（预览阶段，点此查看详情）。\u003c/p\u003e\n\n\u003cp\u003e现在，Go 团队表示 Go 1.22 会将这项特性发布为正式功能。\u003c/p\u003e\n\n\u003cp\u003e根据 Go 开发团队技术 leader Russ Cox (rsc) 的介绍，Go 开发者经常会犯的错误是在循环迭代结束后，保留​​对循环变量的引用，此时它会采用预期之外的新值。\u003c/p\u003e\n\n\u003cp\u003e例如下面的程序：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc main() {\n    done := make(chan bool)\n\n    values := []string{\u0026quot;a\u0026quot;, \u0026quot;b\u0026quot;, \u0026quot;c\u0026quot;}\n    for _, v := range values {\n        go func() {\n            fmt.Println(v)\n            done \u0026lt;- true\n        }()\n    }\n\n    // wait for all goroutines to complete before exiting\n    for _ = range values {\n        \u0026lt;-done\n    }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e其创建的三个 goroutine 都用于打印相同的变量 v，因此它们只会打印出 “c”, “c”, “c”，而不是按顺序打印 “a”, “b”, 和 “c”。\u003c/p\u003e\n\n\u003cp\u003e从 Go1.21 开始，开发者可以启用 GOEXPERIMENT=loopvar 来构建 Go 程序，以解决上文提到的 for 循环变量问题。\u003c/p\u003e\n\n\u003cp\u003e构建命令：\u003c/p\u003e\n\n\u003cpre\u003e\u003ccode\u003eGOEXPERIMENT=loopvar go install my/program\nGOEXPERIMENT=loopvar go build my/program\nGOEXPERIMENT=loopvar go test my/program\nGOEXPERIMENT=loopvar go test my/program -bench=.\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cp\u003e现在 Go 开发团队表示，从 Go1.22 开始，新的 for 循环语义将会在 go.mod 文件中的 Go 版本大于等于 Go1.22 下默认启用。\u003c/p\u003e\n",
+      "Description": "",
       "Author": "",
       "PubDate": "0001-01-01T00:00:00Z"
     },
