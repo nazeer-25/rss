@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>请教一个 Java 中 CompletableFuture 的问题 - 程序员</title>
+      <link>https://www.v2ex.com/t/976158</link>
+      <description>&lt;p&gt;今天在看 Redisson 代码的时候，在 RedisExecutor&amp;lt;V, R&amp;gt;的 168 行发现这样一段&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;        connectionFuture.whenComplete((connection, e) -&amp;gt; {&#xA;            if (connectionFuture.isCancelled()) {&#xA;                connectionManager.getServiceManager().getShutdownLatch().release();&#xA;                return;&#xA;            }&#xA;&#xA;            if (connectionFuture.isDone() &amp;amp;&amp;amp; connectionFuture.isCompletedExceptionally()) {&#xA;                return;&#xA;            }&#xA;            .....&#xA;        })&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我的疑问是，已经在 whenComplete 中了，isDone()不是恒为 true 的吗，为什么这里要加这个判断？&lt;/p&gt;&#xA;</description>
+      <author>dumbbell5kg</author>
+      <pubDate>22 Sep 2023 04:02:04 +0000</pubDate>
+    </item>
+    <item>
+      <title>员工离职/用户注销账户后，系统中的数据该如何处理 - 问与答</title>
+      <link>https://www.v2ex.com/t/976157</link>
+      <description>&lt;p&gt;比如在一个汽车维修的系统，维修公司员工会上传每个环节的维修内容和图片，用户可以看到员工的姓名、岗位（角色）、维修内容等。假如后续这个员工离职后，这个维修内容该怎么处理呢？&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;直接在公司员工表把这个员工删除，那员工写的这些维修内容该如何处理？&lt;/p&gt;&#xA;&lt;p&gt;1.1 员工关联的维修内容也一起删除。（这个肯定不行，这些内容应该属于是公司的资产，用户也应该一直能看到）&lt;/p&gt;&#xA;&lt;p&gt;1.2 维修内容表取消员工表 id 外键，删除时把维修内容表里的员工 id 设为 &lt;code&gt;null&lt;/code&gt;，用户看到的维修内容员工显示为已离职。（个人觉得这个也不合理）&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;在公司员工表里加一个 &lt;code&gt;deleted_at&lt;/code&gt; 字段，也就是软删除，其他任何数据都不作处理。假如后续这个员工再入职这个公司时，那这个员工之前的数据要不要恢复？&lt;/p&gt;&#xA;&lt;p&gt;2.1 直接在公司员工表再新建一条新数据，也就是一个新账户，不恢复原来的数据。&lt;/p&gt;&#xA;&lt;p&gt;2.2 把 &lt;code&gt;deleted_at&lt;/code&gt; 设置为 &lt;code&gt;null&lt;/code&gt;，也就是恢复该员工原来的所有数据。（个人倾向于这个方案）&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+      <author>jerrry</author>
+      <pubDate>22 Sep 2023 04:00:20 +0000</pubDate>
+    </item>
+    <item>
       <title>微信换绑转区后登录不上了 - 微信</title>
       <link>https://www.v2ex.com/t/976155</link>
       <description>原先绑定的是澳门的号码，换绑大陆的号码十分钟后掉线了，之后登录一直提示:网络异常，请稍候重试。换了好几部手机尝试登录这个微信号都不行，有遇到同样问题的吗？去申请解冻账号，提示账号没有被封或冻结。</description>
