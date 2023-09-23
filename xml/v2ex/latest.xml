@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>Mysql select for update 的加锁机制？ - 程序员</title>
+      <link>https://www.v2ex.com/t/976590</link>
+      <description>如下表，age 上有唯一索引&lt;br /&gt;&lt;br /&gt;CREATE TABLE `test` (&lt;br /&gt;      `id` int NOT NULL AUTO_INCREMENT,&lt;br /&gt;      `age` char(10) NOT NULL,&lt;br /&gt;      `name` char(10) NOT NULL,&lt;br /&gt;      PRIMARY KEY (`id`),&lt;br /&gt;      UNIQUE KEY `idx_age` (`age`)&lt;br /&gt;) ENGINE=InnoDB AUTO_INCREMENT=70032 DEFAULT CHARSET=utf8mb3&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;| id    | age   | name   |&lt;br /&gt;+-------+-------+--------+&lt;br /&gt;| 70031 | 80009 | n79999 |&lt;br /&gt;| 70030 | 80008 | n79998 |&lt;br /&gt;| 70029 | 80007 | n79997 |&lt;br /&gt;| 70028 | 80006 | n79996 |&lt;br /&gt;| 70027 | 80005 | n79995 |&lt;br /&gt;+-------+-------+--------+&lt;br /&gt;&lt;br /&gt;事务 1:&lt;br /&gt;select * from test where age = 80009 for update;&lt;br /&gt;&lt;br /&gt;事务 2:&lt;br /&gt;select * from test where age = 80008 for update;&lt;br /&gt;&lt;br /&gt;事务 2 会阻塞，data_locks 显示事务 2 在等待 id=70031 的 record lock ，这是为什么？</description>
+      <author>hjcpnr</author>
+      <pubDate>23 Sep 2023 21:39:51 +0000</pubDate>
+    </item>
+    <item>
       <title>对深圳真有点失望 - 分享发现</title>
       <link>https://www.v2ex.com/t/976588</link>
       <description>请了年假想去香港玩，顺便来深圳呆两天，没想到第一印象真有点差，刚下飞机，到达 t3 航站楼，本来要坐地铁的，没找到出口，只有一个类似地铁的摆渡车，写着前往 t3 ？我都蒙了……问了一下旁边穿着黄马甲的人，没想到就是指了一下那个摆渡车，然后一脸不耐烦的走了，至于吗？有一个拿着喇叭的工作人员和我说这是出去的唯一通道。多做点标记吧，真的，不是所有人都对深圳机场那么熟悉。出来找地铁，也是标记很少，不容易一下子找到要去的站台。感觉深圳基础设施都很新，就是标记都很少，也太简洁了。少点人文关怀，类似北京那种地面全是标记和指引线的我觉得就很不错。不熟悉的也会很快找到。然后就是深圳特产，铛铛铛，之前一直网上听到吐槽，真没想到刚到就碰到了，住南山这边，凌晨四点半铛铛铛把我吵醒，一直铛到快五点才消停，真的需要这么赶工期吗？这么早铛铛铛，你没事吧？真是吵到一点都不困了，我真的服了，来之前就没睡好，估计都成熊猫眼了。政府真的都不管管凌晨施工吗？真是有点失望😞</description>
