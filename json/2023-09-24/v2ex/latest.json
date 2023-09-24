@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "部署方案搞得花里胡哨并不会有什么好处，只会陷入失控 - 程序员",
+      "Link": "https://www.v2ex.com/t/976720",
+      "Description": "\u003cp\u003e故事的背景是来自于 HomeLab 上的一套 K8S ，部署了 Grafana 等应用，后端存储需要一个 MySQL……怎么部署这个 MySQL 呢？\u003cbr/\u003e\n先看了一眼 \u003ca href=\"http://dev.mysql.com\" rel=\"nofollow\"\u003edev.mysql.com\u003c/a\u003e 里边，有个 MySQL Operator for Kubernetes 。很好，就他了！默认直接一个三副本集群，走的是 Group Replication 的方案……\u003cbr/\u003e\n然后 MySQL 存储 PVC 咋么搞呢？ local pv ？不如直接 Ceph ？然后看了一眼 Rook Ceph ，直接一把梭……默认又是一个三副本的集群起来了……\u003cbr/\u003e\n很好，到这里一份数据存三遍在一块盘里，三块盘一共存了九份……倒也不是不能接受……反正就是浪费一丢丢丢空间而已嘛……\u003cbr/\u003e\n重启了一趟，运维灾难就来了。重启以后得等 Rook Ceph 的所有 Pod 拉起来，然后所有 Pod 的 PV 才能用……进一步的，MySQL Group Replication 要开始选举，选举出 Master 以后还不能用……所有的 Slave 要重新做主从同步，这个时候由于 Ceph 本身 I/O 性能不如裸盘导致这个同步奇慢无比……再加上 MySQL Group Replication 插件时不时还会有一些报错：Fatal error during execution on the Applier module of Group Replication.自始至终集群状态都是不可用，MySQL Router 一直处于 CrashLoopBackOff 的状态……进一步所有应用因为连不上 MySQL ，一直 CrashLoopBackOff……\u003cbr/\u003e\n每次重启就得为这个错误的选择浪费一下午时间……\u003c/p\u003e\n",
+      "Author": "ccde8259",
+      "PubDate": "2023-09-24T10:33:36Z"
+    },
+    {
+      "Title": "求一份远程的前端工作机会 - 求职",
+      "Link": "https://www.v2ex.com/t/976719",
+      "Description": "求一份前端远程工作机会，技术栈：react / ts / tailwind.css ，后端会 Node.js, 熟悉 Koa.js / Egg.js, nest.js 目前正在看。最近也有在写一些 Rust 、Go 开源项目，github: \u003ca target=\"_blank\" href=\"https://github.com/eryue0220\" rel=\"nofollow noopener\"\u003ehttps://github.com/eryue0220\u003c/a\u003e 上面有在贡献的一些开源项目。\u003cbr /\u003e\u003cbr /\u003e如果你对开源项目有兴趣，或者有好的建议及工作机会，可以私聊我。",
+      "Author": "cinchen",
+      "PubDate": "2023-09-24T10:32:09Z"
+    },
+    {
+      "Title": "小米万兆路由器能装 kmod 包什么的吗？ - 路由器",
+      "Link": "https://www.v2ex.com/t/976718",
+      "Description": "\u003cp\u003e小米官方固件拉的一比，只支持 PPPoE 拨号\u003cbr/\u003e\n不知道能不能安装 kmod-ip6-tunnel 和 ds-lite 架 4in6 隧道\u003c/p\u003e\n",
+      "Author": "username1919810",
+      "PubDate": "2023-09-24T10:28:03Z"
+    },
+    {
+      "Title": "Surge v5 for mac 5 人车组队 2=3 - Surge",
+      "Link": "https://www.v2ex.com/t/976717",
+      "Description": "\u003cp\u003e一个车位 150 t: \u003ca href=\"https://t.me/Chris_Lluw\" rel=\"nofollow\"\u003ehttps://t.me/Chris_Lluw\u003c/a\u003e\n2=3\u003c/p\u003e\n",
+      "Author": "chrislluw",
+      "PubDate": "2023-09-24T10:26:38Z"
+    },
+    {
       "Title": "iOS 微信后台截图(谣言?) - iPhone",
       "Link": "https://www.v2ex.com/t/976716",
       "Description": "\u003ch3\u003e后台截图这个事情不止是微信有的,telegram 也有\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e不过受限于 telegram 的保护,imazing 提取出来的相关备份不带有任何数据,但是微信可以使用 imazing 的备份应用程序数据,获取到截图相关的文件\u003c/li\u003e\n\u003cli\u003e需要将提取出来的 \u003ccode\u003e.imazingapp\u003c/code\u003e 后缀更改为 \u003ccode\u003e.ipa\u003c/code\u003e ,然后使用 压缩软件进行解压即可\u003c/li\u003e\n\u003cli\u003eimazing 微信截图路径: /WeChat/Container/Documents/----/MinimizeRec_v1.4/SnapShot/webview_id:/local/  可以直接搜索 SnapShot 获取相关路径\u003c/li\u003e\n\u003cli\u003e由于 telegram 的保护机制,所以只能\u003cstrong\u003e越狱\u003c/strong\u003e的 iPhone 设备才能验, 搜索 Snapshots 即可\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003e疑惑: 为什么软件要截图保存到本地呢?有没有从事 iOS 开发的大佬回答一下\u003c/h3\u003e\n\u003cblockquote\u003e\n\u003cp\u003e来源: 最开始是在 tg 看到的,后来这个频道删除了相关消息,然后陆陆续续推特也开始讨论\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e\u003cimg alt=\"tg 消息\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://i.imgur.com/GrMTynT.jpeg\"/\u003e\u003c/p\u003e\n",
