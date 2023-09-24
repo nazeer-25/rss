@@ -23,16 +23,6 @@
       <description>&lt;h1&gt;团队与项目&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;组建团队是一个需要时间和耐心的过程。团队成员需要建立关系，学习如何相互协作，并了解彼此的优势和劣势。只有经过一段时间的相处和磨合，团队才能形成真正的凝聚力。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;当团队克服个体差异，形成默契配合和相互信任的关系时，就会产生一种神奇的魔力。这个团队能够一起制定计划、解决问题，并共同面对和完成各种任务。这种团队凝聚力的形成需要时间，但一旦形成，团队的效率和成果将会大大提升。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;专业的开发组织会将项目分配给已经形成凝聚力的团队，而不是围绕项目来组建团队。这样的团队可以同时承接多个项目，并根据成员的技能和能力来分配工作，从而顺利完成项目。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;作为项目承包人，如果拥有一个团队专注于自己的项目，就能够清楚地计算团队的投入。他们知道组建和解散团队都是一项代价高昂的工作，因此公司也不会轻易调走团队。这样的团队可以为公司节省时间和资源，并提高项目的成功率。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;然而，组建和解散团队只是人为的困难，并不应该限制公司的决策。如果公司认为某个项目的优先级更高，应该迅速重新分配资源。项目承包人的职责就是清晰地定义和阐述项目的价值和意义，以获得公司管理层的认可和支持。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;团队的构建比项目本身更具挑战性。因此，建立稳定的团队，让他们在不同项目中持续合作，成为一个强大的协作引擎，是更好的做法。团队也可以同时承接多个项目，提高整体效率。在组建团队时，给予他们充足的时间，让他们形成凝聚力，并持续共同工作，这样才能不断交付出优秀的项目成果。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;总结起来，组建团队需要时间和耐心。团队的凝聚力是一个神奇的魔力，能够让团队成员共同协作、解决问题，并取得优秀的成果。专业的开发组织会将项目分配给已有凝聚力的团队，以提高工作效率和成功率。团队的构建比项目本身更具挑战性，但只有通过持续合作和共同工作，团队才能成为一个强大的协作引擎。&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;关注公众号【爱发白日梦的后端】分享技术干货、读书笔记、开源项目、实战经验、高效开发工具等，您的关注将是我的更新动力！&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;</description>
     </item>
     <item>
-      <title>go怎么调用yolo训练的onnx模型，进行识别图片捏</title>
-      <link>https://studygolang.com/topics/16755#reply0</link>
-      <description>&lt;p&gt;go怎么调用yolo训练的onnx模型，进行识别图片捏，应该调用什么库，麻烦给个链接，或者代码图，感激不尽&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
-      <title>如何限制http.HandleFunc并发数量？</title>
-      <link>https://studygolang.com/topics/16746#reply6</link>
-      <description>&lt;pre&gt;&lt;code&gt;func xHandle(w http.ResponseWriter, r *http.Request) {&#xA;    fmt.Printf(&amp;quot;new request: %p\n&amp;quot;, r)&#xA;    w.Write([]byte(&amp;quot;Hello\n&amp;quot;))&#xA;    for {}&#xA;}&#xA;&#xA;func main() {&#xA;    http.HandleFunc(&amp;quot;/&amp;quot;, xHandle)&#xA;    http.ListenAndServe(&amp;quot;:8080&amp;quot;, nil)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;对于每一个http请求，http服务都会启动一个go routine 来调用xHandle函数。目前搜到的资料都是在xHandle内部做并发数控制，就是说等http服务启go routine后，发现超限了再直接退出。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我想问的是如何从源头上控制http服务的go routine数量，也是当go routine到达上限后，都不用启动go routine回调xHandle,直接在底层响应500给客户端？&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>有谁知道这是什么原因吗？并发请求总是隔段时间就提示：golang Client.Timeout exceeded while awaiting headers</title>
       <link>https://studygolang.com/topics/16757#reply1</link>
       <description>&lt;pre&gt;&lt;code&gt;// Get 提交&#xA;func Get(api string, params, headers map[string]string, tryTimes int) (error, int, interface{}) {&#xA;&#x9;// 创建请求&#xA;&#x9;req, _ := http.NewRequest(&amp;quot;GET&amp;quot;, api, nil)&#xA;&#xA;&#x9;// GET 请求携带查询参数&#xA;&#x9;q := req.URL.Query()&#xA;&#x9;if len(params) &amp;gt; 0 {&#xA;&#x9;&#x9;for key, value := range params {&#xA;&#x9;&#x9;&#x9;q.Add(key, value)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;req.URL.RawQuery = q.Encode()&#xA;&#xA;&#x9;// 设置请求头&#xA;&#x9;if len(headers) &amp;gt; 0 {&#xA;&#x9;&#x9;for key, value := range headers {&#xA;&#x9;&#x9;&#x9;req.Header.Set(key, value)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;// 发送请求&#xA;&#x9;resp, err := client.Do(req)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;if tryTimes &amp;gt; 0 {&#xA;&#x9;&#x9;&#x9;return Get(api, params, headers, tryTimes-1)&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;// 上报日志&#xA;&#x9;&#x9;return err, 0, nil&#xA;&#x9;}&#xA;&#xA;&#x9;// 关闭连接&#xA;&#x9;defer resp.Body.Close()&#xA;&#xA;&#x9;// 读取内容&#xA;&#x9;body, err := io.ReadAll(resp.Body)&#xA;&#x9;if err != nil {&#xA;&#x9;&#x9;// 上报日志&#xA;&#x9;&#x9;return err, resp.StatusCode, nil&#xA;&#x9;}&#xA;&#xA;&#x9;return nil, resp.StatusCode, string(body)&#xA;}&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
@@ -54,6 +44,11 @@
     </item>
     <item>
       <title>go怎么调用yolo训练的onnx模型，进行识别图片捏</title>
+      <link>https://studygolang.com/topics/16755#reply0</link>
+      <description>&lt;p&gt;go怎么调用yolo训练的onnx模型，进行识别图片捏，应该调用什么库，麻烦给个链接，或者代码图，感激不尽&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>go怎么调用yolo训练的onnx模型，进行识别图片捏</title>
       <link>https://studygolang.com/topics/16754#reply0</link>
       <description>&lt;p&gt;go怎么调用yolo训练的onnx模型，进行识别图片捏，应该使用什么库&lt;/p&gt;&#xA;</description>
     </item>
@@ -66,6 +61,11 @@
       <title>代码整洁之道：程序员的职业素养（十三）</title>
       <link>https://studygolang.com/topics/16751#reply0</link>
       <description>&lt;h1&gt;协作&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;在软件开发领域，团队协作是取得高效成果的关键。专业的开发团队通过相互协作和合作，实现项目目标。然而，个人的独立工作也有其价值，让开发人员可以专注于解决有趣的问题。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;团队协作是软件开发中不可或缺的一部分。当团队成员能够高度专业地相互合作时，整个团队将变得高效。与此相反，单打独斗或与团队脱节都是不专业的表现。虽然人际关系可能会复杂且难以处理，但编程则是整洁且可预见的。对于许多开发人员来说，能够独自待在房间里数个小时，沉浸在有趣的问题中，是一种最快乐的时光。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;然而，尽管我们对自己的工作充满热情，但最好将注意力集中在我们的老板所追求的目标上。他们关注的是与业务的协同发展。一个不正常的团队最糟糕的表现是，每个程序员都在自己的代码周围筑起一道高墙，拒绝让其他人接触到这些代码。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;专业的开发人员不会阻止别人修改代码。他们不会在代码上建立所有权的壁垒，而是尽可能多地互相合作。通过合作，他们实现了学习的目的。然而，最好还是要进行沟通，代码的所有者更清楚其中的潜在问题。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;专业人士选择结对编程的原因是，结对编程是最好的代码复查方式。系统中不应该包含未经其他开发人员复查过的代码。尽管代码复查的方法有很多，但大多数方法效率都很低下。而以互相协作的方式完成代码编写，是最高效且最有效果的代码复查方法。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;当然，有时候独立工作是正确的选择。当我们需要长时间思考一个问题时，独自工作是合适的。当任务琐碎且无足轻重，与另一个人一起工作可能会浪费时间。然而，总的来说，与其他人紧密协作，进行结对编程，是最佳实践。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;通过团队协作，开发人员能够共同攻克挑战并取得更好的结果。合作不仅提高了代码质量，还能够促进知识共享和技能提升。同时，个人独立工作也有其价值，允许开发人员专注于解决复杂问题。在软件开发中，平衡团队协作和个人工作是取得成功的关键。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;总结起来，团队协作和个人工作在程序开发中都是重要的。通过合作和互相协作，开发人员能够取得更好的成果。然而，在某些情况下，个人独立工作也是必要的。重要的是要找到平衡点，以确保团队的高效运作和个人的发展。&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;关注公众号【爱发白日梦的后端】分享技术干货、读书笔记、开源项目、实战经验、高效开发工具等，您的关注将是我的更新动力！&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>如何限制http.HandleFunc并发数量？</title>
+      <link>https://studygolang.com/topics/16746#reply6</link>
+      <description>&lt;pre&gt;&lt;code&gt;func xHandle(w http.ResponseWriter, r *http.Request) {&#xA;    fmt.Printf(&amp;quot;new request: %p\n&amp;quot;, r)&#xA;    w.Write([]byte(&amp;quot;Hello\n&amp;quot;))&#xA;    for {}&#xA;}&#xA;&#xA;func main() {&#xA;    http.HandleFunc(&amp;quot;/&amp;quot;, xHandle)&#xA;    http.ListenAndServe(&amp;quot;:8080&amp;quot;, nil)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;对于每一个http请求，http服务都会启动一个go routine 来调用xHandle函数。目前搜到的资料都是在xHandle内部做并发数控制，就是说等http服务启go routine后，发现超限了再直接退出。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;我想问的是如何从源头上控制http服务的go routine数量，也是当go routine到达上限后，都不用启动go routine回调xHandle,直接在底层响应500给客户端？&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>go总结</title>
