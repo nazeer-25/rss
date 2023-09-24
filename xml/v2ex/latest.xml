@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>教程: 在 macOS 中移除 command line tools 并继续使用 git - 程序员</title>
+      <link>https://www.v2ex.com/t/976656</link>
+      <description>&lt;p&gt;command line tools 苦天下程序猿久已, 现在这破玩意越来越大,从原来的 700MB 已经成长到了&lt;strong&gt;3GB&lt;/strong&gt;了&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;1695529671494.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img1.imgtp.com/2023/09/24/KMRUm9zr.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;我只是想用 git 而已, command line tools 居然为了不到 200M 的工具 捆绑 3GB 用不到的垃圾,&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;申明一下: 我不写 C++ 不写 xcode 只是写个前端 用 git 管理仓库 对于我用不到的那些东西, command line tools 不应该浪费我的硬盘!&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;下面介绍一下如何在移除 command line tools 的同时继续使用 git(目前不太完美)&lt;/p&gt;&#xA;&lt;h2&gt;第一步: 安装 git&lt;/h2&gt;&#xA;&lt;p&gt;这一步骤非常简单, 电脑上&lt;strong&gt;已经安装&lt;/strong&gt;了 command line tools 和 git 的人&lt;strong&gt;可以省略此步骤&lt;/strong&gt;,&lt;/p&gt;&#xA;&lt;p&gt;如果电脑上没有安装 git 和 command line tools, 请按照传统方法, 安装好 command line tools 和 git&lt;/p&gt;&#xA;&lt;p&gt;链接: &lt;a href=&#34;https://git-scm.com/download/mac&#34; rel=&#34;nofollow&#34;&gt;https://git-scm.com/download/mac&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2&gt;第二步: 安装 brew 并安装 git&lt;/h2&gt;&#xA;&lt;p&gt;先不要奇怪第一步已经安装了 git 为什么又要安装一遍, 按照步骤走就行了,问就是为了避免 brew 安装的时候需要 git 而你又没有,陷入死循环&lt;/p&gt;&#xA;&lt;p&gt;安装 brew,根据脚本提示选择合适的源,一步步按照脚步提示操作就行&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;/bin/zsh -c &#34;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;安装 git&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew install git&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;第三步: 移除 command line tools&lt;/h2&gt;&#xA;&lt;p&gt;核心步骤来了, 移除 command line tools 需要关闭 MacOS 的 SIP,&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;以 mbp14 2021 为例关闭 sip: 关机后,长按开机键不放,出现选项,进去输入登录密码,左上角打开终端,输入 csrutil disable,输入γ,输入密码,等待一会,重启.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;非 apple 芯片请自行百度, 都是烂大街的教程了&lt;/p&gt;&#xA;&lt;p&gt;关闭 sip 后,重启进入系统,打开终端 执行命令&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo rm -rf /Library/Developer/CommandLineTools/&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;还有一部分文件看自己想不想删除,我就不复制粘贴了,看这个&lt;a href=&#34;https://www.zhihu.com/question/522081975/answer/2558847384&#34; rel=&#34;nofollow&#34;&gt;Command Line Tools for Xcode 怎么彻底卸载？ - richking 的回答 - 知乎&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;好了, 一切操作完成后, 你会发现占据你 3GB 硬盘空间的 command line tools 已经不见了 ,而且 git 一如既往的好使&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;(可选)开启 sip:关机后,长按开机键不放,出现选项,进去输入登录密码,左上角打开终端,输入 csrutil enable,输入γ,输入密码,等待一会,重启&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2&gt;最后&lt;/h2&gt;&#xA;&lt;p&gt;这并不是一个完美的脱离 command line tools 的方法, 就目前 2023 年 09 月 24 日 而言 打开 vscode 仍然会弹窗&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;1695531777772.png&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://img1.imgtp.com/2023/09/24/j8HMBKv0.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;选择取消就行, 不需要安装, 不完美的地方在于 每次打开 vscode 都会弹窗,这个小尾巴只能拜托万能的 V 友再研究研究 补充补充了&lt;/p&gt;&#xA;</description>
+      <author>bddxg</author>
+      <pubDate>24 Sep 2023 05:06:13 +0000</pubDate>
+    </item>
+    <item>
+      <title>7 年的平面设计找一份远程设计的工作 - 求职</title>
+      <link>https://www.v2ex.com/t/976655</link>
+      <description>&lt;p&gt;rt ，期待联系我，设计经验丰富，有活动/汽车/景区/婚庆/产品/医美/餐饮等行业的设计经验。有小型团队 2-5 人/中型团队 5-10 人的企划管理经验。部门工作节奏规划，工作汇报，跨部门协作能力尚可。对活动方案撰写，策划。线下展区活动开展有丰富经验。对新媒体运营方面，直播部门方面有一定经验。&#xA;相信我，我能满足你的任何要求&lt;/p&gt;&#xA;</description>
+      <author>zhouen</author>
+      <pubDate>24 Sep 2023 05:06:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问这个网址 https://limetorrent.xyz/应该怎么写搜索？ - 问与答</title>
+      <link>https://www.v2ex.com/t/976654</link>
+      <description>最近 limetorrent 网址失效，新网址在外挂的“豆瓣资源下载大师”里面不可以用。&lt;br /&gt;请问如何才能实现返回访问结果？&lt;br /&gt;就像这个{ name: &#39;海盗湾&#39;, link: &#39;&lt;a target=&#34;_blank&#34; href=&#34;https://piratebay.live/search/&#39;&#34; rel=&#34;nofollow noopener&#34;&gt;https://piratebay.live/search/&#39;&lt;/a&gt; + ywm, selector: &#39;#searchResult div.detName&#39; },</description>
+      <author>brucecao</author>
+      <pubDate>24 Sep 2023 05:04:45 +0000</pubDate>
+    </item>
+    <item>
+      <title>惊呼！不能再匿名发帖 - 分享发现</title>
+      <link>https://www.v2ex.com/t/976653</link>
+      <description>&lt;p&gt;知乎？！&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://d-dev.host.uqugu.com/i/uploads/tmp/%E7%9F%A5%E4%B9%8E%E3%80%8C%E5%8C%BF%E5%90%8D%E5%8A%9F%E8%83%BD%E3%80%8D%E4%B8%8B%E7%BA%BF%E5%85%AC%E5%91%8A.pdf&#34; rel=&#34;nofollow&#34;&gt;下线匿名功能&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&amp;lt;embed src=&#34;&lt;a href=&#34;https://d-dev.host.uqugu.com/i/uploads/tmp/%E7%9F%A5%E4%B9%8E%E3%80%8C%E5%8C%BF%E5%90%8D%E5%8A%9F%E8%83%BD%E3%80%8D%E4%B8%8B%E7%BA%BF%E5%85%AC%E5%91%8A.pdf&#34; rel=&#34;nofollow&#34;&gt;https://d-dev.host.uqugu.com/i/uploads/tmp/%E7%9F%A5%E4%B9%8E%E3%80%8C%E5%8C%BF%E5%90%8D%E5%8A%9F%E8%83%BD%E3%80%8D%E4%B8%8B%E7%BA%BF%E5%85%AC%E5%91%8A.pdf&lt;/a&gt;&#34; type=&#34;application/pdf&#34;&amp;gt;&amp;lt;/embed&amp;gt;&lt;/p&gt;&#xA;&lt;p&gt;整个大新闻&lt;/p&gt;&#xA;&lt;p&gt;👍&lt;/p&gt;&#xA;</description>
+      <author>wisetc</author>
+      <pubDate>24 Sep 2023 05:04:30 +0000</pubDate>
+    </item>
+    <item>
       <title>蜂窝信号消失会导致 WiFi 密码错误 - iPhone</title>
       <link>https://www.v2ex.com/t/976652</link>
       <description>一个持续了两年，非常烦的问题。&lt;br /&gt;&lt;br /&gt;我这边房子里蜂窝信号差，时有时无，所以比较依赖 WiFi 。&lt;br /&gt;&lt;br /&gt;一旦蜂窝信号消失，iPhone 手机的 WiFi 有可能同时消失，直接断网。此时如果手动连接那个 WiFi ，会提示密码错误。必须重启，不然再也连不了这个 WiFi 了。重启会自动连上该 WiFi 。&lt;br /&gt;&lt;br /&gt;我和我老婆的 iPhone 都有这个问题，她的 iPad （无蜂窝）偶尔也这样。其它的设备，包括数台 MacBook ，安卓手机，Windows 电脑，都是正常的。&lt;br /&gt;&lt;br /&gt;不知道有没有人有同样的问题，怎么解决。</description>
