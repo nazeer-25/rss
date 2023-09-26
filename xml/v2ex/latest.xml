@@ -4,6 +4,34 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>在 k8s 里利用 oss 部署静态网站的问题 - Kubernetes</title>
+      <link>https://www.v2ex.com/t/977305</link>
+      <description>&lt;p&gt;现在每个前端项目，都要弄个 nginx 容器，把 dist 放进去，我想到一个用 oss 部署静态网站的方案&lt;/p&gt;&#xA;&lt;p&gt;1 、k8s 创建一个 Service ，类型为 ExternalName ，把 oss-data 指向 oss 的地址，我用的是腾讯 cos ，地址就是 &lt;a href=&#34;http://nginx-static-xxxx.cos.ap-shanghai.myqcloud.com&#34; rel=&#34;nofollow&#34;&gt;nginx-static-xxxx.cos.ap-shanghai.myqcloud.com&lt;/a&gt; ，这个 bucket 设置为公有读私有写&lt;/p&gt;&#xA;&lt;p&gt;2 、把 dist 目录上传到 nginx-static-xxxx/test/目录下&lt;/p&gt;&#xA;&lt;p&gt;3 、创建一个 ingress 规则，把 oss-data 的 80 端口映射为一个域名 &lt;a href=&#34;http://test.mydomain.com&#34; rel=&#34;nofollow&#34;&gt;test.mydomain.com&lt;/a&gt; ，如下&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;apiVersion: networking.k8s.io/v1&#xA;kind: Ingress&#xA;metadata:&#xA;  annotations:&#xA;    nginx.ingress.kubernetes.io/configuration-snippet: |&#xA;      rewrite ^/$  /index.html redirect;&#xA;    nginx.ingress.kubernetes.io/rewrite-target: /test/$1&#xA;    nginx.ingress.kubernetes.io/upstream-vhost: nginx-static-xxxx.cos.ap-shanghai.myqcloud.com&#xA;&#xA;  name: www&#xA;  namespace: test&#xA;spec:&#xA;  ingressClassName: nginx&#xA;  rules:&#xA;    - host: test.mydomain.com&#xA;      http:&#xA;        paths:&#xA;          - backend:&#xA;              service:&#xA;                name: oss-data&#xA;                port:&#xA;                  number: 80&#xA;            path: /(.*)&#xA;            pathType: Prefix&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;就是用户访问 &lt;a href=&#34;http://test.domain.com/index.html&#34; rel=&#34;nofollow&#34;&gt;test.domain.com/index.html&lt;/a&gt; ，会转发到后端的 oss-data/test/index.html ，传给 cos 的则是&#xA;&lt;a href=&#34;http://nginx-static-xxxx.cos.ap-shanghai.myqcloud.com/test/index.html&#34; rel=&#34;nofollow&#34;&gt;nginx-static-xxxx.cos.ap-shanghai.myqcloud.com/test/index.html&lt;/a&gt;&#xA;rewrite /$ 是为了保证访问 &lt;a href=&#34;http://test.domain.com&#34; rel=&#34;nofollow&#34;&gt;test.domain.com&lt;/a&gt; 的时候 cos 不会报告 404 错误&lt;/p&gt;&#xA;&lt;p&gt;这样，以后，每次发布新项目，只需要把 dist 目录同步到 cos 这个 bucket 的某个目录中，然后创建一个 ingress 规则映射到新域名即可。&lt;/p&gt;&#xA;&lt;p&gt;如果是全静态网站这种方案没有问题。但是对于 vue 的路由就有点问题，比如 url 里的路由信息，比如/login?...，在 vue 里会跳转，但是 ingress 把这个请求转到 cos 上，就会出现 404 。在 nginx 里，是使用 try_files 来保证直接/login 跳转到 index.html 的 。&lt;/p&gt;&#xA;&lt;p&gt;但是在 ingress 里，try_files 和 rewrite 规则有些冲突，try_files 是查找本地文件，rewrite-target 是把数据传到后端服务，类似于(proxy_pass)的规则。&lt;/p&gt;&#xA;&lt;p&gt;所以除了把/login 之类的特殊处理，是否还有其它方法？&lt;/p&gt;&#xA;</description>
+      <author>guoguobaba</author>
+      <pubDate>26 Sep 2023 08:25:02 +0000</pubDate>
+    </item>
+    <item>
+      <title>隔空投送里没有 [将设备彼此靠近] 选项，是为啥。。。 - iOS</title>
+      <link>https://www.v2ex.com/t/977304</link>
+      <description>&lt;p&gt;系统是 17.0.1&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://i.imgur.com/XwbciXT.jpeg&#34;/&gt;&lt;/p&gt;&#xA;</description>
+      <author>thosai</author>
+      <pubDate>26 Sep 2023 08:21:27 +0000</pubDate>
+    </item>
+    <item>
+      <title>做了几天功略，给一家三口做了份保险方案，大家看看怎么样？ - 生活</title>
+      <link>https://www.v2ex.com/t/977303</link>
+      <description>前文提要： &lt;a target=&#34;_blank&#34; href=&#34;https://www.v2ex.com/t/976623&#34; rel=&#34;nofollow noopener&#34;&gt;https://www.v2ex.com/t/976623&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;不过好像没什么人看，就新开一贴了。&lt;br /&gt;&lt;br /&gt; &lt;a target=&#34;_blank&#34; href=&#34;https://i.imgur.com/8zLG2oZ.png&#34; rel=&#34;nofollow noopener&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.imgur.com/8zLG2oZ.png&#34; class=&#34;embedded_image&#34; rel=&#34;noreferrer&#34;&gt;&lt;/a&gt;</description>
+      <author>jenlors</author>
+      <pubDate>26 Sep 2023 08:21:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>十一去沈阳玩 3 天，有没有好玩好吃的地方推荐？ - 旅行</title>
+      <link>https://www.v2ex.com/t/977301</link>
+      <description>&lt;p&gt;求推荐～～&lt;/p&gt;&#xA;</description>
+      <author>rokicat007</author>
+      <pubDate>26 Sep 2023 08:17:48 +0000</pubDate>
+    </item>
+    <item>
       <title>成都移动开始撤出部分 4G 基站了 - 宽带症候群</title>
       <link>https://www.v2ex.com/t/977300</link>
       <description>&lt;p&gt;上周开始电话偶尔会直接断&lt;/p&gt;&#xA;&lt;p&gt;今天实在受不鸟了，找 10086 排障，客服那边确认，确实有调整。&lt;/p&gt;&#xA;&lt;p&gt;最后给了个套话，如果以后有扩容的话会优先考虑扩容这边，囧&lt;/p&gt;&#xA;</description>
