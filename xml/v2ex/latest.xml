@@ -4,6 +4,20 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>求 Windows 和 macOS 下单盘防止 bit rot 的最佳实践 - 程序员</title>
+      <link>https://www.v2ex.com/t/977206</link>
+      <description>&lt;p&gt;确实遇到 bit rot 导致部分数据损坏的情况，也多次看见各种场景下 bit rot 的案例（本站好像就有， /t/695160 第 119 条回复可确定 bit rot ）所以我对文件系统的数据完整性功能比较看重。&lt;/p&gt;&#xA;&lt;p&gt;因为用的 Windows 轻薄本只能插一块 M.2 硬盘，研究了一种单盘抗 bit rot 的方案：自制了一个小工具每 10 分钟 &lt;code&gt;rclone sync&lt;/code&gt; 客户端侧加密单向同步到 Google Drive 一遍。因为开启了 ReFS 完整性检查的 Enforce ，手动破坏 VHD 文件实验确定 ReFS 确实能阻止对损坏文件的读取，从而防止 rclone 上传损坏文件。因为发现在尝试读取损坏文件时会触发一个 System EventID=133 的事件，我还做了一个 133 事件时自动从 Google Drive 拉回对应完好文件的功能。不知道是不是单盘的原因，&lt;code&gt;Microsoft\Windows\Data Integrity Scan&lt;/code&gt; 这个 Scrubber 总是不工作，在 1 秒内退出，扫描不出任何错误，所以还做了一个每天凌晨 3 点全盘读取一次的功能（我嫌麻烦从来不关电脑也不睡眠）。&lt;/p&gt;&#xA;&lt;p&gt;但我最近多次在 Reddit 等地方看到 ReFS 的负面文章（尽管在我手动破坏 VHD 的实验中表现的似乎还不错，除了那个 Scrubber 无法工作外没有出现预期外结果，但那些 Reddit 上发帖的用户做了自动化测试脚本，显然比我的实验可以覆盖的用例多不少），同时我还有一台使用 Apple M2 Pro 处理器的备用笔记本（无法在物理机上直接安装 Windows ，macOS 下似乎没有支持文件内容 checksum 的文件系统）想问问有没有什么更好的实践。&lt;/p&gt;&#xA;&lt;p&gt;我也考虑过不基于文件系统的实现，定期全量校验文件 hash ，但这种情况下除了无法防止因硬盘固件等问题导致数据在写入硬盘前就出现错误外（我的现有方案也无法纠正这种情况的错误），无法拦截错误数据的读取，更重要的是无法准确判断是否是用户主动的更改（发现了一个软件在保存文件时不会更新文件的修改时间，不知道是用了什么办法写入数据的）&lt;/p&gt;&#xA;&lt;p&gt;我必须使用的生产力软件没有 Linux 版本，也完全无法在 wine 中工作，因此请不要推荐使用 Linux ，以及用奇怪的办法在 Windows 下使用 Linux Only 的文件系统，例如 ZFS 。&lt;/p&gt;&#xA;</description>
+      <author>cuso45h2o</author>
+      <pubDate>26 Sep 2023 03:20:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>有无比较全的 tg 搜索频道 - 问与答</title>
+      <link>https://www.v2ex.com/t/977205</link>
+      <description>之前加过，找不到了，类似中文导航，搜索关键词，能搜到比较全面的，不要大家都在一起那种群组，互相搜索都看得到的，  要频道那种，只是自己用那种。</description>
+      <author>dtgxx</author>
+      <pubDate>26 Sep 2023 03:19:25 +0000</pubDate>
+    </item>
+    <item>
       <title>求开源测试覆盖率 dashboard - 程序员</title>
       <link>https://www.v2ex.com/t/977204</link>
       <description>&lt;p&gt;我们在用的语言包括 Java 、Golang 、Node.js ，新起 PR 或者合并 master 时自动跑 CI 时各个服务各自收集测试覆盖率数据，然后上报。希望有一个 DashBoard 用于展示单元测试、集成测试的覆盖率，主要是团队内自己看。&lt;/p&gt;&#xA;&lt;p&gt;不知道各位大佬有没有搭过类似的，最好是开源的。或者有相关的实践经验，比如怎么设计测试覆盖率的数据格式、接口，如何设计测试覆盖率数据的存储等等也可以。感谢！&lt;/p&gt;&#xA;</description>
@@ -13,7 +27,7 @@
     <item>
       <title>求推荐个好看的手机支架，有没有 MagSafe 都可以。 - iPhone</title>
       <link>https://www.v2ex.com/t/977203</link>
-      <description>&lt;p&gt;目前看上了下面这个：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-22968806719.14.259f46304eFzdr&amp;amp;id=651246267943&#34; rel=&#34;nofollow&#34;&gt;https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-22968806719.14.259f46304eFzdr&amp;amp;id=651246267943&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;2023-09-26 11 11 12&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://github.com/KyleBing/v2ex-image/assets/12215982/6bc9695a-ebf1-4b9b-a069-7c91d1094af7&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;主要优点：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;座与充电器分离，即使不用 MagSafe ，也可以作为支架插线使用&lt;/li&gt;&#xA;&lt;li&gt;好看&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;有没有其它比较好的推荐&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;目前看上了下面这个：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-22968806719.14.259f46304eFzdr&amp;amp;id=651246267943&#34; rel=&#34;nofollow&#34;&gt;https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-22968806719.14.259f46304eFzdr&amp;amp;id=651246267943&lt;/a&gt;&lt;br/&gt;&#xA;&lt;a href=&#34;https://detail.tmall.com/item.htm?abbucket=2&amp;amp;id=682390168030&amp;amp;ns=1&amp;amp;skuId=5060480459960&amp;amp;spm=a21n57.1.0.0.7574523c9seQGu&#34; rel=&#34;nofollow&#34;&gt;https://detail.tmall.com/item.htm?abbucket=2&amp;amp;id=682390168030&amp;amp;ns=1&amp;amp;skuId=5060480459960&amp;amp;spm=a21n57.1.0.0.7574523c9seQGu&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;2023-09-26 11 11 12&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://github.com/KyleBing/v2ex-image/assets/12215982/6bc9695a-ebf1-4b9b-a069-7c91d1094af7&#34;/&gt;&lt;/p&gt;&#xA;&lt;p&gt;主要优点：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;座与充电器分离，即使不用 MagSafe ，也可以作为支架插线使用&lt;/li&gt;&#xA;&lt;li&gt;好看&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;有没有其它比较好的推荐&lt;/p&gt;&#xA;</description>
       <author>kylebing</author>
       <pubDate>26 Sep 2023 03:15:42 +0000</pubDate>
     </item>
