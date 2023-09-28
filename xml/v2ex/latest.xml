@@ -4,6 +4,12 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>macOS 14 原生支持 2k 显示器的 hidpi 了 - 问与答</title>
+      <link>https://www.v2ex.com/t/977773</link>
+      <author>clintme</author>
+      <pubDate>28 Sep 2023 00:14:39 +0000</pubDate>
+    </item>
+    <item>
       <title>独立开发变现周刊（第 106 期）：个人独立开发之旅， 2 年内从 0 到月收入 4.5 万美元 - 分享发现</title>
       <link>https://www.v2ex.com/t/977772</link>
       <description>&lt;p&gt;明天中秋，祝大家中秋快乐！&lt;/p&gt;&#xA;&lt;p&gt;分享独立开发、产品变现相关内容，每周五发布。&lt;/p&gt;&#xA;&lt;p&gt;目录&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;1 、damngood：一个开源小工具站被收购&lt;/li&gt;&#xA;&lt;li&gt;2 、Stable Diffusion Prompt Reader: AI 图片 prompt 查看器&lt;/li&gt;&#xA;&lt;li&gt;3 、Text Blaze: AI 快捷键模版扩展插件&lt;/li&gt;&#xA;&lt;li&gt;4 、个人独立开发之旅: 2 年内从 0 到每月 4.5 万美元&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;本期详细内容： &lt;a href=&#34;https://www.ezindie.com/weekly/issue-106&#34; rel=&#34;nofollow&#34;&gt;https://www.ezindie.com/weekly/issue-106&lt;/a&gt;&lt;/p&gt;&#xA;</description>
@@ -11,7 +17,7 @@
       <pubDate>27 Sep 2023 23:56:55 +0000</pubDate>
     </item>
     <item>
-      <title>[去掉集显性能翻倍,自问自答] RDP 如何彻底禁止使用 PCIe 1.1x1 显卡的渲染？ - 分享发现</title>
+      <title>[去掉集显性能翻倍,自问自答] RDP 如何彻底禁止使用 PCIe 1.1x1 显卡的渲染？ - 硬件</title>
       <link>https://www.v2ex.com/t/977771</link>
       <description>&lt;h1&gt;问题和需求&lt;/h1&gt;&#xA;&lt;p&gt;给没有核显的老机器一个稳定的亮机途径，日常极度轻度使用，主要依赖于 RDP 。&lt;/p&gt;&#xA;&lt;p&gt;目前使用&lt;code&gt;GT520 PCI 版&lt;/code&gt;@&lt;code&gt;PCIe 1.1x1&lt;/code&gt;的时候，显示输出性能很差，导致桌面使用卡顿，甚至影响到 RDP 的输出。在使用远程桌面的时候，卡顿依然存在&lt;/p&gt;&#xA;&lt;h2&gt;解决方案&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;在设备管理器里面禁用显示适配器 GT520 可以大大提升（大雾）&lt;/li&gt;&#xA;&lt;li&gt;[正解] 使用修改注册表的方式禁用 d3d 加速即可。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cmd&#34;&gt;reg add &#34;HKLM\SOFTWARE\Microsoft\Direct3D\Drivers&#34; /v SoftwareOnly /t REG_DWORD /d 1 /f 0&amp;gt;nul 1&amp;gt;nul&#xA;reg add &#34;HKLM\SOFTWARE\Microsoft\DirectDraw&#34; /v EmulationOnly /t REG_DWORD /d 1 /f 0&amp;gt;nul 1&amp;gt;nul&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h1&gt;Anti-XY-Problem&lt;/h1&gt;&#xA;&lt;p&gt;机器配置: Z97 UD3M+E3 1231v3+阵列卡+万兆网卡+PCIeX4 Nvme 扩展卡&lt;/p&gt;&#xA;&lt;p&gt;因为 [贪便宜] 没有选择 x299 平台，但是又需要很多 pcie 设备，分析下设备需求：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;网卡：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;40GbE CX3 网卡&lt;/li&gt;&#xA;&lt;li&gt;需求 PCIe 3.0 8GTx8 不过分吧&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;阵列卡&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;LSI 2308 的 raid 卡，顶配，支持 CV ，有电池的&lt;/li&gt;&#xA;&lt;li&gt;需求 PCIe 3.0 8GTx8 不过分吧&lt;/li&gt;&#xA;&lt;li&gt;实测缓内能到 5GiB/s ，很凶&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;板载 nvme 和扩展 nvme&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;根据主板说明书，板载的 2280nvme 是 PCH 提供的 10G 接口（实际是 5GTx2 ），系统显示的是 2.0x2&lt;/li&gt;&#xA;&lt;li&gt;搞了一张 x4 的扩展卡放在第三个 PCH 给的 x16 槽位&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;BIOS 兼容性设置问题&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;如果让 PCH 槽位运行在 x4 模式，其他 x1 槽位就都不可用了&lt;/li&gt;&#xA;&lt;li&gt;根据官网给的框图，唯一的 PCI 槽位和 PCH x4 槽位不共享交换机&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;因此，选择了一块 pci 接口的亮机卡&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;这玩意还不便宜&lt;/li&gt;&#xA;&lt;li&gt;但是起码，比切板的 pcie1x 显卡好用&lt;/li&gt;&#xA;&lt;li&gt;如果不切显卡，就要把主板的 1x 槽位给打开&lt;/li&gt;&#xA;&lt;li&gt;但是这都不解决和 pcie4x 共享带宽的问题&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Z97UD3H&#34; class=&#34;embedded_image&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer&#34; rel=&#34;noreferrer&#34; src=&#34;https://cdn.yitang.top/upload/ether-public/yitang/1695858498fd06220e64f88a4d31a7b647e2e136d36da6d4c0.png&#34;/&gt;&lt;/p&gt;&#xA;&lt;h2&gt;以上论证了为什么我一定要使用一个 X1 的亮机卡&lt;/h2&gt;&#xA;&lt;p&gt;当然了，我买一块规格类似的带集显的 CPU 也不是不行……&lt;/p&gt;&#xA;&lt;p&gt;但是那样我就还不如——真的——换 X299 了&lt;/p&gt;&#xA;&lt;h1&gt;完&lt;/h1&gt;&#xA;</description>
       <author>phpfpm</author>
@@ -240,7 +246,7 @@
       <pubDate>27 Sep 2023 14:25:55 +0000</pubDate>
     </item>
     <item>
-      <title>终于有一个视频清晰的说清楚了手机、笔记本金属外壳麻手（Y 电容漏电流）的原理 - 问与答</title>
+      <title>终于有一个视频清晰的说清楚了手机、笔记本金属外壳麻手（Y 电容漏电流）的原理 - 分享发现</title>
       <link>https://www.v2ex.com/t/977728</link>
       <description> [隔离型开关电源为什么外壳还是带电？原来是里面这个元件在捣鬼-哔哩哔哩]  &lt;a target=&#34;_blank&#34; href=&#34;https://b23.tv/uCgdZ84&#34; rel=&#34;nofollow noopener&#34;&gt;https://b23.tv/uCgdZ84&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;简而言之，要给设备隔离 EMI 干扰，必须在火地之间跨接 Y 电容&lt;br /&gt;&lt;br /&gt;造成实际火地导通、地和外壳联通，从而火线电压上外壳可以有 100v 的电压&lt;br /&gt;&lt;br /&gt;但 Y 电容，按其容抗，通过电流只会有 0.0 几几 ma ，在人体安全电流范围内，因此只会麻手不会触电。这样的设计是符合安规各种认证的</description>
       <author>matepi</author>
