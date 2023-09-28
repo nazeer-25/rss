@@ -4,6 +4,34 @@
   "Description": "",
   "Items": [
     {
+      "Title": "哪里可以看到张一鸣，王兴、张小龙全部的微博、饭否 - 问与答",
+      "Link": "https://www.v2ex.com/t/977967",
+      "Description": "",
+      "Author": "xinmans",
+      "PubDate": "2023-09-28T07:26:54Z"
+    },
+    {
+      "Title": "macos sonoma 更新后最有用的是把书签全都改成网页 xxx.app? - macOS",
+      "Link": "https://www.v2ex.com/t/977966",
+      "Description": "Sonoma 把网易保存成 app 还是挺好用的,花了半个多小时把所有的书签都保存了一遍,但是也遇到了几个问题:\u003cbr /\u003e1.必须要添加到程序坞才行?每次都是保存到程序坞在移除,然后去启动台里整理到一个文件夹里\u003cbr /\u003e2.图标有点糊,但是又不知道去哪弄高清的,虽然不怎么看都是 command+space 启动\u003cbr /\u003e3.部分体验还行,部分体验不太行,主要是有些跳转之后没发返回,不知道是不是使用的姿势不对",
+      "Author": "giserd",
+      "PubDate": "2023-09-28T07:26:29Z"
+    },
+    {
+      "Title": "Go 1.21 新加的 log/slog 大家开始用了吗? 写了一个输出到阿里云日志的 writer 扩展, 顺带问个跟 slog 扩展相关的问题. - Go 编程语言",
+      "Link": "https://www.v2ex.com/t/977965",
+      "Description": "\u003ch2\u003e先是分享下我写的扩展\u003c/h2\u003e\n\u003cp\u003e扩展 writer 的地址: \u003ca href=\"https://github.com/gota33/aliyun-log-writer\" rel=\"nofollow\"\u003ehttps://github.com/gota33/aliyun-log-writer\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003elogger := slog.New(slog.NewJSONHandler(os.Stdout, nil))\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e用的时候把参数中的 os.Stdout 换成这个 writer 就行了.\u003c/p\u003e\n\u003ch2\u003e然后问两个问题\u003c/h2\u003e\n\u003cp\u003e一个是 slog 想 Hook 的话就两个接口可以入手, \u003ccode\u003eslog.Handler\u003c/code\u003e 和 \u003ccode\u003eio.Writer\u003c/code\u003e. \u003c/p\u003e\n\u003cp\u003e我这里选择了 \u003ccode\u003eio.Writer\u003c/code\u003e, 主要是因为自己写 \u003ccode\u003eslog.Handler\u003c/code\u003e 的话, 得把 \u003ccode\u003eslog.commonHandler\u003c/code\u003e 里的逻辑再实现一遍, 实在有点麻烦, 有没有像 \u003ccode\u003elogrus.Hook\u003c/code\u003e 那样比较简单的实现方式?\u003c/p\u003e\n\u003chr/\u003e\n\u003cp\u003e还有一个问题跟 channel 有关.\u003c/p\u003e\n\u003cp\u003e有这样的工作队列, \u003ccode\u003esubmit()\u003c/code\u003e 提交任务, \u003ccode\u003estop()\u003c/code\u003e 阻止新任务提交, 并处理完存量任务后返回.\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003evar (\n\tErrClosed = errors.New(\"closed\")\n\tchQuit    = make(chan struct{})\n\tchData    = make(chan int, 10)\n)\n\n// func start() { ... }\n\nfunc submit(n int) error {\n\tselect {\n\tcase \u0026lt;-chQuit:\n\t\treturn ErrClosed\n\tcase chData \u0026lt;- n:\n\t\treturn nil\n\t}\n}\n\nfunc stop() {\n\tclose(chQuit)\n\tclose(chData)\n\t\n\tfor n := range chData {\n\t\t// process data\n\t\t_ = n\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e但是 \u003ccode\u003eselect\u003c/code\u003e 跟 \u003ccode\u003eswitch\u003c/code\u003e 不一样, \u003ccode\u003ecase\u003c/code\u003e 的选择不是有序的, 导致有时候会选到第二个 \u003ccode\u003ecase\u003c/code\u003e 然后 \u003ccode\u003epanic\u003c/code\u003e.\u003c/p\u003e\n\u003cp\u003e所以后来把 \u003ccode\u003estop()\u003c/code\u003e 改成这样了\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-go\"\u003efunc stop() {\n\tclose(chQuit)\n\n\tch := chData\n\tchData = make(chan int)\n\n\tfor len(ch) \u0026gt; 0 {\n\t\t// process data\n\t\tselect {\n\t\tcase n := \u0026lt;-ch:\n\t\t\t_ = n\n\t\tdefault:\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这种情况大家一般是怎么处理的?\u003c/p\u003e\n",
+      "Author": "Gota",
+      "PubDate": "2023-09-28T07:23:40Z"
+    },
+    {
+      "Title": "[2023.9.28]医药小幅回调，止盈部分通信，成功潜伏一次主力----持仓 1 小时涨 8% - 投资",
+      "Link": "https://www.v2ex.com/t/977964",
+      "Description": "昨日医药接近涨停，长期看好，没有减仓，今日小幅回调。\u003cbr /\u003e\u003cbr /\u003e今天通信板块涨得还可以。\u003cbr /\u003e\u003cbr /\u003e中午午休发现教育板块存在资金流入现象，同时板块处于极度超跌，于是极小仓位买入某股，13.12 涨 1.7 买入 14.14 左右涨停，体验了一把过山车得感觉。\u003cbr /\u003e\u003cbr /\u003e整体涨 0.5%\u003cbr /\u003e\u003cbr /\u003e一边告诫自己不要抄底。。。一边感觉抄底赌博很爽！！！",
+      "Author": "encro",
+      "PubDate": "2023-09-28T07:23:04Z"
+    },
+    {
       "Title": "v 站的帖子回复能做成 reddit 那样吗？ - 问与答",
       "Link": "https://www.v2ex.com/t/977962",
       "Description": "\u003cp\u003e就是楼中楼那样，不然看起来有点累，上下文有点断断续续的\u003c/p\u003e\n",

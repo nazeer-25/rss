@@ -4,6 +4,33 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>哪里可以看到张一鸣，王兴、张小龙全部的微博、饭否 - 问与答</title>
+      <link>https://www.v2ex.com/t/977967</link>
+      <author>xinmans</author>
+      <pubDate>28 Sep 2023 07:26:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>macos sonoma 更新后最有用的是把书签全都改成网页 xxx.app? - macOS</title>
+      <link>https://www.v2ex.com/t/977966</link>
+      <description>Sonoma 把网易保存成 app 还是挺好用的,花了半个多小时把所有的书签都保存了一遍,但是也遇到了几个问题:&lt;br /&gt;1.必须要添加到程序坞才行?每次都是保存到程序坞在移除,然后去启动台里整理到一个文件夹里&lt;br /&gt;2.图标有点糊,但是又不知道去哪弄高清的,虽然不怎么看都是 command+space 启动&lt;br /&gt;3.部分体验还行,部分体验不太行,主要是有些跳转之后没发返回,不知道是不是使用的姿势不对</description>
+      <author>giserd</author>
+      <pubDate>28 Sep 2023 07:26:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>Go 1.21 新加的 log/slog 大家开始用了吗? 写了一个输出到阿里云日志的 writer 扩展, 顺带问个跟 slog 扩展相关的问题. - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/977965</link>
+      <description>&lt;h2&gt;先是分享下我写的扩展&lt;/h2&gt;&#xA;&lt;p&gt;扩展 writer 的地址: &lt;a href=&#34;https://github.com/gota33/aliyun-log-writer&#34; rel=&#34;nofollow&#34;&gt;https://github.com/gota33/aliyun-log-writer&lt;/a&gt;&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;用的时候把参数中的 os.Stdout 换成这个 writer 就行了.&lt;/p&gt;&#xA;&lt;h2&gt;然后问两个问题&lt;/h2&gt;&#xA;&lt;p&gt;一个是 slog 想 Hook 的话就两个接口可以入手, &lt;code&gt;slog.Handler&lt;/code&gt; 和 &lt;code&gt;io.Writer&lt;/code&gt;. &lt;/p&gt;&#xA;&lt;p&gt;我这里选择了 &lt;code&gt;io.Writer&lt;/code&gt;, 主要是因为自己写 &lt;code&gt;slog.Handler&lt;/code&gt; 的话, 得把 &lt;code&gt;slog.commonHandler&lt;/code&gt; 里的逻辑再实现一遍, 实在有点麻烦, 有没有像 &lt;code&gt;logrus.Hook&lt;/code&gt; 那样比较简单的实现方式?&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;还有一个问题跟 channel 有关.&lt;/p&gt;&#xA;&lt;p&gt;有这样的工作队列, &lt;code&gt;submit()&lt;/code&gt; 提交任务, &lt;code&gt;stop()&lt;/code&gt; 阻止新任务提交, 并处理完存量任务后返回.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var (&#xA;&#x9;ErrClosed = errors.New(&#34;closed&#34;)&#xA;&#x9;chQuit    = make(chan struct{})&#xA;&#x9;chData    = make(chan int, 10)&#xA;)&#xA;&#xA;// func start() { ... }&#xA;&#xA;func submit(n int) error {&#xA;&#x9;select {&#xA;&#x9;case &amp;lt;-chQuit:&#xA;&#x9;&#x9;return ErrClosed&#xA;&#x9;case chData &amp;lt;- n:&#xA;&#x9;&#x9;return nil&#xA;&#x9;}&#xA;}&#xA;&#xA;func stop() {&#xA;&#x9;close(chQuit)&#xA;&#x9;close(chData)&#xA;&#x9;&#xA;&#x9;for n := range chData {&#xA;&#x9;&#x9;// process data&#xA;&#x9;&#x9;_ = n&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是 &lt;code&gt;select&lt;/code&gt; 跟 &lt;code&gt;switch&lt;/code&gt; 不一样, &lt;code&gt;case&lt;/code&gt; 的选择不是有序的, 导致有时候会选到第二个 &lt;code&gt;case&lt;/code&gt; 然后 &lt;code&gt;panic&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;所以后来把 &lt;code&gt;stop()&lt;/code&gt; 改成这样了&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func stop() {&#xA;&#x9;close(chQuit)&#xA;&#xA;&#x9;ch := chData&#xA;&#x9;chData = make(chan int)&#xA;&#xA;&#x9;for len(ch) &amp;gt; 0 {&#xA;&#x9;&#x9;// process data&#xA;&#x9;&#x9;select {&#xA;&#x9;&#x9;case n := &amp;lt;-ch:&#xA;&#x9;&#x9;&#x9;_ = n&#xA;&#x9;&#x9;default:&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;这种情况大家一般是怎么处理的?&lt;/p&gt;&#xA;</description>
+      <author>Gota</author>
+      <pubDate>28 Sep 2023 07:23:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>[2023.9.28]医药小幅回调，止盈部分通信，成功潜伏一次主力----持仓 1 小时涨 8% - 投资</title>
+      <link>https://www.v2ex.com/t/977964</link>
+      <description>昨日医药接近涨停，长期看好，没有减仓，今日小幅回调。&lt;br /&gt;&lt;br /&gt;今天通信板块涨得还可以。&lt;br /&gt;&lt;br /&gt;中午午休发现教育板块存在资金流入现象，同时板块处于极度超跌，于是极小仓位买入某股，13.12 涨 1.7 买入 14.14 左右涨停，体验了一把过山车得感觉。&lt;br /&gt;&lt;br /&gt;整体涨 0.5%&lt;br /&gt;&lt;br /&gt;一边告诫自己不要抄底。。。一边感觉抄底赌博很爽！！！</description>
+      <author>encro</author>
+      <pubDate>28 Sep 2023 07:23:04 +0000</pubDate>
+    </item>
+    <item>
       <title>v 站的帖子回复能做成 reddit 那样吗？ - 问与答</title>
       <link>https://www.v2ex.com/t/977962</link>
       <description>&lt;p&gt;就是楼中楼那样，不然看起来有点累，上下文有点断断续续的&lt;/p&gt;&#xA;</description>
