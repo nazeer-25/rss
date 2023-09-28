@@ -4,6 +4,75 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>跪求大家帮忙推荐一款免费，开源的客户关系管理系统。 - 问与答</title>
+      <link>https://www.v2ex.com/t/977817</link>
+      <description>&lt;p&gt;打扰了各位，我需要这样一款免费的软件：&lt;/p&gt;&#xA;&lt;p&gt;维护客户信息：输入客户名称，多久拜访一次（ 2 周，1 个月，regular schedule ），地址信息之类的。&lt;/p&gt;&#xA;&lt;p&gt;然后每次打开软件，就提示当周需要拜访的客户。如果拜访过了，修改状态，自动进入下个拜访周期。&lt;/p&gt;&#xA;&lt;p&gt;越简单越好~&lt;/p&gt;&#xA;</description>
+      <author>61366756</author>
+      <pubDate>28 Sep 2023 02:09:51 +0000</pubDate>
+    </item>
+    <item>
+      <title>求 Java 开源项目推荐(前后端分离项目），在校学生 - 问与答</title>
+      <link>https://www.v2ex.com/t/977816</link>
+      <description>&lt;p&gt;技术栈：spring ，sprngmvc,springboot,rocketmq,mysql,mybatis 等，&#xA;前端； vue3,axios,element ui 等，目前在做 vhr(项目），目前在学 redis,大四不是很忙，求推荐&#xA;&lt;a href=&#34;https://github.com/Breeze1203&#34; rel=&#34;nofollow&#34;&gt;https://github.com/Breeze1203&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>breeze2001</author>
+      <pubDate>28 Sep 2023 02:09:43 +0000</pubDate>
+    </item>
+    <item>
+      <title>Go&#39;s Assembler 01: defer - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/977815</link>
+      <description>&lt;p&gt;Link: &lt;a href=&#34;http://blog.j2gg0s.com/&#34; rel=&#34;nofollow&#34;&gt;http://blog.j2gg0s.com/&lt;/a&gt;&#xA;全文依然基于 go1.21.1, GOOS=linux, GOARCH=amd64, 编译和反汇编都运行在 macOS.&lt;/p&gt;&#xA;&lt;p&gt;当前 Go 实现 defer 机制的方式有三种: open coded, stack allocated 和 heap allocated.&lt;/p&gt;&#xA;&lt;p&gt;Open coded 指在编译时, 将 defer 直接插入函数返回的位置, 和直接调用相比也基本没有额外的开销.&lt;/p&gt;&#xA;&lt;p&gt;Stack allocated 和 heap allocated 类似.&#xA;首先都是在遇到 defer 时将其保存到当前 goroutine.&#xA;随后在函数返回的位置插入对 runtime.deferreturn 的调用, 该函数按照先进后出的顺序执行当前 goroutine 的 defer 函数.&#xA;二者的区别在于前者在插入 defer 时使用栈上空间, 性能损失小;&#xA;后者使用推上空间, 有巨大的性能成本.&lt;/p&gt;&#xA;&lt;h2&gt;open coded&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://go.googlesource.com/proposal/+/refs/heads/master/design/34481-opencoded-defers.md&#34; rel=&#34;nofollow&#34;&gt;相关设计文档&lt;/a&gt;&#xA;中有个非常形象的例子.&lt;/p&gt;&#xA;&lt;p&gt;假设代码如下:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;defer f1(a)&#xA;if cond {&#xA; defer f2(b)&#xA;}&#xA;body...&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;经过编译后的代码如下:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;deferBits |= 1&amp;lt;&amp;lt;0&#xA;tmpF1 = f1&#xA;tmpA = a&#xA;if cond {&#xA; deferBits |= 1&amp;lt;&amp;lt;1&#xA; tmpF2 = f2&#xA; tmpB = b&#xA;}&#xA;body...&#xA;exit:&#xA;if deferBits &amp;amp; 1&amp;lt;&amp;lt;1 != 0 {&#xA; deferBits &amp;amp;^= 1&amp;lt;&amp;lt;1&#xA; tmpF2(tmpB)&#xA;}&#xA;if deferBits &amp;amp; 1&amp;lt;&amp;lt;0 != 0 {&#xA; deferBits &amp;amp;^= 1&amp;lt;&amp;lt;0&#xA; tmpF1(tmpA)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;即:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;将 defer 涉及的函数和变量都保存到栈上&lt;/li&gt;&#xA;&lt;li&gt;用 deferBits 来保存对应的 defer 是否应该执行&lt;/li&gt;&#xA;&lt;li&gt;编译过程中, 在函数退出时插入调用代码&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//go:noinline&#xA;func max(a, b int) int {&#xA;        if a &amp;gt; b {&#xA;                defer func() {&#xA;                        fmt.Println(&#34;max is a&#34;)&#xA;                }()&#xA;                return a&#xA;        }&#xA;        defer func() {&#xA;                fmt.Println(&#34;max is b&#34;)&#xA;        }()&#xA;        return b&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;对应的汇编代码:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;栈上的 0~6th 字节未使用, 7th 字节被用来存储 deferbits&lt;/li&gt;&#xA;&lt;li&gt;8~15th 字节用于在调用 defer 前暂存 main.max 的返回值&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre&gt;&lt;code&gt;000000000047ae00 &amp;lt;main.max&amp;gt;:&#xA;; func max(a, b int) int {&#xA;  47ae00: 49 3b 66 10                  &#x9;cmpq&#x9;16(%r14), %rsp&#xA;  47ae04: 0f 86 87 00 00 00            &#x9;jbe&#x9;0x47ae91 &amp;lt;main.max+0x91&amp;gt;&#xA;  47ae0a: 55                           &#x9;pushq&#x9;%rbp&#xA;  47ae0b: 48 89 e5                     &#x9;movq&#x9;%rsp, %rbp&#xA;  47ae0e: 48 83 ec 20                  &#x9;subq&#x9;$32, %rsp&#xA;  47ae12: 44 0f 11 7c 24 10            &#x9;movups&#x9;%xmm15, 16(%rsp)&#xA;  47ae18: c6 44 24 07 00               &#x9;movb&#x9;$0, 7(%rsp)&#xA;  47ae1d: 48 c7 44 24 08 00 00 00 00   &#x9;movq&#x9;$0, 8(%rsp)&#xA;; &#x9;if a &amp;gt; b {&#xA;  47ae26: 48 39 d8                     &#x9;cmpq&#x9;%rbx, %rax              ; rax - rbx&#xA;  47ae29: 7e 2b                        &#x9;jle&#x9;0x47ae56 &amp;lt;main.max+0x56&amp;gt;    ; jle -&amp;gt; jump if less or equal&#xA;; &#x9;&#x9;defer func() {&#xA;  47ae2b: 48 8d 0d c6 06 02 00         &#x9;leaq&#x9;132806(%rip), %rcx      # 0x49b4f8 &amp;lt;go:func.*+0x220&amp;gt;    ; 见后续&#xA;  47ae32: 48 89 4c 24 18               &#x9;movq&#x9;%rcx, 24(%rsp)                                          ; 见后续&#xA;  47ae37: c6 44 24 07 01               &#x9;movb&#x9;$1, 7(%rsp)             ; deferbits 的第一个 bit 被置为 1, movb 仅移动一个字节&#xA;; &#x9;&#x9;return a&#xA;  47ae3c: 48 89 44 24 08               &#x9;movq&#x9;%rax, 8(%rsp)           ; 调用 defer 将 rax 中的返回结果暂存到栈中&#xA;  47ae41: c6 44 24 07 00               &#x9;movb&#x9;$0, 7(%rsp)             ; 清空 deferbits 的第一个 bit&#xA;  47ae46: e8 b5 00 00 00               &#x9;callq&#x9;0x47af00 &amp;lt;main.max.func1&amp;gt;&#xA;  47ae4b: 48 8b 44 24 08               &#x9;movq&#x9;8(%rsp), %rax&#xA;  47ae50: 48 83 c4 20                  &#x9;addq&#x9;$32, %rsp&#xA;  47ae54: 5d                           &#x9;popq&#x9;%rbp&#xA;  47ae55: c3                           &#x9;retq&#xA;; &#x9;defer func() {&#xA;  47ae56: 48 8d 05 a3 06 02 00         &#x9;leaq&#x9;132771(%rip), %rax      # 0x49b500 &amp;lt;go:func.*+0x228&amp;gt;&#xA;  47ae5d: 48 89 44 24 10               &#x9;movq&#x9;%rax, 16(%rsp)&#xA;  47ae62: c6 44 24 07 02               &#x9;movb&#x9;$2, 7(%rsp)             ; 第二个 defer 对应 deferbits 的第二个 bit&#xA;; &#x9;return b&#xA;  47ae67: 48 89 5c 24 08               &#x9;movq&#x9;%rbx, 8(%rsp)&#xA;  47ae6c: c6 44 24 07 00               &#x9;movb&#x9;$0, 7(%rsp)&#xA;  47ae71: e8 ea 00 00 00               &#x9;callq&#x9;0x47af60 &amp;lt;main.max.func2&amp;gt;&#xA;  47ae76: 48 8b 44 24 08               &#x9;movq&#x9;8(%rsp), %rax&#xA;  47ae7b: 48 83 c4 20                  &#x9;addq&#x9;$32, %rsp&#xA;  47ae7f: 5d                           &#x9;popq&#x9;%rbp&#xA;  47ae80: c3                           &#x9;retq&#xA;  47ae81: e8 5a 47 fb ff               &#x9;callq&#x9;0x42f5e0 &amp;lt;runtime.deferreturn&amp;gt;  &#xA;  47ae86: 48 8b 44 24 08               &#x9;movq&#x9;8(%rsp), %rax&#xA;  47ae8b: 48 83 c4 20                  &#x9;addq&#x9;$32, %rsp&#xA;  47ae8f: 5d                           &#x9;popq&#x9;%rbp&#xA;  47ae90: c3                           &#x9;retq&#xA;; func max(a, b int) int {&#xA;  47ae91: 48 89 44 24 08               &#x9;movq&#x9;%rax, 8(%rsp)&#xA;  47ae96: 48 89 5c 24 10               &#x9;movq&#x9;%rbx, 16(%rsp)&#xA;  47ae9b: 0f 1f 44 00 00               &#x9;nopl&#x9;(%rax,%rax)&#xA;  47aea0: e8 fb fb fd ff               &#x9;callq&#x9;0x45aaa0 &amp;lt;runtime.morestack_noctxt.abi0&amp;gt;&#xA;  47aea5: 48 8b 44 24 08               &#x9;movq&#x9;8(%rsp), %rax&#xA;  47aeaa: 48 8b 5c 24 10               &#x9;movq&#x9;16(%rsp), %rbx&#xA;  47aeaf: e9 4c ff ff ff               &#x9;jmp&#x9;0x47ae00 &amp;lt;main.max&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;stack allocated&lt;/h2&gt;&#xA;&lt;p&gt;Open coded 的弊端是可能造成汇编代码的体积膨胀, 所以 Go 会自主判断是否要降级到 stack allocated.&#xA;比如说当 defer 的数量超过 8 个时, 就会降级到 stack allocated. 此时:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;defer 被保存在当前 goroutine 的变量 _defer 内, 一个链表&lt;/li&gt;&#xA;&lt;li&gt;编译时遇到 defer, 则插入对 runtime.deferprocStack 的调用, 将 defer 插入到 g._defer 的队首&lt;/li&gt;&#xA;&lt;li&gt;编译时在函数的返回处都插入对 runtime.deferreturn 的调用, 该函数会执行当前 goroutine 的 defer.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Go 示例代码:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//go:noinline&#xA;func add(a, b int) int {&#xA;&#x9;defer func() { fmt.Println(1) }()&#xA;&#x9;defer func() { fmt.Println(2) }()&#xA;&#x9;defer func() { fmt.Println(3) }()&#xA;&#x9;defer func() { fmt.Println(4) }()&#xA;&#x9;defer func() { fmt.Println(5) }()&#xA;&#x9;defer func() { fmt.Println(6) }()&#xA;&#x9;defer func() { fmt.Println(7) }()&#xA;&#x9;defer func() { fmt.Println(8) }()&#xA;&#x9;defer func() { fmt.Println(9) }()&#xA;&#x9;return a + b&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;通过 deferprocStack 将 defer 保存到 goroutine 的汇编如下.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;; &#x9;defer func() { fmt.Println(1) }()&#xA;  47ae56: 48 8d 0d 8b 16 02 00         &#x9;leaq&#x9;136843(%rip), %rcx      # 0x49c4e8 &amp;lt;go:func.*+0x220&amp;gt;&#xA;  47ae5d: 48 89 8c 24 d8 01 00 00      &#x9;movq&#x9;%rcx, 472(%rsp)&#xA;  47ae65: 48 8d 84 24 c0 01 00 00      &#x9;leaq&#x9;448(%rsp), %rax&#xA;  47ae6d: e8 8e 41 fb ff               &#x9;callq&#x9;0x42f000 &amp;lt;runtime.deferprocStack&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;理解上述汇编代码, 需要结合 runtime 中的 deferprocStack 函数.&#xA;其签名为 &lt;code&gt;func deferprocStack(d *_defer) {}&lt;/code&gt;, 参数 _defer 的主要结构为:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type _defer struct {&#xA;&#x9;started bool&#xA;&#x9;heap    bool&#xA;&#x9;// openDefer indicates that this _defer is for a frame with open-coded&#xA;&#x9;// defers. We have only one defer record for the entire frame (which may&#xA;&#x9;// currently have 0, 1, or more defers active).&#xA;&#x9;openDefer bool&#xA;&#x9;sp        uintptr // sp at time of defer&#xA;&#x9;pc        uintptr // pc at time of defer&#xA;&#x9;fn        func()  // can be nil for open-coded defers&#xA;    ...&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;此时倒着看这部分汇编会更容易理解:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;callq&#x9;0x42f000 &amp;lt;runtime.deferprocStack&amp;gt;&lt;/code&gt; 调用 deferprocStack&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;leaq&#x9;448(%rsp), %rax&lt;/code&gt; 在调用前将参数保存到 rax&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;movq&#x9;%rcx, 472(%rsp)&lt;/code&gt; _defer 的开头在 448, 472 是偏移了 24 字节, 对应字段为 fn, 所以此处的含义是将 rcx 赋值给 _defer.fn&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;leaq&#x9;136843(%rip), %rcx      # 0x49c4e8 &amp;lt;go:func.*+0x220&amp;gt;&lt;/code&gt; 将 defer 函数的地址加载到 rcx&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;此时回头去看 open coded 下的 leaq 也可以理解, 保留的原因是因为 GC?&lt;/p&gt;&#xA;&lt;p&gt;返回前调用 deferreturn 的汇编代码:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;; &#x9;return a + b&#xA;  47af8d: 48 8b 84 24 b0 02 00 00      &#x9;movq&#x9;688(%rsp), %rax     ; 将暂存在栈上的函数入参 a 和 b 存储到寄存器 rax 和 rcx&#xA;  47af95: 48 8b 8c 24 a8 02 00 00      &#x9;movq&#x9;680(%rsp), %rcx&#xA;  47af9d: 48 01 c8                     &#x9;addq&#x9;%rcx, %rax&#xA;  47afa0: 48 89 44 24 08               &#x9;movq&#x9;%rax, 8(%rsp)       ; 将结果暂存到栈上&#xA;  47afa5: e8 36 46 fb ff               &#x9;callq&#x9;0x42f5e0 &amp;lt;runtime.deferreturn&amp;gt;          ; 调用 deferreturn, 以 FILO 的顺序执行 defer&#xA;  47afaa: 48 8b 44 24 08               &#x9;movq&#x9;8(%rsp), %rax                           ; 将暂存的返回值存储到 rax&#xA;  47afaf: 48 81 c4 98 02 00 00         &#x9;addq&#x9;$664, %rsp              # imm = 0x298   ; 释放申请的栈空间&#xA;  47afb6: 5d                           &#x9;popq&#x9;%rbp                                    ; 恢复 base pointer&#xA;  47afb7: c3                           &#x9;retq&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;heap allocated&lt;/h2&gt;&#xA;&lt;p&gt;Heap allocated 和 stack allocated 的逻辑基本相似, 区别在于使用堆时, 需要用 deferproc 代替 deferprocStack.&#xA;&lt;a href=&#34;https://go-review.googlesource.com/c/go/+/171758&#34; rel=&#34;nofollow&#34;&gt;PR&lt;/a&gt; 指出当 defer 被多次调用时即会触发 heap allocated.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//go:noinline&#xA;func sum(numbers []int) int {&#xA;        sum := 0&#xA;        for i := 0; i &amp;lt; len(numbers); i++ {&#xA;                defer func() {&#xA;                        fmt.Println(1)&#xA;                }()&#xA;                sum += numbers[i]&#xA;        }&#xA;        return sum&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;从汇编中我们可以看到, 相对于 stack allocated 是调用 deferprocStack, 现在调用的是 deferproc.&#xA;deferproc 会在堆上, 而不是栈上, 构造 _defer.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;; &#x9;&#x9;defer func() {&#xA;  47af79: 48 8d 05 e0 15 02 00         &#x9;leaq&#x9;136672(%rip), %rax      # 0x49c560 &amp;lt;go:func.*+0x270&amp;gt;&#xA;  47af80: e8 7b 40 fb ff               &#x9;callq&#x9;0x42f000 &amp;lt;runtime.deferproc&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h2&gt;Reference:&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://go.googlesource.com/proposal/+/refs/heads/master/design/34481-opencoded-defers.md&#34; rel=&#34;nofollow&#34;&gt;Proposal: Low-cost defers through inline code, and extra funcdata to manage the panic case&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+      <author>GopherDaily</author>
+      <pubDate>28 Sep 2023 02:08:08 +0000</pubDate>
+    </item>
+    <item>
+      <title>电脑外接摄像头一个奇怪的问题，看看大家有没有什么解决办法 - 问与答</title>
+      <link>https://www.v2ex.com/t/977814</link>
+      <description>系统环境：黑苹果，外接摄像头&lt;br /&gt;&lt;br /&gt;在飞书视频会议的时候第一次画面总是偏黑，然后只要再打开一次 Mac 自带的 Facetime 或者 Photo booth ，就是两个软件视频画面都开着，画面马上就正常了，就像是 Mac 自带的软件打通了什么故障之类的，很奇怪。这个问题我纠结很久了，但是因为有临时解决方法所以一直没去深究，看看大家有没有什么解决办法？</description>
+      <author>jenlors</author>
+      <pubDate>28 Sep 2023 02:07:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>国庆假期都计划去哪 - 问与答</title>
+      <link>https://www.v2ex.com/t/977813</link>
+      <description>&lt;p&gt;结婚有娃后放假比上班累，计划回趟老丈人家，再回老家，折腾几天没有出去玩的时间了&lt;/p&gt;&#xA;</description>
+      <author>PerryHe</author>
+      <pubDate>28 Sep 2023 02:06:52 +0000</pubDate>
+    </item>
+    <item>
+      <title>鼠标卡顿问题求助 - 问与答</title>
+      <link>https://www.v2ex.com/t/977812</link>
+      <description>&lt;p&gt;家里台式机的鼠标是罗技 G604 ，鼠标指针经常卡顿，影响正常使用。具体表现在，接收器插在机箱前置的 USB 口，卡顿最严重；插在主板的 USB 口，稍好一些，但还有偶尔卡顿；用一个 USB 一拖三连接，可以缓解卡顿，但还是不能彻底解决。&lt;/p&gt;&#xA;&lt;p&gt;怀疑是无线设备多，信号互相干扰造成的，电视、台式机、PS5 、XBOX 都在同一个房间。&lt;/p&gt;&#xA;&lt;p&gt;请教各位大佬有什么好的解决方法，谢谢！&lt;/p&gt;&#xA;</description>
+      <author>shuiniu66</author>
+      <pubDate>28 Sep 2023 02:05:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>刚刚 V2 网站崩了？ - 问与答</title>
+      <link>https://www.v2ex.com/t/977808</link>
+      <author>HelloWorld556</author>
+      <pubDate>28 Sep 2023 02:00:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>OpenAI 的 api 接口有请求速率限制有什么解决方案吗？ - OpenAI</title>
+      <link>https://www.v2ex.com/t/977807</link>
+      <description>&lt;p&gt;目前搞了两个号，gmail 注册的，绑的同一张卡&#xA;看了一下有些批发账号的，感觉容易被封&#xA;有没有稳定的方法啊？&#xA;批量注册的那种都是企业邮箱+接码注册的吧，多个号绑定同一种卡会不会被封啊&#xA;目前的卡月费还要 28 。。。。&lt;/p&gt;&#xA;&lt;h2&gt;API 请求限制&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th&gt;MODEL&lt;/th&gt;&#xA;&lt;th&gt;TPM&lt;/th&gt;&#xA;&lt;th&gt;RPM&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;gpt-3.5-turbo&lt;/td&gt;&#xA;&lt;td&gt;90,000&lt;/td&gt;&#xA;&lt;td&gt;3,500&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;tr&gt;&#xA;&lt;td&gt;gpt-4&lt;/td&gt;&#xA;&lt;td&gt;40,000&lt;/td&gt;&#xA;&lt;td&gt;200&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;</description>
+      <author>lizhien</author>
+      <pubDate>28 Sep 2023 02:00:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问有没有大佬知道比较好的 apple ID 迁移数据的方法？ - Apple</title>
+      <link>https://www.v2ex.com/t/977806</link>
+      <description>&lt;p&gt;需求：国区 id 的 icloud 、通讯录、照片等所有数据要迁到美区 id ，原国区 id 因大陆特有的 app 内购、付费比较多，不直接转地区了&lt;/p&gt;&#xA;&lt;p&gt;目前在知乎看到了一个方法是所有数据保存到本地（手机），然后换 id 登陆 icloud 再合并，但这样的话需要比较大的空间，有没有比较好的办法呢？&lt;/p&gt;&#xA;</description>
+      <author>levine</author>
+      <pubDate>28 Sep 2023 01:52:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>请问下土耳其 Turkcell 如何激活 imessage 显示号码 - 问与答</title>
+      <link>https://www.v2ex.com/t/977804</link>
+      <description>上车了张土耳其 Turkcell esim ，保号每月 10 里拉，接短信一切正常，但是一直无法开启 imessage ，后边查到开启 imessage 需要发短信，又开了个 5$套餐里边有流量、短信包，短信可以正常发送，但是 imessage 死活激活不了，果子也显示不出来号码，有前辈答疑解惑吗，谢谢</description>
+      <author>bjm1996</author>
+      <pubDate>28 Sep 2023 01:50:13 +0000</pubDate>
+    </item>
+    <item>
       <title>我的 mbp14 太小 想多个屏幕，能用类似随航投到 imac5k 吗， iPad 可以投上去 - 问与答</title>
       <link>https://www.v2ex.com/t/977803</link>
       <author>zzz6519003</author>
@@ -136,18 +205,11 @@
       <pubDate>28 Sep 2023 01:14:39 +0000</pubDate>
     </item>
     <item>
-      <title>日本企业要出海要对外扩张是因为国内小，但是美国企业呢？ - 随想</title>
+      <title>日本企业要出海要对外扩张是因为国内小，但是美国企业呢？ - 地球</title>
       <link>https://www.v2ex.com/t/977783</link>
       <description>&lt;h4&gt;走在路上我想到一个问题，&lt;/h4&gt;&#xA;&lt;h4&gt;你说日本企业必须要出海，要对外扩张，&lt;/h4&gt;&#xA;&lt;h4&gt;比如丰田本田优衣库，是因为国内市场太小。&lt;/h4&gt;&#xA;&lt;h4&gt;必须对外扩张。&lt;/h4&gt;&#xA;&lt;h4&gt;那美国企业，肯德基麦当劳，&lt;/h4&gt;&#xA;&lt;h4&gt;甚至能开到中国的四五线城市，所谓的下沉市场，那是为什么，&lt;/h4&gt;&#xA;&lt;h4&gt;美国市场还不够大吗？不够赚吗？&lt;/h4&gt;&#xA;&lt;h4&gt;开到国外的四五线城市面临的困难可能比赚的钱还要多吧？&lt;/h4&gt;&#xA;&lt;h4&gt;想一下把大米先生从东海岸开到西海岸，&lt;/h4&gt;&#xA;&lt;h4&gt;从西雅图开到墨西哥州，&lt;/h4&gt;&#xA;&lt;h4&gt;还不能只是洛杉矶这样的大都市，&lt;/h4&gt;&#xA;&lt;h4&gt;还得进入小镇上。。。&lt;/h4&gt;&#xA;&lt;h4&gt;是什么样的动力，这么强大。。。&lt;/h4&gt;&#xA;</description>
       <author>weishijun14</author>
       <pubDate>28 Sep 2023 01:14:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>Surge 作者大刘为啥搞了这么多年都没啥事？ - 问与答</title>
-      <link>https://www.v2ex.com/t/977782</link>
-      <description>&lt;p&gt;鉴于最近的翻墙事件，大刘肉身还在国内吧，我看他还创办了家公司，像 Surge 这种比较敏感的工具软件为啥一直活的好好的，虽然我知道翻墙只是 Surge 的功能之一，但之前很多 GitHub 上连纯代码项目都迫于某些压力而关闭，而 Surge 还能干的风生水起。&lt;/p&gt;&#xA;</description>
-      <author>wulili</author>
-      <pubDate>28 Sep 2023 01:13:31 +0000</pubDate>
     </item>
     <item>
       <title>有没有开车回去的 v 友，准备在路上堵多久啊 - 问与答</title>
@@ -222,6 +284,13 @@
       <description>之前的两个 beats 耳机都坏了，Powerbeats Pro 左耳充不进去电，Beats Fit Pro 左右耳鲨鱼鳍(耳翼)先后断裂，换新后再次断裂。在网上看这种情况应该不是个例，Beats 的质量堪忧啊，现在如果再送修的话需要收 799 ，新的才 1200 左右&lt;br /&gt;准备换个新无线蓝牙耳机，有推荐吗</description>
       <author>leo747604</author>
       <pubDate>27 Sep 2023 22:48:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>Surge 作者大刘为啥搞了这么多年都没啥事？ - 问与答</title>
+      <link>https://www.v2ex.com/t/977782</link>
+      <description>&lt;p&gt;鉴于最近的翻墙事件，大刘肉身还在国内吧，我看他还创办了家公司，像 Surge 这种比较敏感的工具软件为啥一直活的好好的，虽然我知道翻墙只是 Surge 的功能之一，但之前很多 GitHub 上连纯代码项目都迫于某些压力而关闭，而 Surge 还能干的风生水起。&lt;/p&gt;&#xA;</description>
+      <author>wulili</author>
+      <pubDate>28 Sep 2023 01:13:31 +0000</pubDate>
     </item>
     <item>
       <title>家人们谁懂啊， m1 pro mac 升级 14 后登陆界面都要卡死，降级方便吗？ - Apple</title>
