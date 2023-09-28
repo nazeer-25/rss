@@ -4,6 +4,13 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>ubuntu 端口转发，总显示 Connection refused - 程序员</title>
+      <link>https://www.v2ex.com/t/978065</link>
+      <description>&lt;p&gt;各位大佬，请教个端口转发的问题。&#xA;我这边有服务运行在本地的 127.0.0.1: 8545 ，机子内网 ip 是 192.168.0.5 。我需要将所有到 192.168.0.5: 8549 的请求转发到 127.0.0.1:8545. 于是我使用 iptables 添加了如下规则并 save 。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;iptables -t nat -A PREROUTING -d 192.168.0.5 -p tcp --dport 8549 -j DNAT --to-destination 127.0.0.1:8545&#xA;iptables-save&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;同时我确保 ufw 8549 打开了。&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;ufw allow 8549&#xA;~# ufw status&#xA;Status: active&#xA;&#xA;To                         Action      From&#xA;--                         ------      ----&#xA;8549                       ALLOW       Anywhere                  &#xA;8549 (v6)                  ALLOW       Anywhere (v6)             &#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是我 curl 依旧显示 connection refused&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;curl http://192.168.0.5:8549/ &#xA;curl: (7) Failed to connect to 192.168.0.5 port 8549: Connection refused&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;求大佬们指点一下！&lt;/p&gt;&#xA;</description>
+      <author>samohyes</author>
+      <pubDate>28 Sep 2023 15:13:30 +0000</pubDate>
+    </item>
+    <item>
       <title>公众号文章的阅读 点赞 数据抓取过程中有一个 key 会半小时过期，请问有没有大佬知道怎么自动更新？ - 问与答</title>
       <link>https://www.v2ex.com/t/978064</link>
       <description>就像这一篇文章里写的&lt;br /&gt;&lt;br /&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://wnma3mz.github.io/hexo_blog/2017/11/18/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E7%88%AC%E8%99%AB%E7%9A%84%E7%BB%8F%E5%8E%86%EF%BC%88%E5%BE%AE%E4%BF%A1%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E7%82%B9%E8%B5%9E%E7%9A%84%E8%8E%B7%E5%8F%96%EF%BC%89/&#34; rel=&#34;nofollow noopener&#34;&gt;https://wnma3mz.github.io/hexo_blog/2017/11/18/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E7%88%AC%E8%99%AB%E7%9A%84%E7%BB%8F%E5%8E%86%EF%BC%88%E5%BE%AE%E4%BF%A1%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E7%82%B9%E8%B5%9E%E7%9A%84%E8%8E%B7%E5%8F%96%EF%BC%89/&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;params = {&lt;br /&gt;    &#34;__biz&#34;: your__biz,&lt;br /&gt;    &#34;mid&#34;: article_mid,&lt;br /&gt;    &#34;sn&#34;: article_sn,&lt;br /&gt;    &#34;idx&#34;: article_idx,&lt;br /&gt;    &#34;key&#34;: yourkey,&lt;br /&gt;    &#34;pass_ticket&#34;: pass_ticket,&lt;br /&gt;    &#34;appmsg_token&#34;: yourappmsg_token,&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;    &#34;key&#34; 这个参数对应的值，我计时了一下大概半小时过期。我想知道怎么实现自动生成，避免每次都要去访问一个新的文章，然后再从 url 中找。&lt;br /&gt;&lt;br /&gt;感谢指点</description>
