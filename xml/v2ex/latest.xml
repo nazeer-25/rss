@@ -4,6 +4,27 @@
     <link>https://www.v2ex.com/?tab=all</link>
     <description></description>
     <item>
+      <title>老哥们，问一个 go build 代理的问题 - Go 编程语言</title>
+      <link>https://www.v2ex.com/t/977933</link>
+      <description>&lt;p&gt;我现在有一台 vmware centos7 服务器。使用 yum 安装了 golang&lt;/p&gt;&#xA;&lt;p&gt;并且在/etc/profiles 设置了 http_proxy 和 https_proxy 代理&lt;/p&gt;&#xA;&lt;p&gt;/etc/profiles 设置的内容如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;export http_proxy=http://192.168.230.1:808&#xA;export https_proxy=https://192.168.230.1:808&#xA;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;但是当我使用 go build xxx.go 的时，就会报错，&#xA;go env 设置如下：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;[root@localhost tz-monitor]# go env&#xA;GO111MODULE=&#34;&#34;&#xA;GOARCH=&#34;amd64&#34;&#xA;GOBIN=&#34;&#34;&#xA;GOCACHE=&#34;/root/.cache/go-build&#34;&#xA;GOENV=&#34;/root/.config/go/env&#34;&#xA;GOEXE=&#34;&#34;&#xA;GOEXPERIMENT=&#34;&#34;&#xA;GOFLAGS=&#34;&#34;&#xA;GOHOSTARCH=&#34;amd64&#34;&#xA;GOHOSTOS=&#34;linux&#34;&#xA;GOINSECURE=&#34;&#34;&#xA;GOMODCACHE=&#34;/root/go/pkg/mod&#34;&#xA;GONOPROXY=&#34;&#34;&#xA;GONOSUMDB=&#34;&#34;&#xA;GOOS=&#34;linux&#34;&#xA;GOPATH=&#34;/root/go&#34;&#xA;GOPRIVATE=&#34;&#34;&#xA;GOPROXY=&#34;https://goproxy.io,direct&#34;&#xA;GOROOT=&#34;/usr/lib/golang&#34;&#xA;GOSUMDB=&#34;sum.golang.org&#34;&#xA;GOTMPDIR=&#34;&#34;&#xA;GOTOOLDIR=&#34;/usr/lib/golang/pkg/tool/linux_amd64&#34;&#xA;GOVCS=&#34;&#34;&#xA;GOVERSION=&#34;go1.19.10&#34;&#xA;GCCGO=&#34;gccgo&#34;&#xA;GOAMD64=&#34;v1&#34;&#xA;AR=&#34;ar&#34;&#xA;CC=&#34;gcc&#34;&#xA;CXX=&#34;g++&#34;&#xA;CGO_ENABLED=&#34;1&#34;&#xA;GOMOD=&#34;/home/golang/tz-monitor/go.mod&#34;&#xA;GOWORK=&#34;&#34;&#xA;CGO_CFLAGS=&#34;-g -O2&#34;&#xA;CGO_CPPFLAGS=&#34;&#34;&#xA;CGO_CXXFLAGS=&#34;-g -O2&#34;&#xA;CGO_FFLAGS=&#34;-g -O2&#34;&#xA;CGO_LDFLAGS=&#34;-g -O2&#34;&#xA;PKG_CONFIG=&#34;pkg-config&#34;&#xA;GOGCCFLAGS=&#34;-fPIC -m64 -pthread -Wl,--no-gc-sections -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build1417382532=/tmp/go-build -gno-record-gcc-switches&#34;&#xA;&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;使用 go build 时&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;[root@localhost tz-monitor]# go build main.go &#xA;go: downloading github.com/shirou/gopsutil/v3 v3.23.8&#xA;main.go:6:2: github.com/shirou/gopsutil/v3@v3.23.8: Get &#34;https://goproxy.io/github.com/shirou/gopsutil/v3/@v/v3.23.8.zip&#34;: proxyconnect tcp: EOF&#xA;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;我看网上 go build 设置代理的意思好像是，访问国内的镜像，而非真正的代理。&lt;/p&gt;&#xA;&lt;p&gt;我也尝试过，直接在有网的机器把&lt;code&gt;v3.23.8.zip&lt;/code&gt; 传到这台没网的机器 然后使用 &lt;code&gt;go build&lt;/code&gt;。然而毫无卵用&lt;/p&gt;&#xA;&lt;p&gt;老哥们 ，我这个怎么搞&lt;/p&gt;&#xA;</description>
+      <author>leegoo</author>
+      <pubDate>28 Sep 2023 06:32:40 +0000</pubDate>
+    </item>
+    <item>
+      <title>有使用京东无线宝路由器拨号上网的老铁吗？请叫关于 IPV6 的问题 - 问与答</title>
+      <link>https://www.v2ex.com/t/977932</link>
+      <description>&lt;p&gt;移动宽带，分配了公网 IPV6 ，京东无线宝拨号上网，ipv6 自动获取和 nat6 都试过了，都能获取公网 ipv6 地址，可以从外网直接访问，访问到的是无线宝路由器管理页面。&lt;/p&gt;&#xA;&lt;p&gt;连接到无限宝的笔记本，也获得了公网 ipv6 地址，但是从外网访问远程不到笔记本上，始终连不上。&lt;/p&gt;&#xA;&lt;p&gt;使用 frp 端口转发访问笔记本是正常的，所以笔记本的 rdp 设置应该没问题。&lt;/p&gt;&#xA;&lt;p&gt;各位老铁，这种情况会是什么原因导致的？光猫和路由器的 ipv6 防火墙都关闭了。怀疑是无线宝的问题，有相同情况的吗？&lt;/p&gt;&#xA;</description>
+      <author>1311317</author>
+      <pubDate>28 Sep 2023 06:31:22 +0000</pubDate>
+    </item>
+    <item>
+      <title>8 年经验求职一份远程工作，后端开发 - 求职</title>
+      <link>https://www.v2ex.com/t/977931</link>
+      <description>&lt;p&gt;个人家庭原因求远程工作，&#xA;去年找到一个不错的远程团队写了半年多 Go ，&#xA;后面因为团队项目暂停了就解散了；&lt;/p&gt;&#xA;&lt;p&gt;3 年大厂中台部门&#xA;4 年初创&lt;/p&gt;&#xA;&lt;p&gt;Java 全家桶熟练&#xA;大厂上亿流量&#xA;互联网金融中台 基金、账户、实名相关业务核心流程经验，日数据量 3500W+&#xA;电商黄金流程、选品、购物车、订单、支付 核心流程经验&#xA;低代码服务编排平台核心开发，接入业务 100+ 公司内运行 1 年+&lt;/p&gt;&#xA;&lt;p&gt;有架构经验、熟悉高并发下的系统设计、数据、缓存等解决方案&#xA;熟悉 阿里云 腾讯云 AWS （项目搭建 BI 等 备案 opensearch 等）主流环境&lt;/p&gt;&#xA;&lt;p&gt;github：aHR0cHM6Ly9naXRodWIuY29tL2NvZGV5dW5n&#xA;wechat:NjE2NzI0ODk1&lt;/p&gt;&#xA;&lt;p&gt;简历在线： &lt;a href=&#34;https://wk6fbsipks.feishu.cn/file/B2kpbm1jyouttJxFObtcO0binnk?from=from_copylink&#34; rel=&#34;nofollow&#34;&gt;https://wk6fbsipks.feishu.cn/file/B2kpbm1jyouttJxFObtcO0binnk?from=from_copylink&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+      <author>CoderGeek</author>
+      <pubDate>28 Sep 2023 06:28:42 +0000</pubDate>
+    </item>
+    <item>
       <title>Linux 作为 NAS，数据在独立的 ZFS 文件系统上，系统盘需要做成 Root on ZFS 吗 - 程序员</title>
       <link>https://www.v2ex.com/t/977930</link>
       <description>&lt;p&gt;FreeBSD 作为 NAS 遇到了硬件兼容性问题，所以准备转到 Linux + OpenZFS 的方案，详见这篇帖子&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.v2ex.com/t/977732&#34; rel=&#34;nofollow&#34;&gt;https://www.v2ex.com/t/977732&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;系统盘是 SATA3 Intel S3710 200G ，企业级固态，质量很好。&lt;/p&gt;&#xA;&lt;p&gt;lvm + ext4 是一开始的方案，但是我读 OpenZFS 文档的安装教程的时候看到了 Root on ZFS 这样的操作。&lt;/p&gt;&#xA;&lt;p&gt;很纠结到底是 lvm + ext4 的方案，还是 Root on ZFS 。&lt;/p&gt;&#xA;&lt;p&gt;我考虑 Root on ZFS 的出发点是，防止 bit rotate 以及比 lvm 灵活得多的快照。&lt;/p&gt;&#xA;&lt;p&gt;各位推荐什么方案？又或者有其他方案？&lt;/p&gt;&#xA;</description>
