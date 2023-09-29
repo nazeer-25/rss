@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "误打误撞，把 PVE 搞成了网管交换机。这竟然也可以？？ - 路由器",
+      "Link": "https://www.v2ex.com/t/978176",
+      "Description": "\u003cp\u003e看网上教程，基本都是教大家如何在 pve 里把一个 trunk 口分离出 vlan 。作为一个小白，总觉得 pve 也能把两条线合并成一个 trunk 口实现单线复用，省下一台交换机。跟家折腾，没想到误打误撞成功了。  \u003c/p\u003e\n\u003cp\u003e原环境：\u003cbr/\u003e\nvmbr1 作为公共 LAN 口（ 192.168.1.x ），分配给 ROS 和 op 作为内网，桥接到一个物理口连接远端交换机；\u003cbr/\u003e\nvmbr2 桥接到一个物理口连接光猫，分配给 ROS 拨号，同时也分配给 op ，得到一个光猫 IP （ 192.168.0.x ），进行 IPTV 的转发。运行下来相安无事。\u003c/p\u003e\n\u003cp\u003e现环境：\u003cbr/\u003e\nvmbr1 保持不变；\u003cbr/\u003e\n新建一个 vlan：vmbr1.99 ；\u003cbr/\u003e\n将 vmbr1.99 和光猫口物理口同时桥接进 vmbr2 ；\n\u003ca href=\"https://imgse.com/i/pPq9NAP\" rel=\"nofollow\"\u003e\u003cimg alt=\"pPq9NAP.png\" class=\"embedded_image\" loading=\"lazy\" referrerpolicy=\"no-referrer\" rel=\"noreferrer\" src=\"https://z1.ax1x.com/2023/09/29/pPq9NAP.png\"/\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e这样做以后，原先（ 192.168.1.x ）的网络没有任何影响，而且在远端的交换机上也能分理出光猫的网络（ 192.168.0.x ）。但问题也来了，Linux Bridge 把物理口和 VLAN 桥接算是正常操作吗？桥接后的 vmbr2 仍然能正常拨号，不会有杂七杂八的流量进到 vmbr1.99 吗？\u003c/p\u003e\n",
+      "Author": "guiys",
+      "PubDate": "2023-09-29T10:30:50Z"
+    },
+    {
       "Title": "刚刚升级 iOS 17.0.2 后无法上网，分享出来避坑 - iPhone",
       "Link": "https://www.v2ex.com/t/978173",
       "Description": "设备：\u003cbr /\u003e14Pro ，17.0.1\u003cbr /\u003e\u003cbr /\u003e场景：\u003cbr /\u003e刚看到提示可以升级到 17.0.2 ，就很顺手的点击升级了\u003cbr /\u003e\u003cbr /\u003e升级完的几个异常：\u003cbr /\u003e1 、右上角的 WiFi 图标消失了，变成了 4G ，尽管在 WiFi 设置里是连上的看起来一切正常\u003cbr /\u003e2 、不管 WiFi 打开还是关闭(只用 4G)，几乎所有 app 都是连不上网的（比如微信里是断网的状态），Safari 里一般的网站比如百度都上不了，唯独上 Apple 官网没问题（而且系统设置里竟然可以顺利下载 17.1Beta ，？？？）\u003cbr /\u003e\u003cbr /\u003e失败的尝试：\u003cbr /\u003e重启手机、还原网络设置、升级到 17.1Beta\u003cbr /\u003e\u003cbr /\u003e成功的尝试：\u003cbr /\u003e无意间看到 [设置-VPN ] 的状态在不断尝试连接，就试着去 Quan X 的 app 里，把开关打开，然后网络就一切恢复正常了，WiFi 图标也回来了\u003cbr /\u003e\u003cbr /\u003e这是啥原理啊？有懂的老哥说下不",
