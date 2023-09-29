@@ -4,6 +4,20 @@
   "Description": "",
   "Items": [
     {
+      "Title": "谈一下 Type-C 口的数据和充电 - iPhone",
+      "Link": "https://www.v2ex.com/t/978132",
+      "Description": "\u003cp\u003eC 口的 iPhone 15 发布，看到 V2EX 上面不少人都在讨论 c 口充电数据的相关事宜，所以简单的讨论下 Type-C 口的事情。\u003c/p\u003e\n\u003cp\u003e在这个帖子里面只谈 USB-IF 官方标准和高通的 QC 标准，不谈其他任何厂商的魔改协议。\u003c/p\u003e\n\u003cp\u003e先说数据吧。按照目前的标准来说，各种 USB 口都变成了通用接口（\u003cstrong\u003eInterface\u003c/strong\u003e）。不管数据线两头是什么接口，AtoC ，CtoC ，AtoA 也好，这条数据线支持什么数据协议是要看这个线的标准（线里面多少芯）。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eUSB 2.0 的协议，只要是有 4 根内芯的线就可以支持，供电 2 根，D+/D-差分线 2 根。两端接口可以是 A 口或者 C 口。\u003c/li\u003e\n\u003cli\u003eUSB 3.0/USB 3.1 的协议，需要 8 芯的线，供电 2 根，2.0 的 D+/D-差分线 2 根，3.0 差分线 2 组共 4 根。两端接口可以是 A 口（需要有 3.0 触点-9 针）或者 C 口。（ 5G 还是 10G ，要去看 3.0 的差分线支不支持双工。如果硬要杠，6 芯线也能能支持 3.0 ，因为 3.0 协议不需要 2.0 的 2 根线，但是设备能不能识别就不清楚了。）\u003c/li\u003e\n\u003cli\u003eUSB 3.2 的协议，只支持 C 口，并且重新分配了差分线，把原来的 3.0 的差分线重新分组成了 4 组通道（ lane ）。每组通道支持 5G 。这就是 3.2 里面 5G ，10G ，20G 的来源。原则来说，3.2 需要 10 根内芯来支持，供电 2 根，4 组通道共 8 根。\u003c/li\u003e\n\u003cli\u003eDP ，只支持 c 口，在 USB 3.2 里面不是定义了 4 组 lane 嘛，DP 就是用一组或多组 Lane 来传输显示信号，简单的来说就是 USB 和 DP 共同 share 4 组 lane ，不能复用。\u003c/li\u003e\n\u003cli\u003eThunderbolt 3/4 雷电协议，只支持 C 口。TB 跟 usb 协议的最大区别在于，TB 需要有协议芯片，这个芯片负责 4 组 lane 的复用，来实现最大带宽 40G 。C 口 TB 线在两头是有芯片的。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e总结以下，在数据方面，Thunderbolt 在 C 口头上是有控制芯片的，这个芯片死贵死贵的。A 口/C 口要看几根线，才能知道最大的传输速度是多少。A 口封顶 10G ，C 口封顶 20G 。\u003c/p\u003e\n\u003cp\u003e说完了数据，说电力传输。USB 中的电力输送是通过 VBUS 和 GND 完成的。\nUSB-IF 标准中，C 口有两种供电方式，USB 供电标准和 PD 供电标准。\u003c/p\u003e\n\u003cp\u003eUSB 供电标准，不需要额外的线，默认提供。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e2.0 A 口，插上就提供 5V 500mA 。\u003c/li\u003e\n\u003cli\u003e3.0 A 口，插上就提供 5V 900mA 。\u003c/li\u003e\n\u003cli\u003e\nC 口，稍微复杂一些，分 Host 和 Device （ DFP ，UFP ，DRP ）的角色，关于角色就不展开说了。\u003cul\u003e\n\u003cli\u003e对于充电器来说，只要插进来的 C 口，在 CC 和 GND 之间有个 5.1k 电阻，那么就默认提供至少 5V 500/900mA 的电力。\u003c/li\u003e\n\u003cli\u003e对于 C 的设备来说，看插进来的 C 口的 CC 跟 VBUS 之间串了多大的电阻，就可以知道这个充电器有多大的供电能力，从 5V 900mA 到 5V 1.5A 至 5V 3A 的。\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e在 USB 供电标准下，不管是 A2C ，C2C ，只要需要 2 芯线就可以给设备充电了，最多提供 15W 的电力，并不需要其他的线，包括 CC 线，前提是在 c 头上安对了电阻。\u003c/p\u003e\n\u003cp\u003ePD 供电标准，提供了更大供电能力，但需要额外的 1-2 线和 e-marker 芯片。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eUSB-IF 标准中，只有 C 口有 CC 针，故只有 C 口支持 PD 供电。\u003c/li\u003e\n\u003cli\u003e没有 E-marker 芯片，最高 3A @ 20V ，有 E-marker ，5A @ 20V 。（没看 PD 3.1 协议，按照 PD 3.0 来讲）\u003c/li\u003e\n\u003cli\u003e如果 PD 协商失败，按照 USB 供电标准来默认供电。\u003c/li\u003e\n\u003cli\u003ePD 用 CC 线来跑协议。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003ePD 线特征就是双 C 口有 CC 线，E-marker 可选。如果是 E-marker 线，需要有一条额外的 VCONN （ CC2 ）线来给 E-marker 芯片供电，或者两头都装 E-marker 芯片，这样就不需要 VCONN 线了。\u003c/p\u003e\n\u003cp\u003e高通的 QC 和 Apple 2.4A\n高通的 QC 和 Apple 2.4A 都是用 D+/D-数据线来跑协议，从而提供比默认 USB 供电更大供电能力。对于此类协议，A 口 C 口都无所谓了，只要有 D+/D-线就可以。\u003c/p\u003e\n\u003cp\u003e最后最后的总结，\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eAtoC 线，除非魔改，否则跑不了 PD 。\u003c/li\u003e\n\u003cli\u003eAtoC 线，C 口必须有 56k 电阻串在 CC 跟 VBUS ，否则 C 口 DRP 设备不识别。（很多 C 口设备并不是真 C 口，只能叫 USB 2.0 A 口 over C 口，协议都是 USB 2.0 的，把 4 根线焊在了 C 口上，有些为了兼容 C2C 线的充电，给你加 2 个 5.1k 电阻。）\u003c/li\u003e\n\u003cli\u003eCtoC 线，数据和 PD 都是可选的，可以只有 PD 没数据，也可以只有数据没 PD 。\u003c/li\u003e\n\u003cli\u003eCtoC 线，3A+数据，至少 5 芯。\u003c/li\u003e\n\u003cli\u003eCtoC 线，5A+数据，1 x E-marker + 6 芯线，或者 2 x  E-marker + 5 芯线。\u003c/li\u003e\n\u003c/ul\u003e\n",
+      "Author": "tywtyw2002",
+      "PubDate": "2023-09-29T04:51:40Z"
+    },
+    {
+      "Title": "旧机抵扣买了台 15pro，线下提货，但是旧机却不回收 - iPhone",
+      "Link": "https://www.v2ex.com/t/978131",
+      "Description": "苹果 12 换苹果 15 ，能抵扣 2000 块。但是旧机要通过快递回收，会到手刀吗？ 成色很一般，屏幕边框都有明显划痕",
+      "Author": "vzyw",
+      "PubDate": "2023-09-29T04:50:36Z"
+    },
+    {
       "Title": "树莓派 5 来了 - 分享发现",
       "Link": "https://www.v2ex.com/t/978129",
       "Description": "\u003ca target=\"_blank\" href=\"https://mp.weixin.qq.com/s/7ze002cZ6vqNUhM6QJfwFA\" rel=\"nofollow noopener\"\u003ehttps://mp.weixin.qq.com/s/7ze002cZ6vqNUhM6QJfwFA\u003c/a\u003e",
