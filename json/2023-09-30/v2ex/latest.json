@@ -4,6 +4,13 @@
   "Description": "",
   "Items": [
     {
+      "Title": "watchOS 10 移除了左右滑动切换表盘的手势 - Apple",
+      "Link": "https://www.v2ex.com/t/978383",
+      "Description": "\u003cp\u003e如题，watchOS 10.0.1 现在只能按住表盘中间，然后再左右滑动切换表盘。非常令人不爽。\u003c/p\u003e\n\u003cp\u003e不知道这个改变是什么目的。没有因为和新功能冲突被替换，这个功能就是单纯地消失了。\u003c/p\u003e\n\u003cp\u003e但是按住表盘左右边缘并不会触发这个界面，所以有理由怀疑是个 bug ？\u003c/p\u003e\n",
+      "Author": "nezumi0926",
+      "PubDate": "2023-09-30T21:32:21Z"
+    },
+    {
       "Title": "RUST 所有权移动问题 - Rust",
       "Link": "https://www.v2ex.com/t/978382",
       "Description": "\u003cp\u003e刚随手写了一个示例，尝试探测编译器检测机制。以下代码在 JAVA/C/C++等众多语言中没有任何问题，即使按照 RUST 的所有权原则，也应该正常。但实际上编译失败了。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estruct Dog {\n    name: String,\n}\n\nimpl Dog {\n    fn release(self) {\n        println!(\"{}\", self.name)\n    }\n}\n\nstruct Person {\n    dog: Dog,\n    name: String,\n}\n\nfn main() {\n    let mut person = Person {\n        dog: Dog {\n            name: String::from(\"Hamel\"),\n        },\n        name: String::from(\"Zoe\"),\n    };\n\n    person.dog.release();\n\n    for _ in 0..1 {\n        person.dog = Dog {\n            name: String::from(\"Hogge\"),\n        };\n    }\n\n    println!(\"{} got a new dog: {}\", person.name, person.dog.name);\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e以上代码我先通过 Person 关联了 Dog ，随后释放 Person 中的 Dog ，到此 Dog 不再有效，若后续直接调用会编译失败。\u003c/p\u003e\n\u003cp\u003e我跟着创建一个百分比会执行的 for 循环重新赋值，按理说指针已发生了变更，后续在循环外使用的 Dog 是新建的对象不会有问题。\u003c/p\u003e\n\u003cp\u003e但事上上编译失败。Rust 的检测器似乎没有认真评估 for 中的条件，认为 loop 至少执行一次，而 for 却不确定。当我把 for 改成 loop ，它确实正常了。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eloop {\n    person.dog = Dog {\n        name: String::from(\"Hogge\"),\n    };\n    break\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我接着在 loop 中加一个百分比会执行的条件判断，最终仍然失败了。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eloop {\n    if true {\n        person.dog = Dog {\n            name: String::from(\"Hogge\"),\n        };\n    }\n    break\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e如果说写 C/C++满脑袋都是寄存器、堆、栈、指针...，那么 RUST 必然是所有权检查器。\u003c/p\u003e\n",
